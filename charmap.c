@@ -271,9 +271,11 @@ draw_character (Charmap *charmap, gint row, gint col)
 
   uc = charmap->page_first_char + row * CHARMAP_COLS + col;
 
-  if (uc == charmap->active_char)
+  if (GTK_WIDGET_HAS_FOCUS (charmap->tabulus) && uc == charmap->active_char)
+    gc = charmap->tabulus->style->text_gc[GTK_STATE_SELECTED];
+  else if (uc == charmap->active_char)
     gc = charmap->tabulus->style->text_gc[GTK_STATE_ACTIVE];
-  else 
+  else
     gc = charmap->tabulus->style->text_gc[GTK_STATE_NORMAL];
 
   square_width = calculate_square_dimension_x (charmap->font_metrics);
@@ -307,9 +309,11 @@ draw_square_bg (Charmap *charmap, gint row, gint col)
 
   uc = charmap->page_first_char + row * CHARMAP_COLS + col;
 
-  if (uc == charmap->active_char)
+  if (GTK_WIDGET_HAS_FOCUS (charmap->tabulus) && uc == charmap->active_char)
+    gc = charmap->tabulus->style->base_gc[GTK_STATE_SELECTED];
+  else if (uc == charmap->active_char)
     gc = charmap->tabulus->style->base_gc[GTK_STATE_ACTIVE];
-  else 
+  else
     gc = charmap->tabulus->style->base_gc[GTK_STATE_NORMAL];
 
   square_width = calculate_square_dimension_x (charmap->font_metrics);
@@ -1182,6 +1186,17 @@ scroll_charmap (GtkAdjustment *adjustment, Charmap *charmap)
 }
 
 
+static gboolean    
+focus_in_or_out_event (GtkWidget *widget, GdkEventFocus *event, 
+                       gpointer user_data)
+{
+  Charmap *charmap = CHARMAP (user_data);
+  if (charmap->tabulus != NULL && charmap->tabulus_pixmap != NULL)
+    draw_and_expose_character_square (charmap, charmap->active_char);
+  return FALSE;
+}
+
+
 static GtkWidget *
 make_scrollbar (Charmap *charmap)
 {
@@ -1225,6 +1240,10 @@ charmap_init (Charmap *charmap)
                     G_CALLBACK (key_press_event), charmap);
   g_signal_connect (G_OBJECT (charmap->tabulus), "button_press_event",
                     G_CALLBACK (button_press_event), charmap);
+  g_signal_connect (G_OBJECT (charmap->tabulus), "focus-in-event",
+                    G_CALLBACK (focus_in_or_out_event), charmap);
+  g_signal_connect (G_OBJECT (charmap->tabulus), "focus-out-event",
+                    G_CALLBACK (focus_in_or_out_event), charmap);
 
   /* this is required to get key_press events */
   GTK_WIDGET_SET_FLAGS (charmap->tabulus, GTK_CAN_FOCUS);
