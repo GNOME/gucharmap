@@ -1,5 +1,10 @@
 2003-01-23  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* autogen.sh: Oops, forgot to redirect the output of
+	aclocal/automake --version to /dev/null.
+
+2003-01-23  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/charmap.[ch]: Make use of G_BEGIN_DECLS/G_END_DECLS, and
 	explicitely use (void) instead of empty parameter lists.
 
