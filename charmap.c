@@ -974,6 +974,95 @@ make_caption (Charmap *charmap)
 }
 
 
+static void       
+clipboard_text_received (GtkClipboard *clipboard, 
+                         const gchar *text,
+                         gpointer data)
+{
+  gunichar uc;
+  gunichar old_page_first_char, old_active_char;
+  Charmap *charmap;
+
+  charmap = CHARMAP (data);
+  old_page_first_char = charmap->page_first_char;
+  old_active_char = charmap->active_char;
+
+  uc = g_utf8_get_char_validated (text, -1);
+
+  if (uc == (gunichar)(-2) || uc == (gunichar)(-1))
+    {
+      g_printerr ("clipboard_text_received: invalid utf-8 sequence\n");
+      return;
+    }
+
+  charmap->active_char = uc;
+
+  if (charmap->active_char < charmap->page_first_char
+      || charmap->active_char >= charmap->page_first_char 
+                                 + CHARMAP_ROWS * CHARMAP_COLS)
+    charmap->page_first_char = charmap->active_char - 
+                               (charmap->active_char % CHARMAP_COLS);
+
+  if (charmap->page_first_char != old_page_first_char)
+    {
+      draw_tabulus_pixmap (charmap);
+      gtk_widget_queue_draw (GTK_WIDGET (charmap->tabulus));
+    }
+  else if (charmap->active_char != old_active_char)
+    {
+      draw_tabulus_pixmap (charmap);
+
+      expose_char_for_redraw (charmap, charmap->active_char);
+      expose_char_for_redraw (charmap, old_active_char);
+    }
+}
+
+
+static void
+identify_clipboard (GtkWidget *widget,
+                    Charmap *charmap)
+{
+  GtkClipboard *clipboard;
+  clipboard = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
+  gtk_clipboard_request_text (clipboard, clipboard_text_received, charmap);
+}
+
+static void
+identify_selection (GtkWidget *widget,
+                    Charmap *charmap)
+{
+  GtkClipboard *clipboard;
+  clipboard = gtk_clipboard_get (GDK_SELECTION_PRIMARY);
+  gtk_clipboard_request_text (clipboard, clipboard_text_received, charmap);
+}
+
+
+static GtkWidget *
+make_paste_button (Charmap *charmap)
+{
+  GtkWidget *button;
+  GtkWidget *frame;
+  GtkWidget *vbox;
+
+  vbox = gtk_vbox_new (FALSE, 2);
+
+  button = gtk_button_new_with_label ("identify character from selection");
+  g_signal_connect (G_OBJECT (button), "clicked",
+                    G_CALLBACK (identify_selection), charmap);
+  gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
+
+  button = gtk_button_new_with_label ("identify character from clipboard");
+  g_signal_connect (G_OBJECT (button), "clicked",
+                    G_CALLBACK (identify_clipboard), charmap);
+  gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
+
+  frame = gtk_frame_new (NULL);
+  gtk_container_add (GTK_CONTAINER (frame), vbox);
+
+  return frame;
+}
+
+
 static GtkWidget *
 make_text_to_copy (Charmap *charmap)
 {
@@ -1078,6 +1167,7 @@ void
 charmap_init (Charmap *charmap)
 {
   GtkWidget *hbox;
+  GtkWidget *vbox;
 
   debug ("charmap_init\n");
 
@@ -1106,8 +1196,14 @@ charmap_init (Charmap *charmap)
 
   gtk_box_pack_start (GTK_BOX (hbox), charmap->tabulus, TRUE, TRUE, 0);
   gtk_box_pack_start (GTK_BOX (hbox), make_scrollbar (charmap), TRUE, TRUE, 0);
-  gtk_box_pack_start (GTK_BOX (hbox), make_unicode_block_selector (charmap), 
+
+  vbox = gtk_vbox_new (FALSE, 3);
+  gtk_box_pack_start (GTK_BOX (vbox), make_unicode_block_selector (charmap), 
                       TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (vbox), make_paste_button (charmap), 
+                      FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (hbox), vbox, TRUE, TRUE, 0);
+
 
   charmap->font_name = pango_font_description_to_string (
           charmap->tabulus->style->font_desc);
