@@ -270,7 +270,7 @@ get_canonical_decomposition (GucharmapCharmap *charmap,
       return NULL;
     }
 
-  gs = g_string_new (_("Canonical decomposition: \t"));
+  gs = g_string_new ("Canonical decomposition: \t");
 
   g_string_append_printf (gs, "U+%4.4X %s", decomposition[0], 
                           gucharmap_get_unicode_name (decomposition[0]));
@@ -302,10 +302,10 @@ get_see_also (GucharmapCharmap *charmap,
 
   gs = g_string_new (NULL);
   
-  g_string_append_printf (gs, _("See also: \t\t\t\t\tU+%4.4X %s\n"), 
+  g_string_append_printf (gs, "See also: \t\t\t\t\tU+%4.4X %s\n", 
                           exes[0], gucharmap_get_unicode_name (exes[0]));
   for (i = 1;  exes[i] != (gunichar)(-1);  i++)
-    g_string_append_printf (gs, _("\t\t\t\t\t\tU+%4.4X %s\n"), 
+    g_string_append_printf (gs, "\t\t\t\t\t\tU+%4.4X %s\n", 
                             exes[i], gucharmap_get_unicode_name (exes[i]));
 
   g_free (exes);
@@ -328,9 +328,9 @@ get_alias_names (GucharmapCharmap *charmap,
 
   gs = g_string_new (NULL);
 
-  g_string_append_printf (gs, _("Alias names: \t\t\t\t%s\n"), equals[0]);
+  g_string_append_printf (gs, "Alias names: \t\t\t\t%s\n", equals[0]);
   for (i = 1;  equals[i] != NULL;  i++)
-    g_string_append_printf (gs, _("\t\t\t\t\t\t%s\n"), equals[i]);
+    g_string_append_printf (gs, "\t\t\t\t\t\t%s\n", equals[i]);
 
   g_free (equals);
 
@@ -353,9 +353,9 @@ get_notes (GucharmapCharmap *charmap,
 
   gs = g_string_new (NULL);
 
-  g_string_append_printf (gs, _("Notes: \t\t\t\t\t%s\n"), stars[0]);
+  g_string_append_printf (gs, "Notes: \t\t\t\t\t%s\n", stars[0]);
   for (i = 1;  stars[i] != NULL;  i++)
-    g_string_append_printf (gs, _("\t\t\t\t\t\t%s\n"), stars[i]);
+    g_string_append_printf (gs, "\t\t\t\t\t\t%s\n", stars[i]);
 
   g_free (stars);
 
@@ -378,10 +378,10 @@ get_approximate_equivalents (GucharmapCharmap *charmap,
 
   gs = g_string_new (NULL);
 
-  g_string_append_printf (gs, _("Approximate equivalents: \t%s\n"), 
+  g_string_append_printf (gs, "Approximate equivalents: \t%s\n", 
                           pounds[0]);
   for (i = 1;  pounds[i] != NULL;  i++)
-    g_string_append_printf (gs, _("\t\t\t\t\t\t%s\n"), pounds[i]);
+    g_string_append_printf (gs, "\t\t\t\t\t\t%s\n", pounds[i]);
 
   g_free (pounds);
 
@@ -404,10 +404,10 @@ get_equivalents (GucharmapCharmap *charmap,
 
   gs = g_string_new (NULL);
 
-  g_string_append_printf (gs, _("Equivalents: \t\t\t%s\n"), 
+  g_string_append_printf (gs, "Equivalents: \t\t\t%s\n", 
                           colons[0]);
   for (i = 1;  colons[i] != NULL;  i++)
-    g_string_append_printf (gs, _("\t\t\t\t\t\t\t%s\n"), colons[i]);
+    g_string_append_printf (gs, "\t\t\t\t\t\t\t%s\n", colons[i]);
 
   g_free (colons);
 
@@ -454,11 +454,11 @@ set_details (GucharmapCharmap *charmap,
   g_free (temp);
 
   gtk_text_buffer_insert_with_tags_by_name (
-          buffer, &iter, _("General Character Properties\n\n"), -1, 
+          buffer, &iter, "General Character Properties\n\n", -1, 
           "bold", NULL);
 
   /* character category */
-  temp = g_strdup_printf (_("Unicode category: \t\t\t%s\n"), 
+  temp = g_strdup_printf ("Unicode category: \t\t\t%s\n", 
                           gucharmap_get_unicode_category_name (uc));
   gtk_text_buffer_insert (buffer, &iter, temp, -1);
   g_free (temp);
@@ -476,19 +476,25 @@ set_details (GucharmapCharmap *charmap,
 
   gtk_text_buffer_insert (buffer, &iter, "\n\n", -1);
   gtk_text_buffer_insert_with_tags_by_name (
-          buffer, &iter, _("Various Useful Representations\n\n"), -1, 
+          buffer, &iter, "Various Useful Representations\n\n", -1, 
           "bold", NULL);
 
   /* UTF-8 */
-  gstemp = g_string_new (_("UTF-8: \t\t\t\t\t"));
+  gtk_text_buffer_insert_with_tags_by_name (buffer, &iter, "UTF-8:", -1,
+                                            "tab-test", NULL);
+  gtk_text_buffer_insert_with_tags_by_name (buffer, &iter, "\t", -1,
+                                            "tab-test", NULL);
+  gstemp = g_string_new (NULL);
   for (i = 0;  i < n;  i++)
     g_string_append_printf (gstemp, "0x%2.2X ", ubuf[i]);
   g_string_append_c (gstemp, '\n');
-  gtk_text_buffer_insert (buffer, &iter, gstemp->str, gstemp->len);
+  gtk_text_buffer_insert_with_tags_by_name (buffer, &iter, 
+                                            gstemp->str, gstemp->len,
+                                            "tab-test", NULL);
   g_string_free (gstemp, TRUE);
 
   /* octal \012\234 UTF-8 */
-  gstemp = g_string_new (_("Octal escaped UTF-8: \t\t"));
+  gstemp = g_string_new ("Octal escaped UTF-8: \t\t");
   for (i = 0;  i < n;  i++)
     g_string_append_printf (gstemp, "\\%3.3o", ubuf[i]);
   g_string_append_c (gstemp, '\n');
@@ -496,14 +502,14 @@ set_details (GucharmapCharmap *charmap,
   g_string_free (gstemp, TRUE);
 
   /* entity reference */
-  temp = g_strdup_printf (_("Decimal entity reference: \t&#%d;\n"), 
+  temp = g_strdup_printf ("Decimal entity reference: \t&#%d;\n", 
                           uc);
   gtk_text_buffer_insert (buffer, &iter, temp, -1);
   g_free (temp);
 
   gtk_text_buffer_insert (buffer, &iter, "\n\n", -1);
   gtk_text_buffer_insert_with_tags_by_name (
-          buffer, &iter, _("Annotations and Cross References\n\n"), -1, 
+          buffer, &iter, "Annotations and Cross References\n\n", -1, 
           "bold", NULL);
 
   /* nameslist equals (alias names) */
@@ -550,13 +556,13 @@ set_details (GucharmapCharmap *charmap,
 
   gtk_text_buffer_insert (buffer, &iter, "\n\n", -1);
   gtk_text_buffer_insert_with_tags_by_name (
-          buffer, &iter, _("CJK Ideograph Information\n\n"), -1, 
+          buffer, &iter, "CJK Ideograph Information\n\n", -1, 
           "bold", NULL);
 
   csp = gucharmap_get_unicode_kDefinition (uc);
   if (csp)
     {
-      temp = g_strdup_printf (_("Definition in English: \t\t\t%s\n"), csp);
+      temp = g_strdup_printf ("Definition in English: \t\t\t%s\n", csp);
       gtk_text_buffer_insert (buffer, &iter, temp, -1);
       g_free (temp);
     }
@@ -564,7 +570,7 @@ set_details (GucharmapCharmap *charmap,
   csp = gucharmap_get_unicode_kMandarin (uc);
   if (csp)
     {
-      temp = g_strdup_printf (_("Mandarin Pronunciation: \t\t%s\n"), csp);
+      temp = g_strdup_printf ("Mandarin Pronunciation: \t\t%s\n", csp);
       gtk_text_buffer_insert (buffer, &iter, temp, -1);
       g_free (temp);
     }
@@ -572,7 +578,7 @@ set_details (GucharmapCharmap *charmap,
   csp = gucharmap_get_unicode_kJapaneseOn (uc);
   if (csp)
     {
-      temp = g_strdup_printf (_("Japanese On Pronunciation: \t\t%s\n"), csp);
+      temp = g_strdup_printf ("Japanese On Pronunciation: \t\t%s\n", csp);
       gtk_text_buffer_insert (buffer, &iter, temp, -1);
       g_free (temp);
     }
@@ -580,7 +586,7 @@ set_details (GucharmapCharmap *charmap,
   csp = gucharmap_get_unicode_kJapaneseKun (uc);
   if (csp)
     {
-      temp = g_strdup_printf (_("Japanese Kun Pronunciation: \t\t%s\n"), csp);
+      temp = g_strdup_printf ("Japanese Kun Pronunciation: \t\t%s\n", csp);
       gtk_text_buffer_insert (buffer, &iter, temp, -1);
       g_free (temp);
     }
@@ -588,7 +594,7 @@ set_details (GucharmapCharmap *charmap,
   csp = gucharmap_get_unicode_kTang (uc);
   if (csp)
     {
-      temp = g_strdup_printf (_("Tang Pronunciation: \t\t\t%s\n"), csp);
+      temp = g_strdup_printf ("Tang Pronunciation: \t\t\t%s\n", csp);
       gtk_text_buffer_insert (buffer, &iter, temp, -1);
       g_free (temp);
     }
@@ -596,7 +602,7 @@ set_details (GucharmapCharmap *charmap,
   csp = gucharmap_get_unicode_kKorean (uc);
   if (csp)
     {
-      temp = g_strdup_printf (_("Korean Pronunciation: \t\t\t%s\n"), csp);
+      temp = g_strdup_printf ("Korean Pronunciation: \t\t\t%s\n", csp);
       gtk_text_buffer_insert (buffer, &iter, temp, -1);
       g_free (temp);
     }
@@ -654,6 +660,7 @@ create_tags (GucharmapCharmap *charmap)
 {
   GtkTextBuffer *buffer;
   gint default_font_size;
+  PangoTabArray *tab_array;
 
   buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (charmap->details));
 
@@ -668,6 +675,13 @@ create_tags (GucharmapCharmap *charmap)
 			      NULL);
   gtk_text_buffer_create_tag (buffer, "big",
                               "size", default_font_size * 5 / 4,
+                              NULL);
+
+  tab_array = pango_tab_array_new_with_positions (1, TRUE, 
+                                                  200, PANGO_TAB_LEFT);
+  gtk_text_buffer_create_tag (buffer, "tab-test",
+                              "tabs", tab_array,
+                              "tabs-set", TRUE,
                               NULL);
 }
 
