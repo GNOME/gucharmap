@@ -6,13 +6,507 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 2.2\n"
-"POT-Creation-Date: 2003-05-02 22:10+0100\n"
-"PO-Revision-Date: 2003-05-02 22:15+0000\n"
+"POT-Creation-Date: 2003-05-08 00:57+0100\n"
+"PO-Revision-Date: 2003-05-08 01:00+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#. ID
+#: gucharmap.desktop.in.h:1 gucharmap/gucharmap-window.c:370
+#: gucharmap/gucharmap-window.c:748 gucharmap/imgucharmap.c:196
+msgid "Unicode Character Map"
+msgstr "Mapa Caracteres Unicode"
+
+#: gucharmap/gucharmap-charmap.c:273
+msgid "Canonical decomposition: \t"
+msgstr "Decomposição canónica: \t"
+
+#: gucharmap/gucharmap-charmap.c:305
+#, c-format
+msgid "See also: \t\t\t\t\tU+%4.4X %s\n"
+msgstr "Consulte também: \t\t\t\t\tU+%4.4X %s\n"
+
+#: gucharmap/gucharmap-charmap.c:308
+#, c-format
+msgid "\t\t\t\t\t\tU+%4.4X %s\n"
+msgstr "\t\t\t\t\t\tU+%4.4X %s\n"
+
+#: gucharmap/gucharmap-charmap.c:331
+#, c-format
+msgid "Alias names: \t\t\t\t%s\n"
+msgstr "Sinónimos: \t\t\t\t%s\n"
+
+#: gucharmap/gucharmap-charmap.c:333 gucharmap/gucharmap-charmap.c:358
+#: gucharmap/gucharmap-charmap.c:384
+#, c-format
+msgid "\t\t\t\t\t\t%s\n"
+msgstr "\t\t\t\t\t\t%s\n"
+
+#: gucharmap/gucharmap-charmap.c:356
+#, c-format
+msgid "Notes: \t\t\t\t\t%s\n"
+msgstr "Notas: \t\t\t\t\t%s\n"
+
+#: gucharmap/gucharmap-charmap.c:381
+#, c-format
+msgid "Approximate equivalents: \t%s\n"
+msgstr "Equivalentes aproximados: \t%s\n"
+
+#: gucharmap/gucharmap-charmap.c:407
+#, c-format
+msgid "Equivalents: \t\t\t%s\n"
+msgstr "Equivalentes: \t\t\t%s\n"
+
+#: gucharmap/gucharmap-charmap.c:410
+#, c-format
+msgid "\t\t\t\t\t\t\t%s\n"
+msgstr "\t\t\t\t\t\t\t%s\n"
+
+#: gucharmap/gucharmap-charmap.c:439
+msgid "[not a printable character]"
+msgstr "[caracter não imprimível]"
+
+#: gucharmap/gucharmap-charmap.c:457
+msgid ""
+"General Character Properties\n"
+"\n"
+msgstr ""
+"Propriedades Genéricas de Caracter\n"
+"\n"
+
+#. character category
+#: gucharmap/gucharmap-charmap.c:461
+#, c-format
+msgid "Unicode category: \t\t\t%s\n"
+msgstr "Categoria unicode: \t\t\t%s\n"
+
+#: gucharmap/gucharmap-charmap.c:479
+msgid ""
+"Various Useful Representations\n"
+"\n"
+msgstr ""
+"Várias Representações Úteis\n"
+"\n"
+
+#. UTF-8
+#: gucharmap/gucharmap-charmap.c:483
+msgid "UTF-8: \t\t\t\t\t"
+msgstr "UTF-8: \t\t\t\t\t"
+
+#. octal \012\234 UTF-8
+#: gucharmap/gucharmap-charmap.c:491
+msgid "Octal escaped UTF-8: \t\t"
+msgstr "UTF-8 Escapado octal: \t\t"
+
+#. entity reference
+#: gucharmap/gucharmap-charmap.c:499
+#, c-format
+msgid "Decimal entity reference: \t&#%d;\n"
+msgstr "Referência decimal de entidade: \t&#%d;\n"
+
+#: gucharmap/gucharmap-charmap.c:506
+msgid ""
+"Annotations and Cross References\n"
+"\n"
+msgstr ""
+"Anotações e Referências Cruzadas\n"
+"\n"
+
+#: gucharmap/gucharmap-charmap.c:553
+msgid ""
+"CJK Ideograph Information\n"
+"\n"
+msgstr ""
+"Informação Ideográfica CJK\n"
+"\n"
+
+#: gucharmap/gucharmap-charmap.c:559
+#, c-format
+msgid "Definition in English: \t\t\t%s\n"
+msgstr "Definição em Inglês: \t\t\t%s\n"
+
+#: gucharmap/gucharmap-charmap.c:567
+#, c-format
+msgid "Mandarin Pronunciation: \t\t%s\n"
+msgstr "Pronunciação em Mandarim: \t\t%s\n"
+
+#: gucharmap/gucharmap-charmap.c:575
+#, c-format
+msgid "Japanese On Pronunciation: \t\t%s\n"
+msgstr "Pronunciação em Japonês On: \t\t%s\n"
+
+#: gucharmap/gucharmap-charmap.c:583
+#, c-format
+msgid "Japanese Kun Pronunciation: \t\t%s\n"
+msgstr "Pronunciação em Japonês Kun: \t\t%s\n"
+
+#: gucharmap/gucharmap-charmap.c:591
+#, c-format
+msgid "Tang Pronunciation: \t\t\t%s\n"
+msgstr "Pronunciação em Tang: \t\t\t%s\n"
+
+#: gucharmap/gucharmap-charmap.c:599
+#, c-format
+msgid "Korean Pronunciation: \t\t\t%s\n"
+msgstr "Pronunciação em Coreano: \t\t\t%s\n"
+
+#: gucharmap/gucharmap-charmap.c:641
+msgid "List of Unicode Blocks"
+msgstr "Lista de Blocos Unicode"
+
+#: gucharmap/gucharmap-charmap.c:704
+msgid "Character Map"
+msgstr "Mapa Caracteres"
+
+#: gucharmap/gucharmap-charmap.c:708
+msgid "Characte_r Table"
+msgstr "Tabela Caracte_res"
+
+#: gucharmap/gucharmap-charmap.c:711
+msgid "Character _Details"
+msgstr "Detalhes Caracteres"
+
+#: gucharmap/gucharmap-mini-fontsel.c:280
+msgid "Font"
+msgstr "Fonte"
+
+#: gucharmap/gucharmap-mini-fontsel.c:287
+msgid "Font Family"
+msgstr "Família Fonte"
+
+#: gucharmap/gucharmap-mini-fontsel.c:292
+msgid "Font Style"
+msgstr "Estilo Fonte"
+
+#: gucharmap/gucharmap-mini-fontsel.c:298
+msgid "Font Size"
+msgstr "Tamanho Fonte"
+
+#: gucharmap/gucharmap-table.c:1251
+msgid "Clipboard is empty."
+msgstr "Área de transferência está vazia."
+
+#: gucharmap/gucharmap-table.c:1253
+msgid "There is no selected text."
+msgstr "Não existe texto seleccionado."
+
+#: gucharmap/gucharmap-table.c:1261 gucharmap/gucharmap-table.c:1488
+msgid "Unknown character, unable to identify."
+msgstr "Conjunto de caracteres desconhecido, incapaz de identificar."
+
+#: gucharmap/gucharmap-table.c:1265 gucharmap/gucharmap-table.c:1492
+msgid "Character found."
+msgstr "Caracter encontrado."
+
+#: gucharmap/gucharmap-table.c:1559
+msgid "Character Table"
+msgstr "Tabela Caracteres"
+
+#: gucharmap/gucharmap-unicode-info.c:140
+#, c-format
+msgid "HANGUL SYLLABLE %s%s%s"
+msgstr "SÍLABA HANGUL %s%s%s"
+
+#: gucharmap/gucharmap-unicode-info.c:151
+msgid "<CJK Ideograph Extension A>"
+msgstr "<Extensão Ideográfica CJK A>"
+
+#: gucharmap/gucharmap-unicode-info.c:153
+msgid "<CJK Ideograph>"
+msgstr "<Ideográfico CJK>"
+
+#: gucharmap/gucharmap-unicode-info.c:157
+msgid "<Non Private Use High Surrogate>"
+msgstr "<Substituição Elevada Utilização Não Privada>"
+
+#: gucharmap/gucharmap-unicode-info.c:159
+msgid "<Private Use High Surrogate>"
+msgstr "<Substituição Elevada Utilização Privada>"
+
+#: gucharmap/gucharmap-unicode-info.c:161
+msgid "<Low Surrogate, Last>"
+msgstr "<Substituição Rebaixada, Última>"
+
+#: gucharmap/gucharmap-unicode-info.c:163
+msgid "<Private Use>"
+msgstr "<Utilização Privada>"
+
+#: gucharmap/gucharmap-unicode-info.c:165
+msgid "<Plane 15 Private Use>"
+msgstr "<Utilização Privada Plano 15>"
+
+#: gucharmap/gucharmap-unicode-info.c:167
+msgid "<Plane 16 Private Use>"
+msgstr "<Utilização Privada Plano 16>"
+
+#: gucharmap/gucharmap-unicode-info.c:169
+msgid "<CJK Ideograph Extension B>"
+msgstr "<Extensão Ideográfica CJK B>"
+
+#: gucharmap/gucharmap-unicode-info.c:174
+msgid "<not assigned>"
+msgstr "<não atribuido>"
+
+#: gucharmap/gucharmap-unicode-info.c:186
+msgid "Other, Control"
+msgstr "Outro, Controlo"
+
+#: gucharmap/gucharmap-unicode-info.c:187
+msgid "Other, Format"
+msgstr "Outro, Formato"
+
+#: gucharmap/gucharmap-unicode-info.c:188
+msgid "Other, Not Assigned"
+msgstr "Outro, Não Atribuido"
+
+#: gucharmap/gucharmap-unicode-info.c:189
+msgid "Other, Private Use"
+msgstr "Outro, Utilização Privada"
+
+#: gucharmap/gucharmap-unicode-info.c:190
+msgid "Other, Surrogate"
+msgstr "Outro, Substituição"
+
+#: gucharmap/gucharmap-unicode-info.c:191
+msgid "Letter, Lowercase"
+msgstr "Letra, Minúscula"
+
+#: gucharmap/gucharmap-unicode-info.c:192
+msgid "Letter, Modifier"
+msgstr "Letra, Modificador"
+
+#: gucharmap/gucharmap-unicode-info.c:193
+msgid "Letter, Other"
+msgstr "Letra, Outro"
+
+#: gucharmap/gucharmap-unicode-info.c:194
+msgid "Letter, Titlecase"
+msgstr "Letra, Capitalização Títulos"
+
+#: gucharmap/gucharmap-unicode-info.c:195
+msgid "Letter, Uppercase"
+msgstr "Letra, Maiúscula"
+
+#: gucharmap/gucharmap-unicode-info.c:196
+msgid "Mark, Spacing Combining"
+msgstr "Marca, Combinação Espaços"
+
+#: gucharmap/gucharmap-unicode-info.c:197
+msgid "Mark, Enclosing"
+msgstr "Marca, Contido"
+
+#: gucharmap/gucharmap-unicode-info.c:198
+msgid "Mark, Non-Spacing"
+msgstr "Marca, Não-Espaçamento"
+
+#: gucharmap/gucharmap-unicode-info.c:199
+msgid "Number, Decimal Digit"
+msgstr "Número, Dígito Decimal"
+
+#: gucharmap/gucharmap-unicode-info.c:200
+msgid "Number, Letter"
+msgstr "Número, Letra"
+
+#: gucharmap/gucharmap-unicode-info.c:201
+msgid "Number, Other"
+msgstr "Número, Outro"
+
+#: gucharmap/gucharmap-unicode-info.c:202
+msgid "Punctuation, Connector"
+msgstr "Pontuação, Ligação"
+
+#: gucharmap/gucharmap-unicode-info.c:203
+msgid "Punctuation, Dash"
+msgstr "Pontuação, Traço"
+
+#: gucharmap/gucharmap-unicode-info.c:204
+msgid "Punctuation, Close"
+msgstr "Pontuação, Fechar"
+
+#: gucharmap/gucharmap-unicode-info.c:205
+msgid "Punctuation, Final Quote"
+msgstr "Pontuação, Aspa Final"
+
+#: gucharmap/gucharmap-unicode-info.c:206
+msgid "Punctuation, Initial Quote"
+msgstr "Pontuação, Aspa Inicial"
+
+#: gucharmap/gucharmap-unicode-info.c:207
+msgid "Punctuation, Other"
+msgstr "Pontuação, Outra"
+
+#: gucharmap/gucharmap-unicode-info.c:208
+msgid "Punctuation, Open"
+msgstr "Pontuação, Abrir"
+
+#: gucharmap/gucharmap-unicode-info.c:209
+msgid "Symbol, Currency"
+msgstr "Símbolo, Moeda"
+
+#: gucharmap/gucharmap-unicode-info.c:210
+msgid "Symbol, Modifier"
+msgstr "Símbolo, Modificador"
+
+#: gucharmap/gucharmap-unicode-info.c:211
+msgid "Symbol, Math"
+msgstr "Símbolo, Matemática"
+
+#: gucharmap/gucharmap-unicode-info.c:212
+msgid "Symbol, Other"
+msgstr "Símbolo, Outro"
+
+#: gucharmap/gucharmap-unicode-info.c:213
+msgid "Separator, Line"
+msgstr "Separador, Linha"
+
+#: gucharmap/gucharmap-unicode-info.c:214
+msgid "Separator, Paragraph"
+msgstr "Separador, Parágrafo"
+
+#: gucharmap/gucharmap-unicode-info.c:215
+msgid "Separator, Space"
+msgstr "Separador, Espaço"
+
+#: gucharmap/gucharmap-window.c:71
+#, c-format
+msgid ""
+"Not a valid code point to jump to. Must be a hexadecimal number between 0 "
+"and %4.4X."
+msgstr ""
+"Não é um código de ponto válido para onde ir. Tem de ser um número "
+"hexadecimal entre 0 e %4.4X."
+
+#: gucharmap/gucharmap-window.c:93
+msgid "Go to hex code point"
+msgstr "Ir para código ponto hex"
+
+#: gucharmap/gucharmap-window.c:113
+msgid "_Enter Unicode code point"
+msgstr "_Introduzir código ponto Unicode"
+
+#: gucharmap/gucharmap-window.c:173
+msgid "Not found."
+msgstr "Não encontrado."
+
+#: gucharmap/gucharmap-window.c:177
+msgid "Found."
+msgstr "Encontrado."
+
+#: gucharmap/gucharmap-window.c:181
+msgid "Search wrapped."
+msgstr "Procura enrolada."
+
+#: gucharmap/gucharmap-window.c:185
+msgid "Nothing to search for."
+msgstr "Nada a procurar."
+
+#: gucharmap/gucharmap-window.c:224
+msgid "Find"
+msgstr "Procurar"
+
+#: gucharmap/gucharmap-window.c:239
+msgid "_Search:"
+msgstr "_Procurar:"
+
+#: gucharmap/gucharmap-window.c:293
+msgid "Zoom mode enabled. Press <Esc> to disable zoom."
+msgstr "Modo de zoom activo. Prima <Esc> para desactivar zoom."
+
+#: gucharmap/gucharmap-window.c:303
+msgid "Zoom mode disabled."
+msgstr "Modo zoom inactivo."
+
+#: gucharmap/gucharmap-window.c:363
+msgid "translator_credits"
+msgstr "Duarte Loreto <happyguy_pt@hotmail.com>"
+
+#: gucharmap/gucharmap-window.c:414
+msgid "Char_map"
+msgstr "_Mapa Caracteres"
+
+#: gucharmap/gucharmap-window.c:416
+msgid "_View"
+msgstr "_Ver"
+
+#: gucharmap/gucharmap-window.c:418
+msgid "_Search"
+msgstr "_Procurar"
+
+#: gucharmap/gucharmap-window.c:438
+msgid "Expand/Collapse All"
+msgstr "Expandir/Recolher Tudo"
+
+#. ctrl-+ or ctrl-=
+#: gucharmap/gucharmap-window.c:447
+msgid "Zoom _In"
+msgstr "_Aumentar Zoom"
+
+#. ctrl--
+#: gucharmap/gucharmap-window.c:459
+msgid "Zoom _Out"
+msgstr "_Reduzir Zoom"
+
+#. ctrl-<enter>
+#: gucharmap/gucharmap-window.c:472
+msgid "_Zoom Mode"
+msgstr "Modo _Zoom"
+
+#: gucharmap/gucharmap-window.c:484
+msgid "Snap Columns to Power of Two"
+msgstr "Ajustar Colunas à Potência de Dois"
+
+#. ctrl-f
+#: gucharmap/gucharmap-window.c:496
+msgid "_Find..."
+msgstr "_Procurar..."
+
+#. ctrl-g
+#: gucharmap/gucharmap-window.c:507
+msgid "Find _Next"
+msgstr "Procurar _Seguinte"
+
+#. shift-ctrl-g
+#: gucharmap/gucharmap-window.c:518
+msgid "Find _Previous"
+msgstr "Procurar _Anterior"
+
+#. ctrl-h
+#: gucharmap/gucharmap-window.c:534
+msgid "_Hex Code Point..."
+msgstr "Código Ponto _Hex..."
+
+#. ctrl-p
+#: gucharmap/gucharmap-window.c:542
+msgid "Character in _Clipboard"
+msgstr "_Caracteres na Área Transferência"
+
+#. make the help menu
+#: gucharmap/gucharmap-window.c:552
+msgid "_Help"
+msgstr "_Ajuda"
+
+#: gucharmap/gucharmap-window.c:590
+msgid "The selected code point is not a valid Unicode character."
+msgstr "O código de ponto seleccionado não é um caracter Unicode válido."
+
+#: gucharmap/gucharmap-window.c:618
+msgid "Text copied to clipboard."
+msgstr "Texto copiado da área de transferência."
+
+#: gucharmap/gucharmap-window.c:644
+msgid "_Text to copy:"
+msgstr "_Texto a copiar:"
+
+#: gucharmap/gucharmap-window.c:665
+msgid "Copy to the clipboard."
+msgstr "Copiar para a área de transferência"
+
+#: gucharmap/main.c:41
+msgid "Font to start with; ex: 'Serif 27'"
+msgstr "Fonte com que começar; ex: 'Serif 27'"
 
 #: gucharmap/unicode/unicode_blocks.cI:7
 msgid "Basic Latin"
@@ -514,512 +1008,80 @@ msgstr "Área Utilização Privada Suplementar-A"
 msgid "Supplementary Private Use Area-B"
 msgstr "Área Utilização Privada Suplementar-B"
 
-#: gucharmap/charmap.c:728
-msgid "Character Map"
-msgstr "Mapa Caracteres"
-
-#: gucharmap/charmap.c:732
-msgid "Character"
-msgstr "Caracter"
-
-#: gucharmap/charmap.c:733
-msgid "Unicode category"
-msgstr "Categoria unicode"
-
-#: gucharmap/charmap.c:734
-msgid "Canonical decomposition"
-msgstr "Decomposição canónica"
-
-#: gucharmap/charmap.c:735
-msgid "UTF-8"
-msgstr "UTF-8"
-
-#: gucharmap/charmap.c:736
-msgid "Other representations"
-msgstr "Outras representações"
-
-#: gucharmap/charmap.c:737
-msgid "See also"
-msgstr "Ver também"
-
-#: gucharmap/charmap.c:738
-msgid "Equivalents"
-msgstr "Equivalentes"
-
-#: gucharmap/charmap.c:739
-msgid "Alias names"
-msgstr "Sinónimos"
-
-#: gucharmap/charmap.c:740
-msgid "Approximate equivalents"
-msgstr "Equivalentes aproximados"
-
-#: gucharmap/charmap.c:741
-msgid "Notes"
-msgstr "Notas"
-
-#: gucharmap/charmap.c:743
-msgid "CJK ideograph definition"
-msgstr "Definição ideográfica CJK"
-
-#: gucharmap/charmap.c:744
-msgid "Mandarin pronunciation"
-msgstr "Pronúncia mandarim"
-
-#: gucharmap/charmap.c:745
-msgid "Japanese On pronunciation"
-msgstr "Pronúncia japonesa On"
-
-#: gucharmap/charmap.c:746
-msgid "Japanese Kun pronunciation"
-msgstr "Pronúncia japonesa Kun"
-
-#: gucharmap/charmap.c:747
-msgid "Cantonese pronunciation"
-msgstr "Pronúncia cantonesa"
-
-#: gucharmap/charmap.c:748
-msgid "Tang pronunciation"
-msgstr "Pronúncia tang"
-
-#: gucharmap/charmap.c:749
-msgid "Korean pronunciation"
-msgstr "Pronúncia coreana"
-
-#: gucharmap/charmap.c:767
-msgid "Details on the Current Character"
-msgstr "Detalhes sobre o Caracter Actual"
-
-#: gucharmap/charmap.c:778
-msgid "List of Unicode Blocks"
-msgstr "Lista de Blocos Unicode"
-
-#: gucharmap/chartable.c:1249
-msgid "Clipboard is empty."
-msgstr "Área de transferência está vazia."
-
-#: gucharmap/chartable.c:1251
-msgid "There is no selected text."
-msgstr "Não existe texto seleccionado."
-
-#: gucharmap/chartable.c:1259 gucharmap/chartable.c:1486
-msgid "Unknown character, unable to identify."
-msgstr "Conjunto de caracteres desconhecido, incapaz de identificar."
-
-#: gucharmap/chartable.c:1263 gucharmap/chartable.c:1490
-msgid "Character found."
-msgstr "Caracter encontrado."
-
-#: gucharmap/chartable.c:1557
-msgid "Character Table"
-msgstr "Tabela Caracteres"
-
-#. ID
-#: gucharmap/imgucharmap.c:196 gucharmap/gucharmap_window.c:608
-#: gucharmap/gucharmap_window.c:1173 gucharmap.desktop.in.h:1
-msgid "Unicode Character Map"
-msgstr "Mapa Caracteres Unicode"
-
-#: gucharmap/main.c:43
-msgid "Font to start with; ex: 'Serif 27'"
-msgstr "Fonte com que começar; ex: 'Serif 27'"
-
-#: gucharmap/mini_fontsel.c:270
-msgid "Font"
-msgstr "Fonte"
-
-#: gucharmap/mini_fontsel.c:277
-msgid "Font Family"
-msgstr "Família Fonte"
-
-#: gucharmap/mini_fontsel.c:282
-msgid "Font Style"
-msgstr "Estilo Fonte"
-
-#: gucharmap/mini_fontsel.c:288
-msgid "Font Size"
-msgstr "Tamanho Fonte"
-
-#: gucharmap/unicode_info.c:140
-#, c-format
-msgid "HANGUL SYLLABLE %s%s%s"
-msgstr "SÍLABA HANGUL %s%s%s"
-
-#: gucharmap/unicode_info.c:151
-msgid "<CJK Ideograph Extension A>"
-msgstr "<Extensão Ideográfica CJK A>"
-
-#: gucharmap/unicode_info.c:153
-msgid "<CJK Ideograph>"
-msgstr "<Ideográfico CJK>"
-
-#: gucharmap/unicode_info.c:157
-msgid "<Non Private Use High Surrogate>"
-msgstr "<Substituição Elevada Utilização Não Privada>"
-
-#: gucharmap/unicode_info.c:159
-msgid "<Private Use High Surrogate>"
-msgstr "<Substituição Elevada Utilização Privada>"
-
-#: gucharmap/unicode_info.c:161
-msgid "<Low Surrogate, Last>"
-msgstr "<Substituição Rebaixada, Última>"
-
-#: gucharmap/unicode_info.c:163
-msgid "<Private Use>"
-msgstr "<Utilização Privada>"
-
-#: gucharmap/unicode_info.c:165
-msgid "<Plane 15 Private Use>"
-msgstr "<Utilização Privada Plano 15>"
-
-#: gucharmap/unicode_info.c:167
-msgid "<Plane 16 Private Use>"
-msgstr "<Utilização Privada Plano 16>"
-
-#: gucharmap/unicode_info.c:169
-msgid "<CJK Ideograph Extension B>"
-msgstr "<Extensão Ideográfica CJK B>"
-
-#: gucharmap/unicode_info.c:174
-msgid "<not assigned>"
-msgstr "<não atribuido>"
-
-#: gucharmap/unicode_info.c:186
-msgid "Other, Control"
-msgstr "Outro, Controlo"
-
-#: gucharmap/unicode_info.c:187
-msgid "Other, Format"
-msgstr "Outro, Formato"
-
-#: gucharmap/unicode_info.c:188
-msgid "Other, Not Assigned"
-msgstr "Outro, Não Atribuido"
-
-#: gucharmap/unicode_info.c:189
-msgid "Other, Private Use"
-msgstr "Outro, Utilização Privada"
-
-#: gucharmap/unicode_info.c:190
-msgid "Other, Surrogate"
-msgstr "Outro, Substituição"
-
-#: gucharmap/unicode_info.c:191
-msgid "Letter, Lowercase"
-msgstr "Letra, Minúscula"
-
-#: gucharmap/unicode_info.c:192
-msgid "Letter, Modifier"
-msgstr "Letra, Modificador"
-
-#: gucharmap/unicode_info.c:193
-msgid "Letter, Other"
-msgstr "Letra, Outro"
-
-#: gucharmap/unicode_info.c:194
-msgid "Letter, Titlecase"
-msgstr "Letra, Capitalização Títulos"
-
-#: gucharmap/unicode_info.c:195
-msgid "Letter, Uppercase"
-msgstr "Letra, Maiúscula"
-
-#: gucharmap/unicode_info.c:196
-msgid "Mark, Spacing Combining"
-msgstr "Marca, Combinação Espaços"
-
-#: gucharmap/unicode_info.c:197
-msgid "Mark, Enclosing"
-msgstr "Marca, Contido"
-
-#: gucharmap/unicode_info.c:198
-msgid "Mark, Non-Spacing"
-msgstr "Marca, Não-Espaçamento"
-
-#: gucharmap/unicode_info.c:199
-msgid "Number, Decimal Digit"
-msgstr "Número, Dígito Decimal"
-
-#: gucharmap/unicode_info.c:200
-msgid "Number, Letter"
-msgstr "Número, Letra"
-
-#: gucharmap/unicode_info.c:201
-msgid "Number, Other"
-msgstr "Número, Outro"
-
-#: gucharmap/unicode_info.c:202
-msgid "Punctuation, Connector"
-msgstr "Pontuação, Ligação"
-
-#: gucharmap/unicode_info.c:203
-msgid "Punctuation, Dash"
-msgstr "Pontuação, Traço"
-
-#: gucharmap/unicode_info.c:204
-msgid "Punctuation, Close"
-msgstr "Pontuação, Fechar"
-
-#: gucharmap/unicode_info.c:205
-msgid "Punctuation, Final Quote"
-msgstr "Pontuação, Aspa Final"
-
-#: gucharmap/unicode_info.c:206
-msgid "Punctuation, Initial Quote"
-msgstr "Pontuação, Aspa Inicial"
-
-#: gucharmap/unicode_info.c:207
-msgid "Punctuation, Other"
-msgstr "Pontuação, Outra"
-
-#: gucharmap/unicode_info.c:208
-msgid "Punctuation, Open"
-msgstr "Pontuação, Abrir"
-
-#: gucharmap/unicode_info.c:209
-msgid "Symbol, Currency"
-msgstr "Símbolo, Moeda"
-
-#: gucharmap/unicode_info.c:210
-msgid "Symbol, Modifier"
-msgstr "Símbolo, Modificador"
-
-#: gucharmap/unicode_info.c:211
-msgid "Symbol, Math"
-msgstr "Símbolo, Matemática"
-
-#: gucharmap/unicode_info.c:212
-msgid "Symbol, Other"
-msgstr "Símbolo, Outro"
-
-#: gucharmap/unicode_info.c:213
-msgid "Separator, Line"
-msgstr "Separador, Linha"
-
-#: gucharmap/unicode_info.c:214
-msgid "Separator, Paragraph"
-msgstr "Separador, Parágrafo"
-
-#: gucharmap/unicode_info.c:215
-msgid "Separator, Space"
-msgstr "Separador, Espaço"
-
-#: gucharmap/gucharmap_window.c:74
-#, c-format
-msgid ""
-"Not a valid code point to jump to. Must be a hexadecimal number between 0 "
-"and %4.4X."
-msgstr ""
-"Não é um código de ponto válido para onde ir. Tem de ser um número "
-"hexadecimal entre 0 e %4.4X."
-
-#: gucharmap/gucharmap_window.c:96
-msgid "Go to hex code point"
-msgstr "Ir para código ponto hex"
-
-#: gucharmap/gucharmap_window.c:116
-msgid "_Enter Unicode code point"
-msgstr "_Introduzir código ponto Unicode"
-
-#: gucharmap/gucharmap_window.c:176
-msgid "Not found."
-msgstr "Não encontrado."
-
-#: gucharmap/gucharmap_window.c:180
-msgid "Found."
-msgstr "Encontrado."
-
-#: gucharmap/gucharmap_window.c:184
-msgid "Search wrapped."
-msgstr "Procura enrolada."
-
-#: gucharmap/gucharmap_window.c:188
-msgid "Nothing to search for."
-msgstr "Nada a procurar."
-
-#: gucharmap/gucharmap_window.c:227
-msgid "Find"
-msgstr "Procurar"
-
-#: gucharmap/gucharmap_window.c:242
-msgid "_Search:"
-msgstr "_Procurar:"
-
-#: gucharmap/gucharmap_window.c:531
-msgid "Zoom mode enabled. Press <Esc> to disable zoom."
-msgstr "Modo de zoom activo. Prima <Esc> para desactivar zoom."
-
-#: gucharmap/gucharmap_window.c:541
-msgid "Zoom mode disabled."
-msgstr "Modo zoom inactivo."
-
-#: gucharmap/gucharmap_window.c:601
-msgid "translator_credits"
-msgstr "Duarte Loreto <happyguy_pt@hotmail.com>"
-
-#: gucharmap/gucharmap_window.c:654
-msgid "Char_map"
-msgstr "_Mapa Caracteres"
-
-#: gucharmap/gucharmap_window.c:656
-msgid "_View"
-msgstr "_Ver"
-
-#: gucharmap/gucharmap_window.c:658
-msgid "_Search"
-msgstr "_Procurar"
-
-#: gucharmap/gucharmap_window.c:678
-msgid "Expand/Collapse All"
-msgstr "Expandir/Recolher Tudo"
-
-#. ctrl-+ or ctrl-=
-#: gucharmap/gucharmap_window.c:687
-msgid "Zoom _In"
-msgstr "_Aumentar Zoom"
-
-#. ctrl--
-#: gucharmap/gucharmap_window.c:699
-msgid "Zoom _Out"
-msgstr "_Reduzir Zoom"
-
-#. ctrl-<enter>
-#: gucharmap/gucharmap_window.c:712
-msgid "_Zoom Mode"
-msgstr "Modo _Zoom"
-
-#: gucharmap/gucharmap_window.c:724
-msgid "_Unicode Details"
-msgstr "Detalhes _Unicode"
-
-#. the unicode details submenu
-#: gucharmap/gucharmap_window.c:730 gucharmap/gucharmap_window.c:780
-#: gucharmap/gucharmap_window.c:835
-msgid "Options"
-msgstr "Opções"
-
-#: gucharmap/gucharmap_window.c:739
-msgid "_Category"
-msgstr "_Categoria"
-
-#: gucharmap/gucharmap_window.c:747
-msgid "Canonical _Decomposition"
-msgstr "_Decomposição Canónica"
-
-#: gucharmap/gucharmap_window.c:755
-msgid "_UTF-8"
-msgstr "_UTF-8"
-
-#: gucharmap/gucharmap_window.c:763
-msgid "_Other Representations"
-msgstr "_Outras Representações"
-
-#: gucharmap/gucharmap_window.c:774
-msgid "_Annotations and Cross References"
-msgstr "_Anotações e Referncias Cruzadas"
-
-#: gucharmap/gucharmap_window.c:789
-msgid "_Alias Names"
-msgstr "_Sinónimos"
-
-#: gucharmap/gucharmap_window.c:796
-msgid "_Notes"
-msgstr "_Notas"
-
-#: gucharmap/gucharmap_window.c:803
-msgid "_See Also"
-msgstr "_Ver Também"
-
-#: gucharmap/gucharmap_window.c:810
-msgid "_Approximate Equivalents"
-msgstr "Equivalentes _Aproximados"
-
-#: gucharmap/gucharmap_window.c:817
-msgid "_Equivalents"
-msgstr "_Equivalentes"
-
-#: gucharmap/gucharmap_window.c:829
-msgid "_CJK Ideograph Details"
-msgstr "Detalhes Ideográfico _CJK"
-
-#: gucharmap/gucharmap_window.c:845
-msgid "CJK Ideograph _Definition"
-msgstr "_Definição Ideográfica CJK"
-
-#: gucharmap/gucharmap_window.c:854
-msgid "_Mandarin Pronunciation"
-msgstr "Pronúncia _Mandarim"
-
-#: gucharmap/gucharmap_window.c:863
-msgid "Japanese _On Pronunciation"
-msgstr "Pronúncia Japonesa _On"
-
-#: gucharmap/gucharmap_window.c:872
-msgid "_Japanese Kun Pronunciation"
-msgstr "Pronúncia Japonesa _Kun"
-
-#: gucharmap/gucharmap_window.c:881
-msgid "_Cantonese Pronunciation"
-msgstr "Pronúncia _Cantonesa"
-
-#: gucharmap/gucharmap_window.c:890
-msgid "_Tang Pronunciation"
-msgstr "Pronúncia _Tang"
-
-#: gucharmap/gucharmap_window.c:898
-msgid "_Korean Pronunciation"
-msgstr "P_ronúncia Coreana"
-
-#: gucharmap/gucharmap_window.c:909
-msgid "Snap Columns to Power of Two"
-msgstr "Ajustar Colunas à Potência de Dois"
-
-#. ctrl-f
-#: gucharmap/gucharmap_window.c:921
-msgid "_Find..."
-msgstr "_Procurar..."
-
-#. ctrl-g
-#: gucharmap/gucharmap_window.c:932
-msgid "Find _Next"
-msgstr "Procurar _Seguinte"
-
-#. shift-ctrl-g
-#: gucharmap/gucharmap_window.c:943
-msgid "Find _Previous"
-msgstr "Procurar _Anterior"
-
-#. ctrl-h
-#: gucharmap/gucharmap_window.c:959
-msgid "_Hex Code Point..."
-msgstr "Código Ponto _Hex..."
-
-#. ctrl-p
-#: gucharmap/gucharmap_window.c:967
-msgid "Character in _Clipboard"
-msgstr "_Caracteres na Área Transferência"
-
-#. make the help menu
-#: gucharmap/gucharmap_window.c:977
-msgid "_Help"
-msgstr "_Ajuda"
-
-#: gucharmap/gucharmap_window.c:1015
-msgid "The selected code point is not a valid Unicode character."
-msgstr "O código de ponto seleccionado não é um caracter Unicode válido."
-
-#: gucharmap/gucharmap_window.c:1043
-msgid "Text copied to clipboard."
-msgstr "Texto copiado da área de transferência."
-
-#: gucharmap/gucharmap_window.c:1069
-msgid "_Text to copy:"
-msgstr "_Texto a copiar:"
-
-#: gucharmap/gucharmap_window.c:1090
-msgid "Copy to the clipboard."
-msgstr "Copiar para a área de transferência"
+#~ msgid "Character"
+#~ msgstr "Caracter"
+
+#~ msgid "UTF-8"
+#~ msgstr "UTF-8"
+
+#~ msgid "Other representations"
+#~ msgstr "Outras representações"
+
+#~ msgid "See also"
+#~ msgstr "Ver também"
+
+#~ msgid "Notes"
+#~ msgstr "Notas"
+
+#~ msgid "CJK ideograph definition"
+#~ msgstr "Definição ideográfica CJK"
+
+#~ msgid "Mandarin pronunciation"
+#~ msgstr "Pronúncia mandarim"
+
+#~ msgid "Japanese On pronunciation"
+#~ msgstr "Pronúncia japonesa On"
+
+#~ msgid "Japanese Kun pronunciation"
+#~ msgstr "Pronúncia japonesa Kun"
+
+#~ msgid "Cantonese pronunciation"
+#~ msgstr "Pronúncia cantonesa"
+
+#~ msgid "Tang pronunciation"
+#~ msgstr "Pronúncia tang"
+
+#~ msgid "Korean pronunciation"
+#~ msgstr "Pronúncia coreana"
+
+#~ msgid "Details on the Current Character"
+#~ msgstr "Detalhes sobre o Caracter Actual"
+
+#~ msgid "_Unicode Details"
+#~ msgstr "Detalhes _Unicode"
+
+#~ msgid "Options"
+#~ msgstr "Opções"
+
+#~ msgid "_Category"
+#~ msgstr "_Categoria"
+
+#~ msgid "Canonical _Decomposition"
+#~ msgstr "_Decomposição Canónica"
+
+#~ msgid "_UTF-8"
+#~ msgstr "_UTF-8"
+
+#~ msgid "_Alias Names"
+#~ msgstr "_Sinónimos"
+
+#~ msgid "_Notes"
+#~ msgstr "_Notas"
+
+#~ msgid "_See Also"
+#~ msgstr "_Ver Também"
+
+#~ msgid "_Approximate Equivalents"
+#~ msgstr "Equivalentes _Aproximados"
+
+#~ msgid "_Equivalents"
+#~ msgstr "_Equivalentes"
+
+#~ msgid "_CJK Ideograph Details"
+#~ msgstr "Detalhes Ideográfico _CJK"
+
+#~ msgid "_Cantonese Pronunciation"
+#~ msgstr "Pronúncia _Cantonesa"
 
 #~ msgid ""
 #~ "Search for the next occurrence of this string in a character's Unicode "
