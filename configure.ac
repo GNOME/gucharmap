@@ -32,7 +32,7 @@ GETTEXT_PACKAGE=gucharmap
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", 
                    [Define the gettext package to be used])
-ALL_LINGUAS="am cs el eo es fi fr ko nl uk sv"
+ALL_LINGUAS="am cs el eo es fi fr ko nl sv"
 AM_GLIB_GNU_GETTEXT
 
 
