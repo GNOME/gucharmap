@@ -26,7 +26,11 @@
 # unicode_data.cI 
 # unicode_unihan.cI
 # unicode_blocks.cI
+# unicode_nameslist.cI
 #
+
+# the shell must have "let"
+
 
 UNZIP=`which unzip`
 WGET=`which wget`
@@ -35,12 +39,36 @@ MV=`which mv`
 ECHO=`which echo`
 MKDIR=`which mkdir`
 AWK=`which awk`
+TOUCH=`which touch`
+EXPR=`which expr`
+TRUE=`which true`
+CAT=`which cat`
+ICONV=`which iconv`
 GENERATE_UNIHAN="./generate_unihan"
 
 unidir="$PWD/unicode.org"
 srcdir="$PWD"
 
 PATH=""
+
+
+# usage: tempfile=`maketemp`
+function maketemp()
+{
+    x=888888
+
+    while $TRUE 
+    do
+	tmpnam="/tmp/gucharmap$x"
+
+	if [ -e $tmpnam ] ; then
+	    x=`$EXPR $x + 1`
+	    continue
+	fi
+
+	$TOUCH $tmpnam && $ECHO $tmpnam && break
+    done
+}
 
 
 function download()
@@ -53,6 +81,8 @@ function download()
         $ECHO
         $ECHO "http://www.unicode.org/Public/UNIDATA/UnicodeData.txt"
         $ECHO "http://www.unicode.org/Public/UNIDATA/Unihan.zip"
+        $ECHO "http://www.unicode.org/Public/UNIDATA/NamesList.txt"
+        $ECHO "http://www.unicode.org/Public/UNIDATA/Blocks.txt"
         $ECHO
         exit 1
     fi
@@ -103,6 +133,128 @@ function write_blocks()
 
     $ECHO "{ (gunichar)-1, (gunichar)-1, NULL }"
     $ECHO "};"
+}
+
+
+function write_nameslist()
+{
+    equal_i=0
+    ex_i=0
+    star_i=0
+    pound_i=0
+
+    equal0_i=-1
+    ex0_i=-1
+    star0_i=-1
+    pound0_i=-1
+
+    equal_file=`maketemp`
+    ex_file=`maketemp`
+    star_file=`maketemp`
+    pound_file=`maketemp`
+    main_file=`maketemp`
+
+    IFS=''
+
+    while read line
+    do
+        case $line in
+
+	    "	="*) 
+	    if [ $equal0_i = "-1" ] ; then equal0_i=$equal_i ; fi
+	    equal_i=`$EXPR $equal_i + 1`
+	    value=`$ECHO $line | $SED 's/^[^=]*= //' | $SED 's/\"/\\\"/g'`
+	    $ECHO "  { 0x$hex, \"$value\" }," >> $equal_file
+	    ;;
+
+	    "	x"*) 
+	    if [ $ex0_i = "-1" ] ; then ex0_i=$ex_i ; fi
+	    ex_i=`$EXPR $ex_i + 1`
+	    value=`$ECHO $line | $SED 's/^.* \([^ ]*\))$/\1/' | $SED 's/\"/\\\"/g'`
+	    $ECHO "  { 0x$hex, 0x$value }," >> $ex_file
+	    ;;
+
+	    "	*"*) 
+	    if [ $star0_i = "-1" ] ; then star0_i=$star_i ; fi
+	    star_i=`$EXPR $star_i + 1`
+	    value=`$ECHO $line | $SED 's/^[^\*]*\* //' | $SED 's/\"/\\\"/g'`
+	    $ECHO "  { 0x$hex, \"$value\" }," >> $star_file
+	    ;;
+
+	    "	#"*) 
+	    if [ $pound0_i = "-1" ] ; then pound0_i=$pound_i ; fi
+	    pound_i=`$EXPR $pound_i + 1`
+	    value=`$ECHO $line | $SED 's/^[^#]*# //' | $SED 's/\"/\\\"/g'`
+	    $ECHO "  { 0x$hex, \"$value\" }," >> $pound_file
+	    ;;
+
+	    # skip any other line that starts with a tab
+	    "	"*) continue ;; 
+
+	    # skip lines that start with @
+	    "@"*) continue ;;
+
+
+	    # otherwise, it has to be a code point
+	    *) 
+
+	    if [ $equal0_i != "-1" ] || [ $ex0_i != "-1" ] || [ $star0_i != "-1" ] || [ $pound0_i != "-1" ]
+	    then
+		$ECHO "  { 0x$hex, $equal0_i, $star0_i, $ex0_i, $pound0_i }," >> $main_file
+	    fi
+
+	    equal0_i=-1
+	    ex0_i=-1
+	    star0_i=-1
+	    pound0_i=-1
+
+	    hex=`$ECHO $line | $AWK '{ print $1 }'`
+	    ;;
+
+	esac
+    done
+
+    $ECHO "/* unicode_nameslist.cI */"
+    $ECHO "/* THIS IS A GENERATED FILE. */"
+    $ECHO "/* http://www.unicode.org/Public/UNIDATA/NamesList.txt */"
+    $ECHO
+    $ECHO "const UnicharString names_list_equals[] ="
+    $ECHO "{"
+    $CAT $equal_file
+    $ECHO "  { (gunichar)(-1), 0 }"
+    $ECHO "};"
+    $ECHO 
+
+    $ECHO 
+    $ECHO "const UnicharString names_list_stars[] ="
+    $ECHO "{"
+    $CAT $star_file
+    $ECHO "  { (gunichar)(-1), 0 }"
+    $ECHO "};"
+    $ECHO 
+
+    $ECHO 
+    $ECHO "const UnicharString names_list_pounds[] ="
+    $ECHO "{"
+    $CAT $pound_file
+    $ECHO "  { (gunichar)(-1), 0 }"
+    $ECHO "};"
+    $ECHO 
+
+    $ECHO 
+    $ECHO "const UnicharUnichar names_list_exes[] ="
+    $ECHO "{"
+    $CAT $ex_file
+    $ECHO "  { (gunichar)(-1), 0 }"
+    $ECHO "};"
+    $ECHO 
+
+    $ECHO 
+    $ECHO "const NamesList names_list[] ="
+    $ECHO "{"
+    $CAT $main_file
+    $ECHO "};"
+    $ECHO 
 }
 
 
@@ -170,7 +322,7 @@ function do_unihan()
     out=$srcdir/unicode_unihan.cI
     backup $out
 
-    $ECHO -n "generating $out... this may take a minute..."
+    $ECHO -n "generating $out... this might take a minute..."
     $UNZIP -c $unidir/Unihan.zip | $GENERATE_UNIHAN > $out
     $ECHO " done"
 }
@@ -195,6 +347,37 @@ function do_blocks()
     $ECHO " done"
 }
 
+
+function do_nameslist()
+{
+    make_download_dir
+
+    if [ "x$ICONV" = "x" ] ; then
+        $ECHO
+        $ECHO "error: iconv not found"
+        $ECHO
+        $ECHO "Unforunately, as of the writing of this script, NamesList.txt "
+        $ECHO "is encoded in iso8859-1, which means it must be iconv'd to "
+	$ECHO "UTF-8. Why unicode.org has done us this misdeed, I do not know."
+        $ECHO
+        exit 1
+    fi
+
+    f="$unidir/NamesList.txt"
+    if [ ! -e $f ] ; then
+        download "NamesList.txt"
+    else
+        $ECHO "already have $f, not downloading"
+    fi
+
+    out="$srcdir/unicode_nameslist.cI"
+    backup $out
+
+    $ECHO -n "generating $out... this might take a while..."
+    $ICONV -f "ISO8859-1" -t "UTF-8" $f | write_nameslist > $out
+    $ECHO " done"
+}
+
 # end of functions
 
 
@@ -204,11 +387,13 @@ case "x$1" in
     "xunicode_data.cI") do_unicode_data ;;
     "xunicode_unihan.cI") do_unihan ;;
     "xunicode_blocks.cI") do_blocks ;;
+    "xunicode_nameslist.cI") do_nameslist ;;
     *) 
         echo "usage: $0 FILE_TO_GENERATE"
         echo "       where FILE_TO_GENERATE is unicode_data.cI" 
         echo "                              or unicode_unihan.cI"
         echo "                              or unicode_blocks.cI"
+        echo "                              or unicode_nameslist.cI"
         exit 1
 esac
 

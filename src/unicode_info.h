@@ -63,6 +63,35 @@ typedef struct
 Unihan;
 
 
+
+typedef struct 
+{
+  gunichar index;
+  gchar *value;
+}
+UnicharString;
+
+typedef struct
+{
+  gunichar index;
+  gunichar value;
+}
+UnicharUnichar;
+
+typedef struct
+{
+  gunichar index;
+  gint equals_index;  /* -1 means */
+  gint stars_index;   /* this character */
+  gint exes_index;    /* doesn't */
+  gint pounds_index;  /* have any */
+}
+NamesList;
+
+
+/* XXX: should get some of the NamesList block level data */
+
+
 extern const UnicodeBlock unicode_blocks[];
 
 gint count_blocks (gunichar max);
@@ -92,6 +121,11 @@ gunichar * unicode_canonical_decomposition (gunichar ch, gsize *result_len);
 gunichar find_next_substring_match (gunichar start, gunichar unichar_max,
                                     const gchar *search_text);
 
+/* nameslist stuff */
+const gchar ** get_nameslist_stars (gunichar uc);
+const gchar ** get_nameslist_equals (gunichar uc);
+gunichar * get_nameslist_exes (gunichar uc);
+const gchar ** get_nameslist_pounds (gunichar uc);
 
 G_END_DECLS
 

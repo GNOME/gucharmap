@@ -68,7 +68,7 @@ static const GtkTargetEntry dnd_target_table[] =
 
 
 /* return value is read-only, should not be freed */
-static gchar *
+static const gchar *
 unichar_to_printable_utf8 (gunichar uc)
 {
   static gchar buf[12];
@@ -305,6 +305,104 @@ set_caption (Charmap *charmap)
                           get_unicode_kKorean (charmap->active_char), -1);
     }
 #endif /* #if ENABLE_UNIHAN */
+
+
+  /* nameslist stars */
+  if (charmap->caption_rows[CHARMAP_CAPTION_STARS])
+    {
+      const gchar **stars = get_nameslist_stars (charmap->active_char);
+      const gchar *star;
+
+      gtk_tree_model_get_iter (
+              model, &iter, 
+              gtk_tree_row_reference_get_path (
+                  charmap->caption_rows[CHARMAP_CAPTION_STARS]));
+
+      if (stars)
+        star = stars[0];
+      else
+        star = NULL;
+
+      gtk_tree_store_set (charmap->caption_model, &iter, CAPTION_VALUE, 
+                          star, -1);
+
+      if (stars)
+        g_free (stars);
+    }
+
+  /* nameslist pounds */
+  if (charmap->caption_rows[CHARMAP_CAPTION_POUNDS])
+    {
+      const gchar **pounds = get_nameslist_pounds (charmap->active_char);
+      const gchar *pound;
+
+      gtk_tree_model_get_iter (
+              model, &iter, 
+              gtk_tree_row_reference_get_path (
+                  charmap->caption_rows[CHARMAP_CAPTION_POUNDS]));
+
+      if (pounds)
+        pound = pounds[0];
+      else
+        pound = NULL;
+
+      gtk_tree_store_set (charmap->caption_model, &iter, CAPTION_VALUE, 
+                          pound, -1);
+
+      if (pounds)
+        g_free (pounds);
+    }
+
+  /* nameslist equals */
+  if (charmap->caption_rows[CHARMAP_CAPTION_EQUALS])
+    {
+      const gchar **equals = get_nameslist_equals (charmap->active_char);
+      const gchar *equal;
+
+      gtk_tree_model_get_iter (
+              model, &iter, 
+              gtk_tree_row_reference_get_path (
+                  charmap->caption_rows[CHARMAP_CAPTION_EQUALS]));
+
+      if (equals)
+        equal = equals[0];
+      else
+        equal = NULL;
+
+      gtk_tree_store_set (charmap->caption_model, &iter, CAPTION_VALUE, 
+                          equal, -1);
+
+      if (equals)
+        g_free (equals);
+    }
+
+  /* nameslist exes */
+  if (charmap->caption_rows[CHARMAP_CAPTION_EXES])
+    {
+      gunichar *exes = get_nameslist_exes (charmap->active_char);
+      gchar *temp;
+
+      gtk_tree_model_get_iter (
+              model, &iter, 
+              gtk_tree_row_reference_get_path (
+                  charmap->caption_rows[CHARMAP_CAPTION_EXES]));
+
+      if (exes)
+        temp = g_strdup_printf ("%s [U+%4.4X %s]", 
+                                unichar_to_printable_utf8 (exes[0]), 
+                                exes[0], get_unicode_name (exes[0]));
+      else
+        temp = NULL;
+
+      gtk_tree_store_set (charmap->caption_model, &iter, 
+                          CAPTION_VALUE, temp, -1);
+
+      if (temp)
+        g_free (temp);
+
+      if (exes)
+        g_free (exes);
+    }
 }
 
 
@@ -1687,6 +1785,10 @@ make_caption (Charmap *charmap)
                                   GTK_POLICY_ALWAYS, GTK_POLICY_NEVER);
 
   charmap_show_caption (charmap, CHARMAP_CAPTION_CHARACTER);
+  charmap_show_caption (charmap, CHARMAP_CAPTION_STARS);
+  charmap_show_caption (charmap, CHARMAP_CAPTION_EQUALS);
+  charmap_show_caption (charmap, CHARMAP_CAPTION_POUNDS);
+  charmap_show_caption (charmap, CHARMAP_CAPTION_EXES);
 
   gtk_widget_show_all (scrolled_window);
   gtk_widget_hide (scrolled_window);
@@ -2048,6 +2150,10 @@ charmap_init (Charmap *charmap)
   caption_labels[CHARMAP_CAPTION_KTANG] =  _("Tang pronunciation"), 
   caption_labels[CHARMAP_CAPTION_KKOREAN] =  _("Korean pronunciation"), 
 #endif
+  caption_labels[CHARMAP_CAPTION_EQUALS] = _("Alias names");
+  caption_labels[CHARMAP_CAPTION_STARS] = _("Notes");
+  caption_labels[CHARMAP_CAPTION_EXES] = _("See also");
+  caption_labels[CHARMAP_CAPTION_POUNDS] = _("Approximate equivalents");
 
   charmap->rows = CHARMAP_MIN_ROWS;
   charmap->cols = CHARMAP_MIN_COLS;

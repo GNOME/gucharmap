@@ -29,6 +29,7 @@
 #if ENABLE_UNIHAN
 # include <unicode_unihan.cI>
 #endif
+#include <unicode_nameslist.cI>
 
 
 /* constants for hangul (de)composition, see UAX #15 */
@@ -496,4 +497,149 @@ get_unicode_kJapaneseOn (gunichar uc)
 }
 
 #endif /* #else (#if ENABLE_UNIHAN) */
+
+
+/* does a binary search; also caches most recent, since it will often be
+ * called in succession on the same character */
+static const NamesList *
+get_nameslist (gunichar uc)
+{
+  static gunichar most_recent_searched;
+  static const NamesList *most_recent_result;
+  gint min = 0;
+  gint mid;
+  gint max = sizeof (names_list) / sizeof (NamesList) - 1;
+
+  if (uc < names_list[0].index || uc > names_list[max].index)
+    return NULL;
+
+  if (uc == most_recent_searched)
+    return most_recent_result;
+
+  most_recent_searched = uc;
+
+  while (max >= min) 
+    {
+      mid = (min + max) / 2;
+      if (uc > names_list[mid].index)
+        min = mid + 1;
+      else if (uc < names_list[mid].index)
+        max = mid - 1;
+      else
+        {
+          most_recent_result = names_list + mid;
+          return names_list + mid;
+        }
+    }
+
+  most_recent_result = NULL;
+  return NULL;
+}
+
+
+/* returns newly allocated array of gunichar terminated with -1 */
+gunichar *
+get_nameslist_exes (gunichar uc)
+{
+  const NamesList *nl;
+  gunichar *exes;
+  gint i, count;
+  
+  nl = get_nameslist (uc);
+
+  if (nl == NULL || nl->exes_index == -1)
+    return NULL;
+
+  /* count the number of exes */
+  for (i = 0;  names_list_exes[nl->exes_index + i].index == uc;  i++);
+  count = i;
+
+  exes = g_malloc ((count + 1) * sizeof (gunichar));
+  for (i = 0;  i < count;  i++)
+    exes[i] = names_list_exes[nl->exes_index + i].value;
+  exes[count] = (gunichar)(-1);
+
+  return exes;
+}
+
+
+/* returns newly allocated null-terminated array of gchar* */
+/* the items are const, but the array should be freed by the caller */
+const gchar **
+get_nameslist_equals (gunichar uc)
+{
+  const NamesList *nl;
+  const gchar **equals;
+  gint i, count;
+  
+  nl = get_nameslist (uc);
+
+  if (nl == NULL || nl->equals_index == -1)
+    return NULL;
+
+  /* count the number of equals */
+  for (i = 0;  names_list_equals[nl->equals_index + i].index == uc;  i++);
+  count = i;
+
+  equals = g_malloc ((count + 1) * sizeof (gchar *));
+  for (i = 0;  i < count;  i++)
+    equals[i] = names_list_equals[nl->equals_index + i].value;
+  equals[count] = NULL;
+
+  return equals;
+}
+
+
+/* returns newly allocated null-terminated array of gchar* */
+/* the items are const, but the array should be freed by the caller */
+const gchar **
+get_nameslist_stars (gunichar uc)
+{
+  const NamesList *nl;
+  const gchar **stars;
+  gint i, count;
+
+  nl = get_nameslist (uc);
+
+  if (nl == NULL || nl->stars_index == -1)
+    return NULL;
+
+  /* count the number of stars */
+  for (i = 0;  names_list_stars[nl->stars_index + i].index == uc;  i++);
+  count = i;
+
+  stars = g_malloc ((count + 1) * sizeof (gchar *));
+  for (i = 0;  i < count;  i++)
+    stars[i] = names_list_stars[nl->stars_index + i].value;
+  stars[count] = NULL;
+
+  return stars;
+}
+
+
+/* returns newly allocated null-terminated array of gchar* */
+/* the items are const, but the array should be freed by the caller */
+const gchar **
+get_nameslist_pounds (gunichar uc)
+{
+  const NamesList *nl;
+  const gchar **pounds;
+  gint i, count;
+  
+  nl = get_nameslist (uc);
+
+  if (nl == NULL || nl->pounds_index == -1)
+    return NULL;
+
+  /* count the number of pounds */
+  for (i = 0;  names_list_pounds[nl->pounds_index + i].index == uc;  i++);
+  count = i;
+
+  pounds = g_malloc ((count + 1) * sizeof (gchar *));
+  for (i = 0;  i < count;  i++)
+    pounds[i] = names_list_pounds[nl->pounds_index + i].value;
+  pounds[count] = NULL;
+
+  return pounds;
+}
 
