@@ -17,14 +17,6 @@
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  */
 
-#include "unicode-names.h"
-#include "unicode-blocks.h"
-#include "unicode-nameslist.h"
-#include "unicode-categories.h"
-#if ENABLE_UNIHAN
-# include "unicode-unihan.h"
-#endif
-
 #if HAVE_CONFIG_H
 # include <config.h>
 #endif
@@ -33,6 +25,14 @@
 #include <string.h>
 #include <gucharmap_intl.h>
 #include <gucharmap/gucharmap-unicode-info.h>
+
+#include "unicode-names.h"
+#include "unicode-blocks.h"
+#include "unicode-nameslist.h"
+#include "unicode-categories.h"
+#if ENABLE_UNIHAN
+# include "unicode-unihan.h"
+#endif
 
 /* constants for hangul (de)composition, see UAX #15 */
 #define SBase 0xAC00
@@ -62,54 +62,51 @@ static const gchar * const JAMO_T_TABLE[] = {
   "S", "SS", "NG", "J", "C", "K", "T", "P", "H"
 };
 
-/* computes the hangul name as per UAX #15 */
 G_CONST_RETURN gchar *
-get_hangul_syllable_name (gunichar s)
+gucharmap_get_unicode_name (gunichar wc)
 {
   static gchar buf[32];
-  gint SIndex = s - SBase;
-  gint LIndex, VIndex, TIndex;
 
-  if (SIndex < 0 || SIndex >= SCount)
-    return "";
+  if ((wc >= 0x3400 && wc <= 0x4DB5) 
+      || (wc >= 0x4e00 && wc <= 0x9fa5) 
+      || (wc >= 0x20000 && wc <= 0x2A6D6))
+    {
+      g_snprintf (buf, sizeof (buf), "CJK UNIFIED IDEOGRAPH-%04X", wc);
+      return buf;
+    }
+  else if (wc >= 0xac00 && wc <= 0xd7af)
+    {
+      /* compute hangul syllable name as per UAX #15 */
+      gint SIndex = wc - SBase;
+      gint LIndex, VIndex, TIndex;
 
-  LIndex = SIndex / NCount;
-  VIndex = (SIndex % NCount) / TCount;
-  TIndex = SIndex % TCount;
+      if (SIndex < 0 || SIndex >= SCount)
+        return "";
 
-  g_snprintf (buf, 32, _("HANGUL SYLLABLE %s%s%s"), JAMO_L_TABLE[LIndex],
-              JAMO_V_TABLE[VIndex], JAMO_T_TABLE[TIndex]);
+      LIndex = SIndex / NCount;
+      VIndex = (SIndex % NCount) / TCount;
+      TIndex = SIndex % TCount;
 
-  return buf;
-}
+      g_snprintf (buf, sizeof (buf), "HANGUL SYLLABLE %s%s%s", 
+                  JAMO_L_TABLE[LIndex], JAMO_V_TABLE[VIndex], JAMO_T_TABLE[TIndex]);
 
-
-G_CONST_RETURN gchar *
-gucharmap_get_unicode_name (gunichar uc)
-{
-  if (uc >= 0x3400 && uc <= 0x4DB5)
-    return _("<CJK Ideograph Extension A>");
-  else if (uc >= 0x4e00 && uc <= 0x9fa5)
-    return _("<CJK Ideograph>");
-  else if (uc >= 0xac00 && uc <= 0xd7af)
-    return get_hangul_syllable_name (uc);
-  else if (uc >= 0xD800 && uc <= 0xDB7F) 
+      return buf;
+    }
+  else if (wc >= 0xD800 && wc <= 0xDB7F) 
     return _("<Non Private Use High Surrogate>");
-  else if (uc >= 0xDB80 && uc <= 0xDBFF) 
+  else if (wc >= 0xDB80 && wc <= 0xDBFF) 
     return _("<Private Use High Surrogate>");
-  else if (uc >= 0xDC00 && uc <= 0xDFFF)
-    return _("<Low Surrogate, Last>");
-  else if (uc >= 0xE000 && uc <= 0xF8FF) 
+  else if (wc >= 0xDC00 && wc <= 0xDFFF)
+    return _("<Low Surrogate>");
+  else if (wc >= 0xE000 && wc <= 0xF8FF) 
     return _("<Private Use>");
-  else if (uc >= 0xF0000 && uc <= 0xFFFFD)
+  else if (wc >= 0xF0000 && wc <= 0xFFFFD)
     return _("<Plane 15 Private Use>");
-  else if (uc >= 0x100000 && uc <= 0x10FFFD)
+  else if (wc >= 0x100000 && wc <= 0x10FFFD)
     return _("<Plane 16 Private Use>");
-  else if (uc >= 0x20000 && uc <= 0x2A6D6)
-    return _("<CJK Ideograph Extension B>");
   else
     {
-      const gchar *x = gucharmap_get_unicode_data_name (uc);
+      const gchar *x = gucharmap_get_unicode_data_name (wc);
       if (x == NULL)
         return _("<not assigned>");
       else
@@ -117,11 +114,10 @@ gucharmap_get_unicode_name (gunichar uc)
     }
 }
 
-
 G_CONST_RETURN gchar *
-gucharmap_get_unicode_category_name (gunichar uc)
+gucharmap_get_unicode_category_name (gunichar wc)
 {
-  switch (gucharmap_unichar_type (uc))
+  switch (gucharmap_unichar_type (wc))
     {
       case G_UNICODE_CONTROL: return _("Other, Control");
       case G_UNICODE_FORMAT: return _("Other, Format");
@@ -157,7 +153,6 @@ gucharmap_get_unicode_category_name (gunichar uc)
     }
 }
 
-
 /* counts the number of entries in gucharmap_unicode_blocks with start <= max */
 gint 
 gucharmap_count_blocks (gunichar max)
@@ -169,7 +164,6 @@ gucharmap_count_blocks (gunichar max)
 
   return i;
 }
-
 
 /* http://www.unicode.org/unicode/reports/tr15/#Hangul */
 static gunichar *
@@ -205,7 +199,6 @@ hangul_decomposition (gunichar s, gsize *result_len)
   return r;
 }
 
-
 /*
  * See http://bugzilla.gnome.org/show_bug.cgi?id=100456
  *
@@ -227,8 +220,6 @@ gucharmap_unicode_canonical_decomposition (gunichar ch,
   else 
     return g_unicode_canonical_decomposition (ch, result_len);
 }
-
-
 
 /* does a binary search on unicode_names */
 G_CONST_RETURN gchar *
@@ -254,7 +245,6 @@ gucharmap_get_unicode_data_name (gunichar uc)
 
   return NULL;
 }
-
 
 /* ascii case-insensitive substring search (source ripped from glib) */
 static G_CONST_RETURN gchar *
@@ -293,7 +283,6 @@ ascii_case_strrstr (const gchar *haystack, const gchar *needle)
   
   return NULL;
 }
-
 
 /* case insensitive; returns (gunichar)(-1) if nothing found */
 /* direction must be +1 or -1 */
@@ -356,7 +345,6 @@ gucharmap_find_substring_match (gunichar start,
   return (gunichar)(-1);
 }
 
-
 #if ENABLE_UNIHAN
 
 /* does a binary search; also caches most recent, since it will often be
@@ -395,7 +383,6 @@ _get_unihan (gunichar uc)
   most_recent_result = NULL;
   return NULL;
 }
-
 
 G_CONST_RETURN gchar * 
 gucharmap_get_unicode_kDefinition (gunichar uc)
@@ -513,7 +500,6 @@ gucharmap_get_unicode_kJapaneseOn (gunichar uc)
 
 #endif /* #else (#if ENABLE_UNIHAN) */
 
-
 /* does a binary search; also caches most recent, since it will often be
  * called in succession on the same character */
 static G_CONST_RETURN NamesList *
@@ -551,7 +537,6 @@ get_nameslist (gunichar uc)
   return NULL;
 }
 
-
 gboolean
 _gucharmap_unicode_has_nameslist_entry (gunichar uc)
 {
@@ -583,7 +568,6 @@ gucharmap_get_nameslist_exes (gunichar uc)
   return exes;
 }
 
-
 /* returns newly allocated null-terminated array of gchar* */
 /* the items are const, but the array should be freed by the caller */
 G_CONST_RETURN gchar **
@@ -609,7 +593,6 @@ gucharmap_get_nameslist_equals (gunichar uc)
 
   return equals;
 }
-
 
 /* returns newly allocated null-terminated array of gchar* */
 /* the items are const, but the array should be freed by the caller */
@@ -637,7 +620,6 @@ gucharmap_get_nameslist_stars (gunichar uc)
   return stars;
 }
 
-
 /* returns newly allocated null-terminated array of gchar* */
 /* the items are const, but the array should be freed by the caller */
 G_CONST_RETURN gchar **
@@ -663,7 +645,6 @@ gucharmap_get_nameslist_pounds (gunichar uc)
 
   return pounds;
 }
-
 
 /* returns newly allocated null-terminated array of gchar* */
 /* the items are const, but the array should be freed by the caller */
@@ -691,7 +672,6 @@ gucharmap_get_nameslist_colons (gunichar uc)
   return colons;
 }
 
-
 #define UNICODE_VALID(Char)                   \
     ((Char) < 0x110000 &&                     \
     ((Char) < 0xD800 || (Char) >= 0xE000) &&  \
@@ -704,7 +684,6 @@ gucharmap_unichar_validate (gunichar ch)
 {
   return UNICODE_VALID (ch);
 }
-
 
 /**
  * gucharmap_unichar_to_printable_utf8
@@ -759,7 +738,6 @@ gucharmap_unichar_to_printable_utf8 (gunichar uc, gchar *outbuf)
     return g_unichar_to_utf8 (uc, outbuf);
 }
 
-
 /**
  * gucharmap_unichar_type:
  * @c: a Unicode character
@@ -792,7 +770,6 @@ gucharmap_unichar_type (gunichar uc)
   return G_UNICODE_UNASSIGNED;
 }
 
-
 /**
  * gucharmap_unichar_isdefined:
  * @uc: a Unicode character
@@ -807,7 +784,6 @@ gucharmap_unichar_isdefined (gunichar uc)
 {
   return gucharmap_unichar_type (uc) != G_UNICODE_UNASSIGNED;
 }
-
 
 /**
  * gucharmap_unichar_isgraph:
