@@ -31,7 +31,7 @@ libgucharmap_la_LIBADD = @GTK_LIBS@ @GNOME_LIBS@
 lib_LTLIBRARIES = libgucharmap.la
 
 
-libgucharmap_la_SOURCES = gucharmap_marshal.c gucharmap_marshal.h \
+libgucharmap_la_SOURCES = gucharmap-marshal.c gucharmap-marshal.h \
                           gucharmap_intl.c gucharmap_intl.h \
                           chartable_accessible.c chartable_accessible.h \
                           charcell_accessible.c charcell_accessible.h \
@@ -83,17 +83,17 @@ im_gucharmap_la_SOURCES = imgucharmap.c
 im_gucharmap_la_LIBADD = libgucharmap.la @GTK_LIBS@ @GNOME_LIBS@
 
 
-gucharmap_marshal.h: gucharmap_marshal.list
+gucharmap-marshal.h: gucharmap_marshal.list
 	( @GLIB_GENMARSHAL@ --prefix=gucharmap_marshal gucharmap_marshal.list \
-                            --header > gucharmap_marshal.tmp \
-	  && mv gucharmap_marshal.tmp gucharmap_marshal.h ) \
-        || ( rm -f gucharmap_marshal.tmp && exit 1 )
+                            --header > gucharmap-marshal.tmp \
+	  && mv gucharmap-marshal.tmp gucharmap-marshal.h ) \
+        || ( rm -f gucharmap-marshal.tmp && exit 1 )
 
-gucharmap_marshal.c: gucharmap_marshal.h
+gucharmap-marshal.c: gucharmap-marshal.h
 	( @GLIB_GENMARSHAL@ --prefix=gucharmap_marshal gucharmap_marshal.list \
-                            --body > gucharmap_marshal.tmp \
-          && mv gucharmap_marshal.tmp gucharmap_marshal.c ) \
-        || ( rm -f gucharmap_marshal.tmp && exit 1 )
+                            --body > gucharmap-marshal.tmp \
+          && mv gucharmap-marshal.tmp gucharmap-marshal.c ) \
+        || ( rm -f gucharmap-marshal.tmp && exit 1 )
 
 
 # don't do the symlink stuff if this is windows
@@ -147,6 +147,7 @@ all-local:
 
 endif
 
+CLEANFILES = gucharmap-marshal.c gucharmap-marshal.h
 
 EXTRA_DIST = gucharmap_marshal.list gucharmaprc.rc 
 
