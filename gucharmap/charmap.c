@@ -34,6 +34,8 @@
 #define font_height(font_metrics) ((pango_font_metrics_get_ascent (font_metrics) + pango_font_metrics_get_descent (font_metrics)) / PANGO_SCALE)
 
 
+#define set_statusbar_message(x,y) 
+
 /* only the label is visible in the block selector */
 enum 
 {
@@ -54,19 +56,11 @@ enum
 enum 
 {
   ACTIVATE = 0,
+  STATUS_MESSAGE,
   NUM_SIGNALS
 };
 
-static guint charmap_signals[NUM_SIGNALS] = { 0 };
-
-
-static void
-set_statusbar_message (Charmap *charmap, gchar *message)
-{
-  /* underflow is allowed */
-  gtk_statusbar_pop (GTK_STATUSBAR (charmap->statusbar), 0); 
-  gtk_statusbar_push (GTK_STATUSBAR (charmap->statusbar), 0, message);
-}
+static guint charmap_signals[NUM_SIGNALS] = { 0, 0 };
 
 
 /* return value is read-only, should not be freed */
@@ -1287,9 +1281,11 @@ selection_text_received (GtkClipboard *clipboard,
   if (text == NULL)
     {
       if (clipboard == gtk_clipboard_get (GDK_SELECTION_CLIPBOARD))
-        set_statusbar_message (charmap, _("Clipboard is empty."));
+        g_signal_emit (charmap, charmap_signals[STATUS_MESSAGE], 0, 
+		       _("Clipboard is empty."));
       else
-        set_statusbar_message (charmap, _("There is no selected text."));
+        g_signal_emit (charmap, charmap_signals[STATUS_MESSAGE], 0, 
+		       _("There is no selected text."));
       return;
     }
 
@@ -1297,12 +1293,13 @@ selection_text_received (GtkClipboard *clipboard,
 
   if (uc == (gunichar)(-2) || uc == (gunichar)(-1) || uc > UNICHAR_MAX)
     {
-      set_statusbar_message (charmap, 
-                             _("Unknown character, unable to identify."));
+      g_signal_emit (charmap, charmap_signals[STATUS_MESSAGE], 0, 
+                     _("Unknown character, unable to identify."));
     }
   else
     {
-      set_statusbar_message (charmap, _("Character found."));
+      g_signal_emit (charmap, charmap_signals[STATUS_MESSAGE], 0, 
+	             _("Character found."));
       set_active_character (charmap, uc);
       redraw (charmap);
     }
@@ -1487,12 +1484,13 @@ drag_data_received (GtkWidget *widget,
 
   if (uc == (gunichar)(-2) || uc == (gunichar)(-1) || uc > UNICHAR_MAX)
     {
-      set_statusbar_message (charmap, 
-                             _("Unknown character, unable to identify."));
+      g_signal_emit (charmap, charmap_signals[STATUS_MESSAGE], 0, 
+                     _("Unknown character, unable to identify."));
     }
   else
     {
-      set_statusbar_message (charmap, _("Character found."));
+      g_signal_emit (charmap, charmap_signals[STATUS_MESSAGE], 0, 
+	             _("Character found."));
       set_active_character (charmap, uc);
       redraw (charmap);
     }
@@ -1570,12 +1568,19 @@ void
 charmap_class_init (CharmapClass *clazz)
 {
   clazz->activate = NULL;
+  clazz->status_message = NULL;
 
   charmap_signals[ACTIVATE] =
       g_signal_new ("activate", charmap_get_type (), G_SIGNAL_RUN_FIRST,
                     G_STRUCT_OFFSET (CharmapClass, activate),
                     NULL, NULL, gucharmap_marshal_VOID__UINT, G_TYPE_NONE, 
 		    1, G_TYPE_UINT);
+
+  charmap_signals[STATUS_MESSAGE] =
+      g_signal_new ("status-message", charmap_get_type (), G_SIGNAL_RUN_FIRST,
+                    G_STRUCT_OFFSET (CharmapClass, status_message),
+                    NULL, NULL, gucharmap_marshal_VOID__STRING, G_TYPE_NONE, 
+		    1, G_TYPE_STRING);
 }
 
 
@@ -1613,9 +1618,6 @@ charmap_init (Charmap *charmap)
   gtk_box_pack_start (GTK_BOX (charmap), hpaned, TRUE, TRUE, 0);
   gtk_widget_show (hpaned);
   /* end packing stuff in the outer vbox (the Charmap itself) */
-
-  /* the statusbar— not placed anywhere */
-  charmap->statusbar = gtk_statusbar_new ();
 
   charmap->font_name = NULL;
 
@@ -1716,13 +1718,6 @@ charmap_set_font (Charmap *charmap, gchar *font_name)
 }
 
 
-GtkWidget *
-charmap_get_statusbar (Charmap *charmap)
-{
-  return charmap->statusbar;
-}
-
-
 void
 charmap_identify_clipboard (Charmap *charmap, GtkClipboard *clipboard)
 {
@@ -1762,7 +1757,7 @@ charmap_go_to_character (Charmap *charmap, gunichar uc)
     }
 
   message = g_strdup_printf ("Jumped to U+%4.4X.", uc);
-  set_statusbar_message (charmap, message);
+  g_signal_emit (charmap, charmap_signals[STATUS_MESSAGE], 0, message);
   g_free (message);
 }
 
@@ -1774,7 +1769,8 @@ charmap_search (Charmap *charmap, const gchar *search_text)
 
   if (search_text[0] == '\0')
     {
-      set_statusbar_message (charmap, _("Nothing to search for."));
+      g_signal_emit (charmap, charmap_signals[STATUS_MESSAGE], 0, 
+	             _("Nothing to search for."));
       return;
     }
   
@@ -1783,14 +1779,17 @@ charmap_search (Charmap *charmap, const gchar *search_text)
   if (uc != (gunichar)(-1) && uc <= UNICHAR_MAX)
     {
       if (uc <= charmap->active_char)
-        set_statusbar_message (charmap, _("Search wrapped."));
+        g_signal_emit (charmap, charmap_signals[STATUS_MESSAGE], 0, 
+		       _("Search wrapped."));
       else
-        set_statusbar_message (charmap, _("Found."));
+        g_signal_emit (charmap, charmap_signals[STATUS_MESSAGE], 0, 
+		       _("Found."));
 
       set_active_character (charmap, uc);
       redraw (charmap);
     }
   else
-    set_statusbar_message (charmap, _("Not found."));
+    g_signal_emit (charmap, charmap_signals[STATUS_MESSAGE], 0, 
+	           _("Not found."));
 }
 

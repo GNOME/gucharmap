@@ -104,12 +104,6 @@ struct _Charmap
   /* for the scrollbar */
   GtkObject *adjustment; 
   gulong adjustment_changed_handler_id; 
-
-  /* status bar */
-  /* the status bar is not placed anywhere, but the program that uses the
-   * charmap can get it using charmap_get_statusbar and place it wherever
-   * it likes */
-  GtkWidget *statusbar;
 };
 
 
@@ -118,6 +112,7 @@ struct _CharmapClass
   GtkVBoxClass parent_class;
 
   void (* activate) (Charmap *charmap);
+  void (* status_message) (Charmap *charmap);
 };
 
 
@@ -146,7 +141,6 @@ struct _Caption
 GtkType charmap_get_type (void);
 GtkWidget * charmap_new ();
 void charmap_set_font (Charmap *charmap, gchar *font_name);
-GtkWidget *charmap_get_statusbar (Charmap *charmap);
 void charmap_identify_clipboard (Charmap *charmap, GtkClipboard *clipboard);
 void charmap_expand_block_selector (Charmap *charmap);
 void charmap_collapse_block_selector (Charmap *charmap);

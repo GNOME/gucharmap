@@ -35,6 +35,7 @@
 static GtkWidget *charmap;
 static GtkWidget *text_to_copy;
 static GtkWidget *search_entry;
+static GtkWidget *statusbar;
 static GdkPixbuf *icon;
 
 typedef struct 
@@ -43,6 +44,22 @@ typedef struct
   GtkWidget *label;
 } 
 EntryAndLabel;
+
+
+static void
+set_statusbar_message (const gchar *message)
+{
+  /* underflow is allowed */
+  gtk_statusbar_pop (GTK_STATUSBAR (statusbar), 0); 
+  gtk_statusbar_push (GTK_STATUSBAR (statusbar), 0, message);
+}
+
+
+static void
+status_message (GtkWidget *widget, const gchar *message)
+{
+  set_statusbar_message (message);
+}
 
 
 static void
@@ -172,7 +189,7 @@ copy_button_clicked (GtkWidget *widget, gpointer callback_data)
           clipboard, 
           gtk_entry_get_text (GTK_ENTRY (text_to_copy)), -1);
 
-  /* set_statusbar_message (charmap, _("Text copied to clipboard.")); */
+  set_statusbar_message (_("Text copied to clipboard."));
 
   return TRUE;
 }
@@ -182,7 +199,7 @@ static gint
 clear_button_clicked (GtkWidget *widget, gpointer callback_data)
 {
   gtk_entry_set_text (GTK_ENTRY (text_to_copy), "");
-  /* set_statusbar_message (charmap, _("Text-to-copy entry box cleared.")); */
+  set_statusbar_message (_("Text-to-copy entry box cleared."));
   return TRUE;
 }
 
@@ -388,7 +405,6 @@ main (gint argc, gchar **argv)
   GtkWidget *window = NULL;
   GtkWidget *vbox;
   GtkWidget *hbox;
-  GtkWidget *statusbar;
   GtkWidget *fontsel;
   GtkWidget *toolbar; /* the fontsel goes on this */
   GtkTooltips *tooltips;
@@ -449,7 +465,13 @@ main (gint argc, gchar **argv)
 
   g_signal_connect (fontsel, "changed", G_CALLBACK (fontsel_changed), charmap);
   g_signal_connect (charmap, "activate", 
-	            G_CALLBACK (append_character_to_text_to_copy), NULL);
+                    G_CALLBACK (append_character_to_text_to_copy), NULL);
+  g_signal_connect (charmap, "status-message",
+                    G_CALLBACK (status_message), NULL);
+
+  statusbar = gtk_statusbar_new ();
+  gtk_box_pack_start (GTK_BOX (vbox), statusbar, FALSE, FALSE, 0);
+  gtk_widget_show (statusbar);
 
   /* make the starting font 50% bigger than the default font */
   orig_font = mini_font_selection_get_font_name (MINI_FONT_SELECTION (fontsel));
@@ -465,12 +487,6 @@ main (gint argc, gchar **argv)
 
   gtk_widget_show (vbox);
   gtk_widget_show (window);
-
-  /* show the statusbar */
-  statusbar = charmap_get_statusbar (CHARMAP (charmap));
-  gtk_box_pack_start (GTK_BOX (vbox), statusbar, FALSE, FALSE, 0);
-  gtk_widget_show (statusbar);
-  gtk_statusbar_set_has_resize_grip (GTK_STATUSBAR (statusbar), TRUE);
 
   gtk_main ();
 
