@@ -1308,10 +1308,10 @@ size_allocate (GtkWidget *widget, GtkAllocation *allocation, Charmap *charmap)
   old_rows = charmap->rows;
   old_cols = charmap->cols;
 
-  charmap->rows = allocation->width 
-                  / calculate_square_dimension_x (charmap->font_metrics);
-  charmap->cols = allocation->height
-                  / calculate_square_dimension_y (charmap->font_metrics);
+  charmap->cols = allocation->width 
+                  / (calculate_square_dimension_x (charmap->font_metrics) + 1);
+  charmap->rows = allocation->height
+                  / (calculate_square_dimension_y (charmap->font_metrics) + 1);
 
   g_printerr ("size_allocate: %dx%d -> %dx%d\n", 
                allocation->width, allocation->height, 
@@ -1320,11 +1320,16 @@ size_allocate (GtkWidget *widget, GtkAllocation *allocation, Charmap *charmap)
   if (charmap->rows == old_rows && charmap->cols == old_cols)
     return;
 
-  /* size the drawing area - the +1 is for the 1-pixel borders*/
-  gtk_widget_set_size_request (
-          charmap->tabulus, 
-          calculate_tabulus_dimension_x (charmap),
-          calculate_tabulus_dimension_y (charmap));
+  {
+    gint x = calculate_tabulus_dimension_x (charmap);
+    gint y = calculate_tabulus_dimension_y (charmap);
+
+    g_printerr ("size_allocate: requesting %dx%d\n", x, y);
+  }
+
+  gtk_widget_set_size_request (charmap->tabulus, 
+                               calculate_tabulus_dimension_x (charmap),
+                               calculate_tabulus_dimension_y (charmap));
 
   charmap->page_first_char = charmap->active_char 
                              - (charmap->active_char % charmap->cols);
@@ -1502,7 +1507,6 @@ charmap_set_font (Charmap *charmap, gchar *font_name)
   pango_layout_set_font_description (charmap->pango_layout,
                                      charmap->tabulus->style->font_desc);
 
-  /* size the drawing area - the +1 is for the 1-pixel borders*/
   gtk_widget_set_size_request (
           charmap->tabulus, 
           calculate_tabulus_dimension_x (charmap),
