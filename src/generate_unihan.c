@@ -192,12 +192,6 @@ process_unihan_txt (FILE *fin)
       if (strstr (bp, "kJapaneseOn") == bp)
         kJapaneseOn = quote (strchr (bp + 5, '\t') + 1);
     }
-
-    printf ("};\n");
-    printf ("\n");
-    printf ("\n");
-    printf ("#endif /* #if ENABLE_UNIHAN */\n");
-    printf ("\n");
 }
 
 
@@ -222,6 +216,11 @@ main ()
 
   process_unihan_txt (stdin);
 
+  printf ("};\n");
+  printf ("\n");
+  printf ("\n");
+  printf ("#endif /* #if ENABLE_UNIHAN */\n");
+  printf ("\n");
 
   exit (EXIT_SUCCESS);
 }
