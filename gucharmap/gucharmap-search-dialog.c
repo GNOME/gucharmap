@@ -432,7 +432,7 @@ gucharmap_search_dialog_start_search (GucharmapSearchDialog *search_dialog,
   gunichar start_char;
   gint start_index;
 
-  GdkCursor *cursor = gdk_cursor_new (GDK_WATCH);
+  GdkCursor *cursor = _gucharmap_window_progress_cursor ();
   gdk_window_set_cursor (GTK_WIDGET (search_dialog)->window, cursor);
   gdk_cursor_unref (cursor);
 
