@@ -293,6 +293,19 @@ expose_char_for_redraw (Charmap *charmap, gunichar uc)
 }
 
 
+static void
+append_character_to_text_to_copy (Charmap *charmap)
+{
+  static gchar buf[TEXT_TO_COPY_MAXLENGTH];
+
+  g_snprintf (buf, TEXT_TO_COPY_MAXLENGTH, "%s%s", 
+              gtk_entry_get_text (GTK_ENTRY (charmap->text_to_copy)),
+              unichar_to_printable_utf8 (charmap->active_char));
+
+  gtk_entry_set_text (GTK_ENTRY (charmap->text_to_copy), buf);
+}
+
+
 /* for moving around in the charmap */
 /* XXX: redrawing could be much more efficient */
 static gint
@@ -309,7 +322,7 @@ key_press_event (GtkWidget *widget,
   charmap = CHARMAP (callback_data);
   old_active_char = charmap->active_char;
 
-  /* move the cursor depending on which key was pressed */
+  /* move the cursor or whatever depending on which key was pressed */
   switch (event->keyval)
     {
       case GDK_Home: case GDK_KP_Home:
@@ -354,8 +367,12 @@ key_press_event (GtkWidget *widget,
           charmap->active_char = UNICHAR_MAX;
         break;
 
+      case GDK_Return: case GDK_KP_Enter:
+        append_character_to_text_to_copy (charmap);
+        return TRUE;
+
       default:
-        return FALSE; /* don't redraw */
+        return TRUE;; /* don't redraw */
     }
 
   old_page_first_char = charmap->page_first_char;
@@ -586,6 +603,8 @@ charmap_init (Charmap *charmap)
                       TRUE, TRUE, 0);
 
   charmap->text_to_copy = gtk_entry_new ();
+  gtk_entry_set_max_length (GTK_ENTRY (charmap->text_to_copy), 
+                            TEXT_TO_COPY_MAXLENGTH);
   gtk_box_pack_start (GTK_BOX (hbox), charmap->text_to_copy, TRUE, TRUE, 0);
 
   gtk_box_pack_start (GTK_BOX (hbox), 

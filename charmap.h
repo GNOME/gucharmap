@@ -39,6 +39,8 @@ extern "C" {
 /* #define UNICHAR_MAX 0x0010ffff  XXX: gtk has problems */
 #define UNICHAR_MAX 0x0000ffff
 
+#define TEXT_TO_COPY_MAXLENGTH 4096
+
 
 typedef struct _Charmap Charmap;
 typedef struct _CharmapClass CharmapClass;
