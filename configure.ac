@@ -31,7 +31,7 @@ GETTEXT_PACKAGE=gucharmap
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", 
                    [Define the gettext package to be used])
-ALL_LINGUAS="ar az bg ca cs da de el eo en_GB es et eu fi fr ga gl hu it ja ko lt lv nl nn no pl pt_BR pt ro ru sk sl sv ta tr uk vi wa zh_CN zh_TW"
+ALL_LINGUAS="eo es fr"
 AM_GLIB_GNU_GETTEXT
 
 PKG_CHECK_MODULES(GUCHARMAP, gtk+-2.0 >= 2.0.0)
