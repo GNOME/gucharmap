@@ -65,7 +65,7 @@ unichar_to_printable_utf8 (gunichar uc)
 static void
 set_caption (Charmap *charmap)
 {
-  #define BUFLEN 512
+#define BUFLEN 512
   static gchar buf[BUFLEN];
   gunichar *decomposition;
   gsize result_len;
@@ -167,10 +167,6 @@ set_active_block (Charmap *charmap)
       gtk_tree_model_get (GTK_TREE_MODEL (charmap->block_selector_model), 
                           &iter, BLOCK_SELECTOR_UNICODE_BLOCK, &unicode_block, 
                           -1);
-      /*
-      g_printerr ("%4.4X..%4.4X; active = %4.4X    %s\n", 
-                  unicode_block->start, unicode_block->end, 
-                  charmap->active_char, unicode_block->name); */
 
       if (unicode_block == unicode_block_prev_prev)
         goto set_active_block_finished;
@@ -265,7 +261,7 @@ set_scrollbar_adjustment (Charmap *charmap)
 
 
 static void
-draw_character_on_pixmap (Charmap *charmap, gint row, gint col)
+draw_character (Charmap *charmap, gint row, gint col)
 {
   gint padding_x, padding_y;
   gint char_width, char_height;
@@ -276,15 +272,7 @@ draw_character_on_pixmap (Charmap *charmap, gint row, gint col)
   uc = charmap->page_first_char + row * CHARMAP_COLS + col;
 
   if (uc == charmap->active_char)
-    {
-      gc = charmap->tabulus->style->text_gc[GTK_STATE_ACTIVE];
-      gdk_draw_rectangle (charmap->tabulus_pixmap,
-                          charmap->tabulus->style->base_gc[GTK_STATE_ACTIVE],
-                          TRUE, 
-                          (square_width+1) * col + 1, 
-                          (square_height+1) * row + 1, 
-                          square_width, square_height);
-    }
+    gc = charmap->tabulus->style->text_gc[GTK_STATE_ACTIVE];
   else 
     gc = charmap->tabulus->style->text_gc[GTK_STATE_NORMAL];
 
@@ -311,7 +299,64 @@ draw_character_on_pixmap (Charmap *charmap, gint row, gint col)
 
 
 static void
-draw_borders_on_pixmap (Charmap *charmap)
+draw_square_bg (Charmap *charmap, gint row, gint col)
+{
+  gint square_width, square_height; 
+  gunichar uc;
+  GdkGC *gc;
+
+  uc = charmap->page_first_char + row * CHARMAP_COLS + col;
+
+  if (uc == charmap->active_char)
+    gc = charmap->tabulus->style->base_gc[GTK_STATE_ACTIVE];
+  else 
+    gc = charmap->tabulus->style->base_gc[GTK_STATE_NORMAL];
+
+  square_width = calculate_square_dimension_x (charmap->font_metrics);
+  square_height = calculate_square_dimension_y (charmap->font_metrics);
+
+  gdk_draw_rectangle (charmap->tabulus_pixmap, gc, TRUE, 
+                      (square_width+1) * col + 1, (square_height+1) * row + 1, 
+                      square_width, square_height);
+
+  g_printerr ("draw_square_bg: drew %d, %d, %d, %d\n", 
+                      (square_width+1) * col + 1, 
+                      (square_height+1) * row + 1, 
+                      square_width, square_height);
+}
+
+
+static void
+expose_square (Charmap *charmap, gint row, gint col)
+{
+  gint square_width, square_height;
+
+
+  square_width = calculate_square_dimension_x (charmap->font_metrics);
+  square_height = calculate_square_dimension_y (charmap->font_metrics);
+
+  gtk_widget_queue_draw_area (charmap->tabulus, 
+                              (square_width+1) * col + 1, 
+                              (square_height+1) * row + 1, 
+                              square_width, square_height);
+
+  g_printerr ("expose_square: exposed %d, %d, %d, %d\n", 
+                              (square_width+1) * col + 1, 
+                              (square_height+1) * row + 1, 
+                              square_width, square_height);
+}
+
+
+static void
+draw_square (Charmap *charmap, gint row, gint col)
+{
+  draw_square_bg (charmap, row, col);
+  draw_character (charmap, row, col);
+}
+
+
+static void
+draw_borders (Charmap *charmap)
 {
   gint x, y;
   gint width, height; 
@@ -343,15 +388,11 @@ draw_borders_on_pixmap (Charmap *charmap)
 
 /* draws the backing store pixmap */
 static void
-draw_tabulus_pixmap (Charmap *charmap)
+draw_tabulus_from_scratch (Charmap *charmap)
 {
   gint row, col;
   gint width, height;
-  gint square_width, square_height; 
 
-  /* width and height of a square */
-  square_width = calculate_square_dimension_x (charmap->font_metrics);
-  square_height = calculate_square_dimension_y (charmap->font_metrics);
   width = calculate_tabulus_dimension_x (charmap->font_metrics);
   height = calculate_tabulus_dimension_y (charmap->font_metrics);
 
@@ -359,10 +400,7 @@ draw_tabulus_pixmap (Charmap *charmap)
   gdk_draw_rectangle (charmap->tabulus_pixmap,
                       charmap->tabulus->style->base_gc[GTK_STATE_NORMAL], 
                       TRUE, 0, 0, width, height);
-  draw_borders_on_pixmap (charmap);
-
-  pango_layout_set_font_description (charmap->pango_layout,
-                                     charmap->tabulus->style->font_desc);
+  draw_borders (charmap);
 
   /* draw the characters */
   for (row = 0;  row < CHARMAP_ROWS;  row++)
@@ -370,8 +408,11 @@ draw_tabulus_pixmap (Charmap *charmap)
       {
         gunichar uc = charmap->page_first_char + row * CHARMAP_COLS + col;
 
+        if (uc == charmap->active_char)
+          draw_square_bg (charmap, row, col);
+
         if (g_unichar_isgraph (uc))
-          draw_character_on_pixmap (charmap, row, col);
+          draw_character (charmap, row, col);
       }
 }
 
@@ -393,7 +434,7 @@ expose_event (GtkWidget *widget,
               calculate_tabulus_dimension_x (charmap->font_metrics),
               calculate_tabulus_dimension_y (charmap->font_metrics), -1);
 
-      draw_tabulus_pixmap (charmap);
+      draw_tabulus_from_scratch (charmap);
     }
 
   gdk_draw_drawable (charmap->tabulus->window,
@@ -407,29 +448,17 @@ expose_event (GtkWidget *widget,
 }
 
 
-/* draws the square that this character is in */
 static void
-expose_char_for_redraw (Charmap *charmap, gunichar uc)
+draw_and_expose_character_square (Charmap *charmap, gunichar uc)
 {
-  gint row, col, x, y, w, h;
+  gint row = (uc - charmap->page_first_char) / CHARMAP_COLS;
+  gint col = (uc - charmap->page_first_char) % CHARMAP_COLS;
 
-  g_assert (uc >= charmap->page_first_char);
-  g_assert (uc < charmap->page_first_char + CHARMAP_ROWS * CHARMAP_COLS);
-
-  row = (uc - charmap->page_first_char) / CHARMAP_COLS;
-  col = uc % CHARMAP_COLS;
-
-  w = calculate_square_dimension_x (charmap->font_metrics);
-  h = calculate_square_dimension_y (charmap->font_metrics);
-
-  x = col * (w + 1) + 1;
-  y = row * (h + 1) + 1;
-
-  gdk_draw_drawable (charmap->tabulus->window,
-                     charmap->tabulus->style->fg_gc[GTK_STATE_NORMAL],
-                     charmap->tabulus_pixmap,
-                     x, y, x, y, w, h);
-  /* gtk_widget_queue_draw_area (charmap->tabulus, x, y, dim, dim); */
+  if (row >= 0 && row < CHARMAP_ROWS && col >= 0 && col < CHARMAP_COLS)
+    {
+      draw_square (charmap, row, col);
+      expose_square (charmap, row, col);
+    }
 }
 
 
@@ -442,8 +471,8 @@ redraw (Charmap *charmap)
 
   if (row_offset >= CHARMAP_ROWS || row_offset <= -CHARMAP_ROWS)
     {
-      /* redraw all the squares */
-      /* copy the whole thing to the drawable */
+      draw_tabulus_from_scratch (charmap);
+      gtk_widget_queue_draw (charmap->tabulus);
     }
   else if (row_offset != 0)
     {
@@ -451,6 +480,7 @@ redraw (Charmap *charmap)
       /* redraw the squares that weren't part of the shift */
       /* redraw active and old_active if they haven't been already */
       /* copy the whole thing to the drawable */
+      gtk_widget_queue_draw (charmap->tabulus);
     }
 
   if (charmap->active_char != charmap->old_active_char)
@@ -459,9 +489,8 @@ redraw (Charmap *charmap)
       set_active_block (charmap);
       set_scrollbar_adjustment (charmap); /* XXX */
 
-      /* if they haven't already been redrawn */
-      /*   redraw old_active and new_active */
-      /*   copy old_active and new_active to the drawable */
+      draw_and_expose_character_square (charmap, charmap->old_active_char);
+      draw_and_expose_character_square (charmap, charmap->active_char);
     }
 
   charmap->old_page_first_char = charmap->page_first_char;
@@ -492,12 +521,6 @@ set_active_character (Charmap *charmap, gunichar uc)
 
   charmap->active_char = uc;
   charmap->page_first_char = uc - (uc % CHARMAP_COLS);
-
-  g_printerr ("set_active_character: old active = %4.4X\n", charmap->old_active_char);
-  g_printerr ("set_active_character: new active = %4.4X\n", charmap->active_char);
-  g_printerr ("set_active_character: old page first = %4.4X\n", charmap->old_page_first_char);
-  g_printerr ("set_active_character: new page first = %4.4X\n", charmap->page_first_char);
-  g_printerr ("\n");
 }
 
 
@@ -1103,6 +1126,9 @@ charmap_init (Charmap *charmap)
   charmap->pango_layout = pango_layout_new (
           gtk_widget_get_pango_context (charmap->tabulus));
 
+  pango_layout_set_font_description (charmap->pango_layout,
+                                     charmap->tabulus->style->font_desc);
+
   /* size the drawing area */
   gtk_widget_set_size_request (
           charmap->tabulus, 
@@ -1185,6 +1211,9 @@ charmap_set_font (Charmap *charmap, gchar *font_name)
   g_object_unref (charmap->pango_layout);
   charmap->pango_layout = pango_layout_new (
           gtk_widget_get_pango_context (charmap->tabulus));
+
+  pango_layout_set_font_description (charmap->pango_layout,
+                                     charmap->tabulus->style->font_desc);
 
   /* size the drawing area - the +1 is for the 1-pixel borders*/
   gtk_widget_set_size_request (
