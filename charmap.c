@@ -594,8 +594,11 @@ append_character_to_text_to_copy (Charmap *charmap)
 {
   static gchar buf[TEXT_TO_COPY_MAXLENGTH];
   static gchar ubuf[7];
+  gint n;
 
-  g_unichar_to_utf8 (charmap->active_char, ubuf);
+  n = g_unichar_to_utf8 (charmap->active_char, ubuf);
+  ubuf[n] = '\0';
+
   g_snprintf (buf, TEXT_TO_COPY_MAXLENGTH, "%s%s", 
               gtk_entry_get_text (GTK_ENTRY (charmap->text_to_copy)), ubuf);
 
