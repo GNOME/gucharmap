@@ -7,6 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap 0.2\n"
+"POT-Creation-Date: 2003-01-12 11:50-0500\n"
 "PO-Revision-Date: 2002-12-19 02:57-0800\n"
 "Last-Translator: Brion VIBBER <brion@pobox.com>\n"
 "Language-Team: Esperanto <eo@li.org>\n"
@@ -14,170 +15,202 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/charmap.c:110
-#, c-format
-msgid "Unicode code point: U+%4.4X (%u)"
-msgstr "Unikodnumero: U+%4.4X (%u)"
-
-#: src/charmap.c:111
-#, c-format
-msgid "Character: %s"
-msgstr "Signo: %s"
-
-#: src/charmap.c:112
-#, c-format
-msgid "Unicode category: %s"
-msgstr "Unikoda signoklaso: %s"
-
-#: src/charmap.c:113
-#, c-format
-msgid "Unicode name: %s"
-msgstr "Unikoda nomo: %s"
-
-#: src/charmap.c:115
-#, c-format
-msgid "Ideograph definition: %s"
-msgstr "Difino de ideogramo: %s"
-
-#: src/charmap.c:116
-#, c-format
-msgid "Cantonese pronunciation: %s"
-msgstr "Kantona prononco: %s"
-
-#: src/charmap.c:117
-#, c-format
-msgid "Mandarin pronunciation: %s"
-msgstr "Mandarina prononco: %s"
-
-#: src/charmap.c:118
-#, c-format
-msgid "Tang pronunciation: %s"
-msgstr "Tanga prononco: %s"
-
-#: src/charmap.c:119
-#, c-format
-msgid "Korean pronunciation: %s"
-msgstr "Korea prononco: %s"
-
-#: src/charmap.c:120
-#, c-format
-msgid "Japanese On pronunciation: %s"
-msgstr "Japana on-prononco: %s"
-
-#: src/charmap.c:121
-#, c-format
-msgid "Japanese Kun pronunciation: %s"
-msgstr "Japana kun-prononco: %s"
-
-#: src/charmap.c:153
-#, c-format
-msgid "Unicode canonical decomposition: %s [U+%4.4X]"
-msgstr "Laŭnorma Unikoda disiĝo: %s [U+%4.4X]"
-
-#: src/charmap.c:879
+#: src/charmap.c:1006
 msgid "Text copied to clipboard."
 msgstr "Enpoŝigis tekston."
 
-#: src/charmap.c:891
+#: src/charmap.c:1018
 msgid "Text-to-copy entry box cleared."
 msgstr "Malplenigis tekstujon."
 
-#: src/charmap.c:982
-msgid "Expand/collapse all"
-msgstr "Elfaldu/enfaldu ĉiujn."
+#: src/charmap.c:1205
+#, fuzzy
+msgid "Unicode name"
+msgstr "Unikoda nomo: %s"
 
-#: src/charmap.c:986
-msgid "Show/hide code point values in the block list."
-msgstr "Montru/kaŝu signojn en la ignorlisto."
+#: src/charmap.c:1211
+#, fuzzy
+msgid "Unicode code point"
+msgstr "Unikodnumero: U+%4.4X (%u)"
 
-#: src/charmap.c:1243
+#: src/charmap.c:1217
+#, fuzzy
+msgid "Unicode category"
+msgstr "Unikoda signoklaso: %s"
+
+#: src/charmap.c:1223
+#, fuzzy
+msgid "Canonical decomposition"
+msgstr "Laŭnorma Unikoda disiĝo: %s [U+%4.4X]"
+
+#: src/charmap.c:1229
+msgid "UTF-8"
+msgstr ""
+
+#: src/charmap.c:1236
+#, fuzzy
+msgid "CJK ideograph definition"
+msgstr "Difino de ideogramo: %s"
+
+#: src/charmap.c:1242
+#, fuzzy
+msgid "Mandarin pronunciation"
+msgstr "Mandarina prononco: %s"
+
+#: src/charmap.c:1248
+#, fuzzy
+msgid "Japanese On pronunciation"
+msgstr "Japana on-prononco: %s"
+
+#: src/charmap.c:1254
+#, fuzzy
+msgid "Japanese Kun pronunciation"
+msgstr "Japana kun-prononco: %s"
+
+#: src/charmap.c:1260
+#, fuzzy
+msgid "Cantonese pronunciation"
+msgstr "Kantona prononco: %s"
+
+#: src/charmap.c:1266
+#, fuzzy
+msgid "Tang pronunciation"
+msgstr "Tanga prononco: %s"
+
+#: src/charmap.c:1272
+#, fuzzy
+msgid "Korean pronunciation"
+msgstr "Korea prononco: %s"
+
+#: src/charmap.c:1327
 msgid "Clipboard is empty."
 msgstr "Poŝo malplenas."
 
-#: src/charmap.c:1245
-msgid "Selection is empty."
-msgstr "Elekta areo malplenas."
+#: src/charmap.c:1329
+msgid "There is no selected text."
+msgstr ""
 
-#: src/charmap.c:1257
+#: src/charmap.c:1338 src/charmap.c:1568
 msgid "Unknown character, unable to identify."
 msgstr "Nekonata signo; neeblas identigi ĝin."
 
-#: src/charmap.c:1261 src/charmap.c:1593
+#: src/charmap.c:1342 src/charmap.c:1572
 msgid "Character found."
 msgstr "Trovis signon."
 
-#: src/charmap.c:1299
-msgid "Identify character from selection"
-msgstr "Identigu signon de la elekta areo"
-
-#: src/charmap.c:1304
-msgid "Jump to the first character in the primary selection. (X11 only.)"
-msgstr "Saltu al la unua signo de la ĉefa elekta areo. (Nur X11.)"
-
-#: src/charmap.c:1306
-msgid "Identify character from clipboard"
-msgstr "Identigu signon de la poŝo"
-
-#: src/charmap.c:1312
-msgid "Jump to the first character in the clipboard."
-msgstr "Saltu al la unua signo de la poŝo."
-
-#: src/charmap.c:1335
+#: src/charmap.c:1361
 msgid "Text to copy:"
 msgstr "Kopiota teksto:"
 
-#: src/charmap.c:1349
+#: src/charmap.c:1375
 msgid "Copy to the clipboard."
 msgstr "Enpoŝigu."
 
-#: src/charmap.c:1550
+#: src/charmap.c:1655
 msgid "Nothing to search for."
 msgstr "Nenio por serĉi."
 
-#: src/charmap.c:1559
+#: src/charmap.c:1664
 msgid "Search wrapped."
 msgstr "Serĉado finiĝis."
 
-#: src/charmap.c:1561
+#: src/charmap.c:1666
 msgid "Found."
 msgstr "Trovis."
 
-#: src/charmap.c:1567
+#: src/charmap.c:1672
 msgid "Not found."
 msgstr "Ne trovis."
 
-#: src/charmap.c:1582
-msgid "Nothing to jump to."
-msgstr "Neniu por alsalti."
-
-#: src/charmap.c:1601
-#, c-format
-msgid ""
-"Not a valid code point to jump to. Must be a hex number between 0 and %4.4X."
-msgstr "Neeblas salti al nevalida signokodo. Devas esti deksesuma numero inter 0 kaj %4.4X."
-
-#: src/charmap.c:1619
-msgid "Search:"
-msgstr "Serĉu:"
-
-#: src/charmap.c:1632
+#: src/charmap.c:1698
 msgid ""
 "Search for the next occurrence of this string in a character's Unicode name."
 msgstr "Serĉu la sekvan aperon de la ĉeno en Unikodnomo de signo."
 
-#. jump
-#: src/charmap.c:1635
-msgid "Jump to:"
-msgstr "Saltu al:"
+#: src/main.c:76
+#, fuzzy, c-format
+msgid ""
+"Not a valid code point to jump to. Must be a hexadecimal number between 0 "
+"and %4.4X."
+msgstr ""
+"Neeblas salti al nevalida signokodo. Devas esti deksesuma numero inter 0 kaj "
+"%4.4X."
 
-#: src/charmap.c:1649
-msgid "Jump to this hexadecimal code point."
+#: src/main.c:96
+#, fuzzy
+msgid "Go to hex code point"
 msgstr "Saltu al tiu ĉi deksesuma kodono."
 
-#: src/main.c:90
+#: src/main.c:116
+#, fuzzy
+msgid "Enter unicode code point"
+msgstr "Unikodnumero: U+%4.4X (%u)"
+
+#: src/main.c:152
+msgid "translator_credits"
+msgstr ""
+
+#: src/main.c:159 src/main.c:294
 msgid "Unicode Character Map"
 msgstr "Unikoda Signomontrilo"
 
-#: src/main.c:115
-msgid "Show/hide font selection."
-msgstr "Montru/kaŝu tiparelektilon."
+#: src/main.c:205
+msgid "_File"
+msgstr ""
+
+#: src/main.c:207
+msgid "_View"
+msgstr ""
+
+#: src/main.c:209
+msgid "_Go to"
+msgstr ""
+
+#: src/main.c:227
+#, fuzzy
+msgid "Expand/Collapse All"
+msgstr "Elfaldu/enfaldu ĉiujn."
+
+#: src/main.c:237
+msgid "_Hex Code Point..."
+msgstr ""
+
+#: src/main.c:242
+#, fuzzy
+msgid "Character in _Clipboard"
+msgstr "Identigu signon de la poŝo"
+
+#. make the help menu
+#: src/main.c:250
+msgid "_Help"
+msgstr ""
+
+#~ msgid "Character: %s"
+#~ msgstr "Signo: %s"
+
+#~ msgid "Show/hide code point values in the block list."
+#~ msgstr "Montru/kaŝu signojn en la ignorlisto."
+
+#~ msgid "Selection is empty."
+#~ msgstr "Elekta areo malplenas."
+
+#~ msgid "Identify character from selection"
+#~ msgstr "Identigu signon de la elekta areo"
+
+#~ msgid "Jump to the first character in the primary selection. (X11 only.)"
+#~ msgstr "Saltu al la unua signo de la ĉefa elekta areo. (Nur X11.)"
+
+#~ msgid "Jump to the first character in the clipboard."
+#~ msgstr "Saltu al la unua signo de la poŝo."
+
+#~ msgid "Nothing to jump to."
+#~ msgstr "Neniu por alsalti."
+
+#~ msgid "Search:"
+#~ msgstr "Serĉu:"
+
+#~ msgid "Jump to:"
+#~ msgstr "Saltu al:"
+
+#~ msgid "Show/hide font selection."
+#~ msgstr "Montru/kaŝu tiparelektilon."

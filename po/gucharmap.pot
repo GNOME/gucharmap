@@ -1,181 +1,169 @@
-# $Id$
-# translation of gucharmap
-# copyright (c) 2002 Noah Levitt
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: gucharmap 0.2\n"
-"POT-Creation-Date: 2002-12-18 15:58-0500\n"
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2003-01-12 11:50-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/charmap.c:110
-#, c-format
-msgid "Unicode code point: U+%4.4X (%u)"
-msgstr ""
-
-#: src/charmap.c:111
-#, c-format
-msgid "Character: %s"
-msgstr ""
-
-#: src/charmap.c:112
-#, c-format
-msgid "Unicode category: %s"
-msgstr ""
-
-#: src/charmap.c:113
-#, c-format
-msgid "Unicode name: %s"
-msgstr ""
-
-#: src/charmap.c:115
-#, c-format
-msgid "Ideograph definition: %s"
-msgstr ""
-
-#: src/charmap.c:116
-#, c-format
-msgid "Cantonese pronunciation: %s"
-msgstr ""
-
-#: src/charmap.c:117
-#, c-format
-msgid "Mandarin pronunciation: %s"
-msgstr ""
-
-#: src/charmap.c:118
-#, c-format
-msgid "Tang pronunciation: %s"
-msgstr ""
-
-#: src/charmap.c:119
-#, c-format
-msgid "Korean pronunciation: %s"
-msgstr ""
-
-#: src/charmap.c:120
-#, c-format
-msgid "Japanese On pronunciation: %s"
-msgstr ""
-
-#: src/charmap.c:121
-#, c-format
-msgid "Japanese Kun pronunciation: %s"
-msgstr ""
-
-#: src/charmap.c:153
-#, c-format
-msgid "Unicode canonical decomposition: %s [U+%4.4X]"
-msgstr ""
-
-#: src/charmap.c:879
+#: src/charmap.c:1006
 msgid "Text copied to clipboard."
 msgstr ""
 
-#: src/charmap.c:891
+#: src/charmap.c:1018
 msgid "Text-to-copy entry box cleared."
 msgstr ""
 
-#: src/charmap.c:982
-msgid "Expand/collapse all"
+#: src/charmap.c:1205
+msgid "Unicode name"
 msgstr ""
 
-#: src/charmap.c:986
-msgid "Show/hide code point values in the block list."
+#: src/charmap.c:1211
+msgid "Unicode code point"
 msgstr ""
 
-#: src/charmap.c:1243
+#: src/charmap.c:1217
+msgid "Unicode category"
+msgstr ""
+
+#: src/charmap.c:1223
+msgid "Canonical decomposition"
+msgstr ""
+
+#: src/charmap.c:1229
+msgid "UTF-8"
+msgstr ""
+
+#: src/charmap.c:1236
+msgid "CJK ideograph definition"
+msgstr ""
+
+#: src/charmap.c:1242
+msgid "Mandarin pronunciation"
+msgstr ""
+
+#: src/charmap.c:1248
+msgid "Japanese On pronunciation"
+msgstr ""
+
+#: src/charmap.c:1254
+msgid "Japanese Kun pronunciation"
+msgstr ""
+
+#: src/charmap.c:1260
+msgid "Cantonese pronunciation"
+msgstr ""
+
+#: src/charmap.c:1266
+msgid "Tang pronunciation"
+msgstr ""
+
+#: src/charmap.c:1272
+msgid "Korean pronunciation"
+msgstr ""
+
+#: src/charmap.c:1327
 msgid "Clipboard is empty."
 msgstr ""
 
-#: src/charmap.c:1245
-msgid "Selection is empty."
+#: src/charmap.c:1329
+msgid "There is no selected text."
 msgstr ""
 
-#: src/charmap.c:1257
+#: src/charmap.c:1338 src/charmap.c:1568
 msgid "Unknown character, unable to identify."
 msgstr ""
 
-#: src/charmap.c:1261 src/charmap.c:1593
+#: src/charmap.c:1342 src/charmap.c:1572
 msgid "Character found."
 msgstr ""
 
-#: src/charmap.c:1299
-msgid "Identify character from selection"
-msgstr ""
-
-#: src/charmap.c:1304
-msgid "Jump to the first character in the primary selection. (X11 only.)"
-msgstr ""
-
-#: src/charmap.c:1306
-msgid "Identify character from clipboard"
-msgstr ""
-
-#: src/charmap.c:1312
-msgid "Jump to the first character in the clipboard."
-msgstr ""
-
-#: src/charmap.c:1335
+#: src/charmap.c:1361
 msgid "Text to copy:"
 msgstr ""
 
-#: src/charmap.c:1349
+#: src/charmap.c:1375
 msgid "Copy to the clipboard."
 msgstr ""
 
-#: src/charmap.c:1550
+#: src/charmap.c:1655
 msgid "Nothing to search for."
 msgstr ""
 
-#: src/charmap.c:1559
+#: src/charmap.c:1664
 msgid "Search wrapped."
 msgstr ""
 
-#: src/charmap.c:1561
+#: src/charmap.c:1666
 msgid "Found."
 msgstr ""
 
-#: src/charmap.c:1567
+#: src/charmap.c:1672
 msgid "Not found."
 msgstr ""
 
-#: src/charmap.c:1582
-msgid "Nothing to jump to."
-msgstr ""
-
-#: src/charmap.c:1601
-#, c-format
-msgid ""
-"Not a valid code point to jump to. Must be a hex number between 0 and %4.4X."
-msgstr ""
-
-#: src/charmap.c:1619
-msgid "Search:"
-msgstr ""
-
-#: src/charmap.c:1632
+#: src/charmap.c:1698
 msgid ""
 "Search for the next occurrence of this string in a character's Unicode name."
 msgstr ""
 
-#. jump
-#: src/charmap.c:1635
-msgid "Jump to:"
+#: src/main.c:76
+#, c-format
+msgid ""
+"Not a valid code point to jump to. Must be a hexadecimal number between 0 "
+"and %4.4X."
 msgstr ""
 
-#: src/charmap.c:1649
-msgid "Jump to this hexadecimal code point."
+#: src/main.c:96
+msgid "Go to hex code point"
 msgstr ""
 
-#: src/main.c:90
+#: src/main.c:116
+msgid "Enter unicode code point"
+msgstr ""
+
+#: src/main.c:152
+msgid "translator_credits"
+msgstr ""
+
+#: src/main.c:159 src/main.c:294
 msgid "Unicode Character Map"
 msgstr ""
 
-#: src/main.c:115
-msgid "Show/hide font selection."
+#: src/main.c:205
+msgid "_File"
+msgstr ""
+
+#: src/main.c:207
+msgid "_View"
+msgstr ""
+
+#: src/main.c:209
+msgid "_Go to"
+msgstr ""
+
+#: src/main.c:227
+msgid "Expand/Collapse All"
+msgstr ""
+
+#: src/main.c:237
+msgid "_Hex Code Point..."
+msgstr ""
+
+#: src/main.c:242
+msgid "Character in _Clipboard"
+msgstr ""
+
+#. make the help menu
+#: src/main.c:250
+msgid "_Help"
 msgstr ""
