@@ -2,208 +2,347 @@
 # Copyright (C) 2003 The Free Software Foundation, Inc.
 # This file is distributed under the same license as the gucharmap package.
 # Tino Meinen <a.t.meinen@chello.nl>
+# Sebastien Bruggeman <seba@ulyssis.org>
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: gucharmap 0.1\n"
-"POT-Creation-Date: 2003-02-02 19:23+0100\n"
-"PO-Revision-Date: 2003-02-03 02:50+0100\n"
-"Last-Translator: Tino Meinen <a.t.meinen@chello.nl>\n"
+"Project-Id-Version: gucharmap 0.3\n"
+"POT-Creation-Date: 2003-02-06 11:28+0100\n"
+"PO-Revision-Date: 2003-02-06 14:09--100\n"
+"Last-Translator: Sebastien Bruggeman <seba@ulyssis.org>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/charmap.c:654
+#: src/charmap.c:699
 msgid "Zoom mode disabled."
 msgstr "Zoomen uitgezet."
 
-#: src/charmap.c:1343
+#: src/charmap.c:1388
 msgid "Zoom mode enabled. Press <Esc> to disable zoom."
 msgstr "Zoomen aangezet. Druk op <Esc> om zoomen weer uit te zetten."
 
-#: src/charmap.c:1412
+#: src/charmap.c:1457
 msgid "Zoom mode enabled."
 msgstr "Zoomen aangezet."
 
-#: src/charmap.c:1603
-msgid "Character"
-msgstr "Karakter"
-
-#: src/charmap.c:1609
-msgid "Unicode category"
-msgstr "Unicode categorie"
-
-#: src/charmap.c:1615
-msgid "Canonical decomposition"
-msgstr "Canonieke decompositie"
-
-#: src/charmap.c:1621
-msgid "UTF-8"
-msgstr "UTF-8"
-
-#: src/charmap.c:1627
-msgid "Other representations"
-msgstr "Andere representaties"
-
-#: src/charmap.c:1634
-msgid "CJK ideograph definition"
-msgstr "CJK ideogram-definitie"
-
-#: src/charmap.c:1640
-msgid "Mandarin pronunciation"
-msgstr "Uitspraak in Mandarijn"
-
-#: src/charmap.c:1646
-msgid "Japanese On pronunciation"
-msgstr "Uitspraak in Japans On"
-
-#: src/charmap.c:1652
-msgid "Japanese Kun pronunciation"
-msgstr "Uitspraak in Japans Kun"
-
-#: src/charmap.c:1658
-msgid "Cantonese pronunciation"
-msgstr "Uitspraak in Cantonees"
-
-#: src/charmap.c:1664
-msgid "Tang pronunciation"
-msgstr "Uitspraak in Tang"
-
-#: src/charmap.c:1670
-msgid "Korean pronunciation"
-msgstr "Uitspraak in Koreaans"
-
-#: src/charmap.c:1725
+#: src/charmap.c:1693
 msgid "Clipboard is empty."
 msgstr "Klembord is leeg."
 
-#: src/charmap.c:1727
+#: src/charmap.c:1695
 msgid "There is no selected text."
 msgstr "Er is geen geselecteerde tekst."
 
-#: src/charmap.c:1735 src/charmap.c:1939
+#: src/charmap.c:1703
+#: src/charmap.c:1907
 msgid "Unknown character, unable to identify."
-msgstr "Onbekend karakter, onmogelijk het te identificeren."
+msgstr "Onbekend teken, onmogelijk het te identificeren."
 
-#: src/charmap.c:1739 src/charmap.c:1943
+#: src/charmap.c:1707
+#: src/charmap.c:1911
 msgid "Character found."
-msgstr "Karakter gevonden."
+msgstr "Teken gevonden."
 
-#: src/main.c:140
+#: src/charmap.c:2016
+msgid "Character Map"
+msgstr "Tekentabel"
+
+#: src/charmap.c:2020
+msgid "Character"
+msgstr "Teken"
+
+#: src/charmap.c:2021
+msgid "Unicode category"
+msgstr "Unicode categorie"
+
+#: src/charmap.c:2022
+msgid "Canonical decomposition"
+msgstr "Canonieke decompositie"
+
+#: src/charmap.c:2023
+msgid "UTF-8"
+msgstr "UTF-8"
+
+#: src/charmap.c:2024
+msgid "Other representations"
+msgstr "Andere representaties"
+
+#: src/charmap.c:2026
+msgid "CJK ideograph definition"
+msgstr "CJK ideogram-definitie"
+
+#: src/charmap.c:2027
+msgid "Mandarin pronunciation"
+msgstr "Mandarijnse uitspraak"
+
+#: src/charmap.c:2028
+msgid "Japanese On pronunciation"
+msgstr "Japanse On uitspraak"
+
+#: src/charmap.c:2029
+msgid "Japanese Kun pronunciation"
+msgstr "Japanse Kun uitspraak"
+
+#: src/charmap.c:2030
+msgid "Cantonese pronunciation"
+msgstr "Cantonese uitspraak"
+
+#: src/charmap.c:2031
+msgid "Tang pronunciation"
+msgstr "Tang uitspraak"
+
+#: src/charmap.c:2032
+msgid "Korean pronunciation"
+msgstr "Koreaanse uitspraak"
+
+#: src/charmap.c:2048
+msgid "Character Table"
+msgstr "Tekentabel"
+
+#: src/charmap.c:2053
+msgid "Details on the Current Character"
+msgstr "Details over het huidige karakter"
+
+#: src/charmap.c:2064
+msgid "List of Unicode Blocks"
+msgstr "Lijst van Unicode blokken"
+
+#: src/main.c:180
+#: src/main.c:662
+msgid "category"
+msgstr "categorie"
+
+#: src/main.c:182
+#: src/main.c:670
+msgid "decomposition"
+msgstr "decompositie"
+
+#: src/main.c:184
+#: src/main.c:677
+msgid "utf8"
+msgstr "utf8"
+
+#: src/main.c:186
+#: src/main.c:685
+msgid "other_reps"
+msgstr "andere _representaties"
+
+#: src/main.c:189
+#: src/main.c:712
+msgid "kdefinition"
+msgstr "kdefinitie"
+
+#: src/main.c:191
+#: src/main.c:720
+msgid "kmandarin"
+msgstr "kmandarijns"
+
+#: src/main.c:193
+#: src/main.c:728
+msgid "kjapaneseon"
+msgstr "kjapanseon"
+
+#: src/main.c:195
+#: src/main.c:736
+msgid "kjapanesekun"
+msgstr "kjapansekun"
+
+#: src/main.c:197
+#: src/main.c:744
+msgid "kcantonese"
+msgstr "kcantonees"
+
+#: src/main.c:199
+#: src/main.c:752
+msgid "ktang"
+msgstr "ktang"
+
+#: src/main.c:201
+#: src/main.c:760
+msgid "kkorean"
+msgstr "kkoreaans"
+
+#: src/main.c:261
 #, c-format
-msgid ""
-"Not a valid code point to jump to. Must be a hexadecimal number between 0 "
-"and %4.4X."
-msgstr ""
-"Geen geldig codepunt om naar toe te springen. Het moet een hexadecimaal "
-"nummer zijn tussen 0 en %4.4X."
+msgid "Not a valid code point to jump to. Must be a hexadecimal number between 0 and %4.4X."
+msgstr "Geen geldig codepunt om naar toe te springen. Het moet een hexadecimaal nummer zijn tussen 0 en %4.4X."
 
-#: src/main.c:162
+#: src/main.c:283
 msgid "Go to hex code point"
 msgstr "Ga naar het hex codepunt."
 
-#: src/main.c:183
+#: src/main.c:304
 msgid "_Enter unicode code point"
 msgstr "Unicode codepunt in_voeren"
 
-#: src/main.c:227
+#: src/main.c:348
 msgid "The selected code point is not a valid unicode character."
-msgstr "Het selecteerde codepunt is geen geldig unicode-letterteken."
+msgstr "Het geselecteerde codepunt is geen geldig unicode-teken."
 
-#: src/main.c:258
+#: src/main.c:379
 msgid "Text copied to clipboard."
-msgstr "Tekst gekopieerd naar het klembord."
+msgstr "Tekst gekopiëerd naar het klembord."
 
-#: src/main.c:268
+#: src/main.c:389
 msgid "Text-to-copy entry box cleared."
 msgstr "Invoerveld voor te-kopiëren-tekst gewist."
 
-#: src/main.c:282
+#: src/main.c:403
 msgid "Not found."
 msgstr "Niet gevonden."
 
-#: src/main.c:286
+#: src/main.c:407
 msgid "Found."
 msgstr "Gevonden."
 
-#: src/main.c:290
+#: src/main.c:411
 msgid "Search wrapped."
-msgstr "Het zoeken is opnieuw begonnen."
+msgstr "Het zoeken is weer van voren begonnen."
 
-#: src/main.c:294
+#: src/main.c:415
 msgid "Nothing to search for."
 msgstr "Niets om naar te zoeken."
 
-#: src/main.c:317
+#: src/main.c:438
 msgid "_Search:"
 msgstr "_Zoeken:"
 
-# Dit kan beter
-#: src/main.c:335
-msgid ""
-"Search for the next occurrence of this string in a character's Unicode name."
-msgstr ""
-"Zoeken naar het volgende voorkomen van deze tekenreeks in de Unicode-naam "
-"van een karakter."
+#: src/main.c:456
+msgid "Search for the next occurrence of this string in a character's Unicode name."
+msgstr "Zoeken naar het volgende teken waarvan de Unicode-naam deze tekenreeks bevat."
 
-#: src/main.c:364
+#: src/main.c:485
 msgid "_Text to copy:"
 msgstr "Te kopiëren _tekst:"
 
-#: src/main.c:383
+#: src/main.c:504
 msgid "Copy to the clipboard."
 msgstr "Kopiëren naar het klembord."
 
-#: src/main.c:408
+#: src/main.c:529
 msgid "translator_credits"
-msgstr ""
-"Sebastien Bruggeman <seba@ulyssis.org>\n"
+msgstr "Sebastien Bruggeman <seba@ulyssis.org>\n"
 "Tino Meinen <a.t.meinen@chello.nl>"
 
-#: src/main.c:415 src/main.c:580
+#: src/main.c:536
+#: src/main.c:822
 msgid "Unicode Character Map"
-msgstr "Unicode letterteken-tabel"
+msgstr "Unicode tekentabel"
 
-#: src/main.c:464
+#: src/main.c:586
 msgid "Char_map"
-msgstr "letterteken-_tabel"
+msgstr "teken_tabel"
 
-#: src/main.c:466
+#: src/main.c:588
 msgid "_View"
 msgstr "B_eeld"
 
-#: src/main.c:468
+#: src/main.c:590
 msgid "_Go To"
 msgstr "_Ga naar"
 
-# beter: in/uitklappen?
-#: src/main.c:487
+#: src/main.c:609
 msgid "Expand/Collapse All"
-msgstr "Alles uitvouwen/opvouwen"
+msgstr "Alles uit-/inschuiven"
 
 #. ctrl-+ or ctrl-=
-#: src/main.c:496
+#: src/main.c:618
 msgid "Zoom _In"
 msgstr "_Inzoomen"
 
-#. finished making the view menu
 #. ctrl--
-#: src/main.c:509
+#: src/main.c:630
 msgid "Zoom _Out"
 msgstr "_Uitzoomen"
 
+#: src/main.c:643
+msgid "_Unicode Details"
+msgstr "_Unicode details"
+
+#. the unicode details submenu
+#: src/main.c:649
+#: src/main.c:698
+msgid "Options"
+msgstr "Opties"
+
+#: src/main.c:657
+msgid "_Category"
+msgstr "_Categorie"
+
+#: src/main.c:665
+msgid "Canonical _Decomposition"
+msgstr "Canonieke _decompositie"
+
+#: src/main.c:672
+msgid "_UTF-8"
+msgstr "_UTF-8"
+
+#: src/main.c:680
+msgid "_Other Representations"
+msgstr "_Andere representaties"
+
+#: src/main.c:692
+msgid "_CJK Ideograph Details"
+msgstr "_CJK ideogram-definitie"
+
+#: src/main.c:707
+msgid "CJK Ideograph _Definition"
+msgstr "CJK ideogram-_definitie"
+
+#: src/main.c:715
+msgid "_Mandarin Pronunciation"
+msgstr "_Mandarijnse uitspraak"
+
+#: src/main.c:723
+msgid "Japanese _On Pronunciation"
+msgstr "Japanse _On uitspraak"
+
+#: src/main.c:731
+msgid "_Japanese Kun Pronunciation"
+msgstr "_Japanse Kun uitspraak"
+
+#: src/main.c:739
+msgid "_Cantonese Pronunciation"
+msgstr "_Cantonese uitspraak"
+
+#: src/main.c:747
+msgid "_Tang Pronunciation"
+msgstr "_Tang uitspraak"
+
+#: src/main.c:755
+msgid "_Korean Pronunciation"
+msgstr "_Koreaanse uitspraak"
+
 #. ctrl-h
-#: src/main.c:524
+#: src/main.c:770
 msgid "_Hex Code Point..."
 msgstr "_Hex codepunt..."
 
 #. ctrl-v
-#: src/main.c:532
+#: src/main.c:778
 msgid "Character in _Clipboard"
 msgstr "Karakter in _klembord"
 
 #. make the help menu
-#: src/main.c:542
+#: src/main.c:788
 msgid "_Help"
 msgstr "_Hulp"
+
+#: src/mini_fontsel.c:280
+msgid "Font"
+msgstr "Lettertype"
+
+#: src/mini_fontsel.c:289
+msgid "Font Family"
+msgstr "Lettertypefamilie"
+
+#: src/mini_fontsel.c:293
+msgid "Font Style"
+msgstr "Lettertypestijl"
+
+#: src/mini_fontsel.c:300
+msgid "Font Size"
+msgstr "Lettertypegrootte"
+
