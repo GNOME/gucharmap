@@ -590,13 +590,36 @@ append_character_to_text_to_copy (Charmap *charmap)
 static void
 set_active_character (Charmap *charmap, gunichar uc)
 {
+  gint offset;
+
   g_return_if_fail (uc >= 0 && uc <= UNICHAR_MAX);
 
   charmap->old_active_char = charmap->active_char;
   charmap->old_page_first_char = charmap->page_first_char;
 
   charmap->active_char = uc;
-  charmap->page_first_char = uc - (uc % CHARMAP_COLS);
+
+  if (uc - charmap->page_first_char < CHARMAP_ROWS * CHARMAP_ROWS)
+    return;
+
+  offset = (gint) charmap->active_char - (gint) charmap->old_active_char;
+
+  if (offset > 0 && offset < 2*CHARMAP_COLS)
+    {
+      charmap->page_first_char = 
+          charmap->active_char - (charmap->active_char % CHARMAP_COLS) 
+          - (CHARMAP_ROWS - 1) * CHARMAP_COLS;
+    }
+  else if (offset < 0 && offset > -2*CHARMAP_COLS)
+    {
+      charmap->page_first_char = uc - (uc % CHARMAP_COLS);
+    }
+  else 
+    {
+      charmap->page_first_char = 
+          charmap->active_char 
+          + (charmap->old_page_first_char - charmap->old_active_char);
+    }
 }
 
 
@@ -1021,7 +1044,8 @@ selection_text_received (GtkClipboard *clipboard,
   gunichar old_page_first_char, old_active_char;
   Charmap *charmap;
 
-  g_return_if_fail (text != NULL);
+  if (text == NULL)
+    return;
 
   charmap = CHARMAP (data);
   old_page_first_char = charmap->page_first_char;
