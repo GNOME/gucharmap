@@ -6,13 +6,446 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
-"POT-Creation-Date: 2003-04-30 19:41+0200\n"
-"PO-Revision-Date: 2003-04-30 19:45+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-06-26 17:05+0200\n"
+"PO-Revision-Date: 2003-06-26 17:05+0200\n"
 "Last-Translator: Ole Laursen <olau@hardworking.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#. ID
+#: gucharmap.desktop.in.h:1 gucharmap/gucharmap-window.c:381
+#: gucharmap/gucharmap-window.c:972 gucharmap/imgucharmap.c:209
+msgid "Unicode Character Map"
+msgstr "Tegnoversigt (Unicode)"
+
+#: gucharmap/gucharmap-charmap.c:397
+msgid "Canonical decomposition:"
+msgstr "Kanonisk dekomposition:"
+
+#: gucharmap/gucharmap-charmap.c:437 gucharmap/gucharmap-table.c:327
+msgid "[not a printable character]"
+msgstr "[ikke et tegn der kan vises]"
+
+#: gucharmap/gucharmap-charmap.c:457
+msgid "General Character Properties"
+msgstr "Generelle tegnegenskaber"
+
+#. character category
+#: gucharmap/gucharmap-charmap.c:460
+msgid "Unicode category:"
+msgstr "Unicodekategori:"
+
+#: gucharmap/gucharmap-charmap.c:466
+msgid "Various Useful Representations"
+msgstr "Diverse brugbare repræsentationer"
+
+#: gucharmap/gucharmap-charmap.c:475
+msgid "UTF-8:"
+msgstr "UTF-8:"
+
+#: gucharmap/gucharmap-charmap.c:483
+msgid "Octal escaped UTF-8:"
+msgstr "Oktalt kodet UTF-8:"
+
+#: gucharmap/gucharmap-charmap.c:489
+msgid "Decimal entity reference:"
+msgstr "Decimal entitetsreference:"
+
+#: gucharmap/gucharmap-charmap.c:495
+msgid "Annotations and Cross References"
+msgstr "Bemærkninger og krydsreferencer"
+
+#: gucharmap/gucharmap-charmap.c:502
+msgid "Alias names:"
+msgstr "Aliasnavne:"
+
+#: gucharmap/gucharmap-charmap.c:511
+msgid "Notes:"
+msgstr "Noter:"
+
+#: gucharmap/gucharmap-charmap.c:520
+msgid "See also:"
+msgstr "Se også:"
+
+#: gucharmap/gucharmap-charmap.c:529
+msgid "Approximate equivalents:"
+msgstr "Omtrent ækvivalente:"
+
+#: gucharmap/gucharmap-charmap.c:538
+msgid "Equivalents:"
+msgstr "Ækvivalente:"
+
+#: gucharmap/gucharmap-charmap.c:553
+msgid "CJK Ideograph Information"
+msgstr "CJK-ideograf-info"
+
+#: gucharmap/gucharmap-charmap.c:558
+msgid "Definition in English:"
+msgstr "Definition på engelsk:"
+
+#: gucharmap/gucharmap-charmap.c:563
+msgid "Mandarin Pronunciation:"
+msgstr "Mandarin-udtale:"
+
+#: gucharmap/gucharmap-charmap.c:568
+msgid "Japanese On Pronunciation:"
+msgstr "Japanskt On-udtale:"
+
+#: gucharmap/gucharmap-charmap.c:573
+msgid "Japanese Kun Pronunciation:"
+msgstr "Japanskt Kun-udtale:"
+
+#: gucharmap/gucharmap-charmap.c:578
+msgid "Tang Pronunciation:"
+msgstr "Tang-udtale:"
+
+#: gucharmap/gucharmap-charmap.c:583
+msgid "Korean Pronunciation:"
+msgstr "Koreansk udtale:"
+
+#: gucharmap/gucharmap-charmap.c:890
+msgid "Characte_r Table"
+msgstr "Tegn_oversigt"
+
+#: gucharmap/gucharmap-charmap.c:893
+msgid "Character _Details"
+msgstr "Tegn_detaljer"
+
+#: gucharmap/gucharmap-charmap.c:911
+msgid "List of Unicode Blocks"
+msgstr "Liste over Unicodeblokke"
+
+#: gucharmap/gucharmap-mini-fontsel.c:197
+msgid "Font"
+msgstr "Skrifttype"
+
+#: gucharmap/gucharmap-mini-fontsel.c:204
+msgid "Font Family"
+msgstr "Familie"
+
+#: gucharmap/gucharmap-mini-fontsel.c:208
+msgid "_Bold"
+msgstr "_Fed"
+
+#: gucharmap/gucharmap-mini-fontsel.c:213
+msgid "_Italic"
+msgstr "_Kursiv"
+
+#: gucharmap/gucharmap-mini-fontsel.c:222
+msgid "Font Size"
+msgstr "Størrelse"
+
+#: gucharmap/gucharmap-table.c:1417
+msgid "Clipboard is empty."
+msgstr "Klippebordet er tomt."
+
+#: gucharmap/gucharmap-table.c:1419
+msgid "There is no selected text."
+msgstr "Der er ingen markeret tekst."
+
+#: gucharmap/gucharmap-table.c:1427 gucharmap/gucharmap-table.c:1690
+msgid "Unknown character, unable to identify."
+msgstr "Ukendt tegn, kan ikke identificeres."
+
+#: gucharmap/gucharmap-table.c:1431 gucharmap/gucharmap-table.c:1694
+msgid "Character found."
+msgstr "Tegn fundet."
+
+#: gucharmap/gucharmap-table.c:1761
+msgid "Character Table"
+msgstr "Tegnoversigt"
+
+#: gucharmap/gucharmap-unicode-info.c:140
+#, c-format
+msgid "HANGUL SYLLABLE %s%s%s"
+msgstr "HANGUL-stavelse %s%s%s"
+
+#: gucharmap/gucharmap-unicode-info.c:151
+msgid "<CJK Ideograph Extension A>"
+msgstr "<CJK-ideografudvidelse A>"
+
+#: gucharmap/gucharmap-unicode-info.c:153
+msgid "<CJK Ideograph>"
+msgstr "<CJK-ideograf>"
+
+#: gucharmap/gucharmap-unicode-info.c:157
+msgid "<Non Private Use High Surrogate>"
+msgstr "<ikke-privat brug, høj surrogat>"
+
+#: gucharmap/gucharmap-unicode-info.c:159
+msgid "<Private Use High Surrogate>"
+msgstr "<privat brug, høj surrogat>"
+
+#: gucharmap/gucharmap-unicode-info.c:161
+msgid "<Low Surrogate, Last>"
+msgstr "<lav surrogat, sidste>"
+
+#: gucharmap/gucharmap-unicode-info.c:163
+msgid "<Private Use>"
+msgstr "<privat brug>"
+
+#: gucharmap/gucharmap-unicode-info.c:165
+msgid "<Plane 15 Private Use>"
+msgstr "<plan 15-privat brug>"
+
+#: gucharmap/gucharmap-unicode-info.c:167
+msgid "<Plane 16 Private Use>"
+msgstr "<plan 16-privat brug>"
+
+#: gucharmap/gucharmap-unicode-info.c:169
+msgid "<CJK Ideograph Extension B>"
+msgstr "<CJK-ideografudvidelse A>"
+
+#: gucharmap/gucharmap-unicode-info.c:174
+msgid "<not assigned>"
+msgstr "<ikke tildelt>"
+
+#: gucharmap/gucharmap-unicode-info.c:186
+msgid "Other, Control"
+msgstr "Anden, kontrol"
+
+#: gucharmap/gucharmap-unicode-info.c:187
+msgid "Other, Format"
+msgstr "Anden, formatering"
+
+#: gucharmap/gucharmap-unicode-info.c:188
+msgid "Other, Not Assigned"
+msgstr "Anden, ikke tildelt"
+
+#: gucharmap/gucharmap-unicode-info.c:189
+msgid "Other, Private Use"
+msgstr "Anden, privat brug"
+
+#: gucharmap/gucharmap-unicode-info.c:190
+msgid "Other, Surrogate"
+msgstr "Anden, surrogat"
+
+#: gucharmap/gucharmap-unicode-info.c:191
+msgid "Letter, Lowercase"
+msgstr "Bogstav, lille"
+
+#: gucharmap/gucharmap-unicode-info.c:192
+msgid "Letter, Modifier"
+msgstr "Bogstav, ændring"
+
+#: gucharmap/gucharmap-unicode-info.c:193
+msgid "Letter, Other"
+msgstr "Bogstav, andet"
+
+#: gucharmap/gucharmap-unicode-info.c:194
+msgid "Letter, Titlecase"
+msgstr "Bogstav, titel"
+
+#: gucharmap/gucharmap-unicode-info.c:195
+msgid "Letter, Uppercase"
+msgstr "Bogstav, stort"
+
+#: gucharmap/gucharmap-unicode-info.c:196
+msgid "Mark, Spacing Combining"
+msgstr "Tegn, mellemrumskombinerende"
+
+#: gucharmap/gucharmap-unicode-info.c:197
+msgid "Mark, Enclosing"
+msgstr "Tegn, indrammende"
+
+#: gucharmap/gucharmap-unicode-info.c:198
+msgid "Mark, Non-Spacing"
+msgstr "Tegn, ikke-mellemrum"
+
+#: gucharmap/gucharmap-unicode-info.c:199
+msgid "Number, Decimal Digit"
+msgstr "Tal, decimalt tal"
+
+#: gucharmap/gucharmap-unicode-info.c:200
+msgid "Number, Letter"
+msgstr "Tal, bogstav"
+
+#: gucharmap/gucharmap-unicode-info.c:201
+msgid "Number, Other"
+msgstr "Tal, andet"
+
+#: gucharmap/gucharmap-unicode-info.c:202
+msgid "Punctuation, Connector"
+msgstr "Punktuering, forbinder"
+
+#: gucharmap/gucharmap-unicode-info.c:203
+msgid "Punctuation, Dash"
+msgstr "Punktuering, tankestreg"
+
+#: gucharmap/gucharmap-unicode-info.c:204
+msgid "Punctuation, Close"
+msgstr "Punktuering, lukning"
+
+#: gucharmap/gucharmap-unicode-info.c:205
+msgid "Punctuation, Final Quote"
+msgstr "Punktuering, afsluttende anførselstegn"
+
+#: gucharmap/gucharmap-unicode-info.c:206
+msgid "Punctuation, Initial Quote"
+msgstr "Punktuering, begyndende anførselstegn"
+
+#: gucharmap/gucharmap-unicode-info.c:207
+msgid "Punctuation, Other"
+msgstr "Punktuering, anden"
+
+#: gucharmap/gucharmap-unicode-info.c:208
+msgid "Punctuation, Open"
+msgstr "Punktuering, åbning"
+
+#: gucharmap/gucharmap-unicode-info.c:209
+msgid "Symbol, Currency"
+msgstr "Symbol, valuta"
+
+#: gucharmap/gucharmap-unicode-info.c:210
+msgid "Symbol, Modifier"
+msgstr "Symbol, ændring"
+
+#: gucharmap/gucharmap-unicode-info.c:211
+msgid "Symbol, Math"
+msgstr "Symbol, matematik"
+
+#: gucharmap/gucharmap-unicode-info.c:212
+msgid "Symbol, Other"
+msgstr "Symbol, andet"
+
+#: gucharmap/gucharmap-unicode-info.c:213
+msgid "Separator, Line"
+msgstr "Adskiller, linje"
+
+#: gucharmap/gucharmap-unicode-info.c:214
+msgid "Separator, Paragraph"
+msgstr "Adskiller, afsnit"
+
+#: gucharmap/gucharmap-unicode-info.c:215
+msgid "Separator, Space"
+msgstr "Adskiller, mellemrum"
+
+#: gucharmap/gucharmap-window.c:56
+msgid "Information"
+msgstr "Information"
+
+#: gucharmap/gucharmap-window.c:118
+#, c-format
+msgid ""
+"Not a valid code point to jump to. Must be a hexadecimal number between 0 "
+"and %4.4X."
+msgstr ""
+"Ikke et gyldigt kodepunkt at springe til. Skal være et hexadecimalt tal "
+"mellem 0 og %4.4X."
+
+#: gucharmap/gucharmap-window.c:142
+msgid "Jump to Unicode Code Point"
+msgstr "Spring til Unicodekodepunkt"
+
+#: gucharmap/gucharmap-window.c:159
+msgid "_Enter hexadecimal Unicode code point:"
+msgstr "_Indtast hexadecimalt Unicodekodepunkt:"
+
+#: gucharmap/gucharmap-window.c:218
+msgid "Not found."
+msgstr "Ikke fundet."
+
+#: gucharmap/gucharmap-window.c:222
+msgid "Nothing to search for."
+msgstr "Ingenting at søge efter."
+
+#: gucharmap/gucharmap-window.c:265
+msgid "Find"
+msgstr "Find"
+
+#: gucharmap/gucharmap-window.c:281
+msgid "_Search:"
+msgstr "_Find:"
+
+#: gucharmap/gucharmap-window.c:374
+msgid "translator_credits"
+msgstr "Ole Laursen <olau@hardworking.dk>"
+
+#: gucharmap/gucharmap-window.c:516
+msgid "_File"
+msgstr "_Fil"
+
+#: gucharmap/gucharmap-window.c:518
+msgid "_View"
+msgstr "_Vis"
+
+#: gucharmap/gucharmap-window.c:520
+msgid "_Search"
+msgstr "_Find"
+
+#: gucharmap/gucharmap-window.c:522
+msgid "_Go"
+msgstr "_Gå til"
+
+#. ctrl-+ or ctrl-=
+#: gucharmap/gucharmap-window.c:543
+msgid "Zoom _In"
+msgstr "Zoom _ind"
+
+#. ctrl--
+#: gucharmap/gucharmap-window.c:555
+msgid "Zoom _Out"
+msgstr "Zoom _ud"
+
+#: gucharmap/gucharmap-window.c:567
+msgid "Snap Columns to Power of Two"
+msgstr "Lås kolonner til multipla af to"
+
+#: gucharmap/gucharmap-window.c:578
+msgid "_Find..."
+msgstr "_Find..."
+
+#: gucharmap/gucharmap-window.c:588
+msgid "Find _Next"
+msgstr "Find _næste"
+
+#: gucharmap/gucharmap-window.c:598
+msgid "Find _Previous"
+msgstr "Find _forrige"
+
+#: gucharmap/gucharmap-window.c:613
+msgid "Code _Point..."
+msgstr "_Kodepunkt..."
+
+#: gucharmap/gucharmap-window.c:620
+msgid "Character in _Clipboard"
+msgstr "Tegn på _klippebord"
+
+#: gucharmap/gucharmap-window.c:656
+msgid "_Next Character"
+msgstr "_Næste tegn"
+
+#: gucharmap/gucharmap-window.c:663
+msgid "_Previous Character"
+msgstr "_Forrige tegn"
+
+#. make the help menu
+#: gucharmap/gucharmap-window.c:676
+msgid "_Help"
+msgstr "_Hjælp"
+
+#: gucharmap/gucharmap-window.c:767
+msgid "_Text to copy:"
+msgstr "_Tekst at kopiere:"
+
+#: gucharmap/gucharmap-window.c:788
+msgid "Copy to the clipboard."
+msgstr "Kopiér til klippebordet."
+
+#: gucharmap/gucharmap-window.c:929
+msgid "Back"
+msgstr "Tilbage"
+
+#: gucharmap/gucharmap-window.c:937
+msgid "Forward"
+msgstr "Fremad"
+
+#: gucharmap/main.c:41
+msgid "Font to start with; ex: 'Serif 27'"
+msgstr "Skrifttype at begynde med; f.eks.: 'Serif 27'"
 
 #: gucharmap/unicode/unicode_blocks.cI:7
 msgid "Basic Latin"
@@ -514,509 +947,98 @@ msgstr "Ekstra privat brug-område-A"
 msgid "Supplementary Private Use Area-B"
 msgstr "Ekstra privat brug-område-B"
 
-#: gucharmap/charmap.c:728
-msgid "Character Map"
-msgstr "Tegnoversigt"
-
-#: gucharmap/charmap.c:732
-msgid "Character"
-msgstr "Tegn"
-
-#: gucharmap/charmap.c:733
-msgid "Unicode category"
-msgstr "Unicodekategori"
-
-#: gucharmap/charmap.c:734
-msgid "Canonical decomposition"
-msgstr "Kanonisk dekomposition"
-
-#: gucharmap/charmap.c:735
-msgid "UTF-8"
-msgstr "UTF-8"
-
-#: gucharmap/charmap.c:736
-msgid "Other representations"
-msgstr "Andre repræsentationer"
-
-#: gucharmap/charmap.c:737
-msgid "See also"
-msgstr "Se også"
-
-#: gucharmap/charmap.c:738
-msgid "Equivalents"
-msgstr "Ækvivalente"
-
-#: gucharmap/charmap.c:739
-msgid "Alias names"
-msgstr "Aliasnavne"
-
-#: gucharmap/charmap.c:740
-msgid "Approximate equivalents"
-msgstr "Omtrent ækvivalente"
-
-#: gucharmap/charmap.c:741
-msgid "Notes"
-msgstr "Noter"
-
-#: gucharmap/charmap.c:743
-msgid "CJK ideograph definition"
-msgstr "CJK-ideografdefinition"
-
-#: gucharmap/charmap.c:744
-msgid "Mandarin pronunciation"
-msgstr "Mandarin-udtale"
-
-#: gucharmap/charmap.c:745
-msgid "Japanese On pronunciation"
-msgstr "Japanskt On-udtale"
-
-#: gucharmap/charmap.c:746
-msgid "Japanese Kun pronunciation"
-msgstr "Japanskt Kun-udtale"
-
-#: gucharmap/charmap.c:747
-msgid "Cantonese pronunciation"
-msgstr "Kantonesisk udtale"
-
-#: gucharmap/charmap.c:748
-msgid "Tang pronunciation"
-msgstr "Tang-udtale"
-
-#: gucharmap/charmap.c:749
-msgid "Korean pronunciation"
-msgstr "Koreansk udtale"
-
-#: gucharmap/charmap.c:767
-msgid "Details on the Current Character"
-msgstr "Detaljer om det aktuelle tegn"
-
-#: gucharmap/charmap.c:778
-msgid "List of Unicode Blocks"
-msgstr "Liste over Unicodeblokke"
-
-#: gucharmap/chartable.c:1249
-msgid "Clipboard is empty."
-msgstr "Klippebordet er tomt."
-
-#: gucharmap/chartable.c:1251
-msgid "There is no selected text."
-msgstr "Der er ingen markeret tekst."
-
-#: gucharmap/chartable.c:1259 gucharmap/chartable.c:1486
-msgid "Unknown character, unable to identify."
-msgstr "Ukendt tegn, kan ikke identificeres."
-
-#: gucharmap/chartable.c:1263 gucharmap/chartable.c:1490
-msgid "Character found."
-msgstr "Tegn fundet."
-
-#: gucharmap/chartable.c:1557
-msgid "Character Table"
-msgstr "Tegnoversigt"
-
-#. ID
-#: gucharmap/imgucharmap.c:196 gucharmap/gucharmap_window.c:608
-#: gucharmap/gucharmap_window.c:1173 gucharmap.desktop.in.h:1
-msgid "Unicode Character Map"
-msgstr "Tegnoversigt (Unicode)"
-
-#: gucharmap/main.c:43
-msgid "Font to start with; ex: 'Serif 27'"
-msgstr "Skrifttype at begynde med; f.eks.: 'Serif 27'"
-
-#: gucharmap/mini_fontsel.c:270
-msgid "Font"
-msgstr "Skrifttype"
-
-#: gucharmap/mini_fontsel.c:277
-msgid "Font Family"
-msgstr "Familie"
-
-#: gucharmap/mini_fontsel.c:282
-msgid "Font Style"
-msgstr "Stil"
-
-#: gucharmap/mini_fontsel.c:288
-msgid "Font Size"
-msgstr "Størrelse"
-
-#: gucharmap/unicode_info.c:140
-#, c-format
-msgid "HANGUL SYLLABLE %s%s%s"
-msgstr "HANGUL-stavelse %s%s%s"
-
-#: gucharmap/unicode_info.c:151
-msgid "<CJK Ideograph Extension A>"
-msgstr "<CJK-ideografudvidelse A>"
-
-#: gucharmap/unicode_info.c:153
-msgid "<CJK Ideograph>"
-msgstr "<CJK-ideograf>"
-
-#: gucharmap/unicode_info.c:157
-msgid "<Non Private Use High Surrogate>"
-msgstr "<ikke-privat brug, høj surrogat>"
-
-#: gucharmap/unicode_info.c:159
-msgid "<Private Use High Surrogate>"
-msgstr "<privat brug, høj surrogat>"
-
-#: gucharmap/unicode_info.c:161
-msgid "<Low Surrogate, Last>"
-msgstr "<lav surrogat, sidste>"
-
-#: gucharmap/unicode_info.c:163
-msgid "<Private Use>"
-msgstr "<privat brug>"
-
-#: gucharmap/unicode_info.c:165
-msgid "<Plane 15 Private Use>"
-msgstr "<plan 15-privat brug>"
-
-#: gucharmap/unicode_info.c:167
-msgid "<Plane 16 Private Use>"
-msgstr "<plan 16-privat brug>"
-
-#: gucharmap/unicode_info.c:169
-msgid "<CJK Ideograph Extension B>"
-msgstr "<CJK-ideografudvidelse A>"
-
-#: gucharmap/unicode_info.c:174
-msgid "<not assigned>"
-msgstr "<ikke tildelt>"
-
-#: gucharmap/unicode_info.c:186
-msgid "Other, Control"
-msgstr "Anden, kontrol"
-
-#: gucharmap/unicode_info.c:187
-msgid "Other, Format"
-msgstr "Anden, formatering"
-
-#: gucharmap/unicode_info.c:188
-msgid "Other, Not Assigned"
-msgstr "Anden, ikke tildelt"
-
-#: gucharmap/unicode_info.c:189
-msgid "Other, Private Use"
-msgstr "Anden, privat brug"
-
-#: gucharmap/unicode_info.c:190
-msgid "Other, Surrogate"
-msgstr "Anden, surrogat"
-
-#: gucharmap/unicode_info.c:191
-msgid "Letter, Lowercase"
-msgstr "Bogstav, lille"
-
-#: gucharmap/unicode_info.c:192
-msgid "Letter, Modifier"
-msgstr "Bogstav, ændring"
-
-#: gucharmap/unicode_info.c:193
-msgid "Letter, Other"
-msgstr "Bogstav, andet"
-
-#: gucharmap/unicode_info.c:194
-msgid "Letter, Titlecase"
-msgstr "Bogstav, titel"
-
-#: gucharmap/unicode_info.c:195
-msgid "Letter, Uppercase"
-msgstr "Bogstav, stort"
-
-#: gucharmap/unicode_info.c:196
-msgid "Mark, Spacing Combining"
-msgstr "Tegn, mellemrumskombinerende"
-
-#: gucharmap/unicode_info.c:197
-msgid "Mark, Enclosing"
-msgstr "Tegn, indrammende"
-
-#: gucharmap/unicode_info.c:198
-msgid "Mark, Non-Spacing"
-msgstr "Tegn, ikke-mellemrum"
-
-#: gucharmap/unicode_info.c:199
-msgid "Number, Decimal Digit"
-msgstr "Tal, decimalt tal"
-
-#: gucharmap/unicode_info.c:200
-msgid "Number, Letter"
-msgstr "Tal, bogstav"
-
-#: gucharmap/unicode_info.c:201
-msgid "Number, Other"
-msgstr "Tal, andet"
-
-#: gucharmap/unicode_info.c:202
-msgid "Punctuation, Connector"
-msgstr "Punktuering, forbinder"
-
-#: gucharmap/unicode_info.c:203
-msgid "Punctuation, Dash"
-msgstr "Punktuering, tankestreg"
-
-#: gucharmap/unicode_info.c:204
-msgid "Punctuation, Close"
-msgstr "Punktuering, lukning"
-
-#: gucharmap/unicode_info.c:205
-msgid "Punctuation, Final Quote"
-msgstr "Punktuering, afsluttende anførselstegn"
-
-#: gucharmap/unicode_info.c:206
-msgid "Punctuation, Initial Quote"
-msgstr "Punktuering, begyndende anførselstegn"
-
-#: gucharmap/unicode_info.c:207
-msgid "Punctuation, Other"
-msgstr "Punktuering, anden"
-
-#: gucharmap/unicode_info.c:208
-msgid "Punctuation, Open"
-msgstr "Punktuering, åbning"
-
-#: gucharmap/unicode_info.c:209
-msgid "Symbol, Currency"
-msgstr "Symbol, valuta"
-
-#: gucharmap/unicode_info.c:210
-msgid "Symbol, Modifier"
-msgstr "Symbol, ændring"
-
-#: gucharmap/unicode_info.c:211
-msgid "Symbol, Math"
-msgstr "Symbol, matematik"
-
-#: gucharmap/unicode_info.c:212
-msgid "Symbol, Other"
-msgstr "Symbol, andet"
-
-#: gucharmap/unicode_info.c:213
-msgid "Separator, Line"
-msgstr "Adskiller, linje"
-
-#: gucharmap/unicode_info.c:214
-msgid "Separator, Paragraph"
-msgstr "Adskiller, afsnit"
-
-#: gucharmap/unicode_info.c:215
-msgid "Separator, Space"
-msgstr "Adskiller, mellemrum"
-
-#: gucharmap/gucharmap_window.c:74
-#, c-format
-msgid ""
-"Not a valid code point to jump to. Must be a hexadecimal number between 0 "
-"and %4.4X."
-msgstr ""
-"Ikke et gyldigt kodepunkt at springe til. Skal være et hexadecimalt tal "
-"mellem 0 og %4.4X."
-
-#: gucharmap/gucharmap_window.c:96
-msgid "Go to hex code point"
-msgstr "Gå til hexadecimalt kodepunkt"
-
-#: gucharmap/gucharmap_window.c:116
-msgid "_Enter Unicode code point"
-msgstr "_Indtast Unicodekodepunkt"
-
-#: gucharmap/gucharmap_window.c:176
-msgid "Not found."
-msgstr "Ikke fundet."
-
-#: gucharmap/gucharmap_window.c:180
-msgid "Found."
-msgstr "Fundet."
-
-#: gucharmap/gucharmap_window.c:184
-msgid "Search wrapped."
-msgstr "Søgningen startede forfra."
-
-#: gucharmap/gucharmap_window.c:188
-msgid "Nothing to search for."
-msgstr "Ingenting at søge efter."
-
-#: gucharmap/gucharmap_window.c:227
-msgid "Find"
-msgstr "Find"
-
-#: gucharmap/gucharmap_window.c:242
-msgid "_Search:"
-msgstr "_Find:"
-
-#: gucharmap/gucharmap_window.c:531
-msgid "Zoom mode enabled. Press <Esc> to disable zoom."
-msgstr "Zoomtilstand aktiveret. Tryk på <Esc> for at deaktivere zoom."
-
-#: gucharmap/gucharmap_window.c:541
-msgid "Zoom mode disabled."
-msgstr "Zoomtilstand deaktiveret."
-
-#: gucharmap/gucharmap_window.c:601
-msgid "translator_credits"
-msgstr "Ole Laursen <olau@hardworking.dk>"
-
-#: gucharmap/gucharmap_window.c:654
-msgid "Char_map"
-msgstr "Tegn_oversigt"
-
-#: gucharmap/gucharmap_window.c:656
-msgid "_View"
-msgstr "_Vis"
-
-#: gucharmap/gucharmap_window.c:658
-msgid "_Search"
-msgstr "_Find"
-
-#: gucharmap/gucharmap_window.c:678
-msgid "Expand/Collapse All"
-msgstr "Udfold/sammenfold"
-
-#. ctrl-+ or ctrl-=
-#: gucharmap/gucharmap_window.c:687
-msgid "Zoom _In"
-msgstr "Zoom _ind"
-
-#. ctrl--
-#: gucharmap/gucharmap_window.c:699
-msgid "Zoom _Out"
-msgstr "Zoom _ud"
-
-#. ctrl-<enter>
-#: gucharmap/gucharmap_window.c:712
-msgid "_Zoom Mode"
-msgstr "_Zoomtilstand"
-
-#: gucharmap/gucharmap_window.c:724
-msgid "_Unicode Details"
-msgstr "_Unicodedetaljer"
-
-#. the unicode details submenu
-#: gucharmap/gucharmap_window.c:730 gucharmap/gucharmap_window.c:780
-#: gucharmap/gucharmap_window.c:835
-msgid "Options"
-msgstr "Indstillinger"
-
-#: gucharmap/gucharmap_window.c:739
-msgid "_Category"
-msgstr "_Kategori"
-
-#: gucharmap/gucharmap_window.c:747
-msgid "Canonical _Decomposition"
-msgstr "Kanonisk _dekomposition"
-
-#: gucharmap/gucharmap_window.c:755
-msgid "_UTF-8"
-msgstr "_UTF-8"
-
-#: gucharmap/gucharmap_window.c:763
-msgid "_Other Representations"
-msgstr "_Andre repræsentationer"
-
-#: gucharmap/gucharmap_window.c:774
-msgid "_Annotations and Cross References"
-msgstr "_Bemærkninger og krydsreferencer"
-
-#: gucharmap/gucharmap_window.c:789
-msgid "_Alias Names"
-msgstr "_Aliasnavne"
-
-#: gucharmap/gucharmap_window.c:796
-msgid "_Notes"
-msgstr "_Noter"
-
-#: gucharmap/gucharmap_window.c:803
-msgid "_See Also"
-msgstr "_Se også"
-
-#: gucharmap/gucharmap_window.c:810
-msgid "_Approximate Equivalents"
-msgstr "_Omtrent ækvivalente"
-
-#: gucharmap/gucharmap_window.c:817
-msgid "_Equivalents"
-msgstr "_Ækvivalente"
-
-#: gucharmap/gucharmap_window.c:829
-msgid "_CJK Ideograph Details"
-msgstr "_CJK-ideografdetaljer"
-
-#: gucharmap/gucharmap_window.c:845
-msgid "CJK Ideograph _Definition"
-msgstr "CJK-ideograf_definition"
-
-#: gucharmap/gucharmap_window.c:854
-msgid "_Mandarin Pronunciation"
-msgstr "_Mandarin-udtale"
-
-#: gucharmap/gucharmap_window.c:863
-msgid "Japanese _On Pronunciation"
-msgstr "Japanskt _On-udtale"
-
-#: gucharmap/gucharmap_window.c:872
-msgid "_Japanese Kun Pronunciation"
-msgstr "_Japanskt Kun-udtale"
-
-#: gucharmap/gucharmap_window.c:881
-msgid "_Cantonese Pronunciation"
-msgstr "_Kantonesisk udtale"
-
-#: gucharmap/gucharmap_window.c:890
-msgid "_Tang Pronunciation"
-msgstr "_Tang-udtale"
-
-#: gucharmap/gucharmap_window.c:898
-msgid "_Korean Pronunciation"
-msgstr "_Koreansk udtale"
-
-#: gucharmap/gucharmap_window.c:909
-msgid "Snap Columns to Power of Two"
-msgstr "Lås kolonner til multipla af to"
-
-#. ctrl-f
-#: gucharmap/gucharmap_window.c:921
-msgid "_Find..."
-msgstr "_Find..."
-
-#. ctrl-g
-#: gucharmap/gucharmap_window.c:932
-msgid "Find _Next"
-msgstr "Find _næste"
-
-#. shift-ctrl-g
-#: gucharmap/gucharmap_window.c:943
-msgid "Find _Previous"
-msgstr "Find _forrige"
-
-#. ctrl-h
-#: gucharmap/gucharmap_window.c:959
-msgid "_Hex Code Point..."
-msgstr "_Hexadecimalt kodepunkt..."
-
-#. ctrl-p
-#: gucharmap/gucharmap_window.c:967
-msgid "Character in _Clipboard"
-msgstr "Tegn på _klippebord"
-
-#. make the help menu
-#: gucharmap/gucharmap_window.c:977
-msgid "_Help"
-msgstr "_Hjælp"
-
-#: gucharmap/gucharmap_window.c:1015
-msgid "The selected code point is not a valid Unicode character."
-msgstr "Det valgte kodepunkt er ikke et gyldigt Unicodetegn."
-
-#: gucharmap/gucharmap_window.c:1043
-msgid "Text copied to clipboard."
-msgstr "Tekst kopieret til klippebordet."
-
-#: gucharmap/gucharmap_window.c:1069
-msgid "_Text to copy:"
-msgstr "_Tekst at kopiere:"
-
-#: gucharmap/gucharmap_window.c:1090
-msgid "Copy to the clipboard."
-msgstr "Kopiér til klippebordet."
+#~ msgid "Other representations"
+#~ msgstr "Andre repræsentationer"
+
+#~ msgid "CJK ideograph definition"
+#~ msgstr "CJK-ideografdefinition"
+
+#~ msgid "Mandarin pronunciation"
+#~ msgstr "Mandarin-udtale"
+
+#~ msgid "Japanese On pronunciation"
+#~ msgstr "Japanskt On-udtale"
+
+#~ msgid "Japanese Kun pronunciation"
+#~ msgstr "Japanskt Kun-udtale"
+
+#~ msgid "Cantonese pronunciation"
+#~ msgstr "Kantonesisk udtale"
+
+#~ msgid "Tang pronunciation"
+#~ msgstr "Tang-udtale"
+
+#~ msgid "Korean pronunciation"
+#~ msgstr "Koreansk udtale"
+
+#~ msgid "Details on the Current Character"
+#~ msgstr "Detaljer om det aktuelle tegn"
+
+#~ msgid "Font Style"
+#~ msgstr "Stil"
+
+#~ msgid "Go to hex code point"
+#~ msgstr "Gå til hexadecimalt kodepunkt"
+
+#~ msgid "Found."
+#~ msgstr "Fundet."
+
+#~ msgid "Search wrapped."
+#~ msgstr "Søgningen startede forfra."
+
+#~ msgid "Zoom mode enabled. Press <Esc> to disable zoom."
+#~ msgstr "Zoomtilstand aktiveret. Tryk på <Esc> for at deaktivere zoom."
+
+#~ msgid "Zoom mode disabled."
+#~ msgstr "Zoomtilstand deaktiveret."
+
+#~ msgid "Char_map"
+#~ msgstr "Tegn_oversigt"
+
+#~ msgid "Expand/Collapse All"
+#~ msgstr "Udfold/sammenfold"
+
+#~ msgid "_Zoom Mode"
+#~ msgstr "_Zoomtilstand"
+
+#~ msgid "_Unicode Details"
+#~ msgstr "_Unicodedetaljer"
+
+#~ msgid "Options"
+#~ msgstr "Indstillinger"
+
+#~ msgid "_Category"
+#~ msgstr "_Kategori"
+
+#~ msgid "Canonical _Decomposition"
+#~ msgstr "Kanonisk _dekomposition"
+
+#~ msgid "_UTF-8"
+#~ msgstr "_UTF-8"
+
+#~ msgid "_Alias Names"
+#~ msgstr "_Aliasnavne"
+
+#~ msgid "_Notes"
+#~ msgstr "_Noter"
+
+#~ msgid "_See Also"
+#~ msgstr "_Se også"
+
+#~ msgid "_Approximate Equivalents"
+#~ msgstr "_Omtrent ækvivalente"
+
+#~ msgid "_Equivalents"
+#~ msgstr "_Ækvivalente"
+
+#~ msgid "_CJK Ideograph Details"
+#~ msgstr "_CJK-ideografdetaljer"
+
+#~ msgid "_Cantonese Pronunciation"
+#~ msgstr "_Kantonesisk udtale"
+
+#~ msgid "The selected code point is not a valid Unicode character."
+#~ msgstr "Det valgte kodepunkt er ikke et gyldigt Unicodetegn."
+
+#~ msgid "Text copied to clipboard."
+#~ msgstr "Tekst kopieret til klippebordet."
