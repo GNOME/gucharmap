@@ -41,14 +41,13 @@ libtoolize --force --copy                || exit 1
 autoheader                               || exit 1
 $automake --foreign --add-missing --copy || exit 1
 autoconf                                 || exit 1
+intltoolize --copy --force --automake    || exit 1
 cd "$origdir"                            || exit 1
 
 if test -z "$AUTOGEN_SUBDIR_MODE"
 then
   "$srcdir/configure" "$@" || exit 1
   $set_option +x
-  echo
-  echo "Now type 'make' to compile $PROJECT."
 fi
 
 exit 0

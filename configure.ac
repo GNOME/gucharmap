@@ -25,6 +25,7 @@ AM_INIT_AUTOMAKE(gucharmap, 0.3)
 # checks for progs
 AC_PROG_CC
 AC_PROG_LIBTOOL
+AC_PROG_INTLTOOL([0.22])
 
 
 # checks for stuff
