@@ -24,6 +24,8 @@
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 #include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
 
 #include <gucharmap/gucharmap.h>
 #include "gucharmap_intl.h"
@@ -276,6 +278,52 @@ insert_chocolate_detail_codepoints (GucharmapCharmap *charmap,
 }
 
 
+/* returns a pointer to the start of [0-9A-F]{4}, or null if not found */
+static const gchar *
+find_codepoint (const gchar *str)
+{
+  gint i;
+
+  /* what we are searching for is ascii; in this case, we don't have to
+   * worry about multibyte characters at all */
+  for (i = 0;  i + 3 < strlen (str);  i++)
+    {
+      if (isxdigit (str[i]) && isxdigit (str[i+1]) 
+          && isxdigit (str[i+2]) && isxdigit (str[i+3]))
+        return str + i;
+    }
+
+  return NULL;
+}
+
+
+static void
+insert_string_link_codepoints (GucharmapCharmap *charmap,
+                               GtkTextBuffer *buffer,
+                               GtkTextIter *iter,
+                               const gchar *str)
+{
+  const gchar *p1, *p2;
+
+  p1 = str;
+  for (;;)
+    {
+      p2 = find_codepoint (p1);
+      if (p2 != NULL)
+        {
+          gunichar uc;
+          gtk_text_buffer_insert (buffer, iter, p1, p2 - p1);
+          uc = strtoul (p2, (gchar **) &p1, 16);
+          insert_codepoint (charmap, buffer, iter, uc);
+        }
+      else
+        {
+          gtk_text_buffer_insert (buffer, iter, p1, -1);
+          break;
+        }
+    }
+}
+
 /* values is a null-terminated array of strings */
 static void
 insert_chocolate_detail (GucharmapCharmap *charmap,
@@ -292,8 +340,7 @@ insert_chocolate_detail (GucharmapCharmap *charmap,
   for (i = 0;  values[i];  i++)
     {
       gtk_text_buffer_insert (buffer, iter, " • ", -1);
-      gtk_text_buffer_insert_with_tags_by_name (buffer, iter, values[i], -1,
-                                               "detail-value", NULL);
+      insert_string_link_codepoints (charmap, buffer, iter, values[i]);
       gtk_text_buffer_insert (buffer, iter, "\n", -1);
     }
 
@@ -341,6 +388,8 @@ conditionally_insert_canonical_decomposition (GucharmapCharmap *charmap,
       gtk_text_buffer_insert (buffer, iter, " + ", -1);
       insert_codepoint (charmap, buffer, iter, decomposition[i]);
     }
+
+  gtk_text_buffer_insert (buffer, iter, "\n", -1);
 
   g_free (decomposition);
 }
