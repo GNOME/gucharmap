@@ -29,6 +29,8 @@
 
 #define GUCHARMAP_SEARCH_DIALOG_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), gucharmap_search_dialog_get_type (), GucharmapSearchDialogPrivate))
 
+extern GdkCursor * _gucharmap_window_progress_cursor ();
+
 enum
 {
   SEARCH_START,
@@ -193,7 +195,7 @@ check_for_explicit_codepoint (const GucharmapCodepointList *list,
 }
 
 static gboolean
-quick_checks (GucharmapSearchState *search_state)
+quick_checks_before (GucharmapSearchState *search_state)
 {
   gint index;
 
@@ -233,14 +235,64 @@ quick_checks (GucharmapSearchState *search_state)
 }
 
 static gboolean
+quick_checks_after (GucharmapSearchState *search_state)
+{
+  gchar *search_string_nfc;
+  gchar *endptr;
+  
+  /* if NFC of the search string is a single character, jump to that */
+  search_string_nfc = g_utf8_normalize (search_state->no_leading_space, -1, G_NORMALIZE_NFC);
+  if (g_utf8_strlen (search_string_nfc, -1) == 1)
+    {
+      gint index = gucharmap_codepoint_list_get_index (search_state->list, g_utf8_get_char (search_string_nfc));
+      g_free (search_string_nfc);
+
+      if (index != -1)
+        {
+          search_state->found_index = index;
+          search_state->dont_search = TRUE;
+          return TRUE;
+        }
+    }
+  else
+    g_free (search_string_nfc);
+
+  /* jump to the first nonspace character unless it’s plain ascii */
+  if (*search_state->no_leading_space < 0x20 || *search_state->no_leading_space > 0x7e)
+    {
+      gint index = gucharmap_codepoint_list_get_index (search_state->list, g_utf8_get_char (search_state->no_leading_space));
+      if (index != -1)
+        {
+          search_state->found_index = index;
+          search_state->dont_search = TRUE;
+          return TRUE;
+        }
+    }
+
+  /* check for hex codepoint without any prefix */
+  gunichar wc = strtoul (search_state->no_leading_space, &endptr, 16);
+  if (endptr != search_state->no_leading_space)
+    {
+      gint index = gucharmap_codepoint_list_get_index (search_state->list, wc);
+      if (index != -1)
+        {
+          search_state->found_index = index;
+          search_state->dont_search = TRUE;
+          return TRUE;
+        }
+    }
+
+  return FALSE;
+}
+
+static gboolean
 idle_search (GucharmapSearchDialog *search_dialog)
 {
   GucharmapSearchDialogPrivate *priv = GUCHARMAP_SEARCH_DIALOG_GET_PRIVATE (search_dialog);
   GTimer *timer = g_timer_new ();
   gunichar wc;
-  gint index;
 
-  if (quick_checks (priv->search_state))
+  if (quick_checks_before (priv->search_state))
     return FALSE;
 
   /* XXX: search with leading spaces? */
@@ -270,16 +322,8 @@ idle_search (GucharmapSearchDialog *search_dialog)
     }
   while (priv->search_state->curr_index != priv->search_state->start_index);
 
-  /* jump to the first nonspace character unless it’s plain ascii */
-  if (*priv->search_state->no_leading_space < 0x20 || *priv->search_state->no_leading_space > 0x7e)
-    {
-      index = gucharmap_codepoint_list_get_index (priv->search_state->list, g_utf8_get_char (priv->search_state->no_leading_space));
-      if (index != -1)
-        {
-          priv->search_state->found_index = index;
-          priv->search_state->dont_search = TRUE;
-        }
-    }
+  if (quick_checks_after (priv->search_state))
+    return FALSE;
 
   priv->search_state->dont_search = TRUE;
   return FALSE;

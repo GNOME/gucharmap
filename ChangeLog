@@ -1,5 +1,15 @@
 2004-02-25  Noah Levitt
 
+	* gucharmap/gucharmap-search-dialog.c: After doing full text
+	search, try NFC on the search string, and if the result is a
+	single character, jump to it. (#134678, requested by Mariano
+	Suárez-Alvarez) Then, if that fails, try interpreting the
+	search string as a hex number, and jump to that codepoint.
+	(This is in addition to jumping straight to 0x* and U+*, which
+	are checked before the full string search.)
+
+2004-02-25  Noah Levitt
+
 	* gucharmap/gucharmap-window.c: Use gtk_window_present to show search
 	dialog. (#132266, Fernando Herrera)
 
