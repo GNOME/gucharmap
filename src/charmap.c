@@ -27,9 +27,12 @@
 #include "charmap.h"
 #include "unicode_info.h"
 #include "gucharmap_intl.h"
+#include "gucharmap_marshal.h"
+
 
 #define abs(x) ((x) >= 0 ? (x) : (-x))
 #define font_height(font_metrics) ((pango_font_metrics_get_ascent (font_metrics) + pango_font_metrics_get_descent (font_metrics)) / PANGO_SCALE)
+
 
 /* only the label is visible in the block selector */
 enum 
@@ -46,6 +49,15 @@ enum
   CAPTION_VALUE,
   CAPTION_NUM_COLUMNS
 };
+
+
+enum 
+{
+  ACTIVATE = 0,
+  NUM_SIGNALS
+};
+
+static guint charmap_signals[NUM_SIGNALS] = { 0 };
 
 
 static void
@@ -950,6 +962,8 @@ key_press_event (GtkWidget *widget,
 
       case GDK_Return: case GDK_KP_Enter:
         append_character_to_text_to_copy (charmap);
+	g_signal_emit (charmap, charmap_signals[ACTIVATE], 0, 
+		       charmap->active_char);
         return TRUE;
 
       /* pass on other keys, like tab and stuff that shifts focus */
@@ -1034,6 +1048,8 @@ button_press_event (GtkWidget *widget,
   if (event->button == 1 && event->type == GDK_2BUTTON_PRESS)
     {
       append_character_to_text_to_copy (charmap);
+      g_signal_emit (charmap, charmap_signals[ACTIVATE], 0, 
+	             charmap->active_char);
     }
   /* single-click */
   else if (event->button == 1 && event->type == GDK_BUTTON_PRESS) 
@@ -1704,6 +1720,13 @@ make_search (Charmap *charmap)
 void
 charmap_class_init (CharmapClass *clazz)
 {
+  clazz->activate = NULL;
+
+  charmap_signals[ACTIVATE] =
+      g_signal_new ("activate", charmap_get_type (), G_SIGNAL_RUN_FIRST,
+                    G_STRUCT_OFFSET (CharmapClass, activate),
+                    NULL, NULL, gucharmap_marshal_VOID__UINT, G_TYPE_NONE, 
+		    1, G_TYPE_UINT);
 }
 
 
