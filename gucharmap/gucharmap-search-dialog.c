@@ -513,6 +513,8 @@ gucharmap_search_dialog_init (GucharmapSearchDialog *search_dialog)
   gtk_box_pack_start (GTK_BOX (hbox), priv->entry, TRUE, TRUE, 0);
   g_signal_connect (priv->entry, "changed", G_CALLBACK (entry_changed), search_dialog);
 
+  gtk_label_set_mnemonic_widget (GTK_LABEL (label), priv->entry);
+
   /* since the entry is empty */
   gtk_widget_set_sensitive (priv->prev_button, FALSE);
   gtk_widget_set_sensitive (priv->next_button, FALSE);
