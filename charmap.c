@@ -78,11 +78,11 @@ draw_tabulus_pixmap (Charmap *charmap)
                       charmap->tabulus->allocation.height);
 
   /* width and height of a square */
-  w = charmap->tabulus->allocation.width / CHARMAP_COLS;
-  h = charmap->tabulus->allocation.height / CHARMAP_ROWS;
+  w = (charmap->tabulus->allocation.width - 1) / CHARMAP_COLS - 1;
+  h = (charmap->tabulus->allocation.height - 1) / CHARMAP_ROWS - 1;
 
   /* vertical lines */
-  for (x = w; x < charmap->tabulus->allocation.width; x += w)
+  for (x = 0; x < charmap->tabulus->allocation.width; x += w+1)
     {
       gdk_draw_line (charmap->tabulus_pixmap,
                      charmap->tabulus->style->fg_gc[GTK_STATE_INSENSITIVE], 
@@ -90,7 +90,7 @@ draw_tabulus_pixmap (Charmap *charmap)
     }
 
   /* horizontal lines */
-  for (y = h; y < charmap->tabulus->allocation.height; y += h)
+  for (y = 0; y < charmap->tabulus->allocation.height; y += h+1)
     {
       gdk_draw_line (charmap->tabulus_pixmap,
                      charmap->tabulus->style->fg_gc[GTK_STATE_INSENSITIVE], 
@@ -112,7 +112,10 @@ draw_tabulus_pixmap (Charmap *charmap)
             gdk_draw_rectangle (
                     charmap->tabulus_pixmap,
                     charmap->tabulus->style->base_gc[GTK_STATE_ACTIVE],
-                    TRUE, w * col + 1, h * row + 1, w - 1, h - 1);
+                    TRUE, 
+                    (w+1) * col + 1, 
+                    (h+1) * row + 1, 
+                    w, h);
           }
         else 
           gc = charmap->tabulus->style->text_gc[GTK_STATE_NORMAL];
@@ -126,8 +129,8 @@ draw_tabulus_pixmap (Charmap *charmap)
         pango_layout_get_pixel_size (charmap->pango_layout, &wid, &hei);
 
         gdk_draw_layout (charmap->tabulus_pixmap, gc,
-                         w * col + (w - wid) / 2, 
-                         h * row + (h - hei) / 2, 
+                         (w+1) * col + (w - wid) / 2, 
+                         (h+1) * row + (h - hei) / 2, 
                          charmap->pango_layout);
       }
 
@@ -221,6 +224,22 @@ key_press_event (GtkWidget *widget,
           }
         break;
 
+      case GDK_Page_Up: case GDK_b: case GDK_minus:
+        if (charmap->active_char >= CHARMAP_COLS * CHARMAP_ROWS)
+          {
+            charmap->active_char -= CHARMAP_COLS * CHARMAP_ROWS;
+            need_redraw = TRUE;
+          }
+        break;
+
+      case GDK_Page_Down: case GDK_space:
+        if (charmap->active_char < UNICHAR_MAX - CHARMAP_COLS * CHARMAP_ROWS)
+          {
+            charmap->active_char += CHARMAP_COLS * CHARMAP_ROWS;
+            need_redraw = TRUE;
+          }
+        break;
+
       default:
         return FALSE; /* don't redraw */
     }
@@ -288,11 +307,11 @@ charmap_init (Charmap *charmap)
   charmap->pango_layout = pango_layout_new (
           gtk_widget_get_pango_context (charmap->tabulus));
 
-  /* size the drawing area */
+  /* size the drawing area - the +1 is for the 1-pixel borders*/
   square_dimension = calculate_square_dimension (charmap->font_metrics);
   gtk_widget_set_size_request (charmap->tabulus, 
-                               CHARMAP_COLS * square_dimension,
-                               CHARMAP_ROWS * square_dimension);
+                               CHARMAP_COLS * (square_dimension + 1) + 1,
+                               CHARMAP_ROWS * (square_dimension + 1) + 1);
 
   charmap->page_first_char = (gunichar) 0x0000;
   charmap->active_char = (gunichar) 0x0000;
