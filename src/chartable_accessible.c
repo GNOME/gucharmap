@@ -46,6 +46,21 @@ CharcellAccessibleInfo;
 static gpointer parent_class = NULL;
 
 
+static GList*
+get_cell_list (ChartableAccessible *table)
+{
+  gpointer data;
+
+  data = g_object_get_data (G_OBJECT (table), "chartable-cell-data");
+  return (GList *)data;
+}
+
+static void
+set_cell_list (ChartableAccessible *table, gpointer data)
+{
+  g_object_set_data (G_OBJECT (table), "chartable-cell-data", data);
+}
+
 static AtkObject*
 find_cell (ChartableAccessible *table,
 	   gint index)
@@ -54,7 +69,7 @@ find_cell (ChartableAccessible *table,
   GList *cell_list;
   GList *l;
 
-  cell_list = table->cell_data;
+  cell_list = get_cell_list (table);
 
   for (l = cell_list; l; l = l->next)
     {
@@ -115,9 +130,11 @@ find_cell_info (ChartableAccessible *table,
 		GList **list)
 {
   GList *l;
+  GList *cell_list;
   CharcellAccessibleInfo *cell_info;
 
-  for (l = table->cell_data; l; l= l->next)
+  cell_list = get_cell_list (table);
+  for (l = cell_list; l; l= l->next)
     {
       cell_info = (CharcellAccessibleInfo *) l->data;
       if (cell_info->cell == cell)
@@ -137,12 +154,13 @@ cell_info_remove (ChartableAccessible  *table,
 		  AtkObject *cell)
 {
   CharcellAccessibleInfo *info;
-  GList *l;
+  GList *l, *cell_list;
 
   info = find_cell_info (table, cell, &l);
   if (info)
     {
-      table->cell_data = g_list_remove_link (table->cell_data, l);
+      cell_list = get_cell_list (table);
+      set_cell_list (table, g_list_remove_link (cell_list, l));
       g_free (info);
       return;
     }
@@ -173,12 +191,14 @@ cell_info_new (ChartableAccessible *table,
                gint index)
 {
   CharcellAccessibleInfo *info;
+  GList *cell_list;
 
   info = g_new (CharcellAccessibleInfo, 1);
   info->cell = cell;
   info->index = index;
 
-  table->cell_data = g_list_append (table->cell_data, info);
+  cell_list = get_cell_list (table);
+  set_cell_list (table, g_list_append (cell_list, info));
   /* Setup weak reference notification */
 
   g_object_weak_ref (G_OBJECT (cell),
@@ -363,16 +383,18 @@ static void
 clear_cached_data (ChartableAccessible *table)
 {
   GList *l;
+  GList *cell_list;
 
-  if (table->cell_data)
+  cell_list = get_cell_list (table);
+  if (cell_list)
     {
-      for (l = table->cell_data; l; l = l->next)
+      for (l = cell_list; l; l = l->next)
         {
           g_free (l->data);
         }
-      g_list_free (table->cell_data);
+      g_list_free (cell_list);
 
-      table->cell_data = NULL;
+      set_cell_list (table, NULL);
     }
 }
 
@@ -396,6 +418,7 @@ traverse_cells (AtkObject *obj)
   ChartableAccessible *table;
   GtkWidget *widget;
   GList *l;
+  GList *cell_list;
   Chartable *chartable;
   CharcellAccessibleInfo *info;
 
@@ -409,7 +432,8 @@ traverse_cells (AtkObject *obj)
   table = CHARTABLE_ACCESSIBLE (obj);
   chartable = get_chartable (widget);
 
-  for (l = table->cell_data; l; l = l->next)
+  cell_list = get_cell_list (table);
+  for (l = cell_list; l; l = l->next)
     {
       info = l->data;
       set_cell_visibility (chartable, CHARCELL_ACCESSIBLE (info->cell), TRUE);
@@ -487,7 +511,6 @@ chartable_accessible_initialize (AtkObject *obj,
 
   widget = GTK_WIDGET (data);
   table = CHARTABLE_ACCESSIBLE (obj);
-  table->cell_data = NULL;
   chartable = get_chartable (widget);
   g_signal_connect (chartable->adjustment, "value_changed",
                     G_CALLBACK (adjustment_changed), obj);

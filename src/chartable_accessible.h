@@ -49,8 +49,6 @@ typedef struct _ChartableAccessibleClass ChartableAccessibleClass;
 struct _ChartableAccessible
 {
   GtkAccessible parent;
-
-  GList *cell_data;
 };
 
 
