@@ -105,7 +105,8 @@ main (gint argc, gchar **argv)
 
       font_desc = pango_font_description_from_string (orig_font);
       pango_font_description_set_size (
-              font_desc, pango_font_description_get_size (font_desc) * 3/2);
+              font_desc, 
+              pango_font_description_get_size (font_desc) * 3/2 / PANGO_SCALE * PANGO_SCALE);
       new_font = pango_font_description_to_string (font_desc);
     }
   /* this sends the changed signal: */

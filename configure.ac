@@ -18,9 +18,9 @@ dnl 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
 dnl
 
 AC_PREREQ([2.50])
-AC_INIT([gucharmap], [0.4.0], [nlevitt аt users.sourceforge.net])
+AC_INIT([gucharmap], [0.5.0], [nlevitt аt users.sourceforge.net])
 AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE(gucharmap, 0.4.0)
+AM_INIT_AUTOMAKE(gucharmap, 0.5.0)
 
 AM_MAINTAINER_MODE
 
@@ -28,7 +28,7 @@ AM_MAINTAINER_MODE
 AC_PROG_CC
 AC_PROG_LIBTOOL
 AC_PROG_INTLTOOL([0.22])
-
+AC_CHECK_PROGS([GTK_QUERY_IMMODULES], [gtk-query-immodules-2.0], [MISSING])
 
 # checks for stuff
 GETTEXT_PACKAGE=gucharmap

@@ -24,7 +24,7 @@ desktop_in_files = gucharmap.desktop.in
 desktop_DATA 	 = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
-SUBDIRS = gucharmap po pixmaps
+SUBDIRS = po pixmaps gucharmap 
 
 EXTRA_DIST = gtkrc.win32 gucharmap.nsi.in gucharmap.pc.in \
              intltool-extract.in intltool-merge.in intltool-update.in \

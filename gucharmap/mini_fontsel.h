@@ -57,6 +57,8 @@ struct _MiniFontSelection
   GHashTable *available_faces;
 
   gint style_changed_handler_id;
+
+  gboolean realized;
 };
 
 

@@ -41,7 +41,7 @@ libgucharmap_la_SOURCES = gucharmap_marshal.c gucharmap_marshal.h \
 
 # this is different from the project version
 # http://sources.redhat.com/autobook/autobook/autobook_91.html
-libgucharmap_la_LDFLAGS = -version-info 1:0:0
+libgucharmap_la_LDFLAGS = -version-info 2:0:0
 
 
 libgucharmapincludedir = $(includedir)/gucharmap
@@ -109,6 +109,51 @@ uninstall-local:
 	&& rm -f "$(DESTDIR)$(bindir)/charmap"
 
 endif
+
+all-local: gtk.immodules
+
+gtk.immodules: $(module_LTLIBRARIES)
+	@if test "x$(GTK_QUERY_IMMODULES)" != "xMISSING" ; then \
+	  echo "$(GTK_QUERY_IMMODULES) $(module_LTLIBRARIES) > gtk.immodules";\
+	  $(GTK_QUERY_IMMODULES) $(module_LTLIBRARIES) > gtk.immodules ; \
+        fi
+
+# use -hook instead of -local so that the message gets printed at the end
+install-data-hook:
+	@if test "x$(GTK_QUERY_IMMODULES)" != "xMISSING" ; then \
+	  echo $(mkinstalldirs) $(DESTDIR)$(sysconfdir)/gucharmap ; \
+	  $(mkinstalldirs) $(DESTDIR)$(sysconfdir)/gucharmap; \
+	  echo "GTK_PATH=$(DESTDIR)$(moduledir) $(GTK_QUERY_IMMODULES) > $(DESTDIR)$(sysconfdir)/gucharmap/gtk.immodules" ; \
+	  GTK_PATH=$(DESTDIR)$(moduledir) $(GTK_QUERY_IMMODULES) > $(DESTDIR)$(sysconfdir)/gucharmap/gtk.immodules ; \
+	  echo ; \
+	  echo ; \
+	  echo "   IMPORTANT!" ; \
+	  echo "   " ; \
+	  echo "   The gucharmap input module has been installed. " ; \
+	  echo "   If you want to be able to use it (you do! trust " ; \
+	  echo "   me!), you must configure your environment. I " ; \
+	  echo "   suggest you add the following lines to your " ; \
+	  echo "   ~/.bash_profile or equivalent:" ; \
+	  echo "   " ; \
+	  echo "   GTK_IM_MODULE_FILE=$(DESTDIR)$(sysconfdir)/gucharmap/gtk.immodules" ; \
+	  echo "   export GTK_IM_MODULE_FILE" ; \
+	  echo "   " ; \
+	  echo "   Please see the README for more information." ; \
+	  echo ; \
+	  echo ; \
+	else \
+	  echo ; \
+	  echo ; \
+	  echo "   WARNING!" ; \
+	  echo "   " ; \
+	  echo "   The gucharmap input module has been installed, " ; \
+	  echo "   but the gtk-query-immodules-2.0 utility was not " ; \
+	  echo "   found, so gtk.immodules could not be generated." ; \
+	  echo "   " ; \
+	  echo "   Please see the README for more information." ; \
+	  echo ; \
+	  echo ; \
+	fi
 
 
 EXTRA_DIST = gucharmap_marshal.list gucharmaprc.rc 

@@ -260,33 +260,14 @@ size_changed (GtkAdjustment *adjustment, MiniFontSelection *fontsel)
 }
 
 
-void
-mini_font_selection_class_init (MiniFontSelectionClass *clazz)
-{
-  clazz->changed = NULL;
-
-  mini_font_selection_signals[CHANGED] =
-      g_signal_new ("changed", mini_font_selection_get_type (), 
-		    G_SIGNAL_RUN_FIRST,
-                    G_STRUCT_OFFSET (MiniFontSelectionClass, changed),
-                    NULL, NULL, gucharmap_marshal_VOID__VOID,
-                    G_TYPE_NONE, 0);
-}
-
-
-void
-mini_font_selection_init (MiniFontSelection *fontsel)
+static void
+realize (GtkWidget *widget)
 {
   AtkObject *accessib;
+  MiniFontSelection *fontsel = MINI_FONT_SELECTION (widget);
 
   accessib = gtk_widget_get_accessible (GTK_WIDGET (fontsel));
   atk_object_set_name (accessib, _("Font"));
-
-  fontsel->available_faces = NULL;
-
-  gtk_widget_ensure_style (GTK_WIDGET (fontsel));
-  fontsel->font_desc = pango_font_description_copy (
-          GTK_WIDGET (fontsel)->style->font_desc);
 
   gtk_box_set_spacing (GTK_BOX (fontsel), 6);
 
@@ -300,9 +281,6 @@ mini_font_selection_init (MiniFontSelection *fontsel)
   accessib = gtk_widget_get_accessible (fontsel->style);
   atk_object_set_name (accessib, _("Font Style"));
 
-  fontsel->size_adj = gtk_adjustment_new (
-          pango_font_description_get_size (fontsel->font_desc) / PANGO_SCALE, 
-          MIN_FONT_SIZE, MAX_FONT_SIZE, 1, 9, 0);
   fontsel->size = gtk_spin_button_new (GTK_ADJUSTMENT (fontsel->size_adj),
                                        0, 0);
   gtk_widget_show (fontsel->size);
@@ -332,6 +310,48 @@ mini_font_selection_init (MiniFontSelection *fontsel)
                       pango_font_description_get_family (fontsel->font_desc));
 
   gtk_container_set_border_width (GTK_CONTAINER (fontsel), 6);
+
+  gtk_widget_show_all (GTK_WIDGET (fontsel));
+
+  fontsel->realized = TRUE;
+}
+
+
+void
+mini_font_selection_class_init (MiniFontSelectionClass *clazz)
+{
+  clazz->changed = NULL;
+
+  mini_font_selection_signals[CHANGED] =
+      g_signal_new ("changed", mini_font_selection_get_type (), 
+		    G_SIGNAL_RUN_FIRST,
+                    G_STRUCT_OFFSET (MiniFontSelectionClass, changed),
+                    NULL, NULL, gucharmap_marshal_VOID__VOID,
+                    G_TYPE_NONE, 0);
+}
+
+
+void
+mini_font_selection_init (MiniFontSelection *fontsel)
+{
+  fontsel->available_faces = NULL;
+  fontsel->realized = FALSE;
+
+  gtk_widget_ensure_style (GTK_WIDGET (fontsel));
+  fontsel->font_desc = pango_font_description_copy (
+          GTK_WIDGET (fontsel)->style->font_desc);
+
+
+  gtk_widget_ensure_style (GTK_WIDGET (fontsel));
+  fontsel->font_desc = pango_font_description_copy (
+          GTK_WIDGET (fontsel)->style->font_desc);
+
+  fontsel->size_adj = gtk_adjustment_new (
+          pango_font_description_get_size (fontsel->font_desc) / PANGO_SCALE, 
+          MIN_FONT_SIZE, MAX_FONT_SIZE, 1, 9, 0);
+
+  /* we don't create any widgets until we're realized */
+  g_signal_connect (G_OBJECT (fontsel), "realize", G_CALLBACK (realize), NULL);
 }
 
 
@@ -380,14 +400,20 @@ mini_font_selection_set_font_name (MiniFontSelection *fontsel,
 
   fontsel->font_desc = pango_font_description_from_string (fontname);
 
-  gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (fontsel->family)->entry), 
-                      pango_font_description_get_family (fontsel->font_desc));
+  if (fontsel->realized)
+    {
+      gtk_entry_set_text (
+              GTK_ENTRY (GTK_COMBO (fontsel->family)->entry), 
+              pango_font_description_get_family (fontsel->font_desc));
+    
+      /* XXX: set_style: figure out how */
+    }
 
-  /* XXX: set_style: figure out how */
+  gtk_adjustment_set_value (
+          GTK_ADJUSTMENT (fontsel->size_adj), 
+          pango_font_description_get_size (fontsel->font_desc) / PANGO_SCALE);
 
-  gtk_spin_button_set_value (
-          GTK_SPIN_BUTTON (fontsel->size), 
-          PANGO_PIXELS (pango_font_description_get_size (fontsel->font_desc)));
+  g_signal_emit (fontsel, mini_font_selection_signals[CHANGED], 0);
 
   return TRUE;
 }
@@ -413,7 +439,7 @@ mini_font_selection_get_font_size (MiniFontSelection *fontsel)
 void
 mini_font_selection_set_font_size (MiniFontSelection *fontsel, gint size)
 {
-  gtk_spin_button_set_value (GTK_SPIN_BUTTON (fontsel->size), size);
+  gtk_adjustment_set_value (GTK_ADJUSTMENT (fontsel->size_adj), size);
   set_size (fontsel, size);
 }
 

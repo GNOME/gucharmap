@@ -3,6 +3,9 @@ This is the README for gucharmap.
 gucharmap is a featureful unicode character map. You can get the
 latest version of from http://gucharmap.sourceforge.net/
 
+
+COMPILING
+
 gucharmap uses GTK+ 2.2 or later, which you can get from
 http://gtk.org/. 
 
@@ -25,6 +28,51 @@ There are two extra ./configure options:
     languages, and is extracted from [3]. Omitting the ideograph
     information will reduce gucharmap's size by roughly 2 megabytes.
 
+
+GUCHARMAP INPUT METHOD
+
+What is this thing? Open up, for example, gedit. Right-click in the
+editable area. Hover over "Input Methods". The list of input methods
+you currently have available will pop up. If you try a couple, you'll
+see what they do.
+
+Most of these affect what happens when you type in the window. The
+gucharmap input method is a little different. It opens up a gucharmap
+window. When you double-click on a character, it goes directly into
+your document.
+
+Getting the gucharmap input method to show up in the list requires
+a little extra work on your part. The list comes from a file, called
+gtk.immodules. On my system, it is installed in 
+/etc/gtk-2.0/gtk.immodules
+It would be rude of gucharmap to write over that file, so it installs
+its version of gtk.immodules in a different place: 
+${prefix}/etc/gucharmap/gtk.immodules.
+where ${prefix} is the prefix where gucharmap is installed (/usr/local
+by default). gucharmap's version of gtk.immodules includes all the the
+input modules in GTK+'s version, plus gucharmap.
+
+You have to tell GTK+ to use gucharmap's version of gtk.immodules if
+you want to use the gucharmap input module (which you do!). To do
+this, set the environment variable GTK_IM_MODULE_FILE to
+${prefix}/etc/gucharmap/gtk.immodules. For example, you can put these
+lines in your ~/.bash_profile or ~/.profile or /etc/profile or
+somewhere:
+
+GTK_IM_MODULE_FILE=${prefix}/etc/gucharmap/gtk.immodules
+export GTK_IM_MODULE_FILE
+
+Replace ${prefix} with the prefix where gucharmap is installed.
+
+Alternatively, you can simply write over GTK+'s gtk.immodules with
+gucharmap's version. For example:
+
+# mv /etc/gtk-2.0/gtk.immodules /etc/gtk-2.0/gtk.immodules.bak
+# cp ${prefix}/etc/gucharmap/gtk.immodules /etc/gtk-2.0/.
+
+
+CREDITS
+
 gucharmap is Copyright (c) 2003 Noah Levitt, and is licensed to you
 under the terms of the GPL. See the file COPYING.
 
@@ -43,6 +91,6 @@ gucharmap was influenced by Juliusz Chroboczek's ucm
 (http://www.pps.jussieu.fr/~jch/software/files/ucm-0.3.tar.gz), the
 Windows charmap, and GNOME's gcharmap.
 
-Noah Levitt <nlevitt аt columbia.edu>
-updated Sat Mar 15 17:12:22 EST 2003
 
+Noah Levitt <nlevitt аt columbia.edu>
+updated Sun Mar 30 02:05:37 EST 2003
