@@ -27,7 +27,8 @@
 
 #if HAVE_LIBGNOMEUI
 # include <libgnomeui/gnome-about.h>
-# include <libgnomeui/gnome-stock-icons.h>
+# include <libgnomeui/gnome-app-helper.h>
+# include <libgnomeui/gnome-ui-init.h>
 #endif
 
 
@@ -144,17 +145,30 @@ static void
 help_about (GtkWidget *widget, gpointer data)
 {
   GtkWidget *about;
-  const gchar *authors[] = 
-    {
-      "Noah Levitt <nlevitt аt columbia.edu>",
-      NULL
-    };
+  const gchar *authors[] = { "Noah Levitt <nlevitt аt columbia.edu>", NULL };
 
-  about = gnome_about_new (_("Unicode Character Map"),
-                           "0.2", "Copyright © 2003 Noah Levitt",
+  about = gnome_about_new ("gucharmap", "0.2", "Copyright © 2003 Noah Levitt",
                            NULL, authors, NULL, NULL, icon);
 
   gtk_widget_show (about);
+}
+
+
+static GtkWidget *
+make_gnome_help_menu ()
+{
+  GnomeUIInfo help_menu[] =
+  {
+    GNOMEUIINFO_MENU_ABOUT_ITEM (help_about, NULL),
+    GNOMEUIINFO_END
+  };
+  GtkWidget *menu;
+
+  menu = gtk_menu_new ();
+
+  gnome_app_fill_menu (GTK_MENU_SHELL (menu), help_menu, NULL, TRUE, 0);
+
+  return menu;
 }
 #endif /* #if HAVE_LIBGNOMEUI */
 
@@ -170,7 +184,7 @@ static GtkWidget *
 make_menu ()
 {
   GtkWidget *menubar;
-  GtkWidget *file_menu, *view_menu, *goto_menu, *help_menu;
+  GtkWidget *file_menu, *view_menu, *goto_menu;
   GtkWidget *file_menu_item, *view_menu_item;
   GtkWidget *goto_menu_item, *help_menu_item;
   GtkWidget *menu_item;
@@ -224,13 +238,8 @@ make_menu ()
   /* make the help menu */
   help_menu_item = gtk_menu_item_new_with_mnemonic (_("_Help"));
   gtk_menu_shell_append (GTK_MENU_SHELL (menubar), help_menu_item);
-  help_menu = gtk_menu_new ();
-  gtk_menu_item_set_submenu (GTK_MENU_ITEM (help_menu_item), help_menu);
-
-  menu_item = gtk_menu_item_new_with_mnemonic (_("_About"));
-  g_signal_connect (G_OBJECT (menu_item), "activate",
-                    G_CALLBACK (help_about), NULL);
-  gtk_menu_shell_append (GTK_MENU_SHELL (help_menu), menu_item);
+  gtk_menu_item_set_submenu (GTK_MENU_ITEM (help_menu_item), 
+                             make_gnome_help_menu ());
   /* finished making the help menu */
 #endif /* #if HAVE_LIBGNOMEUI */
 
@@ -251,7 +260,12 @@ main (gint argc, gchar **argv)
   gchar *orig_font, *new_font;
   PangoFontDescription *font_desc;
 
+#if HAVE_LIBGNOMEUI
+  gnome_program_init ("gucharmap", "0.2", LIBGNOMEUI_MODULE, argc, argv,
+                      NULL, NULL, NULL);
+#else
   gtk_init (&argc, &argv);
+#endif
 
   tooltips = gtk_tooltips_new ();
 
