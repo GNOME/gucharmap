@@ -470,15 +470,11 @@ draw_square_bg (Charmap *charmap, gint row, gint col)
 static void
 expose_square (Charmap *charmap, gint row, gint col)
 {
-  gint square_width, square_height;
-
-  square_width = column_width (charmap, col) - 1;
-  square_height = row_height (charmap, row) - 1;
-
   gtk_widget_queue_draw_area (charmap->chartable, 
                               x_offset (charmap, col),
-                              y_offset (charmap, col),
-                              square_width, square_height);
+                              y_offset (charmap, row),
+                              column_width (charmap, col) - 1,
+                              row_height (charmap, row) - 1);
 }
 
 
@@ -680,20 +676,23 @@ redraw (Charmap *charmap)
   gint row_offset;
   gboolean actives_done = FALSE;
 
-/* #ifdef G_PLATFORM_WIN32 */
-#if 1
-
-  /* get around the bug in gdkdrawable-win32.c */
-  /* yup, this makes it really slow */
-  draw_chartable_from_scratch (charmap);
-  gtk_widget_queue_draw (charmap->chartable);
-  actives_done = TRUE;
-
-#else /* #ifdef G_PLATFORM_WIN32 */
-
   row_offset = ((gint) charmap->page_first_char 
                 - (gint) charmap->old_page_first_char)
                / charmap->cols;
+
+/* #ifdef G_PLATFORM_WIN32 */
+#if 1
+
+  if (row_offset != 0)
+    {
+      /* get around the bug in gdkdrawable-win32.c */
+      /* yup, this makes it really slow */
+      draw_chartable_from_scratch (charmap);
+      gtk_widget_queue_draw (charmap->chartable);
+      actives_done = TRUE;
+    }
+
+#else /* #ifdef G_PLATFORM_WIN32 */
 
   if (row_offset >= charmap->rows || row_offset <= -charmap->rows)
     {
