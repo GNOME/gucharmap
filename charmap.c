@@ -1034,7 +1034,7 @@ make_caption (Charmap *charmap)
 
   /*
    * *------------------------------------------------*
-   * | codepoint:   | character:  | category:         |
+   * | codepoint:  | character:   | category:         |
    * *------------------------------------------------*
    * | name:                                          |
    * *------------------------------------------------*
@@ -1042,9 +1042,9 @@ make_caption (Charmap *charmap)
    * *------------------------------------------------*
    * | kDefinition:                                   |
    * *------------------------------------------------*
-   * | kCantonese:  | kMandarin:  | kTang: | kKorean: |
+   * | kMandarin:  | kCantonese:  | kTang: | kKorean: |
    * *------------------------------------------------*
-   * | kJapaneseKun:              | kJapaneseOn:      |
+   * | kJapaneseOn:               | kJapaneseKun:     |
    * *------------------------------------------------*
    */
 
@@ -1065,18 +1065,18 @@ make_caption (Charmap *charmap)
   gtk_table_attach_defaults (GTK_TABLE (table), charmap->caption->kDefinition,
                              0, 4, 3, 4);
 
-  gtk_table_attach_defaults (GTK_TABLE (table), charmap->caption->kCantonese,
-                             0, 1, 4, 5);
   gtk_table_attach_defaults (GTK_TABLE (table), charmap->caption->kMandarin,
+                             0, 1, 4, 5);
+  gtk_table_attach_defaults (GTK_TABLE (table), charmap->caption->kCantonese,
                              1, 2, 4, 5);
   gtk_table_attach_defaults (GTK_TABLE (table), charmap->caption->kTang,
                              2, 3, 4, 5);
   gtk_table_attach_defaults (GTK_TABLE (table), charmap->caption->kKorean,
                              3, 4, 4, 5);
 
-  gtk_table_attach_defaults (GTK_TABLE (table), charmap->caption->kJapaneseKun,
-                             0, 2, 5, 6);
   gtk_table_attach_defaults (GTK_TABLE (table), charmap->caption->kJapaneseOn,
+                             0, 2, 5, 6);
+  gtk_table_attach_defaults (GTK_TABLE (table), charmap->caption->kJapaneseKun,
                              2, 4, 5, 6);
 
   scrolled_window = gtk_scrolled_window_new (NULL, NULL);
