@@ -93,7 +93,7 @@ main (gint argc, gchar **argv)
   if (new_font == NULL) /* new_font could be set by command line option */
     {
       GucharmapMiniFontSelection *fontsel = gucharmap_window_get_mini_font_selection (GUCHARMAP_WINDOW (window));
-      gint default_size = PANGO_PIXELS (1.5 * pango_font_description_get_size (window->style->font_desc));
+      gint default_size = PANGO_PIXELS (2.0 * pango_font_description_get_size (window->style->font_desc));
       gucharmap_mini_font_selection_set_default_font_size (fontsel, default_size);
       gucharmap_mini_font_selection_reset_font_size (fontsel);
     }

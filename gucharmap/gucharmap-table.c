@@ -71,7 +71,7 @@ gucharmap_table_cell_column (GucharmapTable *chartable,
 static gint
 bare_minimal_column_width (GucharmapTable *chartable)
 {
-  return PANGO_PIXELS (8192 + 2.5 * pango_font_description_get_size (chartable->drawing_area->style->font_desc));
+  return PANGO_PIXELS (3.0 * pango_font_description_get_size (chartable->drawing_area->style->font_desc));
 }
 
 static gint
@@ -119,7 +119,7 @@ gucharmap_table_x_offset (GucharmapTable *chartable, gint col)
 static gint
 bare_minimal_row_height (GucharmapTable *chartable)
 {
-  return PANGO_PIXELS (8192 + 2.5 * pango_font_description_get_size (chartable->drawing_area->style->font_desc));
+  return PANGO_PIXELS (2.5 * pango_font_description_get_size (chartable->drawing_area->style->font_desc));
 }
 
 static gint
@@ -1087,11 +1087,6 @@ size_allocate (GtkWidget *widget,
   if (chartable->pixmap != NULL)
     g_object_unref (chartable->pixmap);
   chartable->pixmap = NULL;
-
-#if 0
-  if (chartable->drawing_area->window)
-    draw_chartable_from_scratch (chartable);
-#endif
 
   if (chartable->rows == old_rows && chartable->cols == old_cols)
     return;
