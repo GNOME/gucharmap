@@ -1,10 +1,12 @@
 #!/bin/sh
+#
 # $Id$
 #
 # runs autotools to create ./configure and friends
+#
 
 set -x
-aclocal                                 || exit 1
+aclocal -I /usr/local/share/aclocal     || exit 1
 libtoolize --force --copy               || exit 1
 autoheader                              || exit 1
 automake --foreign --add-missing --copy || exit 1
