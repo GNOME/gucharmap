@@ -481,10 +481,8 @@ make_zoom_window (Chartable *chartable)
 
   chartable->zoom_window = gtk_window_new (GTK_WINDOW_POPUP);
 
-#if GTK_CHECK_VERSION (2,1,1)
   gtk_window_set_screen (GTK_WINDOW (chartable->zoom_window),
                          gtk_widget_get_screen (chartable->drawing_area));
-#endif
 
   /* Prevent the window from being painted with the default background. */
   gtk_widget_set_app_paintable (chartable->zoom_window, TRUE);
@@ -1619,6 +1617,7 @@ chartable_init (Chartable *chartable)
   chartable->zoom_mode_enabled = FALSE;
   chartable->zoom_window = NULL;
   chartable->zoom_pixbuf = NULL;
+  chartable->font_metrics = NULL;
 
   accessible = gtk_widget_get_accessible (GTK_WIDGET (chartable));
   atk_object_set_name (accessible, _("Character Table"));
@@ -1788,6 +1787,10 @@ chartable_set_font (Chartable *chartable, const gchar *font_name)
   /* ensure style so that this has an effect even before it's realized */
   gtk_widget_ensure_style (chartable->drawing_area);
   gtk_widget_modify_font (chartable->drawing_area, font_desc);
+
+  /* free the old font metrics */
+  if (chartable->font_metrics != NULL)
+    pango_font_metrics_unref (chartable->font_metrics);
 
   chartable->font_metrics = pango_context_get_metrics (
           gtk_widget_get_pango_context (chartable->drawing_area),

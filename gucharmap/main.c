@@ -652,8 +652,11 @@ make_gnome_help_menu ()
 static void
 fontsel_changed (MiniFontSelection *fontsel, Charmap *charmap)
 {
-  chartable_set_font (charmap->chartable, 
-                      mini_font_selection_get_font_name (fontsel));
+  gchar *font_name = mini_font_selection_get_font_name (fontsel);
+
+  chartable_set_font (charmap->chartable, font_name);
+
+  g_free (font_name);
 }
 
 

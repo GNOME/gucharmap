@@ -63,13 +63,13 @@ fi
 
 
 # gtk is required
-PKG_CHECK_MODULES(GTK, gtk+-2.0 >= 2.0.0)
+PKG_CHECK_MODULES(GTK, gtk+-2.0 >= 2.2.0)
 
 AC_ARG_ENABLE(gnome,
               AC_HELP_STRING([--disable-gnome],
 	                     [don't build with GNOME support]))
 if test "x$enable_gnome" != "xno"; then
-    PKG_CHECK_MODULES(GNOME, libgnomeui-2.0 >= 2.0.0 libgnome-2.0 >= 2.0.0, 
+    PKG_CHECK_MODULES(GNOME, libgnomeui-2.0 >= 2.2.0 libgnome-2.0 >= 2.2.0, 
                     have_gnome=yes, have_gnome=no)
 else
     AC_MSG_NOTICE([GNOME support disabled with --disable-gnome])

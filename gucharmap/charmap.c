@@ -163,9 +163,12 @@ set_caption_value (GtkTreeStore *tree_store,
                    const gchar *value)
 {
   GtkTreeIter iter;
+  GtkTreePath *path;
 
-  gtk_tree_model_get_iter (GTK_TREE_MODEL (tree_store), &iter, 
-                           gtk_tree_row_reference_get_path (rowref));
+  path = gtk_tree_row_reference_get_path (rowref);
+  gtk_tree_model_get_iter (GTK_TREE_MODEL (tree_store), &iter, path);
+  gtk_tree_path_free (path);
+
   gtk_tree_store_set (tree_store, &iter, 
                       CAPTION_VALUE, value, -1);
 }
@@ -221,11 +224,14 @@ set_caption_values (GtkTreeStore *tree_store,
                     const gchar **values)
 {
   GtkTreeIter iter, child_iter;
+  GtkTreePath *path;
   gboolean have_another_row = FALSE;
   gint i;
 
-  gtk_tree_model_get_iter (GTK_TREE_MODEL (tree_store), &iter, 
-                           gtk_tree_row_reference_get_path (rowref));
+
+  path = gtk_tree_row_reference_get_path (rowref);
+  gtk_tree_model_get_iter (GTK_TREE_MODEL (tree_store), &iter, path);
+  gtk_tree_path_free (path);
 
   if (values == NULL)
     {
@@ -256,17 +262,8 @@ set_caption_values (GtkTreeStore *tree_store,
     }
 
   /* delete remaining rows */
-  while (have_another_row)
-    {
-      GtkTreeIter temp_iter = child_iter;
-      have_another_row = gtk_tree_model_iter_next (GTK_TREE_MODEL (tree_store),
-                                                   &temp_iter);
-
-      gtk_tree_store_remove (tree_store, &child_iter);
-
-      child_iter = temp_iter;
-    }
-
+  while (gtk_tree_store_iter_is_valid (tree_store, &child_iter))
+    gtk_tree_store_remove (tree_store, &child_iter);
 }
 
 
@@ -975,12 +972,16 @@ charmap_show_caption (Charmap *charmap, CharmapCaption caption_id)
 
   if (charmap->caption_rows[caption_id] == NULL)
     {
+      GtkTreePath *path;
+
       gtk_tree_store_insert (charmap->caption_model, &iter, NULL, 
                              compute_position_to_insert_at (charmap, 
                                                             caption_id));
 
-      charmap->caption_rows[caption_id] = gtk_tree_row_reference_new (
-              model, gtk_tree_model_get_path (model, &iter));
+      path = gtk_tree_model_get_path (model, &iter);
+      charmap->caption_rows[caption_id] = gtk_tree_row_reference_new (model, 
+                                                                      path);
+      gtk_tree_path_free (path);
 
       gtk_tree_store_set (charmap->caption_model, &iter, CAPTION_LABEL, 
                           caption_labels[caption_id], -1);
