@@ -8,8 +8,8 @@ typedef struct _UnicodeCategory UnicodeCategory;
 
 static const struct _UnicodeCategory
 {
-  gunichar first;
-  gunichar last;
+  gunichar start;
+  gunichar end;
   GUnicodeType category;
 }
 unicode_categories[] =

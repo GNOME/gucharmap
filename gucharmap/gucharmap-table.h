@@ -55,8 +55,9 @@ struct _GucharmapTable
   guint old_active_cell;
 
   /* for the scrollbar */
-  GtkObject *adjustment; 
+  GtkAdjustment *adjustment; 
   gulong adjustment_changed_handler_id; 
+  GtkWidget *scrollbar;
 
   GtkWidget *zoom_window;
   GdkPixmap *zoom_pixmap;
@@ -68,6 +69,7 @@ struct _GucharmapTable
   gdouble click_x, click_y; 
 
   GucharmapCodepointList *codepoint_list;
+  gboolean codepoint_list_changed;
 };
 
 struct _GucharmapTableClass
@@ -93,6 +95,8 @@ void gucharmap_table_identify_clipboard (GucharmapTable *chartable,
 void gucharmap_table_grab_focus (GucharmapTable *chartable);
 void gucharmap_table_set_snap_pow2 (GucharmapTable *chartable, 
                                     gboolean snap);
+void gucharmap_table_set_codepoint_list (GucharmapTable         *chartable,
+                                         GucharmapCodepointList *list);
 
 G_END_DECLS
 

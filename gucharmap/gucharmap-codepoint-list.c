@@ -21,35 +21,54 @@
 #include <glib.h>
 #include <gucharmap/gucharmap-codepoint-list.h>
 
+typedef struct _DefaultCodepointListPrivate DefaultCodepointListPrivate;
+
+struct _DefaultCodepointListPrivate
+{
+  gunichar start;
+  gunichar end;
+};
+
+#define GUCHARMAP_CODEPOINT_LIST_GET_PRIVATE(o) \
+            (G_TYPE_INSTANCE_GET_PRIVATE ((o), gucharmap_codepoint_list_get_type (), DefaultCodepointListPrivate))
+
 static gunichar 
 default_get_char (GucharmapCodepointList *list, 
                   guint                   index)
 {
-  if (index > UNICHAR_MAX)
+  DefaultCodepointListPrivate *priv = GUCHARMAP_CODEPOINT_LIST_GET_PRIVATE (list);
+
+  if (index > priv->end - priv->start)
     return (gunichar)(-1);
   else
-    return (gunichar) index;
+    return (gunichar) priv->start + index;
 }
 
 static guint
 default_get_index (GucharmapCodepointList *list, 
                    gunichar                wc)
 {
-  if (wc > UNICHAR_MAX)
+  DefaultCodepointListPrivate *priv = GUCHARMAP_CODEPOINT_LIST_GET_PRIVATE (list);
+
+  if (wc < priv->start || wc > priv->end)
     return (guint)(-1);
   else
-    return (guint) wc;
+    return wc - priv->start;
 }
 
 static guint
 default_get_last_index (GucharmapCodepointList *list)
 {
-  return (guint) UNICHAR_MAX;
+  DefaultCodepointListPrivate *priv = GUCHARMAP_CODEPOINT_LIST_GET_PRIVATE (list);
+
+  return priv->end - priv->start;
 }
 
 static void
 gucharmap_codepoint_list_class_init (GucharmapCodepointListClass *clazz)
 {
+  g_type_class_add_private (clazz, sizeof (DefaultCodepointListPrivate));
+
   /* the default implementation is all unicode codepoints in order */
   clazz->get_char = default_get_char;
   clazz->get_index = default_get_index;
@@ -139,7 +158,23 @@ gucharmap_codepoint_list_get_last_index (GucharmapCodepointList *list)
  * g_object_unref() to free the result.
  **/
 GucharmapCodepointList * 
-gucharmap_codepoint_list_new ()
+gucharmap_codepoint_list_new (gunichar start,
+                              gunichar end)
 {
-  return g_object_new (gucharmap_codepoint_list_get_type (), NULL);
+  GucharmapCodepointList *list;
+  DefaultCodepointListPrivate *priv;
+
+  list = GUCHARMAP_CODEPOINT_LIST (g_object_new (gucharmap_codepoint_list_get_type (), NULL));
+  priv = GUCHARMAP_CODEPOINT_LIST_GET_PRIVATE (list);
+
+  /* XXX: what to do if start > end, etc */
+
+  priv->start = start;
+
+  if (end <= UNICHAR_MAX)
+    priv->end = end;
+  else
+    priv->end = UNICHAR_MAX;
+
+  return list;
 }

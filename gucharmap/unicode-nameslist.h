@@ -30,7 +30,7 @@ struct _NamesList
   gint colons_index;
 };
 
-static const struct _UnicharString names_list_equals[] = 
+static const UnicharString names_list_equals[] = 
 {
   { 0x0000, "NULL" },
   { 0x0001, "START OF HEADING" },
@@ -841,7 +841,7 @@ static const struct _UnicharString names_list_equals[] =
   { (gunichar)(-1), 0 }
 };
 
-static const struct _UnicharString names_list_stars[] = 
+static const UnicharString names_list_stars[] = 
 {
   { 0x0020, "sometimes considered a control code" },
   { 0x0020, "other space characters: 2000-200A" },
@@ -2330,7 +2330,7 @@ static const struct _UnicharString names_list_stars[] =
   { (gunichar)(-1), 0 }
 };
 
-static const struct _UnicharString names_list_pounds[] = 
+static const UnicharString names_list_pounds[] = 
 {
   { 0x00A0, "<noBreak> 0020" },
   { 0x00A8, "0020 0308" },
@@ -5633,7 +5633,7 @@ static const struct _UnicharString names_list_pounds[] =
   { (gunichar)(-1), 0 }
 };
 
-static const struct _UnicharUnichar names_list_exes[] = 
+static const UnicharUnichar names_list_exes[] = 
 {
   { 0x001A, 0xFFFD },
   { 0x0020, 0x00A0 },
@@ -6891,7 +6891,7 @@ static const struct _UnicharUnichar names_list_exes[] =
   { (gunichar)(-1), 0 }
 };
 
-static const struct _UnicharString names_list_colons[] = 
+static const UnicharString names_list_colons[] = 
 {
   { 0x00C0, "0041 0300" },
   { 0x00C1, "0041 0301" },
@@ -8822,7 +8822,7 @@ static const struct _UnicharString names_list_colons[] =
   { (gunichar)(-1), 0 }
 };
 
-static const struct _NamesList names_list[] =
+static const NamesList names_list[] =
 {
   { 0x0000, 0, -1, -1, -1, -1 },
   { 0x0001, 1, -1, -1, -1, -1 },

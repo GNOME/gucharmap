@@ -17,28 +17,12 @@
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  */
 
-
 #ifndef GUCHARMAP_UNICODE_INFO_H
 #define GUCHARMAP_UNICODE_INFO_H
 
 #include <glib.h>
 
-
 G_BEGIN_DECLS
-
-
-typedef struct
-{
-  gunichar start;
-  gunichar end;
-  const gchar *name;
-}
-GucharmapUnicodeBlock;
-
-extern const GucharmapUnicodeBlock gucharmap_unicode_blocks[];
-
-gint gucharmap_count_blocks (gunichar max);
-
 
 /* return values are read-only */
 G_CONST_RETURN gchar * gucharmap_get_unicode_name (gunichar uc);
@@ -80,7 +64,7 @@ gboolean                gucharmap_unichar_isdefined         (gunichar  wc);
 gboolean                gucharmap_unichar_isgraph           (gunichar  wc);
 
 /* XXX: defined in gucharmap-script-codepoint-list.c */
-G_CONST_RETURN gchar **  gucharmap_unicode_list_scripts     ();
+G_CONST_RETURN gchar ** gucharmap_unicode_list_scripts      ();
 
 G_END_DECLS
 

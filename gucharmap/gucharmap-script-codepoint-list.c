@@ -58,9 +58,9 @@ gucharmap_get_script_for_char (gunichar wc)
   while (max >= min) 
     {
       mid = (min + max) / 2;
-      if (wc > unicode_scripts[mid].last)
+      if (wc > unicode_scripts[mid].end)
         min = mid + 1;
-      else if (wc < unicode_scripts[mid].first)
+      else if (wc < unicode_scripts[mid].start)
         max = mid - 1;
       else
         return unicode_scripts[mid].script;
@@ -117,8 +117,8 @@ get_chars_for_script (const gchar            *script,
   for (i = 0, j = 0, index = 0;  i < sizeof (unicode_scripts) / sizeof (UnicodeScript);  i++)
     if (unicode_scripts[i].script_index == script_index)
       {
-        (*ranges)[j].start = unicode_scripts[i].first;
-        (*ranges)[j].end = unicode_scripts[i].last;
+        (*ranges)[j].start = unicode_scripts[i].start;
+        (*ranges)[j].end = unicode_scripts[i].end;
         (*ranges)[j].index = index;
 
         index += (*ranges)[j].end - (*ranges)[j].start + 1;

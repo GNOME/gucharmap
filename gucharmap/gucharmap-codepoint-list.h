@@ -49,13 +49,16 @@ struct _GucharmapCodepointListClass
   GObjectClass parent_class;
 
   /* zero is the first index */
-  gunichar (*get_char)       (GucharmapCodepointList *list, guint index);
-  guint    (*get_index)      (GucharmapCodepointList *list, gunichar wc);
   guint    (*get_last_index) (GucharmapCodepointList *list);
+  gunichar (*get_char)       (GucharmapCodepointList *list, 
+                              guint                   index);
+  guint    (*get_index)      (GucharmapCodepointList *list, 
+                              gunichar                wc);
 };
 
 GType                    gucharmap_codepoint_list_get_type       ();
-GucharmapCodepointList * gucharmap_codepoint_list_new            ();
+GucharmapCodepointList * gucharmap_codepoint_list_new            (gunichar start,
+                                                                  gunichar end);
 gunichar                 gucharmap_codepoint_list_get_char       (GucharmapCodepointList *list, 
                                                                   guint                   index);
 guint                    gucharmap_codepoint_list_get_index      (GucharmapCodepointList *list, 

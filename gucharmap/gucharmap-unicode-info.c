@@ -153,18 +153,6 @@ gucharmap_get_unicode_category_name (gunichar wc)
     }
 }
 
-/* counts the number of entries in gucharmap_unicode_blocks with start <= max */
-gint 
-gucharmap_count_blocks (gunichar max)
-{
-  gint i;
-
-  for (i = 0;  gucharmap_unicode_blocks[i].start != (gunichar)(-1)
-               && gucharmap_unicode_blocks[i].start < max;  i++);
-
-  return i;
-}
-
 /* http://www.unicode.org/unicode/reports/tr15/#Hangul */
 static gunichar *
 hangul_decomposition (gunichar s, gsize *result_len)
@@ -756,15 +744,15 @@ gucharmap_unichar_type (gunichar uc)
   gint mid;
   gint max = sizeof (unicode_categories) / sizeof (UnicodeCategory) - 1;
 
-  if (uc < unicode_categories[0].first || uc > unicode_categories[max].last)
+  if (uc < unicode_categories[0].start || uc > unicode_categories[max].end)
     return G_UNICODE_UNASSIGNED;
 
   while (max >= min) 
     {
       mid = (min + max) / 2;
-      if (uc > unicode_categories[mid].last)
+      if (uc > unicode_categories[mid].end)
         min = mid + 1;
-      else if (uc < unicode_categories[mid].first)
+      else if (uc < unicode_categories[mid].start)
         max = mid - 1;
       else
         return unicode_categories[mid].category;

@@ -37,15 +37,6 @@
 
 extern gboolean _gucharmap_unicode_has_nameslist_entry (gunichar uc);
 
-/* only the label is visible in the block selector */
-enum 
-{
-  BLOCK_SELECTOR_LABEL = 0,
-  BLOCK_SELECTOR_UC_START,
-  BLOCK_SELECTOR_UNICODE_BLOCK,
-  BLOCK_SELECTOR_NUM_COLUMNS
-};
-
 enum 
 {
   STATUS_MESSAGE = 0,
@@ -62,149 +53,14 @@ status_message (GucharmapCharmap *charmap, const gchar *message)
                  0, message);
 }
 
-
-/* XXX: linear search (but N is small) */
-static GtkTreePath *
-find_block_index_tree_path (GucharmapCharmap *charmap, gunichar uc)
-{
-  gint i;
-
-  for (i = 0;  i < charmap->block_index_size;  i++)
-    if (charmap->block_index[i].start > uc)
-      break;
-
-  return charmap->block_index[i-1].tree_path;
-}
-
-
-/* selects the active block in the block selector tree view based on the
- * active character */
-static void
-set_active_block (GucharmapCharmap *charmap, 
-                  gunichar          wc)
-{
-  GtkTreePath *parent = NULL;
-  GtkTreePath *tree_path;
-  
-  tree_path = find_block_index_tree_path (charmap, wc);
-
-  /* block our "changed" handler */
-  g_signal_handler_block (G_OBJECT (charmap->block_selection), 
-                          charmap->block_selection_changed_handler_id);
-
-  gtk_tree_view_set_cursor (GTK_TREE_VIEW (charmap->block_selector_view),
-                            tree_path, NULL, FALSE);
-
-  g_signal_handler_unblock (G_OBJECT (charmap->block_selection),
-                            charmap->block_selection_changed_handler_id);
-
-  if (parent != NULL)
-    gtk_tree_path_free (parent);
-}
-
-
-static void
-block_selection_changed (GtkTreeSelection *selection, 
-                         GucharmapCharmap *charmap)
-{
-  GtkTreeModel *model;
-  GtkTreeIter iter;
-
-  if (gtk_tree_selection_get_selected (selection, &model, &iter))
-    {
-      gunichar uc_start;
-      gtk_tree_model_get (model, &iter, BLOCK_SELECTOR_UC_START, &uc_start, -1);
-      gucharmap_table_set_active_character (charmap->chartable, uc_start);
-    }
-}
-
-
-/* makes the list of unicode blocks and code points */
-static GtkWidget *
-make_unicode_block_selector (GucharmapCharmap *charmap)
-{
-  GtkWidget *scrolled_window;
-  GtkTreeIter iter;
-  GtkCellRenderer *cell;
-  GtkTreeViewColumn *column;
-  gint i, bi;
-
-  scrolled_window = gtk_scrolled_window_new (NULL, NULL);
-
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
-                                  GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
-  gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolled_window), 
-                                       GTK_SHADOW_ETCHED_IN);
-
-  charmap->block_selector_model = gtk_tree_store_new (
-          BLOCK_SELECTOR_NUM_COLUMNS, G_TYPE_STRING, 
-          G_TYPE_UINT, G_TYPE_POINTER);
-
-  charmap->block_index_size = gucharmap_count_blocks (UNICHAR_MAX) + 1;
-  charmap->block_index = g_malloc (charmap->block_index_size 
-                                   * sizeof (GucharmapBlockIndex));
-  bi = 0;
-
-  for (i = 0;  gucharmap_unicode_blocks[i].start != (gunichar)(-1)
-               && gucharmap_unicode_blocks[i].start <= UNICHAR_MAX;  i++)
-    {
-      gtk_tree_store_append (charmap->block_selector_model, &iter, NULL);
-      gtk_tree_store_set (charmap->block_selector_model, &iter, 
-                          BLOCK_SELECTOR_LABEL, 
-                          _(gucharmap_unicode_blocks[i].name),
-                          BLOCK_SELECTOR_UC_START, 
-                          gucharmap_unicode_blocks[i].start,
-                          BLOCK_SELECTOR_UNICODE_BLOCK, 
-                          &(gucharmap_unicode_blocks[i]),
-                          -1);
-      charmap->block_index[bi].start = gucharmap_unicode_blocks[i].start;
-      charmap->block_index[bi].tree_path = gtk_tree_model_get_path (
-              GTK_TREE_MODEL (charmap->block_selector_model), &iter);
-      bi++;
-    }
-
-  /* terminate value that is bigger than the biggest character */
-  charmap->block_index[bi].start = UNICHAR_MAX + 1;
-  charmap->block_index[bi].tree_path = NULL;
-
-  /* we have the model, now make the view */
-  charmap->block_selector_view = gtk_tree_view_new_with_model (
-          GTK_TREE_MODEL (charmap->block_selector_model));
-  charmap->block_selection = gtk_tree_view_get_selection (
-          GTK_TREE_VIEW (charmap->block_selector_view));
-  gtk_tree_view_set_headers_visible (
-          GTK_TREE_VIEW (charmap->block_selector_view), FALSE);
-
-  cell = gtk_cell_renderer_text_new ();
-  column = gtk_tree_view_column_new_with_attributes (NULL, cell, 
-                                                     "text", 0, NULL);
-
-  gtk_tree_view_append_column (GTK_TREE_VIEW (charmap->block_selector_view),
-                               GTK_TREE_VIEW_COLUMN (column));
-
-  gtk_tree_selection_set_mode (charmap->block_selection, GTK_SELECTION_BROWSE);
-  charmap->block_selection_changed_handler_id = g_signal_connect (G_OBJECT (charmap->block_selection), "changed", 
-                                                                  G_CALLBACK (block_selection_changed), charmap);
-
-  gtk_container_add (GTK_CONTAINER (scrolled_window), 
-                     charmap->block_selector_view);
-
-  gtk_widget_show_all (scrolled_window);
-
-  return scrolled_window;
-}
-
-
 static void 
 charmap_finalize (GObject *object)
 {
   GucharmapCharmap *charmap = GUCHARMAP_CHARMAP (object);
-  g_free (charmap->block_index);
 
   gdk_cursor_unref (charmap->hand_cursor);
   gdk_cursor_unref (charmap->regular_cursor);
 }
-
 
 void
 gucharmap_charmap_class_init (GucharmapCharmapClass *clazz)
@@ -228,7 +84,6 @@ gucharmap_charmap_class_init (GucharmapCharmapClass *clazz)
   G_OBJECT_CLASS (clazz)->finalize = charmap_finalize;
 }
 
-
 static void
 insert_vanilla_detail (GucharmapCharmap *charmap, 
                        GtkTextBuffer *buffer,
@@ -242,7 +97,6 @@ insert_vanilla_detail (GucharmapCharmap *charmap,
                                             "detail-value", NULL);
   gtk_text_buffer_insert (buffer, iter, "\n", -1);
 }
-
 
 /* makes a nice string and makes it a link to the character */
 static void
@@ -262,14 +116,12 @@ insert_codepoint (GucharmapCharmap *charmap,
                                     "underline", PANGO_UNDERLINE_SINGLE, 
                                     NULL);
   /* add one so that zero is the "nothing" value, since U+0000 is a character */
-  g_object_set_data (G_OBJECT (tag), "link_character", 
-                     GUINT_TO_POINTER (uc + 1));
+  g_object_set_data (G_OBJECT (tag), "link-character", GUINT_TO_POINTER (uc + 1));
 
   gtk_text_buffer_insert_with_tags (buffer, iter, str, -1, tag, NULL);
 
   g_free (str);
 }
-
 
 static void
 insert_chocolate_detail_codepoints (GucharmapCharmap *charmap,
@@ -313,7 +165,6 @@ find_codepoint (const gchar *str)
 
   return NULL;
 }
-
 
 static void
 insert_string_link_codepoints (GucharmapCharmap *charmap,
@@ -381,7 +232,6 @@ insert_heading (GucharmapCharmap *charmap,
                                             "bold", NULL);
   gtk_text_buffer_insert (buffer, iter, "\n\n", -1);
 }
-
 
 static void
 conditionally_insert_canonical_decomposition (GucharmapCharmap *charmap, 
@@ -586,7 +436,6 @@ set_details (GucharmapCharmap *charmap,
 #endif /* #if ENABLE_UNIHAN */
 }
 
-
 static void
 active_char_set (GtkWidget        *widget, 
                  gunichar          wc, 
@@ -597,7 +446,6 @@ active_char_set (GtkWidget        *widget,
   const gchar **temps;
   gint i;
 
-  set_active_block (charmap, wc);
   set_details (charmap, wc);
 
   gs = g_string_new (NULL);
@@ -632,7 +480,6 @@ active_char_set (GtkWidget        *widget,
   g_string_free (gs, TRUE);
 }
 
-
 /* this creates all the named text tags we'll be using in set_details */
 static void
 create_tags (GucharmapCharmap *charmap)
@@ -659,7 +506,6 @@ create_tags (GucharmapCharmap *charmap)
                               NULL);
 }
 
-
 static void
 follow_if_link (GucharmapCharmap *charmap,
                 GtkTextIter *iter)
@@ -673,8 +519,8 @@ follow_if_link (GucharmapCharmap *charmap,
       gunichar uc;
 
       /* subtract 1 because U+0000 is a character; see above where we set
-       * "link_character" */
-      uc = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (tag), "link_character")) - 1;
+       * "link-character" */
+      uc = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (tag), "link-character")) - 1;
 
       if (uc != (gunichar)(-1)) 
         {
@@ -688,7 +534,6 @@ follow_if_link (GucharmapCharmap *charmap,
   if (tags) 
     g_slist_free (tags);
 }
-
 
 static gboolean
 details_key_press_event (GtkWidget *text_view,
@@ -714,7 +559,6 @@ details_key_press_event (GtkWidget *text_view,
 
   return FALSE;
 }
-
 
 static gboolean
 details_event_after (GtkWidget *text_view,
@@ -752,7 +596,6 @@ details_event_after (GtkWidget *text_view,
   return FALSE;
 }
 
-
 static void
 set_cursor_if_appropriate (GucharmapCharmap *charmap,
                            gint x,
@@ -775,8 +618,8 @@ set_cursor_if_appropriate (GucharmapCharmap *charmap,
       gunichar uc;
 
       /* subtract 1 because U+0000 is a character; see above where we set
-       * "link_character" */
-      uc = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (tag), "link_character")) - 1;
+       * "link-character" */
+      uc = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (tag), "link-character")) - 1;
 
       if (uc != (gunichar)(-1)) 
         {
@@ -799,7 +642,6 @@ set_cursor_if_appropriate (GucharmapCharmap *charmap,
     g_slist_free (tags);
 }
 
-
 static gboolean
 details_motion_notify_event (GtkWidget *text_view,
                              GdkEventMotion *event,
@@ -816,7 +658,6 @@ details_motion_notify_event (GtkWidget *text_view,
   gdk_window_get_pointer (text_view->window, NULL, NULL, NULL);
   return FALSE;
 }
-
 
 static gboolean
 details_visibility_notify_event (GtkWidget *text_view,
@@ -836,11 +677,10 @@ details_visibility_notify_event (GtkWidget *text_view,
   return FALSE;
 }
 
-
 static GtkWidget *
 make_details_page (GucharmapCharmap *charmap)
 {
-  GtkWidget *scrolled_window;
+  GtkWidget *scrolled_window = NULL;
 
   scrolled_window = gtk_scrolled_window_new (NULL, NULL);
   gtk_widget_show (scrolled_window);
@@ -871,9 +711,9 @@ make_details_page (GucharmapCharmap *charmap)
   return scrolled_window;
 }
 
-
 static GtkWidget *
-make_chartable_pane (GucharmapCharmap *charmap)
+make_chartable_pane (GucharmapCharmap       *charmap,
+                     GucharmapCodepointList *codepoint_list)
 {
   GtkWidget *notebook;
 
@@ -881,6 +721,8 @@ make_chartable_pane (GucharmapCharmap *charmap)
   gtk_widget_show (notebook);
 
   charmap->chartable = GUCHARMAP_TABLE (gucharmap_table_new ());
+  gucharmap_table_set_codepoint_list (charmap->chartable, codepoint_list);
+
   gtk_widget_show (GTK_WIDGET (charmap->chartable));
   g_signal_connect (G_OBJECT (charmap->chartable), "set-active-char", 
                     G_CALLBACK (active_char_set), charmap);
@@ -897,26 +739,32 @@ make_chartable_pane (GucharmapCharmap *charmap)
   return notebook;
 }
 
+static void
+chapter_changed (GucharmapChapters *chapters,
+                 GucharmapCharmap  *charmap)
+{
+  gucharmap_table_set_codepoint_list (charmap->chartable, gucharmap_chapters_get_codepoint_list (chapters));
+}
 
-void
+static void
 gucharmap_charmap_init (GucharmapCharmap *charmap)
 {
-  AtkObject *accessib;
-  GtkWidget *block_selector;
+  GtkWidget *chapters;
+  GtkWidget *pane2;
 
   charmap->hand_cursor = gdk_cursor_new (GDK_HAND2);
   charmap->regular_cursor = gdk_cursor_new (GDK_XTERM);
   charmap->hovering_over_link = FALSE;
 
-  block_selector = make_unicode_block_selector (charmap);
-  accessib = gtk_widget_get_accessible (block_selector);
-  atk_object_set_name (accessib, _("List of Unicode Blocks"));
+  chapters = gucharmap_block_chapters_new ();
+  gtk_widget_show (chapters);
 
-  gtk_paned_pack1 (GTK_PANED (charmap), block_selector, FALSE, TRUE);
-  gtk_paned_pack2 (GTK_PANED (charmap), make_chartable_pane (charmap), 
-                   TRUE, TRUE);
+  g_signal_connect (G_OBJECT (chapters), "changed", G_CALLBACK (chapter_changed), charmap);
 
-  set_active_block (charmap, gucharmap_table_get_active_character (charmap->chartable));
+  pane2 = make_chartable_pane (charmap, gucharmap_chapters_get_codepoint_list (GUCHARMAP_CHAPTERS (chapters)));
+  gtk_paned_pack1 (GTK_PANED (charmap), chapters, FALSE, TRUE);
+  gtk_paned_pack2 (GTK_PANED (charmap), pane2, TRUE, TRUE);
+
   set_details (charmap, gucharmap_table_get_active_character (charmap->chartable));
 }
 
@@ -926,7 +774,6 @@ gucharmap_charmap_new (void)
 {
   return GTK_WIDGET (g_object_new (gucharmap_charmap_get_type (), NULL));
 }
-
 
 GType
 gucharmap_charmap_get_type (void)
@@ -965,14 +812,12 @@ gucharmap_charmap_set_font (GucharmapCharmap *charmap,
   gucharmap_table_set_font (charmap->chartable, font_name);
 }
 
-
 void
 gucharmap_charmap_identify_clipboard (GucharmapCharmap *charmap, 
                                       GtkClipboard *clipboard)
 {
   gucharmap_table_identify_clipboard (charmap->chartable, clipboard);
 }
-
 
 void
 gucharmap_charmap_go_to_character (GucharmapCharmap *charmap, 
@@ -981,7 +826,6 @@ gucharmap_charmap_go_to_character (GucharmapCharmap *charmap,
   if (uc >= 0 && uc <= UNICHAR_MAX)
     gucharmap_table_set_active_character (charmap->chartable, uc);
 }
-
 
 /* direction is +1 (forward) or -1 (backward) */
 GucharmapSearchResult
@@ -1027,20 +871,17 @@ gucharmap_charmap_search (GucharmapCharmap *charmap,
   return result;
 }
 
-
 void
 gucharmap_charmap_zoom_enable (GucharmapCharmap *charmap)
 {
   gucharmap_table_zoom_enable (charmap->chartable);
 }
 
-
 void
 gucharmap_charmap_zoom_disable (GucharmapCharmap *charmap)
 {
   gucharmap_table_zoom_disable (charmap->chartable);
 }
-
 
 GucharmapTable *
 gucharmap_charmap_get_chartable (GucharmapCharmap *charmap)

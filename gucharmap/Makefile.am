@@ -30,7 +30,6 @@ libgucharmap_la_LIBADD = @GTK_LIBS@ @GNOME_LIBS@
 
 lib_LTLIBRARIES = libgucharmap.la
 
-
 libgucharmap_la_SOURCES = gucharmap-marshal.c gucharmap-marshal.h \
                           gucharmap_intl.c gucharmap_intl.h \
                           chartable_accessible.c chartable_accessible.h \
@@ -42,12 +41,13 @@ libgucharmap_la_SOURCES = gucharmap-marshal.c gucharmap-marshal.h \
                           gucharmap-window.c gucharmap-window.h \
 			  gucharmap-codepoint-list.c gucharmap-codepoint-list.h \
 			  gucharmap-script-codepoint-list.c gucharmap-script-codepoint-list.h \
+			  gucharmap-chapters.c gucharmap-chapters.h \
+			  gucharmap-block-chapters.c gucharmap-block-chapters.h \
 			  unicode-blocks.h unicode-categories.h unicode-names.h \
 			  unicode-nameslist.h unicode-scripts.h unicode-unihan.h
 
 # this is different from the project version
 libgucharmap_la_LDFLAGS = -version-info 3:3:0
-
 
 libgucharmapincludedir = $(includedir)/gucharmap
 libgucharmapinclude_HEADERS = gucharmap.h \
@@ -82,7 +82,6 @@ im_gucharmap_la_LDFLAGS = -rpath $(moduledir) -avoid-version -module
 im_gucharmap_la_SOURCES = imgucharmap.c
 im_gucharmap_la_LIBADD = libgucharmap.la @GTK_LIBS@ @GNOME_LIBS@
 
-
 gucharmap-marshal.h: gucharmap_marshal.list
 	( @GLIB_GENMARSHAL@ --prefix=gucharmap_marshal gucharmap_marshal.list \
                             --header > gucharmap-marshal.tmp \
@@ -95,15 +94,12 @@ gucharmap-marshal.c: gucharmap-marshal.h
           && mv gucharmap-marshal.tmp gucharmap-marshal.c ) \
         || ( rm -f gucharmap-marshal.tmp && exit 1 )
 
-
 # don't do the symlink stuff if this is windows
 if OS_WIN32
 
 install-exec-hook:
         
-
 uninstall-local:
-
 
 else
 
@@ -123,7 +119,6 @@ uninstall-local:
 	&& rm -f "$(DESTDIR)$(bindir)/gnome-character-map"
 
 endif
-
 
 if BUILD_GTK_IMMODULES
 
