@@ -1676,9 +1676,9 @@ charmap_init (Charmap *charmap)
 
   /* top hbox has search and text_to_copy */
   hbox = gtk_hbox_new (FALSE, 18); /* space between the parts */
+  gtk_box_pack_start (GTK_BOX (hbox), make_search (charmap), TRUE, TRUE, 0);
   gtk_box_pack_start (GTK_BOX (hbox), make_text_to_copy (charmap), 
                       TRUE, TRUE, 0);
-  gtk_box_pack_end (GTK_BOX (hbox), make_search (charmap), TRUE, TRUE, 0);
   /* end top hbox */
 
   /* vbox for charmap and caption */
