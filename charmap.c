@@ -274,13 +274,15 @@ expose_char_for_redraw (Charmap *charmap, gunichar uc)
   g_assert (uc < charmap->page_first_char + CHARMAP_ROWS * CHARMAP_COLS);
 
   row = (uc - charmap->page_first_char) / CHARMAP_COLS;
-  col = uc % CHARMAP_ROWS;
+  col = uc % CHARMAP_COLS;
 
   w = calculate_square_dimension_x (charmap->font_metrics);
   h = calculate_square_dimension_y (charmap->font_metrics);
 
   x = col * (w + 1) + 1;
   y = row * (h + 1) + 1;
+
+  debug ("exposing (row, col) = (%d, %d)\n", row, col);
 
   gdk_draw_drawable (charmap->tabulus->window,
                      charmap->tabulus->style->fg_gc[GTK_STATE_NORMAL],
@@ -558,7 +560,8 @@ charmap_set_font (Charmap *charmap, gchar *font_name)
           calculate_tabulus_dimension_y (charmap->font_metrics));
 
   /* force pixmap to be redrawn on next expose event */
-  g_object_unref (charmap->tabulus_pixmap);
+  if (charmap->tabulus_pixmap != NULL)
+    g_object_unref (charmap->tabulus_pixmap);
   charmap->tabulus_pixmap = NULL;
 }
 
