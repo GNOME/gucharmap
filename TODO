@@ -20,18 +20,15 @@ $Id$
  - Accessibility stuff, see 
    http://developer.gnome.org/projects/gap/guide/gad/index.html
 
- - Magnify active character, as in windows charmap?
+ - Magnify active character, as in windows charmap? [DONE]
 
-
-For the next release after 0.2 (0.3? 1.0?):
-
- - Pull the search and text-to-copy out of the charmap widget.
+ - Pull the search and text-to-copy out of the charmap widget. [DONE]
 
  - Do all the text direction stuff, including connecting to that
    direction-changed signal. In a RTL locale, U+0000 should be in the
-   upper right.
+   upper right. [DONE??]
 
- - Replace bootstrap with autogen.sh.
+ - Replace bootstrap with autogen.sh. [DONE]
 
  - Write the shell script that automates generation of the source
    files that are based on uincode.org information. Make it part of
@@ -48,11 +45,8 @@ For the next release after 0.2 (0.3? 1.0?):
 
  - Use keynav from theme with GtkBindingSet.
 
-
-Other future things, perhaps to be in 0.3, perhaps not:
-
  - Think about sending signals and messages instead of exporting the
-   statusbar widget.
+   statusbar widget. [DONE]
 
  - Fix the mini_fontsel quirks and bugs.
 
@@ -67,3 +61,49 @@ Other future things, perhaps to be in 0.3, perhaps not:
  - Write or solicit some help. The F1 kind.
  
  - Unicode annotations and cross references (suggested by Markus Kuhn).
+
+ - MiniFontSelection needs some accessibility.
+ 
+ - Position the zoom window better; I have a plan, it's simple, but
+   not worth writing down.
+
+ - Edit menu.
+
+ - Font selection should be tabbable-to.
+
+ - Menu item(s) to enter and exit zoom mode.
+
+ - Get rid of the triangle in the character details; instead, put
+   items in the view menu, e.g. Extra Unicode Info, CJK Info, (Notes,
+   See Also, ... NamesList.txt stuff)
+
+ - Maybe make Find a dialog box?? Seems like a fine way to do it, but
+   there's nothing really wrong that I can think of with the current
+   way.
+
+ - Maybe make the size of the zoom font configurable?
+
+ - Tooltips on the scrollbar.
+
+ - Daniel doesn't like the case (upper) of the character names.
+
+ - Allow people to type code points in the search box?
+
+ - Split Expand/Collapse All into two menu items?
+
+ - Save state???
+
+ - Make all references to characters links-- click to jump to the
+   character.
+
+ - Web browser-like forward/back for characters visited? Need to be
+   smart about what to count as "visited".
+
+ - gunihan, another program in the gucharmap package, with the same
+   functionality as http://www.unicode.org/charts/unihansearch.html
+   (suggested by Sebastien).
+
+ - A gtk+ input module that uses the charmap.
+
+ - Separate the public and private parts of teh charmap struct(s) and
+   stuff.
