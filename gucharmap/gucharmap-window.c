@@ -143,9 +143,8 @@ jump_code_point (GtkWidget *widget, GucharmapWindow *guw)
 
 
 static void
-set_status (GucharmapWindow *guw, const gchar *message)
+status_message (GtkWidget *widget, const gchar *message, GucharmapWindow *guw)
 {
-  /* underflow is allowed */
   gtk_statusbar_pop (GTK_STATUSBAR (guw->status), 0); 
   if (message != NULL)
     gtk_statusbar_push (GTK_STATUSBAR (guw->status), 0, message);
@@ -153,9 +152,36 @@ set_status (GucharmapWindow *guw, const gchar *message)
 
 
 static void
-status_message (GtkWidget *widget, const gchar *message, GucharmapWindow *guw)
+information_dialog (GucharmapWindow *guw,
+                    const gchar *message)
 {
-  set_status (guw, message);
+  GtkWidget *dialog, *label, *hbox, *icon;
+
+  dialog = gtk_dialog_new_with_buttons (_("Information"), GTK_WINDOW (guw),
+                                        GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_NO_SEPARATOR,
+                                        GTK_STOCK_OK, GTK_RESPONSE_ACCEPT, 
+                                        NULL);
+
+  hbox = gtk_hbox_new (FALSE, 12);
+  gtk_widget_show (hbox);
+
+  gtk_container_set_border_width (GTK_CONTAINER (hbox), 6);
+
+  gtk_container_add (GTK_CONTAINER (GTK_DIALOG (dialog)->vbox), hbox);
+
+  icon = gtk_image_new_from_stock (GTK_STOCK_DIALOG_INFO, 
+                                   GTK_ICON_SIZE_DIALOG);
+  gtk_widget_show (icon);
+  gtk_box_pack_start (GTK_BOX (hbox), icon, FALSE, FALSE, 0);
+
+  label = gtk_label_new (message);
+  gtk_widget_show (label);
+  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+
+  g_signal_connect (dialog, "response", 
+                    G_CALLBACK (gtk_widget_destroy), NULL);
+  
+  gtk_widget_show (dialog);
 }
 
 
@@ -169,20 +195,16 @@ do_search (GucharmapWindow *guw,
 
   switch (gucharmap_charmap_search (guw->charmap, search_text, direction))
     {
-      case GUCHARMAP_NOT_FOUND:
-        set_status (guw, _("Not found."));
-        break;
-
       case GUCHARMAP_FOUND:
-        set_status (guw, _("Found."));
+      case GUCHARMAP_WRAPPED:
         break;
 
-      case GUCHARMAP_WRAPPED:
-        set_status (guw, _("Search wrapped."));
+      case GUCHARMAP_NOT_FOUND:
+        information_dialog (guw, _("Not found."));
         break;
 
       case GUCHARMAP_NOTHING_TO_SEARCH_FOR:
-        set_status (guw, _("Nothing to search for."));
+        information_dialog (guw, _("Nothing to search for."));
         break;
 
       default:
@@ -289,8 +311,6 @@ toggle_zoom_mode (GtkCheckMenuItem *mi, GucharmapWindow *guw)
       /* leave zoom mode by pressing escape (or by the normal means) */
       gtk_widget_add_accelerator (GTK_WIDGET (mi), "activate", 
                                   guw->accel_group, GDK_Escape, 0, 0);
-
-      set_status (guw, _("Zoom mode enabled. Press <Esc> to disable zoom."));
     }
   else
     {
@@ -299,8 +319,6 @@ toggle_zoom_mode (GtkCheckMenuItem *mi, GucharmapWindow *guw)
       /* but escape won't enter zoom mode, that would be too weird */
       gtk_widget_remove_accelerator (GTK_WIDGET (mi), guw->accel_group,
                                      GDK_Escape, 0);
-
-      set_status (guw, _("Zoom mode disabled."));
     }
 }
 
@@ -576,10 +594,7 @@ append_character_to_text_to_copy (GucharmapTable *chartable,
     return;
 
   if (! gucharmap_unichar_validate (uc))
-    {
-      set_status (guw, _("The selected code point is not a valid Unicode character."));
-      return;
-    }
+    return;
 
   n = g_unichar_to_utf8 (uc, ubuf);
   ubuf[n] = '\0';
@@ -590,8 +605,6 @@ append_character_to_text_to_copy (GucharmapTable *chartable,
   gtk_entry_set_text (GTK_ENTRY (guw->text_to_copy_entry), gs->str);
 
   g_string_free (gs, TRUE);
-
-  set_status (guw, NULL);
 }
 
 
@@ -604,8 +617,6 @@ edit_copy (GtkWidget *widget, GucharmapWindow *guw)
     gtk_editable_select_region (GTK_EDITABLE (guw->text_to_copy_entry), 0, -1);
 
   gtk_editable_copy_clipboard (GTK_EDITABLE (guw->text_to_copy_entry));
-
-  set_status (guw, _("Text copied to clipboard."));
 
   return TRUE;
 }
