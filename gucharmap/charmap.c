@@ -135,7 +135,7 @@ make_array_of_char_descs (gunichar *ucs)
   descs = g_malloc ((i+1) * sizeof (gchar *));
 
   for (i = 0;  ucs[i] != (gunichar)(-1);  i++)
-    descs[i] = g_strdup_printf ("%s [U+%4.4X %s]",                    
+    descs[i] = g_strdup_printf ("\342\200\252%s [U+%4.4X %s]",
                                 unichar_to_printable_utf8 (ucs[i]), 
                                 ucs[i], get_unicode_name (ucs[i]));
 
@@ -168,6 +168,25 @@ set_caption_value (GtkTreeStore *tree_store,
                            gtk_tree_row_reference_get_path (rowref));
   gtk_tree_store_set (tree_store, &iter, 
                       CAPTION_VALUE, value, -1);
+}
+
+
+/* wraps the string in <LTRE>%s<PDF> */
+static void
+set_caption_value_ltr (GtkTreeStore *tree_store, 
+                       GtkTreeRowReference *rowref, 
+                       const gchar *value)
+{
+  gchar *temp;
+
+  if (value == NULL)
+    set_caption_value (tree_store, rowref, NULL);
+  else
+    {
+      temp = g_strdup_printf ("\342\200\252%s\342\200\254", value);
+      set_caption_value (tree_store, rowref, temp);
+      g_free (temp);
+    }
 }
 
 
@@ -243,6 +262,38 @@ set_caption_values (GtkTreeStore *tree_store,
 
 
 static void
+set_caption_values_ltr (GtkTreeStore *tree_store, 
+                        GtkTreeRowReference *rowref, 
+                        const gchar **values)
+{
+  gchar **ltr_values;
+  gint i;
+
+  if (values == NULL)
+    {
+      set_caption_values (tree_store, rowref, NULL);
+      return;
+    }
+
+  /* count them and allocate the array */
+  for (i = 0;  values[i] != NULL;  i++);
+  ltr_values = g_malloc ((i+1) * sizeof (gchar *));
+
+  for (i = 0;  values[i] != NULL;  i++)
+    ltr_values[i] = g_strdup_printf ("\342\200\252%s\342\200\254", values[i]);
+  ltr_values[i] = NULL;
+
+  set_caption_values (tree_store, rowref, (const gchar **) ltr_values);
+
+  free_array_of_strings (ltr_values);
+}
+
+
+/* \342\200\216 is U+200E LEFT-TO-RIGHT MARK */
+/* \342\200\217 is U+200F RIGHT-TO-LEFT MARK */
+/* \342\200\252 is U+202A LEFT-TO-RIGHT EMBEDDING */
+/* \342\200\254 is U+202C POP DIRECTIONAL FORMATTING */
+static void
 set_caption (Charmap *charmap, gunichar uc)
 {
   guchar ubuf[7];
@@ -251,7 +302,7 @@ set_caption (Charmap *charmap, gunichar uc)
   /* codepoint and name */
   if (charmap->caption_rows[CHARMAP_CAPTION_CHARACTER])
     {
-      gchar *temp = g_strdup_printf ("U+%4.4X %s", uc, 
+      gchar *temp = g_strdup_printf ("\342\200\252U+%4.4X %s\342\200\254", uc, 
                                      get_unicode_name (uc));
       set_caption_value (charmap->caption_model, 
                          charmap->caption_rows[CHARMAP_CAPTION_CHARACTER],
@@ -273,7 +324,7 @@ set_caption (Charmap *charmap, gunichar uc)
       GString *gstemp = g_string_new (NULL);
       n = g_unichar_to_utf8 (uc, ubuf);
       for (i = 0;  i < n;  i++)
-        g_string_append_printf (gstemp, "0x%2.2X ", ubuf[i]);
+        g_string_append_printf (gstemp, "0x%2.2X\342\200\217 ", ubuf[i]);
 
       set_caption_value (charmap->caption_model, 
                          charmap->caption_rows[CHARMAP_CAPTION_UTF8],
@@ -285,11 +336,12 @@ set_caption (Charmap *charmap, gunichar uc)
   /* other representations (for C, html) */
   if (charmap->caption_rows[CHARMAP_CAPTION_OTHER_REPS])
     {
-      GString *gstemp = g_string_new (NULL);
+      GString *gstemp = g_string_new ("\342\200\252");
       n = g_unichar_to_utf8 (uc, ubuf);
       for (i = 0;  i < n;  i++)
         g_string_append_printf (gstemp, "\\%3.3o", ubuf[i]);
-      g_string_append_printf (gstemp, "\t\t&#%d;", uc);
+      g_string_append_printf (gstemp, "\342\200\254\t");
+      g_string_append_printf (gstemp, "\342\200\252&#%d;\342\200\254", uc);
 
       set_caption_value (charmap->caption_model, 
                          charmap->caption_rows[CHARMAP_CAPTION_OTHER_REPS],
@@ -307,12 +359,13 @@ set_caption (Charmap *charmap, gunichar uc)
 
       decomposition = unicode_canonical_decomposition (uc,
                                                        &result_len);
-      gstemp = g_string_new (NULL);
-      g_string_printf (gstemp, "%s [U+%4.4X]", 
-                       unichar_to_printable_utf8 (decomposition[0]), 
-                       decomposition[0]);
+      gstemp = g_string_new ("\342\200\252");
+      g_string_append_printf (gstemp, "%s [U+%4.4X]", 
+                              unichar_to_printable_utf8 (decomposition[0]), 
+                              decomposition[0]);
       for (i = 1;  i < result_len;  i++)
-        g_string_append_printf (gstemp, " + %s [U+%4.4X]", 
+        g_string_append_printf (gstemp, 
+                                " + %s [U+%4.4X]", 
                                 unichar_to_printable_utf8 (decomposition[i]), 
                                 decomposition[i]);
 
@@ -327,45 +380,45 @@ set_caption (Charmap *charmap, gunichar uc)
 #if ENABLE_UNIHAN
   /* kDefinition */
   if (charmap->caption_rows[CHARMAP_CAPTION_KDEFINITION])
-    set_caption_value (charmap->caption_model, 
-                       charmap->caption_rows[CHARMAP_CAPTION_KDEFINITION],
-                       get_unicode_kDefinition (uc));
+    set_caption_value_ltr (charmap->caption_model, 
+                           charmap->caption_rows[CHARMAP_CAPTION_KDEFINITION],
+                           get_unicode_kDefinition (uc));
 
   /* kMandarin */
   if (charmap->caption_rows[CHARMAP_CAPTION_KMANDARIN])
-    set_caption_value (charmap->caption_model, 
-                       charmap->caption_rows[CHARMAP_CAPTION_KMANDARIN],
-                       get_unicode_kMandarin (uc));
+    set_caption_value_ltr (charmap->caption_model, 
+                           charmap->caption_rows[CHARMAP_CAPTION_KMANDARIN],
+                           get_unicode_kMandarin (uc));
 
   /* kJapaneseOn */
   if (charmap->caption_rows[CHARMAP_CAPTION_KJAPANESEON])
-    set_caption_value (charmap->caption_model, 
-                       charmap->caption_rows[CHARMAP_CAPTION_KJAPANESEON],
-                       get_unicode_kJapaneseOn (uc));
+    set_caption_value_ltr (charmap->caption_model, 
+                           charmap->caption_rows[CHARMAP_CAPTION_KJAPANESEON],
+                           get_unicode_kJapaneseOn (uc));
 
   /* kJapaneseKun */
   if (charmap->caption_rows[CHARMAP_CAPTION_KJAPANESEKUN])
-    set_caption_value (charmap->caption_model, 
-                       charmap->caption_rows[CHARMAP_CAPTION_KJAPANESEKUN],
-                       get_unicode_kJapaneseKun (uc));
+    set_caption_value_ltr (charmap->caption_model, 
+                           charmap->caption_rows[CHARMAP_CAPTION_KJAPANESEKUN],
+                           get_unicode_kJapaneseKun (uc));
 
   /* kCantonese */
   if (charmap->caption_rows[CHARMAP_CAPTION_KCANTONESE])
-    set_caption_value (charmap->caption_model, 
-                       charmap->caption_rows[CHARMAP_CAPTION_KCANTONESE],
-                       get_unicode_kCantonese (uc));
+    set_caption_value_ltr (charmap->caption_model, 
+                           charmap->caption_rows[CHARMAP_CAPTION_KCANTONESE],
+                           get_unicode_kCantonese (uc));
 
   /* kTang */
   if (charmap->caption_rows[CHARMAP_CAPTION_KTANG])
-    set_caption_value (charmap->caption_model, 
-                       charmap->caption_rows[CHARMAP_CAPTION_KTANG],
-                       get_unicode_kTang (uc));
+    set_caption_value_ltr (charmap->caption_model, 
+                           charmap->caption_rows[CHARMAP_CAPTION_KTANG],
+                           get_unicode_kTang (uc));
 
   /* kKorean */
   if (charmap->caption_rows[CHARMAP_CAPTION_KKOREAN])
-    set_caption_value (charmap->caption_model, 
-                       charmap->caption_rows[CHARMAP_CAPTION_KKOREAN],
-                       get_unicode_kKorean (uc));
+    set_caption_value_ltr (charmap->caption_model, 
+                           charmap->caption_rows[CHARMAP_CAPTION_KKOREAN],
+                           get_unicode_kKorean (uc));
 #endif /* #if ENABLE_UNIHAN */
 
 
@@ -374,9 +427,9 @@ set_caption (Charmap *charmap, gunichar uc)
     {
       const gchar **stars = get_nameslist_stars (uc);
 
-      set_caption_values (charmap->caption_model, 
-                          charmap->caption_rows[CHARMAP_CAPTION_STARS],
-                          stars);
+      set_caption_values_ltr (charmap->caption_model, 
+                              charmap->caption_rows[CHARMAP_CAPTION_STARS],
+                              stars);
 
       if (stars)
         g_free (stars);
@@ -387,9 +440,9 @@ set_caption (Charmap *charmap, gunichar uc)
     {
       const gchar **pounds = get_nameslist_pounds (uc);
 
-      set_caption_values (charmap->caption_model, 
-                          charmap->caption_rows[CHARMAP_CAPTION_POUNDS],
-                          pounds);
+      set_caption_values_ltr (charmap->caption_model, 
+                              charmap->caption_rows[CHARMAP_CAPTION_POUNDS],
+                              pounds);
 
       if (pounds)
         g_free (pounds);
@@ -400,9 +453,9 @@ set_caption (Charmap *charmap, gunichar uc)
     {
       const gchar **equals = get_nameslist_equals (uc);
 
-      set_caption_values (charmap->caption_model, 
-                          charmap->caption_rows[CHARMAP_CAPTION_EQUALS],
-                          equals);
+      set_caption_values_ltr (charmap->caption_model, 
+                              charmap->caption_rows[CHARMAP_CAPTION_EQUALS],
+                              equals);
 
       if (equals)
         g_free (equals);
@@ -413,9 +466,9 @@ set_caption (Charmap *charmap, gunichar uc)
     {
       const gchar **colons = get_nameslist_colons (uc);
 
-      set_caption_values (charmap->caption_model, 
-                          charmap->caption_rows[CHARMAP_CAPTION_COLONS],
-                          colons);
+      set_caption_values_ltr (charmap->caption_model, 
+                              charmap->caption_rows[CHARMAP_CAPTION_COLONS],
+                              colons);
 
       if (colons)
         g_free (colons);
