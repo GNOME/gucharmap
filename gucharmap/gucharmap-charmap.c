@@ -88,16 +88,6 @@ set_active_block (GucharmapCharmap *charmap, gunichar uc)
   g_signal_handler_block (G_OBJECT (charmap->block_selection), 
                           charmap->block_selection_changed_handler_id);
 
-  if (gtk_tree_path_get_depth (tree_path) == 2)
-    {
-      parent = gtk_tree_path_copy (tree_path);
-      gtk_tree_path_up (parent);
-
-      if (! gtk_tree_view_row_expanded (
-              GTK_TREE_VIEW (charmap->block_selector_view), parent))
-        tree_path = parent;
-    }
-
   gtk_tree_view_set_cursor (GTK_TREE_VIEW (charmap->block_selector_view),
                             tree_path, NULL, FALSE);
 
@@ -136,11 +126,8 @@ make_unicode_block_selector (GucharmapCharmap *charmap)
 {
   GtkWidget *scrolled_window;
   GtkTreeIter iter;
-  GtkTreeIter child_iter;
   GtkCellRenderer *cell;
   GtkTreeViewColumn *column;
-  gchar buf[12];
-  gunichar uc;
   gint i, bi;
 
   scrolled_window = gtk_scrolled_window_new (NULL, NULL);
@@ -155,10 +142,9 @@ make_unicode_block_selector (GucharmapCharmap *charmap)
           G_TYPE_UINT, G_TYPE_POINTER);
 
   /* UNICHAR_MAX / PAGE_SIZE is U+XXXX blocks, gucharmap_count_blocks is named blocks */
-  charmap->block_index_size = (UNICHAR_MAX / PAGE_SIZE) + 2
-                              + gucharmap_count_blocks (UNICHAR_MAX);
+  charmap->block_index_size = gucharmap_count_blocks (UNICHAR_MAX);
   charmap->block_index = g_malloc (charmap->block_index_size 
-                                   * sizeof (BlockIndex));
+                                   * sizeof (GucharmapBlockIndex));
   bi = 0;
 
   for (i = 0;  gucharmap_unicode_blocks[i].start != (gunichar)(-1)
@@ -177,31 +163,6 @@ make_unicode_block_selector (GucharmapCharmap *charmap)
       charmap->block_index[bi].tree_path = gtk_tree_model_get_path (
               GTK_TREE_MODEL (charmap->block_selector_model), &iter);
       bi++;
-
-      if (gucharmap_unicode_blocks[i].start % PAGE_SIZE == 0)
-        uc = gucharmap_unicode_blocks[i].start;
-      else
-        uc = gucharmap_unicode_blocks[i].start + PAGE_SIZE 
-            - (gucharmap_unicode_blocks[i].start % PAGE_SIZE);
-
-      /* U+0000, U+0100, etc */
-      for ( ; uc >= gucharmap_unicode_blocks[i].start 
-              && uc <= gucharmap_unicode_blocks[i].end 
-              && uc <= UNICHAR_MAX;  
-           uc += PAGE_SIZE) 
-        {
-          g_snprintf (buf, sizeof (buf), "U+%4.4X", uc);
-	  gtk_tree_store_append (charmap->block_selector_model, 
-                                 &child_iter, &iter);
-	  gtk_tree_store_set (charmap->block_selector_model, &child_iter, 
-                              BLOCK_SELECTOR_LABEL, buf, 
-                              BLOCK_SELECTOR_UC_START, uc, 
-                              BLOCK_SELECTOR_UNICODE_BLOCK, NULL, -1);
-          charmap->block_index[bi].start = uc;
-          charmap->block_index[bi].tree_path = gtk_tree_model_get_path (
-                  GTK_TREE_MODEL (charmap->block_selector_model), &child_iter);
-          bi++;
-        }
     }
 
   /* terminate value that is bigger than the biggest character */
@@ -779,26 +740,6 @@ gucharmap_charmap_identify_clipboard (GucharmapCharmap *charmap,
                                       GtkClipboard *clipboard)
 {
   gucharmap_table_identify_clipboard (charmap->chartable, clipboard);
-}
-
-
-void 
-gucharmap_charmap_expand_block_selector (GucharmapCharmap *charmap)
-{
-  gtk_tree_view_expand_all (GTK_TREE_VIEW (charmap->block_selector_view));
-
-  /* have to send it an expose event or the change won't happen right away */
-  gtk_widget_queue_draw (gtk_widget_get_parent (charmap->block_selector_view));
-}
-
-
-void 
-gucharmap_charmap_collapse_block_selector (GucharmapCharmap *charmap)
-{
-  gtk_tree_view_collapse_all (GTK_TREE_VIEW (charmap->block_selector_view));
-
-  /* have to send it an expose event or the change won't happen right away */
-  gtk_widget_queue_draw (gtk_widget_get_parent (charmap->block_selector_view));
 }
 
 

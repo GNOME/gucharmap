@@ -329,18 +329,6 @@ font_smaller (GtkWidget *widget, GucharmapWindow *guw)
 }
 
 
-
-static void
-expand_collapse (GtkCheckMenuItem *mi, GucharmapWindow *guw)
-{
-  if (gtk_check_menu_item_get_active (mi))
-    gucharmap_charmap_expand_block_selector (guw->charmap);
-  else
-    gucharmap_charmap_collapse_block_selector (guw->charmap);
-
-}
-
-
 static void
 snap_cols_pow2 (GtkCheckMenuItem *mi, GucharmapWindow *guw)
 {
@@ -434,11 +422,6 @@ make_menu (GucharmapWindow *guw)
   view_menu = gtk_menu_new ();
   gtk_menu_set_accel_group (GTK_MENU (view_menu), guw->accel_group);
   gtk_menu_item_set_submenu (GTK_MENU_ITEM (view_menu_item), view_menu);
-
-  menu_item = gtk_check_menu_item_new_with_mnemonic (_("Expand/Collapse All"));
-  g_signal_connect (G_OBJECT (menu_item), "activate",
-                    G_CALLBACK (expand_collapse), guw);
-  gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), menu_item);
 
   /* separator */
   gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), gtk_menu_item_new ());

@@ -56,7 +56,7 @@ typedef struct
   gunichar start;
   GtkTreePath *tree_path;
 } 
-BlockIndex;
+GucharmapBlockIndex;
 
 
 struct _GucharmapCharmap
@@ -74,7 +74,7 @@ struct _GucharmapCharmap
   GtkWidget *block_selector_view;
   gulong block_selection_changed_handler_id; 
 
-  BlockIndex *block_index;
+  GucharmapBlockIndex *block_index;
   gint block_index_size;
 
   GtkWidget *details;  /* GtkTextView * */
