@@ -244,42 +244,6 @@ make_canonical_decomposition_string (GucharmapCharmap *charmap,
 }
 
 
-/* returns NULL or an array of strings; the strings and the array should be
- * freed */
-static gchar **
-get_nameslist_exes_strings (gunichar uc)
-{
-  gunichar *exes = gucharmap_get_nameslist_exes (uc);
-  gchar **estrings;
-  gint i;
-
-  if (exes == NULL)
-    return NULL;
-
-  for (i = 0;  exes[i] != (gunichar)(-1);  i++);
-  estrings = g_new (gchar *, i + 1);
-
-  for (i = 0;  exes[i] != (gunichar)(-1);  i++)
-    estrings[i] = g_strdup_printf ("U+%4.4X %s", exes[i], 
-                                   gucharmap_get_unicode_name (exes[i]));
-  estrings[i] = NULL;
-
-  return estrings;
-}
-
-
-static void
-free_string_array (gchar **strings)
-{
-  gint i;
-
-  for (i = 0;  strings[i];  i++)
-    g_free (strings[i]);
-
-  g_free (strings);
-}
-
-
 static void
 insert_vanilla_detail (GucharmapCharmap *charmap, 
                        GtkTextBuffer *buffer,
@@ -291,6 +255,76 @@ insert_vanilla_detail (GucharmapCharmap *charmap,
   gtk_text_buffer_insert (buffer, iter, " ", -1);
   gtk_text_buffer_insert_with_tags_by_name (buffer, iter, value, -1,
                                             "detail-value", NULL);
+  gtk_text_buffer_insert (buffer, iter, "\n", -1);
+}
+
+
+/* many thanks to Eric Warmenhoven, author of gtkimhtml.c in gaim; 
+ * ideas and code ripped from there */
+static gboolean
+tag_event (GtkTextTag *tag,
+           GtkWidget *widget,
+           GdkEvent *event,
+           GtkTextIter *iter,
+           GucharmapCharmap *charmap)
+{
+  gunichar uc = (gunichar) g_object_get_data (G_OBJECT (tag), "character");
+  g_print ("tag_event: uc = %04X\n", uc);
+
+  if (event->type == GDK_BUTTON_RELEASE 
+      && ((GdkEventButton *) event)->button == 1) 
+    {
+      GtkTextIter start, end;
+      /* we shouldn't open a URL if the user has selected something: */
+      gtk_text_buffer_get_selection_bounds (gtk_text_iter_get_buffer (iter),
+                                            &start, &end);
+
+      if (gtk_text_iter_get_offset (&start) == gtk_text_iter_get_offset (&end))
+        {
+          gucharmap_table_set_active_character (charmap->chartable, uc);
+          return TRUE;
+        }
+    }
+
+  return FALSE;
+}
+           
+
+static void
+insert_chocolate_detail_codepoints (GucharmapCharmap *charmap,
+                                    GtkTextBuffer *buffer,
+                                    GtkTextIter *iter,
+                                    const gchar *name,
+                                    const gunichar *ucs)
+{
+  gint i;
+  gchar *str;
+  GtkTextTag *tag;
+
+  gtk_text_buffer_insert (buffer, iter, name, -1);
+  gtk_text_buffer_insert (buffer, iter, "\n", -1);
+
+  for (i = 0;  ucs[i] != (gunichar)(-1);  i++)
+    {
+      gtk_text_buffer_insert (buffer, iter, " • ", -1);
+      str = g_strdup_printf ("U+%4.4X %s", ucs[i], 
+                             gucharmap_get_unicode_name (ucs[i]));
+
+      tag = gtk_text_buffer_create_tag (buffer, NULL, 
+                                        "foreground", "blue", 
+                                        "underline", PANGO_UNDERLINE_SINGLE, 
+                                        NULL);
+      g_object_set_data (G_OBJECT (tag), "character", (gpointer) ucs[i]);
+
+      g_signal_connect (G_OBJECT (tag), "event", 
+                        G_CALLBACK (tag_event), charmap);
+
+      gtk_text_buffer_insert_with_tags (buffer, iter, str, -1, tag, NULL);
+      gtk_text_buffer_insert (buffer, iter, "\n", -1);
+
+      g_free (str);
+    }
+
   gtk_text_buffer_insert (buffer, iter, "\n", -1);
 }
 
@@ -346,7 +380,7 @@ set_details (GucharmapCharmap *charmap,
   guchar ubuf[7];
   gint n, i;
   const gchar **csarr;
-  gchar **sarr;
+  gunichar *ucs;
 
   buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (charmap->details));
   gtk_text_buffer_set_text (buffer, "", -1);
@@ -437,14 +471,13 @@ set_details (GucharmapCharmap *charmap,
       g_free (csarr);
     }
 
-
   /* nameslist exes (see also) */
-  sarr = get_nameslist_exes_strings (uc);
-  if (sarr != NULL)
+  ucs = gucharmap_get_nameslist_exes (uc);
+  if (ucs != NULL)
     {
-      insert_chocolate_detail (charmap, buffer, &iter,
-                               _("See also:"), (const gchar **) sarr);
-      free_string_array (sarr);
+      insert_chocolate_detail_codepoints (charmap, buffer, &iter,
+                                          _("See also:"), ucs);
+      g_free (ucs);
     }
 
   /* nameslist pounds (approximate equivalents) */
@@ -570,6 +603,12 @@ create_tags (GucharmapCharmap *charmap)
                               "size", default_font_size * 5 / 4,
                               NULL);
   gtk_text_buffer_create_tag (buffer, "detail-value",
+                              NULL);
+  gtk_text_buffer_create_tag (buffer, "link",
+                              "foreground", "blue",
+                              "foreground-set", TRUE,
+                              "underline", PANGO_UNDERLINE_SINGLE,
+                              "underline-set", TRUE,
                               NULL);
 }
 
