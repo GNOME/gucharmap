@@ -162,7 +162,11 @@ go_to_character (GucharmapChapters *chapters,
         {
           selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (parent->tree_view));
           if (!gtk_tree_selection_iter_is_selected (selection, &iter))
-            gtk_tree_selection_select_iter (selection, &iter);
+            {
+              GtkTreePath *path = gtk_tree_model_get_path (parent->tree_model, &iter);
+              gtk_tree_view_set_cursor (GTK_TREE_VIEW (parent->tree_view), path, NULL, FALSE);
+              gtk_tree_path_free (path);
+            }
           return TRUE;
         }
     }
@@ -173,7 +177,11 @@ go_to_character (GucharmapChapters *chapters,
 
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (parent->tree_view));
   if (!gtk_tree_selection_iter_is_selected (selection, &iter))
-    gtk_tree_selection_select_iter (selection, &iter);
+    {
+      GtkTreePath *path = gtk_tree_model_get_path (parent->tree_model, &iter);
+      gtk_tree_view_set_cursor (GTK_TREE_VIEW (parent->tree_view), path, NULL, FALSE);
+      gtk_tree_path_free (path);
+    }
 
   return TRUE;
 }
