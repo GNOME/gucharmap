@@ -378,6 +378,11 @@ help_about (GtkWidget *widget, GucharmapWindow *guw)
           "Padraig O'Briain <Padraig.Obriain аt sun.com>",
           NULL 
         };
+      const gchar *documenters[] =
+	{
+	  "Chee Bin HOH <cbhoh аt gnome.org>",
+          NULL
+	};	  
       const gchar *translator_credits;
 
       translator_credits = _("translator_credits");
@@ -387,7 +392,7 @@ help_about (GtkWidget *widget, GucharmapWindow *guw)
       about = gnome_about_new (
               "gucharmap", VERSION, 
               "Copyright © 2003 Noah Levitt <nlevitt аt columbia.edu>",
-              _("Unicode Character Map"), authors, NULL, 
+              _("Unicode Character Map"), authors, documenters,
               translator_credits, guw->icon);
 
       /* set the widget pointer to NULL when the widget is destroyed */
