@@ -99,4 +99,4 @@ uninstall-local:
 endif
 
 
-EXTRA_DIST = gucharmap_marshal.list
+EXTRA_DIST = gucharmap_marshal.list gucharmaprc.rc

@@ -17,6 +17,9 @@
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  */
 
+#ifdef HAVE_CONFIG_H
+# include <config.h>
+#endif
 
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
@@ -612,11 +615,35 @@ main (gint argc, gchar **argv)
   tooltips = gtk_tooltips_new ();
 
   window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+  gtk_window_set_title (GTK_WINDOW (window), _("Unicode Character Map"));
   gtk_window_set_default_size (GTK_WINDOW (window), 
                                gdk_screen_width () * 1/2,
                                gdk_screen_height () * 9/16);
-  gtk_window_set_title (GTK_WINDOW (window), _("Unicode Character Map"));
+
+#ifdef G_PLATFORM_WIN32
+  {
+    gchar *package_root, *icon_path;
+
+    package_root = g_win32_get_package_installation_directory (NULL, NULL);
+    icon_path = g_build_filename (package_root, "share", 
+                                  "pixmaps", "gucharmap.png");
+    icon = gdk_pixbuf_new_from_file (icon_path, &error);
+    g_free (package_root);
+    g_free (icon_path);
+  }
+#else  /* #ifdef G_PLATFORM_WIN32 */
   icon = gdk_pixbuf_new_from_file (ICON_PATH, &error);
+#endif /* #ifdef G_PLATFORM_WIN32 */
+
+  if (error != NULL)
+    {
+      g_assert (icon == NULL);
+      g_warning ("Error loading icon: %s\n", error->message);
+      g_error_free (error);
+    }
+  else
+    gtk_window_set_icon (GTK_WINDOW (window), icon);
+
   if (error != NULL)
     {
       g_assert (icon == NULL);
