@@ -14,9 +14,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gucharmap 0.3\n"
-"POT-Creation-Date: 2003-04-12 14:32+0200\n"
-"PO-Revision-Date: 2003-04-12 14:32+0200\n"
+"Project-Id-Version: gucharmap 0.5\n"
+"POT-Creation-Date: 2003-04-17 17:59+0200\n"
+"PO-Revision-Date: 2003-04-17 17:59+0200\n"
 "Last-Translator: Christian Neumair <chris@gnome-de.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -547,28 +547,28 @@ msgstr "Details zum aktuellen Zeichen"
 msgid "List of Unicode Blocks"
 msgstr "Liste der Unicode-Blöcke"
 
-#: gucharmap/chartable.c:1272
+#: gucharmap/chartable.c:1236
 msgid "Clipboard is empty."
 msgstr "Die Zwischenablage ist leer."
 
-#: gucharmap/chartable.c:1274
+#: gucharmap/chartable.c:1238
 msgid "There is no selected text."
 msgstr "Sie haben keinen Text markiert."
 
-#: gucharmap/chartable.c:1282 gucharmap/chartable.c:1508
+#: gucharmap/chartable.c:1246 gucharmap/chartable.c:1473
 msgid "Unknown character, unable to identify."
 msgstr "Unbekanntes Zeichen, Identifikation nicht möglich."
 
-#: gucharmap/chartable.c:1286 gucharmap/chartable.c:1512
+#: gucharmap/chartable.c:1250 gucharmap/chartable.c:1477
 msgid "Character found."
 msgstr "Zeichen gefunden."
 
-#: gucharmap/chartable.c:1577
+#: gucharmap/chartable.c:1543
 msgid "Character Table"
 msgstr "Zeichentabelle"
 
 #. ID
-#: gucharmap/imgucharmap.c:116 gucharmap/gucharmap_window.c:600
+#: gucharmap/imgucharmap.c:196 gucharmap/gucharmap_window.c:600
 #: gucharmap/gucharmap_window.c:1156 gucharmap.desktop.in.h:1
 msgid "Unicode Character Map"
 msgstr "Unicode-Zeichentabelle"
@@ -766,16 +766,16 @@ msgid ""
 "Not a valid code point to jump to. Must be a hexadecimal number between 0 "
 "and %4.4X."
 msgstr ""
-"Kein gültiger Sprung-Code. Dieser muss eine hexadezimale Zahl zwischen 0 und "
+"Ungültiger Sprung-Code - dieser muss eine hexadezimale Zahl zwischen 0 und "
 "%4.4X sein."
 
 #: gucharmap/gucharmap_window.c:96
 msgid "Go to hex code point"
-msgstr "Zu Zeichen gehen"
+msgstr "Zu Hex-Sprung-Code gehen"
 
 #: gucharmap/gucharmap_window.c:116
-msgid "_Enter unicode code point"
-msgstr "_Geben Sie eine Unicode-Zeichenfolge ein"
+msgid "_Enter Unicode code point"
+msgstr "_Geben Sie einen Unicode-Sprung-Code ein"
 
 #: gucharmap/gucharmap_window.c:176
 msgid "Not found."
@@ -799,7 +799,7 @@ msgstr "Suchen"
 
 #: gucharmap/gucharmap_window.c:242
 msgid "_Search:"
-msgstr "S_uche:"
+msgstr "Such_begriff:"
 
 #: gucharmap/gucharmap_window.c:531
 msgid "Zoom mode enabled. Press <Esc> to disable zoom."
@@ -957,8 +957,8 @@ msgid "_Help"
 msgstr "_Hilfe"
 
 #: gucharmap/gucharmap_window.c:998
-msgid "The selected code point is not a valid unicode character."
-msgstr "Der gewäglten Zeichenfolge entspricht kein gültiges Unicode-Zeichen."
+msgid "The selected code point is not a valid Unicode character."
+msgstr "Dem angegebenen Sprung-Code entspricht kein gültiges Unicode-Zeichen."
 
 #: gucharmap/gucharmap_window.c:1026
 msgid "Text copied to clipboard."
