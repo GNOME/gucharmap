@@ -1357,14 +1357,11 @@ button_release_event (GtkWidget *widget,
 static GtkWidget *
 make_scrollbar (GucharmapTable *chartable)
 {
-  chartable->adjustment = GTK_ADJUSTMENT (
-          gtk_adjustment_new (1.0 * chartable->page_first_cell / chartable->cols, 0.0, 
-                              1.0 * gucharmap_codepoint_list_get_last_index (chartable->codepoint_list) / chartable->cols, 
-                              2.0, 3.0 * chartable->rows, chartable->rows));
+  /* we don't know the correct values for all these yet */
+  chartable->adjustment = GTK_ADJUSTMENT (gtk_adjustment_new (0, 0, 0, 0, 0, 0));
 
-  chartable->adjustment_changed_handler_id = g_signal_connect (
-          G_OBJECT (chartable->adjustment), "value-changed",
-          G_CALLBACK (scroll_chartable), chartable);
+  chartable->adjustment_changed_handler_id = g_signal_connect (G_OBJECT (chartable->adjustment), "value-changed",
+                                                               G_CALLBACK (scroll_chartable), chartable);
 
   return gtk_vscrollbar_new (GTK_ADJUSTMENT (chartable->adjustment));
 }
