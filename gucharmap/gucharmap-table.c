@@ -615,26 +615,97 @@ draw_character (GucharmapTable *chartable, gint row, gint col)
 }
 
 
+static const GucharmapUnicodeBlock *
+find_block (GucharmapTable *chartable, 
+            gunichar uc)
+{
+  static gunichar last = (gunichar)(-1);
+  static const GucharmapUnicodeBlock *last_found = NULL;
+  gint i;
+
+  if (uc == last)
+    return last_found;
+
+  for (i = 0; ; i++)
+    {
+      if (uc >= gucharmap_unicode_blocks[i].start 
+              && uc <= gucharmap_unicode_blocks[i].end)
+        {
+          last = uc;
+          last_found = gucharmap_unicode_blocks + i;
+          return last_found;
+        }
+      if (gucharmap_unicode_blocks[i].start == (gunichar)(-1))
+        {
+          last = uc;
+          last_found = NULL;
+          return last_found;
+        }
+    }
+}
+
+
+static gboolean
+character_in_active_block (GucharmapTable *chartable,
+                           gunichar uc)
+{
+  const GucharmapUnicodeBlock *block;
+
+  block = find_block (chartable, chartable->active_char);
+  if (block == NULL)
+    return FALSE;
+  else
+    return uc >= block->start && uc <= block->end;
+}
+
+
+static void
+tint (GdkColor *bg,
+      GdkColor *fg,
+      GdkColor *composited)
+{
+  static gint alpha = 15; /* 100 -> all fg, 0 -> all bg */
+
+  composited->red = (alpha * fg->red + (100 - alpha) * bg->red) / 100;
+  composited->green = (alpha * fg->green + (100 - alpha) * bg->green) / 100;
+  composited->blue = (alpha * fg->blue + (100 - alpha) * bg->blue) / 100;
+}
+
+
 static void
 draw_square_bg (GucharmapTable *chartable, gint row, gint col)
 {
   gint square_width, square_height; 
   gunichar uc;
   GdkGC *gc;
+  GdkColor untinted;
 
   uc = rowcol_to_unichar (chartable, row, col);
 
+  gc = gdk_gc_new (GDK_DRAWABLE (chartable->drawing_area->window));
+
   if (GTK_WIDGET_HAS_FOCUS (chartable->drawing_area) 
       && uc == chartable->active_char)
-    gc = chartable->drawing_area->style->base_gc[GTK_STATE_SELECTED];
+    untinted = chartable->drawing_area->style->base[GTK_STATE_SELECTED];
   else if (uc == chartable->active_char)
-    gc = chartable->drawing_area->style->base_gc[GTK_STATE_ACTIVE];
+    untinted = chartable->drawing_area->style->base[GTK_STATE_ACTIVE];
   else if (! gucharmap_unichar_validate (uc))
-    gc = chartable->drawing_area->style->fg_gc[GTK_STATE_INSENSITIVE];
+    untinted = chartable->drawing_area->style->fg[GTK_STATE_INSENSITIVE];
   else if (! gucharmap_unichar_isdefined (uc))
-    gc = chartable->drawing_area->style->bg_gc[GTK_STATE_INSENSITIVE];
+    untinted = chartable->drawing_area->style->bg[GTK_STATE_INSENSITIVE];
   else 
-    gc = chartable->drawing_area->style->base_gc[GTK_STATE_NORMAL];
+    untinted = chartable->drawing_area->style->base[GTK_STATE_NORMAL];
+
+  if (character_in_active_block (chartable, uc))
+    {
+      GdkColor tinted;
+      tint (&untinted, 
+            &chartable->drawing_area->style->base[GTK_STATE_SELECTED],
+            &tinted);
+      gdk_gc_set_rgb_fg_color (gc, &tinted);
+    }
+  else
+    gdk_gc_set_rgb_fg_color (gc, &untinted);
 
   square_width = gucharmap_table_column_width (chartable, col) - 1;
   square_height = gucharmap_table_row_height (chartable, row) - 1;
@@ -700,12 +771,7 @@ draw_chartable_from_scratch (GucharmapTable *chartable)
       {
         gunichar uc = rowcol_to_unichar (chartable, row, col);
 
-        /* don't need to draw the plain background, only the other ones */
-        if (uc == chartable->active_char
-            || ! gucharmap_unichar_validate (uc)
-            || ! gucharmap_unichar_isdefined (uc))
-          draw_square_bg (chartable, row, col);
-
+        draw_square_bg (chartable, row, col);
         draw_character (chartable, row, col);
       }
 }
@@ -879,7 +945,9 @@ gucharmap_table_redraw (GucharmapTable *chartable, gboolean move_zoom)
 
 #else /* #ifdef G_PLATFORM_WIN32 */
 
-  if (row_offset >= chartable->rows || row_offset <= -chartable->rows)
+  if (row_offset >= chartable->rows || row_offset <= -chartable->rows
+      || find_block (chartable, chartable->active_char)
+         != find_block (chartable, chartable->old_active_char))
     {
       draw_chartable_from_scratch (chartable);
       gtk_widget_queue_draw (chartable->drawing_area);
