@@ -80,7 +80,7 @@ unichar_to_printable_utf8 (gunichar uc)
    * the code positions U+D800 to U+DFFF (UTF-16 surrogates) as well as
    * U+FFFE and U+FFFF must not occur in normal UTF-8" */
   if ((g_unichar_isdefined (uc) && ! g_unichar_isgraph (uc)) 
-      || ! is_valid_character (uc) || uc == 0x2029)
+      || ! g_unichar_validate (uc) || uc == 0x2029)
     return "";
   
   /* Unicode Standard 3.2, section 2.6, "By convention, diacritical marks
