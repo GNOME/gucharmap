@@ -48,17 +48,40 @@ debug (const char *format, ...)
 #endif
 
 
+/* return value is read-only, should not be freed */
+static gchar *
+unichar_to_printable_utf8 (gunichar uc)
+{
+  static gchar buf[8];
+  gint x;
+  
+  if (g_unichar_type (uc) == G_UNICODE_COMBINING_MARK
+          || g_unichar_type (uc) == G_UNICODE_ENCLOSING_MARK
+          || g_unichar_type (uc) == G_UNICODE_NON_SPACING_MARK)
+    {
+      buf[0] = ' ';
+      x = g_unichar_to_utf8 (uc, buf+1);
+      buf[x+1] = '\0';
+      debug ("%s is a combining character\n", buf);
+    }
+  else
+    {
+      x = g_unichar_to_utf8 (uc, buf);
+      buf[x] = '\0';
+    }
+
+  return buf;
+}
+
+
 static void
 set_caption (Charmap *charmap)
 {
-  static gchar utf8_buf[8];
-  gchar *escaped_utf8_buf, *escaped_unicode_info, *caption_markup;
-  gint x;
+  gchar *escaped_utf8_buf, *escaped_unicode_info;
+  gchar *caption_markup;
 
-  x = g_unichar_to_utf8 (charmap->active_char, utf8_buf);
-  utf8_buf[x] = '\0';
-
-  escaped_utf8_buf = g_markup_escape_text (utf8_buf, -1);
+  escaped_utf8_buf = g_markup_escape_text (
+          unichar_to_printable_utf8 (charmap->active_char), -1);
   escaped_unicode_info = g_markup_escape_text (
           get_unicode_info (charmap->active_char), -1);
 
@@ -92,7 +115,6 @@ calculate_square_dimension (PangoFontMetrics *font_metrics)
 static void
 draw_tabulus_pixmap (Charmap *charmap)
 {
-  static gchar utf8_buf[8];
   gint x, y, row, col;
   gint square_width, square_height; 
   gint char_width, char_height;
@@ -157,8 +179,9 @@ draw_tabulus_pixmap (Charmap *charmap)
         if (! g_unichar_isgraph (uc))
           continue;
 
-        x = g_unichar_to_utf8 (uc, utf8_buf);
-        pango_layout_set_text (charmap->pango_layout, utf8_buf, x);
+        pango_layout_set_text (charmap->pango_layout, 
+                               unichar_to_printable_utf8 (uc), 
+                               -1);
 
         pango_layout_get_pixel_size (charmap->pango_layout, 
                                      &char_width, &char_height);

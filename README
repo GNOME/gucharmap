@@ -1,1 +1,1 @@
-gcc -Wall -ansi -g -I/usr/local/include/gtk-2.0 -I/usr/local/lib/gtk-2.0/include -I/usr/local/include/atk-1.0 -I/usr/local/include/pango-1.0 -I/usr/X11R6/include -I/usr/include/freetype2 -I/usr/local/include/glib-2.0 -I/usr/local/lib/glib-2.0/include charmap.c main.c -L/usr/local/lib -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgdk_pixbuf-2.0 -lm -lpangoxft-1.0 -lpangox-1.0 -lpango-1.0 -lgobject-2.0 -lgmodule-2.0 -ldl -lglib-2.0
+gcc -Wall -ansi -g `pkg-config --cflags gtk+-2.0`  unicode_info.c charmap.c main.c  `pkg-config --libs gtk+-2.0`
