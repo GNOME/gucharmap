@@ -685,30 +685,23 @@ fontsel_changed (GucharmapMiniFontSelection *fontsel, GucharmapWindow *guw)
 }
 
 static void
-append_character_to_text_to_copy (GucharmapTable *chartable, 
-                                  gunichar uc, 
+insert_character_in_text_to_copy (GucharmapTable  *chartable, 
+                                  gunichar         wc, 
                                   GucharmapWindow *guw)
 {
-  GString *gs;
   gchar ubuf[7];
-  gint n;
+  gint pos;
+
+  g_return_if_fail (gucharmap_unichar_validate (wc));
 
   /* don't do anything if text_to_copy is not active */
   if (! guw->text_to_copy_visible)
     return;
 
-  if (! gucharmap_unichar_validate (uc))
-    return;
-
-  n = g_unichar_to_utf8 (uc, ubuf);
-  ubuf[n] = '\0';
-
-  gs = g_string_new (gtk_entry_get_text (GTK_ENTRY (guw->text_to_copy_entry)));
-  g_string_append (gs, ubuf);
-
-  gtk_entry_set_text (GTK_ENTRY (guw->text_to_copy_entry), gs->str);
-
-  g_string_free (gs, TRUE);
+  ubuf[g_unichar_to_utf8 (wc, ubuf)] = '\0';
+  pos = gtk_editable_get_position (GTK_EDITABLE (guw->text_to_copy_entry));
+  gtk_editable_insert_text (GTK_EDITABLE (guw->text_to_copy_entry), ubuf, -1, &pos);
+  gtk_editable_set_position (GTK_EDITABLE (guw->text_to_copy_entry), pos);
 }
 
 static void
@@ -857,7 +850,7 @@ pack_stuff_in_window (GucharmapWindow *guw)
   gtk_box_pack_start (GTK_BOX (big_vbox), guw->text_to_copy_container, 
                       FALSE, FALSE, 0);
   g_signal_connect (guw->charmap->chartable, "activate", 
-                    G_CALLBACK (append_character_to_text_to_copy), guw);
+                    G_CALLBACK (insert_character_in_text_to_copy), guw);
 
   guw->status = gtk_statusbar_new ();
   gtk_box_pack_start (GTK_BOX (big_vbox), guw->status, FALSE, FALSE, 0);
