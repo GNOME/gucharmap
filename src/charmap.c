@@ -64,9 +64,14 @@ unichar_to_printable_utf8 (gunichar uc)
   static gchar buf[12];
   gint x;
 
-  /* XXX: workaround for pango 1.0.3 bug
+  /* XXX: 0x2029: workaround for pango 1.0.3 bug
    * http://bugzilla.gnome.org/show_bug.cgi?id=88824 */
-  if ((g_unichar_isdefined (uc) && ! g_unichar_isgraph (uc)) || uc == 0x2029)
+  /* http://www.cl.cam.ac.uk/~mgk25/unicode.html#utf-8 --"Also note that
+   * the code positions U+D800 to U+DFFF (UTF-16 surrogates) as well as
+   * U+FFFE and U+FFFF must not occur in normal UTF-8" */
+  if ((g_unichar_isdefined (uc) && ! g_unichar_isgraph (uc)) 
+      || uc == 0x2029 || uc == 0xfffe || uc == 0xffff
+      || (uc >= 0xd800 && uc <= 0xdfff))
     return "";
   
   /* Unicode Standard 3.2, section 2.6, "By convention, diacritical marks
@@ -412,6 +417,9 @@ draw_character (Charmap *charmap, gint row, gint col)
   GdkGC *gc;
 
   uc = charmap->page_first_char + row * charmap->cols + col;
+
+  if (uc < 0 || uc > UNICHAR_MAX)
+    return;
 
   if (GTK_WIDGET_HAS_FOCUS (charmap->chartable) && uc == charmap->active_char)
     gc = charmap->chartable->style->text_gc[GTK_STATE_SELECTED];
