@@ -28,7 +28,8 @@ extern "C" {
 
 
 #define CHARMAP(obj)         GTK_CHECK_CAST (obj, charmap_get_type (), Charmap)
-#define CHARMAP_CLASS(clazz) GTK_CHECK_CLASS_CAST (clazz, charmap_get_type (), CharmapClass)
+#define CHARMAP_CLASS(clazz) GTK_CHECK_CLASS_CAST (clazz, charmap_get_type (), \
+                                                   CharmapClass)
 #define IS_CHARMAP(obj)      GTK_CHECK_TYPE (obj, charmap_get_type ())
 
 #define CHARMAP_ROWS 16

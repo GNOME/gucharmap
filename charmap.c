@@ -22,12 +22,11 @@
 #include "charmap.h"
 #include "unicode_info.h"
 
+#if 0
 #include <stdarg.h>
 #include <time.h>
 #include <stdio.h>
 
-
-#if 0
 static void
 debug (const char *format, ...)
 {
@@ -56,8 +55,8 @@ unichar_to_printable_utf8 (gunichar uc)
   gint x;
   
   if (g_unichar_type (uc) == G_UNICODE_COMBINING_MARK
-          || g_unichar_type (uc) == G_UNICODE_ENCLOSING_MARK
-          || g_unichar_type (uc) == G_UNICODE_NON_SPACING_MARK)
+      || g_unichar_type (uc) == G_UNICODE_ENCLOSING_MARK
+      || g_unichar_type (uc) == G_UNICODE_NON_SPACING_MARK)
     {
       buf[0] = ' ';
       x = g_unichar_to_utf8 (uc, buf+1);
@@ -369,10 +368,11 @@ key_press_event (GtkWidget *widget,
       expose_char_for_redraw (charmap, old_active_char);
     }
 
-  return FALSE;
+  return TRUE;
 }
 
 
+/* for mouse clicks */
 static gunichar
 get_char_at (Charmap *charmap, gint x, gint y)
 {
