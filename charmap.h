@@ -71,6 +71,10 @@ struct _Charmap
   gunichar page_first_char;  /* the character in the upper left square */
   gunichar active_char;
 
+  /* helps us know what to redraw */
+  gunichar old_page_first_char;
+  gunichar old_active_char;
+
   Caption *caption;
 
   GtkWidget *text_to_copy;

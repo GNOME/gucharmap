@@ -61,6 +61,7 @@ unichar_to_printable_utf8 (gunichar uc)
 }
 
 
+
 static void
 set_caption (Charmap *charmap)
 {
@@ -283,12 +284,6 @@ draw_character_on_pixmap (Charmap *charmap, gint row, gint col)
                           (square_width+1) * col + 1, 
                           (square_height+1) * row + 1, 
                           square_width, square_height);
-
-      /* this is stuff that must be done when the active char
-       * changes, is this an ok place to do it? XXX */
-      set_caption (charmap);
-      set_active_block (charmap);
-      set_scrollbar_adjustment (charmap);
     }
   else 
     gc = charmap->tabulus->style->text_gc[GTK_STATE_NORMAL];
@@ -346,14 +341,13 @@ draw_borders_on_pixmap (Charmap *charmap)
 }
 
 
-/* redraws the backing store pixmap */
+/* draws the backing store pixmap */
 static void
 draw_tabulus_pixmap (Charmap *charmap)
 {
   gint row, col;
   gint width, height;
   gint square_width, square_height; 
-  GdkGC *gc;
 
   /* width and height of a square */
   square_width = calculate_square_dimension_x (charmap->font_metrics);
@@ -375,7 +369,6 @@ draw_tabulus_pixmap (Charmap *charmap)
     for (col = 0;  col < CHARMAP_COLS;  col++)
       {
         gunichar uc = charmap->page_first_char + row * CHARMAP_COLS + col;
-
 
         if (g_unichar_isgraph (uc))
           draw_character_on_pixmap (charmap, row, col);
@@ -440,6 +433,42 @@ expose_char_for_redraw (Charmap *charmap, gunichar uc)
 }
 
 
+/* Redraws whatever needs to be redrawn, in the character table and caption
+ * and everything, and exposes what needs to be exposed. */
+static void
+redraw (Charmap *charmap)
+{
+  gint row_offset = charmap->page_first_char - charmap->old_page_first_char;
+
+  if (row_offset >= CHARMAP_ROWS || row_offset <= -CHARMAP_ROWS)
+    {
+      /* redraw all the squares */
+      /* copy the whole thing to the drawable */
+    }
+  else if (row_offset != 0)
+    {
+      /* shift the pixmap up or down */
+      /* redraw the squares that weren't part of the shift */
+      /* redraw active and old_active if they haven't been already */
+      /* copy the whole thing to the drawable */
+    }
+
+  if (charmap->active_char != charmap->old_active_char)
+    {
+      set_caption (charmap);
+      set_active_block (charmap);
+      set_scrollbar_adjustment (charmap); /* XXX */
+
+      /* if they haven't already been redrawn */
+      /*   redraw old_active and new_active */
+      /*   copy old_active and new_active to the drawable */
+    }
+
+  charmap->old_page_first_char = charmap->page_first_char;
+  charmap->old_active_char = charmap->active_char;
+}
+
+
 static void
 append_character_to_text_to_copy (Charmap *charmap)
 {
@@ -454,116 +483,87 @@ append_character_to_text_to_copy (Charmap *charmap)
 
 
 static void
+set_active_character (Charmap *charmap, gunichar uc)
+{
+  g_return_if_fail (uc >= 0 && uc <= UNICHAR_MAX);
+
+  charmap->old_active_char = charmap->active_char;
+  charmap->old_page_first_char = charmap->page_first_char;
+
+  charmap->active_char = uc;
+  charmap->page_first_char = uc - (uc % CHARMAP_COLS);
+
+  g_printerr ("set_active_character: old active = %4.4X\n", charmap->old_active_char);
+  g_printerr ("set_active_character: new active = %4.4X\n", charmap->active_char);
+  g_printerr ("set_active_character: old page first = %4.4X\n", charmap->old_page_first_char);
+  g_printerr ("set_active_character: new page first = %4.4X\n", charmap->page_first_char);
+  g_printerr ("\n");
+}
+
+
+static void
 move_home (Charmap *charmap)
 {
-  charmap->active_char = 0x0000;
-  charmap->page_first_char = 0x0000;
+  set_active_character (charmap, 0x0000);
 }
 
 static void
 move_end (Charmap *charmap)
 {
-  charmap->active_char = UNICHAR_MAX;
-
-  /* make this row the last row shown */
-  charmap->page_first_char = 
-      (charmap->active_char - (charmap->active_char % CHARMAP_COLS)) 
-      - ((CHARMAP_ROWS - 1) * CHARMAP_COLS); 
+  set_active_character (charmap, UNICHAR_MAX);
 }
 
 static void
 move_up (Charmap *charmap)
 {
   if (charmap->active_char >= CHARMAP_COLS)
-    charmap->active_char -= CHARMAP_COLS;
+    set_active_character (charmap, charmap->active_char - CHARMAP_COLS);
   else
-    charmap->active_char = 0;
-
-  if (charmap->active_char < charmap->page_first_char
-      || charmap->active_char >= charmap->page_first_char 
-                                 + CHARMAP_ROWS * CHARMAP_COLS)
-    charmap->page_first_char = charmap->active_char - 
-                               (charmap->active_char % CHARMAP_COLS);
+    set_active_character (charmap, 0);
 }
 
 static void
 move_down (Charmap *charmap)
 {
   if (charmap->active_char <= UNICHAR_MAX - CHARMAP_COLS)
-    charmap->active_char += CHARMAP_COLS;
+    set_active_character (charmap, charmap->active_char + CHARMAP_COLS);
   else
-    charmap->active_char = UNICHAR_MAX;
-
-  if (charmap->active_char < charmap->page_first_char
-      || charmap->active_char >= charmap->page_first_char 
-                                 + CHARMAP_ROWS * CHARMAP_COLS)
-    {
-      /* make this row the last row shown */
-      charmap->page_first_char = 
-          (charmap->active_char - (charmap->active_char % CHARMAP_COLS)) 
-          - ((CHARMAP_ROWS - 1) * CHARMAP_COLS); 
-    }
+    set_active_character (charmap, UNICHAR_MAX);
 }
 
 static void
 move_left (Charmap *charmap)
 {
   if (charmap->active_char > 0)
-    charmap->active_char--;
-
-  if (charmap->active_char < charmap->page_first_char
-      || charmap->active_char >= charmap->page_first_char 
-                                 + CHARMAP_ROWS * CHARMAP_COLS)
-    charmap->page_first_char = charmap->active_char - 
-                               (charmap->active_char % CHARMAP_COLS);
+    set_active_character (charmap, charmap->active_char - 1);
 }
 
 static void
 move_right (Charmap *charmap)
 {
   if (charmap->active_char < UNICHAR_MAX)
-    charmap->active_char++;
+    set_active_character (charmap, charmap->active_char + 1);
 
-  if (charmap->active_char < charmap->page_first_char
-      || charmap->active_char >= charmap->page_first_char 
-                                 + CHARMAP_ROWS * CHARMAP_COLS)
-    {
-      /* make this row the last row shown */
-      charmap->page_first_char = 
-          (charmap->active_char - (charmap->active_char % CHARMAP_COLS)) 
-          - ((CHARMAP_ROWS - 1) * CHARMAP_COLS); 
-    }
 }
 
 static void
 move_page_up (Charmap *charmap)
 {
   if (charmap->active_char >= CHARMAP_COLS * CHARMAP_ROWS)
-    charmap->active_char -= CHARMAP_COLS * CHARMAP_ROWS;
+    set_active_character (charmap, 
+                          charmap->active_char - CHARMAP_COLS * CHARMAP_ROWS);
   else if (charmap->active_char > 0)
-    charmap->active_char = 0;
-
-  if (charmap->active_char < charmap->page_first_char)
-    {
-      if (charmap->page_first_char >= CHARMAP_ROWS * CHARMAP_COLS)
-        charmap->page_first_char -= CHARMAP_ROWS * CHARMAP_COLS;
-      else
-        charmap->page_first_char = charmap->active_char - 
-                                   (charmap->active_char % CHARMAP_COLS);
-    }
+    set_active_character (charmap, 0);
 }
 
 static void
 move_page_down (Charmap *charmap)
 {
   if (charmap->active_char < UNICHAR_MAX - CHARMAP_COLS * CHARMAP_ROWS)
-    charmap->active_char += CHARMAP_COLS * CHARMAP_ROWS;
+    set_active_character (charmap, 
+                          charmap->active_char + CHARMAP_COLS * CHARMAP_ROWS);
   else if (charmap->active_char < UNICHAR_MAX)
-    charmap->active_char = UNICHAR_MAX;
-
-  if (charmap->active_char >= charmap->page_first_char 
-                              + CHARMAP_ROWS * CHARMAP_COLS)
-    charmap->page_first_char += CHARMAP_ROWS * CHARMAP_COLS;
+    set_active_character (charmap, UNICHAR_MAX);
 }
 
 
@@ -621,21 +621,10 @@ key_press_event (GtkWidget *widget,
         return TRUE;
 
       default:
-        return TRUE; /* don't redraw */
+        return TRUE;
     }
 
-  if (charmap->page_first_char != old_page_first_char)
-    {
-      draw_tabulus_pixmap (charmap);
-      gtk_widget_queue_draw (GTK_WIDGET (charmap->tabulus));
-    }
-  else if (charmap->active_char != old_active_char)
-    {
-      draw_tabulus_pixmap (charmap);
-
-      expose_char_for_redraw (charmap, charmap->active_char);
-      expose_char_for_redraw (charmap, old_active_char);
-    }
+  redraw (charmap);
 
   return TRUE;
 }
@@ -675,6 +664,7 @@ copy_button_clicked (GtkWidget *widget,
 {
   Charmap *charmap = CHARMAP (callback_data);
   gtk_editable_select_region (GTK_EDITABLE (charmap->text_to_copy), 0, -1);
+  /* XXX: also copy to CLIPBOARD */
   return TRUE;
 }
 
@@ -699,7 +689,6 @@ button_press_event (GtkWidget *widget,
                     gpointer callback_data)
 {
   Charmap *charmap = CHARMAP (callback_data);
-  gunichar old_active_char;
 
   /* in case we lost keyboard focus and are clicking to get it back */
   gtk_widget_grab_focus (charmap->tabulus);
@@ -712,25 +701,12 @@ button_press_event (GtkWidget *widget,
   /* single-click */
   else if (event->button == 1 && event->type == GDK_BUTTON_PRESS) 
     {
-      old_active_char = charmap->active_char;
-      charmap->active_char = get_char_at (charmap, event->x, event->y);
-
-      if (charmap->active_char != old_active_char)
-        {
-          draw_tabulus_pixmap (charmap);
-        
-          expose_char_for_redraw (charmap, charmap->active_char);
-          expose_char_for_redraw (charmap, old_active_char);
-        }
+      set_active_character (charmap, 
+                            get_char_at (charmap, event->x, event->y));
+      redraw (charmap);
     }
 
   return TRUE;
-}
-
-
-void
-charmap_class_init (CharmapClass *clazz)
-{
 }
 
 
@@ -742,37 +718,15 @@ block_selection_changed (GtkTreeSelection *selection,
   GtkTreeIter iter;
   Charmap *charmap;
   gunichar uc_start;
-  gunichar old_active_char, old_page_first_char;
 
   charmap = CHARMAP (user_data);
-
-  old_active_char = charmap->active_char;
-  old_page_first_char = charmap->page_first_char;
 
   if (gtk_tree_selection_get_selected (selection, &model, &iter))
     {
       gtk_tree_model_get (model, &iter, 1, &uc_start, -1);
 
-      charmap->active_char = uc_start;
-
-      if (charmap->active_char < charmap->page_first_char
-          || charmap->active_char >= charmap->page_first_char 
-                                     + CHARMAP_ROWS * CHARMAP_COLS)
-          charmap->page_first_char = charmap->active_char - 
-                                     (charmap->active_char % CHARMAP_COLS);
-    }
-
-  if (charmap->page_first_char != old_page_first_char)
-    {
-      draw_tabulus_pixmap (charmap);
-      gtk_widget_queue_draw (GTK_WIDGET (charmap->tabulus));
-    }
-  else if (charmap->active_char != old_active_char)
-    {
-      draw_tabulus_pixmap (charmap);
-
-      expose_char_for_redraw (charmap, charmap->active_char);
-      expose_char_for_redraw (charmap, old_active_char);
+      set_active_character (charmap, uc_start);
+      redraw (charmap);
     }
 }
 
@@ -960,7 +914,7 @@ make_caption (Charmap *charmap)
 
 
 static void       
-clipboard_text_received (GtkClipboard *clipboard, 
+selection_text_received (GtkClipboard *clipboard, 
                          const gchar *text,
                          gpointer data)
 {
@@ -968,38 +922,18 @@ clipboard_text_received (GtkClipboard *clipboard,
   gunichar old_page_first_char, old_active_char;
   Charmap *charmap;
 
+  g_return_if_fail (text != NULL);
+
   charmap = CHARMAP (data);
   old_page_first_char = charmap->page_first_char;
   old_active_char = charmap->active_char;
 
   uc = g_utf8_get_char_validated (text, -1);
 
-  if (uc == (gunichar)(-2) || uc == (gunichar)(-1))
-    {
-      g_printerr ("clipboard_text_received: invalid utf-8 sequence\n");
-      return;
-    }
+  g_return_if_fail (uc != (gunichar)(-2) && uc != (gunichar)(-1));
 
-  charmap->active_char = uc;
-
-  if (charmap->active_char < charmap->page_first_char
-      || charmap->active_char >= charmap->page_first_char 
-                                 + CHARMAP_ROWS * CHARMAP_COLS)
-    charmap->page_first_char = charmap->active_char - 
-                               (charmap->active_char % CHARMAP_COLS);
-
-  if (charmap->page_first_char != old_page_first_char)
-    {
-      draw_tabulus_pixmap (charmap);
-      gtk_widget_queue_draw (GTK_WIDGET (charmap->tabulus));
-    }
-  else if (charmap->active_char != old_active_char)
-    {
-      draw_tabulus_pixmap (charmap);
-
-      expose_char_for_redraw (charmap, charmap->active_char);
-      expose_char_for_redraw (charmap, old_active_char);
-    }
+  set_active_character (charmap, uc);
+  redraw (charmap);
 }
 
 
@@ -1009,16 +943,16 @@ identify_clipboard (GtkWidget *widget,
 {
   GtkClipboard *clipboard;
   clipboard = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
-  gtk_clipboard_request_text (clipboard, clipboard_text_received, charmap);
+  gtk_clipboard_request_text (clipboard, selection_text_received, charmap);
 }
 
 static void
-identify_selection (GtkWidget *widget,
-                    Charmap *charmap)
+identify_primary (GtkWidget *widget,
+                  Charmap *charmap)
 {
   GtkClipboard *clipboard;
   clipboard = gtk_clipboard_get (GDK_SELECTION_PRIMARY);
-  gtk_clipboard_request_text (clipboard, clipboard_text_received, charmap);
+  gtk_clipboard_request_text (clipboard, selection_text_received, charmap);
 }
 
 
@@ -1033,7 +967,7 @@ make_paste_button (Charmap *charmap)
 
   button = gtk_button_new_with_label ("identify character from selection");
   g_signal_connect (G_OBJECT (button), "clicked",
-                    G_CALLBACK (identify_selection), charmap);
+                    G_CALLBACK (identify_primary), charmap);
   gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
 
   button = gtk_button_new_with_label ("identify character from clipboard");
@@ -1086,48 +1020,13 @@ make_text_to_copy (Charmap *charmap)
 }
 
 
+/* XXX: should adjust by row, not active character */
 static void
 scroll_charmap (GtkAdjustment *adjustment, Charmap *charmap)
 {
-  gunichar old_active_char, old_page_first_char;
-
-  /*
-  g_printerr ("adjustment value = %f\n", 
-              gtk_adjustment_get_value (adjustment));
-              */
-
-  old_active_char = charmap->active_char;
-  old_page_first_char = charmap->page_first_char;
-
-  charmap->active_char = (gunichar) gtk_adjustment_get_value (adjustment);
-  charmap->active_char -= charmap->active_char % CHARMAP_COLS;
-
-  if (charmap->active_char < charmap->page_first_char)
-    {
-      charmap->page_first_char = charmap->active_char - 
-                                 (charmap->active_char % CHARMAP_COLS);
-    }
-  else if (charmap->active_char >= charmap->page_first_char 
-                               + CHARMAP_ROWS * CHARMAP_COLS)
-    {
-      /* make this row the last row shown */
-      charmap->page_first_char = 
-          (charmap->active_char - (charmap->active_char % CHARMAP_COLS)) 
-          - ((CHARMAP_ROWS - 1) * CHARMAP_COLS); 
-    }
-
-  if (charmap->page_first_char != old_page_first_char)
-    {
-      draw_tabulus_pixmap (charmap);
-      gtk_widget_queue_draw (GTK_WIDGET (charmap->tabulus));
-    }
-  else if (charmap->active_char != old_active_char)
-    {
-      draw_tabulus_pixmap (charmap);
-
-      expose_char_for_redraw (charmap, charmap->active_char);
-      expose_char_for_redraw (charmap, old_active_char);
-    }
+  set_active_character (charmap, 
+                        (gunichar) gtk_adjustment_get_value (adjustment));
+  redraw (charmap);
 }
 
 
@@ -1144,6 +1043,12 @@ make_scrollbar (Charmap *charmap)
           G_CALLBACK (scroll_charmap), charmap);
 
   return gtk_vscrollbar_new (GTK_ADJUSTMENT (charmap->adjustment));
+}
+
+
+void
+charmap_class_init (CharmapClass *clazz)
+{
 }
 
 
