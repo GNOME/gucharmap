@@ -88,14 +88,14 @@ im_gucharmap_la_LDFLAGS = -rpath $(moduledir) -avoid-version -module
 im_gucharmap_la_SOURCES = imgucharmap.c
 im_gucharmap_la_LIBADD = libgucharmap.la @GTK_LIBS@ @GNOME_LIBS@
 
-gucharmap-marshal.h: gucharmap_marshal.list
-	( @GLIB_GENMARSHAL@ --prefix=gucharmap_marshal gucharmap_marshal.list \
+gucharmap-marshal.h: gucharmap-marshal.list
+	( @GLIB_GENMARSHAL@ --prefix=gucharmap_marshal gucharmap-marshal.list \
                             --header > gucharmap-marshal.tmp \
 	  && mv gucharmap-marshal.tmp gucharmap-marshal.h ) \
         || ( rm -f gucharmap-marshal.tmp && exit 1 )
 
 gucharmap-marshal.c: gucharmap-marshal.h
-	( @GLIB_GENMARSHAL@ --prefix=gucharmap_marshal gucharmap_marshal.list \
+	( @GLIB_GENMARSHAL@ --prefix=gucharmap_marshal gucharmap-marshal.list \
                             --body > gucharmap-marshal.tmp \
           && mv gucharmap-marshal.tmp gucharmap-marshal.c ) \
         || ( rm -f gucharmap-marshal.tmp && exit 1 )
@@ -150,5 +150,5 @@ endif
 
 CLEANFILES = gucharmap-marshal.c gucharmap-marshal.h
 
-EXTRA_DIST = gucharmap_marshal.list gucharmaprc.rc 
+EXTRA_DIST = gucharmap-marshal.list gucharmaprc.rc 
 
