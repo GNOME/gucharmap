@@ -1,62 +1,183 @@
 # $Id$
 # translation of gucharmap
+# copyright (c) 2002 Noah Levitt
 #
+# forgive my bad French
+#
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: gucharmap 0.1\n"
-"POT-Creation-Date: 2002-12-09 22:27-0500\n"
+"Project-Id-Version: gucharmap 0.2\n"
+"POT-Creation-Date: 2002-12-18 15:58-0500\n"
+"Last-Translator: Noah Levitt <nlevitt@users.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: src/charmap.c:110
+#, c-format
 msgid "Unicode code point: U+%4.4X (%u)"
 msgstr "Valeur unicode : U+%4.4X (%u)"
 
+#: src/charmap.c:111
+#, c-format
 msgid "Character: %s"
 msgstr "Caractère : %s"
 
+#: src/charmap.c:112
+#, c-format
 msgid "Unicode category: %s"
 msgstr "Catégorie unicode : %s"
 
+#: src/charmap.c:113
+#, c-format
 msgid "Unicode name: %s"
 msgstr "Nom unicode : %s"
 
+#: src/charmap.c:115
+#, c-format
 msgid "Ideograph definition: %s"
 msgstr "Définition d'idéographe : %s"
 
+#: src/charmap.c:116
+#, c-format
 msgid "Cantonese pronunciation: %s"
 msgstr "Prononciation cantonaise : %s"
 
+#: src/charmap.c:117
+#, c-format
 msgid "Mandarin pronunciation: %s"
 msgstr "Prononciation mandarine : %s"
 
+#: src/charmap.c:118
+#, c-format
 msgid "Tang pronunciation: %s"
 msgstr "Prononciation tang : %s"
 
+#: src/charmap.c:119
+#, c-format
 msgid "Korean pronunciation: %s"
 msgstr "Prononciation coréenne : %s"
 
+#: src/charmap.c:120
+#, c-format
 msgid "Japanese On pronunciation: %s"
 msgstr "Prononciation japonaise « on » : %s"
 
+#: src/charmap.c:121
+#, c-format
 msgid "Japanese Kun pronunciation: %s"
 msgstr "Prononciation japonaise « kun » : %s"
 
+#: src/charmap.c:153
+#, c-format
 msgid "Unicode canonical decomposition: %s [U+%4.4X]"
 msgstr "Décomposition canonique unicode : %s [U+%4.4X]"
 
+#: src/charmap.c:879
+msgid "Text copied to clipboard."
+msgstr "Texte copié au presse-papiers"
+
+#: src/charmap.c:891
+msgid "Text-to-copy entry box cleared."
+msgstr ""
+
+#: src/charmap.c:982
 msgid "Expand/collapse all"
 msgstr "Tout étendre/réduire"
 
+#: src/charmap.c:986
+msgid "Show/hide code point values in the block list."
+msgstr ""
+
+#: src/charmap.c:1243
+msgid "Clipboard is empty."
+msgstr "Le presse-papiers est vide."
+
+#: src/charmap.c:1245
+msgid "Selection is empty."
+msgstr "La sélection est vide."
+
+#: src/charmap.c:1257
+msgid "Unknown character, unable to identify."
+msgstr ""
+
+#: src/charmap.c:1261 src/charmap.c:1593
+msgid "Character found."
+msgstr "Le caractère a été trouvé."
+
+#: src/charmap.c:1299
 msgid "Identify character from selection"
 msgstr "Identifier le caractère de la sélection"
 
+#: src/charmap.c:1304
+msgid "Jump to the first character in the primary selection. (X11 only.)"
+msgstr ""
+
+#: src/charmap.c:1306
 msgid "Identify character from clipboard"
 msgstr "Identifier le caractère du presse-papiers"
 
+#: src/charmap.c:1312
+msgid "Jump to the first character in the clipboard."
+msgstr ""
+
+#: src/charmap.c:1335
 msgid "Text to copy:"
 msgstr "Texte à copier :"
 
+#: src/charmap.c:1349
+msgid "Copy to the clipboard."
+msgstr "Copier au presse-papiers."
+
+#: src/charmap.c:1550
+msgid "Nothing to search for."
+msgstr "Rien à rechercher."
+
+#: src/charmap.c:1559
+msgid "Search wrapped."
+msgstr ""
+
+#: src/charmap.c:1561
+msgid "Found."
+msgstr "Trouvé."
+
+#: src/charmap.c:1567
+msgid "Not found."
+msgstr "Non trouvé."
+
+#: src/charmap.c:1582
+msgid "Nothing to jump to."
+msgstr ""
+
+#: src/charmap.c:1601
+#, c-format
+msgid ""
+"Not a valid code point to jump to. Must be a hex number between 0 and %4.4X."
+msgstr ""
+
+#: src/charmap.c:1619
+msgid "Search:"
+msgstr "Rechercher :"
+
+#: src/charmap.c:1632
+msgid ""
+"Search for the next occurrence of this string in a character's Unicode name."
+msgstr ""
+
+#. jump
+#: src/charmap.c:1635
+msgid "Jump to:"
+msgstr ""
+
+#: src/charmap.c:1649
+msgid "Jump to this hexadecimal code point."
+msgstr ""
+
+#: src/main.c:90
 msgid "Unicode Character Map"
 msgstr "Mappage caractères unicode"
 
+#: src/main.c:115
+msgid "Show/hide font selection."
+msgstr ""
