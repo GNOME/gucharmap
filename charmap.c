@@ -18,6 +18,7 @@
  */
 
 #include <gtk/gtk.h>
+#include <gdk/gdkkeysyms.h>
 #include "charmap.h"
 
 #include <stdarg.h>
@@ -112,13 +113,6 @@ draw_tabulus_pixmap (Charmap *charmap)
     for (col = 0;  col < CHARMAP_COLS;  col++)
       {
         gunichar uc = charmap->page_first_char + row * CHARMAP_COLS + col;
-        if (! g_unichar_isgraph (uc))
-          continue;
-
-        x = g_unichar_to_utf8 (uc, utf8_buf);
-        pango_layout_set_text (charmap->pango_layout, utf8_buf, x);
-
-        pango_layout_get_pixel_size (charmap->pango_layout, &wid, &hei);
 
         if (uc == charmap->active_char)
           {
@@ -130,6 +124,14 @@ draw_tabulus_pixmap (Charmap *charmap)
           }
         else 
           gc = charmap->tabulus->style->text_gc[GTK_STATE_NORMAL];
+
+        if (! g_unichar_isgraph (uc))
+          continue;
+
+        x = g_unichar_to_utf8 (uc, utf8_buf);
+        pango_layout_set_text (charmap->pango_layout, utf8_buf, x);
+
+        pango_layout_get_pixel_size (charmap->pango_layout, &wid, &hei);
 
         gdk_draw_layout (charmap->tabulus_pixmap, gc,
                          w * col + (w - wid) / 2, 
@@ -165,6 +167,61 @@ expose_event (GtkWidget *widget,
 }
 
 
+static gint
+key_press_event (GtkWidget *widget, 
+                 GdkEventKey *event, 
+                 gpointer callback_data)
+{
+    Charmap *charmap;
+
+    debug ("key_press_event\n");
+
+    charmap = CHARMAP (callback_data);
+
+    switch (event->keyval)
+      {
+        case GDK_Home: case GDK_KP_Home:
+          charmap->active_char = 0x0000;
+          break;
+
+        case GDK_End: case GDK_KP_End:
+          charmap->active_char = UNICHAR_MAX;
+          break;
+
+        case GDK_Up: case GDK_KP_Up: case GDK_k:
+          if (charmap->active_char >= CHARMAP_COLS)
+            charmap->active_char -= CHARMAP_COLS;
+          break;
+
+        case GDK_Down: case GDK_KP_Down: case GDK_j:
+          if (charmap->active_char <= UNICHAR_MAX - CHARMAP_COLS)
+            charmap->active_char += CHARMAP_COLS;
+          break;
+
+        case GDK_Left: case GDK_KP_Left: case GDK_h:
+          if (charmap->active_char > 0)
+            charmap->active_char--;
+          break;
+
+        case GDK_Right: case GDK_KP_Right: case GDK_l:
+          if (charmap->active_char < UNICHAR_MAX)
+            charmap->active_char++;
+          break;
+      }
+
+    /* move to the page with this active char */
+    charmap->page_first_char 
+        = charmap->active_char - (charmap->active_char % 
+                                  (CHARMAP_COLS * CHARMAP_ROWS));
+
+    /* redraw pixmap*/
+    gdk_pixmap_unref (charmap->tabulus_pixmap);
+    draw_tabulus_pixmap (charmap);
+
+    return FALSE;
+}
+
+
 void
 charmap_class_init (CharmapClass *clazz)
 {
@@ -180,8 +237,17 @@ charmap_init (Charmap *charmap)
   debug ("charmap_init\n");
 
   charmap->tabulus = gtk_drawing_area_new ();
+
+  gtk_widget_add_events (charmap->tabulus, GDK_KEY_PRESS_MASK);
+
   g_signal_connect (G_OBJECT (charmap->tabulus), "expose_event",
                     G_CALLBACK (expose_event), charmap);
+  g_signal_connect (G_OBJECT (charmap->tabulus), "key_press_event",
+                    G_CALLBACK (key_press_event), charmap);
+
+  /* this is required to get key_press events (XXX: i think) */
+  GTK_WIDGET_SET_FLAGS (charmap->tabulus, GTK_CAN_FOCUS);
+  gtk_widget_grab_focus (charmap->tabulus);
 
   gtk_box_pack_start (GTK_BOX (charmap), charmap->tabulus, TRUE, TRUE, 0);
 
@@ -203,7 +269,7 @@ charmap_init (Charmap *charmap)
                                CHARMAP_ROWS * square_dimension);
 
   charmap->page_first_char = (gunichar) 0x0000;
-  charmap->active_char = (gunichar) 0x0041;
+  charmap->active_char = (gunichar) 0x0000;
 }
 
 

@@ -34,6 +34,9 @@ extern "C" {
 #define CHARMAP_ROWS 16
 #define CHARMAP_COLS 16
 
+/* largest legal unicode character */
+#define UNICHAR_MAX 0x0010ffff
+
 
 typedef struct _Charmap Charmap;
 typedef struct _CharmapClass CharmapClass;
