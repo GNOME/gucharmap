@@ -1308,9 +1308,9 @@ size_allocate (GtkWidget *widget, GtkAllocation *allocation, Charmap *charmap)
   old_rows = charmap->rows;
   old_cols = charmap->cols;
 
-  charmap->cols = allocation->width 
+  charmap->cols = (allocation->width - 1)
                   / (calculate_square_dimension_x (charmap->font_metrics) + 1);
-  charmap->rows = allocation->height
+  charmap->rows = (allocation->height - 1)
                   / (calculate_square_dimension_y (charmap->font_metrics) + 1);
 
   g_printerr ("size_allocate: %dx%d -> %dx%d\n", 
@@ -1326,10 +1326,6 @@ size_allocate (GtkWidget *widget, GtkAllocation *allocation, Charmap *charmap)
 
     g_printerr ("size_allocate: requesting %dx%d\n", x, y);
   }
-
-  gtk_widget_set_size_request (charmap->tabulus, 
-                               calculate_tabulus_dimension_x (charmap),
-                               calculate_tabulus_dimension_y (charmap));
 
   charmap->page_first_char = charmap->active_char 
                              - (charmap->active_char % charmap->cols);
