@@ -432,7 +432,10 @@ make_zoom_window (Chartable *chartable)
   if (chartable->zoom_window)
     return;
 
-  chartable->zoom_window = gtk_window_new (GTK_WINDOW_POPUP);
+  chartable->zoom_window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+  gtk_window_set_type_hint (GTK_WINDOW (chartable->zoom_window), 
+                            GDK_WINDOW_TYPE_HINT_UTILITY);
+  gtk_window_set_decorated (GTK_WINDOW (chartable->zoom_window), FALSE);
 
   gtk_window_set_screen (GTK_WINDOW (chartable->zoom_window),
                          gtk_widget_get_screen (chartable->drawing_area));
@@ -1202,7 +1205,7 @@ set_top_row (Chartable *chartable, gint row)
 
   /* character is still on the visible page */
   if (chartable->active_char - chartable->page_first_char 
-          < chartable->rows * chartable->cols)
+      < chartable->rows * chartable->cols)
     return;
 
   c = chartable->old_active_char % chartable->cols;
@@ -1317,9 +1320,10 @@ button_press_event (GtkWidget *widget,
       g_signal_emit (chartable, chartable_signals[ACTIVATE], 
                      0, chartable->active_char);
     }
-  /* single-click */ else if (event->button == 1 && event->type == GDK_BUTTON_PRESS) {
-      set_active_char (
-              chartable, get_char_at (chartable, event->x, event->y));
+  /* single-click */ 
+  else if (event->button == 1 && event->type == GDK_BUTTON_PRESS) 
+    {
+      set_active_char (chartable, get_char_at (chartable, event->x, event->y));
       chartable_redraw (chartable, TRUE);
     }
   else if (event->button == 2)
@@ -1371,7 +1375,7 @@ make_scrollbar (Chartable *chartable)
           2.0, 3.0 * chartable->rows, 0.0);
 
   chartable->adjustment_changed_handler_id = g_signal_connect (
-          G_OBJECT (chartable->adjustment), "value_changed",
+          G_OBJECT (chartable->adjustment), "value-changed",
           G_CALLBACK (scroll_chartable), chartable);
 
   return gtk_vscrollbar_new (GTK_ADJUSTMENT (chartable->adjustment));
@@ -1587,13 +1591,13 @@ chartable_init (Chartable *chartable)
                     G_CALLBACK (expose_event), chartable);
   g_signal_connect (G_OBJECT (chartable->drawing_area), "size-allocate",
                     G_CALLBACK (size_allocate), chartable);
-  g_signal_connect (G_OBJECT (chartable->drawing_area), "key_press_event",
+  g_signal_connect (G_OBJECT (chartable->drawing_area), "key-press-event",
                     G_CALLBACK (key_press_event), chartable);
-  g_signal_connect (G_OBJECT (chartable->drawing_area), "button_press_event",
+  g_signal_connect (G_OBJECT (chartable->drawing_area), "button-press-event",
                     G_CALLBACK (button_press_event), chartable);
-  g_signal_connect (G_OBJECT (chartable->drawing_area), "button_release_event",
+  g_signal_connect (G_OBJECT (chartable->drawing_area), "button-release-event",
                     G_CALLBACK (button_release_event), chartable);
-  g_signal_connect (G_OBJECT (chartable->drawing_area), "motion_notify_event",
+  g_signal_connect (G_OBJECT (chartable->drawing_area), "motion-notify-event",
                     G_CALLBACK (motion_notify_event), chartable);
   g_signal_connect (G_OBJECT (chartable->drawing_area), "focus-in-event",
                     G_CALLBACK (focus_in_or_out_event), chartable);
