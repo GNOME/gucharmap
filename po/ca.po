@@ -1,18 +1,18 @@
 # Traducció del mòdul gucharmap de Softcatalà
-# Copyright © 2003,2004 Free Software Foundation, Inc.
+# Copyright © 2003, 2004, 2005 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gucharmap package.
-# Xavier Conde Rueda <xaviconde@eresmas.com>, 2003,2004.
+# Xavier Conde Rueda <xaviconde@eresmas.com>, 2003, 2004, 2005
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-12-14 15:46+0100\n"
-"PO-Revision-Date: 2004-02-24 14:39+0100\n"
+"POT-Creation-Date: 2005-02-16 15:59+0100\n"
+"PO-Revision-Date: 2005-02-16 18:28+0100\n"
 "Last-Translator: Xavier Conde Rueda <xaviconde@eresmas.com>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: gucharmap.desktop.in.h:1 gucharmap/gucharmap-window.c:324
@@ -123,7 +123,7 @@ msgstr "Tipus de lletra"
 
 #: gucharmap/gucharmap-mini-fontsel.c:210
 msgid "Font Family"
-msgstr "Familia del tipus de lletra"
+msgstr "Família del tipus de lletra"
 
 #: gucharmap/gucharmap-mini-fontsel.c:230
 msgid "Font Size"
@@ -138,7 +138,7 @@ msgstr "Comú"
 
 #: gucharmap/gucharmap-table.c:1509
 msgid "Unknown character, unable to identify."
-msgstr "El caràcter és desconegut, no es pot identificar."
+msgstr "Es desconeix el caràcter, no es pot identificar."
 
 #: gucharmap/gucharmap-table.c:1511 gucharmap/gucharmap-search-dialog.c:465
 msgid "Not found."
@@ -243,15 +243,15 @@ msgstr "Marca, no és un espai"
 
 #: gucharmap/gucharmap-unicode-info.c:133
 msgid "Number, Decimal Digit"
-msgstr "Número, dígit decimal"
+msgstr "Nombre, dígit decimal"
 
 #: gucharmap/gucharmap-unicode-info.c:134
 msgid "Number, Letter"
-msgstr "Número, Lletra"
+msgstr "Nombre, Lletra"
 
 #: gucharmap/gucharmap-unicode-info.c:135
 msgid "Number, Other"
-msgstr "Número, altres"
+msgstr "Nombre, altres"
 
 #: gucharmap/gucharmap-unicode-info.c:136
 msgid "Punctuation, Connector"
@@ -345,6 +345,7 @@ msgstr "_Visualitza"
 msgid "_Search"
 msgstr "_Cerca"
 
+# FIXME: "_Vés a"?
 #: gucharmap/gucharmap-window.c:475
 msgid "_Go"
 msgstr "_Vés"
@@ -390,11 +391,11 @@ msgstr "Cerca l'an_terior"
 
 #: gucharmap/gucharmap-window.c:584
 msgid "_Next Character"
-msgstr "Següe_nt caràcter"
+msgstr "Caràcter següe_nt"
 
 #: gucharmap/gucharmap-window.c:590
 msgid "_Previous Character"
-msgstr "An_terior caràcter"
+msgstr "Caràcter an_terior"
 
 #. make the help menu
 #: gucharmap/gucharmap-window.c:631
@@ -403,7 +404,7 @@ msgstr "A_juda"
 
 #: gucharmap/gucharmap-window.c:714
 msgid "_Text to copy:"
-msgstr "_Text per copiar:"
+msgstr "_Text a copiar:"
 
 #: gucharmap/gucharmap-window.c:735
 msgid "Copy to the clipboard."
@@ -423,11 +424,11 @@ msgstr "Suplement llatí-1"
 
 #: gucharmap/unicode-blocks.h:20
 msgid "Latin Extended-A"
-msgstr "Llatí extès-A"
+msgstr "Llatí estès-A"
 
 #: gucharmap/unicode-blocks.h:21
 msgid "Latin Extended-B"
-msgstr "Llatí extès-B"
+msgstr "Llatí estès-B"
 
 #: gucharmap/unicode-blocks.h:22
 msgid "IPA Extensions"
@@ -503,11 +504,11 @@ msgstr "Telugu"
 
 #: gucharmap/unicode-blocks.h:40 gucharmap/unicode-scripts.h:37
 msgid "Kannada"
-msgstr "Kannada"
+msgstr "Kanarès"
 
 #: gucharmap/unicode-blocks.h:41 gucharmap/unicode-scripts.h:44
 msgid "Malayalam"
-msgstr "Malayalam"
+msgstr "Malaialam"
 
 #: gucharmap/unicode-blocks.h:42 gucharmap/unicode-scripts.h:53
 msgid "Sinhala"
@@ -519,7 +520,7 @@ msgstr "Thai"
 
 #: gucharmap/unicode-blocks.h:44 gucharmap/unicode-scripts.h:40
 msgid "Lao"
-msgstr "Lao"
+msgstr "Laosià"
 
 #: gucharmap/unicode-blocks.h:45 gucharmap/unicode-scripts.h:62
 msgid "Tibetan"
@@ -551,7 +552,7 @@ msgstr "Sil·làbics d'aborigens canadencs unificat"
 
 #: gucharmap/unicode-blocks.h:52 gucharmap/unicode-scripts.h:47
 msgid "Ogham"
-msgstr "Ogham"
+msgstr "Ogàmic"
 
 #: gucharmap/unicode-blocks.h:53 gucharmap/unicode-scripts.h:51
 msgid "Runic"
@@ -579,7 +580,7 @@ msgstr "Khmer"
 
 #: gucharmap/unicode-blocks.h:59 gucharmap/unicode-scripts.h:45
 msgid "Mongolian"
-msgstr "Mongolès"
+msgstr "Mongol"
 
 #: gucharmap/unicode-blocks.h:60 gucharmap/unicode-scripts.h:42
 msgid "Limbu"
@@ -599,11 +600,11 @@ msgstr "Extensions fonètiques"
 
 #: gucharmap/unicode-blocks.h:64
 msgid "Latin Extended Additional"
-msgstr "Addicional llatí extès"
+msgstr "Addicional llatí estès"
 
 #: gucharmap/unicode-blocks.h:65
 msgid "Greek Extended"
-msgstr "Grec extès"
+msgstr "Grec estès"
 
 #: gucharmap/unicode-blocks.h:66
 msgid "General Punctuation"
@@ -627,7 +628,7 @@ msgstr "Símbols semblants a lletres"
 
 #: gucharmap/unicode-blocks.h:71
 msgid "Number Forms"
-msgstr "Formes de número"
+msgstr "Formes de nombres"
 
 #: gucharmap/unicode-blocks.h:72
 msgid "Arrows"
@@ -739,7 +740,7 @@ msgstr "Kanbun"
 
 #: gucharmap/unicode-blocks.h:99
 msgid "Bopomofo Extended"
-msgstr "Bopomofo extès"
+msgstr "Bopomofo estès"
 
 #: gucharmap/unicode-blocks.h:100
 msgid "Katakana Phonetic Extensions"
@@ -747,7 +748,7 @@ msgstr "Extensions fonètiques katakana"
 
 #: gucharmap/unicode-blocks.h:101
 msgid "Enclosed CJK Letters and Months"
-msgstr "Messos i lletres CJK inclosos"
+msgstr "Mesos i lletres CJK inclosos"
 
 #: gucharmap/unicode-blocks.h:102
 msgid "CJK Compatibility"
@@ -803,7 +804,7 @@ msgstr "Formes de presentació alfabètica"
 
 #: gucharmap/unicode-blocks.h:115
 msgid "Arabic Presentation Forms-A"
-msgstr "Formes de presentació aràbica - A"
+msgstr "Formes de presentació aràbiga - A"
 
 #: gucharmap/unicode-blocks.h:116
 msgid "Variation Selectors"
@@ -833,6 +834,7 @@ msgstr "Formes d'amplada mitja i total"
 msgid "Specials"
 msgstr "Especials"
 
+# FIXME: "Conjunt de síl·labes B lineals" ? (veure següent entrada)
 #: gucharmap/unicode-blocks.h:123
 msgid "Linear B Syllabary"
 msgstr "Conjunt de síl·labes linial B"
@@ -843,8 +845,9 @@ msgstr "Ideogrames B lineals"
 
 #: gucharmap/unicode-blocks.h:125
 msgid "Aegean Numbers"
-msgstr "Números egeus"
+msgstr "Nombres egeus"
 
+# Nota: Cursiva és lletra inclinada escrita a mà, itàlica és lletra inclinada
 #: gucharmap/unicode-blocks.h:126 gucharmap/unicode-scripts.h:48
 msgid "Old Italic"
 msgstr "Cursiva antiga"
@@ -897,6 +900,7 @@ msgstr "Extensió B dels ideogrames unificats CJK"
 msgid "CJK Compatibility Ideographs Supplement"
 msgstr "Suplement dels ideogrames de compatibilitat CJK"
 
+# FIXME: "Marcadors"? (segons recull)
 #: gucharmap/unicode-blocks.h:139
 msgid "Tags"
 msgstr "Etiquetes"
@@ -919,7 +923,7 @@ msgstr "Braille"
 
 #: gucharmap/unicode-scripts.h:18
 msgid "Canadian Aboriginal"
-msgstr "Canadenc d'aborígen"
+msgstr "Canadenc aborígen"
 
 #: gucharmap/unicode-scripts.h:21
 msgid "Cypriot"
