@@ -53,13 +53,13 @@ unicode_data.cI:
 unicode_blocks.cI:
 	./generate_unicode_stuff.sh unicode_blocks.cI
 
-unicode_nameslist.cI:
+unicode_nameslist.cI: generate_nameslist
 	./generate_unicode_stuff.sh unicode_nameslist.cI
 
 
-noinst_PROGRAMS = generate_unihan
-
+noinst_PROGRAMS = generate_unihan generate_nameslist
 generate_unihan_SOURCES = generate_unihan.c
+generate_nameslist_SOURCES = generate_nameslist.c
 
 
 # this is different from the project version

@@ -643,3 +643,30 @@ get_nameslist_pounds (gunichar uc)
   return pounds;
 }
 
+
+/* returns newly allocated null-terminated array of gchar* */
+/* the items are const, but the array should be freed by the caller */
+const gchar **
+get_nameslist_colons (gunichar uc)
+{
+  const NamesList *nl;
+  const gchar **colons;
+  gint i, count;
+  
+  nl = get_nameslist (uc);
+
+  if (nl == NULL || nl->colons_index == -1)
+    return NULL;
+
+  /* count the number of colons */
+  for (i = 0;  names_list_colons[nl->colons_index + i].index == uc;  i++);
+  count = i;
+
+  colons = g_malloc ((count + 1) * sizeof (gchar *));
+  for (i = 0;  i < count;  i++)
+    colons[i] = names_list_colons[nl->colons_index + i].value;
+  colons[count] = NULL;
+
+  return colons;
+}
+

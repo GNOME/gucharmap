@@ -376,6 +376,29 @@ set_caption (Charmap *charmap)
         g_free (equals);
     }
 
+  /* nameslist colons */
+  if (charmap->caption_rows[CHARMAP_CAPTION_COLONS])
+    {
+      const gchar **colons = get_nameslist_colons (charmap->active_char);
+      const gchar *colon;
+
+      gtk_tree_model_get_iter (
+              model, &iter, 
+              gtk_tree_row_reference_get_path (
+                  charmap->caption_rows[CHARMAP_CAPTION_COLONS]));
+
+      if (colons)
+        colon = colons[0];
+      else
+        colon = NULL;
+
+      gtk_tree_store_set (charmap->caption_model, &iter, CAPTION_VALUE, 
+                          colon, -1);
+
+      if (colons)
+        g_free (colons);
+    }
+
   /* nameslist exes */
   if (charmap->caption_rows[CHARMAP_CAPTION_EXES])
     {
@@ -1789,6 +1812,7 @@ make_caption (Charmap *charmap)
   charmap_show_caption (charmap, CHARMAP_CAPTION_EQUALS);
   charmap_show_caption (charmap, CHARMAP_CAPTION_POUNDS);
   charmap_show_caption (charmap, CHARMAP_CAPTION_EXES);
+  charmap_show_caption (charmap, CHARMAP_CAPTION_COLONS);
 
   gtk_widget_show_all (scrolled_window);
   gtk_widget_hide (scrolled_window);
@@ -2154,6 +2178,7 @@ charmap_init (Charmap *charmap)
   caption_labels[CHARMAP_CAPTION_STARS] = _("Notes");
   caption_labels[CHARMAP_CAPTION_EXES] = _("See also");
   caption_labels[CHARMAP_CAPTION_POUNDS] = _("Approximate equivalents");
+  caption_labels[CHARMAP_CAPTION_COLONS] = _("Equivalents");
 
   charmap->rows = CHARMAP_MIN_ROWS;
   charmap->cols = CHARMAP_MIN_COLS;

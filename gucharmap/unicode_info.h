@@ -85,6 +85,7 @@ typedef struct
   gint stars_index;   /* this character */
   gint exes_index;    /* doesn't */
   gint pounds_index;  /* have any */
+  gint colons_index;
 }
 NamesList;
 
@@ -126,6 +127,7 @@ const gchar ** get_nameslist_stars (gunichar uc);
 const gchar ** get_nameslist_equals (gunichar uc);
 gunichar * get_nameslist_exes (gunichar uc);
 const gchar ** get_nameslist_pounds (gunichar uc);
+const gchar ** get_nameslist_colons (gunichar uc);
 
 G_END_DECLS
 

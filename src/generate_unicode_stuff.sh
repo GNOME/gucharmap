@@ -29,20 +29,26 @@
 # unicode_nameslist.cI
 #
 
-
+#
+# set absolute paths on these if you need to
+#
 UNZIP=`which unzip`
 WGET=`which wget`
 SED=`which sed`
 MV=`which mv`
+RM=`which rm`
 ECHO=`which echo`
 MKDIR=`which mkdir`
 AWK=`which awk`
 TOUCH=`which touch`
 EXPR=`which expr`
-TRUE=`which true`
+TRUE=" : "
 CAT=`which cat`
+BC=`which bc`
 ICONV=`which iconv`
+
 GENERATE_UNIHAN="./generate_unihan"
+GENERATE_NAMESLIST="./generate_nameslist"
 
 unidir="$PWD/unicode.org"
 srcdir="$PWD"
@@ -50,26 +56,36 @@ srcdir="$PWD"
 PATH=""
 
 
-# usage: tempfile=`maketemp`
-function maketemp()
+rand_seed=$$
+
+random()
 {
-    x=888888
+    rand_seed=`$ECHO s\(1 + $rand_seed\) | $BC -l | $SED 's/^.......//'`
+
+    $ECHO $rand_seed
+}
+
+
+# usage: tempfile=`maketemp`
+maketemp()
+{
+    x=10101
 
     while $TRUE 
     do
-	tmpnam="/tmp/gucharmap$x"
+        tmpnam="/tmp/gucharmap.temp.$x"
 
-	if [ -e $tmpnam ] ; then
-	    x=`$EXPR $x + 1`
-	    continue
-	fi
+        if [ -f $tmpnam -o -d $tmpnam ] ; then
+            x=`$EXPR $x + 1`
+            continue
+        fi
 
 	$TOUCH $tmpnam && $ECHO $tmpnam && break
     done
 }
 
 
-function download()
+download()
 {
     if [ "x$WGET" = "x" ] ; then
         $ECHO
@@ -91,7 +107,7 @@ function download()
 
 
 # reads from stdin, writes to stdout
-function write_unicode_data()
+write_unicode_data()
 {
     $ECHO "/* unicode_data.cI */"
     $ECHO "/* THIS IS A GENERATED FILE. */"
@@ -106,7 +122,7 @@ function write_unicode_data()
 }
 
 
-function write_blocks()
+write_blocks()
 {
     $ECHO "/* unicode_blocks.cI */"
     $ECHO "/* THIS IS A GENERATED FILE. */"
@@ -133,7 +149,7 @@ function write_blocks()
 }
 
 
-function write_nameslist()
+write_nameslist()
 {
     equal_i=0
     ex_i=0
@@ -195,7 +211,7 @@ function write_nameslist()
 	    # otherwise, it has to be a code point
 	    *) 
 
-	    if [ $equal0_i != "-1" ] || [ $ex0_i != "-1" ] || [ $star0_i != "-1" ] || [ $pound0_i != "-1" ]
+	    if [ $equal0_i != "-1" -o $ex0_i != "-1" -o $star0_i != "-1" -o $pound0_i != "-1" ]
 	    then
 		$ECHO "  { 0x$hex, $equal0_i, $star0_i, $ex0_i, $pound0_i }," >> $main_file
 	    fi
@@ -252,38 +268,44 @@ function write_nameslist()
     $CAT $main_file
     $ECHO "};"
     $ECHO 
+
+    $RM -f $equal_file
+    $RM -f $star_file
+    $RM -f $pound_file
+    $RM -f $ex_file
+    $RM -f $main_file
 }
 
 
-function backup()
+backup()
 {
-    if [ -e $1 ] ; then
+    if [ -f $1 ] ; then
         $ECHO "backing up existing $1 to $1.old"
         $MV -f $1 $1.old
     fi
 }
 
 
-function make_download_dir()
+make_download_dir()
 {
-    if [ -e $unidir ] && [ ! -d $unidir ] ; then
+    if [ -f $unidir ] ; then
         $ECHO "error: $unidir exists and is not a directory"
         exit 1
     fi
     
-    if [ ! -e $unidir ] ; then
+    if [ ! -d $unidir ] ; then
         $ECHO "creating directory $unidir"
         $MKDIR $unidir
     fi
 }
 
 
-function do_unicode_data()
+do_unicode_data()
 {
     make_download_dir
 
     f="$unidir/UnicodeData.txt"
-    if [ ! -e $f ] ; then
+    if [ ! -f $f ] ; then
         download "UnicodeData.txt"
     else
         $ECHO "already have $f, not downloading"
@@ -298,7 +320,7 @@ function do_unicode_data()
 }
 
 
-function do_unihan()
+do_unihan()
 {
     if [ "x$UNZIP" = "x" ] ; then
         $ECHO
@@ -310,7 +332,7 @@ function do_unihan()
     make_download_dir
 
     f="$unidir/Unihan.zip"
-    if [ ! -e $f ] ; then
+    if [ ! -f $f ] ; then
         download "Unihan.zip"
     else
         $ECHO "already have $f, not downloading"
@@ -325,12 +347,12 @@ function do_unihan()
 }
 
 
-function do_blocks()
+do_blocks()
 {
     make_download_dir
 
     f="$unidir/Blocks.txt"
-    if [ ! -e $f ] ; then
+    if [ ! -f $f ] ; then
         download "Blocks.txt"
     else
         $ECHO "already have $f, not downloading"
@@ -345,7 +367,7 @@ function do_blocks()
 }
 
 
-function do_nameslist()
+do_nameslist()
 {
     make_download_dir
 
@@ -361,7 +383,7 @@ function do_nameslist()
     fi
 
     f="$unidir/NamesList.txt"
-    if [ ! -e $f ] ; then
+    if [ ! -f $f ] ; then
         download "NamesList.txt"
     else
         $ECHO "already have $f, not downloading"
@@ -370,8 +392,8 @@ function do_nameslist()
     out="$srcdir/unicode_nameslist.cI"
     backup $out
 
-    $ECHO -n "generating $out... this might take a while..."
-    $ICONV -f "ISO8859-1" -t "UTF-8" $f | write_nameslist > $out
+    $ECHO -n "generating $out..."
+    $ICONV -f "ISO8859-1" -t "UTF-8" $f | $GENERATE_NAMESLIST > $out
     $ECHO " done"
 }
 
