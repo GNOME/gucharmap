@@ -201,7 +201,7 @@ make_menu ()
 
   /* make the menu bar */
   menubar = gtk_menu_bar_new ();
-  file_menu_item = gtk_menu_item_new_with_mnemonic (_("_File"));
+  file_menu_item = gtk_menu_item_new_with_mnemonic (_("Char_map"));
   gtk_menu_shell_append (GTK_MENU_SHELL (menubar), file_menu_item);
   view_menu_item = gtk_menu_item_new_with_mnemonic (_("_View"));
   gtk_menu_shell_append (GTK_MENU_SHELL (menubar), view_menu_item);
