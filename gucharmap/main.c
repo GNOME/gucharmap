@@ -382,15 +382,6 @@ edit_copy (GtkWidget *widget, gpointer callback_data)
 }
 
 
-static gint
-edit_clear (GtkWidget *widget, gpointer callback_data)
-{
-  gtk_entry_set_text (GTK_ENTRY (text_to_copy), "");
-  set_text_to_copy_status (_("Text-to-copy entry box cleared."));
-  return TRUE;
-}
-
-
 static void
 do_search (GtkWidget *widget, gpointer data)
 {
@@ -418,6 +409,17 @@ do_search (GtkWidget *widget, gpointer data)
       default:
         g_warning ("charmap_search returned an unexpected result; this should never happen");
     }
+}
+
+
+static void
+entry_changed_sensitize_button (GtkEditable *editable, GtkWidget *button)
+{
+  const gchar *entry_text;
+  
+  entry_text = gtk_entry_get_text (GTK_ENTRY (editable));
+
+  gtk_widget_set_sensitive (button, entry_text[0] != '\0');
 }
 
 
@@ -449,11 +451,15 @@ make_search ()
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), search_entry);
 
   button = gtk_button_new_from_stock (GTK_STOCK_FIND);
+  gtk_widget_set_sensitive (button, FALSE);
   g_signal_connect (G_OBJECT (button), "clicked",
                     G_CALLBACK (do_search), NULL);
   gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
 
   gtk_tooltips_set_tip (tooltips, button, _("Search for the next occurrence of this string in a character's Unicode name."), NULL);
+
+  g_signal_connect (G_OBJECT (search_entry), "changed",
+                    G_CALLBACK (entry_changed_sensitize_button), button);
 
   /* the status message label */
   hbox = gtk_hbox_new (FALSE, 0); 
@@ -497,9 +503,13 @@ make_text_to_copy ()
 
   /* the copy button */
   button = gtk_button_new_from_stock (GTK_STOCK_COPY); 
+  gtk_widget_set_sensitive (button, FALSE);
   g_signal_connect (G_OBJECT (button), "clicked",
                     G_CALLBACK (edit_copy), NULL);
   gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
+
+  g_signal_connect (G_OBJECT (text_to_copy), "changed",
+                    G_CALLBACK (entry_changed_sensitize_button), button);
 
   gtk_tooltips_set_tip (tooltips, button, _("Copy to the clipboard."), NULL);
 
@@ -570,8 +580,8 @@ static GtkWidget *
 make_menu (GtkWindow *window)
 {
   GtkWidget *menubar;
-  GtkWidget *file_menu, *edit_menu, *view_menu, *goto_menu;
-  GtkWidget *file_menu_item, *edit_menu_item, *view_menu_item;
+  GtkWidget *file_menu, *view_menu, *goto_menu;
+  GtkWidget *file_menu_item, *view_menu_item;
   GtkWidget *goto_menu_item;
   GtkWidget *menu_item;
   GtkAccelGroup *accel_group;
@@ -588,8 +598,6 @@ make_menu (GtkWindow *window)
   menubar = gtk_menu_bar_new ();
   file_menu_item = gtk_menu_item_new_with_mnemonic (_("Char_map"));
   gtk_menu_shell_append (GTK_MENU_SHELL (menubar), file_menu_item);
-  edit_menu_item = gtk_menu_item_new_with_mnemonic (_("_Edit"));
-  gtk_menu_shell_append (GTK_MENU_SHELL (menubar), edit_menu_item);
   view_menu_item = gtk_menu_item_new_with_mnemonic (_("_View"));
   gtk_menu_shell_append (GTK_MENU_SHELL (menubar), view_menu_item);
   goto_menu_item = gtk_menu_item_new_with_mnemonic (_("_Go To"));
@@ -605,27 +613,6 @@ make_menu (GtkWindow *window)
                     G_CALLBACK (gtk_main_quit), NULL);
   gtk_menu_shell_append (GTK_MENU_SHELL (file_menu), menu_item);
   /* finished making the file menu */
-
-  /* make the edit menu */
-  edit_menu = gtk_menu_new ();
-  gtk_menu_set_accel_group (GTK_MENU (edit_menu), accel_group);
-  gtk_menu_item_set_submenu (GTK_MENU_ITEM (edit_menu_item), edit_menu);
-
-  /* edit/copy */
-  menu_item = gtk_image_menu_item_new_from_stock (GTK_STOCK_COPY, accel_group);
-  gtk_menu_shell_append (GTK_MENU_SHELL (edit_menu), menu_item);
-  g_signal_connect (G_OBJECT (menu_item), "activate",
-                    G_CALLBACK (edit_copy), NULL);
-
-  /* separator */
-  gtk_menu_shell_append (GTK_MENU_SHELL (edit_menu), gtk_menu_item_new ());
-
-  /* edit/clear */
-  menu_item = gtk_image_menu_item_new_from_stock (GTK_STOCK_CLEAR, accel_group);
-  gtk_menu_shell_append (GTK_MENU_SHELL (edit_menu), menu_item);
-  g_signal_connect (G_OBJECT (menu_item), "activate",
-                    G_CALLBACK (edit_clear), NULL);
-  /* finished making the edit menu */
 
   /* make the view menu */
   view_menu = gtk_menu_new ();
