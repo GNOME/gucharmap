@@ -125,7 +125,7 @@ main (gint argc, gchar **argv)
   new_font = pango_font_description_to_string (font_desc);
   /* this sends the changed signal: */
   gtk_font_selection_set_font_name (GTK_FONT_SELECTION (fontsel), new_font);
-  /* g_object_unref (font_desc); XXX: causes seg fault */
+  pango_font_description_free (font_desc);
   g_free (orig_font);
   g_free (new_font);
 

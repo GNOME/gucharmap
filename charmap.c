@@ -1400,8 +1400,7 @@ charmap_init (Charmap *charmap)
   gtk_box_pack_start (GTK_BOX (hbox), vbox, FALSE, FALSE, 0);
 
 
-  charmap->font_name = pango_font_description_to_string (
-          charmap->tabulus->style->font_desc);
+  charmap->font_name = NULL;
 
   charmap->font_metrics = pango_context_get_metrics (
           gtk_widget_get_pango_context (charmap->tabulus),
@@ -1484,11 +1483,13 @@ charmap_set_font (Charmap *charmap, gchar *font_name)
     {
       g_free (charmap->font_name);
       charmap->font_name = NULL;
+      charmap->font_name = g_strdup (font_name);
     }
-  
-  charmap->font_name = font_name;
-  font_desc = pango_font_description_from_string (font_name);
 
+  font_desc = pango_font_description_from_string (charmap->font_name);
+
+  /* ensure style so that this has an effect even before it's realized */
+  gtk_widget_ensure_style (charmap->tabulus);
   gtk_widget_modify_font (charmap->tabulus, font_desc);
 
   charmap->font_metrics = pango_context_get_metrics (
@@ -1503,10 +1504,7 @@ charmap_set_font (Charmap *charmap, gchar *font_name)
   pango_layout_set_font_description (charmap->pango_layout,
                                      charmap->tabulus->style->font_desc);
 
-  gtk_widget_set_size_request (
-          charmap->tabulus, 
-          calculate_tabulus_dimension_x (charmap),
-          calculate_tabulus_dimension_y (charmap));
+  pango_font_description_free (font_desc);
 
   /* force pixmap to be redrawn on next expose event */
   if (charmap->tabulus_pixmap != NULL)
