@@ -156,13 +156,11 @@ set_caption (Charmap *charmap)
 
 
 /* selects the active block in the block selector tree view */
-/* XXX: this is inefficient */
 static void
 set_active_block (Charmap *charmap)
 {
   gboolean valid;
-  GtkTreeIter iter1;
-  GtkTreeIter iter2;
+  GtkTreePath *tree_path;
   gunichar uc_start;
 
   valid = gtk_tree_model_get_iter_first (
@@ -174,14 +172,22 @@ set_active_block (Charmap *charmap)
 
       if (uc_start > charmap->active_char)
         {
+          /* don't send the "changed" signal on this selection change */
           g_signal_handler_block (G_OBJECT (charmap->block_selection), 
                                   charmap->block_selection_changed_handler_id);
-
           gtk_tree_selection_select_iter (charmap->block_selection, &iter1);
-
           g_signal_handler_unblock (
                   G_OBJECT (charmap->block_selection),
                   charmap->block_selection_changed_handler_id);
+
+          tree_path = gtk_tree_model_get_path (
+                  GTK_TREE_MODEL (charmap->block_selector_model), &iter2);
+
+          gtk_tree_view_scroll_to_cell (
+                  GTK_TREE_VIEW (charmap->block_selector_view),
+                  tree_path, NULL, FALSE, 0, 0);
+
+          gtk_tree_path_free (tree_path);
 
           return;
         }
@@ -734,7 +740,6 @@ make_unicode_block_selector (Charmap *charmap)
   GtkWidget *scrolled_window;
   GtkTreeIter iter;
   GtkTreeIter child_iter;
-  GtkWidget *tree_view;
   GtkCellRenderer *cell;
   GtkTreeViewColumn *column;
   gchar buf[12];
@@ -770,17 +775,18 @@ make_unicode_block_selector (Charmap *charmap)
         }
     }
 
-  tree_view = gtk_tree_view_new_with_model (
+  charmap->block_selector_view = gtk_tree_view_new_with_model (
           GTK_TREE_MODEL (charmap->block_selector_model));
   charmap->block_selection = gtk_tree_view_get_selection (
-          GTK_TREE_VIEW (tree_view));
-  gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (tree_view), FALSE);
+          GTK_TREE_VIEW (charmap->block_selector_view));
+  gtk_tree_view_set_headers_visible (
+          GTK_TREE_VIEW (charmap->block_selector_view), FALSE);
 
   cell = gtk_cell_renderer_text_new ();
   column = gtk_tree_view_column_new_with_attributes (NULL, cell, 
                                                      "text", 0, NULL);
 
-  gtk_tree_view_append_column (GTK_TREE_VIEW (tree_view),
+  gtk_tree_view_append_column (GTK_TREE_VIEW (charmap->block_selector_view),
                                GTK_TREE_VIEW_COLUMN (column));
 
   gtk_tree_selection_set_mode (charmap->block_selection, GTK_SELECTION_BROWSE);
@@ -788,7 +794,8 @@ make_unicode_block_selector (Charmap *charmap)
           G_OBJECT (charmap->block_selection), "changed", 
           G_CALLBACK (block_selection_changed), charmap);
 
-  gtk_container_add (GTK_CONTAINER (scrolled_window), tree_view);
+  gtk_container_add (GTK_CONTAINER (scrolled_window), 
+                     charmap->block_selector_view);
 
   return scrolled_window;
 }
