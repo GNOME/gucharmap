@@ -17,6 +17,10 @@
 ## 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
 ##
 
+distuninstallcheck_listfiles = find . -type -f -print | grep -v scrollkeeper
+
+distcleancheck_listfiles = find . -type -f print | grep -v 'omf\.out'
+
 AUTOMAKE_OPTIONS = foreign
 
 desktopdir 	 = $(datadir)/applications
@@ -28,8 +32,13 @@ SUBDIRS = po pixmaps gucharmap help
 
 EXTRA_DIST = gtkrc.win32 gucharmap.nsi.in gucharmap.pc.in \
              intltool-extract.in intltool-merge.in intltool-update.in \
-             gucharmap.desktop.in gucharmap.spec.in
+             gucharmap.desktop.in gucharmap.spec.in $(desktop_DATA)
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gucharmap.pc
+
+DISTCLEANFILES = \
+	intltool-update \
+	intltool-extract \
+	intltool-merge
 
