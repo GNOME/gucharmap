@@ -18,9 +18,9 @@ dnl 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
 dnl
 
 AC_PREREQ([2.50])
-AC_INIT([gucharmap], [0.7.0])
+AC_INIT([gucharmap], [0.6.1])
 AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE(gucharmap, 0.7.0)
+AM_INIT_AUTOMAKE(gucharmap, 0.6.1)
 
 AM_MAINTAINER_MODE
 
@@ -28,13 +28,7 @@ AM_MAINTAINER_MODE
 AC_PROG_CC
 AC_PROG_LIBTOOL
 AC_PROG_INTLTOOL([0.22])
-AC_CHECK_PROGS([GTK_QUERY_IMMODULES], [gtk-query-immodules-2.0])
-
-if test "x$GTK_QUERY_IMMODULES" = "x" ;
-then
-    AC_MSG_ERROR([gtk-query-immodules-2.0 not found.])
-fi
-
+AC_CHECK_PROGS([GTK_QUERY_IMMODULES], [gtk-query-immodules-2.0], [MISSING])
 
 # checks for stuff
 GETTEXT_PACKAGE=gucharmap
@@ -70,7 +64,6 @@ fi
 
 # gtk is required
 PKG_CHECK_MODULES(GTK, gtk+-2.0 >= 2.2.0)
-GTK_BINARY_VERSION=`pkg-config --variable gtk_binary_version gtk+-2.0`
 
 AC_ARG_ENABLE(gnome,
               AC_HELP_STRING([--disable-gnome],
@@ -106,7 +99,6 @@ AC_CHECK_FUNCS([bind_textdomain_codeset])
 
 AC_SUBST(GTK_CFLAGS)
 AC_SUBST(GTK_LIBS)
-AC_SUBST(GTK_BINARY_VERSION)
 
 AC_SUBST(GNOME_CFLAGS)
 AC_SUBST(GNOME_LIBS)

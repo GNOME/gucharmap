@@ -1,6 +1,6 @@
 ## $Id$
 ##
-## Copyright (c) 2002  Noah Levitt
+## Copyright (c) 2002  Noah Levitt <nlevitt@users.sourceforge.net>
 ##
 ## This program is free software; you can redistribute it and/or modify it
 ## under the terms of the GNU General Public License as published by the
@@ -66,7 +66,7 @@ gucharmap_LDADD = libgucharmap.la @GTK_LIBS@ @GNOME_LIBS@ @POPT_LIBS@
 endif
 
 
-moduledir = $(libdir)/gtk-2.0/$(GTK_BINARY_VERSION)/immodules
+moduledir = $(libdir)/gucharmap/immodules
 module_LTLIBRARIES = im-gucharmap.la
 im_gucharmap_la_LDFLAGS = -rpath $(moduledir) -avoid-version -module
 im_gucharmap_la_SOURCES = imgucharmap.c
@@ -112,16 +112,48 @@ endif
 
 all-local: gtk.immodules
 
-
-noinst_PROGRAMS = im-module-file
-im_module_file_SOURCES = im-module-file.c
-im_module_file_LDADD = @GTK_LIBS@
-
 gtk.immodules: $(module_LTLIBRARIES)
-	$(GTK_QUERY_IMMODULES) $(module_LTLIBRARIES) > gtk.immodules ;
+	@if test "x$(GTK_QUERY_IMMODULES)" != "xMISSING" ; then \
+	  echo "$(GTK_QUERY_IMMODULES) $(module_LTLIBRARIES) > gtk.immodules";\
+	  $(GTK_QUERY_IMMODULES) $(module_LTLIBRARIES) > gtk.immodules ; \
+        fi
 
-install-data-hook: im-module-file
-	GTK_PATH=$$GTK_PATH:$(DESTDIR)$(libdir)/gtk-2.0 $(GTK_QUERY_IMMODULES) > `./im-module-file` ;
+# use -hook instead of -local so that the message gets printed at the end
+install-data-hook:
+	@if test "x$(GTK_QUERY_IMMODULES)" != "xMISSING" ; then \
+	  echo $(mkinstalldirs) $(DESTDIR)$(sysconfdir)/gucharmap ; \
+	  $(mkinstalldirs) $(DESTDIR)$(sysconfdir)/gucharmap; \
+	  echo "GTK_PATH=$(DESTDIR)$(libdir)/gucharmap $(GTK_QUERY_IMMODULES) > $(DESTDIR)$(sysconfdir)/gucharmap/gtk.immodules" ; \
+	  GTK_PATH=$(DESTDIR)$(libdir)/gucharmap $(GTK_QUERY_IMMODULES) > $(DESTDIR)$(sysconfdir)/gucharmap/gtk.immodules ; \
+	  echo ; \
+	  echo ; \
+	  echo "   IMPORTANT!" ; \
+	  echo "   " ; \
+	  echo "   The gucharmap input module has been installed. " ; \
+	  echo "   If you want to be able to use it (you do! trust " ; \
+	  echo "   me!), you must configure your environment. I " ; \
+	  echo "   suggest you add the following lines to your " ; \
+	  echo "   ~/.bash_profile or equivalent:" ; \
+	  echo "   " ; \
+	  echo "   GTK_IM_MODULE_FILE=$(DESTDIR)$(sysconfdir)/gucharmap/gtk.immodules" ; \
+	  echo "   export GTK_IM_MODULE_FILE" ; \
+	  echo "   " ; \
+	  echo "   Please see the README for more information." ; \
+	  echo ; \
+	  echo ; \
+	else \
+	  echo ; \
+	  echo ; \
+	  echo "   WARNING!" ; \
+	  echo "   " ; \
+	  echo "   The gucharmap input module has been installed, " ; \
+	  echo "   but the gtk-query-immodules-2.0 utility was not " ; \
+	  echo "   found, so gtk.immodules could not be generated." ; \
+	  echo "   " ; \
+	  echo "   Please see the README for more information." ; \
+	  echo ; \
+	  echo ; \
+	fi
 
 
 EXTRA_DIST = gucharmap_marshal.list gucharmaprc.rc 
