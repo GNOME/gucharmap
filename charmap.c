@@ -17,325 +17,160 @@
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  */
 
-
 #include <gtk/gtk.h>
-#include <stdlib.h>
 #include "charmap.h"
-#include "unicode_names.h"
+
+#include <stdarg.h>
+#include <time.h>
+#include <stdio.h>
 
 
-/*
- * when not selected: 
- * when selected: gtk_widget_modify_bg (..., GTK_STATE_NORMAL, &(...->style->base[GTK_STATE_SELECTED]));
- */
-/*
- * GTK_STATE_NORMAL GTK_STATE_ACTIVE GTK_STATE_PRELIGHT GTK_STATE_SELECTED GTK_STATE_INSENSITIVE
- * fg[5];   bg[5];   light[5];   dark[5];   mid[5];   text[5];   base[5];   text_aa[5];
- */
-/* gtk_label_set_selectable (GTK_LABEL (charmap->squares[row][col]->label), TRUE); */
+#if 1
+static void
+debug (const char *format, ...)
+{
+  static char timestamp[80];
+  va_list arg;
+  time_t now;
 
+  now = time (NULL);
+  strftime (timestamp, sizeof (timestamp), "%c", localtime (&now));
+  fprintf(stderr, "[%s] ", timestamp);
 
-#if 0
-#define debug(x...) g_print (x)
+  va_start(arg, format);
+  vfprintf(stderr, format, arg);
+  va_end(arg);
+}
 #else
 #define debug(x...)
 #endif
 
+
+/* XXX: may want to have some smartness here to avoid resizing too much */
+static gint 
+calculate_square_dimension (PangoFontMetrics *font_metrics)
+{
+  debug ("calculate_square_dimension\n");
+
+  /* XXX: can't get max width for the font, so just use the height */
+  return 2 + (pango_font_metrics_get_ascent (font_metrics) 
+              + pango_font_metrics_get_descent (font_metrics)) 
+             / PANGO_SCALE;
+}
+
+
+/* redraws the backing store pixmap */
 static void
-charmap_class_init (CharmapClass *clazz)
+draw_tabulus_pixmap (Charmap *charmap)
 {
-  debug ("charmap_class_init starting\n");
-  debug ("charmap_class_init finished\n");
-}
+  gint x, y;
 
+  debug ("draw_tabulus_pixmap\n");
 
-/* converts "U+1234" to 0x1234 */
-static gunichar
-block_label_to_unicar (gchar *label)
-{
-    return (gunichar) strtol (label + 2, NULL, 16);
-}
+  if (charmap->tabulus_pixmap != NULL)
+    gdk_pixmap_unref (charmap->tabulus_pixmap);
 
+  charmap->tabulus_pixmap = gdk_pixmap_new (charmap->tabulus->window,
+                                            charmap->tabulus->allocation.width,
+                                            charmap->tabulus->allocation.height,
+                                            -1);
 
-/* don't free or modify what this returns */
-static gchar *
-friendly_unichar_to_utf8 (gunichar uc)
-{
-  static gchar buf[8];
-  gint n;
+  /* a plain background */
+  gdk_draw_rectangle (charmap->tabulus_pixmap,
+                      charmap->tabulus->style->base_gc[GTK_STATE_NORMAL], 
+                      TRUE, 
+                      0, 0, 
+                      charmap->tabulus->allocation.width,
+                      charmap->tabulus->allocation.height);
 
-  if (g_unichar_isgraph (uc))
+  /* vertical lines */
+  for (x = charmap->tabulus->allocation.width / CHARMAP_COLS;
+       x < charmap->tabulus->allocation.width;
+       x += charmap->tabulus->allocation.width / CHARMAP_COLS)
     {
-      n = g_unichar_to_utf8 (uc, buf);
-
-      if (g_unichar_type (uc) == G_UNICODE_BREAK_COMBINING_MARK)
-        {
-          buf[n] = ' ';
-          buf[n+1] = '\0';
-        }
-      else 
-          buf[n] = '\0';
+      gdk_draw_line (charmap->tabulus_pixmap,
+                     charmap->tabulus->style->fg_gc[GTK_STATE_INSENSITIVE], 
+                     x, 0, x, charmap->tabulus->allocation.height - 1);
     }
-  else
+
+  /* horizontal lines */
+  for (y = charmap->tabulus->allocation.height / CHARMAP_ROWS;
+       y < charmap->tabulus->allocation.height;
+       y += charmap->tabulus->allocation.height / CHARMAP_ROWS)
     {
-      buf[0] = ' ';
-      buf[1] = '\0';
+      gdk_draw_line (charmap->tabulus_pixmap,
+                     charmap->tabulus->style->fg_gc[GTK_STATE_INSENSITIVE], 
+                     0, y, charmap->tabulus->allocation.width - 1, y);
     }
-
-  return buf;
 }
 
 
-static void
-fill_character_table (Charmap *charmap)
-{
-  gint row, col;
-
-  for (row = 0;  row < charmap->rows;  row++) 
-    for (col = 0;  col < charmap->columns;  col++)
-      {
-        gunichar uc = charmap->block_start + (row * charmap->columns) + col;
-        gtk_label_set_text (GTK_LABEL (charmap->squares[row][col]->label), 
-                            friendly_unichar_to_utf8 (uc));
-      }
-}
-
-
-static void
-block_selection_changed_cb (GtkTreeSelection *selection, 
-                            gpointer data)
+/* redraws the screen from the backing pixmap */
+static gint
+expose_event (GtkWidget *widget, 
+              GdkEventExpose *event, 
+              gpointer callback_data)
 {
   Charmap *charmap;
-  GtkTreeIter iter;
-  GtkTreeModel *model;
-  gunichar new_block_start;
-  gchar *block_label;
 
-  debug ("block_selection_changed_cb starting\n");
+  debug ("expose_event\n");
 
-  charmap = CHARMAP (data);
+  charmap = CHARMAP (callback_data);
+  if (charmap->tabulus_pixmap == NULL)
+    draw_tabulus_pixmap (charmap);
 
-  if (gtk_tree_selection_get_selected (selection, &model, &iter))
-    {
-      gtk_tree_model_get (model, &iter, 0, &block_label, -1);
-      new_block_start = block_label_to_unicar (block_label);
+  gdk_draw_drawable (charmap->tabulus->window,
+                     widget->style->fg_gc[GTK_STATE_NORMAL],
+                     charmap->tabulus_pixmap,
+                     event->area.x, event->area.y,
+                     event->area.x, event->area.y,
+                     event->area.width, event->area.height);
 
-      if (new_block_start != charmap->block_start)
-        {
-          charmap->block_start = new_block_start;
-          fill_character_table (charmap);
-        }
-
-      g_free (block_label);
-    }
-
-  debug ("block_selection_changed_cb finished\n");
+  return FALSE;
 }
 
 
-static GtkWidget *
-make_unicode_block_selector (Charmap *charmap)
+void
+charmap_class_init (CharmapClass *clazz)
 {
-  GtkWidget *scrolled_window;
-  GtkWidget *tree_view;
-  GtkListStore *model;
-  GtkCellRenderer *cell;
-  GtkTreeViewColumn *column;
-  GtkTreeSelection *selection;
-  GtkTreeIter iter;
-  gchar buf[10];
-  gunichar i;
-
-  debug ("make_unicode_block_selector starting\n");
-
-  scrolled_window = gtk_scrolled_window_new (NULL, NULL);
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
-                                  GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
-
-  model = gtk_list_store_new (1, G_TYPE_STRING);
-  tree_view = gtk_tree_view_new ();
-  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tree_view));
-  gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (tree_view), FALSE);
-
-  gtk_container_add (GTK_CONTAINER (scrolled_window), tree_view);
-  gtk_tree_view_set_model (GTK_TREE_VIEW (tree_view), GTK_TREE_MODEL (model));
-
-  for (i = 0;  i < 0x10000;  i += charmap->rows * charmap->columns)
-    {
-      g_snprintf (buf, 10, "U+%4.4X", i);
-      gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-      gtk_list_store_set (GTK_LIST_STORE (model), &iter, 0, buf, -1);
-    }
-
-  cell = gtk_cell_renderer_text_new ();
-  column = gtk_tree_view_column_new_with_attributes (NULL, cell, "text", 0, NULL);
-
-  gtk_tree_view_append_column (GTK_TREE_VIEW (tree_view),
-                               GTK_TREE_VIEW_COLUMN (column));
-
-  gtk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
-  g_signal_connect (G_OBJECT (selection), "changed", 
-                    G_CALLBACK (block_selection_changed_cb), charmap);
-
-  debug ("make_unicode_block_selector finished\n");
-  return scrolled_window;
+  debug ("charmap_class_init\n");
 }
 
 
-static void
-character_clicked_cb (GtkEventBox *event_box, 
-                      GdkEvent *event, 
-                      gpointer data)
-{
-  Square *square = (Square *) data;
-  Charmap *charmap = square->charmap;
-
-  if (square != charmap->selected)
-    {
-      gchar *caption_text;
-      gunichar uc;
-
-      if (charmap->selected != NULL)
-        gtk_widget_set_state (charmap->selected->event_box, GTK_STATE_NORMAL);
-
-      gtk_widget_set_state (square->event_box, GTK_STATE_SELECTED);
-      square->charmap->selected = square;
-
-      uc = charmap->block_start 
-          + square->row * charmap->columns 
-          + square->col;
-
-      caption_text = g_strdup_printf ("U+%4.4X %s %s", uc, 
-                                      friendly_unichar_to_utf8 (uc),
-                                      get_unicode_name (uc));
-
-      /* XXX do we need to keep track of old caption text to free it here? */
-
-      gtk_label_set_text (GTK_LABEL (charmap->caption), caption_text);
-    }
-}
-
-
-static Square *
-square_new (guint16 row, 
-            guint16 col, 
-            GtkWidget *event_box, 
-            GtkWidget *label, 
-            Charmap *charmap)
-{
-  Square *square;
-
-  square = g_new (Square, 1);
-  square->row = row;
-  square->col = col;
-  square->event_box = event_box;
-  square->label = label;
-  square->charmap = charmap;
-
-  return square;
-}
-
-
-static GtkWidget *
-init_character_selector (Charmap *charmap)
-{
-  gint row, col;
-
-  charmap->table = gtk_table_new (charmap->rows, charmap->columns, TRUE);
-  gtk_table_set_row_spacings (GTK_TABLE (charmap->table), 1);
-  gtk_table_set_col_spacings (GTK_TABLE (charmap->table), 1);
-
-  charmap->squares = g_malloc (charmap->rows * sizeof (Square **));
-
-  for (row = 0;  row < charmap->rows;  row++)
-    {
-      charmap->squares[row] = g_malloc (charmap->columns * sizeof (Square *));
-
-      for (col = 0;  col < charmap->columns;  col++)
-        {
-          charmap->squares[row][col] = square_new (row, col, gtk_event_box_new (), gtk_label_new ("x"), charmap);
-
-          gtk_widget_set_events (charmap->squares[row][col]->event_box, 
-                                 GDK_BUTTON_PRESS_MASK);
-
-          g_signal_connect (G_OBJECT (charmap->squares[row][col]->event_box), 
-                            "button_press_event",
-                            G_CALLBACK (character_clicked_cb), 
-                            charmap->squares[row][col]);
-
-          /* change the colors to look like text */
-          gtk_widget_modify_bg (charmap->squares[row][col]->event_box, 
-                                GTK_STATE_NORMAL, 
-                                &(GTK_WIDGET(charmap)->style->base[GTK_STATE_NORMAL]));
-
-          gtk_widget_modify_text (charmap->squares[row][col]->event_box, 
-                                GTK_STATE_NORMAL, 
-                                &(GTK_WIDGET(charmap)->style->text[GTK_STATE_NORMAL]));
-
-          gtk_widget_modify_bg (charmap->squares[row][col]->event_box, 
-                                GTK_STATE_SELECTED, 
-                                &(GTK_WIDGET(charmap)->style->base[GTK_STATE_SELECTED]));
-
-          /* XXX can't figure out which style is which */
-          gtk_widget_modify_text (charmap->squares[row][col]->event_box, 
-                                GTK_STATE_SELECTED, 
-                                &(GTK_WIDGET(charmap)->style->text[GTK_STATE_NORMAL]));
-
-          gtk_container_add (GTK_CONTAINER (charmap->squares[row][col]->event_box),
-                             charmap->squares[row][col]->label);
-
-          gtk_table_attach_defaults (GTK_TABLE (charmap->table), 
-                                     charmap->squares[row][col]->event_box, 
-                                     col, col + 1, row, row + 1);
-        }
-    }
-
-  fill_character_table (charmap);
-
-  return charmap->table;
-}
-
-
-static void
+void
 charmap_init (Charmap *charmap)
 {
-  GtkWidget *hbox;
-  debug ("charmap_init starting\n");
-  charmap->rows = 16;
-  charmap->columns = 16;
-  charmap->block_start = 0x0000;
-  charmap->selected = NULL;
+  gint square_dimension;
 
-  gtk_box_set_spacing (GTK_BOX (charmap), 10);
+  debug ("charmap_init\n");
 
-  charmap->block_selector = make_unicode_block_selector (charmap);
-  charmap->character_selector = init_character_selector (charmap);
-  charmap->caption = gtk_label_new ("Unicode Character Map and Font Viewer");
-  gtk_label_set_selectable (GTK_LABEL (charmap->caption), TRUE);
-  gtk_label_set_justify (GTK_LABEL (charmap->caption), GTK_JUSTIFY_LEFT);
+  charmap->tabulus = gtk_drawing_area_new ();
+  g_signal_connect (G_OBJECT (charmap->tabulus), "expose_event",
+                    G_CALLBACK (expose_event), charmap);
 
-  hbox = gtk_hbox_new (FALSE, 4);
-  gtk_box_pack_start (GTK_BOX (hbox), charmap->character_selector, 
-                      TRUE, TRUE, 0);
-  gtk_box_pack_start (GTK_BOX (hbox), charmap->block_selector, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (charmap), charmap->tabulus, TRUE, TRUE, 0);
 
-  gtk_box_pack_start (GTK_BOX (charmap), hbox, TRUE, TRUE, 0);
-  gtk_box_pack_start (GTK_BOX (charmap), charmap->caption, TRUE, TRUE, 0);
+  /* init the font information */
+  charmap->font_name = pango_font_description_to_string (
+          charmap->tabulus->style->font_desc);
 
-  debug ("charmap_init finished\n");
+  charmap->font_metrics = pango_context_get_metrics (
+          gtk_widget_get_pango_context (charmap->tabulus),
+          charmap->tabulus->style->font_desc, NULL);
+
+  /* size the drawing area */
+  square_dimension = calculate_square_dimension (charmap->font_metrics);
+  gtk_widget_set_size_request (charmap->tabulus, 
+                               CHARMAP_COLS * square_dimension,
+                               CHARMAP_ROWS * square_dimension);
 }
 
 
-GtkWidget*
+GtkWidget *
 charmap_new ()
 {
-  GtkWidget *w;
-  debug ("charmap_new starting\n");
-
-  w = GTK_WIDGET (g_object_new (charmap_get_type (), NULL));
-
-  debug ("charmap_new finished\n");
-  return w;
+  debug ("charmap_new\n");
+  return GTK_WIDGET (g_object_new (charmap_get_type (), NULL));
 }
 
 
@@ -343,20 +178,21 @@ GtkType
 charmap_get_type ()
 {
   static GtkType charmap_type = 0;
-  debug ("charmap_get_type starting\n");
+
+  debug ("charmap_get_type\n");
 
   if (!charmap_type)
     {
       static const GTypeInfo charmap_info =
       {
-	sizeof (CharmapClass),
+        sizeof (CharmapClass),
         NULL,           /* base_init */
         NULL,           /* base_finalize */
         (GClassInitFunc) charmap_class_init,
         NULL,           /* class_finalize */
         NULL,           /* class_data */
         sizeof (Charmap),
-        16,             /* n_preallocs */
+        0,              /* n_preallocs */
         (GInstanceInitFunc) charmap_init,
       };
 
@@ -364,36 +200,6 @@ charmap_get_type ()
                                              &charmap_info, 0);
     }
 
-  debug ("charmap_get_type finished\n");
   return charmap_type;
 }
 
-
-void
-charmap_set_font (Charmap *charmap, gchar *font_name)
-{
-  if (charmap->font_name == NULL 
-          || g_ascii_strcasecmp (charmap->font_name, font_name) != 0)
-    {
-      PangoFontDescription *font_desc;
-      int row, col;
-
-      g_free (charmap->font_name);
-      charmap->font_name = g_strdup (font_name);
-
-      font_desc = pango_font_description_from_string (charmap->font_name);
-
-      for (row = 0;  row < charmap->rows;  row++)
-        for (col = 0;  col < charmap->columns;  col++)
-          gtk_widget_modify_font (charmap->squares[row][col]->label, 
-                                  font_desc);
-    }
-}
-
-
-/* the value returned is read-only */
-gchar *
-charmap_get_font (Charmap *charmap)
-{
-    return charmap->font_name;
-}
