@@ -60,49 +60,6 @@ status_message (GucharmapCharmap *charmap, const gchar *message)
 }
 
 
-#if 0
-/* ucs is terminated with (gunichar)(-1). Return value should be freed with
- * free_array_of_strings */
-static gchar **
-make_array_of_char_descs (gunichar *ucs)
-{
-  gchar **descs;
-  gchar buf[11];
-  gint i;
-
-  if (ucs == NULL)
-    return NULL;
-
-  /* count them and allocate the array */
-  for (i = 0;  ucs[i] != (gunichar)(-1);  i++);
-  descs = g_malloc ((i+1) * sizeof (gchar *));
-
-  for (i = 0;  ucs[i] != (gunichar)(-1);  i++)
-    {
-      buf[gucharmap_unichar_to_printable_utf8 (ucs[i], buf)] = '\0';
-      descs[i] = g_strdup_printf ("\342\200\252%s [U+%4.4X %s]", buf, ucs[i], 
-                                  gucharmap_get_unicode_name (ucs[i]));
-    }
-
-  descs[i] = NULL;
-  return descs;
-}
-
-
-static void
-free_array_of_strings (gchar **strs)
-{
-  gint i;
-
-  for (i = 0;  strs[i] != NULL;  i++)
-    g_free (strs[i]);
-
-  g_free (strs);
-}
-#endif
-
-
-
 /* XXX: linear search (but N is small) */
 static GtkTreePath *
 find_block_index_tree_path (GucharmapCharmap *charmap, gunichar uc)
@@ -587,8 +544,6 @@ set_details (GucharmapCharmap *charmap,
       gtk_text_buffer_insert (buffer, &iter, gstemp->str, gstemp->len);
       g_string_free (gstemp, TRUE);
     }
-
-
 }
 
 
@@ -597,8 +552,14 @@ active_char_set (GtkWidget *widget,
                  gunichar uc, 
                  GucharmapCharmap *charmap)
 {
+  gchar *temp;
+
   set_active_block (charmap, uc);
   set_details (charmap, uc);
+
+  temp = g_strdup_printf ("U+%4.4X %s", uc, gucharmap_get_unicode_name (uc));
+  status_message (charmap, temp);
+  g_free (temp);
 }
 
 
