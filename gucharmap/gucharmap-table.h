@@ -28,12 +28,9 @@ G_BEGIN_DECLS
 #define GUCHARMAP_TABLE(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), \
                               gucharmap_table_get_type (), GucharmapTable))
 
-#define GUCHARMAP_TABLE_CLASS(clazz) (G_TYPE_CHECK_CLASS_CAST ((clazz), \
-                                                         gucharmap_table_get_type (),\
-                                                         GucharmapTableClass))
+#define GUCHARMAP_TABLE_CLASS(clazz) (G_TYPE_CHECK_CLASS_CAST ((clazz), gucharmap_table_get_type (), GucharmapTableClass))
 
-#define IS_GUCHARMAP_TABLE(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), \
-                                 gucharmap_table_get_type ()))
+#define IS_GUCHARMAP_TABLE(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), gucharmap_table_get_type ()))
 
 
 typedef struct _GucharmapTable GucharmapTable;

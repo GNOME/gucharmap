@@ -27,19 +27,11 @@
 G_BEGIN_DECLS
 
 
-#define CHARCELL_ACCESSIBLE(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), \
-                                  charcell_accessible_get_type (), \
-                                  CharcellAccessible))
-#define CHARCELL_ACCESSIBLE_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), \
-                                          charcell_accessible_get_type (), \
-                                          CharcellAccessibleClass))
-#define IS_CHARCELL_ACCESSIBLE(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), \
-                                     charcell_accessible_get_type ()))
-#define IS_CHARCELL_ACCESSIBLE_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass),\
-                                             charcell_accessible_get_type ()))
-#define CHARCELL_ACCESSIBLE_GET_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS ((obj), \
-                                            charcell_accessible_get_type, \
-                                            CharcellAccessibleClass))
+#define CHARCELL_ACCESSIBLE(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), charcell_accessible_get_type (), CharcellAccessible))
+#define CHARCELL_ACCESSIBLE_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), charcell_accessible_get_type (), CharcellAccessibleClass))
+#define IS_CHARCELL_ACCESSIBLE(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), charcell_accessible_get_type ()))
+#define IS_CHARCELL_ACCESSIBLE_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), charcell_accessible_get_type ()))
+#define CHARCELL_ACCESSIBLE_GET_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS ((obj), charcell_accessible_get_type, CharcellAccessibleClass))
 
 
 typedef struct _CharcellAccessible      CharcellAccessible;

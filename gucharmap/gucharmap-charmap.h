@@ -27,57 +27,58 @@
 G_BEGIN_DECLS
 
 
-#define GUCHARMAP_CHARMAP(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), gucharmap_charmap_get_type (), \
-                                                  GucharmapCharmap))
+#define GUCHARMAP_CHARMAP(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), \
+                                gucharmap_charmap_get_type (), \
+                                GucharmapCharmap))
 
 #define GUCHARMAP_CHARMAP_CLASS(clazz) (G_TYPE_CHECK_CLASS_CAST ((clazz), \
-                                                       gucharmap_charmap_get_type (),\
-                                                       GucharmapCharmapClass))
+                                        gucharmap_charmap_get_type (),\
+                                        GucharmapCharmapClass))
 
 #define IS_GUCHARMAP_CHARMAP(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), \
-                         gucharmap_charmap_get_type ()))
+                                   gucharmap_charmap_get_type ()))
 
 typedef struct _GucharmapCharmap GucharmapCharmap;
 typedef struct _GucharmapCharmapClass GucharmapCharmapClass;
 
 typedef enum
 {
-  GUCHARMAP_CHARMAP_NOT_FOUND,
-  GUCHARMAP_CHARMAP_FOUND,
-  GUCHARMAP_CHARMAP_WRAPPED,
-  GUCHARMAP_CHARMAP_NOTHING_TO_SEARCH_FOR
+  GUCHARMAP_NOT_FOUND,
+  GUCHARMAP_FOUND,
+  GUCHARMAP_WRAPPED,
+  GUCHARMAP_NOTHING_TO_SEARCH_FOR
 }
-GucharmapCharmapSearchResult;
+GucharmapSearchResult;
 
 
 /* the order of the captions */
 typedef enum
 {
-  GUCHARMAP_CHARMAP_CAPTION_CHARACTER = 0,
-  GUCHARMAP_CHARMAP_CAPTION_CATEGORY,
-  GUCHARMAP_CHARMAP_CAPTION_DECOMPOSITION,
-  GUCHARMAP_CHARMAP_CAPTION_UTF8,
-  GUCHARMAP_CHARMAP_CAPTION_OTHER_REPS,
+  GUCHARMAP_CAPTION_CHARACTER = 0,
+  GUCHARMAP_CAPTION_CATEGORY,
+  GUCHARMAP_CAPTION_DECOMPOSITION,
+  GUCHARMAP_CAPTION_UTF8,
+  GUCHARMAP_CAPTION_OTHER_REPS,
 
   /* nameslist stuff */
-  GUCHARMAP_CHARMAP_CAPTION_EQUALS,
-  GUCHARMAP_CHARMAP_CAPTION_STARS,
-  GUCHARMAP_CHARMAP_CAPTION_EXES,
-  GUCHARMAP_CHARMAP_CAPTION_POUNDS,
-  GUCHARMAP_CHARMAP_CAPTION_COLONS,
+  GUCHARMAP_CAPTION_EQUALS,
+  GUCHARMAP_CAPTION_STARS,
+  GUCHARMAP_CAPTION_EXES,
+  GUCHARMAP_CAPTION_POUNDS,
+  GUCHARMAP_CAPTION_COLONS,
 
   /* unihan subset */
-  GUCHARMAP_CHARMAP_CAPTION_KDEFINITION,
-  GUCHARMAP_CHARMAP_CAPTION_KMANDARIN,
-  GUCHARMAP_CHARMAP_CAPTION_KJAPANESEON,
-  GUCHARMAP_CHARMAP_CAPTION_KJAPANESEKUN,
-  GUCHARMAP_CHARMAP_CAPTION_KCANTONESE,
-  GUCHARMAP_CHARMAP_CAPTION_KTANG,
-  GUCHARMAP_CHARMAP_CAPTION_KKOREAN,
+  GUCHARMAP_CAPTION_KDEFINITION,
+  GUCHARMAP_CAPTION_KMANDARIN,
+  GUCHARMAP_CAPTION_KJAPANESEON,
+  GUCHARMAP_CAPTION_KJAPANESEKUN,
+  GUCHARMAP_CAPTION_KCANTONESE,
+  GUCHARMAP_CAPTION_KTANG,
+  GUCHARMAP_CAPTION_KKOREAN,
 
-  GUCHARMAP_CHARMAP_CAPTION_COUNT
+  GUCHARMAP_CAPTION_COUNT
 }
-GucharmapCharmapCaption;
+GucharmapCaption;
 
 typedef struct 
 {
@@ -105,7 +106,7 @@ struct _GucharmapCharmap
   gint block_index_size;
 
   /* the caption */
-  GtkTreeRowReference *caption_rows[GUCHARMAP_CHARMAP_CAPTION_COUNT];
+  GtkTreeRowReference *caption_rows[GUCHARMAP_CAPTION_COUNT];
   GtkTreeStore *caption_model;
 };
 
@@ -120,16 +121,21 @@ struct _GucharmapCharmapClass
 
 GType gucharmap_charmap_get_type (void);
 GtkWidget * gucharmap_charmap_new (void);
-void gucharmap_charmap_set_font (GucharmapCharmap *charmap, const gchar *font_name);
-void gucharmap_charmap_identify_clipboard (GucharmapCharmap *charmap, GtkClipboard *clipboard);
+void gucharmap_charmap_set_font (GucharmapCharmap *charmap, 
+                                 const gchar *font_name);
+void gucharmap_charmap_identify_clipboard (GucharmapCharmap *charmap, 
+                                           GtkClipboard *clipboard);
 void gucharmap_charmap_expand_block_selector (GucharmapCharmap *charmap);
 void gucharmap_charmap_collapse_block_selector (GucharmapCharmap *charmap);
-void gucharmap_charmap_go_to_character (GucharmapCharmap *charmap, gunichar uc);
-GucharmapCharmapSearchResult gucharmap_charmap_search (GucharmapCharmap *charmap, 
-                                    const gchar *search_text, 
-                                    gint direction);
-void gucharmap_charmap_hide_caption (GucharmapCharmap *charmap, GucharmapCharmapCaption caption_id);
-void gucharmap_charmap_show_caption (GucharmapCharmap *charmap, GucharmapCharmapCaption caption_id);
+void gucharmap_charmap_go_to_character (GucharmapCharmap *charmap, 
+                                        gunichar uc);
+GucharmapSearchResult gucharmap_charmap_search (GucharmapCharmap *charmap, 
+                                                const gchar *search_text, 
+                                                gint direction);
+void gucharmap_charmap_hide_caption (GucharmapCharmap *charmap, 
+                                     GucharmapCaption caption_id);
+void gucharmap_charmap_show_caption (GucharmapCharmap *charmap, 
+                                     GucharmapCaption caption_id);
 void gucharmap_charmap_zoom_enable (GucharmapCharmap *charmap);
 void gucharmap_charmap_zoom_disable (GucharmapCharmap *charmap);
 GucharmapTable * gucharmap_charmap_get_chartable (GucharmapCharmap *charmap);

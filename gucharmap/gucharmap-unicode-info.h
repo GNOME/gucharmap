@@ -58,12 +58,13 @@ G_CONST_RETURN gchar * gucharmap_get_unicode_kJapaneseKun (gunichar uc);
 G_CONST_RETURN gchar * gucharmap_get_unicode_kJapaneseOn (gunichar uc);
 G_CONST_RETURN gchar * gucharmap_get_hangul_syllable_name (gunichar s);
 
-/* A wrapper for g_	unicode_canonical_decomposition that also does hangul
+/* A wrapper for g_unicode_canonical_decomposition that also does hangul
  * decomposition. 
  * See http://bugzilla.gnome.org/show_bug.cgi?id=100456
  * Will no longer be necessary once my patch is accepted.
  */
-gunichar * gucharmap_unicode_canonical_decomposition (gunichar ch, gsize *result_len);
+gunichar * gucharmap_unicode_canonical_decomposition (gunichar ch, 
+                                                      gsize *result_len);
 
 /* starts search at start */
 gunichar gucharmap_find_substring_match (gunichar start, 

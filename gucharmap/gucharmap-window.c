@@ -169,19 +169,19 @@ do_search (GucharmapWindow *guw,
 
   switch (gucharmap_charmap_search (guw->charmap, search_text, direction))
     {
-      case GUCHARMAP_CHARMAP_NOT_FOUND:
+      case GUCHARMAP_NOT_FOUND:
         set_status (guw, _("Not found."));
         break;
 
-      case GUCHARMAP_CHARMAP_FOUND:
+      case GUCHARMAP_FOUND:
         set_status (guw, _("Found."));
         break;
 
-      case GUCHARMAP_CHARMAP_WRAPPED:
+      case GUCHARMAP_WRAPPED:
         set_status (guw, _("Search wrapped."));
         break;
 
-      case GUCHARMAP_CHARMAP_NOTHING_TO_SEARCH_FOR:
+      case GUCHARMAP_NOTHING_TO_SEARCH_FOR:
         set_status (guw, _("Nothing to search for."));
         break;
 
@@ -281,7 +281,7 @@ search_find_prev (GtkWidget *widget, GucharmapWindow *guw)
 
 static void
 set_caption_visible (GucharmapWindow *guw, 
-                     GucharmapCharmapCaption caption_id, 
+                     GucharmapCaption caption_id, 
                      gboolean visible)
 {
   if (visible)
@@ -300,63 +300,63 @@ set_caption_visible (GucharmapWindow *guw,
 static void
 show_hide_caption_category (GtkCheckMenuItem *mi, GucharmapWindow *guw)
 {
-  set_caption_visible (guw, GUCHARMAP_CHARMAP_CAPTION_CATEGORY, 
+  set_caption_visible (guw, GUCHARMAP_CAPTION_CATEGORY, 
                        gtk_check_menu_item_get_active (mi));
 }
 
 static void
 show_hide_caption_decomposition (GtkCheckMenuItem *mi, GucharmapWindow *guw)
 {
-  set_caption_visible (guw, GUCHARMAP_CHARMAP_CAPTION_DECOMPOSITION, 
+  set_caption_visible (guw, GUCHARMAP_CAPTION_DECOMPOSITION, 
                        gtk_check_menu_item_get_active (mi));
 }
 
 static void
 show_hide_caption_utf8 (GtkCheckMenuItem *mi, GucharmapWindow *guw)
 {
-  set_caption_visible (guw, GUCHARMAP_CHARMAP_CAPTION_UTF8, 
+  set_caption_visible (guw, GUCHARMAP_CAPTION_UTF8, 
                        gtk_check_menu_item_get_active (mi));
 }
 
 static void
 show_hide_caption_other_reps (GtkCheckMenuItem *mi, GucharmapWindow *guw)
 {
-  set_caption_visible (guw, GUCHARMAP_CHARMAP_CAPTION_OTHER_REPS, 
+  set_caption_visible (guw, GUCHARMAP_CAPTION_OTHER_REPS, 
                        gtk_check_menu_item_get_active (mi));
 }
 
 static void
 show_hide_caption_equals (GtkCheckMenuItem *mi, GucharmapWindow *guw)
 {
-  set_caption_visible (guw, GUCHARMAP_CHARMAP_CAPTION_EQUALS, 
+  set_caption_visible (guw, GUCHARMAP_CAPTION_EQUALS, 
                        gtk_check_menu_item_get_active (mi));
 }
 
 static void
 show_hide_caption_stars (GtkCheckMenuItem *mi, GucharmapWindow *guw)
 {
-  set_caption_visible (guw, GUCHARMAP_CHARMAP_CAPTION_STARS, 
+  set_caption_visible (guw, GUCHARMAP_CAPTION_STARS, 
                        gtk_check_menu_item_get_active (mi));
 }
 
 static void
 show_hide_caption_exes (GtkCheckMenuItem *mi, GucharmapWindow *guw)
 {
-  set_caption_visible (guw, GUCHARMAP_CHARMAP_CAPTION_EXES, 
+  set_caption_visible (guw, GUCHARMAP_CAPTION_EXES, 
                        gtk_check_menu_item_get_active (mi));
 }
 
 static void
 show_hide_caption_pounds (GtkCheckMenuItem *mi, GucharmapWindow *guw)
 {
-  set_caption_visible (guw, GUCHARMAP_CHARMAP_CAPTION_POUNDS, 
+  set_caption_visible (guw, GUCHARMAP_CAPTION_POUNDS, 
                        gtk_check_menu_item_get_active (mi));
 }
 
 static void
 show_hide_caption_colons (GtkCheckMenuItem *mi, GucharmapWindow *guw)
 {
-  set_caption_visible (guw, GUCHARMAP_CHARMAP_CAPTION_COLONS, 
+  set_caption_visible (guw, GUCHARMAP_CAPTION_COLONS, 
                        gtk_check_menu_item_get_active (mi));
 }
 
@@ -364,49 +364,49 @@ show_hide_caption_colons (GtkCheckMenuItem *mi, GucharmapWindow *guw)
 static void
 show_hide_caption_kdefinition (GtkCheckMenuItem *mi, GucharmapWindow *guw)
 {
-  set_caption_visible (guw, GUCHARMAP_CHARMAP_CAPTION_KDEFINITION, 
+  set_caption_visible (guw, GUCHARMAP_CAPTION_KDEFINITION, 
                        gtk_check_menu_item_get_active (mi));
 }
 
 static void
 show_hide_caption_kmandarin (GtkCheckMenuItem *mi, GucharmapWindow *guw)
 {
-  set_caption_visible (guw, GUCHARMAP_CHARMAP_CAPTION_KMANDARIN, 
+  set_caption_visible (guw, GUCHARMAP_CAPTION_KMANDARIN, 
                        gtk_check_menu_item_get_active (mi));
 }
 
 static void
 show_hide_caption_kjapaneseon (GtkCheckMenuItem *mi, GucharmapWindow *guw)
 {
-  set_caption_visible (guw, GUCHARMAP_CHARMAP_CAPTION_KJAPANESEON, 
+  set_caption_visible (guw, GUCHARMAP_CAPTION_KJAPANESEON, 
                        gtk_check_menu_item_get_active (mi));
 }
 
 static void
 show_hide_caption_kjapanesekun (GtkCheckMenuItem *mi, GucharmapWindow *guw)
 {
-  set_caption_visible (guw, GUCHARMAP_CHARMAP_CAPTION_KJAPANESEKUN, 
+  set_caption_visible (guw, GUCHARMAP_CAPTION_KJAPANESEKUN, 
                        gtk_check_menu_item_get_active (mi));
 }
 
 static void
 show_hide_caption_kcantonese (GtkCheckMenuItem *mi, GucharmapWindow *guw)
 {
-  set_caption_visible (guw, GUCHARMAP_CHARMAP_CAPTION_KCANTONESE, 
+  set_caption_visible (guw, GUCHARMAP_CAPTION_KCANTONESE, 
                        gtk_check_menu_item_get_active (mi));
 }
 
 static void
 show_hide_caption_ktang (GtkCheckMenuItem *mi, GucharmapWindow *guw)
 {
-  set_caption_visible (guw, GUCHARMAP_CHARMAP_CAPTION_KTANG, 
+  set_caption_visible (guw, GUCHARMAP_CAPTION_KTANG, 
                        gtk_check_menu_item_get_active (mi));
 }
 
 static void
 show_hide_caption_kkorean (GtkCheckMenuItem *mi, GucharmapWindow *guw)
 {
-  set_caption_visible (guw, GUCHARMAP_CHARMAP_CAPTION_KKOREAN, 
+  set_caption_visible (guw, GUCHARMAP_CAPTION_KKOREAN, 
                        gtk_check_menu_item_get_active (mi));
 }
 #endif /* #if ENABLE_UNIHAN */
@@ -415,13 +415,13 @@ show_hide_caption_kkorean (GtkCheckMenuItem *mi, GucharmapWindow *guw)
 static void
 show_hide_nameslist (GtkCheckMenuItem *mi, GucharmapWindow *guw)
 {
-  static const GucharmapCharmapCaption nameslist_caption_ids[] = 
+  static const GucharmapCaption nameslist_caption_ids[] = 
     { 
-      GUCHARMAP_CHARMAP_CAPTION_STARS,
-      GUCHARMAP_CHARMAP_CAPTION_EXES,
-      GUCHARMAP_CHARMAP_CAPTION_COLONS,
-      GUCHARMAP_CHARMAP_CAPTION_EQUALS,
-      GUCHARMAP_CHARMAP_CAPTION_POUNDS,
+      GUCHARMAP_CAPTION_STARS,
+      GUCHARMAP_CAPTION_EXES,
+      GUCHARMAP_CAPTION_COLONS,
+      GUCHARMAP_CAPTION_EQUALS,
+      GUCHARMAP_CAPTION_POUNDS,
     };
   gint i;
 
@@ -449,15 +449,15 @@ show_hide_nameslist (GtkCheckMenuItem *mi, GucharmapWindow *guw)
 static void
 show_hide_unihan (GtkCheckMenuItem *mi, GucharmapWindow *guw)
 {
-  static const GucharmapCharmapCaption unihan_caption_ids[] = 
+  static const GucharmapCaption unihan_caption_ids[] = 
     { 
-      GUCHARMAP_CHARMAP_CAPTION_KDEFINITION,
-      GUCHARMAP_CHARMAP_CAPTION_KMANDARIN,
-      GUCHARMAP_CHARMAP_CAPTION_KJAPANESEON,
-      GUCHARMAP_CHARMAP_CAPTION_KJAPANESEKUN,
-      GUCHARMAP_CHARMAP_CAPTION_KCANTONESE,
-      GUCHARMAP_CHARMAP_CAPTION_KTANG,
-      GUCHARMAP_CHARMAP_CAPTION_KKOREAN,
+      GUCHARMAP_CAPTION_KDEFINITION,
+      GUCHARMAP_CAPTION_KMANDARIN,
+      GUCHARMAP_CAPTION_KJAPANESEON,
+      GUCHARMAP_CAPTION_KJAPANESEKUN,
+      GUCHARMAP_CAPTION_KCANTONESE,
+      GUCHARMAP_CAPTION_KTANG,
+      GUCHARMAP_CAPTION_KKOREAN,
     };
   gint i;
 
@@ -485,12 +485,12 @@ show_hide_unihan (GtkCheckMenuItem *mi, GucharmapWindow *guw)
 static void
 show_hide_unicode (GtkCheckMenuItem *mi, GucharmapWindow *guw)
 {
-  static const GucharmapCharmapCaption unicode_caption_ids[] = 
+  static const GucharmapCaption unicode_caption_ids[] = 
     { 
-      GUCHARMAP_CHARMAP_CAPTION_CATEGORY, 
-      GUCHARMAP_CHARMAP_CAPTION_DECOMPOSITION,
-      GUCHARMAP_CHARMAP_CAPTION_UTF8,
-      GUCHARMAP_CHARMAP_CAPTION_OTHER_REPS
+      GUCHARMAP_CAPTION_CATEGORY, 
+      GUCHARMAP_CAPTION_DECOMPOSITION,
+      GUCHARMAP_CAPTION_UTF8,
+      GUCHARMAP_CAPTION_OTHER_REPS
     };
   gint i;
 
@@ -736,7 +736,7 @@ make_menu (GucharmapWindow *guw)
   menu_item = gtk_check_menu_item_new_with_mnemonic (_("_Category"));
   gtk_menu_shell_append (GTK_MENU_SHELL (unicode_details_menu), menu_item);
   gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item), 
-                                  guw->caption_show[GUCHARMAP_CHARMAP_CAPTION_CATEGORY]);
+                                  guw->caption_show[GUCHARMAP_CAPTION_CATEGORY]);
   g_signal_connect (G_OBJECT (menu_item), "activate",
                     G_CALLBACK (show_hide_caption_category), guw);
 
@@ -745,14 +745,14 @@ make_menu (GucharmapWindow *guw)
   gtk_menu_shell_append (GTK_MENU_SHELL (unicode_details_menu), menu_item);
   gtk_check_menu_item_set_active (
           GTK_CHECK_MENU_ITEM (menu_item), 
-          guw->caption_show[GUCHARMAP_CHARMAP_CAPTION_DECOMPOSITION]);
+          guw->caption_show[GUCHARMAP_CAPTION_DECOMPOSITION]);
   g_signal_connect (G_OBJECT (menu_item), "activate",
                     G_CALLBACK (show_hide_caption_decomposition), guw);
 
   menu_item = gtk_check_menu_item_new_with_mnemonic (_("_UTF-8"));
   gtk_menu_shell_append (GTK_MENU_SHELL (unicode_details_menu), menu_item);
   gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item), 
-                                  guw->caption_show[GUCHARMAP_CHARMAP_CAPTION_UTF8]);
+                                  guw->caption_show[GUCHARMAP_CAPTION_UTF8]);
   g_signal_connect (G_OBJECT (menu_item), "activate",
                     G_CALLBACK (show_hide_caption_utf8), guw);
 
@@ -761,7 +761,7 @@ make_menu (GucharmapWindow *guw)
   gtk_menu_shell_append (GTK_MENU_SHELL (unicode_details_menu), menu_item);
   gtk_check_menu_item_set_active (
           GTK_CHECK_MENU_ITEM (menu_item), 
-          guw->caption_show[GUCHARMAP_CHARMAP_CAPTION_OTHER_REPS]);
+          guw->caption_show[GUCHARMAP_CAPTION_OTHER_REPS]);
   g_signal_connect (G_OBJECT (menu_item), "activate",
                     G_CALLBACK (show_hide_caption_other_reps), guw);
 
@@ -786,35 +786,35 @@ make_menu (GucharmapWindow *guw)
   menu_item = gtk_check_menu_item_new_with_mnemonic (_("_Alias Names"));
   gtk_menu_shell_append (GTK_MENU_SHELL (nameslist_details_menu), menu_item);
   gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item), 
-                                  guw->caption_show[GUCHARMAP_CHARMAP_CAPTION_EQUALS]);
+                                  guw->caption_show[GUCHARMAP_CAPTION_EQUALS]);
   g_signal_connect (G_OBJECT (menu_item), "activate",
                     G_CALLBACK (show_hide_caption_equals), guw);
 
   menu_item = gtk_check_menu_item_new_with_mnemonic (_("_Notes"));
   gtk_menu_shell_append (GTK_MENU_SHELL (nameslist_details_menu), menu_item);
   gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item), 
-                                  guw->caption_show[GUCHARMAP_CHARMAP_CAPTION_STARS]);
+                                  guw->caption_show[GUCHARMAP_CAPTION_STARS]);
   g_signal_connect (G_OBJECT (menu_item), "activate",
                     G_CALLBACK (show_hide_caption_stars), guw);
 
   menu_item = gtk_check_menu_item_new_with_mnemonic (_("_See Also"));
   gtk_menu_shell_append (GTK_MENU_SHELL (nameslist_details_menu), menu_item);
   gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item), 
-                                  guw->caption_show[GUCHARMAP_CHARMAP_CAPTION_EXES]);
+                                  guw->caption_show[GUCHARMAP_CAPTION_EXES]);
   g_signal_connect (G_OBJECT (menu_item), "activate",
                     G_CALLBACK (show_hide_caption_exes), guw);
 
   menu_item = gtk_check_menu_item_new_with_mnemonic (_("_Approximate Equivalents"));
   gtk_menu_shell_append (GTK_MENU_SHELL (nameslist_details_menu), menu_item);
   gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item), 
-                                  guw->caption_show[GUCHARMAP_CHARMAP_CAPTION_POUNDS]);
+                                  guw->caption_show[GUCHARMAP_CAPTION_POUNDS]);
   g_signal_connect (G_OBJECT (menu_item), "activate",
                     G_CALLBACK (show_hide_caption_pounds), guw);
 
   menu_item = gtk_check_menu_item_new_with_mnemonic (_("_Equivalents"));
   gtk_menu_shell_append (GTK_MENU_SHELL (nameslist_details_menu), menu_item);
   gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item), 
-                                  guw->caption_show[GUCHARMAP_CHARMAP_CAPTION_COLONS]);
+                                  guw->caption_show[GUCHARMAP_CAPTION_COLONS]);
   g_signal_connect (G_OBJECT (menu_item), "activate",
                     G_CALLBACK (show_hide_caption_colons), guw);
 
@@ -843,7 +843,7 @@ make_menu (GucharmapWindow *guw)
   gtk_menu_shell_append (GTK_MENU_SHELL (unihan_details_menu), menu_item);
   gtk_check_menu_item_set_active (
           GTK_CHECK_MENU_ITEM (menu_item), 
-          guw->caption_show[GUCHARMAP_CHARMAP_CAPTION_KDEFINITION]);
+          guw->caption_show[GUCHARMAP_CAPTION_KDEFINITION]);
   g_signal_connect (G_OBJECT (menu_item), "activate",
                     G_CALLBACK (show_hide_caption_kdefinition), guw);
 
@@ -852,7 +852,7 @@ make_menu (GucharmapWindow *guw)
   gtk_menu_shell_append (GTK_MENU_SHELL (unihan_details_menu), menu_item);
   gtk_check_menu_item_set_active (
           GTK_CHECK_MENU_ITEM (menu_item), 
-          guw->caption_show[GUCHARMAP_CHARMAP_CAPTION_KMANDARIN]);
+          guw->caption_show[GUCHARMAP_CAPTION_KMANDARIN]);
   g_signal_connect (G_OBJECT (menu_item), "activate",
                     G_CALLBACK (show_hide_caption_kmandarin), guw);
 
@@ -861,7 +861,7 @@ make_menu (GucharmapWindow *guw)
   gtk_menu_shell_append (GTK_MENU_SHELL (unihan_details_menu), menu_item);
   gtk_check_menu_item_set_active (
           GTK_CHECK_MENU_ITEM (menu_item), 
-          guw->caption_show[GUCHARMAP_CHARMAP_CAPTION_KJAPANESEON]);
+          guw->caption_show[GUCHARMAP_CAPTION_KJAPANESEON]);
   g_signal_connect (G_OBJECT (menu_item), "activate",
                     G_CALLBACK (show_hide_caption_kjapaneseon), guw);
 
@@ -870,7 +870,7 @@ make_menu (GucharmapWindow *guw)
   gtk_menu_shell_append (GTK_MENU_SHELL (unihan_details_menu), menu_item);
   gtk_check_menu_item_set_active (
           GTK_CHECK_MENU_ITEM (menu_item), 
-          guw->caption_show[GUCHARMAP_CHARMAP_CAPTION_KJAPANESEKUN]);
+          guw->caption_show[GUCHARMAP_CAPTION_KJAPANESEKUN]);
   g_signal_connect (G_OBJECT (menu_item), "activate",
                     G_CALLBACK (show_hide_caption_kjapanesekun), guw);
 
@@ -879,7 +879,7 @@ make_menu (GucharmapWindow *guw)
   gtk_menu_shell_append (GTK_MENU_SHELL (unihan_details_menu), menu_item);
   gtk_check_menu_item_set_active (
           GTK_CHECK_MENU_ITEM (menu_item), 
-          guw->caption_show[GUCHARMAP_CHARMAP_CAPTION_KCANTONESE]);
+          guw->caption_show[GUCHARMAP_CAPTION_KCANTONESE]);
   g_signal_connect (G_OBJECT (menu_item), "activate",
                     G_CALLBACK (show_hide_caption_kcantonese), guw);
 
@@ -887,7 +887,7 @@ make_menu (GucharmapWindow *guw)
           _("_Tang Pronunciation"));
   gtk_menu_shell_append (GTK_MENU_SHELL (unihan_details_menu), menu_item);
   gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item), 
-                                  guw->caption_show[GUCHARMAP_CHARMAP_CAPTION_KTANG]);
+                                  guw->caption_show[GUCHARMAP_CAPTION_KTANG]);
   g_signal_connect (G_OBJECT (menu_item), "activate",
                     G_CALLBACK (show_hide_caption_ktang), guw);
 
@@ -895,7 +895,7 @@ make_menu (GucharmapWindow *guw)
           _("_Korean Pronunciation"));
   gtk_menu_shell_append (GTK_MENU_SHELL (unihan_details_menu), menu_item);
   gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item), 
-                                  guw->caption_show[GUCHARMAP_CHARMAP_CAPTION_KKOREAN]);
+                                  guw->caption_show[GUCHARMAP_CAPTION_KKOREAN]);
   g_signal_connect (G_OBJECT (menu_item), "activate",
                     G_CALLBACK (show_hide_caption_kkorean), guw);
 #endif
@@ -1174,13 +1174,13 @@ gucharmap_window_init (GucharmapWindow *guw)
   guw->last_search = NULL;
 
   /* which captions to show by default, when enabled */
-  guw->caption_show[GUCHARMAP_CHARMAP_CAPTION_CATEGORY] = TRUE;
-  guw->caption_show[GUCHARMAP_CHARMAP_CAPTION_DECOMPOSITION] = TRUE;
-  guw->caption_show[GUCHARMAP_CHARMAP_CAPTION_STARS] = TRUE;
-  guw->caption_show[GUCHARMAP_CHARMAP_CAPTION_EXES] = TRUE;
+  guw->caption_show[GUCHARMAP_CAPTION_CATEGORY] = TRUE;
+  guw->caption_show[GUCHARMAP_CAPTION_DECOMPOSITION] = TRUE;
+  guw->caption_show[GUCHARMAP_CAPTION_STARS] = TRUE;
+  guw->caption_show[GUCHARMAP_CAPTION_EXES] = TRUE;
 #if ENABLE_UNIHAN
-  guw->caption_show[GUCHARMAP_CHARMAP_CAPTION_KDEFINITION] = TRUE;
-  guw->caption_show[GUCHARMAP_CHARMAP_CAPTION_KMANDARIN] = TRUE;
+  guw->caption_show[GUCHARMAP_CAPTION_KDEFINITION] = TRUE;
+  guw->caption_show[GUCHARMAP_CAPTION_KMANDARIN] = TRUE;
 #endif
 
   load_icon (guw);

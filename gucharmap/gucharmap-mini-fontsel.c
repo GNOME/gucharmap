@@ -404,7 +404,7 @@ gucharmap_mini_font_selection_get_type ()
 /* XXX: should do error checking */
 gboolean 
 gucharmap_mini_font_selection_set_font_name (GucharmapMiniFontSelection *fontsel,
-                                   const gchar *fontname)
+                                             const gchar *fontname)
 {
   pango_font_description_free (fontsel->font_desc);
 
@@ -447,9 +447,11 @@ gucharmap_mini_font_selection_get_font_size (GucharmapMiniFontSelection *fontsel
 
 /* size in points */
 void
-gucharmap_mini_font_selection_set_font_size (GucharmapMiniFontSelection *fontsel, gint size)
+gucharmap_mini_font_selection_set_font_size (GucharmapMiniFontSelection *fontsel, 
+                                             gint size)
 {
   gtk_adjustment_set_value (GTK_ADJUSTMENT (fontsel->size_adj), size);
   set_size (fontsel, size);
 }
+
 

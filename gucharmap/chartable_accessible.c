@@ -30,9 +30,12 @@
 #include "charcell_accessible.h"
 
 
-extern gint gucharmap_table_x_offset (GucharmapTable *chartable, gint col);
-extern gint gucharmap_table_y_offset (GucharmapTable *chartable, gint row);
-extern gint gucharmap_table_unichar_column (GucharmapTable *chartable, gunichar uc);
+extern gint gucharmap_table_x_offset (GucharmapTable *chartable, 
+                                      gint col);
+extern gint gucharmap_table_y_offset (GucharmapTable *chartable, 
+                                      gint row);
+extern gint gucharmap_table_unichar_column (GucharmapTable *chartable, 
+                                            gunichar uc);
 
 
 typedef struct 

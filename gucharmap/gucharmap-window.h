@@ -47,7 +47,7 @@ struct _GucharmapWindow
 {
   GtkWindow parent;
 
-  GucharmapCharmap *charmap;  /* XXX: could use GtkWidget instead of GucharmapCharmap */
+  GucharmapCharmap *charmap;
   GtkWidget *status;
   GtkAccelGroup *accel_group;
 
@@ -63,8 +63,8 @@ struct _GucharmapWindow
 
   gchar *last_search;
 
-  /* caption_show[GUCHARMAP_CHARMAP_CAPTION_CHARACTER] is ignored; it is always shown */
-  gboolean caption_show[GUCHARMAP_CHARMAP_CAPTION_COUNT];
+  /* caption_show[GUCHARMAP_CAPTION_CHARACTER] is ignored; it is always shown */
+  gboolean caption_show[GUCHARMAP_CAPTION_COUNT];
 
   gboolean font_selection_visible;
   gboolean text_to_copy_visible;

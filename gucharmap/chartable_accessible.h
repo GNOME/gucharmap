@@ -27,19 +27,11 @@
 G_BEGIN_DECLS
 
 
-#define CHARTABLE_ACCESSIBLE(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), \
-                                   chartable_accessible_get_type (), \
-                                   ChartableAccessible))
-#define CHARTABLE_ACCESSIBLE_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), \
-                                           chartable_accessible_get_type (), \
-                                           ChartableAccessibleClass))
-#define IS_CHARTABLE_ACCESSIBLE(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), \
-                                      chartable_accessible_get_type ()))
-#define IS_CHARTABLE_ACCESSIBLE_CLASS(klass) \
-    (G_TYPE_CHECK_CLASS_TYPE ((klass), chartable_accessible_get_type ()))
-#define CHARTABLE_ACCESSIBLE_GET_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS ((obj),\
-                                             chartable_accessible_get_type (),\
-                                             ChartableAccessibleClass))
+#define CHARTABLE_ACCESSIBLE(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), chartable_accessible_get_type (), ChartableAccessible))
+#define CHARTABLE_ACCESSIBLE_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), chartable_accessible_get_type (), ChartableAccessibleClass))
+#define IS_CHARTABLE_ACCESSIBLE(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), chartable_accessible_get_type ()))
+#define IS_CHARTABLE_ACCESSIBLE_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), chartable_accessible_get_type ()))
+#define CHARTABLE_ACCESSIBLE_GET_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS ((obj), chartable_accessible_get_type (), ChartableAccessibleClass))
 
 
 typedef struct _ChartableAccessible      ChartableAccessible;

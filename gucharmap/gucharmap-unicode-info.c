@@ -279,7 +279,8 @@ hangul_decomposition (gunichar s, gsize *result_len)
  *   @result_len is set to the resulting length of the string.
  */
 gunichar *
-gucharmap_unicode_canonical_decomposition (gunichar ch, gsize   *result_len)
+gucharmap_unicode_canonical_decomposition (gunichar ch, 
+                                           gsize *result_len)
 {
   if (ch >= 0xac00 && ch <= 0xd7af)  /* Hangul syllable */
     return hangul_decomposition (ch, result_len);

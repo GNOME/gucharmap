@@ -29,12 +29,18 @@
 #include "charcell_accessible.h"
 
 
-extern gint gucharmap_table_x_offset (GucharmapTable *chartable, gint col);
-extern gint gucharmap_table_y_offset (GucharmapTable *chartable, gint row);
-extern gint gucharmap_table_unichar_column (GucharmapTable *chartable, gunichar uc);
-extern gint gucharmap_table_row_height (GucharmapTable *chartable, gint row);
-extern gint gucharmap_table_column_width (GucharmapTable *chartable, gint col);
-extern void gucharmap_table_redraw (GucharmapTable *chartable, gboolean move_zoom);
+extern gint gucharmap_table_x_offset (GucharmapTable *chartable, 
+                                      gint col);
+extern gint gucharmap_table_y_offset (GucharmapTable *chartable, 
+                                      gint row);
+extern gint gucharmap_table_unichar_column (GucharmapTable *chartable, 
+                                            gunichar uc);
+extern gint gucharmap_table_row_height (GucharmapTable *chartable, 
+                                        gint row);
+extern gint gucharmap_table_column_width (GucharmapTable *chartable, 
+                                          gint col);
+extern void gucharmap_table_redraw (GucharmapTable *chartable, 
+                                    gboolean move_zoom);
 
 
 static gpointer parent_class = NULL;
