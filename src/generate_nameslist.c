@@ -17,7 +17,8 @@
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  */
 
-/* reads Unihan.txt from stdin, prints unicode_unihan.cI on stdout */
+/* reads NameList.txt (converted to UTF-8) from stdin, prints
+ * unicode_unihan.cI on stdout */
 
 #include <stdio.h>
 #include <stdlib.h>

@@ -126,59 +126,165 @@ status_message (Charmap *charmap, const gchar *message)
 }
 
 
+/* ucs is terminated with (gunichar)(-1). Return value should be freed with
+ * free_array_of_strings */
+static gchar **
+make_array_of_char_descs (gunichar *ucs)
+{
+  gchar **descs;
+  gint i;
+
+  if (ucs == NULL)
+    return NULL;
+
+  /* count them and allocate the array */
+  for (i = 0;  ucs[i] != (gunichar)(-1);  i++);
+  descs = g_malloc ((i+1) * sizeof (gchar *));
+
+  for (i = 0;  ucs[i] != (gunichar)(-1);  i++)
+    descs[i] = g_strdup_printf ("%s [U+%4.4X %s]",                    
+                                unichar_to_printable_utf8 (ucs[i]), 
+                                ucs[i], get_unicode_name (ucs[i]));
+
+  descs[i] = NULL;
+  return descs;
+}
+
+
+static void
+free_array_of_strings (gchar **strs)
+{
+  gint i;
+
+  for (i = 0;  strs[i] != NULL;  i++)
+    g_free (strs[i]);
+
+  g_free (strs);
+}
+
+
+/* sets the value for the referenced row */
+static void 
+set_caption_value (GtkTreeStore *tree_store, 
+                   GtkTreeRowReference *rowref, 
+                   const gchar *value)
+{
+  GtkTreeIter iter;
+
+  gtk_tree_model_get_iter (GTK_TREE_MODEL (tree_store), &iter, 
+                           gtk_tree_row_reference_get_path (rowref));
+  gtk_tree_store_set (tree_store, &iter, 
+                      CAPTION_VALUE, value, -1);
+}
+
+
+/* makes child rows of the referenced row if there is more than one value;
+ * values is null-terminated; also deletes extra child rows if there are
+ * any */
+/* algo:
+ *   if (values == null)
+ *     set_caption (null)
+ *   else
+ *     {
+ *       set_row_value (values[0]);
+ *       child_iter = gtk_tree_model_iter_children ();
+ *
+ *       for (i = 1;  values[i] != NULL;  i++)
+ *         {
+ *           if (no child_iter)
+ *             make_child_iter;
+ *
+ *           set_row_value (values[0])
+ *         }
+ *     }
+ *
+ *   if (child_iter is not set)
+ *     child_iter = gtk_tree_model_iter_children ();
+ *
+ *   delete remaining children
+ */
+static void
+set_caption_values (GtkTreeStore *tree_store, 
+                    GtkTreeRowReference *rowref, 
+                    const gchar **values)
+{
+  GtkTreeIter iter, child_iter;
+  gboolean have_another_row = FALSE;
+  gint i;
+
+  gtk_tree_model_get_iter (GTK_TREE_MODEL (tree_store), &iter, 
+                           gtk_tree_row_reference_get_path (rowref));
+
+  if (values == NULL)
+    {
+      gtk_tree_store_set (tree_store, &iter, 
+                          CAPTION_VALUE, NULL, -1);
+      have_another_row = gtk_tree_model_iter_children (
+                             GTK_TREE_MODEL (tree_store), &child_iter, &iter);
+    }
+  else
+    {
+      gtk_tree_store_set (tree_store, &iter, 
+                          CAPTION_VALUE, values[0], -1);
+
+      have_another_row = gtk_tree_model_iter_children (
+                             GTK_TREE_MODEL (tree_store), &child_iter, &iter);
+
+      for (i = 1;  values[i] != NULL;  i++)
+        {
+          if (! have_another_row)
+            gtk_tree_store_append (tree_store, &child_iter, &iter);
+
+          gtk_tree_store_set (tree_store, &child_iter, 
+                              CAPTION_VALUE, values[i], -1);
+
+          have_another_row = gtk_tree_model_iter_next (
+                                 GTK_TREE_MODEL (tree_store), &child_iter);
+        }
+    }
+
+  /* delete remaining rows */
+  while (have_another_row)
+    have_another_row = gtk_tree_store_remove (tree_store, &child_iter);
+}
+
+
 static void
 set_caption (Charmap *charmap)
 {
-  GtkTreeIter iter;
-  GtkTreeModel *model;
   guchar ubuf[7];
-  gchar *temp;
-  GString *gstemp;
-  gsize result_len;
   gint i, n;
-
-  model = GTK_TREE_MODEL (charmap->caption_model);
 
   /* codepoint and name */
   if (charmap->caption_rows[CHARMAP_CAPTION_CHARACTER])
     {
-      gtk_tree_model_get_iter (
-              model, &iter, 
-              gtk_tree_row_reference_get_path (
-                  charmap->caption_rows[CHARMAP_CAPTION_CHARACTER]));
-      temp = g_strdup_printf ("U+%4.4X %s", charmap->active_char, 
-                              get_unicode_name (charmap->active_char));
-      gtk_tree_store_set (charmap->caption_model, &iter, 
-                          CAPTION_VALUE, temp, -1);
+      gchar *temp = g_strdup_printf ("U+%4.4X %s", charmap->active_char, 
+                                     get_unicode_name (charmap->active_char));
+      set_caption_value (charmap->caption_model, 
+                         charmap->caption_rows[CHARMAP_CAPTION_CHARACTER],
+                         temp);
       g_free (temp);
     }
 
   /* category */
   if (charmap->caption_rows[CHARMAP_CAPTION_CATEGORY])
     {
-      gtk_tree_model_get_iter (
-              model, &iter, 
-              gtk_tree_row_reference_get_path (
-                  charmap->caption_rows[CHARMAP_CAPTION_CATEGORY]));
-      gtk_tree_store_set (charmap->caption_model, &iter, CAPTION_VALUE, 
-                          get_unicode_category_name (charmap->active_char), 
-                          -1);
+      set_caption_value (charmap->caption_model, 
+                         charmap->caption_rows[CHARMAP_CAPTION_CATEGORY],
+                         get_unicode_category_name (charmap->active_char));
     }
 
   /* utf-8 */
   if (charmap->caption_rows[CHARMAP_CAPTION_UTF8])
     {
-      gstemp = g_string_new (NULL);
+      GString *gstemp = g_string_new (NULL);
       n = g_unichar_to_utf8 (charmap->active_char, ubuf);
       for (i = 0;  i < n;  i++)
         g_string_append_printf (gstemp, "0x%2.2X ", ubuf[i]);
 
-      gtk_tree_model_get_iter (
-              model, &iter, 
-              gtk_tree_row_reference_get_path (
-                  charmap->caption_rows[CHARMAP_CAPTION_UTF8]));
-      gtk_tree_store_set (charmap->caption_model, &iter, 
-                          CAPTION_VALUE, gstemp->str, -1);
+      set_caption_value (charmap->caption_model, 
+                         charmap->caption_rows[CHARMAP_CAPTION_UTF8],
+                         gstemp->str);
 
       g_string_free (gstemp, TRUE);
     }
@@ -186,18 +292,15 @@ set_caption (Charmap *charmap)
   /* other representations (for C, html) */
   if (charmap->caption_rows[CHARMAP_CAPTION_OTHER_REPS])
     {
-      gstemp = g_string_new (NULL);
+      GString *gstemp = g_string_new (NULL);
       n = g_unichar_to_utf8 (charmap->active_char, ubuf);
       for (i = 0;  i < n;  i++)
         g_string_append_printf (gstemp, "\\%3.3o", ubuf[i]);
       g_string_append_printf (gstemp, "\t\t&#%d;", charmap->active_char);
 
-      gtk_tree_model_get_iter (
-              model, &iter, 
-              gtk_tree_row_reference_get_path (
-                  charmap->caption_rows[CHARMAP_CAPTION_OTHER_REPS]));
-      gtk_tree_store_set (charmap->caption_model, &iter, 
-                          CAPTION_VALUE, gstemp->str, -1);
+      set_caption_value (charmap->caption_model, 
+                         charmap->caption_rows[CHARMAP_CAPTION_OTHER_REPS],
+                         gstemp->str);
 
       g_string_free (gstemp, TRUE);
     }
@@ -205,7 +308,9 @@ set_caption (Charmap *charmap)
   /* decomposition */
   if (charmap->caption_rows[CHARMAP_CAPTION_DECOMPOSITION])
     {
+      GString *gstemp;
       gunichar *decomposition;
+      gsize result_len;
 
       decomposition = unicode_canonical_decomposition (charmap->active_char,
                                                        &result_len);
@@ -217,12 +322,11 @@ set_caption (Charmap *charmap)
         g_string_append_printf (gstemp, " + %s [U+%4.4X]", 
                                 unichar_to_printable_utf8 (decomposition[i]), 
                                 decomposition[i]);
-      gtk_tree_model_get_iter (
-              model, &iter, 
-              gtk_tree_row_reference_get_path (
-                  charmap->caption_rows[CHARMAP_CAPTION_DECOMPOSITION]));
-      gtk_tree_store_set (charmap->caption_model, 
-                          &iter, CAPTION_VALUE, gstemp->str, -1);
+
+      set_caption_value (charmap->caption_model, 
+                         charmap->caption_rows[CHARMAP_CAPTION_DECOMPOSITION],
+                         gstemp->str);
+
       g_free (decomposition);
       g_string_free (gstemp, TRUE);
     }
@@ -230,80 +334,45 @@ set_caption (Charmap *charmap)
 #if ENABLE_UNIHAN
   /* kDefinition */
   if (charmap->caption_rows[CHARMAP_CAPTION_KDEFINITION])
-    {
-      gtk_tree_model_get_iter (
-              model, &iter, 
-              gtk_tree_row_reference_get_path (
-                  charmap->caption_rows[CHARMAP_CAPTION_KDEFINITION]));
-      gtk_tree_store_set (charmap->caption_model, &iter, CAPTION_VALUE, 
-                          get_unicode_kDefinition (charmap->active_char), -1);
-    }
+    set_caption_value (charmap->caption_model, 
+                       charmap->caption_rows[CHARMAP_CAPTION_KDEFINITION],
+                       get_unicode_kDefinition (charmap->active_char));
 
   /* kMandarin */
   if (charmap->caption_rows[CHARMAP_CAPTION_KMANDARIN])
-    {
-      gtk_tree_model_get_iter (
-              model, &iter, 
-              gtk_tree_row_reference_get_path (
-                  charmap->caption_rows[CHARMAP_CAPTION_KMANDARIN]));
-      gtk_tree_store_set (charmap->caption_model, &iter, CAPTION_VALUE, 
-                          get_unicode_kMandarin (charmap->active_char), -1);
-    }
+    set_caption_value (charmap->caption_model, 
+                       charmap->caption_rows[CHARMAP_CAPTION_KMANDARIN],
+                       get_unicode_kMandarin (charmap->active_char));
 
   /* kJapaneseOn */
   if (charmap->caption_rows[CHARMAP_CAPTION_KJAPANESEON])
-    {
-      gtk_tree_model_get_iter (
-              model, &iter, 
-              gtk_tree_row_reference_get_path (
-                  charmap->caption_rows[CHARMAP_CAPTION_KJAPANESEON]));
-      gtk_tree_store_set (charmap->caption_model, &iter, CAPTION_VALUE, 
-                          get_unicode_kJapaneseOn (charmap->active_char), -1);
-    }
+    set_caption_value (charmap->caption_model, 
+                       charmap->caption_rows[CHARMAP_CAPTION_KJAPANESEON],
+                       get_unicode_kJapaneseOn (charmap->active_char));
 
   /* kJapaneseKun */
   if (charmap->caption_rows[CHARMAP_CAPTION_KJAPANESEKUN])
-    {
-      gtk_tree_model_get_iter (
-              model, &iter, 
-              gtk_tree_row_reference_get_path (
-                  charmap->caption_rows[CHARMAP_CAPTION_KJAPANESEKUN]));
-      gtk_tree_store_set (charmap->caption_model, &iter, CAPTION_VALUE, 
-                          get_unicode_kJapaneseKun (charmap->active_char), -1);
-    }
+    set_caption_value (charmap->caption_model, 
+                       charmap->caption_rows[CHARMAP_CAPTION_KJAPANESEKUN],
+                       get_unicode_kJapaneseKun (charmap->active_char));
 
   /* kCantonese */
   if (charmap->caption_rows[CHARMAP_CAPTION_KCANTONESE])
-    {
-      gtk_tree_model_get_iter (
-              model, &iter, 
-              gtk_tree_row_reference_get_path (
-                  charmap->caption_rows[CHARMAP_CAPTION_KCANTONESE]));
-      gtk_tree_store_set (charmap->caption_model, &iter, CAPTION_VALUE, 
-                          get_unicode_kCantonese (charmap->active_char), -1);
-    }
+    set_caption_value (charmap->caption_model, 
+                       charmap->caption_rows[CHARMAP_CAPTION_KCANTONESE],
+                       get_unicode_kCantonese (charmap->active_char));
 
   /* kTang */
   if (charmap->caption_rows[CHARMAP_CAPTION_KTANG])
-    {
-      gtk_tree_model_get_iter (
-              model, &iter, 
-              gtk_tree_row_reference_get_path (
-                  charmap->caption_rows[CHARMAP_CAPTION_KTANG]));
-      gtk_tree_store_set (charmap->caption_model, &iter, CAPTION_VALUE, 
-                          get_unicode_kTang (charmap->active_char), -1);
-    }
+    set_caption_value (charmap->caption_model, 
+                       charmap->caption_rows[CHARMAP_CAPTION_KTANG],
+                       get_unicode_kTang (charmap->active_char));
 
   /* kKorean */
   if (charmap->caption_rows[CHARMAP_CAPTION_KKOREAN])
-    {
-      gtk_tree_model_get_iter (
-              model, &iter, 
-              gtk_tree_row_reference_get_path (
-                  charmap->caption_rows[CHARMAP_CAPTION_KKOREAN]));
-      gtk_tree_store_set (charmap->caption_model, &iter, CAPTION_VALUE, 
-                          get_unicode_kKorean (charmap->active_char), -1);
-    }
+    set_caption_value (charmap->caption_model, 
+                       charmap->caption_rows[CHARMAP_CAPTION_KKOREAN],
+                       get_unicode_kKorean (charmap->active_char));
 #endif /* #if ENABLE_UNIHAN */
 
 
@@ -311,20 +380,10 @@ set_caption (Charmap *charmap)
   if (charmap->caption_rows[CHARMAP_CAPTION_STARS])
     {
       const gchar **stars = get_nameslist_stars (charmap->active_char);
-      const gchar *star;
 
-      gtk_tree_model_get_iter (
-              model, &iter, 
-              gtk_tree_row_reference_get_path (
-                  charmap->caption_rows[CHARMAP_CAPTION_STARS]));
-
-      if (stars)
-        star = stars[0];
-      else
-        star = NULL;
-
-      gtk_tree_store_set (charmap->caption_model, &iter, CAPTION_VALUE, 
-                          star, -1);
+      set_caption_values (charmap->caption_model, 
+                          charmap->caption_rows[CHARMAP_CAPTION_STARS],
+                          stars);
 
       if (stars)
         g_free (stars);
@@ -334,20 +393,10 @@ set_caption (Charmap *charmap)
   if (charmap->caption_rows[CHARMAP_CAPTION_POUNDS])
     {
       const gchar **pounds = get_nameslist_pounds (charmap->active_char);
-      const gchar *pound;
 
-      gtk_tree_model_get_iter (
-              model, &iter, 
-              gtk_tree_row_reference_get_path (
-                  charmap->caption_rows[CHARMAP_CAPTION_POUNDS]));
-
-      if (pounds)
-        pound = pounds[0];
-      else
-        pound = NULL;
-
-      gtk_tree_store_set (charmap->caption_model, &iter, CAPTION_VALUE, 
-                          pound, -1);
+      set_caption_values (charmap->caption_model, 
+                          charmap->caption_rows[CHARMAP_CAPTION_POUNDS],
+                          pounds);
 
       if (pounds)
         g_free (pounds);
@@ -357,20 +406,10 @@ set_caption (Charmap *charmap)
   if (charmap->caption_rows[CHARMAP_CAPTION_EQUALS])
     {
       const gchar **equals = get_nameslist_equals (charmap->active_char);
-      const gchar *equal;
 
-      gtk_tree_model_get_iter (
-              model, &iter, 
-              gtk_tree_row_reference_get_path (
-                  charmap->caption_rows[CHARMAP_CAPTION_EQUALS]));
-
-      if (equals)
-        equal = equals[0];
-      else
-        equal = NULL;
-
-      gtk_tree_store_set (charmap->caption_model, &iter, CAPTION_VALUE, 
-                          equal, -1);
+      set_caption_values (charmap->caption_model, 
+                          charmap->caption_rows[CHARMAP_CAPTION_EQUALS],
+                          equals);
 
       if (equals)
         g_free (equals);
@@ -380,20 +419,10 @@ set_caption (Charmap *charmap)
   if (charmap->caption_rows[CHARMAP_CAPTION_COLONS])
     {
       const gchar **colons = get_nameslist_colons (charmap->active_char);
-      const gchar *colon;
 
-      gtk_tree_model_get_iter (
-              model, &iter, 
-              gtk_tree_row_reference_get_path (
-                  charmap->caption_rows[CHARMAP_CAPTION_COLONS]));
-
-      if (colons)
-        colon = colons[0];
-      else
-        colon = NULL;
-
-      gtk_tree_store_set (charmap->caption_model, &iter, CAPTION_VALUE, 
-                          colon, -1);
+      set_caption_values (charmap->caption_model, 
+                          charmap->caption_rows[CHARMAP_CAPTION_COLONS],
+                          colons);
 
       if (colons)
         g_free (colons);
@@ -403,25 +432,16 @@ set_caption (Charmap *charmap)
   if (charmap->caption_rows[CHARMAP_CAPTION_EXES])
     {
       gunichar *exes = get_nameslist_exes (charmap->active_char);
-      gchar *temp;
+      gchar **values;
 
-      gtk_tree_model_get_iter (
-              model, &iter, 
-              gtk_tree_row_reference_get_path (
-                  charmap->caption_rows[CHARMAP_CAPTION_EXES]));
+      values = make_array_of_char_descs (exes);
 
-      if (exes)
-        temp = g_strdup_printf ("%s [U+%4.4X %s]", 
-                                unichar_to_printable_utf8 (exes[0]), 
-                                exes[0], get_unicode_name (exes[0]));
-      else
-        temp = NULL;
+      set_caption_values (charmap->caption_model, 
+                          charmap->caption_rows[CHARMAP_CAPTION_EXES],
+                          (const gchar **) values);
 
-      gtk_tree_store_set (charmap->caption_model, &iter, 
-                          CAPTION_VALUE, temp, -1);
-
-      if (temp)
-        g_free (temp);
+      if (values)
+        g_free (values);
 
       if (exes)
         g_free (exes);
