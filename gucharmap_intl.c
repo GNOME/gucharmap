@@ -13,7 +13,6 @@ gchar *
 gucharmap_gettext (const gchar *str)
 {
   static gboolean gucharmap_gettext_initialized = FALSE;
-  gchar *rv;
 
   if (!gucharmap_gettext_initialized)
     {
@@ -24,9 +23,7 @@ gucharmap_gettext (const gchar *str)
       gucharmap_gettext_initialized = TRUE;
     }
   
-  rv = dgettext (GETTEXT_PACKAGE, str);
-  g_printerr ("gucharmap_gettext: returning %s\n", rv);
-  return rv;
+  return dgettext (GETTEXT_PACKAGE, str);
 }
 
 #endif /* #ifdef ENABLE_NLS */

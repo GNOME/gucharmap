@@ -21,6 +21,7 @@
 #include <gdk/gdkkeysyms.h>
 #include "charmap.h"
 #include "unicode_info.h"
+#include "gucharmap_intl.h"
 
 #define abs(x) ((x) >= 0 ? (x) : (-x))
 
@@ -82,46 +83,47 @@ set_caption (Charmap *charmap)
   gint i;
   gchar *bp;
 
-  g_snprintf (buf, BUFLEN, "codepoint: U+%4.4X", charmap->active_char);
+  g_snprintf (buf, BUFLEN, _("Unicode code point: U+%4.4X (%u)"), 
+              charmap->active_char, charmap->active_char);
   gtk_label_set_text (GTK_LABEL (charmap->caption->codepoint), buf);
 
-  g_snprintf (buf, BUFLEN, "character: %s", 
+  g_snprintf (buf, BUFLEN, _("Character: %s"), 
               unichar_to_printable_utf8 (charmap->active_char));
   gtk_label_set_text (GTK_LABEL (charmap->caption->character), buf);
 
-  g_snprintf (buf, BUFLEN, "category: %s", 
+  g_snprintf (buf, BUFLEN, _("Unicode category: %s"), 
               get_unicode_category_name (charmap->active_char));
   gtk_label_set_text (GTK_LABEL (charmap->caption->category), buf);
 
-  g_snprintf (buf, BUFLEN, "name: %s", 
+  g_snprintf (buf, BUFLEN, _("Unicode name: %s"), 
               get_unicode_name (charmap->active_char));
   gtk_label_set_text (GTK_LABEL (charmap->caption->name), buf);
 
-  g_snprintf (buf, BUFLEN, "kDefinition: %s", 
+  g_snprintf (buf, BUFLEN, _("East Asian definition: %s"), 
               get_unicode_kDefinition (charmap->active_char));
   gtk_label_set_text (GTK_LABEL (charmap->caption->kDefinition), buf);
 
-  g_snprintf (buf, BUFLEN, "kCantonese: %s", 
+  g_snprintf (buf, BUFLEN, _("Cantonese pronunciation: %s"), 
               get_unicode_kCantonese (charmap->active_char));
   gtk_label_set_text (GTK_LABEL (charmap->caption->kCantonese), buf);
 
-  g_snprintf (buf, BUFLEN, "kMandarin: %s", 
+  g_snprintf (buf, BUFLEN, _("Mandarin pronunciation: %s"), 
               get_unicode_kMandarin (charmap->active_char));
   gtk_label_set_text (GTK_LABEL (charmap->caption->kMandarin), buf);
 
-  g_snprintf (buf, BUFLEN, "kTang: %s", 
+  g_snprintf (buf, BUFLEN, _("Tang pronunciation: %s"), 
               get_unicode_kTang (charmap->active_char));
   gtk_label_set_text (GTK_LABEL (charmap->caption->kTang), buf);
 
-  g_snprintf (buf, BUFLEN, "kKorean: %s", 
+  g_snprintf (buf, BUFLEN, _("Korean pronunciation: %s"), 
               get_unicode_kKorean (charmap->active_char));
   gtk_label_set_text (GTK_LABEL (charmap->caption->kKorean), buf);
 
-  g_snprintf (buf, BUFLEN, "kJapaneseOn: %s", 
+  g_snprintf (buf, BUFLEN, _("Japanese On pronunciation: %s"), 
               get_unicode_kJapaneseOn (charmap->active_char));
   gtk_label_set_text (GTK_LABEL (charmap->caption->kJapaneseOn), buf);
 
-  g_snprintf (buf, BUFLEN, "kJapaneseKun: %s", 
+  g_snprintf (buf, BUFLEN, _("Japanese Kun pronunciation: %s"), 
               get_unicode_kJapaneseKun (charmap->active_char));
   gtk_label_set_text (GTK_LABEL (charmap->caption->kJapaneseKun), buf);
 
@@ -129,7 +131,8 @@ set_caption (Charmap *charmap)
   decomposition = unicode_canonical_decomposition (charmap->active_char,
                                                    &result_len);
   bp = buf;
-  bp += g_snprintf (buf, BUFLEN, "decomposition: %s [U+%4.4X]", 
+  bp += g_snprintf (buf, BUFLEN, 
+                    _("Unicode canonical decomposition: %s [U+%4.4X]"), 
                     unichar_to_printable_utf8 (decomposition[0]),
                     decomposition[0]);
   for (i = 1;  i < result_len;  i++)
@@ -999,18 +1002,18 @@ make_caption (Charmap *charmap)
   gtk_table_set_row_spacings (GTK_TABLE (table), 3);
   gtk_table_set_col_spacings (GTK_TABLE (table), 10);
 
-  charmap->caption->codepoint = gtk_label_new ("codepoint: ");
-  charmap->caption->character = gtk_label_new ("character: ");;
-  charmap->caption->category = gtk_label_new ("category: ");
-  charmap->caption->name = gtk_label_new ("name: ");
-  charmap->caption->kDefinition = gtk_label_new ("kDefinition: ");
-  charmap->caption->kCantonese = gtk_label_new ("kCantonese: ");
-  charmap->caption->kKorean = gtk_label_new ("kKorean: ");
-  charmap->caption->kJapaneseOn = gtk_label_new ("kJapaneseOn: ");
-  charmap->caption->kTang = gtk_label_new ("kTang: ");
-  charmap->caption->kMandarin = gtk_label_new ("kMandarin: ");
-  charmap->caption->kJapaneseKun = gtk_label_new ("kJapaneseKun: ");
-  charmap->caption->decomposition = gtk_label_new ("decomposition: ");
+  charmap->caption->codepoint = gtk_label_new ("");
+  charmap->caption->character = gtk_label_new ("");;
+  charmap->caption->category = gtk_label_new ("");
+  charmap->caption->name = gtk_label_new ("");
+  charmap->caption->kDefinition = gtk_label_new ("");
+  charmap->caption->kCantonese = gtk_label_new ("");
+  charmap->caption->kKorean = gtk_label_new ("");
+  charmap->caption->kJapaneseOn = gtk_label_new ("");
+  charmap->caption->kTang = gtk_label_new ("");
+  charmap->caption->kMandarin = gtk_label_new ("");
+  charmap->caption->kJapaneseKun = gtk_label_new ("");
+  charmap->caption->decomposition = gtk_label_new ("");
 
   /* fix heights so that stuff doesn't get cut off */
   font_metrics = pango_context_get_metrics (
@@ -1171,12 +1174,12 @@ make_paste_button (Charmap *charmap)
 
   vbox = gtk_vbox_new (FALSE, 2);
 
-  button = gtk_button_new_with_label ("identify character from selection");
+  button = gtk_button_new_with_label (_("Identify character from selection"));
   g_signal_connect (G_OBJECT (button), "clicked",
                     G_CALLBACK (identify_primary), charmap);
   gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
 
-  button = gtk_button_new_with_label ("identify character from clipboard");
+  button = gtk_button_new_with_label (_("identify character from clipboard"));
   g_signal_connect (G_OBJECT (button), "clicked",
                     G_CALLBACK (identify_clipboard), charmap);
   gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
@@ -1198,7 +1201,7 @@ make_text_to_copy (Charmap *charmap)
 
   hbox = gtk_hbox_new (FALSE, 5);
 
-  label = gtk_label_new ("text to copy:");
+  label = gtk_label_new (_("Text to copy:"));
   gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 
   charmap->text_to_copy = gtk_entry_new ();
