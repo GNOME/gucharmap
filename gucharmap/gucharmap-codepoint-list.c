@@ -25,26 +25,26 @@ static gunichar
 default_get_char (GucharmapCodepointList *list, 
                   guint                   index)
 {
-  if (index * 2 > UNICHAR_MAX)
+  if (index > UNICHAR_MAX)
     return (gunichar)(-1);
   else
-    return (gunichar) index * 2;
+    return (gunichar) index;
 }
 
 static guint
 default_get_index (GucharmapCodepointList *list, 
                    gunichar                wc)
 {
-  if (wc > UNICHAR_MAX || wc % 2 == 1)
+  if (wc > UNICHAR_MAX)
     return (guint)(-1);
   else
-    return (guint) wc / 2;
+    return (guint) wc;
 }
 
 static guint
 default_get_last_index (GucharmapCodepointList *list)
 {
-  return (guint) UNICHAR_MAX / 2;
+  return (guint) UNICHAR_MAX;
 }
 
 static void
