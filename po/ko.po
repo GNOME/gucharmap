@@ -6,183 +6,309 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
-"POT-Creation-Date: 2003-01-26 00:09+0900\n"
-"PO-Revision-Date: 2003-01-25 15:19+0900\n"
-"Last-Translator: Young-Ho, Cha <ganadist@chollian.net>\n"
+"POT-Creation-Date: 2003-03-13 22:06+0900\n"
+"PO-Revision-Date: 2003-03-13 14:03+0900\n"
+"Last-Translator: Young-Ho, Cha <ganadist@mizi.com>\n"
 "Language-Team: GTP Korean <gnome-kr-translation@gnome.or.kr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/charmap.c:1129
-msgid "Zoom mode disabled."
-msgstr "확대 모드 쓰지 않음"
+#: gucharmap/charmap.c:774
+msgid "Character Map"
+msgstr "글자 보기"
 
-#: src/charmap.c:1335
-msgid "Zoom mode enabled. Press <Esc> to disable zoom."
-msgstr "확대 모드 쓰기. <Esc>를 누르면 확대하지 않습니다."
-
-#: src/charmap.c:1394
-msgid "Zoom mode enabled."
-msgstr "확대 모드 쓰기."
-
-#: src/charmap.c:1587
+#: gucharmap/charmap.c:778
 msgid "Character"
 msgstr "글자"
 
-#: src/charmap.c:1593
+#: gucharmap/charmap.c:779
 msgid "Unicode category"
-msgstr "유니코드 "
+msgstr "유니코드 범위"
 
-#: src/charmap.c:1599
+#: gucharmap/charmap.c:780
 msgid "Canonical decomposition"
 msgstr "글자 나누기"
 
-#: src/charmap.c:1605
+#: gucharmap/charmap.c:781
 msgid "UTF-8"
 msgstr "UTF-8"
 
-#: src/charmap.c:1611
+#: gucharmap/charmap.c:782
 msgid "Other representations"
-msgstr "다른 모양"
+msgstr "다른 표기법"
 
-#: src/charmap.c:1618
+#: gucharmap/charmap.c:783
+msgid "See also"
+msgstr "참고 글자"
+
+#: gucharmap/charmap.c:784
+msgid "Equivalents"
+msgstr "같은 글자"
+
+#: gucharmap/charmap.c:785
+msgid "Alias names"
+msgstr "다른 이름"
+
+#: gucharmap/charmap.c:786
+msgid "Approximate equivalents"
+msgstr "비슷한 글자"
+
+#: gucharmap/charmap.c:787
+msgid "Notes"
+msgstr "주의"
+
+#: gucharmap/charmap.c:789
 msgid "CJK ideograph definition"
 msgstr "CJK 한자 뜻"
 
-#: src/charmap.c:1624
+#: gucharmap/charmap.c:790
 msgid "Mandarin pronunciation"
 msgstr "북경어 표기"
 
-#: src/charmap.c:1630
+#: gucharmap/charmap.c:791
 msgid "Japanese On pronunciation"
 msgstr "일본어 음독"
 
-#: src/charmap.c:1636
+#: gucharmap/charmap.c:792
 msgid "Japanese Kun pronunciation"
 msgstr "일본어 훈독"
 
-#: src/charmap.c:1642
+#: gucharmap/charmap.c:793
 msgid "Cantonese pronunciation"
 msgstr "광동어 표기"
 
-#: src/charmap.c:1648
+#: gucharmap/charmap.c:794
 msgid "Tang pronunciation"
 msgstr "중국 고어 표기"
 
-#: src/charmap.c:1654
+#: gucharmap/charmap.c:795
 msgid "Korean pronunciation"
 msgstr "한글 표기"
 
-#: src/charmap.c:1709
-msgid "Clipboard is empty."
-msgstr "클립보드가 비었습니다."
+#: gucharmap/charmap.c:813
+msgid "Details on the Current Character"
+msgstr "현재 글자의 자세한 설명"
 
-#: src/charmap.c:1711
-msgid "There is no selected text."
-msgstr "선택한 글자가 없습니다."
+#: gucharmap/charmap.c:824
+msgid "List of Unicode Blocks"
+msgstr "유니코드 범위 목록"
 
-#: src/charmap.c:1719 src/charmap.c:1923
-msgid "Unknown character, unable to identify."
-msgstr "알 수 없는 글자."
+#: gucharmap/main.c:68
+msgid "Font to start with; ex: 'Serif 27'"
+msgstr "시작할 글꼴; 예: 'Gulim 27'"
 
-#: src/charmap.c:1723 src/charmap.c:1927
-msgid "Character found."
-msgstr "글자를 찾았습니다."
+#: gucharmap/main.c:131
+msgid "Zoom mode enabled. Press <Esc> to disable zoom."
+msgstr "확대 모드 쓰기. <Esc>를 누르면 확대하지 않습니다."
 
-#: src/main.c:114
+#: gucharmap/main.c:141
+msgid "Zoom mode disabled."
+msgstr "확대 모드 쓰지 않음"
+
+#: gucharmap/main.c:344
 #, c-format
 msgid ""
 "Not a valid code point to jump to. Must be a hexadecimal number between 0 "
 "and %4.4X."
 msgstr "잘못된 코드번호 입니다. 16진수로 0부터 %4.4X사이의 번호여야 합니다."
 
-#: src/main.c:136
+#: gucharmap/main.c:366
 msgid "Go to hex code point"
 msgstr "16진 코드 번호로 갑니다"
 
-#: src/main.c:157
+#: gucharmap/main.c:387
 msgid "_Enter unicode code point"
 msgstr "유니코드 번호를 넣으십시오(_E)"
 
-#: src/main.c:201
+#: gucharmap/main.c:431
 msgid "The selected code point is not a valid unicode character."
 msgstr "선택한 코드 번호는 올바른 유니코드 글자가 아닙니다."
 
-#: src/main.c:232
+#: gucharmap/main.c:459
 msgid "Text copied to clipboard."
 msgstr "글자가 클립보드에 복사되었습니다."
 
-#: src/main.c:242
-msgid "Text-to-copy entry box cleared."
-msgstr "글자 입력 상자가 비워졌습니다."
-
-#: src/main.c:256
+#: gucharmap/main.c:474
 msgid "Not found."
 msgstr "찾지 못함"
 
-#: src/main.c:260
+#: gucharmap/main.c:478
 msgid "Found."
 msgstr "찾았습니다."
 
-#: src/main.c:264
+#: gucharmap/main.c:482
 msgid "Search wrapped."
 msgstr "처음부터 다시 찾습니다."
 
-#: src/main.c:268
+#: gucharmap/main.c:486
 msgid "Nothing to search for."
 msgstr "찾을 것이 없습니다."
 
-#: src/main.c:291
+#: gucharmap/main.c:520
 msgid "_Search:"
 msgstr "찾기(_S):"
 
-#: src/main.c:309
+#: gucharmap/main.c:539
 msgid ""
 "Search for the next occurrence of this string in a character's Unicode name."
 msgstr "글자의 유니코드 이름에 나오는 설명에서 찾습니다."
 
-#: src/main.c:338
+#: gucharmap/main.c:571
 msgid "_Text to copy:"
 msgstr "복사할 글자(_T):"
 
-#: src/main.c:357
+#: gucharmap/main.c:592
 msgid "Copy to the clipboard."
 msgstr "클립보드로 복사합니다."
 
-#: src/main.c:382
+#: gucharmap/main.c:618
 msgid "translator_credits"
 msgstr "차영호 <ganadist@mizi.com>, 2003"
 
-#: src/main.c:389 src/main.c:517
+#: gucharmap/main.c:625 gucharmap/main.c:1088 gucharmap.desktop.in.h:1
 msgid "Unicode Character Map"
 msgstr "유니코드 글자 보기"
 
-#: src/main.c:433
+#: gucharmap/main.c:680
 msgid "Char_map"
 msgstr "글자보기(_M)"
 
-#: src/main.c:435
+#: gucharmap/main.c:682
 msgid "_View"
 msgstr "보기(_V)"
 
-#: src/main.c:437
+#: gucharmap/main.c:684
 msgid "_Go To"
 msgstr "가기(_G)"
 
-#: src/main.c:455
+#: gucharmap/main.c:703
 msgid "Expand/Collapse All"
 msgstr "모두 펼치기/접기"
 
-#: src/main.c:465
+#. ctrl-+ or ctrl-=
+#: gucharmap/main.c:712
+msgid "Zoom _In"
+msgstr "확대(_I)"
+
+#. ctrl--
+#: gucharmap/main.c:724
+msgid "Zoom _Out"
+msgstr "축소(_O)"
+
+#. ctrl-<enter>
+#: gucharmap/main.c:737
+msgid "_Zoom Mode"
+msgstr "줌 모드(_Z)"
+
+#: gucharmap/main.c:751
+msgid "_Unicode Details"
+msgstr "유니코드 설명(_U)"
+
+#. the unicode details submenu
+#: gucharmap/main.c:757 gucharmap/main.c:806 gucharmap/main.c:880
+msgid "Options"
+msgstr "옵션"
+
+#: gucharmap/main.c:765
+msgid "_Category"
+msgstr "범위(_C)"
+
+#: gucharmap/main.c:773
+msgid "Canonical _Decomposition"
+msgstr "글자 나누기(_D)"
+
+#: gucharmap/main.c:780
+msgid "_UTF-8"
+msgstr "UTF-8(_U)"
+
+#: gucharmap/main.c:788
+msgid "_Other Representations"
+msgstr "다른 표기법(_O)"
+
+#: gucharmap/main.c:800
+msgid "_CJK Ideograph Details"
+msgstr "CJK 한자 설명(_C)"
+
+#: gucharmap/main.c:815
+msgid "CJK Ideograph _Definition"
+msgstr "CJK 한자 뜻(_D)"
+
+#: gucharmap/main.c:823
+msgid "_Mandarin Pronunciation"
+msgstr "북경어 표기(_M)"
+
+#: gucharmap/main.c:831
+msgid "Japanese _On Pronunciation"
+msgstr "일본어 음독(_O)"
+
+#: gucharmap/main.c:839
+msgid "_Japanese Kun Pronunciation"
+msgstr "일본어 훈독(_J)"
+
+#: gucharmap/main.c:847
+msgid "_Cantonese Pronunciation"
+msgstr "광동어 표기(_C)"
+
+#: gucharmap/main.c:855
+msgid "_Tang Pronunciation"
+msgstr "중국 고어 표기(_T)"
+
+#: gucharmap/main.c:863
+msgid "_Korean Pronunciation"
+msgstr "한글 표기(_K)"
+
+#: gucharmap/main.c:874
+msgid "_Annotations and Cross References"
+msgstr "해설 및 참고 사항"
+
+#: gucharmap/main.c:889
+msgid "_Alias Names"
+msgstr "다른 이름(_A)"
+
+#: gucharmap/main.c:896
+msgid "_Notes"
+msgstr "주의(_N)"
+
+#: gucharmap/main.c:903
+msgid "_See Also"
+msgstr "참고 글자(_S)"
+
+#: gucharmap/main.c:910
+msgid "_Approximate Equivalents"
+msgstr "비슷한 글자(_A)"
+
+#: gucharmap/main.c:917
+msgid "_Equivalents"
+msgstr "같은 글자(_E)"
+
+#. ctrl-h
+#: gucharmap/main.c:930
 msgid "_Hex Code Point..."
 msgstr "16진 코드 번호(_H)..."
 
-#: src/main.c:470
+#. ctrl-v
+#: gucharmap/main.c:938
 msgid "Character in _Clipboard"
 msgstr "클립보드의 글자(_C)"
 
 #. make the help menu
-#: src/main.c:478
+#: gucharmap/main.c:948
 msgid "_Help"
 msgstr "도움말(_H)"
+
+#: gucharmap/mini_fontsel.c:283
+msgid "Font"
+msgstr "글꼴"
+
+#: gucharmap/mini_fontsel.c:292
+msgid "Font Family"
+msgstr "글꼴 패밀리"
+
+#: gucharmap/mini_fontsel.c:296
+msgid "Font Style"
+msgstr "글꼴 모양"
+
+#: gucharmap/mini_fontsel.c:303
+msgid "Font Size"
+msgstr "글꼴 크기"
