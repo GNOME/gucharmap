@@ -82,7 +82,7 @@ set_caption (Charmap *charmap)
   escaped_utf8_buf = g_markup_escape_text (
           unichar_to_printable_utf8 (charmap->active_char), -1);
   escaped_unicode_info = g_markup_escape_text (
-          get_unicode_info (charmap->active_char), -1);
+          get_unicode_name (charmap->active_char), -1);
 
   /* n.b. the string below has utf8 quotes in it */
   caption_markup = g_strdup_printf (

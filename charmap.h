@@ -28,15 +28,16 @@ extern "C" {
 
 
 #define CHARMAP(obj)         GTK_CHECK_CAST (obj, charmap_get_type (), Charmap)
-#define CHARMAP_CLASS(clazz) GTK_CHECK_CLASS_CAST (clazz, charmap_get_type (), \
+#define CHARMAP_CLASS(clazz) GTK_CHECK_CLASS_CAST (clazz, charmap_get_type (),\
                                                    CharmapClass)
 #define IS_CHARMAP(obj)      GTK_CHECK_TYPE (obj, charmap_get_type ())
 
-#define CHARMAP_ROWS 8
+#define CHARMAP_ROWS 12
 #define CHARMAP_COLS 16
 
 /* largest legal unicode character */
-#define UNICHAR_MAX 0x0010ffff
+/* #define UNICHAR_MAX 0x0010ffff  XXX: gtk has problems */
+#define UNICHAR_MAX 0x0000ffff
 
 
 typedef struct _Charmap Charmap;
