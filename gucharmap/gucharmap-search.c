@@ -35,7 +35,7 @@ struct _GucharmapSearchState
   GucharmapDirection      increment;
   gboolean                whole_word;
   gint                    found_index;       /* index of the found character */
-  /* true if there are known to be know matches, or there is known to be
+  /* true if there are known to be no matches, or there is known to be
    * exactly one match and it has been found */
   gboolean                dont_search;
   gpointer                saved_data;        /* holds some data to pass back to the caller */
@@ -286,6 +286,7 @@ gboolean
 gucharmap_idle_search (GucharmapSearchState *search_state)
 {
   GTimer *timer = g_timer_new ();
+  gunichar wc;
   gint index;
 
   if (quick_checks (search_state))
@@ -297,7 +298,7 @@ gucharmap_idle_search (GucharmapSearchState *search_state)
   do
     {
       search_state->curr_index = (search_state->curr_index + search_state->increment + search_state->list_num_chars) % search_state->list_num_chars;
-      gunichar wc = gucharmap_codepoint_list_get_char (search_state->list, search_state->curr_index);
+      wc = gucharmap_codepoint_list_get_char (search_state->list, search_state->curr_index);
 
       if (!gucharmap_unichar_validate (wc) || !gucharmap_unichar_isdefined (wc))
         continue;
