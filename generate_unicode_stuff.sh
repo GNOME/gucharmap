@@ -91,12 +91,12 @@ fi
 typedef struct 
 {
   gunichar index;
-  gchar *name;
+  const gchar *name;
 } 
 unicode_data_t;
 
 
-static unicode_data_t unicode_data[] =
+static const unicode_data_t unicode_data[] =
 {
 EOF
 
@@ -109,7 +109,7 @@ EOF
 
 
 /* does a binary search on unicode_data */
-gchar *
+const gchar *
 get_unicode_data_name (gunichar uc)
 {
   gint min = 0;
@@ -135,14 +135,14 @@ get_unicode_data_name (gunichar uc)
 
 
 /* ascii case-insensitive substring search (source ripped from glib) */
-static gchar *
+static const gchar *
 ascii_case_strrstr (const gchar *haystack, const gchar *needle)
 {
   gsize i;
   gsize needle_len;
   gsize haystack_len;
   const gchar *p;
-      
+
   g_return_val_if_fail (haystack != NULL, NULL);
   g_return_val_if_fail (needle != NULL, NULL);
 
@@ -150,11 +150,11 @@ ascii_case_strrstr (const gchar *haystack, const gchar *needle)
   haystack_len = strlen (haystack);
 
   if (needle_len == 0)
-    return (gchar *)haystack;
+    return haystack;
 
   if (haystack_len < needle_len)
     return NULL;
-  
+
   p = haystack + haystack_len - needle_len;
 
   while (p >= haystack)
@@ -162,13 +162,13 @@ ascii_case_strrstr (const gchar *haystack, const gchar *needle)
       for (i = 0; i < needle_len; i++)
         if (g_ascii_tolower (p[i]) != g_ascii_tolower (needle[i]))
           goto next;
-      
-      return (gchar *)p;
-      
+
+      return p;
+
     next:
       p--;
     }
-  
+
   return NULL;
 }
 

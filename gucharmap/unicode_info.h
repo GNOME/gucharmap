@@ -24,35 +24,33 @@
 #include <gtk/gtk.h>
 
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
+G_BEGIN_DECLS
 
 typedef struct
 {
   gunichar start;
   gunichar end;
-  gchar *name;
+  const gchar *name;
 }
 unicode_block_t;
 
-extern unicode_block_t unicode_blocks[];
+extern const unicode_block_t unicode_blocks[];
 
 gint count_blocks (gunichar max);
 
 
 /* return values are read-only */
-gchar * get_unicode_name (gunichar uc);
-gchar * get_unicode_data_name (gunichar uc);
-gchar * get_unicode_category_name (gunichar uc);
-gchar * get_unicode_kDefinition (gunichar uc);
-gchar * get_unicode_kCantonese (gunichar uc);
-gchar * get_unicode_kMandarin (gunichar uc);
-gchar * get_unicode_kTang (gunichar uc);
-gchar * get_unicode_kKorean (gunichar uc);
-gchar * get_unicode_kJapaneseKun (gunichar uc);
-gchar * get_unicode_kJapaneseOn (gunichar uc);
-gchar * get_hangul_syllable_name (gunichar s);
+G_CONST_RETURN gchar * get_unicode_name (gunichar uc);
+G_CONST_RETURN gchar * get_unicode_data_name (gunichar uc);
+G_CONST_RETURN gchar * get_unicode_category_name (gunichar uc);
+G_CONST_RETURN gchar * get_unicode_kDefinition (gunichar uc);
+G_CONST_RETURN gchar * get_unicode_kCantonese (gunichar uc);
+G_CONST_RETURN gchar * get_unicode_kMandarin (gunichar uc);
+G_CONST_RETURN gchar * get_unicode_kTang (gunichar uc);
+G_CONST_RETURN gchar * get_unicode_kKorean (gunichar uc);
+G_CONST_RETURN gchar * get_unicode_kJapaneseKun (gunichar uc);
+G_CONST_RETURN gchar * get_unicode_kJapaneseOn (gunichar uc);
+G_CONST_RETURN gchar * get_hangul_syllable_name (gunichar s);
 
 /* A wrapper for g_unicode_canonical_decomposition that also does hangul
  * decomposition. 
@@ -70,9 +68,7 @@ gunichar find_next_substring_match (gunichar start, gunichar unichar_max,
 gboolean is_valid_character (gunichar uc);
 
 
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */
+G_END_DECLS
 
 #endif  /* #ifndef UNICODE_INFO_H */
 

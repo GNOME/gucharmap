@@ -1,5 +1,14 @@
 2003-01-23  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* generate_unicode_stuff.sh:
+	* src/unicode_data.c:
+	* src/unicode_info.[ch]:
+	* src/unihan.c: Declare the static Unicode data blocks const,
+	because they are.  Also, return const gchar * from functions
+	that return read-only strings.
+
+2003-01-23  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* src/charmap.[ch]: Implement a real zoom mode instead of abusing
 	the drag icon.  Zooming can now be activated by pressing either
 	the right mouse button or '+' on the keyboard.

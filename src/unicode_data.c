@@ -30,12 +30,12 @@
 typedef struct 
 {
   gunichar index;
-  gchar *name;
+  const gchar *name;
 } 
 unicode_data_t;
 
 
-static unicode_data_t unicode_data[] =
+static const unicode_data_t unicode_data[] =
 {
   { 0x0000, "<control>" },
   { 0x0001, "<control>" },
@@ -13915,7 +13915,7 @@ static unicode_data_t unicode_data[] =
 
 
 /* does a binary search on unicode_data */
-gchar *
+const gchar *
 get_unicode_data_name (gunichar uc)
 {
   gint min = 0;
@@ -13941,7 +13941,7 @@ get_unicode_data_name (gunichar uc)
 
 
 /* ascii case-insensitive substring search (source ripped from glib) */
-static gchar *
+static const gchar *
 ascii_case_strrstr (const gchar *haystack, const gchar *needle)
 {
   gsize i;
@@ -13956,7 +13956,7 @@ ascii_case_strrstr (const gchar *haystack, const gchar *needle)
   haystack_len = strlen (haystack);
 
   if (needle_len == 0)
-    return (gchar *)haystack;
+    return haystack;
 
   if (haystack_len < needle_len)
     return NULL;
@@ -13969,7 +13969,7 @@ ascii_case_strrstr (const gchar *haystack, const gchar *needle)
         if (g_ascii_tolower (p[i]) != g_ascii_tolower (needle[i]))
           goto next;
       
-      return (gchar *)p;
+      return p;
       
     next:
       p--;

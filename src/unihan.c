@@ -30,17 +30,17 @@
 typedef struct 
 {
   gunichar index;
-  gchar *kDefinition;
-  gchar *kCantonese;
-  gchar *kMandarin;
-  gchar *kTang;
-  gchar *kKorean;
-  gchar *kJapeneseKun;
-  gchar *kJapaneseOn;
+  const gchar *kDefinition;
+  const gchar *kCantonese;
+  const gchar *kMandarin;
+  const gchar *kTang;
+  const gchar *kKorean;
+  const gchar *kJapeneseKun;
+  const gchar *kJapaneseOn;
 } 
 unihan_t;
 
-static unihan_t unihan[] =
+static const unihan_t unihan[] =
 {
   { 0x3400, "(same as 丘) hillock or mound", "JAAU1 KAAU5", "", "", "", "", "" },
   { 0x3401, "to lick; to taste, a mat, bamboo bark", "TIM2", "TIAN3 TIAN4", "", "", "", "" },
@@ -27037,11 +27037,11 @@ static unihan_t unihan[] =
 
 /* does a binary search; also caches most recent, since it will often be
  * called in succession on the same character */
-static unihan_t *
+static const unihan_t *
 _get_unihan (gunichar uc)
 {
   static gunichar most_recent_searched;
-  static unihan_t *most_recent_result;
+  static const unihan_t *most_recent_result;
   gint min = 0;
   gint mid;
   gint max = sizeof (unihan) / sizeof (unihan_t) - 1;
@@ -27073,70 +27073,70 @@ _get_unihan (gunichar uc)
 }
 
 
-gchar * 
+const gchar * 
 get_unicode_kDefinition (gunichar uc)
 {
-  unihan_t *uh = _get_unihan (uc);
+  const unihan_t *uh = _get_unihan (uc);
   if (uh == NULL)
     return "";
   else
     return uh->kDefinition;
 }
 
-gchar * 
+const gchar * 
 get_unicode_kCantonese (gunichar uc)
 {
-  unihan_t *uh = _get_unihan (uc);
+  const unihan_t *uh = _get_unihan (uc);
   if (uh == NULL)
     return "";
   else
     return uh->kCantonese;
 }
 
-gchar * 
+const gchar * 
 get_unicode_kMandarin (gunichar uc)
 {
-  unihan_t *uh = _get_unihan (uc);
+  const unihan_t *uh = _get_unihan (uc);
   if (uh == NULL)
     return "";
   else
     return uh->kMandarin;
 }
 
-gchar * 
+const gchar * 
 get_unicode_kTang (gunichar uc)
 {
-  unihan_t *uh = _get_unihan (uc);
+  const unihan_t *uh = _get_unihan (uc);
   if (uh == NULL)
     return "";
   else
     return uh->kTang;
 }
 
-gchar * 
+const gchar * 
 get_unicode_kKorean (gunichar uc)
 {
-  unihan_t *uh = _get_unihan (uc);
+  const unihan_t *uh = _get_unihan (uc);
   if (uh == NULL)
     return "";
   else
     return uh->kKorean;
 }
 
-gchar * 
+const gchar * 
 get_unicode_kJapaneseKun (gunichar uc)
 {
-  unihan_t *uh = _get_unihan (uc);
+  const unihan_t *uh = _get_unihan (uc);
   if (uh == NULL)
     return "";
   else
     return uh->kJapeneseKun;
 }
 
-gchar * 
+const gchar * 
 get_unicode_kJapaneseOn (gunichar uc)
 {
-  unihan_t *uh = _get_unihan (uc);
+  const unihan_t *uh = _get_unihan (uc);
   if (uh == NULL)
     return "";
   else
@@ -27145,46 +27145,47 @@ get_unicode_kJapaneseOn (gunichar uc)
 
 #else /* #if ENABLE_UNIHAN */
 
-gchar * 
+const gchar * 
 get_unicode_kDefinition (gunichar uc)
 {
   return "This feature was not compiled in.";
 }
 
-gchar * 
+const gchar * 
 get_unicode_kCantonese (gunichar uc)
 {
   return "This feature was not compiled in.";
 }
 
-gchar * 
+const gchar * 
 get_unicode_kMandarin (gunichar uc)
 {
   return "This feature was not compiled in.";
 }
 
-gchar * 
+const gchar * 
 get_unicode_kTang (gunichar uc)
 {
   return "This feature was not compiled in.";
 }
 
-gchar * 
+const gchar * 
 get_unicode_kKorean (gunichar uc)
 {
   return "This feature was not compiled in.";
 }
 
-gchar * 
+const gchar * 
 get_unicode_kJapaneseKun (gunichar uc)
 {
   return "This feature was not compiled in.";
 }
 
-gchar * 
+const gchar * 
 get_unicode_kJapaneseOn (gunichar uc)
 {
   return "This feature was not compiled in.";
 }
 
 #endif /* #else (#if ENABLE_UNIHAN) */
+

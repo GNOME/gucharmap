@@ -31,25 +31,25 @@
 #define NCount (VCount * TCount)
 #define SCount (LCount * NCount)
 
-static gchar *JAMO_L_TABLE[] = {
+static const gchar * const JAMO_L_TABLE[] = {
   "G", "GG", "N", "D", "DD", "R", "M", "B", "BB",
   "S", "SS", "", "J", "JJ", "C", "K", "T", "P", "H", NULL
 };
 
-static gchar *JAMO_V_TABLE[] = {
+static const gchar * const JAMO_V_TABLE[] = {
   "A", "AE", "YA", "YAE", "EO", "E", "YEO", "YE", "O",
   "WA", "WAE", "OE", "YO", "U", "WEO", "WE", "WI",
   "YU", "EU", "YI", "I"
 };
 
-static gchar *JAMO_T_TABLE[] = {
+static const gchar * const JAMO_T_TABLE[] = {
   "", "G", "GG", "GS", "N", "NJ", "NH", "D", "L", "LG", "LM",
   "LB", "LS", "LT", "LP", "LH", "M", "B", "BS",
   "S", "SS", "NG", "J", "C", "K", "T", "P", "H"
 };
 
 /* computes the hangul name as per UAX #15 */
-gchar *
+const gchar *
 get_hangul_syllable_name (gunichar s)
 {
   static gchar buf[32];
@@ -70,7 +70,7 @@ get_hangul_syllable_name (gunichar s)
 }
 
 
-gchar *
+const gchar *
 get_unicode_name (gunichar uc)
 {
   if (uc >= 0x3400 && uc <= 0x4DB5)
@@ -95,7 +95,7 @@ get_unicode_name (gunichar uc)
     return "<CJK Ideograph Extension B>";
   else
     {
-      gchar *x = get_unicode_data_name (uc);
+      const gchar *x = get_unicode_data_name (uc);
       if (x == NULL)
         return "<not assigned>";
       else
@@ -104,7 +104,7 @@ get_unicode_name (gunichar uc)
 }
 
 
-gchar *
+const gchar *
 get_unicode_category_name (gunichar uc)
 {
   switch (g_unichar_type (uc))
@@ -144,7 +144,7 @@ get_unicode_category_name (gunichar uc)
 }
 
 
-unicode_block_t unicode_blocks[] =
+const unicode_block_t unicode_blocks[] =
 {
   { 0x0000, 0x007F, "Basic Latin" },
   { 0x0080, 0x00FF, "Latin-1 Supplement" },
@@ -256,7 +256,7 @@ unicode_block_t unicode_blocks[] =
   { 0xE0000, 0xE007F, "Tags" },
   { 0xF0000, 0xFFFFF, "Supplementary Private Use Area-A" },
   { 0x100000, 0x10FFFF, "Supplementary Private Use Area-B" },
-  { -1, -1, NULL }
+  { (gunichar)-1, (gunichar)-1, NULL }
 };
 
 
