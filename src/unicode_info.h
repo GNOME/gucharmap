@@ -40,6 +40,29 @@ typedef struct
 }
 UnicodeBlock;
 
+
+typedef struct 
+{
+  gunichar index;
+  const gchar *name;
+} 
+UnicodeData;
+
+
+typedef struct 
+{
+  gunichar index;
+  const gchar *kDefinition;
+  const gchar *kCantonese;
+  const gchar *kMandarin;
+  const gchar *kTang;
+  const gchar *kKorean;
+  const gchar *kJapeneseKun;
+  const gchar *kJapaneseOn;
+} 
+Unihan;
+
+
 extern const UnicodeBlock unicode_blocks[];
 
 gint count_blocks (gunichar max);
@@ -68,10 +91,6 @@ gunichar * unicode_canonical_decomposition (gunichar ch, gsize *result_len);
 /* starts search at start */
 gunichar find_next_substring_match (gunichar start, gunichar unichar_max,
                                     const gchar *search_text);
-
-/* returns true unless the character is definitely not a valid unicode
- * character */
-gboolean is_valid_character (gunichar uc);
 
 
 G_END_DECLS

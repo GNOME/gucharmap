@@ -29,10 +29,18 @@ lib_LTLIBRARIES = libgucharmap.la
 
 libgucharmap_la_SOURCES = gucharmap_marshal.c gucharmap_marshal.h \
                           charmap.c charmap.h \
-                          unicode_data.c unicode_info.c \
-                          unicode_info.h unihan.c \
+                          unicode_data.cI unicode_unihan.cI \
+                          unicode_info.c unicode_info.h \
                           gucharmap_intl.c gucharmap_intl.h \
                           mini_fontsel.c mini_fontsel.h
+
+
+unicode_data.cI:
+	./generate_unicode_stuff.sh unicode_data.cI || exit 1
+
+unicode_unihan.cI:
+	./generate_unicode_stuff.sh unicode_unihan.cI || exit 1
+
 
 # this is different from the project version
 # http://sources.redhat.com/autobook/autobook/autobook_91.html
@@ -46,6 +54,7 @@ libgucharmapinclude_HEADERS = charmap.h unicode_info.h mini_fontsel.h
 bin_PROGRAMS = gucharmap
 
 gucharmap_SOURCES = main.c
+
 
 if OS_WIN32
 
@@ -99,4 +108,5 @@ uninstall-local:
 endif
 
 
-EXTRA_DIST = gucharmap_marshal.list gucharmaprc.rc
+EXTRA_DIST = gucharmap_marshal.list gucharmaprc.rc unicode_data.cI \
+             unicode_unihan.cI

@@ -17,8 +17,18 @@
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  */
 
+#if HAVE_CONFIG_H
+# include <config.h>
+#endif
+
 #include <gtk/gtk.h>
-#include "unicode_info.h"
+#include <unicode_info.h>
+
+#include <unicode_data.cI>
+#if ENABLE_UNIHAN
+# include <unicode_unihan.cI>
+#endif
+
 
 /* constants for hangul (de)composition, see UAX #15 */
 #define SBase 0xAC00
@@ -328,4 +338,277 @@ unicode_canonical_decomposition (gunichar ch, gsize   *result_len)
   else 
     return g_unicode_canonical_decomposition (ch, result_len);
 }
+
+
+
+/* does a binary search on unicode_data */
+const gchar *
+get_unicode_data_name (gunichar uc)
+{
+  gint min = 0;
+  gint mid;
+  gint max = sizeof (unicode_data) / sizeof (UnicodeData) - 1;
+
+  if (uc < unicode_data[0].index || uc > unicode_data[max].index)
+    return "";
+
+  while (max >= min) 
+    {
+      mid = (min + max) / 2;
+      if (uc > unicode_data[mid].index)
+        min = mid + 1;
+      else if (uc < unicode_data[mid].index)
+        max = mid - 1;
+      else
+        return unicode_data[mid].name;
+    }
+
+  return NULL;
+}
+
+
+/* ascii case-insensitive substring search (source ripped from glib) */
+static const gchar *
+ascii_case_strrstr (const gchar *haystack, const gchar *needle)
+{
+  gsize i;
+  gsize needle_len;
+  gsize haystack_len;
+  const gchar *p;
+      
+  g_return_val_if_fail (haystack != NULL, NULL);
+  g_return_val_if_fail (needle != NULL, NULL);
+
+  needle_len = strlen (needle);
+  haystack_len = strlen (haystack);
+
+  if (needle_len == 0)
+    return haystack;
+
+  if (haystack_len < needle_len)
+    return NULL;
+  
+  p = haystack + haystack_len - needle_len;
+
+  while (p >= haystack)
+    {
+      for (i = 0; i < needle_len; i++)
+        if (g_ascii_tolower (p[i]) != g_ascii_tolower (needle[i]))
+          goto next;
+      
+      return p;
+      
+    next:
+      p--;
+    }
+  
+  return NULL;
+}
+
+
+/* case insensitive; returns (gunichar)(-1) if nothing found */
+gunichar
+find_next_substring_match (gunichar start, gunichar unichar_max,
+                           const gchar *search_text)
+{
+  gint min = 0;
+  gint mid = 0;
+  gint max = sizeof (unicode_data) / sizeof (UnicodeData) - 1;
+  gint i0;
+  gint i;
+
+  /* locate the start character by binary search */
+  if (start < unicode_data[0].index || start > unichar_max)
+    i0 = 0;
+  else
+    {
+      while (max >= min) 
+        {
+          mid = (min + max) / 2;
+          if (start > unicode_data[mid].index)
+            min = mid + 1;
+          else if (start < unicode_data[mid].index)
+            max = mid - 1;
+          else
+            break;
+        }
+
+      i0 = mid;
+    }
+
+  /* try substring match on each */
+  max = sizeof (unicode_data) / sizeof (UnicodeData);
+  for (i = i0+1;  i != i0;  )
+    {
+      if (ascii_case_strrstr (unicode_data[i].name, search_text) != NULL)
+        return unicode_data[i].index;
+
+      i++;
+      if (i >= max || unicode_data[i].index > unichar_max)
+        i = 0;
+    }
+
+  /* if the start character matches we want to return a match */
+  if (ascii_case_strrstr (unicode_data[i].name, search_text) != NULL)
+    return unicode_data[i].index;
+
+  return (gunichar)(-1);
+}
+
+
+#if ENABLE_UNIHAN
+
+/* does a binary search; also caches most recent, since it will often be
+ * called in succession on the same character */
+static const Unihan *
+_get_unihan (gunichar uc)
+{
+  static gunichar most_recent_searched;
+  static const Unihan *most_recent_result;
+  gint min = 0;
+  gint mid;
+  gint max = sizeof (unihan) / sizeof (Unihan) - 1;
+
+  if (uc < unihan[0].index || uc > unihan[max].index)
+    return NULL;
+
+  if (uc == most_recent_searched)
+    return most_recent_result;
+
+  most_recent_searched = uc;
+
+  while (max >= min) 
+    {
+      mid = (min + max) / 2;
+      if (uc > unihan[mid].index)
+        min = mid + 1;
+      else if (uc < unihan[mid].index)
+        max = mid - 1;
+      else
+        {
+          most_recent_result = unihan + mid;
+          return unihan + mid;
+        }
+    }
+
+  most_recent_result = NULL;
+  return NULL;
+}
+
+
+const gchar * 
+get_unicode_kDefinition (gunichar uc)
+{
+  const Unihan *uh = _get_unihan (uc);
+  if (uh == NULL)
+    return "";
+  else
+    return uh->kDefinition;
+}
+
+const gchar * 
+get_unicode_kCantonese (gunichar uc)
+{
+  const Unihan *uh = _get_unihan (uc);
+  if (uh == NULL)
+    return "";
+  else
+    return uh->kCantonese;
+}
+
+const gchar * 
+get_unicode_kMandarin (gunichar uc)
+{
+  const Unihan *uh = _get_unihan (uc);
+  if (uh == NULL)
+    return "";
+  else
+    return uh->kMandarin;
+}
+
+const gchar * 
+get_unicode_kTang (gunichar uc)
+{
+  const Unihan *uh = _get_unihan (uc);
+  if (uh == NULL)
+    return "";
+  else
+    return uh->kTang;
+}
+
+const gchar * 
+get_unicode_kKorean (gunichar uc)
+{
+  const Unihan *uh = _get_unihan (uc);
+  if (uh == NULL)
+    return "";
+  else
+    return uh->kKorean;
+}
+
+const gchar * 
+get_unicode_kJapaneseKun (gunichar uc)
+{
+  const Unihan *uh = _get_unihan (uc);
+  if (uh == NULL)
+    return "";
+  else
+    return uh->kJapeneseKun;
+}
+
+const gchar * 
+get_unicode_kJapaneseOn (gunichar uc)
+{
+  const Unihan *uh = _get_unihan (uc);
+  if (uh == NULL)
+    return "";
+  else
+    return uh->kJapaneseOn;
+}
+
+#else /* #if ENABLE_UNIHAN */
+
+const gchar * 
+get_unicode_kDefinition (gunichar uc)
+{
+  return "This feature was not compiled in.";
+}
+
+const gchar * 
+get_unicode_kCantonese (gunichar uc)
+{
+  return "This feature was not compiled in.";
+}
+
+const gchar * 
+get_unicode_kMandarin (gunichar uc)
+{
+  return "This feature was not compiled in.";
+}
+
+const gchar * 
+get_unicode_kTang (gunichar uc)
+{
+  return "This feature was not compiled in.";
+}
+
+const gchar * 
+get_unicode_kKorean (gunichar uc)
+{
+  return "This feature was not compiled in.";
+}
+
+const gchar * 
+get_unicode_kJapaneseKun (gunichar uc)
+{
+  return "This feature was not compiled in.";
+}
+
+const gchar * 
+get_unicode_kJapaneseOn (gunichar uc)
+{
+  return "This feature was not compiled in.";
+}
+
+#endif /* #else (#if ENABLE_UNIHAN) */
 
