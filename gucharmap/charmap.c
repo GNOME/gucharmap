@@ -1132,6 +1132,8 @@ update_zoom_window (Charmap *charmap)
   GdkPixbuf *pixbuf;
   gint width, height;
 
+  g_return_if_fail (charmap->zoom_window != NULL);
+
   pixbuf = create_glyph_pixbuf (charmap, compute_zoom_font_size (charmap));
   width  = gdk_pixbuf_get_width (pixbuf);
   height = gdk_pixbuf_get_height (pixbuf);
