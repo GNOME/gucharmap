@@ -756,6 +756,12 @@ draw_chartable_from_scratch (GucharmapTable *chartable)
 {
   gint row, col;
 
+  if (chartable->pixmap == NULL)
+    chartable->pixmap = gdk_pixmap_new (
+	    chartable->drawing_area->window, 
+	    chartable->drawing_area->allocation.width,
+	    chartable->drawing_area->allocation.height, -1);
+
   /* plain background */
   gdk_draw_rectangle (
           chartable->pixmap,
@@ -769,8 +775,6 @@ draw_chartable_from_scratch (GucharmapTable *chartable)
   for (row = 0;  row < chartable->rows;  row++)
     for (col = 0;  col < chartable->cols;  col++)
       {
-        gunichar uc = rowcol_to_unichar (chartable, row, col);
-
         draw_square_bg (chartable, row, col);
         draw_character (chartable, row, col);
       }
@@ -1002,11 +1006,6 @@ expose_event (GtkWidget *widget,
 
   if (chartable->pixmap == NULL)
     {
-      chartable->pixmap = gdk_pixmap_new (
-              chartable->drawing_area->window, 
-              chartable->drawing_area->allocation.width,
-              chartable->drawing_area->allocation.height, -1);
-
       draw_chartable_from_scratch (chartable);
 
       /* the zoom window may need to be redrawn and repositioned */
