@@ -1109,7 +1109,7 @@ key_press_event (GtkWidget *widget,
                  GdkEventKey *event, 
                  GucharmapTable *chartable)
 {
-  if (event->state & GDK_MODIFIER_MASK)
+  if (event->state & (GDK_MOD1_MASK | GDK_CONTROL_MASK))
     return FALSE;
 
   /* move the cursor or whatever depending on which key was pressed */
