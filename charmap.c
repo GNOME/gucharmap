@@ -78,13 +78,14 @@ set_caption (Charmap *charmap)
 {
 #define BUFLEN 512
   static gchar buf[BUFLEN];
+  static guchar ubuf[7];
   gunichar *decomposition;
   gsize result_len;
-  gint i;
+  gint i, n, m;
   gchar *bp;
 
   g_snprintf (buf, BUFLEN, _("Unicode code point: U+%4.4X (%u)"), 
-              charmap->active_char, charmap->active_char);
+                  charmap->active_char, charmap->active_char);
   gtk_label_set_text (GTK_LABEL (charmap->caption->codepoint), buf);
 
   g_snprintf (buf, BUFLEN, _("Character: %s"), 
@@ -98,6 +99,13 @@ set_caption (Charmap *charmap)
   g_snprintf (buf, BUFLEN, _("Unicode name: %s"), 
               get_unicode_name (charmap->active_char));
   gtk_label_set_text (GTK_LABEL (charmap->caption->name), buf);
+
+  /* XXX: should "UTF-8: " be localized? */
+  n = g_snprintf (buf, BUFLEN, "UTF-8: ");
+  m = g_unichar_to_utf8 (charmap->active_char, ubuf);
+  for (i = 0;  i < m;  i++)
+    n += g_snprintf (buf + n, BUFLEN - n, " 0x%2.2X", ubuf[i]);
+  gtk_label_set_text (GTK_LABEL (charmap->caption->utf8), buf);
 
   g_snprintf (buf, BUFLEN, _("Ideograph definition: %s"), 
               get_unicode_kDefinition (charmap->active_char));
@@ -1039,6 +1047,7 @@ make_caption (Charmap *charmap)
   charmap->caption->kMandarin = gtk_label_new ("");
   charmap->caption->kJapaneseKun = gtk_label_new ("");
   charmap->caption->decomposition = gtk_label_new ("");
+  charmap->caption->utf8 = gtk_label_new ("");
 
   /* fix heights so that stuff doesn't get cut off */
   font_metrics = pango_context_get_metrics (
@@ -1062,6 +1071,7 @@ make_caption (Charmap *charmap)
   gtk_widget_set_size_request (charmap->caption->kJapaneseKun, -1, font_height);
   gtk_widget_set_size_request (charmap->caption->decomposition, -1, 
                                font_height);
+  gtk_widget_set_size_request (charmap->caption->utf8, -1, font_height);
 
   gtk_label_set_selectable (GTK_LABEL (charmap->caption->codepoint), TRUE);
   gtk_label_set_selectable (GTK_LABEL (charmap->caption->character), TRUE);
@@ -1075,6 +1085,7 @@ make_caption (Charmap *charmap)
   gtk_label_set_selectable (GTK_LABEL (charmap->caption->kTang), TRUE);
   gtk_label_set_selectable (GTK_LABEL (charmap->caption->kMandarin), TRUE);
   gtk_label_set_selectable (GTK_LABEL (charmap->caption->decomposition), TRUE);
+  gtk_label_set_selectable (GTK_LABEL (charmap->caption->utf8), TRUE);
 
   gtk_misc_set_alignment (GTK_MISC (charmap->caption->codepoint), 0, 0);
   gtk_misc_set_alignment (GTK_MISC (charmap->caption->character), 0, 0);
@@ -1088,12 +1099,13 @@ make_caption (Charmap *charmap)
   gtk_misc_set_alignment (GTK_MISC (charmap->caption->kTang), 0, 0);
   gtk_misc_set_alignment (GTK_MISC (charmap->caption->kMandarin), 0, 0);
   gtk_misc_set_alignment (GTK_MISC (charmap->caption->decomposition), 0, 0);
+  gtk_misc_set_alignment (GTK_MISC (charmap->caption->utf8), 0, 0);
 
   /*
    * *------------------------------------------------*
    * | codepoint:  | character:   | category:         |
    * *------------------------------------------------*
-   * | name:                                          |
+   * | utf-8:      | name:                            |
    * *------------------------------------------------*
    * | decomposition:                                 |
    * *------------------------------------------------*
@@ -1112,8 +1124,10 @@ make_caption (Charmap *charmap)
   gtk_table_attach_defaults (GTK_TABLE (table), charmap->caption->category,
                              2, 4, 0, 1);
 
+  gtk_table_attach_defaults (GTK_TABLE (table), charmap->caption->utf8,
+                             0, 1, 1, 2);
   gtk_table_attach_defaults (GTK_TABLE (table), charmap->caption->name,
-                             0, 4, 1, 2);
+                             1, 4, 1, 2);
 
   gtk_table_attach_defaults (GTK_TABLE (table), 
                              charmap->caption->decomposition, 

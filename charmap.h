@@ -115,6 +115,7 @@ struct _Caption
   GtkWidget *kTang;
   GtkWidget *kMandarin;
   GtkWidget *decomposition;
+  GtkWidget *utf8;
 };
 
 
