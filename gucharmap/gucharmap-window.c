@@ -156,7 +156,8 @@ jump_code_point (GtkWidget *widget, GucharmapWindow *guw)
   gtk_container_set_border_width (GTK_CONTAINER (crapbox), 6);
   gtk_box_set_spacing (GTK_BOX (crapbox), 6);
 
-  label = gtk_label_new_with_mnemonic (_("_Enter hexadecimal Unicode code point:"));
+  label = gtk_label_new_with_mnemonic (_("_Enter hexadecimal Unicode"
+                                         "code point:"));
   gtk_widget_show (label);
   gtk_box_pack_start (GTK_BOX (crapbox), label, FALSE, FALSE, 0);
 
@@ -198,8 +199,10 @@ status_message (GtkWidget *widget, const gchar *message, GucharmapWindow *guw)
 
 
 /* direction is -1 (back) or +1 (forward) */
-static void
+/* returns TRUE if search was successful */
+static gboolean
 do_search (GucharmapWindow *guw, 
+           GtkWindow *alert_parent,
            const gchar *search_text, 
            gint direction)
 {
@@ -209,19 +212,19 @@ do_search (GucharmapWindow *guw,
     {
       case GUCHARMAP_FOUND:
       case GUCHARMAP_WRAPPED:
-        break;
+        return TRUE;
 
       case GUCHARMAP_NOT_FOUND:
-        information_dialog (guw, GTK_WINDOW (guw), _("Not found."));
-        break;
+        information_dialog (guw, alert_parent, _("Not found."));
+        return FALSE;
 
       case GUCHARMAP_NOTHING_TO_SEARCH_FOR:
-        information_dialog (guw, GTK_WINDOW (guw), 
-                            _("Nothing to search for."));
-        break;
+        information_dialog (guw, alert_parent, _("Nothing to search for."));
+        return FALSE;
 
       default:
         g_warning ("gucharmap_charmap_search returned an unexpected result; this should never happen");
+        return FALSE;
     }
 }
 
@@ -238,7 +241,10 @@ search_find_response (GtkDialog *dialog,
 
       entry_dialog->guw->last_search = g_strdup (gtk_entry_get_text (entry_dialog->entry));
 
-      do_search (entry_dialog->guw, entry_dialog->guw->last_search, 1);
+      /* drop back into the search dialog if the search fails */
+      if (! do_search (entry_dialog->guw, GTK_WINDOW (entry_dialog->dialog),
+                       entry_dialog->guw->last_search, 1))
+        return;
     }
 
   g_free (entry_dialog);
@@ -307,7 +313,7 @@ static void
 search_find_next (GtkWidget *widget, GucharmapWindow *guw)
 {
   if (guw->last_search != NULL)
-    do_search (guw, guw->last_search, 1);
+    do_search (guw, GTK_WINDOW (guw), guw->last_search, 1);
   else
     search_find (widget, guw);
 }
@@ -317,7 +323,7 @@ static void
 search_find_prev (GtkWidget *widget, GucharmapWindow *guw)
 {
   if (guw->last_search != NULL)
-    do_search (guw, guw->last_search, -1);
+    do_search (guw, GTK_WINDOW (guw), guw->last_search, -1);
   /* XXX: else, open up search dialog, but search backwards :-( */
 }
 
