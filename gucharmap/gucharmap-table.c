@@ -1108,9 +1108,6 @@ key_release_event (GtkWidget *widget,
                    GdkEventKey *event,
                    GucharmapTable *chartable)
 {
-  if (event->state & (GDK_MOD1_MASK | GDK_CONTROL_MASK))
-    return FALSE;
-
   switch (event->keyval)
     {
       case GDK_Shift_L: case GDK_Shift_R:
@@ -1408,9 +1405,23 @@ motion_notify_event (GtkWidget *widget,
 
 
 static gboolean
-focus_in_or_out_event (GtkWidget *widget, 
+focus_out_event (GtkWidget *widget, 
                        GdkEventFocus *event,
                        GucharmapTable *chartable)
+{
+  gucharmap_table_zoom_disable (chartable);
+
+  if (chartable->drawing_area != NULL && chartable->pixmap != NULL)
+    draw_and_expose_character_square (chartable, chartable->active_char);
+
+  return FALSE;
+}
+
+
+static gboolean
+focus_in_event (GtkWidget *widget, 
+                GdkEventFocus *event,
+                GucharmapTable *chartable)
 {
   if (chartable->drawing_area != NULL && chartable->pixmap != NULL)
     draw_and_expose_character_square (chartable, chartable->active_char);
@@ -1605,9 +1616,9 @@ gucharmap_table_init (GucharmapTable *chartable)
   g_signal_connect (G_OBJECT (chartable->drawing_area), "motion-notify-event",
                     G_CALLBACK (motion_notify_event), chartable);
   g_signal_connect (G_OBJECT (chartable->drawing_area), "focus-in-event",
-                    G_CALLBACK (focus_in_or_out_event), chartable);
+                    G_CALLBACK (focus_in_event), chartable);
   g_signal_connect (G_OBJECT (chartable->drawing_area), "focus-out-event",
-                    G_CALLBACK (focus_in_or_out_event), chartable);
+                    G_CALLBACK (focus_out_event), chartable);
   g_signal_connect (G_OBJECT (chartable->drawing_area), "scroll-event",
                     G_CALLBACK (mouse_wheel_event), chartable);
   g_signal_connect (G_OBJECT (chartable->drawing_area), "style-set",
