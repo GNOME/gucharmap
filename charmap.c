@@ -360,6 +360,120 @@ append_character_to_text_to_copy (Charmap *charmap)
 }
 
 
+static void
+move_home (Charmap *charmap)
+{
+  charmap->active_char = 0x0000;
+  charmap->page_first_char = 0x0000;
+}
+
+static void
+move_end (Charmap *charmap)
+{
+  charmap->active_char = UNICHAR_MAX;
+
+  /* make this row the last row shown */
+  charmap->page_first_char = 
+      (charmap->active_char - (charmap->active_char % CHARMAP_COLS)) 
+      - ((CHARMAP_ROWS - 1) * CHARMAP_COLS); 
+}
+
+static void
+move_up (Charmap *charmap)
+{
+  if (charmap->active_char >= CHARMAP_COLS)
+    charmap->active_char -= CHARMAP_COLS;
+  else
+    charmap->active_char = 0;
+
+  if (charmap->active_char < charmap->page_first_char
+      || charmap->active_char >= charmap->page_first_char 
+                                 + CHARMAP_ROWS * CHARMAP_COLS)
+    charmap->page_first_char = charmap->active_char - 
+                               (charmap->active_char % CHARMAP_COLS);
+}
+
+static void
+move_down (Charmap *charmap)
+{
+  if (charmap->active_char <= UNICHAR_MAX - CHARMAP_COLS)
+    charmap->active_char += CHARMAP_COLS;
+  else
+    charmap->active_char = UNICHAR_MAX;
+
+  if (charmap->active_char < charmap->page_first_char
+      || charmap->active_char >= charmap->page_first_char 
+                                 + CHARMAP_ROWS * CHARMAP_COLS)
+    {
+      /* make this row the last row shown */
+      charmap->page_first_char = 
+          (charmap->active_char - (charmap->active_char % CHARMAP_COLS)) 
+          - ((CHARMAP_ROWS - 1) * CHARMAP_COLS); 
+    }
+}
+
+static void
+move_left (Charmap *charmap)
+{
+  if (charmap->active_char > 0)
+    charmap->active_char--;
+
+  if (charmap->active_char < charmap->page_first_char
+      || charmap->active_char >= charmap->page_first_char 
+                                 + CHARMAP_ROWS * CHARMAP_COLS)
+    charmap->page_first_char = charmap->active_char - 
+                               (charmap->active_char % CHARMAP_COLS);
+}
+
+static void
+move_right (Charmap *charmap)
+{
+  if (charmap->active_char < UNICHAR_MAX)
+    charmap->active_char++;
+
+  if (charmap->active_char < charmap->page_first_char
+      || charmap->active_char >= charmap->page_first_char 
+                                 + CHARMAP_ROWS * CHARMAP_COLS)
+    {
+      /* make this row the last row shown */
+      charmap->page_first_char = 
+          (charmap->active_char - (charmap->active_char % CHARMAP_COLS)) 
+          - ((CHARMAP_ROWS - 1) * CHARMAP_COLS); 
+    }
+}
+
+static void
+move_page_up (Charmap *charmap)
+{
+  if (charmap->active_char >= CHARMAP_COLS * CHARMAP_ROWS)
+    charmap->active_char -= CHARMAP_COLS * CHARMAP_ROWS;
+  else if (charmap->active_char > 0)
+    charmap->active_char = 0;
+
+  if (charmap->active_char < charmap->page_first_char)
+    {
+      if (charmap->page_first_char >= CHARMAP_ROWS * CHARMAP_COLS)
+        charmap->page_first_char -= CHARMAP_ROWS * CHARMAP_COLS;
+      else
+        charmap->page_first_char = charmap->active_char - 
+                                   (charmap->active_char % CHARMAP_COLS);
+    }
+}
+
+static void
+move_page_down (Charmap *charmap)
+{
+  if (charmap->active_char < UNICHAR_MAX - CHARMAP_COLS * CHARMAP_ROWS)
+    charmap->active_char += CHARMAP_COLS * CHARMAP_ROWS;
+  else if (charmap->active_char < UNICHAR_MAX)
+    charmap->active_char = UNICHAR_MAX;
+
+  if (charmap->active_char >= charmap->page_first_char 
+                              + CHARMAP_ROWS * CHARMAP_COLS)
+    charmap->page_first_char += CHARMAP_ROWS * CHARMAP_COLS;
+}
+
+
 /* mostly for moving around in the charmap */
 static gint
 key_press_event (GtkWidget *widget, 
@@ -374,50 +488,41 @@ key_press_event (GtkWidget *widget,
 
   charmap = CHARMAP (callback_data);
   old_active_char = charmap->active_char;
+  old_page_first_char = charmap->page_first_char;
 
   /* move the cursor or whatever depending on which key was pressed */
   switch (event->keyval)
     {
       case GDK_Home: case GDK_KP_Home:
-        charmap->active_char = 0x0000;
+        move_home (charmap);
         break;
 
       case GDK_End: case GDK_KP_End:
-        charmap->active_char = UNICHAR_MAX;
+        move_end (charmap);
         break;
 
       case GDK_Up: case GDK_KP_Up: case GDK_k:
-        if (charmap->active_char >= CHARMAP_COLS)
-          charmap->active_char -= CHARMAP_COLS;
+        move_up (charmap);
         break;
 
       case GDK_Down: case GDK_KP_Down: case GDK_j:
-        if (charmap->active_char <= UNICHAR_MAX - CHARMAP_COLS)
-          charmap->active_char += CHARMAP_COLS;
+        move_down (charmap);
         break;
 
       case GDK_Left: case GDK_KP_Left: case GDK_h:
-        if (charmap->active_char > 0)
-          charmap->active_char--;
+        move_left (charmap);
         break;
 
       case GDK_Right: case GDK_KP_Right: case GDK_l:
-        if (charmap->active_char < UNICHAR_MAX)
-          charmap->active_char++;
+        move_right (charmap);
         break;
 
       case GDK_Page_Up: case GDK_b: case GDK_minus:
-        if (charmap->active_char >= CHARMAP_COLS * CHARMAP_ROWS)
-          charmap->active_char -= CHARMAP_COLS * CHARMAP_ROWS;
-        else if (charmap->active_char > 0)
-          charmap->active_char = 0;
+        move_page_up (charmap);
         break;
 
       case GDK_Page_Down: case GDK_space:
-        if (charmap->active_char < UNICHAR_MAX - CHARMAP_COLS * CHARMAP_ROWS)
-          charmap->active_char += CHARMAP_COLS * CHARMAP_ROWS;
-        else if (charmap->active_char < UNICHAR_MAX)
-          charmap->active_char = UNICHAR_MAX;
+        move_page_down (charmap);
         break;
 
       case GDK_Return: case GDK_KP_Enter:
@@ -425,15 +530,8 @@ key_press_event (GtkWidget *widget,
         return TRUE;
 
       default:
-        return TRUE;; /* don't redraw */
+        return TRUE; /* don't redraw */
     }
-
-  old_page_first_char = charmap->page_first_char;
-
-  /* move to the page with this active char */
-  charmap->page_first_char 
-      = charmap->active_char - (charmap->active_char % 
-                                (CHARMAP_COLS * CHARMAP_ROWS));
 
   if (charmap->page_first_char != old_page_first_char)
     {
@@ -457,6 +555,7 @@ static gunichar
 get_char_at (Charmap *charmap, gint x, gint y)
 {
   gint row, col, w, h;
+  gunichar rv;
 
   w = calculate_square_dimension_x (charmap->font_metrics);
   h = calculate_square_dimension_y (charmap->font_metrics);
@@ -469,7 +568,13 @@ get_char_at (Charmap *charmap, gint x, gint y)
   if (col >= CHARMAP_COLS)
     col = CHARMAP_COLS - 1;
 
-  return charmap->page_first_char + row * CHARMAP_COLS + col;
+  rv = charmap->page_first_char + row * CHARMAP_COLS + col;
+
+  /* XXX: check this somewhere else? */
+  if (rv > UNICHAR_MAX)
+    return UNICHAR_MAX;
+
+  return rv;
 }
 
 
