@@ -113,8 +113,9 @@ do_search (GucharmapWindow *guw,
 {
   const gchar *no_leading_space, *nptr;
   char *endptr;
-  g_assert (direction == -1 || direction == 1);
   gunichar wc;
+
+  g_assert (direction == -1 || direction == 1);
 
   if (search_text[0] == '\0')
     {
