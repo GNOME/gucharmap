@@ -36,7 +36,7 @@ GETTEXT_PACKAGE=gucharmap
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", 
                    [Define the gettext package to be used])
-ALL_LINGUAS="am ar az ca be bn cs cy da de el en_CA en_GB eo es fa fi fr ga hi hr hu id it ja ko lt mk ml mn ms nl nn no pa pl pt pt_BR ru sk sq sr sr@Latn sv ta th uk vi wa zh_CN zh_TW"
+ALL_LINGUAS="am ar az ca be bn cs cy da de el en_CA en_GB eo es fa fi fr ga hi hr hu id is it ja ko lt mk ml mn ms nl nn no pa pl pt pt_BR ru sk sq sr sr@Latn sv ta th uk vi wa zh_CN zh_TW"
 AM_GLIB_GNU_GETTEXT
 
 
