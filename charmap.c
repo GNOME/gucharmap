@@ -1300,6 +1300,42 @@ style_set (GtkWidget *widget, GtkStyle *previous_style, Charmap *charmap)
 }
 
 
+static void
+size_allocate (GtkWidget *widget, GtkAllocation *allocation, Charmap *charmap)
+{
+  gint old_rows, old_cols;
+
+  old_rows = charmap->rows;
+  old_cols = charmap->cols;
+
+  charmap->rows = allocation->width 
+                  / calculate_square_dimension_x (charmap->font_metrics);
+  charmap->cols = allocation->height
+                  / calculate_square_dimension_y (charmap->font_metrics);
+
+  g_printerr ("size_allocate: %dx%d -> %dx%d\n", 
+               allocation->width, allocation->height, 
+               charmap->rows, charmap->cols);
+
+  if (charmap->rows == old_rows && charmap->cols == old_cols)
+    return;
+
+  /* size the drawing area - the +1 is for the 1-pixel borders*/
+  gtk_widget_set_size_request (
+          charmap->tabulus, 
+          calculate_tabulus_dimension_x (charmap),
+          calculate_tabulus_dimension_y (charmap));
+
+  charmap->page_first_char = charmap->active_char 
+                             - (charmap->active_char % charmap->cols);
+
+  /* force pixmap to be redrawn on next expose event */
+  if (charmap->tabulus_pixmap != NULL)
+    g_object_unref (charmap->tabulus_pixmap);
+  charmap->tabulus_pixmap = NULL;
+}
+
+
 void
 charmap_class_init (CharmapClass *clazz)
 {
@@ -1340,6 +1376,8 @@ charmap_init (Charmap *charmap)
                     G_CALLBACK (mouse_wheel_event), charmap);
   g_signal_connect (G_OBJECT (charmap->tabulus), "style-set",
                     G_CALLBACK (style_set), charmap);
+  g_signal_connect (G_OBJECT (charmap->tabulus), "size-allocate",
+                    G_CALLBACK (size_allocate), charmap);
 
   /* this is required to get key_press events */
   GTK_WIDGET_SET_FLAGS (charmap->tabulus, GTK_CAN_FOCUS);
