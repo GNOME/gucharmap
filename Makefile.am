@@ -49,5 +49,5 @@ gucharmap_LDADD = libgucharmap.la  @GUCHARMAP_LIBS@
 gucharmap_SOURCES = main.c
 
 
-SUBDIRS = po
+SUBDIRS = po pixmaps
 
