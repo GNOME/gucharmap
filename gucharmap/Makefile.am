@@ -77,7 +77,7 @@ moduledir = $(libdir)/gtk-2.0/$(GTK_BINARY_VERSION)/immodules
 module_LTLIBRARIES = im-gucharmap.la
 im_gucharmap_la_LDFLAGS = -rpath $(moduledir) -avoid-version -module
 im_gucharmap_la_SOURCES = imgucharmap.c
-im_gucharmap_la_LIBADD = libgucharmap.la @GTK_LIBS@
+im_gucharmap_la_LIBADD = libgucharmap.la @GTK_LIBS@ @GNOME_LIBS@
 
 
 gucharmap_marshal.h: gucharmap_marshal.list
