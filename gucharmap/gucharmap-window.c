@@ -602,17 +602,6 @@ make_menu (GucharmapWindow *guw)
   gtk_menu_shell_append (GTK_MENU_SHELL (search_menu), menu_item);
   /* finished making the search menu */
 
-  /* separator */
-  gtk_menu_shell_append (GTK_MENU_SHELL (search_menu), gtk_menu_item_new ());
-
-  menu_item = gtk_menu_item_new_with_mnemonic (_("Character in _Clipboard"));
-  gtk_widget_add_accelerator (menu_item, "activate", guw->accel_group,
-                              GDK_o, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
-  g_signal_connect (G_OBJECT (menu_item), "activate",
-                    G_CALLBACK (jump_clipboard), guw); 
-  gtk_menu_shell_append (GTK_MENU_SHELL (search_menu), menu_item);
-  /* finished making the search menu */
-
   /* make the go menu */
   go_menu = gtk_menu_new ();
   gtk_menu_set_accel_group (GTK_MENU (go_menu), guw->accel_group);
@@ -654,6 +643,17 @@ make_menu (GucharmapWindow *guw)
   g_signal_connect (G_OBJECT (menu_item), "activate",
                     G_CALLBACK (prev_character), guw);
   gtk_menu_shell_append (GTK_MENU_SHELL (go_menu), menu_item);
+
+  /* separator */
+  gtk_menu_shell_append (GTK_MENU_SHELL (go_menu), gtk_menu_item_new ());
+
+  menu_item = gtk_menu_item_new_with_mnemonic (_("Character in _Clipboard"));
+  gtk_widget_add_accelerator (menu_item, "activate", guw->accel_group,
+                              GDK_Insert, 0, GTK_ACCEL_VISIBLE);
+  g_signal_connect (G_OBJECT (menu_item), "activate",
+                    G_CALLBACK (jump_clipboard), guw); 
+  gtk_menu_shell_append (GTK_MENU_SHELL (go_menu), menu_item);
+  /* finished making the go menu */
 
 #if HAVE_GNOME
   /* if we are the input module and are running inside a non-gnome gtk+
