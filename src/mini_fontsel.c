@@ -55,8 +55,6 @@ show_available_fonts (MiniFontSelection *fontsel)
   GList *family_names = NULL;
   gint n_families, i;
 
-  g_printerr ("mini_fontsel.c: show_available_fonts\n");
-
   /* keys are strings */
   pango_font_family_hash = g_hash_table_new (g_str_hash, g_str_equal);
   
@@ -135,50 +133,36 @@ faces_sort_func (const void *a, const void *b)
 
 
 /* This fills the font style list with all the possible style combinations
-   for the current font family. */
+   for the current font family. 
+   Also creates fontsel->available_faces. */
 static void
 show_available_styles (MiniFontSelection *fontsel)
 {
   PangoFontFace **faces;
   PangoFontFamily *family;
   GList *face_names = NULL;
-  gboolean new_family_has_old_style = FALSE;
   gint n_faces, i;
 
-  g_printerr ("mini_fontsel.c: show_available_styles: showing styles for \"%s\"\n", fontsel->family_value);
-
-  family = g_hash_table_lookup (pango_font_family_hash, fontsel->family_value);
+  family = g_hash_table_lookup (
+          pango_font_family_hash, 
+          pango_font_description_get_family (fontsel->font_desc));
   pango_font_family_list_faces (family, &faces, &n_faces);
   qsort (faces, n_faces, sizeof (PangoFontFace *), faces_sort_func);
+
+  if (fontsel->available_faces != NULL)
+    g_hash_table_destroy (fontsel->available_faces);
+  fontsel->available_faces = g_hash_table_new (g_str_hash, g_str_equal);
 
   for (i = 0;  i < n_faces;  i++)
     {
       const gchar *face_name = pango_font_face_get_face_name (faces[i]);
       face_names = g_list_append (face_names, (gpointer) face_name);
 
-      if (fontsel->style_value != NULL
-          && strcmp (face_name, fontsel->style_value) == 0)
-        new_family_has_old_style = TRUE;
+      g_hash_table_insert (fontsel->available_faces, 
+                           (gchar *) face_name, faces[i]);
     }
 
-  if (new_family_has_old_style)
-    {
-      g_signal_handler_block (G_OBJECT (GTK_COMBO (fontsel->style)->entry),
-                              fontsel->style_changed_handler_id);
-
-      gtk_combo_set_popdown_strings (GTK_COMBO (fontsel->style), face_names);
-
-      gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (fontsel->style)->entry), 
-                          fontsel->style_value);
-      g_signal_handler_unblock (G_OBJECT (GTK_COMBO (fontsel->style)->entry),
-                                fontsel->style_changed_handler_id);
-    }
-  else
-    {
-      /* the old style is not on the new list */
-      gtk_combo_set_popdown_strings (GTK_COMBO (fontsel->style), face_names);
-    }
-
+  gtk_combo_set_popdown_strings (GTK_COMBO (fontsel->style), face_names);
 
   g_list_free (face_names);
   g_free (faces);
@@ -188,10 +172,7 @@ show_available_styles (MiniFontSelection *fontsel)
 static void
 set_family (MiniFontSelection *fontsel, const gchar *new_family)
 {
-  if (fontsel->family_value != NULL)
-    g_free (fontsel->family_value);
-
-  fontsel->family_value = g_strdup (new_family);
+  pango_font_description_set_family (fontsel->font_desc, new_family);
 
   show_available_styles (fontsel);
 
@@ -207,24 +188,30 @@ family_changed (GtkWidget *widget, MiniFontSelection *fontsel)
   new_family = gtk_entry_get_text (
                  GTK_ENTRY (GTK_COMBO (fontsel->family)->entry));
 
-  g_printerr ("mini_fontsel.c: family_changed: %s\n", new_family);
-
   if (new_family[0] == '\0') /* empty string */
     return;
 
-  if (fontsel->family_value == NULL
-      || g_utf8_collate (fontsel->family_value, new_family) != 0)
-    set_family (fontsel, new_family);
+  set_family (fontsel, new_family);
 }
 
 
 static void
 set_style (MiniFontSelection *fontsel, const gchar *new_style)
 {
-  if (fontsel->style_value != NULL)
-    g_free (fontsel->style_value);
+  PangoFontFace *face;
+  gint size;
+  
+  face = g_hash_table_lookup (fontsel->available_faces, new_style);
+  g_return_if_fail (face != NULL);
 
-  fontsel->style_value = g_strdup (new_style);
+  size = pango_font_description_get_size (fontsel->font_desc);
+  pango_font_description_free (fontsel->font_desc);
+
+  fontsel->font_desc = pango_font_face_describe (face);
+  pango_font_description_set_size (fontsel->font_desc, size);
+
+  g_printerr ("mini_fontsel.c: set_style: \"%s\"\n", 
+              pango_font_description_to_string (fontsel-> font_desc));
 
   g_signal_emit (fontsel, mini_font_selection_signals[CHANGED], 0);
 }
@@ -243,16 +230,14 @@ style_changed (GtkWidget *widget, MiniFontSelection *fontsel)
   if (new_style[0] == '\0') /* empty string */
     return;
 
-  if (fontsel->style_value == NULL
-      || g_utf8_collate (fontsel->style_value, new_style) != 0)
-    set_style (fontsel, new_style);
+  set_style (fontsel, new_style);
 }
 
 
 static void
 set_size (MiniFontSelection *fontsel, gint size)
 {
-  fontsel->size_value = size;
+  pango_font_description_set_size (fontsel->font_desc, PANGO_SCALE * size);
   g_signal_emit (fontsel, mini_font_selection_signals[CHANGED], 0);
 }
 
@@ -260,10 +245,8 @@ set_size (MiniFontSelection *fontsel, gint size)
 static void 
 size_changed (GtkAdjustment *adjustment, MiniFontSelection *fontsel)
 {
-  g_printerr ("mini_fontsel.c: size_changed: %d\n", 
-              (gint) gtk_adjustment_get_value (adjustment));
-
-  if ((gint) gtk_adjustment_get_value (adjustment) != fontsel->size_value)
+  if ((gint) gtk_adjustment_get_value (adjustment) 
+      != pango_font_description_get_size (fontsel->font_desc))
     set_size (fontsel, (gint) gtk_adjustment_get_value (adjustment));
 }
 
@@ -271,8 +254,6 @@ size_changed (GtkAdjustment *adjustment, MiniFontSelection *fontsel)
 void
 mini_font_selection_class_init (MiniFontSelectionClass *clazz)
 {
-  g_printerr ("mini_fontsel.c: mini_font_selection_class_init\n");
-
   clazz->changed = NULL;
 
   mini_font_selection_signals[CHANGED] =
@@ -287,11 +268,8 @@ mini_font_selection_class_init (MiniFontSelectionClass *clazz)
 void
 mini_font_selection_init (MiniFontSelection *fontsel)
 {
-  g_printerr ("mini_fontsel.c: mini_font_selection_init\n");
-
-  fontsel->family_value = NULL;
-  fontsel->style_value = NULL;
-  fontsel->size_value = -1;
+  fontsel->available_faces = NULL;
+  fontsel->font_desc = pango_font_description_new ();
 
   gtk_box_set_spacing (GTK_BOX (fontsel), 10);
 
@@ -321,15 +299,14 @@ mini_font_selection_init (MiniFontSelection *fontsel)
 
   show_available_fonts (fontsel);
 
-  mini_font_selection_set_font_name (MINI_FONT_SELECTION (fontsel), 
-                                     "Sans Italic 12");
+  fontsel->font_desc = pango_font_description_copy (
+          GTK_WIDGET (fontsel)->style->font_desc);
 }
 
 
 GtkWidget *
 mini_font_selection_new ()
 {
-  g_printerr ("mini_fontsel.c: mini_font_selection_new\n");
   return GTK_WIDGET (g_object_new (mini_font_selection_get_type (), NULL));
 }
 
@@ -338,8 +315,6 @@ GType
 mini_font_selection_get_type ()
 {
   static GType mini_font_selection_type = 0;
-
-  g_printerr ("mini_fontsel.c: mini_font_selection_get_type\n");
 
   if (mini_font_selection_type == 0)
     {
@@ -370,26 +345,18 @@ gboolean
 mini_font_selection_set_font_name (MiniFontSelection *fontsel,
                                    const gchar *fontname)
 {
-  PangoFontDescription *font_desc;
+  pango_font_description_free (fontsel->font_desc);
 
-  g_printerr ("mini_fontsel.c: mini_font_selection_set_font_name (\"%s\")\n", 
-              fontname);
+  fontsel->font_desc = pango_font_description_from_string (fontname);
 
-  font_desc = pango_font_description_from_string (fontname);
-
-  set_family (fontsel, pango_font_description_get_family (font_desc));
   gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (fontsel->family)->entry), 
-                      pango_font_description_get_family (font_desc));
+                      pango_font_description_get_family (fontsel->font_desc));
 
   /* XXX: set_style: figure out how */
 
-  set_size (fontsel, 
-            PANGO_PIXELS (pango_font_description_get_size (font_desc)));
   gtk_spin_button_set_value (
           GTK_SPIN_BUTTON (fontsel->size), 
-          PANGO_PIXELS (pango_font_description_get_size (font_desc)));
-
-  pango_font_description_free (font_desc);
+          PANGO_PIXELS (pango_font_description_get_size (fontsel->font_desc)));
 
   return TRUE;
 }
@@ -399,13 +366,5 @@ mini_font_selection_set_font_name (MiniFontSelection *fontsel,
 gchar * 
 mini_font_selection_get_font_name (MiniFontSelection *fontsel)
 {
-  g_printerr ("mini_fontsel.c: mini_font_selection_get_font_name\n");
-
-  if (g_ascii_strcasecmp (fontsel->style_value, "regular") == 0)
-    return g_strdup_printf ("%s %d", fontsel->family_value, 
-                                     fontsel->size_value);
-  else
-    return g_strdup_printf ("%s %s %d", fontsel->family_value, 
-                                        fontsel->style_value, 
-                                        fontsel->size_value);
+  return pango_font_description_to_string (fontsel->font_desc);
 }

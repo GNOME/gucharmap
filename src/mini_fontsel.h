@@ -57,9 +57,9 @@ struct _MiniFontSelection
   GtkObject *size_adj; 
   GtkWidget *size;   /* spin button */
 
-  gchar *family_value; /* current family */
-  gchar *style_value;  /* current face */
-  gint size_value;     /* current size */
+  PangoFontDescription *font_desc;
+
+  GHashTable *available_faces;
 
   gint style_changed_handler_id;
 };
