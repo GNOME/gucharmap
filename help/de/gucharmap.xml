@@ -1,0 +1,700 @@
+<?xml version="1.0"?><!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+"http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+  <!ENTITY legal SYSTEM "legal.xml">
+  <!ENTITY appversion "0.8.0">
+  <!ENTITY manrevision "2.0.1">
+  <!ENTITY date "Dezember 2003">
+  <!ENTITY app "Unicode-Zeichentabelle">
+  <!ENTITY ug "GNOME Desktop Benutzerhandbuch">
+]>
+
+<!-- 
+ (Do not remove this comment block.)
+  Maintained by the GNOME Documentation Project
+  http://developer.gnome.org/projects/gdp
+  Template version: 2.0 beta
+  Template last modified Apr 11, 2002
+-->
+
+<!-- =============Document Header ============================= -->
+<article id="index" lang="de">
+<!-- please do not change the id; for translations, change lang to -->
+<!-- appropriate code -->
+  <articleinfo>
+    <title>Unicode-Zeichentabelle-Handbuch V&manrevision;</title>
+    <copyright>
+      <year>2003</year>
+      <holder>Sun Microsystems</holder>
+    </copyright>
+    <copyright> 
+      <year>2003</year> 
+      <holder>Chee Bin HOH</holder> 
+    </copyright> 
+
+<!-- translators: uncomment this:
+    <copyright>
+      <year>2002</year>
+      <holder>ME-THE-TRANSLATOR (Latin translation)</holder>
+    </copyright>
+-->
+
+    <publisher> 
+      <publishername>GNOME Dokumentationsprojekt</publishername> 
+    </publisher> 
+
+    &legal;
+   <!-- This file  contains link to license for the documentation (GNU FDL), and 
+        other legal stuff such as "NO WARRANTY" statement. Please do not change 
+	any of this. -->
+
+    <authorgroup> 
+      <author>
+        <firstname>Sun</firstname>
+        <surname>GNOME Dokumentationsteam</surname>
+        <affiliation><orgname>Sun Microsystems</orgname></affiliation>
+      </author>
+      <author> 
+        <firstname>Chee Bin</firstname> 
+        <surname>HOH</surname> 
+        <affiliation> 
+          <orgname>GNOME Dokumentationsprojekt</orgname> 
+          <address> <email>cbhoh@gnome.org</email> </address>
+        </affiliation>
+      </author>
+
+<!--
+      <author> 
+        <firstname>Documentation</firstname> 
+          <surname>Writer 1</surname> 
+          <affiliation> 
+            <orgname>GNOME Documentation Project</orgname> 
+            <address> <email>doc-writer1@gnome.org</email> </address> 
+          </affiliation> 
+      </author> 
+-->
+      
+<!-- This is appropriate place for other contributors: translators,
+     maintainers,  etc. Commented out by default.
+      <othercredit role="translator">
+        <firstname>Latin</firstname> 
+	<surname>Translator 1</surname> 
+	<affiliation> 
+          <orgname>Latin Translation Team</orgname> 
+          <address> <email>translator@gnome.org</email> </address> 
+	</affiliation>
+	<contrib>Latin translation</contrib>
+      </othercredit>
+-->
+    </authorgroup>
+
+
+    <revhistory>
+      <revision> 
+	<revnumber>Unicode-Zeichentabelle-Handbuch V&manrevision;</revnumber> 
+	<date>&date;</date> 
+	<revdescription> 
+          <para role="author">Sun GNOME Dokumentationsteam</para>
+          <para role="publisher">GNOME-Dokumentationsprojekt</para>
+        </revdescription>
+      </revision>
+      <revision> 
+	<revnumber>Unicode-Zeichentabelle-Handbuch V2.0</revnumber> 
+	<date>Oktober 2003</date> 
+	<revdescription> 
+          <para role="author">Chee Bin HOH
+	    <email>cbhoh@gnome.org</email>
+          </para>
+          <para role="publisher">GNOME-Dokumentationsprojekt</para>
+        </revdescription>
+      </revision>
+    </revhistory>
+
+    <releaseinfo> In diesem Handbuch wird Version &appversion; der Anwendung &app; beschrieben.
+    </releaseinfo>
+
+    <legalnotice> 
+      <title>Feedback</title>
+      <para>Wenn Sie Fehler finden oder Vorschl&auml;ge zur Anwendung <application>&app;</application> oder zu diesem Handbuch haben, folgen Sie den Anweisungen auf der <ulink url="ghelp:gnome-feedback" type="help">GNOME Feedback Page</ulink>. 
+      </para>
+<!-- Translators may also add here feedback address for translations -->
+    </legalnotice>
+  </articleinfo>
+
+<!-- ============= Index ===================================== -->
+  <indexterm zone="index"> 
+    <primary>gucharmap</primary> 
+  </indexterm> 
+  <indexterm zone="index"> 
+    <primary>&app;</primary> 
+  </indexterm>
+  <indexterm zone="index"> 
+    <primary>Zeichentabelle</primary> 
+  </indexterm>
+
+<!-- ============= Document Body ============================= -->
+<!-- ============= Introduction ============================== -->
+  <sect1 id="gucharmap-introduction"> 
+     <title>Einf&uuml;hrung</title>
+    <para>
+      Die Anwendung <application>&app;</application> ist eine Zeichentabelle nach Unicode/ISO10646 und dient dar&uuml;ber hinaus auch als Schriftartenbetrachter.
+      Bei Unicode/ISO10646 handelt es sich um einen Standard zur Zeichencodierung bzw. eine Bezeichnung f&uuml;r den dazugeh&ouml;rigen Zeichensatz.
+      Ziel der Entwickler von Unicode/ISO10646 war es, in diesem Zeichensatz nach M&ouml;glichkeit alle Schriftzeichen aller weltweit verwendeten Schriftsysteme abzubilden.
+    </para>
+    <para>
+      Mit der Anwendung <application>&app;</application> k&ouml;nnen Sie bei Bedarf Schriftzeichen aus einer Tabelle ausw&auml;hlen und mit Standardzeichen zu einer Textfolge kombinieren. Die so erstellte Textfolge k&ouml;nnen Sie dann in einer anderen Anwendung, wie z. B. in einem Texteditor-Dokument, einf&uuml;gen. 
+    </para>
+    <para>
+      In der Anwendung <application>&app;</application> finden Sie unter anderem akzentuierte Zeichen, mathematische und sonstige Symbole sowie besondere typographische Zeichen. 
+      Viele dieser Zeichen stehen &uuml;ber die Standardtastatur nicht zur Verf&uuml;gung.
+    </para>
+  </sect1>
+
+<!-- =========== Getting Started ============================== -->
+
+  <sect1 id="gucharmap-getting-started"> 
+     <title>Erste Schritte</title>
+
+    <sect2 id="gucharmap-start"> 
+        <title>So starten Sie die Anwendung &app;</title>
+      <para>Sie k&ouml;nnen die Anwendung <application>&app;</application> auf eine der folgenden Weisen starten:
+      </para>
+      <variablelist>
+        <varlistentry>
+          <term><guimenu>Men&uuml;</guimenu></term>
+          <listitem>
+            <para>Wie Sie die Anwendung <application>&app;</application> &uuml;ber eines der Men&uuml;s starten, erfahren Sie in der aktuellsten Fassung des Dokuments "&ug;" f&uuml;r Ihre jeweilige Plattform. 
+            </para>
+    	  </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>Befehlszeile</term>
+	  <listitem>
+            <para>
+                  F&uuml;hren Sie folgenden Befehl aus:
+              <command>gnome-character-map</command>
+            </para>
+            <para>
+              N&auml;here Informationen zum Starten der Anwendung
+              <application>&app;</application> von der Befehlszeile aus finden Sie im Abschnitt <ulink url="man:gnome-character-map" type="man">
+              <citerefentry><refentrytitle>gnome-character-map</refentrytitle>
+              <manvolnum>1</manvolnum></citerefentry></ulink>.
+            </para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </sect2>
+
+    <sect2 id="gucharmap-when-start">
+      <title>Beim Start der Anwendung &app;</title>
+      <para>Wenn Sie <application>&app;</application> starten, wird das folgende Fenster angezeigt.
+      </para>
+
+      <!-- ==== Figure ==== -->
+      <figure id="gucharmap-window-fig"> 
+        <title>&app;-Fenster</title>
+        <screenshot>
+          <mediaobject>
+	    <imageobject>
+              <imagedata fileref="figures/gucharmap_window.png" format="PNG"/> 
+            </imageobject>
+	    <textobject>
+              <phrase>Zeigt das &app;-Fenster. </phrase>
+	    </textobject>
+          </mediaobject>
+        </screenshot>
+      </figure>
+      <!-- ==== End of Figure ==== -->
+
+      <!-- Include any descriptions of the GUI immediately after the screenshot of the main UI, -->
+      <!-- for example, the items on the menubar and on the toolbar. This section is optional. -->
+
+      <para>Das <application>&app;</application>-Fenster enth&auml;lt die folgenden Elemente:
+      </para>
+      <variablelist>
+        <varlistentry> 
+          <term>Men&uuml;leiste</term> 
+          <listitem>
+            <para>
+              Die Men&uuml;s der Men&uuml;leiste erhalten die meisten zur Arbeit mit der Anwendung <application>&app;</application> erforderlichen Befehle.
+            </para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>Symbolleiste</term>
+          <listitem>
+            <para> Die Symbolleiste enth&auml;lt einen Teil der Befehle, die Sie &uuml;ber die Men&uuml;leiste aufrufen k&ouml;nnen.
+Dar&uuml;ber hinaus finden Sie in der Symbolleiste eine Dropdown-Schriftenliste sowie verschiedene Schaltfl&auml;chen zum Festlegen des Schriftstils.
+            </para>
+          </listitem>
+        </varlistentry>
+        <varlistentry> 
+          <term>Anzeigebereich</term> 
+          <listitem>
+            <para>              Der Anzeigebereich umfasst folgende Elemente:
+            </para>
+            <itemizedlist>
+              <listitem>
+                <para>Listenfeld mit Unicode-Zeichens&auml;tzen
+                </para>
+              </listitem>
+              <listitem>
+                <para>Registerabschnitt <guilabel>Zeichentabelle</guilabel>
+                </para>
+              </listitem>
+              <listitem>
+                <para>Registerabschnitt <guilabel>Zeichendetails</guilabel>
+                </para>
+              </listitem>
+              <listitem>
+                <para>Textfeld <guilabel>Zu kopierender Text</guilabel>
+                </para>
+              </listitem>
+              <listitem>
+                <para>Schaltfl&auml;che <guibutton>Kopieren</guibutton>
+                </para>
+              </listitem>
+            </itemizedlist>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>Statusleiste</term>
+          <listitem>
+            <para>In der Statusleiste werden Informationen zum gerade ausgew&auml;hlten Zeichen angezeigt.
+            </para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </sect2>
+  </sect1>
+
+<!-- ================ Usage ================================ -->
+  <sect1 id="gucharmap-usage"> 
+    <title>Verwendung</title>
+    
+    <sect2 id="gucharmap-create-textstring">
+      <title>So erstellen Sie eine Textfolge</title>
+      <para>
+        Um Ihre gew&uuml;nschte Textfolge im Feld <guilabel>Zu kopierender Text</guilabel> zusammenzustellen, gehen Sie wie folgt vor:
+      </para>
+      <orderedlist>
+        <listitem>
+          <para>
+            W&auml;hlen Sie einen Zeichensatz aus der Liste aus.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            &Uuml;bernehmen Sie die gew&uuml;nschten Zeichen mit einer der folgenden Methoden:
+          </para>
+          <itemizedlist>
+            <listitem>
+              <para>
+                Klicken Sie im Registerabschnitt <guilabel>Zeichentabelle</guilabel> auf eine Zeichenschaltfl&auml;che und dr&uuml;cken Sie die <keycap>Eingabetaste</keycap>. Das ausgew&auml;hlte Zeichen wird in das Feld <guilabel>Zu kopierender Text</guilabel> &uuml;bernommen. 
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                Klicken Sie im Registerabschnitt <guilabel>Zeichentabelle</guilabel> auf eine Zeichenschaltfl&auml;che und ziehen Sie das Zeichen mit der Maus in das Feld <guilabel>Zu kopierender Text</guilabel>. 
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                Klicken Sie in das Feld <guilabel>Zu kopierender Text</guilabel>, um es zu aktivieren.
+                Wenn das Feld bereits eine Textfolge enth&auml;lt, setzen Sie die Eingabemarke mit einem Mausklick an die gew&uuml;nschte Einf&uuml;geposition. Nun k&ouml;nnen Sie &uuml;ber die Tastatur beliebige Standardzeichen einf&uuml;gen. 
+              </para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+      </orderedlist>
+    </sect2>
+
+<!-- =============== To Copy and Paste a Text String ====================== -->
+    <sect2 id="gucharmap-copy-textstring">
+		<title>So kopieren Sie eine Textfolge und f&uuml;gen sie in eine Anwendung ein</title>
+      <para>
+        Um die Textfolge aus dem Feld <guilabel>Zu kopierender Text</guilabel> in einer anderen Anwendung einzuf&uuml;gen, gehen Sie wie folgt vor:
+      </para>
+      <orderedlist>
+        <listitem>
+          <para>
+            Markieren Sie die Textfolge im Feld <guilabel>Zu kopierender Text</guilabel> mit der Maus oder klicken Sie auf <guibutton>Kopieren</guibutton>. Die ausgew&auml;hlte Textfolge erscheint nun hervorgehoben. 
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Zeigen Sie in der Zielanwendung an die gew&uuml;nschte Stelle und dr&uuml;cken Sie die mittlere Maustaste, um die Textfolge an dieser Stelle einzuf&uuml;gen. Sie k&ouml;nnen die Textfolge auch in die Anwendung einf&uuml;gen, wenn die Funktion "Einf&uuml;gen" verf&uuml;gbar ist. Sie k&ouml;nnen diesen Vorgang beliebig oft wiederholen, solange die Textfolge markiert ist.
+
+                Klicken Sie in das Feld <guilabel>Zu kopierender Text</guilabel>, um die Textauswahl aufzuheben. 
+          </para>
+        </listitem>
+      </orderedlist>
+      <para>
+        Wenn Sie den Inhalt des Felds <guilabel>Zu kopierender Text</guilabel> in eine andere Anwendung kopieren, erscheint er dort im aktuellen Zeichensatz dieser Anwendung.
+      </para>
+      <para>Wenn die Textfolge nicht sichtbare Zeichen enth&auml;lt, kann diese nur 
+		in Anwendungen eingef&uuml;gt werden, die den gesamten Zeichensatz unterst&uuml;tzen.
+      </para>
+      <para>Wenn Sie die Anwendung <application>&app;</application> vor dem Einf&uuml;gen 
+			der Textfolge in eine Anwendung schlie&szlig;en, geht die Textfolge verloren. 
+      </para>
+    </sect2>
+
+<!-- =============== To Change the Input Mode  ========================= -->
+    <sect2 id="gucharmap-change-charset">
+      <title>So stellen Sie den Eingabemodus um</title>
+      <para>
+        Sie k&ouml;nnen einen anderen Eingabemodus ausw&auml;hlen, indem Sie im Feld <guilabel>Zu kopierender Text</guilabel> rechtsklicken und anschlie&szlig;end im Kontextmen&uuml; den Punkt <guimenuitem>Eingabemethoden</guimenuitem> ausw&auml;hlen.
+      </para>
+      <para>
+        Zeichenlayoutoptionen f&uuml;r die Arbeit mit nicht-lateinischen Zeichens&auml;tzen k&ouml;nnen Sie aufrufen, indem Sie im Feld <guilabel>Zu kopierender Text</guilabel> rechtsklicken und anschlie&szlig;end         <guimenuitem>Unicode-Steuerzeichen einf&uuml;gen</guimenuitem> w&auml;hlen.
+      </para>
+    </sect2>
+    
+    <sect2 id="usage-find-character">
+      <title>So suchen Sie nach bestimmten Zeichen</title>
+      <para>
+        Es gibt verschiedene M&ouml;glichkeiten, um in der Anwendung <application>&app;</application> nach einem bestimmten Zeichen zu suchen.
+      </para>
+    
+      <sect3 id="usage-find-character-name">
+        <title>So suchen Sie ein Zeichen anhand seines Unicode-Namens</title>
+        <para>
+          Zur Zeichensuche anhand eines Unicode-Namens gehen Sie folgenderma&szlig;en vor:
+        </para>
+        <orderedlist>
+          <listitem>
+            <para>
+              W&auml;hlen Sie <menuchoice>
+                <guimenu>Suchen</guimenu>
+                <guimenuitem>Suchen</guimenuitem>
+              </menuchoice>.
+              Das Dialogfeld <guilabel>Suchen</guilabel> erscheint. 
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Geben Sie im Feld <guilabel>Suchbegriff</guilabel> den Unicode-Namen ein.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Klicken Sie auf <guibutton>Suchen</guibutton>. 
+            </para>
+            <para>
+              <application>&app;</application> zeigt das erste Zeichen, auf das die Suchkriterien zutreffen, hervorgehoben dar.
+            </para>
+            <para>
+              Falls keine passenden Zeichen gefunden werden k&ouml;nnen, zeigt die Anwendung <application>&app;</application> eine entsprechende Meldung an.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Um nach dem n&auml;chsten passenden Zeichen suchen zu lassen, w&auml;hlen Sie <menuchoice>
+                <guimenu>Suchen</guimenu>
+                <guimenuitem>Weitersuchen</guimenuitem>
+              </menuchoice> .
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Um zur&uuml;ck zum letzten passenden Zeichen zu springen, w&auml;hlen Sie <menuchoice>
+                <guimenu>Suchen</guimenu>
+                <guimenuitem>R&uuml;ckw&auml;rts suchen</guimenuitem>
+              </menuchoice> .
+            </para>
+          </listitem>
+        </orderedlist>
+      </sect3>
+    
+      <sect3 id="usage-find-character-code">
+        <title>So suchen Sie ein Zeichen anhand des Unicode-Hexadezimalcodes</title>
+        <para>
+          Zur Zeichensuche anhand eines Unicode-Hexadezimalcodes gehen Sie folgenderma&szlig;en vor:
+        </para>
+        <orderedlist>
+          <listitem>
+            <para>
+              W&auml;hlen Sie <menuchoice>
+                <guimenu>Suchen</guimenu>
+                <guimenuitem>Zeichen mit Hex-Code</guimenuitem>
+              </menuchoice>.
+              Das Dialogfeld <guilabel>Zu Unicode-Code springen</guilabel> erscheinen. 
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Geben Sie im Textfeld den gew&uuml;nschten Unicode-Hexadezimalcode ein.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Klicken Sie auf <guibutton>OK</guibutton>. 
+            </para>
+            <para>
+              <application>&app;</application> zeigt das dazugeh&ouml;rige Zeichen hervorgehoben dar.
+            </para>
+            <para>
+              Falls keine passenden Zeichen gefunden werden k&ouml;nnen, zeigt die Anwendung <application>&app;</application> eine entsprechende Meldung an.
+            </para>
+          </listitem>
+        </orderedlist>
+      </sect3>
+    
+      <sect3 id="usage-find-character-clipboard">
+        <title>So suchen Sie nach dem ersten Zeichen in der Zwischenablage</title>
+        <para>
+          Um nach dem ersten Zeichen zu suchen, das sich gerade in der Zwischenablage befindet, w&auml;hlen Sie <menuchoice>
+            <guimenu>Suchen</guimenu>
+            <guimenuitem>Zeichen in Zwischenablage</guimenuitem>
+          </menuchoice>.
+        </para>
+        <para>
+Die Anwendung <application>&app;</application> zeigt das Suchergebnis in der Statusleiste an.
+        </para>
+      </sect3>
+    
+      <sect3 id="usage-find-character-otherapp">
+        <title>So suchen Sie ein Zeichen aus einer anderen Anwendung</title>
+        <para>
+          Um nach einem Zeichen aus einer anderen Anwendung zu suchen, ziehen Sie dieses Zeichen aus der betreffenden Anwendung auf die <guilabel>Zeichentabelle</guilabel>.
+        </para>
+        <para>
+Die Anwendung <application>&app;</application> zeigt das Suchergebnis in der Statusleiste an.
+        </para>
+      </sect3>
+
+    </sect2>
+
+<!-- =============== To Browse the Character Table  ========================= -->
+    <sect2 id="usage-browse-characters">
+      <title>So laufen Sie durch die vollst&auml;ndige Zeichenliste</title>
+      <para>
+        Sie k&ouml;nnen die Liste der Zeichen in der <guilabel>Zeichentabelle</guilabel> auch einfach von Hand durchlaufen. Hierf&uuml;r stehen Ihnen folgende M&ouml;glichkeiten zur Verf&uuml;gung:
+      </para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            W&auml;hlen <menuchoice>
+              <guimenu>Gehe zu</guimenu>
+              <guimenuitem>N&auml;chstem Zeichen</guimenuitem>
+            </menuchoice>, um zum n&auml;chsten Zeichen der Unicode-Sequenz zu springen. 
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            W&auml;hlen <menuchoice>
+              <guimenu>Gehe zu</guimenu>
+              <guimenuitem>Vorherigem Zeichen</guimenuitem>
+            </menuchoice>, um zum vorherigen Zeichen der Unicode-Sequenz zu springen. 
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Dr&uuml;cken Sie eine der Pfeiltasten auf der Tastatur.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Durchlaufen Sie die Liste mithilfe der Bildlaufleiste der <guilabel>Zeichentabelle</guilabel>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Lassen Sie sich die Zeichen durch Dr&uuml;cken der Tasten <keycap>BildAuf</keycap> bzw. <keycap>BildAb</keycap> seitenweise anzeigen.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Springen Sie mit der Taste <keycap>Pos1</keycap> zum ersten Zeichen der Unicode-Sequenz.
+            Zum letzten Zeichen k&ouml;nnen Sie mit der Taste <keycap>Ende</keycap> springen.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    
+    <sect2 id="usage-display-details">
+      <title>So zeigen Sie Detailinformationen zu einem bestimmten Zeichen an</title>
+      <para>
+        Detailinformationen zu einem bestimmten Zeichen k&ouml;nnen Sie sich wie folgt anzeigen lassen:
+      </para>
+      <orderedlist>
+        <listitem>
+          <para>
+            W&auml;hlen Sie einen Zeichensatz aus der Liste aus. 
+            Beispiel:<guilabel>Lateinische Schrift</guilabel>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            W&auml;hlen Sie im Registerabschnitt <guilabel>Zeichentabelle</guilabel> ein Zeichen aus.
+            Beispiel:<guilabel>B</guilabel>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Klicken Sie auf das Register <guilabel>Zeichendetails</guilabel>. 
+          </para>
+        </listitem>
+      </orderedlist>
+      <para>
+        Auf dem Registerabschnitt <guilabel>Zeichendetails</guilabel> finden Sie nun folgende Angaben zum ausgew&auml;hlten Zeichen:
+      </para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            Unicode-Hexadezimalcode
+          </para>
+          <para>            Beispiel:<guilabel>U+0042</guilabel>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Unicode-Zeichenname
+          </para>
+          <para>            Beispiel:<guilabel>LATIN CAPITAL LETTER B</guilabel>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <guilabel>Allgemeine Zeicheneigenschaften</guilabel>
+          </para>
+          <itemizedlist>
+            <listitem>
+              <para>
+                Unicode-Kategorie
+              </para>
+              <para>
+                Beispiel:<guilabel>Buchstabe, Gro&szlig;schrift</guilabel>
+              </para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+        <listitem>
+          <para>
+            <guilabel>Verschiedene, n&uuml;tzliche Darstellungsweisen</guilabel>
+          </para>
+          <itemizedlist>
+            <listitem>
+              <para>
+                UTF-8-Codierung
+              </para>
+              <para>
+                Beispiel:<guilabel>0x42</guilabel>
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                Oktal terminierte UTF-8-Codierung:
+              </para>
+              <para>
+                Beispiel:<guilabel>\102</guilabel>
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                Dezimale Entit&auml;tsreferenz
+              </para>
+              <para>
+                Beispiel:<guilabel>&amp;#66;</guilabel>
+              </para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+        <listitem>
+          <para>
+            <guilabel>Darstellungsweisen und Querverweise</guilabel>
+          </para>
+          <para>
+            Beispiel:<guilabel>U+212C SCRIPT CAPITAL B</guilabel>
+          </para>
+          <para>
+            Klicken Sie auf die Verkn&uuml;pfung, um Detailinformationen zum angegebenen Zeichen anzeigen zu lassen.
+          </para>
+          <itemizedlist>
+            <listitem>
+              <para>
+                Mit dem Men&uuml;punkt <menuchoice>
+                  <guimenu>Gehe zu</guimenu>
+                  <guimenuitem>Zur&uuml;ck</guimenuitem>
+                </menuchoice>
+                oder der Schaltfl&auml;che <guibutton>Zur&uuml;ck</guibutton> k&ouml;nnen Sie im Verlauf der besuchten Verkn&uuml;pfungen zur&uuml;ckspringen.
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                Mit dem Men&uuml;punkt <menuchoice>
+                  <guimenu>Gehe zu</guimenu>
+                  <guimenuitem>Vor</guimenuitem>
+                </menuchoice>
+                oder der Schaltfl&auml;che <guibutton>Vor</guibutton> k&ouml;nnen Sie sich im Verlauf der besuchten Verkn&uuml;pfungen vorw&auml;rts bewegen.
+              </para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    
+    <sect2 id="usage-format-character">
+      <title>So &auml;ndern Sie das Format eines Zeichens</title>
+      <para>
+        Um das Format eines Zeichens zu &auml;ndern, gehen Sie folgenderma&szlig;en vor:
+      </para>
+      <orderedlist>
+        <listitem>
+          <para>
+            Zum &Auml;ndern der Schriftart w&auml;hlen Sie die gew&uuml;nschte Schrift aus der daf&uuml;r vorgesehenen Dropdown-Liste aus. 
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            F&uuml;r fetten Schriftschnitt klicken Sie auf die Schaltfl&auml;che <guibutton>Fett</guibutton>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            F&uuml;r Kursivschrift klicken Sie auf die Schaltfl&auml;che <guibutton>Kursiv</guibutton>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Um die Schrift zu vergr&ouml;&szlig;ern, w&auml;hlen Sie 
+            <menuchoice>
+              <guimenu>Ansicht</guimenu>
+              <guimenuitem>Vergr&ouml;&szlig;ern</guimenuitem>
+            </menuchoice> oder stellen die gew&uuml;nschte Gr&ouml;&szlig;e &uuml;ber das entsprechende Drehfeld ein.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Um die Schrift zu verkleinern, w&auml;hlen Sie 
+            <menuchoice>
+              <guimenu>Ansicht</guimenu>
+              <guimenuitem>Verkleinern</guimenuitem>
+            </menuchoice> oder verwenden wiederum das entsprechende Drehfeld.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Um das ausgew&auml;hlte Zeichen zu vergr&ouml;&szlig;ern, dr&uuml;cken Sie die <keycap>Umschalttaste</keycap>.
+          </para>
+        </listitem>
+      </orderedlist>
+    </sect2>
+    
+    <sect2 id="usage-format-chartable">
+      <title>So &auml;ndern Sie das Format der Zeichentabelle</title>
+      <para>
+        Um das Format der Zeichentabelle zu &auml;ndern, w&auml;hlen Sie 
+        <menuchoice>
+          <guimenu>Ansicht</guimenu>
+          <guimenuitem>Spalten bis zur doppelten Breite erweitern</guimenuitem>
+        </menuchoice>.
+      </para>
+      <para>
+        Die Anwendung <application>&app;</application> passt den Registerabschnitt 
+        <guilabel>Zeichentabelle</guilabel> nun so an, dass die Spaltenanzahl einer Zweierpotenz entspricht, also beispielsweise zwei, vier oder acht Spalten. Wie viele Spalten angezeigt werden, h&auml;ngt von der Schriftgr&ouml;&szlig;e ab.
+      </para>
+    </sect2>
+
+  </sect1>
+</article>

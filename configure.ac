@@ -130,6 +130,15 @@ po/Makefile.in
 pixmaps/Makefile 
 help/Makefile
 help/C/Makefile
+help/de/Makefile
+help/es/Makefile
+help/fr/Makefile
+help/it/Makefile
+help/ja/Makefile
+help/ko/Makefile
+help/sv/Makefile
+help/zh_CN/Makefile
+help/zh_TW/Makefile
 gucharmap.spec
 gucharmap.nsi])
 

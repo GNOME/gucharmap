@@ -1,0 +1,683 @@
+<?xml version="1.0"?><!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+"http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+  <!ENTITY legal SYSTEM "legal.xml">
+  <!ENTITY appversion "0.8.0">
+  <!ENTITY manrevision "2.0.1">
+  <!ENTITY date "December 2003">
+  <!ENTITY app "Unicode Character Map">
+  <!ENTITY ug "GNOME Desktop User Guide">
+]>
+
+<!-- 
+ (Do not remove this comment block.)
+  Maintained by the GNOME Documentation Project
+  http://developer.gnome.org/projects/gdp
+  Template version: 2.0 beta
+  Template last modified Apr 11, 2002
+-->
+
+<!-- =============Document Header ============================= -->
+<article id="index" lang="es">
+<!-- please do not change the id; for translations, change lang to -->
+<!-- appropriate code -->
+  <articleinfo>
+    <title>Manual del Mapa de caracteres Unicode V&manrevision;</title>
+    <copyright>
+      <year>2003</year>
+      <holder>Sun Microsystems</holder>
+    </copyright>
+    <copyright> 
+      <year>2003</year> 
+      <holder>Chee Bin HOH</holder> 
+    </copyright> 
+
+<!-- translators: uncomment this:
+    <copyright>
+      <year>2002</year>
+      <holder>ME-THE-TRANSLATOR (Latin translation)</holder>
+    </copyright>
+-->
+
+    <publisher> 
+      <publishername>Proyecto de documentaci&oacute;n de GNOME</publishername> 
+    </publisher> 
+
+    &legal;
+   <!-- This file  contains link to license for the documentation (GNU FDL), and 
+        other legal stuff such as "NO WARRANTY" statement. Please do not change 
+	any of this. -->
+
+    <authorgroup> 
+      <author>
+        <firstname>Sun</firstname>
+        <surname>Equipo de documentaci&oacute;n de GNOME</surname>
+        <affiliation><orgname>Sun Microsystems</orgname></affiliation>
+      </author>
+      <author> 
+        <firstname>Chee Bin</firstname> 
+        <surname>HOH</surname> 
+        <affiliation> 
+          <orgname>Proyecto de documentaci&oacute;n de GNOME</orgname> 
+          <address> <email>cbhoh@gnome.org</email> </address>
+        </affiliation>
+      </author>
+
+<!--
+      <author> 
+        <firstname>Documentation</firstname> 
+          <surname>Writer 1</surname> 
+          <affiliation> 
+            <orgname>GNOME Documentation Project</orgname> 
+            <address> <email>doc-writer1@gnome.org</email> </address> 
+          </affiliation> 
+      </author> 
+-->
+      
+<!-- This is appropriate place for other contributors: translators,
+     maintainers,  etc. Commented out by default.
+      <othercredit role="translator">
+        <firstname>Latin</firstname> 
+	<surname>Translator 1</surname> 
+	<affiliation> 
+          <orgname>Latin Translation Team</orgname> 
+          <address> <email>translator@gnome.org</email> </address> 
+	</affiliation>
+	<contrib>Latin translation</contrib>
+      </othercredit>
+-->
+    </authorgroup>
+
+
+    <revhistory>
+      <revision> 
+	<revnumber>Manual del Mapa de caracteres Unicode V&manrevision;</revnumber> 
+	<date>&date;</date> 
+	<revdescription> 
+          <para role="author">Equipo de documentaci&oacute;n de Sun GNOME</para>
+          <para role="publisher">Proyecto de documentaci&oacute;n de GNOME</para>
+        </revdescription>
+      </revision>
+      <revision> 
+	<revnumber>Manual del Mapa de caracteres Unicode V2.0</revnumber> 
+	<date>Octubre 2003</date> 
+	<revdescription> 
+          <para role="author">Chee Bin HOH
+	    <email>cbhoh@gnome.org</email>
+          </para>
+          <para role="publisher">Proyecto de documentaci&oacute;n de GNOME</para>
+        </revdescription>
+      </revision>
+    </revhistory>
+
+    <releaseinfo>Este manual describe la versi&oacute;n &appversion; del &app;.
+    </releaseinfo>
+
+    <legalnotice> 
+      <title>Comentarios</title>
+      <para>Para informar de un defecto o hacer una sugerencia sobre la aplicaci&oacute;n <application>&app;</application> o el presente manual, siga las indicaciones que aparecen en la <ulink url="ghelp:gnome-feedback" type="help">GNOME Feedback Page</ulink>. 
+ 
+      </para>
+<!-- Translators may also add here feedback address for translations -->
+    </legalnotice>
+  </articleinfo>
+
+<!-- ============= Index ===================================== -->
+  <indexterm zone="index"> 
+    <primary>gucharmap</primary> 
+  </indexterm> 
+  <indexterm zone="index"> 
+    <primary>&app;</primary> 
+  </indexterm>
+  <indexterm zone="index"> 
+    <primary>Mapa de caracteres</primary> 
+  </indexterm>
+
+<!-- ============= Document Body ============================= -->
+<!-- ============= Introduction ============================== -->
+  <sect1 id="gucharmap-introduction"> 
+	 <title>Introducci&oacute;n</title>
+    <para>
+      La aplicaci&oacute;n <application>&app;</application> es un mapa de caracteres y un visualizador de fuentes Unicode/ISO10646.
+      Unicode/ISO10646 es un juego de caracteres codificado y un est&aacute;ndar de juegos de caracteres.
+      Los desarrolladores de Unicode/ISO10646 tienen pensado incluir en este juego de caracteres la totalidad de los caracteres utilizados en todos los idiomas escritos del mundo.
+    </para>
+    <para>
+      Puede utilizar el <application>&app;</application> para seleccionar caracteres de una tabla y, a continuaci&oacute;n, combinarlos en una cadena de texto con caracteres est&aacute;ndar. Puede insertar la cadena de texto creada en aplicaciones como, por ejemplo, documentos del editor de texto. 
+    </para>
+    <para>La aplicaci&oacute;n <application>&app;</application> proporciona caracteres acentuados, s&iacute;mbolos matem&aacute;ticos, s&iacute;mbolos especiales y signos de puntuaci&oacute;n. 
+      Muchos de los caracteres que ofrece el <application>&app;</application> no est&aacute;n disponibles en un teclado est&aacute;ndar.
+    </para>
+  </sect1>
+
+<!-- =========== Getting Started ============================== -->
+
+  <sect1 id="gucharmap-getting-started"> 
+	 <title>Procedimientos iniciales</title>
+
+    <sect2 id="gucharmap-start"> 
+        <title>Para iniciar el &app;</title>
+      <para>Para iniciar el <application>&app;</application>, siga estos pasos:
+      </para>
+      <variablelist>
+        <varlistentry>
+          <term><guimenu>Men&uacute;</guimenu></term>
+          <listitem>
+            <para>
+              Para obtener informaci&oacute;n sobre c&oacute;mo iniciar el <application>&app;</application>
+ desde un men&uacute;, consulte la &uacute;ltima versi&oacute;n de la &ug; correspondiente a su plataforma.
+            </para>
+    	  </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>L&iacute;nea de &oacute;rdenes</term>
+	  <listitem>
+            <para>
+              Ejecute la orden siguiente:
+              <command>gnome-character-map</command>
+            </para>
+            <para>
+              Para obtener m&aacute;s informaci&oacute;n sobre c&oacute;mo ejecutar el
+              <application>&app;</application> desde una l&iacute;nea de &oacute;rdenes, consulte <ulink url="man:gnome-character-map" type="man"><citerefentry><refentrytitle>gnome-character-map</refentrytitle><manvolnum>1</manvolnum></citerefentry></ulink>.
+            </para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </sect2>
+
+    <sect2 id="gucharmap-when-start"><title>Al iniciar el &app;</title>
+      <para>Al iniciar el <application>&app;</application>, se muestra la siguiente ventana.
+      </para>
+
+      <!-- ==== Figure ==== -->
+      <figure id="gucharmap-window-fig"> 
+        <title>Ventana del &app;</title>
+        <screenshot>
+          <mediaobject>
+	    <imageobject>
+              <imagedata fileref="figures/gucharmap_window.png" format="PNG"/> 
+            </imageobject>
+	    <textobject>
+              <phrase>Muestra la ventana del &app;.</phrase>
+	    </textobject>
+          </mediaobject>
+        </screenshot>
+      </figure>
+      <!-- ==== End of Figure ==== -->
+
+      <!-- Include any descriptions of the GUI immediately after the screenshot of the main UI, -->
+      <!-- for example, the items on the menubar and on the toolbar. This section is optional. -->
+
+      <para>La ventana del <application>&app;</application> contiene los elementos siguientes:
+      </para>
+      <variablelist>
+        <varlistentry>
+          <term>Barra de men&uacute;s</term>
+          <listitem>
+            <para>
+              Los men&uacute;s contienen la mayor&iacute;a de las &oacute;rdenes necesarias para trabajar con el <application>&app;</application>.
+            </para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>Barra de herramientas</term>
+          <listitem>
+            <para>La barra de herramientas contiene un subconjunto de &oacute;rdenes accesibles desde la barra de men&uacute;s.
+La barra contiene tambi&eacute;n una lista desplegable de tipos de letra, as&iacute; como botones de estilo de tipos de letra.
+            </para>
+          </listitem>
+        </varlistentry>
+        <varlistentry> 
+          <term>&Aacute;rea de visualizaci&oacute;n</term> 
+          <listitem>
+            <para>
+El &aacute;rea de visualizaci&oacute;n consta de:
+            </para>
+            <itemizedlist>
+              <listitem>
+                <para>Cuadro de la lista de juegos de caracteres Unicode
+                </para>
+              </listitem>
+              <listitem>
+                <para>Ficha <guilabel>Tabla de caracteres</guilabel> </para>
+              </listitem>
+              <listitem>
+                <para>Ficha <guilabel>Detalles del car&aacute;cter</guilabel> </para>
+              </listitem>
+              <listitem>
+                <para>Cuadro <guilabel>Texto que copiar</guilabel>
+                </para>
+              </listitem>
+              <listitem>
+                <para>Bot&oacute;n <guibutton>Copiar</guibutton>
+                </para>
+              </listitem>
+            </itemizedlist>
+          </listitem>
+        </varlistentry>
+        <varlistentry> 
+          <term>Barra de estado</term> 
+          <listitem>
+            <para>En la barra de estado se muestra informaci&oacute;n acerca del car&aacute;cter seleccionado.
+            </para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </sect2>
+  </sect1>
+
+<!-- ================ Usage ================================ -->
+  <sect1 id="gucharmap-usage"> 
+    <title>Uso</title>
+    
+    <sect2 id="gucharmap-create-textstring">
+      <title>Para crear una cadena de texto</title>
+      <para>
+        Para crear una cadena de texto en el campo <guilabel>Texto que copiar</guilabel>, efect&uacute;e los siguientes pasos:
+      </para>
+      <orderedlist>
+        <listitem>
+          <para>
+            Seleccione un juego de caracteres del cuadro de lista.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Inserte los caracteres mediante uno de estos m&eacute;todos:
+          </para>
+          <itemizedlist>
+            <listitem>
+              <para>
+                Haga clic en un bot&oacute;n de car&aacute;cter en la ficha <guilabel>Tabla de caracteres</guilabel> y pulse <keycap>Intro</keycap> para insertar el car&aacute;cter en el campo <guilabel>Texto que copiar</guilabel>. 
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                Haga clic en un bot&oacute;n de car&aacute;cter en la ficha <guilabel>Tabla de caracteres</guilabel> y arr&aacute;strelo al campo <guilabel>Texto que copiar</guilabel>. 
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                Haga clic en el campo <guilabel>Texto que copiar</guilabel> para asignarle el foco.
+                Si el campo ya contiene una cadena de texto, haga clic en el lugar de &eacute;sta donde desee insertar el car&aacute;cter. Pulse una tecla de un car&aacute;cter en el teclado. 
+              </para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+      </orderedlist>
+    </sect2>
+
+<!-- =============== To Copy and Paste a Text String ====================== -->
+    <sect2 id="gucharmap-copy-textstring"><title>Para copiar y pegar una cadena de texto en una aplicaci&oacute;n</title>
+      <para>
+        Para copiar y pegar la cadena de texto del campo <guilabel>Texto que copiar</guilabel> en una aplicaci&oacute;n, efect&uacute;e los siguientes pasos:
+      </para>
+      <orderedlist>
+        <listitem>
+          <para>
+            Arrastre el puntero para seleccionar la cadena de texto en el campo <guilabel>Texto que copiar</guilabel> o haga clic en <guibutton>Copiar</guibutton>. La cadena de texto seleccionada queda resaltada. 
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            En otra aplicaci&oacute;n, se&ntilde;ale el lugar en el que desee situar la cadena de texto y haga clic con el bot&oacute;n central para insertarla. Tambi&eacute;n puede pegar la cadena de texto en la aplicaci&oacute;n si &eacute;sta dispone de una funci&oacute;n Pegar. Puede repetir la inserci&oacute;n tantas veces como quiera mientras la cadena de texto est&eacute; seleccionada.
+
+                Haga clic en el campo <guilabel>Texto que copiar</guilabel> para deseleccionar la cadena de texto. 
+          </para>
+        </listitem>
+      </orderedlist>
+      <para>
+        Al pegar el contenido del campo <guilabel>Texto que copiar</guilabel> en otras aplicaciones, la cadena de texto aparece con el juego de caracteres actual de la aplicaci&oacute;n.
+      </para>
+      <para>Si la cadena de texto contiene caracteres no visibles, s&oacute;lo podr&aacute; insertarla en aplicaciones que admitan el alfabeto completo.
+      </para>
+      <para>Si sale del <application>&app;</application> antes de pegar la cadena de texto en una aplicaci&oacute;n, la perder&aacute;. 
+      </para>
+    </sect2>
+
+<!-- =============== To Change the Input Mode  ========================= -->
+    <sect2 id="gucharmap-change-charset">
+      <title>Para cambiar el modo de entrada</title>
+      <para>
+        Par cambiar el modo de entrada, haga clic con el bot&oacute;n derecho en el campo <guilabel>Texto que copiar</guilabel> y seleccione <guimenuitem>M&eacute;todos de entrada</guimenuitem>.
+      </para>
+      <para>
+        Para mostrar las opciones de disposici&oacute;n de caracteres necesarias para trabajar con juegos de caracteres no latinos, haga clic con el bot&oacute;n derecho en el campo <guilabel>Texto que copiar</guilabel> y seleccione <guimenuitem>Insertar car&aacute;cter de control Unicode</guimenuitem>.
+      </para>
+    </sect2>
+    
+    <sect2 id="usage-find-character">
+      <title>Para buscar un car&aacute;cter</title>
+      <para>
+        Hay diversos m&eacute;todos para buscar un car&aacute;cter en el <application>&app;</application>.
+      </para>
+    
+      <sect3 id="usage-find-character-name">
+        <title>Para buscar un car&aacute;cter por su nombre Unicode</title>
+        <para>
+          Para buscar un car&aacute;cter por su nombre Unicode, efect&uacute;e los siguientes pasos:
+        </para>
+        <orderedlist>
+          <listitem>
+            <para>
+              Seleccione <menuchoice>
+                <guimenu>Buscar</guimenu>
+                <guimenuitem>Buscar</guimenuitem>
+              </menuchoice>.
+            Se abrir&aacute; el di&aacute;logo <guilabel>Buscar</guilabel>. 
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Escriba el nombre Unicode en el campo <guilabel>Buscar</guilabel>.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Haga clic en <guibutton>Buscar</guibutton>. 
+            </para>
+            <para>La aplicaci&oacute;n <application>&app;</application> resaltar&aacute; el primer car&aacute;cter que coincida con los criterios de b&uacute;squeda.
+            </para>
+            <para>
+              Si no se encuentra ning&uacute;n car&aacute;cter que coincida, el <application>&app;</application> muestra una alerta informativa.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Para buscar el siguiente car&aacute;cter coincidente seleccione <menuchoice>
+                <guimenu>Buscar</guimenu>
+                <guimenuitem>Buscar el siguiente</guimenuitem>
+              </menuchoice>.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Para buscar el car&aacute;cter coincidente anterior seleccione <menuchoice>
+                <guimenu>Buscar</guimenu>
+                <guimenuitem>Buscar el anterior</guimenuitem>
+              </menuchoice>.
+            </para>
+          </listitem>
+        </orderedlist>
+      </sect3>
+    
+      <sect3 id="usage-find-character-code">
+        <title>Para buscar un car&aacute;cter por su punto de c&oacute;digo Unicode</title>
+        <para>
+          Para buscar un car&aacute;cter por su punto de c&oacute;digo Unicode, efect&uacute;e los siguientes pasos:
+        </para>
+        <orderedlist>
+          <listitem>
+            <para>
+              Seleccione <menuchoice>
+                <guimenu>Buscar</guimenu>
+                <guimenuitem>Punto de c&oacute;digo</guimenuitem>
+              </menuchoice>.
+              Se muestra el di&aacute;logo <guilabel>Saltar al punto de c&oacute;digo Unicode</guilabel>. 
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Escriba el punto de c&oacute;digo Unicode hexadecimal en el campo de texto.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Haga clic en <guibutton>Aceptar</guibutton>. 
+            </para>
+            <para>La aplicaci&oacute;n <application>&app;</application> resaltar&aacute; el primer car&aacute;cter que coincida con los criterios de b&uacute;squeda.
+            </para>
+            <para>
+              Si no se encuentra ning&uacute;n car&aacute;cter que coincida, el <application>&app;</application> muestra una alerta informativa.
+            </para>
+          </listitem>
+        </orderedlist>
+      </sect3>
+    
+      <sect3 id="usage-find-character-clipboard">
+        <title>Para buscar el primer car&aacute;cter del portapapeles</title>
+        <para>
+          Para buscar el primer car&aacute;cter del portapapeles, seleccione <menuchoice>
+            <guimenu>Buscar</guimenu>
+            <guimenuitem>Car&aacute;cter en el portapapeles</guimenuitem>
+          </menuchoice>.
+        </para>
+        <para>La aplicaci&oacute;n <application>&app;</application> muestra el resultado de la b&uacute;squeda en la barra de estado.
+        </para>
+      </sect3>
+    
+      <sect3 id="usage-find-character-otherapp">
+        <title>Para buscar un car&aacute;cter de otra aplicaci&oacute;n</title>
+        <para>
+          Para buscar un car&aacute;cter de otra aplicaci&oacute;n, arr&aacute;strelo desde la otra aplicaci&oacute;n a la <guilabel>Tabla de caracteres</guilabel>.
+        </para>
+        <para>La aplicaci&oacute;n <application>&app;</application> muestra el resultado de la b&uacute;squeda en la barra de estado.
+        </para>
+      </sect3>
+
+    </sect2>
+
+<!-- =============== To Browse the Character Table  ========================= -->
+    <sect2 id="usage-browse-characters">
+      <title>Para examinar todos los caracteres</title>
+      <para>
+        Para buscar dentro de los caracteres de la <guilabel>Tabla de caracteres</guilabel>, utilice uno de estos m&eacute;todos:
+      </para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            Seleccione <menuchoice>
+              <guimenu>Ir a</guimenu>
+              <guimenuitem>Siguiente car&aacute;cter</guimenuitem>
+            </menuchoice> para seleccionar el siguiente car&aacute;cter de la secuencia Unicode. 
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Seleccione <menuchoice>
+              <guimenu>Ir a</guimenu>
+              <guimenuitem>Car&aacute;cter anterior</guimenuitem>
+            </menuchoice> para seleccionar el car&aacute;cter anterior de la secuencia Unicode. 
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Utilice las teclas de flecha del teclado.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Utilice la barra de desplazamiento de la <guilabel>Tabla de caracteres</guilabel>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Pulse las teclas <keycap>Av P&aacute;g</keycap> y <keycap>Re P&aacute;g</keycap> para examinar los caracteres p&aacute;gina a p&aacute;gina.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Pulse la tecla <keycap>Inicio</keycap> para seleccionar el primer car&aacute;cter de la secuencia Unicode.
+            Para seleccionar el ultimo car&aacute;cter pulse la tecla <keycap>Fin</keycap>.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    
+    <sect2 id="usage-display-details">
+      <title>Para mostrar informaci&oacute;n detallada acerca de un car&aacute;cter</title>
+      <para>
+        Para mostrar informaci&oacute;n detallada acerca de un car&aacute;cter, efect&uacute;e los siguientes pasos:
+      </para>
+      <orderedlist>
+        <listitem>
+          <para>
+            Seleccione un juego de caracteres del cuadro de lista. 
+            Ejemplo:<guilabel>Basic Latin</guilabel>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Seleccione un car&aacute;cter en la ficha <guilabel>Tabla de caracteres</guilabel>.
+            Ejemplo:<guilabel>B</guilabel>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Haga clic en la ficha <guilabel>Detalles del car&aacute;cter</guilabel>. 
+          </para>
+        </listitem>
+      </orderedlist>
+      <para>
+        La ficha <guilabel>Detalles del car&aacute;cter</guilabel> muestra la informaci&oacute;n siguiente acerca del car&aacute;cter seleccionado:
+      </para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            Punto de c&oacute;digo Unicode
+          </para>
+          <para>            Ejemplo: <guilabel>U+0042</guilabel>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Nombre Unicode del car&aacute;cter
+          </para>
+          <para>            Ejemplo: <guilabel>LATIN CAPITAL LETTER B</guilabel>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <guilabel>Propiedades generales del car&aacute;cter</guilabel>
+          </para>
+          <itemizedlist>
+            <listitem>
+              <para>
+                Categor&iacute;a de Unicode
+              </para>
+              <para>
+                Ejemplo: <guilabel>Letter, may&uacute;scula</guilabel>
+              </para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+        <listitem>
+          <para>
+            <guilabel>Varias representaciones &uacute;tiles</guilabel>
+          </para>
+          <itemizedlist>
+            <listitem>
+              <para>
+                Codificaci&oacute;n UTF-8
+              </para>
+              <para>
+                Ejemplo: <guilabel>0x42</guilabel>
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                Codificaci&oacute;n UTF-8 Octal con caracteres de escape
+              </para>
+              <para>
+                Ejemplo: <guilabel>\102</guilabel>
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                Referencia decimal de la entidad  </para>
+              <para>
+                Ejemplo: <guilabel></guilabel>
+              </para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+        <listitem>
+          <para>
+            <guilabel>Anotaciones y referencias cruzadas</guilabel>
+          </para>
+          <para>            Ejemplo: <guilabel>U+212C SCRIPT CAPITAL B</guilabel>
+          </para>
+          <para>
+            Haga clic en el v&iacute;nculo para visualizar los detalles del car&aacute;cter seleccionado.
+          </para>
+          <itemizedlist>
+            <listitem>
+              <para>
+                Seleccione <menuchoice>
+                  <guimenu>Ir a</guimenu>
+                  <guimenuitem>Atr&aacute;s</guimenuitem>
+                </menuchoice> o haga clic en el bot&oacute;n <guibutton>Atr&aacute;s</guibutton> para volver hacia atr&aacute;s en el historial de v&iacute;nculos.
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                Seleccione <menuchoice>
+                  <guimenu>Ira </guimenu>
+                  <guimenuitem>Adelante</guimenuitem>
+                </menuchoice> o haga clic en el bot&oacute;n <guibutton>Adelante</guibutton> para ir hacia delante en el historial de v&iacute;nculos.
+              </para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    
+    <sect2 id="usage-format-character">
+      <title>Para cambiar el formato de un car&aacute;cter</title>
+      <para>
+          Para cambiar el formato de un car&aacute;cter, efect&uacute;e los siguientes pasos:
+      </para>
+      <orderedlist>
+        <listitem>
+          <para>
+            Para cambiar el tipo de letra, seleccione uno en la lista desplegable de tipos de letra. 
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Para cambiar el tipo de letra a negrita, haga clic en el bot&oacute;n <guibutton>Negrita</guibutton>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Para cambiar el tipo de letra a cursiva, haga clic en el bot&oacute;n <guibutton>Cursiva</guibutton>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Para aumentar el tama&ntilde;o del tipo de letra, seleccione <menuchoice>
+              <guimenu>Ver</guimenu>
+              <guimenuitem>Aumentar</guimenuitem>
+            </menuchoice> o utilice el bot&oacute;n de incremento del zoom.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Para disminuir el tama&ntilde;o del tipo de letra, seleccione <menuchoice>
+              <guimenu>Ver</guimenu>
+              <guimenuitem>Disminuir</guimenuitem>
+            </menuchoice> o utilice el bot&oacute;n de incremento del zoom.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Para agrandar el car&aacute;cter seleccionado, pulse <keycap>May&uacute;s</keycap>.
+          </para>
+        </listitem>
+      </orderedlist>
+    </sect2>
+    
+    <sect2 id="usage-format-chartable">
+      <title>Para cambiar el formato de la tabla de caracteres</title>
+      <para>
+        Para cambiar el formato de la tabla de caracteres, seleccione
+        <menuchoice>
+          <guimenu>Ver</guimenu>
+          <guimenuitem>Alinear columnas en potencias de dos</guimenuitem>
+        </menuchoice>.
+      </para>
+      <para>La miniaplicaci&oacute;n <application>&app;</application> modifica la ficha <guilabel>Tabla de caracteres</guilabel> de forma que el n&uacute;mero de columnas sea una potencia de dos; por ejemplo, dos columnas,  cuatro columnas, ocho columnas, etc. El n&uacute;mero de columnas depende del tama&ntilde;o de la fuente.
+      </para>
+    </sect2>
+
+  </sect1>
+</article>

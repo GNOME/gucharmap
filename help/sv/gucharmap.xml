@@ -1,0 +1,755 @@
+<?xml version="1.0"?><!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+"http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+  <!ENTITY legal SYSTEM "legal.xml">
+  <!ENTITY appversion "0.8.0">
+  <!ENTITY manrevision "2.0.1">
+  <!ENTITY date "December 2003">
+  <!ENTITY app "Unicode-teckentabell">
+  <!ENTITY ug "Anv&auml;ndarhandbok f&ouml;r skrivbordet GNOME">
+]>
+
+<!-- 
+ (Do not remove this comment block.)
+  Maintained by the GNOME Documentation Project
+  http://developer.gnome.org/projects/gdp
+  Template version: 2.0 beta
+  Template last modified Apr 11, 2002
+-->
+
+<!-- =============Document Header ============================= -->
+<article id="index" lang="sv">
+<!-- please do not change the id; for translations, change lang to -->
+<!-- appropriate code -->
+  <articleinfo>
+    <title>Handbok f&ouml;r Unicode-teckentabell, version &manrevision;</title>
+    <copyright>
+      <year>2003</year>
+      <holder>Sun Microsystems</holder>
+    </copyright>
+    <copyright> 
+      <year>2003</year> 
+      <holder>Chee Bin HOH</holder> 
+    </copyright> 
+
+<!-- translators: uncomment this:
+    <copyright>
+      <year>2002</year>
+      <holder>ME-THE-TRANSLATOR (Latin translation)</holder>
+    </copyright>
+-->
+
+    <publisher> 
+      <publishername>Dokumentationsprojekt f&ouml;r GNOME</publishername> 
+    </publisher> 
+
+    &legal;
+   <!-- This file  contains link to license for the documentation (GNU FDL), and 
+        other legal stuff such as "NO WARRANTY" statement. Please do not change 
+	any of this. -->
+
+    <authorgroup> 
+      <author>
+        <firstname>Suns</firstname>
+        <surname>GNOME-dokumentationsteam</surname>
+        <affiliation><orgname>Sun Microsystems</orgname></affiliation>
+      </author>
+      <author> 
+        <firstname>Chee Bin</firstname> 
+        <surname>HOH</surname> 
+        <affiliation> 
+          <orgname>Dokumentationsprojekt f&ouml;r GNOME</orgname> 
+          <address> <email>cbhoh@gnome.org</email> </address>
+        </affiliation>
+      </author>
+
+<!--
+      <author> 
+        <firstname>Documentation</firstname> 
+          <surname>Writer 1</surname> 
+          <affiliation> 
+            <orgname>GNOME Documentation Project</orgname> 
+            <address> <email>doc-writer1@gnome.org</email> </address> 
+          </affiliation> 
+      </author> 
+-->
+      
+<!-- This is appropriate place for other contributors: translators,
+     maintainers,  etc. Commented out by default.
+      <othercredit role="translator">
+        <firstname>Latin</firstname> 
+	<surname>Translator 1</surname> 
+	<affiliation> 
+          <orgname>Latin Translation Team</orgname> 
+          <address> <email>translator@gnome.org</email> </address> 
+	</affiliation>
+	<contrib>Latin translation</contrib>
+      </othercredit>
+-->
+    </authorgroup>
+
+
+    <revhistory>
+      <revision> 
+	<revnumber>Handbok f&ouml;r Unicode-teckentabell, version &manrevision;</revnumber> 
+	<date>&date;</date> 
+	<revdescription> 
+          <para role="author">Suns GNOME-dokumentationsteam</para>
+          <para role="publisher">Dokumentationsprojekt f&ouml;r GNOME</para>
+        </revdescription>
+      </revision>
+      <revision> 
+	<revnumber>Handbok f&ouml;r Unicode-teckentabell, version 2.0</revnumber> 
+	<date>Oktober 2003</date> 
+	<revdescription> 
+          <para role="author">Chee Bin HOH
+	    <email>cbhoh@gnome.org</email>
+          </para>
+          <para role="publisher">Dokumentationsprojekt f&ouml;r GNOME</para>
+        </revdescription>
+      </revision>
+    </revhistory>
+
+    <releaseinfo>
+ I den h&auml;r handboken beskrivs version &appversion; av &app;.
+    </releaseinfo>
+
+    <legalnotice> 
+      <title>Feedback</title>
+      <para>F&ouml;lj instruktionerna p&aring; <ulink url="ghelp:gnome-feedback" type="help">GNOME:s feedbacksida</ulink> om du vill rapportera ett fel eller ge f&ouml;rslag betr&auml;ffande det h&auml;r programmet eller den h&auml;r handboken. 
+      </para>
+<!-- Translators may also add here feedback address for translations -->
+    </legalnotice>
+  </articleinfo>
+
+<!-- ============= Index ===================================== -->
+  <indexterm zone="index"> 
+    <primary>gucharmap</primary> 
+  </indexterm> 
+  <indexterm zone="index"> 
+    <primary>&app;</primary> 
+  </indexterm>
+  <indexterm zone="index"> 
+    <primary>Teckentabell</primary> 
+  </indexterm>
+
+<!-- ============= Document Body ============================= -->
+<!-- ============= Introduction ============================== -->
+  <sect1 id="gucharmap-introduction"> 
+     <title>Introduktion</title>
+    <para>
+      Programmet <application>&app;</application> &auml;r en 
+      Unicode/ISO10646-teckentabell och typsnittsvisare.
+      Unicode/ISO10646 &auml;r en kodad teckenupps&auml;ttning och teckenupps&auml;ttningsstandard.
+      Utvecklarna av Unicode/ISO10646 avser att ta med alla tecken som
+      anv&auml;nds i alla v&auml;rldens skriftspr&aring;k i den h&auml;r teckenupps&auml;ttningen.
+    </para>
+    <para>
+      Du kan anv&auml;nda <application>&app;</application> f&ouml;r att v&auml;lja tecken i 
+      en teckentabell och sedan kombinera tecknen i en textstr&auml;ng med
+      standardtecken. Du kan infoga den textstr&auml;ng 
+      du skapar i andra program, t ex dokument i textredigerare. 
+    </para>
+    <para>
+      <application>&app;</application> inneh&aring;ller bokst&auml;ver med accent, 
+      matematiska symboler, specialtecken och interpunktionstecken. 
+      M&aring;nga av tecknen i <application>&app;</application>
+      &auml;r inte tillg&auml;ngliga p&aring; ett vanligt tangentbord.
+    </para>
+  </sect1>
+
+<!-- =========== Getting Started ============================== -->
+
+  <sect1 id="gucharmap-getting-started"> 
+    <title>Komma ig&aring;ng</title>
+
+    <sect2 id="gucharmap-start"> 
+        <title>S&aring; h&auml;r startar du &app;</title>
+      <para>Du kan starta <application>&app;</application> p&aring; f&ouml;ljande s&auml;tt:
+      </para>
+      <variablelist>
+        <varlistentry>
+          <term><guimenu>Meny</guimenu></term>
+          <listitem>
+            <para>
+              Mer information om hur du startar
+              <application>&app;</application> fr&aring;n en meny 
+              finns i den senaste versionen av &ug; f&ouml;r din plattform.
+            </para>
+    	  </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>Kommandorad</term>
+	  <listitem>
+            <para>
+                  Utf&ouml;r f&ouml;ljande kommando:
+              <command>gnome-character-map</command>
+            </para>
+            <para>
+              Mer information om hur du k&ouml;r 
+              <application>&app;</application> fr&aring;n en kommandorad 
+              finns i <ulink url="man:gnome-character-map" type="man">
+              <citerefentry><refentrytitle>gnome-character-map</refentrytitle>
+              <manvolnum>1</manvolnum></citerefentry></ulink>.
+            </para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </sect2>
+
+    <sect2 id="gucharmap-when-start"> 
+        <title>N&auml;r du startar &app;</title>
+      <para>N&auml;r du startar <application>&app;</application> visas f&ouml;ljande f&ouml;nster.
+      </para>
+
+      <!-- ==== Figure ==== -->
+      <figure id="gucharmap-window-fig"> 
+        <title>&app;-f&ouml;nster</title>
+        <screenshot>
+          <mediaobject>
+	    <imageobject>
+              <imagedata fileref="figures/gucharmap_window.png" format="PNG"/> 
+            </imageobject>
+	    <textobject>
+              <phrase>Visar &app;-f&ouml;nstret. </phrase>
+	    </textobject>
+          </mediaobject>
+        </screenshot>
+      </figure>
+      <!-- ==== End of Figure ==== -->
+
+      <!-- Include any descriptions of the GUI immediately after the screenshot of the main UI, -->
+      <!-- for example, the items on the menubar and on the toolbar. This section is optional. -->
+
+      <para><application>&app;</application>-f&ouml;nstret inneh&aring;ller f&ouml;ljande element:
+      </para>
+      <variablelist>
+        <varlistentry>
+          <term>Menyrad</term>
+          <listitem>
+            <para>
+              Menyerna p&aring; menyraden inneh&aring;ller de flesta kommandon du beh&ouml;ver n&auml;r
+              du arbetar med <application>&app;</application>.
+            </para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>Verktygsrad</term>
+          <listitem>
+            <para>
+              Verktygsraden inneh&aring;ller en del av de kommandon som du kommer &aring;t fr&aring;n menyraden.
+              Verktygsraden inneh&aring;ller ocks&aring; en dold lista med typsnitt, och knappar f&ouml;r typsnittsstil.
+            </para>
+          </listitem>
+        </varlistentry>
+        <varlistentry> 
+<term>Visningsomr&aring;de</term>
+                         <listitem>
+            <para>
+              Visningsomr&aring;det inneh&aring;ller f&ouml;ljande komponenter:
+            </para>
+            <itemizedlist>
+              <listitem>
+                <para>Listruta f&ouml;r Unicode-teckenupps&auml;ttning
+                </para>
+              </listitem>
+              <listitem>
+                <para>Flikavsnittet <guilabel>Teckentabell</guilabel>
+                </para>
+              </listitem>
+              <listitem>
+                <para>Flikavsnittet <guilabel>Teckendetaljer</guilabel>
+                </para>
+              </listitem>
+              <listitem>
+                <para>Textf&auml;ltet <guilabel>Text att kopiera</guilabel>
+                </para>
+              </listitem>
+              <listitem>
+                <para>Knappen <guibutton>Kopiera</guibutton>
+                </para>
+              </listitem>
+            </itemizedlist>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>Statusrad</term>
+          <listitem>
+            <para>Statusraden visar information om det valda tecknet.
+            </para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </sect2>
+  </sect1>
+
+<!-- ================ Usage ================================ -->
+  <sect1 id="gucharmap-usage"> 
+     <title>Anv&auml;ndning</title>
+    
+    <sect2 id="gucharmap-create-textstring">
+      <title>S&aring; h&auml;r skapar du en textstr&auml;ng</title>
+      <para>
+        Du skapar en textstr&auml;ng i f&auml;ltet <guilabel>Text att kopiera</guilabel> genom 
+        att utf&ouml;ra f&ouml;ljande steg:
+      </para>
+      <orderedlist>
+        <listitem>
+          <para>
+            V&auml;lj en teckenupps&auml;ttning i listrutan.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Infoga tecken p&aring; n&aring;got av f&ouml;ljande s&auml;tt:
+          </para>
+          <itemizedlist>
+            <listitem>
+              <para>
+                Klicka p&aring; en teckenknapp i flikavsnittet <guilabel>Teckentabell</guilabel>
+                och tryck sedan p&aring; <keycap>Retur</keycap>, s&aring; infogas tecknet i 
+                f&auml;ltet <guilabel>Text att kopiera</guilabel>. 
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                Klicka p&aring; en teckenknapp i flikavsnittet <guilabel>Teckentabell</guilabel>
+                och dra sedan tecknet till f&auml;ltet <guilabel>Text att kopiera</guilabel>. 
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                Ge fokus till f&auml;ltet <guilabel>Text att kopiera</guilabel> genom att klicka p&aring; det.
+                Om en textstr&auml;ng redan finns i f&auml;ltet klickar du p&aring; den plats i 
+                textstr&auml;ngen d&auml;r du vill infoga tecknet. Infoga ett tecken i f&auml;ltet genom att
+                trycka p&aring; motsvarande tangent p&aring; tangentbordet. 
+              </para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+      </orderedlist>
+    </sect2>
+
+<!-- =============== To Copy and Paste a Text String ====================== -->
+    <sect2 id="gucharmap-copy-textstring">
+      <title>S&aring; h&auml;r kopierar du och klistrar in en textstr&auml;ng i ett program</title>
+      <para>
+        Du kopierar och klistrar in textstr&auml;ngen fr&aring;n f&auml;ltet <guilabel>Text att kopiera</guilabel> 
+        i ett program genom att utf&ouml;ra f&ouml;ljande steg:
+      </para>
+      <orderedlist>
+        <listitem>
+          <para>
+            V&auml;lj textstr&auml;ngen i f&auml;ltet <guilabel>Text att kopiera</guilabel> 
+            genom att dra pekaren, eller klicka p&aring; <guibutton>Kopiera</guibutton>. Den valda textstr&auml;ngen visas
+            markerad. 
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Peka p&aring; den plats i ett program d&auml;r du vill placera textstr&auml;ngen och
+            infoga textstr&auml;ngen genom att klicka med musens mittknapp. Du kan ocks&aring; klistra in
+            textstr&auml;ngen i programmet om funktionen f&ouml;r att klistra in &auml;r tillg&auml;nglig. Du kan upprepa
+            infogningen s&aring; m&aring;nga g&aring;nger du vill medan textstr&auml;ngen &auml;r markerad.
+            Avmarkera textstr&auml;ngen genom att klicka p&aring; f&auml;ltet <guilabel>Text att kopiera</guilabel>. 
+          </para>
+        </listitem>
+      </orderedlist>
+      <para>
+        N&auml;r du klistrar in inneh&aring;llet fr&aring;n f&auml;ltet <guilabel>Text att kopiera</guilabel> i     andra program 
+        s&aring; visas textstr&auml;ngen i programmets aktuella teckenupps&auml;ttning.
+      </para>
+      <para>
+        Om textstr&auml;ngen inneh&aring;ller osynliga tecken kan du bara infoga
+        textstr&auml;ngen i program som st&ouml;der hela teckenupps&auml;ttningen.
+      </para>
+      <para>
+        Om du avslutar <application>&app;</application> innan du klistrar in
+        textstr&auml;ngen i ett program s&aring; g&aring;r textstr&auml;ngen f&ouml;rlorad. 
+      </para>
+    </sect2>
+
+<!-- =============== To Change the Input Mode  ========================= -->
+    <sect2 id="gucharmap-change-charset">
+      <title>S&aring; h&auml;r &auml;ndrar du inskrivningsl&auml;ge</title>
+      <para>
+        Du &auml;ndrar inskrivningsl&auml;ge genom att h&ouml;gerklicka p&aring;
+        f&auml;ltet <guilabel>Text att kopiera</guilabel> och sedan
+        v&auml;lja <guimenuitem>Indatametoder</guimenuitem>.
+      </para>
+      <para>
+        Du kan visa alternativ f&ouml;r teckenlayout som &auml;r anv&auml;ndbara 
+        n&auml;r du arbetar med ickelatinska teckenupps&auml;ttningar
+        genom att h&ouml;gerklicka p&aring; f&auml;ltet <guilabel>Text att kopiera</guilabel> och sedan
+        v&auml;lja <guimenuitem>Infoga Unicode-styrtecken</guimenuitem>.
+      </para>
+    </sect2>
+    
+    <sect2 id="usage-find-character">
+      <title>S&aring; h&auml;r s&ouml;ker du efter ett tecken</title>
+      <para>
+        Du kan s&ouml;ka efter ett tecken p&aring; flera s&auml;tt i <application>&app;</application>.
+      </para>
+    
+      <sect3 id="usage-find-character-name">
+        <title>S&aring; h&auml;r s&ouml;ker du efter ett tecken med Unicode-namn</title>
+        <para>
+          Du s&ouml;ker efter ett tecken med Unicode-namn genom att utf&ouml;ra f&ouml;ljande steg:
+        </para>
+        <orderedlist>
+          <listitem>
+            <para>
+              V&auml;lj <menuchoice>
+                <guimenu>S&ouml;k</guimenu>
+                <guimenuitem>S&ouml;k</guimenuitem>
+              </menuchoice>.
+            Dialogf&ouml;nstret <guilabel>S&ouml;k</guilabel> visas. 
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Ange Unicode-namnet i f&auml;ltet <guilabel>S&ouml;k</guilabel>.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Klicka p&aring; <guibutton>S&ouml;k</guibutton>. 
+            </para>
+            <para>
+              <application>&app;</application> markerar 
+              det f&ouml;rsta tecken som matchar s&ouml;kvillkoren.
+            </para>
+            <para>
+              Om inget matchande tecken p&aring;tr&auml;ffas visar <application>&app;</application> 
+              ett informationsmeddelande.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              S&ouml;k n&auml;sta matchande tecken 
+              genom att v&auml;lja <menuchoice>
+                <guimenu>S&ouml;k</guimenu>
+                <guimenuitem>S&ouml;k n&auml;sta</guimenuitem>
+              </menuchoice>.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              S&ouml;k f&ouml;reg&aring;ende matchande tecken 
+              genom att v&auml;lja <menuchoice>
+                <guimenu>S&ouml;k</guimenu>
+                <guimenuitem>S&ouml;k f&ouml;reg&aring;ende</guimenuitem>
+              </menuchoice>.
+            </para>
+          </listitem>
+        </orderedlist>
+      </sect3>
+    
+      <sect3 id="usage-find-character-code">
+        <title>S&aring; h&auml;r s&ouml;ker du efter ett tecken med Unicode-kodpunkt</title>
+        <para>
+          Du s&ouml;ker efter ett tecken med Unicode-kodpunkt genom att utf&ouml;ra f&ouml;ljande steg:
+        </para>
+        <orderedlist>
+          <listitem>
+            <para>
+              V&auml;lj <menuchoice>
+                <guimenu>S&ouml;k</guimenu>
+                <guimenuitem>Kodpunkt</guimenuitem>
+              </menuchoice>.
+              Dialogf&ouml;nstret <guilabel>Hoppa till Unicode-kodpunkt</guilabel> visas. 
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Ange den hexadecimala Unicode-kodpunkten i textf&auml;ltet.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Klicka p&aring; <guibutton>OK</guibutton>. 
+            </para>
+            <para>
+              <application>&app;</application> markerar 
+              det tecken som matchar s&ouml;kvillkoren.
+            </para>
+            <para>
+              Om inget matchande tecken p&aring;tr&auml;ffas visar <application>&app;</application> 
+              ett informationsmeddelande.
+            </para>
+          </listitem>
+        </orderedlist>
+      </sect3>
+    
+      <sect3 id="usage-find-character-clipboard">
+        <title>S&aring; h&auml;r s&ouml;ker du efter det f&ouml;rsta tecknet i urklipp</title>
+        <para>
+          Du s&ouml;ker efter det f&ouml;rsta tecknet i urklipp genom att 
+          v&auml;lja <menuchoice>
+            <guimenu>S&ouml;k</guimenu>
+            <guimenuitem>Tecken i urklipp</guimenuitem>
+          </menuchoice>.
+        </para>
+        <para>
+          <application>&app;</application> visar s&ouml;kresultatet i statusraden.
+        </para>
+      </sect3>
+    
+      <sect3 id="usage-find-character-otherapp">
+        <title>S&aring; h&auml;r s&ouml;ker du efter ett tecken fr&aring;n ett annat program</title>
+        <para>
+          Du kan s&ouml;ka efter ett tecken fr&aring;n ett annat program 
+          genom att dra tecknet fr&aring;n det andra programmet till 
+          <guilabel>Teckentabell</guilabel>.
+        </para>
+        <para>
+          <application>&app;</application> visar s&ouml;kresultatet i statusraden.
+        </para>
+      </sect3>
+
+    </sect2>
+
+<!-- =============== To Browse the Character Table  ========================= -->
+    <sect2 id="usage-browse-characters">
+      <title>S&aring; h&auml;r bl&auml;ddrar du genom alla tecken</title>
+      <para>
+        Du kan bl&auml;ddra genom alla tecken i flikavsnittet <guilabel>Teckentabell</guilabel>
+        p&aring; f&ouml;ljande s&auml;tt:
+      </para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            Markera n&auml;sta tecken i Unicode-sekvensen genom att v&auml;lja <menuchoice>
+              <guimenu>G&aring;</guimenu>
+              <guimenuitem>N&auml;sta tecken</guimenuitem>
+            </menuchoice>. 
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Markera f&ouml;reg&aring;ende tecken i Unicode-sekvensen genom att v&auml;lja <menuchoice>
+              <guimenu>G&aring;</guimenu>
+              <guimenuitem>F&ouml;reg&aring;ende tecken</guimenuitem>
+            </menuchoice>. 
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Tryck p&aring; tangentbordets piltangenter.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Anv&auml;nd rullningslisten vid <guilabel>Teckentabell</guilabel>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Bl&auml;ddra genom tecknen sida f&ouml;r sida genom att trycka p&aring; tangenterna
+            <keycap>PageUp</keycap> och <keycap>PageDown</keycap>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Markera det f&ouml;rsta tecknet i Unicode-sekvensen genom att trycka p&aring;
+            tangenten <keycap>Home</keycap>.
+            Markera det sista tecknet genom att trycka p&aring; tangenten <keycap>End</keycap>.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    
+    <sect2 id="usage-display-details"> 
+      <title>S&aring; h&auml;r visar du detaljerad information om ett tecken</title>
+      <para>
+        Du visar detaljerad information om ett tecken genom att utf&ouml;ra f&ouml;ljande steg:
+      </para>
+      <orderedlist>
+        <listitem>
+          <para>
+            V&auml;lj en teckenupps&auml;ttning i listrutan. 
+            Exempel:<guilabel>Grundl&auml;ggande latinska</guilabel>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            V&auml;lj ett tecken i flikavsnittet <guilabel>Teckentabell</guilabel>.
+            Exempel:<guilabel>B</guilabel>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Klicka p&aring; flikavsnittet <guilabel>Teckendetaljer</guilabel>. 
+          </para>
+        </listitem>
+      </orderedlist>
+      <para>
+        Flikavsnittet <guilabel>Teckendetaljer</guilabel> visar f&ouml;ljande
+        information om det valda tecknet:
+      </para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            Unicode-kodpunkt
+          </para>
+          <para>
+            Exempel: <guilabel>U+0042</guilabel>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Unicode -teckennamn
+          </para>
+          <para>
+            Exempel: <guilabel>LATIN CAPITAL LETTER B</guilabel>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <guilabel>Allm&auml;nna teckenegenskaper</guilabel>
+          </para>
+          <itemizedlist>
+            <listitem>
+              <para>
+                Unicode-kategori
+              </para>
+              <para>
+                Exempel: <guilabel>Bokstav, versal</guilabel>
+              </para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+        <listitem>
+          <para>
+            <guilabel>Diverse anv&auml;ndbara representationer</guilabel>
+          </para>
+          <itemizedlist>
+            <listitem>
+              <para>
+                UTF-8-kodning
+              </para>
+              <para>
+                Exempel: <guilabel>0x42</guilabel>
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                Oktal UTF-8-kodning
+              </para>
+              <para>
+                Exempel: <guilabel>\102</guilabel>
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                Decimalentitetsreferens
+              </para>
+              <para>
+                Exempel: <guilabel></guilabel>
+              </para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+        <listitem>
+          <para>
+            <guilabel>Annotationer och korsreferenser</guilabel>
+          </para>
+          <para>
+            Exempel: <guilabel>U+212C SCRIPT CAPITAL B</guilabel>
+          </para>
+          <para>
+            Visa detaljer om det refererade tecknet genom att klicka p&aring; l&auml;nken.
+          </para>
+          <itemizedlist>
+            <listitem>
+              <para>
+                Navigera bak&aring;t genom l&auml;nkens historik genom att v&auml;lja <menuchoice>
+                  <guimenu>G&aring;</guimenu>
+                  <guimenuitem>Bak&aring;t</guimenuitem>
+                </menuchoice>,
+                eller klicka p&aring; knappen <guibutton>Bak&aring;t</guibutton>.
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                Navigera fram&aring;t genom l&auml;nkens historik genom att v&auml;lja <menuchoice>
+                  <guimenu>G&aring;</guimenu>
+                  <guimenuitem>Fram&aring;t</guimenuitem>
+                </menuchoice>,
+                eller klicka p&aring; knappen <guibutton>Fram&aring;t</guibutton>.
+              </para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    
+    <sect2 id="usage-format-character">
+      <title>S&aring; h&auml;r &auml;ndrar du format p&aring; ett tecken</title>
+      <para>
+        Du &auml;ndrar format p&aring; ett tecken genom att utf&ouml;ra f&ouml;ljande steg:
+      </para>
+      <orderedlist>
+        <listitem>
+          <para>
+            Om du vill &auml;ndra typsnitt v&auml;ljer du ett nytt i listrutan med typsnitt. 
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Om du vill &auml;ndra typsnittstypen till fetstilt s&aring;
+            klickar du p&aring; knappen <guibutton>Fet</guibutton>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Om du vill &auml;ndra typsnittstypen till kursiverad s&aring;
+            klickar du p&aring; knappen <guibutton>Kursiv</guibutton>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Om du vill g&ouml;ra typsnittet st&ouml;rre v&auml;ljer du 
+            <menuchoice>
+              <guimenu>Visa</guimenu>
+              <guimenuitem>Zooma in</guimenuitem>
+            </menuchoice>,
+            eller anv&auml;nder zoomningsrotationsrutan.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Om du vill g&ouml;ra typsnittet mindre v&auml;ljer du 
+            <menuchoice>
+              <guimenu>Visa</guimenu>
+              <guimenuitem>Zooma ut</guimenuitem>
+            </menuchoice>,
+            eller anv&auml;nder zoomningsrotationsrutan.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Om du vill f&ouml;rstora det markerade tecknet trycker du p&aring; <keycap>Skift</keycap>.
+          </para>
+        </listitem>
+      </orderedlist>
+    </sect2>
+    
+    <sect2 id="usage-format-chartable">
+      <title>S&aring; h&auml;r &auml;ndrar du format p&aring; teckentabellen</title>
+      <para>
+        Du &auml;ndrar format p&aring; teckentabellen genom att v&auml;lja
+        <menuchoice>
+          <guimenu>Visa</guimenu>
+          <guimenuitem>F&auml;st kolumner till tv&aring;potenser</guimenuitem>
+        </menuchoice>.
+      </para>
+      <para>
+        <application>&app;</application> &auml;ndrar flikavsnittet 
+        <guilabel>Teckentabell</guilabel> s&aring; att antalet kolumner
+        &auml;r en tv&aring;potens, t ex tv&aring; kolumner, fyra kolumner, &aring;tta kolumner o s v. Antalet kolumner beror p&aring;
+        typsnittets storlek.
+      </para>
+    </sect2>
+
+  </sect1>
+</article>
