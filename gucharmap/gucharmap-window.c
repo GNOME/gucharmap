@@ -174,10 +174,11 @@ static void
 search_start (GucharmapSearchDialog *search_dialog,
               GucharmapWindow       *guw)
 {
+  GdkCursor *cursor;
   GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
   g_assert (IS_GUCHARMAP_WINDOW (guw));
 
-  GdkCursor *cursor = _gucharmap_window_progress_cursor ();
+  cursor = _gucharmap_window_progress_cursor ();
   gdk_window_set_cursor (GTK_WIDGET (guw)->window, cursor);
   gdk_cursor_unref (cursor);
 
