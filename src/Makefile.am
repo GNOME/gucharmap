@@ -45,9 +45,20 @@ libgucharmapinclude_HEADERS = charmap.h unicode_info.h mini_fontsel.h
 
 bin_PROGRAMS = gucharmap
 
+gucharmap_SOURCES = main.c
+
+if OS_WIN32
+
+gucharmap_LDADD = gucharmaprc.o libgucharmap.la  @GTK_LIBS@ @GNOME_LIBS@
+
+gucharmaprc.o: gucharmaprc.rc
+	windres -i $< -o $@
+
+else
+
 gucharmap_LDADD = libgucharmap.la  @GTK_LIBS@ @GNOME_LIBS@
 
-gucharmap_SOURCES = main.c
+endif
 
 
 gucharmap_marshal.h: gucharmap_marshal.list
