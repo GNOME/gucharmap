@@ -367,17 +367,14 @@ append_character_to_text_to_copy (Charmap *charmap, gunichar uc)
 
 
 static gint
-copy_button_clicked (GtkWidget *widget, gpointer callback_data)
+edit_copy (GtkWidget *widget, gpointer callback_data)
 {
-  GtkClipboard *clipboard = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
+  /* if nothing is selected, select the whole thing */
+  if (! gtk_editable_get_selection_bounds (GTK_EDITABLE (text_to_copy), 
+                                           NULL, NULL))
+    gtk_editable_select_region (GTK_EDITABLE (text_to_copy), 0, -1);
 
-  /* select it so it's in SELECTION_PRIMARY */
-  gtk_editable_select_region (GTK_EDITABLE (text_to_copy), 0, -1);
-
-  /* copy to SELECTION_CLIPBOARD */
-  gtk_clipboard_set_text (
-          clipboard, 
-          gtk_entry_get_text (GTK_ENTRY (text_to_copy)), -1);
+  gtk_editable_copy_clipboard (GTK_EDITABLE (text_to_copy));
 
   set_text_to_copy_status (_("Text copied to clipboard."));
 
@@ -386,7 +383,7 @@ copy_button_clicked (GtkWidget *widget, gpointer callback_data)
 
 
 static gint
-clear_button_clicked (GtkWidget *widget, gpointer callback_data)
+edit_clear (GtkWidget *widget, gpointer callback_data)
 {
   gtk_entry_set_text (GTK_ENTRY (text_to_copy), "");
   set_text_to_copy_status (_("Text-to-copy entry box cleared."));
@@ -501,7 +498,7 @@ make_text_to_copy ()
   /* the copy button */
   button = gtk_button_new_from_stock (GTK_STOCK_COPY); 
   g_signal_connect (G_OBJECT (button), "clicked",
-                    G_CALLBACK (copy_button_clicked), NULL);
+                    G_CALLBACK (edit_copy), NULL);
   gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
 
   gtk_tooltips_set_tip (tooltips, button, _("Copy to the clipboard."), NULL);
@@ -573,12 +570,15 @@ static GtkWidget *
 make_menu (GtkWindow *window)
 {
   GtkWidget *menubar;
-  GtkWidget *file_menu, *view_menu, *goto_menu;
-  GtkWidget *file_menu_item, *view_menu_item;
-  GtkWidget *goto_menu_item, *help_menu_item;
+  GtkWidget *file_menu, *edit_menu, *view_menu, *goto_menu;
+  GtkWidget *file_menu_item, *edit_menu_item, *view_menu_item;
+  GtkWidget *goto_menu_item;
   GtkWidget *menu_item;
   GtkAccelGroup *accel_group;
   GtkWidget *unicode_details_menu, *unihan_details_menu;
+#if HAVE_GNOME
+  GtkWidget *help_menu_item;
+#endif
 
   accel_group = gtk_accel_group_new ();
   gtk_window_add_accel_group (GTK_WINDOW (window), accel_group);
@@ -588,6 +588,8 @@ make_menu (GtkWindow *window)
   menubar = gtk_menu_bar_new ();
   file_menu_item = gtk_menu_item_new_with_mnemonic (_("Char_map"));
   gtk_menu_shell_append (GTK_MENU_SHELL (menubar), file_menu_item);
+  edit_menu_item = gtk_menu_item_new_with_mnemonic (_("_Edit"));
+  gtk_menu_shell_append (GTK_MENU_SHELL (menubar), edit_menu_item);
   view_menu_item = gtk_menu_item_new_with_mnemonic (_("_View"));
   gtk_menu_shell_append (GTK_MENU_SHELL (menubar), view_menu_item);
   goto_menu_item = gtk_menu_item_new_with_mnemonic (_("_Go To"));
@@ -603,6 +605,27 @@ make_menu (GtkWindow *window)
                     G_CALLBACK (gtk_main_quit), NULL);
   gtk_menu_shell_append (GTK_MENU_SHELL (file_menu), menu_item);
   /* finished making the file menu */
+
+  /* make the edit menu */
+  edit_menu = gtk_menu_new ();
+  gtk_menu_set_accel_group (GTK_MENU (edit_menu), accel_group);
+  gtk_menu_item_set_submenu (GTK_MENU_ITEM (edit_menu_item), edit_menu);
+
+  /* edit/copy */
+  menu_item = gtk_image_menu_item_new_from_stock (GTK_STOCK_COPY, accel_group);
+  gtk_menu_shell_append (GTK_MENU_SHELL (edit_menu), menu_item);
+  g_signal_connect (G_OBJECT (menu_item), "activate",
+                    G_CALLBACK (edit_copy), NULL);
+
+  /* separator */
+  gtk_menu_shell_append (GTK_MENU_SHELL (edit_menu), gtk_menu_item_new ());
+
+  /* edit/clear */
+  menu_item = gtk_image_menu_item_new_from_stock (GTK_STOCK_CLEAR, accel_group);
+  gtk_menu_shell_append (GTK_MENU_SHELL (edit_menu), menu_item);
+  g_signal_connect (G_OBJECT (menu_item), "activate",
+                    G_CALLBACK (edit_clear), NULL);
+  /* finished making the edit menu */
 
   /* make the view menu */
   view_menu = gtk_menu_new ();
@@ -780,7 +803,7 @@ make_menu (GtkWindow *window)
   /* ctrl-v */
   menu_item = gtk_menu_item_new_with_mnemonic (_("Character in _Clipboard"));
   gtk_widget_add_accelerator (menu_item, "activate", accel_group,
-	                      GDK_v, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+	                      GDK_p, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
   g_signal_connect (G_OBJECT (menu_item), "activate",
                     G_CALLBACK (jump_clipboard), NULL); 
   gtk_menu_shell_append (GTK_MENU_SHELL (goto_menu), menu_item);
@@ -900,7 +923,7 @@ main (gint argc, gchar **argv)
   gint rc;
 #endif
 
-  const struct poptOption options [] =
+  const struct poptOption options[] =
     {
       { "font", '\0', POPT_ARG_STRING, &new_font, 0, 
         _("Font to start with; ex: 'Serif 27'"), NULL },
@@ -916,7 +939,8 @@ main (gint argc, gchar **argv)
 #else
   gtk_init (&argc, &argv);
 
-  popt_context = poptGetContext ("gucharmap", argc, argv, options, 0);
+  popt_context = poptGetContext ("gucharmap", argc, (const gchar **) argv, 
+                                 options, 0);
   rc = poptGetNextOpt (popt_context);
 
   if (rc != -1)
