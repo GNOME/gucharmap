@@ -206,7 +206,63 @@ do_search (GucharmapWindow *guw,
            const gchar *search_text, 
            gint direction)
 {
+  const gchar *no_leading_space, *nptr;
+  char *endptr;
   g_assert (direction == -1 || direction == 1);
+  gunichar wc;
+
+  if (search_text[0] == '\0')
+    {
+      information_dialog (guw, alert_parent, _("Nothing to search for."));
+      return FALSE;
+    }
+
+  /* skip spaces */
+  for (no_leading_space = search_text;  
+       g_unichar_isspace (g_utf8_get_char (no_leading_space));
+       no_leading_space = g_utf8_next_char (no_leading_space));
+
+  /* check for explicit decimal codepoint */
+  if (strncasecmp (no_leading_space, "&#", 2) == 0)
+    {
+      nptr = no_leading_space + 2;
+      wc = strtoul (nptr, &endptr, 10);
+      if (endptr != nptr && wc <= UNICHAR_MAX)
+        {
+          gucharmap_charmap_go_to_character (guw->charmap, wc);
+          return TRUE;
+        }
+    }
+
+  /* check for explicit hex code point */
+  nptr = no_leading_space;
+  if (strncasecmp (no_leading_space, "&#x", 3) == 0)
+    nptr = no_leading_space + 3;
+  else if (strncasecmp (no_leading_space, "U+", 2) == 0
+           || strncasecmp (no_leading_space, "0x", 2) == 0)
+    nptr = no_leading_space + 2;
+
+  if (nptr != no_leading_space)
+    {
+      wc = strtoul (nptr, &endptr, 16);
+      if (endptr != nptr && wc <= UNICHAR_MAX)
+        {
+          gucharmap_charmap_go_to_character (guw->charmap, wc);
+          return TRUE;
+        }
+    }
+
+  /* “Unicode character names contain only uppercase Latin letters A through
+   * Z, digits, space, and hyphen-minus.” If first character is not one of
+   * those, jump to it. */
+  if (! ((*no_leading_space >= 'A' && *no_leading_space <= 'Z') 
+         || (*no_leading_space >= 'a' && *no_leading_space <= 'z') 
+         || (*no_leading_space >= '0' && *no_leading_space <= '9') 
+         || (*no_leading_space == '-')))
+    {
+      gucharmap_charmap_go_to_character (guw->charmap, g_utf8_get_char (no_leading_space));
+      return TRUE;
+    }
 
   switch (gucharmap_charmap_search (guw->charmap, search_text, direction))
     {
@@ -215,7 +271,33 @@ do_search (GucharmapWindow *guw,
         return TRUE;
 
       case GUCHARMAP_NOT_FOUND:
-        information_dialog (guw, alert_parent, _("Not found."));
+        /* try searching without leading spaces */
+        switch (gucharmap_charmap_search (guw->charmap, no_leading_space, direction))
+          {
+            case GUCHARMAP_FOUND:
+            case GUCHARMAP_WRAPPED:
+              return TRUE;
+
+            case GUCHARMAP_NOT_FOUND:
+              /* NOW try interpreting it from the start as a hex codepoint */
+              wc = strtoul (no_leading_space, &endptr, 16);
+              if (endptr != nptr && wc <= UNICHAR_MAX)
+                {
+                  gucharmap_charmap_go_to_character (guw->charmap, wc);
+                  return TRUE;
+                }
+
+              information_dialog (guw, alert_parent, _("Not found."));
+              return FALSE;
+
+            case GUCHARMAP_NOTHING_TO_SEARCH_FOR:
+              information_dialog (guw, alert_parent, _("Nothing to search for."));
+              return FALSE;
+
+            default:
+              g_warning ("gucharmap_charmap_search returned an unexpected result; this should never happen");
+              return FALSE;
+          }
         return FALSE;
 
       case GUCHARMAP_NOTHING_TO_SEARCH_FOR:
