@@ -14021,6 +14021,10 @@ find_next_substring_match (gunichar start, gunichar unichar_max,
         i = 0;
     }
 
+  /* if the start character matches we want to return a match */
+  if (ascii_case_strrstr (unicode_data[i].name, search_text) != NULL)
+    return unicode_data[i].index;
+
   return (gunichar)(-1);
 }
 
