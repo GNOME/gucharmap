@@ -339,6 +339,54 @@ key_press_event (GtkWidget *widget,
 }
 
 
+static gunichar
+get_char_at (Charmap *charmap, gint x, gint y)
+{
+  gint row, col, dim;
+
+  dim = calculate_square_dimension (charmap->font_metrics);
+
+  row = y / (dim + 1);
+  if (row >= CHARMAP_ROWS)
+    row = CHARMAP_ROWS - 1;
+
+  col = x / (dim + 1);
+  if (col >= CHARMAP_COLS)
+    col = CHARMAP_COLS - 1;
+
+  return charmap->page_first_char + row * CHARMAP_COLS + col;
+}
+
+
+static gint
+button_press_event (GtkWidget *widget, 
+                    GdkEventButton *event, 
+                    gpointer callback_data)
+{
+  Charmap *charmap = CHARMAP (callback_data);
+  gunichar old_active_char;
+
+  old_active_char = charmap->active_char;
+  charmap->active_char = get_char_at (charmap, event->x, event->y);
+
+  if (charmap->active_char != old_active_char)
+    {
+      /* redraw pixmap*/
+      draw_tabulus_pixmap (charmap);
+    
+      /* XXX: send expose event instead? */
+      gdk_draw_drawable (charmap->tabulus->window,
+                         charmap->tabulus->style->fg_gc[GTK_STATE_NORMAL],
+                         charmap->tabulus_pixmap,
+                         0, 0, 0, 0,
+                         charmap->tabulus->allocation.width,
+                         charmap->tabulus->allocation.height);
+    }
+
+  return FALSE;
+}
+
+
 void
 charmap_class_init (CharmapClass *clazz)
 {
@@ -355,12 +403,16 @@ charmap_init (Charmap *charmap)
 
   charmap->tabulus = gtk_drawing_area_new ();
 
-  gtk_widget_add_events (charmap->tabulus, GDK_KEY_PRESS_MASK);
+  gtk_widget_set_events (charmap->tabulus, GDK_EXPOSURE_MASK 
+                                           | GDK_KEY_PRESS_MASK
+                                           | GDK_BUTTON_PRESS_MASK);
 
   g_signal_connect (G_OBJECT (charmap->tabulus), "expose_event",
                     G_CALLBACK (expose_event), charmap);
   g_signal_connect (G_OBJECT (charmap->tabulus), "key_press_event",
                     G_CALLBACK (key_press_event), charmap);
+  g_signal_connect (G_OBJECT (charmap->tabulus), "button_press_event",
+                    G_CALLBACK (button_press_event), charmap);
 
   /* this is required to get key_press events (XXX: i think) */
   GTK_WIDGET_SET_FLAGS (charmap->tabulus, GTK_CAN_FOCUS);
