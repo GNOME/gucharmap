@@ -74,10 +74,12 @@ show_hide_details (GtkWidget *widget, gpointer data)
 
 
 static void
-fontsel_changed (MiniFontSelection *fontsel, gpointer data)
+fontsel_changed (MiniFontSelection *fontsel, Charmap *charmap)
 {
   g_printerr ("fontsel_changed: %s\n", 
               mini_font_selection_get_font_name (fontsel));
+
+  charmap_set_font (charmap, mini_font_selection_get_font_name (fontsel));
 }
 
 
@@ -194,8 +196,6 @@ main (gint argc, gchar **argv)
   gtk_box_pack_start (GTK_BOX (vbox), make_menu (), FALSE, FALSE, 0);
 
   fontsel = mini_font_selection_new ();
-  g_signal_connect (fontsel, "changed", G_CALLBACK (fontsel_changed),
-                    NULL);
   gtk_box_pack_start (GTK_BOX (vbox), fontsel, FALSE, FALSE, 0);
 
   charmap = charmap_new ();
@@ -204,6 +204,9 @@ main (gint argc, gchar **argv)
   gtk_window_set_default_size (GTK_WINDOW (window), 
                                gdk_screen_width () * 1/2,
                                gdk_screen_height () * 1/2);
+
+  g_signal_connect (fontsel, "changed", G_CALLBACK (fontsel_changed),
+                    charmap);
 
   /* make the starting font 3/2 of the default selection in fontsel */
   orig_font = mini_font_selection_get_font_name (MINI_FONT_SELECTION (fontsel));
