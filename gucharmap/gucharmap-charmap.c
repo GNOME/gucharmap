@@ -24,7 +24,6 @@
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 #include <stdlib.h>
-#include <ctype.h>
 #include <string.h>
 
 #include <gucharmap/gucharmap.h>
@@ -285,6 +284,8 @@ insert_chocolate_detail_codepoints (GucharmapCharmap *charmap,
   gtk_text_buffer_insert (buffer, iter, "\n", -1);
 }
 
+#define is_hex_digit(c) (((c) >= '0' && (c) <= '9') \
+                         || ((c) >= 'A' && (c) <= 'F'))
 
 /* returns a pointer to the start of [0-9A-F]{4}, or null if not found */
 static const gchar *
@@ -296,8 +297,8 @@ find_codepoint (const gchar *str)
    * worry about multibyte characters at all */
   for (i = 0;  i + 3 < strlen (str);  i++)
     {
-      if (isxdigit (str[i]) && isxdigit (str[i+1]) 
-          && isxdigit (str[i+2]) && isxdigit (str[i+3]))
+      if (is_hex_digit (str[i]) && is_hex_digit (str[i+1]) 
+          && is_hex_digit (str[i+2]) && is_hex_digit (str[i+3]))
         return str + i;
     }
 
