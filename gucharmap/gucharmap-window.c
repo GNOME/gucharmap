@@ -248,7 +248,7 @@ font_bigger (GtkWidget *widget, GucharmapWindow *guw)
   gint size, increment;
 
   size = gucharmap_mini_font_selection_get_font_size (GUCHARMAP_MINI_FONT_SELECTION (guw->fontsel));
-  increment = MAX (size / 12, 1);
+  increment = MAX (size / 5, 1);
   gucharmap_mini_font_selection_set_font_size (GUCHARMAP_MINI_FONT_SELECTION (guw->fontsel), 
                                                size + increment);
 }
@@ -259,9 +259,9 @@ font_smaller (GtkWidget *widget, GucharmapWindow *guw)
   gint size, increment;
 
   size = gucharmap_mini_font_selection_get_font_size (GUCHARMAP_MINI_FONT_SELECTION (guw->fontsel));
-  increment = MAX (size / 12, 1);
+  increment = MAX (size / 5, 1);
   gucharmap_mini_font_selection_set_font_size (GUCHARMAP_MINI_FONT_SELECTION (guw->fontsel), 
-                                     size - increment);
+                                               size - increment);
 }
 
 static void
@@ -280,14 +280,14 @@ help_about (GtkWidget *widget, GucharmapWindow *guw)
     {
       const gchar *authors[] = 
         { 
-          "Noah Levitt <nlevitt аt columbia.edu>", 
-          "Daniel Elstner <daniel.elstner аt gmx.net>", 
-          "Padraig O'Briain <Padraig.Obriain аt sun.com>",
+          "Noah Levitt <nlevitt columbia edu>", 
+          "Daniel Elstner <daniel.elstner gmx net>", 
+          "Padraig O'Briain <Padraig.Obriain sun com>",
           NULL 
         };
       const gchar *documenters[] =
 	{
-	  "Chee Bin HOH <cbhoh аt gnome.org>",
+	  "Chee Bin HOH <cbhoh gnome org>",
           NULL
 	};	  
       const gchar *translator_credits;
@@ -296,15 +296,11 @@ help_about (GtkWidget *widget, GucharmapWindow *guw)
       if (strcmp (translator_credits, "translator_credits") == 0)
         translator_credits = NULL;
 
-      about = gnome_about_new (
-              "gucharmap", VERSION, 
-              "Copyright © 2003 Noah Levitt <nlevitt аt columbia.edu>",
-              _("Character Map"), authors, documenters,
-              translator_credits, guw->icon);
+      about = gnome_about_new ("gucharmap", VERSION, "Copyright © 2004 Noah Levitt <nlevitt columbia edu>",
+                               _("Character Map"), authors, documenters, translator_credits, guw->icon);
 
       /* set the widget pointer to NULL when the widget is destroyed */
-      g_signal_connect (G_OBJECT (about), "destroy",
-                        G_CALLBACK (gtk_widget_destroyed), &about);
+      g_signal_connect (G_OBJECT (about), "destroy", G_CALLBACK (gtk_widget_destroyed), &about);
       gtk_window_set_icon (GTK_WINDOW (about), guw->icon);
     }
 
