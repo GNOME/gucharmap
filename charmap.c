@@ -159,44 +159,82 @@ set_caption (Charmap *charmap)
 static void
 set_active_block (Charmap *charmap)
 {
+  GtkTreePath *tree_path = NULL;
+  /* to check for bouncy loops */
+  unicode_block_t *unicode_block = NULL;
+  unicode_block_t *unicode_block_prev = NULL;
+  unicode_block_t *unicode_block_prev_prev = NULL;
   gboolean valid;
-  GtkTreePath *tree_path;
-  gunichar uc_start;
+  GtkTreeIter iter;
 
-  valid = gtk_tree_model_get_iter_first (
-          GTK_TREE_MODEL (charmap->block_selector_model), &iter2);
+  /* try to start with the current selection */
+  valid = gtk_tree_selection_get_selected (charmap->block_selection,
+                                           NULL, &iter);
+  if (!valid)
+    {
+      valid = gtk_tree_model_get_iter_first (
+              GTK_TREE_MODEL (charmap->block_selector_model), &iter);
+    }
+
+  tree_path = gtk_tree_model_get_path (
+                  GTK_TREE_MODEL (charmap->block_selector_model), &iter);
   while (valid)
     {
-      gtk_tree_model_get (GTK_TREE_MODEL (charmap->block_selector_model), 
-                          &iter2, 1, &uc_start, -1);
+      valid = gtk_tree_model_get_iter (
+              GTK_TREE_MODEL (charmap->block_selector_model), &iter,
+              tree_path);
 
-      if (uc_start > charmap->active_char)
+      unicode_block_prev_prev = unicode_block_prev;
+      unicode_block_prev = unicode_block;
+      gtk_tree_model_get (GTK_TREE_MODEL (charmap->block_selector_model), 
+                          &iter, BLOCK_SELECTOR_UNICODE_BLOCK, &unicode_block, 
+                          -1);
+      /*
+      g_printerr ("%4.4X..%4.4X; active = %4.4X    %s\n", 
+                  unicode_block->start, unicode_block->end, 
+                  charmap->active_char, unicode_block->name); */
+
+      if (unicode_block == unicode_block_prev_prev)
+        goto set_active_block_finished;
+
+      if (charmap->active_char >= unicode_block->start
+          && charmap->active_char <= unicode_block->end)
         {
           /* don't send the "changed" signal on this selection change */
           g_signal_handler_block (G_OBJECT (charmap->block_selection), 
                                   charmap->block_selection_changed_handler_id);
-          gtk_tree_selection_select_iter (charmap->block_selection, &iter1);
+          gtk_tree_selection_select_path (charmap->block_selection, tree_path);
           g_signal_handler_unblock (
                   G_OBJECT (charmap->block_selection),
                   charmap->block_selection_changed_handler_id);
-
-          tree_path = gtk_tree_model_get_path (
-                  GTK_TREE_MODEL (charmap->block_selector_model), &iter2);
 
           gtk_tree_view_scroll_to_cell (
                   GTK_TREE_VIEW (charmap->block_selector_view),
                   tree_path, NULL, FALSE, 0, 0);
 
-          gtk_tree_path_free (tree_path);
-
-          return;
+          goto set_active_block_finished;
         }
-
-      iter1 = iter2;
-
-      valid = gtk_tree_model_iter_next (
-              GTK_TREE_MODEL (charmap->block_selector_model), &iter2);
+      else if (charmap->active_char < unicode_block->start)
+        {
+          valid = gtk_tree_path_prev (tree_path);
+        }
+      else if (charmap->active_char > unicode_block->end)
+        {
+          /* XXX: this junk is cuz gtk_tree_path_next returns void */
+          valid = gtk_tree_model_get_iter (
+                  GTK_TREE_MODEL (charmap->block_selector_model), &iter,
+                  tree_path);
+          valid = gtk_tree_model_iter_next (
+                  GTK_TREE_MODEL (charmap->block_selector_model), &iter);
+          if (valid)
+            gtk_tree_path_next (tree_path);
+        }
     }
+
+set_active_block_finished:
+  if (tree_path != NULL)
+    gtk_tree_path_free (tree_path);
+  return;
 }
 
 
@@ -752,16 +790,18 @@ make_unicode_block_selector (Charmap *charmap)
   gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolled_window), 
                                        GTK_SHADOW_ETCHED_IN);
 
-  charmap->block_selector_model = gtk_tree_store_new (2, G_TYPE_STRING, 
-                                                      G_TYPE_UINT);
+  charmap->block_selector_model = gtk_tree_store_new (
+          BLOCK_SELECTOR_NUM_COLUMNS, G_TYPE_STRING, 
+          G_TYPE_UINT, G_TYPE_POINTER);
 
   for (i = 0, uc = 0;  unicode_blocks[i].start != (gunichar)(-1)
                && uc <= UNICHAR_MAX;  i++)
     {
       gtk_tree_store_append (charmap->block_selector_model, &iter, NULL);
       gtk_tree_store_set (charmap->block_selector_model, &iter, 
-                          0, unicode_blocks[i].name, 
-                          1, unicode_blocks[i].start,
+                          BLOCK_SELECTOR_LABEL, unicode_blocks[i].name, 
+                          BLOCK_SELECTOR_UC_START, unicode_blocks[i].start,
+                          BLOCK_SELECTOR_UNICODE_BLOCK, &(unicode_blocks[i]),
                           -1);
 
       for ( ;  uc <= unicode_blocks[i].end && uc <= UNICHAR_MAX;  
@@ -770,8 +810,10 @@ make_unicode_block_selector (Charmap *charmap)
           g_snprintf (buf, 12, "U+%4.4X", uc);
 	  gtk_tree_store_append (charmap->block_selector_model, 
                                  &child_iter, &iter);
-	  gtk_tree_store_set (charmap->block_selector_model, 
-                              &child_iter, 0, buf, 1, uc, -1);
+	  gtk_tree_store_set (charmap->block_selector_model, &child_iter, 
+                              BLOCK_SELECTOR_LABEL, buf, 
+                              BLOCK_SELECTOR_UC_START, uc, 
+                              BLOCK_SELECTOR_UNICODE_BLOCK, NULL, -1);
         }
     }
 

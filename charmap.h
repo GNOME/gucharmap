@@ -48,6 +48,15 @@ typedef struct _CharmapClass CharmapClass;
 typedef struct _Caption Caption;
 
 
+/* the columns in the tree view (only the first is visible */
+enum {
+  BLOCK_SELECTOR_LABEL = 0,
+  BLOCK_SELECTOR_UC_START,
+  BLOCK_SELECTOR_UNICODE_BLOCK,
+  BLOCK_SELECTOR_NUM_COLUMNS
+};
+
+
 struct _Charmap
 {
   GtkVBox parent;
@@ -68,6 +77,7 @@ struct _Charmap
 
   GtkTreeSelection *block_selection;
   GtkTreeStore *block_selector_model;
+  GtkWidget *block_selector_view;
   gulong block_selection_changed_handler_id; 
 };
 
