@@ -319,14 +319,140 @@ get_canonical_decomposition (GucharmapCharmap *charmap,
                           gucharmap_get_unicode_name (decomposition[0]));
 
   for (i = 1;  i < result_len;  i++)
-    {
-      g_string_append_printf (gs, " + U+%4.4X %s", decomposition[i], 
-                              gucharmap_get_unicode_name (decomposition[i]));
-    }
+    g_string_append_printf (gs, " + U+%4.4X %s", decomposition[i], 
+                            gucharmap_get_unicode_name (decomposition[i]));
 
   g_string_append_c (gs, '\n');
 
   g_free (decomposition);
+
+  return gs;
+}
+
+
+/* returns NULL if there are no exes; otherwise returns a GString which
+ * should be g_string_freed by the caller */
+static GString *
+get_see_also (GucharmapCharmap *charmap,
+              gunichar uc)
+{
+  GString *gs;
+  gunichar *exes = gucharmap_get_nameslist_exes (uc);
+  gint i;
+
+  if (exes == NULL)
+    return NULL;
+
+  gs = g_string_new (NULL);
+  
+  g_string_append_printf (gs, _("See also: \t\t\t\t\tU+%4.4X %s\n"), 
+                          exes[0], gucharmap_get_unicode_name (exes[0]));
+  for (i = 1;  exes[i] != (gunichar)(-1);  i++)
+    g_string_append_printf (gs, _("\t\t\t\t\t\tU+%4.4X %s\n"), 
+                            exes[i], gucharmap_get_unicode_name (exes[i]));
+
+  g_free (exes);
+
+  return gs;
+}
+
+/* returns NULL if there are no equals; otherwise returns a GString which
+ * should be g_string_freed by the caller */
+static GString *
+get_alias_names (GucharmapCharmap *charmap,
+                 gunichar uc)
+{
+  const gchar **equals = gucharmap_get_nameslist_equals (uc);
+  GString *gs;
+  gint i;
+
+  if (equals == NULL)
+    return NULL;
+
+  gs = g_string_new (NULL);
+
+  g_string_append_printf (gs, _("Alias names: \t\t\t\t%s\n"), equals[0]);
+  for (i = 1;  equals[i] != NULL;  i++)
+    g_string_append_printf (gs, _("\t\t\t\t\t\t%s\n"), equals[i]);
+
+  g_free (equals);
+
+  return gs;
+}
+
+
+/* returns NULL if there are no stars; otherwise returns a GString which
+ * should be g_string_freed by the caller */
+static GString *
+get_notes (GucharmapCharmap *charmap,
+           gunichar uc)
+{
+  const gchar **stars = gucharmap_get_nameslist_stars (uc);
+  GString *gs;
+  gint i;
+
+  if (stars == NULL)
+    return NULL;
+
+  gs = g_string_new (NULL);
+
+  g_string_append_printf (gs, _("Notes: \t\t\t\t\t%s\n"), stars[0]);
+  for (i = 1;  stars[i] != NULL;  i++)
+    g_string_append_printf (gs, _("\t\t\t\t\t\t%s\n"), stars[i]);
+
+  g_free (stars);
+
+  return gs;
+}
+
+
+/* returns NULL if there are no pounds; otherwise returns a GString which
+ * should be g_string_freed by the caller */
+static GString *
+get_approximate_equivalents (GucharmapCharmap *charmap,
+                             gunichar uc)
+{
+  const gchar **pounds = gucharmap_get_nameslist_pounds (uc);
+  GString *gs;
+  gint i;
+
+  if (pounds == NULL)
+    return NULL;
+
+  gs = g_string_new (NULL);
+
+  g_string_append_printf (gs, _("Approximate equivalents: \t%s\n"), 
+                          pounds[0]);
+  for (i = 1;  pounds[i] != NULL;  i++)
+    g_string_append_printf (gs, _("\t\t\t\t\t\t%s\n"), pounds[i]);
+
+  g_free (pounds);
+
+  return gs;
+}
+
+
+/* returns NULL if there are no colons; otherwise returns a GString which
+ * should be g_string_freed by the caller */
+static GString *
+get_equivalents (GucharmapCharmap *charmap,
+                 gunichar uc)
+{
+  const gchar **colons = gucharmap_get_nameslist_colons (uc);
+  GString *gs;
+  gint i;
+
+  if (colons == NULL)
+    return NULL;
+
+  gs = g_string_new (NULL);
+
+  g_string_append_printf (gs, _("Equivalents: \t\t\t%s\n"), 
+                          colons[0]);
+  for (i = 1;  colons[i] != NULL;  i++)
+    g_string_append_printf (gs, _("\t\t\t\t\t\t\t%s\n"), colons[i]);
+
+  g_free (colons);
 
   return gs;
 }
@@ -416,6 +542,53 @@ set_details (GucharmapCharmap *charmap,
                           uc);
   gtk_text_buffer_insert (buffer, &iter, temp, -1);
   g_free (temp);
+
+  gtk_text_buffer_insert (buffer, &iter, "\n\n", -1);
+  gtk_text_buffer_insert_with_tags_by_name (
+          buffer, &iter, _("Annotations and Cross References\n\n"), -1, 
+          "bold", NULL);
+
+  /* nameslist equals (alias names) */
+  gstemp = get_alias_names (charmap, uc);
+  if (gstemp != NULL)
+    {
+      gtk_text_buffer_insert (buffer, &iter, gstemp->str, gstemp->len);
+      g_string_free (gstemp, TRUE);
+    }
+
+  /* nameslist stars (notes) */
+  gstemp = get_notes (charmap, uc);
+  if (gstemp != NULL)
+    {
+      gtk_text_buffer_insert (buffer, &iter, gstemp->str, gstemp->len);
+      g_string_free (gstemp, TRUE);
+    }
+
+  /* nameslist exes (see also) */
+  gstemp = get_see_also (charmap, uc);
+  if (gstemp != NULL)
+    {
+      gtk_text_buffer_insert (buffer, &iter, gstemp->str, gstemp->len);
+      g_string_free (gstemp, TRUE);
+    }
+
+  /* nameslist pounds (approximate equivalents) */
+  gstemp = get_approximate_equivalents (charmap, uc);
+  if (gstemp != NULL)
+    {
+      gtk_text_buffer_insert (buffer, &iter, gstemp->str, gstemp->len);
+      g_string_free (gstemp, TRUE);
+    }
+
+  /* nameslist colons (equivalents) */
+  gstemp = get_equivalents (charmap, uc);
+  if (gstemp != NULL)
+    {
+      gtk_text_buffer_insert (buffer, &iter, gstemp->str, gstemp->len);
+      g_string_free (gstemp, TRUE);
+    }
+
+
 }
 
 
