@@ -18,9 +18,9 @@ dnl 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
 dnl
 
 AC_PREREQ([2.50])
-AC_INIT([gucharmap], [1.3.0])
+AC_INIT([gucharmap], [1.3.1])
 AM_CONFIG_HEADER([config.h])
-AM_INIT_AUTOMAKE([gucharmap], [1.3.0])
+AM_INIT_AUTOMAKE([gucharmap], [1.3.1])
 
 AM_MAINTAINER_MODE
 
@@ -64,7 +64,6 @@ fi
 
 # gtk is required
 PKG_CHECK_MODULES(GTK, gtk+-2.0 >= 2.2.0)
-GTK_BINARY_VERSION=`pkg-config --variable gtk_binary_version gtk+-2.0`
 
 AC_ARG_ENABLE(gnome,
               AC_HELP_STRING([--disable-gnome],
@@ -90,7 +89,7 @@ then
     
     AC_SUBST(POPT_LIBS)
 else
-	GNOMEPKGS="libgnomeui-2.0 libgnome-2.0"
+    GNOMEPKGS="libgnomeui-2.0 libgnome-2.0"
 fi
 AC_SUBST(GNOMEPKGS)
 
@@ -100,7 +99,6 @@ AC_CHECK_FUNCS([bind_textdomain_codeset])
 
 AC_SUBST(GTK_CFLAGS)
 AC_SUBST(GTK_LIBS)
-AC_SUBST(GTK_BINARY_VERSION)
 
 AC_SUBST(GNOME_CFLAGS)
 AC_SUBST(GNOME_LIBS)

@@ -240,6 +240,7 @@ quick_checks_after (GucharmapSearchState *search_state)
 {
   gchar *search_string_nfc;
   gchar *endptr;
+  gunichar wc;
   
   /* if NFC of the search string is a single character, jump to that */
   search_string_nfc = g_utf8_normalize (search_state->no_leading_space, -1, G_NORMALIZE_NFC);
@@ -271,7 +272,7 @@ quick_checks_after (GucharmapSearchState *search_state)
     }
 
   /* check for hex codepoint without any prefix */
-  gunichar wc = strtoul (search_state->no_leading_space, &endptr, 16);
+  wc = strtoul (search_state->no_leading_space, &endptr, 16);
   if (endptr != search_state->no_leading_space)
     {
       gint index = gucharmap_codepoint_list_get_index (search_state->list, wc);
