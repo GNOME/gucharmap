@@ -223,12 +223,8 @@ compute_zoom_font_size (GucharmapTable *chartable)
   gdouble scale;
   gint font_size;
 
-#if GTK_CHECK_VERSION (2,1,1)
   screen_height = gdk_screen_get_height (
           gtk_widget_get_screen (chartable->drawing_area));
-#else
-  screen_height = gdk_screen_height ();
-#endif
 
   limit = (0.3 * screen_height) / bare_minimal_row_height (chartable);
   scale = CLAMP (limit, 1.0, 12.0);
@@ -1270,7 +1266,8 @@ selection_text_received (GtkClipboard *clipboard,
 
 
 void
-gucharmap_table_identify_clipboard (GucharmapTable *chartable, GtkClipboard *clipboard)
+gucharmap_table_identify_clipboard (GucharmapTable *chartable, 
+	                            GtkClipboard *clipboard)
 {
   gtk_clipboard_request_text (
           clipboard, (GtkClipboardTextReceivedFunc) selection_text_received, 

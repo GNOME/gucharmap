@@ -462,7 +462,7 @@ gucharmap_get_unicode_kDefinition (gunichar uc)
 {
   const Unihan *uh = _get_unihan (uc);
   if (uh == NULL)
-    return "";
+    return NULL;
   else
     return uh->kDefinition;
 }
@@ -472,7 +472,7 @@ gucharmap_get_unicode_kCantonese (gunichar uc)
 {
   const Unihan *uh = _get_unihan (uc);
   if (uh == NULL)
-    return "";
+    return NULL;
   else
     return uh->kCantonese;
 }
@@ -482,7 +482,7 @@ gucharmap_get_unicode_kMandarin (gunichar uc)
 {
   const Unihan *uh = _get_unihan (uc);
   if (uh == NULL)
-    return "";
+    return NULL;
   else
     return uh->kMandarin;
 }
@@ -492,7 +492,7 @@ gucharmap_get_unicode_kTang (gunichar uc)
 {
   const Unihan *uh = _get_unihan (uc);
   if (uh == NULL)
-    return "";
+    return NULL;
   else
     return uh->kTang;
 }
@@ -502,7 +502,7 @@ gucharmap_get_unicode_kKorean (gunichar uc)
 {
   const Unihan *uh = _get_unihan (uc);
   if (uh == NULL)
-    return "";
+    return NULL;
   else
     return uh->kKorean;
 }
@@ -512,7 +512,7 @@ gucharmap_get_unicode_kJapaneseKun (gunichar uc)
 {
   const Unihan *uh = _get_unihan (uc);
   if (uh == NULL)
-    return "";
+    return NULL;
   else
     return uh->kJapeneseKun;
 }
@@ -522,7 +522,7 @@ gucharmap_get_unicode_kJapaneseOn (gunichar uc)
 {
   const Unihan *uh = _get_unihan (uc);
   if (uh == NULL)
-    return "";
+    return NULL;
   else
     return uh->kJapaneseOn;
 }
