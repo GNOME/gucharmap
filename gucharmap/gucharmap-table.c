@@ -1159,7 +1159,7 @@ size_allocate (GtkWidget *widget,
 
   /* adjust the adjustment, since it's based on the size of a row */
   adjustment = GTK_ADJUSTMENT (chartable->adjustment);
-  adjustment->upper = 1.0 * UNICHAR_MAX / chartable->cols;
+  adjustment->upper = 1.0 * gucharmap_codepoint_list_get_last_index (chartable->codepoint_list) / chartable->cols;
   adjustment->page_increment = 3.0 * chartable->rows;
   gtk_adjustment_changed (adjustment);
   set_scrollbar_adjustment (chartable);
@@ -1187,7 +1187,7 @@ move_up (GucharmapTable *chartable)
 static void
 move_down (GucharmapTable *chartable)
 {
-  if (chartable->active_cell <= UNICHAR_MAX - chartable->cols)
+  if (chartable->active_cell <= gucharmap_codepoint_list_get_last_index (chartable->codepoint_list) - chartable->cols)
     set_active_cell (chartable, chartable->active_cell + chartable->cols);
 }
 
@@ -1327,7 +1327,7 @@ set_top_row (GucharmapTable *chartable, gint row)
 {
   gint r, c;
 
-  g_return_if_fail (row >= 0 && row <= UNICHAR_MAX / chartable->cols);
+  g_return_if_fail (row >= 0 && row <= gucharmap_codepoint_list_get_last_index (chartable->codepoint_list) / chartable->cols);
 
   chartable->old_page_first_cell = chartable->page_first_cell;
   chartable->old_active_cell = chartable->active_cell;
@@ -1477,7 +1477,7 @@ static GtkWidget *
 make_scrollbar (GucharmapTable *chartable)
 {
   chartable->adjustment = gtk_adjustment_new (
-          0.0, 0.0, 1.0 * UNICHAR_MAX / chartable->cols, 
+          0.0, 0.0, 1.0 * gucharmap_codepoint_list_get_last_index (chartable->codepoint_list) / chartable->cols, 
           2.0, 3.0 * chartable->rows, 0.0);
 
   chartable->adjustment_changed_handler_id = g_signal_connect (
@@ -1561,8 +1561,7 @@ mouse_wheel_up (GucharmapTable *chartable)
 static void
 mouse_wheel_down (GucharmapTable *chartable)
 {
-  if (chartable->page_first_cell 
-          < UNICHAR_MAX - chartable->rows * chartable->cols / 2)
+  if (chartable->page_first_cell < gucharmap_codepoint_list_get_last_index (chartable->codepoint_list) - chartable->rows * chartable->cols / 2)
     {
       set_top_row (chartable, (chartable->page_first_cell
                                + chartable->rows * chartable->cols / 2) 
@@ -1570,7 +1569,7 @@ mouse_wheel_down (GucharmapTable *chartable)
     }
   else 
     {
-      set_top_row (chartable, UNICHAR_MAX / chartable->cols);
+      set_top_row (chartable, gucharmap_codepoint_list_get_last_index (chartable->codepoint_list) / chartable->cols);
     }
 
   gucharmap_table_redraw (chartable, TRUE);
@@ -1621,23 +1620,23 @@ drag_data_received (GtkWidget *widget,
                     GucharmapTable *chartable)
 {
   gchar *text;
-  gunichar uc;
+  gunichar wc;
 
   text = gtk_selection_data_get_text (selection_data);
 
   if (text == NULL) /* XXX: say something in the statusbar? */
     return;
 
-  uc = g_utf8_get_char_validated (text, -1);
+  wc = g_utf8_get_char_validated (text, -1);
 
-  if (uc == (gunichar)(-2) || uc == (gunichar)(-1) || uc > UNICHAR_MAX)
-    {
-      status_message (chartable, _("Unknown character, unable to identify."));
-    }
+  if (wc == (gunichar)(-2) || wc == (gunichar)(-1) || wc > UNICHAR_MAX)
+    status_message (chartable, _("Unknown character, unable to identify."));
+  else if (gucharmap_codepoint_list_get_index (chartable->codepoint_list, wc) == (guint)(-1))
+    status_message (chartable, _("Not found."));
   else
     {
       status_message (chartable, _("Character found."));
-      set_active_char (chartable, uc);
+      set_active_char (chartable, wc);
       gucharmap_table_redraw (chartable, TRUE);
     }
 
@@ -1682,7 +1681,7 @@ drag_data_get (GtkWidget *widget,
   gchar buf[7];
   gint n;
 
-  n = g_unichar_to_utf8 (chartable->active_cell, buf);
+  n = g_unichar_to_utf8 (gucharmap_codepoint_list_get_char (chartable->codepoint_list, chartable->active_cell), buf);
   gtk_selection_data_set_text (selection_data, buf, n);
 }
 

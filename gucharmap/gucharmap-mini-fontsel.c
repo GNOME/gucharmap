@@ -149,7 +149,7 @@ mini_font_selection_finalize (GObject *object)
 }
 
 
-void
+static void
 gucharmap_mini_font_selection_class_init (GucharmapMiniFontSelectionClass *clazz)
 {
   clazz->changed = NULL;
@@ -191,7 +191,7 @@ italic_toggled (GtkToggleButton *toggle,
 }
 
 
-void
+static void
 gucharmap_mini_font_selection_init (GucharmapMiniFontSelection *fontsel)
 {
   AtkObject *accessib;

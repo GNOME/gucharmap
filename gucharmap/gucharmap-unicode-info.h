@@ -67,16 +67,20 @@ gunichar gucharmap_find_substring_match (gunichar start,
                                          gint direction);
 
 /* nameslist stuff */
-G_CONST_RETURN gchar ** gucharmap_get_nameslist_stars (gunichar uc);
-G_CONST_RETURN gchar ** gucharmap_get_nameslist_equals (gunichar uc);
-gunichar * gucharmap_get_nameslist_exes (gunichar uc);
-G_CONST_RETURN gchar ** gucharmap_get_nameslist_pounds (gunichar uc);
-G_CONST_RETURN gchar ** gucharmap_get_nameslist_colons (gunichar uc);
-gboolean gucharmap_unichar_validate (gunichar ch);
-gint gucharmap_unichar_to_printable_utf8 (gunichar uc, gchar *outbuf);
-GUnicodeType gucharmap_unichar_type (gunichar uc);
-gboolean gucharmap_unichar_isdefined (gunichar uc);
-gboolean gucharmap_unichar_isgraph (gunichar c);
+G_CONST_RETURN gchar ** gucharmap_get_nameslist_stars       (gunichar  wc);
+G_CONST_RETURN gchar ** gucharmap_get_nameslist_equals      (gunichar  wc);
+gunichar *              gucharmap_get_nameslist_exes        (gunichar  wc);
+G_CONST_RETURN gchar ** gucharmap_get_nameslist_pounds      (gunichar  wc);
+G_CONST_RETURN gchar ** gucharmap_get_nameslist_colons      (gunichar  wc);
+gboolean                gucharmap_unichar_validate          (gunichar  wc);
+gint                    gucharmap_unichar_to_printable_utf8 (gunichar  wc, 
+                                                             gchar    *outbuf);
+GUnicodeType            gucharmap_unichar_type              (gunichar  wc);
+gboolean                gucharmap_unichar_isdefined         (gunichar  wc);
+gboolean                gucharmap_unichar_isgraph           (gunichar  wc);
+
+/* XXX: defined in gucharmap-script-codepoint-list.c */
+G_CONST_RETURN gchar **  gucharmap_unicode_list_scripts     ();
 
 G_END_DECLS
 

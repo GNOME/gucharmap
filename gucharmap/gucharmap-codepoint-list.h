@@ -24,8 +24,8 @@
 
 G_BEGIN_DECLS
 
-#define GUCHARMAP_CODEPOINT_LIST (obj) \
-            (G_TYPE_CHECK_INSTANCE_CASE ((obj), gucharmap_codepoint_list_get_type (), GucharmapCodepointList))
+#define GUCHARMAP_CODEPOINT_LIST(obj) \
+            (G_TYPE_CHECK_INSTANCE_CAST ((obj), gucharmap_codepoint_list_get_type (), GucharmapCodepointList))
 
 #define GUCHARMAP_CODEPOINT_LIST_CLASS(clazz) \
             (G_TYPE_CHECK_CLASS_CAST ((clazz), gucharmap_codepoint_list_get_type (), GucharmapCodepointListClass))
@@ -55,7 +55,7 @@ struct _GucharmapCodepointListClass
 };
 
 GType                    gucharmap_codepoint_list_get_type       ();
-GucharmapCodepointList * gucharmap_codepoint_list_new ();
+GucharmapCodepointList * gucharmap_codepoint_list_new            ();
 gunichar                 gucharmap_codepoint_list_get_char       (GucharmapCodepointList *list, 
                                                                   guint                   index);
 guint                    gucharmap_codepoint_list_get_index      (GucharmapCodepointList *list, 

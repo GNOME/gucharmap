@@ -40,8 +40,10 @@ libgucharmap_la_SOURCES = gucharmap_marshal.c gucharmap_marshal.h \
                           gucharmap-table.c gucharmap-table.h \
                           gucharmap-unicode-info.c gucharmap-unicode-info.h \
                           gucharmap-window.c gucharmap-window.h \
-			  gucharmap-codepoint-list.c gucharmap-codepoint-list.h
-
+			  gucharmap-codepoint-list.c gucharmap-codepoint-list.h \
+			  gucharmap-script-codepoint-list.c gucharmap-script-codepoint-list.h \
+			  unicode-blocks.h unicode-categories.h unicode-names.h \
+			  unicode-nameslist.h unicode-scripts.h unicode-unihan.h
 
 # this is different from the project version
 libgucharmap_la_LDFLAGS = -version-info 3:3:0
@@ -54,8 +56,8 @@ libgucharmapinclude_HEADERS = gucharmap.h \
                               gucharmap-window.h \
                               gucharmap-mini-fontsel.h \
                               gucharmap-unicode-info.h \
-			      gucharmap-codepoint-list.h
-
+			      gucharmap-codepoint-list.h \
+			      gucharmap-script-codepoint-list.h
 
 bin_PROGRAMS = gucharmap
 gucharmap_SOURCES = main.c

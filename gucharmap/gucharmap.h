@@ -26,5 +26,6 @@
 #include <gucharmap/gucharmap-unicode-info.h>
 #include <gucharmap/gucharmap-mini-fontsel.h>
 #include <gucharmap/gucharmap-codepoint-list.h>
+#include <gucharmap/gucharmap-script-codepoint-list.h>
 
 #endif /* #ifndef GUCHARMAP_H */
