@@ -128,9 +128,14 @@ do_search (GucharmapWindow *guw,
        no_leading_space = g_utf8_next_char (no_leading_space));
 
   /* check for explicit decimal codepoint */
+  nptr = no_leading_space;
   if (strncasecmp (no_leading_space, "&#", 2) == 0)
+    nptr = no_leading_space + 2;
+  else if (*no_leading_space == '#')
+    nptr = no_leading_space + 1;
+
+  if (nptr != no_leading_space)
     {
-      nptr = no_leading_space + 2;
       wc = strtoul (nptr, &endptr, 10);
       if (endptr != nptr && wc <= UNICHAR_MAX)
         {
