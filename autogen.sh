@@ -5,8 +5,6 @@
 # runs autotools to create ./configure and friends
 #
 
-PROJECT=gucharmap
-
 srcdir=`dirname "$0"`
 test -z $srcdir && srcdir=.
 
@@ -35,14 +33,14 @@ test -n "${BASH_VERSION+set}" && set_option='set'
 
 $set_option -x
 
-$aclocal $ACLOCAL_FLAGS                  || exit 1
-glib-gettextize --force --copy           || exit 1
-libtoolize --force --copy                || exit 1
-autoheader                               || exit 1
-$automake --foreign --add-missing --copy || exit 1
-autoconf                                 || exit 1
-intltoolize --copy --force --automake    || exit 1
-cd "$origdir"                            || exit 1
+$aclocal $ACLOCAL_FLAGS                                || exit 1
+glib-gettextize --force --copy > /dev/null             || exit 1
+libtoolize --force --copy                              || exit 1
+autoheader                                             || exit 1
+$automake --foreign --add-missing --copy &> /dev/null  || exit 1
+autoconf                                               || exit 1
+intltoolize --copy --force --automake                  || exit 1
+cd "$origdir"                                          || exit 1
 
 if test -z "$AUTOGEN_SUBDIR_MODE"
 then

@@ -139,12 +139,14 @@ if test "x$enable_unihan" != "xno" ; then
 fi
 
 
-AC_OUTPUT([
+AC_CONFIG_FILES([
 gucharmap.pc
 Makefile
 gucharmap/Makefile 
 gucharmap/unicode/Makefile 
-po/Makefile.in 
+po/Makefile.in
 pixmaps/Makefile 
 gucharmap.spec
 gucharmap.nsi])
+
+AC_OUTPUT
