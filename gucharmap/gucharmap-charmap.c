@@ -244,6 +244,42 @@ make_canonical_decomposition_string (GucharmapCharmap *charmap,
 }
 
 
+/* returns NULL or an array of strings; the strings and the array should be
+ * freed */
+static gchar **
+get_nameslist_exes_strings (gunichar uc)
+{
+  gunichar *exes = gucharmap_get_nameslist_exes (uc);
+  gchar **estrings;
+  gint i;
+
+  if (exes == NULL)
+    return NULL;
+
+  for (i = 0;  exes[i] != (gunichar)(-1);  i++);
+  estrings = g_new (gchar *, i + 1);
+
+  for (i = 0;  exes[i] != (gunichar)(-1);  i++)
+    estrings[i] = g_strdup_printf ("U+%4.4X %s", exes[i], 
+                                   gucharmap_get_unicode_name (exes[i]));
+  estrings[i] = NULL;
+
+  return estrings;
+}
+
+
+static void
+free_string_array (gchar **strings)
+{
+  gint i;
+
+  for (i = 0;  strings[i];  i++)
+    g_free (strings[i]);
+
+  g_free (strings);
+}
+
+
 static void
 insert_vanilla_detail (GucharmapCharmap *charmap, 
                        GtkTextBuffer *buffer,
@@ -309,7 +345,8 @@ set_details (GucharmapCharmap *charmap,
   gchar buf[12];
   guchar ubuf[7];
   gint n, i;
-  const gchar **temps;
+  const gchar **csarr;
+  gchar **sarr;
 
   buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (charmap->details));
   gtk_text_buffer_set_text (buffer, "", -1);
@@ -378,50 +415,49 @@ set_details (GucharmapCharmap *charmap,
                   _("Annotations and Cross References"));
 
   /* nameslist equals (alias names) */
-  temps = gucharmap_get_nameslist_equals (uc);
-  if (temps != NULL)
+  csarr = gucharmap_get_nameslist_equals (uc);
+  if (csarr != NULL)
     {
       insert_chocolate_detail (charmap, buffer, &iter,
-                               _("Alias names:"), temps);
-      g_free (temps);
+                               _("Alias names:"), csarr);
+      g_free (csarr);
     }
 
   /* nameslist stars (notes) */
-  temps = gucharmap_get_nameslist_stars (uc);
-  if (temps != NULL)
+  csarr = gucharmap_get_nameslist_stars (uc);
+  if (csarr != NULL)
     {
       insert_chocolate_detail (charmap, buffer, &iter,
-                               _("Notes:"), temps);
-      g_free (temps);
+                               _("Notes:"), csarr);
+      g_free (csarr);
     }
 
-#if 0
+
   /* nameslist exes (see also) */
-  temps = gucharmap_get_nameslist_exes (uc);
-  if (temps != NULL)
+  sarr = get_nameslist_exes_strings (uc);
+  if (sarr != NULL)
     {
       insert_chocolate_detail (charmap, buffer, &iter,
-                               _("See also:"), temps);
-      g_free (temps);
+                               _("See also:"), sarr);
+      free_string_array (sarr);
     }
-#endif
 
   /* nameslist pounds (approximate equivalents) */
-  temps = gucharmap_get_nameslist_pounds (uc);
-  if (temps != NULL)
+  csarr = gucharmap_get_nameslist_pounds (uc);
+  if (csarr != NULL)
     {
       insert_chocolate_detail (charmap, buffer, &iter,
-                               _("Approximate equivalents:"), temps);
-      g_free (temps);
+                               _("Approximate equivalents:"), csarr);
+      g_free (csarr);
     }
 
   /* nameslist colons (equivalents) */
-  temps = gucharmap_get_nameslist_colons (uc);
-  if (temps != NULL)
+  csarr = gucharmap_get_nameslist_colons (uc);
+  if (csarr != NULL)
     {
       insert_chocolate_detail (charmap, buffer, &iter,
-                               _("Equivalents:"), temps);
-      g_free (temps);
+                               _("Equivalents:"), csarr);
+      g_free (csarr);
     }
 
 #if ENABLE_UNIHAN
