@@ -19,20 +19,35 @@
 
 AUTOMAKE_OPTIONS = foreign
 
-bin_PROGRAMS = gucharmap
-
-gucharmap_LDADD = @GUCHARMAP_LIBS@
 AM_CFLAGS = $(GUCHARMAP_CFLAGS) -Wall -ansi -O2
 
 localedir = $(datadir)/locale
 AM_CPPFLAGS = -DLOCALEDIR=\"$(localedir)\"
 
-gucharmap_SOURCES = charmap.c charmap.h main.c \
-                    unicode_data.c unicode_info.c \
-                    unicode_info.h unihan.c \
-                    gucharmap_intl.c gucharmap_intl.h
+libgucharmap_la_LIBADD = @GUCHARMAP_LIBS@
 
-gucharmap_DEPENDENCIES = Makefile
+lib_LTLIBRARIES = libgucharmap.la
+
+libgucharmap_la_SOURCES = charmap.c charmap.h \
+                          unicode_data.c unicode_info.c \
+                          unicode_info.h unihan.c \
+                          gucharmap_intl.c gucharmap_intl.h
+
+# this is different from the project version
+# http://sources.redhat.com/autobook/autobook/autobook_91.html
+libgucharmap_la_LDFLAGS = -version-info 1:0:0
+
+
+libgucharmapincludedir = $(includedir)/gucharmap
+libgucharmapinclude_HEADERS = charmap.h unicode_info.h
+
+
+bin_PROGRAMS = gucharmap
+
+gucharmap_LDADD = libgucharmap.la  @GUCHARMAP_LIBS@
+
+gucharmap_SOURCES = main.c
+
 
 SUBDIRS = po
 
