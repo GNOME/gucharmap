@@ -966,20 +966,6 @@ gucharmap_table_redraw (GucharmapTable *chartable,
   chartable->old_active_cell = chartable->active_cell;
 }
 
-#if 0
-void
-logg (const gchar *location,
-      const gchar *message)
-{
-  static GTimer *timer = NULL;
-
-  if (timer == NULL)
-    timer = g_timer_new ();
-
-  g_print ("%7.3f: %36s:    %s\n", g_timer_elapsed (timer, NULL), location, message);
-}
-#endif
-
 /* redraws the screen from the backing pixmap */
 static gint
 expose_event (GtkWidget *widget, 
@@ -1399,11 +1385,13 @@ motion_notify_event (GtkWidget *widget,
 
       if (cell != chartable->active_cell)
         {
+          gtk_widget_hide (chartable->zoom_window);
           set_active_cell (chartable, cell);
           gucharmap_table_redraw (chartable, FALSE);
         }
 
       place_zoom_window (chartable, event->x_root, event->y_root);
+      gtk_widget_show (chartable->zoom_window);
     }
 
   return FALSE;
