@@ -110,6 +110,12 @@ struct _Charmap
   /* search */
   GtkWidget *search_entry;
   GtkWidget *jump_entry;
+
+  /* status bar */
+  /* the status bar is not placed anywhere, but the program that uses the
+   * charmap can get it using charmap_get_statusbar and place it wherever
+   * it likes */
+  GtkWidget *statusbar;
 };
 
 
@@ -142,6 +148,7 @@ GtkType charmap_get_type (void);
 GtkWidget * charmap_new ();
 void charmap_set_font (Charmap *charmap, gchar *font_name);
 void charmap_set_geometry_hints (Charmap *charmap, GtkWindow *window);
+GtkWidget *charmap_get_statusbar (Charmap *charmap);
 
 #ifdef __cplusplus
 }

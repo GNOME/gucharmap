@@ -38,10 +38,6 @@ fontsel_changed (GtkTreeSelection *selection, gpointer data)
   charmap_set_font (CHARMAP (charmap), new_font);
   g_free (new_font);
 
-  /*
-  charmap_set_geometry_hints (CHARMAP (charmap), 
-                              GTK_WINDOW (gtk_widget_get_toplevel (charmap)));
-                              */
 }
 
 
@@ -79,6 +75,7 @@ main (gint argc, gchar **argv)
   GtkWidget *vbox;
   GtkWidget *fontsel;
   GtkWidget *fontsel_toggle;
+  GtkWidget *statusbar;
   gchar *orig_font, *new_font;
   PangoFontDescription *font_desc;
 
@@ -120,8 +117,6 @@ main (gint argc, gchar **argv)
                   GTK_FONT_SELECTION (fontsel)->size_list)), 
           "changed", G_CALLBACK (fontsel_changed), fontsel);
 
-  /* charmap_set_geometry_hints (CHARMAP (charmap), GTK_WINDOW (window)); */
-
   gtk_window_set_default_size (GTK_WINDOW (window), 
                                gdk_screen_width () * 1/2,
                                gdk_screen_height () * 1/2);
@@ -138,10 +133,18 @@ main (gint argc, gchar **argv)
   g_free (orig_font);
   g_free (new_font);
 
+  /* show everything so far */
   gtk_widget_show_all (window);
 
+  /* don't show the fontsel */
   gtk_box_pack_start (GTK_BOX (vbox), fontsel, FALSE, FALSE, 0);
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (fontsel_toggle), FALSE);
+
+  /* show the statusbar */
+  statusbar = charmap_get_statusbar (CHARMAP (charmap));
+  gtk_box_pack_start (GTK_BOX (vbox), statusbar, FALSE, FALSE, 0);
+  gtk_widget_show (statusbar);
+  gtk_statusbar_set_has_resize_grip (GTK_STATUSBAR (statusbar), TRUE);
 
   gtk_main ();
 

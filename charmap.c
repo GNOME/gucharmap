@@ -1580,6 +1580,9 @@ charmap_init (Charmap *charmap)
   gtk_box_pack_start (GTK_BOX (charmap), make_search (charmap), 
                       FALSE, FALSE, 3);
 
+  /* the statusbar— not placed anywhere */
+  charmap->statusbar = gtk_statusbar_new ();
+
   set_caption (charmap);
   set_active_block (charmap);
   set_scrollbar_adjustment (charmap);
@@ -1686,3 +1689,8 @@ charmap_set_geometry_hints (Charmap *charmap, GtkWindow *window)
 }
 
 
+GtkWidget *
+charmap_get_statusbar (Charmap *charmap)
+{
+  return charmap->statusbar;
+}
