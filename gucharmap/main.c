@@ -69,6 +69,130 @@ toggle_fontsel (GtkToggleButton *togglebutton, gpointer *fontsel)
 }
 
 
+static void
+expand_collapse (GtkWidget *widget, gpointer data)
+{
+  g_printerr ("expand_collapse\n");
+}
+
+
+static void
+jump_code_point (GtkWidget *widget, gpointer data)
+{
+  g_printerr ("jump_code_point\n");
+}
+
+
+static void
+jump_selection (GtkWidget *widget, gpointer data)
+{
+  g_printerr ("jump_selection\n");
+}
+
+
+static void
+jump_clipboard (GtkWidget *widget, gpointer data)
+{
+  g_printerr ("jump_clipboard\n");
+}
+
+
+static void
+help_about (GtkWidget *widget, gpointer data)
+{
+  g_printerr ("help_about\n");
+}
+
+
+static void
+show_hide_details (GtkWidget *widget, gpointer data)
+{
+  g_printerr ("show_hide_details\n");
+}
+
+
+static GtkWidget *
+make_menu ()
+{
+  GtkWidget *menubar;
+  GtkWidget *file_menu, *view_menu, *actions_menu, *help_menu;
+  GtkWidget *file_menu_item, *view_menu_item;
+  GtkWidget *actions_menu_item, *help_menu_item;
+  GtkWidget *menu_item;
+
+  /* make the menu bar */
+  menubar = gtk_menu_bar_new ();
+  file_menu_item = gtk_menu_item_new_with_mnemonic (_("_File"));
+  gtk_menu_shell_append (GTK_MENU_SHELL (menubar), file_menu_item);
+  view_menu_item = gtk_menu_item_new_with_mnemonic (_("_View"));
+  gtk_menu_shell_append (GTK_MENU_SHELL (menubar), view_menu_item);
+  actions_menu_item = gtk_menu_item_new_with_mnemonic (_("_Actions"));
+  gtk_menu_shell_append (GTK_MENU_SHELL (menubar), actions_menu_item);
+  help_menu_item = gtk_menu_item_new_with_mnemonic (_("_Help"));
+  gtk_menu_shell_append (GTK_MENU_SHELL (menubar), help_menu_item);
+  /* finished making the menu bar */
+
+  /* make the file menu */
+  file_menu = gtk_menu_new ();
+  gtk_menu_item_set_submenu (GTK_MENU_ITEM (file_menu_item),
+                             file_menu);
+  menu_item = gtk_image_menu_item_new_from_stock (GTK_STOCK_QUIT, NULL);
+  g_signal_connect (G_OBJECT (menu_item), "activate",
+                    G_CALLBACK (gtk_main_quit), NULL);
+  gtk_menu_shell_append (GTK_MENU_SHELL (file_menu), menu_item);
+  /* finished making the file menu */
+
+  /* make the view menu */
+  view_menu = gtk_menu_new ();
+  gtk_menu_item_set_submenu (GTK_MENU_ITEM (view_menu_item), view_menu);
+
+  menu_item = gtk_check_menu_item_new_with_mnemonic (_("Expand/Collapse All"));
+  g_signal_connect (G_OBJECT (menu_item), "activate",
+                    G_CALLBACK (expand_collapse), NULL);
+  gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), menu_item);
+
+  menu_item = gtk_check_menu_item_new_with_mnemonic (_("Show/Hide Details"));
+  g_signal_connect (G_OBJECT (menu_item), "activate",
+                    G_CALLBACK (show_hide_details), NULL);
+  gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), menu_item);
+  /* finished making the view menu */
+
+  /* make the actions menu */
+  actions_menu = gtk_menu_new ();
+  gtk_menu_item_set_submenu (GTK_MENU_ITEM (actions_menu_item), actions_menu);
+
+  menu_item = gtk_menu_item_new_with_mnemonic (_("Jump to _Hex Code Point"));
+  g_signal_connect (G_OBJECT (menu_item), "activate",
+                    G_CALLBACK (jump_code_point), NULL);
+  gtk_menu_shell_append (GTK_MENU_SHELL (actions_menu), menu_item);
+
+  menu_item = gtk_menu_item_new_with_mnemonic (
+          _("Jump to First Character in the _Clipboard"));
+  g_signal_connect (G_OBJECT (menu_item), "activate",
+                    G_CALLBACK (jump_clipboard), NULL);
+  gtk_menu_shell_append (GTK_MENU_SHELL (actions_menu), menu_item);
+
+  menu_item = gtk_menu_item_new_with_mnemonic (
+          _("Jump to First Character in the _Selected Text"));
+  g_signal_connect (G_OBJECT (menu_item), "activate",
+                    G_CALLBACK (jump_selection), NULL);
+  gtk_menu_shell_append (GTK_MENU_SHELL (actions_menu), menu_item);
+  /* finished making the actions menu */
+
+  /* make the help menu */
+  help_menu = gtk_menu_new ();
+  gtk_menu_item_set_submenu (GTK_MENU_ITEM (help_menu_item), help_menu);
+
+  menu_item = gtk_menu_item_new_with_mnemonic (_("_About"));
+  g_signal_connect (G_OBJECT (menu_item), "activate",
+                    G_CALLBACK (help_about), NULL);
+  gtk_menu_shell_append (GTK_MENU_SHELL (help_menu), menu_item);
+  /* finished making the help menu */
+
+  return menubar;
+}
+
+
 gint
 main (gint argc, gchar **argv)
 {
@@ -95,10 +219,10 @@ main (gint argc, gchar **argv)
   g_signal_connect (G_OBJECT (window), "destroy",
                     G_CALLBACK (gtk_main_quit), NULL);
 
-  gtk_container_set_border_width (GTK_CONTAINER (window), 5);
-
   vbox = gtk_vbox_new (FALSE, VBOX_SPACING);
   gtk_container_add (GTK_CONTAINER (window), vbox);
+
+  gtk_box_pack_start (GTK_BOX (vbox), make_menu (), FALSE, FALSE, 0);
 
   charmap = charmap_new ();
   gtk_box_pack_start (GTK_BOX (vbox), charmap, TRUE, TRUE, 0);
