@@ -21,7 +21,7 @@
 #include <gtk/gtk.h>
 #include "charmap.h"
 #include "gucharmap_intl.h"
-#include "pixmaps/gucharmap.xpm"  /* defines gucharmap_xpm */
+#include "../pixmaps/gucharmap.xpm"  /* defines gucharmap_xpm */
 
 
 #define VBOX_SPACING 3

@@ -42,4 +42,4 @@ AC_CHECK_FUNCS([bind_textdomain_codeset])
 AC_SUBST(GUCHARMAP_CFLAGS)
 AC_SUBST(GUCHARMAP_LIBS)
 
-AC_OUTPUT([Makefile po/Makefile.in pixmaps/Makefile])
+AC_OUTPUT([Makefile src/Makefile po/Makefile.in pixmaps/Makefile])
