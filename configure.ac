@@ -34,13 +34,23 @@ AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE",
 ALL_LINGUAS="eo es fr nl"
 AM_GLIB_GNU_GETTEXT
 
-PKG_CHECK_MODULES(GUCHARMAP, gtk+-2.0 >= 2.0.0)
+PKG_CHECK_MODULES(GTK, gtk+-2.0 >= 2.0.0)
+PKG_CHECK_MODULES(LIBGNOMEUI, libgnomeui-2.0 >= 2.0.0, 
+                  have_libgnomeui=yes, have_libgnomeui=no)
 
 # checks for funcs 
 AC_CHECK_FUNCS([bind_textdomain_codeset])
 
-AC_SUBST(GUCHARMAP_CFLAGS)
-AC_SUBST(GUCHARMAP_LIBS)
+AC_SUBST(GTK_CFLAGS)
+AC_SUBST(GTK_LIBS)
+
+AC_SUBST(LIBGNOMEUI_CFLAGS)
+AC_SUBST(LIBGNOMEUI_LIBS)
+
+AH_TEMPLATE([HAVE_LIBGNOMEUI], [Define if have libgnomeui])
+if test "x$have_libgnomeui" = "xyes" ; then
+    AC_DEFINE(HAVE_LIBGNOMEUI)
+fi
 
 AH_TEMPLATE([ENABLE_UNIHAN], [Define if you want CJK ideograph information])
 AC_ARG_ENABLE(unihan, 

@@ -25,8 +25,14 @@
 #include "mini_fontsel.h"
 #include "../pixmaps/gucharmap.xpm"  /* defines gucharmap_xpm */
 
+#if HAVE_LIBGNOMEUI
+# include <libgnomeui/gnome-about.h>
+# include <libgnomeui/gnome-stock-icons.h>
+#endif
+
 
 static GtkWidget *charmap;
+static GdkPixbuf *icon;
 
 typedef struct 
 {
@@ -133,11 +139,24 @@ jump_clipboard (GtkWidget *widget, gpointer data)
 }
 
 
+#if HAVE_LIBGNOMEUI
 static void
 help_about (GtkWidget *widget, gpointer data)
 {
-  g_printerr ("help_about\n");
+  GtkWidget *about;
+  const gchar *authors[] = 
+    {
+      "Noah Levitt <nlevitt аt columbia.edu>",
+      NULL
+    };
+
+  about = gnome_about_new (_("Unicode Character Map"),
+                           "0.2", "Copyright © 2003 Noah Levitt",
+                           NULL, authors, NULL, NULL, icon);
+
+  gtk_widget_show (about);
 }
+#endif /* #if HAVE_LIBGNOMEUI */
 
 
 static void
@@ -164,8 +183,6 @@ make_menu ()
   gtk_menu_shell_append (GTK_MENU_SHELL (menubar), view_menu_item);
   goto_menu_item = gtk_menu_item_new_with_mnemonic (_("_Go to"));
   gtk_menu_shell_append (GTK_MENU_SHELL (menubar), goto_menu_item);
-  help_menu_item = gtk_menu_item_new_with_mnemonic (_("_Help"));
-  gtk_menu_shell_append (GTK_MENU_SHELL (menubar), help_menu_item);
   /* finished making the menu bar */
 
   /* make the file menu */
@@ -203,7 +220,10 @@ make_menu ()
   gtk_menu_shell_append (GTK_MENU_SHELL (goto_menu), menu_item);
   /* finished making the goto menu */
 
+#if HAVE_LIBGNOMEUI
   /* make the help menu */
+  help_menu_item = gtk_menu_item_new_with_mnemonic (_("_Help"));
+  gtk_menu_shell_append (GTK_MENU_SHELL (menubar), help_menu_item);
   help_menu = gtk_menu_new ();
   gtk_menu_item_set_submenu (GTK_MENU_ITEM (help_menu_item), help_menu);
 
@@ -212,6 +232,7 @@ make_menu ()
                     G_CALLBACK (help_about), NULL);
   gtk_menu_shell_append (GTK_MENU_SHELL (help_menu), menu_item);
   /* finished making the help menu */
+#endif /* #if HAVE_LIBGNOMEUI */
 
   gtk_widget_show_all (menubar);
   return menubar;
@@ -239,9 +260,8 @@ main (gint argc, gchar **argv)
                                gdk_screen_width () * 1/2,
                                gdk_screen_height () * 1/2);
   gtk_window_set_title (GTK_WINDOW (window), _("Unicode Character Map"));
-  gtk_window_set_icon (
-          GTK_WINDOW (window), 
-          gdk_pixbuf_new_from_xpm_data ((const gchar **) gucharmap_xpm));
+  icon = gdk_pixbuf_new_from_xpm_data ((const gchar **) gucharmap_xpm);
+  gtk_window_set_icon (GTK_WINDOW (window), icon);
 
   g_signal_connect (G_OBJECT (window), "destroy",
                     G_CALLBACK (gtk_main_quit), NULL);

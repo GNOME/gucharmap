@@ -17,12 +17,12 @@
 ## 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
 ##
 
-AM_CFLAGS = $(GUCHARMAP_CFLAGS) -Wall -ansi 
+AM_CFLAGS = $(GTK_CFLAGS) $(LIBGNOMEUI_CFLAGS) -Wall -ansi 
 
 localedir = $(datadir)/locale
 AM_CPPFLAGS = -DLOCALEDIR=\"$(localedir)\"
 
-libgucharmap_la_LIBADD = @GUCHARMAP_LIBS@
+libgucharmap_la_LIBADD = @GTK_LIBS@ @LIBGNOMEUI_LIBS@
 
 lib_LTLIBRARIES = libgucharmap.la
 
@@ -43,7 +43,7 @@ libgucharmapinclude_HEADERS = charmap.h unicode_info.h mini_fontsel.h
 
 bin_PROGRAMS = gucharmap
 
-gucharmap_LDADD = libgucharmap.la  @GUCHARMAP_LIBS@
+gucharmap_LDADD = libgucharmap.la  @GTK_LIBS@ @LIBGNOMEUI_LIBS@
 
 gucharmap_SOURCES = main.c
 
