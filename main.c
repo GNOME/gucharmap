@@ -35,12 +35,45 @@ fontsel_changed (GtkTreeSelection *selection, gpointer data)
 }
 
 
+static void
+toggle_fontsel (GtkToggleButton *togglebutton, gpointer *fontsel)
+{
+  GtkWidget *toplevel;
+  gint width, height;
+  GtkRequisition requisition;
+
+  toplevel = gtk_widget_get_toplevel (GTK_WIDGET (togglebutton));
+  gtk_window_get_size (GTK_WINDOW (toplevel), &width, &height);
+
+  gtk_widget_size_request (GTK_WIDGET (fontsel), &requisition);
+
+  if (gtk_toggle_button_get_active (togglebutton))
+    {
+      g_printerr ("toggle_fontsel: %dx%d -> %dx%d\n", width, height,
+                   width, height + requisition.height);
+      gtk_widget_show (GTK_WIDGET (fontsel));
+      gtk_window_resize (GTK_WINDOW (toplevel), width, 
+                         height + requisition.height);
+    }
+  else
+    {
+      g_printerr ("toggle_fontsel: %dx%d -> %dx%d\n", width, height,
+                   width, height - requisition.height);
+
+      gtk_widget_hide (GTK_WIDGET (fontsel));
+      gtk_window_resize (GTK_WINDOW (toplevel), width, 
+                         height - requisition.height);
+    }
+}
+
+
 gint
 main (gint argc, gchar **argv)
 {
   GtkWidget *window = NULL;
   GtkWidget *vbox;
   GtkWidget *fontsel;
+  GtkWidget *fontsel_toggle;
 
   gtk_init (&argc, &argv);
 
@@ -58,13 +91,22 @@ main (gint argc, gchar **argv)
   charmap = charmap_new ();
   gtk_box_pack_start (GTK_BOX (vbox), charmap, TRUE, TRUE, 0);
 
+  fontsel_toggle = gtk_toggle_button_new_with_label (
+          "show font selection");
+  gtk_box_pack_start (GTK_BOX (vbox), fontsel_toggle, FALSE, FALSE, 0);
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (fontsel_toggle), TRUE);
+
   fontsel = gtk_font_selection_new ();
   gtk_box_pack_start (GTK_BOX (vbox), fontsel, FALSE, FALSE, 0);
+
+  g_signal_connect (G_OBJECT (fontsel_toggle), "toggled",
+                    G_CALLBACK (toggle_fontsel), fontsel);
 
   g_signal_connect (
           gtk_tree_view_get_selection (GTK_TREE_VIEW (
                   GTK_FONT_SELECTION (fontsel)->size_list)), 
           "changed", G_CALLBACK (fontsel_changed), fontsel);
+
 
   gtk_widget_show_all (window);
 
