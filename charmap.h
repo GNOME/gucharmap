@@ -68,6 +68,7 @@ struct _CharmapClass
 
 GtkType charmap_get_type (void);
 GtkWidget * charmap_new ();
+void charmap_set_font (Charmap *charmap, gchar *font_name);
 
 
 #ifdef __cplusplus

@@ -378,6 +378,9 @@ button_press_event (GtkWidget *widget,
       expose_char_for_redraw (charmap, old_active_char);
     }
 
+  /* in case we lost keyboard focus and are clicking to get it back */
+  gtk_widget_grab_focus (charmap->tabulus);
+
   return FALSE;
 }
 
@@ -415,7 +418,6 @@ charmap_init (Charmap *charmap)
 
   gtk_box_pack_start (GTK_BOX (charmap), charmap->tabulus, TRUE, TRUE, 0);
 
-  /* init the font information */
   charmap->font_name = pango_font_description_to_string (
           charmap->tabulus->style->font_desc);
 
@@ -479,3 +481,31 @@ charmap_get_type ()
   return charmap_type;
 }
 
+void 
+charmap_set_font (Charmap *charmap, gchar *font_name)
+{
+  gint square_dimension;
+  PangoFontDescription *font_desc;
+
+  charmap->font_name = font_name;
+  font_desc = pango_font_description_from_string (font_name);
+
+  gtk_widget_modify_font (charmap->tabulus, font_desc);
+
+  charmap->font_metrics = pango_context_get_metrics (
+          gtk_widget_get_pango_context (charmap->tabulus),
+          charmap->tabulus->style->font_desc, NULL);
+
+  /* XXX: unref something? */
+  charmap->pango_layout = pango_layout_new (
+          gtk_widget_get_pango_context (charmap->tabulus));
+
+  /* size the drawing area - the +1 is for the 1-pixel borders*/
+  square_dimension = calculate_square_dimension (charmap->font_metrics);
+  gtk_widget_set_size_request (charmap->tabulus, 
+                               CHARMAP_COLS * (square_dimension + 1) + 1,
+                               CHARMAP_ROWS * (square_dimension + 1) + 1);
+
+  draw_tabulus_pixmap (charmap);
+  gtk_widget_queue_draw (GTK_WIDGET (charmap->tabulus));
+}

@@ -22,11 +22,25 @@
 #include "charmap.h"
 
 
+static GtkWidget *charmap;
+
+
+static void
+fontsel_changed (GtkTreeSelection *selection, gpointer data)
+{
+  gchar *newfont = gtk_font_selection_get_font_name (
+          GTK_FONT_SELECTION (data));
+  g_print ("new font = %s\n", newfont);
+  charmap_set_font (CHARMAP (charmap), newfont);
+}
+
+
 gint
 main (gint argc, gchar **argv)
 {
   GtkWidget *window = NULL;
   GtkWidget *vbox;
+  GtkWidget *fontsel;
 
   gtk_init (&argc, &argv);
 
@@ -42,7 +56,17 @@ main (gint argc, gchar **argv)
   vbox = gtk_vbox_new (FALSE, 0);
   gtk_container_add (GTK_CONTAINER (window), vbox);
 
-  gtk_box_pack_start (GTK_BOX (vbox), charmap_new (), TRUE, TRUE, 0);
+  charmap = charmap_new ();
+  gtk_box_pack_start (GTK_BOX (vbox), charmap, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (vbox), gtk_hseparator_new (), TRUE, TRUE, 0);
+
+  fontsel = gtk_font_selection_new ();
+  gtk_box_pack_start (GTK_BOX (vbox), fontsel, TRUE, TRUE, 0);
+
+  g_signal_connect (
+          gtk_tree_view_get_selection (GTK_TREE_VIEW (
+                  GTK_FONT_SELECTION (fontsel)->size_list)), 
+          "changed", G_CALLBACK (fontsel_changed), fontsel);
 
   gtk_widget_show_all (window);
 
