@@ -157,7 +157,7 @@ jump_code_point (GtkWidget *widget, GucharmapWindow *guw)
   gtk_box_set_spacing (GTK_BOX (crapbox), 6);
 
   label = gtk_label_new_with_mnemonic (_("_Enter hexadecimal Unicode"
-                                         "code point:"));
+                                         " code point:"));
   gtk_widget_show (label);
   gtk_box_pack_start (GTK_BOX (crapbox), label, FALSE, FALSE, 0);
 
