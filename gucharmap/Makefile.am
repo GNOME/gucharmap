@@ -1,6 +1,6 @@
 ## $Id$
 ##
-## Copyright (c) 2002  Noah Levitt
+## Copyright (c) 2003  Noah Levitt
 ##
 ## This program is free software; you can redistribute it and/or modify it
 ## under the terms of the GNU General Public License as published by the
@@ -42,7 +42,7 @@ libgucharmap_la_SOURCES = gucharmap_marshal.c gucharmap_marshal.h \
 
 # this is different from the project version
 # http://sources.redhat.com/autobook/autobook/autobook_91.html
-libgucharmap_la_LDFLAGS = -version-info 2:0:0
+libgucharmap_la_LDFLAGS = -version-info 3:0:0
 
 
 libgucharmapincludedir = $(includedir)/gucharmap
