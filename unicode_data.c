@@ -18,6 +18,7 @@
  */
 
 #include <gtk/gtk.h>
+#include <string.h>
 #include "unicode_info.h"
 
 /* 
@@ -13936,6 +13937,91 @@ get_unicode_data_name (gunichar uc)
     }
 
   return "";
+}
+
+
+/* ascii case-insensitive substring search (source ripped from glib) */
+static gchar *
+ascii_case_strrstr (const gchar *haystack, const gchar *needle)
+{
+  gsize i;
+  gsize needle_len;
+  gsize haystack_len;
+  const gchar *p;
+      
+  g_return_val_if_fail (haystack != NULL, NULL);
+  g_return_val_if_fail (needle != NULL, NULL);
+
+  needle_len = strlen (needle);
+  haystack_len = strlen (haystack);
+
+  if (needle_len == 0)
+    return (gchar *)haystack;
+
+  if (haystack_len < needle_len)
+    return NULL;
+  
+  p = haystack + haystack_len - needle_len;
+
+  while (p >= haystack)
+    {
+      for (i = 0; i < needle_len; i++)
+        if (g_ascii_tolower (p[i]) != g_ascii_tolower (needle[i]))
+          goto next;
+      
+      return (gchar *)p;
+      
+    next:
+      p--;
+    }
+  
+  return NULL;
+}
+
+
+/* case insensitive; returns (gunichar)(-1) if nothing found */
+gunichar
+find_next_substring_match (gunichar start, gunichar unichar_max,
+                           const gchar *search_text)
+{
+  gint min = 0;
+  gint mid = 0;
+  gint max = sizeof (unicode_data) / sizeof (unicode_data_t) - 1;
+  gint i0;
+  gint i;
+
+  /* locate the start character by binary search */
+  if (start < unicode_data[0].index || start > unichar_max)
+    i0 = 0;
+  else
+    {
+      while (max >= min) 
+        {
+          mid = (min + max) / 2;
+          if (start > unicode_data[mid].index)
+            min = mid + 1;
+          else if (start < unicode_data[mid].index)
+            max = mid - 1;
+          else
+            break;
+        }
+
+      i0 = mid;
+    }
+
+  /* try substring match on each */
+  max = sizeof (unicode_data) / sizeof (unicode_data_t);
+  for (i = i0+1;  i != i0;  )
+    {
+      if (ascii_case_strrstr (unicode_data[i].name, search_text) != NULL)
+        return unicode_data[i].index;
+
+      i++;
+      if (i >= max || unicode_data[i].index > unichar_max)
+        i = 0;
+    }
+
+  return (gunichar)(-1);
 }
 
 

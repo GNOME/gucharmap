@@ -19,6 +19,7 @@
 
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
+#include <stdlib.h>
 #include "charmap.h"
 #include "unicode_info.h"
 #include "gucharmap_intl.h"
@@ -1225,27 +1226,27 @@ make_text_to_copy (Charmap *charmap)
   GtkWidget *button;
   GtkWidget *label;
 
-  hbox = gtk_hbox_new (FALSE, 5);
+  hbox = gtk_hbox_new (FALSE, 0);
 
   label = gtk_label_new (_("Text to copy:"));
-  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 4);
 
   charmap->text_to_copy = gtk_entry_new ();
   gtk_entry_set_max_length (GTK_ENTRY (charmap->text_to_copy), 
                             TEXT_TO_COPY_MAXLENGTH);
-  gtk_box_pack_start (GTK_BOX (hbox), charmap->text_to_copy, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (hbox), charmap->text_to_copy, TRUE, TRUE, 4);
 
   /* the copy button */
   button = gtk_button_new_from_stock (GTK_STOCK_COPY); 
   g_signal_connect (G_OBJECT (button), "clicked",
                     G_CALLBACK (copy_button_clicked), charmap);
-  gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 4);
 
   /* the clear button */
   button = gtk_button_new_from_stock (GTK_STOCK_CLEAR);
   g_signal_connect (G_OBJECT (button), "clicked",
                     G_CALLBACK (clear_button_clicked), charmap);
-  gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 4);
 
   /* put the text_to_copy stuff in a frame */
   frame = gtk_frame_new (NULL);
@@ -1431,6 +1432,90 @@ make_chartable (Charmap *charmap)
 }
 
 
+static void
+do_search (GtkWidget *widget, Charmap *charmap)
+{
+  const gchar *search_text;
+  gunichar uc;
+
+  search_text = gtk_entry_get_text (GTK_ENTRY (charmap->search_entry));
+  
+  uc = find_next_substring_match (charmap->active_char, UNICHAR_MAX, 
+                                  search_text);
+  if (uc != (gunichar)(-1) && uc <= UNICHAR_MAX)
+    {
+      set_active_character (charmap, uc);
+      redraw (charmap);
+    }
+  /* else, not found */
+}
+
+
+static void
+do_jump (GtkWidget *widget, Charmap *charmap)
+{
+  long l;
+  const gchar *jump_text;
+  gchar *endptr;
+
+  jump_text = gtk_entry_get_text (GTK_ENTRY (charmap->jump_entry));
+
+  l = strtol (jump_text, &endptr, 16);
+  if (endptr == jump_text) 
+    return;
+
+  if (l >= 0 && l <= UNICHAR_MAX)
+    {
+      set_active_character (charmap, (gunichar) l);
+      redraw (charmap);
+    }
+  /* else, it's not a number, so do nothing */
+}
+
+
+static GtkWidget *
+make_search (Charmap *charmap)
+{
+  GtkWidget *hbox;
+  GtkWidget *button;
+  GtkWidget *frame;
+
+  /* search */
+  hbox = gtk_hbox_new (FALSE, 3);
+  gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (_("Search:")),
+                      FALSE, FALSE, 3);
+
+  charmap->search_entry = gtk_entry_new ();
+  g_signal_connect (G_OBJECT (charmap->search_entry), "activate",
+                    G_CALLBACK (do_search), charmap);
+  gtk_box_pack_start (GTK_BOX (hbox), charmap->search_entry, TRUE, TRUE, 3);
+
+  button = gtk_button_new_from_stock (GTK_STOCK_FIND);
+  g_signal_connect (G_OBJECT (button), "clicked",
+                    G_CALLBACK (do_search), charmap);
+  gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 3);
+
+  /* jump */
+  gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (_("Jump to:")),
+                      FALSE, FALSE, 3);
+
+  charmap->jump_entry = gtk_entry_new ();
+  g_signal_connect (G_OBJECT (charmap->jump_entry), "activate",
+                    G_CALLBACK (do_jump), charmap);
+  gtk_box_pack_start (GTK_BOX (hbox), charmap->jump_entry, FALSE, FALSE, 3);
+
+  button = gtk_button_new_from_stock (GTK_STOCK_JUMP_TO);
+  g_signal_connect (G_OBJECT (button), "clicked",
+                    G_CALLBACK (do_jump), charmap);
+  gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 3);
+
+  frame = gtk_frame_new (NULL);
+  gtk_container_add (GTK_CONTAINER (frame), hbox);
+  
+  return frame;
+}
+
+
 void
 charmap_class_init (CharmapClass *clazz)
 {
@@ -1447,21 +1532,21 @@ charmap_init (Charmap *charmap)
   charmap->rows = CHARMAP_MIN_ROWS;
   charmap->cols = CHARMAP_MIN_COLS;
 
-  gtk_box_set_spacing (GTK_BOX (charmap), 5);
+  gtk_box_set_spacing (GTK_BOX (charmap), 0);
 
-  hbox = gtk_hbox_new (FALSE, 3);
+  hbox = gtk_hbox_new (FALSE, 0);
 
-  gtk_box_pack_start (GTK_BOX (charmap), hbox, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (charmap), hbox, TRUE, TRUE, 3);
 
   gtk_box_pack_start (GTK_BOX (hbox), make_chartable (charmap), 
-                      TRUE, TRUE, 0);
+                      TRUE, TRUE, 3);
 
   vbox = gtk_vbox_new (FALSE, 3);
   gtk_box_pack_start (GTK_BOX (vbox), make_unicode_block_selector (charmap), 
-                      TRUE, TRUE, 0);
+                      TRUE, TRUE, 3);
   gtk_box_pack_start (GTK_BOX (vbox), make_paste_button (charmap), 
-                      FALSE, FALSE, 0);
-  gtk_box_pack_start (GTK_BOX (hbox), vbox, FALSE, FALSE, 0);
+                      FALSE, FALSE, 3);
+  gtk_box_pack_start (GTK_BOX (hbox), vbox, FALSE, FALSE, 3);
 
   charmap->font_name = NULL;
 
@@ -1485,11 +1570,15 @@ charmap_init (Charmap *charmap)
 
   /* the text_to_copy */
   gtk_box_pack_start (GTK_BOX (charmap), make_text_to_copy (charmap), 
-                      FALSE, FALSE, 0);
+                      FALSE, FALSE, 3);
 
   /* the caption */
   gtk_box_pack_start (GTK_BOX (charmap), make_caption (charmap), 
-                      FALSE, FALSE, 0);
+                      FALSE, FALSE, 3);
+
+  /* the search */
+  gtk_box_pack_start (GTK_BOX (charmap), make_search (charmap), 
+                      FALSE, FALSE, 3);
 
   set_caption (charmap);
   set_active_block (charmap);

@@ -106,6 +106,10 @@ struct _Charmap
   /* for the scrollbar */
   GtkObject *adjustment; 
   gulong adjustment_changed_handler_id; 
+
+  /* search */
+  GtkWidget *search_entry;
+  GtkWidget *jump_entry;
 };
 
 

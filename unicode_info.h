@@ -61,6 +61,10 @@ gchar * get_hangul_syllable_name (gunichar s);
  */
 gunichar * unicode_canonical_decomposition (gunichar ch, gsize *result_len);
 
+/* starts search at start */
+gunichar find_next_substring_match (gunichar start, gunichar unichar_max,
+                                    const gchar *search_text);
+
 
 
 #ifdef __cplusplus
