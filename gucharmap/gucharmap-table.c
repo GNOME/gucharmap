@@ -288,8 +288,7 @@ layout_scaled_glyph (GucharmapTable *chartable,
           gtk_widget_get_style (chartable->drawing_area)->font_desc);
   pango_font_description_set_size (font_desc, font_size);
 
-  layout = pango_layout_new (
-          pango_layout_get_context (chartable->pango_layout));
+  layout = pango_layout_new (pango_layout_get_context (chartable->pango_layout));
 
   pango_layout_set_font_description (layout, font_desc);
 
@@ -331,9 +330,7 @@ create_glyph_pixmap (GucharmapTable *chartable,
       if (family == NULL)
         family = g_strdup (_("[not a printable character]"));
 
-      pango_layout2 = pango_layout_new (
-              gtk_widget_get_pango_context (GTK_WIDGET (chartable)));
-      pango_layout_set_text (pango_layout2, family, -1);
+      pango_layout2 = gtk_widget_create_pango_layout (GTK_WIDGET (chartable), family);
       pango_layout_get_pixel_extents (pango_layout2, NULL, &family_rect);
 
       /* Make the GdkPixmap large enough to account for possible offsets in the
@@ -1769,7 +1766,6 @@ drag_data_get (GtkWidget *widget,
 void
 gucharmap_table_init (GucharmapTable *chartable)
 {
-  PangoContext *context;
   AtkObject *accessible;
 
   chartable->zoom_mode_enabled = FALSE;
@@ -1846,12 +1842,10 @@ gucharmap_table_init (GucharmapTable *chartable)
 
   chartable->font_name = NULL;
 
-  chartable->font_metrics = pango_context_get_metrics (
-          gtk_widget_get_pango_context (chartable->drawing_area),
-          chartable->drawing_area->style->font_desc, NULL);
+  chartable->font_metrics = pango_context_get_metrics (gtk_widget_get_pango_context (chartable->drawing_area),
+                                                       chartable->drawing_area->style->font_desc, NULL);
 
-  context = gtk_widget_get_pango_context (chartable->drawing_area);
-  chartable->pango_layout = pango_layout_new (context);
+  chartable->pango_layout = gtk_widget_create_pango_layout (chartable->drawing_area, NULL);
 
   pango_layout_set_font_description (chartable->pango_layout,
                                      chartable->drawing_area->style->font_desc);
@@ -1951,14 +1945,12 @@ gucharmap_table_set_font (GucharmapTable *chartable, const gchar *font_name)
   if (chartable->font_metrics != NULL)
     pango_font_metrics_unref (chartable->font_metrics);
 
-  chartable->font_metrics = pango_context_get_metrics (
-          gtk_widget_get_pango_context (chartable->drawing_area),
-          chartable->drawing_area->style->font_desc, NULL);
+  chartable->font_metrics = pango_context_get_metrics (gtk_widget_get_pango_context (chartable->drawing_area),
+                                                       chartable->drawing_area->style->font_desc, NULL);
 
   /* new pango layout for the new font */
   g_object_unref (chartable->pango_layout);
-  chartable->pango_layout = pango_layout_new (
-          gtk_widget_get_pango_context (chartable->drawing_area));
+  chartable->pango_layout = gtk_widget_create_pango_layout (chartable->drawing_area, NULL);
 
   pango_layout_set_font_description (chartable->pango_layout,
                                      chartable->drawing_area->style->font_desc);
