@@ -306,7 +306,9 @@ layout_scaled_glyph (GucharmapTable *chartable,
 
 
 static GdkPixmap *
-create_glyph_pixmap (GucharmapTable *chartable, gint font_size)
+create_glyph_pixmap (GucharmapTable *chartable, 
+                     gint font_size,
+                     gboolean draw_font_family)
 {
   enum { PADDING = 8 };
 
@@ -322,21 +324,28 @@ create_glyph_pixmap (GucharmapTable *chartable, gint font_size)
    */
   pango_layout = layout_scaled_glyph (chartable, chartable->active_char, 
                                       font_size, &family);
-
-  if (family == NULL)
-    family = _("[not a printable character]");
-
-  pango_layout2 = pango_layout_new (
-          gtk_widget_get_pango_context (GTK_WIDGET (chartable)));
-  pango_layout_set_text (pango_layout2, family, -1);
-  pango_layout_get_pixel_extents (pango_layout2, NULL, &family_rect);
-
   pango_layout_get_pixel_extents (pango_layout, &char_rect, NULL);
 
-  /* Make the GdkPixmap large enough to account for possible offsets in the
-   * ink extents of the glyph. */
-  pixmap_width  = MAX (char_rect.width, family_rect.width)  + 2 * PADDING;
-  pixmap_height = family_rect.height + char_rect.height + 4 * PADDING;
+  if (draw_font_family)
+    {
+      if (family == NULL)
+        family = _("[not a printable character]");
+
+      pango_layout2 = pango_layout_new (
+              gtk_widget_get_pango_context (GTK_WIDGET (chartable)));
+      pango_layout_set_text (pango_layout2, family, -1);
+      pango_layout_get_pixel_extents (pango_layout2, NULL, &family_rect);
+
+      /* Make the GdkPixmap large enough to account for possible offsets in the
+       * ink extents of the glyph. */
+      pixmap_width  = MAX (char_rect.width, family_rect.width)  + 2 * PADDING;
+      pixmap_height = family_rect.height + char_rect.height + 4 * PADDING;
+    }
+  else
+    {
+      pixmap_width  = char_rect.width + 2 * PADDING;
+      pixmap_height = char_rect.height + 2 * PADDING;
+    }
 
   style = gtk_widget_get_style (chartable->drawing_area);
 
@@ -357,14 +366,18 @@ create_glyph_pixmap (GucharmapTable *chartable, gint font_size)
                    pango_layout);
   g_object_unref (pango_layout);
 
-  gdk_draw_line (pixmap, style->dark_gc[GTK_STATE_NORMAL],
-                 6 + 1, char_rect.height + 2 * PADDING,
-                 pixmap_width - 3 - 6, char_rect.height + 2 * PADDING);
-  gdk_draw_layout (pixmap, style->text_gc[GTK_STATE_NORMAL],
-                   PADDING, pixmap_height - PADDING - family_rect.height,
-                   pango_layout2);
+  if (draw_font_family)
+    {
+      gdk_draw_line (pixmap, style->dark_gc[GTK_STATE_NORMAL],
+                     6 + 1, char_rect.height + 2 * PADDING,
+                     pixmap_width - 3 - 6, char_rect.height + 2 * PADDING);
+      gdk_draw_layout (pixmap, style->text_gc[GTK_STATE_NORMAL],
+                       PADDING, pixmap_height - PADDING - family_rect.height,
+                       pango_layout2);
 
-  g_object_unref (pango_layout2);
+      g_object_unref (pango_layout2);
+    }
+
   g_free (family);
 
   return pixmap;
@@ -440,7 +453,7 @@ update_zoom_window (GucharmapTable *chartable)
     g_object_unref (chartable->zoom_pixmap);
 
   chartable->zoom_pixmap = create_glyph_pixmap (
-          chartable, compute_zoom_font_size (chartable));
+          chartable, compute_zoom_font_size (chartable), TRUE);
 
   if (GTK_WIDGET_REALIZED (chartable->zoom_window))
     {
@@ -1720,7 +1733,8 @@ drag_begin (GtkWidget *widget,
   GdkPixmap *drag_icon;
 
   drag_icon = create_glyph_pixmap (chartable, 
-                                   compute_drag_font_size (chartable));
+                                   compute_drag_font_size (chartable),
+                                   FALSE);
   gtk_drag_set_icon_pixmap (context, gtk_widget_get_colormap (widget), 
                             drag_icon, NULL, -8, -8);
   g_object_unref (drag_icon);
