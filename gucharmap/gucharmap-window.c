@@ -17,9 +17,7 @@
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  */
 
-#if HAVE_CONFIG_H
-# include <config.h>
-#endif
+#include "config.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -103,24 +101,52 @@ status_message (GtkWidget *widget, const gchar *message, GucharmapWindow *guw)
 }
 
 static void
-do_search (GucharmapWindow    *guw, 
-           GtkWindow          *alert_parent,
-           const gchar        *search_text, 
-           GucharmapDirection  direction)
+search_completed (GucharmapSearchState *search_state)
+{
+  GucharmapWindow *guw = gucharmap_search_state_get_saved_data (search_state);
+  gunichar char_found = gucharmap_search_state_get_found_char (search_state);
+
+  if (char_found == (gunichar)(-1))
+    /* information_dialog (guw, alert_parent, _("Not found.")); */
+    information_dialog (guw, NULL, _("Not found."));
+  else
+    gucharmap_charmap_go_to_character (guw->charmap, char_found);
+
+  gucharmap_search_state_free (search_state);
+  guw->search_in_progress = FALSE;
+  gdk_window_set_cursor (GTK_WIDGET (guw)->window, NULL);
+}
+
+static void
+start_search (GucharmapWindow    *guw, 
+              GtkWindow          *alert_parent,
+              const gchar        *search_string, 
+              GucharmapDirection  direction)
 {
   GucharmapCodepointList *list;
   GucharmapChapters *chapters;
-  gint index, start_index;
+  GucharmapSearchState *search_state;
+  GdkCursor *cursor;
+  gint start_index;
+
+  cursor = gdk_cursor_new (GDK_WATCH);
+  gdk_window_set_cursor (GTK_WIDGET (guw)->window, cursor);
+  gdk_cursor_unref (cursor);
+
+  g_return_if_fail (!guw->search_in_progress);
+
+  guw->search_in_progress = TRUE;
 
   chapters = gucharmap_charmap_get_chapters (guw->charmap);
   list = (GucharmapCodepointList *) gucharmap_chapters_get_book_codepoint_list (chapters);
   start_index = gucharmap_codepoint_list_get_index (list, gucharmap_table_get_active_character (guw->charmap->chartable));
-  index = gucharmap_find_next (list, search_text, start_index, direction, FALSE);
 
-  if (index >= 0)
-    gucharmap_charmap_go_to_character (guw->charmap, gucharmap_codepoint_list_get_char (list, index));
-  else
-    information_dialog (guw, alert_parent, _("Not found."));
+  search_state = gucharmap_search_state_new (list, search_string, start_index, direction, FALSE, guw);
+
+  /* index = gucharmap_find_next (list, search_string, start_index, direction, FALSE); */
+
+  g_idle_add_full (G_PRIORITY_DEFAULT_IDLE, (GSourceFunc) gucharmap_idle_search, 
+                   search_state, (GDestroyNotify) search_completed);
 }
 
 static void
@@ -135,13 +161,14 @@ search_find_response (GtkDialog *dialog,
 
       entry_dialog->guw->last_search = g_strdup (gtk_entry_get_text (entry_dialog->entry));
 
-      do_search (entry_dialog->guw, GTK_WINDOW (entry_dialog->dialog), 
-                 entry_dialog->guw->last_search, GUCHARMAP_FORWARD);
-      return;
+      start_search (entry_dialog->guw, GTK_WINDOW (entry_dialog->dialog), 
+                    entry_dialog->guw->last_search, GUCHARMAP_FORWARD);
     }
-
-  g_free (entry_dialog);
-  gtk_widget_destroy (GTK_WIDGET (dialog));
+  else
+    {
+      g_free (entry_dialog);
+      gtk_widget_destroy (GTK_WIDGET (dialog));
+    }
 }
 
 static void
@@ -202,7 +229,7 @@ static void
 search_find_next (GtkWidget *widget, GucharmapWindow *guw)
 {
   if (guw->last_search != NULL)
-    do_search (guw, GTK_WINDOW (guw), guw->last_search, 1);
+    start_search (guw, GTK_WINDOW (guw), guw->last_search, 1);
   else
     search_find (widget, guw);
 }
@@ -211,7 +238,7 @@ static void
 search_find_prev (GtkWidget *widget, GucharmapWindow *guw)
 {
   if (guw->last_search != NULL)
-    do_search (guw, GTK_WINDOW (guw), guw->last_search, -1);
+    start_search (guw, GTK_WINDOW (guw), guw->last_search, -1);
   /* XXX: else, open up search dialog, but search backwards :-( */
 }
 

@@ -32,11 +32,18 @@ typedef enum
 }
 GucharmapDirection;
 
-gint gucharmap_find_next (const GucharmapCodepointList *list,
-                          const gchar            *search_text,
-                          gint                    start_index,
-                          GucharmapDirection      direction,
-                          gboolean                whole_word);
+typedef struct _GucharmapSearchState GucharmapSearchState;
+
+gpointer               gucharmap_search_state_get_saved_data (GucharmapSearchState         *search_state);
+gunichar               gucharmap_search_state_get_found_char (GucharmapSearchState         *search_state);
+void                   gucharmap_search_state_free           (GucharmapSearchState         *search_state);
+GucharmapSearchState * gucharmap_search_state_new            (const GucharmapCodepointList *list, 
+                                                              const gchar                  *search_string, 
+                                                              gint                          start_index, 
+                                                              GucharmapDirection            direction, 
+                                                              gboolean                      whole_word,
+                                                              const gpointer                saved_data);
+gboolean               gucharmap_idle_search                 (GucharmapSearchState         *search_state);
 
 G_END_DECLS
 

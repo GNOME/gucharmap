@@ -65,6 +65,7 @@ struct _GucharmapWindow
   GdkPixbuf *icon;
 
   gchar *last_search;
+  gboolean search_in_progress;
 
   gboolean font_selection_visible;
   gboolean text_to_copy_visible;
