@@ -22,6 +22,9 @@
 #include "charmap.h"
 
 
+#define VBOX_SPACING 3
+
+
 static GtkWidget *charmap;
 
 
@@ -49,20 +52,15 @@ toggle_fontsel (GtkToggleButton *togglebutton, gpointer *fontsel)
 
   if (gtk_toggle_button_get_active (togglebutton))
     {
-      g_printerr ("toggle_fontsel: %dx%d -> %dx%d\n", width, height,
-                   width, height + requisition.height);
       gtk_widget_show (GTK_WIDGET (fontsel));
       gtk_window_resize (GTK_WINDOW (toplevel), width, 
-                         height + requisition.height);
+                         height + requisition.height + VBOX_SPACING);
     }
   else
     {
-      g_printerr ("toggle_fontsel: %dx%d -> %dx%d\n", width, height,
-                   width, height - requisition.height);
-
       gtk_widget_hide (GTK_WIDGET (fontsel));
       gtk_window_resize (GTK_WINDOW (toplevel), width, 
-                         height - requisition.height);
+                         height - requisition.height - VBOX_SPACING);
     }
 }
 
@@ -85,19 +83,19 @@ main (gint argc, gchar **argv)
 
   gtk_container_set_border_width (GTK_CONTAINER (window), 5);
 
-  vbox = gtk_vbox_new (FALSE, 5);
+  vbox = gtk_vbox_new (FALSE, VBOX_SPACING);
   gtk_container_add (GTK_CONTAINER (window), vbox);
 
   charmap = charmap_new ();
   gtk_box_pack_start (GTK_BOX (vbox), charmap, TRUE, TRUE, 0);
 
   fontsel_toggle = gtk_toggle_button_new_with_label (
-          "show font selection");
+          "show/hide font selection");
   gtk_box_pack_start (GTK_BOX (vbox), fontsel_toggle, FALSE, FALSE, 0);
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (fontsel_toggle), TRUE);
 
   fontsel = gtk_font_selection_new ();
   gtk_box_pack_start (GTK_BOX (vbox), fontsel, FALSE, FALSE, 0);
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (fontsel_toggle), TRUE);
 
   g_signal_connect (G_OBJECT (fontsel_toggle), "toggled",
                     G_CALLBACK (toggle_fontsel), fontsel);
