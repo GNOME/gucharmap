@@ -1,5 +1,11 @@
 2003-04-16  Noah Levitt  <nlevitt аt columbia.edu>
 
+        * gucharmap/chartable.[ch]: The zoom window and drag icon use pixmap
+        instead of pixbuf. It had to be converted back and forth from a
+        pixmap, anyway (at least for the zoom window).
+        
+2003-04-16  Noah Levitt  <nlevitt аt columbia.edu>
+
         * gucharmap/chartable.c: Made the zoom window a bit less invasive.
         It's no longer always on top and on every desktop. But now it is
         focusable (you can alt-tab to it, for example). Oh well, close enough.

@@ -64,7 +64,7 @@ struct _Chartable
   gulong adjustment_changed_handler_id; 
 
   GtkWidget *zoom_window;
-  GdkPixbuf *zoom_pixbuf;
+  GdkPixmap *zoom_pixmap;
   gboolean zoom_mode_enabled;
 };
 
