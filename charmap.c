@@ -31,7 +31,9 @@ unichar_to_printable_utf8 (gunichar uc)
   static gchar buf[12];
   gint x;
 
-  if (! g_unichar_isgraph (uc))
+  /* the 0x2029 thing is a workaround for pango 1.0.3 bug
+   * http://bugzilla.gnome.org/show_bug.cgi?id=88824 */
+  if (! g_unichar_isgraph (uc) || uc == 0x2029)
     return "";
   
   /* Unicode Standard 3.2, section 2.6, "By convention, diacritical marks
@@ -682,8 +684,6 @@ move_up (Charmap *charmap)
 {
   if (charmap->active_char >= charmap->cols)
     set_active_character (charmap, charmap->active_char - charmap->cols);
-  else
-    set_active_character (charmap, 0);
 }
 
 static void
@@ -691,8 +691,6 @@ move_down (Charmap *charmap)
 {
   if (charmap->active_char <= UNICHAR_MAX - charmap->cols)
     set_active_character (charmap, charmap->active_char + charmap->cols);
-  else
-    set_active_character (charmap, UNICHAR_MAX);
 }
 
 static void
@@ -1279,6 +1277,9 @@ mouse_wheel_event (GtkWidget *widget, GdkEventScroll *event, Charmap *charmap)
 
       case GDK_SCROLL_DOWN:
         mouse_wheel_down (charmap);
+        break;
+
+      default:
         break;
     }
 
