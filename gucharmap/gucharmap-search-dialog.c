@@ -495,6 +495,29 @@ entry_changed (GtkEntry              *entry,
     }
 }
 
+static void 
+set_button_stock_image_and_label (GtkButton *button,
+                                  gchar     *stock_id,
+                                  gchar     *mnemonic)
+{
+  GtkWidget *hbox, *image, *label, *align;
+
+  align = gtk_alignment_new (0.5, 0.5, 0.0, 0.0);
+  gtk_container_add (GTK_CONTAINER (button), align);
+
+  hbox = gtk_hbox_new (FALSE, 2);
+  gtk_container_add (GTK_CONTAINER (align), hbox);
+
+  image = gtk_image_new_from_stock (stock_id, GTK_ICON_SIZE_BUTTON);
+  gtk_box_pack_start (GTK_BOX (hbox), image, FALSE, FALSE, 0);
+
+  label = gtk_label_new_with_mnemonic (mnemonic);
+  gtk_label_set_mnemonic_widget (GTK_LABEL (label), GTK_WIDGET (button));
+  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+
+  gtk_widget_show_all (align);
+}
+
 static void
 gucharmap_search_dialog_init (GucharmapSearchDialog *search_dialog)
 {
@@ -513,8 +536,19 @@ gucharmap_search_dialog_init (GucharmapSearchDialog *search_dialog)
 
   /* add buttons */
   gtk_dialog_add_button (GTK_DIALOG (search_dialog), GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
-  priv->prev_button = gtk_dialog_add_button (GTK_DIALOG (search_dialog), _("_Previous"), GUCHARMAP_RESPONSE_PREVIOUS);
-  priv->next_button = gtk_dialog_add_button (GTK_DIALOG (search_dialog), _("_Next"), GUCHARMAP_RESPONSE_NEXT);
+
+  priv->prev_button = gtk_button_new ();
+  GTK_WIDGET_SET_FLAGS (priv->prev_button, GTK_CAN_DEFAULT);
+  set_button_stock_image_and_label (GTK_BUTTON (priv->prev_button), GTK_STOCK_GO_BACK, _("_Previous"));
+  gtk_dialog_add_action_widget (GTK_DIALOG (search_dialog), priv->prev_button, GUCHARMAP_RESPONSE_PREVIOUS);
+  gtk_widget_show (priv->prev_button);
+
+  priv->next_button = gtk_button_new ();
+  GTK_WIDGET_SET_FLAGS (priv->next_button, GTK_CAN_DEFAULT);
+  gtk_widget_show (priv->next_button);
+  set_button_stock_image_and_label (GTK_BUTTON (priv->next_button), GTK_STOCK_GO_FORWARD, _("_Next"));
+  gtk_dialog_add_action_widget (GTK_DIALOG (search_dialog), priv->next_button, GUCHARMAP_RESPONSE_NEXT);
+
   gtk_dialog_set_default_response (GTK_DIALOG (search_dialog), GUCHARMAP_RESPONSE_NEXT);
 
   hbox = gtk_hbox_new (FALSE, 12);
