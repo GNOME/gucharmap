@@ -26,6 +26,7 @@ AM_INIT_AUTOMAKE(gucharmap, 0.3)
 AC_PROG_CC
 AC_PROG_LIBTOOL
 
+
 # checks for stuff
 GETTEXT_PACKAGE=gucharmap
 AC_SUBST(GETTEXT_PACKAGE)
@@ -33,6 +34,7 @@ AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE",
                    [Define the gettext package to be used])
 ALL_LINGUAS="am cs el eo es fr ko nl sv"
 AM_GLIB_GNU_GETTEXT
+
 
 # check for win32
 case "$host" in
@@ -48,7 +50,19 @@ fi
 AM_CONDITIONAL(OS_WIN32, test "x$os_win32" = "xyes")
 
 
+# if pango >= 1.2.1, UNICHAR_MAX = 0x10ffff
+AH_TEMPLATE([UNICHAR_MAX], [The last unicode character we support])
+PKG_CHECK_MODULES(PANGO, pango >= 1.2.1, full_unicode=yes, full_unicode=no)
+if test "x$full_unicode" = "xyes" ; then
+    AC_DEFINE(UNICHAR_MAX, 0x0010ffff)
+else
+    AC_DEFINE(UNICHAR_MAX, 0x0000ffff)
+fi
+
+
+# gtk is required
 PKG_CHECK_MODULES(GTK, gtk+-2.0 >= 2.0.0)
+
 
 AC_ARG_ENABLE(gnome,
               AC_HELP_STRING([--disable-gnome],
@@ -61,15 +75,13 @@ else
   have_gnome=no
 fi  
 
+
 # checks for funcs 
 AC_CHECK_FUNCS([bind_textdomain_codeset])
 
 
 AC_SUBST(GTK_CFLAGS)
 AC_SUBST(GTK_LIBS)
-
-GLIB_GENMARSHAL=`pkg-config --variable=glib_genmarshal glib-2.0`
-AC_SUBST(GLIB_GENMARSHAL)
 
 AC_SUBST(GNOME_CFLAGS)
 AC_SUBST(GNOME_LIBS)
@@ -79,6 +91,11 @@ if test "x$have_gnome" = "xyes" ; then
     AC_DEFINE(HAVE_GNOME)
 fi
 
+
+GLIB_GENMARSHAL=`pkg-config --variable=glib_genmarshal glib-2.0`
+AC_SUBST(GLIB_GENMARSHAL)
+
+
 AH_TEMPLATE([ENABLE_UNIHAN], [Define if you want CJK ideograph information])
 AC_ARG_ENABLE(unihan, 
               AC_HELP_STRING([--disable-unihan], 
@@ -86,6 +103,7 @@ AC_ARG_ENABLE(unihan,
 if test "x$enable_unihan" != "xno" ; then
     AC_DEFINE(ENABLE_UNIHAN)
 fi
+
 
 AC_OUTPUT([Makefile src/Makefile po/Makefile.in 
            pixmaps/Makefile gucharmap.nsi])

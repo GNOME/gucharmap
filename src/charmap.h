@@ -43,9 +43,10 @@ G_BEGIN_DECLS
 #define CHARMAP_MIN_ROWS 4
 #define CHARMAP_MIN_COLS 4
 
-/* largest legal unicode character */
-/* #define UNICHAR_MAX 0x0010ffff  XXX: gtk has problems */
-#define UNICHAR_MAX 0x0000ffff
+#ifndef UNICHAR_MAX
+# define UNICHAR_MAX 0x0000ffff
+#endif
+
 
 #define TEXT_TO_COPY_MAXLENGTH 4096
 

@@ -20,7 +20,7 @@
 AM_CFLAGS = $(GTK_CFLAGS) $(GNOME_CFLAGS) -Wall -ansi 
 
 localedir = $(datadir)/locale
-AM_CPPFLAGS = -DLOCALEDIR=\"$(localedir)\" \
+AM_CPPFLAGS = -DLOCALEDIR=\"$(localedir)\" -DGTK_DISABLE_DEPRECATED=1 \
               -DICON_PATH=\"$(datadir)/pixmaps/gucharmap.png\"
 
 libgucharmap_la_LIBADD = @GTK_LIBS@
