@@ -24,13 +24,16 @@
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 #include <stdlib.h>
-#include "charmap.h"
-#include "mini_fontsel.h"
-#include "unicode_info.h"
+#include <charmap.h>
+#include <mini_fontsel.h>
+#include <unicode_info.h>
 #if HAVE_GNOME
-# include "gnome.h"
+# include <gnome.h>
 #endif
-#include "gucharmap_intl.h"
+#if !HAVE_GNOME
+# include <popt.h>
+#endif
+#include <gucharmap_intl.h>
 
 #ifndef ICON_PATH
 # define ICON_PATH ""
@@ -797,70 +800,16 @@ make_menu (GtkWindow *window)
 }
 
 
-gint
-main (gint argc, gchar **argv)
+/* packs stuff in the window */
+void
+make_gui (GtkWidget *window)
 {
-  GtkWidget *window = NULL;
   GtkWidget *big_vbox;
-  GtkWidget *hbox;
   GtkWidget *spacer;
-  GtkTooltips *tooltips;
-  gchar *orig_font, *new_font;
-  PangoFontDescription *font_desc;
-  GError *error = NULL;
-
-#if HAVE_GNOME
-  gnome_program_init ("gucharmap", VERSION, LIBGNOMEUI_MODULE, argc, argv,
-                      NULL, NULL, NULL);
-#else
-  gtk_init (&argc, &argv);
-#endif
-
-  tooltips = gtk_tooltips_new ();
-
-  window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-  gtk_window_set_title (GTK_WINDOW (window), _("Unicode Character Map"));
-  gtk_window_set_default_size (GTK_WINDOW (window), 
-                               gdk_screen_width () * 1/2,
-                               gdk_screen_height () * 9/16);
-
-#ifdef G_PLATFORM_WIN32
-  {
-    gchar *package_root, *icon_path;
-
-    package_root = g_win32_get_package_installation_directory (NULL, NULL);
-    icon_path = g_build_filename (package_root, "share", 
-                                  "pixmaps", "gucharmap.png");
-    icon = gdk_pixbuf_new_from_file (icon_path, &error);
-    g_free (package_root);
-    g_free (icon_path);
-  }
-#else  /* #ifdef G_PLATFORM_WIN32 */
-  icon = gdk_pixbuf_new_from_file (ICON_PATH, &error);
-#endif /* #ifdef G_PLATFORM_WIN32 */
-
-  if (error != NULL)
-    {
-      g_assert (icon == NULL);
-      g_warning ("Error loading icon: %s\n", error->message);
-      g_error_free (error);
-    }
-  else
-    gtk_window_set_icon (GTK_WINDOW (window), icon);
-
-  g_signal_connect (G_OBJECT (window), "destroy",
-                    G_CALLBACK (gtk_main_quit), NULL);
+  GtkWidget *hbox;
 
   big_vbox = gtk_vbox_new (FALSE, 0);
   gtk_container_add (GTK_CONTAINER (window), big_vbox);
-
-  /* which captions to show by default, when enabled */
-  caption_show[CHARMAP_CAPTION_CATEGORY] = TRUE;
-  caption_show[CHARMAP_CAPTION_DECOMPOSITION] = TRUE;
-#if ENABLE_UNIHAN
-  caption_show[CHARMAP_CAPTION_KDEFINITION] = TRUE;
-  caption_show[CHARMAP_CAPTION_KMANDARIN] = TRUE;
-#endif
 
   gtk_box_pack_start (GTK_BOX (big_vbox), make_menu (GTK_WINDOW (window)), 
 	              FALSE, FALSE, 0);
@@ -898,23 +847,132 @@ main (gint argc, gchar **argv)
   g_signal_connect (charmap, "status-message",
                     G_CALLBACK (status_message), NULL);
 
-  /* make the starting font 50% bigger than the default font */
-  orig_font = mini_font_selection_get_font_name (MINI_FONT_SELECTION (fontsel));
-  font_desc = pango_font_description_from_string (orig_font);
-  pango_font_description_set_size (
-          font_desc, pango_font_description_get_size (font_desc) * 3/2);
-  new_font = pango_font_description_to_string (font_desc);
-  /* this sends the changed signal: */
-  mini_font_selection_set_font_name (MINI_FONT_SELECTION (fontsel), new_font);
-  pango_font_description_free (font_desc);
-  g_free (orig_font);
-  g_free (new_font);
-
   gtk_widget_show (big_vbox);
-  gtk_widget_show (window);
 
   /* XXX: slightly evil cuz we're not supposed to know about chartable */
   gtk_widget_grab_focus (CHARMAP (charmap)->chartable);
+
+}
+
+
+void
+load_icon (GtkWidget *window)
+{
+  GError *error = NULL;
+
+#ifdef G_PLATFORM_WIN32
+
+  gchar *package_root, *icon_path;
+
+  package_root = g_win32_get_package_installation_directory (NULL, NULL);
+  icon_path = g_build_filename (package_root, "share", 
+          "pixmaps", "gucharmap.png");
+  icon = gdk_pixbuf_new_from_file (icon_path, &error);
+  g_free (package_root);
+  g_free (icon_path);
+
+#else  /* #ifdef G_PLATFORM_WIN32 */
+
+  icon = gdk_pixbuf_new_from_file (ICON_PATH, &error);
+
+#endif /* #ifdef G_PLATFORM_WIN32 */
+
+  if (error != NULL)
+    {
+      g_assert (icon == NULL);
+      g_warning ("Error loading icon: %s\n", error->message);
+      g_error_free (error);
+    }
+  else
+    gtk_window_set_icon (GTK_WINDOW (window), icon);
+}
+
+
+gint
+main (gint argc, gchar **argv)
+{
+  GtkWidget *window = NULL;
+  GtkTooltips *tooltips;
+  gchar *orig_font = NULL, *new_font = NULL;
+  PangoFontDescription *font_desc = NULL;
+#if !HAVE_GNOME
+  poptContext popt_context;
+  gint rc;
+#endif
+
+  const struct poptOption options [] =
+    {
+      { "font", '\0', POPT_ARG_STRING, &new_font, 0, 
+        _("Font to start with; ex: 'Serif 27'"), NULL },
+#if !HAVE_GNOME
+      POPT_AUTOHELP  /* gnome does this automatically */
+#endif
+      { NULL, '\0', 0, NULL, 0 }
+    };
+
+#if HAVE_GNOME
+  gnome_program_init ("gucharmap", VERSION, LIBGNOMEUI_MODULE, argc, argv,
+                      GNOME_PARAM_POPT_TABLE, options, NULL);
+#else
+  gtk_init (&argc, &argv);
+
+  popt_context = poptGetContext ("gucharmap", argc, argv, options, 0);
+  rc = poptGetNextOpt (popt_context);
+
+  if (rc != -1)
+    {
+       g_printerr ("%s: %s\n", 
+                   poptBadOption (popt_context, POPT_BADOPTION_NOALIAS),
+                   poptStrerror (rc));
+
+       exit (1);
+    }
+#endif
+
+  tooltips = gtk_tooltips_new ();
+
+  window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+  gtk_window_set_title (GTK_WINDOW (window), _("Unicode Character Map"));
+  gtk_window_set_default_size (GTK_WINDOW (window), 
+                               gdk_screen_width () * 1/2,
+                               gdk_screen_height () * 9/16);
+  g_signal_connect (G_OBJECT (window), "destroy",
+                    G_CALLBACK (gtk_main_quit), NULL);
+
+  load_icon (window);
+
+  /* which captions to show by default, when enabled */
+  caption_show[CHARMAP_CAPTION_CATEGORY] = TRUE;
+  caption_show[CHARMAP_CAPTION_DECOMPOSITION] = TRUE;
+#if ENABLE_UNIHAN
+  caption_show[CHARMAP_CAPTION_KDEFINITION] = TRUE;
+  caption_show[CHARMAP_CAPTION_KMANDARIN] = TRUE;
+#endif
+
+  make_gui (window);
+
+  /* make the starting font 50% bigger than the default font */
+  if (new_font == NULL)
+    {
+      orig_font = mini_font_selection_get_font_name (
+              MINI_FONT_SELECTION (fontsel));
+      font_desc = pango_font_description_from_string (orig_font);
+      pango_font_description_set_size (
+              font_desc, pango_font_description_get_size (font_desc) * 3/2);
+      new_font = pango_font_description_to_string (font_desc);
+    }
+  /* this sends the changed signal: */
+  mini_font_selection_set_font_name (MINI_FONT_SELECTION (fontsel), new_font);
+
+  if (font_desc)
+    pango_font_description_free (font_desc);
+
+  if (orig_font)
+    g_free (orig_font);
+
+  g_free (new_font);
+
+  gtk_widget_show (window);
 
   gtk_main ();
 

@@ -49,14 +49,14 @@ gucharmap_SOURCES = main.c
 
 if OS_WIN32
 
-gucharmap_LDADD = gucharmaprc.o libgucharmap.la  @GTK_LIBS@ @GNOME_LIBS@
+gucharmap_LDADD = gucharmaprc.o libgucharmap.la @GTK_LIBS@ @POPT_LIBS@
 
 gucharmaprc.o: gucharmaprc.rc
 	windres -i $< -o $@
 
 else
 
-gucharmap_LDADD = libgucharmap.la  @GTK_LIBS@ @GNOME_LIBS@
+gucharmap_LDADD = libgucharmap.la @GTK_LIBS@ @GNOME_LIBS@ @POPT_LIBS@
 
 endif
 

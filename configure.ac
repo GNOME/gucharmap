@@ -68,12 +68,25 @@ AC_ARG_ENABLE(gnome,
               AC_HELP_STRING([--disable-gnome],
 	                     [don't build with GNOME support]))
 if test "x$enable_gnome" != "xno"; then
-  PKG_CHECK_MODULES(GNOME, libgnomeui-2.0 >= 2.0.0 libgnome-2.0 >= 2.0.0, 
+    PKG_CHECK_MODULES(GNOME, libgnomeui-2.0 >= 2.0.0 libgnome-2.0 >= 2.0.0, 
                     have_gnome=yes, have_gnome=no)
 else
-  AC_MSG_NOTICE([GNOME support disabled with --disable-gnome])
-  have_gnome=no
+    AC_MSG_NOTICE([GNOME support disabled with --disable-gnome])
+    have_gnome=no
 fi  
+
+if test "x$have_gnome" = "xno" 
+then
+    libs_bak="$LIBS"
+    LIBS=""
+
+    AC_CHECK_LIB(popt, poptGetNextOpt,, AC_MSG_ERROR([popt is required]))
+
+    POPT_LIBS="$LIBS"
+    LIBS=libs_bak
+    
+    AC_SUBST(POPT_LIBS)
+fi
 
 
 # checks for funcs 
