@@ -63,6 +63,11 @@ tabulus_init (Tabulus *tabulus)
   tabulus->rows = 0;
   tabulus->cols = 0;
 
+  tabulus->table = gtk_table_new (1, 1, TRUE);
+  gtk_table_set_row_spacings (GTK_TABLE (tabulus->table), 2);
+  gtk_table_set_col_spacings (GTK_TABLE (tabulus->table), 2);
+  gtk_container_add (GTK_CONTAINER (tabulus), tabulus->table);
+
   tabulus_resize (tabulus, 1, 1);
 }
 
@@ -164,11 +169,12 @@ tabulus_resize (Tabulus *tabulus,
                 guint16 cols)
 {
   guint16 old_rows, old_cols;
-  guint16 row;
+  guint16 row, col;
 
   debug ("tabulus_resize\n");
 
   g_return_if_fail (IS_TABULUS (tabulus));
+  g_return_if_fail (tabulus->table != NULL);
   g_return_if_fail (rows > 0);
   g_return_if_fail (cols > 0);
 
@@ -200,4 +206,13 @@ tabulus_resize (Tabulus *tabulus,
   for (row = 0;  row < rows;  row++)
     tabulus->cells[row] = resize_row (tabulus->cells[row], 
                                       row, old_cols, cols);
+
+  gtk_table_resize (GTK_TABLE (tabulus->table), rows, cols);
+
+  for (row = old_rows;  row < rows;  row++)
+    for (col = old_cols;  col < cols;  col++)
+      gtk_table_attach_defaults (GTK_TABLE (tabulus->table),
+                                 tabulus->cells[row][col]->event_box,
+                                 col, col+1, row, row+1);
 }
+

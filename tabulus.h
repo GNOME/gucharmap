@@ -53,8 +53,11 @@ struct _Tabulus
 {
   GtkBin parent;
 
+  GtkWidget *table;
+
   Cell ***cells;
   Cell *selected;
+
   guint16 rows, cols;
 };
 

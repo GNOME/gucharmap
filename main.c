@@ -23,14 +23,6 @@
 
 #if 0
 static GtkWidget *charmap;
-
-void
-fontsel_changed_cb (GtkTreeSelection *selection, gpointer data)
-{
-  GtkWidget *fontsel = GTK_WIDGET (data);
-  gchar *newfont = gtk_font_selection_get_font_name (GTK_FONT_SELECTION (fontsel));
-  charmap_set_font (CHARMAP (charmap), newfont);
-}
 #endif
 
 
@@ -58,13 +50,8 @@ main (int argc, char **argv)
   tabulus = tabulus_new (8, 12);
   gtk_box_pack_start (GTK_BOX (vbox), tabulus, TRUE, TRUE, 0);
 
-#if 0
   fontsel = gtk_font_selection_new ();
-  g_signal_connect (gtk_tree_view_get_selection (GTK_TREE_VIEW (GTK_FONT_SELECTION (fontsel)->size_list)), 
-          "changed", G_CALLBACK (fontsel_changed_cb), fontsel);
-
   gtk_box_pack_start (GTK_BOX (vbox), fontsel, TRUE, TRUE, 0);
-#endif
 
   gtk_widget_show_all (window);
 
