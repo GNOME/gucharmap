@@ -17,7 +17,7 @@
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  */
 
-/* reads Unihan.txt from stdin, prints unicode_unihan.c on stdout */
+/* reads Unihan.txt from stdin, prints unicode_unihan.cI on stdout */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -202,13 +202,6 @@ main ()
   printf ("/* THIS IS A GENERATED FILE. */\n");
   printf ("/* http://www.unicode.org/Public/UNIDATA/Unihan.zip */\n");
   printf ("\n");
-  printf ("\n");
-  printf ("#if HAVE_CONFIG_H\n");
-  printf ("# include <config.h>\n");
-  printf ("#endif\n");
-  printf ("#include <unicode_info.h>\n");
-  printf ("\n");
-  printf ("\n");
   printf ("#if ENABLE_UNIHAN\n");
   printf ("\n");
   printf ("const Unihan unihan[] =\n");
@@ -217,7 +210,6 @@ main ()
   process_unihan_txt (stdin);
 
   printf ("};\n");
-  printf ("\n");
   printf ("\n");
   printf ("#endif /* #if ENABLE_UNIHAN */\n");
   printf ("\n");

@@ -37,16 +37,19 @@ libgucharmap_la_SOURCES = gucharmap_marshal.c gucharmap_marshal.h \
 
 # A source file listed in BUILT_SOURCES is created before the other
 # all targets are made.
-BUILT_SOURCES = unicode_data.cI unicode_unihan.cI
+BUILT_SOURCES = unicode_data.cI unicode_unihan.cI unicode_blocks.cI
 # Putting these in maintainer-clean because users generally will not
 # want to delete these, since the tarball comes with them.
-MAINTAINERCLEANFILES = unicode_data.cI unicode_unihan.cI
+MAINTAINERCLEANFILES = unicode_data.cI unicode_unihan.cI unicode_blocks.cI
 
 unicode_data.cI:
 	./generate_unicode_stuff.sh unicode_data.cI
 
 unicode_unihan.cI: generate_unihan
 	./generate_unicode_stuff.sh unicode_unihan.cI
+
+unicode_blocks.cI:
+	./generate_unicode_stuff.sh unicode_blocks.cI
 
 
 noinst_PROGRAMS = generate_unihan

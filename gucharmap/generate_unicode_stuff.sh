@@ -23,7 +23,9 @@
 
 #
 # This script gets files from unicode.org and generates
-# unicode_data.cI and unicode_unihan.cI
+# unicode_data.cI 
+# unicode_unihan.cI
+# unicode_blocks.cI
 #
 
 UNZIP=`which unzip`
@@ -37,6 +39,8 @@ GENERATE_UNIHAN="./generate_unihan"
 
 unidir="$PWD/unicode.org"
 srcdir="$PWD"
+
+PATH=""
 
 
 function download()
@@ -70,6 +74,34 @@ function write_unicode_data()
 
     $AWK -F';' '{print "  { 0x" $1 ", \"" $2 "\" },"}' 
 
+    $ECHO "};"
+}
+
+
+function write_blocks()
+{
+    $ECHO "/* unicode_blocks.cI */"
+    $ECHO "/* THIS IS A GENERATED FILE. */"
+    $ECHO "/* http://www.unicode.org/Public/UNIDATA/Blocks.txt */"
+    $ECHO "" 
+    $ECHO "const UnicodeBlock unicode_blocks[] ="
+    $ECHO "{"
+
+    while read line
+    do
+        case $line in
+            "#"*) continue ;;
+        esac 
+
+        bounds=`$ECHO $line | $AWK -F'; ' '{ print $1 }'`
+        name=`$ECHO $line | $AWK -F'; ' '{ print $2 }'`
+        start=`$ECHO $bounds | $AWK -F'\.\.' '{ print $1 }'`
+        end=`$ECHO $bounds | $AWK -F'\.\.' '{ print $2 }'`
+
+        $ECHO "  { 0x$start, 0x$end, \"$name\" },"
+    done
+
+    $ECHO "{ (gunichar)-1, (gunichar)-1, NULL }"
     $ECHO "};"
 }
 
@@ -111,9 +143,9 @@ function do_unicode_data()
     out=$srcdir/unicode_data.cI
     backup $out
 
-    $ECHO -n "writing $out..."
-    write_unicode_data < $unidir/UnicodeData.txt > $out
-    $ECHO "done"
+    $ECHO -n "generating $out..."
+    write_unicode_data < $f > $out
+    $ECHO " done"
 }
 
 
@@ -138,9 +170,29 @@ function do_unihan()
     out=$srcdir/unicode_unihan.cI
     backup $out
 
-    $ECHO -n "writing $out... this may take a minute..."
+    $ECHO -n "generating $out... this may take a minute..."
     $UNZIP -c $unidir/Unihan.zip | $GENERATE_UNIHAN > $out
-    $ECHO "done"
+    $ECHO " done"
+}
+
+
+function do_blocks()
+{
+    make_download_dir
+
+    f="$unidir/Blocks.txt"
+    if [ ! -e $f ] ; then
+        download "Blocks.txt"
+    else
+        $ECHO "already have $f, not downloading"
+    fi
+
+    out=$srcdir/unicode_blocks.cI
+    backup $out
+
+    $ECHO -n "generating $out..."
+    write_blocks < $f > $out
+    $ECHO " done"
 }
 
 # end of functions
@@ -151,9 +203,12 @@ function do_unihan()
 case "x$1" in
     "xunicode_data.cI") do_unicode_data ;;
     "xunicode_unihan.cI") do_unihan ;;
+    "xunicode_blocks.cI") do_blocks ;;
     *) 
         echo "usage: $0 FILE_TO_GENERATE"
-        echo "       where FILE_TO_GENERATE is unicode_data.cI or unicode_unihan.cI"
+        echo "       where FILE_TO_GENERATE is unicode_data.cI" 
+        echo "                              or unicode_unihan.cI"
+        echo "                              or unicode_blocks.cI"
         exit 1
 esac
 
