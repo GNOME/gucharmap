@@ -138,6 +138,8 @@ struct _Charmap
   /* the caption */
   GtkTreeRowReference *caption_rows[CHARMAP_CAPTION_COUNT];
   GtkTreeStore *caption_model;
+
+  gboolean zoom_mode_enabled;
 };
 
 

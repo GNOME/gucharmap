@@ -847,8 +847,6 @@ destroy_zoom_window (Charmap *charmap)
 
       gdk_window_set_cursor (charmap->chartable->window, NULL);
       gtk_object_destroy (GTK_OBJECT (zoom_window));
-
-      status_message (charmap, _("Zoom mode disabled."));
     }
 }
 
@@ -1093,6 +1091,7 @@ expose_event (GtkWidget *widget,
 
       draw_chartable_from_scratch (charmap);
 
+      /* the zoom window may need to be redrawn and repositioned */
       if (charmap->zoom_window)
         {
           gint x, y;
@@ -1594,8 +1593,6 @@ button_press_event (GtkWidget *widget,
       /* must do this after gtk_widget_show */
       set_window_background (charmap->zoom_window, charmap->zoom_pixbuf);
       gdk_window_clear (charmap->zoom_window->window);
-
-      status_message (charmap, _("Zoom mode enabled."));
     }
 
   /* need to return false so it gets drag events */
@@ -1608,7 +1605,7 @@ button_release_event (GtkWidget *widget,
                       GdkEventButton *event, 
                       Charmap *charmap)
 {
-  if (event->button == 3)
+  if (!charmap->zoom_mode_enabled && event->button == 3)
     destroy_zoom_window (charmap);
 
   return FALSE;
@@ -2182,6 +2179,7 @@ charmap_init (Charmap *charmap)
 
   charmap->zoom_window = NULL;
   charmap->zoom_pixbuf = NULL;
+  charmap->zoom_mode_enabled = FALSE;
 
   gtk_box_set_spacing (GTK_BOX (charmap), 6);
   gtk_container_set_border_width (GTK_CONTAINER (charmap), 6);
@@ -2458,6 +2456,8 @@ charmap_zoom_enable (Charmap *charmap)
 {
   gint x, y;
 
+  charmap->zoom_mode_enabled = TRUE;
+
   make_zoom_window (charmap);
   update_zoom_window (charmap);
 
@@ -2469,13 +2469,12 @@ charmap_zoom_enable (Charmap *charmap)
   /* must do this after gtk_widget_show */
   set_window_background (charmap->zoom_window, charmap->zoom_pixbuf);
   gdk_window_clear (charmap->zoom_window->window);
-
-  status_message (charmap, _("Zoom mode enabled."));
 }
 
 
 void
 charmap_zoom_disable (Charmap *charmap)
 {
+  charmap->zoom_mode_enabled = FALSE;
   destroy_zoom_window (charmap);
 }
