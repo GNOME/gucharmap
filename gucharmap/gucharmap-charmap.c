@@ -482,7 +482,7 @@ set_details (GucharmapCharmap *charmap,
   csp = gucharmap_get_unicode_kJapaneseKun (uc);
   if (csp)
     insert_vanilla_detail (charmap, buffer, &iter,
-                           _("Japanese Kun Pronunciation"), csp);
+                           _("Japanese Kun Pronunciation:"), csp);
 
   csp = gucharmap_get_unicode_kTang (uc);
   if (csp)
