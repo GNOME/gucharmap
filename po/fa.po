@@ -2,6 +2,7 @@
 # Copyright (C) 2003, 2004 Sharif FarsiWeb, Inc.
 # Roozbeh Pournader <roozbeh@farsiweb.info>, 2003.
 # Meelad Zakaria <meelad@bamdad.org>, 2004.
+# Behdad Esfahbod <behdad@gnu.org>, 2005.
 #
 msgid ""
 msgstr ""
@@ -26,11 +27,11 @@ msgstr "درج نویسه‌های خاص در نوشتار"
 
 #: gucharmap/gucharmap-charmap.c:250
 msgid "Canonical decomposition:"
-msgstr "تجزیه‌ی مشروع:"
+msgstr "تجزیه‌ی معیار:"
 
 #: gucharmap/gucharmap-charmap.c:290 gucharmap/gucharmap-table.c:294
 msgid "[not a printable character]"
-msgstr "[این نویسه قابل چاپ نیست]"
+msgstr "[نویسه‌ی غیر قابل چاپ]"
 
 #: gucharmap/gucharmap-charmap.c:304
 msgid "General Character Properties"
@@ -43,7 +44,7 @@ msgstr "دسته‌ی یونی‌کد:"
 
 #: gucharmap/gucharmap-charmap.c:313
 msgid "Various Useful Representations"
-msgstr ""
+msgstr "نمایش‌های پرکاربرد گوناگون"
 
 #: gucharmap/gucharmap-charmap.c:322
 msgid "UTF-8:"
@@ -51,15 +52,15 @@ msgstr "UTF-8:"
 
 #: gucharmap/gucharmap-charmap.c:330
 msgid "Octal escaped UTF-8:"
-msgstr ""
+msgstr "UTF-8 در مبنای هشت:"
 
 #: gucharmap/gucharmap-charmap.c:336
 msgid "Decimal entity reference:"
-msgstr "مرجع دهدهی نماد:"
+msgstr "ارجاع دهدهی نماد:"
 
 #: gucharmap/gucharmap-charmap.c:342
 msgid "Annotations and Cross References"
-msgstr "تفاسیر و ارجاعات"
+msgstr "توضیحات و ارجاعات"
 
 #: gucharmap/gucharmap-charmap.c:349
 msgid "Alias names:"
@@ -67,7 +68,7 @@ msgstr "نام‌های مستعار:"
 
 #: gucharmap/gucharmap-charmap.c:358
 msgid "Notes:"
-msgstr "یادداشت‌ها:"
+msgstr "نکات:"
 
 #: gucharmap/gucharmap-charmap.c:367
 msgid "See also:"
@@ -111,11 +112,11 @@ msgstr "تلفظ کره‌ای:"
 
 #: gucharmap/gucharmap-charmap.c:731
 msgid "Characte_r Table"
-msgstr "نقشه‌ی _نویسه‌ها"
+msgstr "جدول _نویسه‌ها"
 
 #: gucharmap/gucharmap-charmap.c:734
 msgid "Character _Details"
-msgstr "_جزئیات نویسه‌ها"
+msgstr "_جزئیات نویسه"
 
 #: gucharmap/gucharmap-mini-fontsel.c:203
 msgid "Font"
@@ -154,15 +155,15 @@ msgstr "جدول نویسه‌ها"
 
 #: gucharmap/gucharmap-unicode-info.c:94
 msgid "<Non Private Use High Surrogate>"
-msgstr ""
+msgstr "<جایگزین بالای استفاده‌ی غیر خصوصی>"
 
 #: gucharmap/gucharmap-unicode-info.c:96
 msgid "<Private Use High Surrogate>"
-msgstr ""
+msgstr "<جایگزین بالای استفاده‌ی خصوصی>"
 
 #: gucharmap/gucharmap-unicode-info.c:98
 msgid "<Low Surrogate>"
-msgstr ""
+msgstr "<جایگزین پایین>"
 
 #: gucharmap/gucharmap-unicode-info.c:100
 msgid "<Private Use>"
@@ -170,15 +171,15 @@ msgstr "<استفاده‌ی خصوصی>"
 
 #: gucharmap/gucharmap-unicode-info.c:102
 msgid "<Plane 15 Private Use>"
-msgstr ""
+msgstr "<استفاده‌ی خصوصی صفحه‌ی ۱۵>"
 
 #: gucharmap/gucharmap-unicode-info.c:104
 msgid "<Plane 16 Private Use>"
-msgstr ""
+msgstr "<استفاده‌ی خصوصی صفحه‌ی ۱۶>"
 
 #: gucharmap/gucharmap-unicode-info.c:109
 msgid "<not assigned>"
-msgstr "<تخصیص نیافته>"
+msgstr "<تخصیص‌نیافته>"
 
 #: gucharmap/gucharmap-unicode-info.c:120
 msgid "Other, Control"
@@ -186,7 +187,7 @@ msgstr "غیره، کنترلی"
 
 #: gucharmap/gucharmap-unicode-info.c:121
 msgid "Other, Format"
-msgstr "غیره، قالب"
+msgstr "غیره، قالب‌بندی"
 
 #: gucharmap/gucharmap-unicode-info.c:122
 msgid "Other, Not Assigned"
@@ -198,7 +199,7 @@ msgstr "غیره، استفاده‌ی خصوصی"
 
 #: gucharmap/gucharmap-unicode-info.c:124
 msgid "Other, Surrogate"
-msgstr ""
+msgstr "غیره، جایگزین"
 
 #: gucharmap/gucharmap-unicode-info.c:125
 msgid "Letter, Lowercase"
@@ -206,7 +207,7 @@ msgstr "حرف، کوچک"
 
 #: gucharmap/gucharmap-unicode-info.c:126
 msgid "Letter, Modifier"
-msgstr ""
+msgstr "حرف، تغییردهنده"
 
 #: gucharmap/gucharmap-unicode-info.c:127
 msgid "Letter, Other"
@@ -214,7 +215,7 @@ msgstr "حرف، غیره"
 
 #: gucharmap/gucharmap-unicode-info.c:128
 msgid "Letter, Titlecase"
-msgstr ""
+msgstr "حرف، تیتر"
 
 #: gucharmap/gucharmap-unicode-info.c:129
 msgid "Letter, Uppercase"
@@ -222,15 +223,15 @@ msgstr "حرف، بزرگ"
 
 #: gucharmap/gucharmap-unicode-info.c:130
 msgid "Mark, Spacing Combining"
-msgstr ""
+msgstr "نشانه، جاگیر سوارشونده"
 
 #: gucharmap/gucharmap-unicode-info.c:131
 msgid "Mark, Enclosing"
-msgstr ""
+msgstr "نشانه، دربرگیرنده"
 
 #: gucharmap/gucharmap-unicode-info.c:132
 msgid "Mark, Non-Spacing"
-msgstr ""
+msgstr "نشانه، غیر جاگیر"
 
 #: gucharmap/gucharmap-unicode-info.c:133
 msgid "Number, Decimal Digit"
@@ -246,31 +247,31 @@ msgstr "عدد، غیره"
 
 #: gucharmap/gucharmap-unicode-info.c:136
 msgid "Punctuation, Connector"
-msgstr ""
+msgstr "نقطه‌گذاری، اتصال"
 
 #: gucharmap/gucharmap-unicode-info.c:137
 msgid "Punctuation, Dash"
-msgstr ""
+msgstr "نقطه‌گذاری، تیره"
 
 #: gucharmap/gucharmap-unicode-info.c:138
 msgid "Punctuation, Close"
-msgstr ""
+msgstr "نقطه‌گذاری، بسته"
 
 #: gucharmap/gucharmap-unicode-info.c:139
 msgid "Punctuation, Final Quote"
-msgstr ""
+msgstr "نقطه‌گذاری، گیومه بسته"
 
 #: gucharmap/gucharmap-unicode-info.c:140
 msgid "Punctuation, Initial Quote"
-msgstr ""
+msgstr "نقطه‌گذاری، گیومه باز"
 
 #: gucharmap/gucharmap-unicode-info.c:141
 msgid "Punctuation, Other"
-msgstr ""
+msgstr "نقطه‌گذاری، غیره"
 
 #: gucharmap/gucharmap-unicode-info.c:142
 msgid "Punctuation, Open"
-msgstr ""
+msgstr "نقطه‌گذاری، باز"
 
 #: gucharmap/gucharmap-unicode-info.c:143
 msgid "Symbol, Currency"
@@ -278,7 +279,7 @@ msgstr "علامت، پول"
 
 #: gucharmap/gucharmap-unicode-info.c:144
 msgid "Symbol, Modifier"
-msgstr ""
+msgstr "علامت، تغییردهنده"
 
 #: gucharmap/gucharmap-unicode-info.c:145
 msgid "Symbol, Math"
@@ -290,15 +291,15 @@ msgstr "علامت، غیره"
 
 #: gucharmap/gucharmap-unicode-info.c:147
 msgid "Separator, Line"
-msgstr ""
+msgstr "جداکننده، خط"
 
 #: gucharmap/gucharmap-unicode-info.c:148
 msgid "Separator, Paragraph"
-msgstr ""
+msgstr "جداکننده، بند"
 
 #: gucharmap/gucharmap-unicode-info.c:149
 msgid "Separator, Space"
-msgstr ""
+msgstr "جداکننده، فاصله"
 
 #: gucharmap/gucharmap-window.c:189
 msgid "Searching..."
@@ -307,7 +308,8 @@ msgstr "در حال جستجو..."
 #: gucharmap/gucharmap-window.c:319
 msgid "translator_credits"
 msgstr "روزبه پورنادر <roozbeh@sharif.edu>\n"
-"میلاد زکریا <meelad@bamdad.org>"
+"میلاد زکریا <meelad@bamdad.org>\n"
+"بهداد اسفهبد <behdad@gnu.org>"
 
 #: gucharmap/gucharmap-window.c:420 gucharmap/gucharmap-window.c:602
 msgid "Next Script"
@@ -339,20 +341,19 @@ msgstr "_جستجو"
 
 #: gucharmap/gucharmap-window.c:475
 msgid "_Go"
-msgstr "_رفتن"
+msgstr "_برو"
 
 #: gucharmap/gucharmap-window.c:494
 msgid "By _Script"
-msgstr ""
+msgstr "بر مبنای خط"
 
 #: gucharmap/gucharmap-window.c:500
-#, fuzzy
 msgid "By _Unicode Block"
-msgstr "فهرست بلوک‌های یونی‌کد"
+msgstr "بر مبنای بلوک‌ یونی‌کد"
 
 #: gucharmap/gucharmap-window.c:508
 msgid "Snap Columns to Power of Two"
-msgstr ""
+msgstr "تعداد ستون‌ها توانی از دو"
 
 #. ctrl-+
 #: gucharmap/gucharmap-window.c:516
@@ -404,7 +405,7 @@ msgstr "نسخه‌برداری به تخته‌برش."
 
 #: gucharmap/main.c:39
 msgid "Font to start with; ex: 'Serif 27'"
-msgstr "قلم آغاز؛ مثلاً 'Serif 27'"
+msgstr "قلم شروع؛ مثلاً 'Serif 27'"
 
 #: gucharmap/unicode-blocks.h:18
 msgid "Basic Latin"
@@ -428,11 +429,11 @@ msgstr "گسترش‌های IPA"
 
 #: gucharmap/unicode-blocks.h:23
 msgid "Spacing Modifier Letters"
-msgstr ""
+msgstr "حروف تغییردهنده‌ی جاگیر"
 
 #: gucharmap/unicode-blocks.h:24
 msgid "Combining Diacritical Marks"
-msgstr ""
+msgstr "نشانه‌های سوارشونده‌ی اِعراب"
 
 #: gucharmap/unicode-blocks.h:25
 msgid "Greek and Coptic"
@@ -444,7 +445,7 @@ msgstr "سیریلی"
 
 #: gucharmap/unicode-blocks.h:27
 msgid "Cyrillic Supplementary"
-msgstr ""
+msgstr "اضافات سیریلی"
 
 #: gucharmap/unicode-blocks.h:28 gucharmap/unicode-scripts.h:13
 msgid "Armenian"
@@ -600,7 +601,7 @@ msgstr "یونانی گسترش‌یافته"
 
 #: gucharmap/unicode-blocks.h:66
 msgid "General Punctuation"
-msgstr ""
+msgstr "نقطه‌گذاری عمومی"
 
 #: gucharmap/unicode-blocks.h:67
 msgid "Superscripts and Subscripts"
@@ -648,7 +649,7 @@ msgstr ""
 
 #: gucharmap/unicode-blocks.h:78
 msgid "Box Drawing"
-msgstr ""
+msgstr "جعبه‌کِشی"
 
 #: gucharmap/unicode-blocks.h:79
 msgid "Block Elements"
@@ -672,7 +673,7 @@ msgstr "علائم ریاضی متفرقه - الف"
 
 #: gucharmap/unicode-blocks.h:84
 msgid "Supplemental Arrows-A"
-msgstr ""
+msgstr "پیکان‌های تکمیلی - الف"
 
 #: gucharmap/unicode-blocks.h:85
 msgid "Braille Patterns"
@@ -772,15 +773,15 @@ msgstr "سیلاب‌های هانگول"
 
 #: gucharmap/unicode-blocks.h:109
 msgid "High Surrogates"
-msgstr ""
+msgstr "جایگزین‌های بالا"
 
 #: gucharmap/unicode-blocks.h:110
 msgid "High Private Use Surrogates"
-msgstr ""
+msgstr "جایگزین‌های بالای استفاده‌ی خصوصی"
 
 #: gucharmap/unicode-blocks.h:111
 msgid "Low Surrogates"
-msgstr ""
+msgstr "جایگزین‌های پایین"
 
 #: gucharmap/unicode-blocks.h:112
 msgid "Private Use Area"
@@ -900,11 +901,11 @@ msgstr ""
 
 #: gucharmap/unicode-blocks.h:141
 msgid "Supplementary Private Use Area-A"
-msgstr ""
+msgstr "محوطه‌ی استفاده‌ی خصوصی اضافی - الف"
 
 #: gucharmap/unicode-blocks.h:142
 msgid "Supplementary Private Use Area-B"
-msgstr ""
+msgstr "محوطه‌ی استفاده‌ی خصوصی اضافی - ب"
 
 #: gucharmap/unicode-scripts.h:16
 msgid "Braille"
@@ -912,7 +913,7 @@ msgstr "بریل"
 
 #: gucharmap/unicode-scripts.h:18
 msgid "Canadian Aboriginal"
-msgstr ""
+msgstr "بومی کانادایی"
 
 #: gucharmap/unicode-scripts.h:21
 msgid "Cypriot"
@@ -952,7 +953,7 @@ msgstr "همه"
 
 #: gucharmap/gucharmap-block-chapters.c:79
 msgid "Unicode Block"
-msgstr "بلوک یونی‌کدی"
+msgstr "بلوک یونی‌کد"
 
 #: gucharmap/gucharmap-script-chapters.c:76
 msgid "Script"
@@ -965,7 +966,7 @@ msgstr "اطلاعات"
 #. follow hig guidelines
 #: gucharmap/gucharmap-search-dialog.c:592
 msgid "Find"
-msgstr "یافتن"
+msgstr "پیدا کن"
 
 #: gucharmap/gucharmap-search-dialog.c:606
 msgid "_Previous"
