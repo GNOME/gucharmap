@@ -26,6 +26,12 @@
 
 enum
 {
+  MIN_FONT_SIZE = 5,
+  MAX_FONT_SIZE = 500
+};
+
+enum
+{
   CHANGED,
   NUM_SIGNALS
 };
@@ -230,10 +236,14 @@ style_changed (GtkWidget *widget, MiniFontSelection *fontsel)
 }
 
 
+/* size is in points */
 static void
 set_size (MiniFontSelection *fontsel, gint size)
 {
-  pango_font_description_set_size (fontsel->font_desc, PANGO_SCALE * size);
+  g_printerr ("set_size: %d\n", size);
+  pango_font_description_set_size (
+	  fontsel->font_desc, 
+	  PANGO_SCALE * CLAMP (size, MIN_FONT_SIZE, MAX_FONT_SIZE));
   g_signal_emit (fontsel, mini_font_selection_signals[CHANGED], 0);
 }
 
@@ -272,7 +282,8 @@ mini_font_selection_init (MiniFontSelection *fontsel)
   fontsel->family = gtk_combo_new ();
   fontsel->style = gtk_combo_new ();
 
-  fontsel->size_adj = gtk_adjustment_new (14, 5, 500, 1, 9, 0);
+  fontsel->size_adj = gtk_adjustment_new (14, MIN_FONT_SIZE, MAX_FONT_SIZE, 
+	                                  1, 9, 0);
   fontsel->size = gtk_spin_button_new (GTK_ADJUSTMENT (fontsel->size_adj),
                                        0, 0);
 
@@ -366,3 +377,21 @@ mini_font_selection_get_font_name (MiniFontSelection *fontsel)
 {
   return pango_font_description_to_string (fontsel->font_desc);
 }
+
+
+/* returns font size in points */
+gint
+mini_font_selection_get_font_size (MiniFontSelection *fontsel)
+{
+  return pango_font_description_get_size (fontsel->font_desc) / PANGO_SCALE;
+}
+
+
+/* size in points */
+void
+mini_font_selection_set_font_size (MiniFontSelection *fontsel, gint size)
+{
+  gtk_spin_button_set_value (GTK_SPIN_BUTTON (fontsel->size), size);
+  set_size (fontsel, size);
+}
+

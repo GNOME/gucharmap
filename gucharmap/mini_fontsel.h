@@ -26,9 +26,8 @@
 
 #include <gtk/gtk.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
+
+G_BEGIN_DECLS
 
 
 #define MINI_FONT_SELECTION(obj) \
@@ -78,10 +77,12 @@ GtkWidget * mini_font_selection_new ();
 gboolean mini_font_selection_set_font_name (MiniFontSelection *fontsel,
                                             const gchar *fontname);
 gchar * mini_font_selection_get_font_name (MiniFontSelection *fontsel);
+gint mini_font_selection_get_font_size (MiniFontSelection *fontsel);
+void mini_font_selection_set_font_size (MiniFontSelection *fontsel, gint size);
 
-#ifdef __cplusplus
-}
-#endif  /* #ifdef __cplusplus */
+
+G_END_DECLS
+
 
 #endif /* #ifndef MINI_FONTSEL_H */
 

@@ -39,6 +39,7 @@ static GtkWidget *search_entry;
 static GtkWidget *status;
 static GtkWidget *search_status;
 static GtkWidget *text_to_copy_status;
+static GtkWidget *fontsel;
 static GdkPixbuf *icon;
 
 typedef struct 
@@ -89,6 +90,26 @@ expand_collapse (GtkCheckMenuItem *mi, gpointer data)
     charmap_expand_block_selector (CHARMAP (charmap));
   else
     charmap_collapse_block_selector (CHARMAP (charmap));
+}
+
+
+static void
+font_bigger (GtkWidget *widget, gpointer data)
+{
+  gint size;
+
+  size = mini_font_selection_get_font_size (MINI_FONT_SELECTION (fontsel));
+  mini_font_selection_set_font_size (MINI_FONT_SELECTION (fontsel), size + 2);
+}
+
+
+static void
+font_smaller (GtkWidget *widget, gpointer data)
+{
+  gint size;
+
+  size = mini_font_selection_get_font_size (MINI_FONT_SELECTION (fontsel));
+  mini_font_selection_set_font_size (MINI_FONT_SELECTION (fontsel), size - 2);
 }
 
 
@@ -456,6 +477,16 @@ make_menu ()
   g_signal_connect (G_OBJECT (menu_item), "activate",
                     G_CALLBACK (expand_collapse), NULL);
   gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), menu_item);
+
+  menu_item = gtk_menu_item_new_with_mnemonic (_("_Decrease Font Size"));
+  g_signal_connect (G_OBJECT (menu_item), "activate",
+                    G_CALLBACK (font_smaller), NULL);
+  gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), menu_item);
+
+  menu_item = gtk_menu_item_new_with_mnemonic (_("_Increase Font Size"));
+  g_signal_connect (G_OBJECT (menu_item), "activate",
+                    G_CALLBACK (font_bigger), NULL);
+  gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), menu_item);
   /* finished making the view menu */
 
   /* make the goto menu */
@@ -493,7 +524,6 @@ main (gint argc, gchar **argv)
   GtkWidget *window = NULL;
   GtkWidget *big_vbox;
   GtkWidget *hbox;
-  GtkWidget *fontsel;
   GtkWidget *toolbar; /* the fontsel goes on this */
   GtkWidget *spacer;
   GtkTooltips *tooltips;
