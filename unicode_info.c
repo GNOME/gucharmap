@@ -236,6 +236,19 @@ unicode_block_t unicode_blocks[] =
 };
 
 
+/* counts the number of entries in unicode_blocks with start <= max */
+gint 
+count_blocks (gunichar max)
+{
+  gint i;
+
+  for (i = 0;  unicode_blocks[i].start != (gunichar)(-1)
+               && unicode_blocks[i].start < max;  i++);
+
+  return i;
+}
+
+
 /* http://www.unicode.org/unicode/reports/tr15/#Hangul */
 static gunichar *
 hangul_decomposition (gunichar s, gsize *result_len)

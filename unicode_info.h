@@ -38,6 +38,8 @@ unicode_block_t;
 
 extern unicode_block_t unicode_blocks[];
 
+gint count_blocks (gunichar max);
+
 
 /* return values are read-only */
 gchar * get_unicode_name (gunichar uc);

@@ -32,7 +32,7 @@ unichar_to_printable_utf8 (gunichar uc)
   static gchar buf[12];
   gint x;
 
-  /* the 0x2029 thing is a workaround for pango 1.0.3 bug
+  /* XXX: workaround for pango 1.0.3 bug
    * http://bugzilla.gnome.org/show_bug.cgi?id=88824 */
   if (! g_unichar_isgraph (uc) || uc == 0x2029)
     return "";
@@ -153,83 +153,50 @@ set_caption (Charmap *charmap)
 }
 
 
+/* XXX: linear search (but N is small) */
+static GtkTreePath *
+find_block_index_tree_path (Charmap *charmap, gunichar uc)
+{
+  gint i;
+
+  for (i = 0;  i < charmap->block_index_size;  i++)
+    if (charmap->block_index[i].start > uc)
+      break;
+
+  return charmap->block_index[i-1].tree_path;
+}
+
+
 /* selects the active block in the block selector tree view based on the
  * active character */
 static void
 set_active_block (Charmap *charmap)
 {
-  GtkTreePath *tree_path = NULL;
-  /* to check for bouncy loops */
-  unicode_block_t *unicode_block = NULL;
-  unicode_block_t *unicode_block_prev = NULL;
-  unicode_block_t *unicode_block_prev_prev = NULL;
-  gboolean valid;
-  GtkTreeIter iter;
+  GtkTreePath *tree_path;
+  
+  tree_path = find_block_index_tree_path (charmap, charmap->active_char);
 
-  /* try to start with the current selection */
-  valid = gtk_tree_selection_get_selected (charmap->block_selection,
-                                           NULL, &iter);
-  if (!valid)
+  /* block our "changed" handler */
+  g_signal_handler_block (G_OBJECT (charmap->block_selection), 
+                          charmap->block_selection_changed_handler_id);
+
+  gtk_tree_selection_select_path (charmap->block_selection, tree_path);
+
+  if (gtk_tree_path_get_depth (tree_path) == 2)
     {
-      valid = gtk_tree_model_get_iter_first (
-              GTK_TREE_MODEL (charmap->block_selector_model), &iter);
+      GtkTreePath *parent = gtk_tree_path_copy (tree_path);
+      gtk_tree_path_up (parent);
+
+      gtk_tree_view_expand_row (GTK_TREE_VIEW (charmap->block_selector_view), 
+                                parent, TRUE);
+      gtk_tree_path_free (parent);
     }
 
-  tree_path = gtk_tree_model_get_path (
-                  GTK_TREE_MODEL (charmap->block_selector_model), &iter);
-  while (valid)
-    {
-      valid = gtk_tree_model_get_iter (
-              GTK_TREE_MODEL (charmap->block_selector_model), &iter,
-              tree_path);
+  g_signal_handler_unblock (G_OBJECT (charmap->block_selection),
+                            charmap->block_selection_changed_handler_id);
 
-      unicode_block_prev_prev = unicode_block_prev;
-      unicode_block_prev = unicode_block;
-      gtk_tree_model_get (GTK_TREE_MODEL (charmap->block_selector_model), 
-                          &iter, BLOCK_SELECTOR_UNICODE_BLOCK, &unicode_block, 
-                          -1);
-
-      if (unicode_block == unicode_block_prev_prev)
-        goto set_active_block_finished;
-
-      if (charmap->active_char >= unicode_block->start
-          && charmap->active_char <= unicode_block->end)
-        {
-          /* block our "changed" handler */
-          g_signal_handler_block (G_OBJECT (charmap->block_selection), 
-                                  charmap->block_selection_changed_handler_id);
-          gtk_tree_selection_select_path (charmap->block_selection, tree_path);
-          g_signal_handler_unblock (
-                  G_OBJECT (charmap->block_selection),
-                  charmap->block_selection_changed_handler_id);
-
-          gtk_tree_view_scroll_to_cell (
-                  GTK_TREE_VIEW (charmap->block_selector_view),
-                  tree_path, NULL, FALSE, 0, 0);
-
-          goto set_active_block_finished;
-        }
-      else if (charmap->active_char < unicode_block->start)
-        {
-          valid = gtk_tree_path_prev (tree_path);
-        }
-      else if (charmap->active_char > unicode_block->end)
-        {
-          /* XXX: this junk is cuz gtk_tree_path_next returns void */
-          valid = gtk_tree_model_get_iter (
-                  GTK_TREE_MODEL (charmap->block_selector_model), &iter,
-                  tree_path);
-          valid = gtk_tree_model_iter_next (
-                  GTK_TREE_MODEL (charmap->block_selector_model), &iter);
-          if (valid)
-            gtk_tree_path_next (tree_path);
-        }
-    }
-
-set_active_block_finished:
-  if (tree_path != NULL)
-    gtk_tree_path_free (tree_path);
-  return;
+  gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (charmap->block_selector_view),
+                                tree_path, NULL, FALSE, 0, 0);
 }
 
 
@@ -945,7 +912,7 @@ make_unicode_block_selector (Charmap *charmap)
   GtkTreeViewColumn *column;
   gchar buf[12];
   gunichar uc;
-  gint i;
+  gint i, bi;
 
   vbox = gtk_vbox_new (FALSE, 1);
 
@@ -967,8 +934,15 @@ make_unicode_block_selector (Charmap *charmap)
           BLOCK_SELECTOR_NUM_COLUMNS, G_TYPE_STRING, 
           G_TYPE_UINT, G_TYPE_POINTER);
 
+  /* UNICHAR_MAX / BLOCK_SIZE is U+XXXX blocks, count_blocks is named blocks */
+  charmap->block_index_size = (UNICHAR_MAX / BLOCK_SIZE) + 2
+                              + count_blocks (UNICHAR_MAX);
+  charmap->block_index = g_malloc (charmap->block_index_size 
+                                   * sizeof (block_index_t));
+  bi = 0;
+
   for (i = 0;  unicode_blocks[i].start != (gunichar)(-1)
-                       && unicode_blocks[i].start <= UNICHAR_MAX;  i++)
+               && unicode_blocks[i].start <= UNICHAR_MAX;  i++)
     {
       gtk_tree_store_append (charmap->block_selector_model, &iter, NULL);
       gtk_tree_store_set (charmap->block_selector_model, &iter, 
@@ -976,24 +950,37 @@ make_unicode_block_selector (Charmap *charmap)
                           BLOCK_SELECTOR_UC_START, unicode_blocks[i].start,
                           BLOCK_SELECTOR_UNICODE_BLOCK, &(unicode_blocks[i]),
                           -1);
+      charmap->block_index[bi].start = unicode_blocks[i].start;
+      charmap->block_index[bi].tree_path = gtk_tree_model_get_path (
+              GTK_TREE_MODEL (charmap->block_selector_model), &iter);
+      bi++;
 
-      if (unicode_blocks[i].start % 256 == 0)
+      if (unicode_blocks[i].start % BLOCK_SIZE == 0)
         uc = unicode_blocks[i].start;
       else
-        uc = unicode_blocks[i].start + 256 - unicode_blocks[i].start % 256;
+        uc = unicode_blocks[i].start + BLOCK_SIZE 
+            - (unicode_blocks[i].start % BLOCK_SIZE);
 
       for ( ; uc >= unicode_blocks[i].start && uc <= unicode_blocks[i].end 
-              && uc <= UNICHAR_MAX;  uc += 256) 
+              && uc <= UNICHAR_MAX;  uc += BLOCK_SIZE) 
         {
-          g_snprintf (buf, 12, "U+%4.4X", uc);
+          g_snprintf (buf, sizeof (buf), "U+%4.4X", uc);
 	  gtk_tree_store_append (charmap->block_selector_model, 
                                  &child_iter, &iter);
 	  gtk_tree_store_set (charmap->block_selector_model, &child_iter, 
                               BLOCK_SELECTOR_LABEL, buf, 
                               BLOCK_SELECTOR_UC_START, uc, 
                               BLOCK_SELECTOR_UNICODE_BLOCK, NULL, -1);
+          charmap->block_index[bi].start = uc;
+          charmap->block_index[bi].tree_path = gtk_tree_model_get_path (
+                  GTK_TREE_MODEL (charmap->block_selector_model), &child_iter);
+          bi++;
         }
     }
+
+  /* terminate value that is bigger than the biggest character */
+  charmap->block_index[bi].start = UNICHAR_MAX + 1;
+  charmap->block_index[bi].tree_path = NULL;
 
   charmap->block_selector_view = gtk_tree_view_new_with_model (
           GTK_TREE_MODEL (charmap->block_selector_model));
@@ -1476,7 +1463,6 @@ charmap_init (Charmap *charmap)
                       FALSE, FALSE, 0);
   gtk_box_pack_start (GTK_BOX (hbox), vbox, FALSE, FALSE, 0);
 
-
   charmap->font_name = NULL;
 
   charmap->font_metrics = pango_context_get_metrics (
@@ -1609,4 +1595,5 @@ charmap_set_geometry_hints (Charmap *charmap, GtkWindow *window)
   gtk_window_set_geometry_hints (window, charmap->chartable, &hints,
           GDK_HINT_RESIZE_INC | GDK_HINT_MIN_SIZE | GDK_HINT_BASE_SIZE);
 }
+
 

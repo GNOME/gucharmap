@@ -41,6 +41,9 @@ extern "C" {
 
 #define TEXT_TO_COPY_MAXLENGTH 4096
 
+/* 0x100, a standard increment for paging unicode */
+#define BLOCK_SIZE 256
+
 
 typedef struct _Charmap Charmap;
 typedef struct _CharmapClass CharmapClass;
@@ -49,12 +52,21 @@ typedef struct _Caption Caption;
 
 
 /* the columns in the tree view (only the first is visible */
-enum {
+enum 
+{
   BLOCK_SELECTOR_LABEL = 0,
   BLOCK_SELECTOR_UC_START,
   BLOCK_SELECTOR_UNICODE_BLOCK,
   BLOCK_SELECTOR_NUM_COLUMNS
 };
+
+
+typedef struct 
+{
+  gunichar start;
+  GtkTreePath *tree_path;
+} 
+block_index_t;
 
 
 struct _Charmap
@@ -87,6 +99,9 @@ struct _Charmap
   GtkTreeStore *block_selector_model;
   GtkWidget *block_selector_view;
   gulong block_selection_changed_handler_id; 
+
+  block_index_t *block_index;
+  gint block_index_size;
 
   /* for the scrollbar */
   GtkObject *adjustment; 
