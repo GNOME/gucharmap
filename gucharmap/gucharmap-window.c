@@ -862,49 +862,12 @@ link_clicked (GucharmapCharmap *charmap,
   gtk_widget_set_sensitive (guw->forward_button, FALSE);
 }
 
-static GtkWidget *
-button_new_with_stock_image (gchar *message,
-                             gchar *stock_id)
-{
-  GtkWidget *button;
-  GtkWidget *hbox;
-  GtkWidget *image;
-  GtkWidget *label;
-  GtkWidget *align;
-
-  button = gtk_button_new ();
-  gtk_widget_show (button);
-
-  label = gtk_label_new (message);
-  gtk_widget_show (label);
-
-  image = gtk_image_new_from_stock (stock_id, GTK_ICON_SIZE_BUTTON);
-  gtk_widget_show (image);
-
-  hbox = gtk_hbox_new (FALSE, 3);
-  gtk_widget_show (hbox);
-
-  gtk_box_pack_start (GTK_BOX (hbox), image, FALSE, FALSE, 0);
-  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-
-  align = gtk_alignment_new (0.5, 0.5, 0.0, 0.0);
-  gtk_widget_show (align);
-
-  gtk_container_add (GTK_CONTAINER (align), hbox);
-
-  gtk_container_add (GTK_CONTAINER (button), align);
-
-  return button;
-}
-
 
 static void
 pack_stuff_in_window (GucharmapWindow *guw)
 {
   GtkWidget *big_vbox;
   GtkWidget *hbox;
-  GtkWidget *button_box;
-  GtkWidget *separator;
 
   guw->charmap = GUCHARMAP_CHARMAP (gucharmap_charmap_new ());
 
@@ -924,31 +887,6 @@ pack_stuff_in_window (GucharmapWindow *guw)
                     G_CALLBACK (fontsel_changed), guw);
   gtk_box_pack_start (GTK_BOX (hbox), guw->fontsel, FALSE, FALSE, 0);
   gtk_widget_show (GTK_WIDGET (guw->charmap));
-
-  separator = gtk_alignment_new (0, 0, 0, 0);
-  gtk_widget_show (separator);
-  gtk_widget_set_size_request (separator, 12, -1);
-  gtk_box_pack_start (GTK_BOX (hbox), separator, FALSE, FALSE, 0);
-
-  button_box = gtk_hbutton_box_new ();
-  gtk_widget_show (button_box);
-  gtk_box_pack_start (GTK_BOX (hbox), button_box, FALSE, FALSE, 0);
-
-  guw->back_button = button_new_with_stock_image (_("Back"), 
-                                                  GTK_STOCK_GO_BACK);
-  gtk_widget_show (guw->back_button);
-  gtk_widget_set_sensitive (guw->back_button, FALSE);
-  gtk_container_add (GTK_CONTAINER (button_box), guw->back_button);
-  g_signal_connect (G_OBJECT (guw->back_button), "clicked",
-                    G_CALLBACK (history_back), guw);
-
-  guw->forward_button = button_new_with_stock_image (_("Forward"), 
-                                                  GTK_STOCK_GO_FORWARD);
-  gtk_widget_show (guw->forward_button);
-  gtk_widget_set_sensitive (guw->forward_button, FALSE);
-  gtk_container_add (GTK_CONTAINER (button_box), guw->forward_button);
-  g_signal_connect (G_OBJECT (guw->forward_button), "clicked",
-                    G_CALLBACK (history_forward), guw);
 
   guw->text_to_copy_container = make_text_to_copy (guw);
   gtk_container_set_border_width (GTK_CONTAINER (guw->text_to_copy_container), 
