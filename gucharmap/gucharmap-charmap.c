@@ -31,9 +31,6 @@
 #include "gucharmap-marshal.h"
 #include "chartable_accessible.h"
 
-/* 0x100, a standard increment for paging unicode */
-#define PAGE_SIZE 256
-
 extern gboolean _gucharmap_unicode_has_nameslist_entry (gunichar uc);
 
 enum 
@@ -766,7 +763,6 @@ gucharmap_charmap_init (GucharmapCharmap *charmap)
 
   set_details (charmap, gucharmap_table_get_active_character (charmap->chartable));
 }
-
 
 GtkWidget *
 gucharmap_charmap_new (void)
