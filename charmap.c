@@ -984,6 +984,8 @@ make_caption (Charmap *charmap)
 {
   GtkWidget *scrolled_window;
   GtkWidget *table;
+  PangoFontMetrics *font_metrics; 
+  gint font_height; 
 
   /* most of the rest of this is setting up the caption */
   charmap->caption = g_malloc (sizeof (Caption));
@@ -1077,12 +1079,22 @@ make_caption (Charmap *charmap)
   gtk_table_attach_defaults (GTK_TABLE (table), charmap->caption->kJapaneseOn,
                              2, 4, 5, 6);
 
-
   scrolled_window = gtk_scrolled_window_new (NULL, NULL);
   gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (scrolled_window),
                                          table);
-  gtk_scrolled_window_set_policy  (GTK_SCROLLED_WINDOW (scrolled_window), 
-                                   GTK_POLICY_AUTOMATIC, GTK_POLICY_NEVER);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window), 
+                                  GTK_POLICY_ALWAYS, GTK_POLICY_NEVER);
+
+  /* have to make more room for this so that the bottom doesn't get cut off */
+  font_metrics = pango_context_get_metrics (
+          gtk_widget_get_pango_context (charmap->caption->name),
+          charmap->caption->name->style->font_desc, NULL);
+
+  font_height = (pango_font_metrics_get_ascent (font_metrics) 
+                 + pango_font_metrics_get_descent (font_metrics)) 
+                / PANGO_SCALE;
+  /* 6 rows */
+  gtk_widget_set_size_request (table, 0, 6 * font_height);
 
   return scrolled_window;
 }
