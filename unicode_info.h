@@ -30,6 +30,7 @@ extern "C" {
 
 /* return values are read-only */
 gchar * get_unicode_name (gunichar uc);
+gchar * get_unicode_data_name (gunichar uc);
 gchar * get_unicode_category_name (gunichar uc);
 gchar * get_unicode_kDefinition (gunichar uc);
 gchar * get_unicode_kCantonese (gunichar uc);
@@ -38,6 +39,7 @@ gchar * get_unicode_kTang (gunichar uc);
 gchar * get_unicode_kKorean (gunichar uc);
 gchar * get_unicode_kJapaneseKun (gunichar uc);
 gchar * get_unicode_kJapaneseOn (gunichar uc);
+gchar * get_hangul_syllable_name (gunichar s);
 
 #ifdef __cplusplus
 }
