@@ -212,6 +212,7 @@ find_block_index_tree_path (Charmap *charmap, gunichar uc)
 static void
 set_active_block (Charmap *charmap)
 {
+  GtkTreePath *parent = NULL;
   GtkTreePath *tree_path;
   
   tree_path = find_block_index_tree_path (charmap, charmap->active_char);
@@ -220,23 +221,26 @@ set_active_block (Charmap *charmap)
   g_signal_handler_block (G_OBJECT (charmap->block_selection), 
                           charmap->block_selection_changed_handler_id);
 
-  gtk_tree_selection_select_path (charmap->block_selection, tree_path);
-
   if (gtk_tree_path_get_depth (tree_path) == 2)
     {
-      GtkTreePath *parent = gtk_tree_path_copy (tree_path);
+      parent = gtk_tree_path_copy (tree_path);
       gtk_tree_path_up (parent);
 
-      gtk_tree_view_expand_row (GTK_TREE_VIEW (charmap->block_selector_view), 
-                                parent, TRUE);
-      gtk_tree_path_free (parent);
+      if (! gtk_tree_view_row_expanded (
+              GTK_TREE_VIEW (charmap->block_selector_view), parent))
+        tree_path = parent;
     }
+
+  gtk_tree_selection_select_path (charmap->block_selection, tree_path);
 
   g_signal_handler_unblock (G_OBJECT (charmap->block_selection),
                             charmap->block_selection_changed_handler_id);
 
   gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (charmap->block_selector_view),
                                 tree_path, NULL, FALSE, 0, 0);
+
+  if (parent != NULL)
+    gtk_tree_path_free (parent);
 }
 
 
@@ -933,7 +937,8 @@ block_selection_changed (GtkTreeSelection *selection,
 
   if (gtk_tree_selection_get_selected (selection, &model, &iter))
     {
-      gtk_tree_model_get (model, &iter, 1, &uc_start, -1);
+      gtk_tree_model_get (model, &iter, BLOCK_SELECTOR_UC_START, 
+                          &uc_start, -1);
 
       set_active_character (charmap, uc_start);
       redraw (charmap);
