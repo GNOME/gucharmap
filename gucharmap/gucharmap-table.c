@@ -329,7 +329,7 @@ create_glyph_pixmap (GucharmapTable *chartable,
   if (draw_font_family)
     {
       if (family == NULL)
-        family = _("[not a printable character]");
+        family = g_strdup (_("[not a printable character]"));
 
       pango_layout2 = pango_layout_new (
               gtk_widget_get_pango_context (GTK_WIDGET (chartable)));
