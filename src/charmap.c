@@ -1050,7 +1050,8 @@ button_press_event (GtkWidget *widget,
                                   gtk_clipboard_get (GDK_SELECTION_PRIMARY));
     }
 
-  return TRUE;
+  /* need to return false so it gets drag events */
+  return FALSE;
 }
 
 
@@ -1525,20 +1526,6 @@ size_allocate (GtkWidget *widget, GtkAllocation *allocation, Charmap *charmap)
 
 
 static void
-drag_end (GtkWidget *widget, GdkDragContext *drag_context, Charmap *charmap)
-{
-  g_printerr ("drag_end\n");
-}
-
-
-static void
-drag_begin (GtkWidget *widget, GdkDragContext *drag_context, Charmap *charmap)
-{
-  g_printerr ("drag_begin\n");
-}
-
-
-static void
 drag_data_get (GtkWidget *widget, 
                GdkDragContext *context,
                GtkSelectionData *selection_data,
@@ -1547,7 +1534,11 @@ drag_data_get (GtkWidget *widget,
                Charmap *charmap)
 
 {
-  g_printerr ("drag_data_get\n");
+  gchar buf[7];
+  gint n;
+
+  n = g_unichar_to_utf8 (charmap->active_char, buf);
+  gtk_selection_data_set_text (selection_data, buf, n);
 }
 
 
@@ -1566,7 +1557,7 @@ drag_data_received (GtkWidget *widget,
 
   text = gtk_selection_data_get_text (selection_data);
 
-  if (text == NULL)
+  if (text == NULL) /* XXX: say something in the statusbar? */
     return;
 
   uc = g_utf8_get_char_validated (text, -1);
@@ -1627,7 +1618,7 @@ make_chartable (Charmap *charmap)
                      target_table, G_N_ELEMENTS (target_table),
                      GDK_ACTION_COPY);
 
-  g_signal_connect (G_OBJECT (charmap->chartable), "drag_data_received",
+  g_signal_connect (G_OBJECT (charmap->chartable), "drag-data-received",
                     G_CALLBACK (drag_data_received), charmap);
 
 
@@ -1635,11 +1626,7 @@ make_chartable (Charmap *charmap)
                        target_table, G_N_ELEMENTS (target_table),
                        GDK_ACTION_COPY);
 
-  g_signal_connect (G_OBJECT (charmap->chartable), "drag_end",
-                    G_CALLBACK (drag_end), charmap);
-  g_signal_connect (G_OBJECT (charmap->chartable), "drag_begin",
-                    G_CALLBACK (drag_begin), charmap);
-  g_signal_connect (G_OBJECT (charmap->chartable), "drag_data_get",
+  g_signal_connect (G_OBJECT (charmap->chartable), "drag-data-get",
                     G_CALLBACK (drag_data_get), charmap);
 
   /* this is required to get key_press events */
