@@ -147,8 +147,8 @@ struct _CharmapClass
 {
   GtkVBoxClass parent_class;
 
-  void (* activate) (Charmap *charmap);
-  void (* status_message) (Charmap *charmap);
+  void (* activate) (Charmap *charmap, gunichar uc);
+  void (* status_message) (Charmap *charmap, gchar *message);
 };
 
 
