@@ -2,7 +2,7 @@
 <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
 "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
   <!ENTITY legal SYSTEM "legal.xml">
-  <!ENTITY appversion "1.2.0">
+  <!ENTITY appversion "1.3.0">
   <!ENTITY manrevision "2.1">
   <!ENTITY date "February 2004">
   <!ENTITY app "Character Map">
@@ -138,7 +138,7 @@
   <sect1 id="gucharmap-introduction"> 
     <title>Introduction</title> 
     <para>
-      The <application>&app;</application> application is a Unicode/ISO10646 character map and font viewer. Unicode/ISO10646 is a coded character set and character set standard. The Unicode/ISO10646 developers intend to include in this character set all of the characters that are used in all of the written languages in the world.
+      The <application>&app;</application> application is a Unicode character map. Unicode is a character set standard with the goal to include all of the characters that are used in all of the written languages in the world.
     </para>
     <para>
       You can use <application>&app;</application> to select characters from a character table, then combine the characters into a text string with standard characters. You can insert the text string that you create into other applications, such as text editor documents. 
@@ -159,7 +159,7 @@
       </para> 
       <variablelist>
         <varlistentry>
-          <term><guimenu>Applications menu</guimenu></term>
+          <term><guimenu>Applications</guimenu> menu</term>
           <listitem>
             <para>
               Choose <menuchoice><guimenu>Accessories</guimenu><guimenuitem>Character Map</guimenuitem></menuchoice>.
@@ -171,9 +171,6 @@
 	  <listitem>
             <para>
               Execute the following command: <command>gnome-character-map</command>
-            </para>
-            <para>
-              For more information about how to run <application>&app;</application> from a command line, see <ulink url="man:gnome-character-map" type="man"><citerefentry><refentrytitle>gnome-character-map</refentrytitle><manvolnum>1</manvolnum></citerefentry></ulink>.
             </para>
           </listitem>
         </varlistentry>
@@ -328,7 +325,7 @@
       <orderedlist>
         <listitem>
           <para>
-            Drag the pointer to select the text string in the <guilabel>Text to copy</guilabel> field, and click <guibutton>Copy</guibutton>. The selected text string appears highlighted. 
+            Drag the pointer to select the text string in the <guilabel>Text to copy</guilabel> field, then click <guibutton>Copy</guibutton>. The selected text string appears highlighted. 
           </para>
         </listitem>
         <listitem>
@@ -348,17 +345,6 @@
       </para>
     </sect2>
 
-<!-- =============== To Change the Input Mode  ========================= -->
-    <sect2 id="gucharmap-change-charset">
-      <title>To Change the Input Mode</title>
-      <para>
-        To change the input mode, right-click on the <guilabel>Text to copy</guilabel> field, then select <guimenuitem>Input Methods</guimenuitem>.
-      </para>
-      <para>
-        To display character layout options that are useful for working with non-Latin character sets, right-click on the <guilabel>Text to copy</guilabel> field, then select <guimenuitem>Insert Unicode Control Character</guimenuitem>.
-      </para>
-    </sect2>
-    
     <sect2 id="usage-find-character">
       <title>To Search for a Character</title>
       <para>
@@ -372,12 +358,12 @@
         </listitem>
         <listitem>
           <para>
-            Enter the Unicode code point or Unicode character name in the <guilabel>Search</guilabel> field in the <guilabel>Find</guilabel> dialog.
+            Enter the search string in the <guilabel>Search</guilabel> field in the <guilabel>Find</guilabel> dialog.
           </para>
         </listitem>
         <listitem>
           <para>
-            Click <guibutton>Find</guibutton>. 
+            Click <guibutton>Next</guibutton>. 
           </para>
           <para>
             <application>&app;</application> highlights the first character that matches the search criteria, in the <guilabel>Character Table</guilabel> tabbed section. <application>&app;</application> also displays the Unicode code point and Unicode character name in the status bar.
@@ -388,26 +374,15 @@
         </listitem>
         <listitem>
           <para>
-            Choose <menuchoice><guimenu>Search</guimenu><guimenuitem>Find Next</guimenuitem></menuchoice> to find the next matching character.
+            Click <guibutton>Next</guibutton> to find the next matching character. Alternatively, choose <menuchoice><guimenu>Search</guimenu><guimenuitem>Find Next</guimenuitem></menuchoice>.
           </para>
         </listitem>
         <listitem>
           <para>
-            Choose <menuchoice><guimenu>Search</guimenu><guimenuitem>Find Previous</guimenuitem></menuchoice> to find the previous matching character.
+            Click <guibutton>Previous</guibutton> to find the previous matching character. Alternatively, choose <menuchoice><guimenu>Search</guimenu><guimenuitem>Find Previous</guimenuitem></menuchoice>.
           </para>
         </listitem>
       </orderedlist>
-    </sect2>
-    
-    
-    <sect2 id="usage-find-character-clipboard">
-      <title>To Display the First Character in the Clipboard</title>
-      <para>
-        To display the first character in the clipboard, choose <menuchoice><guimenu>Go</guimenu><guimenuitem>Character in Clipboard</guimenuitem></menuchoice>.
-      </para>
-      <para>
-        <application>&app;</application> highlights the character in the <guilabel>Character Table</guilabel> tabbed section. <application>&app;</application> also displays the Unicode code point and Unicode character name in the status bar.
-      </para>
     </sect2>
     
 <!-- =============== To Browse the Character Table  ========================= -->
@@ -417,6 +392,21 @@
         You can browse through the characters in the <guilabel>Character Table</guilabel> tabbed section in the following ways:
       </para>
       <itemizedlist>
+        <listitem>
+          <para>
+            Choose <menuchoice><guimenu>Go</guimenu><guimenuitem>Next Script</guimenuitem></menuchoice> or <menuchoice><guimenu>Go</guimenu><guimenuitem>Next Block</guimenuitem></menuchoice> to select the next character set. 
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Choose <menuchoice><guimenu>Go</guimenu><guimenuitem>Previous Script</guimenuitem></menuchoice> or <menuchoice><guimenu>Go</guimenu><guimenuitem>Previous Block</guimenuitem></menuchoice> to select the previous character set. 
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Use the scrollbar for the <guilabel>Script</guilabel> or <guilabel>Unicode Block</guilabel> list box to select any character set.
+          </para>
+        </listitem>
         <listitem>
           <para>
             Choose <menuchoice><guimenu>Go</guimenu><guimenuitem>Next Character</guimenuitem></menuchoice> to select the next character in the Unicode sequence. 
@@ -429,12 +419,12 @@
         </listitem>
         <listitem>
           <para>
-            Press the arrow keys on the keyboard.
+            Press the arrow keys on the keyboard to browse through the characters.
           </para>
         </listitem>
         <listitem>
           <para>
-            Use the <guilabel>Character Table</guilabel> scrollbar.
+            Use the <guilabel>Character Table</guilabel> scrollbar to browse through the characters.
           </para>
         </listitem>
         <listitem>
@@ -548,18 +538,6 @@
           <para>
             Click on the link to display the details for the referenced character.
           </para>
-          <itemizedlist>
-            <listitem>
-              <para>
-                Choose <menuchoice><guimenu>Go</guimenu><guimenuitem>Back</guimenuitem></menuchoice> to navigate back through the link history.
-              </para>
-            </listitem>
-            <listitem>
-              <para>
-                Choose <menuchoice><guimenu>Go</guimenu><guimenuitem>Forward</guimenuitem></menuchoice> to navigate forward through the link history.
-              </para>
-            </listitem>
-          </itemizedlist>
         </listitem>
       </itemizedlist>
     </sect2>
@@ -587,12 +565,17 @@
         </listitem>
         <listitem>
           <para>
-            To make the font size larger, choose <menuchoice><guimenu>View</guimenu><guimenuitem>Zoom In</guimenuitem></menuchoice> or use the zoom spin box.
+            To increase the font size, choose <menuchoice><guimenu>View</guimenu><guimenuitem>Zoom In</guimenuitem></menuchoice> or use the zoom spin box.
           </para>
         </listitem>
         <listitem>
           <para>
-            To make the font size smaller, choose <menuchoice><guimenu>View</guimenu><guimenuitem>Zoom Out</guimenuitem></menuchoice> or use the zoom spin box.
+            To decrease the font size, choose <menuchoice><guimenu>View</guimenu><guimenuitem>Zoom Out</guimenuitem></menuchoice> or use the zoom spin box.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            To display normal font size, choose <menuchoice><guimenu>View</guimenu><guimenuitem>Normal Size</guimenuitem></menuchoice>.
           </para>
         </listitem>
         <listitem>
