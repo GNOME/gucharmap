@@ -93,36 +93,40 @@ static void
 draw_tabulus_pixmap (Charmap *charmap)
 {
   static gchar utf8_buf[8];
-  gint x, y, row, col, w, h, wid, hei;
+  gint x, y, row, col;
+  gint square_width, square_height; 
+  gint char_width, char_height;
+  gint width, height;
   GdkGC *gc;
 
   debug ("draw_tabulus_pixmap\n");
 
+  /* width and height of a square */
+  square_width = calculate_square_dimension (charmap->font_metrics);
+  square_height = calculate_square_dimension (charmap->font_metrics);
+
+  width = (square_width+1) * CHARMAP_COLS + 1;
+  height = (square_height+1) * CHARMAP_ROWS + 1;
+
   /* plain background */
   gdk_draw_rectangle (charmap->tabulus_pixmap,
                       charmap->tabulus->style->base_gc[GTK_STATE_NORMAL], 
-                      TRUE, 0, 0, 
-                      charmap->tabulus->allocation.width,
-                      charmap->tabulus->allocation.height);
-
-  /* width and height of a square */
-  w = (charmap->tabulus->allocation.width - 1) / CHARMAP_COLS - 1;
-  h = (charmap->tabulus->allocation.height - 1) / CHARMAP_ROWS - 1;
+                      TRUE, 0, 0, width, height);
 
   /* vertical lines */
-  for (x = 0; x < charmap->tabulus->allocation.width; x += w+1)
+  for (x = 0;  x < width;  x += square_width + 1)
     {
       gdk_draw_line (charmap->tabulus_pixmap,
                      charmap->tabulus->style->fg_gc[GTK_STATE_INSENSITIVE], 
-                     x, 0, x, charmap->tabulus->allocation.height - 1);
+                     x, 0, x, height - 1);
     }
 
   /* horizontal lines */
-  for (y = 0; y < charmap->tabulus->allocation.height; y += h+1)
+  for (y = 0;  y < height;  y += square_height + 1)
     {
       gdk_draw_line (charmap->tabulus_pixmap,
                      charmap->tabulus->style->fg_gc[GTK_STATE_INSENSITIVE], 
-                     0, y, charmap->tabulus->allocation.width - 1, y);
+                     0, y, width - 1, y);
     }
 
   pango_layout_set_font_description (charmap->pango_layout,
@@ -141,9 +145,8 @@ draw_tabulus_pixmap (Charmap *charmap)
                     charmap->tabulus_pixmap,
                     charmap->tabulus->style->base_gc[GTK_STATE_ACTIVE],
                     TRUE, 
-                    (w+1) * col + 1, 
-                    (h+1) * row + 1, 
-                    w, h);
+                    (square_width+1) * col + 1, (square_height+1) * row + 1, 
+                    square_width, square_height);
 
             /* XXX: seems like an ok place to set the caption, no? */
             set_caption (charmap);
@@ -157,12 +160,14 @@ draw_tabulus_pixmap (Charmap *charmap)
         x = g_unichar_to_utf8 (uc, utf8_buf);
         pango_layout_set_text (charmap->pango_layout, utf8_buf, x);
 
-        pango_layout_get_pixel_size (charmap->pango_layout, &wid, &hei);
+        pango_layout_get_pixel_size (charmap->pango_layout, 
+                                     &char_width, &char_height);
 
-        gdk_draw_layout (charmap->tabulus_pixmap, gc,
-                         (w+1) * col + (w - wid) / 2, 
-                         (h+1) * row + (h - hei) / 2, 
-                         charmap->pango_layout);
+        gdk_draw_layout (
+                charmap->tabulus_pixmap, gc,
+                (square_width+1) * col + (square_width - char_width) / 2, 
+                (square_height+1) * row + (square_height - char_height) / 2, 
+                charmap->pango_layout);
       }
 
 }

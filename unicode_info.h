@@ -18,8 +18,8 @@
  */
 
 
-#ifndef CHARNAMES_H
-#define CHARNAMES_H
+#ifndef UNICODE_INFO_H
+#define UNICODE_INFO_H
 
 #include <gtk/gtk.h>
 
@@ -37,5 +37,5 @@ gchar *  get_unicode_info (gunichar uc);
 }
 #endif /* __cplusplus */
 
-#endif  /* #ifndef CHARNAMES_H */
+#endif  /* #ifndef UNICODE_INFO_H */
 
