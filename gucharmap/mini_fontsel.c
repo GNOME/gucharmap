@@ -283,7 +283,10 @@ mini_font_selection_init (MiniFontSelection *fontsel)
   atk_object_set_name (accessib, _("Font"));
 
   fontsel->available_faces = NULL;
-  fontsel->font_desc = pango_font_description_new ();
+
+  gtk_widget_ensure_style (GTK_WIDGET (fontsel));
+  fontsel->font_desc = pango_font_description_copy (
+          GTK_WIDGET (fontsel)->style->font_desc);
 
   gtk_box_set_spacing (GTK_BOX (fontsel), 6);
 
@@ -295,8 +298,9 @@ mini_font_selection_init (MiniFontSelection *fontsel)
   accessib = gtk_widget_get_accessible (fontsel->style);
   atk_object_set_name (accessib, _("Font Style"));
 
-  fontsel->size_adj = gtk_adjustment_new (14, MIN_FONT_SIZE, MAX_FONT_SIZE, 
-	                                  1, 9, 0);
+  fontsel->size_adj = gtk_adjustment_new (
+          pango_font_description_get_size (fontsel->font_desc) / PANGO_SCALE, 
+          MIN_FONT_SIZE, MAX_FONT_SIZE, 1, 9, 0);
   fontsel->size = gtk_spin_button_new (GTK_ADJUSTMENT (fontsel->size_adj),
                                        0, 0);
   accessib = gtk_widget_get_accessible (fontsel->size);
@@ -306,6 +310,8 @@ mini_font_selection_init (MiniFontSelection *fontsel)
                              FALSE);
   gtk_editable_set_editable (GTK_EDITABLE (GTK_COMBO (fontsel->style)->entry),
                              FALSE);
+
+  show_available_fonts (fontsel);
 
   g_signal_connect (G_OBJECT (GTK_COMBO (fontsel->family)->entry), "changed",
                     G_CALLBACK (family_changed), fontsel);
@@ -319,10 +325,8 @@ mini_font_selection_init (MiniFontSelection *fontsel)
   gtk_box_pack_start (GTK_BOX (fontsel), fontsel->style, FALSE, FALSE, 0);
   gtk_box_pack_start (GTK_BOX (fontsel), fontsel->size, FALSE, FALSE, 0);
 
-  show_available_fonts (fontsel);
-
-  fontsel->font_desc = pango_font_description_copy (
-          GTK_WIDGET (fontsel)->style->font_desc);
+  gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (fontsel->family)->entry),
+                      pango_font_description_get_family (fontsel->font_desc));
 
   gtk_container_set_border_width (GTK_CONTAINER (fontsel), 6);
 }
