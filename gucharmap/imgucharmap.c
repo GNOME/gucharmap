@@ -26,26 +26,14 @@
 #include <gtk/gtkimcontextsimple.h>
 #include <gtk/gtkimmodule.h>
 #include <gtk/gtk.h>
+#include <gmodule.h>
 #include <string.h>
 #include <gucharmap/gucharmap_window.h>
 #include <gucharmap/gucharmap_intl.h>
 
 
 GType type_imgucharmap = 0;
-GtkWidget *gucharmap_window = NULL;
-
-
-static void
-imgucharmap_class_init (GtkIMContextSimpleClass *class)
-{
-}
-
-
-void 
-im_module_exit ()
-{
-  /* XXX: what should we do here? */
-}
+GucharmapWindow *the_guw = NULL;
 
 
 static void
@@ -53,34 +41,126 @@ chartable_activate (Chartable *chartable,
                     gunichar uc, 
                     GtkIMContextSimple *im_context)
 {
-  gchar buf[10];
-
+  gchar buf[7];
   buf [g_unichar_to_utf8 (uc, buf)] = '\0';
-
   g_signal_emit_by_name (im_context, "commit", &buf);
+}
+
+
+static void
+disconnect_handler (GucharmapWindow *guw)
+{
+  gulong *handler_id;
+
+  handler_id = g_object_get_data (G_OBJECT (gdk_display_get_default ()),
+                                  "gucharmap-activate-handler-id");
+  if (handler_id != NULL)
+    {
+      g_signal_handler_disconnect (guw->charmap->chartable, *handler_id);
+      g_free (handler_id);
+      g_object_set_data (G_OBJECT (gdk_display_get_default ()),
+                         "gucharmap-activate-handler-id", NULL);
+    }
+}
+
+
+static void
+connect_handler (GucharmapWindow *guw, GtkIMContext *im_context)
+{
+  gulong *handler_id;
+
+  handler_id = g_malloc (sizeof (gulong));
+
+  *handler_id = g_signal_connect (guw->charmap->chartable, "activate", 
+                                  G_CALLBACK (chartable_activate), im_context);
+
+  g_object_set_data (G_OBJECT (gdk_display_get_default ()),
+                     "gucharmap-activate-handler-id", handler_id);
+}
+
+
+static void
+focus_in (GtkIMContext *im_context)
+{
+  GucharmapWindow *guw;
+
+  guw = g_object_get_data (G_OBJECT (gdk_display_get_default ()), 
+                           "gucharmap-window");
+
+  g_assert (guw != NULL);
+
+  if (GTK_WIDGET_VISIBLE (GTK_WIDGET (guw)))
+    {
+      /* disconnect from the old im_context, connect to the new */
+      disconnect_handler (guw);
+      connect_handler (guw, im_context);
+    }
+}
+
+
+static void
+set_client_window (GtkIMContext *context, GdkWindow *window)
+{
+  GucharmapWindow *guw;
+
+  guw = g_object_get_data (G_OBJECT (gdk_display_get_default ()), 
+                           "gucharmap-window");
+
+  /* the window we were connected to could have been destroyed */
+  if (window == NULL && guw != NULL)
+    disconnect_handler (guw);
+}
+
+
+static void
+imgucharmap_class_init (GtkIMContextSimpleClass *clazz)
+{
+  GTK_IM_CONTEXT_CLASS (clazz)->set_client_window = set_client_window;
+  GTK_IM_CONTEXT_CLASS (clazz)->focus_in = focus_in;
+}
+
+
+void 
+im_module_exit ()
+{
+  GucharmapWindow *guw;
+
+  guw = g_object_get_data (G_OBJECT (gdk_display_get_default ()), 
+                           "gucharmap-window");
+
+  g_assert (guw != NULL);
+
+  disconnect_handler (guw);
+  gtk_widget_hide (GTK_WIDGET (guw));
 }
 
 
 static void
 imgucharmap_init (GtkIMContextSimple *im_context)
 {
-  GtkWidget *guw = NULL;
   GdkScreen *screen;
+  GtkWidget *guw = NULL;
 
-  guw = gucharmap_window_new ();
+  guw = g_object_get_data (G_OBJECT (gdk_display_get_default ()), 
+                           "gucharmap-window");
+  if (guw == NULL)
+    {
+      guw = gucharmap_window_new ();
 
-  screen = gtk_window_get_screen (GTK_WINDOW (guw));
-  gtk_window_set_default_size (GTK_WINDOW (guw), 
-                               gdk_screen_get_width (screen) * 1/3, 
-                               gdk_screen_get_height (screen) * 1/3); 
+      screen = gtk_window_get_screen (GTK_WINDOW (guw));
+      gtk_window_set_default_size (GTK_WINDOW (guw), 
+                                   gdk_screen_get_width (screen) * 5/12, 
+                                   gdk_screen_get_height (screen) * 1/3); 
 
-  g_signal_connect (G_OBJECT (guw), "destroy",
-                    G_CALLBACK (im_module_exit), NULL);
+      g_signal_connect (guw, "delete-event", 
+                        G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 
-  g_signal_connect (GUCHARMAP_WINDOW (guw)->charmap->chartable, "activate", 
-                    G_CALLBACK (chartable_activate), im_context);
+      g_object_set_data (G_OBJECT (gdk_display_get_default ()), 
+                         "gucharmap-window", guw);
 
-  gucharmap_window_set_font_selection_visible (GUCHARMAP_WINDOW (guw), FALSE);
+      the_guw = g_object_ref (guw);
+    }
+
 
   gtk_widget_show_all (guw);
 }
@@ -149,5 +229,14 @@ im_module_create (const gchar *context_id)
     return NULL;
 }
 
+
+/* need to make the module resident so that the static variables in the
+ * various gucharmap classes can't unset */
+const gchar * 
+g_module_check_init (GModule *module)
+{
+  g_module_make_resident (module);
+  return NULL;
+}
 
 
