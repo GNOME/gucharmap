@@ -35,8 +35,8 @@ ALL_LINGUAS="eo es fr nl"
 AM_GLIB_GNU_GETTEXT
 
 PKG_CHECK_MODULES(GTK, gtk+-2.0 >= 2.0.0)
-PKG_CHECK_MODULES(LIBGNOMEUI, libgnomeui-2.0 >= 2.0.0, 
-                  have_libgnomeui=yes, have_libgnomeui=no)
+PKG_CHECK_MODULES(GNOME, libgnomeui-2.0 >= 2.0.0 libgnome-2.0 >= 2.0.0, 
+                  have_gnome=yes, have_gnome=no)
 
 # checks for funcs 
 AC_CHECK_FUNCS([bind_textdomain_codeset])
@@ -44,12 +44,12 @@ AC_CHECK_FUNCS([bind_textdomain_codeset])
 AC_SUBST(GTK_CFLAGS)
 AC_SUBST(GTK_LIBS)
 
-AC_SUBST(LIBGNOMEUI_CFLAGS)
-AC_SUBST(LIBGNOMEUI_LIBS)
+AC_SUBST(GNOME_CFLAGS)
+AC_SUBST(GNOME_LIBS)
 
-AH_TEMPLATE([HAVE_LIBGNOMEUI], [Define if have libgnomeui])
-if test "x$have_libgnomeui" = "xyes" ; then
-    AC_DEFINE(HAVE_LIBGNOMEUI)
+AH_TEMPLATE([HAVE_GNOME], [Define if have gnome])
+if test "x$have_gnome" = "xyes" ; then
+    AC_DEFINE(HAVE_GNOME)
 fi
 
 AH_TEMPLATE([ENABLE_UNIHAN], [Define if you want CJK ideograph information])

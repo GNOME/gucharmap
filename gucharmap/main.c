@@ -1,6 +1,6 @@
 /* $Id$ */
 /*
- * Copyright (c) 2002  Noah Levitt <nlevitt@users.sourceforge.net>
+ * Copyright (c) 2003  Noah Levitt <nlevitt@users.sourceforge.net>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -21,14 +21,11 @@
 #include <gtk/gtk.h>
 #include <stdlib.h>
 #include "charmap.h"
-#include "gucharmap_intl.h"
 #include "mini_fontsel.h"
-
-#if HAVE_LIBGNOMEUI
-# include <libgnomeui/gnome-about.h>
-# include <libgnomeui/gnome-app-helper.h>
-# include <libgnomeui/gnome-ui-init.h>
+#if HAVE_GNOME
+# include "gnome.h"
 #endif
+#include "gucharmap_intl.h"
 
 #ifndef ICON_PATH
 # define ICON_PATH ""
@@ -143,16 +140,25 @@ jump_clipboard (GtkWidget *widget, gpointer data)
 }
 
 
-#if HAVE_LIBGNOMEUI
+#if HAVE_GNOME
 static void
 help_about (GtkWidget *widget, gpointer data)
 {
   GtkWidget *about;
   const gchar *authors[] = { "Noah Levitt <nlevitt аt columbia.edu>", NULL };
+  const gchar *translator_credits;
 
-  about = gnome_about_new ("gucharmap", VERSION, 
-                           "Copyright © 2003 Noah Levitt",
-                           NULL, authors, NULL, NULL, icon);
+  translator_credits = _("translator_credits");
+  if (strcmp (translator_credits, "translator_credits") == 0)
+    {
+      translator_credits = NULL;
+      g_printerr ("no translator credits\n");
+    }
+
+  about = gnome_about_new (
+          "gucharmap", VERSION, 
+          "Copyright © 2003 Noah Levitt <nlevitt аt columbia.edu>",
+          _("Unicode Character Map"), authors, NULL, translator_credits, icon);
 
   gtk_widget_show (about);
 }
@@ -174,7 +180,7 @@ make_gnome_help_menu ()
 
   return menu;
 }
-#endif /* #if HAVE_LIBGNOMEUI */
+#endif /* #if HAVE_GNOME */
 
 
 static void
@@ -238,14 +244,14 @@ make_menu ()
   gtk_menu_shell_append (GTK_MENU_SHELL (goto_menu), menu_item);
   /* finished making the goto menu */
 
-#if HAVE_LIBGNOMEUI
+#if HAVE_GNOME
   /* make the help menu */
   help_menu_item = gtk_menu_item_new_with_mnemonic (_("_Help"));
   gtk_menu_shell_append (GTK_MENU_SHELL (menubar), help_menu_item);
   gtk_menu_item_set_submenu (GTK_MENU_ITEM (help_menu_item), 
                              make_gnome_help_menu ());
   /* finished making the help menu */
-#endif /* #if HAVE_LIBGNOMEUI */
+#endif /* #if HAVE_GNOME */
 
   gtk_widget_show_all (menubar);
   return menubar;
@@ -265,7 +271,7 @@ main (gint argc, gchar **argv)
   PangoFontDescription *font_desc;
   GError *error = NULL;
 
-#if HAVE_LIBGNOMEUI
+#if HAVE_GNOME
   gnome_program_init ("gucharmap", VERSION, LIBGNOMEUI_MODULE, argc, argv,
                       NULL, NULL, NULL);
 #else
@@ -283,7 +289,7 @@ main (gint argc, gchar **argv)
   if (error != NULL)
     {
       g_assert (icon == NULL);
-      g_printerr ("Error loading icon: %s\n", error->message);
+      g_warning ("Error loading icon: %s\n", error->message);
       g_error_free (error);
     }
   else
@@ -310,7 +316,7 @@ main (gint argc, gchar **argv)
   g_signal_connect (fontsel, "changed", G_CALLBACK (fontsel_changed),
                     charmap);
 
-  /* make the starting font 3/2 of the default selection in fontsel */
+  /* make the starting font 50% bigger than the default font */
   orig_font = mini_font_selection_get_font_name (MINI_FONT_SELECTION (fontsel));
   font_desc = pango_font_description_from_string (orig_font);
   pango_font_description_set_size (
