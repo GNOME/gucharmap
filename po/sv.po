@@ -8,13 +8,376 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
-"POT-Creation-Date: 2003-04-29 08:20+0200\n"
-"PO-Revision-Date: 2003-04-29 08:20+0200\n"
+"POT-Creation-Date: 2003-05-09 11:50+0200\n"
+"PO-Revision-Date: 2003-05-09 11:50+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#. ID
+#: gucharmap.desktop.in.h:1 gucharmap/gucharmap-window.c:358
+#: gucharmap/gucharmap-window.c:738 gucharmap/imgucharmap.c:196
+msgid "Unicode Character Map"
+msgstr "Unicode-teckentabell"
+
+#: gucharmap/gucharmap-charmap.c:400
+msgid "[not a printable character]"
+msgstr "[inte ett utskrivbart tecken]"
+
+#: gucharmap/gucharmap-charmap.c:608
+msgid "List of Unicode Blocks"
+msgstr "Lista med Unicode-block"
+
+#: gucharmap/gucharmap-charmap.c:679
+msgid "Character Map"
+msgstr "Teckentabell"
+
+#: gucharmap/gucharmap-charmap.c:683
+msgid "Characte_r Table"
+msgstr "Tecke_ntabell"
+
+#: gucharmap/gucharmap-charmap.c:686
+msgid "Character _Details"
+msgstr "Tecken_detaljer"
+
+#: gucharmap/gucharmap-mini-fontsel.c:280
+msgid "Font"
+msgstr "Typsnitt"
+
+#: gucharmap/gucharmap-mini-fontsel.c:287
+msgid "Font Family"
+msgstr "Typsnittsfamilj"
+
+#: gucharmap/gucharmap-mini-fontsel.c:292
+msgid "Font Style"
+msgstr "Typsnittsstil"
+
+#: gucharmap/gucharmap-mini-fontsel.c:298
+msgid "Font Size"
+msgstr "Typsnittsstorlek"
+
+#: gucharmap/gucharmap-table.c:1251
+msgid "Clipboard is empty."
+msgstr "Urklipp är tomt."
+
+#: gucharmap/gucharmap-table.c:1253
+msgid "There is no selected text."
+msgstr "Det finns ingen markerad text."
+
+#: gucharmap/gucharmap-table.c:1261 gucharmap/gucharmap-table.c:1488
+msgid "Unknown character, unable to identify."
+msgstr "Okänt tecken, kan inte identifiera."
+
+#: gucharmap/gucharmap-table.c:1265 gucharmap/gucharmap-table.c:1492
+msgid "Character found."
+msgstr "Tecken hittat."
+
+#: gucharmap/gucharmap-table.c:1559
+msgid "Character Table"
+msgstr "Teckentabell"
+
+#: gucharmap/gucharmap-unicode-info.c:140
+#, c-format
+msgid "HANGUL SYLLABLE %s%s%s"
+msgstr "HANGUL-STAVELSE %s%s%s"
+
+#: gucharmap/gucharmap-unicode-info.c:151
+msgid "<CJK Ideograph Extension A>"
+msgstr "<CJK-ideograftillägg A>"
+
+#: gucharmap/gucharmap-unicode-info.c:153
+msgid "<CJK Ideograph>"
+msgstr "<CJK-ideograf>"
+
+#: gucharmap/gucharmap-unicode-info.c:157
+msgid "<Non Private Use High Surrogate>"
+msgstr "<Högt surrogat som inte är för privat användning>"
+
+#: gucharmap/gucharmap-unicode-info.c:159
+msgid "<Private Use High Surrogate>"
+msgstr "<Högt surrogat för privat användning>"
+
+#: gucharmap/gucharmap-unicode-info.c:161
+msgid "<Low Surrogate, Last>"
+msgstr "<Lågt surrogat, senare>"
+
+#: gucharmap/gucharmap-unicode-info.c:163
+msgid "<Private Use>"
+msgstr "<Privat användning>"
+
+#: gucharmap/gucharmap-unicode-info.c:165
+msgid "<Plane 15 Private Use>"
+msgstr "<Plan 15 för privat användning>"
+
+#: gucharmap/gucharmap-unicode-info.c:167
+msgid "<Plane 16 Private Use>"
+msgstr "<Plan 16 för privat användning>"
+
+#: gucharmap/gucharmap-unicode-info.c:169
+msgid "<CJK Ideograph Extension B>"
+msgstr "<CJK-ideograftillägg B>"
+
+#: gucharmap/gucharmap-unicode-info.c:174
+msgid "<not assigned>"
+msgstr "<inte tilldelad>"
+
+#: gucharmap/gucharmap-unicode-info.c:186
+msgid "Other, Control"
+msgstr "Andra, kontroll"
+
+#: gucharmap/gucharmap-unicode-info.c:187
+msgid "Other, Format"
+msgstr "Andra, format"
+
+#: gucharmap/gucharmap-unicode-info.c:188
+msgid "Other, Not Assigned"
+msgstr "Andra, inte tilldelade"
+
+#: gucharmap/gucharmap-unicode-info.c:189
+msgid "Other, Private Use"
+msgstr "Andra, privat användning"
+
+#: gucharmap/gucharmap-unicode-info.c:190
+msgid "Other, Surrogate"
+msgstr "Andra, surrogat"
+
+#: gucharmap/gucharmap-unicode-info.c:191
+msgid "Letter, Lowercase"
+msgstr "Bokstav, gemen"
+
+#: gucharmap/gucharmap-unicode-info.c:192
+msgid "Letter, Modifier"
+msgstr "Bokstav, modifierare"
+
+#: gucharmap/gucharmap-unicode-info.c:193
+msgid "Letter, Other"
+msgstr "Bokstav, andra"
+
+#: gucharmap/gucharmap-unicode-info.c:194
+msgid "Letter, Titlecase"
+msgstr "Bokstav, titeltyp"
+
+#: gucharmap/gucharmap-unicode-info.c:195
+msgid "Letter, Uppercase"
+msgstr "Bokstav, versal"
+
+#: gucharmap/gucharmap-unicode-info.c:196
+msgid "Mark, Spacing Combining"
+msgstr "Märke, blankstegskombinerande"
+
+#: gucharmap/gucharmap-unicode-info.c:197
+msgid "Mark, Enclosing"
+msgstr "Märke, inneslutande"
+
+#: gucharmap/gucharmap-unicode-info.c:198
+msgid "Mark, Non-Spacing"
+msgstr "Märke, icke-blanksteg"
+
+#: gucharmap/gucharmap-unicode-info.c:199
+msgid "Number, Decimal Digit"
+msgstr "Tal, decimal siffra"
+
+#: gucharmap/gucharmap-unicode-info.c:200
+msgid "Number, Letter"
+msgstr "Tal, bokstav"
+
+#: gucharmap/gucharmap-unicode-info.c:201
+msgid "Number, Other"
+msgstr "Tal, andra"
+
+#: gucharmap/gucharmap-unicode-info.c:202
+msgid "Punctuation, Connector"
+msgstr "Skiljetecken, sammanfogare"
+
+#: gucharmap/gucharmap-unicode-info.c:203
+msgid "Punctuation, Dash"
+msgstr "Skiljetecken, streck"
+
+#: gucharmap/gucharmap-unicode-info.c:204
+msgid "Punctuation, Close"
+msgstr "Skiljetecken, stäng"
+
+#: gucharmap/gucharmap-unicode-info.c:205
+msgid "Punctuation, Final Quote"
+msgstr "Skiljetecken, slutcitat"
+
+#: gucharmap/gucharmap-unicode-info.c:206
+msgid "Punctuation, Initial Quote"
+msgstr "Skiljetecken, påbörjan av citat"
+
+#: gucharmap/gucharmap-unicode-info.c:207
+msgid "Punctuation, Other"
+msgstr "Skiljetecken, andra"
+
+#: gucharmap/gucharmap-unicode-info.c:208
+msgid "Punctuation, Open"
+msgstr "Skiljetecken, öppna"
+
+#: gucharmap/gucharmap-unicode-info.c:209
+msgid "Symbol, Currency"
+msgstr "Symbol, valuta"
+
+#: gucharmap/gucharmap-unicode-info.c:210
+msgid "Symbol, Modifier"
+msgstr "Symbol, modifierare"
+
+#: gucharmap/gucharmap-unicode-info.c:211
+msgid "Symbol, Math"
+msgstr "Symbol, matematik"
+
+#: gucharmap/gucharmap-unicode-info.c:212
+msgid "Symbol, Other"
+msgstr "Symbol, andra"
+
+#: gucharmap/gucharmap-unicode-info.c:213
+msgid "Separator, Line"
+msgstr "Avskiljare, rad"
+
+#: gucharmap/gucharmap-unicode-info.c:214
+msgid "Separator, Paragraph"
+msgstr "Avskiljare, stycke"
+
+#: gucharmap/gucharmap-unicode-info.c:215
+msgid "Separator, Space"
+msgstr "Avskiljare, blanksteg"
+
+#: gucharmap/gucharmap-window.c:71
+#, c-format
+msgid ""
+"Not a valid code point to jump to. Must be a hexadecimal number between 0 "
+"and %4.4X."
+msgstr ""
+"Inte en giltig kodpunkt att hoppa till. Måste vara ett hexadecimalt tal "
+"mellan 0 och %4.4X."
+
+#: gucharmap/gucharmap-window.c:93
+msgid "Go to hex code point"
+msgstr "Gå till hexadecimal kodpunkt"
+
+#: gucharmap/gucharmap-window.c:113
+msgid "_Enter Unicode code point"
+msgstr "_Ange Unicode-kodpunkt"
+
+#: gucharmap/gucharmap-window.c:173
+msgid "Not found."
+msgstr "Hittades inte."
+
+#: gucharmap/gucharmap-window.c:177
+msgid "Found."
+msgstr "Hittades."
+
+#: gucharmap/gucharmap-window.c:181
+msgid "Search wrapped."
+msgstr "Sökningen började om från början."
+
+#: gucharmap/gucharmap-window.c:185
+msgid "Nothing to search for."
+msgstr "Ingenting att söka efter."
+
+#: gucharmap/gucharmap-window.c:224
+msgid "Find"
+msgstr "Sök"
+
+#: gucharmap/gucharmap-window.c:239
+msgid "_Search:"
+msgstr "_Sök:"
+
+#: gucharmap/gucharmap-window.c:293
+msgid "Zoom mode enabled. Press <Esc> to disable zoom."
+msgstr "Zoomläget aktiverat. Tryck på <Esc> för att inaktivera zoom."
+
+#: gucharmap/gucharmap-window.c:303
+msgid "Zoom mode disabled."
+msgstr "Zoomläget inaktiverat."
+
+#: gucharmap/gucharmap-window.c:351
+msgid "translator_credits"
+msgstr ""
+"Christian Rose\n"
+"Skicka synpunkter på översättningen till sv@li.org"
+
+#: gucharmap/gucharmap-window.c:402
+msgid "Char_map"
+msgstr "Tecken_tabell"
+
+#: gucharmap/gucharmap-window.c:404
+msgid "_View"
+msgstr "_Visa"
+
+#: gucharmap/gucharmap-window.c:406
+msgid "_Search"
+msgstr "_Sök"
+
+#. ctrl-+ or ctrl-=
+#: gucharmap/gucharmap-window.c:430
+msgid "Zoom _In"
+msgstr "Zooma _in"
+
+#. ctrl--
+#: gucharmap/gucharmap-window.c:442
+msgid "Zoom _Out"
+msgstr "Zooma _ut"
+
+#. ctrl-<enter>
+#: gucharmap/gucharmap-window.c:455
+msgid "_Zoom Mode"
+msgstr "_Zoomläge"
+
+#: gucharmap/gucharmap-window.c:467
+msgid "Snap Columns to Power of Two"
+msgstr "Fäst kolumner vid jämnt antal"
+
+#. ctrl-f
+#: gucharmap/gucharmap-window.c:479
+msgid "_Find..."
+msgstr "_Sök..."
+
+#. ctrl-g
+#: gucharmap/gucharmap-window.c:490
+msgid "Find _Next"
+msgstr "Sök _nästa"
+
+#. shift-ctrl-g
+#: gucharmap/gucharmap-window.c:501
+msgid "Find _Previous"
+msgstr "Sök _föregående"
+
+#. ctrl-h
+#: gucharmap/gucharmap-window.c:517
+msgid "_Hex Code Point..."
+msgstr "_Hexadecimal kodpunkt..."
+
+#. ctrl-p
+#: gucharmap/gucharmap-window.c:525
+msgid "Character in _Clipboard"
+msgstr "Tecken i _urklipp"
+
+#. make the help menu
+#: gucharmap/gucharmap-window.c:535
+msgid "_Help"
+msgstr "_Hjälp"
+
+#: gucharmap/gucharmap-window.c:580
+msgid "The selected code point is not a valid Unicode character."
+msgstr "Den valda kodpunkten är inte ett giltigt Unicode-tecken."
+
+#: gucharmap/gucharmap-window.c:608
+msgid "Text copied to clipboard."
+msgstr "Texten kopierad till urklipp."
+
+#: gucharmap/gucharmap-window.c:634
+msgid "_Text to copy:"
+msgstr "_Text att kopiera:"
+
+#: gucharmap/gucharmap-window.c:655
+msgid "Copy to the clipboard."
+msgstr "Kopiera till urklipp."
+
+#: gucharmap/main.c:41
+msgid "Font to start with; ex: 'Serif 27'"
+msgstr "Typsnitt att starta med; t.ex. \"Serif 27\""
 
 #: gucharmap/unicode/unicode_blocks.cI:7
 msgid "Basic Latin"
@@ -516,514 +879,128 @@ msgstr "Tillägg till privatanvändningsområde-A"
 msgid "Supplementary Private Use Area-B"
 msgstr "Tillägg till privatanvändningsområde-B"
 
-#: gucharmap/charmap.c:728
-msgid "Character Map"
-msgstr "Teckentabell"
-
-#: gucharmap/charmap.c:732
-msgid "Character"
-msgstr "Tecken"
-
-#: gucharmap/charmap.c:733
-msgid "Unicode category"
-msgstr "Unicode-kategori"
-
-#: gucharmap/charmap.c:734
-msgid "Canonical decomposition"
-msgstr "Kanonisk dekomposition"
-
-#: gucharmap/charmap.c:735
-msgid "UTF-8"
-msgstr "UTF-8"
-
-#: gucharmap/charmap.c:736
-msgid "Other representations"
-msgstr "Andra representationer"
-
-#: gucharmap/charmap.c:737
-msgid "See also"
-msgstr "Se även"
-
-#: gucharmap/charmap.c:738
-msgid "Equivalents"
-msgstr "Ekvivalenter"
-
-#: gucharmap/charmap.c:739
-msgid "Alias names"
-msgstr "Aliasnamn"
-
-#: gucharmap/charmap.c:740
-msgid "Approximate equivalents"
-msgstr "Ungefärliga ekvivalenter"
-
-#: gucharmap/charmap.c:741
-msgid "Notes"
-msgstr "Anteckningar"
-
-#: gucharmap/charmap.c:743
-msgid "CJK ideograph definition"
-msgstr "CJK-ideografdefinition"
-
-#: gucharmap/charmap.c:744
-msgid "Mandarin pronunciation"
-msgstr "Mandarin-uttal"
-
-#: gucharmap/charmap.c:745
-msgid "Japanese On pronunciation"
-msgstr "Japanskt On-uttal"
-
-#: gucharmap/charmap.c:746
-msgid "Japanese Kun pronunciation"
-msgstr "Japanskt Kun-uttal"
-
-#: gucharmap/charmap.c:747
-msgid "Cantonese pronunciation"
-msgstr "Kantonesiskt uttal"
-
-#: gucharmap/charmap.c:748
-msgid "Tang pronunciation"
-msgstr "Tang-uttal"
-
-#: gucharmap/charmap.c:749
-msgid "Korean pronunciation"
-msgstr "Koreanskt uttal"
-
-#: gucharmap/charmap.c:767
-msgid "Details on the Current Character"
-msgstr "Detaljer om det aktuella tecknet"
-
-#: gucharmap/charmap.c:778
-msgid "List of Unicode Blocks"
-msgstr "Lista med Unicode-block"
-
-#: gucharmap/chartable.c:1249
-msgid "Clipboard is empty."
-msgstr "Urklipp är tomt."
-
-#: gucharmap/chartable.c:1251
-msgid "There is no selected text."
-msgstr "Det finns ingen markerad text."
-
-#: gucharmap/chartable.c:1259 gucharmap/chartable.c:1486
-msgid "Unknown character, unable to identify."
-msgstr "Okänt tecken, kan inte identifiera."
-
-#: gucharmap/chartable.c:1263 gucharmap/chartable.c:1490
-msgid "Character found."
-msgstr "Tecken hittat."
-
-#: gucharmap/chartable.c:1557
-msgid "Character Table"
-msgstr "Teckentabell"
-
-#. ID
-#: gucharmap/imgucharmap.c:196 gucharmap/gucharmap_window.c:608
-#: gucharmap/gucharmap_window.c:1173 gucharmap.desktop.in.h:1
-msgid "Unicode Character Map"
-msgstr "Unicode-teckentabell"
-
-#: gucharmap/main.c:43
-msgid "Font to start with; ex: 'Serif 27'"
-msgstr "Typsnitt att starta med; t.ex. \"Serif 27\""
-
-#: gucharmap/mini_fontsel.c:270
-msgid "Font"
-msgstr "Typsnitt"
-
-#: gucharmap/mini_fontsel.c:277
-msgid "Font Family"
-msgstr "Typsnittsfamilj"
-
-#: gucharmap/mini_fontsel.c:282
-msgid "Font Style"
-msgstr "Typsnittsstil"
-
-#: gucharmap/mini_fontsel.c:288
-msgid "Font Size"
-msgstr "Typsnittsstorlek"
-
-#: gucharmap/unicode_info.c:140
-#, c-format
-msgid "HANGUL SYLLABLE %s%s%s"
-msgstr "HANGUL-STAVELSE %s%s%s"
-
-#: gucharmap/unicode_info.c:151
-msgid "<CJK Ideograph Extension A>"
-msgstr "<CJK-ideograftillägg A>"
-
-#: gucharmap/unicode_info.c:153
-msgid "<CJK Ideograph>"
-msgstr "<CJK-ideograf>"
-
-#: gucharmap/unicode_info.c:157
-msgid "<Non Private Use High Surrogate>"
-msgstr "<Högt surrogat som inte är för privat användning>"
-
-#: gucharmap/unicode_info.c:159
-msgid "<Private Use High Surrogate>"
-msgstr "<Högt surrogat för privat användning>"
-
-#: gucharmap/unicode_info.c:161
-msgid "<Low Surrogate, Last>"
-msgstr "<Lågt surrogat, senare>"
-
-#: gucharmap/unicode_info.c:163
-msgid "<Private Use>"
-msgstr "<Privat användning>"
-
-#: gucharmap/unicode_info.c:165
-msgid "<Plane 15 Private Use>"
-msgstr "<Plan 15 för privat användning>"
-
-#: gucharmap/unicode_info.c:167
-msgid "<Plane 16 Private Use>"
-msgstr "<Plan 16 för privat användning>"
-
-#: gucharmap/unicode_info.c:169
-msgid "<CJK Ideograph Extension B>"
-msgstr "<CJK-ideograftillägg B>"
-
-#: gucharmap/unicode_info.c:174
-msgid "<not assigned>"
-msgstr "<inte tilldelad>"
-
-#: gucharmap/unicode_info.c:186
-msgid "Other, Control"
-msgstr "Andra, kontroll"
-
-#: gucharmap/unicode_info.c:187
-msgid "Other, Format"
-msgstr "Andra, format"
-
-#: gucharmap/unicode_info.c:188
-msgid "Other, Not Assigned"
-msgstr "Andra, inte tilldelade"
-
-#: gucharmap/unicode_info.c:189
-msgid "Other, Private Use"
-msgstr "Andra, privat användning"
-
-#: gucharmap/unicode_info.c:190
-msgid "Other, Surrogate"
-msgstr "Andra, surrogat"
-
-#: gucharmap/unicode_info.c:191
-msgid "Letter, Lowercase"
-msgstr "Bokstav, gemen"
-
-#: gucharmap/unicode_info.c:192
-msgid "Letter, Modifier"
-msgstr "Bokstav, modifierare"
-
-#: gucharmap/unicode_info.c:193
-msgid "Letter, Other"
-msgstr "Bokstav, andra"
-
-#: gucharmap/unicode_info.c:194
-msgid "Letter, Titlecase"
-msgstr "Bokstav, titeltyp"
-
-#: gucharmap/unicode_info.c:195
-msgid "Letter, Uppercase"
-msgstr "Bokstav, versal"
-
-#: gucharmap/unicode_info.c:196
-msgid "Mark, Spacing Combining"
-msgstr "Märke, blankstegskombinerande"
-
-#: gucharmap/unicode_info.c:197
-msgid "Mark, Enclosing"
-msgstr "Märke, inneslutande"
-
-#: gucharmap/unicode_info.c:198
-msgid "Mark, Non-Spacing"
-msgstr "Märke, icke-blanksteg"
-
-#: gucharmap/unicode_info.c:199
-msgid "Number, Decimal Digit"
-msgstr "Tal, decimal siffra"
-
-#: gucharmap/unicode_info.c:200
-msgid "Number, Letter"
-msgstr "Tal, bokstav"
-
-#: gucharmap/unicode_info.c:201
-msgid "Number, Other"
-msgstr "Tal, andra"
-
-#: gucharmap/unicode_info.c:202
-msgid "Punctuation, Connector"
-msgstr "Skiljetecken, sammanfogare"
-
-#: gucharmap/unicode_info.c:203
-msgid "Punctuation, Dash"
-msgstr "Skiljetecken, streck"
-
-#: gucharmap/unicode_info.c:204
-msgid "Punctuation, Close"
-msgstr "Skiljetecken, stäng"
-
-#: gucharmap/unicode_info.c:205
-msgid "Punctuation, Final Quote"
-msgstr "Skiljetecken, slutcitat"
-
-#: gucharmap/unicode_info.c:206
-msgid "Punctuation, Initial Quote"
-msgstr "Skiljetecken, påbörjan av citat"
-
-#: gucharmap/unicode_info.c:207
-msgid "Punctuation, Other"
-msgstr "Skiljetecken, andra"
-
-#: gucharmap/unicode_info.c:208
-msgid "Punctuation, Open"
-msgstr "Skiljetecken, öppna"
-
-#: gucharmap/unicode_info.c:209
-msgid "Symbol, Currency"
-msgstr "Symbol, valuta"
-
-#: gucharmap/unicode_info.c:210
-msgid "Symbol, Modifier"
-msgstr "Symbol, modifierare"
-
-#: gucharmap/unicode_info.c:211
-msgid "Symbol, Math"
-msgstr "Symbol, matematik"
-
-#: gucharmap/unicode_info.c:212
-msgid "Symbol, Other"
-msgstr "Symbol, andra"
-
-#: gucharmap/unicode_info.c:213
-msgid "Separator, Line"
-msgstr "Avskiljare, rad"
-
-#: gucharmap/unicode_info.c:214
-msgid "Separator, Paragraph"
-msgstr "Avskiljare, stycke"
-
-#: gucharmap/unicode_info.c:215
-msgid "Separator, Space"
-msgstr "Avskiljare, blanksteg"
-
-#: gucharmap/gucharmap_window.c:74
-#, c-format
-msgid ""
-"Not a valid code point to jump to. Must be a hexadecimal number between 0 "
-"and %4.4X."
-msgstr ""
-"Inte en giltig kodpunkt att hoppa till. Måste vara ett hexadecimalt tal "
-"mellan 0 och %4.4X."
-
-#: gucharmap/gucharmap_window.c:96
-msgid "Go to hex code point"
-msgstr "Gå till hexadecimal kodpunkt"
-
-#: gucharmap/gucharmap_window.c:116
-msgid "_Enter Unicode code point"
-msgstr "_Ange Unicode-kodpunkt"
-
-#: gucharmap/gucharmap_window.c:176
-msgid "Not found."
-msgstr "Hittades inte."
-
-#: gucharmap/gucharmap_window.c:180
-msgid "Found."
-msgstr "Hittades."
-
-#: gucharmap/gucharmap_window.c:184
-msgid "Search wrapped."
-msgstr "Sökningen började om från början."
-
-#: gucharmap/gucharmap_window.c:188
-msgid "Nothing to search for."
-msgstr "Ingenting att söka efter."
-
-#: gucharmap/gucharmap_window.c:227
-msgid "Find"
-msgstr "Sök"
-
-#: gucharmap/gucharmap_window.c:242
-msgid "_Search:"
-msgstr "_Sök:"
-
-#: gucharmap/gucharmap_window.c:531
-msgid "Zoom mode enabled. Press <Esc> to disable zoom."
-msgstr "Zoomläget aktiverat. Tryck på <Esc> för att inaktivera zoom."
-
-#: gucharmap/gucharmap_window.c:541
-msgid "Zoom mode disabled."
-msgstr "Zoomläget inaktiverat."
-
-#: gucharmap/gucharmap_window.c:601
-msgid "translator_credits"
-msgstr ""
-"Christian Rose\n"
-"Skicka synpunkter på översättningen till sv@li.org"
-
-#: gucharmap/gucharmap_window.c:654
-msgid "Char_map"
-msgstr "Tecken_tabell"
-
-#: gucharmap/gucharmap_window.c:656
-msgid "_View"
-msgstr "_Visa"
-
-#: gucharmap/gucharmap_window.c:658
-msgid "_Search"
-msgstr "_Sök"
-
-#: gucharmap/gucharmap_window.c:678
-msgid "Expand/Collapse All"
-msgstr "Fäll ut/Fäll in allt"
-
-#. ctrl-+ or ctrl-=
-#: gucharmap/gucharmap_window.c:687
-msgid "Zoom _In"
-msgstr "Zooma _in"
-
-#. ctrl--
-#: gucharmap/gucharmap_window.c:699
-msgid "Zoom _Out"
-msgstr "Zooma _ut"
-
-#. ctrl-<enter>
-#: gucharmap/gucharmap_window.c:712
-msgid "_Zoom Mode"
-msgstr "_Zoomläge"
-
-#: gucharmap/gucharmap_window.c:724
-msgid "_Unicode Details"
-msgstr "_Unicode-detaljer"
-
-#. the unicode details submenu
-#: gucharmap/gucharmap_window.c:730 gucharmap/gucharmap_window.c:780
-#: gucharmap/gucharmap_window.c:835
-msgid "Options"
-msgstr "Alternativ"
-
-#: gucharmap/gucharmap_window.c:739
-msgid "_Category"
-msgstr "_Kategori"
-
-#: gucharmap/gucharmap_window.c:747
-msgid "Canonical _Decomposition"
-msgstr "Kanonisk _dekomposition"
-
-#: gucharmap/gucharmap_window.c:755
-msgid "_UTF-8"
-msgstr "_UTF-8"
-
-#: gucharmap/gucharmap_window.c:763
-msgid "_Other Representations"
-msgstr "_Andra representationer"
-
-#: gucharmap/gucharmap_window.c:774
-msgid "_Annotations and Cross References"
-msgstr "_Annotationer och korsreferenser"
-
-#: gucharmap/gucharmap_window.c:789
-msgid "_Alias Names"
-msgstr "_Aliasnamn"
-
-#: gucharmap/gucharmap_window.c:796
-msgid "_Notes"
-msgstr "_Anteckningar"
-
-#: gucharmap/gucharmap_window.c:803
-msgid "_See Also"
-msgstr "_Se även"
-
-#: gucharmap/gucharmap_window.c:810
-msgid "_Approximate Equivalents"
-msgstr "_Ungefärliga ekvivalenter"
-
-#: gucharmap/gucharmap_window.c:817
-msgid "_Equivalents"
-msgstr "_Ekvivalenter"
-
-#: gucharmap/gucharmap_window.c:829
-msgid "_CJK Ideograph Details"
-msgstr "_CJK-ideografdetaljer"
-
-#: gucharmap/gucharmap_window.c:845
-msgid "CJK Ideograph _Definition"
-msgstr "CJK-ideograf_definition"
-
-#: gucharmap/gucharmap_window.c:854
-msgid "_Mandarin Pronunciation"
-msgstr "_Mandarin-uttal"
-
-#: gucharmap/gucharmap_window.c:863
-msgid "Japanese _On Pronunciation"
-msgstr "Japanskt _On-uttal"
-
-#: gucharmap/gucharmap_window.c:872
-msgid "_Japanese Kun Pronunciation"
-msgstr "_Japanskt Kun-uttal"
-
-#: gucharmap/gucharmap_window.c:881
-msgid "_Cantonese Pronunciation"
-msgstr "_Kantonesiskt uttal"
-
-#: gucharmap/gucharmap_window.c:890
-msgid "_Tang Pronunciation"
-msgstr "_Tang-uttal"
-
-#: gucharmap/gucharmap_window.c:898
-msgid "_Korean Pronunciation"
-msgstr "_Koreanskt uttal"
-
-#: gucharmap/gucharmap_window.c:909
-msgid "Snap Columns to Power of Two"
-msgstr "Fäst kolumner vid jämnt antal"
-
-#. ctrl-f
-#: gucharmap/gucharmap_window.c:921
-msgid "_Find..."
-msgstr "_Sök..."
-
-#. ctrl-g
-#: gucharmap/gucharmap_window.c:932
-msgid "Find _Next"
-msgstr "Sök _nästa"
-
-#. shift-ctrl-g
-#: gucharmap/gucharmap_window.c:943
-msgid "Find _Previous"
-msgstr "Sök _föregående"
-
-#. ctrl-h
-#: gucharmap/gucharmap_window.c:959
-msgid "_Hex Code Point..."
-msgstr "_Hexadecimal kodpunkt..."
-
-#. ctrl-p
-#: gucharmap/gucharmap_window.c:967
-msgid "Character in _Clipboard"
-msgstr "Tecken i _urklipp"
-
-#. make the help menu
-#: gucharmap/gucharmap_window.c:977
-msgid "_Help"
-msgstr "_Hjälp"
-
-#: gucharmap/gucharmap_window.c:1015
-msgid "The selected code point is not a valid Unicode character."
-msgstr "Den valda kodpunkten är inte ett giltigt Unicode-tecken."
-
-#: gucharmap/gucharmap_window.c:1043
-msgid "Text copied to clipboard."
-msgstr "Texten kopierad till urklipp."
-
-#: gucharmap/gucharmap_window.c:1069
-msgid "_Text to copy:"
-msgstr "_Text att kopiera:"
-
-#: gucharmap/gucharmap_window.c:1090
-msgid "Copy to the clipboard."
-msgstr "Kopiera till urklipp."
+#~ msgid "not a printable character"
+#~ msgstr "inte ett utskrivbart tecken"
+
+#~ msgid "Character Details"
+#~ msgstr "Teckendetaljer"
+
+#~ msgid "Character"
+#~ msgstr "Tecken"
+
+#~ msgid "Unicode category"
+#~ msgstr "Unicode-kategori"
+
+#~ msgid "Canonical decomposition"
+#~ msgstr "Kanonisk dekomposition"
+
+#~ msgid "UTF-8"
+#~ msgstr "UTF-8"
+
+#~ msgid "Other representations"
+#~ msgstr "Andra representationer"
+
+#~ msgid "See also"
+#~ msgstr "Se även"
+
+#~ msgid "Equivalents"
+#~ msgstr "Ekvivalenter"
+
+#~ msgid "Alias names"
+#~ msgstr "Aliasnamn"
+
+#~ msgid "Approximate equivalents"
+#~ msgstr "Ungefärliga ekvivalenter"
+
+#~ msgid "Notes"
+#~ msgstr "Anteckningar"
+
+#~ msgid "CJK ideograph definition"
+#~ msgstr "CJK-ideografdefinition"
+
+#~ msgid "Mandarin pronunciation"
+#~ msgstr "Mandarin-uttal"
+
+#~ msgid "Japanese On pronunciation"
+#~ msgstr "Japanskt On-uttal"
+
+#~ msgid "Japanese Kun pronunciation"
+#~ msgstr "Japanskt Kun-uttal"
+
+#~ msgid "Cantonese pronunciation"
+#~ msgstr "Kantonesiskt uttal"
+
+#~ msgid "Tang pronunciation"
+#~ msgstr "Tang-uttal"
+
+#~ msgid "Korean pronunciation"
+#~ msgstr "Koreanskt uttal"
+
+#~ msgid "Details on the Current Character"
+#~ msgstr "Detaljer om det aktuella tecknet"
+
+#~ msgid "Expand/Collapse All"
+#~ msgstr "Fäll ut/Fäll in allt"
+
+#~ msgid "_Unicode Details"
+#~ msgstr "_Unicode-detaljer"
+
+#~ msgid "Options"
+#~ msgstr "Alternativ"
+
+#~ msgid "_Category"
+#~ msgstr "_Kategori"
+
+#~ msgid "Canonical _Decomposition"
+#~ msgstr "Kanonisk _dekomposition"
+
+#~ msgid "_UTF-8"
+#~ msgstr "_UTF-8"
+
+#~ msgid "_Other Representations"
+#~ msgstr "_Andra representationer"
+
+#~ msgid "_Annotations and Cross References"
+#~ msgstr "_Annotationer och korsreferenser"
+
+#~ msgid "_Alias Names"
+#~ msgstr "_Aliasnamn"
+
+#~ msgid "_Notes"
+#~ msgstr "_Anteckningar"
+
+#~ msgid "_See Also"
+#~ msgstr "_Se även"
+
+#~ msgid "_Approximate Equivalents"
+#~ msgstr "_Ungefärliga ekvivalenter"
+
+#~ msgid "_Equivalents"
+#~ msgstr "_Ekvivalenter"
+
+#~ msgid "_CJK Ideograph Details"
+#~ msgstr "_CJK-ideografdetaljer"
+
+#~ msgid "CJK Ideograph _Definition"
+#~ msgstr "CJK-ideograf_definition"
+
+#~ msgid "_Mandarin Pronunciation"
+#~ msgstr "_Mandarin-uttal"
+
+#~ msgid "Japanese _On Pronunciation"
+#~ msgstr "Japanskt _On-uttal"
+
+#~ msgid "_Japanese Kun Pronunciation"
+#~ msgstr "_Japanskt Kun-uttal"
+
+#~ msgid "_Cantonese Pronunciation"
+#~ msgstr "_Kantonesiskt uttal"
+
+#~ msgid "_Tang Pronunciation"
+#~ msgstr "_Tang-uttal"
+
+#~ msgid "_Korean Pronunciation"
+#~ msgstr "_Koreanskt uttal"
 
 #~ msgid "CJK Ideograph Extension A"
 #~ msgstr "CJK-ideograftillägg A"
