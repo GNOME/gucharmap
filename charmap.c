@@ -355,7 +355,7 @@ charmap_get_type ()
         (GClassInitFunc) charmap_class_init,
         NULL,           /* class_finalize */
         NULL,           /* class_data */
-        sizeof (GtkCalendar),
+        sizeof (Charmap),
         16,             /* n_preallocs */
         (GInstanceInitFunc) charmap_init,
       };
