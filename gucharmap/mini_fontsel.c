@@ -266,7 +266,7 @@ mini_font_selection_init (MiniFontSelection *fontsel)
   fontsel->available_faces = NULL;
   fontsel->font_desc = pango_font_description_new ();
 
-  gtk_box_set_spacing (GTK_BOX (fontsel), 12);
+  gtk_box_set_spacing (GTK_BOX (fontsel), 6);
 
   fontsel->family = gtk_combo_new ();
   fontsel->style = gtk_combo_new ();
