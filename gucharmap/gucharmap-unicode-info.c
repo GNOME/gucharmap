@@ -241,13 +241,13 @@ gucharmap_get_unicode_data_name_count ()
   return G_N_ELEMENTS (unicode_names);
 }
 
+#if ENABLE_UNIHAN
+
 gint
 gucharmap_get_unihan_count ()
 {
   return G_N_ELEMENTS (unihan);
 }
-
-#if ENABLE_UNIHAN
 
 /* does a binary search; also caches most recent, since it will often be
  * called in succession on the same character */
@@ -357,6 +357,12 @@ gucharmap_get_unicode_kJapaneseOn (gunichar uc)
 }
 
 #else /* #if ENABLE_UNIHAN */
+
+gint
+gucharmap_get_unihan_count ()
+{
+  return 0;
+}
 
 G_CONST_RETURN gchar * 
 gucharmap_get_unicode_kDefinition (gunichar uc)
