@@ -875,20 +875,26 @@ charmap_go_to_character (Charmap *charmap, gunichar uc)
 }
 
 
+/* direction is +1 (forward) or -1 (backward) */
 CharmapSearchResult
-charmap_search (Charmap *charmap, const gchar *search_text)
+charmap_search (Charmap *charmap, 
+                const gchar *search_text, 
+                gint direction)
 {
   gunichar uc;
   CharmapSearchResult result;
 
+  g_assert (direction == -1 || direction == 1);
+
   if (search_text[0] == '\0')
     return CHARMAP_NOTHING_TO_SEARCH_FOR;
   
-  uc = find_next_substring_match (charmap->chartable->active_char, 
-                                  UNICHAR_MAX, search_text);
+  uc = find_substring_match (charmap->chartable->active_char, 
+                             search_text, direction);
   if (uc != (gunichar)(-1) && uc <= UNICHAR_MAX)
     {
-      if (uc <= charmap->chartable->active_char)
+      if ((direction == 1 && uc <= charmap->chartable->active_char)
+          || (direction == -1 && uc >= charmap->chartable->active_char))
         result = CHARMAP_WRAPPED;
       else
         result = CHARMAP_FOUND;

@@ -355,21 +355,25 @@ ascii_case_strrstr (const gchar *haystack, const gchar *needle)
 
 
 /* case insensitive; returns (gunichar)(-1) if nothing found */
+/* direction must be +1 or -1 */
 gunichar
-find_next_substring_match (gunichar start, gunichar unichar_max,
-                           const gchar *search_text)
+find_substring_match (gunichar start, 
+                      const gchar *search_text,
+                      gint direction)
 {
-  gint min = 0;
-  gint mid = 0;
   gint max = sizeof (unicode_data) / sizeof (UnicodeData) - 1;
   gint i0;
   gint i;
 
+  g_assert (direction == -1 || direction == 1);
+
   /* locate the start character by binary search */
-  if (start < unicode_data[0].index || start > unichar_max)
+  if (start < unicode_data[0].index || start > UNICHAR_MAX)
     i0 = 0;
   else
     {
+      gint min = 0, mid = 0;
+
       while (max >= min) 
         {
           mid = (min + max) / 2;
@@ -384,16 +388,24 @@ find_next_substring_match (gunichar start, gunichar unichar_max,
       i0 = mid;
     }
 
+  max = sizeof (unicode_data) / sizeof (UnicodeData) - 1;
   /* try substring match on each */
-  max = sizeof (unicode_data) / sizeof (UnicodeData);
-  for (i = i0+1;  i != i0;  )
+  for (i = i0 + direction;  i != i0;  )
     {
+      if (unicode_data[i].index > UNICHAR_MAX)
+        {
+          i += direction;
+          continue;
+        }
+
       if (ascii_case_strrstr (unicode_data[i].name, search_text) != NULL)
         return unicode_data[i].index;
 
-      i++;
-      if (i >= max || unicode_data[i].index > unichar_max)
+      i += direction;
+      if (i > max)
         i = 0;
+      else if (i < 0)
+        i = max;
     }
 
   /* if the start character matches we want to return a match */

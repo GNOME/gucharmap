@@ -162,10 +162,15 @@ status_message (GtkWidget *widget, const gchar *message, GucharmapWindow *guw)
 }
 
 
+/* direction is -1 (back) or +1 (forward) */
 static void
-do_search (GucharmapWindow *guw, const gchar *search_text)
+do_search (GucharmapWindow *guw, 
+           const gchar *search_text, 
+           gint direction)
 {
-  switch (charmap_search (guw->charmap, search_text))
+  g_assert (direction == -1 || direction == 1);
+
+  switch (charmap_search (guw->charmap, search_text, direction))
     {
       case CHARMAP_NOT_FOUND:
         set_status (guw, _("Not found."));
@@ -202,7 +207,7 @@ search_find_response (GtkDialog *dialog, gint response, GPtrArray *stuff)
 
       guw->last_search = g_strdup (gtk_entry_get_text (GTK_ENTRY (entry)));
 
-      do_search (guw, guw->last_search);
+      do_search (guw, guw->last_search, 1);
     }
 
   g_ptr_array_free (stuff, FALSE);
@@ -262,9 +267,18 @@ static void
 search_find_next (GtkWidget *widget, GucharmapWindow *guw)
 {
   if (guw->last_search != NULL)
-    do_search (guw, guw->last_search);
+    do_search (guw, guw->last_search, 1);
   else
     search_find (widget, guw);
+}
+
+
+static void
+search_find_prev (GtkWidget *widget, GucharmapWindow *guw)
+{
+  if (guw->last_search != NULL)
+    do_search (guw, guw->last_search, -1);
+  /* XXX: else, open up search dialog, but search backwards :-( */
 }
 
 
@@ -906,6 +920,18 @@ make_menu (GucharmapWindow *guw)
                               GDK_g, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
   g_signal_connect (G_OBJECT (menu_item), "activate",
                     G_CALLBACK (search_find_next), guw);
+  gtk_menu_shell_append (GTK_MENU_SHELL (search_menu), menu_item);
+
+  /* shift-ctrl-g */
+  menu_item = gtk_image_menu_item_new_with_mnemonic (_("Find _Previous"));
+  gtk_image_menu_item_set_image (
+          GTK_IMAGE_MENU_ITEM (menu_item), 
+          gtk_image_new_from_stock (GTK_STOCK_FIND, GTK_ICON_SIZE_MENU));
+  gtk_widget_add_accelerator (menu_item, "activate", guw->accel_group,
+                              GDK_g, GDK_SHIFT_MASK | GDK_CONTROL_MASK, 
+                              GTK_ACCEL_VISIBLE);
+  g_signal_connect (G_OBJECT (menu_item), "activate",
+                    G_CALLBACK (search_find_prev), guw);
   gtk_menu_shell_append (GTK_MENU_SHELL (search_menu), menu_item);
   /* finished making the search menu */
 

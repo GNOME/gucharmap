@@ -125,7 +125,9 @@ void charmap_identify_clipboard (Charmap *charmap, GtkClipboard *clipboard);
 void charmap_expand_block_selector (Charmap *charmap);
 void charmap_collapse_block_selector (Charmap *charmap);
 void charmap_go_to_character (Charmap *charmap, gunichar uc);
-CharmapSearchResult charmap_search (Charmap *charmap, const gchar *search_text);
+CharmapSearchResult charmap_search (Charmap *charmap, 
+                                    const gchar *search_text, 
+                                    gint direction);
 void charmap_hide_caption (Charmap *charmap, CharmapCaption caption_id);
 void charmap_show_caption (Charmap *charmap, CharmapCaption caption_id);
 void charmap_zoom_enable (Charmap *charmap);
