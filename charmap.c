@@ -649,8 +649,9 @@ set_top_row (Charmap *charmap, gint row)
 
   charmap->page_first_char = row * charmap->cols;
 
+  /* character is still on the visible page */
   if (charmap->active_char - charmap->page_first_char 
-          < charmap->rows * charmap->rows)
+          < charmap->rows * charmap->cols)
     return;
 
   c = charmap->old_active_char % charmap->cols;
