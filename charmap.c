@@ -22,6 +22,7 @@
 #include "charmap.h"
 #include "unicode_info.h"
 
+#define abs(x) ((x) >= 0 ? (x) : (-x))
 
 /* return value is read-only, should not be freed */
 static gchar *
@@ -461,7 +462,6 @@ draw_and_expose_character_square (Charmap *charmap, gunichar uc)
 static void
 shift_area (Charmap *charmap, gint row_offset)
 {
-#define abs(x) ((x) >= 0 ? (x) : (-x))
   gint rows;
   gint square_width, square_height, width, height;
   gint area_height;
@@ -621,12 +621,19 @@ set_active_character (Charmap *charmap, gunichar uc)
     {
       charmap->page_first_char = uc - (uc % CHARMAP_COLS);
     }
-  else 
+  else if (abs (offset) % CHARMAP_COLS == 0)
     {
       charmap->page_first_char = 
           charmap->active_char 
           + (charmap->old_page_first_char - charmap->old_active_char);
     }
+  else
+    {
+      charmap->page_first_char = uc - (uc % CHARMAP_COLS);
+    }
+
+  if (charmap->page_first_char < 0)
+    charmap->page_first_char = 0;
 }
 
 
