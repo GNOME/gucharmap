@@ -36,131 +36,31 @@
 #endif
 
 
-static void
-jump_clipboard (GtkWidget *widget, GucharmapWindow *guw)
+typedef struct _EntryDialog EntryDialog;
+
+struct _EntryDialog
 {
-  gucharmap_charmap_identify_clipboard (guw->charmap, 
-                              gtk_clipboard_get (GDK_SELECTION_CLIPBOARD));
-}
-
-
-static void
-jump_code_point_response (GtkDialog *dialog, 
-                          gint response, 
-                          GPtrArray *stuff)
-{
-  GucharmapWindow *guw = g_ptr_array_index (stuff, 0);
-  GtkWidget *entry = g_ptr_array_index (stuff, 1);
-  GtkWidget *label = g_ptr_array_index (stuff, 2);
-
-  if (response == GTK_RESPONSE_OK)
-    {
-      const gchar *text;
-      gchar *message;
-      gchar *endptr;
-      glong l;
-
-      text = gtk_entry_get_text (GTK_ENTRY (entry));
-
-      l = strtol (text, &endptr, 16);
-
-      if (*text != '\0' && *endptr == '\0' && l >= 0 && l <= UNICHAR_MAX)
-        gucharmap_charmap_go_to_character (guw->charmap, (gunichar) l);
-      else
-        {
-          message = g_strdup_printf (_("Not a valid code point to jump to. Must be a hexadecimal number between 0 and %4.4X."), UNICHAR_MAX);
-          gtk_label_set_text (GTK_LABEL (label), message);
-          g_free (message);
-          return;
-        }
-    }
-
-  g_ptr_array_free (stuff, FALSE);
-  gtk_widget_destroy (GTK_WIDGET (dialog));
-}
-
-
-static void
-jump_code_point (GtkWidget *widget, GucharmapWindow *guw)
-{
+  GucharmapWindow *guw;
   GtkWidget *dialog;
-  GtkWidget *vbox;
-  GtkWidget *hbox;
-  GtkWidget *entry;
-  GtkWidget *label;
-  GPtrArray *stuff;
-
-  dialog = gtk_dialog_new_with_buttons (_("Go to hex code point"),
-                                        GTK_WINDOW (guw),
-                                        GTK_DIALOG_DESTROY_WITH_PARENT, 
-                                        GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, 
-                                        GTK_STOCK_OK, GTK_RESPONSE_OK, 
-                                        NULL);
-
-  gtk_window_set_icon (GTK_WINDOW (dialog), guw->icon);
-
-  vbox = gtk_vbox_new (FALSE, 6);
-  gtk_container_set_border_width (GTK_CONTAINER (vbox), 6);
-
-  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), vbox,
-                      FALSE, FALSE, 0);
-
-  entry = gtk_entry_new ();
-  gtk_entry_set_activates_default (GTK_ENTRY (entry), TRUE);
-  gtk_entry_set_max_length (GTK_ENTRY (entry), 8); 
-  gtk_entry_set_width_chars (GTK_ENTRY (entry), 8);
-  hbox = gtk_hbox_new (FALSE, 0);
-  label = gtk_label_new_with_mnemonic (_("_Enter Unicode code point"));
-  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-  gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
-  gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
-
-  gtk_label_set_mnemonic_widget (GTK_LABEL (label), entry);
-
-  gtk_box_pack_start (GTK_BOX (vbox), entry, FALSE, FALSE, 0);
-
-  hbox = gtk_hbox_new (FALSE, 0);
-  label = gtk_label_new (NULL);
-  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-  gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
-  gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
-  gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
-
-  gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
-
-  stuff = g_ptr_array_sized_new (3);
-  g_ptr_array_add (stuff, guw);
-  g_ptr_array_add (stuff, entry);
-  g_ptr_array_add (stuff, label);
-
-  g_signal_connect (GTK_DIALOG (dialog), "response", 
-                    G_CALLBACK (jump_code_point_response), stuff);
-
-  gtk_widget_show_all (dialog);
-
-  gtk_widget_grab_focus (entry);
-}
-
-
-static void
-status_message (GtkWidget *widget, const gchar *message, GucharmapWindow *guw)
-{
-  gtk_statusbar_pop (GTK_STATUSBAR (guw->status), 0); 
-  if (message != NULL)
-    gtk_statusbar_push (GTK_STATUSBAR (guw->status), 0, message);
-}
+  GtkEntry *entry;
+};
 
 
 static void
 information_dialog (GucharmapWindow *guw,
+                    GtkWindow *parent,
                     const gchar *message)
 {
   GtkWidget *dialog, *label, *hbox, *icon;
 
-  dialog = gtk_dialog_new_with_buttons (_("Information"), GTK_WINDOW (guw),
-                                        GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_NO_SEPARATOR,
+  dialog = gtk_dialog_new_with_buttons (_("Information"), parent,
+                                        GTK_DIALOG_MODAL 
+                                        | GTK_DIALOG_DESTROY_WITH_PARENT 
+                                        | GTK_DIALOG_NO_SEPARATOR,
                                         GTK_STOCK_OK, GTK_RESPONSE_ACCEPT, 
                                         NULL);
+
+  gtk_window_set_icon (GTK_WINDOW (dialog), guw->icon);
 
   hbox = gtk_hbox_new (FALSE, 12);
   gtk_widget_show (hbox);
@@ -176,12 +76,124 @@ information_dialog (GucharmapWindow *guw,
 
   label = gtk_label_new (message);
   gtk_widget_show (label);
+  gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
   gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 
   g_signal_connect (dialog, "response", 
                     G_CALLBACK (gtk_widget_destroy), NULL);
   
   gtk_widget_show (dialog);
+}
+
+
+static void
+jump_clipboard (GtkWidget *widget, GucharmapWindow *guw)
+{
+  gucharmap_charmap_identify_clipboard (
+          guw->charmap, gtk_clipboard_get (GDK_SELECTION_CLIPBOARD));
+}
+
+
+static void
+jump_code_point_response (GtkDialog *dialog, 
+                          gint response, 
+                          EntryDialog *entry_dialog)
+{
+  if (response == GTK_RESPONSE_OK)
+    {
+      const gchar *text;
+      gchar *message;
+      gchar *endptr;
+      glong l;
+
+      text = gtk_entry_get_text (entry_dialog->entry);
+
+      l = strtol (text, &endptr, 16);
+
+      if (*text != '\0' && *endptr == '\0' && l >= 0 && l <= UNICHAR_MAX)
+        gucharmap_charmap_go_to_character (entry_dialog->guw->charmap, 
+                                           (gunichar) l);
+      else
+        {
+          message = g_strdup_printf (_("Not a valid code point to jump to."
+                                       " Must be a hexadecimal number between"
+                                       " 0 and %4.4X."), UNICHAR_MAX);
+          information_dialog (entry_dialog->guw, GTK_WINDOW (dialog), message);
+          g_free (message);
+          return;
+        }
+    }
+
+  g_free (entry_dialog);
+  gtk_widget_destroy (GTK_WIDGET (dialog));
+}
+
+
+static void
+jump_code_point (GtkWidget *widget, GucharmapWindow *guw)
+{
+  GtkWidget *dialog;
+  GtkWidget *entry;
+  GtkWidget *label;
+  GtkWidget *crapbox;
+  GtkWidget *spacer;
+  EntryDialog *entry_dialog;
+
+  dialog = gtk_dialog_new_with_buttons (_("Jump to Unicode Code Point"),
+                                        GTK_WINDOW (guw),
+                                        GTK_DIALOG_DESTROY_WITH_PARENT
+                                        | GTK_DIALOG_NO_SEPARATOR, 
+                                        GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, 
+                                        GTK_STOCK_OK, GTK_RESPONSE_OK, 
+                                        NULL);
+
+  crapbox = gtk_vbox_new (FALSE, 0);
+  gtk_widget_show (crapbox);
+  gtk_container_add (GTK_CONTAINER (GTK_DIALOG (dialog)->vbox), crapbox);
+
+  gtk_window_set_icon (GTK_WINDOW (dialog), guw->icon);
+  gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+  gtk_container_set_border_width (GTK_CONTAINER (crapbox), 6);
+  gtk_box_set_spacing (GTK_BOX (crapbox), 6);
+
+  label = gtk_label_new_with_mnemonic (_("_Enter hexadecimal Unicode code point:"));
+  gtk_widget_show (label);
+  gtk_box_pack_start (GTK_BOX (crapbox), label, FALSE, FALSE, 0);
+
+  entry = gtk_entry_new ();
+  gtk_widget_show (entry);
+  gtk_entry_set_activates_default (GTK_ENTRY (entry), TRUE);
+  gtk_entry_set_max_length (GTK_ENTRY (entry), 8); 
+  gtk_entry_set_width_chars (GTK_ENTRY (entry), 8);
+  gtk_box_pack_start (GTK_BOX (crapbox), entry, FALSE, FALSE, 0);
+
+  spacer = gtk_alignment_new (0, 0, 0, 0);
+  gtk_widget_show (spacer);
+  gtk_widget_set_size_request (spacer, -1, 6);
+  gtk_box_pack_start (GTK_BOX (crapbox), spacer, FALSE, FALSE, 0);
+
+  gtk_label_set_mnemonic_widget (GTK_LABEL (label), entry);
+
+  entry_dialog = g_new (EntryDialog, 1); 
+  entry_dialog->guw = guw;
+  entry_dialog->dialog = dialog;
+  entry_dialog->entry = GTK_ENTRY (entry);
+
+  g_signal_connect (GTK_DIALOG (dialog), "response", 
+                    G_CALLBACK (jump_code_point_response), entry_dialog);
+
+  gtk_widget_show_all (dialog);
+
+  gtk_widget_grab_focus (entry);
+}
+
+
+static void
+status_message (GtkWidget *widget, const gchar *message, GucharmapWindow *guw)
+{
+  gtk_statusbar_pop (GTK_STATUSBAR (guw->status), 0); 
+  if (message != NULL)
+    gtk_statusbar_push (GTK_STATUSBAR (guw->status), 0, message);
 }
 
 
@@ -200,11 +212,12 @@ do_search (GucharmapWindow *guw,
         break;
 
       case GUCHARMAP_NOT_FOUND:
-        information_dialog (guw, _("Not found."));
+        information_dialog (guw, GTK_WINDOW (guw), _("Not found."));
         break;
 
       case GUCHARMAP_NOTHING_TO_SEARCH_FOR:
-        information_dialog (guw, _("Nothing to search for."));
+        information_dialog (guw, GTK_WINDOW (guw), 
+                            _("Nothing to search for."));
         break;
 
       default:
@@ -531,10 +544,10 @@ make_menu (GucharmapWindow *guw)
   /* separator */
   gtk_menu_shell_append (GTK_MENU_SHELL (search_menu), gtk_menu_item_new ());
 
-  /* ctrl-h */
-  menu_item = gtk_menu_item_new_with_mnemonic (_("_Hex Code Point..."));
+  /* ctrl-j */
+  menu_item = gtk_menu_item_new_with_mnemonic (_("Code _Point..."));
   gtk_widget_add_accelerator (menu_item, "activate", guw->accel_group,
-                              GDK_h, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+                              GDK_j, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
   g_signal_connect (G_OBJECT (menu_item), "activate",
                     G_CALLBACK (jump_code_point), guw);
   gtk_menu_shell_append (GTK_MENU_SHELL (search_menu), menu_item);
