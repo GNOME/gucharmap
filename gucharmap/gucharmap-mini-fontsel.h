@@ -47,18 +47,13 @@ struct _GucharmapMiniFontSelection
   GtkHBox parent;
 
   GtkWidget *family; /* combo box */
-  GtkWidget *style;  /* combo box */
+  GtkWidget *bold;   /* toggle button*/
+  GtkWidget *italic; /* toggle button*/
 
   GtkObject *size_adj; 
   GtkWidget *size;   /* spin button */
-
+  
   PangoFontDescription *font_desc;
-
-  GHashTable *available_faces;
-
-  gint style_changed_handler_id;
-
-  gboolean realized;
 };
 
 
