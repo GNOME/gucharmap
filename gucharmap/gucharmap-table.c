@@ -1834,9 +1834,10 @@ gucharmap_table_get_active_character (GucharmapTable *chartable)
 }
 
 void
-gucharmap_table_set_active_character (GucharmapTable *chartable, gunichar uc)
+gucharmap_table_set_active_character (GucharmapTable *chartable, 
+                                      gunichar        wc)
 {
-  set_active_char (chartable, uc);
+  set_active_char (chartable, wc);
   gucharmap_table_redraw (chartable, TRUE);
 }
 

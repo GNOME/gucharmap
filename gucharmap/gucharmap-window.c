@@ -451,15 +451,19 @@ static void
 prev_character (GtkWidget       *button,
                 GucharmapWindow *guw)
 {
+  gint index = guw->charmap->chartable->active_cell;
   gunichar wc;
 
-  if (guw->charmap->chartable->active_cell <= 0)
+  do
     {
-      guint last_index = gucharmap_codepoint_list_get_last_index (guw->charmap->chartable->codepoint_list);
-      wc = gucharmap_codepoint_list_get_char (guw->charmap->chartable->codepoint_list, last_index);
+      index--;
+
+      if (index <= 0)
+        index = gucharmap_codepoint_list_get_last_index (guw->charmap->chartable->codepoint_list);
+
+      wc = gucharmap_codepoint_list_get_char (guw->charmap->chartable->codepoint_list, index);
     }
-  else
-    wc = gucharmap_codepoint_list_get_char (guw->charmap->chartable->codepoint_list, guw->charmap->chartable->active_cell - 1);
+  while (!gucharmap_unichar_isdefined (wc) || !gucharmap_unichar_validate (wc));
 
   gucharmap_table_set_active_character (guw->charmap->chartable, wc);
 }
@@ -468,13 +472,19 @@ static void
 next_character (GtkWidget       *button,
                 GucharmapWindow *guw)
 {
+  gint index = guw->charmap->chartable->active_cell;
   gunichar wc;
 
-  if (guw->charmap->chartable->active_cell 
-      >= gucharmap_codepoint_list_get_last_index (guw->charmap->chartable->codepoint_list))
-    wc = gucharmap_codepoint_list_get_char (guw->charmap->chartable->codepoint_list, 0);
-  else
-    wc = gucharmap_codepoint_list_get_char (guw->charmap->chartable->codepoint_list, guw->charmap->chartable->active_cell + 1);
+  do
+    {
+      index++;
+
+      if (index >= gucharmap_codepoint_list_get_last_index (guw->charmap->chartable->codepoint_list))
+        index = 0;
+
+      wc = gucharmap_codepoint_list_get_char (guw->charmap->chartable->codepoint_list, index);
+    }
+  while (!gucharmap_unichar_isdefined (wc) || !gucharmap_unichar_validate (wc));
 
   gucharmap_table_set_active_character (guw->charmap->chartable, wc);
 }

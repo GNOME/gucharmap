@@ -49,10 +49,10 @@ struct _GucharmapTable
   PangoFontMetrics *font_metrics;
   PangoLayout *pango_layout;
 
-  guint page_first_cell;
-  guint active_cell;
-  guint old_page_first_cell;
-  guint old_active_cell;
+  gint page_first_cell;
+  gint active_cell;
+  gint old_page_first_cell;
+  gint old_active_cell;
 
   /* for the scrollbar */
   GtkAdjustment *adjustment; 

@@ -644,8 +644,9 @@ sub process_scripts_txt ($)
     }
 
     close ($scripts);
+
     # do we want Common on the list? maybe with a different name?
-    # $scripts{"Common"} = 1; 
+    $scripts{"Common"} = 1; 
 
     print $out "/* unicode-blocks.h */\n";
     print $out "/* THIS IS A GENERATED FILE. CHANGES WILL BE OVERWRITTEN. */\n";
