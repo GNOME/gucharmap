@@ -259,37 +259,6 @@ insert_vanilla_detail (GucharmapCharmap *charmap,
 }
 
 
-/* many thanks to Eric Warmenhoven, author of gtkimhtml.c in gaim; 
- * ideas and code ripped from there */
-static gboolean
-tag_event (GtkTextTag *tag,
-           GtkWidget *widget,
-           GdkEvent *event,
-           GtkTextIter *iter,
-           GucharmapCharmap *charmap)
-{
-  gunichar uc = (gunichar) g_object_get_data (G_OBJECT (tag), "character");
-  g_print ("tag_event: uc = %04X\n", uc);
-
-  if (event->type == GDK_BUTTON_RELEASE 
-      && ((GdkEventButton *) event)->button == 1) 
-    {
-      GtkTextIter start, end;
-      /* we shouldn't open a URL if the user has selected something: */
-      gtk_text_buffer_get_selection_bounds (gtk_text_iter_get_buffer (iter),
-                                            &start, &end);
-
-      if (gtk_text_iter_get_offset (&start) == gtk_text_iter_get_offset (&end))
-        {
-          gucharmap_table_set_active_character (charmap->chartable, uc);
-          return TRUE;
-        }
-    }
-
-  return FALSE;
-}
-           
-
 static void
 insert_chocolate_detail_codepoints (GucharmapCharmap *charmap,
                                     GtkTextBuffer *buffer,
@@ -314,10 +283,7 @@ insert_chocolate_detail_codepoints (GucharmapCharmap *charmap,
                                         "foreground", "blue", 
                                         "underline", PANGO_UNDERLINE_SINGLE, 
                                         NULL);
-      g_object_set_data (G_OBJECT (tag), "character", (gpointer) ucs[i]);
-
-      g_signal_connect (G_OBJECT (tag), "event", 
-                        G_CALLBACK (tag_event), charmap);
+      g_object_set_data (G_OBJECT (tag), "link_character", (gpointer) ucs[i]);
 
       gtk_text_buffer_insert_with_tags (buffer, iter, str, -1, tag, NULL);
       gtk_text_buffer_insert (buffer, iter, "\n", -1);
@@ -729,6 +695,85 @@ make_navigation_bar (GucharmapCharmap *charmap)
 }
 
 
+static void
+follow_if_link (GucharmapCharmap *charmap,
+                GtkTextIter *iter)
+{
+  GSList *tags = NULL, *tagp = NULL;
+
+  tags = gtk_text_iter_get_tags (iter);
+  for (tagp = tags;  tagp != NULL;  tagp = tagp->next)
+    {
+      GtkTextTag *tag = tagp->data;
+      gunichar uc = (gunichar) g_object_get_data (G_OBJECT (tag), 
+                                                  "link_character");
+
+      if (uc != 0) /* XXX: atm can't link to U+0000, easy to fix */
+        {
+          gucharmap_table_set_active_character (charmap->chartable, uc);
+          break;
+        }
+    }
+}
+
+
+static gboolean
+text_view_button_release_event (GtkWidget *text_view,
+                                GdkEventButton *event,
+                                GucharmapCharmap *charmap)
+{
+  GtkTextIter start, end, iter;
+  GtkTextBuffer *buffer;
+  gint x, y;
+
+  if (event->button != 1)
+    return FALSE;
+
+  buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_view));
+
+  /* we shouldn't follow a link if the user has selected something */
+  gtk_text_buffer_get_selection_bounds (buffer, &start, &end);
+  if (gtk_text_iter_get_offset (&start) != gtk_text_iter_get_offset (&end))
+    return FALSE;
+
+  gtk_text_view_window_to_buffer_coords (GTK_TEXT_VIEW (text_view), 
+                                         GTK_TEXT_WINDOW_WIDGET,
+                                         event->x, event->y, &x, &y);
+
+  gtk_text_view_get_iter_at_location (GTK_TEXT_VIEW (text_view), &iter, x, y);
+
+  follow_if_link (charmap, &iter);
+
+  return FALSE;
+}
+
+
+static gboolean
+text_view_key_press_event (GtkWidget *text_view,
+                           GdkEventKey *event,
+                           GucharmapCharmap *charmap)
+{
+  GtkTextIter iter;
+  GtkTextBuffer *buffer;
+
+  switch (event->keyval)
+    {
+      case GDK_Return: 
+      case GDK_KP_Enter:
+        buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_view));
+        gtk_text_buffer_get_iter_at_mark (buffer, &iter, 
+                                          gtk_text_buffer_get_insert (buffer));
+        follow_if_link (charmap, &iter);
+        break;
+
+      default:
+        break;
+    }
+
+  return FALSE;
+}
+
+
 static GtkWidget *
 make_details_page (GucharmapCharmap *charmap)
 {
@@ -751,6 +796,12 @@ make_details_page (GucharmapCharmap *charmap)
   gtk_text_view_set_editable (GTK_TEXT_VIEW (charmap->details), FALSE);
   gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (charmap->details), 
                                GTK_WRAP_WORD);
+
+  /* gtk_widget_set_events (charmap->details, 0xffffffff); */
+  g_signal_connect (G_OBJECT (charmap->details), "button-release-event",
+                    G_CALLBACK (text_view_button_release_event), charmap);
+  g_signal_connect (G_OBJECT (charmap->details), "key-press-event",
+                    G_CALLBACK (text_view_key_press_event), charmap);
 
   create_tags (charmap);
 
