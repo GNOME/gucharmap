@@ -79,7 +79,7 @@ struct _ChartableClass
 };
 
 
-GtkType chartable_get_type (void);
+GType chartable_get_type (void);
 GtkWidget * chartable_new (void);
 void chartable_set_font (Chartable *chartable, const gchar *font_name);
 gunichar chartable_get_active_character (Chartable *chartable);

@@ -78,7 +78,7 @@ G_CONST_RETURN gchar ** get_nameslist_colons (gunichar uc);
 gboolean unichar_validate (gunichar ch);
 gint unichar_to_printable_utf8 (gunichar uc, gchar *outbuf);
 GUnicodeType unichar_type (gunichar uc);
-gboolean g_unichar_isdefined (gunichar uc);
+gboolean unichar_isdefined (gunichar uc);
 gboolean unichar_isgraph (gunichar c);
 
 G_END_DECLS

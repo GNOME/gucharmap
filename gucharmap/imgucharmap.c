@@ -32,7 +32,7 @@
 
 
 GType type_imgucharmap = 0;
-GtkWidget *gucharmap_window = NULL
+GtkWidget *gucharmap_window = NULL;
 
 
 static void
@@ -47,7 +47,7 @@ im_module_exit ()
 {
   g_printerr ("im_module_exit\n");
 
-  XXXXXXXXXXXXXXXXXXXX destroy gucharmap_window
+  /* XXXXXXXXXXXXXXXXXXXX destroy gucharmap_window */
 }
 
 

@@ -35,7 +35,8 @@ libgucharmap_la_SOURCES = gucharmap_marshal.c gucharmap_marshal.h \
                           chartable_accessible.c chartable_accessible.h \
                           charcell_accessible.c charcell_accessible.h \
                           chartable.c chartable.h \
-                          mini_fontsel.c mini_fontsel.h
+                          mini_fontsel.c mini_fontsel.h \
+                          gucharmap_window.c gucharmap_window.h
 
 
 # this is different from the project version
@@ -45,11 +46,12 @@ libgucharmap_la_LDFLAGS = -version-info 1:0:0
 
 libgucharmapincludedir = $(includedir)/gucharmap
 libgucharmapinclude_HEADERS = charmap.h chartable.h unicode_info.h \
-                              mini_fontsel.h
+                              mini_fontsel.h gucharmap_window.h
 
 
 bin_PROGRAMS = gucharmap
-gucharmap_SOURCES = main.c
+# gucharmap_SOURCES = main.c
+gucharmap_SOURCES = test-main.c
 
 if OS_WIN32
 
@@ -65,14 +67,11 @@ gucharmap_LDADD = libgucharmap.la @GTK_LIBS@ @GNOME_LIBS@ @POPT_LIBS@
 endif
 
 
-
 moduledir = $(libdir)/gucharmap/immodules
 module_LTLIBRARIES = im-gucharmap.la
 im_gucharmap_la_LDFLAGS = -rpath $(moduledir) -avoid-version -module
 im_gucharmap_la_SOURCES = imgucharmap.c
 im_gucharmap_la_LIBADD = libgucharmap.la @GTK_LIBS@
-
-
 
 
 gucharmap_marshal.h: gucharmap_marshal.list

@@ -118,7 +118,7 @@ struct _CharmapClass
 };
 
 
-GtkType charmap_get_type (void);
+GType charmap_get_type (void);
 GtkWidget * charmap_new (void);
 void charmap_set_font (Charmap *charmap, const gchar *font_name);
 void charmap_identify_clipboard (Charmap *charmap, GtkClipboard *clipboard);
