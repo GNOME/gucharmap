@@ -1,8 +1,13 @@
 #include <gtk/gtk.h>
 
 gint
-main (gint argc, gchar **argv)
+main ()
 {
-  g_print ("%s\n", gtk_rc_get_im_module_file ());
+  gchar *im_module_file;
+
+  im_module_file = gtk_rc_get_im_module_file ();
+  g_print ("%s\n", im_module_file);
+  g_free (im_module_file);
+
   return 0;
 }
