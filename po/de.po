@@ -14,9 +14,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gucharmap 0.7.0\n"
-"POT-Creation-Date: 2003-06-01 23:03+0200\n"
-"PO-Revision-Date: 2003-06-01 23:03+0200\n"
+"Project-Id-Version: gucharmap 0.8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-06-12 12:40+0200\n"
+"PO-Revision-Date: 2003-06-12 12:40+0200\n"
 "Last-Translator: Christian Neumair <chris@gnome-de.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -25,110 +26,106 @@ msgstr ""
 
 #. ID
 #: gucharmap.desktop.in.h:1 gucharmap/gucharmap-window.c:381
-#: gucharmap/gucharmap-window.c:755 gucharmap/imgucharmap.c:209
+#: gucharmap/gucharmap-window.c:972 gucharmap/imgucharmap.c:209
 msgid "Unicode Character Map"
 msgstr "Unicode-Zeichentabelle"
 
-#: gucharmap/gucharmap-charmap.c:359
+#: gucharmap/gucharmap-charmap.c:397
+msgid "Canonical decomposition:"
+msgstr "Kanonische Zerlegung:"
+
+#: gucharmap/gucharmap-charmap.c:437 gucharmap/gucharmap-table.c:327
 msgid "[not a printable character]"
 msgstr "[kein druckbares Zeichen]"
 
-#: gucharmap/gucharmap-charmap.c:373
+#: gucharmap/gucharmap-charmap.c:457
 msgid "General Character Properties"
 msgstr "Allgemeine Zeicheneigenschaften"
 
 #. character category
-#: gucharmap/gucharmap-charmap.c:376
+#: gucharmap/gucharmap-charmap.c:460
 msgid "Unicode category:"
 msgstr "Unicode-Kategorie:"
 
-#: gucharmap/gucharmap-charmap.c:384
-msgid "Canonical decomposition:"
-msgstr "Kanonische Zerlegung:"
-
-#: gucharmap/gucharmap-charmap.c:388
+#: gucharmap/gucharmap-charmap.c:466
 msgid "Various Useful Representations"
 msgstr "Verschiedene, nützliche Darstellungsweisen"
 
-#: gucharmap/gucharmap-charmap.c:397
+#: gucharmap/gucharmap-charmap.c:475
 msgid "UTF-8:"
 msgstr "UTF-8:"
 
-#: gucharmap/gucharmap-charmap.c:405
+#: gucharmap/gucharmap-charmap.c:483
 msgid "Octal escaped UTF-8:"
 msgstr "Oktal terminiertes UTF-8:"
 
-#: gucharmap/gucharmap-charmap.c:411
+#: gucharmap/gucharmap-charmap.c:489
 msgid "Decimal entity reference:"
 msgstr "Dezimale Entitätsreferenz:"
 
-#: gucharmap/gucharmap-charmap.c:415
+#: gucharmap/gucharmap-charmap.c:495
 msgid "Annotations and Cross References"
 msgstr "Darstellungsweisen und Querverweise"
 
-#: gucharmap/gucharmap-charmap.c:422
+#: gucharmap/gucharmap-charmap.c:502
 msgid "Alias names:"
 msgstr "Aliasnamen:"
 
-#: gucharmap/gucharmap-charmap.c:431
+#: gucharmap/gucharmap-charmap.c:511
 msgid "Notes:"
 msgstr "Hinweise:"
 
-#: gucharmap/gucharmap-charmap.c:441
+#: gucharmap/gucharmap-charmap.c:520
 msgid "See also:"
 msgstr "Siehe auch:"
 
-#: gucharmap/gucharmap-charmap.c:450
+#: gucharmap/gucharmap-charmap.c:529
 msgid "Approximate equivalents:"
 msgstr "Ungefähre Äquivalente:"
 
-#: gucharmap/gucharmap-charmap.c:459
+#: gucharmap/gucharmap-charmap.c:538
 msgid "Equivalents:"
 msgstr "Äquivalente:"
 
-#: gucharmap/gucharmap-charmap.c:465
+#: gucharmap/gucharmap-charmap.c:553
 msgid "CJK Ideograph Information"
 msgstr "CJK-Ideographinformationen"
 
-#: gucharmap/gucharmap-charmap.c:470
+#: gucharmap/gucharmap-charmap.c:558
 msgid "Definition in English:"
 msgstr "Definition in Englisch:"
 
-#: gucharmap/gucharmap-charmap.c:475
+#: gucharmap/gucharmap-charmap.c:563
 msgid "Mandarin Pronunciation:"
 msgstr "Mandarin-Aussprache:"
 
-#: gucharmap/gucharmap-charmap.c:480
+#: gucharmap/gucharmap-charmap.c:568
 msgid "Japanese On Pronunciation:"
 msgstr "Japanische On-Aussprache:"
 
-#: gucharmap/gucharmap-charmap.c:485
+#: gucharmap/gucharmap-charmap.c:573
 msgid "Japanese Kun Pronunciation:"
 msgstr "Japanische Kun-Aussprache:"
 
-#: gucharmap/gucharmap-charmap.c:490
+#: gucharmap/gucharmap-charmap.c:578
 msgid "Tang Pronunciation:"
 msgstr "Tang-Aussprache:"
 
-#: gucharmap/gucharmap-charmap.c:495
+#: gucharmap/gucharmap-charmap.c:583
 msgid "Korean Pronunciation:"
 msgstr "Koreanische Aussprache:"
 
-#: gucharmap/gucharmap-charmap.c:564
-msgid "List of Unicode Blocks"
-msgstr "Liste der Unicode-Blöcke"
-
-#: gucharmap/gucharmap-charmap.c:631
-msgid "Character Map"
-msgstr "Zeichentabelle"
-
-#: gucharmap/gucharmap-charmap.c:635
+#: gucharmap/gucharmap-charmap.c:890
 msgid "Characte_r Table"
 msgstr "Zeichen_tabelle"
 
-#: gucharmap/gucharmap-charmap.c:638
+#: gucharmap/gucharmap-charmap.c:893
 msgid "Character _Details"
 msgstr "Zeichen_details"
+
+#: gucharmap/gucharmap-charmap.c:911
+msgid "List of Unicode Blocks"
+msgstr "Liste der Unicode-Blöcke"
 
 #: gucharmap/gucharmap-mini-fontsel.c:197
 msgid "Font"
@@ -150,23 +147,23 @@ msgstr "_Kursiv"
 msgid "Font Size"
 msgstr "Schriftgröße"
 
-#: gucharmap/gucharmap-table.c:1292
+#: gucharmap/gucharmap-table.c:1417
 msgid "Clipboard is empty."
 msgstr "Die Zwischenablage ist leer."
 
-#: gucharmap/gucharmap-table.c:1294
+#: gucharmap/gucharmap-table.c:1419
 msgid "There is no selected text."
 msgstr "Sie haben keinen Text markiert."
 
-#: gucharmap/gucharmap-table.c:1302 gucharmap/gucharmap-table.c:1544
+#: gucharmap/gucharmap-table.c:1427 gucharmap/gucharmap-table.c:1690
 msgid "Unknown character, unable to identify."
 msgstr "Unbekanntes Zeichen, Identifikation nicht möglich."
 
-#: gucharmap/gucharmap-table.c:1306 gucharmap/gucharmap-table.c:1548
+#: gucharmap/gucharmap-table.c:1431 gucharmap/gucharmap-table.c:1694
 msgid "Character found."
 msgstr "Zeichen gefunden."
 
-#: gucharmap/gucharmap-table.c:1615
+#: gucharmap/gucharmap-table.c:1761
 msgid "Character Table"
 msgstr "Zeichentabelle"
 
@@ -378,69 +375,84 @@ msgstr "Such_begriff:"
 msgid "translator_credits"
 msgstr "Christian Neumair <chris@gnome-de.org>"
 
-#: gucharmap/gucharmap-window.c:425
+#: gucharmap/gucharmap-window.c:516
 msgid "_File"
 msgstr "_Datei"
 
-#: gucharmap/gucharmap-window.c:427
+#: gucharmap/gucharmap-window.c:518
 msgid "_View"
 msgstr "_Ansicht"
 
-#: gucharmap/gucharmap-window.c:429
+#: gucharmap/gucharmap-window.c:520
 msgid "_Search"
 msgstr "_Suchen"
 
+#: gucharmap/gucharmap-window.c:522
+msgid "_Go"
+msgstr "_Gehe zu"
+
 #. ctrl-+ or ctrl-=
-#: gucharmap/gucharmap-window.c:450
+#: gucharmap/gucharmap-window.c:543
 msgid "Zoom _In"
 msgstr "Ver_größern"
 
 #. ctrl--
-#: gucharmap/gucharmap-window.c:462
+#: gucharmap/gucharmap-window.c:555
 msgid "Zoom _Out"
 msgstr "Ver_kleinern"
 
-#: gucharmap/gucharmap-window.c:474
+#: gucharmap/gucharmap-window.c:567
 msgid "Snap Columns to Power of Two"
 msgstr "Spalten bis zur doppelten Breite erweitern"
 
-#. ctrl-f
-#: gucharmap/gucharmap-window.c:486
+#: gucharmap/gucharmap-window.c:578
 msgid "_Find..."
 msgstr "_Suchen..."
 
-#. ctrl-g
-#: gucharmap/gucharmap-window.c:497
+#: gucharmap/gucharmap-window.c:588
 msgid "Find _Next"
 msgstr "_Weitersuchen"
 
-#. shift-ctrl-g
-#: gucharmap/gucharmap-window.c:508
+#: gucharmap/gucharmap-window.c:598
 msgid "Find _Previous"
 msgstr "_Rückwärts suchen"
 
-#. ctrl-j
-#: gucharmap/gucharmap-window.c:524
+#: gucharmap/gucharmap-window.c:613
 msgid "Code _Point..."
 msgstr "Zeichen mit _Hex-Code..."
 
-#. ctrl-p
-#: gucharmap/gucharmap-window.c:532
+#: gucharmap/gucharmap-window.c:620
 msgid "Character in _Clipboard"
 msgstr "Zeichen in _Zwischenablage"
 
+#: gucharmap/gucharmap-window.c:656
+msgid "_Next Character"
+msgstr "_Nächstem Zeichen"
+
+#: gucharmap/gucharmap-window.c:663
+msgid "_Previous Character"
+msgstr "_Vorherigem Zeichen"
+
 #. make the help menu
-#: gucharmap/gucharmap-window.c:546
+#: gucharmap/gucharmap-window.c:676
 msgid "_Help"
 msgstr "_Hilfe"
 
-#: gucharmap/gucharmap-window.c:639
+#: gucharmap/gucharmap-window.c:767
 msgid "_Text to copy:"
 msgstr "Zu kopierender _Text:"
 
-#: gucharmap/gucharmap-window.c:660
+#: gucharmap/gucharmap-window.c:788
 msgid "Copy to the clipboard."
 msgstr "In die Zwischenablage kopieren"
+
+#: gucharmap/gucharmap-window.c:929
+msgid "Back"
+msgstr "Zurück"
+
+#: gucharmap/gucharmap-window.c:937
+msgid "Forward"
+msgstr "Vor"
 
 #: gucharmap/main.c:41
 msgid "Font to start with; ex: 'Serif 27'"
