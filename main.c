@@ -28,10 +28,10 @@ static GtkWidget *charmap;
 static void
 fontsel_changed (GtkTreeSelection *selection, gpointer data)
 {
-  gchar *newfont = gtk_font_selection_get_font_name (
-          GTK_FONT_SELECTION (data));
-  g_print ("new font = %s\n", newfont);
-  charmap_set_font (CHARMAP (charmap), newfont);
+  gchar *new_font;
+  
+  new_font = gtk_font_selection_get_font_name (GTK_FONT_SELECTION (data));
+  charmap_set_font (CHARMAP (charmap), new_font);
 }
 
 
