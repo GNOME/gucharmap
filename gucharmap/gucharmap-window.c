@@ -227,22 +227,21 @@ do_search (GucharmapWindow *guw,
 
 
 static void
-search_find_response (GtkDialog *dialog, gint response, GPtrArray *stuff)
+search_find_response (GtkDialog *dialog, 
+                      gint response, 
+                      EntryDialog *entry_dialog)
 {
-  GucharmapWindow *guw = g_ptr_array_index (stuff, 0);
-  GtkWidget *entry = g_ptr_array_index (stuff, 1);
-
   if (response == GTK_RESPONSE_OK)
     {
-      if (guw->last_search != NULL)
-        g_free (guw->last_search);
+      if (entry_dialog->guw->last_search != NULL)
+        g_free (entry_dialog->guw->last_search);
 
-      guw->last_search = g_strdup (gtk_entry_get_text (GTK_ENTRY (entry)));
+      entry_dialog->guw->last_search = g_strdup (gtk_entry_get_text (entry_dialog->entry));
 
-      do_search (guw, guw->last_search, 1);
+      do_search (entry_dialog->guw, entry_dialog->guw->last_search, 1);
     }
 
-  g_ptr_array_free (stuff, FALSE);
+  g_free (entry_dialog);
   gtk_widget_destroy (GTK_WIDGET (dialog));
 }
 
@@ -254,11 +253,13 @@ search_find (GtkWidget *widget, GucharmapWindow *guw)
   GtkWidget *hbox;
   GtkWidget *label;
   GtkWidget *entry;
-  GPtrArray *stuff;
+  GtkWidget *spacer;
+  EntryDialog *entry_dialog;
 
   dialog = gtk_dialog_new_with_buttons (_("Find"),
                                         GTK_WINDOW (guw),
-                                        GTK_DIALOG_DESTROY_WITH_PARENT, 
+                                        GTK_DIALOG_NO_SEPARATOR 
+                                        | GTK_DIALOG_DESTROY_WITH_PARENT, 
                                         GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, 
                                         GTK_STOCK_FIND, GTK_RESPONSE_OK, 
                                         NULL);
@@ -282,12 +283,19 @@ search_find (GtkWidget *widget, GucharmapWindow *guw)
 
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), entry);
 
-  stuff = g_ptr_array_sized_new (2);
-  g_ptr_array_add (stuff, guw);
-  g_ptr_array_add (stuff, entry);
+  spacer = gtk_alignment_new (0, 0, 0, 0);
+  gtk_widget_show (spacer);
+  gtk_widget_set_size_request (spacer, -1, 6);
+  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), 
+                      spacer, FALSE, FALSE, 0);
+
+  entry_dialog = g_new (EntryDialog, 1); 
+  entry_dialog->guw = guw;
+  entry_dialog->dialog = dialog;
+  entry_dialog->entry = GTK_ENTRY (entry);
 
   g_signal_connect (GTK_DIALOG (dialog), "response", 
-                    G_CALLBACK (search_find_response), stuff);
+                    G_CALLBACK (search_find_response), entry_dialog);
 
   gtk_widget_show_all (dialog);
 
