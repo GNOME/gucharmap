@@ -97,13 +97,20 @@ status_message (GtkWidget *widget, const gchar *message, GucharmapWindow *guw)
     gtk_statusbar_push (GTK_STATUSBAR (guw->status), 0, message);
 }
 
+static gboolean
+in_view (GucharmapWindow *guw,
+         gunichar         wc)
+{
+  return gucharmap_codepoint_list_get_index (guw->charmap->chartable->codepoint_list, wc) != (guint)(-1);
+}
+
 /* direction is -1 (back) or +1 (forward) */
 /* returns TRUE if search was successful */
 static gboolean
 do_search (GucharmapWindow *guw, 
-           GtkWindow *alert_parent,
-           const gchar *search_text, 
-           gint direction)
+           GtkWindow       *alert_parent,
+           const gchar     *search_text, 
+           gint             direction)
 {
   const gchar *no_leading_space, *nptr;
   char *endptr;
@@ -132,7 +139,7 @@ do_search (GucharmapWindow *guw,
   if (nptr != no_leading_space)
     {
       wc = strtoul (nptr, &endptr, 10);
-      if (endptr != nptr && wc <= UNICHAR_MAX)
+      if (endptr != nptr && in_view (guw, wc))
         {
           gucharmap_charmap_go_to_character (guw->charmap, wc);
           return TRUE;
@@ -150,7 +157,7 @@ do_search (GucharmapWindow *guw,
   if (nptr != no_leading_space)
     {
       wc = strtoul (nptr, &endptr, 16);
-      if (endptr != nptr && wc <= UNICHAR_MAX)
+      if (endptr != nptr && in_view (guw, wc))
         {
           gucharmap_charmap_go_to_character (guw->charmap, wc);
           return TRUE;
@@ -158,8 +165,7 @@ do_search (GucharmapWindow *guw,
     }
 
   /* if there is only one character and it isspace() jump to it */
-  if (g_utf8_get_char (search_text) <= UNICHAR_MAX
-      && g_utf8_strlen (search_text, -1) == 1)
+  if (in_view (guw, g_utf8_get_char (search_text)) && g_utf8_strlen (search_text, -1) == 1)
     {
       gucharmap_charmap_go_to_character (guw->charmap, g_utf8_get_char (search_text));
       return TRUE;
@@ -169,7 +175,7 @@ do_search (GucharmapWindow *guw,
    * Z, digits, space, and hyphen-minus.” If first character is not one of
    * those, jump to it. Also, if there is only one character, jump to it.
    * */
-  if (g_utf8_get_char (no_leading_space) <= UNICHAR_MAX
+  if (in_view (guw, g_utf8_get_char (no_leading_space))
       && (g_utf8_strlen (no_leading_space, -1) == 1
           || ! ((*no_leading_space >= 'A' && *no_leading_space <= 'Z') 
                 || (*no_leading_space >= 'a' && *no_leading_space <= 'z') 
@@ -198,7 +204,7 @@ do_search (GucharmapWindow *guw,
             case GUCHARMAP_NOT_FOUND:
               /* NOW try interpreting it from the start as a hex codepoint */
               wc = strtoul (no_leading_space, &endptr, 16);
-              if (endptr != nptr && wc <= UNICHAR_MAX)
+              if (endptr != nptr && in_view (guw, wc))
                 {
                   gucharmap_charmap_go_to_character (guw->charmap, wc);
                   return TRUE;
