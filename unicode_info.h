@@ -30,7 +30,7 @@ extern "C" {
 
 
 /* return value is read-only */
-gchar *  get_unicode_name (gunichar uc);
+gchar *  get_unicode_info (gunichar uc);
 
 
 #ifdef __cplusplus

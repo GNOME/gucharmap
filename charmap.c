@@ -20,6 +20,7 @@
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 #include "charmap.h"
+#include "unicode_info.h"
 
 #include <stdarg.h>
 #include <time.h>
@@ -45,6 +46,33 @@ debug (const char *format, ...)
 #else
 #define debug(x...)
 #endif
+
+
+static void
+set_caption (Charmap *charmap)
+{
+  static gchar utf8_buf[8];
+  gchar *escaped_utf8_buf, *escaped_unicode_info, *caption_markup;
+  gint x;
+
+  x = g_unichar_to_utf8 (charmap->active_char, utf8_buf);
+  utf8_buf[x] = '\0';
+
+  escaped_utf8_buf = g_markup_escape_text (utf8_buf, -1);
+  escaped_unicode_info = g_markup_escape_text (
+          get_unicode_info (charmap->active_char), -1);
+
+  /* n.b. the string below has utf8 quotes in it */
+  caption_markup = g_strdup_printf (
+          "<span size=\"large\">U+%4.4X “%s” %s</span>",
+          charmap->active_char, escaped_utf8_buf, escaped_unicode_info);
+
+  gtk_label_set_markup (GTK_LABEL (charmap->caption), caption_markup);
+
+  g_free (caption_markup);
+  g_free (escaped_utf8_buf);
+  g_free (escaped_unicode_info);
+}
 
 
 /* XXX: may want to have some smartness here to avoid resizing too much */
@@ -116,6 +144,9 @@ draw_tabulus_pixmap (Charmap *charmap)
                     (w+1) * col + 1, 
                     (h+1) * row + 1, 
                     w, h);
+
+            /* XXX: seems like an ok place to set the caption, no? */
+            set_caption (charmap);
           }
         else 
           gc = charmap->tabulus->style->text_gc[GTK_STATE_NORMAL];
@@ -168,6 +199,8 @@ expose_event (GtkWidget *widget,
 }
 
 
+/* for moving around in the charmap */
+/* XXX: redrawing could be much more efficient */
 static gint
 key_press_event (GtkWidget *widget, 
                  GdkEventKey *event, 
@@ -190,6 +223,7 @@ key_press_event (GtkWidget *widget,
 
       case GDK_End: case GDK_KP_End:
         charmap->active_char = UNICHAR_MAX;
+        need_redraw = TRUE;
         break;
 
       case GDK_Up: case GDK_KP_Up: case GDK_k:
@@ -230,12 +264,22 @@ key_press_event (GtkWidget *widget,
             charmap->active_char -= CHARMAP_COLS * CHARMAP_ROWS;
             need_redraw = TRUE;
           }
+        else if (charmap->active_char > 0)
+          {
+            charmap->active_char = 0;
+            need_redraw = TRUE;
+          }
         break;
 
       case GDK_Page_Down: case GDK_space:
         if (charmap->active_char < UNICHAR_MAX - CHARMAP_COLS * CHARMAP_ROWS)
           {
             charmap->active_char += CHARMAP_COLS * CHARMAP_ROWS;
+            need_redraw = TRUE;
+          }
+        else if (charmap->active_char < UNICHAR_MAX)
+          {
+            charmap->active_char = UNICHAR_MAX;
             need_redraw = TRUE;
           }
         break;
@@ -315,6 +359,11 @@ charmap_init (Charmap *charmap)
 
   charmap->page_first_char = (gunichar) 0x0000;
   charmap->active_char = (gunichar) 0x0000;
+
+  charmap->caption = gtk_label_new ("");
+  gtk_label_set_selectable (GTK_LABEL (charmap->caption), TRUE);
+  set_caption (charmap);
+  gtk_box_pack_start (GTK_BOX (charmap), charmap->caption, TRUE, TRUE, 0);
 }
 
 

@@ -18,7 +18,7 @@
  */
 
 #include <gtk/gtk.h>
-#include "unicode_names.h"
+#include "unicode_info.h"
 
 /* 
  * http://www.unicode.org/Public/UNIDATA/UnicodeData.txt
@@ -13910,11 +13910,11 @@ static struct _charname {
 
 /* does a binary search on character_names */
 gchar *
-get_unicode_name (gunichar uc)
+get_unicode_info (gunichar uc)
 {
-  int min = 0;
-  int mid;
-  int max = sizeof (character_names) / sizeof (struct _charname) - 1;
+  gint min = 0;
+  gint mid;
+  gint max = sizeof (character_names) / sizeof (struct _charname) - 1;
 
   if (uc < character_names[0].index || uc > character_names[max].index)
     return "unknown";
