@@ -236,8 +236,49 @@ compute_zoom_font_size (GucharmapTable *chartable)
 }
 
 
+/* returns the font family of the last glyph item in the first line of the
+ * layout; should be freed by caller */
+static gchar *
+get_font (PangoLayout *layout)
+{
+  PangoLayoutLine *line;
+  PangoGlyphItem *glyph_item;
+  PangoFont *font;
+  GSList *run_node;
+  gchar *family;
+  PangoFontDescription *font_desc;
+
+  line = pango_layout_get_line (layout, 0);
+
+  /* get to the last glyph_item (the one with the character we're drawing */
+  for (run_node = line->runs;  
+       run_node && run_node->next;  
+       run_node = run_node->next);
+
+  if (run_node)
+    {
+      glyph_item = run_node->data;
+      font = glyph_item->item->analysis.font;
+      font_desc = pango_font_describe (font);
+
+      family = g_strdup (pango_font_description_get_family (font_desc));
+
+      pango_font_description_free (font_desc);
+    }
+  else
+    family = NULL;
+
+  return family;
+}
+
+
+/* font_family (if not null) gets filled in with the actual font family
+ * used to draw the character */
 static PangoLayout *
-layout_scaled_glyph (GucharmapTable *chartable, gunichar uc, gint font_size)
+layout_scaled_glyph (GucharmapTable *chartable, 
+                     gunichar uc, 
+                     gint font_size,
+                     gchar **font_family)
 {
   PangoFontDescription *font_desc;
   PangoLayout *layout;
@@ -255,6 +296,9 @@ layout_scaled_glyph (GucharmapTable *chartable, gunichar uc, gint font_size)
   buf[gucharmap_unichar_to_printable_utf8 (uc, buf)] = '\0';
   pango_layout_set_text (layout, buf, -1);
 
+  if (font_family)
+    *font_family = get_font (layout);
+
   pango_font_description_free (font_desc);
 
   return layout;
@@ -266,25 +310,33 @@ create_glyph_pixmap (GucharmapTable *chartable, gint font_size)
 {
   enum { PADDING = 8 };
 
-  PangoLayout *pango_layout;
-  PangoRectangle ink_rect;
+  PangoLayout *pango_layout, *pango_layout2 = NULL;
+  PangoRectangle char_rect, family_rect;
   gint pixmap_width, pixmap_height;
   GtkStyle *style;
   GdkPixmap *pixmap;
+  gchar *family;
 
   /* Apply the scaling.  Unfortunately not all fonts seem to be scalable.
    * We could fall back to GdkPixbuf scaling, but that looks butt ugly :-/
    */
-  pango_layout = layout_scaled_glyph (chartable,
-                                      chartable->active_char,
-                                      font_size);
+  pango_layout = layout_scaled_glyph (chartable, chartable->active_char, 
+                                      font_size, &family);
 
-  pango_layout_get_pixel_extents (pango_layout, &ink_rect, NULL);
+  if (family == NULL)
+    family = _("[not a printable character]");
+
+  pango_layout2 = pango_layout_new (
+          gtk_widget_get_pango_context (GTK_WIDGET (chartable)));
+  pango_layout_set_text (pango_layout2, family, -1);
+  pango_layout_get_pixel_extents (pango_layout2, NULL, &family_rect);
+
+  pango_layout_get_pixel_extents (pango_layout, &char_rect, NULL);
 
   /* Make the GdkPixmap large enough to account for possible offsets in the
    * ink extents of the glyph. */
-  pixmap_width  = ink_rect.width  + 2 * PADDING;
-  pixmap_height = ink_rect.height + 2 * PADDING;
+  pixmap_width  = MAX (char_rect.width, family_rect.width)  + 2 * PADDING;
+  pixmap_height = family_rect.height + char_rect.height + 4 * PADDING;
 
   style = gtk_widget_get_style (chartable->drawing_area);
 
@@ -294,19 +346,26 @@ create_glyph_pixmap (GucharmapTable *chartable, gint font_size)
   gdk_draw_rectangle (pixmap, style->base_gc[GTK_STATE_NORMAL],
                       TRUE, 0, 0, pixmap_width, pixmap_height);
 
-  /* Draw a rectangular border, taking ink_rect offsets into account. */
+  /* Draw a rectangular border, taking char_rect offsets into account. */
   gdk_draw_rectangle (pixmap, style->fg_gc[GTK_STATE_INSENSITIVE], 
-                      FALSE, 1, 1, 
-                      ink_rect.width  + 2 * PADDING - 3,
-                      ink_rect.height + 2 * PADDING - 3);
+                      FALSE, 1, 1, pixmap_width - 3, pixmap_height - 3);
 
   /* Now draw the glyph.  The coordinates are adapted
-   * in order to compensate negative ink_rect offsets. */
+   * in order to compensate negative char_rect offsets. */
   gdk_draw_layout (pixmap, style->text_gc[GTK_STATE_NORMAL],
-                   -ink_rect.x + PADDING, -ink_rect.y + PADDING,
+                   -char_rect.x + PADDING, -char_rect.y + PADDING,
                    pango_layout);
-
   g_object_unref (pango_layout);
+
+  gdk_draw_line (pixmap, style->dark_gc[GTK_STATE_NORMAL],
+                 6 + 1, char_rect.height + 2 * PADDING,
+                 pixmap_width - 3 - 6, char_rect.height + 2 * PADDING);
+  gdk_draw_layout (pixmap, style->text_gc[GTK_STATE_NORMAL],
+                   PADDING, pixmap_height - PADDING - family_rect.height,
+                   pango_layout2);
+
+  g_object_unref (pango_layout2);
+  g_free (family);
 
   return pixmap;
 }
