@@ -35,13 +35,11 @@ msgstr "Klembord is leeg."
 msgid "There is no selected text."
 msgstr "Er is geen geselecteerde tekst."
 
-#: src/charmap.c:1703
-#: src/charmap.c:1907
+#: src/charmap.c:1703 src/charmap.c:1907
 msgid "Unknown character, unable to identify."
 msgstr "Onbekend teken, onmogelijk het te identificeren."
 
-#: src/charmap.c:1707
-#: src/charmap.c:1911
+#: src/charmap.c:1707 src/charmap.c:1911
 msgid "Character found."
 msgstr "Teken gevonden."
 
@@ -109,65 +107,58 @@ msgstr "Details over het huidige karakter"
 msgid "List of Unicode Blocks"
 msgstr "Lijst van Unicode blokken"
 
-#: src/main.c:180
-#: src/main.c:662
+#: src/main.c:180 src/main.c:662
 msgid "category"
 msgstr "categorie"
 
-#: src/main.c:182
-#: src/main.c:670
+#: src/main.c:182 src/main.c:670
 msgid "decomposition"
 msgstr "decompositie"
 
-#: src/main.c:184
-#: src/main.c:677
+#: src/main.c:184 src/main.c:677
 msgid "utf8"
 msgstr "utf8"
 
-#: src/main.c:186
-#: src/main.c:685
+#: src/main.c:186 src/main.c:685
 msgid "other_reps"
 msgstr "andere _representaties"
 
-#: src/main.c:189
-#: src/main.c:712
+#: src/main.c:189 src/main.c:712
 msgid "kdefinition"
 msgstr "kdefinitie"
 
-#: src/main.c:191
-#: src/main.c:720
+#: src/main.c:191 src/main.c:720
 msgid "kmandarin"
 msgstr "kmandarijns"
 
-#: src/main.c:193
-#: src/main.c:728
+#: src/main.c:193 src/main.c:728
 msgid "kjapaneseon"
 msgstr "kjapanseon"
 
-#: src/main.c:195
-#: src/main.c:736
+#: src/main.c:195 src/main.c:736
 msgid "kjapanesekun"
 msgstr "kjapansekun"
 
-#: src/main.c:197
-#: src/main.c:744
+#: src/main.c:197 src/main.c:744
 msgid "kcantonese"
 msgstr "kcantonees"
 
-#: src/main.c:199
-#: src/main.c:752
+#: src/main.c:199 src/main.c:752
 msgid "ktang"
 msgstr "ktang"
 
-#: src/main.c:201
-#: src/main.c:760
+#: src/main.c:201 src/main.c:760
 msgid "kkorean"
 msgstr "kkoreaans"
 
 #: src/main.c:261
 #, c-format
-msgid "Not a valid code point to jump to. Must be a hexadecimal number between 0 and %4.4X."
-msgstr "Geen geldig codepunt om naar toe te springen. Het moet een hexadecimaal nummer zijn tussen 0 en %4.4X."
+msgid ""
+"Not a valid code point to jump to. Must be a hexadecimal number between 0 "
+"and %4.4X."
+msgstr ""
+"Geen geldig codepunt om naar toe te springen. Het moet een hexadecimaal "
+"nummer zijn tussen 0 en %4.4X."
 
 #: src/main.c:283
 msgid "Go to hex code point"
@@ -179,7 +170,7 @@ msgstr "Unicode codepunt in_voeren"
 
 #: src/main.c:348
 msgid "The selected code point is not a valid unicode character."
-msgstr "Het geselecteerde codepunt is geen geldig unicode-teken."
+msgstr "Het selecteerde codepunt is geen geldig unicode-teken."
 
 #: src/main.c:379
 msgid "Text copied to clipboard."
@@ -210,8 +201,10 @@ msgid "_Search:"
 msgstr "_Zoeken:"
 
 #: src/main.c:456
-msgid "Search for the next occurrence of this string in a character's Unicode name."
-msgstr "Zoeken naar het volgende teken waarvan de Unicode-naam deze tekenreeks bevat."
+msgid ""
+"Search for the next occurrence of this string in a character's Unicode name."
+msgstr ""
+"Zoeken naar het volgende teken waarvan de Unicode-naam deze tekenreeks bevat."
 
 #: src/main.c:485
 msgid "_Text to copy:"
@@ -223,11 +216,11 @@ msgstr "Kopiëren naar het klembord."
 
 #: src/main.c:529
 msgid "translator_credits"
-msgstr "Sebastien Bruggeman <seba@ulyssis.org>\n"
+msgstr ""
+"Sebastien Bruggeman <seba@ulyssis.org>\n"
 "Tino Meinen <a.t.meinen@chello.nl>"
 
-#: src/main.c:536
-#: src/main.c:822
+#: src/main.c:536 src/main.c:822
 msgid "Unicode Character Map"
 msgstr "Unicode tekentabel"
 
@@ -262,8 +255,7 @@ msgid "_Unicode Details"
 msgstr "_Unicode details"
 
 #. the unicode details submenu
-#: src/main.c:649
-#: src/main.c:698
+#: src/main.c:649 src/main.c:698
 msgid "Options"
 msgstr "Opties"
 
@@ -345,4 +337,3 @@ msgstr "Lettertypestijl"
 #: src/mini_fontsel.c:300
 msgid "Font Size"
 msgstr "Lettertypegrootte"
-
