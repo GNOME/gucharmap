@@ -94,20 +94,38 @@ set_caption (Charmap *charmap)
   gsize result_len;
   gint i, n, m;
   gchar *bp;
+  static gchar *codepoint_str=NULL, *character_str, *category_str, *name_str;
+  static gchar *kDefinition_str, *kCantonese_str, *kMandarin_str;
+  static gchar *kTang_str, *kKorean_str, *kJapaneseOn_str, *kJapaneseKun_str;
 
-  g_snprintf (buf, BUFLEN, _("Unicode code point: U+%4.4X (%u)"), 
+  if (codepoint_str == NULL)
+    {
+      codepoint_str = _("Unicode code point: U+%4.4X (%u)");
+      character_str = _("Character: %s");
+      category_str = _("Unicode category: %s"); 
+      name_str = _("Unicode name: %s");
+      kDefinition_str = _("Ideograph definition: %s");
+      kCantonese_str = _("Cantonese pronunciation: %s");
+      kMandarin_str = _("Mandarin pronunciation: %s");
+      kTang_str = _("Tang pronunciation: %s");
+      kKorean_str = _("Korean pronunciation: %s");
+      kJapaneseOn_str = _("Japanese On pronunciation: %s");
+      kJapaneseKun_str = _("Japanese Kun pronunciation: %s");
+    }
+
+  g_snprintf (buf, BUFLEN, codepoint_str, 
                   charmap->active_char, charmap->active_char);
   gtk_label_set_text (GTK_LABEL (charmap->caption->codepoint), buf);
 
-  g_snprintf (buf, BUFLEN, _("Character: %s"), 
+  g_snprintf (buf, BUFLEN, character_str,
               unichar_to_printable_utf8 (charmap->active_char));
   gtk_label_set_text (GTK_LABEL (charmap->caption->character), buf);
 
-  g_snprintf (buf, BUFLEN, _("Unicode category: %s"), 
+  g_snprintf (buf, BUFLEN, category_str,
               get_unicode_category_name (charmap->active_char));
   gtk_label_set_text (GTK_LABEL (charmap->caption->category), buf);
 
-  g_snprintf (buf, BUFLEN, _("Unicode name: %s"), 
+  g_snprintf (buf, BUFLEN, name_str,
               get_unicode_name (charmap->active_char));
   gtk_label_set_text (GTK_LABEL (charmap->caption->name), buf);
 
@@ -118,31 +136,31 @@ set_caption (Charmap *charmap)
     n += g_snprintf (buf + n, BUFLEN - n, " 0x%2.2X", ubuf[i]);
   gtk_label_set_text (GTK_LABEL (charmap->caption->utf8), buf);
 
-  g_snprintf (buf, BUFLEN, _("Ideograph definition: %s"), 
+  g_snprintf (buf, BUFLEN, kDefinition_str,
               get_unicode_kDefinition (charmap->active_char));
   gtk_label_set_text (GTK_LABEL (charmap->caption->kDefinition), buf);
 
-  g_snprintf (buf, BUFLEN, _("Cantonese pronunciation: %s"), 
+  g_snprintf (buf, BUFLEN, kCantonese_str,
               get_unicode_kCantonese (charmap->active_char));
   gtk_label_set_text (GTK_LABEL (charmap->caption->kCantonese), buf);
 
-  g_snprintf (buf, BUFLEN, _("Mandarin pronunciation: %s"), 
+  g_snprintf (buf, BUFLEN, kMandarin_str,
               get_unicode_kMandarin (charmap->active_char));
   gtk_label_set_text (GTK_LABEL (charmap->caption->kMandarin), buf);
 
-  g_snprintf (buf, BUFLEN, _("Tang pronunciation: %s"), 
+  g_snprintf (buf, BUFLEN, kTang_str,
               get_unicode_kTang (charmap->active_char));
   gtk_label_set_text (GTK_LABEL (charmap->caption->kTang), buf);
 
-  g_snprintf (buf, BUFLEN, _("Korean pronunciation: %s"), 
+  g_snprintf (buf, BUFLEN, kKorean_str,
               get_unicode_kKorean (charmap->active_char));
   gtk_label_set_text (GTK_LABEL (charmap->caption->kKorean), buf);
 
-  g_snprintf (buf, BUFLEN, _("Japanese On pronunciation: %s"), 
+  g_snprintf (buf, BUFLEN, kJapaneseOn_str,
               get_unicode_kJapaneseOn (charmap->active_char));
   gtk_label_set_text (GTK_LABEL (charmap->caption->kJapaneseOn), buf);
 
-  g_snprintf (buf, BUFLEN, _("Japanese Kun pronunciation: %s"), 
+  g_snprintf (buf, BUFLEN, kJapaneseKun_str,
               get_unicode_kJapaneseKun (charmap->active_char));
   gtk_label_set_text (GTK_LABEL (charmap->caption->kJapaneseKun), buf);
 
