@@ -421,7 +421,7 @@ jump_clipboard (GtkWidget *widget, gpointer data)
 
 
 static void
-append_character_to_text_to_copy (Charmap *charmap, gunichar uc)
+append_character_to_text_to_copy (Chartable *chartable, gunichar uc)
 {
   GString *gs;
   gchar ubuf[7];

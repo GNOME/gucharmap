@@ -49,9 +49,7 @@ libgucharmapinclude_HEADERS = charmap.h chartable.h unicode_info.h \
 
 
 bin_PROGRAMS = gucharmap
-
 gucharmap_SOURCES = main.c
-
 
 if OS_WIN32
 
@@ -65,6 +63,16 @@ else
 gucharmap_LDADD = libgucharmap.la @GTK_LIBS@ @GNOME_LIBS@ @POPT_LIBS@
 
 endif
+
+
+
+moduledir = $(libdir)/gucharmap/immodules
+module_LTLIBRARIES = im-gucharmap.la
+im_gucharmap_la_LDFLAGS = -rpath $(moduledir) -avoid-version -module
+im_gucharmap_la_SOURCES = imgucharmap.c
+im_gucharmap_la_LIBADD = libgucharmap.la @GTK_LIBS@
+
+
 
 
 gucharmap_marshal.h: gucharmap_marshal.list
