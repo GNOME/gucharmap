@@ -126,13 +126,11 @@ set_caption (Charmap *charmap)
   gtk_tree_store_set (charmap->caption->caption_model, &iter, CAPTION_VALUE, 
                       get_unicode_name (charmap->active_char), -1);
 
-  /* U+200E = LEFT-TO-RIGHT MARK \xe2\x80\x8e */
-
   /* codepoint */
   gtk_tree_model_get_iter (
           model, &iter, 
           gtk_tree_row_reference_get_path (charmap->caption->codepoint));
-  temp = g_strdup_printf ("\xE2\x80\x8EU+%4.4X (%u)", 
+  temp = g_strdup_printf ("U+%4.4X (%u)", 
                           charmap->active_char, charmap->active_char);
   gtk_tree_store_set (charmap->caption->caption_model, &iter, 
                       CAPTION_VALUE, temp, -1);
