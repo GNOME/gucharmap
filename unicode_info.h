@@ -52,6 +52,14 @@ gchar * get_unicode_kJapaneseKun (gunichar uc);
 gchar * get_unicode_kJapaneseOn (gunichar uc);
 gchar * get_hangul_syllable_name (gunichar s);
 
+/* A wrapper for g_unicode_canonical_decomposition that also does hangul
+ * decomposition. 
+ * See http://bugzilla.gnome.org/show_bug.cgi?id=100456
+ * Will no longer be necessary once my patch is accepted.
+ */
+gunichar * unicode_canonical_decomposition (gunichar ch, gsize *result_len);
+
+
 
 #ifdef __cplusplus
 }

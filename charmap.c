@@ -139,8 +139,8 @@ set_caption (Charmap *charmap)
   gtk_label_set_text (GTK_LABEL (charmap->caption->kJapaneseKun), buf);
 
   /* do the decomposition */
-  decomposition = g_unicode_canonical_decomposition (charmap->active_char,
-                                                     &result_len);
+  decomposition = unicode_canonical_decomposition (charmap->active_char,
+                                                   &result_len);
   bp = buf;
   bp += g_snprintf (buf, BUFLEN, "decomposition: U+%4.4X (%s)", 
                     decomposition[0],
@@ -150,6 +150,8 @@ set_caption (Charmap *charmap)
                       decomposition[i],
                       unichar_to_printable_utf8 (decomposition[i]));
   gtk_label_set_text (GTK_LABEL (charmap->caption->decomposition), buf);
+
+  g_free (decomposition);
 }
 
 
@@ -537,12 +539,14 @@ charmap_class_init (CharmapClass *clazz)
 }
 
 
+/* makes the list of unicode blocks and code points */
 static GtkWidget *
 make_unicode_block_selector (Charmap *charmap)
 {
   GtkWidget *scrolled_window;
   GtkTreeStore *model;
   GtkTreeIter iter;
+  GtkTreeIter child_iter;
   GtkWidget *tree_view;
   GtkCellRenderer *cell;
   GtkTreeViewColumn *column;
@@ -565,11 +569,9 @@ make_unicode_block_selector (Charmap *charmap)
       gtk_tree_store_append (model, &iter, NULL);
       gtk_tree_store_set (model, &iter, 0, unicode_blocks[i].name, -1);
 
-      for ( ;  uc <= unicode_blocks[i].end;  
+      for ( ;  uc <= unicode_blocks[i].end && uc <= UNICHAR_MAX;  
                uc += CHARMAP_ROWS * CHARMAP_COLS) 
         {
-          GtkTreeIter child_iter;
-
           g_snprintf (buf, 12, "U+%4.4X", uc);
 	  gtk_tree_store_append (model, &child_iter, &iter);
 	  gtk_tree_store_set (model, &child_iter, 0, buf, -1);
@@ -713,11 +715,9 @@ make_text_to_copy (Charmap *charmap)
   GtkWidget *button;
   GtkWidget *label;
 
-  /* the "text to copy" part */
   hbox = gtk_hbox_new (FALSE, 5);
 
   label = gtk_label_new ("text to copy:");
-  gtk_misc_set_padding (GTK_MISC (label), 3, 3);
   gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
 
   charmap->text_to_copy = gtk_entry_new ();

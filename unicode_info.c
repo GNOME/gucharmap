@@ -234,3 +234,61 @@ unicode_block_t unicode_blocks[] =
   { 0x100000, 0x10FFFF, "Supplementary Private Use Area-B" },
   { -1, -1, NULL }
 };
+
+
+/* http://www.unicode.org/unicode/reports/tr15/#Hangul */
+static gunichar *
+hangul_decomposition (gunichar s, gsize *result_len)
+{
+  gunichar *r = g_malloc (3 * sizeof (gunichar));
+  gint SIndex = s - SBase;
+
+  /* not a hangul syllable */
+  if (SIndex < 0 || SIndex >= SCount)
+    {
+      r[0] = s;
+      *result_len = 1;
+    }
+  else
+    {
+      gunichar L = LBase + SIndex / NCount;
+      gunichar V = VBase + (SIndex % NCount) / TCount;
+      gunichar T = TBase + SIndex % TCount;
+
+      r[0] = L;
+      r[1] = V;
+
+      if (T != TBase) 
+        {
+          r[2] = T;
+          *result_len = 3;
+        }
+      else
+        *result_len = 2;
+    }
+
+  return r;
+}
+
+
+/*
+ * See http://bugzilla.gnome.org/show_bug.cgi?id=100456
+ *
+ * unicode_canonical_decomposition:
+ * @ch: a Unicode character.
+ * @result_len: location to store the length of the return value.
+ *
+ * Computes the canonical decomposition of a Unicode character.  
+ * 
+ * Return value: a newly allocated string of Unicode characters.
+ *   @result_len is set to the resulting length of the string.
+ */
+gunichar *
+unicode_canonical_decomposition (gunichar ch, gsize   *result_len)
+{
+  if (ch >= 0xac00 && ch <= 0xd7af)  /* Hangul syllable */
+    return hangul_decomposition (ch, result_len);
+  else 
+    return g_unicode_canonical_decomposition (ch, result_len);
+}
+
