@@ -106,6 +106,14 @@ main (gint argc, gchar **argv)
 
   g_signal_connect (
           gtk_tree_view_get_selection (GTK_TREE_VIEW (
+                  GTK_FONT_SELECTION (fontsel)->family_list)), 
+          "changed", G_CALLBACK (fontsel_changed), fontsel);
+  g_signal_connect (
+          gtk_tree_view_get_selection (GTK_TREE_VIEW (
+                  GTK_FONT_SELECTION (fontsel)->face_list)), 
+          "changed", G_CALLBACK (fontsel_changed), fontsel);
+  g_signal_connect (
+          gtk_tree_view_get_selection (GTK_TREE_VIEW (
                   GTK_FONT_SELECTION (fontsel)->size_list)), 
           "changed", G_CALLBACK (fontsel_changed), fontsel);
 
