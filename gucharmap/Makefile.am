@@ -94,7 +94,7 @@ else
 # install a symlink to the binary called "charmap"
 install-exec-hook:
 	test -e "$(DESTDIR)$(bindir)/charmap" \
-        || ln -s "$(DESTDIR)$(bindir)/gucharmap" "$(DESTDIR)$(bindir)/charmap"
+        || (cd "$(DESTDIR)$(bindir)" && ln -s gucharmap charmap)
 
 # remove bin/charmap if it's a symlink (it's a pain to test what it's
 # a symlink to)
