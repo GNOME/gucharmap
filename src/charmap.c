@@ -1318,7 +1318,6 @@ selection_text_received (GtkClipboard *clipboard,
                          gpointer data)
 {
   gunichar uc;
-  gunichar old_page_first_char, old_active_char;
   Charmap *charmap = CHARMAP (data);
 
   if (text == NULL)
@@ -1329,9 +1328,6 @@ selection_text_received (GtkClipboard *clipboard,
         set_statusbar_message (charmap, _("There is no selected text."));
       return;
     }
-
-  old_page_first_char = charmap->page_first_char;
-  old_active_char = charmap->active_char;
 
   uc = g_utf8_get_char_validated (text, -1);
 
@@ -1528,10 +1524,81 @@ size_allocate (GtkWidget *widget, GtkAllocation *allocation, Charmap *charmap)
 }
 
 
+static void
+drag_end (GtkWidget *widget, GdkDragContext *drag_context, Charmap *charmap)
+{
+  g_printerr ("drag_end\n");
+}
+
+
+static void
+drag_begin (GtkWidget *widget, GdkDragContext *drag_context, Charmap *charmap)
+{
+  g_printerr ("drag_begin\n");
+}
+
+
+static void
+drag_data_get (GtkWidget *widget, 
+               GdkDragContext *context,
+               GtkSelectionData *selection_data,
+               guint info,
+               guint time,
+               Charmap *charmap)
+
+{
+  g_printerr ("drag_data_get\n");
+}
+
+
+static void
+drag_data_received (GtkWidget *widget,
+                    GdkDragContext *context,
+                    gint x,
+                    gint y,
+                    GtkSelectionData *selection_data,
+                    guint info,
+                    guint time,
+                    Charmap *charmap)
+{
+  gchar *text;
+  gunichar uc;
+
+  text = gtk_selection_data_get_text (selection_data);
+
+  if (text == NULL)
+    return;
+
+  uc = g_utf8_get_char_validated (text, -1);
+
+  if (uc == (gunichar)(-2) || uc == (gunichar)(-1) || uc > UNICHAR_MAX)
+    {
+      set_statusbar_message (charmap, 
+                             _("Unknown character, unable to identify."));
+    }
+  else
+    {
+      set_statusbar_message (charmap, _("Character found."));
+      set_active_character (charmap, uc);
+      redraw (charmap);
+    }
+
+  g_free (text);
+}
+
+
+
 static GtkWidget *
 make_chartable (Charmap *charmap)
 {
   GtkWidget *hbox;
+  GtkTargetEntry target_table[] =
+    {
+      { "UTF8_STRING", 0, 0 },
+      { "COMPOUND_TEXT", 0, 0 },
+      { "TEXT", 0, 0 },
+      { "STRING", 0, 0 },
+    };
 
   charmap->chartable = gtk_drawing_area_new ();
 
@@ -1555,6 +1622,25 @@ make_chartable (Charmap *charmap)
                     G_CALLBACK (style_set), charmap);
   g_signal_connect (G_OBJECT (charmap->chartable), "size-allocate",
                     G_CALLBACK (size_allocate), charmap);
+
+  gtk_drag_dest_set (charmap->chartable, GTK_DEST_DEFAULT_ALL,
+                     target_table, G_N_ELEMENTS (target_table),
+                     GDK_ACTION_COPY);
+
+  g_signal_connect (G_OBJECT (charmap->chartable), "drag_data_received",
+                    G_CALLBACK (drag_data_received), charmap);
+
+
+  gtk_drag_source_set (charmap->chartable, GDK_BUTTON1_MASK, 
+                       target_table, G_N_ELEMENTS (target_table),
+                       GDK_ACTION_COPY);
+
+  g_signal_connect (G_OBJECT (charmap->chartable), "drag_end",
+                    G_CALLBACK (drag_end), charmap);
+  g_signal_connect (G_OBJECT (charmap->chartable), "drag_begin",
+                    G_CALLBACK (drag_begin), charmap);
+  g_signal_connect (G_OBJECT (charmap->chartable), "drag_data_get",
+                    G_CALLBACK (drag_data_get), charmap);
 
   /* this is required to get key_press events */
   GTK_WIDGET_SET_FLAGS (charmap->chartable, GTK_CAN_FOCUS);
