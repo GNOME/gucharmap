@@ -652,13 +652,37 @@ block_selection_changed (GtkTreeSelection *selection,
   GtkTreeIter iter;
   Charmap *charmap;
   gunichar uc_start;
+  gunichar old_active_char, old_page_first_char;
 
   charmap = CHARMAP (user_data);
+
+  old_active_char = charmap->active_char;
+  old_page_first_char = charmap->page_first_char;
 
   if (gtk_tree_selection_get_selected (selection, &model, &iter))
     {
       gtk_tree_model_get (model, &iter, 1, &uc_start, -1);
-      g_printerr ("block_selection_changed: uc_start = 0x%4.4X\n", uc_start);
+
+      charmap->active_char = uc_start;
+
+      if (charmap->active_char < charmap->page_first_char
+          || charmap->active_char >= charmap->page_first_char 
+                                     + CHARMAP_ROWS * CHARMAP_COLS)
+          charmap->page_first_char = charmap->active_char - 
+                                     (charmap->active_char % CHARMAP_COLS);
+    }
+
+  if (charmap->page_first_char != old_page_first_char)
+    {
+      draw_tabulus_pixmap (charmap);
+      gtk_widget_queue_draw (GTK_WIDGET (charmap->tabulus));
+    }
+  else if (charmap->active_char != old_active_char)
+    {
+      draw_tabulus_pixmap (charmap);
+
+      expose_char_for_redraw (charmap, charmap->active_char);
+      expose_char_for_redraw (charmap, old_active_char);
     }
 }
 
