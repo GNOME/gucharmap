@@ -28,7 +28,7 @@ AM_MAINTAINER_MODE
 AC_PROG_CC
 AC_DISABLE_STATIC
 AC_PROG_LIBTOOL
-AC_PROG_INTLTOOL([0.22])
+AC_PROG_INTLTOOL([0.29])
 
 
 # checks for stuff
@@ -63,7 +63,7 @@ else
 fi
 
 # gtk is required
-PKG_CHECK_MODULES(GTK, gtk+-2.0 >= 2.2.0)
+PKG_CHECK_MODULES(GTK, gobject-2.0 >= 2.3.0 gtk+-2.0 >= 2.2.0)
 
 AC_ARG_ENABLE(gnome,
               AC_HELP_STRING([--disable-gnome],
