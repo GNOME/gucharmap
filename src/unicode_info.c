@@ -97,7 +97,7 @@ get_unicode_name (gunichar uc)
     {
       gchar *x = get_unicode_data_name (uc);
       if (x == NULL)
-        return "<Undefined>";
+        return "<not assigned>";
       else
         return x;
     }
