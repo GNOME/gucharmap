@@ -1673,19 +1673,51 @@ charmap_init (Charmap *charmap)
 
   gtk_box_set_spacing (GTK_BOX (charmap), 0);
 
-  hbox = gtk_hbox_new (FALSE, 0);
 
-  gtk_box_pack_start (GTK_BOX (charmap), hbox, TRUE, TRUE, 3);
-
-  gtk_box_pack_start (GTK_BOX (hbox), make_chartable (charmap), 
-                      TRUE, TRUE, 3);
+  /* start packing stuff in the inner block selector vbox */
 
   vbox = gtk_vbox_new (FALSE, 3);
   gtk_box_pack_start (GTK_BOX (vbox), make_unicode_block_selector (charmap), 
                       TRUE, TRUE, 3);
   gtk_box_pack_start (GTK_BOX (vbox), make_paste_button (charmap), 
                       FALSE, FALSE, 3);
+
+  /* end packing stuff in the inner block selector vbox */
+
+
+  /* start packing stuff in top hbox */
+
+  hbox = gtk_hbox_new (FALSE, 0);
+
+  gtk_box_pack_start (GTK_BOX (hbox), make_chartable (charmap), 
+                      TRUE, TRUE, 3);
+
   gtk_box_pack_start (GTK_BOX (hbox), vbox, FALSE, FALSE, 3);
+
+  /* end packing stuff in top hbox */
+
+
+  /* start packing stuff in the outer vbox (the Charmap itself) */
+
+  gtk_box_pack_start (GTK_BOX (charmap), hbox, TRUE, TRUE, 3);
+
+  /* the text_to_copy */
+  gtk_box_pack_start (GTK_BOX (charmap), make_text_to_copy (charmap), 
+                      FALSE, FALSE, 3);
+
+  /* the caption */
+  gtk_box_pack_start (GTK_BOX (charmap), make_caption (charmap), 
+                      FALSE, FALSE, 3);
+
+  /* the search */
+  gtk_box_pack_start (GTK_BOX (charmap), make_search (charmap), 
+                      FALSE, FALSE, 3);
+
+  /* end packing stuff in the outer vbox (the Charmap itself) */
+
+
+  /* the statusbar— not placed anywhere */
+  charmap->statusbar = gtk_statusbar_new ();
 
   charmap->font_name = NULL;
 
@@ -1706,21 +1738,6 @@ charmap_init (Charmap *charmap)
 
   charmap->page_first_char = (gunichar) 0x0000;
   charmap->active_char = (gunichar) 0x0000;
-
-  /* the text_to_copy */
-  gtk_box_pack_start (GTK_BOX (charmap), make_text_to_copy (charmap), 
-                      FALSE, FALSE, 3);
-
-  /* the caption */
-  gtk_box_pack_start (GTK_BOX (charmap), make_caption (charmap), 
-                      FALSE, FALSE, 3);
-
-  /* the search */
-  gtk_box_pack_start (GTK_BOX (charmap), make_search (charmap), 
-                      FALSE, FALSE, 3);
-
-  /* the statusbar— not placed anywhere */
-  charmap->statusbar = gtk_statusbar_new ();
 
   set_caption (charmap);
   set_active_block (charmap);
