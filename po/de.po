@@ -14,10 +14,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gucharmap 1.2.0\n"
+"Project-Id-Version: gucharmap 1.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-01 21:54+0100\n"
-"PO-Revision-Date: 2004-02-01 21:54+0100\n"
+"POT-Creation-Date: 2004-02-22 10:33+0100\n"
+"PO-Revision-Date: 2004-02-22 10:33+0100\n"
 "Last-Translator: Christian Neumair <chris@gnome-de.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -25,8 +25,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. ID
-#: gucharmap.desktop.in.h:1 gucharmap/gucharmap-window.c:261
-#: gucharmap/gucharmap-window.c:724 gucharmap/imgucharmap.c:207
+#: gucharmap.desktop.in.h:1 gucharmap/gucharmap-window.c:323
+#: gucharmap/gucharmap-window.c:855 gucharmap/imgucharmap.c:207
 msgid "Character Map"
 msgstr "Zeichentabelle"
 
@@ -146,19 +146,19 @@ msgstr "Schriftgröße"
 msgid "Common"
 msgstr "Standard"
 
-#: gucharmap/gucharmap-table.c:1531
+#: gucharmap/gucharmap-table.c:1521
 msgid "Unknown character, unable to identify."
 msgstr "Unbekanntes Zeichen, Identifikation nicht möglich."
 
-#: gucharmap/gucharmap-table.c:1533 gucharmap/gucharmap-search-dialog.c:418
+#: gucharmap/gucharmap-table.c:1523 gucharmap/gucharmap-search-dialog.c:418
 msgid "Not found."
 msgstr "Nicht gefunden."
 
-#: gucharmap/gucharmap-table.c:1536
+#: gucharmap/gucharmap-table.c:1526
 msgid "Character found."
 msgstr "Zeichen gefunden."
 
-#: gucharmap/gucharmap-table.c:1600
+#: gucharmap/gucharmap-table.c:1590
 msgid "Character Table"
 msgstr "Zeichentabelle"
 
@@ -311,87 +311,103 @@ msgstr "Trenner, Absatz"
 msgid "Separator, Space"
 msgstr "Trenner, Leerzeichen"
 
-#: gucharmap/gucharmap-window.c:127
+#: gucharmap/gucharmap-window.c:189
 msgid "Searching..."
 msgstr "Suchvorgang..."
 
-#: gucharmap/gucharmap-window.c:256
+#: gucharmap/gucharmap-window.c:318
 msgid "translator_credits"
 msgstr "Christian Neumair <chris@gnome-de.org>"
 
-#: gucharmap/gucharmap-window.c:380
+#: gucharmap/gucharmap-window.c:419 gucharmap/gucharmap-window.c:601
+msgid "Next Script"
+msgstr "Nächstes Skript"
+
+#: gucharmap/gucharmap-window.c:420 gucharmap/gucharmap-window.c:602
+msgid "Previous Script"
+msgstr "Vorheriges Skript"
+
+#: gucharmap/gucharmap-window.c:432 gucharmap/gucharmap-window.c:606
+msgid "Next Block"
+msgstr "Nächster Block"
+
+#: gucharmap/gucharmap-window.c:433 gucharmap/gucharmap-window.c:607
+msgid "Previous Block"
+msgstr "Vorheriger Block"
+
+#: gucharmap/gucharmap-window.c:468
 msgid "_File"
 msgstr "_Datei"
 
-#: gucharmap/gucharmap-window.c:382
+#: gucharmap/gucharmap-window.c:470
 msgid "_View"
 msgstr "_Ansicht"
 
-#: gucharmap/gucharmap-window.c:384
+#: gucharmap/gucharmap-window.c:472
 msgid "_Search"
 msgstr "_Suchen"
 
-#: gucharmap/gucharmap-window.c:386
+#: gucharmap/gucharmap-window.c:474
 msgid "_Go"
 msgstr "_Gehe zu"
 
-#: gucharmap/gucharmap-window.c:405
+#: gucharmap/gucharmap-window.c:493
 msgid "By _Script"
 msgstr "Nach _Skript"
 
-#: gucharmap/gucharmap-window.c:411
+#: gucharmap/gucharmap-window.c:499
 msgid "By _Unicode Block"
 msgstr "Nach _Unicode-Block"
 
-#: gucharmap/gucharmap-window.c:419
+#: gucharmap/gucharmap-window.c:507
 msgid "Snap Columns to Power of Two"
 msgstr "Spalten bis zur doppelten Breite erweitern"
 
 #. ctrl-+
-#: gucharmap/gucharmap-window.c:427
+#: gucharmap/gucharmap-window.c:515
 msgid "Zoom _In"
 msgstr "Ver_größern"
 
 #. ctrl--
-#: gucharmap/gucharmap-window.c:437
+#: gucharmap/gucharmap-window.c:525
 msgid "Zoom _Out"
 msgstr "Ver_kleinern"
 
 #. ctrl-=
-#: gucharmap/gucharmap-window.c:447
+#: gucharmap/gucharmap-window.c:535
 msgid "_Normal Size"
-msgstr ""
+msgstr "_Normale Größe"
 
-#: gucharmap/gucharmap-window.c:461
+#: gucharmap/gucharmap-window.c:549
 msgid "_Find..."
 msgstr "_Suchen..."
 
-#: gucharmap/gucharmap-window.c:469
+#: gucharmap/gucharmap-window.c:557
 msgid "Find _Next"
 msgstr "_Weitersuchen"
 
-#: gucharmap/gucharmap-window.c:478
+#: gucharmap/gucharmap-window.c:566
 msgid "Find _Previous"
 msgstr "_Rückwärts suchen"
 
-#: gucharmap/gucharmap-window.c:495
+#: gucharmap/gucharmap-window.c:583
 msgid "_Next Character"
 msgstr "_Nächstem Zeichen"
 
-#: gucharmap/gucharmap-window.c:501
+#: gucharmap/gucharmap-window.c:589
 msgid "_Previous Character"
 msgstr "_Vorherigem Zeichen"
 
 #. make the help menu
-#: gucharmap/gucharmap-window.c:513
+#: gucharmap/gucharmap-window.c:630
 msgid "_Help"
 msgstr "_Hilfe"
 
-#: gucharmap/gucharmap-window.c:596
+#: gucharmap/gucharmap-window.c:713
 msgid "_Text to copy:"
 msgstr "Zu kopierender _Text:"
 
-#: gucharmap/gucharmap-window.c:617
+#: gucharmap/gucharmap-window.c:734
 msgid "Copy to the clipboard."
 msgstr "In die Zwischenablage kopieren"
 
@@ -963,18 +979,18 @@ msgid "Information"
 msgstr "Informationen"
 
 #. follow hig guidelines
-#: gucharmap/gucharmap-search-dialog.c:505
+#: gucharmap/gucharmap-search-dialog.c:528
 msgid "Find"
 msgstr "Suchen"
 
-#: gucharmap/gucharmap-search-dialog.c:516
+#: gucharmap/gucharmap-search-dialog.c:542
 msgid "_Previous"
 msgstr "_Rückwärts suchen"
 
-#: gucharmap/gucharmap-search-dialog.c:517
+#: gucharmap/gucharmap-search-dialog.c:549
 msgid "_Next"
 msgstr "_Weitersuchen"
 
-#: gucharmap/gucharmap-search-dialog.c:525
+#: gucharmap/gucharmap-search-dialog.c:559
 msgid "_Search:"
 msgstr "Such_begriff:"
