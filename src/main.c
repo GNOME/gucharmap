@@ -150,10 +150,7 @@ help_about (GtkWidget *widget, gpointer data)
 
   translator_credits = _("translator_credits");
   if (strcmp (translator_credits, "translator_credits") == 0)
-    {
-      translator_credits = NULL;
-      g_printerr ("no translator credits\n");
-    }
+    translator_credits = NULL;
 
   about = gnome_about_new (
           "gucharmap", VERSION, 
