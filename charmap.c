@@ -542,6 +542,16 @@ redraw (Charmap *charmap)
   gint row_offset;
   gboolean actives_done = FALSE;
 
+#ifdef G_PLATFORM_WIN32
+
+  /* get around the bug in gdkdrawable-win32.c */
+  /* yup, this makes it really slow */
+  draw_chartable_from_scratch (charmap);
+  gtk_widget_queue_draw (charmap->chartable);
+  actives_done = TRUE;
+
+#else /* #ifdef G_PLATFORM_WIN32 */
+
   row_offset = ((gint) charmap->page_first_char 
                 - (gint) charmap->old_page_first_char)
                / charmap->cols;
@@ -560,6 +570,8 @@ redraw (Charmap *charmap)
       gtk_widget_queue_draw (charmap->chartable);
       actives_done = TRUE;
     }
+
+#endif /* #else (#ifdef G_PLATFORM_WIN32) */
 
   if (charmap->active_char != charmap->old_active_char)
     {
