@@ -99,7 +99,7 @@ set_caption (Charmap *charmap)
               get_unicode_name (charmap->active_char));
   gtk_label_set_text (GTK_LABEL (charmap->caption->name), buf);
 
-  g_snprintf (buf, BUFLEN, _("East Asian definition: %s"), 
+  g_snprintf (buf, BUFLEN, _("Ideograph definition: %s"), 
               get_unicode_kDefinition (charmap->active_char));
   gtk_label_set_text (GTK_LABEL (charmap->caption->kDefinition), buf);
 
@@ -1179,7 +1179,7 @@ make_paste_button (Charmap *charmap)
                     G_CALLBACK (identify_primary), charmap);
   gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
 
-  button = gtk_button_new_with_label (_("identify character from clipboard"));
+  button = gtk_button_new_with_label (_("Identify character from clipboard"));
   g_signal_connect (G_OBJECT (button), "clicked",
                     G_CALLBACK (identify_clipboard), charmap);
   gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
