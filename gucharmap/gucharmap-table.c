@@ -1398,6 +1398,12 @@ button_press_event (GtkWidget *widget,
   /* in case we lost keyboard focus and are clicking to get it back */
   gtk_widget_grab_focus (chartable->drawing_area);
 
+  if (event->button == 1)
+    {
+      chartable->click_x = event->x;
+      chartable->click_y = event->y;
+    }
+
   /* double-click */
   if (event->button == 1 && event->type == GDK_2BUTTON_PRESS)
     {
@@ -1434,8 +1440,10 @@ button_press_event (GtkWidget *widget,
       gdk_window_clear (chartable->zoom_window->window);
     }
 
-  /* need to return false so it gets drag events */
-  return FALSE;
+  /* XXX: [need to return false so it gets drag events] */
+  /* actually return true because we handle drag_begin because of
+   * http://bugzilla.gnome.org/show_bug.cgi?id=114534 */
+  return TRUE;
 }
 
 
@@ -1471,6 +1479,19 @@ motion_notify_event (GtkWidget *widget,
                      GdkEventMotion *event, 
                      GucharmapTable *chartable)
 {
+  if ((event->state & GDK_BUTTON1_MASK) != 0
+      && gtk_drag_check_threshold (widget, 
+                                   chartable->click_x, 
+                                   chartable->click_y, 
+                                   event->x, 
+                                   event->y))
+    {
+      gtk_drag_begin (widget, 
+                      gtk_target_list_new (dnd_target_table, 
+                                           G_N_ELEMENTS (dnd_target_table)),
+                      GDK_ACTION_COPY, 1, (GdkEvent *) event);
+    }
+
   if ((event->state & GDK_BUTTON3_MASK) != 0 && chartable->zoom_window)
     {
       gunichar uc;
@@ -1685,7 +1706,7 @@ gucharmap_table_init (GucharmapTable *chartable)
   gtk_widget_set_events (chartable->drawing_area,
           GDK_EXPOSURE_MASK | GDK_KEY_PRESS_MASK | GDK_BUTTON_PRESS_MASK |
           GDK_BUTTON_RELEASE_MASK | GDK_BUTTON3_MOTION_MASK |
-          GDK_FOCUS_CHANGE_MASK | GDK_SCROLL_MASK);
+          GDK_BUTTON1_MOTION_MASK | GDK_FOCUS_CHANGE_MASK | GDK_SCROLL_MASK);
 
   g_signal_connect (G_OBJECT (chartable->drawing_area), "expose-event",
                     G_CALLBACK (expose_event), chartable);
@@ -1717,9 +1738,7 @@ gucharmap_table_init (GucharmapTable *chartable)
   g_signal_connect (G_OBJECT (chartable->drawing_area), "drag-data-received",
                     G_CALLBACK (drag_data_received), chartable);
 
-  gtk_drag_source_set (chartable->drawing_area, GDK_BUTTON1_MASK, 
-                       dnd_target_table, G_N_ELEMENTS (dnd_target_table),
-                       GDK_ACTION_COPY);
+  /* XXX: gtk_drag_source_set removed due to #114534 (do it by hand) */
 
   g_signal_connect (G_OBJECT (chartable->drawing_area), "drag-begin",
                     G_CALLBACK (drag_begin), chartable);

@@ -65,6 +65,9 @@ struct _GucharmapTable
   gboolean zoom_mode_enabled;
 
   gboolean snap_pow2_enabled;
+
+  /* for dragging (#114534) */
+  gdouble click_x, click_y; 
 };
 
 
