@@ -601,6 +601,8 @@ append_character_to_text_to_copy (Charmap *charmap)
 }
 
 
+/* XXX: the logic this function uses to set page_first_char is hideous and
+ * probably wrong */
 static void
 set_active_character (Charmap *charmap, gunichar uc)
 {
@@ -617,31 +619,21 @@ set_active_character (Charmap *charmap, gunichar uc)
   if (uc - charmap->page_first_char < charmap->rows * charmap->cols)
     return;
 
+  /* move the page_first_char as far as active_char has moved */
   offset = (gint) charmap->active_char - (gint) charmap->old_active_char;
 
-  if (offset > 0 && offset < 2*charmap->cols)
-    {
-      charmap->page_first_char = 
-          charmap->active_char - (charmap->active_char % charmap->cols) 
-          - (charmap->rows - 1) * charmap->cols;
-    }
-  else if (offset < 0 && offset > -2*charmap->cols)
-    {
-      charmap->page_first_char = uc - (uc % charmap->cols);
-    }
-  else if (abs (offset) % charmap->cols == 0)
-    {
-      charmap->page_first_char = 
-          charmap->active_char 
-          + (charmap->old_page_first_char - charmap->old_active_char);
-    }
+  if ((gint) charmap->old_page_first_char + offset >= 0)
+    charmap->page_first_char = charmap->old_page_first_char + offset;
   else
-    {
-      charmap->page_first_char = uc - (uc % charmap->cols);
-    }
-
-  if (charmap->page_first_char < 0)
     charmap->page_first_char = 0;
+
+  /* round down so that it's a multiple of charmap->cols */
+  charmap->page_first_char -= (charmap->page_first_char % charmap->cols);
+
+  /* go back up if we should have rounded up */
+  if (charmap->active_char - charmap->page_first_char 
+          >= charmap->rows * charmap->cols)
+    charmap->page_first_char += charmap->cols;
 }
 
 
