@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
-"POT-Creation-Date: 2003-05-09 11:50+0200\n"
-"PO-Revision-Date: 2003-05-09 11:50+0200\n"
+"POT-Creation-Date: 2003-05-25 23:35+0200\n"
+"PO-Revision-Date: 2003-05-25 23:36+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -22,23 +22,105 @@ msgstr ""
 msgid "Unicode Character Map"
 msgstr "Unicode-teckentabell"
 
-#: gucharmap/gucharmap-charmap.c:400
+#: gucharmap/gucharmap-charmap.c:359
 msgid "[not a printable character]"
 msgstr "[inte ett utskrivbart tecken]"
 
-#: gucharmap/gucharmap-charmap.c:608
+#: gucharmap/gucharmap-charmap.c:373
+msgid "General Character Properties"
+msgstr "Allmänna teckenegenskaper"
+
+#. character category
+#: gucharmap/gucharmap-charmap.c:376
+msgid "Unicode category:"
+msgstr "Unicode-kategori:"
+
+#: gucharmap/gucharmap-charmap.c:384
+msgid "Canonical decomposition:"
+msgstr "Kanonisk dekomposition:"
+
+#: gucharmap/gucharmap-charmap.c:388
+msgid "Various Useful Representations"
+msgstr "Diverse användbara representationer"
+
+#: gucharmap/gucharmap-charmap.c:397
+msgid "UTF-8:"
+msgstr "UTF-8:"
+
+# Osäker
+#: gucharmap/gucharmap-charmap.c:405
+msgid "Octal escaped UTF-8:"
+msgstr "Oktalt kodad UTF-8:"
+
+#: gucharmap/gucharmap-charmap.c:411
+msgid "Decimal entity reference:"
+msgstr "Decimalentitetsreferens:"
+
+#: gucharmap/gucharmap-charmap.c:415
+msgid "Annotations and Cross References"
+msgstr "Annotationer och korsreferenser"
+
+#: gucharmap/gucharmap-charmap.c:422
+msgid "Alias names:"
+msgstr "Aliasnamn:"
+
+#: gucharmap/gucharmap-charmap.c:431
+msgid "Notes:"
+msgstr "Anteckningar:"
+
+#: gucharmap/gucharmap-charmap.c:441
+msgid "See also:"
+msgstr "Se även:"
+
+#: gucharmap/gucharmap-charmap.c:450
+msgid "Approximate equivalents:"
+msgstr "Ungefärliga ekvivalenter:"
+
+#: gucharmap/gucharmap-charmap.c:459
+msgid "Equivalents:"
+msgstr "Ekvivalenter:"
+
+#: gucharmap/gucharmap-charmap.c:465
+msgid "CJK Ideograph Information"
+msgstr "CJK-ideografinformation"
+
+#: gucharmap/gucharmap-charmap.c:470
+msgid "Definition in English:"
+msgstr "Defintion på engelska:"
+
+#: gucharmap/gucharmap-charmap.c:475
+msgid "Mandarin Pronunciation:"
+msgstr "Mandarin-uttal:"
+
+#: gucharmap/gucharmap-charmap.c:480
+msgid "Japanese On Pronunciation:"
+msgstr "Japanskt On-uttal:"
+
+#: gucharmap/gucharmap-charmap.c:485
+msgid "Japanese Kun Pronunciation"
+msgstr "Japanskt Kun-uttal"
+
+#: gucharmap/gucharmap-charmap.c:490
+msgid "Tang Pronunciation:"
+msgstr "Tang-uttal:"
+
+#: gucharmap/gucharmap-charmap.c:495
+msgid "Korean Pronunciation:"
+msgstr "Koreanskt uttal:"
+
+#: gucharmap/gucharmap-charmap.c:534
 msgid "List of Unicode Blocks"
 msgstr "Lista med Unicode-block"
 
-#: gucharmap/gucharmap-charmap.c:679
+#: gucharmap/gucharmap-charmap.c:599
 msgid "Character Map"
 msgstr "Teckentabell"
 
-#: gucharmap/gucharmap-charmap.c:683
+#: gucharmap/gucharmap-charmap.c:603
 msgid "Characte_r Table"
 msgstr "Tecke_ntabell"
 
-#: gucharmap/gucharmap-charmap.c:686
+#: gucharmap/gucharmap-charmap.c:606
 msgid "Character _Details"
 msgstr "Tecken_detaljer"
 
@@ -58,23 +140,23 @@ msgstr "Typsnittsstil"
 msgid "Font Size"
 msgstr "Typsnittsstorlek"
 
-#: gucharmap/gucharmap-table.c:1251
+#: gucharmap/gucharmap-table.c:1247
 msgid "Clipboard is empty."
 msgstr "Urklipp är tomt."
 
-#: gucharmap/gucharmap-table.c:1253
+#: gucharmap/gucharmap-table.c:1249
 msgid "There is no selected text."
 msgstr "Det finns ingen markerad text."
 
-#: gucharmap/gucharmap-table.c:1261 gucharmap/gucharmap-table.c:1488
+#: gucharmap/gucharmap-table.c:1257 gucharmap/gucharmap-table.c:1485
 msgid "Unknown character, unable to identify."
 msgstr "Okänt tecken, kan inte identifiera."
 
-#: gucharmap/gucharmap-table.c:1265 gucharmap/gucharmap-table.c:1492
+#: gucharmap/gucharmap-table.c:1261 gucharmap/gucharmap-table.c:1489
 msgid "Character found."
 msgstr "Tecken hittat."
 
-#: gucharmap/gucharmap-table.c:1559
+#: gucharmap/gucharmap-table.c:1556
 msgid "Character Table"
 msgstr "Teckentabell"
 
@@ -879,15 +961,6 @@ msgstr "Tillägg till privatanvändningsområde-A"
 msgid "Supplementary Private Use Area-B"
 msgstr "Tillägg till privatanvändningsområde-B"
 
-#~ msgid "not a printable character"
-#~ msgstr "inte ett utskrivbart tecken"
-
-#~ msgid "Character Details"
-#~ msgstr "Teckendetaljer"
-
-#~ msgid "Character"
-#~ msgstr "Tecken"
-
 #~ msgid "Unicode category"
 #~ msgstr "Unicode-kategori"
 
@@ -897,23 +970,54 @@ msgstr "Tillägg till privatanvändningsområde-B"
 #~ msgid "UTF-8"
 #~ msgstr "UTF-8"
 
-#~ msgid "Other representations"
-#~ msgstr "Andra representationer"
+# Osäker
+#~ msgid "Octal escaped UTF-8"
+#~ msgstr "Oktalt kodad UTF-8"
 
-#~ msgid "See also"
-#~ msgstr "Se även"
+#~ msgid "Decimal entity reference"
+#~ msgstr "Decimalentitetsreferens"
 
-#~ msgid "Equivalents"
-#~ msgstr "Ekvivalenter"
+#~ msgid "_Annotations and Cross References"
+#~ msgstr "_Annotationer och korsreferenser"
 
 #~ msgid "Alias names"
 #~ msgstr "Aliasnamn"
 
+#~ msgid "Notes"
+#~ msgstr "Anteckningar"
+
+#~ msgid "See also"
+#~ msgstr "Se även"
+
 #~ msgid "Approximate equivalents"
 #~ msgstr "Ungefärliga ekvivalenter"
 
-#~ msgid "Notes"
-#~ msgstr "Anteckningar"
+#~ msgid "Equivalents"
+#~ msgstr "Ekvivalenter"
+
+#~ msgid "Mandarin Pronunciation"
+#~ msgstr "Mandarin-uttal"
+
+#~ msgid "Japanese On Pronunciation"
+#~ msgstr "Japanskt On-uttal"
+
+#~ msgid "Japanese Kun Pronunciation:"
+#~ msgstr "Japanskt Kun-uttal:"
+
+#~ msgid "Tang Pronunciation"
+#~ msgstr "Tang-uttal"
+
+#~ msgid "Korean Pronunciation"
+#~ msgstr "Koreanskt uttal"
+
+#~ msgid "not a printable character"
+#~ msgstr "inte ett utskrivbart tecken"
+
+#~ msgid "Character"
+#~ msgstr "Tecken"
+
+#~ msgid "Other representations"
+#~ msgstr "Andra representationer"
 
 #~ msgid "CJK ideograph definition"
 #~ msgstr "CJK-ideografdefinition"
@@ -957,12 +1061,6 @@ msgstr "Tillägg till privatanvändningsområde-B"
 #~ msgid "_UTF-8"
 #~ msgstr "_UTF-8"
 
-#~ msgid "_Other Representations"
-#~ msgstr "_Andra representationer"
-
-#~ msgid "_Annotations and Cross References"
-#~ msgstr "_Annotationer och korsreferenser"
-
 #~ msgid "_Alias Names"
 #~ msgstr "_Aliasnamn"
 
@@ -981,9 +1079,6 @@ msgstr "Tillägg till privatanvändningsområde-B"
 #~ msgid "_CJK Ideograph Details"
 #~ msgstr "_CJK-ideografdetaljer"
 
-#~ msgid "CJK Ideograph _Definition"
-#~ msgstr "CJK-ideograf_definition"
-
 #~ msgid "_Mandarin Pronunciation"
 #~ msgstr "_Mandarin-uttal"
 
@@ -998,9 +1093,6 @@ msgstr "Tillägg till privatanvändningsområde-B"
 
 #~ msgid "_Tang Pronunciation"
 #~ msgstr "_Tang-uttal"
-
-#~ msgid "_Korean Pronunciation"
-#~ msgstr "_Koreanskt uttal"
 
 #~ msgid "CJK Ideograph Extension A"
 #~ msgstr "CJK-ideograftillägg A"
@@ -1077,20 +1169,8 @@ msgstr "Tillägg till privatanvändningsområde-B"
 #~ msgid "Canonical Decomposition"
 #~ msgstr "Kanonisk dekomposition"
 
-#~ msgid "Mandarin Pronunciation"
-#~ msgstr "Mandarin-uttal"
-
-#~ msgid "Japanese On Pronunciation"
-#~ msgstr "Japanskt On-uttal"
-
-#~ msgid "Japanese Kun Pronunciation"
-#~ msgstr "Japanskt Kun-uttal"
-
 #~ msgid "Cantonese Pronunciation"
 #~ msgstr "Kantonesiskt uttal"
-
-#~ msgid "Tang Pronunciation"
-#~ msgstr "Tang-uttal"
 
 #~ msgid "Characters"
 #~ msgstr "Tecken"
