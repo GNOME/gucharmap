@@ -69,6 +69,16 @@ typedef struct
 block_index_t;
 
 
+typedef enum
+{
+  NOT_FOUND,
+  FOUND,
+  WRAPPED,
+  NOTHING_TO_SEARCH_FOR
+}
+charmap_search_result_t;
+
+
 struct _Charmap
 {
   GtkVBox parent;
@@ -145,7 +155,8 @@ void charmap_identify_clipboard (Charmap *charmap, GtkClipboard *clipboard);
 void charmap_expand_block_selector (Charmap *charmap);
 void charmap_collapse_block_selector (Charmap *charmap);
 void charmap_go_to_character (Charmap *charmap, gunichar uc);
-void charmap_search (Charmap *charmap, const gchar *search_text);
+charmap_search_result_t charmap_search (Charmap *charmap, 
+                                        const gchar *search_text);
 
 
 #ifdef __cplusplus

@@ -35,7 +35,9 @@
 static GtkWidget *charmap;
 static GtkWidget *text_to_copy;
 static GtkWidget *search_entry;
-static GtkWidget *statusbar;
+static GtkWidget *status;
+static GtkWidget *search_status;
+static GtkWidget *text_to_copy_status;
 static GdkPixbuf *icon;
 
 typedef struct 
@@ -47,18 +49,34 @@ EntryAndLabel;
 
 
 static void
-set_statusbar_message (const gchar *message)
+set_status (const gchar *message)
 {
   /* underflow is allowed */
-  gtk_statusbar_pop (GTK_STATUSBAR (statusbar), 0); 
-  gtk_statusbar_push (GTK_STATUSBAR (statusbar), 0, message);
+  gtk_statusbar_pop (GTK_STATUSBAR (status), 0); 
+  gtk_statusbar_push (GTK_STATUSBAR (status), 0, message);
 }
 
 
 static void
 status_message (GtkWidget *widget, const gchar *message)
 {
-  set_statusbar_message (message);
+  set_status (message);
+}
+
+
+static void
+set_search_status (const gchar *message)
+{
+  gtk_label_set_text (GTK_LABEL (search_status), message);
+  set_status (message);
+}
+
+
+static void
+set_text_to_copy_status (const gchar *message)
+{
+  gtk_label_set_text (GTK_LABEL (text_to_copy_status), message);
+  set_status (message);
 }
 
 
@@ -136,7 +154,7 @@ jump_code_point (GtkWidget *widget, gpointer data)
 
   gtk_box_pack_start (GTK_BOX (vbox), eal->entry, FALSE, FALSE, 0);
 
-  eal->label = gtk_label_new ("");
+  eal->label = gtk_label_new (NULL);
   gtk_label_set_line_wrap (GTK_LABEL (eal->label), TRUE);
   gtk_box_pack_start (GTK_BOX (vbox), eal->label, FALSE, FALSE, 0);
 
@@ -189,7 +207,7 @@ copy_button_clicked (GtkWidget *widget, gpointer callback_data)
           clipboard, 
           gtk_entry_get_text (GTK_ENTRY (text_to_copy)), -1);
 
-  set_statusbar_message (_("Text copied to clipboard."));
+  set_text_to_copy_status (_("Text copied to clipboard."));
 
   return TRUE;
 }
@@ -199,7 +217,7 @@ static gint
 clear_button_clicked (GtkWidget *widget, gpointer callback_data)
 {
   gtk_entry_set_text (GTK_ENTRY (text_to_copy), "");
-  set_statusbar_message (_("Text-to-copy entry box cleared."));
+  set_text_to_copy_status (_("Text-to-copy entry box cleared."));
   return TRUE;
 }
 
@@ -210,7 +228,27 @@ do_search (GtkWidget *widget, gpointer data)
   const gchar *search_text;
 
   search_text = gtk_entry_get_text (GTK_ENTRY (search_entry));
-  charmap_search (CHARMAP (charmap), search_text);
+  switch (charmap_search (CHARMAP (charmap), search_text))
+    {
+      case NOT_FOUND:
+        set_search_status (_("Not found."));
+        break;
+
+      case FOUND:
+        set_search_status (_("Found."));
+        break;
+
+      case WRAPPED:
+        set_search_status (_("Search wrapped."));
+        break;
+
+      case NOTHING_TO_SEARCH_FOR:
+        set_search_status (_("Nothing to search for."));
+        break;
+
+      default:
+        g_warning ("charmap_search returned an unexpected result; this should never happen");
+    }
 }
 
 
@@ -218,6 +256,7 @@ static GtkWidget *
 make_search ()
 {
   GtkWidget *hbox;
+  GtkWidget *vbox;
   GtkWidget *button;
   GtkTooltips *tooltips;
 
@@ -238,26 +277,42 @@ make_search ()
 
   gtk_tooltips_set_tip (tooltips, button, _("Search for the next occurrence of this string in a character's Unicode name."), NULL);
 
-  gtk_widget_show_all (hbox);
+  vbox = gtk_vbox_new (FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
-  return hbox;
+  /* the status message label */
+  hbox = gtk_hbox_new (FALSE, 0); 
+  search_status = gtk_label_new (NULL);
+  gtk_label_set_justify (GTK_LABEL (search_status), GTK_JUSTIFY_LEFT);
+  gtk_box_pack_start (GTK_BOX (hbox), search_status, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+
+  gtk_widget_show_all (vbox);
+
+  return vbox;
 }
 
 
 static GtkWidget *
 make_text_to_copy ()
 {
-  GtkWidget *hbox;
   GtkWidget *button;
   GtkWidget *label;
+  GtkWidget *table;
+  GtkWidget *hbox;
   GtkTooltips *tooltips;
 
-  hbox = gtk_hbox_new (FALSE, 6);
+  table = gtk_table_new (2, 2, FALSE);
+  gtk_table_set_col_spacings (GTK_TABLE (table), 6);
 
   tooltips = gtk_tooltips_new ();
 
   label = gtk_label_new (_("Text to copy:"));
-  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+  /* gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 0, 1); */
+  gtk_table_attach (GTK_TABLE (table), label, 0, 1, 0, 1, 0, 0, 0, 0);
+
+  hbox = gtk_hbox_new (FALSE, 6);
+  gtk_table_attach_defaults (GTK_TABLE (table), hbox, 1, 2, 0, 1);
 
   text_to_copy = gtk_entry_new ();
   gtk_entry_set_max_length (GTK_ENTRY (text_to_copy), 
@@ -278,9 +333,16 @@ make_text_to_copy ()
                     G_CALLBACK (clear_button_clicked), NULL);
   gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
 
-  gtk_widget_show_all (hbox);
+  /* the status message label */
+  hbox = gtk_hbox_new (FALSE, 0); 
+  text_to_copy_status = gtk_label_new (NULL);
+  gtk_label_set_justify (GTK_LABEL (text_to_copy_status), GTK_JUSTIFY_LEFT);
+  gtk_box_pack_start (GTK_BOX (hbox), text_to_copy_status, FALSE, FALSE, 0);
+  gtk_table_attach_defaults (GTK_TABLE (table), hbox, 1, 2, 1, 2);
 
-  return hbox;
+  gtk_widget_show_all (table);
+
+  return table;
 }
 
 
@@ -403,10 +465,11 @@ gint
 main (gint argc, gchar **argv)
 {
   GtkWidget *window = NULL;
-  GtkWidget *vbox;
+  GtkWidget *big_vbox;
   GtkWidget *hbox;
   GtkWidget *fontsel;
   GtkWidget *toolbar; /* the fontsel goes on this */
+  GtkWidget *spacer;
   GtkTooltips *tooltips;
   gchar *orig_font, *new_font;
   PangoFontDescription *font_desc;
@@ -439,39 +502,45 @@ main (gint argc, gchar **argv)
   g_signal_connect (G_OBJECT (window), "destroy",
                     G_CALLBACK (gtk_main_quit), NULL);
 
-  vbox = gtk_vbox_new (FALSE, 0);
-  gtk_container_add (GTK_CONTAINER (window), vbox);
+  big_vbox = gtk_vbox_new (FALSE, 0);
+  gtk_container_add (GTK_CONTAINER (window), big_vbox);
 
-  gtk_box_pack_start (GTK_BOX (vbox), make_menu (), FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (big_vbox), make_menu (), FALSE, FALSE, 0);
 
   toolbar = gtk_toolbar_new ();
   fontsel = mini_font_selection_new ();
   gtk_toolbar_append_widget (GTK_TOOLBAR (toolbar), fontsel, NULL, NULL);
-  gtk_box_pack_start (GTK_BOX (vbox), toolbar, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (big_vbox), toolbar, FALSE, FALSE, 0);
   gtk_widget_show_all (toolbar);
 
+  /* some empty space */
+  spacer = gtk_alignment_new (0, 0, 0, 0); 
+  gtk_widget_set_size_request (spacer, -1, 12);
+  gtk_widget_show (spacer);
+  gtk_box_pack_start (GTK_BOX (big_vbox), spacer, FALSE, FALSE, 0);
+
   /* hbox has search and text_to_copy */
-  hbox = gtk_hbox_new (FALSE, 18); /* space between the parts */
+  hbox = gtk_hbox_new (FALSE, 30); /* space between the parts */
   gtk_box_pack_start (GTK_BOX (hbox), make_search (), TRUE, TRUE, 0);
   gtk_box_pack_start (GTK_BOX (hbox), make_text_to_copy (), TRUE, TRUE, 0);
-  gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 6);
   gtk_container_set_border_width (GTK_CONTAINER (hbox), 6);
+  gtk_box_pack_start (GTK_BOX (big_vbox), hbox, FALSE, FALSE, 0);
   gtk_widget_show (hbox);
   /* end hbox */
 
   charmap = charmap_new ();
   gtk_widget_show (charmap);
-  gtk_box_pack_start (GTK_BOX (vbox), charmap, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (big_vbox), charmap, TRUE, TRUE, 0);
+
+  status = gtk_statusbar_new ();
+  gtk_box_pack_start (GTK_BOX (big_vbox), status, FALSE, FALSE, 0);
+  gtk_widget_show (status);
 
   g_signal_connect (fontsel, "changed", G_CALLBACK (fontsel_changed), charmap);
   g_signal_connect (charmap, "activate", 
                     G_CALLBACK (append_character_to_text_to_copy), NULL);
   g_signal_connect (charmap, "status-message",
                     G_CALLBACK (status_message), NULL);
-
-  statusbar = gtk_statusbar_new ();
-  gtk_box_pack_start (GTK_BOX (vbox), statusbar, FALSE, FALSE, 0);
-  gtk_widget_show (statusbar);
 
   /* make the starting font 50% bigger than the default font */
   orig_font = mini_font_selection_get_font_name (MINI_FONT_SELECTION (fontsel));
@@ -485,7 +554,7 @@ main (gint argc, gchar **argv)
   g_free (orig_font);
   g_free (new_font);
 
-  gtk_widget_show (vbox);
+  gtk_widget_show (big_vbox);
   gtk_widget_show (window);
 
   gtk_main ();

@@ -1796,16 +1796,15 @@ charmap_go_to_character (Charmap *charmap, gunichar uc)
 }
 
 
-void
+charmap_search_result_t
 charmap_search (Charmap *charmap, const gchar *search_text)
 {
   gunichar uc;
+  charmap_search_result_t result;
 
   if (search_text[0] == '\0')
     {
-      g_signal_emit (charmap, charmap_signals[STATUS_MESSAGE], 0, 
-	             _("Nothing to search for."));
-      return;
+      return NOTHING_TO_SEARCH_FOR;
     }
   
   uc = find_next_substring_match (charmap->active_char, UNICHAR_MAX, 
@@ -1813,17 +1812,16 @@ charmap_search (Charmap *charmap, const gchar *search_text)
   if (uc != (gunichar)(-1) && uc <= UNICHAR_MAX)
     {
       if (uc <= charmap->active_char)
-        g_signal_emit (charmap, charmap_signals[STATUS_MESSAGE], 0, 
-		       _("Search wrapped."));
+        result = WRAPPED;
       else
-        g_signal_emit (charmap, charmap_signals[STATUS_MESSAGE], 0, 
-		       _("Found."));
+        result = FOUND;
 
       set_active_character (charmap, uc);
       redraw (charmap);
     }
   else
-    g_signal_emit (charmap, charmap_signals[STATUS_MESSAGE], 0, 
-	           _("Not found."));
+    result = NOT_FOUND;
+
+  return result;
 }
 
