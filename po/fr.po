@@ -1,29 +1,27 @@
 # $Id$
 # translation of gucharmap
 # copyright (c) 2002 Noah Levitt
-#
-# forgive my bad French
-#
-#, fuzzy
+# copyright (c) 2003 Christophe Fergeau <teuf@users.sourceforge.net>
 msgid ""
 msgstr ""
-"Project-Id-Version: gucharmap 0.2\n"
-"POT-Creation-Date: 2003-01-12 13:35-0500\n"
-"Last-Translator: Noah Levitt <nlevitt@users.sourceforge.net>\n"
+"Project-Id-Version: gucharmap\n"
+"POT-Creation-Date: (null)\n"
+"PO-Revision-Date: 2003-01-13 13:37+0100\n"
+"Last-Translator: Christophe Fergeau <teuf@users.sourceforge.net>\n"
+"Language-Team: GNOME French team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: src/charmap.c:1004
 msgid "Text copied to clipboard."
-msgstr "Texte copié au presse-papiers"
+msgstr "Texte copié dans le presse-papiers"
 
 #: src/charmap.c:1016
 msgid "Text-to-copy entry box cleared."
 msgstr ""
 
 #: src/charmap.c:1203
-#, fuzzy
 msgid "Unicode name"
 msgstr "Nom unicode"
 
@@ -33,41 +31,35 @@ msgid "Unicode code point"
 msgstr "Valeur unicode"
 
 #: src/charmap.c:1215
-#, fuzzy
 msgid "Unicode category"
 msgstr "Catégorie unicode"
 
 #: src/charmap.c:1221
-#, fuzzy
 msgid "Canonical decomposition"
 msgstr "Décomposition canonique"
 
 #: src/charmap.c:1227
 msgid "UTF-8"
-msgstr ""
+msgstr "UTF-8"
 
 #: src/charmap.c:1234
 #, fuzzy
 msgid "CJK ideograph definition"
-msgstr "Définition d'idéographe"
+msgstr "Définition d'idéographe CJK"
 
 #: src/charmap.c:1240
-#, fuzzy
 msgid "Mandarin pronunciation"
 msgstr "Prononciation mandarine"
 
 #: src/charmap.c:1246
-#, fuzzy
 msgid "Japanese On pronunciation"
-msgstr "Prononciation japonaise « on »"
+msgstr "Prononciation japonaise « On »"
 
 #: src/charmap.c:1252
-#, fuzzy
 msgid "Japanese Kun pronunciation"
-msgstr "Prononciation japonaise « kun »"
+msgstr "Prononciation japonaise « Kun »"
 
 #: src/charmap.c:1258
-#, fuzzy
 msgid "Cantonese pronunciation"
 msgstr "Prononciation cantonaise"
 
@@ -77,7 +69,6 @@ msgid "Tang pronunciation"
 msgstr "Prononciation tang"
 
 #: src/charmap.c:1270
-#, fuzzy
 msgid "Korean pronunciation"
 msgstr "Prononciation coréenne"
 
@@ -87,11 +78,11 @@ msgstr "Le presse-papiers est vide."
 
 #: src/charmap.c:1327
 msgid "There is no selected text."
-msgstr ""
+msgstr "Il n'y a pas de texte sélectionné."
 
 #: src/charmap.c:1336 src/charmap.c:1566
 msgid "Unknown character, unable to identify."
-msgstr ""
+msgstr "Caractère inconnu, impossible de l'identifier."
 
 #: src/charmap.c:1340 src/charmap.c:1570
 msgid "Character found."
@@ -99,11 +90,11 @@ msgstr "Le caractère a été trouvé."
 
 #: src/charmap.c:1359
 msgid "Text to copy:"
-msgstr "Texte à copier"
+msgstr "Texte à copier :"
 
 #: src/charmap.c:1373
 msgid "Copy to the clipboard."
-msgstr "Copier au presse-papiers."
+msgstr "Copier dans le presse-papiers."
 
 #: src/charmap.c:1653
 msgid "Nothing to search for."
@@ -125,12 +116,14 @@ msgstr "Non trouvé."
 msgid ""
 "Search for the next occurrence of this string in a character's Unicode name."
 msgstr ""
+"Rechercher l'occurrence suivante de cette chaîne dans le nom Unicode d'un "
+"caractère."
 
 #: src/main.c:75
 #, c-format
 msgid ""
-"Not a valid code point to jump to. Must be a hexadecimal number between 0 "
-"and %4.4X."
+"Not a valid code point to jump to. Must be a hexadecimal number between 0 and "
+"%4.4X."
 msgstr ""
 
 #: src/main.c:95
@@ -145,25 +138,26 @@ msgstr "Valeur unicode : U+%4.4X (%u)"
 #: src/main.c:151
 msgid "translator_credits"
 msgstr ""
+"Noah Levitt\n"
+"Christophe Fergeau  <teuf@users.sourceforge.net>"
 
 #: src/main.c:161 src/main.c:287
 msgid "Unicode Character Map"
-msgstr "Mappage caractères unicode"
+msgstr "Table de caractères unicode"
 
 #: src/main.c:204
 msgid "Char_map"
-msgstr ""
+msgstr "_Table de caractères"
 
 #: src/main.c:206
 msgid "_View"
-msgstr ""
+msgstr "_Voir"
 
 #: src/main.c:208
 msgid "_Go to"
-msgstr ""
+msgstr "_Aller à"
 
 #: src/main.c:226
-#, fuzzy
 msgid "Expand/Collapse All"
 msgstr "Tout étendre/réduire"
 
@@ -179,7 +173,7 @@ msgstr "Identifier le caractère du presse-papiers"
 #. make the help menu
 #: src/main.c:249
 msgid "_Help"
-msgstr ""
+msgstr "_Aide"
 
 #~ msgid "Character: %s"
 #~ msgstr "Caractère : %s"
