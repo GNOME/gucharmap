@@ -113,7 +113,7 @@ jump_code_point (GtkWidget *widget, GucharmapWindow *guw)
   gtk_entry_set_max_length (GTK_ENTRY (entry), 8); 
   gtk_entry_set_width_chars (GTK_ENTRY (entry), 8);
   hbox = gtk_hbox_new (FALSE, 0);
-  label = gtk_label_new_with_mnemonic (_("_Enter unicode code point"));
+  label = gtk_label_new_with_mnemonic (_("_Enter Unicode code point"));
   gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
   gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
   gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
@@ -995,7 +995,7 @@ append_character_to_text_to_copy (Chartable *chartable,
 
   if (! unichar_validate (uc))
     {
-      set_status (guw, _("The selected code point is not a valid unicode character."));
+      set_status (guw, _("The selected code point is not a valid Unicode character."));
       return;
     }
 
