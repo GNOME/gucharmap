@@ -27,9 +27,9 @@
 #include "charmap.h"
 #include "unicode_info.h"
 #include "gucharmap_intl.h"
-#include "disclosure-widget.h"
 
 #define abs(x) ((x) >= 0 ? (x) : (-x))
+#define font_height(font_metrics) ((pango_font_metrics_get_ascent (font_metrics) + pango_font_metrics_get_descent (font_metrics)) / PANGO_SCALE)
 
 /* only the label is visible in the block selector */
 enum 
@@ -278,38 +278,112 @@ set_active_block (Charmap *charmap)
 }
 
 
-static gint 
-calculate_square_dimension_x (PangoFontMetrics *font_metrics)
+/* computes the column width based solely on the font size */
+static gint
+bare_minimal_column_width (Charmap *charmap)
 {
-  /* XXX: can't get max width for the font, so just use the height */
-  return 5 + (pango_font_metrics_get_ascent (font_metrics) 
-              + pango_font_metrics_get_descent (font_metrics)) 
-             / PANGO_SCALE;
-}
-
-
-static gint 
-calculate_square_dimension_y (PangoFontMetrics *font_metrics)
-{
-  return 5 + (pango_font_metrics_get_ascent (font_metrics) 
-              + pango_font_metrics_get_descent (font_metrics)) 
-             / PANGO_SCALE;
+  /* XXX: width is not available, so use height */
+  return font_height (charmap->font_metrics) + 7;
 }
 
 
 static gint
-calculate_chartable_dimension_x (Charmap *charmap)
+minimal_column_width (Charmap *charmap)
 {
-  return charmap->cols * (calculate_square_dimension_x (charmap->font_metrics) 
-                          + 1) + 1;
+  gint total_extra_pixels;
+  gint bare_minimal_width = bare_minimal_column_width (charmap);
+
+  total_extra_pixels = charmap->chartable->allocation.width 
+                       - (charmap->cols * bare_minimal_width + 1);
+
+  return bare_minimal_width + total_extra_pixels / charmap->cols;
+}
+
+
+/* not all columns are necessarily the same width because of padding */
+static gint
+column_width (Charmap *charmap, gint col)
+{
+  gint num_padded_columns;
+  gint min_col_w = minimal_column_width (charmap);
+
+  num_padded_columns = charmap->chartable->allocation.width 
+                       - (min_col_w * charmap->cols + 1);
+
+  if (charmap->cols - col <= num_padded_columns)
+    return min_col_w + 1;
+  else
+    return min_col_w;
+}
+
+
+/* calculates the position of the left end of the column (just to the right
+ * of the left border) */
+/* XXX: calling this repeatedly is not the most efficient, but it probably
+ * is the most readable */
+static gint
+x_offset (Charmap *charmap, gint col)
+{
+  gint c, x;
+
+  for (c = 0, x = 1;  c < col;  c++)
+    x += column_width (charmap, c);
+
+  return x;
+}
+
+
+/* computes the row height based solely on the font size */
+static gint
+bare_minimal_row_height (Charmap *charmap)
+{
+  return font_height (charmap->font_metrics) + 7;
 }
 
 
 static gint
-calculate_chartable_dimension_y (Charmap *charmap)
+minimal_row_height (Charmap *charmap)
 {
-  return charmap->rows * (calculate_square_dimension_y (charmap->font_metrics) 
-                          + 1) + 1;
+  gint total_extra_pixels;
+  gint bare_minimal_height = bare_minimal_row_height (charmap);
+
+  total_extra_pixels = charmap->chartable->allocation.height 
+                       - (charmap->rows * bare_minimal_height + 1);
+
+  return bare_minimal_height + total_extra_pixels / charmap->rows;
+}
+
+
+/* not all rows are necessarily the same height because of padding */
+static gint
+row_height (Charmap *charmap, gint row)
+{
+  gint num_padded_rows;
+  gint min_row_h = minimal_row_height (charmap);
+
+  num_padded_rows = charmap->chartable->allocation.height -
+                    (min_row_h * charmap->rows + 1);
+
+  if (charmap->rows - row <= num_padded_rows)
+    return min_row_h + 1;
+  else
+    return min_row_h;
+}
+
+
+/* calculates the position of the top end of the row (just below the top
+ * border) */
+/* XXX: calling this repeatedly is not the most efficient, but it probably
+ * is the most readable */
+static gint
+y_offset (Charmap *charmap, gint row)
+{
+  gint r, y;
+
+  for (r = 0, y = 1;  r < row;  r++)
+    y += row_height (charmap, r);
+
+  return y;
 }
 
 
@@ -346,8 +420,8 @@ draw_character (Charmap *charmap, gint row, gint col)
   else
     gc = charmap->chartable->style->text_gc[GTK_STATE_NORMAL];
 
-  square_width = calculate_square_dimension_x (charmap->font_metrics);
-  square_height = calculate_square_dimension_y (charmap->font_metrics);
+  square_width = column_width (charmap, col) - 1;
+  square_height = row_height (charmap, row) - 1;
 
   pango_layout_set_text (charmap->pango_layout, 
                          unichar_to_printable_utf8 (uc), 
@@ -362,8 +436,8 @@ draw_character (Charmap *charmap, gint row, gint col)
 
   /* extra +1 is for the uncounted border */
   gdk_draw_layout (charmap->chartable_pixmap, gc,
-                   (square_width+1) * col + 1 + padding_x,
-                   (square_height+1) * row + 1 + padding_y,
+                   x_offset (charmap, col) + padding_x,
+                   y_offset (charmap, row) + padding_y,
                    charmap->pango_layout);
 }
 
@@ -384,11 +458,11 @@ draw_square_bg (Charmap *charmap, gint row, gint col)
   else
     gc = charmap->chartable->style->base_gc[GTK_STATE_NORMAL];
 
-  square_width = calculate_square_dimension_x (charmap->font_metrics);
-  square_height = calculate_square_dimension_y (charmap->font_metrics);
+  square_width = column_width (charmap, col) - 1;
+  square_height = row_height (charmap, row) - 1;
 
   gdk_draw_rectangle (charmap->chartable_pixmap, gc, TRUE, 
-                      (square_width+1) * col + 1, (square_height+1) * row + 1, 
+                      x_offset (charmap, col), y_offset (charmap, row),
                       square_width, square_height);
 }
 
@@ -398,12 +472,12 @@ expose_square (Charmap *charmap, gint row, gint col)
 {
   gint square_width, square_height;
 
-  square_width = calculate_square_dimension_x (charmap->font_metrics);
-  square_height = calculate_square_dimension_y (charmap->font_metrics);
+  square_width = column_width (charmap, col) - 1;
+  square_height = row_height (charmap, row) - 1;
 
   gtk_widget_queue_draw_area (charmap->chartable, 
-                              (square_width+1) * col + 1, 
-                              (square_height+1) * row + 1, 
+                              x_offset (charmap, col),
+                              y_offset (charmap, col),
                               square_width, square_height);
 }
 
@@ -419,30 +493,30 @@ draw_square (Charmap *charmap, gint row, gint col)
 static void
 draw_borders (Charmap *charmap)
 {
-  gint x, y;
-  gint width, height; 
-  gint square_width, square_height; 
-
-  square_width = calculate_square_dimension_x (charmap->font_metrics);
-  square_height = calculate_square_dimension_y (charmap->font_metrics);
-
-  width = calculate_chartable_dimension_x (charmap);
-  height = calculate_chartable_dimension_y (charmap);
+  gint x, y, col, row;
 
   /* vertical lines */
-  for (x = 0;  x < width;  x += square_width + 1)
+  gdk_draw_line (charmap->chartable_pixmap,
+                 charmap->chartable->style->fg_gc[GTK_STATE_INSENSITIVE], 
+                 0, 0, 0, charmap->chartable->allocation.height - 1);
+  for (col = 0, x = 0;  col < charmap->cols;  col++)
     {
+      x += column_width (charmap, col);
       gdk_draw_line (charmap->chartable_pixmap,
                      charmap->chartable->style->fg_gc[GTK_STATE_INSENSITIVE], 
-                     x, 0, x, height - 1);
+                     x, 0, x, charmap->chartable->allocation.height - 1);
     }
 
   /* horizontal lines */
-  for (y = 0;  y < height;  y += square_height + 1)
+  gdk_draw_line (charmap->chartable_pixmap,
+                 charmap->chartable->style->fg_gc[GTK_STATE_INSENSITIVE], 
+                 0, 0, charmap->chartable->allocation.width - 1, 0);
+  for (row = 0, y = 0;  row < charmap->rows;  row++)
     {
+      y += row_height (charmap, row);
       gdk_draw_line (charmap->chartable_pixmap,
                      charmap->chartable->style->fg_gc[GTK_STATE_INSENSITIVE], 
-                     0, y, width - 1, y);
+                     0, y, charmap->chartable->allocation.width - 1, y);
     }
 }
 
@@ -452,15 +526,13 @@ static void
 draw_chartable_from_scratch (Charmap *charmap)
 {
   gint row, col;
-  gint width, height;
-
-  width = calculate_chartable_dimension_x (charmap);
-  height = calculate_chartable_dimension_y (charmap);
 
   /* plain background */
   gdk_draw_rectangle (charmap->chartable_pixmap,
                       charmap->chartable->style->base_gc[GTK_STATE_NORMAL], 
-                      TRUE, 0, 0, width, height);
+                      TRUE, 0, 0, 
+                      charmap->chartable->allocation.width, 
+                      charmap->chartable->allocation.height);
   draw_borders (charmap);
 
   /* draw the characters */
@@ -493,8 +565,8 @@ expose_event (GtkWidget *widget,
     {
       charmap->chartable_pixmap = gdk_pixmap_new (
               charmap->chartable->window, 
-              calculate_chartable_dimension_x (charmap),
-              calculate_chartable_dimension_y (charmap), -1);
+              charmap->chartable->allocation.width,
+              charmap->chartable->allocation.height, -1);
 
       draw_chartable_from_scratch (charmap);
     }
@@ -524,40 +596,38 @@ draw_and_expose_character_square (Charmap *charmap, gunichar uc)
 }
 
 
+#if 0
 /* copies the portion of the chartable that is on the new and old to its new
  * position */
 static void
 shift_area (Charmap *charmap, gint row_offset)
 {
   gint rows;
-  gint square_width, square_height, width, height;
+  gint square_width, square_height;
   gint area_height;
   gint ysrc, ydest;
 
   square_width = calculate_square_dimension_x (charmap->font_metrics);
   square_height = calculate_square_dimension_y (charmap->font_metrics);
 
-  width = calculate_chartable_dimension_x (charmap);
-  height = calculate_chartable_dimension_y (charmap);
-
   rows = charmap->rows - abs (row_offset);
   area_height = rows * (square_height + 1) + 1;
 
   if (row_offset > 0) /* moving up */
     {
-      ysrc = height - area_height;
+      ysrc = charmap->chartable->allocation.height - area_height;
       ydest = 0;
     }
   else /* moving down */
     {
       ysrc = 0;
-      ydest = height - area_height;
+      ydest = charmap->chartable->allocation.height - area_height;
     }
 
   gdk_draw_drawable (charmap->chartable_pixmap,
                      charmap->chartable->style->base_gc[GTK_STATE_NORMAL], 
                      charmap->chartable_pixmap, 0, ysrc, 0, ydest,
-                     width, area_height);
+                     charmap->chartable->allocation.width, area_height);
 }
 
 
@@ -599,6 +669,7 @@ draw_squares_after_shift (Charmap *charmap, gint row_offset)
       draw_square (charmap, row, col);
     }
 }
+#endif
 
 
 /* Redraws whatever needs to be redrawn, in the character table and caption
@@ -609,7 +680,8 @@ redraw (Charmap *charmap)
   gint row_offset;
   gboolean actives_done = FALSE;
 
-#ifdef G_PLATFORM_WIN32
+/* #ifdef G_PLATFORM_WIN32 */
+#if 1
 
   /* get around the bug in gdkdrawable-win32.c */
   /* yup, this makes it really slow */
@@ -871,21 +943,16 @@ key_press_event (GtkWidget *widget,
 static gunichar
 get_char_at (Charmap *charmap, gint x, gint y)
 {
-  gint row, col, w, h;
+  gint r, c, x0, y0;
   gunichar rv;
 
-  w = calculate_square_dimension_x (charmap->font_metrics);
-  h = calculate_square_dimension_y (charmap->font_metrics);
+  for (c = 0, x0 = 0;  x0 < x;  c++)
+    x0 += column_width (charmap, c);
 
-  row = y / (h + 1);
-  if (row >= charmap->rows)
-    row = charmap->rows - 1;
+  for (r = 0, y0 = 0;  y0 < y;  r++)
+    y0 += row_height (charmap, r);
 
-  col = x / (w + 1);
-  if (col >= charmap->cols)
-    col = charmap->cols - 1;
-
-  rv = charmap->page_first_char + row * charmap->cols + col;
+  rv = charmap->page_first_char + (r-1) * charmap->cols + (c-1);
 
   /* XXX: check this somewhere else? */
   if (rv > UNICHAR_MAX)
@@ -1418,10 +1485,8 @@ size_allocate (GtkWidget *widget, GtkAllocation *allocation, Charmap *charmap)
   old_rows = charmap->rows;
   old_cols = charmap->cols;
 
-  charmap->cols = (allocation->width - 1)
-                  / (calculate_square_dimension_x (charmap->font_metrics) + 1);
-  charmap->rows = (allocation->height - 1)
-                  / (calculate_square_dimension_y (charmap->font_metrics) + 1);
+  charmap->cols = (allocation->width - 1) / bare_minimal_column_width (charmap);
+  charmap->rows = (allocation->height - 1) / bare_minimal_row_height (charmap);
 
   /* avoid a horrible floating point exception crash */
   if (charmap->rows < 1)
@@ -1429,16 +1494,16 @@ size_allocate (GtkWidget *widget, GtkAllocation *allocation, Charmap *charmap)
   if (charmap->cols < 1)
     charmap->cols = 1;
 
+  /* force pixmap to be redrawn on next expose event */
+  if (charmap->chartable_pixmap != NULL)
+    g_object_unref (charmap->chartable_pixmap);
+  charmap->chartable_pixmap = NULL;
+
   if (charmap->rows == old_rows && charmap->cols == old_cols)
     return;
 
   charmap->page_first_char = charmap->active_char 
                              - (charmap->active_char % charmap->cols);
-
-  /* force pixmap to be redrawn on next expose event */
-  if (charmap->chartable_pixmap != NULL)
-    g_object_unref (charmap->chartable_pixmap);
-  charmap->chartable_pixmap = NULL;
 
   /* adjust the adjustment, since it's based on the size of a row */
   adjustment = GTK_ADJUSTMENT (charmap->adjustment);
@@ -1618,9 +1683,8 @@ charmap_init (Charmap *charmap)
   /* end top hbox */
 
   /* vbox for charmap and caption */
-  vbox = gtk_vbox_new (FALSE, 12);
-  gtk_box_pack_start (GTK_BOX (vbox), make_chartable (charmap), 
-                      TRUE, TRUE, 0);
+  vbox = gtk_vbox_new (FALSE, 6);
+  gtk_box_pack_start (GTK_BOX (vbox), make_chartable (charmap), TRUE, TRUE, 0);
   caption = make_caption (charmap);
   gtk_widget_show (caption);
   gtk_box_pack_start (GTK_BOX (vbox), caption, FALSE, FALSE, 0);
@@ -1655,11 +1719,6 @@ charmap_init (Charmap *charmap)
 
   pango_layout_set_font_description (charmap->pango_layout,
                                      charmap->chartable->style->font_desc);
-
-  /* size the drawing area */
-  gtk_widget_set_size_request (charmap->chartable, 
-                               calculate_chartable_dimension_x (charmap),
-                               calculate_chartable_dimension_y (charmap));
 
   charmap->page_first_char = (gunichar) 0x0000;
   charmap->active_char = (gunichar) 0x0000;
@@ -1745,28 +1804,6 @@ charmap_set_font (Charmap *charmap, gchar *font_name)
   if (charmap->chartable_pixmap != NULL)
     g_object_unref (charmap->chartable_pixmap);
   charmap->chartable_pixmap = NULL;
-}
-
-
-/* call this to let the charmap set window geometry hints; this will make
- * resizing snap nicely to rows and columns; should do this when changing
- * the font as well as at initialization */
-void 
-charmap_set_geometry_hints (Charmap *charmap, GtkWindow *window)
-{
-  GdkGeometry hints;
-
-  hints.width_inc = calculate_square_dimension_x (charmap->font_metrics) + 1;
-  hints.height_inc = calculate_square_dimension_y (charmap->font_metrics) + 1;
-
-  hints.min_width = hints.width_inc * CHARMAP_MIN_COLS + 1;
-  hints.min_height = hints.height_inc * CHARMAP_MIN_ROWS + 1;
-
-  hints.base_width = 1;
-  hints.base_height = 1;
-
-  gtk_window_set_geometry_hints (window, charmap->chartable, &hints,
-          GDK_HINT_RESIZE_INC | GDK_HINT_MIN_SIZE | GDK_HINT_BASE_SIZE);
 }
 
 
