@@ -216,12 +216,14 @@ gucharmap_mini_font_selection_init (GucharmapMiniFontSelection *fontsel)
   gtk_editable_set_editable (GTK_EDITABLE (GTK_COMBO (fontsel->family)->entry),
                              FALSE);
 
-  fontsel->bold = gtk_toggle_button_new_with_mnemonic (_("_Bold"));
+  fontsel->bold = gtk_toggle_button_new_with_mnemonic (GTK_STOCK_BOLD);
+  gtk_button_set_use_stock (GTK_BUTTON (fontsel->bold), TRUE);
   gtk_widget_show (fontsel->bold);
   g_signal_connect (fontsel->bold, "toggled",
                     G_CALLBACK (bold_toggled), fontsel);
 
-  fontsel->italic = gtk_toggle_button_new_with_mnemonic (_("_Italic"));
+  fontsel->italic = gtk_toggle_button_new_with_mnemonic (GTK_STOCK_ITALIC);
+  gtk_button_set_use_stock (GTK_BUTTON (fontsel->italic), TRUE);
   gtk_widget_show (fontsel->italic);
   g_signal_connect (fontsel->italic, "toggled",
                     G_CALLBACK (italic_toggled), fontsel);
