@@ -126,6 +126,7 @@ AC_OUTPUT([
 gucharmap.pc
 Makefile
 gucharmap/Makefile 
+gucharmap/unicode/Makefile 
 po/Makefile.in 
 pixmaps/Makefile 
 gucharmap.nsi])

@@ -25,12 +25,12 @@
 #include <string.h>
 #include <unicode_info.h>
 
-#include <unicode_data.cI>
-#include <unicode_blocks.cI>
+#include <unicode/unicode_data.cI>
+#include <unicode/unicode_blocks.cI>
 #if ENABLE_UNIHAN
-# include <unicode_unihan.cI>
+# include <unicode/unicode_unihan.cI>
 #endif
-#include <unicode_nameslist.cI>
+#include <unicode/unicode_nameslist.cI>
 
 
 /* constants for hangul (de)composition, see UAX #15 */

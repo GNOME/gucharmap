@@ -131,7 +131,7 @@ process_nameslist_txt (FILE *fin)
   int equal_i=0, ex_i=0, star_i=0, pound_i=0, colon_i=0;
   int equal0_i=-1, ex0_i=-1, star0_i=-1, pound0_i=-1, colon0_i=-1;
   FILE *equal_file, *ex_file, *star_file, *pound_file, *colon_file, *main_file;
-  unsigned uc, ucv;
+  unsigned uc = 0, ucv;
   char c;
 
   equal_file = tmpfile ();

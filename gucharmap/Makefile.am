@@ -37,30 +37,6 @@ libgucharmap_la_SOURCES = gucharmap_marshal.c gucharmap_marshal.h \
                           chartable.c chartable.h \
                           mini_fontsel.c mini_fontsel.h
 
-if MAINTAINER_MODE
-
-# A source file listed in BUILT_SOURCES is created before the other
-# all targets are made.
-BUILT_SOURCES = unicode_data.cI unicode_unihan.cI unicode_blocks.cI \
-		unicode_nameslist.cI
-
-unicode_unihan.cI: generate_unihan
-	./generate_unicode_stuff.sh unicode_unihan.cI
-
-unicode_data.cI:
-	./generate_unicode_stuff.sh unicode_data.cI
-
-unicode_blocks.cI:
-	./generate_unicode_stuff.sh unicode_blocks.cI
-
-unicode_nameslist.cI: generate_nameslist
-	./generate_unicode_stuff.sh unicode_nameslist.cI
-
-generate_unihan: generate_unihan.c
-
-generate_nameslist: generate_nameslist.c
-
-endif
 
 # this is different from the project version
 # http://sources.redhat.com/autobook/autobook/autobook_91.html
@@ -129,7 +105,12 @@ uninstall-local:
 endif
 
 
-EXTRA_DIST = gucharmap_marshal.list gucharmaprc.rc unicode_data.cI \
-	     unicode_unihan.cI unicode_blocks.cI unicode_nameslist.cI \
-             generate_nameslist.c generate_unihan.c \
-             generate_unicode_stuff.sh
+EXTRA_DIST = gucharmap_marshal.list gucharmaprc.rc 
+
+
+if MAINTAINER_MODE
+SUBDIRS = unicode
+endif
+
+ 
+

@@ -1,3 +1,23 @@
+2003-03-11  Noah Levitt  <nlevitt аt columbia.edu>
+
+        * configure.ac:
+        * gucharmap/.cvsignore:
+        * gucharmap/Makefile.am:
+        * gucharmap/generate_nameslist.c:
+        * gucharmap/generate_unicode_stuff.sh:
+        * gucharmap/generate_unihan.c:
+        * gucharmap/unicode_info.c:
+        * gucharmap/unicode/.cvsignore:
+        * gucharmap/unicode/Makefile.am:
+        * gucharmap/unicode/generate_nameslist.c:
+        * gucharmap/unicode/generate_unihan.c:
+        * gucharmap/unicode/generator.sh: 
+        * gucharmap/unicode/unicode_blocks.cI:
+        * gucharmap/unicode/unicode_data.cI:
+        * gucharmap/unicode/unicode_nameslist.cI:
+        * gucharmap/unicode/unicode_unihan.cI: Moved generated stuff to its
+        own directory, made it compile only with --enable-maintainer-mode.
+
 2003-03-10  Ole Laursen  <olau@hardworking.dk>
 
 	* configure.ac: Added Danish (da) to ALL_LINGUAS.
@@ -33,12 +53,12 @@
 
 2003-03-03  Noah Levitt  <nlevitt аt columbia.edu>
 
-        * src/chartable.[ch]
-        * src/charmap.[ch]
-        * src/Makefile.am
-        * src/chartable.h
-        * src/chartable_accessible.c
-        * src/charcell_accessible.c
+        * src/chartable.[ch]:
+        * src/charmap.[ch]:
+        * src/Makefile.am:
+        * src/chartable.h:
+        * src/chartable_accessible.c:
+        * src/charcell_accessible.c:
         * src/main.c: Refactored chartable into its own widget.
 
 2003-03-03  Dmitry G. Mastrukov  <dmitry@taurussoft.org>
