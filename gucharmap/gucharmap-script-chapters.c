@@ -1,6 +1,6 @@
 /* $Id$ */
 /*
- * Copyright (c) 2003  Noah Levitt
+ * Copyright (c) 2004 Noah Levitt
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -17,12 +17,11 @@
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  */
 
-#include <stdlib.h>
-
 #include "config.h"
 #include <gtk/gtk.h>
+#include <stdlib.h>
 #include <string.h>
-#include "gucharmap_intl.h"
+#include "gucharmap-intl.h"
 #include "gucharmap-unicode-info.h"
 #include "gucharmap-script-chapters.h"
 #include "gucharmap-script-codepoint-list.h"

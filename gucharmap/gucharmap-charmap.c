@@ -1,6 +1,6 @@
 /* $Id$ */
 /*
- * Copyright (c) 2003  Noah Levitt <nlevitt аt users.sourceforge.net>
+ * Copyright (c) 2004 Noah Levitt
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -17,9 +17,7 @@
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  */
 
-#ifdef HAVE_CONFIG_H
-# include <config.h>
-#endif
+#include "config.h"
 
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
@@ -29,10 +27,9 @@
 #include "gucharmap-charmap.h"
 #include "gucharmap-unicode-info.h"
 #include "gucharmap-script-chapters.h"
-#include "gucharmap_intl.h"
+#include "gucharmap-intl.h"
 #include "gucharmap-marshal.h"
 #include "chartable_accessible.h"
-
 
 /* 0x100, a standard increment for paging unicode */
 #define PAGE_SIZE 256

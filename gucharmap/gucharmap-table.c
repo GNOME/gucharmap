@@ -1,6 +1,6 @@
 /* $Id$ */
 /*
- * Copyright (c) 2003  Noah Levitt <nlevitt аt columbia.edu>
+ * Copyright (c) 2004 Noah Levitt
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -17,17 +17,14 @@
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  */
 
-#ifdef HAVE_CONFIG_H
-# include <config.h>
-#endif
-
+#include "config.h"
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
-
-#include <gucharmap/gucharmap.h>
-#include <gucharmap-marshal.h>
-#include <chartable_accessible.h>
-#include <gucharmap_intl.h>
+#include "gucharmap-marshal.h"
+#include "chartable_accessible.h"
+#include "gucharmap-intl.h"
+#include "gucharmap-table.h"
+#include "gucharmap-unicode-info.h"
 
 enum 
 {

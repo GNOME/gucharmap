@@ -1,6 +1,6 @@
 /* $Id$ */
 /*
- * Copyright (c) 2003  Noah Levitt <nlevitt аt columbia.edu>
+ * Copyright (c) 2004 Noah Levitt
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the

@@ -19,8 +19,6 @@
 
 #include "config.h"
 
-#include "gucharmap-search-dialog.h"
-
 #include <stdlib.h>
 #include <string.h>
 #include <gtk/gtk.h>
@@ -33,7 +31,8 @@
 #include "gucharmap-unicode-info.h"
 #include "gucharmap-script-chapters.h"
 #include "gucharmap-block-chapters.h"
-#include "gucharmap_intl.h"
+#include "gucharmap-intl.h"
+#include "gucharmap-search-dialog.h"
 
 #ifndef ICON_PATH
 # define ICON_PATH ""

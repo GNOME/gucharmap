@@ -25,7 +25,7 @@
 #include "gucharmap-window.h"
 #include "gucharmap-unicode-info.h"
 #include "gucharmap-marshal.h"
-#include "gucharmap_intl.h"
+#include "gucharmap-intl.h"
 
 #define GUCHARMAP_SEARCH_DIALOG_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), gucharmap_search_dialog_get_type (), GucharmapSearchDialogPrivate))
 

@@ -1,6 +1,6 @@
 /* $Id$ */
 /*
- * Copyright (c) 2003  Noah Levitt <nlevitt@users.sourceforge.net>
+ * Copyright (c) 2004 Noah Levitt
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -23,7 +23,6 @@
 #include <gtk/gtk.h>
 #include <gucharmap/gucharmap-table.h>
 #include <gucharmap/gucharmap-chapters.h>
-
 
 G_BEGIN_DECLS
 

@@ -31,7 +31,7 @@ libgucharmap_la_LIBADD = @GTK_LIBS@ @GNOME_LIBS@
 lib_LTLIBRARIES = libgucharmap.la
 
 libgucharmap_la_SOURCES = gucharmap-marshal.c gucharmap-marshal.h \
-                          gucharmap_intl.c gucharmap_intl.h \
+                          gucharmap-intl.c gucharmap-intl.h \
                           chartable_accessible.c chartable_accessible.h \
                           charcell_accessible.c charcell_accessible.h \
                           gucharmap-charmap.c gucharmap-charmap.h \

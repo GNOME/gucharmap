@@ -1,8 +1,6 @@
 /* $Id$ */
 
-#ifdef HAVE_CONFIG_H
-# include "config.h"
-#endif
+#include "config.h"
 
 #ifdef ENABLE_NLS
 

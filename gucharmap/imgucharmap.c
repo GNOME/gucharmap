@@ -1,6 +1,6 @@
 /* $Id$ */
 /*
- * Copyright (c) 2003  Noah Levitt <nlevitt аt columbia.edu>
+ * Copyright (c) 2003 Noah Levitt
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -19,17 +19,15 @@
  * gtk+ input method module using gucharmap
  */
 
-#ifdef HAVE_CONFIG_H
-# include <config.h>
-#endif
+#include "config.h"
 
 #include <gtk/gtkimcontextsimple.h>
 #include <gtk/gtkimmodule.h>
 #include <gtk/gtk.h>
 #include <gmodule.h>
 #include <string.h>
-#include <gucharmap/gucharmap.h>
-#include "gucharmap_intl.h"
+#include "gucharmap-intl.h"
+#include "gucharmap-window.h"
 
 
 GType type_imgucharmap = 0;
