@@ -64,8 +64,8 @@ struct _Charmap
   /* rows and columns on a page */
   gint rows, cols;
 
-  GtkWidget *tabulus;         /* GtkDrawingArea */
-  GdkPixmap *tabulus_pixmap; 
+  GtkWidget *chartable;         /* GtkDrawingArea */
+  GdkPixmap *chartable_pixmap; 
 
   gchar *font_name;
   PangoFontMetrics *font_metrics;

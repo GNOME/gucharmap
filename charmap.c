@@ -253,7 +253,7 @@ calculate_square_dimension_y (PangoFontMetrics *font_metrics)
 
 
 static gint
-calculate_tabulus_dimension_x (Charmap *charmap)
+calculate_chartable_dimension_x (Charmap *charmap)
 {
   return charmap->cols * (calculate_square_dimension_x (charmap->font_metrics) 
                           + 1) + 1;
@@ -261,7 +261,7 @@ calculate_tabulus_dimension_x (Charmap *charmap)
 
 
 static gint
-calculate_tabulus_dimension_y (Charmap *charmap)
+calculate_chartable_dimension_y (Charmap *charmap)
 {
   return charmap->rows * (calculate_square_dimension_y (charmap->font_metrics) 
                           + 1) + 1;
@@ -294,12 +294,12 @@ draw_character (Charmap *charmap, gint row, gint col)
 
   uc = charmap->page_first_char + row * charmap->cols + col;
 
-  if (GTK_WIDGET_HAS_FOCUS (charmap->tabulus) && uc == charmap->active_char)
-    gc = charmap->tabulus->style->text_gc[GTK_STATE_SELECTED];
+  if (GTK_WIDGET_HAS_FOCUS (charmap->chartable) && uc == charmap->active_char)
+    gc = charmap->chartable->style->text_gc[GTK_STATE_SELECTED];
   else if (uc == charmap->active_char)
-    gc = charmap->tabulus->style->text_gc[GTK_STATE_ACTIVE];
+    gc = charmap->chartable->style->text_gc[GTK_STATE_ACTIVE];
   else
-    gc = charmap->tabulus->style->text_gc[GTK_STATE_NORMAL];
+    gc = charmap->chartable->style->text_gc[GTK_STATE_NORMAL];
 
   square_width = calculate_square_dimension_x (charmap->font_metrics);
   square_height = calculate_square_dimension_y (charmap->font_metrics);
@@ -316,7 +316,7 @@ draw_character (Charmap *charmap, gint row, gint col)
   padding_y = (square_height - char_height) - (square_height - char_height)/2;
 
   /* extra +1 is for the uncounted border */
-  gdk_draw_layout (charmap->tabulus_pixmap, gc,
+  gdk_draw_layout (charmap->chartable_pixmap, gc,
                    (square_width+1) * col + 1 + padding_x,
                    (square_height+1) * row + 1 + padding_y,
                    charmap->pango_layout);
@@ -332,17 +332,17 @@ draw_square_bg (Charmap *charmap, gint row, gint col)
 
   uc = charmap->page_first_char + row * charmap->cols + col;
 
-  if (GTK_WIDGET_HAS_FOCUS (charmap->tabulus) && uc == charmap->active_char)
-    gc = charmap->tabulus->style->base_gc[GTK_STATE_SELECTED];
+  if (GTK_WIDGET_HAS_FOCUS (charmap->chartable) && uc == charmap->active_char)
+    gc = charmap->chartable->style->base_gc[GTK_STATE_SELECTED];
   else if (uc == charmap->active_char)
-    gc = charmap->tabulus->style->base_gc[GTK_STATE_ACTIVE];
+    gc = charmap->chartable->style->base_gc[GTK_STATE_ACTIVE];
   else
-    gc = charmap->tabulus->style->base_gc[GTK_STATE_NORMAL];
+    gc = charmap->chartable->style->base_gc[GTK_STATE_NORMAL];
 
   square_width = calculate_square_dimension_x (charmap->font_metrics);
   square_height = calculate_square_dimension_y (charmap->font_metrics);
 
-  gdk_draw_rectangle (charmap->tabulus_pixmap, gc, TRUE, 
+  gdk_draw_rectangle (charmap->chartable_pixmap, gc, TRUE, 
                       (square_width+1) * col + 1, (square_height+1) * row + 1, 
                       square_width, square_height);
 }
@@ -356,7 +356,7 @@ expose_square (Charmap *charmap, gint row, gint col)
   square_width = calculate_square_dimension_x (charmap->font_metrics);
   square_height = calculate_square_dimension_y (charmap->font_metrics);
 
-  gtk_widget_queue_draw_area (charmap->tabulus, 
+  gtk_widget_queue_draw_area (charmap->chartable, 
                               (square_width+1) * col + 1, 
                               (square_height+1) * row + 1, 
                               square_width, square_height);
@@ -381,22 +381,22 @@ draw_borders (Charmap *charmap)
   square_width = calculate_square_dimension_x (charmap->font_metrics);
   square_height = calculate_square_dimension_y (charmap->font_metrics);
 
-  width = calculate_tabulus_dimension_x (charmap);
-  height = calculate_tabulus_dimension_y (charmap);
+  width = calculate_chartable_dimension_x (charmap);
+  height = calculate_chartable_dimension_y (charmap);
 
   /* vertical lines */
   for (x = 0;  x < width;  x += square_width + 1)
     {
-      gdk_draw_line (charmap->tabulus_pixmap,
-                     charmap->tabulus->style->fg_gc[GTK_STATE_INSENSITIVE], 
+      gdk_draw_line (charmap->chartable_pixmap,
+                     charmap->chartable->style->fg_gc[GTK_STATE_INSENSITIVE], 
                      x, 0, x, height - 1);
     }
 
   /* horizontal lines */
   for (y = 0;  y < height;  y += square_height + 1)
     {
-      gdk_draw_line (charmap->tabulus_pixmap,
-                     charmap->tabulus->style->fg_gc[GTK_STATE_INSENSITIVE], 
+      gdk_draw_line (charmap->chartable_pixmap,
+                     charmap->chartable->style->fg_gc[GTK_STATE_INSENSITIVE], 
                      0, y, width - 1, y);
     }
 }
@@ -404,17 +404,17 @@ draw_borders (Charmap *charmap)
 
 /* draws the backing store pixmap */
 static void
-draw_tabulus_from_scratch (Charmap *charmap)
+draw_chartable_from_scratch (Charmap *charmap)
 {
   gint row, col;
   gint width, height;
 
-  width = calculate_tabulus_dimension_x (charmap);
-  height = calculate_tabulus_dimension_y (charmap);
+  width = calculate_chartable_dimension_x (charmap);
+  height = calculate_chartable_dimension_y (charmap);
 
   /* plain background */
-  gdk_draw_rectangle (charmap->tabulus_pixmap,
-                      charmap->tabulus->style->base_gc[GTK_STATE_NORMAL], 
+  gdk_draw_rectangle (charmap->chartable_pixmap,
+                      charmap->chartable->style->base_gc[GTK_STATE_NORMAL], 
                       TRUE, 0, 0, width, height);
   draw_borders (charmap);
 
@@ -444,19 +444,19 @@ expose_event (GtkWidget *widget,
 
   charmap = CHARMAP (callback_data);
 
-  if (charmap->tabulus_pixmap == NULL)
+  if (charmap->chartable_pixmap == NULL)
     {
-      charmap->tabulus_pixmap = gdk_pixmap_new (
-              charmap->tabulus->window, 
-              calculate_tabulus_dimension_x (charmap),
-              calculate_tabulus_dimension_y (charmap), -1);
+      charmap->chartable_pixmap = gdk_pixmap_new (
+              charmap->chartable->window, 
+              calculate_chartable_dimension_x (charmap),
+              calculate_chartable_dimension_y (charmap), -1);
 
-      draw_tabulus_from_scratch (charmap);
+      draw_chartable_from_scratch (charmap);
     }
 
-  gdk_draw_drawable (charmap->tabulus->window,
+  gdk_draw_drawable (charmap->chartable->window,
                      widget->style->fg_gc[GTK_STATE_NORMAL],
-                     charmap->tabulus_pixmap,
+                     charmap->chartable_pixmap,
                      event->area.x, event->area.y,
                      event->area.x, event->area.y,
                      event->area.width, event->area.height);
@@ -479,7 +479,7 @@ draw_and_expose_character_square (Charmap *charmap, gunichar uc)
 }
 
 
-/* copies the portion of the tabulus that is on the new and old to its new
+/* copies the portion of the chartable that is on the new and old to its new
  * position */
 static void
 shift_area (Charmap *charmap, gint row_offset)
@@ -492,8 +492,8 @@ shift_area (Charmap *charmap, gint row_offset)
   square_width = calculate_square_dimension_x (charmap->font_metrics);
   square_height = calculate_square_dimension_y (charmap->font_metrics);
 
-  width = calculate_tabulus_dimension_x (charmap);
-  height = calculate_tabulus_dimension_y (charmap);
+  width = calculate_chartable_dimension_x (charmap);
+  height = calculate_chartable_dimension_y (charmap);
 
   rows = charmap->rows - abs (row_offset);
   area_height = rows * (square_height + 1) + 1;
@@ -509,14 +509,14 @@ shift_area (Charmap *charmap, gint row_offset)
       ydest = height - area_height;
     }
 
-  gdk_draw_drawable (charmap->tabulus_pixmap,
-                     charmap->tabulus->style->base_gc[GTK_STATE_NORMAL], 
-                     charmap->tabulus_pixmap, 0, ysrc, 0, ydest,
+  gdk_draw_drawable (charmap->chartable_pixmap,
+                     charmap->chartable->style->base_gc[GTK_STATE_NORMAL], 
+                     charmap->chartable_pixmap, 0, ysrc, 0, ydest,
                      width, area_height);
 }
 
 
-/* Redraws the squares in the rows that are newly on the tabulus, based on
+/* Redraws the squares in the rows that are newly on the chartable, based on
  * row_offset; also redraws the active and old_active squares as
  * appropriate. */
 static void
@@ -570,8 +570,8 @@ redraw (Charmap *charmap)
 
   if (row_offset >= charmap->rows || row_offset <= -charmap->rows)
     {
-      draw_tabulus_from_scratch (charmap);
-      gtk_widget_queue_draw (charmap->tabulus);
+      draw_chartable_from_scratch (charmap);
+      gtk_widget_queue_draw (charmap->chartable);
       actives_done = TRUE;
     }
   else if (row_offset != 0)
@@ -579,7 +579,7 @@ redraw (Charmap *charmap)
       shift_area (charmap, row_offset);
       draw_squares_after_shift (charmap, row_offset);
       draw_borders (charmap);
-      gtk_widget_queue_draw (charmap->tabulus);
+      gtk_widget_queue_draw (charmap->chartable);
       actives_done = TRUE;
     }
 
@@ -879,7 +879,7 @@ button_press_event (GtkWidget *widget,
   Charmap *charmap = CHARMAP (callback_data);
 
   /* in case we lost keyboard focus and are clicking to get it back */
-  gtk_widget_grab_focus (charmap->tabulus);
+  gtk_widget_grab_focus (charmap->chartable);
 
   /* double-click */
   if (event->button == 1 && event->type == GDK_2BUTTON_PRESS)
@@ -1281,7 +1281,7 @@ focus_in_or_out_event (GtkWidget *widget, GdkEventFocus *event,
                        gpointer user_data)
 {
   Charmap *charmap = CHARMAP (user_data);
-  if (charmap->tabulus != NULL && charmap->tabulus_pixmap != NULL)
+  if (charmap->chartable != NULL && charmap->chartable_pixmap != NULL)
     draw_and_expose_character_square (charmap, charmap->active_char);
   return FALSE;
 }
@@ -1361,11 +1361,11 @@ mouse_wheel_event (GtkWidget *widget, GdkEventScroll *event, Charmap *charmap)
 static void
 style_set (GtkWidget *widget, GtkStyle *previous_style, Charmap *charmap)
 {
-  if (charmap->tabulus_pixmap != NULL)
-    g_object_unref (charmap->tabulus_pixmap);
-  charmap->tabulus_pixmap = NULL;
+  if (charmap->chartable_pixmap != NULL)
+    g_object_unref (charmap->chartable_pixmap);
+  charmap->chartable_pixmap = NULL;
 
-  gtk_widget_queue_draw (charmap->tabulus);
+  gtk_widget_queue_draw (charmap->chartable);
 }
 
 
@@ -1390,9 +1390,9 @@ size_allocate (GtkWidget *widget, GtkAllocation *allocation, Charmap *charmap)
                              - (charmap->active_char % charmap->cols);
 
   /* force pixmap to be redrawn on next expose event */
-  if (charmap->tabulus_pixmap != NULL)
-    g_object_unref (charmap->tabulus_pixmap);
-  charmap->tabulus_pixmap = NULL;
+  if (charmap->chartable_pixmap != NULL)
+    g_object_unref (charmap->chartable_pixmap);
+  charmap->chartable_pixmap = NULL;
 
   /* adjust the adjustment, since it's based on the size of a row */
   adjustment = GTK_ADJUSTMENT (charmap->adjustment);
@@ -1421,40 +1421,40 @@ charmap_init (Charmap *charmap)
 
   gtk_box_set_spacing (GTK_BOX (charmap), 5);
 
-  charmap->tabulus = gtk_drawing_area_new ();
+  charmap->chartable = gtk_drawing_area_new ();
 
-  gtk_widget_set_events (charmap->tabulus, GDK_EXPOSURE_MASK 
+  gtk_widget_set_events (charmap->chartable, GDK_EXPOSURE_MASK 
                                            | GDK_KEY_PRESS_MASK
                                            | GDK_BUTTON_PRESS_MASK
                                            | GDK_FOCUS_CHANGE_MASK
                                            | GDK_SCROLL_MASK);
 
-  g_signal_connect (G_OBJECT (charmap->tabulus), "expose_event",
+  g_signal_connect (G_OBJECT (charmap->chartable), "expose_event",
                     G_CALLBACK (expose_event), charmap);
-  g_signal_connect (G_OBJECT (charmap->tabulus), "key_press_event",
+  g_signal_connect (G_OBJECT (charmap->chartable), "key_press_event",
                     G_CALLBACK (key_press_event), charmap);
-  g_signal_connect (G_OBJECT (charmap->tabulus), "button_press_event",
+  g_signal_connect (G_OBJECT (charmap->chartable), "button_press_event",
                     G_CALLBACK (button_press_event), charmap);
-  g_signal_connect (G_OBJECT (charmap->tabulus), "focus-in-event",
+  g_signal_connect (G_OBJECT (charmap->chartable), "focus-in-event",
                     G_CALLBACK (focus_in_or_out_event), charmap);
-  g_signal_connect (G_OBJECT (charmap->tabulus), "focus-out-event",
+  g_signal_connect (G_OBJECT (charmap->chartable), "focus-out-event",
                     G_CALLBACK (focus_in_or_out_event), charmap);
-  g_signal_connect (G_OBJECT (charmap->tabulus), "scroll-event",
+  g_signal_connect (G_OBJECT (charmap->chartable), "scroll-event",
                     G_CALLBACK (mouse_wheel_event), charmap);
-  g_signal_connect (G_OBJECT (charmap->tabulus), "style-set",
+  g_signal_connect (G_OBJECT (charmap->chartable), "style-set",
                     G_CALLBACK (style_set), charmap);
-  g_signal_connect (G_OBJECT (charmap->tabulus), "size-allocate",
+  g_signal_connect (G_OBJECT (charmap->chartable), "size-allocate",
                     G_CALLBACK (size_allocate), charmap);
 
   /* this is required to get key_press events */
-  GTK_WIDGET_SET_FLAGS (charmap->tabulus, GTK_CAN_FOCUS);
-  gtk_widget_grab_focus (charmap->tabulus);
+  GTK_WIDGET_SET_FLAGS (charmap->chartable, GTK_CAN_FOCUS);
+  gtk_widget_grab_focus (charmap->chartable);
 
   hbox = gtk_hbox_new (FALSE, 3);
 
   gtk_box_pack_start (GTK_BOX (charmap), hbox, TRUE, TRUE, 0);
 
-  gtk_box_pack_start (GTK_BOX (hbox), charmap->tabulus, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (hbox), charmap->chartable, TRUE, TRUE, 0);
   gtk_box_pack_start (GTK_BOX (hbox), make_scrollbar (charmap), 
                       FALSE, FALSE, 0);
 
@@ -1469,19 +1469,19 @@ charmap_init (Charmap *charmap)
   charmap->font_name = NULL;
 
   charmap->font_metrics = pango_context_get_metrics (
-          gtk_widget_get_pango_context (charmap->tabulus),
-          charmap->tabulus->style->font_desc, NULL);
+          gtk_widget_get_pango_context (charmap->chartable),
+          charmap->chartable->style->font_desc, NULL);
 
   charmap->pango_layout = pango_layout_new (
-          gtk_widget_get_pango_context (charmap->tabulus));
+          gtk_widget_get_pango_context (charmap->chartable));
 
   pango_layout_set_font_description (charmap->pango_layout,
-                                     charmap->tabulus->style->font_desc);
+                                     charmap->chartable->style->font_desc);
 
   /* size the drawing area */
-  gtk_widget_set_size_request (charmap->tabulus, 
-                               calculate_tabulus_dimension_x (charmap),
-                               calculate_tabulus_dimension_y (charmap));
+  gtk_widget_set_size_request (charmap->chartable, 
+                               calculate_chartable_dimension_x (charmap),
+                               calculate_chartable_dimension_y (charmap));
 
   charmap->page_first_char = (gunichar) 0x0000;
   charmap->active_char = (gunichar) 0x0000;
@@ -1554,27 +1554,27 @@ charmap_set_font (Charmap *charmap, gchar *font_name)
   font_desc = pango_font_description_from_string (charmap->font_name);
 
   /* ensure style so that this has an effect even before it's realized */
-  gtk_widget_ensure_style (charmap->tabulus);
-  gtk_widget_modify_font (charmap->tabulus, font_desc);
+  gtk_widget_ensure_style (charmap->chartable);
+  gtk_widget_modify_font (charmap->chartable, font_desc);
 
   charmap->font_metrics = pango_context_get_metrics (
-          gtk_widget_get_pango_context (charmap->tabulus),
-          charmap->tabulus->style->font_desc, NULL);
+          gtk_widget_get_pango_context (charmap->chartable),
+          charmap->chartable->style->font_desc, NULL);
 
   /* new pango layout for the new font */
   g_object_unref (charmap->pango_layout);
   charmap->pango_layout = pango_layout_new (
-          gtk_widget_get_pango_context (charmap->tabulus));
+          gtk_widget_get_pango_context (charmap->chartable));
 
   pango_layout_set_font_description (charmap->pango_layout,
-                                     charmap->tabulus->style->font_desc);
+                                     charmap->chartable->style->font_desc);
 
   pango_font_description_free (font_desc);
 
   /* force pixmap to be redrawn on next expose event */
-  if (charmap->tabulus_pixmap != NULL)
-    g_object_unref (charmap->tabulus_pixmap);
-  charmap->tabulus_pixmap = NULL;
+  if (charmap->chartable_pixmap != NULL)
+    g_object_unref (charmap->chartable_pixmap);
+  charmap->chartable_pixmap = NULL;
 }
 
 
@@ -1595,7 +1595,7 @@ charmap_set_geometry_hints (Charmap *charmap, GtkWindow *window)
   hints.base_width = 1;
   hints.base_height = 1;
 
-  gtk_window_set_geometry_hints (window, charmap->tabulus, &hints,
+  gtk_window_set_geometry_hints (window, charmap->chartable, &hints,
           GDK_HINT_RESIZE_INC | GDK_HINT_MIN_SIZE | GDK_HINT_BASE_SIZE);
 }
 
