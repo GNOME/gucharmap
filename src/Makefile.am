@@ -22,7 +22,7 @@ AM_CFLAGS = $(GTK_CFLAGS) $(LIBGNOMEUI_CFLAGS) -Wall -ansi
 localedir = $(datadir)/locale
 AM_CPPFLAGS = -DLOCALEDIR=\"$(localedir)\"
 
-libgucharmap_la_LIBADD = @GTK_LIBS@ @LIBGNOMEUI_LIBS@
+libgucharmap_la_LIBADD = @GTK_LIBS@
 
 lib_LTLIBRARIES = libgucharmap.la
 
