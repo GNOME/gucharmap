@@ -37,9 +37,9 @@ GucharmapWindow *the_guw = NULL;
 
 
 static void
-gucharmap_table_activate (GucharmapTable	 *chartable, 
-                    gunichar uc, 
-                    GtkIMContextSimple *im_context)
+gucharmap_table_activate (GucharmapTable *chartable, 
+                          gunichar uc, 
+                          GtkIMContextSimple *im_context)
 {
   gchar buf[7];
   buf [g_unichar_to_utf8 (uc, buf)] = '\0';
@@ -140,17 +140,27 @@ imgucharmap_init (GtkIMContextSimple *im_context)
 {
   GdkScreen *screen;
   GtkWidget *guw = NULL;
+  gboolean already_have_window = FALSE;
 
-  guw = g_object_get_data (G_OBJECT (gdk_display_get_default ()), 
-                           "gucharmap-window");
-  if (guw == NULL)
+  /* we can't use the GucharmapWindow for this because it can get stuck in
+   * a recursive loop creating new windows */
+  already_have_window = (gboolean) g_object_get_data (
+          G_OBJECT (gdk_display_get_default ()), 
+          "gucharmap-already-have-window");
+
+  if (! already_have_window)
     {
+      g_object_set_data (G_OBJECT (gdk_display_get_default ()), 
+                         "gucharmap-already-have-window", (gpointer) TRUE);
+
       guw = gucharmap_window_new ();
+
+      gucharmap_table_grab_focus (GUCHARMAP_WINDOW (guw)->charmap->chartable);
 
       screen = gtk_window_get_screen (GTK_WINDOW (guw));
       gtk_window_set_default_size (GTK_WINDOW (guw), 
                                    gdk_screen_get_width (screen) * 5/12, 
-                                   gdk_screen_get_height (screen) * 1/3); 
+                                   gdk_screen_get_height (screen) * 5/12); 
 
       g_signal_connect (guw, "delete-event", 
                         G_CALLBACK (gtk_widget_hide_on_delete), NULL);
@@ -160,9 +170,12 @@ imgucharmap_init (GtkIMContextSimple *im_context)
 
       the_guw = g_object_ref (guw);
     }
+  else
+    guw = g_object_get_data (G_OBJECT (gdk_display_get_default ()), 
+                             "gucharmap-window");
 
-
-  gtk_widget_show_all (guw);
+  if (guw)
+    gtk_widget_show_all (guw);
 }
 
 

@@ -610,6 +610,8 @@ make_details_page (GucharmapCharmap *charmap)
   charmap->details = gtk_text_view_new ();
   gtk_widget_show (charmap->details);
   gtk_text_view_set_editable (GTK_TEXT_VIEW (charmap->details), FALSE);
+  gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (charmap->details), 
+                               GTK_WRAP_WORD);
 
   create_tags (charmap);
 

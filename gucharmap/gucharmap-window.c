@@ -538,12 +538,17 @@ make_menu (GucharmapWindow *guw)
   /* finished making the search menu */
 
 #if HAVE_GNOME
-  /* make the help menu */
-  help_menu_item = gtk_menu_item_new_with_mnemonic (_("_Help"));
-  gtk_menu_shell_append (GTK_MENU_SHELL (menubar), help_menu_item);
-  gtk_menu_item_set_submenu (GTK_MENU_ITEM (help_menu_item), 
-                             make_gnome_help_menu (guw));
-  /* finished making the help menu */
+  /* if we are the input module and are running inside a non-gnome gtk+
+   * program, doing gnome stuff will generate warnings */
+  if (gnome_program_get () != NULL)
+    {
+      /* make the help menu */
+      help_menu_item = gtk_menu_item_new_with_mnemonic (_("_Help"));
+      gtk_menu_shell_append (GTK_MENU_SHELL (menubar), help_menu_item);
+      gtk_menu_item_set_submenu (GTK_MENU_ITEM (help_menu_item), 
+                                 make_gnome_help_menu (guw));
+      /* finished making the help menu */
+    }
 #endif /* #if HAVE_GNOME */
 
   gtk_widget_show_all (menubar);
