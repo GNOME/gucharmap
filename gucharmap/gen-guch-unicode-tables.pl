@@ -673,7 +673,7 @@ sub process_scripts_txt ($)
     print $out "{\n";
     print $out "  gunichar start;\n";
     print $out "  gunichar end;\n";
-    print $out "  guint    script_index;   /* index into unicode_script_list */\n";
+    print $out "  gint     script_index;   /* index into unicode_script_list */\n";
     print $out "}\n";
     print $out "unicode_scripts[] =\n";
     print $out "{\n";

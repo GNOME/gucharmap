@@ -69,7 +69,7 @@ static const struct _UnicodeScript
 {
   gunichar start;
   gunichar end;
-  guint    script_index;   /* index into unicode_script_list */
+  gint     script_index;   /* index into unicode_script_list */
 }
 unicode_scripts[] =
 {

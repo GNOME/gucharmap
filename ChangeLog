@@ -1,5 +1,15 @@
 2004-01-15  Noah Levitt
 
+	* gucharmap/gen-guch-unicode-tables.pl:
+	* gucharmap/gucharmap-codepoint-list.c:
+	* gucharmap/gucharmap-codepoint-list.h:
+	* gucharmap/gucharmap-script-codepoint-list.c:
+	* gucharmap/unicode-scripts.h: Use signed integers as the indices into
+	codepoint lists. There was no point using unsigned. It's easier to
+	check for -1 with signed integers.
+
+2004-01-15  Noah Levitt
+
 	* autogen.sh: Replace home-spun thing with gnome-common's autogen.
 
 2004-01-12  Noah Levitt

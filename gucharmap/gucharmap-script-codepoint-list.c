@@ -72,7 +72,7 @@ gucharmap_get_script_for_char (gunichar wc)
 }
 #endif
 
-static guint
+static gint
 find_script (const gchar *script)
 {
   gint min, mid, max;
@@ -92,7 +92,7 @@ find_script (const gchar *script)
         return mid;
     }
 
-  return (guint)(-1);
+  return -1;
 }
 
 /* *ranges should be freed by caller */
@@ -152,13 +152,13 @@ get_chars_for_script (const gchar            *script,
                       gint                   *size)
 {
   gint i, j, index;
-  guint script_index;
+  gint script_index;
 
   if (strcmp (script, "Common") == 0)
     return get_other_chars (ranges, size);
 
   script_index = find_script (script);
-  if (script_index == (guint)(-1))
+  if (script_index == -1)
     return FALSE;
 
   for (i = 0, j = 0;  i < G_N_ELEMENTS (unicode_scripts);  i++)
@@ -200,7 +200,7 @@ ensure_initialized (GucharmapScriptCodepointList *guscl)
 
 static gunichar 
 get_char (GucharmapCodepointList *list, 
-          guint                   index)
+          gint                    index)
 {
   GucharmapScriptCodepointList *guscl = GUCHARMAP_SCRIPT_CODEPOINT_LIST (list);
   ScriptCodepointListPrivate *priv = GUCHARMAP_SCRIPT_CODEPOINT_LIST_GET_PRIVATE (guscl);
@@ -225,7 +225,7 @@ get_char (GucharmapCodepointList *list,
   return (gunichar)(-1);
 }
 
-static guint
+static gint
 get_index (GucharmapCodepointList *list, 
            gunichar                wc)
 {
@@ -249,10 +249,10 @@ get_index (GucharmapCodepointList *list,
         return priv->ranges[mid].index + wc - priv->ranges[mid].start;
     }
 
-  return (guint)(-1);
+  return -1;
 }
 
-static guint
+static gint
 get_last_index (GucharmapCodepointList *list)
 {
   GucharmapScriptCodepointList *guscl = GUCHARMAP_SCRIPT_CODEPOINT_LIST (list);

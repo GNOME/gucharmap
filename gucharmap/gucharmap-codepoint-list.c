@@ -34,7 +34,7 @@ struct _DefaultCodepointListPrivate
 
 static gunichar 
 default_get_char (GucharmapCodepointList *list, 
-                  guint                   index)
+                  gint                    index)
 {
   DefaultCodepointListPrivate *priv = GUCHARMAP_CODEPOINT_LIST_GET_PRIVATE (list);
 
@@ -44,19 +44,19 @@ default_get_char (GucharmapCodepointList *list,
     return (gunichar) priv->start + index;
 }
 
-static guint
+static gint 
 default_get_index (GucharmapCodepointList *list, 
                    gunichar                wc)
 {
   DefaultCodepointListPrivate *priv = GUCHARMAP_CODEPOINT_LIST_GET_PRIVATE (list);
 
   if (wc < priv->start || wc > priv->end)
-    return (guint)(-1);
+    return -1;
   else
     return wc - priv->start;
 }
 
-static guint
+static gint
 default_get_last_index (GucharmapCodepointList *list)
 {
   DefaultCodepointListPrivate *priv = GUCHARMAP_CODEPOINT_LIST_GET_PRIVATE (list);
@@ -111,7 +111,7 @@ gucharmap_codepoint_list_get_type ()
  **/
 gunichar 
 gucharmap_codepoint_list_get_char (GucharmapCodepointList *list, 
-                                   guint                   index)
+                                   gint                    index)
 {
   g_return_val_if_fail (IS_GUCHARMAP_CODEPOINT_LIST (list), (gunichar)(-1));
 
@@ -123,14 +123,14 @@ gucharmap_codepoint_list_get_char (GucharmapCodepointList *list,
  * @list: a #GucharmapCodepointList
  * @wc: character for which to find the index
  * 
- * Return value: index of @wc, or (guint)(-1) if @wc is not in this
+ * Return value: index of @wc, or -1 if @wc is not in this
  * codepoint list.
  **/
-guint
+gint
 gucharmap_codepoint_list_get_index (GucharmapCodepointList *list, 
                                     gunichar                wc)
 {
-  g_return_val_if_fail (IS_GUCHARMAP_CODEPOINT_LIST (list), (guint)(-1));
+  g_return_val_if_fail (IS_GUCHARMAP_CODEPOINT_LIST (list), -1);
 
   return GUCHARMAP_CODEPOINT_LIST_GET_CLASS (list)->get_index (list, wc);
 }
@@ -141,10 +141,10 @@ gucharmap_codepoint_list_get_index (GucharmapCodepointList *list,
  *
  * Return value: last index in this codepoint list.
  **/
-guint
+gint
 gucharmap_codepoint_list_get_last_index (GucharmapCodepointList *list)
 {
-  g_return_val_if_fail (IS_GUCHARMAP_CODEPOINT_LIST (list), (guint)(-1));
+  g_return_val_if_fail (IS_GUCHARMAP_CODEPOINT_LIST (list), -1);
 
   return GUCHARMAP_CODEPOINT_LIST_GET_CLASS (list)->get_last_index (list);
 }
