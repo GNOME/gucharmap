@@ -28,7 +28,7 @@
 enum
 {
   MIN_FONT_SIZE = 5,
-  MAX_FONT_SIZE = 500
+  MAX_FONT_SIZE = 400,
 };
 
 enum

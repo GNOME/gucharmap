@@ -160,6 +160,8 @@ void charmap_go_to_character (Charmap *charmap, gunichar uc);
 CharmapSearchResult charmap_search (Charmap *charmap, const gchar *search_text);
 void charmap_hide_caption (Charmap *charmap, CharmapCaption caption_id);
 void charmap_show_caption (Charmap *charmap, CharmapCaption caption_id);
+void charmap_zoom_enable (Charmap *charmap);
+void charmap_zoom_disable (Charmap *charmap);
 
 
 G_END_DECLS

@@ -63,7 +63,6 @@ fi
 # gtk is required
 PKG_CHECK_MODULES(GTK, gtk+-2.0 >= 2.0.0)
 
-
 AC_ARG_ENABLE(gnome,
               AC_HELP_STRING([--disable-gnome],
 	                     [don't build with GNOME support]))
@@ -75,6 +74,7 @@ else
     have_gnome=no
 fi  
 
+GNOMEPKGS=""
 if test "x$have_gnome" = "xno" 
 then
     libs_bak="$LIBS"
@@ -86,8 +86,10 @@ then
     LIBS="$libs_bak"
     
     AC_SUBST(POPT_LIBS)
+else
+	GNOMEPKGS="libgnomeui-2.0 libgnome-2.0"
 fi
-
+AC_SUBST(GNOMEPKGS)
 
 # checks for funcs 
 AC_CHECK_FUNCS([bind_textdomain_codeset])
@@ -118,5 +120,10 @@ if test "x$enable_unihan" != "xno" ; then
 fi
 
 
-AC_OUTPUT([Makefile src/Makefile po/Makefile.in 
-           pixmaps/Makefile gucharmap.nsi])
+AC_OUTPUT([
+gucharmap.pc
+Makefile
+src/Makefile 
+po/Makefile.in 
+pixmaps/Makefile 
+gucharmap.nsi])

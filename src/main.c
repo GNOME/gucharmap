@@ -117,6 +117,16 @@ expand_collapse (GtkCheckMenuItem *mi, gpointer data)
 }
 
 
+static void
+toggle_zoom_mode (GtkCheckMenuItem *mi, gpointer data)
+{
+  if (gtk_check_menu_item_get_active (mi))
+    charmap_zoom_enable (CHARMAP (charmap));
+  else
+    charmap_zoom_disable (CHARMAP (charmap));
+}
+
+
 #if ENABLE_UNIHAN
 static void
 show_hide_unihan (GtkCheckMenuItem *mi, gpointer data)
@@ -701,6 +711,21 @@ make_menu (GtkWindow *window)
   g_signal_connect (G_OBJECT (menu_item), "activate",
                     G_CALLBACK (font_smaller), NULL);
   gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), menu_item);
+
+  /* separator */
+  gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), gtk_menu_item_new ());
+
+  /* ctrl-- */
+  menu_item = gtk_check_menu_item_new_with_mnemonic (_("_Zoom Mode"));
+  gtk_widget_add_accelerator (menu_item, "activate", accel_group,
+	                      GDK_Return, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+  gtk_widget_add_accelerator (menu_item, "activate", accel_group,
+	                      GDK_KP_Enter, GDK_CONTROL_MASK, 0);
+  g_signal_connect (G_OBJECT (menu_item), "activate",
+                    G_CALLBACK (toggle_zoom_mode), NULL);
+  gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), menu_item);
+
+
 
   /* separator */
   gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), gtk_menu_item_new ());

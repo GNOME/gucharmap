@@ -441,7 +441,7 @@ set_caption (Charmap *charmap)
                           (const gchar **) values);
 
       if (values)
-        g_free (values);
+        free_array_of_strings (values);
 
       if (exes)
         g_free (exes);
@@ -905,7 +905,6 @@ update_zoom_window (Charmap *charmap)
 {
   gint width, height;
 
-
   g_return_if_fail (charmap->zoom_window != NULL);
 
   if (charmap->zoom_pixbuf != NULL)
@@ -1093,6 +1092,15 @@ expose_event (GtkWidget *widget,
               charmap->chartable->allocation.height, -1);
 
       draw_chartable_from_scratch (charmap);
+
+      if (charmap->zoom_window)
+        {
+          gint x, y;
+
+          update_zoom_window (charmap);
+          get_appropriate_active_char_corner_xy (charmap, &x, &y);
+          place_zoom_window (charmap, x, y);
+        }
     }
 
   gdk_draw_drawable (charmap->chartable->window,
@@ -1362,7 +1370,9 @@ compute_drag_font_size (Charmap *charmap)
 static void
 make_zoom_window (Charmap *charmap)
 {
-  destroy_zoom_window (charmap);
+  /* if there is already a zoom window, do nothing */
+  if (charmap->zoom_window)
+    return;
 
   charmap->zoom_window = gtk_window_new (GTK_WINDOW_POPUP);
 
@@ -1486,8 +1496,6 @@ key_press_event (GtkWidget *widget,
                  GdkEventKey *event, 
                  Charmap *charmap)
 {
-  gint x, y;
-
   /* move the cursor or whatever depending on which key was pressed */
   switch (event->keyval)
     {
@@ -1528,27 +1536,6 @@ key_press_event (GtkWidget *widget,
 		       charmap->active_char);
         return TRUE;
 
-      case GDK_plus: case GDK_KP_Add: case GDK_equal:
-        make_zoom_window (charmap);
-        update_zoom_window (charmap);
-
-        get_appropriate_active_char_corner_xy (charmap, &x, &y);
-        place_zoom_window (charmap, x, y);
-
-        gtk_widget_show (charmap->zoom_window);
-
-        /* must do this after gtk_widget_show */
-        set_window_background (charmap->zoom_window, charmap->zoom_pixbuf);
-        gdk_window_clear (charmap->zoom_window->window);
-
-        status_message (charmap,
-                        _("Zoom mode enabled. Press <Esc> to disable zoom."));
-        return TRUE;
-
-      case GDK_minus: case GDK_KP_Subtract: case GDK_Escape:
-        destroy_zoom_window (charmap);
-        return TRUE;
-
       /* pass on other keys, like tab and stuff that shifts focus */
       default:
         return FALSE;
@@ -1572,9 +1559,6 @@ button_press_event (GtkWidget *widget,
   /* in case we lost keyboard focus and are clicking to get it back */
   gtk_widget_grab_focus (charmap->chartable);
 
-  if (event->button == 1)
-    destroy_zoom_window (charmap);
-
   /* double-click */
   if (event->button == 1 && event->type == GDK_2BUTTON_PRESS)
     {
@@ -1586,7 +1570,7 @@ button_press_event (GtkWidget *widget,
     {
       set_active_character (charmap,
                             get_char_at (charmap, event->x, event->y));
-      redraw (charmap, FALSE);
+      redraw (charmap, TRUE);
     }
   else if (event->button == 2)
     {
@@ -1880,8 +1864,6 @@ static gboolean
 focus_in_or_out_event (GtkWidget *widget, GdkEventFocus *event,
                        Charmap *charmap)
 {
-  destroy_zoom_window (charmap);
-
   if (charmap->chartable != NULL && charmap->chartable_pixmap != NULL)
     draw_and_expose_character_square (charmap, charmap->active_char);
 
@@ -2470,3 +2452,30 @@ charmap_hide_caption (Charmap *charmap, CharmapCaption caption_id)
     }
 }
 
+
+void
+charmap_zoom_enable (Charmap *charmap)
+{
+  gint x, y;
+
+  make_zoom_window (charmap);
+  update_zoom_window (charmap);
+
+  get_appropriate_active_char_corner_xy (charmap, &x, &y);
+  place_zoom_window (charmap, x, y);
+
+  gtk_widget_show (charmap->zoom_window);
+
+  /* must do this after gtk_widget_show */
+  set_window_background (charmap->zoom_window, charmap->zoom_pixbuf);
+  gdk_window_clear (charmap->zoom_window->window);
+
+  status_message (charmap, _("Zoom mode enabled."));
+}
+
+
+void
+charmap_zoom_disable (Charmap *charmap)
+{
+  destroy_zoom_window (charmap);
+}

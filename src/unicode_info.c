@@ -22,6 +22,7 @@
 #endif
 
 #include <gtk/gtk.h>
+#include <string.h>
 #include <unicode_info.h>
 
 #include <unicode_data.cI>
