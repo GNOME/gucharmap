@@ -108,8 +108,7 @@ gucharmap_table_column_width (GucharmapTable *chartable, gint col)
   gint num_padded_columns;
   gint min_col_w = minimal_column_width (chartable);
 
-  num_padded_columns = chartable->drawing_area->allocation.width 
-                       - (min_col_w * chartable->cols + 1);
+  num_padded_columns = chartable->drawing_area->allocation.width - (min_col_w * chartable->cols + 1);
 
   if (chartable->cols - col <= num_padded_columns)
     return min_col_w + 1;
@@ -145,8 +144,7 @@ minimal_row_height (GucharmapTable *chartable)
   gint total_extra_pixels;
   gint bare_minimal_height = bare_minimal_row_height (chartable);
 
-  total_extra_pixels = chartable->drawing_area->allocation.height 
-                       - (chartable->rows * bare_minimal_height + 1);
+  total_extra_pixels = chartable->drawing_area->allocation.height - (chartable->rows * bare_minimal_height + 1);
 
   return bare_minimal_height + total_extra_pixels / chartable->rows;
 }
@@ -158,8 +156,7 @@ gucharmap_table_row_height (GucharmapTable *chartable, gint row)
   gint num_padded_rows;
   gint min_row_h = minimal_row_height (chartable);
 
-  num_padded_rows = chartable->drawing_area->allocation.height -
-                    (min_row_h * chartable->rows + 1);
+  num_padded_rows = chartable->drawing_area->allocation.height - (min_row_h * chartable->rows + 1);
 
   if (chartable->rows - row <= num_padded_rows)
     return min_row_h + 1;
@@ -714,17 +711,15 @@ find_block (GucharmapTable *chartable,
 
 static gboolean
 character_in_active_block (GucharmapTable *chartable,
-                           gunichar uc)
+                           gunichar        wc)
 {
   const GucharmapUnicodeBlock *block;
 
-  /* g_print ("character_in_active_block: uc = U+%04X\n", uc); */
-
-  block = find_block (chartable, gucharmap_codepoint_list_get_char (chartable->codepoint_list, chartable->active_cell));
+  block = find_block (chartable, gucharmap_table_get_active_character (chartable));
   if (block == NULL)
     return FALSE;
   else
-    return uc >= block->start && uc <= block->end;
+    return wc >= block->start && wc <= block->end;
 }
 
 static void
@@ -1160,8 +1155,7 @@ size_allocate (GtkWidget *widget,
   if (chartable->rows == old_rows && chartable->cols == old_cols)
     return;
 
-  chartable->page_first_cell = chartable->active_cell 
-                             - (chartable->active_cell % chartable->cols);
+  chartable->page_first_cell = chartable->active_cell - (chartable->active_cell % chartable->cols);
 
   /* adjust the adjustment, since it's based on the size of a row */
   adjustment = GTK_ADJUSTMENT (chartable->adjustment);
@@ -1227,9 +1221,7 @@ static void
 move_page_up (GucharmapTable *chartable)
 {
   if (chartable->active_cell >= chartable->cols * chartable->rows)
-    {
-      set_active_cell (chartable, chartable->active_cell - chartable->cols * chartable->rows);
-    }
+    set_active_cell (chartable, chartable->active_cell - chartable->cols * chartable->rows);
   else if (chartable->active_cell > 0)
     set_active_cell (chartable, 0);
 }
@@ -1237,12 +1229,10 @@ move_page_up (GucharmapTable *chartable)
 static void
 move_page_down (GucharmapTable *chartable)
 {
-  if (chartable->active_cell < UNICHAR_MAX - chartable->cols * chartable->rows)
-    {
-      set_active_cell (chartable, chartable->active_cell + chartable->cols * chartable->rows);
-    }
-  else if (chartable->active_cell < UNICHAR_MAX)
-    set_active_cell (chartable, UNICHAR_MAX);
+  if (chartable->active_cell < gucharmap_codepoint_list_get_last_index (chartable->codepoint_list) - chartable->cols * chartable->rows)
+    set_active_cell (chartable, chartable->active_cell + chartable->cols * chartable->rows);
+  else if (chartable->active_cell < gucharmap_codepoint_list_get_last_index (chartable->codepoint_list))
+    set_active_cell (chartable, gucharmap_codepoint_list_get_last_index (chartable->codepoint_list));
 }
 
 static gint
@@ -1319,8 +1309,7 @@ key_press_event (GtkWidget *widget,
         return FALSE;
 
       case GDK_Return: case GDK_KP_Enter: case GDK_space:
-	g_signal_emit (chartable, gucharmap_table_signals[ACTIVATE], 0, 
-		       chartable->active_cell);
+	g_signal_emit (chartable, gucharmap_table_signals[ACTIVATE], 0, gucharmap_table_get_active_character (chartable));
         return TRUE;
 
       /* pass on other keys, like tab and stuff that shifts focus */
@@ -1358,11 +1347,11 @@ set_top_row (GucharmapTable *chartable, gint row)
     r = 0;
 
   chartable->active_cell = chartable->page_first_cell + r * chartable->cols + c;
-  if (chartable->active_cell > UNICHAR_MAX)
-    chartable->active_cell = UNICHAR_MAX;
+  if (chartable->active_cell > gucharmap_codepoint_list_get_last_index (chartable->codepoint_list))
+    chartable->active_cell = gucharmap_codepoint_list_get_last_index (chartable->codepoint_list);
 
-  g_signal_emit (chartable, gucharmap_table_signals[SET_ACTIVE_CHAR], 
-                 0, chartable->active_cell);
+  g_signal_emit (chartable, gucharmap_table_signals[SET_ACTIVE_CHAR], 0, 
+                 gucharmap_table_get_active_character (chartable));
 }
 
 static void
@@ -1436,8 +1425,7 @@ button_press_event (GtkWidget *widget,
   /* double-click */
   if (event->button == 1 && event->type == GDK_2BUTTON_PRESS)
     {
-      g_signal_emit (chartable, gucharmap_table_signals[ACTIVATE], 
-                     0, chartable->active_cell);
+      g_signal_emit (chartable, gucharmap_table_signals[ACTIVATE], 0, gucharmap_table_get_active_character (chartable));
     }
   /* single-click */ 
   else if (event->button == 1 && event->type == GDK_BUTTON_PRESS) 
@@ -1788,8 +1776,8 @@ gucharmap_table_init (GucharmapTable *chartable)
   pango_layout_set_font_description (chartable->pango_layout,
                                      chartable->drawing_area->style->font_desc);
 
-  chartable->page_first_cell = (gunichar) 0x0000;
-  chartable->active_cell = (gunichar) 0x0000;
+  chartable->page_first_cell = 0;
+  chartable->active_cell = 0;
 }
 
 GtkWidget *
@@ -1901,19 +1889,6 @@ gucharmap_table_get_active_character (GucharmapTable *chartable)
 {
   return gucharmap_codepoint_list_get_char (chartable->codepoint_list, chartable->active_cell);
 }
-
-#if 0
-static gunichar
-get_character_at_location (GucharmapTable *chartable, 
-                           gint row,
-                           gint col)
-{
-  if (gtk_widget_get_direction (chartable->drawing_area) == GTK_TEXT_DIR_RTL)
-    return get_character_at_cell (chartable, chartable->page_first_cell + row * chartable->cols + (chartable->cols - col - 1));
-  else
-    return get_character_at_cell (chartable, chartable->page_first_cell + row * chartable->cols + col);
-}
-#endif
 
 void
 gucharmap_table_set_active_character (GucharmapTable *chartable, gunichar uc)
