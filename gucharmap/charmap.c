@@ -1623,7 +1623,7 @@ charmap_init (Charmap *charmap)
 
   /* start packing stuff in the vbox for the top pane */
   vbox = gtk_vbox_new (FALSE, 0);
-  gtk_box_pack_start (GTK_BOX (vbox), hpaned, TRUE, TRUE, 3);
+  gtk_box_pack_start (GTK_BOX (vbox), hpaned, TRUE, TRUE, 0);
   /* end packing stuff in the vbox for the top pane */
 
   /* put stuff in the vpaned */
@@ -1633,8 +1633,8 @@ charmap_init (Charmap *charmap)
   /* done with panes */
 
   /* start packing stuff in the outer vbox (the Charmap itself) */
-  gtk_box_pack_start (GTK_BOX (charmap), hbox, FALSE, FALSE, 3);
-  gtk_box_pack_start (GTK_BOX (charmap), vpaned, TRUE, TRUE, 3);
+  gtk_box_pack_start (GTK_BOX (charmap), hbox, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (charmap), vpaned, TRUE, TRUE, 0);
   /* end packing stuff in the outer vbox (the Charmap itself) */
 
   /* the statusbar— not placed anywhere */

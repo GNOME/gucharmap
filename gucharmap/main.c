@@ -25,9 +25,6 @@
 #include "../pixmaps/gucharmap.xpm"  /* defines gucharmap_xpm */
 
 
-#define VBOX_SPACING 3
-
-
 static GtkWidget *charmap;
 
 
@@ -172,12 +169,12 @@ main (gint argc, gchar **argv)
   GtkWidget *vbox;
   GtkWidget *statusbar;
   GtkWidget *fontsel;
+  GtkWidget *toolbar; /* the fontsel goes on this */
   GtkTooltips *tooltips;
   gchar *orig_font, *new_font;
   PangoFontDescription *font_desc;
 
   gtk_init (&argc, &argv);
-
 
   tooltips = gtk_tooltips_new ();
 
@@ -185,18 +182,21 @@ main (gint argc, gchar **argv)
   gtk_window_set_title (GTK_WINDOW (window), _("Unicode Character Map"));
   gtk_window_set_icon (
           GTK_WINDOW (window), 
-          gdk_pixbuf_new_from_xpm_data ((const char **) gucharmap_xpm));
+          gdk_pixbuf_new_from_xpm_data ((const gchar **) gucharmap_xpm));
 
   g_signal_connect (G_OBJECT (window), "destroy",
                     G_CALLBACK (gtk_main_quit), NULL);
 
-  vbox = gtk_vbox_new (FALSE, VBOX_SPACING);
+  vbox = gtk_vbox_new (FALSE, 0);
   gtk_container_add (GTK_CONTAINER (window), vbox);
 
   gtk_box_pack_start (GTK_BOX (vbox), make_menu (), FALSE, FALSE, 0);
 
+  toolbar = gtk_toolbar_new ();
   fontsel = mini_font_selection_new ();
-  gtk_box_pack_start (GTK_BOX (vbox), fontsel, FALSE, FALSE, 0);
+  gtk_container_set_border_width (GTK_CONTAINER (fontsel), 5);
+  gtk_toolbar_append_widget (GTK_TOOLBAR (toolbar), fontsel, NULL, NULL);
+  gtk_box_pack_start (GTK_BOX (vbox), toolbar, FALSE, FALSE, 0);
 
   charmap = charmap_new ();
   gtk_box_pack_start (GTK_BOX (vbox), charmap, TRUE, TRUE, 0);
