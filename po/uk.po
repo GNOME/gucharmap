@@ -6,333 +6,311 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
-"POT-Creation-Date: 2003-03-01 23:53+0200\n"
-"PO-Revision-Date: 2003-03-01 13:15--500\n"
+"POT-Creation-Date: 2003-03-10 16:42+0200\n"
+"PO-Revision-Date: 2003-03-10 06:13--500\n"
 "Last-Translator: Yuriy Syrota <yuri@renome.rovno.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/charmap.c:1907
-msgid "Clipboard is empty."
-msgstr "Кишеня порожня."
-
-#: src/charmap.c:1909
-msgid "There is no selected text."
-msgstr "Немає вибраного тексту."
-
-#: src/charmap.c:1917
-#: src/charmap.c:2119
-msgid "Unknown character, unable to identify."
-msgstr "Невідомий символ, неможливо ідентифікувати."
-
-#: src/charmap.c:1921
-#: src/charmap.c:2123
-msgid "Character found."
-msgstr "Символ знайдено."
-
-#: src/charmap.c:2243
+#: gucharmap/charmap.c:774
 msgid "Character Map"
 msgstr "Мапа символів"
 
-#: src/charmap.c:2247
+#: gucharmap/charmap.c:778
 msgid "Character"
 msgstr "Символ"
 
-#: src/charmap.c:2248
+#: gucharmap/charmap.c:779
 msgid "Unicode category"
-msgstr ""
+msgstr "Категорія Унікоду"
 
-#: src/charmap.c:2249
+#: gucharmap/charmap.c:780
 msgid "Canonical decomposition"
 msgstr "Канонічний розклад"
 
-#: src/charmap.c:2250
+#: gucharmap/charmap.c:781
 msgid "UTF-8"
 msgstr "UTF-8"
 
-#: src/charmap.c:2251
+#: gucharmap/charmap.c:782
 msgid "Other representations"
 msgstr "Інші представлення"
 
-#: src/charmap.c:2253
-msgid "CJK ideograph definition"
-msgstr ""
-
-#: src/charmap.c:2254
-msgid "Mandarin pronunciation"
-msgstr ""
-
-#: src/charmap.c:2255
-msgid "Japanese On pronunciation"
-msgstr ""
-
-#: src/charmap.c:2256
-msgid "Japanese Kun pronunciation"
-msgstr ""
-
-#: src/charmap.c:2257
-msgid "Cantonese pronunciation"
-msgstr ""
-
-#: src/charmap.c:2258
-msgid "Tang pronunciation"
-msgstr ""
-
-#: src/charmap.c:2259
-msgid "Korean pronunciation"
-msgstr ""
-
-#: src/charmap.c:2261
+#: gucharmap/charmap.c:783
 msgid "See also"
 msgstr "Дивіться також"
 
-#: src/charmap.c:2262
+#: gucharmap/charmap.c:784
 msgid "Equivalents"
 msgstr "Еквіваленти"
 
-#: src/charmap.c:2263
+#: gucharmap/charmap.c:785
 msgid "Alias names"
 msgstr "Інші назви"
 
-#: src/charmap.c:2264
+#: gucharmap/charmap.c:786
 msgid "Approximate equivalents"
 msgstr "Приблизні еквіваленти"
 
-#: src/charmap.c:2265
+#: gucharmap/charmap.c:787
 msgid "Notes"
 msgstr "Нотатки"
 
-#: src/charmap.c:2281
-msgid "Character Table"
-msgstr "Таблиця символів"
+#: gucharmap/charmap.c:789
+msgid "CJK ideograph definition"
+msgstr "Позначення ідеограми CJK"
 
-#: src/charmap.c:2286
+#: gucharmap/charmap.c:790
+msgid "Mandarin pronunciation"
+msgstr "Мандаринська фонетична транскрипція"
+
+#: gucharmap/charmap.c:791
+msgid "Japanese On pronunciation"
+msgstr "Японська фонетична транскрипція Он"
+
+#: gucharmap/charmap.c:792
+msgid "Japanese Kun pronunciation"
+msgstr "Японська фонетична транскрипція Кун"
+
+#: gucharmap/charmap.c:793
+msgid "Cantonese pronunciation"
+msgstr "Кантонська фонетична транскрипція"
+
+#: gucharmap/charmap.c:794
+msgid "Tang pronunciation"
+msgstr "Фонетична транскрипція Танґ"
+
+#: gucharmap/charmap.c:795
+msgid "Korean pronunciation"
+msgstr "Корейська фонетична транскрипція"
+
+#: gucharmap/charmap.c:813
 msgid "Details on the Current Character"
 msgstr "Відомості про поточний символ"
 
-#: src/charmap.c:2297
+#: gucharmap/charmap.c:824
 msgid "List of Unicode Blocks"
-msgstr ""
+msgstr "Список блоків Унікоду"
 
-#: src/main.c:68
+#: gucharmap/main.c:68
 msgid "Font to start with; ex: 'Serif 27'"
-msgstr ""
+msgstr "З чого починається шрифт; напр., \"Serif 27\""
 
-#: src/main.c:131
+#: gucharmap/main.c:131
 msgid "Zoom mode enabled. Press <Esc> to disable zoom."
 msgstr "Увімкнено режим збільшення. Натисніть клавішу \"Esc\" для вимкнення збільшення."
 
-#: src/main.c:141
+#: gucharmap/main.c:141
 msgid "Zoom mode disabled."
 msgstr "Режим збільшення вимкнено."
 
-#: src/main.c:344
+#: gucharmap/main.c:344
 #, c-format
 msgid "Not a valid code point to jump to. Must be a hexadecimal number between 0 and %4.4X."
-msgstr ""
+msgstr "Неправильний код для переходу. Це має бути шістнадцяткове число в діапазоні від 0 до %4.4X."
 
-#: src/main.c:366
+#: gucharmap/main.c:366
 msgid "Go to hex code point"
-msgstr ""
+msgstr "Перейти за шістнадцятковим кодом"
 
-#: src/main.c:387
+#: gucharmap/main.c:387
 msgid "_Enter unicode code point"
-msgstr ""
+msgstr "_Ввести код Унікоду."
 
-#: src/main.c:431
+#: gucharmap/main.c:431
 msgid "The selected code point is not a valid unicode character."
-msgstr ""
+msgstr "Вибраний код не є кодом символу Унікоду."
 
-#: src/main.c:459
+#: gucharmap/main.c:459
 msgid "Text copied to clipboard."
 msgstr "Текст скопійовано в кишеню."
 
-#: src/main.c:474
+#: gucharmap/main.c:474
 msgid "Not found."
 msgstr "Не знайдено."
 
-#: src/main.c:478
+#: gucharmap/main.c:478
 msgid "Found."
 msgstr "Знайдено."
 
-#: src/main.c:482
+#: gucharmap/main.c:482
 msgid "Search wrapped."
-msgstr ""
+msgstr "Пошук почався з іншого кінця."
 
-#: src/main.c:486
+#: gucharmap/main.c:486
 msgid "Nothing to search for."
-msgstr ""
+msgstr "Немає що шукати."
 
-#: src/main.c:520
+#: gucharmap/main.c:520
 msgid "_Search:"
-msgstr ""
+msgstr "_Пошук:"
 
-#: src/main.c:539
+#: gucharmap/main.c:539
 msgid "Search for the next occurrence of this string in a character's Unicode name."
-msgstr ""
+msgstr "Шукати наступне входження цього рядка у назві символів Унікоду."
 
-#: src/main.c:571
+#: gucharmap/main.c:571
 msgid "_Text to copy:"
-msgstr ""
+msgstr "_Текст для копіювання:"
 
-#: src/main.c:592
+#: gucharmap/main.c:592
 msgid "Copy to the clipboard."
-msgstr ""
+msgstr "Скопіювати у кишеню."
 
-#: src/main.c:618
+#: gucharmap/main.c:618
 msgid "translator_credits"
 msgstr "Юрій Сирота <yuriy@beer.com>"
 
-#: src/main.c:625
-#: src/main.c:1089
+#: gucharmap/main.c:625
+#: gucharmap/main.c:1088
 #: gucharmap.desktop.in.h:1
 msgid "Unicode Character Map"
-msgstr ""
+msgstr "Мапа символів Унікоду"
 
-#: src/main.c:679
+#: gucharmap/main.c:680
 msgid "Char_map"
 msgstr "_Мапа символів"
 
-#: src/main.c:681
+#: gucharmap/main.c:682
 msgid "_View"
 msgstr "_Вигляд"
 
-#: src/main.c:683
+#: gucharmap/main.c:684
 msgid "_Go To"
-msgstr ""
+msgstr "_Перейти"
 
-#: src/main.c:702
+#: gucharmap/main.c:703
 msgid "Expand/Collapse All"
-msgstr ""
+msgstr "Розгорнути чи згорнути все"
 
 #. ctrl-+ or ctrl-=
-#: src/main.c:711
+#: gucharmap/main.c:712
 msgid "Zoom _In"
 msgstr "З_більшити"
 
 #. ctrl--
-#: src/main.c:723
+#: gucharmap/main.c:724
 msgid "Zoom _Out"
 msgstr "З_меншити"
 
 #. ctrl-<enter>
-#: src/main.c:736
+#: gucharmap/main.c:737
 msgid "_Zoom Mode"
-msgstr ""
+msgstr "Режим _збільшення"
 
-#: src/main.c:750
+#: gucharmap/main.c:751
 msgid "_Unicode Details"
-msgstr ""
+msgstr "Подробиці _Унікоду"
 
 #. the unicode details submenu
-#: src/main.c:756
-#: src/main.c:805
-#: src/main.c:879
+#: gucharmap/main.c:757
+#: gucharmap/main.c:806
+#: gucharmap/main.c:880
 msgid "Options"
 msgstr "Параметри"
 
-#: src/main.c:764
+#: gucharmap/main.c:765
 msgid "_Category"
 msgstr "_Категорія"
 
-#: src/main.c:772
+#: gucharmap/main.c:773
 msgid "Canonical _Decomposition"
-msgstr ""
+msgstr "Канонічний _розклад"
 
-#: src/main.c:779
+#: gucharmap/main.c:780
 msgid "_UTF-8"
 msgstr "_UTF-8"
 
-#: src/main.c:787
+#: gucharmap/main.c:788
 msgid "_Other Representations"
 msgstr "_Інші представлення"
 
-#: src/main.c:799
+#: gucharmap/main.c:800
 msgid "_CJK Ideograph Details"
-msgstr ""
+msgstr "Деталі ідеограми _CJK"
 
-#: src/main.c:814
+#: gucharmap/main.c:815
 msgid "CJK Ideograph _Definition"
-msgstr ""
+msgstr "_Позначення ідеограми CJK"
 
-#: src/main.c:822
+#: gucharmap/main.c:823
 msgid "_Mandarin Pronunciation"
-msgstr ""
+msgstr "_Мандаринська фонетична транскрипція"
 
-#: src/main.c:830
+#: gucharmap/main.c:831
 msgid "Japanese _On Pronunciation"
-msgstr ""
+msgstr "Японська фонетична транскрипція _Он"
 
-#: src/main.c:838
+#: gucharmap/main.c:839
 msgid "_Japanese Kun Pronunciation"
-msgstr ""
+msgstr "_Японська фонетична транскрипція Кун"
 
-#: src/main.c:846
+#: gucharmap/main.c:847
 msgid "_Cantonese Pronunciation"
-msgstr ""
+msgstr "_Кантонська фонетична транскрипція"
 
-#: src/main.c:854
+#: gucharmap/main.c:855
 msgid "_Tang Pronunciation"
-msgstr ""
+msgstr "Фонетична транскрипція _Танґ"
 
-#: src/main.c:862
+#: gucharmap/main.c:863
 msgid "_Korean Pronunciation"
-msgstr ""
+msgstr "Ко_рейська фонетична транскрипція"
 
-#: src/main.c:873
+#: gucharmap/main.c:874
 msgid "_Annotations and Cross References"
-msgstr ""
+msgstr "П_римітки і посилання"
 
-#: src/main.c:888
+#: gucharmap/main.c:889
 msgid "_Alias Names"
 msgstr "_Інші назви"
 
-#: src/main.c:895
+#: gucharmap/main.c:896
 msgid "_Notes"
 msgstr "_Нотатки"
 
-#: src/main.c:902
+#: gucharmap/main.c:903
 msgid "_See Also"
 msgstr "_Дивіться також"
 
-#: src/main.c:909
+#: gucharmap/main.c:910
 msgid "_Approximate Equivalents"
 msgstr "_Приблизні еквіваленти"
 
-#: src/main.c:916
+#: gucharmap/main.c:917
 msgid "_Equivalents"
 msgstr "_Еквіваленти"
 
 #. ctrl-h
-#: src/main.c:929
+#: gucharmap/main.c:930
 msgid "_Hex Code Point..."
-msgstr ""
+msgstr "_Шістнадцятковий код..."
 
 #. ctrl-v
-#: src/main.c:937
+#: gucharmap/main.c:938
 msgid "Character in _Clipboard"
-msgstr ""
+msgstr "Символ у _кишені"
 
 #. make the help menu
-#: src/main.c:947
+#: gucharmap/main.c:948
 msgid "_Help"
 msgstr "_Довідка"
 
-#: src/mini_fontsel.c:283
+#: gucharmap/mini_fontsel.c:283
 msgid "Font"
 msgstr "Шрифт"
 
-#: src/mini_fontsel.c:292
+#: gucharmap/mini_fontsel.c:292
 msgid "Font Family"
 msgstr "Гарнітура"
 
-#: src/mini_fontsel.c:296
+#: gucharmap/mini_fontsel.c:296
 msgid "Font Style"
 msgstr "Стиль шрифта"
 
-#: src/mini_fontsel.c:303
+#: gucharmap/mini_fontsel.c:303
 msgid "Font Size"
 msgstr "Розмір шрифта"
 
