@@ -53,6 +53,9 @@ unichar_to_printable_utf8 (gunichar uc)
 {
   static gchar buf[8];
   gint x;
+
+  if (! g_unichar_isgraph (uc))
+    return "";
   
   if (g_unichar_type (uc) == G_UNICODE_COMBINING_MARK
       || g_unichar_type (uc) == G_UNICODE_ENCLOSING_MARK
@@ -61,7 +64,6 @@ unichar_to_printable_utf8 (gunichar uc)
       buf[0] = ' ';
       x = g_unichar_to_utf8 (uc, buf+1);
       buf[x+1] = '\0';
-      debug ("%s is a combining character\n", buf);
     }
   else
     {
@@ -76,26 +78,23 @@ unichar_to_printable_utf8 (gunichar uc)
 static void
 set_caption (Charmap *charmap)
 {
-#if 0
-  gchar *escaped_utf8_buf, *escaped_unicode_info;
-  gchar *caption_markup;
+  #define BUFLEN 512
+  static gchar buf[BUFLEN];
 
-  escaped_utf8_buf = g_markup_escape_text (
-          unichar_to_printable_utf8 (charmap->active_char), -1);
-  escaped_unicode_info = g_markup_escape_text (
-          get_unicode_name (charmap->active_char), -1);
+  g_snprintf (buf, BUFLEN, "codepoint: U+%4.4X", charmap->active_char);
+  gtk_label_set_text (GTK_LABEL (charmap->caption->codepoint), buf);
 
-  /* n.b. the string below has utf8 quotes in it */
-  caption_markup = g_strdup_printf (
-          "<span size=\"large\">U+%4.4X “%s” %s</span>",
-          charmap->active_char, escaped_utf8_buf, escaped_unicode_info);
+  g_snprintf (buf, BUFLEN, "character: %s", 
+              unichar_to_printable_utf8 (charmap->active_char));
+  gtk_label_set_text (GTK_LABEL (charmap->caption->character), buf);
 
-  gtk_label_set_markup (GTK_LABEL (charmap->caption), caption_markup);
+  g_snprintf (buf, BUFLEN, "category: %s", 
+              get_unicode_category_name (charmap->active_char));
+  gtk_label_set_text (GTK_LABEL (charmap->caption->category), buf);
 
-  g_free (caption_markup);
-  g_free (escaped_utf8_buf);
-  g_free (escaped_unicode_info);
-#endif
+  g_snprintf (buf, BUFLEN, "name: %s", 
+              get_unicode_name (charmap->active_char));
+  gtk_label_set_text (GTK_LABEL (charmap->caption->name), buf);
 }
 
 
