@@ -5,14 +5,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap 2.0.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-07-11 16:11+0200\n"
-"PO-Revision-Date: 2003-07-11 16:21+0200\n"
+"POT-Creation-Date: 2003-08-24 19:18+0200\n"
+"PO-Revision-Date: 2003-08-24 19:22+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
+"Report-Msgid-Bugs-To: \n"
 
 #. ID
 #: gucharmap.desktop.in.h:1 gucharmap/gucharmap-window.c:386
@@ -24,7 +24,7 @@ msgstr "Unicode tegnkart"
 msgid "Canonical decomposition:"
 msgstr ""
 
-#: gucharmap/gucharmap-charmap.c:437 gucharmap/gucharmap-table.c:327
+#: gucharmap/gucharmap-charmap.c:437 gucharmap/gucharmap-table.c:332
 msgid "[not a printable character]"
 msgstr ""
 
@@ -35,7 +35,7 @@ msgstr ""
 #. character category
 #: gucharmap/gucharmap-charmap.c:460
 msgid "Unicode category:"
-msgstr ""
+msgstr "Unicode-kategori:"
 
 #: gucharmap/gucharmap-charmap.c:466
 msgid "Various Useful Representations"
@@ -43,16 +43,15 @@ msgstr ""
 
 #: gucharmap/gucharmap-charmap.c:475
 msgid "UTF-8:"
-msgstr ""
+msgstr "UTF-8:"
 
 #: gucharmap/gucharmap-charmap.c:483
 msgid "Octal escaped UTF-8:"
 msgstr ""
 
 #: gucharmap/gucharmap-charmap.c:489
-#, fuzzy
 msgid "Decimal entity reference:"
-msgstr "Brukervalg for ordbok"
+msgstr ""
 
 #: gucharmap/gucharmap-charmap.c:495
 msgid "Annotations and Cross References"
@@ -116,7 +115,7 @@ msgstr "_Detaljer om tegn"
 
 #: gucharmap/gucharmap-charmap.c:911
 msgid "List of Unicode Blocks"
-msgstr ""
+msgstr "Liste over Unicode-blokker"
 
 #: gucharmap/gucharmap-mini-fontsel.c:197
 msgid "Font"
@@ -132,29 +131,29 @@ msgstr "_Uthevet"
 
 #: gucharmap/gucharmap-mini-fontsel.c:213
 msgid "_Italic"
-msgstr "_Kursiv"
+msgstr "Kurs_iv"
 
 #: gucharmap/gucharmap-mini-fontsel.c:222
 msgid "Font Size"
 msgstr "Skriftstørrelse"
 
-#: gucharmap/gucharmap-table.c:1417
+#: gucharmap/gucharmap-table.c:1435
 msgid "Clipboard is empty."
 msgstr "Utklippstavlen er tom."
 
-#: gucharmap/gucharmap-table.c:1419
+#: gucharmap/gucharmap-table.c:1437
 msgid "There is no selected text."
 msgstr "Ingen tekst er valgt."
 
-#: gucharmap/gucharmap-table.c:1427 gucharmap/gucharmap-table.c:1690
+#: gucharmap/gucharmap-table.c:1445 gucharmap/gucharmap-table.c:1708
 msgid "Unknown character, unable to identify."
 msgstr "Ukjent tegn. Kan ikke identifiseres."
 
-#: gucharmap/gucharmap-table.c:1431 gucharmap/gucharmap-table.c:1694
+#: gucharmap/gucharmap-table.c:1449 gucharmap/gucharmap-table.c:1712
 msgid "Character found."
 msgstr "Tegn funnet."
 
-#: gucharmap/gucharmap-table.c:1761
+#: gucharmap/gucharmap-table.c:1780
 msgid "Character Table"
 msgstr "Tegntabell"
 
@@ -185,7 +184,7 @@ msgstr ""
 
 #: gucharmap/gucharmap-unicode-info.c:163
 msgid "<Private Use>"
-msgstr ""
+msgstr "<Privat bruk>"
 
 #: gucharmap/gucharmap-unicode-info.c:165
 msgid "<Plane 15 Private Use>"
@@ -348,7 +347,7 @@ msgstr "Ikke funnet."
 
 #: gucharmap/gucharmap-window.c:222
 msgid "Nothing to search for."
-msgstr ""
+msgstr "Ingenting å søke etter."
 
 #: gucharmap/gucharmap-window.c:265
 msgid "Find"
@@ -447,7 +446,7 @@ msgstr ""
 
 #: gucharmap/unicode/unicode_blocks.cI:7
 msgid "Basic Latin"
-msgstr ""
+msgstr "Grunnleggende Latin"
 
 #: gucharmap/unicode/unicode_blocks.cI:8
 msgid "Latin-1 Supplement"
@@ -466,9 +465,8 @@ msgid "IPA Extensions"
 msgstr ""
 
 #: gucharmap/unicode/unicode_blocks.cI:12
-#, fuzzy
 msgid "Spacing Modifier Letters"
-msgstr "Første mappeoppføring"
+msgstr ""
 
 #: gucharmap/unicode/unicode_blocks.cI:13
 msgid "Combining Diacritical Marks"
@@ -476,7 +474,7 @@ msgstr ""
 
 #: gucharmap/unicode/unicode_blocks.cI:14
 msgid "Greek and Coptic"
-msgstr ""
+msgstr "Gresk og koptisk"
 
 #: gucharmap/unicode/unicode_blocks.cI:15
 msgid "Cyrillic"
@@ -484,7 +482,7 @@ msgstr "Kyrillisk"
 
 #: gucharmap/unicode/unicode_blocks.cI:16
 msgid "Cyrillic Supplementary"
-msgstr ""
+msgstr "Kyrillisk tillegg"
 
 #: gucharmap/unicode/unicode_blocks.cI:17
 msgid "Armenian"
@@ -504,7 +502,7 @@ msgstr "Syrisk"
 
 #: gucharmap/unicode/unicode_blocks.cI:21
 msgid "Thaana"
-msgstr ""
+msgstr "Thaana"
 
 #: gucharmap/unicode/unicode_blocks.cI:22
 msgid "Devanagari"
@@ -512,47 +510,47 @@ msgstr "Devanagari"
 
 #: gucharmap/unicode/unicode_blocks.cI:23
 msgid "Bengali"
-msgstr ""
+msgstr "Bengali"
 
 #: gucharmap/unicode/unicode_blocks.cI:24
 msgid "Gurmukhi"
-msgstr ""
+msgstr "Gurmukhi"
 
 #: gucharmap/unicode/unicode_blocks.cI:25
 msgid "Gujarati"
-msgstr ""
+msgstr "Gujarati"
 
 #: gucharmap/unicode/unicode_blocks.cI:26
 msgid "Oriya"
-msgstr ""
+msgstr "Oriya"
 
 #: gucharmap/unicode/unicode_blocks.cI:27
 msgid "Tamil"
-msgstr ""
+msgstr "Tamil"
 
 #: gucharmap/unicode/unicode_blocks.cI:28
 msgid "Telugu"
-msgstr ""
+msgstr "Telugu"
 
 #: gucharmap/unicode/unicode_blocks.cI:29
 msgid "Kannada"
-msgstr ""
+msgstr "Kannada"
 
 #: gucharmap/unicode/unicode_blocks.cI:30
 msgid "Malayalam"
-msgstr ""
+msgstr "Malayalam"
 
 #: gucharmap/unicode/unicode_blocks.cI:31
 msgid "Sinhala"
-msgstr ""
+msgstr "Sinhala"
 
 #: gucharmap/unicode/unicode_blocks.cI:32
 msgid "Thai"
-msgstr ""
+msgstr "Thai"
 
 #: gucharmap/unicode/unicode_blocks.cI:33
 msgid "Lao"
-msgstr ""
+msgstr "Lao"
 
 #: gucharmap/unicode/unicode_blocks.cI:34
 msgid "Tibetan"
@@ -560,15 +558,15 @@ msgstr "Tibetansk"
 
 #: gucharmap/unicode/unicode_blocks.cI:35
 msgid "Myanmar"
-msgstr ""
+msgstr "Myanmar"
 
 #: gucharmap/unicode/unicode_blocks.cI:36
 msgid "Georgian"
-msgstr ""
+msgstr "Georgisk"
 
 #: gucharmap/unicode/unicode_blocks.cI:37
 msgid "Hangul Jamo"
-msgstr ""
+msgstr "Hangul Jamo"
 
 #: gucharmap/unicode/unicode_blocks.cI:38
 msgid "Ethiopic"
@@ -576,7 +574,7 @@ msgstr "Etiopisk"
 
 #: gucharmap/unicode/unicode_blocks.cI:39
 msgid "Cherokee"
-msgstr ""
+msgstr "Cherokee"
 
 #: gucharmap/unicode/unicode_blocks.cI:40
 msgid "Unified Canadian Aboriginal Syllabics"
@@ -584,11 +582,11 @@ msgstr ""
 
 #: gucharmap/unicode/unicode_blocks.cI:41
 msgid "Ogham"
-msgstr ""
+msgstr "Ogham"
 
 #: gucharmap/unicode/unicode_blocks.cI:42
 msgid "Runic"
-msgstr ""
+msgstr "Rune"
 
 #: gucharmap/unicode/unicode_blocks.cI:43
 msgid "Tagalog"
@@ -596,39 +594,39 @@ msgstr "Tagalog"
 
 #: gucharmap/unicode/unicode_blocks.cI:44
 msgid "Hanunoo"
-msgstr ""
+msgstr "Haunoo"
 
 #: gucharmap/unicode/unicode_blocks.cI:45
 msgid "Buhid"
-msgstr ""
+msgstr "Buhid"
 
 #: gucharmap/unicode/unicode_blocks.cI:46
 msgid "Tagbanwa"
-msgstr ""
+msgstr "Tagbanwa"
 
 #: gucharmap/unicode/unicode_blocks.cI:47
 msgid "Khmer"
-msgstr ""
+msgstr "Khmer"
 
 #: gucharmap/unicode/unicode_blocks.cI:48
 msgid "Mongolian"
-msgstr ""
+msgstr "Mongolsk"
 
 #: gucharmap/unicode/unicode_blocks.cI:49
 msgid "Limbu"
-msgstr ""
+msgstr "Limbu"
 
 #: gucharmap/unicode/unicode_blocks.cI:50
 msgid "Tai Le"
-msgstr ""
+msgstr "Tai Le"
 
 #: gucharmap/unicode/unicode_blocks.cI:51
 msgid "Khmer Symbols"
-msgstr ""
+msgstr "Khmer symboler"
 
 #: gucharmap/unicode/unicode_blocks.cI:52
 msgid "Phonetic Extensions"
-msgstr ""
+msgstr "Fonetiske utvidelser"
 
 #: gucharmap/unicode/unicode_blocks.cI:53
 msgid "Latin Extended Additional"
@@ -636,7 +634,7 @@ msgstr ""
 
 #: gucharmap/unicode/unicode_blocks.cI:54
 msgid "Greek Extended"
-msgstr ""
+msgstr "Utvidet gresk"
 
 #: gucharmap/unicode/unicode_blocks.cI:55
 msgid "General Punctuation"
@@ -648,7 +646,7 @@ msgstr ""
 
 #: gucharmap/unicode/unicode_blocks.cI:57
 msgid "Currency Symbols"
-msgstr ""
+msgstr "Valutasymboler"
 
 #: gucharmap/unicode/unicode_blocks.cI:58
 msgid "Combining Diacritical Marks for Symbols"
@@ -659,9 +657,8 @@ msgid "Letterlike Symbols"
 msgstr ""
 
 #: gucharmap/unicode/unicode_blocks.cI:60
-#, fuzzy
 msgid "Number Forms"
-msgstr "Antall former"
+msgstr "Tallformer"
 
 #: gucharmap/unicode/unicode_blocks.cI:61
 msgid "Arrows"
@@ -709,7 +706,7 @@ msgstr "Dingbats"
 
 #: gucharmap/unicode/unicode_blocks.cI:72
 msgid "Miscellaneous Mathematical Symbols-A"
-msgstr ""
+msgstr "Forskjellige matematiske symboler-A"
 
 #: gucharmap/unicode/unicode_blocks.cI:73
 msgid "Supplemental Arrows-A"
@@ -753,15 +750,15 @@ msgstr ""
 
 #: gucharmap/unicode/unicode_blocks.cI:83
 msgid "Hiragana"
-msgstr ""
+msgstr "Hiragana"
 
 #: gucharmap/unicode/unicode_blocks.cI:84
 msgid "Katakana"
-msgstr ""
+msgstr "Katakana"
 
 #: gucharmap/unicode/unicode_blocks.cI:85
 msgid "Bopomofo"
-msgstr ""
+msgstr "Bopomofo"
 
 #: gucharmap/unicode/unicode_blocks.cI:86
 msgid "Hangul Compatibility Jamo"
@@ -769,7 +766,7 @@ msgstr ""
 
 #: gucharmap/unicode/unicode_blocks.cI:87
 msgid "Kanbun"
-msgstr ""
+msgstr "Kanbun"
 
 #: gucharmap/unicode/unicode_blocks.cI:88
 msgid "Bopomofo Extended"
@@ -885,11 +882,11 @@ msgstr ""
 
 #: gucharmap/unicode/unicode_blocks.cI:116
 msgid "Gothic"
-msgstr ""
+msgstr "Gotisk"
 
 #: gucharmap/unicode/unicode_blocks.cI:117
 msgid "Ugaritic"
-msgstr ""
+msgstr "Ugaritisk"
 
 #: gucharmap/unicode/unicode_blocks.cI:118
 msgid "Deseret"
@@ -897,11 +894,11 @@ msgstr "Deseret"
 
 #: gucharmap/unicode/unicode_blocks.cI:119
 msgid "Shavian"
-msgstr ""
+msgstr "Shavian"
 
 #: gucharmap/unicode/unicode_blocks.cI:120
 msgid "Osmanya"
-msgstr ""
+msgstr "Osmanya"
 
 #: gucharmap/unicode/unicode_blocks.cI:121
 msgid "Cypriot Syllabary"
@@ -913,7 +910,7 @@ msgstr ""
 
 #: gucharmap/unicode/unicode_blocks.cI:123
 msgid "Musical Symbols"
-msgstr ""
+msgstr "Musikalske symboler"
 
 #: gucharmap/unicode/unicode_blocks.cI:124
 msgid "Tai Xuan Jing Symbols"
