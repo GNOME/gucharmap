@@ -353,8 +353,10 @@ chartable_accessible_ref_state_set (AtkObject *obj)
   state_set = ATK_OBJECT_CLASS (parent_class)->ref_state_set (obj);
   widget = GTK_ACCESSIBLE (obj)->widget;
 
+  /* XXX: temporarily commenting out atk 1.2 dependent functionality
   if (widget != NULL)
     atk_state_set_add_state (state_set, ATK_STATE_MANAGES_DESCENDANTS);
+    */
 
   return state_set;
 }
