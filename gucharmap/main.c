@@ -112,6 +112,13 @@ show_hide_details (GtkWidget *widget, gpointer data)
 }
 
 
+static void
+mini_fontsel_changed (MiniFontSelection *fontsel, gpointer data)
+{
+  g_printerr ("mini_fontsel_changed\n");
+}
+
+
 static GtkWidget *
 make_menu ()
 {
@@ -202,6 +209,7 @@ main (gint argc, gchar **argv)
   GtkWidget *fontsel;
   GtkWidget *fontsel_toggle;
   GtkWidget *statusbar;
+  GtkWidget *mini_fontsel;
   GtkTooltips *tooltips;
   gchar *orig_font, *new_font;
   PangoFontDescription *font_desc;
@@ -225,8 +233,8 @@ main (gint argc, gchar **argv)
 
   gtk_box_pack_start (GTK_BOX (vbox), make_menu (), FALSE, FALSE, 0);
 
-  gtk_box_pack_start (GTK_BOX (vbox), mini_font_selection_new (), 
-                      FALSE, FALSE, 0);
+  mini_fontsel = mini_font_selection_new ();
+  gtk_box_pack_start (GTK_BOX (vbox), mini_fontsel, FALSE, FALSE, 0);
 
   charmap = charmap_new ();
   gtk_box_pack_start (GTK_BOX (vbox), charmap, TRUE, TRUE, 0);
@@ -254,6 +262,9 @@ main (gint argc, gchar **argv)
           gtk_tree_view_get_selection (GTK_TREE_VIEW (
                   GTK_FONT_SELECTION (fontsel)->size_list)), 
           "changed", G_CALLBACK (fontsel_changed), fontsel);
+
+  g_signal_connect (mini_fontsel, "changed", G_CALLBACK (mini_fontsel_changed),
+                    NULL);
 
   gtk_window_set_default_size (GTK_WINDOW (window), 
                                gdk_screen_width () * 1/2,

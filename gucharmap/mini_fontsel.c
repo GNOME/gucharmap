@@ -23,6 +23,15 @@
 #include "mini_fontsel.h"
 
 
+enum
+{
+  CHANGED,
+  LAST_SIGNAL
+};
+
+static guint mini_font_selection_signals [LAST_SIGNAL] = { 0 };
+
+
 /* looks up PangoFontFamily by family name, since no such function is in
  * the api*/
 static GHashTable *pango_font_family_hash = NULL;
@@ -198,7 +207,7 @@ set_family (MiniFontSelection *fontsel, const gchar *new_family)
 
   show_available_styles (fontsel);
 
-  /* emit "changed" signal */
+  g_signal_emit (fontsel, mini_font_selection_signals[CHANGED], 0);
 }
 
 
@@ -229,7 +238,7 @@ set_style (MiniFontSelection *fontsel, const gchar *new_style)
 
   fontsel->style_value = g_strdup (new_style);
 
-  /* emit "changed" signal */
+  g_signal_emit (fontsel, mini_font_selection_signals[CHANGED], 0);
 }
 
 
@@ -256,7 +265,7 @@ static void
 set_size (MiniFontSelection *fontsel, gint size)
 {
   fontsel->size_value = size;
-  /* emit "changed" signal */
+  g_signal_emit (fontsel, mini_font_selection_signals[CHANGED], 0);
 }
 
 
@@ -275,6 +284,15 @@ void
 mini_font_selection_class_init (MiniFontSelectionClass *clazz)
 {
   g_printerr ("mini_font_selection_class_init\n");
+
+  clazz->changed = NULL;
+
+  mini_font_selection_signals[CHANGED] =
+      g_signal_new ("changed", 
+                    mini_font_selection_get_type (), G_SIGNAL_RUN_FIRST,
+                    G_STRUCT_OFFSET (MiniFontSelectionClass, changed),
+                    NULL, NULL, gtk_signal_default_marshaller, 
+                    G_TYPE_NONE, 0);
 }
 
 

@@ -68,6 +68,8 @@ struct _MiniFontSelection
 struct _MiniFontSelectionClass
 {
   GtkHBoxClass parent_class;
+
+  void (* changed) (MiniFontSelection *fontsel);
 };
 
 
