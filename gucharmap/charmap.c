@@ -330,10 +330,10 @@ set_caption (Charmap *charmap, gunichar uc)
   /* utf-8 */
   if (charmap->caption_rows[CHARMAP_CAPTION_UTF8])
     {
-      GString *gstemp = g_string_new (NULL);
+      GString *gstemp = g_string_new ("\342\200\252");
       n = g_unichar_to_utf8 (uc, ubuf);
       for (i = 0;  i < n;  i++)
-        g_string_append_printf (gstemp, "0x%2.2X\342\200\217 ", ubuf[i]);
+        g_string_append_printf (gstemp, "0x%2.2X ", ubuf[i]);
 
       set_caption_value (charmap->caption_model, 
                          charmap->caption_rows[CHARMAP_CAPTION_UTF8],
