@@ -1,5 +1,5 @@
 # Serbian translation of gucharmap
-# Courtesy of Prevod.org team (http://www.prevod.org/) -- 2003.
+# Courtesy of Prevod.org team (http://www.prevod.org/) -- 2003, 2004.
 #
 # This file is distributed under the same license as the gucharmap package.
 #
@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-14 09:00+0100\n"
-"PO-Revision-Date: 2004-01-14 09:01+0100\n"
+"POT-Creation-Date: 2004-02-01 20:21+0100\n"
+"PO-Revision-Date: 2004-02-01 20:22+0100\n"
 "Last-Translator: Данило Шеган <dsegan@gmx.net>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nognu.org>\n"
 "MIME-Version: 1.0\n"
@@ -18,8 +18,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. ID
-#: gucharmap.desktop.in.h:1 gucharmap/gucharmap-window.c:386
-#: gucharmap/gucharmap-window.c:919 gucharmap/imgucharmap.c:209
+#: gucharmap.desktop.in.h:1 gucharmap/gucharmap-window.c:261
+#: gucharmap/gucharmap-window.c:724 gucharmap/imgucharmap.c:207
 msgid "Character Map"
 msgstr "Таблица знакова"
 
@@ -27,398 +27,370 @@ msgstr "Таблица знакова"
 msgid "Insert special characters into documents"
 msgstr "Унесите нарочите знаке у документа"
 
-#: gucharmap/gucharmap-charmap.c:256
+#: gucharmap/gucharmap-charmap.c:250
 msgid "Canonical decomposition:"
 msgstr "Канонска декомпозиција:"
 
-#: gucharmap/gucharmap-charmap.c:296 gucharmap/gucharmap-table.c:310
+#: gucharmap/gucharmap-charmap.c:290 gucharmap/gucharmap-table.c:294
 msgid "[not a printable character]"
 msgstr "[знак без приказа]"
 
-#: gucharmap/gucharmap-charmap.c:310
+#: gucharmap/gucharmap-charmap.c:304
 msgid "General Character Properties"
 msgstr "Опште особине знака"
 
 #. character category
-#: gucharmap/gucharmap-charmap.c:313
+#: gucharmap/gucharmap-charmap.c:307
 msgid "Unicode category:"
 msgstr "Уникод категорија:"
 
-#: gucharmap/gucharmap-charmap.c:319
+#: gucharmap/gucharmap-charmap.c:313
 msgid "Various Useful Representations"
 msgstr "Разни начини приказа"
 
-#: gucharmap/gucharmap-charmap.c:328
+#: gucharmap/gucharmap-charmap.c:322
 msgid "UTF-8:"
 msgstr "УТФ-8:"
 
-#: gucharmap/gucharmap-charmap.c:336
+#: gucharmap/gucharmap-charmap.c:330
 msgid "Octal escaped UTF-8:"
 msgstr "Октално истакнута УТФ-8:"
 
-#: gucharmap/gucharmap-charmap.c:342
+#: gucharmap/gucharmap-charmap.c:336
 msgid "Decimal entity reference:"
 msgstr "Децимални ентитети:"
 
-#: gucharmap/gucharmap-charmap.c:348
+#: gucharmap/gucharmap-charmap.c:342
 msgid "Annotations and Cross References"
 msgstr "Прибелешке и међу-референце"
 
-#: gucharmap/gucharmap-charmap.c:355
+#: gucharmap/gucharmap-charmap.c:349
 msgid "Alias names:"
 msgstr "Друга имена:"
 
-#: gucharmap/gucharmap-charmap.c:364
+#: gucharmap/gucharmap-charmap.c:358
 msgid "Notes:"
 msgstr "Белешке:"
 
-#: gucharmap/gucharmap-charmap.c:373
+#: gucharmap/gucharmap-charmap.c:367
 msgid "See also:"
 msgstr "Видети такође:"
 
-#: gucharmap/gucharmap-charmap.c:382
+#: gucharmap/gucharmap-charmap.c:376
 msgid "Approximate equivalents:"
 msgstr "Приближни еквиваленти:"
 
-#: gucharmap/gucharmap-charmap.c:391
+#: gucharmap/gucharmap-charmap.c:385
 msgid "Equivalents:"
 msgstr "Еквиваленти:"
 
-#: gucharmap/gucharmap-charmap.c:406
+#: gucharmap/gucharmap-charmap.c:400
 msgid "CJK Ideograph Information"
 msgstr "Подаци о CJK идеограму"
 
-#: gucharmap/gucharmap-charmap.c:411
+#: gucharmap/gucharmap-charmap.c:405
 msgid "Definition in English:"
 msgstr "Дефиниција на енглеском:"
 
-#: gucharmap/gucharmap-charmap.c:416
+#: gucharmap/gucharmap-charmap.c:410
 msgid "Mandarin Pronunciation:"
 msgstr "Мандарински изговор:"
 
-#: gucharmap/gucharmap-charmap.c:421
+#: gucharmap/gucharmap-charmap.c:415
 msgid "Japanese On Pronunciation:"
 msgstr "Јапански Он изговор:"
 
-#: gucharmap/gucharmap-charmap.c:426
+#: gucharmap/gucharmap-charmap.c:420
 msgid "Japanese Kun Pronunciation:"
 msgstr "Јапански Кун изговор:"
 
-#: gucharmap/gucharmap-charmap.c:431
+#: gucharmap/gucharmap-charmap.c:425
 msgid "Tang Pronunciation:"
 msgstr "Танг изговор:"
 
-#: gucharmap/gucharmap-charmap.c:436
+#: gucharmap/gucharmap-charmap.c:430
 msgid "Korean Pronunciation:"
 msgstr "Корејски изговор:"
 
-#: gucharmap/gucharmap-charmap.c:736
+#: gucharmap/gucharmap-charmap.c:730
 msgid "Characte_r Table"
 msgstr "Таблица _знакова"
 
-#: gucharmap/gucharmap-charmap.c:739
+#: gucharmap/gucharmap-charmap.c:733
 msgid "Character _Details"
 msgstr "_Детаљи о знаку"
 
-#: gucharmap/gucharmap-mini-fontsel.c:208
+#: gucharmap/gucharmap-mini-fontsel.c:203
 msgid "Font"
 msgstr "Фонт"
 
-#: gucharmap/gucharmap-mini-fontsel.c:215
+#: gucharmap/gucharmap-mini-fontsel.c:210
 msgid "Font Family"
 msgstr "Породица фонта"
 
-#: gucharmap/gucharmap-mini-fontsel.c:235
+#: gucharmap/gucharmap-mini-fontsel.c:230
 msgid "Font Size"
 msgstr "Величина фонта"
 
 #. Unicode assigns "Common" as the script name for any character not
 #. * specifically listed in Scripts.txt
-#: gucharmap/gucharmap-script-codepoint-list.c:71
+#: gucharmap/gucharmap-script-codepoint-list.c:458
 #: gucharmap/unicode-scripts.h:20
 msgid "Common"
 msgstr "Заједнички"
 
-#: gucharmap/gucharmap-table.c:1319
-msgid "Clipboard is empty."
-msgstr "Списак исечака је празан."
-
-#: gucharmap/gucharmap-table.c:1321
-msgid "There is no selected text."
-msgstr "Текст није изабран."
-
-#: gucharmap/gucharmap-table.c:1328
-msgid "Unknown character in clipboard, unable to identify."
-msgstr "Непознат знак међу исечцима, не могу да препознам."
-
-#: gucharmap/gucharmap-table.c:1330
-msgid "First character in clipboard not found."
-msgstr "Први знак у списку исечака није нађен."
-
-#: gucharmap/gucharmap-table.c:1333 gucharmap/gucharmap-table.c:1578
-msgid "Character found."
-msgstr "Знак је нађен."
-
-#: gucharmap/gucharmap-table.c:1573
+#: gucharmap/gucharmap-table.c:1531
 msgid "Unknown character, unable to identify."
 msgstr "Непознат знак, не може да препозна."
 
-#: gucharmap/gucharmap-table.c:1575 gucharmap/gucharmap-window.c:213
+#: gucharmap/gucharmap-table.c:1533 gucharmap/gucharmap-search-dialog.c:418
 msgid "Not found."
 msgstr "Није нађен."
 
-#: gucharmap/gucharmap-table.c:1643
+#: gucharmap/gucharmap-table.c:1536
+msgid "Character found."
+msgstr "Знак је нађен."
+
+#: gucharmap/gucharmap-table.c:1600
 msgid "Character Table"
 msgstr "Таблица знакова"
 
-#: gucharmap/gucharmap-unicode-info.c:96
+#: gucharmap/gucharmap-unicode-info.c:94
 msgid "<Non Private Use High Surrogate>"
 msgstr "<Висока замена из неприватног опсега>"
 
-#: gucharmap/gucharmap-unicode-info.c:98
+#: gucharmap/gucharmap-unicode-info.c:96
 msgid "<Private Use High Surrogate>"
 msgstr "<Висока замена из приватног опсега>"
 
-#: gucharmap/gucharmap-unicode-info.c:100
+#: gucharmap/gucharmap-unicode-info.c:98
 msgid "<Low Surrogate>"
 msgstr "<Ниске замене>"
 
-#: gucharmap/gucharmap-unicode-info.c:102
+#: gucharmap/gucharmap-unicode-info.c:100
 msgid "<Private Use>"
 msgstr "<Приватан опсег>"
 
-#: gucharmap/gucharmap-unicode-info.c:104
+#: gucharmap/gucharmap-unicode-info.c:102
 msgid "<Plane 15 Private Use>"
 msgstr "<Приватан опсег 15. равни>"
 
-#: gucharmap/gucharmap-unicode-info.c:106
+#: gucharmap/gucharmap-unicode-info.c:104
 msgid "<Plane 16 Private Use>"
 msgstr "<Приватан опсег 16. равни>"
 
-#: gucharmap/gucharmap-unicode-info.c:111
+#: gucharmap/gucharmap-unicode-info.c:109
 msgid "<not assigned>"
 msgstr "<није додељено>"
 
-#: gucharmap/gucharmap-unicode-info.c:122
+#: gucharmap/gucharmap-unicode-info.c:120
 msgid "Other, Control"
 msgstr "Остали, контролни"
 
-#: gucharmap/gucharmap-unicode-info.c:123
+#: gucharmap/gucharmap-unicode-info.c:121
 msgid "Other, Format"
 msgstr "Остали, приказни"
 
-#: gucharmap/gucharmap-unicode-info.c:124
+#: gucharmap/gucharmap-unicode-info.c:122
 msgid "Other, Not Assigned"
 msgstr "Остали, недодељени"
 
-#: gucharmap/gucharmap-unicode-info.c:125
+#: gucharmap/gucharmap-unicode-info.c:123
 msgid "Other, Private Use"
 msgstr "Остали, приватни опсег"
 
-#: gucharmap/gucharmap-unicode-info.c:126
+#: gucharmap/gucharmap-unicode-info.c:124
 msgid "Other, Surrogate"
 msgstr "Остали, замене"
 
-#: gucharmap/gucharmap-unicode-info.c:127
+#: gucharmap/gucharmap-unicode-info.c:125
 msgid "Letter, Lowercase"
 msgstr "Слова, мала"
 
-#: gucharmap/gucharmap-unicode-info.c:128
+#: gucharmap/gucharmap-unicode-info.c:126
 msgid "Letter, Modifier"
 msgstr "Слова, измењивачи"
 
-#: gucharmap/gucharmap-unicode-info.c:129
+#: gucharmap/gucharmap-unicode-info.c:127
 msgid "Letter, Other"
 msgstr "Слова, остала"
 
-#: gucharmap/gucharmap-unicode-info.c:130
+#: gucharmap/gucharmap-unicode-info.c:128
 msgid "Letter, Titlecase"
 msgstr "Слова, насловна"
 
-#: gucharmap/gucharmap-unicode-info.c:131
+#: gucharmap/gucharmap-unicode-info.c:129
 msgid "Letter, Uppercase"
 msgstr "Слова, велика"
 
-#: gucharmap/gucharmap-unicode-info.c:132
+#: gucharmap/gucharmap-unicode-info.c:130
 msgid "Mark, Spacing Combining"
 msgstr "Ознака, размаци"
 
-#: gucharmap/gucharmap-unicode-info.c:133
+#: gucharmap/gucharmap-unicode-info.c:131
 msgid "Mark, Enclosing"
 msgstr "Ознака, укључујућа"
 
-#: gucharmap/gucharmap-unicode-info.c:134
+#: gucharmap/gucharmap-unicode-info.c:132
 msgid "Mark, Non-Spacing"
 msgstr "Ознака, без размака"
 
-#: gucharmap/gucharmap-unicode-info.c:135
+#: gucharmap/gucharmap-unicode-info.c:133
 msgid "Number, Decimal Digit"
 msgstr "Број, децимална цифра"
 
-#: gucharmap/gucharmap-unicode-info.c:136
+#: gucharmap/gucharmap-unicode-info.c:134
 msgid "Number, Letter"
 msgstr "Број, слово"
 
-#: gucharmap/gucharmap-unicode-info.c:137
+#: gucharmap/gucharmap-unicode-info.c:135
 msgid "Number, Other"
 msgstr "Број, остало"
 
-#: gucharmap/gucharmap-unicode-info.c:138
+#: gucharmap/gucharmap-unicode-info.c:136
 msgid "Punctuation, Connector"
 msgstr "Интерпункција, спајање"
 
-#: gucharmap/gucharmap-unicode-info.c:139
+#: gucharmap/gucharmap-unicode-info.c:137
 msgid "Punctuation, Dash"
 msgstr "Интерпункција, црта"
 
-#: gucharmap/gucharmap-unicode-info.c:140
+#: gucharmap/gucharmap-unicode-info.c:138
 msgid "Punctuation, Close"
 msgstr "Интерпункција, затварање"
 
-#: gucharmap/gucharmap-unicode-info.c:141
+#: gucharmap/gucharmap-unicode-info.c:139
 msgid "Punctuation, Final Quote"
 msgstr "Интерпункција, завршни наводник"
 
-#: gucharmap/gucharmap-unicode-info.c:142
+#: gucharmap/gucharmap-unicode-info.c:140
 msgid "Punctuation, Initial Quote"
 msgstr "Интерпункција, почетни наводник"
 
-#: gucharmap/gucharmap-unicode-info.c:143
+#: gucharmap/gucharmap-unicode-info.c:141
 msgid "Punctuation, Other"
 msgstr "Интерпункција, остало"
 
-#: gucharmap/gucharmap-unicode-info.c:144
+#: gucharmap/gucharmap-unicode-info.c:142
 msgid "Punctuation, Open"
 msgstr "Интерпункција, отварање"
 
-#: gucharmap/gucharmap-unicode-info.c:145
+#: gucharmap/gucharmap-unicode-info.c:143
 msgid "Symbol, Currency"
 msgstr "Симбол, валута"
 
-#: gucharmap/gucharmap-unicode-info.c:146
+#: gucharmap/gucharmap-unicode-info.c:144
 msgid "Symbol, Modifier"
 msgstr "Симбол, измењивач"
 
-#: gucharmap/gucharmap-unicode-info.c:147
+#: gucharmap/gucharmap-unicode-info.c:145
 msgid "Symbol, Math"
 msgstr "Симбол, математички"
 
-#: gucharmap/gucharmap-unicode-info.c:148
+#: gucharmap/gucharmap-unicode-info.c:146
 msgid "Symbol, Other"
 msgstr "Симбол, остало"
 
-#: gucharmap/gucharmap-unicode-info.c:149
+#: gucharmap/gucharmap-unicode-info.c:147
 msgid "Separator, Line"
 msgstr "Разделник, линија"
 
-#: gucharmap/gucharmap-unicode-info.c:150
+#: gucharmap/gucharmap-unicode-info.c:148
 msgid "Separator, Paragraph"
 msgstr "Разделник, пасус"
 
-#: gucharmap/gucharmap-unicode-info.c:151
+#: gucharmap/gucharmap-unicode-info.c:149
 msgid "Separator, Space"
 msgstr "Разделник, размак"
 
-#: gucharmap/gucharmap-window.c:54
-msgid "Information"
-msgstr "Подаци"
+#: gucharmap/gucharmap-window.c:127
+msgid "Searching..."
+msgstr "Тражим..."
 
-#: gucharmap/gucharmap-window.c:123 gucharmap/gucharmap-window.c:217
-#: gucharmap/gucharmap-window.c:227
-msgid "Nothing to search for."
-msgstr "Нема шта да тражи."
-
-#: gucharmap/gucharmap-window.c:269
-msgid "Find"
-msgstr "Пронађи"
-
-#: gucharmap/gucharmap-window.c:282
-msgid "_Search:"
-msgstr "_Претрага:"
-
-#: gucharmap/gucharmap-window.c:379
+#: gucharmap/gucharmap-window.c:256
 msgid "translator_credits"
 msgstr ""
 "Данило Шеган <danilo@prevod.org>\n"
 "\n"
-"http://www.Prevod.org/"
+"Prevod.org — превод на српски језик"
 
-#: gucharmap/gucharmap-window.c:538
+#: gucharmap/gucharmap-window.c:380
 msgid "_File"
 msgstr "_Датотека"
 
-#: gucharmap/gucharmap-window.c:540
+#: gucharmap/gucharmap-window.c:382
 msgid "_View"
 msgstr "П_реглед"
 
-#: gucharmap/gucharmap-window.c:542
+#: gucharmap/gucharmap-window.c:384
 msgid "_Search"
 msgstr "_Претрага"
 
-#: gucharmap/gucharmap-window.c:544
+#: gucharmap/gucharmap-window.c:386
 msgid "_Go"
 msgstr "_Иди"
 
-#. ctrl-+ or ctrl-=
-#: gucharmap/gucharmap-window.c:565
+#: gucharmap/gucharmap-window.c:405
+msgid "By _Script"
+msgstr "Према _писму"
+
+#: gucharmap/gucharmap-window.c:411
+msgid "By _Unicode Block"
+msgstr "Према _Уникод блоку"
+
+#: gucharmap/gucharmap-window.c:419
+msgid "Snap Columns to Power of Two"
+msgstr "Приказуј број колона који је степен двојке"
+
+#. ctrl-+
+#: gucharmap/gucharmap-window.c:427
 msgid "Zoom _In"
 msgstr "У_већај"
 
 #. ctrl--
-#: gucharmap/gucharmap-window.c:577
+#: gucharmap/gucharmap-window.c:437
 msgid "Zoom _Out"
 msgstr "У_мањи"
 
-#: gucharmap/gucharmap-window.c:589
-msgid "Snap Columns to Power of Two"
-msgstr "Приказуј број колона који је степен двојке"
+#. ctrl-=
+#: gucharmap/gucharmap-window.c:447
+msgid "_Normal Size"
+msgstr "_Обична величина"
 
-#: gucharmap/gucharmap-window.c:597
-msgid "By _Script"
-msgstr "Према _писму"
-
-#: gucharmap/gucharmap-window.c:603
-msgid "By _Unicode Block"
-msgstr "Према _Уникод блоку"
-
-#: gucharmap/gucharmap-window.c:613
+#: gucharmap/gucharmap-window.c:461
 msgid "_Find..."
 msgstr "_Нађи..."
 
-#: gucharmap/gucharmap-window.c:623
+#: gucharmap/gucharmap-window.c:469
 msgid "Find _Next"
 msgstr "Нађи _следећи"
 
-#: gucharmap/gucharmap-window.c:633
+#: gucharmap/gucharmap-window.c:478
 msgid "Find _Previous"
 msgstr "Нађи _претходни"
 
-#: gucharmap/gucharmap-window.c:673
+#: gucharmap/gucharmap-window.c:495
 msgid "_Next Character"
 msgstr "_Следећи знак"
 
-#: gucharmap/gucharmap-window.c:680
+#: gucharmap/gucharmap-window.c:501
 msgid "_Previous Character"
 msgstr "_Претходни знак"
 
-#: gucharmap/gucharmap-window.c:690
-msgid "Character in _Clipboard"
-msgstr "Знак у _списак исечака"
-
 #. make the help menu
-#: gucharmap/gucharmap-window.c:704
+#: gucharmap/gucharmap-window.c:513
 msgid "_Help"
 msgstr "_Помоћ"
 
-#: gucharmap/gucharmap-window.c:783
+#: gucharmap/gucharmap-window.c:596
 msgid "_Text to copy:"
 msgstr "_Текст за копирање:"
 
-#: gucharmap/gucharmap-window.c:804
+#: gucharmap/gucharmap-window.c:617
 msgid "Copy to the clipboard."
 msgstr "Смести у списак исечака."
 
-#: gucharmap/main.c:41
+#: gucharmap/main.c:39
 msgid "Font to start with; ex: 'Serif 27'"
 msgstr "Фонт са којим треба почети; нпр. „Serif 27“"
 
@@ -963,17 +935,56 @@ msgstr "Линеар Б"
 msgid "Yi"
 msgstr "Ји"
 
-#: gucharmap/gucharmap-block-chapters.c:60
+#: gucharmap/gucharmap-block-chapters.c:61
 msgid "All"
 msgstr "Све"
 
-#: gucharmap/gucharmap-block-chapters.c:78
+#: gucharmap/gucharmap-block-chapters.c:79
 msgid "Unicode Block"
 msgstr "Уникод блог"
 
-#: gucharmap/gucharmap-script-chapters.c:74
+#: gucharmap/gucharmap-script-chapters.c:76
 msgid "Script"
 msgstr "Писмо"
+
+#: gucharmap/gucharmap-search-dialog.c:372
+msgid "Information"
+msgstr "Подаци"
+
+#. follow hig guidelines
+#: gucharmap/gucharmap-search-dialog.c:505
+msgid "Find"
+msgstr "Пронађи"
+
+#: gucharmap/gucharmap-search-dialog.c:516
+msgid "_Previous"
+msgstr "_Претходни"
+
+#: gucharmap/gucharmap-search-dialog.c:517
+msgid "_Next"
+msgstr "_Следећи"
+
+#: gucharmap/gucharmap-search-dialog.c:525
+msgid "_Search:"
+msgstr "_Претрага:"
+
+#~ msgid "Clipboard is empty."
+#~ msgstr "Списак исечака је празан."
+
+#~ msgid "There is no selected text."
+#~ msgstr "Текст није изабран."
+
+#~ msgid "Unknown character in clipboard, unable to identify."
+#~ msgstr "Непознат знак међу исечцима, не могу да препознам."
+
+#~ msgid "First character in clipboard not found."
+#~ msgstr "Први знак у списку исечака није нађен."
+
+#~ msgid "Nothing to search for."
+#~ msgstr "Нема шта да тражи."
+
+#~ msgid "Character in _Clipboard"
+#~ msgstr "Знак у _списак исечака"
 
 #~ msgid "Unicode Character Map"
 #~ msgstr "Мапа Уникод знакова"
