@@ -25,6 +25,8 @@
 #endif
 
 #include <gtk/gtk.h>
+#include <chartable.h>
+
 
 G_BEGIN_DECLS
 
@@ -78,6 +80,14 @@ typedef enum
   CHARMAP_CAPTION_DECOMPOSITION,
   CHARMAP_CAPTION_UTF8,
   CHARMAP_CAPTION_OTHER_REPS,
+
+  /* nameslist stuff */
+  CHARMAP_CAPTION_EQUALS,
+  CHARMAP_CAPTION_STARS,
+  CHARMAP_CAPTION_EXES,
+  CHARMAP_CAPTION_POUNDS,
+  CHARMAP_CAPTION_COLONS,
+
 #if ENABLE_UNIHAN
   CHARMAP_CAPTION_KDEFINITION,
   CHARMAP_CAPTION_KMANDARIN,
@@ -87,12 +97,6 @@ typedef enum
   CHARMAP_CAPTION_KTANG,
   CHARMAP_CAPTION_KKOREAN,
 #endif
-  /* nameslist stuff */
-  CHARMAP_CAPTION_EQUALS,
-  CHARMAP_CAPTION_STARS,
-  CHARMAP_CAPTION_EXES,
-  CHARMAP_CAPTION_POUNDS,
-  CHARMAP_CAPTION_COLONS,
 
   CHARMAP_CAPTION_COUNT
 }
@@ -103,24 +107,10 @@ struct _Charmap
 {
   GtkVBox parent;
 
+  Chartable *chartable;
+
   /* rows and columns on a page */
   gint rows, cols;
-
-  GtkWidget *chartable;         /* GtkDrawingArea */
-  GdkPixmap *chartable_pixmap; 
-  GtkWidget *zoom_window;
-  GdkPixbuf *zoom_pixbuf;
-
-  gchar *font_name;
-  PangoFontMetrics *font_metrics;
-  PangoLayout *pango_layout;
-
-  gunichar page_first_char;  /* the character in the upper left square */
-  gunichar active_char;
-
-  /* helps us know what to redraw */
-  gunichar old_page_first_char;
-  gunichar old_active_char;
 
   /* the unicode block selection list */
   GtkTreeSelection *block_selection;
@@ -131,15 +121,9 @@ struct _Charmap
   BlockIndex *block_index;
   gint block_index_size;
 
-  /* for the scrollbar */
-  GtkObject *adjustment; 
-  gulong adjustment_changed_handler_id; 
-
   /* the caption */
   GtkTreeRowReference *caption_rows[CHARMAP_CAPTION_COUNT];
   GtkTreeStore *caption_model;
-
-  gboolean zoom_mode_enabled;
 };
 
 
@@ -147,9 +131,7 @@ struct _CharmapClass
 {
   GtkVBoxClass parent_class;
 
-  void (* activate) (Charmap *charmap, gunichar uc);
   void (* status_message) (Charmap *charmap, gchar *message);
-  void (* set_active_char) (Charmap *charmap, guint ch);
 };
 
 

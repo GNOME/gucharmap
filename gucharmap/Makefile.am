@@ -34,6 +34,7 @@ libgucharmap_la_SOURCES = gucharmap_marshal.c gucharmap_marshal.h \
                           gucharmap_intl.c gucharmap_intl.h \
                           chartable_accessible.c chartable_accessible.h \
                           charcell_accessible.c charcell_accessible.h \
+                          chartable.c chartable.h \
                           mini_fontsel.c mini_fontsel.h
 
 
@@ -71,7 +72,8 @@ libgucharmap_la_LDFLAGS = -version-info 1:0:0
 
 
 libgucharmapincludedir = $(includedir)/gucharmap
-libgucharmapinclude_HEADERS = charmap.h unicode_info.h mini_fontsel.h
+libgucharmapinclude_HEADERS = charmap.h chartable.h unicode_info.h \
+                              mini_fontsel.h
 
 
 bin_PROGRAMS = gucharmap

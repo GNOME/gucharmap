@@ -651,7 +651,8 @@ make_gnome_help_menu ()
 static void
 fontsel_changed (MiniFontSelection *fontsel, Charmap *charmap)
 {
-  charmap_set_font (charmap, mini_font_selection_get_font_name (fontsel));
+  chartable_set_font (charmap->chartable, 
+                      mini_font_selection_get_font_name (fontsel));
 }
 
 
@@ -998,16 +999,14 @@ make_gui (GtkWidget *window)
   gtk_widget_show (status);
 
   g_signal_connect (fontsel, "changed", G_CALLBACK (fontsel_changed), charmap);
-  g_signal_connect (charmap, "activate", 
+  g_signal_connect (CHARMAP (charmap)->chartable, "activate", 
                     G_CALLBACK (append_character_to_text_to_copy), NULL);
   g_signal_connect (charmap, "status-message",
                     G_CALLBACK (status_message), NULL);
 
   gtk_widget_show (big_vbox);
 
-  /* XXX: slightly evil cuz we're not supposed to know about chartable */
-  gtk_widget_grab_focus (CHARMAP (charmap)->chartable);
-
+  chartable_grab_focus (CHARMAP (charmap)->chartable);
 }
 
 
@@ -1022,7 +1021,7 @@ load_icon (GtkWidget *window)
 
   package_root = g_win32_get_package_installation_directory (NULL, NULL);
   icon_path = g_build_filename (package_root, "share", 
-          "pixmaps", "gucharmap.png");
+                                "pixmaps", "gucharmap.png");
   icon = gdk_pixbuf_new_from_file (icon_path, &error);
   g_free (package_root);
   g_free (icon_path);
