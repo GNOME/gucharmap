@@ -596,7 +596,7 @@ gucharmap_search_dialog_init (GucharmapSearchDialog *search_dialog)
   gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (search_dialog)->vbox), 12);
   gtk_window_set_resizable (GTK_WINDOW (search_dialog), FALSE);
 
-  g_signal_connect (search_dialog, "delete-event", G_CALLBACK (gtk_widget_hide), NULL);
+  g_signal_connect (search_dialog, "delete-event", G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 
   /* add buttons */
   gtk_dialog_add_button (GTK_DIALOG (search_dialog), GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
