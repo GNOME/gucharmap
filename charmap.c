@@ -452,6 +452,7 @@ button_press_event (GtkWidget *widget,
   Charmap *charmap = CHARMAP (callback_data);
   gunichar old_active_char;
 
+  /* in case we lost keyboard focus and are clicking to get it back */
   gtk_widget_grab_focus (charmap->tabulus);
 
   /* double-click */
@@ -472,9 +473,6 @@ button_press_event (GtkWidget *widget,
           expose_char_for_redraw (charmap, charmap->active_char);
           expose_char_for_redraw (charmap, old_active_char);
         }
-
-      /* in case we lost keyboard focus and are clicking to get it back */
-      gtk_widget_grab_focus (charmap->tabulus);
     }
 
   return TRUE;
