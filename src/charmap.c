@@ -1477,6 +1477,12 @@ size_allocate (GtkWidget *widget, GtkAllocation *allocation, Charmap *charmap)
   charmap->rows = (allocation->height - 1)
                   / (calculate_square_dimension_y (charmap->font_metrics) + 1);
 
+  /* avoid a horrible floating point exception crash */
+  if (charmap->rows < 1)
+    charmap->rows = 1;
+  if (charmap->cols < 1)
+    charmap->cols = 1;
+
   if (charmap->rows == old_rows && charmap->cols == old_cols)
     return;
 
