@@ -303,14 +303,14 @@ help_about (GtkWidget       *widget,
     {
       const gchar *authors[] = 
         { 
-          "Noah Levitt <nlevitt columbia edu>", 
-          "Daniel Elstner <daniel.elstner gmx net>", 
-          "Padraig O'Briain <Padraig.Obriain sun com>",
+          "Noah Levitt <nlevitt@columbia.edu>", 
+          "Daniel Elstner <daniel.elstner@gmx.net>", 
+          "Padraig O'Briain <Padraig.Obriain@sun.com>",
           NULL 
         };
       const gchar *documenters[] =
 	{
-	  "Chee Bin HOH <cbhoh gnome org>",
+	  "Chee Bin HOH <cbhoh@gnome.org>",
           "Sun Microsystems",
           NULL
 	};	  
@@ -320,7 +320,7 @@ help_about (GtkWidget       *widget,
       if (strcmp (translator_credits, "translator_credits") == 0)
         translator_credits = NULL;
 
-      about = gnome_about_new ("gucharmap", VERSION, "Copyright © 2004 Noah Levitt <nlevitt columbia edu>",
+      about = gnome_about_new ("gucharmap", VERSION, "Copyright © 2004 Noah Levitt <nlevitt@columbia.edu>",
                                _("Character Map"), authors, documenters, translator_credits, priv->icon);
 
       /* set the widget pointer to NULL when the widget is destroyed */
