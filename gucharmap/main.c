@@ -337,7 +337,7 @@ jump_code_point_response (GtkDialog *dialog, gint response, EntryAndLabel *eal)
 
       l = strtol (text, &endptr, 16);
 
-      if (endptr != text && l >= 0 && l <= UNICHAR_MAX)
+      if (*text != '\0' && *endptr == '\0' && l >= 0 && l <= UNICHAR_MAX)
         charmap_go_to_character (CHARMAP (charmap), (gunichar) l);
       else
         {
