@@ -2,16 +2,14 @@
 
 #ifndef GUCHARMAP_INTL_H
 
-#if HAVE_CONFIG_H
-# include "config.h"
-#endif
+#include "config.h"
 
 #undef _
 #undef N_
 
 #ifdef ENABLE_NLS
 
-gchar * gucharmap_gettext (const gchar *str);
+char * gucharmap_gettext (const char *str);
 
 # include <libintl.h>
 

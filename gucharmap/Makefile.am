@@ -43,6 +43,7 @@ libgucharmap_la_SOURCES = gucharmap-marshal.c gucharmap-marshal.h \
 			  gucharmap-script-codepoint-list.c gucharmap-script-codepoint-list.h \
 			  gucharmap-chapters.c gucharmap-chapters.h \
 			  gucharmap-block-chapters.c gucharmap-block-chapters.h \
+			  gucharmap-script-chapters.c gucharmap-script-chapters.h \
 			  unicode-blocks.h unicode-categories.h unicode-names.h \
 			  unicode-nameslist.h unicode-scripts.h unicode-unihan.h
 

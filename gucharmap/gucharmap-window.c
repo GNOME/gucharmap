@@ -479,6 +479,22 @@ next_character (GtkWidget       *button,
   gucharmap_table_set_active_character (guw->charmap->chartable, wc);
 }
 
+static void
+view_by_script (GtkCheckMenuItem *check_menu_item,
+                GucharmapWindow  *guw)
+{
+  if (gtk_check_menu_item_get_active (check_menu_item))
+    gucharmap_charmap_set_chapters (guw->charmap, GUCHARMAP_CHAPTERS (gucharmap_script_chapters_new ()));
+}
+
+static void
+view_by_block (GtkCheckMenuItem *check_menu_item,
+                GucharmapWindow  *guw)
+{
+  if (gtk_check_menu_item_get_active (check_menu_item))
+    gucharmap_charmap_set_chapters (guw->charmap, GUCHARMAP_CHAPTERS (gucharmap_block_chapters_new ()));
+}
+
 static GtkWidget *
 make_menu (GucharmapWindow *guw)
 {
@@ -490,6 +506,7 @@ make_menu (GucharmapWindow *guw)
   GtkWidget *help_menu_item;
 #endif
   guint forward_keysym, back_keysym;
+  GSList *group = NULL; 
 
   if (gtk_widget_get_direction (GTK_WIDGET (guw)) == GTK_TEXT_DIR_RTL)
     {
@@ -564,6 +581,19 @@ make_menu (GucharmapWindow *guw)
                     G_CALLBACK (snap_cols_pow2), guw);
   gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), menu_item);
 
+  /* separator */
+  gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), gtk_menu_item_new ());
+
+  menu_item = gtk_radio_menu_item_new_with_mnemonic (group, _("By _Script"));
+  gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item), FALSE);
+  gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), menu_item);
+  g_signal_connect (menu_item, "toggled", G_CALLBACK (view_by_script), guw);
+  group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (menu_item));
+
+  menu_item = gtk_radio_menu_item_new_with_mnemonic (group, _("By _Unicode Block"));
+  gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item), FALSE);
+  gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), menu_item);
+  g_signal_connect (menu_item, "toggled", G_CALLBACK (view_by_block), guw);
 
   /* make the search menu */
   search_menu = gtk_menu_new ();

@@ -20,7 +20,7 @@
 #include "config.h"
 #include <glib.h>
 #include <string.h>
-#include <gucharmap/gucharmap-script-codepoint-list.h>
+#include "gucharmap-script-codepoint-list.h"
 #include "unicode-scripts.h"
 
 typedef struct
@@ -152,8 +152,6 @@ get_char (GucharmapCodepointList *list,
   ScriptCodepointListPrivate *priv = GUCHARMAP_SCRIPT_CODEPOINT_LIST_GET_PRIVATE (guscl);
   gint min, mid, max;
 
-  /* g_print ("GucharmapScriptCodepointList::get_char: index = %u\n", index); */
-
   ensure_initialized (guscl);
 
   min = 0;
@@ -180,8 +178,6 @@ get_index (GucharmapCodepointList *list,
   GucharmapScriptCodepointList *guscl = GUCHARMAP_SCRIPT_CODEPOINT_LIST (list);
   ScriptCodepointListPrivate *priv = GUCHARMAP_SCRIPT_CODEPOINT_LIST_GET_PRIVATE (guscl);
   gint min, mid, max;
-
-  /* g_print ("GucharmapScriptCodepointList::get_index: wc = %04X\n", wc); */
 
   ensure_initialized (guscl);
 
@@ -211,8 +207,6 @@ get_last_index (GucharmapCodepointList *list)
   GucharmapScriptCodepointList *guscl = GUCHARMAP_SCRIPT_CODEPOINT_LIST (list);
   ScriptCodepointListPrivate *priv = GUCHARMAP_SCRIPT_CODEPOINT_LIST_GET_PRIVATE (guscl);
 
-  /* g_print ("GucharmapScriptCodepointList::get_last_index\n"); */
-
   ensure_initialized (guscl);
 
   return priv->ranges[priv->n_ranges-1].index + priv->ranges[priv->n_ranges-1].end - priv->ranges[priv->n_ranges-1].start;
@@ -236,8 +230,6 @@ gucharmap_script_codepoint_list_class_init (GucharmapScriptCodepointListClass *c
 {
   GucharmapCodepointListClass *codepoint_list_class = GUCHARMAP_CODEPOINT_LIST_CLASS (clazz);
   GObjectClass *gobject_class = G_OBJECT_CLASS (clazz);
-
-  /* g_print ("gucharmap_script_codepoint_list_class_init\n"); */
 
   g_type_class_add_private (codepoint_list_class, sizeof (ScriptCodepointListPrivate));
 
@@ -296,7 +288,6 @@ gucharmap_script_codepoint_list_get_type ()
 GucharmapCodepointList * 
 gucharmap_script_codepoint_list_new ()
 {
-  g_print ("gucharmap_script_codepoint_list_new\n");
   return GUCHARMAP_CODEPOINT_LIST (g_object_new (gucharmap_script_codepoint_list_get_type (), NULL));
 }
 

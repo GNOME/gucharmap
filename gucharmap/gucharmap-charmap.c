@@ -26,7 +26,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <gucharmap/gucharmap.h>
+#include "gucharmap-charmap.h"
+#include "gucharmap-unicode-info.h"
+#include "gucharmap-script-chapters.h"
 #include "gucharmap_intl.h"
 #include "gucharmap-marshal.h"
 #include "chartable_accessible.h"
@@ -756,7 +758,7 @@ gucharmap_charmap_init (GucharmapCharmap *charmap)
   charmap->regular_cursor = gdk_cursor_new (GDK_XTERM);
   charmap->hovering_over_link = FALSE;
 
-  chapters = gucharmap_block_chapters_new ();
+  chapters = gucharmap_script_chapters_new ();
   gtk_widget_show (chapters);
 
   g_signal_connect (G_OBJECT (chapters), "changed", G_CALLBACK (chapter_changed), charmap);
@@ -871,22 +873,19 @@ gucharmap_charmap_search (GucharmapCharmap *charmap,
   return result;
 }
 
-void
-gucharmap_charmap_zoom_enable (GucharmapCharmap *charmap)
-{
-  gucharmap_table_zoom_enable (charmap->chartable);
-}
-
-void
-gucharmap_charmap_zoom_disable (GucharmapCharmap *charmap)
-{
-  gucharmap_table_zoom_disable (charmap->chartable);
-}
-
 GucharmapTable *
 gucharmap_charmap_get_chartable (GucharmapCharmap *charmap)
 {
   return charmap->chartable;
 }
 
-
+void
+gucharmap_charmap_set_chapters (GucharmapCharmap  *charmap,
+                                GucharmapChapters *chapters)
+{
+  gtk_container_remove (GTK_CONTAINER (charmap), GTK_PANED (charmap)->child1);
+  gtk_paned_pack1 (GTK_PANED (charmap), GTK_WIDGET (chapters), FALSE, TRUE);
+  gucharmap_table_set_codepoint_list (charmap->chartable, gucharmap_chapters_get_codepoint_list (chapters));
+  g_signal_connect (G_OBJECT (chapters), "changed", G_CALLBACK (chapter_changed), charmap);
+  gtk_widget_show (GTK_WIDGET (chapters));
+}

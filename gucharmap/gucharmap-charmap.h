@@ -21,7 +21,8 @@
 #define GUCHARMAP_CHARMAP_H
 
 #include <gtk/gtk.h>
-#include <gucharmap/gucharmap-table.h>
+#include "gucharmap-table.h"
+#include "gucharmap-chapters.h"
 
 
 G_BEGIN_DECLS
@@ -78,22 +79,20 @@ struct _GucharmapCharmapClass
 };
 
 
-GType gucharmap_charmap_get_type (void);
-GtkWidget * gucharmap_charmap_new (void);
-void gucharmap_charmap_set_font (GucharmapCharmap *charmap, 
-                                 const gchar *font_name);
-void gucharmap_charmap_identify_clipboard (GucharmapCharmap *charmap, 
-                                           GtkClipboard *clipboard);
-void gucharmap_charmap_expand_block_selector (GucharmapCharmap *charmap);
-void gucharmap_charmap_collapse_block_selector (GucharmapCharmap *charmap);
-void gucharmap_charmap_go_to_character (GucharmapCharmap *charmap, 
-                                        gunichar uc);
-GucharmapSearchResult gucharmap_charmap_search (GucharmapCharmap *charmap, 
-                                                const gchar *search_text, 
-                                                gint direction);
-void gucharmap_charmap_zoom_enable (GucharmapCharmap *charmap);
-void gucharmap_charmap_zoom_disable (GucharmapCharmap *charmap);
-GucharmapTable * gucharmap_charmap_get_chartable (GucharmapCharmap *charmap);
+GType                 gucharmap_charmap_get_type           (void);
+GtkWidget *           gucharmap_charmap_new                (void);
+void                  gucharmap_charmap_set_font           (GucharmapCharmap  *charmap, 
+                                                            const gchar       *font_name);
+void                  gucharmap_charmap_identify_clipboard (GucharmapCharmap  *charmap, 
+                                                            GtkClipboard      *clipboard);
+void                  gucharmap_charmap_go_to_character    (GucharmapCharmap  *charmap, 
+                                                            gunichar           uc);
+GucharmapSearchResult gucharmap_charmap_search             (GucharmapCharmap  *charmap, 
+                                                            const gchar       *search_text, 
+                                                            gint               direction);
+GucharmapTable *      gucharmap_charmap_get_chartable      (GucharmapCharmap  *charmap);
+void                  gucharmap_charmap_set_chapters       (GucharmapCharmap  *charmap,
+                                                            GucharmapChapters *chapters);
 
 G_END_DECLS
 

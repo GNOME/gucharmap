@@ -29,5 +29,6 @@
 #include <gucharmap/gucharmap-script-codepoint-list.h>
 #include <gucharmap/gucharmap-chapters.h>
 #include <gucharmap/gucharmap-block-chapters.h>
+#include <gucharmap/gucharmap-script-chapters.h>
 
 #endif /* #ifndef GUCHARMAP_H */
