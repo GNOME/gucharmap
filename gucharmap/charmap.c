@@ -592,84 +592,6 @@ draw_and_expose_character_square (Charmap *charmap, gunichar uc)
 }
 
 
-#if 0
-/* copies the portion of the chartable that is on the new and old to its new
- * position */
-static void
-shift_area (Charmap *charmap, gint row_offset)
-{
-  gint rows;
-  gint square_width, square_height;
-  gint area_height;
-  gint ysrc, ydest;
-
-  square_width = calculate_square_dimension_x (charmap->font_metrics);
-  square_height = calculate_square_dimension_y (charmap->font_metrics);
-
-  rows = charmap->rows - abs (row_offset);
-  area_height = rows * (square_height + 1) + 1;
-
-  if (row_offset > 0) /* moving up */
-    {
-      ysrc = charmap->chartable->allocation.height - area_height;
-      ydest = 0;
-    }
-  else /* moving down */
-    {
-      ysrc = 0;
-      ydest = charmap->chartable->allocation.height - area_height;
-    }
-
-  gdk_draw_drawable (charmap->chartable_pixmap,
-                     charmap->chartable->style->base_gc[GTK_STATE_NORMAL], 
-                     charmap->chartable_pixmap, 0, ysrc, 0, ydest,
-                     charmap->chartable->allocation.width, area_height);
-}
-
-
-/* Redraws the squares in the rows that are newly on the chartable, based on
- * row_offset; also redraws the active and old_active squares as
- * appropriate. */
-static void
-draw_squares_after_shift (Charmap *charmap, gint row_offset)
-{
-  gint row, col, start_row, end_row;
-
-  if (row_offset > 0) 
-    {
-      start_row = charmap->rows - row_offset;
-      end_row = charmap->rows - 1;
-    }
-  else
-    {
-      start_row = 0;
-      end_row = -row_offset - 1;
-    }
-
-  for (row = start_row;  row <= end_row;  row++)
-    for (col = 0;  col < charmap->cols;  col++)
-      draw_square (charmap, row, col);
-
-  row = (charmap->active_char - charmap->page_first_char) / charmap->cols;
-  if (row < start_row || row > end_row)
-    {
-      col = (charmap->active_char - charmap->page_first_char) % charmap->cols;
-      draw_square (charmap, row, col);
-    }
-
-  row = (charmap->old_active_char - charmap->page_first_char) / charmap->cols;
-  if (row >= 0 && row < charmap->rows && (row < start_row || row > end_row))
-    {
-      col = (charmap->old_active_char - charmap->page_first_char) 
-            % charmap->cols;
-      draw_square (charmap, row, col);
-    }
-}
-#endif
-
-#define greater(a,b) ((a) > (b) ? (a) : (b))
-#define lesser(a,b) ((a) < (b) ? (a) : (b))
-
 static void
 copy_rows (Charmap *charmap, gint row_offset)
 {
@@ -678,11 +600,6 @@ copy_rows (Charmap *charmap, gint row_offset)
 
   num_padded_rows = charmap->chartable->allocation.height -
                     (minimal_row_height (charmap) * charmap->rows + 1);
-
-  /*
-  g_print ("copy_rows: charmap->rows = %d, row_offset = %d\n", charmap->rows, row_offset);
-  g_print ("copy_rows: num_padded_rows = %d; 0 - %d not padded, %d - %d padded\n", num_padded_rows, charmap->rows - num_padded_rows - 1, charmap->rows - num_padded_rows, charmap->rows - 1);
-  */
 
   if (abs (row_offset) < charmap->rows - num_padded_rows)
     {
@@ -702,14 +619,6 @@ copy_rows (Charmap *charmap, gint row_offset)
         }
 
       height = y_offset (charmap, num_rows) - y_offset (charmap, 0) - 1;
-
-      /*
-      g_print ("copy_rows: small rows: copying %d rows from %d to %d\n", 
-               num_rows, from_row, to_row);
-               */
-
-      g_print ("small: %d\n", height + greater (y_offset (charmap, from_row), 
-                                                y_offset (charmap, to_row)));
 
       gdk_draw_drawable (charmap->chartable_pixmap,
                          charmap->chartable->style->base_gc[GTK_STATE_NORMAL], 
@@ -733,14 +642,6 @@ copy_rows (Charmap *charmap, gint row_offset)
           from_row = charmap->rows - num_padded_rows;
           to_row = charmap->rows - num_padded_rows - row_offset;
         }
-
-      /*
-      g_print ("copy_rows: big rows: copying from %d to %d\n", 
-               from_row, to_row);
-               */
-
-      g_print ("big: %d\n", lesser (y_offset (charmap, from_row), 
-                                    y_offset (charmap, to_row)));
 
       /* it's ok to go off the end (so use allocation.height) */
       gdk_draw_drawable (charmap->chartable_pixmap,
@@ -769,25 +670,6 @@ redraw_rows (Charmap *charmap, gint row_offset)
       start_row = 0;
       end_row = -row_offset - 1;
     }
-
-  /*
-  for (row = 0;  row <= charmap->rows;  row++)
-    {
-      gint from_row = row + row_offset;
-
-      if (from_row < 0 || from_row >= charmap->rows)
-        continue;
-
-      if (row_height (charmap, row) == row_height (charmap, from_row))
-        {
-          g_print ("redraw_rows: SAME HEIGHT: %d -> %d\n", from_row, row);
-        }
-      else
-        {
-          g_print ("redraw_rows: DIFF HEIGHT: %d -> %d\n", from_row, row);
-        }
-    }
-    */
 
   for (row = 0;  row <= charmap->rows;  row++)
     {
@@ -1405,9 +1287,6 @@ make_caption (Charmap *charmap)
                                                      "text", CAPTION_LABEL,
                                                      NULL);
   g_object_set (G_OBJECT (cell), "weight", PANGO_WEIGHT_BOLD, NULL);
-  /* gtk_widget_ensure_style (tree_view);
-  g_object_set (G_OBJECT (cell), "background-gdk", 
-                &(tree_view->style->bg[GTK_STATE_NORMAL]), NULL); */
   gtk_tree_view_append_column (GTK_TREE_VIEW (tree_view), column);
 
   cell = gtk_cell_renderer_text_new ();
