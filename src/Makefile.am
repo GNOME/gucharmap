@@ -27,19 +27,31 @@ libgucharmap_la_LIBADD = @GTK_LIBS@
 
 lib_LTLIBRARIES = libgucharmap.la
 
+
 libgucharmap_la_SOURCES = gucharmap_marshal.c gucharmap_marshal.h \
                           charmap.c charmap.h \
-                          unicode_data.cI unicode_unihan.cI \
                           unicode_info.c unicode_info.h \
                           gucharmap_intl.c gucharmap_intl.h \
                           mini_fontsel.c mini_fontsel.h
 
 
-unicode_data.cI:
-	./generate_unicode_stuff.sh unicode_data.cI || exit 1
+# A source file listed in BUILT_SOURCES is created before the other
+# all targets are made.
+BUILT_SOURCES = unicode_data.cI unicode_unihan.cI
+# Putting these in maintainer-clean because users generally will not
+# want to delete these, since the tarball comes with them.
+MAINTAINERCLEANFILES = unicode_data.cI unicode_unihan.cI
 
-unicode_unihan.cI:
-	./generate_unicode_stuff.sh unicode_unihan.cI || exit 1
+unicode_data.cI:
+	./generate_unicode_stuff.sh unicode_data.cI
+
+unicode_unihan.cI: generate_unihan
+	./generate_unicode_stuff.sh unicode_unihan.cI
+
+
+noinst_PROGRAMS = generate_unihan
+
+generate_unihan_SOURCES = generate_unihan.c
 
 
 # this is different from the project version

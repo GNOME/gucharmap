@@ -4,7 +4,7 @@
 # 
 
 #
-# Copyright (c) 2002  Noah Levitt <nlevitt аt users.sourceforge.net>
+# Copyright (c) 2003  Noah Levitt <nlevitt аt users.sourceforge.net>
 #
 # This program is free software; you can redistribute it and/or modify it
 # under the terms of the GNU General Public License as published by the
@@ -23,7 +23,7 @@
 
 #
 # This script gets files from unicode.org and generates
-# unicode_data.cI and unihan.cI
+# unicode_data.cI and unicode_unihan.cI
 #
 
 UNZIP=`which unzip`
@@ -33,6 +33,7 @@ MV=`which mv`
 ECHO=`which echo`
 MKDIR=`which mkdir`
 AWK=`which awk`
+GENERATE_UNIHAN="./generate_unihan"
 
 unidir="$PWD/unicode.org"
 srcdir="$PWD"
@@ -70,89 +71,6 @@ function write_unicode_data()
     $AWK -F';' '{print "  { 0x" $1 ", \"" $2 "\" },"}' 
 
     $ECHO "};"
-}
-
-
-function stringify()
-{
-    if [ "x$1" = "x" ] ; then
-        echo 0
-    else
-        echo "\"$1\""
-    fi
-}
-
-# reads from stdin, writes to stdout
-function write_unihan()
-{
-    $ECHO "/* unicode_unihan.cI */" 
-    $ECHO "/* THIS IS A GENERATED FILE. */"
-    $ECHO "/* http://www.unicode.org/Public/UNIDATA/Unihan.zip */"
-    $ECHO ""
-    $ECHO ""
-    $ECHO "#if HAVE_CONFIG_H"
-    $ECHO "# include <config.h>"
-    $ECHO "#endif"
-    $ECHO "#include <unicode_info.h>"
-    $ECHO ""
-    $ECHO ""
-    $ECHO "#if ENABLE_UNIHAN"
-    $ECHO ""
-    $ECHO "const Unihan unihan[] ="
-    $ECHO "{"
-
-    unset kDefinition kCantonese kMandarin kTang 
-    unset kKorean kJapaneseKun kJapaneseOn
-    
-    curr_index="U+3400"
-    
-    while read index property value
-    do
-        case $index in
-            "#") continue ;;
-            "#*") continue ;;
-        esac
-    
-        if [ "x$index" != "x$curr_index" ] 
-        then
-            hex=`$ECHO $curr_index | $SED 's/^U+/0x/'`
-            curr_index=$index
-    
-            if [ "x$kDefinition" = "x" ] && [ "x$kCantonese" = "x" ] && [ "x$kMandarin" = "x" ] && [ "x$kTang" = "x" ] && [ "x$kKorean" = "x" ] && [ "x$kJapaneseKun" = "x" ] && [ "x$kJapaneseOn" = "x" ] ;
-            then
-                continue;
-            fi
-
-            QQkDefinition=`stringify "$kDefinition"`
-            QQkCantonese=`stringify "$kCantonese"`
-            QQkMandarin=`stringify "$kMandarin"`
-            QQkTang=`stringify "$kTang"`
-            QQkKorean=`stringify "$kKorean"`
-            QQkJapaneseKun=`stringify "$kJapaneseKun"`
-            QQkJapaneseOn=`stringify "$kJapaneseOn"`
-
-            $ECHO "  { $hex, $QQkDefinition, $QQkCantonese, $QQkMandarin, $QQkTang, $QQkKorean, $QQkJapaneseKun, $QQkJapaneseOn },"
-    
-            unset kDefinition kCantonese kMandarin kTang
-            unset kKorean kJapaneseKun kJapaneseOn
-        fi
-    
-        case $property in
-            "kDefinition")  kDefinition=`$ECHO $value | $SED 's/\"/\\\"/g'` ;;
-            "kCantonese")   kCantonese=`$ECHO $value | $SED 's/\"/\\\"/g'` ;;
-            "kMandarin")    kMandarin=`$ECHO $value | $SED 's/\"/\\\"/g'` ;;
-            "kTang")        kTang=`$ECHO $value | $SED 's/\"/\\\"/g'` ;;
-            "kKorean")      kKorean=`$ECHO $value | $SED 's/\"/\\\"/g'` ;;
-            "kJapaneseKun") kJapaneseKun=`$ECHO $value | $SED 's/\"/\\\"/g'` ;;
-            "kJapaneseOn")  kJapaneseOn=`$ECHO $value | $SED 's/\"/\\\"/g'` ;;
-        esac
-    done
-
-    $ECHO "};"
-    $ECHO ""
-    $ECHO ""
-    $ECHO "#endif /* #if ENABLE_UNIHAN */"
-    $ECHO ""
 }
 
 
@@ -220,8 +138,8 @@ function do_unihan()
     out=$srcdir/unicode_unihan.cI
     backup $out
 
-    $ECHO -n "writing $out (this will take a long time)..."
-    $UNZIP -c $unidir/Unihan.zip | write_unihan > $out
+    $ECHO -n "writing $out... this may take a minute..."
+    $UNZIP -c $unidir/Unihan.zip | $GENERATE_UNIHAN > $out
     $ECHO "done"
 }
 
