@@ -18,7 +18,7 @@ $Id$
  - Paste to jump to a character [DONE]
 
  - Accessibility stuff, see 
-   http://developer.gnome.org/projects/gap/guide/gad/index.html
+   http://developer.gnome.org/projects/gap/guide/gad/index.html [DONE]
 
  - Magnify active character, as in windows charmap? [DONE]
 
@@ -35,20 +35,20 @@ $Id$
    the build process?? Maybe the autogen process... [DONE]
 
  - Do something about accessibility. This might mean having the
-   charmap implement AtkTable as suggested by hp.
+   charmap implement AtkTable as suggested by hp. [DONE]
 
  - Handle --version, --help, etc., even when built without gnome. [DONE]
 
  - Add a --disable-gnome option to the configury. [DONE]
 
- - Accels for some of the menu items.
+ - Accels for some of the menu items. [DONE]
 
  - Use keynav from theme with GtkBindingSet.
 
  - Think about sending signals and messages instead of exporting the
    statusbar widget. [DONE]
 
- - Fix the mini_fontsel quirks and bugs.
+ - Fix the mini_fontsel quirks and bugs. [DONE]
 
  - Write gtk docs for the charmap and mini_fontsel widgets.
 
@@ -60,10 +60,8 @@ $Id$
 
  - Write or solicit some help. The F1 kind.
  
- - Unicode annotations and cross references (suggested by Markus Kuhn).
+ - Unicode annotations and cross references (suggested by Markus Kuhn). [DONE]
 
- - MiniFontSelection needs some accessibility.
- 
  - Position the zoom window better; I have a plan, it's simple, but
    not worth writing down. [DONE]
 
@@ -71,7 +69,7 @@ $Id$
 
  - Font selection should be tabbable-to. [DONE]
 
- - Menu item(s) to enter and exit zoom mode.
+ - Menu item(s) to enter and exit zoom mode. [DONE, then removed]
 
  - Get rid of the triangle in the character details; instead, put
    items in the view menu, e.g. Extra Unicode Info, CJK Info, (Notes,
@@ -79,7 +77,7 @@ $Id$
 
  - Maybe make Find a dialog box?? Seems like a fine way to do it, but
    there's nothing really wrong that I can think of with the current
-   way.
+   way. [DONE -- it is better: find-prev and stuff]
 
  - Maybe make the size of the zoom font configurable?
 
@@ -89,7 +87,7 @@ $Id$
 
  - Allow people to type code points in the search box?
 
- - Split Expand/Collapse All into two menu items?
+ - Split Expand/Collapse All into two menu items? [this menu item is gone]
 
  - Save state???
 
@@ -103,12 +101,12 @@ $Id$
    functionality as http://www.unicode.org/charts/unihansearch.html
    (suggested by Sebastien).
 
- - A gtk+ input module that uses the charmap.
+ - A gtk+ input module that uses the charmap. [DONE]
 
  - Separate the public and private parts of teh charmap struct(s) and
    stuff.
 
- - Split the chartable out of the charmap widget, make it its own.
+ - Split the chartable out of the charmap widget, make it its own. [DONE]
 
  - Possibility to view by script, as in scripts.txt.
 
