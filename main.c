@@ -76,10 +76,13 @@ main (gint argc, gchar **argv)
   GtkWidget *fontsel;
   GtkWidget *fontsel_toggle;
   GtkWidget *statusbar;
+  GtkTooltips *tooltips;
   gchar *orig_font, *new_font;
   PangoFontDescription *font_desc;
 
   gtk_init (&argc, &argv);
+
+  tooltips = gtk_tooltips_new ();
 
   window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   gtk_window_set_title (GTK_WINDOW (window), _("Unicode Character Map"));
@@ -103,6 +106,8 @@ main (gint argc, gchar **argv)
 
   g_signal_connect (G_OBJECT (fontsel_toggle), "toggled",
                     G_CALLBACK (toggle_fontsel), fontsel);
+  gtk_tooltips_set_tip (tooltips, fontsel_toggle, 
+                        _("Show/hide font selection."), NULL);
 
   g_signal_connect (
           gtk_tree_view_get_selection (GTK_TREE_VIEW (
