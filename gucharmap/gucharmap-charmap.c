@@ -435,7 +435,9 @@ set_details (GucharmapCharmap *charmap,
   else
     {
       /* give it some space to breathe */
-      gtk_text_buffer_insert (buffer, &iter, "     ", -1);
+      /* gtk_text_buffer_insert (buffer, &iter, "     ", -1); */
+      gtk_text_buffer_insert_with_tags_by_name (buffer, &iter, "   ", -1, 
+                                                "gimongous", NULL);
       gtk_text_buffer_insert_with_tags_by_name (buffer, &iter, buf, n, 
                                                 "gimongous", NULL);
     }
