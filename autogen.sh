@@ -20,8 +20,8 @@ then
 fi
 
 # Use the versioned executables if available.
-aclocal=aclocal-1.4
-automake=automake-1.4
+aclocal=aclocal-1.7
+automake=automake-1.7
 $aclocal  --version </dev/null >/dev/null 2>&1 || aclocal=aclocal
 $automake --version </dev/null >/dev/null 2>&1 || automake=automake
 

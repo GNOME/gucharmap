@@ -17,7 +17,7 @@
 ## 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
 ##
 
-AM_CFLAGS = $(GTK_CFLAGS) $(GNOME_CFLAGS) 
+AM_CFLAGS = $(GTK_CFLAGS) $(GNOME_CFLAGS)
 
 localedir = $(datadir)/locale
 AM_CPPFLAGS = -DLOCALEDIR=\"$(localedir)\" -DGTK_DISABLE_DEPRECATED=1 \
@@ -32,6 +32,8 @@ libgucharmap_la_SOURCES = gucharmap_marshal.c gucharmap_marshal.h \
                           charmap.c charmap.h \
                           unicode_info.c unicode_info.h \
                           gucharmap_intl.c gucharmap_intl.h \
+                          chartable_accessible.c chartable_accessible.h \
+                          charcell_accessible.c charcell_accessible.h \
                           mini_fontsel.c mini_fontsel.h
 
 
@@ -39,10 +41,11 @@ libgucharmap_la_SOURCES = gucharmap_marshal.c gucharmap_marshal.h \
 # all targets are made.
 BUILT_SOURCES = unicode_data.cI unicode_unihan.cI unicode_blocks.cI \
 		unicode_nameslist.cI
-# Putting these in maintainer-clean because users generally will not
-# want to delete these, since the tarball comes with them.
-MAINTAINERCLEANFILES = unicode_data.cI unicode_unihan.cI unicode_blocks.cI \
-		       unicode_nameslist.cI
+
+## # Don't want "make clean to delete these, because then make will regenerate
+## # unicode_unihan.cI and unicode_nameslist.cI
+## DISTCLEANFILES = generate_unihan generate_nameslist
+
 
 unicode_unihan.cI: generate_unihan
 	./generate_unicode_stuff.sh unicode_unihan.cI

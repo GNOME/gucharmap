@@ -46,7 +46,6 @@ esac
 if test "x$os_win32" = "xyes"
 then
     CFLAGS="$CFLAGS -mms-bitfields -mwindows"
-
 fi
 AM_CONDITIONAL(OS_WIN32, test "x$os_win32" = "xyes")
 

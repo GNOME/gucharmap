@@ -611,6 +611,7 @@ help_about (GtkWidget *widget, gpointer data)
   GtkWidget *about;
   const gchar *authors[] = { "Noah Levitt <nlevitt аt columbia.edu>", 
                              "Daniel Elstner <daniel.elstner аt gmx.net>", 
+                             "Padraig O'Briain <Padraig.Obriain аt sun.com>",
                              NULL };
   const gchar *translator_credits;
 
@@ -1053,7 +1054,7 @@ main (gint argc, gchar **argv)
 #if !HAVE_GNOME
   poptContext popt_context;
   gint rc;
-#endif
+#endif  /* #if !HAVE_GNOME */
 
 #if !HAVE_GNOME
   gtk_init (&argc, &argv);

@@ -149,6 +149,7 @@ struct _CharmapClass
 
   void (* activate) (Charmap *charmap, gunichar uc);
   void (* status_message) (Charmap *charmap, gchar *message);
+  void (* set_active_char) (Charmap *charmap, guint ch);
 };
 
 
@@ -164,7 +165,6 @@ void charmap_hide_caption (Charmap *charmap, CharmapCaption caption_id);
 void charmap_show_caption (Charmap *charmap, CharmapCaption caption_id);
 void charmap_zoom_enable (Charmap *charmap);
 void charmap_zoom_disable (Charmap *charmap);
-
 
 G_END_DECLS
 
