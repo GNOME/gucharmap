@@ -21,15 +21,10 @@
 #ifndef GUCHARMAP_UNICODE_INFO_H
 #define GUCHARMAP_UNICODE_INFO_H
 
-#include <gtk/gtk.h>
+#include <glib.h>
 
 
 G_BEGIN_DECLS
-
-
-#ifndef UNICHAR_MAX
-# define UNICHAR_MAX 0x0000ffff
-#endif
 
 
 typedef struct
