@@ -40977,43 +40977,71 @@ _get_unihan (gunichar uc)
 
 
 gchar * 
-get_kDefinition (gunichar uc)
+get_unicode_kDefinition (gunichar uc)
 {
-  return _get_unihan (uc)->kDefinition;
+  unihan_t *uh = _get_unihan (uc);
+  if (uh == NULL)
+    return "";
+  else
+    return uh->kDefinition;
 }
 
 gchar * 
-get_kCantonese (gunichar uc)
+get_unicode_kCantonese (gunichar uc)
 {
-  return _get_unihan (uc)->kCantonese;
+  unihan_t *uh = _get_unihan (uc);
+  if (uh == NULL)
+    return "";
+  else
+    return uh->kCantonese;
 }
 
 gchar * 
-get_kMandarin (gunichar uc)
+get_unicode_kMandarin (gunichar uc)
 {
-  return _get_unihan (uc)->kMandarin;
+  unihan_t *uh = _get_unihan (uc);
+  if (uh == NULL)
+    return "";
+  else
+    return uh->kMandarin;
 }
 
 gchar * 
-get_kTang (gunichar uc)
+get_unicode_kTang (gunichar uc)
 {
-  return _get_unihan (uc)->kTang;
+  unihan_t *uh = _get_unihan (uc);
+  if (uh == NULL)
+    return "";
+  else
+    return uh->kTang;
 }
 
 gchar * 
-get_kKorean (gunichar uc)
+get_unicode_kKorean (gunichar uc)
 {
-  return _get_unihan (uc)->kKorean;
+  unihan_t *uh = _get_unihan (uc);
+  if (uh == NULL)
+    return "";
+  else
+    return uh->kKorean;
 }
 
 gchar * 
-get_kJapeneseKun (gunichar uc)
+get_unicode_kJapeneseKun (gunichar uc)
 {
-  return _get_unihan (uc)->kJapeneseKun;
+  unihan_t *uh = _get_unihan (uc);
+  if (uh == NULL)
+    return "";
+  else
+    return uh->kJapeneseKun;
 }
 
 gchar * 
-get_kJapaneseOn (gunichar uc)
+get_unicode_kJapaneseOn (gunichar uc)
 {
-  return _get_unihan (uc)->kJapaneseOn;
+  unihan_t *uh = _get_unihan (uc);
+  if (uh == NULL)
+    return "";
+  else
+    return uh->kJapaneseOn;
 }

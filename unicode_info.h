@@ -31,13 +31,13 @@ extern "C" {
 /* return values are read-only */
 gchar * get_unicode_name (gunichar uc);
 gchar * get_unicode_category_name (gunichar uc);
-gchar * get_kDefinition (gunichar uc);
-gchar * get_kCantonese (gunichar uc);
-gchar * get_kMandarin (gunichar uc);
-gchar * get_kTang (gunichar uc);
-gchar * get_kKorean (gunichar uc);
-gchar * get_kJapeneseKun (gunichar uc);
-gchar * get_kJapaneseOn (gunichar uc);
+gchar * get_unicode_kDefinition (gunichar uc);
+gchar * get_unicode_kCantonese (gunichar uc);
+gchar * get_unicode_kMandarin (gunichar uc);
+gchar * get_unicode_kTang (gunichar uc);
+gchar * get_unicode_kKorean (gunichar uc);
+gchar * get_unicode_kJapeneseKun (gunichar uc);
+gchar * get_unicode_kJapaneseOn (gunichar uc);
 
 #ifdef __cplusplus
 }

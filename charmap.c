@@ -95,6 +95,30 @@ set_caption (Charmap *charmap)
   g_snprintf (buf, BUFLEN, "name: %s", 
               get_unicode_name (charmap->active_char));
   gtk_label_set_text (GTK_LABEL (charmap->caption->name), buf);
+
+  g_snprintf (buf, BUFLEN, "kDefinition: %s", 
+              get_unicode_kDefinition (charmap->active_char));
+  gtk_label_set_text (GTK_LABEL (charmap->caption->kDefinition), buf);
+
+  g_snprintf (buf, BUFLEN, "kCantonese: %s", 
+              get_unicode_kCantonese (charmap->active_char));
+  gtk_label_set_text (GTK_LABEL (charmap->caption->kCantonese), buf);
+
+  g_snprintf (buf, BUFLEN, "kMandarin: %s", 
+              get_unicode_kMandarin (charmap->active_char));
+  gtk_label_set_text (GTK_LABEL (charmap->caption->kMandarin), buf);
+
+  g_snprintf (buf, BUFLEN, "kTang: %s", 
+              get_unicode_kTang (charmap->active_char));
+  gtk_label_set_text (GTK_LABEL (charmap->caption->kTang), buf);
+
+  g_snprintf (buf, BUFLEN, "kKorean: %s", 
+              get_unicode_kKorean (charmap->active_char));
+  gtk_label_set_text (GTK_LABEL (charmap->caption->kKorean), buf);
+
+  g_snprintf (buf, BUFLEN, "kJapaneseOn: %s", 
+              get_unicode_kJapaneseOn (charmap->active_char));
+  gtk_label_set_text (GTK_LABEL (charmap->caption->kJapaneseOn), buf);
 }
 
 
