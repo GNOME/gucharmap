@@ -520,9 +520,10 @@ follow_if_link (GucharmapCharmap *charmap,
 
       if (uc != (gunichar)(-1)) 
         {
-          g_signal_emit (charmap, gucharmap_charmap_signals[LINK_CLICKED], 
-                          0, charmap->chartable->active_cell, uc);
-          gucharmap_table_set_active_character (charmap->chartable, uc);
+          g_signal_emit (charmap, gucharmap_charmap_signals[LINK_CLICKED], 0, 
+                         gucharmap_table_get_active_character (charmap->chartable), 
+                         uc);
+          gucharmap_charmap_go_to_character (charmap, uc);
           break;
         }
     }
