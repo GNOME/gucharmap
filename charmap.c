@@ -1350,8 +1350,8 @@ charmap_init (Charmap *charmap)
   GtkWidget *hbox;
   GtkWidget *vbox;
 
-  charmap->rows = CHARMAP_DEFAULT_ROWS;
-  charmap->cols = CHARMAP_DEFAULT_COLS;
+  charmap->rows = CHARMAP_MIN_ROWS;
+  charmap->cols = CHARMAP_MIN_COLS;
 
   gtk_box_set_spacing (GTK_BOX (charmap), 5);
 
@@ -1512,5 +1512,27 @@ charmap_set_font (Charmap *charmap, gchar *font_name)
   if (charmap->tabulus_pixmap != NULL)
     g_object_unref (charmap->tabulus_pixmap);
   charmap->tabulus_pixmap = NULL;
+}
+
+
+/* call this to let the charmap set window geometry hints; this will make
+ * resizing snap nicely to rows and columns; should do this when changing
+ * the font as well as at initialization */
+void 
+charmap_set_geometry_hints (Charmap *charmap, GtkWindow *window)
+{
+  GdkGeometry hints;
+
+  hints.width_inc = calculate_square_dimension_x (charmap->font_metrics) + 1;
+  hints.height_inc = calculate_square_dimension_y (charmap->font_metrics) + 1;
+
+  hints.min_width = hints.width_inc * CHARMAP_MIN_COLS + 1;
+  hints.min_height = hints.height_inc * CHARMAP_MIN_ROWS + 1;
+
+  hints.base_width = 1;
+  hints.base_height = 1;
+
+  gtk_window_set_geometry_hints (window, charmap->tabulus, &hints,
+          GDK_HINT_RESIZE_INC | GDK_HINT_MIN_SIZE | GDK_HINT_BASE_SIZE);
 }
 
