@@ -49,6 +49,7 @@ static GtkWidget *text_to_copy_status;
 static GtkWidget *fontsel;
 static GtkWidget *unicode_options_menu_item;
 static GtkWidget *unihan_options_menu_item;
+static GtkWidget *nameslist_options_menu_item;
 static GdkPixbuf *icon;
 /* caption_show[CHARMAP_CAPTION_CHARACTER] is ignored; it is always shown */
 static gboolean caption_show[CHARMAP_CAPTION_COUNT];
@@ -186,34 +187,77 @@ show_hide_unicode (GtkCheckMenuItem *mi, gpointer data)
 
 
 static void
+show_hide_nameslist (GtkCheckMenuItem *mi, gpointer data)
+{
+  static const CharmapCaption nameslist_caption_ids[] = 
+    { 
+      CHARMAP_CAPTION_STARS,
+      CHARMAP_CAPTION_EXES,
+      CHARMAP_CAPTION_COLONS,
+      CHARMAP_CAPTION_EQUALS,
+      CHARMAP_CAPTION_POUNDS,
+    };
+  gint i;
+
+  if (gtk_check_menu_item_get_active (mi))
+    {
+      gtk_widget_set_sensitive (nameslist_options_menu_item, TRUE);
+
+      /* show the checked nameslist captions */
+      for (i = 0;  i < G_N_ELEMENTS (nameslist_caption_ids);  i++)
+        if (caption_show[nameslist_caption_ids[i]])
+          charmap_show_caption (CHARMAP (charmap), nameslist_caption_ids[i]);
+    }
+  else
+    {
+      gtk_widget_set_sensitive (nameslist_options_menu_item, FALSE);
+
+      /* hide all the nameslist captions */
+      for (i = 0;  i < G_N_ELEMENTS (nameslist_caption_ids);  i++)
+        charmap_hide_caption (CHARMAP (charmap), nameslist_caption_ids[i]);
+    }
+}
+
+
+static void
 show_hide_caption (GtkCheckMenuItem *mi, gchar *which_caption)
 {
   CharmapCaption caption_id = -1;
 
-  if (g_ascii_strcasecmp (which_caption, N_("category")) == 0)
+  if (g_ascii_strcasecmp (which_caption, "category") == 0)
     caption_id = CHARMAP_CAPTION_CATEGORY;
-  else if (g_ascii_strcasecmp (which_caption, N_("decomposition")) == 0)
+  else if (g_ascii_strcasecmp (which_caption, "decomposition") == 0)
     caption_id = CHARMAP_CAPTION_DECOMPOSITION;
-  else if (g_ascii_strcasecmp (which_caption, N_("utf8")) == 0)
+  else if (g_ascii_strcasecmp (which_caption, "utf8") == 0)
     caption_id = CHARMAP_CAPTION_UTF8;
-  else if (g_ascii_strcasecmp (which_caption, N_("other_reps")) == 0)
+  else if (g_ascii_strcasecmp (which_caption, "other_reps") == 0)
     caption_id = CHARMAP_CAPTION_OTHER_REPS;
 #if ENABLE_UNIHAN
-  else if (g_ascii_strcasecmp (which_caption, N_("kdefinition")) == 0)
+  else if (g_ascii_strcasecmp (which_caption, "kdefinition") == 0)
     caption_id = CHARMAP_CAPTION_KDEFINITION;
-  else if (g_ascii_strcasecmp (which_caption, N_("kmandarin")) == 0)
+  else if (g_ascii_strcasecmp (which_caption, "kmandarin") == 0)
     caption_id = CHARMAP_CAPTION_KMANDARIN;
-  else if (g_ascii_strcasecmp (which_caption, N_("kjapaneseon")) == 0)
+  else if (g_ascii_strcasecmp (which_caption, "kjapaneseon") == 0)
     caption_id = CHARMAP_CAPTION_KJAPANESEON;
-  else if (g_ascii_strcasecmp (which_caption, N_("kjapanesekun")) == 0)
+  else if (g_ascii_strcasecmp (which_caption, "kjapanesekun") == 0)
     caption_id = CHARMAP_CAPTION_KJAPANESEKUN;
-  else if (g_ascii_strcasecmp (which_caption, N_("kcantonese")) == 0)
+  else if (g_ascii_strcasecmp (which_caption, "kcantonese") == 0)
     caption_id = CHARMAP_CAPTION_KCANTONESE;
-  else if (g_ascii_strcasecmp (which_caption, N_("ktang")) == 0)
+  else if (g_ascii_strcasecmp (which_caption, "ktang") == 0)
     caption_id = CHARMAP_CAPTION_KTANG;
-  else if (g_ascii_strcasecmp (which_caption, N_("kkorean")) == 0)
+  else if (g_ascii_strcasecmp (which_caption, "kkorean") == 0)
     caption_id = CHARMAP_CAPTION_KKOREAN;
 #endif /* #if ENABLE_UNIHAN */
+  else if (g_ascii_strcasecmp (which_caption, "equals") == 0)
+    caption_id = CHARMAP_CAPTION_EQUALS;
+  else if (g_ascii_strcasecmp (which_caption, "stars") == 0)
+    caption_id = CHARMAP_CAPTION_STARS;
+  else if (g_ascii_strcasecmp (which_caption, "exes") == 0)
+    caption_id = CHARMAP_CAPTION_EXES;
+  else if (g_ascii_strcasecmp (which_caption, "pounds") == 0)
+    caption_id = CHARMAP_CAPTION_POUNDS;
+  else if (g_ascii_strcasecmp (which_caption, "colons") == 0)
+    caption_id = CHARMAP_CAPTION_COLONS;
 
   if (gtk_check_menu_item_get_active (mi))
     {
@@ -593,7 +637,8 @@ make_menu (GtkWindow *window)
   GtkWidget *goto_menu_item;
   GtkWidget *menu_item;
   GtkAccelGroup *accel_group;
-  GtkWidget *unicode_details_menu, *unihan_details_menu;
+  GtkWidget *unicode_details_menu, *unihan_details_menu, 
+            *nameslist_details_menu;
 #if HAVE_GNOME
   GtkWidget *help_menu_item;
 #endif
@@ -656,7 +701,6 @@ make_menu (GtkWindow *window)
   g_signal_connect (G_OBJECT (menu_item), "activate",
                     G_CALLBACK (font_smaller), NULL);
   gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), menu_item);
-  /* finished making the view menu */
 
   /* separator */
   gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), gtk_menu_item_new ());
@@ -680,7 +724,7 @@ make_menu (GtkWindow *window)
   gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item), 
                                   caption_show[CHARMAP_CAPTION_CATEGORY]);
   g_signal_connect (G_OBJECT (menu_item), "activate",
-                    G_CALLBACK (show_hide_caption), N_("category"));
+                    G_CALLBACK (show_hide_caption), "category");
 
   menu_item = gtk_check_menu_item_new_with_mnemonic (
           _("Canonical _Decomposition"));
@@ -688,14 +732,14 @@ make_menu (GtkWindow *window)
   gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item), 
                                   caption_show[CHARMAP_CAPTION_DECOMPOSITION]);
   g_signal_connect (G_OBJECT (menu_item), "activate",
-                    G_CALLBACK (show_hide_caption), N_("decomposition"));
+                    G_CALLBACK (show_hide_caption), "decomposition");
 
   menu_item = gtk_check_menu_item_new_with_mnemonic (_("_UTF-8"));
   gtk_menu_shell_append (GTK_MENU_SHELL (unicode_details_menu), menu_item);
   gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item), 
                                   caption_show[CHARMAP_CAPTION_UTF8]);
   g_signal_connect (G_OBJECT (menu_item), "activate",
-                    G_CALLBACK (show_hide_caption), N_("utf8"));
+                    G_CALLBACK (show_hide_caption), "utf8");
 
   menu_item = gtk_check_menu_item_new_with_mnemonic (
           _("_Other Representations"));
@@ -703,7 +747,7 @@ make_menu (GtkWindow *window)
   gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item), 
                                   caption_show[CHARMAP_CAPTION_OTHER_REPS]);
   g_signal_connect (G_OBJECT (menu_item), "activate",
-                    G_CALLBACK (show_hide_caption), N_("other_reps"));
+                    G_CALLBACK (show_hide_caption), "other_reps");
 
 #if ENABLE_UNIHAN
   /* separator */
@@ -730,7 +774,7 @@ make_menu (GtkWindow *window)
   gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item), 
                                   caption_show[CHARMAP_CAPTION_KDEFINITION]);
   g_signal_connect (G_OBJECT (menu_item), "activate",
-                    G_CALLBACK (show_hide_caption), N_("kdefinition"));
+                    G_CALLBACK (show_hide_caption), "kdefinition");
 
   menu_item = gtk_check_menu_item_new_with_mnemonic (
           _("_Mandarin Pronunciation"));
@@ -738,7 +782,7 @@ make_menu (GtkWindow *window)
   gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item), 
                                   caption_show[CHARMAP_CAPTION_KMANDARIN]);
   g_signal_connect (G_OBJECT (menu_item), "activate",
-                    G_CALLBACK (show_hide_caption), N_("kmandarin"));
+                    G_CALLBACK (show_hide_caption), "kmandarin");
 
   menu_item = gtk_check_menu_item_new_with_mnemonic (
           _("Japanese _On Pronunciation"));
@@ -746,7 +790,7 @@ make_menu (GtkWindow *window)
   gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item), 
                                   caption_show[CHARMAP_CAPTION_KJAPANESEON]);
   g_signal_connect (G_OBJECT (menu_item), "activate",
-                    G_CALLBACK (show_hide_caption), N_("kjapaneseon"));
+                    G_CALLBACK (show_hide_caption), "kjapaneseon");
 
   menu_item = gtk_check_menu_item_new_with_mnemonic (
           _("_Japanese Kun Pronunciation"));
@@ -754,7 +798,7 @@ make_menu (GtkWindow *window)
   gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item), 
                                   caption_show[CHARMAP_CAPTION_KJAPANESEKUN]);
   g_signal_connect (G_OBJECT (menu_item), "activate",
-                    G_CALLBACK (show_hide_caption), N_("kjapanesekun"));
+                    G_CALLBACK (show_hide_caption), "kjapanesekun");
 
   menu_item = gtk_check_menu_item_new_with_mnemonic (
           _("_Cantonese Pronunciation"));
@@ -762,7 +806,7 @@ make_menu (GtkWindow *window)
   gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item), 
                                   caption_show[CHARMAP_CAPTION_KCANTONESE]);
   g_signal_connect (G_OBJECT (menu_item), "activate",
-                    G_CALLBACK (show_hide_caption), N_("kcantonese"));
+                    G_CALLBACK (show_hide_caption), "kcantonese");
 
   menu_item = gtk_check_menu_item_new_with_mnemonic (
           _("_Tang Pronunciation"));
@@ -770,7 +814,7 @@ make_menu (GtkWindow *window)
   gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item), 
                                   caption_show[CHARMAP_CAPTION_KTANG]);
   g_signal_connect (G_OBJECT (menu_item), "activate",
-                    G_CALLBACK (show_hide_caption), N_("ktang"));
+                    G_CALLBACK (show_hide_caption), "ktang");
 
   menu_item = gtk_check_menu_item_new_with_mnemonic (
           _("_Korean Pronunciation"));
@@ -778,9 +822,61 @@ make_menu (GtkWindow *window)
   gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item), 
                                   caption_show[CHARMAP_CAPTION_KKOREAN]);
   g_signal_connect (G_OBJECT (menu_item), "activate",
-                    G_CALLBACK (show_hide_caption), N_("kkorean"));
-
+                    G_CALLBACK (show_hide_caption), "kkorean");
 #endif
+
+  /* separator */
+  gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), gtk_menu_item_new ());
+
+  menu_item = gtk_check_menu_item_new_with_mnemonic (_("_Annotations and Cross References"));
+  g_signal_connect (G_OBJECT (menu_item), "activate",
+                    G_CALLBACK (show_hide_nameslist), NULL);
+  gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), menu_item);
+
+  /* the namelist details submenu */
+  nameslist_options_menu_item = gtk_menu_item_new_with_mnemonic (_("Options"));
+  gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), 
+                         nameslist_options_menu_item);
+  gtk_widget_set_sensitive (nameslist_options_menu_item, FALSE);
+
+  nameslist_details_menu = gtk_menu_new ();
+  gtk_menu_item_set_submenu (GTK_MENU_ITEM (nameslist_options_menu_item), 
+                             nameslist_details_menu);
+
+  menu_item = gtk_check_menu_item_new_with_mnemonic (_("_Alias Names"));
+  gtk_menu_shell_append (GTK_MENU_SHELL (nameslist_details_menu), menu_item);
+  gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item), 
+                                  caption_show[CHARMAP_CAPTION_EQUALS]);
+  g_signal_connect (G_OBJECT (menu_item), "activate",
+                    G_CALLBACK (show_hide_caption), "equals");
+
+  menu_item = gtk_check_menu_item_new_with_mnemonic (_("_Notes"));
+  gtk_menu_shell_append (GTK_MENU_SHELL (nameslist_details_menu), menu_item);
+  gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item), 
+                                  caption_show[CHARMAP_CAPTION_STARS]);
+  g_signal_connect (G_OBJECT (menu_item), "activate",
+                    G_CALLBACK (show_hide_caption), "stars");
+
+  menu_item = gtk_check_menu_item_new_with_mnemonic (_("_See Also"));
+  gtk_menu_shell_append (GTK_MENU_SHELL (nameslist_details_menu), menu_item);
+  gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item), 
+                                  caption_show[CHARMAP_CAPTION_EXES]);
+  g_signal_connect (G_OBJECT (menu_item), "activate",
+                    G_CALLBACK (show_hide_caption), "exes");
+
+  menu_item = gtk_check_menu_item_new_with_mnemonic (_("_Approximate Equivalents"));
+  gtk_menu_shell_append (GTK_MENU_SHELL (nameslist_details_menu), menu_item);
+  gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item), 
+                                  caption_show[CHARMAP_CAPTION_POUNDS]);
+  g_signal_connect (G_OBJECT (menu_item), "activate",
+                    G_CALLBACK (show_hide_caption), "pounds");
+
+  menu_item = gtk_check_menu_item_new_with_mnemonic (_("_Equivalents"));
+  gtk_menu_shell_append (GTK_MENU_SHELL (nameslist_details_menu), menu_item);
+  gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item), 
+                                  caption_show[CHARMAP_CAPTION_COLONS]);
+  g_signal_connect (G_OBJECT (menu_item), "activate",
+                    G_CALLBACK (show_hide_caption), "colons");
 
   /* make the goto menu */
   goto_menu = gtk_menu_new ();
@@ -964,6 +1060,8 @@ main (gint argc, gchar **argv)
   caption_show[CHARMAP_CAPTION_KDEFINITION] = TRUE;
   caption_show[CHARMAP_CAPTION_KMANDARIN] = TRUE;
 #endif
+  caption_show[CHARMAP_CAPTION_STARS] = TRUE;
+  caption_show[CHARMAP_CAPTION_EXES] = TRUE;
 
   make_gui (window);
 

@@ -1828,11 +1828,6 @@ make_caption (Charmap *charmap)
                                   GTK_POLICY_ALWAYS, GTK_POLICY_NEVER);
 
   charmap_show_caption (charmap, CHARMAP_CAPTION_CHARACTER);
-  charmap_show_caption (charmap, CHARMAP_CAPTION_STARS);
-  charmap_show_caption (charmap, CHARMAP_CAPTION_EQUALS);
-  charmap_show_caption (charmap, CHARMAP_CAPTION_POUNDS);
-  charmap_show_caption (charmap, CHARMAP_CAPTION_EXES);
-  charmap_show_caption (charmap, CHARMAP_CAPTION_COLONS);
 
   gtk_widget_show_all (scrolled_window);
   gtk_widget_hide (scrolled_window);
@@ -2194,11 +2189,11 @@ charmap_init (Charmap *charmap)
   caption_labels[CHARMAP_CAPTION_KTANG] =  _("Tang pronunciation"), 
   caption_labels[CHARMAP_CAPTION_KKOREAN] =  _("Korean pronunciation"), 
 #endif
-  caption_labels[CHARMAP_CAPTION_EQUALS] = _("Alias names");
-  caption_labels[CHARMAP_CAPTION_STARS] = _("Notes");
   caption_labels[CHARMAP_CAPTION_EXES] = _("See also");
-  caption_labels[CHARMAP_CAPTION_POUNDS] = _("Approximate equivalents");
   caption_labels[CHARMAP_CAPTION_COLONS] = _("Equivalents");
+  caption_labels[CHARMAP_CAPTION_EQUALS] = _("Alias names");
+  caption_labels[CHARMAP_CAPTION_POUNDS] = _("Approximate equivalents");
+  caption_labels[CHARMAP_CAPTION_STARS] = _("Notes");
 
   charmap->rows = CHARMAP_MIN_ROWS;
   charmap->cols = CHARMAP_MIN_COLS;
@@ -2413,6 +2408,22 @@ charmap_search (Charmap *charmap, const gchar *search_text)
 }
 
 
+/* captions appear in numerical (by CharmapCaption value) order */
+static gint
+compute_position_to_insert_at (Charmap *charmap, 
+                               CharmapCaption caption_id)
+{
+  CharmapCaption i;
+  gint position;
+
+  for (i = 0, position = 0;  i < caption_id;  i++)
+    if (charmap->caption_rows[i])
+      position++;
+
+  return position;
+}
+
+
 
 void
 charmap_show_caption (Charmap *charmap, CharmapCaption caption_id)
@@ -2424,7 +2435,9 @@ charmap_show_caption (Charmap *charmap, CharmapCaption caption_id)
 
   if (charmap->caption_rows[caption_id] == NULL)
     {
-      gtk_tree_store_insert (charmap->caption_model, &iter, NULL, caption_id);
+      gtk_tree_store_insert (charmap->caption_model, &iter, NULL, 
+                             compute_position_to_insert_at (charmap, 
+                                                            caption_id));
 
       charmap->caption_rows[caption_id] = gtk_tree_row_reference_new (
               model, gtk_tree_model_get_path (model, &iter));
