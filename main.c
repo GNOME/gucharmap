@@ -45,7 +45,6 @@ main (gint argc, gchar **argv)
   gtk_init (&argc, &argv);
 
   window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-  gtk_window_set_resizable (GTK_WINDOW (window), FALSE);
   gtk_window_set_title (GTK_WINDOW (window), "Unicode Character Map");
 
   g_signal_connect (G_OBJECT (window), "destroy",
@@ -60,7 +59,7 @@ main (gint argc, gchar **argv)
   gtk_box_pack_start (GTK_BOX (vbox), charmap, TRUE, TRUE, 0);
 
   fontsel = gtk_font_selection_new ();
-  gtk_box_pack_start (GTK_BOX (vbox), fontsel, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (vbox), fontsel, FALSE, FALSE, 0);
 
   g_signal_connect (
           gtk_tree_view_get_selection (GTK_TREE_VIEW (
