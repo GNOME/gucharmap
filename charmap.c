@@ -911,11 +911,25 @@ block_selection_changed (GtkTreeSelection *selection,
 }
 
 
+static void
+show_hide_code_points (GtkToggleButton *togglebutton, Charmap *charmap)
+{
+  g_printerr ("show_hide_code_points: active = %d\n", 
+              gtk_toggle_button_get_active (togglebutton));
+  if (gtk_toggle_button_get_active (togglebutton))
+    gtk_tree_view_expand_all (GTK_TREE_VIEW (charmap->block_selector_view));
+  else
+    gtk_tree_view_collapse_all (GTK_TREE_VIEW (charmap->block_selector_view));
+}
+
+
 /* makes the list of unicode blocks and code points */
 static GtkWidget *
 make_unicode_block_selector (Charmap *charmap)
 {
   GtkWidget *scrolled_window;
+  GtkWidget *checkbox;
+  GtkWidget *vbox;
   GtkTreeIter iter;
   GtkTreeIter child_iter;
   GtkCellRenderer *cell;
@@ -924,7 +938,17 @@ make_unicode_block_selector (Charmap *charmap)
   gunichar uc;
   gint i;
 
+  vbox = gtk_vbox_new (FALSE, 1);
+
+  checkbox = gtk_check_button_new_with_label ("Show/hide code points");
+  gtk_box_pack_start (GTK_BOX (vbox), checkbox, FALSE, FALSE, 0);
+
+  g_signal_connect (G_OBJECT (checkbox), "toggled", 
+                    G_CALLBACK (show_hide_code_points), charmap);
+
   scrolled_window = gtk_scrolled_window_new (NULL, NULL);
+  gtk_box_pack_start (GTK_BOX (vbox), scrolled_window, TRUE, TRUE, 0);
+
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
                                   GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
   gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolled_window), 
@@ -984,7 +1008,7 @@ make_unicode_block_selector (Charmap *charmap)
   gtk_container_add (GTK_CONTAINER (scrolled_window), 
                      charmap->block_selector_view);
 
-  return scrolled_window;
+  return vbox;
 }
 
 
