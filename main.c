@@ -95,8 +95,8 @@ main (gint argc, gchar **argv)
   charmap = charmap_new ();
   gtk_box_pack_start (GTK_BOX (vbox), charmap, TRUE, TRUE, 0);
 
-  fontsel_toggle = gtk_toggle_button_new_with_label (
-          "show/hide font selection");
+  fontsel_toggle = gtk_toggle_button_new_with_label (GTK_STOCK_SELECT_FONT);
+  gtk_button_set_use_stock (GTK_BUTTON (fontsel_toggle), TRUE);
   gtk_box_pack_start (GTK_BOX (vbox), fontsel_toggle, FALSE, FALSE, 0);
 
   fontsel = gtk_font_selection_new ();
