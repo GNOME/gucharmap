@@ -63,7 +63,8 @@ calculate_square_dimension (PangoFontMetrics *font_metrics)
 static void
 draw_tabulus_pixmap (Charmap *charmap)
 {
-  gint x, y;
+  static gchar utf8_buf[8];
+  gint x, y, row, col, w, h, wid, hei;
 
   debug ("draw_tabulus_pixmap\n");
 
@@ -75,18 +76,19 @@ draw_tabulus_pixmap (Charmap *charmap)
                                             charmap->tabulus->allocation.height,
                                             -1);
 
-  /* a plain background */
+  /* plain background */
   gdk_draw_rectangle (charmap->tabulus_pixmap,
                       charmap->tabulus->style->base_gc[GTK_STATE_NORMAL], 
-                      TRUE, 
-                      0, 0, 
+                      TRUE, 0, 0, 
                       charmap->tabulus->allocation.width,
                       charmap->tabulus->allocation.height);
 
+  /* width and height of a square */
+  w = charmap->tabulus->allocation.width / CHARMAP_COLS;
+  h = charmap->tabulus->allocation.height / CHARMAP_ROWS;
+
   /* vertical lines */
-  for (x = charmap->tabulus->allocation.width / CHARMAP_COLS;
-       x < charmap->tabulus->allocation.width;
-       x += charmap->tabulus->allocation.width / CHARMAP_COLS)
+  for (x = w; x < charmap->tabulus->allocation.width; x += w)
     {
       gdk_draw_line (charmap->tabulus_pixmap,
                      charmap->tabulus->style->fg_gc[GTK_STATE_INSENSITIVE], 
@@ -94,14 +96,36 @@ draw_tabulus_pixmap (Charmap *charmap)
     }
 
   /* horizontal lines */
-  for (y = charmap->tabulus->allocation.height / CHARMAP_ROWS;
-       y < charmap->tabulus->allocation.height;
-       y += charmap->tabulus->allocation.height / CHARMAP_ROWS)
+  for (y = h; y < charmap->tabulus->allocation.height; y += h)
     {
       gdk_draw_line (charmap->tabulus_pixmap,
                      charmap->tabulus->style->fg_gc[GTK_STATE_INSENSITIVE], 
                      0, y, charmap->tabulus->allocation.width - 1, y);
     }
+
+  pango_layout_set_font_description (charmap->pango_layout,
+                                     charmap->tabulus->style->font_desc);
+
+  /* draw the characters */
+  for (row = 0;  row < CHARMAP_ROWS;  row++)
+    for (col = 0;  col < CHARMAP_COLS;  col++)
+      {
+        gunichar uc = charmap->page_first_char + row * CHARMAP_COLS + col;
+        if (! g_unichar_isgraph (uc))
+          continue;
+
+        x = g_unichar_to_utf8 (uc, utf8_buf);
+        pango_layout_set_text (charmap->pango_layout, utf8_buf, x);
+
+        pango_layout_get_pixel_size (charmap->pango_layout, &wid, &hei);
+
+        gdk_draw_layout (charmap->tabulus_pixmap, 
+                         charmap->tabulus->style->text_gc[GTK_STATE_NORMAL], 
+                         w * col + (w - wid) / 2, 
+                         h * row + (h - hei) / 2, 
+                         charmap->pango_layout);
+      }
+
 }
 
 
@@ -158,11 +182,16 @@ charmap_init (Charmap *charmap)
           gtk_widget_get_pango_context (charmap->tabulus),
           charmap->tabulus->style->font_desc, NULL);
 
+  charmap->pango_layout = pango_layout_new (
+          gtk_widget_get_pango_context (charmap->tabulus));
+
   /* size the drawing area */
   square_dimension = calculate_square_dimension (charmap->font_metrics);
   gtk_widget_set_size_request (charmap->tabulus, 
                                CHARMAP_COLS * square_dimension,
                                CHARMAP_ROWS * square_dimension);
+
+  charmap->page_first_char = (gunichar) 0x0000;
 }
 
 

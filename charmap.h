@@ -45,8 +45,12 @@ struct _Charmap
 
   GtkWidget *tabulus;         /* GtkDrawingArea* */
   GdkPixmap *tabulus_pixmap; 
+
   gchar *font_name;
   PangoFontMetrics *font_metrics;
+  PangoLayout *pango_layout;
+
+  gunichar page_first_char;  /* the character in the upper left box */
 };
 
 
