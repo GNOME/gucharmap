@@ -123,8 +123,8 @@ install-data-hook:
 	@if test "x$(GTK_QUERY_IMMODULES)" != "xMISSING" ; then \
 	  echo $(mkinstalldirs) $(DESTDIR)$(sysconfdir)/gucharmap ; \
 	  $(mkinstalldirs) $(DESTDIR)$(sysconfdir)/gucharmap; \
-	  echo "GTK_PATH=$(DESTDIR)$(moduledir) $(GTK_QUERY_IMMODULES) > $(DESTDIR)$(sysconfdir)/gucharmap/gtk.immodules" ; \
-	  GTK_PATH=$(DESTDIR)$(moduledir) $(GTK_QUERY_IMMODULES) > $(DESTDIR)$(sysconfdir)/gucharmap/gtk.immodules ; \
+	  echo "GTK_PATH=$(DESTDIR)$(libdir)/gucharmap $(GTK_QUERY_IMMODULES) > $(DESTDIR)$(sysconfdir)/gucharmap/gtk.immodules" ; \
+	  GTK_PATH=$(DESTDIR)$(libdir)/gucharmap $(GTK_QUERY_IMMODULES) > $(DESTDIR)$(sysconfdir)/gucharmap/gtk.immodules ; \
 	  echo ; \
 	  echo ; \
 	  echo "   IMPORTANT!" ; \
