@@ -1403,31 +1403,16 @@ size_allocate (GtkWidget *widget, GtkAllocation *allocation, Charmap *charmap)
 }
 
 
-void
-charmap_class_init (CharmapClass *clazz)
-{
-}
-
-
-/* does all the initial construction */
-void
-charmap_init (Charmap *charmap)
+static GtkWidget *
+make_chartable (Charmap *charmap)
 {
   GtkWidget *hbox;
-  GtkWidget *vbox;
-
-  charmap->rows = CHARMAP_MIN_ROWS;
-  charmap->cols = CHARMAP_MIN_COLS;
-
-  gtk_box_set_spacing (GTK_BOX (charmap), 5);
 
   charmap->chartable = gtk_drawing_area_new ();
 
-  gtk_widget_set_events (charmap->chartable, GDK_EXPOSURE_MASK 
-                                           | GDK_KEY_PRESS_MASK
-                                           | GDK_BUTTON_PRESS_MASK
-                                           | GDK_FOCUS_CHANGE_MASK
-                                           | GDK_SCROLL_MASK);
+  gtk_widget_set_events (charmap->chartable, 
+          GDK_EXPOSURE_MASK | GDK_KEY_PRESS_MASK | GDK_BUTTON_PRESS_MASK
+          | GDK_FOCUS_CHANGE_MASK | GDK_SCROLL_MASK);
 
   g_signal_connect (G_OBJECT (charmap->chartable), "expose_event",
                     G_CALLBACK (expose_event), charmap);
@@ -1450,13 +1435,39 @@ charmap_init (Charmap *charmap)
   GTK_WIDGET_SET_FLAGS (charmap->chartable, GTK_CAN_FOCUS);
   gtk_widget_grab_focus (charmap->chartable);
 
+  hbox = gtk_hbox_new (FALSE, 1);
+  gtk_box_pack_start (GTK_BOX (hbox), charmap->chartable, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (hbox), make_scrollbar (charmap), 
+                      FALSE, FALSE, 0);
+
+  return hbox;
+}
+
+
+void
+charmap_class_init (CharmapClass *clazz)
+{
+}
+
+
+/* does all the initial construction */
+void
+charmap_init (Charmap *charmap)
+{
+  GtkWidget *hbox;
+  GtkWidget *vbox;
+
+  charmap->rows = CHARMAP_MIN_ROWS;
+  charmap->cols = CHARMAP_MIN_COLS;
+
+  gtk_box_set_spacing (GTK_BOX (charmap), 5);
+
   hbox = gtk_hbox_new (FALSE, 3);
 
   gtk_box_pack_start (GTK_BOX (charmap), hbox, TRUE, TRUE, 0);
 
-  gtk_box_pack_start (GTK_BOX (hbox), charmap->chartable, TRUE, TRUE, 0);
-  gtk_box_pack_start (GTK_BOX (hbox), make_scrollbar (charmap), 
-                      FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (hbox), make_chartable (charmap), 
+                      TRUE, TRUE, 0);
 
   vbox = gtk_vbox_new (FALSE, 3);
   gtk_box_pack_start (GTK_BOX (vbox), make_unicode_block_selector (charmap), 
