@@ -129,6 +129,8 @@ jump_code_point (GtkWidget *widget, gpointer data)
   GtkWidget *dialog;
   EntryAndLabel *eal;
   GtkWidget *vbox;
+  GtkWidget *hbox;
+  GtkWidget *label;
 
   dialog = gtk_dialog_new_with_buttons (
           _("Go to hex code point"),
@@ -137,6 +139,8 @@ jump_code_point (GtkWidget *widget, gpointer data)
           GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, 
           GTK_STOCK_OK, GTK_RESPONSE_OK, 
           NULL);
+
+  gtk_window_set_icon (GTK_WINDOW (dialog), icon);
 
   vbox = gtk_vbox_new (FALSE, 6);
   gtk_container_set_border_width (GTK_CONTAINER (vbox), 6);
@@ -149,16 +153,22 @@ jump_code_point (GtkWidget *widget, gpointer data)
   gtk_entry_set_activates_default (GTK_ENTRY (eal->entry), TRUE);
   gtk_entry_set_max_length (GTK_ENTRY (eal->entry), 8); 
   gtk_entry_set_width_chars (GTK_ENTRY (eal->entry), 8);
+  hbox = gtk_hbox_new (FALSE, 0);
+  label = gtk_label_new_with_mnemonic (_("_Enter unicode code point"));
+  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+  gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
+  gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
-  gtk_box_pack_start (GTK_BOX (vbox),
-                      gtk_label_new (_("Enter unicode code point")),
-                      FALSE, FALSE, 0);
+  gtk_label_set_mnemonic_widget (GTK_LABEL (label), eal->entry);
 
   gtk_box_pack_start (GTK_BOX (vbox), eal->entry, FALSE, FALSE, 0);
 
+  hbox = gtk_hbox_new (FALSE, 0);
   eal->label = gtk_label_new (NULL);
+  gtk_box_pack_start (GTK_BOX (hbox), eal->label, FALSE, FALSE, 0);
+  gtk_label_set_justify (GTK_LABEL (eal->label), GTK_JUSTIFY_LEFT);
   gtk_label_set_line_wrap (GTK_LABEL (eal->label), TRUE);
-  gtk_box_pack_start (GTK_BOX (vbox), eal->label, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
   gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
 
@@ -267,20 +277,29 @@ do_search (GtkWidget *widget, gpointer data)
 static GtkWidget *
 make_search ()
 {
-  GtkWidget *hbox;
-  GtkWidget *vbox;
   GtkWidget *button;
+  GtkWidget *label;
+  GtkWidget *table;
+  GtkWidget *hbox;
   GtkTooltips *tooltips;
+
+  table = gtk_table_new (2, 2, FALSE);
+  gtk_table_set_col_spacings (GTK_TABLE (table), 6);
 
   tooltips = gtk_tooltips_new ();
 
-  /* search */
+  label = gtk_label_new_with_mnemonic (_("_Search:"));
+  gtk_table_attach (GTK_TABLE (table), label, 0, 1, 0, 1, 0, 0, 0, 0);
+
   hbox = gtk_hbox_new (FALSE, 6);
+  gtk_table_attach_defaults (GTK_TABLE (table), hbox, 1, 2, 0, 1);
 
   search_entry = gtk_entry_new ();
   g_signal_connect (G_OBJECT (search_entry), "activate",
                     G_CALLBACK (do_search), NULL);
   gtk_box_pack_start (GTK_BOX (hbox), search_entry, TRUE, TRUE, 0);
+
+  gtk_label_set_mnemonic_widget (GTK_LABEL (label), search_entry);
 
   button = gtk_button_new_from_stock (GTK_STOCK_FIND);
   g_signal_connect (G_OBJECT (button), "clicked",
@@ -289,19 +308,16 @@ make_search ()
 
   gtk_tooltips_set_tip (tooltips, button, _("Search for the next occurrence of this string in a character's Unicode name."), NULL);
 
-  vbox = gtk_vbox_new (FALSE, 0);
-  gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
-
   /* the status message label */
   hbox = gtk_hbox_new (FALSE, 0); 
   search_status = gtk_label_new (NULL);
   gtk_label_set_justify (GTK_LABEL (search_status), GTK_JUSTIFY_LEFT);
   gtk_box_pack_start (GTK_BOX (hbox), search_status, FALSE, FALSE, 0);
-  gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+  gtk_table_attach_defaults (GTK_TABLE (table), hbox, 1, 2, 1, 2);
 
-  gtk_widget_show_all (vbox);
+  gtk_widget_show_all (table);
 
-  return vbox;
+  return table;
 }
 
 
@@ -319,8 +335,7 @@ make_text_to_copy ()
 
   tooltips = gtk_tooltips_new ();
 
-  label = gtk_label_new (_("Text to copy:"));
-  /* gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 0, 1); */
+  label = gtk_label_new_with_mnemonic (_("_Text to copy:"));
   gtk_table_attach (GTK_TABLE (table), label, 0, 1, 0, 1, 0, 0, 0, 0);
 
   hbox = gtk_hbox_new (FALSE, 6);
@@ -331,6 +346,8 @@ make_text_to_copy ()
                             TEXT_TO_COPY_MAXLENGTH);
   gtk_box_pack_start (GTK_BOX (hbox), text_to_copy, TRUE, TRUE, 0);
 
+  gtk_label_set_mnemonic_widget (GTK_LABEL (label), text_to_copy);
+
   /* the copy button */
   button = gtk_button_new_from_stock (GTK_STOCK_COPY); 
   g_signal_connect (G_OBJECT (button), "clicked",
@@ -338,12 +355,6 @@ make_text_to_copy ()
   gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
 
   gtk_tooltips_set_tip (tooltips, button, _("Copy to the clipboard."), NULL);
-
-  /* the clear button */
-  button = gtk_button_new_from_stock (GTK_STOCK_CLEAR);
-  g_signal_connect (G_OBJECT (button), "clicked",
-                    G_CALLBACK (clear_button_clicked), NULL);
-  gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
 
   /* the status message label */
   hbox = gtk_hbox_new (FALSE, 0); 
@@ -377,6 +388,7 @@ help_about (GtkWidget *widget, gpointer data)
           "Copyright © 2003 Noah Levitt <nlevitt аt columbia.edu>",
           _("Unicode Character Map"), authors, NULL, translator_credits, icon);
 
+  gtk_window_set_icon (GTK_WINDOW (about), icon);
   gtk_widget_show (about);
 }
 
@@ -422,7 +434,7 @@ make_menu ()
   gtk_menu_shell_append (GTK_MENU_SHELL (menubar), file_menu_item);
   view_menu_item = gtk_menu_item_new_with_mnemonic (_("_View"));
   gtk_menu_shell_append (GTK_MENU_SHELL (menubar), view_menu_item);
-  goto_menu_item = gtk_menu_item_new_with_mnemonic (_("_Go to"));
+  goto_menu_item = gtk_menu_item_new_with_mnemonic (_("_Go To"));
   gtk_menu_shell_append (GTK_MENU_SHELL (menubar), goto_menu_item);
   /* finished making the menu bar */
 
@@ -535,8 +547,8 @@ main (gint argc, gchar **argv)
 
   /* hbox has search and text_to_copy */
   hbox = gtk_hbox_new (FALSE, 30); /* space between the parts */
-  gtk_box_pack_start (GTK_BOX (hbox), make_search (), TRUE, TRUE, 0);
   gtk_box_pack_start (GTK_BOX (hbox), make_text_to_copy (), TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (hbox), make_search (), TRUE, TRUE, 0);
   gtk_container_set_border_width (GTK_CONTAINER (hbox), 6);
   gtk_box_pack_start (GTK_BOX (big_vbox), hbox, FALSE, FALSE, 0);
   gtk_widget_show (hbox);
