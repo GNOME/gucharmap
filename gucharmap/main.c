@@ -93,7 +93,7 @@ main (gint argc, gchar **argv)
 
   screen = gtk_window_get_screen (GTK_WINDOW (window));
   gtk_window_set_default_size (GTK_WINDOW (window), 
-                               gdk_screen_get_width (screen) * 1/2,
+                               gdk_screen_get_width (screen) * 9/16,
                                gdk_screen_get_height (screen) * 9/16);
 
 

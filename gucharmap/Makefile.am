@@ -132,7 +132,7 @@ gtk.immodules: $(module_LTLIBRARIES)
 	$(GTK_QUERY_IMMODULES) $(module_LTLIBRARIES) > gtk.immodules ;
 
 install-data-hook: im-module-file
-	GTK_PATH=$$GTK_PATH:$(DESTDIR)$(libdir)/gtk-2.0 $(GTK_QUERY_IMMODULES) > `./im-module-file` ;
+	LD_LIBRARY_PATH=$(DESTDIR)$(libdir):$$LD_LIBRARY_PATH GTK_PATH=$$GTK_PATH:$(DESTDIR)$(libdir)/gtk-2.0 $(GTK_QUERY_IMMODULES) > `./im-module-file` ;
 
 else
 
