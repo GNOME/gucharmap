@@ -28,7 +28,7 @@
 
 #include <gucharmap/gucharmap.h>
 #include "gucharmap_intl.h"
-#include "gucharmap_marshal.h"
+#include "gucharmap-marshal.h"
 #include "chartable_accessible.h"
 
 
@@ -54,7 +54,6 @@ enum
 };
 
 static guint gucharmap_charmap_signals[NUM_SIGNALS] = { 0, 0 };
-
 
 static void
 status_message (GucharmapCharmap *charmap, const gchar *message)

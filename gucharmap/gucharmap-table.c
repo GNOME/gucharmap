@@ -25,7 +25,7 @@
 #include <gdk/gdkkeysyms.h>
 
 #include <gucharmap/gucharmap.h>
-#include <gucharmap_marshal.h>
+#include <gucharmap-marshal.h>
 #include <chartable_accessible.h>
 #include <gucharmap_intl.h>
 

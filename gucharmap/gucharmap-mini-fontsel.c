@@ -26,7 +26,7 @@
 #include <string.h>
 #include <gucharmap/gucharmap-mini-fontsel.h>
 #include "gucharmap_intl.h"
-#include "gucharmap_marshal.h"
+#include "gucharmap-marshal.h"
 
 
 enum
