@@ -28,29 +28,37 @@
 static gchar *
 unichar_to_printable_utf8 (gunichar uc)
 {
-  static gchar buf[9];
+  static gchar buf[12];
   gint x;
 
   if (! g_unichar_isgraph (uc))
     return "";
   
+  /* Unicode Standard 3.2, section 2.6, "By convention, diacritical marks
+   * used by the Unicode Standard may be exhibited in (apparent) isolation
+   * by applying them to U+0020 SPACE or to U+00A0 NO BREAK SPACE." */
+
+  /* 17:10 < owen> noah: I'm *not* claiming that what Pango does currently
+   *               is right, but convention isn't a requirement. I think
+   *               it's probably better to do the Uniscribe thing and put
+   *               the lone combining mark on a dummy character and require
+   *               ZWJ
+   * 17:11 < noah> owen: do you mean that i should put a ZWJ in there, or
+   *               that pango will do that?
+   * 17:11 < owen> noah: I mean, you should (assuming some future more
+   *               capable version of Pango) put it in there
+   */
+
   if (g_unichar_type (uc) == G_UNICODE_COMBINING_MARK
       || g_unichar_type (uc) == G_UNICODE_ENCLOSING_MARK
       || g_unichar_type (uc) == G_UNICODE_NON_SPACING_MARK)
     {
-      /* http://microsoft.com/typography/otfntdev/arabicot/other.htm */
-      /* Please note that to render a sign standalone (in apparent
-       * isolation from any base) one should apply it on a space (see
-       * section 2.5 'Combining Marks' of Unicode Standard 3.1). Uniscribe
-       * requires a ZWJ to be placed between the space and a mark for them
-       * to combine into a standalone sign.
-       *
-       * XXX: should i put a zero width joiner in there?
-       */
-
       buf[0] = ' ';
-      x = g_unichar_to_utf8 (uc, buf+1);
-      buf[x+1] = '\0';
+      buf[1] = '\xe2'; /* ZERO */ 
+      buf[2] = '\x80'; /* WIDTH */
+      buf[3] = '\x8d'; /* JOINER (0x200D) */
+      x = g_unichar_to_utf8 (uc, buf+4);
+      buf[x+4] = '\0';
     }
   else
     {
@@ -582,10 +590,11 @@ static void
 append_character_to_text_to_copy (Charmap *charmap)
 {
   static gchar buf[TEXT_TO_COPY_MAXLENGTH];
+  static gchar ubuf[7];
 
+  g_unichar_to_utf8 (charmap->active_char, ubuf);
   g_snprintf (buf, TEXT_TO_COPY_MAXLENGTH, "%s%s", 
-              gtk_entry_get_text (GTK_ENTRY (charmap->text_to_copy)),
-              unichar_to_printable_utf8 (charmap->active_char));
+              gtk_entry_get_text (GTK_ENTRY (charmap->text_to_copy)), ubuf);
 
   gtk_entry_set_text (GTK_ENTRY (charmap->text_to_copy), buf);
 }
