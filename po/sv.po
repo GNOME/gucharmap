@@ -8,94 +8,151 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
-"POT-Creation-Date: 2003-02-02 21:24+0100\n"
-"PO-Revision-Date: 2003-02-02 21:50+0100\n"
+"POT-Creation-Date: 2003-02-10 02:31+0100\n"
+"PO-Revision-Date: 2003-02-10 02:32+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/charmap.c:654
+#: src/charmap.c:710
 msgid "Zoom mode disabled."
 msgstr "Zoomläget inaktiverat."
 
-#: src/charmap.c:1343
+#: src/charmap.c:1399
 msgid "Zoom mode enabled. Press <Esc> to disable zoom."
 msgstr "Zoomläget aktiverat. Tryck på <Esc> för att inaktivera zoom."
 
-#: src/charmap.c:1412
+#: src/charmap.c:1468
 msgid "Zoom mode enabled."
 msgstr "Zoomläget aktiverat."
 
-#: src/charmap.c:1603
-msgid "Character"
-msgstr "Tecken"
-
-msgid "Characters"
-msgstr "Tecken"
-
-#: src/charmap.c:1609
-msgid "Unicode category"
-msgstr "Unicode-kategori"
-
-#: src/charmap.c:1615
-msgid "Canonical decomposition"
-msgstr "Kanonisk dekomposition"
-
-#: src/charmap.c:1621
-msgid "UTF-8"
-msgstr "UTF-8"
-
-#: src/charmap.c:1627
-msgid "Other representations"
-msgstr "Andra representationer"
-
-#: src/charmap.c:1634
-msgid "CJK ideograph definition"
-msgstr "CJK-ideografdefinition"
-
-#: src/charmap.c:1640
-msgid "Mandarin pronunciation"
-msgstr "Mandarin-uttal"
-
-#: src/charmap.c:1646
-msgid "Japanese On pronunciation"
-msgstr "Japanskt On-uttal"
-
-#: src/charmap.c:1652
-msgid "Japanese Kun pronunciation"
-msgstr "Japanskt Kun-uttal"
-
-#: src/charmap.c:1658
-msgid "Cantonese pronunciation"
-msgstr "Kantonesiskt uttal"
-
-#: src/charmap.c:1664
-msgid "Tang pronunciation"
-msgstr "Tang-uttal"
-
-#: src/charmap.c:1670
-msgid "Korean pronunciation"
-msgstr "Koreanskt uttal"
-
-#: src/charmap.c:1725
+#: src/charmap.c:1704
 msgid "Clipboard is empty."
 msgstr "Urklipp är tomt."
 
-#: src/charmap.c:1727
+#: src/charmap.c:1706
 msgid "There is no selected text."
 msgstr "Det finns ingen markerad text."
 
-#: src/charmap.c:1735 src/charmap.c:1939
+#: src/charmap.c:1714 src/charmap.c:1918
 msgid "Unknown character, unable to identify."
 msgstr "Okänt tecken, kan inte identifiera."
 
-#: src/charmap.c:1739 src/charmap.c:1943
+#: src/charmap.c:1718 src/charmap.c:1922
 msgid "Character found."
 msgstr "Tecken hittat."
 
-#: src/main.c:140
+#: src/charmap.c:2028
+msgid "Character Map"
+msgstr "Teckentabell"
+
+#: src/charmap.c:2032
+msgid "Character"
+msgstr "Tecken"
+
+#: src/charmap.c:2033
+msgid "Unicode category"
+msgstr "Unicode-kategori"
+
+#: src/charmap.c:2034
+msgid "Canonical decomposition"
+msgstr "Kanonisk dekomposition"
+
+#: src/charmap.c:2035
+msgid "UTF-8"
+msgstr "UTF-8"
+
+#: src/charmap.c:2036
+msgid "Other representations"
+msgstr "Andra representationer"
+
+#: src/charmap.c:2038
+msgid "CJK ideograph definition"
+msgstr "CJK-ideografdefinition"
+
+#: src/charmap.c:2039
+msgid "Mandarin pronunciation"
+msgstr "Mandarin-uttal"
+
+#: src/charmap.c:2040
+msgid "Japanese On pronunciation"
+msgstr "Japanskt On-uttal"
+
+#: src/charmap.c:2041
+msgid "Japanese Kun pronunciation"
+msgstr "Japanskt Kun-uttal"
+
+#: src/charmap.c:2042
+msgid "Cantonese pronunciation"
+msgstr "Kantonesiskt uttal"
+
+#: src/charmap.c:2043
+msgid "Tang pronunciation"
+msgstr "Tang-uttal"
+
+#: src/charmap.c:2044
+msgid "Korean pronunciation"
+msgstr "Koreanskt uttal"
+
+#: src/charmap.c:2060
+msgid "Character Table"
+msgstr "Teckentabell"
+
+#: src/charmap.c:2065
+msgid "Details on the Current Character"
+msgstr "Detaljer om det aktuella tecknet"
+
+#: src/charmap.c:2076
+msgid "List of Unicode Blocks"
+msgstr "Lista med Unicode-block"
+
+#: src/main.c:180 src/main.c:662
+msgid "category"
+msgstr "kategori"
+
+#: src/main.c:182 src/main.c:670
+msgid "decomposition"
+msgstr "dekomposition"
+
+#: src/main.c:184 src/main.c:677
+msgid "utf8"
+msgstr "utf8"
+
+#: src/main.c:186 src/main.c:685
+msgid "other_reps"
+msgstr "andra_representationer"
+
+#: src/main.c:189 src/main.c:712
+msgid "kdefinition"
+msgstr "kdefinition"
+
+#: src/main.c:191 src/main.c:720
+msgid "kmandarin"
+msgstr "kmandarin"
+
+#: src/main.c:193 src/main.c:728
+msgid "kjapaneseon"
+msgstr "kjapanskon"
+
+#: src/main.c:195 src/main.c:736
+msgid "kjapanesekun"
+msgstr "kjapanskkun"
+
+#: src/main.c:197 src/main.c:744
+msgid "kcantonese"
+msgstr "kkantonesiska"
+
+#: src/main.c:199 src/main.c:752
+msgid "ktang"
+msgstr "ktang"
+
+#: src/main.c:201 src/main.c:760
+msgid "kkorean"
+msgstr "kkoreanska"
+
+#: src/main.c:261
 #, c-format
 msgid ""
 "Not a valid code point to jump to. Must be a hexadecimal number between 0 "
@@ -104,108 +161,219 @@ msgstr ""
 "Inte en giltig kodpunkt att hoppa till. Måste vara ett hexadecimalt tal "
 "mellan 0 och %4.4X."
 
-#: src/main.c:162
+#: src/main.c:283
 msgid "Go to hex code point"
 msgstr "Gå till hexadecimal kodpunkt"
 
-#: src/main.c:183
+#: src/main.c:304
 msgid "_Enter unicode code point"
 msgstr "_Ange Unicode-kodpunkt"
 
-#: src/main.c:227
+#: src/main.c:348
 msgid "The selected code point is not a valid unicode character."
 msgstr "Den valda kodpunkten är inte ett giltigt Unicode-tecken."
 
-#: src/main.c:258
+#: src/main.c:379
 msgid "Text copied to clipboard."
 msgstr "Texten kopierad till urklipp."
 
-#: src/main.c:268
+#: src/main.c:389
 msgid "Text-to-copy entry box cleared."
 msgstr "Text-att-kopiera-inmatningsfältet tömt."
 
-#: src/main.c:282
+#: src/main.c:403
 msgid "Not found."
 msgstr "Hittades inte."
 
-#: src/main.c:286
+#: src/main.c:407
 msgid "Found."
 msgstr "Hittades."
 
-#: src/main.c:290
+#: src/main.c:411
 msgid "Search wrapped."
 msgstr "Sökningen började om från början."
 
-#: src/main.c:294
+#: src/main.c:415
 msgid "Nothing to search for."
 msgstr "Ingenting att söka efter."
 
-#: src/main.c:317
+#: src/main.c:438
 msgid "_Search:"
 msgstr "_Sök:"
 
-#: src/main.c:335
+#: src/main.c:456
 msgid ""
 "Search for the next occurrence of this string in a character's Unicode name."
 msgstr ""
 "Sök för nästa förekomst av denna sträng i Unicode-namnet för ett tecken."
 
-#: src/main.c:364
+#: src/main.c:485
 msgid "_Text to copy:"
 msgstr "_Text att kopiera:"
 
-#: src/main.c:383
+#: src/main.c:504
 msgid "Copy to the clipboard."
 msgstr "Kopiera till urklipp."
 
-#: src/main.c:408
+#: src/main.c:529
 msgid "translator_credits"
 msgstr ""
 "Christian Rose\n"
 "Skicka synpunkter på översättningen till sv@li.org"
 
-#: src/main.c:415 src/main.c:580
+#: src/main.c:536 src/main.c:822
 msgid "Unicode Character Map"
 msgstr "Unicode-teckentabell"
 
-#: src/main.c:464
+#: src/main.c:586
 msgid "Char_map"
 msgstr "Tecken_tabell"
 
-#: src/main.c:466
+#: src/main.c:588
 msgid "_View"
 msgstr "_Visa"
 
-#: src/main.c:468
+#: src/main.c:590
 msgid "_Go To"
 msgstr "_Gå till"
 
-#: src/main.c:487
+#: src/main.c:609
 msgid "Expand/Collapse All"
 msgstr "Fäll ut/Fäll in allt"
 
 #. ctrl-+ or ctrl-=
-#: src/main.c:496
+#: src/main.c:618
 msgid "Zoom _In"
 msgstr "Zooma _in"
 
-#. finished making the view menu
 #. ctrl--
-#: src/main.c:509
+#: src/main.c:630
 msgid "Zoom _Out"
 msgstr "Zooma _ut"
 
+#: src/main.c:643
+msgid "_Unicode Details"
+msgstr "_Unicode-detaljer"
+
+#. the unicode details submenu
+#: src/main.c:649 src/main.c:698
+msgid "Options"
+msgstr "Alternativ"
+
+#: src/main.c:657
+msgid "_Category"
+msgstr "_Kategori"
+
+#: src/main.c:665
+msgid "Canonical _Decomposition"
+msgstr "Kanonisk _dekomposition"
+
+#: src/main.c:672
+msgid "_UTF-8"
+msgstr "_UTF-8"
+
+#: src/main.c:680
+msgid "_Other Representations"
+msgstr "_Andra representationer"
+
+#: src/main.c:692
+msgid "_CJK Ideograph Details"
+msgstr "_CJK-ideografdetaljer"
+
+#: src/main.c:707
+msgid "CJK Ideograph _Definition"
+msgstr "CJK-ideograf_definition"
+
+#: src/main.c:715
+msgid "_Mandarin Pronunciation"
+msgstr "_Mandarin-uttal"
+
+#: src/main.c:723
+msgid "Japanese _On Pronunciation"
+msgstr "Japanskt _On-uttal"
+
+#: src/main.c:731
+msgid "_Japanese Kun Pronunciation"
+msgstr "_Japanskt Kun-uttal"
+
+#: src/main.c:739
+msgid "_Cantonese Pronunciation"
+msgstr "_Kantonesiskt uttal"
+
+#: src/main.c:747
+msgid "_Tang Pronunciation"
+msgstr "_Tang-uttal"
+
+#: src/main.c:755
+msgid "_Korean Pronunciation"
+msgstr "_Koreanskt uttal"
+
 #. ctrl-h
-#: src/main.c:524
+#: src/main.c:770
 msgid "_Hex Code Point..."
 msgstr "_Hexadecimal kodpunkt..."
 
 #. ctrl-v
-#: src/main.c:532
+#: src/main.c:778
 msgid "Character in _Clipboard"
 msgstr "Tecken i _urklipp"
 
 #. make the help menu
-#: src/main.c:542
+#: src/main.c:788
 msgid "_Help"
 msgstr "_Hjälp"
+
+#: src/mini_fontsel.c:283
+msgid "Font"
+msgstr "Typsnitt"
+
+#: src/mini_fontsel.c:292
+msgid "Font Family"
+msgstr "Typsnittsfamilj"
+
+#: src/mini_fontsel.c:296
+msgid "Font Style"
+msgstr "Typsnittsstil"
+
+#: src/mini_fontsel.c:303
+msgid "Font Size"
+msgstr "Typsnittsstorlek"
+
+#~ msgid "Unicode Details"
+#~ msgstr "Unicode-detaljer"
+
+#~ msgid "Category"
+#~ msgstr "Kategori"
+
+#~ msgid "Canonical Decomposition"
+#~ msgstr "Kanonisk dekomposition"
+
+#~ msgid "Other Representations"
+#~ msgstr "Andra representationer"
+
+#~ msgid "CJK Ideograph Details"
+#~ msgstr "CJK-ideografdetaljer"
+
+#~ msgid "CJK Ideograph Definition"
+#~ msgstr "CJK-ideografdefinition"
+
+#~ msgid "Mandarin Pronunciation"
+#~ msgstr "Mandarin-uttal"
+
+#~ msgid "Japanese On Pronunciation"
+#~ msgstr "Japanskt On-uttal"
+
+#~ msgid "Japanese Kun Pronunciation"
+#~ msgstr "Japanskt Kun-uttal"
+
+#~ msgid "Cantonese Pronunciation"
+#~ msgstr "Kantonesiskt uttal"
+
+#~ msgid "Tang Pronunciation"
+#~ msgstr "Tang-uttal"
+
+#~ msgid "Korean Pronunciation"
+#~ msgstr "Koreanskt uttal"
+
+#~ msgid "Characters"
+#~ msgstr "Tecken"
