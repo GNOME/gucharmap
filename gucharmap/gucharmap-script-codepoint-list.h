@@ -21,8 +21,9 @@
 #define GUCHARMAP_SCRIPT_CODEPOINT_LIST_H
 
 #include <glib-object.h>
-#include <gucharmap/gucharmap-codepoint-list.h>
-#include <gucharmap/gucharmap-unicode-info.h>
+#include <glib.h>
+#include "gucharmap-codepoint-list.h"
+#include "gucharmap-unicode-info.h"
 
 G_BEGIN_DECLS
 
@@ -53,8 +54,10 @@ struct _GucharmapScriptCodepointListClass
 
 GType                    gucharmap_script_codepoint_list_get_type       ();
 GucharmapCodepointList * gucharmap_script_codepoint_list_new            ();
-gboolean                 gucharmap_script_codepoint_list_set_script     (GucharmapScriptCodepointList *list,
-	                                                                 const gchar                  *script);
+gboolean                 gucharmap_script_codepoint_list_set_script     (GucharmapScriptCodepointList  *list,
+	                                                                 const gchar                   *script);
+gboolean                 gucharmap_script_codepoint_list_set_scripts    (GucharmapScriptCodepointList  *list,
+	                                                                 const gchar                  **scripts);
 /* XXX: gucharmap_script_codepoint_list_get_script? seems unnecessary */
 
 G_END_DECLS

@@ -35,9 +35,7 @@ typedef struct _ScriptCodepointListPrivate ScriptCodepointListPrivate;
 
 struct _ScriptCodepointListPrivate 
 {
-  gchar         *script;
-  UnicodeRange  *ranges;
-  gint           n_ranges;
+  GPtrArray *ranges;
 };
 
 #define GUCHARMAP_SCRIPT_CODEPOINT_LIST_GET_PRIVATE(o) \
@@ -190,7 +188,7 @@ ensure_initialized (GucharmapScriptCodepointList *guscl)
   ScriptCodepointListPrivate *priv = GUCHARMAP_SCRIPT_CODEPOINT_LIST_GET_PRIVATE (guscl);
   gboolean success;
 
-  if (priv->script != NULL)
+  if (priv->ranges != NULL)
     return;
 
   success = gucharmap_script_codepoint_list_set_script (guscl, "Latin");
@@ -209,17 +207,21 @@ get_char (GucharmapCodepointList *list,
   ensure_initialized (guscl);
 
   min = 0;
-  max = priv->n_ranges - 1;
+  max = priv->ranges->len - 1;
 
   while (max >= min) 
     {
+      UnicodeRange *range;
+
       mid = (min + max) / 2;
-      if (index > priv->ranges[mid].index + priv->ranges[mid].end - priv->ranges[mid].start)
+      range = (UnicodeRange *) (priv->ranges->pdata[mid]);
+
+      if (index > range->index + range->end - range->start)
         min = mid + 1;
-      else if (index < priv->ranges[mid].index)
+      else if (index < range->index)
         max = mid - 1;
       else
-        return priv->ranges[mid].start + index - priv->ranges[mid].index;
+        return range->start + index - range->index;
     }
 
   return (gunichar)(-1);
@@ -236,17 +238,21 @@ get_index (GucharmapCodepointList *list,
   ensure_initialized (guscl);
 
   min = 0;
-  max = priv->n_ranges - 1;
+  max = priv->ranges->len - 1;
 
   while (max >= min) 
     {
+      UnicodeRange *range;
+
       mid = (min + max) / 2;
-      if (wc > priv->ranges[mid].end)
+      range = (UnicodeRange *) (priv->ranges->pdata[mid]);
+
+      if (wc > range->end)
         min = mid + 1;
-      else if (wc < priv->ranges[mid].start)
+      else if (wc < range->start)
         max = mid - 1;
       else
-        return priv->ranges[mid].index + wc - priv->ranges[mid].start;
+        return range->index + wc - range->start;
     }
 
   return -1;
@@ -257,10 +263,13 @@ get_last_index (GucharmapCodepointList *list)
 {
   GucharmapScriptCodepointList *guscl = GUCHARMAP_SCRIPT_CODEPOINT_LIST (list);
   ScriptCodepointListPrivate *priv = GUCHARMAP_SCRIPT_CODEPOINT_LIST_GET_PRIVATE (guscl);
+  UnicodeRange *last_range;
 
   ensure_initialized (guscl);
 
-  return priv->ranges[priv->n_ranges-1].index + priv->ranges[priv->n_ranges-1].end - priv->ranges[priv->n_ranges-1].start;
+  last_range = (UnicodeRange *) (priv->ranges->pdata[priv->ranges->len-1]);
+
+  return last_range->index + last_range->end - last_range->start;
 }
 
 static void
@@ -269,11 +278,8 @@ finalize (GObject *object)
   GucharmapScriptCodepointList *guscl = GUCHARMAP_SCRIPT_CODEPOINT_LIST (object);
   ScriptCodepointListPrivate *priv = GUCHARMAP_SCRIPT_CODEPOINT_LIST_GET_PRIVATE (guscl);
 
-  if (priv->script)
-    g_free (priv->script);
-
   if (priv->ranges)
-    g_free (priv->ranges);
+    g_ptr_array_free (priv->ranges, TRUE);
 }
 
 static void
@@ -295,9 +301,7 @@ static void
 gucharmap_script_codepoint_list_init (GucharmapScriptCodepointList *guscl)
 {
   ScriptCodepointListPrivate *priv = GUCHARMAP_SCRIPT_CODEPOINT_LIST_GET_PRIVATE (guscl);
-  priv->script = NULL;
   priv->ranges = NULL;
-  priv->n_ranges = 0;
 }
 
 GType
@@ -344,6 +348,8 @@ gucharmap_script_codepoint_list_new ()
 
 /**
  * gucharmap_script_codepoint_list_set_script:
+ * @list: a GucharmapScriptCodepointList
+ * @script: the script name
  *
  * Sets the script for the codepoint list. 
  *
@@ -354,26 +360,48 @@ gboolean
 gucharmap_script_codepoint_list_set_script (GucharmapScriptCodepointList *list,
                                             const gchar                  *script)
 {
+  const gchar *scripts[2];
+
+  scripts[0] = script;
+  scripts[1] = NULL;
+
+  return gucharmap_script_codepoint_list_set_scripts (list, scripts);
+}
+
+/**
+ * gucharmap_script_codepoint_list_set_scripts:
+ * @list: a GucharmapScriptCodepointList
+ * @scripts: NULL-terminated array of script names
+ *
+ * Sets multiple scripts for the codepoint list. Codepoints are sorted
+ * according to their order in @scripts.
+ *
+ * Return value: %TRUE on success, %FALSE if any of the scripts don’t
+ * exist, in which case the script is not changed.
+ **/
+gboolean
+gucharmap_script_codepoint_list_set_scripts (GucharmapScriptCodepointList  *list,
+	                                     const gchar                  **scripts)
+{
   ScriptCodepointListPrivate *priv = GUCHARMAP_SCRIPT_CODEPOINT_LIST_GET_PRIVATE (list);
   UnicodeRange *ranges;
-  gint size;
+  gint i, j, size;
+  
+  priv->ranges = g_ptr_array_new ();
+  for (i = 0;  scripts[i];  i++)
+    if (get_chars_for_script (scripts[i], &ranges, &size))
+      {
+        for (j = 0;  j < size;  j++)
+          g_ptr_array_add (priv->ranges, g_memdup (ranges + j, sizeof (ranges[j])));
+        g_free (ranges);
+      }
+    else
+      {
+        g_ptr_array_free (priv->ranges, TRUE);
+        return FALSE;
+      }
 
-  if (priv->script && strcmp (script, priv->script) == 0)
-    return TRUE;
-
-  if (get_chars_for_script (script, &ranges, &size))
-    {
-      g_free (priv->script);
-      g_free (priv->ranges);
-      
-      priv->script = g_strdup (script);
-      priv->ranges = ranges;
-      priv->n_ranges = size;
-
-      return TRUE;
-    }
-  else
-    return FALSE;
+  return TRUE;
 }
 
 /**
@@ -388,4 +416,5 @@ gucharmap_unicode_list_scripts ()
 {
   return unicode_script_list;
 }
+
 
