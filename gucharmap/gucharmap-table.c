@@ -1103,6 +1103,25 @@ move_page_down (GucharmapTable *chartable)
 }
 
 
+static gint
+key_release_event (GtkWidget *widget,
+                   GdkEventKey *event,
+                   GucharmapTable *chartable)
+{
+  if (event->state & (GDK_MOD1_MASK | GDK_CONTROL_MASK))
+    return FALSE;
+
+  switch (event->keyval)
+    {
+      case GDK_Shift_L: case GDK_Shift_R:
+        gucharmap_table_zoom_disable (chartable);
+        break;
+    }
+
+  return FALSE;
+}
+
+
 /* mostly for moving around in the chartable */
 static gint
 key_press_event (GtkWidget *widget, 
@@ -1123,29 +1142,38 @@ key_press_event (GtkWidget *widget,
         move_end (chartable);
         break;
 
-      case GDK_Up: case GDK_KP_Up: case GDK_k:
+      case GDK_Up: case GDK_KP_Up: 
+      case GDK_k: case GDK_K:
         move_up (chartable);
         break;
 
-      case GDK_Down: case GDK_KP_Down: case GDK_j:
+      case GDK_Down: case GDK_KP_Down: 
+      case GDK_j: case GDK_J:
         move_down (chartable);
         break;
 
-      case GDK_Left: case GDK_KP_Left: case GDK_h:
+      case GDK_Left: case GDK_KP_Left: 
+      case GDK_h: case GDK_H:
         move_left (chartable);
         break;
 
-      case GDK_Right: case GDK_KP_Right: case GDK_l:
+      case GDK_Right: case GDK_KP_Right: 
+      case GDK_l: case GDK_L:
         move_right (chartable);
         break;
 
-      case GDK_Page_Up: case GDK_KP_Page_Up: case GDK_b:
+      case GDK_Page_Up: case GDK_KP_Page_Up: 
+      case GDK_b: case GDK_B:
         move_page_up (chartable);
         break;
 
       case GDK_Page_Down: case GDK_KP_Page_Down:
         move_page_down (chartable);
         break;
+
+      case GDK_Shift_L: case GDK_Shift_R:
+        gucharmap_table_zoom_enable (chartable);
+        return FALSE;
 
       case GDK_Return: case GDK_KP_Enter: case GDK_space:
 	g_signal_emit (chartable, gucharmap_table_signals[ACTIVATE], 0, 
@@ -1568,6 +1596,8 @@ gucharmap_table_init (GucharmapTable *chartable)
                     G_CALLBACK (size_allocate), chartable);
   g_signal_connect (G_OBJECT (chartable->drawing_area), "key-press-event",
                     G_CALLBACK (key_press_event), chartable);
+  g_signal_connect (G_OBJECT (chartable->drawing_area), "key-release-event",
+                    G_CALLBACK (key_release_event), chartable);
   g_signal_connect (G_OBJECT (chartable->drawing_area), "button-press-event",
                     G_CALLBACK (button_press_event), chartable);
   g_signal_connect (G_OBJECT (chartable->drawing_area), "button-release-event",

@@ -323,28 +323,6 @@ search_find_prev (GtkWidget *widget, GucharmapWindow *guw)
 
 
 static void
-toggle_zoom_mode (GtkCheckMenuItem *mi, GucharmapWindow *guw)
-{
-  if (gtk_check_menu_item_get_active (mi))
-    {
-      gucharmap_charmap_zoom_enable (guw->charmap);
-
-      /* leave zoom mode by pressing escape (or by the normal means) */
-      gtk_widget_add_accelerator (GTK_WIDGET (mi), "activate", 
-                                  guw->accel_group, GDK_Escape, 0, 0);
-    }
-  else
-    {
-      gucharmap_charmap_zoom_disable (guw->charmap);
-
-      /* but escape won't enter zoom mode, that would be too weird */
-      gtk_widget_remove_accelerator (GTK_WIDGET (mi), guw->accel_group,
-                                     GDK_Escape, 0);
-    }
-}
-
-
-static void
 font_bigger (GtkWidget *widget, GucharmapWindow *guw)
 {
   gint size, increment;
@@ -462,9 +440,6 @@ make_menu (GucharmapWindow *guw)
   gtk_menu_set_accel_group (GTK_MENU (view_menu), guw->accel_group);
   gtk_menu_item_set_submenu (GTK_MENU_ITEM (view_menu_item), view_menu);
 
-  /* separator */
-  gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), gtk_menu_item_new ());
-
   /* ctrl-+ or ctrl-= */
   menu_item = gtk_menu_item_new_with_mnemonic (_("Zoom _In"));
   gtk_widget_add_accelerator (menu_item, "activate", guw->accel_group,
@@ -485,19 +460,6 @@ make_menu (GucharmapWindow *guw)
                               GDK_KP_Subtract, GDK_CONTROL_MASK, 0);
   g_signal_connect (G_OBJECT (menu_item), "activate",
                     G_CALLBACK (font_smaller), guw);
-  gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), menu_item);
-
-  /* separator */
-  gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), gtk_menu_item_new ());
-
-  /* ctrl-<enter> */
-  menu_item = gtk_check_menu_item_new_with_mnemonic (_("_Zoom Mode"));
-  gtk_widget_add_accelerator (menu_item, "activate", guw->accel_group,
-                              GDK_Return, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
-  gtk_widget_add_accelerator (menu_item, "activate", guw->accel_group,
-                              GDK_KP_Enter, GDK_CONTROL_MASK, 0);
-  g_signal_connect (G_OBJECT (menu_item), "activate",
-                    G_CALLBACK (toggle_zoom_mode), guw);
   gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), menu_item);
 
   /* separator */
