@@ -35,6 +35,8 @@ fontsel_changed (GtkTreeSelection *selection, gpointer data)
   
   new_font = gtk_font_selection_get_font_name (GTK_FONT_SELECTION (data));
   charmap_set_font (CHARMAP (charmap), new_font);
+  g_free (new_font);
+
   charmap_set_geometry_hints (CHARMAP (charmap), 
                               GTK_WINDOW (gtk_widget_get_toplevel (charmap)));
 }
@@ -74,6 +76,8 @@ main (gint argc, gchar **argv)
   GtkWidget *vbox;
   GtkWidget *fontsel;
   GtkWidget *fontsel_toggle;
+  gchar *orig_font, *new_font;
+  PangoFontDescription *font_desc;
 
   gtk_init (&argc, &argv);
 
@@ -112,6 +116,18 @@ main (gint argc, gchar **argv)
   gtk_window_set_default_size (GTK_WINDOW (window), 
                                gdk_screen_width () * 2/3,
                                gdk_screen_height () * 4/5);
+
+  /* make the starting font 3/2 of the default selection in fontsel */
+  orig_font = gtk_font_selection_get_font_name (GTK_FONT_SELECTION (fontsel));
+  font_desc = pango_font_description_from_string (orig_font);
+  pango_font_description_set_size (
+          font_desc, pango_font_description_get_size (font_desc) * 3/2);
+  new_font = pango_font_description_to_string (font_desc);
+  /* this sends the changed signal: */
+  gtk_font_selection_set_font_name (GTK_FONT_SELECTION (fontsel), new_font);
+  /* g_object_unref (font_desc); XXX: causes seg fault */
+  g_free (orig_font);
+  g_free (new_font);
 
   gtk_widget_show_all (window);
 

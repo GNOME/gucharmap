@@ -550,7 +550,7 @@ redraw (Charmap *charmap)
 {
   gint row_offset;
   gboolean actives_done = FALSE;
-  
+
   row_offset = ((gint) charmap->page_first_char 
                 - (gint) charmap->old_page_first_char)
                / charmap->cols;
