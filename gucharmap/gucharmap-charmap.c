@@ -840,24 +840,20 @@ details_event_after (GtkWidget *text_view,
 }
 
 
-static gboolean
-details_motion_notify_event (GtkWidget *text_view,
-                             GdkEventMotion *event,
-                             GucharmapCharmap *charmap)
+static void
+set_cursor_if_appropriate (GucharmapCharmap *charmap,
+                           gint x,
+                           gint y)
 {
   GSList *tags = NULL, *tagp = NULL;
   GtkTextBuffer *buffer;
   GtkTextIter iter;
   gboolean hovering_over_link = FALSE;
-  gint x, y;
 
-  gtk_text_view_window_to_buffer_coords (GTK_TEXT_VIEW (text_view), 
-                                         GTK_TEXT_WINDOW_WIDGET,
-                                         event->x, event->y, &x, &y);
+  buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (charmap->details));
 
-  buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_view));
-
-  gtk_text_view_get_iter_at_location (GTK_TEXT_VIEW (text_view), &iter, x, y);
+  gtk_text_view_get_iter_at_location (GTK_TEXT_VIEW (charmap->details), 
+                                      &iter, x, y);
 
   tags = gtk_text_iter_get_tags (&iter);
   for (tagp = tags;  tagp != NULL;  tagp = tagp->next)
@@ -881,15 +877,49 @@ details_motion_notify_event (GtkWidget *text_view,
       charmap->hovering_over_link = hovering_over_link;
 
       if (hovering_over_link)
-        gdk_window_set_cursor (event->window, charmap->hand_cursor);
+        gdk_window_set_cursor (gtk_text_view_get_window (GTK_TEXT_VIEW (charmap->details), GTK_TEXT_WINDOW_TEXT), charmap->hand_cursor);
       else
-        gdk_window_set_cursor (event->window, charmap->regular_cursor);
+        gdk_window_set_cursor (gtk_text_view_get_window (GTK_TEXT_VIEW (charmap->details), GTK_TEXT_WINDOW_TEXT), charmap->regular_cursor);
     }
 
   if (tags) 
     g_slist_free (tags);
+}
+
+
+static gboolean
+details_motion_notify_event (GtkWidget *text_view,
+                             GdkEventMotion *event,
+                             GucharmapCharmap *charmap)
+{
+  gint x, y;
+
+  gtk_text_view_window_to_buffer_coords (GTK_TEXT_VIEW (text_view), 
+                                         GTK_TEXT_WINDOW_WIDGET,
+                                         event->x, event->y, &x, &y);
+
+  set_cursor_if_appropriate (charmap, x, y);
 
   gdk_window_get_pointer (text_view->window, NULL, NULL, NULL);
+  return FALSE;
+}
+
+
+static gboolean
+details_visibility_notify_event (GtkWidget *text_view,
+                                 GdkEventVisibility *event,
+                                 GucharmapCharmap *charmap)
+{
+  gint wx, wy, bx, by;
+
+  gdk_window_get_pointer (text_view->window, &wx, &wy, NULL);
+
+  gtk_text_view_window_to_buffer_coords (GTK_TEXT_VIEW (text_view), 
+                                         GTK_TEXT_WINDOW_WIDGET,
+                                         wx, wy, &bx, &by);
+
+  set_cursor_if_appropriate (charmap, bx, by);
+
   return FALSE;
 }
 
@@ -923,6 +953,8 @@ make_details_page (GucharmapCharmap *charmap)
                     G_CALLBACK (details_event_after), charmap);
   g_signal_connect (G_OBJECT (charmap->details), "motion-notify-event", 
                     G_CALLBACK (details_motion_notify_event), charmap);
+  g_signal_connect (G_OBJECT (charmap->details), "visibility-notify-event", 
+                    G_CALLBACK (details_visibility_notify_event), charmap);
 
   create_tags (charmap);
 
