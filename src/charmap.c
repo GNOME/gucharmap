@@ -1599,6 +1599,7 @@ charmap_init (Charmap *charmap)
 {
   GtkWidget *hpaned;
   GtkWidget *hbox;
+  GtkWidget *vbox;
   GtkWidget *caption;
 
   charmap->rows = CHARMAP_MIN_ROWS;
@@ -1613,21 +1614,28 @@ charmap_init (Charmap *charmap)
   gtk_box_pack_start (GTK_BOX (hbox), make_search (charmap), TRUE, TRUE, 0);
   /* end top hbox */
 
+  /* vbox for charmap and caption */
+  vbox = gtk_vbox_new (FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (vbox), make_chartable (charmap), 
+                      TRUE, TRUE, 0);
+  caption = make_caption (charmap);
+  gtk_widget_show (caption);
+  gtk_box_pack_start (GTK_BOX (vbox), caption, FALSE, FALSE, 0);
+  gtk_widget_show (vbox);
+  /* end vbox for charmap and caption*/
+
   /* put stuff in top hpaned */
   hpaned = gtk_hpaned_new ();
   gtk_paned_pack1 (GTK_PANED (hpaned), make_unicode_block_selector (charmap), 
                    FALSE, TRUE);
-  gtk_paned_pack2 (GTK_PANED (hpaned), make_chartable (charmap), TRUE, TRUE);
+  gtk_paned_pack2 (GTK_PANED (hpaned), vbox, TRUE, TRUE);
   /* done with panes */
 
-  caption = make_caption (charmap);
   /* start packing stuff in the outer vbox (the Charmap itself) */
   gtk_box_pack_start (GTK_BOX (charmap), hbox, FALSE, FALSE, 0);
   gtk_widget_show (hbox);
   gtk_box_pack_start (GTK_BOX (charmap), hpaned, TRUE, TRUE, 0);
   gtk_widget_show (hpaned);
-  gtk_box_pack_start (GTK_BOX (charmap), caption, FALSE, FALSE, 0);
-  gtk_widget_show (caption);
   /* end packing stuff in the outer vbox (the Charmap itself) */
 
   /* the statusbar— not placed anywhere */
