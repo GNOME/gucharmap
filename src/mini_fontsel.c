@@ -210,9 +210,6 @@ set_style (MiniFontSelection *fontsel, const gchar *new_style)
   fontsel->font_desc = pango_font_face_describe (face);
   pango_font_description_set_size (fontsel->font_desc, size);
 
-  g_printerr ("mini_fontsel.c: set_style: \"%s\"\n", 
-              pango_font_description_to_string (fontsel-> font_desc));
-
   g_signal_emit (fontsel, mini_font_selection_signals[CHANGED], 0);
 }
 
@@ -224,8 +221,6 @@ style_changed (GtkWidget *widget, MiniFontSelection *fontsel)
 
   new_style = gtk_entry_get_text (
           GTK_ENTRY (GTK_COMBO (fontsel->style)->entry));
-
-  g_printerr ("mini_fontsel.c: style_changed: %s\n", new_style);
 
   if (new_style[0] == '\0') /* empty string */
     return;

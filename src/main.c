@@ -73,9 +73,6 @@ show_hide_details (GtkWidget *widget, gpointer data)
 static void
 fontsel_changed (MiniFontSelection *fontsel, Charmap *charmap)
 {
-  g_printerr ("fontsel_changed: %s\n", 
-              mini_font_selection_get_font_name (fontsel));
-
   charmap_set_font (charmap, mini_font_selection_get_font_name (fontsel));
 }
 

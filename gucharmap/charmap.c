@@ -27,6 +27,7 @@
 #include "charmap.h"
 #include "unicode_info.h"
 #include "gucharmap_intl.h"
+#include "disclosure-widget.h"
 
 #define abs(x) ((x) >= 0 ? (x) : (-x))
 
@@ -1597,10 +1598,9 @@ charmap_class_init (CharmapClass *clazz)
 void
 charmap_init (Charmap *charmap)
 {
-  GtkWidget *vbox;
-  GtkWidget *vpaned;
   GtkWidget *hpaned;
   GtkWidget *hbox;
+  GtkWidget *caption;
 
   charmap->rows = CHARMAP_MIN_ROWS;
   charmap->cols = CHARMAP_MIN_COLS;
@@ -1621,20 +1621,16 @@ charmap_init (Charmap *charmap)
   gtk_paned_pack2 (GTK_PANED (hpaned), make_chartable (charmap), TRUE, TRUE);
   /* done with panes */
 
-  /* start packing stuff in the vbox for the top pane */
-  vbox = gtk_vbox_new (FALSE, 0);
-  gtk_box_pack_start (GTK_BOX (vbox), hpaned, TRUE, TRUE, 0);
-  /* end packing stuff in the vbox for the top pane */
-
-  /* put stuff in the vpaned */
-  vpaned = gtk_vpaned_new ();
-  gtk_paned_pack1 (GTK_PANED (vpaned), vbox, TRUE, TRUE);
-  gtk_paned_pack2 (GTK_PANED (vpaned), make_caption (charmap), FALSE, TRUE);
-  /* done with panes */
-
+  caption = make_caption (charmap);
   /* start packing stuff in the outer vbox (the Charmap itself) */
   gtk_box_pack_start (GTK_BOX (charmap), hbox, FALSE, FALSE, 0);
-  gtk_box_pack_start (GTK_BOX (charmap), vpaned, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (charmap), hpaned, TRUE, TRUE, 0);
+  gtk_box_pack_start (
+          GTK_BOX (charmap), 
+          cddb_disclosure_new (caption, _("Details on the current character"), 
+                               NULL), 
+          FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (charmap), caption, FALSE, FALSE, 0);
   /* end packing stuff in the outer vbox (the Charmap itself) */
 
   /* the statusbar— not placed anywhere */
