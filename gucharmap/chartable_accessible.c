@@ -336,7 +336,7 @@ chartable_accessible_ref_accessible_at_point (AtkComponent *component,
 
 
 static void
-atk_component_interface_init (AtkComponentIface *iface)
+chartable_accessible_component_interface_init (AtkComponentIface *iface)
 {
   g_return_if_fail (iface != NULL);
 
@@ -676,7 +676,7 @@ chartable_accessible_get_row_at_index (AtkTable *table,
 
 
 static void
-atk_table_interface_init (AtkTableIface *iface)
+chartable_accessible_table_interface_init (AtkTableIface *iface)
 {
   g_return_if_fail (iface != NULL);
 
@@ -714,14 +714,14 @@ chartable_accessible_get_type (void)
 
     static const GInterfaceInfo atk_table_info =
     {
-        (GInterfaceInitFunc) atk_table_interface_init,
+        (GInterfaceInitFunc) chartable_accessible_table_interface_init,
         (GInterfaceFinalizeFunc) NULL,
         NULL
     };
 
     static const GInterfaceInfo atk_component_info =
     {
-        (GInterfaceInitFunc) atk_component_interface_init,
+        (GInterfaceInitFunc) chartable_accessible_component_interface_init,
         (GInterfaceFinalizeFunc) NULL,
         NULL
     };

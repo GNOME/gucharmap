@@ -171,7 +171,7 @@ charcell_accessible_grab_focus (AtkComponent *component)
 
 
 static void
-atk_component_interface_init (AtkComponentIface *iface)
+charcell_accessible_component_interface_init (AtkComponentIface *iface)
 {
   g_return_if_fail (iface != NULL);
 
@@ -268,7 +268,7 @@ charcell_accessible_action_set_description (AtkAction   *action,
 
 
 static void
-atk_action_interface_init (AtkActionIface *iface)
+charcell_accessible_action_interface_init (AtkActionIface *iface)
 {
   g_return_if_fail (iface != NULL);
 
@@ -303,14 +303,14 @@ charcell_accessible_get_type (void)
 
       static const GInterfaceInfo atk_component_info =
       {
-        (GInterfaceInitFunc) atk_component_interface_init,
+        (GInterfaceInitFunc) charcell_accessible_component_interface_init,
         (GInterfaceFinalizeFunc) NULL,
         NULL
       };
 
      static const GInterfaceInfo atk_action_info =
      {
-       (GInterfaceInitFunc) atk_action_interface_init,
+       (GInterfaceInitFunc) charcell_accessible_action_interface_init,
        (GInterfaceFinalizeFunc) NULL,
        NULL
      };
