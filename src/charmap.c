@@ -30,8 +30,6 @@
 #include "gucharmap_marshal.h"
 
 
-#define set_statusbar_message(x,y) 
-
 /* only the label is visible in the block selector */
 enum 
 {
@@ -123,6 +121,13 @@ unichar_to_printable_utf8 (gunichar uc)
     }
 
   return buf;
+}
+
+
+static void
+status_message (Charmap *charmap, const gchar *message)
+{
+  g_signal_emit (charmap, charmap_signals[STATUS_MESSAGE], 0, message);
 }
 
 
@@ -1115,6 +1120,8 @@ leave_zoom_mode (Charmap *charmap)
 
       gdk_window_set_cursor (charmap->chartable->window, NULL);
       gtk_object_destroy (GTK_OBJECT (zoom_window));
+
+      status_message (charmap, _("Zoom mode disabled."));
     }
 }
 
@@ -1314,12 +1321,14 @@ key_press_event (GtkWidget *widget,
 		       charmap->active_char);
         return TRUE;
 
-      case GDK_plus: case GDK_KP_Add:
+      case GDK_plus: case GDK_KP_Add: case GDK_equal:
         get_root_coords_at_active_char (charmap, &x_root, &y_root);
         enter_zoom_mode (charmap, x_root, y_root);
+        status_message (charmap,
+                        _("Zoom mode enabled. Press <Esc> to disable zoom."));
         return TRUE;
 
-      case GDK_minus: case GDK_KP_Subtract:
+      case GDK_minus: case GDK_KP_Subtract: case GDK_Escape:
         leave_zoom_mode (charmap);
         return TRUE;
 
@@ -1375,6 +1384,7 @@ button_press_event (GtkWidget *widget,
 
       enter_zoom_mode (charmap, event->x_root, event->y_root);
       hide_mouse_cursor (charmap->chartable);
+      status_message (charmap, _("Zoom mode enabled."));
     }
 
   /* need to return false so it gets drag events */
@@ -1678,7 +1688,7 @@ make_caption (Charmap *charmap)
 }
 
 
-static void       
+static void
 selection_text_received (GtkClipboard *clipboard, 
                          const gchar *text,
                          gpointer data)
@@ -1689,11 +1699,9 @@ selection_text_received (GtkClipboard *clipboard,
   if (text == NULL)
     {
       if (clipboard == gtk_clipboard_get (GDK_SELECTION_CLIPBOARD))
-        g_signal_emit (charmap, charmap_signals[STATUS_MESSAGE], 0, 
-		       _("Clipboard is empty."));
+        status_message (charmap, _("Clipboard is empty."));
       else
-        g_signal_emit (charmap, charmap_signals[STATUS_MESSAGE], 0, 
-		       _("There is no selected text."));
+        status_message (charmap, _("There is no selected text."));
       return;
     }
 
@@ -1701,13 +1709,11 @@ selection_text_received (GtkClipboard *clipboard,
 
   if (uc == (gunichar)(-2) || uc == (gunichar)(-1) || uc > UNICHAR_MAX)
     {
-      g_signal_emit (charmap, charmap_signals[STATUS_MESSAGE], 0, 
-                     _("Unknown character, unable to identify."));
+      status_message (charmap, _("Unknown character, unable to identify."));
     }
   else
     {
-      g_signal_emit (charmap, charmap_signals[STATUS_MESSAGE], 0, 
-	             _("Character found."));
+      status_message (charmap, _("Character found."));
       set_active_character (charmap, uc);
       redraw (charmap, TRUE);
     }
@@ -1907,13 +1913,11 @@ drag_data_received (GtkWidget *widget,
 
   if (uc == (gunichar)(-2) || uc == (gunichar)(-1) || uc > UNICHAR_MAX)
     {
-      g_signal_emit (charmap, charmap_signals[STATUS_MESSAGE], 0, 
-                     _("Unknown character, unable to identify."));
+      status_message (charmap, _("Unknown character, unable to identify."));
     }
   else
     {
-      g_signal_emit (charmap, charmap_signals[STATUS_MESSAGE], 0, 
-	             _("Character found."));
+      status_message (charmap, _("Character found."));
       set_active_character (charmap, uc);
       redraw (charmap, TRUE);
     }
@@ -2182,7 +2186,7 @@ charmap_go_to_character (Charmap *charmap, gunichar uc)
     }
 
   message = g_strdup_printf ("Jumped to U+%4.4X.", uc);
-  g_signal_emit (charmap, charmap_signals[STATUS_MESSAGE], 0, message);
+  status_message (charmap, message);
   g_free (message);
 }
 

@@ -1,5 +1,15 @@
 2003-01-23  Daniel Elstner  <daniel.elstner@gmx.net>
 
+	* src/charmap.c (status_message): Add an invocator function for
+	the "status-message" signal, and use it.
+
+	(key_press_event): Make '=' and <Esc> enter/leave zoom mode, too.
+	(button_press_event):
+	(leave_zoom_mode): Show statusbar messages when entering/leaving
+	zoom mode.
+
+2003-01-23  Daniel Elstner  <daniel.elstner@gmx.net>
+
 	* autogen.sh: Oops, forgot to redirect the output of
 	aclocal/automake --version to /dev/null.
 
