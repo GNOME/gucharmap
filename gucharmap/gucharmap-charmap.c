@@ -35,6 +35,8 @@
 /* 0x100, a standard increment for paging unicode */
 #define PAGE_SIZE 256
 
+extern gboolean _gucharmap_unicode_has_nameslist_entry (gunichar uc);
+
 /* only the label is visible in the block selector */
 enum 
 {
@@ -487,87 +489,97 @@ set_details (GucharmapCharmap *charmap,
                          _("Decimal entity reference:"), temp);
   g_free (temp);
 
-  insert_heading (charmap, buffer, &iter, 
-                  _("Annotations and Cross References"));
-
-  /* nameslist equals (alias names) */
-  csarr = gucharmap_get_nameslist_equals (uc);
-  if (csarr != NULL)
+  if (_gucharmap_unicode_has_nameslist_entry (uc))
     {
-      insert_chocolate_detail (charmap, buffer, &iter,
-                               _("Alias names:"), csarr, FALSE);
-      g_free (csarr);
-    }
-
-  /* nameslist stars (notes) */
-  csarr = gucharmap_get_nameslist_stars (uc);
-  if (csarr != NULL)
-    {
-      insert_chocolate_detail (charmap, buffer, &iter,
-                               _("Notes:"), csarr, TRUE);
-      g_free (csarr);
-    }
-
-  /* nameslist exes (see also) */
-  ucs = gucharmap_get_nameslist_exes (uc);
-  if (ucs != NULL)
-    {
-      insert_chocolate_detail_codepoints (charmap, buffer, &iter,
-                                          _("See also:"), ucs);
-      g_free (ucs);
-    }
-
-  /* nameslist pounds (approximate equivalents) */
-  csarr = gucharmap_get_nameslist_pounds (uc);
-  if (csarr != NULL)
-    {
-      insert_chocolate_detail (charmap, buffer, &iter,
-                               _("Approximate equivalents:"), csarr, TRUE);
-      g_free (csarr);
-    }
-
-  /* nameslist colons (equivalents) */
-  csarr = gucharmap_get_nameslist_colons (uc);
-  if (csarr != NULL)
-    {
-      insert_chocolate_detail (charmap, buffer, &iter,
-                               _("Equivalents:"), csarr, TRUE);
-      g_free (csarr);
+      insert_heading (charmap, buffer, &iter, 
+                      _("Annotations and Cross References"));
+    
+      /* nameslist equals (alias names) */
+      csarr = gucharmap_get_nameslist_equals (uc);
+      if (csarr != NULL)
+        {
+          insert_chocolate_detail (charmap, buffer, &iter,
+                                   _("Alias names:"), csarr, FALSE);
+          g_free (csarr);
+        }
+    
+      /* nameslist stars (notes) */
+      csarr = gucharmap_get_nameslist_stars (uc);
+      if (csarr != NULL)
+        {
+          insert_chocolate_detail (charmap, buffer, &iter,
+                                   _("Notes:"), csarr, TRUE);
+          g_free (csarr);
+        }
+    
+      /* nameslist exes (see also) */
+      ucs = gucharmap_get_nameslist_exes (uc);
+      if (ucs != NULL)
+        {
+          insert_chocolate_detail_codepoints (charmap, buffer, &iter,
+                                              _("See also:"), ucs);
+          g_free (ucs);
+        }
+    
+      /* nameslist pounds (approximate equivalents) */
+      csarr = gucharmap_get_nameslist_pounds (uc);
+      if (csarr != NULL)
+        {
+          insert_chocolate_detail (charmap, buffer, &iter,
+                                   _("Approximate equivalents:"), csarr, TRUE);
+          g_free (csarr);
+        }
+    
+      /* nameslist colons (equivalents) */
+      csarr = gucharmap_get_nameslist_colons (uc);
+      if (csarr != NULL)
+        {
+          insert_chocolate_detail (charmap, buffer, &iter,
+                                   _("Equivalents:"), csarr, TRUE);
+          g_free (csarr);
+        }
     }
 
 #if ENABLE_UNIHAN
 
-  insert_heading (charmap, buffer, &iter, _("CJK Ideograph Information"));
-
-  csp = gucharmap_get_unicode_kDefinition (uc);
-  if (csp)
-    insert_vanilla_detail (charmap, buffer, &iter,
-                           _("Definition in English:"), csp);
-
-  csp = gucharmap_get_unicode_kMandarin (uc);
-  if (csp)
-    insert_vanilla_detail (charmap, buffer, &iter,
-                           _("Mandarin Pronunciation:"), csp);
-
-  csp = gucharmap_get_unicode_kJapaneseOn (uc);
-  if (csp)
-    insert_vanilla_detail (charmap, buffer, &iter,
-                           _("Japanese On Pronunciation:"), csp);
-
-  csp = gucharmap_get_unicode_kJapaneseKun (uc);
-  if (csp)
-    insert_vanilla_detail (charmap, buffer, &iter,
-                           _("Japanese Kun Pronunciation:"), csp);
-
-  csp = gucharmap_get_unicode_kTang (uc);
-  if (csp)
-    insert_vanilla_detail (charmap, buffer, &iter,
-                           _("Tang Pronunciation:"), csp);
-
-  csp = gucharmap_get_unicode_kKorean (uc);
-  if (csp)
-    insert_vanilla_detail (charmap, buffer, &iter,
-                           _("Korean Pronunciation:"), csp);
+  /* this isn't so bad efficiency-wise */
+  if (gucharmap_get_unicode_kDefinition (uc)
+      || gucharmap_get_unicode_kMandarin (uc)
+      || gucharmap_get_unicode_kJapaneseOn (uc)
+      || gucharmap_get_unicode_kJapaneseKun (uc)
+      || gucharmap_get_unicode_kTang (uc)
+      || gucharmap_get_unicode_kKorean (uc))
+    {
+      csp = gucharmap_get_unicode_kDefinition (uc);
+      if (csp)
+        insert_vanilla_detail (charmap, buffer, &iter,
+                               _("Definition in English:"), csp);
+    
+      csp = gucharmap_get_unicode_kMandarin (uc);
+      if (csp)
+        insert_vanilla_detail (charmap, buffer, &iter,
+                               _("Mandarin Pronunciation:"), csp);
+    
+      csp = gucharmap_get_unicode_kJapaneseOn (uc);
+      if (csp)
+        insert_vanilla_detail (charmap, buffer, &iter,
+                               _("Japanese On Pronunciation:"), csp);
+    
+      csp = gucharmap_get_unicode_kJapaneseKun (uc);
+      if (csp)
+        insert_vanilla_detail (charmap, buffer, &iter,
+                               _("Japanese Kun Pronunciation:"), csp);
+    
+      csp = gucharmap_get_unicode_kTang (uc);
+      if (csp)
+        insert_vanilla_detail (charmap, buffer, &iter,
+                               _("Tang Pronunciation:"), csp);
+    
+      csp = gucharmap_get_unicode_kKorean (uc);
+      if (csp)
+        insert_vanilla_detail (charmap, buffer, &iter,
+                               _("Korean Pronunciation:"), csp);
+    }
 #endif /* #if ENABLE_UNIHAN */
 }
 

@@ -612,6 +612,12 @@ get_nameslist (gunichar uc)
 }
 
 
+gboolean
+_gucharmap_unicode_has_nameslist_entry (gunichar uc)
+{
+  return get_nameslist (uc) != NULL;
+}
+
 /* returns newly allocated array of gunichar terminated with -1 */
 gunichar *
 gucharmap_get_nameslist_exes (gunichar uc)
@@ -887,5 +893,4 @@ gucharmap_unichar_isgraph (gunichar uc)
           && t != G_UNICODE_SURROGATE
           && t != G_UNICODE_SPACE_SEPARATOR);
 }
-
 
