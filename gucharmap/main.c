@@ -53,6 +53,8 @@ main (gint argc, gchar **argv)
   gchar *orig_font = NULL;
   PangoFontDescription *font_desc = NULL;
   GdkScreen *screen;
+  gint monitor;
+    GdkRectangle rect;
 #if !HAVE_GNOME
   poptContext popt_context;
   gint rc;
@@ -90,12 +92,12 @@ main (gint argc, gchar **argv)
   gucharmap_window_set_font_selection_visible (GUCHARMAP_WINDOW (window), TRUE);
   gucharmap_window_set_file_menu_visible (GUCHARMAP_WINDOW (window), TRUE);
 
-
   screen = gtk_window_get_screen (GTK_WINDOW (window));
+  monitor = gdk_screen_get_monitor_at_point (screen, 0, 0);
+  gdk_screen_get_monitor_geometry (screen, monitor, &rect);
   gtk_window_set_default_size (GTK_WINDOW (window), 
-                               gdk_screen_get_width (screen) * 9/16,
-                               gdk_screen_get_height (screen) * 9/16);
-
+                               rect.width * 9/16, 
+                               rect.height * 9/16);
 
   /* make the starting font 50% bigger than the default font */
   if (new_font == NULL) /* new_font could be set by command line option */
