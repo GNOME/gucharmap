@@ -430,10 +430,8 @@ history_back (GtkWidget *widget,
   guw->history = guw->history->prev;
 
   gtk_widget_set_sensitive (guw->back_menu_item, guw->history->prev != NULL);
-  gtk_widget_set_sensitive (guw->back_button, guw->history->prev != NULL);
 
   gtk_widget_set_sensitive (guw->forward_menu_item, TRUE);
-  gtk_widget_set_sensitive (guw->forward_button, TRUE);
 
   gucharmap_table_set_active_character (guw->charmap->chartable,
                                         (gunichar) guw->history->data);
@@ -451,10 +449,8 @@ history_forward (GtkWidget *widget,
 
   gtk_widget_set_sensitive (guw->forward_menu_item, 
                             guw->history->next != NULL);
-  gtk_widget_set_sensitive (guw->forward_button, guw->history->next != NULL);
 
   gtk_widget_set_sensitive (guw->back_menu_item, TRUE);
-  gtk_widget_set_sensitive (guw->back_button, TRUE);
 
   gucharmap_table_set_active_character (guw->charmap->chartable,
                                         (gunichar) guw->history->data);
@@ -857,9 +853,7 @@ link_clicked (GucharmapCharmap *charmap,
   guw->history = guw->history->next;
 
   gtk_widget_set_sensitive (guw->back_menu_item, TRUE);
-  gtk_widget_set_sensitive (guw->back_button, TRUE);
   gtk_widget_set_sensitive (guw->forward_menu_item, FALSE);
-  gtk_widget_set_sensitive (guw->forward_button, FALSE);
 }
 
 

@@ -75,8 +75,6 @@ struct _GucharmapWindow
   GList *history;
   GtkWidget *back_menu_item;
   GtkWidget *forward_menu_item;
-  GtkWidget *back_button;
-  GtkWidget *forward_button;
 };
 
 
