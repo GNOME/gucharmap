@@ -1,5 +1,23 @@
 2004-01-31  Noah Levitt
 
+	* gucharmap/gucharmap-table.c:
+	* gucharmap/gucharmap-window.c:
+	* gucharmap/main.c: Remove logging statements just committed. 
+
+	* gucharmap/gucharmap-table.c: Simplify bare_minimal_* functions.
+
+2004-01-31  Noah Levitt
+
+	* gucharmap/gucharmap-table.c:
+	* gucharmap/gucharmap-table.h:
+	* gucharmap/gucharmap-window.c:
+	* gucharmap/main.c: Estimate font height rather than call
+	pango_context_get_metrics, drastically improving startup time and
+	responsiveness when changing fonts. This commit has some logging
+	statements in it for reference; will remove and recommit.
+
+2004-01-31  Noah Levitt
+
 	* gucharmap/Makefile.am:
 	* gucharmap/gucharmap-marshal.list:
 	* gucharmap/gucharmap_marshal.list: Rename gucharmap_marshal.list to

@@ -38,8 +38,6 @@
 # define ICON_PATH ""
 #endif
 
-extern void logg (const gchar *message, const gchar *location);
-
 typedef struct _EntryDialog EntryDialog;
 
 struct _EntryDialog
@@ -687,8 +685,6 @@ static void
 gucharmap_window_init (GucharmapWindow *guw)
 {
   GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
-
-  logg ("gucharmap_window_init:", "starting");
 
   gtk_window_set_title (GTK_WINDOW (guw), _("Character Map"));
 

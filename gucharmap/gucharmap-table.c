@@ -26,8 +26,6 @@
 #include "gucharmap-table.h"
 #include "gucharmap-unicode-info.h"
 
-extern void logg (const gchar *message, const gchar *location);
-
 enum 
 {
   ACTIVATE = 0,
@@ -69,18 +67,11 @@ gucharmap_table_cell_column (GucharmapTable *chartable,
     return (cell - chartable->page_first_cell) % chartable->cols;
 }
 
-static gint
-font_height (GucharmapTable *chartable)
-{
-  return PANGO_PIXELS (2.2 * pango_font_description_get_size (chartable->drawing_area->style->font_desc));
-}
-
 /* computes the column width based solely on the font size */
 static gint
 bare_minimal_column_width (GucharmapTable *chartable)
 {
-  /* XXX: width is not available, so use height */
-  return font_height (chartable) + 7;
+  return PANGO_PIXELS (8192 + 2.5 * pango_font_description_get_size (chartable->drawing_area->style->font_desc));
 }
 
 static gint
@@ -89,8 +80,7 @@ minimal_column_width (GucharmapTable *chartable)
   gint total_extra_pixels;
   gint bare_minimal_width = bare_minimal_column_width (chartable);
 
-  total_extra_pixels = chartable->drawing_area->allocation.width 
-                       - (chartable->cols * bare_minimal_width + 1);
+  total_extra_pixels = chartable->drawing_area->allocation.width - (chartable->cols * bare_minimal_width + 1);
 
   return bare_minimal_width + total_extra_pixels / chartable->cols;
 }
@@ -129,7 +119,7 @@ gucharmap_table_x_offset (GucharmapTable *chartable, gint col)
 static gint
 bare_minimal_row_height (GucharmapTable *chartable)
 {
-  return font_height (chartable) + 7;
+  return PANGO_PIXELS (8192 + 2.5 * pango_font_description_get_size (chartable->drawing_area->style->font_desc));
 }
 
 static gint
@@ -1583,8 +1573,6 @@ gucharmap_table_init (GucharmapTable *chartable)
 {
   AtkObject *accessible;
 
-  logg ("gucharmap_table_init:", "starting");
-
   chartable->zoom_mode_enabled = FALSE;
   chartable->zoom_window = NULL;
   chartable->zoom_pixmap = NULL;
@@ -1660,13 +1648,6 @@ gucharmap_table_init (GucharmapTable *chartable)
 
   chartable->font_name = NULL;
 
-#if 0
-  logg ("gucharmap_table_init:", "calling pango_context_get_metrics");
-  chartable->font_metrics = pango_context_get_metrics (gtk_widget_get_pango_context (chartable->drawing_area),
-                                                       chartable->drawing_area->style->font_desc, NULL);
-  logg ("gucharmap_table_init:", "pango_context_get_metrics returned");
-#endif
-
   chartable->pango_layout = gtk_widget_create_pango_layout (chartable->drawing_area, NULL);
 
   pango_layout_set_font_description (chartable->pango_layout,
@@ -1676,8 +1657,6 @@ gucharmap_table_init (GucharmapTable *chartable)
   chartable->active_cell = 0;
   chartable->rows = 1;
   chartable->cols = 1;
-
-  logg ("gucharmap_table_init:", "finished");
 }
 
 GtkWidget *
@@ -1761,17 +1740,6 @@ gucharmap_table_set_font (GucharmapTable *chartable, const gchar *font_name)
   /* ensure style so that this has an effect even before it's realized */
   gtk_widget_ensure_style (chartable->drawing_area);
   gtk_widget_modify_font (chartable->drawing_area, font_desc);
-
-#if 0
-  /* free the old font metrics */
-  if (chartable->font_metrics != NULL)
-    pango_font_metrics_unref (chartable->font_metrics);
-
-  logg ("gucharmap_table_set_font:", "calling pango_context_get_metrics");
-  chartable->font_metrics = pango_context_get_metrics (gtk_widget_get_pango_context (chartable->drawing_area),
-                                                       chartable->drawing_area->style->font_desc, NULL);
-  logg ("gucharmap_table_set_font:", "pango_context_get_metrics returned");
-#endif
 
   /* new pango layout for the new font */
   g_object_unref (chartable->pango_layout);

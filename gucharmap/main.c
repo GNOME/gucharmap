@@ -32,15 +32,6 @@
 #include "gucharmap-window.h"
 #include "gucharmap-mini-fontsel.h"
 
-static GTimer *timer;
-
-void
-logg (const gchar *location,
-      const gchar *message)
-{
-  g_print ("%3.3f:    %-30s %s\n", g_timer_elapsed (timer, NULL), location, message);
-}
-
 static gchar *new_font = NULL;
 static struct poptOption options[] = 
 { 
@@ -56,25 +47,19 @@ gint
 main (gint argc, gchar **argv)
 {
   GtkWidget *window;
-  /* gchar *orig_font = NULL;
-  PangoFontDescription *font_desc = NULL; */
   GdkScreen *screen;
   gint monitor;
-   GdkRectangle rect;
+  GdkRectangle rect;
 #if !HAVE_GNOME
   poptContext popt_context;
   gint rc;
 #endif  /* #if !HAVE_GNOME */
-
-  timer = g_timer_new ();
 
 #if !HAVE_GNOME
   gtk_init (&argc, &argv);
 #else 
   setlocale (LC_ALL, "");
 #endif
-
-  logg ("main:", "starting");
 
   /* translate --help message */
   options[0].descrip = _(options[0].descrip);
@@ -118,7 +103,6 @@ main (gint argc, gchar **argv)
 
   gucharmap_table_grab_focus (GUCHARMAP_WINDOW (window)->charmap->chartable);
 
-  logg ("main:", "showing window");
   gtk_widget_show_all (window);
 
   gtk_main ();
