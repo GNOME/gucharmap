@@ -32,7 +32,7 @@ extern "C" {
                                                    CharmapClass)
 #define IS_CHARMAP(obj)      GTK_CHECK_TYPE (obj, charmap_get_type ())
 
-#define CHARMAP_ROWS 12
+#define CHARMAP_ROWS 16
 #define CHARMAP_COLS 16
 
 /* largest legal unicode character */
