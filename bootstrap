@@ -6,7 +6,7 @@
 #
 
 set -x
-aclocal -I /usr/local/share/aclocal     || exit 1
+aclocal                                 || exit 1
 glib-gettextize --force --copy          || exit 1
 libtoolize --force --copy               || exit 1
 autoheader                              || exit 1
