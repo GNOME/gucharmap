@@ -364,25 +364,35 @@ snap_cols_pow2 (GtkCheckMenuItem *mi, GucharmapWindow *guw)
 static void
 help_about (GtkWidget *widget, GucharmapWindow *guw)
 {
-  GtkWidget *about;
-  const gchar *authors[] = { "Noah Levitt <nlevitt аt columbia.edu>", 
-                             "Daniel Elstner <daniel.elstner аt gmx.net>", 
-                             "Padraig O'Briain <Padraig.Obriain аt sun.com>",
-                             NULL };
-  const gchar *translator_credits;
+  static GtkWidget *about = NULL;
+  if (about == NULL) 
+    {
+      const gchar *authors[] = 
+        { 
+          "Noah Levitt <nlevitt аt columbia.edu>", 
+          "Daniel Elstner <daniel.elstner аt gmx.net>", 
+          "Padraig O'Briain <Padraig.Obriain аt sun.com>",
+          NULL 
+        };
+      const gchar *translator_credits;
 
-  translator_credits = _("translator_credits");
-  if (strcmp (translator_credits, "translator_credits") == 0)
-    translator_credits = NULL;
+      translator_credits = _("translator_credits");
+      if (strcmp (translator_credits, "translator_credits") == 0)
+        translator_credits = NULL;
 
-  about = gnome_about_new (
-          "gucharmap", VERSION, 
-          "Copyright © 2003 Noah Levitt <nlevitt аt columbia.edu>",
-          _("Unicode Character Map"), authors, NULL, 
-          translator_credits, guw->icon);
+      about = gnome_about_new (
+              "gucharmap", VERSION, 
+              "Copyright © 2003 Noah Levitt <nlevitt аt columbia.edu>",
+              _("Unicode Character Map"), authors, NULL, 
+              translator_credits, guw->icon);
 
-  gtk_window_set_icon (GTK_WINDOW (about), guw->icon);
-  gtk_widget_show (about);
+      /* set the widget pointer to NULL when the widget is destroyed */
+      g_signal_connect (G_OBJECT (about), "destroy",
+                        G_CALLBACK (gtk_widget_destroyed), &about);
+      gtk_window_set_icon (GTK_WINDOW (about), guw->icon);
+    }
+
+  gtk_window_present (GTK_WINDOW (about));
 }
 
 
