@@ -1,0 +1,1 @@
+gcc -Wall -ansi -g `pkg-config --cflags gtk+-2.0` -o gucharmap *.c `pkg-config --libs gtk+-2.0` -Wl,--rpath,/usr/local/lib,--rpath,/usr/X11R6/lib
