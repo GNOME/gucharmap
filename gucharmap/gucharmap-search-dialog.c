@@ -397,6 +397,8 @@ search_completed (GucharmapSearchDialog *search_dialog)
 
   gtk_widget_set_sensitive (priv->prev_button, TRUE);
   gtk_widget_set_sensitive (priv->next_button, TRUE);
+
+  gdk_window_set_cursor (GTK_WIDGET (search_dialog)->window, NULL);
 }
 
 void
@@ -407,6 +409,10 @@ gucharmap_search_dialog_start_search (GucharmapSearchDialog *search_dialog,
   GucharmapCodepointList *list;
   gunichar start_char;
   gint start_index;
+
+  GdkCursor *cursor = gdk_cursor_new (GDK_WATCH);
+  gdk_window_set_cursor (GTK_WIDGET (search_dialog)->window, cursor);
+  gdk_cursor_unref (cursor);
 
   if (priv->search_state)
     gucharmap_search_state_free (priv->search_state);
