@@ -70,7 +70,7 @@ struct _GucharmapCharmapClass
 
 
 GType                 gucharmap_charmap_get_type           (void);
-GtkWidget *           gucharmap_charmap_new                (void);
+GtkWidget *           gucharmap_charmap_new                (GucharmapChapters *chapters);
 void                  gucharmap_charmap_set_font           (GucharmapCharmap  *charmap, 
                                                             const gchar       *font_name);
 void                  gucharmap_charmap_identify_clipboard (GucharmapCharmap  *charmap, 

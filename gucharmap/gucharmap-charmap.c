@@ -745,29 +745,28 @@ chapter_changed (GucharmapChapters *chapters,
 static void
 gucharmap_charmap_init (GucharmapCharmap *charmap)
 {
-  GtkWidget *chapters;
+}
+
+GtkWidget *
+gucharmap_charmap_new (GucharmapChapters *chapters)
+{
+  GucharmapCharmap *charmap = g_object_new (gucharmap_charmap_get_type (), NULL);
   GtkWidget *pane2;
 
   charmap->hand_cursor = gdk_cursor_new (GDK_HAND2);
   charmap->regular_cursor = gdk_cursor_new (GDK_XTERM);
   charmap->hovering_over_link = FALSE;
-
-  chapters = gucharmap_script_chapters_new ();
-  gtk_widget_show (chapters);
+  gtk_widget_show (GTK_WIDGET (chapters));
 
   g_signal_connect (G_OBJECT (chapters), "changed", G_CALLBACK (chapter_changed), charmap);
 
   pane2 = make_chartable_pane (charmap, gucharmap_chapters_get_codepoint_list (GUCHARMAP_CHAPTERS (chapters)));
-  gtk_paned_pack1 (GTK_PANED (charmap), chapters, FALSE, TRUE);
+  gtk_paned_pack1 (GTK_PANED (charmap), GTK_WIDGET (chapters), FALSE, TRUE);
   gtk_paned_pack2 (GTK_PANED (charmap), pane2, TRUE, TRUE);
 
   set_details (charmap, gucharmap_table_get_active_character (charmap->chartable));
-}
 
-GtkWidget *
-gucharmap_charmap_new (void)
-{
-  return GTK_WIDGET (g_object_new (gucharmap_charmap_get_type (), NULL));
+  return GTK_WIDGET (charmap);
 }
 
 GType

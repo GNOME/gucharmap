@@ -66,6 +66,8 @@ GucharmapCodepointList *                gucharmap_chapters_get_codepoint_list   
 G_CONST_RETURN GucharmapCodepointList * gucharmap_chapters_get_book_codepoint_list (GucharmapChapters *chapters);
 gboolean                                gucharmap_chapters_go_to_character         (GucharmapChapters *chapters, 
                                                                                     gunichar           wc);
+void                                    gucharmap_chapters_next                    (GucharmapChapters *chapters);
+void                                    gucharmap_chapters_previous                (GucharmapChapters *chapters);
 
 G_END_DECLS
 

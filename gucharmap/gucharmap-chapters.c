@@ -134,3 +134,41 @@ gucharmap_chapters_go_to_character (GucharmapChapters *chapters,
 
   return GUCHARMAP_CHAPTERS_GET_CLASS (chapters)->go_to_character (chapters, wc);
 }
+
+/**
+ * gucharmap_chapters_next:
+ * @chapters: a #GucharmapChapters
+ *
+ * Moves to the next chapter if applicable.
+ **/
+void
+gucharmap_chapters_next (GucharmapChapters *chapters)
+{
+  GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (chapters->tree_view));
+  GtkTreeIter iter;
+
+  if (gtk_tree_selection_get_selected (selection, NULL, &iter))
+    if (gtk_tree_model_iter_next (chapters->tree_model, &iter))
+      gtk_tree_selection_select_iter (selection, &iter);
+}
+
+/**
+ * gucharmap_chapters_next:
+ * @chapters: a #GucharmapChapters
+ *
+ * Moves to the previous chapter if applicable.
+ **/
+void
+gucharmap_chapters_previous (GucharmapChapters *chapters)
+{
+  GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (chapters->tree_view));
+  GtkTreeIter iter;
+
+  if (gtk_tree_selection_get_selected (selection, NULL, &iter))
+    {
+      GtkTreePath *path = gtk_tree_model_get_path (chapters->tree_model, &iter);
+      if (gtk_tree_path_prev (path))
+        gtk_tree_selection_select_path (selection, path);
+      gtk_tree_path_free (path);
+    }
+}

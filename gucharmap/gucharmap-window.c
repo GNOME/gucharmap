@@ -41,6 +41,13 @@
 #define GUCHARMAP_WINDOW_GET_PRIVATE(o) \
             (G_TYPE_INSTANCE_GET_PRIVATE ((o), gucharmap_window_get_type (), GucharmapWindowPrivate))
 
+typedef enum
+{
+  CHAPTERS_SCRIPT,
+  CHAPTERS_BLOCK
+}
+ChaptersMode;
+
 typedef struct _GucharmapWindowPrivate GucharmapWindowPrivate;
 
 struct _GucharmapWindowPrivate
@@ -52,12 +59,10 @@ struct _GucharmapWindowPrivate
   GtkWidget *text_to_copy_container; /* the thing to show/hide */
   GtkWidget *text_to_copy_entry;
 
-  GtkWidget *unicode_options_menu_item;
-  GtkWidget *unihan_options_menu_item;
-  GtkWidget *nameslist_options_menu_item;
-
   GtkWidget *file_menu_item;
   GtkWidget *quit_menu_item;
+  GtkWidget *next_chapter_menu_item;
+  GtkWidget *prev_chapter_menu_item;
 
   GdkPixbuf *icon;
 
@@ -73,6 +78,8 @@ struct _GucharmapWindowPrivate
   gboolean font_selection_visible;
   gboolean text_to_copy_visible;
   gboolean file_menu_visible;
+
+  ChaptersMode chapters_mode; 
 };
 
 static void
@@ -331,11 +338,32 @@ next_character (GtkWidget       *button,
 }
 
 static void
+next_chapter (GtkWidget       *button,
+              GucharmapWindow *guw)
+{
+  GucharmapChapters *chapters = gucharmap_charmap_get_chapters (guw->charmap);
+  gucharmap_chapters_next (chapters);
+}
+
+static void
+prev_chapter (GtkWidget       *button,
+              GucharmapWindow *guw)
+{
+  GucharmapChapters *chapters = gucharmap_charmap_get_chapters (guw->charmap);
+  gucharmap_chapters_previous (chapters);
+}
+
+static void
 view_by_script (GtkCheckMenuItem *check_menu_item,
                 GucharmapWindow  *guw)
 {
   if (gtk_check_menu_item_get_active (check_menu_item))
-    gucharmap_charmap_set_chapters (guw->charmap, GUCHARMAP_CHAPTERS (gucharmap_script_chapters_new ()));
+    {
+      GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
+      gucharmap_charmap_set_chapters (guw->charmap, GUCHARMAP_CHAPTERS (gucharmap_script_chapters_new ()));
+      gtk_label_set_text (GTK_LABEL (gtk_bin_get_child (GTK_BIN (priv->next_chapter_menu_item))), _("Next Script"));;
+      gtk_label_set_text (GTK_LABEL (gtk_bin_get_child (GTK_BIN (priv->prev_chapter_menu_item))), _("Previous Script"));;
+    }
 }
 
 static void
@@ -343,7 +371,12 @@ view_by_block (GtkCheckMenuItem *check_menu_item,
                 GucharmapWindow  *guw)
 {
   if (gtk_check_menu_item_get_active (check_menu_item))
-    gucharmap_charmap_set_chapters (guw->charmap, GUCHARMAP_CHAPTERS (gucharmap_block_chapters_new ()));
+    {
+      GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
+      gucharmap_charmap_set_chapters (guw->charmap, GUCHARMAP_CHAPTERS (gucharmap_block_chapters_new ()));
+      gtk_label_set_text (GTK_LABEL (gtk_bin_get_child (GTK_BIN (priv->next_chapter_menu_item))), _("Next Block"));;
+      gtk_label_set_text (GTK_LABEL (gtk_bin_get_child (GTK_BIN (priv->prev_chapter_menu_item))), _("Previous Block"));;
+    }
 }
 
 static GtkWidget *
@@ -503,6 +536,35 @@ make_menu (GucharmapWindow *guw)
                               GDK_p, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
   g_signal_connect (G_OBJECT (menu_item), "activate", G_CALLBACK (prev_character), guw);
   gtk_menu_shell_append (GTK_MENU_SHELL (go_menu), menu_item);
+
+  /* separator */
+  gtk_menu_shell_append (GTK_MENU_SHELL (go_menu), gtk_menu_item_new ());
+
+  switch (priv->chapters_mode)
+    {
+      case CHAPTERS_SCRIPT:
+        priv->next_chapter_menu_item = gtk_menu_item_new_with_label (_("Next Script"));
+        priv->prev_chapter_menu_item = gtk_menu_item_new_with_label (_("Previous Script"));
+        break;
+
+      case CHAPTERS_BLOCK:
+        priv->next_chapter_menu_item = gtk_menu_item_new_with_label (_("Next Block"));
+        priv->prev_chapter_menu_item = gtk_menu_item_new_with_label (_("Previous Block"));
+        break;
+
+      default:
+        g_assert_not_reached ();
+    }
+
+  gtk_widget_add_accelerator (priv->next_chapter_menu_item, "activate", priv->accel_group,
+                              GDK_Page_Down, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+  g_signal_connect (priv->next_chapter_menu_item, "activate", G_CALLBACK (next_chapter), guw);
+  gtk_menu_shell_append (GTK_MENU_SHELL (go_menu), priv->next_chapter_menu_item);
+
+  gtk_widget_add_accelerator (priv->prev_chapter_menu_item, "activate", priv->accel_group,
+                              GDK_Page_Up, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+  g_signal_connect (priv->prev_chapter_menu_item, "activate", G_CALLBACK (prev_chapter), guw);
+  gtk_menu_shell_append (GTK_MENU_SHELL (go_menu), priv->prev_chapter_menu_item);
 
 #if HAVE_GNOME
   /* if we are the input module and are running inside a non-gnome gtk+
@@ -665,10 +727,24 @@ static void
 pack_stuff_in_window (GucharmapWindow *guw)
 {
   GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
+  GtkWidget *chapters;
   GtkWidget *big_vbox;
   GtkWidget *hbox;
 
-  guw->charmap = GUCHARMAP_CHARMAP (gucharmap_charmap_new ());
+  switch (priv->chapters_mode)
+    {
+      case CHAPTERS_SCRIPT:
+        chapters = gucharmap_script_chapters_new ();
+        break;
+
+      case CHAPTERS_BLOCK:
+        chapters = gucharmap_block_chapters_new ();
+        break;
+
+      default:
+        g_assert_not_reached ();
+    }
+  guw->charmap = GUCHARMAP_CHARMAP (gucharmap_charmap_new (GUCHARMAP_CHAPTERS (chapters)));
 
   big_vbox = gtk_vbox_new (FALSE, 0);
   gtk_container_add (GTK_CONTAINER (guw), big_vbox);
@@ -726,6 +802,7 @@ gucharmap_window_init (GucharmapWindow *guw)
   priv->font_selection_visible = FALSE;
   priv->text_to_copy_visible = FALSE;
   priv->file_menu_visible = FALSE;
+  priv->chapters_mode = CHAPTERS_SCRIPT;
 
   priv->search_dialog = NULL;
 
