@@ -21,3 +21,44 @@ $Id$
    http://developer.gnome.org/projects/gap/guide/gad/index.html
 
  - Magnify active character, as in windows charmap?
+
+
+For the next release after 0.2 (0.3? 1.0?):
+
+ - Pull the search and text-to-copy out of the charmap widget.
+
+ - Do all the text direction stuff, including connecting to that
+   direction-changed signal. In a RTL locale, U+0000 should be in the
+   upper right.
+
+ - Replace bootstrap with autogen.sh.
+
+ - Write the shell script that automates generation of the source
+   files that are based on uincode.org information. Make it part of
+   the build process?? Maybe the autogen process...
+
+ - Do something about accessibility. This might mean having the
+   charmap implement AtkTable as suggested by hp.
+
+ - Handle --version, --help, etc., even when built without gnome.
+
+ - Add a --disable-gnome option to the configury.
+
+
+Other future things, perhaps to be in 0.3, perhaps not:
+
+ - Think about sending signals and messages instead of exporting the
+   statusbar widget.
+
+ - Fix the mini_fontsel quirks and bugs.
+
+ - Write gtk docs for the charmap and mini_fontsel widgets.
+
+ - Find out about strangenesses (like the list of DnD targets) and fix
+   them if appropriate.
+
+ - Think about the search; should it find computed hangul syllables,
+   etc?
+
+ - Write or solicit some help. The F1 kind.
+ 
