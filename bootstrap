@@ -5,6 +5,7 @@
 
 set -x
 aclocal                                 || exit 1
+libtoolize --force --copy               || exit 1
 autoheader                              || exit 1
 automake --foreign --add-missing --copy || exit 1
 autoconf                                || exit 1
