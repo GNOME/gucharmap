@@ -256,7 +256,7 @@ insert_codepoint (GucharmapCharmap *charmap,
                                     NULL);
   /* add one so that zero is the "nothing" value, since U+0000 is a character */
   g_object_set_data (G_OBJECT (tag), "link_character", 
-                     (gpointer) (uc + 1));
+                     GUINT_TO_POINTER (uc + 1));
 
   gtk_text_buffer_insert_with_tags (buffer, iter, str, -1, tag, NULL);
 
@@ -672,7 +672,7 @@ follow_if_link (GucharmapCharmap *charmap,
 
       /* subtract 1 because U+0000 is a character; see above where we set
        * "link_character" */
-      uc = (gunichar) g_object_get_data (G_OBJECT (tag), "link_character") - 1;
+      uc = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (tag), "link_character")) - 1;
 
       if (uc != (gunichar)(-1)) 
         {
@@ -774,7 +774,7 @@ set_cursor_if_appropriate (GucharmapCharmap *charmap,
 
       /* subtract 1 because U+0000 is a character; see above where we set
        * "link_character" */
-      uc = (gunichar) g_object_get_data (G_OBJECT (tag), "link_character") - 1;
+      uc = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (tag), "link_character")) - 1;
 
       if (uc != (gunichar)(-1)) 
         {
