@@ -74,13 +74,11 @@ unichar_to_printable_utf8 (gunichar uc)
   static gchar buf[12];
   gint x;
 
-  /* XXX: 0x2029: workaround for pango 1.0.3 bug
-   * http://bugzilla.gnome.org/show_bug.cgi?id=88824 */
   /* http://www.cl.cam.ac.uk/~mgk25/unicode.html#utf-8 --"Also note that
    * the code positions U+D800 to U+DFFF (UTF-16 surrogates) as well as
    * U+FFFE and U+FFFF must not occur in normal UTF-8" */
   if ((g_unichar_isdefined (uc) && ! g_unichar_isgraph (uc)) 
-      || ! g_unichar_validate (uc) || uc == 0x2029)
+      || ! g_unichar_validate (uc))
     return "";
   
   /* Unicode Standard 3.2, section 2.6, "By convention, diacritical marks
