@@ -1,3 +1,8 @@
+2003-05-17  Noah Levitt
+
+	* gucharmap/Makefile.am: Install "gnome-character-map" symlink
+	as reqested by Glynn Foster.
+
 2003-05-14  Padraig O'Briain  <padraig.obriain@sun.com>
 
 	* chartable-accessible.c: Emit active-descendant-changed signal
@@ -5,45 +10,45 @@
 
 2003-05-14  Noah Levitt
 
-        * configure.ac: Added zh_CN to ALL_LINGUAS.
+	* configure.ac: Added zh_CN to ALL_LINGUAS.
 
 2003-05-08  Noah Levitt
 
-        * gucharmap/gucharmap-charmap.c:
-        * gucharmap/gucharmap-charmap.h:
-        * gucharmap/gucharmap-window.c: Get rid of the U+xxxx page listings in
-        the treeview on the left.
+	* gucharmap/gucharmap-charmap.c:
+	* gucharmap/gucharmap-charmap.h:
+	* gucharmap/gucharmap-window.c: Get rid of the U+xxxx page listings in
+	the treeview on the left.
 
 2003-05-08  Noah Levitt
 
-        * gucharmap/gucharmap-window.c:
-        * gucharmap/gucharmap-window.h:
-        * gucharmap/main.c: Hide the File (Char_map) menu in the input method.
-        (bug #112605, Gregory Merchan)
+	* gucharmap/gucharmap-window.c:
+	* gucharmap/gucharmap-window.h:
+	* gucharmap/main.c: Hide the File (Char_map) menu in the input method.
+	(bug #112605, Gregory Merchan)
 
 2003-05-07  Noah Levitt
 
-        * gucharmap/gucharmap-charmap.c: Added CJK ideograph info to the
-        details tab.
+	* gucharmap/gucharmap-charmap.c: Added CJK ideograph info to the
+	details tab.
 
 2003-05-06  Noah Levitt
 
-        * gucharmap/gucharmap-charmap.c: Set statusbar message to indicate
-        active character.
+	* gucharmap/gucharmap-charmap.c: Set statusbar message to indicate
+	active character.
 
 2003-05-06  Noah Levitt
 
-        * gucharmap/gucharmap-charmap.c: Added the nameslist stuff to the
-        character details tab.
+	* gucharmap/gucharmap-charmap.c: Added the nameslist stuff to the
+	character details tab.
 
 2003-05-06  Noah Levitt
 
-        * gucharmap/gucharmap-charmap.c:
-        * gucharmap/gucharmap-charmap.h:
-        * gucharmap/gucharmap-window.c:
-        * gucharmap/gucharmap-window.h: Started redoing the UI to get rid of
-        the character details treeview, and replace it with a text view in
-        another tab.
+	* gucharmap/gucharmap-charmap.c:
+	* gucharmap/gucharmap-charmap.h:
+	* gucharmap/gucharmap-window.c:
+	* gucharmap/gucharmap-window.h: Started redoing the UI to get rid of
+	the character details treeview, and replace it with a text view in
+	another tab.
 
 2003-05-07  Abel Cheung  <maddog@linux.org.hk>
 
@@ -51,62 +56,62 @@
 
 2003-05-04  Noah Levitt
 
-        * gucharmap/gucharmap-table.c: Ignore keypresses with modifiers.
+	* gucharmap/gucharmap-table.c: Ignore keypresses with modifiers.
 
 2003-05-04  Noah Levitt
 
-        * gucharmap/Makefile.am:
-        * gucharmap/charcell_accessible.c:
-        * gucharmap/charmap.c:
-        * gucharmap/charmap.h:
-        * gucharmap/chartable.c:
-        * gucharmap/chartable.h:
-        * gucharmap/chartable_accessible.c:
-        * gucharmap/gucharmap-charmap.c:
-        * gucharmap/gucharmap-charmap.h:
-        * gucharmap/gucharmap-mini-fontsel.c:
-        * gucharmap/gucharmap-mini-fontsel.h:
-        * gucharmap/gucharmap-table.c:
-        * gucharmap/gucharmap-table.h:
-        * gucharmap/gucharmap-unicode-info.c:
-        * gucharmap/gucharmap-unicode-info.h:
-        * gucharmap/gucharmap-window.c:
-        * gucharmap/gucharmap-window.h:
-        * gucharmap/gucharmap.h:
-        * gucharmap/imgucharmap.c:
-        * gucharmap/main.c:
-        * gucharmap/mini_fontsel.c:
-        * gucharmap/mini_fontsel.h:
-        * gucharmap/unicode_info.c:
-        * gucharmap/unicode_info.h:
-        * gucharmap/unicode/generator.sh:
-        * gucharmap/unicode/unicode_blocks.cI: Reorganized so that everything
-        public has the gucharmap_ prefix.
+	* gucharmap/Makefile.am:
+	* gucharmap/charcell_accessible.c:
+	* gucharmap/charmap.c:
+	* gucharmap/charmap.h:
+	* gucharmap/chartable.c:
+	* gucharmap/chartable.h:
+	* gucharmap/chartable_accessible.c:
+	* gucharmap/gucharmap-charmap.c:
+	* gucharmap/gucharmap-charmap.h:
+	* gucharmap/gucharmap-mini-fontsel.c:
+	* gucharmap/gucharmap-mini-fontsel.h:
+	* gucharmap/gucharmap-table.c:
+	* gucharmap/gucharmap-table.h:
+	* gucharmap/gucharmap-unicode-info.c:
+	* gucharmap/gucharmap-unicode-info.h:
+	* gucharmap/gucharmap-window.c:
+	* gucharmap/gucharmap-window.h:
+	* gucharmap/gucharmap.h:
+	* gucharmap/imgucharmap.c:
+	* gucharmap/main.c:
+	* gucharmap/mini_fontsel.c:
+	* gucharmap/mini_fontsel.h:
+	* gucharmap/unicode_info.c:
+	* gucharmap/unicode_info.h:
+	* gucharmap/unicode/generator.sh:
+	* gucharmap/unicode/unicode_blocks.cI: Reorganized so that everything
+	public has the gucharmap_ prefix.
 
 2003-05-03  Noah Levitt
 
-        * configure.ac: 
-        * Makefile.am: 
-        * gucharmap.spec.in: Add rpm spec file.
+	* configure.ac: 
+	* Makefile.am: 
+	* gucharmap.spec.in: Add rpm spec file.
 
 2003-05-03  Noah Levitt
 
-        * README:
-        * configure.ac:
-        * gucharmap/im-module-file.c:
-        * gucharmap/Makefile.am: Install the input module in the right place,
-        and write /etc/gtk-2.0/gtk.immodules.
+	* README:
+	* configure.ac:
+	* gucharmap/im-module-file.c:
+	* gucharmap/Makefile.am: Install the input module in the right place,
+	and write /etc/gtk-2.0/gtk.immodules.
 
 2003-05-03  Noah Levitt
 
-        * configure.ac: Bump development version to 0.7.0.
+	* configure.ac: Bump development version to 0.7.0.
 
 2003-04-28  Noah Levitt
 
-        * gucharmap/unicode/unicode_blocks.cI:
-        * gucharmap/unicode/unicode_categories.cI:
-        * gucharmap/unicode/unicode_data.cI:
-        * gucharmap/unicode/unicode_nameslist.cI: Update to Unicode 4.0.
+	* gucharmap/unicode/unicode_blocks.cI:
+	* gucharmap/unicode/unicode_categories.cI:
+	* gucharmap/unicode/unicode_data.cI:
+	* gucharmap/unicode/unicode_nameslist.cI: Update to Unicode 4.0.
 
 2003-04-21  Abel Cheung  <maddog@linux.org.hk>
 
@@ -114,31 +119,31 @@
 
 2003-04-19  Noah Levitt  <nlevitt аt columbia.edu>
 
-        * gucharmap/chartable.c:
-        * gucharmap/chartable.h:
-        * gucharmap/gucharmap_window.c: Snap columns to power of two option
-        (bug #107965).
+	* gucharmap/chartable.c:
+	* gucharmap/chartable.h:
+	* gucharmap/gucharmap_window.c: Snap columns to power of two option
+	(bug #107965).
 
 2003-04-16  Noah Levitt  <nlevitt аt columbia.edu>
 
-        * gucharmap/chartable.[ch]: The zoom window and drag icon use pixmap
-        instead of pixbuf. It had to be converted back and forth from a
-        pixmap, anyway (at least for the zoom window).
-        
+	* gucharmap/chartable.[ch]: The zoom window and drag icon use pixmap
+	instead of pixbuf. It had to be converted back and forth from a
+	pixmap, anyway (at least for the zoom window).
+	
 2003-04-16  Noah Levitt  <nlevitt аt columbia.edu>
 
-        * gucharmap/chartable.c: Made the zoom window a bit less invasive.
-        It's no longer always on top and on every desktop. But now it is
-        focusable (you can alt-tab to it, for example). Oh well, close enough.
+	* gucharmap/chartable.c: Made the zoom window a bit less invasive.
+	It's no longer always on top and on every desktop. But now it is
+	focusable (you can alt-tab to it, for example). Oh well, close enough.
 
 2003-04-15  Noah Levitt  <nlevitt аt columbia.edu>
 
-        * gucharmap/imgucharmap.c: Got the gucharmap input module working
-        better.
+	* gucharmap/imgucharmap.c: Got the gucharmap input module working
+	better.
 
 2003-04-10  Paul Duffy <dubhthach@frink.nuigalway.ie>
 
-        * configure.ac: Added ga (irish) to ALL_LINGUAS.
+	* configure.ac: Added ga (irish) to ALL_LINGUAS.
 
 2003-03-30  Noah Levitt  <nlevitt аt columbia.edu>
 
@@ -156,25 +161,25 @@
 
 2003-03-29  Noah Levitt  <nlevitt аt columbia.edu>
 
-        * gucharmap/charmap.c:
-        * gucharmap/charmap.h:
-        * gucharmap/gucharmap_window.c:
-        * gucharmap/unicode_info.c:
-        * gucharmap/unicode_info.h: Implemented Find Previous (shift-ctrl-G).
+	* gucharmap/charmap.c:
+	* gucharmap/charmap.h:
+	* gucharmap/gucharmap_window.c:
+	* gucharmap/unicode_info.c:
+	* gucharmap/unicode_info.h: Implemented Find Previous (shift-ctrl-G).
 
 2003-03-29  Noah Levitt  <nlevitt аt columbia.edu>
 
-        * gucharmap/gucharmap_window.c: Moved items in the Go menu to the
-        Search menu.
+	* gucharmap/gucharmap_window.c: Moved items in the Go menu to the
+	Search menu.
 
 2003-03-29  Noah Levitt  <nlevitt аt columbia.edu>
 
-        * gucharmap/Makefile.am:
-        * gucharmap/gucharmap_window.c:
-        * gucharmap/gucharmap_window.h:
-        * gucharmap/main.c:
-        * gucharmap/mini_fontsel.c: Created GucharmapWindow widget. Got rid of
-        the search entry and button; made a menu item and dialog instead.
+	* gucharmap/Makefile.am:
+	* gucharmap/gucharmap_window.c:
+	* gucharmap/gucharmap_window.h:
+	* gucharmap/main.c:
+	* gucharmap/mini_fontsel.c: Created GucharmapWindow widget. Got rid of
+	the search entry and button; made a menu item and dialog instead.
 
 2003-03-26  Christian Neumair  <chris@gnome-de.org>
 
@@ -185,9 +190,9 @@
 
 2003-03-26  Noah Levitt  <nlevitt аt columbia.edu>
 
-        * gucharmap/Makefile.am:
-        * gucharmap/imgucharmap.c:
-        * gucharmap/main.c: Started gucharmap input method.
+	* gucharmap/Makefile.am:
+	* gucharmap/imgucharmap.c:
+	* gucharmap/main.c: Started gucharmap input method.
 
 2003-03-22  Alessio Frusciante  <algol@firenze.linux.it>
 
@@ -214,8 +219,8 @@
 
 2003-03-16  YanKo Kaneti  <yaneti@declera.com>
 
-        * gucharmap/Makefile.am: make the charmap symlink relative.
-        Fixes staging area installs in DESTDIR.
+	* gucharmap/Makefile.am: make the charmap symlink relative.
+	Fixes staging area installs in DESTDIR.
 
 2003-03-15  Noah Levitt  <nlevitt аt columbia.edu>
 
@@ -230,23 +235,23 @@
 
 2003-03-11  Noah Levitt  <nlevitt аt columbia.edu>
 
-        * configure.ac:
-        * gucharmap/.cvsignore:
-        * gucharmap/Makefile.am:
-        * gucharmap/generate_nameslist.c:
-        * gucharmap/generate_unicode_stuff.sh:
-        * gucharmap/generate_unihan.c:
-        * gucharmap/unicode_info.c:
-        * gucharmap/unicode/.cvsignore:
-        * gucharmap/unicode/Makefile.am:
-        * gucharmap/unicode/generate_nameslist.c:
-        * gucharmap/unicode/generate_unihan.c:
-        * gucharmap/unicode/generator.sh: 
-        * gucharmap/unicode/unicode_blocks.cI:
-        * gucharmap/unicode/unicode_data.cI:
-        * gucharmap/unicode/unicode_nameslist.cI:
-        * gucharmap/unicode/unicode_unihan.cI: Moved generated stuff to its
-        own directory, made it compile only with --enable-maintainer-mode.
+	* configure.ac:
+	* gucharmap/.cvsignore:
+	* gucharmap/Makefile.am:
+	* gucharmap/generate_nameslist.c:
+	* gucharmap/generate_unicode_stuff.sh:
+	* gucharmap/generate_unihan.c:
+	* gucharmap/unicode_info.c:
+	* gucharmap/unicode/.cvsignore:
+	* gucharmap/unicode/Makefile.am:
+	* gucharmap/unicode/generate_nameslist.c:
+	* gucharmap/unicode/generate_unihan.c:
+	* gucharmap/unicode/generator.sh: 
+	* gucharmap/unicode/unicode_blocks.cI:
+	* gucharmap/unicode/unicode_data.cI:
+	* gucharmap/unicode/unicode_nameslist.cI:
+	* gucharmap/unicode/unicode_unihan.cI: Moved generated stuff to its
+	own directory, made it compile only with --enable-maintainer-mode.
 
 2003-03-10  Ole Laursen  <olau@hardworking.dk>
 
@@ -258,12 +263,12 @@
 
 2003-03-10  Noah Levitt  <nlevitt аt columbia.edu>
 
-        * gucharmap/charmap.c: Canonical decomposition works in both
-        directions! Thanks, Roozbeh.
+	* gucharmap/charmap.c: Canonical decomposition works in both
+	directions! Thanks, Roozbeh.
 
 2003-03-09  Noah Levitt  <nlevitt аt columbia.edu>
 
-        * gucharmap/charmap.c: Made character details... acceptable in RTL.
+	* gucharmap/charmap.c: Made character details... acceptable in RTL.
 
 2003-03-08  Takeshi AIHANA <aihana@gnome.gr.jp>
 
@@ -271,9 +276,9 @@
 
 2002-03-04  Dom Lachowicz <cinamod@hotmail.com>
 
-        * gucharmap/chartable.[ch]: Remove cruft, const set_font()
-        * gucharmap/charmap.[ch]: Remove cruft, add set_font(), properly prefix chartable.h
-        * gucharmap/mini_fontsel.h: Remove config.h
+	* gucharmap/chartable.[ch]: Remove cruft, const set_font()
+	* gucharmap/charmap.[ch]: Remove cruft, add set_font(), properly prefix chartable.h
+	* gucharmap/mini_fontsel.h: Remove config.h
 
 2003-03-04  Padraig O'Briain  <padraig.obriain@sun.com>
 
@@ -283,13 +288,13 @@
 
 2003-03-03  Noah Levitt  <nlevitt аt columbia.edu>
 
-        * src/chartable.[ch]:
-        * src/charmap.[ch]:
-        * src/Makefile.am:
-        * src/chartable.h:
-        * src/chartable_accessible.c:
-        * src/charcell_accessible.c:
-        * src/main.c: Refactored chartable into its own widget.
+	* src/chartable.[ch]:
+	* src/charmap.[ch]:
+	* src/Makefile.am:
+	* src/chartable.h:
+	* src/chartable_accessible.c:
+	* src/charcell_accessible.c:
+	* src/main.c: Refactored chartable into its own widget.
 
 2003-03-03  Dmitry G. Mastrukov  <dmitry@taurussoft.org>
 
@@ -306,22 +311,22 @@
 
 2003-03-01  Noah Levitt  <nlevitt аt columbia.edu>
 
-        * configure.ac:
-        * src/Makefile.am:
-        * src/charcell_accessible.c:
-        * src/charcell_accessible.h:
-        * src/charmap.c:
-        * src/charmap.h:
-        * src/chartable_accessible.c:
-        * src/chartable_accessible.h:
-        * src/main.c:
+	* configure.ac:
+	* src/Makefile.am:
+	* src/charcell_accessible.c:
+	* src/charcell_accessible.h:
+	* src/charmap.c:
+	* src/charmap.h:
+	* src/chartable_accessible.c:
+	* src/chartable_accessible.h:
+	* src/main.c:
 	* COPYING.LIB: Added AtkTable implementation for the character table.
 	Contributed by Padraig O'Briain.
 
 
 2003-03-01  Duarte Loreto <happyguy_pt@hotmail.com>
 
-        * configure.ac: Added "pt" to ALL_LINGUAS.
+	* configure.ac: Added "pt" to ALL_LINGUAS.
 
 2003-02-28  Noah Levitt  <nlevitt аt columbia.edu>
 
@@ -346,8 +351,8 @@
 	* gucharmap.pc.in:
 	* Makefile.am: 
 	* configure.ac:
-        * .cvsignore: Made gucharmap a pkg-config package. Contributed by Dom
-        Lachowicz.
+	* .cvsignore: Made gucharmap a pkg-config package. Contributed by Dom
+	Lachowicz.
 
 2003-02-26  Noah Levitt  <nlevitt аt columbia.edu>
 
@@ -357,9 +362,9 @@
 	* src/generate_unicode_stuff.sh:
 	* src/generate_unicode_stuff.sh:
 	* src/.cvsignore:
-        * src/unicode_info.[ch]: Annotations and cross references are now
-        among the character details that can be displayed (requested by Markus
-        Kuhn). Also, fixed the positioning of items in the details caption.
+	* src/unicode_info.[ch]: Annotations and cross references are now
+	among the character details that can be displayed (requested by Markus
+	Kuhn). Also, fixed the positioning of items in the details caption.
 
 2003-02-24  Evandro Fernandes Giovanini <evandrofg@ig.com.br>
 
@@ -418,8 +423,8 @@
 2003-02-03  Noah Levitt  <nlevitt аt columbia.edu>
 
 	* src/Makefile.am:
-        * src/gucharmaprc.rc:
-        * pixmaps/gucharmap.ico: Set up the win32 icon.
+	* src/gucharmaprc.rc:
+	* pixmaps/gucharmap.ico: Set up the win32 icon.
 
 2003-02-03  Daniel Yacob  <locales@geez.org>
 

@@ -105,13 +105,17 @@ else
 # install a symlink to the binary called "charmap"
 install-exec-hook:
 	test -e "$(DESTDIR)$(bindir)/charmap" \
-        || (cd "$(DESTDIR)$(bindir)" && ln -s gucharmap charmap)
+        || (cd "$(DESTDIR)$(bindir)" && ln -s gucharmap charmap) ; \
+	test -e "$(DESTDIR)$(bindir)/gnome-character-map" \
+        || (cd "$(DESTDIR)$(bindir)" && ln -s gucharmap gnome-character-map)
 
 # remove bin/charmap if it's a symlink (it's a pain to test what it's
 # a symlink to)
 uninstall-local:
 	test -h "$(DESTDIR)$(bindir)/charmap" \
-	&& rm -f "$(DESTDIR)$(bindir)/charmap"
+	&& rm -f "$(DESTDIR)$(bindir)/charmap" ; \
+	test -h "$(DESTDIR)$(bindir)/gnome-character-map" \
+	&& rm -f "$(DESTDIR)$(bindir)/gnome-character-map"
 
 endif
 
