@@ -1,6 +1,6 @@
 /* $Id$ */
 /*
- * Copyright (c) 2003  Noah Levitt <nlevitt@users.sourceforge.net>
+ * Copyright (c) 2003  Noah Levitt <nlevitt аt users.sourceforge.net>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -33,6 +33,8 @@
 
 
 static GtkWidget *charmap;
+static GtkWidget *text_to_copy;
+static GtkWidget *search_entry;
 static GdkPixbuf *icon;
 
 typedef struct 
@@ -137,6 +139,131 @@ jump_clipboard (GtkWidget *widget, gpointer data)
 {
   charmap_identify_clipboard (CHARMAP (charmap), 
                               gtk_clipboard_get (GDK_SELECTION_CLIPBOARD));
+}
+
+
+static void
+append_character_to_text_to_copy (Charmap *charmap, gunichar uc)
+{
+  static gchar buf[TEXT_TO_COPY_MAXLENGTH];
+  static gchar ubuf[7];
+  gint n;
+
+  n = g_unichar_to_utf8 (uc, ubuf);
+  ubuf[n] = '\0';
+
+  g_snprintf (buf, TEXT_TO_COPY_MAXLENGTH, "%s%s", 
+              gtk_entry_get_text (GTK_ENTRY (text_to_copy)), ubuf);
+
+  gtk_entry_set_text (GTK_ENTRY (text_to_copy), buf);
+}
+
+
+static gint
+copy_button_clicked (GtkWidget *widget, gpointer callback_data)
+{
+  GtkClipboard *clipboard = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
+
+  /* select it so it's in SELECTION_PRIMARY */
+  gtk_editable_select_region (GTK_EDITABLE (text_to_copy), 0, -1);
+
+  /* copy to SELECTION_CLIPBOARD */
+  gtk_clipboard_set_text (
+          clipboard, 
+          gtk_entry_get_text (GTK_ENTRY (text_to_copy)), -1);
+
+  /* set_statusbar_message (charmap, _("Text copied to clipboard.")); */
+
+  return TRUE;
+}
+
+
+static gint
+clear_button_clicked (GtkWidget *widget, gpointer callback_data)
+{
+  gtk_entry_set_text (GTK_ENTRY (text_to_copy), "");
+  /* set_statusbar_message (charmap, _("Text-to-copy entry box cleared.")); */
+  return TRUE;
+}
+
+
+static void
+do_search (GtkWidget *widget, gpointer data)
+{
+  const gchar *search_text;
+
+  search_text = gtk_entry_get_text (GTK_ENTRY (search_entry));
+  charmap_search (CHARMAP (charmap), search_text);
+}
+
+
+static GtkWidget *
+make_search ()
+{
+  GtkWidget *hbox;
+  GtkWidget *button;
+  GtkTooltips *tooltips;
+
+  tooltips = gtk_tooltips_new ();
+
+  /* search */
+  hbox = gtk_hbox_new (FALSE, 6);
+
+  search_entry = gtk_entry_new ();
+  g_signal_connect (G_OBJECT (search_entry), "activate",
+                    G_CALLBACK (do_search), NULL);
+  gtk_box_pack_start (GTK_BOX (hbox), search_entry, TRUE, TRUE, 0);
+
+  button = gtk_button_new_from_stock (GTK_STOCK_FIND);
+  g_signal_connect (G_OBJECT (button), "clicked",
+                    G_CALLBACK (do_search), NULL);
+  gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
+
+  gtk_tooltips_set_tip (tooltips, button, _("Search for the next occurrence of this string in a character's Unicode name."), NULL);
+
+  gtk_widget_show_all (hbox);
+
+  return hbox;
+}
+
+
+static GtkWidget *
+make_text_to_copy ()
+{
+  GtkWidget *hbox;
+  GtkWidget *button;
+  GtkWidget *label;
+  GtkTooltips *tooltips;
+
+  hbox = gtk_hbox_new (FALSE, 6);
+
+  tooltips = gtk_tooltips_new ();
+
+  label = gtk_label_new (_("Text to copy:"));
+  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+
+  text_to_copy = gtk_entry_new ();
+  gtk_entry_set_max_length (GTK_ENTRY (text_to_copy), 
+                            TEXT_TO_COPY_MAXLENGTH);
+  gtk_box_pack_start (GTK_BOX (hbox), text_to_copy, TRUE, TRUE, 0);
+
+  /* the copy button */
+  button = gtk_button_new_from_stock (GTK_STOCK_COPY); 
+  g_signal_connect (G_OBJECT (button), "clicked",
+                    G_CALLBACK (copy_button_clicked), NULL);
+  gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
+
+  gtk_tooltips_set_tip (tooltips, button, _("Copy to the clipboard."), NULL);
+
+  /* the clear button */
+  button = gtk_button_new_from_stock (GTK_STOCK_CLEAR);
+  g_signal_connect (G_OBJECT (button), "clicked",
+                    G_CALLBACK (clear_button_clicked), NULL);
+  gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
+
+  gtk_widget_show_all (hbox);
+
+  return hbox;
 }
 
 
@@ -260,6 +387,7 @@ main (gint argc, gchar **argv)
 {
   GtkWidget *window = NULL;
   GtkWidget *vbox;
+  GtkWidget *hbox;
   GtkWidget *statusbar;
   GtkWidget *fontsel;
   GtkWidget *toolbar; /* the fontsel goes on this */
@@ -306,12 +434,22 @@ main (gint argc, gchar **argv)
   gtk_box_pack_start (GTK_BOX (vbox), toolbar, FALSE, FALSE, 0);
   gtk_widget_show_all (toolbar);
 
+  /* hbox has search and text_to_copy */
+  hbox = gtk_hbox_new (FALSE, 18); /* space between the parts */
+  gtk_box_pack_start (GTK_BOX (hbox), make_search (), TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (hbox), make_text_to_copy (), TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 6);
+  gtk_container_set_border_width (GTK_CONTAINER (hbox), 6);
+  gtk_widget_show (hbox);
+  /* end hbox */
+
   charmap = charmap_new ();
   gtk_widget_show (charmap);
   gtk_box_pack_start (GTK_BOX (vbox), charmap, TRUE, TRUE, 0);
 
-  g_signal_connect (fontsel, "changed", G_CALLBACK (fontsel_changed),
-                    charmap);
+  g_signal_connect (fontsel, "changed", G_CALLBACK (fontsel_changed), charmap);
+  g_signal_connect (charmap, "activate", 
+	            G_CALLBACK (append_character_to_text_to_copy), NULL);
 
   /* make the starting font 50% bigger than the default font */
   orig_font = mini_font_selection_get_font_name (MINI_FONT_SELECTION (fontsel));

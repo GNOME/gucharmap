@@ -92,8 +92,6 @@ struct _Charmap
 
   Caption *caption;
 
-  GtkWidget *text_to_copy;
-
   /* the unicode block selection list */
   GtkTreeSelection *block_selection;
   GtkTreeStore *block_selector_model;
@@ -106,9 +104,6 @@ struct _Charmap
   /* for the scrollbar */
   GtkObject *adjustment; 
   gulong adjustment_changed_handler_id; 
-
-  /* search */
-  GtkWidget *search_entry;
 
   /* status bar */
   /* the status bar is not placed anywhere, but the program that uses the
@@ -156,6 +151,7 @@ void charmap_identify_clipboard (Charmap *charmap, GtkClipboard *clipboard);
 void charmap_expand_block_selector (Charmap *charmap);
 void charmap_collapse_block_selector (Charmap *charmap);
 void charmap_go_to_character (Charmap *charmap, gunichar uc);
+void charmap_search (Charmap *charmap, const gchar *search_text);
 
 
 #ifdef __cplusplus

@@ -1,6 +1,6 @@
 /* $Id$ */
 /*
- * Copyright (c) 2003  Noah Levitt <nlevitt@users.sourceforge.net>
+ * Copyright (c) 2003  Noah Levitt <nlevitt аt users.sourceforge.net>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -766,23 +766,6 @@ redraw (Charmap *charmap)
 }
 
 
-static void
-append_character_to_text_to_copy (Charmap *charmap)
-{
-  static gchar buf[TEXT_TO_COPY_MAXLENGTH];
-  static gchar ubuf[7];
-  gint n;
-
-  n = g_unichar_to_utf8 (charmap->active_char, ubuf);
-  ubuf[n] = '\0';
-
-  g_snprintf (buf, TEXT_TO_COPY_MAXLENGTH, "%s%s", 
-              gtk_entry_get_text (GTK_ENTRY (charmap->text_to_copy)), ubuf);
-
-  gtk_entry_set_text (GTK_ENTRY (charmap->text_to_copy), buf);
-}
-
-
 /* XXX: the logic this function uses to set page_first_char is hideous and
  * probably wrong */
 static void
@@ -961,7 +944,6 @@ key_press_event (GtkWidget *widget,
         break;
 
       case GDK_Return: case GDK_KP_Enter: case GDK_space:
-        append_character_to_text_to_copy (charmap);
 	g_signal_emit (charmap, charmap_signals[ACTIVATE], 0, 
 		       charmap->active_char);
         return TRUE;
@@ -1000,38 +982,6 @@ get_char_at (Charmap *charmap, gint x, gint y)
 }
 
 
-static gint
-copy_button_clicked (GtkWidget *widget,
-                     gpointer callback_data)
-{
-  Charmap *charmap = CHARMAP (callback_data);
-  GtkClipboard *clipboard = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
-
-  /* select it so it's in SELECTION_PRIMARY */
-  gtk_editable_select_region (GTK_EDITABLE (charmap->text_to_copy), 0, -1);
-
-  /* copy to SELECTION_CLIPBOARD */
-  gtk_clipboard_set_text (
-          clipboard, 
-          gtk_entry_get_text (GTK_ENTRY (charmap->text_to_copy)), -1);
-
-  set_statusbar_message (charmap, _("Text copied to clipboard."));
-
-  return TRUE;
-}
-
-
-static gint
-clear_button_clicked (GtkWidget *widget,
-                      gpointer callback_data)
-{
-  Charmap *charmap = CHARMAP (callback_data);
-  gtk_entry_set_text (GTK_ENTRY (charmap->text_to_copy), "");
-  set_statusbar_message (charmap, _("Text-to-copy entry box cleared."));
-  return TRUE;
-}
-
-
 /*  - single click with left button: activate character under pointer
  *  - double-click with left button: add active character to text_to_copy
  *  - single-click with middle button: jump to selection_primary
@@ -1047,7 +997,6 @@ button_press_event (GtkWidget *widget,
   /* double-click */
   if (event->button == 1 && event->type == GDK_2BUTTON_PRESS)
     {
-      append_character_to_text_to_copy (charmap);
       g_signal_emit (charmap, charmap_signals[ACTIVATE], 0, 
 	             charmap->active_char);
     }
@@ -1360,46 +1309,6 @@ selection_text_received (GtkClipboard *clipboard,
 }
 
 
-static GtkWidget *
-make_text_to_copy (Charmap *charmap)
-{
-  GtkWidget *hbox;
-  GtkWidget *button;
-  GtkWidget *label;
-  GtkTooltips *tooltips;
-
-  hbox = gtk_hbox_new (FALSE, 6);
-
-  tooltips = gtk_tooltips_new ();
-
-  label = gtk_label_new (_("Text to copy:"));
-  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-
-  charmap->text_to_copy = gtk_entry_new ();
-  gtk_entry_set_max_length (GTK_ENTRY (charmap->text_to_copy), 
-                            TEXT_TO_COPY_MAXLENGTH);
-  gtk_box_pack_start (GTK_BOX (hbox), charmap->text_to_copy, TRUE, TRUE, 0);
-
-  /* the copy button */
-  button = gtk_button_new_from_stock (GTK_STOCK_COPY); 
-  g_signal_connect (G_OBJECT (button), "clicked",
-                    G_CALLBACK (copy_button_clicked), charmap);
-  gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
-
-  gtk_tooltips_set_tip (tooltips, button, _("Copy to the clipboard."), NULL);
-
-  /* the clear button */
-  button = gtk_button_new_from_stock (GTK_STOCK_CLEAR);
-  g_signal_connect (G_OBJECT (button), "clicked",
-                    G_CALLBACK (clear_button_clicked), charmap);
-  gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
-
-  gtk_widget_show_all (hbox);
-
-  return hbox;
-}
-
-
 static void
 scroll_charmap (GtkAdjustment *adjustment, Charmap *charmap)
 {
@@ -1657,66 +1566,6 @@ make_chartable (Charmap *charmap)
 }
 
 
-static void
-do_search (GtkWidget *widget, Charmap *charmap)
-{
-  const gchar *search_text;
-  gunichar uc;
-
-  search_text = gtk_entry_get_text (GTK_ENTRY (charmap->search_entry));
-  if (search_text[0] == '\0')
-    {
-      set_statusbar_message (charmap, _("Nothing to search for."));
-      return;
-    }
-  
-  uc = find_next_substring_match (charmap->active_char, UNICHAR_MAX, 
-                                  search_text);
-  if (uc != (gunichar)(-1) && uc <= UNICHAR_MAX)
-    {
-      if (uc <= charmap->active_char)
-        set_statusbar_message (charmap, _("Search wrapped."));
-      else
-        set_statusbar_message (charmap, _("Found."));
-
-      set_active_character (charmap, uc);
-      redraw (charmap);
-    }
-  else
-    set_statusbar_message (charmap, _("Not found."));
-}
-
-
-static GtkWidget *
-make_search (Charmap *charmap)
-{
-  GtkWidget *hbox;
-  GtkWidget *button;
-  GtkTooltips *tooltips;
-
-  tooltips = gtk_tooltips_new ();
-
-  /* search */
-  hbox = gtk_hbox_new (FALSE, 6);
-
-  charmap->search_entry = gtk_entry_new ();
-  g_signal_connect (G_OBJECT (charmap->search_entry), "activate",
-                    G_CALLBACK (do_search), charmap);
-  gtk_box_pack_start (GTK_BOX (hbox), charmap->search_entry, TRUE, TRUE, 0);
-
-  button = gtk_button_new_from_stock (GTK_STOCK_FIND);
-  g_signal_connect (G_OBJECT (button), "clicked",
-                    G_CALLBACK (do_search), charmap);
-  gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
-
-  gtk_tooltips_set_tip (tooltips, button, _("Search for the next occurrence of this string in a character's Unicode name."), NULL);
-
-  gtk_widget_show_all (hbox);
-
-  return hbox;
-}
-
-
 void
 charmap_class_init (CharmapClass *clazz)
 {
@@ -1735,7 +1584,6 @@ void
 charmap_init (Charmap *charmap)
 {
   GtkWidget *hpaned;
-  GtkWidget *hbox;
   GtkWidget *vbox;
   GtkWidget *caption;
 
@@ -1744,13 +1592,6 @@ charmap_init (Charmap *charmap)
 
   gtk_box_set_spacing (GTK_BOX (charmap), 6);
   gtk_container_set_border_width (GTK_CONTAINER (charmap), 6);
-
-  /* top hbox has search and text_to_copy */
-  hbox = gtk_hbox_new (FALSE, 18); /* space between the parts */
-  gtk_box_pack_start (GTK_BOX (hbox), make_search (charmap), TRUE, TRUE, 0);
-  gtk_box_pack_start (GTK_BOX (hbox), make_text_to_copy (charmap), 
-                      TRUE, TRUE, 0);
-  /* end top hbox */
 
   /* vbox for charmap and caption */
   vbox = gtk_vbox_new (FALSE, 6);
@@ -1769,8 +1610,6 @@ charmap_init (Charmap *charmap)
   /* done with panes */
 
   /* start packing stuff in the outer vbox (the Charmap itself) */
-  gtk_box_pack_start (GTK_BOX (charmap), hbox, FALSE, FALSE, 6);
-  gtk_widget_show (hbox);
   gtk_box_pack_start (GTK_BOX (charmap), hpaned, TRUE, TRUE, 0);
   gtk_widget_show (hpaned);
   /* end packing stuff in the outer vbox (the Charmap itself) */
@@ -1925,5 +1764,33 @@ charmap_go_to_character (Charmap *charmap, gunichar uc)
   message = g_strdup_printf ("Jumped to U+%4.4X.", uc);
   set_statusbar_message (charmap, message);
   g_free (message);
+}
+
+
+void
+charmap_search (Charmap *charmap, const gchar *search_text)
+{
+  gunichar uc;
+
+  if (search_text[0] == '\0')
+    {
+      set_statusbar_message (charmap, _("Nothing to search for."));
+      return;
+    }
+  
+  uc = find_next_substring_match (charmap->active_char, UNICHAR_MAX, 
+                                  search_text);
+  if (uc != (gunichar)(-1) && uc <= UNICHAR_MAX)
+    {
+      if (uc <= charmap->active_char)
+        set_statusbar_message (charmap, _("Search wrapped."));
+      else
+        set_statusbar_message (charmap, _("Found."));
+
+      set_active_character (charmap, uc);
+      redraw (charmap);
+    }
+  else
+    set_statusbar_message (charmap, _("Not found."));
 }
 
