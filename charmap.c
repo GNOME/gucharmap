@@ -76,6 +76,7 @@ unichar_to_printable_utf8 (gunichar uc)
 static void
 set_caption (Charmap *charmap)
 {
+#if 0
   gchar *escaped_utf8_buf, *escaped_unicode_info;
   gchar *caption_markup;
 
@@ -94,6 +95,7 @@ set_caption (Charmap *charmap)
   g_free (caption_markup);
   g_free (escaped_utf8_buf);
   g_free (escaped_unicode_info);
+#endif
 }
 
 
@@ -478,10 +480,136 @@ charmap_init (Charmap *charmap)
   charmap->page_first_char = (gunichar) 0x0000;
   charmap->active_char = (gunichar) 0x0000;
 
+  /*
   charmap->caption = gtk_label_new ("");
   gtk_label_set_selectable (GTK_LABEL (charmap->caption), TRUE);
   set_caption (charmap);
   gtk_box_pack_start (GTK_BOX (charmap), charmap->caption, TRUE, TRUE, 0);
+  */
+  charmap->caption = g_malloc (sizeof (Caption));
+  charmap->caption->table = gtk_table_new (5, 5, FALSE);
+  charmap->caption->codepoint = gtk_label_new ("codepoint");
+  charmap->caption->character = gtk_label_new ("character");;
+  charmap->caption->category = gtk_label_new ("category");
+  charmap->caption->name = gtk_label_new ("name");
+  charmap->caption->kDefinition = gtk_label_new ("kDefinition");
+  charmap->caption->kCantonese = gtk_label_new ("kCantonese");
+  charmap->caption->kKorean = gtk_label_new ("kKorean");
+  charmap->caption->kJapaneseOn = gtk_label_new ("kJapaneseOn");
+  charmap->caption->kTang = gtk_label_new ("kTang");
+  charmap->caption->kMandarin = gtk_label_new ("kMandarin");
+  charmap->caption->decomposition = gtk_label_new ("decomposition");
+
+  gtk_label_set_selectable (GTK_LABEL (charmap->caption->codepoint), TRUE);
+  gtk_label_set_selectable (GTK_LABEL (charmap->caption->character), TRUE);
+  gtk_label_set_selectable (GTK_LABEL (charmap->caption->category), TRUE);
+  gtk_label_set_selectable (GTK_LABEL (charmap->caption->name), TRUE);
+  gtk_label_set_selectable (GTK_LABEL (charmap->caption->kDefinition), TRUE);
+  gtk_label_set_selectable (GTK_LABEL (charmap->caption->kCantonese), TRUE);
+  gtk_label_set_selectable (GTK_LABEL (charmap->caption->kKorean), TRUE);
+  gtk_label_set_selectable (GTK_LABEL (charmap->caption->kJapaneseOn), TRUE);
+  gtk_label_set_selectable (GTK_LABEL (charmap->caption->kTang), TRUE);
+  gtk_label_set_selectable (GTK_LABEL (charmap->caption->kMandarin), TRUE);
+  gtk_label_set_selectable (GTK_LABEL (charmap->caption->decomposition), TRUE);
+
+  gtk_label_set_justify (GTK_LABEL (charmap->caption->codepoint), 
+                         GTK_JUSTIFY_LEFT);
+  gtk_label_set_justify (GTK_LABEL (charmap->caption->character), 
+                         GTK_JUSTIFY_LEFT);
+  gtk_label_set_justify (GTK_LABEL (charmap->caption->category), 
+                         GTK_JUSTIFY_LEFT);
+  gtk_label_set_justify (GTK_LABEL (charmap->caption->name), 
+                         GTK_JUSTIFY_LEFT);
+  gtk_label_set_justify (GTK_LABEL (charmap->caption->kDefinition), 
+                         GTK_JUSTIFY_LEFT);
+  gtk_label_set_justify (GTK_LABEL (charmap->caption->kCantonese), 
+                         GTK_JUSTIFY_LEFT);
+  gtk_label_set_justify (GTK_LABEL (charmap->caption->kKorean), 
+                         GTK_JUSTIFY_LEFT);
+  gtk_label_set_justify (GTK_LABEL (charmap->caption->kJapaneseOn), 
+                         GTK_JUSTIFY_LEFT);
+  gtk_label_set_justify (GTK_LABEL (charmap->caption->kTang), 
+                         GTK_JUSTIFY_LEFT);
+  gtk_label_set_justify (GTK_LABEL (charmap->caption->kMandarin), 
+                         GTK_JUSTIFY_LEFT);
+  gtk_label_set_justify (GTK_LABEL (charmap->caption->decomposition), 
+                         GTK_JUSTIFY_LEFT);
+
+  gtk_misc_set_alignment (GTK_MISC (charmap->caption->codepoint), 0, 0);
+  gtk_misc_set_alignment (GTK_MISC (charmap->caption->character), 0, 0);
+  gtk_misc_set_alignment (GTK_MISC (charmap->caption->category), 0, 0);
+  gtk_misc_set_alignment (GTK_MISC (charmap->caption->name), 0, 0);
+  gtk_misc_set_alignment (GTK_MISC (charmap->caption->kDefinition), 0, 0);
+  gtk_misc_set_alignment (GTK_MISC (charmap->caption->kCantonese), 0, 0);
+  gtk_misc_set_alignment (GTK_MISC (charmap->caption->kKorean), 0, 0);
+  gtk_misc_set_alignment (GTK_MISC (charmap->caption->kJapaneseOn), 0, 0);
+  gtk_misc_set_alignment (GTK_MISC (charmap->caption->kTang), 0, 0);
+  gtk_misc_set_alignment (GTK_MISC (charmap->caption->kMandarin), 0, 0);
+  gtk_misc_set_alignment (GTK_MISC (charmap->caption->decomposition), 0, 0);
+
+  gtk_misc_set_padding (GTK_MISC (charmap->caption->codepoint), 3, 3);
+  gtk_misc_set_padding (GTK_MISC (charmap->caption->character), 3, 3);
+  gtk_misc_set_padding (GTK_MISC (charmap->caption->category), 3, 3);
+  gtk_misc_set_padding (GTK_MISC (charmap->caption->name), 3, 3);
+  gtk_misc_set_padding (GTK_MISC (charmap->caption->kDefinition), 3, 3);
+  gtk_misc_set_padding (GTK_MISC (charmap->caption->kCantonese), 3, 3);
+  gtk_misc_set_padding (GTK_MISC (charmap->caption->kKorean), 3, 3);
+  gtk_misc_set_padding (GTK_MISC (charmap->caption->kJapaneseOn), 3, 3);
+  gtk_misc_set_padding (GTK_MISC (charmap->caption->kTang), 3, 3);
+  gtk_misc_set_padding (GTK_MISC (charmap->caption->kMandarin), 3, 3);
+  gtk_misc_set_padding (GTK_MISC (charmap->caption->decomposition), 3, 3);
+
+
+  /*
+   * *-------------*-------------------------------------------------*
+   * | codepoint:  | character:   | category:                        |
+   * *-------------+--------------+----------------------------------*
+   * | name:                                                         |
+   * *---------------------------------------------------------------*
+   * | kDefinition:                                                  |
+   * *-------------+--------------+----------+------------+----------*
+   * | kCantonese: | kJapaneseOn: | kKorean: | kMandarin: | kTang:   |
+   * *-------------+--------------+----------+------------+----------*
+   * | canonical decomposition:                                      |
+   * *---------------------------------------------------------------*
+   */
+
+  gtk_table_attach_defaults (GTK_TABLE (charmap->caption->table), 
+                             charmap->caption->codepoint,
+                             0, 1, 0, 1);
+  gtk_table_attach_defaults (GTK_TABLE (charmap->caption->table), 
+                             charmap->caption->character,
+                             1, 2, 0, 1);
+  gtk_table_attach_defaults (GTK_TABLE (charmap->caption->table), 
+                             charmap->caption->category,
+                             2, 5, 0, 1);
+  gtk_table_attach_defaults (GTK_TABLE (charmap->caption->table), 
+                             charmap->caption->name,
+                             0, 5, 1, 2);
+  gtk_table_attach_defaults (GTK_TABLE (charmap->caption->table), 
+                             charmap->caption->kDefinition,
+                             0, 5, 2, 3);
+  gtk_table_attach_defaults (GTK_TABLE (charmap->caption->table), 
+                             charmap->caption->kCantonese,
+                             0, 1, 3, 4);
+  gtk_table_attach_defaults (GTK_TABLE (charmap->caption->table), 
+                             charmap->caption->kJapaneseOn,
+                             1, 2, 3, 4);
+  gtk_table_attach_defaults (GTK_TABLE (charmap->caption->table), 
+                             charmap->caption->kKorean,
+                             2, 3, 3, 4);
+  gtk_table_attach_defaults (GTK_TABLE (charmap->caption->table), 
+                             charmap->caption->kMandarin,
+                             3, 4, 3, 4);
+  gtk_table_attach_defaults (GTK_TABLE (charmap->caption->table), 
+                             charmap->caption->kTang,
+                             4, 5, 3, 4);
+  gtk_table_attach_defaults (GTK_TABLE (charmap->caption->table), 
+                             charmap->caption->decomposition,
+                             0, 5, 4, 5);
+
+  gtk_box_pack_start (GTK_BOX (charmap), charmap->caption->table, 
+                      TRUE, TRUE, 0);
 }
 
 

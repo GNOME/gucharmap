@@ -43,6 +43,8 @@ extern "C" {
 typedef struct _Charmap Charmap;
 typedef struct _CharmapClass CharmapClass;
 
+typedef struct _Caption Caption;
+
 
 struct _Charmap
 {
@@ -58,13 +60,32 @@ struct _Charmap
   gunichar page_first_char;  /* the character in the upper left box */
   gunichar active_char;      /* (gunichar)(-1) if none selected */
 
-  GtkWidget *caption;
+  Caption *caption;
 };
 
 
 struct _CharmapClass
 {
   GtkVBoxClass parent_class;
+};
+
+
+struct _Caption
+{
+  GtkWidget *table;
+
+  /* labels */
+  GtkWidget *codepoint;
+  GtkWidget *character;
+  GtkWidget *category;
+  GtkWidget *name;
+  GtkWidget *kDefinition;
+  GtkWidget *kCantonese;
+  GtkWidget *kKorean;
+  GtkWidget *kJapaneseOn;
+  GtkWidget *kTang;
+  GtkWidget *kMandarin;
+  GtkWidget *decomposition;
 };
 
 
