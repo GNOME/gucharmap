@@ -22,6 +22,8 @@ AC_INIT([gucharmap], [0.3], [nlevitt аt users.sourceforge.net])
 AM_CONFIG_HEADER(config.h)
 AM_INIT_AUTOMAKE(gucharmap, 0.3)
 
+AM_MAINTAINER_MODE
+
 # checks for progs
 AC_PROG_CC
 AC_PROG_LIBTOOL

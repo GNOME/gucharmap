@@ -44,13 +44,6 @@ if MAINTAINER_MODE
 BUILT_SOURCES = unicode_data.cI unicode_unihan.cI unicode_blocks.cI \
 		unicode_nameslist.cI
 
-endif
-
-## # Don't want "make clean to delete these, because then make will regenerate
-## # unicode_unihan.cI and unicode_nameslist.cI
-## DISTCLEANFILES = generate_unihan generate_nameslist
-
-
 unicode_unihan.cI: generate_unihan
 	./generate_unicode_stuff.sh unicode_unihan.cI
 
@@ -63,11 +56,11 @@ unicode_blocks.cI:
 unicode_nameslist.cI: generate_nameslist
 	./generate_unicode_stuff.sh unicode_nameslist.cI
 
+generate_unihan: generate_unihan.c
 
-noinst_PROGRAMS = generate_unihan generate_nameslist
-generate_unihan_SOURCES = generate_unihan.c
-generate_nameslist_SOURCES = generate_nameslist.c
+generate_nameslist: generate_nameslist.c
 
+endif
 
 # this is different from the project version
 # http://sources.redhat.com/autobook/autobook/autobook_91.html
@@ -137,4 +130,6 @@ endif
 
 
 EXTRA_DIST = gucharmap_marshal.list gucharmaprc.rc unicode_data.cI \
-	     unicode_unihan.cI unicode_blocks.cI unicode_nameslist.cI
+	     unicode_unihan.cI unicode_blocks.cI unicode_nameslist.cI \
+             generate_nameslist.c generate_unihan.c \
+             generate_unicode_stuff.sh

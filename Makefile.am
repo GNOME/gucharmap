@@ -27,7 +27,8 @@ desktop_DATA 	 = $(desktop_in_files:.desktop.in=.desktop)
 SUBDIRS = gucharmap po pixmaps
 
 EXTRA_DIST = gtkrc.win32 gucharmap.nsi.in gucharmap.pc.in \
-             intltool-extract.in intltool-merge.in intltool-update.in
+             intltool-extract.in intltool-merge.in intltool-update.in \
+             gucharmap.desktop.in
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gucharmap.pc
