@@ -391,13 +391,30 @@ clear_cached_data (ChartableAccessible *table)
     }
 }
 
+static void
+set_focus_object (AtkObject *obj,
+                  AtkObject *focus_obj)
+{
+  g_object_set_data (G_OBJECT (obj), "chartable-accessible-focus-object", focus_obj);
+}
+
+static AtkObject*
+get_focus_object (AtkObject *obj)
+{
+  return g_object_get_data (G_OBJECT (obj), "chartable-accessible-focus-object");
+}
 
 static void
 chartable_accessible_finalize (GObject *obj)
 {
   ChartableAccessible *table;
+  AtkObject *focus_obj;
 
   table = CHARTABLE_ACCESSIBLE (obj);
+
+  focus_obj = get_focus_object (ATK_OBJECT (obj));
+  if (focus_obj)
+    g_object_unref (focus_obj);
 
   clear_cached_data (table);
 
@@ -466,7 +483,6 @@ find_object (GucharmapTable   *chartable,
   return atk_table_ref_at (ATK_TABLE (obj), row, column);
 }
 
-
 static void
 active_char_set (GucharmapTable  *chartable,
                  guint    ui,
@@ -474,20 +490,20 @@ active_char_set (GucharmapTable  *chartable,
 {
   gunichar uc;
   AtkObject *child;
+  AtkObject *focus_obj;
 
   uc = (gunichar) ui;
 
   child = find_object (chartable, uc, data);
-  atk_focus_tracker_notify (child);
-  g_object_unref (child);
-}
-
-
-static void
-set_focus_object (AtkObject *obj,
-                  AtkObject *focus_obj)
-{
-  g_object_set_data (G_OBJECT (obj), "gail-focus-object", focus_obj);
+  focus_obj = get_focus_object (data);
+  if (focus_obj != child)
+    {
+      charcell_accessible_remove_state (CHARCELL_ACCESSIBLE (focus_obj), ATK_STATE_FOCUSED, FALSE);
+      charcell_accessible_add_state (CHARCELL_ACCESSIBLE (child), ATK_STATE_FOCUSED, FALSE);
+    }  
+  g_object_unref (focus_obj);
+  set_focus_object (data, child);
+  g_signal_emit_by_name (data, "active-descendant-changed", child);
 }
 
 
@@ -513,7 +529,7 @@ chartable_accessible_initialize (AtkObject *obj,
                     G_CALLBACK (active_char_set), obj);
 
   focus_obj = find_object (chartable, chartable->active_char, obj);
-  set_focus_object (obj, focus_obj);
+  set_focus_object (obj, focus_obj);  
 }
 
 
