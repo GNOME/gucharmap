@@ -641,122 +641,6 @@ create_tags (GucharmapCharmap *charmap)
 }
 
 
-static GtkWidget *
-button_new_with_mnemonic_and_stock_image (gchar *mnemonic,
-                                          gchar *stock_id,
-                                          gboolean image_on_right)
-{
-  GtkWidget *button;
-  GtkWidget *hbox;
-  GtkWidget *image;
-  GtkWidget *label;
-  GtkWidget *align;
-
-  button = gtk_button_new ();
-  gtk_widget_show (button);
-
-  label = gtk_label_new_with_mnemonic (mnemonic);
-  gtk_widget_show (label);
-  gtk_label_set_mnemonic_widget (GTK_LABEL (label), button);
-
-  image = gtk_image_new_from_stock (stock_id, GTK_ICON_SIZE_BUTTON);
-  gtk_widget_show (image);
-
-  hbox = gtk_hbox_new (FALSE, 3);
-  gtk_widget_show (hbox);
-
-  if (image_on_right)
-    {
-      gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-      gtk_box_pack_start (GTK_BOX (hbox), image, FALSE, FALSE, 0);
-    }
-  else
-    {
-      gtk_box_pack_start (GTK_BOX (hbox), image, FALSE, FALSE, 0);
-      gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-    }
-
-  align = gtk_alignment_new (0.5, 0.5, 0.0, 0.0);
-  gtk_widget_show (align);
-
-  gtk_container_add (GTK_CONTAINER (align), hbox);
-
-  gtk_container_add (GTK_CONTAINER (button), align);
-
-  return button;
-}
-
-
-static void
-prev_character_clicked (GtkWidget *button,
-                        GucharmapCharmap *charmap)
-{
-  gunichar uc;
-
-  uc = gucharmap_table_get_active_character (charmap->chartable);
-
-  do 
-    {
-      uc = uc - 1;
-      if (uc < 0 || uc > UNICHAR_MAX)
-        uc = UNICHAR_MAX;
-    }
-  while (! gucharmap_unichar_validate (uc) 
-        || gucharmap_unichar_type (uc) == G_UNICODE_UNASSIGNED);
-
-  gucharmap_table_set_active_character (charmap->chartable, uc);
-}
-
-
-static void
-next_character_clicked (GtkWidget *button,
-                        GucharmapCharmap *charmap)
-{
-  gunichar uc;
-
-  uc = gucharmap_table_get_active_character (charmap->chartable);
-
-  for (uc = (uc + 1) % (UNICHAR_MAX + 1); 
-       (! gucharmap_unichar_validate (uc) 
-        || gucharmap_unichar_type (uc) == G_UNICODE_UNASSIGNED); 
-       uc = (uc + 1) % (UNICHAR_MAX + 1));
-
-  gucharmap_table_set_active_character (charmap->chartable, uc);
-}
-
-
-static GtkWidget *
-make_navigation_bar (GucharmapCharmap *charmap)
-{
-  GtkWidget *button_box;
-  GtkWidget *button;
-
-  button_box = gtk_hbutton_box_new ();
-  gtk_widget_show (button_box);
-  gtk_button_box_set_layout (GTK_BUTTON_BOX (button_box), 
-                             GTK_BUTTONBOX_START);
-  gtk_container_set_border_width (GTK_CONTAINER (button_box), 6);
-
-  button = button_new_with_mnemonic_and_stock_image (_("_Previous Character"),
-                                                     GTK_STOCK_GO_BACK,
-                                                     FALSE);
-  gtk_widget_show (button);
-  gtk_container_add (GTK_CONTAINER (button_box), button);
-  g_signal_connect (G_OBJECT (button), "clicked", 
-                    G_CALLBACK (prev_character_clicked), charmap);
-
-  button = button_new_with_mnemonic_and_stock_image (_("_Next Character"),
-                                                     GTK_STOCK_GO_FORWARD,
-                                                     TRUE);
-  gtk_widget_show (button);
-  gtk_container_add (GTK_CONTAINER (button_box), button);
-  g_signal_connect (G_OBJECT (button), "clicked", 
-                    G_CALLBACK (next_character_clicked), charmap);
-
-  return button_box;
-}
-
-
 static void
 follow_if_link (GucharmapCharmap *charmap,
                 GtkTextIter *iter)
@@ -937,11 +821,7 @@ details_visibility_notify_event (GtkWidget *text_view,
 static GtkWidget *
 make_details_page (GucharmapCharmap *charmap)
 {
-  GtkWidget *vbox;
   GtkWidget *scrolled_window;
-
-  vbox = gtk_vbox_new (FALSE, 0);
-  gtk_widget_show (vbox);
 
   scrolled_window = gtk_scrolled_window_new (NULL, NULL);
   gtk_widget_show (scrolled_window);
@@ -949,7 +829,6 @@ make_details_page (GucharmapCharmap *charmap)
                                   GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
   gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolled_window), 
                                        GTK_SHADOW_ETCHED_IN);
-  gtk_box_pack_start (GTK_BOX (vbox), scrolled_window, TRUE, TRUE, 0);
 
   charmap->details = gtk_text_view_new ();
   gtk_widget_show (charmap->details);
@@ -970,10 +849,7 @@ make_details_page (GucharmapCharmap *charmap)
 
   gtk_container_add (GTK_CONTAINER (scrolled_window), charmap->details);
 
-  gtk_box_pack_start (GTK_BOX (vbox), make_navigation_bar (charmap), 
-                      FALSE, FALSE, 0);
-
-  return vbox;
+  return scrolled_window;
 }
 
 

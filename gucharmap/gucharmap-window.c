@@ -440,6 +440,44 @@ history_forward (GtkWidget *widget,
 }
 
 
+static void
+prev_character (GtkWidget *button,
+                GucharmapWindow *guw)
+{
+  gunichar uc;
+
+  uc = guw->charmap->chartable->active_char;
+
+  do 
+    {
+      uc = uc - 1;
+      if (uc < 0 || uc > UNICHAR_MAX)
+        uc = UNICHAR_MAX;
+    }
+  while (! gucharmap_unichar_validate (uc) 
+        || gucharmap_unichar_type (uc) == G_UNICODE_UNASSIGNED);
+
+  gucharmap_table_set_active_character (guw->charmap->chartable, uc);
+}
+
+
+static void
+next_character (GtkWidget *button,
+                GucharmapWindow *guw)
+{
+  gunichar uc;
+
+  uc = guw->charmap->chartable->active_char;
+
+  for (uc = (uc + 1) % (UNICHAR_MAX + 1); 
+       (! gucharmap_unichar_validate (uc) 
+        || gucharmap_unichar_type (uc) == G_UNICODE_UNASSIGNED); 
+       uc = (uc + 1) % (UNICHAR_MAX + 1));
+
+  gucharmap_table_set_active_character (guw->charmap->chartable, uc);
+}
+
+
 static GtkWidget *
 make_menu (GucharmapWindow *guw)
 {
@@ -566,7 +604,6 @@ make_menu (GucharmapWindow *guw)
   /* separator */
   gtk_menu_shell_append (GTK_MENU_SHELL (search_menu), gtk_menu_item_new ());
 
-  /* ctrl-j */
   menu_item = gtk_menu_item_new_with_mnemonic (_("Code _Point..."));
   gtk_widget_add_accelerator (menu_item, "activate", guw->accel_group,
                               GDK_j, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
@@ -574,10 +611,9 @@ make_menu (GucharmapWindow *guw)
                     G_CALLBACK (jump_code_point), guw);
   gtk_menu_shell_append (GTK_MENU_SHELL (search_menu), menu_item);
 
-  /* ctrl-p */
   menu_item = gtk_menu_item_new_with_mnemonic (_("Character in _Clipboard"));
   gtk_widget_add_accelerator (menu_item, "activate", guw->accel_group,
-                              GDK_p, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+                              GDK_o, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
   g_signal_connect (G_OBJECT (menu_item), "activate",
                     G_CALLBACK (jump_clipboard), guw); 
   gtk_menu_shell_append (GTK_MENU_SHELL (search_menu), menu_item);
@@ -607,6 +643,23 @@ make_menu (GucharmapWindow *guw)
   g_signal_connect (G_OBJECT (guw->forward_menu_item), "activate",
                     G_CALLBACK (history_forward), guw);
   gtk_widget_set_sensitive (guw->forward_menu_item, FALSE);
+
+  /* separator */
+  gtk_menu_shell_append (GTK_MENU_SHELL (go_menu), gtk_menu_item_new ());
+
+  menu_item = gtk_menu_item_new_with_mnemonic (_("_Next Character"));
+  gtk_widget_add_accelerator (menu_item, "activate", guw->accel_group,
+                              GDK_n, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+  g_signal_connect (G_OBJECT (menu_item), "activate",
+                    G_CALLBACK (next_character), guw);
+  gtk_menu_shell_append (GTK_MENU_SHELL (go_menu), menu_item);
+
+  menu_item = gtk_menu_item_new_with_mnemonic (_("_Previous Character"));
+  gtk_widget_add_accelerator (menu_item, "activate", guw->accel_group,
+                              GDK_p, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+  g_signal_connect (G_OBJECT (menu_item), "activate",
+                    G_CALLBACK (prev_character), guw);
+  gtk_menu_shell_append (GTK_MENU_SHELL (go_menu), menu_item);
 
 #if HAVE_GNOME
   /* if we are the input module and are running inside a non-gnome gtk+
