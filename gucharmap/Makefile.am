@@ -119,8 +119,10 @@ uninstall-local:
 
 endif
 
-all-local: gtk.immodules
 
+if BUILD_GTK_IMMODULES
+
+all-local: gtk.immodules
 
 noinst_PROGRAMS = im-module-file
 im_module_file_SOURCES = im-module-file.c
@@ -131,6 +133,8 @@ gtk.immodules: $(module_LTLIBRARIES)
 
 install-data-hook: im-module-file
 	GTK_PATH=$$GTK_PATH:$(DESTDIR)$(libdir)/gtk-2.0 $(GTK_QUERY_IMMODULES) > `./im-module-file` ;
+
+endif
 
 
 EXTRA_DIST = gucharmap_marshal.list gucharmaprc.rc 

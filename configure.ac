@@ -28,11 +28,20 @@ AM_MAINTAINER_MODE
 AC_PROG_CC
 AC_PROG_LIBTOOL
 AC_PROG_INTLTOOL([0.22])
-AC_CHECK_PROGS([GTK_QUERY_IMMODULES], [gtk-query-immodules-2.0])
 
-if test "x$GTK_QUERY_IMMODULES" = "x" ;
+AC_ARG_ENABLE(gtk-immodules,
+              AC_HELP_STRING([--disable-gtk-immodules],
+                             [don't generate gtk.immodules]))
+AM_CONDITIONAL(BUILD_GTK_IMMODULES, test "x$enable_gtk_immodules" != "xno")
+
+if test "x$enable_gtk_immodules" != "xno" ;
 then
-    AC_MSG_ERROR([gtk-query-immodules-2.0 not found.])
+    AC_CHECK_PROGS([GTK_QUERY_IMMODULES], [gtk-query-immodules-2.0])
+
+    if test "x$GTK_QUERY_IMMODULES" = "x" ;
+    then
+        AC_MSG_ERROR([gtk-query-immodules-2.0 not found.])
+    fi
 fi
 
 
