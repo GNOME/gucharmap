@@ -826,8 +826,16 @@ copy_button_clicked (GtkWidget *widget,
                      gpointer callback_data)
 {
   Charmap *charmap = CHARMAP (callback_data);
+  GtkClipboard *clipboard = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
+  gchar *text;
+
+  /* select it so it's in SELECTION_PRIMARY */
   gtk_editable_select_region (GTK_EDITABLE (charmap->text_to_copy), 0, -1);
-  /* XXX: also copy to CLIPBOARD */
+
+  /* copy to SELECTION_CLIPBOARD */
+  text = gtk_editable_get_chars (GTK_EDITABLE (charmap->text_to_copy), 0, -1);
+  gtk_clipboard_set_text (clipboard, text, -1);
+
   return TRUE;
 }
 
@@ -855,6 +863,8 @@ button_press_event (GtkWidget *widget,
 
   /* in case we lost keyboard focus and are clicking to get it back */
   gtk_widget_grab_focus (charmap->tabulus);
+
+  g_printerr ("button_press_event: button %d pressed\n", event->button);
 
   /* double-click */
   if (event->button == 1 && event->type == GDK_2BUTTON_PRESS)
@@ -1157,7 +1167,7 @@ make_text_to_copy (Charmap *charmap)
   hbox = gtk_hbox_new (FALSE, 5);
 
   label = gtk_label_new ("text to copy:");
-  gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 
   charmap->text_to_copy = gtk_entry_new ();
   gtk_entry_set_max_length (GTK_ENTRY (charmap->text_to_copy), 
@@ -1168,13 +1178,13 @@ make_text_to_copy (Charmap *charmap)
   button = gtk_button_new_from_stock (GTK_STOCK_COPY); 
   g_signal_connect (G_OBJECT (button), "clicked",
                     G_CALLBACK (copy_button_clicked), charmap);
-  gtk_box_pack_start (GTK_BOX (hbox), button, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
 
   /* the clear button */
   button = gtk_button_new_from_stock (GTK_STOCK_CLEAR);
   g_signal_connect (G_OBJECT (button), "clicked",
                     G_CALLBACK (clear_button_clicked), charmap);
-  gtk_box_pack_start (GTK_BOX (hbox), button, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
 
   /* put the text_to_copy stuff in a frame */
   frame = gtk_frame_new (NULL);
@@ -1220,6 +1230,54 @@ make_scrollbar (Charmap *charmap)
 }
 
 
+static void
+mouse_wheel_up (Charmap *charmap)
+{
+  if (charmap->page_first_char > CHARMAP_ROWS * CHARMAP_COLS / 2)
+    set_top_row (charmap, 
+                 (charmap->page_first_char - CHARMAP_ROWS * CHARMAP_COLS / 2) 
+                  / CHARMAP_COLS);
+  else 
+    set_top_row (charmap, 0);
+
+  redraw (charmap);
+}
+
+
+static void
+mouse_wheel_down (Charmap *charmap)
+{
+  if (charmap->page_first_char < UNICHAR_MAX - CHARMAP_ROWS * CHARMAP_COLS / 2)
+    set_top_row (charmap, 
+                 (charmap->page_first_char + CHARMAP_ROWS * CHARMAP_COLS / 2) 
+                  / CHARMAP_COLS);
+  else 
+    set_top_row (charmap, UNICHAR_MAX / CHARMAP_COLS);
+
+  redraw (charmap);
+}
+
+
+gboolean    
+mouse_wheel_event (GtkWidget *widget, GdkEventScroll *event, Charmap *charmap)
+{
+  g_printerr ("mouse_wheel_event: direction = %d\n", event->direction);
+
+  switch (event->direction)
+    {
+      case GDK_SCROLL_UP:
+        mouse_wheel_up (charmap);
+        break;
+
+      case GDK_SCROLL_DOWN:
+        mouse_wheel_down (charmap);
+        break;
+    }
+
+  return TRUE;
+}
+
+
 void
 charmap_class_init (CharmapClass *clazz)
 {
@@ -1239,7 +1297,9 @@ charmap_init (Charmap *charmap)
 
   gtk_widget_set_events (charmap->tabulus, GDK_EXPOSURE_MASK 
                                            | GDK_KEY_PRESS_MASK
-                                           | GDK_BUTTON_PRESS_MASK);
+                                           | GDK_BUTTON_PRESS_MASK
+                                           | GDK_FOCUS_CHANGE_MASK
+                                           | GDK_SCROLL_MASK);
 
   g_signal_connect (G_OBJECT (charmap->tabulus), "expose_event",
                     G_CALLBACK (expose_event), charmap);
@@ -1251,6 +1311,8 @@ charmap_init (Charmap *charmap)
                     G_CALLBACK (focus_in_or_out_event), charmap);
   g_signal_connect (G_OBJECT (charmap->tabulus), "focus-out-event",
                     G_CALLBACK (focus_in_or_out_event), charmap);
+  g_signal_connect (G_OBJECT (charmap->tabulus), "scroll-event",
+                    G_CALLBACK (mouse_wheel_event), charmap);
 
   /* this is required to get key_press events */
   GTK_WIDGET_SET_FLAGS (charmap->tabulus, GTK_CAN_FOCUS);
