@@ -202,8 +202,9 @@ make_unicode_block_selector (GucharmapCharmap *charmap)
 
 
 static void 
-charmap_finalize (GucharmapCharmap *charmap)
+charmap_finalize (GObject *object)
 {
+  GucharmapCharmap *charmap = GUCHARMAP_CHARMAP (object);
   g_free (charmap->block_index);
 
   gdk_cursor_unref (charmap->hand_cursor);

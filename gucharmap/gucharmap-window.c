@@ -1005,8 +1005,10 @@ show_all (GtkWidget *widget)
 
 
 static void
-window_finalize (GucharmapWindow *guw)
+window_finalize (GObject *object)
 {
+  GucharmapWindow *guw = GUCHARMAP_WINDOW (object);
+
   if (guw->last_search)
     g_free (guw->last_search);
 

@@ -142,8 +142,9 @@ size_changed (GtkAdjustment *adjustment,
 
 
 static void
-mini_font_selection_finalize (GucharmapMiniFontSelection *fontsel)
+mini_font_selection_finalize (GObject *object)
 {
+  GucharmapMiniFontSelection *fontsel = GUCHARMAP_MINI_FONT_SELECTION (object);
   pango_font_description_free (fontsel->font_desc);
 }
 
