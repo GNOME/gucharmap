@@ -46,7 +46,7 @@ libgucharmap_la_LDFLAGS = -version-info 1:0:0
 
 libgucharmapincludedir = $(includedir)/gucharmap
 libgucharmapinclude_HEADERS = charmap.h chartable.h unicode_info.h \
-                              mini_fontsel.h gucharmap_window.h
+                              mini_fontsel.h # gucharmap_window.h
 
 
 bin_PROGRAMS = gucharmap
