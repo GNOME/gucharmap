@@ -19,6 +19,7 @@
 
 
 #include <gtk/gtk.h>
+#include <gdk/gdkkeysyms.h>
 #include <stdlib.h>
 #include "charmap.h"
 #include "mini_fontsel.h"
@@ -96,20 +97,24 @@ expand_collapse (GtkCheckMenuItem *mi, gpointer data)
 static void
 font_bigger (GtkWidget *widget, gpointer data)
 {
-  gint size;
+  gint size, increment;
 
   size = mini_font_selection_get_font_size (MINI_FONT_SELECTION (fontsel));
-  mini_font_selection_set_font_size (MINI_FONT_SELECTION (fontsel), size + 2);
+  increment = MAX (size / 12, 1);
+  mini_font_selection_set_font_size (MINI_FONT_SELECTION (fontsel), 
+	                             size + increment);
 }
 
 
 static void
 font_smaller (GtkWidget *widget, gpointer data)
 {
-  gint size;
+  gint size, increment;
 
   size = mini_font_selection_get_font_size (MINI_FONT_SELECTION (fontsel));
-  mini_font_selection_set_font_size (MINI_FONT_SELECTION (fontsel), size - 2);
+  increment = MAX (size / 12, 1);
+  mini_font_selection_set_font_size (MINI_FONT_SELECTION (fontsel), 
+	                             size - increment);
 }
 
 
@@ -441,13 +446,18 @@ fontsel_changed (MiniFontSelection *fontsel, Charmap *charmap)
 
 
 static GtkWidget *
-make_menu ()
+make_menu (GtkWindow *window)
 {
   GtkWidget *menubar;
   GtkWidget *file_menu, *view_menu, *goto_menu;
   GtkWidget *file_menu_item, *view_menu_item;
   GtkWidget *goto_menu_item, *help_menu_item;
   GtkWidget *menu_item;
+  GtkAccelGroup *accel_group;
+
+  accel_group = gtk_accel_group_new ();
+  gtk_window_add_accel_group (GTK_WINDOW (window), accel_group);
+  g_object_unref (accel_group);
 
   /* make the menu bar */
   menubar = gtk_menu_bar_new ();
@@ -461,9 +471,9 @@ make_menu ()
 
   /* make the file menu */
   file_menu = gtk_menu_new ();
-  gtk_menu_item_set_submenu (GTK_MENU_ITEM (file_menu_item),
-                             file_menu);
-  menu_item = gtk_image_menu_item_new_from_stock (GTK_STOCK_QUIT, NULL);
+  gtk_menu_set_accel_group (GTK_MENU (file_menu), accel_group);
+  gtk_menu_item_set_submenu (GTK_MENU_ITEM (file_menu_item), file_menu);
+  menu_item = gtk_image_menu_item_new_from_stock (GTK_STOCK_QUIT, accel_group);
   g_signal_connect (G_OBJECT (menu_item), "activate",
                     G_CALLBACK (gtk_main_quit), NULL);
   gtk_menu_shell_append (GTK_MENU_SHELL (file_menu), menu_item);
@@ -471,6 +481,7 @@ make_menu ()
 
   /* make the view menu */
   view_menu = gtk_menu_new ();
+  gtk_menu_set_accel_group (GTK_MENU (view_menu), accel_group);
   gtk_menu_item_set_submenu (GTK_MENU_ITEM (view_menu_item), view_menu);
 
   menu_item = gtk_check_menu_item_new_with_mnemonic (_("Expand/Collapse All"));
@@ -478,27 +489,49 @@ make_menu ()
                     G_CALLBACK (expand_collapse), NULL);
   gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), menu_item);
 
-  menu_item = gtk_menu_item_new_with_mnemonic (_("_Decrease Font Size"));
-  g_signal_connect (G_OBJECT (menu_item), "activate",
-                    G_CALLBACK (font_smaller), NULL);
-  gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), menu_item);
+  /* separator */
+  gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), gtk_menu_item_new ());
 
-  menu_item = gtk_menu_item_new_with_mnemonic (_("_Increase Font Size"));
+  /* ctrl-+ or ctrl-= */
+  menu_item = gtk_menu_item_new_with_mnemonic (_("Zoom _In"));
+  gtk_widget_add_accelerator (menu_item, "activate", accel_group,
+	                      GDK_plus, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+  gtk_widget_add_accelerator (menu_item, "activate", accel_group,
+	                      GDK_equal, GDK_CONTROL_MASK, 0);
+  gtk_widget_add_accelerator (menu_item, "activate", accel_group,
+	                      GDK_KP_Add, GDK_CONTROL_MASK, 0);
   g_signal_connect (G_OBJECT (menu_item), "activate",
                     G_CALLBACK (font_bigger), NULL);
   gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), menu_item);
   /* finished making the view menu */
 
+  /* ctrl-- */
+  menu_item = gtk_menu_item_new_with_mnemonic (_("Zoom _Out"));
+  gtk_widget_add_accelerator (menu_item, "activate", accel_group,
+	                      GDK_minus, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+  gtk_widget_add_accelerator (menu_item, "activate", accel_group,
+	                      GDK_KP_Subtract, GDK_CONTROL_MASK, 0);
+  g_signal_connect (G_OBJECT (menu_item), "activate",
+                    G_CALLBACK (font_smaller), NULL);
+  gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), menu_item);
+
   /* make the goto menu */
   goto_menu = gtk_menu_new ();
+  gtk_menu_set_accel_group (GTK_MENU (goto_menu), accel_group);
   gtk_menu_item_set_submenu (GTK_MENU_ITEM (goto_menu_item), goto_menu);
 
+  /* ctrl-h */
   menu_item = gtk_menu_item_new_with_mnemonic (_("_Hex Code Point..."));
+  gtk_widget_add_accelerator (menu_item, "activate", accel_group,
+	                      GDK_h, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
   g_signal_connect (G_OBJECT (menu_item), "activate",
                     G_CALLBACK (jump_code_point), NULL);
   gtk_menu_shell_append (GTK_MENU_SHELL (goto_menu), menu_item);
 
+  /* ctrl-v */
   menu_item = gtk_menu_item_new_with_mnemonic (_("Character in _Clipboard"));
+  gtk_widget_add_accelerator (menu_item, "activate", accel_group,
+	                      GDK_v, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
   g_signal_connect (G_OBJECT (menu_item), "activate",
                     G_CALLBACK (jump_clipboard), NULL); 
   gtk_menu_shell_append (GTK_MENU_SHELL (goto_menu), menu_item);
@@ -561,7 +594,8 @@ main (gint argc, gchar **argv)
   big_vbox = gtk_vbox_new (FALSE, 0);
   gtk_container_add (GTK_CONTAINER (window), big_vbox);
 
-  gtk_box_pack_start (GTK_BOX (big_vbox), make_menu (), FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (big_vbox), make_menu (GTK_WINDOW (window)), 
+	              FALSE, FALSE, 0);
 
   toolbar = gtk_toolbar_new ();
   fontsel = mini_font_selection_new ();

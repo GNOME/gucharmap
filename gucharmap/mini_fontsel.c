@@ -240,7 +240,6 @@ style_changed (GtkWidget *widget, MiniFontSelection *fontsel)
 static void
 set_size (MiniFontSelection *fontsel, gint size)
 {
-  g_printerr ("set_size: %d\n", size);
   pango_font_description_set_size (
 	  fontsel->font_desc, 
 	  PANGO_SCALE * CLAMP (size, MIN_FONT_SIZE, MAX_FONT_SIZE));

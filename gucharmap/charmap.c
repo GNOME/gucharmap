@@ -1329,10 +1329,11 @@ key_press_event (GtkWidget *widget,
       case GDK_plus: case GDK_KP_Add: case GDK_equal:
         make_zoom_window (charmap);
         update_zoom_window (charmap);
-        gtk_widget_show (charmap->zoom_window);
 
         get_appropriate_active_char_corner_xy (charmap, &x, &y);
         place_zoom_window (charmap, x, y);
+
+        gtk_widget_show (charmap->zoom_window);
 
         /* must do this after gtk_widget_show */
         set_window_background (charmap->zoom_window, charmap->zoom_pixbuf);
