@@ -17,13 +17,11 @@
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  */
 
-/* XXX move this after it’s confirmed to work */
-#include <gucharmap/gucharmap-script-codepoint-list.h>
-#include "unicode-scripts.h"
-
 #include "config.h"
 #include <glib.h>
 #include <string.h>
+#include <gucharmap/gucharmap-script-codepoint-list.h>
+#include "unicode-scripts.h"
 
 typedef struct
 {
@@ -221,9 +219,23 @@ get_last_index (GucharmapCodepointList *list)
 }
 
 static void
+finalize (GObject *object)
+{
+  GucharmapScriptCodepointList *guscl = GUCHARMAP_SCRIPT_CODEPOINT_LIST (object);
+  ScriptCodepointListPrivate *priv = GUCHARMAP_SCRIPT_CODEPOINT_LIST_GET_PRIVATE (guscl);
+
+  if (priv->script)
+    g_free (priv->script);
+
+  if (priv->ranges)
+    g_free (priv->ranges);
+}
+
+static void
 gucharmap_script_codepoint_list_class_init (GucharmapScriptCodepointListClass *clazz)
 {
-  GucharmapCodepointListClass *codepoint_list_class = (GucharmapCodepointListClass *) clazz;
+  GucharmapCodepointListClass *codepoint_list_class = GUCHARMAP_CODEPOINT_LIST_CLASS (clazz);
+  GObjectClass *gobject_class = G_OBJECT_CLASS (clazz);
 
   /* g_print ("gucharmap_script_codepoint_list_class_init\n"); */
 
@@ -232,6 +244,8 @@ gucharmap_script_codepoint_list_class_init (GucharmapScriptCodepointListClass *c
   codepoint_list_class->get_char = get_char;
   codepoint_list_class->get_index = get_index;
   codepoint_list_class->get_last_index = get_last_index;
+  
+  gobject_class->finalize = finalize;
 }
 
 static void 
