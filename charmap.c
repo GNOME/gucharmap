@@ -26,6 +26,25 @@
 
 #define abs(x) ((x) >= 0 ? (x) : (-x))
 
+
+static void
+set_statusbar_message (Charmap *charmap, gchar *message)
+{
+  /* underflow is allowed */
+  gtk_statusbar_pop (GTK_STATUSBAR (charmap->statusbar), 0); 
+  gtk_statusbar_push (GTK_STATUSBAR (charmap->statusbar), 0, message);
+}
+
+
+static void
+clear_statusbar_message (Charmap *charmap)
+{
+  /* underflow is allowed */
+  gtk_statusbar_pop (GTK_STATUSBAR (charmap->statusbar), 0); 
+}
+
+
+
 /* return value is read-only, should not be freed */
 static gchar *
 unichar_to_printable_utf8 (gunichar uc)
@@ -821,6 +840,8 @@ copy_button_clicked (GtkWidget *widget,
           clipboard, 
           gtk_entry_get_text (GTK_ENTRY (charmap->text_to_copy)), -1);
 
+  set_statusbar_message (charmap, _("Text copied to clipboard."));
+
   return TRUE;
 }
 
@@ -831,6 +852,7 @@ clear_button_clicked (GtkWidget *widget,
 {
   Charmap *charmap = CHARMAP (callback_data);
   gtk_entry_set_text (GTK_ENTRY (charmap->text_to_copy), "");
+  set_statusbar_message (charmap, _("Text-to-copy entry box cleared."));
   return TRUE;
 }
 
@@ -1155,21 +1177,33 @@ selection_text_received (GtkClipboard *clipboard,
 {
   gunichar uc;
   gunichar old_page_first_char, old_active_char;
-  Charmap *charmap;
+  Charmap *charmap = CHARMAP (data);
 
   if (text == NULL)
-    return;
+    {
+      if (clipboard == gtk_clipboard_get (GDK_SELECTION_CLIPBOARD))
+        set_statusbar_message (charmap, _("Clipboard is empty."));
+      else
+        set_statusbar_message (charmap, _("Selection is empty."));
+      return;
+    }
 
-  charmap = CHARMAP (data);
   old_page_first_char = charmap->page_first_char;
   old_active_char = charmap->active_char;
 
   uc = g_utf8_get_char_validated (text, -1);
 
-  g_return_if_fail (uc != (gunichar)(-2) && uc != (gunichar)(-1));
-
-  set_active_character (charmap, uc);
-  redraw (charmap);
+  if (uc == (gunichar)(-2) || uc == (gunichar)(-1) || uc > UNICHAR_MAX)
+    {
+      set_statusbar_message (charmap, 
+                             _("Unknown character, unable to identify."));
+    }
+  else
+    {
+      set_statusbar_message (charmap, _("Character found."));
+      set_active_character (charmap, uc);
+      redraw (charmap);
+    }
 }
 
 
@@ -1439,15 +1473,26 @@ do_search (GtkWidget *widget, Charmap *charmap)
   gunichar uc;
 
   search_text = gtk_entry_get_text (GTK_ENTRY (charmap->search_entry));
+  if (search_text[0] == '\0')
+    {
+      set_statusbar_message (charmap, _("Nothing to search for."));
+      return;
+    }
   
   uc = find_next_substring_match (charmap->active_char, UNICHAR_MAX, 
                                   search_text);
   if (uc != (gunichar)(-1) && uc <= UNICHAR_MAX)
     {
+      if (uc <= charmap->active_char)
+        set_statusbar_message (charmap, _("Search wrapped."));
+      else
+        set_statusbar_message (charmap, _("Found."));
+
       set_active_character (charmap, uc);
       redraw (charmap);
     }
-  /* else, not found */
+  else
+    set_statusbar_message (charmap, _("Not found."));
 }
 
 
@@ -1457,19 +1502,33 @@ do_jump (GtkWidget *widget, Charmap *charmap)
   long l;
   const gchar *jump_text;
   gchar *endptr;
+  gchar *message;
 
   jump_text = gtk_entry_get_text (GTK_ENTRY (charmap->jump_entry));
+  if (jump_text[0] == '\0')
+    {
+      set_statusbar_message (charmap, _("Nothing to jump to."));
+      return;
+    }
 
   l = strtol (jump_text, &endptr, 16);
   if (endptr == jump_text) 
-    return;
+    goto do_jump_invalid;
 
   if (l >= 0 && l <= UNICHAR_MAX)
     {
       set_active_character (charmap, (gunichar) l);
+      set_statusbar_message (charmap, _("Character found."));
       redraw (charmap);
+      return;
     }
-  /* else, it's not a number, so do nothing */
+  else
+    goto do_jump_invalid;
+
+do_jump_invalid:
+  message = g_strdup_printf (_("Not a valid code point to jump to. Must be a hex number between 0 and %4.4X."), UNICHAR_MAX);
+  set_statusbar_message (charmap, message);
+  g_free (message);
 }
 
 
