@@ -29,7 +29,8 @@ lib_LTLIBRARIES = libgucharmap.la
 libgucharmap_la_SOURCES = charmap.c charmap.h \
                           unicode_data.c unicode_info.c \
                           unicode_info.h unihan.c \
-                          gucharmap_intl.c gucharmap_intl.h
+                          gucharmap_intl.c gucharmap_intl.h \
+                          mini_fontsel.c mini_fontsel.h
 
 # this is different from the project version
 # http://sources.redhat.com/autobook/autobook/autobook_91.html
@@ -37,7 +38,7 @@ libgucharmap_la_LDFLAGS = -version-info 1:0:0
 
 
 libgucharmapincludedir = $(includedir)/gucharmap
-libgucharmapinclude_HEADERS = charmap.h unicode_info.h
+libgucharmapinclude_HEADERS = charmap.h unicode_info.h mini_fontsel.h
 
 
 bin_PROGRAMS = gucharmap

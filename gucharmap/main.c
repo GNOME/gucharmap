@@ -21,6 +21,7 @@
 #include <gtk/gtk.h>
 #include "charmap.h"
 #include "gucharmap_intl.h"
+#include "mini_fontsel.h"
 #include "../pixmaps/gucharmap.xpm"  /* defines gucharmap_xpm */
 
 
@@ -223,6 +224,9 @@ main (gint argc, gchar **argv)
   gtk_container_add (GTK_CONTAINER (window), vbox);
 
   gtk_box_pack_start (GTK_BOX (vbox), make_menu (), FALSE, FALSE, 0);
+
+  gtk_box_pack_start (GTK_BOX (vbox), mini_font_selection_new (), 
+                      FALSE, FALSE, 0);
 
   charmap = charmap_new ();
   gtk_box_pack_start (GTK_BOX (vbox), charmap, TRUE, TRUE, 0);
