@@ -172,7 +172,7 @@
     <itemizedlist> 
       <listitem> 
         <para>Search unicode character by hexadecimal Unicode code point,
-         Unicode name, character dragged from another applicaton or the first character 
+         Unicode name, character dragged from another application or the first character 
          in clipboard.
         </para>
       </listitem> 
@@ -333,18 +333,6 @@
                     <interface>Zoom</interface> spin box: Enables you to resize characters.
                   </para>
                 </listitem>
-		<listitem>
-		  <para>
-                    <guibutton>Back</guibutton> button: Enables you to go backward the link-following history 
-                    to other character in the <guilabel>Character Details</guilabel> tabbed section.
-                  </para>
-                </listitem>
-		<listitem>
-		  <para>
-                    <guibutton>Forward</guibutton> button: Enables you to go forward the link-following history 
-                    to other character in the <guilabel>Character Details</guilabel> tabbed section.
-                  </para>
-                </listitem>
               </itemizedlist>
             </para>
           </listitem>
@@ -420,101 +408,97 @@
       <title>To Find a Character</title>
       <para>To find a character, you can use the following methods:
       </para>
-
       <variablelist>
         <varlistentry>
-          <term>Find Character by Unicode Name</term>
+          <term>Find Character by Unicode Name or Code Point</term>
           <listitem>
-            <itemizedlist>
-              <listitem>
-	        <para>Choose 
-                  <menuchoice>
-                    <shortcut>
-		      <keycombo><keycap>Ctrl</keycap><keycap>F</keycap></keycombo>
-                    </shortcut>
-                    <guimenu>Search</guimenu>
-                    <guimenuitem>Find</guimenuitem>
-                  </menuchoice>.
-                  The <guilabel>Find</guilabel> dialog is displayed, enter the unicode name in
-                  the <guilabel>Search</guilabel> field, then press <keycap>Return</keycap> or 
-                  click on the <guibutton>Find</guibutton> button. This will find the 
-                  occurrences of the characters which have unicode names matching the entire words 
-                  of the text that you type.
-                </para>
-              </listitem>
-              <listitem>
-                <para>Choose 
-                  <menuchoice>
-                    <shortcut>
-                      <keycombo><keycap>Ctrl</keycap><keycap>G</keycap></keycombo>
-                    </shortcut>
-	            <guimenu>Search</guimenu>
-                    <guimenuitem>Next</guimenuitem>
-                  </menuchoice> to find the next matching character.
-                </para>
-              </listitem>
-              <listitem>
-	        <para>Choose 
-                  <menuchoice>
-                    <shortcut>
-                      <keycombo><keycap>Shift</keycap><keycap>Ctrl</keycap><keycap>G</keycap></keycombo>
-                    </shortcut>
-	            <guimenu>Search</guimenu>
-                    <guimenuitem>Previous</guimenuitem>
-                  </menuchoice> to find the previous matching character.
-                </para>
-              </listitem>
-            </itemizedlist>
+	    <para>Choose 
+              <menuchoice>
+                <shortcut>
+	          <keycombo><keycap>Ctrl</keycap><keycap>F</keycap></keycombo>
+                </shortcut>
+                <guimenu>Search</guimenu>
+                <guimenuitem>Find</guimenuitem>
+              </menuchoice>.
+              The <guilabel>Find</guilabel> dialog is displayed, enter the unicode name 
+              or unicode code point in the <guilabel>Search</guilabel> field, then 
+              press <keycap>Return</keycap> or click on the <guibutton>Find</guibutton> button.
+              This will find the occurrences of the characters which match the unicode name
+              or code point that you type.
+            </para>
+	    <para>Choose 
+              <menuchoice>
+                <shortcut>
+                  <keycombo><keycap>Ctrl</keycap><keycap>G</keycap></keycombo>
+                </shortcut>
+	        <guimenu>Search</guimenu>
+                <guimenuitem>Find Next</guimenuitem>
+              </menuchoice> to find the next matching character. To find the previous matching 
+              character, choose
+              <menuchoice>
+                <shortcut>
+                  <keycombo><keycap>Shift</keycap><keycap>Ctrl</keycap><keycap>G</keycap></keycombo>
+                </shortcut>
+	        <guimenu>Search</guimenu>
+                <guimenuitem>Find Previous</guimenuitem>
+              </menuchoice>.
+            </para>
+            <para>The application supports the following unicode 
+              code point formats:
+              <itemizedlist>
+                <listitem>
+                  <para>U+XXXX</para>
+                </listitem>
+		<listitem>
+		  <para>0xXXXX</para>
+		</listitem>
+		<listitem>
+		  <para>&amp;#xXXXX</para>
+		</listitem>
+		<listitem>
+		  <para>&amp;#dddd</para>
+		</listitem>
+		<listitem>
+		  <para>#dddd</para>
+		</listitem>
+		<listitem>
+		  <para>XXXX (plain hexadecimal digits)</para>
+		</listitem>
+              </itemizedlist>
+            </para>
+	    <para>Where XXXX is the hexadecimal value of unicode code point, dddd is the
+              decimal value of unicode code point. The application checks for all 
+              unicode code point formats except the plain hexadecimal digits before 
+              searching by unicode name. 
+            </para>
+	    <para>Unicode name is limited to characters [A-Za-z0-9 -]. The application checks 
+              the first character you type (excluding leading spaces) to see if it is one of those
+              characters, and if it is not, it jumps to that first character. If you enter exactly 
+              one character, the application will jump to that character even it is one of 
+              the [A-Za-z0-9 -] characters.
+            </para>
 	  </listitem>
 	</varlistentry>
 	<varlistentry>
-	  <term>Find Character by Unicode Code Point</term>
-	  <listitem>
-	    <itemizedlist>
-	      <listitem>
-                 <para>Choose 
-                   <menuchoice>
-                     <shortcut>
-		       <keycombo><keycap>Ctrl</keycap><keycap>J</keycap></keycombo>
-		     </shortcut>
-		     <guimenu>Search</guimenu>
-		     <guimenuitem>Code Point</guimenuitem>
-                   </menuchoice>. The <guilabel>Jump to Unicode Code Point</guilabel> dialog
-                   is displayed, enter the hexadecimal unicode code point in the text field,
-                   then press <keycap>Return</keycap>, or click the <guibutton>OK</guibutton> button.
-                 </para> 
-	      </listitem>
-            </itemizedlist>
-	  </listitem>
-        </varlistentry>
-	<varlistentry>
 	  <term>Find Character in Clipboard</term>
 	  <listitem>
-	    <itemizedlist>
-	      <listitem>
-                 <para>Choose 
-                   <menuchoice>
-                     <shortcut>
-		       <keycombo><keycap>Ctrl</keycap><keycap>O</keycap></keycombo>
-		     </shortcut>
-		     <guimenu>Search</guimenu>
-		     <guimenuitem>Character in Clipboard</guimenuitem>
-                   </menuchoice>. This will find the first character in clipboard.
-                 </para> 
-	      </listitem>
-            </itemizedlist>
+            <para>Choose 
+              <menuchoice>
+                <shortcut>
+	          <keycombo><keycap>Ctrl</keycap><keycap>O</keycap></keycombo>
+		</shortcut>
+                <guimenu>Search</guimenu>
+                <guimenuitem>Character in Clipboard</guimenuitem>
+              </menuchoice>. This will find the first character in clipboard.
+            </para> 
 	  </listitem>
         </varlistentry>
 	<varlistentry>
 	  <term>Find Character By Dragging</term>
 	  <listitem>
-	    <itemizedlist>
-	      <listitem>
-   	        <para>Drag characters from another application to the &app; Character Table to
-                  identify the first character.
-                </para>
-              </listitem> 
-            </itemizedlist>
+            <para>Drag characters from another application to the &app; Character Table to
+              identify the first character.
+            </para>
 	  </listitem>
 	</varlistentry>
       </variablelist>
@@ -561,14 +545,14 @@
 	      <shortcut><keycombo><keycap>Alt</keycap><keycap>Left</keycap></keycombo></shortcut>
               <guimenu>Go</guimenu>
               <guimenuitem>Back</guimenuitem>
-            </menuchoice> or click on the <guibutton>Back</guibutton> button to go backward the 
+            </menuchoice> to go backward the 
             link-following history for the characters. To go forward the link-following history, 
             you can choose
             <menuchoice>
 	      <shortcut><keycombo><keycap>Alt</keycap><keycap>Right</keycap></keycombo></shortcut>
               <guimenu>Go</guimenu>
               <guimenuitem>Forward</guimenuitem>
-            </menuchoice> or click on the <guibutton>Forward</guibutton> button.
+            </menuchoice>.
           </para>
         </tip>
       </para>
