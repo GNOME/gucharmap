@@ -34,8 +34,8 @@ extern gint gucharmap_table_x_offset (GucharmapTable *chartable,
                                       gint col);
 extern gint gucharmap_table_y_offset (GucharmapTable *chartable, 
                                       gint row);
-extern gint gucharmap_table_unichar_column (GucharmapTable *chartable, 
-                                            gunichar uc);
+extern gint gucharmap_table_cell_column (GucharmapTable *chartable, 
+                                         guint cell);
 
 
 typedef struct 
@@ -104,8 +104,8 @@ set_cell_visibility (GucharmapTable  *chartable,
 {
   charcell_accessible_add_state (cell, ATK_STATE_VISIBLE, emit_signal);
 
-  if (cell->index >= chartable->page_first_char &&
-      cell->index < chartable->page_first_char 
+  if (cell->index >= chartable->page_first_cell &&
+      cell->index < chartable->page_first_cell 
                     + chartable->rows * chartable->cols)
     {
       charcell_accessible_add_state (cell, ATK_STATE_SHOWING, emit_signal);
@@ -322,7 +322,7 @@ chartable_accessible_ref_accessible_at_point (AtkComponent *component,
   if (row == chartable->rows || row < 0)
     return NULL;
 
-  row += chartable->page_first_char / chartable->cols;
+  row += chartable->page_first_cell / chartable->cols;
 
   return chartable_accessible_ref_at (ATK_TABLE (component), row, col);
 }
@@ -478,7 +478,7 @@ find_object (GucharmapTable   *chartable,
   gint row, column;
 
   row = uc / chartable->cols;
-  column = gucharmap_table_unichar_column (chartable, uc);
+  column = gucharmap_table_cell_column (chartable, uc);
 
   return atk_table_ref_at (ATK_TABLE (obj), row, column);
 }
@@ -528,7 +528,7 @@ chartable_accessible_initialize (AtkObject *obj,
   g_signal_connect (chartable, "set_active_char",
                     G_CALLBACK (active_char_set), obj);
 
-  focus_obj = find_object (chartable, chartable->active_char, obj);
+  focus_obj = find_object (chartable, chartable->active_cell, obj);
   set_focus_object (obj, focus_obj);  
 }
 

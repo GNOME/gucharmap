@@ -17,16 +17,14 @@
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  */
 
-
 #ifndef GUCHARMAP_H
 #define GUCHARMAP_H
-
 
 #include <gucharmap/gucharmap-table.h>
 #include <gucharmap/gucharmap-charmap.h>
 #include <gucharmap/gucharmap-window.h>
 #include <gucharmap/gucharmap-unicode-info.h>
 #include <gucharmap/gucharmap-mini-fontsel.h>
-
+#include <gucharmap/gucharmap-codepoint-list.h>
 
 #endif /* #ifndef GUCHARMAP_H */

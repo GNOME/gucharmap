@@ -33,8 +33,8 @@ extern gint gucharmap_table_x_offset (GucharmapTable *chartable,
                                       gint col);
 extern gint gucharmap_table_y_offset (GucharmapTable *chartable, 
                                       gint row);
-extern gint gucharmap_table_unichar_column (GucharmapTable *chartable, 
-                                            gunichar uc);
+extern gint gucharmap_table_cell_column (GucharmapTable *chartable, 
+                                         guint cell);
 extern gint gucharmap_table_row_height (GucharmapTable *chartable, 
                                         gint row);
 extern gint gucharmap_table_column_width (GucharmapTable *chartable, 
@@ -139,13 +139,13 @@ charcell_accessible_get_extents (AtkComponent *component,
    * Is the cell visible on the screen
    */
   chartable = GUCHARMAP_TABLE (cell->widget);
-  if (cell->index >= chartable->page_first_char && cell->index < chartable->page_first_char + chartable->rows * chartable->cols)
+  if (cell->index >= chartable->page_first_cell && cell->index < chartable->page_first_cell + chartable->rows * chartable->cols)
     {
       atk_component_get_extents (ATK_COMPONENT (cell_parent), 
                                  &real_x, &real_y, &real_width, &real_height, 
                                  coord_type);
-      row = (cell->index - chartable->page_first_char)/ chartable->cols;
-      column = gucharmap_table_unichar_column (chartable, cell->index);
+      row = (cell->index - chartable->page_first_cell)/ chartable->cols;
+      column = gucharmap_table_cell_column (chartable, cell->index);
       *x = real_x + gucharmap_table_x_offset (chartable, column);
       *y = real_y + gucharmap_table_y_offset (chartable, row);
       *width = gucharmap_table_column_width (chartable, column);

@@ -17,7 +17,6 @@
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  */
 
-
 #ifdef HAVE_CONFIG_H
 # include <config.h>
 #endif
@@ -30,7 +29,6 @@
 #include <chartable_accessible.h>
 #include <gucharmap_intl.h>
 
-
 enum 
 {
   ACTIVATE = 0,
@@ -41,7 +39,6 @@ enum
 
 static guint gucharmap_table_signals[NUM_SIGNALS] = { 0, 0, 0 };
 
-
 static const GtkTargetEntry dnd_target_table[] =
 {
   { "UTF8_STRING", 0, 0 },
@@ -50,29 +47,28 @@ static const GtkTargetEntry dnd_target_table[] =
   { "STRING", 0, 0 }
 };
 
-
 /* depends on directionality */
-static gunichar
-rowcol_to_unichar (GucharmapTable *chartable, gint row, gint col)
+static guint
+get_cell_at_rowcol (GucharmapTable *chartable,
+                    gint            row,
+                    gint            col)
 {
   if (gtk_widget_get_direction (chartable->drawing_area) == GTK_TEXT_DIR_RTL)
-    return chartable->page_first_char + row * chartable->cols 
-           + (chartable->cols - col - 1);
+    return chartable->page_first_cell + row * chartable->cols + (chartable->cols - col - 1);
   else
-    return chartable->page_first_char + row * chartable->cols + col;
+    return chartable->page_first_cell + row * chartable->cols + col;
 }
-
 
 /* Depends on directionality. Column 0 is the furthest left.  */
 gint
-gucharmap_table_unichar_column (GucharmapTable *chartable, gunichar uc)
+gucharmap_table_cell_column (GucharmapTable *chartable, 
+                             guint cell)
 {
   if (gtk_widget_get_direction (chartable->drawing_area) == GTK_TEXT_DIR_RTL)
-    return chartable->cols - (uc - chartable->page_first_char) % chartable->cols - 1;
+    return chartable->cols - (cell - chartable->page_first_cell) % chartable->cols - 1;
   else
-    return (uc - chartable->page_first_char) % chartable->cols;
+    return (cell - chartable->page_first_cell) % chartable->cols;
 }
-
 
 static gint
 font_height (PangoFontMetrics *font_metrics)
@@ -85,7 +81,6 @@ font_height (PangoFontMetrics *font_metrics)
   return PANGO_PIXELS (height);
 }
 
-
 /* computes the column width based solely on the font size */
 static gint
 bare_minimal_column_width (GucharmapTable *chartable)
@@ -93,7 +88,6 @@ bare_minimal_column_width (GucharmapTable *chartable)
   /* XXX: width is not available, so use height */
   return font_height (chartable->font_metrics) + 7;
 }
-
 
 static gint
 minimal_column_width (GucharmapTable *chartable)
@@ -106,7 +100,6 @@ minimal_column_width (GucharmapTable *chartable)
 
   return bare_minimal_width + total_extra_pixels / chartable->cols;
 }
-
 
 /* not all columns are necessarily the same width because of padding */
 gint
@@ -124,7 +117,6 @@ gucharmap_table_column_width (GucharmapTable *chartable, gint col)
     return min_col_w;
 }
 
-
 /* calculates the position of the left end of the column (just to the right
  * of the left border) */
 /* XXX: calling this repeatedly is not the most efficient, but it probably
@@ -140,14 +132,12 @@ gucharmap_table_x_offset (GucharmapTable *chartable, gint col)
   return x;
 }
 
-
 /* computes the row height based solely on the font size */
 static gint
 bare_minimal_row_height (GucharmapTable *chartable)
 {
   return font_height (chartable->font_metrics) + 7;
 }
-
 
 static gint
 minimal_row_height (GucharmapTable *chartable)
@@ -160,7 +150,6 @@ minimal_row_height (GucharmapTable *chartable)
 
   return bare_minimal_height + total_extra_pixels / chartable->rows;
 }
-
 
 /* not all rows are necessarily the same height because of padding */
 gint
@@ -178,7 +167,6 @@ gucharmap_table_row_height (GucharmapTable *chartable, gint row)
     return min_row_h;
 }
 
-
 /* calculates the position of the top end of the row (just below the top
  * border) */
 /* XXX: calling this repeatedly is not the most efficient, but it probably
@@ -194,7 +182,6 @@ gucharmap_table_y_offset (GucharmapTable *chartable, gint row)
   return y;
 }
 
-
 static AtkObject*
 chartable_accessible_factory_create_accessible (GObject *obj)
 {
@@ -206,14 +193,12 @@ chartable_accessible_factory_create_accessible (GObject *obj)
   return chartable_accessible_new (widget);
 }
 
-
 /* the window must be realized, or window->window will be null */
 static void
 set_window_background (GtkWidget *window, GdkPixmap *pixmap)
 {
   gdk_window_set_back_pixmap (window->window, pixmap, FALSE);
 }
-
 
 static gint
 compute_zoom_font_size (GucharmapTable *chartable)
@@ -234,7 +219,6 @@ compute_zoom_font_size (GucharmapTable *chartable)
 
   return scale * ((font_size > 0) ? font_size : 10 * PANGO_SCALE);
 }
-
 
 /* returns the font family of the last glyph item in the first line of the
  * layout; should be freed by caller */
@@ -271,7 +255,6 @@ get_font (PangoLayout *layout)
   return family;
 }
 
-
 /* font_family (if not null) gets filled in with the actual font family
  * used to draw the character */
 static PangoLayout *
@@ -303,7 +286,6 @@ layout_scaled_glyph (GucharmapTable *chartable,
   return layout;
 }
 
-
 static GdkPixmap *
 create_glyph_pixmap (GucharmapTable *chartable, 
                      gint font_size,
@@ -321,7 +303,7 @@ create_glyph_pixmap (GucharmapTable *chartable,
   /* Apply the scaling.  Unfortunately not all fonts seem to be scalable.
    * We could fall back to GdkPixbuf scaling, but that looks butt ugly :-/
    */
-  pango_layout = layout_scaled_glyph (chartable, chartable->active_char, 
+  pango_layout = layout_scaled_glyph (chartable, gucharmap_table_get_active_character (chartable),
                                       font_size, &family);
   pango_layout_get_pixel_extents (pango_layout, &char_rect, NULL);
 
@@ -380,7 +362,6 @@ create_glyph_pixmap (GucharmapTable *chartable,
   return pixmap;
 }
 
-
 static void
 get_appropriate_upper_left_xy (GucharmapTable *chartable, 
                                gint width,  gint height,
@@ -389,8 +370,8 @@ get_appropriate_upper_left_xy (GucharmapTable *chartable,
 {
   gint row, col;
 
-  row = (chartable->active_char - chartable->page_first_char) / chartable->cols;
-  col = gucharmap_table_unichar_column (chartable, chartable->active_char);
+  row = (chartable->active_cell - chartable->page_first_cell) / chartable->cols;
+  col = gucharmap_table_cell_column (chartable, chartable->active_cell);
 
   *x = x_root;
   *y = y_root;
@@ -401,7 +382,6 @@ get_appropriate_upper_left_xy (GucharmapTable *chartable,
   if (col >= chartable->cols / 2)
     *x -= width;
 }
-
 
 /* places the zoom window toward the inside of the coordinates */
 static void
@@ -421,7 +401,6 @@ place_zoom_window (GucharmapTable *chartable, gint x_root, gint y_root)
   gtk_window_move (GTK_WINDOW (chartable->zoom_window), x, y);
 }
 
-
 static void
 zoom_window_realize (GtkWidget *zoom_window, 
                      GucharmapTable *chartable)
@@ -437,7 +416,6 @@ zoom_window_realize (GtkWidget *zoom_window,
   gtk_widget_set_size_request (chartable->zoom_window, width, height);
   gtk_window_resize (GTK_WINDOW (chartable->zoom_window), width, height);
 }
-
 
 static void
 update_zoom_window (GucharmapTable *chartable)
@@ -465,7 +443,6 @@ update_zoom_window (GucharmapTable *chartable)
   gtk_window_resize (GTK_WINDOW (chartable->zoom_window), width, height);
 }
 
-
 static void
 make_zoom_window (GucharmapTable *chartable)
 {
@@ -488,7 +465,6 @@ make_zoom_window (GucharmapTable *chartable)
   gtk_widget_set_app_paintable (chartable->zoom_window, TRUE);
 }
 
-
 static void
 destroy_zoom_window (GucharmapTable *chartable)
 {
@@ -504,13 +480,11 @@ destroy_zoom_window (GucharmapTable *chartable)
     }
 }
 
-
 static GType
 chartable_accessible_factory_get_accessible_type (void)
 {
   return chartable_accessible_get_type ();
 }
-
 
 static void
 chartable_accessible_factory_class_init (AtkObjectFactoryClass *clazz)
@@ -518,7 +492,6 @@ chartable_accessible_factory_class_init (AtkObjectFactoryClass *clazz)
   clazz->create_accessible = chartable_accessible_factory_create_accessible;
   clazz->get_accessible_type = chartable_accessible_factory_get_accessible_type;
 }
-
 
 static GType
 chartable_accessible_factory_get_type (void)
@@ -547,47 +520,45 @@ chartable_accessible_factory_get_type (void)
   return t;
 }
 
-
-/* XXX: the logic this function uses to set page_first_char is hideous and
- * probably wrong */
 static void
-set_active_char (GucharmapTable *chartable, gunichar uc)
+set_active_cell (GucharmapTable *chartable,
+                 guint           cell)
 {
-  gint offset;
+  chartable->old_active_cell = chartable->active_cell;
+  chartable->old_page_first_cell = chartable->page_first_cell;
 
-  g_return_if_fail (uc >= 0 && uc <= UNICHAR_MAX);
-
-  chartable->old_active_char = chartable->active_char;
-  chartable->old_page_first_char = chartable->page_first_char;
-
-  chartable->active_char = uc;
+  chartable->active_cell = cell;
 
   /* update page, if necessary */
-  if (uc - chartable->page_first_char >= chartable->rows * chartable->cols)
+  if (cell - chartable->page_first_cell >= chartable->rows * chartable->cols)
     {
-      /* move the page_first_char as far as active_char has moved */
-      offset = (gint) chartable->active_char 
-               - (gint) chartable->old_active_char;
+      /* move the page_first_cell as far as active_cell has moved */
+      gint offset = (gint) chartable->active_cell - (gint) chartable->old_active_cell;
     
-      if ((gint) chartable->old_page_first_char + offset >= 0)
-        chartable->page_first_char = chartable->old_page_first_char + offset;
+      if ((gint) chartable->old_page_first_cell + offset >= 0)
+        chartable->page_first_cell = chartable->old_page_first_cell + offset;
       else
-        chartable->page_first_char = 0;
+        chartable->page_first_cell = 0;
     
       /* round down so that it's a multiple of chartable->cols */
-      chartable->page_first_char 
-          -= (chartable->page_first_char % chartable->cols);
+      chartable->page_first_cell -= (chartable->page_first_cell % chartable->cols);
     
       /* go back up if we should have rounded up */
-      if (chartable->active_char - chartable->page_first_char 
-          >= chartable->rows * chartable->cols)
-        chartable->page_first_char += chartable->cols;
+      if (chartable->active_cell - chartable->page_first_cell >= chartable->rows * chartable->cols)
+        chartable->page_first_cell += chartable->cols;
     }
 
-  g_signal_emit (chartable, gucharmap_table_signals[SET_ACTIVE_CHAR], 
-                 0, chartable->active_char);
+  g_signal_emit (chartable, gucharmap_table_signals[SET_ACTIVE_CHAR], 0, 
+                 gucharmap_codepoint_list_get_char (chartable->codepoint_list, chartable->active_cell));
 }
 
+static void
+set_active_char (GucharmapTable *chartable,
+                 gunichar        wc)
+{
+  guint cell = gucharmap_codepoint_list_get_index (chartable->codepoint_list, wc);
+  set_active_cell (chartable, cell);
+}
 
 static void
 draw_borders (GucharmapTable *chartable)
@@ -622,7 +593,6 @@ draw_borders (GucharmapTable *chartable)
     }
 }
 
-
 static void
 set_scrollbar_adjustment (GucharmapTable *chartable)
 {
@@ -631,34 +601,66 @@ set_scrollbar_adjustment (GucharmapTable *chartable)
                           chartable->adjustment_changed_handler_id);
 
   gtk_adjustment_set_value (GTK_ADJUSTMENT (chartable->adjustment), 
-                            1.0 * chartable->page_first_char / chartable->cols);
+                            1.0 * chartable->page_first_cell / chartable->cols);
 
   g_signal_handler_unblock (G_OBJECT (chartable->adjustment),
                             chartable->adjustment_changed_handler_id);
 }
 
+static guint
+get_last_cell (GucharmapTable *chartable)
+{
+  return gucharmap_codepoint_list_get_last_index (chartable->codepoint_list);
+}
+
+/* for mouse clicks */
+static gunichar
+get_cell_at_xy (GucharmapTable *chartable, 
+                gint            x, 
+                gint            y)
+{
+  gint r, c, x0, y0;
+  guint cell;
+
+  for (c = 0, x0 = 0;  x0 <= x && c < chartable->cols;  c++)
+    x0 += gucharmap_table_column_width (chartable, c);
+
+  for (r = 0, y0 = 0;  y0 <= y && r < chartable->rows;  r++)
+    y0 += gucharmap_table_row_height (chartable, r);
+
+  /* cell = rowcol_to_unichar (chartable, r-1, c-1); */
+  cell = get_cell_at_rowcol (chartable, r-1, c-1);
+
+  /* XXX: check this somewhere else? */
+  if (cell > get_last_cell (chartable))
+    return get_last_cell (chartable);
+
+  return cell;
+}
 
 static void
-draw_character (GucharmapTable *chartable, gint row, gint col)
+draw_character (GucharmapTable *chartable, 
+                gint            row, 
+                gint            col)
 {
   gint padding_x, padding_y;
   gint char_width, char_height;
   gint square_width, square_height; 
-  gunichar uc;
+  gunichar wc;
+  guint cell;
   GdkGC *gc;
   gchar buf[10];
   gint n;
 
-  uc = rowcol_to_unichar (chartable, row, col);
+  cell = get_cell_at_rowcol (chartable, row, col);
+  wc = gucharmap_codepoint_list_get_char (chartable->codepoint_list, cell);
 
-  if (uc < 0 || uc > UNICHAR_MAX || ! gucharmap_unichar_validate (uc) 
-      || ! gucharmap_unichar_isdefined (uc))
+  if (wc < 0 || wc > UNICHAR_MAX || ! gucharmap_unichar_validate (wc) || ! gucharmap_unichar_isdefined (wc))
     return;
 
-  if (GTK_WIDGET_HAS_FOCUS (chartable->drawing_area) 
-      && uc == chartable->active_char)
+  if (GTK_WIDGET_HAS_FOCUS (chartable->drawing_area) && cell == chartable->active_cell)
     gc = chartable->drawing_area->style->text_gc[GTK_STATE_SELECTED];
-  else if (uc == chartable->active_char)
+  else if (cell == chartable->active_cell)
     gc = chartable->drawing_area->style->text_gc[GTK_STATE_ACTIVE];
   else
     gc = chartable->drawing_area->style->text_gc[GTK_STATE_NORMAL];
@@ -666,11 +668,10 @@ draw_character (GucharmapTable *chartable, gint row, gint col)
   square_width = gucharmap_table_column_width (chartable, col) - 1;
   square_height = gucharmap_table_row_height (chartable, row) - 1;
 
-  n = gucharmap_unichar_to_printable_utf8 (uc, buf); 
+  n = gucharmap_unichar_to_printable_utf8 (wc, buf); 
   pango_layout_set_text (chartable->pango_layout, buf, n);
 
-  pango_layout_get_pixel_size (chartable->pango_layout, 
-                               &char_width, &char_height);
+  pango_layout_get_pixel_size (chartable->pango_layout, &char_width, &char_height);
 
   /* (square_width - char_width)/2 is the smaller half */
   padding_x = (square_width - char_width) - (square_width - char_width)/2;
@@ -681,7 +682,6 @@ draw_character (GucharmapTable *chartable, gint row, gint col)
                    gucharmap_table_y_offset (chartable, row) + padding_y,
                    chartable->pango_layout);
 }
-
 
 static const GucharmapUnicodeBlock *
 find_block (GucharmapTable *chartable, 
@@ -712,20 +712,20 @@ find_block (GucharmapTable *chartable,
     }
 }
 
-
 static gboolean
 character_in_active_block (GucharmapTable *chartable,
                            gunichar uc)
 {
   const GucharmapUnicodeBlock *block;
 
-  block = find_block (chartable, chartable->active_char);
+  /* g_print ("character_in_active_block: uc = U+%04X\n", uc); */
+
+  block = find_block (chartable, gucharmap_codepoint_list_get_char (chartable->codepoint_list, chartable->active_cell));
   if (block == NULL)
     return FALSE;
   else
     return uc >= block->start && uc <= block->end;
 }
-
 
 static void
 tint (GdkColor *bg,
@@ -739,33 +739,34 @@ tint (GdkColor *bg,
   composited->blue = (alpha * fg->blue + (100 - alpha) * bg->blue) / 100;
 }
 
-
 static void
 draw_square_bg (GucharmapTable *chartable, gint row, gint col)
 {
   gint square_width, square_height; 
-  gunichar uc;
   GdkGC *gc;
   GdkColor untinted;
+  guint cell;
+  gunichar wc;
 
-  uc = rowcol_to_unichar (chartable, row, col);
+  cell = get_cell_at_rowcol (chartable, row, col);
+  wc = gucharmap_codepoint_list_get_char (chartable->codepoint_list, cell);
 
   gc = gdk_gc_new (GDK_DRAWABLE (chartable->drawing_area->window));
 
-  if (GTK_WIDGET_HAS_FOCUS (chartable->drawing_area) 
-      && uc == chartable->active_char)
+  if (GTK_WIDGET_HAS_FOCUS (chartable->drawing_area) && cell == chartable->active_cell)
     untinted = chartable->drawing_area->style->base[GTK_STATE_SELECTED];
-  else if (uc == chartable->active_char)
+  else if (cell == chartable->active_cell)
     untinted = chartable->drawing_area->style->base[GTK_STATE_ACTIVE];
-  else if (! gucharmap_unichar_validate (uc))
+  else if (! gucharmap_unichar_validate (wc))
     untinted = chartable->drawing_area->style->fg[GTK_STATE_INSENSITIVE];
-  else if (! gucharmap_unichar_isdefined (uc))
+  else if (! gucharmap_unichar_isdefined (wc))
     untinted = chartable->drawing_area->style->bg[GTK_STATE_INSENSITIVE];
   else 
     untinted = chartable->drawing_area->style->base[GTK_STATE_NORMAL];
 
-  if (character_in_active_block (chartable, uc))
+  if (character_in_active_block (chartable, wc))
     {
+      /* g_print ("draw_square_bg: tinting cell: %d. wc: U+%04X.\n", cell, wc); */
       GdkColor tinted;
       tint (&untinted, 
             &chartable->drawing_area->style->base[GTK_STATE_SELECTED],
@@ -773,7 +774,10 @@ draw_square_bg (GucharmapTable *chartable, gint row, gint col)
       gdk_gc_set_rgb_fg_color (gc, &tinted);
     }
   else
-    gdk_gc_set_rgb_fg_color (gc, &untinted);
+    {
+      /* g_print ("draw_square_bg: not tinting cell: %d. wc: U+%04X.\n", cell, wc); */
+      gdk_gc_set_rgb_fg_color (gc, &untinted);
+    }
 
   square_width = gucharmap_table_column_width (chartable, col) - 1;
   square_height = gucharmap_table_row_height (chartable, row) - 1;
@@ -786,7 +790,6 @@ draw_square_bg (GucharmapTable *chartable, gint row, gint col)
   g_object_unref (gc);
 }
 
-
 static void
 expose_square (GucharmapTable *chartable, gint row, gint col)
 {
@@ -797,7 +800,6 @@ expose_square (GucharmapTable *chartable, gint row, gint col)
                               gucharmap_table_row_height (chartable, row) - 1);
 }
 
-
 static void
 draw_square (GucharmapTable *chartable, gint row, gint col)
 {
@@ -805,12 +807,12 @@ draw_square (GucharmapTable *chartable, gint row, gint col)
   draw_character (chartable, row, col);
 }
 
-
 static void
-draw_and_expose_character_square (GucharmapTable *chartable, gunichar uc)
+draw_and_expose_cell (GucharmapTable *chartable,
+                      guint cell)
 {
-  gint row = (uc - chartable->page_first_char) / chartable->cols;
-  gint col = gucharmap_table_unichar_column (chartable, uc);
+  gint row = (cell - chartable->page_first_cell) / chartable->cols;
+  gint col = gucharmap_table_cell_column (chartable, cell);
 
   if (row >= 0 && row < chartable->rows && col >= 0 && col < chartable->cols)
     {
@@ -818,7 +820,6 @@ draw_and_expose_character_square (GucharmapTable *chartable, gunichar uc)
       expose_square (chartable, row, col);
     }
 }
-
 
 /* draws the backing store pixmap */
 static void
@@ -849,7 +850,6 @@ draw_chartable_from_scratch (GucharmapTable *chartable)
         draw_character (chartable, row, col);
       }
 }
-
 
 static void
 copy_rows (GucharmapTable *chartable, gint row_offset)
@@ -915,7 +915,6 @@ copy_rows (GucharmapTable *chartable, gint row_offset)
     }
 }
 
-
 static void
 redraw_rows (GucharmapTable *chartable, gint row_offset)
 {
@@ -953,23 +952,22 @@ redraw_rows (GucharmapTable *chartable, gint row_offset)
     }
 }
 
-
 static void
 get_root_coords_at_active_char (GucharmapTable *chartable, 
-                                gint *x_root, gint *y_root)
+                                gint *x_root, 
+                                gint *y_root)
 {
   gint x, y;
   gint row, col;
 
   gdk_window_get_origin (chartable->drawing_area->window, &x, &y);
 
-  row = (chartable->active_char - chartable->page_first_char) / chartable->cols;
-  col = gucharmap_table_unichar_column (chartable, chartable->active_char);
+  row = (chartable->active_cell - chartable->page_first_cell) / chartable->cols;
+  col = gucharmap_table_cell_column (chartable, chartable->active_cell);
 
   *x_root = x + gucharmap_table_x_offset (chartable, col);
   *y_root = y + gucharmap_table_y_offset (chartable, row);
 }
-
 
 /* retunrs the coords of the innermost corner of the square */
 static void
@@ -980,8 +978,8 @@ get_appropriate_active_char_corner_xy (GucharmapTable *chartable, gint *x, gint 
 
   get_root_coords_at_active_char (chartable, &x0, &y0);
 
-  row = (chartable->active_char - chartable->page_first_char) / chartable->cols;
-  col = gucharmap_table_unichar_column (chartable, chartable->active_char);
+  row = (chartable->active_cell - chartable->page_first_cell) / chartable->cols;
+  col = gucharmap_table_cell_column (chartable, chartable->active_cell);
 
   *x = x0;
   *y = y0;
@@ -993,18 +991,17 @@ get_appropriate_active_char_corner_xy (GucharmapTable *chartable, gint *x, gint 
     *x += gucharmap_table_column_width (chartable, col);
 }
 
-
 /* Redraws whatever needs to be redrawn, in the character table and
  * everything, and exposes what needs to be exposed. */
 void
-gucharmap_table_redraw (GucharmapTable *chartable, gboolean move_zoom)
+gucharmap_table_redraw (GucharmapTable *chartable, 
+                        gboolean        move_zoom)
 {
   gint row_offset;
   gboolean actives_done = FALSE;
+  gunichar old_wc, new_wc;
 
-  row_offset = ((gint) chartable->page_first_char 
-                - (gint) chartable->old_page_first_char)
-               / chartable->cols;
+  row_offset = ((gint) chartable->page_first_cell - (gint) chartable->old_page_first_cell) / chartable->cols;
 
 #ifdef G_PLATFORM_WIN32
 
@@ -1019,9 +1016,10 @@ gucharmap_table_redraw (GucharmapTable *chartable, gboolean move_zoom)
 
 #else /* #ifdef G_PLATFORM_WIN32 */
 
+  old_wc = gucharmap_codepoint_list_get_char (chartable->codepoint_list, chartable->old_active_cell);
+  new_wc = gucharmap_codepoint_list_get_char (chartable->codepoint_list, chartable->active_cell);
   if (row_offset >= chartable->rows || row_offset <= -chartable->rows
-      || find_block (chartable, chartable->active_char)
-         != find_block (chartable, chartable->old_active_char))
+      || find_block (chartable, new_wc) != find_block (chartable, old_wc))
     {
       draw_chartable_from_scratch (chartable);
       gtk_widget_queue_draw (chartable->drawing_area);
@@ -1035,18 +1033,16 @@ gucharmap_table_redraw (GucharmapTable *chartable, gboolean move_zoom)
       gtk_widget_queue_draw (chartable->drawing_area);
     }
 
-#endif /* #else (#ifdef G_PLATFORM_WIN32) */
+#endif
 
-  if (chartable->active_char != chartable->old_active_char)
+  if (chartable->active_cell != chartable->old_active_cell)
     {
       set_scrollbar_adjustment (chartable); /* XXX */
 
       if (!actives_done)
         {
-          draw_and_expose_character_square (chartable, 
-                                            chartable->old_active_char);
-          draw_and_expose_character_square (chartable, 
-                                            chartable->active_char);
+          draw_and_expose_cell (chartable, chartable->old_active_cell);
+          draw_and_expose_cell (chartable, chartable->active_cell);
         }
 
       if (chartable->zoom_window)
@@ -1061,10 +1057,9 @@ gucharmap_table_redraw (GucharmapTable *chartable, gboolean move_zoom)
         }
     }
 
-  chartable->old_page_first_char = chartable->page_first_char;
-  chartable->old_active_char = chartable->active_char;
+  chartable->old_page_first_cell = chartable->page_first_cell;
+  chartable->old_active_cell = chartable->active_cell;
 }
-
 
 /* redraws the screen from the backing pixmap */
 static gint
@@ -1099,7 +1094,6 @@ expose_event (GtkWidget *widget,
   return FALSE;
 }
 
-
 void
 gucharmap_table_class_init (GucharmapTableClass *clazz)
 {
@@ -1126,7 +1120,6 @@ gucharmap_table_class_init (GucharmapTableClass *clazz)
 		    1, G_TYPE_STRING);
 }
 
-
 static int
 high_bit (int n)
 {
@@ -1134,7 +1127,6 @@ high_bit (int n)
   for (i = 1;  i < n;  i *= 2);
   return i/2;
 }
-
 
 static void
 size_allocate (GtkWidget *widget, 
@@ -1168,8 +1160,8 @@ size_allocate (GtkWidget *widget,
   if (chartable->rows == old_rows && chartable->cols == old_cols)
     return;
 
-  chartable->page_first_char = chartable->active_char 
-                             - (chartable->active_char % chartable->cols);
+  chartable->page_first_cell = chartable->active_cell 
+                             - (chartable->active_cell % chartable->cols);
 
   /* adjust the adjustment, since it's based on the size of a row */
   adjustment = GTK_ADJUSTMENT (chartable->adjustment);
@@ -1179,40 +1171,38 @@ size_allocate (GtkWidget *widget,
   set_scrollbar_adjustment (chartable);
 }
 
-
 static void
 move_home (GucharmapTable *chartable)
 {
-  set_active_char (chartable, 0x0000);
+  set_active_cell (chartable, 0);
 }
 
 static void
 move_end (GucharmapTable *chartable)
 {
-  set_active_char (chartable, UNICHAR_MAX);
+  set_active_cell (chartable, get_last_cell (chartable));
 }
 
 static void
 move_up (GucharmapTable *chartable)
 {
-  if (chartable->active_char >= chartable->cols)
-    set_active_char (chartable, chartable->active_char - chartable->cols);
+  if (chartable->active_cell >= chartable->cols)
+    set_active_cell (chartable, chartable->active_cell - chartable->cols);
 }
 
 static void
 move_down (GucharmapTable *chartable)
 {
-  if (chartable->active_char <= UNICHAR_MAX - chartable->cols)
-    set_active_char (chartable, chartable->active_char + chartable->cols);
+  if (chartable->active_cell <= UNICHAR_MAX - chartable->cols)
+    set_active_cell (chartable, chartable->active_cell + chartable->cols);
 }
 
-
 static void
-move_cursor (GucharmapTable *chartable, gint offset)
+move_cursor (GucharmapTable *chartable, 
+             gint            offset)
 {
-  if (chartable->active_char + offset >= 0
-      && chartable->active_char + offset <= UNICHAR_MAX)
-    set_active_char (chartable, chartable->active_char + offset);
+  if (chartable->active_cell + offset >= 0 && chartable->active_cell + offset <= get_last_cell (chartable))
+    set_active_cell (chartable, chartable->active_cell + offset);
 }
 
 static void
@@ -1236,29 +1226,24 @@ move_right (GucharmapTable *chartable)
 static void
 move_page_up (GucharmapTable *chartable)
 {
-  if (chartable->active_char >= chartable->cols * chartable->rows)
+  if (chartable->active_cell >= chartable->cols * chartable->rows)
     {
-      set_active_char (
-              chartable, 
-              chartable->active_char - chartable->cols * chartable->rows);
+      set_active_cell (chartable, chartable->active_cell - chartable->cols * chartable->rows);
     }
-  else if (chartable->active_char > 0)
-    set_active_char (chartable, 0);
+  else if (chartable->active_cell > 0)
+    set_active_cell (chartable, 0);
 }
 
 static void
 move_page_down (GucharmapTable *chartable)
 {
-  if (chartable->active_char < UNICHAR_MAX - chartable->cols * chartable->rows)
+  if (chartable->active_cell < UNICHAR_MAX - chartable->cols * chartable->rows)
     {
-      set_active_char (
-              chartable, 
-              chartable->active_char + chartable->cols * chartable->rows);
+      set_active_cell (chartable, chartable->active_cell + chartable->cols * chartable->rows);
     }
-  else if (chartable->active_char < UNICHAR_MAX)
-    set_active_char (chartable, UNICHAR_MAX);
+  else if (chartable->active_cell < UNICHAR_MAX)
+    set_active_cell (chartable, UNICHAR_MAX);
 }
-
 
 static gint
 key_release_event (GtkWidget *widget,
@@ -1279,7 +1264,6 @@ key_release_event (GtkWidget *widget,
 
   return FALSE;
 }
-
 
 /* mostly for moving around in the chartable */
 static gint
@@ -1336,7 +1320,7 @@ key_press_event (GtkWidget *widget,
 
       case GDK_Return: case GDK_KP_Enter: case GDK_space:
 	g_signal_emit (chartable, gucharmap_table_signals[ACTIVATE], 0, 
-		       chartable->active_char);
+		       chartable->active_cell);
         return TRUE;
 
       /* pass on other keys, like tab and stuff that shifts focus */
@@ -1349,7 +1333,6 @@ key_press_event (GtkWidget *widget,
   return TRUE;
 }
 
-
 static void
 set_top_row (GucharmapTable *chartable, gint row)
 {
@@ -1357,31 +1340,30 @@ set_top_row (GucharmapTable *chartable, gint row)
 
   g_return_if_fail (row >= 0 && row <= UNICHAR_MAX / chartable->cols);
 
-  chartable->old_page_first_char = chartable->page_first_char;
-  chartable->old_active_char = chartable->active_char;
+  chartable->old_page_first_cell = chartable->page_first_cell;
+  chartable->old_active_cell = chartable->active_cell;
 
-  chartable->page_first_char = row * chartable->cols;
+  chartable->page_first_cell = row * chartable->cols;
 
   /* character is still on the visible page */
-  if (chartable->active_char - chartable->page_first_char 
+  if (chartable->active_cell - chartable->page_first_cell 
       < chartable->rows * chartable->cols)
     return;
 
-  c = chartable->old_active_char % chartable->cols;
+  c = chartable->old_active_cell % chartable->cols;
 
-  if (chartable->page_first_char < chartable->old_page_first_char)
+  if (chartable->page_first_cell < chartable->old_page_first_cell)
     r = chartable->rows - 1;
   else
     r = 0;
 
-  chartable->active_char = chartable->page_first_char + r * chartable->cols + c;
-  if (chartable->active_char > UNICHAR_MAX)
-    chartable->active_char = UNICHAR_MAX;
+  chartable->active_cell = chartable->page_first_cell + r * chartable->cols + c;
+  if (chartable->active_cell > UNICHAR_MAX)
+    chartable->active_cell = UNICHAR_MAX;
 
   g_signal_emit (chartable, gucharmap_table_signals[SET_ACTIVE_CHAR], 
-                 0, chartable->active_char);
+                 0, chartable->active_cell);
 }
-
 
 static void
 scroll_chartable (GtkAdjustment *adjustment, GucharmapTable *chartable)
@@ -1390,43 +1372,18 @@ scroll_chartable (GtkAdjustment *adjustment, GucharmapTable *chartable)
   gucharmap_table_redraw (chartable, TRUE);
 }
 
-
-/* for mouse clicks */
-static gunichar
-get_char_at (GucharmapTable *chartable, gint x, gint y)
-{
-  gint r, c, x0, y0;
-  gunichar rv;
-
-  for (c = 0, x0 = 0;  x0 <= x && c < chartable->cols;  c++)
-    x0 += gucharmap_table_column_width (chartable, c);
-
-  for (r = 0, y0 = 0;  y0 <= y && r < chartable->rows;  r++)
-    y0 += gucharmap_table_row_height (chartable, r);
-
-  rv = rowcol_to_unichar (chartable, r-1, c-1);
-
-  /* XXX: check this somewhere else? */
-  if (rv > UNICHAR_MAX)
-    return UNICHAR_MAX;
-
-  return rv;
-}
-
-
 static void
 status_message (GucharmapTable *chartable, const gchar *message)
 {
   g_signal_emit (chartable, gucharmap_table_signals[STATUS_MESSAGE], 0, message);
 }
 
-
 static void
-selection_text_received (GtkClipboard *clipboard, 
-                         const gchar *text,
+selection_text_received (GtkClipboard  *clipboard, 
+                         const gchar    *text,
                          GucharmapTable *chartable)
 {
-  gunichar uc;
+  gunichar wc;
 
   if (text == NULL)
     {
@@ -1437,30 +1394,26 @@ selection_text_received (GtkClipboard *clipboard,
       return;
     }
 
-  uc = g_utf8_get_char_validated (text, -1);
+  wc = g_utf8_get_char_validated (text, -1);
 
-  if (uc == (gunichar)(-2) || uc == (gunichar)(-1) || uc > UNICHAR_MAX)
-    {
-      status_message (chartable, _("Unknown character, unable to identify."));
-    }
+  if (wc == (gunichar)(-2) || wc == (gunichar)(-1) || wc > UNICHAR_MAX)
+    status_message (chartable, _("Unknown character in clipboard, unable to identify."));
+  else if (gucharmap_codepoint_list_get_index (chartable->codepoint_list, wc) == (guint)(-1))
+    status_message (chartable, _("First character in clipboard not found."));
   else
     {
       status_message (chartable, _("Character found."));
-      set_active_char (chartable, uc);
+      set_active_char (chartable, wc);
       gucharmap_table_redraw (chartable, TRUE);
     }
 }
 
-
 void
 gucharmap_table_identify_clipboard (GucharmapTable *chartable, 
-	                            GtkClipboard *clipboard)
+	                            GtkClipboard   *clipboard)
 {
-  gtk_clipboard_request_text (
-          clipboard, (GtkClipboardTextReceivedFunc) selection_text_received, 
-          chartable);
+  gtk_clipboard_request_text (clipboard, (GtkClipboardTextReceivedFunc) selection_text_received, chartable);
 }
-
 
 /*  - single click with left button: activate character under pointer
  *  - double-click with left button: add active character to text_to_copy
@@ -1484,12 +1437,12 @@ button_press_event (GtkWidget *widget,
   if (event->button == 1 && event->type == GDK_2BUTTON_PRESS)
     {
       g_signal_emit (chartable, gucharmap_table_signals[ACTIVATE], 
-                     0, chartable->active_char);
+                     0, chartable->active_cell);
     }
   /* single-click */ 
   else if (event->button == 1 && event->type == GDK_BUTTON_PRESS) 
     {
-      set_active_char (chartable, get_char_at (chartable, event->x, event->y));
+      set_active_cell (chartable, get_cell_at_xy (chartable, event->x, event->y));
       gucharmap_table_redraw (chartable, TRUE);
     }
   else if (event->button == 2)
@@ -1499,13 +1452,12 @@ button_press_event (GtkWidget *widget,
     }
   else if (event->button == 3)
     {
-      set_active_char (
-              chartable, get_char_at (chartable, event->x, event->y));
+      set_active_cell (chartable, get_cell_at_xy (chartable, event->x, event->y));
 
       make_zoom_window (chartable);
       gucharmap_table_redraw (chartable, FALSE);
 
-      if (chartable->active_char == chartable->old_active_char)
+      if (chartable->active_cell == chartable->old_active_cell)
         update_zoom_window (chartable); 
 
       place_zoom_window (chartable, event->x_root, event->y_root);
@@ -1522,7 +1474,6 @@ button_press_event (GtkWidget *widget,
   return TRUE;
 }
 
-
 static gint
 button_release_event (GtkWidget *widget, 
                       GdkEventButton *event, 
@@ -1533,7 +1484,6 @@ button_release_event (GtkWidget *widget,
 
   return FALSE;
 }
-
 
 static GtkWidget *
 make_scrollbar (GucharmapTable *chartable)
@@ -1548,7 +1498,6 @@ make_scrollbar (GucharmapTable *chartable)
 
   return gtk_vscrollbar_new (GTK_ADJUSTMENT (chartable->adjustment));
 }
-
 
 static gint
 motion_notify_event (GtkWidget *widget, 
@@ -1570,13 +1519,11 @@ motion_notify_event (GtkWidget *widget,
 
   if ((event->state & GDK_BUTTON3_MASK) != 0 && chartable->zoom_window)
     {
-      gunichar uc;
+      guint cell = get_cell_at_xy (chartable, MAX (0, event->x), MAX (0, event->y));
 
-      uc = get_char_at (chartable, MAX (0, event->x), MAX (0, event->y));
-
-      if (uc != chartable->active_char)
+      if (cell != chartable->active_cell)
         {
-          set_active_char (chartable, uc);
+          set_active_cell (chartable, cell);
           gucharmap_table_redraw (chartable, FALSE);
         }
 
@@ -1586,7 +1533,6 @@ motion_notify_event (GtkWidget *widget,
   return FALSE;
 }
 
-
 static gboolean
 focus_out_event (GtkWidget *widget, 
                        GdkEventFocus *event,
@@ -1595,11 +1541,10 @@ focus_out_event (GtkWidget *widget,
   gucharmap_table_zoom_disable (chartable);
 
   if (chartable->drawing_area != NULL && chartable->pixmap != NULL)
-    draw_and_expose_character_square (chartable, chartable->active_char);
+    draw_and_expose_cell (chartable, chartable->active_cell);
 
   return FALSE;
 }
-
 
 static gboolean
 focus_in_event (GtkWidget *widget, 
@@ -1607,17 +1552,16 @@ focus_in_event (GtkWidget *widget,
                 GucharmapTable *chartable)
 {
   if (chartable->drawing_area != NULL && chartable->pixmap != NULL)
-    draw_and_expose_character_square (chartable, chartable->active_char);
+    draw_and_expose_cell (chartable, chartable->active_cell);
 
   return FALSE;
 }
 
-
 static void
 mouse_wheel_up (GucharmapTable *chartable)
 {
-  if (chartable->page_first_char > chartable->rows * chartable->cols / 2)
-    set_top_row (chartable, (chartable->page_first_char 
+  if (chartable->page_first_cell > chartable->rows * chartable->cols / 2)
+    set_top_row (chartable, (chartable->page_first_cell 
                              - chartable->rows * chartable->cols / 2) 
                             / chartable->cols);
   else 
@@ -1626,14 +1570,13 @@ mouse_wheel_up (GucharmapTable *chartable)
   gucharmap_table_redraw (chartable, TRUE);
 }
 
-
 static void
 mouse_wheel_down (GucharmapTable *chartable)
 {
-  if (chartable->page_first_char 
+  if (chartable->page_first_cell 
           < UNICHAR_MAX - chartable->rows * chartable->cols / 2)
     {
-      set_top_row (chartable, (chartable->page_first_char
+      set_top_row (chartable, (chartable->page_first_cell
                                + chartable->rows * chartable->cols / 2) 
                               / chartable->cols);
     }
@@ -1644,7 +1587,6 @@ mouse_wheel_down (GucharmapTable *chartable)
 
   gucharmap_table_redraw (chartable, TRUE);
 }
-
 
 /* mouse wheel scrolls by half a page */
 static gboolean    
@@ -1669,7 +1611,6 @@ mouse_wheel_event (GtkWidget *widget,
   return TRUE;
 }
 
-
 static void
 style_set (GtkWidget *widget, 
            GtkStyle *previous_style, 
@@ -1681,7 +1622,6 @@ style_set (GtkWidget *widget,
 
   gtk_widget_queue_draw (chartable->drawing_area);
 }
-
 
 static void
 drag_data_received (GtkWidget *widget,
@@ -1716,7 +1656,6 @@ drag_data_received (GtkWidget *widget,
   g_free (text);
 }
 
-
 static gint
 compute_drag_font_size (GucharmapTable *chartable)
 {
@@ -1727,7 +1666,6 @@ compute_drag_font_size (GucharmapTable *chartable)
 
   return 5 * ((font_size > 0) ? font_size : 10 * PANGO_SCALE);
 }
-
 
 static void
 drag_begin (GtkWidget *widget, 
@@ -1744,7 +1682,6 @@ drag_begin (GtkWidget *widget,
   g_object_unref (drag_icon);
 }
 
-
 static void
 drag_data_get (GtkWidget *widget, 
                GdkDragContext *context,
@@ -1757,10 +1694,9 @@ drag_data_get (GtkWidget *widget,
   gchar buf[7];
   gint n;
 
-  n = g_unichar_to_utf8 (chartable->active_char, buf);
+  n = g_unichar_to_utf8 (chartable->active_cell, buf);
   gtk_selection_data_set_text (selection_data, buf, n);
 }
-
 
 /* does all the initial construction */
 void
@@ -1773,6 +1709,8 @@ gucharmap_table_init (GucharmapTable *chartable)
   chartable->zoom_pixmap = NULL;
   chartable->font_metrics = NULL;
   chartable->snap_pow2_enabled = FALSE;
+
+  chartable->codepoint_list = gucharmap_codepoint_list_new ();
 
   accessible = gtk_widget_get_accessible (GTK_WIDGET (chartable));
   atk_object_set_name (accessible, _("Character Table"));
@@ -1850,17 +1788,15 @@ gucharmap_table_init (GucharmapTable *chartable)
   pango_layout_set_font_description (chartable->pango_layout,
                                      chartable->drawing_area->style->font_desc);
 
-  chartable->page_first_char = (gunichar) 0x0000;
-  chartable->active_char = (gunichar) 0x0000;
+  chartable->page_first_cell = (gunichar) 0x0000;
+  chartable->active_cell = (gunichar) 0x0000;
 }
-
 
 GtkWidget *
 gucharmap_table_new (void)
 {
   return GTK_WIDGET (g_object_new (gucharmap_table_get_type (), NULL));
 }
-
 
 GType
 gucharmap_table_get_type (void)
@@ -1889,7 +1825,6 @@ gucharmap_table_get_type (void)
   return gucharmap_table_type;
 }
 
-
 void
 gucharmap_table_zoom_enable (GucharmapTable *chartable)
 {
@@ -1910,14 +1845,12 @@ gucharmap_table_zoom_enable (GucharmapTable *chartable)
   gdk_window_clear (chartable->zoom_window->window);
 }
 
-
 void
 gucharmap_table_zoom_disable (GucharmapTable *chartable)
 {
   chartable->zoom_mode_enabled = FALSE;
   destroy_zoom_window (chartable);
 }
-
 
 void 
 gucharmap_table_set_font (GucharmapTable *chartable, const gchar *font_name)
@@ -1963,13 +1896,24 @@ gucharmap_table_set_font (GucharmapTable *chartable, const gchar *font_name)
   chartable->pixmap = NULL;
 }
 
-
 gunichar 
 gucharmap_table_get_active_character (GucharmapTable *chartable)
 {
-  return chartable->active_char;
+  return gucharmap_codepoint_list_get_char (chartable->codepoint_list, chartable->active_cell);
 }
 
+#if 0
+static gunichar
+get_character_at_location (GucharmapTable *chartable, 
+                           gint row,
+                           gint col)
+{
+  if (gtk_widget_get_direction (chartable->drawing_area) == GTK_TEXT_DIR_RTL)
+    return get_character_at_cell (chartable, chartable->page_first_cell + row * chartable->cols + (chartable->cols - col - 1));
+  else
+    return get_character_at_cell (chartable, chartable->page_first_cell + row * chartable->cols + col);
+}
+#endif
 
 void
 gucharmap_table_set_active_character (GucharmapTable *chartable, gunichar uc)
@@ -1978,13 +1922,11 @@ gucharmap_table_set_active_character (GucharmapTable *chartable, gunichar uc)
   gucharmap_table_redraw (chartable, TRUE);
 }
 
-
 void
 gucharmap_table_grab_focus (GucharmapTable *chartable)
 {
   gtk_widget_grab_focus (chartable->drawing_area);
 }
-
 
 void 
 gucharmap_table_set_snap_pow2 (GucharmapTable *chartable, gboolean snap)

@@ -39,7 +39,8 @@ libgucharmap_la_SOURCES = gucharmap_marshal.c gucharmap_marshal.h \
                           gucharmap-mini-fontsel.c gucharmap-mini-fontsel.h \
                           gucharmap-table.c gucharmap-table.h \
                           gucharmap-unicode-info.c gucharmap-unicode-info.h \
-                          gucharmap-window.c gucharmap-window.h
+                          gucharmap-window.c gucharmap-window.h \
+			  gucharmap-codepoint-list.c gucharmap-codepoint-list.h
 
 
 # this is different from the project version

@@ -21,9 +21,9 @@
 #define GUCHARMAP_TABLE_H
 
 #include <gtk/gtk.h>
+#include <gucharmap/gucharmap-codepoint-list.h>
 
 G_BEGIN_DECLS
-
 
 #define GUCHARMAP_TABLE(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), \
                               gucharmap_table_get_type (), GucharmapTable))
@@ -32,10 +32,8 @@ G_BEGIN_DECLS
 
 #define IS_GUCHARMAP_TABLE(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), gucharmap_table_get_type ()))
 
-
 typedef struct _GucharmapTable GucharmapTable;
 typedef struct _GucharmapTableClass GucharmapTableClass;
-
 
 struct _GucharmapTable
 {
@@ -51,10 +49,10 @@ struct _GucharmapTable
   PangoFontMetrics *font_metrics;
   PangoLayout *pango_layout;
 
-  gunichar page_first_char;  /* the character in the upper left square */
-  gunichar active_char;
-  gunichar old_page_first_char; /* helps us know what to redraw */
-  gunichar old_active_char;
+  guint page_first_cell;
+  guint active_cell;
+  guint old_page_first_cell;
+  guint old_active_cell;
 
   /* for the scrollbar */
   GtkObject *adjustment; 
@@ -68,8 +66,9 @@ struct _GucharmapTable
 
   /* for dragging (#114534) */
   gdouble click_x, click_y; 
-};
 
+  GucharmapCodepointList *codepoint_list;
+};
 
 struct _GucharmapTableClass
 {
@@ -79,7 +78,6 @@ struct _GucharmapTableClass
   void (* set_active_char) (GucharmapTable *chartable, guint ch);
   void (* status_message) (GucharmapTable *chartable, const gchar *message);
 };
-
 
 GType gucharmap_table_get_type (void);
 GtkWidget * gucharmap_table_new (void);
@@ -95,7 +93,6 @@ void gucharmap_table_identify_clipboard (GucharmapTable *chartable,
 void gucharmap_table_grab_focus (GucharmapTable *chartable);
 void gucharmap_table_set_snap_pow2 (GucharmapTable *chartable, 
                                     gboolean snap);
-
 
 G_END_DECLS
 

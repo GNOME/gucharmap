@@ -35,7 +35,6 @@
 # define ICON_PATH ""
 #endif
 
-
 typedef struct _EntryDialog EntryDialog;
 
 struct _EntryDialog
@@ -44,7 +43,6 @@ struct _EntryDialog
   GtkWidget *dialog;
   GtkEntry *entry;
 };
-
 
 static void
 information_dialog (GucharmapWindow *guw,
@@ -85,14 +83,11 @@ information_dialog (GucharmapWindow *guw,
   gtk_widget_show (dialog);
 }
 
-
 static void
 jump_clipboard (GtkWidget *widget, GucharmapWindow *guw)
 {
-  gucharmap_charmap_identify_clipboard (
-          guw->charmap, gtk_clipboard_get (GDK_SELECTION_CLIPBOARD));
+  gucharmap_charmap_identify_clipboard (guw->charmap, gtk_clipboard_get (GDK_SELECTION_CLIPBOARD));
 }
-
 
 static void
 status_message (GtkWidget *widget, const gchar *message, GucharmapWindow *guw)
@@ -101,7 +96,6 @@ status_message (GtkWidget *widget, const gchar *message, GucharmapWindow *guw)
   if (message != NULL)
     gtk_statusbar_push (GTK_STATUSBAR (guw->status), 0, message);
 }
-
 
 /* direction is -1 (back) or +1 (forward) */
 /* returns TRUE if search was successful */
@@ -233,7 +227,6 @@ do_search (GucharmapWindow *guw,
     }
 }
 
-
 static void
 search_find_response (GtkDialog *dialog, 
                       gint response, 
@@ -256,9 +249,9 @@ search_find_response (GtkDialog *dialog,
   gtk_widget_destroy (GTK_WIDGET (dialog));
 }
 
-
 static void
-search_find (GtkWidget *widget, GucharmapWindow *guw)
+search_find (GtkWidget       *widget, 
+             GucharmapWindow *guw)
 {
   GtkWidget *dialog;
   GtkWidget *hbox;
@@ -267,13 +260,10 @@ search_find (GtkWidget *widget, GucharmapWindow *guw)
   GtkWidget *spacer;
   EntryDialog *entry_dialog;
 
-  dialog = gtk_dialog_new_with_buttons (_("Find"),
-                                        GTK_WINDOW (guw),
-                                        GTK_DIALOG_NO_SEPARATOR 
-                                        | GTK_DIALOG_DESTROY_WITH_PARENT, 
+  dialog = gtk_dialog_new_with_buttons (_("Find"), GTK_WINDOW (guw),
+                                        GTK_DIALOG_NO_SEPARATOR | GTK_DIALOG_DESTROY_WITH_PARENT, 
                                         GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, 
-                                        GTK_STOCK_FIND, GTK_RESPONSE_OK, 
-                                        NULL);
+                                        GTK_STOCK_FIND, GTK_RESPONSE_OK, NULL);
 
   gtk_window_set_icon (GTK_WINDOW (dialog), guw->icon);
   gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
@@ -313,7 +303,6 @@ search_find (GtkWidget *widget, GucharmapWindow *guw)
   gtk_widget_grab_focus (entry);
 }
 
-
 static void
 search_find_next (GtkWidget *widget, GucharmapWindow *guw)
 {
@@ -323,7 +312,6 @@ search_find_next (GtkWidget *widget, GucharmapWindow *guw)
     search_find (widget, guw);
 }
 
-
 static void
 search_find_prev (GtkWidget *widget, GucharmapWindow *guw)
 {
@@ -331,7 +319,6 @@ search_find_prev (GtkWidget *widget, GucharmapWindow *guw)
     do_search (guw, GTK_WINDOW (guw), guw->last_search, -1);
   /* XXX: else, open up search dialog, but search backwards :-( */
 }
-
 
 static void
 font_bigger (GtkWidget *widget, GucharmapWindow *guw)
@@ -344,7 +331,6 @@ font_bigger (GtkWidget *widget, GucharmapWindow *guw)
                                      size + increment);
 }
 
-
 static void
 font_smaller (GtkWidget *widget, GucharmapWindow *guw)
 {
@@ -356,14 +342,12 @@ font_smaller (GtkWidget *widget, GucharmapWindow *guw)
                                      size - increment);
 }
 
-
 static void
 snap_cols_pow2 (GtkCheckMenuItem *mi, GucharmapWindow *guw)
 {
   gucharmap_table_set_snap_pow2 (guw->charmap->chartable, 
                            gtk_check_menu_item_get_active (mi));
 }
-
 
 #if HAVE_GNOME
 static void
@@ -405,7 +389,6 @@ help_about (GtkWidget *widget, GucharmapWindow *guw)
   gtk_window_present (GTK_WINDOW (about));
 }
 
-
 static GtkWidget *
 make_gnome_help_menu (GucharmapWindow *guw)
 {
@@ -425,12 +408,11 @@ make_gnome_help_menu (GucharmapWindow *guw)
 }
 #endif /* #if HAVE_GNOME */
 
-
 static void
 history_back (GtkWidget *widget, 
               GucharmapWindow *guw)
 {
-  guw->history->data = (gpointer) guw->charmap->chartable->active_char;
+  guw->history->data = GUINT_TO_POINTER (gucharmap_table_get_active_character (guw->charmap->chartable));
 
   g_assert (guw->history->prev);
   guw->history = guw->history->prev;
@@ -439,16 +421,14 @@ history_back (GtkWidget *widget,
 
   gtk_widget_set_sensitive (guw->forward_menu_item, TRUE);
 
-  gucharmap_table_set_active_character (guw->charmap->chartable,
-                                        (gunichar) guw->history->data);
+  gucharmap_table_set_active_character (guw->charmap->chartable, GPOINTER_TO_UINT (guw->history->data));
 }
-
 
 static void
 history_forward (GtkWidget *widget, 
                  GucharmapWindow *guw)
 {
-  guw->history->data = (gpointer) guw->charmap->chartable->active_char;
+  guw->history->data = GUINT_TO_POINTER (gucharmap_table_get_active_character (guw->charmap->chartable));
 
   g_assert (guw->history->next);
   guw->history = guw->history->next;
@@ -458,48 +438,40 @@ history_forward (GtkWidget *widget,
 
   gtk_widget_set_sensitive (guw->back_menu_item, TRUE);
 
-  gucharmap_table_set_active_character (guw->charmap->chartable,
-                                        (gunichar) guw->history->data);
+  gucharmap_table_set_active_character (guw->charmap->chartable, GPOINTER_TO_UINT (guw->history->data));
 }
 
-
 static void
-prev_character (GtkWidget *button,
+prev_character (GtkWidget       *button,
                 GucharmapWindow *guw)
 {
-  gunichar uc;
+  gunichar wc;
 
-  uc = guw->charmap->chartable->active_char;
-
-  do 
+  if (guw->charmap->chartable->active_cell <= 0)
     {
-      uc = uc - 1;
-      if (uc < 0 || uc > UNICHAR_MAX)
-        uc = UNICHAR_MAX;
+      guint last_index = gucharmap_codepoint_list_get_last_index (guw->charmap->chartable->codepoint_list);
+      wc = gucharmap_codepoint_list_get_char (guw->charmap->chartable->codepoint_list, last_index);
     }
-  while (! gucharmap_unichar_validate (uc) 
-        || gucharmap_unichar_type (uc) == G_UNICODE_UNASSIGNED);
+  else
+    wc = gucharmap_codepoint_list_get_char (guw->charmap->chartable->codepoint_list, guw->charmap->chartable->active_cell - 1);
 
-  gucharmap_table_set_active_character (guw->charmap->chartable, uc);
+  gucharmap_table_set_active_character (guw->charmap->chartable, wc);
 }
-
 
 static void
-next_character (GtkWidget *button,
+next_character (GtkWidget       *button,
                 GucharmapWindow *guw)
 {
-  gunichar uc;
+  gunichar wc;
 
-  uc = guw->charmap->chartable->active_char;
+  if (guw->charmap->chartable->active_cell 
+      >= gucharmap_codepoint_list_get_last_index (guw->charmap->chartable->codepoint_list))
+    wc = gucharmap_codepoint_list_get_char (guw->charmap->chartable->codepoint_list, 0);
+  else
+    wc = gucharmap_codepoint_list_get_char (guw->charmap->chartable->codepoint_list, guw->charmap->chartable->active_cell + 1);
 
-  for (uc = (uc + 1) % (UNICHAR_MAX + 1); 
-       (! gucharmap_unichar_validate (uc) 
-        || gucharmap_unichar_type (uc) == G_UNICODE_UNASSIGNED); 
-       uc = (uc + 1) % (UNICHAR_MAX + 1));
-
-  gucharmap_table_set_active_character (guw->charmap->chartable, uc);
+  gucharmap_table_set_active_character (guw->charmap->chartable, wc);
 }
-
 
 static GtkWidget *
 make_menu (GucharmapWindow *guw)
@@ -702,7 +674,6 @@ make_menu (GucharmapWindow *guw)
   return menubar;
 }
 
-
 static void
 fontsel_changed (GucharmapMiniFontSelection *fontsel, GucharmapWindow *guw)
 {
@@ -712,7 +683,6 @@ fontsel_changed (GucharmapMiniFontSelection *fontsel, GucharmapWindow *guw)
 
   g_free (font_name);
 }
-
 
 static void
 append_character_to_text_to_copy (GucharmapTable *chartable, 
@@ -741,7 +711,6 @@ append_character_to_text_to_copy (GucharmapTable *chartable,
   g_string_free (gs, TRUE);
 }
 
-
 static void
 edit_copy (GtkWidget *widget, GucharmapWindow *guw)
 {
@@ -753,14 +722,12 @@ edit_copy (GtkWidget *widget, GucharmapWindow *guw)
   gtk_editable_copy_clipboard (GTK_EDITABLE (guw->text_to_copy_entry));
 }
 
-
 static void
 entry_changed_sensitize_button (GtkEditable *editable, GtkWidget *button)
 {
   const gchar *entry_text = gtk_entry_get_text (GTK_ENTRY (editable));
   gtk_widget_set_sensitive (button, entry_text[0] != '\0');
 }
-
 
 static GtkWidget *
 make_text_to_copy (GucharmapWindow *guw)
@@ -800,7 +767,6 @@ make_text_to_copy (GucharmapWindow *guw)
   return hbox;
 }
 
-
 void
 load_icon (GucharmapWindow *guw)
 {
@@ -833,7 +799,6 @@ load_icon (GucharmapWindow *guw)
     gtk_window_set_icon (GTK_WINDOW (guw), guw->icon);
 }
 
-
 static void
 status_realize (GtkWidget *status,
                 GucharmapWindow *guw)
@@ -842,7 +807,6 @@ status_realize (GtkWidget *status,
   gtk_widget_set_size_request (guw->status, -1, 
                                guw->status->allocation.height + 3);
 }
-
 
 static void
 link_clicked (GucharmapCharmap *charmap,
@@ -861,7 +825,6 @@ link_clicked (GucharmapCharmap *charmap,
   gtk_widget_set_sensitive (guw->back_menu_item, TRUE);
   gtk_widget_set_sensitive (guw->forward_menu_item, FALSE);
 }
-
 
 static void
 pack_stuff_in_window (GucharmapWindow *guw)
@@ -911,7 +874,6 @@ pack_stuff_in_window (GucharmapWindow *guw)
   gtk_widget_show (big_vbox);
 }
 
-
 static void
 gucharmap_window_init (GucharmapWindow *guw)
 {
@@ -932,13 +894,11 @@ gucharmap_window_init (GucharmapWindow *guw)
   pack_stuff_in_window (guw);
 }
 
-
 static void
 show_all (GtkWidget *widget)
 {
   gtk_widget_show (widget);
 }
-
 
 static void
 window_finalize (GObject *object)
@@ -957,14 +917,12 @@ window_finalize (GObject *object)
     }
 }
 
-
 static void
 gucharmap_window_class_init (GucharmapWindowClass *clazz)
 {
   GTK_WIDGET_CLASS (clazz)->show_all = show_all;
   G_OBJECT_CLASS (clazz)->finalize = window_finalize;
 }
-
 
 GType 
 gucharmap_window_get_type ()
@@ -995,13 +953,11 @@ gucharmap_window_get_type ()
   return gucharmap_window_type;
 }
 
-
 GtkWidget * 
 gucharmap_window_new ()
 {
   return GTK_WIDGET (g_object_new (gucharmap_window_get_type (), NULL));
 }
-
 
 void 
 gucharmap_window_set_font_selection_visible (GucharmapWindow *guw, 
@@ -1014,7 +970,6 @@ gucharmap_window_set_font_selection_visible (GucharmapWindow *guw,
   else
     gtk_widget_hide (guw->fontsel);
 }
-
 
 void 
 gucharmap_window_set_text_to_copy_visible (GucharmapWindow *guw, 
@@ -1030,7 +985,7 @@ gucharmap_window_set_text_to_copy_visible (GucharmapWindow *guw,
 
 void 
 gucharmap_window_set_file_menu_visible (GucharmapWindow *guw, 
-                                           gboolean visible)
+                                        gboolean         visible)
 {
   guw->file_menu_visible = visible;
 

@@ -1,5 +1,20 @@
 2003-11-23  Noah Levitt
 
+	* gucharmap/Makefile.am:
+	* gucharmap/charcell_accessible.c:
+	* gucharmap/chartable_accessible.c:
+	* gucharmap/gucharmap-charmap.c:
+	* gucharmap/gucharmap-codepoint-list.c:
+	* gucharmap/gucharmap-codepoint-list.h:
+	* gucharmap/gucharmap-table.c:
+	* gucharmap/gucharmap-table.h:
+	* gucharmap/gucharmap-window.c:
+	* gucharmap/gucharmap.h: Change chartable to keep track of cells by
+	cell number instead of by character. GucharmapCodepointList gives the
+	codepoint for a particular cell.
+
+2003-11-23  Noah Levitt
+
 	* gucharmap.desktop.in: Change Terminal=0 to Terminal=false. (#127748,
 	Pawel)
 
