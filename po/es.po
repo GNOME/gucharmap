@@ -1,217 +1,342 @@
-# $Id$
-# translation of gucharmap
-# copyright (c) 2002 Noah Levitt
+# Spanish translation of gucharmap
+# Copyright © 2002-2003 the Free Software Foundation, Inc.
+# This file is distributed under the same license as the gucharmap package.
+# Eduardo García Cebollero <kiwnix@yahoo.es>, 2002.
+# Pablo Gonzalo del Campo <pablodc@bigfoot.com>, 2003.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap 0.2\n"
-"POT-Creation-Date: 2003-01-12 13:35-0500\n"
-"Last-Translator: Eduardo Garcia Cebollero <kiwnix@yahoo.es>\n"
+"POT-Creation-Date: 2003-02-10 11:24+0100\n"
+"Last-Translator: Pablo Gonzalo del Campo <pablodc@bigfoot.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2003-02-10 16:45-0300\n"
+"Language-Team: Spanish <traductores@es.gnome.org>\n"
+"X-Generator: KBabel 1.1\n"
 
-#: src/charmap.c:1004
-msgid "Text copied to clipboard."
-msgstr "Texto copiado al portapapeles."
+#: src/charmap.c:710
+msgid "Zoom mode disabled."
+msgstr "Modo de acercamiento desactivado"
 
-#: src/charmap.c:1016
-msgid "Text-to-copy entry box cleared."
-msgstr "Caja de texto a copiar borrada."
+#: src/charmap.c:1399
+msgid "Zoom mode enabled. Press <Esc> to disable zoom."
+msgstr "Modo de acercamiento activado. Presione <Esc> para desactivar el acercamiento"
 
-#: src/charmap.c:1203
-#, fuzzy
-msgid "Unicode name"
-msgstr "Nombre Unicode"
+#: src/charmap.c:1468
+msgid "Zoom mode enabled."
+msgstr "Modo de acercamiento habilitado."
 
-#: src/charmap.c:1209
-#, fuzzy
-msgid "Unicode code point"
-msgstr "Punto de codigo Unicode"
-
-#: src/charmap.c:1215
-#, fuzzy
-msgid "Unicode category"
-msgstr "Categoria Unicode: %s"
-
-#: src/charmap.c:1221
-#, fuzzy
-msgid "Canonical decomposition"
-msgstr "Descomposicion canonica"
-
-#: src/charmap.c:1227
-msgid "UTF-8"
-msgstr "UTF-8"
-
-#: src/charmap.c:1234
-#, fuzzy
-msgid "CJK ideograph definition"
-msgstr "Descomposición ideografica CJK"
-
-#: src/charmap.c:1240
-#, fuzzy
-msgid "Mandarin pronunciation"
-msgstr "Pronunciación en Mandarin"
-
-#: src/charmap.c:1246
-#, fuzzy
-msgid "Japanese On pronunciation"
-msgstr "Pronunciación Japonesa On"
-
-#: src/charmap.c:1252
-#, fuzzy
-msgid "Japanese Kun pronunciation"
-msgstr "Pronunciación Japonesa Kun"
-
-#: src/charmap.c:1258
-#, fuzzy
-msgid "Cantonese pronunciation"
-msgstr "Pronunciación Cantonesa"
-
-#: src/charmap.c:1264
-#, fuzzy
-msgid "Tang pronunciation"
-msgstr "Pronunciación Tang"
-
-#: src/charmap.c:1270
-#, fuzzy
-msgid "Korean pronunciation"
-msgstr "Pronunciación en Koreano"
-
-#: src/charmap.c:1325
+#: src/charmap.c:1704
 msgid "Clipboard is empty."
-msgstr "El portapapeles esta vacio."
+msgstr "El portapapeles esta vacío."
 
-#: src/charmap.c:1327
+#: src/charmap.c:1706
 msgid "There is no selected text."
 msgstr "No hay texto seleccionado."
 
-#: src/charmap.c:1336 src/charmap.c:1566
+#: src/charmap.c:1714 src/charmap.c:1918
 msgid "Unknown character, unable to identify."
 msgstr "Caracter desconocido, imposible identificarlo."
 
-#: src/charmap.c:1340 src/charmap.c:1570
+#: src/charmap.c:1718 src/charmap.c:1922
 msgid "Character found."
 msgstr "Caracter encontrado."
 
-#: src/charmap.c:1359
-msgid "Text to copy:"
-msgstr "Texto a copiar:"
+#: src/charmap.c:2028
+msgid "Character Map"
+msgstr "Mapa de caracteres"
 
-#: src/charmap.c:1373
-msgid "Copy to the clipboard."
-msgstr "Copiar al portapapeles."
+#: src/charmap.c:2032
+msgid "Character"
+msgstr "Caracter"
 
-#: src/charmap.c:1653
-msgid "Nothing to search for."
-msgstr "Nada en lo que buscar."
+#: src/charmap.c:2033
+msgid "Unicode category"
+msgstr "Categoría de unicode"
 
-#: src/charmap.c:1662
-msgid "Search wrapped."
-msgstr ""
+#: src/charmap.c:2034
+msgid "Canonical decomposition"
+msgstr "Descomposición canónica"
 
-#: src/charmap.c:1664
-msgid "Found."
-msgstr "Encontrado."
+#: src/charmap.c:2035
+msgid "UTF-8"
+msgstr "UTF-8"
 
-#: src/charmap.c:1670
-msgid "Not found."
-msgstr "No encontrado."
+#: src/charmap.c:2036
+msgid "Other representations"
+msgstr "Otras representaciones"
 
-#: src/charmap.c:1696
-msgid ""
-"Search for the next occurrence of this string in a character's Unicode name."
-msgstr ""
-"Buscar la proxima ocurrencia de esta cadena en el nombre de un caracter "
-"Unicode"
+#: src/charmap.c:2038
+msgid "CJK ideograph definition"
+msgstr "Definición ideográfica CJK"
 
-#: src/main.c:75
-#, fuzzy, c-format
+#: src/charmap.c:2039
+msgid "Mandarin pronunciation"
+msgstr "Pronunciación en Mandarín"
+
+#: src/charmap.c:2040
+msgid "Japanese On pronunciation"
+msgstr "Pronunciación Japonesa On"
+
+#: src/charmap.c:2041
+msgid "Japanese Kun pronunciation"
+msgstr "Pronunciación Japonesa Kun"
+
+#: src/charmap.c:2042
+msgid "Cantonese pronunciation"
+msgstr "Pronunciación Cantonesa"
+
+#: src/charmap.c:2043
+msgid "Tang pronunciation"
+msgstr "Pronunciación Tang"
+
+#: src/charmap.c:2044
+msgid "Korean pronunciation"
+msgstr "Pronunciación en Koreano"
+
+#: src/charmap.c:2060
+msgid "Character Table"
+msgstr "Tabla de caracteres"
+
+#: src/charmap.c:2065
+msgid "Details on the Current Character"
+msgstr "Detalles del caracter actual"
+
+#: src/charmap.c:2076
+msgid "List of Unicode Blocks"
+msgstr "Lista de bloques unicode"
+
+#: src/main.c:183 src/main.c:665
+msgid "category"
+msgstr "categoría"
+
+#: src/main.c:185 src/main.c:673
+msgid "decomposition"
+msgstr "descomposición"
+
+#: src/main.c:187 src/main.c:680
+msgid "utf8"
+msgstr "utf8"
+
+#: src/main.c:189 src/main.c:688
+msgid "other_reps"
+msgstr "other_reps"
+
+#: src/main.c:192 src/main.c:715
+msgid "kdefinition"
+msgstr "kdefinition"
+
+#: src/main.c:194 src/main.c:723
+msgid "kmandarin"
+msgstr "kmandarin"
+
+#: src/main.c:196 src/main.c:731
+msgid "kjapaneseon"
+msgstr "kjapaneseon"
+
+#: src/main.c:198 src/main.c:739
+msgid "kjapanesekun"
+msgstr "kjapanesekun"
+
+#: src/main.c:200 src/main.c:747
+msgid "kcantonese"
+msgstr "kcantonese"
+
+#: src/main.c:202 src/main.c:755
+msgid "ktang"
+msgstr "ktang"
+
+#: src/main.c:204 src/main.c:763
+msgid "kkorean"
+msgstr "kkorean"
+
+#: src/main.c:264
+#, c-format
 msgid ""
 "Not a valid code point to jump to. Must be a hexadecimal number between 0 "
 "and %4.4X."
 msgstr ""
-"No hay un codigo valido al que saltar. Debe ser un numero hexadecimal entre "
+"No hay un Codigo valido al que saltar. Debe ser un numero hexadecimal entre "
 "0 y %4.4X."
 
-#: src/main.c:95
-#, fuzzy
+#: src/main.c:286
 msgid "Go to hex code point"
-msgstr "Saltar a ese codigo hexadecimal."
+msgstr "Ir al punto de código hexadecimal"
 
-#: src/main.c:115
-#, fuzzy
-msgid "Enter unicode code point"
-msgstr "Codigo Unicode: U+%4.4X (%u)"
+#: src/main.c:307
+msgid "_Enter unicode code point"
+msgstr "Ingr_ese el punto de código unicode"
 
-#: src/main.c:151
+#: src/main.c:351
+msgid "The selected code point is not a valid unicode character."
+msgstr "El punto de código seleccionado no es un caracter unicode válido."
+
+#: src/main.c:382
+msgid "Text copied to clipboard."
+msgstr "Texto copiado al portapapeles."
+
+#: src/main.c:392
+msgid "Text-to-copy entry box cleared."
+msgstr "Caja de texto a copiar borrada."
+
+#: src/main.c:406
+msgid "Not found."
+msgstr "No encontrado."
+
+#: src/main.c:410
+msgid "Found."
+msgstr "Encontrado."
+
+#: src/main.c:414
+msgid "Search wrapped."
+msgstr "Búsqueda acotada."
+
+#: src/main.c:418
+msgid "Nothing to search for."
+msgstr "Nada para buscar."
+
+#: src/main.c:441
+msgid "_Search:"
+msgstr "Bu_scar:"
+
+#: src/main.c:459
+msgid "Search for the next occurrence of this string in a character's Unicode name."
+msgstr "Buscar la próxima ocurrencia de esta cadena en el nombre de un caracter Unicode."
+
+#: src/main.c:488
+msgid "_Text to copy:"
+msgstr "_Texto a copiar:"
+
+#: src/main.c:507
+msgid "Copy to the clipboard."
+msgstr "Copiar al portapapeles."
+
+#: src/main.c:532
 msgid "translator_credits"
-msgstr "Eduardo Garcia Cebollero <kiwnix@yahoo.es>"
+msgstr ""
+"Pablo G. del Campo <pablodc@bigfoot.com>, 2003\n"
+"Eduardo García Cebollero <kiwnix@yahoo.es>, 2002"
 
-#: src/main.c:161 src/main.c:287
+#: src/main.c:539 src/main.c:935
 msgid "Unicode Character Map"
-msgstr "Mapa de Caracteres Unicode"
+msgstr "Mapa de caracteres Unicode"
 
-#: src/main.c:204
+#: src/main.c:589
 msgid "Char_map"
 msgstr "_Mapa de caracteres"
 
-#: src/main.c:206
+#: src/main.c:591
 msgid "_View"
 msgstr "_Ver"
 
-#: src/main.c:208
-msgid "_Go to"
+#: src/main.c:593
+msgid "_Go To"
 msgstr "_Ir a"
 
-#: src/main.c:226
-#, fuzzy
+#: src/main.c:612
 msgid "Expand/Collapse All"
-msgstr "Expandir/Plegar todos"
+msgstr "Expandir/Plegar todo"
 
-#: src/main.c:236
+#. ctrl-+ or ctrl-=
+#: src/main.c:621
+msgid "Zoom _In"
+msgstr "Ac_ercar"
+
+#. ctrl--
+#: src/main.c:633
+msgid "Zoom _Out"
+msgstr "Ale_jar"
+
+#: src/main.c:646
+msgid "_Unicode Details"
+msgstr "Detalles de _unicode"
+
+#. the unicode details submenu
+#: src/main.c:652 src/main.c:701
+msgid "Options"
+msgstr "Opciones"
+
+#: src/main.c:660
+msgid "_Category"
+msgstr "_Categoría"
+
+#: src/main.c:668
+msgid "Canonical _Decomposition"
+msgstr "_Descomposición canónica"
+
+#: src/main.c:675
+msgid "_UTF-8"
+msgstr "_UTF-8"
+
+#: src/main.c:683
+msgid "_Other Representations"
+msgstr "_Otras representaciones"
+
+#: src/main.c:695
+msgid "_CJK Ideograph Details"
+msgstr "Descomposición ideográfica _CJK"
+
+#: src/main.c:710
+msgid "CJK Ideograph _Definition"
+msgstr "_Definición ideográfica CJK"
+
+#: src/main.c:718
+msgid "_Mandarin Pronunciation"
+msgstr "Pronunciación en _Mandarín"
+
+#: src/main.c:726
+msgid "Japanese _On Pronunciation"
+msgstr "Pronunciación Japonesa _On"
+
+#: src/main.c:734
+msgid "_Japanese Kun Pronunciation"
+msgstr "Pronunciación _Japonesa Kun"
+
+#: src/main.c:742
+msgid "_Cantonese Pronunciation"
+msgstr "Pronunciación _Cantonesa"
+
+#: src/main.c:750
+msgid "_Tang Pronunciation"
+msgstr "Pronunciación _Tang"
+
+#: src/main.c:758
+msgid "_Korean Pronunciation"
+msgstr "Pronunciación en _Koreano"
+
+#. ctrl-h
+#: src/main.c:773
 msgid "_Hex Code Point..."
-msgstr "Codigo _Hexadecimal"
+msgstr "Punto de código _hexadecimal..."
 
-#: src/main.c:241
-#, fuzzy
+#. ctrl-v
+#: src/main.c:781
 msgid "Character in _Clipboard"
-msgstr "Identificar caracter desde el _Portapeles"
+msgstr "_Caracter en el portapapeles"
 
 #. make the help menu
-#: src/main.c:249
+#: src/main.c:791
 msgid "_Help"
-msgstr "_Ayuda"
+msgstr "A_yuda"
 
-#~ msgid "Character: %s"
-#~ msgstr "Caracter: %s"
+#: src/main.c:906
+msgid "Font to start with; ex: 'Serif 27'"
+msgstr "Tipografía con la cual iniciar; ex: 'Serif 27'"
 
-#~ msgid "Show/hide code point values in the block list."
-#~ msgstr "Mostrar/Ocultar valores de los codigos en la lista "
-#~ "Mostrar/Esconder los valores de los codigos unicode en la lista de "
-#~ "bloques."
+#: src/mini_fontsel.c:283
+msgid "Font"
+msgstr "Tipografía"
 
-#~ msgid "Selection is empty."
-#~ msgstr "La selecciÃ³n esta vacia."
+#: src/mini_fontsel.c:292
+msgid "Font Family"
+msgstr "Familia tipográfica"
 
-#~ msgid "Identify character from selection"
-#~ msgstr "Identificar caracter desde la selecciÃ³n"
+#: src/mini_fontsel.c:296
+msgid "Font Style"
+msgstr "Estilo de la tipografía"
 
-#~ msgid "Jump to the first character in the primary selection. (X11 only.)"
-#~ msgstr "Saltar al primer caracter en la seleccion primaria. (solo X11)."
-
-#~ msgid "Jump to the first character in the clipboard."
-#~ msgstr "Saltar al primer caracter en el portapeles."
-
-#~ msgid "Nothing to jump to."
-#~ msgstr "Nada a lo que saltar."
-
-#~ msgid "Search:"
-#~ msgstr "Buscar:"
-
-#~ msgid "Jump to:"
-#~ msgstr "Saltar a:"
-
-#~ msgid "Show/hide font selection."
-#~ msgstr "Mostrar/Ocultar seleccion de fuente."
+#: src/mini_fontsel.c:303
+msgid "Font Size"
+msgstr "Tamaño de la tipografía"
