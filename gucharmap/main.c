@@ -54,7 +54,7 @@ main (gint argc, gchar **argv)
   PangoFontDescription *font_desc = NULL; */
   GdkScreen *screen;
   gint monitor;
-    GdkRectangle rect;
+   GdkRectangle rect;
 #if !HAVE_GNOME
   poptContext popt_context;
   gint rc;
@@ -71,19 +71,15 @@ main (gint argc, gchar **argv)
 
 #if HAVE_GNOME
   gnome_program_init ("gucharmap", VERSION, LIBGNOMEUI_MODULE, argc, argv,
-                      GNOME_PARAM_APP_DATADIR, DATADIR,     
+                      GNOME_PARAM_APP_DATADIR, DATADIR,
                       GNOME_PARAM_POPT_TABLE, options, NULL);
 #else
-  popt_context = poptGetContext ("gucharmap", argc, (const gchar **) argv, 
-                                 options, 0);
+  popt_context = poptGetContext ("gucharmap", argc, (const gchar **) argv, options, 0);
   rc = poptGetNextOpt (popt_context);
 
   if (rc != -1)
     {
-       g_printerr ("%s: %s\n", 
-                   poptBadOption (popt_context, POPT_BADOPTION_NOALIAS),
-                   poptStrerror (rc));
-
+       g_printerr ("%s: %s\n", poptBadOption (popt_context, POPT_BADOPTION_NOALIAS), poptStrerror (rc));
        exit (1);
     }
 #endif  /* else (#if HAVE_GNOME) */
@@ -96,9 +92,7 @@ main (gint argc, gchar **argv)
   screen = gtk_window_get_screen (GTK_WINDOW (window));
   monitor = gdk_screen_get_monitor_at_point (screen, 0, 0);
   gdk_screen_get_monitor_geometry (screen, monitor, &rect);
-  gtk_window_set_default_size (GTK_WINDOW (window), 
-                               rect.width * 9/16, 
-                               rect.height * 9/16);
+  gtk_window_set_default_size (GTK_WINDOW (window), rect.width * 9/16, rect.height * 9/16);
 
 #if 0
   /* make the starting font 50% bigger than the default font */

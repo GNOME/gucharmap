@@ -1306,43 +1306,6 @@ status_message (GucharmapTable *chartable, const gchar *message)
   g_signal_emit (chartable, gucharmap_table_signals[STATUS_MESSAGE], 0, message);
 }
 
-static void
-selection_text_received (GtkClipboard   *clipboard, 
-                         const gchar    *text,
-                         GucharmapTable *chartable)
-{
-  gunichar wc;
-
-  if (text == NULL)
-    {
-      if (clipboard == gtk_clipboard_get (GDK_SELECTION_CLIPBOARD))
-        status_message (chartable, _("Clipboard is empty."));
-      else
-        status_message (chartable, _("There is no selected text."));
-      return;
-    }
-
-  wc = g_utf8_get_char_validated (text, -1);
-
-  if (wc == (gunichar)(-2) || wc == (gunichar)(-1) || wc > UNICHAR_MAX)
-    status_message (chartable, _("Unknown character in clipboard, unable to identify."));
-  else if (gucharmap_codepoint_list_get_index (chartable->codepoint_list, wc) == (guint)(-1))
-    status_message (chartable, _("First character in clipboard not found."));
-  else
-    {
-      status_message (chartable, _("Character found."));
-      set_active_char (chartable, wc);
-      gucharmap_table_redraw (chartable, TRUE);
-    }
-}
-
-void
-gucharmap_table_identify_clipboard (GucharmapTable *chartable, 
-	                            GtkClipboard   *clipboard)
-{
-  gtk_clipboard_request_text (clipboard, (GtkClipboardTextReceivedFunc) selection_text_received, chartable);
-}
-
 /*  - single click with left button: activate character under pointer
  *  - double-click with left button: add active character to text_to_copy
  *  - single-click with middle button: jump to selection_primary
@@ -1371,11 +1334,6 @@ button_press_event (GtkWidget *widget,
     {
       set_active_cell (chartable, get_cell_at_xy (chartable, event->x, event->y));
       gucharmap_table_redraw (chartable, TRUE);
-    }
-  else if (event->button == 2)
-    {
-      gucharmap_table_identify_clipboard (chartable, 
-                                    gtk_clipboard_get (GDK_SELECTION_PRIMARY));
     }
   else if (event->button == 3)
     {

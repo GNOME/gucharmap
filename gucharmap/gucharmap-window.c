@@ -77,12 +77,6 @@ struct _GucharmapWindowPrivate
   gboolean font_selection_visible;
   gboolean text_to_copy_visible;
   gboolean file_menu_visible;
-
-  /* points to the element we are currently at (could be in the middle of
-   * the list) */
-  GList *history;
-  GtkWidget *back_menu_item;
-  GtkWidget *forward_menu_item;
 };
 
 static void
@@ -118,13 +112,6 @@ information_dialog (GucharmapWindow *guw,
   g_signal_connect (dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
   
   gtk_widget_show (dialog);
-}
-
-static void
-jump_clipboard (GtkWidget       *widget, 
-                GucharmapWindow *guw)
-{
-  gucharmap_charmap_identify_clipboard (guw->charmap, gtk_clipboard_get (GDK_SELECTION_CLIPBOARD));
 }
 
 static void
@@ -383,43 +370,6 @@ make_gnome_help_menu (GucharmapWindow *guw)
 #endif /* #if HAVE_GNOME */
 
 static void
-history_back (GtkWidget       *widget, 
-              GucharmapWindow *guw)
-{
-  GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
-
-  priv->history->data = GUINT_TO_POINTER (gucharmap_table_get_active_character (guw->charmap->chartable));
-
-  g_assert (priv->history->prev);
-  priv->history = priv->history->prev;
-
-  gtk_widget_set_sensitive (priv->back_menu_item, priv->history->prev != NULL);
-
-  gtk_widget_set_sensitive (priv->forward_menu_item, TRUE);
-
-  gucharmap_table_set_active_character (guw->charmap->chartable, GPOINTER_TO_UINT (priv->history->data));
-}
-
-static void
-history_forward (GtkWidget       *widget, 
-                 GucharmapWindow *guw)
-{
-  GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
-
-  priv->history->data = GUINT_TO_POINTER (gucharmap_table_get_active_character (guw->charmap->chartable));
-
-  g_assert (priv->history->next);
-  priv->history = priv->history->next;
-
-  gtk_widget_set_sensitive (priv->forward_menu_item, 
-                            priv->history->next != NULL);
-
-  gtk_widget_set_sensitive (priv->back_menu_item, TRUE);
-
-  gucharmap_table_set_active_character (guw->charmap->chartable, GPOINTER_TO_UINT (priv->history->data));
-}
-
-static void
 prev_character (GtkWidget       *button,
                 GucharmapWindow *guw)
 {
@@ -522,8 +472,7 @@ make_menu (GucharmapWindow *guw)
   file_menu = gtk_menu_new ();
   gtk_menu_set_accel_group (GTK_MENU (file_menu), priv->accel_group);
   gtk_menu_item_set_submenu (GTK_MENU_ITEM (priv->file_menu_item), file_menu);
-  priv->quit_menu_item = gtk_image_menu_item_new_from_stock (GTK_STOCK_QUIT, 
-                                                            priv->accel_group);
+  priv->quit_menu_item = gtk_image_menu_item_new_from_stock (GTK_STOCK_QUIT, priv->accel_group);
   g_signal_connect (G_OBJECT (priv->quit_menu_item), "activate",
                     G_CALLBACK (gtk_main_quit), NULL);
   gtk_menu_shell_append (GTK_MENU_SHELL (file_menu), priv->quit_menu_item);
@@ -534,6 +483,20 @@ make_menu (GucharmapWindow *guw)
   gtk_menu_set_accel_group (GTK_MENU (view_menu), priv->accel_group);
   gtk_menu_item_set_submenu (GTK_MENU_ITEM (view_menu_item), view_menu);
 
+  menu_item = gtk_radio_menu_item_new_with_mnemonic (group, _("By _Script"));
+  gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item), FALSE);
+  gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), menu_item);
+  g_signal_connect (menu_item, "toggled", G_CALLBACK (view_by_script), guw);
+  group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (menu_item));
+
+  menu_item = gtk_radio_menu_item_new_with_mnemonic (group, _("By _Unicode Block"));
+  gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item), FALSE);
+  gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), menu_item);
+  g_signal_connect (menu_item, "toggled", G_CALLBACK (view_by_block), guw);
+
+  /* separator */
+  gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), gtk_menu_item_new ());
+
   /* ctrl-+ or ctrl-= */
   menu_item = gtk_menu_item_new_with_mnemonic (_("Zoom _In"));
   gtk_widget_add_accelerator (menu_item, "activate", priv->accel_group,
@@ -543,7 +506,7 @@ make_menu (GucharmapWindow *guw)
   gtk_widget_add_accelerator (menu_item, "activate", priv->accel_group,
                               GDK_KP_Add, GDK_CONTROL_MASK, 0);
   g_signal_connect (G_OBJECT (menu_item), "activate",
-                    G_CALLBACK (font_bigger), priv);
+                    G_CALLBACK (font_bigger), guw);
   gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), menu_item);
 
   /* ctrl-- */
@@ -553,30 +516,15 @@ make_menu (GucharmapWindow *guw)
   gtk_widget_add_accelerator (menu_item, "activate", priv->accel_group,
                               GDK_KP_Subtract, GDK_CONTROL_MASK, 0);
   g_signal_connect (G_OBJECT (menu_item), "activate",
-                    G_CALLBACK (font_smaller), priv);
+                    G_CALLBACK (font_smaller), guw);
   gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), menu_item);
 
   /* separator */
   gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), gtk_menu_item_new ());
 
   menu_item = gtk_check_menu_item_new_with_label (_("Snap Columns to Power of Two"));
-  g_signal_connect (menu_item,  "activate", 
-                    G_CALLBACK (snap_cols_pow2), priv);
+  g_signal_connect (menu_item,  "activate", G_CALLBACK (snap_cols_pow2), guw);
   gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), menu_item);
-
-  /* separator */
-  gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), gtk_menu_item_new ());
-
-  menu_item = gtk_radio_menu_item_new_with_mnemonic (group, _("By _Script"));
-  gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item), FALSE);
-  gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), menu_item);
-  g_signal_connect (menu_item, "toggled", G_CALLBACK (view_by_script), priv);
-  group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (menu_item));
-
-  menu_item = gtk_radio_menu_item_new_with_mnemonic (group, _("By _Unicode Block"));
-  gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item), FALSE);
-  gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), menu_item);
-  g_signal_connect (menu_item, "toggled", G_CALLBACK (view_by_block), priv);
 
   /* make the search menu */
   search_menu = gtk_menu_new ();
@@ -584,13 +532,12 @@ make_menu (GucharmapWindow *guw)
   gtk_menu_item_set_submenu (GTK_MENU_ITEM (search_menu_item), search_menu);
 
   menu_item = gtk_image_menu_item_new_with_mnemonic (_("_Find..."));
-  gtk_image_menu_item_set_image (
-          GTK_IMAGE_MENU_ITEM (menu_item), 
-          gtk_image_new_from_stock (GTK_STOCK_FIND, GTK_ICON_SIZE_MENU));
+  gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (menu_item), 
+                                 gtk_image_new_from_stock (GTK_STOCK_FIND, GTK_ICON_SIZE_MENU));
   gtk_widget_add_accelerator (menu_item, "activate", priv->accel_group,
                               GDK_f, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
   g_signal_connect (G_OBJECT (menu_item), "activate",
-                    G_CALLBACK (search_find), priv);
+                    G_CALLBACK (search_find), guw);
   gtk_menu_shell_append (GTK_MENU_SHELL (search_menu), menu_item);
 
   menu_item = gtk_image_menu_item_new_with_mnemonic (_("Find _Next"));
@@ -600,7 +547,7 @@ make_menu (GucharmapWindow *guw)
   gtk_widget_add_accelerator (menu_item, "activate", priv->accel_group,
                               GDK_g, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
   g_signal_connect (G_OBJECT (menu_item), "activate",
-                    G_CALLBACK (search_find_next), priv);
+                    G_CALLBACK (search_find_next), guw);
   gtk_menu_shell_append (GTK_MENU_SHELL (search_menu), menu_item);
 
   menu_item = gtk_image_menu_item_new_with_mnemonic (_("Find _Previous"));
@@ -611,7 +558,7 @@ make_menu (GucharmapWindow *guw)
                               GDK_g, GDK_SHIFT_MASK | GDK_CONTROL_MASK, 
                               GTK_ACCEL_VISIBLE);
   g_signal_connect (G_OBJECT (menu_item), "activate",
-                    G_CALLBACK (search_find_prev), priv);
+                    G_CALLBACK (search_find_prev), guw);
   gtk_menu_shell_append (GTK_MENU_SHELL (search_menu), menu_item);
   /* finished making the search menu */
 
@@ -620,53 +567,17 @@ make_menu (GucharmapWindow *guw)
   gtk_menu_set_accel_group (GTK_MENU (go_menu), priv->accel_group);
   gtk_menu_item_set_submenu (GTK_MENU_ITEM (go_menu_item), go_menu);
 
-  priv->back_menu_item = gtk_image_menu_item_new_from_stock (GTK_STOCK_GO_BACK, 
-                                                            priv->accel_group);
-  gtk_menu_shell_append (GTK_MENU_SHELL (go_menu), priv->back_menu_item);
-  gtk_widget_add_accelerator (priv->back_menu_item, "activate", 
-                              priv->accel_group, back_keysym, 
-                              GDK_MOD1_MASK, GTK_ACCEL_VISIBLE);
-  g_signal_connect (G_OBJECT (priv->back_menu_item), "activate",
-                    G_CALLBACK (history_back), priv);
-  gtk_widget_set_sensitive (priv->back_menu_item, FALSE);
-
-  priv->forward_menu_item = gtk_image_menu_item_new_from_stock (
-          GTK_STOCK_GO_FORWARD, priv->accel_group);
-  gtk_menu_shell_append (GTK_MENU_SHELL (go_menu), priv->forward_menu_item);
-  gtk_widget_add_accelerator (priv->forward_menu_item, "activate", 
-                              priv->accel_group, forward_keysym, 
-                              GDK_MOD1_MASK, GTK_ACCEL_VISIBLE);
-  g_signal_connect (G_OBJECT (priv->forward_menu_item), "activate",
-                    G_CALLBACK (history_forward), priv);
-  gtk_widget_set_sensitive (priv->forward_menu_item, FALSE);
-
-  /* separator */
-  gtk_menu_shell_append (GTK_MENU_SHELL (go_menu), gtk_menu_item_new ());
-
   menu_item = gtk_menu_item_new_with_mnemonic (_("_Next Character"));
   gtk_widget_add_accelerator (menu_item, "activate", priv->accel_group,
                               GDK_n, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
-  g_signal_connect (G_OBJECT (menu_item), "activate",
-                    G_CALLBACK (next_character), priv);
+  g_signal_connect (G_OBJECT (menu_item), "activate", G_CALLBACK (next_character), guw);
   gtk_menu_shell_append (GTK_MENU_SHELL (go_menu), menu_item);
 
   menu_item = gtk_menu_item_new_with_mnemonic (_("_Previous Character"));
   gtk_widget_add_accelerator (menu_item, "activate", priv->accel_group,
                               GDK_p, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
-  g_signal_connect (G_OBJECT (menu_item), "activate",
-                    G_CALLBACK (prev_character), priv);
+  g_signal_connect (G_OBJECT (menu_item), "activate", G_CALLBACK (prev_character), guw);
   gtk_menu_shell_append (GTK_MENU_SHELL (go_menu), menu_item);
-
-  /* separator */
-  gtk_menu_shell_append (GTK_MENU_SHELL (go_menu), gtk_menu_item_new ());
-
-  menu_item = gtk_menu_item_new_with_mnemonic (_("Character in _Clipboard"));
-  gtk_widget_add_accelerator (menu_item, "activate", priv->accel_group,
-                              GDK_Insert, 0, GTK_ACCEL_VISIBLE);
-  g_signal_connect (G_OBJECT (menu_item), "activate",
-                    G_CALLBACK (jump_clipboard), priv); 
-  gtk_menu_shell_append (GTK_MENU_SHELL (go_menu), menu_item);
-  /* finished making the go menu */
 
 #if HAVE_GNOME
   /* if we are the input module and are running inside a non-gnome gtk+
@@ -826,26 +737,6 @@ status_realize (GtkWidget       *status,
 }
 
 static void
-link_clicked (GucharmapCharmap *charmap,
-              gunichar          old_character,
-              gunichar          new_character,
-              GucharmapWindow  *guw)
-{
-  GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
-
-  priv->history->data = (gpointer) old_character;
-
-  g_list_free (priv->history->next);
-  priv->history->next = NULL;
-
-  priv->history = g_list_append (priv->history, (gpointer) new_character);
-  priv->history = priv->history->next;
-
-  gtk_widget_set_sensitive (priv->back_menu_item, TRUE);
-  gtk_widget_set_sensitive (priv->forward_menu_item, FALSE);
-}
-
-static void
 pack_stuff_in_window (GucharmapWindow *guw)
 {
   GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
@@ -881,7 +772,6 @@ pack_stuff_in_window (GucharmapWindow *guw)
   g_signal_connect (priv->status, "realize", G_CALLBACK (status_realize), guw);
 
   g_signal_connect (guw->charmap, "status-message", G_CALLBACK (status_message), guw);
-  g_signal_connect (guw->charmap, "link-clicked", G_CALLBACK (link_clicked), guw);
 
   gtk_widget_show (big_vbox);
 }
@@ -898,9 +788,6 @@ gucharmap_window_init (GucharmapWindow *guw)
   priv->file_menu_visible = FALSE;
 
   priv->last_search = NULL;
-
-  /* the data in the list is characters, not pointers */
-  priv->history = g_list_append (NULL, GUINT_TO_POINTER (0x0000));
 
   load_icon (guw);
   gtk_window_set_icon (GTK_WINDOW (guw), priv->icon);
@@ -922,14 +809,6 @@ window_finalize (GObject *object)
 
   if (priv->last_search)
     g_free (priv->last_search);
-
-  if (priv->history)
-    {
-      while (priv->history->prev)
-        priv->history = priv->history->prev;
-
-      g_list_free (priv->history);
-    }
 }
 
 static void

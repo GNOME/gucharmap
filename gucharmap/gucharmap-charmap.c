@@ -815,13 +815,6 @@ gucharmap_charmap_set_font (GucharmapCharmap *charmap,
 }
 
 void
-gucharmap_charmap_identify_clipboard (GucharmapCharmap *charmap, 
-                                      GtkClipboard *clipboard)
-{
-  gucharmap_table_identify_clipboard (charmap->chartable, clipboard);
-}
-
-void
 gucharmap_charmap_go_to_character (GucharmapCharmap *charmap, 
                                    gunichar          wc)
 {
