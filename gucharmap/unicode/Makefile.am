@@ -22,19 +22,19 @@ BUILT_SOURCES = unicode_data.cI unicode_unihan.cI unicode_blocks.cI \
 		unicode_nameslist.cI unicode_categories.cI
 
 unicode_unihan.cI: generate_unihan
-	./generator.sh unicode_unihan.cI
+	$(srcdir)/generator.sh unicode_unihan.cI
 
 unicode_data.cI:
-	./generator.sh unicode_data.cI
+	$(srcdir)/generator.sh unicode_data.cI
 
 unicode_blocks.cI:
-	./generator.sh unicode_blocks.cI
+	$(srcdir)/generator.sh unicode_blocks.cI
 
 unicode_nameslist.cI: generate_nameslist
-	./generator.sh unicode_nameslist.cI
+	$(srcdir)/generator.sh unicode_nameslist.cI
 
 unicode_categories.cI:
-	./generator.sh unicode_categories.cI
+	$(srcdir)/generator.sh unicode_categories.cI
 
 noinst_PROGRAMS = generate_unihan generate_nameslist
 generate_unihan_SOURCES = generate_unihan.c
