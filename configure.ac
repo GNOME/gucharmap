@@ -18,9 +18,9 @@ dnl 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
 dnl
 
 AC_PREREQ([2.50])
-AC_INIT([gucharmap], [0.2], [nlevitt@users.sourceforge.net])
+AC_INIT([gucharmap], [0.2.5], [nlevitt аt users.sourceforge.net])
 AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE(gucharmap, 0.2)
+AM_INIT_AUTOMAKE(gucharmap, 0.2.5)
 
 # checks for progs
 AC_PROG_CC
@@ -33,6 +33,20 @@ AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE",
                    [Define the gettext package to be used])
 ALL_LINGUAS="eo es fr nl el"
 AM_GLIB_GNU_GETTEXT
+
+# check for win32
+case "$host" in
+  *-*-mingw*) os_win32="yes" ;; 
+  *) os_win32="no" ;; 
+esac
+
+if test "x$os_win32" = "xyes"
+then
+    CFLAGS="$CFLAGS -mms-bitfields -mwindows"
+
+fi
+AM_CONDITIONAL(OS_WIN32, test "x$os_win32" = "xyes")
+
 
 PKG_CHECK_MODULES(GTK, gtk+-2.0 >= 2.0.0)
 

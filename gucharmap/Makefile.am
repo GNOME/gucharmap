@@ -63,17 +63,29 @@ gucharmap_marshal.c: gucharmap_marshal.h
         || ( rm -f gucharmap_marshal.tmp && exit 1 )
 
 
+# don't do the symlink stuff if this is windows
+if OS_WIN32
+
+install-exec-hook:
+        
+
+uninstall-local:
+
+
+else
+
 # install a symlink to the binary called "charmap"
 install-exec-hook:
 	test -e "$(DESTDIR)$(bindir)/charmap" \
         || ln -s "$(DESTDIR)$(bindir)/gucharmap" "$(DESTDIR)$(bindir)/charmap"
 
-
 # remove bin/charmap if it's a symlink (it's a pain to test what it's
 # a symlink to)
-# XXX: automake 1.4 has no uninstall-hook
 uninstall-local:
 	test -h "$(DESTDIR)$(bindir)/charmap" \
 	&& rm -f "$(DESTDIR)$(bindir)/charmap"
+
+endif
+
 
 EXTRA_DIST = gucharmap_marshal.list
