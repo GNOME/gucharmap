@@ -59,12 +59,16 @@ struct _GucharmapWindow
   GtkWidget *unihan_options_menu_item;
   GtkWidget *nameslist_options_menu_item;
 
+  GtkWidget *file_menu_item;
+  GtkWidget *quit_menu_item;
+
   GdkPixbuf *icon;
 
   gchar *last_search;
 
   gboolean font_selection_visible;
   gboolean text_to_copy_visible;
+  gboolean file_menu_visible;
 };
 
 
@@ -80,6 +84,9 @@ void gucharmap_window_set_font_selection_visible (GucharmapWindow *guw,
                                                   gboolean visible);
 void gucharmap_window_set_text_to_copy_visible (GucharmapWindow *guw, 
                                                 gboolean visible);
+void gucharmap_window_set_file_menu_visible (GucharmapWindow *guw, 
+                                             gboolean visible);
+
 
 
 G_END_DECLS
