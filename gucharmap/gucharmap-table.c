@@ -1262,7 +1262,7 @@ key_press_event (GtkWidget *widget,
 
 static void
 set_top_row (GucharmapTable *chartable, 
-             gint row)
+             gint            row)
 {
   gint r, c;
 
@@ -1274,8 +1274,8 @@ set_top_row (GucharmapTable *chartable,
   chartable->page_first_cell = row * chartable->cols;
 
   /* character is still on the visible page */
-  if (chartable->active_cell - chartable->page_first_cell 
-      < chartable->rows * chartable->cols)
+  if (chartable->active_cell - chartable->page_first_cell > 0
+      && chartable->active_cell - chartable->page_first_cell < chartable->rows * chartable->cols)
     return;
 
   c = chartable->old_active_cell % chartable->cols;
@@ -1307,7 +1307,7 @@ status_message (GucharmapTable *chartable, const gchar *message)
 }
 
 static void
-selection_text_received (GtkClipboard  *clipboard, 
+selection_text_received (GtkClipboard   *clipboard, 
                          const gchar    *text,
                          GucharmapTable *chartable)
 {
@@ -1489,9 +1489,7 @@ static void
 mouse_wheel_up (GucharmapTable *chartable)
 {
   if (chartable->page_first_cell > chartable->rows * chartable->cols / 2)
-    set_top_row (chartable, (chartable->page_first_cell 
-                             - chartable->rows * chartable->cols / 2) 
-                            / chartable->cols);
+    set_top_row (chartable, (chartable->page_first_cell - chartable->rows * chartable->cols / 2) / chartable->cols);
   else 
     set_top_row (chartable, 0);
 
