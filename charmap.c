@@ -318,11 +318,6 @@ draw_square_bg (Charmap *charmap, gint row, gint col)
   gdk_draw_rectangle (charmap->tabulus_pixmap, gc, TRUE, 
                       (square_width+1) * col + 1, (square_height+1) * row + 1, 
                       square_width, square_height);
-
-  g_printerr ("draw_square_bg: drew %d, %d, %d, %d\n", 
-                      (square_width+1) * col + 1, 
-                      (square_height+1) * row + 1, 
-                      square_width, square_height);
 }
 
 
@@ -331,16 +326,10 @@ expose_square (Charmap *charmap, gint row, gint col)
 {
   gint square_width, square_height;
 
-
   square_width = calculate_square_dimension_x (charmap->font_metrics);
   square_height = calculate_square_dimension_y (charmap->font_metrics);
 
   gtk_widget_queue_draw_area (charmap->tabulus, 
-                              (square_width+1) * col + 1, 
-                              (square_height+1) * row + 1, 
-                              square_width, square_height);
-
-  g_printerr ("expose_square: exposed %d, %d, %d, %d\n", 
                               (square_width+1) * col + 1, 
                               (square_height+1) * row + 1, 
                               square_width, square_height);
@@ -408,6 +397,7 @@ draw_tabulus_from_scratch (Charmap *charmap)
       {
         gunichar uc = charmap->page_first_char + row * CHARMAP_COLS + col;
 
+        /* for others, the background was drawn in a big swath */
         if (uc == charmap->active_char)
           draw_square_bg (charmap, row, col);
 
@@ -462,25 +452,108 @@ draw_and_expose_character_square (Charmap *charmap, gunichar uc)
 }
 
 
+/* copies the portion of the tabulus that is on the new and old to its new
+ * position */
+static void
+shift_area (Charmap *charmap, gint row_offset)
+{
+#define abs(x) ((x) >= 0 ? (x) : (-x))
+  gint rows;
+  gint square_width, square_height, width, height;
+  gint area_height;
+  gint ysrc, ydest;
+
+  square_width = calculate_square_dimension_x (charmap->font_metrics);
+  square_height = calculate_square_dimension_y (charmap->font_metrics);
+
+  width = calculate_tabulus_dimension_x (charmap->font_metrics);
+  height = calculate_tabulus_dimension_y (charmap->font_metrics);
+
+  rows = CHARMAP_ROWS - abs (row_offset);
+  area_height = rows * (square_height + 1) + 1;
+
+  if (row_offset > 0) /* moving up */
+    {
+      ysrc = height - area_height;
+      ydest = 0;
+    }
+  else /* moving down */
+    {
+      ysrc = 0;
+      ydest = height - area_height;
+    }
+
+  gdk_draw_drawable (charmap->tabulus_pixmap,
+                     charmap->tabulus->style->base_gc[GTK_STATE_NORMAL], 
+                     charmap->tabulus_pixmap, 0, ysrc, 0, ydest,
+                     width, area_height);
+}
+
+
+/* Redraws the squares in the rows that are newly on the tabulus, based on
+ * row_offset; also redraws the active and old_active squares as
+ * appropriate. */
+static void
+draw_squares_after_shift (Charmap *charmap, gint row_offset)
+{
+  gint row, col, start_row, end_row;
+
+  if (row_offset > 0) 
+    {
+      start_row = CHARMAP_ROWS - row_offset;
+      end_row = CHARMAP_ROWS - 1;
+    }
+  else
+    {
+      start_row = 0;
+      end_row = -row_offset - 1;
+    }
+
+  for (row = start_row;  row <= end_row;  row++)
+    for (col = 0;  col < CHARMAP_COLS;  col++)
+      draw_square (charmap, row, col);
+
+  row = (charmap->active_char - charmap->page_first_char) / CHARMAP_COLS;
+  if (row < start_row || row > end_row)
+    {
+      col = (charmap->active_char - charmap->page_first_char) % CHARMAP_COLS;
+      draw_square (charmap, row, col);
+    }
+
+  row = (charmap->old_active_char - charmap->page_first_char) / CHARMAP_COLS;
+  if (row >= 0 && row < CHARMAP_COLS && (row < start_row || row > end_row))
+    {
+      col = (charmap->old_active_char - charmap->page_first_char) 
+            % CHARMAP_COLS;
+      draw_square (charmap, row, col);
+    }
+}
+
+
 /* Redraws whatever needs to be redrawn, in the character table and caption
  * and everything, and exposes what needs to be exposed. */
 static void
 redraw (Charmap *charmap)
 {
-  gint row_offset = charmap->page_first_char - charmap->old_page_first_char;
+  gint row_offset;
+  gboolean actives_done = FALSE;
+  
+  row_offset = ((gint) charmap->page_first_char 
+                - (gint) charmap->old_page_first_char)
+               / CHARMAP_COLS;
 
   if (row_offset >= CHARMAP_ROWS || row_offset <= -CHARMAP_ROWS)
     {
       draw_tabulus_from_scratch (charmap);
       gtk_widget_queue_draw (charmap->tabulus);
+      actives_done = TRUE;
     }
   else if (row_offset != 0)
     {
-      /* shift the pixmap up or down */
-      /* redraw the squares that weren't part of the shift */
-      /* redraw active and old_active if they haven't been already */
-      /* copy the whole thing to the drawable */
+      shift_area (charmap, row_offset);
+      draw_squares_after_shift (charmap, row_offset);
       gtk_widget_queue_draw (charmap->tabulus);
+      actives_done = TRUE;
     }
 
   if (charmap->active_char != charmap->old_active_char)
@@ -489,8 +562,11 @@ redraw (Charmap *charmap)
       set_active_block (charmap);
       set_scrollbar_adjustment (charmap); /* XXX */
 
-      draw_and_expose_character_square (charmap, charmap->old_active_char);
-      draw_and_expose_character_square (charmap, charmap->active_char);
+      if (!actives_done)
+        {
+          draw_and_expose_character_square (charmap, charmap->old_active_char);
+          draw_and_expose_character_square (charmap, charmap->active_char);
+        }
     }
 
   charmap->old_page_first_char = charmap->page_first_char;
