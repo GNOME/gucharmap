@@ -46,7 +46,6 @@ struct _GucharmapTable
   GdkPixmap *pixmap; 
 
   gchar *font_name;
-  PangoFontMetrics *font_metrics;
   PangoLayout *pango_layout;
 
   gint page_first_cell;
