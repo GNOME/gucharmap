@@ -123,7 +123,7 @@ fi
 AC_OUTPUT([
 gucharmap.pc
 Makefile
-src/Makefile 
+gucharmap/Makefile 
 po/Makefile.in 
 pixmaps/Makefile 
 gucharmap.nsi])

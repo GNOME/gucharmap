@@ -20,12 +20,8 @@
 #ifndef CHARMAP_H
 #define CHARMAP_H
 
-#ifdef HAVE_CONFIG_H
-# include <config.h>
-#endif
-
 #include <gtk/gtk.h>
-#include <chartable.h>
+#include <gucharmap/chartable.h>
 
 
 G_BEGIN_DECLS
@@ -41,26 +37,8 @@ G_BEGIN_DECLS
 #define IS_CHARMAP(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), \
                          charmap_get_type ()))
 
-
-#define CHARMAP_MIN_ROWS 4
-#define CHARMAP_MIN_COLS 4
-
-
-/* 0x100, a standard increment for paging unicode */
-#define BLOCK_SIZE 256
-
-
 typedef struct _Charmap Charmap;
 typedef struct _CharmapClass CharmapClass;
-
-
-typedef struct 
-{
-  gunichar start;
-  GtkTreePath *tree_path;
-} 
-BlockIndex;
-
 
 typedef enum
 {
@@ -88,7 +66,7 @@ typedef enum
   CHARMAP_CAPTION_POUNDS,
   CHARMAP_CAPTION_COLONS,
 
-#if ENABLE_UNIHAN
+  /* unihan subset */
   CHARMAP_CAPTION_KDEFINITION,
   CHARMAP_CAPTION_KMANDARIN,
   CHARMAP_CAPTION_KJAPANESEON,
@@ -96,12 +74,17 @@ typedef enum
   CHARMAP_CAPTION_KCANTONESE,
   CHARMAP_CAPTION_KTANG,
   CHARMAP_CAPTION_KKOREAN,
-#endif
 
   CHARMAP_CAPTION_COUNT
 }
 CharmapCaption;
 
+typedef struct 
+{
+  gunichar start;
+  GtkTreePath *tree_path;
+} 
+BlockIndex;
 
 struct _Charmap
 {
@@ -131,13 +114,13 @@ struct _CharmapClass
 {
   GtkVBoxClass parent_class;
 
-  void (* status_message) (Charmap *charmap, gchar *message);
+  void (* status_message) (Charmap *charmap, const gchar *message);
 };
 
 
 GtkType charmap_get_type (void);
 GtkWidget * charmap_new (void);
-void charmap_set_font (Charmap *charmap, gchar *font_name);
+void charmap_set_font (Charmap *charmap, const gchar *font_name);
 void charmap_identify_clipboard (Charmap *charmap, GtkClipboard *clipboard);
 void charmap_expand_block_selector (Charmap *charmap);
 void charmap_collapse_block_selector (Charmap *charmap);

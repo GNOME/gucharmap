@@ -20,10 +20,6 @@
 #ifndef MINI_FONTSEL_H
 #define MINI_FONTSEL_H
 
-#if HAVE_CONFIG_H
-# include <config.h>
-#endif
-
 #include <gtk/gtk.h>
 
 

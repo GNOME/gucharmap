@@ -32,6 +32,9 @@
 #include <chartable_accessible.h>
 #include <chartable.h>
 
+/* 0x100, a standard increment for paging unicode */
+#define BLOCK_SIZE 256
+
 /* only the label is visible in the block selector */
 enum 
 {
@@ -53,7 +56,6 @@ enum
   STATUS_MESSAGE = 0,
   NUM_SIGNALS
 };
-
 
 static gchar **caption_labels;
 
@@ -800,6 +802,13 @@ charmap_get_type (void)
     }
 
   return charmap_type;
+}
+
+
+void 
+charmap_set_font (Charmap *charmap, const gchar *font_name)
+{
+  chartable_set_font (charmap->chartable, font_name);
 }
 
 

@@ -20,10 +20,6 @@
 #ifndef CHARTABLE_H
 #define CHARTABLE_H
 
-#ifdef HAVE_CONFIG_H
-# include <config.h>
-#endif
-
 #include <gtk/gtk.h>
 
 G_BEGIN_DECLS
@@ -38,14 +34,6 @@ G_BEGIN_DECLS
 
 #define IS_CHARTABLE(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), \
                          chartable_get_type ()))
-
-
-#define CHARTABLE_DEFAULT_ROWS 4
-#define CHARTABLE_DEFUALT_COLS 4
-
-
-/* 0x100, a standard increment for paging unicode */
-#define BLOCK_SIZE 256
 
 
 typedef struct _Chartable Chartable;
@@ -87,13 +75,13 @@ struct _ChartableClass
 
   void (* activate) (Chartable *chartable, gunichar uc);
   void (* set_active_char) (Chartable *chartable, guint ch);
-  void (* status_message) (Chartable *chartable, gchar *message);
+  void (* status_message) (Chartable *chartable, const gchar *message);
 };
 
 
 GtkType chartable_get_type (void);
 GtkWidget * chartable_new (void);
-void chartable_set_font (Chartable *chartable, gchar *font_name);
+void chartable_set_font (Chartable *chartable, const gchar *font_name);
 gunichar chartable_get_active_character (Chartable *chartable);
 void chartable_set_active_character (Chartable *chartable, gunichar uc);
 void chartable_zoom_enable (Chartable *chartable);

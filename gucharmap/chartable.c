@@ -1768,7 +1768,7 @@ chartable_zoom_disable (Chartable *chartable)
 
 
 void 
-chartable_set_font (Chartable *chartable, gchar *font_name)
+chartable_set_font (Chartable *chartable, const gchar *font_name)
 {
   PangoFontDescription *font_desc;
 
