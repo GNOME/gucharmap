@@ -201,6 +201,16 @@ make_unicode_block_selector (GucharmapCharmap *charmap)
 }
 
 
+static void 
+charmap_finalize (GucharmapCharmap *charmap)
+{
+  g_free (charmap->block_index);
+
+  gdk_cursor_unref (charmap->hand_cursor);
+  gdk_cursor_unref (charmap->regular_cursor);
+}
+
+
 void
 gucharmap_charmap_class_init (GucharmapCharmapClass *clazz)
 {
@@ -219,6 +229,8 @@ gucharmap_charmap_class_init (GucharmapCharmapClass *clazz)
                     G_STRUCT_OFFSET (GucharmapCharmapClass, link_clicked),
                     NULL, NULL, gucharmap_marshal_VOID__UINT_UINT, G_TYPE_NONE, 
 		    2, G_TYPE_UINT, G_TYPE_UINT);
+
+  G_OBJECT_CLASS (clazz)->finalize = charmap_finalize;
 }
 
 

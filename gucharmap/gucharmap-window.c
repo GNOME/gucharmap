@@ -1005,9 +1005,26 @@ show_all (GtkWidget *widget)
 
 
 static void
+window_finalize (GucharmapWindow *guw)
+{
+  if (guw->last_search)
+    g_free (guw->last_search);
+
+  if (guw->history)
+    {
+      while (guw->history->prev)
+        guw->history = guw->history->prev;
+
+      g_list_free (guw->history);
+    }
+}
+
+
+static void
 gucharmap_window_class_init (GucharmapWindowClass *clazz)
 {
   GTK_WIDGET_CLASS (clazz)->show_all = show_all;
+  G_OBJECT_CLASS (clazz)->finalize = window_finalize;
 }
 
 

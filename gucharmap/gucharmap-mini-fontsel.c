@@ -141,6 +141,13 @@ size_changed (GtkAdjustment *adjustment,
 }
 
 
+static void
+mini_font_selection_finalize (GucharmapMiniFontSelection *fontsel)
+{
+  pango_font_description_free (fontsel->font_desc);
+}
+
+
 void
 gucharmap_mini_font_selection_class_init (GucharmapMiniFontSelectionClass *clazz)
 {
@@ -152,6 +159,8 @@ gucharmap_mini_font_selection_class_init (GucharmapMiniFontSelectionClass *clazz
                     G_STRUCT_OFFSET (GucharmapMiniFontSelectionClass, changed),
                     NULL, NULL, gucharmap_marshal_VOID__VOID,
                     G_TYPE_NONE, 0);
+
+  G_OBJECT_CLASS (clazz)->finalize = mini_font_selection_finalize;
 }
 
 

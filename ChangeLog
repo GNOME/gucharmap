@@ -1,5 +1,12 @@
 2003-09-04  Noah Levitt
 
+	* gucharmap/gucharmap-charmap.c:
+	* gucharmap/gucharmap-mini-fontsel.c:
+	* gucharmap/gucharmap-window.c: Add finalize functions to free stuff
+	that the widgets allocate on the heap.
+
+2003-09-04  Noah Levitt
+
 	* gucharmap/gucharmap-mini-fontsel.c: Fix leak in
 	show_available_families. (Kjartan Maraas)
 
