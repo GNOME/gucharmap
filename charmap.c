@@ -549,18 +549,31 @@ make_unicode_block_selector (Charmap *charmap)
   GtkTreeSelection *selection;
   gchar buf[12];
   gunichar uc;
+  gint i;
 
   scrolled_window = gtk_scrolled_window_new (NULL, NULL);
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
                                   GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
+  gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolled_window), 
+                                       GTK_SHADOW_ETCHED_IN);
 
   model = gtk_tree_store_new (1, G_TYPE_STRING);
 
-  for (uc = 0;  uc <= UNICHAR_MAX;  uc += CHARMAP_ROWS * CHARMAP_COLS)
+  for (i = 0, uc = 0;  unicode_blocks[i].start != (gunichar)(-1)
+               && uc <= UNICHAR_MAX;  i++)
     {
-      g_snprintf (buf, 12, "U+%4.4X", uc);
       gtk_tree_store_append (model, &iter, NULL);
-      gtk_tree_store_set (model, &iter, 0, buf, -1);
+      gtk_tree_store_set (model, &iter, 0, unicode_blocks[i].name, -1);
+
+      for ( ;  uc <= unicode_blocks[i].end;  
+               uc += CHARMAP_ROWS * CHARMAP_COLS) 
+        {
+          GtkTreeIter child_iter;
+
+          g_snprintf (buf, 12, "U+%4.4X", uc);
+	  gtk_tree_store_append (model, &child_iter, &iter);
+	  gtk_tree_store_set (model, &child_iter, 0, buf, -1);
+        }
     }
 
   tree_view = gtk_tree_view_new_with_model (GTK_TREE_MODEL (model));

@@ -28,6 +28,17 @@
 extern "C" {
 #endif /* __cplusplus */
 
+typedef struct
+{
+  gunichar start;
+  gunichar end;
+  gchar *name;
+}
+unicode_block_t;
+
+extern unicode_block_t unicode_blocks[];
+
+
 /* return values are read-only */
 gchar * get_unicode_name (gunichar uc);
 gchar * get_unicode_data_name (gunichar uc);
@@ -40,6 +51,7 @@ gchar * get_unicode_kKorean (gunichar uc);
 gchar * get_unicode_kJapaneseKun (gunichar uc);
 gchar * get_unicode_kJapaneseOn (gunichar uc);
 gchar * get_hangul_syllable_name (gunichar s);
+
 
 #ifdef __cplusplus
 }
