@@ -848,15 +848,6 @@ main (gint argc, gchar **argv)
   else
     gtk_window_set_icon (GTK_WINDOW (window), icon);
 
-  if (error != NULL)
-    {
-      g_assert (icon == NULL);
-      g_warning ("Error loading icon: %s\n", error->message);
-      g_error_free (error);
-    }
-  else
-    gtk_window_set_icon (GTK_WINDOW (window), icon);
-
   g_signal_connect (G_OBJECT (window), "destroy",
                     G_CALLBACK (gtk_main_quit), NULL);
 
