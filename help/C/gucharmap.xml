@@ -2,20 +2,10 @@
 <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
 "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
   <!ENTITY legal SYSTEM "legal.xml">
-  <!ENTITY appversion "1.0.0">
-  <!ENTITY manrevision "2.0">
-  <!ENTITY date "October 2003">
-  <!ENTITY app "<application>Unicode Character Map</application>">
-  <!-- Note: If you change the app value, remember to change the 
-             name of the application inside revnumber tag and 
-             releaseinfo tag
-  -->
-  <!-- Information about the entities
-       The legal.xml file contains legal information, there is no need to edit the file. 
-       Use the appversion entity to specify the version of the application.
-       Use the manrevision entity to specify the revision number of this manual.
-       Use the date entity to specify the release date of this manual.
-       Use the app entity to specify the name of the application. -->
+  <!ENTITY appversion "1.2.0">
+  <!ENTITY manrevision "2.1">
+  <!ENTITY date "January 2004">
+  <!ENTITY app "Character Map">
 ]>
 
 <!-- 
@@ -31,9 +21,14 @@
 <!-- please do not change the id; for translations, change lang to -->
 <!-- appropriate code -->
   <articleinfo> 
-    <title>&app; Manual V&manrevision;</title>       
+    <title>Character Map Manual V&manrevision;</title>       
+    <copyright>
+      <year>2004</year>
+      <holder>Sun Microsystems</holder>
+    </copyright>
     <copyright> 
       <year>2003</year> 
+      <year>2004</year>
       <holder>Chee Bin HOH</holder> 
     </copyright> 
 
@@ -44,27 +39,28 @@
     </copyright>
 -->
 
-<!-- An address can be added to the publisher information.  If a role is 
-     not specified, the publisher/author is the same for all versions of the 
-     document.  -->
     <publisher> 
-      <publishername> GNOME Documentation Project </publishername> 
+      <publishername>GNOME Documentation Project</publishername> 
     </publisher> 
 
-   &legal;
-
+    &legal;
    <!-- This file  contains link to license for the documentation (GNU FDL), and 
         other legal stuff such as "NO WARRANTY" statement. Please do not change 
 	any of this. -->
 
     <authorgroup> 
+      <author>
+        <firstname>Sun</firstname>
+        <surname>GNOME Documentation Team</surname>
+        <affiliation><orgname>Sun Microsystems</orgname></affiliation>
+      </author>
       <author> 
-	<firstname>Chee Bin</firstname> 
-	<surname>HOH</surname> 
-	<affiliation> 
-	  <orgname>GNOME Documentation Project</orgname> 
-  	  <address> <email>cbhoh@gnome.org</email> </address> 
-	</affiliation> 
+        <firstname>Chee Bin</firstname> 
+        <surname>HOH</surname> 
+        <affiliation> 
+          <orgname>GNOME Documentation Project</orgname> 
+          <address> <email>cbhoh@gnome.org</email> </address> 
+        </affiliation> 
       </author> 
 
 <!--
@@ -93,22 +89,18 @@
     </authorgroup>
 
 
-<!-- According to GNU FDL, revision history is mandatory if you are -->
-<!-- modifying/reusing someone else's document.  If not, you can omit it. -->
-<!-- Remember to remove the &manrevision; entity from the revision entries other -->
-<!-- than the current revision. -->
-<!-- The revision numbering system for GNOME manuals is as follows: -->
-<!-- * the revision number consists of two components -->
-<!-- * the first component of the revision number reflects the release version of the GNOME desktop. -->
-<!-- * the second component of the revision number is a decimal unit that is incremented with each revision of the manual. -->
-<!-- For example, if the GNOME desktop release is V2.x, the first version of the manual that -->
-<!-- is written in that desktop timeframe is V2.0, the second version of the manual is V2.1, etc. -->
-<!-- When the desktop release version changes to V3.x, the revision number of the manual changes -->
-<!-- to V3.0, and so on. -->  
     <revhistory>
       <revision> 
-	<revnumber>Unicode Character Map Manual V&manrevision;</revnumber> 
+	<revnumber>Character Map Manual V&manrevision;</revnumber> 
 	<date>&date;</date> 
+	<revdescription> 
+          <para role="author">Sun GNOME Documentation Team</para>
+          <para role="publisher">GNOME Documentation Project</para>
+        </revdescription> 
+      </revision> 
+      <revision> 
+	<revnumber>Unicode Character Map Manual V2.0</revnumber> 
+	<date>October 2003</date> 
 	<revdescription> 
           <para role="author">Chee Bin HOH
 	    <email>cbhoh@gnome.org</email>
@@ -116,27 +108,16 @@
           <para role="publisher">GNOME Documentation Project</para>
         </revdescription> 
       </revision> 
-
-<!--
-      <revision> 
-	<revnumber>Full title of previous manual.</revnumber> 
-		<date>Release date of previous manual.</date> 
-		<revdescription> 
-	  		<para role="author">Documentation Writer 1 
-	    	<email>docwriter1@gnome.org</email>
-	  		</para>
-	  		<para role="publisher">GNOME Documentation Project</para>
- 		</revdescription> 
-      </revision> 
--->
     </revhistory> 
 
-    <releaseinfo>This manual describes version &appversion; of Unicode Code Character.
+    <releaseinfo>
+      This manual describes version &appversion; of &app;.
     </releaseinfo> 
+
     <legalnotice> 
       <title>Feedback</title> 
-      <para>To report a bug or make a suggestion regarding the &app; application or
-      this manual, follow the directions in the <ulink url="ghelp:gnome-feedback"
+      <para>To report a bug or make a suggestion regarding the <application>&app;</application> 
+      application or this manual, follow the directions in the <ulink url="ghelp:gnome-feedback"
       type="help">GNOME Feedback Page</ulink>. 
       </para>
 <!-- Translators may also add here feedback address for translations -->
@@ -150,63 +131,36 @@
   <indexterm zone="index"> 
     <primary>&app;</primary> 
   </indexterm>
+  <indexterm zone="index"> 
+    <primary>Character Map</primary> 
+  </indexterm>
 
 <!-- ============= Document Body ============================= -->
 <!-- ============= Introduction ============================== -->
-<!-- Use the Introduction section to give a brief overview of what
-     the application is and what it does. -->
   <sect1 id="gucharmap-introduction"> 
     <title>Introduction</title> 
-    <para>&app; is a Unicode/ISO10646 character map and font viewer.
-      It enables you to access characters in other languages, 
-      special symbols and punctuation marks that are encoded using Unicode.
+    <para>
+      The <application>&app;</application> application is a 
+      Unicode/ISO10646 character map and font viewer.
+      Unicode/ISO10646 is a coded character set and character set standard.
+      The Unicode/ISO10646 developers intend to include in this character set
+      all of the characters that are used in all of the written languages in the world.
     </para>
-
-    <note>
-      <para>Unicode/ISO10646 is a coded character set and character set standard 
-        which intends to include all characters used in all the written languages.
-      </para>
-    </note>
-
-    <para>&app; provides the following features:
-    <itemizedlist> 
-      <listitem> 
-        <para>Search unicode character by hexadecimal Unicode code point,
-         Unicode name, character dragged from another application or the first character 
-         in clipboard.
-        </para>
-      </listitem> 
-      <listitem> 
-	<para>Browse through all available unicode characters and unicode blocks for
-          the installed fonts.
-        </para>
-      </listitem> 
-      <listitem> 
-	<para>Examine unicode character details which provides useful clickable
-          links to other characters.
-        </para>
-      </listitem> 
-      <listitem>
-        <para>A variety of zoom level views and fonts.
-        </para>
-      </listitem>
-      <listitem>
-        <para>A variety of ways to copy unicode characters into another
-          application: drag selection, clipboard and Input Method.
-        </para>
-      </listitem>
-    </itemizedlist> 
+    <para>
+      You can use <application>&app;</application> to select characters 
+      from a character table, then combine the characters into a text string 
+      with standard characters. You can insert the text string 
+      that you create into other applications, such as text editor documents. 
+    </para>
+    <para>
+      <application>&app;</application> provides accented characters, 
+      mathematical symbols, special symbols, and punctuation marks. 
+      Many of the characters provided by <application>&app;</application>
+      are not available on a standard keyboard.
     </para>
   </sect1>
 
 <!-- =========== Getting Started ============================== -->
-<!-- Use the Getting Started section to describe the steps required
-     to start the application and to describe the user interface components
-     of the application. If there is other information that it is important
-     for readers to know before they start using the application, you should
-     also include this information here. 
-     If the information about how to get started is very short, you can 
-     include it in the Introduction and omit this section. -->
 
   <sect1 id="gucharmap-getting-started"> 
     <title>Getting Started</title> 
@@ -217,48 +171,28 @@
       </para> 
       <variablelist>
         <varlistentry>
-          <term><guimenu>Applications</guimenu> menu</term>
+          <term><guimenu>Applications menu</guimenu></term>
           <listitem>
-            <para>Choose 
-              <menuchoice>
-                <guisubmenu>Accessories</guisubmenu>
-                <guimenuitem>Unicode Character Map</guimenuitem>
-              </menuchoice>. 
+            <para>
+              Choose <menuchoice><guimenu>Accessories</guimenu>
+              <guimenuitem>Character Map</guimenuitem></menuchoice>.
             </para>
-    	  </listitem>
+          </listitem>
         </varlistentry>
         <varlistentry>
           <term>Command line</term>
 	  <listitem>
-	    <itemizedlist>
-	      <listitem>
-		<para>To start <application>&app;</application> from a command line, type the 
-                  following command, then press <keycap>Return</keycap>:
-                </para>
-                <para> 
-                  <command>gucharmap</command> 
-                </para> 
-              </listitem>
-              <listitem>
-                <para>To start <application>&app;</application> in a different font and
-                  point size, type the following command, then press <keycap>Return</keycap>:
-                </para>
-                <para>
-                  <command>gucharmap --font="<replaceable>string</replaceable>"</command>
-                </para>
-                <para>where <replaceable>string</replaceable> can include font name
-                  and point size (for example, 
-                  <command>gucharmap --font="bitstream vera sans italic 20"</command> or 
-                  something).
-                </para>
-              </listitem>
-            </itemizedlist>
-            <note>
-              <para>To view other command line options that are available, type
-                <command>gucharmap --help</command>, then press
-                <keycap>Return</keycap>.
-              </para>
-            </note>
+            <para>
+              Execute the following command: 
+              <command>gnome-character-map</command>
+            </para>
+            <para>
+              For more information about how to run 
+              <application>&app;</application> from a command line, 
+              see <ulink url="man:gnome-character-map" type="man">
+              <citerefentry><refentrytitle>gnome-character-map</refentrytitle>
+              <manvolnum>1</manvolnum></citerefentry></ulink>.
+            </para>
           </listitem>
         </varlistentry>
       </variablelist>
@@ -271,23 +205,14 @@
 
       <!-- ==== Figure ==== -->
       <figure id="gucharmap-window-fig"> 
-        <title>&app; Start Up Window</title> 
+        <title>&app; Window</title> 
         <screenshot> 
           <mediaobject> 
 	    <imageobject>
-              <imagedata fileref="figures/gucharmap_start_window.png" format="PNG"/> 
+              <imagedata fileref="figures/gucharmap_window.png" format="PNG"/> 
             </imageobject>
-	    <!-- EPS versions of the figures are not required at the moment. -->
-<!-- 
-            <imageobject>
-              <imagedata fileref="figures/image.eps" format="EPS"/>
-            </imageobject>
--->
 	    <textobject> 
-              <phrase>Shows &app; main window. Contains titlebar, menubar,
-                toolbar, list pane, character pane and scrollbars. 
-                Menubar contains File, View, Search, Go and Help menus.
-              </phrase> 
+              <phrase>Shows &app; window.</phrase> 
 	    </textobject> 
           </mediaobject> 
         </screenshot> 
@@ -297,97 +222,60 @@
       <!-- Include any descriptions of the GUI immediately after the screenshot of the main UI, -->
       <!-- for example, the items on the menubar and on the toolbar. This section is optional. -->
 
-      <para>The &app; window contains the following elements:
+      <para>The <application>&app;</application> window contains the following elements:
       </para>
       <variablelist>
         <varlistentry>
           <term>Menubar</term>
           <listitem>
-            <para>The menus on the menubar contain most of the commands you need to use in 
-              &app;.
+            <para>
+              The menus on the menubar contain most of the commands that you need 
+              to work with <application>&app;</application>.
             </para>
           </listitem>
         </varlistentry>
         <varlistentry>
-	  <term>Font Selector</term>
+          <term>Toolbar</term>
           <listitem>
-            <para>The font selector section contains the following elements:
-              <itemizedlist>
-                <listitem>
-		  <para>
-                    <interface>Font</interface> drop-down combination box: Enables you to select a font.
-                  </para>
-                </listitem>
-		<listitem>
-		  <para>
-                    <guibutton>Bold</guibutton> button: Enables you to select bold style.
-                  </para>
-                </listitem>
-                <listitem>
-		  <para>
-                    <guibutton>Italic</guibutton> button: Enables you  to select italic style.
-                  </para>
-                </listitem>
-                <listitem>
-		  <para>
-                    <interface>Zoom</interface> spin box: Enables you to resize characters.
-                  </para>
-                </listitem>
-              </itemizedlist>
+            <para>
+              The toolbar contains a drop-down list of fonts, font style buttons, and a zoom spin box.
             </para>
           </listitem>
         </varlistentry>
         <varlistentry>
-          <term>Unicode block pane</term>
+          <term>Display area</term>
           <listitem>
-            <para>The unicode block pane contains a list of blocks of unicode characters.
+            <para>
+              The display area contains the following components:
             </para>
-          </listitem>
-        </varlistentry>
-        <varlistentry>
-          <term>Character pane</term>
-          <listitem>
-            <para>The character pane contains the following tabbed sections:
-            </para>
-	    <itemizedlist>
-	      <listitem>
-		<para><guilabel>Character Table</guilabel>: displays all
-                  available unicode characters.
+            <itemizedlist>
+              <listitem>
+                <para><guilabel>Script</guilabel> or <guilabel>Unicode Block</guilabel> list box
                 </para>
               </listitem>
-	      <listitem>
-		<para><guilabel>Character Details</guilabel>: displays full
-                  unicode character details for the active character.
+              <listitem>
+                <para><guilabel>Character Table</guilabel> tabbed section
+                </para>
+              </listitem>
+              <listitem>
+                <para><guilabel>Character Details</guilabel> tabbed section
+                </para>
+              </listitem>
+              <listitem>
+                <para><guilabel>Text to copy</guilabel> text box
+                </para>
+              </listitem>
+              <listitem>
+                <para><guibutton>Copy</guibutton> button
                 </para>
               </listitem>
             </itemizedlist>
           </listitem>
         </varlistentry>
         <varlistentry>
-          <term>Text to copy</term>
-          <listitem>
-            <para>The text to copy section contains the following elements:
-              <itemizedlist>
-                <listitem>
-                  <para><guilabel>Text to copy</guilabel> field: Enables you to enter 
-                    character you want to copy to clipboard.
-                  </para>
-                </listitem>
-                <listitem>
-                   <para><guibutton>Copy</guibutton> button: Enables you to copy text from the
-                     <guilabel>Text to copy</guilabel> field to clipboard.
-                   </para>
-                </listitem>
-              </itemizedlist>
-            </para>
-          </listitem>
-        </varlistentry>
-        <varlistentry>
           <term>Statusbar</term>
           <listitem>
-            <para>The statusbar displays useful information about the active character,
-              like Unicode character code point, Unicode name, for CJK ideographs, the 
-              definition; usage notes if the character has any.
+            <para>The statusbar displays information about the selected character.
             </para>
           </listitem>
         </varlistentry>
@@ -396,359 +284,455 @@
   </sect1>
 
 <!-- ================ Usage ================================ --> 
-<!-- Use this section to describe how to use the application to perform the tasks for which
-     the application is designed.  
---> 
   <sect1 id="gucharmap-usage">
     <title>Usage</title> 
-    <para>You can use the &app; application to perform the following tasks:
-    </para>
+    
+    <sect2 id="gucharmap-change-view">
+      <title>To Change the Character-Set List</title>
+      <para>
+        To list the character sets by script name,
+        choose <menuchoice>
+          <guimenu>View</guimenu>
+          <guimenuitem>By Script</guimenuitem>
+        </menuchoice>.
+      </para>
+      <para>
+        To list the character sets by Unicode block,
+        choose <menuchoice>
+          <guimenu>View</guimenu>
+          <guimenuitem>By Unicode Block</guimenuitem>
+        </menuchoice>.
+      </para>
+    </sect2>
+    
+    <sect2 id="gucharmap-create-textstring">
+      <title>To Create a Text String</title>
+      <para>
+        To create a text string in the <guilabel>Text to copy</guilabel> field, 
+        perform the following steps:
+      </para>
+      <orderedlist>
+        <listitem>
+          <para>
+            Select a character set from the list box.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Insert characters in one of the following ways: 
+          </para>
+          <itemizedlist>
+            <listitem>
+              <para>
+                Double-click on a character button in the 
+                <guilabel>Character Table</guilabel> tabbed section, 
+                to insert the character in the 
+                <guilabel>Text to copy</guilabel> field. 
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                Click on a character button in the <guilabel>Character Table</guilabel> tabbed
+                section, then press <keycap>Return</keycap> to insert the character in the 
+                <guilabel>Text to copy</guilabel> field. 
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                Click on a character button in the <guilabel>Character Table</guilabel> tabbed
+                section, then drag the character to the <guilabel>Text to copy</guilabel> field. 
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                Click on the <guilabel>Text to copy</guilabel> field to give focus to the field.
+                If a text string is already in the field, click on the text string at the point
+                where you want to insert the character. Press a character key on your keyboard
+                to insert that character into the field. 
+              </para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+      </orderedlist>
+    </sect2>
+
+<!-- =============== To Copy and Paste a Text String ====================== -->
+    <sect2 id="gucharmap-copy-textstring">
+      <title>To Copy and Paste Your Text String into an Application</title>
+      <para>
+        To copy and paste the text string from the <guilabel>Text to copy</guilabel> 
+        field into an application, perform the following steps: 
+      </para>
+      <orderedlist>
+        <listitem>
+          <para>
+            Drag the pointer to select the text string in the
+            <guilabel>Text to copy</guilabel> field, and click
+            <guibutton>Copy</guibutton>. The selected text string appears
+            highlighted. 
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Point to the location in an application where you want to put
+            the text string and middle-click to insert the text string. You can also paste the
+            text string into the application if a Paste facility is available. You can repeat
+            the insertion as many times as you want while the text string is selected.
+            Click on the <guilabel>Text to copy</guilabel> field to deselect the text string. 
+          </para>
+        </listitem>
+      </orderedlist>
+      <para>
+        When you paste the contents of the <guilabel>Text to copy</guilabel> field into 
+        other applications, the text string appears in the current character set of the 
+        application.
+      </para>
+      <para>
+        If your text string contains non-visible characters, you can only
+        insert the text string into applications that support the full character set.
+      </para>
+      <para>
+        If you quit <application>&app;</application> before you paste the
+        text string into an application, your text string is lost. 
+      </para>
+    </sect2>
+
+<!-- =============== To Change the Input Mode  ========================= -->
+    <sect2 id="gucharmap-change-charset">
+      <title>To Change the Input Mode</title>
+      <para>
+        To change the input mode, right-click on the
+        <guilabel>Text to copy</guilabel> field, then select
+        <guimenuitem>Input Methods</guimenuitem>.
+      </para>
+      <para>
+        To display character layout options that are useful 
+        for working with non-Latin character sets,
+        right-click on the <guilabel>Text to copy</guilabel> field, then select
+        <guimenuitem>Insert Unicode Control Character</guimenuitem>.
+      </para>
+    </sect2>
     
     <sect2 id="usage-find-character">
-      <title>To Find a Character</title>
-      <para>To find a character, you can use the following methods:
+      <title>To Search for a Character</title>
+      <para>
+        To search for a character, perform the following steps:
       </para>
-      <variablelist>
-        <varlistentry>
-          <term>Find Character by Unicode Name or Code Point</term>
-          <listitem>
-	    <para>Choose 
-              <menuchoice>
-                <shortcut>
-	          <keycombo><keycap>Ctrl</keycap><keycap>F</keycap></keycombo>
-                </shortcut>
-                <guimenu>Search</guimenu>
-                <guimenuitem>Find</guimenuitem>
-              </menuchoice>.
-              The <guilabel>Find</guilabel> dialog is displayed, enter the unicode name 
-              or unicode code point in the <guilabel>Search</guilabel> field, then 
-              press <keycap>Return</keycap> or click on the <guibutton>Find</guibutton> button.
-              This will find the occurrences of the characters which match the unicode name
-              or code point that you type.
-            </para>
-	    <para>Choose 
-              <menuchoice>
-                <shortcut>
-                  <keycombo><keycap>Ctrl</keycap><keycap>G</keycap></keycombo>
-                </shortcut>
-	        <guimenu>Search</guimenu>
-                <guimenuitem>Find Next</guimenuitem>
-              </menuchoice> to find the next matching character. To find the previous matching 
-              character, choose
-              <menuchoice>
-                <shortcut>
-                  <keycombo><keycap>Shift</keycap><keycap>Ctrl</keycap><keycap>G</keycap></keycombo>
-                </shortcut>
-	        <guimenu>Search</guimenu>
-                <guimenuitem>Find Previous</guimenuitem>
-              </menuchoice>.
-            </para>
-            <para>The application supports the following unicode 
-              code point formats:
-              <itemizedlist>
-                <listitem>
-                  <para>U+XXXX</para>
-                </listitem>
-		<listitem>
-		  <para>0xXXXX</para>
-		</listitem>
-		<listitem>
-		  <para>&amp;#xXXXX</para>
-		</listitem>
-		<listitem>
-		  <para>&amp;#dddd</para>
-		</listitem>
-		<listitem>
-		  <para>#dddd</para>
-		</listitem>
-		<listitem>
-		  <para>XXXX (plain hexadecimal digits)</para>
-		</listitem>
-              </itemizedlist>
-            </para>
-	    <para>Where XXXX is the hexadecimal value of unicode code point, dddd is the
-              decimal value of unicode code point. The application checks for all 
-              unicode code point formats except the plain hexadecimal digits before 
-              searching by unicode name. 
-            </para>
-	    <para>Unicode name is limited to characters [A-Za-z0-9 -]. The application checks 
-              the first character you type (excluding leading spaces) to see if it is one of those
-              characters, and if it is not, it jumps to that first character. If you enter exactly 
-              one character, the application will jump to that character even it is one of 
-              the [A-Za-z0-9 -] characters.
-            </para>
-	  </listitem>
-	</varlistentry>
-	<varlistentry>
-	  <term>Find Character in Clipboard</term>
-	  <listitem>
-            <para>Choose 
-              <menuchoice>
-                <shortcut>
-	          <keycombo><keycap>Ctrl</keycap><keycap>O</keycap></keycombo>
-		</shortcut>
-                <guimenu>Search</guimenu>
-                <guimenuitem>Character in Clipboard</guimenuitem>
-              </menuchoice>. This will find the first character in clipboard.
-            </para> 
-	  </listitem>
-        </varlistentry>
-	<varlistentry>
-	  <term>Find Character By Dragging</term>
-	  <listitem>
-            <para>Drag characters from another application to the &app; Character Table to
-              identify the first character.
-            </para>
-	  </listitem>
-	</varlistentry>
-      </variablelist>
-      <tip>
-	<para>You can use X selection to find a character. Highlight the characters, then
-          middle-click on the &app; Character Table, it will identify the first character in selection.
-        </para>
-      </tip>
-    </sect2>
-
-    <sect2 id="usage-examine-character">
-      <title>To Examine a Character</title>
-      <para>To examine a character, click on the <guilabel>Character Details</guilabel> tab.
-        The Character Details tabbed section provides the following information about each
-        character:
-        <itemizedlist>
-	  <listitem>
-	    <para>Unicode code point.</para>
-          </listitem>
-          <listitem>
-            <para>Unicode character name.</para>
-          </listitem>
-          <listitem>
-            <para>Unicode category.</para>
-          </listitem>
-          <listitem>
-            <para>Unicode canonical decomposition.</para>
-          </listitem>
-          <listitem>
-            <para>UTF-8 encoding (e.g. 0xE2 0x86 0x90).</para>
-          </listitem>
-          <listitem>
-            <para>Other representations useful to programmers.</para>
-          </listitem>
-	  <listitem>
-            <para>If the clickable links are available, you can click on the 
-              links to other characters.
-            </para>
-          </listitem>
-        </itemizedlist>
-        <tip>
-	  <para>You can choose 
-            <menuchoice>
-	      <shortcut><keycombo><keycap>Alt</keycap><keycap>Left</keycap></keycombo></shortcut>
-              <guimenu>Go</guimenu>
-              <guimenuitem>Back</guimenuitem>
-            </menuchoice> to go backward the 
-            link-following history for the characters. To go forward the link-following history, 
-            you can choose
-            <menuchoice>
-	      <shortcut><keycombo><keycap>Alt</keycap><keycap>Right</keycap></keycombo></shortcut>
-              <guimenu>Go</guimenu>
-              <guimenuitem>Forward</guimenuitem>
+      <orderedlist>
+        <listitem>
+          <para>
+            Choose <menuchoice>
+              <guimenu>Search</guimenu>
+              <guimenuitem>Find</guimenuitem>
             </menuchoice>.
           </para>
-        </tip>
+        </listitem>
+        <listitem>
+          <para>
+            Enter the character in the <guilabel>Search</guilabel> field
+            in the <guilabel>Find</guilabel> dialog.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Click <guibutton>Find</guibutton>. 
+          </para>
+          <para>
+            <application>&app;</application> highlights 
+            the first character that matches the search criteria,
+            in the <guilabel>Character Table</guilabel> tabbed section.
+            <application>&app;</application> also displays the 
+            Unicode code point and Unicode character name
+            in the status bar.
+          </para>
+          <para>
+            If no matching character is found, <application>&app;</application> 
+            displays an information alert.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Choose <menuchoice>
+              <guimenu>Search</guimenu>
+              <guimenuitem>Find Next</guimenuitem>
+            </menuchoice> to find the next matching character.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Choose <menuchoice>
+              <guimenu>Search</guimenu>
+              <guimenuitem>Find Previous</guimenuitem>
+            </menuchoice> to find the previous matching character.
+          </para>
+        </listitem>
+      </orderedlist>
+    </sect2>
+    
+    
+    <sect2 id="usage-find-character-clipboard">
+      <title>To Display the First Character in the Clipboard</title>
+      <para>
+        To display the first character in the clipboard, 
+        choose <menuchoice>
+          <guimenu>Go</guimenu>
+          <guimenuitem>Character in Clipboard</guimenuitem>
+        </menuchoice>.
+      </para>
+      <para>
+        <application>&app;</application> highlights the character 
+        in the <guilabel>Character Table</guilabel> tabbed section. 
+        <application>&app;</application> also displays the 
+        Unicode code point and Unicode character name
+        in the status bar.
       </para>
     </sect2>
-
+    
+<!-- =============== To Browse the Character Table  ========================= -->
     <sect2 id="usage-browse-characters">
       <title>To Browse Through all Characters</title>
-      <para>To browse through all available unicode characters in the Character Table,
-        you can use the following methods:
+      <para>
+        You can browse through the characters in the <guilabel>Character Table</guilabel>
+        tabbed section in the following ways:
       </para>
       <itemizedlist>
-	<listitem>
-	  <para>Use the arrow keys on the keyboards.</para>
-	</listitem>
-	<listitem>
-	  <para>Use the scrollbars on the window.</para>
-	</listitem>
-	<listitem>
-	  <para>Use the <keycap>Page Up</keycap> or the <keycap>Page Down</keycap> keys to browse 
-            through all characters page by page.
-          </para>
-	</listitem>
-	<listitem>
-	  <para>Use the <keycap>Home</keycap> key to jump to the first page of the Character Table. 
-            To jump to the last page, use the <keycap>End</keycap> key.
-          </para>
-	</listitem>
         <listitem>
-	  <para>Use the Unicode block pane to browse a block of characters from the Unicode character set.
-          </para>
-	</listitem>
-	<listitem>
-	  <para>Choose
-            <menuchoice>
-	      <shortcut><keycombo><keycap>Ctrl</keycap><keycap>N</keycap></keycombo></shortcut>
+          <para>
+            Choose <menuchoice>
               <guimenu>Go</guimenu>
               <guimenuitem>Next Character</guimenuitem>
-            </menuchoice> to browse the next character in unicode sequence. It will skip
-            over unassigned codepoints. 
-           </para>
-	</listitem>
-	<listitem>
-	  <para>Choose
-            <menuchoice>
-	      <shortcut><keycombo><keycap>Ctrl</keycap><keycap>P</keycap></keycombo></shortcut>
+            </menuchoice>
+            to select the next character in the Unicode sequence. 
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Choose <menuchoice>
               <guimenu>Go</guimenu>
               <guimenuitem>Previous Character</guimenuitem>
-            </menuchoice> to browse the previous character in unicode sequence. It will skip
-            over unassigned codepoints.
-           </para>
-	</listitem>
+            </menuchoice>
+            to select the previous character in the Unicode sequence. 
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Press the arrow keys on the keyboard.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Use the <guilabel>Character Table</guilabel> scrollbar.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Press the <keycap>Page Up</keycap> and <keycap>Page Down</keycap> keys to browse
+            through the characters page by page.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Press the <keycap>Home</keycap> key to select the first character
+            in the Unicode sequence.
+            To select the last character, press the <keycap>End</keycap> key.
+          </para>
+        </listitem>
       </itemizedlist>
-      <tip>
-	<para>Right click on a character or press <keycap>Shift</keycap> to magnify the active
-          character in the Character Table.
-         </para>
-       </tip>
     </sect2>
-
-    <sect2 id="gucharmap-insert-into-apps">
-      <title>To Insert Character To another Application</title>
-      <para>To insert character from &app; to another application, you can use the following methods:
+    
+    <sect2 id="usage-display-details">
+      <title>To Display Detailed Information About a Character</title>
+      <para>
+        To display detailed information about a character, perform the following steps:
       </para>
-      <variablelist>
-	<varlistentry>
-	  <term>Input Method</term>
-	  <listitem>
-	    <para>Right click on the text field (or editable area) of another application, choose
-              <menuchoice>
-		<guimenu>Input Methods</guimenu>
-		<guimenuitem>Unicode Character Map</guimenuitem>
-              </menuchoice>. The &app; window is displayed, double click on the
-              character to insert it to the text field of the application.
-            </para>
-	  </listitem>
-        </varlistentry>
-	<varlistentry>
-	  <term>Drag the Character</term>
-	  <listitem>
-	    <para>Drag the character from the Character Table to the text field of another application.
-            </para>
-          </listitem>
-	</varlistentry>
-	<varlistentry>
-	  <term>Copy To Clipboard</term>
-	  <listitem>
-	    <orderedlist>
-	      <listitem>
-		<para>Double click to copy a character to the <guilabel>Text to copy</guilabel> field.
-                </para>
-	      </listitem>
-	      <listitem>
-		<para>Click on the <guibutton>Copy</guibutton> button to copy the characters to clipboard.
-                </para>
-              </listitem>
-	      <listitem>
-		<para>Paste the characters from clipboard to the text field of another application.
-                </para>
-              </listitem>
-	    </orderedlist>
-	  </listitem>
-        </varlistentry>
-      </variablelist>
-    </sect2>
-    <sect2 id="gucharmap-change-zoom">
-      <title>To Change the Zoom Factor</title>
-      <para>To resize the characters in the Character Table, you can use the following methods:
+      <orderedlist>
+        <listitem>
+          <para>
+            Select a character set from the list box. 
+            Example: <guilabel>Basic Latin</guilabel>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Select a character from the <guilabel>Character Table</guilabel> tabbed section.
+            Example: <guilabel>B</guilabel>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Click on the <guilabel>Character Details</guilabel> tabbed section. 
+          </para>
+        </listitem>
+      </orderedlist>
+      <para>
+        The <guilabel>Character Details</guilabel> tabbed section 
+        displays the following information about the selected character:
       </para>
       <itemizedlist>
-	<listitem>
-	  <para>To enlarge the characters, choose
-            <menuchoice>
-	      <shortcut><keycombo><keycap>Ctrl</keycap><keycap>+</keycap></keycombo></shortcut>
-              <guimenu>View</guimenu>
-              <guimenuitem>Zoom In</guimenuitem>
-            </menuchoice> or use the Zoom spin box to specify the size.
+        <listitem>
+          <para>
+            Unicode code point
+          </para>
+          <para>
+            Example: <guilabel>U+0042</guilabel>
           </para>
         </listitem>
         <listitem>
-	  <para>To shrink the characters, choose 
-            <menuchoice>
-	      <shortcut><keycombo><keycap>Ctrl</keycap><keycap>-</keycap></keycombo></shortcut>
-              <guimenu>View</guimenu>
-              <guimenuitem>Zoom Out</guimenuitem>
-            </menuchoice> or use the Zoom spin box to specify the size.
+          <para>
+            Unicode character name
+          </para>
+          <para>
+            Example: <guilabel>LATIN CAPITAL LETTER B</guilabel>
           </para>
         </listitem>
         <listitem>
-          <para>To make the columns of the Character Table to the power of two, choose
-            <menuchoice>
-              <guimenu>View</guimenu>
-	      <guimenuitem>Snap Columns to Power of Two</guimenuitem>
-            </menuchoice>. 
+          <para>
+            <guilabel>General Character Properties</guilabel>
           </para>
+          <itemizedlist>
+            <listitem>
+              <para>
+                Unicode category
+              </para>
+              <para>
+                Example: <guilabel>Letter, Uppercase</guilabel>
+              </para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+        <listitem>
+          <para>
+            <guilabel>Various Useful Representations</guilabel>
+          </para>
+          <itemizedlist>
+            <listitem>
+              <para>
+                UTF-8 encoding
+              </para>
+              <para>
+                Example: <guilabel>0x42</guilabel>
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                Octal escaped UTF-8 encoding
+              </para>
+              <para>
+                Example: <guilabel>\102</guilabel>
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                Decimal entity reference
+              </para>
+              <para>
+                Example: <guilabel>&amp;&num;66;</guilabel>
+              </para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+        <listitem>
+          <para>
+            <guilabel>Annotations and Cross References</guilabel>
+          </para>
+          <para>
+            Example: <guilabel>U+212C SCRIPT CAPITAL B</guilabel>
+          </para>
+          <para>
+            Click on the link to display the details for the referenced character.
+          </para>
+          <itemizedlist>
+            <listitem>
+              <para>
+                Choose <menuchoice>
+                  <guimenu>Go</guimenu>
+                  <guimenuitem>Back</guimenuitem>
+                </menuchoice>
+                to navigate back through the link history.
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                Choose <menuchoice>
+                  <guimenu>Go</guimenu>
+                  <guimenuitem>Forward</guimenuitem>
+                </menuchoice>
+                to navigate forward through the link history.
+              </para>
+            </listitem>
+          </itemizedlist>
         </listitem>
       </itemizedlist>
     </sect2>
-    <sect2 id="gucharmap-change-font">
-      <title>To Change the Font</title>
-      <para>To change the font, you can use the following methods:
-        <itemizedlist>
-          <listitem>
-            <para>Use the font drop-down combination box to specify the font.</para>
-          </listitem>
-          <listitem>
-            <para>Click on the <guibutton>Bold</guibutton> button.</para>
-          </listitem>
-          <listitem>
-            <para>Click on the <guibutton>Italic</guibutton> button.</para>
-	  </listitem>
-        </itemizedlist>
+    
+    <sect2 id="usage-format-character">
+      <title>To Change the Format of a Character</title>
+      <para>
+        To change the format of a character, perform the following steps:
+      </para>
+      <orderedlist>
+        <listitem>
+          <para>
+            To change the font, select a font from the font drop-down list. 
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            To change the font type to bold type, 
+            click on the <guibutton>Bold</guibutton> button.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            To change the font type to italic type, 
+            click on the <guibutton>Italic</guibutton> button.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            To make the font size larger, choose 
+            <menuchoice>
+              <guimenu>View</guimenu>
+              <guimenuitem>Zoom In</guimenuitem>
+            </menuchoice>
+            or use the zoom spin box.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            To make the font size smaller, choose 
+            <menuchoice>
+              <guimenu>View</guimenu>
+              <guimenuitem>Zoom Out</guimenuitem>
+            </menuchoice>
+            or use the zoom spin box.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            To magnify the selected character, press <keycap>Shift</keycap>.
+          </para>
+        </listitem>
+      </orderedlist>
+    </sect2>
+    
+    <sect2 id="usage-format-chartable">
+      <title>To Change the Format of the Character Table</title>
+      <para>
+        To change the format of the character table, choose
+        <menuchoice>
+          <guimenu>View</guimenu>
+          <guimenuitem>Snap Columns to Power of Two</guimenuitem>
+        </menuchoice>.
+      </para>
+      <para>
+        <application>&app;</application> changes the 
+        <guilabel>Character Table</guilabel> tabbed section
+        so that the number of columns is a power of two, for example, two columns, 
+        four columns, eight columns, and so on. The number of columns depends on
+        the size of the window and the size of the font.
       </para>
     </sect2>
+
   </sect1>
-
-<!-- ============= Bugs ================================== -->
-<!-- This section is optional and is commented out by default. 
-     You can use it to describe known bugs and limitations of the 
-	  program if there are any - please be frank and list all
-     problems you know of. 
-  
-  <sect1 id="mayapp-bugs">
-  <title>Known Bugs and Limitations</title>
-  <para> </para>
- </sect1>
--->
-
-<!-- ============= About ================================== -->
-<!-- This section contains info about the program (not docs), such as
-     author's name(s), web page, license, feedback address. This
-     section is optional: primary place for this info is "About.." box of
-     the program. However, if you do wish to include this info in the
-     manual, this is the place to put it. Alternatively, you can put this 
-     information in the title page. -->
-  <sect1 id="gucharmap-about"> 
-    <title>About &app;</title> 
-    <para>&app; was written by Noah Levitt (<email>nlevitt@columbia.edu</email>),
-      Daniel Elstner (<email>daniel.elstner@gmx.net</email>) and
-      Padraig O'Briain (<email>Padraig.Obriain@sun.com</email>).
-      To find more information about &app;, please visit the 
-      <ulink url="http://gucharmap.sourceforge.net" type="http">&app; Web
-      page</ulink>.
-    </para>
-
-    <para>
-      To report a bug or make a suggestion regarding this application or
-      this manual, follow the directions in this 
-      <ulink url="ghelp:gnome-feedback" type="help">document</ulink>.
-    </para>
-
-    <para> This program is distributed under the terms of the GNU
-      General Public license as published by the Free Software
-      Foundation; either version 2 of the License, or (at your option)
-      any later version. A copy of this license can be found at this
-      <ulink url="ghelp:gpl" type="help">link</ulink>, or in the file
-      COPYING included with the source code of this program. 
-    </para>
-  </sect1> 
 </article>
