@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
-"POT-Creation-Date: 2003-05-31 11:39+0200\n"
-"PO-Revision-Date: 2003-05-31 11:40+0200\n"
+"POT-Creation-Date: 2003-06-02 10:47+0200\n"
+"PO-Revision-Date: 2003-06-02 10:48+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -18,145 +18,153 @@ msgstr ""
 
 #. ID
 #: gucharmap.desktop.in.h:1 gucharmap/gucharmap-window.c:381
-#: gucharmap/gucharmap-window.c:738 gucharmap/imgucharmap.c:196
+#: gucharmap/gucharmap-window.c:753 gucharmap/imgucharmap.c:209
 msgid "Unicode Character Map"
 msgstr "Unicode-teckentabell"
 
-#: gucharmap/gucharmap-charmap.c:359
+#: gucharmap/gucharmap-charmap.c:360
 msgid "[not a printable character]"
 msgstr "[inte ett utskrivbart tecken]"
 
-#: gucharmap/gucharmap-charmap.c:373
+#: gucharmap/gucharmap-charmap.c:378
 msgid "General Character Properties"
 msgstr "Allmänna teckenegenskaper"
 
 #. character category
-#: gucharmap/gucharmap-charmap.c:376
+#: gucharmap/gucharmap-charmap.c:381
 msgid "Unicode category:"
 msgstr "Unicode-kategori:"
 
-#: gucharmap/gucharmap-charmap.c:384
+#: gucharmap/gucharmap-charmap.c:389
 msgid "Canonical decomposition:"
 msgstr "Kanonisk dekomposition:"
 
-#: gucharmap/gucharmap-charmap.c:388
+#: gucharmap/gucharmap-charmap.c:393
 msgid "Various Useful Representations"
 msgstr "Diverse användbara representationer"
 
-#: gucharmap/gucharmap-charmap.c:397
+#: gucharmap/gucharmap-charmap.c:402
 msgid "UTF-8:"
 msgstr "UTF-8:"
 
 # Osäker
-#: gucharmap/gucharmap-charmap.c:405
+#: gucharmap/gucharmap-charmap.c:410
 msgid "Octal escaped UTF-8:"
 msgstr "Oktalt kodad UTF-8:"
 
-#: gucharmap/gucharmap-charmap.c:411
+#: gucharmap/gucharmap-charmap.c:416
 msgid "Decimal entity reference:"
 msgstr "Decimalentitetsreferens:"
 
-#: gucharmap/gucharmap-charmap.c:415
+#: gucharmap/gucharmap-charmap.c:420
 msgid "Annotations and Cross References"
 msgstr "Annotationer och korsreferenser"
 
-#: gucharmap/gucharmap-charmap.c:422
+#: gucharmap/gucharmap-charmap.c:427
 msgid "Alias names:"
 msgstr "Aliasnamn:"
 
-#: gucharmap/gucharmap-charmap.c:431
+#: gucharmap/gucharmap-charmap.c:436
 msgid "Notes:"
 msgstr "Anteckningar:"
 
-#: gucharmap/gucharmap-charmap.c:441
+#: gucharmap/gucharmap-charmap.c:445
 msgid "See also:"
 msgstr "Se även:"
 
-#: gucharmap/gucharmap-charmap.c:450
+#: gucharmap/gucharmap-charmap.c:454
 msgid "Approximate equivalents:"
 msgstr "Ungefärliga ekvivalenter:"
 
-#: gucharmap/gucharmap-charmap.c:459
+#: gucharmap/gucharmap-charmap.c:463
 msgid "Equivalents:"
 msgstr "Ekvivalenter:"
 
-#: gucharmap/gucharmap-charmap.c:465
+#: gucharmap/gucharmap-charmap.c:469
 msgid "CJK Ideograph Information"
 msgstr "CJK-ideografinformation"
 
-#: gucharmap/gucharmap-charmap.c:470
+#: gucharmap/gucharmap-charmap.c:474
 msgid "Definition in English:"
 msgstr "Defintion på engelska:"
 
-#: gucharmap/gucharmap-charmap.c:475
+#: gucharmap/gucharmap-charmap.c:479
 msgid "Mandarin Pronunciation:"
 msgstr "Mandarin-uttal:"
 
-#: gucharmap/gucharmap-charmap.c:480
+#: gucharmap/gucharmap-charmap.c:484
 msgid "Japanese On Pronunciation:"
 msgstr "Japanskt On-uttal:"
 
-#: gucharmap/gucharmap-charmap.c:485
-msgid "Japanese Kun Pronunciation"
-msgstr "Japanskt Kun-uttal"
+#: gucharmap/gucharmap-charmap.c:489
+msgid "Japanese Kun Pronunciation:"
+msgstr "Japanskt Kun-uttal:"
 
-#: gucharmap/gucharmap-charmap.c:490
+#: gucharmap/gucharmap-charmap.c:494
 msgid "Tang Pronunciation:"
 msgstr "Tang-uttal:"
 
-#: gucharmap/gucharmap-charmap.c:495
+#: gucharmap/gucharmap-charmap.c:499
 msgid "Korean Pronunciation:"
 msgstr "Koreanskt uttal:"
 
-#: gucharmap/gucharmap-charmap.c:534
-msgid "List of Unicode Blocks"
-msgstr "Lista med Unicode-block"
+#: gucharmap/gucharmap-charmap.c:678
+msgid "_Previous Character"
+msgstr "_Föregående tecken"
 
-#: gucharmap/gucharmap-charmap.c:599
-msgid "Character Map"
-msgstr "Teckentabell"
+#: gucharmap/gucharmap-charmap.c:686
+msgid "_Next Character"
+msgstr "_Nästa tecken"
 
-#: gucharmap/gucharmap-charmap.c:603
+#: gucharmap/gucharmap-charmap.c:834
 msgid "Characte_r Table"
 msgstr "Tecke_ntabell"
 
-#: gucharmap/gucharmap-charmap.c:606
+#: gucharmap/gucharmap-charmap.c:837
 msgid "Character _Details"
 msgstr "Tecken_detaljer"
 
-#: gucharmap/gucharmap-mini-fontsel.c:280
+#: gucharmap/gucharmap-charmap.c:851
+msgid "List of Unicode Blocks"
+msgstr "Lista med Unicode-block"
+
+#: gucharmap/gucharmap-mini-fontsel.c:197
 msgid "Font"
 msgstr "Typsnitt"
 
-#: gucharmap/gucharmap-mini-fontsel.c:287
+#: gucharmap/gucharmap-mini-fontsel.c:204
 msgid "Font Family"
 msgstr "Typsnittsfamilj"
 
-#: gucharmap/gucharmap-mini-fontsel.c:292
-msgid "Font Style"
-msgstr "Typsnittsstil"
+#: gucharmap/gucharmap-mini-fontsel.c:208
+msgid "_Bold"
+msgstr "_Fet"
 
-#: gucharmap/gucharmap-mini-fontsel.c:298
+#: gucharmap/gucharmap-mini-fontsel.c:213
+msgid "_Italic"
+msgstr "_Kursiv"
+
+#: gucharmap/gucharmap-mini-fontsel.c:222
 msgid "Font Size"
 msgstr "Typsnittsstorlek"
 
-#: gucharmap/gucharmap-table.c:1275
+#: gucharmap/gucharmap-table.c:1359
 msgid "Clipboard is empty."
 msgstr "Urklipp är tomt."
 
-#: gucharmap/gucharmap-table.c:1277
+#: gucharmap/gucharmap-table.c:1361
 msgid "There is no selected text."
 msgstr "Det finns ingen markerad text."
 
-#: gucharmap/gucharmap-table.c:1285 gucharmap/gucharmap-table.c:1513
+#: gucharmap/gucharmap-table.c:1369 gucharmap/gucharmap-table.c:1611
 msgid "Unknown character, unable to identify."
 msgstr "Okänt tecken, kan inte identifiera."
 
-#: gucharmap/gucharmap-table.c:1289 gucharmap/gucharmap-table.c:1517
+#: gucharmap/gucharmap-table.c:1373 gucharmap/gucharmap-table.c:1615
 msgid "Character found."
 msgstr "Tecken hittat."
 
-#: gucharmap/gucharmap-table.c:1584
+#: gucharmap/gucharmap-table.c:1682
 msgid "Character Table"
 msgstr "Teckentabell"
 
@@ -343,7 +351,7 @@ msgid "Jump to Unicode Code Point"
 msgstr "Hoppa till Unicode-kodpunkt"
 
 #: gucharmap/gucharmap-window.c:159
-msgid "_Enter hexadecimal Unicodecode point:"
+msgid "_Enter hexadecimal Unicode code point:"
 msgstr "_Ange hexadecimal Unicode-kodpunkt:"
 
 #: gucharmap/gucharmap-window.c:218
@@ -420,15 +428,15 @@ msgid "Character in _Clipboard"
 msgstr "Tecken i _urklipp"
 
 #. make the help menu
-#: gucharmap/gucharmap-window.c:542
+#: gucharmap/gucharmap-window.c:546
 msgid "_Help"
 msgstr "_Hjälp"
 
-#: gucharmap/gucharmap-window.c:634
+#: gucharmap/gucharmap-window.c:637
 msgid "_Text to copy:"
 msgstr "_Text att kopiera:"
 
-#: gucharmap/gucharmap-window.c:655
+#: gucharmap/gucharmap-window.c:658
 msgid "Copy to the clipboard."
 msgstr "Kopiera till urklipp."
 
@@ -936,7 +944,31 @@ msgstr "Tillägg till privatanvändningsområde-A"
 msgid "Supplementary Private Use Area-B"
 msgstr "Tillägg till privatanvändningsområde-B"
 
-#~ msgid "_Enter hexadecimal Unicode code point:"
+#~ msgid "Previous Character"
+#~ msgstr "Föregående tecken"
+
+#~ msgid "Next Character"
+#~ msgstr "Nästa tecken"
+
+#~ msgid "Character"
+#~ msgstr "Tecken"
+
+#~ msgid "Bold"
+#~ msgstr "Fet"
+
+#~ msgid "Italic"
+#~ msgstr "Kursiv"
+
+#~ msgid "Japanese Kun Pronunciation"
+#~ msgstr "Japanskt Kun-uttal"
+
+#~ msgid "Character Map"
+#~ msgstr "Teckentabell"
+
+#~ msgid "Font Style"
+#~ msgstr "Typsnittsstil"
+
+#~ msgid "_Enter hexadecimal Unicodecode point:"
 #~ msgstr "_Ange hexadecimal Unicode-kodpunkt:"
 
 #~ msgid "_Enter hexadecimal Unicode code point"
@@ -1018,9 +1050,6 @@ msgstr "Tillägg till privatanvändningsområde-B"
 #~ msgid "Japanese On Pronunciation"
 #~ msgstr "Japanskt On-uttal"
 
-#~ msgid "Japanese Kun Pronunciation:"
-#~ msgstr "Japanskt Kun-uttal:"
-
 #~ msgid "Tang Pronunciation"
 #~ msgstr "Tang-uttal"
 
@@ -1029,9 +1058,6 @@ msgstr "Tillägg till privatanvändningsområde-B"
 
 #~ msgid "not a printable character"
 #~ msgstr "inte ett utskrivbart tecken"
-
-#~ msgid "Character"
-#~ msgstr "Tecken"
 
 #~ msgid "Other representations"
 #~ msgstr "Andra representationer"
