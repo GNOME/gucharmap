@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-01 22:56+0100\n"
-"PO-Revision-Date: 2004-02-01 22:56+0100\n"
+"POT-Creation-Date: 2004-02-18 11:29+0100\n"
+"PO-Revision-Date: 2004-02-18 11:29+0100\n"
 "Last-Translator: Ole Laursen <olau@hardworking.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. ID
-#: gucharmap.desktop.in.h:1 gucharmap/gucharmap-window.c:261
-#: gucharmap/gucharmap-window.c:724 gucharmap/imgucharmap.c:207
+#: gucharmap.desktop.in.h:1 gucharmap/gucharmap-window.c:323
+#: gucharmap/gucharmap-window.c:855 gucharmap/imgucharmap.c:207
 msgid "Character Map"
 msgstr "Tegnoversigt"
 
@@ -137,19 +137,19 @@ msgstr "Størrelse"
 msgid "Common"
 msgstr "Almen"
 
-#: gucharmap/gucharmap-table.c:1531
+#: gucharmap/gucharmap-table.c:1521
 msgid "Unknown character, unable to identify."
 msgstr "Ukendt tegn, kan ikke identificeres."
 
-#: gucharmap/gucharmap-table.c:1533 gucharmap/gucharmap-search-dialog.c:418
+#: gucharmap/gucharmap-table.c:1523 gucharmap/gucharmap-search-dialog.c:418
 msgid "Not found."
 msgstr "Ikke fundet."
 
-#: gucharmap/gucharmap-table.c:1536
+#: gucharmap/gucharmap-table.c:1526
 msgid "Character found."
 msgstr "Tegn fundet."
 
-#: gucharmap/gucharmap-table.c:1600
+#: gucharmap/gucharmap-table.c:1590
 msgid "Character Table"
 msgstr "Tegnoversigt"
 
@@ -301,87 +301,103 @@ msgstr "Adskiller, afsnit"
 msgid "Separator, Space"
 msgstr "Adskiller, mellemrum"
 
-#: gucharmap/gucharmap-window.c:127
+#: gucharmap/gucharmap-window.c:189
 msgid "Searching..."
 msgstr "Søgning..."
 
-#: gucharmap/gucharmap-window.c:256
+#: gucharmap/gucharmap-window.c:318
 msgid "translator_credits"
 msgstr "Ole Laursen <olau@hardworking.dk>"
 
-#: gucharmap/gucharmap-window.c:380
+#: gucharmap/gucharmap-window.c:419 gucharmap/gucharmap-window.c:601
+msgid "Next Script"
+msgstr "Næste skrift"
+
+#: gucharmap/gucharmap-window.c:420 gucharmap/gucharmap-window.c:602
+msgid "Previous Script"
+msgstr "Forrige skrift"
+
+#: gucharmap/gucharmap-window.c:432 gucharmap/gucharmap-window.c:606
+msgid "Next Block"
+msgstr "Næste blok"
+
+#: gucharmap/gucharmap-window.c:433 gucharmap/gucharmap-window.c:607
+msgid "Previous Block"
+msgstr "Forrige blok"
+
+#: gucharmap/gucharmap-window.c:468
 msgid "_File"
 msgstr "_Fil"
 
-#: gucharmap/gucharmap-window.c:382
+#: gucharmap/gucharmap-window.c:470
 msgid "_View"
 msgstr "_Vis"
 
-#: gucharmap/gucharmap-window.c:384
+#: gucharmap/gucharmap-window.c:472
 msgid "_Search"
 msgstr "_Find"
 
-#: gucharmap/gucharmap-window.c:386
+#: gucharmap/gucharmap-window.c:474
 msgid "_Go"
 msgstr "_Gå til"
 
-#: gucharmap/gucharmap-window.c:405
+#: gucharmap/gucharmap-window.c:493
 msgid "By _Script"
 msgstr "Efter _skrift"
 
-#: gucharmap/gucharmap-window.c:411
+#: gucharmap/gucharmap-window.c:499
 msgid "By _Unicode Block"
 msgstr "Efter _Unicodeblokke"
 
-#: gucharmap/gucharmap-window.c:419
+#: gucharmap/gucharmap-window.c:507
 msgid "Snap Columns to Power of Two"
 msgstr "Lås kolonner til multipla af to"
 
 #. ctrl-+
-#: gucharmap/gucharmap-window.c:427
+#: gucharmap/gucharmap-window.c:515
 msgid "Zoom _In"
 msgstr "Zoom _ind"
 
 #. ctrl--
-#: gucharmap/gucharmap-window.c:437
+#: gucharmap/gucharmap-window.c:525
 msgid "Zoom _Out"
 msgstr "Zoom _ud"
 
 #. ctrl-=
-#: gucharmap/gucharmap-window.c:447
+#: gucharmap/gucharmap-window.c:535
 msgid "_Normal Size"
 msgstr "_Normal størrelse"
 
-#: gucharmap/gucharmap-window.c:461
+#: gucharmap/gucharmap-window.c:549
 msgid "_Find..."
 msgstr "_Find..."
 
-#: gucharmap/gucharmap-window.c:469
+#: gucharmap/gucharmap-window.c:557
 msgid "Find _Next"
 msgstr "Find _næste"
 
-#: gucharmap/gucharmap-window.c:478
+#: gucharmap/gucharmap-window.c:566
 msgid "Find _Previous"
 msgstr "Find _forrige"
 
-#: gucharmap/gucharmap-window.c:495
+#: gucharmap/gucharmap-window.c:583
 msgid "_Next Character"
 msgstr "_Næste tegn"
 
-#: gucharmap/gucharmap-window.c:501
+#: gucharmap/gucharmap-window.c:589
 msgid "_Previous Character"
 msgstr "_Forrige tegn"
 
 #. make the help menu
-#: gucharmap/gucharmap-window.c:513
+#: gucharmap/gucharmap-window.c:630
 msgid "_Help"
 msgstr "_Hjælp"
 
-#: gucharmap/gucharmap-window.c:596
+#: gucharmap/gucharmap-window.c:713
 msgid "_Text to copy:"
 msgstr "_Tekst at kopiere:"
 
-#: gucharmap/gucharmap-window.c:617
+#: gucharmap/gucharmap-window.c:734
 msgid "Copy to the clipboard."
 msgstr "Kopiér til klippebordet."
 
@@ -946,19 +962,19 @@ msgid "Information"
 msgstr "Information"
 
 #. follow hig guidelines
-#: gucharmap/gucharmap-search-dialog.c:505
+#: gucharmap/gucharmap-search-dialog.c:528
 msgid "Find"
 msgstr "Find"
 
-#: gucharmap/gucharmap-search-dialog.c:516
+#: gucharmap/gucharmap-search-dialog.c:542
 msgid "_Previous"
 msgstr "_Forrige"
 
-#: gucharmap/gucharmap-search-dialog.c:517
+#: gucharmap/gucharmap-search-dialog.c:549
 msgid "_Next"
 msgstr "_Næste"
 
-#: gucharmap/gucharmap-search-dialog.c:525
+#: gucharmap/gucharmap-search-dialog.c:559
 msgid "_Search:"
 msgstr "_Find:"
 
