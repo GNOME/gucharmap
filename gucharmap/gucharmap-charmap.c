@@ -211,39 +211,6 @@ gucharmap_charmap_class_init (GucharmapCharmapClass *clazz)
 }
 
 
-/* returns NULL if the character decomposes into itself; otherwise returns
- * a gchar * which should be freed by the caller */
-static gchar *
-make_canonical_decomposition_string (GucharmapCharmap *charmap, 
-                                     gunichar uc)
-{
-  GString *gs;
-  gunichar *decomposition;
-  gsize result_len;
-  gint i;
-
-  decomposition = gucharmap_unicode_canonical_decomposition (uc,
-                                                             &result_len);
-  if (result_len == 1)
-    {
-      g_free (decomposition);
-      return NULL;
-    }
-
-  gs = g_string_new (NULL);
-  g_string_append_printf (gs, "U+%4.4X %s", decomposition[0], 
-                          gucharmap_get_unicode_name (decomposition[0]));
-
-  for (i = 1;  i < result_len;  i++)
-    g_string_append_printf (gs, " + U+%4.4X %s", decomposition[i], 
-                            gucharmap_get_unicode_name (decomposition[i]));
-
-  g_free (decomposition);
-
-  return g_string_free (gs, FALSE);
-}
-
-
 static void
 insert_vanilla_detail (GucharmapCharmap *charmap, 
                        GtkTextBuffer *buffer,
@@ -348,6 +315,37 @@ insert_heading (GucharmapCharmap *charmap,
 
 
 static void
+conditionally_insert_canonical_decomposition (GucharmapCharmap *charmap, 
+                                              GtkTextBuffer *buffer,
+                                              GtkTextIter *iter,
+                                              gunichar uc)
+{
+  gunichar *decomposition;
+  gsize result_len;
+  gint i;
+
+  decomposition = gucharmap_unicode_canonical_decomposition (uc, &result_len);
+
+  if (result_len == 1)
+    {
+      g_free (decomposition);
+      return;
+    }
+
+  gtk_text_buffer_insert (buffer, iter, _("Canonical decomposition:"), -1);
+  gtk_text_buffer_insert (buffer, iter, " ", -1);
+
+  insert_codepoint (charmap, buffer, iter, decomposition[0]);
+  for (i = 1;  i < result_len;  i++)
+    {
+      gtk_text_buffer_insert (buffer, iter, " + ", -1);
+      insert_codepoint (charmap, buffer, iter, decomposition[i]);
+    }
+
+  g_free (decomposition);
+}
+
+static void
 set_details (GucharmapCharmap *charmap,
              gunichar uc)
 {
@@ -397,13 +395,7 @@ set_details (GucharmapCharmap *charmap,
                          gucharmap_get_unicode_category_name (uc));
 
   /* canonical decomposition */
-  temp = make_canonical_decomposition_string (charmap, uc);
-  if (temp != NULL)
-    {
-      insert_vanilla_detail (charmap, buffer, &iter, 
-                             _("Canonical decomposition:"), temp);
-      g_free (temp);
-    }
+  conditionally_insert_canonical_decomposition (charmap, buffer, &iter, uc);
 
   insert_heading (charmap, buffer, &iter, _("Various Useful Representations"));
 
@@ -584,12 +576,6 @@ create_tags (GucharmapCharmap *charmap)
                               "size", default_font_size * 5 / 4,
                               NULL);
   gtk_text_buffer_create_tag (buffer, "detail-value",
-                              NULL);
-  gtk_text_buffer_create_tag (buffer, "link",
-                              "foreground", "blue",
-                              "foreground-set", TRUE,
-                              "underline", PANGO_UNDERLINE_SINGLE,
-                              "underline-set", TRUE,
                               NULL);
 }
 
