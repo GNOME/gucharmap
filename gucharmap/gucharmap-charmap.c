@@ -550,6 +550,8 @@ set_details (GucharmapCharmap *charmap,
       || gucharmap_get_unicode_kTang (uc)
       || gucharmap_get_unicode_kKorean (uc))
     {
+      insert_heading (charmap, buffer, &iter, _("CJK Ideograph Information"));
+
       csp = gucharmap_get_unicode_kDefinition (uc);
       if (csp)
         insert_vanilla_detail (charmap, buffer, &iter,
