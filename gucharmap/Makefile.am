@@ -42,7 +42,7 @@ libgucharmap_la_SOURCES = gucharmap_marshal.c gucharmap_marshal.h \
 
 # this is different from the project version
 # http://sources.redhat.com/autobook/autobook/autobook_91.html
-libgucharmap_la_LDFLAGS = -version-info 3:1:0
+libgucharmap_la_LDFLAGS = -version-info 3:2:0
 
 
 libgucharmapincludedir = $(includedir)/gucharmap
