@@ -29,9 +29,12 @@ static GtkWidget *charmap;
 
 
 static void
-expand_collapse (GtkWidget *widget, gpointer data)
+expand_collapse (GtkCheckMenuItem *mi, gpointer data)
 {
-  g_printerr ("expand_collapse\n");
+  if (gtk_check_menu_item_get_active (mi))
+    charmap_expand_block_selector (CHARMAP (charmap));
+  else
+    charmap_collapse_block_selector (CHARMAP (charmap));
 }
 
 

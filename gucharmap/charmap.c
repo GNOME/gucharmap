@@ -1070,19 +1070,6 @@ block_selection_changed (GtkTreeSelection *selection,
 }
 
 
-static void
-show_hide_code_points (GtkToggleButton *togglebutton, Charmap *charmap)
-{
-  if (gtk_toggle_button_get_active (togglebutton))
-    gtk_tree_view_expand_all (GTK_TREE_VIEW (charmap->block_selector_view));
-  else
-    gtk_tree_view_collapse_all (GTK_TREE_VIEW (charmap->block_selector_view));
-
-  /* have to send it an expose event or the change won't happen right away */
-  gtk_widget_queue_draw (gtk_widget_get_parent (charmap->block_selector_view));
-}
-
-
 /* makes the list of unicode blocks and code points */
 static GtkWidget *
 make_unicode_block_selector (Charmap *charmap)
@@ -1193,6 +1180,7 @@ make_caption (Charmap *charmap)
   GtkCellRenderer *cell;
   GtkTreeModel *model;
   GtkWidget *scrolled_window;
+  gint ypad;
 
   charmap->caption = g_malloc (sizeof (Caption));
 
@@ -1297,6 +1285,9 @@ make_caption (Charmap *charmap)
 
   /* make it "editable" so the value can be copied and pasted */
   g_object_set (G_OBJECT (cell), "editable", TRUE, NULL); 
+  g_object_get (G_OBJECT (cell), "ypad", &ypad, NULL);
+  ypad += 2;  /* give it a few more pixels vertically */
+  g_object_set (G_OBJECT (cell), "ypad", ypad, NULL);
 
   /* do this so it doesn't manically change size */
   gtk_cell_renderer_text_set_fixed_height_from_font (
@@ -1837,4 +1828,23 @@ charmap_identify_clipboard (Charmap *charmap, GtkClipboard *clipboard)
   gtk_clipboard_request_text (clipboard, selection_text_received, charmap);
 }
 
+
+void 
+charmap_expand_block_selector (Charmap *charmap)
+{
+  gtk_tree_view_expand_all (GTK_TREE_VIEW (charmap->block_selector_view));
+
+  /* have to send it an expose event or the change won't happen right away */
+  gtk_widget_queue_draw (gtk_widget_get_parent (charmap->block_selector_view));
+}
+
+
+void 
+charmap_collapse_block_selector (Charmap *charmap)
+{
+  gtk_tree_view_collapse_all (GTK_TREE_VIEW (charmap->block_selector_view));
+
+  /* have to send it an expose event or the change won't happen right away */
+  gtk_widget_queue_draw (gtk_widget_get_parent (charmap->block_selector_view));
+}
 
