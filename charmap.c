@@ -567,6 +567,7 @@ redraw (Charmap *charmap)
     {
       shift_area (charmap, row_offset);
       draw_squares_after_shift (charmap, row_offset);
+      draw_borders (charmap);
       gtk_widget_queue_draw (charmap->tabulus);
       actives_done = TRUE;
     }
@@ -667,6 +668,8 @@ set_top_row (Charmap *charmap, gint row)
     r = 0;
 
   charmap->active_char = charmap->page_first_char + r * charmap->cols + c;
+  if (charmap->active_char > UNICHAR_MAX)
+    charmap->active_char = UNICHAR_MAX;
 }
 
 
@@ -1211,7 +1214,6 @@ make_text_to_copy (Charmap *charmap)
 }
 
 
-/* XXX: should adjust by row, not active character */
 static void
 scroll_charmap (GtkAdjustment *adjustment, Charmap *charmap)
 {
