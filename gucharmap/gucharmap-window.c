@@ -691,7 +691,17 @@ load_icon (GucharmapWindow *guw)
 }
 
 
-void
+static void
+status_realize (GtkWidget *status,
+                GucharmapWindow *guw)
+{
+  /* increase the height a bit so it doesn't resize itself */
+  gtk_widget_set_size_request (guw->status, -1, 
+                               guw->status->allocation.height + 3);
+}
+
+
+static void
 pack_stuff_in_window (GucharmapWindow *guw)
 {
   GtkWidget *big_vbox;
@@ -724,6 +734,8 @@ pack_stuff_in_window (GucharmapWindow *guw)
   guw->status = gtk_statusbar_new ();
   gtk_box_pack_start (GTK_BOX (big_vbox), guw->status, FALSE, FALSE, 0);
   gtk_widget_show (guw->status);
+  g_signal_connect (guw->status, "realize",
+                    G_CALLBACK (status_realize), guw);
 
   g_signal_connect (guw->charmap, "status-message",
                     G_CALLBACK (status_message), guw);
