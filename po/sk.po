@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-07 23:31+0100\n"
-"PO-Revision-Date: 2004-01-07 23:32+0100\n"
+"POT-Creation-Date: 2004-01-28 21:56+0100\n"
+"PO-Revision-Date: 2004-01-28 21:59+0100\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
@@ -17,8 +17,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. ID
-#: gucharmap.desktop.in.h:1 gucharmap/gucharmap-window.c:386
-#: gucharmap/gucharmap-window.c:879 gucharmap/imgucharmap.c:209
+#: gucharmap.desktop.in.h:1 gucharmap/gucharmap-window.c:342
+#: gucharmap/gucharmap-window.c:784 gucharmap/imgucharmap.c:209
 msgid "Character Map"
 msgstr "Mapa znakov"
 
@@ -26,102 +26,98 @@ msgstr "Mapa znakov"
 msgid "Insert special characters into documents"
 msgstr "Vložiť špeciálne znaky do dokumentov"
 
-#: gucharmap/gucharmap-charmap.c:404
+#: gucharmap/gucharmap-charmap.c:256
 msgid "Canonical decomposition:"
 msgstr "Kanonická dekompozícia:"
 
-#: gucharmap/gucharmap-charmap.c:444 gucharmap/gucharmap-table.c:310
+#: gucharmap/gucharmap-charmap.c:296 gucharmap/gucharmap-table.c:310
 msgid "[not a printable character]"
 msgstr "[nie je tlačiteľný znak]"
 
-#: gucharmap/gucharmap-charmap.c:458
+#: gucharmap/gucharmap-charmap.c:310
 msgid "General Character Properties"
 msgstr "Všeobecné vlastnosti znakov"
 
 #. character category
-#: gucharmap/gucharmap-charmap.c:461
+#: gucharmap/gucharmap-charmap.c:313
 msgid "Unicode category:"
 msgstr "Kategória Unicode:"
 
-#: gucharmap/gucharmap-charmap.c:467
+#: gucharmap/gucharmap-charmap.c:319
 msgid "Various Useful Representations"
 msgstr "Rôzne užitočné reprezentácie"
 
-#: gucharmap/gucharmap-charmap.c:476
+#: gucharmap/gucharmap-charmap.c:328
 msgid "UTF-8:"
 msgstr "UTF-8:"
 
-#: gucharmap/gucharmap-charmap.c:484
+#: gucharmap/gucharmap-charmap.c:336
 msgid "Octal escaped UTF-8:"
 msgstr "Osmičkové escape UTF-8:"
 
-#: gucharmap/gucharmap-charmap.c:490
+#: gucharmap/gucharmap-charmap.c:342
 msgid "Decimal entity reference:"
 msgstr "Desiatkový odkaz entity:"
 
-#: gucharmap/gucharmap-charmap.c:496
+#: gucharmap/gucharmap-charmap.c:348
 msgid "Annotations and Cross References"
 msgstr "Poznámky a krížové odkazy"
 
-#: gucharmap/gucharmap-charmap.c:503
+#: gucharmap/gucharmap-charmap.c:355
 msgid "Alias names:"
 msgstr "Alternatívne mená:"
 
-#: gucharmap/gucharmap-charmap.c:512
+#: gucharmap/gucharmap-charmap.c:364
 msgid "Notes:"
 msgstr "Poznámky:"
 
-#: gucharmap/gucharmap-charmap.c:521
+#: gucharmap/gucharmap-charmap.c:373
 msgid "See also:"
 msgstr "Pozri tiež:"
 
-#: gucharmap/gucharmap-charmap.c:530
+#: gucharmap/gucharmap-charmap.c:382
 msgid "Approximate equivalents:"
 msgstr "Približné ekvivalenty:"
 
-#: gucharmap/gucharmap-charmap.c:539
+#: gucharmap/gucharmap-charmap.c:391
 msgid "Equivalents:"
 msgstr "Ekvivalenty:"
 
-#: gucharmap/gucharmap-charmap.c:554
+#: gucharmap/gucharmap-charmap.c:406
 msgid "CJK Ideograph Information"
 msgstr "Informácia o CJK symbole"
 
-#: gucharmap/gucharmap-charmap.c:559
+#: gucharmap/gucharmap-charmap.c:411
 msgid "Definition in English:"
 msgstr "Definícia v angličtine:"
 
-#: gucharmap/gucharmap-charmap.c:564
+#: gucharmap/gucharmap-charmap.c:416
 msgid "Mandarin Pronunciation:"
 msgstr "Mandarínska výslovnosť:"
 
-#: gucharmap/gucharmap-charmap.c:569
+#: gucharmap/gucharmap-charmap.c:421
 msgid "Japanese On Pronunciation:"
 msgstr "Japonská On výslovnosť:"
 
-#: gucharmap/gucharmap-charmap.c:574
+#: gucharmap/gucharmap-charmap.c:426
 msgid "Japanese Kun Pronunciation:"
 msgstr "Japonská Kun výslovnosť:"
 
-#: gucharmap/gucharmap-charmap.c:579
+#: gucharmap/gucharmap-charmap.c:431
 msgid "Tang Pronunciation:"
 msgstr "Tang výslovnosť:"
 
-#: gucharmap/gucharmap-charmap.c:584
+#: gucharmap/gucharmap-charmap.c:436
 msgid "Korean Pronunciation:"
 msgstr "Kórejská výslovnosť:"
 
-#: gucharmap/gucharmap-charmap.c:892
+#: gucharmap/gucharmap-charmap.c:736
 msgid "Characte_r Table"
 msgstr "Tabuľka _znakov"
 
-#: gucharmap/gucharmap-charmap.c:895
+#: gucharmap/gucharmap-charmap.c:739
 msgid "Character _Details"
 msgstr "Po_drobnosti znaku"
-
-#: gucharmap/gucharmap-charmap.c:913
-msgid "List of Unicode Blocks"
-msgstr "Zoznam blokov unicode"
 
 #: gucharmap/gucharmap-mini-fontsel.c:208
 msgid "Font"
@@ -137,39 +133,25 @@ msgstr "Veľkosť písma"
 
 #. Unicode assigns "Common" as the script name for any character not
 #. * specifically listed in Scripts.txt
-#: gucharmap/gucharmap-script-codepoint-list.c:71
+#: gucharmap/gucharmap-script-codepoint-list.c:458
+#: gucharmap/unicode-scripts.h:20
 msgid "Common"
 msgstr "Všeobecné"
 
-#: gucharmap/gucharmap-table.c:1380
-msgid "Clipboard is empty."
-msgstr "Schránka je prázdna."
-
-#: gucharmap/gucharmap-table.c:1382
-msgid "There is no selected text."
-msgstr "Nie je označený text."
-
-#: gucharmap/gucharmap-table.c:1389
-msgid "Unknown character in clipboard, unable to identify."
-msgstr "Neznámy znak v schránke, nepodarilo sa identifikovať."
-
-#: gucharmap/gucharmap-table.c:1391
-msgid "First character in clipboard not found."
-msgstr "Prvý znak v schránke nenájdený."
-
-#: gucharmap/gucharmap-table.c:1394 gucharmap/gucharmap-table.c:1638
-msgid "Character found."
-msgstr "Znak nájdený."
-
-#: gucharmap/gucharmap-table.c:1633
+#: gucharmap/gucharmap-table.c:1531
 msgid "Unknown character, unable to identify."
 msgstr "Neznámy znak, nepodarilo sa identifikovať."
 
-#: gucharmap/gucharmap-table.c:1635 gucharmap/gucharmap-window.c:213
+#. information_dialog (guw, alert_parent, _("Not found."));
+#: gucharmap/gucharmap-table.c:1533 gucharmap/gucharmap-window.c:139
 msgid "Not found."
 msgstr "Nenájdené."
 
-#: gucharmap/gucharmap-table.c:1703
+#: gucharmap/gucharmap-table.c:1536
+msgid "Character found."
+msgstr "Znak nájdený."
+
+#: gucharmap/gucharmap-table.c:1601
 msgid "Character Table"
 msgstr "Tabuľka znakov"
 
@@ -321,91 +303,90 @@ msgstr "Oddeľovač, odstavec"
 msgid "Separator, Space"
 msgstr "Oddeľovač, medzera"
 
-#: gucharmap/gucharmap-window.c:54
+#: gucharmap/gucharmap-window.c:90
 msgid "Information"
 msgstr "Informácie"
 
-#: gucharmap/gucharmap-window.c:123 gucharmap/gucharmap-window.c:217
-#: gucharmap/gucharmap-window.c:227
-msgid "Nothing to search for."
-msgstr "Nič na hľadanie."
-
-#: gucharmap/gucharmap-window.c:269
+#: gucharmap/gucharmap-window.c:217
 msgid "Find"
 msgstr "Nájsť"
 
-#: gucharmap/gucharmap-window.c:282
+#: gucharmap/gucharmap-window.c:230
 msgid "_Search:"
 msgstr "_Hľadať:"
 
-#: gucharmap/gucharmap-window.c:379
+#: gucharmap/gucharmap-window.c:337
 msgid "translator_credits"
 msgstr "Marcel Telka <marcel@telka.sk>"
 
-#: gucharmap/gucharmap-window.c:511
+#: gucharmap/gucharmap-window.c:461
 msgid "_File"
 msgstr "_Súbor"
 
-#: gucharmap/gucharmap-window.c:513
+#: gucharmap/gucharmap-window.c:463
 msgid "_View"
 msgstr "_Zobraziť"
 
-#: gucharmap/gucharmap-window.c:515
+#: gucharmap/gucharmap-window.c:465
 msgid "_Search"
 msgstr "_Hľadať"
 
-#: gucharmap/gucharmap-window.c:517
+#: gucharmap/gucharmap-window.c:467
 msgid "_Go"
 msgstr "_Prejsť na"
 
+#: gucharmap/gucharmap-window.c:486
+msgid "By _Script"
+msgstr "Podľa _písma"
+
+#: gucharmap/gucharmap-window.c:492
+msgid "By _Unicode Block"
+msgstr "Podľa blokov _Unicode"
+
 #. ctrl-+ or ctrl-=
-#: gucharmap/gucharmap-window.c:538
+#: gucharmap/gucharmap-window.c:501
 msgid "Zoom _In"
 msgstr "Zväčš_it"
 
 #. ctrl--
-#: gucharmap/gucharmap-window.c:550
+#: gucharmap/gucharmap-window.c:513
 msgid "Zoom _Out"
 msgstr "Zm_enšiť"
 
-#: gucharmap/gucharmap-window.c:562
+#: gucharmap/gucharmap-window.c:525
 msgid "Snap Columns to Power of Two"
 msgstr "Upraviť stĺpce na mocniny dvojky"
 
-#: gucharmap/gucharmap-window.c:573
+#: gucharmap/gucharmap-window.c:534
 msgid "_Find..."
 msgstr "_Nájsť..."
 
-#: gucharmap/gucharmap-window.c:583
+#: gucharmap/gucharmap-window.c:543
 msgid "Find _Next"
 msgstr "Nájsť _nasledujúce"
 
-#: gucharmap/gucharmap-window.c:593
+#: gucharmap/gucharmap-window.c:553
 msgid "Find _Previous"
 msgstr "Nájsť _predhádzajúce"
 
-#: gucharmap/gucharmap-window.c:633
+#: gucharmap/gucharmap-window.c:570
 msgid "_Next Character"
 msgstr "_Nasledujúci znak"
 
-#: gucharmap/gucharmap-window.c:640
+#: gucharmap/gucharmap-window.c:576
 msgid "_Previous Character"
 msgstr "_Predchádzajúci znak"
 
-#: gucharmap/gucharmap-window.c:650
-msgid "Character in _Clipboard"
-msgstr "Znak v _schránke"
-
 #. make the help menu
-#: gucharmap/gucharmap-window.c:664
+#: gucharmap/gucharmap-window.c:588
 msgid "_Help"
 msgstr "_Pomocník"
 
-#: gucharmap/gucharmap-window.c:743
+#: gucharmap/gucharmap-window.c:671
 msgid "_Text to copy:"
 msgstr "_Text na kopírovanie:"
 
-#: gucharmap/gucharmap-window.c:764
+#: gucharmap/gucharmap-window.c:692
 msgid "Copy to the clipboard."
 msgstr "Kopírovať do schránky."
 
@@ -413,503 +394,503 @@ msgstr "Kopírovať do schránky."
 msgid "Font to start with; ex: 'Serif 27'"
 msgstr "Font, s ktorým mám začať; napr. 'Serif 27'"
 
-#: gucharmap/unicode-blocks.h:11
+#: gucharmap/unicode-blocks.h:18
 msgid "Basic Latin"
 msgstr "Základná latinka"
 
-#: gucharmap/unicode-blocks.h:12
+#: gucharmap/unicode-blocks.h:19
 msgid "Latin-1 Supplement"
 msgstr "Latinka-1 doplnky"
 
-#: gucharmap/unicode-blocks.h:13
+#: gucharmap/unicode-blocks.h:20
 msgid "Latin Extended-A"
 msgstr "Latinka rozšírená-A"
 
-#: gucharmap/unicode-blocks.h:14
+#: gucharmap/unicode-blocks.h:21
 msgid "Latin Extended-B"
 msgstr "Latinky rozšírená-B"
 
-#: gucharmap/unicode-blocks.h:15
+#: gucharmap/unicode-blocks.h:22
 msgid "IPA Extensions"
 msgstr "Rozšírenia IPA"
 
-#: gucharmap/unicode-blocks.h:16
+#: gucharmap/unicode-blocks.h:23
 msgid "Spacing Modifier Letters"
 msgstr "Medzery upravujúce písmená"
 
-#: gucharmap/unicode-blocks.h:17
+#: gucharmap/unicode-blocks.h:24
 msgid "Combining Diacritical Marks"
 msgstr "Kombinujúce diakritické značky"
 
-#: gucharmap/unicode-blocks.h:18
+#: gucharmap/unicode-blocks.h:25
 msgid "Greek and Coptic"
 msgstr "Grécke a Coptic"
 
-#: gucharmap/unicode-blocks.h:19 gucharmap/unicode-scripts.h:21
+#: gucharmap/unicode-blocks.h:26 gucharmap/unicode-scripts.h:22
 msgid "Cyrillic"
 msgstr "Cyrilika"
 
-#: gucharmap/unicode-blocks.h:20
+#: gucharmap/unicode-blocks.h:27
 msgid "Cyrillic Supplementary"
 msgstr "Cyrilika doplnky"
 
-#: gucharmap/unicode-blocks.h:21 gucharmap/unicode-scripts.h:13
+#: gucharmap/unicode-blocks.h:28 gucharmap/unicode-scripts.h:13
 msgid "Armenian"
 msgstr "Arménsky"
 
-#: gucharmap/unicode-blocks.h:22 gucharmap/unicode-scripts.h:33
+#: gucharmap/unicode-blocks.h:29 gucharmap/unicode-scripts.h:34
 msgid "Hebrew"
 msgstr "Hebrejský"
 
-#: gucharmap/unicode-blocks.h:23 gucharmap/unicode-scripts.h:12
+#: gucharmap/unicode-blocks.h:30 gucharmap/unicode-scripts.h:12
 msgid "Arabic"
 msgstr "Arabský"
 
-#: gucharmap/unicode-blocks.h:24 gucharmap/unicode-scripts.h:53
+#: gucharmap/unicode-blocks.h:31 gucharmap/unicode-scripts.h:54
 msgid "Syriac"
 msgstr "Syriac"
 
-#: gucharmap/unicode-blocks.h:25 gucharmap/unicode-scripts.h:59
+#: gucharmap/unicode-blocks.h:32 gucharmap/unicode-scripts.h:60
 msgid "Thaana"
 msgstr "Thaana"
 
-#: gucharmap/unicode-blocks.h:26 gucharmap/unicode-scripts.h:23
+#: gucharmap/unicode-blocks.h:33 gucharmap/unicode-scripts.h:24
 msgid "Devanagari"
 msgstr "Devanagari"
 
-#: gucharmap/unicode-blocks.h:27 gucharmap/unicode-scripts.h:14
+#: gucharmap/unicode-blocks.h:34 gucharmap/unicode-scripts.h:14
 msgid "Bengali"
 msgstr "Bengálsky"
 
-#: gucharmap/unicode-blocks.h:28 gucharmap/unicode-scripts.h:29
+#: gucharmap/unicode-blocks.h:35 gucharmap/unicode-scripts.h:30
 msgid "Gurmukhi"
 msgstr "Gurmukhi"
 
-#: gucharmap/unicode-blocks.h:29 gucharmap/unicode-scripts.h:28
+#: gucharmap/unicode-blocks.h:36 gucharmap/unicode-scripts.h:29
 msgid "Gujarati"
 msgstr "Gujarati"
 
-#: gucharmap/unicode-blocks.h:30 gucharmap/unicode-scripts.h:48
+#: gucharmap/unicode-blocks.h:37 gucharmap/unicode-scripts.h:49
 msgid "Oriya"
 msgstr "Oriya"
 
-#: gucharmap/unicode-blocks.h:31 gucharmap/unicode-scripts.h:57
+#: gucharmap/unicode-blocks.h:38 gucharmap/unicode-scripts.h:58
 msgid "Tamil"
 msgstr "Tamilský"
 
-#: gucharmap/unicode-blocks.h:32 gucharmap/unicode-scripts.h:58
+#: gucharmap/unicode-blocks.h:39 gucharmap/unicode-scripts.h:59
 msgid "Telugu"
 msgstr "Telugu"
 
-#: gucharmap/unicode-blocks.h:33 gucharmap/unicode-scripts.h:36
+#: gucharmap/unicode-blocks.h:40 gucharmap/unicode-scripts.h:37
 msgid "Kannada"
 msgstr "Kannada"
 
-#: gucharmap/unicode-blocks.h:34 gucharmap/unicode-scripts.h:43
+#: gucharmap/unicode-blocks.h:41 gucharmap/unicode-scripts.h:44
 msgid "Malayalam"
 msgstr "Malayalam"
 
-#: gucharmap/unicode-blocks.h:35 gucharmap/unicode-scripts.h:52
+#: gucharmap/unicode-blocks.h:42 gucharmap/unicode-scripts.h:53
 msgid "Sinhala"
 msgstr "Sinhala"
 
-#: gucharmap/unicode-blocks.h:36 gucharmap/unicode-scripts.h:60
+#: gucharmap/unicode-blocks.h:43 gucharmap/unicode-scripts.h:61
 msgid "Thai"
 msgstr "Thajský"
 
-#: gucharmap/unicode-blocks.h:37 gucharmap/unicode-scripts.h:39
+#: gucharmap/unicode-blocks.h:44 gucharmap/unicode-scripts.h:40
 msgid "Lao"
 msgstr "Laoský"
 
-#: gucharmap/unicode-blocks.h:38 gucharmap/unicode-scripts.h:61
+#: gucharmap/unicode-blocks.h:45 gucharmap/unicode-scripts.h:62
 msgid "Tibetan"
 msgstr "Tibetský"
 
-#: gucharmap/unicode-blocks.h:39 gucharmap/unicode-scripts.h:45
+#: gucharmap/unicode-blocks.h:46 gucharmap/unicode-scripts.h:46
 msgid "Myanmar"
 msgstr "Myanmarský"
 
-#: gucharmap/unicode-blocks.h:40 gucharmap/unicode-scripts.h:25
+#: gucharmap/unicode-blocks.h:47 gucharmap/unicode-scripts.h:26
 msgid "Georgian"
 msgstr "Gruzínsky"
 
-#: gucharmap/unicode-blocks.h:41
+#: gucharmap/unicode-blocks.h:48
 msgid "Hangul Jamo"
 msgstr "Hangul Jamo"
 
-#: gucharmap/unicode-blocks.h:42 gucharmap/unicode-scripts.h:24
+#: gucharmap/unicode-blocks.h:49 gucharmap/unicode-scripts.h:25
 msgid "Ethiopic"
 msgstr "Etiópsky"
 
-#: gucharmap/unicode-blocks.h:43 gucharmap/unicode-scripts.h:19
+#: gucharmap/unicode-blocks.h:50 gucharmap/unicode-scripts.h:19
 msgid "Cherokee"
 msgstr "Cherokee"
 
-#: gucharmap/unicode-blocks.h:44
+#: gucharmap/unicode-blocks.h:51
 msgid "Unified Canadian Aboriginal Syllabics"
 msgstr "Unifikované kanadské domorodé slabiky"
 
-#: gucharmap/unicode-blocks.h:45 gucharmap/unicode-scripts.h:46
+#: gucharmap/unicode-blocks.h:52 gucharmap/unicode-scripts.h:47
 msgid "Ogham"
 msgstr "Ogham"
 
-#: gucharmap/unicode-blocks.h:46 gucharmap/unicode-scripts.h:50
+#: gucharmap/unicode-blocks.h:53 gucharmap/unicode-scripts.h:51
 msgid "Runic"
 msgstr "Runy"
 
-#: gucharmap/unicode-blocks.h:47 gucharmap/unicode-scripts.h:54
+#: gucharmap/unicode-blocks.h:54 gucharmap/unicode-scripts.h:55
 msgid "Tagalog"
 msgstr "Tagalog"
 
-#: gucharmap/unicode-blocks.h:48 gucharmap/unicode-scripts.h:32
+#: gucharmap/unicode-blocks.h:55 gucharmap/unicode-scripts.h:33
 msgid "Hanunoo"
 msgstr "Hanunoo"
 
-#: gucharmap/unicode-blocks.h:49 gucharmap/unicode-scripts.h:17
+#: gucharmap/unicode-blocks.h:56 gucharmap/unicode-scripts.h:17
 msgid "Buhid"
 msgstr "Buhid"
 
-#: gucharmap/unicode-blocks.h:50 gucharmap/unicode-scripts.h:55
+#: gucharmap/unicode-blocks.h:57 gucharmap/unicode-scripts.h:56
 msgid "Tagbanwa"
 msgstr "Tagbanwa"
 
-#: gucharmap/unicode-blocks.h:51 gucharmap/unicode-scripts.h:38
+#: gucharmap/unicode-blocks.h:58 gucharmap/unicode-scripts.h:39
 msgid "Khmer"
 msgstr "Kmérsky"
 
-#: gucharmap/unicode-blocks.h:52 gucharmap/unicode-scripts.h:44
+#: gucharmap/unicode-blocks.h:59 gucharmap/unicode-scripts.h:45
 msgid "Mongolian"
 msgstr "Mongolský"
 
-#: gucharmap/unicode-blocks.h:53 gucharmap/unicode-scripts.h:41
+#: gucharmap/unicode-blocks.h:60 gucharmap/unicode-scripts.h:42
 msgid "Limbu"
 msgstr "Limbu"
 
-#: gucharmap/unicode-blocks.h:54 gucharmap/unicode-scripts.h:56
+#: gucharmap/unicode-blocks.h:61 gucharmap/unicode-scripts.h:57
 msgid "Tai Le"
 msgstr "Tai Le"
 
-#: gucharmap/unicode-blocks.h:55
+#: gucharmap/unicode-blocks.h:62
 msgid "Khmer Symbols"
 msgstr "Kmérske symboly"
 
-#: gucharmap/unicode-blocks.h:56
+#: gucharmap/unicode-blocks.h:63
 msgid "Phonetic Extensions"
 msgstr "Fonetické rozšírenia"
 
-#: gucharmap/unicode-blocks.h:57
+#: gucharmap/unicode-blocks.h:64
 msgid "Latin Extended Additional"
 msgstr "Latinka rozšírená prídavná"
 
-#: gucharmap/unicode-blocks.h:58
+#: gucharmap/unicode-blocks.h:65
 msgid "Greek Extended"
 msgstr "Grécke rozšírené"
 
-#: gucharmap/unicode-blocks.h:59
+#: gucharmap/unicode-blocks.h:66
 msgid "General Punctuation"
 msgstr "Všeobecná interpunkcia"
 
-#: gucharmap/unicode-blocks.h:60
+#: gucharmap/unicode-blocks.h:67
 msgid "Superscripts and Subscripts"
 msgstr "Horné a dolné indexy"
 
-#: gucharmap/unicode-blocks.h:61
+#: gucharmap/unicode-blocks.h:68
 msgid "Currency Symbols"
 msgstr "Symboly meny"
 
-#: gucharmap/unicode-blocks.h:62
+#: gucharmap/unicode-blocks.h:69
 msgid "Combining Diacritical Marks for Symbols"
 msgstr "Kombinácia diakritických značiek a symbolov"
 
-#: gucharmap/unicode-blocks.h:63
+#: gucharmap/unicode-blocks.h:70
 msgid "Letterlike Symbols"
 msgstr "Symboly ako písmená"
 
-#: gucharmap/unicode-blocks.h:64
+#: gucharmap/unicode-blocks.h:71
 msgid "Number Forms"
 msgstr "Číselné formy"
 
-#: gucharmap/unicode-blocks.h:65
+#: gucharmap/unicode-blocks.h:72
 msgid "Arrows"
 msgstr "Šípky"
 
-#: gucharmap/unicode-blocks.h:66
+#: gucharmap/unicode-blocks.h:73
 msgid "Mathematical Operators"
 msgstr "Matematické operátory"
 
-#: gucharmap/unicode-blocks.h:67
+#: gucharmap/unicode-blocks.h:74
 msgid "Miscellaneous Technical"
 msgstr "Rôzne technické"
 
-#: gucharmap/unicode-blocks.h:68
+#: gucharmap/unicode-blocks.h:75
 msgid "Control Pictures"
 msgstr "Riadiace obrázky"
 
-#: gucharmap/unicode-blocks.h:69
+#: gucharmap/unicode-blocks.h:76
 msgid "Optical Character Recognition"
 msgstr "Optické rozlišovanie znakov"
 
-#: gucharmap/unicode-blocks.h:70
+#: gucharmap/unicode-blocks.h:77
 msgid "Enclosed Alphanumerics"
 msgstr "Vložené alfanumerické"
 
-#: gucharmap/unicode-blocks.h:71
+#: gucharmap/unicode-blocks.h:78
 msgid "Box Drawing"
 msgstr "Kreslenie okienok"
 
-#: gucharmap/unicode-blocks.h:72
+#: gucharmap/unicode-blocks.h:79
 msgid "Block Elements"
 msgstr "Blokové elementy"
 
-#: gucharmap/unicode-blocks.h:73
+#: gucharmap/unicode-blocks.h:80
 msgid "Geometric Shapes"
 msgstr "Geometrické tvary"
 
-#: gucharmap/unicode-blocks.h:74
+#: gucharmap/unicode-blocks.h:81
 msgid "Miscellaneous Symbols"
 msgstr "Rôzne symboly"
 
-#: gucharmap/unicode-blocks.h:75
+#: gucharmap/unicode-blocks.h:82
 msgid "Dingbats"
 msgstr "Dingbats"
 
-#: gucharmap/unicode-blocks.h:76
+#: gucharmap/unicode-blocks.h:83
 msgid "Miscellaneous Mathematical Symbols-A"
 msgstr "Rôzne matematické symboly-A"
 
-#: gucharmap/unicode-blocks.h:77
+#: gucharmap/unicode-blocks.h:84
 msgid "Supplemental Arrows-A"
 msgstr "Doplnkové šípky-A"
 
-#: gucharmap/unicode-blocks.h:78
+#: gucharmap/unicode-blocks.h:85
 msgid "Braille Patterns"
 msgstr "Braillove vzory"
 
-#: gucharmap/unicode-blocks.h:79
+#: gucharmap/unicode-blocks.h:86
 msgid "Supplemental Arrows-B"
 msgstr "Doplnkové šípky-B"
 
-#: gucharmap/unicode-blocks.h:80
+#: gucharmap/unicode-blocks.h:87
 msgid "Miscellaneous Mathematical Symbols-B"
 msgstr "Rôzne matematické symboly-B"
 
-#: gucharmap/unicode-blocks.h:81
+#: gucharmap/unicode-blocks.h:88
 msgid "Supplemental Mathematical Operators"
 msgstr "Doplnkové matematické operátory"
 
-#: gucharmap/unicode-blocks.h:82
+#: gucharmap/unicode-blocks.h:89
 msgid "Miscellaneous Symbols and Arrows"
 msgstr "Rôzne symboly a šípky"
 
-#: gucharmap/unicode-blocks.h:83
+#: gucharmap/unicode-blocks.h:90
 msgid "CJK Radicals Supplement"
 msgstr "CJK kmeňové doplnky"
 
-#: gucharmap/unicode-blocks.h:84
+#: gucharmap/unicode-blocks.h:91
 msgid "Kangxi Radicals"
 msgstr "Kangxi kmene"
 
-#: gucharmap/unicode-blocks.h:85
+#: gucharmap/unicode-blocks.h:92
 msgid "Ideographic Description Characters"
 msgstr "Znaky popisujúce symboly"
 
-#: gucharmap/unicode-blocks.h:86
+#: gucharmap/unicode-blocks.h:93
 msgid "CJK Symbols and Punctuation"
 msgstr "CJK symboly a interpunkcia"
 
-#: gucharmap/unicode-blocks.h:87 gucharmap/unicode-scripts.h:34
+#: gucharmap/unicode-blocks.h:94 gucharmap/unicode-scripts.h:35
 msgid "Hiragana"
 msgstr "Hiragana"
 
-#: gucharmap/unicode-blocks.h:88 gucharmap/unicode-scripts.h:37
+#: gucharmap/unicode-blocks.h:95 gucharmap/unicode-scripts.h:38
 msgid "Katakana"
 msgstr "Katakana"
 
-#: gucharmap/unicode-blocks.h:89 gucharmap/unicode-scripts.h:15
+#: gucharmap/unicode-blocks.h:96 gucharmap/unicode-scripts.h:15
 msgid "Bopomofo"
 msgstr "Bopomofo"
 
-#: gucharmap/unicode-blocks.h:90
+#: gucharmap/unicode-blocks.h:97
 msgid "Hangul Compatibility Jamo"
 msgstr "Hangul kompatibilné Jamo"
 
-#: gucharmap/unicode-blocks.h:91
+#: gucharmap/unicode-blocks.h:98
 msgid "Kanbun"
 msgstr "Kanbun"
 
-#: gucharmap/unicode-blocks.h:92
+#: gucharmap/unicode-blocks.h:99
 msgid "Bopomofo Extended"
 msgstr "Bopomofo rozšírené"
 
-#: gucharmap/unicode-blocks.h:93
+#: gucharmap/unicode-blocks.h:100
 msgid "Katakana Phonetic Extensions"
 msgstr "Katakana fonetické rozšírenia"
 
-#: gucharmap/unicode-blocks.h:94
+#: gucharmap/unicode-blocks.h:101
 msgid "Enclosed CJK Letters and Months"
 msgstr "Vložené CJK písmená a mesiace"
 
-#: gucharmap/unicode-blocks.h:95
+#: gucharmap/unicode-blocks.h:102
 msgid "CJK Compatibility"
 msgstr "CJK kompatibilita"
 
-#: gucharmap/unicode-blocks.h:96
+#: gucharmap/unicode-blocks.h:103
 msgid "CJK Unified Ideographs Extension A"
 msgstr "CJK unifikované symboly rozšírenie A"
 
-#: gucharmap/unicode-blocks.h:97
+#: gucharmap/unicode-blocks.h:104
 msgid "Yijing Hexagram Symbols"
 msgstr "Yijing hexagram symboly"
 
-#: gucharmap/unicode-blocks.h:98
+#: gucharmap/unicode-blocks.h:105
 msgid "CJK Unified Ideographs"
 msgstr "CJK unifikované symboly"
 
-#: gucharmap/unicode-blocks.h:99
+#: gucharmap/unicode-blocks.h:106
 msgid "Yi Syllables"
 msgstr "Yi slabiky"
 
-#: gucharmap/unicode-blocks.h:100
+#: gucharmap/unicode-blocks.h:107
 msgid "Yi Radicals"
 msgstr "Yi kmene"
 
-#: gucharmap/unicode-blocks.h:101
+#: gucharmap/unicode-blocks.h:108
 msgid "Hangul Syllables"
 msgstr "Hangul slabiky"
 
-#: gucharmap/unicode-blocks.h:102
+#: gucharmap/unicode-blocks.h:109
 msgid "High Surrogates"
 msgstr "Vyššie náhradné"
 
-#: gucharmap/unicode-blocks.h:103
+#: gucharmap/unicode-blocks.h:110
 msgid "High Private Use Surrogates"
 msgstr "Vyššie náhradné pre súkromné použitie"
 
-#: gucharmap/unicode-blocks.h:104
+#: gucharmap/unicode-blocks.h:111
 msgid "Low Surrogates"
 msgstr "Nižšie náhradné"
 
-#: gucharmap/unicode-blocks.h:105
+#: gucharmap/unicode-blocks.h:112
 msgid "Private Use Area"
 msgstr "Oblasť pre súkromné použitie"
 
-#: gucharmap/unicode-blocks.h:106
+#: gucharmap/unicode-blocks.h:113
 msgid "CJK Compatibility Ideographs"
 msgstr "CJK kompatibilné znaky"
 
-#: gucharmap/unicode-blocks.h:107
+#: gucharmap/unicode-blocks.h:114
 msgid "Alphabetic Presentation Forms"
 msgstr "Formy na preznetáciu abecedy"
 
-#: gucharmap/unicode-blocks.h:108
+#: gucharmap/unicode-blocks.h:115
 msgid "Arabic Presentation Forms-A"
 msgstr "Arabské formy na prezentáciu-Y"
 
-#: gucharmap/unicode-blocks.h:109
+#: gucharmap/unicode-blocks.h:116
 msgid "Variation Selectors"
 msgstr "Vyberače odchýliek"
 
-#: gucharmap/unicode-blocks.h:110
+#: gucharmap/unicode-blocks.h:117
 msgid "Combining Half Marks"
 msgstr "Polovičné značky na kombinovanie"
 
-#: gucharmap/unicode-blocks.h:111
+#: gucharmap/unicode-blocks.h:118
 msgid "CJK Compatibility Forms"
 msgstr "CJK kompatibilné formy"
 
-#: gucharmap/unicode-blocks.h:112
+#: gucharmap/unicode-blocks.h:119
 msgid "Small Form Variants"
 msgstr "Varianty malých foriem"
 
-#: gucharmap/unicode-blocks.h:113
+#: gucharmap/unicode-blocks.h:120
 msgid "Arabic Presentation Forms-B"
 msgstr "Arabské formy na prezentáciu-B"
 
-#: gucharmap/unicode-blocks.h:114
+#: gucharmap/unicode-blocks.h:121
 msgid "Halfwidth and Fullwidth Forms"
 msgstr "Pološiroké a plnoširoké formy"
 
-#: gucharmap/unicode-blocks.h:115
+#: gucharmap/unicode-blocks.h:122
 msgid "Specials"
 msgstr "Špeciálne"
 
-#: gucharmap/unicode-blocks.h:116
+#: gucharmap/unicode-blocks.h:123
 msgid "Linear B Syllabary"
 msgstr "Lineárne B slabiky"
 
-#: gucharmap/unicode-blocks.h:117
+#: gucharmap/unicode-blocks.h:124
 msgid "Linear B Ideograms"
 msgstr "Lineárne B symboly"
 
-#: gucharmap/unicode-blocks.h:118
+#: gucharmap/unicode-blocks.h:125
 msgid "Aegean Numbers"
 msgstr "Čísla Aegean"
 
-#: gucharmap/unicode-blocks.h:119 gucharmap/unicode-scripts.h:47
+#: gucharmap/unicode-blocks.h:126 gucharmap/unicode-scripts.h:48
 msgid "Old Italic"
 msgstr "Stará italika"
 
-#: gucharmap/unicode-blocks.h:120 gucharmap/unicode-scripts.h:26
+#: gucharmap/unicode-blocks.h:127 gucharmap/unicode-scripts.h:27
 msgid "Gothic"
 msgstr "Gotické"
 
-#: gucharmap/unicode-blocks.h:121 gucharmap/unicode-scripts.h:62
+#: gucharmap/unicode-blocks.h:128 gucharmap/unicode-scripts.h:63
 msgid "Ugaritic"
 msgstr "Ugaritické"
 
-#: gucharmap/unicode-blocks.h:122 gucharmap/unicode-scripts.h:22
+#: gucharmap/unicode-blocks.h:129 gucharmap/unicode-scripts.h:23
 msgid "Deseret"
 msgstr "Deseret"
 
-#: gucharmap/unicode-blocks.h:123 gucharmap/unicode-scripts.h:51
+#: gucharmap/unicode-blocks.h:130 gucharmap/unicode-scripts.h:52
 msgid "Shavian"
 msgstr "Shavian"
 
-#: gucharmap/unicode-blocks.h:124 gucharmap/unicode-scripts.h:49
+#: gucharmap/unicode-blocks.h:131 gucharmap/unicode-scripts.h:50
 msgid "Osmanya"
 msgstr "Osmanské"
 
-#: gucharmap/unicode-blocks.h:125
+#: gucharmap/unicode-blocks.h:132
 msgid "Cypriot Syllabary"
 msgstr "Cypriot slabiky"
 
-#: gucharmap/unicode-blocks.h:126
+#: gucharmap/unicode-blocks.h:133
 msgid "Byzantine Musical Symbols"
 msgstr "Byzantské hudobné symboly"
 
-#: gucharmap/unicode-blocks.h:127
+#: gucharmap/unicode-blocks.h:134
 msgid "Musical Symbols"
 msgstr "Hudobné symboly"
 
-#: gucharmap/unicode-blocks.h:128
+#: gucharmap/unicode-blocks.h:135
 msgid "Tai Xuan Jing Symbols"
 msgstr "Symboly Tai Xuan Jing"
 
-#: gucharmap/unicode-blocks.h:129
+#: gucharmap/unicode-blocks.h:136
 msgid "Mathematical Alphanumeric Symbols"
 msgstr "Matematické alfanumerické symboly"
 
-#: gucharmap/unicode-blocks.h:130
+#: gucharmap/unicode-blocks.h:137
 msgid "CJK Unified Ideographs Extension B"
 msgstr "CJK unifikované symboly rozšírenie B"
 
-#: gucharmap/unicode-blocks.h:131
+#: gucharmap/unicode-blocks.h:138
 msgid "CJK Compatibility Ideographs Supplement"
 msgstr "CJK kompatibilné náhradné symboly"
 
-#: gucharmap/unicode-blocks.h:132
+#: gucharmap/unicode-blocks.h:139
 msgid "Tags"
 msgstr "Značky"
 
-#: gucharmap/unicode-blocks.h:133
+#: gucharmap/unicode-blocks.h:140
 msgid "Variation Selectors Supplement"
 msgstr "Vyberače odchýliek náhradné"
 
-#: gucharmap/unicode-blocks.h:134
+#: gucharmap/unicode-blocks.h:141
 msgid "Supplementary Private Use Area-A"
 msgstr "Oblasť náhrad pre súkromné použitie-A"
 
-#: gucharmap/unicode-blocks.h:135
+#: gucharmap/unicode-blocks.h:142
 msgid "Supplementary Private Use Area-B"
 msgstr "Oblasť náhrad pre súkromné použitie-B"
 
@@ -921,80 +902,46 @@ msgstr "Braillove"
 msgid "Canadian Aboriginal"
 msgstr "Kanadské domorodé"
 
-#: gucharmap/unicode-scripts.h:20
+#: gucharmap/unicode-scripts.h:21
 msgid "Cypriot"
 msgstr "Cypriot"
 
-#: gucharmap/unicode-scripts.h:27
+#: gucharmap/unicode-scripts.h:28
 msgid "Greek"
 msgstr "Grécke"
 
-#: gucharmap/unicode-scripts.h:30
+#: gucharmap/unicode-scripts.h:31
 msgid "Han"
 msgstr "Han"
 
-#: gucharmap/unicode-scripts.h:31
+#: gucharmap/unicode-scripts.h:32
 msgid "Hangul"
 msgstr "Hangul"
 
-#: gucharmap/unicode-scripts.h:35
+#: gucharmap/unicode-scripts.h:36
 msgid "Inherited"
 msgstr "Zdedené"
 
-#: gucharmap/unicode-scripts.h:40
+#: gucharmap/unicode-scripts.h:41
 msgid "Latin"
 msgstr "Latinka"
 
-#: gucharmap/unicode-scripts.h:42
+#: gucharmap/unicode-scripts.h:43
 msgid "Linear B"
 msgstr "Lineárne B"
 
-#: gucharmap/unicode-scripts.h:63
+#: gucharmap/unicode-scripts.h:64
 msgid "Yi"
 msgstr "Yi"
 
-#~ msgid "Unicode Character Map"
-#~ msgstr "Mapa znakov Unicode"
+#: gucharmap/gucharmap-block-chapters.c:61
+msgid "All"
+msgstr "Všetko"
 
-#~ msgid "_Bold"
-#~ msgstr "_Polotučné"
+#: gucharmap/gucharmap-block-chapters.c:79
+msgid "Unicode Block"
+msgstr "Blok Unicode"
 
-#~ msgid "_Italic"
-#~ msgstr "_Italika"
-
-#~ msgid "HANGUL SYLLABLE %s%s%s"
-#~ msgstr "HANGULSKÁ SLABIKA %s%s%s"
-
-#~ msgid "<CJK Ideograph Extension A>"
-#~ msgstr "<CJK symbol rozšírenie A>"
-
-#~ msgid "<CJK Ideograph>"
-#~ msgstr "<CJK symbol>"
-
-#~ msgid "<Low Surrogate, Last>"
-#~ msgstr "<Nižšie náhradné, posledné>"
-
-#~ msgid "<CJK Ideograph Extension B>"
-#~ msgstr "<CJK symbol rozšírenie B>"
-
-#~ msgid ""
-#~ "Not a valid code point to jump to. Must be a hexadecimal number between 0 "
-#~ "and %4.4X."
-#~ msgstr ""
-#~ "Nie je platný kódový bod, na ktorý mám skočiť. Musí to byť šestnástkové "
-#~ "číslo medzi 0 a %4.4X."
-
-#~ msgid "Jump to Unicode Code Point"
-#~ msgstr "Skočiť na kódový bod Unicode"
-
-#~ msgid "_Enter hexadecimal Unicode code point:"
-#~ msgstr "_Zadajte šestnástkový kódový bod Unicode:"
-
-#~ msgid "Code _Point..."
-#~ msgstr "Kódový _bod..."
-
-#~ msgid "Back"
-#~ msgstr "Späť"
-
-#~ msgid "Forward"
-#~ msgstr "Dopredu"
+#: gucharmap/gucharmap-script-chapters.c:77
+msgid "Script"
+msgstr "Písmo"
