@@ -1,0 +1,197 @@
+Dear translators,
+
+Clarification of certain strings contained herein.
+
+Noah
+
+
+Date: Mon, 28 Jul 2003 11:38:20 -0400
+From: Noah Levitt 
+To: Telsa Gwynne 
+Subject: Re: How to translate some of the gucharmap strings?
+
+Hey Telsa,
+
+These are good questions. I'm surprised other translators
+haven't brought these up before. The short answer is, most
+of these terms are technical Unicode terms. I'll try to put
+some comments in the source files based on these notes.
+
+On Mon, Jul 28, 2003 at  9:55:48 +0100, Telsa Gwynne wrote:
+> 
+> gucharmap has a collection of strings which I suspect may cause 
+> trouble. There are no notes for translators in the po file (which 
+> some people do). Can I glean some explanations from you, before we
+> do Terrible Things? 
+[...]
+> 
+> These are the strings I don't understand.
+> 
+> #: gucharmap/gucharmap-charmap.c:397
+> msgid "Canonical decomposition:"
+> msgstr ""
+> 
+> (I have visions of this coming out as "Biblical falling-apart" or something
+> at the moment: is this "taking apart" sort of decomposition rather than
+> "it's falling apart by itself"?) 
+
+It's more like "taking apart". There are characters that can
+be split up into base character + accent pairs, or sometimes
+even further. For example, č = c +  ̌ , that is,
+LATIN LETTER SMALL C WITH CARON = LATIN LETTER SMALL C + COMBINING CARON
+
+> 
+> #: gucharmap/gucharmap-unicode-info.c:157
+> msgid "<Non Private Use High Surrogate>"
+> msgstr ""
+>                                                                                 
+> #: gucharmap/gucharmap-unicode-info.c:159
+> msgid "<Private Use High Surrogate>"
+> msgstr ""
+>                                                                                 
+> #: gucharmap/gucharmap-unicode-info.c:161
+> msgid "<Low Surrogate, Last>"
+> msgstr ""
+> 
+> For the above three, is surrogate something we must translate
+> exactly, or can we use something that means "something in its
+> place" (if we can find a way to say that :)) 
+
+It's rather unfortunate that these terms exist, let alone
+have to be in gucharmap. I don't know how they should be
+translated, so I'll tell you what they mean. 
+
+  Unicode originally implied that the encoding was UCS-2
+  and it initially didn't make any provisions for characters
+  outside the BMP (U+0000 to U+FFFF). When it became clear
+  that more than 64k characters would be needed for certain
+  special applications (historic alphabets and ideographs,
+  mathematical and musical typesetting, etc.), Unicode was
+  turned into a sort of 21-bit character set with possible
+  code points in the range U-00000000 to U-0010FFFF. The
+  2×1024 surrogate characters (U+D800 to U+DFFF) were
+  introduced into the BMP to allow 1024×1024 non-BMP
+  characters to be represented as a sequence of two 16-bit
+  surrogate characters. This way UTF-16 was born, which
+  represents the extended "21-bit" Unicode in a way
+  backwards compatible with UCS-2.
+
+from http://www.cl.cam.ac.uk/~mgk25/unicode.html 
+(BMP = Basic Multilingual Plane, 0000-FFFF) Notice the use
+of the word surrogate in this paragraph. A low surrogate is
+the first half of a 2 * 16bit character, and a high
+surrogate is the second half (in UTF-16 only, which we
+hate-- UTF-8 is God's encoding). Private Use Surrogate just
+means that these particular surrogates map into one of the
+Private Use Areas.
+
+> 
+> #: gucharmap/gucharmap-unicode-info.c:165
+> msgid "<Plane 15 Private Use>"
+> msgstr ""
+>                                                                                 
+> #: gucharmap/gucharmap-unicode-info.c:167
+> msgid "<Plane 16 Private Use>"
+> msgstr ""
+> 
+> For the above two, I take it these are not planes in the air? :) 
+> surfaces, perhaps?
+
+In Unicode, each 16 bit space is called a plane, for some
+reason. 0000-FFFF, 10000-1FFFF, ..., 100000-10FFFF. There
+are 17 planes.
+
+> 
+> #: gucharmap/gucharmap-unicode-info.c:186
+> msgid "Other, Control"
+> msgstr ""
+> 
+> Control as a noun, not a verb? 
+
+Yeah, a noun. This is the same idea as iscntrl() in ctype.h.
+Newline, carriage return, delete, etc are control
+characters.
+
+> 
+> #: gucharmap/gucharmap-window.c:142
+> msgid "Jump to Unicode Code Point"
+> msgstr ""
+> 
+> (and its neighbours in the po file: this is code as in.. well, as _not_
+> in source code, I take it)
+
+Code point just means a number, basically. "Unicode assigns
+a number to every character". That number is the code point.
+
+> 
+> #: gucharmap/gucharmap-window.c:577
+> msgid "Snap Columns to Power of Two"
+> msgstr ""
+> 
+> snap? As in the way metacity has some sort of "snapping"? 
+
+Yes, I think it's the same idea.
+
+> 
+> And these are strings I want to check we give the right sense
+> for:
+> 
+> #: gucharmap/gucharmap-charmap.c:437 gucharmap/gucharmap-table.c:332
+> msgid "[not a printable character]"
+> msgstr ""
+>  -- can we say "character which cannot be printed"? And is this
+> printed on a printer, or displayed on a monitor as well?
+
+Yes, you can say that. Displayed on a monitor as well.
+
+> 
+> #: gucharmap/gucharmap-charmap.c:529
+> msgid "Approximate equivalents:"
+> msgstr ""
+>                                                                                 
+> #: gucharmap/gucharmap-charmap.c:538
+> msgid "Equivalents:"
+> msgstr ""
+>   -- For these, is equivalent the "mathematical" "exactly the same"
+> sort of concept, or something different?
+
+Yeah, I'm pretty sure "exactly the same" works here.
+
+> 
+> #: gucharmap/unicode/unicode_blocks.cI:101
+> msgid "Private Use Area"
+> msgstr ""
+>   -- This is the part of unicode reserved for people to do what they 
+> want with? 
+
+Exactly.
+
+> 
+> #: gucharmap/unicode/unicode_blocks.cI:110
+> msgid "Halfwidth and Fullwidth Forms"
+> msgstr ""
+>  -- forms of... characters? 
+
+Yes. 
+
+Noah
+
+
+Date: Mon, 28 Jul 2003 12:12:54 -0400
+From: Noah Levitt 
+To: Telsa Gwynne 
+Subject: Re: How to translate some of the gucharmap strings?
+
+On Mon, Jul 28, 2003 at 16:50:02 +0100, Telsa Gwynne wrote:
+> 
+> > > #: gucharmap/gucharmap-charmap.c:466
+> > > msgid "Various Useful Representations"
+> > > msgstr ""
+> > 
+
+Ah. Yes, of characters. For example, this section lists the
+numeric entity reference for use in html and xml, e.g.
+&#3278;, and stuff along those lines.
+
+Noah
+
