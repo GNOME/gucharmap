@@ -83,7 +83,7 @@ then
     AC_CHECK_LIB(popt, poptGetNextOpt,, AC_MSG_ERROR([popt is required]))
 
     POPT_LIBS="$LIBS"
-    LIBS=libs_bak
+    LIBS="$libs_bak"
     
     AC_SUBST(POPT_LIBS)
 fi
