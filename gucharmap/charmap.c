@@ -1165,7 +1165,7 @@ make_caption (Charmap *charmap)
   charmap->caption->name = gtk_tree_row_reference_new (
           model, gtk_tree_model_get_path (model, &iter0));
   gtk_tree_store_set (charmap->caption->caption_model, &iter0,
-                      CAPTION_LABEL, _("Unicode name"), -1);
+                      CAPTION_LABEL, _("Name"), -1);
 
   gtk_tree_store_append (charmap->caption->caption_model, &iter0, NULL);
   charmap->caption->codepoint = gtk_tree_row_reference_new (
