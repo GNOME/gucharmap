@@ -352,15 +352,19 @@ set_details (GucharmapCharmap *charmap,
   gtk_text_buffer_set_text (buffer, "", -1);
 
   gtk_text_buffer_get_start_iter (buffer, &iter);
-  gtk_text_buffer_insert (buffer, &iter, "\n", -1);
+  gtk_text_buffer_insert (buffer, &iter, "\n\n", -1);
 
   n = gucharmap_unichar_to_printable_utf8 (uc, buf);
   if (n == 0)
     gtk_text_buffer_insert_with_tags_by_name (
             buffer, &iter, _("[not a printable character]"), -1, NULL);
   else
-    gtk_text_buffer_insert_with_tags_by_name (buffer, &iter, buf, n, 
-                                              "gimongous", NULL);
+    {
+      /* give it some space to breathe */
+      gtk_text_buffer_insert (buffer, &iter, "     ", -1);
+      gtk_text_buffer_insert_with_tags_by_name (buffer, &iter, buf, n, 
+                                                "gimongous", NULL);
+    }
 
   gtk_text_buffer_insert (buffer, &iter, "\n\n", -1);
                                              
@@ -544,34 +548,6 @@ active_char_set (GtkWidget *widget,
 }
 
 
-static GtkWidget *
-make_chartable_page (GucharmapCharmap *charmap)
-{
-  GtkWidget *hpaned;
-  GtkWidget *block_selector;
-  AtkObject *accessib;
-
-  hpaned = gtk_hpaned_new ();
-  gtk_widget_show (hpaned);
-
-  charmap->chartable = GUCHARMAP_TABLE (gucharmap_table_new ());
-  g_signal_connect (G_OBJECT (charmap->chartable), "set-active-char", 
-                    G_CALLBACK (active_char_set), charmap);
-  g_signal_connect_swapped (G_OBJECT (charmap->chartable), "status-message", 
-                            G_CALLBACK (status_message), charmap);
-
-  block_selector = make_unicode_block_selector (charmap);
-  accessib = gtk_widget_get_accessible (block_selector);
-  atk_object_set_name (accessib, _("List of Unicode Blocks"));
-
-  gtk_paned_pack1 (GTK_PANED (hpaned), block_selector, FALSE, TRUE);
-  gtk_paned_pack2 (GTK_PANED (hpaned), GTK_WIDGET (charmap->chartable), 
-                   TRUE, TRUE);
-
-  return hpaned;
-}
-
-
 /* this creates all the named text tags we'll be using in set_details */
 static void
 create_tags (GucharmapCharmap *charmap)
@@ -730,21 +706,45 @@ make_details_page (GucharmapCharmap *charmap)
 }
 
 
-/* does all the initial construction */
+static GtkWidget *
+make_chartable_pane (GucharmapCharmap *charmap)
+{
+  GtkWidget *notebook;
+
+  notebook = gtk_notebook_new ();
+  gtk_widget_show (notebook);
+
+  charmap->chartable = GUCHARMAP_TABLE (gucharmap_table_new ());
+  gtk_widget_show (GTK_WIDGET (charmap->chartable));
+  g_signal_connect (G_OBJECT (charmap->chartable), "set-active-char", 
+                    G_CALLBACK (active_char_set), charmap);
+  g_signal_connect_swapped (G_OBJECT (charmap->chartable), "status-message", 
+                            G_CALLBACK (status_message), charmap);
+
+  gtk_notebook_append_page (
+          GTK_NOTEBOOK (notebook), GTK_WIDGET (charmap->chartable),
+          gtk_label_new_with_mnemonic (_("Characte_r Table")));
+  gtk_notebook_append_page (
+          GTK_NOTEBOOK (notebook), make_details_page (charmap), 
+          gtk_label_new_with_mnemonic (_("Character _Details")));
+
+  return notebook;
+}
+
+
 void
 gucharmap_charmap_init (GucharmapCharmap *charmap)
 {
   AtkObject *accessib;
+  GtkWidget *block_selector;
 
-  accessib = gtk_widget_get_accessible (GTK_WIDGET (charmap));
-  atk_object_set_name (accessib, _("Character Map"));
+  block_selector = make_unicode_block_selector (charmap);
+  accessib = gtk_widget_get_accessible (block_selector);
+  atk_object_set_name (accessib, _("List of Unicode Blocks"));
 
-  gtk_notebook_append_page (
-          GTK_NOTEBOOK (charmap), make_chartable_page (charmap), 
-          gtk_label_new_with_mnemonic (_("Characte_r Table")));
-  gtk_notebook_append_page (
-          GTK_NOTEBOOK (charmap), make_details_page (charmap), 
-          gtk_label_new_with_mnemonic (_("Character _Details")));
+  gtk_paned_pack1 (GTK_PANED (charmap), block_selector, FALSE, TRUE);
+  gtk_paned_pack2 (GTK_PANED (charmap), make_chartable_pane (charmap), 
+                   TRUE, TRUE);
 
   set_active_block (charmap, charmap->chartable->active_char);
   set_details (charmap, charmap->chartable->active_char);
@@ -778,7 +778,7 @@ gucharmap_charmap_get_type (void)
         (GInstanceInitFunc) gucharmap_charmap_init,
       };
 
-      gucharmap_charmap_type = g_type_register_static (GTK_TYPE_NOTEBOOK, 
+      gucharmap_charmap_type = g_type_register_static (GTK_TYPE_HPANED, 
                                                        "GucharmapCharmap", 
                                                        &gucharmap_charmap_info,
                                                        0);

@@ -61,7 +61,7 @@ GucharmapBlockIndex;
 
 struct _GucharmapCharmap
 {
-  GtkNotebook parent;
+  GtkHPaned parent;
 
   GucharmapTable *chartable;
 
@@ -83,7 +83,7 @@ struct _GucharmapCharmap
 
 struct _GucharmapCharmapClass
 {
-  GtkNotebookClass parent_class;
+  GtkHPanedClass parent_class;
 
   void (* status_message) (GucharmapCharmap *charmap, const gchar *message);
 };
