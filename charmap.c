@@ -990,7 +990,7 @@ make_unicode_block_selector (Charmap *charmap)
 static GtkWidget *
 make_caption (Charmap *charmap)
 {
-  GtkWidget *frame;
+  GtkWidget *scrolled_window;
   GtkWidget *table;
 
   /* most of the rest of this is setting up the caption */
@@ -1085,11 +1085,14 @@ make_caption (Charmap *charmap)
   gtk_table_attach_defaults (GTK_TABLE (table), charmap->caption->kJapaneseOn,
                              2, 4, 5, 6);
 
-  /* put this stuff in a frame */
-  frame = gtk_frame_new (NULL);
-  gtk_container_add (GTK_CONTAINER (frame), table);
 
-  return frame;
+  scrolled_window = gtk_scrolled_window_new (NULL, NULL);
+  gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (scrolled_window),
+                                         table);
+  gtk_scrolled_window_set_policy  (GTK_SCROLLED_WINDOW (scrolled_window), 
+                                   GTK_POLICY_AUTOMATIC, GTK_POLICY_NEVER);
+
+  return scrolled_window;
 }
 
 
