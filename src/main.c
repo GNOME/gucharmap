@@ -44,7 +44,12 @@ static GtkWidget *status;
 static GtkWidget *search_status;
 static GtkWidget *text_to_copy_status;
 static GtkWidget *fontsel;
+static GtkWidget *unicode_options_menu_item;
+static GtkWidget *unihan_options_menu_item;
 static GdkPixbuf *icon;
+/* caption_show[CHARMAP_CAPTION_CHARACTER] is ignored; it is always shown */
+static gboolean caption_show[CHARMAP_CAPTION_COUNT];
+
 
 typedef struct 
 {
@@ -94,6 +99,7 @@ expand_collapse (GtkCheckMenuItem *mi, gpointer data)
     charmap_expand_block_selector (CHARMAP (charmap));
   else
     charmap_collapse_block_selector (CHARMAP (charmap));
+
 }
 
 
@@ -101,10 +107,35 @@ expand_collapse (GtkCheckMenuItem *mi, gpointer data)
 static void
 show_hide_unihan (GtkCheckMenuItem *mi, gpointer data)
 {
+  static const CharmapCaption unihan_caption_ids[] = 
+    { 
+      CHARMAP_CAPTION_KDEFINITION,
+      CHARMAP_CAPTION_KMANDARIN,
+      CHARMAP_CAPTION_KJAPANESEON,
+      CHARMAP_CAPTION_KJAPANESEKUN,
+      CHARMAP_CAPTION_KCANTONESE,
+      CHARMAP_CAPTION_KTANG,
+      CHARMAP_CAPTION_KKOREAN,
+    };
+  gint i;
+
   if (gtk_check_menu_item_get_active (mi))
-    charmap_show_unihan (CHARMAP (charmap));
+    {
+      gtk_widget_set_sensitive (unihan_options_menu_item, TRUE);
+
+      /* show the checked unicode captions */
+      for (i = 0;  i < G_N_ELEMENTS (unihan_caption_ids);  i++)
+        if (caption_show[unihan_caption_ids[i]])
+          charmap_show_caption (CHARMAP (charmap), unihan_caption_ids[i]);
+    }
   else
-    charmap_hide_unihan (CHARMAP (charmap));
+    {
+      gtk_widget_set_sensitive (unihan_options_menu_item, FALSE);
+
+      /* hide all the unicode captions */
+      for (i = 0;  i < G_N_ELEMENTS (unihan_caption_ids);  i++)
+        charmap_hide_caption (CHARMAP (charmap), unihan_caption_ids[i]);
+    }
 }
 #endif
 
@@ -112,10 +143,75 @@ show_hide_unihan (GtkCheckMenuItem *mi, gpointer data)
 static void
 show_hide_unicode (GtkCheckMenuItem *mi, gpointer data)
 {
+  static const CharmapCaption unicode_caption_ids[] = 
+    { 
+      CHARMAP_CAPTION_CATEGORY, 
+      CHARMAP_CAPTION_DECOMPOSITION,
+      CHARMAP_CAPTION_UTF8,
+      CHARMAP_CAPTION_OTHER_REPS
+    };
+  gint i;
+
   if (gtk_check_menu_item_get_active (mi))
-    charmap_show_unicode (CHARMAP (charmap));
+    {
+      gtk_widget_set_sensitive (unicode_options_menu_item, TRUE);
+
+      /* show the checked unicode captions */
+      for (i = 0;  i < G_N_ELEMENTS (unicode_caption_ids);  i++)
+        if (caption_show[unicode_caption_ids[i]])
+          charmap_show_caption (CHARMAP (charmap), unicode_caption_ids[i]);
+    }
   else
-    charmap_hide_unicode (CHARMAP (charmap));
+    {
+      gtk_widget_set_sensitive (unicode_options_menu_item, FALSE);
+
+      /* hide all the unicode captions */
+      for (i = 0;  i < G_N_ELEMENTS (unicode_caption_ids);  i++)
+        charmap_hide_caption (CHARMAP (charmap), unicode_caption_ids[i]);
+    }
+}
+
+
+static void
+show_hide_caption (GtkCheckMenuItem *mi, gchar *which_caption)
+{
+  CharmapCaption caption_id = -1;
+
+  if (g_ascii_strcasecmp (which_caption, N_("category")) == 0)
+    caption_id = CHARMAP_CAPTION_CATEGORY;
+  else if (g_ascii_strcasecmp (which_caption, N_("decomposition")) == 0)
+    caption_id = CHARMAP_CAPTION_DECOMPOSITION;
+  else if (g_ascii_strcasecmp (which_caption, N_("utf8")) == 0)
+    caption_id = CHARMAP_CAPTION_UTF8;
+  else if (g_ascii_strcasecmp (which_caption, N_("other_reps")) == 0)
+    caption_id = CHARMAP_CAPTION_OTHER_REPS;
+#if ENABLE_UNIHAN
+  else if (g_ascii_strcasecmp (which_caption, N_("kdefinition")) == 0)
+    caption_id = CHARMAP_CAPTION_KDEFINITION;
+  else if (g_ascii_strcasecmp (which_caption, N_("kmandarin")) == 0)
+    caption_id = CHARMAP_CAPTION_KMANDARIN;
+  else if (g_ascii_strcasecmp (which_caption, N_("kjapaneseon")) == 0)
+    caption_id = CHARMAP_CAPTION_KJAPANESEON;
+  else if (g_ascii_strcasecmp (which_caption, N_("kjapanesekun")) == 0)
+    caption_id = CHARMAP_CAPTION_KJAPANESEKUN;
+  else if (g_ascii_strcasecmp (which_caption, N_("kcantonese")) == 0)
+    caption_id = CHARMAP_CAPTION_KCANTONESE;
+  else if (g_ascii_strcasecmp (which_caption, N_("ktang")) == 0)
+    caption_id = CHARMAP_CAPTION_KTANG;
+  else if (g_ascii_strcasecmp (which_caption, N_("kkorean")) == 0)
+    caption_id = CHARMAP_CAPTION_KKOREAN;
+#endif /* #if ENABLE_UNIHAN */
+
+  if (gtk_check_menu_item_get_active (mi))
+    {
+      caption_show[caption_id] = TRUE;
+      charmap_show_caption (CHARMAP (charmap), caption_id);
+    }
+  else
+    {
+      caption_show[caption_id] = FALSE;
+      charmap_hide_caption (CHARMAP (charmap), caption_id);
+    }
 }
 
 
@@ -303,19 +399,19 @@ do_search (GtkWidget *widget, gpointer data)
   search_text = gtk_entry_get_text (GTK_ENTRY (search_entry));
   switch (charmap_search (CHARMAP (charmap), search_text))
     {
-      case NOT_FOUND:
+      case CHARMAP_NOT_FOUND:
         set_search_status (_("Not found."));
         break;
 
-      case FOUND:
+      case CHARMAP_FOUND:
         set_search_status (_("Found."));
         break;
 
-      case WRAPPED:
+      case CHARMAP_WRAPPED:
         set_search_status (_("Search wrapped."));
         break;
 
-      case NOTHING_TO_SEARCH_FOR:
+      case CHARMAP_NOTHING_TO_SEARCH_FOR:
         set_search_status (_("Nothing to search for."));
         break;
 
@@ -479,6 +575,7 @@ make_menu (GtkWindow *window)
   GtkWidget *goto_menu_item, *help_menu_item;
   GtkWidget *menu_item;
   GtkAccelGroup *accel_group;
+  GtkWidget *unicode_details_menu, *unihan_details_menu;
 
   accel_group = gtk_accel_group_new ();
   gtk_window_add_accel_group (GTK_WINDOW (window), accel_group);
@@ -517,23 +614,6 @@ make_menu (GtkWindow *window)
   /* separator */
   gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), gtk_menu_item_new ());
 
-  menu_item = gtk_check_menu_item_new_with_mnemonic (
-          _("_Unicode Character Details"));
-  g_signal_connect (G_OBJECT (menu_item), "activate",
-                    G_CALLBACK (show_hide_unicode), NULL);
-  gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), menu_item);
-
-#if ENABLE_UNIHAN
-  menu_item = gtk_check_menu_item_new_with_mnemonic (
-          _("_CJK Ideograph Details"));
-  g_signal_connect (G_OBJECT (menu_item), "activate",
-                    G_CALLBACK (show_hide_unihan), NULL);
-  gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), menu_item);
-#endif
-
-  /* separator */
-  gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), gtk_menu_item_new ());
-
   /* ctrl-+ or ctrl-= */
   menu_item = gtk_menu_item_new_with_mnemonic (_("Zoom _In"));
   gtk_widget_add_accelerator (menu_item, "activate", accel_group,
@@ -556,6 +636,130 @@ make_menu (GtkWindow *window)
                     G_CALLBACK (font_smaller), NULL);
   gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), menu_item);
   /* finished making the view menu */
+
+  /* separator */
+  gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), gtk_menu_item_new ());
+
+  menu_item = gtk_check_menu_item_new_with_mnemonic (_("_Unicode Details"));
+  g_signal_connect (G_OBJECT (menu_item), "activate",
+                    G_CALLBACK (show_hide_unicode), NULL);
+  gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), menu_item);
+
+  /* the unicode details submenu */
+  unicode_options_menu_item = gtk_menu_item_new_with_mnemonic (_("Options"));
+  gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), unicode_options_menu_item);
+  gtk_widget_set_sensitive (unicode_options_menu_item, FALSE);
+
+  unicode_details_menu = gtk_menu_new ();
+  gtk_menu_item_set_submenu (GTK_MENU_ITEM (unicode_options_menu_item), 
+                             unicode_details_menu);
+
+  menu_item = gtk_check_menu_item_new_with_mnemonic (_("_Category"));
+  gtk_menu_shell_append (GTK_MENU_SHELL (unicode_details_menu), menu_item);
+  gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item), 
+                                  caption_show[CHARMAP_CAPTION_CATEGORY]);
+  g_signal_connect (G_OBJECT (menu_item), "activate",
+                    G_CALLBACK (show_hide_caption), N_("category"));
+
+  menu_item = gtk_check_menu_item_new_with_mnemonic (
+          _("Canonical _Decomposition"));
+  gtk_menu_shell_append (GTK_MENU_SHELL (unicode_details_menu), menu_item);
+  gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item), 
+                                  caption_show[CHARMAP_CAPTION_DECOMPOSITION]);
+  g_signal_connect (G_OBJECT (menu_item), "activate",
+                    G_CALLBACK (show_hide_caption), N_("decomposition"));
+
+  menu_item = gtk_check_menu_item_new_with_mnemonic (_("_UTF-8"));
+  gtk_menu_shell_append (GTK_MENU_SHELL (unicode_details_menu), menu_item);
+  gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item), 
+                                  caption_show[CHARMAP_CAPTION_UTF8]);
+  g_signal_connect (G_OBJECT (menu_item), "activate",
+                    G_CALLBACK (show_hide_caption), N_("utf8"));
+
+  menu_item = gtk_check_menu_item_new_with_mnemonic (
+          _("_Other Representations"));
+  gtk_menu_shell_append (GTK_MENU_SHELL (unicode_details_menu), menu_item);
+  gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item), 
+                                  caption_show[CHARMAP_CAPTION_OTHER_REPS]);
+  g_signal_connect (G_OBJECT (menu_item), "activate",
+                    G_CALLBACK (show_hide_caption), N_("other_reps"));
+
+#if ENABLE_UNIHAN
+  /* separator */
+  gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), gtk_menu_item_new ());
+
+  menu_item = gtk_check_menu_item_new_with_mnemonic (
+          _("_CJK Ideograph Details"));
+  g_signal_connect (G_OBJECT (menu_item), "activate",
+                    G_CALLBACK (show_hide_unihan), NULL);
+  gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), menu_item);
+
+  /* the unihan details submenu */
+  unihan_options_menu_item = gtk_menu_item_new_with_mnemonic (_("Options"));
+  gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), unihan_options_menu_item);
+  gtk_widget_set_sensitive (unihan_options_menu_item, FALSE);
+
+  unihan_details_menu = gtk_menu_new ();
+  gtk_menu_item_set_submenu (GTK_MENU_ITEM (unihan_options_menu_item), 
+                             unihan_details_menu);
+
+  menu_item = gtk_check_menu_item_new_with_mnemonic (
+          _("CJK Ideograph _Definition"));
+  gtk_menu_shell_append (GTK_MENU_SHELL (unihan_details_menu), menu_item);
+  gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item), 
+                                  caption_show[CHARMAP_CAPTION_KDEFINITION]);
+  g_signal_connect (G_OBJECT (menu_item), "activate",
+                    G_CALLBACK (show_hide_caption), N_("kdefinition"));
+
+  menu_item = gtk_check_menu_item_new_with_mnemonic (
+          _("_Mandarin Pronunciation"));
+  gtk_menu_shell_append (GTK_MENU_SHELL (unihan_details_menu), menu_item);
+  gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item), 
+                                  caption_show[CHARMAP_CAPTION_KMANDARIN]);
+  g_signal_connect (G_OBJECT (menu_item), "activate",
+                    G_CALLBACK (show_hide_caption), N_("kmandarin"));
+
+  menu_item = gtk_check_menu_item_new_with_mnemonic (
+          _("Japanese _On Pronunciation"));
+  gtk_menu_shell_append (GTK_MENU_SHELL (unihan_details_menu), menu_item);
+  gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item), 
+                                  caption_show[CHARMAP_CAPTION_KJAPANESEON]);
+  g_signal_connect (G_OBJECT (menu_item), "activate",
+                    G_CALLBACK (show_hide_caption), N_("kjapaneseon"));
+
+  menu_item = gtk_check_menu_item_new_with_mnemonic (
+          _("_Japanese Kun Pronunciation"));
+  gtk_menu_shell_append (GTK_MENU_SHELL (unihan_details_menu), menu_item);
+  gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item), 
+                                  caption_show[CHARMAP_CAPTION_KJAPANESEKUN]);
+  g_signal_connect (G_OBJECT (menu_item), "activate",
+                    G_CALLBACK (show_hide_caption), N_("kjapanesekun"));
+
+  menu_item = gtk_check_menu_item_new_with_mnemonic (
+          _("_Cantonese Pronunciation"));
+  gtk_menu_shell_append (GTK_MENU_SHELL (unihan_details_menu), menu_item);
+  gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item), 
+                                  caption_show[CHARMAP_CAPTION_KCANTONESE]);
+  g_signal_connect (G_OBJECT (menu_item), "activate",
+                    G_CALLBACK (show_hide_caption), N_("kcantonese"));
+
+  menu_item = gtk_check_menu_item_new_with_mnemonic (
+          _("_Tang Pronunciation"));
+  gtk_menu_shell_append (GTK_MENU_SHELL (unihan_details_menu), menu_item);
+  gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item), 
+                                  caption_show[CHARMAP_CAPTION_KTANG]);
+  g_signal_connect (G_OBJECT (menu_item), "activate",
+                    G_CALLBACK (show_hide_caption), N_("ktang"));
+
+  menu_item = gtk_check_menu_item_new_with_mnemonic (
+          _("_Korean Pronunciation"));
+  gtk_menu_shell_append (GTK_MENU_SHELL (unihan_details_menu), menu_item);
+  gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item), 
+                                  caption_show[CHARMAP_CAPTION_KKOREAN]);
+  g_signal_connect (G_OBJECT (menu_item), "activate",
+                    G_CALLBACK (show_hide_caption), N_("kkorean"));
+
+#endif
 
   /* make the goto menu */
   goto_menu = gtk_menu_new ();
@@ -658,6 +862,14 @@ main (gint argc, gchar **argv)
 
   big_vbox = gtk_vbox_new (FALSE, 0);
   gtk_container_add (GTK_CONTAINER (window), big_vbox);
+
+  /* which captions to show by default, when enabled */
+  caption_show[CHARMAP_CAPTION_CATEGORY] = TRUE;
+  caption_show[CHARMAP_CAPTION_DECOMPOSITION] = TRUE;
+#if ENABLE_UNIHAN
+  caption_show[CHARMAP_CAPTION_KDEFINITION] = TRUE;
+  caption_show[CHARMAP_CAPTION_KMANDARIN] = TRUE;
+#endif
 
   gtk_box_pack_start (GTK_BOX (big_vbox), make_menu (GTK_WINDOW (window)), 
 	              FALSE, FALSE, 0);

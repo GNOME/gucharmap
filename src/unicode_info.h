@@ -32,9 +32,9 @@ typedef struct
   gunichar end;
   const gchar *name;
 }
-unicode_block_t;
+UnicodeBlock;
 
-extern const unicode_block_t unicode_blocks[];
+extern const UnicodeBlock unicode_blocks[];
 
 gint count_blocks (gunichar max);
 

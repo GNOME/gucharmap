@@ -32,10 +32,10 @@ typedef struct
   gunichar index;
   const gchar *name;
 } 
-unicode_data_t;
+UnicodeData;
 
 
-static const unicode_data_t unicode_data[] =
+static const UnicodeData unicode_data[] =
 {
   { 0x0000, "<control>" },
   { 0x0001, "<control>" },
@@ -13920,7 +13920,7 @@ get_unicode_data_name (gunichar uc)
 {
   gint min = 0;
   gint mid;
-  gint max = sizeof (unicode_data) / sizeof (unicode_data_t) - 1;
+  gint max = sizeof (unicode_data) / sizeof (UnicodeData) - 1;
 
   if (uc < unicode_data[0].index || uc > unicode_data[max].index)
     return "";
@@ -13986,7 +13986,7 @@ find_next_substring_match (gunichar start, gunichar unichar_max,
 {
   gint min = 0;
   gint mid = 0;
-  gint max = sizeof (unicode_data) / sizeof (unicode_data_t) - 1;
+  gint max = sizeof (unicode_data) / sizeof (UnicodeData) - 1;
   gint i0;
   gint i;
 
@@ -14010,7 +14010,7 @@ find_next_substring_match (gunichar start, gunichar unichar_max,
     }
 
   /* try substring match on each */
-  max = sizeof (unicode_data) / sizeof (unicode_data_t);
+  max = sizeof (unicode_data) / sizeof (UnicodeData);
   for (i = i0+1;  i != i0;  )
     {
       if (ascii_case_strrstr (unicode_data[i].name, search_text) != NULL)

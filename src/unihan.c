@@ -38,9 +38,9 @@ typedef struct
   const gchar *kJapeneseKun;
   const gchar *kJapaneseOn;
 } 
-unihan_t;
+Unihan;
 
-static const unihan_t unihan[] =
+static const Unihan unihan[] =
 {
   { 0x3400, "(same as 丘) hillock or mound", "JAAU1 KAAU5", "", "", "", "", "" },
   { 0x3401, "to lick; to taste, a mat, bamboo bark", "TIM2", "TIAN3 TIAN4", "", "", "", "" },
@@ -27037,14 +27037,14 @@ static const unihan_t unihan[] =
 
 /* does a binary search; also caches most recent, since it will often be
  * called in succession on the same character */
-static const unihan_t *
+static const Unihan *
 _get_unihan (gunichar uc)
 {
   static gunichar most_recent_searched;
-  static const unihan_t *most_recent_result;
+  static const Unihan *most_recent_result;
   gint min = 0;
   gint mid;
-  gint max = sizeof (unihan) / sizeof (unihan_t) - 1;
+  gint max = sizeof (unihan) / sizeof (Unihan) - 1;
 
   if (uc < unihan[0].index || uc > unihan[max].index)
     return NULL;
@@ -27076,7 +27076,7 @@ _get_unihan (gunichar uc)
 const gchar * 
 get_unicode_kDefinition (gunichar uc)
 {
-  const unihan_t *uh = _get_unihan (uc);
+  const Unihan *uh = _get_unihan (uc);
   if (uh == NULL)
     return "";
   else
@@ -27086,7 +27086,7 @@ get_unicode_kDefinition (gunichar uc)
 const gchar * 
 get_unicode_kCantonese (gunichar uc)
 {
-  const unihan_t *uh = _get_unihan (uc);
+  const Unihan *uh = _get_unihan (uc);
   if (uh == NULL)
     return "";
   else
@@ -27096,7 +27096,7 @@ get_unicode_kCantonese (gunichar uc)
 const gchar * 
 get_unicode_kMandarin (gunichar uc)
 {
-  const unihan_t *uh = _get_unihan (uc);
+  const Unihan *uh = _get_unihan (uc);
   if (uh == NULL)
     return "";
   else
@@ -27106,7 +27106,7 @@ get_unicode_kMandarin (gunichar uc)
 const gchar * 
 get_unicode_kTang (gunichar uc)
 {
-  const unihan_t *uh = _get_unihan (uc);
+  const Unihan *uh = _get_unihan (uc);
   if (uh == NULL)
     return "";
   else
@@ -27116,7 +27116,7 @@ get_unicode_kTang (gunichar uc)
 const gchar * 
 get_unicode_kKorean (gunichar uc)
 {
-  const unihan_t *uh = _get_unihan (uc);
+  const Unihan *uh = _get_unihan (uc);
   if (uh == NULL)
     return "";
   else
@@ -27126,7 +27126,7 @@ get_unicode_kKorean (gunichar uc)
 const gchar * 
 get_unicode_kJapaneseKun (gunichar uc)
 {
-  const unihan_t *uh = _get_unihan (uc);
+  const Unihan *uh = _get_unihan (uc);
   if (uh == NULL)
     return "";
   else
@@ -27136,7 +27136,7 @@ get_unicode_kJapaneseKun (gunichar uc)
 const gchar * 
 get_unicode_kJapaneseOn (gunichar uc)
 {
-  const unihan_t *uh = _get_unihan (uc);
+  const Unihan *uh = _get_unihan (uc);
   if (uh == NULL)
     return "";
   else

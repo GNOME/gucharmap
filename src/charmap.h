@@ -56,25 +56,45 @@ G_BEGIN_DECLS
 typedef struct _Charmap Charmap;
 typedef struct _CharmapClass CharmapClass;
 
-typedef struct _Caption Caption;
-
 
 typedef struct 
 {
   gunichar start;
   GtkTreePath *tree_path;
 } 
-block_index_t;
+BlockIndex;
 
 
 typedef enum
 {
-  NOT_FOUND,
-  FOUND,
-  WRAPPED,
-  NOTHING_TO_SEARCH_FOR
+  CHARMAP_NOT_FOUND,
+  CHARMAP_FOUND,
+  CHARMAP_WRAPPED,
+  CHARMAP_NOTHING_TO_SEARCH_FOR
 }
-charmap_search_result_t;
+CharmapSearchResult;
+
+
+/* the order of the captions */
+typedef enum
+{
+  CHARMAP_CAPTION_CHARACTER = 0,
+  CHARMAP_CAPTION_CATEGORY,
+  CHARMAP_CAPTION_DECOMPOSITION,
+  CHARMAP_CAPTION_UTF8,
+  CHARMAP_CAPTION_OTHER_REPS,
+#if ENABLE_UNIHAN
+  CHARMAP_CAPTION_KDEFINITION,
+  CHARMAP_CAPTION_KMANDARIN,
+  CHARMAP_CAPTION_KJAPANESEON,
+  CHARMAP_CAPTION_KJAPANESEKUN,
+  CHARMAP_CAPTION_KCANTONESE,
+  CHARMAP_CAPTION_KTANG,
+  CHARMAP_CAPTION_KKOREAN,
+#endif
+  CHARMAP_CAPTION_COUNT
+}
+CharmapCaption;
 
 
 struct _Charmap
@@ -100,20 +120,22 @@ struct _Charmap
   gunichar old_page_first_char;
   gunichar old_active_char;
 
-  Caption *caption;
-
   /* the unicode block selection list */
   GtkTreeSelection *block_selection;
   GtkTreeStore *block_selector_model;
   GtkWidget *block_selector_view;
   gulong block_selection_changed_handler_id; 
 
-  block_index_t *block_index;
+  BlockIndex *block_index;
   gint block_index_size;
 
   /* for the scrollbar */
   GtkObject *adjustment; 
   gulong adjustment_changed_handler_id; 
+
+  /* the caption */
+  GtkTreeRowReference *caption_rows[CHARMAP_CAPTION_COUNT];
+  GtkTreeStore *caption_model;
 };
 
 
@@ -126,28 +148,6 @@ struct _CharmapClass
 };
 
 
-struct _Caption
-{
-  GtkTreeStore *caption_model;
-
-  GtkTreeRowReference *character;
-  GtkTreeRowReference *category;
-  GtkTreeRowReference *decomposition;
-  GtkTreeRowReference *utf8;
-  GtkTreeRowReference *other_reps;
-
-#if ENABLE_UNIHAN
-  GtkTreeRowReference *kDefinition;
-  GtkTreeRowReference *kCantonese;
-  GtkTreeRowReference *kKorean;
-  GtkTreeRowReference *kJapaneseOn;
-  GtkTreeRowReference *kJapaneseKun;
-  GtkTreeRowReference *kTang;
-  GtkTreeRowReference *kMandarin;
-#endif
-};
-
-
 GtkType charmap_get_type (void);
 GtkWidget * charmap_new (void);
 void charmap_set_font (Charmap *charmap, gchar *font_name);
@@ -155,12 +155,9 @@ void charmap_identify_clipboard (Charmap *charmap, GtkClipboard *clipboard);
 void charmap_expand_block_selector (Charmap *charmap);
 void charmap_collapse_block_selector (Charmap *charmap);
 void charmap_go_to_character (Charmap *charmap, gunichar uc);
-charmap_search_result_t charmap_search (Charmap *charmap, 
-                                        const gchar *search_text);
-void charmap_show_unihan (Charmap *charmap);
-void charmap_hide_unihan (Charmap *charmap);
-void charmap_show_unicode (Charmap *charmap);
-void charmap_hide_unicode (Charmap *charmap);
+CharmapSearchResult charmap_search (Charmap *charmap, const gchar *search_text);
+void charmap_hide_caption (Charmap *charmap, CharmapCaption caption_id);
+void charmap_show_caption (Charmap *charmap, CharmapCaption caption_id);
 
 
 G_END_DECLS

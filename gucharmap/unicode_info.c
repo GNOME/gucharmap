@@ -144,7 +144,7 @@ get_unicode_category_name (gunichar uc)
 }
 
 
-const unicode_block_t unicode_blocks[] =
+const UnicodeBlock unicode_blocks[] =
 {
   { 0x0000, 0x007F, "Basic Latin" },
   { 0x0080, 0x00FF, "Latin-1 Supplement" },
