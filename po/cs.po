@@ -6,107 +6,151 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap VERSION\n"
-"POT-Creation-Date: 2003-02-04 04:21+0100\n"
-"PO-Revision-Date: 2003-02-04 11:47+0100\n"
+"POT-Creation-Date: 2003-02-05 11:29+0100\n"
+"PO-Revision-Date: 2003-02-05 20:59+0100\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/charmap.c:717
+#: src/charmap.c:699
 msgid "Zoom mode disabled."
 msgstr "Režim zvětšování zakázán."
 
-#: src/charmap.c:1406
+#: src/charmap.c:1388
 msgid "Zoom mode enabled. Press <Esc> to disable zoom."
 msgstr "Režim zvětšování povolen. Zvětšování zakážete stisknutím <Esc>."
 
-#: src/charmap.c:1475
+#: src/charmap.c:1457
 msgid "Zoom mode enabled."
 msgstr "Režim zvětšování povolen."
 
-#: src/charmap.c:1666
-msgid "Character"
-msgstr "Znak"
-
-#: src/charmap.c:1722
+#: src/charmap.c:1693
 msgid "Clipboard is empty."
 msgstr "Schránka je prázdná."
 
-#: src/charmap.c:1724
+#: src/charmap.c:1695
 msgid "There is no selected text."
 msgstr "Není vybrán žádný text."
 
-#: src/charmap.c:1732 src/charmap.c:1936
+#: src/charmap.c:1703 src/charmap.c:1907
 msgid "Unknown character, unable to identify."
 msgstr "Neznámý znak, nemohu jej identifikovat."
 
-#: src/charmap.c:1736 src/charmap.c:1940
+#: src/charmap.c:1707 src/charmap.c:1911
 msgid "Character found."
 msgstr "Znak nalezen."
 
-#: src/charmap.c:2045
+#: src/charmap.c:2016
 msgid "Character Map"
 msgstr "Mapa znaků"
 
-#: src/charmap.c:2060
-msgid "Character Table"
-msgstr "Tabulka znaků"
+#: src/charmap.c:2020
+msgid "Character"
+msgstr "Znak"
 
-#: src/charmap.c:2065
-msgid "Details on the Current Character"
-msgstr "Detaily o aktuálním znaku"
-
-#: src/charmap.c:2076
-msgid "List of Unicode Blocks"
-msgstr "Seznam bloků Unicode"
-
-#: src/charmap.c:2275
+#: src/charmap.c:2021
 msgid "Unicode category"
 msgstr "Kategorie Unicode"
 
-#: src/charmap.c:2285
+#: src/charmap.c:2022
 msgid "Canonical decomposition"
 msgstr "Kanonický rozklad"
 
-#: src/charmap.c:2295
+#: src/charmap.c:2023
 msgid "UTF-8"
 msgstr "UTF-8"
 
-#: src/charmap.c:2305
+#: src/charmap.c:2024
 msgid "Other representations"
 msgstr "Jiné reprezentace"
 
-#: src/charmap.c:2383
+#: src/charmap.c:2026
 msgid "CJK ideograph definition"
 msgstr "Definice ideografu CJK"
 
-#: src/charmap.c:2393
+#: src/charmap.c:2027
 msgid "Mandarin pronunciation"
 msgstr "Výslovnost Mandarin"
 
-#: src/charmap.c:2403
+#: src/charmap.c:2028
 msgid "Japanese On pronunciation"
 msgstr "Japonská výslovnost On"
 
-#: src/charmap.c:2413
+#: src/charmap.c:2029
 msgid "Japanese Kun pronunciation"
 msgstr "Japonská výslovnost Kun"
 
-#: src/charmap.c:2423
+#: src/charmap.c:2030
 msgid "Cantonese pronunciation"
 msgstr "Výslovnost Cantonese"
 
-#: src/charmap.c:2433
+#: src/charmap.c:2031
 msgid "Tang pronunciation"
 msgstr "Výslovnost Tang"
 
-#: src/charmap.c:2443
+#: src/charmap.c:2032
 msgid "Korean pronunciation"
 msgstr "Korejská výslovnost"
 
-#: src/main.c:162
+#: src/charmap.c:2048
+msgid "Character Table"
+msgstr "Tabulka znaků"
+
+#: src/charmap.c:2053
+msgid "Details on the Current Character"
+msgstr "Detaily o aktuálním znaku"
+
+#: src/charmap.c:2064
+msgid "List of Unicode Blocks"
+msgstr "Seznam bloků Unicode"
+
+#: src/main.c:180 src/main.c:662
+msgid "category"
+msgstr "kategorie"
+
+#: src/main.c:182 src/main.c:670
+msgid "decomposition"
+msgstr "rozklad"
+
+#: src/main.c:184 src/main.c:677
+msgid "utf8"
+msgstr "utf8"
+
+#: src/main.c:186 src/main.c:685
+msgid "other_reps"
+msgstr "jiné_repr"
+
+#: src/main.c:189 src/main.c:712
+msgid "kdefinition"
+msgstr "kdefinition"
+
+#: src/main.c:191 src/main.c:720
+msgid "kmandarin"
+msgstr "kmandarin"
+
+#: src/main.c:193 src/main.c:728
+msgid "kjapaneseon"
+msgstr "kjapaneseon"
+
+#: src/main.c:195 src/main.c:736
+msgid "kjapanesekun"
+msgstr "kjapanesekun"
+
+#: src/main.c:197 src/main.c:744
+msgid "kcantonese"
+msgstr "kcantonese"
+
+#: src/main.c:199 src/main.c:752
+msgid "ktang"
+msgstr "ktang"
+
+#: src/main.c:201 src/main.c:760
+msgid "kkorean"
+msgstr "kkorean"
+
+#: src/main.c:261
 #, c-format
 msgid ""
 "Not a valid code point to jump to. Must be a hexadecimal number between 0 "
@@ -115,113 +159,162 @@ msgstr ""
 "Na tento neplatný kód nelze přejít. Musí to být šestnáctkové číslo mezi 0 a %"
 "4.4X."
 
-#: src/main.c:184
+#: src/main.c:283
 msgid "Go to hex code point"
 msgstr "Jít na šestnáctkový kód"
 
-#: src/main.c:205
+#: src/main.c:304
 msgid "_Enter unicode code point"
 msgstr "_Zadejte kód Unicode"
 
-#: src/main.c:249
+#: src/main.c:348
 msgid "The selected code point is not a valid unicode character."
 msgstr "Vybraný kód není platný znak Unicode."
 
-#: src/main.c:280
+#: src/main.c:379
 msgid "Text copied to clipboard."
 msgstr "Text zkopírován do schránky."
 
-#: src/main.c:290
+#: src/main.c:389
 msgid "Text-to-copy entry box cleared."
 msgstr "Pole pro zadání kopírovaného textu vymazáno."
 
-#: src/main.c:304
+#: src/main.c:403
 msgid "Not found."
 msgstr "Nenalezeno."
 
-#: src/main.c:308
+#: src/main.c:407
 msgid "Found."
 msgstr "Nalezeno."
 
-#: src/main.c:312
+#: src/main.c:411
 msgid "Search wrapped."
 msgstr "Hledání začalo od druhého konce."
 
-#: src/main.c:316
+#: src/main.c:415
 msgid "Nothing to search for."
 msgstr "Není co hledat."
 
-#: src/main.c:339
+#: src/main.c:438
 msgid "_Search:"
 msgstr "_Hledat:"
 
-#: src/main.c:357
+#: src/main.c:456
 msgid ""
 "Search for the next occurrence of this string in a character's Unicode name."
 msgstr "Hledat další výskyt tohoto řetězce v Unicode názvu znaku."
 
-#: src/main.c:386
+#: src/main.c:485
 msgid "_Text to copy:"
 msgstr "_Text pro kopírování"
 
-#: src/main.c:405
+#: src/main.c:504
 msgid "Copy to the clipboard."
 msgstr "Kopírovat do schránky"
 
-#: src/main.c:430
+#: src/main.c:529
 msgid "translator_credits"
 msgstr "Miloslav Trmač <mitr@volny.cz>"
 
-#: src/main.c:437 src/main.c:618
+#: src/main.c:536 src/main.c:822
 msgid "Unicode Character Map"
 msgstr "Mapa znaků Unicoe"
 
-#: src/main.c:486
+#: src/main.c:586
 msgid "Char_map"
 msgstr "_Mapa znaků"
 
-#: src/main.c:488
+#: src/main.c:588
 msgid "_View"
 msgstr "_Zobrazit"
 
-#: src/main.c:490
+#: src/main.c:590
 msgid "_Go To"
 msgstr "_Přejít"
 
-#: src/main.c:509
+#: src/main.c:609
 msgid "Expand/Collapse All"
 msgstr "Rozbalit/sbalit vše"
 
-#: src/main.c:518
-msgid "_Unicode Character Details"
-msgstr "Detaily o znaku _Unicode"
-
-#: src/main.c:525
-msgid "_CJK Ideograph Details"
-msgstr "Detaily o ideografu _CJK"
-
 #. ctrl-+ or ctrl-=
-#: src/main.c:535
+#: src/main.c:618
 msgid "Zoom _In"
 msgstr "Z_většit"
 
 #. ctrl--
-#: src/main.c:547
+#: src/main.c:630
 msgid "Zoom _Out"
 msgstr "Z_menšit"
 
+#: src/main.c:643
+msgid "_Unicode Details"
+msgstr "Detaily _Unicode"
+
+#. the unicode details submenu
+#: src/main.c:649 src/main.c:698
+msgid "Options"
+msgstr "Možnosti"
+
+#: src/main.c:657
+msgid "_Category"
+msgstr "_Kategorie"
+
+#: src/main.c:665
+msgid "Canonical _Decomposition"
+msgstr "Kanonický _rozklad"
+
+#: src/main.c:672
+msgid "_UTF-8"
+msgstr "_UTF-8"
+
+#: src/main.c:680
+msgid "_Other Representations"
+msgstr "_Jiné reprezentace"
+
+#: src/main.c:692
+msgid "_CJK Ideograph Details"
+msgstr "Detaily o ideografu _CJK"
+
+#: src/main.c:707
+msgid "CJK Ideograph _Definition"
+msgstr "_Definice ideografu CJK"
+
+#: src/main.c:715
+msgid "_Mandarin Pronunciation"
+msgstr "Výslovnost _Mandarin"
+
+#: src/main.c:723
+msgid "Japanese _On Pronunciation"
+msgstr "Japonská výslovnost _On"
+
+#: src/main.c:731
+msgid "_Japanese Kun Pronunciation"
+msgstr "_Japonská výslovnost Kun"
+
+#: src/main.c:739
+msgid "_Cantonese Pronunciation"
+msgstr "Výslovnost _Cantonese"
+
+#: src/main.c:747
+msgid "_Tang Pronunciation"
+msgstr "Výslovnost _Tang"
+
+#: src/main.c:755
+msgid "_Korean Pronunciation"
+msgstr "_Korejská výslovnost"
+
 #. ctrl-h
-#: src/main.c:563
+#: src/main.c:770
 msgid "_Hex Code Point..."
 msgstr "_Šestnáctkový kód..."
 
 #. ctrl-v
-#: src/main.c:571
+#: src/main.c:778
 msgid "Character in _Clipboard"
 msgstr "Znak ve _schránce"
 
 #. make the help menu
-#: src/main.c:581
+#: src/main.c:788
 msgid "_Help"
 msgstr "_Nápověda"
 
