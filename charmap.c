@@ -104,7 +104,7 @@ calculate_square_dimension_x (PangoFontMetrics *font_metrics)
   debug ("calculate_square_dimension_x\n");
 
   /* XXX: can't get max width for the font, so just use the height */
-  return 2 + (pango_font_metrics_get_ascent (font_metrics) 
+  return 3 + (pango_font_metrics_get_ascent (font_metrics) 
               + pango_font_metrics_get_descent (font_metrics)) 
              / PANGO_SCALE;
 }
@@ -116,7 +116,7 @@ calculate_square_dimension_y (PangoFontMetrics *font_metrics)
 {
   debug ("calculate_square_dimension_y\n");
 
-  return 2 + (pango_font_metrics_get_ascent (font_metrics) 
+  return 5 + (pango_font_metrics_get_ascent (font_metrics) 
               + pango_font_metrics_get_descent (font_metrics)) 
              / PANGO_SCALE;
 }
@@ -144,7 +144,7 @@ calculate_tabulus_dimension_y (PangoFontMetrics *font_metrics)
 static void
 draw_tabulus_pixmap (Charmap *charmap)
 {
-  gint x, y, row, col;
+  gint x, y, row, col, padding_x, padding_y;
   gint square_width, square_height; 
   gint char_width, char_height;
   gint width, height;
@@ -212,12 +212,19 @@ draw_tabulus_pixmap (Charmap *charmap)
                                -1);
 
         pango_layout_get_pixel_size (charmap->pango_layout, 
-                                     &char_width, &char_height);
+                               &char_width, &char_height);
 
+        /* (square_width - char_width)/2 is the smaller half */
+        padding_x = (square_width - char_width) 
+                    - (square_width - char_width)/2;
+        padding_y = (square_height - char_height) 
+                    - (square_height - char_height)/2;
+
+        /* extra +1 is for the uncounted border */
         gdk_draw_layout (
                 charmap->tabulus_pixmap, gc,
-                (square_width+1) * col + (square_width - char_width) / 2, 
-                (square_height+1) * row + (square_height - char_height) / 2, 
+                (square_width+1) * col + 1 + padding_x,
+                (square_height+1) * row + 1 + padding_y,
                 charmap->pango_layout);
       }
 }
