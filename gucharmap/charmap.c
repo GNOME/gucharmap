@@ -1101,6 +1101,7 @@ make_caption (Charmap *charmap)
   GtkTreeViewColumn *column;
   GtkCellRenderer *cell;
   GtkTreeModel *model;
+  GtkWidget *scrolled_window;
   GtkWidget *disclosure;
   GtkWidget *vbox;
 
@@ -1203,18 +1204,30 @@ make_caption (Charmap *charmap)
                                                      "text", CAPTION_VALUE,
                                                      NULL);
   gtk_tree_view_append_column (GTK_TREE_VIEW (tree_view), column);
+
   /* make it "editable" so the value can be copied and pasted */
   g_object_set (G_OBJECT (cell), "editable", TRUE, NULL); 
 
-  vbox = gtk_vbox_new (FALSE, 0);
-  disclosure = cddb_disclosure_new (tree_view, 
+  /* do this so it doesn't manically change size */
+  gtk_cell_renderer_text_set_fixed_height_from_font (
+          GTK_CELL_RENDERER_TEXT (cell), 1);
+
+  scrolled_window = gtk_scrolled_window_new (NULL, NULL);
+  gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (scrolled_window),
+                                         tree_view);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
+                                  GTK_POLICY_ALWAYS, GTK_POLICY_NEVER);
+
+  disclosure = cddb_disclosure_new (scrolled_window, 
                                     _("Details on the current character"), 
                                     NULL);
+
+  vbox = gtk_vbox_new (FALSE, 0);
   gtk_box_pack_start (GTK_BOX (vbox), disclosure, FALSE, FALSE, 0);
-  gtk_box_pack_start (GTK_BOX (vbox), tree_view, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (vbox), scrolled_window, FALSE, FALSE, 0);
 
   gtk_widget_show_all (vbox);
-  gtk_widget_hide (tree_view);
+  gtk_widget_hide (scrolled_window);
 
   return vbox;
 }
