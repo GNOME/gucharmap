@@ -90,6 +90,7 @@ show_available_families (GucharmapMiniFontSelection *fontsel)
   gtk_combo_set_popdown_strings (GTK_COMBO (fontsel->family), family_names);
     
   g_list_free (family_names);
+  g_free (families);
 }
 
 
