@@ -27,7 +27,7 @@
 #include <stdio.h>
 
 
-#if 0
+#if 1
 static void
 debug (const char *format, ...)
 {
@@ -268,6 +268,7 @@ key_press_event (GtkWidget *widget,
   charmap = CHARMAP (callback_data);
   old_active_char = charmap->active_char;
 
+  /* move the cursor depending on which key was pressed */
   switch (event->keyval)
     {
       case GDK_Home: case GDK_KP_Home:
@@ -487,25 +488,38 @@ charmap_set_font (Charmap *charmap, gchar *font_name)
   gint square_dimension;
   PangoFontDescription *font_desc;
 
-  charmap->font_name = font_name;
-  font_desc = pango_font_description_from_string (font_name);
+  if (charmap->font_name != NULL
+      || g_ascii_strcasecmp (charmap->font_name, font_name) != 0)
+    {
+      g_free (charmap->font_name);
+      charmap->font_name = NULL;
+    }
+  else
+    return;
 
-  gtk_widget_modify_font (charmap->tabulus, font_desc);
+    {
+      charmap->font_name = font_name;
+      font_desc = pango_font_description_from_string (font_name);
 
-  charmap->font_metrics = pango_context_get_metrics (
-          gtk_widget_get_pango_context (charmap->tabulus),
-          charmap->tabulus->style->font_desc, NULL);
+      gtk_widget_modify_font (charmap->tabulus, font_desc);
 
-  /* XXX: unref something? */
-  charmap->pango_layout = pango_layout_new (
-          gtk_widget_get_pango_context (charmap->tabulus));
+      charmap->font_metrics = pango_context_get_metrics (
+              gtk_widget_get_pango_context (charmap->tabulus),
+              charmap->tabulus->style->font_desc, NULL);
 
-  /* size the drawing area - the +1 is for the 1-pixel borders*/
-  square_dimension = calculate_square_dimension (charmap->font_metrics);
-  gtk_widget_set_size_request (charmap->tabulus, 
-                               CHARMAP_COLS * (square_dimension + 1) + 1,
-                               CHARMAP_ROWS * (square_dimension + 1) + 1);
+      /* XXX: unref something? */
+      charmap->pango_layout = pango_layout_new (
+              gtk_widget_get_pango_context (charmap->tabulus));
 
-  draw_tabulus_pixmap (charmap);
-  gtk_widget_queue_draw (GTK_WIDGET (charmap->tabulus));
+      /* size the drawing area - the +1 is for the 1-pixel borders*/
+      square_dimension = calculate_square_dimension (charmap->font_metrics);
+      gtk_widget_set_size_request (charmap->tabulus, 
+                                   CHARMAP_COLS * (square_dimension + 1) + 1,
+                                   CHARMAP_ROWS * (square_dimension + 1) + 1);
+
+      draw_tabulus_pixmap (charmap);
+      gtk_widget_queue_draw (GTK_WIDGET (charmap->tabulus));
+    }
 }
+
+
