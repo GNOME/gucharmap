@@ -878,27 +878,30 @@ draw_borders (Charmap *charmap)
 {
   gint x, y, col, row;
 
+  /* dark_gc[GTK_STATE_NORMAL] seems to be what is used to draw the borders
+   * around widgets, so we use it for the lines */
+
   /* vertical lines */
   gdk_draw_line (charmap->chartable_pixmap,
-                 charmap->chartable->style->fg_gc[GTK_STATE_INSENSITIVE], 
+                 charmap->chartable->style->dark_gc[GTK_STATE_NORMAL], 
                  0, 0, 0, charmap->chartable->allocation.height - 1);
   for (col = 0, x = 0;  col < charmap->cols;  col++)
     {
       x += column_width (charmap, col);
       gdk_draw_line (charmap->chartable_pixmap,
-                     charmap->chartable->style->fg_gc[GTK_STATE_INSENSITIVE], 
+                     charmap->chartable->style->dark_gc[GTK_STATE_NORMAL], 
                      x, 0, x, charmap->chartable->allocation.height - 1);
     }
 
   /* horizontal lines */
   gdk_draw_line (charmap->chartable_pixmap,
-                 charmap->chartable->style->fg_gc[GTK_STATE_INSENSITIVE], 
+                 charmap->chartable->style->dark_gc[GTK_STATE_NORMAL], 
                  0, 0, charmap->chartable->allocation.width - 1, 0);
   for (row = 0, y = 0;  row < charmap->rows;  row++)
     {
       y += row_height (charmap, row);
       gdk_draw_line (charmap->chartable_pixmap,
-                     charmap->chartable->style->fg_gc[GTK_STATE_INSENSITIVE], 
+                     charmap->chartable->style->dark_gc[GTK_STATE_NORMAL], 
                      0, y, charmap->chartable->allocation.width - 1, y);
     }
 }
