@@ -26,7 +26,7 @@
 #include <stdio.h>
 
 
-#if 1
+#if 0
 static void
 debug (const char *format, ...)
 {
@@ -69,14 +69,6 @@ draw_tabulus_pixmap (Charmap *charmap)
   GdkGC *gc;
 
   debug ("draw_tabulus_pixmap\n");
-
-  if (charmap->tabulus_pixmap != NULL)
-    gdk_pixmap_unref (charmap->tabulus_pixmap);
-
-  charmap->tabulus_pixmap = gdk_pixmap_new (charmap->tabulus->window,
-                                            charmap->tabulus->allocation.width,
-                                            charmap->tabulus->allocation.height,
-                                            -1);
 
   /* plain background */
   gdk_draw_rectangle (charmap->tabulus_pixmap,
@@ -153,8 +145,14 @@ expose_event (GtkWidget *widget,
   debug ("expose_event\n");
 
   charmap = CHARMAP (callback_data);
+
   if (charmap->tabulus_pixmap == NULL)
-    draw_tabulus_pixmap (charmap);
+    {
+      charmap->tabulus_pixmap = gdk_pixmap_new (
+              charmap->tabulus->window, charmap->tabulus->allocation.width,
+              charmap->tabulus->allocation.height, -1);
+      draw_tabulus_pixmap (charmap);
+    }
 
   gdk_draw_drawable (charmap->tabulus->window,
                      widget->style->fg_gc[GTK_STATE_NORMAL],
@@ -172,53 +170,81 @@ key_press_event (GtkWidget *widget,
                  GdkEventKey *event, 
                  gpointer callback_data)
 {
-    Charmap *charmap;
+  Charmap *charmap;
+  gboolean need_redraw = FALSE;
 
-    debug ("key_press_event\n");
+  debug ("key_press_event\n");
 
-    charmap = CHARMAP (callback_data);
+  charmap = CHARMAP (callback_data);
 
-    switch (event->keyval)
-      {
-        case GDK_Home: case GDK_KP_Home:
-          charmap->active_char = 0x0000;
-          break;
+  switch (event->keyval)
+    {
+      case GDK_Home: case GDK_KP_Home:
+        charmap->active_char = 0x0000;
+        need_redraw = TRUE;
+        need_redraw = TRUE;
+        break;
 
-        case GDK_End: case GDK_KP_End:
-          charmap->active_char = UNICHAR_MAX;
-          break;
+      case GDK_End: case GDK_KP_End:
+        charmap->active_char = UNICHAR_MAX;
+        break;
 
-        case GDK_Up: case GDK_KP_Up: case GDK_k:
-          if (charmap->active_char >= CHARMAP_COLS)
+      case GDK_Up: case GDK_KP_Up: case GDK_k:
+        if (charmap->active_char >= CHARMAP_COLS)
+          {
             charmap->active_char -= CHARMAP_COLS;
-          break;
+            need_redraw = TRUE;
+          }
+        break;
 
-        case GDK_Down: case GDK_KP_Down: case GDK_j:
-          if (charmap->active_char <= UNICHAR_MAX - CHARMAP_COLS)
+      case GDK_Down: case GDK_KP_Down: case GDK_j:
+        if (charmap->active_char <= UNICHAR_MAX - CHARMAP_COLS)
+          {
             charmap->active_char += CHARMAP_COLS;
-          break;
+            need_redraw = TRUE;
+          }
+        break;
 
-        case GDK_Left: case GDK_KP_Left: case GDK_h:
-          if (charmap->active_char > 0)
+      case GDK_Left: case GDK_KP_Left: case GDK_h:
+        if (charmap->active_char > 0)
+          {
             charmap->active_char--;
-          break;
+            need_redraw = TRUE;
+          }
+        break;
 
-        case GDK_Right: case GDK_KP_Right: case GDK_l:
-          if (charmap->active_char < UNICHAR_MAX)
+      case GDK_Right: case GDK_KP_Right: case GDK_l:
+        if (charmap->active_char < UNICHAR_MAX)
+          {
             charmap->active_char++;
-          break;
-      }
+            need_redraw = TRUE;
+          }
+        break;
 
-    /* move to the page with this active char */
-    charmap->page_first_char 
-        = charmap->active_char - (charmap->active_char % 
-                                  (CHARMAP_COLS * CHARMAP_ROWS));
+      default:
+        return FALSE; /* don't redraw */
+    }
 
-    /* redraw pixmap*/
-    gdk_pixmap_unref (charmap->tabulus_pixmap);
-    draw_tabulus_pixmap (charmap);
+  /* move to the page with this active char */
+  charmap->page_first_char 
+      = charmap->active_char - (charmap->active_char % 
+                                (CHARMAP_COLS * CHARMAP_ROWS));
 
-    return FALSE;
+  if (need_redraw)
+    {
+      /* redraw pixmap*/
+      draw_tabulus_pixmap (charmap);
+    
+      /* XXX: send expose event instead? */
+      gdk_draw_drawable (charmap->tabulus->window,
+                         charmap->tabulus->style->fg_gc[GTK_STATE_NORMAL],
+                         charmap->tabulus_pixmap,
+                         0, 0, 0, 0,
+                         charmap->tabulus->allocation.width,
+                         charmap->tabulus->allocation.height);
+    }
+
+  return FALSE;
 }
 
 
