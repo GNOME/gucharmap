@@ -571,6 +571,9 @@ main (gint argc, gchar **argv)
   gtk_widget_show (big_vbox);
   gtk_widget_show (window);
 
+  /* XXX: slightly evil cuz we're not supposed to know about chartable */
+  gtk_widget_grab_focus (CHARMAP (charmap)->chartable);
+
   gtk_main ();
 
   return 0;
