@@ -77,6 +77,7 @@ else
 fi  
 
 GNOMEPKGS=""
+SUB_DIRS="po pixmaps gucharmap"
 if test "x$have_gnome" = "xno" 
 then
     libs_bak="$LIBS"
@@ -90,8 +91,10 @@ then
     AC_SUBST(POPT_LIBS)
 else
     GNOMEPKGS="libgnomeui-2.0 libgnome-2.0"
+    SUB_DIRS="$SUB_DIRS help"
 fi
 AC_SUBST(GNOMEPKGS)
+AC_SUBST(SUB_DIRS)
 
 # checks for funcs 
 AC_CHECK_FUNCS([bind_textdomain_codeset])
