@@ -602,7 +602,7 @@ append_character_to_text_to_copy (GucharmapTable *chartable,
 }
 
 
-static gint
+static void
 edit_copy (GtkWidget *widget, GucharmapWindow *guw)
 {
   /* if nothing is selected, select the whole thing */
@@ -611,8 +611,6 @@ edit_copy (GtkWidget *widget, GucharmapWindow *guw)
     gtk_editable_select_region (GTK_EDITABLE (guw->text_to_copy_entry), 0, -1);
 
   gtk_editable_copy_clipboard (GTK_EDITABLE (guw->text_to_copy_entry));
-
-  return TRUE;
 }
 
 
