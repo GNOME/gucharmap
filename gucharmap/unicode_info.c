@@ -73,10 +73,34 @@ get_hangul_syllable_name (gunichar s)
 gchar *
 get_unicode_name (gunichar uc)
 {
-  if (uc >= 0xac00 && uc <= 0xd7af)
+  if (uc >= 0x3400 && uc <= 0x4DB5)
+    return "<CJK Ideograph Extension A>";
+  else if (uc >= 0x4e00 && uc <= 0x9fa5)
+    return "<CJK Ideograph>";
+  else if (uc >= 0xac00 && uc <= 0xd7af)
     return get_hangul_syllable_name (uc);
+  else if (uc >= 0xD800 && uc <= 0xDB7F) 
+    return "<Non Private Use High Surrogate>";
+  else if (uc >= 0xDB80 && uc <= 0xDBFF) 
+    return "<Private Use High Surrogate>";
+  else if (uc >= 0xDC00 && uc <= 0xDFFF)
+    return "<Low Surrogate, Last>";
+  else if (uc >= 0xE000 && uc <= 0xF8FF) 
+    return "<Private Use>";
+  else if (uc >= 0xF0000 && uc <= 0xFFFFD)
+    return "<Plane 15 Private Use>";
+  else if (uc >= 0x100000 && uc <= 0x10FFFD)
+    return "<Plane 16 Private Use>";
+  else if (uc >= 0x20000 && uc <= 0x2A6D6)
+    return "<CJK Ideograph Extension B>";
   else
-    return get_unicode_data_name (uc);
+    {
+      gchar *x = get_unicode_data_name (uc);
+      if (x == NULL)
+        return "<Undefined>";
+      else
+        return x;
+    }
 }
 
 

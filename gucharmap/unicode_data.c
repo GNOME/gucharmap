@@ -13936,7 +13936,7 @@ get_unicode_data_name (gunichar uc)
         return unicode_data[mid].name;
     }
 
-  return "";
+  return NULL;
 }
 
 
