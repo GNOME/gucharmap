@@ -42,15 +42,6 @@ G_BEGIN_DECLS
 typedef struct _GucharmapCharmap GucharmapCharmap;
 typedef struct _GucharmapCharmapClass GucharmapCharmapClass;
 
-typedef enum
-{
-  GUCHARMAP_NOT_FOUND,
-  GUCHARMAP_FOUND,
-  GUCHARMAP_WRAPPED,
-  GUCHARMAP_NOTHING_TO_SEARCH_FOR
-}
-GucharmapSearchResult;
-
 struct _GucharmapCharmap
 {
   GtkHPaned parent;
@@ -87,12 +78,10 @@ void                  gucharmap_charmap_identify_clipboard (GucharmapCharmap  *c
                                                             GtkClipboard      *clipboard);
 void                  gucharmap_charmap_go_to_character    (GucharmapCharmap  *charmap, 
                                                             gunichar           uc);
-GucharmapSearchResult gucharmap_charmap_search             (GucharmapCharmap  *charmap, 
-                                                            const gchar       *search_text, 
-                                                            gint               direction);
 GucharmapTable *      gucharmap_charmap_get_chartable      (GucharmapCharmap  *charmap);
 void                  gucharmap_charmap_set_chapters       (GucharmapCharmap  *charmap,
                                                             GucharmapChapters *chapters);
+GucharmapChapters *   gucharmap_charmap_get_chapters       (GucharmapCharmap  *charmap);
 
 G_END_DECLS
 

@@ -87,7 +87,7 @@ gucharmap_chapters_get_type ()
 
 /**
  * gucharmap_chapters_get_codepoint_list:
- * @chapters: a #Gucharmap
+ * @chapters: a #GucharmapChapters
  *
  * Creates a new #GucharmapCodepointList representing the characters in the
  * current chapter.
@@ -102,4 +102,35 @@ gucharmap_chapters_get_codepoint_list (GucharmapChapters *chapters)
   g_return_val_if_fail (IS_GUCHARMAP_CHAPTERS (chapters), NULL);
 
   return GUCHARMAP_CHAPTERS_GET_CLASS (chapters)->get_codepoint_list (chapters);
+}
+
+/**
+ * gucharmap_chapters_get_codepoint_list:
+ * @chapters: a #GucharmapChapters
+ *
+ * Return value: a #GucharmapCodepointList representing all the characters
+ * in all the chapters. It should not be modified or freed.
+ **/
+G_CONST_RETURN GucharmapCodepointList * 
+gucharmap_chapters_get_book_codepoint_list (GucharmapChapters *chapters)
+{
+  g_return_val_if_fail (IS_GUCHARMAP_CHAPTERS (chapters), NULL);
+
+  return GUCHARMAP_CHAPTERS_GET_CLASS (chapters)->get_book_codepoint_list (chapters);
+}
+
+/**
+ * gucharmap_chapters_go_to_character:
+ * @chapters: a #GucharmapChapters
+ * @wc: a character
+ *
+ * Return value: %TRUE on success, %FALSE on failure.
+ **/
+gboolean
+gucharmap_chapters_go_to_character (GucharmapChapters *chapters, 
+                                    gunichar           wc)
+{
+  g_return_val_if_fail (IS_GUCHARMAP_CHAPTERS (chapters), FALSE);
+
+  return GUCHARMAP_CHAPTERS_GET_CLASS (chapters)->go_to_character (chapters, wc);
 }

@@ -58,6 +58,8 @@ gboolean                 gucharmap_script_codepoint_list_set_script     (Gucharm
 	                                                                 const gchar                   *script);
 gboolean                 gucharmap_script_codepoint_list_set_scripts    (GucharmapScriptCodepointList  *list,
 	                                                                 const gchar                  **scripts);
+gboolean                 gucharmap_script_codepoint_list_append_script  (GucharmapScriptCodepointList  *list,
+                                                                         const gchar                   *script);
 /* XXX: gucharmap_script_codepoint_list_get_script? seems unnecessary */
 
 G_END_DECLS

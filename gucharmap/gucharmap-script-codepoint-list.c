@@ -42,34 +42,6 @@ struct _ScriptCodepointListPrivate
             (G_TYPE_INSTANCE_GET_PRIVATE ((o), gucharmap_script_codepoint_list_get_type (), \
                                           ScriptCodepointListPrivate))
 
-#if 0
-G_CONST_RETURN gchar *
-gucharmap_get_script_for_char (gunichar wc)
-{
-  gint min = 0;
-  gint mid;
-  gint max = sizeof (unicode_scripts) / sizeof (UnicodeScript) - 1;
-
-  if (!gucharmap_unichar_isdefined (wc))
-    return NULL;
-  
-  while (max >= min) 
-    {
-      mid = (min + max) / 2;
-      if (wc > unicode_scripts[mid].end)
-        min = mid + 1;
-      else if (wc < unicode_scripts[mid].start)
-        max = mid - 1;
-      else
-        return unicode_scripts[mid].script;
-    }
-
-  /* Unicode assigns "Common" as the script name for any character not
-   * specifically listed in Scripts.txt */
-  return _("Common");
-}
-#endif
-
 static gint
 find_script (const gchar *script)
 {
@@ -227,31 +199,21 @@ get_char (GucharmapCodepointList *list,
   return (gunichar)(-1);
 }
 
+/* XXX: linear search */
 static gint
 get_index (GucharmapCodepointList *list, 
            gunichar                wc)
 {
   GucharmapScriptCodepointList *guscl = GUCHARMAP_SCRIPT_CODEPOINT_LIST (list);
   ScriptCodepointListPrivate *priv = GUCHARMAP_SCRIPT_CODEPOINT_LIST_GET_PRIVATE (guscl);
-  gint min, mid, max;
+  gint i;
 
   ensure_initialized (guscl);
 
-  min = 0;
-  max = priv->ranges->len - 1;
-
-  while (max >= min) 
+  for (i = 0;  i < priv->ranges->len;  i++)
     {
-      UnicodeRange *range;
-
-      mid = (min + max) / 2;
-      range = (UnicodeRange *) (priv->ranges->pdata[mid]);
-
-      if (wc > range->end)
-        min = mid + 1;
-      else if (wc < range->start)
-        max = mid - 1;
-      else
+      UnicodeRange *range = (UnicodeRange *) priv->ranges->pdata[i];
+      if (wc >= range->start && wc <= range->end)
         return range->index + wc - range->start;
     }
 
@@ -405,6 +367,51 @@ gucharmap_script_codepoint_list_set_scripts (GucharmapScriptCodepointList  *list
 }
 
 /**
+ * gucharmap_script_codepoint_list_append_script:
+ * @list: a GucharmapScriptCodepointList
+ * @script: the script name
+ *
+ * Appends the characters in @script to the codepoint list.
+ *
+ * Return value: %TRUE on success, %FALSE if there is no such script, in
+ * which case the codepoint list is not changed.
+ **/
+gboolean
+gucharmap_script_codepoint_list_append_script (GucharmapScriptCodepointList  *list,
+                                               const gchar                   *script)
+{
+  ScriptCodepointListPrivate *priv = GUCHARMAP_SCRIPT_CODEPOINT_LIST_GET_PRIVATE (list);
+  UnicodeRange *ranges;
+  gint j, size, index0;
+
+  if (priv->ranges == NULL)
+    priv->ranges = g_ptr_array_new ();
+
+  if (priv->ranges->len > 0)
+    {
+      UnicodeRange *last_range = (UnicodeRange *) priv->ranges->pdata[priv->ranges->len - 1];
+      index0 = last_range->index  + last_range->end - last_range->start + 1;
+    }
+  else
+    index0 = 0;
+
+  if (get_chars_for_script (script, &ranges, &size))
+    {
+      for (j = 0;  j < size;  j++)
+        {
+          UnicodeRange *range = g_memdup (ranges + j, sizeof (ranges[j]));
+          range->index += index0;
+          g_ptr_array_add (priv->ranges, range);
+        }
+      g_free (ranges);
+
+      return TRUE;
+    }
+
+  return FALSE;
+}
+
+/**
  * gucharmap_unicode_list_scripts:
  *
  * Return value: NULL-terminated array of script names. These have been
@@ -417,4 +424,36 @@ gucharmap_unicode_list_scripts ()
   return unicode_script_list;
 }
 
+/**
+ * gucharmap_unicode_get_script_for_char:
+ * @wc: a character
+ *
+ * Return value: The English (untranslated) name of the script to which the
+ * character belongs. Characters that don't belong to an actual script
+ * return %"Common".
+ **/
+G_CONST_RETURN gchar *
+gucharmap_unicode_get_script_for_char (gunichar wc)
+{
+  gint min = 0;
+  gint mid;
+  gint max = sizeof (unicode_scripts) / sizeof (UnicodeScript) - 1;
 
+  if (wc > UNICHAR_MAX)
+    return NULL;
+  
+  while (max >= min) 
+    {
+      mid = (min + max) / 2;
+      if (wc > unicode_scripts[mid].end)
+        min = mid + 1;
+      else if (wc < unicode_scripts[mid].start)
+        max = mid - 1;
+      else
+        return unicode_script_list[unicode_scripts[mid].script_index];
+    }
+
+  /* Unicode assigns "Common" as the script name for any character not
+   * specifically listed in Scripts.txt */
+  return N_("Common");
+}

@@ -45,7 +45,8 @@ libgucharmap_la_SOURCES = gucharmap-marshal.c gucharmap-marshal.h \
 			  gucharmap-block-chapters.c gucharmap-block-chapters.h \
 			  gucharmap-script-chapters.c gucharmap-script-chapters.h \
 			  unicode-blocks.h unicode-categories.h unicode-names.h \
-			  unicode-nameslist.h unicode-scripts.h unicode-unihan.h
+			  unicode-nameslist.h unicode-scripts.h unicode-unihan.h \
+			  gucharmap-search.h gucharmap-search.c
 
 # this is different from the project version
 libgucharmap_la_LDFLAGS = -version-info 3:3:0

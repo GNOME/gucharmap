@@ -28,8 +28,13 @@
 #if HAVE_GNOME
 # include <gnome.h>
 #endif
-#include <gucharmap/gucharmap.h>
-#include <gucharmap/gucharmap_intl.h>
+#include "gucharmap-search.h"
+#include "gucharmap-window.h"
+#include "gucharmap-mini-fontsel.h"
+#include "gucharmap-unicode-info.h"
+#include "gucharmap-script-chapters.h"
+#include "gucharmap-block-chapters.h"
+#include "gucharmap_intl.h"
 
 #ifndef ICON_PATH
 # define ICON_PATH ""
@@ -97,140 +102,25 @@ status_message (GtkWidget *widget, const gchar *message, GucharmapWindow *guw)
     gtk_statusbar_push (GTK_STATUSBAR (guw->status), 0, message);
 }
 
-static gboolean
-in_view (GucharmapWindow *guw,
-         gunichar         wc)
+static void
+do_search (GucharmapWindow    *guw, 
+           GtkWindow          *alert_parent,
+           const gchar        *search_text, 
+           GucharmapDirection  direction)
 {
-  return gucharmap_codepoint_list_get_index (guw->charmap->chartable->codepoint_list, wc) != (guint)(-1);
-}
+  GucharmapCodepointList *list;
+  GucharmapChapters *chapters;
+  gint index, start_index;
 
-/* direction is -1 (back) or +1 (forward) */
-/* returns TRUE if search was successful */
-static gboolean
-do_search (GucharmapWindow *guw, 
-           GtkWindow       *alert_parent,
-           const gchar     *search_text, 
-           gint             direction)
-{
-  const gchar *no_leading_space, *nptr;
-  char *endptr;
-  gunichar wc;
+  chapters = gucharmap_charmap_get_chapters (guw->charmap);
+  list = (GucharmapCodepointList *) gucharmap_chapters_get_book_codepoint_list (chapters);
+  start_index = gucharmap_codepoint_list_get_index (list, gucharmap_table_get_active_character (guw->charmap->chartable));
+  index = gucharmap_find_next (list, search_text, start_index, direction, FALSE);
 
-  g_assert (direction == -1 || direction == 1);
-
-  if (search_text[0] == '\0')
-    {
-      information_dialog (guw, alert_parent, _("Nothing to search for."));
-      return FALSE;
-    }
-
-  /* skip spaces */
-  for (no_leading_space = search_text;  
-       g_unichar_isspace (g_utf8_get_char (no_leading_space));
-       no_leading_space = g_utf8_next_char (no_leading_space));
-
-  /* check for explicit decimal codepoint */
-  nptr = no_leading_space;
-  if (strncasecmp (no_leading_space, "&#", 2) == 0)
-    nptr = no_leading_space + 2;
-  else if (*no_leading_space == '#')
-    nptr = no_leading_space + 1;
-
-  if (nptr != no_leading_space)
-    {
-      wc = strtoul (nptr, &endptr, 10);
-      if (endptr != nptr && in_view (guw, wc))
-        {
-          gucharmap_charmap_go_to_character (guw->charmap, wc);
-          return TRUE;
-        }
-    }
-
-  /* check for explicit hex code point */
-  nptr = no_leading_space;
-  if (strncasecmp (no_leading_space, "&#x", 3) == 0)
-    nptr = no_leading_space + 3;
-  else if (strncasecmp (no_leading_space, "U+", 2) == 0
-           || strncasecmp (no_leading_space, "0x", 2) == 0)
-    nptr = no_leading_space + 2;
-
-  if (nptr != no_leading_space)
-    {
-      wc = strtoul (nptr, &endptr, 16);
-      if (endptr != nptr && in_view (guw, wc))
-        {
-          gucharmap_charmap_go_to_character (guw->charmap, wc);
-          return TRUE;
-        }
-    }
-
-  /* if there is only one character and it isspace() jump to it */
-  if (in_view (guw, g_utf8_get_char (search_text)) && g_utf8_strlen (search_text, -1) == 1)
-    {
-      gucharmap_charmap_go_to_character (guw->charmap, g_utf8_get_char (search_text));
-      return TRUE;
-    }
-
-  /* “Unicode character names contain only uppercase Latin letters A through
-   * Z, digits, space, and hyphen-minus.” If first character is not one of
-   * those, jump to it. Also, if there is only one character, jump to it.
-   * */
-  if (in_view (guw, g_utf8_get_char (no_leading_space))
-      && (g_utf8_strlen (no_leading_space, -1) == 1
-          || ! ((*no_leading_space >= 'A' && *no_leading_space <= 'Z') 
-                || (*no_leading_space >= 'a' && *no_leading_space <= 'z') 
-                || (*no_leading_space >= '0' && *no_leading_space <= '9') 
-                || (*no_leading_space == '-')
-                || (*no_leading_space == '\0'))))
-    {
-      gucharmap_charmap_go_to_character (guw->charmap, g_utf8_get_char (no_leading_space));
-      return TRUE;
-    }
-
-  switch (gucharmap_charmap_search (guw->charmap, search_text, direction))
-    {
-      case GUCHARMAP_FOUND:
-      case GUCHARMAP_WRAPPED:
-        return TRUE;
-
-      case GUCHARMAP_NOT_FOUND:
-        /* try searching without leading spaces */
-        switch (gucharmap_charmap_search (guw->charmap, no_leading_space, direction))
-          {
-            case GUCHARMAP_FOUND:
-            case GUCHARMAP_WRAPPED:
-              return TRUE;
-
-            case GUCHARMAP_NOT_FOUND:
-              /* NOW try interpreting it from the start as a hex codepoint */
-              wc = strtoul (no_leading_space, &endptr, 16);
-              if (endptr != nptr && in_view (guw, wc))
-                {
-                  gucharmap_charmap_go_to_character (guw->charmap, wc);
-                  return TRUE;
-                }
-
-              information_dialog (guw, alert_parent, _("Not found."));
-              return FALSE;
-
-            case GUCHARMAP_NOTHING_TO_SEARCH_FOR:
-              information_dialog (guw, alert_parent, _("Nothing to search for."));
-              return FALSE;
-
-            default:
-              g_warning ("gucharmap_charmap_search returned an unexpected result; this should never happen");
-              return FALSE;
-          }
-        return FALSE;
-
-      case GUCHARMAP_NOTHING_TO_SEARCH_FOR:
-        information_dialog (guw, alert_parent, _("Nothing to search for."));
-        return FALSE;
-
-      default:
-        g_warning ("gucharmap_charmap_search returned an unexpected result; this should never happen");
-        return FALSE;
-    }
+  if (index >= 0)
+    gucharmap_charmap_go_to_character (guw->charmap, gucharmap_codepoint_list_get_char (list, index));
+  else
+    information_dialog (guw, alert_parent, _("Not found."));
 }
 
 static void
@@ -245,10 +135,9 @@ search_find_response (GtkDialog *dialog,
 
       entry_dialog->guw->last_search = g_strdup (gtk_entry_get_text (entry_dialog->entry));
 
-      /* drop back into the search dialog if the search fails */
-      if (! do_search (entry_dialog->guw, GTK_WINDOW (entry_dialog->dialog),
-                       entry_dialog->guw->last_search, 1))
-        return;
+      do_search (entry_dialog->guw, GTK_WINDOW (entry_dialog->dialog), 
+                 entry_dialog->guw->last_search, GUCHARMAP_FORWARD);
+      return;
     }
 
   g_free (entry_dialog);
@@ -334,7 +223,7 @@ font_bigger (GtkWidget *widget, GucharmapWindow *guw)
   size = gucharmap_mini_font_selection_get_font_size (GUCHARMAP_MINI_FONT_SELECTION (guw->fontsel));
   increment = MAX (size / 12, 1);
   gucharmap_mini_font_selection_set_font_size (GUCHARMAP_MINI_FONT_SELECTION (guw->fontsel), 
-                                     size + increment);
+                                               size + increment);
 }
 
 static void

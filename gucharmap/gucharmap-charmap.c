@@ -823,54 +823,17 @@ gucharmap_charmap_identify_clipboard (GucharmapCharmap *charmap,
 
 void
 gucharmap_charmap_go_to_character (GucharmapCharmap *charmap, 
-                                   gunichar uc)
+                                   gunichar          wc)
 {
-  if (uc >= 0 && uc <= UNICHAR_MAX)
-    gucharmap_table_set_active_character (charmap->chartable, uc);
-}
+  GucharmapChapters *chapters = gucharmap_charmap_get_chapters (charmap);
+  gboolean status;
 
-/* direction is +1 (forward) or -1 (backward) */
-GucharmapSearchResult
-gucharmap_charmap_search (GucharmapCharmap *charmap, 
-                          const gchar      *search_text, 
-                          gint              direction)
-{
-  GucharmapSearchResult result;
-  gunichar wc, first_wc;
+  status = gucharmap_chapters_go_to_character (chapters, wc);
+  if (!status)
+    g_warning ("gucharmap_chapters_go_to_character failed (%04X)\n", wc);
 
-  g_assert (direction == -1 || direction == 1);
-
-  if (search_text[0] == '\0')
-    return GUCHARMAP_NOTHING_TO_SEARCH_FOR;
-  
-  wc = gucharmap_find_substring_match (gucharmap_table_get_active_character (charmap->chartable), search_text, direction);
-  first_wc = wc;
-
-  while (wc != (gunichar)(-1) && wc <= UNICHAR_MAX 
-         && gucharmap_codepoint_list_get_index (charmap->chartable->codepoint_list, wc) == (guint)(-1))
-    {
-      wc = gucharmap_find_substring_match (wc, search_text, direction);
-      if (wc == first_wc)
-        {
-          wc = (gunichar)(-1);
-          break;
-        }
-    }
-
-  if (wc != (gunichar)(-1) && wc <= UNICHAR_MAX)
-    {
-      if ((direction == 1 && wc <= charmap->chartable->active_cell)
-          || (direction == -1 && wc >= charmap->chartable->active_cell))
-        result = GUCHARMAP_WRAPPED;
-      else
-        result = GUCHARMAP_FOUND;
-
-      gucharmap_table_set_active_character (charmap->chartable, wc);
-    }
-  else
-    result = GUCHARMAP_NOT_FOUND;
-
-  return result;
+  if (wc >= 0 && wc <= UNICHAR_MAX)
+    gucharmap_table_set_active_character (charmap->chartable, wc);
 }
 
 GucharmapTable *
@@ -888,4 +851,10 @@ gucharmap_charmap_set_chapters (GucharmapCharmap  *charmap,
   gucharmap_table_set_codepoint_list (charmap->chartable, gucharmap_chapters_get_codepoint_list (chapters));
   g_signal_connect (G_OBJECT (chapters), "changed", G_CALLBACK (chapter_changed), charmap);
   gtk_widget_show (GTK_WIDGET (chapters));
+}
+
+GucharmapChapters *
+gucharmap_charmap_get_chapters (GucharmapCharmap  *charmap)
+{
+  return GUCHARMAP_CHAPTERS (GTK_PANED (charmap)->child1);
 }

@@ -52,6 +52,7 @@ gucharmap_block_chapters_init (GucharmapBlockChapters *chapters)
   GtkTreeSelection *selection;
   gint i;
 
+  parent->book_list = NULL;
   parent->tree_model = GTK_TREE_MODEL (gtk_list_store_new (BLOCK_CHAPTERS_NUM_COLUMNS, 
                                                            G_TYPE_STRING, G_TYPE_POINTER));
 
@@ -99,6 +100,9 @@ finalize (GObject *object)
   /* XXX: what to free and how? */
   g_object_unref (chapters->tree_model);
   /* g_object_unref (chapters->tree_view); */
+
+  if (chapters->book_list)
+    g_object_unref (chapters->book_list);
 }
 
 static GucharmapCodepointList * 
@@ -125,6 +129,55 @@ get_codepoint_list (GucharmapChapters *chapters)
     return NULL;
 }
 
+static G_CONST_RETURN GucharmapCodepointList * 
+get_book_codepoint_list (GucharmapChapters *chapters)
+{
+  if (chapters->book_list == NULL)
+    chapters->book_list = gucharmap_codepoint_list_new (0, UNICHAR_MAX);
+
+  return chapters->book_list;
+}
+
+/* XXX linear search */
+static gboolean
+go_to_character (GucharmapChapters *chapters, 
+                 gunichar           wc)
+{
+  GucharmapChapters *parent = GUCHARMAP_CHAPTERS (chapters);
+  GtkTreeSelection *selection;
+  GtkTreeIter iter;
+
+  if (wc > UNICHAR_MAX)
+    return FALSE;
+
+  /* skip "All" block */
+  if (!gtk_tree_model_get_iter_first (parent->tree_model, &iter))
+    return FALSE;
+
+  while (gtk_tree_model_iter_next (parent->tree_model, &iter))
+    {
+      UnicodeBlock *unicode_block;
+      gtk_tree_model_get (parent->tree_model, &iter, BLOCK_CHAPTERS_UNICODE_BLOCK_PTR, &unicode_block, -1);
+      if (wc >= unicode_block->start && wc <= unicode_block->end)
+        {
+          selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (parent->tree_view));
+          if (!gtk_tree_selection_iter_is_selected (selection, &iter))
+            gtk_tree_selection_select_iter (selection, &iter);
+          return TRUE;
+        }
+    }
+
+  /* "All" is the last resort */
+  if (!gtk_tree_model_get_iter_first (parent->tree_model, &iter))
+    return FALSE;
+
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (parent->tree_view));
+  if (!gtk_tree_selection_iter_is_selected (selection, &iter))
+    gtk_tree_selection_select_iter (selection, &iter);
+
+  return TRUE;
+}
+
 static void
 gucharmap_block_chapters_class_init (GucharmapBlockChaptersClass *clazz)
 {
@@ -133,6 +186,8 @@ gucharmap_block_chapters_class_init (GucharmapBlockChaptersClass *clazz)
 
   gobject_class->finalize = finalize;
   chapters_class->get_codepoint_list = get_codepoint_list;
+  chapters_class->get_book_codepoint_list = get_book_codepoint_list;
+  chapters_class->go_to_character = go_to_character;
 }
 
 GType 

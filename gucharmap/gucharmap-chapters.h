@@ -45,20 +45,27 @@ struct _GucharmapChapters
   GtkScrolledWindow parent;
 
   /*< protected >*/
-  GtkTreeModel *tree_model;
-  GtkWidget    *tree_view;
+  GtkTreeModel           *tree_model;
+  GtkWidget              *tree_view;
+  GucharmapCodepointList *book_list;
 };
 
 struct _GucharmapChaptersClass
 {
   GtkScrolledWindowClass parent_class;
 
-  void                     (* changed)            (GucharmapChapters *chapters);
-  GucharmapCodepointList * (* get_codepoint_list) (GucharmapChapters *chapters);
+  void                                    (* changed)                 (GucharmapChapters *chapters);
+  GucharmapCodepointList *                (* get_codepoint_list)      (GucharmapChapters *chapters);
+  G_CONST_RETURN GucharmapCodepointList * (* get_book_codepoint_list) (GucharmapChapters *chapters);
+  gboolean                                (* go_to_character)         (GucharmapChapters *chapters, 
+                                                                       gunichar           wc);
 };
 
-GType                    gucharmap_chapters_get_type           ();
-GucharmapCodepointList * gucharmap_chapters_get_codepoint_list (GucharmapChapters *chapters);
+GType                                   gucharmap_chapters_get_type                ();
+GucharmapCodepointList *                gucharmap_chapters_get_codepoint_list      (GucharmapChapters *chapters);
+G_CONST_RETURN GucharmapCodepointList * gucharmap_chapters_get_book_codepoint_list (GucharmapChapters *chapters);
+gboolean                                gucharmap_chapters_go_to_character         (GucharmapChapters *chapters, 
+                                                                                    gunichar           wc);
 
 G_END_DECLS
 

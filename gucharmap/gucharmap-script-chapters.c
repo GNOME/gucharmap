@@ -17,8 +17,11 @@
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  */
 
+#include <stdlib.h>
+
 #include "config.h"
 #include <gtk/gtk.h>
+#include <string.h>
 #include "gucharmap_intl.h"
 #include "gucharmap-unicode-info.h"
 #include "gucharmap-script-chapters.h"
@@ -127,6 +130,65 @@ get_codepoint_list (GucharmapChapters *chapters)
     return NULL;
 }
 
+static gboolean
+append_script (GtkTreeModel                 *model,
+               GtkTreePath                  *path,
+               GtkTreeIter                  *iter,
+               GucharmapScriptCodepointList *list)
+{
+  gchar *script_untranslated;
+
+  gtk_tree_model_get (model, iter, SCRIPT_CHAPTERS_SCRIPT_UNTRANSLATED, &script_untranslated, -1);
+
+  gucharmap_script_codepoint_list_append_script (list, script_untranslated);
+
+  return FALSE;
+}
+
+static G_CONST_RETURN GucharmapCodepointList * 
+get_book_codepoint_list (GucharmapChapters *chapters)
+{
+  if (chapters->book_list == NULL)
+    {
+      chapters->book_list = gucharmap_script_codepoint_list_new ();
+      gtk_tree_model_foreach (chapters->tree_model, (GtkTreeModelForeachFunc) append_script, chapters->book_list);
+    }
+
+  return chapters->book_list;
+}
+
+static gboolean
+go_to_character (GucharmapChapters *chapters, 
+                 gunichar           wc)
+{
+  GucharmapChapters *parent = GUCHARMAP_CHAPTERS (chapters);
+  GtkTreeSelection *selection;
+  const gchar *script, *temp;
+  GtkTreeIter iter;
+
+  script = gucharmap_unicode_get_script_for_char (wc);
+  if (script == NULL)
+    return FALSE;
+
+  if (!gtk_tree_model_get_iter_first (parent->tree_model, &iter))
+    return FALSE;
+
+  do
+    {
+      gtk_tree_model_get (parent->tree_model, &iter, SCRIPT_CHAPTERS_SCRIPT_UNTRANSLATED, &temp, -1);
+      if (strcmp (script, temp) == 0)
+        {
+          selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (parent->tree_view));
+          if (!gtk_tree_selection_iter_is_selected (selection, &iter))
+            gtk_tree_selection_select_iter (selection, &iter);
+          return TRUE;
+        }
+    }
+  while (gtk_tree_model_iter_next (parent->tree_model, &iter));
+
+  return FALSE;
+}
+
 static void
 gucharmap_script_chapters_class_init (GucharmapScriptChaptersClass *clazz)
 {
@@ -135,6 +197,8 @@ gucharmap_script_chapters_class_init (GucharmapScriptChaptersClass *clazz)
 
   gobject_class->finalize = finalize;
   chapters_class->get_codepoint_list = get_codepoint_list;
+  chapters_class->get_book_codepoint_list = get_book_codepoint_list;
+  chapters_class->go_to_character = go_to_character;
 }
 
 GType 

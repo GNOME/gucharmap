@@ -60,7 +60,7 @@ GType                    gucharmap_codepoint_list_get_type       ();
 GucharmapCodepointList * gucharmap_codepoint_list_new            (gunichar start,
                                                                   gunichar end);
 gunichar                 gucharmap_codepoint_list_get_char       (GucharmapCodepointList *list, 
-                                                                  gint                   index);
+                                                                  gint                    index);
 gint                     gucharmap_codepoint_list_get_index      (GucharmapCodepointList *list, 
                                                                   gunichar                wc);
 gint                     gucharmap_codepoint_list_get_last_index (GucharmapCodepointList *list);

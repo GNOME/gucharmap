@@ -25,46 +25,41 @@
 G_BEGIN_DECLS
 
 /* return values are read-only */
-G_CONST_RETURN gchar * gucharmap_get_unicode_name (gunichar uc);
-G_CONST_RETURN gchar * gucharmap_get_unicode_data_name (gunichar uc);
-G_CONST_RETURN gchar * gucharmap_get_unicode_category_name (gunichar uc);
-G_CONST_RETURN gchar * gucharmap_get_unicode_kDefinition (gunichar uc);
-G_CONST_RETURN gchar * gucharmap_get_unicode_kCantonese (gunichar uc);
-G_CONST_RETURN gchar * gucharmap_get_unicode_kMandarin (gunichar uc);
-G_CONST_RETURN gchar * gucharmap_get_unicode_kTang (gunichar uc);
-G_CONST_RETURN gchar * gucharmap_get_unicode_kKorean (gunichar uc);
-G_CONST_RETURN gchar * gucharmap_get_unicode_kJapaneseKun (gunichar uc);
-G_CONST_RETURN gchar * gucharmap_get_unicode_kJapaneseOn (gunichar uc);
-G_CONST_RETURN gchar * gucharmap_get_hangul_syllable_name (gunichar s);
+G_CONST_RETURN gchar *  gucharmap_get_unicode_name                (gunichar uc);
+G_CONST_RETURN gchar *  gucharmap_get_unicode_data_name           (gunichar uc);
+G_CONST_RETURN gchar *  gucharmap_get_unicode_category_name       (gunichar uc);
+G_CONST_RETURN gchar *  gucharmap_get_unicode_kDefinition         (gunichar uc);
+G_CONST_RETURN gchar *  gucharmap_get_unicode_kCantonese          (gunichar uc);
+G_CONST_RETURN gchar *  gucharmap_get_unicode_kMandarin           (gunichar uc);
+G_CONST_RETURN gchar *  gucharmap_get_unicode_kTang               (gunichar uc);
+G_CONST_RETURN gchar *  gucharmap_get_unicode_kKorean             (gunichar uc);
+G_CONST_RETURN gchar *  gucharmap_get_unicode_kJapaneseKun        (gunichar uc);
+G_CONST_RETURN gchar *  gucharmap_get_unicode_kJapaneseOn         (gunichar uc);
+G_CONST_RETURN gchar *  gucharmap_get_hangul_syllable_name        (gunichar s);
 
 /* A wrapper for g_unicode_canonical_decomposition that also does hangul
  * decomposition. 
  * See http://bugzilla.gnome.org/show_bug.cgi?id=100456
- * Will no longer be necessary once my patch is accepted.
  */
-gunichar * gucharmap_unicode_canonical_decomposition (gunichar ch, 
-                                                      gsize *result_len);
-
-/* starts search at start */
-gunichar gucharmap_find_substring_match (gunichar start, 
-                                         const gchar *search_text, 
-                                         gint direction);
+gunichar *              gucharmap_unicode_canonical_decomposition (gunichar  ch, 
+                                                                   gsize    *result_len);
 
 /* nameslist stuff */
-G_CONST_RETURN gchar ** gucharmap_get_nameslist_stars       (gunichar  wc);
-G_CONST_RETURN gchar ** gucharmap_get_nameslist_equals      (gunichar  wc);
-gunichar *              gucharmap_get_nameslist_exes        (gunichar  wc);
-G_CONST_RETURN gchar ** gucharmap_get_nameslist_pounds      (gunichar  wc);
-G_CONST_RETURN gchar ** gucharmap_get_nameslist_colons      (gunichar  wc);
-gboolean                gucharmap_unichar_validate          (gunichar  wc);
-gint                    gucharmap_unichar_to_printable_utf8 (gunichar  wc, 
-                                                             gchar    *outbuf);
-GUnicodeType            gucharmap_unichar_type              (gunichar  wc);
-gboolean                gucharmap_unichar_isdefined         (gunichar  wc);
-gboolean                gucharmap_unichar_isgraph           (gunichar  wc);
+G_CONST_RETURN gchar ** gucharmap_get_nameslist_stars             (gunichar  wc);
+G_CONST_RETURN gchar ** gucharmap_get_nameslist_equals            (gunichar  wc);
+gunichar *              gucharmap_get_nameslist_exes              (gunichar  wc);
+G_CONST_RETURN gchar ** gucharmap_get_nameslist_pounds            (gunichar  wc);
+G_CONST_RETURN gchar ** gucharmap_get_nameslist_colons            (gunichar  wc);
+gboolean                gucharmap_unichar_validate                (gunichar  wc);
+gint                    gucharmap_unichar_to_printable_utf8       (gunichar  wc, 
+                                                                   gchar    *outbuf);
+GUnicodeType            gucharmap_unichar_type                    (gunichar  wc);
+gboolean                gucharmap_unichar_isdefined               (gunichar  wc);
+gboolean                gucharmap_unichar_isgraph                 (gunichar  wc);
 
-/* XXX: defined in gucharmap-script-codepoint-list.c */
-G_CONST_RETURN gchar ** gucharmap_unicode_list_scripts      ();
+/* defined in gucharmap-script-codepoint-list.c */
+G_CONST_RETURN gchar ** gucharmap_unicode_list_scripts            ();
+G_CONST_RETURN gchar *  gucharmap_unicode_get_script_for_char     (gunichar wc);
 
 G_END_DECLS
 
