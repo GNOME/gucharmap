@@ -21,6 +21,7 @@
 #include <gtk/gtk.h>
 #include "charmap.h"
 #include "gucharmap_intl.h"
+#include "pixmaps/gucharmap.xpm"  /* defines gucharmap_xpm */
 
 
 #define VBOX_SPACING 3
@@ -82,10 +83,14 @@ main (gint argc, gchar **argv)
 
   gtk_init (&argc, &argv);
 
+
   tooltips = gtk_tooltips_new ();
 
   window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   gtk_window_set_title (GTK_WINDOW (window), _("Unicode Character Map"));
+  gtk_window_set_icon (
+          GTK_WINDOW (window), 
+          gdk_pixbuf_new_from_xpm_data ((const char **) gucharmap_xpm));
 
   g_signal_connect (G_OBJECT (window), "destroy",
                     G_CALLBACK (gtk_main_quit), NULL);
