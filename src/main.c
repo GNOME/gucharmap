@@ -20,7 +20,6 @@
 
 #include <gtk/gtk.h>
 #include <stdlib.h>
-#include <string.h>
 #include "charmap.h"
 #include "mini_fontsel.h"
 #if HAVE_GNOME
@@ -151,7 +150,10 @@ help_about (GtkWidget *widget, gpointer data)
 
   translator_credits = _("translator_credits");
   if (strcmp (translator_credits, "translator_credits") == 0)
-    translator_credits = NULL;
+    {
+      translator_credits = NULL;
+      g_printerr ("no translator credits\n");
+    }
 
   about = gnome_about_new (
           "gucharmap", VERSION, 
@@ -196,9 +198,6 @@ make_menu ()
   GtkWidget *file_menu_item, *view_menu_item;
   GtkWidget *goto_menu_item, *help_menu_item;
   GtkWidget *menu_item;
-  GtkAccelGroup *accel;
-
-  accel = gtk_accel_group_new ();
 
   /* make the menu bar */
   menubar = gtk_menu_bar_new ();
@@ -214,7 +213,7 @@ make_menu ()
   file_menu = gtk_menu_new ();
   gtk_menu_item_set_submenu (GTK_MENU_ITEM (file_menu_item),
                              file_menu);
-  menu_item = gtk_image_menu_item_new_from_stock (GTK_STOCK_QUIT, accel);
+  menu_item = gtk_image_menu_item_new_from_stock (GTK_STOCK_QUIT, NULL);
   g_signal_connect (G_OBJECT (menu_item), "activate",
                     G_CALLBACK (gtk_main_quit), NULL);
   gtk_menu_shell_append (GTK_MENU_SHELL (file_menu), menu_item);
@@ -277,12 +276,6 @@ main (gint argc, gchar **argv)
                       NULL, NULL, NULL);
 #else
   gtk_init (&argc, &argv);
-
-  if (argc > 1)
-    {
-      g_print ("gucharmap %s\n", VERSION);
-      exit (0);
-    }
 #endif
 
   tooltips = gtk_tooltips_new ();
