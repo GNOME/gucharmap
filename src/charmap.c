@@ -411,6 +411,29 @@ set_scrollbar_adjustment (Charmap *charmap)
 }
 
 
+/* depends on directionality */
+static gunichar
+rowcol_to_unichar (Charmap *charmap, gint row, gint col)
+{
+  if (gtk_widget_get_direction (charmap->chartable) == GTK_TEXT_DIR_RTL)
+    return charmap->page_first_char + row * charmap->cols 
+           + (charmap->cols - col - 1);
+  else
+    return charmap->page_first_char + row * charmap->cols + col;
+}
+
+
+/* depends on directionality */
+static gint
+unichar_column (Charmap *charmap, gunichar uc)
+{
+  if (gtk_widget_get_direction (charmap->chartable) == GTK_TEXT_DIR_RTL)
+    return charmap->cols - (uc - charmap->page_first_char) % charmap->cols - 1;
+  else
+    return (uc - charmap->page_first_char) % charmap->cols;
+}
+
+
 static void
 draw_character (Charmap *charmap, gint row, gint col)
 {
@@ -420,7 +443,7 @@ draw_character (Charmap *charmap, gint row, gint col)
   gunichar uc;
   GdkGC *gc;
 
-  uc = charmap->page_first_char + row * charmap->cols + col;
+  uc = rowcol_to_unichar (charmap, row, col);
 
   if (uc < 0 || uc > UNICHAR_MAX)
     return;
@@ -460,7 +483,7 @@ draw_square_bg (Charmap *charmap, gint row, gint col)
   gunichar uc;
   GdkGC *gc;
 
-  uc = charmap->page_first_char + row * charmap->cols + col;
+  uc = rowcol_to_unichar (charmap, row, col);
 
   if (GTK_WIDGET_HAS_FOCUS (charmap->chartable) && uc == charmap->active_char)
     gc = charmap->chartable->style->base_gc[GTK_STATE_SELECTED];
@@ -546,7 +569,7 @@ draw_chartable_from_scratch (Charmap *charmap)
   for (row = 0;  row < charmap->rows;  row++)
     for (col = 0;  col < charmap->cols;  col++)
       {
-        gunichar uc = charmap->page_first_char + row * charmap->cols + col;
+        gunichar uc = rowcol_to_unichar (charmap, row, col);
 
         /* for others, the background was drawn in a big swath */
         if (uc == charmap->active_char)
@@ -592,7 +615,7 @@ static void
 draw_and_expose_character_square (Charmap *charmap, gunichar uc)
 {
   gint row = (uc - charmap->page_first_char) / charmap->cols;
-  gint col = (uc - charmap->page_first_char) % charmap->cols;
+  gint col = unichar_column (charmap, uc);
 
   if (row >= 0 && row < charmap->rows && col >= 0 && col < charmap->cols)
     {
@@ -852,19 +875,31 @@ move_down (Charmap *charmap)
     set_active_character (charmap, charmap->active_char + charmap->cols);
 }
 
+
+static void
+move_cursor (Charmap *charmap, gint offset)
+{
+  if (charmap->active_char + offset >= 0
+      && charmap->active_char + offset <= UNICHAR_MAX)
+    set_active_character (charmap, charmap->active_char + offset);
+}
+
 static void
 move_left (Charmap *charmap)
 {
-  if (charmap->active_char > 0)
-    set_active_character (charmap, charmap->active_char - 1);
+  if (gtk_widget_get_direction (charmap->chartable) == GTK_TEXT_DIR_RTL)
+    move_cursor (charmap, 1);
+  else
+    move_cursor (charmap, -1);
 }
 
 static void
 move_right (Charmap *charmap)
 {
-  if (charmap->active_char < UNICHAR_MAX)
-    set_active_character (charmap, charmap->active_char + 1);
-
+  if (gtk_widget_get_direction (charmap->chartable) == GTK_TEXT_DIR_RTL)
+    move_cursor (charmap, -1);
+  else
+    move_cursor (charmap, 1);
 }
 
 static void
@@ -966,7 +1001,7 @@ get_char_at (Charmap *charmap, gint x, gint y)
   for (r = 0, y0 = 0;  y0 < y;  r++)
     y0 += row_height (charmap, r);
 
-  rv = charmap->page_first_char + (r-1) * charmap->cols + (c-1);
+  rv = rowcol_to_unichar (charmap, r-1, c-1);
 
   /* XXX: check this somewhere else? */
   if (rv > UNICHAR_MAX)
@@ -1497,7 +1532,6 @@ drag_data_received (GtkWidget *widget,
 
   g_free (text);
 }
-
 
 
 static GtkWidget *
