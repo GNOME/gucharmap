@@ -69,6 +69,12 @@ struct _GucharmapWindow
   gboolean font_selection_visible;
   gboolean text_to_copy_visible;
   gboolean file_menu_visible;
+
+  /* points to the element we are currently at (could be in the middle of
+   * the list) */
+  GList *history;
+  GtkWidget *back_menu_item;
+  GtkWidget *forward_menu_item;
 };
 
 

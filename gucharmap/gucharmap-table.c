@@ -387,7 +387,6 @@ update_zoom_window (GucharmapTable *chartable)
     {
       set_window_background (chartable->zoom_window, chartable->zoom_pixmap);
       gdk_window_clear (chartable->zoom_window->window);
-
     }
 
   gdk_drawable_get_size (GDK_DRAWABLE (chartable->zoom_pixmap), 

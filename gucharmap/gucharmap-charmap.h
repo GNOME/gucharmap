@@ -90,6 +90,9 @@ struct _GucharmapCharmapClass
   GtkHPanedClass parent_class;
 
   void (* status_message) (GucharmapCharmap *charmap, const gchar *message);
+  void (* link_clicked) (GucharmapCharmap *charmap, 
+                         gunichar old_character,
+                         gunichar new_character);
 };
 
 

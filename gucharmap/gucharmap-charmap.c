@@ -48,10 +48,11 @@ enum
 enum 
 {
   STATUS_MESSAGE = 0,
+  LINK_CLICKED,
   NUM_SIGNALS
 };
 
-static guint gucharmap_charmap_signals[NUM_SIGNALS] = { 0 };
+static guint gucharmap_charmap_signals[NUM_SIGNALS] = { 0, 0 };
 
 
 static void
@@ -210,6 +211,13 @@ gucharmap_charmap_class_init (GucharmapCharmapClass *clazz)
                     G_STRUCT_OFFSET (GucharmapCharmapClass, status_message),
                     NULL, NULL, gucharmap_marshal_VOID__STRING, G_TYPE_NONE, 
 		    1, G_TYPE_STRING);
+
+  gucharmap_charmap_signals[LINK_CLICKED] =
+      g_signal_new ("link-clicked", gucharmap_charmap_get_type (), 
+                    G_SIGNAL_RUN_FIRST,
+                    G_STRUCT_OFFSET (GucharmapCharmapClass, link_clicked),
+                    NULL, NULL, gucharmap_marshal_VOID__UINT_UINT, G_TYPE_NONE, 
+		    2, G_TYPE_UINT, G_TYPE_UINT);
 }
 
 
@@ -767,6 +775,8 @@ follow_if_link (GucharmapCharmap *charmap,
 
       if (uc != (gunichar)(-1)) 
         {
+          g_signal_emit (charmap, gucharmap_charmap_signals[LINK_CLICKED], 
+                          0, charmap->chartable->active_char, uc);
           gucharmap_table_set_active_character (charmap->chartable, uc);
           break;
         }
