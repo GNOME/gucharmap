@@ -2066,14 +2066,14 @@ charmap_init (Charmap *charmap)
 
 
 GtkWidget *
-charmap_new ()
+charmap_new (void)
 {
   return GTK_WIDGET (g_object_new (charmap_get_type (), NULL));
 }
 
 
 GType
-charmap_get_type ()
+charmap_get_type (void)
 {
   static GType charmap_type = 0;
 

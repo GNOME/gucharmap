@@ -26,9 +26,7 @@
 
 #include <gtk/gtk.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
+G_BEGIN_DECLS
 
 
 #define CHARMAP(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), charmap_get_type (), \
@@ -150,7 +148,7 @@ struct _Caption
 
 
 GtkType charmap_get_type (void);
-GtkWidget * charmap_new ();
+GtkWidget * charmap_new (void);
 void charmap_set_font (Charmap *charmap, gchar *font_name);
 void charmap_identify_clipboard (Charmap *charmap, GtkClipboard *clipboard);
 void charmap_expand_block_selector (Charmap *charmap);
@@ -160,8 +158,7 @@ charmap_search_result_t charmap_search (Charmap *charmap,
                                         const gchar *search_text);
 
 
-#ifdef __cplusplus
-}
-#endif  /* #ifdef __cplusplus */
+G_END_DECLS
 
 #endif  /* #ifndef CHARMAP_H */
+
