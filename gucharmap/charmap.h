@@ -61,16 +61,6 @@ typedef struct _CharmapClass CharmapClass;
 typedef struct _Caption Caption;
 
 
-/* the columns in the tree view (only the first is visible */
-enum 
-{
-  BLOCK_SELECTOR_LABEL = 0,
-  BLOCK_SELECTOR_UC_START,
-  BLOCK_SELECTOR_UNICODE_BLOCK,
-  BLOCK_SELECTOR_NUM_COLUMNS
-};
-
-
 typedef struct 
 {
   gunichar start;
@@ -137,22 +127,22 @@ struct _CharmapClass
 
 struct _Caption
 {
-  /* labels */
-  GtkWidget *codepoint;
-  GtkWidget *character;
-  GtkWidget *category;
-  GtkWidget *name;
-  GtkWidget *decomposition;
-  GtkWidget *utf8;
+  GtkTreeStore *caption_model;
+
+  GtkTreeRowReference *codepoint;
+  GtkTreeRowReference *category;
+  GtkTreeRowReference *name;
+  GtkTreeRowReference *decomposition;
+  GtkTreeRowReference *utf8;
 
 #if ENABLE_UNIHAN
-  GtkWidget *kDefinition;
-  GtkWidget *kCantonese;
-  GtkWidget *kKorean;
-  GtkWidget *kJapaneseOn;
-  GtkWidget *kJapaneseKun;
-  GtkWidget *kTang;
-  GtkWidget *kMandarin;
+  GtkTreeRowReference *kDefinition;
+  GtkTreeRowReference *kCantonese;
+  GtkTreeRowReference *kKorean;
+  GtkTreeRowReference *kJapaneseOn;
+  GtkTreeRowReference *kJapaneseKun;
+  GtkTreeRowReference *kTang;
+  GtkTreeRowReference *kMandarin;
 #endif
 };
 

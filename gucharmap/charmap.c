@@ -31,6 +31,22 @@
 
 #define abs(x) ((x) >= 0 ? (x) : (-x))
 
+/* only the label is visible in the block selector */
+enum 
+{
+  BLOCK_SELECTOR_LABEL = 0,
+  BLOCK_SELECTOR_UC_START,
+  BLOCK_SELECTOR_UNICODE_BLOCK,
+  BLOCK_SELECTOR_NUM_COLUMNS
+};
+
+enum 
+{
+  CAPTION_LABEL = 0,
+  CAPTION_VALUE,
+  CAPTION_NUM_COLUMNS
+};
+
 
 static void
 set_statusbar_message (Charmap *charmap, gchar *message)
@@ -92,104 +108,123 @@ unichar_to_printable_utf8 (gunichar uc)
 static void
 set_caption (Charmap *charmap)
 {
-#define BUFLEN 512
-  static gchar buf[BUFLEN];
-  static guchar ubuf[7];
+  GtkTreeIter iter;
+  GtkTreeModel *model;
+  guchar ubuf[7];
+  gchar *temp;
   gunichar *decomposition;
+  GString *gstemp;
   gsize result_len;
-  gint i, n, m;
-  gchar *bp;
-  static gchar *codepoint_str=NULL, *character_str, *category_str, *name_str;
+  gint i, n;
 
-#if ENABLE_UNIHAN
-  static gchar *kDefinition_str, *kCantonese_str, *kMandarin_str;
-  static gchar *kTang_str, *kKorean_str, *kJapaneseOn_str, *kJapaneseKun_str;
-#endif
+  model = GTK_TREE_MODEL (charmap->caption->caption_model);
 
-  if (codepoint_str == NULL)
-    {
-      codepoint_str = _("Unicode code point: U+%4.4X (%u)");
-      character_str = _("Character: %s");
-      category_str = _("Unicode category: %s"); 
-      name_str = _("Unicode name: %s");
-#if ENABLE_UNIHAN
-      kDefinition_str = _("Ideograph definition: %s");
-      kCantonese_str = _("Cantonese pronunciation: %s");
-      kMandarin_str = _("Mandarin pronunciation: %s");
-      kTang_str = _("Tang pronunciation: %s");
-      kKorean_str = _("Korean pronunciation: %s");
-      kJapaneseOn_str = _("Japanese On pronunciation: %s");
-      kJapaneseKun_str = _("Japanese Kun pronunciation: %s");
-#endif
-    }
+  /* name */
+  gtk_tree_model_get_iter (
+          model, &iter, 
+          gtk_tree_row_reference_get_path (charmap->caption->name));
+  gtk_tree_store_set (charmap->caption->caption_model, &iter, CAPTION_VALUE, 
+                      get_unicode_name (charmap->active_char), -1);
 
-  g_snprintf (buf, BUFLEN, codepoint_str, 
-                  charmap->active_char, charmap->active_char);
-  gtk_label_set_text (GTK_LABEL (charmap->caption->codepoint), buf);
+  /* U+200E = LEFT-TO-RIGHT MARK \xe2\x80\x8e */
 
-  g_snprintf (buf, BUFLEN, character_str,
-              unichar_to_printable_utf8 (charmap->active_char));
-  gtk_label_set_text (GTK_LABEL (charmap->caption->character), buf);
+  /* codepoint */
+  gtk_tree_model_get_iter (
+          model, &iter, 
+          gtk_tree_row_reference_get_path (charmap->caption->codepoint));
+  temp = g_strdup_printf ("\xE2\x80\x8EU+%4.4X (%u)", 
+                          charmap->active_char, charmap->active_char);
+  gtk_tree_store_set (charmap->caption->caption_model, &iter, 
+                      CAPTION_VALUE, temp, -1);
+  g_free (temp);
 
-  g_snprintf (buf, BUFLEN, category_str,
-              get_unicode_category_name (charmap->active_char));
-  gtk_label_set_text (GTK_LABEL (charmap->caption->category), buf);
+  /* category */
+  gtk_tree_model_get_iter (
+          model, &iter, 
+          gtk_tree_row_reference_get_path (charmap->caption->category));
+  gtk_tree_store_set (charmap->caption->caption_model, &iter, CAPTION_VALUE, 
+                      get_unicode_category_name (charmap->active_char), -1);
 
-  g_snprintf (buf, BUFLEN, name_str,
-              get_unicode_name (charmap->active_char));
-  gtk_label_set_text (GTK_LABEL (charmap->caption->name), buf);
+  /* utf-8 */
+  gstemp = g_string_new (NULL);
+  n = g_unichar_to_utf8 (charmap->active_char, ubuf);
+  for (i = 0;  i < n;  i++)
+    g_string_append_printf (gstemp, "0x%2.2X ", ubuf[i]);
+  gtk_tree_model_get_iter (
+          model, &iter, 
+          gtk_tree_row_reference_get_path (charmap->caption->utf8));
+  gtk_tree_store_set (charmap->caption->caption_model, &iter, 
+                      CAPTION_VALUE, gstemp->str, -1);
+  g_string_free (gstemp, TRUE);
 
-  /* XXX: should "UTF-8: " be localized? */
-  n = g_snprintf (buf, BUFLEN, "UTF-8: ");
-  m = g_unichar_to_utf8 (charmap->active_char, ubuf);
-  for (i = 0;  i < m;  i++)
-    n += g_snprintf (buf + n, BUFLEN - n, " 0x%2.2X", ubuf[i]);
-  gtk_label_set_text (GTK_LABEL (charmap->caption->utf8), buf);
-
-  /* do the decomposition */
+  /* decomposition */
   decomposition = unicode_canonical_decomposition (charmap->active_char,
                                                    &result_len);
-  bp = buf;
-  bp += g_snprintf (buf, BUFLEN, 
-                    _("Unicode canonical decomposition: %s [U+%4.4X]"), 
-                    unichar_to_printable_utf8 (decomposition[0]),
-                    decomposition[0]);
+  gstemp = g_string_new (NULL);
+  g_string_printf (gstemp, "%s [U+%4.4X]", 
+                   unichar_to_printable_utf8 (decomposition[0]), 
+                   decomposition[0]);
   for (i = 1;  i < result_len;  i++)
-    bp += g_snprintf (bp, buf + BUFLEN - bp, " + %s [U+%4.4X]", 
-                      unichar_to_printable_utf8 (decomposition[i]),
-                      decomposition[i]);
-  gtk_label_set_text (GTK_LABEL (charmap->caption->decomposition), buf);
-
+    g_string_append_printf (gstemp, " + %s [U+%4.4X]", 
+                            unichar_to_printable_utf8 (decomposition[i]), 
+                            decomposition[i]);
+  gtk_tree_model_get_iter (
+          model, &iter, 
+          gtk_tree_row_reference_get_path (charmap->caption->decomposition));
+  gtk_tree_store_set (charmap->caption->caption_model, &iter, CAPTION_VALUE, 
+                      gstemp->str, -1);
   g_free (decomposition);
+  g_string_free (gstemp, TRUE);
 
 #if ENABLE_UNIHAN
-  g_snprintf (buf, BUFLEN, kDefinition_str,
-              get_unicode_kDefinition (charmap->active_char));
-  gtk_label_set_text (GTK_LABEL (charmap->caption->kDefinition), buf);
+  /* kDefinition */
+  gtk_tree_model_get_iter (
+          model, &iter, 
+          gtk_tree_row_reference_get_path (charmap->caption->kDefinition));
+  gtk_tree_store_set (charmap->caption->caption_model, &iter, CAPTION_VALUE, 
+                      get_unicode_kDefinition (charmap->active_char), -1);
 
-  g_snprintf (buf, BUFLEN, kCantonese_str,
-              get_unicode_kCantonese (charmap->active_char));
-  gtk_label_set_text (GTK_LABEL (charmap->caption->kCantonese), buf);
+  /* kMandarin */
+  gtk_tree_model_get_iter (
+          model, &iter, 
+          gtk_tree_row_reference_get_path (charmap->caption->kMandarin));
+  gtk_tree_store_set (charmap->caption->caption_model, &iter, CAPTION_VALUE, 
+                      get_unicode_kMandarin (charmap->active_char), -1);
 
-  g_snprintf (buf, BUFLEN, kMandarin_str,
-              get_unicode_kMandarin (charmap->active_char));
-  gtk_label_set_text (GTK_LABEL (charmap->caption->kMandarin), buf);
+  /* kJapaneseOn */
+  gtk_tree_model_get_iter (
+          model, &iter, 
+          gtk_tree_row_reference_get_path (charmap->caption->kJapaneseOn));
+  gtk_tree_store_set (charmap->caption->caption_model, &iter, CAPTION_VALUE, 
+                      get_unicode_kJapaneseOn (charmap->active_char), -1);
 
-  g_snprintf (buf, BUFLEN, kTang_str,
-              get_unicode_kTang (charmap->active_char));
-  gtk_label_set_text (GTK_LABEL (charmap->caption->kTang), buf);
+  /* kJapaneseKun */
+  gtk_tree_model_get_iter (
+          model, &iter, 
+          gtk_tree_row_reference_get_path (charmap->caption->kJapaneseKun));
+  gtk_tree_store_set (charmap->caption->caption_model, &iter, CAPTION_VALUE, 
+                      get_unicode_kJapaneseKun (charmap->active_char), -1);
 
-  g_snprintf (buf, BUFLEN, kKorean_str,
-              get_unicode_kKorean (charmap->active_char));
-  gtk_label_set_text (GTK_LABEL (charmap->caption->kKorean), buf);
+  /* kCantonese */
+  gtk_tree_model_get_iter (
+          model, &iter, 
+          gtk_tree_row_reference_get_path (charmap->caption->kCantonese));
+  gtk_tree_store_set (charmap->caption->caption_model, &iter, CAPTION_VALUE, 
+                      get_unicode_kCantonese (charmap->active_char), -1);
 
-  g_snprintf (buf, BUFLEN, kJapaneseOn_str,
-              get_unicode_kJapaneseOn (charmap->active_char));
-  gtk_label_set_text (GTK_LABEL (charmap->caption->kJapaneseOn), buf);
+  /* kTang */
+  gtk_tree_model_get_iter (
+          model, &iter, 
+          gtk_tree_row_reference_get_path (charmap->caption->kTang));
+  gtk_tree_store_set (charmap->caption->caption_model, &iter, CAPTION_VALUE, 
+                      get_unicode_kTang (charmap->active_char), -1);
 
-  g_snprintf (buf, BUFLEN, kJapaneseKun_str,
-              get_unicode_kJapaneseKun (charmap->active_char));
-  gtk_label_set_text (GTK_LABEL (charmap->caption->kJapaneseKun), buf);
+  /* kKorean */
+  gtk_tree_model_get_iter (
+          model, &iter, 
+          gtk_tree_row_reference_get_path (charmap->caption->kKorean));
+  gtk_tree_store_set (charmap->caption->caption_model, &iter, CAPTION_VALUE, 
+                      get_unicode_kKorean (charmap->active_char), -1);
 #endif /* #if ENABLE_UNIHAN */
 }
 
@@ -969,12 +1004,9 @@ make_unicode_block_selector (Charmap *charmap)
   GtkTreeIter child_iter;
   GtkCellRenderer *cell;
   GtkTreeViewColumn *column;
-  GtkTooltips *tooltips;
   gchar buf[12];
   gunichar uc;
   gint i, bi;
-
-  tooltips = gtk_tooltips_new ();
 
   scrolled_window = gtk_scrolled_window_new (NULL, NULL);
 
@@ -1035,6 +1067,7 @@ make_unicode_block_selector (Charmap *charmap)
   charmap->block_index[bi].start = UNICHAR_MAX + 1;
   charmap->block_index[bi].tree_path = NULL;
 
+  /* we have the model, now make the view */
   charmap->block_selector_view = gtk_tree_view_new_with_model (
           GTK_TREE_MODEL (charmap->block_selector_model));
   charmap->block_selection = gtk_tree_view_get_selection (
@@ -1065,168 +1098,125 @@ make_unicode_block_selector (Charmap *charmap)
 static GtkWidget *
 make_caption (Charmap *charmap)
 {
-  GtkWidget *scrolled_window;
-  GtkWidget *table;
-  GtkWidget *vbox;
+  GtkTreeIter iter0, iter1, iter2;
+  GtkWidget *tree_view;
+  GtkTreeViewColumn *column;
+  GtkCellRenderer *cell;
+  GtkTreeModel *model;
   GtkWidget *disclosure;
-  PangoFontMetrics *font_metrics; 
-  gint font_height; 
+  GtkWidget *vbox;
 
   charmap->caption = g_malloc (sizeof (Caption));
-  charmap->caption->codepoint = gtk_label_new ("");
-  charmap->caption->character = gtk_label_new ("");;
-  charmap->caption->category = gtk_label_new ("");
-  charmap->caption->name = gtk_label_new ("");
-  charmap->caption->decomposition = gtk_label_new ("");
-  charmap->caption->utf8 = gtk_label_new ("");
 
-  /* fix heights so that stuff doesn't get cut off */
-  font_metrics = pango_context_get_metrics (
-          gtk_widget_get_pango_context (charmap->caption->name),
-          charmap->caption->name->style->font_desc, NULL);
+  charmap->caption->caption_model = gtk_tree_store_new (CAPTION_NUM_COLUMNS,
+                                                        G_TYPE_STRING, 
+                                                        G_TYPE_STRING);
 
-  font_height = (pango_font_metrics_get_ascent (font_metrics) 
-                 + pango_font_metrics_get_descent (font_metrics)) 
-                / PANGO_SCALE;
+  /* save some typing */
+  model = GTK_TREE_MODEL (charmap->caption->caption_model);
 
-  gtk_widget_set_size_request (charmap->caption->codepoint, -1, font_height);
-  gtk_widget_set_size_request (charmap->caption->character, -1, font_height);
-  gtk_widget_set_size_request (charmap->caption->category, -1, font_height);
-  gtk_widget_set_size_request (charmap->caption->name, -1, font_height);
-  gtk_widget_set_size_request (charmap->caption->decomposition, -1, 
-                               font_height);
-  gtk_widget_set_size_request (charmap->caption->utf8, -1, font_height);
+  gtk_tree_store_append (charmap->caption->caption_model, &iter0, NULL);
+  charmap->caption->name = gtk_tree_row_reference_new (
+          model, gtk_tree_model_get_path (model, &iter0));
+  gtk_tree_store_set (charmap->caption->caption_model, &iter0,
+                      CAPTION_LABEL, _("Unicode name"), -1);
 
-  gtk_label_set_selectable (GTK_LABEL (charmap->caption->codepoint), TRUE);
-  gtk_label_set_selectable (GTK_LABEL (charmap->caption->character), TRUE);
-  gtk_label_set_selectable (GTK_LABEL (charmap->caption->category), TRUE);
-  gtk_label_set_selectable (GTK_LABEL (charmap->caption->name), TRUE);
-  gtk_label_set_selectable (GTK_LABEL (charmap->caption->decomposition), TRUE);
-  gtk_label_set_selectable (GTK_LABEL (charmap->caption->utf8), TRUE);
+  gtk_tree_store_append (charmap->caption->caption_model, &iter0, NULL);
+  charmap->caption->codepoint = gtk_tree_row_reference_new (
+          model, gtk_tree_model_get_path (model, &iter0));
+  gtk_tree_store_set (charmap->caption->caption_model, &iter0,
+                      CAPTION_LABEL, _("Unicode code point"), -1);
 
-  gtk_misc_set_alignment (GTK_MISC (charmap->caption->codepoint), 0, 0);
-  gtk_misc_set_alignment (GTK_MISC (charmap->caption->character), 0, 0);
-  gtk_misc_set_alignment (GTK_MISC (charmap->caption->category), 0, 0);
-  gtk_misc_set_alignment (GTK_MISC (charmap->caption->name), 0, 0);
-  gtk_misc_set_alignment (GTK_MISC (charmap->caption->decomposition), 0, 0);
-  gtk_misc_set_alignment (GTK_MISC (charmap->caption->utf8), 0, 0);
+  gtk_tree_store_append (charmap->caption->caption_model, &iter1, &iter0);
+  charmap->caption->category = gtk_tree_row_reference_new (
+          model, gtk_tree_model_get_path (model, &iter1));
+  gtk_tree_store_set (charmap->caption->caption_model, &iter1,
+                      CAPTION_LABEL, _("Unicode category"), -1);
+
+  gtk_tree_store_append (charmap->caption->caption_model, &iter1, &iter0);
+  charmap->caption->decomposition = gtk_tree_row_reference_new (
+          model, gtk_tree_model_get_path (model, &iter1));
+  gtk_tree_store_set (charmap->caption->caption_model, &iter1,
+                      CAPTION_LABEL, _("Canonical decomposition"), -1);
+
+  gtk_tree_store_append (charmap->caption->caption_model, &iter1, &iter0);
+  charmap->caption->utf8 = gtk_tree_row_reference_new (
+          model, gtk_tree_model_get_path (model, &iter1));
+  gtk_tree_store_set (charmap->caption->caption_model, &iter1,
+                      CAPTION_LABEL, _("UTF-8"), -1);
 
 #if ENABLE_UNIHAN
-  charmap->caption->kDefinition = gtk_label_new ("");
-  charmap->caption->kCantonese = gtk_label_new ("");
-  charmap->caption->kKorean = gtk_label_new ("");
-  charmap->caption->kJapaneseOn = gtk_label_new ("");
-  charmap->caption->kTang = gtk_label_new ("");
-  charmap->caption->kMandarin = gtk_label_new ("");
-  charmap->caption->kJapaneseKun = gtk_label_new ("");
+  gtk_tree_store_append (charmap->caption->caption_model, &iter1, &iter0);
+  charmap->caption->kDefinition = gtk_tree_row_reference_new (
+          model, gtk_tree_model_get_path (model, &iter1));
+  gtk_tree_store_set (charmap->caption->caption_model, &iter1,
+                      CAPTION_LABEL, _("East Asian ideograph"), -1);
 
-  gtk_label_set_selectable (GTK_LABEL (charmap->caption->kDefinition), TRUE);
-  gtk_label_set_selectable (GTK_LABEL (charmap->caption->kCantonese), TRUE);
-  gtk_label_set_selectable (GTK_LABEL (charmap->caption->kKorean), TRUE);
-  gtk_label_set_selectable (GTK_LABEL (charmap->caption->kJapaneseKun), TRUE);
-  gtk_label_set_selectable (GTK_LABEL (charmap->caption->kJapaneseOn), TRUE);
-  gtk_label_set_selectable (GTK_LABEL (charmap->caption->kTang), TRUE);
-  gtk_label_set_selectable (GTK_LABEL (charmap->caption->kMandarin), TRUE);
+  gtk_tree_store_append (charmap->caption->caption_model, &iter2, &iter1);
+  charmap->caption->kMandarin = gtk_tree_row_reference_new (
+          model, gtk_tree_model_get_path (model, &iter2));
+  gtk_tree_store_set (charmap->caption->caption_model, &iter2,
+                      CAPTION_LABEL, _("Mandarin pronunciation"), -1);
 
-  gtk_widget_set_size_request (charmap->caption->kDefinition, -1, font_height);
-  gtk_widget_set_size_request (charmap->caption->kCantonese, -1, font_height);
-  gtk_widget_set_size_request (charmap->caption->kJapaneseKun, -1, font_height);
-  gtk_widget_set_size_request (charmap->caption->kKorean, -1, font_height);
-  gtk_widget_set_size_request (charmap->caption->kTang, -1, font_height);
-  gtk_widget_set_size_request (charmap->caption->kMandarin, -1, font_height);
-  gtk_widget_set_size_request (charmap->caption->kJapaneseKun, -1, font_height);
+  gtk_tree_store_append (charmap->caption->caption_model, &iter2, &iter1);
+  charmap->caption->kJapaneseOn = gtk_tree_row_reference_new (
+          model, gtk_tree_model_get_path (model, &iter2));
+  gtk_tree_store_set (charmap->caption->caption_model, &iter2,
+                      CAPTION_LABEL, _("Japanese On pronunciation"), -1);
 
-  gtk_misc_set_alignment (GTK_MISC (charmap->caption->kDefinition), 0, 0);
-  gtk_misc_set_alignment (GTK_MISC (charmap->caption->kCantonese), 0, 0);
-  gtk_misc_set_alignment (GTK_MISC (charmap->caption->kKorean), 0, 0);
-  gtk_misc_set_alignment (GTK_MISC (charmap->caption->kJapaneseKun), 0, 0);
-  gtk_misc_set_alignment (GTK_MISC (charmap->caption->kJapaneseOn), 0, 0);
-  gtk_misc_set_alignment (GTK_MISC (charmap->caption->kTang), 0, 0);
-  gtk_misc_set_alignment (GTK_MISC (charmap->caption->kMandarin), 0, 0);
+  gtk_tree_store_append (charmap->caption->caption_model, &iter2, &iter1);
+  charmap->caption->kJapaneseKun = gtk_tree_row_reference_new (
+          model, gtk_tree_model_get_path (model, &iter2));
+  gtk_tree_store_set (charmap->caption->caption_model, &iter2,
+                      CAPTION_LABEL, _("Japanese Kun pronunciation"), -1);
+
+  gtk_tree_store_append (charmap->caption->caption_model, &iter2, &iter1);
+  charmap->caption->kCantonese = gtk_tree_row_reference_new (
+          model, gtk_tree_model_get_path (model, &iter2));
+  gtk_tree_store_set (charmap->caption->caption_model, &iter2,
+                      CAPTION_LABEL, _("Cantonese pronunciation"), -1);
+
+  gtk_tree_store_append (charmap->caption->caption_model, &iter2, &iter1);
+  charmap->caption->kTang = gtk_tree_row_reference_new (
+          model, gtk_tree_model_get_path (model, &iter2));
+  gtk_tree_store_set (charmap->caption->caption_model, &iter2,
+                      CAPTION_LABEL, _("Tang pronunciation"), -1);
+
+  gtk_tree_store_append (charmap->caption->caption_model, &iter2, &iter1);
+  charmap->caption->kKorean = gtk_tree_row_reference_new (
+          model, gtk_tree_model_get_path (model, &iter2));
+  gtk_tree_store_set (charmap->caption->caption_model, &iter2,
+                      CAPTION_LABEL, _("Korean pronunciation"), -1);
 #endif /* #if ENABLE_UNIHAN */
 
-  /*
-   * *------------------------------------------------*
-   * | codepoint:  | character:   | category:         |
-   * *------------------------------------------------*
-   * | utf-8:      | name:                            |
-   * *------------------------------------------------*
-   * | decomposition:                                 |
-   * *------------------------------------------------*
-#if ENABLE_UNIHAN
-   * | kDefinition:                                   |
-   * *------------------------------------------------*
-   * | kMandarin:  | kCantonese:  | kTang: | kKorean: |
-   * *------------------------------------------------*
-   * | kJapaneseOn:               | kJapaneseKun:     |
-   * *------------------------------------------------*
-#endif
-   */
+  /* now make the tree view */
+  tree_view = gtk_tree_view_new_with_model (
+          GTK_TREE_MODEL (charmap->caption->caption_model));
+  gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (tree_view), FALSE);
 
-#ifdef ENABLE_UNIHAN
-  table = gtk_table_new (6, 4, FALSE);
-#else
-  table = gtk_table_new (3, 4, FALSE);
-#endif
+  cell = gtk_cell_renderer_text_new ();
+  column = gtk_tree_view_column_new_with_attributes (NULL, cell,
+                                                     "text", CAPTION_LABEL,
+                                                     NULL);
+  gtk_tree_view_append_column (GTK_TREE_VIEW (tree_view), column);
 
-  gtk_table_set_row_spacings (GTK_TABLE (table), 3);
-  gtk_table_set_col_spacings (GTK_TABLE (table), 10);
-
-  gtk_table_attach_defaults (GTK_TABLE (table), charmap->caption->codepoint,
-                             0, 1, 0, 1);
-  gtk_table_attach_defaults (GTK_TABLE (table), charmap->caption->character,
-                             1, 2, 0, 1);
-  gtk_table_attach_defaults (GTK_TABLE (table), charmap->caption->category,
-                             2, 4, 0, 1);
-
-  gtk_table_attach_defaults (GTK_TABLE (table), charmap->caption->utf8,
-                             0, 1, 1, 2);
-  gtk_table_attach_defaults (GTK_TABLE (table), charmap->caption->name,
-                             1, 4, 1, 2);
-
-  gtk_table_attach_defaults (GTK_TABLE (table), 
-                             charmap->caption->decomposition, 
-                             0, 4, 2, 3);
-
-#ifdef ENABLE_UNIHAN
-  gtk_table_attach_defaults (GTK_TABLE (table), charmap->caption->kDefinition,
-                             0, 4, 3, 4);
-
-  gtk_table_attach_defaults (GTK_TABLE (table), charmap->caption->kMandarin,
-                             0, 1, 4, 5);
-  gtk_table_attach_defaults (GTK_TABLE (table), charmap->caption->kCantonese,
-                             1, 2, 4, 5);
-  gtk_table_attach_defaults (GTK_TABLE (table), charmap->caption->kTang,
-                             2, 3, 4, 5);
-  gtk_table_attach_defaults (GTK_TABLE (table), charmap->caption->kKorean,
-                             3, 4, 4, 5);
-
-  gtk_table_attach_defaults (GTK_TABLE (table), charmap->caption->kJapaneseOn,
-                             0, 2, 5, 6);
-  gtk_table_attach_defaults (GTK_TABLE (table), charmap->caption->kJapaneseKun,
-                             2, 4, 5, 6);
-#endif
-
-  scrolled_window = gtk_scrolled_window_new (NULL, NULL);
-  gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (scrolled_window),
-                                         table);
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window), 
-                                  GTK_POLICY_ALWAYS, GTK_POLICY_NEVER);
+  cell = gtk_cell_renderer_text_new ();
+  column = gtk_tree_view_column_new_with_attributes (NULL, cell,
+                                                     "text", CAPTION_VALUE,
+                                                     NULL);
+  gtk_tree_view_append_column (GTK_TREE_VIEW (tree_view), column);
+  /* make it "editable" so the value can be copied and pasted */
+  g_object_set (G_OBJECT (cell), "editable", TRUE, NULL); 
 
   vbox = gtk_vbox_new (FALSE, 0);
-
-  disclosure = cddb_disclosure_new (scrolled_window, 
+  disclosure = cddb_disclosure_new (tree_view, 
                                     _("Details on the current character"), 
                                     NULL);
   gtk_box_pack_start (GTK_BOX (vbox), disclosure, FALSE, FALSE, 0);
-  gtk_box_pack_start (GTK_BOX (vbox), scrolled_window, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (vbox), tree_view, FALSE, FALSE, 0);
 
-  /* this makes it give the scrolled_window enough space when it is shown */
-  gtk_widget_show_all (scrolled_window);
-  gtk_widget_hide (scrolled_window);
-
-  gtk_widget_show (disclosure);
-  gtk_widget_show (vbox);
+  gtk_widget_show_all (vbox);
+  gtk_widget_hide (tree_view);
 
   return vbox;
 }
