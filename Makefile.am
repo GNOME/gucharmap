@@ -21,3 +21,4 @@ AUTOMAKE_OPTIONS = foreign
 
 SUBDIRS = src po pixmaps
 
+EXTRA_DIST = gtkrc.win32 gucharmap.nsi.in

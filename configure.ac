@@ -87,4 +87,5 @@ if test "x$enable_unihan" != "xno" ; then
     AC_DEFINE(ENABLE_UNIHAN)
 fi
 
-AC_OUTPUT([Makefile src/Makefile po/Makefile.in pixmaps/Makefile])
+AC_OUTPUT([Makefile src/Makefile po/Makefile.in 
+           pixmaps/Makefile gucharmap.nsi])
