@@ -536,7 +536,7 @@ draw_squares_after_shift (Charmap *charmap, gint row_offset)
     }
 
   row = (charmap->old_active_char - charmap->page_first_char) / charmap->cols;
-  if (row >= 0 && row < charmap->cols && (row < start_row || row > end_row))
+  if (row >= 0 && row < charmap->rows && (row < start_row || row > end_row))
     {
       col = (charmap->old_active_char - charmap->page_first_char) 
             % charmap->cols;
@@ -830,14 +830,14 @@ copy_button_clicked (GtkWidget *widget,
 {
   Charmap *charmap = CHARMAP (callback_data);
   GtkClipboard *clipboard = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
-  gchar *text;
 
   /* select it so it's in SELECTION_PRIMARY */
   gtk_editable_select_region (GTK_EDITABLE (charmap->text_to_copy), 0, -1);
 
   /* copy to SELECTION_CLIPBOARD */
-  text = gtk_editable_get_chars (GTK_EDITABLE (charmap->text_to_copy), 0, -1);
-  gtk_clipboard_set_text (clipboard, text, -1);
+  gtk_clipboard_set_text (
+          clipboard, 
+          gtk_entry_get_text (GTK_ENTRY (charmap->text_to_copy)), -1);
 
   return TRUE;
 }
@@ -1281,7 +1281,7 @@ mouse_wheel_down (Charmap *charmap)
 
 
 /* mouse wheel scrolls by half a page */
-gboolean    
+static gboolean    
 mouse_wheel_event (GtkWidget *widget, GdkEventScroll *event, Charmap *charmap)
 {
   switch (event->direction)
@@ -1423,10 +1423,9 @@ charmap_init (Charmap *charmap)
                                      charmap->tabulus->style->font_desc);
 
   /* size the drawing area */
-  gtk_widget_set_size_request (
-          charmap->tabulus, 
-          calculate_tabulus_dimension_x (charmap),
-          calculate_tabulus_dimension_y (charmap));
+  gtk_widget_set_size_request (charmap->tabulus, 
+                               calculate_tabulus_dimension_x (charmap),
+                               calculate_tabulus_dimension_y (charmap));
 
   charmap->page_first_char = (gunichar) 0x0000;
   charmap->active_char = (gunichar) 0x0000;
