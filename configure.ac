@@ -146,6 +146,8 @@ gucharmap/Makefile
 gucharmap/unicode/Makefile 
 po/Makefile.in
 pixmaps/Makefile 
+help/Makefile
+help/C/Makefile
 gucharmap.spec
 gucharmap.nsi])
 

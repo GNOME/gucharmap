@@ -401,6 +401,7 @@ make_gnome_help_menu (GucharmapWindow *guw)
 {
   GnomeUIInfo help_menu[] =
   {
+    GNOMEUIINFO_HELP (PACKAGE),
     GNOMEUIINFO_MENU_ABOUT_ITEM (help_about, guw),
     GNOMEUIINFO_END
   };
@@ -408,7 +409,7 @@ make_gnome_help_menu (GucharmapWindow *guw)
 
   menu = gtk_menu_new ();
 
-  gnome_app_fill_menu (GTK_MENU_SHELL (menu), help_menu, NULL, TRUE, 0);
+  gnome_app_fill_menu (GTK_MENU_SHELL (menu), help_menu, guw->accel_group, TRUE, 0);
 
   return menu;
 }

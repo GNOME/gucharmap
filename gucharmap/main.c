@@ -71,6 +71,7 @@ main (gint argc, gchar **argv)
 
 #if HAVE_GNOME
   gnome_program_init ("gucharmap", VERSION, LIBGNOMEUI_MODULE, argc, argv,
+                      GNOME_PARAM_APP_DATADIR, DATADIR,     
                       GNOME_PARAM_POPT_TABLE, options, NULL);
 #else
   popt_context = poptGetContext ("gucharmap", argc, (const gchar **) argv, 
