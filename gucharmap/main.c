@@ -23,12 +23,15 @@
 #include "charmap.h"
 #include "gucharmap_intl.h"
 #include "mini_fontsel.h"
-#include "../pixmaps/gucharmap.xpm"  /* defines gucharmap_xpm */
 
 #if HAVE_LIBGNOMEUI
 # include <libgnomeui/gnome-about.h>
 # include <libgnomeui/gnome-app-helper.h>
 # include <libgnomeui/gnome-ui-init.h>
+#endif
+
+#ifndef ICON_PATH
+# define ICON_PATH ""
 #endif
 
 
@@ -147,7 +150,8 @@ help_about (GtkWidget *widget, gpointer data)
   GtkWidget *about;
   const gchar *authors[] = { "Noah Levitt <nlevitt аt columbia.edu>", NULL };
 
-  about = gnome_about_new ("gucharmap", "0.2", "Copyright © 2003 Noah Levitt",
+  about = gnome_about_new ("gucharmap", VERSION, 
+                           "Copyright © 2003 Noah Levitt",
                            NULL, authors, NULL, NULL, icon);
 
   gtk_widget_show (about);
@@ -259,9 +263,10 @@ main (gint argc, gchar **argv)
   GtkTooltips *tooltips;
   gchar *orig_font, *new_font;
   PangoFontDescription *font_desc;
+  GError *error = NULL;
 
 #if HAVE_LIBGNOMEUI
-  gnome_program_init ("gucharmap", "0.2", LIBGNOMEUI_MODULE, argc, argv,
+  gnome_program_init ("gucharmap", VERSION, LIBGNOMEUI_MODULE, argc, argv,
                       NULL, NULL, NULL);
 #else
   gtk_init (&argc, &argv);
@@ -274,8 +279,15 @@ main (gint argc, gchar **argv)
                                gdk_screen_width () * 1/2,
                                gdk_screen_height () * 1/2);
   gtk_window_set_title (GTK_WINDOW (window), _("Unicode Character Map"));
-  icon = gdk_pixbuf_new_from_xpm_data ((const gchar **) gucharmap_xpm);
-  gtk_window_set_icon (GTK_WINDOW (window), icon);
+  icon = gdk_pixbuf_new_from_file (ICON_PATH, &error);
+  if (error != NULL)
+    {
+      g_assert (icon == NULL);
+      g_printerr ("Error loading icon: %s\n", error->message);
+      g_error_free (error);
+    }
+  else
+    gtk_window_set_icon (GTK_WINDOW (window), icon);
 
   g_signal_connect (G_OBJECT (window), "destroy",
                     G_CALLBACK (gtk_main_quit), NULL);

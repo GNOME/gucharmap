@@ -22,5 +22,5 @@ pixmapsdir = $(datadir)/pixmaps
 
 pixmaps_DATA = gucharmap.png
 
-EXTRA_DIST = $(pixmaps_DATA) gucharmap.xpm
+EXTRA_DIST = $(pixmaps_DATA) 
 

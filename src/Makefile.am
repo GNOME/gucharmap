@@ -20,7 +20,8 @@
 AM_CFLAGS = $(GTK_CFLAGS) $(LIBGNOMEUI_CFLAGS) -Wall -ansi 
 
 localedir = $(datadir)/locale
-AM_CPPFLAGS = -DLOCALEDIR=\"$(localedir)\"
+AM_CPPFLAGS = -DLOCALEDIR=\"$(localedir)\" \
+              -DICON_PATH=\"$(datadir)/pixmaps/gucharmap.png\"
 
 libgucharmap_la_LIBADD = @GTK_LIBS@
 
