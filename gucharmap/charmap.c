@@ -1558,7 +1558,6 @@ make_chartable (Charmap *charmap)
 
   /* this is required to get key_press events */
   GTK_WIDGET_SET_FLAGS (charmap->chartable, GTK_CAN_FOCUS);
-  gtk_widget_grab_focus (charmap->chartable);
 
   hbox = gtk_hbox_new (FALSE, 1);
   gtk_box_pack_start (GTK_BOX (hbox), charmap->chartable, TRUE, TRUE, 0);
@@ -1621,11 +1620,10 @@ make_search (Charmap *charmap)
   button = gtk_button_new_from_stock (GTK_STOCK_FIND);
   g_signal_connect (G_OBJECT (button), "clicked",
                     G_CALLBACK (do_search), charmap);
-  gtk_box_pack_end (GTK_BOX (hbox), button, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
 
   gtk_tooltips_set_tip (tooltips, button, _("Search for the next occurrence of this string in a character's Unicode name."), NULL);
 
-  /* gtk_container_set_border_width (GTK_CONTAINER (hbox), 6); */
   gtk_widget_show_all (hbox);
 
   return hbox;

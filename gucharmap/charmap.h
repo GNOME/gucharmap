@@ -109,7 +109,6 @@ struct _Charmap
 
   /* search */
   GtkWidget *search_entry;
-  GtkWidget *jump_entry;
 
   /* status bar */
   /* the status bar is not placed anywhere, but the program that uses the
