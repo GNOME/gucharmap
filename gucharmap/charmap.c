@@ -964,7 +964,6 @@ static GtkWidget *
 make_unicode_block_selector (Charmap *charmap)
 {
   GtkWidget *scrolled_window;
-  GtkWidget *checkbox;
   GtkWidget *vbox;
   GtkTreeIter iter;
   GtkTreeIter child_iter;
@@ -978,16 +977,6 @@ make_unicode_block_selector (Charmap *charmap)
   vbox = gtk_vbox_new (FALSE, 1);
 
   tooltips = gtk_tooltips_new ();
-
-  checkbox = gtk_check_button_new_with_label (_("Expand/collapse all"));
-  gtk_box_pack_start (GTK_BOX (vbox), checkbox, FALSE, FALSE, 0);
-
-  gtk_tooltips_set_tip (tooltips, checkbox, 
-                        _("Show/hide code point values in the block list."), 
-                        NULL);
-
-  g_signal_connect (G_OBJECT (checkbox), "toggled", 
-                    G_CALLBACK (show_hide_code_points), charmap);
 
   scrolled_window = gtk_scrolled_window_new (NULL, NULL);
   gtk_box_pack_start (GTK_BOX (vbox), scrolled_window, TRUE, TRUE, 0);
@@ -1242,7 +1231,7 @@ selection_text_received (GtkClipboard *clipboard,
       if (clipboard == gtk_clipboard_get (GDK_SELECTION_CLIPBOARD))
         set_statusbar_message (charmap, _("Clipboard is empty."));
       else
-        set_statusbar_message (charmap, _("Selection is empty."));
+        set_statusbar_message (charmap, _("There is no selected text."));
       return;
     }
 
@@ -1285,45 +1274,9 @@ identify_primary (GtkWidget *widget,
 
 
 static GtkWidget *
-make_paste_button (Charmap *charmap)
-{
-  GtkWidget *button;
-  GtkWidget *frame;
-  GtkWidget *vbox;
-  GtkTooltips *tooltips;
-
-  vbox = gtk_vbox_new (FALSE, 2);
-
-  tooltips = gtk_tooltips_new ();
-
-  button = gtk_button_new_with_label (_("Identify character from selection"));
-  g_signal_connect (G_OBJECT (button), "clicked",
-                    G_CALLBACK (identify_primary), charmap);
-  gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
-
-  gtk_tooltips_set_tip (tooltips, button, _("Jump to the first character in the primary selection. (X11 only.)"), NULL);
-
-  button = gtk_button_new_with_label (_("Identify character from clipboard"));
-  g_signal_connect (G_OBJECT (button), "clicked",
-                    G_CALLBACK (identify_clipboard), charmap);
-  gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
-
-  gtk_tooltips_set_tip (tooltips, button, 
-                        _("Jump to the first character in the clipboard."), 
-                        NULL);
-
-  frame = gtk_frame_new (NULL);
-  gtk_container_add (GTK_CONTAINER (frame), vbox);
-
-  return frame;
-}
-
-
-static GtkWidget *
 make_text_to_copy (Charmap *charmap)
 {
   GtkWidget *hbox;
-  GtkWidget *frame;
   GtkWidget *button;
   GtkWidget *label;
   GtkTooltips *tooltips;
@@ -1333,18 +1286,18 @@ make_text_to_copy (Charmap *charmap)
   tooltips = gtk_tooltips_new ();
 
   label = gtk_label_new (_("Text to copy:"));
-  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 4);
+  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 3);
 
   charmap->text_to_copy = gtk_entry_new ();
   gtk_entry_set_max_length (GTK_ENTRY (charmap->text_to_copy), 
                             TEXT_TO_COPY_MAXLENGTH);
-  gtk_box_pack_start (GTK_BOX (hbox), charmap->text_to_copy, TRUE, TRUE, 4);
+  gtk_box_pack_start (GTK_BOX (hbox), charmap->text_to_copy, TRUE, TRUE, 3);
 
   /* the copy button */
   button = gtk_button_new_from_stock (GTK_STOCK_COPY); 
   g_signal_connect (G_OBJECT (button), "clicked",
                     G_CALLBACK (copy_button_clicked), charmap);
-  gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 4);
+  gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 3);
 
   gtk_tooltips_set_tip (tooltips, button, _("Copy to the clipboard."), NULL);
 
@@ -1352,13 +1305,9 @@ make_text_to_copy (Charmap *charmap)
   button = gtk_button_new_from_stock (GTK_STOCK_CLEAR);
   g_signal_connect (G_OBJECT (button), "clicked",
                     G_CALLBACK (clear_button_clicked), charmap);
-  gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 4);
+  gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 3);
 
-  /* put the text_to_copy stuff in a frame */
-  frame = gtk_frame_new (NULL);
-  gtk_container_add (GTK_CONTAINER (frame), hbox);
-
-  return frame;
+  return hbox;
 }
 
 
@@ -1615,15 +1564,12 @@ make_search (Charmap *charmap)
 {
   GtkWidget *hbox;
   GtkWidget *button;
-  GtkWidget *frame;
   GtkTooltips *tooltips;
 
   tooltips = gtk_tooltips_new ();
 
   /* search */
-  hbox = gtk_hbox_new (FALSE, 3);
-  gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (_("Search:")),
-                      FALSE, FALSE, 3);
+  hbox = gtk_hbox_new (FALSE, 0);
 
   charmap->search_entry = gtk_entry_new ();
   g_signal_connect (G_OBJECT (charmap->search_entry), "activate",
@@ -1637,27 +1583,7 @@ make_search (Charmap *charmap)
 
   gtk_tooltips_set_tip (tooltips, button, _("Search for the next occurrence of this string in a character's Unicode name."), NULL);
 
-  /* jump */
-  gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (_("Jump to:")),
-                      FALSE, FALSE, 3);
-
-  charmap->jump_entry = gtk_entry_new ();
-  g_signal_connect (G_OBJECT (charmap->jump_entry), "activate",
-                    G_CALLBACK (do_jump), charmap);
-  gtk_box_pack_start (GTK_BOX (hbox), charmap->jump_entry, FALSE, FALSE, 3);
-
-  button = gtk_button_new_from_stock (GTK_STOCK_JUMP_TO);
-  g_signal_connect (G_OBJECT (button), "clicked",
-                    G_CALLBACK (do_jump), charmap);
-  gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 3);
-
-  gtk_tooltips_set_tip (tooltips, button, 
-                        _("Jump to this hexadecimal code point."), NULL);
-
-  frame = gtk_frame_new (NULL);
-  gtk_container_add (GTK_CONTAINER (frame), hbox);
-  
-  return frame;
+  return hbox;
 }
 
 
@@ -1674,31 +1600,30 @@ charmap_init (Charmap *charmap)
   GtkWidget *vbox;
   GtkWidget *vpaned;
   GtkWidget *hpaned;
+  GtkWidget *hbox;
 
   charmap->rows = CHARMAP_MIN_ROWS;
   charmap->cols = CHARMAP_MIN_COLS;
 
   gtk_box_set_spacing (GTK_BOX (charmap), 0);
 
-  /* start packing stuff in the inner block selector vbox */
-  vbox = gtk_vbox_new (FALSE, 0);
-  gtk_box_pack_start (GTK_BOX (vbox), make_unicode_block_selector (charmap), 
-                      TRUE, TRUE, 3);
-  gtk_box_pack_start (GTK_BOX (vbox), make_paste_button (charmap), 
-                      FALSE, FALSE, 3);
-  /* end packing stuff in the inner block selector vbox */
+  /* top hbox has search and text_to_copy */
+  hbox = gtk_hbox_new (FALSE, 25); /* space between the parts */
+  gtk_box_pack_start (GTK_BOX (hbox), make_text_to_copy (charmap), 
+                      TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (hbox), make_search (charmap), TRUE, TRUE, 0);
+  /* end top hbox */
 
   /* put stuff in top hpaned */
   hpaned = gtk_hpaned_new ();
-  gtk_paned_pack1 (GTK_PANED (hpaned), make_chartable (charmap), TRUE, TRUE);
-  gtk_paned_pack2 (GTK_PANED (hpaned), vbox, FALSE, TRUE);
+  gtk_paned_pack1 (GTK_PANED (hpaned), make_unicode_block_selector (charmap), 
+                   FALSE, TRUE);
+  gtk_paned_pack2 (GTK_PANED (hpaned), make_chartable (charmap), TRUE, TRUE);
   /* done with panes */
 
   /* start packing stuff in the vbox for the top pane */
   vbox = gtk_vbox_new (FALSE, 0);
   gtk_box_pack_start (GTK_BOX (vbox), hpaned, TRUE, TRUE, 3);
-  gtk_box_pack_start (GTK_BOX (vbox), make_text_to_copy (charmap), 
-                      FALSE, FALSE, 3);
   /* end packing stuff in the vbox for the top pane */
 
   /* put stuff in the vpaned */
@@ -1708,9 +1633,8 @@ charmap_init (Charmap *charmap)
   /* done with panes */
 
   /* start packing stuff in the outer vbox (the Charmap itself) */
+  gtk_box_pack_start (GTK_BOX (charmap), hbox, FALSE, FALSE, 3);
   gtk_box_pack_start (GTK_BOX (charmap), vpaned, TRUE, TRUE, 3);
-  gtk_box_pack_start (GTK_BOX (charmap), make_search (charmap), 
-                      FALSE, FALSE, 3);
   /* end packing stuff in the outer vbox (the Charmap itself) */
 
   /* the statusbar— not placed anywhere */
