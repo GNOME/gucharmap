@@ -29,6 +29,7 @@
 #include <unicode_info.h>
 #if HAVE_GNOME
 # include <gnome.h>
+# include <locale.h> /* we call setlocale(3) */
 #endif
 #if !HAVE_GNOME
 # include <popt.h>
