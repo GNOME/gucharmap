@@ -87,6 +87,7 @@ struct _Charmap
   GtkWidget *chartable;         /* GtkDrawingArea */
   GdkPixmap *chartable_pixmap; 
   GtkWidget *zoom_window;
+  GdkPixbuf *zoom_pixbuf;
 
   gchar *font_name;
   PangoFontMetrics *font_metrics;

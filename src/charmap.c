@@ -58,18 +58,12 @@ enum
 static guint charmap_signals[NUM_SIGNALS] = { 0, 0 };
 
 static const GtkTargetEntry dnd_target_table[] =
-  {
-    { "UTF8_STRING", 0, 0 },
-    { "COMPOUND_TEXT", 0, 0 },
-    { "TEXT", 0, 0 },
-    { "STRING", 0, 0 }
-  };
-
-
-static void enter_zoom_mode (Charmap *charmap, gint x_root, gint y_root);
-static void leave_zoom_mode (Charmap *charmap);
-static void update_zoom_window (Charmap *charmap);
-static void move_zoom_window (Charmap *charmap, gint x_root, gint y_root);
+{
+  { "UTF8_STRING", 0, 0 },
+  { "COMPOUND_TEXT", 0, 0 },
+  { "TEXT", 0, 0 },
+  { "STRING", 0, 0 }
+};
 
 
 /* return value is read-only, should not be freed */
@@ -455,7 +449,7 @@ rowcol_to_unichar (Charmap *charmap, gint row, gint col)
 }
 
 
-/* depends on directionality */
+/* Depends on directionality. Column 0 is the furthest left.  */
 static gint
 unichar_column (Charmap *charmap, gunichar uc)
 {
@@ -477,8 +471,263 @@ get_root_coords_at_active_char (Charmap *charmap, gint *x_root, gint *y_root)
   row = (charmap->active_char - charmap->page_first_char) / charmap->cols;
   col = unichar_column (charmap, charmap->active_char);
 
-  *x_root = x + x_offset (charmap, col) + column_width (charmap, col) / 2;
-  *y_root = y + y_offset (charmap, row) + row_height   (charmap, row) / 2;
+  *x_root = x + x_offset (charmap, col);
+  *y_root = y + y_offset (charmap, row);
+}
+
+
+static void
+get_appropriate_upper_left_xy (Charmap *charmap, 
+                               gint width, gint height,
+                               gint x_root, gint y_root,
+                               gint *x, gint *y)
+{
+  gint row, col;
+
+  row = (charmap->active_char - charmap->page_first_char) / charmap->cols;
+  col = unichar_column (charmap, charmap->active_char);
+
+  *x = x_root;
+  *y = y_root;
+
+  if (row >= charmap->rows / 2)
+    *y -= height;
+
+  if (col >= charmap->cols / 2)
+    *x -= width;
+}
+
+
+/* retunrs the coords of the innermost corner of the square */
+static void
+get_appropriate_active_char_corner_xy (Charmap *charmap, gint *x, gint *y)
+{
+  gint x0, y0;
+  gint row, col;
+
+  get_root_coords_at_active_char (charmap, &x0, &y0);
+
+  row = (charmap->active_char - charmap->page_first_char) / charmap->cols;
+  col = unichar_column (charmap, charmap->active_char);
+
+  *x = x0;
+  *y = y0;
+
+  if (row < charmap->rows / 2)
+    *y += row_height (charmap, row);
+
+  if (col < charmap->cols / 2)
+    *x += column_width (charmap, col);
+}
+
+
+/* places the zoom window toward the inside of the coordinates */
+static void
+place_zoom_window (Charmap *charmap, gint x_root, gint y_root)
+{
+  gint width, height;
+  gint x, y;
+
+  g_return_if_fail (charmap->zoom_window != NULL);
+
+  /* This works because we always use gtk_widget_set_size_request() */
+  gtk_widget_get_size_request (charmap->zoom_window, &width, &height);
+
+  get_appropriate_upper_left_xy (charmap, width, height, 
+                                 x_root, y_root, &x, &y);
+
+  gtk_window_move (GTK_WINDOW (charmap->zoom_window), x, y);
+}
+
+
+static PangoLayout *
+layout_scaled_glyph (Charmap *charmap, gunichar uc, gint font_size)
+{
+  PangoFontDescription *font_desc;
+  PangoLayout *layout;
+
+  font_desc = pango_font_description_copy (
+          gtk_widget_get_style (charmap->chartable)->font_desc);
+  pango_font_description_set_size (font_desc, font_size);
+
+  layout = pango_layout_new (pango_layout_get_context (charmap->pango_layout));
+
+  pango_layout_set_font_description (layout, font_desc);
+  pango_layout_set_text (layout, unichar_to_printable_utf8 (uc), -1);
+
+  pango_font_description_free (font_desc);
+
+  return layout;
+}
+
+
+static GdkPixbuf *
+create_glyph_pixbuf (Charmap *charmap, gint font_size)
+{
+  enum { PADDING = 8 };
+
+  PangoLayout *pango_layout;
+  PangoRectangle ink_rect;
+  gint pixmap_width, pixmap_height;
+  GtkStyle *style;
+  GdkPixmap *pixmap;
+  GdkPixbuf *pixbuf;
+
+  /* Apply the scaling.  Unfortunately not all fonts seem to be scalable.
+   * We could fall back to GdkPixbuf scaling, but that looks butt ugly :/
+   */
+  pango_layout = layout_scaled_glyph (charmap,
+                                      charmap->active_char,
+                                      font_size);
+
+  pango_layout_get_pixel_extents (pango_layout, &ink_rect, NULL);
+
+  /* Make the GdkPixmap large enough to account for
+   * possible offsets in the ink extents of the glyph.
+   */
+  pixmap_width  = ink_rect.width  + ABS (ink_rect.x) + 2 * PADDING;
+  pixmap_height = ink_rect.height + ABS (ink_rect.y) + 2 * PADDING;
+
+  style = gtk_widget_get_style (charmap->chartable);
+
+  pixmap = gdk_pixmap_new (charmap->chartable->window,
+                           pixmap_width, pixmap_height,
+                           -1);
+
+  gdk_draw_rectangle (pixmap,
+                      style->base_gc[GTK_STATE_NORMAL],
+                      TRUE,
+                      0, 0,
+                      pixmap_width, pixmap_height);
+
+  /* Draw a rectangular border while taking ink_rect offsets
+   * into account.  Superfluous edges will be clipped later.
+   */
+  gdk_draw_rectangle (pixmap,
+                      style->fg_gc[GTK_STATE_INSENSITIVE], 
+                      FALSE,
+                      MAX (0, ink_rect.x) + 1,
+                      MAX (0, ink_rect.y) + 1,
+                      ink_rect.width  + 2 * PADDING - 3,
+                      ink_rect.height + 2 * PADDING - 3);
+
+  /* Now draw the glyph.  The coordinates are adapted
+   * in order to compensate negative ink_rect offsets.
+   */
+  gdk_draw_layout (pixmap,
+                   style->text_gc[GTK_STATE_NORMAL],
+                   MAX (0, -ink_rect.x) + PADDING,
+                   MAX (0, -ink_rect.y) + PADDING,
+                   pango_layout);
+
+  /* Finally extract the area that has actually been drawn on;
+   * projected parts are discarded.  The resulting area is exactly
+   * that of the rectangle drawn earlier plus 1 pixel border width.
+   */
+  pixbuf = gdk_pixbuf_get_from_drawable (NULL, pixmap, NULL,
+                                         MAX (0, ink_rect.x),
+                                         MAX (0, ink_rect.y),
+                                         0, 0,
+                                         ink_rect.width  + 2 * PADDING,
+                                         ink_rect.height + 2 * PADDING);
+
+  g_object_unref (pango_layout);
+  g_object_unref (pixmap);
+
+  return pixbuf;
+}
+
+
+static void
+destroy_zoom_window (Charmap *charmap)
+{
+  if (charmap->zoom_window)
+    {
+      GtkWidget *zoom_window;
+
+      zoom_window = charmap->zoom_window;
+      charmap->zoom_window = NULL;
+
+      gdk_window_set_cursor (charmap->chartable->window, NULL);
+      gtk_object_destroy (GTK_OBJECT (zoom_window));
+
+      status_message (charmap, _("Zoom mode disabled."));
+    }
+}
+
+
+static gint
+compute_zoom_font_size (Charmap *charmap)
+{
+  gint screen_height;
+  gdouble limit;
+  gdouble scale;
+  gint font_size;
+
+#if GTK_CHECK_VERSION (2,1,1)
+  screen_height = gdk_screen_get_height (
+          gtk_widget_get_screen (charmap->chartable));
+#else
+  screen_height = gdk_screen_height ();
+#endif
+
+  limit = (0.3 * screen_height) / bare_minimal_row_height (charmap);
+  scale = CLAMP (limit, 1.0, 12.0);
+
+  font_size = pango_font_description_get_size (
+          gtk_widget_get_style (charmap->chartable)->font_desc);
+
+  return scale * ((font_size > 0) ? font_size : 10 * PANGO_SCALE);
+}
+
+
+/* the window must be realized, or window->window will be null */
+static void
+set_window_background (GtkWidget *window, GdkPixbuf *pixbuf)
+{
+  GdkPixmap *pixmap;
+  GdkPixmap *mask;
+
+  gdk_pixbuf_render_pixmap_and_mask_for_colormap (
+          pixbuf, gtk_widget_get_colormap (window), &pixmap, &mask, 128);
+
+  gdk_window_set_back_pixmap (window->window, pixmap, FALSE);
+
+  if (mask)
+    {
+      gtk_widget_shape_combine_mask (window, mask, 0, 0);
+      g_object_unref (mask);
+    }
+
+  g_object_unref (pixmap);
+}
+
+
+static void
+update_zoom_window (Charmap *charmap)
+{
+  gint width, height;
+
+
+  g_return_if_fail (charmap->zoom_window != NULL);
+
+  if (charmap->zoom_pixbuf != NULL)
+    g_object_unref (charmap->zoom_pixbuf);
+
+  charmap->zoom_pixbuf = create_glyph_pixbuf (
+          charmap, compute_zoom_font_size (charmap));
+
+  width  = gdk_pixbuf_get_width (charmap->zoom_pixbuf);
+  height = gdk_pixbuf_get_height (charmap->zoom_pixbuf);
+
+  gtk_widget_set_size_request (charmap->zoom_window, width, height);
+  gtk_window_resize (GTK_WINDOW (charmap->zoom_window), width, height);
+
+  if (GTK_WIDGET_REALIZED (charmap->zoom_window))
+    {
+      set_window_background (charmap->zoom_window, charmap->zoom_pixbuf);
+      gdk_window_clear (charmap->zoom_window->window);
+    }
 }
 
 
@@ -632,12 +881,8 @@ draw_chartable_from_scratch (Charmap *charmap)
 static gint
 expose_event (GtkWidget *widget, 
               GdkEventExpose *event, 
-              gpointer callback_data)
+              Charmap *charmap)
 {
-  Charmap *charmap;
-
-  charmap = CHARMAP (callback_data);
-
   if (charmap->chartable_pixmap == NULL)
     {
       charmap->chartable_pixmap = gdk_pixmap_new (
@@ -764,7 +1009,6 @@ redraw_rows (Charmap *charmap, gint row_offset)
 
       if (draw_row)
         {
-          /* g_print ("redraw_rows: redrawing row %d\n", row); */
           for (col = 0;  col < charmap->cols;  col++)
             draw_square (charmap, row, col);
         }
@@ -830,10 +1074,10 @@ redraw (Charmap *charmap, gboolean move_zoom)
 
       if (move_zoom && charmap->zoom_window)
         {
-          gint x_root, y_root;
+          gint x, y;
 
-          get_root_coords_at_active_char (charmap, &x_root, &y_root);
-          move_zoom_window (charmap, x_root, y_root);
+          get_appropriate_active_char_corner_xy (charmap, &x, &y);
+          place_zoom_window (charmap, x, y);
         }
     }
 
@@ -901,129 +1145,6 @@ get_char_at (Charmap *charmap, gint x, gint y)
 }
 
 
-static PangoLayout *
-layout_scaled_glyph (Charmap *charmap, gunichar uc, gint font_size)
-{
-  PangoFontDescription *font_desc;
-  PangoLayout *layout;
-
-  font_desc = pango_font_description_copy (
-          gtk_widget_get_style (charmap->chartable)->font_desc);
-  pango_font_description_set_size (font_desc, font_size);
-
-  layout = pango_layout_new (pango_layout_get_context (charmap->pango_layout));
-
-  pango_layout_set_font_description (layout, font_desc);
-  pango_layout_set_text (layout, unichar_to_printable_utf8 (uc), -1);
-
-  pango_font_description_free (font_desc);
-
-  return layout;
-}
-
-
-static GdkPixbuf *
-create_glyph_pixbuf (Charmap *charmap, gint font_size)
-{
-  enum { PADDING = 8 };
-
-  PangoLayout *pango_layout;
-  PangoRectangle ink_rect;
-  gint pixmap_width, pixmap_height;
-  GtkStyle *style;
-  GdkPixmap *pixmap;
-  GdkPixbuf *pixbuf;
-
-  /* Apply the scaling.  Unfortunately not all fonts seem to be scalable.
-   * We could fall back to GdkPixbuf scaling, but that looks butt ugly :/
-   */
-  pango_layout = layout_scaled_glyph (charmap,
-                                      charmap->active_char,
-                                      font_size);
-
-  pango_layout_get_pixel_extents (pango_layout, &ink_rect, NULL);
-
-  /* Make the GdkPixmap large enough to account for
-   * possible offsets in the ink extents of the glyph.
-   */
-  pixmap_width  = ink_rect.width  + ABS (ink_rect.x) + 2 * PADDING;
-  pixmap_height = ink_rect.height + ABS (ink_rect.y) + 2 * PADDING;
-
-  style = gtk_widget_get_style (charmap->chartable);
-
-  pixmap = gdk_pixmap_new (charmap->chartable->window,
-                           pixmap_width, pixmap_height,
-                           -1);
-
-  gdk_draw_rectangle (pixmap,
-                      style->base_gc[GTK_STATE_NORMAL],
-                      TRUE,
-                      0, 0,
-                      pixmap_width, pixmap_height);
-
-  /* Draw a rectangular border while taking ink_rect offsets
-   * into account.  Superfluous edges will be clipped later.
-   */
-  gdk_draw_rectangle (pixmap,
-                      style->fg_gc[GTK_STATE_INSENSITIVE], 
-                      FALSE,
-                      MAX (0, ink_rect.x) + 1,
-                      MAX (0, ink_rect.y) + 1,
-                      ink_rect.width  + 2 * PADDING - 3,
-                      ink_rect.height + 2 * PADDING - 3);
-
-  /* Now draw the glyph.  The coordinates are adapted
-   * in order to compensate negative ink_rect offsets.
-   */
-  gdk_draw_layout (pixmap,
-                   style->text_gc[GTK_STATE_NORMAL],
-                   MAX (0, -ink_rect.x) + PADDING,
-                   MAX (0, -ink_rect.y) + PADDING,
-                   pango_layout);
-
-  /* Finally extract the area that has actually been drawn on;
-   * projected parts are discarded.  The resulting area is exactly
-   * that of the rectangle drawn earlier plus 1 pixel border width.
-   */
-  pixbuf = gdk_pixbuf_get_from_drawable (NULL, pixmap, NULL,
-                                         MAX (0, ink_rect.x),
-                                         MAX (0, ink_rect.y),
-                                         0, 0,
-                                         ink_rect.width  + 2 * PADDING,
-                                         ink_rect.height + 2 * PADDING);
-
-  g_object_unref (pango_layout);
-  g_object_unref (pixmap);
-
-  return pixbuf;
-}
-
-
-static gint
-compute_zoom_font_size (Charmap *charmap)
-{
-  gint screen_height;
-  gdouble limit;
-  gdouble scale;
-  gint font_size;
-
-#if GTK_CHECK_VERSION (2,1,1)
-  screen_height = gdk_screen_get_height (
-          gtk_widget_get_screen (charmap->chartable));
-#else
-  screen_height = gdk_screen_height ();
-#endif
-
-  limit = (0.3 * screen_height) / bare_minimal_row_height (charmap);
-  scale = CLAMP (limit, 1.0, 12.0);
-
-  font_size = pango_font_description_get_size (
-          gtk_widget_get_style (charmap->chartable)->font_desc);
-
-  return scale * ((font_size > 0) ? font_size : 10 * PANGO_SCALE);
-}
-
-
 static gint
 compute_drag_font_size (Charmap *charmap)
 {
@@ -1037,135 +1158,19 @@ compute_drag_font_size (Charmap *charmap)
 
 
 static void
-set_window_background (GtkWidget *window, GdkPixbuf *pixbuf)
+make_zoom_window (Charmap *charmap)
 {
-  GdkPixmap *pixmap;
-  GdkPixmap *mask;
-
-  gdk_pixbuf_render_pixmap_and_mask_for_colormap (
-          pixbuf,
-          gtk_widget_get_colormap (window),
-          &pixmap, &mask, 128);
-
-  gdk_window_set_back_pixmap (window->window, pixmap, FALSE);
-
-  if (mask)
-    {
-      gtk_widget_shape_combine_mask (window, mask, 0, 0);
-      g_object_unref (mask);
-    }
-
-  g_object_unref (pixmap);
-}
-
-
-static void
-enter_zoom_mode (Charmap *charmap, gint x_root, gint y_root)
-{
-  GdkPixbuf *pixbuf;
-
-  leave_zoom_mode (charmap);
+  destroy_zoom_window (charmap);
 
   charmap->zoom_window = gtk_window_new (GTK_WINDOW_POPUP);
+
 #if GTK_CHECK_VERSION (2,1,1)
   gtk_window_set_screen (GTK_WINDOW (charmap->zoom_window),
                          gtk_widget_get_screen (charmap->chartable));
 #endif
+
   /* Prevent the window from being painted with the default background. */
   gtk_widget_set_app_paintable (charmap->zoom_window, TRUE);
-
-  pixbuf = create_glyph_pixbuf (charmap, compute_zoom_font_size (charmap));
-
-  gtk_widget_set_size_request (charmap->zoom_window,
-                               gdk_pixbuf_get_width (pixbuf),
-                               gdk_pixbuf_get_height (pixbuf));
-
-  move_zoom_window (charmap, x_root, y_root);
-  gtk_widget_show (charmap->zoom_window);
-
-  set_window_background (charmap->zoom_window, pixbuf);
-
-  g_object_unref (pixbuf);
-}
-
-
-/* Set an invisible mouse cursor for widget->window. */
-static void
-hide_mouse_cursor (GtkWidget *widget)
-{
-  const char blank_data[] = { 0x0 };
-  GdkBitmap *blank_mask;
-  GtkStyle *style;
-  GdkCursor *cursor;
-
-  blank_mask = gdk_bitmap_create_from_data (widget->window,
-                                            blank_data, 1, 1);
-  style = gtk_widget_get_style (widget);
-
-  cursor = gdk_cursor_new_from_pixmap (blank_mask, blank_mask,
-                                       &style->black, &style->white,
-                                       0, 0);
-
-  gdk_window_set_cursor (widget->window, cursor);
-
-  gdk_cursor_unref (cursor);
-  g_object_unref (blank_mask);
-}
-
-
-static void
-leave_zoom_mode (Charmap *charmap)
-{
-  if (charmap->zoom_window)
-    {
-      GtkWidget *zoom_window;
-
-      zoom_window = charmap->zoom_window;
-      charmap->zoom_window = NULL;
-
-      gdk_window_set_cursor (charmap->chartable->window, NULL);
-      gtk_object_destroy (GTK_OBJECT (zoom_window));
-
-      status_message (charmap, _("Zoom mode disabled."));
-    }
-}
-
-
-static void
-update_zoom_window (Charmap *charmap)
-{
-  GdkPixbuf *pixbuf;
-  gint width, height;
-
-  g_return_if_fail (charmap->zoom_window != NULL);
-
-  pixbuf = create_glyph_pixbuf (charmap, compute_zoom_font_size (charmap));
-  width  = gdk_pixbuf_get_width (pixbuf);
-  height = gdk_pixbuf_get_height (pixbuf);
-
-  gtk_widget_set_size_request (charmap->zoom_window, width, height);
-  gtk_window_resize (GTK_WINDOW (charmap->zoom_window), width, height);
-
-  set_window_background (charmap->zoom_window, pixbuf);
-  gdk_window_clear (charmap->zoom_window->window);
-
-  g_object_unref (pixbuf);
-}
-
-
-static void
-move_zoom_window (Charmap *charmap, gint x_root, gint y_root)
-{
-  gint width, height;
-
-  g_return_if_fail (charmap->zoom_window != NULL);
-
-  /* This works because we always use gtk_widget_set_size_request() */
-  gtk_widget_get_size_request (charmap->zoom_window, &width, &height);
-
-  gtk_window_move (GTK_WINDOW (charmap->zoom_window),
-                   x_root - width  / 2,
-                   y_root - height / 2);
 }
 
 
@@ -1277,16 +1282,9 @@ move_page_down (Charmap *charmap)
 static gint
 key_press_event (GtkWidget *widget, 
                  GdkEventKey *event, 
-                 gpointer callback_data)
+                 Charmap *charmap)
 {
-  Charmap *charmap;
-  gunichar old_active_char;
-  gunichar old_page_first_char;
-  gint x_root, y_root;
-
-  charmap = CHARMAP (callback_data);
-  old_active_char = charmap->active_char;
-  old_page_first_char = charmap->page_first_char;
+  gint x, y;
 
   /* move the cursor or whatever depending on which key was pressed */
   switch (event->keyval)
@@ -1329,14 +1327,23 @@ key_press_event (GtkWidget *widget,
         return TRUE;
 
       case GDK_plus: case GDK_KP_Add: case GDK_equal:
-        get_root_coords_at_active_char (charmap, &x_root, &y_root);
-        enter_zoom_mode (charmap, x_root, y_root);
+        make_zoom_window (charmap);
+        update_zoom_window (charmap);
+        gtk_widget_show (charmap->zoom_window);
+
+        get_appropriate_active_char_corner_xy (charmap, &x, &y);
+        place_zoom_window (charmap, x, y);
+
+        /* must do this after gtk_widget_show */
+        set_window_background (charmap->zoom_window, charmap->zoom_pixbuf);
+        gdk_window_clear (charmap->zoom_window->window);
+
         status_message (charmap,
                         _("Zoom mode enabled. Press <Esc> to disable zoom."));
         return TRUE;
 
       case GDK_minus: case GDK_KP_Subtract: case GDK_Escape:
-        leave_zoom_mode (charmap);
+        destroy_zoom_window (charmap);
         return TRUE;
 
       /* pass on other keys, like tab and stuff that shifts focus */
@@ -1363,7 +1370,7 @@ button_press_event (GtkWidget *widget,
   gtk_widget_grab_focus (charmap->chartable);
 
   if (event->button == 1)
-    leave_zoom_mode (charmap);
+    destroy_zoom_window (charmap);
 
   /* double-click */
   if (event->button == 1 && event->type == GDK_2BUTTON_PRESS)
@@ -1387,10 +1394,20 @@ button_press_event (GtkWidget *widget,
     {
       set_active_character (charmap,
                             get_char_at (charmap, event->x, event->y));
+
+      make_zoom_window (charmap);
       redraw (charmap, FALSE);
 
-      enter_zoom_mode (charmap, event->x_root, event->y_root);
-      hide_mouse_cursor (charmap->chartable);
+      if (charmap->active_char == charmap->old_active_char)
+        update_zoom_window (charmap); 
+
+      place_zoom_window (charmap, event->x_root, event->y_root);
+      gtk_widget_show (charmap->zoom_window);
+
+      /* must do this after gtk_widget_show */
+      set_window_background (charmap->zoom_window, charmap->zoom_pixbuf);
+      gdk_window_clear (charmap->zoom_window->window);
+
       status_message (charmap, _("Zoom mode enabled."));
     }
 
@@ -1405,7 +1422,7 @@ button_release_event (GtkWidget *widget,
                       Charmap *charmap)
 {
   if (event->button == 3)
-    leave_zoom_mode (charmap);
+    destroy_zoom_window (charmap);
 
   return FALSE;
 }
@@ -1418,19 +1435,17 @@ motion_notify_event (GtkWidget *widget,
 {
   if ((event->state & GDK_BUTTON3_MASK) != 0 && charmap->zoom_window)
     {
-      gint x, y;
       gunichar uc;
 
-      x = event->x;
-      y = event->y;
-      uc = get_char_at (charmap, MAX (0, x), MAX (0, y));
+      uc = get_char_at (charmap, MAX (0, event->x), MAX (0, event->y));
 
       if (uc != charmap->active_char)
         {
           set_active_character (charmap, uc);
           redraw (charmap, FALSE);
         }
-      move_zoom_window (charmap, event->x_root, event->y_root);
+
+      place_zoom_window (charmap, event->x_root, event->y_root);
     }
 
   return FALSE;
@@ -1739,7 +1754,7 @@ static gboolean
 focus_in_or_out_event (GtkWidget *widget, GdkEventFocus *event,
                        Charmap *charmap)
 {
-  leave_zoom_mode (charmap);
+  destroy_zoom_window (charmap);
 
   if (charmap->chartable != NULL && charmap->chartable_pixmap != NULL)
     draw_and_expose_character_square (charmap, charmap->active_char);
@@ -2030,6 +2045,7 @@ charmap_init (Charmap *charmap)
   charmap->cols = CHARMAP_MIN_COLS;
 
   charmap->zoom_window = NULL;
+  charmap->zoom_pixbuf = NULL;
 
   gtk_box_set_spacing (GTK_BOX (charmap), 6);
   gtk_container_set_border_width (GTK_CONTAINER (charmap), 6);
