@@ -971,6 +971,7 @@ gucharmap_table_redraw (GucharmapTable *chartable,
   chartable->old_active_cell = chartable->active_cell;
 }
 
+#if 0
 void
 logg (const gchar *location,
       const gchar *message)
@@ -982,6 +983,7 @@ logg (const gchar *location,
 
   g_print ("%7.3f: %36s:    %s\n", g_timer_elapsed (timer, NULL), location, message);
 }
+#endif
 
 /* redraws the screen from the backing pixmap */
 static gint
@@ -989,7 +991,6 @@ expose_event (GtkWidget *widget,
               GdkEventExpose *event, 
               GucharmapTable *chartable)
 {
-  logg ("expose_event", "starting");
   gdk_window_set_back_pixmap (widget->window, NULL, FALSE);
 
   if (chartable->pixmap == NULL)
@@ -1014,7 +1015,6 @@ expose_event (GtkWidget *widget,
                      event->area.x, event->area.y,
                      event->area.width, event->area.height);
 
-  logg ("expose_event", "finished");
   return FALSE;
 }
 
@@ -1072,8 +1072,6 @@ size_allocate (GtkWidget *widget,
 {
   gint old_rows, old_cols;
 
-  logg ("size_allocate", "starting");
-
   old_rows = chartable->rows;
   old_cols = chartable->cols;
 
@@ -1101,16 +1099,11 @@ size_allocate (GtkWidget *widget,
 #endif
 
   if (chartable->rows == old_rows && chartable->cols == old_cols)
-    {
-      logg ("size_allocate", "finished");
-      return;
-    }
+    return;
 
   chartable->page_first_cell = chartable->active_cell - (chartable->active_cell % chartable->cols);
 
   update_scrollbar_adjustment (chartable);
-
-  logg ("size_allocate", "finished");
 }
 
 static void
@@ -1596,8 +1589,6 @@ gucharmap_table_init (GucharmapTable *chartable)
 {
   AtkObject *accessible;
 
-  logg ("gucharmap_table_init", "starting");
-
   chartable->zoom_mode_enabled = FALSE;
   chartable->zoom_window = NULL;
   chartable->zoom_pixmap = NULL;
@@ -1695,8 +1686,6 @@ gucharmap_table_get_type (void)
 {
   static GType gucharmap_table_type = 0;
 
-  logg ("gucharmap_table_get_type", "");
-
   if (!gucharmap_table_type)
     {
       static const GTypeInfo gucharmap_table_info =
@@ -1750,8 +1739,6 @@ void
 gucharmap_table_set_font (GucharmapTable *chartable, const gchar *font_name)
 {
   PangoFontDescription *font_desc;
-
-  logg ("gucharmap_table_set_font", "starting");
 
   /* if it's the same as the current font, do nothing */
   if (chartable->font_name != NULL

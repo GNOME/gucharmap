@@ -32,8 +32,6 @@
 #include "gucharmap-window.h"
 #include "gucharmap-mini-fontsel.h"
 
-extern void logg (const gchar *location, const gchar *message);
-
 static gchar *new_font = NULL;
 static struct poptOption options[] = 
 { 
@@ -56,8 +54,6 @@ main (gint argc, gchar **argv)
   poptContext popt_context;
   gint rc;
 #endif  /* #if !HAVE_GNOME */
-
-  logg ("main", "starting");
 
 #if !HAVE_GNOME
   gtk_init (&argc, &argv);
@@ -106,14 +102,8 @@ main (gint argc, gchar **argv)
 
   gucharmap_table_grab_focus (GUCHARMAP_WINDOW (window)->charmap->chartable);
 
-  /*
-  logg ("main", "calling gtk_widget_show_all (window)");
-  gtk_widget_show_all (window);
-  */
-  logg ("main", "calling gtk_widget_show (window)");
   gtk_widget_show (window);
 
-  logg ("main", "calling gtk_main ()");
   gtk_main ();
 
   return 0;
