@@ -74,9 +74,9 @@ show_hide_details (GtkWidget *widget, gpointer data)
 
 
 static void
-mini_fontsel_changed (MiniFontSelection *fontsel, gpointer data)
+fontsel_changed (MiniFontSelection *fontsel, gpointer data)
 {
-  g_printerr ("mini_fontsel_changed: %s\n", 
+  g_printerr ("fontsel_changed: %s\n", 
               mini_font_selection_get_font_name (fontsel));
 }
 
@@ -194,7 +194,7 @@ main (gint argc, gchar **argv)
   gtk_box_pack_start (GTK_BOX (vbox), make_menu (), FALSE, FALSE, 0);
 
   fontsel = mini_font_selection_new ();
-  g_signal_connect (fontsel, "changed", G_CALLBACK (mini_fontsel_changed),
+  g_signal_connect (fontsel, "changed", G_CALLBACK (fontsel_changed),
                     NULL);
   gtk_box_pack_start (GTK_BOX (vbox), fontsel, FALSE, FALSE, 0);
 
@@ -205,7 +205,6 @@ main (gint argc, gchar **argv)
                                gdk_screen_width () * 1/2,
                                gdk_screen_height () * 1/2);
 
-#if 0
   /* make the starting font 3/2 of the default selection in fontsel */
   orig_font = mini_font_selection_get_font_name (MINI_FONT_SELECTION (fontsel));
   font_desc = pango_font_description_from_string (orig_font);
@@ -217,7 +216,6 @@ main (gint argc, gchar **argv)
   pango_font_description_free (font_desc);
   g_free (orig_font);
   g_free (new_font);
-#endif
 
   /* show everything so far */
   gtk_widget_show_all (window);

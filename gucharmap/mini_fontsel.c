@@ -33,7 +33,7 @@ static guint mini_font_selection_signals [LAST_SIGNAL] = { 0 };
 
 
 /* looks up PangoFontFamily by family name, since no such function is in
- * the api*/
+ * the api */
 static GHashTable *pango_font_family_hash = NULL;
 
 
@@ -55,11 +55,11 @@ show_available_fonts (MiniFontSelection *fontsel)
   GList *family_names = NULL;
   gint n_families, i;
 
+  g_printerr ("mini_fontsel.c: show_available_fonts\n");
+
   /* keys are strings */
   pango_font_family_hash = g_hash_table_new (g_str_hash, g_str_equal);
   
-  g_printerr ("mini_fontsel.c: show_available_fonts\n");
-
   pango_context_list_families (
           gtk_widget_get_pango_context (GTK_WIDGET (fontsel)),
           &families, &n_families);
@@ -145,7 +145,7 @@ show_available_styles (MiniFontSelection *fontsel)
   gboolean new_family_has_old_style = FALSE;
   gint n_faces, i;
 
-  g_printerr ("mini_fontsel.c: show_available_styles\n");
+  g_printerr ("mini_fontsel.c: show_available_styles: showing styles for \"%s\"\n", fontsel->family_value);
 
   family = g_hash_table_lookup (pango_font_family_hash, fontsel->family_value);
   pango_font_family_list_faces (family, &faces, &n_faces);
@@ -320,6 +320,9 @@ mini_font_selection_init (MiniFontSelection *fontsel)
   gtk_box_pack_start (GTK_BOX (fontsel), fontsel->size, FALSE, FALSE, 0);
 
   show_available_fonts (fontsel);
+
+  mini_font_selection_set_font_name (MINI_FONT_SELECTION (fontsel), 
+                                     "Sans Italic 12");
 }
 
 
@@ -375,9 +378,16 @@ mini_font_selection_set_font_name (MiniFontSelection *fontsel,
   font_desc = pango_font_description_from_string (fontname);
 
   set_family (fontsel, pango_font_description_get_family (font_desc));
+  gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (fontsel->family)->entry), 
+                      pango_font_description_get_family (font_desc));
+
   /* XXX: set_style: figure out how */
+
   set_size (fontsel, 
             PANGO_PIXELS (pango_font_description_get_size (font_desc)));
+  gtk_spin_button_set_value (
+          GTK_SPIN_BUTTON (fontsel->size), 
+          PANGO_PIXELS (pango_font_description_get_size (font_desc)));
 
   pango_font_description_free (font_desc);
 
@@ -391,6 +401,11 @@ mini_font_selection_get_font_name (MiniFontSelection *fontsel)
 {
   g_printerr ("mini_fontsel.c: mini_font_selection_get_font_name\n");
 
-  return g_strdup_printf ("%s %s %d", fontsel->family_value, 
-                          fontsel->style_value, fontsel->size_value);
+  if (g_ascii_strcasecmp (fontsel->style_value, "regular") == 0)
+    return g_strdup_printf ("%s %d", fontsel->family_value, 
+                                     fontsel->size_value);
+  else
+    return g_strdup_printf ("%s %s %d", fontsel->family_value, 
+                                        fontsel->style_value, 
+                                        fontsel->size_value);
 }
