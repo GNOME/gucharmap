@@ -1428,12 +1428,12 @@ charmap_init (Charmap *charmap)
   charmap->page_first_char = (gunichar) 0x0000;
   charmap->active_char = (gunichar) 0x0000;
 
-  /* the caption */
-  gtk_box_pack_start (GTK_BOX (charmap), make_caption (charmap), 
-                      FALSE, FALSE, 0);
-
   /* the text_to_copy */
   gtk_box_pack_start (GTK_BOX (charmap), make_text_to_copy (charmap), 
+                      FALSE, FALSE, 0);
+
+  /* the caption */
+  gtk_box_pack_start (GTK_BOX (charmap), make_caption (charmap), 
                       FALSE, FALSE, 0);
 
   set_caption (charmap);
