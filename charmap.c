@@ -227,6 +227,28 @@ expose_event (GtkWidget *widget,
 }
 
 
+/* draws the square that this character is in */
+static void
+expose_char_for_redraw (Charmap *charmap, gunichar uc)
+{
+  gint row, col, x, y, dim;
+
+  g_assert (uc >= charmap->page_first_char);
+  g_assert (uc < charmap->page_first_char + CHARMAP_ROWS * CHARMAP_COLS);
+
+  row = (uc - charmap->page_first_char) / CHARMAP_COLS;
+  col = uc % CHARMAP_ROWS;
+
+  dim = calculate_square_dimension (charmap->font_metrics);
+
+  x = row * (dim + 1) + 1;
+  y = col * (dim + 1) + 1;
+
+  g_print ("calling gtk_widget_queue_draw_area (x = %d, y = %d, width = %d, height = %d\n", x, y, dim, dim);
+  gtk_widget_queue_draw_area (charmap->tabulus, x, y, dim, dim);
+}
+
+
 /* for moving around in the charmap */
 /* XXX: redrawing could be much more efficient */
 static gint
@@ -235,104 +257,80 @@ key_press_event (GtkWidget *widget,
                  gpointer callback_data)
 {
   Charmap *charmap;
-  gboolean need_redraw = FALSE;
+  gunichar old_active_char;
+  gunichar old_page_first_char;
 
   debug ("key_press_event\n");
 
   charmap = CHARMAP (callback_data);
+  old_active_char = charmap->active_char;
 
   switch (event->keyval)
     {
       case GDK_Home: case GDK_KP_Home:
         charmap->active_char = 0x0000;
-        need_redraw = TRUE;
-        need_redraw = TRUE;
         break;
 
       case GDK_End: case GDK_KP_End:
         charmap->active_char = UNICHAR_MAX;
-        need_redraw = TRUE;
         break;
 
       case GDK_Up: case GDK_KP_Up: case GDK_k:
         if (charmap->active_char >= CHARMAP_COLS)
-          {
-            charmap->active_char -= CHARMAP_COLS;
-            need_redraw = TRUE;
-          }
+          charmap->active_char -= CHARMAP_COLS;
         break;
 
       case GDK_Down: case GDK_KP_Down: case GDK_j:
         if (charmap->active_char <= UNICHAR_MAX - CHARMAP_COLS)
-          {
-            charmap->active_char += CHARMAP_COLS;
-            need_redraw = TRUE;
-          }
+          charmap->active_char += CHARMAP_COLS;
         break;
 
       case GDK_Left: case GDK_KP_Left: case GDK_h:
         if (charmap->active_char > 0)
-          {
-            charmap->active_char--;
-            need_redraw = TRUE;
-          }
+          charmap->active_char--;
         break;
 
       case GDK_Right: case GDK_KP_Right: case GDK_l:
         if (charmap->active_char < UNICHAR_MAX)
-          {
-            charmap->active_char++;
-            need_redraw = TRUE;
-          }
+          charmap->active_char++;
         break;
 
       case GDK_Page_Up: case GDK_b: case GDK_minus:
         if (charmap->active_char >= CHARMAP_COLS * CHARMAP_ROWS)
-          {
-            charmap->active_char -= CHARMAP_COLS * CHARMAP_ROWS;
-            need_redraw = TRUE;
-          }
+          charmap->active_char -= CHARMAP_COLS * CHARMAP_ROWS;
         else if (charmap->active_char > 0)
-          {
-            charmap->active_char = 0;
-            need_redraw = TRUE;
-          }
+          charmap->active_char = 0;
         break;
 
       case GDK_Page_Down: case GDK_space:
         if (charmap->active_char < UNICHAR_MAX - CHARMAP_COLS * CHARMAP_ROWS)
-          {
-            charmap->active_char += CHARMAP_COLS * CHARMAP_ROWS;
-            need_redraw = TRUE;
-          }
+          charmap->active_char += CHARMAP_COLS * CHARMAP_ROWS;
         else if (charmap->active_char < UNICHAR_MAX)
-          {
-            charmap->active_char = UNICHAR_MAX;
-            need_redraw = TRUE;
-          }
+          charmap->active_char = UNICHAR_MAX;
         break;
 
       default:
         return FALSE; /* don't redraw */
     }
 
+  old_page_first_char = charmap->page_first_char;
+
   /* move to the page with this active char */
   charmap->page_first_char 
       = charmap->active_char - (charmap->active_char % 
                                 (CHARMAP_COLS * CHARMAP_ROWS));
 
-  if (need_redraw)
+  if (charmap->page_first_char != old_page_first_char)
     {
-      /* redraw pixmap*/
       draw_tabulus_pixmap (charmap);
-    
-      /* XXX: send expose event instead? */
-      gdk_draw_drawable (charmap->tabulus->window,
-                         charmap->tabulus->style->fg_gc[GTK_STATE_NORMAL],
-                         charmap->tabulus_pixmap,
-                         0, 0, 0, 0,
-                         charmap->tabulus->allocation.width,
-                         charmap->tabulus->allocation.height);
+      gtk_widget_queue_draw (GTK_WIDGET (charmap->tabulus));
+    }
+  else if (charmap->active_char != old_active_char)
+    {
+      draw_tabulus_pixmap (charmap);
+
+      expose_char_for_redraw (charmap, old_active_char);
+      expose_char_for_redraw (charmap, charmap->active_char);
     }
 
   return FALSE;
@@ -369,18 +367,15 @@ button_press_event (GtkWidget *widget,
   old_active_char = charmap->active_char;
   charmap->active_char = get_char_at (charmap, event->x, event->y);
 
+  g_print ("old active char =  %u ;  new active char =  %u\n", 
+           old_active_char, charmap->active_char);
+
   if (charmap->active_char != old_active_char)
     {
-      /* redraw pixmap*/
       draw_tabulus_pixmap (charmap);
     
-      /* XXX: send expose event instead? */
-      gdk_draw_drawable (charmap->tabulus->window,
-                         charmap->tabulus->style->fg_gc[GTK_STATE_NORMAL],
-                         charmap->tabulus_pixmap,
-                         0, 0, 0, 0,
-                         charmap->tabulus->allocation.width,
-                         charmap->tabulus->allocation.height);
+      expose_char_for_redraw (charmap, old_active_char);
+      expose_char_for_redraw (charmap, charmap->active_char);
     }
 
   return FALSE;
