@@ -53,12 +53,11 @@ main (gint argc, gchar **argv)
 
   gtk_container_set_border_width (GTK_CONTAINER (window), 5);
 
-  vbox = gtk_vbox_new (FALSE, 0);
+  vbox = gtk_vbox_new (FALSE, 5);
   gtk_container_add (GTK_CONTAINER (window), vbox);
 
   charmap = charmap_new ();
   gtk_box_pack_start (GTK_BOX (vbox), charmap, TRUE, TRUE, 0);
-  gtk_box_pack_start (GTK_BOX (vbox), gtk_hseparator_new (), TRUE, TRUE, 0);
 
   fontsel = gtk_font_selection_new ();
   gtk_box_pack_start (GTK_BOX (vbox), fontsel, TRUE, TRUE, 0);

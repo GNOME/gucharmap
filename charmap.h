@@ -61,6 +61,8 @@ struct _Charmap
   gunichar active_char;      /* (gunichar)(-1) if none selected */
 
   Caption *caption;
+
+  GtkWidget *text_to_copy;
 };
 
 
@@ -72,8 +74,6 @@ struct _CharmapClass
 
 struct _Caption
 {
-  GtkWidget *table;
-
   /* labels */
   GtkWidget *codepoint;
   GtkWidget *character;

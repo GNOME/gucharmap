@@ -436,10 +436,17 @@ charmap_class_init (CharmapClass *clazz)
 }
 
 
+/* does all the initial construction */
 void
 charmap_init (Charmap *charmap)
 {
+  GtkWidget *hbox;
+  GtkWidget *frame;
+  GtkWidget *table;
+
   debug ("charmap_init\n");
+
+  gtk_box_set_spacing (GTK_BOX (charmap), 5);
 
   charmap->tabulus = gtk_drawing_area_new ();
 
@@ -479,25 +486,19 @@ charmap_init (Charmap *charmap)
   charmap->page_first_char = (gunichar) 0x0000;
   charmap->active_char = (gunichar) 0x0000;
 
-  /*
-  charmap->caption = gtk_label_new ("");
-  gtk_label_set_selectable (GTK_LABEL (charmap->caption), TRUE);
-  set_caption (charmap);
-  gtk_box_pack_start (GTK_BOX (charmap), charmap->caption, TRUE, TRUE, 0);
-  */
   charmap->caption = g_malloc (sizeof (Caption));
-  charmap->caption->table = gtk_table_new (5, 5, FALSE);
-  charmap->caption->codepoint = gtk_label_new ("codepoint");
-  charmap->caption->character = gtk_label_new ("character");;
-  charmap->caption->category = gtk_label_new ("category");
-  charmap->caption->name = gtk_label_new ("name");
-  charmap->caption->kDefinition = gtk_label_new ("kDefinition");
-  charmap->caption->kCantonese = gtk_label_new ("kCantonese");
-  charmap->caption->kKorean = gtk_label_new ("kKorean");
-  charmap->caption->kJapaneseOn = gtk_label_new ("kJapaneseOn");
-  charmap->caption->kTang = gtk_label_new ("kTang");
-  charmap->caption->kMandarin = gtk_label_new ("kMandarin");
-  charmap->caption->decomposition = gtk_label_new ("decomposition");
+  table = gtk_table_new (5, 5, FALSE);
+  charmap->caption->codepoint = gtk_label_new ("codepoint: ");
+  charmap->caption->character = gtk_label_new ("character: ");;
+  charmap->caption->category = gtk_label_new ("category: ");
+  charmap->caption->name = gtk_label_new ("name: ");
+  charmap->caption->kDefinition = gtk_label_new ("kDefinition: ");
+  charmap->caption->kCantonese = gtk_label_new ("kCantonese: ");
+  charmap->caption->kKorean = gtk_label_new ("kKorean: ");
+  charmap->caption->kJapaneseOn = gtk_label_new ("kJapaneseOn: ");
+  charmap->caption->kTang = gtk_label_new ("kTang: ");
+  charmap->caption->kMandarin = gtk_label_new ("kMandarin: ");
+  charmap->caption->decomposition = gtk_label_new ("decomposition: ");
 
   gtk_label_set_selectable (GTK_LABEL (charmap->caption->codepoint), TRUE);
   gtk_label_set_selectable (GTK_LABEL (charmap->caption->character), TRUE);
@@ -510,29 +511,6 @@ charmap_init (Charmap *charmap)
   gtk_label_set_selectable (GTK_LABEL (charmap->caption->kTang), TRUE);
   gtk_label_set_selectable (GTK_LABEL (charmap->caption->kMandarin), TRUE);
   gtk_label_set_selectable (GTK_LABEL (charmap->caption->decomposition), TRUE);
-
-  gtk_label_set_justify (GTK_LABEL (charmap->caption->codepoint), 
-                         GTK_JUSTIFY_LEFT);
-  gtk_label_set_justify (GTK_LABEL (charmap->caption->character), 
-                         GTK_JUSTIFY_LEFT);
-  gtk_label_set_justify (GTK_LABEL (charmap->caption->category), 
-                         GTK_JUSTIFY_LEFT);
-  gtk_label_set_justify (GTK_LABEL (charmap->caption->name), 
-                         GTK_JUSTIFY_LEFT);
-  gtk_label_set_justify (GTK_LABEL (charmap->caption->kDefinition), 
-                         GTK_JUSTIFY_LEFT);
-  gtk_label_set_justify (GTK_LABEL (charmap->caption->kCantonese), 
-                         GTK_JUSTIFY_LEFT);
-  gtk_label_set_justify (GTK_LABEL (charmap->caption->kKorean), 
-                         GTK_JUSTIFY_LEFT);
-  gtk_label_set_justify (GTK_LABEL (charmap->caption->kJapaneseOn), 
-                         GTK_JUSTIFY_LEFT);
-  gtk_label_set_justify (GTK_LABEL (charmap->caption->kTang), 
-                         GTK_JUSTIFY_LEFT);
-  gtk_label_set_justify (GTK_LABEL (charmap->caption->kMandarin), 
-                         GTK_JUSTIFY_LEFT);
-  gtk_label_set_justify (GTK_LABEL (charmap->caption->decomposition), 
-                         GTK_JUSTIFY_LEFT);
 
   gtk_misc_set_alignment (GTK_MISC (charmap->caption->codepoint), 0, 0);
   gtk_misc_set_alignment (GTK_MISC (charmap->caption->character), 0, 0);
@@ -573,42 +551,51 @@ charmap_init (Charmap *charmap)
    * *---------------------------------------------------------------*
    */
 
-  gtk_table_attach_defaults (GTK_TABLE (charmap->caption->table), 
-                             charmap->caption->codepoint,
+  gtk_table_attach_defaults (GTK_TABLE (table), charmap->caption->codepoint,
                              0, 1, 0, 1);
-  gtk_table_attach_defaults (GTK_TABLE (charmap->caption->table), 
-                             charmap->caption->character,
+  gtk_table_attach_defaults (GTK_TABLE (table), charmap->caption->character,
                              1, 2, 0, 1);
-  gtk_table_attach_defaults (GTK_TABLE (charmap->caption->table), 
-                             charmap->caption->category,
+  gtk_table_attach_defaults (GTK_TABLE (table), charmap->caption->category,
                              2, 5, 0, 1);
-  gtk_table_attach_defaults (GTK_TABLE (charmap->caption->table), 
-                             charmap->caption->name,
+  gtk_table_attach_defaults (GTK_TABLE (table), charmap->caption->name,
                              0, 5, 1, 2);
-  gtk_table_attach_defaults (GTK_TABLE (charmap->caption->table), 
-                             charmap->caption->kDefinition,
+  gtk_table_attach_defaults (GTK_TABLE (table), charmap->caption->kDefinition,
                              0, 5, 2, 3);
-  gtk_table_attach_defaults (GTK_TABLE (charmap->caption->table), 
-                             charmap->caption->kCantonese,
+  gtk_table_attach_defaults (GTK_TABLE (table), charmap->caption->kCantonese,
                              0, 1, 3, 4);
-  gtk_table_attach_defaults (GTK_TABLE (charmap->caption->table), 
-                             charmap->caption->kJapaneseOn,
+  gtk_table_attach_defaults (GTK_TABLE (table), charmap->caption->kJapaneseOn,
                              1, 2, 3, 4);
-  gtk_table_attach_defaults (GTK_TABLE (charmap->caption->table), 
-                             charmap->caption->kKorean,
+  gtk_table_attach_defaults (GTK_TABLE (table), charmap->caption->kKorean,
                              2, 3, 3, 4);
-  gtk_table_attach_defaults (GTK_TABLE (charmap->caption->table), 
-                             charmap->caption->kMandarin,
+  gtk_table_attach_defaults (GTK_TABLE (table), charmap->caption->kMandarin,
                              3, 4, 3, 4);
-  gtk_table_attach_defaults (GTK_TABLE (charmap->caption->table), 
-                             charmap->caption->kTang,
+  gtk_table_attach_defaults (GTK_TABLE (table), charmap->caption->kTang,
                              4, 5, 3, 4);
-  gtk_table_attach_defaults (GTK_TABLE (charmap->caption->table), 
-                             charmap->caption->decomposition,
+  gtk_table_attach_defaults (GTK_TABLE (table), 
+                             charmap->caption->decomposition, 
                              0, 5, 4, 5);
 
-  gtk_box_pack_start (GTK_BOX (charmap), charmap->caption->table, 
+  /* put this stuff in a frame */
+  frame = gtk_frame_new (NULL);
+  gtk_container_add (GTK_CONTAINER (frame), table);
+  gtk_box_pack_start (GTK_BOX (charmap), frame, TRUE, TRUE, 0);
+
+  /* the "text to copy" part */
+  hbox = gtk_hbox_new (FALSE, 5);
+  gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new ("text to copy:"), 
                       TRUE, TRUE, 0);
+
+  charmap->text_to_copy = gtk_entry_new ();
+  gtk_box_pack_start (GTK_BOX (hbox), charmap->text_to_copy, TRUE, TRUE, 0);
+
+  gtk_box_pack_start (GTK_BOX (hbox), 
+                      gtk_button_new_from_stock (GTK_STOCK_COPY), 
+                      TRUE, TRUE, 0);
+
+  frame = gtk_frame_new (NULL);
+  gtk_container_add (GTK_CONTAINER (frame), hbox);
+
+  gtk_box_pack_start (GTK_BOX (charmap), frame, TRUE, TRUE, 0);
 }
 
 
