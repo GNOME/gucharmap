@@ -349,6 +349,7 @@ static void
 information_dialog (GucharmapSearchDialog *search_dialog,
                     const gchar           *message)
 {
+  GucharmapSearchDialogPrivate *priv = GUCHARMAP_SEARCH_DIALOG_GET_PRIVATE (search_dialog);
   GtkWidget *dialog, *hbox, *icon, *label;
 
   /* follow hig guidelines */
@@ -361,7 +362,11 @@ information_dialog (GucharmapSearchDialog *search_dialog,
   gtk_window_set_icon (GTK_WINDOW (dialog), gtk_window_get_icon (GTK_WINDOW (search_dialog)));
   gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
   gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
-  gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (search_dialog));
+
+  if (GTK_WIDGET_VISIBLE (search_dialog))
+    gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (search_dialog));
+  else
+    gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (priv->guw));
 
   gtk_dialog_add_button (GTK_DIALOG (dialog), GTK_STOCK_OK, GTK_RESPONSE_ACCEPT);
 
@@ -589,5 +594,4 @@ gucharmap_search_dialog_new (GucharmapWindow *guw)
     gtk_window_set_icon (GTK_WINDOW (search_dialog), gtk_window_get_icon (GTK_WINDOW (guw)));
 
   return GTK_WIDGET (search_dialog);
-
 }
