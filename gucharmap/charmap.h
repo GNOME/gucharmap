@@ -129,11 +129,11 @@ struct _Caption
 {
   GtkTreeStore *caption_model;
 
-  GtkTreeRowReference *codepoint;
+  GtkTreeRowReference *character;
   GtkTreeRowReference *category;
-  GtkTreeRowReference *name;
   GtkTreeRowReference *decomposition;
   GtkTreeRowReference *utf8;
+  GtkTreeRowReference *other_reps;
 
 #if ENABLE_UNIHAN
   GtkTreeRowReference *kDefinition;

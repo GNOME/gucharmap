@@ -145,19 +145,12 @@ set_caption (Charmap *charmap)
 
   model = GTK_TREE_MODEL (charmap->caption->caption_model);
 
-  /* name */
+  /* codepoint and name */
   gtk_tree_model_get_iter (
           model, &iter, 
-          gtk_tree_row_reference_get_path (charmap->caption->name));
-  gtk_tree_store_set (charmap->caption->caption_model, &iter, CAPTION_VALUE, 
-                      get_unicode_name (charmap->active_char), -1);
-
-  /* codepoint */
-  gtk_tree_model_get_iter (
-          model, &iter, 
-          gtk_tree_row_reference_get_path (charmap->caption->codepoint));
-  temp = g_strdup_printf ("U+%4.4X (%u)", 
-                          charmap->active_char, charmap->active_char);
+          gtk_tree_row_reference_get_path (charmap->caption->character));
+  temp = g_strdup_printf ("U+%4.4X %s", charmap->active_char, 
+                          get_unicode_name (charmap->active_char));
   gtk_tree_store_set (charmap->caption->caption_model, &iter, 
                       CAPTION_VALUE, temp, -1);
   g_free (temp);
@@ -177,6 +170,18 @@ set_caption (Charmap *charmap)
   gtk_tree_model_get_iter (
           model, &iter, 
           gtk_tree_row_reference_get_path (charmap->caption->utf8));
+  gtk_tree_store_set (charmap->caption->caption_model, &iter, 
+                      CAPTION_VALUE, gstemp->str, -1);
+  g_string_free (gstemp, TRUE);
+
+  /* other representations (for C, html) */
+  gstemp = g_string_new (NULL);
+  for (i = 0;  i < n;  i++)
+    g_string_append_printf (gstemp, "\\%3.3o", ubuf[i]);
+  g_string_append_printf (gstemp, "\t\t&#%d;", charmap->active_char);
+  gtk_tree_model_get_iter (
+          model, &iter, 
+          gtk_tree_row_reference_get_path (charmap->caption->other_reps));
   gtk_tree_store_set (charmap->caption->caption_model, &iter, 
                       CAPTION_VALUE, gstemp->str, -1);
   g_string_free (gstemp, TRUE);
@@ -1576,16 +1581,10 @@ make_caption (Charmap *charmap)
   model = GTK_TREE_MODEL (charmap->caption->caption_model);
 
   gtk_tree_store_append (charmap->caption->caption_model, &iter0, NULL);
-  charmap->caption->name = gtk_tree_row_reference_new (
+  charmap->caption->character = gtk_tree_row_reference_new (
           model, gtk_tree_model_get_path (model, &iter0));
   gtk_tree_store_set (charmap->caption->caption_model, &iter0,
-                      CAPTION_LABEL, _("Name"), -1);
-
-  gtk_tree_store_append (charmap->caption->caption_model, &iter0, NULL);
-  charmap->caption->codepoint = gtk_tree_row_reference_new (
-          model, gtk_tree_model_get_path (model, &iter0));
-  gtk_tree_store_set (charmap->caption->caption_model, &iter0,
-                      CAPTION_LABEL, _("Unicode code point"), -1);
+                      CAPTION_LABEL, _("Character"), -1);
 
   gtk_tree_store_append (charmap->caption->caption_model, &iter1, &iter0);
   charmap->caption->category = gtk_tree_row_reference_new (
@@ -1604,6 +1603,12 @@ make_caption (Charmap *charmap)
           model, gtk_tree_model_get_path (model, &iter1));
   gtk_tree_store_set (charmap->caption->caption_model, &iter1,
                       CAPTION_LABEL, _("UTF-8"), -1);
+
+  gtk_tree_store_append (charmap->caption->caption_model, &iter1, &iter0);
+  charmap->caption->other_reps = gtk_tree_row_reference_new (
+          model, gtk_tree_model_get_path (model, &iter1));
+  gtk_tree_store_set (charmap->caption->caption_model, &iter1,
+                      CAPTION_LABEL, _("Other representations"), -1);
 
 #if ENABLE_UNIHAN
   gtk_tree_store_append (charmap->caption->caption_model, &iter1, &iter0);
