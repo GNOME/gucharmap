@@ -20,6 +20,7 @@
 
 #include <gtk/gtk.h>
 #include "charmap.h"
+#include "gucharmap_intl.h"
 
 
 #define VBOX_SPACING 3
@@ -82,7 +83,7 @@ main (gint argc, gchar **argv)
   gtk_init (&argc, &argv);
 
   window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-  gtk_window_set_title (GTK_WINDOW (window), "Unicode Character Map");
+  gtk_window_set_title (GTK_WINDOW (window), _("Unicode Character Map"));
 
   g_signal_connect (G_OBJECT (window), "destroy",
                     G_CALLBACK (gtk_main_quit), NULL);

@@ -22,17 +22,24 @@ AC_INIT([gucharmap], [0.1], [nlevitt@users.sourceforge.net])
 AM_CONFIG_HEADER(config.h)
 AM_INIT_AUTOMAKE(gucharmap, 0.1)
 
+# checks for progs
 AC_PROG_CC
 AC_PROG_LIBTOOL
 
+# checks for stuff
 GETTEXT_PACKAGE=gucharmap
-AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE")
-ALL_LINGUAS=""
+AC_SUBST(GETTEXT_PACKAGE)
+AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", 
+                   [Define the gettext package to be used])
+ALL_LINGUAS="fr"
 AM_GLIB_GNU_GETTEXT
 
 PKG_CHECK_MODULES(GUCHARMAP, gtk+-2.0 >= 2.0.0)
 
+# checks for funcs 
+AC_CHECK_FUNCS([bind_textdomain_codeset])
+
 AC_SUBST(GUCHARMAP_CFLAGS)
 AC_SUBST(GUCHARMAP_LIBS)
 
-AC_OUTPUT(Makefile)
+AC_OUTPUT([Makefile po/Makefile.in])
