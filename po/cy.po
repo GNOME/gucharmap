@@ -2,949 +2,1038 @@
 # Copyright (C) Telsa Gwynne
 # This file is distributed under the same license as the gucharmap package.
 # Telsa Gwynne <hobbit@aloss.ukuu.org.uk>, 2003
-# Dafydd Harries <daf@parnassus.ath.cx>, 2003
+# Dafydd Harries <daf@muse.19inch.net>, 2003 2004
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-08-19 02:57+0100\n"
-"PO-Revision-Date: 2003-08-15 16:18+0100\n"
-"Last-Translator: Dafydd Harries <daf@parnassus.ath.cx>\n"
+"POT-Creation-Date: 2004-03-16 17:28+0000\n"
+"PO-Revision-Date: 2004-03-16 17:53+0000\n"
+"Last-Translator: Dafydd Harries <daf@muse.19inch.net>\n"
 "Language-Team: Welsh <gnome-cy@pengwyn.linux.org.uk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. ID
-#: gucharmap.desktop.in.h:1 gucharmap/gucharmap-window.c:386
-#: gucharmap/gucharmap-window.c:982 gucharmap/imgucharmap.c:209
-msgid "Unicode Character Map"
-msgstr "Map Nodau Unicode"
+#: gucharmap.desktop.in.h:1 gucharmap/gucharmap-window.c:324
+#: gucharmap/gucharmap-window.c:856
+msgid "Character Map"
+msgstr "Map Nodau"
 
-#: gucharmap/gucharmap-charmap.c:397
+#: gucharmap.desktop.in.h:2
+msgid "Insert special characters into documents"
+msgstr "Mewnosod nodau arbennig i fewn i ddogfenni"
+
+#: gucharmap/gucharmap-charmap.c:250
 msgid "Canonical decomposition:"
 msgstr "Datgyfansoddiad canonaidd:"
 
-#: gucharmap/gucharmap-charmap.c:437 gucharmap/gucharmap-table.c:332
+#: gucharmap/gucharmap-charmap.c:290 gucharmap/gucharmap-table.c:294
 msgid "[not a printable character]"
 msgstr "[nid yw'n nod arfraffadwy]"
 
-#: gucharmap/gucharmap-charmap.c:457
+#: gucharmap/gucharmap-charmap.c:304
 msgid "General Character Properties"
 msgstr "Priodweddau Nod Cyffredinol"
 
 #. character category
-#: gucharmap/gucharmap-charmap.c:460
+#: gucharmap/gucharmap-charmap.c:307
 msgid "Unicode category:"
 msgstr "Categori Unicode:"
 
-#: gucharmap/gucharmap-charmap.c:466
+#: gucharmap/gucharmap-charmap.c:313
 msgid "Various Useful Representations"
 msgstr "Amryw Gynrycholiadau Defnyddion"
 
-#: gucharmap/gucharmap-charmap.c:475
+#: gucharmap/gucharmap-charmap.c:322
 msgid "UTF-8:"
 msgstr "UTF-8:"
 
-#: gucharmap/gucharmap-charmap.c:483
+#: gucharmap/gucharmap-charmap.c:330
 msgid "Octal escaped UTF-8:"
 msgstr "UTF-8 wedi ei ddianc yn wythol:"
 
-#: gucharmap/gucharmap-charmap.c:489
+#: gucharmap/gucharmap-charmap.c:336
 msgid "Decimal entity reference:"
 msgstr "Cyfeirnod endid degol:"
 
-#: gucharmap/gucharmap-charmap.c:495
+#: gucharmap/gucharmap-charmap.c:342
 msgid "Annotations and Cross References"
 msgstr "Nodiadau a Croesgyfeiriadau"
 
-#: gucharmap/gucharmap-charmap.c:502
+#: gucharmap/gucharmap-charmap.c:349
 msgid "Alias names:"
 msgstr "Enwau aliasau:"
 
-#: gucharmap/gucharmap-charmap.c:511
+#: gucharmap/gucharmap-charmap.c:358
 msgid "Notes:"
 msgstr "Nodiadau:"
 
-#: gucharmap/gucharmap-charmap.c:520
+#: gucharmap/gucharmap-charmap.c:367
 msgid "See also:"
 msgstr "Gweler hefyd:"
 
-#: gucharmap/gucharmap-charmap.c:529
+#: gucharmap/gucharmap-charmap.c:376
 msgid "Approximate equivalents:"
 msgstr "Cyfwerthoedd bras:"
 
-#: gucharmap/gucharmap-charmap.c:538
+#: gucharmap/gucharmap-charmap.c:385
 msgid "Equivalents:"
 msgstr "Cyfwerthoedd:"
 
-#: gucharmap/gucharmap-charmap.c:553
+#: gucharmap/gucharmap-charmap.c:400
 msgid "CJK Ideograph Information"
 msgstr "Gwydobaeth Arwyddlun CJK"
 
-#: gucharmap/gucharmap-charmap.c:558
+#: gucharmap/gucharmap-charmap.c:405
 msgid "Definition in English:"
 msgstr "Diffiniad yn Saesneg:"
 
-#: gucharmap/gucharmap-charmap.c:563
+#: gucharmap/gucharmap-charmap.c:410
 msgid "Mandarin Pronunciation:"
 msgstr "Ynganiad Mandarin:"
 
-#: gucharmap/gucharmap-charmap.c:568
+#: gucharmap/gucharmap-charmap.c:415
 msgid "Japanese On Pronunciation:"
 msgstr "Ynganiad On Japaneg:"
 
-#: gucharmap/gucharmap-charmap.c:573
+#: gucharmap/gucharmap-charmap.c:420
 msgid "Japanese Kun Pronunciation:"
 msgstr "Ynganiad Kun Japaneg:"
 
-#: gucharmap/gucharmap-charmap.c:578
+#: gucharmap/gucharmap-charmap.c:425
 msgid "Tang Pronunciation:"
 msgstr "Ynganiad Tang:"
 
-#: gucharmap/gucharmap-charmap.c:583
+#: gucharmap/gucharmap-charmap.c:430
 msgid "Korean Pronunciation:"
 msgstr "Ynganiad Corëeg:"
 
-#: gucharmap/gucharmap-charmap.c:890
+#: gucharmap/gucharmap-charmap.c:731
 msgid "Characte_r Table"
 msgstr "Tabl _Nodau"
 
-#: gucharmap/gucharmap-charmap.c:893
+#: gucharmap/gucharmap-charmap.c:734
 msgid "Character _Details"
 msgstr "_Manylion Nod"
 
-#: gucharmap/gucharmap-charmap.c:911
-msgid "List of Unicode Blocks"
-msgstr "Rhestr Blociau Unicode"
-
-#: gucharmap/gucharmap-mini-fontsel.c:197
+#: gucharmap/gucharmap-mini-fontsel.c:203
 msgid "Font"
 msgstr "Ffont"
 
-#: gucharmap/gucharmap-mini-fontsel.c:204
+#: gucharmap/gucharmap-mini-fontsel.c:210
 msgid "Font Family"
 msgstr "Teulu Ffont"
 
-#: gucharmap/gucharmap-mini-fontsel.c:208
-msgid "_Bold"
-msgstr "_Trwm"
-
-#: gucharmap/gucharmap-mini-fontsel.c:213
-msgid "_Italic"
-msgstr "_Italeg"
-
-#: gucharmap/gucharmap-mini-fontsel.c:222
+#: gucharmap/gucharmap-mini-fontsel.c:230
 msgid "Font Size"
 msgstr "Maint Ffont"
 
-#: gucharmap/gucharmap-table.c:1435
-msgid "Clipboard is empty."
-msgstr "Mae'r clipfwrdd yn wag."
+#. Unicode assigns "Common" as the script name for any character not
+#. * specifically listed in Scripts.txt
+#: gucharmap/gucharmap-script-codepoint-list.c:458
+#: gucharmap/unicode-scripts.h:20
+msgid "Common"
+msgstr "Cyffredin"
 
-#: gucharmap/gucharmap-table.c:1437
-msgid "There is no selected text."
-msgstr "Does dim testun dewisiedig."
-
-#: gucharmap/gucharmap-table.c:1445 gucharmap/gucharmap-table.c:1708
+#: gucharmap/gucharmap-table.c:1509
 msgid "Unknown character, unable to identify."
 msgstr "Nod anhysbys, ni ellir ei adnabod."
 
-#: gucharmap/gucharmap-table.c:1449 gucharmap/gucharmap-table.c:1712
-msgid "Character found."
-msgstr "Canfodwyd y nod."
-
-#: gucharmap/gucharmap-table.c:1780
-msgid "Character Table"
-msgstr "Tabl Nodau"
-
-#: gucharmap/gucharmap-unicode-info.c:140
-#, c-format
-msgid "HANGUL SYLLABLE %s%s%s"
-msgstr "SILLAF HANGUL %s%s%s"
-
-#: gucharmap/gucharmap-unicode-info.c:151
-msgid "<CJK Ideograph Extension A>"
-msgstr "<Estyniad Arwyddlun CJK A>"
-
-#: gucharmap/gucharmap-unicode-info.c:153
-msgid "<CJK Ideograph>"
-msgstr "<Arwyddlun CJK>"
-
-#: gucharmap/gucharmap-unicode-info.c:157
-msgid "<Non Private Use High Surrogate>"
-msgstr "<Dirprwy Uchel Dim Defnydd Preifat>"
-
-#: gucharmap/gucharmap-unicode-info.c:159
-msgid "<Private Use High Surrogate>"
-msgstr "<Dirprwy Uchel Defnydd Preifat>"
-
-#: gucharmap/gucharmap-unicode-info.c:161
-msgid "<Low Surrogate, Last>"
-msgstr "<Dirprwy Isel, Olaf>"
-
-#: gucharmap/gucharmap-unicode-info.c:163
-msgid "<Private Use>"
-msgstr "<Defnydd Preifat>"
-
-#: gucharmap/gucharmap-unicode-info.c:165
-msgid "<Plane 15 Private Use>"
-msgstr "<Plân 15 Defnydd Preifat>"
-
-#: gucharmap/gucharmap-unicode-info.c:167
-msgid "<Plane 16 Private Use>"
-msgstr "<Plân 16 Defnydd Preifat>"
-
-#: gucharmap/gucharmap-unicode-info.c:169
-msgid "<CJK Ideograph Extension B>"
-msgstr "<Estyniad Arwyddlun CJK B>"
-
-#: gucharmap/gucharmap-unicode-info.c:174
-msgid "<not assigned>"
-msgstr "<heb ei neilltuo>"
-
-#: gucharmap/gucharmap-unicode-info.c:186
-msgid "Other, Control"
-msgstr "Arall, Rheoli"
-
-#: gucharmap/gucharmap-unicode-info.c:187
-msgid "Other, Format"
-msgstr "Arall, Fformat"
-
-#: gucharmap/gucharmap-unicode-info.c:188
-msgid "Other, Not Assigned"
-msgstr "Arall, Heb ei Neilltuo"
-
-#: gucharmap/gucharmap-unicode-info.c:189
-msgid "Other, Private Use"
-msgstr "Arall, Defnydd Preifat"
-
-#: gucharmap/gucharmap-unicode-info.c:190
-msgid "Other, Surrogate"
-msgstr "Arall, Dirprwy"
-
-#: gucharmap/gucharmap-unicode-info.c:191
-msgid "Letter, Lowercase"
-msgstr "Llythyren, Llythyren Fach"
-
-#: gucharmap/gucharmap-unicode-info.c:192
-msgid "Letter, Modifier"
-msgstr "Llythyren, Addasydd"
-
-#: gucharmap/gucharmap-unicode-info.c:193
-msgid "Letter, Other"
-msgstr "Llythyren, Arall"
-
-#: gucharmap/gucharmap-unicode-info.c:194
-msgid "Letter, Titlecase"
-msgstr "Llythyren, Priflythrennedd Teitl"
-
-#: gucharmap/gucharmap-unicode-info.c:195
-msgid "Letter, Uppercase"
-msgstr "Llythyren, Priflythyren"
-
-#: gucharmap/gucharmap-unicode-info.c:196
-msgid "Mark, Spacing Combining"
-msgstr "Marc, Bylchu Cyfuno"
-
-#: gucharmap/gucharmap-unicode-info.c:197
-msgid "Mark, Enclosing"
-msgstr "Arall, Amgau"
-
-#: gucharmap/gucharmap-unicode-info.c:198
-msgid "Mark, Non-Spacing"
-msgstr "Arall, Nid Bylchu"
-
-#: gucharmap/gucharmap-unicode-info.c:199
-msgid "Number, Decimal Digit"
-msgstr "Rhif, Digid Degol"
-
-#: gucharmap/gucharmap-unicode-info.c:200
-msgid "Number, Letter"
-msgstr "Rhif, Llythyren"
-
-#: gucharmap/gucharmap-unicode-info.c:201
-msgid "Number, Other"
-msgstr "Rhif, Arall"
-
-#: gucharmap/gucharmap-unicode-info.c:202
-msgid "Punctuation, Connector"
-msgstr "Atalnod, Cysylltwr"
-
-#: gucharmap/gucharmap-unicode-info.c:203
-msgid "Punctuation, Dash"
-msgstr "Atalnod, Llinell Doriad"
-
-#: gucharmap/gucharmap-unicode-info.c:204
-msgid "Punctuation, Close"
-msgstr "Atalnod, Cau"
-
-#: gucharmap/gucharmap-unicode-info.c:205
-msgid "Punctuation, Final Quote"
-msgstr "Atalnod, Dyfynod Olaf"
-
-#: gucharmap/gucharmap-unicode-info.c:206
-msgid "Punctuation, Initial Quote"
-msgstr "Atalnod, Dyfynod Cyntaf"
-
-#: gucharmap/gucharmap-unicode-info.c:207
-msgid "Punctuation, Other"
-msgstr "Atalnod, Arall"
-
-#: gucharmap/gucharmap-unicode-info.c:208
-msgid "Punctuation, Open"
-msgstr "Atalnod, Agor"
-
-#: gucharmap/gucharmap-unicode-info.c:209
-msgid "Symbol, Currency"
-msgstr "Symbol, Ariannol"
-
-#: gucharmap/gucharmap-unicode-info.c:210
-msgid "Symbol, Modifier"
-msgstr "Symol, Addasydd"
-
-#: gucharmap/gucharmap-unicode-info.c:211
-msgid "Symbol, Math"
-msgstr "Symbol, Mathemateg"
-
-#: gucharmap/gucharmap-unicode-info.c:212
-msgid "Symbol, Other"
-msgstr "Symbol, Arall"
-
-#: gucharmap/gucharmap-unicode-info.c:213
-msgid "Separator, Line"
-msgstr "Gwahanydd, Llinell"
-
-#: gucharmap/gucharmap-unicode-info.c:214
-msgid "Separator, Paragraph"
-msgstr "Gwahanydd, Paragraff"
-
-#: gucharmap/gucharmap-unicode-info.c:215
-msgid "Separator, Space"
-msgstr "Gwahanydd, Bwlch"
-
-#: gucharmap/gucharmap-window.c:56
-msgid "Information"
-msgstr "Gwybodaeth"
-
-#: gucharmap/gucharmap-window.c:118
-#, c-format
-msgid ""
-"Not a valid code point to jump to. Must be a hexadecimal number between 0 "
-"and %4.4X."
-msgstr ""
-"Nid yw'n pwynt côd dilys i neidio ati. Rhaid iddo fod yn rhif hecsadegol "
-"rhwng 0 a %4.4X."
-
-#: gucharmap/gucharmap-window.c:142
-msgid "Jump to Unicode Code Point"
-msgstr "Neidio at Pwyn Côd Unicode"
-
-#: gucharmap/gucharmap-window.c:159
-msgid "_Enter hexadecimal Unicode code point:"
-msgstr "_Rhowch pwynt côd Unicode hecsadegol:"
-
-#: gucharmap/gucharmap-window.c:218
+#: gucharmap/gucharmap-table.c:1511 gucharmap/gucharmap-search-dialog.c:465
 msgid "Not found."
 msgstr "Heb ei ganfod."
 
-#: gucharmap/gucharmap-window.c:222
-msgid "Nothing to search for."
-msgstr "Dim byd i'w chwilio amdani."
+#: gucharmap/gucharmap-table.c:1514
+msgid "Character found."
+msgstr "Canfodwyd y nod."
 
-#: gucharmap/gucharmap-window.c:265
-msgid "Find"
-msgstr "Chwilio"
+#: gucharmap/gucharmap-table.c:1578
+msgid "Character Table"
+msgstr "Tabl Nodau"
 
-#: gucharmap/gucharmap-window.c:281
-msgid "_Search:"
-msgstr "_Chwilio:"
+#: gucharmap/gucharmap-unicode-info.c:94
+msgid "<Non Private Use High Surrogate>"
+msgstr "<Dirprwy Uchel Dim Defnydd Preifat>"
 
-#: gucharmap/gucharmap-window.c:379
+#: gucharmap/gucharmap-unicode-info.c:96
+msgid "<Private Use High Surrogate>"
+msgstr "<Dirprwy Uchel Defnydd Preifat>"
+
+#: gucharmap/gucharmap-unicode-info.c:98
+msgid "<Low Surrogate>"
+msgstr "<Diprwy Isel>"
+
+#: gucharmap/gucharmap-unicode-info.c:100
+msgid "<Private Use>"
+msgstr "<Defnydd Preifat>"
+
+#: gucharmap/gucharmap-unicode-info.c:102
+msgid "<Plane 15 Private Use>"
+msgstr "<Plân 15 Defnydd Preifat>"
+
+#: gucharmap/gucharmap-unicode-info.c:104
+msgid "<Plane 16 Private Use>"
+msgstr "<Plân 16 Defnydd Preifat>"
+
+#: gucharmap/gucharmap-unicode-info.c:109
+msgid "<not assigned>"
+msgstr "<heb ei neilltuo>"
+
+#: gucharmap/gucharmap-unicode-info.c:120
+msgid "Other, Control"
+msgstr "Arall, Rheoli"
+
+#: gucharmap/gucharmap-unicode-info.c:121
+msgid "Other, Format"
+msgstr "Arall, Fformat"
+
+#: gucharmap/gucharmap-unicode-info.c:122
+msgid "Other, Not Assigned"
+msgstr "Arall, Heb ei Neilltuo"
+
+#: gucharmap/gucharmap-unicode-info.c:123
+msgid "Other, Private Use"
+msgstr "Arall, Defnydd Preifat"
+
+#: gucharmap/gucharmap-unicode-info.c:124
+msgid "Other, Surrogate"
+msgstr "Arall, Dirprwy"
+
+#: gucharmap/gucharmap-unicode-info.c:125
+msgid "Letter, Lowercase"
+msgstr "Llythyren, Llythyren Fach"
+
+#: gucharmap/gucharmap-unicode-info.c:126
+msgid "Letter, Modifier"
+msgstr "Llythyren, Addasydd"
+
+#: gucharmap/gucharmap-unicode-info.c:127
+msgid "Letter, Other"
+msgstr "Llythyren, Arall"
+
+#: gucharmap/gucharmap-unicode-info.c:128
+msgid "Letter, Titlecase"
+msgstr "Llythyren, Priflythrennedd Teitl"
+
+#: gucharmap/gucharmap-unicode-info.c:129
+msgid "Letter, Uppercase"
+msgstr "Llythyren, Priflythyren"
+
+#: gucharmap/gucharmap-unicode-info.c:130
+msgid "Mark, Spacing Combining"
+msgstr "Marc, Bylchu Cyfuno"
+
+#: gucharmap/gucharmap-unicode-info.c:131
+msgid "Mark, Enclosing"
+msgstr "Arall, Amgau"
+
+#: gucharmap/gucharmap-unicode-info.c:132
+msgid "Mark, Non-Spacing"
+msgstr "Arall, Nid Bylchu"
+
+#: gucharmap/gucharmap-unicode-info.c:133
+msgid "Number, Decimal Digit"
+msgstr "Rhif, Digid Degol"
+
+#: gucharmap/gucharmap-unicode-info.c:134
+msgid "Number, Letter"
+msgstr "Rhif, Llythyren"
+
+#: gucharmap/gucharmap-unicode-info.c:135
+msgid "Number, Other"
+msgstr "Rhif, Arall"
+
+#: gucharmap/gucharmap-unicode-info.c:136
+msgid "Punctuation, Connector"
+msgstr "Atalnod, Cysylltwr"
+
+#: gucharmap/gucharmap-unicode-info.c:137
+msgid "Punctuation, Dash"
+msgstr "Atalnod, Llinell Doriad"
+
+#: gucharmap/gucharmap-unicode-info.c:138
+msgid "Punctuation, Close"
+msgstr "Atalnod, Cau"
+
+#: gucharmap/gucharmap-unicode-info.c:139
+msgid "Punctuation, Final Quote"
+msgstr "Atalnod, Dyfynod Olaf"
+
+#: gucharmap/gucharmap-unicode-info.c:140
+msgid "Punctuation, Initial Quote"
+msgstr "Atalnod, Dyfynod Cyntaf"
+
+#: gucharmap/gucharmap-unicode-info.c:141
+msgid "Punctuation, Other"
+msgstr "Atalnod, Arall"
+
+#: gucharmap/gucharmap-unicode-info.c:142
+msgid "Punctuation, Open"
+msgstr "Atalnod, Agor"
+
+#: gucharmap/gucharmap-unicode-info.c:143
+msgid "Symbol, Currency"
+msgstr "Symbol, Ariannol"
+
+#: gucharmap/gucharmap-unicode-info.c:144
+msgid "Symbol, Modifier"
+msgstr "Symol, Addasydd"
+
+#: gucharmap/gucharmap-unicode-info.c:145
+msgid "Symbol, Math"
+msgstr "Symbol, Mathemateg"
+
+#: gucharmap/gucharmap-unicode-info.c:146
+msgid "Symbol, Other"
+msgstr "Symbol, Arall"
+
+#: gucharmap/gucharmap-unicode-info.c:147
+msgid "Separator, Line"
+msgstr "Gwahanydd, Llinell"
+
+#: gucharmap/gucharmap-unicode-info.c:148
+msgid "Separator, Paragraph"
+msgstr "Gwahanydd, Paragraff"
+
+#: gucharmap/gucharmap-unicode-info.c:149
+msgid "Separator, Space"
+msgstr "Gwahanydd, Bwlch"
+
+#: gucharmap/gucharmap-window.c:189
+msgid "Searching..."
+msgstr "Yn Chwilio..."
+
+#: gucharmap/gucharmap-window.c:319
 msgid "translator_credits"
 msgstr ""
-"Telsa Gwynne <hobbit@aloss.ukuu.org.uk>, Dafydd Harries <daf@parnassus.ath."
-"cx>"
+"Telsa Gwynne <hobbit@aloss.ukuu.org.uk>,\n"
+"Dafydd Harries <daf@muse.19inch.net>"
 
-#: gucharmap/gucharmap-window.c:526
+#: gucharmap/gucharmap-window.c:420 gucharmap/gucharmap-window.c:602
+msgid "Next Script"
+msgstr "Sgript Nesaf"
+
+#: gucharmap/gucharmap-window.c:421 gucharmap/gucharmap-window.c:603
+msgid "Previous Script"
+msgstr "Sgript Cynt"
+
+#: gucharmap/gucharmap-window.c:433 gucharmap/gucharmap-window.c:607
+msgid "Next Block"
+msgstr "Bloc Nesaf"
+
+#: gucharmap/gucharmap-window.c:434 gucharmap/gucharmap-window.c:608
+msgid "Previous Block"
+msgstr "Bloc Cynt"
+
+#: gucharmap/gucharmap-window.c:469
 msgid "_File"
 msgstr "_Ffeil"
 
-#: gucharmap/gucharmap-window.c:528
+#: gucharmap/gucharmap-window.c:471
 msgid "_View"
 msgstr "_Golwg"
 
-#: gucharmap/gucharmap-window.c:530
+#: gucharmap/gucharmap-window.c:473
 msgid "_Search"
 msgstr "_Chwilio"
 
-#: gucharmap/gucharmap-window.c:532
+#: gucharmap/gucharmap-window.c:475
 msgid "_Go"
 msgstr "_Mynd"
 
-#. ctrl-+ or ctrl-=
-#: gucharmap/gucharmap-window.c:553
+#: gucharmap/gucharmap-window.c:494
+msgid "By _Script"
+msgstr "Yn Ôl _Sgript"
+
+#: gucharmap/gucharmap-window.c:500
+msgid "By _Unicode Block"
+msgstr "Yn Ôl Bloc _Unicode"
+
+#: gucharmap/gucharmap-window.c:508
+msgid "Snap Columns to Power of Two"
+msgstr "Ffitio Coloffnau ar Bŵer o Dau"
+
+#. ctrl-+
+#: gucharmap/gucharmap-window.c:516
 msgid "Zoom _In"
 msgstr "_Chwyddo"
 
 #. ctrl--
-#: gucharmap/gucharmap-window.c:565
+#: gucharmap/gucharmap-window.c:526
 msgid "Zoom _Out"
 msgstr "Cre_bachu"
 
-#: gucharmap/gucharmap-window.c:577
-msgid "Snap Columns to Power of Two"
-msgstr "Ffitio Coloffnau ar Bŵer o Dau"
+#. ctrl-=
+#: gucharmap/gucharmap-window.c:536
+msgid "_Normal Size"
+msgstr "Maint _Normal"
 
-#: gucharmap/gucharmap-window.c:588
+#: gucharmap/gucharmap-window.c:550
 msgid "_Find..."
 msgstr "_Chwilio..."
 
-#: gucharmap/gucharmap-window.c:598
+#: gucharmap/gucharmap-window.c:558
 msgid "Find _Next"
 msgstr "Canfod _Nesaf"
 
-#: gucharmap/gucharmap-window.c:608
+#: gucharmap/gucharmap-window.c:567
 msgid "Find _Previous"
 msgstr "Canfod _Cynt"
 
-#: gucharmap/gucharmap-window.c:623
-msgid "Code _Point..."
-msgstr "_Pwynt Côd..."
-
-#: gucharmap/gucharmap-window.c:630
-msgid "Character in _Clipboard"
-msgstr "Nod yn y _Clipfwrdd"
-
-#: gucharmap/gucharmap-window.c:666
+#: gucharmap/gucharmap-window.c:584
 msgid "_Next Character"
 msgstr "Nod _Nesaf"
 
-#: gucharmap/gucharmap-window.c:673
+#: gucharmap/gucharmap-window.c:590
 msgid "_Previous Character"
 msgstr "Nod _Cynt"
 
 #. make the help menu
-#: gucharmap/gucharmap-window.c:686
+#: gucharmap/gucharmap-window.c:631
 msgid "_Help"
 msgstr "_Cymorth"
 
-#: gucharmap/gucharmap-window.c:777
+#: gucharmap/gucharmap-window.c:714
 msgid "_Text to copy:"
 msgstr "_Testun i'w gopïo:"
 
-#: gucharmap/gucharmap-window.c:798
+#: gucharmap/gucharmap-window.c:735
 msgid "Copy to the clipboard."
 msgstr "Copïo i'r clipfwrdd."
 
-#: gucharmap/gucharmap-window.c:939
-msgid "Back"
-msgstr "Yn ôl"
-
-#: gucharmap/gucharmap-window.c:947
-msgid "Forward"
-msgstr "Ymlaen"
-
-#: gucharmap/main.c:41
+#: gucharmap/main.c:39
 msgid "Font to start with; ex: 'Serif 27'"
 msgstr "Y ffont i gychwyn efo; e.e.: 'Serif 27'"
 
-#: gucharmap/unicode/unicode_blocks.cI:7
+#: gucharmap/unicode-blocks.h:18
 msgid "Basic Latin"
 msgstr "Lladin Sylfaenol"
 
-#: gucharmap/unicode/unicode_blocks.cI:8
+#: gucharmap/unicode-blocks.h:19
 msgid "Latin-1 Supplement"
 msgstr "Atodiad Lladin-1"
 
-#: gucharmap/unicode/unicode_blocks.cI:9
+#: gucharmap/unicode-blocks.h:20
 msgid "Latin Extended-A"
 msgstr "Lladin Estynedig-A"
 
-#: gucharmap/unicode/unicode_blocks.cI:10
+#: gucharmap/unicode-blocks.h:21
 msgid "Latin Extended-B"
 msgstr "Lladin Estynedig-B"
 
-#: gucharmap/unicode/unicode_blocks.cI:11
+#: gucharmap/unicode-blocks.h:22
 msgid "IPA Extensions"
 msgstr "Estyniadau IPA"
 
-#: gucharmap/unicode/unicode_blocks.cI:12
+#: gucharmap/unicode-blocks.h:23
 msgid "Spacing Modifier Letters"
 msgstr "Llythrennau Addasu Bylchu"
 
-#: gucharmap/unicode/unicode_blocks.cI:13
+#: gucharmap/unicode-blocks.h:24
 msgid "Combining Diacritical Marks"
 msgstr "Matciau Cyfuno Diacritig"
 
-#: gucharmap/unicode/unicode_blocks.cI:14
+#: gucharmap/unicode-blocks.h:25
 msgid "Greek and Coptic"
 msgstr "Groeg a Copteg"
 
-#: gucharmap/unicode/unicode_blocks.cI:15
+#: gucharmap/unicode-blocks.h:26 gucharmap/unicode-scripts.h:22
 msgid "Cyrillic"
 msgstr "Cyrilig"
 
-#: gucharmap/unicode/unicode_blocks.cI:16
+#: gucharmap/unicode-blocks.h:27
 msgid "Cyrillic Supplementary"
 msgstr "Cyrilig Atodol"
 
-#: gucharmap/unicode/unicode_blocks.cI:17
+#: gucharmap/unicode-blocks.h:28 gucharmap/unicode-scripts.h:13
 msgid "Armenian"
 msgstr "Armeneg"
 
-#: gucharmap/unicode/unicode_blocks.cI:18
+#: gucharmap/unicode-blocks.h:29 gucharmap/unicode-scripts.h:34
 msgid "Hebrew"
 msgstr "Hebraeg"
 
-#: gucharmap/unicode/unicode_blocks.cI:19
+#: gucharmap/unicode-blocks.h:30 gucharmap/unicode-scripts.h:12
 msgid "Arabic"
 msgstr "Arabeg"
 
-#: gucharmap/unicode/unicode_blocks.cI:20
+#: gucharmap/unicode-blocks.h:31 gucharmap/unicode-scripts.h:54
 msgid "Syriac"
 msgstr "Syrieg"
 
-#: gucharmap/unicode/unicode_blocks.cI:21
+#: gucharmap/unicode-blocks.h:32 gucharmap/unicode-scripts.h:60
 msgid "Thaana"
 msgstr "Thaana"
 
-#: gucharmap/unicode/unicode_blocks.cI:22
+#: gucharmap/unicode-blocks.h:33 gucharmap/unicode-scripts.h:24
 msgid "Devanagari"
 msgstr "Defanagari"
 
-#: gucharmap/unicode/unicode_blocks.cI:23
+#: gucharmap/unicode-blocks.h:34 gucharmap/unicode-scripts.h:14
 msgid "Bengali"
 msgstr "Bengaleg"
 
-#: gucharmap/unicode/unicode_blocks.cI:24
+#: gucharmap/unicode-blocks.h:35 gucharmap/unicode-scripts.h:30
 msgid "Gurmukhi"
 msgstr "Gurmukhi"
 
-#: gucharmap/unicode/unicode_blocks.cI:25
+#: gucharmap/unicode-blocks.h:36 gucharmap/unicode-scripts.h:29
 msgid "Gujarati"
 msgstr "Gwjarati"
 
-#: gucharmap/unicode/unicode_blocks.cI:26
+#: gucharmap/unicode-blocks.h:37 gucharmap/unicode-scripts.h:49
 msgid "Oriya"
 msgstr "Orïa"
 
-#: gucharmap/unicode/unicode_blocks.cI:27
+#: gucharmap/unicode-blocks.h:38 gucharmap/unicode-scripts.h:58
 msgid "Tamil"
 msgstr "Tamil"
 
-#: gucharmap/unicode/unicode_blocks.cI:28
+#: gucharmap/unicode-blocks.h:39 gucharmap/unicode-scripts.h:59
 msgid "Telugu"
 msgstr "Telwgw"
 
-#: gucharmap/unicode/unicode_blocks.cI:29
+#: gucharmap/unicode-blocks.h:40 gucharmap/unicode-scripts.h:37
 msgid "Kannada"
 msgstr "Canareg"
 
-#: gucharmap/unicode/unicode_blocks.cI:30
+#: gucharmap/unicode-blocks.h:41 gucharmap/unicode-scripts.h:44
 msgid "Malayalam"
 msgstr "Malaialam"
 
-#: gucharmap/unicode/unicode_blocks.cI:31
+#: gucharmap/unicode-blocks.h:42 gucharmap/unicode-scripts.h:53
 msgid "Sinhala"
 msgstr "Sinhala"
 
-#: gucharmap/unicode/unicode_blocks.cI:32
+#: gucharmap/unicode-blocks.h:43 gucharmap/unicode-scripts.h:61
 msgid "Thai"
 msgstr "Siameg"
 
-#: gucharmap/unicode/unicode_blocks.cI:33
+#: gucharmap/unicode-blocks.h:44 gucharmap/unicode-scripts.h:40
 msgid "Lao"
 msgstr "Laoseg"
 
-#: gucharmap/unicode/unicode_blocks.cI:34
+#: gucharmap/unicode-blocks.h:45 gucharmap/unicode-scripts.h:62
 msgid "Tibetan"
 msgstr "Tibeteg"
 
-#: gucharmap/unicode/unicode_blocks.cI:35
+#: gucharmap/unicode-blocks.h:46 gucharmap/unicode-scripts.h:46
 msgid "Myanmar"
 msgstr "Myanmar"
 
-#: gucharmap/unicode/unicode_blocks.cI:36
+#: gucharmap/unicode-blocks.h:47 gucharmap/unicode-scripts.h:26
 msgid "Georgian"
 msgstr "Georgeg"
 
-#: gucharmap/unicode/unicode_blocks.cI:37
+#: gucharmap/unicode-blocks.h:48
 msgid "Hangul Jamo"
 msgstr "Hangul Jamo"
 
-#: gucharmap/unicode/unicode_blocks.cI:38
+#: gucharmap/unicode-blocks.h:49 gucharmap/unicode-scripts.h:25
 msgid "Ethiopic"
 msgstr "Ethiopeg"
 
-#: gucharmap/unicode/unicode_blocks.cI:39
+#: gucharmap/unicode-blocks.h:50 gucharmap/unicode-scripts.h:19
 msgid "Cherokee"
 msgstr "Tsierocî"
 
-#: gucharmap/unicode/unicode_blocks.cI:40
+#: gucharmap/unicode-blocks.h:51
 msgid "Unified Canadian Aboriginal Syllabics"
 msgstr "Sillafogion Brodorol Canadaidd Unedig"
 
-#: gucharmap/unicode/unicode_blocks.cI:41
+#: gucharmap/unicode-blocks.h:52 gucharmap/unicode-scripts.h:47
 msgid "Ogham"
 msgstr "Ogam"
 
-#: gucharmap/unicode/unicode_blocks.cI:42
+#: gucharmap/unicode-blocks.h:53 gucharmap/unicode-scripts.h:51
 msgid "Runic"
 msgstr "Rwnig"
 
-#: gucharmap/unicode/unicode_blocks.cI:43
+#: gucharmap/unicode-blocks.h:54 gucharmap/unicode-scripts.h:55
 msgid "Tagalog"
 msgstr "Tagalog"
 
-#: gucharmap/unicode/unicode_blocks.cI:44
+#: gucharmap/unicode-blocks.h:55 gucharmap/unicode-scripts.h:33
 msgid "Hanunoo"
 msgstr "Hanunoo"
 
-#: gucharmap/unicode/unicode_blocks.cI:45
+#: gucharmap/unicode-blocks.h:56 gucharmap/unicode-scripts.h:17
 msgid "Buhid"
 msgstr "Buhid"
 
-#: gucharmap/unicode/unicode_blocks.cI:46
+#: gucharmap/unicode-blocks.h:57 gucharmap/unicode-scripts.h:56
 msgid "Tagbanwa"
 msgstr "Tagbanwa"
 
-#: gucharmap/unicode/unicode_blocks.cI:47
+#: gucharmap/unicode-blocks.h:58 gucharmap/unicode-scripts.h:39
 msgid "Khmer"
 msgstr "Chmereg"
 
-#: gucharmap/unicode/unicode_blocks.cI:48
+#: gucharmap/unicode-blocks.h:59 gucharmap/unicode-scripts.h:45
 msgid "Mongolian"
 msgstr "Mongoleg"
 
-#: gucharmap/unicode/unicode_blocks.cI:49
+#: gucharmap/unicode-blocks.h:60 gucharmap/unicode-scripts.h:42
 msgid "Limbu"
 msgstr "Limbu"
 
-#: gucharmap/unicode/unicode_blocks.cI:50
+#: gucharmap/unicode-blocks.h:61 gucharmap/unicode-scripts.h:57
 msgid "Tai Le"
 msgstr "Tai Le"
 
-#: gucharmap/unicode/unicode_blocks.cI:51
+#: gucharmap/unicode-blocks.h:62
 msgid "Khmer Symbols"
 msgstr "Symbolau Chmereg"
 
-#: gucharmap/unicode/unicode_blocks.cI:52
+#: gucharmap/unicode-blocks.h:63
 msgid "Phonetic Extensions"
 msgstr "Estyniadau Seinegol"
 
-#: gucharmap/unicode/unicode_blocks.cI:53
+#: gucharmap/unicode-blocks.h:64
 msgid "Latin Extended Additional"
 msgstr "Lladin Estynedig Ychwanegol"
 
-#: gucharmap/unicode/unicode_blocks.cI:54
+#: gucharmap/unicode-blocks.h:65
 msgid "Greek Extended"
 msgstr "Groeg Estynedig"
 
-#: gucharmap/unicode/unicode_blocks.cI:55
+#: gucharmap/unicode-blocks.h:66
 msgid "General Punctuation"
 msgstr "Atalnodau Cyffredinol"
 
-#: gucharmap/unicode/unicode_blocks.cI:56
+#: gucharmap/unicode-blocks.h:67
 msgid "Superscripts and Subscripts"
 msgstr "Uwchysgrifau ac Isysgrifau"
 
-#: gucharmap/unicode/unicode_blocks.cI:57
+#: gucharmap/unicode-blocks.h:68
 msgid "Currency Symbols"
 msgstr "Symbolau Ariannol"
 
-#: gucharmap/unicode/unicode_blocks.cI:58
+#: gucharmap/unicode-blocks.h:69
 msgid "Combining Diacritical Marks for Symbols"
 msgstr "Marciau Diacririg Cyfuno ar gyfer Symbolau"
 
-#: gucharmap/unicode/unicode_blocks.cI:59
+#: gucharmap/unicode-blocks.h:70
 msgid "Letterlike Symbols"
 msgstr "Symbolau fel Llythrennau"
 
-#: gucharmap/unicode/unicode_blocks.cI:60
+#: gucharmap/unicode-blocks.h:71
 msgid "Number Forms"
 msgstr "Ffurfiau Rhif"
 
-#: gucharmap/unicode/unicode_blocks.cI:61
+#: gucharmap/unicode-blocks.h:72
 msgid "Arrows"
 msgstr "Saethau"
 
-#: gucharmap/unicode/unicode_blocks.cI:62
+#: gucharmap/unicode-blocks.h:73
 msgid "Mathematical Operators"
 msgstr "Gweithredyddion Mathemategol"
 
-#: gucharmap/unicode/unicode_blocks.cI:63
+#: gucharmap/unicode-blocks.h:74
 msgid "Miscellaneous Technical"
 msgstr "Amryw Technegol"
 
-#: gucharmap/unicode/unicode_blocks.cI:64
+#: gucharmap/unicode-blocks.h:75
 msgid "Control Pictures"
 msgstr "Lluniau Rheoli"
 
-#: gucharmap/unicode/unicode_blocks.cI:65
+#: gucharmap/unicode-blocks.h:76
 msgid "Optical Character Recognition"
 msgstr "Adnabyddiaeth Nodau Optegol"
 
-#: gucharmap/unicode/unicode_blocks.cI:66
+#: gucharmap/unicode-blocks.h:77
 msgid "Enclosed Alphanumerics"
 msgstr "Alffaniwmerigion Amgaeëdig"
 
-#: gucharmap/unicode/unicode_blocks.cI:67
+#: gucharmap/unicode-blocks.h:78
 msgid "Box Drawing"
 msgstr "Arlunio Blwch"
 
-#: gucharmap/unicode/unicode_blocks.cI:68
+#: gucharmap/unicode-blocks.h:79
 msgid "Block Elements"
 msgstr "Elfenau Bloc"
 
-#: gucharmap/unicode/unicode_blocks.cI:69
+#: gucharmap/unicode-blocks.h:80
 msgid "Geometric Shapes"
 msgstr "Siapau Gemometrig"
 
-#: gucharmap/unicode/unicode_blocks.cI:70
+#: gucharmap/unicode-blocks.h:81
 msgid "Miscellaneous Symbols"
 msgstr "Amryw Symbolau"
 
-#: gucharmap/unicode/unicode_blocks.cI:71
+#: gucharmap/unicode-blocks.h:82
 msgid "Dingbats"
 msgstr "Dingbats"
 
-#: gucharmap/unicode/unicode_blocks.cI:72
+#: gucharmap/unicode-blocks.h:83
 msgid "Miscellaneous Mathematical Symbols-A"
 msgstr "Amryw Symboalau Mathemategol - A"
 
-#: gucharmap/unicode/unicode_blocks.cI:73
+#: gucharmap/unicode-blocks.h:84
 msgid "Supplemental Arrows-A"
 msgstr "Saethau Atodiadol - A"
 
-#: gucharmap/unicode/unicode_blocks.cI:74
+#: gucharmap/unicode-blocks.h:85
 msgid "Braille Patterns"
 msgstr "Patrymau Braille"
 
-#: gucharmap/unicode/unicode_blocks.cI:75
+#: gucharmap/unicode-blocks.h:86
 msgid "Supplemental Arrows-B"
 msgstr "Saethau Atodiadol - B"
 
-#: gucharmap/unicode/unicode_blocks.cI:76
+#: gucharmap/unicode-blocks.h:87
 msgid "Miscellaneous Mathematical Symbols-B"
 msgstr "Amryw Symbolau Mathemategol - B"
 
-#: gucharmap/unicode/unicode_blocks.cI:77
+#: gucharmap/unicode-blocks.h:88
 msgid "Supplemental Mathematical Operators"
 msgstr "Gweithredyddion Mathemategol Atodiadol"
 
-#: gucharmap/unicode/unicode_blocks.cI:78
+#: gucharmap/unicode-blocks.h:89
 msgid "Miscellaneous Symbols and Arrows"
 msgstr "Amryw Symbolau a Saethau"
 
-#: gucharmap/unicode/unicode_blocks.cI:79
+#: gucharmap/unicode-blocks.h:90
 msgid "CJK Radicals Supplement"
 msgstr "Atodiad Gwreiddion CJK"
 
-#: gucharmap/unicode/unicode_blocks.cI:80
+#: gucharmap/unicode-blocks.h:91
 msgid "Kangxi Radicals"
 msgstr "Gwreiddion Kangxi"
 
-#: gucharmap/unicode/unicode_blocks.cI:81
+#: gucharmap/unicode-blocks.h:92
 msgid "Ideographic Description Characters"
 msgstr "Nodau Disgrifiad Arwyddluniol"
 
-#: gucharmap/unicode/unicode_blocks.cI:82
+#: gucharmap/unicode-blocks.h:93
 msgid "CJK Symbols and Punctuation"
 msgstr "Symbolau ac Atalnodau CJK"
 
-#: gucharmap/unicode/unicode_blocks.cI:83
+#: gucharmap/unicode-blocks.h:94 gucharmap/unicode-scripts.h:35
 msgid "Hiragana"
 msgstr "Hiragana"
 
-#: gucharmap/unicode/unicode_blocks.cI:84
+#: gucharmap/unicode-blocks.h:95 gucharmap/unicode-scripts.h:38
 msgid "Katakana"
 msgstr "Katakana"
 
-#: gucharmap/unicode/unicode_blocks.cI:85
+#: gucharmap/unicode-blocks.h:96 gucharmap/unicode-scripts.h:15
 msgid "Bopomofo"
 msgstr "Bopomofo"
 
-#: gucharmap/unicode/unicode_blocks.cI:86
+#: gucharmap/unicode-blocks.h:97
 msgid "Hangul Compatibility Jamo"
 msgstr "Cyfaddaster Hangul Jamo"
 
-#: gucharmap/unicode/unicode_blocks.cI:87
+#: gucharmap/unicode-blocks.h:98
 msgid "Kanbun"
 msgstr "Kanbun"
 
-#: gucharmap/unicode/unicode_blocks.cI:88
+#: gucharmap/unicode-blocks.h:99
 msgid "Bopomofo Extended"
 msgstr "Bopomofo Estynedig"
 
-#: gucharmap/unicode/unicode_blocks.cI:89
+#: gucharmap/unicode-blocks.h:100
 msgid "Katakana Phonetic Extensions"
 msgstr "Estyniadau Katkana Seinyddol"
 
-#: gucharmap/unicode/unicode_blocks.cI:90
+#: gucharmap/unicode-blocks.h:101
 msgid "Enclosed CJK Letters and Months"
 msgstr "Llythrennau a Misoedd CJK Amgaeëdig"
 
-#: gucharmap/unicode/unicode_blocks.cI:91
+#: gucharmap/unicode-blocks.h:102
 msgid "CJK Compatibility"
 msgstr "Cyfaddaster CJK"
 
-#: gucharmap/unicode/unicode_blocks.cI:92
+#: gucharmap/unicode-blocks.h:103
 msgid "CJK Unified Ideographs Extension A"
 msgstr "Estyniad Unedig Arwyddluniau CJK A"
 
-#: gucharmap/unicode/unicode_blocks.cI:93
+#: gucharmap/unicode-blocks.h:104
 msgid "Yijing Hexagram Symbols"
 msgstr "Symbolau Hecsagram Yijing"
 
-#: gucharmap/unicode/unicode_blocks.cI:94
+#: gucharmap/unicode-blocks.h:105
 msgid "CJK Unified Ideographs"
 msgstr "Arwyddluniau Uniedig CJK"
 
-#: gucharmap/unicode/unicode_blocks.cI:95
+#: gucharmap/unicode-blocks.h:106
 msgid "Yi Syllables"
 msgstr "Sillafau Yi"
 
-#: gucharmap/unicode/unicode_blocks.cI:96
+#: gucharmap/unicode-blocks.h:107
 msgid "Yi Radicals"
 msgstr "Gwreiddion Yi"
 
-#: gucharmap/unicode/unicode_blocks.cI:97
+#: gucharmap/unicode-blocks.h:108
 msgid "Hangul Syllables"
 msgstr "Sillafau Hangul"
 
-#: gucharmap/unicode/unicode_blocks.cI:98
+#: gucharmap/unicode-blocks.h:109
 msgid "High Surrogates"
 msgstr "Dirprwyon Uchel"
 
-#: gucharmap/unicode/unicode_blocks.cI:99
+#: gucharmap/unicode-blocks.h:110
 msgid "High Private Use Surrogates"
 msgstr "Diprywon Uchel Defnydd Preifat"
 
-#: gucharmap/unicode/unicode_blocks.cI:100
+#: gucharmap/unicode-blocks.h:111
 msgid "Low Surrogates"
 msgstr "Diprwyon Isel"
 
-#: gucharmap/unicode/unicode_blocks.cI:101
+#: gucharmap/unicode-blocks.h:112
 msgid "Private Use Area"
 msgstr "Ardal Defnydd Preifat"
 
-#: gucharmap/unicode/unicode_blocks.cI:102
+#: gucharmap/unicode-blocks.h:113
 msgid "CJK Compatibility Ideographs"
 msgstr "Arwyddluniau Cyfaddaster CJK"
 
-#: gucharmap/unicode/unicode_blocks.cI:103
+#: gucharmap/unicode-blocks.h:114
 msgid "Alphabetic Presentation Forms"
 msgstr "Ffurfiau Cyflwynid Alffabetig"
 
-#: gucharmap/unicode/unicode_blocks.cI:104
+#: gucharmap/unicode-blocks.h:115
 msgid "Arabic Presentation Forms-A"
 msgstr "Ffurfiau Cyflwyniad Arabeg - A"
 
-#: gucharmap/unicode/unicode_blocks.cI:105
+#: gucharmap/unicode-blocks.h:116
 msgid "Variation Selectors"
 msgstr "Dewiswyr Amrywiad"
 
-#: gucharmap/unicode/unicode_blocks.cI:106
+#: gucharmap/unicode-blocks.h:117
 msgid "Combining Half Marks"
 msgstr "Hanner Marciau Cyfuno"
 
-#: gucharmap/unicode/unicode_blocks.cI:107
+#: gucharmap/unicode-blocks.h:118
 msgid "CJK Compatibility Forms"
 msgstr "Ffurfiau Cyfaddaster CJK"
 
-#: gucharmap/unicode/unicode_blocks.cI:108
+#: gucharmap/unicode-blocks.h:119
 msgid "Small Form Variants"
 msgstr "Amrywiadau Ffurf Bychan"
 
-#: gucharmap/unicode/unicode_blocks.cI:109
+#: gucharmap/unicode-blocks.h:120
 msgid "Arabic Presentation Forms-B"
 msgstr "Ffurfiau Cyflwyniad Arabeg - B"
 
-#: gucharmap/unicode/unicode_blocks.cI:110
+#: gucharmap/unicode-blocks.h:121
 msgid "Halfwidth and Fullwidth Forms"
 msgstr "Ffurfiau Hanner Lled a Lled Llawn"
 
-#: gucharmap/unicode/unicode_blocks.cI:111
+#: gucharmap/unicode-blocks.h:122
 msgid "Specials"
 msgstr "Arbennigion"
 
-#: gucharmap/unicode/unicode_blocks.cI:112
+#: gucharmap/unicode-blocks.h:123
 msgid "Linear B Syllabary"
 msgstr "Sillwyddor Llinysgrif B"
 
-#: gucharmap/unicode/unicode_blocks.cI:113
+#: gucharmap/unicode-blocks.h:124
 msgid "Linear B Ideograms"
 msgstr "Arwyddluniau Llinysgrif B"
 
-#: gucharmap/unicode/unicode_blocks.cI:114
+#: gucharmap/unicode-blocks.h:125
 msgid "Aegean Numbers"
 msgstr "Rhifau Egeaidd"
 
-#: gucharmap/unicode/unicode_blocks.cI:115
+#: gucharmap/unicode-blocks.h:126 gucharmap/unicode-scripts.h:48
 msgid "Old Italic"
 msgstr "Hen Eidaleg"
 
-#: gucharmap/unicode/unicode_blocks.cI:116
+#: gucharmap/unicode-blocks.h:127 gucharmap/unicode-scripts.h:27
 msgid "Gothic"
 msgstr "Gotheg"
 
-#: gucharmap/unicode/unicode_blocks.cI:117
+#: gucharmap/unicode-blocks.h:128 gucharmap/unicode-scripts.h:63
 msgid "Ugaritic"
 msgstr "Wgariteg"
 
-#: gucharmap/unicode/unicode_blocks.cI:118
+#: gucharmap/unicode-blocks.h:129 gucharmap/unicode-scripts.h:23
 msgid "Deseret"
 msgstr "Deseret"
 
-#: gucharmap/unicode/unicode_blocks.cI:119
+#: gucharmap/unicode-blocks.h:130 gucharmap/unicode-scripts.h:52
 msgid "Shavian"
 msgstr "Shawaidd"
 
-#: gucharmap/unicode/unicode_blocks.cI:120
+#: gucharmap/unicode-blocks.h:131 gucharmap/unicode-scripts.h:50
 msgid "Osmanya"
 msgstr "Osmanya"
 
-#: gucharmap/unicode/unicode_blocks.cI:121
+#: gucharmap/unicode-blocks.h:132
 msgid "Cypriot Syllabary"
 msgstr "Sillwyddor Cypraidd"
 
-#: gucharmap/unicode/unicode_blocks.cI:122
+#: gucharmap/unicode-blocks.h:133
 msgid "Byzantine Musical Symbols"
 msgstr "Symbolau Cerddorol Bysantaidd"
 
-#: gucharmap/unicode/unicode_blocks.cI:123
+#: gucharmap/unicode-blocks.h:134
 msgid "Musical Symbols"
 msgstr "Symbolau Cerddorol"
 
-#: gucharmap/unicode/unicode_blocks.cI:124
+#: gucharmap/unicode-blocks.h:135
 msgid "Tai Xuan Jing Symbols"
 msgstr "Symbolau Tai Xuan Jing"
 
-#: gucharmap/unicode/unicode_blocks.cI:125
+#: gucharmap/unicode-blocks.h:136
 msgid "Mathematical Alphanumeric Symbols"
 msgstr "Symbolau Mathemategol Alffaniwmerig"
 
-#: gucharmap/unicode/unicode_blocks.cI:126
+#: gucharmap/unicode-blocks.h:137
 msgid "CJK Unified Ideographs Extension B"
 msgstr "Estyniad Arwyddluniau Unedig CJK B "
 
-#: gucharmap/unicode/unicode_blocks.cI:127
+#: gucharmap/unicode-blocks.h:138
 msgid "CJK Compatibility Ideographs Supplement"
 msgstr "Atodiad Arwyddluniau Cyfaddaster CJK"
 
-#: gucharmap/unicode/unicode_blocks.cI:128
+#: gucharmap/unicode-blocks.h:139
 msgid "Tags"
 msgstr "Tagiau"
 
-#: gucharmap/unicode/unicode_blocks.cI:129
+#: gucharmap/unicode-blocks.h:140
 msgid "Variation Selectors Supplement"
 msgstr "Dewiswyr Amrywiad Atodiadol"
 
-#: gucharmap/unicode/unicode_blocks.cI:130
+#: gucharmap/unicode-blocks.h:141
 msgid "Supplementary Private Use Area-A"
 msgstr "Ardal Defnydd Preifat Atodiadol - A"
 
-#: gucharmap/unicode/unicode_blocks.cI:131
+#: gucharmap/unicode-blocks.h:142
 msgid "Supplementary Private Use Area-B"
 msgstr "Ardal Defnydd Preifat Atodiadol - B"
+
+#: gucharmap/unicode-scripts.h:16
+msgid "Braille"
+msgstr "Braille"
+
+#: gucharmap/unicode-scripts.h:18
+msgid "Canadian Aboriginal"
+msgstr "Brodorol Canadaidd"
+
+#: gucharmap/unicode-scripts.h:21
+msgid "Cypriot"
+msgstr "Cyprus"
+
+#: gucharmap/unicode-scripts.h:28
+msgid "Greek"
+msgstr "Groeg"
+
+#: gucharmap/unicode-scripts.h:31
+msgid "Han"
+msgstr "Han"
+
+#: gucharmap/unicode-scripts.h:32
+msgid "Hangul"
+msgstr "Hangul"
+
+#: gucharmap/unicode-scripts.h:36
+msgid "Inherited"
+msgstr "Etifeddedig"
+
+#: gucharmap/unicode-scripts.h:41
+msgid "Latin"
+msgstr "Lladin"
+
+#: gucharmap/unicode-scripts.h:43
+msgid "Linear B"
+msgstr "Llinysgrif B"
+
+#: gucharmap/unicode-scripts.h:64
+msgid "Yi"
+msgstr "Yi"
+
+#: gucharmap/gucharmap-block-chapters.c:61
+msgid "All"
+msgstr "Popeth"
+
+#: gucharmap/gucharmap-block-chapters.c:79
+msgid "Unicode Block"
+msgstr "Bloc Unicode"
+
+#: gucharmap/gucharmap-script-chapters.c:76
+msgid "Script"
+msgstr "Sgript"
+
+#: gucharmap/gucharmap-search-dialog.c:419
+msgid "Information"
+msgstr "Gwybodaeth"
+
+#. follow hig guidelines
+#: gucharmap/gucharmap-search-dialog.c:592
+msgid "Find"
+msgstr "Chwilio"
+
+#: gucharmap/gucharmap-search-dialog.c:606
+msgid "_Previous"
+msgstr "_Cynt"
+
+#: gucharmap/gucharmap-search-dialog.c:613
+msgid "_Next"
+msgstr "_Nesaf"
+
+#: gucharmap/gucharmap-search-dialog.c:623
+msgid "_Search:"
+msgstr "_Chwilio:"
+
+#~ msgid "Unicode Character Map"
+#~ msgstr "Map Nodau Unicode"
+
+#~ msgid "_Bold"
+#~ msgstr "_Trwm"
+
+#~ msgid "_Italic"
+#~ msgstr "_Italeg"
+
+#~ msgid "Clipboard is empty."
+#~ msgstr "Mae'r clipfwrdd yn wag."
+
+#~ msgid "There is no selected text."
+#~ msgstr "Does dim testun dewisiedig."
+
+#~ msgid "HANGUL SYLLABLE %s%s%s"
+#~ msgstr "SILLAF HANGUL %s%s%s"
+
+#~ msgid "<CJK Ideograph Extension A>"
+#~ msgstr "<Estyniad Arwyddlun CJK A>"
+
+#~ msgid "<CJK Ideograph>"
+#~ msgstr "<Arwyddlun CJK>"
+
+#~ msgid "<Low Surrogate, Last>"
+#~ msgstr "<Dirprwy Isel, Olaf>"
+
+#~ msgid "<CJK Ideograph Extension B>"
+#~ msgstr "<Estyniad Arwyddlun CJK B>"
+
+#~ msgid ""
+#~ "Not a valid code point to jump to. Must be a hexadecimal number between 0 "
+#~ "and %4.4X."
+#~ msgstr ""
+#~ "Nid yw'n pwynt côd dilys i neidio ati. Rhaid iddo fod yn rhif hecsadegol "
+#~ "rhwng 0 a %4.4X."
+
+#~ msgid "Jump to Unicode Code Point"
+#~ msgstr "Neidio at Pwyn Côd Unicode"
+
+#~ msgid "_Enter hexadecimal Unicode code point:"
+#~ msgstr "_Rhowch pwynt côd Unicode hecsadegol:"
+
+#~ msgid "Nothing to search for."
+#~ msgstr "Dim byd i'w chwilio amdani."
+
+#~ msgid "Code _Point..."
+#~ msgstr "_Pwynt Côd..."
+
+#~ msgid "Character in _Clipboard"
+#~ msgstr "Nod yn y _Clipfwrdd"
+
+#~ msgid "Back"
+#~ msgstr "Yn ôl"
+
+#~ msgid "Forward"
+#~ msgstr "Ymlaen"
