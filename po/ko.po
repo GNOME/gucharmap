@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
-"POT-Creation-Date: 2003-06-02 23:15+0900\n"
-"PO-Revision-Date: 2003-06-02 14:38+0900\n"
+"POT-Creation-Date: 2003-07-10 14:01+0900\n"
+"PO-Revision-Date: 2003-07-10 05:03+0900\n"
 "Last-Translator: Young-Ho, Cha <ganadist at mizi.com>\n"
 "Language-Team: GTP Korean <gnome-kr-translation@gnome.or.kr>\n"
 "MIME-Version: 1.0\n"
@@ -15,113 +15,105 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. ID
-#: gucharmap.desktop.in.h:1 gucharmap/gucharmap-window.c:381
-#: gucharmap/gucharmap-window.c:753 gucharmap/imgucharmap.c:209
+#: gucharmap.desktop.in.h:1 gucharmap/gucharmap-window.c:386
+#: gucharmap/gucharmap-window.c:982 gucharmap/imgucharmap.c:209
 msgid "Unicode Character Map"
 msgstr "유니코드 글자 보기"
 
-#: gucharmap/gucharmap-charmap.c:360
+#: gucharmap/gucharmap-charmap.c:397
+msgid "Canonical decomposition:"
+msgstr "글자 나누기:"
+
+#: gucharmap/gucharmap-charmap.c:437 gucharmap/gucharmap-table.c:327
 msgid "[not a printable character]"
 msgstr "[표시할 수 없는 문자]"
 
-#: gucharmap/gucharmap-charmap.c:378
+#: gucharmap/gucharmap-charmap.c:457
 msgid "General Character Properties"
 msgstr "일반 문자 등록 정보"
 
 #. character category
-#: gucharmap/gucharmap-charmap.c:381
+#: gucharmap/gucharmap-charmap.c:460
 msgid "Unicode category:"
 msgstr "유니코드 범위:"
 
-#: gucharmap/gucharmap-charmap.c:389
-msgid "Canonical decomposition:"
-msgstr "글자 나누기:"
-
-#: gucharmap/gucharmap-charmap.c:393
+#: gucharmap/gucharmap-charmap.c:466
 msgid "Various Useful Representations"
 msgstr "다른 표기법"
 
-#: gucharmap/gucharmap-charmap.c:402
+#: gucharmap/gucharmap-charmap.c:475
 msgid "UTF-8:"
 msgstr "UTF-8:"
 
-#: gucharmap/gucharmap-charmap.c:410
+#: gucharmap/gucharmap-charmap.c:483
 msgid "Octal escaped UTF-8:"
 msgstr "8진수로 풀어쓴 UTF-8:"
 
-#: gucharmap/gucharmap-charmap.c:416
+#: gucharmap/gucharmap-charmap.c:489
 msgid "Decimal entity reference:"
 msgstr ""
 
-#: gucharmap/gucharmap-charmap.c:420
+#: gucharmap/gucharmap-charmap.c:495
 msgid "Annotations and Cross References"
 msgstr "해설 및 참고 사항"
 
-#: gucharmap/gucharmap-charmap.c:427
+#: gucharmap/gucharmap-charmap.c:502
 msgid "Alias names:"
 msgstr "다른 이름:"
 
-#: gucharmap/gucharmap-charmap.c:436
+#: gucharmap/gucharmap-charmap.c:511
 msgid "Notes:"
 msgstr "주의:"
 
-#: gucharmap/gucharmap-charmap.c:445
+#: gucharmap/gucharmap-charmap.c:520
 msgid "See also:"
 msgstr "참고 글자:"
 
-#: gucharmap/gucharmap-charmap.c:454
+#: gucharmap/gucharmap-charmap.c:529
 msgid "Approximate equivalents:"
 msgstr "비슷한 글자:"
 
-#: gucharmap/gucharmap-charmap.c:463
+#: gucharmap/gucharmap-charmap.c:538
 msgid "Equivalents:"
 msgstr "같은 글자:"
 
-#: gucharmap/gucharmap-charmap.c:469
+#: gucharmap/gucharmap-charmap.c:553
 msgid "CJK Ideograph Information"
 msgstr "CJK 한자 정보"
 
-#: gucharmap/gucharmap-charmap.c:474
+#: gucharmap/gucharmap-charmap.c:558
 msgid "Definition in English:"
-msgstr ""
+msgstr "뜻을 영어로 풀어놓기:"
 
-#: gucharmap/gucharmap-charmap.c:479
+#: gucharmap/gucharmap-charmap.c:563
 msgid "Mandarin Pronunciation:"
 msgstr "북경어 표기:"
 
-#: gucharmap/gucharmap-charmap.c:484
+#: gucharmap/gucharmap-charmap.c:568
 msgid "Japanese On Pronunciation:"
 msgstr "일본어 음독:"
 
-#: gucharmap/gucharmap-charmap.c:489
+#: gucharmap/gucharmap-charmap.c:573
 msgid "Japanese Kun Pronunciation:"
 msgstr "일본어 훈독:"
 
-#: gucharmap/gucharmap-charmap.c:494
+#: gucharmap/gucharmap-charmap.c:578
 msgid "Tang Pronunciation:"
 msgstr "중국 고어 표기:"
 
-#: gucharmap/gucharmap-charmap.c:499
+#: gucharmap/gucharmap-charmap.c:583
 msgid "Korean Pronunciation:"
 msgstr "한글 표기:"
 
-#: gucharmap/gucharmap-charmap.c:678
-msgid "_Previous Character"
-msgstr "이전 글자(_P)"
-
-#: gucharmap/gucharmap-charmap.c:686
-msgid "_Next Character"
-msgstr "다음 글자(_N)"
-
-#: gucharmap/gucharmap-charmap.c:834
+#: gucharmap/gucharmap-charmap.c:890
 msgid "Characte_r Table"
 msgstr "글자 표(_R)"
 
-#: gucharmap/gucharmap-charmap.c:837
+#: gucharmap/gucharmap-charmap.c:893
 msgid "Character _Details"
 msgstr "글자 정보(_D)"
 
-#: gucharmap/gucharmap-charmap.c:851
+#: gucharmap/gucharmap-charmap.c:911
 msgid "List of Unicode Blocks"
 msgstr "유니코드 범위 목록"
 
@@ -145,23 +137,23 @@ msgstr "기울임(_I)"
 msgid "Font Size"
 msgstr "글꼴 크기"
 
-#: gucharmap/gucharmap-table.c:1359
+#: gucharmap/gucharmap-table.c:1417
 msgid "Clipboard is empty."
 msgstr "클립보드가 비었습니다."
 
-#: gucharmap/gucharmap-table.c:1361
+#: gucharmap/gucharmap-table.c:1419
 msgid "There is no selected text."
 msgstr "선택된 글자가 없습니다."
 
-#: gucharmap/gucharmap-table.c:1369 gucharmap/gucharmap-table.c:1611
+#: gucharmap/gucharmap-table.c:1427 gucharmap/gucharmap-table.c:1690
 msgid "Unknown character, unable to identify."
 msgstr "알 수 없는 문자, 인식할 수 없습니다."
 
-#: gucharmap/gucharmap-table.c:1373 gucharmap/gucharmap-table.c:1615
+#: gucharmap/gucharmap-table.c:1431 gucharmap/gucharmap-table.c:1694
 msgid "Character found."
 msgstr "글자를 찾았습니다."
 
-#: gucharmap/gucharmap-table.c:1682
+#: gucharmap/gucharmap-table.c:1761
 msgid "Character Table"
 msgstr "글자 표"
 
@@ -272,7 +264,7 @@ msgstr "숫자, 문자"
 
 #: gucharmap/gucharmap-unicode-info.c:201
 msgid "Number, Other"
-msgstr ""
+msgstr "숫자, 그외"
 
 #: gucharmap/gucharmap-unicode-info.c:202
 msgid "Punctuation, Connector"
@@ -284,23 +276,23 @@ msgstr ""
 
 #: gucharmap/gucharmap-unicode-info.c:204
 msgid "Punctuation, Close"
-msgstr ""
+msgstr "구두 기호, 닫기"
 
 #: gucharmap/gucharmap-unicode-info.c:205
 msgid "Punctuation, Final Quote"
-msgstr ""
+msgstr "구두 기호, 인용 끝"
 
 #: gucharmap/gucharmap-unicode-info.c:206
 msgid "Punctuation, Initial Quote"
-msgstr ""
+msgstr "구두 기호, 인용 시작"
 
 #: gucharmap/gucharmap-unicode-info.c:207
 msgid "Punctuation, Other"
-msgstr ""
+msgstr "구두 기호, 그외"
 
 #: gucharmap/gucharmap-unicode-info.c:208
 msgid "Punctuation, Open"
-msgstr ""
+msgstr "구두 기호, 열기"
 
 #: gucharmap/gucharmap-unicode-info.c:209
 msgid "Symbol, Currency"
@@ -316,7 +308,7 @@ msgstr "기호, 수학"
 
 #: gucharmap/gucharmap-unicode-info.c:212
 msgid "Symbol, Other"
-msgstr ""
+msgstr "기호, 그외"
 
 #: gucharmap/gucharmap-unicode-info.c:213
 msgid "Separator, Line"
@@ -365,73 +357,88 @@ msgstr "찾기"
 msgid "_Search:"
 msgstr "찾기(_S):"
 
-#: gucharmap/gucharmap-window.c:374
+#: gucharmap/gucharmap-window.c:379
 msgid "translator_credits"
 msgstr "차영호 <ganadist at mizi.com>, 2003"
 
-#: gucharmap/gucharmap-window.c:425
+#: gucharmap/gucharmap-window.c:526
 msgid "_File"
 msgstr "파일(_F)"
 
-#: gucharmap/gucharmap-window.c:427
+#: gucharmap/gucharmap-window.c:528
 msgid "_View"
 msgstr "보기(_V)"
 
-#: gucharmap/gucharmap-window.c:429
+#: gucharmap/gucharmap-window.c:530
 msgid "_Search"
 msgstr "찾기(_S)"
 
+#: gucharmap/gucharmap-window.c:532
+msgid "_Go"
+msgstr "가기(_G)"
+
 #. ctrl-+ or ctrl-=
-#: gucharmap/gucharmap-window.c:450
+#: gucharmap/gucharmap-window.c:553
 msgid "Zoom _In"
 msgstr "확대(_I)"
 
 #. ctrl--
-#: gucharmap/gucharmap-window.c:462
+#: gucharmap/gucharmap-window.c:565
 msgid "Zoom _Out"
 msgstr "축소(_O)"
 
-#: gucharmap/gucharmap-window.c:474
+#: gucharmap/gucharmap-window.c:577
 msgid "Snap Columns to Power of Two"
 msgstr ""
 
-#. ctrl-f
-#: gucharmap/gucharmap-window.c:486
+#: gucharmap/gucharmap-window.c:588
 msgid "_Find..."
 msgstr "찾기(_F)..."
 
-#. ctrl-g
-#: gucharmap/gucharmap-window.c:497
+#: gucharmap/gucharmap-window.c:598
 msgid "Find _Next"
 msgstr "다음 찾기(_N)"
 
-#. shift-ctrl-g
-#: gucharmap/gucharmap-window.c:508
+#: gucharmap/gucharmap-window.c:608
 msgid "Find _Previous"
 msgstr "이전 찾기(_P)"
 
-#. ctrl-j
-#: gucharmap/gucharmap-window.c:524
+#: gucharmap/gucharmap-window.c:623
 msgid "Code _Point..."
 msgstr "코드 번호(_P)..."
 
-#. ctrl-p
-#: gucharmap/gucharmap-window.c:532
+#: gucharmap/gucharmap-window.c:630
 msgid "Character in _Clipboard"
 msgstr "클립보드의 글자(_C)"
 
+#: gucharmap/gucharmap-window.c:666
+msgid "_Next Character"
+msgstr "다음 글자(_N)"
+
+#: gucharmap/gucharmap-window.c:673
+msgid "_Previous Character"
+msgstr "이전 글자(_P)"
+
 #. make the help menu
-#: gucharmap/gucharmap-window.c:546
+#: gucharmap/gucharmap-window.c:686
 msgid "_Help"
 msgstr "도움말(_H)"
 
-#: gucharmap/gucharmap-window.c:637
+#: gucharmap/gucharmap-window.c:777
 msgid "_Text to copy:"
 msgstr "복사할 글자(_T):"
 
-#: gucharmap/gucharmap-window.c:658
+#: gucharmap/gucharmap-window.c:798
 msgid "Copy to the clipboard."
 msgstr "클립보드로 복사합니다."
+
+#: gucharmap/gucharmap-window.c:939
+msgid "Back"
+msgstr "뒤로"
+
+#: gucharmap/gucharmap-window.c:947
+msgid "Forward"
+msgstr "앞으로"
 
 #: gucharmap/main.c:41
 msgid "Font to start with; ex: 'Serif 27'"
@@ -463,7 +470,7 @@ msgstr "간격 조정 문자"
 
 #: gucharmap/unicode/unicode_blocks.cI:13
 msgid "Combining Diacritical Marks"
-msgstr "악센트 기호"
+msgstr "조합 구분 표시"
 
 #: gucharmap/unicode/unicode_blocks.cI:14
 msgid "Greek and Coptic"
@@ -571,7 +578,7 @@ msgstr "체로키 문자"
 
 #: gucharmap/unicode/unicode_blocks.cI:40
 msgid "Unified Canadian Aboriginal Syllabics"
-msgstr ""
+msgstr "통합 캐나다 원주민 글자"
 
 #: gucharmap/unicode/unicode_blocks.cI:41
 msgid "Ogham"
@@ -603,11 +610,11 @@ msgstr "크메르 문자"
 
 #: gucharmap/unicode/unicode_blocks.cI:48
 msgid "Mongolian"
-msgstr "몽고 문자"
+msgstr "몽골 문자"
 
 #: gucharmap/unicode/unicode_blocks.cI:49
 msgid "Limbu"
-msgstr ""
+msgstr "림부 문자"
 
 #: gucharmap/unicode/unicode_blocks.cI:50
 msgid "Tai Le"
@@ -623,7 +630,7 @@ msgstr "발음 확장영역"
 
 #: gucharmap/unicode/unicode_blocks.cI:53
 msgid "Latin Extended Additional"
-msgstr ""
+msgstr "라틴 확장 추가 영역"
 
 #: gucharmap/unicode/unicode_blocks.cI:54
 msgid "Greek Extended"
@@ -643,7 +650,7 @@ msgstr "화폐 기호"
 
 #: gucharmap/unicode/unicode_blocks.cI:58
 msgid "Combining Diacritical Marks for Symbols"
-msgstr ""
+msgstr "기호용 조합 구분 표시"
 
 #: gucharmap/unicode/unicode_blocks.cI:59
 msgid "Letterlike Symbols"
@@ -735,11 +742,11 @@ msgstr ""
 
 #: gucharmap/unicode/unicode_blocks.cI:81
 msgid "Ideographic Description Characters"
-msgstr ""
+msgstr "한자 기술 글자"
 
 #: gucharmap/unicode/unicode_blocks.cI:82
 msgid "CJK Symbols and Punctuation"
-msgstr ""
+msgstr "CJK 기호및 문장기호"
 
 #: gucharmap/unicode/unicode_blocks.cI:83
 msgid "Hiragana"
@@ -759,7 +766,7 @@ msgstr "한글 호환 자모"
 
 #: gucharmap/unicode/unicode_blocks.cI:87
 msgid "Kanbun"
-msgstr ""
+msgstr "관문"
 
 #: gucharmap/unicode/unicode_blocks.cI:88
 msgid "Bopomofo Extended"
@@ -775,7 +782,7 @@ msgstr "CJK 괄호 문자 및 요일/달 기호"
 
 #: gucharmap/unicode/unicode_blocks.cI:91
 msgid "CJK Compatibility"
-msgstr ""
+msgstr "CJK 호환 영역"
 
 #: gucharmap/unicode/unicode_blocks.cI:92
 msgid "CJK Unified Ideographs Extension A"
@@ -783,7 +790,7 @@ msgstr "CJK 통합 한자 확장영역 A"
 
 #: gucharmap/unicode/unicode_blocks.cI:93
 msgid "Yijing Hexagram Symbols"
-msgstr ""
+msgstr "주역 6선형 기호"
 
 #: gucharmap/unicode/unicode_blocks.cI:94
 msgid "CJK Unified Ideographs"
@@ -835,15 +842,15 @@ msgstr ""
 
 #: gucharmap/unicode/unicode_blocks.cI:106
 msgid "Combining Half Marks"
-msgstr ""
+msgstr "조합 반각 표시"
 
 #: gucharmap/unicode/unicode_blocks.cI:107
 msgid "CJK Compatibility Forms"
-msgstr ""
+msgstr "CJK 호환용 꼴"
 
 #: gucharmap/unicode/unicode_blocks.cI:108
 msgid "Small Form Variants"
-msgstr ""
+msgstr "작은꼴 변형"
 
 #: gucharmap/unicode/unicode_blocks.cI:109
 msgid "Arabic Presentation Forms-B"
@@ -887,7 +894,7 @@ msgstr ""
 
 #: gucharmap/unicode/unicode_blocks.cI:119
 msgid "Shavian"
-msgstr ""
+msgstr "쇼 문자"
 
 #: gucharmap/unicode/unicode_blocks.cI:120
 msgid "Osmanya"
@@ -895,7 +902,7 @@ msgstr ""
 
 #: gucharmap/unicode/unicode_blocks.cI:121
 msgid "Cypriot Syllabary"
-msgstr ""
+msgstr "키프로스 음절표"
 
 #: gucharmap/unicode/unicode_blocks.cI:122
 msgid "Byzantine Musical Symbols"
@@ -919,7 +926,7 @@ msgstr "CJK 통합 한자 확장영역B"
 
 #: gucharmap/unicode/unicode_blocks.cI:127
 msgid "CJK Compatibility Ideographs Supplement"
-msgstr ""
+msgstr "CJK 호환 보충 한자"
 
 #: gucharmap/unicode/unicode_blocks.cI:128
 msgid "Tags"
@@ -936,4 +943,3 @@ msgstr "사용자 추가 영역A"
 #: gucharmap/unicode/unicode_blocks.cI:131
 msgid "Supplementary Private Use Area-B"
 msgstr "사용자 추가 영역B"
-
