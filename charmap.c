@@ -601,7 +601,8 @@ set_active_character (Charmap *charmap, gunichar uc)
 
   charmap->active_char = uc;
 
-  if (uc - charmap->page_first_char < CHARMAP_ROWS * CHARMAP_ROWS)
+  /* active_char is still on the current page */
+  if (uc - charmap->page_first_char < CHARMAP_ROWS * CHARMAP_COLS)
     return;
 
   offset = (gint) charmap->active_char - (gint) charmap->old_active_char;
@@ -1187,7 +1188,7 @@ make_scrollbar (Charmap *charmap)
   charmap->adjustment = gtk_adjustment_new (0.0, 0.0, 
                                             1.0 * UNICHAR_MAX / CHARMAP_COLS, 
                                             2.0, 3.0 * CHARMAP_ROWS, 
-                                            1.0 * CHARMAP_ROWS);
+                                            0.0);
 
   charmap->adjustment_changed_handler_id = g_signal_connect (
           G_OBJECT (charmap->adjustment), "value_changed",
