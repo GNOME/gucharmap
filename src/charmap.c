@@ -942,6 +942,8 @@ expose_event (GtkWidget *widget,
               GdkEventExpose *event, 
               Charmap *charmap)
 {
+  gdk_window_set_back_pixmap (widget->window, NULL, FALSE);
+
   if (charmap->chartable_pixmap == NULL)
     {
       charmap->chartable_pixmap = gdk_pixmap_new (

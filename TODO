@@ -37,7 +37,7 @@ $Id$
  - Do something about accessibility. This might mean having the
    charmap implement AtkTable as suggested by hp.
 
- - Handle --version, --help, etc., even when built without gnome.
+ - Handle --version, --help, etc., even when built without gnome. [DONE]
 
  - Add a --disable-gnome option to the configury. [DONE]
 
@@ -65,17 +65,17 @@ $Id$
  - MiniFontSelection needs some accessibility.
  
  - Position the zoom window better; I have a plan, it's simple, but
-   not worth writing down.
+   not worth writing down. [DONE]
 
- - Edit menu.
+ - Edit menu. [UGLY. Not planning to do it.]
 
- - Font selection should be tabbable-to.
+ - Font selection should be tabbable-to. [DONE]
 
  - Menu item(s) to enter and exit zoom mode.
 
  - Get rid of the triangle in the character details; instead, put
    items in the view menu, e.g. Extra Unicode Info, CJK Info, (Notes,
-   See Also, ... NamesList.txt stuff)
+   See Also, ... NamesList.txt stuff) [DONE]
 
  - Maybe make Find a dialog box?? Seems like a fine way to do it, but
    there's nothing really wrong that I can think of with the current
@@ -107,3 +107,15 @@ $Id$
 
  - Separate the public and private parts of teh charmap struct(s) and
    stuff.
+
+ - Split the chartable out of the charmap widget, make it its own.
+
+ - Possibility to view by script, as in scripts.txt.
+
+ - All features in unibook.
+
+ - Include as much of the unidata as makes sense.
+
+ - Set font at command-line. [DONE]
+
+ - win32 install-shield type thing. [DONE]
