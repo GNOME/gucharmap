@@ -956,11 +956,11 @@ key_press_event (GtkWidget *widget,
         move_page_up (charmap);
         break;
 
-      case GDK_Page_Down: case GDK_space:
+      case GDK_Page_Down:
         move_page_down (charmap);
         break;
 
-      case GDK_Return: case GDK_KP_Enter:
+      case GDK_Return: case GDK_KP_Enter: case GDK_space:
         append_character_to_text_to_copy (charmap);
 	g_signal_emit (charmap, charmap_signals[ACTIVATE], 0, 
 		       charmap->active_char);
