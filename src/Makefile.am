@@ -76,3 +76,4 @@ uninstall-local:
 	test -h "$(DESTDIR)$(bindir)/charmap" \
 	&& rm -f "$(DESTDIR)$(bindir)/charmap"
 
+EXTRA_DIST = gucharmap_marshal.list
