@@ -330,7 +330,8 @@ insert_chocolate_detail (GucharmapCharmap *charmap,
                          GtkTextBuffer *buffer,
                          GtkTextIter *iter,
                          const gchar *name,
-                         const gchar **values)
+                         const gchar **values,
+                         gboolean expand_codepoints)
 {
   gint i;
 
@@ -340,7 +341,10 @@ insert_chocolate_detail (GucharmapCharmap *charmap,
   for (i = 0;  values[i];  i++)
     {
       gtk_text_buffer_insert (buffer, iter, " • ", -1);
-      insert_string_link_codepoints (charmap, buffer, iter, values[i]);
+      if (expand_codepoints)
+        insert_string_link_codepoints (charmap, buffer, iter, values[i]);
+      else
+        gtk_text_buffer_insert (buffer, iter, values[i], -1);
       gtk_text_buffer_insert (buffer, iter, "\n", -1);
     }
 
@@ -480,7 +484,7 @@ set_details (GucharmapCharmap *charmap,
   if (csarr != NULL)
     {
       insert_chocolate_detail (charmap, buffer, &iter,
-                               _("Alias names:"), csarr);
+                               _("Alias names:"), csarr, FALSE);
       g_free (csarr);
     }
 
@@ -489,7 +493,7 @@ set_details (GucharmapCharmap *charmap,
   if (csarr != NULL)
     {
       insert_chocolate_detail (charmap, buffer, &iter,
-                               _("Notes:"), csarr);
+                               _("Notes:"), csarr, TRUE);
       g_free (csarr);
     }
 
@@ -507,7 +511,7 @@ set_details (GucharmapCharmap *charmap,
   if (csarr != NULL)
     {
       insert_chocolate_detail (charmap, buffer, &iter,
-                               _("Approximate equivalents:"), csarr);
+                               _("Approximate equivalents:"), csarr, TRUE);
       g_free (csarr);
     }
 
@@ -516,7 +520,7 @@ set_details (GucharmapCharmap *charmap,
   if (csarr != NULL)
     {
       insert_chocolate_detail (charmap, buffer, &iter,
-                               _("Equivalents:"), csarr);
+                               _("Equivalents:"), csarr, TRUE);
       g_free (csarr);
     }
 
