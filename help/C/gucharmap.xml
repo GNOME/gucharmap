@@ -63,7 +63,7 @@
 	<surname>HOH</surname> 
 	<affiliation> 
 	  <orgname>GNOME Documentation Project</orgname> 
-  	  <address> <email>cbhoh@mimos.my</email> </address> 
+  	  <address> <email>cbhoh@gnome.org</email> </address> 
 	</affiliation> 
       </author> 
 
@@ -111,7 +111,7 @@
 	<date>&date;</date> 
 	<revdescription> 
           <para role="author">Chee Bin HOH
-	    <email>cbhoh@mimos.my</email>
+	    <email>cbhoh@gnome.org</email>
           </para>
           <para role="publisher">GNOME Documentation Project</para>
         </revdescription> 
@@ -177,7 +177,7 @@
         </para>
       </listitem> 
       <listitem> 
-	<para>Browse through all available unicode characters and categories for
+	<para>Browse through all available unicode characters and unicode blocks for
           the installed fonts.
         </para>
       </listitem> 
@@ -244,12 +244,12 @@
                   point size, type the following command, then press <keycap>Return</keycap>:
                 </para>
                 <para>
-                  <command>gucharmap font="<replaceable>string</replaceable>"</command>
+                  <command>gucharmap --font="<replaceable>string</replaceable>"</command>
                 </para>
                 <para>where <replaceable>string</replaceable> can include font name
-                  (e.g. <userinput>serif</userinput>), <userinput>B</userinput> for bold,
-                  <userinput>I</userinput> for italic and a point size number, all
-                  seperated by space character.
+                  and point size (for example, 
+                  <command>gucharmap --font="bitstream vera sans italic 20"</command> or 
+                  something).
                 </para>
               </listitem>
             </itemizedlist>
@@ -350,9 +350,9 @@
           </listitem>
         </varlistentry>
         <varlistentry>
-          <term>Category pane</term>
+          <term>Unicode block pane</term>
           <listitem>
-            <para>The category pane contains a list of categories for unicode characters.
+            <para>The unicode block pane contains a list of blocks of unicode characters.
             </para>
           </listitem>
         </varlistentry>
@@ -508,15 +508,19 @@
 	<varlistentry>
 	  <term>Find Character By Dragging</term>
 	  <listitem>
-	    <para>Drag characters from another application to the &app; Character Table to
-              identify the first character.
-            </para>
+	    <itemizedlist>
+	      <listitem>
+   	        <para>Drag characters from another application to the &app; Character Table to
+                  identify the first character.
+                </para>
+              </listitem> 
+            </itemizedlist>
 	  </listitem>
 	</varlistentry>
       </variablelist>
       <tip>
 	<para>You can use X selection to find a character. Highlight the characters, then
-          click on the &app; Character Table, it will identify the first character in selection.
+          middle-click on the &app; Character Table, it will identify the first character in selection.
         </para>
       </tip>
     </sect2>
@@ -552,8 +556,19 @@
           </listitem>
         </itemizedlist>
         <tip>
-	  <para>You can click on the <guibutton>Back</guibutton> or <guibutton>Forward</guibutton>
-            buttons to go backward or forward the link-following history for the characters.
+	  <para>You can choose 
+            <menuchoice>
+	      <shortcut><keycombo><keycap>Alt</keycap><keycap>Left</keycap></keycombo></shortcut>
+              <guimenu>Go</guimenu>
+              <guimenuitem>Back</guimenuitem>
+            </menuchoice> or click on the <guibutton>Back</guibutton> button to go backward the 
+            link-following history for the characters. To go forward the link-following history, 
+            you can choose
+            <menuchoice>
+	      <shortcut><keycombo><keycap>Alt</keycap><keycap>Right</keycap></keycombo></shortcut>
+              <guimenu>Go</guimenu>
+              <guimenuitem>Forward</guimenuitem>
+            </menuchoice> or click on the <guibutton>Forward</guibutton> button.
           </para>
         </tip>
       </para>
@@ -582,7 +597,7 @@
           </para>
 	</listitem>
         <listitem>
-	  <para>Use the category pane to browse a category of characters from the Unicode character set.
+	  <para>Use the Unicode block pane to browse a block of characters from the Unicode character set.
           </para>
 	</listitem>
 	<listitem>
@@ -591,7 +606,8 @@
 	      <shortcut><keycombo><keycap>Ctrl</keycap><keycap>N</keycap></keycombo></shortcut>
               <guimenu>Go</guimenu>
               <guimenuitem>Next Character</guimenuitem>
-            </menuchoice> to browse the next character in unicode sequence.
+            </menuchoice> to browse the next character in unicode sequence. It will skip
+            over unassigned codepoints. 
            </para>
 	</listitem>
 	<listitem>
@@ -600,7 +616,8 @@
 	      <shortcut><keycombo><keycap>Ctrl</keycap><keycap>P</keycap></keycombo></shortcut>
               <guimenu>Go</guimenu>
               <guimenuitem>Previous Character</guimenuitem>
-            </menuchoice> to browse the previous character in unicode sequence.
+            </menuchoice> to browse the previous character in unicode sequence. It will skip
+            over unassigned codepoints.
            </para>
 	</listitem>
       </itemizedlist>
@@ -631,7 +648,7 @@
 	<varlistentry>
 	  <term>Drag the Character</term>
 	  <listitem>
-	    <para>Drag the character to the text field of another application.
+	    <para>Drag the character from the Character Table to the text field of another application.
             </para>
           </listitem>
 	</varlistentry>
@@ -679,22 +696,22 @@
             </menuchoice> or use the Zoom spin box to specify the size.
           </para>
         </listitem>
+        <listitem>
+          <para>To make the columns of the Character Table to the power of two, choose
+            <menuchoice>
+              <guimenu>View</guimenu>
+	      <guimenuitem>Snap Columns to Power of Two</guimenuitem>
+            </menuchoice>. 
+          </para>
+        </listitem>
       </itemizedlist>
-      <note>
-        <para>To make the columns of the Character Table to the power of two, choose
-          <menuchoice>
-            <guimenu>View</guimenu>
-	    <guimenuitem>Snap Columns to Power of Two</guimenuitem>
-          </menuchoice>. 
-        </para>
-      </note>
     </sect2>
     <sect2 id="gucharmap-change-font">
       <title>To Change the Font</title>
       <para>To change the font, you can use the following methods:
         <itemizedlist>
           <listitem>
-            <para>Use the drop-down combination box to specify the font.</para>
+            <para>Use the font drop-down combination box to specify the font.</para>
           </listitem>
           <listitem>
             <para>Click on the <guibutton>Bold</guibutton> button.</para>
