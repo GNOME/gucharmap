@@ -546,8 +546,6 @@ redraw (Charmap *charmap)
                 - (gint) charmap->old_page_first_char)
                / CHARMAP_COLS;
 
-  /* g_printerr ("redraw: row_offset = %d\n", row_offset); */
-
   if (row_offset >= CHARMAP_ROWS || row_offset <= -CHARMAP_ROWS)
     {
       draw_tabulus_from_scratch (charmap);
@@ -783,8 +781,9 @@ key_press_event (GtkWidget *widget,
         append_character_to_text_to_copy (charmap);
         return TRUE;
 
+      /* pass on other keys, like tab and stuff that shifts focus */
       default:
-        return TRUE;
+        return FALSE;
     }
 
   redraw (charmap);
@@ -863,8 +862,6 @@ button_press_event (GtkWidget *widget,
 
   /* in case we lost keyboard focus and are clicking to get it back */
   gtk_widget_grab_focus (charmap->tabulus);
-
-  g_printerr ("button_press_event: button %d pressed\n", event->button);
 
   /* double-click */
   if (event->button == 1 && event->type == GDK_2BUTTON_PRESS)
@@ -1258,11 +1255,10 @@ mouse_wheel_down (Charmap *charmap)
 }
 
 
+/* mouse wheel scrolls by half a page */
 gboolean    
 mouse_wheel_event (GtkWidget *widget, GdkEventScroll *event, Charmap *charmap)
 {
-  g_printerr ("mouse_wheel_event: direction = %d\n", event->direction);
-
   switch (event->direction)
     {
       case GDK_SCROLL_UP:
@@ -1282,6 +1278,7 @@ void
 charmap_class_init (CharmapClass *clazz)
 {
 }
+
 
 
 /* does all the initial construction */
@@ -1363,6 +1360,10 @@ charmap_init (Charmap *charmap)
   /* the text_to_copy */
   gtk_box_pack_start (GTK_BOX (charmap), make_text_to_copy (charmap), 
                       TRUE, TRUE, 0);
+
+  set_caption (charmap);
+  set_active_block (charmap);
+  set_scrollbar_adjustment (charmap);
 }
 
 
