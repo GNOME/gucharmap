@@ -635,7 +635,7 @@ draw_character (GucharmapTable *chartable,
   cell = get_cell_at_rowcol (chartable, row, col);
   wc = gucharmap_codepoint_list_get_char (chartable->codepoint_list, cell);
 
-  if (wc < 0 || wc > UNICHAR_MAX || ! gucharmap_unichar_validate (wc) || ! gucharmap_unichar_isdefined (wc))
+  if (wc < 0 || wc > UNICHAR_MAX || !gucharmap_unichar_validate (wc) || !gucharmap_unichar_isdefined (wc))
     return;
 
   if (GTK_WIDGET_HAS_FOCUS (chartable->drawing_area) && cell == chartable->active_cell)
@@ -681,6 +681,8 @@ draw_square_bg (GucharmapTable *chartable, gint row, gint col)
     untinted = chartable->drawing_area->style->base[GTK_STATE_SELECTED];
   else if (cell == chartable->active_cell)
     untinted = chartable->drawing_area->style->base[GTK_STATE_ACTIVE];
+  else if (cell > gucharmap_codepoint_list_get_last_index (chartable->codepoint_list))
+    untinted = chartable->drawing_area->style->dark[GTK_STATE_NORMAL]; 
   else if (! gucharmap_unichar_validate (wc))
     untinted = chartable->drawing_area->style->fg[GTK_STATE_INSENSITIVE];
   else if (! gucharmap_unichar_isdefined (wc))
@@ -744,13 +746,6 @@ draw_chartable_from_scratch (GucharmapTable *chartable)
 	    chartable->drawing_area->allocation.width,
 	    chartable->drawing_area->allocation.height, -1);
 
-  /* plain background */
-  gdk_draw_rectangle (
-          chartable->pixmap,
-          chartable->drawing_area->style->base_gc[GTK_STATE_NORMAL], 
-          TRUE, 0, 0, 
-          chartable->drawing_area->allocation.width, 
-          chartable->drawing_area->allocation.height);
   draw_borders (chartable);
 
   /* draw the characters */
