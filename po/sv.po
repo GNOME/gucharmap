@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
-"POT-Creation-Date: 2003-06-04 16:29+0200\n"
-"PO-Revision-Date: 2003-06-04 16:30+0200\n"
+"POT-Creation-Date: 2003-06-05 06:56+0200\n"
+"PO-Revision-Date: 2003-06-05 06:56+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgstr ""
 
 #. ID
 #: gucharmap.desktop.in.h:1 gucharmap/gucharmap-window.c:381
-#: gucharmap/gucharmap-window.c:899 gucharmap/imgucharmap.c:209
+#: gucharmap/gucharmap-window.c:972 gucharmap/imgucharmap.c:209
 msgid "Unicode Character Map"
 msgstr "Unicode-teckentabell"
 
@@ -368,76 +368,84 @@ msgstr ""
 "Christian Rose\n"
 "Skicka synpunkter på översättningen till sv@li.org"
 
-#: gucharmap/gucharmap-window.c:510
+#: gucharmap/gucharmap-window.c:516
 msgid "_File"
 msgstr "_Arkiv"
 
-#: gucharmap/gucharmap-window.c:512
+#: gucharmap/gucharmap-window.c:518
 msgid "_View"
 msgstr "_Visa"
 
-#: gucharmap/gucharmap-window.c:514
+#: gucharmap/gucharmap-window.c:520
 msgid "_Search"
 msgstr "_Sök"
 
-#: gucharmap/gucharmap-window.c:516
+#: gucharmap/gucharmap-window.c:522
 msgid "_Go"
 msgstr "_Gå"
 
 #. ctrl-+ or ctrl-=
-#: gucharmap/gucharmap-window.c:537
+#: gucharmap/gucharmap-window.c:543
 msgid "Zoom _In"
 msgstr "Zooma _in"
 
 #. ctrl--
-#: gucharmap/gucharmap-window.c:549
+#: gucharmap/gucharmap-window.c:555
 msgid "Zoom _Out"
 msgstr "Zooma _ut"
 
-#: gucharmap/gucharmap-window.c:561
+#: gucharmap/gucharmap-window.c:567
 msgid "Snap Columns to Power of Two"
 msgstr "Fäst kolumner vid jämnt antal"
 
-#: gucharmap/gucharmap-window.c:572
+#: gucharmap/gucharmap-window.c:578
 msgid "_Find..."
 msgstr "_Sök..."
 
-#: gucharmap/gucharmap-window.c:582
+#: gucharmap/gucharmap-window.c:588
 msgid "Find _Next"
 msgstr "Sök _nästa"
 
-#: gucharmap/gucharmap-window.c:592
+#: gucharmap/gucharmap-window.c:598
 msgid "Find _Previous"
 msgstr "Sök _föregående"
 
-#: gucharmap/gucharmap-window.c:607
+#: gucharmap/gucharmap-window.c:613
 msgid "Code _Point..."
 msgstr "Kod_punkt..."
 
-#: gucharmap/gucharmap-window.c:614
+#: gucharmap/gucharmap-window.c:620
 msgid "Character in _Clipboard"
 msgstr "Tecken i _urklipp"
 
-#: gucharmap/gucharmap-window.c:650
+#: gucharmap/gucharmap-window.c:656
 msgid "_Next Character"
 msgstr "_Nästa tecken"
 
-#: gucharmap/gucharmap-window.c:657
+#: gucharmap/gucharmap-window.c:663
 msgid "_Previous Character"
 msgstr "_Föregående tecken"
 
 #. make the help menu
-#: gucharmap/gucharmap-window.c:670
+#: gucharmap/gucharmap-window.c:676
 msgid "_Help"
 msgstr "_Hjälp"
 
-#: gucharmap/gucharmap-window.c:761
+#: gucharmap/gucharmap-window.c:767
 msgid "_Text to copy:"
 msgstr "_Text att kopiera:"
 
-#: gucharmap/gucharmap-window.c:782
+#: gucharmap/gucharmap-window.c:788
 msgid "Copy to the clipboard."
 msgstr "Kopiera till urklipp."
+
+#: gucharmap/gucharmap-window.c:929
+msgid "Back"
+msgstr "Bakåt"
+
+#: gucharmap/gucharmap-window.c:937
+msgid "Forward"
+msgstr "Framåt"
 
 #: gucharmap/main.c:41
 msgid "Font to start with; ex: 'Serif 27'"
@@ -942,6 +950,12 @@ msgstr "Tillägg till privatanvändningsområde-A"
 #: gucharmap/unicode/unicode_blocks.cI:131
 msgid "Supplementary Private Use Area-B"
 msgstr "Tillägg till privatanvändningsområde-B"
+
+#~ msgid "_Back"
+#~ msgstr "_Bakåt"
+
+#~ msgid "_Forward"
+#~ msgstr "_Framåt"
 
 #~ msgid "_Go to"
 #~ msgstr "_Gå till"
