@@ -36,7 +36,7 @@ libgucharmap_la_SOURCES = gucharmap_marshal.c gucharmap_marshal.h \
                           charcell_accessible.c charcell_accessible.h \
                           chartable.c chartable.h \
                           mini_fontsel.c mini_fontsel.h \
-                          # gucharmap_window.c gucharmap_window.h
+                          gucharmap_window.c gucharmap_window.h
 
 
 # this is different from the project version
@@ -46,12 +46,11 @@ libgucharmap_la_LDFLAGS = -version-info 1:0:0
 
 libgucharmapincludedir = $(includedir)/gucharmap
 libgucharmapinclude_HEADERS = charmap.h chartable.h unicode_info.h \
-                              mini_fontsel.h # gucharmap_window.h
+                              mini_fontsel.h gucharmap_window.h
 
 
 bin_PROGRAMS = gucharmap
 gucharmap_SOURCES = main.c
-# gucharmap_SOURCES = test-main.c
 
 if OS_WIN32
 

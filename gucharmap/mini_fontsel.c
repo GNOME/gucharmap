@@ -291,10 +291,12 @@ mini_font_selection_init (MiniFontSelection *fontsel)
   gtk_box_set_spacing (GTK_BOX (fontsel), 6);
 
   fontsel->family = gtk_combo_new ();
+  gtk_widget_show (fontsel->family);
   accessib = gtk_widget_get_accessible (fontsel->family);
   atk_object_set_name (accessib, _("Font Family"));
 
   fontsel->style = gtk_combo_new ();
+  gtk_widget_show (fontsel->style);
   accessib = gtk_widget_get_accessible (fontsel->style);
   atk_object_set_name (accessib, _("Font Style"));
 
@@ -303,6 +305,7 @@ mini_font_selection_init (MiniFontSelection *fontsel)
           MIN_FONT_SIZE, MAX_FONT_SIZE, 1, 9, 0);
   fontsel->size = gtk_spin_button_new (GTK_ADJUSTMENT (fontsel->size_adj),
                                        0, 0);
+  gtk_widget_show (fontsel->size);
   accessib = gtk_widget_get_accessible (fontsel->size);
   atk_object_set_name (accessib, _("Font Size"));
 
