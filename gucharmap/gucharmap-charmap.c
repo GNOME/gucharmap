@@ -438,7 +438,7 @@ set_details (GucharmapCharmap *charmap,
   if (sarr != NULL)
     {
       insert_chocolate_detail (charmap, buffer, &iter,
-                               _("See also:"), sarr);
+                               _("See also:"), (const gchar **) sarr);
       free_string_array (sarr);
     }
 
@@ -502,14 +502,44 @@ active_char_set (GtkWidget *widget,
                  gunichar uc, 
                  GucharmapCharmap *charmap)
 {
-  gchar *temp;
+  GString *gs;
+  const gchar *temp;
+  const gchar **temps;
+  gint i;
 
   set_active_block (charmap, uc);
   set_details (charmap, uc);
 
-  temp = g_strdup_printf ("U+%4.4X %s", uc, gucharmap_get_unicode_name (uc));
-  status_message (charmap, temp);
-  g_free (temp);
+  gs = g_string_new (NULL);
+  g_string_append_printf (gs, "U+%4.4X %s", uc, 
+                          gucharmap_get_unicode_name (uc));
+
+#if ENABLE_UNIHAN
+  temp = gucharmap_get_unicode_kDefinition (uc);
+  if (temp)
+    g_string_append_printf (gs, "   %s", temp);
+#endif
+
+  temps = gucharmap_get_nameslist_equals (uc);
+  if (temps)
+    {
+      g_string_append_printf (gs, "   = %s", temps[0]);
+      for (i = 1;  temps[i];  i++)
+        g_string_append_printf (gs, "; %s", temps[i]);
+      g_free (temps);
+    }
+
+  temps = gucharmap_get_nameslist_stars (uc);
+  if (temps)
+    {
+      g_string_append_printf (gs, "   • %s", temps[0]);
+      for (i = 1;  temps[i];  i++)
+        g_string_append_printf (gs, "; %s", temps[i]);
+      g_free (temps);
+    }
+
+  status_message (charmap, gs->str);
+  g_string_free (gs, TRUE);
 }
 
 
@@ -579,7 +609,7 @@ make_details_page (GucharmapCharmap *charmap)
 
   charmap->details = gtk_text_view_new ();
   gtk_widget_show (charmap->details);
-  /* gtk_text_view_set_editable (GTK_TEXT_VIEW (charmap->details), FALSE); */
+  gtk_text_view_set_editable (GTK_TEXT_VIEW (charmap->details), FALSE);
 
   create_tags (charmap);
 
@@ -667,15 +697,8 @@ void
 gucharmap_charmap_go_to_character (GucharmapCharmap *charmap, 
                                    gunichar uc)
 {
-  gchar *message;
-
   if (uc >= 0 && uc <= UNICHAR_MAX)
-    {
-      gucharmap_table_set_active_character (charmap->chartable, uc);
-      message = g_strdup_printf ("Jumped to U+%4.4X.", uc);
-      status_message (charmap, message);
-      g_free (message);
-    }
+    gucharmap_table_set_active_character (charmap->chartable, uc);
 }
 
 
