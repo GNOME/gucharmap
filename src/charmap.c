@@ -1,6 +1,6 @@
 /* $Id$ */
 /*
- * Copyright (c) 2002  Noah Levitt <nlevitt@users.sourceforge.net>
+ * Copyright (c) 2003  Noah Levitt <nlevitt@users.sourceforge.net>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -1673,10 +1673,10 @@ charmap_new ()
 }
 
 
-GtkType
+GType
 charmap_get_type ()
 {
-  static GtkType charmap_type = 0;
+  static GType charmap_type = 0;
 
   if (!charmap_type)
     {

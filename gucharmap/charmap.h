@@ -1,6 +1,6 @@
 /* $Id$ */
 /*
- * Copyright (c) 2002  Noah Levitt <nlevitt@users.sourceforge.net>
+ * Copyright (c) 2003  Noah Levitt <nlevitt@users.sourceforge.net>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -31,10 +31,16 @@ extern "C" {
 #endif /* __cplusplus */
 
 
-#define CHARMAP(obj)         GTK_CHECK_CAST (obj, charmap_get_type (), Charmap)
-#define CHARMAP_CLASS(clazz) GTK_CHECK_CLASS_CAST (clazz, charmap_get_type (),\
-                                                   CharmapClass)
-#define IS_CHARMAP(obj)      GTK_CHECK_TYPE (obj, charmap_get_type ())
+#define CHARMAP(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), charmap_get_type (), \
+                                                  Charmap))
+
+#define CHARMAP_CLASS(clazz) (G_TYPE_CHECK_CLASS_CAST ((clazz), \
+                                                       charmap_get_type (),\
+                                                       CharmapClass))
+
+#define IS_CHARMAP(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), \
+                         charmap_get_type ()))
+
 
 #define CHARMAP_MIN_ROWS 4
 #define CHARMAP_MIN_COLS 4

@@ -1,6 +1,6 @@
 /* $Id$ */
 /*
- * Copyright (c) 2002  Noah Levitt <nlevitt@users.sourceforge.net>
+ * Copyright (c) 2003  Noah Levitt <nlevitt@users.sourceforge.net>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -32,15 +32,15 @@ extern "C" {
 
 
 #define MINI_FONT_SELECTION(obj) \
-        GTK_CHECK_CAST (obj, mini_font_selection_get_type (), \
-                        MiniFontSelection)
+        (G_TYPE_CHECK_INSTANCE_CAST ((obj), mini_font_selection_get_type (), \
+                                     MiniFontSelection))
 
 #define MINI_FONT_SELECTION_CLASS(clazz) \
-        GTK_CHECK_CLASS_CAST (clazz, mini_font_selection_get_type (), \
-                              MiniFontSelectionClass)
+        (G_TYPE_CHECK_CLASS_CAST ((clazz), mini_font_selection_get_type (), \
+                                  MiniFontSelectionClass))
 
 #define IS_MINI_FONT_SELECTION(obj) \
-        GTK_CHECK_TYPE (obj, mini_font_selection_get_type ())
+        G_TYPE_CHECK_INSTANCE_TYPE ((obj), mini_font_selection_get_type ())
 
 
 typedef struct _MiniFontSelection MiniFontSelection;
@@ -71,7 +71,7 @@ struct _MiniFontSelectionClass
 };
 
 
-GtkType mini_font_selection_get_type ();
+GType mini_font_selection_get_type ();
 GtkWidget * mini_font_selection_new ();
 gboolean mini_font_selection_set_font_name (MiniFontSelection *fontsel,
                                             const gchar *fontname);

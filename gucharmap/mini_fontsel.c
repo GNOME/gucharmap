@@ -1,6 +1,6 @@
 /* $Id$ */
 /*
- * Copyright (c) 2002  Noah Levitt <nlevitt@users.sourceforge.net>
+ * Copyright (c) 2003  Noah Levitt <nlevitt@users.sourceforge.net>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -136,13 +136,13 @@ show_available_styles (MiniFontSelection *fontsel)
   gboolean new_family_has_old_style = FALSE;
   gint n_faces, i;
 
-  g_printerr ("gtk_font_selection_show_available_styles\n");
+  g_printerr ("show_available_styles\n");
 
   family = g_hash_table_lookup (pango_font_family_hash, fontsel->family_value);
   pango_font_family_list_faces (family, &faces, &n_faces);
   qsort (faces, n_faces, sizeof (PangoFontFace *), faces_sort_func);
 
-  for (i=0; i < n_faces; i++)
+  for (i = 0;  i < n_faces;  i++)
     {
       const gchar *face_name = pango_font_face_get_face_name (faces[i]);
       face_names = g_list_append (face_names, (gpointer) face_name);
@@ -325,10 +325,10 @@ mini_font_selection_new ()
 }
 
 
-GtkType
+GType
 mini_font_selection_get_type ()
 {
-  static GtkType mini_font_selection_type = 0;
+  static GType mini_font_selection_type = 0;
 
   g_printerr ("mini_font_selection_get_type\n");
 
