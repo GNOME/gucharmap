@@ -1233,8 +1233,9 @@ charmap_init (Charmap *charmap)
 
   gtk_box_pack_start (GTK_BOX (charmap), hbox, TRUE, TRUE, 0);
 
-  gtk_box_pack_start (GTK_BOX (hbox), charmap->tabulus, TRUE, TRUE, 0);
-  gtk_box_pack_start (GTK_BOX (hbox), make_scrollbar (charmap), TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (hbox), charmap->tabulus, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (hbox), make_scrollbar (charmap), 
+                      FALSE, FALSE, 0);
 
   vbox = gtk_vbox_new (FALSE, 3);
   gtk_box_pack_start (GTK_BOX (vbox), make_unicode_block_selector (charmap), 
