@@ -1,6 +1,6 @@
 /* $Id$ */
 /*
- * Copyright (c) 2003  Noah Levitt <nlevitt аt columbia.edu>
+ * Copyright (c) 2004 Noah Levitt
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -19,7 +19,7 @@
 
 #include "config.h"
 
-#include "gucharmap-window.h"
+#include "gucharmap-search-dialog.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -28,7 +28,7 @@
 #if HAVE_GNOME
 # include <gnome.h>
 #endif
-#include "gucharmap-search.h"
+#include "gucharmap-window.h"
 #include "gucharmap-mini-fontsel.h"
 #include "gucharmap-unicode-info.h"
 #include "gucharmap-script-chapters.h"
@@ -71,48 +71,17 @@ struct _GucharmapWindowPrivate
 
   GdkPixbuf *icon;
 
-  gchar *last_search;
-  gboolean search_in_progress;
+  GtkWidget *search_dialog; /* takes care of all aspects of searching */
+
+  /* menu items to disable while searching */
+  GtkWidget *find_menu_item;
+  GtkWidget *find_next_menu_item;
+  GtkWidget *find_prev_menu_item;
 
   gboolean font_selection_visible;
   gboolean text_to_copy_visible;
   gboolean file_menu_visible;
 };
-
-static void
-information_dialog (GucharmapWindow *guw,
-                    GtkWindow       *parent,
-                    const gchar     *message)
-{
-  GtkWidget *dialog, *label, *hbox, *icon;
-  GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
-
-  dialog = gtk_dialog_new_with_buttons (_("Information"), parent,
-                                        GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_NO_SEPARATOR,
-                                        GTK_STOCK_OK, GTK_RESPONSE_ACCEPT, NULL);
-
-  gtk_window_set_icon (GTK_WINDOW (dialog), priv->icon);
-
-  hbox = gtk_hbox_new (FALSE, 12);
-  gtk_widget_show (hbox);
-
-  gtk_container_set_border_width (GTK_CONTAINER (hbox), 6);
-
-  gtk_container_add (GTK_CONTAINER (GTK_DIALOG (dialog)->vbox), hbox);
-
-  icon = gtk_image_new_from_stock (GTK_STOCK_DIALOG_INFO, GTK_ICON_SIZE_DIALOG);
-  gtk_widget_show (icon);
-  gtk_box_pack_start (GTK_BOX (hbox), icon, FALSE, FALSE, 0);
-
-  label = gtk_label_new (message);
-  gtk_widget_show (label);
-  gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
-  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-
-  g_signal_connect (dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
-  
-  gtk_widget_show (dialog);
-}
 
 static void
 status_message (GtkWidget       *widget, 
@@ -128,78 +97,37 @@ status_message (GtkWidget       *widget,
 }
 
 static void
-search_completed (GucharmapSearchState *search_state)
-{
-  GucharmapWindow *guw = gucharmap_search_state_get_saved_data (search_state);
-  gunichar char_found = gucharmap_search_state_get_found_char (search_state);
-  GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
-
-  if (char_found == (gunichar)(-1))
-    /* information_dialog (guw, alert_parent, _("Not found.")); */
-    information_dialog (guw, NULL, _("Not found."));
-  else
-    gucharmap_charmap_go_to_character (guw->charmap, char_found);
-
-  gucharmap_search_state_free (search_state);
-  priv->search_in_progress = FALSE;
-  gdk_window_set_cursor (GTK_WIDGET (guw)->window, NULL);
-}
-
-static void
-start_search (GucharmapWindow    *guw, 
-              GtkWindow          *alert_parent,
-              const gchar        *search_string, 
-              GucharmapDirection  direction)
+search_start (GucharmapSearchDialog *search_dialog,
+              GucharmapWindow       *guw)
 {
   GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
-  GucharmapCodepointList *list;
-  GucharmapChapters *chapters;
-  GucharmapSearchState *search_state;
-  GdkCursor *cursor;
-  gunichar start_char;
-  gint start_index;
+  g_assert (IS_GUCHARMAP_WINDOW (guw));
 
-  cursor = gdk_cursor_new (GDK_WATCH);
+  GdkCursor *cursor = gdk_cursor_new (GDK_WATCH);
   gdk_window_set_cursor (GTK_WIDGET (guw)->window, cursor);
   gdk_cursor_unref (cursor);
 
-  g_return_if_fail (!priv->search_in_progress);
-
-  priv->search_in_progress = TRUE;
-
-  chapters = gucharmap_charmap_get_chapters (guw->charmap);
-  list = (GucharmapCodepointList *) gucharmap_chapters_get_book_codepoint_list (chapters);
-  start_char = gucharmap_table_get_active_character (guw->charmap->chartable);
-  start_index = gucharmap_codepoint_list_get_index (list, start_char);
-
-  search_state = gucharmap_search_state_new (list, search_string, start_index, direction, FALSE, guw);
-
-  /* idle handler does the search */
-  g_idle_add_full (G_PRIORITY_DEFAULT_IDLE, (GSourceFunc) gucharmap_idle_search, 
-                   search_state, (GDestroyNotify) search_completed);
+  gtk_widget_set_sensitive (priv->find_menu_item, FALSE);
+  gtk_widget_set_sensitive (priv->find_next_menu_item, FALSE);
+  gtk_widget_set_sensitive (priv->find_prev_menu_item, FALSE);
 }
 
 static void
-search_find_response (GtkDialog   *dialog, 
-                      gint         response, 
-                      EntryDialog *entry_dialog)
+search_finish (GucharmapSearchDialog *search_dialog,
+               gunichar               found_char,
+               GucharmapWindow       *guw)
 {
-  GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (entry_dialog->guw);
+  GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
 
-  if (response == GTK_RESPONSE_OK)
-    {
-      if (priv->last_search != NULL)
-        g_free (priv->last_search);
+  if (found_char != (gunichar)(-1))
+    gucharmap_charmap_go_to_character (guw->charmap, found_char);
+  /* not-found dialog handled by GucharmapSearchDialog */
 
-      priv->last_search = g_strdup (gtk_entry_get_text (entry_dialog->entry));
+  gdk_window_set_cursor (GTK_WIDGET (guw)->window, NULL);
 
-      start_search (entry_dialog->guw, GTK_WINDOW (entry_dialog->dialog), priv->last_search, GUCHARMAP_FORWARD);
-    }
-  else
-    {
-      g_free (entry_dialog);
-      gtk_widget_destroy (GTK_WIDGET (dialog));
-    }
+  gtk_widget_set_sensitive (priv->find_menu_item, TRUE);
+  gtk_widget_set_sensitive (priv->find_next_menu_item, TRUE);
+  gtk_widget_set_sensitive (priv->find_prev_menu_item, TRUE);
 }
 
 static void
@@ -207,54 +135,16 @@ search_find (GtkWidget       *widget,
              GucharmapWindow *guw)
 {
   GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
-  GtkWidget *dialog;
-  GtkWidget *hbox;
-  GtkWidget *label;
-  GtkWidget *entry;
-  GtkWidget *spacer;
-  EntryDialog *entry_dialog;
+  g_assert (IS_GUCHARMAP_WINDOW (guw));
 
-  dialog = gtk_dialog_new_with_buttons (_("Find"), GTK_WINDOW (guw),
-                                        GTK_DIALOG_NO_SEPARATOR | GTK_DIALOG_DESTROY_WITH_PARENT, 
-                                        GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, 
-                                        GTK_STOCK_FIND, GTK_RESPONSE_OK, NULL);
+  if (priv->search_dialog == NULL)
+    {
+      priv->search_dialog = gucharmap_search_dialog_new (guw);
+      g_signal_connect (priv->search_dialog, "search-start", G_CALLBACK (search_start), guw);
+      g_signal_connect (priv->search_dialog, "search-finish", G_CALLBACK (search_finish), guw);
+    }
 
-  gtk_window_set_icon (GTK_WINDOW (dialog), priv->icon);
-  gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
-
-  hbox = gtk_hbox_new (FALSE, 12);
-  gtk_container_set_border_width (GTK_CONTAINER (hbox), 6);
-  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), hbox,
-                      FALSE, FALSE, 0);
-
-  label = gtk_label_new_with_mnemonic (_("_Search:"));
-  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-
-  entry = gtk_entry_new ();
-  gtk_entry_set_activates_default (GTK_ENTRY (entry), TRUE);
-  if (priv->last_search != NULL)
-    gtk_entry_set_text (GTK_ENTRY (entry), priv->last_search);
-  gtk_box_pack_start (GTK_BOX (hbox), entry, TRUE, TRUE, 0);
-
-  gtk_label_set_mnemonic_widget (GTK_LABEL (label), entry);
-
-  spacer = gtk_alignment_new (0, 0, 0, 0);
-  gtk_widget_show (spacer);
-  gtk_widget_set_size_request (spacer, -1, 6);
-  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), 
-                      spacer, FALSE, FALSE, 0);
-
-  entry_dialog = g_new (EntryDialog, 1); 
-  entry_dialog->guw = guw;
-  entry_dialog->dialog = dialog;
-  entry_dialog->entry = GTK_ENTRY (entry);
-
-  g_signal_connect (GTK_DIALOG (dialog), "response", 
-                    G_CALLBACK (search_find_response), entry_dialog);
-
-  gtk_widget_show_all (dialog);
-
-  gtk_widget_grab_focus (entry);
+  gtk_widget_show (priv->search_dialog);
 }
 
 static void
@@ -263,20 +153,22 @@ search_find_next (GtkWidget       *widget,
 {
   GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
 
-  if (priv->last_search != NULL)
-    start_search (guw, GTK_WINDOW (guw), priv->last_search, GUCHARMAP_FORWARD);
+  if (priv->search_dialog)
+    gucharmap_search_dialog_start_search (GUCHARMAP_SEARCH_DIALOG (priv->search_dialog), GUCHARMAP_DIRECTION_FORWARD);
   else
     search_find (widget, guw);
 }
 
 static void
-search_find_prev (GtkWidget *widget, GucharmapWindow *guw)
+search_find_prev (GtkWidget       *widget, 
+                  GucharmapWindow *guw)
 {
   GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
 
-  if (priv->last_search != NULL)
-    start_search (guw, GTK_WINDOW (guw), priv->last_search, GUCHARMAP_BACKWARD);
-  /* XXX: else, open up search dialog, but search backwards :-( */
+  if (priv->search_dialog)
+    gucharmap_search_dialog_start_search (GUCHARMAP_SEARCH_DIALOG (priv->search_dialog), GUCHARMAP_DIRECTION_BACKWARD);
+  else
+    search_find (widget, guw);
 }
 
 static void
@@ -531,35 +423,33 @@ make_menu (GucharmapWindow *guw)
   gtk_menu_set_accel_group (GTK_MENU (search_menu), priv->accel_group);
   gtk_menu_item_set_submenu (GTK_MENU_ITEM (search_menu_item), search_menu);
 
-  menu_item = gtk_image_menu_item_new_with_mnemonic (_("_Find..."));
-  gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (menu_item), 
+  priv->find_menu_item = gtk_image_menu_item_new_with_mnemonic (_("_Find..."));
+  gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (priv->find_menu_item), 
                                  gtk_image_new_from_stock (GTK_STOCK_FIND, GTK_ICON_SIZE_MENU));
-  gtk_widget_add_accelerator (menu_item, "activate", priv->accel_group,
+  gtk_widget_add_accelerator (priv->find_menu_item, "activate", priv->accel_group,
                               GDK_f, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
-  g_signal_connect (G_OBJECT (menu_item), "activate",
-                    G_CALLBACK (search_find), guw);
-  gtk_menu_shell_append (GTK_MENU_SHELL (search_menu), menu_item);
+  g_signal_connect (G_OBJECT (priv->find_menu_item), "activate", G_CALLBACK (search_find), guw);
+  gtk_menu_shell_append (GTK_MENU_SHELL (search_menu), priv->find_menu_item);
 
-  menu_item = gtk_image_menu_item_new_with_mnemonic (_("Find _Next"));
-  gtk_image_menu_item_set_image (
-          GTK_IMAGE_MENU_ITEM (menu_item), 
-          gtk_image_new_from_stock (GTK_STOCK_FIND, GTK_ICON_SIZE_MENU));
-  gtk_widget_add_accelerator (menu_item, "activate", priv->accel_group,
+  priv->find_next_menu_item = gtk_image_menu_item_new_with_mnemonic (_("Find _Next"));
+  gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (priv->find_next_menu_item), 
+                                 gtk_image_new_from_stock (GTK_STOCK_FIND, GTK_ICON_SIZE_MENU));
+  gtk_widget_add_accelerator (priv->find_next_menu_item, "activate", priv->accel_group,
                               GDK_g, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
-  g_signal_connect (G_OBJECT (menu_item), "activate",
+  g_signal_connect (G_OBJECT (priv->find_next_menu_item), "activate",
                     G_CALLBACK (search_find_next), guw);
-  gtk_menu_shell_append (GTK_MENU_SHELL (search_menu), menu_item);
+  gtk_menu_shell_append (GTK_MENU_SHELL (search_menu), priv->find_next_menu_item);
 
-  menu_item = gtk_image_menu_item_new_with_mnemonic (_("Find _Previous"));
+  priv->find_prev_menu_item = gtk_image_menu_item_new_with_mnemonic (_("Find _Previous"));
   gtk_image_menu_item_set_image (
-          GTK_IMAGE_MENU_ITEM (menu_item), 
+          GTK_IMAGE_MENU_ITEM (priv->find_prev_menu_item), 
           gtk_image_new_from_stock (GTK_STOCK_FIND, GTK_ICON_SIZE_MENU));
-  gtk_widget_add_accelerator (menu_item, "activate", priv->accel_group,
+  gtk_widget_add_accelerator (priv->find_prev_menu_item, "activate", priv->accel_group,
                               GDK_g, GDK_SHIFT_MASK | GDK_CONTROL_MASK, 
                               GTK_ACCEL_VISIBLE);
-  g_signal_connect (G_OBJECT (menu_item), "activate",
+  g_signal_connect (G_OBJECT (priv->find_prev_menu_item), "activate",
                     G_CALLBACK (search_find_prev), guw);
-  gtk_menu_shell_append (GTK_MENU_SHELL (search_menu), menu_item);
+  gtk_menu_shell_append (GTK_MENU_SHELL (search_menu), priv->find_prev_menu_item);
   /* finished making the search menu */
 
   /* make the go menu */
@@ -787,7 +677,7 @@ gucharmap_window_init (GucharmapWindow *guw)
   priv->text_to_copy_visible = FALSE;
   priv->file_menu_visible = FALSE;
 
-  priv->last_search = NULL;
+  priv->search_dialog = NULL;
 
   load_icon (guw);
   gtk_window_set_icon (GTK_WINDOW (guw), priv->icon);
@@ -804,11 +694,15 @@ show_all (GtkWidget *widget)
 static void
 window_finalize (GObject *object)
 {
+#if 0
   GucharmapWindow *guw = GUCHARMAP_WINDOW (object);
   GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
 
+  /*
   if (priv->last_search)
     g_free (priv->last_search);
+    */
+#endif
 }
 
 static void
