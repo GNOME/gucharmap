@@ -579,6 +579,14 @@ expand_collapse (GtkCheckMenuItem *mi, GucharmapWindow *guw)
 }
 
 
+static void
+snap_cols_pow2 (GtkCheckMenuItem *mi, GucharmapWindow *guw)
+{
+  chartable_set_snap_pow2 (guw->charmap->chartable, 
+                           gtk_check_menu_item_get_active (mi));
+}
+
+
 #if HAVE_GNOME
 static void
 help_about (GtkWidget *widget, GucharmapWindow *guw)
@@ -894,6 +902,15 @@ make_menu (GucharmapWindow *guw)
   g_signal_connect (G_OBJECT (menu_item), "activate",
                     G_CALLBACK (show_hide_caption_kkorean), guw);
 #endif
+
+  /* separator */
+  gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), gtk_menu_item_new ());
+
+  menu_item = gtk_check_menu_item_new_with_label (_("Snap Columns to Power of Two"));
+  g_signal_connect (menu_item,  "activate", 
+                    G_CALLBACK (snap_cols_pow2), guw);
+  gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), menu_item);
+
 
   /* make the search menu */
   search_menu = gtk_menu_new ();

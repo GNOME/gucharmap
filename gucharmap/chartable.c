@@ -975,6 +975,15 @@ chartable_class_init (ChartableClass *clazz)
 }
 
 
+static int
+high_bit (int n)
+{
+  int i;
+  for (i = 1;  i < n;  i *= 2);
+  return i/2;
+}
+
+
 static void
 size_allocate (GtkWidget *widget, 
                GtkAllocation *allocation, 
@@ -986,7 +995,11 @@ size_allocate (GtkWidget *widget,
   old_rows = chartable->rows;
   old_cols = chartable->cols;
 
-  chartable->cols = (allocation->width - 1) / bare_minimal_column_width (chartable);
+  if (chartable->snap_pow2_enabled)
+    chartable->cols = high_bit ((allocation->width - 1) / bare_minimal_column_width (chartable));
+  else
+    chartable->cols = (allocation->width - 1) / bare_minimal_column_width (chartable);
+
   chartable->rows = (allocation->height - 1) / bare_minimal_row_height (chartable);
 
   /* avoid a horrible floating point exception crash */
@@ -1538,6 +1551,7 @@ chartable_init (Chartable *chartable)
   chartable->zoom_window = NULL;
   chartable->zoom_pixmap = NULL;
   chartable->font_metrics = NULL;
+  chartable->snap_pow2_enabled = FALSE;
 
   accessible = gtk_widget_get_accessible (GTK_WIDGET (chartable));
   atk_object_set_name (accessible, _("Character Table"));
@@ -1549,7 +1563,7 @@ chartable_init (Chartable *chartable)
           GDK_BUTTON_RELEASE_MASK | GDK_BUTTON3_MOTION_MASK |
           GDK_FOCUS_CHANGE_MASK | GDK_SCROLL_MASK);
 
-  g_signal_connect (G_OBJECT (chartable->drawing_area), "expose_event",
+  g_signal_connect (G_OBJECT (chartable->drawing_area), "expose-event",
                     G_CALLBACK (expose_event), chartable);
   g_signal_connect (G_OBJECT (chartable->drawing_area), "size-allocate",
                     G_CALLBACK (size_allocate), chartable);
@@ -1755,3 +1769,14 @@ chartable_grab_focus (Chartable *chartable)
 }
 
 
+void 
+chartable_set_snap_pow2 (Chartable *chartable, gboolean snap)
+{
+  if (snap != chartable->snap_pow2_enabled)
+    {
+      chartable->snap_pow2_enabled = snap;
+
+      /* sends "size-allocate" */
+      gtk_widget_queue_resize (chartable->drawing_area); 
+    }
+}

@@ -29,11 +29,11 @@ G_BEGIN_DECLS
                         chartable_get_type (), Chartable))
 
 #define CHARTABLE_CLASS(clazz) (G_TYPE_CHECK_CLASS_CAST ((clazz), \
-                                                       chartable_get_type (),\
-                                                       ChartableClass))
+                                                         chartable_get_type (),\
+                                                         ChartableClass))
 
 #define IS_CHARTABLE(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), \
-                         chartable_get_type ()))
+                           chartable_get_type ()))
 
 
 typedef struct _Chartable Chartable;
@@ -66,6 +66,8 @@ struct _Chartable
   GtkWidget *zoom_window;
   GdkPixmap *zoom_pixmap;
   gboolean zoom_mode_enabled;
+
+  gboolean snap_pow2_enabled;
 };
 
 
@@ -89,6 +91,7 @@ void chartable_zoom_disable (Chartable *chartable);
 void chartable_identify_clipboard (Chartable *chartable, 
                                    GtkClipboard *clipboard);
 void chartable_grab_focus (Chartable *chartable);
+void chartable_set_snap_pow2 (Chartable *chartable, gboolean snap);
 
 
 G_END_DECLS
