@@ -81,13 +81,6 @@ gucharmap_LDADD = libgucharmap.la @GTK_LIBS@ @GNOME_LIBS@ @POPT_LIBS@
 
 endif
 
-
-moduledir = $(libdir)/gtk-2.0/$(GTK_BINARY_VERSION)/immodules
-module_LTLIBRARIES = im-gucharmap.la
-im_gucharmap_la_LDFLAGS = -rpath $(moduledir) -avoid-version -module
-im_gucharmap_la_SOURCES = imgucharmap.c
-im_gucharmap_la_LIBADD = libgucharmap.la @GTK_LIBS@ @GNOME_LIBS@
-
 gucharmap-marshal.h: gucharmap-marshal.list
 	( @GLIB_GENMARSHAL@ --prefix=gucharmap_marshal gucharmap-marshal.list \
                             --header > gucharmap-marshal.tmp \
@@ -123,28 +116,6 @@ uninstall-local:
 	&& rm -f "$(DESTDIR)$(bindir)/charmap" ; \
 	test -h "$(DESTDIR)$(bindir)/gnome-character-map" \
 	&& rm -f "$(DESTDIR)$(bindir)/gnome-character-map"
-
-endif
-
-if BUILD_GTK_IMMODULES
-
-all-local: gtk.immodules
-
-noinst_PROGRAMS = im-module-file
-im_module_file_SOURCES = im-module-file.c
-im_module_file_LDADD = @GTK_LIBS@
-
-gtk.immodules: $(module_LTLIBRARIES)
-	$(GTK_QUERY_IMMODULES) $(module_LTLIBRARIES) > gtk.immodules ;
-
-install-data-hook: im-module-file
-	LD_LIBRARY_PATH=$(DESTDIR)$(libdir):$$LD_LIBRARY_PATH GTK_PATH=$$GTK_PATH:$(DESTDIR)$(libdir)/gtk-2.0 $(GTK_QUERY_IMMODULES) > `./im-module-file` ;
-
-else
-
-install-data-hook: 
-
-all-local: 
 
 endif
 

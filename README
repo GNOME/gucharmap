@@ -29,28 +29,6 @@ There are two extra ./configure options:
     information will reduce gucharmap's size by roughly 2 megabytes.
 
 
-GUCHARMAP INPUT METHOD
-
-What is this thing? Open up, for example, gedit. Right-click in the
-editable area. Hover over "Input Methods". The list of input methods
-you currently have available will pop up. If you try a couple, you'll
-see what they do.
-
-Most of these affect what happens when you type in the window. The
-gucharmap input method is a little different. It opens up a gucharmap
-window. When you double-click on a character, it goes directly into
-your document.
-
-Installation overwrites the system-wide input module cache file,
-normally /etc/gtk-2.0/gtk.immodules. (This is the right thing to do,
-see http://bugzilla.gnome.org/show_bug.cgi?id=112099.)
-
-You will want to add ${prefix}/lib/gtk-2.0/$(GTK_BINARY_VERSION)/immodules,
-the directory where the input modules are installed, to your
-system-wide GTK_PATH.
-
-
-
 CREDITS
 
 gucharmap is Copyright (c) 2003 Noah Levitt, and is licensed to you
