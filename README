@@ -41,34 +41,13 @@ gucharmap input method is a little different. It opens up a gucharmap
 window. When you double-click on a character, it goes directly into
 your document.
 
-Getting the gucharmap input method to show up in the list requires
-a little extra work on your part. The list comes from a file, called
-gtk.immodules. On my system, it is installed in 
-/etc/gtk-2.0/gtk.immodules
-It would be rude of gucharmap to write over that file, so it installs
-its version of gtk.immodules in a different place: 
-${prefix}/etc/gucharmap/gtk.immodules.
-where ${prefix} is the prefix where gucharmap is installed (/usr/local
-by default). gucharmap's version of gtk.immodules includes all the the
-input modules in GTK+'s version, plus gucharmap.
+Installation overwrites the system-wide input module cache file,
+normally /etc/gtk-2.0/gtk.immodules. (This is the right thing to do,
+see http://bugzilla.gnome.org/show_bug.cgi?id=112099.)
 
-You have to tell GTK+ to use gucharmap's version of gtk.immodules if
-you want to use the gucharmap input module (which you do!). To do
-this, set the environment variable GTK_IM_MODULE_FILE to
-${prefix}/etc/gucharmap/gtk.immodules. For example, you can put these
-lines in your ~/.bash_profile or ~/.profile or /etc/profile or
-somewhere:
-
-GTK_IM_MODULE_FILE=${prefix}/etc/gucharmap/gtk.immodules
-export GTK_IM_MODULE_FILE
-
-Replace ${prefix} with the prefix where gucharmap is installed.
-
-Alternatively, you can simply write over GTK+'s gtk.immodules with
-gucharmap's version. For example:
-
-# mv /etc/gtk-2.0/gtk.immodules /etc/gtk-2.0/gtk.immodules.bak
-# cp ${prefix}/etc/gucharmap/gtk.immodules /etc/gtk-2.0/.
+You will want to add ${prefix}/lib/gtk-2.0/$(GTK_BINARY_VERSION)/immodules,
+the directory where the input modules are installed, to your
+system-wide GTK_PATH.
 
 
 CREDITS
@@ -93,4 +72,4 @@ Windows charmap, and GNOME's gcharmap.
 
 
 Noah Levitt <nlevitt аt columbia.edu>
-updated Sun Mar 30 02:05:37 EST 2003
+$Id$
