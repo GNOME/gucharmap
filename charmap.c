@@ -253,7 +253,7 @@ set_scrollbar_adjustment (Charmap *charmap)
                           charmap->adjustment_changed_handler_id);
 
   gtk_adjustment_set_value (GTK_ADJUSTMENT (charmap->adjustment), 
-                            1.0 * charmap->active_char);
+                            1.0 * charmap->page_first_char / CHARMAP_COLS);
 
   g_signal_handler_unblock (G_OBJECT (charmap->adjustment),
                             charmap->adjustment_changed_handler_id);
@@ -542,6 +542,8 @@ redraw (Charmap *charmap)
                 - (gint) charmap->old_page_first_char)
                / CHARMAP_COLS;
 
+  /* g_printerr ("redraw: row_offset = %d\n", row_offset); */
+
   if (row_offset >= CHARMAP_ROWS || row_offset <= -CHARMAP_ROWS)
     {
       draw_tabulus_from_scratch (charmap);
@@ -620,6 +622,33 @@ set_active_character (Charmap *charmap, gunichar uc)
           charmap->active_char 
           + (charmap->old_page_first_char - charmap->old_active_char);
     }
+}
+
+
+static void
+set_top_row (Charmap *charmap, gint row)
+{
+  gint r, c;
+
+  g_return_if_fail (row >= 0 && row <= UNICHAR_MAX / CHARMAP_COLS);
+
+  charmap->old_page_first_char = charmap->page_first_char;
+  charmap->old_active_char = charmap->active_char;
+
+  charmap->page_first_char = row * CHARMAP_COLS;
+
+  if (charmap->active_char - charmap->page_first_char 
+          < CHARMAP_ROWS * CHARMAP_ROWS)
+    return;
+
+  c = charmap->old_active_char % CHARMAP_COLS;
+
+  if (charmap->page_first_char < charmap->old_page_first_char)
+    r = CHARMAP_ROWS - 1;
+  else
+    r = 0;
+
+  charmap->active_char = charmap->page_first_char + r * CHARMAP_COLS + c;
 }
 
 
@@ -1147,8 +1176,7 @@ make_text_to_copy (Charmap *charmap)
 static void
 scroll_charmap (GtkAdjustment *adjustment, Charmap *charmap)
 {
-  set_active_character (charmap, 
-                        (gunichar) gtk_adjustment_get_value (adjustment));
+  set_top_row (charmap, (gint) gtk_adjustment_get_value (adjustment));
   redraw (charmap);
 }
 
@@ -1156,10 +1184,10 @@ scroll_charmap (GtkAdjustment *adjustment, Charmap *charmap)
 static GtkWidget *
 make_scrollbar (Charmap *charmap)
 {
-  charmap->adjustment = gtk_adjustment_new (
-          0.0, 0.0, 1.0 * (UNICHAR_MAX + CHARMAP_ROWS * CHARMAP_COLS), 
-          2.0 * CHARMAP_COLS, 5.0 * CHARMAP_ROWS * CHARMAP_COLS, 
-          1.0 * CHARMAP_ROWS * CHARMAP_COLS);
+  charmap->adjustment = gtk_adjustment_new (0.0, 0.0, 
+                                            1.0 * UNICHAR_MAX / CHARMAP_COLS, 
+                                            2.0, 3.0 * CHARMAP_ROWS, 
+                                            1.0 * CHARMAP_ROWS);
 
   charmap->adjustment_changed_handler_id = g_signal_connect (
           G_OBJECT (charmap->adjustment), "value_changed",
