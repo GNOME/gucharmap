@@ -37,11 +37,14 @@ libgucharmap_la_SOURCES = gucharmap_marshal.c gucharmap_marshal.h \
                           chartable.c chartable.h \
                           mini_fontsel.c mini_fontsel.h
 
+if MAINTAINER_MODE
 
 # A source file listed in BUILT_SOURCES is created before the other
 # all targets are made.
 BUILT_SOURCES = unicode_data.cI unicode_unihan.cI unicode_blocks.cI \
 		unicode_nameslist.cI
+
+endif
 
 ## # Don't want "make clean to delete these, because then make will regenerate
 ## # unicode_unihan.cI and unicode_nameslist.cI
