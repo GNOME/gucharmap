@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap.HEAD.sq\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-01 23:03+0100\n"
-"PO-Revision-Date: 2004-02-01 23:05+0100\n"
+"POT-Creation-Date: 2004-02-02 11:24+0100\n"
+"PO-Revision-Date: 2004-02-02 11:26+0100\n"
 "Last-Translator: Laurent Dhima <laurenti@alblinux.net>\n"
 "Language-Team: Albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -17,8 +17,8 @@ msgstr ""
 "X-Generator: KBabel 1.3\n"
 
 #. ID
-#: gucharmap.desktop.in.h:1 gucharmap/gucharmap-window.c:261
-#: gucharmap/gucharmap-window.c:724 gucharmap/imgucharmap.c:207
+#: gucharmap.desktop.in.h:1 gucharmap/gucharmap-window.c:268
+#: gucharmap/gucharmap-window.c:800 gucharmap/imgucharmap.c:207
 msgid "Character Map"
 msgstr "Harta e simboleve"
 
@@ -138,19 +138,19 @@ msgstr "Madhësia e gërmave"
 msgid "Common"
 msgstr "Të përbashkët"
 
-#: gucharmap/gucharmap-table.c:1531
+#: gucharmap/gucharmap-table.c:1521
 msgid "Unknown character, unable to identify."
 msgstr "Simbol i panjohur, identifikimi është i pamundur."
 
-#: gucharmap/gucharmap-table.c:1533 gucharmap/gucharmap-search-dialog.c:418
+#: gucharmap/gucharmap-table.c:1523 gucharmap/gucharmap-search-dialog.c:418
 msgid "Not found."
 msgstr "Nuk u gjet."
 
-#: gucharmap/gucharmap-table.c:1536
+#: gucharmap/gucharmap-table.c:1526
 msgid "Character found."
 msgstr "Simboli u gjet."
 
-#: gucharmap/gucharmap-table.c:1600
+#: gucharmap/gucharmap-table.c:1590
 msgid "Character Table"
 msgstr "Tabela e simboleve"
 
@@ -302,87 +302,103 @@ msgstr "Ndarës, paragraf"
 msgid "Separator, Space"
 msgstr "Ndarës, hapësirë"
 
-#: gucharmap/gucharmap-window.c:127
+#: gucharmap/gucharmap-window.c:134
 msgid "Searching..."
 msgstr "Duke kërkuar..."
 
-#: gucharmap/gucharmap-window.c:256
+#: gucharmap/gucharmap-window.c:263
 msgid "translator_credits"
 msgstr "Laurent Dhima <laurenti@alblinux.net>"
 
-#: gucharmap/gucharmap-window.c:380
+#: gucharmap/gucharmap-window.c:364 gucharmap/gucharmap-window.c:546
+msgid "Next Script"
+msgstr "Script-i në vazhdim"
+
+#: gucharmap/gucharmap-window.c:365 gucharmap/gucharmap-window.c:547
+msgid "Previous Script"
+msgstr "Script-i paraardhës"
+
+#: gucharmap/gucharmap-window.c:377 gucharmap/gucharmap-window.c:551
+msgid "Next Block"
+msgstr "Blloku në vazhdim"
+
+#: gucharmap/gucharmap-window.c:378 gucharmap/gucharmap-window.c:552
+msgid "Previous Block"
+msgstr "Blloku paraardhës"
+
+#: gucharmap/gucharmap-window.c:413
 msgid "_File"
 msgstr "_File"
 
-#: gucharmap/gucharmap-window.c:382
+#: gucharmap/gucharmap-window.c:415
 msgid "_View"
 msgstr "_Shfaq"
 
-#: gucharmap/gucharmap-window.c:384
+#: gucharmap/gucharmap-window.c:417
 msgid "_Search"
 msgstr "_Kërko"
 
-#: gucharmap/gucharmap-window.c:386
+#: gucharmap/gucharmap-window.c:419
 msgid "_Go"
 msgstr "_Shko"
 
-#: gucharmap/gucharmap-window.c:405
+#: gucharmap/gucharmap-window.c:438
 msgid "By _Script"
 msgstr "Nga _Script"
 
-#: gucharmap/gucharmap-window.c:411
+#: gucharmap/gucharmap-window.c:444
 msgid "By _Unicode Block"
 msgstr "Sipas bllokut _Unicode"
 
-#: gucharmap/gucharmap-window.c:419
+#: gucharmap/gucharmap-window.c:452
 msgid "Snap Columns to Power of Two"
 msgstr "Snap Columns to Power of Two"
 
 #. ctrl-+
-#: gucharmap/gucharmap-window.c:427
+#: gucharmap/gucharmap-window.c:460
 msgid "Zoom _In"
 msgstr "Z_madho"
 
 #. ctrl--
-#: gucharmap/gucharmap-window.c:437
+#: gucharmap/gucharmap-window.c:470
 msgid "Zoom _Out"
 msgstr "Z_vogëlo"
 
 #. ctrl-=
-#: gucharmap/gucharmap-window.c:447
+#: gucharmap/gucharmap-window.c:480
 msgid "_Normal Size"
 msgstr "_Madhësia normale"
 
-#: gucharmap/gucharmap-window.c:461
+#: gucharmap/gucharmap-window.c:494
 msgid "_Find..."
 msgstr "_Gjej..."
 
-#: gucharmap/gucharmap-window.c:469
+#: gucharmap/gucharmap-window.c:502
 msgid "Find _Next"
 msgstr "Gjej _pasardhësen"
 
-#: gucharmap/gucharmap-window.c:478
+#: gucharmap/gucharmap-window.c:511
 msgid "Find _Previous"
 msgstr "Gjej p_araardhësen"
 
-#: gucharmap/gucharmap-window.c:495
+#: gucharmap/gucharmap-window.c:528
 msgid "_Next Character"
 msgstr "Simboli _pasardhës"
 
-#: gucharmap/gucharmap-window.c:501
+#: gucharmap/gucharmap-window.c:534
 msgid "_Previous Character"
 msgstr "Simboli p_araardhës"
 
 #. make the help menu
-#: gucharmap/gucharmap-window.c:513
+#: gucharmap/gucharmap-window.c:575
 msgid "_Help"
 msgstr "_Ndihmë"
 
-#: gucharmap/gucharmap-window.c:596
+#: gucharmap/gucharmap-window.c:658
 msgid "_Text to copy:"
 msgstr "_Teksti që duhet kopjuar:"
 
-#: gucharmap/gucharmap-window.c:617
+#: gucharmap/gucharmap-window.c:679
 msgid "Copy to the clipboard."
 msgstr "Kopjoje tek shënimet."
 
