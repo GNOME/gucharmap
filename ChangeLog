@@ -1,27 +1,37 @@
+2003-02-03  Noah Levitt  <nlevitt аt columbia.edu>
+
+	* src/main.c:
+	* src/charmap.[ch]: Got rid of the disclosure triangle in the
+	character details; now the extra information can be shown and hidden
+	from the view menu.
+
 2003-02-02  Christian Rose  <menthos@menthos.com>
 
 	* configure.ac: Added "sv" to ALL_LINGUAS.
 
-2003-02-02 Noah Levitt <nlevitt аt columbia.edu>
+2003-02-02  Noah Levitt  <nlevitt аt columbia.edu>
+
 	* src/main.c: Added accelerators in the menus. Also, renamed font size
 	changing menu items to Zoom In/Out, and made the zoom increment of
 	the zoom proportional to the current font size.
 
-2003-02-01 Noah Levitt <nlevitt аt columbia.edu>
+2003-02-01  Noah Levitt  <nlevitt аt columbia.edu>
+
 	* src/mini_fontsel.[ch]:
 	* src/main.c: Added menu items to increase and decrease the font size
 
-2003-02-01 Noah Levitt <nlevitt аt columbia.edu>
+2003-02-01  Noah Levitt  <nlevitt аt columbia.edu>
+
 	* src/charmap.[ch]: Changed placement of zoom window so that it is
 	usually within the chartable, and so that the cursor is visible
 
-2003-01-24 Noah Levitt <nlevitt аt columbia.edu>
+2003-01-24  Noah Levitt  <nlevitt аt columbia.edu>
 
 	* src/main.c: Made some small improvements suggested by Gman; some
 	mnemonics for entries, icons for dialogs, left-justification of
 	labels, etc
 
-2003-01-23 Noah Levitt <nlevitt аt columbia.edu>
+2003-01-23  Noah Levitt  <nlevitt аt columbia.edu>
 
 	* src/charmap.[ch]: In the character details, put codepoint and name
 	in one row, add "other representations", octal for C,sh and &#dec;

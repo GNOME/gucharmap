@@ -157,6 +157,10 @@ void charmap_collapse_block_selector (Charmap *charmap);
 void charmap_go_to_character (Charmap *charmap, gunichar uc);
 charmap_search_result_t charmap_search (Charmap *charmap, 
                                         const gchar *search_text);
+void charmap_show_unihan (Charmap *charmap);
+void charmap_hide_unihan (Charmap *charmap);
+void charmap_show_unicode (Charmap *charmap);
+void charmap_hide_unicode (Charmap *charmap);
 
 
 G_END_DECLS

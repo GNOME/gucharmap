@@ -94,6 +94,28 @@ expand_collapse (GtkCheckMenuItem *mi, gpointer data)
 }
 
 
+#if ENABLE_UNIHAN
+static void
+show_hide_unihan (GtkCheckMenuItem *mi, gpointer data)
+{
+  if (gtk_check_menu_item_get_active (mi))
+    charmap_show_unihan (CHARMAP (charmap));
+  else
+    charmap_hide_unihan (CHARMAP (charmap));
+}
+#endif
+
+
+static void
+show_hide_unicode (GtkCheckMenuItem *mi, gpointer data)
+{
+  if (gtk_check_menu_item_get_active (mi))
+    charmap_show_unicode (CHARMAP (charmap));
+  else
+    charmap_hide_unicode (CHARMAP (charmap));
+}
+
+
 static void
 font_bigger (GtkWidget *widget, gpointer data)
 {
@@ -492,6 +514,23 @@ make_menu (GtkWindow *window)
   /* separator */
   gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), gtk_menu_item_new ());
 
+  menu_item = gtk_check_menu_item_new_with_mnemonic (
+          _("_Unicode Character Details"));
+  g_signal_connect (G_OBJECT (menu_item), "activate",
+                    G_CALLBACK (show_hide_unicode), NULL);
+  gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), menu_item);
+
+#if ENABLE_UNIHAN
+  menu_item = gtk_check_menu_item_new_with_mnemonic (
+          _("_CJK Ideograph Details"));
+  g_signal_connect (G_OBJECT (menu_item), "activate",
+                    G_CALLBACK (show_hide_unihan), NULL);
+  gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), menu_item);
+#endif
+
+  /* separator */
+  gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), gtk_menu_item_new ());
+
   /* ctrl-+ or ctrl-= */
   menu_item = gtk_menu_item_new_with_mnemonic (_("Zoom _In"));
   gtk_widget_add_accelerator (menu_item, "activate", accel_group,
@@ -503,7 +542,6 @@ make_menu (GtkWindow *window)
   g_signal_connect (G_OBJECT (menu_item), "activate",
                     G_CALLBACK (font_bigger), NULL);
   gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), menu_item);
-  /* finished making the view menu */
 
   /* ctrl-- */
   menu_item = gtk_menu_item_new_with_mnemonic (_("Zoom _Out"));
@@ -514,6 +552,7 @@ make_menu (GtkWindow *window)
   g_signal_connect (G_OBJECT (menu_item), "activate",
                     G_CALLBACK (font_smaller), NULL);
   gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), menu_item);
+  /* finished making the view menu */
 
   /* make the goto menu */
   goto_menu = gtk_menu_new ();
@@ -575,7 +614,7 @@ main (gint argc, gchar **argv)
   window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   gtk_window_set_default_size (GTK_WINDOW (window), 
                                gdk_screen_width () * 1/2,
-                               gdk_screen_height () * 1/2);
+                               gdk_screen_height () * 9/16);
   gtk_window_set_title (GTK_WINDOW (window), _("Unicode Character Map"));
   icon = gdk_pixbuf_new_from_file (ICON_PATH, &error);
   if (error != NULL)
@@ -651,3 +690,4 @@ main (gint argc, gchar **argv)
 
   return 0;
 }
+
