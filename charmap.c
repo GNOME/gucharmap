@@ -1274,6 +1274,17 @@ mouse_wheel_event (GtkWidget *widget, GdkEventScroll *event, Charmap *charmap)
 }
 
 
+static void
+style_set (GtkWidget *widget, GtkStyle *previous_style, Charmap *charmap)
+{
+  if (charmap->tabulus_pixmap != NULL)
+    g_object_unref (charmap->tabulus_pixmap);
+  charmap->tabulus_pixmap = NULL;
+
+  gtk_widget_queue_draw (charmap->tabulus);
+}
+
+
 void
 charmap_class_init (CharmapClass *clazz)
 {
@@ -1310,6 +1321,8 @@ charmap_init (Charmap *charmap)
                     G_CALLBACK (focus_in_or_out_event), charmap);
   g_signal_connect (G_OBJECT (charmap->tabulus), "scroll-event",
                     G_CALLBACK (mouse_wheel_event), charmap);
+  g_signal_connect (G_OBJECT (charmap->tabulus), "style-set",
+                    G_CALLBACK (style_set), charmap);
 
   /* this is required to get key_press events */
   GTK_WIDGET_SET_FLAGS (charmap->tabulus, GTK_CAN_FOCUS);
