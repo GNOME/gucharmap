@@ -1,5 +1,11 @@
 2003-06-02  Noah Levitt
 
+	* gucharmap/gucharmap-charmap.c: Clicking a link no longer selects the
+	whole textview (thanks, ::event-after). Also fixed stuff to allow
+	linking to U+0000.
+
+2003-06-02  Noah Levitt
+
 	* gucharmap/gucharmap-table.c: Don't try to draw on a null pixmap.
 
 2003-06-02  Noah Levitt

@@ -259,6 +259,33 @@ insert_vanilla_detail (GucharmapCharmap *charmap,
 }
 
 
+/* makes a nice string and makes it a link to the character */
+static void
+insert_codepoint (GucharmapCharmap *charmap,
+                  GtkTextBuffer *buffer,
+                  GtkTextIter *iter,
+                  gunichar uc)
+{
+  gchar *str;
+  GtkTextTag *tag;
+
+  str = g_strdup_printf ("U+%4.4X %s", uc,
+                         gucharmap_get_unicode_name (uc));
+
+  tag = gtk_text_buffer_create_tag (buffer, NULL, 
+                                    "foreground", "blue", 
+                                    "underline", PANGO_UNDERLINE_SINGLE, 
+                                    NULL);
+  /* add one so that zero is the "nothing" value, since U+0000 is a character */
+  g_object_set_data (G_OBJECT (tag), "link_character", 
+                     (gpointer) (uc + 1));
+
+  gtk_text_buffer_insert_with_tags (buffer, iter, str, -1, tag, NULL);
+
+  g_free (str);
+}
+
+
 static void
 insert_chocolate_detail_codepoints (GucharmapCharmap *charmap,
                                     GtkTextBuffer *buffer,
@@ -267,8 +294,6 @@ insert_chocolate_detail_codepoints (GucharmapCharmap *charmap,
                                     const gunichar *ucs)
 {
   gint i;
-  gchar *str;
-  GtkTextTag *tag;
 
   gtk_text_buffer_insert (buffer, iter, name, -1);
   gtk_text_buffer_insert (buffer, iter, "\n", -1);
@@ -276,19 +301,8 @@ insert_chocolate_detail_codepoints (GucharmapCharmap *charmap,
   for (i = 0;  ucs[i] != (gunichar)(-1);  i++)
     {
       gtk_text_buffer_insert (buffer, iter, " • ", -1);
-      str = g_strdup_printf ("U+%4.4X %s", ucs[i], 
-                             gucharmap_get_unicode_name (ucs[i]));
-
-      tag = gtk_text_buffer_create_tag (buffer, NULL, 
-                                        "foreground", "blue", 
-                                        "underline", PANGO_UNDERLINE_SINGLE, 
-                                        NULL);
-      g_object_set_data (G_OBJECT (tag), "link_character", (gpointer) ucs[i]);
-
-      gtk_text_buffer_insert_with_tags (buffer, iter, str, -1, tag, NULL);
+      insert_codepoint (charmap, buffer, iter, ucs[i]);
       gtk_text_buffer_insert (buffer, iter, "\n", -1);
-
-      g_free (str);
     }
 
   gtk_text_buffer_insert (buffer, iter, "\n", -1);
@@ -352,6 +366,7 @@ set_details (GucharmapCharmap *charmap,
   gtk_text_buffer_set_text (buffer, "", -1);
 
   gtk_text_buffer_get_start_iter (buffer, &iter);
+  gtk_text_buffer_place_cursor (buffer, &iter);
   gtk_text_buffer_insert (buffer, &iter, "\n\n", -1);
 
   n = gucharmap_unichar_to_printable_utf8 (uc, buf);
@@ -705,46 +720,18 @@ follow_if_link (GucharmapCharmap *charmap,
   for (tagp = tags;  tagp != NULL;  tagp = tagp->next)
     {
       GtkTextTag *tag = tagp->data;
-      gunichar uc = (gunichar) g_object_get_data (G_OBJECT (tag), 
-                                                  "link_character");
+      gunichar uc;
 
-      if (uc != 0) /* XXX: atm can't link to U+0000, easy to fix */
+      /* subtract 1 because U+0000 is a character; see above where we set
+       * "link_character" */
+      uc = (gunichar) g_object_get_data (G_OBJECT (tag), "link_character") - 1;
+
+      if (uc != (gunichar)(-1)) 
         {
           gucharmap_table_set_active_character (charmap->chartable, uc);
           break;
         }
     }
-}
-
-
-static gboolean
-text_view_button_release_event (GtkWidget *text_view,
-                                GdkEventButton *event,
-                                GucharmapCharmap *charmap)
-{
-  GtkTextIter start, end, iter;
-  GtkTextBuffer *buffer;
-  gint x, y;
-
-  if (event->button != 1)
-    return FALSE;
-
-  buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_view));
-
-  /* we shouldn't follow a link if the user has selected something */
-  gtk_text_buffer_get_selection_bounds (buffer, &start, &end);
-  if (gtk_text_iter_get_offset (&start) != gtk_text_iter_get_offset (&end))
-    return FALSE;
-
-  gtk_text_view_window_to_buffer_coords (GTK_TEXT_VIEW (text_view), 
-                                         GTK_TEXT_WINDOW_WIDGET,
-                                         event->x, event->y, &x, &y);
-
-  gtk_text_view_get_iter_at_location (GTK_TEXT_VIEW (text_view), &iter, x, y);
-
-  follow_if_link (charmap, &iter);
-
-  return FALSE;
 }
 
 
@@ -774,6 +761,43 @@ text_view_key_press_event (GtkWidget *text_view,
 }
 
 
+static gboolean
+text_view_event_after (GtkWidget *text_view,
+                       GdkEvent *ev,
+                       GucharmapCharmap *charmap)
+{
+  GtkTextIter start, end, iter;
+  GtkTextBuffer *buffer;
+  GdkEventButton *event;
+  gint x, y;
+
+  if (ev->type != GDK_BUTTON_RELEASE)
+    return FALSE;
+
+  event = (GdkEventButton *) ev;
+
+  if (event->button != 1)
+    return FALSE;
+
+  buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_view));
+
+  /* we shouldn't follow a link if the user has selected something */
+  gtk_text_buffer_get_selection_bounds (buffer, &start, &end);
+  if (gtk_text_iter_get_offset (&start) != gtk_text_iter_get_offset (&end))
+    return FALSE;
+
+  gtk_text_view_window_to_buffer_coords (GTK_TEXT_VIEW (text_view), 
+                                         GTK_TEXT_WINDOW_WIDGET,
+                                         event->x, event->y, &x, &y);
+
+  gtk_text_view_get_iter_at_location (GTK_TEXT_VIEW (text_view), &iter, x, y);
+
+  follow_if_link (charmap, &iter);
+
+  return FALSE;
+}
+
+
 static GtkWidget *
 make_details_page (GucharmapCharmap *charmap)
 {
@@ -797,11 +821,10 @@ make_details_page (GucharmapCharmap *charmap)
   gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (charmap->details), 
                                GTK_WRAP_WORD);
 
-  /* gtk_widget_set_events (charmap->details, 0xffffffff); */
-  g_signal_connect (G_OBJECT (charmap->details), "button-release-event",
-                    G_CALLBACK (text_view_button_release_event), charmap);
   g_signal_connect (G_OBJECT (charmap->details), "key-press-event",
                     G_CALLBACK (text_view_key_press_event), charmap);
+  g_signal_connect (G_OBJECT (charmap->details), "event-after",
+                    G_CALLBACK (text_view_event_after), charmap);
 
   create_tags (charmap);
 
