@@ -215,10 +215,13 @@ gunichar *
 gucharmap_unicode_canonical_decomposition (gunichar ch, 
                                            gsize *result_len)
 {
-  if (ch >= 0xac00 && ch <= 0xd7af)  /* Hangul syllable */
-    return hangul_decomposition (ch, result_len);
-  else 
+  if (GLIB_CHECK_VERSION (2,3,1))
     return g_unicode_canonical_decomposition (ch, result_len);
+  else
+    if (ch >= 0xac00 && ch <= 0xd7af)  /* Hangul syllable */
+      return hangul_decomposition (ch, result_len);
+    else 
+      return g_unicode_canonical_decomposition (ch, result_len);
 }
 
 /* does a binary search on unicode_names */
