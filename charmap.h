@@ -85,6 +85,7 @@ struct _Caption
   GtkWidget *kCantonese;
   GtkWidget *kKorean;
   GtkWidget *kJapaneseOn;
+  GtkWidget *kJapaneseKun;
   GtkWidget *kTang;
   GtkWidget *kMandarin;
   GtkWidget *decomposition;

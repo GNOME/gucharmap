@@ -26,7 +26,7 @@
 #   gchar *kMandarin;
 #   gchar *kTang;
 #   gchar *kKorean;
-#   gchar *kJapeneseKun
+#   gchar *kJapaneseKun
 #   gchar *kJapaneseOn;
 # } 
 # unihan_t;
@@ -43,7 +43,7 @@ kCantonese=""
 kMandarin=""
 kTang=""
 kKorean=""
-kJapeneseKun=""
+kJapaneseKun=""
 kJapaneseOn=""
 
 curr_index="U+3400"
@@ -60,19 +60,19 @@ do
         hex=`echo $curr_index | sed 's/^U+/0x/'`
         curr_index=$index
 
-        if [ "x$kDefinition" = "x" ] && [ "x$kCantonese" = "x" ] && [ "x$kMandarin" = "x" ] && [ "x$kTang" = "x" ] && [ "x$kKorean" = "x" ] && [ "x$kJapeneseKun" = "x" ] && [ "x$kJapaneseOn" = "x" ] ;
+        if [ "x$kDefinition" = "x" ] && [ "x$kCantonese" = "x" ] && [ "x$kMandarin" = "x" ] && [ "x$kTang" = "x" ] && [ "x$kKorean" = "x" ] && [ "x$kJapaneseKun" = "x" ] && [ "x$kJapaneseOn" = "x" ] ;
         then
             continue;
         fi
 
-        echo "  { $hex, \"$kDefinition\", \"$kCantonese\", \"$kMandarin\", \"$kTang\", \"$kKorean\", \"$kJapeneseKun\", \"$kJapaneseOn\" },"
+        echo "  { $hex, \"$kDefinition\", \"$kCantonese\", \"$kMandarin\", \"$kTang\", \"$kKorean\", \"$kJapaneseKun\", \"$kJapaneseOn\" },"
 
         kDefinition=""
         kCantonese=""
         kMandarin=""
         kTang=""
         kKorean=""
-        kJapeneseKun=""
+        kJapaneseKun=""
         kJapaneseOn=""
     fi
 
@@ -82,7 +82,7 @@ do
         "kMandarin") kMandarin=$value ;;
         "kTang") kTang=$value ;;
         "kKorean") kKorean=$value ;;
-        "kJapeneseKun") kJapeneseKun=$value ;;
+        "kJapaneseKun") kJapaneseKun=$value ;;
         "kJapaneseOn") kJapaneseOn=$value ;;
     esac
 done

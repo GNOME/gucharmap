@@ -36,7 +36,7 @@ gchar * get_unicode_kCantonese (gunichar uc);
 gchar * get_unicode_kMandarin (gunichar uc);
 gchar * get_unicode_kTang (gunichar uc);
 gchar * get_unicode_kKorean (gunichar uc);
-gchar * get_unicode_kJapeneseKun (gunichar uc);
+gchar * get_unicode_kJapaneseKun (gunichar uc);
 gchar * get_unicode_kJapaneseOn (gunichar uc);
 
 #ifdef __cplusplus
