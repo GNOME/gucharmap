@@ -537,60 +537,62 @@ charmap_class_init (CharmapClass *clazz)
 }
 
 
-/* does all the initial construction */
-void
-charmap_init (Charmap *charmap)
+static GtkWidget *
+make_unicode_block_selector (Charmap *charmap)
 {
-  GtkWidget *hbox;
+  GtkWidget *scrolled_window;
+  GtkTreeStore *model;
+  GtkTreeIter iter;
+  GtkWidget *tree_view;
+  GtkCellRenderer *cell;
+  GtkTreeViewColumn *column;
+  GtkTreeSelection *selection;
+  gchar buf[12];
+  gunichar uc;
+
+  scrolled_window = gtk_scrolled_window_new (NULL, NULL);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
+                                  GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
+
+  model = gtk_tree_store_new (1, G_TYPE_STRING);
+
+  for (uc = 0;  uc <= UNICHAR_MAX;  uc += CHARMAP_ROWS * CHARMAP_COLS)
+    {
+      g_snprintf (buf, 12, "U+%4.4X", uc);
+      gtk_tree_store_append (model, &iter, NULL);
+      gtk_tree_store_set (model, &iter, 0, buf, -1);
+    }
+
+  tree_view = gtk_tree_view_new_with_model (GTK_TREE_MODEL (model));
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tree_view));
+  gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (tree_view), FALSE);
+
+  cell = gtk_cell_renderer_text_new ();
+  column = gtk_tree_view_column_new_with_attributes (NULL, cell, 
+                                                     "text", 0, NULL);
+
+  gtk_tree_view_append_column (GTK_TREE_VIEW (tree_view),
+                               GTK_TREE_VIEW_COLUMN (column));
+
+  gtk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
+  /*
+  g_signal_connect (G_OBJECT (selection), "changed", 
+                    G_CALLBACK (block_selection_changed_cb), charmap);
+                    */
+
+  gtk_container_add (GTK_CONTAINER (scrolled_window), tree_view);
+
+  return scrolled_window;
+}
+
+
+static GtkWidget *
+make_caption (Charmap *charmap)
+{
   GtkWidget *frame;
   GtkWidget *table;
-  GtkWidget *button;
-  GtkWidget *label;
-
-  debug ("charmap_init\n");
-
-  gtk_box_set_spacing (GTK_BOX (charmap), 5);
-
-  charmap->tabulus = gtk_drawing_area_new ();
-
-  gtk_widget_set_events (charmap->tabulus, GDK_EXPOSURE_MASK 
-                                           | GDK_KEY_PRESS_MASK
-                                           | GDK_BUTTON_PRESS_MASK);
-
-  g_signal_connect (G_OBJECT (charmap->tabulus), "expose_event",
-                    G_CALLBACK (expose_event), charmap);
-  g_signal_connect (G_OBJECT (charmap->tabulus), "key_press_event",
-                    G_CALLBACK (key_press_event), charmap);
-  g_signal_connect (G_OBJECT (charmap->tabulus), "button_press_event",
-                    G_CALLBACK (button_press_event), charmap);
-
-  /* this is required to get key_press events */
-  GTK_WIDGET_SET_FLAGS (charmap->tabulus, GTK_CAN_FOCUS);
-  gtk_widget_grab_focus (charmap->tabulus);
-
-  gtk_box_pack_start (GTK_BOX (charmap), charmap->tabulus, TRUE, TRUE, 0);
-
-  charmap->font_name = pango_font_description_to_string (
-          charmap->tabulus->style->font_desc);
-
-  charmap->font_metrics = pango_context_get_metrics (
-          gtk_widget_get_pango_context (charmap->tabulus),
-          charmap->tabulus->style->font_desc, NULL);
-
-  charmap->pango_layout = pango_layout_new (
-          gtk_widget_get_pango_context (charmap->tabulus));
-
-  /* size the drawing area */
-  gtk_widget_set_size_request (
-          charmap->tabulus, 
-          calculate_tabulus_dimension_x (charmap->font_metrics),
-          calculate_tabulus_dimension_y (charmap->font_metrics));
-
-  charmap->page_first_char = (gunichar) 0x0000;
-  charmap->active_char = (gunichar) 0x0000;
 
   /* most of the rest of this is setting up the caption */
-
   charmap->caption = g_malloc (sizeof (Caption));
   table = gtk_table_new (6, 4, FALSE);
   gtk_table_set_row_spacings (GTK_TABLE (table), 3);
@@ -685,7 +687,18 @@ charmap_init (Charmap *charmap)
   /* put this stuff in a frame */
   frame = gtk_frame_new (NULL);
   gtk_container_add (GTK_CONTAINER (frame), table);
-  gtk_box_pack_start (GTK_BOX (charmap), frame, TRUE, TRUE, 0);
+
+  return frame;
+}
+
+
+static GtkWidget *
+make_text_to_copy (Charmap *charmap)
+{
+  GtkWidget *hbox;
+  GtkWidget *frame;
+  GtkWidget *button;
+  GtkWidget *label;
 
   /* the "text to copy" part */
   hbox = gtk_hbox_new (FALSE, 5);
@@ -715,8 +728,71 @@ charmap_init (Charmap *charmap)
   frame = gtk_frame_new (NULL);
   gtk_container_add (GTK_CONTAINER (frame), hbox);
 
-  /* put the frame in the big box */
-  gtk_box_pack_start (GTK_BOX (charmap), frame, TRUE, TRUE, 0);
+  return frame;
+}
+
+
+/* does all the initial construction */
+void
+charmap_init (Charmap *charmap)
+{
+  GtkWidget *hbox;
+
+  debug ("charmap_init\n");
+
+  gtk_box_set_spacing (GTK_BOX (charmap), 5);
+
+  charmap->tabulus = gtk_drawing_area_new ();
+
+  gtk_widget_set_events (charmap->tabulus, GDK_EXPOSURE_MASK 
+                                           | GDK_KEY_PRESS_MASK
+                                           | GDK_BUTTON_PRESS_MASK);
+
+  g_signal_connect (G_OBJECT (charmap->tabulus), "expose_event",
+                    G_CALLBACK (expose_event), charmap);
+  g_signal_connect (G_OBJECT (charmap->tabulus), "key_press_event",
+                    G_CALLBACK (key_press_event), charmap);
+  g_signal_connect (G_OBJECT (charmap->tabulus), "button_press_event",
+                    G_CALLBACK (button_press_event), charmap);
+
+  /* this is required to get key_press events */
+  GTK_WIDGET_SET_FLAGS (charmap->tabulus, GTK_CAN_FOCUS);
+  gtk_widget_grab_focus (charmap->tabulus);
+
+  hbox = gtk_hbox_new (FALSE, 5);
+
+  gtk_box_pack_start (GTK_BOX (charmap), hbox, TRUE, TRUE, 0);
+
+  gtk_box_pack_start (GTK_BOX (hbox), charmap->tabulus, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (hbox), make_unicode_block_selector (charmap), 
+                      TRUE, TRUE, 0);
+
+  charmap->font_name = pango_font_description_to_string (
+          charmap->tabulus->style->font_desc);
+
+  charmap->font_metrics = pango_context_get_metrics (
+          gtk_widget_get_pango_context (charmap->tabulus),
+          charmap->tabulus->style->font_desc, NULL);
+
+  charmap->pango_layout = pango_layout_new (
+          gtk_widget_get_pango_context (charmap->tabulus));
+
+  /* size the drawing area */
+  gtk_widget_set_size_request (
+          charmap->tabulus, 
+          calculate_tabulus_dimension_x (charmap->font_metrics),
+          calculate_tabulus_dimension_y (charmap->font_metrics));
+
+  charmap->page_first_char = (gunichar) 0x0000;
+  charmap->active_char = (gunichar) 0x0000;
+
+  /* the caption */
+  gtk_box_pack_start (GTK_BOX (charmap), make_caption (charmap), 
+                      TRUE, TRUE, 0);
+
+  /* the text_to_copy */
+  gtk_box_pack_start (GTK_BOX (charmap), make_text_to_copy (charmap), 
+                      TRUE, TRUE, 0);
 }
 
 
