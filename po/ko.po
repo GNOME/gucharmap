@@ -6,8 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
-"POT-Creation-Date: 2003-07-10 14:01+0900\n"
-"PO-Revision-Date: 2003-07-10 05:03+0900\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-08-24 16:12+0900\n"
+"PO-Revision-Date: 2003-08-24 08:15+0900\n"
 "Last-Translator: Young-Ho, Cha <ganadist at mizi.com>\n"
 "Language-Team: GTP Korean <gnome-kr-translation@gnome.or.kr>\n"
 "MIME-Version: 1.0\n"
@@ -24,7 +25,7 @@ msgstr "유니코드 글자 보기"
 msgid "Canonical decomposition:"
 msgstr "글자 나누기:"
 
-#: gucharmap/gucharmap-charmap.c:437 gucharmap/gucharmap-table.c:327
+#: gucharmap/gucharmap-charmap.c:437 gucharmap/gucharmap-table.c:332
 msgid "[not a printable character]"
 msgstr "[표시할 수 없는 문자]"
 
@@ -51,7 +52,7 @@ msgstr "8진수로 풀어쓴 UTF-8:"
 
 #: gucharmap/gucharmap-charmap.c:489
 msgid "Decimal entity reference:"
-msgstr ""
+msgstr "10진수로 표현:"
 
 #: gucharmap/gucharmap-charmap.c:495
 msgid "Annotations and Cross References"
@@ -137,23 +138,23 @@ msgstr "기울임(_I)"
 msgid "Font Size"
 msgstr "글꼴 크기"
 
-#: gucharmap/gucharmap-table.c:1417
+#: gucharmap/gucharmap-table.c:1435
 msgid "Clipboard is empty."
 msgstr "클립보드가 비었습니다."
 
-#: gucharmap/gucharmap-table.c:1419
+#: gucharmap/gucharmap-table.c:1437
 msgid "There is no selected text."
 msgstr "선택된 글자가 없습니다."
 
-#: gucharmap/gucharmap-table.c:1427 gucharmap/gucharmap-table.c:1690
+#: gucharmap/gucharmap-table.c:1445 gucharmap/gucharmap-table.c:1708
 msgid "Unknown character, unable to identify."
 msgstr "알 수 없는 문자, 인식할 수 없습니다."
 
-#: gucharmap/gucharmap-table.c:1431 gucharmap/gucharmap-table.c:1694
+#: gucharmap/gucharmap-table.c:1449 gucharmap/gucharmap-table.c:1712
 msgid "Character found."
 msgstr "글자를 찾았습니다."
 
-#: gucharmap/gucharmap-table.c:1761
+#: gucharmap/gucharmap-table.c:1780
 msgid "Character Table"
 msgstr "글자 표"
 
@@ -172,15 +173,15 @@ msgstr "<CJK 한자>"
 
 #: gucharmap/gucharmap-unicode-info.c:157
 msgid "<Non Private Use High Surrogate>"
-msgstr ""
+msgstr "<비 개인용 상위 확장코드>"
 
 #: gucharmap/gucharmap-unicode-info.c:159
 msgid "<Private Use High Surrogate>"
-msgstr ""
+msgstr "<개인용 상위 확장코드>"
 
 #: gucharmap/gucharmap-unicode-info.c:161
 msgid "<Low Surrogate, Last>"
-msgstr ""
+msgstr "<하위 확장코드, 끝글자>"
 
 #: gucharmap/gucharmap-unicode-info.c:163
 msgid "<Private Use>"
@@ -188,11 +189,11 @@ msgstr "<개인 영역>"
 
 #: gucharmap/gucharmap-unicode-info.c:165
 msgid "<Plane 15 Private Use>"
-msgstr ""
+msgstr "<개인 영역 15 수준>"
 
 #: gucharmap/gucharmap-unicode-info.c:167
 msgid "<Plane 16 Private Use>"
-msgstr ""
+msgstr "<개인 영역 16 수준>"
 
 #: gucharmap/gucharmap-unicode-info.c:169
 msgid "<CJK Ideograph Extension B>"
@@ -220,7 +221,7 @@ msgstr "그외, 개인영역"
 
 #: gucharmap/gucharmap-unicode-info.c:190
 msgid "Other, Surrogate"
-msgstr ""
+msgstr "그외, 확장코드"
 
 #: gucharmap/gucharmap-unicode-info.c:191
 msgid "Letter, Lowercase"
@@ -228,7 +229,7 @@ msgstr "글자, 소문자"
 
 #: gucharmap/gucharmap-unicode-info.c:192
 msgid "Letter, Modifier"
-msgstr ""
+msgstr "글자, 수정자"
 
 #: gucharmap/gucharmap-unicode-info.c:193
 msgid "Letter, Other"
@@ -236,7 +237,7 @@ msgstr "글자, 그외"
 
 #: gucharmap/gucharmap-unicode-info.c:194
 msgid "Letter, Titlecase"
-msgstr ""
+msgstr "글자, 제목문자"
 
 #: gucharmap/gucharmap-unicode-info.c:195
 msgid "Letter, Uppercase"
@@ -244,15 +245,15 @@ msgstr "글자, 대문자"
 
 #: gucharmap/gucharmap-unicode-info.c:196
 msgid "Mark, Spacing Combining"
-msgstr ""
+msgstr "표시, 공백 조합"
 
 #: gucharmap/gucharmap-unicode-info.c:197
 msgid "Mark, Enclosing"
-msgstr ""
+msgstr "표시, 둘러싸기"
 
 #: gucharmap/gucharmap-unicode-info.c:198
 msgid "Mark, Non-Spacing"
-msgstr ""
+msgstr "표시, 공백 아님"
 
 #: gucharmap/gucharmap-unicode-info.c:199
 msgid "Number, Decimal Digit"
@@ -268,11 +269,11 @@ msgstr "숫자, 그외"
 
 #: gucharmap/gucharmap-unicode-info.c:202
 msgid "Punctuation, Connector"
-msgstr ""
+msgstr "구두 기호, 연결자"
 
 #: gucharmap/gucharmap-unicode-info.c:203
 msgid "Punctuation, Dash"
-msgstr ""
+msgstr "구두 기호, 대시"
 
 #: gucharmap/gucharmap-unicode-info.c:204
 msgid "Punctuation, Close"
@@ -300,7 +301,7 @@ msgstr "기호, 통화"
 
 #: gucharmap/gucharmap-unicode-info.c:210
 msgid "Symbol, Modifier"
-msgstr ""
+msgstr "기호, 수정자"
 
 #: gucharmap/gucharmap-unicode-info.c:211
 msgid "Symbol, Math"
@@ -389,7 +390,7 @@ msgstr "축소(_O)"
 
 #: gucharmap/gucharmap-window.c:577
 msgid "Snap Columns to Power of Two"
-msgstr ""
+msgstr "칸을 2제곱수로 맞추기"
 
 #: gucharmap/gucharmap-window.c:588
 msgid "_Find..."
@@ -542,7 +543,7 @@ msgstr "말라얌람 문자"
 
 #: gucharmap/unicode/unicode_blocks.cI:31
 msgid "Sinhala"
-msgstr ""
+msgstr "신할라 문자"
 
 #: gucharmap/unicode/unicode_blocks.cI:32
 msgid "Thai"
@@ -738,7 +739,7 @@ msgstr "CJK 어근 추가영역"
 
 #: gucharmap/unicode/unicode_blocks.cI:80
 msgid "Kangxi Radicals"
-msgstr ""
+msgstr "강희제 기본문자"
 
 #: gucharmap/unicode/unicode_blocks.cI:81
 msgid "Ideographic Description Characters"
@@ -798,11 +799,11 @@ msgstr "CJK 통합 한자"
 
 #: gucharmap/unicode/unicode_blocks.cI:95
 msgid "Yi Syllables"
-msgstr ""
+msgstr "Yi 음절문자"
 
 #: gucharmap/unicode/unicode_blocks.cI:96
 msgid "Yi Radicals"
-msgstr ""
+msgstr "Yi 기본문자"
 
 #: gucharmap/unicode/unicode_blocks.cI:97
 msgid "Hangul Syllables"
@@ -810,19 +811,19 @@ msgstr "한글 음절"
 
 #: gucharmap/unicode/unicode_blocks.cI:98
 msgid "High Surrogates"
-msgstr ""
+msgstr "상위 확장코드"
 
 #: gucharmap/unicode/unicode_blocks.cI:99
 msgid "High Private Use Surrogates"
-msgstr ""
+msgstr "개인용 상위 확장코드"
 
 #: gucharmap/unicode/unicode_blocks.cI:100
 msgid "Low Surrogates"
-msgstr ""
+msgstr "하위 확장코드"
 
 #: gucharmap/unicode/unicode_blocks.cI:101
 msgid "Private Use Area"
-msgstr ""
+msgstr "개인 사용 영역"
 
 #: gucharmap/unicode/unicode_blocks.cI:102
 msgid "CJK Compatibility Ideographs"
@@ -830,15 +831,15 @@ msgstr "CJK 호환 한자"
 
 #: gucharmap/unicode/unicode_blocks.cI:103
 msgid "Alphabetic Presentation Forms"
-msgstr ""
+msgstr "알파벳 표시 꼴"
 
 #: gucharmap/unicode/unicode_blocks.cI:104
 msgid "Arabic Presentation Forms-A"
-msgstr ""
+msgstr "아라비아어 표시 꼴-A"
 
 #: gucharmap/unicode/unicode_blocks.cI:105
 msgid "Variation Selectors"
-msgstr ""
+msgstr "여러가지 선택자"
 
 #: gucharmap/unicode/unicode_blocks.cI:106
 msgid "Combining Half Marks"
@@ -854,23 +855,23 @@ msgstr "작은꼴 변형"
 
 #: gucharmap/unicode/unicode_blocks.cI:109
 msgid "Arabic Presentation Forms-B"
-msgstr ""
+msgstr "아라비아어 표시 꼴-B"
 
 #: gucharmap/unicode/unicode_blocks.cI:110
 msgid "Halfwidth and Fullwidth Forms"
-msgstr ""
+msgstr "반각 및 전각 꼴"
 
 #: gucharmap/unicode/unicode_blocks.cI:111
 msgid "Specials"
-msgstr ""
+msgstr "특수 문자"
 
 #: gucharmap/unicode/unicode_blocks.cI:112
 msgid "Linear B Syllabary"
-msgstr ""
+msgstr "선형 B 음절문자"
 
 #: gucharmap/unicode/unicode_blocks.cI:113
 msgid "Linear B Ideograms"
-msgstr ""
+msgstr "선형 B 표의문자"
 
 #: gucharmap/unicode/unicode_blocks.cI:114
 msgid "Aegean Numbers"
@@ -878,19 +879,19 @@ msgstr "에게 숫자"
 
 #: gucharmap/unicode/unicode_blocks.cI:115
 msgid "Old Italic"
-msgstr ""
+msgstr "고대 이탈리아 문자"
 
 #: gucharmap/unicode/unicode_blocks.cI:116
 msgid "Gothic"
-msgstr ""
+msgstr "고트 문자"
 
 #: gucharmap/unicode/unicode_blocks.cI:117
 msgid "Ugaritic"
-msgstr ""
+msgstr "우가릿 문자"
 
 #: gucharmap/unicode/unicode_blocks.cI:118
 msgid "Deseret"
-msgstr ""
+msgstr "데저렛 문자"
 
 #: gucharmap/unicode/unicode_blocks.cI:119
 msgid "Shavian"
@@ -918,7 +919,7 @@ msgstr ""
 
 #: gucharmap/unicode/unicode_blocks.cI:125
 msgid "Mathematical Alphanumeric Symbols"
-msgstr ""
+msgstr "수학용 알파벳, 숫자 기호"
 
 #: gucharmap/unicode/unicode_blocks.cI:126
 msgid "CJK Unified Ideographs Extension B"
@@ -930,11 +931,11 @@ msgstr "CJK 호환 보충 한자"
 
 #: gucharmap/unicode/unicode_blocks.cI:128
 msgid "Tags"
-msgstr ""
+msgstr "태그"
 
 #: gucharmap/unicode/unicode_blocks.cI:129
 msgid "Variation Selectors Supplement"
-msgstr ""
+msgstr "여러가지 선택자 보조 영역"
 
 #: gucharmap/unicode/unicode_blocks.cI:130
 msgid "Supplementary Private Use Area-A"
