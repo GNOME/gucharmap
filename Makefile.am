@@ -28,7 +28,8 @@ SUBDIRS = po pixmaps gucharmap
 
 EXTRA_DIST = gtkrc.win32 gucharmap.nsi.in gucharmap.pc.in \
              intltool-extract.in intltool-merge.in intltool-update.in \
-             gucharmap.desktop.in
+             gucharmap.desktop.in gucharmap.spec.in
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gucharmap.pc
+
