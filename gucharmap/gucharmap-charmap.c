@@ -423,6 +423,7 @@ set_details (GucharmapCharmap *charmap,
   GtkTextIter iter;
   GString *gstemp;
   gchar *temp;
+  const gchar *csp;
   gchar buf[12];
   guchar ubuf[7];
   gint n, i;
@@ -544,6 +545,62 @@ set_details (GucharmapCharmap *charmap,
       gtk_text_buffer_insert (buffer, &iter, gstemp->str, gstemp->len);
       g_string_free (gstemp, TRUE);
     }
+
+#if ENABLE_UNIHAN
+
+  gtk_text_buffer_insert (buffer, &iter, "\n\n", -1);
+  gtk_text_buffer_insert_with_tags_by_name (
+          buffer, &iter, _("CJK Ideograph Information\n\n"), -1, 
+          "bold", NULL);
+
+  csp = gucharmap_get_unicode_kDefinition (uc);
+  if (csp)
+    {
+      temp = g_strdup_printf (_("Definition in English: \t\t\t%s\n"), csp);
+      gtk_text_buffer_insert (buffer, &iter, temp, -1);
+      g_free (temp);
+    }
+
+  csp = gucharmap_get_unicode_kMandarin (uc);
+  if (csp)
+    {
+      temp = g_strdup_printf (_("Mandarin Pronunciation: \t\t%s\n"), csp);
+      gtk_text_buffer_insert (buffer, &iter, temp, -1);
+      g_free (temp);
+    }
+
+  csp = gucharmap_get_unicode_kJapaneseOn (uc);
+  if (csp)
+    {
+      temp = g_strdup_printf (_("Japanese On Pronunciation: \t\t%s\n"), csp);
+      gtk_text_buffer_insert (buffer, &iter, temp, -1);
+      g_free (temp);
+    }
+
+  csp = gucharmap_get_unicode_kJapaneseKun (uc);
+  if (csp)
+    {
+      temp = g_strdup_printf (_("Japanese Kun Pronunciation: \t\t%s\n"), csp);
+      gtk_text_buffer_insert (buffer, &iter, temp, -1);
+      g_free (temp);
+    }
+
+  csp = gucharmap_get_unicode_kTang (uc);
+  if (csp)
+    {
+      temp = g_strdup_printf (_("Tang Pronunciation: \t\t\t%s\n"), csp);
+      gtk_text_buffer_insert (buffer, &iter, temp, -1);
+      g_free (temp);
+    }
+
+  csp = gucharmap_get_unicode_kKorean (uc);
+  if (csp)
+    {
+      temp = g_strdup_printf (_("Korean Pronunciation: \t\t\t%s\n"), csp);
+      gtk_text_buffer_insert (buffer, &iter, temp, -1);
+      g_free (temp);
+    }
+#endif /* #if ENABLE_UNIHAN */
 }
 
 
