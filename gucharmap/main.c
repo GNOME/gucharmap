@@ -30,6 +30,7 @@
 #endif
 #include "gucharmap-intl.h"
 #include "gucharmap-window.h"
+#include "gucharmap-mini-fontsel.h"
 
 
 static gchar *new_font = NULL;
@@ -86,25 +87,21 @@ main (gint argc, gchar **argv)
   gucharmap_window_set_text_to_copy_visible (GUCHARMAP_WINDOW (window), TRUE);
   gucharmap_window_set_font_selection_visible (GUCHARMAP_WINDOW (window), TRUE);
   gucharmap_window_set_file_menu_visible (GUCHARMAP_WINDOW (window), TRUE);
+  gtk_widget_hide (window);
 
   screen = gtk_window_get_screen (GTK_WINDOW (window));
   monitor = gdk_screen_get_monitor_at_point (screen, 0, 0);
   gdk_screen_get_monitor_geometry (screen, monitor, &rect);
   gtk_window_set_default_size (GTK_WINDOW (window), rect.width * 9/16, rect.height * 9/16);
 
-#if 0
   /* make the starting font 50% bigger than the default font */
   if (new_font == NULL) /* new_font could be set by command line option */
     {
-      orig_font = gucharmap_mini_font_selection_get_font_name (GUCHARMAP_MINI_FONT_SELECTION (GUCHARMAP_WINDOW (window)->fontsel));
-
-      font_desc = pango_font_description_from_string (orig_font);
-      pango_font_description_set_size (font_desc, pango_font_description_get_size (font_desc) * 3/2 / PANGO_SCALE * PANGO_SCALE);
-      new_font = pango_font_description_to_string (font_desc);
+      GucharmapMiniFontSelection *fontsel = gucharmap_window_get_mini_font_selection (GUCHARMAP_WINDOW (window));
+      gint default_size = PANGO_PIXELS (1.5 * pango_font_description_get_size (window->style->font_desc));
+      gucharmap_mini_font_selection_set_default_font_size (fontsel, default_size);
+      gucharmap_mini_font_selection_reset_font_size (fontsel);
     }
-  /* this sends the changed signal: */
-  gucharmap_mini_font_selection_set_font_name (GUCHARMAP_MINI_FONT_SELECTION (GUCHARMAP_WINDOW (window)->fontsel), new_font);
-#endif
 
   g_signal_connect (G_OBJECT (window), "destroy", G_CALLBACK (gtk_main_quit), NULL);
 

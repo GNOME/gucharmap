@@ -193,12 +193,11 @@ gucharmap_mini_font_selection_init (GucharmapMiniFontSelection *fontsel)
   AtkObject *accessib;
 
   gtk_widget_ensure_style (GTK_WIDGET (fontsel));
-  fontsel->font_desc = pango_font_description_copy (
-          GTK_WIDGET (fontsel)->style->font_desc);
+  fontsel->font_desc = pango_font_description_copy (GTK_WIDGET (fontsel)->style->font_desc);
+  fontsel->default_size = pango_font_description_get_size (fontsel->font_desc);
 
-  fontsel->size_adj = gtk_adjustment_new (
-          pango_font_description_get_size (fontsel->font_desc) / PANGO_SCALE, 
-          MIN_FONT_SIZE, MAX_FONT_SIZE, 1, 9, 0);
+  fontsel->size_adj = gtk_adjustment_new (pango_font_description_get_size (fontsel->font_desc) / PANGO_SCALE, 
+                                          MIN_FONT_SIZE, MAX_FONT_SIZE, 1, 9, 0);
 
   accessib = gtk_widget_get_accessible (GTK_WIDGET (fontsel));
   atk_object_set_name (accessib, _("Font"));
@@ -340,4 +339,17 @@ gucharmap_mini_font_selection_set_font_size (GucharmapMiniFontSelection *fontsel
   set_size (fontsel, size);
 }
 
+/* size in points */
+void
+gucharmap_mini_font_selection_set_default_font_size (GucharmapMiniFontSelection *fontsel, 
+                                                     gint                        size)
+{
+  fontsel->default_size = size;
+}
 
+/* size in points */
+void
+gucharmap_mini_font_selection_reset_font_size (GucharmapMiniFontSelection *fontsel)
+{
+  gucharmap_mini_font_selection_set_font_size (fontsel, fontsel->default_size);
+}

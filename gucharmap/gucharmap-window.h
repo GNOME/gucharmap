@@ -23,6 +23,7 @@
 
 #include <gtk/gtk.h>
 #include <gucharmap/gucharmap-charmap.h>
+#include <gucharmap/gucharmap-mini-fontsel.h>
 
 G_BEGIN_DECLS
 
@@ -47,14 +48,15 @@ struct _GucharmapWindowClass
   GtkWindowClass parent_class;
 };
 
-GType       gucharmap_window_get_type                   ();
-GtkWidget * gucharmap_window_new                        ();
-void        gucharmap_window_set_font_selection_visible (GucharmapWindow *guw, 
-                                                         gboolean         visible);
-void        gucharmap_window_set_text_to_copy_visible   (GucharmapWindow *guw, 
-                                                         gboolean         visible);
-void        gucharmap_window_set_file_menu_visible      (GucharmapWindow *guw, 
-                                                         gboolean         visible);
+GType                        gucharmap_window_get_type                   ();
+GtkWidget *                  gucharmap_window_new                        ();
+void                         gucharmap_window_set_font_selection_visible (GucharmapWindow *guw, 
+                                                                          gboolean         visible);
+void                         gucharmap_window_set_text_to_copy_visible   (GucharmapWindow *guw, 
+                                                                          gboolean         visible);
+void                         gucharmap_window_set_file_menu_visible      (GucharmapWindow *guw, 
+                                                                          gboolean         visible);
+GucharmapMiniFontSelection * gucharmap_window_get_mini_font_selection    (GucharmapWindow *guw);
 
 G_END_DECLS
 

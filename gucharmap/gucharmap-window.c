@@ -792,3 +792,9 @@ gucharmap_window_set_file_menu_visible (GucharmapWindow *guw,
     }
 }
 
+GucharmapMiniFontSelection *
+gucharmap_window_get_mini_font_selection (GucharmapWindow *guw)
+{
+  GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
+  return GUCHARMAP_MINI_FONT_SELECTION (priv->fontsel);
+}

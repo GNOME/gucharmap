@@ -22,9 +22,7 @@
 
 #include <gtk/gtk.h>
 
-
 G_BEGIN_DECLS
-
 
 #define GUCHARMAP_MINI_FONT_SELECTION(obj) \
         (G_TYPE_CHECK_INSTANCE_CAST ((obj), gucharmap_mini_font_selection_get_type (), \
@@ -37,25 +35,24 @@ G_BEGIN_DECLS
 #define IS_GUCHARMAP_MINI_FONT_SELECTION(obj) \
         G_TYPE_CHECK_INSTANCE_TYPE ((obj), gucharmap_mini_font_selection_get_type ())
 
-
 typedef struct _GucharmapMiniFontSelection GucharmapMiniFontSelection;
 typedef struct _GucharmapMiniFontSelectionClass GucharmapMiniFontSelectionClass;
-
 
 struct _GucharmapMiniFontSelection
 {
   GtkHBox parent;
 
-  GtkWidget *family; /* combo box */
-  GtkWidget *bold;   /* toggle button*/
-  GtkWidget *italic; /* toggle button*/
+  GtkWidget            *family; /* combo box */
+  GtkWidget            *bold;   /* toggle button*/
+  GtkWidget            *italic; /* toggle button*/
 
-  GtkObject *size_adj; 
-  GtkWidget *size;   /* spin button */
+  GtkObject            *size_adj; 
+  GtkWidget            *size;   /* spin button */
   
   PangoFontDescription *font_desc;
-};
 
+  gint                  default_size;
+};
 
 struct _GucharmapMiniFontSelectionClass
 {
@@ -64,16 +61,17 @@ struct _GucharmapMiniFontSelectionClass
   void (* changed) (GucharmapMiniFontSelection *fontsel);
 };
 
-
-GType gucharmap_mini_font_selection_get_type ();
-GtkWidget * gucharmap_mini_font_selection_new ();
-gboolean gucharmap_mini_font_selection_set_font_name (GucharmapMiniFontSelection *fontsel,
-                                                      const gchar *fontname);
-gchar * gucharmap_mini_font_selection_get_font_name (GucharmapMiniFontSelection *fontsel);
-gint gucharmap_mini_font_selection_get_font_size (GucharmapMiniFontSelection *fontsel);
-void gucharmap_mini_font_selection_set_font_size (GucharmapMiniFontSelection *fontsel,
-                                                  gint size);
-
+GType       gucharmap_mini_font_selection_get_type              ();
+GtkWidget * gucharmap_mini_font_selection_new                   ();
+gboolean    gucharmap_mini_font_selection_set_font_name         (GucharmapMiniFontSelection *fontsel,
+                                                                 const gchar                *fontname);
+gchar *     gucharmap_mini_font_selection_get_font_name         (GucharmapMiniFontSelection *fontsel);
+gint        gucharmap_mini_font_selection_get_font_size         (GucharmapMiniFontSelection *fontsel);
+void        gucharmap_mini_font_selection_set_font_size         (GucharmapMiniFontSelection *fontsel,
+                                                                 gint                        size);
+void        gucharmap_mini_font_selection_set_default_font_size (GucharmapMiniFontSelection *fontsel, 
+                                                                 gint                        size);
+void        gucharmap_mini_font_selection_reset_font_size       (GucharmapMiniFontSelection *fontsel);
 
 G_END_DECLS
 
