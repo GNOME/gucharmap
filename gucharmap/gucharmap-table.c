@@ -838,8 +838,8 @@ get_appropriate_active_char_corner_xy (GucharmapTable *chartable, gint *x, gint 
 }
 
 
-/* Redraws whatever needs to be redrawn, in the character table and caption
- * and everything, and exposes what needs to be exposed. */
+/* Redraws whatever needs to be redrawn, in the character table and
+ * everything, and exposes what needs to be exposed. */
 void
 gucharmap_table_redraw (GucharmapTable *chartable, gboolean move_zoom)
 {
@@ -1113,6 +1113,9 @@ key_press_event (GtkWidget *widget,
                  GdkEventKey *event, 
                  GucharmapTable *chartable)
 {
+  if (event->state & GDK_MODIFIER_MASK)
+    return FALSE;
+
   /* move the cursor or whatever depending on which key was pressed */
   switch (event->keyval)
     {
