@@ -914,12 +914,13 @@ block_selection_changed (GtkTreeSelection *selection,
 static void
 show_hide_code_points (GtkToggleButton *togglebutton, Charmap *charmap)
 {
-  g_printerr ("show_hide_code_points: active = %d\n", 
-              gtk_toggle_button_get_active (togglebutton));
   if (gtk_toggle_button_get_active (togglebutton))
     gtk_tree_view_expand_all (GTK_TREE_VIEW (charmap->block_selector_view));
   else
     gtk_tree_view_collapse_all (GTK_TREE_VIEW (charmap->block_selector_view));
+
+  /* have to send it an expose event or the change won't happen right away */
+  gtk_widget_queue_draw (gtk_widget_get_parent (charmap->block_selector_view));
 }
 
 
@@ -940,7 +941,7 @@ make_unicode_block_selector (Charmap *charmap)
 
   vbox = gtk_vbox_new (FALSE, 1);
 
-  checkbox = gtk_check_button_new_with_label ("Show/hide code points");
+  checkbox = gtk_check_button_new_with_label (_("Expand/collapse all"));
   gtk_box_pack_start (GTK_BOX (vbox), checkbox, FALSE, FALSE, 0);
 
   g_signal_connect (G_OBJECT (checkbox), "toggled", 

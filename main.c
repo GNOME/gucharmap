@@ -38,8 +38,10 @@ fontsel_changed (GtkTreeSelection *selection, gpointer data)
   charmap_set_font (CHARMAP (charmap), new_font);
   g_free (new_font);
 
+  /*
   charmap_set_geometry_hints (CHARMAP (charmap), 
                               GTK_WINDOW (gtk_widget_get_toplevel (charmap)));
+                              */
 }
 
 
@@ -118,7 +120,7 @@ main (gint argc, gchar **argv)
                   GTK_FONT_SELECTION (fontsel)->size_list)), 
           "changed", G_CALLBACK (fontsel_changed), fontsel);
 
-  charmap_set_geometry_hints (CHARMAP (charmap), GTK_WINDOW (window));
+  /* charmap_set_geometry_hints (CHARMAP (charmap), GTK_WINDOW (window)); */
 
   gtk_window_set_default_size (GTK_WINDOW (window), 
                                gdk_screen_width () * 1/2,
