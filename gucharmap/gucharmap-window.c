@@ -225,7 +225,7 @@ search_find (GtkWidget       *widget,
       g_signal_connect (priv->search_dialog, "search-finish", G_CALLBACK (search_finish), guw);
     }
 
-  gtk_widget_show (priv->search_dialog);
+  gtk_window_present (GTK_WINDOW (priv->search_dialog));
 }
 
 static void
