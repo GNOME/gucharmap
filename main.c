@@ -100,8 +100,6 @@ main (gint argc, gchar **argv)
   gtk_box_pack_start (GTK_BOX (vbox), fontsel_toggle, FALSE, FALSE, 0);
 
   fontsel = gtk_font_selection_new ();
-  gtk_box_pack_start (GTK_BOX (vbox), fontsel, FALSE, FALSE, 0);
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (fontsel_toggle), TRUE);
 
   g_signal_connect (G_OBJECT (fontsel_toggle), "toggled",
                     G_CALLBACK (toggle_fontsel), fontsel);
@@ -114,8 +112,8 @@ main (gint argc, gchar **argv)
   charmap_set_geometry_hints (CHARMAP (charmap), GTK_WINDOW (window));
 
   gtk_window_set_default_size (GTK_WINDOW (window), 
-                               gdk_screen_width () * 2/3,
-                               gdk_screen_height () * 4/5);
+                               gdk_screen_width () * 1/2,
+                               gdk_screen_height () * 1/2);
 
   /* make the starting font 3/2 of the default selection in fontsel */
   orig_font = gtk_font_selection_get_font_name (GTK_FONT_SELECTION (fontsel));
@@ -130,6 +128,9 @@ main (gint argc, gchar **argv)
   g_free (new_font);
 
   gtk_widget_show_all (window);
+
+  gtk_box_pack_start (GTK_BOX (vbox), fontsel, FALSE, FALSE, 0);
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (fontsel_toggle), FALSE);
 
   gtk_main ();
 
