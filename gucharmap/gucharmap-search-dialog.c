@@ -52,6 +52,7 @@ typedef struct _GucharmapSearchState GucharmapSearchState;
 struct _GucharmapSearchState
 {
   GucharmapCodepointList *list;
+  gchar                  *search_string;
   gchar                  *search_string_nfd;
   const gchar            *no_leading_space;  /* points into search_string_nfd */
   gint                    start_index;
@@ -334,7 +335,7 @@ idle_search (GucharmapSearchDialog *search_dialog)
  * @search_state: 
  * Return value: 
  **/
-gunichar
+static gunichar
 gucharmap_search_state_get_found_char (GucharmapSearchState *search_state)
 {
   if (search_state->found_index > 0)
@@ -347,7 +348,7 @@ gucharmap_search_state_get_found_char (GucharmapSearchState *search_state)
  * gucharmap_search_state_free:
  * @search_state: 
  **/
-void
+static void
 gucharmap_search_state_free (GucharmapSearchState *search_state)
 {
   g_free (search_state->search_string_nfd);
@@ -367,7 +368,7 @@ gucharmap_search_state_free (GucharmapSearchState *search_state)
  *
  * Return value: the new #GucharmapSearchState.
  **/
-GucharmapSearchState * 
+static GucharmapSearchState * 
 gucharmap_search_state_new (const GucharmapCodepointList *list, 
                             const gchar                  *search_string, 
                             gint                          start_index, 
@@ -383,6 +384,7 @@ gucharmap_search_state_new (const GucharmapCodepointList *list,
   search_state->list = (GucharmapCodepointList *) list;
   search_state->list_num_chars = gucharmap_codepoint_list_get_last_index (search_state->list) + 1;
 
+  search_state->search_string = g_strdup (search_string);
   search_state->search_string_nfd = g_utf8_normalize (search_string, -1, G_NORMALIZE_NFD);
 
   search_state->increment = direction;
@@ -480,13 +482,27 @@ gucharmap_search_dialog_start_search (GucharmapSearchDialog *search_dialog,
   gdk_window_set_cursor (GTK_WIDGET (search_dialog)->window, cursor);
   gdk_cursor_unref (cursor);
 
-  if (priv->search_state)
-    gucharmap_search_state_free (priv->search_state);
 
   list = (GucharmapCodepointList *) gucharmap_chapters_get_book_codepoint_list (gucharmap_charmap_get_chapters (priv->guw->charmap));
-  start_char = gucharmap_table_get_active_character (priv->guw->charmap->chartable);
-  start_index = gucharmap_codepoint_list_get_index (list, start_char);
-  priv->search_state = gucharmap_search_state_new (list, gtk_entry_get_text (GTK_ENTRY (priv->entry)), start_index, direction, FALSE);
+
+  if (priv->search_state == NULL
+      || list != priv->search_state->list
+      || strcmp (priv->search_state->search_string, gtk_entry_get_text (GTK_ENTRY (priv->entry))) != 0)
+    {
+      if (priv->search_state)
+        gucharmap_search_state_free (priv->search_state);
+
+      start_char = gucharmap_table_get_active_character (priv->guw->charmap->chartable);
+      start_index = gucharmap_codepoint_list_get_index (list, start_char);
+      priv->search_state = gucharmap_search_state_new (list, gtk_entry_get_text (GTK_ENTRY (priv->entry)), start_index, direction, FALSE);
+    }
+  else
+    {
+      start_char = gucharmap_table_get_active_character (priv->guw->charmap->chartable);
+      priv->search_state->start_index = gucharmap_codepoint_list_get_index (list, start_char);
+      priv->search_state->curr_index = priv->search_state->start_index;
+      priv->search_state->increment = direction;
+    }
 
   gtk_widget_set_sensitive (priv->prev_button, FALSE);
   gtk_widget_set_sensitive (priv->next_button, FALSE);
@@ -503,6 +519,7 @@ search_find_response (GtkDialog *dialog,
                       gint       response)
 {
   GucharmapSearchDialog *search_dialog = GUCHARMAP_SEARCH_DIALOG (dialog);
+  GucharmapSearchDialogPrivate *priv = GUCHARMAP_SEARCH_DIALOG_GET_PRIVATE (search_dialog);
 
   switch (response)
     {
@@ -518,6 +535,8 @@ search_find_response (GtkDialog *dialog,
         gtk_widget_hide (GTK_WIDGET (search_dialog));
         break;
     }
+
+  gtk_editable_select_region (GTK_EDITABLE (priv->entry), 0, -1);
 }
 
 static void

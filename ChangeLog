@@ -1,5 +1,20 @@
 2004-02-25  Noah Levitt
 
+	* gucharmap/gucharmap-search-dialog.c (search_find_response):
+	Select text in the entry so that when the user next edits it
+	they don't have to delete what's there first. 
+
+	* gucharmap/gucharmap-search-dialog.c: Make
+	gucharmap_search_state_* static. 
+
+	* gucharmap/gucharmap-search-dialog.c (gucharmap_search_dialog_start_search):
+	Use existing search state if searching for the same string as
+	last time (and are viewing by the same codepoint list).
+	search_state->dont_search wasn't being used before. Speeds up
+	repeated searches that have no results or 1 result.
+
+2004-02-25  Noah Levitt
+
 	* gucharmap/gucharmap-search-dialog.c: After doing full text
 	search, try NFC on the search string, and if the result is a
 	single character, jump to it. (#134678, requested by Mariano
