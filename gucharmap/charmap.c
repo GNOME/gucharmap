@@ -302,6 +302,7 @@ set_caption_values_ltr (GtkTreeStore *tree_store,
 /* \342\200\217 is U+200F RIGHT-TO-LEFT MARK */
 /* \342\200\252 is U+202A LEFT-TO-RIGHT EMBEDDING */
 /* \342\200\254 is U+202C POP DIRECTIONAL FORMATTING */
+/* \342\200\256 is U+202E RIGHT-TO-LEFT OVERRIDE */
 static void
 set_caption (Charmap *charmap, gunichar uc)
 {
@@ -368,13 +369,17 @@ set_caption (Charmap *charmap, gunichar uc)
 
       decomposition = unicode_canonical_decomposition (uc,
                                                        &result_len);
-      gstemp = g_string_new ("\342\200\252");
-      g_string_append_printf (gstemp, "%s [U+%4.4X]", 
-                              unichar_to_printable_utf8 (decomposition[0]), 
-                              decomposition[0]);
+
+      gstemp = g_string_new ("");
+      g_string_append_printf (
+              gstemp, 
+              "\342\200\256%s\342\200\254 [\342\200\252U+%4.4X\342\200\254]", 
+              unichar_to_printable_utf8 (decomposition[0]), decomposition[0]);
+
       for (i = 1;  i < result_len;  i++)
         g_string_append_printf (gstemp, 
-                                " + %s [U+%4.4X]", 
+                                /* " + %s [U+%4.4X]",  */
+                                " + \342\200\256%s\342\200\254 [\342\200\252U+%4.4X\342\200\254]", 
                                 unichar_to_printable_utf8 (decomposition[i]), 
                                 decomposition[i]);
 
