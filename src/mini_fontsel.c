@@ -21,15 +21,16 @@
 #include <stdlib.h>
 #include <string.h>
 #include "mini_fontsel.h"
+#include "gucharmap_marshal.h"
 
 
 enum
 {
   CHANGED,
-  LAST_SIGNAL
+  NUM_SIGNALS
 };
 
-static guint mini_font_selection_signals [LAST_SIGNAL] = { 0 };
+static guint mini_font_selection_signals [NUM_SIGNALS] = { 0 };
 
 
 /* looks up PangoFontFamily by family name, since no such function is in
@@ -252,10 +253,10 @@ mini_font_selection_class_init (MiniFontSelectionClass *clazz)
   clazz->changed = NULL;
 
   mini_font_selection_signals[CHANGED] =
-      g_signal_new ("changed", 
-                    mini_font_selection_get_type (), G_SIGNAL_RUN_FIRST,
+      g_signal_new ("changed", mini_font_selection_get_type (), 
+		    G_SIGNAL_RUN_FIRST,
                     G_STRUCT_OFFSET (MiniFontSelectionClass, changed),
-                    NULL, NULL, gtk_signal_default_marshaller, 
+                    NULL, NULL, gucharmap_marshal_VOID__VOID,
                     G_TYPE_NONE, 0);
 }
 

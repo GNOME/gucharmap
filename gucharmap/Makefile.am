@@ -27,7 +27,8 @@ libgucharmap_la_LIBADD = @GTK_LIBS@
 
 lib_LTLIBRARIES = libgucharmap.la
 
-libgucharmap_la_SOURCES = charmap.c charmap.h \
+libgucharmap_la_SOURCES = gucharmap_marshal.c gucharmap_marshal.h \
+                          charmap.c charmap.h \
                           unicode_data.c unicode_info.c \
                           unicode_info.h unihan.c \
                           gucharmap_intl.c gucharmap_intl.h \
@@ -48,3 +49,15 @@ gucharmap_LDADD = libgucharmap.la  @GTK_LIBS@ @GNOME_LIBS@
 
 gucharmap_SOURCES = main.c
 
+
+gucharmap_marshal.h: gucharmap_marshal.list
+	( @GLIB_GENMARSHAL@ --prefix=gucharmap_marshal gucharmap_marshal.list \
+                            --header > gucharmap_marshal.tmp \
+	  && mv gucharmap_marshal.tmp gucharmap_marshal.h ) \
+        || ( rm -f gucharmap_marshal.tmp && exit 1 )
+
+gucharmap_marshal.c: gucharmap_marshal.h
+	( @GLIB_GENMARSHAL@ --prefix=gucharmap_marshal gucharmap_marshal.list \
+                            --body > gucharmap_marshal.tmp \
+          && mv gucharmap_marshal.tmp gucharmap_marshal.c ) \
+        || ( rm -f gucharmap_marshal.tmp && exit 1 )

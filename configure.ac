@@ -50,8 +50,12 @@ fi
 # checks for funcs 
 AC_CHECK_FUNCS([bind_textdomain_codeset])
 
+
 AC_SUBST(GTK_CFLAGS)
 AC_SUBST(GTK_LIBS)
+
+GLIB_GENMARSHAL=`pkg-config --variable=glib_genmarshal glib-2.0`
+AC_SUBST(GLIB_GENMARSHAL)
 
 AC_SUBST(GNOME_CFLAGS)
 AC_SUBST(GNOME_LIBS)
