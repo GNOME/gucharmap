@@ -667,6 +667,147 @@ draw_squares_after_shift (Charmap *charmap, gint row_offset)
 }
 #endif
 
+#define greater(a,b) ((a) > (b) ? (a) : (b))
+#define lesser(a,b) ((a) < (b) ? (a) : (b))
+
+static void
+copy_rows (Charmap *charmap, gint row_offset)
+{
+  gint num_padded_rows;
+  gint from_row, to_row;
+
+  num_padded_rows = charmap->chartable->allocation.height -
+                    (minimal_row_height (charmap) * charmap->rows + 1);
+
+  /*
+  g_print ("copy_rows: charmap->rows = %d, row_offset = %d\n", charmap->rows, row_offset);
+  g_print ("copy_rows: num_padded_rows = %d; 0 - %d not padded, %d - %d padded\n", num_padded_rows, charmap->rows - num_padded_rows - 1, charmap->rows - num_padded_rows, charmap->rows - 1);
+  */
+
+  if (abs (row_offset) < charmap->rows - num_padded_rows)
+    {
+      gint num_rows, height;
+
+      if (row_offset > 0)
+        {
+          from_row = row_offset;
+          to_row = 0;
+          num_rows = charmap->rows - num_padded_rows - from_row;
+        }
+      else
+        {
+          from_row = 0;
+          to_row = -row_offset;
+          num_rows = charmap->rows - num_padded_rows - to_row;
+        }
+
+      height = y_offset (charmap, num_rows) - y_offset (charmap, 0) - 1;
+
+      /*
+      g_print ("copy_rows: small rows: copying %d rows from %d to %d\n", 
+               num_rows, from_row, to_row);
+               */
+
+      g_print ("small: %d\n", height + greater (y_offset (charmap, from_row), 
+                                                y_offset (charmap, to_row)));
+
+      gdk_draw_drawable (charmap->chartable_pixmap,
+                         charmap->chartable->style->base_gc[GTK_STATE_NORMAL], 
+                         charmap->chartable_pixmap, 
+                         0, y_offset (charmap, from_row), 
+                         0, y_offset (charmap, to_row),
+                         charmap->chartable->allocation.width, 
+                         height);
+    }
+
+  if (abs (row_offset) < num_padded_rows)
+    {
+      /* don't need num_rows or height, cuz we can go off the end */
+      if (row_offset > 0)
+        {
+          from_row = charmap->rows - num_padded_rows + row_offset;
+          to_row = charmap->rows - num_padded_rows;
+        }
+      else
+        {
+          from_row = charmap->rows - num_padded_rows;
+          to_row = charmap->rows - num_padded_rows - row_offset;
+        }
+
+      /*
+      g_print ("copy_rows: big rows: copying from %d to %d\n", 
+               from_row, to_row);
+               */
+
+      g_print ("big: %d\n", lesser (y_offset (charmap, from_row), 
+                                    y_offset (charmap, to_row)));
+
+      /* it's ok to go off the end (so use allocation.height) */
+      gdk_draw_drawable (charmap->chartable_pixmap,
+                         charmap->chartable->style->base_gc[GTK_STATE_NORMAL], 
+                         charmap->chartable_pixmap, 
+                         0, y_offset (charmap, from_row), 
+                         0, y_offset (charmap, to_row),
+                         charmap->chartable->allocation.width, 
+                         charmap->chartable->allocation.height);
+    }
+}
+
+
+static void
+redraw_rows (Charmap *charmap, gint row_offset)
+{
+  gint row, col, start_row, end_row;
+
+  if (row_offset > 0) 
+    {
+      start_row = charmap->rows - row_offset;
+      end_row = charmap->rows - 1;
+    }
+  else
+    {
+      start_row = 0;
+      end_row = -row_offset - 1;
+    }
+
+  /*
+  for (row = 0;  row <= charmap->rows;  row++)
+    {
+      gint from_row = row + row_offset;
+
+      if (from_row < 0 || from_row >= charmap->rows)
+        continue;
+
+      if (row_height (charmap, row) == row_height (charmap, from_row))
+        {
+          g_print ("redraw_rows: SAME HEIGHT: %d -> %d\n", from_row, row);
+        }
+      else
+        {
+          g_print ("redraw_rows: DIFF HEIGHT: %d -> %d\n", from_row, row);
+        }
+    }
+    */
+
+  for (row = 0;  row <= charmap->rows;  row++)
+    {
+      gboolean draw_row = FALSE;
+
+      draw_row = draw_row || (row >= start_row && row <= end_row);
+
+      if (row + row_offset >= 0 && row + row_offset <= charmap->rows)
+        draw_row = draw_row || (row_height (charmap, row) 
+                                != row_height (charmap, row + row_offset));
+
+      if (draw_row)
+        {
+          /* g_print ("redraw_rows: redrawing row %d\n", row); */
+          for (col = 0;  col < charmap->cols;  col++)
+            draw_square (charmap, row, col);
+        }
+    }
+}
+
 
 /* Redraws whatever needs to be redrawn, in the character table and caption
  * and everything, and exposes what needs to be exposed. */
@@ -680,8 +821,7 @@ redraw (Charmap *charmap)
                 - (gint) charmap->old_page_first_char)
                / charmap->cols;
 
-/* #ifdef G_PLATFORM_WIN32 */
-#if 1
+#ifdef G_PLATFORM_WIN32
 
   if (row_offset != 0)
     {
@@ -702,11 +842,10 @@ redraw (Charmap *charmap)
     }
   else if (row_offset != 0)
     {
-      shift_area (charmap, row_offset);
-      draw_squares_after_shift (charmap, row_offset);
+      copy_rows (charmap, row_offset);
+      redraw_rows (charmap, row_offset);
       draw_borders (charmap);
       gtk_widget_queue_draw (charmap->chartable);
-      actives_done = TRUE;
     }
 
 #endif /* #else (#ifdef G_PLATFORM_WIN32) */
