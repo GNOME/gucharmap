@@ -1304,6 +1304,7 @@ static void
 size_allocate (GtkWidget *widget, GtkAllocation *allocation, Charmap *charmap)
 {
   gint old_rows, old_cols;
+  GtkAdjustment *adjustment;
 
   old_rows = charmap->rows;
   old_cols = charmap->cols;
@@ -1313,19 +1314,8 @@ size_allocate (GtkWidget *widget, GtkAllocation *allocation, Charmap *charmap)
   charmap->rows = (allocation->height - 1)
                   / (calculate_square_dimension_y (charmap->font_metrics) + 1);
 
-  g_printerr ("size_allocate: %dx%d -> %dx%d\n", 
-               allocation->width, allocation->height, 
-               charmap->rows, charmap->cols);
-
   if (charmap->rows == old_rows && charmap->cols == old_cols)
     return;
-
-  {
-    gint x = calculate_tabulus_dimension_x (charmap);
-    gint y = calculate_tabulus_dimension_y (charmap);
-
-    g_printerr ("size_allocate: requesting %dx%d\n", x, y);
-  }
 
   charmap->page_first_char = charmap->active_char 
                              - (charmap->active_char % charmap->cols);
@@ -1334,6 +1324,13 @@ size_allocate (GtkWidget *widget, GtkAllocation *allocation, Charmap *charmap)
   if (charmap->tabulus_pixmap != NULL)
     g_object_unref (charmap->tabulus_pixmap);
   charmap->tabulus_pixmap = NULL;
+
+  /* adjust the adjustment, since it's based on the size of a row */
+  adjustment = GTK_ADJUSTMENT (charmap->adjustment);
+  adjustment->upper = 1.0 * UNICHAR_MAX / charmap->cols;
+  adjustment->page_increment = 3.0 * charmap->rows;
+  gtk_adjustment_changed (adjustment);
+  set_scrollbar_adjustment (charmap);
 }
 
 
