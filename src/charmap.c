@@ -17,6 +17,10 @@
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  */
 
+#ifdef HAVE_CONFIG_H
+# include <config.h>
+#endif
+
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 #include <stdlib.h>
@@ -95,8 +99,11 @@ set_caption (Charmap *charmap)
   gint i, n, m;
   gchar *bp;
   static gchar *codepoint_str=NULL, *character_str, *category_str, *name_str;
+
+#if ENABLE_UNIHAN
   static gchar *kDefinition_str, *kCantonese_str, *kMandarin_str;
   static gchar *kTang_str, *kKorean_str, *kJapaneseOn_str, *kJapaneseKun_str;
+#endif
 
   if (codepoint_str == NULL)
     {
@@ -104,6 +111,7 @@ set_caption (Charmap *charmap)
       character_str = _("Character: %s");
       category_str = _("Unicode category: %s"); 
       name_str = _("Unicode name: %s");
+#if ENABLE_UNIHAN
       kDefinition_str = _("Ideograph definition: %s");
       kCantonese_str = _("Cantonese pronunciation: %s");
       kMandarin_str = _("Mandarin pronunciation: %s");
@@ -111,6 +119,7 @@ set_caption (Charmap *charmap)
       kKorean_str = _("Korean pronunciation: %s");
       kJapaneseOn_str = _("Japanese On pronunciation: %s");
       kJapaneseKun_str = _("Japanese Kun pronunciation: %s");
+#endif
     }
 
   g_snprintf (buf, BUFLEN, codepoint_str, 
@@ -136,6 +145,23 @@ set_caption (Charmap *charmap)
     n += g_snprintf (buf + n, BUFLEN - n, " 0x%2.2X", ubuf[i]);
   gtk_label_set_text (GTK_LABEL (charmap->caption->utf8), buf);
 
+  /* do the decomposition */
+  decomposition = unicode_canonical_decomposition (charmap->active_char,
+                                                   &result_len);
+  bp = buf;
+  bp += g_snprintf (buf, BUFLEN, 
+                    _("Unicode canonical decomposition: %s [U+%4.4X]"), 
+                    unichar_to_printable_utf8 (decomposition[0]),
+                    decomposition[0]);
+  for (i = 1;  i < result_len;  i++)
+    bp += g_snprintf (bp, buf + BUFLEN - bp, " + %s [U+%4.4X]", 
+                      unichar_to_printable_utf8 (decomposition[i]),
+                      decomposition[i]);
+  gtk_label_set_text (GTK_LABEL (charmap->caption->decomposition), buf);
+
+  g_free (decomposition);
+
+#if ENABLE_UNIHAN
   g_snprintf (buf, BUFLEN, kDefinition_str,
               get_unicode_kDefinition (charmap->active_char));
   gtk_label_set_text (GTK_LABEL (charmap->caption->kDefinition), buf);
@@ -163,22 +189,7 @@ set_caption (Charmap *charmap)
   g_snprintf (buf, BUFLEN, kJapaneseKun_str,
               get_unicode_kJapaneseKun (charmap->active_char));
   gtk_label_set_text (GTK_LABEL (charmap->caption->kJapaneseKun), buf);
-
-  /* do the decomposition */
-  decomposition = unicode_canonical_decomposition (charmap->active_char,
-                                                   &result_len);
-  bp = buf;
-  bp += g_snprintf (buf, BUFLEN, 
-                    _("Unicode canonical decomposition: %s [U+%4.4X]"), 
-                    unichar_to_printable_utf8 (decomposition[0]),
-                    decomposition[0]);
-  for (i = 1;  i < result_len;  i++)
-    bp += g_snprintf (bp, buf + BUFLEN - bp, " + %s [U+%4.4X]", 
-                      unichar_to_printable_utf8 (decomposition[i]),
-                      decomposition[i]);
-  gtk_label_set_text (GTK_LABEL (charmap->caption->decomposition), buf);
-
-  g_free (decomposition);
+#endif /* #if ENABLE_UNIHAN */
 }
 
 
@@ -1067,23 +1078,11 @@ make_caption (Charmap *charmap)
   PangoFontMetrics *font_metrics; 
   gint font_height; 
 
-  /* most of the rest of this is setting up the caption */
   charmap->caption = g_malloc (sizeof (Caption));
-  table = gtk_table_new (6, 4, FALSE);
-  gtk_table_set_row_spacings (GTK_TABLE (table), 3);
-  gtk_table_set_col_spacings (GTK_TABLE (table), 10);
-
   charmap->caption->codepoint = gtk_label_new ("");
   charmap->caption->character = gtk_label_new ("");;
   charmap->caption->category = gtk_label_new ("");
   charmap->caption->name = gtk_label_new ("");
-  charmap->caption->kDefinition = gtk_label_new ("");
-  charmap->caption->kCantonese = gtk_label_new ("");
-  charmap->caption->kKorean = gtk_label_new ("");
-  charmap->caption->kJapaneseOn = gtk_label_new ("");
-  charmap->caption->kTang = gtk_label_new ("");
-  charmap->caption->kMandarin = gtk_label_new ("");
-  charmap->caption->kJapaneseKun = gtk_label_new ("");
   charmap->caption->decomposition = gtk_label_new ("");
   charmap->caption->utf8 = gtk_label_new ("");
 
@@ -1100,13 +1099,6 @@ make_caption (Charmap *charmap)
   gtk_widget_set_size_request (charmap->caption->character, -1, font_height);
   gtk_widget_set_size_request (charmap->caption->category, -1, font_height);
   gtk_widget_set_size_request (charmap->caption->name, -1, font_height);
-  gtk_widget_set_size_request (charmap->caption->kDefinition, -1, font_height);
-  gtk_widget_set_size_request (charmap->caption->kCantonese, -1, font_height);
-  gtk_widget_set_size_request (charmap->caption->kJapaneseKun, -1, font_height);
-  gtk_widget_set_size_request (charmap->caption->kKorean, -1, font_height);
-  gtk_widget_set_size_request (charmap->caption->kTang, -1, font_height);
-  gtk_widget_set_size_request (charmap->caption->kMandarin, -1, font_height);
-  gtk_widget_set_size_request (charmap->caption->kJapaneseKun, -1, font_height);
   gtk_widget_set_size_request (charmap->caption->decomposition, -1, 
                                font_height);
   gtk_widget_set_size_request (charmap->caption->utf8, -1, font_height);
@@ -1115,13 +1107,6 @@ make_caption (Charmap *charmap)
   gtk_label_set_selectable (GTK_LABEL (charmap->caption->character), TRUE);
   gtk_label_set_selectable (GTK_LABEL (charmap->caption->category), TRUE);
   gtk_label_set_selectable (GTK_LABEL (charmap->caption->name), TRUE);
-  gtk_label_set_selectable (GTK_LABEL (charmap->caption->kDefinition), TRUE);
-  gtk_label_set_selectable (GTK_LABEL (charmap->caption->kCantonese), TRUE);
-  gtk_label_set_selectable (GTK_LABEL (charmap->caption->kKorean), TRUE);
-  gtk_label_set_selectable (GTK_LABEL (charmap->caption->kJapaneseKun), TRUE);
-  gtk_label_set_selectable (GTK_LABEL (charmap->caption->kJapaneseOn), TRUE);
-  gtk_label_set_selectable (GTK_LABEL (charmap->caption->kTang), TRUE);
-  gtk_label_set_selectable (GTK_LABEL (charmap->caption->kMandarin), TRUE);
   gtk_label_set_selectable (GTK_LABEL (charmap->caption->decomposition), TRUE);
   gtk_label_set_selectable (GTK_LABEL (charmap->caption->utf8), TRUE);
 
@@ -1129,6 +1114,34 @@ make_caption (Charmap *charmap)
   gtk_misc_set_alignment (GTK_MISC (charmap->caption->character), 0, 0);
   gtk_misc_set_alignment (GTK_MISC (charmap->caption->category), 0, 0);
   gtk_misc_set_alignment (GTK_MISC (charmap->caption->name), 0, 0);
+  gtk_misc_set_alignment (GTK_MISC (charmap->caption->decomposition), 0, 0);
+  gtk_misc_set_alignment (GTK_MISC (charmap->caption->utf8), 0, 0);
+
+#if ENABLE_UNIHAN
+  charmap->caption->kDefinition = gtk_label_new ("");
+  charmap->caption->kCantonese = gtk_label_new ("");
+  charmap->caption->kKorean = gtk_label_new ("");
+  charmap->caption->kJapaneseOn = gtk_label_new ("");
+  charmap->caption->kTang = gtk_label_new ("");
+  charmap->caption->kMandarin = gtk_label_new ("");
+  charmap->caption->kJapaneseKun = gtk_label_new ("");
+
+  gtk_label_set_selectable (GTK_LABEL (charmap->caption->kDefinition), TRUE);
+  gtk_label_set_selectable (GTK_LABEL (charmap->caption->kCantonese), TRUE);
+  gtk_label_set_selectable (GTK_LABEL (charmap->caption->kKorean), TRUE);
+  gtk_label_set_selectable (GTK_LABEL (charmap->caption->kJapaneseKun), TRUE);
+  gtk_label_set_selectable (GTK_LABEL (charmap->caption->kJapaneseOn), TRUE);
+  gtk_label_set_selectable (GTK_LABEL (charmap->caption->kTang), TRUE);
+  gtk_label_set_selectable (GTK_LABEL (charmap->caption->kMandarin), TRUE);
+
+  gtk_widget_set_size_request (charmap->caption->kDefinition, -1, font_height);
+  gtk_widget_set_size_request (charmap->caption->kCantonese, -1, font_height);
+  gtk_widget_set_size_request (charmap->caption->kJapaneseKun, -1, font_height);
+  gtk_widget_set_size_request (charmap->caption->kKorean, -1, font_height);
+  gtk_widget_set_size_request (charmap->caption->kTang, -1, font_height);
+  gtk_widget_set_size_request (charmap->caption->kMandarin, -1, font_height);
+  gtk_widget_set_size_request (charmap->caption->kJapaneseKun, -1, font_height);
+
   gtk_misc_set_alignment (GTK_MISC (charmap->caption->kDefinition), 0, 0);
   gtk_misc_set_alignment (GTK_MISC (charmap->caption->kCantonese), 0, 0);
   gtk_misc_set_alignment (GTK_MISC (charmap->caption->kKorean), 0, 0);
@@ -1136,8 +1149,7 @@ make_caption (Charmap *charmap)
   gtk_misc_set_alignment (GTK_MISC (charmap->caption->kJapaneseOn), 0, 0);
   gtk_misc_set_alignment (GTK_MISC (charmap->caption->kTang), 0, 0);
   gtk_misc_set_alignment (GTK_MISC (charmap->caption->kMandarin), 0, 0);
-  gtk_misc_set_alignment (GTK_MISC (charmap->caption->decomposition), 0, 0);
-  gtk_misc_set_alignment (GTK_MISC (charmap->caption->utf8), 0, 0);
+#endif /* #if ENABLE_UNIHAN */
 
   /*
    * *------------------------------------------------*
@@ -1147,13 +1159,24 @@ make_caption (Charmap *charmap)
    * *------------------------------------------------*
    * | decomposition:                                 |
    * *------------------------------------------------*
+#if ENABLE_UNIHAN
    * | kDefinition:                                   |
    * *------------------------------------------------*
    * | kMandarin:  | kCantonese:  | kTang: | kKorean: |
    * *------------------------------------------------*
    * | kJapaneseOn:               | kJapaneseKun:     |
    * *------------------------------------------------*
+#endif
    */
+
+#ifdef ENABLE_UNIHAN
+  table = gtk_table_new (6, 4, FALSE);
+#else
+  table = gtk_table_new (3, 4, FALSE);
+#endif
+
+  gtk_table_set_row_spacings (GTK_TABLE (table), 3);
+  gtk_table_set_col_spacings (GTK_TABLE (table), 10);
 
   gtk_table_attach_defaults (GTK_TABLE (table), charmap->caption->codepoint,
                              0, 1, 0, 1);
@@ -1171,6 +1194,7 @@ make_caption (Charmap *charmap)
                              charmap->caption->decomposition, 
                              0, 4, 2, 3);
 
+#ifdef ENABLE_UNIHAN
   gtk_table_attach_defaults (GTK_TABLE (table), charmap->caption->kDefinition,
                              0, 4, 3, 4);
 
@@ -1187,6 +1211,7 @@ make_caption (Charmap *charmap)
                              0, 2, 5, 6);
   gtk_table_attach_defaults (GTK_TABLE (table), charmap->caption->kJapaneseKun,
                              2, 4, 5, 6);
+#endif
 
   scrolled_window = gtk_scrolled_window_new (NULL, NULL);
   gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (scrolled_window),

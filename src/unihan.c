@@ -17,9 +17,15 @@
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  */
 
+#if HAVE_CONFIG_H
+# include <config.h>
+#endif
+
 #include <gtk/gtk.h>
 #include "unicode_info.h"
 
+
+#if ENABLE_UNIHAN
 
 typedef struct 
 {
@@ -27136,3 +27142,49 @@ get_unicode_kJapaneseOn (gunichar uc)
   else
     return uh->kJapaneseOn;
 }
+
+#else /* #if ENABLE_UNIHAN */
+
+gchar * 
+get_unicode_kDefinition (gunichar uc)
+{
+  return "This feature was not compiled in.";
+}
+
+gchar * 
+get_unicode_kCantonese (gunichar uc)
+{
+  return "This feature was not compiled in.";
+}
+
+gchar * 
+get_unicode_kMandarin (gunichar uc)
+{
+  return "This feature was not compiled in.";
+}
+
+gchar * 
+get_unicode_kTang (gunichar uc)
+{
+  return "This feature was not compiled in.";
+}
+
+gchar * 
+get_unicode_kKorean (gunichar uc)
+{
+  return "This feature was not compiled in.";
+}
+
+gchar * 
+get_unicode_kJapaneseKun (gunichar uc)
+{
+  return "This feature was not compiled in.";
+}
+
+gchar * 
+get_unicode_kJapaneseOn (gunichar uc)
+{
+  return "This feature was not compiled in.";
+}
+
+#endif /* #else (#if ENABLE_UNIHAN) */

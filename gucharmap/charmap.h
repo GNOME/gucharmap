@@ -20,6 +20,10 @@
 #ifndef CHARMAP_H
 #define CHARMAP_H
 
+#ifdef HAVE_CONFIG_H
+# include <config.h>
+#endif
+
 #include <gtk/gtk.h>
 
 #ifdef __cplusplus
@@ -132,6 +136,10 @@ struct _Caption
   GtkWidget *character;
   GtkWidget *category;
   GtkWidget *name;
+  GtkWidget *decomposition;
+  GtkWidget *utf8;
+
+#if ENABLE_UNIHAN
   GtkWidget *kDefinition;
   GtkWidget *kCantonese;
   GtkWidget *kKorean;
@@ -139,8 +147,7 @@ struct _Caption
   GtkWidget *kJapaneseKun;
   GtkWidget *kTang;
   GtkWidget *kMandarin;
-  GtkWidget *decomposition;
-  GtkWidget *utf8;
+#endif
 };
 
 

@@ -42,4 +42,12 @@ AC_CHECK_FUNCS([bind_textdomain_codeset])
 AC_SUBST(GUCHARMAP_CFLAGS)
 AC_SUBST(GUCHARMAP_LIBS)
 
+AH_TEMPLATE([ENABLE_UNIHAN], [Define if you want CJK ideograph information])
+AC_ARG_ENABLE(unihan, 
+              AC_HELP_STRING([--disable-unihan], 
+                             [don't build in CJK ideograph information]))
+if test "x$enable_unihan" != "xno" ; then
+    AC_DEFINE(ENABLE_UNIHAN)
+fi
+
 AC_OUTPUT([Makefile src/Makefile po/Makefile.in pixmaps/Makefile])
