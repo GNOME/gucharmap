@@ -36,6 +36,8 @@
 
 extern gboolean _gucharmap_unicode_has_nameslist_entry (gunichar uc);
 
+extern void logg (const gchar *location, const gchar *message);
+
 enum 
 {
   STATUS_MESSAGE = 0,
@@ -751,6 +753,8 @@ gucharmap_charmap_init (GucharmapCharmap *charmap)
   GtkWidget *chapters;
   GtkWidget *pane2;
 
+  logg ("gucharmap_charmap_init", "starting");
+
   charmap->hand_cursor = gdk_cursor_new (GDK_HAND2);
   charmap->regular_cursor = gdk_cursor_new (GDK_XTERM);
   charmap->hovering_over_link = FALSE;
@@ -765,6 +769,8 @@ gucharmap_charmap_init (GucharmapCharmap *charmap)
   gtk_paned_pack2 (GTK_PANED (charmap), pane2, TRUE, TRUE);
 
   set_details (charmap, gucharmap_table_get_active_character (charmap->chartable));
+
+  logg ("gucharmap_charmap_init", "finished");
 }
 
 

@@ -27,7 +27,19 @@
 #include "gucharmap-marshal.h"
 #include "gucharmap-intl.h"
 
+extern void logg (const gchar *location, const gchar *message);
+
 #define GUCHARMAP_SEARCH_DIALOG_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), gucharmap_search_dialog_get_type (), GucharmapSearchDialogPrivate))
+
+static GTimer *matches_timer = NULL;
+static gdouble matches_elapsed = 0;
+static gint matches_calls = 0;
+
+static GTimer *utf8_strcasestr_timer = NULL;
+static gdouble utf8_strcasestr_elapsed = 0;
+static gint utf8_strcasestr_calls = 0;
+
+static gint idle_search_calls = 0;
 
 enum
 {
@@ -50,8 +62,8 @@ typedef struct _GucharmapSearchState GucharmapSearchState;
 struct _GucharmapSearchState
 {
   GucharmapCodepointList *list;
-  gchar                  *search_string;
-  const gchar            *no_leading_space;  /* points into search_string */
+  gchar                  *search_string_nfd;
+  const gchar            *no_leading_space;  /* points into search_string_nfd */
   gint                    start_index;
   gint                    curr_index;
   GucharmapDirection      increment;
@@ -81,6 +93,9 @@ utf8_strcasestr (const gchar *haystack,
   gint haystack_len = strlen (haystack);
   const gchar *p, *q, *r;
 
+  utf8_strcasestr_calls++;
+  g_timer_start (utf8_strcasestr_timer);
+
   for (p = haystack;  p + needle_len <= haystack + haystack_len;  p = g_utf8_next_char (p))
     {
       for (q = needle, r = p;  *q && *r;  q = g_utf8_next_char (q), r = g_utf8_next_char (r))
@@ -90,45 +105,57 @@ utf8_strcasestr (const gchar *haystack,
           if (lc0 != lc1)
             goto next;
         }
+      utf8_strcasestr_elapsed += g_timer_elapsed (utf8_strcasestr_timer, NULL);
       return p;
 
-      next:
+     next:
         ;
     }
 
+  utf8_strcasestr_elapsed += g_timer_elapsed (utf8_strcasestr_timer, NULL);
   return NULL;
 }
 
 static gboolean
 matches (gunichar     wc,
-         const gchar *search_string)
+         const gchar *search_string_nfd)
 {
-  const gchar *haystack, *haystack_nfd;
+  const gchar *haystack; 
+  gchar *haystack_nfd;
   gboolean matches;
-  gchar *needle_nfd;
 
-
-  needle_nfd = g_utf8_normalize (search_string, -1, G_NORMALIZE_NFD);
+  matches_calls++;
+  g_timer_start (matches_timer);
 
   haystack = gucharmap_get_unicode_name (wc);
   if (haystack)
     {
       /* character names are ascii, so are nfd */
-      haystack_nfd = haystack;
-      /* haystack_nfd = g_utf8_normalize (haystack, -1, G_NORMALIZE_NFD); */
-      matches = utf8_strcasestr (haystack_nfd, needle_nfd) != NULL;
-      /* g_free (haystack_nfd); */
+      haystack_nfd = (gchar *) haystack;
+      matches = utf8_strcasestr (haystack_nfd, search_string_nfd) != NULL;
       if (matches)
         goto yes;
     }
 
+#if ENABLE_UNIHAN
+  haystack = gucharmap_get_unicode_kDefinition (wc);
+  if (haystack)
+    {
+      haystack_nfd = g_utf8_normalize (haystack, -1, G_NORMALIZE_NFD);
+      matches = utf8_strcasestr (haystack_nfd, search_string_nfd) != NULL;
+      g_free (haystack_nfd);
+      if (matches)
+        goto yes;
+    }
+#endif
+
   /* XXX: other strings */
 
-  g_free (needle_nfd);
+  matches_elapsed += g_timer_elapsed (matches_timer, NULL);
   return FALSE;
 
-yes: 
-  g_free (needle_nfd);
+ yes:
+  matches_elapsed += g_timer_elapsed (matches_timer, NULL);
   return TRUE;
 }
 
@@ -188,7 +215,7 @@ quick_checks (GucharmapSearchState *search_state)
     return TRUE;
 
   /* caller should check for empty string */
-  if (search_state->search_string[0] == '\0')
+  if (search_state->search_string_nfd[0] == '\0')
     {
       search_state->dont_search = TRUE;
       return TRUE;
@@ -204,10 +231,10 @@ quick_checks (GucharmapSearchState *search_state)
     }
 
   /* if there is only one character, return it as the found character */
-  if (g_utf8_strlen (search_state->search_string, -1) == 1)
+  if (g_utf8_strlen (search_state->search_string_nfd, -1) == 1)
     {
       index = gucharmap_codepoint_list_get_index ((GucharmapCodepointList *) search_state->list, 
-                                                  g_utf8_get_char (search_state->search_string));
+                                                  g_utf8_get_char (search_state->search_string_nfd));
       if (index != -1)
         {
           search_state->found_index = index;
@@ -226,6 +253,8 @@ idle_search (GucharmapSearchDialog *search_dialog)
   GTimer *timer = g_timer_new ();
   gunichar wc;
   gint index;
+
+  idle_search_calls++;
 
   if (quick_checks (priv->search_state))
     return FALSE;
@@ -293,7 +322,7 @@ gucharmap_search_state_get_found_char (GucharmapSearchState *search_state)
 void
 gucharmap_search_state_free (GucharmapSearchState *search_state)
 {
-  g_free (search_state->search_string);
+  g_free (search_state->search_string_nfd);
   g_free (search_state);
 }
 
@@ -326,7 +355,7 @@ gucharmap_search_state_new (const GucharmapCodepointList *list,
   search_state->list = (GucharmapCodepointList *) list;
   search_state->list_num_chars = gucharmap_codepoint_list_get_last_index (search_state->list) + 1;
 
-  search_state->search_string = g_strdup (search_string);
+  search_state->search_string_nfd = g_utf8_normalize (search_string, -1, G_NORMALIZE_NFD);
 
   search_state->increment = direction;
   search_state->whole_word = whole_word;
@@ -338,7 +367,7 @@ gucharmap_search_state_new (const GucharmapCodepointList *list,
   search_state->curr_index = start_index;
 
   /* set pointer to first non-space character in the search string */
-  for (search_state->no_leading_space = search_string;
+  for (search_state->no_leading_space = search_state->search_string_nfd;
        g_unichar_isspace (g_utf8_get_char (search_state->no_leading_space));
        search_state->no_leading_space = g_utf8_next_char (search_state->no_leading_space));
 
@@ -404,6 +433,21 @@ search_completed (GucharmapSearchDialog *search_dialog)
   gtk_widget_set_sensitive (priv->next_button, TRUE);
 
   gdk_window_set_cursor (GTK_WIDGET (search_dialog)->window, NULL);
+
+  gchar *tmp = g_strdup_printf ("matches: %d calls in %g sec = %.7f sec per call", 
+                                matches_calls, matches_elapsed, matches_elapsed / matches_calls);
+  logg ("search_completed", tmp);
+  g_free (tmp);
+
+  tmp = g_strdup_printf ("utf8_strcasestr: %d calls in %g sec = %.7f sec per call", 
+                         utf8_strcasestr_calls, utf8_strcasestr_elapsed, 
+                         utf8_strcasestr_elapsed / utf8_strcasestr_calls);
+  logg ("search_completed", tmp);
+  g_free (tmp);
+
+  tmp = g_strdup_printf ("utf8_strcasestr: %d calls to idle_search", idle_search_calls);
+  logg ("search_completed", tmp);
+  g_free (tmp);
 }
 
 void
@@ -431,6 +475,13 @@ gucharmap_search_dialog_start_search (GucharmapSearchDialog *search_dialog,
   gtk_widget_set_sensitive (priv->next_button, FALSE);
 
   g_signal_emit (search_dialog, gucharmap_search_dialog_signals[SEARCH_START], 0);
+
+  if (matches_timer == NULL)
+    matches_timer = g_timer_new ();
+  if (utf8_strcasestr_timer == NULL)
+    utf8_strcasestr_timer = g_timer_new ();
+
+  logg ("gucharmap_search_dialog_start_search", "adding idle handler");
 
   g_idle_add_full (G_PRIORITY_DEFAULT_IDLE, (GSourceFunc) idle_search, search_dialog, (GDestroyNotify) search_completed);
 }

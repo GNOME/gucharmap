@@ -971,12 +971,25 @@ gucharmap_table_redraw (GucharmapTable *chartable,
   chartable->old_active_cell = chartable->active_cell;
 }
 
+void
+logg (const gchar *location,
+      const gchar *message)
+{
+  static GTimer *timer = NULL;
+
+  if (timer == NULL)
+    timer = g_timer_new ();
+
+  g_print ("%7.3f: %36s:    %s\n", g_timer_elapsed (timer, NULL), location, message);
+}
+
 /* redraws the screen from the backing pixmap */
 static gint
 expose_event (GtkWidget *widget, 
               GdkEventExpose *event, 
               GucharmapTable *chartable)
 {
+  logg ("expose_event", "starting");
   gdk_window_set_back_pixmap (widget->window, NULL, FALSE);
 
   if (chartable->pixmap == NULL)
@@ -1001,6 +1014,7 @@ expose_event (GtkWidget *widget,
                      event->area.x, event->area.y,
                      event->area.width, event->area.height);
 
+  logg ("expose_event", "finished");
   return FALSE;
 }
 
@@ -1058,6 +1072,8 @@ size_allocate (GtkWidget *widget,
 {
   gint old_rows, old_cols;
 
+  logg ("size_allocate", "starting");
+
   old_rows = chartable->rows;
   old_cols = chartable->cols;
 
@@ -1079,12 +1095,22 @@ size_allocate (GtkWidget *widget,
     g_object_unref (chartable->pixmap);
   chartable->pixmap = NULL;
 
+#if 0
+  if (chartable->drawing_area->window)
+    draw_chartable_from_scratch (chartable);
+#endif
+
   if (chartable->rows == old_rows && chartable->cols == old_cols)
-    return;
+    {
+      logg ("size_allocate", "finished");
+      return;
+    }
 
   chartable->page_first_cell = chartable->active_cell - (chartable->active_cell % chartable->cols);
 
   update_scrollbar_adjustment (chartable);
+
+  logg ("size_allocate", "finished");
 }
 
 static void
@@ -1570,6 +1596,8 @@ gucharmap_table_init (GucharmapTable *chartable)
 {
   AtkObject *accessible;
 
+  logg ("gucharmap_table_init", "starting");
+
   chartable->zoom_mode_enabled = FALSE;
   chartable->zoom_window = NULL;
   chartable->zoom_pixmap = NULL;
@@ -1667,6 +1695,8 @@ gucharmap_table_get_type (void)
 {
   static GType gucharmap_table_type = 0;
 
+  logg ("gucharmap_table_get_type", "");
+
   if (!gucharmap_table_type)
     {
       static const GTypeInfo gucharmap_table_info =
@@ -1683,7 +1713,7 @@ gucharmap_table_get_type (void)
       };
 
       gucharmap_table_type = g_type_register_static (GTK_TYPE_HBOX, "GucharmapTable", 
-                                               &gucharmap_table_info, 0);
+                                                     &gucharmap_table_info, 0);
     }
 
   return gucharmap_table_type;
@@ -1720,6 +1750,8 @@ void
 gucharmap_table_set_font (GucharmapTable *chartable, const gchar *font_name)
 {
   PangoFontDescription *font_desc;
+
+  logg ("gucharmap_table_set_font", "starting");
 
   /* if it's the same as the current font, do nothing */
   if (chartable->font_name != NULL
