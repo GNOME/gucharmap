@@ -29,8 +29,6 @@
 # unicode_nameslist.cI
 #
 
-# the shell must have "let"
-
 
 UNZIP=`which unzip`
 WGET=`which wget`
@@ -123,15 +121,14 @@ function write_blocks()
             "#"*) continue ;;
         esac 
 
-        bounds=`$ECHO $line | $AWK -F'; ' '{ print $1 }'`
-        name=`$ECHO $line | $AWK -F'; ' '{ print $2 }'`
-        start=`$ECHO $bounds | $AWK -F'\.\.' '{ print $1 }'`
-        end=`$ECHO $bounds | $AWK -F'\.\.' '{ print $2 }'`
+        start=`$ECHO $line | $SED 's/^\([^.]*\)\.\.\([^;]*\); \(.*\)$/\1/'`
+        end=`$ECHO $line | $SED 's/^\([^.]*\)\.\.\([^;]*\); \(.*\)$/\2/'`
+        name=`$ECHO $line | $SED 's/^\([^.]*\)\.\.\([^;]*\); \(.*\)$/\3/'`
 
         $ECHO "  { 0x$start, 0x$end, \"$name\" },"
     done
 
-    $ECHO "{ (gunichar)-1, (gunichar)-1, NULL }"
+    $ECHO "  { (gunichar)(-1), (gunichar)(-1), NULL }"
     $ECHO "};"
 }
 
