@@ -61,15 +61,15 @@ struct _Charmap
 {
   GtkVBox parent;
 
-  GtkWidget *tabulus;         /* GtkDrawingArea* */
+  GtkWidget *tabulus;         /* GtkDrawingArea */
   GdkPixmap *tabulus_pixmap; 
 
   gchar *font_name;
   PangoFontMetrics *font_metrics;
   PangoLayout *pango_layout;
 
-  gunichar page_first_char;  /* the character in the upper left box */
-  gunichar active_char;      /* (gunichar)(-1) if none selected */
+  gunichar page_first_char;  /* the character in the upper left square */
+  gunichar active_char;
 
   Caption *caption;
 

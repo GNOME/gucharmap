@@ -22,30 +22,6 @@
 #include "charmap.h"
 #include "unicode_info.h"
 
-#if 0
-#include <stdarg.h>
-#include <time.h>
-#include <stdio.h>
-
-static void
-debug (const char *format, ...)
-{
-  static char timestamp[80];
-  va_list arg;
-  time_t now;
-
-  now = time (NULL);
-  strftime (timestamp, sizeof (timestamp), "%c", localtime (&now));
-  fprintf(stderr, "[%s] ", timestamp);
-
-  va_start(arg, format);
-  vfprintf(stderr, format, arg);
-  va_end(arg);
-}
-#else
-#define debug(x...)
-#endif
-
 
 /* return value is read-only, should not be freed */
 static gchar *
@@ -155,7 +131,8 @@ set_caption (Charmap *charmap)
 }
 
 
-/* selects the active block in the block selector tree view */
+/* selects the active block in the block selector tree view based on the
+ * active character */
 static void
 set_active_block (Charmap *charmap)
 {
@@ -241,10 +218,8 @@ set_active_block_finished:
 static gint 
 calculate_square_dimension_x (PangoFontMetrics *font_metrics)
 {
-  debug ("calculate_square_dimension_x\n");
-
   /* XXX: can't get max width for the font, so just use the height */
-  return 3 + (pango_font_metrics_get_ascent (font_metrics) 
+  return 5 + (pango_font_metrics_get_ascent (font_metrics) 
               + pango_font_metrics_get_descent (font_metrics)) 
              / PANGO_SCALE;
 }
@@ -253,8 +228,6 @@ calculate_square_dimension_x (PangoFontMetrics *font_metrics)
 static gint 
 calculate_square_dimension_y (PangoFontMetrics *font_metrics)
 {
-  debug ("calculate_square_dimension_y\n");
-
   return 5 + (pango_font_metrics_get_ascent (font_metrics) 
               + pango_font_metrics_get_descent (font_metrics)) 
              / PANGO_SCALE;
@@ -264,8 +237,6 @@ calculate_square_dimension_y (PangoFontMetrics *font_metrics)
 static gint
 calculate_tabulus_dimension_x (PangoFontMetrics *font_metrics)
 {
-  debug ("calculate_tabulus_dimension_x\n");
-
   return CHARMAP_COLS * (calculate_square_dimension_x (font_metrics) + 1) + 1;
 }
 
@@ -273,8 +244,6 @@ calculate_tabulus_dimension_x (PangoFontMetrics *font_metrics)
 static gint
 calculate_tabulus_dimension_y (PangoFontMetrics *font_metrics)
 {
-  debug ("calculate_tabulus_dimension_y\n");
-
   return CHARMAP_ROWS * (calculate_square_dimension_y (font_metrics) + 1) + 1;
 }
 
@@ -282,10 +251,6 @@ calculate_tabulus_dimension_y (PangoFontMetrics *font_metrics)
 static void
 set_scrollbar_adjustment (Charmap *charmap)
 {
-    /*
-  g_printerr ("set_scrollbar_adjustment: active_char = U+%4.4X\n",
-              charmap->active_char);
-              */
   /* block our "value_changed" handler */
   g_signal_handler_block (G_OBJECT (charmap->adjustment),
                           charmap->adjustment_changed_handler_id);
@@ -298,28 +263,70 @@ set_scrollbar_adjustment (Charmap *charmap)
 }
 
 
-/* redraws the backing store pixmap */
 static void
-draw_tabulus_pixmap (Charmap *charmap)
+draw_character_on_pixmap (Charmap *charmap, gint row, gint col)
 {
-  gint x, y, row, col, padding_x, padding_y;
-  gint square_width, square_height; 
+  gint padding_x, padding_y;
   gint char_width, char_height;
-  gint width, height;
+  gint square_width, square_height; 
+  gunichar uc;
   GdkGC *gc;
 
-  debug ("draw_tabulus_pixmap\n");
+  uc = charmap->page_first_char + row * CHARMAP_COLS + col;
 
-  /* width and height of a square */
+  if (uc == charmap->active_char)
+    {
+      gc = charmap->tabulus->style->text_gc[GTK_STATE_ACTIVE];
+      gdk_draw_rectangle (charmap->tabulus_pixmap,
+                          charmap->tabulus->style->base_gc[GTK_STATE_ACTIVE],
+                          TRUE, 
+                          (square_width+1) * col + 1, 
+                          (square_height+1) * row + 1, 
+                          square_width, square_height);
+
+      /* this is stuff that must be done when the active char
+       * changes, is this an ok place to do it? XXX */
+      set_caption (charmap);
+      set_active_block (charmap);
+      set_scrollbar_adjustment (charmap);
+    }
+  else 
+    gc = charmap->tabulus->style->text_gc[GTK_STATE_NORMAL];
+
   square_width = calculate_square_dimension_x (charmap->font_metrics);
   square_height = calculate_square_dimension_y (charmap->font_metrics);
+
+  pango_layout_set_text (charmap->pango_layout, 
+                         unichar_to_printable_utf8 (uc), 
+                         -1);
+
+  pango_layout_get_pixel_size (charmap->pango_layout, 
+                               &char_width, &char_height);
+
+  /* (square_width - char_width)/2 is the smaller half */
+  padding_x = (square_width - char_width) - (square_width - char_width)/2;
+  padding_y = (square_height - char_height) - (square_height - char_height)/2;
+
+  /* extra +1 is for the uncounted border */
+  gdk_draw_layout (charmap->tabulus_pixmap, gc,
+                   (square_width+1) * col + 1 + padding_x,
+                   (square_height+1) * row + 1 + padding_y,
+                   charmap->pango_layout);
+}
+
+
+static void
+draw_borders_on_pixmap (Charmap *charmap)
+{
+  gint x, y;
+  gint width, height; 
+  gint square_width, square_height; 
+
+  square_width = calculate_square_dimension_x (charmap->font_metrics);
+  square_height = calculate_square_dimension_y (charmap->font_metrics);
+
   width = calculate_tabulus_dimension_x (charmap->font_metrics);
   height = calculate_tabulus_dimension_y (charmap->font_metrics);
-
-  /* plain background */
-  gdk_draw_rectangle (charmap->tabulus_pixmap,
-                      charmap->tabulus->style->base_gc[GTK_STATE_NORMAL], 
-                      TRUE, 0, 0, width, height);
 
   /* vertical lines */
   for (x = 0;  x < width;  x += square_width + 1)
@@ -336,6 +343,29 @@ draw_tabulus_pixmap (Charmap *charmap)
                      charmap->tabulus->style->fg_gc[GTK_STATE_INSENSITIVE], 
                      0, y, width - 1, y);
     }
+}
+
+
+/* redraws the backing store pixmap */
+static void
+draw_tabulus_pixmap (Charmap *charmap)
+{
+  gint row, col;
+  gint width, height;
+  gint square_width, square_height; 
+  GdkGC *gc;
+
+  /* width and height of a square */
+  square_width = calculate_square_dimension_x (charmap->font_metrics);
+  square_height = calculate_square_dimension_y (charmap->font_metrics);
+  width = calculate_tabulus_dimension_x (charmap->font_metrics);
+  height = calculate_tabulus_dimension_y (charmap->font_metrics);
+
+  /* plain background */
+  gdk_draw_rectangle (charmap->tabulus_pixmap,
+                      charmap->tabulus->style->base_gc[GTK_STATE_NORMAL], 
+                      TRUE, 0, 0, width, height);
+  draw_borders_on_pixmap (charmap);
 
   pango_layout_set_font_description (charmap->pango_layout,
                                      charmap->tabulus->style->font_desc);
@@ -346,47 +376,9 @@ draw_tabulus_pixmap (Charmap *charmap)
       {
         gunichar uc = charmap->page_first_char + row * CHARMAP_COLS + col;
 
-        if (uc == charmap->active_char)
-          {
-            gc = charmap->tabulus->style->text_gc[GTK_STATE_ACTIVE];
-            gdk_draw_rectangle (
-                    charmap->tabulus_pixmap,
-                    charmap->tabulus->style->base_gc[GTK_STATE_ACTIVE],
-                    TRUE, 
-                    (square_width+1) * col + 1, (square_height+1) * row + 1, 
-                    square_width, square_height);
 
-            /* this is stuff that must be done when the active char
-             * changes, is this an ok place to do it? XXX*/
-            set_caption (charmap);
-            set_active_block (charmap);
-            set_scrollbar_adjustment (charmap);
-          }
-        else 
-          gc = charmap->tabulus->style->text_gc[GTK_STATE_NORMAL];
-
-        if (! g_unichar_isgraph (uc))
-          continue;
-
-        pango_layout_set_text (charmap->pango_layout, 
-                               unichar_to_printable_utf8 (uc), 
-                               -1);
-
-        pango_layout_get_pixel_size (charmap->pango_layout, 
-                               &char_width, &char_height);
-
-        /* (square_width - char_width)/2 is the smaller half */
-        padding_x = (square_width - char_width) 
-                    - (square_width - char_width)/2;
-        padding_y = (square_height - char_height) 
-                    - (square_height - char_height)/2;
-
-        /* extra +1 is for the uncounted border */
-        gdk_draw_layout (
-                charmap->tabulus_pixmap, gc,
-                (square_width+1) * col + 1 + padding_x,
-                (square_height+1) * row + 1 + padding_y,
-                charmap->pango_layout);
+        if (g_unichar_isgraph (uc))
+          draw_character_on_pixmap (charmap, row, col);
       }
 }
 
@@ -398,8 +390,6 @@ expose_event (GtkWidget *widget,
               gpointer callback_data)
 {
   Charmap *charmap;
-
-  debug ("expose_event\n");
 
   charmap = CHARMAP (callback_data);
 
@@ -441,8 +431,6 @@ expose_char_for_redraw (Charmap *charmap, gunichar uc)
 
   x = col * (w + 1) + 1;
   y = row * (h + 1) + 1;
-
-  debug ("exposing (row, col) = (%d, %d)\n", row, col);
 
   gdk_draw_drawable (charmap->tabulus->window,
                      charmap->tabulus->style->fg_gc[GTK_STATE_NORMAL],
@@ -588,8 +576,6 @@ key_press_event (GtkWidget *widget,
   Charmap *charmap;
   gunichar old_active_char;
   gunichar old_page_first_char;
-
-  debug ("key_press_event\n");
 
   charmap = CHARMAP (callback_data);
   old_active_char = charmap->active_char;
@@ -745,7 +731,6 @@ button_press_event (GtkWidget *widget,
 void
 charmap_class_init (CharmapClass *clazz)
 {
-  debug ("charmap_class_init\n");
 }
 
 
@@ -1169,8 +1154,6 @@ charmap_init (Charmap *charmap)
   GtkWidget *hbox;
   GtkWidget *vbox;
 
-  debug ("charmap_init\n");
-
   gtk_box_set_spacing (GTK_BOX (charmap), 5);
 
   charmap->tabulus = gtk_drawing_area_new ();
@@ -1237,7 +1220,6 @@ charmap_init (Charmap *charmap)
 GtkWidget *
 charmap_new ()
 {
-  debug ("charmap_new\n");
   return GTK_WIDGET (g_object_new (charmap_get_type (), NULL));
 }
 
@@ -1246,8 +1228,6 @@ GtkType
 charmap_get_type ()
 {
   static GtkType charmap_type = 0;
-
-  debug ("charmap_get_type\n");
 
   if (!charmap_type)
     {
@@ -1276,8 +1256,6 @@ void
 charmap_set_font (Charmap *charmap, gchar *font_name)
 {
   PangoFontDescription *font_desc;
-
-  debug ("charmap_set_font (\"%s\")\n", font_name);
 
   /* if it's the same as the current font, do nothing */
   if (charmap->font_name != NULL
