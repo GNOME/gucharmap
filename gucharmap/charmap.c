@@ -256,8 +256,17 @@ set_caption_values (GtkTreeStore *tree_store,
     }
 
   /* delete remaining rows */
-  while (gtk_tree_store_iter_is_valid (tree_store, &child_iter))
-    gtk_tree_store_remove (tree_store, &child_iter);
+  while (have_another_row)
+    {
+      GtkTreeIter temp_iter = child_iter;
+      have_another_row = gtk_tree_model_iter_next (GTK_TREE_MODEL (tree_store),
+                                                   &temp_iter);
+
+      gtk_tree_store_remove (tree_store, &child_iter);
+
+      child_iter = temp_iter;
+    }
+
 }
 
 
