@@ -1012,6 +1012,29 @@ make_caption (Charmap *charmap)
   charmap->caption->kJapaneseKun = gtk_label_new ("kJapaneseKun: ");
   charmap->caption->decomposition = gtk_label_new ("decomposition: ");
 
+  /* fix heights so that stuff doesn't get cut off */
+  font_metrics = pango_context_get_metrics (
+          gtk_widget_get_pango_context (charmap->caption->name),
+          charmap->caption->name->style->font_desc, NULL);
+
+  font_height = (pango_font_metrics_get_ascent (font_metrics) 
+                 + pango_font_metrics_get_descent (font_metrics)) 
+                / PANGO_SCALE;
+
+  gtk_widget_set_size_request (charmap->caption->codepoint, -1, font_height);
+  gtk_widget_set_size_request (charmap->caption->character, -1, font_height);
+  gtk_widget_set_size_request (charmap->caption->category, -1, font_height);
+  gtk_widget_set_size_request (charmap->caption->name, -1, font_height);
+  gtk_widget_set_size_request (charmap->caption->kDefinition, -1, font_height);
+  gtk_widget_set_size_request (charmap->caption->kCantonese, -1, font_height);
+  gtk_widget_set_size_request (charmap->caption->kJapaneseKun, -1, font_height);
+  gtk_widget_set_size_request (charmap->caption->kKorean, -1, font_height);
+  gtk_widget_set_size_request (charmap->caption->kTang, -1, font_height);
+  gtk_widget_set_size_request (charmap->caption->kMandarin, -1, font_height);
+  gtk_widget_set_size_request (charmap->caption->kJapaneseKun, -1, font_height);
+  gtk_widget_set_size_request (charmap->caption->decomposition, -1, 
+                               font_height);
+
   gtk_label_set_selectable (GTK_LABEL (charmap->caption->codepoint), TRUE);
   gtk_label_set_selectable (GTK_LABEL (charmap->caption->character), TRUE);
   gtk_label_set_selectable (GTK_LABEL (charmap->caption->category), TRUE);
@@ -1090,17 +1113,6 @@ make_caption (Charmap *charmap)
                                          table);
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window), 
                                   GTK_POLICY_ALWAYS, GTK_POLICY_NEVER);
-
-  /* have to make more room for this so that the bottom doesn't get cut off */
-  font_metrics = pango_context_get_metrics (
-          gtk_widget_get_pango_context (charmap->caption->name),
-          charmap->caption->name->style->font_desc, NULL);
-
-  font_height = (pango_font_metrics_get_ascent (font_metrics) 
-                 + pango_font_metrics_get_descent (font_metrics)) 
-                / PANGO_SCALE;
-  /* 6 rows */
-  gtk_widget_set_size_request (table, 0, 6 * font_height);
 
   return scrolled_window;
 }
