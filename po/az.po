@@ -6,7 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap.HEAD\n"
-"POT-Creation-Date: 2003-07-10 05:05+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-08-11 12:36+0200\n"
 "PO-Revision-Date: 2003-07-21 20:10+0200\n"
 "Last-Translator: Mətin Əmirov <metin@karegen.com>\n"
 "Language-Team: Azerbaijani <gnome@azitt.com>\n"
@@ -15,10 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. ID
-#: gucharmap.desktop.in.h:1
-#: gucharmap/gucharmap-window.c:386
-#: gucharmap/gucharmap-window.c:982
-#: gucharmap/imgucharmap.c:209
+#: gucharmap.desktop.in.h:1 gucharmap/gucharmap-window.c:386
+#: gucharmap/gucharmap-window.c:982 gucharmap/imgucharmap.c:209
 msgid "Unicode Character Map"
 msgstr "Yunikod Hərf Xəritəsi"
 
@@ -26,8 +25,7 @@ msgstr "Yunikod Hərf Xəritəsi"
 msgid "Canonical decomposition:"
 msgstr "Kanonik dağılma"
 
-#: gucharmap/gucharmap-charmap.c:437
-#: gucharmap/gucharmap-table.c:327
+#: gucharmap/gucharmap-charmap.c:437 gucharmap/gucharmap-table.c:332
 msgid "[not a printable character]"
 msgstr "[çap edilə biən hərf deyil]"
 
@@ -42,7 +40,7 @@ msgstr "Yunikod kateqoriyası:"
 
 #: gucharmap/gucharmap-charmap.c:466
 msgid "Various Useful Representations"
-msgstr "Müxtəlif Faydalı İfadələr"
+msgstr "Müxtə'lif Faydalı İfadələr"
 
 #: gucharmap/gucharmap-charmap.c:475
 msgid "UTF-8:"
@@ -140,25 +138,23 @@ msgstr "Ə_yik"
 msgid "Font Size"
 msgstr "Yazı Növü Böyüklüyü"
 
-#: gucharmap/gucharmap-table.c:1417
+#: gucharmap/gucharmap-table.c:1435
 msgid "Clipboard is empty."
 msgstr "Ara yaddaş boşdur."
 
-#: gucharmap/gucharmap-table.c:1419
+#: gucharmap/gucharmap-table.c:1437
 msgid "There is no selected text."
 msgstr "Seçili mətn yoxdur."
 
-#: gucharmap/gucharmap-table.c:1427
-#: gucharmap/gucharmap-table.c:1690
+#: gucharmap/gucharmap-table.c:1445 gucharmap/gucharmap-table.c:1708
 msgid "Unknown character, unable to identify."
 msgstr "Namə'lum hərf, tanına bilmədi"
 
-#: gucharmap/gucharmap-table.c:1431
-#: gucharmap/gucharmap-table.c:1694
+#: gucharmap/gucharmap-table.c:1449 gucharmap/gucharmap-table.c:1712
 msgid "Character found."
 msgstr "Hərf tapıldı."
 
-#: gucharmap/gucharmap-table.c:1761
+#: gucharmap/gucharmap-table.c:1780
 msgid "Character Table"
 msgstr "Hərf Cədvəli"
 
@@ -333,8 +329,12 @@ msgstr "Mə'lumat"
 
 #: gucharmap/gucharmap-window.c:118
 #, c-format
-msgid "Not a valid code point to jump to. Must be a hexadecimal number between 0 and %4.4X."
-msgstr "Gediləcək hökmlü kod nöqtəsi deyil. 0 ilə %4.4X arasındakı altılı ədəd olmalıdır."
+msgid ""
+"Not a valid code point to jump to. Must be a hexadecimal number between 0 "
+"and %4.4X."
+msgstr ""
+"Gediləcək hökmlü kod nöqtəsi deyil. 0 ilə %4.4X arasındakı altılı ədəd "
+"olmalıdır."
 
 #: gucharmap/gucharmap-window.c:142
 msgid "Jump to Unicode Code Point"
@@ -429,11 +429,11 @@ msgstr "_Yardım"
 
 #: gucharmap/gucharmap-window.c:777
 msgid "_Text to copy:"
-msgstr "Köçürdüləcək mə_tn:"
+msgstr "Köçürüləcək mə_tn:"
 
 #: gucharmap/gucharmap-window.c:798
 msgid "Copy to the clipboard."
-msgstr "Ara yaddaşa köçürt"
+msgstr "Ara yaddaşa köçür"
 
 #: gucharmap/gucharmap-window.c:939
 msgid "Back"
@@ -673,7 +673,7 @@ msgstr "Riyazi Operatorlar"
 
 #: gucharmap/unicode/unicode_blocks.cI:63
 msgid "Miscellaneous Technical"
-msgstr "Müxtəlif Texniki"
+msgstr "Müxtə'lif Texniki"
 
 #: gucharmap/unicode/unicode_blocks.cI:64
 msgid "Control Pictures"
@@ -701,7 +701,7 @@ msgstr "Geometrik Formalar"
 
 #: gucharmap/unicode/unicode_blocks.cI:70
 msgid "Miscellaneous Symbols"
-msgstr "Müxtəlif Simvollar"
+msgstr "Müxtə'lif Simvollar"
 
 #: gucharmap/unicode/unicode_blocks.cI:71
 msgid "Dingbats"
@@ -709,7 +709,7 @@ msgstr "Dingbatlar"
 
 #: gucharmap/unicode/unicode_blocks.cI:72
 msgid "Miscellaneous Mathematical Symbols-A"
-msgstr "Müxtəlif Riyazi Simvollar-A"
+msgstr "Müxtə'lif Riyazi Simvollar-A"
 
 #: gucharmap/unicode/unicode_blocks.cI:73
 msgid "Supplemental Arrows-A"
@@ -725,7 +725,7 @@ msgstr "Əlavə Edilmiş Oxlar-B"
 
 #: gucharmap/unicode/unicode_blocks.cI:76
 msgid "Miscellaneous Mathematical Symbols-B"
-msgstr "Müxtəlif Riyazi Simvollar-B"
+msgstr "Müxtə'lif Riyazi Simvollar-B"
 
 #: gucharmap/unicode/unicode_blocks.cI:77
 msgid "Supplemental Mathematical Operators"
@@ -733,7 +733,7 @@ msgstr "Əlavə Edilmiş Riyazi Operatorlar"
 
 #: gucharmap/unicode/unicode_blocks.cI:78
 msgid "Miscellaneous Symbols and Arrows"
-msgstr "Müxtəlif Simvol və Oxlar"
+msgstr "Müxtə'lif Simvol və Oxlar"
 
 #: gucharmap/unicode/unicode_blocks.cI:79
 msgid "CJK Radicals Supplement"
@@ -946,4 +946,3 @@ msgstr "Əlavə Edilmiş Xüsusi İstifadə Sahəsi-A"
 #: gucharmap/unicode/unicode_blocks.cI:131
 msgid "Supplementary Private Use Area-B"
 msgstr "Əlavə Edilmiş Xüsusi İstifadə Sahəsi-B"
-
