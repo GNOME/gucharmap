@@ -147,6 +147,7 @@ void charmap_hide_caption (Charmap *charmap, CharmapCaption caption_id);
 void charmap_show_caption (Charmap *charmap, CharmapCaption caption_id);
 void charmap_zoom_enable (Charmap *charmap);
 void charmap_zoom_disable (Charmap *charmap);
+Chartable * charmap_get_chartable (Charmap *charmap);
 
 G_END_DECLS
 

@@ -948,3 +948,11 @@ charmap_zoom_disable (Charmap *charmap)
   chartable_zoom_disable (charmap->chartable);
 }
 
+
+Chartable *
+charmap_get_chartable (Charmap *charmap)
+{
+  return charmap->chartable;
+}
+
+
