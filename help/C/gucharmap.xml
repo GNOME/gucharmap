@@ -4,7 +4,7 @@
   <!ENTITY legal SYSTEM "legal.xml">
   <!ENTITY appversion "1.2.0">
   <!ENTITY manrevision "2.1">
-  <!ENTITY date "January 2004">
+  <!ENTITY date "February 2004">
   <!ENTITY app "Character Map">
 ]>
 
@@ -116,9 +116,7 @@
 
     <legalnotice> 
       <title>Feedback</title> 
-      <para>To report a bug or make a suggestion regarding the <application>&app;</application> 
-      application or this manual, follow the directions in the <ulink url="ghelp:gnome-feedback"
-      type="help">GNOME Feedback Page</ulink>. 
+      <para>To report a bug or make a suggestion regarding the <application>&app;</application> application or this manual, follow the directions in the <ulink url="ghelp:gnome-feedback" type="help">GNOME Feedback Page</ulink>. 
       </para>
 <!-- Translators may also add here feedback address for translations -->
     </legalnotice> 
@@ -140,23 +138,13 @@
   <sect1 id="gucharmap-introduction"> 
     <title>Introduction</title> 
     <para>
-      The <application>&app;</application> application is a 
-      Unicode/ISO10646 character map and font viewer.
-      Unicode/ISO10646 is a coded character set and character set standard.
-      The Unicode/ISO10646 developers intend to include in this character set
-      all of the characters that are used in all of the written languages in the world.
+      The <application>&app;</application> application is a Unicode/ISO10646 character map and font viewer. Unicode/ISO10646 is a coded character set and character set standard. The Unicode/ISO10646 developers intend to include in this character set all of the characters that are used in all of the written languages in the world.
     </para>
     <para>
-      You can use <application>&app;</application> to select characters 
-      from a character table, then combine the characters into a text string 
-      with standard characters. You can insert the text string 
-      that you create into other applications, such as text editor documents. 
+      You can use <application>&app;</application> to select characters from a character table, then combine the characters into a text string with standard characters. You can insert the text string that you create into other applications, such as text editor documents. 
     </para>
     <para>
-      <application>&app;</application> provides accented characters, 
-      mathematical symbols, special symbols, and punctuation marks. 
-      Many of the characters provided by <application>&app;</application>
-      are not available on a standard keyboard.
+      <application>&app;</application> provides accented characters, mathematical symbols, special symbols, and punctuation marks. Many of the characters provided by <application>&app;</application> are not available on a standard keyboard.
     </para>
   </sect1>
 
@@ -174,8 +162,7 @@
           <term><guimenu>Applications menu</guimenu></term>
           <listitem>
             <para>
-              Choose <menuchoice><guimenu>Accessories</guimenu>
-              <guimenuitem>Character Map</guimenuitem></menuchoice>.
+              Choose <menuchoice><guimenu>Accessories</guimenu><guimenuitem>Character Map</guimenuitem></menuchoice>.
             </para>
           </listitem>
         </varlistentry>
@@ -183,15 +170,10 @@
           <term>Command line</term>
 	  <listitem>
             <para>
-              Execute the following command: 
-              <command>gnome-character-map</command>
+              Execute the following command: <command>gnome-character-map</command>
             </para>
             <para>
-              For more information about how to run 
-              <application>&app;</application> from a command line, 
-              see <ulink url="man:gnome-character-map" type="man">
-              <citerefentry><refentrytitle>gnome-character-map</refentrytitle>
-              <manvolnum>1</manvolnum></citerefentry></ulink>.
+              For more information about how to run <application>&app;</application> from a command line, see <ulink url="man:gnome-character-map" type="man"><citerefentry><refentrytitle>gnome-character-map</refentrytitle><manvolnum>1</manvolnum></citerefentry></ulink>.
             </para>
           </listitem>
         </varlistentry>
@@ -229,8 +211,7 @@
           <term>Menubar</term>
           <listitem>
             <para>
-              The menus on the menubar contain most of the commands that you need 
-              to work with <application>&app;</application>.
+              The menus on the menubar contain most of the commands that you need to work with <application>&app;</application>.
             </para>
           </listitem>
         </varlistentry>
@@ -290,31 +271,22 @@
     <sect2 id="gucharmap-change-view">
       <title>To Change the Character-Set List</title>
       <para>
-        To list the character sets by script name,
-        choose <menuchoice>
-          <guimenu>View</guimenu>
-          <guimenuitem>By Script</guimenuitem>
-        </menuchoice>.
+        To list the character sets by script name, choose <menuchoice><guimenu>View</guimenu><guimenuitem>By Script</guimenuitem></menuchoice>.
       </para>
       <para>
-        To list the character sets by Unicode block,
-        choose <menuchoice>
-          <guimenu>View</guimenu>
-          <guimenuitem>By Unicode Block</guimenuitem>
-        </menuchoice>.
+        To list the character sets by Unicode block, choose <menuchoice><guimenu>View</guimenu><guimenuitem>By Unicode Block</guimenuitem></menuchoice>.
       </para>
     </sect2>
     
     <sect2 id="gucharmap-create-textstring">
       <title>To Create a Text String</title>
       <para>
-        To create a text string in the <guilabel>Text to copy</guilabel> field, 
-        perform the following steps:
+        To create a text string in the <guilabel>Text to copy</guilabel> field, perform the following steps:
       </para>
       <orderedlist>
         <listitem>
           <para>
-            Select a character set from the list box.
+            Select a character set from the <guilabel>Script</guilabel> or <guilabel>Unicode Block</guilabel> list box.
           </para>
         </listitem>
         <listitem>
@@ -324,31 +296,22 @@
           <itemizedlist>
             <listitem>
               <para>
-                Double-click on a character button in the 
-                <guilabel>Character Table</guilabel> tabbed section, 
-                to insert the character in the 
-                <guilabel>Text to copy</guilabel> field. 
+                Double-click on a character button in the <guilabel>Character Table</guilabel> tabbed section, to insert the character in the <guilabel>Text to copy</guilabel> field. 
               </para>
             </listitem>
             <listitem>
               <para>
-                Click on a character button in the <guilabel>Character Table</guilabel> tabbed
-                section, then press <keycap>Return</keycap> to insert the character in the 
-                <guilabel>Text to copy</guilabel> field. 
+                Click on a character button in the <guilabel>Character Table</guilabel> tabbed section, then press <keycap>Return</keycap> to insert the character in the <guilabel>Text to copy</guilabel> field. 
               </para>
             </listitem>
             <listitem>
               <para>
-                Click on a character button in the <guilabel>Character Table</guilabel> tabbed
-                section, then drag the character to the <guilabel>Text to copy</guilabel> field. 
+                Click on a character button in the <guilabel>Character Table</guilabel> tabbed section, then drag the character to the <guilabel>Text to copy</guilabel> field. 
               </para>
             </listitem>
             <listitem>
               <para>
-                Click on the <guilabel>Text to copy</guilabel> field to give focus to the field.
-                If a text string is already in the field, click on the text string at the point
-                where you want to insert the character. Press a character key on your keyboard
-                to insert that character into the field. 
+                Click on the <guilabel>Text to copy</guilabel> field to give focus to the field. If a text string is already in the field, click on the text string at the point where you want to insert the character. Press a character key on your keyboard to insert that character into the field. 
               </para>
             </listitem>
           </itemizedlist>
@@ -360,40 +323,28 @@
     <sect2 id="gucharmap-copy-textstring">
       <title>To Copy and Paste Your Text String into an Application</title>
       <para>
-        To copy and paste the text string from the <guilabel>Text to copy</guilabel> 
-        field into an application, perform the following steps: 
+        To copy and paste the text string from the <guilabel>Text to copy</guilabel> field into an application, perform the following steps: 
       </para>
       <orderedlist>
         <listitem>
           <para>
-            Drag the pointer to select the text string in the
-            <guilabel>Text to copy</guilabel> field, and click
-            <guibutton>Copy</guibutton>. The selected text string appears
-            highlighted. 
+            Drag the pointer to select the text string in the <guilabel>Text to copy</guilabel> field, and click <guibutton>Copy</guibutton>. The selected text string appears highlighted. 
           </para>
         </listitem>
         <listitem>
           <para>
-            Point to the location in an application where you want to put
-            the text string and middle-click to insert the text string. You can also paste the
-            text string into the application if a Paste facility is available. You can repeat
-            the insertion as many times as you want while the text string is selected.
-            Click on the <guilabel>Text to copy</guilabel> field to deselect the text string. 
+            Point to the location in an application where you want to put the text string and middle-click to insert the text string. You can also paste the text string into the application if a Paste facility is available. You can repeat the insertion as many times as you want while the text string is selected. Click on the <guilabel>Text to copy</guilabel> field to deselect the text string. 
           </para>
         </listitem>
       </orderedlist>
       <para>
-        When you paste the contents of the <guilabel>Text to copy</guilabel> field into 
-        other applications, the text string appears in the current character set of the 
-        application.
+        When you paste the contents of the <guilabel>Text to copy</guilabel> field into other applications, the text string appears in the current character set of the application.
       </para>
       <para>
-        If your text string contains non-visible characters, you can only
-        insert the text string into applications that support the full character set.
+        If your text string contains non-visible characters, you can only insert the text string into applications that support the full character set.
       </para>
       <para>
-        If you quit <application>&app;</application> before you paste the
-        text string into an application, your text string is lost. 
+        If you quit <application>&app;</application> before you paste the text string into an application, your text string is lost. 
       </para>
     </sect2>
 
@@ -401,15 +352,10 @@
     <sect2 id="gucharmap-change-charset">
       <title>To Change the Input Mode</title>
       <para>
-        To change the input mode, right-click on the
-        <guilabel>Text to copy</guilabel> field, then select
-        <guimenuitem>Input Methods</guimenuitem>.
+        To change the input mode, right-click on the <guilabel>Text to copy</guilabel> field, then select <guimenuitem>Input Methods</guimenuitem>.
       </para>
       <para>
-        To display character layout options that are useful 
-        for working with non-Latin character sets,
-        right-click on the <guilabel>Text to copy</guilabel> field, then select
-        <guimenuitem>Insert Unicode Control Character</guimenuitem>.
+        To display character layout options that are useful for working with non-Latin character sets, right-click on the <guilabel>Text to copy</guilabel> field, then select <guimenuitem>Insert Unicode Control Character</guimenuitem>.
       </para>
     </sect2>
     
@@ -421,16 +367,12 @@
       <orderedlist>
         <listitem>
           <para>
-            Choose <menuchoice>
-              <guimenu>Search</guimenu>
-              <guimenuitem>Find</guimenuitem>
-            </menuchoice>.
+            Choose <menuchoice><guimenu>Search</guimenu><guimenuitem>Find</guimenuitem></menuchoice>.
           </para>
         </listitem>
         <listitem>
           <para>
-            Enter the character in the <guilabel>Search</guilabel> field
-            in the <guilabel>Find</guilabel> dialog.
+            Enter the Unicode code point or Unicode character name in the <guilabel>Search</guilabel> field in the <guilabel>Find</guilabel> dialog.
           </para>
         </listitem>
         <listitem>
@@ -438,32 +380,20 @@
             Click <guibutton>Find</guibutton>. 
           </para>
           <para>
-            <application>&app;</application> highlights 
-            the first character that matches the search criteria,
-            in the <guilabel>Character Table</guilabel> tabbed section.
-            <application>&app;</application> also displays the 
-            Unicode code point and Unicode character name
-            in the status bar.
+            <application>&app;</application> highlights the first character that matches the search criteria, in the <guilabel>Character Table</guilabel> tabbed section. <application>&app;</application> also displays the Unicode code point and Unicode character name in the status bar.
           </para>
           <para>
-            If no matching character is found, <application>&app;</application> 
-            displays an information alert.
+            If no matching character is found, <application>&app;</application> displays an information alert.
           </para>
         </listitem>
         <listitem>
           <para>
-            Choose <menuchoice>
-              <guimenu>Search</guimenu>
-              <guimenuitem>Find Next</guimenuitem>
-            </menuchoice> to find the next matching character.
+            Choose <menuchoice><guimenu>Search</guimenu><guimenuitem>Find Next</guimenuitem></menuchoice> to find the next matching character.
           </para>
         </listitem>
         <listitem>
           <para>
-            Choose <menuchoice>
-              <guimenu>Search</guimenu>
-              <guimenuitem>Find Previous</guimenuitem>
-            </menuchoice> to find the previous matching character.
+            Choose <menuchoice><guimenu>Search</guimenu><guimenuitem>Find Previous</guimenuitem></menuchoice> to find the previous matching character.
           </para>
         </listitem>
       </orderedlist>
@@ -473,18 +403,10 @@
     <sect2 id="usage-find-character-clipboard">
       <title>To Display the First Character in the Clipboard</title>
       <para>
-        To display the first character in the clipboard, 
-        choose <menuchoice>
-          <guimenu>Go</guimenu>
-          <guimenuitem>Character in Clipboard</guimenuitem>
-        </menuchoice>.
+        To display the first character in the clipboard, choose <menuchoice><guimenu>Go</guimenu><guimenuitem>Character in Clipboard</guimenuitem></menuchoice>.
       </para>
       <para>
-        <application>&app;</application> highlights the character 
-        in the <guilabel>Character Table</guilabel> tabbed section. 
-        <application>&app;</application> also displays the 
-        Unicode code point and Unicode character name
-        in the status bar.
+        <application>&app;</application> highlights the character in the <guilabel>Character Table</guilabel> tabbed section. <application>&app;</application> also displays the Unicode code point and Unicode character name in the status bar.
       </para>
     </sect2>
     
@@ -492,26 +414,17 @@
     <sect2 id="usage-browse-characters">
       <title>To Browse Through all Characters</title>
       <para>
-        You can browse through the characters in the <guilabel>Character Table</guilabel>
-        tabbed section in the following ways:
+        You can browse through the characters in the <guilabel>Character Table</guilabel> tabbed section in the following ways:
       </para>
       <itemizedlist>
         <listitem>
           <para>
-            Choose <menuchoice>
-              <guimenu>Go</guimenu>
-              <guimenuitem>Next Character</guimenuitem>
-            </menuchoice>
-            to select the next character in the Unicode sequence. 
+            Choose <menuchoice><guimenu>Go</guimenu><guimenuitem>Next Character</guimenuitem></menuchoice> to select the next character in the Unicode sequence. 
           </para>
         </listitem>
         <listitem>
           <para>
-            Choose <menuchoice>
-              <guimenu>Go</guimenu>
-              <guimenuitem>Previous Character</guimenuitem>
-            </menuchoice>
-            to select the previous character in the Unicode sequence. 
+            Choose <menuchoice><guimenu>Go</guimenu><guimenuitem>Previous Character</guimenuitem></menuchoice> to select the previous character in the Unicode sequence. 
           </para>
         </listitem>
         <listitem>
@@ -526,15 +439,12 @@
         </listitem>
         <listitem>
           <para>
-            Press the <keycap>Page Up</keycap> and <keycap>Page Down</keycap> keys to browse
-            through the characters page by page.
+            Press the <keycap>Page Up</keycap> and <keycap>Page Down</keycap> keys to browse through the characters page by page.
           </para>
         </listitem>
         <listitem>
           <para>
-            Press the <keycap>Home</keycap> key to select the first character
-            in the Unicode sequence.
-            To select the last character, press the <keycap>End</keycap> key.
+            Press the <keycap>Home</keycap> key to select the first character in the Unicode sequence. To select the last character, press the <keycap>End</keycap> key.
           </para>
         </listitem>
       </itemizedlist>
@@ -548,14 +458,12 @@
       <orderedlist>
         <listitem>
           <para>
-            Select a character set from the list box. 
-            Example: <guilabel>Basic Latin</guilabel>
+            Select a character set from the <guilabel>Script</guilabel> or <guilabel>Unicode Block</guilabel> list box. Example: <guilabel>Basic Latin</guilabel>
           </para>
         </listitem>
         <listitem>
           <para>
-            Select a character from the <guilabel>Character Table</guilabel> tabbed section.
-            Example: <guilabel>B</guilabel>
+            Select a character from the <guilabel>Character Table</guilabel> tabbed section. Example: <guilabel>B</guilabel>
           </para>
         </listitem>
         <listitem>
@@ -565,8 +473,7 @@
         </listitem>
       </orderedlist>
       <para>
-        The <guilabel>Character Details</guilabel> tabbed section 
-        displays the following information about the selected character:
+        The <guilabel>Character Details</guilabel> tabbed section displays the following information about the selected character:
       </para>
       <itemizedlist>
         <listitem>
@@ -626,7 +533,7 @@
                 Decimal entity reference
               </para>
               <para>
-                Example: <guilabel>&amp;&num;66;</guilabel>
+                Example: <guilabel>"&#66;"</guilabel>
               </para>
             </listitem>
           </itemizedlist>
@@ -644,20 +551,12 @@
           <itemizedlist>
             <listitem>
               <para>
-                Choose <menuchoice>
-                  <guimenu>Go</guimenu>
-                  <guimenuitem>Back</guimenuitem>
-                </menuchoice>
-                to navigate back through the link history.
+                Choose <menuchoice><guimenu>Go</guimenu><guimenuitem>Back</guimenuitem></menuchoice> to navigate back through the link history.
               </para>
             </listitem>
             <listitem>
               <para>
-                Choose <menuchoice>
-                  <guimenu>Go</guimenu>
-                  <guimenuitem>Forward</guimenuitem>
-                </menuchoice>
-                to navigate forward through the link history.
+                Choose <menuchoice><guimenu>Go</guimenu><guimenuitem>Forward</guimenuitem></menuchoice> to navigate forward through the link history.
               </para>
             </listitem>
           </itemizedlist>
@@ -668,9 +567,9 @@
     <sect2 id="usage-format-character">
       <title>To Change the Format of a Character</title>
       <para>
-        To change the format of a character, perform the following steps:
+        To change the format of a character, perform any of the following steps:
       </para>
-      <orderedlist>
+      <itemizedlist>
         <listitem>
           <para>
             To change the font, select a font from the font drop-down list. 
@@ -678,34 +577,22 @@
         </listitem>
         <listitem>
           <para>
-            To change the font type to bold type, 
-            click on the <guibutton>Bold</guibutton> button.
+            To change the font type to bold type, click on the <guibutton>Bold</guibutton> button.
           </para>
         </listitem>
         <listitem>
           <para>
-            To change the font type to italic type, 
-            click on the <guibutton>Italic</guibutton> button.
+            To change the font type to italic type, click on the <guibutton>Italic</guibutton> button.
           </para>
         </listitem>
         <listitem>
           <para>
-            To make the font size larger, choose 
-            <menuchoice>
-              <guimenu>View</guimenu>
-              <guimenuitem>Zoom In</guimenuitem>
-            </menuchoice>
-            or use the zoom spin box.
+            To make the font size larger, choose <menuchoice><guimenu>View</guimenu><guimenuitem>Zoom In</guimenuitem></menuchoice> or use the zoom spin box.
           </para>
         </listitem>
         <listitem>
           <para>
-            To make the font size smaller, choose 
-            <menuchoice>
-              <guimenu>View</guimenu>
-              <guimenuitem>Zoom Out</guimenuitem>
-            </menuchoice>
-            or use the zoom spin box.
+            To make the font size smaller, choose <menuchoice><guimenu>View</guimenu><guimenuitem>Zoom Out</guimenuitem></menuchoice> or use the zoom spin box.
           </para>
         </listitem>
         <listitem>
@@ -713,24 +600,16 @@
             To magnify the selected character, press <keycap>Shift</keycap>.
           </para>
         </listitem>
-      </orderedlist>
+      </itemizedlist>
     </sect2>
     
     <sect2 id="usage-format-chartable">
       <title>To Change the Format of the Character Table</title>
       <para>
-        To change the format of the character table, choose
-        <menuchoice>
-          <guimenu>View</guimenu>
-          <guimenuitem>Snap Columns to Power of Two</guimenuitem>
-        </menuchoice>.
+        To change the format of the character table, choose <menuchoice><guimenu>View</guimenu><guimenuitem>Snap Columns to Power of Two</guimenuitem></menuchoice>.
       </para>
       <para>
-        <application>&app;</application> changes the 
-        <guilabel>Character Table</guilabel> tabbed section
-        so that the number of columns is a power of two, for example, two columns, 
-        four columns, eight columns, and so on. The number of columns depends on
-        the size of the window and the size of the font.
+        <application>&app;</application> changes the <guilabel>Character Table</guilabel> tabbed section so that the number of columns is a power of two, for example, two columns, four columns, eight columns, and so on. The number of columns depends on the size of the window and the size of the font.
       </para>
     </sect2>
 
