@@ -65,6 +65,7 @@ draw_tabulus_pixmap (Charmap *charmap)
 {
   static gchar utf8_buf[8];
   gint x, y, row, col, w, h, wid, hei;
+  GdkGC *gc;
 
   debug ("draw_tabulus_pixmap\n");
 
@@ -119,8 +120,18 @@ draw_tabulus_pixmap (Charmap *charmap)
 
         pango_layout_get_pixel_size (charmap->pango_layout, &wid, &hei);
 
-        gdk_draw_layout (charmap->tabulus_pixmap, 
-                         charmap->tabulus->style->text_gc[GTK_STATE_NORMAL], 
+        if (uc == charmap->active_char)
+          {
+            gc = charmap->tabulus->style->text_gc[GTK_STATE_ACTIVE];
+            gdk_draw_rectangle (
+                    charmap->tabulus_pixmap,
+                    charmap->tabulus->style->base_gc[GTK_STATE_ACTIVE],
+                    TRUE, w * col + 1, h * row + 1, w - 1, h - 1);
+          }
+        else 
+          gc = charmap->tabulus->style->text_gc[GTK_STATE_NORMAL];
+
+        gdk_draw_layout (charmap->tabulus_pixmap, gc,
                          w * col + (w - wid) / 2, 
                          h * row + (h - hei) / 2, 
                          charmap->pango_layout);
@@ -192,6 +203,7 @@ charmap_init (Charmap *charmap)
                                CHARMAP_ROWS * square_dimension);
 
   charmap->page_first_char = (gunichar) 0x0000;
+  charmap->active_char = (gunichar) 0x0041;
 }
 
 

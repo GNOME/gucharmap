@@ -51,6 +51,7 @@ struct _Charmap
   PangoLayout *pango_layout;
 
   gunichar page_first_char;  /* the character in the upper left box */
+  gunichar active_char;      /* (gunichar)(-1) if none selected */
 };
 
 
