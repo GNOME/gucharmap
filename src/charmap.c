@@ -934,10 +934,8 @@ clear_button_clicked (GtkWidget *widget,
 static gint
 button_press_event (GtkWidget *widget, 
                     GdkEventButton *event, 
-                    gpointer callback_data)
+                    Charmap *charmap)
 {
-  Charmap *charmap = CHARMAP (callback_data);
-
   /* in case we lost keyboard focus and are clicking to get it back */
   gtk_widget_grab_focus (charmap->chartable);
 
@@ -952,6 +950,11 @@ button_press_event (GtkWidget *widget,
       set_active_character (charmap, 
                             get_char_at (charmap, event->x, event->y));
       redraw (charmap);
+    }
+  else if (event->button == 2)
+    {
+      charmap_identify_clipboard (charmap, 
+                                  gtk_clipboard_get (GDK_SELECTION_PRIMARY));
     }
 
   return TRUE;
@@ -1261,25 +1264,6 @@ selection_text_received (GtkClipboard *clipboard,
       set_active_character (charmap, uc);
       redraw (charmap);
     }
-}
-
-
-static void
-identify_clipboard (GtkWidget *widget,
-                    Charmap *charmap)
-{
-  GtkClipboard *clipboard;
-  clipboard = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
-  gtk_clipboard_request_text (clipboard, selection_text_received, charmap);
-}
-
-static void
-identify_primary (GtkWidget *widget,
-                  Charmap *charmap)
-{
-  GtkClipboard *clipboard;
-  clipboard = gtk_clipboard_get (GDK_SELECTION_PRIMARY);
-  gtk_clipboard_request_text (clipboard, selection_text_received, charmap);
 }
 
 
@@ -1780,3 +1764,12 @@ charmap_get_statusbar (Charmap *charmap)
 {
   return charmap->statusbar;
 }
+
+
+void
+charmap_identify_clipboard (Charmap *charmap, GtkClipboard *clipboard)
+{
+  gtk_clipboard_request_text (clipboard, selection_text_received, charmap);
+}
+
+

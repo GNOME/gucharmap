@@ -43,13 +43,6 @@ jump_code_point (GtkWidget *widget, gpointer data)
 
 
 static void
-jump_selection (GtkWidget *widget, gpointer data)
-{
-  g_printerr ("jump_selection\n");
-}
-
-
-static void
 jump_clipboard (GtkWidget *widget, gpointer data)
 {
   g_printerr ("jump_clipboard\n");
@@ -136,12 +129,6 @@ make_menu ()
           _("Jump to First Character in the _Clipboard"));
   g_signal_connect (G_OBJECT (menu_item), "activate",
                     G_CALLBACK (jump_clipboard), NULL);
-  gtk_menu_shell_append (GTK_MENU_SHELL (actions_menu), menu_item);
-
-  menu_item = gtk_menu_item_new_with_mnemonic (
-          _("Jump to First Character in the _Selected Text"));
-  g_signal_connect (G_OBJECT (menu_item), "activate",
-                    G_CALLBACK (jump_selection), NULL);
   gtk_menu_shell_append (GTK_MENU_SHELL (actions_menu), menu_item);
   /* finished making the actions menu */
 

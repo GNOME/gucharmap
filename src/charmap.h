@@ -152,6 +152,8 @@ GtkWidget * charmap_new ();
 void charmap_set_font (Charmap *charmap, gchar *font_name);
 void charmap_set_geometry_hints (Charmap *charmap, GtkWindow *window);
 GtkWidget *charmap_get_statusbar (Charmap *charmap);
+void charmap_identify_clipboard (Charmap *charmap, GtkClipboard *clipboard);
+
 
 #ifdef __cplusplus
 }
