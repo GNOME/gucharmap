@@ -29,14 +29,14 @@ lib_LTLIBRARIES = libgucharmap.la
 
 
 libgucharmap_la_SOURCES = gucharmap_marshal.c gucharmap_marshal.h \
-                          charmap.c charmap.h \
-                          unicode_info.c unicode_info.h \
                           gucharmap_intl.c gucharmap_intl.h \
                           chartable_accessible.c chartable_accessible.h \
                           charcell_accessible.c charcell_accessible.h \
-                          chartable.c chartable.h \
-                          mini_fontsel.c mini_fontsel.h \
-                          gucharmap_window.c gucharmap_window.h
+                          gucharmap-charmap.c gucharmap-charmap.h \
+                          gucharmap-mini-fontsel.c gucharmap-mini-fontsel.h \
+                          gucharmap-table.c gucharmap-table.h \
+                          gucharmap-unicode-info.c gucharmap-unicode-info.h \
+                          gucharmap-window.c gucharmap-window.h
 
 
 # this is different from the project version
@@ -45,8 +45,12 @@ libgucharmap_la_LDFLAGS = -version-info 2:0:0
 
 
 libgucharmapincludedir = $(includedir)/gucharmap
-libgucharmapinclude_HEADERS = charmap.h chartable.h unicode_info.h \
-                              mini_fontsel.h gucharmap_window.h
+libgucharmapinclude_HEADERS = gucharmap.h \
+                              gucharmap-charmap.h \
+                              gucharmap-table.h \
+                              gucharmap-window.h \
+                              gucharmap-mini-fontsel.h \
+                              gucharmap-unicode-info.h 
 
 
 bin_PROGRAMS = gucharmap

@@ -101,7 +101,7 @@ write_blocks()
     $ECHO "/* THIS IS A GENERATED FILE. */"
     $ECHO "/* http://www.unicode.org/Public/UNIDATA/Blocks.txt */"
     $ECHO "" 
-    $ECHO "const UnicodeBlock unicode_blocks[] ="
+    $ECHO "const GucharmapUnicodeBlock gucharmap_unicode_blocks[] ="
     $ECHO "{"
 
     while read line

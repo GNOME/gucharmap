@@ -25,16 +25,16 @@
 #include <stdlib.h>
 #include <gtk/gtk.h>
 
-#include <charcell_accessible.h>
-#include <chartable.h>
+#include <gucharmap/gucharmap.h>
+#include "charcell_accessible.h"
 
 
-extern gint chartable_x_offset (Chartable *chartable, gint col);
-extern gint chartable_y_offset (Chartable *chartable, gint row);
-extern gint chartable_unichar_column (Chartable *chartable, gunichar uc);
-extern gint chartable_row_height (Chartable *chartable, gint row);
-extern gint chartable_column_width (Chartable *chartable, gint col);
-extern void chartable_redraw (Chartable *chartable, gboolean move_zoom);
+extern gint gucharmap_table_x_offset (GucharmapTable *chartable, gint col);
+extern gint gucharmap_table_y_offset (GucharmapTable *chartable, gint row);
+extern gint gucharmap_table_unichar_column (GucharmapTable *chartable, gunichar uc);
+extern gint gucharmap_table_row_height (GucharmapTable *chartable, gint row);
+extern gint gucharmap_table_column_width (GucharmapTable *chartable, gint col);
+extern void gucharmap_table_redraw (GucharmapTable *chartable, gboolean move_zoom);
 
 
 static gpointer parent_class = NULL;
@@ -119,7 +119,7 @@ charcell_accessible_get_extents (AtkComponent *component,
 {
   CharcellAccessible *cell;
   AtkObject *cell_parent;
-  Chartable *chartable;
+  GucharmapTable *chartable;
   gint real_x, real_y, real_width, real_height;
   gint row, column;
 
@@ -132,18 +132,18 @@ charcell_accessible_get_extents (AtkComponent *component,
   /*
    * Is the cell visible on the screen
    */
-  chartable = CHARTABLE (cell->widget);
+  chartable = GUCHARMAP_TABLE (cell->widget);
   if (cell->index >= chartable->page_first_char && cell->index < chartable->page_first_char + chartable->rows * chartable->cols)
     {
       atk_component_get_extents (ATK_COMPONENT (cell_parent), 
                                  &real_x, &real_y, &real_width, &real_height, 
                                  coord_type);
       row = (cell->index - chartable->page_first_char)/ chartable->cols;
-      column = chartable_unichar_column (chartable, cell->index);
-      *x = real_x + chartable_x_offset (chartable, column);
-      *y = real_y + chartable_y_offset (chartable, row);
-      *width = chartable_column_width (chartable, column);
-      *height = chartable_row_height (chartable, row);
+      column = gucharmap_table_unichar_column (chartable, cell->index);
+      *x = real_x + gucharmap_table_x_offset (chartable, column);
+      *y = real_y + gucharmap_table_y_offset (chartable, row);
+      *width = gucharmap_table_column_width (chartable, column);
+      *height = gucharmap_table_row_height (chartable, row);
     }
   else
     {
@@ -157,15 +157,15 @@ static gboolean
 charcell_accessible_grab_focus (AtkComponent *component)
 {
   CharcellAccessible *cell;
-  Chartable *chartable;
+  GucharmapTable *chartable;
 
   g_return_val_if_fail (IS_CHARCELL_ACCESSIBLE (component), FALSE);
 
   cell = CHARCELL_ACCESSIBLE (component);
 
-  chartable = CHARTABLE (cell->widget);
-  chartable_set_active_character (chartable, cell->index);
-  chartable_redraw (chartable, TRUE);
+  chartable = GUCHARMAP_TABLE (cell->widget);
+  gucharmap_table_set_active_character (chartable, cell->index);
+  gucharmap_table_redraw (chartable, TRUE);
   return TRUE;
 }
 
@@ -191,13 +191,13 @@ static gboolean
 idle_do_action (gpointer data)
 {
   CharcellAccessible *cell;
-  Chartable *chartable;
+  GucharmapTable *chartable;
 
   cell = CHARCELL_ACCESSIBLE (data);
 
-  chartable = CHARTABLE (cell->widget);
-  chartable_set_active_character (chartable, cell->index);
-  chartable_redraw (chartable, TRUE);
+  chartable = GUCHARMAP_TABLE (cell->widget);
+  gucharmap_table_set_active_character (chartable, cell->index);
+  gucharmap_table_redraw (chartable, TRUE);
   g_signal_emit_by_name (chartable, "activate", cell->index);
   return FALSE; 
 }

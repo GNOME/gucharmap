@@ -1,6 +1,6 @@
 /* $Id$ */
 /*
- * Copyright (c) 2002  Noah Levitt <nlevitt@users.sourceforge.net>
+ * Copyright (c) 2003 Noah Levitt
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -24,7 +24,7 @@
 #include <gtk/gtk.h>
 #include <string.h>
 #include <gucharmap_intl.h>
-#include <unicode_info.h>
+#include <gucharmap/gucharmap-unicode-info.h>
 
 
 typedef struct 
@@ -85,13 +85,13 @@ typedef struct
 UnicodeCategory;
 
 
-#include <unicode/unicode_data.cI>
-#include <unicode/unicode_blocks.cI>
+#include "unicode/unicode_data.cI"
+#include "unicode/unicode_blocks.cI"
 #if ENABLE_UNIHAN
-# include <unicode/unicode_unihan.cI>
+# include "unicode/unicode_unihan.cI"
 #endif
-#include <unicode/unicode_nameslist.cI>
-#include <unicode/unicode_categories.cI>
+#include "unicode/unicode_nameslist.cI"
+#include "unicode/unicode_categories.cI"
 
 
 /* constants for hangul (de)composition, see UAX #15 */
@@ -145,7 +145,7 @@ get_hangul_syllable_name (gunichar s)
 
 
 G_CONST_RETURN gchar *
-get_unicode_name (gunichar uc)
+gucharmap_get_unicode_name (gunichar uc)
 {
   if (uc >= 0x3400 && uc <= 0x4DB5)
     return _("<CJK Ideograph Extension A>");
@@ -169,7 +169,7 @@ get_unicode_name (gunichar uc)
     return _("<CJK Ideograph Extension B>");
   else
     {
-      const gchar *x = get_unicode_data_name (uc);
+      const gchar *x = gucharmap_get_unicode_data_name (uc);
       if (x == NULL)
         return _("<not assigned>");
       else
@@ -179,9 +179,9 @@ get_unicode_name (gunichar uc)
 
 
 G_CONST_RETURN gchar *
-get_unicode_category_name (gunichar uc)
+gucharmap_get_unicode_category_name (gunichar uc)
 {
-  switch (unichar_type (uc))
+  switch (gucharmap_unichar_type (uc))
     {
       case G_UNICODE_CONTROL: return _("Other, Control");
       case G_UNICODE_FORMAT: return _("Other, Format");
@@ -218,14 +218,14 @@ get_unicode_category_name (gunichar uc)
 }
 
 
-/* counts the number of entries in unicode_blocks with start <= max */
+/* counts the number of entries in gucharmap_unicode_blocks with start <= max */
 gint 
-count_blocks (gunichar max)
+gucharmap_count_blocks (gunichar max)
 {
   gint i;
 
-  for (i = 0;  unicode_blocks[i].start != (gunichar)(-1)
-               && unicode_blocks[i].start < max;  i++);
+  for (i = 0;  gucharmap_unicode_blocks[i].start != (gunichar)(-1)
+               && gucharmap_unicode_blocks[i].start < max;  i++);
 
   return i;
 }
@@ -269,7 +269,7 @@ hangul_decomposition (gunichar s, gsize *result_len)
 /*
  * See http://bugzilla.gnome.org/show_bug.cgi?id=100456
  *
- * unicode_canonical_decomposition:
+ * gucharmap_unicode_canonical_decomposition:
  * @ch: a Unicode character.
  * @result_len: location to store the length of the return value.
  *
@@ -279,7 +279,7 @@ hangul_decomposition (gunichar s, gsize *result_len)
  *   @result_len is set to the resulting length of the string.
  */
 gunichar *
-unicode_canonical_decomposition (gunichar ch, gsize   *result_len)
+gucharmap_unicode_canonical_decomposition (gunichar ch, gsize   *result_len)
 {
   if (ch >= 0xac00 && ch <= 0xd7af)  /* Hangul syllable */
     return hangul_decomposition (ch, result_len);
@@ -291,7 +291,7 @@ unicode_canonical_decomposition (gunichar ch, gsize   *result_len)
 
 /* does a binary search on unicode_data */
 G_CONST_RETURN gchar *
-get_unicode_data_name (gunichar uc)
+gucharmap_get_unicode_data_name (gunichar uc)
 {
   gint min = 0;
   gint mid;
@@ -357,9 +357,9 @@ ascii_case_strrstr (const gchar *haystack, const gchar *needle)
 /* case insensitive; returns (gunichar)(-1) if nothing found */
 /* direction must be +1 or -1 */
 gunichar
-find_substring_match (gunichar start, 
-                      const gchar *search_text,
-                      gint direction)
+gucharmap_find_substring_match (gunichar start, 
+                                const gchar *search_text,
+                                gint direction)
 {
   gint max = sizeof (unicode_data) / sizeof (UnicodeData) - 1;
   gint i0;
@@ -457,7 +457,7 @@ _get_unihan (gunichar uc)
 
 
 G_CONST_RETURN gchar * 
-get_unicode_kDefinition (gunichar uc)
+gucharmap_get_unicode_kDefinition (gunichar uc)
 {
   const Unihan *uh = _get_unihan (uc);
   if (uh == NULL)
@@ -467,7 +467,7 @@ get_unicode_kDefinition (gunichar uc)
 }
 
 G_CONST_RETURN gchar * 
-get_unicode_kCantonese (gunichar uc)
+gucharmap_get_unicode_kCantonese (gunichar uc)
 {
   const Unihan *uh = _get_unihan (uc);
   if (uh == NULL)
@@ -477,7 +477,7 @@ get_unicode_kCantonese (gunichar uc)
 }
 
 G_CONST_RETURN gchar * 
-get_unicode_kMandarin (gunichar uc)
+gucharmap_get_unicode_kMandarin (gunichar uc)
 {
   const Unihan *uh = _get_unihan (uc);
   if (uh == NULL)
@@ -487,7 +487,7 @@ get_unicode_kMandarin (gunichar uc)
 }
 
 G_CONST_RETURN gchar * 
-get_unicode_kTang (gunichar uc)
+gucharmap_get_unicode_kTang (gunichar uc)
 {
   const Unihan *uh = _get_unihan (uc);
   if (uh == NULL)
@@ -497,7 +497,7 @@ get_unicode_kTang (gunichar uc)
 }
 
 G_CONST_RETURN gchar * 
-get_unicode_kKorean (gunichar uc)
+gucharmap_get_unicode_kKorean (gunichar uc)
 {
   const Unihan *uh = _get_unihan (uc);
   if (uh == NULL)
@@ -507,7 +507,7 @@ get_unicode_kKorean (gunichar uc)
 }
 
 G_CONST_RETURN gchar * 
-get_unicode_kJapaneseKun (gunichar uc)
+gucharmap_get_unicode_kJapaneseKun (gunichar uc)
 {
   const Unihan *uh = _get_unihan (uc);
   if (uh == NULL)
@@ -517,7 +517,7 @@ get_unicode_kJapaneseKun (gunichar uc)
 }
 
 G_CONST_RETURN gchar * 
-get_unicode_kJapaneseOn (gunichar uc)
+gucharmap_get_unicode_kJapaneseOn (gunichar uc)
 {
   const Unihan *uh = _get_unihan (uc);
   if (uh == NULL)
@@ -529,43 +529,43 @@ get_unicode_kJapaneseOn (gunichar uc)
 #else /* #if ENABLE_UNIHAN */
 
 G_CONST_RETURN gchar * 
-get_unicode_kDefinition (gunichar uc)
+gucharmap_get_unicode_kDefinition (gunichar uc)
 {
   return "This feature was not compiled in.";
 }
 
 G_CONST_RETURN gchar * 
-get_unicode_kCantonese (gunichar uc)
+gucharmap_get_unicode_kCantonese (gunichar uc)
 {
   return "This feature was not compiled in.";
 }
 
 G_CONST_RETURN gchar * 
-get_unicode_kMandarin (gunichar uc)
+gucharmap_get_unicode_kMandarin (gunichar uc)
 {
   return "This feature was not compiled in.";
 }
 
 G_CONST_RETURN gchar * 
-get_unicode_kTang (gunichar uc)
+gucharmap_get_unicode_kTang (gunichar uc)
 {
   return "This feature was not compiled in.";
 }
 
 G_CONST_RETURN gchar * 
-get_unicode_kKorean (gunichar uc)
+gucharmap_get_unicode_kKorean (gunichar uc)
 {
   return "This feature was not compiled in.";
 }
 
 G_CONST_RETURN gchar * 
-get_unicode_kJapaneseKun (gunichar uc)
+gucharmap_get_unicode_kJapaneseKun (gunichar uc)
 {
   return "This feature was not compiled in.";
 }
 
 G_CONST_RETURN gchar * 
-get_unicode_kJapaneseOn (gunichar uc)
+gucharmap_get_unicode_kJapaneseOn (gunichar uc)
 {
   return "This feature was not compiled in.";
 }
@@ -613,7 +613,7 @@ get_nameslist (gunichar uc)
 
 /* returns newly allocated array of gunichar terminated with -1 */
 gunichar *
-get_nameslist_exes (gunichar uc)
+gucharmap_get_nameslist_exes (gunichar uc)
 {
   const NamesList *nl;
   gunichar *exes;
@@ -640,7 +640,7 @@ get_nameslist_exes (gunichar uc)
 /* returns newly allocated null-terminated array of gchar* */
 /* the items are const, but the array should be freed by the caller */
 G_CONST_RETURN gchar **
-get_nameslist_equals (gunichar uc)
+gucharmap_get_nameslist_equals (gunichar uc)
 {
   const NamesList *nl;
   const gchar **equals;
@@ -667,7 +667,7 @@ get_nameslist_equals (gunichar uc)
 /* returns newly allocated null-terminated array of gchar* */
 /* the items are const, but the array should be freed by the caller */
 G_CONST_RETURN gchar **
-get_nameslist_stars (gunichar uc)
+gucharmap_get_nameslist_stars (gunichar uc)
 {
   const NamesList *nl;
   const gchar **stars;
@@ -694,7 +694,7 @@ get_nameslist_stars (gunichar uc)
 /* returns newly allocated null-terminated array of gchar* */
 /* the items are const, but the array should be freed by the caller */
 G_CONST_RETURN gchar **
-get_nameslist_pounds (gunichar uc)
+gucharmap_get_nameslist_pounds (gunichar uc)
 {
   const NamesList *nl;
   const gchar **pounds;
@@ -721,7 +721,7 @@ get_nameslist_pounds (gunichar uc)
 /* returns newly allocated null-terminated array of gchar* */
 /* the items are const, but the array should be freed by the caller */
 G_CONST_RETURN gchar **
-get_nameslist_colons (gunichar uc)
+gucharmap_get_nameslist_colons (gunichar uc)
 {
   const NamesList *nl;
   const gchar **colons;
@@ -753,14 +753,14 @@ get_nameslist_colons (gunichar uc)
 
 /* an up-to-date replacement for g_unichar_validate */
 gboolean
-unichar_validate (gunichar ch)
+gucharmap_unichar_validate (gunichar ch)
 {
   return UNICODE_VALID (ch);
 }
 
 
 /**
- * unichar_to_printable_utf8
+ * gucharmap_unichar_to_printable_utf8
  * @uc: a unicode character 
  * @outbuf: output buffer, must have at least 10 bytes of space.
  *          If %NULL, the length will be computed and returned
@@ -773,7 +773,7 @@ unichar_validate (gunichar ch)
  * Return value: number of bytes written
  **/
 gint
-unichar_to_printable_utf8 (gunichar uc, gchar *outbuf)
+gucharmap_unichar_to_printable_utf8 (gunichar uc, gchar *outbuf)
 {
   /* Unicode Standard 3.2, section 2.6, "By convention, diacritical marks
    * used by the Unicode Standard may be exhibited in (apparent) isolation
@@ -790,12 +790,12 @@ unichar_to_printable_utf8 (gunichar uc, gchar *outbuf)
    *               capable version of Pango) put it in there
    */
 
-  if (! unichar_validate (uc) || (! unichar_isgraph (uc) 
-      && unichar_type (uc) != G_UNICODE_PRIVATE_USE))
+  if (! gucharmap_unichar_validate (uc) || (! gucharmap_unichar_isgraph (uc) 
+      && gucharmap_unichar_type (uc) != G_UNICODE_PRIVATE_USE))
     return 0;
-  else if (unichar_type (uc) == G_UNICODE_COMBINING_MARK
-      || unichar_type (uc) == G_UNICODE_ENCLOSING_MARK
-      || unichar_type (uc) == G_UNICODE_NON_SPACING_MARK)
+  else if (gucharmap_unichar_type (uc) == G_UNICODE_COMBINING_MARK
+      || gucharmap_unichar_type (uc) == G_UNICODE_ENCLOSING_MARK
+      || gucharmap_unichar_type (uc) == G_UNICODE_NON_SPACING_MARK)
     {
       gint x;
 
@@ -814,7 +814,7 @@ unichar_to_printable_utf8 (gunichar uc, gchar *outbuf)
 
 
 /**
- * unichar_type:
+ * gucharmap_unichar_type:
  * @c: a Unicode character
  * 
  * Classifies a Unicode character by type.
@@ -822,7 +822,7 @@ unichar_to_printable_utf8 (gunichar uc, gchar *outbuf)
  * Return value: the type of the character.
  **/
 GUnicodeType
-unichar_type (gunichar uc)
+gucharmap_unichar_type (gunichar uc)
 {
   gint min = 0;
   gint mid;
@@ -847,7 +847,7 @@ unichar_type (gunichar uc)
 
 
 /**
- * unichar_isdefined:
+ * gucharmap_unichar_isdefined:
  * @uc: a Unicode character
  * 
  * Determines if a given character is assigned in the Unicode
@@ -856,14 +856,14 @@ unichar_type (gunichar uc)
  * Return value: %TRUE if the character has an assigned value
  **/
 gboolean
-unichar_isdefined (gunichar uc)
+gucharmap_unichar_isdefined (gunichar uc)
 {
-  return unichar_type (uc) != G_UNICODE_UNASSIGNED;
+  return gucharmap_unichar_type (uc) != G_UNICODE_UNASSIGNED;
 }
 
 
 /**
- * unichar_isgraph:
+ * gucharmap_unichar_isgraph:
  * @uc: a Unicode character
  * 
  * Determines whether a character is printable and not a space
@@ -875,9 +875,9 @@ unichar_isdefined (gunichar uc)
  * Return value: %TRUE if @c is printable unless it's a space
  **/
 gboolean
-unichar_isgraph (gunichar uc)
+gucharmap_unichar_isgraph (gunichar uc)
 {
-  GUnicodeType t = unichar_type (uc);
+  GUnicodeType t = gucharmap_unichar_type (uc);
 
   return (t != G_UNICODE_CONTROL
           && t != G_UNICODE_FORMAT

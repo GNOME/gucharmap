@@ -30,10 +30,8 @@
 #if !HAVE_GNOME
 # include <popt.h>
 #endif
-#include <gucharmap/charmap.h>
+#include <gucharmap/gucharmap.h>
 #include <gucharmap/gucharmap_intl.h>
-#include <gucharmap/gucharmap_window.h>
-#include <gucharmap/mini_fontsel.h>
 
 
 static gchar *new_font = NULL;
@@ -100,8 +98,8 @@ main (gint argc, gchar **argv)
   /* make the starting font 50% bigger than the default font */
   if (new_font == NULL) /* new_font could be set by command line option */
     {
-      orig_font = mini_font_selection_get_font_name (
-              MINI_FONT_SELECTION (GUCHARMAP_WINDOW (window)->fontsel));
+      orig_font = gucharmap_mini_font_selection_get_font_name (
+              GUCHARMAP_MINI_FONT_SELECTION (GUCHARMAP_WINDOW (window)->fontsel));
 
       font_desc = pango_font_description_from_string (orig_font);
       pango_font_description_set_size (
@@ -110,13 +108,13 @@ main (gint argc, gchar **argv)
       new_font = pango_font_description_to_string (font_desc);
     }
   /* this sends the changed signal: */
-  mini_font_selection_set_font_name (
-          MINI_FONT_SELECTION (GUCHARMAP_WINDOW (window)->fontsel), new_font);
+  gucharmap_mini_font_selection_set_font_name (
+          GUCHARMAP_MINI_FONT_SELECTION (GUCHARMAP_WINDOW (window)->fontsel), new_font);
 
   g_signal_connect (G_OBJECT (window), "destroy", 
                     G_CALLBACK (gtk_main_quit), NULL);
 
-  chartable_grab_focus (GUCHARMAP_WINDOW (window)->charmap->chartable);
+  gucharmap_table_grab_focus (GUCHARMAP_WINDOW (window)->charmap->chartable);
   gtk_widget_show_all (window);
 
   gtk_main ();

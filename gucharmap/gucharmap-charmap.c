@@ -25,12 +25,11 @@
 #include <gdk/gdkkeysyms.h>
 #include <stdlib.h>
 
-#include <charmap.h>
-#include <unicode_info.h>
-#include <gucharmap_intl.h>
-#include <gucharmap_marshal.h>
-#include <chartable_accessible.h>
-#include <chartable.h>
+#include <gucharmap/gucharmap.h>
+#include "gucharmap_intl.h"
+#include "gucharmap_marshal.h"
+#include "chartable_accessible.h"
+
 
 /* 0x100, a standard increment for paging unicode */
 #define BLOCK_SIZE 256
@@ -59,13 +58,13 @@ enum
 
 static gchar **caption_labels;
 
-static guint charmap_signals[NUM_SIGNALS] = { 0 };
+static guint gucharmap_charmap_signals[NUM_SIGNALS] = { 0 };
 
 
 static void
-status_message (Charmap *charmap, const gchar *message)
+status_message (GucharmapCharmap *charmap, const gchar *message)
 {
-  g_signal_emit (charmap, charmap_signals[STATUS_MESSAGE], 0, message);
+  g_signal_emit (charmap, gucharmap_charmap_signals[STATUS_MESSAGE], 0, message);
 }
 
 
@@ -87,9 +86,9 @@ make_array_of_char_descs (gunichar *ucs)
 
   for (i = 0;  ucs[i] != (gunichar)(-1);  i++)
     {
-      buf[unichar_to_printable_utf8 (ucs[i], buf)] = '\0';
+      buf[gucharmap_unichar_to_printable_utf8 (ucs[i], buf)] = '\0';
       descs[i] = g_strdup_printf ("\342\200\252%s [U+%4.4X %s]", buf, ucs[i], 
-                                  get_unicode_name (ucs[i]));
+                                  gucharmap_get_unicode_name (ucs[i]));
     }
 
   descs[i] = NULL;
@@ -254,32 +253,32 @@ set_caption_values_ltr (GtkTreeStore *tree_store,
 /* \342\200\254 is U+202C POP DIRECTIONAL FORMATTING */
 /* \342\200\256 is U+202E RIGHT-TO-LEFT OVERRIDE */
 static void
-set_caption (Charmap *charmap, gunichar uc)
+set_caption (GucharmapCharmap *charmap, gunichar uc)
 {
   guchar ubuf[7];
   gint i, n;
 
   /* codepoint and name */
-  if (charmap->caption_rows[CHARMAP_CAPTION_CHARACTER])
+  if (charmap->caption_rows[GUCHARMAP_CHARMAP_CAPTION_CHARACTER])
     {
       gchar *temp = g_strdup_printf ("\342\200\252U+%4.4X %s\342\200\254", uc, 
-                                     get_unicode_name (uc));
+                                     gucharmap_get_unicode_name (uc));
       set_caption_value (charmap->caption_model, 
-                         charmap->caption_rows[CHARMAP_CAPTION_CHARACTER],
+                         charmap->caption_rows[GUCHARMAP_CHARMAP_CAPTION_CHARACTER],
                          temp);
       g_free (temp);
     }
 
   /* category */
-  if (charmap->caption_rows[CHARMAP_CAPTION_CATEGORY])
+  if (charmap->caption_rows[GUCHARMAP_CHARMAP_CAPTION_CATEGORY])
     {
       set_caption_value (charmap->caption_model, 
-                         charmap->caption_rows[CHARMAP_CAPTION_CATEGORY],
-                         get_unicode_category_name (uc));
+                         charmap->caption_rows[GUCHARMAP_CHARMAP_CAPTION_CATEGORY],
+                         gucharmap_get_unicode_category_name (uc));
     }
 
   /* utf-8 */
-  if (charmap->caption_rows[CHARMAP_CAPTION_UTF8])
+  if (charmap->caption_rows[GUCHARMAP_CHARMAP_CAPTION_UTF8])
     {
       GString *gstemp = g_string_new ("\342\200\252");
       n = g_unichar_to_utf8 (uc, ubuf);
@@ -287,14 +286,14 @@ set_caption (Charmap *charmap, gunichar uc)
         g_string_append_printf (gstemp, "0x%2.2X ", ubuf[i]);
 
       set_caption_value (charmap->caption_model, 
-                         charmap->caption_rows[CHARMAP_CAPTION_UTF8],
+                         charmap->caption_rows[GUCHARMAP_CHARMAP_CAPTION_UTF8],
                          gstemp->str);
 
       g_string_free (gstemp, TRUE);
     }
 
   /* other representations (for C, html) */
-  if (charmap->caption_rows[CHARMAP_CAPTION_OTHER_REPS])
+  if (charmap->caption_rows[GUCHARMAP_CHARMAP_CAPTION_OTHER_REPS])
     {
       GString *gstemp = g_string_new ("\342\200\252");
       n = g_unichar_to_utf8 (uc, ubuf);
@@ -304,26 +303,26 @@ set_caption (Charmap *charmap, gunichar uc)
       g_string_append_printf (gstemp, "\342\200\252&#%d;\342\200\254", uc);
 
       set_caption_value (charmap->caption_model, 
-                         charmap->caption_rows[CHARMAP_CAPTION_OTHER_REPS],
+                         charmap->caption_rows[GUCHARMAP_CHARMAP_CAPTION_OTHER_REPS],
                          gstemp->str);
 
       g_string_free (gstemp, TRUE);
     }
 
   /* decomposition */
-  if (charmap->caption_rows[CHARMAP_CAPTION_DECOMPOSITION])
+  if (charmap->caption_rows[GUCHARMAP_CHARMAP_CAPTION_DECOMPOSITION])
     {
       GString *gstemp;
       gunichar *decomposition;
       gsize result_len;
       gchar buf[11];
 
-      decomposition = unicode_canonical_decomposition (uc,
-                                                       &result_len);
+      decomposition = gucharmap_unicode_canonical_decomposition (uc,
+                                                                 &result_len);
 
       gstemp = g_string_new ("");
 
-      buf[unichar_to_printable_utf8 (decomposition[0], buf)] = '\0';
+      buf[gucharmap_unichar_to_printable_utf8 (decomposition[0], buf)] = '\0';
       g_string_append_printf (
               gstemp, 
               "\342\200\256%s\342\200\254 [\342\200\252U+%4.4X\342\200\254]",
@@ -331,14 +330,14 @@ set_caption (Charmap *charmap, gunichar uc)
 
       for (i = 1;  i < result_len;  i++)
         {
-          buf[unichar_to_printable_utf8 (decomposition[i], buf)] = '\0';
+          buf[gucharmap_unichar_to_printable_utf8 (decomposition[i], buf)] = '\0';
           g_string_append_printf (gstemp, 
                                   " + \342\200\256%s\342\200\254 [\342\200\252U+%4.4X\342\200\254]", 
                                   buf, decomposition[i]);
         }
 
       set_caption_value (charmap->caption_model, 
-                         charmap->caption_rows[CHARMAP_CAPTION_DECOMPOSITION],
+                         charmap->caption_rows[GUCHARMAP_CHARMAP_CAPTION_DECOMPOSITION],
                          gstemp->str);
 
       g_free (decomposition);
@@ -347,56 +346,56 @@ set_caption (Charmap *charmap, gunichar uc)
 
 #if ENABLE_UNIHAN
   /* kDefinition */
-  if (charmap->caption_rows[CHARMAP_CAPTION_KDEFINITION])
+  if (charmap->caption_rows[GUCHARMAP_CHARMAP_CAPTION_KDEFINITION])
     set_caption_value_ltr (charmap->caption_model, 
-                           charmap->caption_rows[CHARMAP_CAPTION_KDEFINITION],
-                           get_unicode_kDefinition (uc));
+                           charmap->caption_rows[GUCHARMAP_CHARMAP_CAPTION_KDEFINITION],
+                           gucharmap_get_unicode_kDefinition (uc));
 
   /* kMandarin */
-  if (charmap->caption_rows[CHARMAP_CAPTION_KMANDARIN])
+  if (charmap->caption_rows[GUCHARMAP_CHARMAP_CAPTION_KMANDARIN])
     set_caption_value_ltr (charmap->caption_model, 
-                           charmap->caption_rows[CHARMAP_CAPTION_KMANDARIN],
-                           get_unicode_kMandarin (uc));
+                           charmap->caption_rows[GUCHARMAP_CHARMAP_CAPTION_KMANDARIN],
+                           gucharmap_get_unicode_kMandarin (uc));
 
   /* kJapaneseOn */
-  if (charmap->caption_rows[CHARMAP_CAPTION_KJAPANESEON])
+  if (charmap->caption_rows[GUCHARMAP_CHARMAP_CAPTION_KJAPANESEON])
     set_caption_value_ltr (charmap->caption_model, 
-                           charmap->caption_rows[CHARMAP_CAPTION_KJAPANESEON],
-                           get_unicode_kJapaneseOn (uc));
+                           charmap->caption_rows[GUCHARMAP_CHARMAP_CAPTION_KJAPANESEON],
+                           gucharmap_get_unicode_kJapaneseOn (uc));
 
   /* kJapaneseKun */
-  if (charmap->caption_rows[CHARMAP_CAPTION_KJAPANESEKUN])
+  if (charmap->caption_rows[GUCHARMAP_CHARMAP_CAPTION_KJAPANESEKUN])
     set_caption_value_ltr (charmap->caption_model, 
-                           charmap->caption_rows[CHARMAP_CAPTION_KJAPANESEKUN],
-                           get_unicode_kJapaneseKun (uc));
+                           charmap->caption_rows[GUCHARMAP_CHARMAP_CAPTION_KJAPANESEKUN],
+                           gucharmap_get_unicode_kJapaneseKun (uc));
 
   /* kCantonese */
-  if (charmap->caption_rows[CHARMAP_CAPTION_KCANTONESE])
+  if (charmap->caption_rows[GUCHARMAP_CHARMAP_CAPTION_KCANTONESE])
     set_caption_value_ltr (charmap->caption_model, 
-                           charmap->caption_rows[CHARMAP_CAPTION_KCANTONESE],
-                           get_unicode_kCantonese (uc));
+                           charmap->caption_rows[GUCHARMAP_CHARMAP_CAPTION_KCANTONESE],
+                           gucharmap_get_unicode_kCantonese (uc));
 
   /* kTang */
-  if (charmap->caption_rows[CHARMAP_CAPTION_KTANG])
+  if (charmap->caption_rows[GUCHARMAP_CHARMAP_CAPTION_KTANG])
     set_caption_value_ltr (charmap->caption_model, 
-                           charmap->caption_rows[CHARMAP_CAPTION_KTANG],
-                           get_unicode_kTang (uc));
+                           charmap->caption_rows[GUCHARMAP_CHARMAP_CAPTION_KTANG],
+                           gucharmap_get_unicode_kTang (uc));
 
   /* kKorean */
-  if (charmap->caption_rows[CHARMAP_CAPTION_KKOREAN])
+  if (charmap->caption_rows[GUCHARMAP_CHARMAP_CAPTION_KKOREAN])
     set_caption_value_ltr (charmap->caption_model, 
-                           charmap->caption_rows[CHARMAP_CAPTION_KKOREAN],
-                           get_unicode_kKorean (uc));
+                           charmap->caption_rows[GUCHARMAP_CHARMAP_CAPTION_KKOREAN],
+                           gucharmap_get_unicode_kKorean (uc));
 #endif /* #if ENABLE_UNIHAN */
 
 
   /* nameslist stars */
-  if (charmap->caption_rows[CHARMAP_CAPTION_STARS])
+  if (charmap->caption_rows[GUCHARMAP_CHARMAP_CAPTION_STARS])
     {
-      const gchar **stars = get_nameslist_stars (uc);
+      const gchar **stars = gucharmap_get_nameslist_stars (uc);
 
       set_caption_values_ltr (charmap->caption_model, 
-                              charmap->caption_rows[CHARMAP_CAPTION_STARS],
+                              charmap->caption_rows[GUCHARMAP_CHARMAP_CAPTION_STARS],
                               stars);
 
       if (stars)
@@ -404,12 +403,12 @@ set_caption (Charmap *charmap, gunichar uc)
     }
 
   /* nameslist pounds */
-  if (charmap->caption_rows[CHARMAP_CAPTION_POUNDS])
+  if (charmap->caption_rows[GUCHARMAP_CHARMAP_CAPTION_POUNDS])
     {
-      const gchar **pounds = get_nameslist_pounds (uc);
+      const gchar **pounds = gucharmap_get_nameslist_pounds (uc);
 
       set_caption_values_ltr (charmap->caption_model, 
-                              charmap->caption_rows[CHARMAP_CAPTION_POUNDS],
+                              charmap->caption_rows[GUCHARMAP_CHARMAP_CAPTION_POUNDS],
                               pounds);
 
       if (pounds)
@@ -417,12 +416,12 @@ set_caption (Charmap *charmap, gunichar uc)
     }
 
   /* nameslist equals */
-  if (charmap->caption_rows[CHARMAP_CAPTION_EQUALS])
+  if (charmap->caption_rows[GUCHARMAP_CHARMAP_CAPTION_EQUALS])
     {
-      const gchar **equals = get_nameslist_equals (uc);
+      const gchar **equals = gucharmap_get_nameslist_equals (uc);
 
       set_caption_values_ltr (charmap->caption_model, 
-                              charmap->caption_rows[CHARMAP_CAPTION_EQUALS],
+                              charmap->caption_rows[GUCHARMAP_CHARMAP_CAPTION_EQUALS],
                               equals);
 
       if (equals)
@@ -430,12 +429,12 @@ set_caption (Charmap *charmap, gunichar uc)
     }
 
   /* nameslist colons */
-  if (charmap->caption_rows[CHARMAP_CAPTION_COLONS])
+  if (charmap->caption_rows[GUCHARMAP_CHARMAP_CAPTION_COLONS])
     {
-      const gchar **colons = get_nameslist_colons (uc);
+      const gchar **colons = gucharmap_get_nameslist_colons (uc);
 
       set_caption_values_ltr (charmap->caption_model, 
-                              charmap->caption_rows[CHARMAP_CAPTION_COLONS],
+                              charmap->caption_rows[GUCHARMAP_CHARMAP_CAPTION_COLONS],
                               colons);
 
       if (colons)
@@ -443,15 +442,15 @@ set_caption (Charmap *charmap, gunichar uc)
     }
 
   /* nameslist exes */
-  if (charmap->caption_rows[CHARMAP_CAPTION_EXES])
+  if (charmap->caption_rows[GUCHARMAP_CHARMAP_CAPTION_EXES])
     {
-      gunichar *exes = get_nameslist_exes (uc);
+      gunichar *exes = gucharmap_get_nameslist_exes (uc);
       gchar **values;
 
       values = make_array_of_char_descs (exes);
 
       set_caption_values (charmap->caption_model, 
-                          charmap->caption_rows[CHARMAP_CAPTION_EXES],
+                          charmap->caption_rows[GUCHARMAP_CHARMAP_CAPTION_EXES],
                           (const gchar **) values);
 
       if (values)
@@ -465,7 +464,7 @@ set_caption (Charmap *charmap, gunichar uc)
 
 /* XXX: linear search (but N is small) */
 static GtkTreePath *
-find_block_index_tree_path (Charmap *charmap, gunichar uc)
+find_block_index_tree_path (GucharmapCharmap *charmap, gunichar uc)
 {
   gint i;
 
@@ -480,7 +479,7 @@ find_block_index_tree_path (Charmap *charmap, gunichar uc)
 /* selects the active block in the block selector tree view based on the
  * active character */
 static void
-set_active_block (Charmap *charmap, gunichar uc)
+set_active_block (GucharmapCharmap *charmap, gunichar uc)
 {
   GtkTreePath *parent = NULL;
   GtkTreePath *tree_path;
@@ -518,24 +517,24 @@ block_selection_changed (GtkTreeSelection *selection,
 {
   GtkTreeModel *model;
   GtkTreeIter iter;
-  Charmap *charmap;
+  GucharmapCharmap *charmap;
   gunichar uc_start;
 
-  charmap = CHARMAP (user_data);
+  charmap = GUCHARMAP_CHARMAP (user_data);
 
   if (gtk_tree_selection_get_selected (selection, &model, &iter))
     {
       gtk_tree_model_get (model, &iter, BLOCK_SELECTOR_UC_START, 
                           &uc_start, -1);
 
-      chartable_set_active_character (charmap->chartable, uc_start);
+      gucharmap_table_set_active_character (charmap->chartable, uc_start);
     }
 }
 
 
 /* makes the list of unicode blocks and code points */
 static GtkWidget *
-make_unicode_block_selector (Charmap *charmap)
+make_unicode_block_selector (GucharmapCharmap *charmap)
 {
   GtkWidget *scrolled_window;
   GtkTreeIter iter;
@@ -557,35 +556,35 @@ make_unicode_block_selector (Charmap *charmap)
           BLOCK_SELECTOR_NUM_COLUMNS, G_TYPE_STRING, 
           G_TYPE_UINT, G_TYPE_POINTER);
 
-  /* UNICHAR_MAX / BLOCK_SIZE is U+XXXX blocks, count_blocks is named blocks */
+  /* UNICHAR_MAX / BLOCK_SIZE is U+XXXX blocks, gucharmap_count_blocks is named blocks */
   charmap->block_index_size = (UNICHAR_MAX / BLOCK_SIZE) + 2
-                              + count_blocks (UNICHAR_MAX);
+                              + gucharmap_count_blocks (UNICHAR_MAX);
   charmap->block_index = g_malloc (charmap->block_index_size 
                                    * sizeof (BlockIndex));
   bi = 0;
 
-  for (i = 0;  unicode_blocks[i].start != (gunichar)(-1)
-               && unicode_blocks[i].start <= UNICHAR_MAX;  i++)
+  for (i = 0;  gucharmap_unicode_blocks[i].start != (gunichar)(-1)
+               && gucharmap_unicode_blocks[i].start <= UNICHAR_MAX;  i++)
     {
       gtk_tree_store_append (charmap->block_selector_model, &iter, NULL);
       gtk_tree_store_set (charmap->block_selector_model, &iter, 
-                          BLOCK_SELECTOR_LABEL, _(unicode_blocks[i].name),
-                          BLOCK_SELECTOR_UC_START, unicode_blocks[i].start,
-                          BLOCK_SELECTOR_UNICODE_BLOCK, &(unicode_blocks[i]),
+                          BLOCK_SELECTOR_LABEL, _(gucharmap_unicode_blocks[i].name),
+                          BLOCK_SELECTOR_UC_START, gucharmap_unicode_blocks[i].start,
+                          BLOCK_SELECTOR_UNICODE_BLOCK, &(gucharmap_unicode_blocks[i]),
                           -1);
-      charmap->block_index[bi].start = unicode_blocks[i].start;
+      charmap->block_index[bi].start = gucharmap_unicode_blocks[i].start;
       charmap->block_index[bi].tree_path = gtk_tree_model_get_path (
               GTK_TREE_MODEL (charmap->block_selector_model), &iter);
       bi++;
 
-      if (unicode_blocks[i].start % BLOCK_SIZE == 0)
-        uc = unicode_blocks[i].start;
+      if (gucharmap_unicode_blocks[i].start % BLOCK_SIZE == 0)
+        uc = gucharmap_unicode_blocks[i].start;
       else
-        uc = unicode_blocks[i].start + BLOCK_SIZE 
-            - (unicode_blocks[i].start % BLOCK_SIZE);
+        uc = gucharmap_unicode_blocks[i].start + BLOCK_SIZE 
+            - (gucharmap_unicode_blocks[i].start % BLOCK_SIZE);
 
       /* U+0000, U+0100, etc */
-      for ( ; uc >= unicode_blocks[i].start && uc <= unicode_blocks[i].end 
+      for ( ; uc >= gucharmap_unicode_blocks[i].start && uc <= gucharmap_unicode_blocks[i].end 
               && uc <= UNICHAR_MAX;  uc += BLOCK_SIZE) 
         {
           g_snprintf (buf, sizeof (buf), "U+%4.4X", uc);
@@ -636,7 +635,7 @@ make_unicode_block_selector (Charmap *charmap)
 
 
 static GtkWidget *
-make_caption (Charmap *charmap)
+make_caption (GucharmapCharmap *charmap)
 {
   GtkWidget *tree_view;
   GtkTreeViewColumn *column;
@@ -684,7 +683,7 @@ make_caption (Charmap *charmap)
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
                                   GTK_POLICY_ALWAYS, GTK_POLICY_NEVER);
 
-  charmap_show_caption (charmap, CHARMAP_CAPTION_CHARACTER);
+  gucharmap_charmap_show_caption (charmap, GUCHARMAP_CHARMAP_CAPTION_CHARACTER);
 
   gtk_widget_show_all (scrolled_window);
   gtk_widget_hide (scrolled_window);
@@ -694,20 +693,20 @@ make_caption (Charmap *charmap)
 
 
 void
-charmap_class_init (CharmapClass *clazz)
+gucharmap_charmap_class_init (GucharmapCharmapClass *clazz)
 {
   clazz->status_message = NULL;
 
-  charmap_signals[STATUS_MESSAGE] =
-      g_signal_new ("status-message", charmap_get_type (), G_SIGNAL_RUN_FIRST,
-                    G_STRUCT_OFFSET (CharmapClass, status_message),
+  gucharmap_charmap_signals[STATUS_MESSAGE] =
+      g_signal_new ("status-message", gucharmap_charmap_get_type (), G_SIGNAL_RUN_FIRST,
+                    G_STRUCT_OFFSET (GucharmapCharmapClass, status_message),
                     NULL, NULL, gucharmap_marshal_VOID__STRING, G_TYPE_NONE, 
 		    1, G_TYPE_STRING);
 }
 
 
 void
-active_char_set (GtkWidget *widget, gunichar uc, Charmap *charmap)
+active_char_set (GtkWidget *widget, gunichar uc, GucharmapCharmap *charmap)
 {
   set_caption (charmap, uc);
   set_active_block (charmap, uc);
@@ -716,7 +715,7 @@ active_char_set (GtkWidget *widget, gunichar uc, Charmap *charmap)
 
 /* does all the initial construction */
 void
-charmap_init (Charmap *charmap)
+gucharmap_charmap_init (GucharmapCharmap *charmap)
 {
   GtkWidget *hpaned;
   GtkWidget *vbox;
@@ -728,25 +727,25 @@ charmap_init (Charmap *charmap)
   atk_object_set_name (accessib, _("Character Map"));
 
   /* init the caption labels */
-  caption_labels = g_malloc (CHARMAP_CAPTION_COUNT * sizeof (gchar *));
-  caption_labels[CHARMAP_CAPTION_CHARACTER] =  _("Character"),
-  caption_labels[CHARMAP_CAPTION_CATEGORY] =  _("Unicode category"), 
-  caption_labels[CHARMAP_CAPTION_DECOMPOSITION] =  _("Canonical decomposition"), 
-  caption_labels[CHARMAP_CAPTION_UTF8] =  _("UTF-8"), 
-  caption_labels[CHARMAP_CAPTION_OTHER_REPS] =  _("Other representations"), 
-  caption_labels[CHARMAP_CAPTION_EXES] = _("See also");
-  caption_labels[CHARMAP_CAPTION_COLONS] = _("Equivalents");
-  caption_labels[CHARMAP_CAPTION_EQUALS] = _("Alias names");
-  caption_labels[CHARMAP_CAPTION_POUNDS] = _("Approximate equivalents");
-  caption_labels[CHARMAP_CAPTION_STARS] = _("Notes");
+  caption_labels = g_malloc (GUCHARMAP_CHARMAP_CAPTION_COUNT * sizeof (gchar *));
+  caption_labels[GUCHARMAP_CHARMAP_CAPTION_CHARACTER] =  _("Character"),
+  caption_labels[GUCHARMAP_CHARMAP_CAPTION_CATEGORY] =  _("Unicode category"), 
+  caption_labels[GUCHARMAP_CHARMAP_CAPTION_DECOMPOSITION] =  _("Canonical decomposition"), 
+  caption_labels[GUCHARMAP_CHARMAP_CAPTION_UTF8] =  _("UTF-8"), 
+  caption_labels[GUCHARMAP_CHARMAP_CAPTION_OTHER_REPS] =  _("Other representations"), 
+  caption_labels[GUCHARMAP_CHARMAP_CAPTION_EXES] = _("See also");
+  caption_labels[GUCHARMAP_CHARMAP_CAPTION_COLONS] = _("Equivalents");
+  caption_labels[GUCHARMAP_CHARMAP_CAPTION_EQUALS] = _("Alias names");
+  caption_labels[GUCHARMAP_CHARMAP_CAPTION_POUNDS] = _("Approximate equivalents");
+  caption_labels[GUCHARMAP_CHARMAP_CAPTION_STARS] = _("Notes");
 #if ENABLE_UNIHAN
-  caption_labels[CHARMAP_CAPTION_KDEFINITION] =  _("CJK ideograph definition"), 
-  caption_labels[CHARMAP_CAPTION_KMANDARIN] =  _("Mandarin pronunciation"), 
-  caption_labels[CHARMAP_CAPTION_KJAPANESEON] =  _("Japanese On pronunciation"), 
-  caption_labels[CHARMAP_CAPTION_KJAPANESEKUN] =  _("Japanese Kun pronunciation"), 
-  caption_labels[CHARMAP_CAPTION_KCANTONESE] =  _("Cantonese pronunciation"), 
-  caption_labels[CHARMAP_CAPTION_KTANG] =  _("Tang pronunciation"), 
-  caption_labels[CHARMAP_CAPTION_KKOREAN] =  _("Korean pronunciation"), 
+  caption_labels[GUCHARMAP_CHARMAP_CAPTION_KDEFINITION] =  _("CJK ideograph definition"), 
+  caption_labels[GUCHARMAP_CHARMAP_CAPTION_KMANDARIN] =  _("Mandarin pronunciation"), 
+  caption_labels[GUCHARMAP_CHARMAP_CAPTION_KJAPANESEON] =  _("Japanese On pronunciation"), 
+  caption_labels[GUCHARMAP_CHARMAP_CAPTION_KJAPANESEKUN] =  _("Japanese Kun pronunciation"), 
+  caption_labels[GUCHARMAP_CHARMAP_CAPTION_KCANTONESE] =  _("Cantonese pronunciation"), 
+  caption_labels[GUCHARMAP_CHARMAP_CAPTION_KTANG] =  _("Tang pronunciation"), 
+  caption_labels[GUCHARMAP_CHARMAP_CAPTION_KKOREAN] =  _("Korean pronunciation"), 
 #endif
 
   gtk_box_set_spacing (GTK_BOX (charmap), 6);
@@ -754,7 +753,7 @@ charmap_init (Charmap *charmap)
 
   /* vbox for charmap and caption */
   vbox = gtk_vbox_new (FALSE, 6);
-  charmap->chartable = CHARTABLE (chartable_new ());
+  charmap->chartable = GUCHARMAP_TABLE (gucharmap_table_new ());
   g_signal_connect (G_OBJECT (charmap->chartable), "set-active-char", 
                     G_CALLBACK (active_char_set), charmap);
   g_signal_connect_swapped (G_OBJECT (charmap->chartable), "status-message", 
@@ -781,10 +780,10 @@ charmap_init (Charmap *charmap)
   gtk_paned_pack2 (GTK_PANED (hpaned), vbox, TRUE, TRUE);
   /* done with panes */
 
-  /* start packing stuff in the outer vbox (the Charmap itself) */
+  /* start packing stuff in the outer vbox (the GucharmapCharmap itself) */
   gtk_box_pack_start (GTK_BOX (charmap), hpaned, TRUE, TRUE, 0);
   gtk_widget_show (hpaned);
-  /* end packing stuff in the outer vbox (the Charmap itself) */
+  /* end packing stuff in the outer vbox (the GucharmapCharmap itself) */
 
   set_caption (charmap, charmap->chartable->active_char);
   set_active_block (charmap, charmap->chartable->active_char);
@@ -792,56 +791,56 @@ charmap_init (Charmap *charmap)
 
 
 GtkWidget *
-charmap_new (void)
+gucharmap_charmap_new (void)
 {
-  return GTK_WIDGET (g_object_new (charmap_get_type (), NULL));
+  return GTK_WIDGET (g_object_new (gucharmap_charmap_get_type (), NULL));
 }
 
 
 GType
-charmap_get_type (void)
+gucharmap_charmap_get_type (void)
 {
-  static GType charmap_type = 0;
+  static GType gucharmap_charmap_type = 0;
 
-  if (!charmap_type)
+  if (!gucharmap_charmap_type)
     {
-      static const GTypeInfo charmap_info =
+      static const GTypeInfo gucharmap_charmap_info =
       {
-        sizeof (CharmapClass),
+        sizeof (GucharmapCharmapClass),
         NULL,           /* base_init */
         NULL,           /* base_finalize */
-        (GClassInitFunc) charmap_class_init,
+        (GClassInitFunc) gucharmap_charmap_class_init,
         NULL,           /* class_finalize */
         NULL,           /* class_data */
-        sizeof (Charmap),
+        sizeof (GucharmapCharmap),
         0,              /* n_preallocs */
-        (GInstanceInitFunc) charmap_init,
+        (GInstanceInitFunc) gucharmap_charmap_init,
       };
 
-      charmap_type = g_type_register_static (GTK_TYPE_VBOX, "Charmap", 
-                                             &charmap_info, 0);
+      gucharmap_charmap_type = g_type_register_static (GTK_TYPE_VBOX, "GucharmapCharmap", 
+                                             &gucharmap_charmap_info, 0);
     }
 
-  return charmap_type;
+  return gucharmap_charmap_type;
 }
 
 
 void 
-charmap_set_font (Charmap *charmap, const gchar *font_name)
+gucharmap_charmap_set_font (GucharmapCharmap *charmap, const gchar *font_name)
 {
-  chartable_set_font (charmap->chartable, font_name);
+  gucharmap_table_set_font (charmap->chartable, font_name);
 }
 
 
 void
-charmap_identify_clipboard (Charmap *charmap, GtkClipboard *clipboard)
+gucharmap_charmap_identify_clipboard (GucharmapCharmap *charmap, GtkClipboard *clipboard)
 {
-  chartable_identify_clipboard (charmap->chartable, clipboard);
+  gucharmap_table_identify_clipboard (charmap->chartable, clipboard);
 }
 
 
 void 
-charmap_expand_block_selector (Charmap *charmap)
+gucharmap_charmap_expand_block_selector (GucharmapCharmap *charmap)
 {
   gtk_tree_view_expand_all (GTK_TREE_VIEW (charmap->block_selector_view));
 
@@ -851,7 +850,7 @@ charmap_expand_block_selector (Charmap *charmap)
 
 
 void 
-charmap_collapse_block_selector (Charmap *charmap)
+gucharmap_charmap_collapse_block_selector (GucharmapCharmap *charmap)
 {
   gtk_tree_view_collapse_all (GTK_TREE_VIEW (charmap->block_selector_view));
 
@@ -861,13 +860,13 @@ charmap_collapse_block_selector (Charmap *charmap)
 
 
 void
-charmap_go_to_character (Charmap *charmap, gunichar uc)
+gucharmap_charmap_go_to_character (GucharmapCharmap *charmap, gunichar uc)
 {
   gchar *message;
 
   if (uc >= 0 && uc <= UNICHAR_MAX)
     {
-      chartable_set_active_character (charmap->chartable, uc);
+      gucharmap_table_set_active_character (charmap->chartable, uc);
       message = g_strdup_printf ("Jumped to U+%4.4X.", uc);
       status_message (charmap, message);
       g_free (message);
@@ -876,44 +875,44 @@ charmap_go_to_character (Charmap *charmap, gunichar uc)
 
 
 /* direction is +1 (forward) or -1 (backward) */
-CharmapSearchResult
-charmap_search (Charmap *charmap, 
+GucharmapCharmapSearchResult
+gucharmap_charmap_search (GucharmapCharmap *charmap, 
                 const gchar *search_text, 
                 gint direction)
 {
   gunichar uc;
-  CharmapSearchResult result;
+  GucharmapCharmapSearchResult result;
 
   g_assert (direction == -1 || direction == 1);
 
   if (search_text[0] == '\0')
-    return CHARMAP_NOTHING_TO_SEARCH_FOR;
+    return GUCHARMAP_CHARMAP_NOTHING_TO_SEARCH_FOR;
   
-  uc = find_substring_match (charmap->chartable->active_char, 
+  uc = gucharmap_find_substring_match (charmap->chartable->active_char, 
                              search_text, direction);
   if (uc != (gunichar)(-1) && uc <= UNICHAR_MAX)
     {
       if ((direction == 1 && uc <= charmap->chartable->active_char)
           || (direction == -1 && uc >= charmap->chartable->active_char))
-        result = CHARMAP_WRAPPED;
+        result = GUCHARMAP_CHARMAP_WRAPPED;
       else
-        result = CHARMAP_FOUND;
+        result = GUCHARMAP_CHARMAP_FOUND;
 
-      chartable_set_active_character (charmap->chartable, uc);
+      gucharmap_table_set_active_character (charmap->chartable, uc);
     }
   else
-    result = CHARMAP_NOT_FOUND;
+    result = GUCHARMAP_CHARMAP_NOT_FOUND;
 
   return result;
 }
 
 
-/* captions appear in numerical (by CharmapCaption value) order */
+/* captions appear in numerical (by GucharmapCharmapCaption value) order */
 static gint
-compute_position_to_insert_at (Charmap *charmap, 
-                               CharmapCaption caption_id)
+compute_position_to_insert_at (GucharmapCharmap *charmap, 
+                               GucharmapCharmapCaption caption_id)
 {
-  CharmapCaption i;
+  GucharmapCharmapCaption i;
   gint position;
 
   for (i = 0, position = 0;  i < caption_id;  i++)
@@ -926,7 +925,7 @@ compute_position_to_insert_at (Charmap *charmap,
 
 
 void
-charmap_show_caption (Charmap *charmap, CharmapCaption caption_id)
+gucharmap_charmap_show_caption (GucharmapCharmap *charmap, GucharmapCharmapCaption caption_id)
 {
   GtkTreeIter iter;
   GtkTreeModel *model;
@@ -955,7 +954,7 @@ charmap_show_caption (Charmap *charmap, CharmapCaption caption_id)
 
 
 void
-charmap_hide_caption (Charmap *charmap, CharmapCaption caption_id)
+gucharmap_charmap_hide_caption (GucharmapCharmap *charmap, GucharmapCharmapCaption caption_id)
 {
   GtkTreeIter iter;
   GtkTreeModel *model;
@@ -976,21 +975,21 @@ charmap_hide_caption (Charmap *charmap, CharmapCaption caption_id)
 
 
 void
-charmap_zoom_enable (Charmap *charmap)
+gucharmap_charmap_zoom_enable (GucharmapCharmap *charmap)
 {
-  chartable_zoom_enable (charmap->chartable);
+  gucharmap_table_zoom_enable (charmap->chartable);
 }
 
 
 void
-charmap_zoom_disable (Charmap *charmap)
+gucharmap_charmap_zoom_disable (GucharmapCharmap *charmap)
 {
-  chartable_zoom_disable (charmap->chartable);
+  gucharmap_table_zoom_disable (charmap->chartable);
 }
 
 
-Chartable *
-charmap_get_chartable (Charmap *charmap)
+GucharmapTable *
+gucharmap_charmap_get_chartable (GucharmapCharmap *charmap)
 {
   return charmap->chartable;
 }

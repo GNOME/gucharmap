@@ -28,8 +28,8 @@
 #include <gtk/gtk.h>
 #include <gmodule.h>
 #include <string.h>
-#include <gucharmap/gucharmap_window.h>
-#include <gucharmap/gucharmap_intl.h>
+#include <gucharmap/gucharmap.h>
+#include "gucharmap_intl.h"
 
 
 GType type_imgucharmap = 0;
@@ -37,7 +37,7 @@ GucharmapWindow *the_guw = NULL;
 
 
 static void
-chartable_activate (Chartable *chartable, 
+gucharmap_table_activate (GucharmapTable	 *chartable, 
                     gunichar uc, 
                     GtkIMContextSimple *im_context)
 {
@@ -72,7 +72,7 @@ connect_handler (GucharmapWindow *guw, GtkIMContext *im_context)
   handler_id = g_malloc (sizeof (gulong));
 
   *handler_id = g_signal_connect (guw->charmap->chartable, "activate", 
-                                  G_CALLBACK (chartable_activate), im_context);
+                                  G_CALLBACK (gucharmap_table_activate), im_context);
 
   g_object_set_data (G_OBJECT (gdk_display_get_default ()),
                      "gucharmap-activate-handler-id", handler_id);

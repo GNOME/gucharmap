@@ -1,6 +1,6 @@
 /* $Id$ */
 /*
- * Copyright (c) 2003  Noah Levitt <nlevitt@users.sourceforge.net>
+ * Copyright (c) 2003 Noah Levitt
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -17,10 +17,14 @@
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  */
 
+#if HAVE_CONFIG_H
+# include "config.h"
+#endif
+
 #include <gtk/gtk.h>
 #include <stdlib.h>
 #include <string.h>
-#include "mini_fontsel.h"
+#include <gucharmap/gucharmap-mini-fontsel.h>
 #include "gucharmap_intl.h"
 #include "gucharmap_marshal.h"
 
@@ -37,7 +41,7 @@ enum
   NUM_SIGNALS
 };
 
-static guint mini_font_selection_signals [NUM_SIGNALS] = { 0 };
+static guint gucharmap_mini_font_selection_signals[NUM_SIGNALS] = { 0 };
 
 
 /* looks up PangoFontFamily by family name, since no such function is in
@@ -57,7 +61,7 @@ cmp_families (const void *a, const void *b)
 
 /* also initializes the hash table pango_font_families */
 static void
-show_available_fonts (MiniFontSelection *fontsel)
+show_available_fonts (GucharmapMiniFontSelection *fontsel)
 {
   PangoFontFamily **families;
   GList *family_names = NULL;
@@ -141,10 +145,10 @@ faces_sort_func (const void *a, const void *b)
 
 
 /* This fills the font style list with all the possible style combinations
-   for the current font family. 
-   Also creates fontsel->available_faces. */
+ * for the current font family. 
+ * Also creates fontsel->available_faces. */
 static void
-show_available_styles (MiniFontSelection *fontsel)
+show_available_styles (GucharmapMiniFontSelection *fontsel)
 {
   PangoFontFace **faces;
   PangoFontFamily *family;
@@ -181,18 +185,20 @@ show_available_styles (MiniFontSelection *fontsel)
 
 
 static void
-set_family (MiniFontSelection *fontsel, const gchar *new_family)
+set_family (GucharmapMiniFontSelection *fontsel, 
+            const gchar *new_family)
 {
   pango_font_description_set_family (fontsel->font_desc, new_family);
 
   show_available_styles (fontsel);
 
-  g_signal_emit (fontsel, mini_font_selection_signals[CHANGED], 0);
+  g_signal_emit (fontsel, gucharmap_mini_font_selection_signals[CHANGED], 0);
 }
 
 
 static void 
-family_changed (GtkWidget *widget, MiniFontSelection *fontsel)
+family_changed (GtkWidget *widget, 
+                GucharmapMiniFontSelection *fontsel)
 {
   const gchar *new_family;
 
@@ -207,7 +213,8 @@ family_changed (GtkWidget *widget, MiniFontSelection *fontsel)
 
 
 static void
-set_style (MiniFontSelection *fontsel, const gchar *new_style)
+set_style (GucharmapMiniFontSelection *fontsel, 
+           const gchar *new_style)
 {
   PangoFontFace *face;
   gint size;
@@ -221,12 +228,13 @@ set_style (MiniFontSelection *fontsel, const gchar *new_style)
   fontsel->font_desc = pango_font_face_describe (face);
   pango_font_description_set_size (fontsel->font_desc, size);
 
-  g_signal_emit (fontsel, mini_font_selection_signals[CHANGED], 0);
+  g_signal_emit (fontsel, gucharmap_mini_font_selection_signals[CHANGED], 0);
 }
 
 
 static void 
-style_changed (GtkWidget *widget, MiniFontSelection *fontsel)
+style_changed (GtkWidget *widget, 
+               GucharmapMiniFontSelection *fontsel)
 {
   const gchar *new_style;
 
@@ -242,17 +250,19 @@ style_changed (GtkWidget *widget, MiniFontSelection *fontsel)
 
 /* size is in points */
 static void
-set_size (MiniFontSelection *fontsel, gint size)
+set_size (GucharmapMiniFontSelection *fontsel, 
+          gint size)
 {
   pango_font_description_set_size (
 	  fontsel->font_desc, 
 	  PANGO_SCALE * CLAMP (size, MIN_FONT_SIZE, MAX_FONT_SIZE));
-  g_signal_emit (fontsel, mini_font_selection_signals[CHANGED], 0);
+  g_signal_emit (fontsel, gucharmap_mini_font_selection_signals[CHANGED], 0);
 }
 
 
 static void 
-size_changed (GtkAdjustment *adjustment, MiniFontSelection *fontsel)
+size_changed (GtkAdjustment *adjustment, 
+              GucharmapMiniFontSelection *fontsel)
 {
   if ((gint) gtk_adjustment_get_value (adjustment) 
       != pango_font_description_get_size (fontsel->font_desc))
@@ -264,7 +274,7 @@ static void
 realize (GtkWidget *widget)
 {
   AtkObject *accessib;
-  MiniFontSelection *fontsel = MINI_FONT_SELECTION (widget);
+  GucharmapMiniFontSelection *fontsel = GUCHARMAP_MINI_FONT_SELECTION (widget);
 
   accessib = gtk_widget_get_accessible (GTK_WIDGET (fontsel));
   atk_object_set_name (accessib, _("Font"));
@@ -318,21 +328,21 @@ realize (GtkWidget *widget)
 
 
 void
-mini_font_selection_class_init (MiniFontSelectionClass *clazz)
+gucharmap_mini_font_selection_class_init (GucharmapMiniFontSelectionClass *clazz)
 {
   clazz->changed = NULL;
 
-  mini_font_selection_signals[CHANGED] =
-      g_signal_new ("changed", mini_font_selection_get_type (), 
+  gucharmap_mini_font_selection_signals[CHANGED] =
+      g_signal_new ("changed", gucharmap_mini_font_selection_get_type (), 
 		    G_SIGNAL_RUN_FIRST,
-                    G_STRUCT_OFFSET (MiniFontSelectionClass, changed),
+                    G_STRUCT_OFFSET (GucharmapMiniFontSelectionClass, changed),
                     NULL, NULL, gucharmap_marshal_VOID__VOID,
                     G_TYPE_NONE, 0);
 }
 
 
 void
-mini_font_selection_init (MiniFontSelection *fontsel)
+gucharmap_mini_font_selection_init (GucharmapMiniFontSelection *fontsel)
 {
   fontsel->available_faces = NULL;
   fontsel->realized = FALSE;
@@ -356,44 +366,44 @@ mini_font_selection_init (MiniFontSelection *fontsel)
 
 
 GtkWidget *
-mini_font_selection_new ()
+gucharmap_mini_font_selection_new ()
 {
-  return GTK_WIDGET (g_object_new (mini_font_selection_get_type (), NULL));
+  return GTK_WIDGET (g_object_new (gucharmap_mini_font_selection_get_type (), NULL));
 }
 
 
 GType
-mini_font_selection_get_type ()
+gucharmap_mini_font_selection_get_type ()
 {
-  static GType mini_font_selection_type = 0;
+  static GType gucharmap_mini_font_selection_type = 0;
 
-  if (mini_font_selection_type == 0)
+  if (gucharmap_mini_font_selection_type == 0)
     {
-      static const GTypeInfo mini_font_selection_info =
+      static const GTypeInfo gucharmap_mini_font_selection_info =
       {
-        sizeof (MiniFontSelectionClass),
+        sizeof (GucharmapMiniFontSelectionClass),
         NULL,           /* base_init */
         NULL,           /* base_finalize */
-        (GClassInitFunc) mini_font_selection_class_init,
+        (GClassInitFunc) gucharmap_mini_font_selection_class_init,
         NULL,           /* class_finalize */
         NULL,           /* class_data */
-        sizeof (MiniFontSelection),
+        sizeof (GucharmapMiniFontSelection),
         0,              /* n_preallocs */
-        (GInstanceInitFunc) mini_font_selection_init
+        (GInstanceInitFunc) gucharmap_mini_font_selection_init
       };
 
-      mini_font_selection_type = g_type_register_static (
-              GTK_TYPE_HBOX, "MiniFontSelection", 
-              &mini_font_selection_info, 0);
+      gucharmap_mini_font_selection_type = g_type_register_static (
+              GTK_TYPE_HBOX, "GucharmapMiniFontSelection", 
+              &gucharmap_mini_font_selection_info, 0);
     }
 
-  return mini_font_selection_type;
+  return gucharmap_mini_font_selection_type;
 }
 
 
 /* XXX: should do error checking */
 gboolean 
-mini_font_selection_set_font_name (MiniFontSelection *fontsel,
+gucharmap_mini_font_selection_set_font_name (GucharmapMiniFontSelection *fontsel,
                                    const gchar *fontname)
 {
   pango_font_description_free (fontsel->font_desc);
@@ -413,7 +423,7 @@ mini_font_selection_set_font_name (MiniFontSelection *fontsel,
           GTK_ADJUSTMENT (fontsel->size_adj), 
           pango_font_description_get_size (fontsel->font_desc) / PANGO_SCALE);
 
-  g_signal_emit (fontsel, mini_font_selection_signals[CHANGED], 0);
+  g_signal_emit (fontsel, gucharmap_mini_font_selection_signals[CHANGED], 0);
 
   return TRUE;
 }
@@ -421,7 +431,7 @@ mini_font_selection_set_font_name (MiniFontSelection *fontsel,
 
 
 gchar * 
-mini_font_selection_get_font_name (MiniFontSelection *fontsel)
+gucharmap_mini_font_selection_get_font_name (GucharmapMiniFontSelection *fontsel)
 {
   return pango_font_description_to_string (fontsel->font_desc);
 }
@@ -429,7 +439,7 @@ mini_font_selection_get_font_name (MiniFontSelection *fontsel)
 
 /* returns font size in points */
 gint
-mini_font_selection_get_font_size (MiniFontSelection *fontsel)
+gucharmap_mini_font_selection_get_font_size (GucharmapMiniFontSelection *fontsel)
 {
   return pango_font_description_get_size (fontsel->font_desc) / PANGO_SCALE;
 }
@@ -437,7 +447,7 @@ mini_font_selection_get_font_size (MiniFontSelection *fontsel)
 
 /* size in points */
 void
-mini_font_selection_set_font_size (MiniFontSelection *fontsel, gint size)
+gucharmap_mini_font_selection_set_font_size (GucharmapMiniFontSelection *fontsel, gint size)
 {
   gtk_adjustment_set_value (GTK_ADJUSTMENT (fontsel->size_adj), size);
   set_size (fontsel, size);
