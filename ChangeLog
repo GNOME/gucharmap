@@ -1,5 +1,11 @@
 2003-08-01  Noah Levitt
 
+	* gucharmap-table.c: Get rid of the zoom window on key-release of
+	GDK_ISO_Next_Group or GDK_ISO_Prev_Group, since Shift may send these
+	keysyms on release if the grp(shift_toggle) xkb setting is on.
+
+2003-08-01  Noah Levitt
+
 	* gucharmap/gucharmap-charmap.c: Fix reckless casting between gunichar
 	and gpointer (use GPOINTER_TO_UINT and GUINT_TO_POINTER).
 
