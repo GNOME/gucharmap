@@ -155,6 +155,45 @@ set_caption (Charmap *charmap)
 }
 
 
+/* selects the active block in the block selector tree view */
+/* XXX: this is inefficient */
+static void
+set_active_block (Charmap *charmap)
+{
+  gboolean valid;
+  GtkTreeIter iter1;
+  GtkTreeIter iter2;
+  gunichar uc_start;
+
+  valid = gtk_tree_model_get_iter_first (
+          GTK_TREE_MODEL (charmap->block_selector_model), &iter2);
+  while (valid)
+    {
+      gtk_tree_model_get (GTK_TREE_MODEL (charmap->block_selector_model), 
+                          &iter2, 1, &uc_start, -1);
+
+      if (uc_start > charmap->active_char)
+        {
+          g_signal_handler_block (G_OBJECT (charmap->block_selection), 
+                                  charmap->block_selection_changed_handler_id);
+
+          gtk_tree_selection_select_iter (charmap->block_selection, &iter1);
+
+          g_signal_handler_unblock (
+                  G_OBJECT (charmap->block_selection),
+                  charmap->block_selection_changed_handler_id);
+
+          return;
+        }
+
+      iter1 = iter2;
+
+      valid = gtk_tree_model_iter_next (
+              GTK_TREE_MODEL (charmap->block_selector_model), &iter2);
+    }
+}
+
+
 static gint 
 calculate_square_dimension_x (PangoFontMetrics *font_metrics)
 {
@@ -254,8 +293,9 @@ draw_tabulus_pixmap (Charmap *charmap)
                     (square_width+1) * col + 1, (square_height+1) * row + 1, 
                     square_width, square_height);
 
-            /* XXX: seems like an ok place to set the caption, no? */
+            /* XXX: ok place to set the caption and active block? */
             set_caption (charmap);
+            set_active_block (charmap);
           }
         else 
           gc = charmap->tabulus->style->text_gc[GTK_STATE_NORMAL];
@@ -692,13 +732,11 @@ static GtkWidget *
 make_unicode_block_selector (Charmap *charmap)
 {
   GtkWidget *scrolled_window;
-  GtkTreeStore *model;
   GtkTreeIter iter;
   GtkTreeIter child_iter;
   GtkWidget *tree_view;
   GtkCellRenderer *cell;
   GtkTreeViewColumn *column;
-  GtkTreeSelection *selection;
   gchar buf[12];
   gunichar uc;
   gint i;
@@ -709,13 +747,14 @@ make_unicode_block_selector (Charmap *charmap)
   gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolled_window), 
                                        GTK_SHADOW_ETCHED_IN);
 
-  model = gtk_tree_store_new (2, G_TYPE_STRING, G_TYPE_UINT);
+  charmap->block_selector_model = gtk_tree_store_new (2, G_TYPE_STRING, 
+                                                      G_TYPE_UINT);
 
   for (i = 0, uc = 0;  unicode_blocks[i].start != (gunichar)(-1)
                && uc <= UNICHAR_MAX;  i++)
     {
-      gtk_tree_store_append (model, &iter, NULL);
-      gtk_tree_store_set (model, &iter, 
+      gtk_tree_store_append (charmap->block_selector_model, &iter, NULL);
+      gtk_tree_store_set (charmap->block_selector_model, &iter, 
                           0, unicode_blocks[i].name, 
                           1, unicode_blocks[i].start,
                           -1);
@@ -724,13 +763,17 @@ make_unicode_block_selector (Charmap *charmap)
                uc += CHARMAP_ROWS * CHARMAP_COLS) 
         {
           g_snprintf (buf, 12, "U+%4.4X", uc);
-	  gtk_tree_store_append (model, &child_iter, &iter);
-	  gtk_tree_store_set (model, &child_iter, 0, buf, 1, uc, -1);
+	  gtk_tree_store_append (charmap->block_selector_model, 
+                                 &child_iter, &iter);
+	  gtk_tree_store_set (charmap->block_selector_model, 
+                              &child_iter, 0, buf, 1, uc, -1);
         }
     }
 
-  tree_view = gtk_tree_view_new_with_model (GTK_TREE_MODEL (model));
-  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (tree_view));
+  tree_view = gtk_tree_view_new_with_model (
+          GTK_TREE_MODEL (charmap->block_selector_model));
+  charmap->block_selection = gtk_tree_view_get_selection (
+          GTK_TREE_VIEW (tree_view));
   gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (tree_view), FALSE);
 
   cell = gtk_cell_renderer_text_new ();
@@ -740,9 +783,10 @@ make_unicode_block_selector (Charmap *charmap)
   gtk_tree_view_append_column (GTK_TREE_VIEW (tree_view),
                                GTK_TREE_VIEW_COLUMN (column));
 
-  gtk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
-  g_signal_connect (G_OBJECT (selection), "changed", 
-                    G_CALLBACK (block_selection_changed), charmap);
+  gtk_tree_selection_set_mode (charmap->block_selection, GTK_SELECTION_BROWSE);
+  charmap->block_selection_changed_handler_id = g_signal_connect (
+          G_OBJECT (charmap->block_selection), "changed", 
+          G_CALLBACK (block_selection_changed), charmap);
 
   gtk_container_add (GTK_CONTAINER (scrolled_window), tree_view);
 

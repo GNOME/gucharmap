@@ -65,6 +65,10 @@ struct _Charmap
   Caption *caption;
 
   GtkWidget *text_to_copy;
+
+  GtkTreeSelection *block_selection;
+  GtkTreeStore *block_selector_model;
+  gulong block_selection_changed_handler_id; 
 };
 
 
