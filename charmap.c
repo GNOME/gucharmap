@@ -815,8 +815,8 @@ make_unicode_block_selector (Charmap *charmap)
           BLOCK_SELECTOR_NUM_COLUMNS, G_TYPE_STRING, 
           G_TYPE_UINT, G_TYPE_POINTER);
 
-  for (i = 0, uc = 0;  unicode_blocks[i].start != (gunichar)(-1)
-               && uc <= UNICHAR_MAX;  i++)
+  for (i = 0;  unicode_blocks[i].start != (gunichar)(-1)
+               && unicode_blocks[i].start <= UNICHAR_MAX;  i++)
     {
       gtk_tree_store_append (charmap->block_selector_model, &iter, NULL);
       gtk_tree_store_set (charmap->block_selector_model, &iter, 
@@ -825,8 +825,12 @@ make_unicode_block_selector (Charmap *charmap)
                           BLOCK_SELECTOR_UNICODE_BLOCK, &(unicode_blocks[i]),
                           -1);
 
-      for ( ;  uc <= unicode_blocks[i].end && uc <= UNICHAR_MAX;  
-               uc += CHARMAP_ROWS * CHARMAP_COLS) 
+      for (uc = CHARMAP_ROWS * CHARMAP_COLS + unicode_blocks[i].start - 
+                (unicode_blocks[i].start % (CHARMAP_ROWS * CHARMAP_COLS));
+           uc >= unicode_blocks[i].start 
+             && uc <= unicode_blocks[i].end 
+             && uc <= UNICHAR_MAX;  
+           uc += CHARMAP_ROWS * CHARMAP_COLS) 
         {
           g_snprintf (buf, 12, "U+%4.4X", uc);
 	  gtk_tree_store_append (charmap->block_selector_model, 
