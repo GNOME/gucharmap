@@ -785,6 +785,8 @@ draw_square_bg (GucharmapTable *chartable, gint row, gint col)
                       gucharmap_table_x_offset (chartable, col), 
 		      gucharmap_table_y_offset (chartable, row),
                       square_width, square_height);
+
+  g_object_unref (gc);
 }
 
 
