@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-12-16 04:34+0100\n"
-"PO-Revision-Date: 2003-12-16 04:35+0100\n"
+"POT-Creation-Date: 2004-01-10 02:13+0100\n"
+"PO-Revision-Date: 2004-01-10 02:13+0100\n"
 "Last-Translator: Danilo Šegan <dsegan@gmx.net>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nognu.org>\n"
 "MIME-Version: 1.0\n"
@@ -20,103 +20,107 @@ msgstr ""
 #. ID
 #: gucharmap.desktop.in.h:1 gucharmap/gucharmap-window.c:386
 #: gucharmap/gucharmap-window.c:879 gucharmap/imgucharmap.c:209
-msgid "Unicode Character Map"
-msgstr "Mapa Unikod znakova"
+msgid "Character Map"
+msgstr "Tablica znakova"
 
-#: gucharmap/gucharmap-charmap.c:405
+#: gucharmap.desktop.in.h:2
+msgid "Insert special characters into documents"
+msgstr "Unesite naročite znake u dokumenta"
+
+#: gucharmap/gucharmap-charmap.c:404
 msgid "Canonical decomposition:"
 msgstr "Kanonska dekompozicija:"
 
-#: gucharmap/gucharmap-charmap.c:445 gucharmap/gucharmap-table.c:310
+#: gucharmap/gucharmap-charmap.c:444 gucharmap/gucharmap-table.c:310
 msgid "[not a printable character]"
 msgstr "[znak bez prikaza]"
 
-#: gucharmap/gucharmap-charmap.c:459
+#: gucharmap/gucharmap-charmap.c:458
 msgid "General Character Properties"
 msgstr "Opšte osobine znaka"
 
 #. character category
-#: gucharmap/gucharmap-charmap.c:462
+#: gucharmap/gucharmap-charmap.c:461
 msgid "Unicode category:"
 msgstr "Unikod kategorija:"
 
-#: gucharmap/gucharmap-charmap.c:468
+#: gucharmap/gucharmap-charmap.c:467
 msgid "Various Useful Representations"
 msgstr "Razni načini prikaza"
 
-#: gucharmap/gucharmap-charmap.c:477
+#: gucharmap/gucharmap-charmap.c:476
 msgid "UTF-8:"
 msgstr "UTF-8:"
 
-#: gucharmap/gucharmap-charmap.c:485
+#: gucharmap/gucharmap-charmap.c:484
 msgid "Octal escaped UTF-8:"
 msgstr "Oktalno istaknuta UTF-8:"
 
-#: gucharmap/gucharmap-charmap.c:491
+#: gucharmap/gucharmap-charmap.c:490
 msgid "Decimal entity reference:"
 msgstr "Decimalni entiteti:"
 
-#: gucharmap/gucharmap-charmap.c:497
+#: gucharmap/gucharmap-charmap.c:496
 msgid "Annotations and Cross References"
 msgstr "Pribeleške i među-reference"
 
-#: gucharmap/gucharmap-charmap.c:504
+#: gucharmap/gucharmap-charmap.c:503
 msgid "Alias names:"
 msgstr "Druga imena:"
 
-#: gucharmap/gucharmap-charmap.c:513
+#: gucharmap/gucharmap-charmap.c:512
 msgid "Notes:"
 msgstr "Beleške:"
 
-#: gucharmap/gucharmap-charmap.c:522
+#: gucharmap/gucharmap-charmap.c:521
 msgid "See also:"
 msgstr "Videti takođe:"
 
-#: gucharmap/gucharmap-charmap.c:531
+#: gucharmap/gucharmap-charmap.c:530
 msgid "Approximate equivalents:"
 msgstr "Približni ekvivalenti:"
 
-#: gucharmap/gucharmap-charmap.c:540
+#: gucharmap/gucharmap-charmap.c:539
 msgid "Equivalents:"
 msgstr "Ekvivalenti:"
 
-#: gucharmap/gucharmap-charmap.c:555
+#: gucharmap/gucharmap-charmap.c:554
 msgid "CJK Ideograph Information"
 msgstr "Podaci o CJK ideogramu"
 
-#: gucharmap/gucharmap-charmap.c:560
+#: gucharmap/gucharmap-charmap.c:559
 msgid "Definition in English:"
 msgstr "Definicija na engleskom:"
 
-#: gucharmap/gucharmap-charmap.c:565
+#: gucharmap/gucharmap-charmap.c:564
 msgid "Mandarin Pronunciation:"
 msgstr "Mandarinski izgovor:"
 
-#: gucharmap/gucharmap-charmap.c:570
+#: gucharmap/gucharmap-charmap.c:569
 msgid "Japanese On Pronunciation:"
 msgstr "Japanski On izgovor:"
 
-#: gucharmap/gucharmap-charmap.c:575
+#: gucharmap/gucharmap-charmap.c:574
 msgid "Japanese Kun Pronunciation:"
 msgstr "Japanski Kun izgovor:"
 
-#: gucharmap/gucharmap-charmap.c:580
+#: gucharmap/gucharmap-charmap.c:579
 msgid "Tang Pronunciation:"
 msgstr "Tang izgovor:"
 
-#: gucharmap/gucharmap-charmap.c:585
+#: gucharmap/gucharmap-charmap.c:584
 msgid "Korean Pronunciation:"
 msgstr "Korejski izgovor:"
 
-#: gucharmap/gucharmap-charmap.c:893
+#: gucharmap/gucharmap-charmap.c:892
 msgid "Characte_r Table"
 msgstr "Tablica _znakova"
 
-#: gucharmap/gucharmap-charmap.c:896
+#: gucharmap/gucharmap-charmap.c:895
 msgid "Character _Details"
 msgstr "_Detalji o znaku"
 
-#: gucharmap/gucharmap-charmap.c:914
+#: gucharmap/gucharmap-charmap.c:913
 msgid "List of Unicode Blocks"
 msgstr "Spisak Unikod blokova"
 
@@ -128,21 +132,13 @@ msgstr "Font"
 msgid "Font Family"
 msgstr "Porodica fonta"
 
-#: gucharmap/gucharmap-mini-fontsel.c:219
-msgid "_Bold"
-msgstr "_Masno"
-
-#: gucharmap/gucharmap-mini-fontsel.c:224
-msgid "_Italic"
-msgstr "_Kurziv"
-
-#: gucharmap/gucharmap-mini-fontsel.c:233
+#: gucharmap/gucharmap-mini-fontsel.c:235
 msgid "Font Size"
 msgstr "Veličina fonta"
 
 #. Unicode assigns "Common" as the script name for any character not
 #. * specifically listed in Scripts.txt
-#: gucharmap/gucharmap-script-codepoint-list.c:73
+#: gucharmap/gucharmap-script-codepoint-list.c:71
 msgid "Common"
 msgstr "Zajednički"
 
@@ -961,6 +957,15 @@ msgstr "Linear B"
 #: gucharmap/unicode-scripts.h:63
 msgid "Yi"
 msgstr "Ji"
+
+#~ msgid "Unicode Character Map"
+#~ msgstr "Mapa Unikod znakova"
+
+#~ msgid "_Bold"
+#~ msgstr "_Masno"
+
+#~ msgid "_Italic"
+#~ msgstr "_Kurziv"
 
 #~ msgid "HANGUL SYLLABLE %s%s%s"
 #~ msgstr "HANGUL SLOG %s%s%s"
