@@ -90,6 +90,7 @@ main (gint argc, gchar **argv)
   window = gucharmap_window_new ();
   gucharmap_window_set_text_to_copy_visible (GUCHARMAP_WINDOW (window), TRUE);
   gucharmap_window_set_font_selection_visible (GUCHARMAP_WINDOW (window), TRUE);
+  gucharmap_window_set_file_menu_visible (GUCHARMAP_WINDOW (window), TRUE);
 
   screen = gtk_window_get_screen (GTK_WINDOW (window));
   gtk_window_set_default_size (GTK_WINDOW (window), 

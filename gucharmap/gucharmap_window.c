@@ -637,7 +637,7 @@ make_menu (GucharmapWindow *guw)
 {
   GtkWidget *menubar;
   GtkWidget *file_menu, *view_menu, *search_menu;
-  GtkWidget *file_menu_item, *view_menu_item, *search_menu_item;
+  GtkWidget *view_menu_item, *search_menu_item;
   GtkWidget *menu_item;
   GtkWidget *unicode_details_menu, *unihan_details_menu, 
             *nameslist_details_menu;
@@ -651,8 +651,8 @@ make_menu (GucharmapWindow *guw)
 
   /* make the menu bar */
   menubar = gtk_menu_bar_new ();
-  file_menu_item = gtk_menu_item_new_with_mnemonic (_("Char_map"));
-  gtk_menu_shell_append (GTK_MENU_SHELL (menubar), file_menu_item);
+  guw->file_menu_item = gtk_menu_item_new_with_mnemonic (_("Char_map"));
+  gtk_menu_shell_append (GTK_MENU_SHELL (menubar), guw->file_menu_item);
   view_menu_item = gtk_menu_item_new_with_mnemonic (_("_View"));
   gtk_menu_shell_append (GTK_MENU_SHELL (menubar), view_menu_item);
   search_menu_item = gtk_menu_item_new_with_mnemonic (_("_Search"));
@@ -662,12 +662,12 @@ make_menu (GucharmapWindow *guw)
   /* make the file menu */
   file_menu = gtk_menu_new ();
   gtk_menu_set_accel_group (GTK_MENU (file_menu), guw->accel_group);
-  gtk_menu_item_set_submenu (GTK_MENU_ITEM (file_menu_item), file_menu);
-  menu_item = gtk_image_menu_item_new_from_stock (GTK_STOCK_QUIT, 
-                                                  guw->accel_group);
-  g_signal_connect (G_OBJECT (menu_item), "activate",
+  gtk_menu_item_set_submenu (GTK_MENU_ITEM (guw->file_menu_item), file_menu);
+  guw->quit_menu_item = gtk_image_menu_item_new_from_stock (GTK_STOCK_QUIT, 
+                                                            guw->accel_group);
+  g_signal_connect (G_OBJECT (guw->quit_menu_item), "activate",
                     G_CALLBACK (gtk_main_quit), NULL);
-  gtk_menu_shell_append (GTK_MENU_SHELL (file_menu), menu_item);
+  gtk_menu_shell_append (GTK_MENU_SHELL (file_menu), guw->quit_menu_item);
   /* finished making the file menu */
 
   /* make the view menu */
@@ -982,6 +982,13 @@ make_menu (GucharmapWindow *guw)
 #endif /* #if HAVE_GNOME */
 
   gtk_widget_show_all (menubar);
+
+  if (! guw->file_menu_visible)
+    {
+      gtk_widget_hide (guw->file_menu_item);
+      gtk_widget_set_sensitive (guw->quit_menu_item, FALSE);
+    }
+
   return menubar;
 }
 
@@ -1174,6 +1181,7 @@ gucharmap_window_init (GucharmapWindow *guw)
 
   guw->font_selection_visible = FALSE;
   guw->text_to_copy_visible = FALSE;
+  guw->file_menu_visible = FALSE;
   guw->last_search = NULL;
 
   /* which captions to show by default, when enabled */
@@ -1267,6 +1275,25 @@ gucharmap_window_set_text_to_copy_visible (GucharmapWindow *guw,
     gtk_widget_show (guw->text_to_copy_container);
   else
     gtk_widget_hide (guw->text_to_copy_container);
+}
+
+
+void 
+gucharmap_window_set_file_menu_visible (GucharmapWindow *guw, 
+                                           gboolean visible)
+{
+  guw->file_menu_visible = visible;
+
+  if (guw->file_menu_visible)
+    {
+      gtk_widget_show (guw->file_menu_item);
+      gtk_widget_set_sensitive (guw->quit_menu_item, TRUE);
+    }
+  else
+    {
+      gtk_widget_hide (guw->file_menu_item);
+      gtk_widget_set_sensitive (guw->quit_menu_item, FALSE);
+    }
 }
 
 
