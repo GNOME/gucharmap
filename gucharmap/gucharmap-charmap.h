@@ -78,6 +78,10 @@ struct _GucharmapCharmap
   gint block_index_size;
 
   GtkWidget *details;  /* GtkTextView * */
+
+  GdkCursor *hand_cursor;
+  GdkCursor *regular_cursor;
+  gboolean hovering_over_link;
 };
 
 

@@ -771,13 +771,16 @@ follow_if_link (GucharmapCharmap *charmap,
           break;
         }
     }
+
+  if (tags) 
+    g_slist_free (tags);
 }
 
 
 static gboolean
-text_view_key_press_event (GtkWidget *text_view,
-                           GdkEventKey *event,
-                           GucharmapCharmap *charmap)
+details_key_press_event (GtkWidget *text_view,
+                         GdkEventKey *event,
+                         GucharmapCharmap *charmap)
 {
   GtkTextIter iter;
   GtkTextBuffer *buffer;
@@ -801,9 +804,9 @@ text_view_key_press_event (GtkWidget *text_view,
 
 
 static gboolean
-text_view_event_after (GtkWidget *text_view,
-                       GdkEvent *ev,
-                       GucharmapCharmap *charmap)
+details_event_after (GtkWidget *text_view,
+                     GdkEvent *ev,
+                     GucharmapCharmap *charmap)
 {
   GtkTextIter start, end, iter;
   GtkTextBuffer *buffer;
@@ -837,6 +840,60 @@ text_view_event_after (GtkWidget *text_view,
 }
 
 
+static gboolean
+details_motion_notify_event (GtkWidget *text_view,
+                             GdkEventMotion *event,
+                             GucharmapCharmap *charmap)
+{
+  GSList *tags = NULL, *tagp = NULL;
+  GtkTextBuffer *buffer;
+  GtkTextIter iter;
+  gboolean hovering_over_link = FALSE;
+  gint x, y;
+
+  gtk_text_view_window_to_buffer_coords (GTK_TEXT_VIEW (text_view), 
+                                         GTK_TEXT_WINDOW_WIDGET,
+                                         event->x, event->y, &x, &y);
+
+  buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_view));
+
+  gtk_text_view_get_iter_at_location (GTK_TEXT_VIEW (text_view), &iter, x, y);
+
+  tags = gtk_text_iter_get_tags (&iter);
+  for (tagp = tags;  tagp != NULL;  tagp = tagp->next)
+    {
+      GtkTextTag *tag = tagp->data;
+      gunichar uc;
+
+      /* subtract 1 because U+0000 is a character; see above where we set
+       * "link_character" */
+      uc = (gunichar) g_object_get_data (G_OBJECT (tag), "link_character") - 1;
+
+      if (uc != (gunichar)(-1)) 
+        {
+          hovering_over_link = TRUE;
+          break;
+        }
+    }
+
+  if (hovering_over_link != charmap->hovering_over_link)
+    {
+      charmap->hovering_over_link = hovering_over_link;
+
+      if (hovering_over_link)
+        gdk_window_set_cursor (event->window, charmap->hand_cursor);
+      else
+        gdk_window_set_cursor (event->window, charmap->regular_cursor);
+    }
+
+  if (tags) 
+    g_slist_free (tags);
+
+  gdk_window_get_pointer (text_view->window, NULL, NULL, NULL);
+  return FALSE;
+}
+
+
 static GtkWidget *
 make_details_page (GucharmapCharmap *charmap)
 {
@@ -861,9 +918,11 @@ make_details_page (GucharmapCharmap *charmap)
                                GTK_WRAP_WORD);
 
   g_signal_connect (G_OBJECT (charmap->details), "key-press-event",
-                    G_CALLBACK (text_view_key_press_event), charmap);
+                    G_CALLBACK (details_key_press_event), charmap);
   g_signal_connect (G_OBJECT (charmap->details), "event-after",
-                    G_CALLBACK (text_view_event_after), charmap);
+                    G_CALLBACK (details_event_after), charmap);
+  g_signal_connect (G_OBJECT (charmap->details), "motion-notify-event", 
+                    G_CALLBACK (details_motion_notify_event), charmap);
 
   create_tags (charmap);
 
@@ -907,6 +966,10 @@ gucharmap_charmap_init (GucharmapCharmap *charmap)
 {
   AtkObject *accessib;
   GtkWidget *block_selector;
+
+  charmap->hand_cursor = gdk_cursor_new (GDK_HAND2);
+  charmap->regular_cursor = gdk_cursor_new (GDK_XTERM);
+  charmap->hovering_over_link = FALSE;
 
   block_selector = make_unicode_block_selector (charmap);
   accessib = gtk_widget_get_accessible (block_selector);
