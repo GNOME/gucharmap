@@ -1,3 +1,17 @@
+2003-03-15  Noah Levitt  <nlevitt аt columbia.edu>
+
+	* gucharmap/charmap.c:
+	* gucharmap/chartable.c:
+	* gucharmap/main.c:
+	* gucharmap/unicode_info.c:
+	* gucharmap/unicode_info.h:
+	* gucharmap/unicode/Makefile.am:
+	* gucharmap/unicode/generate_categories.pl:
+	* gucharmap/unicode/generator.sh:
+	* gucharmap/unicode/unicode_categories.cI: All unicode information
+	comes from unicode.org files now. No discrepancies with g_unichar_*,
+	no out of date information.
+
 2003-03-16  YanKo Kaneti  <yaneti@declera.com>
 
         * gucharmap/Makefile.am: make the charmap symlink relative.

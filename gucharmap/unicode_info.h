@@ -40,59 +40,6 @@ typedef struct
 }
 UnicodeBlock;
 
-
-typedef struct 
-{
-  gunichar index;
-  const gchar *name;
-} 
-UnicodeData;
-
-
-typedef struct 
-{
-  gunichar index;
-  const gchar *kDefinition;
-  const gchar *kCantonese;
-  const gchar *kMandarin;
-  const gchar *kTang;
-  const gchar *kKorean;
-  const gchar *kJapeneseKun;
-  const gchar *kJapaneseOn;
-} 
-Unihan;
-
-
-
-typedef struct 
-{
-  gunichar index;
-  gchar *value;
-}
-UnicharString;
-
-typedef struct
-{
-  gunichar index;
-  gunichar value;
-}
-UnicharUnichar;
-
-typedef struct
-{
-  gunichar index;
-  gint equals_index;  /* -1 means */
-  gint stars_index;   /* this character */
-  gint exes_index;    /* doesn't */
-  gint pounds_index;  /* have any */
-  gint colons_index;
-}
-NamesList;
-
-
-/* XXX: should get some of the NamesList block level data */
-
-
 extern const UnicodeBlock unicode_blocks[];
 
 gint count_blocks (gunichar max);
@@ -123,11 +70,16 @@ gunichar find_next_substring_match (gunichar start, gunichar unichar_max,
                                     const gchar *search_text);
 
 /* nameslist stuff */
-const gchar ** get_nameslist_stars (gunichar uc);
-const gchar ** get_nameslist_equals (gunichar uc);
+G_CONST_RETURN gchar ** get_nameslist_stars (gunichar uc);
+G_CONST_RETURN gchar ** get_nameslist_equals (gunichar uc);
 gunichar * get_nameslist_exes (gunichar uc);
-const gchar ** get_nameslist_pounds (gunichar uc);
-const gchar ** get_nameslist_colons (gunichar uc);
+G_CONST_RETURN gchar ** get_nameslist_pounds (gunichar uc);
+G_CONST_RETURN gchar ** get_nameslist_colons (gunichar uc);
+gboolean unichar_validate (gunichar ch);
+gint unichar_to_printable_utf8 (gunichar uc, gchar *outbuf);
+GUnicodeType unichar_type (gunichar uc);
+gboolean g_unichar_isdefined (gunichar uc);
+gboolean unichar_isgraph (gunichar c);
 
 G_END_DECLS
 

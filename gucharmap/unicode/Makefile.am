@@ -19,7 +19,7 @@
 
 
 BUILT_SOURCES = unicode_data.cI unicode_unihan.cI unicode_blocks.cI \
-		unicode_nameslist.cI
+		unicode_nameslist.cI unicode_categories.cI
 
 unicode_unihan.cI: generate_unihan
 	./generator.sh unicode_unihan.cI
@@ -33,20 +33,25 @@ unicode_blocks.cI:
 unicode_nameslist.cI: generate_nameslist
 	./generator.sh unicode_nameslist.cI
 
+unicode_categories.cI:
+	./generator.sh unicode_categories.cI
+
 noinst_PROGRAMS = generate_unihan generate_nameslist
 generate_unihan_SOURCES = generate_unihan.c
 generate_nameslist_SOURCES = generate_nameslist.c
 
 CLEANFILES = unicode_unihan.cI.old unicode_data.cI.old \
-             unicode_blocks.cI.old unicode_nameslist.cI.old
+             unicode_blocks.cI.old unicode_nameslist.cI.old \
+             unicode_categories.cI.old
 
 MAINTAINERCLEANFILES = unicode_unihan.cI unicode_data.cI unicode_blocks.cI \
-                       unicode_nameslist.cI 
+                       unicode_nameslist.cI unicode_categories.cI
 
 
 EXTRA_DIST = generate_nameslist.c generate_unihan.c \
              generator.sh unicode_data.cI unicode_unihan.cI \
-             unicode_blocks.cI unicode_nameslist.cI
+             unicode_blocks.cI unicode_nameslist.cI \
+             unicode_categories.cI
 
 
 

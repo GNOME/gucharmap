@@ -25,12 +25,72 @@
 #include <string.h>
 #include <unicode_info.h>
 
+
+typedef struct 
+{
+  gunichar index;
+  const gchar *name;
+} 
+UnicodeData;
+
+
+typedef struct 
+{
+  gunichar index;
+  const gchar *kDefinition;
+  const gchar *kCantonese;
+  const gchar *kMandarin;
+  const gchar *kTang;
+  const gchar *kKorean;
+  const gchar *kJapeneseKun;
+  const gchar *kJapaneseOn;
+} 
+Unihan;
+
+
+
+typedef struct 
+{
+  gunichar index;
+  gchar *value;
+}
+UnicharString;
+
+typedef struct
+{
+  gunichar index;
+  gunichar value;
+}
+UnicharUnichar;
+
+typedef struct
+{
+  gunichar index;
+  gint equals_index;  /* -1 means */
+  gint stars_index;   /* this character */
+  gint exes_index;    /* doesn't */
+  gint pounds_index;  /* have any */
+  gint colons_index;
+}
+NamesList;
+
+
+typedef struct
+{
+  gunichar first;
+  gunichar last;
+  GUnicodeType category;
+}
+UnicodeCategory;
+
+
 #include <unicode/unicode_data.cI>
 #include <unicode/unicode_blocks.cI>
 #if ENABLE_UNIHAN
 # include <unicode/unicode_unihan.cI>
 #endif
 #include <unicode/unicode_nameslist.cI>
+#include <unicode/unicode_categories.cI>
 
 
 /* constants for hangul (de)composition, see UAX #15 */
@@ -62,7 +122,7 @@ static const gchar * const JAMO_T_TABLE[] = {
 };
 
 /* computes the hangul name as per UAX #15 */
-const gchar *
+G_CONST_RETURN gchar *
 get_hangul_syllable_name (gunichar s)
 {
   static gchar buf[32];
@@ -83,7 +143,7 @@ get_hangul_syllable_name (gunichar s)
 }
 
 
-const gchar *
+G_CONST_RETURN gchar *
 get_unicode_name (gunichar uc)
 {
   if (uc >= 0x3400 && uc <= 0x4DB5)
@@ -117,10 +177,10 @@ get_unicode_name (gunichar uc)
 }
 
 
-const gchar *
+G_CONST_RETURN gchar *
 get_unicode_category_name (gunichar uc)
 {
-  switch (g_unichar_type (uc))
+  switch (unichar_type (uc))
     {
       case G_UNICODE_CONTROL: return "Other, Control";
       case G_UNICODE_FORMAT: return "Other, Format";
@@ -229,7 +289,7 @@ unicode_canonical_decomposition (gunichar ch, gsize   *result_len)
 
 
 /* does a binary search on unicode_data */
-const gchar *
+G_CONST_RETURN gchar *
 get_unicode_data_name (gunichar uc)
 {
   gint min = 0;
@@ -255,7 +315,7 @@ get_unicode_data_name (gunichar uc)
 
 
 /* ascii case-insensitive substring search (source ripped from glib) */
-static const gchar *
+static G_CONST_RETURN gchar *
 ascii_case_strrstr (const gchar *haystack, const gchar *needle)
 {
   gsize i;
@@ -347,7 +407,7 @@ find_next_substring_match (gunichar start, gunichar unichar_max,
 
 /* does a binary search; also caches most recent, since it will often be
  * called in succession on the same character */
-static const Unihan *
+static G_CONST_RETURN Unihan *
 _get_unihan (gunichar uc)
 {
   static gunichar most_recent_searched;
@@ -383,7 +443,7 @@ _get_unihan (gunichar uc)
 }
 
 
-const gchar * 
+G_CONST_RETURN gchar * 
 get_unicode_kDefinition (gunichar uc)
 {
   const Unihan *uh = _get_unihan (uc);
@@ -393,7 +453,7 @@ get_unicode_kDefinition (gunichar uc)
     return uh->kDefinition;
 }
 
-const gchar * 
+G_CONST_RETURN gchar * 
 get_unicode_kCantonese (gunichar uc)
 {
   const Unihan *uh = _get_unihan (uc);
@@ -403,7 +463,7 @@ get_unicode_kCantonese (gunichar uc)
     return uh->kCantonese;
 }
 
-const gchar * 
+G_CONST_RETURN gchar * 
 get_unicode_kMandarin (gunichar uc)
 {
   const Unihan *uh = _get_unihan (uc);
@@ -413,7 +473,7 @@ get_unicode_kMandarin (gunichar uc)
     return uh->kMandarin;
 }
 
-const gchar * 
+G_CONST_RETURN gchar * 
 get_unicode_kTang (gunichar uc)
 {
   const Unihan *uh = _get_unihan (uc);
@@ -423,7 +483,7 @@ get_unicode_kTang (gunichar uc)
     return uh->kTang;
 }
 
-const gchar * 
+G_CONST_RETURN gchar * 
 get_unicode_kKorean (gunichar uc)
 {
   const Unihan *uh = _get_unihan (uc);
@@ -433,7 +493,7 @@ get_unicode_kKorean (gunichar uc)
     return uh->kKorean;
 }
 
-const gchar * 
+G_CONST_RETURN gchar * 
 get_unicode_kJapaneseKun (gunichar uc)
 {
   const Unihan *uh = _get_unihan (uc);
@@ -443,7 +503,7 @@ get_unicode_kJapaneseKun (gunichar uc)
     return uh->kJapeneseKun;
 }
 
-const gchar * 
+G_CONST_RETURN gchar * 
 get_unicode_kJapaneseOn (gunichar uc)
 {
   const Unihan *uh = _get_unihan (uc);
@@ -455,43 +515,43 @@ get_unicode_kJapaneseOn (gunichar uc)
 
 #else /* #if ENABLE_UNIHAN */
 
-const gchar * 
+G_CONST_RETURN gchar * 
 get_unicode_kDefinition (gunichar uc)
 {
   return "This feature was not compiled in.";
 }
 
-const gchar * 
+G_CONST_RETURN gchar * 
 get_unicode_kCantonese (gunichar uc)
 {
   return "This feature was not compiled in.";
 }
 
-const gchar * 
+G_CONST_RETURN gchar * 
 get_unicode_kMandarin (gunichar uc)
 {
   return "This feature was not compiled in.";
 }
 
-const gchar * 
+G_CONST_RETURN gchar * 
 get_unicode_kTang (gunichar uc)
 {
   return "This feature was not compiled in.";
 }
 
-const gchar * 
+G_CONST_RETURN gchar * 
 get_unicode_kKorean (gunichar uc)
 {
   return "This feature was not compiled in.";
 }
 
-const gchar * 
+G_CONST_RETURN gchar * 
 get_unicode_kJapaneseKun (gunichar uc)
 {
   return "This feature was not compiled in.";
 }
 
-const gchar * 
+G_CONST_RETURN gchar * 
 get_unicode_kJapaneseOn (gunichar uc)
 {
   return "This feature was not compiled in.";
@@ -502,7 +562,7 @@ get_unicode_kJapaneseOn (gunichar uc)
 
 /* does a binary search; also caches most recent, since it will often be
  * called in succession on the same character */
-static const NamesList *
+static G_CONST_RETURN NamesList *
 get_nameslist (gunichar uc)
 {
   static gunichar most_recent_searched;
@@ -566,7 +626,7 @@ get_nameslist_exes (gunichar uc)
 
 /* returns newly allocated null-terminated array of gchar* */
 /* the items are const, but the array should be freed by the caller */
-const gchar **
+G_CONST_RETURN gchar **
 get_nameslist_equals (gunichar uc)
 {
   const NamesList *nl;
@@ -593,7 +653,7 @@ get_nameslist_equals (gunichar uc)
 
 /* returns newly allocated null-terminated array of gchar* */
 /* the items are const, but the array should be freed by the caller */
-const gchar **
+G_CONST_RETURN gchar **
 get_nameslist_stars (gunichar uc)
 {
   const NamesList *nl;
@@ -620,7 +680,7 @@ get_nameslist_stars (gunichar uc)
 
 /* returns newly allocated null-terminated array of gchar* */
 /* the items are const, but the array should be freed by the caller */
-const gchar **
+G_CONST_RETURN gchar **
 get_nameslist_pounds (gunichar uc)
 {
   const NamesList *nl;
@@ -647,7 +707,7 @@ get_nameslist_pounds (gunichar uc)
 
 /* returns newly allocated null-terminated array of gchar* */
 /* the items are const, but the array should be freed by the caller */
-const gchar **
+G_CONST_RETURN gchar **
 get_nameslist_colons (gunichar uc)
 {
   const NamesList *nl;
@@ -670,4 +730,148 @@ get_nameslist_colons (gunichar uc)
 
   return colons;
 }
+
+
+#define UNICODE_VALID(Char)                   \
+    ((Char) < 0x110000 &&                     \
+    ((Char) < 0xD800 || (Char) >= 0xE000) &&  \
+    ((Char) < 0xFDD0 || (Char) > 0xFDEF) &&   \
+    ((Char) & 0xFFFF) != 0xFFFE && ((Char) & 0xFFFF) != 0xFFFF)
+
+/* an up-to-date replacement for g_unichar_validate */
+gboolean
+unichar_validate (gunichar ch)
+{
+  return UNICODE_VALID (ch);
+}
+
+
+/**
+ * unichar_to_printable_utf8
+ * @uc: a unicode character 
+ * @outbuf: output buffer, must have at least 10 bytes of space.
+ *          If %NULL, the length will be computed and returned
+ *          and nothing will be written to @outbuf.
+ *
+ * Converts a single character to UTF-8 suitable for rendering. Check the
+ * source to see what this means. ;-)
+ * 
+ *
+ * Return value: number of bytes written
+ **/
+gint
+unichar_to_printable_utf8 (gunichar uc, gchar *outbuf)
+{
+  /* Unicode Standard 3.2, section 2.6, "By convention, diacritical marks
+   * used by the Unicode Standard may be exhibited in (apparent) isolation
+   * by applying them to U+0020 SPACE or to U+00A0 NO BREAK SPACE." */
+
+  /* 17:10 < owen> noah: I'm *not* claiming that what Pango does currently
+   *               is right, but convention isn't a requirement. I think
+   *               it's probably better to do the Uniscribe thing and put
+   *               the lone combining mark on a dummy character and require
+   *               ZWJ
+   * 17:11 < noah> owen: do you mean that i should put a ZWJ in there, or
+   *               that pango will do that?
+   * 17:11 < owen> noah: I mean, you should (assuming some future more
+   *               capable version of Pango) put it in there
+   */
+
+  if (! unichar_validate (uc) || (! unichar_isgraph (uc) 
+      && unichar_type (uc) != G_UNICODE_PRIVATE_USE))
+    return 0;
+  else if (unichar_type (uc) == G_UNICODE_COMBINING_MARK
+      || unichar_type (uc) == G_UNICODE_ENCLOSING_MARK
+      || unichar_type (uc) == G_UNICODE_NON_SPACING_MARK)
+    {
+      gint x;
+
+      outbuf[0] = ' ';
+      outbuf[1] = '\xe2'; /* ZERO */ 
+      outbuf[2] = '\x80'; /* WIDTH */
+      outbuf[3] = '\x8d'; /* JOINER (0x200D) */
+
+      x = g_unichar_to_utf8 (uc, outbuf + 4);
+
+      return x + 4;
+    }
+  else
+    return g_unichar_to_utf8 (uc, outbuf);
+}
+
+
+/**
+ * unichar_type:
+ * @c: a Unicode character
+ * 
+ * Classifies a Unicode character by type.
+ * 
+ * Return value: the type of the character.
+ **/
+GUnicodeType
+unichar_type (gunichar uc)
+{
+  gint min = 0;
+  gint mid;
+  gint max = sizeof (unicode_categories) / sizeof (UnicodeCategory) - 1;
+
+  if (uc < unicode_categories[0].first || uc > unicode_categories[max].last)
+    return G_UNICODE_UNASSIGNED;
+
+  while (max >= min) 
+    {
+      mid = (min + max) / 2;
+      if (uc > unicode_categories[mid].last)
+        min = mid + 1;
+      else if (uc < unicode_categories[mid].first)
+        max = mid - 1;
+      else
+        return unicode_categories[mid].category;
+    }
+
+  return G_UNICODE_UNASSIGNED;
+}
+
+
+/**
+ * unichar_isdefined:
+ * @uc: a Unicode character
+ * 
+ * Determines if a given character is assigned in the Unicode
+ * standard.
+ *
+ * Return value: %TRUE if the character has an assigned value
+ **/
+gboolean
+unichar_isdefined (gunichar uc)
+{
+  return unichar_type (uc) != G_UNICODE_UNASSIGNED;
+}
+
+
+/**
+ * unichar_isgraph:
+ * @uc: a Unicode character
+ * 
+ * Determines whether a character is printable and not a space
+ * (returns %FALSE for control characters, format characters, and
+ * spaces). g_unichar_isprint() is similar, but returns %TRUE for
+ * spaces. Given some UTF-8 text, obtain a character value with
+ * g_utf8_get_char().
+ * 
+ * Return value: %TRUE if @c is printable unless it's a space
+ **/
+gboolean
+unichar_isgraph (gunichar uc)
+{
+  GUnicodeType t = unichar_type (uc);
+
+  return (t != G_UNICODE_CONTROL
+          && t != G_UNICODE_FORMAT
+          && t != G_UNICODE_UNASSIGNED
+          && t != G_UNICODE_PRIVATE_USE
+          && t != G_UNICODE_SURROGATE
+          && t != G_UNICODE_SPACE_SEPARATOR);
+}
+
 

@@ -46,9 +46,11 @@ TRUE=" : "
 CAT=`which cat`
 BC=`which bc`
 ICONV=`which iconv`
+PERL=`which perl`
 
 GENERATE_UNIHAN="./generate_unihan"
 GENERATE_NAMESLIST="./generate_nameslist"
+GENERATE_CATEGORIES="./generate_categories.pl"
 
 unidir="$PWD/unicode.org"
 srcdir="$PWD"
@@ -163,6 +165,26 @@ do_unicode_data()
 }
 
 
+do_categories()
+{
+    make_download_dir
+
+    f="$unidir/UnicodeData.txt"
+    if [ ! -f $f ] ; then
+        download "UnicodeData.txt"
+    else
+        $ECHO "already have $f, not downloading"
+    fi
+
+    out=$srcdir/unicode_categories.cI
+    backup $out
+
+    $ECHO -n "generating $out..."
+    $PERL $GENERATE_CATEGORIES < $f > $out
+    $ECHO " done"
+}
+
+
 do_unihan()
 {
     if [ "x$UNZIP" = "x" ] ; then
@@ -250,9 +272,11 @@ case "x$1" in
     "xunicode_unihan.cI") do_unihan ;;
     "xunicode_blocks.cI") do_blocks ;;
     "xunicode_nameslist.cI") do_nameslist ;;
+    "xunicode_categories.cI") do_categories ;;
     *) 
         echo "usage: $0 FILE_TO_GENERATE"
         echo "       where FILE_TO_GENERATE is unicode_data.cI" 
+        echo "                              or unicode_categories.cI"
         echo "                              or unicode_unihan.cI"
         echo "                              or unicode_blocks.cI"
         echo "                              or unicode_nameslist.cI"

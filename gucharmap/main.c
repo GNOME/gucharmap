@@ -427,7 +427,7 @@ append_character_to_text_to_copy (Charmap *charmap, gunichar uc)
   gchar ubuf[7];
   gint n;
 
-  if (! g_unichar_validate (uc))
+  if (! unichar_validate (uc))
     {
       set_text_to_copy_status (_("The selected code point is not a valid unicode character."));
       return;

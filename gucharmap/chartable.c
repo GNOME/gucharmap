@@ -52,56 +52,6 @@ static const GtkTargetEntry dnd_target_table[] =
 };
 
 
-/* return value is read-only, should not be freed */
-static const gchar *
-unichar_to_printable_utf8 (gunichar uc)
-{
-  static gchar buf[12];
-  gint x;
-
-  /* http://www.cl.cam.ac.uk/~mgk25/unicode.html#utf-8 --"Also note that
-   * the code positions U+D800 to U+DFFF (UTF-16 surrogates) as well as
-   * U+FFFE and U+FFFF must not occur in normal UTF-8" */
-  if (! g_unichar_validate (uc) || (! g_unichar_isgraph (uc) 
-              && g_unichar_type (uc) != G_UNICODE_PRIVATE_USE))
-    return "";
-  
-  /* Unicode Standard 3.2, section 2.6, "By convention, diacritical marks
-   * used by the Unicode Standard may be exhibited in (apparent) isolation
-   * by applying them to U+0020 SPACE or to U+00A0 NO BREAK SPACE." */
-
-  /* 17:10 < owen> noah: I'm *not* claiming that what Pango does currently
-   *               is right, but convention isn't a requirement. I think
-   *               it's probably better to do the Uniscribe thing and put
-   *               the lone combining mark on a dummy character and require
-   *               ZWJ
-   * 17:11 < noah> owen: do you mean that i should put a ZWJ in there, or
-   *               that pango will do that?
-   * 17:11 < owen> noah: I mean, you should (assuming some future more
-   *               capable version of Pango) put it in there
-   */
-
-  if (g_unichar_type (uc) == G_UNICODE_COMBINING_MARK
-      || g_unichar_type (uc) == G_UNICODE_ENCLOSING_MARK
-      || g_unichar_type (uc) == G_UNICODE_NON_SPACING_MARK)
-    {
-      buf[0] = ' ';
-      buf[1] = '\xe2'; /* ZERO */ 
-      buf[2] = '\x80'; /* WIDTH */
-      buf[3] = '\x8d'; /* JOINER (0x200D) */
-      x = g_unichar_to_utf8 (uc, buf+4);
-      buf[x+4] = '\0';
-    }
-  else
-    {
-      x = g_unichar_to_utf8 (uc, buf);
-      buf[x] = '\0';
-    }
-
-  return buf;
-}
-
-
 /* depends on directionality */
 static gunichar
 rowcol_to_unichar (Chartable *chartable, gint row, gint col)
@@ -310,6 +260,7 @@ layout_scaled_glyph (Chartable *chartable, gunichar uc, gint font_size)
 {
   PangoFontDescription *font_desc;
   PangoLayout *layout;
+  gchar buf[11];
 
   font_desc = pango_font_description_copy (
           gtk_widget_get_style (chartable->drawing_area)->font_desc);
@@ -319,7 +270,9 @@ layout_scaled_glyph (Chartable *chartable, gunichar uc, gint font_size)
           pango_layout_get_context (chartable->pango_layout));
 
   pango_layout_set_font_description (layout, font_desc);
-  pango_layout_set_text (layout, unichar_to_printable_utf8 (uc), -1);
+
+  buf[unichar_to_printable_utf8 (uc, buf)] = '\0';
+  pango_layout_set_text (layout, buf, -1);
 
   pango_font_description_free (font_desc);
 
@@ -646,11 +599,13 @@ draw_character (Chartable *chartable, gint row, gint col)
   gint square_width, square_height; 
   gunichar uc;
   GdkGC *gc;
+  gchar buf[10];
+  gint n;
 
   uc = rowcol_to_unichar (chartable, row, col);
 
-  if (uc < 0 || uc > UNICHAR_MAX || ! g_unichar_validate (uc) 
-      || ! g_unichar_isdefined (uc))
+  if (uc < 0 || uc > UNICHAR_MAX || ! unichar_validate (uc) 
+      || ! unichar_isdefined (uc))
     return;
 
   if (GTK_WIDGET_HAS_FOCUS (chartable->drawing_area) 
@@ -664,9 +619,8 @@ draw_character (Chartable *chartable, gint row, gint col)
   square_width = chartable_column_width (chartable, col) - 1;
   square_height = chartable_row_height (chartable, row) - 1;
 
-  pango_layout_set_text (chartable->pango_layout, 
-                         unichar_to_printable_utf8 (uc), 
-                         -1);
+  n = unichar_to_printable_utf8 (uc, buf); 
+  pango_layout_set_text (chartable->pango_layout, buf, n);
 
   pango_layout_get_pixel_size (chartable->pango_layout, 
                                &char_width, &char_height);
@@ -696,9 +650,9 @@ draw_square_bg (Chartable *chartable, gint row, gint col)
     gc = chartable->drawing_area->style->base_gc[GTK_STATE_SELECTED];
   else if (uc == chartable->active_char)
     gc = chartable->drawing_area->style->base_gc[GTK_STATE_ACTIVE];
-  else if (! g_unichar_validate (uc))
+  else if (! unichar_validate (uc))
     gc = chartable->drawing_area->style->fg_gc[GTK_STATE_INSENSITIVE];
-  else if (! g_unichar_isdefined (uc))
+  else if (! unichar_isdefined (uc))
     gc = chartable->drawing_area->style->bg_gc[GTK_STATE_INSENSITIVE];
   else 
     gc = chartable->drawing_area->style->base_gc[GTK_STATE_NORMAL];
@@ -769,8 +723,8 @@ draw_chartable_from_scratch (Chartable *chartable)
 
         /* don't need to draw the plain background, only the other ones */
         if (uc == chartable->active_char
-            || ! g_unichar_validate (uc)
-            || ! g_unichar_isdefined (uc))
+            || ! unichar_validate (uc)
+            || ! unichar_isdefined (uc))
           draw_square_bg (chartable, row, col);
 
         draw_character (chartable, row, col);

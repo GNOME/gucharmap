@@ -62,56 +62,6 @@ static gchar **caption_labels;
 static guint charmap_signals[NUM_SIGNALS] = { 0 };
 
 
-/* return value is read-only, should not be freed */
-static const gchar *
-unichar_to_printable_utf8 (gunichar uc)
-{
-  static gchar buf[12];
-  gint x;
-
-  /* http://www.cl.cam.ac.uk/~mgk25/unicode.html#utf-8 --"Also note that
-   * the code positions U+D800 to U+DFFF (UTF-16 surrogates) as well as
-   * U+FFFE and U+FFFF must not occur in normal UTF-8" */
-  if (! g_unichar_validate (uc) || (! g_unichar_isgraph (uc) 
-              && g_unichar_type (uc) != G_UNICODE_PRIVATE_USE))
-    return "";
-  
-  /* Unicode Standard 3.2, section 2.6, "By convention, diacritical marks
-   * used by the Unicode Standard may be exhibited in (apparent) isolation
-   * by applying them to U+0020 SPACE or to U+00A0 NO BREAK SPACE." */
-
-  /* 17:10 < owen> noah: I'm *not* claiming that what Pango does currently
-   *               is right, but convention isn't a requirement. I think
-   *               it's probably better to do the Uniscribe thing and put
-   *               the lone combining mark on a dummy character and require
-   *               ZWJ
-   * 17:11 < noah> owen: do you mean that i should put a ZWJ in there, or
-   *               that pango will do that?
-   * 17:11 < owen> noah: I mean, you should (assuming some future more
-   *               capable version of Pango) put it in there
-   */
-
-  if (g_unichar_type (uc) == G_UNICODE_COMBINING_MARK
-      || g_unichar_type (uc) == G_UNICODE_ENCLOSING_MARK
-      || g_unichar_type (uc) == G_UNICODE_NON_SPACING_MARK)
-    {
-      buf[0] = ' ';
-      buf[1] = '\xe2'; /* ZERO */ 
-      buf[2] = '\x80'; /* WIDTH */
-      buf[3] = '\x8d'; /* JOINER (0x200D) */
-      x = g_unichar_to_utf8 (uc, buf+4);
-      buf[x+4] = '\0';
-    }
-  else
-    {
-      x = g_unichar_to_utf8 (uc, buf);
-      buf[x] = '\0';
-    }
-
-  return buf;
-}
-
-
 static void
 status_message (Charmap *charmap, const gchar *message)
 {
@@ -125,6 +75,7 @@ static gchar **
 make_array_of_char_descs (gunichar *ucs)
 {
   gchar **descs;
+  gchar buf[11];
   gint i;
 
   if (ucs == NULL)
@@ -135,9 +86,11 @@ make_array_of_char_descs (gunichar *ucs)
   descs = g_malloc ((i+1) * sizeof (gchar *));
 
   for (i = 0;  ucs[i] != (gunichar)(-1);  i++)
-    descs[i] = g_strdup_printf ("\342\200\252%s [U+%4.4X %s]",
-                                unichar_to_printable_utf8 (ucs[i]), 
-                                ucs[i], get_unicode_name (ucs[i]));
+    {
+      buf[unichar_to_printable_utf8 (ucs[i], buf)] = '\0';
+      descs[i] = g_strdup_printf ("\342\200\252%s [U+%4.4X %s]", buf, ucs[i], 
+                                  get_unicode_name (ucs[i]));
+    }
 
   descs[i] = NULL;
   return descs;
@@ -363,22 +316,26 @@ set_caption (Charmap *charmap, gunichar uc)
       GString *gstemp;
       gunichar *decomposition;
       gsize result_len;
+      gchar buf[11];
 
       decomposition = unicode_canonical_decomposition (uc,
                                                        &result_len);
 
       gstemp = g_string_new ("");
+
+      buf[unichar_to_printable_utf8 (decomposition[0], buf)] = '\0';
       g_string_append_printf (
               gstemp, 
-              "\342\200\256%s\342\200\254 [\342\200\252U+%4.4X\342\200\254]", 
-              unichar_to_printable_utf8 (decomposition[0]), decomposition[0]);
+              "\342\200\256%s\342\200\254 [\342\200\252U+%4.4X\342\200\254]",
+              buf, decomposition[0]);
 
       for (i = 1;  i < result_len;  i++)
-        g_string_append_printf (gstemp, 
-                                /* " + %s [U+%4.4X]",  */
-                                " + \342\200\256%s\342\200\254 [\342\200\252U+%4.4X\342\200\254]", 
-                                unichar_to_printable_utf8 (decomposition[i]), 
-                                decomposition[i]);
+        {
+          buf[unichar_to_printable_utf8 (decomposition[i], buf)] = '\0';
+          g_string_append_printf (gstemp, 
+                                  " + \342\200\256%s\342\200\254 [\342\200\252U+%4.4X\342\200\254]", 
+                                  buf, decomposition[i]);
+        }
 
       set_caption_value (charmap->caption_model, 
                          charmap->caption_rows[CHARMAP_CAPTION_DECOMPOSITION],
