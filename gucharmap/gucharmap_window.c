@@ -614,9 +614,8 @@ static GtkWidget *
 make_menu (GucharmapWindow *guw)
 {
   GtkWidget *menubar;
-  GtkWidget *file_menu, *view_menu, *go_menu, *search_menu;
-  GtkWidget *file_menu_item, *view_menu_item;
-  GtkWidget *go_menu_item, *search_menu_item;
+  GtkWidget *file_menu, *view_menu, *search_menu;
+  GtkWidget *file_menu_item, *view_menu_item, *search_menu_item;
   GtkWidget *menu_item;
   GtkWidget *unicode_details_menu, *unihan_details_menu, 
             *nameslist_details_menu;
@@ -636,8 +635,6 @@ make_menu (GucharmapWindow *guw)
   gtk_menu_shell_append (GTK_MENU_SHELL (menubar), view_menu_item);
   search_menu_item = gtk_menu_item_new_with_mnemonic (_("_Search"));
   gtk_menu_shell_append (GTK_MENU_SHELL (menubar), search_menu_item);
-  go_menu_item = gtk_menu_item_new_with_mnemonic (_("_Go"));
-  gtk_menu_shell_append (GTK_MENU_SHELL (menubar), go_menu_item);
   /* finished making the menu bar */
 
   /* make the file menu */
@@ -884,12 +881,12 @@ make_menu (GucharmapWindow *guw)
                     G_CALLBACK (show_hide_caption_kkorean), guw);
 #endif
 
-
   /* make the search menu */
   search_menu = gtk_menu_new ();
   gtk_menu_set_accel_group (GTK_MENU (search_menu), guw->accel_group);
   gtk_menu_item_set_submenu (GTK_MENU_ITEM (search_menu_item), search_menu);
 
+  /* ctrl-f */
   menu_item = gtk_image_menu_item_new_with_mnemonic (_("_Find..."));
   gtk_image_menu_item_set_image (
           GTK_IMAGE_MENU_ITEM (menu_item), 
@@ -900,6 +897,7 @@ make_menu (GucharmapWindow *guw)
                     G_CALLBACK (search_find), guw);
   gtk_menu_shell_append (GTK_MENU_SHELL (search_menu), menu_item);
 
+  /* ctrl-g */
   menu_item = gtk_image_menu_item_new_with_mnemonic (_("Find _Next"));
   gtk_image_menu_item_set_image (
           GTK_IMAGE_MENU_ITEM (menu_item), 
@@ -911,10 +909,8 @@ make_menu (GucharmapWindow *guw)
   gtk_menu_shell_append (GTK_MENU_SHELL (search_menu), menu_item);
   /* finished making the search menu */
 
-  /* make the go menu */
-  go_menu = gtk_menu_new ();
-  gtk_menu_set_accel_group (GTK_MENU (go_menu), guw->accel_group);
-  gtk_menu_item_set_submenu (GTK_MENU_ITEM (go_menu_item), go_menu);
+  /* separator */
+  gtk_menu_shell_append (GTK_MENU_SHELL (search_menu), gtk_menu_item_new ());
 
   /* ctrl-h */
   menu_item = gtk_menu_item_new_with_mnemonic (_("_Hex Code Point..."));
@@ -922,16 +918,16 @@ make_menu (GucharmapWindow *guw)
                               GDK_h, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
   g_signal_connect (G_OBJECT (menu_item), "activate",
                     G_CALLBACK (jump_code_point), guw);
-  gtk_menu_shell_append (GTK_MENU_SHELL (go_menu), menu_item);
+  gtk_menu_shell_append (GTK_MENU_SHELL (search_menu), menu_item);
 
-  /* ctrl-v */
+  /* ctrl-p */
   menu_item = gtk_menu_item_new_with_mnemonic (_("Character in _Clipboard"));
   gtk_widget_add_accelerator (menu_item, "activate", guw->accel_group,
                               GDK_p, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
   g_signal_connect (G_OBJECT (menu_item), "activate",
                     G_CALLBACK (jump_clipboard), guw); 
-  gtk_menu_shell_append (GTK_MENU_SHELL (go_menu), menu_item);
-  /* finished making the go menu */
+  gtk_menu_shell_append (GTK_MENU_SHELL (search_menu), menu_item);
+  /* finished making the search menu */
 
 #if HAVE_GNOME
   /* make the help menu */
