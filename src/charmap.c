@@ -133,8 +133,8 @@ unichar_to_printable_utf8 (gunichar uc)
   /* http://www.cl.cam.ac.uk/~mgk25/unicode.html#utf-8 --"Also note that
    * the code positions U+D800 to U+DFFF (UTF-16 surrogates) as well as
    * U+FFFE and U+FFFF must not occur in normal UTF-8" */
-  if ((g_unichar_isdefined (uc) && ! g_unichar_isgraph (uc)) 
-      || ! g_unichar_validate (uc))
+  if (! g_unichar_validate (uc) || (! g_unichar_isgraph (uc) 
+              && g_unichar_type (uc) != G_UNICODE_PRIVATE_USE))
     return "";
   
   /* Unicode Standard 3.2, section 2.6, "By convention, diacritical marks
@@ -990,7 +990,8 @@ draw_character (Charmap *charmap, gint row, gint col)
 
   uc = rowcol_to_unichar (charmap, row, col);
 
-  if (uc < 0 || uc > UNICHAR_MAX)
+  if (uc < 0 || uc > UNICHAR_MAX || ! g_unichar_validate (uc) 
+      || ! g_unichar_isdefined (uc))
     return;
 
   if (GTK_WIDGET_HAS_FOCUS (charmap->chartable) && uc == charmap->active_char)
@@ -1034,14 +1035,19 @@ draw_square_bg (Charmap *charmap, gint row, gint col)
     gc = charmap->chartable->style->base_gc[GTK_STATE_SELECTED];
   else if (uc == charmap->active_char)
     gc = charmap->chartable->style->base_gc[GTK_STATE_ACTIVE];
-  else
+  else if (! g_unichar_validate (uc))
+    gc = charmap->chartable->style->fg_gc[GTK_STATE_INSENSITIVE];
+  else if (! g_unichar_isdefined (uc))
+    gc = charmap->chartable->style->bg_gc[GTK_STATE_INSENSITIVE];
+  else 
     gc = charmap->chartable->style->base_gc[GTK_STATE_NORMAL];
 
   square_width = charmap_column_width (charmap, col) - 1;
   square_height = charmap_row_height (charmap, row) - 1;
 
   gdk_draw_rectangle (charmap->chartable_pixmap, gc, TRUE, 
-                      charmap_x_offset (charmap, col), charmap_y_offset (charmap, row),
+                      charmap_x_offset (charmap, col), 
+		      charmap_y_offset (charmap, row),
                       square_width, square_height);
 }
 
@@ -1120,7 +1126,9 @@ draw_chartable_from_scratch (Charmap *charmap)
         gunichar uc = rowcol_to_unichar (charmap, row, col);
 
         /* for others, the background was drawn in a big swath */
-        if (uc == charmap->active_char)
+        if (uc == charmap->active_char
+            || ! g_unichar_validate (uc)
+            || ! g_unichar_isdefined (uc))
           draw_square_bg (charmap, row, col);
 
         draw_character (charmap, row, col);
