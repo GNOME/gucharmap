@@ -965,7 +965,6 @@ static GtkWidget *
 make_unicode_block_selector (Charmap *charmap)
 {
   GtkWidget *scrolled_window;
-  GtkWidget *vbox;
   GtkTreeIter iter;
   GtkTreeIter child_iter;
   GtkCellRenderer *cell;
@@ -975,12 +974,9 @@ make_unicode_block_selector (Charmap *charmap)
   gunichar uc;
   gint i, bi;
 
-  vbox = gtk_vbox_new (FALSE, 1);
-
   tooltips = gtk_tooltips_new ();
 
   scrolled_window = gtk_scrolled_window_new (NULL, NULL);
-  gtk_box_pack_start (GTK_BOX (vbox), scrolled_window, TRUE, TRUE, 0);
 
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
                                   GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
@@ -1061,7 +1057,8 @@ make_unicode_block_selector (Charmap *charmap)
   gtk_container_add (GTK_CONTAINER (scrolled_window), 
                      charmap->block_selector_view);
 
-  return vbox;
+  gtk_widget_show_all (scrolled_window);
+  return scrolled_window;
 }
 
 
@@ -1070,6 +1067,8 @@ make_caption (Charmap *charmap)
 {
   GtkWidget *scrolled_window;
   GtkWidget *table;
+  GtkWidget *vbox;
+  GtkWidget *disclosure;
   PangoFontMetrics *font_metrics; 
   gint font_height; 
 
@@ -1214,7 +1213,22 @@ make_caption (Charmap *charmap)
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window), 
                                   GTK_POLICY_ALWAYS, GTK_POLICY_NEVER);
 
-  return scrolled_window;
+  vbox = gtk_vbox_new (FALSE, 0);
+
+  disclosure = cddb_disclosure_new (scrolled_window, 
+                                    _("Details on the current character"), 
+                                    NULL);
+  gtk_box_pack_start (GTK_BOX (vbox), disclosure, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (vbox), scrolled_window, FALSE, FALSE, 0);
+
+  /* this makes it give the scrolled_window enough space when it is shown */
+  gtk_widget_show_all (scrolled_window);
+  gtk_widget_hide (scrolled_window);
+
+  gtk_widget_show (disclosure);
+  gtk_widget_show (vbox);
+
+  return vbox;
 }
 
 
@@ -1307,6 +1321,8 @@ make_text_to_copy (Charmap *charmap)
   g_signal_connect (G_OBJECT (button), "clicked",
                     G_CALLBACK (clear_button_clicked), charmap);
   gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 3);
+
+  gtk_widget_show_all (hbox);
 
   return hbox;
 }
@@ -1490,6 +1506,8 @@ make_chartable (Charmap *charmap)
   gtk_box_pack_start (GTK_BOX (hbox), make_scrollbar (charmap), 
                       FALSE, FALSE, 0);
 
+  gtk_widget_show_all (hbox);
+
   return hbox;
 }
 
@@ -1584,6 +1602,8 @@ make_search (Charmap *charmap)
 
   gtk_tooltips_set_tip (tooltips, button, _("Search for the next occurrence of this string in a character's Unicode name."), NULL);
 
+  gtk_widget_show_all (hbox);
+
   return hbox;
 }
 
@@ -1624,13 +1644,11 @@ charmap_init (Charmap *charmap)
   caption = make_caption (charmap);
   /* start packing stuff in the outer vbox (the Charmap itself) */
   gtk_box_pack_start (GTK_BOX (charmap), hbox, FALSE, FALSE, 0);
+  gtk_widget_show (hbox);
   gtk_box_pack_start (GTK_BOX (charmap), hpaned, TRUE, TRUE, 0);
-  gtk_box_pack_start (
-          GTK_BOX (charmap), 
-          cddb_disclosure_new (caption, _("Details on the current character"), 
-                               NULL), 
-          FALSE, FALSE, 0);
+  gtk_widget_show (hpaned);
   gtk_box_pack_start (GTK_BOX (charmap), caption, FALSE, FALSE, 0);
+  gtk_widget_show (caption);
   /* end packing stuff in the outer vbox (the Charmap itself) */
 
   /* the statusbar— not placed anywhere */

@@ -155,6 +155,7 @@ make_menu ()
   gtk_menu_shell_append (GTK_MENU_SHELL (help_menu), menu_item);
   /* finished making the help menu */
 
+  gtk_widget_show_all (menubar);
   return menubar;
 }
 
@@ -176,6 +177,9 @@ main (gint argc, gchar **argv)
   tooltips = gtk_tooltips_new ();
 
   window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+  gtk_window_set_default_size (GTK_WINDOW (window), 
+                               gdk_screen_width () * 1/2,
+                               gdk_screen_height () * 1/2);
   gtk_window_set_title (GTK_WINDOW (window), _("Unicode Character Map"));
   gtk_window_set_icon (
           GTK_WINDOW (window), 
@@ -194,13 +198,11 @@ main (gint argc, gchar **argv)
   gtk_container_set_border_width (GTK_CONTAINER (fontsel), 5);
   gtk_toolbar_append_widget (GTK_TOOLBAR (toolbar), fontsel, NULL, NULL);
   gtk_box_pack_start (GTK_BOX (vbox), toolbar, FALSE, FALSE, 0);
+  gtk_widget_show_all (toolbar);
 
   charmap = charmap_new ();
+  gtk_widget_show (charmap);
   gtk_box_pack_start (GTK_BOX (vbox), charmap, TRUE, TRUE, 0);
-
-  gtk_window_set_default_size (GTK_WINDOW (window), 
-                               gdk_screen_width () * 1/2,
-                               gdk_screen_height () * 1/2);
 
   g_signal_connect (fontsel, "changed", G_CALLBACK (fontsel_changed),
                     charmap);
@@ -217,8 +219,8 @@ main (gint argc, gchar **argv)
   g_free (orig_font);
   g_free (new_font);
 
-  /* show everything so far */
-  gtk_widget_show_all (window);
+  gtk_widget_show (vbox);
+  gtk_widget_show (window);
 
   /* show the statusbar */
   statusbar = charmap_get_statusbar (CHARMAP (charmap));
