@@ -114,7 +114,7 @@ write_blocks()
         end=`$ECHO $line | $SED 's/^\([^.]*\)\.\.\([^;]*\); \(.*\)$/\2/'`
         name=`$ECHO $line | $SED 's/^\([^.]*\)\.\.\([^;]*\); \(.*\)$/\3/'`
 
-        $ECHO "  { 0x$start, 0x$end, \"$name\" },"
+        $ECHO "  { 0x$start, 0x$end, N_(\"$name\") },"
     done
 
     $ECHO "  { (gunichar)(-1), (gunichar)(-1), NULL }"

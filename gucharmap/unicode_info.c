@@ -23,6 +23,7 @@
 
 #include <gtk/gtk.h>
 #include <string.h>
+#include <gucharmap_intl.h>
 #include <unicode_info.h>
 
 
@@ -136,7 +137,7 @@ get_hangul_syllable_name (gunichar s)
   VIndex = (SIndex % NCount) / TCount;
   TIndex = SIndex % TCount;
 
-  g_snprintf (buf, 32, "HANGUL SYLLABLE %s%s%s", JAMO_L_TABLE[LIndex],
+  g_snprintf (buf, 32, _("HANGUL SYLLABLE %s%s%s"), JAMO_L_TABLE[LIndex],
               JAMO_V_TABLE[VIndex], JAMO_T_TABLE[TIndex]);
 
   return buf;
@@ -147,30 +148,30 @@ G_CONST_RETURN gchar *
 get_unicode_name (gunichar uc)
 {
   if (uc >= 0x3400 && uc <= 0x4DB5)
-    return "<CJK Ideograph Extension A>";
+    return _("<CJK Ideograph Extension A>");
   else if (uc >= 0x4e00 && uc <= 0x9fa5)
-    return "<CJK Ideograph>";
+    return _("<CJK Ideograph>");
   else if (uc >= 0xac00 && uc <= 0xd7af)
     return get_hangul_syllable_name (uc);
   else if (uc >= 0xD800 && uc <= 0xDB7F) 
-    return "<Non Private Use High Surrogate>";
+    return _("<Non Private Use High Surrogate>");
   else if (uc >= 0xDB80 && uc <= 0xDBFF) 
-    return "<Private Use High Surrogate>";
+    return _("<Private Use High Surrogate>");
   else if (uc >= 0xDC00 && uc <= 0xDFFF)
-    return "<Low Surrogate, Last>";
+    return _("<Low Surrogate, Last>");
   else if (uc >= 0xE000 && uc <= 0xF8FF) 
-    return "<Private Use>";
+    return _("<Private Use>");
   else if (uc >= 0xF0000 && uc <= 0xFFFFD)
-    return "<Plane 15 Private Use>";
+    return _("<Plane 15 Private Use>");
   else if (uc >= 0x100000 && uc <= 0x10FFFD)
-    return "<Plane 16 Private Use>";
+    return _("<Plane 16 Private Use>");
   else if (uc >= 0x20000 && uc <= 0x2A6D6)
-    return "<CJK Ideograph Extension B>";
+    return _("<CJK Ideograph Extension B>");
   else
     {
       const gchar *x = get_unicode_data_name (uc);
       if (x == NULL)
-        return "<not assigned>";
+        return _("<not assigned>");
       else
         return x;
     }
@@ -182,36 +183,36 @@ get_unicode_category_name (gunichar uc)
 {
   switch (unichar_type (uc))
     {
-      case G_UNICODE_CONTROL: return "Other, Control";
-      case G_UNICODE_FORMAT: return "Other, Format";
-      case G_UNICODE_UNASSIGNED: return "Other, Not Assigned";
-      case G_UNICODE_PRIVATE_USE: return "Other, Private Use";
-      case G_UNICODE_SURROGATE: return "Other, Surrogate";
-      case G_UNICODE_LOWERCASE_LETTER: return "Letter, Lowercase";
-      case G_UNICODE_MODIFIER_LETTER: return "Letter, Modifier";
-      case G_UNICODE_OTHER_LETTER: return "Letter, Other";
-      case G_UNICODE_TITLECASE_LETTER: return "Letter, Titlecase";
-      case G_UNICODE_UPPERCASE_LETTER: return "Letter, Uppercase";
-      case G_UNICODE_COMBINING_MARK: return "Mark, Spacing Combining";
-      case G_UNICODE_ENCLOSING_MARK: return "Mark, Enclosing";
-      case G_UNICODE_NON_SPACING_MARK: return "Mark, Non-Spacing";
-      case G_UNICODE_DECIMAL_NUMBER: return "Number, Decimal Digit";
-      case G_UNICODE_LETTER_NUMBER: return "Number, Letter";
-      case G_UNICODE_OTHER_NUMBER: return "Number, Other";
-      case G_UNICODE_CONNECT_PUNCTUATION: return "Punctuation, Connector";
-      case G_UNICODE_DASH_PUNCTUATION: return "Punctuation, Dash";
-      case G_UNICODE_CLOSE_PUNCTUATION: return "Punctuation, Close";
-      case G_UNICODE_FINAL_PUNCTUATION: return "Punctuation, Final quote ";
-      case G_UNICODE_INITIAL_PUNCTUATION: return "Punctuation, Initial quote";
-      case G_UNICODE_OTHER_PUNCTUATION: return "Punctuation, Other";
-      case G_UNICODE_OPEN_PUNCTUATION: return "Punctuation, Open";
-      case G_UNICODE_CURRENCY_SYMBOL: return "Symbol, Currency";
-      case G_UNICODE_MODIFIER_SYMBOL: return "Symbol, Modifier";
-      case G_UNICODE_MATH_SYMBOL: return "Symbol, Math";
-      case G_UNICODE_OTHER_SYMBOL: return "Symbol, Other";
-      case G_UNICODE_LINE_SEPARATOR: return "Separator, Line";
-      case G_UNICODE_PARAGRAPH_SEPARATOR: return "Separator, Paragraph";
-      case G_UNICODE_SPACE_SEPARATOR: return "Separator, Space";
+      case G_UNICODE_CONTROL: return _("Other, Control");
+      case G_UNICODE_FORMAT: return _("Other, Format");
+      case G_UNICODE_UNASSIGNED: return _("Other, Not Assigned");
+      case G_UNICODE_PRIVATE_USE: return _("Other, Private Use");
+      case G_UNICODE_SURROGATE: return _("Other, Surrogate");
+      case G_UNICODE_LOWERCASE_LETTER: return _("Letter, Lowercase");
+      case G_UNICODE_MODIFIER_LETTER: return _("Letter, Modifier");
+      case G_UNICODE_OTHER_LETTER: return _("Letter, Other");
+      case G_UNICODE_TITLECASE_LETTER: return _("Letter, Titlecase");
+      case G_UNICODE_UPPERCASE_LETTER: return _("Letter, Uppercase");
+      case G_UNICODE_COMBINING_MARK: return _("Mark, Spacing Combining");
+      case G_UNICODE_ENCLOSING_MARK: return _("Mark, Enclosing");
+      case G_UNICODE_NON_SPACING_MARK: return _("Mark, Non-Spacing");
+      case G_UNICODE_DECIMAL_NUMBER: return _("Number, Decimal Digit");
+      case G_UNICODE_LETTER_NUMBER: return _("Number, Letter");
+      case G_UNICODE_OTHER_NUMBER: return _("Number, Other");
+      case G_UNICODE_CONNECT_PUNCTUATION: return _("Punctuation, Connector");
+      case G_UNICODE_DASH_PUNCTUATION: return _("Punctuation, Dash");
+      case G_UNICODE_CLOSE_PUNCTUATION: return _("Punctuation, Close");
+      case G_UNICODE_FINAL_PUNCTUATION: return _("Punctuation, Final Quote");
+      case G_UNICODE_INITIAL_PUNCTUATION: return _("Punctuation, Initial Quote");
+      case G_UNICODE_OTHER_PUNCTUATION: return _("Punctuation, Other");
+      case G_UNICODE_OPEN_PUNCTUATION: return _("Punctuation, Open");
+      case G_UNICODE_CURRENCY_SYMBOL: return _("Symbol, Currency");
+      case G_UNICODE_MODIFIER_SYMBOL: return _("Symbol, Modifier");
+      case G_UNICODE_MATH_SYMBOL: return _("Symbol, Math");
+      case G_UNICODE_OTHER_SYMBOL: return _("Symbol, Other");
+      case G_UNICODE_LINE_SEPARATOR: return _("Separator, Line");
+      case G_UNICODE_PARAGRAPH_SEPARATOR: return _("Separator, Paragraph");
+      case G_UNICODE_SPACE_SEPARATOR: return _("Separator, Space");
       default: return "";
     }
 }

@@ -569,7 +569,7 @@ make_unicode_block_selector (Charmap *charmap)
     {
       gtk_tree_store_append (charmap->block_selector_model, &iter, NULL);
       gtk_tree_store_set (charmap->block_selector_model, &iter, 
-                          BLOCK_SELECTOR_LABEL, unicode_blocks[i].name, 
+                          BLOCK_SELECTOR_LABEL, _(unicode_blocks[i].name),
                           BLOCK_SELECTOR_UC_START, unicode_blocks[i].start,
                           BLOCK_SELECTOR_UNICODE_BLOCK, &(unicode_blocks[i]),
                           -1);
