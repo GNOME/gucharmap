@@ -53,10 +53,11 @@ struct _GucharmapSearchDialogClass
   void (* search_finish) (gunichar found_char);
 };
 
-GType       gucharmap_search_dialog_get_type     ();
-GtkWidget * gucharmap_search_dialog_new          (GucharmapWindow *parent);
-void        gucharmap_search_dialog_start_search (GucharmapSearchDialog *search_dialog,
-                                                  GucharmapDirection     direction);
+GType       gucharmap_search_dialog_get_type      ();
+GtkWidget * gucharmap_search_dialog_new           (GucharmapWindow *parent);
+void        gucharmap_search_dialog_start_search  (GucharmapSearchDialog *search_dialog,
+                                                   GucharmapDirection     direction);
+gdouble     gucharmap_search_dialog_get_completed (GucharmapSearchDialog *search_dialog); 
 
 G_END_DECLS
 

@@ -38,15 +38,6 @@
 # define ICON_PATH ""
 #endif
 
-typedef struct _EntryDialog EntryDialog;
-
-struct _EntryDialog
-{
-  GucharmapWindow *guw;
-  GtkWidget *dialog;
-  GtkEntry *entry;
-};
-
 #define GUCHARMAP_WINDOW_GET_PRIVATE(o) \
             (G_TYPE_INSTANCE_GET_PRIVATE ((o), gucharmap_window_get_type (), GucharmapWindowPrivate))
 
@@ -72,6 +63,8 @@ struct _GucharmapWindowPrivate
 
   GtkWidget *search_dialog; /* takes care of all aspects of searching */
 
+  GtkWidget *progress;
+
   /* menu items to disable while searching */
   GtkWidget *find_menu_item;
   GtkWidget *find_next_menu_item;
@@ -95,6 +88,27 @@ status_message (GtkWidget       *widget,
     gtk_statusbar_push (GTK_STATUSBAR (priv->status), 0, message);
 }
 
+static gboolean
+update_progress_bar (GucharmapWindow *guw)
+{
+  GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
+  gdouble fraction_completed;
+
+  fraction_completed = gucharmap_search_dialog_get_completed (GUCHARMAP_SEARCH_DIALOG (priv->search_dialog));
+
+  if (fraction_completed < 0 || fraction_completed > 1)
+    {
+      gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (priv->progress), 0);
+      gtk_progress_bar_set_text (GTK_PROGRESS_BAR (priv->progress), NULL);
+      return FALSE;
+    }
+  else
+    {
+      gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (priv->progress), fraction_completed);
+      return TRUE;
+    }
+}
+
 static void
 search_start (GucharmapSearchDialog *search_dialog,
               GucharmapWindow       *guw)
@@ -109,6 +123,9 @@ search_start (GucharmapSearchDialog *search_dialog,
   gtk_widget_set_sensitive (priv->find_menu_item, FALSE);
   gtk_widget_set_sensitive (priv->find_next_menu_item, FALSE);
   gtk_widget_set_sensitive (priv->find_prev_menu_item, FALSE);
+
+  gtk_progress_bar_set_text (GTK_PROGRESS_BAR (priv->progress), _("Searching..."));
+  g_timeout_add (100, (GSourceFunc) update_progress_bar, guw);
 }
 
 static void
@@ -117,6 +134,9 @@ search_finish (GucharmapSearchDialog *search_dialog,
                GucharmapWindow       *guw)
 {
   GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
+
+  gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (priv->progress), 0);
+  gtk_progress_bar_set_text (GTK_PROGRESS_BAR (priv->progress), NULL);
 
   if (found_char != (gunichar)(-1))
     gucharmap_charmap_go_to_character (guw->charmap, found_char);
@@ -638,7 +658,7 @@ status_realize (GtkWidget       *status,
   GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
 
   /* increase the height a bit so it doesn't resize itself */
-  gtk_widget_set_size_request (priv->status, -1, priv->status->allocation.height + 3);
+  gtk_widget_set_size_request (priv->status, -1, priv->status->allocation.height + 9);
 }
 
 static void
@@ -671,10 +691,25 @@ pack_stuff_in_window (GucharmapWindow *guw)
   gtk_box_pack_start (GTK_BOX (big_vbox), priv->text_to_copy_container, FALSE, FALSE, 0);
   g_signal_connect (guw->charmap->chartable, "activate", G_CALLBACK (insert_character_in_text_to_copy), guw);
 
+  
+  hbox = gtk_hbox_new (FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (big_vbox), hbox, FALSE, FALSE, 0);
+
   priv->status = gtk_statusbar_new ();
-  gtk_box_pack_start (GTK_BOX (big_vbox), priv->status, FALSE, FALSE, 0);
+  gtk_statusbar_set_has_resize_grip (GTK_STATUSBAR (priv->status), FALSE);
+  gtk_box_pack_start (GTK_BOX (hbox), priv->status, TRUE, TRUE, 0);
   gtk_widget_show (priv->status);
   g_signal_connect (priv->status, "realize", G_CALLBACK (status_realize), guw);
+
+  priv->progress = gtk_progress_bar_new ();
+  gtk_box_pack_start (GTK_BOX (hbox), priv->progress, FALSE, FALSE, 0);;
+
+#if 0
+  grip = gtk_statusbar_new ();
+  gtk_statusbar_set_has_resize_grip (GTK_STATUSBAR (grip), TRUE);
+  gtk_box_pack_start (GTK_BOX (hbox), grip, FALSE, FALSE, 0);;
+#endif
+  gtk_widget_show_all (hbox);
 
   g_signal_connect (guw->charmap, "status-message", G_CALLBACK (status_message), guw);
 

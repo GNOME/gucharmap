@@ -62,6 +62,8 @@ struct _GucharmapSearchState
   gboolean                dont_search;
   gpointer                saved_data;        /* holds some data to pass back to the caller */
   gint                    list_num_chars;    /* last_index + 1 */
+  gboolean                searching;
+  gint                    strings_checked;
 };
 
 struct _GucharmapSearchDialogPrivate
@@ -100,16 +102,20 @@ utf8_strcasestr (const gchar *haystack,
 }
 
 static gboolean
-matches (gunichar     wc,
-         const gchar *search_string_nfd)
+matches (GucharmapSearchDialog *search_dialog,
+         gunichar               wc,
+         const gchar           *search_string_nfd)
 {
+  GucharmapSearchDialogPrivate *priv = GUCHARMAP_SEARCH_DIALOG_GET_PRIVATE (search_dialog);
   const gchar *haystack; 
   gchar *haystack_nfd;
   gboolean matches;
 
-  haystack = gucharmap_get_unicode_name (wc);
+  haystack = gucharmap_get_unicode_data_name (wc);
   if (haystack)
     {
+      priv->search_state->strings_checked++;
+
       /* character names are ascii, so are nfd */
       haystack_nfd = (gchar *) haystack;
       matches = utf8_strcasestr (haystack_nfd, search_string_nfd) != NULL;
@@ -121,6 +127,8 @@ matches (gunichar     wc,
   haystack = gucharmap_get_unicode_kDefinition (wc);
   if (haystack)
     {
+      priv->search_state->strings_checked++;
+
       haystack_nfd = g_utf8_normalize (haystack, -1, G_NORMALIZE_NFD);
       matches = utf8_strcasestr (haystack_nfd, search_string_nfd) != NULL;
       g_free (haystack_nfd);
@@ -247,7 +255,7 @@ idle_search (GucharmapSearchDialog *search_dialog)
         continue;
 
       /* no leading spaces */
-      if (matches (wc, priv->search_state->no_leading_space))
+      if (matches (search_dialog, wc, priv->search_state->no_leading_space))
         {
           if (priv->search_state->found_index == priv->search_state->curr_index)
             priv->search_state->dont_search = TRUE;  /* this is the only match */
@@ -347,6 +355,8 @@ gucharmap_search_state_new (const GucharmapCodepointList *list,
        g_unichar_isspace (g_utf8_get_char (search_state->no_leading_space));
        search_state->no_leading_space = g_utf8_next_char (search_state->no_leading_space));
 
+  search_state->searching = FALSE;
+
   return search_state;
 }
 
@@ -400,6 +410,8 @@ search_completed (GucharmapSearchDialog *search_dialog)
   GucharmapSearchDialogPrivate *priv = GUCHARMAP_SEARCH_DIALOG_GET_PRIVATE (search_dialog);
   gunichar found_char = gucharmap_search_state_get_found_char (priv->search_state);
 
+  priv->search_state->searching = FALSE;
+
   g_signal_emit (search_dialog, gucharmap_search_dialog_signals[SEARCH_FINISH], 0, found_char);
 
   if (found_char == (gunichar)(-1))
@@ -435,9 +447,11 @@ gucharmap_search_dialog_start_search (GucharmapSearchDialog *search_dialog,
   gtk_widget_set_sensitive (priv->prev_button, FALSE);
   gtk_widget_set_sensitive (priv->next_button, FALSE);
 
-  g_signal_emit (search_dialog, gucharmap_search_dialog_signals[SEARCH_START], 0);
+  priv->search_state->searching = TRUE;
+  priv->search_state->strings_checked = 0;
 
   g_idle_add_full (G_PRIORITY_DEFAULT_IDLE, (GSourceFunc) idle_search, search_dialog, (GDestroyNotify) search_completed);
+  g_signal_emit (search_dialog, gucharmap_search_dialog_signals[SEARCH_START], 0);
 }
 
 static void
@@ -601,4 +615,18 @@ gucharmap_search_dialog_new (GucharmapWindow *guw)
     gtk_window_set_icon (GTK_WINDOW (search_dialog), gtk_window_get_icon (GTK_WINDOW (guw)));
 
   return GTK_WIDGET (search_dialog);
+}
+
+gdouble
+gucharmap_search_dialog_get_completed (GucharmapSearchDialog *search_dialog)
+{
+  GucharmapSearchDialogPrivate *priv = GUCHARMAP_SEARCH_DIALOG_GET_PRIVATE (search_dialog);
+
+  if (priv->search_state == NULL || !priv->search_state->searching)
+    return -1.0;
+  else
+    {
+      gdouble total = gucharmap_get_unicode_data_name_count () + gucharmap_get_unihan_count ();
+      return (gdouble) priv->search_state->strings_checked / total;
+    }
 }

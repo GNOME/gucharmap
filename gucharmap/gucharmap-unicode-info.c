@@ -235,6 +235,18 @@ gucharmap_get_unicode_data_name (gunichar uc)
   return NULL;
 }
 
+gint
+gucharmap_get_unicode_data_name_count ()
+{
+  return G_N_ELEMENTS (unicode_names);
+}
+
+gint
+gucharmap_get_unihan_count ()
+{
+  return G_N_ELEMENTS (unihan);
+}
+
 #if ENABLE_UNIHAN
 
 /* does a binary search; also caches most recent, since it will often be
