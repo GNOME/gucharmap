@@ -155,6 +155,9 @@ show_available_styles (MiniFontSelection *fontsel)
           pango_font_family_hash, 
           pango_font_description_get_family (fontsel->font_desc));
   pango_font_family_list_faces (family, &faces, &n_faces);
+
+  g_return_if_fail (n_faces > 0);
+
   qsort (faces, n_faces, sizeof (PangoFontFace *), faces_sort_func);
 
   if (fontsel->available_faces != NULL)
