@@ -66,7 +66,7 @@ unichar_to_printable_utf8 (gunichar uc)
 
   /* XXX: workaround for pango 1.0.3 bug
    * http://bugzilla.gnome.org/show_bug.cgi?id=88824 */
-  if (! g_unichar_isgraph (uc) || uc == 0x2029)
+  if ((g_unichar_isdefined (uc) && ! g_unichar_isgraph (uc)) || uc == 0x2029)
     return "";
   
   /* Unicode Standard 3.2, section 2.6, "By convention, diacritical marks
@@ -540,8 +540,7 @@ draw_chartable_from_scratch (Charmap *charmap)
         if (uc == charmap->active_char)
           draw_square_bg (charmap, row, col);
 
-        if (g_unichar_isgraph (uc))
-          draw_character (charmap, row, col);
+        draw_character (charmap, row, col);
       }
 }
 
