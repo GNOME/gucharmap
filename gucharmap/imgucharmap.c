@@ -206,7 +206,7 @@ imgucharmap_register_type (GTypeModule *module)
 static const GtkIMContextInfo imgucharmap_info = 
 {
   "imgucharmap",                /* ID */
-  N_("Unicode Character Map"),  /* Human readable name */
+  N_("Character Map"),          /* Human readable name */
   GETTEXT_PACKAGE,              /* Translation domain */
   LOCALEDIR,                    /* Dir for bindtextdomain */
   ""    /* Languages for which this module is the default */

@@ -383,7 +383,7 @@ help_about (GtkWidget *widget, GucharmapWindow *guw)
       about = gnome_about_new (
               "gucharmap", VERSION, 
               "Copyright © 2003 Noah Levitt <nlevitt аt columbia.edu>",
-              _("Unicode Character Map"), authors, documenters,
+              _("Character Map"), authors, documenters,
               translator_credits, guw->icon);
 
       /* set the widget pointer to NULL when the widget is destroyed */
@@ -876,7 +876,7 @@ pack_stuff_in_window (GucharmapWindow *guw)
 static void
 gucharmap_window_init (GucharmapWindow *guw)
 {
-  gtk_window_set_title (GTK_WINDOW (guw), _("Unicode Character Map"));
+  gtk_window_set_title (GTK_WINDOW (guw), _("Character Map"));
 
   guw->font_selection_visible = FALSE;
   guw->text_to_copy_visible = FALSE;
