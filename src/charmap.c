@@ -60,7 +60,16 @@ enum
   NUM_SIGNALS
 };
 
+
 static guint charmap_signals[NUM_SIGNALS] = { 0, 0 };
+
+static const GtkTargetEntry dnd_target_table[] =
+  {
+    { "UTF8_STRING", 0, 0 },
+    { "COMPOUND_TEXT", 0, 0 },
+    { "TEXT", 0, 0 },
+    { "STRING", 0, 0 }
+  };
 
 
 /* return value is read-only, should not be freed */
@@ -76,8 +85,7 @@ unichar_to_printable_utf8 (gunichar uc)
    * the code positions U+D800 to U+DFFF (UTF-16 surrogates) as well as
    * U+FFFE and U+FFFF must not occur in normal UTF-8" */
   if ((g_unichar_isdefined (uc) && ! g_unichar_isgraph (uc)) 
-      || uc == 0x2029 || uc == 0xfffe || uc == 0xffff
-      || (uc >= 0xd800 && uc <= 0xdfff))
+      || ! is_valid_character (uc) || uc == 0x2029)
     return "";
   
   /* Unicode Standard 3.2, section 2.6, "By convention, diacritical marks
@@ -819,6 +827,134 @@ set_active_character (Charmap *charmap, gunichar uc)
 }
 
 
+static PangoLayout *
+layout_scaled_glyph (Charmap *charmap, gunichar uc, gdouble scale)
+{
+  gint default_font_size, font_size;
+  PangoLayout *layout;
+  PangoFontDescription *font_desc;
+
+  default_font_size = pango_font_description_get_size (
+      gtk_widget_get_style (GTK_WIDGET (charmap->chartable))->font_desc);
+
+  if (default_font_size <= 0)
+    default_font_size = 10 * PANGO_SCALE;
+
+  font_desc = pango_font_description_copy (
+      gtk_widget_get_style (charmap->chartable)->font_desc);
+
+  font_size = scale * default_font_size;
+  if (font_size <= 0)
+    font_size = default_font_size;
+
+  pango_font_description_set_size (font_desc, font_size);
+
+  layout = pango_layout_new (pango_layout_get_context (charmap->pango_layout));
+
+  pango_layout_set_font_description (layout, font_desc);
+  pango_layout_set_text (layout, unichar_to_printable_utf8 (uc), -1);
+
+  pango_font_description_free (font_desc);
+
+  return layout;
+}
+
+
+static gdouble
+compute_drag_icon_scale (Charmap *charmap)
+{
+  gint screen_height;
+  gdouble limit;
+
+#if GTK_CHECK_VERSION (2,1,1)
+  screen_height = gdk_screen_get_height (
+      gtk_widget_get_screen (charmap->chartable));
+#else
+  screen_height = gdk_screen_height ();
+#endif
+
+  limit = (0.3 * screen_height) / bare_minimal_row_height (charmap);
+
+  return CLAMP (limit, 0.1, 12.0);
+}
+
+
+static GdkPixbuf *
+create_drag_icon (Charmap *charmap)
+{
+  enum { PADDING = 8 };
+
+  PangoLayout *pango_layout;
+  PangoRectangle ink_rect;
+  gint pixmap_width, pixmap_height;
+  GtkStyle *style;
+  GdkPixmap *pixmap;
+  GdkPixbuf *pixbuf;
+
+  /* Apply the scaling.  Unfortunately not all fonts seem to be scalable.
+   * We could fall back to GdkPixbuf scaling, but that looks butt ugly :/
+   */
+  pango_layout = layout_scaled_glyph (charmap, charmap->active_char, 
+                                      compute_drag_icon_scale (charmap));
+
+  pango_layout_get_pixel_extents (pango_layout, &ink_rect, NULL);
+
+  /* Make the GdkPixmap large enough to account for
+   * possible offsets in the ink extents of the glyph.
+   */
+  pixmap_width  = ink_rect.width  + abs(ink_rect.x) + 2 * PADDING;
+  pixmap_height = ink_rect.height + abs(ink_rect.y) + 2 * PADDING;
+
+  style = gtk_widget_get_style (charmap->chartable);
+
+  pixmap = gdk_pixmap_new (charmap->chartable->window,
+                           pixmap_width, pixmap_height,
+                           -1);
+
+  gdk_draw_rectangle (pixmap,
+                      style->base_gc[GTK_STATE_NORMAL],
+                      TRUE,
+                      0, 0,
+                      pixmap_width, pixmap_height);
+
+  /* Draw a rectangular border while taking ink_rect offsets
+   * into account.  Superfluous edges will be clipped later.
+   */
+  gdk_draw_rectangle (pixmap,
+                      style->fg_gc[GTK_STATE_INSENSITIVE], 
+                      FALSE,
+                      MAX(0, ink_rect.x) + 1,
+                      MAX(0, ink_rect.y) + 1,
+                      ink_rect.width  + 2 * PADDING - 3,
+                      ink_rect.height + 2 * PADDING - 3);
+
+  /* Now draw the glyph.  The coordinates are adapted
+   * in order to compensate negative ink_rect offsets.
+   */
+  gdk_draw_layout (pixmap,
+                   style->text_gc[GTK_STATE_NORMAL],
+                   MAX(0, -ink_rect.x) + PADDING,
+                   MAX(0, -ink_rect.y) + PADDING,
+                   pango_layout);
+
+  /* Finally extract the area that has actually been drawn on;
+   * projected parts are discarded.  The resulting area is exactly
+   * that of the rectangle drawn earlier plus 1 pixel border width.
+   */
+  pixbuf = gdk_pixbuf_get_from_drawable (NULL, pixmap, NULL,
+                                         MAX(0, ink_rect.x),
+                                         MAX(0, ink_rect.y),
+                                         0, 0,
+                                         ink_rect.width  + 2 * PADDING,
+                                         ink_rect.height + 2 * PADDING);
+
+  g_object_unref (pango_layout);
+  g_object_unref (pixmap);
+
+  return pixbuf;
+}
+
+
 static void
 set_top_row (Charmap *charmap, gint row)
 {
@@ -1011,6 +1147,96 @@ get_char_at (Charmap *charmap, gint x, gint y)
 }
 
 
+typedef struct
+  {
+    Charmap *charmap;
+    GdkEventButton *event;
+  }
+DragTimeoutData;
+
+
+static DragTimeoutData *
+drag_timeout_data_new (Charmap *charmap, GdkEventButton *event)
+{
+  DragTimeoutData *timeout_data;
+
+  timeout_data = g_new (DragTimeoutData, 1);
+  timeout_data->charmap = charmap;
+  timeout_data->event = (GdkEventButton *)gdk_event_copy ((GdkEvent *)event);
+
+  return timeout_data;
+}
+
+
+/* Take a gpointer argument to avoid dangerous function pointer casts. */
+static void
+drag_timeout_data_free (gpointer data)
+{
+  DragTimeoutData *timeout_data;
+
+  timeout_data = (DragTimeoutData *)data;
+  gdk_event_free ((GdkEvent *)timeout_data->event);
+  g_free (timeout_data);
+}
+
+
+static gboolean
+drag_begin_timeout (gpointer data)
+{
+  DragTimeoutData *timeout_data;
+  GtkTargetList *target_list;
+
+  timeout_data = (DragTimeoutData *)data;
+
+  /* Indicate that the timeout has fired. */
+  timeout_data->charmap->drag_begin_timeout_id = 0;
+
+  target_list = gtk_target_list_new (dnd_target_table,
+                                     G_N_ELEMENTS(dnd_target_table));
+
+  gtk_drag_begin (timeout_data->charmap->chartable,
+                  target_list,
+                  GDK_ACTION_COPY,
+                  timeout_data->event->button,
+                  (GdkEvent *)timeout_data->event);
+
+  gtk_target_list_unref (target_list);
+
+  return FALSE; /* don't call me again */
+}
+
+
+static void
+start_drag_begin_timeout (Charmap *charmap, GdkEventButton *event)
+{
+  gint double_click_time;
+
+  g_return_if_fail (charmap->drag_begin_timeout_id == 0);
+
+  g_object_get (gtk_widget_get_settings (charmap->chartable),
+                "gtk-double-click-time", &double_click_time,
+                NULL);
+
+  charmap->drag_begin_timeout_id = g_timeout_add_full (
+      G_PRIORITY_DEFAULT_IDLE,
+      double_click_time,
+      drag_begin_timeout,
+      drag_timeout_data_new (charmap, event),
+      drag_timeout_data_free);
+}
+
+
+static void
+cancel_drag_begin_timeout (Charmap *charmap)
+{
+  if (charmap->drag_begin_timeout_id != 0)
+    {
+      g_source_remove (charmap->drag_begin_timeout_id);
+      charmap->drag_begin_timeout_id = 0;
+    }
+}
+
+
 /*  - single click with left button: activate character under pointer
  *  - double-click with left button: add active character to text_to_copy
  *  - single-click with middle button: jump to selection_primary
@@ -1020,6 +1246,9 @@ button_press_event (GtkWidget *widget,
                     GdkEventButton *event, 
                     Charmap *charmap)
 {
+  if (event->button == 1)
+    cancel_drag_begin_timeout (charmap);
+
   /* in case we lost keyboard focus and are clicking to get it back */
   gtk_widget_grab_focus (charmap->chartable);
 
@@ -1030,11 +1259,12 @@ button_press_event (GtkWidget *widget,
 	             charmap->active_char);
     }
   /* single-click */
-  else if (event->button == 1 && event->type == GDK_BUTTON_PRESS) 
+  else if (event->button == 1 && event->type == GDK_BUTTON_PRESS)
     {
-      set_active_character (charmap, 
+      set_active_character (charmap,
                             get_char_at (charmap, event->x, event->y));
       redraw (charmap);
+      start_drag_begin_timeout (charmap, event);
     }
   else if (event->button == 2)
     {
@@ -1047,7 +1277,19 @@ button_press_event (GtkWidget *widget,
 }
 
 
-static void        
+static gint
+button_release_event (GtkWidget *widget, 
+                      GdkEventButton *event, 
+                      Charmap *charmap)
+{
+  if (event->button == 1)
+    cancel_drag_begin_timeout (charmap);
+
+  return FALSE;
+}
+
+
+static void
 block_selection_changed (GtkTreeSelection *selection, 
                          gpointer user_data)
 {
@@ -1481,6 +1723,21 @@ size_allocate (GtkWidget *widget, GtkAllocation *allocation, Charmap *charmap)
 
 
 static void
+drag_begin (GtkWidget *widget, 
+            GdkDragContext *context,
+            Charmap *charmap)
+{
+  GdkPixbuf *drag_icon;
+
+  cancel_drag_begin_timeout (charmap);
+
+  drag_icon = create_drag_icon (charmap);
+  gtk_drag_set_icon_pixbuf (context, drag_icon, -8, -8);
+  g_object_unref (drag_icon);
+}
+
+
+static void
 drag_data_get (GtkWidget *widget, 
                GdkDragContext *context,
                GtkSelectionData *selection_data,
@@ -1538,19 +1795,12 @@ static GtkWidget *
 make_chartable (Charmap *charmap)
 {
   GtkWidget *hbox;
-  GtkTargetEntry target_table[] =
-    {
-      { "UTF8_STRING", 0, 0 },
-      { "COMPOUND_TEXT", 0, 0 },
-      { "TEXT", 0, 0 },
-      { "STRING", 0, 0 },
-    };
 
   charmap->chartable = gtk_drawing_area_new ();
 
   gtk_widget_set_events (charmap->chartable, 
-          GDK_EXPOSURE_MASK | GDK_KEY_PRESS_MASK | GDK_BUTTON_PRESS_MASK
-          | GDK_FOCUS_CHANGE_MASK | GDK_SCROLL_MASK);
+          GDK_EXPOSURE_MASK | GDK_KEY_PRESS_MASK | GDK_BUTTON_PRESS_MASK |
+          GDK_BUTTON_RELEASE_MASK | GDK_FOCUS_CHANGE_MASK | GDK_SCROLL_MASK);
 
   g_signal_connect (G_OBJECT (charmap->chartable), "expose_event",
                     G_CALLBACK (expose_event), charmap);
@@ -1558,6 +1808,8 @@ make_chartable (Charmap *charmap)
                     G_CALLBACK (key_press_event), charmap);
   g_signal_connect (G_OBJECT (charmap->chartable), "button_press_event",
                     G_CALLBACK (button_press_event), charmap);
+  g_signal_connect (G_OBJECT (charmap->chartable), "button_release_event",
+                    G_CALLBACK (button_release_event), charmap);
   g_signal_connect (G_OBJECT (charmap->chartable), "focus-in-event",
                     G_CALLBACK (focus_in_or_out_event), charmap);
   g_signal_connect (G_OBJECT (charmap->chartable), "focus-out-event",
@@ -1570,7 +1822,7 @@ make_chartable (Charmap *charmap)
                     G_CALLBACK (size_allocate), charmap);
 
   gtk_drag_dest_set (charmap->chartable, GTK_DEST_DEFAULT_ALL,
-                     target_table, G_N_ELEMENTS (target_table),
+                     dnd_target_table, G_N_ELEMENTS (dnd_target_table),
                      GDK_ACTION_COPY);
 
   g_signal_connect (G_OBJECT (charmap->chartable), "drag-data-received",
@@ -1578,8 +1830,11 @@ make_chartable (Charmap *charmap)
 
 
   gtk_drag_source_set (charmap->chartable, GDK_BUTTON1_MASK, 
-                       target_table, G_N_ELEMENTS (target_table),
+                       dnd_target_table, G_N_ELEMENTS (dnd_target_table),
                        GDK_ACTION_COPY);
+
+  g_signal_connect (G_OBJECT (charmap->chartable), "drag-begin",
+                    G_CALLBACK (drag_begin), charmap);
 
   g_signal_connect (G_OBJECT (charmap->chartable), "drag-data-get",
                     G_CALLBACK (drag_data_get), charmap);
@@ -1628,6 +1883,8 @@ charmap_init (Charmap *charmap)
 
   charmap->rows = CHARMAP_MIN_ROWS;
   charmap->cols = CHARMAP_MIN_COLS;
+
+  charmap->drag_begin_timeout_id = 0;
 
   gtk_box_set_spacing (GTK_BOX (charmap), 6);
   gtk_container_set_border_width (GTK_CONTAINER (charmap), 6);

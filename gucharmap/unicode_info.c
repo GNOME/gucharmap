@@ -329,3 +329,10 @@ unicode_canonical_decomposition (gunichar ch, gsize   *result_len)
     return g_unicode_canonical_decomposition (ch, result_len);
 }
 
+
+gboolean
+is_valid_character (gunichar uc)
+{
+  return (uc >= 0 && uc <= 0x10ffff && uc != 0xfffe && uc != 0xffff 
+          && (uc < 0xd800 || uc > 0xdfff));
+}

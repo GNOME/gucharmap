@@ -22,6 +22,7 @@
 #include <stdlib.h>
 #include "charmap.h"
 #include "mini_fontsel.h"
+#include "unicode_info.h"
 #if HAVE_GNOME
 # include "gnome.h"
 #endif
@@ -53,7 +54,8 @@ set_status (const gchar *message)
 {
   /* underflow is allowed */
   gtk_statusbar_pop (GTK_STATUSBAR (status), 0); 
-  gtk_statusbar_push (GTK_STATUSBAR (status), 0, message);
+  if (message != NULL)
+    gtk_statusbar_push (GTK_STATUSBAR (status), 0, message);
 }
 
 
@@ -180,17 +182,27 @@ jump_clipboard (GtkWidget *widget, gpointer data)
 static void
 append_character_to_text_to_copy (Charmap *charmap, gunichar uc)
 {
-  static gchar buf[TEXT_TO_COPY_MAXLENGTH];
-  static gchar ubuf[7];
+  GString *gs;
+  gchar ubuf[7];
   gint n;
+
+  if (! is_valid_character (uc))
+    {
+      set_text_to_copy_status (_("The selected code point is not a valid unicode character."));
+      return;
+    }
 
   n = g_unichar_to_utf8 (uc, ubuf);
   ubuf[n] = '\0';
 
-  g_snprintf (buf, TEXT_TO_COPY_MAXLENGTH, "%s%s", 
-              gtk_entry_get_text (GTK_ENTRY (text_to_copy)), ubuf);
+  gs = g_string_new (gtk_entry_get_text (GTK_ENTRY (text_to_copy)));
+  g_string_append (gs, ubuf);
 
-  gtk_entry_set_text (GTK_ENTRY (text_to_copy), buf);
+  gtk_entry_set_text (GTK_ENTRY (text_to_copy), gs->str);
+
+  g_string_free (gs, TRUE);
+
+  set_text_to_copy_status (NULL);
 }
 
 
@@ -351,7 +363,9 @@ static void
 help_about (GtkWidget *widget, gpointer data)
 {
   GtkWidget *about;
-  const gchar *authors[] = { "Noah Levitt <nlevitt аt columbia.edu>", NULL };
+  const gchar *authors[] = { "Noah Levitt <nlevitt аt columbia.edu>", 
+                             "Daniel Elstner <daniel.elstner аt gmx.net>", 
+                             NULL };
   const gchar *translator_credits;
 
   translator_credits = _("translator_credits");

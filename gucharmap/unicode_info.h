@@ -65,6 +65,9 @@ gunichar * unicode_canonical_decomposition (gunichar ch, gsize *result_len);
 gunichar find_next_substring_match (gunichar start, gunichar unichar_max,
                                     const gchar *search_text);
 
+/* returns true unless the character is definitely not a valid unicode
+ * character */
+gboolean is_valid_character (gunichar uc);
 
 
 #ifdef __cplusplus

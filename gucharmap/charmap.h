@@ -89,6 +89,8 @@ struct _Charmap
   GtkWidget *chartable;         /* GtkDrawingArea */
   GdkPixmap *chartable_pixmap; 
 
+  guint drag_begin_timeout_id;
+
   gchar *font_name;
   PangoFontMetrics *font_metrics;
   PangoLayout *pango_layout;
