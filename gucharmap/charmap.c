@@ -1096,14 +1096,12 @@ make_unicode_block_selector (Charmap *charmap)
 static GtkWidget *
 make_caption (Charmap *charmap)
 {
-  GtkTreeIter iter0, iter1, iter2;
+  GtkTreeIter iter0, iter1;
   GtkWidget *tree_view;
   GtkTreeViewColumn *column;
   GtkCellRenderer *cell;
   GtkTreeModel *model;
   GtkWidget *scrolled_window;
-  GtkWidget *disclosure;
-  GtkWidget *vbox;
 
   charmap->caption = g_malloc (sizeof (Caption));
 
@@ -1149,42 +1147,42 @@ make_caption (Charmap *charmap)
   charmap->caption->kDefinition = gtk_tree_row_reference_new (
           model, gtk_tree_model_get_path (model, &iter1));
   gtk_tree_store_set (charmap->caption->caption_model, &iter1,
-                      CAPTION_LABEL, _("East Asian ideograph"), -1);
+                      CAPTION_LABEL, _("CJK ideograph definition"), -1);
 
-  gtk_tree_store_append (charmap->caption->caption_model, &iter2, &iter1);
+  gtk_tree_store_append (charmap->caption->caption_model, &iter1, &iter0);
   charmap->caption->kMandarin = gtk_tree_row_reference_new (
-          model, gtk_tree_model_get_path (model, &iter2));
-  gtk_tree_store_set (charmap->caption->caption_model, &iter2,
+          model, gtk_tree_model_get_path (model, &iter1));
+  gtk_tree_store_set (charmap->caption->caption_model, &iter1,
                       CAPTION_LABEL, _("Mandarin pronunciation"), -1);
 
-  gtk_tree_store_append (charmap->caption->caption_model, &iter2, &iter1);
+  gtk_tree_store_append (charmap->caption->caption_model, &iter1, &iter0);
   charmap->caption->kJapaneseOn = gtk_tree_row_reference_new (
-          model, gtk_tree_model_get_path (model, &iter2));
-  gtk_tree_store_set (charmap->caption->caption_model, &iter2,
+          model, gtk_tree_model_get_path (model, &iter1));
+  gtk_tree_store_set (charmap->caption->caption_model, &iter1,
                       CAPTION_LABEL, _("Japanese On pronunciation"), -1);
 
-  gtk_tree_store_append (charmap->caption->caption_model, &iter2, &iter1);
+  gtk_tree_store_append (charmap->caption->caption_model, &iter1, &iter0);
   charmap->caption->kJapaneseKun = gtk_tree_row_reference_new (
-          model, gtk_tree_model_get_path (model, &iter2));
-  gtk_tree_store_set (charmap->caption->caption_model, &iter2,
+          model, gtk_tree_model_get_path (model, &iter1));
+  gtk_tree_store_set (charmap->caption->caption_model, &iter1,
                       CAPTION_LABEL, _("Japanese Kun pronunciation"), -1);
 
-  gtk_tree_store_append (charmap->caption->caption_model, &iter2, &iter1);
+  gtk_tree_store_append (charmap->caption->caption_model, &iter1, &iter0);
   charmap->caption->kCantonese = gtk_tree_row_reference_new (
-          model, gtk_tree_model_get_path (model, &iter2));
-  gtk_tree_store_set (charmap->caption->caption_model, &iter2,
+          model, gtk_tree_model_get_path (model, &iter1));
+  gtk_tree_store_set (charmap->caption->caption_model, &iter1,
                       CAPTION_LABEL, _("Cantonese pronunciation"), -1);
 
-  gtk_tree_store_append (charmap->caption->caption_model, &iter2, &iter1);
+  gtk_tree_store_append (charmap->caption->caption_model, &iter1, &iter0);
   charmap->caption->kTang = gtk_tree_row_reference_new (
-          model, gtk_tree_model_get_path (model, &iter2));
-  gtk_tree_store_set (charmap->caption->caption_model, &iter2,
+          model, gtk_tree_model_get_path (model, &iter1));
+  gtk_tree_store_set (charmap->caption->caption_model, &iter1,
                       CAPTION_LABEL, _("Tang pronunciation"), -1);
 
-  gtk_tree_store_append (charmap->caption->caption_model, &iter2, &iter1);
+  gtk_tree_store_append (charmap->caption->caption_model, &iter1, &iter0);
   charmap->caption->kKorean = gtk_tree_row_reference_new (
-          model, gtk_tree_model_get_path (model, &iter2));
-  gtk_tree_store_set (charmap->caption->caption_model, &iter2,
+          model, gtk_tree_model_get_path (model, &iter1));
+  gtk_tree_store_set (charmap->caption->caption_model, &iter1,
                       CAPTION_LABEL, _("Korean pronunciation"), -1);
 #endif /* #if ENABLE_UNIHAN */
 
@@ -1197,6 +1195,10 @@ make_caption (Charmap *charmap)
   column = gtk_tree_view_column_new_with_attributes (NULL, cell,
                                                      "text", CAPTION_LABEL,
                                                      NULL);
+  g_object_set (G_OBJECT (cell), "weight", PANGO_WEIGHT_BOLD, NULL);
+  /* gtk_widget_ensure_style (tree_view);
+  g_object_set (G_OBJECT (cell), "background-gdk", 
+                &(tree_view->style->bg[GTK_STATE_NORMAL]), NULL); */
   gtk_tree_view_append_column (GTK_TREE_VIEW (tree_view), column);
 
   cell = gtk_cell_renderer_text_new ();
@@ -1218,18 +1220,10 @@ make_caption (Charmap *charmap)
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
                                   GTK_POLICY_ALWAYS, GTK_POLICY_NEVER);
 
-  disclosure = cddb_disclosure_new (scrolled_window, 
-                                    _("Details on the current character"), 
-                                    NULL);
-
-  vbox = gtk_vbox_new (FALSE, 0);
-  gtk_box_pack_start (GTK_BOX (vbox), disclosure, FALSE, FALSE, 0);
-  gtk_box_pack_start (GTK_BOX (vbox), scrolled_window, FALSE, FALSE, 0);
-
-  gtk_widget_show_all (vbox);
+  gtk_widget_show_all (scrolled_window);
   gtk_widget_hide (scrolled_window);
 
-  return vbox;
+  return scrolled_window;
 }
 
 
