@@ -53,7 +53,8 @@ libgucharmapinclude_HEADERS = gucharmap.h \
                               gucharmap-table.h \
                               gucharmap-window.h \
                               gucharmap-mini-fontsel.h \
-                              gucharmap-unicode-info.h 
+                              gucharmap-unicode-info.h \
+			      gucharmap-codepoint-list.h
 
 
 bin_PROGRAMS = gucharmap
