@@ -18,9 +18,9 @@ dnl 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
 dnl
 
 AC_PREREQ([2.50])
-AC_INIT([gucharmap], [1.4.2])
+AC_INIT([gucharmap], [1.4.3])
 AM_CONFIG_HEADER([config.h])
-AM_INIT_AUTOMAKE([gucharmap], [1.4.2])
+AM_INIT_AUTOMAKE([gucharmap], [1.4.3])
 
 AM_MAINTAINER_MODE
 
