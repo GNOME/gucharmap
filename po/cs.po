@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap VERSION\n"
-"POT-Creation-Date: 2003-03-29 20:27+0100\n"
-"PO-Revision-Date: 2003-03-30 14:46+0200\n"
+"POT-Creation-Date: 2003-03-31 12:28+0200\n"
+"PO-Revision-Date: 2003-03-31 13:50+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -555,7 +555,8 @@ msgid "Character Table"
 msgstr "Tabulka znaků"
 
 #. ID
-#: gucharmap/imgucharmap.c:126 gucharmap.desktop.in.h:1
+#: gucharmap/imgucharmap.c:116 gucharmap/gucharmap_window.c:600
+#: gucharmap/gucharmap_window.c:1156 gucharmap.desktop.in.h:1
 msgid "Unicode Character Map"
 msgstr "Mapa znaků Unicode"
 
@@ -563,19 +564,19 @@ msgstr "Mapa znaků Unicode"
 msgid "Font to start with; ex: 'Serif 27'"
 msgstr "Písmo, se kterým začít; např. 'Serif 27'"
 
-#: gucharmap/mini_fontsel.c:283
+#: gucharmap/mini_fontsel.c:270
 msgid "Font"
 msgstr "Písmo"
 
-#: gucharmap/mini_fontsel.c:296
+#: gucharmap/mini_fontsel.c:277
 msgid "Font Family"
 msgstr "Řez písma"
 
-#: gucharmap/mini_fontsel.c:301
+#: gucharmap/mini_fontsel.c:282
 msgid "Font Style"
 msgstr "Styl písma"
 
-#: gucharmap/mini_fontsel.c:310
+#: gucharmap/mini_fontsel.c:288
 msgid "Font Size"
 msgstr "Velikost písma"
 
@@ -744,5 +745,214 @@ msgstr "Oddělovač, odstavec"
 msgid "Separator, Space"
 msgstr "Oddělovač, mezera"
 
-#~ msgid "translator_credits"
-#~ msgstr "Miloslav Trmač <mitr@volny.cz>"
+#: gucharmap/gucharmap_window.c:74
+#, c-format
+msgid ""
+"Not a valid code point to jump to. Must be a hexadecimal number between 0 "
+"and %4.4X."
+msgstr ""
+"Kód, na který se má skočit, není platný. Musí to být šestnáctkové číslo mezi "
+"0 a %4.4X."
+
+#: gucharmap/gucharmap_window.c:96
+msgid "Go to hex code point"
+msgstr "Jít na šestnáctkový kód"
+
+#: gucharmap/gucharmap_window.c:116
+msgid "_Enter unicode code point"
+msgstr "Zadejte kód _Unicode"
+
+#: gucharmap/gucharmap_window.c:176
+msgid "Not found."
+msgstr "Nalezeno."
+
+#: gucharmap/gucharmap_window.c:180
+msgid "Found."
+msgstr "Nalezeno."
+
+#: gucharmap/gucharmap_window.c:184
+msgid "Search wrapped."
+msgstr "Hledání přešlo přes okraj."
+
+#: gucharmap/gucharmap_window.c:188
+msgid "Nothing to search for."
+msgstr "Není co hledat."
+
+#: gucharmap/gucharmap_window.c:227
+msgid "Find"
+msgstr "Najít"
+
+#: gucharmap/gucharmap_window.c:242
+msgid "_Search:"
+msgstr "_Hledat:"
+
+#: gucharmap/gucharmap_window.c:531
+msgid "Zoom mode enabled. Press <Esc> to disable zoom."
+msgstr "Režim zvětšování povolen. Zvětšování zakažte stisknutím <Esc>."
+
+#: gucharmap/gucharmap_window.c:541
+msgid "Zoom mode disabled."
+msgstr "Režim zvětšování zakázán."
+
+#: gucharmap/gucharmap_window.c:593
+msgid "translator_credits"
+msgstr "Miloslav Trmač <mitr@volny.cz>"
+
+#: gucharmap/gucharmap_window.c:646
+msgid "Char_map"
+msgstr "_Mapa znaků"
+
+#: gucharmap/gucharmap_window.c:648
+msgid "_View"
+msgstr "_Zborazit"
+
+#: gucharmap/gucharmap_window.c:650
+msgid "_Search"
+msgstr "_Hledat"
+
+#: gucharmap/gucharmap_window.c:670
+msgid "Expand/Collapse All"
+msgstr "Rozbalit/sbalit vše"
+
+#. ctrl-+ or ctrl-=
+#: gucharmap/gucharmap_window.c:679
+msgid "Zoom _In"
+msgstr "Z_většit"
+
+#. ctrl--
+#: gucharmap/gucharmap_window.c:691
+msgid "Zoom _Out"
+msgstr "Z_menšit"
+
+#. ctrl-<enter>
+#: gucharmap/gucharmap_window.c:704
+msgid "_Zoom Mode"
+msgstr "_Režim zvětšení"
+
+#: gucharmap/gucharmap_window.c:716
+msgid "_Unicode Details"
+msgstr "Detailu _Unicode"
+
+#. the unicode details submenu
+#: gucharmap/gucharmap_window.c:722 gucharmap/gucharmap_window.c:772
+#: gucharmap/gucharmap_window.c:827
+msgid "Options"
+msgstr "Možnosti"
+
+#: gucharmap/gucharmap_window.c:731
+msgid "_Category"
+msgstr "_Kategorie"
+
+#: gucharmap/gucharmap_window.c:739
+msgid "Canonical _Decomposition"
+msgstr "Kanonický _rozklad"
+
+#: gucharmap/gucharmap_window.c:747
+msgid "_UTF-8"
+msgstr "_UTF-8"
+
+#: gucharmap/gucharmap_window.c:755
+msgid "_Other Representations"
+msgstr "_Jiné reprezentace"
+
+#: gucharmap/gucharmap_window.c:766
+msgid "_Annotations and Cross References"
+msgstr "_Poznámky a křížové odkazy"
+
+#: gucharmap/gucharmap_window.c:781
+msgid "_Alias Names"
+msgstr "_Alternativní názvy"
+
+#: gucharmap/gucharmap_window.c:788
+msgid "_Notes"
+msgstr "_Poznámky"
+
+#: gucharmap/gucharmap_window.c:795
+msgid "_See Also"
+msgstr "_Viz také"
+
+#: gucharmap/gucharmap_window.c:802
+msgid "_Approximate Equivalents"
+msgstr "_Přibližné ekvivalenty"
+
+#: gucharmap/gucharmap_window.c:809
+msgid "_Equivalents"
+msgstr "_Ekvivalenty"
+
+#: gucharmap/gucharmap_window.c:821
+msgid "_CJK Ideograph Details"
+msgstr "Detaily o ideografu _CJK"
+
+#: gucharmap/gucharmap_window.c:837
+msgid "CJK Ideograph _Definition"
+msgstr "_Definice ideografu CJK"
+
+#: gucharmap/gucharmap_window.c:846
+msgid "_Mandarin Pronunciation"
+msgstr "Výslovnost _Mandarin"
+
+#: gucharmap/gucharmap_window.c:855
+msgid "Japanese _On Pronunciation"
+msgstr "Japonská výslovnost _On"
+
+#: gucharmap/gucharmap_window.c:864
+msgid "_Japanese Kun Pronunciation"
+msgstr "_Japonská výslovnost Kun"
+
+#: gucharmap/gucharmap_window.c:873
+msgid "_Cantonese Pronunciation"
+msgstr "Výslovnost _Cantonese"
+
+#: gucharmap/gucharmap_window.c:882
+msgid "_Tang Pronunciation"
+msgstr "Výslovnost _Tang"
+
+#: gucharmap/gucharmap_window.c:890
+msgid "_Korean Pronunciation"
+msgstr "_Korejská výslovnost"
+
+#. ctrl-f
+#: gucharmap/gucharmap_window.c:904
+msgid "_Find..."
+msgstr "_Hledat..."
+
+#. ctrl-g
+#: gucharmap/gucharmap_window.c:915
+msgid "Find _Next"
+msgstr "Hledat _následující"
+
+#. shift-ctrl-g
+#: gucharmap/gucharmap_window.c:926
+msgid "Find _Previous"
+msgstr "Hledat _předchozí"
+
+#. ctrl-h
+#: gucharmap/gucharmap_window.c:942
+msgid "_Hex Code Point..."
+msgstr "_Šestnáctkový kód..."
+
+#. ctrl-p
+#: gucharmap/gucharmap_window.c:950
+msgid "Character in _Clipboard"
+msgstr "Znak ve _schránce"
+
+#. make the help menu
+#: gucharmap/gucharmap_window.c:960
+msgid "_Help"
+msgstr "_Nápověda"
+
+#: gucharmap/gucharmap_window.c:998
+msgid "The selected code point is not a valid unicode character."
+msgstr "Vybraný kód není platný znak unicode."
+
+#: gucharmap/gucharmap_window.c:1026
+msgid "Text copied to clipboard."
+msgstr "Text zkopírován do schránky."
+
+#: gucharmap/gucharmap_window.c:1052
+msgid "_Text to copy:"
+msgstr "_Text, který kopírovat:"
+
+#: gucharmap/gucharmap_window.c:1073
+msgid "Copy to the clipboard."
+msgstr "Zkopírovat do schránky."
