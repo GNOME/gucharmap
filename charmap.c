@@ -241,11 +241,14 @@ expose_char_for_redraw (Charmap *charmap, gunichar uc)
 
   dim = calculate_square_dimension (charmap->font_metrics);
 
-  x = row * (dim + 1) + 1;
-  y = col * (dim + 1) + 1;
+  x = col * (dim + 1) + 1;
+  y = row * (dim + 1) + 1;
 
-  g_print ("calling gtk_widget_queue_draw_area (x = %d, y = %d, width = %d, height = %d\n", x, y, dim, dim);
-  gtk_widget_queue_draw_area (charmap->tabulus, x, y, dim, dim);
+  gdk_draw_drawable (charmap->tabulus->window,
+                     charmap->tabulus->style->fg_gc[GTK_STATE_NORMAL],
+                     charmap->tabulus_pixmap,
+                     x, y, x, y, dim, dim);
+  /* gtk_widget_queue_draw_area (charmap->tabulus, x, y, dim, dim); */
 }
 
 
@@ -329,8 +332,8 @@ key_press_event (GtkWidget *widget,
     {
       draw_tabulus_pixmap (charmap);
 
-      expose_char_for_redraw (charmap, old_active_char);
       expose_char_for_redraw (charmap, charmap->active_char);
+      expose_char_for_redraw (charmap, old_active_char);
     }
 
   return FALSE;
@@ -367,15 +370,12 @@ button_press_event (GtkWidget *widget,
   old_active_char = charmap->active_char;
   charmap->active_char = get_char_at (charmap, event->x, event->y);
 
-  g_print ("old active char =  %u ;  new active char =  %u\n", 
-           old_active_char, charmap->active_char);
-
   if (charmap->active_char != old_active_char)
     {
       draw_tabulus_pixmap (charmap);
     
-      expose_char_for_redraw (charmap, old_active_char);
       expose_char_for_redraw (charmap, charmap->active_char);
+      expose_char_for_redraw (charmap, old_active_char);
     }
 
   return FALSE;
