@@ -200,7 +200,7 @@ set_active_block (Charmap *charmap)
       if (charmap->active_char >= unicode_block->start
           && charmap->active_char <= unicode_block->end)
         {
-          /* don't send the "changed" signal on this selection change */
+          /* block our "changed" handler */
           g_signal_handler_block (G_OBJECT (charmap->block_selection), 
                                   charmap->block_selection_changed_handler_id);
           gtk_tree_selection_select_path (charmap->block_selection, tree_path);
@@ -279,6 +279,25 @@ calculate_tabulus_dimension_y (PangoFontMetrics *font_metrics)
 }
 
 
+static void
+set_scrollbar_adjustment (Charmap *charmap)
+{
+    /*
+  g_printerr ("set_scrollbar_adjustment: active_char = U+%4.4X\n",
+              charmap->active_char);
+              */
+  /* block our "value_changed" handler */
+  g_signal_handler_block (G_OBJECT (charmap->adjustment),
+                          charmap->adjustment_changed_handler_id);
+
+  gtk_adjustment_set_value (GTK_ADJUSTMENT (charmap->adjustment), 
+                            1.0 * charmap->active_char);
+
+  g_signal_handler_unblock (G_OBJECT (charmap->adjustment),
+                            charmap->adjustment_changed_handler_id);
+}
+
+
 /* redraws the backing store pixmap */
 static void
 draw_tabulus_pixmap (Charmap *charmap)
@@ -337,9 +356,11 @@ draw_tabulus_pixmap (Charmap *charmap)
                     (square_width+1) * col + 1, (square_height+1) * row + 1, 
                     square_width, square_height);
 
-            /* XXX: ok place to set the caption and active block? */
+            /* this is stuff that must be done when the active char
+             * changes, is this an ok place to do it? XXX*/
             set_caption (charmap);
             set_active_block (charmap);
+            set_scrollbar_adjustment (charmap);
           }
         else 
           gc = charmap->tabulus->style->text_gc[GTK_STATE_NORMAL];
@@ -987,6 +1008,67 @@ make_text_to_copy (Charmap *charmap)
 }
 
 
+static void
+scroll_charmap (GtkAdjustment *adjustment, Charmap *charmap)
+{
+  gunichar old_active_char, old_page_first_char;
+
+  /*
+  g_printerr ("adjustment value = %f\n", 
+              gtk_adjustment_get_value (adjustment));
+              */
+
+  old_active_char = charmap->active_char;
+  old_page_first_char = charmap->page_first_char;
+
+  charmap->active_char = (gunichar) gtk_adjustment_get_value (adjustment);
+  charmap->active_char -= charmap->active_char % CHARMAP_COLS;
+
+  if (charmap->active_char < charmap->page_first_char)
+    {
+      charmap->page_first_char = charmap->active_char - 
+                                 (charmap->active_char % CHARMAP_COLS);
+    }
+  else if (charmap->active_char >= charmap->page_first_char 
+                               + CHARMAP_ROWS * CHARMAP_COLS)
+    {
+      /* make this row the last row shown */
+      charmap->page_first_char = 
+          (charmap->active_char - (charmap->active_char % CHARMAP_COLS)) 
+          - ((CHARMAP_ROWS - 1) * CHARMAP_COLS); 
+    }
+
+  if (charmap->page_first_char != old_page_first_char)
+    {
+      draw_tabulus_pixmap (charmap);
+      gtk_widget_queue_draw (GTK_WIDGET (charmap->tabulus));
+    }
+  else if (charmap->active_char != old_active_char)
+    {
+      draw_tabulus_pixmap (charmap);
+
+      expose_char_for_redraw (charmap, charmap->active_char);
+      expose_char_for_redraw (charmap, old_active_char);
+    }
+}
+
+
+static GtkWidget *
+make_scrollbar (Charmap *charmap)
+{
+  charmap->adjustment = gtk_adjustment_new (
+          0.0, 0.0, 1.0 * (UNICHAR_MAX + CHARMAP_ROWS * CHARMAP_COLS), 
+          2.0 * CHARMAP_COLS, 5.0 * CHARMAP_ROWS * CHARMAP_COLS, 
+          1.0 * CHARMAP_ROWS * CHARMAP_COLS);
+
+  charmap->adjustment_changed_handler_id = g_signal_connect (
+          G_OBJECT (charmap->adjustment), "value_changed",
+          G_CALLBACK (scroll_charmap), charmap);
+
+  return gtk_vscrollbar_new (GTK_ADJUSTMENT (charmap->adjustment));
+}
+
+
 /* does all the initial construction */
 void
 charmap_init (Charmap *charmap)
@@ -1014,11 +1096,12 @@ charmap_init (Charmap *charmap)
   GTK_WIDGET_SET_FLAGS (charmap->tabulus, GTK_CAN_FOCUS);
   gtk_widget_grab_focus (charmap->tabulus);
 
-  hbox = gtk_hbox_new (FALSE, 5);
+  hbox = gtk_hbox_new (FALSE, 3);
 
   gtk_box_pack_start (GTK_BOX (charmap), hbox, TRUE, TRUE, 0);
 
   gtk_box_pack_start (GTK_BOX (hbox), charmap->tabulus, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (hbox), make_scrollbar (charmap), TRUE, TRUE, 0);
   gtk_box_pack_start (GTK_BOX (hbox), make_unicode_block_selector (charmap), 
                       TRUE, TRUE, 0);
 

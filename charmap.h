@@ -75,10 +75,15 @@ struct _Charmap
 
   GtkWidget *text_to_copy;
 
+  /* the unicode block selection list */
   GtkTreeSelection *block_selection;
   GtkTreeStore *block_selector_model;
   GtkWidget *block_selector_view;
   gulong block_selection_changed_handler_id; 
+
+  /* for the scrollbar */
+  GtkObject *adjustment; 
+  gulong adjustment_changed_handler_id; 
 };
 
 
