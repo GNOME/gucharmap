@@ -442,21 +442,15 @@ set_details (GucharmapCharmap *charmap,
 
   gtk_text_buffer_get_start_iter (buffer, &iter);
   gtk_text_buffer_place_cursor (buffer, &iter);
-  gtk_text_buffer_insert (buffer, &iter, "\n\n", -1);
+  gtk_text_buffer_insert (buffer, &iter, "\n", -1);
 
   n = gucharmap_unichar_to_printable_utf8 (uc, buf);
   if (n == 0)
     gtk_text_buffer_insert_with_tags_by_name (
             buffer, &iter, _("[not a printable character]"), -1, NULL);
   else
-    {
-      /* give it some space to breathe */
-      /* gtk_text_buffer_insert (buffer, &iter, "     ", -1); */
-      gtk_text_buffer_insert_with_tags_by_name (buffer, &iter, "   ", -1, 
-                                                "gimongous", NULL);
-      gtk_text_buffer_insert_with_tags_by_name (buffer, &iter, buf, n, 
-                                                "gimongous", NULL);
-    }
+    gtk_text_buffer_insert_with_tags_by_name (buffer, &iter, buf, n, 
+                                              "gimongous", NULL);
 
   gtk_text_buffer_insert (buffer, &iter, "\n\n", -1);
                                              
@@ -659,6 +653,7 @@ create_tags (GucharmapCharmap *charmap)
 
   gtk_text_buffer_create_tag (buffer, "gimongous", 
 	                      "size", 8 * default_font_size, 
+                              "left-margin", PANGO_PIXELS (5 * default_font_size),
 			      NULL);
   gtk_text_buffer_create_tag (buffer, "bold",
 	                      "weight", PANGO_WEIGHT_BOLD,
