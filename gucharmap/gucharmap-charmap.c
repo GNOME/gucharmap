@@ -624,9 +624,20 @@ static void
 prev_character_clicked (GtkWidget *button,
                         GucharmapCharmap *charmap)
 {
-  gucharmap_table_set_active_character (
-          charmap->chartable,  
-          gucharmap_table_get_active_character (charmap->chartable) - 1);
+  gunichar uc;
+
+  uc = gucharmap_table_get_active_character (charmap->chartable);
+
+  do 
+    {
+      uc = uc - 1;
+      if (uc < 0 || uc > UNICHAR_MAX)
+        uc = UNICHAR_MAX;
+    }
+  while (! gucharmap_unichar_validate (uc) 
+        || gucharmap_unichar_type (uc) == G_UNICODE_UNASSIGNED);
+
+  gucharmap_table_set_active_character (charmap->chartable, uc);
 }
 
 
@@ -634,9 +645,16 @@ static void
 next_character_clicked (GtkWidget *button,
                         GucharmapCharmap *charmap)
 {
-  gucharmap_table_set_active_character (
-          charmap->chartable,  
-          gucharmap_table_get_active_character (charmap->chartable) + 1);
+  gunichar uc;
+
+  uc = gucharmap_table_get_active_character (charmap->chartable);
+
+  for (uc = (uc + 1) % (UNICHAR_MAX + 1); 
+       (! gucharmap_unichar_validate (uc) 
+        || gucharmap_unichar_type (uc) == G_UNICODE_UNASSIGNED); 
+       uc = (uc + 1) % (UNICHAR_MAX + 1));
+
+  gucharmap_table_set_active_character (charmap->chartable, uc);
 }
 
 
