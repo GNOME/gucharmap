@@ -1092,6 +1092,7 @@ make_unicode_block_selector (Charmap *charmap)
                      charmap->block_selector_view);
 
   gtk_widget_show_all (scrolled_window);
+
   return scrolled_window;
 }
 
@@ -1275,23 +1276,23 @@ make_text_to_copy (Charmap *charmap)
   GtkWidget *label;
   GtkTooltips *tooltips;
 
-  hbox = gtk_hbox_new (FALSE, 0);
+  hbox = gtk_hbox_new (FALSE, 6);
 
   tooltips = gtk_tooltips_new ();
 
   label = gtk_label_new (_("Text to copy:"));
-  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 3);
+  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 
   charmap->text_to_copy = gtk_entry_new ();
   gtk_entry_set_max_length (GTK_ENTRY (charmap->text_to_copy), 
                             TEXT_TO_COPY_MAXLENGTH);
-  gtk_box_pack_start (GTK_BOX (hbox), charmap->text_to_copy, TRUE, TRUE, 3);
+  gtk_box_pack_start (GTK_BOX (hbox), charmap->text_to_copy, TRUE, TRUE, 0);
 
   /* the copy button */
   button = gtk_button_new_from_stock (GTK_STOCK_COPY); 
   g_signal_connect (G_OBJECT (button), "clicked",
                     G_CALLBACK (copy_button_clicked), charmap);
-  gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 3);
+  gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
 
   gtk_tooltips_set_tip (tooltips, button, _("Copy to the clipboard."), NULL);
 
@@ -1299,7 +1300,7 @@ make_text_to_copy (Charmap *charmap)
   button = gtk_button_new_from_stock (GTK_STOCK_CLEAR);
   g_signal_connect (G_OBJECT (button), "clicked",
                     G_CALLBACK (clear_button_clicked), charmap);
-  gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 3);
+  gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
 
   gtk_widget_show_all (hbox);
 
@@ -1567,20 +1568,21 @@ make_search (Charmap *charmap)
   tooltips = gtk_tooltips_new ();
 
   /* search */
-  hbox = gtk_hbox_new (FALSE, 0);
+  hbox = gtk_hbox_new (FALSE, 6);
 
   charmap->search_entry = gtk_entry_new ();
   g_signal_connect (G_OBJECT (charmap->search_entry), "activate",
                     G_CALLBACK (do_search), charmap);
-  gtk_box_pack_start (GTK_BOX (hbox), charmap->search_entry, TRUE, TRUE, 3);
+  gtk_box_pack_start (GTK_BOX (hbox), charmap->search_entry, TRUE, TRUE, 0);
 
   button = gtk_button_new_from_stock (GTK_STOCK_FIND);
   g_signal_connect (G_OBJECT (button), "clicked",
                     G_CALLBACK (do_search), charmap);
-  gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 3);
+  gtk_box_pack_end (GTK_BOX (hbox), button, FALSE, FALSE, 0);
 
   gtk_tooltips_set_tip (tooltips, button, _("Search for the next occurrence of this string in a character's Unicode name."), NULL);
 
+  /* gtk_container_set_border_width (GTK_CONTAINER (hbox), 6); */
   gtk_widget_show_all (hbox);
 
   return hbox;
@@ -1605,17 +1607,18 @@ charmap_init (Charmap *charmap)
   charmap->rows = CHARMAP_MIN_ROWS;
   charmap->cols = CHARMAP_MIN_COLS;
 
-  gtk_box_set_spacing (GTK_BOX (charmap), 0);
+  gtk_box_set_spacing (GTK_BOX (charmap), 6);
+  gtk_container_set_border_width (GTK_CONTAINER (charmap), 6);
 
   /* top hbox has search and text_to_copy */
-  hbox = gtk_hbox_new (FALSE, 25); /* space between the parts */
+  hbox = gtk_hbox_new (FALSE, 18); /* space between the parts */
   gtk_box_pack_start (GTK_BOX (hbox), make_text_to_copy (charmap), 
                       TRUE, TRUE, 0);
-  gtk_box_pack_start (GTK_BOX (hbox), make_search (charmap), TRUE, TRUE, 0);
+  gtk_box_pack_end (GTK_BOX (hbox), make_search (charmap), TRUE, TRUE, 0);
   /* end top hbox */
 
   /* vbox for charmap and caption */
-  vbox = gtk_vbox_new (FALSE, 0);
+  vbox = gtk_vbox_new (FALSE, 12);
   gtk_box_pack_start (GTK_BOX (vbox), make_chartable (charmap), 
                       TRUE, TRUE, 0);
   caption = make_caption (charmap);
@@ -1632,7 +1635,7 @@ charmap_init (Charmap *charmap)
   /* done with panes */
 
   /* start packing stuff in the outer vbox (the Charmap itself) */
-  gtk_box_pack_start (GTK_BOX (charmap), hbox, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (charmap), hbox, FALSE, FALSE, 6);
   gtk_widget_show (hbox);
   gtk_box_pack_start (GTK_BOX (charmap), hpaned, TRUE, TRUE, 0);
   gtk_widget_show (hpaned);

@@ -182,7 +182,6 @@ main (gint argc, gchar **argv)
 
   toolbar = gtk_toolbar_new ();
   fontsel = mini_font_selection_new ();
-  gtk_container_set_border_width (GTK_CONTAINER (fontsel), 5);
   gtk_toolbar_append_widget (GTK_TOOLBAR (toolbar), fontsel, NULL, NULL);
   gtk_box_pack_start (GTK_BOX (vbox), toolbar, FALSE, FALSE, 0);
   gtk_widget_show_all (toolbar);
