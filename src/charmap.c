@@ -270,13 +270,11 @@ set_active_block (Charmap *charmap)
         tree_path = parent;
     }
 
-  gtk_tree_selection_select_path (charmap->block_selection, tree_path);
+  gtk_tree_view_set_cursor (GTK_TREE_VIEW (charmap->block_selector_view),
+                            tree_path, NULL, FALSE);
 
   g_signal_handler_unblock (G_OBJECT (charmap->block_selection),
                             charmap->block_selection_changed_handler_id);
-
-  gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (charmap->block_selector_view),
-                                tree_path, NULL, FALSE, 0, 0);
 
   if (parent != NULL)
     gtk_tree_path_free (parent);
