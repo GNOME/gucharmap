@@ -45,7 +45,8 @@ jump_code_point (GtkWidget *widget, gpointer data)
 static void
 jump_clipboard (GtkWidget *widget, gpointer data)
 {
-  g_printerr ("jump_clipboard\n");
+  charmap_identify_clipboard (CHARMAP (charmap), 
+                              gtk_clipboard_get (GDK_SELECTION_CLIPBOARD));
 }
 
 
@@ -74,9 +75,9 @@ static GtkWidget *
 make_menu ()
 {
   GtkWidget *menubar;
-  GtkWidget *file_menu, *view_menu, *actions_menu, *help_menu;
+  GtkWidget *file_menu, *view_menu, *goto_menu, *help_menu;
   GtkWidget *file_menu_item, *view_menu_item;
-  GtkWidget *actions_menu_item, *help_menu_item;
+  GtkWidget *goto_menu_item, *help_menu_item;
   GtkWidget *menu_item;
 
   /* make the menu bar */
@@ -85,8 +86,8 @@ make_menu ()
   gtk_menu_shell_append (GTK_MENU_SHELL (menubar), file_menu_item);
   view_menu_item = gtk_menu_item_new_with_mnemonic (_("_View"));
   gtk_menu_shell_append (GTK_MENU_SHELL (menubar), view_menu_item);
-  actions_menu_item = gtk_menu_item_new_with_mnemonic (_("_Actions"));
-  gtk_menu_shell_append (GTK_MENU_SHELL (menubar), actions_menu_item);
+  goto_menu_item = gtk_menu_item_new_with_mnemonic (_("_Go to"));
+  gtk_menu_shell_append (GTK_MENU_SHELL (menubar), goto_menu_item);
   help_menu_item = gtk_menu_item_new_with_mnemonic (_("_Help"));
   gtk_menu_shell_append (GTK_MENU_SHELL (menubar), help_menu_item);
   /* finished making the menu bar */
@@ -116,21 +117,19 @@ make_menu ()
   gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), menu_item);
   /* finished making the view menu */
 
-  /* make the actions menu */
-  actions_menu = gtk_menu_new ();
-  gtk_menu_item_set_submenu (GTK_MENU_ITEM (actions_menu_item), actions_menu);
+  /* make the goto menu */
+  goto_menu = gtk_menu_new ();
+  gtk_menu_item_set_submenu (GTK_MENU_ITEM (goto_menu_item), goto_menu);
 
-  menu_item = gtk_menu_item_new_with_mnemonic (_("Jump to _Hex Code Point"));
+  menu_item = gtk_menu_item_new_with_mnemonic (_("_Hex Code Point..."));
   g_signal_connect (G_OBJECT (menu_item), "activate",
                     G_CALLBACK (jump_code_point), NULL);
-  gtk_menu_shell_append (GTK_MENU_SHELL (actions_menu), menu_item);
+  gtk_menu_shell_append (GTK_MENU_SHELL (goto_menu), menu_item);
 
-  menu_item = gtk_menu_item_new_with_mnemonic (
-          _("Jump to First Character in the _Clipboard"));
+  menu_item = gtk_menu_item_new_with_mnemonic (_("Character in _Clipboard"));
   g_signal_connect (G_OBJECT (menu_item), "activate",
-                    G_CALLBACK (jump_clipboard), NULL);
-  gtk_menu_shell_append (GTK_MENU_SHELL (actions_menu), menu_item);
-  /* finished making the actions menu */
+                    G_CALLBACK (jump_clipboard), NULL); gtk_menu_shell_append (GTK_MENU_SHELL (goto_menu), menu_item);
+  /* finished making the goto menu */
 
   /* make the help menu */
   help_menu = gtk_menu_new ();
