@@ -434,7 +434,6 @@ draw_character (Charmap *charmap, gint row, gint col)
   padding_x = (square_width - char_width) - (square_width - char_width)/2;
   padding_y = (square_height - char_height) - (square_height - char_height)/2;
 
-  /* extra +1 is for the uncounted border */
   gdk_draw_layout (charmap->chartable_pixmap, gc,
                    x_offset (charmap, col) + padding_x,
                    y_offset (charmap, row) + padding_y,
@@ -1016,7 +1015,7 @@ clear_button_clicked (GtkWidget *widget,
 
 /*  - single click with left button: activate character under pointer
  *  - double-click with left button: add active character to text_to_copy
- *  - # single-click with middle button: not implemented
+ *  - single-click with middle button: jump to selection_primary
  */
 static gint
 button_press_event (GtkWidget *widget, 
@@ -1598,7 +1597,7 @@ do_search (GtkWidget *widget, Charmap *charmap)
 static void
 do_jump (GtkWidget *widget, Charmap *charmap)
 {
-  long l;
+  glong l;
   const gchar *jump_text;
   gchar *endptr;
   gchar *message;

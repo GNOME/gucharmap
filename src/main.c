@@ -61,13 +61,6 @@ help_about (GtkWidget *widget, gpointer data)
 
 
 static void
-show_hide_details (GtkWidget *widget, gpointer data)
-{
-  g_printerr ("show_hide_details\n");
-}
-
-
-static void
 fontsel_changed (MiniFontSelection *fontsel, Charmap *charmap)
 {
   charmap_set_font (charmap, mini_font_selection_get_font_name (fontsel));
@@ -113,11 +106,6 @@ make_menu ()
   g_signal_connect (G_OBJECT (menu_item), "activate",
                     G_CALLBACK (expand_collapse), NULL);
   gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), menu_item);
-
-  menu_item = gtk_check_menu_item_new_with_mnemonic (_("Show/Hide Details"));
-  g_signal_connect (G_OBJECT (menu_item), "activate",
-                    G_CALLBACK (show_hide_details), NULL);
-  gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), menu_item);
   /* finished making the view menu */
 
   /* make the goto menu */
@@ -131,7 +119,8 @@ make_menu ()
 
   menu_item = gtk_menu_item_new_with_mnemonic (_("Character in _Clipboard"));
   g_signal_connect (G_OBJECT (menu_item), "activate",
-                    G_CALLBACK (jump_clipboard), NULL); gtk_menu_shell_append (GTK_MENU_SHELL (goto_menu), menu_item);
+                    G_CALLBACK (jump_clipboard), NULL); 
+  gtk_menu_shell_append (GTK_MENU_SHELL (goto_menu), menu_item);
   /* finished making the goto menu */
 
   /* make the help menu */
