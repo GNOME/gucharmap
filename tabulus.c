@@ -20,7 +20,7 @@
 #include <gtk/gtk.h>
 #include "tabulus.h"
 
-#if 0
+#if 1
 #define debug(x...) g_printerr (x)
 #else
 #define debug(x...)
@@ -56,6 +56,8 @@ cell_new (guint16 row,
 static void
 tabulus_init (Tabulus *tabulus)
 {
+  debug ("tabulus_init\n");
+
   tabulus->cells = NULL;
   tabulus->selected = NULL;
   tabulus->rows = 0;
@@ -69,6 +71,8 @@ GtkWidget *
 tabulus_new (guint16 rows, guint16 cols)
 {
   GtkWidget *w;
+
+  debug ("tabulus_new\n");
 
   if (rows <= 0)
     rows = 1;
@@ -88,6 +92,8 @@ tabulus_get_type ()
 {
   static GtkType tabulus_type = 0;
 
+  debug ("tabulus_get_type\n");
+
   if (!tabulus_type)
     {
       static const GTypeInfo tabulus_info =
@@ -99,7 +105,7 @@ tabulus_get_type ()
         NULL,           /* class_finalize */
         NULL,           /* class_data */
         sizeof (Tabulus),
-        16,             /* n_preallocs */
+        0,              /* n_preallocs */
         (GInstanceInitFunc) tabulus_init,
       };
 
@@ -160,6 +166,8 @@ tabulus_resize (Tabulus *tabulus,
   guint16 old_rows, old_cols;
   guint16 row;
 
+  debug ("tabulus_resize\n");
+
   g_return_if_fail (IS_TABULUS (tabulus));
   g_return_if_fail (rows > 0);
   g_return_if_fail (cols > 0);
@@ -183,8 +191,11 @@ tabulus_resize (Tabulus *tabulus,
   for (row = rows;  row < old_rows;  row++)
     free_row (tabulus->cells[row], old_cols);
 
-  /* handles the null case correctly (i think) */
   tabulus->cells = g_realloc (tabulus->cells, rows * sizeof (Cell **));
+
+  /* make the new rows null */
+  for (row = old_rows;  row < rows;  row++)
+    tabulus->cells[row] = NULL;
 
   for (row = 0;  row < rows;  row++)
     tabulus->cells[row] = resize_row (tabulus->cells[row], 

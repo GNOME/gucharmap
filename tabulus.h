@@ -51,6 +51,8 @@ struct _Cell
 
 struct _Tabulus
 {
+  GtkBin parent;
+
   Cell ***cells;
   Cell *selected;
   guint16 rows, cols;

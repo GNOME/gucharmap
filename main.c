@@ -19,8 +19,9 @@
 
 
 #include <gtk/gtk.h>
-#include "charmap.h"
+#include "tabulus.h"
 
+#if 0
 static GtkWidget *charmap;
 
 void
@@ -30,6 +31,7 @@ fontsel_changed_cb (GtkTreeSelection *selection, gpointer data)
   gchar *newfont = gtk_font_selection_get_font_name (GTK_FONT_SELECTION (fontsel));
   charmap_set_font (CHARMAP (charmap), newfont);
 }
+#endif
 
 
 int
@@ -37,6 +39,7 @@ main (int argc, char **argv)
 {
   static GtkWidget *window = NULL;
   GtkWidget *vbox;
+  GtkWidget *tabulus;
   GtkWidget *fontsel;
 
   gtk_init (&argc, &argv);
@@ -52,14 +55,16 @@ main (int argc, char **argv)
   vbox = gtk_vbox_new (FALSE, 0);
   gtk_container_add (GTK_CONTAINER (window), vbox);
 
-  charmap = charmap_new ();
-  gtk_box_pack_start (GTK_BOX (vbox), charmap, TRUE, TRUE, 0);
+  tabulus = tabulus_new (8, 12);
+  gtk_box_pack_start (GTK_BOX (vbox), tabulus, TRUE, TRUE, 0);
 
+#if 0
   fontsel = gtk_font_selection_new ();
   g_signal_connect (gtk_tree_view_get_selection (GTK_TREE_VIEW (GTK_FONT_SELECTION (fontsel)->size_list)), 
           "changed", G_CALLBACK (fontsel_changed_cb), fontsel);
 
   gtk_box_pack_start (GTK_BOX (vbox), fontsel, TRUE, TRUE, 0);
+#endif
 
   gtk_widget_show_all (window);
 
