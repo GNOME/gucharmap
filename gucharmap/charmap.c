@@ -1601,42 +1601,6 @@ do_search (GtkWidget *widget, Charmap *charmap)
 }
 
 
-static void
-do_jump (GtkWidget *widget, Charmap *charmap)
-{
-  glong l;
-  const gchar *jump_text;
-  gchar *endptr;
-  gchar *message;
-
-  jump_text = gtk_entry_get_text (GTK_ENTRY (charmap->jump_entry));
-  if (jump_text[0] == '\0')
-    {
-      set_statusbar_message (charmap, _("Nothing to jump to."));
-      return;
-    }
-
-  l = strtol (jump_text, &endptr, 16);
-  if (endptr == jump_text) 
-    goto do_jump_invalid;
-
-  if (l >= 0 && l <= UNICHAR_MAX)
-    {
-      set_active_character (charmap, (gunichar) l);
-      set_statusbar_message (charmap, _("Character found."));
-      redraw (charmap);
-      return;
-    }
-  else
-    goto do_jump_invalid;
-
-do_jump_invalid:
-  message = g_strdup_printf (_("Not a valid code point to jump to. Must be a hex number between 0 and %4.4X."), UNICHAR_MAX);
-  set_statusbar_message (charmap, message);
-  g_free (message);
-}
-
-
 static GtkWidget *
 make_search (Charmap *charmap)
 {
@@ -1852,5 +1816,22 @@ charmap_collapse_block_selector (Charmap *charmap)
 
   /* have to send it an expose event or the change won't happen right away */
   gtk_widget_queue_draw (gtk_widget_get_parent (charmap->block_selector_view));
+}
+
+
+void
+charmap_go_to_character (Charmap *charmap, gunichar uc)
+{
+  gchar *message;
+
+  if (uc >= 0 && uc <= UNICHAR_MAX)
+    {
+      set_active_character (charmap, uc);
+      redraw (charmap);
+    }
+
+  message = g_strdup_printf ("Jumped to U+%4.4X.", uc);
+  set_statusbar_message (charmap, message);
+  g_free (message);
 }
 

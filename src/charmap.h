@@ -154,6 +154,7 @@ GtkWidget *charmap_get_statusbar (Charmap *charmap);
 void charmap_identify_clipboard (Charmap *charmap, GtkClipboard *clipboard);
 void charmap_expand_block_selector (Charmap *charmap);
 void charmap_collapse_block_selector (Charmap *charmap);
+void charmap_go_to_character (Charmap *charmap, gunichar uc);
 
 
 #ifdef __cplusplus

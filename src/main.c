@@ -19,6 +19,7 @@
 
 
 #include <gtk/gtk.h>
+#include <stdlib.h>
 #include "charmap.h"
 #include "gucharmap_intl.h"
 #include "mini_fontsel.h"
@@ -26,6 +27,13 @@
 
 
 static GtkWidget *charmap;
+
+typedef struct 
+{
+  GtkWidget *entry;
+  GtkWidget *label;
+} 
+EntryAndLabel;
 
 
 static void
@@ -39,9 +47,81 @@ expand_collapse (GtkCheckMenuItem *mi, gpointer data)
 
 
 static void
+jump_code_point_response (GtkDialog *dialog, gint response, EntryAndLabel *eal)
+{
+
+  if (response == GTK_RESPONSE_OK)
+    {
+      const gchar *text;
+      gchar *message;
+      gchar *endptr;
+      glong l;
+
+      text = gtk_entry_get_text (GTK_ENTRY (eal->entry));
+
+      l = strtol (text, &endptr, 16);
+
+      if (endptr != text && l >= 0 && l <= UNICHAR_MAX)
+        charmap_go_to_character (CHARMAP (charmap), (gunichar) l);
+      else
+        {
+          message = g_strdup_printf (_("Not a valid code point to jump to. Must be a hexadecimal number between 0 and %4.4X."), UNICHAR_MAX);
+          gtk_label_set_text (GTK_LABEL (eal->label), message);
+          g_free (message);
+          return;
+        }
+    }
+
+  g_free (eal);
+  gtk_widget_destroy (GTK_WIDGET (dialog));
+}
+
+
+static void
 jump_code_point (GtkWidget *widget, gpointer data)
 {
-  g_printerr ("jump_code_point\n");
+  GtkWidget *dialog;
+  EntryAndLabel *eal;
+  GtkWidget *vbox;
+
+  dialog = gtk_dialog_new_with_buttons (
+          _("Go to hex code point"),
+          GTK_WINDOW (gtk_widget_get_toplevel (widget)),
+          GTK_DIALOG_DESTROY_WITH_PARENT, 
+          GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, 
+          GTK_STOCK_OK, GTK_RESPONSE_OK, 
+          NULL);
+
+  vbox = gtk_vbox_new (FALSE, 6);
+  gtk_container_set_border_width (GTK_CONTAINER (vbox), 6);
+
+  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), vbox,
+                      FALSE, FALSE, 0);
+
+  eal = g_malloc (sizeof (EntryAndLabel));
+  eal->entry = gtk_entry_new ();
+  gtk_entry_set_activates_default (GTK_ENTRY (eal->entry), TRUE);
+  gtk_entry_set_max_length (GTK_ENTRY (eal->entry), 8); 
+  gtk_entry_set_width_chars (GTK_ENTRY (eal->entry), 8);
+
+  gtk_box_pack_start (GTK_BOX (vbox),
+                      gtk_label_new (_("Enter unicode code point")),
+                      FALSE, FALSE, 0);
+
+  gtk_box_pack_start (GTK_BOX (vbox), eal->entry, FALSE, FALSE, 0);
+
+  eal->label = gtk_label_new ("");
+  gtk_label_set_line_wrap (GTK_LABEL (eal->label), TRUE);
+  gtk_box_pack_start (GTK_BOX (vbox), eal->label, FALSE, FALSE, 0);
+
+  gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+
+  g_signal_connect (GTK_DIALOG (dialog), "response", 
+                    G_CALLBACK (jump_code_point_response), eal);
+
+  gtk_widget_show_all (dialog);
+
+  gtk_widget_grab_focus (eal->entry);
 }
 
 
