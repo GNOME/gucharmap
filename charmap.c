@@ -421,6 +421,30 @@ get_char_at (Charmap *charmap, gint x, gint y)
 
 
 static gint
+copy_button_clicked (GtkWidget *widget,
+                     gpointer callback_data)
+{
+  Charmap *charmap = CHARMAP (callback_data);
+  gtk_editable_select_region (GTK_EDITABLE (charmap->text_to_copy), 0, -1);
+  return TRUE;
+}
+
+
+static gint
+clear_button_clicked (GtkWidget *widget,
+                      gpointer callback_data)
+{
+  Charmap *charmap = CHARMAP (callback_data);
+  gtk_entry_set_text (GTK_ENTRY (charmap->text_to_copy), "");
+  return TRUE;
+}
+
+
+/*  - single click with left button: activate character under pointer
+ *  - double-click with left button: add active character to text_to_copy
+ *  - # single-click with middle button: not implemented
+ */
+static gint
 button_press_event (GtkWidget *widget, 
                     GdkEventButton *event, 
                     gpointer callback_data)
@@ -428,21 +452,32 @@ button_press_event (GtkWidget *widget,
   Charmap *charmap = CHARMAP (callback_data);
   gunichar old_active_char;
 
-  old_active_char = charmap->active_char;
-  charmap->active_char = get_char_at (charmap, event->x, event->y);
-
-  if (charmap->active_char != old_active_char)
-    {
-      draw_tabulus_pixmap (charmap);
-    
-      expose_char_for_redraw (charmap, charmap->active_char);
-      expose_char_for_redraw (charmap, old_active_char);
-    }
-
-  /* in case we lost keyboard focus and are clicking to get it back */
   gtk_widget_grab_focus (charmap->tabulus);
 
-  return FALSE;
+  /* double-click */
+  if (event->button == 1 && event->type == GDK_2BUTTON_PRESS)
+    {
+      append_character_to_text_to_copy (charmap);
+    }
+  /* single-click */
+  else if (event->button == 1 && event->type == GDK_BUTTON_PRESS) 
+    {
+      old_active_char = charmap->active_char;
+      charmap->active_char = get_char_at (charmap, event->x, event->y);
+
+      if (charmap->active_char != old_active_char)
+        {
+          draw_tabulus_pixmap (charmap);
+        
+          expose_char_for_redraw (charmap, charmap->active_char);
+          expose_char_for_redraw (charmap, old_active_char);
+        }
+
+      /* in case we lost keyboard focus and are clicking to get it back */
+      gtk_widget_grab_focus (charmap->tabulus);
+    }
+
+  return TRUE;
 }
 
 
@@ -460,6 +495,7 @@ charmap_init (Charmap *charmap)
   GtkWidget *hbox;
   GtkWidget *frame;
   GtkWidget *table;
+  GtkWidget *button;
 
   debug ("charmap_init\n");
 
@@ -607,9 +643,17 @@ charmap_init (Charmap *charmap)
                             TEXT_TO_COPY_MAXLENGTH);
   gtk_box_pack_start (GTK_BOX (hbox), charmap->text_to_copy, TRUE, TRUE, 0);
 
-  gtk_box_pack_start (GTK_BOX (hbox), 
-                      gtk_button_new_from_stock (GTK_STOCK_COPY), 
-                      TRUE, TRUE, 0);
+  /* the copy button */
+  button = gtk_button_new_from_stock (GTK_STOCK_COPY); 
+  g_signal_connect (G_OBJECT (button), "clicked",
+                    G_CALLBACK (copy_button_clicked), charmap);
+  gtk_box_pack_start (GTK_BOX (hbox), button, TRUE, TRUE, 0);
+
+  /* the clear button */
+  button = gtk_button_new_from_stock (GTK_STOCK_CLEAR);
+  g_signal_connect (G_OBJECT (button), "clicked",
+                    G_CALLBACK (clear_button_clicked), charmap);
+  gtk_box_pack_start (GTK_BOX (hbox), button, TRUE, TRUE, 0);
 
   frame = gtk_frame_new (NULL);
   gtk_container_add (GTK_CONTAINER (frame), hbox);
