@@ -8,123 +8,91 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
-"POT-Creation-Date: 2003-02-26 12:52+0100\n"
-"PO-Revision-Date: 2003-02-26 12:53+0100\n"
+"POT-Creation-Date: 2003-03-04 00:49+0100\n"
+"PO-Revision-Date: 2003-03-04 00:50+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/charmap.c:851
-msgid "Zoom mode disabled."
-msgstr "Zoomläget inaktiverat."
-
-#: src/charmap.c:1545
-msgid "Zoom mode enabled. Press <Esc> to disable zoom."
-msgstr "Zoomläget aktiverat. Tryck på <Esc> för att inaktivera zoom."
-
-#: src/charmap.c:1614
-msgid "Zoom mode enabled."
-msgstr "Zoomläget aktiverat."
-
-#: src/charmap.c:1850
-msgid "Clipboard is empty."
-msgstr "Urklipp är tomt."
-
-#: src/charmap.c:1852
-msgid "There is no selected text."
-msgstr "Det finns ingen markerad text."
-
-#: src/charmap.c:1860 src/charmap.c:2064
-msgid "Unknown character, unable to identify."
-msgstr "Okänt tecken, kan inte identifiera."
-
-#: src/charmap.c:1864 src/charmap.c:2068
-msgid "Character found."
-msgstr "Tecken hittat."
-
-#: src/charmap.c:2174
+#: src/charmap.c:705
 msgid "Character Map"
 msgstr "Teckentabell"
 
-#: src/charmap.c:2178
+#: src/charmap.c:709
 msgid "Character"
 msgstr "Tecken"
 
-#: src/charmap.c:2179
+#: src/charmap.c:710
 msgid "Unicode category"
 msgstr "Unicode-kategori"
 
-#: src/charmap.c:2180
+#: src/charmap.c:711
 msgid "Canonical decomposition"
 msgstr "Kanonisk dekomposition"
 
-#: src/charmap.c:2181
+#: src/charmap.c:712
 msgid "UTF-8"
 msgstr "UTF-8"
 
-#: src/charmap.c:2182
+#: src/charmap.c:713
 msgid "Other representations"
 msgstr "Andra representationer"
 
-#: src/charmap.c:2184
-msgid "CJK ideograph definition"
-msgstr "CJK-ideografdefinition"
-
-#: src/charmap.c:2185
-msgid "Mandarin pronunciation"
-msgstr "Mandarin-uttal"
-
-#: src/charmap.c:2186
-msgid "Japanese On pronunciation"
-msgstr "Japanskt On-uttal"
-
-#: src/charmap.c:2187
-msgid "Japanese Kun pronunciation"
-msgstr "Japanskt Kun-uttal"
-
-#: src/charmap.c:2188
-msgid "Cantonese pronunciation"
-msgstr "Kantonesiskt uttal"
-
-#: src/charmap.c:2189
-msgid "Tang pronunciation"
-msgstr "Tang-uttal"
-
-#: src/charmap.c:2190
-msgid "Korean pronunciation"
-msgstr "Koreanskt uttal"
-
-#: src/charmap.c:2192
+#: src/charmap.c:714
 msgid "See also"
 msgstr "Se även"
 
-#: src/charmap.c:2193
+#: src/charmap.c:715
 msgid "Equivalents"
 msgstr "Ekvivalenter"
 
-#: src/charmap.c:2194
+#: src/charmap.c:716
 msgid "Alias names"
 msgstr "Aliasnamn"
 
-#: src/charmap.c:2195
+#: src/charmap.c:717
 msgid "Approximate equivalents"
 msgstr "Ungefärliga ekvivalenter"
 
-#: src/charmap.c:2196
+#: src/charmap.c:718
 msgid "Notes"
 msgstr "Anteckningar"
 
-#: src/charmap.c:2211
-msgid "Character Table"
-msgstr "Teckentabell"
+#: src/charmap.c:720
+msgid "CJK ideograph definition"
+msgstr "CJK-ideografdefinition"
 
-#: src/charmap.c:2216
+#: src/charmap.c:721
+msgid "Mandarin pronunciation"
+msgstr "Mandarin-uttal"
+
+#: src/charmap.c:722
+msgid "Japanese On pronunciation"
+msgstr "Japanskt On-uttal"
+
+#: src/charmap.c:723
+msgid "Japanese Kun pronunciation"
+msgstr "Japanskt Kun-uttal"
+
+#: src/charmap.c:724
+msgid "Cantonese pronunciation"
+msgstr "Kantonesiskt uttal"
+
+#: src/charmap.c:725
+msgid "Tang pronunciation"
+msgstr "Tang-uttal"
+
+#: src/charmap.c:726
+msgid "Korean pronunciation"
+msgstr "Koreanskt uttal"
+
+#: src/charmap.c:744
 msgid "Details on the Current Character"
 msgstr "Detaljer om det aktuella tecknet"
 
-#: src/charmap.c:2227
+#: src/charmap.c:755
 msgid "List of Unicode Blocks"
 msgstr "Lista med Unicode-block"
 
@@ -132,7 +100,15 @@ msgstr "Lista med Unicode-block"
 msgid "Font to start with; ex: 'Serif 27'"
 msgstr "Typsnitt att starta med; t.ex. \"Serif 27\""
 
-#: src/main.c:318
+#: src/main.c:131
+msgid "Zoom mode enabled. Press <Esc> to disable zoom."
+msgstr "Zoomläget aktiverat. Tryck på <Esc> för att inaktivera zoom."
+
+#: src/main.c:141
+msgid "Zoom mode disabled."
+msgstr "Zoomläget inaktiverat."
+
+#: src/main.c:344
 #, c-format
 msgid ""
 "Not a valid code point to jump to. Must be a hexadecimal number between 0 "
@@ -141,185 +117,190 @@ msgstr ""
 "Inte en giltig kodpunkt att hoppa till. Måste vara ett hexadecimalt tal "
 "mellan 0 och %4.4X."
 
-#: src/main.c:340
+#: src/main.c:366
 msgid "Go to hex code point"
 msgstr "Gå till hexadecimal kodpunkt"
 
-#: src/main.c:361
+#: src/main.c:387
 msgid "_Enter unicode code point"
 msgstr "_Ange Unicode-kodpunkt"
 
-#: src/main.c:405
+#: src/main.c:431
 msgid "The selected code point is not a valid unicode character."
 msgstr "Den valda kodpunkten är inte ett giltigt Unicode-tecken."
 
-#: src/main.c:433
+#: src/main.c:459
 msgid "Text copied to clipboard."
 msgstr "Texten kopierad till urklipp."
 
-#: src/main.c:448
+#: src/main.c:474
 msgid "Not found."
 msgstr "Hittades inte."
 
-#: src/main.c:452
+#: src/main.c:478
 msgid "Found."
 msgstr "Hittades."
 
-#: src/main.c:456
+#: src/main.c:482
 msgid "Search wrapped."
 msgstr "Sökningen började om från början."
 
-#: src/main.c:460
+#: src/main.c:486
 msgid "Nothing to search for."
 msgstr "Ingenting att söka efter."
 
-#: src/main.c:494
+#: src/main.c:520
 msgid "_Search:"
 msgstr "_Sök:"
 
-#: src/main.c:513
+#: src/main.c:539
 msgid ""
 "Search for the next occurrence of this string in a character's Unicode name."
 msgstr ""
 "Sök för nästa förekomst av denna sträng i Unicode-namnet för ett tecken."
 
-#: src/main.c:545
+#: src/main.c:571
 msgid "_Text to copy:"
 msgstr "_Text att kopiera:"
 
-#: src/main.c:566
+#: src/main.c:592
 msgid "Copy to the clipboard."
 msgstr "Kopiera till urklipp."
 
-#: src/main.c:591
+#: src/main.c:618
 msgid "translator_credits"
 msgstr ""
 "Christian Rose\n"
 "Skicka synpunkter på översättningen till sv@li.org"
 
-#: src/main.c:598 src/main.c:1047
+#: src/main.c:625 src/main.c:1088 gucharmap.desktop.in.h:1
 msgid "Unicode Character Map"
 msgstr "Unicode-teckentabell"
 
-#: src/main.c:652
+#: src/main.c:680
 msgid "Char_map"
 msgstr "Tecken_tabell"
 
-#: src/main.c:654
+#: src/main.c:682
 msgid "_View"
 msgstr "_Visa"
 
-#: src/main.c:656
+#: src/main.c:684
 msgid "_Go To"
 msgstr "_Gå till"
 
-#: src/main.c:675
+#: src/main.c:703
 msgid "Expand/Collapse All"
 msgstr "Fäll ut/Fäll in allt"
 
 #. ctrl-+ or ctrl-=
-#: src/main.c:684
+#: src/main.c:712
 msgid "Zoom _In"
 msgstr "Zooma _in"
 
 #. ctrl--
-#: src/main.c:696
+#: src/main.c:724
 msgid "Zoom _Out"
 msgstr "Zooma _ut"
 
-#: src/main.c:708
+#. ctrl-<enter>
+#: src/main.c:737
+msgid "_Zoom Mode"
+msgstr "_Zoomläge"
+
+#: src/main.c:751
 msgid "_Unicode Details"
 msgstr "_Unicode-detaljer"
 
 #. the unicode details submenu
-#: src/main.c:714 src/main.c:763 src/main.c:837
+#: src/main.c:757 src/main.c:806 src/main.c:880
 msgid "Options"
 msgstr "Alternativ"
 
-#: src/main.c:722
+#: src/main.c:765
 msgid "_Category"
 msgstr "_Kategori"
 
-#: src/main.c:730
+#: src/main.c:773
 msgid "Canonical _Decomposition"
 msgstr "Kanonisk _dekomposition"
 
-#: src/main.c:737
+#: src/main.c:780
 msgid "_UTF-8"
 msgstr "_UTF-8"
 
-#: src/main.c:745
+#: src/main.c:788
 msgid "_Other Representations"
 msgstr "_Andra representationer"
 
-#: src/main.c:757
+#: src/main.c:800
 msgid "_CJK Ideograph Details"
 msgstr "_CJK-ideografdetaljer"
 
-#: src/main.c:772
+#: src/main.c:815
 msgid "CJK Ideograph _Definition"
 msgstr "CJK-ideograf_definition"
 
-#: src/main.c:780
+#: src/main.c:823
 msgid "_Mandarin Pronunciation"
 msgstr "_Mandarin-uttal"
 
-#: src/main.c:788
+#: src/main.c:831
 msgid "Japanese _On Pronunciation"
 msgstr "Japanskt _On-uttal"
 
-#: src/main.c:796
+#: src/main.c:839
 msgid "_Japanese Kun Pronunciation"
 msgstr "_Japanskt Kun-uttal"
 
-#: src/main.c:804
+#: src/main.c:847
 msgid "_Cantonese Pronunciation"
 msgstr "_Kantonesiskt uttal"
 
-#: src/main.c:812
+#: src/main.c:855
 msgid "_Tang Pronunciation"
 msgstr "_Tang-uttal"
 
-#: src/main.c:820
+#: src/main.c:863
 msgid "_Korean Pronunciation"
 msgstr "_Koreanskt uttal"
 
-#: src/main.c:831
+#: src/main.c:874
 msgid "_Annotations and Cross References"
 msgstr "_Annotationer och korsreferenser"
 
-#: src/main.c:846
+#: src/main.c:889
 msgid "_Alias Names"
 msgstr "_Aliasnamn"
 
-#: src/main.c:853
+#: src/main.c:896
 msgid "_Notes"
 msgstr "_Anteckningar"
 
-#: src/main.c:860
+#: src/main.c:903
 msgid "_See Also"
 msgstr "_Se även"
 
-#: src/main.c:867
+#: src/main.c:910
 msgid "_Approximate Equivalents"
 msgstr "_Ungefärliga ekvivalenter"
 
-#: src/main.c:874
+#: src/main.c:917
 msgid "_Equivalents"
 msgstr "_Ekvivalenter"
 
 #. ctrl-h
-#: src/main.c:887
+#: src/main.c:930
 msgid "_Hex Code Point..."
 msgstr "_Hexadecimal kodpunkt..."
 
 #. ctrl-v
-#: src/main.c:895
+#: src/main.c:938
 msgid "Character in _Clipboard"
 msgstr "Tecken i _urklipp"
 
 #. make the help menu
-#: src/main.c:905
+#: src/main.c:948
 msgid "_Help"
 msgstr "_Hjälp"
 
@@ -338,6 +319,27 @@ msgstr "Typsnittsstil"
 #: src/mini_fontsel.c:303
 msgid "Font Size"
 msgstr "Typsnittsstorlek"
+
+#~ msgid "Zoom Mode"
+#~ msgstr "Zoomläge"
+
+#~ msgid "Zoom mode enabled."
+#~ msgstr "Zoomläget aktiverat."
+
+#~ msgid "Clipboard is empty."
+#~ msgstr "Urklipp är tomt."
+
+#~ msgid "There is no selected text."
+#~ msgstr "Det finns ingen markerad text."
+
+#~ msgid "Unknown character, unable to identify."
+#~ msgstr "Okänt tecken, kan inte identifiera."
+
+#~ msgid "Character found."
+#~ msgstr "Tecken hittat."
+
+#~ msgid "Character Table"
+#~ msgstr "Teckentabell"
 
 #~ msgid "Note"
 #~ msgstr "Anteckning"
