@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap 2.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-16 21:33+0100\n"
-"PO-Revision-Date: 2004-01-16 21:38+0100\n"
+"POT-Creation-Date: 2004-01-29 11:18+0100\n"
+"PO-Revision-Date: 2004-01-29 11:19+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8-bit\n"
 
 #. ID
-#: gucharmap.desktop.in.h:1 gucharmap/gucharmap-window.c:386
-#: gucharmap/gucharmap-window.c:919 gucharmap/imgucharmap.c:209
+#: gucharmap.desktop.in.h:1 gucharmap/gucharmap-window.c:342
+#: gucharmap/gucharmap-window.c:784 gucharmap/imgucharmap.c:209
 msgid "Character Map"
 msgstr "Tegnkart"
 
@@ -131,40 +131,25 @@ msgstr "Skriftstørrelse"
 
 #. Unicode assigns "Common" as the script name for any character not
 #. * specifically listed in Scripts.txt
-#: gucharmap/gucharmap-script-codepoint-list.c:69
+#: gucharmap/gucharmap-script-codepoint-list.c:458
 #: gucharmap/unicode-scripts.h:20
 msgid "Common"
 msgstr "Vanlig"
 
-#: gucharmap/gucharmap-table.c:1319
-msgid "Clipboard is empty."
-msgstr "Utklippstavlen er tom."
-
-#: gucharmap/gucharmap-table.c:1321
-msgid "There is no selected text."
-msgstr "Ingen tekst er valgt."
-
-#: gucharmap/gucharmap-table.c:1328
-msgid "Unknown character in clipboard, unable to identify."
-msgstr "Ukjent tegn på utklippstavlen. Kan ikke identifiseres."
-
-#: gucharmap/gucharmap-table.c:1330
-msgid "First character in clipboard not found."
-msgstr "Første tegn på utklippstavlen ble ikke funnet."
-
-#: gucharmap/gucharmap-table.c:1333 gucharmap/gucharmap-table.c:1578
-msgid "Character found."
-msgstr "Tegn funnet."
-
-#: gucharmap/gucharmap-table.c:1573
+#: gucharmap/gucharmap-table.c:1531
 msgid "Unknown character, unable to identify."
 msgstr "Ukjent tegn. Kan ikke identifiseres."
 
-#: gucharmap/gucharmap-table.c:1575 gucharmap/gucharmap-window.c:213
+#. information_dialog (guw, alert_parent, _("Not found."));
+#: gucharmap/gucharmap-table.c:1533 gucharmap/gucharmap-window.c:139
 msgid "Not found."
 msgstr "Ikke funnet."
 
-#: gucharmap/gucharmap-table.c:1643
+#: gucharmap/gucharmap-table.c:1536
+msgid "Character found."
+msgstr "Tegn funnet."
+
+#: gucharmap/gucharmap-table.c:1601
 msgid "Character Table"
 msgstr "Tegntabell"
 
@@ -177,9 +162,8 @@ msgid "<Private Use High Surrogate>"
 msgstr ""
 
 #: gucharmap/gucharmap-unicode-info.c:100
-#, fuzzy
 msgid "<Low Surrogate>"
-msgstr "Annet, erstatning"
+msgstr "<Lav erstatning>"
 
 #: gucharmap/gucharmap-unicode-info.c:102
 msgid "<Private Use>"
@@ -317,102 +301,92 @@ msgstr "Skilletegn, avsnitt"
 msgid "Separator, Space"
 msgstr "Skilletegn, mellomrom"
 
-#: gucharmap/gucharmap-window.c:54
+#: gucharmap/gucharmap-window.c:90
 msgid "Information"
 msgstr "Informasjon"
 
-#: gucharmap/gucharmap-window.c:123 gucharmap/gucharmap-window.c:217
-#: gucharmap/gucharmap-window.c:227
-msgid "Nothing to search for."
-msgstr "Ingenting å søke etter."
-
-#: gucharmap/gucharmap-window.c:269
+#: gucharmap/gucharmap-window.c:217
 msgid "Find"
 msgstr "Finn"
 
-#: gucharmap/gucharmap-window.c:282
+#: gucharmap/gucharmap-window.c:230
 msgid "_Search:"
 msgstr "_Søk:"
 
-#: gucharmap/gucharmap-window.c:379
+#: gucharmap/gucharmap-window.c:337
 msgid "translator_credits"
 msgstr "Kjartan Maraas <kmaraas@gnome.org>"
 
-#: gucharmap/gucharmap-window.c:538
+#: gucharmap/gucharmap-window.c:461
 msgid "_File"
 msgstr "_Fil"
 
-#: gucharmap/gucharmap-window.c:540
+#: gucharmap/gucharmap-window.c:463
 msgid "_View"
 msgstr "_Vis"
 
-#: gucharmap/gucharmap-window.c:542
+#: gucharmap/gucharmap-window.c:465
 msgid "_Search"
 msgstr "_Søk"
 
-#: gucharmap/gucharmap-window.c:544
+#: gucharmap/gucharmap-window.c:467
 msgid "_Go"
 msgstr "_Gå til"
 
+#: gucharmap/gucharmap-window.c:486
+msgid "By _Script"
+msgstr "Etter _skript"
+
+#: gucharmap/gucharmap-window.c:492
+msgid "By _Unicode Block"
+msgstr "Etter Unicode-blokk"
+
 #. ctrl-+ or ctrl-=
-#: gucharmap/gucharmap-window.c:565
+#: gucharmap/gucharmap-window.c:501
 msgid "Zoom _In"
 msgstr "Zoom _inn"
 
 #. ctrl--
-#: gucharmap/gucharmap-window.c:577
+#: gucharmap/gucharmap-window.c:513
 msgid "Zoom _Out"
 msgstr "Zoom _ut"
 
-#: gucharmap/gucharmap-window.c:589
-#, fuzzy
+#: gucharmap/gucharmap-window.c:525
 msgid "Snap Columns to Power of Two"
-msgstr "Fest kolonner til "
+msgstr "Fest kolonner i andre potens"
 
-#: gucharmap/gucharmap-window.c:597
-msgid "By _Script"
-msgstr "Etter _skript"
-
-#: gucharmap/gucharmap-window.c:603
-msgid "By _Unicode Block"
-msgstr "Etter Unicode-blokk"
-
-#: gucharmap/gucharmap-window.c:613
+#: gucharmap/gucharmap-window.c:534
 msgid "_Find..."
 msgstr "_Finn..."
 
-#: gucharmap/gucharmap-window.c:623
+#: gucharmap/gucharmap-window.c:543
 msgid "Find _Next"
 msgstr "Finn _neste"
 
-#: gucharmap/gucharmap-window.c:633
+#: gucharmap/gucharmap-window.c:553
 msgid "Find _Previous"
 msgstr "Finn _forrige"
 
-#: gucharmap/gucharmap-window.c:673
+#: gucharmap/gucharmap-window.c:570
 msgid "_Next Character"
 msgstr "_Neste tegn"
 
-#: gucharmap/gucharmap-window.c:680
+#: gucharmap/gucharmap-window.c:576
 msgid "_Previous Character"
 msgstr "_Forrige tegn"
 
-#: gucharmap/gucharmap-window.c:690
-msgid "Character in _Clipboard"
-msgstr "Tegn på _utklippstavlen"
-
 #. make the help menu
-#: gucharmap/gucharmap-window.c:704
+#: gucharmap/gucharmap-window.c:588
 msgid "_Help"
 msgstr "_Hjelp"
 
-#: gucharmap/gucharmap-window.c:783
+#: gucharmap/gucharmap-window.c:671
 msgid "_Text to copy:"
 msgstr "_Tekst som skal kopieres:"
 
-#: gucharmap/gucharmap-window.c:804
+#: gucharmap/gucharmap-window.c:692
 msgid "Copy to the clipboard."
-msgstr "Kopier til utklippstavlen"
+msgstr "Kopier til utklippstavlen."
 
 #: gucharmap/main.c:41
 msgid "Font to start with; ex: 'Serif 27'"
@@ -958,14 +932,14 @@ msgstr ""
 msgid "Yi"
 msgstr "Yi"
 
-#: gucharmap/gucharmap-block-chapters.c:60
+#: gucharmap/gucharmap-block-chapters.c:61
 msgid "All"
 msgstr "Alle"
 
-#: gucharmap/gucharmap-block-chapters.c:78
+#: gucharmap/gucharmap-block-chapters.c:79
 msgid "Unicode Block"
 msgstr "Unicode-blokk"
 
-#: gucharmap/gucharmap-script-chapters.c:74
+#: gucharmap/gucharmap-script-chapters.c:77
 msgid "Script"
 msgstr "Skript"
