@@ -2041,6 +2041,11 @@ charmap_init (Charmap *charmap)
   GtkWidget *hpaned;
   GtkWidget *vbox;
   GtkWidget *caption;
+  GtkWidget *temp;
+  AtkObject *accessib;
+
+  accessib = gtk_widget_get_accessible (GTK_WIDGET (charmap));
+  atk_object_set_name (accessib, _("Character Map"));
 
   charmap->rows = CHARMAP_MIN_ROWS;
   charmap->cols = CHARMAP_MIN_COLS;
@@ -2053,17 +2058,27 @@ charmap_init (Charmap *charmap)
 
   /* vbox for charmap and caption */
   vbox = gtk_vbox_new (FALSE, 6);
-  gtk_box_pack_start (GTK_BOX (vbox), make_chartable (charmap), TRUE, TRUE, 0);
+  temp = make_chartable (charmap);
+  accessib = gtk_widget_get_accessible (temp);
+  atk_object_set_name (accessib, _("Character Table"));
+  gtk_box_pack_start (GTK_BOX (vbox), temp, TRUE, TRUE, 0);
+
   caption = make_caption (charmap);
+  accessib = gtk_widget_get_accessible (caption);
+  atk_object_set_name (accessib, _("Details on the Current Character"));
   gtk_widget_show (caption);
   gtk_box_pack_start (GTK_BOX (vbox), caption, FALSE, FALSE, 0);
   gtk_widget_show (vbox);
   /* end vbox for charmap and caption*/
 
-  /* put stuff in top hpaned */
+  /* the panes */
   hpaned = gtk_hpaned_new ();
-  gtk_paned_pack1 (GTK_PANED (hpaned), make_unicode_block_selector (charmap), 
-                   FALSE, TRUE);
+
+  temp = make_unicode_block_selector (charmap);
+  accessib = gtk_widget_get_accessible (temp);
+  atk_object_set_name (accessib, _("List of Unicode Blocks"));
+
+  gtk_paned_pack1 (GTK_PANED (hpaned), temp, FALSE, TRUE);
   gtk_paned_pack2 (GTK_PANED (hpaned), vbox, TRUE, TRUE);
   /* done with panes */
 

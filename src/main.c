@@ -557,7 +557,6 @@ main (gint argc, gchar **argv)
   GtkWidget *window = NULL;
   GtkWidget *big_vbox;
   GtkWidget *hbox;
-  GtkWidget *toolbar; /* the fontsel goes on this */
   GtkWidget *spacer;
   GtkTooltips *tooltips;
   gchar *orig_font, *new_font;
@@ -597,11 +596,9 @@ main (gint argc, gchar **argv)
   gtk_box_pack_start (GTK_BOX (big_vbox), make_menu (GTK_WINDOW (window)), 
 	              FALSE, FALSE, 0);
 
-  toolbar = gtk_toolbar_new ();
   fontsel = mini_font_selection_new ();
-  gtk_toolbar_append_widget (GTK_TOOLBAR (toolbar), fontsel, NULL, NULL);
-  gtk_box_pack_start (GTK_BOX (big_vbox), toolbar, FALSE, FALSE, 0);
-  gtk_widget_show_all (toolbar);
+  gtk_box_pack_start (GTK_BOX (big_vbox), fontsel, FALSE, FALSE, 0);
+  gtk_widget_show_all (fontsel);
 
   /* some empty space */
   spacer = gtk_alignment_new (0, 0, 0, 0); 

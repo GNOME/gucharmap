@@ -21,6 +21,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "mini_fontsel.h"
+#include "gucharmap_intl.h"
 #include "gucharmap_marshal.h"
 
 
@@ -273,18 +274,30 @@ mini_font_selection_class_init (MiniFontSelectionClass *clazz)
 void
 mini_font_selection_init (MiniFontSelection *fontsel)
 {
+  AtkObject *accessib;
+
+  accessib = gtk_widget_get_accessible (GTK_WIDGET (fontsel));
+  atk_object_set_name (accessib, _("Font"));
+
   fontsel->available_faces = NULL;
   fontsel->font_desc = pango_font_description_new ();
 
   gtk_box_set_spacing (GTK_BOX (fontsel), 6);
 
   fontsel->family = gtk_combo_new ();
+  accessib = gtk_widget_get_accessible (fontsel->family);
+  atk_object_set_name (accessib, _("Font Family"));
+
   fontsel->style = gtk_combo_new ();
+  accessib = gtk_widget_get_accessible (fontsel->style);
+  atk_object_set_name (accessib, _("Font Style"));
 
   fontsel->size_adj = gtk_adjustment_new (14, MIN_FONT_SIZE, MAX_FONT_SIZE, 
 	                                  1, 9, 0);
   fontsel->size = gtk_spin_button_new (GTK_ADJUSTMENT (fontsel->size_adj),
                                        0, 0);
+  accessib = gtk_widget_get_accessible (fontsel->size);
+  atk_object_set_name (accessib, _("Font Size"));
 
   gtk_editable_set_editable (GTK_EDITABLE (GTK_COMBO (fontsel->family)->entry),
                              FALSE);
