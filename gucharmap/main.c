@@ -50,8 +50,8 @@ gint
 main (gint argc, gchar **argv)
 {
   GtkWidget *window;
-  gchar *orig_font = NULL;
-  PangoFontDescription *font_desc = NULL;
+  /* gchar *orig_font = NULL;
+  PangoFontDescription *font_desc = NULL; */
   GdkScreen *screen;
   gint monitor;
     GdkRectangle rect;
@@ -100,6 +100,7 @@ main (gint argc, gchar **argv)
                                rect.width * 9/16, 
                                rect.height * 9/16);
 
+#if 0
   /* make the starting font 50% bigger than the default font */
   if (new_font == NULL) /* new_font could be set by command line option */
     {
@@ -111,9 +112,9 @@ main (gint argc, gchar **argv)
     }
   /* this sends the changed signal: */
   gucharmap_mini_font_selection_set_font_name (GUCHARMAP_MINI_FONT_SELECTION (GUCHARMAP_WINDOW (window)->fontsel), new_font);
+#endif
 
-  g_signal_connect (G_OBJECT (window), "destroy", 
-                    G_CALLBACK (gtk_main_quit), NULL);
+  g_signal_connect (G_OBJECT (window), "destroy", G_CALLBACK (gtk_main_quit), NULL);
 
   gucharmap_table_grab_focus (GUCHARMAP_WINDOW (window)->charmap->chartable);
   gtk_widget_show_all (window);

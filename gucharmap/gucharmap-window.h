@@ -22,79 +22,39 @@
 #define GUCHARMAP_WINDOW_H
 
 #include <gtk/gtk.h>
-#include <gucharmap/gucharmap-charmap.h>
-
+#include "gucharmap-charmap.h"
 
 G_BEGIN_DECLS
 
-#define GUCHARMAP_WINDOW(obj) (\
-        G_TYPE_CHECK_INSTANCE_CAST ((obj), gucharmap_window_get_type (), \
-                                    GucharmapWindow))
+#define GUCHARMAP_WINDOW(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), gucharmap_window_get_type (), GucharmapWindow))
 
-#define GUCHARMAP_WINDOW_CLASS(clazz) (\
-        G_TYPE_CHECK_CLASS_CAST ((clazz), gucharmap_window_get_type () \
-                                 GucharmapWindowClass))
+#define GUCHARMAP_WINDOW_CLASS(clazz) (G_TYPE_CHECK_CLASS_CAST ((clazz), gucharmap_window_get_type (), GucharmapWindowClass))
 
-#define IS_GUCHARMAP_WINDOW(obj) (\
-        G_TYPE_CHECK_INSTANCE_TYPE ((obj), gucharmap_window_get_type ()))
-
+#define IS_GUCHARMAP_WINDOW(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), gucharmap_window_get_type ()))
 
 typedef struct _GucharmapWindow GucharmapWindow;
 typedef struct _GucharmapWindowClass GucharmapWindowClass;
-
 
 struct _GucharmapWindow
 {
   GtkWindow parent;
 
-  GucharmapCharmap *charmap;
-  GtkWidget *status;
-  GtkAccelGroup *accel_group;
-
-  GtkWidget *fontsel;
-  GtkWidget *text_to_copy_container; /* the thing to show/hide */
-  GtkWidget *text_to_copy_entry;
-
-  GtkWidget *unicode_options_menu_item;
-  GtkWidget *unihan_options_menu_item;
-  GtkWidget *nameslist_options_menu_item;
-
-  GtkWidget *file_menu_item;
-  GtkWidget *quit_menu_item;
-
-  GdkPixbuf *icon;
-
-  gchar *last_search;
-  gboolean search_in_progress;
-
-  gboolean font_selection_visible;
-  gboolean text_to_copy_visible;
-  gboolean file_menu_visible;
-
-  /* points to the element we are currently at (could be in the middle of
-   * the list) */
-  GList *history;
-  GtkWidget *back_menu_item;
-  GtkWidget *forward_menu_item;
+  GucharmapCharmap *charmap; 
 };
-
 
 struct _GucharmapWindowClass
 {
   GtkWindowClass parent_class;
 };
 
-
-GType gucharmap_window_get_type ();
-GtkWidget * gucharmap_window_new ();
-void gucharmap_window_set_font_selection_visible (GucharmapWindow *guw, 
-                                                  gboolean visible);
-void gucharmap_window_set_text_to_copy_visible (GucharmapWindow *guw, 
-                                                gboolean visible);
-void gucharmap_window_set_file_menu_visible (GucharmapWindow *guw, 
-                                             gboolean visible);
-
-
+GType       gucharmap_window_get_type                   ();
+GtkWidget * gucharmap_window_new                        ();
+void        gucharmap_window_set_font_selection_visible (GucharmapWindow *guw, 
+                                                         gboolean         visible);
+void        gucharmap_window_set_text_to_copy_visible   (GucharmapWindow *guw, 
+                                                         gboolean         visible);
+void        gucharmap_window_set_file_menu_visible      (GucharmapWindow *guw, 
+                                                         gboolean         visible);
 
 G_END_DECLS
 
