@@ -26,6 +26,12 @@
 
 G_BEGIN_DECLS
 
+
+#ifndef UNICHAR_MAX
+# define UNICHAR_MAX 0x0000ffff
+#endif
+
+
 typedef struct
 {
   gunichar start;

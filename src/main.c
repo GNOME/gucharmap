@@ -61,6 +61,16 @@ typedef struct
 } 
 EntryAndLabel;
 
+static gchar *new_font = NULL;
+static struct poptOption options[] = { 
+  { "font", '\0', POPT_ARG_STRING, &new_font, 0, 
+    N_("Font to start with; ex: 'Serif 27'"), NULL },
+#if !HAVE_GNOME
+  POPT_AUTOHELP  /* gnome does this automatically */
+#endif
+  { NULL, '\0', 0, NULL, 0 }
+};
+
 
 static void
 set_status (const gchar *message)
@@ -495,8 +505,6 @@ make_text_to_copy ()
   gtk_table_attach_defaults (GTK_TABLE (table), hbox, 1, 2, 0, 1);
 
   text_to_copy = gtk_entry_new ();
-  gtk_entry_set_max_length (GTK_ENTRY (text_to_copy), 
-                            TEXT_TO_COPY_MAXLENGTH);
   gtk_box_pack_start (GTK_BOX (hbox), text_to_copy, TRUE, TRUE, 0);
 
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), text_to_copy);
@@ -903,29 +911,26 @@ main (gint argc, gchar **argv)
 {
   GtkWidget *window = NULL;
   GtkTooltips *tooltips;
-  gchar *orig_font = NULL, *new_font = NULL;
+  gchar *orig_font = NULL;
   PangoFontDescription *font_desc = NULL;
 #if !HAVE_GNOME
   poptContext popt_context;
   gint rc;
 #endif
 
-  const struct poptOption options[] =
-    {
-      { "font", '\0', POPT_ARG_STRING, &new_font, 0, 
-        _("Font to start with; ex: 'Serif 27'"), NULL },
 #if !HAVE_GNOME
-      POPT_AUTOHELP  /* gnome does this automatically */
+  gtk_init (&argc, &argv);
+#else 
+  setlocale (LC_ALL, "");
 #endif
-      { NULL, '\0', 0, NULL, 0 }
-    };
+
+  /* translate --help message */
+  options[0].descrip = _(options[0].descrip);
 
 #if HAVE_GNOME
   gnome_program_init ("gucharmap", VERSION, LIBGNOMEUI_MODULE, argc, argv,
                       GNOME_PARAM_POPT_TABLE, options, NULL);
 #else
-  gtk_init (&argc, &argv);
-
   popt_context = poptGetContext ("gucharmap", argc, (const gchar **) argv, 
                                  options, 0);
   rc = poptGetNextOpt (popt_context);
@@ -938,7 +943,7 @@ main (gint argc, gchar **argv)
 
        exit (1);
     }
-#endif
+#endif  /* else (#if HAVE_GNOME) */
 
   tooltips = gtk_tooltips_new ();
 

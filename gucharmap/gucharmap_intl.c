@@ -22,14 +22,6 @@ gucharmap_gettext (const gchar *str)
 #endif
       gucharmap_gettext_initialized = TRUE;
     }
-  
-#if 0
-    {
-      gchar *rv;
-      rv = dgettext (GETTEXT_PACKAGE, str);
-      g_printerr ("gucharmap_gettext: returing \"%s\"\n", rv);
-    }
-#endif
 
   return dgettext (GETTEXT_PACKAGE, str);
 }

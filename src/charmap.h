@@ -43,12 +43,6 @@ G_BEGIN_DECLS
 #define CHARMAP_MIN_ROWS 4
 #define CHARMAP_MIN_COLS 4
 
-#ifndef UNICHAR_MAX
-# define UNICHAR_MAX 0x0000ffff
-#endif
-
-
-#define TEXT_TO_COPY_MAXLENGTH 4096
 
 /* 0x100, a standard increment for paging unicode */
 #define BLOCK_SIZE 256

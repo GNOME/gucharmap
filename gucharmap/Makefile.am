@@ -17,7 +17,7 @@
 ## 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
 ##
 
-AM_CFLAGS = $(GTK_CFLAGS) $(GNOME_CFLAGS) -Wall -ansi 
+AM_CFLAGS = $(GTK_CFLAGS) $(GNOME_CFLAGS) 
 
 localedir = $(datadir)/locale
 AM_CPPFLAGS = -DLOCALEDIR=\"$(localedir)\" -DGTK_DISABLE_DEPRECATED=1 \
