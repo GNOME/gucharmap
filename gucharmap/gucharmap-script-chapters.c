@@ -77,6 +77,10 @@ gucharmap_script_chapters_init (GucharmapScriptChapters *chapters)
   gtk_tree_view_column_add_attribute (column, cell, "text", SCRIPT_CHAPTERS_SCRIPT_TRANSLATED);
   gtk_tree_view_append_column (GTK_TREE_VIEW (parent->tree_view), column);
 
+  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (parent->tree_model), 
+                                        SCRIPT_CHAPTERS_SCRIPT_TRANSLATED, 
+                                        GTK_SORT_ASCENDING);
+
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (parent->tree_view));
   gtk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
 
