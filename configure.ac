@@ -143,7 +143,6 @@ AC_CONFIG_FILES([
 gucharmap.pc
 Makefile
 gucharmap/Makefile 
-gucharmap/unicode/Makefile 
 po/Makefile.in
 pixmaps/Makefile 
 help/Makefile

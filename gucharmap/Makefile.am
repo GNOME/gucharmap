@@ -148,10 +148,3 @@ endif
 
 EXTRA_DIST = gucharmap_marshal.list gucharmaprc.rc 
 
-
-if MAINTAINER_MODE
-SUBDIRS = unicode
-endif
-
- 
-

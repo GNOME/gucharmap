@@ -17,6 +17,14 @@
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  */
 
+#include "unicode-names.h"
+#include "unicode-blocks.h"
+#include "unicode-nameslist.h"
+#include "unicode-categories.h"
+#if ENABLE_UNIHAN
+# include "unicode-unihan.h"
+#endif
+
 #if HAVE_CONFIG_H
 # include <config.h>
 #endif
@@ -25,74 +33,6 @@
 #include <string.h>
 #include <gucharmap_intl.h>
 #include <gucharmap/gucharmap-unicode-info.h>
-
-
-typedef struct 
-{
-  gunichar index;
-  const gchar *name;
-} 
-UnicodeData;
-
-
-typedef struct 
-{
-  gunichar index;
-  const gchar *kDefinition;
-  const gchar *kCantonese;
-  const gchar *kMandarin;
-  const gchar *kTang;
-  const gchar *kKorean;
-  const gchar *kJapeneseKun;
-  const gchar *kJapaneseOn;
-} 
-Unihan;
-
-
-
-typedef struct 
-{
-  gunichar index;
-  gchar *value;
-}
-UnicharString;
-
-typedef struct
-{
-  gunichar index;
-  gunichar value;
-}
-UnicharUnichar;
-
-typedef struct
-{
-  gunichar index;
-  gint equals_index;  /* -1 means */
-  gint stars_index;   /* this character */
-  gint exes_index;    /* doesn't */
-  gint pounds_index;  /* have any */
-  gint colons_index;
-}
-NamesList;
-
-
-typedef struct
-{
-  gunichar first;
-  gunichar last;
-  GUnicodeType category;
-}
-UnicodeCategory;
-
-
-#include "unicode/unicode_data.cI"
-#include "unicode/unicode_blocks.cI"
-#if ENABLE_UNIHAN
-# include "unicode/unicode_unihan.cI"
-#endif
-#include "unicode/unicode_nameslist.cI"
-#include "unicode/unicode_categories.cI"
-
 
 /* constants for hangul (de)composition, see UAX #15 */
 #define SBase 0xAC00
@@ -290,26 +230,26 @@ gucharmap_unicode_canonical_decomposition (gunichar ch,
 
 
 
-/* does a binary search on unicode_data */
+/* does a binary search on unicode_names */
 G_CONST_RETURN gchar *
 gucharmap_get_unicode_data_name (gunichar uc)
 {
   gint min = 0;
   gint mid;
-  gint max = sizeof (unicode_data) / sizeof (UnicodeData) - 1;
+  gint max = sizeof (unicode_names) / sizeof (UnicodeName) - 1;
 
-  if (uc < unicode_data[0].index || uc > unicode_data[max].index)
+  if (uc < unicode_names[0].index || uc > unicode_names[max].index)
     return "";
 
   while (max >= min) 
     {
       mid = (min + max) / 2;
-      if (uc > unicode_data[mid].index)
+      if (uc > unicode_names[mid].index)
         min = mid + 1;
-      else if (uc < unicode_data[mid].index)
+      else if (uc < unicode_names[mid].index)
         max = mid - 1;
       else
-        return unicode_data[mid].name;
+        return unicode_names[mid].name;
     }
 
   return NULL;
@@ -362,14 +302,14 @@ gucharmap_find_substring_match (gunichar start,
                                 const gchar *search_text,
                                 gint direction)
 {
-  gint max = sizeof (unicode_data) / sizeof (UnicodeData) - 1;
+  gint max = sizeof (unicode_names) / sizeof (UnicodeName) - 1;
   gint i0;
   gint i;
 
   g_assert (direction == -1 || direction == 1);
 
   /* locate the start character by binary search */
-  if (start < unicode_data[0].index || start > UNICHAR_MAX)
+  if (start < unicode_names[0].index || start > UNICHAR_MAX)
     i0 = 0;
   else
     {
@@ -378,9 +318,9 @@ gucharmap_find_substring_match (gunichar start,
       while (max >= min) 
         {
           mid = (min + max) / 2;
-          if (start > unicode_data[mid].index)
+          if (start > unicode_names[mid].index)
             min = mid + 1;
-          else if (start < unicode_data[mid].index)
+          else if (start < unicode_names[mid].index)
             max = mid - 1;
           else
             break;
@@ -389,18 +329,18 @@ gucharmap_find_substring_match (gunichar start,
       i0 = mid;
     }
 
-  max = sizeof (unicode_data) / sizeof (UnicodeData) - 1;
+  max = sizeof (unicode_names) / sizeof (UnicodeName) - 1;
   /* try substring match on each */
   for (i = i0 + direction;  i != i0;  )
     {
-      if (unicode_data[i].index > UNICHAR_MAX)
+      if (unicode_names[i].index > UNICHAR_MAX)
         {
           i += direction;
           continue;
         }
 
-      if (ascii_case_strrstr (unicode_data[i].name, search_text) != NULL)
-        return unicode_data[i].index;
+      if (ascii_case_strrstr (unicode_names[i].name, search_text) != NULL)
+        return unicode_names[i].index;
 
       i += direction;
       if (i > max)
@@ -410,8 +350,8 @@ gucharmap_find_substring_match (gunichar start,
     }
 
   /* if the start character matches we want to return a match */
-  if (ascii_case_strrstr (unicode_data[i].name, search_text) != NULL)
-    return unicode_data[i].index;
+  if (ascii_case_strrstr (unicode_names[i].name, search_text) != NULL)
+    return unicode_names[i].index;
 
   return (gunichar)(-1);
 }

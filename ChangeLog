@@ -1,5 +1,32 @@
 2003-12-14  Noah Levitt
 
+	* gucharmap/gen-guch-unicode-tables.pl: Some fixes.
+
+	* gucharmap/unicode-blocks.h:
+	* gucharmap/unicode-categories.h:
+	* gucharmap/unicode-names.h:
+	* gucharmap/unicode-nameslist.h:
+	* gucharmap/unicode-unihan.h: New generated headers.
+
+	* gucharmap/unicode/.cvsignore:
+	* gucharmap/unicode/Makefile.am:
+	* gucharmap/unicode/generate_categories.pl:
+	* gucharmap/unicode/generate_nameslist.c:
+	* gucharmap/unicode/generate_unihan.c:
+	* gucharmap/unicode/generator.sh:
+	* gucharmap/unicode/unicode_blocks.cI:
+	* gucharmap/unicode/unicode_categories.cI:
+	* gucharmap/unicode/unicode_data.cI:
+	* gucharmap/unicode/unicode_nameslist.cI:
+	* gucharmap/unicode/unicode_unihan.cI: Remove in favor of new ones.
+
+	* configure.ac:
+	* gucharmap/Makefile.am:
+	* gucharmap/gucharmap-unicode-info.c: Change to the use new unicode
+	tables.
+
+2003-12-14  Noah Levitt
+
 	* gucharmap/gen-guch-unicode-tables.pl: New unicode table generation
 	script.
 
