@@ -1,1 +1,38 @@
-gcc -Wall -ansi -g `pkg-config --cflags gtk+-2.0`  unicode_info.c charmap.c main.c  `pkg-config --libs gtk+-2.0`
+This is the README for gucharmap.
+
+gucharmap is a unicode character map and font viewer.
+
+gucharmap depends on GTK+ 2.0 (or later, hopefully), which you can get
+from http://gtk.org/.
+
+To compile and install, do the usual
+
+   ./configure
+   make
+   make install
+
+There are no extra configure options (yet).
+
+You can get the latest version of gucharmap at
+http://sourceforge.net/projects/gucharmap
+
+gucharmap is Copyright (c) 2002 Noah Levitt, and is licensed to you
+under the GPL. See the file COPYING.
+
+Large portions of gucharmap are taken from files published by
+unicode.org. I think these portions are licensed under the terms of
+the Unicode copyright http://unicode.org/unicode/copyright.html,
+although I'm not entirely sure I have to say that. :)
+
+Data was gathered from the following URLs:
+http://www.unicode.org/Public/UNIDATA/Blocks.txt
+http://www.unicode.org/Public/UNIDATA/UnicodeData.txt
+http://www.unicode.org/Public/UNIDATA/Unihan.zip
+
+gucharmap was influenced by Juliusz Chroboczek's ucm
+(http://www.pps.jussieu.fr/~jch/software/files/ucm-0.3.tar.gz),
+the windows character map, and GNOME's gcharmap.
+
+Noah <nlevitt@users.sourceforge.net>
+Sat Dec  7 10:52:49 EST 2002
+

@@ -23,6 +23,7 @@ bin_PROGRAMS = gucharmap
 
 INCLUDES = $(GUCHARMAP_CFLAGS)
 gucharmap_LDADD = @GUCHARMAP_LIBS@
+AM_CFLAGS = -Wall -ansi
 
 gucharmap_SOURCES = charmap.c charmap.h main.c \
                     unicode_data.c unicode_info.c \
