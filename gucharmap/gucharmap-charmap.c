@@ -143,7 +143,7 @@ make_unicode_block_selector (GucharmapCharmap *charmap)
           BLOCK_SELECTOR_NUM_COLUMNS, G_TYPE_STRING, 
           G_TYPE_UINT, G_TYPE_POINTER);
 
-  charmap->block_index_size = gucharmap_count_blocks (UNICHAR_MAX);
+  charmap->block_index_size = gucharmap_count_blocks (UNICHAR_MAX) + 1;
   charmap->block_index = g_malloc (charmap->block_index_size 
                                    * sizeof (GucharmapBlockIndex));
   bi = 0;
