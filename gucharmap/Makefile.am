@@ -23,7 +23,7 @@ localedir = $(datadir)/locale
 AM_CPPFLAGS = -DLOCALEDIR=\"$(localedir)\" -DGTK_DISABLE_DEPRECATED=1 \
               -DICON_PATH=\"$(datadir)/pixmaps/gucharmap.png\"
 
-libgucharmap_la_LIBADD = @GTK_LIBS@
+libgucharmap_la_LIBADD = @GTK_LIBS@ @GNOME_LIBS@
 
 lib_LTLIBRARIES = libgucharmap.la
 
