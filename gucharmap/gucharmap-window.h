@@ -63,9 +63,6 @@ struct _GucharmapWindow
 
   gchar *last_search;
 
-  /* caption_show[GUCHARMAP_CAPTION_CHARACTER] is ignored; it is always shown */
-  gboolean caption_show[GUCHARMAP_CAPTION_COUNT];
-
   gboolean font_selection_visible;
   gboolean text_to_copy_visible;
 };

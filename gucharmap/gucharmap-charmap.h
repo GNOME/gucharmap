@@ -51,35 +51,6 @@ typedef enum
 GucharmapSearchResult;
 
 
-/* the order of the captions */
-typedef enum
-{
-  GUCHARMAP_CAPTION_CHARACTER = 0,
-  GUCHARMAP_CAPTION_CATEGORY,
-  GUCHARMAP_CAPTION_DECOMPOSITION,
-  GUCHARMAP_CAPTION_UTF8,
-  GUCHARMAP_CAPTION_OTHER_REPS,
-
-  /* nameslist stuff */
-  GUCHARMAP_CAPTION_EQUALS,
-  GUCHARMAP_CAPTION_STARS,
-  GUCHARMAP_CAPTION_EXES,
-  GUCHARMAP_CAPTION_POUNDS,
-  GUCHARMAP_CAPTION_COLONS,
-
-  /* unihan subset */
-  GUCHARMAP_CAPTION_KDEFINITION,
-  GUCHARMAP_CAPTION_KMANDARIN,
-  GUCHARMAP_CAPTION_KJAPANESEON,
-  GUCHARMAP_CAPTION_KJAPANESEKUN,
-  GUCHARMAP_CAPTION_KCANTONESE,
-  GUCHARMAP_CAPTION_KTANG,
-  GUCHARMAP_CAPTION_KKOREAN,
-
-  GUCHARMAP_CAPTION_COUNT
-}
-GucharmapCaption;
-
 typedef struct 
 {
   gunichar start;
@@ -87,9 +58,10 @@ typedef struct
 } 
 BlockIndex;
 
+
 struct _GucharmapCharmap
 {
-  GtkVBox parent;
+  GtkNotebook parent;
 
   GucharmapTable *chartable;
 
@@ -105,15 +77,13 @@ struct _GucharmapCharmap
   BlockIndex *block_index;
   gint block_index_size;
 
-  /* the caption */
-  GtkTreeRowReference *caption_rows[GUCHARMAP_CAPTION_COUNT];
-  GtkTreeStore *caption_model;
+  GtkWidget *details;  /* GtkTextView * */
 };
 
 
 struct _GucharmapCharmapClass
 {
-  GtkVBoxClass parent_class;
+  GtkNotebookClass parent_class;
 
   void (* status_message) (GucharmapCharmap *charmap, const gchar *message);
 };
@@ -132,10 +102,6 @@ void gucharmap_charmap_go_to_character (GucharmapCharmap *charmap,
 GucharmapSearchResult gucharmap_charmap_search (GucharmapCharmap *charmap, 
                                                 const gchar *search_text, 
                                                 gint direction);
-void gucharmap_charmap_hide_caption (GucharmapCharmap *charmap, 
-                                     GucharmapCaption caption_id);
-void gucharmap_charmap_show_caption (GucharmapCharmap *charmap, 
-                                     GucharmapCaption caption_id);
 void gucharmap_charmap_zoom_enable (GucharmapCharmap *charmap);
 void gucharmap_charmap_zoom_disable (GucharmapCharmap *charmap);
 GucharmapTable * gucharmap_charmap_get_chartable (GucharmapCharmap *charmap);
