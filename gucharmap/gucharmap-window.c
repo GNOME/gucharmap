@@ -311,6 +311,7 @@ help_about (GtkWidget       *widget,
       const gchar *documenters[] =
 	{
 	  "Chee Bin HOH <cbhoh gnome org>",
+          "Sun Microsystems",
           NULL
 	};	  
       const gchar *translator_credits;
