@@ -195,6 +195,14 @@ font_smaller (GtkWidget       *widget,
 }
 
 static void
+font_default (GtkWidget       *widget, 
+              GucharmapWindow *guw)
+{
+  GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
+  gucharmap_mini_font_selection_reset_font_size (GUCHARMAP_MINI_FONT_SELECTION (priv->fontsel));
+}
+
+static void
 snap_cols_pow2 (GtkCheckMenuItem *mi, 
                 GucharmapWindow  *guw)
 {
@@ -388,12 +396,17 @@ make_menu (GucharmapWindow *guw)
   /* separator */
   gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), gtk_menu_item_new ());
 
-  /* ctrl-+ or ctrl-= */
+  menu_item = gtk_check_menu_item_new_with_label (_("Snap Columns to Power of Two"));
+  g_signal_connect (menu_item,  "activate", G_CALLBACK (snap_cols_pow2), guw);
+  gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), menu_item);
+
+  /* separator */
+  gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), gtk_menu_item_new ());
+
+  /* ctrl-+ */
   menu_item = gtk_menu_item_new_with_mnemonic (_("Zoom _In"));
   gtk_widget_add_accelerator (menu_item, "activate", priv->accel_group,
                               GDK_plus, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
-  gtk_widget_add_accelerator (menu_item, "activate", priv->accel_group,
-                              GDK_equal, GDK_CONTROL_MASK, 0);
   gtk_widget_add_accelerator (menu_item, "activate", priv->accel_group,
                               GDK_KP_Add, GDK_CONTROL_MASK, 0);
   g_signal_connect (G_OBJECT (menu_item), "activate",
@@ -410,11 +423,14 @@ make_menu (GucharmapWindow *guw)
                     G_CALLBACK (font_smaller), guw);
   gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), menu_item);
 
-  /* separator */
-  gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), gtk_menu_item_new ());
-
-  menu_item = gtk_check_menu_item_new_with_label (_("Snap Columns to Power of Two"));
-  g_signal_connect (menu_item,  "activate", G_CALLBACK (snap_cols_pow2), guw);
+  /* ctrl-= */
+  menu_item = gtk_menu_item_new_with_mnemonic (_("_Normal Size"));
+  gtk_widget_add_accelerator (menu_item, "activate", priv->accel_group,
+                              GDK_equal, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+  gtk_widget_add_accelerator (menu_item, "activate", priv->accel_group,
+                              GDK_KP_Equal, GDK_CONTROL_MASK, 0);
+  g_signal_connect (G_OBJECT (menu_item), "activate",
+                    G_CALLBACK (font_default), guw);
   gtk_menu_shell_append (GTK_MENU_SHELL (view_menu), menu_item);
 
   /* make the search menu */
