@@ -1,3 +1,14 @@
+2004-01-30  Noah Levitt
+
+	* gucharmap/Makefile.am: Install all the include files.
+
+	* gucharmap/gucharmap-charmap.h:
+	* gucharmap/gucharmap-script-codepoint-list.h:
+	* gucharmap/gucharmap-window.h: #include <gucharmap/gucharmap-foo.h>
+	in headers, #include "gucharmap-foo.h" in .c files.
+
+	* gucharmap/gucharmap.h: Add gucharmap-search-dialog.h.
+
 2004-01-29  Noah Levitt
 
 	* gucharmap/Makefile.am:

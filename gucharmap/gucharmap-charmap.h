@@ -21,8 +21,8 @@
 #define GUCHARMAP_CHARMAP_H
 
 #include <gtk/gtk.h>
-#include "gucharmap-table.h"
-#include "gucharmap-chapters.h"
+#include <gucharmap/gucharmap-table.h>
+#include <gucharmap/gucharmap-chapters.h>
 
 
 G_BEGIN_DECLS

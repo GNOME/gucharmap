@@ -22,7 +22,7 @@
 #define GUCHARMAP_WINDOW_H
 
 #include <gtk/gtk.h>
-#include "gucharmap-charmap.h"
+#include <gucharmap/gucharmap-charmap.h>
 
 G_BEGIN_DECLS
 

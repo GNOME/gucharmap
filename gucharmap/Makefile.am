@@ -59,7 +59,11 @@ libgucharmapinclude_HEADERS = gucharmap.h \
                               gucharmap-mini-fontsel.h \
                               gucharmap-unicode-info.h \
 			      gucharmap-codepoint-list.h \
-			      gucharmap-script-codepoint-list.h
+			      gucharmap-script-codepoint-list.h \
+			      gucharmap-block-chapters.h \
+			      gucharmap-chapters.h \
+			      gucharmap-script-chapters.h \
+			      gucharmap-search-dialog.h
 
 bin_PROGRAMS = gucharmap
 gucharmap_SOURCES = main.c

@@ -22,8 +22,8 @@
 
 #include <glib-object.h>
 #include <glib.h>
-#include "gucharmap-codepoint-list.h"
-#include "gucharmap-unicode-info.h"
+#include <gucharmap/gucharmap-codepoint-list.h>
+#include <gucharmap/gucharmap-unicode-info.h>
 
 G_BEGIN_DECLS
 
