@@ -51,7 +51,7 @@ debug (const char *format, ...)
 static gchar *
 unichar_to_printable_utf8 (gunichar uc)
 {
-  static gchar buf[8];
+  static gchar buf[9];
   gint x;
 
   if (! g_unichar_isgraph (uc))
@@ -61,6 +61,16 @@ unichar_to_printable_utf8 (gunichar uc)
       || g_unichar_type (uc) == G_UNICODE_ENCLOSING_MARK
       || g_unichar_type (uc) == G_UNICODE_NON_SPACING_MARK)
     {
+      /* http://microsoft.com/typography/otfntdev/arabicot/other.htm */
+      /* Please note that to render a sign standalone (in apparent
+       * isolation from any base) one should apply it on a space (see
+       * section 2.5 'Combining Marks' of Unicode Standard 3.1). Uniscribe
+       * requires a ZWJ to be placed between the space and a mark for them
+       * to combine into a standalone sign.
+       *
+       * XXX: should i put a zero width joiner in there?
+       */
+
       buf[0] = ' ';
       x = g_unichar_to_utf8 (uc, buf+1);
       buf[x+1] = '\0';
@@ -80,6 +90,10 @@ set_caption (Charmap *charmap)
 {
   #define BUFLEN 512
   static gchar buf[BUFLEN];
+  gunichar *decomposition;
+  gsize result_len;
+  gint i;
+  gchar *bp;
 
   g_snprintf (buf, BUFLEN, "codepoint: U+%4.4X", charmap->active_char);
   gtk_label_set_text (GTK_LABEL (charmap->caption->codepoint), buf);
@@ -123,10 +137,22 @@ set_caption (Charmap *charmap)
   g_snprintf (buf, BUFLEN, "kJapaneseKun: %s", 
               get_unicode_kJapaneseKun (charmap->active_char));
   gtk_label_set_text (GTK_LABEL (charmap->caption->kJapaneseKun), buf);
+
+  /* do the decomposition */
+  decomposition = g_unicode_canonical_decomposition (charmap->active_char,
+                                                     &result_len);
+  bp = buf;
+  bp += g_snprintf (buf, BUFLEN, "decomposition: U+%4.4X (%s)", 
+                    decomposition[0],
+                    unichar_to_printable_utf8 (decomposition[0]));
+  for (i = 1;  i < result_len;  i++)
+    bp += g_snprintf (bp, buf + BUFLEN - bp, " + U+%4.4X (%s)", 
+                      decomposition[i],
+                      unichar_to_printable_utf8 (decomposition[i]));
+  gtk_label_set_text (GTK_LABEL (charmap->caption->decomposition), buf);
 }
 
 
-/* XXX: may want to have some smartness here to avoid resizing too much */
 static gint 
 calculate_square_dimension_x (PangoFontMetrics *font_metrics)
 {
@@ -139,7 +165,6 @@ calculate_square_dimension_x (PangoFontMetrics *font_metrics)
 }
 
 
-/* XXX: may want to have some smartness here to avoid resizing too much */
 static gint 
 calculate_square_dimension_y (PangoFontMetrics *font_metrics)
 {
@@ -277,8 +302,7 @@ expose_event (GtkWidget *widget,
               charmap->tabulus->window, 
               calculate_tabulus_dimension_x (charmap->font_metrics),
               calculate_tabulus_dimension_y (charmap->font_metrics), -1);
-      debug ("gdk_pixmap_new (%d, %d)\n", charmap->tabulus->allocation.width,
-             charmap->tabulus->allocation.height);
+
       draw_tabulus_pixmap (charmap);
     }
 
@@ -334,8 +358,7 @@ append_character_to_text_to_copy (Charmap *charmap)
 }
 
 
-/* for moving around in the charmap */
-/* XXX: redrawing could be much more efficient */
+/* mostly for moving around in the charmap */
 static gint
 key_press_event (GtkWidget *widget, 
                  GdkEventKey *event, 
@@ -541,7 +564,7 @@ charmap_init (Charmap *charmap)
   g_signal_connect (G_OBJECT (charmap->tabulus), "button_press_event",
                     G_CALLBACK (button_press_event), charmap);
 
-  /* this is required to get key_press events (XXX: i think) */
+  /* this is required to get key_press events */
   GTK_WIDGET_SET_FLAGS (charmap->tabulus, GTK_CAN_FOCUS);
   gtk_widget_grab_focus (charmap->tabulus);
 
@@ -557,7 +580,7 @@ charmap_init (Charmap *charmap)
   charmap->pango_layout = pango_layout_new (
           gtk_widget_get_pango_context (charmap->tabulus));
 
-  /* size the drawing area - the +1 is for the 1-pixel borders*/
+  /* size the drawing area */
   gtk_widget_set_size_request (
           charmap->tabulus, 
           calculate_tabulus_dimension_x (charmap->font_metrics),
@@ -566,10 +589,12 @@ charmap_init (Charmap *charmap)
   charmap->page_first_char = (gunichar) 0x0000;
   charmap->active_char = (gunichar) 0x0000;
 
+  /* most of the rest of this is setting up the caption */
+
   charmap->caption = g_malloc (sizeof (Caption));
   table = gtk_table_new (6, 4, FALSE);
-  gtk_table_set_row_spacings (GTK_TABLE (table), 1);
-  gtk_table_set_col_spacings (GTK_TABLE (table), 20);
+  gtk_table_set_row_spacings (GTK_TABLE (table), 3);
+  gtk_table_set_col_spacings (GTK_TABLE (table), 10);
 
   charmap->caption->codepoint = gtk_label_new ("codepoint: ");
   charmap->caption->character = gtk_label_new ("character: ");;
@@ -609,20 +634,6 @@ charmap_init (Charmap *charmap)
   gtk_misc_set_alignment (GTK_MISC (charmap->caption->kTang), 0, 0);
   gtk_misc_set_alignment (GTK_MISC (charmap->caption->kMandarin), 0, 0);
   gtk_misc_set_alignment (GTK_MISC (charmap->caption->decomposition), 0, 0);
-
-  gtk_misc_set_padding (GTK_MISC (charmap->caption->codepoint), 3, 3);
-  gtk_misc_set_padding (GTK_MISC (charmap->caption->character), 3, 3);
-  gtk_misc_set_padding (GTK_MISC (charmap->caption->category), 3, 3);
-  gtk_misc_set_padding (GTK_MISC (charmap->caption->name), 3, 3);
-  gtk_misc_set_padding (GTK_MISC (charmap->caption->kDefinition), 3, 3);
-  gtk_misc_set_padding (GTK_MISC (charmap->caption->kCantonese), 3, 3);
-  gtk_misc_set_padding (GTK_MISC (charmap->caption->kKorean), 3, 3);
-  gtk_misc_set_padding (GTK_MISC (charmap->caption->kJapaneseKun), 3, 3);
-  gtk_misc_set_padding (GTK_MISC (charmap->caption->kJapaneseOn), 3, 3);
-  gtk_misc_set_padding (GTK_MISC (charmap->caption->kTang), 3, 3);
-  gtk_misc_set_padding (GTK_MISC (charmap->caption->kMandarin), 3, 3);
-  gtk_misc_set_padding (GTK_MISC (charmap->caption->decomposition), 3, 3);
-
 
   /*
    * *------------------------------------------------*
@@ -754,6 +765,7 @@ charmap_set_font (Charmap *charmap, gchar *font_name)
 
   debug ("charmap_set_font (\"%s\")\n", font_name);
 
+  /* if it's the same as the current font, do nothing */
   if (charmap->font_name != NULL
       && g_ascii_strcasecmp (charmap->font_name, font_name) == 0)
     return;
