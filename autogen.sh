@@ -18,20 +18,11 @@ REQUIRED_INTLTOOL_VERSION=${REQUIRED_INTLTOOL_VERSION:-0.25}
 REQUIRED_PKG_CONFIG_VERSION=${REQUIRED_PKG_CONFIG_VERSION:-0.14.0}
 REQUIRED_GTK_DOC_VERSION=${REQUIRED_GTK_DOC_VERSION:-1.0}
 REQUIRED_DOC_COMMON_VERSION=${REQUIRED_DOC_COMMON_VERSION:-2.3.0}
+REQUIRED_GNOME_DOC_UTILS_VERSION=${REQUIRED_GNOME_DOC_UTILS_VERSION:-0.1.3}
 
 # a list of required m4 macros.  Package can set an initial value
 REQUIRED_M4MACROS=${REQUIRED_M4MACROS:-}
 FORBIDDEN_M4MACROS=${FORBIDDEN_M4MACROS:-}
-
-# if GNOME2_DIR set, modify ACLOCAL_FLAGS ...
-if [ -n "$GNOME2_DIR" ]; then
-    ACLOCAL_FLAGS="-I $GNOME2_DIR/share/aclocal $ACLOCAL_FLAGS"
-    LD_LIBRARY_PATH="$GNOME2_DIR/lib:$LD_LIBRARY_PATH"
-    PATH="$GNOME2_DIR/bin:$PATH"
-    export PATH
-    export LD_LIBRARY_PATH
-fi
-
 
 # Not all echo versions allow -n, so we check what is possible. This test is
 # based on the one in autoconf.
@@ -90,7 +81,12 @@ version_check() {
 	return 0
     fi
 
-    printbold "checking for $vc_package >= $vc_min_version..."
+    if test "x$vc_package" = "xautomake" -a "x$vc_min_version" = "x1.4"; then
+	vc_comparator="="
+    else
+	vc_comparator=">="
+    fi
+    printbold "checking for $vc_package $vc_comparator $vc_min_version..."
     for vc_checkprog in $vc_checkprogs; do
 	echo $ECHO_N "  testing $vc_checkprog... "
 	if $vc_checkprog --version < /dev/null > /dev/null 2>&1; then
@@ -110,7 +106,7 @@ version_check() {
 	fi
     done
     if [ "$vc_status" != 0 ]; then
-	printerr "***Error***: You must have $vc_package >= $vc_min_version installed"
+	printerr "***Error***: You must have $vc_package $vc_comparator $vc_min_version installed"
 	printerr "  to build $PKG_NAME.  Download the appropriate package for"
 	printerr "  from your distribution or get the source tarball at"
         printerr "    $vc_source"
@@ -203,7 +199,7 @@ check_m4macros() {
 	printerr "***Error***: some autoconf macros required to build $PKG_NAME"
 	printerr "  were not found in your aclocal path, or some forbidden"
 	printerr "  macros were found.  Perhaps you need to adjust your"
-	printerr "  ACLOCAL_PATH?"
+	printerr "  ACLOCAL_FLAGS?"
 	printerr
     fi
     return $cm_status
@@ -218,10 +214,12 @@ want_glib_gettext=false
 want_intltool=false
 want_pkg_config=false
 want_gtk_doc=false
+want_gnome_doc_utils=false
 
 configure_files="`find $srcdir -name '{arch}' -prune -o -name configure.ac -print -o -name configure.in -print`"
 for configure_ac in $configure_files; do
-    if grep "^A[CM]_PROG_LIBTOOL" $configure_ac >/dev/null; then
+    if grep "^A[CM]_PROG_LIBTOOL" $configure_ac >/dev/null || \
+       grep "^LT_INIT" $configure_ac >/dev/null; then
 	want_libtool=true
     fi
     if grep "^AM_GNU_GETTEXT" $configure_ac >/dev/null; then
@@ -230,7 +228,7 @@ for configure_ac in $configure_files; do
     if grep "^AM_GLIB_GNU_GETTEXT" $configure_ac >/dev/null; then
 	want_glib_gettext=true
     fi
-    if grep "^AC_PROG_INTLTOOL" $configure_ac >/dev/null; then
+    if grep "^\(AC\|IT\)_PROG_INTLTOOL" $configure_ac >/dev/null; then
 	want_intltool=true
     fi
     if grep "^PKG_CHECK_MODULES" $configure_ac >/dev/null; then
@@ -238,6 +236,9 @@ for configure_ac in $configure_files; do
     fi
     if grep "^GTK_DOC_CHECK" $configure_ac >/dev/null; then
 	want_gtk_doc=true
+    fi
+    if grep "^GNOME_DOC_INIT" $configure_ac >/dev/null; then
+        want_gnome_doc_utils=true
     fi
 done
 
@@ -252,9 +253,11 @@ AUTOHEADER=`echo $AUTOCONF | sed s/autoconf/autoheader/`
 
 case $REQUIRED_AUTOMAKE_VERSION in
     1.4*) automake_progs="automake-1.4" ;;
-    1.5*) automake_progs="automake-1.5 automake-1.6 automake-1.7" ;;
-    1.6*) automake_progs="automake-1.6 automake-1.7" ;;
-    1.7*) automake_progs="automake-1.7" ;;
+    1.5*) automake_progs="automake-1.5 automake-1.6 automake-1.7 automake-1.8 automake-1.9" ;;
+    1.6*) automake_progs="automake-1.6 automake-1.7 automake-1.8 automake-1.9" ;;
+    1.7*) automake_progs="automake-1.7 automake-1.8 automake-1.9" ;;
+    1.8*) automake_progs="automake-1.8 automake-1.9" ;;
+    1.9*) automake_progs="automake-1.9" ;;
 esac
 version_check automake AUTOMAKE "$automake_progs" $REQUIRED_AUTOMAKE_VERSION \
     "http://ftp.gnu.org/pub/gnu/automake/automake-$REQUIRED_AUTOMAKE_VERSION.tar.gz" || DIE=1
@@ -296,6 +299,11 @@ if $want_gtk_doc; then
     require_m4macro gtk-doc.m4
 fi
 
+if $want_gnome_doc_utils; then
+    version_check gnome-doc-utils GNOME_DOC_PREPARE gnome-doc-prepare $REQUIRED_GNOME_DOC_UTILS_VERSION \
+        "http://ftp.gnome.org/pub/GNOME/sources/gnome-doc-utils/" || DIE=1
+fi
+
 if [ "x$USE_COMMON_DOC_BUILD" = "xyes" ]; then
     version_check gnome-common DOC_COMMON gnome-doc-common \
         $REQUIRED_DOC_COMMON_VERSION " " || DIE=1
@@ -307,7 +315,7 @@ if [ "$DIE" -eq 1 ]; then
   exit 1
 fi
 
-if test -z "$*"; then
+if [ "$#" = 0 ]; then
   printerr "**Warning**: I am going to run \`configure' with no arguments."
   printerr "If you wish to pass any to it, please specify them on the"
   printerr \`$0\'" command line."
@@ -318,24 +326,25 @@ topdir=`pwd`
 for configure_ac in $configure_files; do 
     dirname=`dirname $configure_ac`
     basename=`basename $configure_ac`
-    if test -f $dirname/NO-AUTO-GEN; then
+    if [ -f $dirname/NO-AUTO-GEN ]; then
 	echo skipping $dirname -- flagged as no auto-gen
+    elif [ ! -w $dirname ]; then
+        echo skipping $dirname -- directory is read only
     else
 	printbold "Processing $configure_ac"
 	cd $dirname
 
-	aclocalinclude="$ACLOCAL_FLAGS"
-	printbold "Running $ACLOCAL..."
-	$ACLOCAL $aclocalinclude || exit 1
+        # Note that the order these tools are called should match what
+        # autoconf's "autoupdate" package does.  See bug 138584 for
+        # details.
 
-	if grep "GNOME_AUTOGEN_OBSOLETE" aclocal.m4 >/dev/null; then
-	    printerr "*** obsolete gnome macros were used in $configure_ac"
-	fi
-
-	if grep "^A[CM]_PROG_LIBTOOL" $basename >/dev/null; then
+        # programs that might install new macros get run before aclocal
+	if grep "^A[CM]_PROG_LIBTOOL" $basename >/dev/null || \
+	   grep "^LT_INIT" $basename >/dev/null; then
 	    printbold "Running $LIBTOOLIZE..."
-	    $LIBTOOLIZE --force || exit 1
+	    $LIBTOOLIZE --force --copy || exit 1
 	fi
+
 	if grep "^AM_GLIB_GNU_GETTEXT" $basename >/dev/null; then
 	    printbold "Running $GLIB_GETTEXTIZE... Ignore non-fatal messages."
 	    echo "no" | $GLIB_GETTEXTIZE --force --copy || exit 1
@@ -348,33 +357,62 @@ for configure_ac in $configure_files; do
 	    	echo "no" | $GETTEXTIZE --force --copy || exit 1
 	   fi
 	fi
+
+	if grep "^\(AC\|IT\)_PROG_INTLTOOL" $basename >/dev/null; then
+	    printbold "Running $INTLTOOLIZE..."
+	    $INTLTOOLIZE --force --copy --automake || exit 1
+	fi
 	if grep "^GTK_DOC_CHECK" $basename >/dev/null; then
 	    printbold "Running $GTKDOCIZE..."
-	    $GTKDOCIZE || exit 1
+	    $GTKDOCIZE --copy || exit 1
 	fi
-	if grep "^A[CM]_CONFIG_HEADER" $basename >/dev/null; then
-	    printbold "Running $AUTOHEADER..."
-	    $AUTOHEADER || exit 1
-	fi
+
 	if [ "x$USE_COMMON_DOC_BUILD" = "xyes" ]; then
 	    printbold "Running gnome-doc-common..."
 	    gnome-doc-common --copy || exit 1
 	fi
 
-	printbold "Running $AUTOMAKE..."
-	$AUTOMAKE --gnu --add-missing || exit 1
+        # Now run aclocal to pull in any additional macros needed
 
-	# This must run after automake, since intltoolize wants mkinstalldirs
-	# to be available and that is only linked or copied by automake.
-	if grep "^AC_PROG_INTLTOOL" $basename >/dev/null; then
-	    printbold "Running $INTLTOOLIZE..."
-	    $INTLTOOLIZE --force --automake || exit 1
+	# if the AC_CONFIG_MACRO_DIR() macro is used, pass that
+	# directory to aclocal.
+	m4dir=`cat "$basename" | grep '^AC_CONFIG_MACRO_DIR' | sed -n -e 's/AC_CONFIG_MACRO_DIR(\([^()]*\))/\1/p' | sed -e 's/^\[\(.*\)\]$/\1/' | sed -e 1q`
+	if [ -n "$m4dir" ]; then
+	    m4dir="-I $m4dir"
+	fi
+	printbold "Running $ACLOCAL..."
+	$ACLOCAL $m4dir $ACLOCAL_FLAGS || exit 1
+
+	if grep "GNOME_AUTOGEN_OBSOLETE" aclocal.m4 >/dev/null; then
+	    printerr "*** obsolete gnome macros were used in $configure_ac"
 	fi
 
+	# Now that all the macros are sorted, run autoconf and autoheader ...
 	printbold "Running $AUTOCONF..."
 	$AUTOCONF || exit 1
+	if grep "^A[CM]_CONFIG_HEADER" $basename >/dev/null; then
+	    printbold "Running $AUTOHEADER..."
+	    $AUTOHEADER || exit 1
+	    # this prevents automake from thinking config.h.in is out of
+	    # date, since autoheader doesn't touch the file if it doesn't
+	    # change.
+	    test -f config.h.in && touch config.h.in
+	fi
 
-	cd $topdir
+	# Finally, run automake to create the makefiles ...
+	printbold "Running $AUTOMAKE..."
+        cp -pf COPYING COPYING.autogen_bak
+        cp -pf INSTALL INSTALL.autogen_bak
+	if [ $REQUIRED_AUTOMAKE_VERSION != 1.4 ]; then
+	    $AUTOMAKE --gnu --add-missing --force --copy || exit 1
+	else
+	    $AUTOMAKE --gnu --add-missing --copy || exit 1
+	fi
+        cmp COPYING COPYING.autogen_bak || cp -pf COPYING.autogen_bak COPYING
+        cmp INSTALL INSTALL.autogen_bak || cp -pf INSTALL.autogen_bak INSTALL
+        rm -f COPYING.autogen_bak INSTALL.autogen_bak
+
+	cd "$topdir"
     fi
 done
 
