@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+  <!ENTITY legal SYSTEM "legal.xml">
+  <!ENTITY appversion "1.3.0">
+  <!ENTITY manrevision "2.1">
+  <!ENTITY date "February 2004">
+  <!ENTITY app "Character Map">
+]>
+
+<!-- 
+ (Do not remove this comment block.)
+  Maintained by the GNOME Documentation Project
+  http://developer.gnome.org/projects/gdp
+  Template version: 2.0 beta
+  Template last modified Apr 11, 2002
+-->
+
+<!-- =============Document Header ============================= -->
+<article id="index" lang="eu"><!-- please do not change the id; for translations, change lang to --> <!-- appropriate code --> <articleinfo> 
+    <title>Karaktere-maparen eskuliburua &manrevision; bertsioa</title>       
+    <copyright><year>2004</year> <holder>Sun Microsystems</holder></copyright> 
+    <copyright><year>2003</year> <year>2004</year> <holder>Chee Bin HOH</holder></copyright> 
+
+<!-- translators: uncomment this:
+    <copyright>
+      <year>2002</year>
+      <holder>ME-THE-TRANSLATOR (Latin translation)</holder>
+    </copyright>
+-->
+
+    <publisher><publishername>GNOME dokumentazio proiektua</publishername></publisher> 
+
+    &legal; <!-- This file  contains link to license for the documentation (GNU FDL), and 
+        other legal stuff such as "NO WARRANTY" statement. Please do not change 
+	any of this. -->
+
+    <authorgroup><author>
+    	<firstname>Sun</firstname> 
+	<surname>GNOME dokumentazio-taldea</surname> 
+	<affiliation><orgname>Sun Microsystems</orgname></affiliation></author> 
+	<author><firstname>Chee Bin</firstname> 
+	<surname>HOH</surname> 
+	<affiliation><orgname>GNOME dokumentazio-proiektua</orgname> 
+          <address> <email>cbhoh@gnome.org</email> </address> 
+        </affiliation></author> 
+
+<!--
+      <author> 
+        <firstname>Documentation</firstname> 
+          <surname>Writer 1</surname> 
+          <affiliation> 
+            <orgname>GNOME Documentation Project</orgname> 
+            <address> <email>doc-writer1@gnome.org</email> </address> 
+          </affiliation> 
+      </author> 
+-->
+      
+<!-- This is appropriate place for other contributors: translators,
+     maintainers,  etc. Commented out by default.
+      <othercredit role="translator">
+        <firstname>Latin</firstname> 
+	<surname>Translator 1</surname> 
+	<affiliation> 
+          <orgname>Latin Translation Team</orgname> 
+          <address> <email>translator@gnome.org</email> </address> 
+	</affiliation>
+	<contrib>Latin translation</contrib>
+      </othercredit>
+--></authorgroup>
+
+
+    <revhistory><revision><revnumber>Karaktere-maparen eskuliburua&manrevision;</revnumber> bertsioa <date>&date;</date> <revdescription><para role="author">Sun GNOME dokumentazio-taldea</para> <para role="publisher">GNOME dokumentazio-proiektua</para></revdescription></revision> <revision><revnumber>Unicode karaktere-maparen eskuliburua 2.0</revnumber> bertsioa <date>2003ko urria</date> <revdescription><para role="author">Chee Bin HOH <email>cbhoh@gnome.org</email></para> <para role="publisher">GNOME dokumentazio-proiektua</para></revdescription></revision></revhistory> 
+
+    <releaseinfo>Eskuliburu hau &app;-en &appversion; bertsioari dagokio.</releaseinfo> 
+
+    <legalnotice> 
+      <title>Ohar-bidaltzea</title> 
+      <para>Programa-erroreen berri emateko edo <application>&app;</application> aplikazioari edo eskuliburu honi buruzko iradokizun bat egiteko, jarraitu azalpenak: <ulink url="ghelp:gnome-feedback" type="help">GNOMEra oharrak bidaltzeko orria</ulink>.</para> <!-- Translators may also add here feedback address for translations --></legalnotice></articleinfo> 
+
+<!-- ============= Index ===================================== --> <indexterm zone="index"><primary>gucharmap</primary></indexterm> <indexterm zone="index"><primary>&app;</primary></indexterm> <indexterm zone="index"><primary>karaktere-mapa</primary></indexterm>
+
+<!-- ============= Document Body ============================= --> <!-- ============= Introduction ============================== --> <sect1 id="gucharmap-introduction"> 
+    <title>Sarrera</title> 
+    <para><application>&app;</application> aplikazioa Unicode karaktere-mapa da. Unicode karaktere-joko estandarra da, eta helburua munduko hizkuntza idatzi guztietan erabiltzen diren karaktere guztiak bertan sartzea da.</para> <para><application>&app;</application> erabil dezakezu karaktere-taula batetik karaktereak hautatzeko, eta gero karaktereak testu-katean karaktere estandarrekin konbinatzeko. Sortutako testu-katea beste aplikazioetan txerta dezakezu; adibidez, testu-editoreko dokumentuetan.</para> <para><application>&app;</application>-(e)k karaktere azentudunak, matematika-ikurrak, ikur bereziak eta puntuazio-markak ematen ditu. <application>&app;</application>-(e)k ematen dituen karaktere asko ez dira teklatu estandarretan erabilgarri egoten.</para></sect1>
+
+<!-- =========== Getting Started ============================== -->
+
+  <sect1 id="gucharmap-getting-started"> 
+    <title>Erabiltzen hasteko</title> 
+
+    <sect2 id="gucharmap-start">
+      <title>&app; hasteko</title>
+      <para>Aukera hauek dituzu <application>&app;</application> abiarazteko:</para> <variablelist><varlistentry><term><guimenu>Aplikazioak</guimenu> menua</term> <listitem><para>Aukeratu <menuchoice><guimenu>Gehigarriak</guimenu><guimenuitem>Karaktere-mapa</guimenuitem></menuchoice>.</para></listitem></varlistentry> <varlistentry><term>Komando-lerroa</term> <listitem><para>Exekutatu komando hau: <command>gnome-character-map</command></para></listitem></varlistentry></variablelist></sect2>
+
+    <sect2 id="gucharmap-when-start">
+      <title>&app; abiaraztean</title>
+      <para><application>&app;</application> abiarazten duzunean, leiho hau bistaratuko da.</para>
+
+      <!-- ==== Figure ==== --> <figure id="gucharmap-window-fig"> 
+        <title>&app; leihoa</title> 
+        <screenshot><mediaobject><imageobject><imagedata fileref="figures/gucharmap_window.png" format="PNG"/></imageobject> <textobject><phrase>&app; aplikazioaren leihoa erakusten du.</phrase></textobject></mediaobject></screenshot></figure> <!-- ==== End of Figure ==== -->
+
+      <!-- Include any descriptions of the GUI immediately after the screenshot of the main UI, --> <!-- for example, the items on the menubar and on the toolbar. This section is optional. -->
+
+      <para> <application>&app;</application>-(r)en leihoak elementu hauek ditu:</para> <variablelist><varlistentry><term>Menu-barra</term> <listitem><para>Menu-barrako menuek <application>&app;</application>-(r)en fitxategiak lantzeko beharrezko komando guztiak dituzte.</para></listitem></varlistentry> <varlistentry><term>Tresna-barra</term> <listitem><para>Tresna-barran letra-tipoen goitibeherako zerrenda dago, letra-tipoen estiloen botoiak eta zoomaren biratze-koadroa.</para></listitem></varlistentry> <varlistentry><term>Bistaratze-area</term> <listitem><para>Bistaratze-areak osagai hauek ditu:</para> <itemizedlist><listitem><para><guilabel>Script-a</guilabel> edo <guilabel>Unicode blokea</guilabel> zerrenda-koadroa</para></listitem> <listitem><para><guilabel>Karaktere-taula</guilabel> atal fitxaduna</para></listitem> <listitem><para><guilabel>Karakterearen xehetasunak</guilabel> atal fitxaduna</para></listitem> <listitem><para><guilabel>Kopiatu beharreko testua</guilabel> testu-koadroa</para></listitem> <listitem><para><guibutton>Kopiatu</guibutton> botoia</para></listitem></itemizedlist></listitem></varlistentry> <varlistentry><term>Egoera-barra</term> <listitem><para>Egoera-barrak hautatutako karaktereari buruzko informazioa bistaratzen du.</para></listitem></varlistentry></variablelist></sect2></sect1>
+
+<!-- ================ Usage ================================ --> <sect1 id="gucharmap-usage">
+    <title>Erabilera</title> 
+    
+    <sect2 id="gucharmap-change-view">
+      <title>Karaktere-jokoaren zerrenda aldatzeko</title>
+      <para>Karaktere-multzoak script-aren izenaren arabera zerrendatzeko, aukeratu <menuchoice><guimenu>Ikusi</guimenu><guimenuitem>Script-aren arabera</guimenuitem></menuchoice>.</para> <para>Karaktere-multzoak Unicode blokearen arabera zerrendatzeko, aukeratu <menuchoice><guimenu>Ikusi</guimenu><guimenuitem>Unicode blokearen arabera</guimenuitem></menuchoice>.</para></sect2>
+    
+    <sect2 id="gucharmap-create-textstring">
+      <title>Testu-katea sortzeko</title>
+      <para><guilabel>Kopiatu beharreko testua</guilabel> eremuan testu-katea sortzeko, jarraitu urrats hauei:</para> <orderedlist><listitem><para>Hautatu karaktere-jokoa <guilabel>Script-a</guilabel> edo <guilabel>Unicode blokea</guilabel> zerrenda-koadroan.</para></listitem> <listitem><para>Txertatu karaktereak modu hauetako batean:</para> <itemizedlist><listitem><para>Egin klik bikoitza <guilabel>Karaktere-taula</guilabel> atal fitxaduneko karaktereko botoi batean, karakterea <guilabel>Kopiatu beharreko testua</guilabel> eremuan txertatzeko.</para></listitem> <listitem><para>Egin klik <guilabel>Karaktere-taula</guilabel> atal fitxaduneko karaktere-botoian, eta sakatu <keycap>Itzuli</keycap> karakterea <guilabel>Kopiatu beharreko testua</guilabel> eremuan sartzeko.</para></listitem> <listitem><para>Egin klik <guilabel>Karaktere-taula</guilabel> atal fitxaduneko karaktereko botoi batean, eta arrastatu karakterea <guilabel>Kopiatu beharreko testua</guilabel> eremura.</para></listitem> <listitem><para>Egin klik <guilabel>Kopiatu beharreko testua</guilabel> eremuan, eremuari fokua emateko. Testu-kateren bat eremuan badago, egin klik testu-katean karakterea txertatu nahi duzun puntuan. Sakatu teklatuko karaktere-tekla bat karakterea eremuan txertatzeko.</para></listitem></itemizedlist></listitem></orderedlist></sect2>
+
+<!-- =============== To Copy and Paste a Text String ====================== --> <sect2 id="gucharmap-copy-textstring">
+      <title>Testu-kateak aplikazioan kopiatzeko eta itsasteko</title>
+      <para><guilabel>Kopiatu beharreko testua</guilabel> eremutik testu-kate bat aplikazio batean kopiatu eta itsasteko, jarraitu urrats hauei:</para> <orderedlist><listitem><para>Arrastatu erakuslea <guilabel>Kopiatu beharreko testua</guilabel> eremuko testu-katea hautatzeko, ondoren, sakatu <guibutton>Kopiatu</guibutton>. Hautatutako testu-katea nabarmenduta ageri da.</para></listitem> <listitem><para>Seinalatu testu-katea jarri nahi duzun lekua aplikazioan, eta sakatu saguaren erdiko botoia testu-katea txertatzeko. Testu-katea aplikazioan itsats dezakezu Itsatsi aukera erabilgarri badago. Txertatzea nahi adina aldiz errepika dezakezu testu-katea hautatuta dagoen bitartean. Sakatu <guilabel>Kopiatu beharreko testua</guilabel> eremua testu-katea desautatzeko.</para></listitem></orderedlist> <para><guilabel>Kopiatu beharreko testua</guilabel> eremuko edukiak beste aplikazioetan itsatsitakoan, testu-katea aplikazioko uneko karaktere-jokoan agertzen da.</para> <para>Testu-kateak ikusten ez diren karaktereak baditu, karaktere-joko osoa onartzen duten aplikazioetan bakarrik txerta dezakezu testu-katea.</para> <para><application>&app;</application>-(e)tik testu-katea aplikazioan itsatsi baino lehen ateratzen bazara, testu-katea galduko da.</para></sect2>
+
+    <sect2 id="usage-find-character">
+      <title>Karaktere bat bilatzeko</title>
+      <para>Karaktere bat bilatzeko, jarraitu urrats hauei:</para> <orderedlist><listitem><para>Aukeratu <menuchoice><guimenu>Bilatu</guimenu><guimenuitem>Bilatu</guimenuitem></menuchoice>.</para></listitem> <listitem><para>Sartu bilatu beharreko katea <guilabel>Bilatu</guilabel> eremuan <guilabel>Bilatu</guilabel> elkarrizketa-koadroan.</para></listitem> <listitem><para>Sakatu <guibutton>Hurrengoa</guibutton>.</para> <para><application>&app;</application>-(e)k bilaketa-irizpidearekin bat datorren lehen karakterea nabarmentzen du <guilabel>Karaktere-taula</guilabel> atal fitxadunean. <application>&app;</application>-(e)k Unicode kode-puntua eta Unicode karaktere-izena ere bistaratzen ditu egoera-barran.</para> <para>Bat datorren karaktererik aurkitu ez bada, <application>&app;</application>-(e)k informazioari buruzko alerta bistaratzen du.</para></listitem> <listitem><para>Sakatu <guibutton>Hurrengoa</guibutton> bat datorren hurrengo karakterea bilatzeko. Bestela, aukeratu <menuchoice><guimenu>Bilatu</guimenu><guimenuitem>Bilatu hurrengoa</guimenuitem></menuchoice>.</para></listitem> <listitem><para>Sakatu <guibutton>Aurrekoa</guibutton> bat datorren aurreko karakterea bilatzeko. Bestela, aukeratu <menuchoice><guimenu>Bilatu</guimenu><guimenuitem>Bilatu aurrekoa</guimenuitem></menuchoice>.</para></listitem></orderedlist></sect2>
+    
+<!-- =============== To Browse the Character Table  ========================= --> <sect2 id="usage-browse-characters">
+      <title>Karaktere guztiak arakatzeko</title>
+      <para><guilabel>Karaktere-taula</guilabel> atal fitxaduneko karaktereak arakatzeko modu hauek daude:</para> <itemizedlist><listitem><para>Aukeratu <menuchoice><guimenu>Joan</guimenu><guimenuitem>Hurrengo script-a</guimenuitem></menuchoice> edo <menuchoice><guimenu>Joan</guimenu><guimenuitem>Hurrengo blokea</guimenuitem></menuchoice> hurrengo karaktere-jokoa hautatzeko.</para></listitem> <listitem><para>Aukeratu <menuchoice><guimenu>Joan</guimenu><guimenuitem>Aurreko script-a</guimenuitem></menuchoice> edo <menuchoice><guimenu>Joan</guimenu><guimenuitem>Aurreko blokea</guimenuitem></menuchoice> aurreko karaktere-jokoa hautatzeko.</para></listitem> <listitem><para>Erabili korritze-barra <guilabel>Script-a</guilabel> edo <guilabel>Unicode blokea</guilabel> zerrenda-koadrorako, edozein karaktere-multzo hautatzeko.</para></listitem> <listitem><para>Aukeratu <menuchoice><guimenu>Joan</guimenu><guimenuitem>Hurrengo karakterea</guimenuitem></menuchoice> Unicode sekuentziako hurrengo karakterea hautatzeko.</para></listitem> <listitem><para>Aukeratu <menuchoice><guimenu>Joan</guimenu><guimenuitem>Aurreko karakterea</guimenuitem></menuchoice> Unicode sekuentziako aurreko karakterea hautatzeko.</para></listitem> <listitem><para>Sakatu teklatuko gezi-teklak karaktereak arakatzeko.</para></listitem> <listitem><para>Erabili <guilabel>Karaktere-taula</guilabel> korritze-barra karaktereak arakatzeko.</para></listitem> <listitem><para>Sakatu <keycap>Orria gora</keycap> eta <keycap>Orria behera</keycap> teklak karaktereak arakatzeko orriz orri.</para></listitem> <listitem><para>Sakatu <keycap>Hasi</keycap> tekla Unicode sekuentziako lehen karakterea hautatzeko. Azken karakterea hautatzeko, sakatu <keycap>Buka</keycap> tekla.</para></listitem></itemizedlist></sect2>
+    
+    <sect2 id="usage-display-details">
+      <title>Karaktereari buruzko informazio xehatua bistaratzeko</title>
+      <para>Karaktere bati buruzko informazio xehatua bistaratzeko, jarraitu urrats hauei:</para> <orderedlist><listitem><para>Hautatu karaktere-jokoa <guilabel>Script-a</guilabel> edo <guilabel>Unicode blokea</guilabel> zerrenda-koadroan. Adibidez: <guilabel>Oinarrizko latina</guilabel></para></listitem> <listitem><para>Hautatu karaktere bat <guilabel>Karaktere-taula</guilabel> atal fitxadunean. Adibidez: <guilabel>B</guilabel></para></listitem> <listitem><para>Egin klik <guilabel>Karakterearen xehetasunak</guilabel> atal fitxadunean.</para></listitem></orderedlist> <para> <guilabel>Karakterearen xehetasunak</guilabel> atal fitxadunak hautatutako karaktereari buruzko informazio hau bistaratzen du:</para> <itemizedlist><listitem><para>Unicode kode-puntua</para> <para>Adibidea: <guilabel>U+0042</guilabel></para></listitem> <listitem><para>Unicode karaktere-izena</para> <para>Adibidea: <guilabel>MAIUSKULAZKO LETRA LATINDARRA B</guilabel></para></listitem> <listitem><para><guilabel>Karakterearen oinarrizko propietateak</guilabel></para> <itemizedlist><listitem><para>Unicode kategoria</para> <para>Adibidea: <guilabel>Letra, maiuskula</guilabel></para></listitem></itemizedlist></listitem> <listitem><para><guilabel>Hainbat adierazpen erabilgarri</guilabel></para> <itemizedlist><listitem><para>UTF-8 kodeketa</para> <para>Adibidea: <guilabel>0x42</guilabel></para></listitem> <listitem><para>UTF-8 zortzitar ihesdunaren kodeketa</para> <para>Adibidea: <guilabel>\102</guilabel></para></listitem> <listitem><para>Entitate-erreferentzia hamartarra</para> <para>Adibidea: <guilabel>&quot;B&quot;</guilabel></para></listitem></itemizedlist></listitem> <listitem><para><guilabel>Oharpenak eta erreferentzia gurutzatuak</guilabel></para> <para>Adibidea: <guilabel>U+212C SCRIPT-A MAIUSKULAZ B</guilabel></para> <para>Egin klik estekan aipatutako karaktereari buruzko xehetasunak bistaratzeko.</para></listitem></itemizedlist></sect2>
+    
+    <sect2 id="usage-format-character">
+      <title>Karaktere baten formatua aldatzeko</title>
+      <para>Karaktere baten formatua aldatzeko, modu hauek dituzu:</para> <itemizedlist><listitem><para>Letra-tipoa aldatzeko, hautatu letra-tipoa letra-tipoaren goitibeherako zerrendan.</para></listitem> <listitem><para>Letra-tipoaren mota mota lodira aldatzeko, egin klik <guibutton>Lodia</guibutton> botoian.</para></listitem> <listitem><para>Letra-tipoaren mota mota etzanera aldatzeko, egin klik <guibutton>Etzana</guibutton> botoian.</para></listitem> <listitem><para>Letra-tipoaren tamaina handitzeko, aukeratu <menuchoice><guimenu>Ikusi</guimenu><guimenuitem>Handiagotu</guimenuitem></menuchoice> edo erabili zoomaren biratze-koadroa.</para></listitem> <listitem><para>Letra-tipoaren tamaina txikitzeko, aukeratu <menuchoice><guimenu>Ikusi</guimenu><guimenuitem>Txikiagotu</guimenuitem></menuchoice> edo erabili zoomaren biratze-koadroa.</para></listitem> <listitem><para>Letra-tipoaren tamaina normala bistaratzeko, aukeratu <menuchoice><guimenu>Ikusi</guimenu><guimenuitem>Tamaina normala</guimenuitem></menuchoice>.</para></listitem> <listitem><para>Hautatutako karakterea handitzeko, sakatu <keycap>Maius</keycap>.</para></listitem></itemizedlist></sect2>
+    
+    <sect2 id="usage-format-chartable">
+      <title>Karaktere-taularen formatua aldatzeko</title>
+      <para>Karaktere-taularen formatua aldatzeko, aukeratu <menuchoice><guimenu>Ikusi</guimenu><guimenuitem>Atxiki zutabeak berredurari</guimenuitem></menuchoice>.</para> <para><application>&app;</application>-(e)k <guilabel>Karaktere-taula</guilabel> atal fitxaduna aldatzen du zutabe-kopurua biren berretura izan dadin, adibidez, bi zutabe, lau zutabe, zortzi zutabe, etab. Zutabe-kopurua leihoaren tamainaren eta letra-tipoaren tamainaren araberakoa da.</para></sect2>
+
+  </sect1></article>
