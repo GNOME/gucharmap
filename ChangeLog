@@ -1,3 +1,12 @@
+2005-07-25  Tommi Vainikainen  <thv@iki.fi>
+
+	* autogen.sh (srcdir): Set $srcdir automatically based on `dirname
+	$0` if not set. Fixes bug #158322.
+
+	* gucharmap/Makefile.am (BUILT_SOURCES): Add
+	gucharmap-marshal.[ch] and fix build rules for those files so it
+	works when srcdir != builddir.
+
 2005-07-22  Ignacio Casal Quinteiro  <nacho.resa@gmail.com>
 
 	* configure.ac: Added 'gl' to ALL_LINGUAS.

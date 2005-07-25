@@ -6,7 +6,8 @@ REQUIRED_AUTOMAKE_VERSION=1.7
 
 #name of package
 PKG_NAME=${PKG_NAME:-Package}
-srcdir=${srcdir:-.}
+srcdir=${srcdir:-`dirname $0`}
+test -z "$srcdir" && srcdir=.
 
 # default version requirements ...
 REQUIRED_AUTOCONF_VERSION=${REQUIRED_AUTOCONF_VERSION:-2.53}

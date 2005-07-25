@@ -30,6 +30,8 @@ libgucharmap_la_LIBADD = @GTK_LIBS@ @GNOME_LIBS@
 
 lib_LTLIBRARIES = libgucharmap.la
 
+BUILT_SOURCES = gucharmap-marshal.c gucharmap-marshal.h
+
 libgucharmap_la_SOURCES = gucharmap-marshal.c gucharmap-marshal.h \
                           gucharmap-intl.c gucharmap-intl.h \
                           chartable_accessible.c chartable_accessible.h \
@@ -81,14 +83,14 @@ gucharmap_LDADD = libgucharmap.la @GTK_LIBS@ @GNOME_LIBS@ @POPT_LIBS@
 
 endif
 
-gucharmap-marshal.h: gucharmap-marshal.list
-	( @GLIB_GENMARSHAL@ --prefix=gucharmap_marshal gucharmap-marshal.list \
+gucharmap-marshal.h: $(srcdir)/gucharmap-marshal.list
+	( @GLIB_GENMARSHAL@ --prefix=gucharmap_marshal $(srcdir)/gucharmap-marshal.list \
                             --header > gucharmap-marshal.tmp \
 	  && mv gucharmap-marshal.tmp gucharmap-marshal.h ) \
         || ( rm -f gucharmap-marshal.tmp && exit 1 )
 
-gucharmap-marshal.c: gucharmap-marshal.h
-	( @GLIB_GENMARSHAL@ --prefix=gucharmap_marshal gucharmap-marshal.list \
+gucharmap-marshal.c: $(srcdir)/gucharmap-marshal.list
+	( @GLIB_GENMARSHAL@ --prefix=gucharmap_marshal $(srcdir)/gucharmap-marshal.list \
                             --body > gucharmap-marshal.tmp \
           && mv gucharmap-marshal.tmp gucharmap-marshal.c ) \
         || ( rm -f gucharmap-marshal.tmp && exit 1 )
