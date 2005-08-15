@@ -271,6 +271,7 @@ sub process_unihan_zip ($)
         my $field = $2;
 
         my $value = $3;
+        $value =~ s/\\/\\\\/g;
         $value =~ s/\"/\\"/g;
         $value = qq("$value");
 
@@ -386,6 +387,7 @@ sub process_nameslist_txt ($)
         elsif ($line =~ /^\s+=\s+(.+)$/)
         {
             my $value = $1;
+            $value =~ s/\\/\\\\/g;
             $value =~ s/\"/\\"/g;
 
             if (not defined $nameslist_hash->{$wc}->{'='}->{'index'}) {
@@ -398,6 +400,7 @@ sub process_nameslist_txt ($)
         elsif ($line =~ /^\s+\*\s+(.+)$/)
         {
             my $value = $1;
+            $value =~ s/\\/\\\\/g;
             $value =~ s/\"/\\"/g;
 
             if (not defined $nameslist_hash->{$wc}->{'*'}->{'index'}) {
@@ -410,6 +413,7 @@ sub process_nameslist_txt ($)
         elsif ($line =~ /^\s+#\s+(.+)$/)
         {
             my $value = $1;
+            $value =~ s/\\/\\\\/g;
             $value =~ s/\"/\\"/g;
 
             if (not defined $nameslist_hash->{$wc}->{'#'}->{'index'}) {
@@ -422,6 +426,7 @@ sub process_nameslist_txt ($)
         elsif ($line =~ /^\s+:\s+(.+)$/)
         {
             my $value = $1;
+            $value =~ s/\\/\\\\/g;
             $value =~ s/\"/\\"/g;
 
             if (not defined $nameslist_hash->{$wc}->{':'}->{'index'}) {
