@@ -32,12 +32,16 @@ SUBDIRS = $(SUB_DIRS)
 
 EXTRA_DIST = gtkrc.win32 gucharmap.nsi.in gucharmap.pc.in \
              intltool-extract.in intltool-merge.in intltool-update.in \
+             gnome-doc-utils.make \
              gucharmap.desktop.in gucharmap.spec.in $(desktop_DATA)
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gucharmap.pc
 
+DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper
+
 DISTCLEANFILES = \
+        gnome-doc-utils.make \
 	intltool-update \
 	intltool-extract \
 	intltool-merge

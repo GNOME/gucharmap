@@ -19,7 +19,7 @@ REQUIRED_INTLTOOL_VERSION=${REQUIRED_INTLTOOL_VERSION:-0.25}
 REQUIRED_PKG_CONFIG_VERSION=${REQUIRED_PKG_CONFIG_VERSION:-0.14.0}
 REQUIRED_GTK_DOC_VERSION=${REQUIRED_GTK_DOC_VERSION:-1.0}
 REQUIRED_DOC_COMMON_VERSION=${REQUIRED_DOC_COMMON_VERSION:-2.3.0}
-REQUIRED_GNOME_DOC_UTILS_VERSION=${REQUIRED_GNOME_DOC_UTILS_VERSION:-0.1.3}
+REQUIRED_GNOME_DOC_UTILS_VERSION=${REQUIRED_GNOME_DOC_UTILS_VERSION:-0.3.2}
 
 # a list of required m4 macros.  Package can set an initial value
 REQUIRED_M4MACROS=${REQUIRED_M4MACROS:-}
@@ -371,6 +371,10 @@ for configure_ac in $configure_files; do
 	if [ "x$USE_COMMON_DOC_BUILD" = "xyes" ]; then
 	    printbold "Running gnome-doc-common..."
 	    gnome-doc-common --copy || exit 1
+	fi
+	if grep "^GNOME_DOC_INIT" $basename >/dev/null; then
+	    printbold "Running $GNOME_DOC_PREPARE..."
+	    $GNOME_DOC_PREPARE --copy || exit 1
 	fi
 
         # Now run aclocal to pull in any additional macros needed

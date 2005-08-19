@@ -39,6 +39,8 @@ AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE",
 ALL_LINGUAS="am ar az be bg bn bs ca cs cy da de el en_CA en_GB eo es et fa fi fr ga gl gu hi hr hu id is it ja ko lt mi mk ml mn ms nb ne nl nn no pa pl pt pt_BR ro ru rw sk sq sr sr@Latn sv ta th tr uk vi wa xh zh_CN zh_TW"
 AM_GLIB_GNU_GETTEXT
 
+GNOME_DOC_INIT
+
 
 # check for win32
 case "$host" in
@@ -132,7 +134,6 @@ gucharmap/Makefile
 po/Makefile.in
 pixmaps/Makefile 
 help/Makefile
-help/C/Makefile
 help/de/Makefile
 help/es/Makefile
 help/fr/Makefile
