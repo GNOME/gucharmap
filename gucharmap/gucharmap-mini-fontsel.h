@@ -61,8 +61,8 @@ struct _GucharmapMiniFontSelectionClass
   void (* changed) (GucharmapMiniFontSelection *fontsel);
 };
 
-GType       gucharmap_mini_font_selection_get_type              ();
-GtkWidget * gucharmap_mini_font_selection_new                   ();
+GType       gucharmap_mini_font_selection_get_type              (void);
+GtkWidget * gucharmap_mini_font_selection_new                   (void);
 gboolean    gucharmap_mini_font_selection_set_font_name         (GucharmapMiniFontSelection *fontsel,
                                                                  const gchar                *fontname);
 gchar *     gucharmap_mini_font_selection_get_font_name         (GucharmapMiniFontSelection *fontsel);

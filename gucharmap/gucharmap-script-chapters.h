@@ -49,8 +49,8 @@ struct _GucharmapScriptChaptersClass
   GucharmapChaptersClass parent_class;
 };
 
-GType       gucharmap_script_chapters_get_type ();
-GtkWidget * gucharmap_script_chapters_new      ();
+GType       gucharmap_script_chapters_get_type (void);
+GtkWidget * gucharmap_script_chapters_new      (void);
 
 G_END_DECLS
 

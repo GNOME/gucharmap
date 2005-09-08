@@ -58,7 +58,7 @@ charmap_finalize (GObject *object)
   gdk_cursor_unref (charmap->regular_cursor);
 }
 
-void
+static void
 gucharmap_charmap_class_init (GucharmapCharmapClass *clazz)
 {
   clazz->status_message = NULL;
@@ -148,7 +148,7 @@ insert_chocolate_detail_codepoints (GucharmapCharmap *charmap,
 static const gchar *
 find_codepoint (const gchar *str)
 {
-  gint i;
+  guint i;
 
   /* what we are searching for is ascii; in this case, we don't have to
    * worry about multibyte characters at all */
@@ -237,7 +237,7 @@ conditionally_insert_canonical_decomposition (GucharmapCharmap *charmap,
 {
   gunichar *decomposition;
   gsize result_len;
-  gint i;
+  guint i;
 
   decomposition = gucharmap_unicode_canonical_decomposition (uc, &result_len);
 
@@ -286,8 +286,8 @@ set_details (GucharmapCharmap *charmap,
 
   n = gucharmap_unichar_to_printable_utf8 (uc, buf);
   if (n == 0)
-    gtk_text_buffer_insert_with_tags_by_name (
-            buffer, &iter, _("[not a printable character]"), -1, NULL);
+    gtk_text_buffer_insert (
+            buffer, &iter, _("[not a printable character]"), -1);
   else
     gtk_text_buffer_insert_with_tags_by_name (buffer, &iter, buf, n, 
                                               "gimongous", NULL);
@@ -312,7 +312,7 @@ set_details (GucharmapCharmap *charmap,
 
   insert_heading (charmap, buffer, &iter, _("Various Useful Representations"));
 
-  n = g_unichar_to_utf8 (uc, ubuf);
+  n = g_unichar_to_utf8 (uc, (gchar *)ubuf);
 
   /* UTF-8 */
   gstemp = g_string_new (NULL);
@@ -787,7 +787,7 @@ gucharmap_charmap_get_type (void)
         NULL,           /* class_data */
         sizeof (GucharmapCharmap),
         0,              /* n_preallocs */
-        (GInstanceInitFunc) gucharmap_charmap_init,
+        (GInstanceInitFunc) gucharmap_charmap_init
       };
 
       gucharmap_charmap_type = g_type_register_static (GTK_TYPE_HPANED, 
@@ -818,7 +818,7 @@ gucharmap_charmap_go_to_character (GucharmapCharmap *charmap,
   if (!status)
     g_warning ("gucharmap_chapters_go_to_character failed (%04X)\n", wc);
 
-  if (wc >= 0 && wc <= UNICHAR_MAX)
+  if (wc <= UNICHAR_MAX)
     gucharmap_table_set_active_character (charmap->chartable, wc);
 }
 

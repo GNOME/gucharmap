@@ -27,9 +27,9 @@ G_BEGIN_DECLS
 /* return values are read-only */
 G_CONST_RETURN gchar *  gucharmap_get_unicode_name                (gunichar uc);
 G_CONST_RETURN gchar *  gucharmap_get_unicode_data_name           (gunichar uc);
-gint                    gucharmap_get_unicode_data_name_count     ();
+gint                    gucharmap_get_unicode_data_name_count     (void);
 G_CONST_RETURN gchar *  gucharmap_get_unicode_category_name       (gunichar uc);
-gint                    gucharmap_get_unihan_count                ();
+gint                    gucharmap_get_unihan_count                (void);
 G_CONST_RETURN gchar *  gucharmap_get_unicode_kDefinition         (gunichar uc);
 G_CONST_RETURN gchar *  gucharmap_get_unicode_kCantonese          (gunichar uc);
 G_CONST_RETURN gchar *  gucharmap_get_unicode_kMandarin           (gunichar uc);
@@ -60,7 +60,7 @@ gboolean                gucharmap_unichar_isdefined               (gunichar  wc)
 gboolean                gucharmap_unichar_isgraph                 (gunichar  wc);
 
 /* defined in gucharmap-script-codepoint-list.c */
-G_CONST_RETURN gchar ** gucharmap_unicode_list_scripts            ();
+G_CONST_RETURN gchar ** gucharmap_unicode_list_scripts            (void);
 G_CONST_RETURN gchar *  gucharmap_unicode_get_script_for_char     (gunichar wc);
 
 G_END_DECLS

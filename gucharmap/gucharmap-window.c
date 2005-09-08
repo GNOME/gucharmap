@@ -120,7 +120,7 @@ update_progress_bar (GucharmapWindow *guw)
  * from mozilla 
  * caller should gdk_cursor_unref */
 GdkCursor *
-_gucharmap_window_progress_cursor ()
+_gucharmap_window_progress_cursor (void)
 {
   /* MOZ_CURSOR_SPINNING */
   static const char moz_spinning_bits[] = 
@@ -737,7 +737,7 @@ make_text_to_copy (GucharmapWindow *guw)
   return hbox;
 }
 
-void
+static void
 load_icon (GucharmapWindow *guw)
 {
   GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
@@ -897,7 +897,7 @@ gucharmap_window_class_init (GucharmapWindowClass *clazz)
 }
 
 GType 
-gucharmap_window_get_type ()
+gucharmap_window_get_type (void)
 {
   static GType gucharmap_window_type = 0;
 
@@ -913,7 +913,7 @@ gucharmap_window_get_type ()
           NULL,
           sizeof (GucharmapWindow),
           0,
-          (GInstanceInitFunc) gucharmap_window_init,
+          (GInstanceInitFunc) gucharmap_window_init
         };
 
       gucharmap_window_type = g_type_register_static (GTK_TYPE_WINDOW,
@@ -926,7 +926,7 @@ gucharmap_window_get_type ()
 }
 
 GtkWidget * 
-gucharmap_window_new ()
+gucharmap_window_new (void)
 {
   return GTK_WIDGET (g_object_new (gucharmap_window_get_type (), NULL));
 }

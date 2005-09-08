@@ -199,7 +199,7 @@ gucharmap_block_chapters_class_init (GucharmapBlockChaptersClass *clazz)
 }
 
 GType 
-gucharmap_block_chapters_get_type ()
+gucharmap_block_chapters_get_type (void)
 {
   static GType t = 0;
 
@@ -226,7 +226,7 @@ gucharmap_block_chapters_get_type ()
 }
 
 GtkWidget * 
-gucharmap_block_chapters_new ()
+gucharmap_block_chapters_new (void)
 {
   return GTK_WIDGET (g_object_new (gucharmap_block_chapters_get_type (), NULL));
 }

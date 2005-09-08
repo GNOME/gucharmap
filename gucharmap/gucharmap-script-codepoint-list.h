@@ -52,8 +52,8 @@ struct _GucharmapScriptCodepointListClass
   GucharmapCodepointListClass parent_class;
 };
 
-GType                    gucharmap_script_codepoint_list_get_type       ();
-GucharmapCodepointList * gucharmap_script_codepoint_list_new            ();
+GType                    gucharmap_script_codepoint_list_get_type       (void);
+GucharmapCodepointList * gucharmap_script_codepoint_list_new            (void);
 gboolean                 gucharmap_script_codepoint_list_set_script     (GucharmapScriptCodepointList  *list,
 	                                                                 const gchar                   *script);
 gboolean                 gucharmap_script_codepoint_list_set_scripts    (GucharmapScriptCodepointList  *list,

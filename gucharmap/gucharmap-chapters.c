@@ -59,7 +59,7 @@ gucharmap_chapters_class_init (GucharmapChaptersClass *clazz)
 }
 
 GType 
-gucharmap_chapters_get_type ()
+gucharmap_chapters_get_type (void)
 {
   static GType t = 0;
 

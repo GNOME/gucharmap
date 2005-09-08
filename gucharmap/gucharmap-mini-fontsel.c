@@ -251,7 +251,7 @@ gucharmap_mini_font_selection_init (GucharmapMiniFontSelection *fontsel)
 
 
 GtkWidget *
-gucharmap_mini_font_selection_new ()
+gucharmap_mini_font_selection_new (void)
 {
   return GTK_WIDGET (g_object_new (gucharmap_mini_font_selection_get_type (), 
                                    NULL));
@@ -259,7 +259,7 @@ gucharmap_mini_font_selection_new ()
 
 
 GType
-gucharmap_mini_font_selection_get_type ()
+gucharmap_mini_font_selection_get_type (void)
 {
   static GType gucharmap_mini_font_selection_type = 0;
 

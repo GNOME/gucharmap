@@ -673,7 +673,7 @@ gucharmap_search_dialog_class_init (GucharmapSearchDialogClass *clazz)
 }
 
 GType
-gucharmap_search_dialog_get_type ()
+gucharmap_search_dialog_get_type (void)
 {
   static GType t = 0;
 

@@ -38,7 +38,7 @@ default_get_char (GucharmapCodepointList *list,
 {
   DefaultCodepointListPrivate *priv = GUCHARMAP_CODEPOINT_LIST_GET_PRIVATE (list);
 
-  if (index > priv->end - priv->start)
+  if (index > (gint)priv->end - priv->start)
     return (gunichar)(-1);
   else
     return (gunichar) priv->start + index;
@@ -76,7 +76,7 @@ gucharmap_codepoint_list_class_init (GucharmapCodepointListClass *clazz)
 }
 
 GType
-gucharmap_codepoint_list_get_type ()
+gucharmap_codepoint_list_get_type (void)
 {
   static GType t = 0;
 

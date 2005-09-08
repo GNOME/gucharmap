@@ -61,7 +61,7 @@ struct _GucharmapChaptersClass
                                                                        gunichar           wc);
 };
 
-GType                                   gucharmap_chapters_get_type                ();
+GType                                   gucharmap_chapters_get_type                (void);
 GucharmapCodepointList *                gucharmap_chapters_get_codepoint_list      (GucharmapChapters *chapters);
 G_CONST_RETURN GucharmapCodepointList * gucharmap_chapters_get_book_codepoint_list (GucharmapChapters *chapters);
 gboolean                                gucharmap_chapters_go_to_character         (GucharmapChapters *chapters, 

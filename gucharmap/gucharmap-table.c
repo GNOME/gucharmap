@@ -511,7 +511,7 @@ set_active_cell (GucharmapTable *chartable,
   chartable->active_cell = cell;
 
   /* update page, if necessary */
-  if (cell - chartable->page_first_cell >= chartable->rows * chartable->cols)
+  if ((gint)cell - chartable->page_first_cell >= chartable->rows * chartable->cols)
     {
       /* move the page_first_cell as far as active_cell has moved */
       gint offset = (gint) chartable->active_cell - (gint) chartable->old_active_cell;
@@ -635,12 +635,12 @@ draw_character (GucharmapTable *chartable,
   cell = get_cell_at_rowcol (chartable, row, col);
   wc = gucharmap_codepoint_list_get_char (chartable->codepoint_list, cell);
 
-  if (wc < 0 || wc > UNICHAR_MAX || !gucharmap_unichar_validate (wc) || !gucharmap_unichar_isdefined (wc))
+  if (wc > UNICHAR_MAX || !gucharmap_unichar_validate (wc) || !gucharmap_unichar_isdefined (wc))
     return;
 
-  if (GTK_WIDGET_HAS_FOCUS (chartable->drawing_area) && cell == chartable->active_cell)
+  if (GTK_WIDGET_HAS_FOCUS (chartable->drawing_area) && (gint)cell == chartable->active_cell)
     gc = chartable->drawing_area->style->text_gc[GTK_STATE_SELECTED];
-  else if (cell == chartable->active_cell)
+  else if ((gint)cell == chartable->active_cell)
     gc = chartable->drawing_area->style->text_gc[GTK_STATE_ACTIVE];
   else
     gc = chartable->drawing_area->style->text_gc[GTK_STATE_NORMAL];
@@ -677,11 +677,11 @@ draw_square_bg (GucharmapTable *chartable, gint row, gint col)
 
   gc = gdk_gc_new (GDK_DRAWABLE (chartable->drawing_area->window));
 
-  if (GTK_WIDGET_HAS_FOCUS (chartable->drawing_area) && cell == chartable->active_cell)
+  if (GTK_WIDGET_HAS_FOCUS (chartable->drawing_area) && (gint)cell == chartable->active_cell)
     untinted = chartable->drawing_area->style->base[GTK_STATE_SELECTED];
-  else if (cell == chartable->active_cell)
+  else if ((gint)cell == chartable->active_cell)
     untinted = chartable->drawing_area->style->base[GTK_STATE_ACTIVE];
-  else if (cell > gucharmap_codepoint_list_get_last_index (chartable->codepoint_list))
+  else if ((gint)cell > gucharmap_codepoint_list_get_last_index (chartable->codepoint_list))
     untinted = chartable->drawing_area->style->dark[GTK_STATE_NORMAL]; 
   else if (! gucharmap_unichar_validate (wc))
     untinted = chartable->drawing_area->style->fg[GTK_STATE_INSENSITIVE];
@@ -1383,7 +1383,7 @@ motion_notify_event (GtkWidget *widget,
     {
       guint cell = get_cell_at_xy (chartable, MAX (0, event->x), MAX (0, event->y));
 
-      if (cell != chartable->active_cell)
+      if ((gint)cell != chartable->active_cell)
         {
           gtk_widget_hide (chartable->zoom_window);
           set_active_cell (chartable, cell);
@@ -1676,7 +1676,7 @@ gucharmap_table_get_type (void)
         NULL,           /* class_data */
         sizeof (GucharmapTable),
         0,              /* n_preallocs */
-        (GInstanceInitFunc) gucharmap_table_init,
+        (GInstanceInitFunc) gucharmap_table_init
       };
 
       gucharmap_table_type = g_type_register_static (GTK_TYPE_HBOX, "GucharmapTable", 

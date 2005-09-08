@@ -49,11 +49,11 @@ struct _GucharmapSearchDialogClass
   GtkDialogClass parent_class;
 
   /* signals */
-  void (* search_start)  ();
+  void (* search_start)  (void);
   void (* search_finish) (gunichar found_char);
 };
 
-GType       gucharmap_search_dialog_get_type      ();
+GType       gucharmap_search_dialog_get_type      (void);
 GtkWidget * gucharmap_search_dialog_new           (GucharmapWindow *parent);
 void        gucharmap_search_dialog_start_search  (GucharmapSearchDialog *search_dialog,
                                                    GucharmapDirection     direction);

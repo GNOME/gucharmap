@@ -56,7 +56,7 @@ struct _GucharmapCodepointListClass
                               gunichar                wc);
 };
 
-GType                    gucharmap_codepoint_list_get_type       ();
+GType                    gucharmap_codepoint_list_get_type       (void);
 GucharmapCodepointList * gucharmap_codepoint_list_new            (gunichar start,
                                                                   gunichar end);
 gunichar                 gucharmap_codepoint_list_get_char       (GucharmapCodepointList *list, 

@@ -267,7 +267,7 @@ gucharmap_script_codepoint_list_init (GucharmapScriptCodepointList *guscl)
 }
 
 GType
-gucharmap_script_codepoint_list_get_type ()
+gucharmap_script_codepoint_list_get_type (void)
 {
   static GType t = 0;
 
@@ -303,7 +303,7 @@ gucharmap_script_codepoint_list_get_type ()
  * g_object_unref() to free the result.
  **/
 GucharmapCodepointList * 
-gucharmap_script_codepoint_list_new ()
+gucharmap_script_codepoint_list_new (void)
 {
   return GUCHARMAP_CODEPOINT_LIST (g_object_new (gucharmap_script_codepoint_list_get_type (), NULL));
 }
@@ -419,7 +419,7 @@ gucharmap_script_codepoint_list_append_script (GucharmapScriptCodepointList  *li
  * should be modified by the caller.
  **/
 G_CONST_RETURN gchar **
-gucharmap_unicode_list_scripts ()
+gucharmap_unicode_list_scripts (void)
 {
   return unicode_script_list;
 }

@@ -48,8 +48,8 @@ struct _GucharmapWindowClass
   GtkWindowClass parent_class;
 };
 
-GType                        gucharmap_window_get_type                   ();
-GtkWidget *                  gucharmap_window_new                        ();
+GType                        gucharmap_window_get_type                   (void);
+GtkWidget *                  gucharmap_window_new                        (void);
 void                         gucharmap_window_set_font_selection_visible (GucharmapWindow *guw, 
                                                                           gboolean         visible);
 void                         gucharmap_window_set_text_to_copy_visible   (GucharmapWindow *guw, 

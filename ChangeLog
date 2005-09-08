@@ -1,5 +1,10 @@
 2005-09-08  Behdad Esfahbod  <behdad@gnome.org>
 
+	* gucharmap/*.[ch]: Various gcc warning shut-ups.  Mostly adding void
+	to function definitions with no parameter.
+
+2005-09-08  Behdad Esfahbod  <behdad@gnome.org>
+
 	* configure.ac: Bumped version /up/ to 1.4.4-cvs.
 
 	* gucharmap/Makefile.am: Pass -no-undefined to libtool. (#315490)

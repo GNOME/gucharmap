@@ -236,7 +236,7 @@ gucharmap_get_unicode_data_name (gunichar uc)
 }
 
 gint
-gucharmap_get_unicode_data_name_count ()
+gucharmap_get_unicode_data_name_count (void)
 {
   return G_N_ELEMENTS (unicode_names);
 }
@@ -244,7 +244,7 @@ gucharmap_get_unicode_data_name_count ()
 #if ENABLE_UNIHAN
 
 gint
-gucharmap_get_unihan_count ()
+gucharmap_get_unihan_count (void)
 {
   return G_N_ELEMENTS (unihan);
 }
@@ -444,6 +444,8 @@ get_nameslist (gunichar uc)
   most_recent_result = NULL;
   return NULL;
 }
+
+gboolean _gucharmap_unicode_has_nameslist_entry (gunichar uc);
 
 gboolean
 _gucharmap_unicode_has_nameslist_entry (gunichar uc)

@@ -1,6 +1,7 @@
 /* $Id$ */
 
 #include "config.h"
+#include "gucharmap-intl.h"
 
 #ifdef ENABLE_NLS
 
