@@ -1,5 +1,11 @@
 2005-09-16  Behdad Esfahbod  <behdad@gnome.org>
 
+	* gucharmap/gucharmap-window.c (gucharmap_window_class_init): call
+	finalize from the parent GtkWindow class. (#316514, patch from
+	Alexander Nedotsukov)
+
+2005-09-16  Behdad Esfahbod  <behdad@gnome.org>
+
 	* gucharmap/gucharmap-window.c: s/;;/;/, gcc 2.95.x compatibility. (#316515)
 
 2005-09-08  Behdad Esfahbod  <behdad@gnome.org>
