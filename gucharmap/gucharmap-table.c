@@ -908,7 +908,7 @@ gucharmap_table_redraw (GucharmapTable *chartable,
 
   row_offset = ((gint) chartable->page_first_cell - (gint) chartable->old_page_first_cell) / chartable->cols;
 
-#ifdef G_PLATFORM_WIN32
+#ifdef G_OS_WIN32
 
   if (row_offset != 0)
     {
@@ -919,7 +919,7 @@ gucharmap_table_redraw (GucharmapTable *chartable,
       actives_done = TRUE;
     }
 
-#else /* #ifdef G_PLATFORM_WIN32 */
+#else /* #ifdef G_OS_WIN32 */
 
   if (chartable->codepoint_list_changed 
           || row_offset >= chartable->rows 

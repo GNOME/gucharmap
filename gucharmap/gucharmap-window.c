@@ -745,7 +745,7 @@ load_icon (GucharmapWindow *guw)
   GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
   GError *error = NULL;
 
-#ifdef G_PLATFORM_WIN32
+#ifdef G_OS_WIN32
 
   gchar *package_root, *icon_path;
 
@@ -755,11 +755,11 @@ load_icon (GucharmapWindow *guw)
   g_free (package_root);
   g_free (icon_path);
 
-#else  /* #ifdef G_PLATFORM_WIN32 */
+#else  /* #ifdef G_OS_WIN32 */
 
   priv->icon = gdk_pixbuf_new_from_file (ICON_PATH, &error);
 
-#endif /* #ifdef G_PLATFORM_WIN32 */
+#endif /* #ifdef G_OS_WIN32 */
 
   if (error != NULL)
     {
