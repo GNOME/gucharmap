@@ -391,7 +391,6 @@ set_details (GucharmapCharmap *charmap,
 
   /* this isn't so bad efficiency-wise */
   if (gucharmap_get_unicode_kDefinition (uc)
-      || gucharmap_get_unicode_kCantonese (uc)
       || gucharmap_get_unicode_kMandarin (uc)
       || gucharmap_get_unicode_kJapaneseOn (uc)
       || gucharmap_get_unicode_kJapaneseKun (uc)
@@ -409,11 +408,6 @@ set_details (GucharmapCharmap *charmap,
       if (csp)
         insert_vanilla_detail (charmap, buffer, &iter,
                                _("Mandarin Pronunciation:"), csp);
-    
-      csp = gucharmap_get_unicode_kCantonese (uc);
-      if (csp)
-        insert_vanilla_detail (charmap, buffer, &iter,
-                               _("Cantonese Pronunciation:"), csp);
     
       csp = gucharmap_get_unicode_kJapaneseOn (uc);
       if (csp)
