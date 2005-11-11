@@ -511,7 +511,7 @@ set_active_cell (GucharmapTable *chartable,
   chartable->active_cell = cell;
 
   /* update page, if necessary */
-  if ((gint)cell - chartable->page_first_cell >= chartable->rows * chartable->cols)
+  if ((gint)cell - chartable->page_first_cell >= chartable->rows * chartable->cols || (gint)cell < chartable->page_first_cell)
     {
       /* move the page_first_cell as far as active_cell has moved */
       gint offset = (gint) chartable->active_cell - (gint) chartable->old_active_cell;
