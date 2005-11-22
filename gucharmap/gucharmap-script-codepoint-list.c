@@ -65,89 +65,86 @@ find_script (const gchar *script)
   return -1;
 }
 
-/* *ranges should be freed by caller */
-/* get characters for the "Common" script */
-static gboolean 
-get_other_chars (UnicodeRange **ranges,
-                 gint          *size)
-{
-  gint i, j;
-  gint prev_end;
-  gint index;
-
-  for (i = 0, j = 0, prev_end = -1;  i < G_N_ELEMENTS (unicode_scripts);  i++)
-    {
-      if (unicode_scripts[i].start > prev_end + 1)
-        j++;
-      prev_end = unicode_scripts[i].end;
-    }
-  if (unicode_scripts[i-1].end < UNICHAR_MAX)
-    j++;
-
-  *size = j;
-  *ranges = g_new (UnicodeRange, *size);
-
-  for (i = 0, j = 0, index = 0, prev_end = -1;  i < G_N_ELEMENTS (unicode_scripts);  i++)
-    {
-      if (unicode_scripts[i].start > prev_end + 1)
-        {
-          (*ranges)[j].start = prev_end + 1;
-          (*ranges)[j].end = unicode_scripts[i].start - 1;
-          (*ranges)[j].index = index;
-  
-          index += (*ranges)[j].end - (*ranges)[j].start + 1;
-          j++;
-        }
-
-      prev_end = unicode_scripts[i].end;
-    }
-
-  if (unicode_scripts[i-1].end < UNICHAR_MAX)
-    {
-      (*ranges)[j].start = unicode_scripts[i-1].end + 1;
-      (*ranges)[j].end = UNICHAR_MAX;
-      (*ranges)[j].index = index;
-      j++;
-    }
-
-  g_assert (j == *size);
-
-  return TRUE;
-}
 
 /* *ranges should be freed by caller */
+/* adds unlisted characters to the "Common" script */
 static gboolean
 get_chars_for_script (const gchar            *script,
                       UnicodeRange          **ranges,
                       gint                   *size)
 {
   gint i, j, index;
-  gint script_index;
-
-  if (strcmp (script, "Common") == 0)
-    return get_other_chars (ranges, size);
+  gint script_index, common_script_index;
+  gint prev_end;
 
   script_index = find_script (script);
+  common_script_index = find_script ("Common");
   if (script_index == -1)
     return FALSE;
 
-  for (i = 0, j = 0;  i < G_N_ELEMENTS (unicode_scripts);  i++)
+  j = 0;
+
+  if (script_index == common_script_index)
+    {
+      prev_end = -1;
+      for (i = 0;  i < G_N_ELEMENTS (unicode_scripts);  i++)
+	{
+	  if (unicode_scripts[i].start > prev_end + 1)
+	    j++;
+	  prev_end = unicode_scripts[i].end;
+	}
+      if (unicode_scripts[i-1].end < UNICHAR_MAX)
+	j++;
+    }
+
+  for (i = 0;  i < G_N_ELEMENTS (unicode_scripts);  i++)
     if (unicode_scripts[i].script_index == script_index)
       j++;
 
   *size = j;
   *ranges = g_new (UnicodeRange, *size);
 
-  for (i = 0, j = 0, index = 0;  i < G_N_ELEMENTS (unicode_scripts);  i++)
-    if (unicode_scripts[i].script_index == script_index)
-      {
-        (*ranges)[j].start = unicode_scripts[i].start;
-        (*ranges)[j].end = unicode_scripts[i].end;
-        (*ranges)[j].index = index;
+  j = 0, index = 0, prev_end = -1;
 
-        index += (*ranges)[j].end - (*ranges)[j].start + 1;
-        j++;
-      }
+  for (i = 0;  i < G_N_ELEMENTS (unicode_scripts);  i++)
+    {
+      if (script_index == common_script_index)
+	{
+	  if (unicode_scripts[i].start > prev_end + 1)
+	    {
+	      (*ranges)[j].start = prev_end + 1;
+	      (*ranges)[j].end = unicode_scripts[i].start - 1;
+	      (*ranges)[j].index = index;
+      
+	      index += (*ranges)[j].end - (*ranges)[j].start + 1;
+	      j++;
+	    }
+
+	  prev_end = unicode_scripts[i].end;
+	}
+
+      if (unicode_scripts[i].script_index == script_index)
+	{
+	  (*ranges)[j].start = unicode_scripts[i].start;
+	  (*ranges)[j].end = unicode_scripts[i].end;
+	  (*ranges)[j].index = index;
+
+	  index += (*ranges)[j].end - (*ranges)[j].start + 1;
+	  j++;
+	}
+    }
+
+  if (script_index == common_script_index)
+    {
+      if (unicode_scripts[i-1].end < UNICHAR_MAX)
+	{
+	  (*ranges)[j].start = unicode_scripts[i-1].end + 1;
+	  (*ranges)[j].end = UNICHAR_MAX;
+	  (*ranges)[j].index = index;
+	  j++;
+	}
+    }
+
 
   g_assert (j == *size);
 

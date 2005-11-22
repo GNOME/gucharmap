@@ -1,3 +1,17 @@
+2005-11-22  Behdad Esfahbod  <behdad@gnome.org>
+
+	Update to Unicode 4.1 Character Database. (#313411, Behnam Esfahbod)
+
+	* gucharmap/gucharmap-script-codepoint-list.c,
+	* gucharmap/gen-guch-unicode-tables.pl: Updated to handle 4.1 data.
+
+	* gucharmap/unicode-blocks.h,
+	* gucharmap/unicode-categories.h,
+	* gucharmap/unicode-names.h,
+	* gucharmap/unicode-nameslist.h,
+	* gucharmap/unicode-scripts.h,
+	* gucharmap/unicode-unihan.h: Updated outputs of above scripts.
+
 2005-11-11  Behdad Esfahbod  <behdad@gnome.org>
 
 	* gucharmap/gucharmap-table.c (set_active_cell): Update page on
