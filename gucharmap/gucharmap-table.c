@@ -1437,11 +1437,11 @@ mouse_wheel_up (GucharmapTable *chartable)
 static void
 mouse_wheel_down (GucharmapTable *chartable)
 {
-  if ((gint) get_last_cell (chartable) - chartable->rows * chartable->cols / 2 < 0)
+  if ((gint) get_last_cell (chartable) - chartable->rows * chartable->cols < 0)
     {
       set_top_row (chartable, 0);
     }
-  else if (chartable->page_first_cell < get_last_cell (chartable) - chartable->rows * chartable->cols * 3 / 2)
+  else if (chartable->page_first_cell + chartable->rows * chartable->cols / 2 < get_last_cell (chartable) - chartable->rows * chartable->cols)
     {
       set_top_row (chartable, (chartable->page_first_cell + chartable->rows * chartable->cols / 2) / chartable->cols);
     }
