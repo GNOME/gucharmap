@@ -1,4 +1,19 @@
 2005-11-25  Behdad Esfahbod  <behdad@gnome.org>
+	
+	Use GtkUIManager. (#51532, thetroublemaker)
+
+	* gucharmap/gucharmap-window.c: Ported menus to gtkuimanager
+
+	* gucharmap/gucharmap-window.c: Created functions help_contents and
+	chapters_set_labels.
+
+	* gucharmap/gucharmap-window.c: Ported function help_about from
+	GnomeAboutDialog to GtkAboutDialog, thus got the function out of the
+	#if HAVE_GNOME.
+
+	* configure.ac: The Gtk+ requirement is now >= 2.6.0
+
+2005-11-25  Behdad Esfahbod  <behdad@gnome.org>
 
 	* gucharmap.desktop: Categorize as Utility;Accessibility instead of
 	Graphics;Viewer. (#319078, Stanislav Brabec)

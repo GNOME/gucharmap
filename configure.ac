@@ -66,7 +66,7 @@ else
 fi
 
 # gtk is required
-PKG_CHECK_MODULES(GTK, gobject-2.0 >= 2.3.0 gtk+-2.0 >= 2.2.0)
+PKG_CHECK_MODULES(GTK, gobject-2.0 >= 2.3.0 gtk+-2.0 >= 2.6.0)
 
 AC_ARG_ENABLE(gnome,
               AC_HELP_STRING([--disable-gnome],
