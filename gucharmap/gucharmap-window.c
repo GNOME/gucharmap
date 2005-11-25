@@ -655,6 +655,7 @@ insert_character_in_text_to_copy (GucharmapTable  *chartable,
     return;
 
   ubuf[g_unichar_to_utf8 (wc, ubuf)] = '\0';
+  gtk_editable_delete_selection (GTK_EDITABLE (priv->text_to_copy_entry));
   pos = gtk_editable_get_position (GTK_EDITABLE (priv->text_to_copy_entry));
   gtk_editable_insert_text (GTK_EDITABLE (priv->text_to_copy_entry), ubuf, -1, &pos);
   gtk_editable_set_position (GTK_EDITABLE (priv->text_to_copy_entry), pos);
