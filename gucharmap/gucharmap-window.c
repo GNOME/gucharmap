@@ -364,7 +364,7 @@ prev_character (GtkWidget       *button,
     {
       index--;
 
-      if (index <= 0)
+      if (index < 0)
         index = gucharmap_codepoint_list_get_last_index (guw->charmap->chartable->codepoint_list);
 
       wc = gucharmap_codepoint_list_get_char (guw->charmap->chartable->codepoint_list, index);
@@ -385,7 +385,7 @@ next_character (GtkWidget       *button,
     {
       index++;
 
-      if (index >= gucharmap_codepoint_list_get_last_index (guw->charmap->chartable->codepoint_list))
+      if (index > gucharmap_codepoint_list_get_last_index (guw->charmap->chartable->codepoint_list))
         index = 0;
 
       wc = gucharmap_codepoint_list_get_char (guw->charmap->chartable->codepoint_list, index);
