@@ -752,7 +752,7 @@ gucharmap_search_dialog_init (GucharmapSearchDialog *search_dialog)
   gtk_box_pack_start (GTK_BOX (hbox), priv->entry, TRUE, TRUE, 0);
   g_signal_connect (priv->entry, "changed", G_CALLBACK (entry_changed), search_dialog);
 
-  priv->whole_word_option = gtk_check_button_new_with_mnemonic ("Match _whole word");
+  priv->whole_word_option = gtk_check_button_new_with_mnemonic (_("Match _whole word"));
   gtk_widget_show (priv->whole_word_option);
   gtk_box_pack_start (GTK_BOX (GTK_DIALOG (search_dialog)->vbox), priv->whole_word_option, FALSE, FALSE, 0);
 
