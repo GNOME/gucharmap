@@ -144,19 +144,35 @@ insert_chocolate_detail_codepoints (GucharmapCharmap *charmap,
 #define is_hex_digit(c) (((c) >= '0' && (c) <= '9') \
                          || ((c) >= 'A' && (c) <= 'F'))
 
-/* returns a pointer to the start of [0-9A-F]{4}, or null if not found */
+/* - "XXXX-YYYY" used in annotation of U+003D 
+ * - Annotation of U+03C0 uses ".XXXX" as a fractional number,
+ *   so don't add "." to the list.
+ * Add here if you know more. */
+#define is_blank(c) (  ((c) == ' ')	\
+		    || ((c) == '-') )
+
+#define is_blank_or_hex_or(a,b) (  !((a) < len)	\
+				|| is_blank(str[a])	\
+				|| (is_hex_digit(str[a]) && (b)) )
+
+/* returns a pointer to the start of (?=[^ -])[0-9A-F]{4,5,6}[^0-9A-F],
+ * or null if not found */
 static const gchar *
 find_codepoint (const gchar *str)
 {
-  guint i;
+  guint i, len;
 
   /* what we are searching for is ascii; in this case, we don't have to
    * worry about multibyte characters at all */
-  for (i = 0;  i + 3 < strlen (str);  i++)
+  len = strlen (str);
+  for (i = 0;  i + 3 < len;  i++)
     {
-      if (is_hex_digit (str[i]) && is_hex_digit (str[i+1]) 
-          && is_hex_digit (str[i+2]) && is_hex_digit (str[i+3]))
-        return str + i;
+      if ( ( !(i > 0) || is_blank(str[i-1]) )
+	  && is_hex_digit (str[i+0]) && is_hex_digit (str[i+1]) 
+	  && is_hex_digit (str[i+2]) && is_hex_digit (str[i+3])
+	  && is_blank_or_hex_or(i+4,    is_blank_or_hex_or(i+5,
+		      (i+6 < len) || !is_hex_digit (str[i+6]))) )
+	return str + i;
     }
 
   return NULL;
@@ -340,7 +356,7 @@ set_details (GucharmapCharmap *charmap,
     {
       insert_heading (charmap, buffer, &iter, 
                       _("Annotations and Cross References"));
-    
+
       /* nameslist equals (alias names) */
       csarr = gucharmap_get_nameslist_equals (uc);
       if (csarr != NULL)
@@ -349,7 +365,7 @@ set_details (GucharmapCharmap *charmap,
                                    _("Alias names:"), csarr, FALSE);
           g_free (csarr);
         }
-    
+
       /* nameslist stars (notes) */
       csarr = gucharmap_get_nameslist_stars (uc);
       if (csarr != NULL)
@@ -358,7 +374,7 @@ set_details (GucharmapCharmap *charmap,
                                    _("Notes:"), csarr, TRUE);
           g_free (csarr);
         }
-    
+
       /* nameslist exes (see also) */
       ucs = gucharmap_get_nameslist_exes (uc);
       if (ucs != NULL)
@@ -367,7 +383,7 @@ set_details (GucharmapCharmap *charmap,
                                               _("See also:"), ucs);
           g_free (ucs);
         }
-    
+
       /* nameslist pounds (approximate equivalents) */
       csarr = gucharmap_get_nameslist_pounds (uc);
       if (csarr != NULL)
@@ -376,7 +392,7 @@ set_details (GucharmapCharmap *charmap,
                                    _("Approximate equivalents:"), csarr, TRUE);
           g_free (csarr);
         }
-    
+
       /* nameslist colons (equivalents) */
       csarr = gucharmap_get_nameslist_colons (uc);
       if (csarr != NULL)

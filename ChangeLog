@@ -1,5 +1,10 @@
 2005-11-27  Behdad Esfahbod  <behdad@gnome.org>
 
+	* gucharmap/gucharmap-charmap.c: Make autolinking more strict to not
+	convert 3.1415 to 3.U+1415! (#303596, Behnam Esfahbod)
+
+2005-11-27  Behdad Esfahbod  <behdad@gnome.org>
+
 	* gucharmap/gucharmap-search-dialog.c: Add "whole word" search and
 	also search in the annotations. (#128700, Behnam Esfahbod)
 
