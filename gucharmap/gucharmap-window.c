@@ -482,9 +482,9 @@ static const GtkActionEntry menu_entries[] =
     NULL, G_CALLBACK (next_character) },
   { "PreviousCharacter", NULL, N_("_Previous Character"), "<control>P",
     NULL, G_CALLBACK (prev_character) },
-  { "NextChapter", NULL, N_("Next Script"), "<control>Page_Up",
+  { "NextChapter", NULL, N_("Next Script"), "<control>Page_Down",
     NULL, G_CALLBACK (next_chapter) },
-  { "PreviousChapter", NULL, N_("Previous Script"), "<control>Page_Down",
+  { "PreviousChapter", NULL, N_("Previous Script"), "<control>Page_Up",
     NULL, G_CALLBACK (prev_chapter) },
 
 #if HAVE_GNOME
