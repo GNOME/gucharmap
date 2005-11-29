@@ -308,8 +308,8 @@ quick_checks_before (GucharmapSearchState *search_state)
     return FALSE;
   search_state->did_before_checks = TRUE;
 
-  g_return_if_fail (search_state->search_string_nfd != NULL);
-  g_return_if_fail (search_state->search_string_nfc != NULL);
+  g_return_val_if_fail (search_state->search_string_nfd != NULL, FALSE);
+  g_return_val_if_fail (search_state->search_string_nfc != NULL, FALSE);
 
   /* caller should check for empty string */
   if (search_state->search_string_nfd[0] == '\0')
@@ -396,7 +396,6 @@ idle_search (GucharmapSearchDialog *search_dialog)
 	}
 
       /* check for other matches */
-      gboolean b;
       if (matches (search_dialog, wc, priv->search_state->search_string_nfd))
         {
           priv->search_state->found_index = priv->search_state->curr_index;
@@ -486,7 +485,7 @@ gucharmap_search_state_new (const GucharmapCodepointList *list,
   search_state->curr_index = start_index;
 
   /* set end of search string to last non-space character */
-  for (p = q = search_state->search_string_nfd_temp;
+  for (p = q = r = search_state->search_string_nfd_temp;
        p[0] != '\0';
        q = p, p = g_utf8_next_char (p))
     if (g_unichar_isspace (g_utf8_get_char (p)) && !g_unichar_isspace (g_utf8_get_char (q)))
@@ -494,6 +493,9 @@ gucharmap_search_state_new (const GucharmapCodepointList *list,
   if (!g_unichar_isspace (g_utf8_get_char (q)))
       r = p;
   r[0] = '\0';
+
+  /* caller should check not to search for empty string */
+  g_return_val_if_fail (r != search_state->search_string_nfd_temp, FALSE);
 
   /* NFD */
   /* set pointer to first non-space character in the search string */
