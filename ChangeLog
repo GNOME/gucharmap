@@ -1,3 +1,15 @@
+2005-11-27  Behdad Esfahbod  <behdad@gnome.org>
+
+	Decrease the amount of non-shared data.
+	#169491, Benoît Dejean, Behnam Esfahbod.
+
+	* gucharmap/gen-guch-unicode-tables.pl: Generate index-tables instead
+	of pointer-tables, for Unihan table, and names table.
+
+	* gucharmap/gucharmap-unicode-info.c: Update to follow.
+
+	* gucharmap/unicode-names.h, gucharmap/unicode-unihan.h: Regenerated.
+
 2005-11-28  Noah Levitt  <nlevitt@columbia.edu>
 
 	* gucharmap/gucharmap-window.c: Fix ctrl+{pgdn,pgup}, which had

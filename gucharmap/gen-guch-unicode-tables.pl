@@ -93,15 +93,8 @@ sub process_unicode_data_txt ($)
 
     print $out "#include <glib/gunicode.h>\n\n";
 
-    print $out "typedef struct _UnicodeName UnicodeName;\n\n";
-
-    print $out "static const struct _UnicodeName\n";
-    print $out "{\n";
-    print $out "  gunichar index;\n";
-    print $out "  const gchar *name;\n";
-    print $out "} \n";
-    print $out "unicode_names[] =\n";
-    print $out "{\n";
+    my @unicode_pairs;
+    my %names;
 
     while (my $line = <$unicodedata>)
     {
@@ -111,10 +104,61 @@ sub process_unicode_data_txt ($)
         my $hex = $1;
         my $name = $2;
 
-        print $out qq(  { 0x$hex, "$name" },\n);
+        $names{$name} = 1;
+        push @unicode_pairs, [$hex, $name];
     }
 
-    print $out "};\n\n";
+    print $out "static const char unicode_names_strings[] = \\\n";
+
+    my $offset = 0;
+
+    foreach my $name (sort keys %names) {
+	print $out "  \"$name\\0\"\n";
+	$names{$name} = $offset;
+	$offset += length($name) + 1;
+    }
+
+    undef $offset;
+
+    print $out ";\n";
+
+    print $out "typedef struct _UnicodeName UnicodeName;\n\n";
+
+    print $out "static const struct _UnicodeName\n";
+    print $out "{\n";
+    print $out "  gunichar index;\n";
+    print $out "  guint32 name_offset;\n";
+    print $out "} \n";
+    print $out "unicode_names[] =\n";
+    print $out "{\n";
+
+    my $first_line = 1;
+
+    foreach my $pair (@unicode_pairs) {
+	if (!$first_line) {
+	    print $out ",\n";
+	} else {
+	    $first_line = 0;
+	}
+
+	my ($hex, $name) = @{$pair};
+	my $offset = $names{$name};
+	print $out "  {0x$hex, $offset}";
+    }
+
+    print $out "\n};\n\n";
+
+    print $out <<EOT;
+static inline const char * unicode_name_get_name(const UnicodeName *entry)
+{
+  guint32 offset = entry->name_offset;
+  return unicode_names_strings + offset;
+}
+
+EOT
+
+    undef %names;
+    undef @unicode_pairs;
 
     close ($unicodedata);
     close ($out);
@@ -251,19 +295,22 @@ sub process_unihan_zip ($)
     print $out "static const struct _Unihan\n";
     print $out "{\n";
     print $out "  gunichar index;\n";
-    print $out "  const gchar *kDefinition;\n";
-    print $out "  const gchar *kCantonese;\n";
-    print $out "  const gchar *kMandarin;\n";
-    print $out "  const gchar *kTang;\n";
-    print $out "  const gchar *kKorean;\n";
-    print $out "  const gchar *kJapeneseKun;\n";
-    print $out "  const gchar *kJapaneseOn;\n";
+    print $out "  gint32 kDefinition;\n";
+    print $out "  gint32 kCantonese;\n";
+    print $out "  gint32 kMandarin;\n";
+    print $out "  gint32 kTang;\n";
+    print $out "  gint32 kKorean;\n";
+    print $out "  gint32 kJapaneseKun;\n";
+    print $out "  gint32 kJapaneseOn;\n";
     print $out "} \n";
     print $out "unihan[] =\n";
     print $out "{\n";
 
+    my @strings;
+    my $offset = 0;
+
     my $wc = 0;
-    my ($kDefinition, $kCantonese, $kMandarin, $kTang, $kKorean, $kJapeneseKun, $kJapaneseOn);
+    my ($kDefinition, $kCantonese, $kMandarin, $kTang, $kKorean, $kJapaneseKun, $kJapaneseOn);
 
     my $i = 0;
     while (my $line = <$unihan>)
@@ -277,23 +324,22 @@ sub process_unihan_zip ($)
         my $value = $3;
         $value =~ s/\\/\\\\/g;
         $value =~ s/\"/\\"/g;
-        $value = qq("$value");
 
         if ($new_wc != $wc)
         {
             if (defined $kDefinition or defined $kCantonese or defined $kMandarin 
-                or defined $kTang or defined $kKorean or defined $kJapeneseKun
+                or defined $kTang or defined $kKorean or defined $kJapaneseKun
                 or defined $kJapaneseOn)
             {
-                printf $out ("  { 0x%04X, \%s, \%s, \%s, \%s, \%s, \%s, \%s },\n",
+                printf $out ("  { 0x%04X, \%d, \%d, \%d, \%d, \%d, \%d, \%d },\n",
                              $wc,
-                             $kDefinition || "NULL",
-                             $kCantonese || "NULL",
-                             $kMandarin || "NULL",
-                             $kTang || "NULL",
-                             $kKorean || "NULL",
-                             $kJapeneseKun || "NULL",
-                             $kJapaneseOn || "NULL");
+                             (defined($kDefinition) ? $kDefinition : -1),
+                             (defined($kCantonese) ? $kCantonese: -1),
+                             (defined($kMandarin) ? $kMandarin : -1),
+                             (defined($kTang) ? $kTang : -1),
+                             (defined($kKorean) ? $kKorean : -1),
+                             (defined($kJapaneseKun) ? $kJapaneseKun : -1),
+                             (defined($kJapaneseOn) ? $kJapaneseOn : -1));
             }
 
             $wc = $new_wc;
@@ -303,10 +349,21 @@ sub process_unihan_zip ($)
             undef $kMandarin;
             undef $kTang;
             undef $kKorean;
-            undef $kJapeneseKun;
+            undef $kJapaneseKun;
             undef $kJapaneseOn;
         }
 
+        for my $f qw(kDefinition kCantonese kMandarin
+                     kTang kKorean kJapaneseKun kJapaneseOn) {
+
+            if ($field eq $f) {
+	        push @strings, $value;
+		my $last_offset = $offset;
+		$offset += length($value) + 1;
+		$value = $last_offset;
+		last;
+	    }
+	}
 
         if ($field eq "kDefinition") {
             $kDefinition = $value;
@@ -323,8 +380,8 @@ sub process_unihan_zip ($)
         elsif ($field eq "kKorean") {
             $kKorean = $value;
         }
-        elsif ($field eq "kJapeneseKun") {
-            $kJapeneseKun = $value;
+        elsif ($field eq "kJapaneseKun") {
+            $kJapaneseKun = $value;
         }
         elsif ($field eq "kJapaneseOn") {
             $kJapaneseOn = $value;
@@ -336,6 +393,40 @@ sub process_unihan_zip ($)
     }
 
     print $out "};\n\n";
+
+    print $out "static const char unihan_strings[] = \\\n";
+
+    for my $s (@strings) {
+	print $out "  \"$s\\0\"\n";
+    }
+    print $out ";\n\n";
+
+    print $out "static const Unihan *_get_unihan (gunichar uc)\n;";
+
+    for my $name qw(kDefinition kCantonese kMandarin
+		    kTang kKorean kJapaneseKun kJapaneseOn) {
+    print $out <<EOT;
+
+static inline const char * unihan_get_$name (const Unihan *uh)
+{
+    gint32 offset = uh->$name;
+    if (offset == -1)
+      return NULL;
+    return unihan_strings + offset;
+}
+
+G_CONST_RETURN gchar * 
+gucharmap_get_unicode_$name (gunichar uc)
+{
+  const Unihan *uh = _get_unihan (uc);
+  if (uh == NULL)
+    return NULL;
+  else
+    return unihan_get_$name (uh);
+}
+
+EOT
+    }
 
     close ($unihan);
     close ($out);

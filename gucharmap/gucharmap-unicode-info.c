@@ -216,7 +216,7 @@ gucharmap_get_unicode_data_name (gunichar uc)
 {
   gint min = 0;
   gint mid;
-  gint max = sizeof (unicode_names) / sizeof (UnicodeName) - 1;
+  gint max = G_N_ELEMENTS(unicode_names) - 1;
 
   if (uc < unicode_names[0].index || uc > unicode_names[max].index)
     return "";
@@ -229,7 +229,7 @@ gucharmap_get_unicode_data_name (gunichar uc)
       else if (uc < unicode_names[mid].index)
         max = mid - 1;
       else
-        return unicode_names[mid].name;
+        return unicode_name_get_name(&unicode_names[mid]);
     }
 
   return NULL;
@@ -258,7 +258,8 @@ _get_unihan (gunichar uc)
   static const Unihan *most_recent_result;
   gint min = 0;
   gint mid;
-  gint max = sizeof (unihan) / sizeof (Unihan) - 1;
+  gint max = G_N_ELEMENTS(unihan) - 1;
+
 
   if (uc < unihan[0].index || uc > unihan[max].index)
     return NULL;
@@ -284,76 +285,6 @@ _get_unihan (gunichar uc)
 
   most_recent_result = NULL;
   return NULL;
-}
-
-G_CONST_RETURN gchar * 
-gucharmap_get_unicode_kDefinition (gunichar uc)
-{
-  const Unihan *uh = _get_unihan (uc);
-  if (uh == NULL)
-    return NULL;
-  else
-    return uh->kDefinition;
-}
-
-G_CONST_RETURN gchar * 
-gucharmap_get_unicode_kCantonese (gunichar uc)
-{
-  const Unihan *uh = _get_unihan (uc);
-  if (uh == NULL)
-    return NULL;
-  else
-    return uh->kCantonese;
-}
-
-G_CONST_RETURN gchar * 
-gucharmap_get_unicode_kMandarin (gunichar uc)
-{
-  const Unihan *uh = _get_unihan (uc);
-  if (uh == NULL)
-    return NULL;
-  else
-    return uh->kMandarin;
-}
-
-G_CONST_RETURN gchar * 
-gucharmap_get_unicode_kTang (gunichar uc)
-{
-  const Unihan *uh = _get_unihan (uc);
-  if (uh == NULL)
-    return NULL;
-  else
-    return uh->kTang;
-}
-
-G_CONST_RETURN gchar * 
-gucharmap_get_unicode_kKorean (gunichar uc)
-{
-  const Unihan *uh = _get_unihan (uc);
-  if (uh == NULL)
-    return NULL;
-  else
-    return uh->kKorean;
-}
-
-G_CONST_RETURN gchar * 
-gucharmap_get_unicode_kJapaneseKun (gunichar uc)
-{
-  const Unihan *uh = _get_unihan (uc);
-  if (uh == NULL)
-    return NULL;
-  else
-    return uh->kJapeneseKun;
-}
-
-G_CONST_RETURN gchar * 
-gucharmap_get_unicode_kJapaneseOn (gunichar uc)
-{
-  const Unihan *uh = _get_unihan (uc);
-  if (uh == NULL)
-    return NULL;
-  else
-    return uh->kJapaneseOn;
 }
 
 #else /* #if ENABLE_UNIHAN */
