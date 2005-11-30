@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-25 22:35+0100\n"
-"PO-Revision-Date: 2005-11-25 22:38+0100\n"
+"POT-Creation-Date: 2005-11-30 20:47+0100\n"
+"PO-Revision-Date: 2005-11-30 20:48+0100\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
@@ -27,100 +27,100 @@ msgstr "Mapa znakov"
 msgid "Insert special characters into documents"
 msgstr "Vložiť špeciálne znaky do dokumentov"
 
-#: ../gucharmap/gucharmap-charmap.c:250
+#: ../gucharmap/gucharmap-charmap.c:266
 msgid "Canonical decomposition:"
 msgstr "Kanonická dekompozícia:"
 
-#: ../gucharmap/gucharmap-charmap.c:290 ../gucharmap/gucharmap-table.c:294
+#: ../gucharmap/gucharmap-charmap.c:306 ../gucharmap/gucharmap-table.c:294
 msgid "[not a printable character]"
 msgstr "[nie je tlačiteľný znak]"
 
-#: ../gucharmap/gucharmap-charmap.c:304
+#: ../gucharmap/gucharmap-charmap.c:320
 msgid "General Character Properties"
 msgstr "Všeobecné vlastnosti znakov"
 
 #. character category
-#: ../gucharmap/gucharmap-charmap.c:307
+#: ../gucharmap/gucharmap-charmap.c:323
 msgid "Unicode category:"
 msgstr "Kategória Unicode:"
 
-#: ../gucharmap/gucharmap-charmap.c:313
+#: ../gucharmap/gucharmap-charmap.c:329
 msgid "Various Useful Representations"
 msgstr "Rôzne užitočné reprezentácie"
 
-#: ../gucharmap/gucharmap-charmap.c:322
+#: ../gucharmap/gucharmap-charmap.c:338
 msgid "UTF-8:"
 msgstr "UTF-8:"
 
-#: ../gucharmap/gucharmap-charmap.c:330
+#: ../gucharmap/gucharmap-charmap.c:346
 msgid "Octal escaped UTF-8:"
 msgstr "Osmičkové escape UTF-8:"
 
-#: ../gucharmap/gucharmap-charmap.c:336
+#: ../gucharmap/gucharmap-charmap.c:352
 msgid "Decimal entity reference:"
 msgstr "Desiatkový odkaz entity:"
 
-#: ../gucharmap/gucharmap-charmap.c:342
+#: ../gucharmap/gucharmap-charmap.c:358
 msgid "Annotations and Cross References"
 msgstr "Poznámky a krížové odkazy"
 
-#: ../gucharmap/gucharmap-charmap.c:349
+#: ../gucharmap/gucharmap-charmap.c:365
 msgid "Alias names:"
 msgstr "Alternatívne mená:"
 
-#: ../gucharmap/gucharmap-charmap.c:358
+#: ../gucharmap/gucharmap-charmap.c:374
 msgid "Notes:"
 msgstr "Poznámky:"
 
-#: ../gucharmap/gucharmap-charmap.c:367
+#: ../gucharmap/gucharmap-charmap.c:383
 msgid "See also:"
 msgstr "Pozri tiež:"
 
-#: ../gucharmap/gucharmap-charmap.c:376
+#: ../gucharmap/gucharmap-charmap.c:392
 msgid "Approximate equivalents:"
 msgstr "Približné ekvivalenty:"
 
-#: ../gucharmap/gucharmap-charmap.c:385
+#: ../gucharmap/gucharmap-charmap.c:401
 msgid "Equivalents:"
 msgstr "Ekvivalenty:"
 
-#: ../gucharmap/gucharmap-charmap.c:401
+#: ../gucharmap/gucharmap-charmap.c:417
 msgid "CJK Ideograph Information"
 msgstr "Informácia o CJK symbole"
 
-#: ../gucharmap/gucharmap-charmap.c:406
+#: ../gucharmap/gucharmap-charmap.c:422
 msgid "Definition in English:"
 msgstr "Definícia v angličtine:"
 
-#: ../gucharmap/gucharmap-charmap.c:411
+#: ../gucharmap/gucharmap-charmap.c:427
 msgid "Mandarin Pronunciation:"
 msgstr "Mandarínska výslovnosť:"
 
-#: ../gucharmap/gucharmap-charmap.c:416
+#: ../gucharmap/gucharmap-charmap.c:432
 msgid "Cantonese Pronunciation:"
 msgstr "Kantonská výslovnosť:"
 
-#: ../gucharmap/gucharmap-charmap.c:421
+#: ../gucharmap/gucharmap-charmap.c:437
 msgid "Japanese On Pronunciation:"
 msgstr "Japonská On výslovnosť:"
 
-#: ../gucharmap/gucharmap-charmap.c:426
+#: ../gucharmap/gucharmap-charmap.c:442
 msgid "Japanese Kun Pronunciation:"
 msgstr "Japonská Kun výslovnosť:"
 
-#: ../gucharmap/gucharmap-charmap.c:431
+#: ../gucharmap/gucharmap-charmap.c:447
 msgid "Tang Pronunciation:"
 msgstr "Tang výslovnosť:"
 
-#: ../gucharmap/gucharmap-charmap.c:436
+#: ../gucharmap/gucharmap-charmap.c:452
 msgid "Korean Pronunciation:"
 msgstr "Kórejská výslovnosť:"
 
-#: ../gucharmap/gucharmap-charmap.c:737
+#: ../gucharmap/gucharmap-charmap.c:753
 msgid "Characte_r Table"
 msgstr "Tabuľka _znakov"
 
-#: ../gucharmap/gucharmap-charmap.c:740
+#: ../gucharmap/gucharmap-charmap.c:756
 msgid "Character _Details"
 msgstr "Po_drobnosti znaku"
 
@@ -148,7 +148,7 @@ msgid "Unknown character, unable to identify."
 msgstr "Neznámy znak, nepodarilo sa identifikovať."
 
 #: ../gucharmap/gucharmap-table.c:1513
-#: ../gucharmap/gucharmap-search-dialog.c:465
+#: ../gucharmap/gucharmap-search-dialog.c:583
 msgid "Not found."
 msgstr "Nenájdené."
 
@@ -1044,32 +1044,27 @@ msgstr "Blok Unicode"
 msgid "Script"
 msgstr "Písmo"
 
-#: ../gucharmap/gucharmap-search-dialog.c:419
+#: ../gucharmap/gucharmap-search-dialog.c:537
 msgid "Information"
 msgstr "Informácie"
 
 #. follow hig guidelines
-#: ../gucharmap/gucharmap-search-dialog.c:592
+#: ../gucharmap/gucharmap-search-dialog.c:716
 msgid "Find"
 msgstr "Nájsť"
 
-#: ../gucharmap/gucharmap-search-dialog.c:606
+#: ../gucharmap/gucharmap-search-dialog.c:730
 msgid "_Previous"
 msgstr "_Predchádzajúce"
 
-#: ../gucharmap/gucharmap-search-dialog.c:613
+#: ../gucharmap/gucharmap-search-dialog.c:737
 msgid "_Next"
 msgstr "_Nasledujúce"
 
-#: ../gucharmap/gucharmap-search-dialog.c:623
+#: ../gucharmap/gucharmap-search-dialog.c:747
 msgid "_Search:"
 msgstr "_Hľadať:"
 
-#~ msgid "Next Block"
-#~ msgstr "Nasledujúci blok"
-
-#~ msgid "Previous Block"
-#~ msgstr "Predchádzajúci blok"
-
-#~ msgid "Snap Columns to Power of Two"
-#~ msgstr "Upraviť stĺpce na mocniny dvojky"
+#: ../gucharmap/gucharmap-search-dialog.c:757
+msgid "Match _whole word"
+msgstr "Zhoda _celého slova"
