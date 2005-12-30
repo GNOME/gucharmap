@@ -1,1018 +1,1070 @@
-# Vietnamese translation for gucharmap
+# Vietnamese translation for Gucharmap
 # Copyright © 2005 Gnome i18n Project for Vietnamese.
-# pclouds <pclouds@gmx.net>, 2002.
+# Nguyễn Thái Ngọc Duy <pclouds@gmx.net>, 2002.
 # Clytie Siddall <clytie@riverland.net.au>, 2005.
 # 
 msgid ""
-msgstr ""
-"Project-Id-Version: gucharmap GNOME 2.10\n"
+""
+msgstr "Project-Id-Version: gucharmap GNOME HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-21 06:38+0000\n"
-"PO-Revision-Date: 2005-07-01 16:58+0930\n"
+"POT-Creation-Date: 2005-12-30 06:53+0100\n"
+"PO-Revision-Date: 2005-12-30 17:25+1030\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <gnomevi-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
-"X-Generator: LocFactoryEditor 1.2.2\n"
+"X-Generator: LocFactoryEditor 1.5.1b\n"
 
-#: ../gucharmap.desktop.in.h:1 ../gucharmap/gucharmap-window.c:324
-#: ../gucharmap/gucharmap-window.c:856
+#:../gucharmap.desktop.in.h:1 ../gucharmap/gucharmap-window.c:344
+#:../gucharmap/gucharmap-window.c:839
 msgid "Character Map"
 msgstr "Bản đồ ký tự"
 
-#: ../gucharmap.desktop.in.h:2
+#:../gucharmap.desktop.in.h:2
 msgid "Insert special characters into documents"
 msgstr "Chèn ký tự đặc biệt vào tài liệu"
 
-#: ../gucharmap/gucharmap-charmap.c:250
+#:../gucharmap/gucharmap-charmap.c:266
 msgid "Canonical decomposition:"
 msgstr "Tách chuẩn tắc:"
 
-#: ../gucharmap/gucharmap-charmap.c:290 ../gucharmap/gucharmap-table.c:294
+#:../gucharmap/gucharmap-charmap.c:306 ../gucharmap/gucharmap-table.c:294
 msgid "[not a printable character]"
 msgstr "[ký tự không thể in]"
 
-#: ../gucharmap/gucharmap-charmap.c:304
+#:../gucharmap/gucharmap-charmap.c:320
 msgid "General Character Properties"
 msgstr "Thuộc tính ký tự chung"
 
-#. character category
-#: ../gucharmap/gucharmap-charmap.c:307
+#.character category
+#:../gucharmap/gucharmap-charmap.c:323
 msgid "Unicode category:"
 msgstr "Phân loại Unicode:"
 
-#: ../gucharmap/gucharmap-charmap.c:313
+#:../gucharmap/gucharmap-charmap.c:329
 msgid "Various Useful Representations"
 msgstr "Biểu diễn hữu dụng khác"
 
-#: ../gucharmap/gucharmap-charmap.c:322
+#:../gucharmap/gucharmap-charmap.c:338
 msgid "UTF-8:"
 msgstr "UTF-8:"
 
-#: ../gucharmap/gucharmap-charmap.c:330
+#:../gucharmap/gucharmap-charmap.c:346
 msgid "Octal escaped UTF-8:"
 msgstr "UTF-8 được thoát bát phân:"
 
-#: ../gucharmap/gucharmap-charmap.c:336
+#:../gucharmap/gucharmap-charmap.c:352
 msgid "Decimal entity reference:"
 msgstr "Tham chiếu thực thể thập phân:"
 
-#: ../gucharmap/gucharmap-charmap.c:342
+#:../gucharmap/gucharmap-charmap.c:358
 msgid "Annotations and Cross References"
 msgstr "Tham chiếu chéo và chú thích"
 
-#: ../gucharmap/gucharmap-charmap.c:349
+#:../gucharmap/gucharmap-charmap.c:365
 msgid "Alias names:"
 msgstr "Tên bí danh:"
 
-#: ../gucharmap/gucharmap-charmap.c:358
+#:../gucharmap/gucharmap-charmap.c:374
 msgid "Notes:"
 msgstr "Ghi chú:"
 
-#: ../gucharmap/gucharmap-charmap.c:367
+#:../gucharmap/gucharmap-charmap.c:383
 msgid "See also:"
 msgstr "Xem thêm:"
 
-#: ../gucharmap/gucharmap-charmap.c:376
+#:../gucharmap/gucharmap-charmap.c:392
 msgid "Approximate equivalents:"
 msgstr "Gần tương đương:"
 
-#: ../gucharmap/gucharmap-charmap.c:385
+#:../gucharmap/gucharmap-charmap.c:401
 msgid "Equivalents:"
 msgstr "Tương đương:"
 
-#: ../gucharmap/gucharmap-charmap.c:400
+#:../gucharmap/gucharmap-charmap.c:417
 msgid "CJK Ideograph Information"
 msgstr "Thông tin chữ viết ghi ý CJK (Trung quốc, Nhật bản và Triều tiên)"
 
-#: ../gucharmap/gucharmap-charmap.c:405
+#:../gucharmap/gucharmap-charmap.c:422
 msgid "Definition in English:"
 msgstr "Định nghĩa tiếng Anh:"
 
-#: ../gucharmap/gucharmap-charmap.c:410
+#:../gucharmap/gucharmap-charmap.c:427
 msgid "Mandarin Pronunciation:"
 msgstr "Phát âm tiếng Trung quốc phổ thông:"
 
-#: ../gucharmap/gucharmap-charmap.c:415
+#:../gucharmap/gucharmap-charmap.c:432
+msgid "Cantonese Pronunciation:"
+msgstr "Phát âm Can-ton:"
+
+#:../gucharmap/gucharmap-charmap.c:437
 msgid "Japanese On Pronunciation:"
 msgstr "Phát âm «On» Nhật bản:"
 
-#: ../gucharmap/gucharmap-charmap.c:420
+#:../gucharmap/gucharmap-charmap.c:442
 msgid "Japanese Kun Pronunciation:"
 msgstr "Phát âm «Kun» Nhật bản:"
 
-#: ../gucharmap/gucharmap-charmap.c:425
+#:../gucharmap/gucharmap-charmap.c:447
 msgid "Tang Pronunciation:"
 msgstr "Phát âm «Tang»"
 
-#: ../gucharmap/gucharmap-charmap.c:430
+#:../gucharmap/gucharmap-charmap.c:452
 msgid "Korean Pronunciation:"
 msgstr "Phát âm Triều tiên"
 
-#: ../gucharmap/gucharmap-charmap.c:731
+#:../gucharmap/gucharmap-charmap.c:753
 msgid "Characte_r Table"
 msgstr "_Bảng ký tự"
 
-#: ../gucharmap/gucharmap-charmap.c:734
+#:../gucharmap/gucharmap-charmap.c:756
 msgid "Character _Details"
 msgstr "_Chi tiết ký tự"
 
-#: ../gucharmap/gucharmap-mini-fontsel.c:203
+#:../gucharmap/gucharmap-mini-fontsel.c:203
 msgid "Font"
 msgstr "Phông chữ"
 
-#: ../gucharmap/gucharmap-mini-fontsel.c:210
+#:../gucharmap/gucharmap-mini-fontsel.c:210
 msgid "Font Family"
 msgstr "Nhóm phông chữ"
 
-#: ../gucharmap/gucharmap-mini-fontsel.c:230
+#:../gucharmap/gucharmap-mini-fontsel.c:230
 msgid "Font Size"
 msgstr "Cỡ phông chữ"
 
 # Name: don't translate / Tên: đừng dịch
-#. Unicode assigns "Common" as the script name for any character not
-#. * specifically listed in Scripts.txt
-#: ../gucharmap/gucharmap-script-codepoint-list.c:458
-#: ../gucharmap/unicode-scripts.h:20
+#.Unicode assigns "Common" as the script name for any character not
+#.* specifically listed in Scripts.txt
+#:../gucharmap/gucharmap-script-codepoint-list.c:455
+#:../gucharmap/unicode-scripts.h:22
 msgid "Common"
 msgstr "Common"
 
-#: ../gucharmap/gucharmap-table.c:1509
+#:../gucharmap/gucharmap-table.c:1511
 msgid "Unknown character, unable to identify."
 msgstr "Ký tự lạ, không thể định danh."
 
-#: ../gucharmap/gucharmap-table.c:1511
-#: ../gucharmap/gucharmap-search-dialog.c:465
+#:../gucharmap/gucharmap-table.c:1513
+#:../gucharmap/gucharmap-search-dialog.c:583
 msgid "Not found."
 msgstr "Không tìm thấy."
 
-#: ../gucharmap/gucharmap-table.c:1514
+#:../gucharmap/gucharmap-table.c:1516
 msgid "Character found."
 msgstr "Tìm thấy ký tự."
 
-#: ../gucharmap/gucharmap-table.c:1578
+#:../gucharmap/gucharmap-table.c:1580
 msgid "Character Table"
 msgstr "Bảng ký tự"
 
-#: ../gucharmap/gucharmap-unicode-info.c:94
+#:../gucharmap/gucharmap-unicode-info.c:94
 msgid "<Non Private Use High Surrogate>"
 msgstr "<Thay thế cao dùng không riêng>"
 
-#: ../gucharmap/gucharmap-unicode-info.c:96
+#:../gucharmap/gucharmap-unicode-info.c:96
 msgid "<Private Use High Surrogate>"
 msgstr "<Thay thế cao dùng riêng>"
 
-#: ../gucharmap/gucharmap-unicode-info.c:98
+#:../gucharmap/gucharmap-unicode-info.c:98
 msgid "<Low Surrogate>"
 msgstr "<Thay thế thấp>"
 
-#: ../gucharmap/gucharmap-unicode-info.c:100
+#:../gucharmap/gucharmap-unicode-info.c:100
 msgid "<Private Use>"
 msgstr "<Dùng riêng>"
 
-#: ../gucharmap/gucharmap-unicode-info.c:102
+#:../gucharmap/gucharmap-unicode-info.c:102
 msgid "<Plane 15 Private Use>"
 msgstr "<Dùng riêng phẳng 15>"
 
-#: ../gucharmap/gucharmap-unicode-info.c:104
+#:../gucharmap/gucharmap-unicode-info.c:104
 msgid "<Plane 16 Private Use>"
 msgstr "<Dùng riêng phẳng 16>"
 
-#: ../gucharmap/gucharmap-unicode-info.c:109
+#:../gucharmap/gucharmap-unicode-info.c:109
 msgid "<not assigned>"
 msgstr "<chưa gán>"
 
-#: ../gucharmap/gucharmap-unicode-info.c:120
+#:../gucharmap/gucharmap-unicode-info.c:120
 msgid "Other, Control"
 msgstr "Khác, Điều khiển"
 
-#: ../gucharmap/gucharmap-unicode-info.c:121
+#:../gucharmap/gucharmap-unicode-info.c:121
 msgid "Other, Format"
 msgstr "Khác, Định dạng"
 
-#: ../gucharmap/gucharmap-unicode-info.c:122
+#:../gucharmap/gucharmap-unicode-info.c:122
 msgid "Other, Not Assigned"
 msgstr "Khác, Chưa gán"
 
-#: ../gucharmap/gucharmap-unicode-info.c:123
+#:../gucharmap/gucharmap-unicode-info.c:123
 msgid "Other, Private Use"
 msgstr "Khác, Dùng riêng"
 
-#: ../gucharmap/gucharmap-unicode-info.c:124
+#:../gucharmap/gucharmap-unicode-info.c:124
 msgid "Other, Surrogate"
 msgstr "Khác, Thay thế"
 
-#: ../gucharmap/gucharmap-unicode-info.c:125
+#:../gucharmap/gucharmap-unicode-info.c:125
 msgid "Letter, Lowercase"
 msgstr "Chữ cái, chữ thườn g"
 
-#: ../gucharmap/gucharmap-unicode-info.c:126
+#:../gucharmap/gucharmap-unicode-info.c:126
 msgid "Letter, Modifier"
 msgstr "Chữ cái, Bộ sửa đổi"
 
-#: ../gucharmap/gucharmap-unicode-info.c:127
+#:../gucharmap/gucharmap-unicode-info.c:127
 msgid "Letter, Other"
 msgstr "Chữ cái, Khác"
 
-#: ../gucharmap/gucharmap-unicode-info.c:128
+#:../gucharmap/gucharmap-unicode-info.c:128
 msgid "Letter, Titlecase"
 msgstr "Chữ cái, Chữ hoa bắt đầu mỗi từ"
 
-#: ../gucharmap/gucharmap-unicode-info.c:129
+#:../gucharmap/gucharmap-unicode-info.c:129
 msgid "Letter, Uppercase"
 msgstr "Chữ cái, chữ hoa"
 
-#: ../gucharmap/gucharmap-unicode-info.c:130
+#:../gucharmap/gucharmap-unicode-info.c:130
 msgid "Mark, Spacing Combining"
 msgstr "Đánh dấu, Hợp khoảng trắng"
 
-#: ../gucharmap/gucharmap-unicode-info.c:131
+#:../gucharmap/gucharmap-unicode-info.c:131
 msgid "Mark, Enclosing"
 msgstr "Đánh dấu, Đóng"
 
-#: ../gucharmap/gucharmap-unicode-info.c:132
+#:../gucharmap/gucharmap-unicode-info.c:132
 msgid "Mark, Non-Spacing"
 msgstr "Đánh dấu, Không khoảng trắng"
 
-#: ../gucharmap/gucharmap-unicode-info.c:133
+#:../gucharmap/gucharmap-unicode-info.c:133
 msgid "Number, Decimal Digit"
 msgstr "Số, Chữ số thập phân"
 
-#: ../gucharmap/gucharmap-unicode-info.c:134
+#:../gucharmap/gucharmap-unicode-info.c:134
 msgid "Number, Letter"
 msgstr "Số, Chữ cái"
 
-#: ../gucharmap/gucharmap-unicode-info.c:135
+#:../gucharmap/gucharmap-unicode-info.c:135
 msgid "Number, Other"
 msgstr "Số, Khác"
 
-#: ../gucharmap/gucharmap-unicode-info.c:136
+#:../gucharmap/gucharmap-unicode-info.c:136
 msgid "Punctuation, Connector"
 msgstr "Dấu, Kết nối"
 
-#: ../gucharmap/gucharmap-unicode-info.c:137
+#:../gucharmap/gucharmap-unicode-info.c:137
 msgid "Punctuation, Dash"
 msgstr "Dấu, Gạch ngang"
 
-#: ../gucharmap/gucharmap-unicode-info.c:138
+#:../gucharmap/gucharmap-unicode-info.c:138
 msgid "Punctuation, Close"
 msgstr "Dấu, Đóng"
 
-#: ../gucharmap/gucharmap-unicode-info.c:139
+#:../gucharmap/gucharmap-unicode-info.c:139
 msgid "Punctuation, Final Quote"
 msgstr "Dấu, Đóng trích dẫn"
 
-#: ../gucharmap/gucharmap-unicode-info.c:140
+#:../gucharmap/gucharmap-unicode-info.c:140
 msgid "Punctuation, Initial Quote"
 msgstr "Dấu, Mở trích dẫn"
 
-#: ../gucharmap/gucharmap-unicode-info.c:141
+#:../gucharmap/gucharmap-unicode-info.c:141
 msgid "Punctuation, Other"
 msgstr "Dấu, Khác"
 
-#: ../gucharmap/gucharmap-unicode-info.c:142
+#:../gucharmap/gucharmap-unicode-info.c:142
 msgid "Punctuation, Open"
 msgstr "Dấu, Mở"
 
-#: ../gucharmap/gucharmap-unicode-info.c:143
+#:../gucharmap/gucharmap-unicode-info.c:143
 msgid "Symbol, Currency"
 msgstr "Ký hiệu, tiền tệ"
 
-#: ../gucharmap/gucharmap-unicode-info.c:144
+#:../gucharmap/gucharmap-unicode-info.c:144
 msgid "Symbol, Modifier"
 msgstr "Ký hiệu, bộ sửa đổi"
 
-#: ../gucharmap/gucharmap-unicode-info.c:145
+#:../gucharmap/gucharmap-unicode-info.c:145
 msgid "Symbol, Math"
 msgstr "Ký hiệu, toán học"
 
-#: ../gucharmap/gucharmap-unicode-info.c:146
+#:../gucharmap/gucharmap-unicode-info.c:146
 msgid "Symbol, Other"
 msgstr "Ký hiệu, khác"
 
-#: ../gucharmap/gucharmap-unicode-info.c:147
+#:../gucharmap/gucharmap-unicode-info.c:147
 msgid "Separator, Line"
 msgstr "Ngăn cách, dòng"
 
-#: ../gucharmap/gucharmap-unicode-info.c:148
+#:../gucharmap/gucharmap-unicode-info.c:148
 msgid "Separator, Paragraph"
 msgstr "Ngăn cách, đoạn"
 
-#: ../gucharmap/gucharmap-unicode-info.c:149
+#:../gucharmap/gucharmap-unicode-info.c:149
 msgid "Separator, Space"
 msgstr "Ngăn cách, khoảng trắng"
 
-#: ../gucharmap/gucharmap-window.c:189
+#:../gucharmap/gucharmap-window.c:190
 msgid "Searching..."
 msgstr "Đang tìm..."
 
-#: ../gucharmap/gucharmap-window.c:319
+#:../gucharmap/gucharmap-window.c:338
 msgid "translator_credits"
 msgstr "Nhóm Việt hóa GNOME (http://gnomevi.sourceforge.net)"
 
-#: ../gucharmap/gucharmap-window.c:420 ../gucharmap/gucharmap-window.c:602
-msgid "Next Script"
-msgstr "Chữ viết kế"
+#:../gucharmap/gucharmap-window.c:350
+msgid "gucharmap"
+msgstr "gucharmap"
 
-#: ../gucharmap/gucharmap-window.c:421 ../gucharmap/gucharmap-window.c:603
-msgid "Previous Script"
-msgstr "Chữ viết trước"
-
-#: ../gucharmap/gucharmap-window.c:433 ../gucharmap/gucharmap-window.c:607
-msgid "Next Block"
-msgstr "Khối kế"
-
-#: ../gucharmap/gucharmap-window.c:434 ../gucharmap/gucharmap-window.c:608
-msgid "Previous Block"
-msgstr "Khối trước"
-
-#: ../gucharmap/gucharmap-window.c:469
+#:../gucharmap/gucharmap-window.c:458
 msgid "_File"
 msgstr "_Tập tin"
 
-#: ../gucharmap/gucharmap-window.c:471
+#:../gucharmap/gucharmap-window.c:459
 msgid "_View"
 msgstr "_Xem"
 
-#: ../gucharmap/gucharmap-window.c:473
+#:../gucharmap/gucharmap-window.c:460
 msgid "_Search"
 msgstr "_Tìm"
 
-#: ../gucharmap/gucharmap-window.c:475
+#:../gucharmap/gucharmap-window.c:461
 msgid "_Go"
 msgstr "Đ_i"
 
-#: ../gucharmap/gucharmap-window.c:494
-msgid "By _Script"
-msgstr "Theo chữ _viết"
-
-#: ../gucharmap/gucharmap-window.c:500
-msgid "By _Unicode Block"
-msgstr "Theo khối _Unicode"
-
-#: ../gucharmap/gucharmap-window.c:508
-msgid "Snap Columns to Power of Two"
-msgstr "Đính cột tới bình phương"
-
-#. ctrl-+
-#: ../gucharmap/gucharmap-window.c:516
-msgid "Zoom _In"
-msgstr "Phóng _to"
-
-#. ctrl--
-#: ../gucharmap/gucharmap-window.c:526
-msgid "Zoom _Out"
-msgstr "Thu _nhỏ"
-
-#. ctrl-=
-#: ../gucharmap/gucharmap-window.c:536
-msgid "_Normal Size"
-msgstr "_Cỡ thường"
-
-#: ../gucharmap/gucharmap-window.c:550
-msgid "_Find..."
-msgstr "_Tìm..."
-
-#: ../gucharmap/gucharmap-window.c:558
-msgid "Find _Next"
-msgstr "Tìm _tiếp"
-
-#: ../gucharmap/gucharmap-window.c:567
-msgid "Find _Previous"
-msgstr "Tìm _lùi"
-
-#: ../gucharmap/gucharmap-window.c:584
-msgid "_Next Character"
-msgstr "Ký tự _kế"
-
-#: ../gucharmap/gucharmap-window.c:590
-msgid "_Previous Character"
-msgstr "Ký tự _trước"
-
-#. make the help menu
-#: ../gucharmap/gucharmap-window.c:631
+#:../gucharmap/gucharmap-window.c:462
 msgid "_Help"
 msgstr "Trợ _giúp"
 
-#: ../gucharmap/gucharmap-window.c:714
+#:../gucharmap/gucharmap-window.c:464
+msgid "_Quit"
+msgstr "T_hoát"
+
+#:../gucharmap/gucharmap-window.c:467
+msgid "Zoom _In"
+msgstr "Phóng _to"
+
+#:../gucharmap/gucharmap-window.c:469
+msgid "Zoom _Out"
+msgstr "Thu _nhỏ"
+
+#:../gucharmap/gucharmap-window.c:471
+msgid "_Normal Size"
+msgstr "_Cỡ thường"
+
+#:../gucharmap/gucharmap-window.c:474
+msgid "_Find..."
+msgstr "_Tìm..."
+
+#:../gucharmap/gucharmap-window.c:476
+msgid "Find _Next"
+msgstr "Tìm _tiếp"
+
+#:../gucharmap/gucharmap-window.c:478
+msgid "Find _Previous"
+msgstr "Tìm _lùi"
+
+#:../gucharmap/gucharmap-window.c:481
+msgid "_Next Character"
+msgstr "Ký tự _kế"
+
+#:../gucharmap/gucharmap-window.c:483
+msgid "_Previous Character"
+msgstr "Ký tự _trước"
+
+#:../gucharmap/gucharmap-window.c:485
+msgid "Next Script"
+msgstr "Chữ viết kế"
+
+#:../gucharmap/gucharmap-window.c:487
+msgid "Previous Script"
+msgstr "Chữ viết trước"
+
+#:../gucharmap/gucharmap-window.c:491
+msgid "_Contents"
+msgstr "_Nội dung"
+
+#:../gucharmap/gucharmap-window.c:494
+msgid "_About"
+msgstr "_Giới thiệu"
+
+#:../gucharmap/gucharmap-window.c:500
+msgid "By _Script"
+msgstr "Theo chữ _viết"
+
+#:../gucharmap/gucharmap-window.c:502
+msgid "By _Unicode Block"
+msgstr "Theo khối _Unicode"
+
+#:../gucharmap/gucharmap-window.c:697
 msgid "_Text to copy:"
 msgstr "Đ_oạn cần chép:"
 
-#: ../gucharmap/gucharmap-window.c:735
+#:../gucharmap/gucharmap-window.c:718
 msgid "Copy to the clipboard."
 msgstr "Chép vào khay."
 
-#: ../gucharmap/main.c:39
+#:../gucharmap/main.c:39
 msgid "Font to start with; ex: 'Serif 27'"
 msgstr "Phông chữ bắt đầu; v.d. «Sans Serif 27» (không gạch chân, 27 điểm)"
 
-#: ../gucharmap/unicode-blocks.h:18
+#:../gucharmap/unicode-blocks.h:19
 msgid "Basic Latin"
 msgstr "La-tinh Cơ bản"
 
-#: ../gucharmap/unicode-blocks.h:19
+#:../gucharmap/unicode-blocks.h:20
 msgid "Latin-1 Supplement"
 msgstr "Bổ sung Latin-1"
 
-#: ../gucharmap/unicode-blocks.h:20
+#:../gucharmap/unicode-blocks.h:21
 msgid "Latin Extended-A"
 msgstr "Latin Mở rộng-A"
 
-#: ../gucharmap/unicode-blocks.h:21
+#:../gucharmap/unicode-blocks.h:22
 msgid "Latin Extended-B"
 msgstr "Latin Mở rộng-B"
 
-#: ../gucharmap/unicode-blocks.h:22
+#:../gucharmap/unicode-blocks.h:23
 msgid "IPA Extensions"
 msgstr "Mở rộng IPA"
 
-#: ../gucharmap/unicode-blocks.h:23
+#:../gucharmap/unicode-blocks.h:24
 msgid "Spacing Modifier Letters"
 msgstr "Ký tự sửa đổi khoảng trắng"
 
-#: ../gucharmap/unicode-blocks.h:24
+#:../gucharmap/unicode-blocks.h:25
 msgid "Combining Diacritical Marks"
 msgstr "Dấu phụ kết hợp"
 
-#: ../gucharmap/unicode-blocks.h:25
+#:../gucharmap/unicode-blocks.h:26
 msgid "Greek and Coptic"
-msgstr "Tiếng Hy Lạp và ngôn ngữ phổ biến trong Giáo hội Ai Cập"
+msgstr "Hy Lạp và ngôn ngữ phổ biến trong Giáo hội Ai Cập"
 
-#: ../gucharmap/unicode-blocks.h:26 ../gucharmap/unicode-scripts.h:22
+#:../gucharmap/unicode-blocks.h:27 ../gucharmap/unicode-scripts.h:25
 msgid "Cyrillic"
 msgstr "Chữ ki-rin"
 
-#: ../gucharmap/unicode-blocks.h:27
-msgid "Cyrillic Supplementary"
+#:../gucharmap/unicode-blocks.h:28
+msgid "Cyrillic Supplement"
 msgstr "Chữ ki-rin bổ sung"
 
-#: ../gucharmap/unicode-blocks.h:28 ../gucharmap/unicode-scripts.h:13
+#:../gucharmap/unicode-blocks.h:29 ../gucharmap/unicode-scripts.h:14
 msgid "Armenian"
-msgstr "Tiếng Ác-mê-ni"
+msgstr "Ác-mê-ni"
 
-#: ../gucharmap/unicode-blocks.h:29 ../gucharmap/unicode-scripts.h:34
+#:../gucharmap/unicode-blocks.h:30 ../gucharmap/unicode-scripts.h:38
 msgid "Hebrew"
-msgstr "Tiếng Do Thái "
+msgstr "Do Thái"
 
-#: ../gucharmap/unicode-blocks.h:30 ../gucharmap/unicode-scripts.h:12
+#:../gucharmap/unicode-blocks.h:31 ../gucharmap/unicode-scripts.h:13
 msgid "Arabic"
-msgstr "Tiếng A-rập"
+msgstr "A-rập"
 
-#: ../gucharmap/unicode-blocks.h:31 ../gucharmap/unicode-scripts.h:54
+#:../gucharmap/unicode-blocks.h:32 ../gucharmap/unicode-scripts.h:62
 msgid "Syriac"
-msgstr "Tiếng Xi-ri"
+msgstr "Xi-ri"
 
-#: ../gucharmap/unicode-blocks.h:32 ../gucharmap/unicode-scripts.h:60
+#:../gucharmap/unicode-blocks.h:33
+msgid "Arabic Supplement"
+msgstr "Bổ sung A-rập"
+
+#:../gucharmap/unicode-blocks.h:34 ../gucharmap/unicode-scripts.h:68
 msgid "Thaana"
-msgstr "Tiếng Ta-na"
+msgstr "Ta-na"
 
-#: ../gucharmap/unicode-blocks.h:33 ../gucharmap/unicode-scripts.h:24
+#:../gucharmap/unicode-blocks.h:35 ../gucharmap/unicode-scripts.h:27
 msgid "Devanagari"
-msgstr "Tiếng Đe-va-na-ga-ri"
+msgstr "Đe-va-na-ga-ri"
 
-#: ../gucharmap/unicode-blocks.h:34 ../gucharmap/unicode-scripts.h:14
+#:../gucharmap/unicode-blocks.h:36 ../gucharmap/unicode-scripts.h:15
 msgid "Bengali"
-msgstr "Tiếng Băng Gan"
+msgstr "Băng Gan"
 
-#: ../gucharmap/unicode-blocks.h:35 ../gucharmap/unicode-scripts.h:30
+#:../gucharmap/unicode-blocks.h:37 ../gucharmap/unicode-scripts.h:34
 msgid "Gurmukhi"
-msgstr "Tiếng Gổ-mu-khi"
+msgstr "Gổ-mu-khi"
 
-#: ../gucharmap/unicode-blocks.h:36 ../gucharmap/unicode-scripts.h:29
+#:../gucharmap/unicode-blocks.h:38 ../gucharmap/unicode-scripts.h:33
 msgid "Gujarati"
-msgstr "Tiếng Gu-gia-ra-ti"
+msgstr "Gu-gia-ra-ti"
 
-#: ../gucharmap/unicode-blocks.h:37 ../gucharmap/unicode-scripts.h:49
+#:../gucharmap/unicode-blocks.h:39 ../gucharmap/unicode-scripts.h:56
 msgid "Oriya"
-msgstr "Tiếng O-ri-a"
+msgstr "O-ri-a"
 
-#: ../gucharmap/unicode-blocks.h:38 ../gucharmap/unicode-scripts.h:58
+#:../gucharmap/unicode-blocks.h:40 ../gucharmap/unicode-scripts.h:66
 msgid "Tamil"
-msgstr "Tiếng Ta-mil "
+msgstr "Ta-mil"
 
-#: ../gucharmap/unicode-blocks.h:39 ../gucharmap/unicode-scripts.h:59
+#:../gucharmap/unicode-blocks.h:41 ../gucharmap/unicode-scripts.h:67
 msgid "Telugu"
-msgstr "Tiếng Te-lu-gu"
+msgstr "Te-lu-gu"
 
-#: ../gucharmap/unicode-blocks.h:40 ../gucharmap/unicode-scripts.h:37
+#:../gucharmap/unicode-blocks.h:42 ../gucharmap/unicode-scripts.h:41
 msgid "Kannada"
-msgstr "Tiếng Kan-na-đa"
+msgstr "Kan-na-đa"
 
-#: ../gucharmap/unicode-blocks.h:41 ../gucharmap/unicode-scripts.h:44
+#:../gucharmap/unicode-blocks.h:43 ../gucharmap/unicode-scripts.h:49
 msgid "Malayalam"
-msgstr "Tiếng Ma-lay-am"
+msgstr "Ma-lay-am"
 
-#: ../gucharmap/unicode-blocks.h:42 ../gucharmap/unicode-scripts.h:53
+#:../gucharmap/unicode-blocks.h:44 ../gucharmap/unicode-scripts.h:60
 msgid "Sinhala"
-msgstr "Tiếng Xin-ha-la"
+msgstr "Xin-ha-la"
 
-#: ../gucharmap/unicode-blocks.h:43 ../gucharmap/unicode-scripts.h:61
+#:../gucharmap/unicode-blocks.h:45 ../gucharmap/unicode-scripts.h:69
 msgid "Thai"
-msgstr "Tiếng Thái "
+msgstr "Thái"
 
-#: ../gucharmap/unicode-blocks.h:44 ../gucharmap/unicode-scripts.h:40
+#:../gucharmap/unicode-blocks.h:46 ../gucharmap/unicode-scripts.h:45
 msgid "Lao"
-msgstr "Tiếng Lào"
+msgstr "Lào"
 
-#: ../gucharmap/unicode-blocks.h:45 ../gucharmap/unicode-scripts.h:62
+#:../gucharmap/unicode-blocks.h:47 ../gucharmap/unicode-scripts.h:70
 msgid "Tibetan"
-msgstr "Tiếng Tây Tạng"
+msgstr "Tây Tạng"
 
-#: ../gucharmap/unicode-blocks.h:46 ../gucharmap/unicode-scripts.h:46
+#:../gucharmap/unicode-blocks.h:48 ../gucharmap/unicode-scripts.h:51
 msgid "Myanmar"
 msgstr "Miến điện"
 
-#: ../gucharmap/unicode-blocks.h:47 ../gucharmap/unicode-scripts.h:26
+#:../gucharmap/unicode-blocks.h:49 ../gucharmap/unicode-scripts.h:29
 msgid "Georgian"
-msgstr "Tiếng Gi-oa-gi-a"
+msgstr "Gi-oa-gi-a"
 
-#: ../gucharmap/unicode-blocks.h:48
+#:../gucharmap/unicode-blocks.h:50
 msgid "Hangul Jamo"
 msgstr "Han-gun gia-mô"
 
-#: ../gucharmap/unicode-blocks.h:49 ../gucharmap/unicode-scripts.h:25
+#:../gucharmap/unicode-blocks.h:51 ../gucharmap/unicode-scripts.h:28
 msgid "Ethiopic"
-msgstr "Thuộc về Ê-ti-ô-pi"
+msgstr "Ê-ti-ô-pi"
 
-#: ../gucharmap/unicode-blocks.h:50 ../gucharmap/unicode-scripts.h:19
+#:../gucharmap/unicode-blocks.h:52
+msgid "Ethiopic Supplement"
+msgstr "Bổ sung Ê-ti-ô-pi"
+
+#:../gucharmap/unicode-blocks.h:53 ../gucharmap/unicode-scripts.h:21
 msgid "Cherokee"
-msgstr "Tiếng Che-rô-ki"
+msgstr "Che-rô-ki"
 
-#: ../gucharmap/unicode-blocks.h:51
+#:../gucharmap/unicode-blocks.h:54
 msgid "Unified Canadian Aboriginal Syllabics"
 msgstr "Âm tiết thổ dân Gia-na-đại thông nhất"
 
-#: ../gucharmap/unicode-blocks.h:52 ../gucharmap/unicode-scripts.h:47
+#:../gucharmap/unicode-blocks.h:55 ../gucharmap/unicode-scripts.h:53
 msgid "Ogham"
-msgstr "Tiếng O-gam"
+msgstr "O-gậm"
 
-#: ../gucharmap/unicode-blocks.h:53 ../gucharmap/unicode-scripts.h:51
+#:../gucharmap/unicode-blocks.h:56 ../gucharmap/unicode-scripts.h:58
 msgid "Runic"
 msgstr "Chữ run"
 
-#: ../gucharmap/unicode-blocks.h:54 ../gucharmap/unicode-scripts.h:55
+#:../gucharmap/unicode-blocks.h:57 ../gucharmap/unicode-scripts.h:63
 msgid "Tagalog"
-msgstr "Tiếng Ta-ga-lọc"
+msgstr "Ta-ga-lọc"
 
-#: ../gucharmap/unicode-blocks.h:55 ../gucharmap/unicode-scripts.h:33
+#:../gucharmap/unicode-blocks.h:58 ../gucharmap/unicode-scripts.h:37
 msgid "Hanunoo"
-msgstr "Tiếng Ha-nu-nu"
+msgstr "Ha-nu-nu"
 
-#: ../gucharmap/unicode-blocks.h:56 ../gucharmap/unicode-scripts.h:17
+#:../gucharmap/unicode-blocks.h:59 ../gucharmap/unicode-scripts.h:19
 msgid "Buhid"
-msgstr "Tiếng Bu-hit "
+msgstr "Bu-hit"
 
-#: ../gucharmap/unicode-blocks.h:57 ../gucharmap/unicode-scripts.h:56
+#:../gucharmap/unicode-blocks.h:60 ../gucharmap/unicode-scripts.h:64
 msgid "Tagbanwa"
-msgstr "Tiếng Tgợ-ban-oua"
+msgstr "Tgợ-ban-oua"
 
-#: ../gucharmap/unicode-blocks.h:58 ../gucharmap/unicode-scripts.h:39
+#:../gucharmap/unicode-blocks.h:61 ../gucharmap/unicode-scripts.h:44
 msgid "Khmer"
-msgstr "Tiếng Căm Bốt"
+msgstr "Căm Bốt"
 
-#: ../gucharmap/unicode-blocks.h:59 ../gucharmap/unicode-scripts.h:45
+#:../gucharmap/unicode-blocks.h:62 ../gucharmap/unicode-scripts.h:50
 msgid "Mongolian"
-msgstr "Tiếng Mông Cổ"
+msgstr "Mông Cổ"
 
-#: ../gucharmap/unicode-blocks.h:60 ../gucharmap/unicode-scripts.h:42
+#:../gucharmap/unicode-blocks.h:63 ../gucharmap/unicode-scripts.h:47
 msgid "Limbu"
-msgstr "Tiếng Lim-bu"
+msgstr "Lim-bu"
 
-#: ../gucharmap/unicode-blocks.h:61 ../gucharmap/unicode-scripts.h:57
+#:../gucharmap/unicode-blocks.h:64 ../gucharmap/unicode-scripts.h:65
 msgid "Tai Le"
-msgstr "Tiếng Tai-le"
+msgstr "Tai-le"
 
-#: ../gucharmap/unicode-blocks.h:62
+#:../gucharmap/unicode-blocks.h:65 ../gucharmap/unicode-scripts.h:52
+msgid "New Tai Lue"
+msgstr "Tai Lue mới"
+
+#:../gucharmap/unicode-blocks.h:66
 msgid "Khmer Symbols"
 msgstr "Ký hiệu Khơ-me"
 
-#: ../gucharmap/unicode-blocks.h:63
+#:../gucharmap/unicode-blocks.h:67 ../gucharmap/unicode-scripts.h:18
+msgid "Buginese"
+msgstr "Bu-gi-ni"
+
+#:../gucharmap/unicode-blocks.h:68
 msgid "Phonetic Extensions"
 msgstr "Mở rộng Ngữ âm"
 
-#: ../gucharmap/unicode-blocks.h:64
+#:../gucharmap/unicode-blocks.h:69
+msgid "Phonetic Extensions Supplement"
+msgstr "Bổ sung Mở rộng Ngữ âm"
+
+#:../gucharmap/unicode-blocks.h:70
+msgid "Combining Diacritical Marks Supplement"
+msgstr "Bổ sung Dấu phụ Kết hợp"
+
+#:../gucharmap/unicode-blocks.h:71
 msgid "Latin Extended Additional"
 msgstr "Latin Mở rộng Bổ sung"
 
-#: ../gucharmap/unicode-blocks.h:65
+#:../gucharmap/unicode-blocks.h:72
 msgid "Greek Extended"
 msgstr "Hy Lạp Mở rộng"
 
-#: ../gucharmap/unicode-blocks.h:66
+#:../gucharmap/unicode-blocks.h:73
 msgid "General Punctuation"
 msgstr "Dấu chấm câu chung"
 
-#: ../gucharmap/unicode-blocks.h:67
+#:../gucharmap/unicode-blocks.h:74
 msgid "Superscripts and Subscripts"
 msgstr "Chữ cao và Chữ thấp"
 
-#: ../gucharmap/unicode-blocks.h:68
+#:../gucharmap/unicode-blocks.h:75
 msgid "Currency Symbols"
 msgstr "Ký hiệu Tiền tệ"
 
-#: ../gucharmap/unicode-blocks.h:69
+#:../gucharmap/unicode-blocks.h:76
 msgid "Combining Diacritical Marks for Symbols"
 msgstr "Dấu phụ kết hợp cho Ký hiệu"
 
-#: ../gucharmap/unicode-blocks.h:70
+#:../gucharmap/unicode-blocks.h:77
 msgid "Letterlike Symbols"
 msgstr "Ký hiệu giống Chữ cái"
 
-#: ../gucharmap/unicode-blocks.h:71
+#:../gucharmap/unicode-blocks.h:78
 msgid "Number Forms"
 msgstr "Kiểu thuộc về số"
 
-#: ../gucharmap/unicode-blocks.h:72
+#:../gucharmap/unicode-blocks.h:79
 msgid "Arrows"
 msgstr "Mũi tên"
 
-#: ../gucharmap/unicode-blocks.h:73
+#:../gucharmap/unicode-blocks.h:80
 msgid "Mathematical Operators"
 msgstr "Toán tử Toán học"
 
-#: ../gucharmap/unicode-blocks.h:74
+#:../gucharmap/unicode-blocks.h:81
 msgid "Miscellaneous Technical"
 msgstr "Kỹ thuật Linh tinh"
 
-#: ../gucharmap/unicode-blocks.h:75
+#:../gucharmap/unicode-blocks.h:82
 msgid "Control Pictures"
 msgstr "Hình điều khiển"
 
-#: ../gucharmap/unicode-blocks.h:76
+#:../gucharmap/unicode-blocks.h:83
 msgid "Optical Character Recognition"
 msgstr "Nhận dạng Ký tự Quang học"
 
-#: ../gucharmap/unicode-blocks.h:77
+#:../gucharmap/unicode-blocks.h:84
 msgid "Enclosed Alphanumerics"
 msgstr "Ký tự chữ số được bao"
 
-#: ../gucharmap/unicode-blocks.h:78
+#:../gucharmap/unicode-blocks.h:85
 msgid "Box Drawing"
 msgstr "Vẽ Ô"
 
-#: ../gucharmap/unicode-blocks.h:79
+#:../gucharmap/unicode-blocks.h:86
 msgid "Block Elements"
 msgstr "Phần tử Khối"
 
-#: ../gucharmap/unicode-blocks.h:80
+#:../gucharmap/unicode-blocks.h:87
 msgid "Geometric Shapes"
 msgstr "Hình Hình học"
 
-#: ../gucharmap/unicode-blocks.h:81
+#:../gucharmap/unicode-blocks.h:88
 msgid "Miscellaneous Symbols"
 msgstr "Ký hiệu Linh tinh"
 
-#: ../gucharmap/unicode-blocks.h:82
+#:../gucharmap/unicode-blocks.h:89
 msgid "Dingbats"
 msgstr "Hình linh tinh"
 
-#: ../gucharmap/unicode-blocks.h:83
+#:../gucharmap/unicode-blocks.h:90
 msgid "Miscellaneous Mathematical Symbols-A"
 msgstr "Ký hiệu Toán học Linh tinh-A"
 
-#: ../gucharmap/unicode-blocks.h:84
+#:../gucharmap/unicode-blocks.h:91
 msgid "Supplemental Arrows-A"
 msgstr "Mũi tên Bổ sung-A"
 
-#: ../gucharmap/unicode-blocks.h:85
+#:../gucharmap/unicode-blocks.h:92
 msgid "Braille Patterns"
 msgstr "Mẫu chữ Bray"
 
-#: ../gucharmap/unicode-blocks.h:86
+#:../gucharmap/unicode-blocks.h:93
 msgid "Supplemental Arrows-B"
 msgstr "Mũi tên Bổ sung-B"
 
-#: ../gucharmap/unicode-blocks.h:87
+#:../gucharmap/unicode-blocks.h:94
 msgid "Miscellaneous Mathematical Symbols-B"
 msgstr "Ký hiệu Toán học Linh tinh-B"
 
-#: ../gucharmap/unicode-blocks.h:88
+#:../gucharmap/unicode-blocks.h:95
 msgid "Supplemental Mathematical Operators"
 msgstr "Toán tử Toán học Bổ sung"
 
-#: ../gucharmap/unicode-blocks.h:89
+#:../gucharmap/unicode-blocks.h:96
 msgid "Miscellaneous Symbols and Arrows"
 msgstr "Mũi tên và Ký hiệu Linh tinh"
 
-#: ../gucharmap/unicode-blocks.h:90
+#:../gucharmap/unicode-blocks.h:97 ../gucharmap/unicode-scripts.h:30
+msgid "Glagolitic"
+msgstr "Gợ-la-gô-li-ti"
+
+#:../gucharmap/unicode-blocks.h:98 ../gucharmap/unicode-scripts.h:23
+msgid "Coptic"
+msgstr "Cot-tịc"
+
+#:../gucharmap/unicode-blocks.h:99
+msgid "Georgian Supplement"
+msgstr "Bổ sung Gi-oa-gi-a"
+
+#:../gucharmap/unicode-blocks.h:100 ../gucharmap/unicode-scripts.h:71
+msgid "Tifinagh"
+msgstr "Ti-phi-nạc"
+
+#:../gucharmap/unicode-blocks.h:101
+msgid "Ethiopic Extended"
+msgstr "Ê-ti-ô-pi đã Mở rộng"
+
+#:../gucharmap/unicode-blocks.h:102
+msgid "Supplemental Punctuation"
+msgstr "Phát âm Bổ sung"
+
+#:../gucharmap/unicode-blocks.h:103
 msgid "CJK Radicals Supplement"
 msgstr "Gốc CJK Bổ sung"
 
-#: ../gucharmap/unicode-blocks.h:91
+#:../gucharmap/unicode-blocks.h:104
 msgid "Kangxi Radicals"
 msgstr "Gốc Cang-xi"
 
-#: ../gucharmap/unicode-blocks.h:92
+#:../gucharmap/unicode-blocks.h:105
 msgid "Ideographic Description Characters"
 msgstr "Ký tự diễn tả thuộc chữ viết ghi ý"
 
-#: ../gucharmap/unicode-blocks.h:93
+#:../gucharmap/unicode-blocks.h:106
 msgid "CJK Symbols and Punctuation"
 msgstr "Ký hiệu và dấu chấm câu CJK"
 
-#: ../gucharmap/unicode-blocks.h:94 ../gucharmap/unicode-scripts.h:35
+#:../gucharmap/unicode-blocks.h:107 ../gucharmap/unicode-scripts.h:39
 msgid "Hiragana"
 msgstr "Hi-ra-ga-na (Nhật)"
 
-#: ../gucharmap/unicode-blocks.h:95 ../gucharmap/unicode-scripts.h:38
+#:../gucharmap/unicode-blocks.h:108 ../gucharmap/unicode-scripts.h:42
 msgid "Katakana"
 msgstr "Ca-ta-ca-na (Nhật)"
 
-#: ../gucharmap/unicode-blocks.h:96 ../gucharmap/unicode-scripts.h:15
+#:../gucharmap/unicode-blocks.h:109 ../gucharmap/unicode-scripts.h:16
 msgid "Bopomofo"
 msgstr "Bo-po-mo-pho"
 
-#: ../gucharmap/unicode-blocks.h:97
+#:../gucharmap/unicode-blocks.h:110
 msgid "Hangul Compatibility Jamo"
 msgstr "Sa-mo tương thích Han-gun"
 
-#: ../gucharmap/unicode-blocks.h:98
+#:../gucharmap/unicode-blocks.h:111
 msgid "Kanbun"
 msgstr "Can-bun"
 
-#: ../gucharmap/unicode-blocks.h:99
+#:../gucharmap/unicode-blocks.h:112
 msgid "Bopomofo Extended"
 msgstr "Bo-po-mo-pho Mở rộng"
 
-#: ../gucharmap/unicode-blocks.h:100
+#:../gucharmap/unicode-blocks.h:113
+msgid "CJK Strokes"
+msgstr "Nét CJK"
+
+#:../gucharmap/unicode-blocks.h:114
 msgid "Katakana Phonetic Extensions"
 msgstr "Mở rộng ngữ âm Ca-ta-ca-na (Nhật)"
 
-#: ../gucharmap/unicode-blocks.h:101
+#:../gucharmap/unicode-blocks.h:115
 msgid "Enclosed CJK Letters and Months"
 msgstr "Chữ CJK được bao và tháng"
 
-#: ../gucharmap/unicode-blocks.h:102
+#:../gucharmap/unicode-blocks.h:116
 msgid "CJK Compatibility"
 msgstr "Tương thích CJK"
 
-#: ../gucharmap/unicode-blocks.h:103
+#:../gucharmap/unicode-blocks.h:117
 msgid "CJK Unified Ideographs Extension A"
 msgstr "Mở rộng A của chữ viết ghi ý thông nhất CJK"
 
-#: ../gucharmap/unicode-blocks.h:104
+#:../gucharmap/unicode-blocks.h:118
 msgid "Yijing Hexagram Symbols"
 msgstr "Ký hiệu hình sáu đường Yi-ching"
 
-#: ../gucharmap/unicode-blocks.h:105
+#:../gucharmap/unicode-blocks.h:119
 msgid "CJK Unified Ideographs"
 msgstr "Chữ viết ghi ý thông nhất CJK"
 
-#: ../gucharmap/unicode-blocks.h:106
+#:../gucharmap/unicode-blocks.h:120
 msgid "Yi Syllables"
 msgstr "Âm tiết Yi"
 
-#: ../gucharmap/unicode-blocks.h:107
+#:../gucharmap/unicode-blocks.h:121
 msgid "Yi Radicals"
 msgstr "Gốc Yi"
 
-#: ../gucharmap/unicode-blocks.h:108
+#:../gucharmap/unicode-blocks.h:122
+msgid "Modifier Tone Letters"
+msgstr "Chữ Sửa đổi Giọng"
+
+#:../gucharmap/unicode-blocks.h:123 ../gucharmap/unicode-scripts.h:61
+msgid "Syloti Nagri"
+msgstr "Sy-lo-ti Na-gợ-ri"
+
+#:../gucharmap/unicode-blocks.h:124
 msgid "Hangul Syllables"
 msgstr "Âm tiết Han-gun"
 
-#: ../gucharmap/unicode-blocks.h:109
+#:../gucharmap/unicode-blocks.h:125
 msgid "High Surrogates"
 msgstr "Thay thế cao"
 
-#: ../gucharmap/unicode-blocks.h:110
+#:../gucharmap/unicode-blocks.h:126
 msgid "High Private Use Surrogates"
 msgstr "Thay thế dùng riêng cao"
 
-#: ../gucharmap/unicode-blocks.h:111
+#:../gucharmap/unicode-blocks.h:127
 msgid "Low Surrogates"
 msgstr "Thay thế thấp"
 
-#: ../gucharmap/unicode-blocks.h:112
+#:../gucharmap/unicode-blocks.h:128
 msgid "Private Use Area"
 msgstr "Vùng dùng riêng"
 
-#: ../gucharmap/unicode-blocks.h:113
+#:../gucharmap/unicode-blocks.h:129
 msgid "CJK Compatibility Ideographs"
 msgstr "Chữ viết ghi ý tương thích CJK"
 
-#: ../gucharmap/unicode-blocks.h:114
+#:../gucharmap/unicode-blocks.h:130
 msgid "Alphabetic Presentation Forms"
 msgstr "Hình dạng trình diễn chữ abc"
 
-#: ../gucharmap/unicode-blocks.h:115
+#:../gucharmap/unicode-blocks.h:131
 msgid "Arabic Presentation Forms-A"
 msgstr "Hình dạng trình diễn A-rập A"
 
-#: ../gucharmap/unicode-blocks.h:116
+#:../gucharmap/unicode-blocks.h:132
 msgid "Variation Selectors"
 msgstr "Bộ chọn biến dạng"
 
-#: ../gucharmap/unicode-blocks.h:117
+#:../gucharmap/unicode-blocks.h:133
+msgid "Vertical Forms"
+msgstr "Kiểu dọc"
+
+#:../gucharmap/unicode-blocks.h:134
 msgid "Combining Half Marks"
 msgstr "Kết hợp nửa dấu"
 
-#: ../gucharmap/unicode-blocks.h:118
+#:../gucharmap/unicode-blocks.h:135
 msgid "CJK Compatibility Forms"
 msgstr "Hình dạng tương thích CJK"
 
-#: ../gucharmap/unicode-blocks.h:119
+#:../gucharmap/unicode-blocks.h:136
 msgid "Small Form Variants"
 msgstr "Biến thế hình dạng nhỏ"
 
-#: ../gucharmap/unicode-blocks.h:120
+#:../gucharmap/unicode-blocks.h:137
 msgid "Arabic Presentation Forms-B"
 msgstr "Hình dạng trình diễn A-rập B"
 
-#: ../gucharmap/unicode-blocks.h:121
+#:../gucharmap/unicode-blocks.h:138
 msgid "Halfwidth and Fullwidth Forms"
 msgstr "Hình dạng nửa rộng và toàn rộng"
 
-#: ../gucharmap/unicode-blocks.h:122
+#:../gucharmap/unicode-blocks.h:139
 msgid "Specials"
 msgstr "Đặc biệt"
 
-#: ../gucharmap/unicode-blocks.h:123
+#:../gucharmap/unicode-blocks.h:140
 msgid "Linear B Syllabary"
 msgstr "Bộ âm tiết tuyến B"
 
-#: ../gucharmap/unicode-blocks.h:124
+#:../gucharmap/unicode-blocks.h:141
 msgid "Linear B Ideograms"
 msgstr "Chữ viết ghi ý tuyến B"
 
-#: ../gucharmap/unicode-blocks.h:125
+#:../gucharmap/unicode-blocks.h:142
 msgid "Aegean Numbers"
 msgstr "Số Aegean"
 
-#: ../gucharmap/unicode-blocks.h:126 ../gucharmap/unicode-scripts.h:48
+#:../gucharmap/unicode-blocks.h:143
+msgid "Ancient Greek Numbers"
+msgstr "Số Hy-lạp Cũ"
+
+#:../gucharmap/unicode-blocks.h:144 ../gucharmap/unicode-scripts.h:54
 msgid "Old Italic"
 msgstr "Nghiêng cũ"
 
-#: ../gucharmap/unicode-blocks.h:127 ../gucharmap/unicode-scripts.h:27
+#:../gucharmap/unicode-blocks.h:145 ../gucharmap/unicode-scripts.h:31
 msgid "Gothic"
 msgstr "Gô-tích"
 
-#: ../gucharmap/unicode-blocks.h:128 ../gucharmap/unicode-scripts.h:63
+#:../gucharmap/unicode-blocks.h:146 ../gucharmap/unicode-scripts.h:72
 msgid "Ugaritic"
-msgstr "Tiếng U-ga-ri"
+msgstr "U-ga-ri"
 
-#: ../gucharmap/unicode-blocks.h:129 ../gucharmap/unicode-scripts.h:23
+#:../gucharmap/unicode-blocks.h:147 ../gucharmap/unicode-scripts.h:55
+msgid "Old Persian"
+msgstr "Pha-di cũ"
+
+#:../gucharmap/unicode-blocks.h:148 ../gucharmap/unicode-scripts.h:26
 msgid "Deseret"
 msgstr "Đe-se-ret"
 
-#: ../gucharmap/unicode-blocks.h:130 ../gucharmap/unicode-scripts.h:52
+#:../gucharmap/unicode-blocks.h:149 ../gucharmap/unicode-scripts.h:59
 msgid "Shavian"
 msgstr "Sa-vi-a"
 
-#: ../gucharmap/unicode-blocks.h:131 ../gucharmap/unicode-scripts.h:50
+#:../gucharmap/unicode-blocks.h:150 ../gucharmap/unicode-scripts.h:57
 msgid "Osmanya"
 msgstr "Ot-ma-ni-a"
 
-#: ../gucharmap/unicode-blocks.h:132
+#:../gucharmap/unicode-blocks.h:151
 msgid "Cypriot Syllabary"
 msgstr "Bộ âm tiết Síp"
 
-#: ../gucharmap/unicode-blocks.h:133
+#:../gucharmap/unicode-blocks.h:152 ../gucharmap/unicode-scripts.h:43
+msgid "Kharoshthi"
+msgstr "Kha-roc-si"
+
+#:../gucharmap/unicode-blocks.h:153
 msgid "Byzantine Musical Symbols"
 msgstr "Ký hiệu Âm nhạc Byzantine"
 
-#: ../gucharmap/unicode-blocks.h:134
+#:../gucharmap/unicode-blocks.h:154
 msgid "Musical Symbols"
 msgstr "Ký hiệu Âm nhạc"
 
-#: ../gucharmap/unicode-blocks.h:135
+#:../gucharmap/unicode-blocks.h:155
+msgid "Ancient Greek Musical Notation"
+msgstr "Cách Ghi Nhạc Hy-lạp Cũ"
+
+#:../gucharmap/unicode-blocks.h:156
 msgid "Tai Xuan Jing Symbols"
 msgstr "Ký hiệu Tai Xuan Jing"
 
-#: ../gucharmap/unicode-blocks.h:136
+#:../gucharmap/unicode-blocks.h:157
 msgid "Mathematical Alphanumeric Symbols"
 msgstr "Ký hiệu chữ số toán học"
 
-#: ../gucharmap/unicode-blocks.h:137
+#:../gucharmap/unicode-blocks.h:158
 msgid "CJK Unified Ideographs Extension B"
 msgstr "Phần mở rộng B chữ viết ghi ý thông nhất CJK"
 
-#: ../gucharmap/unicode-blocks.h:138
+#:../gucharmap/unicode-blocks.h:159
 msgid "CJK Compatibility Ideographs Supplement"
 msgstr "Bổ sung chữ viết ghi ý tương thích CJK"
 
-#: ../gucharmap/unicode-blocks.h:139
+#:../gucharmap/unicode-blocks.h:160
 msgid "Tags"
 msgstr "Thẻ"
 
-#: ../gucharmap/unicode-blocks.h:140
+#:../gucharmap/unicode-blocks.h:161
 msgid "Variation Selectors Supplement"
 msgstr "Bổ sung bộ chọn thay đổi"
 
-#: ../gucharmap/unicode-blocks.h:141
+#:../gucharmap/unicode-blocks.h:162
 msgid "Supplementary Private Use Area-A"
 msgstr "Vùng dùng riêng Bổ sung-A"
 
-#: ../gucharmap/unicode-blocks.h:142
+#:../gucharmap/unicode-blocks.h:163
 msgid "Supplementary Private Use Area-B"
 msgstr "Vùng dùng riêng Bổ sung-B"
 
-#: ../gucharmap/unicode-scripts.h:16
+#:../gucharmap/unicode-scripts.h:17
 msgid "Braille"
 msgstr "Chữ Bray"
 
-#: ../gucharmap/unicode-scripts.h:18
+#:../gucharmap/unicode-scripts.h:20
 msgid "Canadian Aboriginal"
 msgstr "Thổ dân Gia-na-đại"
 
-#: ../gucharmap/unicode-scripts.h:21
+#:../gucharmap/unicode-scripts.h:24
 msgid "Cypriot"
 msgstr "Síp"
 
-#: ../gucharmap/unicode-scripts.h:28
+#:../gucharmap/unicode-scripts.h:32
 msgid "Greek"
-msgstr "Tiếng Hy-lạp"
+msgstr "Hy-lạp"
 
-#: ../gucharmap/unicode-scripts.h:31
+#:../gucharmap/unicode-scripts.h:35
 msgid "Han"
 msgstr "Han"
 
-#: ../gucharmap/unicode-scripts.h:32
+#:../gucharmap/unicode-scripts.h:36
 msgid "Hangul"
 msgstr "Han-gun"
 
-#: ../gucharmap/unicode-scripts.h:36
+#:../gucharmap/unicode-scripts.h:40
 msgid "Inherited"
 msgstr "Đã hưởng"
 
-#: ../gucharmap/unicode-scripts.h:41
+#:../gucharmap/unicode-scripts.h:46
 msgid "Latin"
 msgstr "La-tinh"
 
-#: ../gucharmap/unicode-scripts.h:43
+#:../gucharmap/unicode-scripts.h:48
 msgid "Linear B"
 msgstr "Tuyến B"
 
-#: ../gucharmap/unicode-scripts.h:64
+#:../gucharmap/unicode-scripts.h:73
 msgid "Yi"
 msgstr "Yi"
 
-#: ../gucharmap/gucharmap-block-chapters.c:61
+#:../gucharmap/gucharmap-block-chapters.c:61
 msgid "All"
 msgstr "Tất cả"
 
-#: ../gucharmap/gucharmap-block-chapters.c:79
+#:../gucharmap/gucharmap-block-chapters.c:79
 msgid "Unicode Block"
 msgstr "Khối Unicode"
 
-#: ../gucharmap/gucharmap-script-chapters.c:76
+#:../gucharmap/gucharmap-script-chapters.c:76
 msgid "Script"
 msgstr "Chữ viết"
 
-#: ../gucharmap/gucharmap-search-dialog.c:419
+#:../gucharmap/gucharmap-search-dialog.c:537
 msgid "Information"
 msgstr "Thông tin"
 
-#. follow hig guidelines
-#: ../gucharmap/gucharmap-search-dialog.c:592
+#.follow hig guidelines
+#:../gucharmap/gucharmap-search-dialog.c:716
 msgid "Find"
 msgstr "Tìm"
 
-#: ../gucharmap/gucharmap-search-dialog.c:606
+#:../gucharmap/gucharmap-search-dialog.c:730
 msgid "_Previous"
 msgstr "_Về trước"
 
-#: ../gucharmap/gucharmap-search-dialog.c:613
+#:../gucharmap/gucharmap-search-dialog.c:737
 msgid "_Next"
 msgstr "_Kế"
 
-#: ../gucharmap/gucharmap-search-dialog.c:623
+#:../gucharmap/gucharmap-search-dialog.c:747
 msgid "_Search:"
 msgstr "_Tìm kiếm:"
 
-msgid "Unicode Character Map"
-msgstr "Bản đồ Ký tự Unicode"
-
-msgid "_Bold"
-msgstr "Đậ_m"
-
-msgid "_Italic"
-msgstr "_Nghiêng"
-
-msgid "Clipboard is empty."
-msgstr "Clipboard rỗng."
-
-msgid "There is no selected text."
-msgstr "Chưa chọn văn bản."
-
-msgid "Jump to Unicode Code Point"
-msgstr "Nhảy tới Mã Unicode"
-
-msgid "_Enter hexadecimal Unicode code point:"
-msgstr "_Nhập Mã Unicode dạng thập lục phân:"
-
-msgid "Nothing to search for."
-msgstr "Không có gì để tìm."
-
-msgid "Code _Point..."
-msgstr "_Mã..."
-
-msgid "Character in _Clipboard"
-msgstr "Ký tự trong _Clipboard"
-
-msgid "Back"
-msgstr "Lùi"
-
-msgid "Forward"
-msgstr "Tới"
+#:../gucharmap/gucharmap-search-dialog.c:757
+msgid "Match _whole word"
+msgstr "Khớp t_oàn từ"
