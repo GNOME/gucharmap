@@ -17,7 +17,7 @@
 ## 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
 ##
 
-AM_CFLAGS = $(GTK_CFLAGS) $(GNOME_CFLAGS)
+AM_CFLAGS = $(PANGO_CFLAGS) $(GTK_CFLAGS) $(GNOME_CFLAGS)
 
 localedir = $(datadir)/locale
 AM_CPPFLAGS = -I$(top_srcdir) \
@@ -69,18 +69,14 @@ libgucharmapinclude_HEADERS = gucharmap.h \
 
 bin_PROGRAMS = gucharmap
 gucharmap_SOURCES = main.c
+gucharmap_LDADD = libgucharmap.la @PANGO_LIBS@ @GTK_LIBS@ @GNOME_LIBS@ @POPT_LIBS@
 
 if OS_WIN32
-
-gucharmap_LDADD = gucharmaprc.o libgucharmap.la @GTK_LIBS@ @POPT_LIBS@
-
+gucharmap_LDADD += gucharmaprc.o
 gucharmaprc.o: gucharmaprc.rc
 	windres -i $< -o $@
-
 else
-
-gucharmap_LDADD = libgucharmap.la @GTK_LIBS@ @GNOME_LIBS@ @POPT_LIBS@
-
+gucharmap_LDADD += @GNOME_LIBS@
 endif
 
 gucharmap-marshal.h: $(srcdir)/gucharmap-marshal.list
