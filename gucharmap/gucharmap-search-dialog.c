@@ -65,6 +65,7 @@ struct _GucharmapSearchState
   gint                    curr_index;
   GucharmapDirection      increment;
   gboolean                whole_word;
+  gboolean                annotations;
   gint                    found_index;       /* index of the found character */
   /* true if there are known to be no matches, or there is known to be
    * exactly one match and it has been found */
@@ -81,6 +82,7 @@ struct _GucharmapSearchDialogPrivate
   GucharmapWindow       *guw;
   GtkWidget             *entry;
   GtkWidget             *whole_word_option;
+  GtkWidget             *annotations_option;
   GucharmapSearchState  *search_state;
   GtkWidget             *prev_button;
   GtkWidget             *next_button;
@@ -124,7 +126,8 @@ utf8_strcasestr (const gchar *haystack,
 static gboolean
 matches (GucharmapSearchDialog *search_dialog,
          gunichar               wc,
-         const gchar           *search_string_nfd)
+         const gchar           *search_string_nfd,
+         const gboolean         annotations)
 {
   GucharmapSearchDialogPrivate *priv = GUCHARMAP_SEARCH_DIALOG_GET_PRIVATE (search_dialog);
   const gchar *haystack; 
@@ -143,9 +146,10 @@ matches (GucharmapSearchDialog *search_dialog,
       matched = utf8_strcasestr (haystack_nfd, search_string_nfd, priv->search_state->whole_word) != NULL;
     }
 
-#if ENABLE_UNIHAN
-  if (!matched)
+  if (annotations)
     {
+
+#if ENABLE_UNIHAN
       haystack = gucharmap_get_unicode_kDefinition (wc);
       if (haystack)
 	{
@@ -155,12 +159,11 @@ matches (GucharmapSearchDialog *search_dialog,
 	  matched = utf8_strcasestr (haystack_nfd, search_string_nfd, priv->search_state->whole_word) != NULL;
 	  g_free (haystack_nfd);
 	}
-    }
+
+      if (matched)
+	return TRUE;
 #endif
 
-  /* XXX: other strings */
-  if (!matched)
-    {
       haystack_arr = gucharmap_get_nameslist_equals (wc);
       if (haystack_arr)
 	{
@@ -176,10 +179,10 @@ matches (GucharmapSearchDialog *search_dialog,
 	    }
 	  g_free (haystack_arr);
 	}
-    }
 
-  if (!matched)
-    {
+      if (matched)
+	return TRUE;
+
       haystack_arr = gucharmap_get_nameslist_stars (wc);
       if (haystack_arr)
 	{
@@ -195,10 +198,10 @@ matches (GucharmapSearchDialog *search_dialog,
 	    }
 	  g_free (haystack_arr);
 	}
-    }
 
-  if (!matched)
-    {
+      if (matched)
+	return TRUE;
+
       haystack_arr = gucharmap_get_nameslist_colons (wc);
       if (haystack_arr)
 	{
@@ -214,10 +217,10 @@ matches (GucharmapSearchDialog *search_dialog,
 	    }
 	  g_free (haystack_arr);
 	}
-    }
 
-  if (!matched)
-    {
+      if (matched)
+	return TRUE;
+
       haystack_arr = gucharmap_get_nameslist_pounds (wc);
       if (haystack_arr)
 	{
@@ -233,7 +236,12 @@ matches (GucharmapSearchDialog *search_dialog,
 	    }
 	  g_free (haystack_arr);
 	}
+
+      if (matched)
+	return TRUE;
     }
+
+  /* XXX: other strings */
 
   return matched;
 }
@@ -344,6 +352,7 @@ quick_checks_before (GucharmapSearchState *search_state)
 	}
 
     }
+
   return FALSE;
 }
 
@@ -396,7 +405,7 @@ idle_search (GucharmapSearchDialog *search_dialog)
 	}
 
       /* check for other matches */
-      if (matches (search_dialog, wc, priv->search_state->search_string_nfd))
+      if (matches (search_dialog, wc, priv->search_state->search_string_nfd, priv->search_state->annotations))
         {
           priv->search_state->found_index = priv->search_state->curr_index;
           return FALSE;
@@ -448,6 +457,7 @@ gucharmap_search_state_free (GucharmapSearchState *search_state)
  * @start_index: the starting point within @list
  * @direction: forward or backward
  * @whole_word: %TRUE if it should match whole words
+ * @annotations: %TRUE if it should search in character's annotations
  *
  * Initializes a #GucharmapSearchState to search for the next character in
  * the codepoint list that matches @search_string. Assumes input is valid.
@@ -459,7 +469,8 @@ gucharmap_search_state_new (const GucharmapCodepointList *list,
                             const gchar                  *search_string, 
                             gint                          start_index, 
                             GucharmapDirection            direction, 
-                            gboolean                      whole_word)
+                            gboolean                      whole_word,
+                            gboolean                      annotations)
 {
   GucharmapSearchState *search_state;
   gchar *p, *q, *r;
@@ -476,6 +487,7 @@ gucharmap_search_state_new (const GucharmapCodepointList *list,
 
   search_state->increment = direction;
   search_state->whole_word = whole_word;
+  search_state->annotations = annotations;
   search_state->did_before_checks = FALSE;
 
   search_state->found_index = -1;
@@ -607,14 +619,18 @@ gucharmap_search_dialog_start_search (GucharmapSearchDialog *search_dialog,
   if (priv->search_state == NULL
       || list != priv->search_state->list
       || strcmp (priv->search_state->search_string, gtk_entry_get_text (GTK_ENTRY (priv->entry))) != 0
-      || priv->search_state->whole_word != gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (priv->whole_word_option)))
+      || priv->search_state->whole_word != gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (priv->whole_word_option))
+      || priv->search_state->annotations != gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (priv->annotations_option)) )
     {
       if (priv->search_state)
         gucharmap_search_state_free (priv->search_state);
 
       start_char = gucharmap_table_get_active_character (priv->guw->charmap->chartable);
       start_index = gucharmap_codepoint_list_get_index (list, start_char);
-      priv->search_state = gucharmap_search_state_new (list, gtk_entry_get_text (GTK_ENTRY (priv->entry)), start_index, direction, gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (priv->whole_word_option)));
+      priv->search_state = gucharmap_search_state_new (list, gtk_entry_get_text (GTK_ENTRY (priv->entry)),
+			      start_index, direction,
+			      gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (priv->whole_word_option)),
+			      gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (priv->annotations_option)) );
     }
   else
     {
@@ -757,6 +773,10 @@ gucharmap_search_dialog_init (GucharmapSearchDialog *search_dialog)
   priv->whole_word_option = gtk_check_button_new_with_mnemonic (_("Match _whole word"));
   gtk_widget_show (priv->whole_word_option);
   gtk_box_pack_start (GTK_BOX (GTK_DIALOG (search_dialog)->vbox), priv->whole_word_option, FALSE, FALSE, 0);
+
+  priv->annotations_option = gtk_check_button_new_with_mnemonic (_("Search in character _details"));
+  gtk_widget_show (priv->annotations_option);
+  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (search_dialog)->vbox), priv->annotations_option, FALSE, FALSE, 0);
 
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), priv->entry);
 
