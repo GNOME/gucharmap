@@ -288,10 +288,11 @@ set_details (GucharmapCharmap *charmap,
   gchar *temp;
   const gchar *csp;
   gchar buf[12];
-  guchar ubuf[7];
+  guchar utf8[7];
   gint n, i;
   const gchar **csarr;
   gunichar *ucs;
+  gunichar2 *utf16;
 
   buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (charmap->details));
   gtk_text_buffer_set_text (buffer, "", -1);
@@ -326,32 +327,56 @@ set_details (GucharmapCharmap *charmap,
   /* canonical decomposition */
   conditionally_insert_canonical_decomposition (charmap, buffer, &iter, uc);
 
-  insert_heading (charmap, buffer, &iter, _("Various Useful Representations"));
+  /* representations */
+  if (g_unichar_type(uc) != G_UNICODE_BREAK_SURROGATE)
+    {
+      insert_heading (charmap, buffer, &iter, _("Various Useful Representations"));
 
-  n = g_unichar_to_utf8 (uc, (gchar *)ubuf);
+      n = g_unichar_to_utf8 (uc, (gchar *)utf8);
+      utf16 = g_ucs4_to_utf16 (&uc, 1, NULL, NULL, NULL);
 
-  /* UTF-8 */
-  gstemp = g_string_new (NULL);
-  for (i = 0;  i < n;  i++)
-    g_string_append_printf (gstemp, "0x%2.2X ", ubuf[i]);
-  g_string_erase (gstemp, gstemp->len - 1, -1);
-  insert_vanilla_detail (charmap, buffer, &iter, _("UTF-8:"), gstemp->str);
-  g_string_free (gstemp, TRUE);
+      /* UTF-8 */
+      gstemp = g_string_new (NULL);
+      for (i = 0;  i < n;  i++)
+	g_string_append_printf (gstemp, "0x%2.2X ", utf8[i]);
+      g_string_erase (gstemp, gstemp->len - 1, -1);
+      insert_vanilla_detail (charmap, buffer, &iter, _("UTF-8:"), gstemp->str);
+      g_string_free (gstemp, TRUE);
 
-  /* octal \012\234 UTF-8 */
-  gstemp = g_string_new (NULL);
-  for (i = 0;  i < n;  i++)
-    g_string_append_printf (gstemp, "\\%3.3o", ubuf[i]);
-  insert_vanilla_detail (charmap, buffer, &iter, 
-                         _("Octal escaped UTF-8:"), gstemp->str);
-  g_string_free (gstemp, TRUE);
+      /* UTF-16 */
+      gstemp = g_string_new (NULL);
+      g_string_append_printf (gstemp, "0x%4.4X", utf16[0]);
+      if (utf16[0] != '\0' && utf16[1] != '\0')
+	g_string_append_printf (gstemp, " 0x%4.4X", utf16[1]);
+      insert_vanilla_detail (charmap, buffer, &iter, _("UTF-16:"), gstemp->str);
+      g_string_free (gstemp, TRUE);
 
-  /* entity reference */
-  temp = g_strdup_printf ("&#%d;", uc);
-  insert_vanilla_detail (charmap, buffer, &iter, 
-                         _("Decimal entity reference:"), temp);
-  g_free (temp);
+      /* an empty line */
+      gtk_text_buffer_insert (buffer, &iter, "\n", -1);
 
+      /* C octal \012\234 */
+      gstemp = g_string_new (NULL);
+      for (i = 0;  i < n;  i++)
+	g_string_append_printf (gstemp, "\\%3.3o", utf8[i]);
+      insert_vanilla_detail (charmap, buffer, &iter, 
+			     _("C octal escaped UTF-8:"), gstemp->str);
+      g_string_free (gstemp, TRUE);
+
+      /* XML decimal entity */
+      if (0x0001 <= uc && uc <= 0xD7FF
+	  || 0xE000 <= uc && uc <= 0xFFFD
+	  || 0x10000 <= uc && uc <= 0x10FFFF)
+	{
+	  temp = g_strdup_printf ("&#%d;", uc);
+	  insert_vanilla_detail (charmap, buffer, &iter, 
+				 _("XML decimal entity:"), temp);
+	  g_free (temp);
+	}
+
+      g_free(utf16);
+    }
+
+  /* annotations */
   if (_gucharmap_unicode_has_nameslist_entry (uc))
     {
       insert_heading (charmap, buffer, &iter, 
