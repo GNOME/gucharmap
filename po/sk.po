@@ -1,8 +1,8 @@
 # Slovak translations for gucharmap package
 # Slovenské preklady pre balík gucharmap.
-# Copyright (C) 2003, 2004, 2005 Free Software Foundation, Inc.
+# Copyright (C) 2003, 2004, 2005, 2006 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gucharmap package.
-# Marcel Telka <marcel@telka.sk>, 2003, 2004, 2005.
+# Marcel Telka <marcel@telka.sk>, 2003, 2004, 2005, 2006.
 #
 # $Id$
 #
@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-30 20:47+0100\n"
-"PO-Revision-Date: 2005-11-30 20:48+0100\n"
+"POT-Creation-Date: 2006-01-21 23:01+0100\n"
+"PO-Revision-Date: 2006-11-21 23:02+0100\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../gucharmap.desktop.in.h:1 ../gucharmap/gucharmap-window.c:344
-#: ../gucharmap/gucharmap-window.c:839
+#: ../gucharmap/gucharmap-window.c:841
 msgid "Character Map"
 msgstr "Mapa znakov"
 
@@ -148,7 +148,7 @@ msgid "Unknown character, unable to identify."
 msgstr "Neznámy znak, nepodarilo sa identifikovať."
 
 #: ../gucharmap/gucharmap-table.c:1513
-#: ../gucharmap/gucharmap-search-dialog.c:583
+#: ../gucharmap/gucharmap-search-dialog.c:595
 msgid "Not found."
 msgstr "Nenájdené."
 
@@ -320,91 +320,91 @@ msgstr "Marcel Telka <marcel@telka.sk>"
 msgid "gucharmap"
 msgstr "gucharmap"
 
-#: ../gucharmap/gucharmap-window.c:458
+#: ../gucharmap/gucharmap-window.c:460
 msgid "_File"
 msgstr "_Súbor"
 
-#: ../gucharmap/gucharmap-window.c:459
+#: ../gucharmap/gucharmap-window.c:461
 msgid "_View"
 msgstr "_Zobraziť"
 
-#: ../gucharmap/gucharmap-window.c:460
+#: ../gucharmap/gucharmap-window.c:462
 msgid "_Search"
 msgstr "_Hľadať"
 
-#: ../gucharmap/gucharmap-window.c:461
+#: ../gucharmap/gucharmap-window.c:463
 msgid "_Go"
 msgstr "_Prejsť na"
 
-#: ../gucharmap/gucharmap-window.c:462
+#: ../gucharmap/gucharmap-window.c:464
 msgid "_Help"
 msgstr "_Pomocník"
 
-#: ../gucharmap/gucharmap-window.c:464
+#: ../gucharmap/gucharmap-window.c:466
 msgid "_Quit"
 msgstr "_Koniec"
 
-#: ../gucharmap/gucharmap-window.c:467
+#: ../gucharmap/gucharmap-window.c:469
 msgid "Zoom _In"
 msgstr "Zväčš_it"
 
-#: ../gucharmap/gucharmap-window.c:469
+#: ../gucharmap/gucharmap-window.c:471
 msgid "Zoom _Out"
 msgstr "Zm_enšiť"
 
-#: ../gucharmap/gucharmap-window.c:471
+#: ../gucharmap/gucharmap-window.c:473
 msgid "_Normal Size"
 msgstr "_Normálna veľkosť"
 
-#: ../gucharmap/gucharmap-window.c:474
+#: ../gucharmap/gucharmap-window.c:476
 msgid "_Find..."
 msgstr "_Nájsť..."
 
-#: ../gucharmap/gucharmap-window.c:476
+#: ../gucharmap/gucharmap-window.c:478
 msgid "Find _Next"
 msgstr "Nájsť _nasledujúce"
 
-#: ../gucharmap/gucharmap-window.c:478
+#: ../gucharmap/gucharmap-window.c:480
 msgid "Find _Previous"
 msgstr "Nájsť _predchádzajúce"
 
-#: ../gucharmap/gucharmap-window.c:481
+#: ../gucharmap/gucharmap-window.c:483
 msgid "_Next Character"
 msgstr "_Nasledujúci znak"
 
-#: ../gucharmap/gucharmap-window.c:483
+#: ../gucharmap/gucharmap-window.c:485
 msgid "_Previous Character"
 msgstr "_Predchádzajúci znak"
 
-#: ../gucharmap/gucharmap-window.c:485
+#: ../gucharmap/gucharmap-window.c:487
 msgid "Next Script"
 msgstr "Nasledujúce písmo"
 
-#: ../gucharmap/gucharmap-window.c:487
+#: ../gucharmap/gucharmap-window.c:489
 msgid "Previous Script"
 msgstr "Predchádzajúce písmo"
 
-#: ../gucharmap/gucharmap-window.c:491
+#: ../gucharmap/gucharmap-window.c:493
 msgid "_Contents"
 msgstr "_Obsah"
 
-#: ../gucharmap/gucharmap-window.c:494
+#: ../gucharmap/gucharmap-window.c:496
 msgid "_About"
 msgstr "O _programe"
 
-#: ../gucharmap/gucharmap-window.c:500
+#: ../gucharmap/gucharmap-window.c:502
 msgid "By _Script"
 msgstr "Podľa _písma"
 
-#: ../gucharmap/gucharmap-window.c:502
+#: ../gucharmap/gucharmap-window.c:504
 msgid "By _Unicode Block"
 msgstr "Podľa blokov _Unicode"
 
-#: ../gucharmap/gucharmap-window.c:697
+#: ../gucharmap/gucharmap-window.c:699
 msgid "_Text to copy:"
 msgstr "_Text na kopírovanie:"
 
-#: ../gucharmap/gucharmap-window.c:718
+#: ../gucharmap/gucharmap-window.c:720
 msgid "Copy to the clipboard."
 msgstr "Kopírovať do schránky."
 
@@ -1044,27 +1044,31 @@ msgstr "Blok Unicode"
 msgid "Script"
 msgstr "Písmo"
 
-#: ../gucharmap/gucharmap-search-dialog.c:537
+#: ../gucharmap/gucharmap-search-dialog.c:549
 msgid "Information"
 msgstr "Informácie"
 
 #. follow hig guidelines
-#: ../gucharmap/gucharmap-search-dialog.c:716
+#: ../gucharmap/gucharmap-search-dialog.c:732
 msgid "Find"
 msgstr "Nájsť"
 
-#: ../gucharmap/gucharmap-search-dialog.c:730
+#: ../gucharmap/gucharmap-search-dialog.c:746
 msgid "_Previous"
 msgstr "_Predchádzajúce"
 
-#: ../gucharmap/gucharmap-search-dialog.c:737
+#: ../gucharmap/gucharmap-search-dialog.c:753
 msgid "_Next"
 msgstr "_Nasledujúce"
 
-#: ../gucharmap/gucharmap-search-dialog.c:747
+#: ../gucharmap/gucharmap-search-dialog.c:763
 msgid "_Search:"
 msgstr "_Hľadať:"
 
-#: ../gucharmap/gucharmap-search-dialog.c:757
+#: ../gucharmap/gucharmap-search-dialog.c:773
 msgid "Match _whole word"
 msgstr "Zhoda _celého slova"
+
+#: ../gucharmap/gucharmap-search-dialog.c:777
+msgid "Search in character _details"
+msgstr "Vyhľadávať v po_drobnostiach znaku"
