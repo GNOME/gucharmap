@@ -335,8 +335,8 @@ help_about (GtkAction       *action,
     };	  
   const gchar *translator_credits;
 
-  translator_credits = _("translator_credits");
-  if (strcmp (translator_credits, "translator_credits") == 0)
+  translator_credits = _("translator-credits");
+  if (strcmp (translator_credits, "translator-credits") == 0)
     translator_credits = NULL;
 
   gtk_show_about_dialog (GTK_WINDOW (guw),
