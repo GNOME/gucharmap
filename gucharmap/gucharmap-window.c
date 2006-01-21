@@ -356,6 +356,7 @@ prev_character (GtkAction       *action,
                 GucharmapWindow *guw)
 {
   gint index = guw->charmap->chartable->active_cell;
+  gint start = index;
   gunichar wc;
 
   do
@@ -367,7 +368,7 @@ prev_character (GtkAction       *action,
 
       wc = gucharmap_codepoint_list_get_char (guw->charmap->chartable->codepoint_list, index);
     }
-  while (!gucharmap_unichar_isdefined (wc) || !gucharmap_unichar_validate (wc));
+  while ((!gucharmap_unichar_isdefined (wc) || !gucharmap_unichar_validate (wc)) && index != start);
 
   gucharmap_table_set_active_character (guw->charmap->chartable, wc);
 }
@@ -377,6 +378,7 @@ next_character (GtkAction       *action,
                 GucharmapWindow *guw)
 {
   gint index = guw->charmap->chartable->active_cell;
+  gint start = index;
   gunichar wc;
 
   do
@@ -388,7 +390,7 @@ next_character (GtkAction       *action,
 
       wc = gucharmap_codepoint_list_get_char (guw->charmap->chartable->codepoint_list, index);
     }
-  while (!gucharmap_unichar_isdefined (wc) || !gucharmap_unichar_validate (wc));
+  while ((!gucharmap_unichar_isdefined (wc) || !gucharmap_unichar_validate (wc)) && index != start);
 
   gucharmap_table_set_active_character (guw->charmap->chartable, wc);
 }
