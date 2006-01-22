@@ -1,14 +1,14 @@
 # Norwegian translation of gucharmap (bokmål dialect).
-# Copyright (C) 2003-2004, 2005 Free Software Foundation, Inc.
-# Kjartan Maraas <kmaraas@gnome.org>, 2003-2005.
+# Copyright (C) 2003-2005 Free Software Foundation, Inc.
+# Kjartan Maraas <kmaraas@gnome.org>, 2003-2006.
 # Terance Edward Sola <terance@lyse.net>, 2005.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap 1.4.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-03 13:09+0100\n"
-"PO-Revision-Date: 2005-12-03 13:12+0100\n"
+"POT-Creation-Date: 2006-01-22 20:23+0100\n"
+"PO-Revision-Date: 2006-01-22 20:24+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmal <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8-bit\n"
 
 #: ../gucharmap.desktop.in.h:1 ../gucharmap/gucharmap-window.c:344
-#: ../gucharmap/gucharmap-window.c:839
+#: ../gucharmap/gucharmap-window.c:841
 msgid "Character Map"
 msgstr "Tegnkart"
 
@@ -28,96 +28,100 @@ msgstr "Sett inn spesielle tegn i dokumenter"
 msgid "Canonical decomposition:"
 msgstr "Kanonisk dekomposisjon:"
 
-#: ../gucharmap/gucharmap-charmap.c:306 ../gucharmap/gucharmap-table.c:294
+#: ../gucharmap/gucharmap-charmap.c:307 ../gucharmap/gucharmap-table.c:294
 msgid "[not a printable character]"
 msgstr "[tegnet kan ikke vises]"
 
-#: ../gucharmap/gucharmap-charmap.c:320
+#: ../gucharmap/gucharmap-charmap.c:321
 msgid "General Character Properties"
 msgstr "Generelle egenskaper for tegn"
 
 #. character category
-#: ../gucharmap/gucharmap-charmap.c:323
+#: ../gucharmap/gucharmap-charmap.c:324
 msgid "Unicode category:"
 msgstr "Unicode-kategori:"
 
-#: ../gucharmap/gucharmap-charmap.c:329
+#: ../gucharmap/gucharmap-charmap.c:333
 msgid "Various Useful Representations"
 msgstr "Forskjellige nyttige representasjoner"
 
-#: ../gucharmap/gucharmap-charmap.c:338
+#: ../gucharmap/gucharmap-charmap.c:343
 msgid "UTF-8:"
 msgstr "UTF-8:"
 
-#: ../gucharmap/gucharmap-charmap.c:346
-msgid "Octal escaped UTF-8:"
-msgstr "Oktalbeskyttet UTF-8:"
+#: ../gucharmap/gucharmap-charmap.c:351
+msgid "UTF-16:"
+msgstr "UTF-16:"
 
-#: ../gucharmap/gucharmap-charmap.c:352
-msgid "Decimal entity reference:"
-msgstr "Entitetsreferanse i desimaltall:"
+#: ../gucharmap/gucharmap-charmap.c:362
+msgid "C octal escaped UTF-8:"
+msgstr "Oktalbeskyttet UTF-8 for C:"
 
-#: ../gucharmap/gucharmap-charmap.c:358
+#: ../gucharmap/gucharmap-charmap.c:372
+msgid "XML decimal entity:"
+msgstr "Entitetsreferanse i desimaltall for XML:"
+
+#: ../gucharmap/gucharmap-charmap.c:383
 msgid "Annotations and Cross References"
 msgstr "Annotasjoner og kryssreferanser"
 
-#: ../gucharmap/gucharmap-charmap.c:365
+#: ../gucharmap/gucharmap-charmap.c:390
 msgid "Alias names:"
 msgstr "Navn på alias:"
 
-#: ../gucharmap/gucharmap-charmap.c:374
+#: ../gucharmap/gucharmap-charmap.c:399
 msgid "Notes:"
 msgstr "Merknader:"
 
-#: ../gucharmap/gucharmap-charmap.c:383
+#: ../gucharmap/gucharmap-charmap.c:408
 msgid "See also:"
 msgstr "Se også:"
 
-#: ../gucharmap/gucharmap-charmap.c:392
+#: ../gucharmap/gucharmap-charmap.c:417
 msgid "Approximate equivalents:"
 msgstr "Tilnærmede ekvivalenter:"
 
-#: ../gucharmap/gucharmap-charmap.c:401
+#: ../gucharmap/gucharmap-charmap.c:426
 msgid "Equivalents:"
 msgstr "Ekvivalenter:"
 
-#: ../gucharmap/gucharmap-charmap.c:417
+#: ../gucharmap/gucharmap-charmap.c:442
 msgid "CJK Ideograph Information"
 msgstr "KJK informasjon for ordtegn"
 
-#: ../gucharmap/gucharmap-charmap.c:422
+#: ../gucharmap/gucharmap-charmap.c:447
 msgid "Definition in English:"
 msgstr "Engelsk definisjon:"
 
-#: ../gucharmap/gucharmap-charmap.c:427
+#: ../gucharmap/gucharmap-charmap.c:452
 msgid "Mandarin Pronunciation:"
 msgstr "Mandarin uttale:"
 
-#: ../gucharmap/gucharmap-charmap.c:432
+#: ../gucharmap/gucharmap-charmap.c:457
 msgid "Cantonese Pronunciation:"
 msgstr "Kantonesisk uttale:"
 
-#: ../gucharmap/gucharmap-charmap.c:437
+#: ../gucharmap/gucharmap-charmap.c:462
 msgid "Japanese On Pronunciation:"
 msgstr "Japansk On-uttale:"
 
-#: ../gucharmap/gucharmap-charmap.c:442
+#: ../gucharmap/gucharmap-charmap.c:467
 msgid "Japanese Kun Pronunciation:"
 msgstr "Japansk Kun-uttale:"
 
-#: ../gucharmap/gucharmap-charmap.c:447
+#: ../gucharmap/gucharmap-charmap.c:472
 msgid "Tang Pronunciation:"
 msgstr "Tang-uttale:"
 
-#: ../gucharmap/gucharmap-charmap.c:452
+#: ../gucharmap/gucharmap-charmap.c:477
 msgid "Korean Pronunciation:"
 msgstr "Koreansk uttale:"
 
-#: ../gucharmap/gucharmap-charmap.c:753
+#: ../gucharmap/gucharmap-charmap.c:778
 msgid "Characte_r Table"
 msgstr "_Tegntabell"
 
-#: ../gucharmap/gucharmap-charmap.c:756
+#: ../gucharmap/gucharmap-charmap.c:781
 msgid "Character _Details"
 msgstr "_Detaljer om tegn"
 
@@ -145,7 +149,7 @@ msgid "Unknown character, unable to identify."
 msgstr "Ukjent tegn. Kan ikke identifiseres."
 
 #: ../gucharmap/gucharmap-table.c:1513
-#: ../gucharmap/gucharmap-search-dialog.c:583
+#: ../gucharmap/gucharmap-search-dialog.c:595
 msgid "Not found."
 msgstr "Ikke funnet."
 
@@ -317,91 +321,91 @@ msgstr "Kjartan Maraas <kmaraas@gnome.org>"
 msgid "gucharmap"
 msgstr "gucharmap"
 
-#: ../gucharmap/gucharmap-window.c:458
+#: ../gucharmap/gucharmap-window.c:460
 msgid "_File"
 msgstr "_Fil"
 
-#: ../gucharmap/gucharmap-window.c:459
+#: ../gucharmap/gucharmap-window.c:461
 msgid "_View"
 msgstr "_Vis"
 
-#: ../gucharmap/gucharmap-window.c:460
+#: ../gucharmap/gucharmap-window.c:462
 msgid "_Search"
 msgstr "_Søk"
 
-#: ../gucharmap/gucharmap-window.c:461
+#: ../gucharmap/gucharmap-window.c:463
 msgid "_Go"
 msgstr "_Gå til"
 
-#: ../gucharmap/gucharmap-window.c:462
+#: ../gucharmap/gucharmap-window.c:464
 msgid "_Help"
 msgstr "_Hjelp"
 
-#: ../gucharmap/gucharmap-window.c:464
+#: ../gucharmap/gucharmap-window.c:466
 msgid "_Quit"
 msgstr "A_vslutt"
 
-#: ../gucharmap/gucharmap-window.c:467
+#: ../gucharmap/gucharmap-window.c:469
 msgid "Zoom _In"
 msgstr "Zoom _inn"
 
-#: ../gucharmap/gucharmap-window.c:469
+#: ../gucharmap/gucharmap-window.c:471
 msgid "Zoom _Out"
 msgstr "Zoom _ut"
 
-#: ../gucharmap/gucharmap-window.c:471
+#: ../gucharmap/gucharmap-window.c:473
 msgid "_Normal Size"
 msgstr "_Normal størrelse"
 
-#: ../gucharmap/gucharmap-window.c:474
+#: ../gucharmap/gucharmap-window.c:476
 msgid "_Find..."
 msgstr "_Finn..."
 
-#: ../gucharmap/gucharmap-window.c:476
+#: ../gucharmap/gucharmap-window.c:478
 msgid "Find _Next"
 msgstr "Finn _neste"
 
-#: ../gucharmap/gucharmap-window.c:478
+#: ../gucharmap/gucharmap-window.c:480
 msgid "Find _Previous"
 msgstr "Finn _forrige"
 
-#: ../gucharmap/gucharmap-window.c:481
+#: ../gucharmap/gucharmap-window.c:483
 msgid "_Next Character"
 msgstr "_Neste tegn"
 
-#: ../gucharmap/gucharmap-window.c:483
+#: ../gucharmap/gucharmap-window.c:485
 msgid "_Previous Character"
 msgstr "_Forrige tegn"
 
-#: ../gucharmap/gucharmap-window.c:485
+#: ../gucharmap/gucharmap-window.c:487
 msgid "Next Script"
 msgstr "Neste skript"
 
-#: ../gucharmap/gucharmap-window.c:487
+#: ../gucharmap/gucharmap-window.c:489
 msgid "Previous Script"
 msgstr "Forrige skript"
 
-#: ../gucharmap/gucharmap-window.c:491
+#: ../gucharmap/gucharmap-window.c:493
 msgid "_Contents"
 msgstr "_Innhold"
 
-#: ../gucharmap/gucharmap-window.c:494
+#: ../gucharmap/gucharmap-window.c:496
 msgid "_About"
 msgstr "_Om"
 
-#: ../gucharmap/gucharmap-window.c:500
+#: ../gucharmap/gucharmap-window.c:502
 msgid "By _Script"
 msgstr "Etter _skript"
 
-#: ../gucharmap/gucharmap-window.c:502
+#: ../gucharmap/gucharmap-window.c:504
 msgid "By _Unicode Block"
 msgstr "Etter Unicode-blokk"
 
-#: ../gucharmap/gucharmap-window.c:697
+#: ../gucharmap/gucharmap-window.c:699
 msgid "_Text to copy:"
 msgstr "_Tekst som skal kopieres:"
 
-#: ../gucharmap/gucharmap-window.c:718
+#: ../gucharmap/gucharmap-window.c:720
 msgid "Copy to the clipboard."
 msgstr "Kopier til utklippstavlen."
 
@@ -1042,27 +1046,31 @@ msgstr "Unicode-blokk"
 msgid "Script"
 msgstr "Skript"
 
-#: ../gucharmap/gucharmap-search-dialog.c:537
+#: ../gucharmap/gucharmap-search-dialog.c:549
 msgid "Information"
 msgstr "Informasjon"
 
 #. follow hig guidelines
-#: ../gucharmap/gucharmap-search-dialog.c:716
+#: ../gucharmap/gucharmap-search-dialog.c:732
 msgid "Find"
 msgstr "Finn"
 
-#: ../gucharmap/gucharmap-search-dialog.c:730
+#: ../gucharmap/gucharmap-search-dialog.c:746
 msgid "_Previous"
 msgstr "_Forrige"
 
-#: ../gucharmap/gucharmap-search-dialog.c:737
+#: ../gucharmap/gucharmap-search-dialog.c:753
 msgid "_Next"
 msgstr "_Neste"
 
-#: ../gucharmap/gucharmap-search-dialog.c:747
+#: ../gucharmap/gucharmap-search-dialog.c:763
 msgid "_Search:"
 msgstr "_Søk:"
 
-#: ../gucharmap/gucharmap-search-dialog.c:757
+#: ../gucharmap/gucharmap-search-dialog.c:773
 msgid "Match _whole word"
 msgstr "Treff på _hele ord"
+
+#: ../gucharmap/gucharmap-search-dialog.c:777
+msgid "Search in character _details"
+msgstr "Søk i _detaljer om tegn"
