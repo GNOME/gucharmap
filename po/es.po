@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-06 01:38+0100\n"
-"PO-Revision-Date: 2005-12-06 01:39+0100\n"
+"POT-Creation-Date: 2006-01-22 02:51+0100\n"
+"PO-Revision-Date: 2006-01-22 02:52+0100\n"
 "Last-Translator: \n"
 "Language-Team:  <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #: ../gucharmap.desktop.in.h:1 ../gucharmap/gucharmap-window.c:344
-#: ../gucharmap/gucharmap-window.c:839
+#: ../gucharmap/gucharmap-window.c:841
 msgid "Character Map"
 msgstr "Mapa de caracteres"
 
@@ -32,96 +32,100 @@ msgstr "Inserte caracteres especiales en los documentos"
 msgid "Canonical decomposition:"
 msgstr "Descomposición canónica:"
 
-#: ../gucharmap/gucharmap-charmap.c:306 ../gucharmap/gucharmap-table.c:294
+#: ../gucharmap/gucharmap-charmap.c:307 ../gucharmap/gucharmap-table.c:294
 msgid "[not a printable character]"
 msgstr "[no es un carácter imprimible]"
 
-#: ../gucharmap/gucharmap-charmap.c:320
+#: ../gucharmap/gucharmap-charmap.c:321
 msgid "General Character Properties"
 msgstr "Propiedades generales del carácter"
 
 #. character category
-#: ../gucharmap/gucharmap-charmap.c:323
+#: ../gucharmap/gucharmap-charmap.c:324
 msgid "Unicode category:"
 msgstr "Categoría de Unicode:"
 
-#: ../gucharmap/gucharmap-charmap.c:329
+#: ../gucharmap/gucharmap-charmap.c:333
 msgid "Various Useful Representations"
 msgstr "Varias representaciones útiles"
 
-#: ../gucharmap/gucharmap-charmap.c:338
+#: ../gucharmap/gucharmap-charmap.c:343
 msgid "UTF-8:"
 msgstr "UTF-8:"
 
-#: ../gucharmap/gucharmap-charmap.c:346
-msgid "Octal escaped UTF-8:"
-msgstr "UTF-8 octal escapado:"
+#: ../gucharmap/gucharmap-charmap.c:351
+msgid "UTF-16:"
+msgstr "UTF-16:"
 
-#: ../gucharmap/gucharmap-charmap.c:352
-msgid "Decimal entity reference:"
-msgstr "Referencia decimal de la entidad:"
+#: ../gucharmap/gucharmap-charmap.c:362
+msgid "C octal escaped UTF-8:"
+msgstr "C octal escapado UTF-8:"
 
-#: ../gucharmap/gucharmap-charmap.c:358
+#: ../gucharmap/gucharmap-charmap.c:372
+msgid "XML decimal entity:"
+msgstr "Entidad decimal XML:"
+
+#: ../gucharmap/gucharmap-charmap.c:383
 msgid "Annotations and Cross References"
 msgstr "Anotaciones y referencias cruzadas"
 
-#: ../gucharmap/gucharmap-charmap.c:365
+#: ../gucharmap/gucharmap-charmap.c:390
 msgid "Alias names:"
 msgstr "Nombres de los alias:"
 
-#: ../gucharmap/gucharmap-charmap.c:374
+#: ../gucharmap/gucharmap-charmap.c:399
 msgid "Notes:"
 msgstr "Anotaciones:"
 
-#: ../gucharmap/gucharmap-charmap.c:383
+#: ../gucharmap/gucharmap-charmap.c:408
 msgid "See also:"
 msgstr "Vea también:"
 
-#: ../gucharmap/gucharmap-charmap.c:392
+#: ../gucharmap/gucharmap-charmap.c:417
 msgid "Approximate equivalents:"
 msgstr "Equivalencias aproximadas:"
 
-#: ../gucharmap/gucharmap-charmap.c:401
+#: ../gucharmap/gucharmap-charmap.c:426
 msgid "Equivalents:"
 msgstr "Equivalencias:"
 
-#: ../gucharmap/gucharmap-charmap.c:417
+#: ../gucharmap/gucharmap-charmap.c:442
 msgid "CJK Ideograph Information"
 msgstr "CJK, Información ideográfica"
 
-#: ../gucharmap/gucharmap-charmap.c:422
+#: ../gucharmap/gucharmap-charmap.c:447
 msgid "Definition in English:"
 msgstr "Definición en inglés:"
 
-#: ../gucharmap/gucharmap-charmap.c:427
+#: ../gucharmap/gucharmap-charmap.c:452
 msgid "Mandarin Pronunciation:"
 msgstr "Pronunciación mandarín:"
 
-#: ../gucharmap/gucharmap-charmap.c:432
+#: ../gucharmap/gucharmap-charmap.c:457
 msgid "Cantonese Pronunciation:"
 msgstr "Pronunciación cantonesa:"
 
-#: ../gucharmap/gucharmap-charmap.c:437
+#: ../gucharmap/gucharmap-charmap.c:462
 msgid "Japanese On Pronunciation:"
 msgstr "Pronunciación japonesa On:"
 
-#: ../gucharmap/gucharmap-charmap.c:442
+#: ../gucharmap/gucharmap-charmap.c:467
 msgid "Japanese Kun Pronunciation:"
 msgstr "Pronunciación japonesa Kun:"
 
-#: ../gucharmap/gucharmap-charmap.c:447
+#: ../gucharmap/gucharmap-charmap.c:472
 msgid "Tang Pronunciation:"
 msgstr "Pronunciación Tang:"
 
-#: ../gucharmap/gucharmap-charmap.c:452
+#: ../gucharmap/gucharmap-charmap.c:477
 msgid "Korean Pronunciation:"
 msgstr "Pronunciación coreana:"
 
-#: ../gucharmap/gucharmap-charmap.c:753
+#: ../gucharmap/gucharmap-charmap.c:778
 msgid "Characte_r Table"
 msgstr "Tabla de caracte_res"
 
-#: ../gucharmap/gucharmap-charmap.c:756
+#: ../gucharmap/gucharmap-charmap.c:781
 msgid "Character _Details"
 msgstr "_Detalles del carácter"
 
@@ -149,7 +153,7 @@ msgid "Unknown character, unable to identify."
 msgstr "Caracter desconocido, imposible identificarlo."
 
 #: ../gucharmap/gucharmap-table.c:1513
-#: ../gucharmap/gucharmap-search-dialog.c:583
+#: ../gucharmap/gucharmap-search-dialog.c:595
 msgid "Not found."
 msgstr "No encontrado."
 
@@ -324,91 +328,91 @@ msgstr ""
 msgid "gucharmap"
 msgstr "gucharmap"
 
-#: ../gucharmap/gucharmap-window.c:458
+#: ../gucharmap/gucharmap-window.c:460
 msgid "_File"
 msgstr "_Archivo"
 
-#: ../gucharmap/gucharmap-window.c:459
+#: ../gucharmap/gucharmap-window.c:461
 msgid "_View"
 msgstr "_Ver"
 
-#: ../gucharmap/gucharmap-window.c:460
+#: ../gucharmap/gucharmap-window.c:462
 msgid "_Search"
 msgstr "Bu_scar"
 
-#: ../gucharmap/gucharmap-window.c:461
+#: ../gucharmap/gucharmap-window.c:463
 msgid "_Go"
 msgstr "_Ir a"
 
-#: ../gucharmap/gucharmap-window.c:462
+#: ../gucharmap/gucharmap-window.c:464
 msgid "_Help"
 msgstr "A_yuda"
 
-#: ../gucharmap/gucharmap-window.c:464
+#: ../gucharmap/gucharmap-window.c:466
 msgid "_Quit"
 msgstr "_Salir"
 
-#: ../gucharmap/gucharmap-window.c:467
+#: ../gucharmap/gucharmap-window.c:469
 msgid "Zoom _In"
 msgstr "Am_pliar"
 
-#: ../gucharmap/gucharmap-window.c:469
+#: ../gucharmap/gucharmap-window.c:471
 msgid "Zoom _Out"
 msgstr "_Reducir"
 
-#: ../gucharmap/gucharmap-window.c:471
+#: ../gucharmap/gucharmap-window.c:473
 msgid "_Normal Size"
 msgstr "Tamaño _normal"
 
-#: ../gucharmap/gucharmap-window.c:474
+#: ../gucharmap/gucharmap-window.c:476
 msgid "_Find..."
 msgstr "_Buscar..."
 
-#: ../gucharmap/gucharmap-window.c:476
+#: ../gucharmap/gucharmap-window.c:478
 msgid "Find _Next"
 msgstr "Buscar el _siguiente"
 
-#: ../gucharmap/gucharmap-window.c:478
+#: ../gucharmap/gucharmap-window.c:480
 msgid "Find _Previous"
 msgstr "Buscar el an_terior"
 
-#: ../gucharmap/gucharmap-window.c:481
+#: ../gucharmap/gucharmap-window.c:483
 msgid "_Next Character"
 msgstr "_Siguiente carácter"
 
-#: ../gucharmap/gucharmap-window.c:483
+#: ../gucharmap/gucharmap-window.c:485
 msgid "_Previous Character"
 msgstr "Caracter _anterior"
 
-#: ../gucharmap/gucharmap-window.c:485
+#: ../gucharmap/gucharmap-window.c:487
 msgid "Next Script"
 msgstr "Siguiente escritura"
 
-#: ../gucharmap/gucharmap-window.c:487
+#: ../gucharmap/gucharmap-window.c:489
 msgid "Previous Script"
 msgstr "Anterior escritura"
 
-#: ../gucharmap/gucharmap-window.c:491
+#: ../gucharmap/gucharmap-window.c:493
 msgid "_Contents"
 msgstr "_Contenido"
 
-#: ../gucharmap/gucharmap-window.c:494
+#: ../gucharmap/gucharmap-window.c:496
 msgid "_About"
 msgstr "A_cerca de"
 
-#: ../gucharmap/gucharmap-window.c:500
+#: ../gucharmap/gucharmap-window.c:502
 msgid "By _Script"
 msgstr "Por e_scritura"
 
-#: ../gucharmap/gucharmap-window.c:502
+#: ../gucharmap/gucharmap-window.c:504
 msgid "By _Unicode Block"
 msgstr "Por bloque _Unicode"
 
-#: ../gucharmap/gucharmap-window.c:697
+#: ../gucharmap/gucharmap-window.c:699
 msgid "_Text to copy:"
 msgstr "_Texto a copiar:"
 
-#: ../gucharmap/gucharmap-window.c:718
+#: ../gucharmap/gucharmap-window.c:720
 msgid "Copy to the clipboard."
 msgstr "Copiar al portapapeles."
 
@@ -1048,30 +1052,34 @@ msgstr "Bloque Unicode"
 msgid "Script"
 msgstr "Escritura"
 
-#: ../gucharmap/gucharmap-search-dialog.c:537
+#: ../gucharmap/gucharmap-search-dialog.c:549
 msgid "Information"
 msgstr "Información"
 
 #. follow hig guidelines
-#: ../gucharmap/gucharmap-search-dialog.c:716
+#: ../gucharmap/gucharmap-search-dialog.c:732
 msgid "Find"
 msgstr "Buscar"
 
-#: ../gucharmap/gucharmap-search-dialog.c:730
+#: ../gucharmap/gucharmap-search-dialog.c:746
 msgid "_Previous"
 msgstr "_Anterior"
 
-#: ../gucharmap/gucharmap-search-dialog.c:737
+#: ../gucharmap/gucharmap-search-dialog.c:753
 msgid "_Next"
 msgstr "_Siguiente"
 
-#: ../gucharmap/gucharmap-search-dialog.c:747
+#: ../gucharmap/gucharmap-search-dialog.c:763
 msgid "_Search:"
 msgstr "_Buscar:"
 
-#: ../gucharmap/gucharmap-search-dialog.c:757
+#: ../gucharmap/gucharmap-search-dialog.c:773
 msgid "Match _whole word"
 msgstr "Coincidir con la palabra _completa"
+
+#: ../gucharmap/gucharmap-search-dialog.c:777
+msgid "Search in character _details"
+msgstr "Buscar en los _detalles del carácter"
 
 #~ msgid "Next Block"
 #~ msgstr "Siguiente bloque"

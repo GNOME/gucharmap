@@ -5,7 +5,7 @@ DOC_MODULE = gucharmap
 DOC_ENTITIES = legal.xml
 DOC_INCLUDES = 
 
-DOC_LINGUAS =
+DOC_LINGUAS = es
 
 # These should be converted to use gnome-doc-utils
 # http://live.gnome.org/GnomeDocUtilsTranslationMigration
