@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-26 06:52+0100\n"
-"PO-Revision-Date: 2005-11-25 16:43+0800\n"
+"POT-Creation-Date: 2006-01-23 07:29+0100\n"
+"PO-Revision-Date: 2006-01-23 15:09+0800\n"
 "Last-Translator: Cai Qian <caiqian@gnome.org>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../gucharmap.desktop.in.h:1 ../gucharmap/gucharmap-window.c:344
-#: ../gucharmap/gucharmap-window.c:839
+#: ../gucharmap/gucharmap-window.c:841
 msgid "Character Map"
 msgstr "字符映射表"
 
@@ -26,100 +26,104 @@ msgstr "字符映射表"
 msgid "Insert special characters into documents"
 msgstr "在文档中插入特殊字符"
 
-#: ../gucharmap/gucharmap-charmap.c:250
+#: ../gucharmap/gucharmap-charmap.c:266
 msgid "Canonical decomposition:"
 msgstr "规范化分解："
 
-#: ../gucharmap/gucharmap-charmap.c:290 ../gucharmap/gucharmap-table.c:294
+#: ../gucharmap/gucharmap-charmap.c:307 ../gucharmap/gucharmap-table.c:294
 msgid "[not a printable character]"
 msgstr "[非可打印字符]"
 
-#: ../gucharmap/gucharmap-charmap.c:304
+#: ../gucharmap/gucharmap-charmap.c:321
 msgid "General Character Properties"
 msgstr "字符常规属性"
 
 #. character category
-#: ../gucharmap/gucharmap-charmap.c:307
+#: ../gucharmap/gucharmap-charmap.c:324
 msgid "Unicode category:"
 msgstr "Unicode 分类："
 
-#: ../gucharmap/gucharmap-charmap.c:313
+#: ../gucharmap/gucharmap-charmap.c:333
 msgid "Various Useful Representations"
 msgstr "其它有用的表示"
 
-#: ../gucharmap/gucharmap-charmap.c:322
+#: ../gucharmap/gucharmap-charmap.c:343
 msgid "UTF-8:"
 msgstr "UTF-8："
 
-#: ../gucharmap/gucharmap-charmap.c:330
-msgid "Octal escaped UTF-8:"
-msgstr "UTF-8 八进制转义码："
+#: ../gucharmap/gucharmap-charmap.c:351
+msgid "UTF-16:"
+msgstr "UTF-16："
 
-#: ../gucharmap/gucharmap-charmap.c:336
-msgid "Decimal entity reference:"
-msgstr "标记语言十进制实体表示值："
+#: ../gucharmap/gucharmap-charmap.c:362
+msgid "C octal escaped UTF-8:"
+msgstr "C 八进制转码的 UTF-8："
 
-#: ../gucharmap/gucharmap-charmap.c:342
+#: ../gucharmap/gucharmap-charmap.c:372
+msgid "XML decimal entity:"
+msgstr "XML 十进制实体："
+
+#: ../gucharmap/gucharmap-charmap.c:383
 msgid "Annotations and Cross References"
 msgstr "注解和交叉引用"
 
-#: ../gucharmap/gucharmap-charmap.c:349
+#: ../gucharmap/gucharmap-charmap.c:390
 msgid "Alias names:"
 msgstr "别名："
 
-#: ../gucharmap/gucharmap-charmap.c:358
+#: ../gucharmap/gucharmap-charmap.c:399
 msgid "Notes:"
 msgstr "附注："
 
-#: ../gucharmap/gucharmap-charmap.c:367
+#: ../gucharmap/gucharmap-charmap.c:408
 msgid "See also:"
 msgstr "另见："
 
-#: ../gucharmap/gucharmap-charmap.c:376
+#: ../gucharmap/gucharmap-charmap.c:417
 msgid "Approximate equivalents:"
 msgstr "近似等价字符："
 
-#: ../gucharmap/gucharmap-charmap.c:385
+#: ../gucharmap/gucharmap-charmap.c:426
 msgid "Equivalents:"
 msgstr "等价字符："
 
-#: ../gucharmap/gucharmap-charmap.c:401
+#: ../gucharmap/gucharmap-charmap.c:442
 msgid "CJK Ideograph Information"
 msgstr "CJK 表意字符信息"
 
-#: ../gucharmap/gucharmap-charmap.c:406
+#: ../gucharmap/gucharmap-charmap.c:447
 msgid "Definition in English:"
 msgstr "英文定义："
 
-#: ../gucharmap/gucharmap-charmap.c:411
+#: ../gucharmap/gucharmap-charmap.c:452
 msgid "Mandarin Pronunciation:"
 msgstr "普通话发音："
 
-#: ../gucharmap/gucharmap-charmap.c:416
+#: ../gucharmap/gucharmap-charmap.c:457
 msgid "Cantonese Pronunciation:"
 msgstr "粤语发音："
 
-#: ../gucharmap/gucharmap-charmap.c:421
+#: ../gucharmap/gucharmap-charmap.c:462
 msgid "Japanese On Pronunciation:"
 msgstr "日文On发音："
 
-#: ../gucharmap/gucharmap-charmap.c:426
+#: ../gucharmap/gucharmap-charmap.c:467
 msgid "Japanese Kun Pronunciation:"
 msgstr "日文Kun发音："
 
-#: ../gucharmap/gucharmap-charmap.c:431
+#: ../gucharmap/gucharmap-charmap.c:472
 msgid "Tang Pronunciation:"
 msgstr "唐音·古中国发音："
 
-#: ../gucharmap/gucharmap-charmap.c:436
+#: ../gucharmap/gucharmap-charmap.c:477
 msgid "Korean Pronunciation:"
 msgstr "韩语发音："
 
-#: ../gucharmap/gucharmap-charmap.c:737
+#: ../gucharmap/gucharmap-charmap.c:778
 msgid "Characte_r Table"
 msgstr "字符表(_R)"
 
-#: ../gucharmap/gucharmap-charmap.c:740
+#: ../gucharmap/gucharmap-charmap.c:781
 msgid "Character _Details"
 msgstr "字符细节(_D)"
 
@@ -147,7 +151,7 @@ msgid "Unknown character, unable to identify."
 msgstr "未知字符，无法分辨。"
 
 #: ../gucharmap/gucharmap-table.c:1513
-#: ../gucharmap/gucharmap-search-dialog.c:465
+#: ../gucharmap/gucharmap-search-dialog.c:595
 msgid "Not found."
 msgstr "未查到。"
 
@@ -322,91 +326,91 @@ msgstr ""
 msgid "gucharmap"
 msgstr "gucharmap"
 
-#: ../gucharmap/gucharmap-window.c:458
+#: ../gucharmap/gucharmap-window.c:460
 msgid "_File"
 msgstr "文件(_F)"
 
-#: ../gucharmap/gucharmap-window.c:459
+#: ../gucharmap/gucharmap-window.c:461
 msgid "_View"
 msgstr "查看(_V)"
 
-#: ../gucharmap/gucharmap-window.c:460
+#: ../gucharmap/gucharmap-window.c:462
 msgid "_Search"
 msgstr "搜索(_S)"
 
-#: ../gucharmap/gucharmap-window.c:461
+#: ../gucharmap/gucharmap-window.c:463
 msgid "_Go"
 msgstr "转到(_G)"
 
-#: ../gucharmap/gucharmap-window.c:462
+#: ../gucharmap/gucharmap-window.c:464
 msgid "_Help"
 msgstr "帮助(_H)"
 
-#: ../gucharmap/gucharmap-window.c:464
+#: ../gucharmap/gucharmap-window.c:466
 msgid "_Quit"
 msgstr "退出(_Q)"
 
-#: ../gucharmap/gucharmap-window.c:467
+#: ../gucharmap/gucharmap-window.c:469
 msgid "Zoom _In"
 msgstr "放大(_I)"
 
-#: ../gucharmap/gucharmap-window.c:469
+#: ../gucharmap/gucharmap-window.c:471
 msgid "Zoom _Out"
 msgstr "缩小(_O)"
 
-#: ../gucharmap/gucharmap-window.c:471
+#: ../gucharmap/gucharmap-window.c:473
 msgid "_Normal Size"
 msgstr "普通大小(_N)"
 
-#: ../gucharmap/gucharmap-window.c:474
+#: ../gucharmap/gucharmap-window.c:476
 msgid "_Find..."
 msgstr "查找(_F)..."
 
-#: ../gucharmap/gucharmap-window.c:476
+#: ../gucharmap/gucharmap-window.c:478
 msgid "Find _Next"
 msgstr "查找下一个(_N)"
 
-#: ../gucharmap/gucharmap-window.c:478
+#: ../gucharmap/gucharmap-window.c:480
 msgid "Find _Previous"
 msgstr "查找上一个(_P)"
 
-#: ../gucharmap/gucharmap-window.c:481
+#: ../gucharmap/gucharmap-window.c:483
 msgid "_Next Character"
 msgstr "下一个字符(_N)"
 
-#: ../gucharmap/gucharmap-window.c:483
+#: ../gucharmap/gucharmap-window.c:485
 msgid "_Previous Character"
 msgstr "上一个字符(_P)"
 
-#: ../gucharmap/gucharmap-window.c:485
+#: ../gucharmap/gucharmap-window.c:487
 msgid "Next Script"
 msgstr "下一语言"
 
-#: ../gucharmap/gucharmap-window.c:487
+#: ../gucharmap/gucharmap-window.c:489
 msgid "Previous Script"
 msgstr "上一语言"
 
-#: ../gucharmap/gucharmap-window.c:491
+#: ../gucharmap/gucharmap-window.c:493
 msgid "_Contents"
 msgstr "目录(_C)"
 
-#: ../gucharmap/gucharmap-window.c:494
+#: ../gucharmap/gucharmap-window.c:496
 msgid "_About"
 msgstr "关于(_A)"
 
-#: ../gucharmap/gucharmap-window.c:500
+#: ../gucharmap/gucharmap-window.c:502
 msgid "By _Script"
 msgstr "按语言(_S)"
 
-#: ../gucharmap/gucharmap-window.c:502
+#: ../gucharmap/gucharmap-window.c:504
 msgid "By _Unicode Block"
 msgstr "按 _Unicode 区块"
 
-#: ../gucharmap/gucharmap-window.c:697
+#: ../gucharmap/gucharmap-window.c:699
 msgid "_Text to copy:"
 msgstr "要复制的文本(_T)："
 
-#: ../gucharmap/gucharmap-window.c:718
+#: ../gucharmap/gucharmap-window.c:720
 msgid "Copy to the clipboard."
 msgstr "复制到剪贴板。"
 
@@ -1046,24 +1050,31 @@ msgstr "Unicode 区块"
 msgid "Script"
 msgstr "语言"
 
-#: ../gucharmap/gucharmap-search-dialog.c:419
+#: ../gucharmap/gucharmap-search-dialog.c:549
 msgid "Information"
 msgstr "信息"
 
 #. follow hig guidelines
-#: ../gucharmap/gucharmap-search-dialog.c:592
+#: ../gucharmap/gucharmap-search-dialog.c:732
 msgid "Find"
 msgstr "查找"
 
-#: ../gucharmap/gucharmap-search-dialog.c:606
+#: ../gucharmap/gucharmap-search-dialog.c:746
 msgid "_Previous"
 msgstr "上一个(_P)"
 
-#: ../gucharmap/gucharmap-search-dialog.c:613
+#: ../gucharmap/gucharmap-search-dialog.c:753
 msgid "_Next"
 msgstr "下一个(_N)"
 
-#: ../gucharmap/gucharmap-search-dialog.c:623
+#: ../gucharmap/gucharmap-search-dialog.c:763
 msgid "_Search:"
 msgstr "搜索(_S)："
 
+#: ../gucharmap/gucharmap-search-dialog.c:773
+msgid "Match _whole word"
+msgstr "匹配整个单词(_W)"
+
+#: ../gucharmap/gucharmap-search-dialog.c:777
+msgid "Search in character _details"
+msgstr "在字符细节中搜索(_D)"
