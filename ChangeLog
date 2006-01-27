@@ -1,3 +1,23 @@
+2006-01-27  Behdad Esfahbod  <behdad@gnome.org>
+
+	Fixes bug #328775.
+
+	* COPYING.UNICODE: Added.
+
+	* README: Refer to the above file.
+
+	* Makefile.am (EXTRA_DIST): Add the new file.
+
+2006-01-22  Behdad Esfahbod  <behdad@gnome.org>
+
+	Migrate 'es' help files to gnome-doc-utils.
+
+	* help/es/Makefile.am: Oops, removed again.
+
+	* configure.ac (AC_CONFIG_OUTPUT): Removed help/es/Makefile.
+
+	* help/Makefile.am (SUBDIRS): Removed es.
+
 2006-01-22  Behdad Esfahbod  <behdad@gnome.org>
 
 	* help/es/Makefile.am: 	Weird, Francisco Javier F. Serrador removed
