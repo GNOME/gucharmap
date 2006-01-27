@@ -363,9 +363,9 @@ set_details (GucharmapCharmap *charmap,
       g_string_free (gstemp, TRUE);
 
       /* XML decimal entity */
-      if (0x0001 <= uc && uc <= 0xD7FF
-	  || 0xE000 <= uc && uc <= 0xFFFD
-	  || 0x10000 <= uc && uc <= 0x10FFFF)
+      if ((0x0001 <= uc && uc <= 0xD7FF) ||
+	  (0xE000 <= uc && uc <= 0xFFFD) ||
+	  (0x10000 <= uc && uc <= 0x10FFFF))
 	{
 	  temp = g_strdup_printf ("&#%d;", uc);
 	  insert_vanilla_detail (charmap, buffer, &iter, 
