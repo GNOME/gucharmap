@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-12 14:52+0700\n"
-"PO-Revision-Date: 2005-12-12 15:29+0700\n"
+"POT-Creation-Date: 2006-01-28 12:54+0700\n"
+"PO-Revision-Date: 2006-01-28 12:59+0700\n"
 "Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
 "Language-Team: Thai <l10n>\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit"
 
 #: gucharmap.desktop.in.h:1 gucharmap/gucharmap-window.c:344
-#: gucharmap/gucharmap-window.c:839
+#: gucharmap/gucharmap-window.c:848
 msgid "Character Map"
 msgstr "ผังอักขระ"
 
@@ -31,96 +31,100 @@ msgstr "แทรกอักขระพิเศษเข้าในเอก
 msgid "Canonical decomposition:"
 msgstr "ส่วนประกอบบัญญัติไว้:"
 
-#: gucharmap/gucharmap-charmap.c:306 gucharmap/gucharmap-table.c:294
+#: gucharmap/gucharmap-charmap.c:307 gucharmap/gucharmap-table.c:294
 msgid "[not a printable character]"
 msgstr "[ไม่ใช่อักขระที่สามารถพิมพ์ได้]"
 
-#: gucharmap/gucharmap-charmap.c:320
+#: gucharmap/gucharmap-charmap.c:321
 msgid "General Character Properties"
 msgstr "คุณสมบัติของอักขระทั่วไป"
 
 #. character category
-#: gucharmap/gucharmap-charmap.c:323
+#: gucharmap/gucharmap-charmap.c:324
 msgid "Unicode category:"
 msgstr "รายการยูนิโค้ด:"
 
-#: gucharmap/gucharmap-charmap.c:329
+#: gucharmap/gucharmap-charmap.c:333
 msgid "Various Useful Representations"
 msgstr "การแทนค่าที่น่าสนใจ"
 
-#: gucharmap/gucharmap-charmap.c:338
+#: gucharmap/gucharmap-charmap.c:343
 msgid "UTF-8:"
 msgstr "UTF-8:"
 
-#: gucharmap/gucharmap-charmap.c:346
-msgid "Octal escaped UTF-8:"
-msgstr "UTF-8 หลีกเป็นฐานแปด:"
+#: gucharmap/gucharmap-charmap.c:351
+msgid "UTF-16:"
+msgstr "UTF-16:"
 
-#: gucharmap/gucharmap-charmap.c:352
-msgid "Decimal entity reference:"
-msgstr "เอนทิตีตัวอ้างอิงฐานสิบ:"
+#: gucharmap/gucharmap-charmap.c:362
+msgid "C octal escaped UTF-8:"
+msgstr "UTF-8 หลีกเป็นฐานแปดแบบภาษาซี:"
 
-#: gucharmap/gucharmap-charmap.c:358
+#: gucharmap/gucharmap-charmap.c:372
+msgid "XML decimal entity:"
+msgstr "เอนทิตีตัวอ้างอิงฐานสิบแบบ XML:"
+
+#: gucharmap/gucharmap-charmap.c:383
 msgid "Annotations and Cross References"
 msgstr "คำอธิบายและการอ้างอิงข้าม"
 
-#: gucharmap/gucharmap-charmap.c:365
+#: gucharmap/gucharmap-charmap.c:390
 msgid "Alias names:"
 msgstr "นามแฝง:"
 
-#: gucharmap/gucharmap-charmap.c:374
+#: gucharmap/gucharmap-charmap.c:399
 msgid "Notes:"
 msgstr "หมายเหตุ:"
 
-#: gucharmap/gucharmap-charmap.c:383
+#: gucharmap/gucharmap-charmap.c:408
 msgid "See also:"
 msgstr "ดูประกอบ:"
 
-#: gucharmap/gucharmap-charmap.c:392
+#: gucharmap/gucharmap-charmap.c:417
 msgid "Approximate equivalents:"
 msgstr "รูปแบบใกล้เคียง:"
 
-#: gucharmap/gucharmap-charmap.c:401
+#: gucharmap/gucharmap-charmap.c:426
 msgid "Equivalents:"
 msgstr "เท่ากัน:"
 
-#: gucharmap/gucharmap-charmap.c:417
+#: gucharmap/gucharmap-charmap.c:442
 msgid "CJK Ideograph Information"
 msgstr "ข้อมูลอักษรภาพ CJK"
 
-#: gucharmap/gucharmap-charmap.c:422
+#: gucharmap/gucharmap-charmap.c:447
 msgid "Definition in English:"
 msgstr "คำนิยามในภาษาอังกฤษ:"
 
-#: gucharmap/gucharmap-charmap.c:427
+#: gucharmap/gucharmap-charmap.c:452
 msgid "Mandarin Pronunciation:"
 msgstr "การออกเสียงภาษาจีนกลาง:"
 
-#: gucharmap/gucharmap-charmap.c:432
+#: gucharmap/gucharmap-charmap.c:457
 msgid "Cantonese Pronunciation:"
 msgstr "การออกเสียงสำเนียงกวางตุ้ง:"
 
-#: gucharmap/gucharmap-charmap.c:437
+#: gucharmap/gucharmap-charmap.c:462
 msgid "Japanese On Pronunciation:"
 msgstr "การออกเสียง On ของภาษาญี่ปุ่น:"
 
-#: gucharmap/gucharmap-charmap.c:442
+#: gucharmap/gucharmap-charmap.c:467
 msgid "Japanese Kun Pronunciation:"
 msgstr "การออกเสียง Kun ของภาษาญี่ปุ่น:"
 
-#: gucharmap/gucharmap-charmap.c:447
+#: gucharmap/gucharmap-charmap.c:472
 msgid "Tang Pronunciation:"
 msgstr ""
 
-#: gucharmap/gucharmap-charmap.c:452
+#: gucharmap/gucharmap-charmap.c:477
 msgid "Korean Pronunciation:"
 msgstr "การออกเสียงภาษาเกาหลี:"
 
-#: gucharmap/gucharmap-charmap.c:753
+#: gucharmap/gucharmap-charmap.c:778
 msgid "Characte_r Table"
 msgstr "_ตารางอักขระ"
 
-#: gucharmap/gucharmap-charmap.c:756
+#: gucharmap/gucharmap-charmap.c:781
 msgid "Character _Details"
 msgstr "_รายละเอียดของอักขระ"
 
@@ -148,7 +152,7 @@ msgid "Unknown character, unable to identify."
 msgstr "อักขระที่ไม่รู้จัก ไม่สามารถระบุได้"
 
 #: gucharmap/gucharmap-table.c:1513
-#: gucharmap/gucharmap-search-dialog.c:583
+#: gucharmap/gucharmap-search-dialog.c:595
 msgid "Not found."
 msgstr "ไม่พบ"
 
@@ -324,91 +328,91 @@ msgstr ""
 msgid "gucharmap"
 msgstr "gucharmap"
 
-#: gucharmap/gucharmap-window.c:458
+#: gucharmap/gucharmap-window.c:460
 msgid "_File"
 msgstr "แ_ฟ้ม"
 
-#: gucharmap/gucharmap-window.c:459
+#: gucharmap/gucharmap-window.c:461
 msgid "_View"
 msgstr "_มุมมอง"
 
-#: gucharmap/gucharmap-window.c:460
+#: gucharmap/gucharmap-window.c:462
 msgid "_Search"
 msgstr "_ค้นหา"
 
-#: gucharmap/gucharmap-window.c:461
+#: gucharmap/gucharmap-window.c:463
 msgid "_Go"
 msgstr "ไ_ป"
 
-#: gucharmap/gucharmap-window.c:462
+#: gucharmap/gucharmap-window.c:464
 msgid "_Help"
 msgstr "_วิธีใช้"
 
-#: gucharmap/gucharmap-window.c:464
+#: gucharmap/gucharmap-window.c:466
 msgid "_Quit"
 msgstr "_ออก"
 
-#: gucharmap/gucharmap-window.c:467
+#: gucharmap/gucharmap-window.c:469
 msgid "Zoom _In"
 msgstr "ขยายเ_ข้า"
 
-#: gucharmap/gucharmap-window.c:469
+#: gucharmap/gucharmap-window.c:471
 msgid "Zoom _Out"
 msgstr "ขยาย_ออก"
 
-#: gucharmap/gucharmap-window.c:471
+#: gucharmap/gucharmap-window.c:473
 msgid "_Normal Size"
 msgstr "ขนาด_ปกติ"
 
-#: gucharmap/gucharmap-window.c:474
+#: gucharmap/gucharmap-window.c:476
 msgid "_Find..."
 msgstr "_หา..."
 
-#: gucharmap/gucharmap-window.c:476
+#: gucharmap/gucharmap-window.c:478
 msgid "Find _Next"
 msgstr "หา_ต่อ"
 
-#: gucharmap/gucharmap-window.c:478
+#: gucharmap/gucharmap-window.c:480
 msgid "Find _Previous"
 msgstr "หา_ก่อนหน้า"
 
-#: gucharmap/gucharmap-window.c:481
+#: gucharmap/gucharmap-window.c:483
 msgid "_Next Character"
 msgstr "อักขระ_ต่อไป"
 
-#: gucharmap/gucharmap-window.c:483
+#: gucharmap/gucharmap-window.c:485
 msgid "_Previous Character"
 msgstr "อักขระ_ก่อนหน้า"
 
-#: gucharmap/gucharmap-window.c:485
+#: gucharmap/gucharmap-window.c:487
 msgid "Next Script"
 msgstr "ภาษาเขียนถัดไป"
 
-#: gucharmap/gucharmap-window.c:487
+#: gucharmap/gucharmap-window.c:489
 msgid "Previous Script"
 msgstr "ภาษาเขียนก่อนหน้า"
 
-#: gucharmap/gucharmap-window.c:491
+#: gucharmap/gucharmap-window.c:493
 msgid "_Contents"
 msgstr "เ_นื้อหา"
 
-#: gucharmap/gucharmap-window.c:494
+#: gucharmap/gucharmap-window.c:496
 msgid "_About"
 msgstr "เ_กี่ยวกับ"
 
-#: gucharmap/gucharmap-window.c:500
+#: gucharmap/gucharmap-window.c:502
 msgid "By _Script"
 msgstr "เรียงตาม_ภาษาเขียน"
 
-#: gucharmap/gucharmap-window.c:502
+#: gucharmap/gucharmap-window.c:504
 msgid "By _Unicode Block"
 msgstr "เรียงตามบล็อกของ_ยูนิโค้ด"
 
-#: gucharmap/gucharmap-window.c:697
+#: gucharmap/gucharmap-window.c:706
 msgid "_Text to copy:"
 msgstr "_ข้อความที่จะคัดลอก:"
 
-#: gucharmap/gucharmap-window.c:718
+#: gucharmap/gucharmap-window.c:727
 msgid "Copy to the clipboard."
 msgstr "ทำสำเนาไปยังคลิปบอร์ด"
 
@@ -1048,30 +1052,34 @@ msgstr "บล็อกของยูนิโค้ด"
 msgid "Script"
 msgstr "ภาษาเขียน"
 
-#: gucharmap/gucharmap-search-dialog.c:537
+#: gucharmap/gucharmap-search-dialog.c:549
 msgid "Information"
 msgstr "ข้อมูล"
 
 #. follow hig guidelines
-#: gucharmap/gucharmap-search-dialog.c:716
+#: gucharmap/gucharmap-search-dialog.c:732
 msgid "Find"
 msgstr "ค้นหา"
 
-#: gucharmap/gucharmap-search-dialog.c:730
+#: gucharmap/gucharmap-search-dialog.c:746
 msgid "_Previous"
 msgstr "_ก่อนหน้า"
 
-#: gucharmap/gucharmap-search-dialog.c:737
+#: gucharmap/gucharmap-search-dialog.c:753
 msgid "_Next"
 msgstr "_ถัดไป"
 
-#: gucharmap/gucharmap-search-dialog.c:747
+#: gucharmap/gucharmap-search-dialog.c:763
 msgid "_Search:"
 msgstr "_ค้นหา:"
 
-#: gucharmap/gucharmap-search-dialog.c:757
+#: gucharmap/gucharmap-search-dialog.c:773
 msgid "Match _whole word"
 msgstr "ค้นหา_ทั้งคำ"
+
+#: gucharmap/gucharmap-search-dialog.c:777
+msgid "Search in character _details"
+msgstr "ค้นหาในเนื้อหา_รายละเอียดของอักขระ"
 
 #~ msgid "Next Block"
 #~ msgstr "บล็อกถัดไป"
