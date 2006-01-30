@@ -10,5 +10,6 @@ DOC_LINGUAS = es
 # These should be converted to use gnome-doc-utils
 # http://live.gnome.org/GnomeDocUtilsTranslationMigration
 # Please remember also to remove help/langcode/Makefile from toplevel
-# configure.ac's AC_CONFIG_FILES
+# configure.ac's AC_CONFIG_FILES, and remove your directory from
+# the SUBDIRS below.
 SUBDIRS = de fr it ja ko sv zh_CN zh_TW
