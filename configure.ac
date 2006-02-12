@@ -23,7 +23,7 @@ AC_INIT([GNOME Character Map],[1.5.1],[http://bugzilla.gnome.org/enter_bug.cgi?p
 
 AC_CONFIG_SRCDIR([gucharmap/gucharmap.h])
 AC_CONFIG_HEADERS([config.h])
-AM_INIT_AUTOMAKE([1.9 foreign dist-bzip2])
+AM_INIT_AUTOMAKE([1.9 foreign dist-bzip2 no-dist-gzip])
 
 AM_MAINTAINER_MODE
 
