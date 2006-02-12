@@ -196,6 +196,8 @@ gucharmap_block_chapters_class_init (GucharmapBlockChaptersClass *clazz)
   chapters_class->get_codepoint_list = get_codepoint_list;
   chapters_class->get_book_codepoint_list = get_book_codepoint_list;
   chapters_class->go_to_character = go_to_character;
+
+  gucharmap_intl_ensure_initialized ();
 }
 
 GType 

@@ -69,7 +69,7 @@ libgucharmapinclude_HEADERS = gucharmap.h \
 
 bin_PROGRAMS = gucharmap
 gucharmap_SOURCES = main.c
-gucharmap_LDADD = libgucharmap.la @PANGO_LIBS@ @GTK_LIBS@ @GNOME_LIBS@ @POPT_LIBS@
+gucharmap_LDADD = libgucharmap.la @PANGO_LIBS@ @GTK_LIBS@ @GNOME_LIBS@
 
 if OS_WIN32
 gucharmap_LDADD += gucharmaprc.o

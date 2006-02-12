@@ -78,6 +78,8 @@ gucharmap_charmap_class_init (GucharmapCharmapClass *clazz)
                     2, G_TYPE_UINT, G_TYPE_UINT);
 
   G_OBJECT_CLASS (clazz)->finalize = charmap_finalize;
+
+  gucharmap_intl_ensure_initialized ();
 }
 
 static void

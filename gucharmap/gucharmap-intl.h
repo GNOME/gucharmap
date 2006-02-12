@@ -3,42 +3,12 @@
 #ifndef GUCHARMAP_INTL_H
 #define GUCHARMAP_INTL_H
 
-#include "config.h"
+#include <glib/gi18n-lib.h>
 
-#undef _
-#undef N_
+G_BEGIN_DECLS
 
-#ifdef ENABLE_NLS
+void gucharmap_intl_ensure_initialized (void);
 
-char * gucharmap_gettext (const char *str);
-
-# include <libintl.h>
-
-# define _(String) gucharmap_gettext(String)
-
-# ifdef gettext_noop
-#  define N_(String) gettext_noop(String)
-# else
-#  define N_(String) (String)
-# endif
-
-#else /* NLS is disabled */
-
-# define _(String) (String)
-# define N_(String) (String)
-
-# undef textdomain
-# undef gettext
-# undef dgettext
-# undef dcgettext
-# undef bindtextdomain
-
-# define textdomain(String) (String)
-# define gettext(String) (String)
-# define dgettext(Domain,String) (String)
-# define dcgettext(Domain,String,Type) (String)
-# define bindtextdomain(Domain,Directory) (Domain) 
-
-#endif
+G_END_DECLS
 
 #endif /* #ifndef GUCHARMAP_INTL_H */

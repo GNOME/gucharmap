@@ -1,3 +1,15 @@
+2006-02-11  Behdad Esfahbod  <behdad@gnome.org>
+
+	Bug 328912 – misc fixes
+	Patch from Christian Persch
+
+	* autogen.sh, configure.ac, Makefile.am: Modernize the build system.
+
+	* gucharmap/*.c: gucharmap_intl_ensure_initialized () in every
+	library entry point.  Use gi18n-lib.h instead of custom gettext.
+
+	* gucharmap/main.c: Use GOption instead of popt.
+
 2006-01-27  Behdad Esfahbod  <behdad@gnome.org>
 
 	Released 1.5.1.

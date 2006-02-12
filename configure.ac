@@ -18,10 +18,12 @@ dnl 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
 dnl
 
 AC_PREREQ([2.56])
-AC_INIT([gucharmap], [1.5.1])
+
+AC_INIT([GNOME Character Map],[1.5.1],[http://bugzilla.gnome.org/enter_bug.cgi?product=gucharmap],[gucharmap])
+
 AC_CONFIG_SRCDIR([gucharmap/gucharmap.h])
 AC_CONFIG_HEADERS([config.h])
-AM_INIT_AUTOMAKE()
+AM_INIT_AUTOMAKE([1.9 foreign dist-bzip2])
 
 AM_MAINTAINER_MODE
 
@@ -31,17 +33,14 @@ AC_DISABLE_STATIC
 AC_PROG_LIBTOOL
 AC_PROG_INTLTOOL([0.29])
 
-
 # checks for stuff
 GETTEXT_PACKAGE=gucharmap
 AC_SUBST(GETTEXT_PACKAGE)
-AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", 
-                   [Define the gettext package to be used])
+AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE],["$GETTEXT_PACKAGE"],[Define the gettext package to be used])
 ALL_LINGUAS="am ar az be bg bn bs ca cs cy da de el en_CA en_GB eo es et eu fa fi fr ga gl gu hi hr hu id is it ja ko lt mi mk ml mn ms nb ne nl nn no pa pl pt pt_BR ro ru rw sk sq sr sr@Latn sv ta th tr uk vi wa xh zh_CN zh_TW"
 AM_GLIB_GNU_GETTEXT
 
 GNOME_DOC_INIT
-
 
 # check for win32
 case "$host" in
@@ -55,14 +54,13 @@ then
 fi
 AM_CONDITIONAL(OS_WIN32, test "x$os_win32" = "xyes")
 
-
 # if pango >= 1.2.1, UNICHAR_MAX = 0x10ffff
-AH_TEMPLATE([UNICHAR_MAX], [The last unicode character we support])
+
 PKG_CHECK_MODULES(PANGO, pango >= 1.2.1, full_unicode=yes, full_unicode=no)
 if test "x$full_unicode" = "xyes" ; then
-    AC_DEFINE(UNICHAR_MAX, 0x0010ffff)
+    AC_DEFINE([UNICHAR_MAX],[0x0010ffff],[The last unicode character we support])
 else
-    AC_DEFINE(UNICHAR_MAX, 0x0000ffff)
+    AC_DEFINE([UNICHAR_MAX],[0x0000ffff],[The last unicode character we support])
 fi
 
 # gtk is required
@@ -72,7 +70,7 @@ AC_ARG_ENABLE(gnome,
               AC_HELP_STRING([--disable-gnome],
 	                     [don't build with GNOME support]))
 if test "x$enable_gnome" != "xno"; then
-    PKG_CHECK_MODULES(GNOME, libgnomeui-2.0 >= 2.2.0 libgnome-2.0 >= 2.2.0, 
+    PKG_CHECK_MODULES(GNOME, libgnomeui-2.0 >= 2.13.2 libgnome-2.0 >= 2.13.7, 
                     have_gnome=yes, have_gnome=no)
 else
     AC_MSG_NOTICE([GNOME support disabled with --disable-gnome])
@@ -81,18 +79,8 @@ fi
 
 GNOMEPKGS=""
 SUB_DIRS="po pixmaps gucharmap"
-if test "x$have_gnome" = "xno" 
+if test "x$have_gnome" = "xyes" 
 then
-    libs_bak="$LIBS"
-    LIBS=""
-
-    AC_CHECK_LIB(popt, poptGetNextOpt,, AC_MSG_ERROR([popt is required]))
-
-    POPT_LIBS="$LIBS"
-    LIBS="$libs_bak"
-    
-    AC_SUBST(POPT_LIBS)
-else
     GNOMEPKGS="libgnomeui-2.0 libgnome-2.0"
     SUB_DIRS="$SUB_DIRS help"
 fi
@@ -111,24 +99,20 @@ AC_SUBST(GTK_LIBS)
 AC_SUBST(GNOME_CFLAGS)
 AC_SUBST(GNOME_LIBS)
 
-AH_TEMPLATE([HAVE_GNOME], [Define if have gnome])
 if test "x$have_gnome" = "xyes" ; then
-    AC_DEFINE(HAVE_GNOME)
+    AC_DEFINE([HAVE_GNOME],[1],[Define if have gnome])
 fi
 
-
-GLIB_GENMARSHAL=`pkg-config --variable=glib_genmarshal glib-2.0`
+GLIB_GENMARSHAL=`$PKG_CONFIG --variable=glib_genmarshal glib-2.0`
 AC_SUBST(GLIB_GENMARSHAL)
-
 
 AH_TEMPLATE([ENABLE_UNIHAN], [Define if you want CJK ideograph information])
 AC_ARG_ENABLE(unihan, 
               AC_HELP_STRING([--disable-unihan], 
                              [don't build in CJK ideograph information]))
 if test "x$enable_unihan" != "xno" ; then
-    AC_DEFINE(ENABLE_UNIHAN)
+    AC_DEFINE([ENABLE_UNIHAN],[1],[Define if you want CJK ideograph information])
 fi
-
 
 AC_CONFIG_FILES([
 gucharmap.pc

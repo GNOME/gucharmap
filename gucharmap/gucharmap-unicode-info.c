@@ -65,6 +65,8 @@ gucharmap_get_unicode_name (gunichar wc)
 {
   static gchar buf[32];
 
+  gucharmap_intl_ensure_initialized ();
+
   if ((wc >= 0x3400 && wc <= 0x4DB5) 
       || (wc >= 0x4e00 && wc <= 0x9fa5) 
       || (wc >= 0x20000 && wc <= 0x2A6D6))
@@ -115,6 +117,8 @@ gucharmap_get_unicode_name (gunichar wc)
 G_CONST_RETURN gchar *
 gucharmap_get_unicode_category_name (gunichar wc)
 {
+  gucharmap_intl_ensure_initialized ();
+
   switch (gucharmap_unichar_type (wc))
     {
       case G_UNICODE_CONTROL: return _("Other, Control");

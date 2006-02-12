@@ -92,6 +92,7 @@ sub process_unicode_data_txt ($)
     print $out "/* Generated from UCD version $v */\n\n";
 
     print $out "#include <glib/gunicode.h>\n\n";
+    print $out "#include <glib/gi18n-lib.h>\n\n";
 
     my @unicode_pairs;
     my %names;
@@ -677,7 +678,6 @@ sub process_blocks_txt ($)
     print $out "/* Generated from UCD version $v */\n\n";
 
     print $out "#include <glib/gunicode.h>\n";
-    print $out "#include \"gucharmap-intl.h\"\n\n";
 
     print $out "typedef struct _UnicodeBlock UnicodeBlock;\n";
     print $out "\n";

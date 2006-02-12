@@ -2,7 +2,7 @@
 # Run this to generate all the initial makefiles, etc.
 
 PKG_NAME=gucharmap
-REQUIRED_AUTOMAKE_VERSION=1.7
+REQUIRED_AUTOMAKE_VERSION=1.9
 
 #name of package
 PKG_NAME=${PKG_NAME:-Package}

@@ -4,7 +4,6 @@
 /* Generated from UCD version 4.1.0 */
 
 #include <glib/gunicode.h>
-#include "gucharmap-intl.h"
 
 typedef struct _UnicodeScript UnicodeScript;
 

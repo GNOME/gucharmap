@@ -472,6 +472,8 @@ chartable_accessible_factory_class_init (AtkObjectFactoryClass *clazz)
 {
   clazz->create_accessible = chartable_accessible_factory_create_accessible;
   clazz->get_accessible_type = chartable_accessible_factory_get_accessible_type;
+
+  gucharmap_intl_ensure_initialized ();
 }
 
 static GType

@@ -21,26 +21,20 @@
 
 #include <gtk/gtk.h>
 #include <stdlib.h>
+#include"gucharmap-intl.h"
 #if HAVE_GNOME
 # include <gnome.h>
-# include <locale.h> /* we call setlocale(3) */
 #endif
-#if !HAVE_GNOME
-# include <popt.h>
-#endif
-#include "gucharmap-intl.h"
 #include "gucharmap-window.h"
 #include "gucharmap-mini-fontsel.h"
 
 static gchar *new_font = NULL;
-static struct poptOption options[] = 
-{ 
-  { "font", '\0', POPT_ARG_STRING, &new_font, 0, 
+
+static const GOptionEntry goptions[] = 
+{
+  { "font", 0, 0, G_OPTION_ARG_STRING, &new_font,
     N_("Font to start with; ex: 'Serif 27'"), NULL },
-#if !HAVE_GNOME
-  POPT_AUTOHELP  /* gnome does this automatically */
-#endif
-  { NULL, '\0', 0, NULL, 0 }
+  { NULL }
 };
 
 gint
@@ -50,34 +44,33 @@ main (gint argc, gchar **argv)
   GdkScreen *screen;
   gint monitor;
   GdkRectangle rect;
+#if HAVE_GNOME
+  GOptionContext *context;
+#endif
 #if !HAVE_GNOME
-  poptContext popt_context;
-  gint rc;
+  GError *error = NULL;
 #endif  /* #if !HAVE_GNOME */
 
-#if !HAVE_GNOME
-  gtk_init (&argc, &argv);
-#else 
-  setlocale (LC_ALL, "");
-#endif
-
-  /* translate --help message */
-  options[0].descrip = _(options[0].descrip);
+ gucharmap_intl_ensure_initialized ();
+ textdomain (GETTEXT_PACKAGE);
 
 #if HAVE_GNOME
-  gnome_program_init ("gucharmap", VERSION, LIBGNOMEUI_MODULE, argc, argv,
-                      GNOME_PARAM_APP_DATADIR, DATADIR,
-                      GNOME_PARAM_POPT_TABLE, options, NULL);
-#else
-  popt_context = poptGetContext ("gucharmap", argc, (const gchar **) argv, options, 0);
-  rc = poptGetNextOpt (popt_context);
+  context = g_option_context_new ("");
+  g_option_context_add_main_entries (context, goptions, GETTEXT_PACKAGE);
 
-  if (rc != -1)
+  gnome_program_init ("gucharmap", VERSION, LIBGNOMEUI_MODULE, argc, argv,
+		      GNOME_PARAM_APP_DATADIR, DATADIR,
+		      GNOME_PARAM_GOPTION_CONTEXT, context,
+		      NULL);
+#else
+  if (!gtk_init_with_args (&argc, &argv, "", goptions, GETTEXT_PACKAGE, &error))
     {
-       g_printerr ("%s: %s\n", poptBadOption (popt_context, POPT_BADOPTION_NOALIAS), poptStrerror (rc));
-       exit (1);
+      g_printerr ("%s\n", error->message);
+      g_error_free (error);
+
+      exit (1);
     }
-#endif  /* else (#if HAVE_GNOME) */
+#endif /* HAVE_GNOME */
 
   window = gucharmap_window_new ();
   gucharmap_window_set_text_to_copy_visible (GUCHARMAP_WINDOW (window), TRUE);

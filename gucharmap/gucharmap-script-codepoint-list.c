@@ -19,6 +19,7 @@
 
 #include "config.h"
 #include <glib.h>
+#include "gucharmap-intl.h"
 #include <string.h>
 #include "gucharmap-script-codepoint-list.h"
 #include "unicode-scripts.h"
@@ -254,6 +255,8 @@ gucharmap_script_codepoint_list_class_init (GucharmapScriptCodepointListClass *c
   codepoint_list_class->get_last_index = get_last_index;
   
   gobject_class->finalize = finalize;
+
+  gucharmap_intl_ensure_initialized ();
 }
 
 static void 

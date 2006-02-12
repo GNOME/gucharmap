@@ -577,12 +577,7 @@ make_menu (GucharmapWindow *guw)
   			       gtk_ui_manager_get_accel_group (priv->uimanager) );
   
   priv->action_group = gtk_action_group_new ("gucharmap_actions");
-  gtk_action_group_set_translation_domain  (priv->action_group,
-					    GETTEXT_PACKAGE);
-  gtk_action_group_set_translate_func (priv->action_group,
-				       gucharmap_gettext,
-				       NULL,
-				       NULL);
+  gtk_action_group_set_translation_domain (priv->action_group, GETTEXT_PACKAGE);
 
   gtk_action_group_add_actions (priv->action_group,
   				menu_entries,
@@ -888,6 +883,8 @@ gucharmap_window_class_init (GucharmapWindowClass *clazz)
   GTK_WIDGET_CLASS (clazz)->show_all = show_all;
   G_OBJECT_CLASS (clazz)->finalize = window_finalize;
   g_type_class_add_private (clazz, sizeof (GucharmapWindowPrivate));
+
+  gucharmap_intl_ensure_initialized ();
 }
 
 GType 
