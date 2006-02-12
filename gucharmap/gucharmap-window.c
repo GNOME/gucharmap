@@ -735,7 +735,7 @@ load_icon (GucharmapWindow *guw)
   gchar *package_root, *icon_path;
 
   package_root = g_win32_get_package_installation_directory (NULL, NULL);
-  icon_path = g_build_filename (package_root, "share", "pixmaps", "gucharmap.png");
+  icon_path = g_build_filename (package_root, "share", "icons", "hicolor", "48x48", "apps", "gucharmap.png");
   priv->icon = gdk_pixbuf_new_from_file (icon_path, &error);
   g_free (package_root);
   g_free (icon_path);

@@ -18,9 +18,8 @@
 ##
 
 
-pixmapsdir = $(datadir)/pixmaps
+pixmapsdir = $(datadir)/icons/hicolor/48x48/apps
 
 pixmaps_DATA = gucharmap.png
 
 EXTRA_DIST = $(pixmaps_DATA) gucharmap.ico
-
