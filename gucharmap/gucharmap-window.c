@@ -333,22 +333,54 @@ help_about (GtkAction       *action,
       "Sun Microsystems",
       NULL
     };	  
-  const gchar *translator_credits;
 
+  const gchar *license[] = {
+    N_("Gucharmap is free software; you can redistribute it and/or modify "
+       "it under the terms of the GNU General Public License as published by "
+       "the Free Software Foundation; either version 2 of the License, or "
+       "(at your option) any later version."),
+    N_("Permission is hereby granted, free of charge, to any person obtaining "
+       "a copy of the Unicode data files to deal in them without restriction, "
+       "including without limitation the rights to use, copy, modify, merge, "
+       "publish, distribute, and/or sell copies."),
+    N_("Gucharmap and the Unicode data files are distributed in the hope that "
+       "they will be useful, but WITHOUT ANY WARRANTY; without even the implied "
+       "warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See "
+       "the GNU General Public License and Unicode Copyright for more details."),
+    N_("You should have received a copy of the GNU General Public License "
+       "along with Gucharmap; if not, write to the Free Software Foundation, Inc., "
+       "59 Temple Place, Suite 330, Boston, MA  02111-1307  USA"),
+    N_("Also you should have received a copy of the Unicode Copyright along "
+       "with Gucharmap; you can always find it at Unicode's website: "
+       "http://www.unicode.org/copyright.html")
+  };
+  gchar *license_trans;
+  license_trans = g_strconcat (_(license[0]), "\n\n", _(license[1]), "\n\n",
+			       _(license[2]), "\n\n", _(license[3]), "\n\n",
+			       _(license[4]), "\n\n", NULL);
+
+  const gchar *translator_credits;
   translator_credits = _("translator-credits");
   if (strcmp (translator_credits, "translator-credits") == 0)
     translator_credits = NULL;
 
   gtk_show_about_dialog (GTK_WINDOW (guw),
   			 "authors", authors,
-			 "comments", _("Character Map"),
-			 "copyright", "Copyright © 2004 Noah Levitt <nlevitt@columbia.edu>",
+			 "comments", _("GNOME Character Map\n"
+				       "based on Unicode Character Database"),
+			 "copyright", "Copyright © 2004 Noah Levitt <nlevitt@columbia.edu>\n"
+				      "Copyright © 1991-2005 Unicode, Inc.",
 			 "documenters", documenters,
+			 "license", license_trans,
 			 "logo", priv->icon,
+			 "name", _("Gucharmap"),
 			 "translator-credits", translator_credits,
 			 "version", VERSION,
-			 "name", _("gucharmap"),
+			 "website", "http://live.gnome.org/Gucharmap",
+			 "wrap-license", TRUE,
 			 NULL);
+
+  g_free (license_trans);
 }
 
 static void

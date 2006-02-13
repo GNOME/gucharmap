@@ -1,3 +1,16 @@
+2006-02-13  Behdad Esfahbod  <behdad@gnome.org>
+
+	* gucharmap/gucharmap-window.c (help_about): Use "GNOME Character Map"
+	instead of "gucharmap".  Add license information.
+
+	* gucharmap/gen-guch-unicode-tables.pl:
+	* gucharmap/unicode-blocks.h:
+	* gucharmap/unicode-categories.h:
+	* gucharmap/unicode-names.h:
+	* gucharmap/unicode-nameslist.h:
+	* gucharmap/unicode-scripts.h:
+	* gucharmap/unicode-unihan.h: Guard headers from multiple inclusion.
+
 2006-02-11  Behdad Esfahbod  <behdad@gnome.org>
 
 	* gucharmap/Makefile.am, gucharmap/gucharmap-window.c (load_icon),
