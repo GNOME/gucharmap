@@ -22,7 +22,7 @@
 #include <gtk/gtk.h>
 #include <stdlib.h>
 #include"gucharmap-intl.h"
-#if HAVE_GNOME
+#ifdef HAVE_GNOME
 # include <gnome.h>
 #endif
 #include "gucharmap-window.h"
@@ -44,17 +44,16 @@ main (gint argc, gchar **argv)
   GdkScreen *screen;
   gint monitor;
   GdkRectangle rect;
-#if HAVE_GNOME
+#ifdef HAVE_GNOME
   GOptionContext *context;
-#endif
-#if !HAVE_GNOME
+#else
   GError *error = NULL;
-#endif  /* #if !HAVE_GNOME */
+#endif
 
  gucharmap_intl_ensure_initialized ();
  textdomain (GETTEXT_PACKAGE);
 
-#if HAVE_GNOME
+#ifdef HAVE_GNOME
   context = g_option_context_new ("");
   g_option_context_add_main_entries (context, goptions, GETTEXT_PACKAGE);
 
@@ -70,7 +69,7 @@ main (gint argc, gchar **argv)
 
       exit (1);
     }
-#endif /* HAVE_GNOME */
+#endif
 
   window = gucharmap_window_new ();
   gucharmap_window_set_text_to_copy_visible (GUCHARMAP_WINDOW (window), TRUE);

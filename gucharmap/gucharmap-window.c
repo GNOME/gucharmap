@@ -23,7 +23,7 @@
 #include <string.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
-#if HAVE_GNOME
+#ifdef HAVE_GNOME
 # include <gnome.h>
 #endif
 #include "gucharmap-window.h"
@@ -297,7 +297,7 @@ snap_cols_pow2 (GtkAction 	 *action,
   				 gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)));
 }
 
-#if HAVE_GNOME
+#ifdef HAVE_GNOME
 static void
 help_contents (GtkAction *action,
 	       gpointer  data)
@@ -312,13 +312,15 @@ help_contents (GtkAction *action,
       g_error_free (error);
     }
 }
-#endif /* #if HAVE_GNOME */
+#endif
 
 static void
 help_about (GtkAction       *action, 
             GucharmapWindow *guw)
 {
   GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
+  const gchar *translator_credits;
+  const gchar *license_trans;
 
   const gchar *authors[] = 
     { 
@@ -354,12 +356,10 @@ help_about (GtkAction       *action,
        "with Gucharmap; you can always find it at Unicode's website: "
        "http://www.unicode.org/copyright.html")
   };
-  gchar *license_trans;
   license_trans = g_strconcat (_(license[0]), "\n\n", _(license[1]), "\n\n",
 			       _(license[2]), "\n\n", _(license[3]), "\n\n",
 			       _(license[4]), "\n\n", NULL);
 
-  const gchar *translator_credits;
   translator_credits = _("translator-credits");
   if (strcmp (translator_credits, "translator-credits") == 0)
     translator_credits = NULL;
@@ -521,7 +521,7 @@ static const GtkActionEntry menu_entries[] =
   { "PreviousChapter", NULL, N_("Previous Script"), "<control>Page_Up",
     NULL, G_CALLBACK (prev_chapter) },
 
-#if HAVE_GNOME
+#ifdef HAVE_GNOME
   { "HelpContents", GTK_STOCK_HELP, N_("_Contents"), "F1",
     NULL, G_CALLBACK (help_contents) },
 #endif
@@ -565,7 +565,7 @@ static const char ui_info [] =
 "	 <menuitem name=\"GoPreviousChapterMenu\" action=\"PreviousChapter\" />"
 "    </menu>"
 "    <menu name=\"HelpMenu\" action=\"Help\">"
-#if HAVE_GNOME
+#ifdef HAVE_GNOME
 "	 <menuitem name=\"HelpContentsMenu\" action=\"HelpContents\" />"
 #endif
 "	 <menuitem name=\"HelpAboutMenu\" action=\"About\" />"
