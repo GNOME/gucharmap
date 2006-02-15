@@ -1,26 +1,27 @@
 # Hungarian translation of gucharmap.
-# Copyright (C) 2003-2004, 2005 Free Software Foundation, Inc.
+# Copyright (C) 2003-2004, 2005, 2006 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gucharmap package.
 # Andras Timar <timar@fsf.hu>, 2003-2004.
 # Laszlo Dvornik <dvornikl@mailbox.hu>, 2004.
 # Gabor Kelemen <kelemeng@gnome.hu>, 2005.
+# Mate ORY <orymate at gmail d0t com>, 2006.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gucharmap.HEAD.hu\n"
+"Project-Id-Version: gucharmap.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-14 06:46+0000\n"
-"PO-Revision-Date: 2005-08-14 13:41+0200\n"
-"Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
-"Language-Team: Hungarian <gnome@gnome.hu>\n"
+"POT-Creation-Date: 2006-02-01 07:21+0100\n"
+"PO-Revision-Date: 2006-02-02 14:53+0100\n"
+"Last-Translator: Mate ORY <orymate at gmail d0t com>\n"
+"Language-Team: Hungarian <gnome@fsf.hu>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10\n"
+"X-Generator: KBabel 1.10.2\n"
 "Plural-Forms:  nplurals=1; plural=0;\n"
 
-#: ../gucharmap.desktop.in.h:1 ../gucharmap/gucharmap-window.c:324
-#: ../gucharmap/gucharmap-window.c:856
+#: ../gucharmap.desktop.in.h:1 ../gucharmap/gucharmap-window.c:344
+#: ../gucharmap/gucharmap-window.c:848
 msgid "Character Map"
 msgstr "Karaktertábla"
 
@@ -28,96 +29,104 @@ msgstr "Karaktertábla"
 msgid "Insert special characters into documents"
 msgstr "Különleges karakterek dokumentumokba illesztése"
 
-#: ../gucharmap/gucharmap-charmap.c:250
+#: ../gucharmap/gucharmap-charmap.c:266
 msgid "Canonical decomposition:"
 msgstr "Kanonikus dekompozíció:"
 
-#: ../gucharmap/gucharmap-charmap.c:290 ../gucharmap/gucharmap-table.c:294
+#: ../gucharmap/gucharmap-charmap.c:307 ../gucharmap/gucharmap-table.c:294
 msgid "[not a printable character]"
 msgstr "[nem nyomtatható karakter]"
 
-#: ../gucharmap/gucharmap-charmap.c:304
+#: ../gucharmap/gucharmap-charmap.c:321
 msgid "General Character Properties"
 msgstr "Általános karaktertulajdonságok"
 
 #. character category
-#: ../gucharmap/gucharmap-charmap.c:307
+#: ../gucharmap/gucharmap-charmap.c:324
 msgid "Unicode category:"
 msgstr "Unicode-kategória:"
 
-#: ../gucharmap/gucharmap-charmap.c:313
+#: ../gucharmap/gucharmap-charmap.c:333
 msgid "Various Useful Representations"
 msgstr "Többféle hasznos reprezentáció"
 
-#: ../gucharmap/gucharmap-charmap.c:322
+#: ../gucharmap/gucharmap-charmap.c:343
 msgid "UTF-8:"
 msgstr "UTF-8:"
 
-#: ../gucharmap/gucharmap-charmap.c:330
-msgid "Octal escaped UTF-8:"
-msgstr "Oktális formában írt UTF-8:"
+#: ../gucharmap/gucharmap-charmap.c:351
+msgid "UTF-16:"
+msgstr "UTF-16:"
 
-#: ../gucharmap/gucharmap-charmap.c:336
-msgid "Decimal entity reference:"
-msgstr "Decimális entitásreferencia:"
+#: ../gucharmap/gucharmap-charmap.c:362
+msgid "C octal escaped UTF-8:"
+msgstr "C oktális escape-elt UTF-8:"
 
-#: ../gucharmap/gucharmap-charmap.c:342
+#: ../gucharmap/gucharmap-charmap.c:372
+msgid "XML decimal entity:"
+msgstr "XML decimális entitás:"
+
+#: ../gucharmap/gucharmap-charmap.c:383
 msgid "Annotations and Cross References"
 msgstr "Magyarázó jegyzetek és kereszthivatkozások"
 
-#: ../gucharmap/gucharmap-charmap.c:349
+#: ../gucharmap/gucharmap-charmap.c:390
 msgid "Alias names:"
 msgstr "Álnevek:"
 
-#: ../gucharmap/gucharmap-charmap.c:358
+#: ../gucharmap/gucharmap-charmap.c:399
 msgid "Notes:"
 msgstr "Megjegyzés:"
 
-#: ../gucharmap/gucharmap-charmap.c:367
+#: ../gucharmap/gucharmap-charmap.c:408
 msgid "See also:"
 msgstr "Lásd még:"
 
-#: ../gucharmap/gucharmap-charmap.c:376
+#: ../gucharmap/gucharmap-charmap.c:417
 msgid "Approximate equivalents:"
 msgstr "Nagyjából egyenértékű:"
 
-#: ../gucharmap/gucharmap-charmap.c:385
+#: ../gucharmap/gucharmap-charmap.c:426
 msgid "Equivalents:"
 msgstr "Egyenértékű:"
 
-#: ../gucharmap/gucharmap-charmap.c:400
+#: ../gucharmap/gucharmap-charmap.c:442
 msgid "CJK Ideograph Information"
 msgstr "CJK képírásjel-információ"
 
-#: ../gucharmap/gucharmap-charmap.c:405
+#: ../gucharmap/gucharmap-charmap.c:447
 msgid "Definition in English:"
 msgstr "Angol definíció:"
 
-#: ../gucharmap/gucharmap-charmap.c:410
+#: ../gucharmap/gucharmap-charmap.c:452
 msgid "Mandarin Pronunciation:"
 msgstr "Mandarin kiejtés:"
 
-#: ../gucharmap/gucharmap-charmap.c:415
+#: ../gucharmap/gucharmap-charmap.c:457
+msgid "Cantonese Pronunciation:"
+msgstr "Kantoni kiejtés:"
+
+#: ../gucharmap/gucharmap-charmap.c:462
 msgid "Japanese On Pronunciation:"
 msgstr "Japán on kiejtés:"
 
-#: ../gucharmap/gucharmap-charmap.c:420
+#: ../gucharmap/gucharmap-charmap.c:467
 msgid "Japanese Kun Pronunciation:"
 msgstr "Japán kun kiejtés:"
 
-#: ../gucharmap/gucharmap-charmap.c:425
+#: ../gucharmap/gucharmap-charmap.c:472
 msgid "Tang Pronunciation:"
 msgstr "Tang kiejtés:"
 
-#: ../gucharmap/gucharmap-charmap.c:430
+#: ../gucharmap/gucharmap-charmap.c:477
 msgid "Korean Pronunciation:"
 msgstr "Koreai kiejtés:"
 
-#: ../gucharmap/gucharmap-charmap.c:731
+#: ../gucharmap/gucharmap-charmap.c:778
 msgid "Characte_r Table"
 msgstr "Karakte_rtábla"
 
-#: ../gucharmap/gucharmap-charmap.c:734
+#: ../gucharmap/gucharmap-charmap.c:781
 msgid "Character _Details"
 msgstr "Karakter _adatai"
 
@@ -135,25 +144,25 @@ msgstr "Betűméret"
 
 #. Unicode assigns "Common" as the script name for any character not
 #. * specifically listed in Scripts.txt
-#: ../gucharmap/gucharmap-script-codepoint-list.c:458
-#: ../gucharmap/unicode-scripts.h:20
+#: ../gucharmap/gucharmap-script-codepoint-list.c:455
+#: ../gucharmap/unicode-scripts.h:22
 msgid "Common"
 msgstr "Közös"
 
-#: ../gucharmap/gucharmap-table.c:1509
+#: ../gucharmap/gucharmap-table.c:1511
 msgid "Unknown character, unable to identify."
 msgstr "Ismeretlen karakter, nem azonosítható."
 
-#: ../gucharmap/gucharmap-table.c:1511
-#: ../gucharmap/gucharmap-search-dialog.c:465
+#: ../gucharmap/gucharmap-table.c:1513
+#: ../gucharmap/gucharmap-search-dialog.c:595
 msgid "Not found."
 msgstr "Nem található."
 
-#: ../gucharmap/gucharmap-table.c:1514
+#: ../gucharmap/gucharmap-table.c:1516
 msgid "Character found."
 msgstr "Karakter megtalálva."
 
-#: ../gucharmap/gucharmap-table.c:1578
+#: ../gucharmap/gucharmap-table.c:1580
 msgid "Character Table"
 msgstr "Karaktertábla"
 
@@ -209,9 +218,6 @@ msgstr "Egyéb, pótlás"
 msgid "Letter, Lowercase"
 msgstr "Betű, kisbetű"
 
-# #-#-#-#-#  nautilus.HEAD.hu.po-new.po (nautilus CVS-HEAD)  #-#-#-#-#
-# src/file-manager/fm-list-view.c:1988
-# src/file-manager/fm-search-list-view.c:573
 #: ../gucharmap/gucharmap-unicode-info.c:126
 msgid "Letter, Modifier"
 msgstr "Betű, módosító"
@@ -296,7 +302,6 @@ msgstr "Szimbólum, matematikai"
 msgid "Symbol, Other"
 msgstr "Szimbólum, egyéb"
 
-# src/bookmarks_callbacks.c:543
 #: ../gucharmap/gucharmap-unicode-info.c:147
 msgid "Separator, Line"
 msgstr "Elválasztó, sor"
@@ -305,115 +310,109 @@ msgstr "Elválasztó, sor"
 msgid "Separator, Paragraph"
 msgstr "Elválasztó, bekezdés"
 
-# src/bookmarks_callbacks.c:543
 #: ../gucharmap/gucharmap-unicode-info.c:149
 msgid "Separator, Space"
 msgstr "Elválasztó, szóköz"
 
-#: ../gucharmap/gucharmap-window.c:189
+#: ../gucharmap/gucharmap-window.c:190
 msgid "Searching..."
 msgstr "Keresés..."
 
-#: ../gucharmap/gucharmap-window.c:319
+#: ../gucharmap/gucharmap-window.c:338
 msgid "translator-credits"
-msgstr "Tímár András <timar@gnome.hu>"
+msgstr ""
+"Kelemen Gábor <kelemeng@gnome.hu>\n"
+"Tímár András <timar@gnome.hu>"
 
-#: ../gucharmap/gucharmap-window.c:420 ../gucharmap/gucharmap-window.c:602
-msgid "Next Script"
-msgstr "Következő írásrendszer"
+#: ../gucharmap/gucharmap-window.c:350
+msgid "gucharmap"
+msgstr "gucharmap"
 
-#: ../gucharmap/gucharmap-window.c:421 ../gucharmap/gucharmap-window.c:603
-msgid "Previous Script"
-msgstr "Előző írásrendszer"
-
-#: ../gucharmap/gucharmap-window.c:433 ../gucharmap/gucharmap-window.c:607
-msgid "Next Block"
-msgstr "Következő blokk"
-
-#: ../gucharmap/gucharmap-window.c:434 ../gucharmap/gucharmap-window.c:608
-msgid "Previous Block"
-msgstr "Előző blokk"
-
-#: ../gucharmap/gucharmap-window.c:469
+#: ../gucharmap/gucharmap-window.c:460
 msgid "_File"
 msgstr "_Fájl"
 
-#: ../gucharmap/gucharmap-window.c:471
+#: ../gucharmap/gucharmap-window.c:461
 msgid "_View"
 msgstr "_Nézet"
 
-#: ../gucharmap/gucharmap-window.c:473
+#: ../gucharmap/gucharmap-window.c:462
 msgid "_Search"
 msgstr "_Keresés"
 
-#: ../gucharmap/gucharmap-window.c:475
+#: ../gucharmap/gucharmap-window.c:463
 msgid "_Go"
 msgstr "_Ugrás"
 
-#: ../gucharmap/gucharmap-window.c:494
-msgid "By _Script"
-msgstr "Írá_srendszer szerint"
-
-#: ../gucharmap/gucharmap-window.c:500
-msgid "By _Unicode Block"
-msgstr "_Unicode-blokk szerint"
-
-#: ../gucharmap/gucharmap-window.c:508
-msgid "Snap Columns to Power of Two"
-msgstr "Oszlopok szélességének duplázása"
-
-#. ctrl-+
-#: ../gucharmap/gucharmap-window.c:516
-msgid "Zoom _In"
-msgstr "_Nagyítás"
-
-#. ctrl--
-#: ../gucharmap/gucharmap-window.c:526
-msgid "Zoom _Out"
-msgstr "_Kicsinyítés"
-
-#. ctrl-=
-#: ../gucharmap/gucharmap-window.c:536
-msgid "_Normal Size"
-msgstr "_Normál méret"
-
-# #-#-#-#-#  epiphany.gnome-2-4.hu.po-new.po (Epiphany CVS)  #-#-#-#-#
-# src/trans.h:339
-# #-#-#-#-#  galeon.HEAD.hu.po-new.po (Galeon 1.2)  #-#-#-#-#
-# #-#-#-#-#  epiphany.HEAD.hu.po-new.po (Epiphany CVS)  #-#-#-#-#
-# src/trans.h:339
-# #-#-#-#-#  galeon.HEAD.hu.po-new.po (Galeon 1.2)  #-#-#-#-#
-# src/trans.h:339
-#: ../gucharmap/gucharmap-window.c:550
-msgid "_Find..."
-msgstr "_Keresés..."
-
-#: ../gucharmap/gucharmap-window.c:558
-msgid "Find _Next"
-msgstr "_Következő találat"
-
-#: ../gucharmap/gucharmap-window.c:567
-msgid "Find _Previous"
-msgstr "_Előző találat"
-
-#: ../gucharmap/gucharmap-window.c:584
-msgid "_Next Character"
-msgstr "_Következő karakter"
-
-#: ../gucharmap/gucharmap-window.c:590
-msgid "_Previous Character"
-msgstr "_Előző karakter"
-
-#. make the help menu
-#: ../gucharmap/gucharmap-window.c:631
+#: ../gucharmap/gucharmap-window.c:464
 msgid "_Help"
 msgstr "_Súgó"
 
-#: ../gucharmap/gucharmap-window.c:714
+#: ../gucharmap/gucharmap-window.c:466
+msgid "_Quit"
+msgstr "_Kilépés"
+
+#: ../gucharmap/gucharmap-window.c:469
+msgid "Zoom _In"
+msgstr "_Nagyítás"
+
+#: ../gucharmap/gucharmap-window.c:471
+msgid "Zoom _Out"
+msgstr "_Kicsinyítés"
+
+#: ../gucharmap/gucharmap-window.c:473
+msgid "_Normal Size"
+msgstr "_Normál méret"
+
+#: ../gucharmap/gucharmap-window.c:476
+msgid "_Find..."
+msgstr "_Keresés..."
+
+#: ../gucharmap/gucharmap-window.c:478
+msgid "Find _Next"
+msgstr "_Következő találat"
+
+#: ../gucharmap/gucharmap-window.c:480
+msgid "Find _Previous"
+msgstr "_Előző találat"
+
+#: ../gucharmap/gucharmap-window.c:483
+msgid "_Next Character"
+msgstr "_Következő karakter"
+
+#: ../gucharmap/gucharmap-window.c:485
+msgid "_Previous Character"
+msgstr "_Előző karakter"
+
+#: ../gucharmap/gucharmap-window.c:487
+msgid "Next Script"
+msgstr "Következő írásrendszer"
+
+#: ../gucharmap/gucharmap-window.c:489
+msgid "Previous Script"
+msgstr "Előző írásrendszer"
+
+#: ../gucharmap/gucharmap-window.c:493
+msgid "_Contents"
+msgstr "_Tartalom"
+
+#: ../gucharmap/gucharmap-window.c:496
+msgid "_About"
+msgstr "_Névjegy"
+
+#: ../gucharmap/gucharmap-window.c:502
+msgid "By _Script"
+msgstr "Írá_srendszer szerint"
+
+#: ../gucharmap/gucharmap-window.c:504
+msgid "By _Unicode Block"
+msgstr "_Unicode-blokk szerint"
+
+#: ../gucharmap/gucharmap-window.c:706
 msgid "_Text to copy:"
 msgstr "_Másolandó szöveg:"
 
-#: ../gucharmap/gucharmap-window.c:735
+#: ../gucharmap/gucharmap-window.c:727
 msgid "Copy to the clipboard."
 msgstr "Másolás a vágólapra."
 
@@ -421,546 +420,623 @@ msgstr "Másolás a vágólapra."
 msgid "Font to start with; ex: 'Serif 27'"
 msgstr "Kiindulási betűkészlet; pl. \"Serif 27\""
 
-#: ../gucharmap/unicode-blocks.h:18
+#: ../gucharmap/unicode-blocks.h:19
 msgid "Basic Latin"
 msgstr "Latin alap"
 
-#: ../gucharmap/unicode-blocks.h:19
+#: ../gucharmap/unicode-blocks.h:20
 msgid "Latin-1 Supplement"
 msgstr "Latin-1 kiegészítés"
 
-#: ../gucharmap/unicode-blocks.h:20
+#: ../gucharmap/unicode-blocks.h:21
 msgid "Latin Extended-A"
 msgstr "Latin bővített - A"
 
-#: ../gucharmap/unicode-blocks.h:21
+#: ../gucharmap/unicode-blocks.h:22
 msgid "Latin Extended-B"
 msgstr "Latin bővített - B"
 
-#: ../gucharmap/unicode-blocks.h:22
+#: ../gucharmap/unicode-blocks.h:23
 msgid "IPA Extensions"
 msgstr "IPA kiterjesztések"
 
-#: ../gucharmap/unicode-blocks.h:23
+#: ../gucharmap/unicode-blocks.h:24
 msgid "Spacing Modifier Letters"
 msgstr "Szóköz szélességű módosítójelek"
 
-#: ../gucharmap/unicode-blocks.h:24
+#: ../gucharmap/unicode-blocks.h:25
 msgid "Combining Diacritical Marks"
 msgstr "Összeolvadó diakritikus jelek"
 
-#: ../gucharmap/unicode-blocks.h:25
+#: ../gucharmap/unicode-blocks.h:26
 msgid "Greek and Coptic"
 msgstr "Görög és kopt"
 
-#: ../gucharmap/unicode-blocks.h:26 ../gucharmap/unicode-scripts.h:22
+#: ../gucharmap/unicode-blocks.h:27 ../gucharmap/unicode-scripts.h:25
 msgid "Cyrillic"
 msgstr "Cirill"
 
-#: ../gucharmap/unicode-blocks.h:27
-msgid "Cyrillic Supplementary"
+#: ../gucharmap/unicode-blocks.h:28
+msgid "Cyrillic Supplement"
 msgstr "Cirill kiegészítés"
 
-#: ../gucharmap/unicode-blocks.h:28 ../gucharmap/unicode-scripts.h:13
+#: ../gucharmap/unicode-blocks.h:29 ../gucharmap/unicode-scripts.h:14
 msgid "Armenian"
 msgstr "Örmény"
 
-#: ../gucharmap/unicode-blocks.h:29 ../gucharmap/unicode-scripts.h:34
+#: ../gucharmap/unicode-blocks.h:30 ../gucharmap/unicode-scripts.h:38
 msgid "Hebrew"
 msgstr "Héber"
 
-#: ../gucharmap/unicode-blocks.h:30 ../gucharmap/unicode-scripts.h:12
+#: ../gucharmap/unicode-blocks.h:31 ../gucharmap/unicode-scripts.h:13
 msgid "Arabic"
 msgstr "Arab"
 
-#: ../gucharmap/unicode-blocks.h:31 ../gucharmap/unicode-scripts.h:54
+#: ../gucharmap/unicode-blocks.h:32 ../gucharmap/unicode-scripts.h:62
 msgid "Syriac"
 msgstr "Szír"
 
-#: ../gucharmap/unicode-blocks.h:32 ../gucharmap/unicode-scripts.h:60
+#: ../gucharmap/unicode-blocks.h:33
+msgid "Arabic Supplement"
+msgstr "Arab kiegészítés"
+
+#: ../gucharmap/unicode-blocks.h:34 ../gucharmap/unicode-scripts.h:68
 msgid "Thaana"
 msgstr "Thaana"
 
-#: ../gucharmap/unicode-blocks.h:33 ../gucharmap/unicode-scripts.h:24
+#: ../gucharmap/unicode-blocks.h:35 ../gucharmap/unicode-scripts.h:27
 msgid "Devanagari"
 msgstr "Devanagari"
 
-#: ../gucharmap/unicode-blocks.h:34 ../gucharmap/unicode-scripts.h:14
+#: ../gucharmap/unicode-blocks.h:36 ../gucharmap/unicode-scripts.h:15
 msgid "Bengali"
 msgstr "Bengáli"
 
-#: ../gucharmap/unicode-blocks.h:35 ../gucharmap/unicode-scripts.h:30
+#: ../gucharmap/unicode-blocks.h:37 ../gucharmap/unicode-scripts.h:34
 msgid "Gurmukhi"
 msgstr "Gurmukhi"
 
-#: ../gucharmap/unicode-blocks.h:36 ../gucharmap/unicode-scripts.h:29
+#: ../gucharmap/unicode-blocks.h:38 ../gucharmap/unicode-scripts.h:33
 msgid "Gujarati"
 msgstr "Gudzsarati"
 
-#: ../gucharmap/unicode-blocks.h:37 ../gucharmap/unicode-scripts.h:49
+#: ../gucharmap/unicode-blocks.h:39 ../gucharmap/unicode-scripts.h:56
 msgid "Oriya"
-msgstr "Oriya"
+msgstr "Orija"
 
-#: ../gucharmap/unicode-blocks.h:38 ../gucharmap/unicode-scripts.h:58
+#: ../gucharmap/unicode-blocks.h:40 ../gucharmap/unicode-scripts.h:66
 msgid "Tamil"
 msgstr "Tamil"
 
-#: ../gucharmap/unicode-blocks.h:39 ../gucharmap/unicode-scripts.h:59
+#: ../gucharmap/unicode-blocks.h:41 ../gucharmap/unicode-scripts.h:67
 msgid "Telugu"
 msgstr "Telugu"
 
-#: ../gucharmap/unicode-blocks.h:40 ../gucharmap/unicode-scripts.h:37
+#: ../gucharmap/unicode-blocks.h:42 ../gucharmap/unicode-scripts.h:41
 msgid "Kannada"
 msgstr "Kannada"
 
-#: ../gucharmap/unicode-blocks.h:41 ../gucharmap/unicode-scripts.h:44
+#: ../gucharmap/unicode-blocks.h:43 ../gucharmap/unicode-scripts.h:49
 msgid "Malayalam"
 msgstr "Malayalam"
 
-#: ../gucharmap/unicode-blocks.h:42 ../gucharmap/unicode-scripts.h:53
+#: ../gucharmap/unicode-blocks.h:44 ../gucharmap/unicode-scripts.h:60
 msgid "Sinhala"
-msgstr "Sinhala"
+msgstr "Szingaléz"
 
-#: ../gucharmap/unicode-blocks.h:43 ../gucharmap/unicode-scripts.h:61
+#: ../gucharmap/unicode-blocks.h:45 ../gucharmap/unicode-scripts.h:69
 msgid "Thai"
 msgstr "Thai"
 
-#: ../gucharmap/unicode-blocks.h:44 ../gucharmap/unicode-scripts.h:40
+#: ../gucharmap/unicode-blocks.h:46 ../gucharmap/unicode-scripts.h:45
 msgid "Lao"
 msgstr "Lao"
 
-#: ../gucharmap/unicode-blocks.h:45 ../gucharmap/unicode-scripts.h:62
+#: ../gucharmap/unicode-blocks.h:47 ../gucharmap/unicode-scripts.h:70
 msgid "Tibetan"
 msgstr "Tibeti"
 
-#: ../gucharmap/unicode-blocks.h:46 ../gucharmap/unicode-scripts.h:46
+#: ../gucharmap/unicode-blocks.h:48 ../gucharmap/unicode-scripts.h:51
 msgid "Myanmar"
 msgstr "Myanmar"
 
-#: ../gucharmap/unicode-blocks.h:47 ../gucharmap/unicode-scripts.h:26
+#: ../gucharmap/unicode-blocks.h:49 ../gucharmap/unicode-scripts.h:29
 msgid "Georgian"
 msgstr "Grúz"
 
-#: ../gucharmap/unicode-blocks.h:48
+#: ../gucharmap/unicode-blocks.h:50
 msgid "Hangul Jamo"
 msgstr "Hangul Jamo"
 
-#: ../gucharmap/unicode-blocks.h:49 ../gucharmap/unicode-scripts.h:25
+#: ../gucharmap/unicode-blocks.h:51 ../gucharmap/unicode-scripts.h:28
 msgid "Ethiopic"
 msgstr "Etióp"
 
-# src/trans.h:377
-#: ../gucharmap/unicode-blocks.h:50 ../gucharmap/unicode-scripts.h:19
+#: ../gucharmap/unicode-blocks.h:52
+msgid "Ethiopic Supplement"
+msgstr "Etióp kiegészítés"
+
+#: ../gucharmap/unicode-blocks.h:53 ../gucharmap/unicode-scripts.h:21
 msgid "Cherokee"
 msgstr "Cherokee"
 
-#: ../gucharmap/unicode-blocks.h:51
+#: ../gucharmap/unicode-blocks.h:54
 msgid "Unified Canadian Aboriginal Syllabics"
 msgstr "Egységes kanadai bennszülött szótagok"
 
-#: ../gucharmap/unicode-blocks.h:52 ../gucharmap/unicode-scripts.h:47
+#: ../gucharmap/unicode-blocks.h:55 ../gucharmap/unicode-scripts.h:53
 msgid "Ogham"
 msgstr "Ogham"
 
-#: ../gucharmap/unicode-blocks.h:53 ../gucharmap/unicode-scripts.h:51
+#: ../gucharmap/unicode-blocks.h:56 ../gucharmap/unicode-scripts.h:58
 msgid "Runic"
 msgstr "Rúnák"
 
-#: ../gucharmap/unicode-blocks.h:54 ../gucharmap/unicode-scripts.h:55
+#: ../gucharmap/unicode-blocks.h:57 ../gucharmap/unicode-scripts.h:63
 msgid "Tagalog"
 msgstr "Tagalog"
 
-#: ../gucharmap/unicode-blocks.h:55 ../gucharmap/unicode-scripts.h:33
+#: ../gucharmap/unicode-blocks.h:58 ../gucharmap/unicode-scripts.h:37
 msgid "Hanunoo"
 msgstr "Hanunoo"
 
-#: ../gucharmap/unicode-blocks.h:56 ../gucharmap/unicode-scripts.h:17
+#: ../gucharmap/unicode-blocks.h:59 ../gucharmap/unicode-scripts.h:19
 msgid "Buhid"
 msgstr "Buhid"
 
-#: ../gucharmap/unicode-blocks.h:57 ../gucharmap/unicode-scripts.h:56
+#: ../gucharmap/unicode-blocks.h:60 ../gucharmap/unicode-scripts.h:64
 msgid "Tagbanwa"
 msgstr "Tagbanwa"
 
-#: ../gucharmap/unicode-blocks.h:58 ../gucharmap/unicode-scripts.h:39
+#: ../gucharmap/unicode-blocks.h:61 ../gucharmap/unicode-scripts.h:44
 msgid "Khmer"
 msgstr "Khmer"
 
-#: ../gucharmap/unicode-blocks.h:59 ../gucharmap/unicode-scripts.h:45
+#: ../gucharmap/unicode-blocks.h:62 ../gucharmap/unicode-scripts.h:50
 msgid "Mongolian"
 msgstr "Mongol"
 
-#: ../gucharmap/unicode-blocks.h:60 ../gucharmap/unicode-scripts.h:42
+#: ../gucharmap/unicode-blocks.h:63 ../gucharmap/unicode-scripts.h:47
 msgid "Limbu"
 msgstr "Limbu"
 
-#: ../gucharmap/unicode-blocks.h:61 ../gucharmap/unicode-scripts.h:57
+#: ../gucharmap/unicode-blocks.h:64 ../gucharmap/unicode-scripts.h:65
 msgid "Tai Le"
 msgstr "Tai Le"
 
-#: ../gucharmap/unicode-blocks.h:62
+#: ../gucharmap/unicode-blocks.h:65 ../gucharmap/unicode-scripts.h:52
+msgid "New Tai Lue"
+msgstr "Új Tai Lue"
+
+#: ../gucharmap/unicode-blocks.h:66
 msgid "Khmer Symbols"
 msgstr "Khmer szimbólumok"
 
-#: ../gucharmap/unicode-blocks.h:63
+#: ../gucharmap/unicode-blocks.h:67 ../gucharmap/unicode-scripts.h:18
+msgid "Buginese"
+msgstr "Buginese"
+
+#: ../gucharmap/unicode-blocks.h:68
 msgid "Phonetic Extensions"
 msgstr "Fonetikus kiterjesztések"
 
-#: ../gucharmap/unicode-blocks.h:64
+#: ../gucharmap/unicode-blocks.h:69
+msgid "Phonetic Extensions Supplement"
+msgstr "Fonetikus kiterjesztések"
+
+#: ../gucharmap/unicode-blocks.h:70
+msgid "Combining Diacritical Marks Supplement"
+msgstr "Összeolvadó diakritikus jelek kiegészítés"
+
+#: ../gucharmap/unicode-blocks.h:71
 msgid "Latin Extended Additional"
 msgstr "További latin kiterjesztések"
 
-#: ../gucharmap/unicode-blocks.h:65
+#: ../gucharmap/unicode-blocks.h:72
 msgid "Greek Extended"
 msgstr "Bővített görög"
 
-#: ../gucharmap/unicode-blocks.h:66
+#: ../gucharmap/unicode-blocks.h:73
 msgid "General Punctuation"
 msgstr "Általános központozás"
 
-#: ../gucharmap/unicode-blocks.h:67
+#: ../gucharmap/unicode-blocks.h:74
 msgid "Superscripts and Subscripts"
 msgstr "Alsó és felső index"
 
-#: ../gucharmap/unicode-blocks.h:68
+#: ../gucharmap/unicode-blocks.h:75
 msgid "Currency Symbols"
 msgstr "Pénznemek szimbólumai"
 
-#: ../gucharmap/unicode-blocks.h:69
+#: ../gucharmap/unicode-blocks.h:76
 msgid "Combining Diacritical Marks for Symbols"
 msgstr "Összeolvadó diakritikus jelek szimbólumokhoz"
 
-#: ../gucharmap/unicode-blocks.h:70
+#: ../gucharmap/unicode-blocks.h:77
 msgid "Letterlike Symbols"
 msgstr "Betűszerű szimbólumok"
 
-#: ../gucharmap/unicode-blocks.h:71
+#: ../gucharmap/unicode-blocks.h:78
 msgid "Number Forms"
 msgstr "Számalakok"
 
-#: ../gucharmap/unicode-blocks.h:72
+#: ../gucharmap/unicode-blocks.h:79
 msgid "Arrows"
 msgstr "Nyilak"
 
-#: ../gucharmap/unicode-blocks.h:73
+#: ../gucharmap/unicode-blocks.h:80
 msgid "Mathematical Operators"
 msgstr "Matematikai operátorok"
 
-#: ../gucharmap/unicode-blocks.h:74
+#: ../gucharmap/unicode-blocks.h:81
 msgid "Miscellaneous Technical"
 msgstr "Egyéb műszaki jelek"
 
-#: ../gucharmap/unicode-blocks.h:75
+#: ../gucharmap/unicode-blocks.h:82
 msgid "Control Pictures"
 msgstr "Piktogramok"
 
-#: ../gucharmap/unicode-blocks.h:76
+#: ../gucharmap/unicode-blocks.h:83
 msgid "Optical Character Recognition"
 msgstr "Optikai karakterfelismerés"
 
-#: ../gucharmap/unicode-blocks.h:77
+#: ../gucharmap/unicode-blocks.h:84
 msgid "Enclosed Alphanumerics"
 msgstr "Csatolt alfanumerikus karakterek"
 
-#: ../gucharmap/unicode-blocks.h:78
+#: ../gucharmap/unicode-blocks.h:85
 msgid "Box Drawing"
 msgstr "Dobozrajzolás"
 
-#: ../gucharmap/unicode-blocks.h:79
+#: ../gucharmap/unicode-blocks.h:86
 msgid "Block Elements"
 msgstr "Blokkelemek"
 
-#: ../gucharmap/unicode-blocks.h:80
+#: ../gucharmap/unicode-blocks.h:87
 msgid "Geometric Shapes"
 msgstr "Geometriai alakzatok"
 
-#: ../gucharmap/unicode-blocks.h:81
+#: ../gucharmap/unicode-blocks.h:88
 msgid "Miscellaneous Symbols"
 msgstr "Egyéb szimbólumok"
 
-#: ../gucharmap/unicode-blocks.h:82
+#: ../gucharmap/unicode-blocks.h:89
 msgid "Dingbats"
 msgstr "Ábrácskák"
 
-#: ../gucharmap/unicode-blocks.h:83
+#: ../gucharmap/unicode-blocks.h:90
 msgid "Miscellaneous Mathematical Symbols-A"
 msgstr "Egyéb matematikai jelek (A)"
 
-#: ../gucharmap/unicode-blocks.h:84
+#: ../gucharmap/unicode-blocks.h:91
 msgid "Supplemental Arrows-A"
 msgstr "Kiegészítő nyilak (A)"
 
-#: ../gucharmap/unicode-blocks.h:85
+#: ../gucharmap/unicode-blocks.h:92
 msgid "Braille Patterns"
 msgstr "Braille-jelek"
 
-#: ../gucharmap/unicode-blocks.h:86
+#: ../gucharmap/unicode-blocks.h:93
 msgid "Supplemental Arrows-B"
 msgstr "Kiegészítő nyilak (B)"
 
-#: ../gucharmap/unicode-blocks.h:87
+#: ../gucharmap/unicode-blocks.h:94
 msgid "Miscellaneous Mathematical Symbols-B"
 msgstr "Egyéb matematikai jelek (B)"
 
-#: ../gucharmap/unicode-blocks.h:88
+#: ../gucharmap/unicode-blocks.h:95
 msgid "Supplemental Mathematical Operators"
 msgstr "Kiegészítő matematikai műveleti jelek"
 
-#: ../gucharmap/unicode-blocks.h:89
+#: ../gucharmap/unicode-blocks.h:96
 msgid "Miscellaneous Symbols and Arrows"
 msgstr "Egyéb szimbólumok és nyilak"
 
-#: ../gucharmap/unicode-blocks.h:90
+#: ../gucharmap/unicode-blocks.h:97 ../gucharmap/unicode-scripts.h:30
+msgid "Glagolitic"
+msgstr "Glagolit"
+
+#: ../gucharmap/unicode-blocks.h:98 ../gucharmap/unicode-scripts.h:23
+msgid "Coptic"
+msgstr "Kopt"
+
+#: ../gucharmap/unicode-blocks.h:99
+msgid "Georgian Supplement"
+msgstr "Grúz kiegészítés"
+
+#: ../gucharmap/unicode-blocks.h:100 ../gucharmap/unicode-scripts.h:71
+msgid "Tifinagh"
+msgstr "Tifinagh"
+
+#: ../gucharmap/unicode-blocks.h:101
+msgid "Ethiopic Extended"
+msgstr "Bővített etióp"
+
+#: ../gucharmap/unicode-blocks.h:102
+msgid "Supplemental Punctuation"
+msgstr "Kiegészítő írásjelek"
+
+#: ../gucharmap/unicode-blocks.h:103
 msgid "CJK Radicals Supplement"
 msgstr "Kiegészítő CJK gyökök"
 
-#: ../gucharmap/unicode-blocks.h:91
+#: ../gucharmap/unicode-blocks.h:104
 msgid "Kangxi Radicals"
 msgstr "Kandzsi gyökök"
 
-#: ../gucharmap/unicode-blocks.h:92
+#: ../gucharmap/unicode-blocks.h:105
 msgid "Ideographic Description Characters"
 msgstr "Ideogrammatikus leíró karakterek"
 
-#: ../gucharmap/unicode-blocks.h:93
+#: ../gucharmap/unicode-blocks.h:106
 msgid "CJK Symbols and Punctuation"
 msgstr "CJK (kínai, japán, koreai) szimbólumok és írásjelek"
 
-#: ../gucharmap/unicode-blocks.h:94 ../gucharmap/unicode-scripts.h:35
+#: ../gucharmap/unicode-blocks.h:107 ../gucharmap/unicode-scripts.h:39
 msgid "Hiragana"
 msgstr "Hiragana"
 
-#: ../gucharmap/unicode-blocks.h:95 ../gucharmap/unicode-scripts.h:38
+#: ../gucharmap/unicode-blocks.h:108 ../gucharmap/unicode-scripts.h:42
 msgid "Katakana"
 msgstr "Katakana"
 
-#: ../gucharmap/unicode-blocks.h:96 ../gucharmap/unicode-scripts.h:15
+#: ../gucharmap/unicode-blocks.h:109 ../gucharmap/unicode-scripts.h:16
 msgid "Bopomofo"
 msgstr "Bopomofo"
 
-#: ../gucharmap/unicode-blocks.h:97
+#: ../gucharmap/unicode-blocks.h:110
 msgid "Hangul Compatibility Jamo"
 msgstr "Hangul-kompatibilis Jamo"
 
-#: ../gucharmap/unicode-blocks.h:98
+#: ../gucharmap/unicode-blocks.h:111
 msgid "Kanbun"
 msgstr "Kanbun"
 
-#: ../gucharmap/unicode-blocks.h:99
+#: ../gucharmap/unicode-blocks.h:112
 msgid "Bopomofo Extended"
 msgstr "Bővített bopofomo"
 
-#: ../gucharmap/unicode-blocks.h:100
+#: ../gucharmap/unicode-blocks.h:113
+msgid "CJK Strokes"
+msgstr "CJK vonások"
+
+#: ../gucharmap/unicode-blocks.h:114
 msgid "Katakana Phonetic Extensions"
 msgstr "Katakana fonetikus kiterjesztések"
 
-#: ../gucharmap/unicode-blocks.h:101
+#: ../gucharmap/unicode-blocks.h:115
 msgid "Enclosed CJK Letters and Months"
 msgstr "Csatolt CJK betűk és hónapok"
 
-#: ../gucharmap/unicode-blocks.h:102
+#: ../gucharmap/unicode-blocks.h:116
 msgid "CJK Compatibility"
 msgstr "CJK visszafelé kompatibilitási"
 
-#: ../gucharmap/unicode-blocks.h:103
+#: ../gucharmap/unicode-blocks.h:117
 msgid "CJK Unified Ideographs Extension A"
 msgstr "CJK egyesített ideogramok A kiterjesztés"
 
-#: ../gucharmap/unicode-blocks.h:104
+#: ../gucharmap/unicode-blocks.h:118
 msgid "Yijing Hexagram Symbols"
 msgstr "Yijing Hexagram szimbólumok"
 
-#: ../gucharmap/unicode-blocks.h:105
+#: ../gucharmap/unicode-blocks.h:119
 msgid "CJK Unified Ideographs"
 msgstr "CJK egyesített ideogramok"
 
-#: ../gucharmap/unicode-blocks.h:106
+#: ../gucharmap/unicode-blocks.h:120
 msgid "Yi Syllables"
 msgstr "Yi szótagok"
 
-#: ../gucharmap/unicode-blocks.h:107
+#: ../gucharmap/unicode-blocks.h:121
 msgid "Yi Radicals"
 msgstr "Yi gyökök"
 
-#: ../gucharmap/unicode-blocks.h:108
+#: ../gucharmap/unicode-blocks.h:122
+msgid "Modifier Tone Letters"
+msgstr "Kiejtésmódosító jelek"
+
+#: ../gucharmap/unicode-blocks.h:123 ../gucharmap/unicode-scripts.h:61
+msgid "Syloti Nagri"
+msgstr "Syloti Nagri"
+
+#: ../gucharmap/unicode-blocks.h:124
 msgid "Hangul Syllables"
 msgstr "Hangul szótagok"
 
-#: ../gucharmap/unicode-blocks.h:109
+#: ../gucharmap/unicode-blocks.h:125
 msgid "High Surrogates"
 msgstr "Felső pótlások"
 
-#: ../gucharmap/unicode-blocks.h:110
+#: ../gucharmap/unicode-blocks.h:126
 msgid "High Private Use Surrogates"
 msgstr "Felső pótlások személyes felhasználásra"
 
-#: ../gucharmap/unicode-blocks.h:111
+#: ../gucharmap/unicode-blocks.h:127
 msgid "Low Surrogates"
 msgstr "Alsó pótlások"
 
-#: ../gucharmap/unicode-blocks.h:112
+#: ../gucharmap/unicode-blocks.h:128
 msgid "Private Use Area"
 msgstr "Saját használatra kijelölt tartomány"
 
-#: ../gucharmap/unicode-blocks.h:113
+#: ../gucharmap/unicode-blocks.h:129
 msgid "CJK Compatibility Ideographs"
 msgstr "CJK visszafelé kompatibilis ideogramok"
 
-#: ../gucharmap/unicode-blocks.h:114
+#: ../gucharmap/unicode-blocks.h:130
 msgid "Alphabetic Presentation Forms"
 msgstr "Alfabetikus alakok"
 
-#: ../gucharmap/unicode-blocks.h:115
+#: ../gucharmap/unicode-blocks.h:131
 msgid "Arabic Presentation Forms-A"
 msgstr "Arab alakok-A"
 
-#: ../gucharmap/unicode-blocks.h:116
+#: ../gucharmap/unicode-blocks.h:132
 msgid "Variation Selectors"
 msgstr "Variációválasztók"
 
-#: ../gucharmap/unicode-blocks.h:117
+#: ../gucharmap/unicode-blocks.h:133
+msgid "Vertical Forms"
+msgstr "Függőleges alakok"
+
+#: ../gucharmap/unicode-blocks.h:134
 msgid "Combining Half Marks"
 msgstr "Összeolvadó fél jelek"
 
-#: ../gucharmap/unicode-blocks.h:118
+#: ../gucharmap/unicode-blocks.h:135
 msgid "CJK Compatibility Forms"
 msgstr "CJK visszafelé kompatibilitási alakok"
 
-#: ../gucharmap/unicode-blocks.h:119
+#: ../gucharmap/unicode-blocks.h:136
 msgid "Small Form Variants"
 msgstr "Kisalakú változatok"
 
-#: ../gucharmap/unicode-blocks.h:120
+#: ../gucharmap/unicode-blocks.h:137
 msgid "Arabic Presentation Forms-B"
 msgstr "Arab alakok-B"
 
-#: ../gucharmap/unicode-blocks.h:121
+#: ../gucharmap/unicode-blocks.h:138
 msgid "Halfwidth and Fullwidth Forms"
 msgstr "Fél- és teljes szélességű alakok"
 
-# #-#-#-#-#  nautilus.HEAD.hu.po-new.po (nautilus CVS-HEAD)  #-#-#-#-#
-# data/browser.xml.h:75
-#: ../gucharmap/unicode-blocks.h:122
+#: ../gucharmap/unicode-blocks.h:139
 msgid "Specials"
 msgstr "Különleges"
 
-#: ../gucharmap/unicode-blocks.h:123
+#: ../gucharmap/unicode-blocks.h:140
 msgid "Linear B Syllabary"
 msgstr "Lineáris B szótagírás"
 
-#: ../gucharmap/unicode-blocks.h:124
+#: ../gucharmap/unicode-blocks.h:141
 msgid "Linear B Ideograms"
 msgstr "Lineáris B ideogrammok"
 
-#: ../gucharmap/unicode-blocks.h:125
+#: ../gucharmap/unicode-blocks.h:142
 msgid "Aegean Numbers"
 msgstr "Égei számok"
 
-#: ../gucharmap/unicode-blocks.h:126 ../gucharmap/unicode-scripts.h:48
+#: ../gucharmap/unicode-blocks.h:143
+msgid "Ancient Greek Numbers"
+msgstr "Ógörög számok"
+
+#: ../gucharmap/unicode-blocks.h:144 ../gucharmap/unicode-scripts.h:54
 msgid "Old Italic"
 msgstr "Régi itáliai"
 
-#: ../gucharmap/unicode-blocks.h:127 ../gucharmap/unicode-scripts.h:27
+#: ../gucharmap/unicode-blocks.h:145 ../gucharmap/unicode-scripts.h:31
 msgid "Gothic"
 msgstr "Gót"
 
-#: ../gucharmap/unicode-blocks.h:128 ../gucharmap/unicode-scripts.h:63
+#: ../gucharmap/unicode-blocks.h:146 ../gucharmap/unicode-scripts.h:72
 msgid "Ugaritic"
 msgstr "Ugaritic"
 
-#: ../gucharmap/unicode-blocks.h:129 ../gucharmap/unicode-scripts.h:23
+#: ../gucharmap/unicode-blocks.h:147 ../gucharmap/unicode-scripts.h:55
+msgid "Old Persian"
+msgstr "Óperzsa"
+
+#: ../gucharmap/unicode-blocks.h:148 ../gucharmap/unicode-scripts.h:26
 msgid "Deseret"
 msgstr "Deseret"
 
-#: ../gucharmap/unicode-blocks.h:130 ../gucharmap/unicode-scripts.h:52
+#: ../gucharmap/unicode-blocks.h:149 ../gucharmap/unicode-scripts.h:59
 msgid "Shavian"
 msgstr "Shavian"
 
-#: ../gucharmap/unicode-blocks.h:131 ../gucharmap/unicode-scripts.h:50
+#: ../gucharmap/unicode-blocks.h:150 ../gucharmap/unicode-scripts.h:57
 msgid "Osmanya"
 msgstr "Osmanya"
 
-#: ../gucharmap/unicode-blocks.h:132
+#: ../gucharmap/unicode-blocks.h:151
 msgid "Cypriot Syllabary"
 msgstr "Ciprióta szótagírás"
 
-#: ../gucharmap/unicode-blocks.h:133
+#: ../gucharmap/unicode-blocks.h:152 ../gucharmap/unicode-scripts.h:43
+msgid "Kharoshthi"
+msgstr "Kharoshthi"
+
+#: ../gucharmap/unicode-blocks.h:153
 msgid "Byzantine Musical Symbols"
 msgstr "Bizánci hangjegyek"
 
-#: ../gucharmap/unicode-blocks.h:134
+#: ../gucharmap/unicode-blocks.h:154
 msgid "Musical Symbols"
 msgstr "Hangjegyek"
 
-#: ../gucharmap/unicode-blocks.h:135
+#: ../gucharmap/unicode-blocks.h:155
+msgid "Ancient Greek Musical Notation"
+msgstr "Ógörög zenei jelölés"
+
+#: ../gucharmap/unicode-blocks.h:156
 msgid "Tai Xuan Jing Symbols"
 msgstr "Tai Xuan Jing szimbólumok"
 
-#: ../gucharmap/unicode-blocks.h:136
+#: ../gucharmap/unicode-blocks.h:157
 msgid "Mathematical Alphanumeric Symbols"
 msgstr "Matematikai alfanumerikus jelek"
 
-#: ../gucharmap/unicode-blocks.h:137
+#: ../gucharmap/unicode-blocks.h:158
 msgid "CJK Unified Ideographs Extension B"
 msgstr "CJK egyesített ideogramok B kiterjesztés"
 
-#: ../gucharmap/unicode-blocks.h:138
+#: ../gucharmap/unicode-blocks.h:159
 msgid "CJK Compatibility Ideographs Supplement"
 msgstr "CJK egyesített ideogramok kiterjesztés"
 
-#: ../gucharmap/unicode-blocks.h:139
+#: ../gucharmap/unicode-blocks.h:160
 msgid "Tags"
 msgstr "Elemek"
 
-#: ../gucharmap/unicode-blocks.h:140
+#: ../gucharmap/unicode-blocks.h:161
 msgid "Variation Selectors Supplement"
 msgstr "Variációválasztók kiegészítés"
 
-#: ../gucharmap/unicode-blocks.h:141
+#: ../gucharmap/unicode-blocks.h:162
 msgid "Supplementary Private Use Area-A"
 msgstr "Kiegészítés személyes felhasználásra A-terület"
 
-#: ../gucharmap/unicode-blocks.h:142
+#: ../gucharmap/unicode-blocks.h:163
 msgid "Supplementary Private Use Area-B"
 msgstr "Kiegészítés személyes felhasználásra B-terület"
 
-#: ../gucharmap/unicode-scripts.h:16
+#: ../gucharmap/unicode-scripts.h:17
 msgid "Braille"
 msgstr "Braille"
 
-#: ../gucharmap/unicode-scripts.h:18
+#: ../gucharmap/unicode-scripts.h:20
 msgid "Canadian Aboriginal"
 msgstr "Kanadai bennszülött"
 
-#: ../gucharmap/unicode-scripts.h:21
+#: ../gucharmap/unicode-scripts.h:24
 msgid "Cypriot"
 msgstr "Ciprióta"
 
-#: ../gucharmap/unicode-scripts.h:28
+#: ../gucharmap/unicode-scripts.h:32
 msgid "Greek"
 msgstr "Görög"
 
-#: ../gucharmap/unicode-scripts.h:31
+#: ../gucharmap/unicode-scripts.h:35
 msgid "Han"
 msgstr "Han"
 
-#: ../gucharmap/unicode-scripts.h:32
+#: ../gucharmap/unicode-scripts.h:36
 msgid "Hangul"
 msgstr "Hangul"
 
-#: ../gucharmap/unicode-scripts.h:36
+#: ../gucharmap/unicode-scripts.h:40
 msgid "Inherited"
 msgstr "Örökölt"
 
-#: ../gucharmap/unicode-scripts.h:41
+#: ../gucharmap/unicode-scripts.h:46
 msgid "Latin"
 msgstr "Latin"
 
-#: ../gucharmap/unicode-scripts.h:43
+#: ../gucharmap/unicode-scripts.h:48
 msgid "Linear B"
 msgstr "Lineáris B"
 
-#: ../gucharmap/unicode-scripts.h:64
+#: ../gucharmap/unicode-scripts.h:73
 msgid "Yi"
 msgstr "Yi"
 
@@ -976,29 +1052,32 @@ msgstr "Unicode-blokk"
 msgid "Script"
 msgstr "Írásrendszer"
 
-#: ../gucharmap/gucharmap-search-dialog.c:419
+#: ../gucharmap/gucharmap-search-dialog.c:549
 msgid "Information"
 msgstr "Információ"
 
-# #-#-#-#-#  galeon.HEAD.hu.po-new.po (Galeon 1.2)  #-#-#-#-#
-# #-#-#-#-#  nautilus.HEAD.hu.po-new.po (nautilus CVS-HEAD)  #-#-#-#-#
-# src/nautilus-shell-ui.xml.h:25
-# #-#-#-#-#  nautilus.HEAD.hu.po-new.po (nautilus CVS-HEAD)  #-#-#-#-#
-# src/nautilus-shell-ui.xml.h:25
 #. follow hig guidelines
-#: ../gucharmap/gucharmap-search-dialog.c:592
+#: ../gucharmap/gucharmap-search-dialog.c:732
 msgid "Find"
 msgstr "Keresés"
 
-#: ../gucharmap/gucharmap-search-dialog.c:606
+#: ../gucharmap/gucharmap-search-dialog.c:746
 msgid "_Previous"
 msgstr "_Előző"
 
-#: ../gucharmap/gucharmap-search-dialog.c:613
+#: ../gucharmap/gucharmap-search-dialog.c:753
 msgid "_Next"
 msgstr "_Következő"
 
-#: ../gucharmap/gucharmap-search-dialog.c:623
+#: ../gucharmap/gucharmap-search-dialog.c:763
 msgid "_Search:"
 msgstr "_Keresés:"
+
+#: ../gucharmap/gucharmap-search-dialog.c:773
+msgid "Match _whole word"
+msgstr "_Teljes szó"
+
+#: ../gucharmap/gucharmap-search-dialog.c:777
+msgid "Search in character _details"
+msgstr "Keresés a karakter _adatai közt"
 
