@@ -71,6 +71,8 @@ main (gint argc, gchar **argv)
     }
 #endif
 
+  gtk_window_set_default_icon_name ("gucharmap");
+
   window = gucharmap_window_new ();
   gucharmap_window_set_text_to_copy_visible (GUCHARMAP_WINDOW (window), TRUE);
   gucharmap_window_set_font_selection_visible (GUCHARMAP_WINDOW (window), TRUE);

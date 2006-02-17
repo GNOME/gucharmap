@@ -63,8 +63,6 @@ struct _GucharmapWindowPrivate
 
   GtkActionGroup *action_group;
 
-  GdkPixbuf *icon;
-
   GtkWidget *search_dialog; /* takes care of all aspects of searching */
 
   GtkWidget *progress;
@@ -372,7 +370,6 @@ help_about (GtkAction       *action,
 				      "Copyright © 1991-2005 Unicode, Inc.",
 			 "documenters", documenters,
 			 "license", license_trans,
-			 "logo", priv->icon,
 			 "name", _("Gucharmap"),
 			 "translator-credits", translator_credits,
 			 "version", VERSION,
@@ -757,38 +754,6 @@ make_text_to_copy (GucharmapWindow *guw)
 }
 
 static void
-load_icon (GucharmapWindow *guw)
-{
-  GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
-  GError *error = NULL;
-
-#ifdef G_OS_WIN32
-
-  gchar *package_root, *icon_path;
-
-  package_root = g_win32_get_package_installation_directory (NULL, NULL);
-  icon_path = g_build_filename (package_root, "share", "icons", "hicolor", "48x48", "apps", "gucharmap.png");
-  priv->icon = gdk_pixbuf_new_from_file (icon_path, &error);
-  g_free (package_root);
-  g_free (icon_path);
-
-#else  /* #ifdef G_OS_WIN32 */
-
-  priv->icon = gdk_pixbuf_new_from_file (ICON_PATH, &error);
-
-#endif /* #ifdef G_OS_WIN32 */
-
-  if (error != NULL)
-    {
-      g_assert (priv->icon == NULL);
-      g_warning ("Error loading icon: %s\n", error->message);
-      g_error_free (error);
-    }
-  else
-    gtk_window_set_icon (GTK_WINDOW (guw), priv->icon);
-}
-
-static void
 status_realize (GtkWidget       *status,
                 GucharmapWindow *guw)
 {
@@ -881,8 +846,7 @@ gucharmap_window_init (GucharmapWindow *guw)
 
   priv->search_dialog = NULL;
 
-  load_icon (guw);
-  gtk_window_set_icon (GTK_WINDOW (guw), priv->icon);
+  gtk_window_set_icon_name (GTK_WINDOW (guw), "gucharmap");
 
   pack_stuff_in_window (guw);
 }
