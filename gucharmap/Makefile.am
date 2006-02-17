@@ -22,7 +22,7 @@ AM_CFLAGS = $(PANGO_CFLAGS) $(GTK_CFLAGS) $(GNOME_CFLAGS)
 localedir = $(datadir)/locale
 AM_CPPFLAGS = -I$(top_srcdir) \
               -DDATADIR=\"$(datadir)\" \
-              -DLOCALEDIR=\"$(localedir)\" \
+              -DLOCALEDIR=\"$(localedir)\"
 ## -DGTK_DISABLE_DEPRECATED=1
 
 libgucharmap_la_LIBADD = @GTK_LIBS@ @GNOME_LIBS@

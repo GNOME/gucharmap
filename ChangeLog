@@ -1,5 +1,12 @@
 2006-02-17  Behdad Esfahbod  <behdad@gnome.org>
 
+	Bug 331565 – cvs fails to build -- gucharmap/Makefile.am:27: blank
+	line following trailing backslash
+
+	* gucharmap/Makefile.am: Fixed.
+
+2006-02-17  Behdad Esfahbod  <behdad@gnome.org>
+
 	* gucharmap/gucharmap-window.c: Use gtk_window_set_icon_name to set
 	the icon.  Makes it themable.
 
