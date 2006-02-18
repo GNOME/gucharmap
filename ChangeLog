@@ -1,3 +1,12 @@
+2006-02-18  Behdad Esfahbod  <behdad@gnome.org>
+
+	* gucharmap/main.c (main): Call g_set_application_name.
+
+	* gucharmap/gucharmap-window.c (help_about): Set logo-icon-name
+	in gtk_show_about_dialog.
+
+	* pixmaps/Makefile.am: Call gtk-update-icon-cache.
+
 2006-02-17  Behdad Esfahbod  <behdad@gnome.org>
 
 	Bug 331565 – cvs fails to build -- gucharmap/Makefile.am:27: blank

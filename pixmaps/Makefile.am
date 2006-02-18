@@ -18,8 +18,10 @@
 ##
 
 
-pixmapsdir = $(datadir)/icons/hicolor/48x48/apps
-
-pixmaps_DATA = gucharmap.png
+icondir = $(datadir)/icons/hicolor/48x48/apps
+icon_DATA = gucharmap.png
 
 EXTRA_DIST = $(pixmaps_DATA) gucharmap.ico
+
+install-data-hook:
+	gtk-update-icon-cache || :

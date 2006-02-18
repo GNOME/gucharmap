@@ -71,6 +71,7 @@ main (gint argc, gchar **argv)
     }
 #endif
 
+  g_set_application_name (_("Gucharmap"));
   gtk_window_set_default_icon_name ("gucharmap");
 
   window = gucharmap_window_new ();
