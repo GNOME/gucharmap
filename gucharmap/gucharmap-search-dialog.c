@@ -593,9 +593,11 @@ search_completed (GucharmapSearchDialog *search_dialog)
 
   if (found_char == (gunichar)(-1))
     information_dialog (search_dialog, _("Not found."));
-
-  gtk_widget_set_sensitive (priv->prev_button, TRUE);
-  gtk_widget_set_sensitive (priv->next_button, TRUE);
+  else
+    {
+      gtk_widget_set_sensitive (priv->prev_button, TRUE);
+      gtk_widget_set_sensitive (priv->next_button, TRUE);
+    }
 
   gdk_window_set_cursor (GTK_WIDGET (search_dialog)->window, NULL);
 }
@@ -739,7 +741,7 @@ gucharmap_search_dialog_init (GucharmapSearchDialog *search_dialog)
   g_signal_connect (search_dialog, "delete-event", G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 
   /* add buttons */
-  gtk_dialog_add_button (GTK_DIALOG (search_dialog), GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
+  gtk_dialog_add_button (GTK_DIALOG (search_dialog), GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE);
 
   priv->prev_button = gtk_button_new ();
   GTK_WIDGET_SET_FLAGS (priv->prev_button, GTK_CAN_DEFAULT);
