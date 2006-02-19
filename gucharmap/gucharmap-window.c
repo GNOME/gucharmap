@@ -317,8 +317,6 @@ help_about (GtkAction       *action,
             GucharmapWindow *guw)
 {
   GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
-  const gchar *translator_credits;
-  const gchar *license_trans;
 
   const gchar *authors[] = 
     { 
@@ -327,6 +325,7 @@ help_about (GtkAction       *action,
       "Padraig O'Briain <Padraig.Obriain@sun.com>",
       NULL 
     };
+
   const gchar *documenters[] =
     {
       "Chee Bin HOH <cbhoh@gnome.org>",
@@ -354,10 +353,12 @@ help_about (GtkAction       *action,
        "with Gucharmap; you can always find it at Unicode's website: "
        "http://www.unicode.org/copyright.html")
   };
+  gchar *license_trans;
   license_trans = g_strconcat (_(license[0]), "\n\n", _(license[1]), "\n\n",
 			       _(license[2]), "\n\n", _(license[3]), "\n\n",
 			       _(license[4]), "\n\n", NULL);
 
+  gchar *translator_credits;
   translator_credits = _("translator-credits");
   if (strcmp (translator_credits, "translator-credits") == 0)
     translator_credits = NULL;
@@ -365,7 +366,7 @@ help_about (GtkAction       *action,
   gtk_show_about_dialog (GTK_WINDOW (guw),
   			 "authors", authors,
 			 "comments", _("GNOME Character Map\n"
-				       "based on Unicode Character Database"),
+				       "based on the Unicode Character Database"),
 			 "copyright", "Copyright © 2004 Noah Levitt <nlevitt@columbia.edu>\n"
 				      "Copyright © 1991-2005 Unicode, Inc.",
 			 "documenters", documenters,
