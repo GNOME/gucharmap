@@ -358,7 +358,7 @@ help_about (GtkAction       *action,
 			       _(license[2]), "\n\n", _(license[3]), "\n\n",
 			       _(license[4]), "\n\n", NULL);
 
-  gchar *translator_credits;
+  const gchar *translator_credits;
   translator_credits = _("translator-credits");
   if (strcmp (translator_credits, "translator-credits") == 0)
     translator_credits = NULL;
@@ -366,7 +366,7 @@ help_about (GtkAction       *action,
   gtk_show_about_dialog (GTK_WINDOW (guw),
   			 "authors", authors,
 			 "comments", _("GNOME Character Map\n"
-				       "based on the Unicode Character Database"),
+				       "based on Unicode Character Database"),
 			 "copyright", "Copyright © 2004 Noah Levitt <nlevitt@columbia.edu>\n"
 				      "Copyright © 1991-2005 Unicode, Inc.",
 			 "documenters", documenters,
