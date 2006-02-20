@@ -602,8 +602,21 @@ search_completed (GucharmapSearchDialog *search_dialog)
   gdk_window_set_cursor (GTK_WIDGET (search_dialog)->window, NULL);
 }
 
-void
-gucharmap_search_dialog_start_search (GucharmapSearchDialog *search_dialog,
+static gboolean
+_entry_is_empty (GtkEntry *entry)
+{
+  const gchar *text = gtk_entry_get_text (entry);
+  const gchar *p;	/* points into text */
+
+  for (p = text;
+       p[0] != '\0' && g_unichar_isspace (g_utf8_get_char (p));
+       p = g_utf8_next_char (p))
+    ;
+  return p[0] == '\0';
+}
+
+static void
+_gucharmap_search_dialog_fire_search (GucharmapSearchDialog *search_dialog,
                                       GucharmapDirection     direction)
 {
   GucharmapSearchDialogPrivate *priv = GUCHARMAP_SEARCH_DIALOG_GET_PRIVATE (search_dialog);
@@ -652,6 +665,18 @@ gucharmap_search_dialog_start_search (GucharmapSearchDialog *search_dialog,
   g_signal_emit (search_dialog, gucharmap_search_dialog_signals[SEARCH_START], 0);
 }
 
+void
+gucharmap_search_dialog_start_search (GucharmapSearchDialog *search_dialog,
+                                      GucharmapDirection     direction)
+{
+  GucharmapSearchDialogPrivate *priv = GUCHARMAP_SEARCH_DIALOG_GET_PRIVATE (search_dialog);
+
+  if (priv->search_state != NULL && !_entry_is_empty (GTK_ENTRY (priv->entry)))
+    _gucharmap_search_dialog_fire_search (search_dialog, direction);
+  else
+    gtk_window_present (GTK_WINDOW (search_dialog));
+}
+
 static void
 search_find_response (GtkDialog *dialog,
                       gint       response)
@@ -662,11 +687,11 @@ search_find_response (GtkDialog *dialog,
   switch (response)
     {
       case GUCHARMAP_RESPONSE_PREVIOUS:
-        gucharmap_search_dialog_start_search (search_dialog, GUCHARMAP_DIRECTION_BACKWARD);
+        _gucharmap_search_dialog_fire_search (search_dialog, GUCHARMAP_DIRECTION_BACKWARD);
         break;
 
       case GUCHARMAP_RESPONSE_NEXT:
-        gucharmap_search_dialog_start_search (search_dialog, GUCHARMAP_DIRECTION_FORWARD);
+        _gucharmap_search_dialog_fire_search (search_dialog, GUCHARMAP_DIRECTION_FORWARD);
         break;
 
       default:
@@ -682,14 +707,8 @@ entry_changed (GtkEntry              *entry,
                GucharmapSearchDialog *search_dialog)
 {
   GucharmapSearchDialogPrivate *priv = GUCHARMAP_SEARCH_DIALOG_GET_PRIVATE (search_dialog);
-  const gchar *text = gtk_entry_get_text (entry);
-  const gchar *p;	/* points into text */
 
-  for (p = text;
-       p[0] != '\0' && g_unichar_isspace (g_utf8_get_char (p));
-       p = g_utf8_next_char (p))
-    ;
-  if (p[0] == '\0')
+  if (_entry_is_empty(entry))
     {
       gtk_widget_set_sensitive (priv->prev_button, FALSE);
       gtk_widget_set_sensitive (priv->next_button, FALSE);

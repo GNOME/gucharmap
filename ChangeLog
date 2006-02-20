@@ -1,5 +1,14 @@
 2006-02-19  Behnam Esfahbod  <behnam@zwnj.org>
 
+	Bug 331722 – gucharmap crashes with search next/prev
+
+	* gucharmap/gucharmap-search-dialog.c
+	(gucharmap_search_dialog_start_search): Moving to
+	_gucharmap_search_dialog_fire_search and adding _entry_is_empty check
+	before calling that.
+
+2006-02-19  Behnam Esfahbod  <behnam@zwnj.org>
+
 	* gucharmap/gucharmap-window.c: Reverting the description change,
 	because of string freeze.
 
