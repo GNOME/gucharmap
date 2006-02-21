@@ -366,7 +366,7 @@ help_about (GtkAction       *action,
   gtk_show_about_dialog (GTK_WINDOW (guw),
   			 "authors", authors,
 			 "comments", _("GNOME Character Map\n"
-				       "based on Unicode Character Database"),
+				       "based on the Unicode Character Database"),
 			 "copyright", "Copyright © 2004 Noah Levitt <nlevitt@columbia.edu>\n"
 				      "Copyright © 1991-2005 Unicode, Inc.",
 			 "documenters", documenters,
