@@ -24,4 +24,4 @@ icon_DATA = gucharmap.png
 install-data-hook:
 	gtk-update-icon-cache -f -t $(datadir)/icons/hicolor || :
 
-EXTRA_DIST = $(pixmaps_DATA) gucharmap.ico
+EXTRA_DIST = $(icon_DATA) gucharmap.ico
