@@ -50,7 +50,7 @@ libgucharmap_la_SOURCES = gucharmap-marshal.c gucharmap-marshal.h \
 			  gucharmap-search-dialog.h gucharmap-search-dialog.c
 
 # this is different from the project version
-libgucharmap_la_LDFLAGS = -version-info 4:7:0 -no-undefined
+libgucharmap_la_LDFLAGS = -version-info 4:8:0 -no-undefined
 
 libgucharmapincludedir = $(includedir)/gucharmap
 libgucharmapinclude_HEADERS = gucharmap.h \
