@@ -120,14 +120,15 @@ get_codepoint_list (GucharmapChapters *chapters)
       gtk_tree_model_get (model, &iter, SCRIPT_CHAPTERS_SCRIPT_UNTRANSLATED, &script_untranslated, -1);
 
       list = gucharmap_script_codepoint_list_new ();
-      if (gucharmap_script_codepoint_list_set_script (GUCHARMAP_SCRIPT_CODEPOINT_LIST (list), script_untranslated))
-        return list;
-      else
+      if (!gucharmap_script_codepoint_list_set_script (GUCHARMAP_SCRIPT_CODEPOINT_LIST (list), script_untranslated))
         {
           g_error ("gucharmap_script_codepoint_list_set_script (\"%s\") failed\n", script_untranslated);
           /* not reached */
           return NULL;
         }
+
+      g_free (script_untranslated);
+      return list;
     }
   else
     return NULL;
