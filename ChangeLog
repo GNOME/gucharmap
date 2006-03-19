@@ -1,3 +1,11 @@
+2006-03-19  Behdad Esfahbod  <behdad@gnome.org>
+
+	Bug 334865 – tiny string leak
+	Patch from Paolo Borelli.
+
+	* gucharmap/gucharmap-script-chapters.c (get_codepoint_list):
+	Free script_untranslated.
+
 2006-03-13  Behdad Esfahbod  <behdad@gnome.org>
 
 	Released 1.6.0.
