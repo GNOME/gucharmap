@@ -1,3 +1,11 @@
+2006-03-25  Behdad Esfahbod  <behdad@gnome.org>
+
+	Bug 335952 – refcount leak in main
+	Patch from Christian Persch.
+
+	* gucharmap/main.c (main): Unref the GnomeProgram instance when
+	we are done.
+
 2006-03-19  Behdad Esfahbod  <behdad@gnome.org>
 
 	Bug 334865 – tiny string leak

@@ -45,6 +45,7 @@ main (gint argc, gchar **argv)
   gint monitor;
   GdkRectangle rect;
 #ifdef HAVE_GNOME
+  GnomeProgram *program;
   GOptionContext *context;
 #else
   GError *error = NULL;
@@ -57,10 +58,11 @@ main (gint argc, gchar **argv)
   context = g_option_context_new ("");
   g_option_context_add_main_entries (context, goptions, GETTEXT_PACKAGE);
 
-  gnome_program_init ("gucharmap", VERSION, LIBGNOMEUI_MODULE, argc, argv,
-		      GNOME_PARAM_APP_DATADIR, DATADIR,
-		      GNOME_PARAM_GOPTION_CONTEXT, context,
-		      NULL);
+  program = gnome_program_init ("gucharmap", VERSION, LIBGNOMEUI_MODULE,
+		 		argc, argv,
+				GNOME_PARAM_APP_DATADIR, DATADIR,
+				GNOME_PARAM_GOPTION_CONTEXT, context,
+				NULL);
 #else
   if (!gtk_init_with_args (&argc, &argv, "", goptions, GETTEXT_PACKAGE, &error))
     {
@@ -100,6 +102,10 @@ main (gint argc, gchar **argv)
   gtk_widget_show (window);
 
   gtk_main ();
+
+#ifdef HAVE_GNOME
+  g_object_unref (program);
+#endif
 
   return 0;
 }
