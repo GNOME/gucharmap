@@ -358,11 +358,6 @@ help_about (GtkAction       *action,
 			       _(license[2]), "\n\n", _(license[3]), "\n\n",
 			       _(license[4]), "\n\n", NULL);
 
-  const gchar *translator_credits;
-  translator_credits = _("translator-credits");
-  if (strcmp (translator_credits, "translator-credits") == 0)
-    translator_credits = NULL;
-
   gtk_show_about_dialog (GTK_WINDOW (guw),
   			 "authors", authors,
 			 "comments", _("GNOME Character Map\n"
@@ -373,7 +368,7 @@ help_about (GtkAction       *action,
 			 "license", license_trans,
 			 "name", _("Gucharmap"),
 			 "logo-icon-name", "gucharmap",
-			 "translator-credits", translator_credits,
+			 "translator-credits", _("translator-credits"),
 			 "version", VERSION,
 			 "website", "http://live.gnome.org/Gucharmap",
 			 "wrap-license", TRUE,
