@@ -37,10 +37,7 @@ AC_PROG_INTLTOOL([0.29])
 GETTEXT_PACKAGE=gucharmap
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE],["$GETTEXT_PACKAGE"],[Define the gettext package to be used])
-ALL_LINGUAS="am ar az be bg bn bs ca cs cy da de dz el en_CA en_GB eo es et
-eu fa fi fr ga gl gu hi hr hu id is it ja ka ko lt mi mk ml mn ms nb ne nl
-nn no pa pl pt pt_BR ro ru rw sk sq sr sr@Latn sv ta th tr uk vi wa xh
-zh_CN zh_HK zh_TW"
+ALL_LINGUAS="am ar az be bg bn bs ca cs cy da de dz el en_CA en_GB eo es et eu fa fi fr ga gl gu hi hr hu id is it ja ka ko lt mi mk ml mn ms nb ne nl nn no pa pl pt pt_BR ro ru rw sk sq sr sr@Latn sv ta th tr uk vi wa xh zh_CN zh_HK zh_TW"
 AM_GLIB_GNU_GETTEXT
 
 GNOME_DOC_INIT
