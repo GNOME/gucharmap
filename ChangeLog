@@ -1,3 +1,25 @@
+2006-07-19  Behnam Esfahbod  <behnam@zwnj.org>
+
+	Bug 334505 – Search buttons Prev Next unsensitive when they shouldn't be
+
+	* gucharmap/gucharmap-search-dialog.c: Add toggled signals to
+	check buttons.
+	
+2006-07-19  Behnam Esfahbod  <behnam@zwnj.org>
+
+	Bug 336283 – Update to UCD 5.0
+	Update to Unicode 5.0 Character Database, released on July 18, 2006.
+
+	* gucharmap/unicode-blocks.h,
+	* gucharmap/unicode-categories.h,
+	* gucharmap/unicode-names.h,
+	* gucharmap/unicode-nameslist.h,
+	* gucharmap/unicode-scripts.h,
+	* gucharmap/unicode-unihan.h: Updated outputs of generator script.
+
+	* gucharmap/gucharmap/download-unicode-files.sh": Add download script
+	to make UCD updates easier.
+
 2006-04-18  Behdad Esfahbod  <behdad@gnome.org>
 
 	Bug 337943 – [Patch] Use po/LINGUAS

@@ -703,12 +703,12 @@ search_find_response (GtkDialog *dialog,
 }
 
 static void
-entry_changed (GtkEntry              *entry,
+entry_changed (GtkObject             *object,
                GucharmapSearchDialog *search_dialog)
 {
   GucharmapSearchDialogPrivate *priv = GUCHARMAP_SEARCH_DIALOG_GET_PRIVATE (search_dialog);
 
-  if (_entry_is_empty(entry))
+  if (_entry_is_empty(priv->entry))
     {
       gtk_widget_set_sensitive (priv->prev_button, FALSE);
       gtk_widget_set_sensitive (priv->next_button, FALSE);
@@ -794,10 +794,12 @@ gucharmap_search_dialog_init (GucharmapSearchDialog *search_dialog)
   priv->whole_word_option = gtk_check_button_new_with_mnemonic (_("Match _whole word"));
   gtk_widget_show (priv->whole_word_option);
   gtk_box_pack_start (GTK_BOX (GTK_DIALOG (search_dialog)->vbox), priv->whole_word_option, FALSE, FALSE, 0);
+  g_signal_connect (priv->whole_word_option, "toggled", G_CALLBACK (entry_changed), search_dialog);
 
   priv->annotations_option = gtk_check_button_new_with_mnemonic (_("Search in character _details"));
   gtk_widget_show (priv->annotations_option);
   gtk_box_pack_start (GTK_BOX (GTK_DIALOG (search_dialog)->vbox), priv->annotations_option, FALSE, FALSE, 0);
+  g_signal_connect (priv->annotations_option, "toggled", G_CALLBACK (entry_changed), search_dialog);
 
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), priv->entry);
 
