@@ -1,14 +1,21 @@
 #!/bin/sh
+#
+# usage: ./download-unicode-files.sh DIRECTORY
+# downloads following files from unicode.org to DIRECTORY or unicode/ (if
+# DIRECTORY is not presented):
+#  - UnicodeData.txt
+#  - Unihan.zip
+#  - NamesList.txt
+#  - Blocks.txt
+#  - Scripts.txt
+#
 
 FILES='UnicodeData.txt Unihan.zip NamesList.txt Blocks.txt Scripts.txt'
-DIR='unicode'
 
-mkdir -p $DIR
+mkdir -p ${1:-unicode} 
 
 for x in $FILES; do
-	echo -n '.'
-	#if [ -e "$DIR/$x" ]; then continue fi
-	wget "http://www.unicode.org/Public/UNIDATA/$x" -O "$DIR/$x"
+	wget "http://www.unicode.org/Public/UNIDATA/$x" -O "${1:-unicode}/$x"
 done
 
 echo 'Done.'
