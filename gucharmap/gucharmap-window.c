@@ -591,7 +591,7 @@ make_menu (GucharmapWindow *guw)
   g_object_unref (priv->accel_group);
 
   toggle_menu = gtk_toggle_action_new ( "SnapColumns",
-					"Snap Columns to Power of Two",
+					_("Snap Columns to Power of Two"),
 					NULL,
 					NULL);
   g_signal_connect (G_OBJECT(toggle_menu), "toggled", G_CALLBACK (snap_cols_pow2), guw);
