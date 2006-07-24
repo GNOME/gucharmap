@@ -79,13 +79,13 @@ gucharmap_LDADD += @GNOME_LIBS@
 endif
 
 gucharmap-marshal.h: $(srcdir)/gucharmap-marshal.list
-	( @GLIB_GENMARSHAL@ --prefix=gucharmap_marshal $(srcdir)/gucharmap-marshal.list \
+	( @GLIB_GENMARSHAL@ --prefix=_gucharmap_marshal $(srcdir)/gucharmap-marshal.list \
                             --header > gucharmap-marshal.tmp \
 	  && mv gucharmap-marshal.tmp gucharmap-marshal.h ) \
         || ( rm -f gucharmap-marshal.tmp && exit 1 )
 
 gucharmap-marshal.c: $(srcdir)/gucharmap-marshal.list
-	( @GLIB_GENMARSHAL@ --prefix=gucharmap_marshal $(srcdir)/gucharmap-marshal.list \
+	( @GLIB_GENMARSHAL@ --prefix=_gucharmap_marshal $(srcdir)/gucharmap-marshal.list \
                             --body > gucharmap-marshal.tmp \
           && mv gucharmap-marshal.tmp gucharmap-marshal.c ) \
         || ( rm -f gucharmap-marshal.tmp && exit 1 )

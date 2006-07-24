@@ -7,7 +7,7 @@
 
 G_BEGIN_DECLS
 
-void gucharmap_intl_ensure_initialized (void);
+void _gucharmap_intl_ensure_initialized (void);
 
 G_END_DECLS
 

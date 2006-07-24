@@ -51,7 +51,7 @@ main (gint argc, gchar **argv)
   GError *error = NULL;
 #endif
 
- gucharmap_intl_ensure_initialized ();
+ _gucharmap_intl_ensure_initialized ();
  textdomain (GETTEXT_PACKAGE);
 
 #ifdef HAVE_GNOME

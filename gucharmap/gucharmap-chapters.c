@@ -55,7 +55,7 @@ gucharmap_chapters_class_init (GucharmapChaptersClass *clazz)
   gucharmap_chapters_signals[CHANGED] =
       g_signal_new ("changed", gucharmap_chapters_get_type (), G_SIGNAL_RUN_FIRST,
                     G_STRUCT_OFFSET (GucharmapChaptersClass, changed),
-                    NULL, NULL, gucharmap_marshal_VOID__VOID, G_TYPE_NONE, 0);
+                    NULL, NULL, _gucharmap_marshal_VOID__VOID, G_TYPE_NONE, 0);
 }
 
 GType 

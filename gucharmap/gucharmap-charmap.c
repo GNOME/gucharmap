@@ -67,19 +67,19 @@ gucharmap_charmap_class_init (GucharmapCharmapClass *clazz)
       g_signal_new ("status-message", gucharmap_charmap_get_type (), 
                     G_SIGNAL_RUN_FIRST,
                     G_STRUCT_OFFSET (GucharmapCharmapClass, status_message),
-                    NULL, NULL, gucharmap_marshal_VOID__STRING, G_TYPE_NONE, 
+                    NULL, NULL, _gucharmap_marshal_VOID__STRING, G_TYPE_NONE, 
                     1, G_TYPE_STRING);
 
   gucharmap_charmap_signals[LINK_CLICKED] =
       g_signal_new ("link-clicked", gucharmap_charmap_get_type (), 
                     G_SIGNAL_RUN_FIRST,
                     G_STRUCT_OFFSET (GucharmapCharmapClass, link_clicked),
-                    NULL, NULL, gucharmap_marshal_VOID__UINT_UINT, G_TYPE_NONE, 
+                    NULL, NULL, _gucharmap_marshal_VOID__UINT_UINT, G_TYPE_NONE, 
                     2, G_TYPE_UINT, G_TYPE_UINT);
 
   G_OBJECT_CLASS (clazz)->finalize = charmap_finalize;
 
-  gucharmap_intl_ensure_initialized ();
+  _gucharmap_intl_ensure_initialized ();
 }
 
 static void

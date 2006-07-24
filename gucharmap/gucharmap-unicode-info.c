@@ -43,18 +43,18 @@
 #define NCount (VCount * TCount)
 #define SCount (LCount * NCount)
 
-static const gchar * const JAMO_L_TABLE[] = {
+static const gchar JAMO_L_TABLE[][4] = {
   "G", "GG", "N", "D", "DD", "R", "M", "B", "BB",
-  "S", "SS", "", "J", "JJ", "C", "K", "T", "P", "H", NULL
+  "S", "SS", "", "J", "JJ", "C", "K", "T", "P", "H"
 };
 
-static const gchar * const JAMO_V_TABLE[] = {
+static const gchar JAMO_V_TABLE[][4] = {
   "A", "AE", "YA", "YAE", "EO", "E", "YEO", "YE", "O",
   "WA", "WAE", "OE", "YO", "U", "WEO", "WE", "WI",
   "YU", "EU", "YI", "I"
 };
 
-static const gchar * const JAMO_T_TABLE[] = {
+static const gchar JAMO_T_TABLE[][4] = {
   "", "G", "GG", "GS", "N", "NJ", "NH", "D", "L", "LG", "LM",
   "LB", "LS", "LT", "LP", "LH", "M", "B", "BS",
   "S", "SS", "NG", "J", "C", "K", "T", "P", "H"
@@ -65,7 +65,7 @@ gucharmap_get_unicode_name (gunichar wc)
 {
   static gchar buf[32];
 
-  gucharmap_intl_ensure_initialized ();
+  _gucharmap_intl_ensure_initialized ();
 
   if ((wc >= 0x3400 && wc <= 0x4DB5) 
       || (wc >= 0x4e00 && wc <= 0x9fa5) 
@@ -117,7 +117,7 @@ gucharmap_get_unicode_name (gunichar wc)
 G_CONST_RETURN gchar *
 gucharmap_get_unicode_category_name (gunichar wc)
 {
-  gucharmap_intl_ensure_initialized ();
+  _gucharmap_intl_ensure_initialized ();
 
   switch (gucharmap_unichar_type (wc))
     {

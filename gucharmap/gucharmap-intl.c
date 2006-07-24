@@ -5,7 +5,7 @@
 #include "gucharmap-intl.h"
 
 void
-gucharmap_intl_ensure_initialized (void)
+_gucharmap_intl_ensure_initialized (void)
 {
 #ifdef ENABLE_NLS
   static gboolean gucharmap_gettext_initialized = FALSE;

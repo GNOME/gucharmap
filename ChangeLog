@@ -1,3 +1,32 @@
+2006-07-24  Behdad Esfahbod  <behdad@gnome.org>
+
+	* gucharmap/Makefile.am:
+	* gucharmap/gucharmap-block-chapters.c
+	(gucharmap_block_chapters_class_init):
+	* gucharmap/gucharmap-chapters.c (gucharmap_chapters_class_init):
+	* gucharmap/gucharmap-charmap.c (gucharmap_charmap_class_init):
+	* gucharmap/gucharmap-intl.c (_gucharmap_intl_ensure_initialized):
+	* gucharmap/gucharmap-intl.h:
+	* gucharmap/gucharmap-mini-fontsel.c
+	(gucharmap_mini_font_selection_class_init):
+	* gucharmap/gucharmap-script-chapters.c
+	(gucharmap_script_chapters_class_init):
+	* gucharmap/gucharmap-script-codepoint-list.c
+	(gucharmap_script_codepoint_list_class_init):
+	* gucharmap/gucharmap-search-dialog.c
+	(gucharmap_search_dialog_class_init):
+	* gucharmap/gucharmap-table.c
+	(chartable_accessible_factory_class_init),
+	(gucharmap_table_class_init):
+	* gucharmap/gucharmap-unicode-info.c (gucharmap_get_unicode_name),
+	(gucharmap_get_unicode_category_name):
+	* gucharmap/gucharmap-window.c (gucharmap_window_class_init):
+	* gucharmap/main.c (main):
+	Set prefix for marshallers to
+	_gucharmap_marshal, to make the marshallers internal.
+	Change gucharmap_intl_ensure_initialized to
+	_gucharmap_intl_ensure_initialized.
+
 2006-07-22  Behnam Esfahbod  <behnam@zwnj.org>
 
 	* gucharmap/download-unicode-files.sh: Add comments and getting optional

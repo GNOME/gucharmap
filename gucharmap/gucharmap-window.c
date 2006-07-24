@@ -877,7 +877,7 @@ gucharmap_window_class_init (GucharmapWindowClass *clazz)
   G_OBJECT_CLASS (clazz)->finalize = window_finalize;
   g_type_class_add_private (clazz, sizeof (GucharmapWindowPrivate));
 
-  gucharmap_intl_ensure_initialized ();
+  _gucharmap_intl_ensure_initialized ();
 }
 
 GType 

@@ -473,7 +473,7 @@ chartable_accessible_factory_class_init (AtkObjectFactoryClass *clazz)
   clazz->create_accessible = chartable_accessible_factory_create_accessible;
   clazz->get_accessible_type = chartable_accessible_factory_get_accessible_type;
 
-  gucharmap_intl_ensure_initialized ();
+  _gucharmap_intl_ensure_initialized ();
 }
 
 static GType
@@ -1012,20 +1012,20 @@ gucharmap_table_class_init (GucharmapTableClass *clazz)
   gucharmap_table_signals[ACTIVATE] =
       g_signal_new ("activate", gucharmap_table_get_type (), G_SIGNAL_RUN_FIRST,
                     G_STRUCT_OFFSET (GucharmapTableClass, activate),
-                    NULL, NULL, gucharmap_marshal_VOID__UINT, G_TYPE_NONE, 
+                    NULL, NULL, _gucharmap_marshal_VOID__UINT, G_TYPE_NONE, 
 		    1, G_TYPE_UINT);
 
   gucharmap_table_signals[SET_ACTIVE_CHAR] =
       g_signal_new ("set_active_char", gucharmap_table_get_type (), 
                     G_SIGNAL_RUN_FIRST,
                     G_STRUCT_OFFSET (GucharmapTableClass, set_active_char),
-                    NULL, NULL, gucharmap_marshal_VOID__UINT, G_TYPE_NONE, 
+                    NULL, NULL, _gucharmap_marshal_VOID__UINT, G_TYPE_NONE, 
 		    1, G_TYPE_UINT);
 
   gucharmap_table_signals[STATUS_MESSAGE] =
       g_signal_new ("status-message", gucharmap_table_get_type (), G_SIGNAL_RUN_FIRST,
                     G_STRUCT_OFFSET (GucharmapTableClass, status_message),
-                    NULL, NULL, gucharmap_marshal_VOID__STRING, G_TYPE_NONE, 
+                    NULL, NULL, _gucharmap_marshal_VOID__STRING, G_TYPE_NONE, 
 		    1, G_TYPE_STRING);
 }
 

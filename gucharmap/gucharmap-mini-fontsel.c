@@ -154,12 +154,12 @@ gucharmap_mini_font_selection_class_init (GucharmapMiniFontSelectionClass *clazz
       g_signal_new ("changed", gucharmap_mini_font_selection_get_type (), 
 		    G_SIGNAL_RUN_FIRST,
                     G_STRUCT_OFFSET (GucharmapMiniFontSelectionClass, changed),
-                    NULL, NULL, gucharmap_marshal_VOID__VOID,
+                    NULL, NULL, _gucharmap_marshal_VOID__VOID,
                     G_TYPE_NONE, 0);
 
   G_OBJECT_CLASS (clazz)->finalize = mini_font_selection_finalize;
 
-  gucharmap_intl_ensure_initialized ();
+  _gucharmap_intl_ensure_initialized ();
 }
 
 
