@@ -19,7 +19,7 @@ dnl
 
 AC_PREREQ([2.56])
 
-AC_INIT([GNOME Character Map],[1.6.0],[http://bugzilla.gnome.org/enter_bug.cgi?product=gucharmap],[gucharmap])
+AC_INIT([GNOME Character Map],[1.7.0],[http://bugzilla.gnome.org/enter_bug.cgi?product=gucharmap],[gucharmap])
 
 AC_CONFIG_SRCDIR([gucharmap/gucharmap.h])
 AC_CONFIG_HEADERS([config.h])
@@ -31,7 +31,7 @@ AM_MAINTAINER_MODE
 AC_PROG_CC
 AC_DISABLE_STATIC
 AC_PROG_LIBTOOL
-IT_PROG_INTLTOOL([0.34.90])
+IT_PROG_INTLTOOL([0.35.0])
 
 # checks for stuff
 GETTEXT_PACKAGE=gucharmap

@@ -1,5 +1,20 @@
 2006-07-24  Behdad Esfahbod  <behdad@gnome.org>
 
+	Released 1.7.0.
+
+	* configure.ac:
+	Require intltool >= 0.35.0
+	Bump version to 1.7.0
+
+	* gucharmap/Makefile.am:
+	Remove -no-undefined.  Breaks cygwin build.  Send patch please.
+	Bump libtool version to 5:0:0
+
+	* NEWS:
+	Updated.
+
+2006-07-24  Behdad Esfahbod  <behdad@gnome.org>
+
 	Bug 341260 – String "Snap Columns to Power of Two" not marked for
 	translation
 
