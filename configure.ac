@@ -121,7 +121,6 @@ po/Makefile.in
 pixmaps/Makefile 
 help/Makefile
 help/de/Makefile
-help/fr/Makefile
 help/it/Makefile
 help/ja/Makefile
 help/ko/Makefile
