@@ -19,15 +19,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-19 09:30+0200\n"
-"PO-Revision-Date: 2006-08-19 17:36+0300\n"
-"Last-Translator: Leonid Kanter <leon@asplinux.ru>\n"
+"POT-Creation-Date: 2006-08-25 23:55+0400\n"
+"PO-Revision-Date: 2006-08-25 23:59+0300\n"
+"Last-Translator: Nickolay V. Shmyrev <nshmyrev@yandex.ru>\n"
 "Language-Team:  <gnome-cyr@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.2\n"
-"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: ../gucharmap.desktop.in.h:1 ../gucharmap/gucharmap-window.c:837
 msgid "Character Map"
@@ -39,7 +40,7 @@ msgstr "Программа для вставки специальных симв
 
 #: ../gucharmap/gucharmap-charmap.c:268
 msgid "Canonical decomposition:"
-msgstr "Канонической разложение:"
+msgstr "Каноническое разложение:"
 
 #: ../gucharmap/gucharmap-charmap.c:309 ../gucharmap/gucharmap-table.c:294
 msgid "[not a printable character]"
@@ -159,7 +160,7 @@ msgstr "Общий"
 
 #: ../gucharmap/gucharmap-table.c:1513
 msgid "Unknown character, unable to identify."
-msgstr "Неизвестный символ, невозможно идентифицировать."
+msgstr "Неизвестный символ, не удалось идентифицировать."
 
 #: ../gucharmap/gucharmap-table.c:1515
 #: ../gucharmap/gucharmap-search-dialog.c:595
@@ -402,6 +403,22 @@ msgstr ""
 "Носенко Андрей <awn@bcs.zp.ua>\n"
 "Дмитрий Мастрюков"
 
+#: ../gucharmap/gucharmap-window.c:468 ../gucharmap/gucharmap-window.c:513
+msgid "Next Script"
+msgstr "К следующему алфавиту"
+
+#: ../gucharmap/gucharmap-window.c:468 ../gucharmap/gucharmap-window.c:515
+msgid "Previous Script"
+msgstr "К предыдущему алфавиту"
+
+#: ../gucharmap/gucharmap-window.c:473 ../gucharmap/gucharmap-window.c:627
+msgid "Next Block"
+msgstr "Следующий блок"
+
+#: ../gucharmap/gucharmap-window.c:473 ../gucharmap/gucharmap-window.c:627
+msgid "Previous Block"
+msgstr "Предыдущий блок"
+
 #: ../gucharmap/gucharmap-window.c:486
 msgid "_File"
 msgstr "_Файл"
@@ -457,14 +474,6 @@ msgstr "К следующему символу"
 #: ../gucharmap/gucharmap-window.c:511
 msgid "_Previous Character"
 msgstr "К предыдущему символу"
-
-#: ../gucharmap/gucharmap-window.c:513
-msgid "Next Script"
-msgstr "К следующему алфавиту"
-
-#: ../gucharmap/gucharmap-window.c:515
-msgid "Previous Script"
-msgstr "К предыдущему алфавиту"
 
 #: ../gucharmap/gucharmap-window.c:519
 msgid "_Contents"
@@ -1202,4 +1211,3 @@ msgstr "Соответствие слову _целиком"
 #: ../gucharmap/gucharmap-search-dialog.c:799
 msgid "Search in character _details"
 msgstr "Искать в _описаниях символов"
-
