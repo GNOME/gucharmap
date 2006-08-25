@@ -465,12 +465,12 @@ view_by (GtkAction        *action,
     {
       case VIEW_BY_SCRIPT:
       	gucharmap_charmap_set_chapters (guw->charmap, GUCHARMAP_CHAPTERS (gucharmap_script_chapters_new ()));
-	chapters_set_labels ("Next Script", "Previous Script", guw);
+	chapters_set_labels (_("Next Script"), _("Previous Script"), guw);
 	break;
       
       case VIEW_BY_BLOCK:
         gucharmap_charmap_set_chapters (guw->charmap, GUCHARMAP_CHAPTERS (gucharmap_block_chapters_new ()));
-	chapters_set_labels ("Next Block", "Previous Block", guw);
+	chapters_set_labels (_("Next Block"), _("Previous Block"), guw);
 	break;
       
       default:
@@ -624,7 +624,7 @@ make_menu (GucharmapWindow *guw)
 	break;
       
       case CHAPTERS_BLOCK:
-        chapters_set_labels ("Next Block", "Previous Block", guw);
+        chapters_set_labels (_("Next Block"), _("Previous Block"), guw);
 	break;
       
       default:
