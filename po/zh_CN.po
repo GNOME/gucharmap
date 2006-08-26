@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-12 01:50+0200\n"
-"PO-Revision-Date: 2006-03-07 12:56+0800\n"
+"POT-Creation-Date: 2006-08-26 08:35+0200\n"
+"PO-Revision-Date: 2006-08-26 22:34+0800\n"
 "Last-Translator: Cai Qian <caiqian@gnome.org>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
 "MIME-Version: 1.0\n"
@@ -321,6 +321,8 @@ msgid ""
 "Software Foundation; either version 2 of the License, or (at your option) "
 "any later version."
 msgstr ""
+"Gucharmap 是自由软件；您可以按照自由软件基金会所发表的 GNU GPL 协议自由发放和/"
+"或修改它；GPL 协议应该采用第二版或以后的任何版本。"
 
 #: ../gucharmap/gucharmap-window.c:341
 msgid ""
@@ -337,6 +339,8 @@ msgid ""
 "of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General "
 "Public License and Unicode Copyright for more details."
 msgstr ""
+"Gucharmap 及 Unicode 数据文件所发表的目的是希望它能够对您有用，但我们没有任何保证；对于以任何用途使"
+"用它所造成的任何直接或间接后果都不承担任何责任。请参看 GNU GPL 协议中的细节。"
 
 #: ../gucharmap/gucharmap-window.c:349
 msgid ""
@@ -344,6 +348,9 @@ msgid ""
 "Gucharmap; if not, write to the Free Software Foundation, Inc., 59 Temple "
 "Place, Suite 330, Boston, MA  02111-1307  USA"
 msgstr ""
+"您应该在收到 Gucharmap 的同时收到了 GNU GPL 协议的副本；如果您没有收到的话，请"
+"给自由软件基金会写信，地址是 59 Temple Place, Suite 330, Boston, MA  02111-"
+"1307  USA"
 
 #: ../gucharmap/gucharmap-window.c:352
 msgid ""
@@ -351,6 +358,8 @@ msgid ""
 "Gucharmap; you can always find it at Unicode's website: http://www.unicode."
 "org/copyright.html"
 msgstr ""
+"同时，您应该与 Gucharmap 同时收到了 Unicode 版权声明的副本；您总是可以在 Unicode "
+"的网站上找到该版权声明 http://www.unicode.org/copyright.html"
 
 #: ../gucharmap/gucharmap-window.c:363
 msgid ""
@@ -370,6 +379,22 @@ msgstr ""
 "梁昌泰 <beos@turbolinux.com.cn>\n"
 "苏  哲 <suzhe@turbolinux.com.cn>\n"
 "蔡  芊 <caiqian@gnome.org>"
+
+#: ../gucharmap/gucharmap-window.c:468 ../gucharmap/gucharmap-window.c:513
+msgid "Next Script"
+msgstr "下一语言"
+
+#: ../gucharmap/gucharmap-window.c:468 ../gucharmap/gucharmap-window.c:515
+msgid "Previous Script"
+msgstr "上一语言"
+
+#: ../gucharmap/gucharmap-window.c:473 ../gucharmap/gucharmap-window.c:627
+msgid "Next Block"
+msgstr "下一区块"
+
+#: ../gucharmap/gucharmap-window.c:473 ../gucharmap/gucharmap-window.c:627
+msgid "Previous Block"
+msgstr "上一区块"
 
 #: ../gucharmap/gucharmap-window.c:486
 msgid "_File"
@@ -427,14 +452,6 @@ msgstr "下一个字符(_N)"
 msgid "_Previous Character"
 msgstr "上一个字符(_P)"
 
-#: ../gucharmap/gucharmap-window.c:513
-msgid "Next Script"
-msgstr "下一语言"
-
-#: ../gucharmap/gucharmap-window.c:515
-msgid "Previous Script"
-msgstr "上一语言"
-
 #: ../gucharmap/gucharmap-window.c:519
 msgid "_Contents"
 msgstr "目录(_C)"
@@ -453,7 +470,7 @@ msgstr "按 _Unicode 区块"
 
 #: ../gucharmap/gucharmap-window.c:594
 msgid "Snap Columns to Power of Two"
-msgstr ""
+msgstr "将列数设定为二的 N 次方"
 
 #: ../gucharmap/gucharmap-window.c:727
 msgid "_Text to copy:"
@@ -668,9 +685,8 @@ msgid "Buginese"
 msgstr "布吉文"
 
 #: ../gucharmap/unicode-blocks.h:70 ../gucharmap/unicode-scripts.h:18
-#, fuzzy
 msgid "Balinese"
-msgstr "布吉文"
+msgstr "巴里语"
 
 #: ../gucharmap/unicode-blocks.h:71
 msgid "Phonetic Extensions"
@@ -793,9 +809,8 @@ msgid "Glagolitic"
 msgstr "格拉哥里文"
 
 #: ../gucharmap/unicode-blocks.h:101
-#, fuzzy
 msgid "Latin Extended-C"
-msgstr "拉丁文扩展 A"
+msgstr "拉丁文扩展 C"
 
 #: ../gucharmap/unicode-blocks.h:102 ../gucharmap/unicode-scripts.h:27
 msgid "Coptic"
@@ -898,9 +913,8 @@ msgid "Modifier Tone Letters"
 msgstr "修饰符语调字母"
 
 #: ../gucharmap/unicode-blocks.h:127
-#, fuzzy
 msgid "Latin Extended-D"
-msgstr "拉丁文扩展 A"
+msgstr "拉丁文扩展 D"
 
 #: ../gucharmap/unicode-blocks.h:128 ../gucharmap/unicode-scripts.h:69
 msgid "Syloti Nagri"
@@ -908,7 +922,7 @@ msgstr "Syloti Nagri"
 
 #: ../gucharmap/unicode-blocks.h:129
 msgid "Phags-pa"
-msgstr ""
+msgstr "Phags-pa"
 
 #: ../gucharmap/unicode-blocks.h:130
 msgid "Hangul Syllables"
@@ -1024,7 +1038,7 @@ msgstr "塞浦路斯文字音表"
 
 #: ../gucharmap/unicode-blocks.h:158 ../gucharmap/unicode-scripts.h:65
 msgid "Phoenician"
-msgstr ""
+msgstr "腓尼基语"
 
 #: ../gucharmap/unicode-blocks.h:159 ../gucharmap/unicode-scripts.h:48
 msgid "Kharoshthi"
@@ -1032,12 +1046,11 @@ msgstr "卡罗须提文"
 
 #: ../gucharmap/unicode-blocks.h:160 ../gucharmap/unicode-scripts.h:28
 msgid "Cuneiform"
-msgstr ""
+msgstr "楔形文字"
 
 #: ../gucharmap/unicode-blocks.h:161
-#, fuzzy
 msgid "Cuneiform Numbers and Punctuation"
-msgstr "CJK 字符和标点符号"
+msgstr "楔形数字和标点符号"
 
 #: ../gucharmap/unicode-blocks.h:162
 msgid "Byzantine Musical Symbols"
@@ -1057,7 +1070,7 @@ msgstr "太玄经符号"
 
 #: ../gucharmap/unicode-blocks.h:166
 msgid "Counting Rod Numerals"
-msgstr ""
+msgstr "算筹数码"
 
 #: ../gucharmap/unicode-blocks.h:167
 msgid "Mathematical Alphanumeric Symbols"
@@ -1125,11 +1138,11 @@ msgstr "线性 B"
 
 #: ../gucharmap/unicode-scripts.h:58
 msgid "Nko"
-msgstr ""
+msgstr "Nko"
 
 #: ../gucharmap/unicode-scripts.h:64
 msgid "Phags Pa"
-msgstr ""
+msgstr "Phags Pa"
 
 #: ../gucharmap/unicode-scripts.h:81
 msgid "Yi"
