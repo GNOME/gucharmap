@@ -39,8 +39,6 @@ AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE],["$GETTEXT_PACKAGE"],[Define the gettext package to be used])
 AM_GLIB_GNU_GETTEXT
 
-GNOME_DOC_INIT
-
 # check for win32
 case "$host" in
   *-*-mingw*) os_win32="yes" ;; 
@@ -80,6 +78,7 @@ GNOMEPKGS=""
 SUB_DIRS="po pixmaps gucharmap"
 if test "x$have_gnome" = "xyes" 
 then
+    GNOME_DOC_INIT
     GNOMEPKGS="libgnomeui-2.0 libgnome-2.0"
     SUB_DIRS="$SUB_DIRS help"
 fi
