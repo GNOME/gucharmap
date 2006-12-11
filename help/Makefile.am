@@ -5,11 +5,11 @@ DOC_MODULE = gucharmap
 DOC_ENTITIES = legal.xml
 DOC_INCLUDES = 
 
-DOC_LINGUAS = es fi bg
+DOC_LINGUAS = es fi bg sv
 
 # These should be converted to use gnome-doc-utils
 # http://live.gnome.org/GnomeDocUtilsTranslationMigration
 # Please remember also to remove help/langcode/Makefile from toplevel
 # configure.ac's AC_CONFIG_FILES, and remove your directory from
 # the SUBDIRS below.
-SUBDIRS = de fr it ja ko sv zh_CN zh_TW
+SUBDIRS = de fr it ja ko zh_CN zh_TW
