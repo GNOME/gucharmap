@@ -1,4 +1,4 @@
-## $Id$
+## $Id: Makefile.am,v 1.82 2006/09/04 22:41:10 behdad Exp $
 ##
 ## Copyright (c) 2003  Noah Levitt
 ##
@@ -80,15 +80,15 @@ endif
 
 gucharmap-marshal.h: $(srcdir)/gucharmap-marshal.list
 	( @GLIB_GENMARSHAL@ --prefix=_gucharmap_marshal $(srcdir)/gucharmap-marshal.list \
-                            --header > gucharmap-marshal.tmp \
-	  && mv gucharmap-marshal.tmp gucharmap-marshal.h ) \
-        || ( rm -f gucharmap-marshal.tmp && exit 1 )
+                            --header > gucharmap-marshal.h.tmp \
+	  && mv gucharmap-marshal.h.tmp gucharmap-marshal.h ) \
+        || ( rm -f gucharmap-marshal.h.tmp && exit 1 )
 
 gucharmap-marshal.c: $(srcdir)/gucharmap-marshal.list
 	( @GLIB_GENMARSHAL@ --prefix=_gucharmap_marshal $(srcdir)/gucharmap-marshal.list \
-                            --body > gucharmap-marshal.tmp \
-          && mv gucharmap-marshal.tmp gucharmap-marshal.c ) \
-        || ( rm -f gucharmap-marshal.tmp && exit 1 )
+                            --body > gucharmap-marshal.c.tmp \
+          && mv gucharmap-marshal.c.tmp gucharmap-marshal.c ) \
+        || ( rm -f gucharmap-marshal.c.tmp && exit 1 )
 
 # don't do the symlink stuff if this is windows
 if OS_WIN32

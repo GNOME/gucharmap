@@ -1,3 +1,11 @@
+2007-01-10  Behdad Esfahbod  <behdad@gnome.org>
+
+	Bug 386554 – compilation from CVS HEAD failed due to cclosure marshal
+	updates?
+
+	* gucharmap/Makefile.am: Use different temp files for marshaler .c and
+	.h files.
+
 2006-12-15  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* autogen.sh: Update to work with automake 1.10.
