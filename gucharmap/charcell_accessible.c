@@ -25,23 +25,9 @@
 #include <stdlib.h>
 #include <gtk/gtk.h>
 
-#include <gucharmap/gucharmap.h>
+#include "gucharmap.h"
+#include "gucharmap-table-private.h"
 #include "charcell_accessible.h"
-
-
-extern gint gucharmap_table_x_offset (GucharmapTable *chartable, 
-                                      gint col);
-extern gint gucharmap_table_y_offset (GucharmapTable *chartable, 
-                                      gint row);
-extern gint gucharmap_table_cell_column (GucharmapTable *chartable, 
-                                         guint cell);
-extern gint gucharmap_table_row_height (GucharmapTable *chartable, 
-                                        gint row);
-extern gint gucharmap_table_column_width (GucharmapTable *chartable, 
-                                          gint col);
-extern void gucharmap_table_redraw (GucharmapTable *chartable, 
-                                    gboolean move_zoom);
-
 
 static gpointer parent_class = NULL;
 
@@ -145,11 +131,11 @@ charcell_accessible_get_extents (AtkComponent *component,
                                  &real_x, &real_y, &real_width, &real_height, 
                                  coord_type);
       row = (cell->index - chartable->page_first_cell)/ chartable->cols;
-      column = gucharmap_table_cell_column (chartable, cell->index);
-      *x = real_x + gucharmap_table_x_offset (chartable, column);
-      *y = real_y + gucharmap_table_y_offset (chartable, row);
-      *width = gucharmap_table_column_width (chartable, column);
-      *height = gucharmap_table_row_height (chartable, row);
+      column = _gucharmap_table_cell_column (chartable, cell->index);
+      *x = real_x + _gucharmap_table_x_offset (chartable, column);
+      *y = real_y + _gucharmap_table_y_offset (chartable, row);
+      *width = _gucharmap_table_column_width (chartable, column);
+      *height = _gucharmap_table_row_height (chartable, row);
     }
   else
     {
@@ -171,7 +157,7 @@ charcell_accessible_grab_focus (AtkComponent *component)
 
   chartable = GUCHARMAP_TABLE (cell->widget);
   gucharmap_table_set_active_character (chartable, cell->index);
-  gucharmap_table_redraw (chartable, TRUE);
+  _gucharmap_table_redraw (chartable, TRUE);
   return TRUE;
 }
 
@@ -203,7 +189,7 @@ idle_do_action (gpointer data)
 
   chartable = GUCHARMAP_TABLE (cell->widget);
   gucharmap_table_set_active_character (chartable, cell->index);
-  gucharmap_table_redraw (chartable, TRUE);
+  _gucharmap_table_redraw (chartable, TRUE);
   g_signal_emit_by_name (chartable, "activate", cell->index);
   return FALSE; 
 }

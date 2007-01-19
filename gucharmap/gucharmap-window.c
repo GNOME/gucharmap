@@ -74,6 +74,8 @@ struct _GucharmapWindowPrivate
   ChaptersMode chapters_mode; 
 };
 
+GdkCursor * _gucharmap_window_progress_cursor (void);
+
 static GtkWindowClass *parent_class = NULL;
 
 static void
@@ -158,8 +160,8 @@ _gucharmap_window_progress_cursor (void)
 
   gdkcursor = gdk_cursor_new_from_pixmap (cursor, mask, &fg, &bg, 2, 2);
 
-  gdk_bitmap_unref (cursor);
-  gdk_bitmap_unref (mask);
+  g_object_unref (cursor);
+  g_object_unref (mask);
 
   return gdkcursor;
 }
@@ -316,9 +318,7 @@ static void
 help_about (GtkAction       *action, 
             GucharmapWindow *guw)
 {
-  GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
-
-  const gchar *authors[] = 
+  const gchar *authors[] =
     { 
       "Noah Levitt <nlevitt@columbia.edu>", 
       "Daniel Elstner <daniel.elstner@gmx.net>", 

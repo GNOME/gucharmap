@@ -37,7 +37,7 @@ libgucharmap_la_SOURCES = gucharmap-marshal.c gucharmap-marshal.h \
                           charcell_accessible.c charcell_accessible.h \
                           gucharmap-charmap.c gucharmap-charmap.h \
                           gucharmap-mini-fontsel.c gucharmap-mini-fontsel.h \
-                          gucharmap-table.c gucharmap-table.h \
+                          gucharmap-table.c gucharmap-table.h gucharmap-table-private.h \
                           gucharmap-unicode-info.c gucharmap-unicode-info.h \
                           gucharmap-window.c gucharmap-window.h \
 			  gucharmap-codepoint-list.c gucharmap-codepoint-list.h \
@@ -86,6 +86,7 @@ gucharmap-marshal.h: $(srcdir)/gucharmap-marshal.list
 
 gucharmap-marshal.c: $(srcdir)/gucharmap-marshal.list
 	( @GLIB_GENMARSHAL@ --prefix=_gucharmap_marshal $(srcdir)/gucharmap-marshal.list \
+			    --header \
                             --body > gucharmap-marshal.c.tmp \
           && mv gucharmap-marshal.c.tmp gucharmap-marshal.c ) \
         || ( rm -f gucharmap-marshal.c.tmp && exit 1 )
@@ -119,4 +120,3 @@ endif
 CLEANFILES = gucharmap-marshal.c gucharmap-marshal.h
 
 EXTRA_DIST = gucharmap-marshal.list gucharmaprc.rc 
-

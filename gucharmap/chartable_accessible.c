@@ -25,20 +25,12 @@
 #include <string.h>
 #include <gtk/gtk.h>
 
-#include <gucharmap/gucharmap.h>
+#include "gucharmap.h"
+#include "gucharmap-table-private.h"
 #include "chartable_accessible.h"
 #include "charcell_accessible.h"
 
-
-extern gint gucharmap_table_x_offset (GucharmapTable *chartable, 
-                                      gint col);
-extern gint gucharmap_table_y_offset (GucharmapTable *chartable, 
-                                      gint row);
-extern gint gucharmap_table_cell_column (GucharmapTable *chartable, 
-                                         guint cell);
-
-
-typedef struct 
+typedef struct
 {
   AtkObject *cell;
   gint      index;
@@ -302,7 +294,7 @@ chartable_accessible_ref_accessible_at_point (AtkComponent *component,
 
   for (col = 0; col < chartable->cols; col++) 
     {
-      if (x_pos < gucharmap_table_x_offset (chartable, col))
+      if (x_pos < _gucharmap_table_x_offset (chartable, col))
         {
           col--;
           break;
@@ -313,7 +305,7 @@ chartable_accessible_ref_accessible_at_point (AtkComponent *component,
 
   for (row = 0; row < chartable->rows; row++) 
     {
-      if (y_pos < gucharmap_table_y_offset (chartable, row))
+      if (y_pos < _gucharmap_table_y_offset (chartable, row))
         {
           row--;
           break;
@@ -478,7 +470,7 @@ find_object (GucharmapTable   *chartable,
   gint row, column;
 
   row = uc / chartable->cols;
-  column = gucharmap_table_cell_column (chartable, uc);
+  column = _gucharmap_table_cell_column (chartable, uc);
 
   return atk_table_ref_at (ATK_TABLE (obj), row, column);
 }

@@ -1,3 +1,29 @@
+2007-01-19  Christian Persch  <chpe@svn.gnome.org>
+
+	* gucharmap/charcell_accessible.c:
+	(charcell_accessible_get_extents),
+	(charcell_accessible_grab_focus), (idle_do_action):
+	* gucharmap/chartable_accessible.c:
+	(chartable_accessible_ref_accessible_at_point), (find_object):
+	* gucharmap/gucharmap-chapters.c: (gucharmap_chapters_init):
+	* gucharmap/gucharmap-charmap.c:
+	* gucharmap/gucharmap-search-dialog.c: (entry_changed):
+	* gucharmap/gucharmap-table-private.h:
+	* gucharmap/gucharmap-table.c: (_gucharmap_table_cell_column),
+	(_gucharmap_table_column_width), (_gucharmap_table_x_offset),
+	(_gucharmap_table_row_height), (_gucharmap_table_y_offset),
+	(get_appropriate_upper_left_xy), (draw_borders), (get_cell_at_xy),
+	(draw_character), (draw_square_bg), (expose_square),
+	(draw_and_expose_cell), (copy_rows), (redraw_rows),
+	(get_root_coords_at_active_char),
+	(get_appropriate_active_char_corner_xy), (_gucharmap_table_redraw),
+	(key_press_event), (scroll_chartable), (button_press_event),
+	(motion_notify_event), (mouse_wheel_up), (mouse_wheel_down),
+	(drag_data_received), (gucharmap_table_set_active_character):
+	* gucharmap/gucharmap-window.c:
+	(_gucharmap_window_progress_cursor), (help_about): Bug #396265: fix
+	compile warnings and make internal symbols start with underscore.
+
 2007-01-10  Behdad Esfahbod  <behdad@gnome.org>
 
 	Bug 386554 – compilation from CVS HEAD failed due to cclosure marshal

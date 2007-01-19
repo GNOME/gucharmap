@@ -29,7 +29,7 @@
 
 #define GUCHARMAP_SEARCH_DIALOG_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), gucharmap_search_dialog_get_type (), GucharmapSearchDialogPrivate))
 
-extern GdkCursor * _gucharmap_window_progress_cursor ();
+GdkCursor * _gucharmap_window_progress_cursor ();
 
 enum
 {
@@ -708,7 +708,7 @@ entry_changed (GtkObject             *object,
 {
   GucharmapSearchDialogPrivate *priv = GUCHARMAP_SEARCH_DIALOG_GET_PRIVATE (search_dialog);
 
-  if (_entry_is_empty(priv->entry))
+  if (_entry_is_empty (GTK_ENTRY (priv->entry)))
     {
       gtk_widget_set_sensitive (priv->prev_button, FALSE);
       gtk_widget_set_sensitive (priv->next_button, FALSE);

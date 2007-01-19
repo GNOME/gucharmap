@@ -39,7 +39,7 @@ static void
 gucharmap_chapters_init (GucharmapChapters *chapters)
 {
   /* have to do this so that the scrollbars are inited for some reason */
-  gtk_widget_set (GTK_WIDGET (chapters), "hadjustment", NULL, "vadjustment", NULL, NULL);
+  g_object_set (chapters, "hadjustment", NULL, "vadjustment", NULL, NULL);
 
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (chapters), 
                                   GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);

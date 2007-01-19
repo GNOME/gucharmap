@@ -31,7 +31,7 @@
 #include "gucharmap-marshal.h"
 #include "chartable_accessible.h"
 
-extern gboolean _gucharmap_unicode_has_nameslist_entry (gunichar uc);
+gboolean _gucharmap_unicode_has_nameslist_entry (gunichar uc);
 
 enum 
 {
