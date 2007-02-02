@@ -1,4 +1,4 @@
-## $Id$
+## $Id: Makefile.am,v 1.21 2006/02/12 00:07:14 behdad Exp $
 ##
 ## Copyright (c) 2002  Noah Levitt <nlevitt@users.sourceforge.net>
 ##
@@ -17,6 +17,12 @@
 ## 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
 ##
 
+SUBDIRS = po pixmaps gucharmap
+
+if HAVE_GNOME_DOC_UTILS
+SUBDIRS += help
+endif
+
 distuninstallcheck_listfiles = find . -type -f -print | grep -v scrollkeeper
 
 distcleancheck_listfiles = find . -type -f print | grep -v 'omf\.out'
@@ -25,9 +31,6 @@ desktopdir 	 = $(datadir)/applications
 desktop_in_files = gucharmap.desktop.in
 desktop_DATA 	 = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
-
-SUBDIRS = $(SUB_DIRS)
-DIST_SUBDIRS = gucharmap po pixmaps help 
 
 EXTRA_DIST = gtkrc.win32 gucharmap.nsi.in gucharmap.pc.in \
              intltool-extract.in intltool-merge.in intltool-update.in \

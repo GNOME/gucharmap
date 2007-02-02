@@ -1,4 +1,4 @@
-dnl $Id$
+dnl $Id: configure.ac,v 1.138 2006/09/04 22:41:10 behdad Exp $
 dnl
 dnl Copyright (c) 2003  Noah Levitt
 dnl
@@ -39,7 +39,11 @@ AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE],["$GETTEXT_PACKAGE"],[Define the gettext package to be used])
 AM_GLIB_GNU_GETTEXT
 
-GNOME_DOC_INIT
+GNOME_DOC_INIT([0.9.0],[have_gdu=yes],[have_gdu=no])
+
+if test "$have_gdu" = "no"; then
+	AC_MSG_WARN([GNOME doc utils not found; disabling user manual])
+fi
 
 # check for win32
 case "$host" in
@@ -77,14 +81,11 @@ else
 fi  
 
 GNOMEPKGS=""
-SUB_DIRS="po pixmaps gucharmap"
-if test "x$have_gnome" = "xyes" 
+if test "x$have_gnome" = "xyes"
 then
     GNOMEPKGS="libgnomeui-2.0 libgnome-2.0"
-    SUB_DIRS="$SUB_DIRS help"
 fi
 AC_SUBST(GNOMEPKGS)
-AC_SUBST(SUB_DIRS)
 
 # checks for funcs 
 AC_CHECK_FUNCS([bind_textdomain_codeset])
