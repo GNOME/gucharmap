@@ -19,7 +19,7 @@ dnl
 
 AC_PREREQ([2.56])
 
-AC_INIT([GNOME Character Map],[1.8.0],[http://bugzilla.gnome.org/enter_bug.cgi?product=gucharmap],[gucharmap])
+AC_INIT([GNOME Character Map],[1.9.0],[http://bugzilla.gnome.org/enter_bug.cgi?product=gucharmap],[gucharmap])
 
 AC_CONFIG_SRCDIR([gucharmap/gucharmap.h])
 AC_CONFIG_HEADERS([config.h])
@@ -40,6 +40,7 @@ AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE],["$GETTEXT_PACKAGE"],[Define the gettext pa
 AM_GLIB_GNU_GETTEXT
 
 GNOME_DOC_INIT([0.9.0],[have_gdu=yes],[have_gdu=no])
+AM_CONDITIONAL(HAVE_GNOME_DOC_UTILS, test "$have_gdu" = "yes")
 
 if test "$have_gdu" = "no"; then
 	AC_MSG_WARN([GNOME doc utils not found; disabling user manual])
