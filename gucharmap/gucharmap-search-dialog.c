@@ -39,6 +39,7 @@ enum
 };
 
 static guint gucharmap_search_dialog_signals[NUM_SIGNALS] = { 0, 0 };
+static GObjectClass *parent_class;
 
 enum
 {
@@ -821,12 +822,16 @@ gucharmap_search_dialog_finalize (GObject *object)
 
   if (priv->search_state)
     gucharmap_search_state_free (priv->search_state);
+
+  parent_class->finalize (object);
 }
 
 static void
 gucharmap_search_dialog_class_init (GucharmapSearchDialogClass *clazz)
 {
   g_type_class_add_private (clazz, sizeof (GucharmapSearchDialogPrivate));
+
+  parent_class = (GObjectClass *) g_type_class_peek_parent (clazz);
 
   G_OBJECT_CLASS (clazz)->finalize = gucharmap_search_dialog_finalize;
 
