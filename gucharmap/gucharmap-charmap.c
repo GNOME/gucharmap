@@ -330,7 +330,7 @@ set_details (GucharmapCharmap *charmap,
   conditionally_insert_canonical_decomposition (charmap, buffer, &iter, uc);
 
   /* representations */
-  if (g_unichar_type(uc) != G_UNICODE_BREAK_SURROGATE)
+  if (g_unichar_break_type(uc) != G_UNICODE_BREAK_SURROGATE)
     {
       insert_heading (charmap, buffer, &iter, _("Various Useful Representations"));
 
