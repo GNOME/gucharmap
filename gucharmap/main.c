@@ -50,9 +50,10 @@ main (gint argc, gchar **argv)
 #else
   GError *error = NULL;
 #endif
-
- _gucharmap_intl_ensure_initialized ();
- textdomain (GETTEXT_PACKAGE);
+     
+  bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
+  bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+  textdomain (GETTEXT_PACKAGE);
 
 #ifdef HAVE_GNOME
   context = g_option_context_new ("");

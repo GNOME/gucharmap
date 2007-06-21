@@ -1,3 +1,12 @@
+2007-06-21  Behdad Esfahbod  <behdad@gnome.org>
+
+	Bug 396265 – don't export internal symbols
+
+	* configure.ac:
+	* gucharmap/Makefile.am:
+	* gucharmap/main.c (main):
+	Only export '^gucharmap_.*' symbols.
+
 2007-04-30  Behdad Esfahbod  <behdad@gnome.org>
 
 	Bug 434276 – G_UNICODE_BREAK_SURROGATE
