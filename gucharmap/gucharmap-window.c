@@ -718,9 +718,6 @@ make_text_to_copy (GucharmapWindow *guw)
   GtkWidget *button;
   GtkWidget *label;
   GtkWidget *hbox;
-  GtkTooltips *tooltips;
-
-  tooltips = gtk_tooltips_new ();
 
   hbox = gtk_hbox_new (FALSE, 6);
 
@@ -745,7 +742,7 @@ make_text_to_copy (GucharmapWindow *guw)
   g_signal_connect (G_OBJECT (priv->text_to_copy_entry), "changed",
                     G_CALLBACK (entry_changed_sensitize_button), button);
 
-  gtk_tooltips_set_tip (tooltips, button, _("Copy to the clipboard."), NULL);
+  gtk_widget_set_tooltip_text (button, _("Copy to the clipboard."));
 
   return hbox;
 }
