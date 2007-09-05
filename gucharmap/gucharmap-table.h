@@ -67,6 +67,8 @@ struct _GucharmapTable
   /* for dragging (#114534) */
   gdouble click_x, click_y; 
 
+  GtkTargetList *target_list;
+
   GucharmapCodepointList *codepoint_list;
   gboolean codepoint_list_changed;
 };

@@ -45,6 +45,8 @@ static const GtkTargetEntry dnd_target_table[] =
   { "STRING", 0, 0 }
 };
 
+static GtkHBoxClass *parent_class = NULL;
+
 /* depends on directionality */
 static guint
 get_cell_at_rowcol (GucharmapTable *chartable,
@@ -1005,10 +1007,29 @@ expose_event (GtkWidget *widget,
 }
 
 static void
+gucharmap_table_finalize (GObject *object)
+{
+  GucharmapTable *chartable = GUCHARMAP_TABLE (object);
+
+  g_free (chartable->font_name);
+
+  if (chartable->pango_layout)
+    g_object_unref (chartable->pango_layout);
+
+  gtk_target_list_unref (chartable->target_list);
+
+  G_OBJECT_CLASS (parent_class)->finalize (object);
+}
+
+static void
 gucharmap_table_class_init (GucharmapTableClass *clazz)
 {
   clazz->activate = NULL;
   clazz->set_active_char = NULL;
+
+  parent_class = g_type_class_peek_parent (clazz);
+
+  G_OBJECT_CLASS (clazz)->finalize = gucharmap_table_finalize;
 
   gucharmap_table_signals[ACTIVATE] =
       g_signal_new ("activate", gucharmap_table_get_type (), G_SIGNAL_RUN_FIRST,
@@ -1378,9 +1399,7 @@ motion_notify_event (GtkWidget *widget,
                                    event->x, 
                                    event->y))
     {
-      gtk_drag_begin (widget, 
-                      gtk_target_list_new (dnd_target_table, 
-                                           G_N_ELEMENTS (dnd_target_table)),
+      gtk_drag_begin (widget, chartable->target_list,
                       GDK_ACTION_COPY, 1, (GdkEvent *) event);
     }
 
@@ -1591,6 +1610,9 @@ gucharmap_table_init (GucharmapTable *chartable)
           GDK_EXPOSURE_MASK | GDK_KEY_PRESS_MASK | GDK_BUTTON_PRESS_MASK |
           GDK_BUTTON_RELEASE_MASK | GDK_BUTTON3_MOTION_MASK |
           GDK_BUTTON1_MOTION_MASK | GDK_FOCUS_CHANGE_MASK | GDK_SCROLL_MASK);
+
+  chartable->target_list = gtk_target_list_new (dnd_target_table, 
+                                                G_N_ELEMENTS (dnd_target_table));
 
   g_signal_connect (G_OBJECT (chartable->drawing_area), "expose-event",
                     G_CALLBACK (expose_event), chartable);

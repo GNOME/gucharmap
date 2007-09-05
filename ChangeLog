@@ -1,3 +1,16 @@
+2007-09-05  Behdad Esfahbod  <behdad@gnome.org>
+
+	Bug 357471 – chartable::finalize()
+	Patch from paolo borelli
+
+	* gucharmap/gucharmap-table.c (gucharmap_table_finalize),
+	(gucharmap_table_class_init), (motion_notify_event),
+	(gucharmap_table_init):
+	* gucharmap/gucharmap-table.h:
+	Implement chartable::finalize() so that it frees some stuff and chains
+	up to the parent finalize(). Also avoid leaking the target_list each time
+	something is drag&dropped.
+
 2007-08-07  Behdad Esfahbod  <behdad@gnome.org>
 
 	* MAINTAINERS: Add Userid field.
