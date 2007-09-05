@@ -1,5 +1,14 @@
 2007-09-05  Behdad Esfahbod  <behdad@gnome.org>
 
+	Bug 466213 – No branch for gnome-2-18
+	Revert Bug 459279 – port to new tooltips API
+
+	* configure.ac: Require gtk 2.6.0 again.
+	* gucharmap/gucharmap-window.c (make_text_to_copy):
+	Revert port to new tooltips API, so we build with stable Gtk+.
+
+2007-09-05  Behdad Esfahbod  <behdad@gnome.org>
+
 	Bug 357471 – chartable::finalize()
 	Patch from paolo borelli
 
