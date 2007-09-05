@@ -1,5 +1,20 @@
 2007-09-05  Behdad Esfahbod  <behdad@gnome.org>
 
+	Bug 311912 – Should come up showing the unicode block for the default
+	language
+	Patch from Federico Mena Quintero
+
+	* gucharmap/gucharmap-script-chapters.c
+	(get_first_non_underscore_char), (select_default_script),
+	(tree_view_map_event_cb), (queue_select_default_script),
+	(gucharmap_script_chapters_init): Jump to default script for users
+	selected languge (LC_MESSAGES).  We do this by getting translation for
+	"_File" and jumping to the block containing its first character.
+	We delay this until the tree view is mapped so that the tree will
+	scroll to the selected row in addition to just selecting it.
+
+2007-09-05  Behdad Esfahbod  <behdad@gnome.org>
+
 	Bug 466213 – No branch for gnome-2-18
 	Revert Bug 459279 – port to new tooltips API
 

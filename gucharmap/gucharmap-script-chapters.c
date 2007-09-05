@@ -47,6 +47,68 @@ selection_changed (GtkTreeSelection        *selection,
     g_signal_emit_by_name (GUCHARMAP_CHAPTERS (chapters), "changed", 0); 
 }
 
+static gunichar
+get_first_non_underscore_char (const char *str)
+{
+  const char *p;
+
+  if (!str)
+    return -1;
+
+  for (p = str; p && *p; p = g_utf8_find_next_char (p, NULL))
+    {
+      gunichar ch;
+
+      ch = g_utf8_get_char (p);
+      if (g_unichar_isalpha (ch))
+        return ch;
+    }
+
+  return 0;
+}
+
+static void
+select_default_script (GucharmapScriptChapters *chapters)
+{
+  const char *default_str;
+  gunichar first_char;
+
+  default_str = _("_File"); /* use a super-common string */
+  first_char = get_first_non_underscore_char (default_str);
+
+  if (!first_char)
+    return; /* too bad; don't select anything */
+
+  gucharmap_chapters_go_to_character (GUCHARMAP_CHAPTERS (chapters), first_char);
+}
+
+static gboolean
+tree_view_map_event_cb (GtkWidget *widget, GdkEventAny *event, gpointer data)
+{
+  GucharmapScriptChapters *chapters;
+
+  chapters = GUCHARMAP_SCRIPT_CHAPTERS (data);
+
+  select_default_script (chapters);
+  g_signal_handlers_disconnect_by_func (widget, tree_view_map_event_cb, chapters);
+
+  return FALSE;
+}
+
+static void
+queue_select_default_script (GucharmapScriptChapters *chapters)
+{
+  GucharmapChapters *parent = GUCHARMAP_CHAPTERS (chapters);
+
+  /* We wait until the tree view is mapped so that it will scroll to the right
+   * row, in addition to just selecting it but possibly leaving it outside the
+   * visible area.
+   */
+
+  g_signal_connect (parent->tree_view, "map-event",
+		    G_CALLBACK (tree_view_map_event_cb), chapters);
+}
+
 static void
 gucharmap_script_chapters_init (GucharmapScriptChapters *chapters)
 {
@@ -88,6 +150,8 @@ gucharmap_script_chapters_init (GucharmapScriptChapters *chapters)
   gtk_tree_selection_select_iter (selection, &iter);
 
   g_signal_connect (G_OBJECT (selection), "changed", G_CALLBACK (selection_changed), chapters);
+
+  queue_select_default_script (chapters);
 
   gtk_container_add (GTK_CONTAINER (chapters), parent->tree_view);
   gtk_widget_show (parent->tree_view);
