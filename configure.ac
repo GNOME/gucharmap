@@ -122,7 +122,7 @@ fi
 # - If binary compatibility has been broken (eg removed or changed interfaces)
 #   change to C+1:0:0
 # - If the interface is the same as the previous version, change to C:R+1:A
-LIBGUCHARMAP_LT_VERSION=6:1:0
+LIBGUCHARMAP_LT_VERSION=6:2:0
 AC_SUBST([LIBGUCHARMAP_LT_VERSION])
 
 AC_CONFIG_FILES([
