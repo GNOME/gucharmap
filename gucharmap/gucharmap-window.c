@@ -24,6 +24,7 @@
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 #ifdef HAVE_GNOME
+# include <gconf/gconf-client.h>
 # include <gnome.h>
 #endif
 #include "gucharmap-window.h"
@@ -66,9 +67,6 @@ struct _GucharmapWindowPrivate
   gboolean file_menu_visible;
 
   ChaptersMode chapters_mode; 
-
-  gboolean is_maximized;
-  gboolean is_fullscreen;
 };
 
 GdkCursor * _gucharmap_window_progress_cursor (void);
@@ -759,35 +757,6 @@ status_realize (GtkWidget       *status,
 }
 
 static void
-gucharmap_window_state_changed (GtkWidget *widget,
-                                GdkEventWindowState *event,
-                                GucharmapWindow *guw)
-{
-  gboolean maximized, fullscreen;
-  if (event->changed_mask & GDK_WINDOW_STATE_MAXIMIZED) {
-    maximized = (event->new_window_state & GDK_WINDOW_STATE_MAXIMIZED) != 0;
-    GUCHARMAP_WINDOW_GET_PRIVATE (guw)->is_maximized = maximized;
-    gucharmap_settings_set_window_maximized (maximized);
-  }
-  if (event->changed_mask & GDK_WINDOW_STATE_FULLSCREEN) {
-    fullscreen = (event->new_window_state & GDK_WINDOW_STATE_FULLSCREEN) != 0;
-    GUCHARMAP_WINDOW_GET_PRIVATE (guw)->is_fullscreen = fullscreen;
-  }
-}
-
-static void
-gucharmap_window_size_changed (GtkWidget *widget,
-                               GtkAllocation *event,
-                               GucharmapWindow *guw)
-{
-  GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
-  if (!priv->is_maximized && !priv->is_fullscreen) {
-    gucharmap_settings_set_window_width (event->width);
-    gucharmap_settings_set_window_height (event->height);
-  }
-}
-
-static void
 pack_stuff_in_window (GucharmapWindow *guw)
 {
   GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
@@ -873,9 +842,6 @@ gucharmap_window_init (GucharmapWindow *guw)
   gtk_window_set_icon_name (GTK_WINDOW (guw), "gucharmap");
 
   pack_stuff_in_window (guw);
-
-  g_signal_connect (guw, "window-state-event", G_CALLBACK (gucharmap_window_state_changed), guw);
-  g_signal_connect (guw, "size-allocate", G_CALLBACK (gucharmap_window_size_changed), guw);
 }
 
 static void

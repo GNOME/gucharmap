@@ -1,5 +1,25 @@
 2007-12-03  Christian Persch  <chpe@gnome.org>
 
+	* gucharmap.schemas.in:
+	* gucharmap/gucharmap-settings.c: (gucharmap_settings_initialize),
+	(gucharmap_settings_shutdown), (gucharmap_settings_initialized),
+	(gucharmap_settings_get_chapter), (gucharmap_settings_set_chapter),
+	(gucharmap_settings_get_chapters_mode),
+	(gucharmap_settings_set_chapters_mode),
+	(gucharmap_settings_get_font), (gucharmap_settings_set_font),
+	(gucharmap_settings_get_last_char),
+	(gucharmap_settings_set_last_char),
+	(gucharmap_settings_get_snap_pow2),
+	(gucharmap_settings_set_snap_pow2), (window_state_timeout_cb),
+	(free_window_state), (window_configure_event_cb),
+	(window_state_event_cb), (gucharmap_settings_add_window):
+	* gucharmap/gucharmap-settings.h:
+	* gucharmap/gucharmap-window.c: (gucharmap_window_init):
+	* gucharmap/main.c: (main): Cleanup settings code, and make window
+	state persistence not hammer gconf while resizing. Bug #501383.
+
+2007-12-03  Christian Persch  <chpe@gnome.org>
+
 	* gucharmap/gucharmap-mini-fontsel.c: (fill_font_families_combo),
 	(update_font_familiy_combo), (family_changed),
 	(gucharmap_mini_font_selection_init),

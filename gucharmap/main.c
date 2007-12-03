@@ -45,8 +45,6 @@ main (gint argc, gchar **argv)
   GdkScreen *screen;
   gint monitor;
   GdkRectangle rect;
-  gint w, h;
-  gboolean max;
 #ifdef HAVE_GNOME
   GnomeProgram *program;
   GOptionContext *context;
@@ -91,6 +89,8 @@ main (gint argc, gchar **argv)
   gdk_screen_get_monitor_geometry (screen, monitor, &rect);
   gtk_window_set_default_size (GTK_WINDOW (window), rect.width * 9/16, rect.height * 9/16);
 
+  gucharmap_settings_add_window (GTK_WINDOW (window));
+
   /* make the starting font 50% bigger than the default font */
   if (new_font == NULL) /* new_font could be set by command line option */
     {
@@ -115,17 +115,6 @@ main (gint argc, gchar **argv)
       else
         gucharmap_mini_font_selection_reset_font_size (fontsel);
     }
-
-  
-  max = gucharmap_settings_get_window_maximized ();
-  if (max) {
-    gtk_window_maximize (GTK_WINDOW (window));
-  } else {
-    w = gucharmap_settings_get_window_width ();
-    h = gucharmap_settings_get_window_height ();
-    if (w > 0 && h > 0)
-      gtk_window_resize (GTK_WINDOW (window), w, h);
-  }
 
   g_signal_connect (G_OBJECT (window), "destroy", G_CALLBACK (gtk_main_quit), NULL);
 

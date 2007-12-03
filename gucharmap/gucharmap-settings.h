@@ -20,6 +20,7 @@
 #define GUCHARMAP_SETTINGS_H
 
 #include <glib.h>
+#include <gtk/gtkwindow.h>
 
 G_BEGIN_DECLS
 
@@ -35,12 +36,7 @@ gunichar     gucharmap_settings_get_last_char        (void);
 void         gucharmap_settings_set_last_char        (gunichar wc);
 gboolean     gucharmap_settings_get_snap_pow2        (void);
 void         gucharmap_settings_set_snap_pow2        (gboolean snap_pow2);
-gint         gucharmap_settings_get_window_width     (void);
-void         gucharmap_settings_set_window_width     (gint width);
-gint         gucharmap_settings_get_window_height    (void);
-void         gucharmap_settings_set_window_height    (gint height);
-gboolean     gucharmap_settings_get_window_maximized (void);
-void         gucharmap_settings_set_window_maximized (gboolean maximized);
+void         gucharmap_settings_add_window           (GtkWindow *window);
 
 G_END_DECLS
 
