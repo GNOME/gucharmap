@@ -47,7 +47,8 @@ libgucharmap_la_SOURCES = gucharmap-marshal.c gucharmap-marshal.h \
 			  gucharmap-script-chapters.c gucharmap-script-chapters.h \
 			  unicode-blocks.h unicode-categories.h unicode-names.h \
 			  unicode-nameslist.h unicode-scripts.h unicode-unihan.h \
-			  gucharmap-search-dialog.h gucharmap-search-dialog.c
+			  gucharmap-search-dialog.h gucharmap-search-dialog.c \
+			  gucharmap-settings.h gucharmap-settings.c
 
 # this is different from the project version
 libgucharmap_la_LDFLAGS = -version-info $(LIBGUCHARMAP_LT_VERSION) -export-symbols-regex "^gucharmap_*"
@@ -64,7 +65,8 @@ libgucharmapinclude_HEADERS = gucharmap.h \
 			      gucharmap-block-chapters.h \
 			      gucharmap-chapters.h \
 			      gucharmap-script-chapters.h \
-			      gucharmap-search-dialog.h
+			      gucharmap-search-dialog.h \
+			      gucharmap-settings.h
 
 bin_PROGRAMS = gucharmap
 gucharmap_SOURCES = main.c

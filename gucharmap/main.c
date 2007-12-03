@@ -27,6 +27,7 @@
 #endif
 #include "gucharmap-window.h"
 #include "gucharmap-mini-fontsel.h"
+#include "gucharmap-settings.h"
 
 static gchar *new_font = NULL;
 
@@ -44,6 +45,8 @@ main (gint argc, gchar **argv)
   GdkScreen *screen;
   gint monitor;
   GdkRectangle rect;
+  gint w, h;
+  gboolean max;
 #ifdef HAVE_GNOME
   GnomeProgram *program;
   GOptionContext *context;
@@ -74,6 +77,7 @@ main (gint argc, gchar **argv)
     }
 #endif
 
+  gucharmap_settings_initialize ();
   g_set_application_name (_("Gucharmap"));
   gtk_window_set_default_icon_name ("gucharmap");
 
@@ -93,8 +97,35 @@ main (gint argc, gchar **argv)
       GucharmapMiniFontSelection *fontsel = gucharmap_window_get_mini_font_selection (GUCHARMAP_WINDOW (window));
       gint default_size = PANGO_PIXELS (2.0 * pango_font_description_get_size (window->style->font_desc));
       gucharmap_mini_font_selection_set_default_font_size (fontsel, default_size);
-      gucharmap_mini_font_selection_reset_font_size (fontsel);
+
+      new_font = gucharmap_settings_get_font ();
+      if (new_font)
+        {
+          PangoFontDescription *fd = pango_font_description_from_string (new_font);
+
+          /* revert to default font size */
+          if (0 == pango_font_description_get_size (fd))
+            gucharmap_mini_font_selection_reset_font_size (fontsel);
+	  else
+	    gucharmap_mini_font_selection_set_font_name (fontsel, new_font);
+
+          pango_font_description_free (fd);
+	  g_free (new_font);
+        }
+      else
+        gucharmap_mini_font_selection_reset_font_size (fontsel);
     }
+
+  
+  max = gucharmap_settings_get_window_maximized ();
+  if (max) {
+    gtk_window_maximize (GTK_WINDOW (window));
+  } else {
+    w = gucharmap_settings_get_window_width ();
+    h = gucharmap_settings_get_window_height ();
+    if (w > 0 && h > 0)
+      gtk_window_resize (GTK_WINDOW (window), w, h);
+  }
 
   g_signal_connect (G_OBJECT (window), "destroy", G_CALLBACK (gtk_main_quit), NULL);
 
@@ -104,6 +135,7 @@ main (gint argc, gchar **argv)
 
   gtk_main ();
 
+  gucharmap_settings_shutdown ();
 #ifdef HAVE_GNOME
   g_object_unref (program);
 #endif

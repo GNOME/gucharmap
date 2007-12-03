@@ -20,6 +20,7 @@
 #include "config.h"
 #include "gucharmap-chapters.h"
 #include "gucharmap-marshal.h"
+#include <string.h>
 
 enum
 {
@@ -175,4 +176,65 @@ gucharmap_chapters_previous (GucharmapChapters *chapters)
         gtk_tree_view_set_cursor (GTK_TREE_VIEW (chapters->tree_view), path, NULL, FALSE);
       gtk_tree_path_free (path);
     }
+}
+
+/**
+ * gucharmap_chapter_get_string:
+ * @chapters: a #GucharmapChapters
+ *
+ * Returns a newly allocated string containing
+ * the name of the currently selected chapter
+ **/
+gchar*
+gucharmap_chapter_get_string (GucharmapChapters *chapters)
+{
+  GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (chapters->tree_view));
+  GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (chapters->tree_view));
+  GtkTreeIter iter;
+  gchar *name = NULL;
+
+  if (gtk_tree_selection_get_selected (selection, NULL, &iter))
+    gtk_tree_model_get(model, &iter, 0, &name, -1);
+
+  return name;
+}
+
+/**
+ * gucharmap_chapter_get_string:
+ * @chapters: a #GucharmapChapters
+ * @name: Unicode block name
+ *
+ * Sets the selection to the row specified by @name
+ * Return value: %TRUE on success, %FALSE on failure
+ **/
+gboolean
+gucharmap_chapter_set_string (GucharmapChapters *chapters,
+                              const char        *name)
+{
+  GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (chapters->tree_view));
+  GtkTreeIter iter;
+  gboolean match;
+  gchar *str;
+
+  if (name == NULL)
+    return FALSE;
+
+  if (gtk_tree_model_get_iter_first (model, &iter)) {
+      do {
+          gtk_tree_model_get(model, &iter, 0, &str, -1);
+          match = strcmp (name, str);
+          g_free(str);
+          if (0 == match) {
+            GtkTreePath *path = gtk_tree_model_get_path (chapters->tree_model, &iter);
+            gtk_tree_view_set_cursor (GTK_TREE_VIEW (chapters->tree_view), 
+                    path, NULL, FALSE);
+            gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (chapters->tree_view),
+                    path, NULL, FALSE, 0, 0);
+            gtk_tree_path_free (path);
+            return TRUE;
+          }
+      } while (gtk_tree_model_iter_next (model, &iter));
+  }
+
+  return FALSE;
 }

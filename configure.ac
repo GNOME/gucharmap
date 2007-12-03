@@ -19,7 +19,7 @@ dnl
 
 AC_PREREQ([2.56])
 
-AC_INIT([GNOME Character Map],[1.10.1],[http://bugzilla.gnome.org/enter_bug.cgi?product=gucharmap],[gucharmap])
+AC_INIT([GNOME Character Map],[2.21.1],[http://bugzilla.gnome.org/enter_bug.cgi?product=gucharmap],[gucharmap])
 
 AC_CONFIG_SRCDIR([gucharmap/gucharmap.h])
 AC_CONFIG_HEADERS([config.h])
@@ -74,12 +74,26 @@ AC_ARG_ENABLE(gnome,
               AC_HELP_STRING([--disable-gnome],
 	                     [don't build with GNOME support]))
 if test "x$enable_gnome" != "xno"; then
-    PKG_CHECK_MODULES(GNOME, libgnomeui-2.0 >= 2.13.2 libgnome-2.0 >= 2.13.7, 
-                    have_gnome=yes, have_gnome=no)
+    PKG_CHECK_MODULES(GNOME, libgnomeui-2.0 >= 2.13.2 libgnome-2.0 >= 2.13.7,
+    		have_gnome=yes, have_gnome=no)
 else
     AC_MSG_NOTICE([GNOME support disabled with --disable-gnome])
     have_gnome=no
 fi  
+
+AC_ARG_ENABLE(gconf,
+              AC_HELP_STRING([--disable-gconf],
+	                     [don't build with gconf support]))
+if test "x$enable_gconf" != "xno"; then
+    PKG_CHECK_MODULES(GCONF, gconf-2.0,
+                have_gconf=yes, have_gconf=no)
+else
+    AC_MSG_NOTICE([GCONF support disabled with --disable-gconf])
+    have_gconf=no
+fi  
+
+AC_PATH_PROG(GCONFTOOL, gconftool-2, no)
+AM_GCONF_SOURCE_2
 
 GNOMEPKGS=""
 if test "x$have_gnome" = "xyes"
@@ -87,6 +101,13 @@ then
     GNOMEPKGS="libgnomeui-2.0 libgnome-2.0"
 fi
 AC_SUBST(GNOMEPKGS)
+
+GCONFPKGS=""
+if test "x$have_gconf" = "yes"
+then
+    GCONFPKGS="gconf-2.0"
+fi
+AC_SUBST(GCONFPKGS)
 
 # checks for funcs 
 AC_CHECK_FUNCS([bind_textdomain_codeset])
@@ -102,6 +123,10 @@ AC_SUBST(GNOME_LIBS)
 
 if test "x$have_gnome" = "xyes" ; then
     AC_DEFINE([HAVE_GNOME],[1],[Define if have gnome])
+fi
+
+if test "x$have_gconf" = "xyes" ; then
+    AC_DEFINE([HAVE_GCONF], [1], [Define if have gconf])
 fi
 
 GLIB_GENMARSHAL=`$PKG_CONFIG --variable=glib_genmarshal glib-2.0`

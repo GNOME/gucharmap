@@ -29,6 +29,7 @@
 #include "gucharmap-script-chapters.h"
 #include "gucharmap-intl.h"
 #include "gucharmap-marshal.h"
+#include "gucharmap-settings.h"
 #include "chartable_accessible.h"
 
 gboolean _gucharmap_unicode_has_nameslist_entry (gunichar uc);
@@ -481,6 +482,13 @@ set_details (GucharmapCharmap *charmap,
 #endif /* #if ENABLE_UNIHAN */
 }
 
+static gboolean
+gucharmap_active_char_save (gpointer last_char)
+{
+  gucharmap_settings_set_last_char (GPOINTER_TO_UINT (last_char));
+  return FALSE;
+}
+
 static void
 active_char_set (GtkWidget        *widget, 
                  gunichar          wc, 
@@ -492,6 +500,8 @@ active_char_set (GtkWidget        *widget,
   gint i;
 
   set_details (charmap, wc);
+
+  g_idle_add (gucharmap_active_char_save, GUINT_TO_POINTER(wc));
 
   gs = g_string_new (NULL);
   g_string_append_printf (gs, "U+%4.4X %s", wc, 
@@ -802,6 +812,7 @@ gucharmap_charmap_new (GucharmapChapters *chapters)
 {
   GucharmapCharmap *charmap = g_object_new (gucharmap_charmap_get_type (), NULL);
   GtkWidget *pane2;
+  gunichar last_char;
 
   charmap->hand_cursor = gdk_cursor_new (GDK_HAND2);
   charmap->regular_cursor = gdk_cursor_new (GDK_XTERM);
@@ -815,6 +826,11 @@ gucharmap_charmap_new (GucharmapChapters *chapters)
   gtk_paned_pack2 (GTK_PANED (charmap), pane2, TRUE, TRUE);
 
   set_details (charmap, gucharmap_table_get_active_character (charmap->chartable));
+
+  last_char = gucharmap_settings_get_last_char ();
+  /* not validating characters allows restoration of unassigned characters */
+  if (last_char < UNICHAR_MAX && last_char > 0)
+    gucharmap_charmap_go_to_character (charmap, last_char);
 
   return GTK_WIDGET (charmap);
 }

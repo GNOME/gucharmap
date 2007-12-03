@@ -1,3 +1,28 @@
+2007-12-03  Christian Persch  <chpe@gnome.org>
+
+	* configure.ac: Bump version after branching.
+
+	* Makefile.am:
+	* gucharmap.pc.in:
+	* gucharmap/Makefile.am:
+	* gucharmap/gucharmap-block-chapters.c: (selection_changed),
+	(gucharmap_block_chapters_settings_init),
+	(gucharmap_block_chapters_init):
+	* gucharmap/gucharmap-chapters.c: (gucharmap_chapter_get_string),
+	(gucharmap_chapter_set_string):
+	* gucharmap/gucharmap-chapters.h:
+	* gucharmap/gucharmap-charmap.c: (gucharmap_active_char_save),
+	(active_char_set), (gucharmap_charmap_new):
+	* gucharmap/gucharmap-script-chapters.c: (selection_changed),
+	(gucharmap_script_chapters_settings_init),
+	(gucharmap_script_chapters_init):
+	* gucharmap/gucharmap-table.c: (draw_chartable_from_scratch):
+	* gucharmap/gucharmap-window.c: (snap_cols_pow2), (make_menu),
+	(fontsel_changed), (gucharmap_window_state_changed),
+	(gucharmap_window_size_changed), (gucharmap_window_init):
+	* gucharmap/main.c: (main): Remember the settings. Bug #140414,
+	patch by Jason Allen and Jared Moore.
+
 2007-10-24  Changwoo Ryu  <cwryu@debian.org>
 
 	* configure.ac: Korean manual translation migrated to

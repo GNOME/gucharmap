@@ -40,6 +40,13 @@ G_BEGIN_DECLS
 typedef struct _GucharmapChapters GucharmapChapters;
 typedef struct _GucharmapChaptersClass GucharmapChaptersClass;
 
+typedef enum
+{
+  CHAPTERS_SCRIPT,
+  CHAPTERS_BLOCK
+}
+ChaptersMode;
+
 struct _GucharmapChapters
 {
   GtkScrolledWindow parent;
@@ -69,6 +76,9 @@ gboolean                                gucharmap_chapters_go_to_character      
 void                                    gucharmap_chapters_next                    (GucharmapChapters *chapters);
 void                                    gucharmap_chapters_previous                (GucharmapChapters *chapters);
 
+gchar *                                 gucharmap_chapter_get_string               (GucharmapChapters *chapters);
+gboolean                                gucharmap_chapter_set_string               (GucharmapChapters *chapters,
+                                                                                    const gchar       *name);
 G_END_DECLS
 
 #endif /* #ifndef GUCHARMAP_CHAPTERS_H */

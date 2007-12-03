@@ -20,6 +20,7 @@
 #include "config.h"
 #include "gucharmap-block-chapters.h"
 #include "gucharmap-intl.h"
+#include "gucharmap-settings.h"
 #include "unicode-blocks.h"
 
 enum 
@@ -35,11 +36,36 @@ selection_changed (GtkTreeSelection       *selection,
 {
   GtkTreeModel *model;
   GtkTreeIter iter;
+  gchar *chapter = NULL;
 
   /* this should always return true */
   if (gtk_tree_selection_get_selected (selection, &model, &iter))
     /* XXX: parent should have api to do this I guess */
     g_signal_emit_by_name (GUCHARMAP_CHAPTERS (chapters), "changed", 0); 
+  
+  chapter = gucharmap_chapter_get_string (GUCHARMAP_CHAPTERS (chapters));
+  if (chapter)
+    {
+      gucharmap_settings_set_chapter (chapter);
+      g_free (chapter);
+    }
+}
+
+static void
+gucharmap_block_chapters_settings_init (GucharmapChapters *chapters)
+{
+  GtkTreeSelection *sel;
+  gchar *chapter = NULL;
+
+  sel = gtk_tree_view_get_selection (GTK_TREE_VIEW (chapters->tree_view));
+
+  chapter = gucharmap_settings_get_chapter ();
+  if (chapter) {
+    gucharmap_chapter_set_string (chapters, chapter);
+    g_free (chapter);
+  }
+
+  gucharmap_settings_set_chapters_mode (CHAPTERS_BLOCK);
 }
 
 static void
@@ -87,6 +113,8 @@ gucharmap_block_chapters_init (GucharmapBlockChapters *chapters)
   gtk_tree_selection_select_iter (selection, &iter);
 
   g_signal_connect (G_OBJECT (selection), "changed", G_CALLBACK (selection_changed), chapters);
+
+  gucharmap_block_chapters_settings_init (parent);
 
   gtk_container_add (GTK_CONTAINER (chapters), parent->tree_view);
   gtk_widget_show (parent->tree_view);

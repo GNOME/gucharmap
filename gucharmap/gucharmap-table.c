@@ -747,6 +747,11 @@ draw_chartable_from_scratch (GucharmapTable *chartable)
 {
   gint row, col;
 
+  /* drawing area may not be exposed yet when restoring last char setting
+   */
+  if (!GTK_WIDGET_REALIZED (chartable))
+    return;
+
   if (chartable->pixmap == NULL)
     chartable->pixmap = gdk_pixmap_new (
 	    chartable->drawing_area->window, 
