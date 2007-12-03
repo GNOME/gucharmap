@@ -42,6 +42,7 @@ struct _GucharmapMiniFontSelection
 {
   GtkHBox parent;
 
+  GtkListStore         *family_store;
   GtkWidget            *family; /* combo box */
   GtkWidget            *bold;   /* toggle button*/
   GtkWidget            *italic; /* toggle button*/

@@ -1,5 +1,15 @@
 2007-12-03  Christian Persch  <chpe@gnome.org>
 
+	* gucharmap/gucharmap-mini-fontsel.c: (fill_font_families_combo),
+	(update_font_familiy_combo), (family_changed),
+	(gucharmap_mini_font_selection_init),
+	(gucharmap_mini_font_selection_get_type),
+	(gucharmap_mini_font_selection_set_font_name):
+	* gucharmap/gucharmap-mini-fontsel.h: Port to GtkComboBox. Bug
+	#454250.
+
+2007-12-03  Christian Persch  <chpe@gnome.org>
+
 	* gucharmap/gucharmap-window.c: (make_menu): Add mnemonic. Bug
 	#466678, patch by Patrick Wade.
 

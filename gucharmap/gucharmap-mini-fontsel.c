@@ -18,6 +18,7 @@
  */
 
 #include "config.h"
+
 #include <gtk/gtk.h>
 #include <stdlib.h>
 #include <string.h>
@@ -37,56 +38,71 @@ enum
   NUM_SIGNALS
 };
 
-static guint gucharmap_mini_font_selection_signals[NUM_SIGNALS] = { 0 };
-
-
-/* looks up PangoFontFamily by family name, since no such function is in
- * the api */
-static GHashTable *pango_font_family_hash = NULL;
-
-
-static gint
-cmp_families (const void *a, const void *b)
+enum
 {
-  const char *a_name = pango_font_family_get_name (*(PangoFontFamily **)a);
-  const char *b_name = pango_font_family_get_name (*(PangoFontFamily **)b);
-  
-  return g_utf8_collate (a_name, b_name);
-}
+  COL_FAMILIY
+};
+
+static guint gucharmap_mini_font_selection_signals[NUM_SIGNALS];
 
 
-/* also initializes the hash table pango_font_families */
 static void
-show_available_families (GucharmapMiniFontSelection *fontsel)
+fill_font_families_combo (GucharmapMiniFontSelection *fontsel)
 {
   PangoFontFamily **families;
-  GList *family_names = NULL;
-  gint n_families, i;
+  int n_families, i;
 
-  /* keys are strings */
-  pango_font_family_hash = g_hash_table_new (g_str_hash, g_str_equal);
-  
   pango_context_list_families (
           gtk_widget_get_pango_context (GTK_WIDGET (fontsel)),
           &families, &n_families);
-  qsort (families, n_families, sizeof (PangoFontFamily *), cmp_families);
 
   for (i = 0;  i < n_families;  i++)
     {
-      /* must strdup for the hash */
-      gchar *family_name = g_strdup (pango_font_family_get_name (families[i]));
+      PangoFontFamily *family = families[i];
+      GtkTreeIter iter;
 
-      /* insert into the hash */
-      g_hash_table_insert (pango_font_family_hash, family_name, families[i]);
-
-      /* add to the list */
-      family_names = g_list_append (family_names, (gpointer) family_name);
+      gtk_list_store_insert_with_values (fontsel->family_store,
+                                         &iter,
+                                         -1,
+                                         COL_FAMILIY, pango_font_family_get_name (family),
+                                         -1);
     }
 
-  gtk_combo_set_popdown_strings (GTK_COMBO (fontsel->family), family_names);
-    
-  g_list_free (family_names);
   g_free (families);
+
+  /* Now turn on sorting in the combo box */
+  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (fontsel->family_store),
+                                        COL_FAMILIY,
+                                        GTK_SORT_ASCENDING);
+}
+
+
+static void
+update_font_familiy_combo (GucharmapMiniFontSelection *fontsel)
+{
+  GtkTreeModel *model = GTK_TREE_MODEL (fontsel->family_store);
+  GtkTreeIter iter;
+  const char *font_family;
+  gboolean found = FALSE;
+
+  font_family = pango_font_description_get_family (fontsel->font_desc);
+  if (!font_family || !font_family[0])
+    return;
+
+  if (!gtk_tree_model_get_iter_first (model, &iter))
+    return;
+
+  do {
+    char *family;
+
+    gtk_tree_model_get (model, &iter, COL_FAMILIY, &family, -1);
+    found = family && strcmp (family, font_family) == 0;
+    g_free (family);
+  } while (!found && gtk_tree_model_iter_next (model, &iter));
+
+  if (found) {
+    gtk_combo_box_set_active_iter (GTK_COMBO_BOX (fontsel->family), &iter);
+  }
 }
 
 
@@ -100,18 +116,24 @@ set_family (GucharmapMiniFontSelection *fontsel,
 
 
 static void 
-family_changed (GtkWidget *widget, 
+family_changed (GtkComboBox *combo,
                 GucharmapMiniFontSelection *fontsel)
 {
-  const gchar *new_family;
+  GtkTreeIter iter;
+  char *family;
 
-  new_family = gtk_entry_get_text (
-                 GTK_ENTRY (GTK_COMBO (fontsel->family)->entry));
-
-  if (new_family[0] == '\0') /* empty string */
+  if (!gtk_combo_box_get_active_iter (combo, &iter))
     return;
 
-  set_family (fontsel, new_family);
+  gtk_tree_model_get (GTK_TREE_MODEL (fontsel->family_store),
+                      &iter,
+                      COL_FAMILIY, &family,
+                      -1);
+  if (!family)
+    return;
+
+  set_family (fontsel, family);
+  g_free (family);
 }
 
 
@@ -192,6 +214,7 @@ italic_toggled (GtkToggleButton *toggle,
 static void
 gucharmap_mini_font_selection_init (GucharmapMiniFontSelection *fontsel)
 {
+  GtkCellRenderer *renderer;
   AtkObject *accessib;
 
   gtk_widget_ensure_style (GTK_WIDGET (fontsel));
@@ -206,12 +229,17 @@ gucharmap_mini_font_selection_init (GucharmapMiniFontSelection *fontsel)
 
   gtk_box_set_spacing (GTK_BOX (fontsel), 6);
 
-  fontsel->family = gtk_combo_new ();
+  fontsel->family_store = gtk_list_store_new (1, G_TYPE_STRING);
+  fontsel->family = gtk_combo_box_new_with_model (GTK_TREE_MODEL (fontsel->family_store));
+  g_object_unref (fontsel->family_store);
+  renderer = gtk_cell_renderer_text_new ();
+  gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (fontsel->family), renderer, TRUE);
+  gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (fontsel->family), renderer,
+                                  "text", COL_FAMILIY,
+                                  NULL);
   gtk_widget_show (fontsel->family);
   accessib = gtk_widget_get_accessible (fontsel->family);
   atk_object_set_name (accessib, _("Font Family"));
-  gtk_editable_set_editable (GTK_EDITABLE (GTK_COMBO (fontsel->family)->entry),
-                             FALSE);
 
   fontsel->bold = gtk_toggle_button_new_with_mnemonic (GTK_STOCK_BOLD);
   gtk_button_set_use_stock (GTK_BUTTON (fontsel->bold), TRUE);
@@ -233,18 +261,16 @@ gucharmap_mini_font_selection_init (GucharmapMiniFontSelection *fontsel)
   g_signal_connect (fontsel->size_adj, "value-changed",
                     G_CALLBACK (size_changed), fontsel);
 
-  show_available_families (fontsel);
-
-  g_signal_connect (G_OBJECT (GTK_COMBO (fontsel->family)->entry), "changed",
+  fill_font_families_combo (fontsel);
+  update_font_familiy_combo (fontsel);
+    
+  g_signal_connect (fontsel->family, "changed",
                     G_CALLBACK (family_changed), fontsel);
 
   gtk_box_pack_start (GTK_BOX (fontsel), fontsel->family, FALSE, FALSE, 0);
   gtk_box_pack_start (GTK_BOX (fontsel), fontsel->bold, FALSE, FALSE, 0);
   gtk_box_pack_start (GTK_BOX (fontsel), fontsel->italic, FALSE, FALSE, 0);
   gtk_box_pack_start (GTK_BOX (fontsel), fontsel->size, FALSE, FALSE, 0);
-
-  gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (fontsel->family)->entry),
-                      pango_font_description_get_family (fontsel->font_desc));
 
   gtk_container_set_border_width (GTK_CONTAINER (fontsel), 6);
 
@@ -267,7 +293,7 @@ gucharmap_mini_font_selection_get_type (void)
 
   if (gucharmap_mini_font_selection_type == 0)
     {
-      static const GTypeInfo gucharmap_mini_font_selection_info =
+      const GTypeInfo gucharmap_mini_font_selection_info =
       {
         sizeof (GucharmapMiniFontSelectionClass),
         NULL,           /* base_init */
@@ -298,8 +324,7 @@ gucharmap_mini_font_selection_set_font_name (GucharmapMiniFontSelection *fontsel
 
   fontsel->font_desc = pango_font_description_from_string (fontname);
 
-  gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (fontsel->family)->entry), 
-                      pango_font_description_get_family (fontsel->font_desc));
+  update_font_familiy_combo (fontsel);
     
   /* treat oblique and italic both as italic */
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (fontsel->italic), pango_font_description_get_style (fontsel->font_desc) == PANGO_STYLE_ITALIC || pango_font_description_get_style (fontsel->font_desc) == PANGO_STYLE_OBLIQUE);
