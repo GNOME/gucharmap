@@ -42,15 +42,6 @@ static guint gucharmap_table_signals[NUM_SIGNALS];
 
 G_DEFINE_TYPE (GucharmapTable, gucharmap_table, GTK_TYPE_HBOX)
 
-/* FIXMEchpe: use text targets! */
-static const GtkTargetEntry dnd_target_table[] =
-{
-  { "UTF8_STRING", 0, 0 },
-  { "COMPOUND_TEXT", 0, 0 },
-  { "TEXT", 0, 0 },
-  { "STRING", 0, 0 }
-};
-
 /* depends on directionality */
 static guint
 get_cell_at_rowcol (GucharmapTable *chartable,
@@ -1618,8 +1609,8 @@ gucharmap_table_init (GucharmapTable *chartable)
           GDK_BUTTON_RELEASE_MASK | GDK_BUTTON3_MOTION_MASK |
           GDK_BUTTON1_MOTION_MASK | GDK_FOCUS_CHANGE_MASK | GDK_SCROLL_MASK);
 
-  chartable->target_list = gtk_target_list_new (dnd_target_table, 
-                                                G_N_ELEMENTS (dnd_target_table));
+  chartable->target_list = gtk_target_list_new (NULL, 0);
+  gtk_target_list_add_text_targets (chartable->target_list, 0);
 
   g_signal_connect (G_OBJECT (chartable->drawing_area), "expose-event",
                     G_CALLBACK (expose_event), chartable);
@@ -1645,8 +1636,9 @@ gucharmap_table_init (GucharmapTable *chartable)
                     G_CALLBACK (style_set), chartable);
 
   gtk_drag_dest_set (chartable->drawing_area, GTK_DEST_DEFAULT_ALL,
-                     dnd_target_table, G_N_ELEMENTS (dnd_target_table),
+                     NULL, 0,
                      GDK_ACTION_COPY);
+  gtk_drag_dest_add_text_targets (chartable->drawing_area);
 
   g_signal_connect (G_OBJECT (chartable->drawing_area), "drag-data-received",
                     G_CALLBACK (drag_data_received), chartable);

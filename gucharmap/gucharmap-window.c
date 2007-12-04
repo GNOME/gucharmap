@@ -23,10 +23,6 @@
 #include <string.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
-#ifdef HAVE_GNOME
-# include <gconf/gconf-client.h>
-# include <gnome.h>
-#endif
 #include "gucharmap-window.h"
 #include "gucharmap-mini-fontsel.h"
 #include "gucharmap-unicode-info.h"
@@ -293,22 +289,74 @@ snap_cols_pow2 (GtkAction        *action,
   gucharmap_settings_set_snap_pow2 (is_active);
 }
 
-#ifdef HAVE_GNOME
 static void
-help_contents (GtkAction *action,
-               gpointer  data)
+open_url (GtkWindow *parent,
+          const char *url)
 {
   GError *error = NULL;
+  GdkScreen *screen;
+  char *command;
 
-  gnome_help_display ("gucharmap.xml", NULL, &error);
+  screen = gtk_widget_get_screen (GTK_WIDGET (parent));
 
-  if (error != NULL)
-    {
-      g_warning ("%s", error->message);
-      g_error_free (error);
-    }
+  command = g_strconcat ("gnome-open ", url, NULL);
+  gdk_spawn_command_line_on_screen (screen, command, &error);
+  g_free (command);
+
+  if (error) {
+    GtkWidget *d;
+
+    d = gtk_message_dialog_new (parent,
+                                GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+                                GTK_MESSAGE_ERROR, GTK_BUTTONS_OK,
+                                "%s", error->message);
+    g_signal_connect (d, "response", G_CALLBACK (gtk_widget_destroy), NULL);
+    gtk_window_present (GTK_WINDOW (d));
+    g_error_free (error);
+  }
 }
-#endif
+
+static void
+help_contents (GtkAction *action,
+               GtkWindow *window)
+{
+  const char *lang;
+  char *uri = NULL, *url;
+  guint i;
+ 
+  const char * const * langs = g_get_language_names ();
+  for (i = 0; langs[i]; i++) {
+    lang = langs[i];
+    if (strchr (lang, '.')) {
+      continue;
+    }
+ 
+    uri = g_build_filename (DATADIR,
+                            "/gnome/help/gucharmap/",
+                            lang,
+                            "/gucharmap.xml",
+                            NULL);
+					
+    if (g_file_test (uri, G_FILE_TEST_EXISTS)) {
+      break;
+    }
+  }
+
+  if (!uri)
+    return;
+
+  url = g_strconcat ("ghelp://", uri, NULL);
+  open_url (window, url);
+  g_free (url);
+}
+
+static void
+about_open_url (GtkAboutDialog *about,
+                const char *link,
+                gpointer data)
+{
+  open_url (GTK_WINDOW (about), link);
+}
 
 static void
 help_about (GtkAction       *action, 
@@ -353,6 +401,8 @@ help_about (GtkAction       *action,
   license_trans = g_strconcat (_(license[0]), "\n\n", _(license[1]), "\n\n",
 			       _(license[2]), "\n\n", _(license[3]), "\n\n",
 			       _(license[4]), "\n\n", NULL);
+
+  gtk_about_dialog_set_url_hook (about_open_url, NULL, NULL);
 
   gtk_show_about_dialog (GTK_WINDOW (guw),
   			 "authors", authors,
@@ -517,10 +567,8 @@ static const GtkActionEntry menu_entries[] =
   { "PreviousChapter", NULL, N_("Previous Script"), "<control>Page_Up",
     NULL, G_CALLBACK (prev_chapter) },
 
-#ifdef HAVE_GNOME
   { "HelpContents", GTK_STOCK_HELP, N_("_Contents"), "F1",
     NULL, G_CALLBACK (help_contents) },
-#endif
   { "About", GTK_STOCK_ABOUT, N_("_About"), NULL,
     NULL, G_CALLBACK (help_about) }
 };
@@ -561,9 +609,7 @@ static const char ui_info [] =
 "	 <menuitem name=\"GoPreviousChapterMenu\" action=\"PreviousChapter\" />"
 "    </menu>"
 "    <menu name=\"HelpMenu\" action=\"Help\">"
-#ifdef HAVE_GNOME
 "	 <menuitem name=\"HelpContentsMenu\" action=\"HelpContents\" />"
-#endif
 "	 <menuitem name=\"HelpAboutMenu\" action=\"About\" />"
 "    </menu>"
 "  </menubar>";

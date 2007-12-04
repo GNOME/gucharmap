@@ -22,21 +22,9 @@
 #include <gtk/gtk.h>
 #include <stdlib.h>
 #include"gucharmap-intl.h"
-#ifdef HAVE_GNOME
-# include <gnome.h>
-#endif
 #include "gucharmap-window.h"
 #include "gucharmap-mini-fontsel.h"
 #include "gucharmap-settings.h"
-
-static gchar *new_font = NULL;
-
-static const GOptionEntry goptions[] = 
-{
-  { "font", 0, 0, G_OPTION_ARG_STRING, &new_font,
-    N_("Font to start with; ex: 'Serif 27'"), NULL },
-  { NULL }
-};
 
 gint
 main (gint argc, gchar **argv)
@@ -45,27 +33,19 @@ main (gint argc, gchar **argv)
   GdkScreen *screen;
   gint monitor;
   GdkRectangle rect;
-#ifdef HAVE_GNOME
-  GnomeProgram *program;
-  GOptionContext *context;
-#else
   GError *error = NULL;
-#endif
-     
+  gchar *new_font = NULL;
+  GOptionEntry goptions[] =
+  {
+    { "font", 0, 0, G_OPTION_ARG_STRING, &new_font,
+      N_("Font to start with; ex: 'Serif 27'"), N_("FONT") },
+    { NULL }
+  };
+
   bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
   textdomain (GETTEXT_PACKAGE);
 
-#ifdef HAVE_GNOME
-  context = g_option_context_new ("");
-  g_option_context_add_main_entries (context, goptions, GETTEXT_PACKAGE);
-
-  program = gnome_program_init ("gucharmap", VERSION, LIBGNOMEUI_MODULE,
-		 		argc, argv,
-				GNOME_PARAM_APP_DATADIR, DATADIR,
-				GNOME_PARAM_GOPTION_CONTEXT, context,
-				NULL);
-#else
   if (!gtk_init_with_args (&argc, &argv, "", goptions, GETTEXT_PACKAGE, &error))
     {
       g_printerr ("%s\n", error->message);
@@ -73,7 +53,6 @@ main (gint argc, gchar **argv)
 
       exit (1);
     }
-#endif
 
   gucharmap_settings_initialize ();
   g_set_application_name (_("Gucharmap"));
@@ -125,10 +104,6 @@ main (gint argc, gchar **argv)
   gtk_main ();
 
   gucharmap_settings_shutdown ();
-#ifdef HAVE_GNOME
-  g_object_unref (program);
-#endif
 
   return 0;
 }
-

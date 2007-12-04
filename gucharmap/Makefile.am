@@ -56,7 +56,7 @@ libgucharmap_la_CPPFLAGS = \
 libgucharmap_la_CFLAGS = \
 	$(PANGO_CFLAGS)	\
 	$(GTK_CFLAGS)	\
-	$(GNOME_CFLAGS)	\
+	$(GCONF_CFLAGS)	\
 	$(WARN_CFLAGS)	\
 	$(AM_CFLAGS)
 
@@ -67,8 +67,8 @@ libgucharmap_la_LDFLAGS = \
 
 libgucharmap_la_LIBADD = \
 	$(GTK_LIBS)	\
-	$(GNOME_LIBS)
-
+	$(GCONF_LIBS)	\
+	$(INTL_LIBS)
 
 libgucharmapincludedir = $(includedir)/gucharmap
 libgucharmapinclude_HEADERS = gucharmap.h \
@@ -104,7 +104,7 @@ gucharmap_CPPFLAGS = \
 gucharmap_CFLAGS = \
 	$(PANGO_CFLAGS)	\
 	$(GTK_CFLAGS)	\
-	$(GNOME_CFLAGS)	\
+	$(GCONF_CFLAGS)	\
 	$(WARN_CFLAGS)	\
 	$(AM_CFLAGS)
 
@@ -115,7 +115,8 @@ gucharmap_LDADD = \
 	libgucharmap.la	\
 	$(PANGO_LIBS)	\
 	$(GTK_LIBS)	\
-	$(GNOME_LIBS)
+	$(GCONF_LIBS)	\
+	$(INTL_LIBS)
 
 if OS_WIN32
 gucharmap_LDADD += gucharmaprc.o
