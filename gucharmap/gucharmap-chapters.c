@@ -1,6 +1,7 @@
 /* $Id$ */
 /*
  * Copyright (c) 2004 Noah Levitt
+ * Copyright (C) 2007 Christian Persch
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -19,7 +20,10 @@
 
 #include "config.h"
 #include "gucharmap-chapters.h"
+#include "gucharmap-chapters-model.h"
+#include "gucharmap-chapters-view.h"
 #include "gucharmap-marshal.h"
+#include "gucharmap-intl.h"
 #include <string.h>
 
 enum
@@ -28,62 +32,166 @@ enum
   NUM_SIGNALS
 };
 
-static guint gucharmap_chapters_signals[NUM_SIGNALS] = { 0 };
+enum
+{
+  PROP_0,
+  PROP_CHAPTERS_MODEL
+};
+
+static guint gucharmap_chapters_signals[NUM_SIGNALS];
+static void gucharmap_chapters_class_init (GucharmapChaptersClass *klass);
+static void gucharmap_chapters_init       (GucharmapChapters *chapters);
+static GObject *gucharmap_chapters_constructor (GType type,
+                                                guint n_construct_properties,
+                                                GObjectConstructParam *construct_params);
+static void gucharmap_chapters_set_property (GObject *object,
+                                             guint prop_id,
+                                             const GValue *value,
+                                             GParamSpec *pspec);
+
+G_DEFINE_TYPE (GucharmapChapters, gucharmap_chapters, GTK_TYPE_SCROLLED_WINDOW)
+
+static void
+selection_changed (GtkTreeSelection  *selection,
+                   GucharmapChapters *chapters)
+{
+  GtkTreeIter iter;
+
+  /* this should always return true */
+  if (gtk_tree_selection_get_selected (selection, NULL, &iter))
+    /* XXX: parent should have api to do this I guess */
+    g_signal_emit (chapters, gucharmap_chapters_signals[CHANGED], 0);
+/*
+  if ((chapter = gucharmap_chapter_get_string (GUCHARMAP_CHAPTERS (chapters))))
+    {
+      gucharmap_settings_set_chapter (chapter);
+      g_free (chapter);
+    }*/
+}
 
 static GucharmapCodepointList * 
 default_get_codepoint_list (GucharmapChapters *chapters)
 {
-  return gucharmap_codepoint_list_new (0, UNICHAR_MAX);
+  return gucharmap_chapters_view_get_codepoint_list (GUCHARMAP_CHAPTERS_VIEW (chapters->tree_view));
+}
+
+static const GucharmapCodepointList *
+default_get_book_codepoint_list (GucharmapChapters *chapters)
+{
+  return gucharmap_chapters_view_get_book_codepoint_list (GUCHARMAP_CHAPTERS_VIEW (chapters->tree_view));
+}
+
+static gboolean
+default_go_to_character (GucharmapChapters *chapters,
+                         gunichar wc)
+{
+  return gucharmap_chapters_view_select_character (GUCHARMAP_CHAPTERS_VIEW (chapters->tree_view), wc);
 }
 
 static void
 gucharmap_chapters_init (GucharmapChapters *chapters)
 {
-  /* have to do this so that the scrollbars are inited for some reason */
-  g_object_set (chapters, "hadjustment", NULL, "vadjustment", NULL, NULL);
-
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (chapters), 
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (chapters),
                                   GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
   gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (chapters), GTK_SHADOW_ETCHED_IN);
+
+  chapters->tree_view = gucharmap_chapters_view_new ();
+}
+
+static GObject *
+gucharmap_chapters_constructor (GType type,
+                                guint n_construct_properties,
+                                GObjectConstructParam *construct_params)
+{
+  GObject *object;
+  GucharmapChapters *chapters;
+  GtkTreeSelection *selection;
+
+  object = G_OBJECT_CLASS (gucharmap_chapters_parent_class)->constructor
+            (type, n_construct_properties, construct_params);
+  chapters = GUCHARMAP_CHAPTERS (object);
+
+  gtk_container_add (GTK_CONTAINER (chapters), chapters->tree_view);
+  gtk_widget_show (chapters->tree_view);
+
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (chapters->tree_view));
+  g_signal_connect (selection, "changed", G_CALLBACK (selection_changed), chapters);
+    
+  return object;
+}
+
+static void
+gucharmap_chapters_set_property (GObject *object,
+                                 guint prop_id,
+                                 const GValue *value,
+                                 GParamSpec *pspec)
+{
+  GucharmapChapters *chapters = GUCHARMAP_CHAPTERS (object);
+  switch (prop_id) {
+    case PROP_CHAPTERS_MODEL:
+      gucharmap_chapters_set_model (chapters, g_value_get_object (value));
+      break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
+  }
 }
 
 static void
 gucharmap_chapters_class_init (GucharmapChaptersClass *clazz)
 {
-  clazz->get_codepoint_list = default_get_codepoint_list;
+  GObjectClass *object_class = G_OBJECT_CLASS (clazz);
 
-  clazz->changed = NULL;
+  _gucharmap_intl_ensure_initialized ();
+
+  object_class->set_property = gucharmap_chapters_set_property;
+  object_class->constructor = gucharmap_chapters_constructor;
+
+  clazz->get_codepoint_list = default_get_codepoint_list;
+  clazz->get_book_codepoint_list = default_get_book_codepoint_list;
+  clazz->go_to_character = default_go_to_character;
+
   gucharmap_chapters_signals[CHANGED] =
       g_signal_new ("changed", gucharmap_chapters_get_type (), G_SIGNAL_RUN_FIRST,
                     G_STRUCT_OFFSET (GucharmapChaptersClass, changed),
-                    NULL, NULL, _gucharmap_marshal_VOID__VOID, G_TYPE_NONE, 0);
+                    NULL, NULL, g_cclosure_marshal_VOID__VOID, G_TYPE_NONE, 0);
+
+  g_object_class_install_property (object_class,
+                                   PROP_CHAPTERS_MODEL,
+                                   g_param_spec_object ("chapters-model", NULL, NULL,
+                                                        GUCHARMAP_TYPE_CHAPTERS_MODEL,
+                                                        G_PARAM_WRITABLE | G_PARAM_CONSTRUCT | G_PARAM_STATIC_NAME | G_PARAM_STATIC_NICK | G_PARAM_STATIC_BLURB));
 }
 
-GType 
-gucharmap_chapters_get_type (void)
+/**
+ * gucharmap_chapters_new_with_model:
+ * @model: a #GucharmapChaptersModel
+ *
+ * Returns: a new #GucharmapChapters using @model
+ */
+GtkWidget *
+gucharmap_chapters_new_with_model (GucharmapChaptersModel *model)
 {
-  static GType t = 0;
+  return g_object_new (GUCHARMAP_TYPE_CHAPTERS,
+                       "hadjustment", NULL,
+                       "vadjustment", NULL,
+                       "chapters-model", model,
+                       NULL);
+}
 
-  if (t == 0)
-    {
-      static const GTypeInfo type_info =
-        {
-          sizeof (GucharmapChaptersClass),
-          NULL,
-          NULL,
-          (GClassInitFunc) gucharmap_chapters_class_init,
-          NULL,
-          NULL,
-          sizeof (GucharmapChapters),
-          0,
-          (GInstanceInitFunc) gucharmap_chapters_init,
-          NULL
-        };
+void
+gucharmap_chapters_set_model (GucharmapChapters *chapters,
+                              GucharmapChaptersModel *model)
+{
+  chapters->tree_model = GTK_TREE_MODEL (model);
 
-      t = g_type_register_static (GTK_TYPE_SCROLLED_WINDOW, "GucharmapChapters", &type_info, 0);
-    }
+  gucharmap_chapters_view_set_model (GUCHARMAP_CHAPTERS_VIEW (chapters->tree_view), model);
+}
 
-  return t;
+GucharmapChaptersModel *
+gucharmap_chapters_get_model (GucharmapChapters *chapters)
+{
+  return GUCHARMAP_CHAPTERS_MODEL (chapters->tree_model);
 }
 
 /**
@@ -145,16 +253,7 @@ gucharmap_chapters_go_to_character (GucharmapChapters *chapters,
 void
 gucharmap_chapters_next (GucharmapChapters *chapters)
 {
-  GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (chapters->tree_view));
-  GtkTreeIter iter;
-
-  if (gtk_tree_selection_get_selected (selection, NULL, &iter))
-    if (gtk_tree_model_iter_next (chapters->tree_model, &iter))
-      {
-        GtkTreePath *path = gtk_tree_model_get_path (chapters->tree_model, &iter);
-        gtk_tree_view_set_cursor (GTK_TREE_VIEW (chapters->tree_view), path, NULL, FALSE);
-        gtk_tree_path_free (path);
-      }
+  gucharmap_chapters_view_next (GUCHARMAP_CHAPTERS_VIEW (chapters->tree_view));
 }
 
 /**
@@ -166,16 +265,7 @@ gucharmap_chapters_next (GucharmapChapters *chapters)
 void
 gucharmap_chapters_previous (GucharmapChapters *chapters)
 {
-  GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (chapters->tree_view));
-  GtkTreeIter iter;
-
-  if (gtk_tree_selection_get_selected (selection, NULL, &iter))
-    {
-      GtkTreePath *path = gtk_tree_model_get_path (chapters->tree_model, &iter);
-      if (gtk_tree_path_prev (path))
-        gtk_tree_view_set_cursor (GTK_TREE_VIEW (chapters->tree_view), path, NULL, FALSE);
-      gtk_tree_path_free (path);
-    }
+  gucharmap_chapters_view_previous (GUCHARMAP_CHAPTERS_VIEW (chapters->tree_view));
 }
 
 /**
@@ -188,15 +278,7 @@ gucharmap_chapters_previous (GucharmapChapters *chapters)
 gchar*
 gucharmap_chapter_get_string (GucharmapChapters *chapters)
 {
-  GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (chapters->tree_view));
-  GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (chapters->tree_view));
-  GtkTreeIter iter;
-  gchar *name = NULL;
-
-  if (gtk_tree_selection_get_selected (selection, NULL, &iter))
-    gtk_tree_model_get(model, &iter, 0, &name, -1);
-
-  return name;
+  return gucharmap_chapters_view_get_selected (GUCHARMAP_CHAPTERS_VIEW (chapters->tree_view));
 }
 
 /**
@@ -211,30 +293,5 @@ gboolean
 gucharmap_chapter_set_string (GucharmapChapters *chapters,
                               const char        *name)
 {
-  GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (chapters->tree_view));
-  GtkTreeIter iter;
-  gboolean match;
-  gchar *str;
-
-  if (name == NULL)
-    return FALSE;
-
-  if (gtk_tree_model_get_iter_first (model, &iter)) {
-      do {
-          gtk_tree_model_get(model, &iter, 0, &str, -1);
-          match = strcmp (name, str);
-          g_free(str);
-          if (0 == match) {
-            GtkTreePath *path = gtk_tree_model_get_path (chapters->tree_model, &iter);
-            gtk_tree_view_set_cursor (GTK_TREE_VIEW (chapters->tree_view), 
-                    path, NULL, FALSE);
-            gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (chapters->tree_view),
-                    path, NULL, FALSE, 0, 0);
-            gtk_tree_path_free (path);
-            return TRUE;
-          }
-      } while (gtk_tree_model_iter_next (model, &iter));
-  }
-
-  return FALSE;
+  return gucharmap_chapters_view_set_selected (GUCHARMAP_CHAPTERS_VIEW (chapters->tree_view), name);
 }

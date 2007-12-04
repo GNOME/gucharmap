@@ -1,6 +1,7 @@
 /* $Id$ */
 /*
  * Copyright (c) 2004 Noah Levitt
+ * Copyright (C) 2007 Christian Persch
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -21,9 +22,12 @@
 #define GUCHARMAP_CHAPTERS_H
 
 #include <gtk/gtk.h>
+#include <gucharmap/gucharmap-chapters-model.h>
 #include <gucharmap/gucharmap-codepoint-list.h>
 
 G_BEGIN_DECLS
+
+#define GUCHARMAP_TYPE_CHAPTERS (gucharmap_chapters_get_type ())
 
 #define GUCHARMAP_CHAPTERS(obj) \
             (G_TYPE_CHECK_INSTANCE_CAST ((obj), gucharmap_chapters_get_type (), GucharmapChapters))
@@ -40,13 +44,6 @@ G_BEGIN_DECLS
 typedef struct _GucharmapChapters GucharmapChapters;
 typedef struct _GucharmapChaptersClass GucharmapChaptersClass;
 
-typedef enum
-{
-  CHAPTERS_SCRIPT,
-  CHAPTERS_BLOCK
-}
-ChaptersMode;
-
 struct _GucharmapChapters
 {
   GtkScrolledWindow parent;
@@ -54,7 +51,7 @@ struct _GucharmapChapters
   /*< protected >*/
   GtkTreeModel           *tree_model;
   GtkWidget              *tree_view;
-  GucharmapCodepointList *book_list;
+  GucharmapCodepointList *book_list; /* unused */
 };
 
 struct _GucharmapChaptersClass
@@ -69,6 +66,10 @@ struct _GucharmapChaptersClass
 };
 
 GType                                   gucharmap_chapters_get_type                (void);
+GtkWidget *                             gucharmap_chapters_new_with_model          (GucharmapChaptersModel *model);
+void                                    gucharmap_chapters_set_model               (GucharmapChapters *chapters,
+                                                                                    GucharmapChaptersModel *model);
+GucharmapChaptersModel *                gucharmap_chapters_get_model               (GucharmapChapters *chapters);
 GucharmapCodepointList *                gucharmap_chapters_get_codepoint_list      (GucharmapChapters *chapters);
 G_CONST_RETURN GucharmapCodepointList * gucharmap_chapters_get_book_codepoint_list (GucharmapChapters *chapters);
 gboolean                                gucharmap_chapters_go_to_character         (GucharmapChapters *chapters, 

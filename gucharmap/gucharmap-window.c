@@ -457,21 +457,27 @@ view_by (GtkAction        *action,
 	 GtkRadioAction   *radioaction,
          GucharmapWindow  *guw)
 {
+  ChaptersMode mode;
+
   switch (gtk_radio_action_get_current_value (radioaction))
     {
       case VIEW_BY_SCRIPT:
       	gucharmap_charmap_set_chapters (guw->charmap, GUCHARMAP_CHAPTERS (gucharmap_script_chapters_new ()));
 	chapters_set_labels (_("Next Script"), _("Previous Script"), guw);
+        mode = CHAPTERS_SCRIPT;
 	break;
       
       case VIEW_BY_BLOCK:
         gucharmap_charmap_set_chapters (guw->charmap, GUCHARMAP_CHAPTERS (gucharmap_block_chapters_new ()));
 	chapters_set_labels (_("Next Block"), _("Previous Block"), guw);
+        mode = CHAPTERS_BLOCK;
 	break;
       
       default:
         g_assert_not_reached ();
     }
+
+  gucharmap_settings_set_chapters_mode (mode);
 }
 
 /* create the menu entries */

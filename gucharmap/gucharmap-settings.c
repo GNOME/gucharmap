@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2005 Jason Allen
+ * Copyright (C) 2007 Christian Persch
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -17,7 +18,10 @@
  */
 
 #include "config.h"
+
+#include <string.h>
 #include <glib.h>
+#include <glib/gi18n-lib.h>
 
 #include "gucharmap-chapters.h"
 #include "gucharmap-settings.h"
@@ -31,12 +35,30 @@ static GConfClient *client;
 
 #define GCONF_PREFIX "/apps/gucharmap"
 
-static gchar *
-get_default_chapter (void)
+static gunichar
+get_first_non_underscore_char (const char *str)
 {
-  /* XXX: In the future, do something based on chapters mode and locale 
-   * or something. */
-  return NULL;
+  const char *p;
+
+  if (!str)
+    return 0;
+
+  for (p = str; p && *p; p = g_utf8_find_next_char (p, NULL))
+    {
+      gunichar ch;
+
+      ch = g_utf8_get_char (p);
+      if (g_unichar_isalpha (ch))
+        return ch;
+    }
+
+  return 0;
+}
+
+static gunichar
+get_default_last_char (void)
+{
+  return get_first_non_underscore_char (_("_File")); /* use a super-common string */
 }
 
 static ChaptersMode
@@ -51,12 +73,6 @@ static gchar *
 get_default_font (void)
 {
   return NULL;
-}
-
-static gunichar
-get_default_last_char (void)
-{
-  return 0;
 }
 
 static gboolean
@@ -95,68 +111,30 @@ gucharmap_settings_initialized (void)
   return (client != NULL);
 }
 
-gchar *
-gucharmap_settings_get_chapter (void)
-{
-#if 0
-  gchar *chapter = NULL;
-
-  if (gucharmap_settings_initialized())
-    chapter = gconf_client_get_string (client, GCONF_PREFIX"/chapter", NULL);
-
-  if (chapter) 
-    return chapter;
-  else
-    return get_default_chapter();
-#endif
-  return get_default_chapter ();
-}
-
-void
-gucharmap_settings_set_chapter (gchar *chapter)
-{
-#if 0
-  if (!gucharmap_settings_initialized ()) {
-      return;
-  }
-  gconf_client_set_string (client, GCONF_PREFIX"/chapter", chapter, NULL);
-#endif
-}
-
 ChaptersMode
 gucharmap_settings_get_chapters_mode (void)
 {
-#if 0
   ChaptersMode ret;
-  gchar *mode = NULL;
+  gchar *mode;
   
-  if (gucharmap_settings_initialized ())
-  	mode = gconf_client_get_string (client, GCONF_PREFIX"/chapters_mode", NULL);
-
+  mode = gconf_client_get_string (client, GCONF_PREFIX"/chapters_mode", NULL);
   if (mode == NULL)
     return get_default_chapters_mode ();
 
-  if (g_ascii_strncasecmp (mode, "script", 6) == 0)
+  if (strcmp (mode, "script") == 0)
     ret = CHAPTERS_SCRIPT;
-  else if (g_ascii_strncasecmp (mode, "block", 5) == 0)
+  else if (strcmp (mode, "block") == 0)
     ret = CHAPTERS_BLOCK;
   else
     ret = get_default_chapters_mode ();
 
   g_free (mode);
   return ret;
-#endif
-  return get_default_chapters_mode ();
 }
 
 void
 gucharmap_settings_set_chapters_mode (ChaptersMode mode)
 {
-#if 0
-  if (!gucharmap_settings_initialized ()) {
-      return;
-  }
-
   switch (mode)
     {
       case CHAPTERS_SCRIPT:
@@ -167,7 +145,6 @@ gucharmap_settings_set_chapters_mode (ChaptersMode mode)
         gconf_client_set_string (client, GCONF_PREFIX"/chapters_mode", "block", NULL);
       break;
     }
-#endif
 }
 
 gchar *
@@ -209,7 +186,10 @@ gucharmap_settings_get_last_char (void)
   /* FIXME: use g_ascii_strtoull */
   sscanf (str, "U+%X", &c);
   g_free(str);
-  return c;
+  if (c > 0 && c < UNICHAR_MAX)
+    return c;
+
+  return get_default_last_char ();
 }
 
 void
@@ -264,12 +244,6 @@ static gboolean
 gucharmap_settings_initialized (void)
 {
   return FALSE;
-}
-
-gchar *
-gucharmap_settings_get_chapter (void)
-{
-  return get_default_chapter ();
 }
 
 void

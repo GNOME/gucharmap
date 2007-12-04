@@ -35,8 +35,14 @@ enum
   NUM_SIGNALS
 };
 
-static guint gucharmap_table_signals[NUM_SIGNALS] = { 0, 0, 0 };
+static void gucharmap_table_class_init (GucharmapTableClass *clazz);
+static void gucharmap_table_finalize   (GObject *object);
 
+static guint gucharmap_table_signals[NUM_SIGNALS];
+
+G_DEFINE_TYPE (GucharmapTable, gucharmap_table, GTK_TYPE_HBOX)
+
+/* FIXMEchpe: use text targets! */
 static const GtkTargetEntry dnd_target_table[] =
 {
   { "UTF8_STRING", 0, 0 },
@@ -44,8 +50,6 @@ static const GtkTargetEntry dnd_target_table[] =
   { "TEXT", 0, 0 },
   { "STRING", 0, 0 }
 };
-
-static GtkHBoxClass *parent_class = NULL;
 
 /* depends on directionality */
 static guint
@@ -499,7 +503,7 @@ chartable_accessible_factory_get_type (void)
         NULL,
         NULL
       };
-      t = g_type_register_static (ATK_TYPE_OBJECT_FACTORY, 
+      t = g_type_register_static (ATK_TYPE_OBJECT_FACTORY,
                                   "ChartableAccessibleFactory",
                                   &tinfo, 0);
     }
@@ -689,12 +693,12 @@ draw_square_bg (GucharmapTable *chartable, gint row, gint col)
   else if ((gint)cell == chartable->active_cell)
     untinted = chartable->drawing_area->style->base[GTK_STATE_ACTIVE];
   else if ((gint)cell > get_last_cell (chartable))
-    untinted = chartable->drawing_area->style->dark[GTK_STATE_NORMAL]; 
+    untinted = chartable->drawing_area->style->dark[GTK_STATE_NORMAL];
   else if (! gucharmap_unichar_validate (wc))
     untinted = chartable->drawing_area->style->fg[GTK_STATE_INSENSITIVE];
   else if (! gucharmap_unichar_isdefined (wc))
     untinted = chartable->drawing_area->style->bg[GTK_STATE_INSENSITIVE];
-  else 
+  else
     untinted = chartable->drawing_area->style->base[GTK_STATE_NORMAL];
 
   gdk_gc_set_rgb_fg_color (gc, &untinted);
@@ -1023,7 +1027,7 @@ gucharmap_table_finalize (GObject *object)
 
   gtk_target_list_unref (chartable->target_list);
 
-  G_OBJECT_CLASS (parent_class)->finalize (object);
+  G_OBJECT_CLASS (gucharmap_table_parent_class)->finalize (object);
 }
 
 static void
@@ -1031,8 +1035,6 @@ gucharmap_table_class_init (GucharmapTableClass *clazz)
 {
   clazz->activate = NULL;
   clazz->set_active_char = NULL;
-
-  parent_class = g_type_class_peek_parent (clazz);
 
   G_OBJECT_CLASS (clazz)->finalize = gucharmap_table_finalize;
 
@@ -1694,33 +1696,6 @@ gucharmap_table_new (void)
   return GTK_WIDGET (g_object_new (gucharmap_table_get_type (), NULL));
 }
 
-GType
-gucharmap_table_get_type (void)
-{
-  static GType gucharmap_table_type = 0;
-
-  if (!gucharmap_table_type)
-    {
-      static const GTypeInfo gucharmap_table_info =
-      {
-        sizeof (GucharmapTableClass),
-        NULL,           /* base_init */
-        NULL,           /* base_finalize */
-        (GClassInitFunc) gucharmap_table_class_init,
-        NULL,           /* class_finalize */
-        NULL,           /* class_data */
-        sizeof (GucharmapTable),
-        0,              /* n_preallocs */
-        (GInstanceInitFunc) gucharmap_table_init
-      };
-
-      gucharmap_table_type = g_type_register_static (GTK_TYPE_HBOX, "GucharmapTable", 
-                                                     &gucharmap_table_info, 0);
-    }
-
-  return gucharmap_table_type;
-}
-
 void
 gucharmap_table_zoom_enable (GucharmapTable *chartable)
 {
@@ -1788,6 +1763,9 @@ gucharmap_table_set_font (GucharmapTable *chartable, const gchar *font_name)
 gunichar 
 gucharmap_table_get_active_character (GucharmapTable *chartable)
 {
+  if (!chartable->codepoint_list)
+    return 0;
+
   return gucharmap_codepoint_list_get_char (chartable->codepoint_list, chartable->active_cell);
 }
 
@@ -1830,14 +1808,18 @@ gucharmap_table_set_codepoint_list (GucharmapTable         *chartable,
   chartable->active_cell = 0;
   chartable->page_first_cell = 0;
 
+  /* force pixmap to be redrawn */
+  if (chartable->pixmap != NULL)
+    g_object_unref (chartable->pixmap);
+  chartable->pixmap = NULL;
+
+  if (!list)
+    return;
+
   g_signal_emit (chartable, gucharmap_table_signals[SET_ACTIVE_CHAR], 0, 
                  gucharmap_table_get_active_character (chartable));
 
   update_scrollbar_adjustment (chartable);
 
-  /* force pixmap to be redrawn */
-  if (chartable->pixmap != NULL)
-    g_object_unref (chartable->pixmap);
-  chartable->pixmap = NULL;
   gtk_widget_queue_draw (chartable->drawing_area);
 }

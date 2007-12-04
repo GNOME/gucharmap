@@ -17,19 +17,11 @@
 ## 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
 ##
 
-AM_CFLAGS = $(PANGO_CFLAGS) $(GTK_CFLAGS) $(GNOME_CFLAGS)
-
 localedir = $(datadir)/locale
-AM_CPPFLAGS = -I$(top_srcdir) \
-              -DDATADIR=\"$(datadir)\" \
-              -DLOCALEDIR=\"$(localedir)\"
-## -DGTK_DISABLE_DEPRECATED=1
-
-libgucharmap_la_LIBADD = @GTK_LIBS@ @GNOME_LIBS@
-
-lib_LTLIBRARIES = libgucharmap.la
 
 BUILT_SOURCES = gucharmap-marshal.c gucharmap-marshal.h
+
+lib_LTLIBRARIES = libgucharmap.la
 
 libgucharmap_la_SOURCES = gucharmap-marshal.c gucharmap-marshal.h \
                           gucharmap-intl.c gucharmap-intl.h \
@@ -42,42 +34,93 @@ libgucharmap_la_SOURCES = gucharmap-marshal.c gucharmap-marshal.h \
                           gucharmap-window.c gucharmap-window.h \
 			  gucharmap-codepoint-list.c gucharmap-codepoint-list.h \
 			  gucharmap-script-codepoint-list.c gucharmap-script-codepoint-list.h \
+			  gucharmap-chapters-model.c gucharmap-chapters-model.h \
 			  gucharmap-chapters.c gucharmap-chapters.h \
+			  gucharmap-chapters-view.c gucharmap-chapters-view.h \
+			  gucharmap-block-chapters-model.c gucharmap-block-chapters-model.h \
 			  gucharmap-block-chapters.c gucharmap-block-chapters.h \
+			  gucharmap-script-chapters-model.c gucharmap-script-chapters-model.h \
 			  gucharmap-script-chapters.c gucharmap-script-chapters.h \
 			  unicode-blocks.h unicode-categories.h unicode-names.h \
 			  unicode-nameslist.h unicode-scripts.h unicode-unihan.h \
 			  gucharmap-search-dialog.h gucharmap-search-dialog.c \
 			  gucharmap-settings.h gucharmap-settings.c
 
-# this is different from the project version
-libgucharmap_la_LDFLAGS = -version-info $(LIBGUCHARMAP_LT_VERSION) -export-symbols-regex "^gucharmap_*"
+libgucharmap_la_CPPFLAGS = \
+	-I$(top_srcdir)			\
+	-DDATADIR=\"$(datadir)\"	\
+	-DLOCALEDIR=\"$(localedir)\"	\
+	$(DISABLE_DEPRECATED)		\
+	$(AM_CPPFLAGS)
+
+libgucharmap_la_CFLAGS = \
+	$(PANGO_CFLAGS)	\
+	$(GTK_CFLAGS)	\
+	$(GNOME_CFLAGS)	\
+	$(WARN_CFLAGS)	\
+	$(AM_CFLAGS)
+
+libgucharmap_la_LDFLAGS = \
+	-version-info $(LIBGUCHARMAP_LT_VERSION)	\
+	-export-symbols-regex "^gucharmap_*"		\
+	$(AM_LDFLAGS)
+
+libgucharmap_la_LIBADD = \
+	$(GTK_LIBS)	\
+	$(GNOME_LIBS)
+
 
 libgucharmapincludedir = $(includedir)/gucharmap
 libgucharmapinclude_HEADERS = gucharmap.h \
-                              gucharmap-charmap.h \
-                              gucharmap-table.h \
-                              gucharmap-window.h \
-                              gucharmap-mini-fontsel.h \
-                              gucharmap-unicode-info.h \
-			      gucharmap-codepoint-list.h \
-			      gucharmap-script-codepoint-list.h \
 			      gucharmap-block-chapters.h \
+			      gucharmap-block-chapters-model.h \
 			      gucharmap-chapters.h \
+			      gucharmap-chapters-model.h \
+			      gucharmap-chapters-view.h \
+                              gucharmap-charmap.h \
+			      gucharmap-codepoint-list.h \
+                              gucharmap-mini-fontsel.h \
 			      gucharmap-script-chapters.h \
+			      gucharmap-script-chapters-model.h \
+			      gucharmap-script-codepoint-list.h \
 			      gucharmap-search-dialog.h \
+                              gucharmap-table.h \
+                              gucharmap-unicode-info.h \
+                              gucharmap-window.h \
 			      gucharmap-settings.h
 
+
 bin_PROGRAMS = gucharmap
+
 gucharmap_SOURCES = main.c
-gucharmap_LDADD = libgucharmap.la @PANGO_LIBS@ @GTK_LIBS@ @GNOME_LIBS@
+
+gucharmap_CPPFLAGS = \
+	-I$(top_srcdir)			\
+	-DDATADIR=\"$(datadir)\"	\
+	-DLOCALEDIR=\"$(localedir)\"	\
+	$(DISABLE_DEPRECATED)		\
+	$(AM_CPPFLAGS)
+
+gucharmap_CFLAGS = \
+	$(PANGO_CFLAGS)	\
+	$(GTK_CFLAGS)	\
+	$(GNOME_CFLAGS)	\
+	$(WARN_CFLAGS)	\
+	$(AM_CFLAGS)
+
+gucharmap_LDFLAGS = \
+	$(AM_LDFLAGS)
+
+gucharmap_LDADD = \
+	libgucharmap.la	\
+	$(PANGO_LIBS)	\
+	$(GTK_LIBS)	\
+	$(GNOME_LIBS)
 
 if OS_WIN32
 gucharmap_LDADD += gucharmaprc.o
 gucharmaprc.o: gucharmaprc.rc
 	windres -i $< -o $@
-else
-gucharmap_LDADD += @GNOME_LIBS@
 endif
 
 gucharmap-marshal.h: $(srcdir)/gucharmap-marshal.list

@@ -1,17 +1,6 @@
 <?xml version="1.0"?>
 <gconfschemafile>
   <schemalist>
-<!--
-    <schema>
-      <key>/schemas/apps/gucharmap/chapter</key>
-      <applyto>/apps/gucharmap/chapter</applyto>
-      <owner>gucharmap</owner>
-      <type>string</type>
-      <locale name="C">
-        <short></short>
-        <long></long>
-      </locale>
-    </schema>
 
     <schema>
       <key>/schemas/apps/gucharmap/chapters_mode</key>
@@ -23,7 +12,19 @@
         <long></long>
       </locale>
     </schema>
--->
+
+    <schema>
+      <key>/schemas/apps/gucharmap/last_char</key>
+      <applyto>/apps/gucharmap/last_char</applyto>
+      <owner>gucharmap</owner>
+      <type>string</type>
+      <default>0</default>
+      <locale name="C">
+        <short></short>
+        <long></long>
+      </locale>
+    </schema>
+    
     <schema>
       <key>/schemas/apps/gucharmap/font</key>
       <applyto>/apps/gucharmap/font</applyto>
@@ -47,18 +48,6 @@
       </locale>
     </schema>
 
-    <schema>
-      <key>/schemas/apps/gucharmap/last_char</key>
-      <applyto>/apps/gucharmap/last_char</applyto>
-      <owner>gucharmap</owner>
-      <type>string</type>
-      <default>0</default>
-      <locale name="C">
-        <short></short>
-        <long></long>
-      </locale>
-    </schema>
-    
     <schema>
       <key>/schemas/apps/gucharmap/snap_cols_pow2</key>
       <applyto>/apps/gucharmap/snap_cols_pow2</applyto>

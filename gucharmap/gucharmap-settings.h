@@ -21,13 +21,12 @@
 
 #include <glib.h>
 #include <gtk/gtkwindow.h>
+#include <gucharmap/gucharmap-chapters-model.h>
 
 G_BEGIN_DECLS
 
 void         gucharmap_settings_initialize           (void);
 void         gucharmap_settings_shutdown             (void);
-gchar *      gucharmap_settings_get_chapter          (void);
-void         gucharmap_settings_set_chapter          (gchar *chapter);
 ChaptersMode gucharmap_settings_get_chapters_mode    (void);
 void         gucharmap_settings_set_chapters_mode    (ChaptersMode mode);
 gchar *      gucharmap_settings_get_font             (void);

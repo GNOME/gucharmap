@@ -768,8 +768,7 @@ make_details_page (GucharmapCharmap *charmap)
 }
 
 static GtkWidget *
-make_chartable_pane (GucharmapCharmap       *charmap,
-                     GucharmapCodepointList *codepoint_list)
+make_chartable_pane (GucharmapCharmap       *charmap)
 {
   GtkWidget *notebook;
 
@@ -777,7 +776,6 @@ make_chartable_pane (GucharmapCharmap       *charmap,
   gtk_widget_show (notebook);
 
   charmap->chartable = GUCHARMAP_TABLE (gucharmap_table_new ());
-  gucharmap_table_set_codepoint_list (charmap->chartable, codepoint_list);
 
   gtk_widget_show (GTK_WIDGET (charmap->chartable));
   g_signal_connect (G_OBJECT (charmap->chartable), "set-active-char", 
@@ -812,7 +810,6 @@ gucharmap_charmap_new (GucharmapChapters *chapters)
 {
   GucharmapCharmap *charmap = g_object_new (gucharmap_charmap_get_type (), NULL);
   GtkWidget *pane2;
-  gunichar last_char;
 
   charmap->hand_cursor = gdk_cursor_new (GDK_HAND2);
   charmap->regular_cursor = gdk_cursor_new (GDK_XTERM);
@@ -821,49 +818,16 @@ gucharmap_charmap_new (GucharmapChapters *chapters)
 
   g_signal_connect (G_OBJECT (chapters), "changed", G_CALLBACK (chapter_changed), charmap);
 
-  pane2 = make_chartable_pane (charmap, gucharmap_chapters_get_codepoint_list (GUCHARMAP_CHAPTERS (chapters)));
+  pane2 = make_chartable_pane (charmap);
   gtk_paned_pack1 (GTK_PANED (charmap), GTK_WIDGET (chapters), FALSE, TRUE);
   gtk_paned_pack2 (GTK_PANED (charmap), pane2, TRUE, TRUE);
 
-  set_details (charmap, gucharmap_table_get_active_character (charmap->chartable));
-
-  last_char = gucharmap_settings_get_last_char ();
-  /* not validating characters allows restoration of unassigned characters */
-  if (last_char < UNICHAR_MAX && last_char > 0)
-    gucharmap_charmap_go_to_character (charmap, last_char);
+  gucharmap_charmap_go_to_character (charmap, gucharmap_settings_get_last_char ());
 
   return GTK_WIDGET (charmap);
 }
 
-GType
-gucharmap_charmap_get_type (void)
-{
-  static GType gucharmap_charmap_type = 0;
-
-  if (!gucharmap_charmap_type)
-    {
-      static const GTypeInfo gucharmap_charmap_info =
-      {
-        sizeof (GucharmapCharmapClass),
-        NULL,           /* base_init */
-        NULL,           /* base_finalize */
-        (GClassInitFunc) gucharmap_charmap_class_init,
-        NULL,           /* class_finalize */
-        NULL,           /* class_data */
-        sizeof (GucharmapCharmap),
-        0,              /* n_preallocs */
-        (GInstanceInitFunc) gucharmap_charmap_init
-      };
-
-      gucharmap_charmap_type = g_type_register_static (GTK_TYPE_HPANED, 
-                                                       "GucharmapCharmap", 
-                                                       &gucharmap_charmap_info,
-                                                       0);
-    }
-
-  return gucharmap_charmap_type;
-}
-
+G_DEFINE_TYPE (GucharmapCharmap, gucharmap_charmap, GTK_TYPE_HPANED)
 
 void 
 gucharmap_charmap_set_font (GucharmapCharmap *charmap, 
@@ -899,9 +863,11 @@ gucharmap_charmap_set_chapters (GucharmapCharmap  *charmap,
 {
   gtk_container_remove (GTK_CONTAINER (charmap), GTK_PANED (charmap)->child1);
   gtk_paned_pack1 (GTK_PANED (charmap), GTK_WIDGET (chapters), FALSE, TRUE);
-  gucharmap_table_set_codepoint_list (charmap->chartable, gucharmap_chapters_get_codepoint_list (chapters));
   g_signal_connect (G_OBJECT (chapters), "changed", G_CALLBACK (chapter_changed), charmap);
   gtk_widget_show (GTK_WIDGET (chapters));
+
+  /* Keep the same character selected as before */
+  gucharmap_charmap_go_to_character (charmap, gucharmap_table_get_active_character (charmap->chartable));
 }
 
 GucharmapChapters *
