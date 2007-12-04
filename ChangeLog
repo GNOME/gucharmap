@@ -1,5 +1,78 @@
 2007-12-04  Christian Persch  <chpe@gnome.org>
 
+	* gucharmap.schemas.in:
+	* gucharmap/Makefile.am:
+	* gucharmap/gucharmap-block-chapters-model.c:
+	(gucharmap_block_chapters_model_init), (get_codepoint_list),
+	(get_book_codepoint_list), (character_to_iter),
+	(gucharmap_block_chapters_model_class_init),
+	(gucharmap_block_chapters_model_new):
+	* gucharmap/gucharmap-block-chapters-model.h:
+	* gucharmap/gucharmap-block-chapters.c:
+	(gucharmap_block_chapters_init),
+	(gucharmap_block_chapters_class_init),
+	(gucharmap_block_chapters_new):
+	* gucharmap/gucharmap-block-chapters.h:
+	* gucharmap/gucharmap-chapters-model.c:
+	(default_get_codepoint_list), (gucharmap_chapters_model_init),
+	(gucharmap_chapters_model_finalize),
+	(gucharmap_chapters_model_class_init),
+	(gucharmap_chapters_model_get_codepoint_list),
+	(gucharmap_chapters_model_get_book_codepoint_list),
+	(gucharmap_chapters_model_character_to_iter),
+	(gucharmap_chapters_model_get_title),
+	(gucharmap_chapters_model_id_to_iter):
+	* gucharmap/gucharmap-chapters-model.h:
+	* gucharmap/gucharmap-chapters-view.c: (select_iter),
+	(gucharmap_chapters_view_init),
+	(gucharmap_chapters_view_class_init),
+	(gucharmap_chapters_view_new), (gucharmap_chapters_view_set_model),
+	(gucharmap_chapters_view_next), (gucharmap_chapters_view_previous),
+	(gucharmap_chapters_view_get_selected),
+	(gucharmap_chapters_view_set_selected),
+	(gucharmap_chapters_view_select_character),
+	(gucharmap_chapters_view_get_codepoint_list),
+	(gucharmap_chapters_view_get_book_codepoint_list):
+	* gucharmap/gucharmap-chapters-view.h:
+	* gucharmap/gucharmap-chapters.c: (selection_changed),
+	(default_get_codepoint_list), (default_get_book_codepoint_list),
+	(default_go_to_character), (gucharmap_chapters_init),
+	(gucharmap_chapters_constructor),
+	(gucharmap_chapters_set_property), (gucharmap_chapters_class_init),
+	(gucharmap_chapters_new_with_model),
+	(gucharmap_chapters_set_model), (gucharmap_chapters_get_model),
+	(gucharmap_chapters_next), (gucharmap_chapters_previous),
+	(gucharmap_chapter_get_string), (gucharmap_chapter_set_string):
+	* gucharmap/gucharmap-chapters.h:
+	* gucharmap/gucharmap-charmap.c: (make_chartable_pane),
+	(gucharmap_charmap_new), (gucharmap_charmap_set_chapters):
+	* gucharmap/gucharmap-script-chapters-model.c:
+	(gucharmap_script_chapters_model_init), (get_codepoint_list),
+	(append_script), (get_book_codepoint_list), (character_to_iter),
+	(gucharmap_script_chapters_model_class_init),
+	(gucharmap_script_chapters_model_new):
+	* gucharmap/gucharmap-script-chapters-model.h:
+	* gucharmap/gucharmap-script-chapters.c:
+	(gucharmap_script_chapters_init),
+	(gucharmap_script_chapters_class_init),
+	(gucharmap_script_chapters_new):
+	* gucharmap/gucharmap-script-chapters.h:
+	* gucharmap/gucharmap-settings.c: (get_first_non_underscore_char),
+	(get_default_last_char), (gucharmap_settings_get_chapters_mode),
+	(gucharmap_settings_set_chapters_mode),
+	(gucharmap_settings_get_last_char):
+	* gucharmap/gucharmap-settings.h:
+	* gucharmap/gucharmap-table.c: (gucharmap_table_finalize),
+	(gucharmap_table_class_init),
+	(gucharmap_table_get_active_character),
+	(gucharmap_table_set_codepoint_list):
+	* gucharmap/gucharmap-window.c: (view_by): Refactoring: move common
+	code from gucharmap-{script,block}-chapters to
+	gucharmap-chapters-model/gucharmap-chapters-view. Persist the last
+	seen character, and keep it when switching between views.
+
+2007-12-04  Christian Persch  <chpe@gnome.org>
+
 	=== Release 2.21.3 ===
 
 	* configure.ac:
