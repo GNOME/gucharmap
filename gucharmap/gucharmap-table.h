@@ -91,8 +91,6 @@ void gucharmap_table_set_active_character (GucharmapTable *chartable,
                                            gunichar uc);
 void gucharmap_table_zoom_enable (GucharmapTable *chartable);
 void gucharmap_table_zoom_disable (GucharmapTable *chartable);
-void gucharmap_table_identify_clipboard (GucharmapTable *chartable, 
-                                         GtkClipboard *clipboard);
 void gucharmap_table_grab_focus (GucharmapTable *chartable);
 void gucharmap_table_set_snap_pow2 (GucharmapTable *chartable, 
                                     gboolean snap);

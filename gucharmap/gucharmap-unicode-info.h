@@ -37,7 +37,6 @@ G_CONST_RETURN gchar *  gucharmap_get_unicode_kTang               (gunichar uc);
 G_CONST_RETURN gchar *  gucharmap_get_unicode_kKorean             (gunichar uc);
 G_CONST_RETURN gchar *  gucharmap_get_unicode_kJapaneseKun        (gunichar uc);
 G_CONST_RETURN gchar *  gucharmap_get_unicode_kJapaneseOn         (gunichar uc);
-G_CONST_RETURN gchar *  gucharmap_get_hangul_syllable_name        (gunichar s);
 
 /* A wrapper for g_unicode_canonical_decomposition that also does hangul
  * decomposition. 

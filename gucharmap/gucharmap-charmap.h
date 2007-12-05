@@ -73,9 +73,7 @@ GType                 gucharmap_charmap_get_type           (void);
 GtkWidget *           gucharmap_charmap_new                (GucharmapChapters *chapters);
 void                  gucharmap_charmap_set_font           (GucharmapCharmap  *charmap, 
                                                             const gchar       *font_name);
-void                  gucharmap_charmap_identify_clipboard (GucharmapCharmap  *charmap, 
-                                                            GtkClipboard      *clipboard);
-void                  gucharmap_charmap_go_to_character    (GucharmapCharmap  *charmap, 
+void                  gucharmap_charmap_go_to_character    (GucharmapCharmap  *charmap,
                                                             gunichar           uc);
 GucharmapTable *      gucharmap_charmap_get_chartable      (GucharmapCharmap  *charmap);
 void                  gucharmap_charmap_set_chapters       (GucharmapCharmap  *charmap,
