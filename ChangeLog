@@ -1,3 +1,9 @@
+2007-12-05  Christian Persch  <chpe@gnome.org>
+
+	* gucharmap/gucharmap-settings.c: (window_state_timeout_cb),
+	(window_state_event_cb), (gucharmap_settings_add_window): Fix the
+	build with --disable-gconf. Bug #501710.
+
 2007-12-04  Christian Persch  <chpe@gnome.org>
 
 	* configure.ac:

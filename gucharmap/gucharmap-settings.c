@@ -302,6 +302,8 @@ gucharmap_settings_set_snap_pow2 (gboolean snap_pow2)
 
 #endif /* HAVE_GCONF */
 
+#ifdef HAVE_GCONF
+
 typedef struct {
   guint timeout_id;
   int width;
@@ -313,10 +315,8 @@ typedef struct {
 static gboolean
 window_state_timeout_cb (WindowState *state)
 {
-#ifdef HAVE_GCONF
   gconf_client_set_int (client, GCONF_PREFIX "/width", state->width, NULL);
   gconf_client_set_int (client, GCONF_PREFIX "/height", state->height, NULL);
-#endif
 
   state->timeout_id = 0;
   return FALSE;
@@ -362,19 +362,17 @@ window_state_event_cb (GtkWidget *widget,
 {
   if (event->changed_mask & GDK_WINDOW_STATE_MAXIMIZED) {
     state->is_maximised = (event->new_window_state & GDK_WINDOW_STATE_MAXIMIZED) != 0;
-#ifdef HAVE_GCONF
     gconf_client_set_bool (client, GCONF_PREFIX "/maximized", state->is_maximised, NULL);
-#endif
   }
   if (event->changed_mask & GDK_WINDOW_STATE_FULLSCREEN) {
     state->is_fullscreen = (event->new_window_state & GDK_WINDOW_STATE_FULLSCREEN) != 0;
-#ifdef HAVE_GCONF
     gconf_client_set_bool (client, GCONF_PREFIX "/fullscreen", state->is_fullscreen, NULL);
-#endif
   }
 
   return FALSE;
 }
+
+#endif /* HAVE_GCONF */
 
 /**
  * gucharma_settings_add_window:
@@ -387,6 +385,7 @@ window_state_event_cb (GtkWidget *widget,
 void
 gucharmap_settings_add_window (GtkWindow *window)
 {
+#ifdef HAVE_GCONF
   WindowState *state;
   int width, height;
   gboolean maximised, fullscreen;
@@ -417,4 +416,5 @@ gucharmap_settings_add_window (GtkWindow *window)
   if (fullscreen) {
     gtk_window_fullscreen (GTK_WINDOW (window));
   }
+#endif /* HAVE_GCONF */
 }
