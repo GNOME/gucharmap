@@ -172,13 +172,6 @@ chartable_accessible_factory_create_accessible (GObject *obj)
   return chartable_accessible_new (widget);
 }
 
-/* the window must be realized, or window->window will be null */
-static void
-set_window_background (GtkWidget *window, GdkPixmap *pixmap)
-{
-  gdk_window_set_back_pixmap (window->window, pixmap, FALSE);
-}
-
 static gint
 compute_zoom_font_size (GucharmapTable *chartable)
 {
@@ -266,7 +259,8 @@ layout_scaled_glyph (GucharmapTable *chartable,
 }
 
 static GdkPixmap *
-create_glyph_pixmap (GucharmapTable *chartable, 
+create_glyph_pixmap (GucharmapTable *chartable,
+                     gunichar wc,
                      gint font_size,
                      gboolean draw_font_family)
 {
@@ -282,7 +276,7 @@ create_glyph_pixmap (GucharmapTable *chartable,
   /* Apply the scaling.  Unfortunately not all fonts seem to be scalable.
    * We could fall back to GdkPixbuf scaling, but that looks butt ugly :-/
    */
-  pango_layout = layout_scaled_glyph (chartable, gucharmap_table_get_active_character (chartable),
+  pango_layout = layout_scaled_glyph (chartable, wc,
                                       font_size, &family);
   pango_layout_get_pixel_extents (pango_layout, &char_rect, NULL);
 
@@ -366,60 +360,32 @@ get_appropriate_upper_left_xy (GucharmapTable *chartable,
 static void
 place_zoom_window (GucharmapTable *chartable, gint x_root, gint y_root)
 {
-  gint width, height;
-  gint x, y;
+  GdkPixmap *pixmap;
+  gint width, height, x, y;
 
   g_return_if_fail (chartable->zoom_window != NULL);
 
-  /* This works because we always use gtk_widget_set_size_request() */
-  gtk_widget_get_size_request (chartable->zoom_window, &width, &height);
+  gtk_image_get_pixmap (GTK_IMAGE (chartable->zoom_image), &pixmap, NULL);
+  if (!pixmap)
+    return;
 
-  get_appropriate_upper_left_xy (chartable, width, height, 
+  gdk_drawable_get_size (GDK_DRAWABLE (pixmap), &width, &height);
+  get_appropriate_upper_left_xy (chartable, width, height,
                                  x_root, y_root, &x, &y);
-
   gtk_window_move (GTK_WINDOW (chartable->zoom_window), x, y);
-}
-
-static void
-zoom_window_realize (GtkWidget *zoom_window, 
-                     GucharmapTable *chartable)
-{
-  gint width, height;
-
-  set_window_background (chartable->zoom_window, chartable->zoom_pixmap);
-  gdk_window_clear (chartable->zoom_window->window);
-
-  gdk_drawable_get_size (GDK_DRAWABLE (chartable->zoom_pixmap), 
-                         &width, &height);
-
-  gtk_widget_set_size_request (chartable->zoom_window, width, height);
-  gtk_window_resize (GTK_WINDOW (chartable->zoom_window), width, height);
 }
 
 static void
 update_zoom_window (GucharmapTable *chartable)
 {
-  gint width, height;
+  GdkPixmap *pixmap;
 
-  g_return_if_fail (chartable->zoom_window != NULL);
-
-  if (chartable->zoom_pixmap != NULL)
-    g_object_unref (chartable->zoom_pixmap);
-
-  chartable->zoom_pixmap = create_glyph_pixmap (
-          chartable, compute_zoom_font_size (chartable), TRUE);
-
-  if (GTK_WIDGET_REALIZED (chartable->zoom_window))
-    {
-      set_window_background (chartable->zoom_window, chartable->zoom_pixmap);
-      gdk_window_clear (chartable->zoom_window->window);
-    }
-
-  gdk_drawable_get_size (GDK_DRAWABLE (chartable->zoom_pixmap), 
-                             &width, &height);
-
-  gtk_widget_set_size_request (chartable->zoom_window, width, height);
-  gtk_window_resize (GTK_WINDOW (chartable->zoom_window), width, height);
+  pixmap = create_glyph_pixmap (chartable,
+                                gucharmap_table_get_active_character (chartable),
+                                compute_zoom_font_size (chartable),
+                                TRUE);
+  gtk_image_set_from_pixmap (GTK_IMAGE (chartable->zoom_image), pixmap, NULL);
+  g_object_unref (pixmap);
 }
 
 static void
@@ -430,18 +396,18 @@ make_zoom_window (GucharmapTable *chartable)
     return;
 
   chartable->zoom_window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-  g_signal_connect (chartable->zoom_window, "realize",
-                    G_CALLBACK (zoom_window_realize), chartable);
+  chartable->zoom_image = gtk_image_new ();
+  gtk_container_add (GTK_CONTAINER (chartable->zoom_window),
+                     chartable->zoom_image);
+  gtk_widget_show (chartable->zoom_image);
 
+  gtk_window_set_resizable (GTK_WINDOW (chartable->zoom_window), FALSE);
   gtk_window_set_type_hint (GTK_WINDOW (chartable->zoom_window), 
                             GDK_WINDOW_TYPE_HINT_UTILITY);
   gtk_window_set_decorated (GTK_WINDOW (chartable->zoom_window), FALSE);
 
   gtk_window_set_screen (GTK_WINDOW (chartable->zoom_window),
                          gtk_widget_get_screen (chartable->drawing_area));
-
-  /* Prevent the window from being painted with the default background. */
-  gtk_widget_set_app_paintable (chartable->zoom_window, TRUE);
 }
 
 static void
@@ -453,9 +419,10 @@ destroy_zoom_window (GucharmapTable *chartable)
 
       zoom_window = chartable->zoom_window;
       chartable->zoom_window = NULL;
+      chartable->zoom_image = NULL;
 
       gdk_window_set_cursor (chartable->drawing_area->window, NULL);
-      gtk_object_destroy (GTK_OBJECT (zoom_window));
+      gtk_widget_destroy (zoom_window);
     }
 }
 
@@ -1350,10 +1317,6 @@ button_press_event (GtkWidget *widget,
 
       place_zoom_window (chartable, event->x_root, event->y_root);
       gtk_widget_show (chartable->zoom_window);
-
-      /* must do this after gtk_widget_show */
-      set_window_background (chartable->zoom_window, chartable->zoom_pixmap);
-      gdk_window_clear (chartable->zoom_window->window);
     }
 
   /* XXX: [need to return false so it gets drag events] */
@@ -1562,7 +1525,8 @@ drag_begin (GtkWidget *widget,
 {
   GdkPixmap *drag_icon;
 
-  drag_icon = create_glyph_pixmap (chartable, 
+  drag_icon = create_glyph_pixmap (chartable,
+                                   gucharmap_table_get_active_character (chartable),
                                    compute_drag_font_size (chartable),
                                    FALSE);
   gtk_drag_set_icon_pixmap (context, gtk_widget_get_colormap (widget), 
@@ -1594,7 +1558,6 @@ gucharmap_table_init (GucharmapTable *chartable)
 
   chartable->zoom_mode_enabled = FALSE;
   chartable->zoom_window = NULL;
-  chartable->zoom_pixmap = NULL;
   chartable->snap_pow2_enabled = FALSE;
 
   chartable->codepoint_list = gucharmap_codepoint_list_new (0, UNICHAR_MAX);
@@ -1702,10 +1665,6 @@ gucharmap_table_zoom_enable (GucharmapTable *chartable)
   place_zoom_window (chartable, x, y);
 
   gtk_widget_show (chartable->zoom_window);
-
-  /* must do this after gtk_widget_show */
-  set_window_background (chartable->zoom_window, chartable->zoom_pixmap);
-  gdk_window_clear (chartable->zoom_window->window);
 }
 
 void

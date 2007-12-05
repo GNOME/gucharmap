@@ -59,7 +59,7 @@ struct _GucharmapTable
   GtkWidget *scrollbar;
 
   GtkWidget *zoom_window;
-  GdkPixmap *zoom_pixmap;
+  GtkWidget *zoom_image;
   gboolean zoom_mode_enabled;
 
   gboolean snap_pow2_enabled;

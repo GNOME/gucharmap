@@ -1,3 +1,12 @@
+2007-12-06  Christian Persch  <chpe@gnome.org>
+
+	* gucharmap/gucharmap-table.c: (create_glyph_pixmap),
+	(place_zoom_window), (update_zoom_window), (make_zoom_window),
+	(destroy_zoom_window), (button_press_event), (drag_begin),
+	(gucharmap_table_init), (gucharmap_table_zoom_enable):
+	* gucharmap/gucharmap-table.h: Simplify character popup code. Should
+	fix popup sizing bug #501915.
+
 2007-12-05  Christian Persch  <chpe@gnome.org>
 
 	* gucharmap/gucharmap-charmap.h:
