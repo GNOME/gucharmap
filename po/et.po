@@ -19,10 +19,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Gucharmap HEAD\n"
+"Project-Id-Version: Gucharmap 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-04 03:17+0000\n"
-"PO-Revision-Date: 2007-09-19 08:30+0300\n"
+"POT-Creation-Date: 2007-12-04 03:51+0000\n"
+"PO-Revision-Date: 2007-12-04 07:42+0200\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -42,7 +42,7 @@ msgstr "Erimärkide lisamine dokumentidesse"
 msgid "Canonical decomposition:"
 msgstr ""
 
-#: ../gucharmap/gucharmap-charmap.c:309 ../gucharmap/gucharmap-table.c:295
+#: ../gucharmap/gucharmap-charmap.c:309 ../gucharmap/gucharmap-table.c:297
 msgid "[not a printable character]"
 msgstr "[pole prinditav märk]"
 
@@ -158,20 +158,20 @@ msgstr "Kirjasuurus "
 msgid "Common"
 msgstr "Üldine"
 
-#: ../gucharmap/gucharmap-table.c:1517
+#: ../gucharmap/gucharmap-table.c:1536
 msgid "Unknown character, unable to identify."
 msgstr "Tundmatu märk, ei saa tuvastada."
 
-#: ../gucharmap/gucharmap-table.c:1519
-#: ../gucharmap/gucharmap-search-dialog.c:595
+#: ../gucharmap/gucharmap-table.c:1538
+#: ../gucharmap/gucharmap-search-dialog.c:596
 msgid "Not found."
 msgstr "Ei leitud."
 
-#: ../gucharmap/gucharmap-table.c:1522
+#: ../gucharmap/gucharmap-table.c:1541
 msgid "Character found."
 msgstr "Märk leitud."
 
-#: ../gucharmap/gucharmap-table.c:1586
+#: ../gucharmap/gucharmap-table.c:1605
 msgid "Character Table"
 msgstr "Märgitabel"
 
@@ -387,7 +387,7 @@ msgstr ""
 "GNOME märgikaart\n"
 "põhineb Unicode märkide anmdebaasil"
 
-#: ../gucharmap/gucharmap-window.c:369 ../gucharmap/main.c:76
+#: ../gucharmap/gucharmap-window.c:369 ../gucharmap/main.c:77
 msgid "Gucharmap"
 msgstr "Gucharmap"
 
@@ -414,6 +414,7 @@ msgid "Previous Block"
 msgstr "Eelmine blokk"
 
 #: ../gucharmap/gucharmap-window.c:486
+#: ../gucharmap/gucharmap-script-chapters.c:76
 msgid "_File"
 msgstr "_Fail"
 
@@ -719,7 +720,7 @@ msgstr "Kombineeruvate diakriitikute täiendus"
 
 #: ../gucharmap/unicode-blocks.h:74
 msgid "Latin Extended Additional"
-msgstr ""
+msgstr "Ladina laiendatud lisad"
 
 #: ../gucharmap/unicode-blocks.h:75
 msgid "Greek Extended"
@@ -851,19 +852,19 @@ msgstr "Täiendavad kirjavahemärgid"
 
 #: ../gucharmap/unicode-blocks.h:107
 msgid "CJK Radicals Supplement"
-msgstr ""
+msgstr "CJK radikaalide lisa"
 
 #: ../gucharmap/unicode-blocks.h:108
 msgid "Kangxi Radicals"
-msgstr ""
+msgstr "Kangxi radikaalid"
 
 #: ../gucharmap/unicode-blocks.h:109
 msgid "Ideographic Description Characters"
-msgstr ""
+msgstr "Ideograafilised kirjeldavad märgid"
 
 #: ../gucharmap/unicode-blocks.h:110
 msgid "CJK Symbols and Punctuation"
-msgstr ""
+msgstr "CJK sümbolid ja kirjavahemärgid"
 
 #: ../gucharmap/unicode-blocks.h:111 ../gucharmap/unicode-scripts.h:44
 msgid "Hiragana"
@@ -923,11 +924,11 @@ msgstr "Yi silbid"
 
 #: ../gucharmap/unicode-blocks.h:125
 msgid "Yi Radicals"
-msgstr ""
+msgstr "Yi radikaalid"
 
 #: ../gucharmap/unicode-blocks.h:126
 msgid "Modifier Tone Letters"
-msgstr ""
+msgstr "Toonimuutmistähed"
 
 #: ../gucharmap/unicode-blocks.h:127
 msgid "Latin Extended-D"
@@ -983,7 +984,7 @@ msgstr "Vertikaalvormid"
 
 #: ../gucharmap/unicode-blocks.h:140
 msgid "Combining Half Marks"
-msgstr ""
+msgstr "Kombineeritud poolmärgid"
 
 #: ../gucharmap/unicode-blocks.h:141
 msgid "CJK Compatibility Forms"
@@ -991,7 +992,7 @@ msgstr "CJK ühilduvusvormid"
 
 #: ../gucharmap/unicode-blocks.h:142
 msgid "Small Form Variants"
-msgstr ""
+msgstr "Väikevormide variandid"
 
 #: ../gucharmap/unicode-blocks.h:143
 msgid "Arabic Presentation Forms-B"
@@ -999,7 +1000,7 @@ msgstr "Araabia esitlusvormid-B"
 
 #: ../gucharmap/unicode-blocks.h:144
 msgid "Halfwidth and Fullwidth Forms"
-msgstr ""
+msgstr "Pool- ja täislaiuses vormid"
 
 #: ../gucharmap/unicode-blocks.h:145
 msgid "Specials"
@@ -1083,11 +1084,11 @@ msgstr "Vana-kreeka muusikaline notatsioon"
 
 #: ../gucharmap/unicode-blocks.h:165
 msgid "Tai Xuan Jing Symbols"
-msgstr ""
+msgstr "Tai Xuan Jingi sümbolid"
 
 #: ../gucharmap/unicode-blocks.h:166
 msgid "Counting Rod Numerals"
-msgstr ""
+msgstr "Arvutuspulganumbrid"
 
 #: ../gucharmap/unicode-blocks.h:167
 msgid "Mathematical Alphanumeric Symbols"
@@ -1173,35 +1174,35 @@ msgstr "Kõik"
 msgid "Unicode Block"
 msgstr "Unikoodi blokk"
 
-#: ../gucharmap/gucharmap-script-chapters.c:76
+#: ../gucharmap/gucharmap-script-chapters.c:138
 msgid "Script"
 msgstr "Tähestik"
 
-#: ../gucharmap/gucharmap-search-dialog.c:549
+#: ../gucharmap/gucharmap-search-dialog.c:550
 msgid "Information"
 msgstr "Teave"
 
 #. follow hig guidelines
-#: ../gucharmap/gucharmap-search-dialog.c:753
+#: ../gucharmap/gucharmap-search-dialog.c:754
 msgid "Find"
 msgstr "Otsing"
 
-#: ../gucharmap/gucharmap-search-dialog.c:767
+#: ../gucharmap/gucharmap-search-dialog.c:768
 msgid "_Previous"
 msgstr "_Eelmine"
 
-#: ../gucharmap/gucharmap-search-dialog.c:774
+#: ../gucharmap/gucharmap-search-dialog.c:775
 msgid "_Next"
 msgstr "_Järgmine"
 
-#: ../gucharmap/gucharmap-search-dialog.c:784
+#: ../gucharmap/gucharmap-search-dialog.c:785
 msgid "_Search:"
 msgstr "_Otsing:"
 
-#: ../gucharmap/gucharmap-search-dialog.c:794
+#: ../gucharmap/gucharmap-search-dialog.c:795
 msgid "Match _whole word"
 msgstr "Otsitakse _täpset sõnavastet"
 
-#: ../gucharmap/gucharmap-search-dialog.c:799
+#: ../gucharmap/gucharmap-search-dialog.c:800
 msgid "Search in character _details"
 msgstr "Otsitakse _märgi üksikasjadest"
