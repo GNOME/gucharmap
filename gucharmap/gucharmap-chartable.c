@@ -57,6 +57,17 @@ static void gucharmap_chartable_finalize   (GObject *object);
 
 static guint signals[NUM_SIGNALS];
 
+/** Notes
+ *
+ * 1. Table geometry
+ * The allocated rectangle is divided into ::rows rows and ::col columns,
+ * numbered 0..rows-1 and 0..cols-1.
+ * The available width (height) is divided evenly between all columns (rows).
+ * The remaining space is distributed among the columns (rows) so that
+ * columns cols-n_padded_columns .. cols-1 (rows rows-n_padded_rows .. rows)
+ * are 1px wider (taller) than the others.
+ */
+
 /* ATK factory */
 
 #ifdef ENABLE_ACCESSIBLE
