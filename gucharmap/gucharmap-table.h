@@ -25,6 +25,8 @@
 
 G_BEGIN_DECLS
 
+#define GUCHARMAP_TYPE_TABLE (gucharmap_table_get_type ())
+
 #define GUCHARMAP_TABLE(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), \
                               gucharmap_table_get_type (), GucharmapTable))
 
@@ -100,5 +102,3 @@ void gucharmap_table_set_codepoint_list (GucharmapTable         *chartable,
 G_END_DECLS
 
 #endif  /* #ifndef GUCHARMAP_TABLE_H */
-
-
