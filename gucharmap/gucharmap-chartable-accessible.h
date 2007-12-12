@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2003  Sun Microsystems Inc.
+ * Copyright (C) 2007  Christian Persch
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public

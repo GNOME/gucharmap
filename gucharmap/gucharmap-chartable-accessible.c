@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2003  Sun Microsystems Inc.
+ * Copyright (C) 2007  Christian Persch
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -245,6 +246,7 @@ gucharmap_chartable_accessible_ref_state_set (AtkObject *obj)
   if (widget != NULL)
     atk_state_set_add_state (state_set, ATK_STATE_MANAGES_DESCENDANTS);
 
+  /* FIXME: reference count ? */
   return state_set;
 }
 
