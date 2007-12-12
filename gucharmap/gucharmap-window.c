@@ -423,22 +423,26 @@ help_about (GtkAction       *action,
   g_free (license_trans);
 }
 
+/* FIXMEchpe: make these methods on the codepoint list! */
 static void
 prev_character (GtkAction       *action,
                 GucharmapWindow *guw)
 {
-  gint index = guw->charmap->chartable->active_cell;
-  gint start = index;
+  GucharmapCodepointList *codepoint_list;
+  gint index, start;
   gunichar wc;
+
+  start = index = gucharmap_table_get_active_cell (guw->charmap->chartable);
+  codepoint_list = gucharmap_table_get_codepoint_list (guw->charmap->chartable);
 
   do
     {
       index--;
 
       if (index < 0)
-        index = gucharmap_codepoint_list_get_last_index (guw->charmap->chartable->codepoint_list);
+        index = gucharmap_codepoint_list_get_last_index (codepoint_list);
 
-      wc = gucharmap_codepoint_list_get_char (guw->charmap->chartable->codepoint_list, index);
+      wc = gucharmap_codepoint_list_get_char (codepoint_list, index);
     }
   while ((!gucharmap_unichar_isdefined (wc) || !gucharmap_unichar_validate (wc)) && index != start);
 
@@ -449,18 +453,21 @@ static void
 next_character (GtkAction       *action,
                 GucharmapWindow *guw)
 {
-  gint index = guw->charmap->chartable->active_cell;
-  gint start = index;
+  GucharmapCodepointList *codepoint_list;
+  gint index, start;
   gunichar wc;
+
+  start = index = gucharmap_table_get_active_cell (guw->charmap->chartable);
+  codepoint_list = gucharmap_table_get_codepoint_list (guw->charmap->chartable);
 
   do
     {
       index++;
 
-      if (index > gucharmap_codepoint_list_get_last_index (guw->charmap->chartable->codepoint_list))
+      if (index > gucharmap_codepoint_list_get_last_index (codepoint_list))
         index = 0;
 
-      wc = gucharmap_codepoint_list_get_char (guw->charmap->chartable->codepoint_list, index);
+      wc = gucharmap_codepoint_list_get_char (codepoint_list, index);
     }
   while ((!gucharmap_unichar_isdefined (wc) || !gucharmap_unichar_validate (wc)) && index != start);
 

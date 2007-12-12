@@ -26,7 +26,7 @@
 #include <gtk/gtk.h>
 
 #include "gucharmap.h"
-#include "gucharmap-table-private.h"
+#include "gucharmap-chartable-private.h"
 #include "chartable_accessible.h"
 #include "charcell_accessible.h"
 

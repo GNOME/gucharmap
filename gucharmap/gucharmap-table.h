@@ -41,38 +41,39 @@ struct _GucharmapTable
 {
   GtkHBox parent;
 
+  /* FIXME: remove all this crap when bumping the ABI version */
   /* rows and columns on a page */
-  gint rows, cols;
+  gint _unused_1, _unused_2;
 
-  GtkWidget *drawing_area;         /* GtkDrawingArea */
-  GdkPixmap *pixmap; 
+  GtkWidget *scrolled_window;
+  GtkWidget *chartable;
 
-  gchar *font_name;
-  PangoLayout *pango_layout;
+  gpointer _unused_4;
+  gpointer _unused_5;
 
-  gint page_first_cell;
-  gint active_cell;
-  gint old_page_first_cell;
-  gint old_active_cell;
+  gint _unused_6;
+  gint _unused_7;
+  gint _unused_8;
+  gint _unused_9;
 
   /* for the scrollbar */
-  GtkAdjustment *adjustment; 
-  gulong adjustment_changed_handler_id; 
-  GtkWidget *scrollbar;
+  gpointer _unused_10;
+  gulong _unused_11;
+  gpointer _unused_12;
 
-  GtkWidget *zoom_window;
-  GtkWidget *zoom_image;
-  gboolean zoom_mode_enabled;
+  gpointer _unused_13;
+  gpointer _unused_14;
+  gboolean _unused_15;
 
-  gboolean snap_pow2_enabled;
+  gboolean _unused_16;
 
   /* for dragging (#114534) */
-  gdouble click_x, click_y; 
+  gdouble _unused_17, _unused_18;
 
-  GtkTargetList *target_list;
+  gpointer _unused_19;
 
-  GucharmapCodepointList *codepoint_list;
-  gboolean codepoint_list_changed;
+  gpointer _unused_20;
+  gboolean _unused_21;
 };
 
 struct _GucharmapTableClass
@@ -98,6 +99,8 @@ void gucharmap_table_set_snap_pow2 (GucharmapTable *chartable,
                                     gboolean snap);
 void gucharmap_table_set_codepoint_list (GucharmapTable         *chartable,
                                          GucharmapCodepointList *list);
+GucharmapCodepointList * gucharmap_table_get_codepoint_list (GucharmapTable         *chartable);
+gint gucharmap_table_get_active_cell (GucharmapTable *chartable);
 
 G_END_DECLS
 
