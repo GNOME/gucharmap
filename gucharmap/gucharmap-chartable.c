@@ -69,6 +69,7 @@ struct _GucharmapChartable
   GtkTargetList *target_list;
 
   GucharmapCodepointList *codepoint_list;
+  int last_cell; /* from gucharmap_codepoint_list_get_last_index */
   gboolean codepoint_list_changed;
 
   /* Settings */
@@ -561,12 +562,6 @@ chartable_accessible_factory_get_type (void)
 
 #endif
 
-static guint
-get_last_cell (GucharmapChartable *chartable)
-{
-  return gucharmap_codepoint_list_get_last_index (chartable->codepoint_list);
-}
-
 static void
 set_active_cell (GucharmapChartable *chartable,
                  guint           cell)
@@ -584,8 +579,8 @@ set_active_cell (GucharmapChartable *chartable,
     
       if ((gint) chartable->old_page_first_cell + offset < 0)
         chartable->page_first_cell = 0;
-      else if ((gint) chartable->old_page_first_cell + offset > get_last_cell (chartable) - (get_last_cell (chartable) % chartable->cols) - chartable->cols * (chartable->rows - 1))
-        chartable->page_first_cell = get_last_cell (chartable) - (get_last_cell (chartable) % chartable->cols) - chartable->cols * (chartable->rows - 1);
+      else if ((gint) chartable->old_page_first_cell + offset > chartable->last_cell - (chartable->last_cell % chartable->cols) - chartable->cols * (chartable->rows - 1))
+        chartable->page_first_cell = chartable->last_cell - (chartable->last_cell % chartable->cols) - chartable->cols * (chartable->rows - 1);
       else
         chartable->page_first_cell = chartable->old_page_first_cell + offset;
     
@@ -675,8 +670,8 @@ get_cell_at_xy (GucharmapChartable *chartable,
   cell = get_cell_at_rowcol (chartable, r-1, c-1);
 
   /* XXX: check this somewhere else? */
-  if (cell > get_last_cell (chartable))
-    return get_last_cell (chartable);
+  if (cell > chartable->last_cell)
+    return chartable->last_cell;
 
   return cell;
 }
@@ -746,7 +741,7 @@ draw_square_bg (GucharmapChartable *chartable, gint row, gint col)
     untinted = widget->style->base[GTK_STATE_SELECTED];
   else if ((gint)cell == chartable->active_cell)
     untinted = widget->style->base[GTK_STATE_ACTIVE];
-  else if ((gint)cell > get_last_cell (chartable))
+  else if ((gint)cell > chartable->last_cell)
     untinted = widget->style->dark[GTK_STATE_NORMAL];
   else if (! gucharmap_unichar_validate (wc))
     untinted = widget->style->fg[GTK_STATE_INSENSITIVE];
@@ -1048,7 +1043,7 @@ update_scrollbar_adjustment (GucharmapChartable *chartable)
 
   vadjustment->value = 1.0 * chartable->page_first_cell / chartable->cols;
   vadjustment->lower = 0.0;
-  vadjustment->upper = 1.0 * ( get_last_cell (chartable) / chartable->cols + 1 );
+  vadjustment->upper = 1.0 * ( chartable->last_cell / chartable->cols + 1 );
   vadjustment->step_increment = 3.0;
   vadjustment->page_increment = 1.0 * chartable->rows;
   vadjustment->page_size = chartable->rows;
@@ -1271,7 +1266,7 @@ move_home (GucharmapChartable *chartable)
 static void
 move_end (GucharmapChartable *chartable)
 {
-  set_active_cell (chartable, get_last_cell (chartable));
+  set_active_cell (chartable, chartable->last_cell);
 }
 
 static void
@@ -1284,7 +1279,7 @@ move_up (GucharmapChartable *chartable)
 static void
 move_down (GucharmapChartable *chartable)
 {
-  if (chartable->active_cell <= get_last_cell (chartable) - chartable->cols)
+  if (chartable->active_cell <= chartable->last_cell - chartable->cols)
     set_active_cell (chartable, chartable->active_cell + chartable->cols);
 }
 
@@ -1292,7 +1287,7 @@ static void
 move_cursor (GucharmapChartable *chartable, 
              gint            offset)
 {
-  if (chartable->active_cell + offset >= 0 && chartable->active_cell + offset <= get_last_cell (chartable))
+  if (chartable->active_cell + offset >= 0 && chartable->active_cell + offset <= chartable->last_cell)
     set_active_cell (chartable, chartable->active_cell + offset);
 }
 
@@ -1328,10 +1323,10 @@ move_page_up (GucharmapChartable *chartable)
 static void
 move_page_down (GucharmapChartable *chartable)
 {
-  if (chartable->active_cell < get_last_cell (chartable) - chartable->cols * chartable->rows)
+  if (chartable->active_cell < chartable->last_cell - chartable->cols * chartable->rows)
     set_active_cell (chartable, chartable->active_cell + chartable->cols * chartable->rows);
-  else if (chartable->active_cell < get_last_cell (chartable))
-    set_active_cell (chartable, get_last_cell (chartable));
+  else if (chartable->active_cell < chartable->last_cell)
+    set_active_cell (chartable, chartable->last_cell);
 }
 
 static gint
@@ -1427,7 +1422,7 @@ set_top_row (GucharmapChartable *chartable,
 {
   gint r, c;
 
-  g_return_if_fail (row >= 0 && row <= get_last_cell (chartable) / chartable->cols);
+  g_return_if_fail (row >= 0 && row <= chartable->last_cell / chartable->cols);
 
   chartable->old_page_first_cell = chartable->page_first_cell;
   chartable->old_active_cell = chartable->active_cell;
@@ -1447,8 +1442,8 @@ set_top_row (GucharmapChartable *chartable,
     r = 0;
 
   chartable->active_cell = chartable->page_first_cell + r * chartable->cols + c;
-  if (chartable->active_cell > get_last_cell (chartable))
-    chartable->active_cell = get_last_cell (chartable);
+  if (chartable->active_cell > chartable->last_cell)
+    chartable->active_cell = chartable->last_cell;
 
   g_signal_emit (chartable, gucharmap_chartable_signals[SET_ACTIVE_CHAR], 0, 
                  gucharmap_chartable_get_active_character (chartable));
@@ -1592,17 +1587,17 @@ mouse_wheel_up (GucharmapChartable *chartable)
 static void
 mouse_wheel_down (GucharmapChartable *chartable)
 {
-  if ((gint) get_last_cell (chartable) - chartable->rows * chartable->cols < 0)
+  if ((gint) chartable->last_cell - chartable->rows * chartable->cols < 0)
     {
       set_top_row (chartable, 0);
     }
-  else if (chartable->page_first_cell + chartable->rows * chartable->cols / 2 < get_last_cell (chartable) - chartable->rows * chartable->cols)
+  else if (chartable->page_first_cell + chartable->rows * chartable->cols / 2 < chartable->last_cell - chartable->rows * chartable->cols)
     {
       set_top_row (chartable, (chartable->page_first_cell + chartable->rows * chartable->cols / 2) / chartable->cols);
     }
   else 
     {
-      set_top_row (chartable, get_last_cell (chartable) / chartable->cols - (chartable->rows - 1) );
+      set_top_row (chartable, chartable->last_cell / chartable->cols - (chartable->rows - 1) );
     }
 
   _gucharmap_chartable_redraw (chartable, TRUE);
@@ -1727,8 +1722,6 @@ gucharmap_chartable_init (GucharmapChartable *chartable)
   chartable->zoom_window = NULL;
   chartable->snap_pow2_enabled = FALSE;
 
-  chartable->codepoint_list = gucharmap_codepoint_list_new (0, UNICHAR_MAX);
-
 #ifdef ENABLE_ACCESSIBLE
   accessible = gtk_widget_get_accessible (GTK_WIDGET (chartable));
   atk_object_set_name (accessible, _("Character Table"));
@@ -1787,6 +1780,9 @@ gucharmap_chartable_init (GucharmapChartable *chartable)
                                      chartable_accessible_factory_get_type ());
     }
 #endif
+
+    /* FIXMEchpe: try NULL ?? */
+  gucharmap_chartable_set_codepoint_list (chartable, NULL);// gucharmap_codepoint_list_new (0, UNICHAR_MAX));
 
   gtk_widget_show_all (GTK_WIDGET (chartable));
 }
@@ -1869,8 +1865,8 @@ gucharmap_chartable_set_snap_pow2 (GucharmapChartable *chartable, gboolean snap)
 }
 
 void
-gucharmap_chartable_set_codepoint_list (GucharmapChartable         *chartable,
-                                    GucharmapCodepointList *list)
+gucharmap_chartable_set_codepoint_list (GucharmapChartable     *chartable,
+                                        GucharmapCodepointList *list /* adopting */)
 {
   GtkWidget *widget = GTK_WIDGET (chartable);
 
@@ -1882,6 +1878,7 @@ gucharmap_chartable_set_codepoint_list (GucharmapChartable         *chartable,
 
   chartable->active_cell = 0;
   chartable->page_first_cell = 0;
+  chartable->last_cell = 0;
 
   /* force pixmap to be redrawn */
   if (chartable->pixmap != NULL)
@@ -1890,6 +1887,8 @@ gucharmap_chartable_set_codepoint_list (GucharmapChartable         *chartable,
 
   if (!list)
     return;
+
+  chartable->last_cell = gucharmap_codepoint_list_get_last_index (chartable->codepoint_list);
 
   g_signal_emit (chartable, gucharmap_chartable_signals[SET_ACTIVE_CHAR], 0, 
                  gucharmap_chartable_get_active_character (chartable));
