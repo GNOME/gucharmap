@@ -1435,7 +1435,7 @@ gucharmap_chartable_get_accessible (GtkWidget *widget)
       /*
        * Figure out whether accessibility is enabled by looking at the
        * type of the accessible object which would be created for
-       * the parent type of GtkIconView.
+       * the parent type of GucharmapChartable.
        */
       derived_type = g_type_parent (GUCHARMAP_TYPE_CHARTABLE);
 
