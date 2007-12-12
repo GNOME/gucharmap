@@ -66,7 +66,6 @@ struct _GucharmapChartable
 
   GtkWidget *zoom_window;
   GtkWidget *zoom_image;
-  gboolean zoom_mode_enabled;
 
   /* for dragging (#114534) */
   gdouble click_x, click_y; 
@@ -78,7 +77,8 @@ struct _GucharmapChartable
   gboolean codepoint_list_changed;
 
   /* Settings */
-  gboolean snap_pow2_enabled;
+  guint snap_pow2_enabled : 1;
+  guint zoom_mode_enabled : 1;
 };
 
 struct _GucharmapChartableClass
