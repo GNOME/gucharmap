@@ -1016,15 +1016,7 @@ gucharmap_table_class_init (GucharmapTableClass *clazz)
 		    1, G_TYPE_STRING);
 }
 
-static int
-high_bit (int n)
-{
-  int i;
-  for (i = 1;  i < n;  i *= 2);
-  return i/2;
-}
-
-static void 
+static void
 update_scrollbar_adjustment (GucharmapTable *chartable)
 {
   chartable->adjustment->value = 1.0 * chartable->page_first_cell / chartable->cols; 
@@ -1048,7 +1040,7 @@ size_allocate (GtkWidget *widget,
   old_cols = chartable->cols;
 
   if (chartable->snap_pow2_enabled)
-    chartable->cols = high_bit ((allocation->width - 1) / bare_minimal_column_width (chartable));
+    chartable->cols = 1 << g_bit_nth_msf ((allocation->width - 1) / bare_minimal_column_width (chartable), -1);
   else
     chartable->cols = (allocation->width - 1) / bare_minimal_column_width (chartable);
 
