@@ -37,6 +37,18 @@ enum
 static guint signals[NUM_SIGNALS];
 
 static void
+activate (GucharmapChartable *real_table, guint value, GucharmapTable *chartable)
+{
+  g_signal_emit (chartable, signals[ACTIVATE], 0, value);
+}
+
+static void
+set_active_char (GucharmapChartable *real_table, guint value, GucharmapTable *chartable)
+{
+  g_signal_emit (chartable, signals[SET_ACTIVE_CHAR], 0, value);
+}
+
+static void
 status_message (GucharmapChartable *real_table, const gchar *message, GucharmapTable *chartable)
 {
   g_signal_emit (chartable, signals[STATUS_MESSAGE], 0, message);
@@ -50,6 +62,10 @@ gucharmap_table_init (GucharmapTable *chartable)
                                   GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
 
   chartable->chartable = gucharmap_chartable_new ();
+  g_signal_connect (GUCHARMAP_CHARTABLE (chartable->chartable), "activate",
+                    G_CALLBACK (activate), chartable);
+  g_signal_connect (GUCHARMAP_CHARTABLE (chartable->chartable), "set-active-char",
+                    G_CALLBACK (set_active_char), chartable);
   g_signal_connect (GUCHARMAP_CHARTABLE (chartable->chartable), "status-message",
                     G_CALLBACK (status_message), chartable);
 
@@ -77,7 +93,7 @@ gucharmap_table_class_init (GucharmapTableClass *klass)
 		    1, G_TYPE_UINT);
 
   signals[SET_ACTIVE_CHAR] =
-      g_signal_new ("set_active_char", gucharmap_table_get_type (), 
+      g_signal_new ("set-active-char", gucharmap_table_get_type (),
                     G_SIGNAL_RUN_FIRST,
                     G_STRUCT_OFFSET (GucharmapTableClass, set_active_char),
                     NULL, NULL, g_cclosure_marshal_VOID__UINT, G_TYPE_NONE,
