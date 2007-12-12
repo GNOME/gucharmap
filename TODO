@@ -1,52 +1,18 @@
-$Id$ 
+$Id: TODO,v 1.15 2006/01/21 23:38:14 behdad Exp $ 
 
- - Get all the information in the caption. [DONE]
+TODO when next breaking ABI/API compat:
 
- - Navigate by unicode block and codepoint (GtkTreeView on the right?) [DONE]
+- Remove Gucharmap{,Script,Block}Chapters, GucharmapTable.
 
- - Scrollbar on the tabulus [DONE]
 
- - Move up and down one row at a time in the tabulus [DONE]
-
- - Figure out something good for resizing and stuff [DONE]
+Generic TODOs:
 
  - Maybe change the keyboard and mouse navigation to do prelight stuff;
    only blue when you click or press enter or whatever?
 
- - Text to copy: can do this like gnome-character-map [DONE]
-
  - Paste to jump to a character [DONE]
 
- - Accessibility stuff, see 
-   http://developer.gnome.org/projects/gap/guide/gad/index.html [DONE]
-
- - Magnify active character, as in windows charmap? [DONE]
-
- - Pull the search and text-to-copy out of the charmap widget. [DONE]
-
- - Do all the text direction stuff, including connecting to that
-   direction-changed signal. In a RTL locale, U+0000 should be in the
-   upper right. [DONE??]
-
- - Replace bootstrap with autogen.sh. [DONE]
-
- - Write the shell script that automates generation of the source
-   files that are based on unicode.org information. Make it part of
-   the build process?? Maybe the autogen process... [DONE]
-
- - Do something about accessibility. This might mean having the
-   charmap implement AtkTable as suggested by hp. [DONE]
-
- - Handle --version, --help, etc., even when built without gnome. [DONE]
-
- - Add a --disable-gnome option to the configury. [DONE]
-
- - Accels for some of the menu items. [DONE]
-
  - Use keynav from theme with GtkBindingSet.
-
- - Think about sending signals and messages instead of exporting the
-   statusbar widget. [DONE]
 
  - Fix the mini_fontsel quirks and bugs. [DONE]
 
@@ -60,24 +26,11 @@ $Id$
 
  - Write or solicit some help. The F1 kind.
  
- - Unicode annotations and cross references (suggested by Markus Kuhn). [DONE]
-
- - Position the zoom window better; I have a plan, it's simple, but
-   not worth writing down. [DONE]
-
  - Edit menu. [UGLY. Not planning to do it.]
 
  - Font selection should be tabbable-to. [DONE]
 
  - Menu item(s) to enter and exit zoom mode. [DONE, then removed]
-
- - Get rid of the triangle in the character details; instead, put
-   items in the view menu, e.g. Extra Unicode Info, CJK Info, (Notes,
-   See Also, ... NamesList.txt stuff) [DONE]
-
- - Maybe make Find a dialog box?? Seems like a fine way to do it, but
-   there's nothing really wrong that I can think of with the current
-   way. [DONE -- it is better: find-prev and stuff]
 
  - Maybe make the size of the zoom font configurable?
 
@@ -85,14 +38,9 @@ $Id$
 
  - Daniel doesn't like the case (upper) of the character names.
 
- - Allow people to type code points in the search box? [DONE]
-
  - Split Expand/Collapse All into two menu items? [this menu item is gone]
 
  - Save state???
-
- - Make all references to characters links-- click to jump to the
-   character. [DONE]
 
  - Web browser-like forward/back for characters visited? Need to be
    smart about what to count as "visited".
@@ -106,14 +54,8 @@ $Id$
  - Separate the public and private parts of teh charmap struct(s) and
    stuff.
 
- - Split the chartable out of the charmap widget, make it its own. [DONE]
-
- - Possibility to view by script, as in scripts.txt. [DONE]
-
  - All features in unibook.
 
  - Include as much of the unidata as makes sense.
-
- - Set font at command-line. [DONE]
 
  - win32 install-shield type thing. [DONE]
