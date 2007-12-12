@@ -48,7 +48,8 @@ enum
 enum
 {
   PROP_0,
-  PROP_ACTIVE_CHAR
+  PROP_ACTIVE_CHAR,
+  PROP_CODEPOINT_LIST
 };
 
 static void gucharmap_chartable_class_init (GucharmapChartableClass *klass);
@@ -1007,6 +1008,9 @@ update_scrollbar_adjustment (GucharmapChartable *chartable)
 {
   GtkAdjustment *vadjustment = chartable->vadjustment;
 
+  if (!vadjustment)
+    return;
+
   vadjustment->value = 1.0 * chartable->page_first_cell / chartable->cols;
   vadjustment->lower = 0.0;
   vadjustment->upper = 1.0 * ( chartable->last_cell / chartable->cols + 1 );
@@ -1685,6 +1689,9 @@ gucharmap_chartable_set_property (GObject *object,
     case PROP_ACTIVE_CHAR:
       gucharmap_chartable_set_active_character (chartable, g_value_get_uint (value));
       break;
+    case PROP_CODEPOINT_LIST:
+      gucharmap_chartable_set_codepoint_list (chartable, g_value_get_object (value));
+      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
@@ -1702,6 +1709,9 @@ gucharmap_chartable_get_property (GObject *object,
   switch (prop_id) {
     case PROP_ACTIVE_CHAR:
       g_value_set_uint (value, gucharmap_chartable_get_active_character (chartable));
+      break;
+    case PROP_CODEPOINT_LIST:
+      g_value_set_object (value, gucharmap_chartable_get_codepoint_list (chartable));
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -1794,6 +1804,16 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
                         G_PARAM_STATIC_NAME |
                         G_PARAM_STATIC_NICK |
                         G_PARAM_STATIC_BLURB));
+
+  g_object_class_install_property
+    (object_class,
+     PROP_CODEPOINT_LIST,
+     g_param_spec_object ("codepoint-list", NULL, NULL,
+                          gucharmap_codepoint_list_get_type (),
+                          G_PARAM_READWRITE |
+                          G_PARAM_STATIC_NAME |
+                          G_PARAM_STATIC_NICK |
+                          G_PARAM_STATIC_BLURB));
 
   /* Keybindings */
   binding_set = gtk_binding_set_by_class (klass);
@@ -2017,41 +2037,43 @@ gucharmap_chartable_set_snap_pow2 (GucharmapChartable *chartable,
  * @list: a #GucharmapCodepointList
  *
  * Sets the codepoint list to show in the character table.
- * 
- * Note: this function adopts the refcount of @list instead
- * of adding its own reference.
  */
 void
 gucharmap_chartable_set_codepoint_list (GucharmapChartable     *chartable,
-                                        GucharmapCodepointList *list /* adopting */)
+                                        GucharmapCodepointList *codepoint_list)
 {
+  GObject *object = G_OBJECT (chartable);
   GtkWidget *widget = GTK_WIDGET (chartable);
 
+  g_object_freeze_notify (object);
+
+  if (codepoint_list)
+    g_object_ref (codepoint_list);
   if (chartable->codepoint_list)
     g_object_unref (chartable->codepoint_list);
-
-  chartable->codepoint_list = list;
+  chartable->codepoint_list = codepoint_list;
   chartable->codepoint_list_changed = TRUE;
 
   chartable->active_cell = 0;
   chartable->page_first_cell = 0;
-  chartable->last_cell = 0;
+  if (codepoint_list)
+    chartable->last_cell = gucharmap_codepoint_list_get_last_index (codepoint_list);
+  else
+    chartable->last_cell = 0;
 
   /* force pixmap to be redrawn */
   if (chartable->pixmap != NULL)
     g_object_unref (chartable->pixmap);
   chartable->pixmap = NULL;
 
-  if (!list)
-    return;
-
-  chartable->last_cell = gucharmap_codepoint_list_get_last_index (chartable->codepoint_list);
-
-  g_object_notify (G_OBJECT (chartable), "active-character");
+  g_object_notify (object, "codepoint-list");
+  g_object_notify (object, "active-character");
 
   update_scrollbar_adjustment (chartable);
 
   gtk_widget_queue_draw (widget);
+
+  g_object_thaw_notify (object);
 }
 
 /**
