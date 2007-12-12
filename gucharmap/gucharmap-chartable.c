@@ -2,6 +2,9 @@
  * Copyright (c) 2004 Noah Levitt
  * Copyright (C) 2007 Christian Persch
  *
+ * Some code copied from gtk+/gtk/gtkiconview:
+ * Copyright (C) 2002, 2004  Anders Carlsson <andersca@gnu.org>
+ *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
  * Free Software Foundation; either version 2 of the License, or (at your
@@ -83,6 +86,9 @@ struct _GucharmapChartableClass
   void    (* set_scroll_adjustments) (GucharmapChartable *chartable,
                                       GtkAdjustment      *hadjustment,
                                       GtkAdjustment      *vadjustment);
+  gboolean (* move_cursor)           (GucharmapChartable *chartable,
+                                      GtkMovementStep     step,
+                                      gint                count);
 
   void (* activate) (GucharmapChartable *chartable, gunichar uc);
   void (* set_active_char) (GucharmapChartable *chartable, guint ch);
@@ -94,13 +100,14 @@ enum
   ACTIVATE,
   SET_ACTIVE_CHAR,
   STATUS_MESSAGE,
+  MOVE_CURSOR,
   NUM_SIGNALS
 };
 
 static void gucharmap_chartable_class_init (GucharmapChartableClass *klass);
 static void gucharmap_chartable_finalize   (GObject *object);
 
-static guint gucharmap_chartable_signals[NUM_SIGNALS];
+static guint signals[NUM_SIGNALS];
 static void
 set_top_row (GucharmapChartable *chartable, 
              gint            row);
@@ -592,7 +599,7 @@ set_active_cell (GucharmapChartable *chartable,
         chartable->page_first_cell += chartable->cols;
     }
 
-  g_signal_emit (chartable, gucharmap_chartable_signals[SET_ACTIVE_CHAR], 0, 
+  g_signal_emit (chartable, signals[SET_ACTIVE_CHAR], 0,
                  gucharmap_codepoint_list_get_char (chartable->codepoint_list, chartable->active_cell));
 }
 
@@ -1205,6 +1212,147 @@ gucharmap_chartable_set_adjustments (GucharmapChartable *chartable,
 }
 
 static void
+gucharmap_chartable_add_move_binding (GtkBindingSet  *binding_set,
+                                      guint           keyval,
+                                      guint           modmask,
+                                      GtkMovementStep step,
+                                      gint            count)
+{
+  gtk_binding_entry_add_signal (binding_set, keyval, modmask,
+                                "move-cursor", 2,
+                                G_TYPE_ENUM, step,
+                                G_TYPE_INT, count);
+
+  gtk_binding_entry_add_signal (binding_set, keyval, GDK_SHIFT_MASK,
+                                "move-cursor", 2,
+                                G_TYPE_ENUM, step,
+                                G_TYPE_INT, count);
+
+  if ((modmask & GDK_CONTROL_MASK) == GDK_CONTROL_MASK)
+   return;
+
+  gtk_binding_entry_add_signal (binding_set, keyval, GDK_CONTROL_MASK | GDK_SHIFT_MASK,
+                                "move-cursor", 2,
+                                G_TYPE_ENUM, step,
+                                G_TYPE_INT, count);
+
+  gtk_binding_entry_add_signal (binding_set, keyval, GDK_CONTROL_MASK,
+                                "move-cursor", 2,
+                                G_TYPE_ENUM, step,
+                                G_TYPE_INT, count);
+}
+
+static void
+gucharmap_chartable_move_cursor_left_right (GucharmapChartable *chartable,
+                                            int count)
+{
+  GtkWidget *widget = GTK_WIDGET (chartable);
+  gboolean is_rtl;
+  int offset, new_cell;
+
+  is_rtl = (gtk_widget_get_direction (widget) == GTK_TEXT_DIR_RTL);
+  offset = is_rtl ? -count : count;
+  new_cell = chartable->active_cell + offset;
+
+  if (new_cell >= 0 &&
+      new_cell <= chartable->last_cell)
+    set_active_cell (chartable, new_cell);
+}
+
+static void
+gucharmap_chartable_move_cursor_up_down (GucharmapChartable *chartable,
+                                         int count)
+{
+  int new_cell;
+
+  new_cell = chartable->active_cell + chartable->cols * count;
+  if (new_cell >= 0 &&
+      new_cell <= chartable->last_cell)
+    set_active_cell (chartable, new_cell);
+}
+
+static void
+gucharmap_chartable_move_cursor_page_up_down (GucharmapChartable *chartable,
+                                              int count)
+{
+  int page_size, new_cell;
+
+  page_size = chartable->cols * chartable->rows;
+  new_cell = chartable->active_cell + page_size * count;
+  new_cell = CLAMP (new_cell, 0, chartable->last_cell);
+  set_active_cell (chartable, new_cell);
+}
+
+static void
+gucharmap_chartable_move_cursor_start_end (GucharmapChartable *chartable,
+                                           int count)
+{
+  int new_cell;
+
+  if (count > 0)
+    new_cell = chartable->last_cell;
+  else
+    new_cell = 0;
+
+  set_active_cell (chartable, new_cell);
+}
+
+static gboolean
+gucharmap_chartable_move_cursor (GucharmapChartable *chartable,
+                                 GtkMovementStep     step,
+                                 int                 count)
+{
+//   GdkModifierType state;
+
+  g_return_val_if_fail (step == GTK_MOVEMENT_LOGICAL_POSITIONS ||
+                        step == GTK_MOVEMENT_VISUAL_POSITIONS ||
+                        step == GTK_MOVEMENT_DISPLAY_LINES ||
+                        step == GTK_MOVEMENT_PAGES ||
+                        step == GTK_MOVEMENT_BUFFER_ENDS, FALSE);
+
+  if (!GTK_WIDGET_HAS_FOCUS (GTK_WIDGET (chartable)))
+    return FALSE;
+
+//   gucharmap_chartable_stop_editing (chartable, FALSE);
+//   gtk_widget_grab_focus (GTK_WIDGET (chartable));
+// 
+//   if (gtk_get_current_event_state (&state))
+//     {
+//       if ((state & GDK_CONTROL_MASK) == GDK_CONTROL_MASK)
+//         chartable->priv->ctrl_pressed = TRUE;
+//       if ((state & GDK_SHIFT_MASK) == GDK_SHIFT_MASK)
+//         chartable->priv->shift_pressed = TRUE;
+//     }
+//   /* else we assume not pressed */
+
+  switch (step)
+    {
+    case GTK_MOVEMENT_LOGICAL_POSITIONS:
+    case GTK_MOVEMENT_VISUAL_POSITIONS:
+      gucharmap_chartable_move_cursor_left_right (chartable, count);
+      break;
+    case GTK_MOVEMENT_DISPLAY_LINES:
+      gucharmap_chartable_move_cursor_up_down (chartable, count);
+      break;
+    case GTK_MOVEMENT_PAGES:
+      gucharmap_chartable_move_cursor_page_up_down (chartable, count);
+      break;
+    case GTK_MOVEMENT_BUFFER_ENDS:
+      gucharmap_chartable_move_cursor_start_end (chartable, count);
+      break;
+    default:
+      g_assert_not_reached ();
+    }
+
+//   chartable->priv->ctrl_pressed = FALSE;
+//   chartable->priv->shift_pressed = FALSE;
+
+  _gucharmap_chartable_redraw (chartable, TRUE);
+
+  return TRUE;
+}
+
+static void
 gucharmap_chartable_finalize (GObject *object)
 {
   GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (object);
@@ -1225,6 +1373,7 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+  GtkBindingSet *binding_set;
 
   object_class->finalize = gucharmap_chartable_finalize;
 
@@ -1232,8 +1381,9 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
   widget_class->size_allocate = gucharmap_chartable_size_allocate;
   widget_class->size_request = gucharmap_chartable_size_request;
   widget_class->style_set = gucharmap_chartable_style_set;
-  
+
   klass->set_scroll_adjustments = gucharmap_chartable_set_adjustments;
+  klass->move_cursor = gucharmap_chartable_move_cursor;
   klass->activate = NULL;
   klass->set_active_char = NULL;
 
@@ -1247,96 +1397,115 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
                   G_TYPE_NONE, 2,
                   GTK_TYPE_ADJUSTMENT, GTK_TYPE_ADJUSTMENT);
 
-  gucharmap_chartable_signals[ACTIVATE] =
-      g_signal_new ("activate", gucharmap_chartable_get_type (), G_SIGNAL_RUN_FIRST,
-                    G_STRUCT_OFFSET (GucharmapChartableClass, activate),
-                    NULL, NULL, g_cclosure_marshal_VOID__UINT, G_TYPE_NONE, 
-		    1, G_TYPE_UINT);
+  signals[ACTIVATE] =
+    g_signal_new ("activate", gucharmap_chartable_get_type (), G_SIGNAL_RUN_FIRST,
+                  G_STRUCT_OFFSET (GucharmapChartableClass, activate),
+                  NULL, NULL, g_cclosure_marshal_VOID__UINT, G_TYPE_NONE,
+                  1, G_TYPE_UINT);
 
-  gucharmap_chartable_signals[SET_ACTIVE_CHAR] =
-      g_signal_new ("set-active-char", gucharmap_chartable_get_type (),
-                    G_SIGNAL_RUN_FIRST,
-                    G_STRUCT_OFFSET (GucharmapChartableClass, set_active_char),
-                    NULL, NULL, g_cclosure_marshal_VOID__UINT, G_TYPE_NONE,
-		    1, G_TYPE_UINT);
+  signals[SET_ACTIVE_CHAR] =
+    g_signal_new ("set-active-char", gucharmap_chartable_get_type (),
+                  G_SIGNAL_RUN_FIRST,
+                  G_STRUCT_OFFSET (GucharmapChartableClass, set_active_char),
+                  NULL, NULL, g_cclosure_marshal_VOID__UINT, G_TYPE_NONE,
+                  1, G_TYPE_UINT);
 
-  gucharmap_chartable_signals[STATUS_MESSAGE] =
-      g_signal_new ("status-message", gucharmap_chartable_get_type (), G_SIGNAL_RUN_FIRST,
-                    G_STRUCT_OFFSET (GucharmapChartableClass, status_message),
-                    NULL, NULL, g_cclosure_marshal_VOID__STRING, G_TYPE_NONE,
-		    1, G_TYPE_STRING);
-}
+  signals[STATUS_MESSAGE] =
+    g_signal_new ("status-message", gucharmap_chartable_get_type (), G_SIGNAL_RUN_FIRST,
+                  G_STRUCT_OFFSET (GucharmapChartableClass, status_message),
+                  NULL, NULL, g_cclosure_marshal_VOID__STRING, G_TYPE_NONE,
+                  1, G_TYPE_STRING);
 
-static void
-move_home (GucharmapChartable *chartable)
-{
-  set_active_cell (chartable, 0);
-}
+  signals[MOVE_CURSOR] =
+    g_signal_new ("move-cursor",
+                  G_TYPE_FROM_CLASS (object_class),
+                  G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
+                  G_STRUCT_OFFSET (GucharmapChartableClass, move_cursor),
+                  NULL, NULL,
+                  _gucharmap_marshal_BOOLEAN__ENUM_INT,
+                  G_TYPE_BOOLEAN, 2,
+                  GTK_TYPE_MOVEMENT_STEP,
+                  G_TYPE_INT);
 
-static void
-move_end (GucharmapChartable *chartable)
-{
-  set_active_cell (chartable, chartable->last_cell);
-}
 
-static void
-move_up (GucharmapChartable *chartable)
-{
-  if (chartable->active_cell >= chartable->cols)
-    set_active_cell (chartable, chartable->active_cell - chartable->cols);
-}
+  /* Keybindings */
+  binding_set = gtk_binding_set_by_class (klass);
 
-static void
-move_down (GucharmapChartable *chartable)
-{
-  if (chartable->active_cell <= chartable->last_cell - chartable->cols)
-    set_active_cell (chartable, chartable->active_cell + chartable->cols);
-}
+  gucharmap_chartable_add_move_binding (binding_set, GDK_Up, 0,
+                                        GTK_MOVEMENT_DISPLAY_LINES, -1);
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KP_Up, 0,
+                                        GTK_MOVEMENT_DISPLAY_LINES, -1);
+#if 0
+  gucharmap_chartable_add_move_binding (binding_set, GDK_k, 0,
+                                        GTK_MOVEMENT_DISPLAY_LINES, -1);
+  gucharmap_chartable_add_move_binding (binding_set, GDK_K, 0,
+                                        GTK_MOVEMENT_DISPLAY_LINES, -1);
+#endif
 
-static void
-move_cursor (GucharmapChartable *chartable, 
-             gint            offset)
-{
-  if (chartable->active_cell + offset >= 0 && chartable->active_cell + offset <= chartable->last_cell)
-    set_active_cell (chartable, chartable->active_cell + offset);
-}
+  gucharmap_chartable_add_move_binding (binding_set, GDK_Down, 0,
+                                        GTK_MOVEMENT_DISPLAY_LINES, 1);
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KP_Down, 0,
+                                        GTK_MOVEMENT_DISPLAY_LINES, 1);
+#if 0
+  gucharmap_chartable_add_move_binding (binding_set, GDK_j, 0,
+                                        GTK_MOVEMENT_DISPLAY_LINES, 1);
+  gucharmap_chartable_add_move_binding (binding_set, GDK_J, 0,
+                                        GTK_MOVEMENT_DISPLAY_LINES, 1);
+#endif
 
-static void
-move_left (GucharmapChartable *chartable)
-{
-  GtkWidget *widget = GTK_WIDGET (chartable);
-  if (gtk_widget_get_direction (widget) == GTK_TEXT_DIR_RTL)
-    move_cursor (chartable, 1);
-  else
-    move_cursor (chartable, -1);
-}
+  gucharmap_chartable_add_move_binding (binding_set, GDK_p, GDK_CONTROL_MASK,
+                                        GTK_MOVEMENT_DISPLAY_LINES, -1);
 
-static void
-move_right (GucharmapChartable *chartable)
-{
-  GtkWidget *widget = GTK_WIDGET (chartable);
-  if (gtk_widget_get_direction (widget) == GTK_TEXT_DIR_RTL)
-    move_cursor (chartable, -1);
-  else
-    move_cursor (chartable, 1);
-}
+  gucharmap_chartable_add_move_binding (binding_set, GDK_n, GDK_CONTROL_MASK,
+                                        GTK_MOVEMENT_DISPLAY_LINES, 1);
 
-static void
-move_page_up (GucharmapChartable *chartable)
-{
-  if (chartable->active_cell >= chartable->cols * chartable->rows)
-    set_active_cell (chartable, chartable->active_cell - chartable->cols * chartable->rows);
-  else if (chartable->active_cell > 0)
-    set_active_cell (chartable, 0);
-}
+  gucharmap_chartable_add_move_binding (binding_set, GDK_Home, 0,
+                                        GTK_MOVEMENT_BUFFER_ENDS, -1);
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KP_Home, 0,
+                                        GTK_MOVEMENT_BUFFER_ENDS, -1);
 
-static void
-move_page_down (GucharmapChartable *chartable)
-{
-  if (chartable->active_cell < chartable->last_cell - chartable->cols * chartable->rows)
-    set_active_cell (chartable, chartable->active_cell + chartable->cols * chartable->rows);
-  else if (chartable->active_cell < chartable->last_cell)
-    set_active_cell (chartable, chartable->last_cell);
+  gucharmap_chartable_add_move_binding (binding_set, GDK_End, 0,
+                                        GTK_MOVEMENT_BUFFER_ENDS, 1);
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KP_End, 0,
+                                        GTK_MOVEMENT_BUFFER_ENDS, 1);
+
+  gucharmap_chartable_add_move_binding (binding_set, GDK_Page_Up, 0,
+                                        GTK_MOVEMENT_PAGES, -1);
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KP_Page_Up, 0,
+                                        GTK_MOVEMENT_PAGES, -1);
+#if 0
+  gucharmap_chartable_add_move_binding (binding_set, GDK_b, 0,
+                                        GTK_MOVEMENT_PAGES, -1);
+  gucharmap_chartable_add_move_binding (binding_set, GDK_B, 0,
+                                        GTK_MOVEMENT_PAGES, -1);
+#endif
+
+  gucharmap_chartable_add_move_binding (binding_set, GDK_Page_Down, 0,
+                                        GTK_MOVEMENT_PAGES, 1);
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KP_Page_Down, 0,
+                                        GTK_MOVEMENT_PAGES, 1);
+
+  gucharmap_chartable_add_move_binding (binding_set, GDK_Left, 0,
+                                        GTK_MOVEMENT_VISUAL_POSITIONS, -1);
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KP_Left, 0,
+                                        GTK_MOVEMENT_VISUAL_POSITIONS, -1);
+#if 0
+  gucharmap_chartable_add_move_binding (binding_set, GDK_h, 0,
+                                        GTK_MOVEMENT_VISUAL_POSITIONS, -1);
+  gucharmap_chartable_add_move_binding (binding_set, GDK_H, 0,
+                                        GTK_MOVEMENT_VISUAL_POSITIONS, -1);
+#endif
+
+  gucharmap_chartable_add_move_binding (binding_set, GDK_Right, 0,
+                                        GTK_MOVEMENT_VISUAL_POSITIONS, 1);
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KP_Right, 0,
+                                        GTK_MOVEMENT_VISUAL_POSITIONS, 1);
+#if 0
+  gucharmap_chartable_add_move_binding (binding_set, GDK_l, 0,
+                                        GTK_MOVEMENT_VISUAL_POSITIONS, 1);
+  gucharmap_chartable_add_move_binding (binding_set, GDK_L, 0,
+                                        GTK_MOVEMENT_VISUAL_POSITIONS, 1);
+#endif
 }
 
 static gint
@@ -1371,49 +1540,12 @@ key_press_event (GtkWidget *widget,
   /* move the cursor or whatever depending on which key was pressed */
   switch (event->keyval)
     {
-      case GDK_Home: case GDK_KP_Home:
-        move_home (chartable);
-        break;
-
-      case GDK_End: case GDK_KP_End:
-        move_end (chartable);
-        break;
-
-      case GDK_Up: case GDK_KP_Up: 
-      case GDK_k: case GDK_K:
-        move_up (chartable);
-        break;
-
-      case GDK_Down: case GDK_KP_Down: 
-      case GDK_j: case GDK_J:
-        move_down (chartable);
-        break;
-
-      case GDK_Left: case GDK_KP_Left: 
-      case GDK_h: case GDK_H:
-        move_left (chartable);
-        break;
-
-      case GDK_Right: case GDK_KP_Right: 
-      case GDK_l: case GDK_L:
-        move_right (chartable);
-        break;
-
-      case GDK_Page_Up: case GDK_KP_Page_Up: 
-      case GDK_b: case GDK_B:
-        move_page_up (chartable);
-        break;
-
-      case GDK_Page_Down: case GDK_KP_Page_Down:
-        move_page_down (chartable);
-        break;
-
       case GDK_Shift_L: case GDK_Shift_R:
         gucharmap_chartable_zoom_enable (chartable);
         return FALSE;
 
       case GDK_Return: case GDK_KP_Enter: case GDK_space:
-	g_signal_emit (chartable, gucharmap_chartable_signals[ACTIVATE], 0, gucharmap_chartable_get_active_character (chartable));
+	g_signal_emit (chartable, signals[ACTIVATE], 0, gucharmap_chartable_get_active_character (chartable));
         return TRUE;
 
       /* pass on other keys, like tab and stuff that shifts focus */
@@ -1455,14 +1587,14 @@ set_top_row (GucharmapChartable *chartable,
   if (chartable->active_cell > chartable->last_cell)
     chartable->active_cell = chartable->last_cell;
 
-  g_signal_emit (chartable, gucharmap_chartable_signals[SET_ACTIVE_CHAR], 0, 
+  g_signal_emit (chartable, signals[SET_ACTIVE_CHAR], 0,
                  gucharmap_chartable_get_active_character (chartable));
 }
 
 static void
 status_message (GucharmapChartable *chartable, const gchar *message)
 {
-  g_signal_emit (chartable, gucharmap_chartable_signals[STATUS_MESSAGE], 0, message);
+  g_signal_emit (chartable, signals[STATUS_MESSAGE], 0, message);
 }
 
 /*  - single click with left button: activate character under pointer
@@ -1486,7 +1618,7 @@ button_press_event (GtkWidget *widget,
   /* double-click */
   if (event->button == 1 && event->type == GDK_2BUTTON_PRESS)
     {
-      g_signal_emit (chartable, gucharmap_chartable_signals[ACTIVATE], 0, gucharmap_chartable_get_active_character (chartable));
+      g_signal_emit (chartable, signals[ACTIVATE], 0, gucharmap_chartable_get_active_character (chartable));
     }
   /* single-click */ 
   else if (event->button == 1 && event->type == GDK_BUTTON_PRESS) 
@@ -1900,7 +2032,7 @@ gucharmap_chartable_set_codepoint_list (GucharmapChartable     *chartable,
 
   chartable->last_cell = gucharmap_codepoint_list_get_last_index (chartable->codepoint_list);
 
-  g_signal_emit (chartable, gucharmap_chartable_signals[SET_ACTIVE_CHAR], 0, 
+  g_signal_emit (chartable, signals[SET_ACTIVE_CHAR], 0,
                  gucharmap_chartable_get_active_character (chartable));
 
   update_scrollbar_adjustment (chartable);
