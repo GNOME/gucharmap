@@ -79,12 +79,15 @@ AC_ARG_ENABLE([gconf],
               [AS_HELP_STRING([--disable-gconf],
 	                      [don't build with gconf support])])
 if test "x$enable_gconf" != "xno"; then
+    GCONFPKGS="gconf-2.0"
     PKG_CHECK_MODULES(GCONF, gconf-2.0,
                 have_gconf=yes, have_gconf=no)
 else
+    GCONFPKGS=
     AC_MSG_NOTICE([GCONF support disabled with --disable-gconf])
     have_gconf=no
 fi  
+AC_SUBST([GCONFPKGS])
 
 AM_GCONF_SOURCE_2
 AC_PATH_PROG([GCONFTOOL],[gconftool-2],[no])
