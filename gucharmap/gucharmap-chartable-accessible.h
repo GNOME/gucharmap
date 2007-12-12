@@ -40,7 +40,7 @@ struct _GucharmapChartableAccessible
 {
   GtkAccessible parent_instance;
   GtkAdjustment *vadjustment;
-  GArray *cells;
+  GPtrArray *cells;
   AtkObject *focus_obj;
 };
 
