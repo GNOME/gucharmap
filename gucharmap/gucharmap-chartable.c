@@ -46,6 +46,8 @@ struct _GucharmapChartable
 
   /* Font */
   PangoFontDescription *font_desc;
+  int drag_font_size;
+
   int bare_minimal_column_width;
   int bare_minimal_row_height;
 
@@ -133,6 +135,8 @@ gucharmap_chartable_set_font_desc (GucharmapChartable *chartable,
   font_size = pango_font_description_get_size (chartable->font_desc);
   chartable->bare_minimal_column_width = PANGO_PIXELS (3.0 * font_size);
   chartable->bare_minimal_row_height = PANGO_PIXELS (2.5 * font_size);
+
+  chartable->drag_font_size = 5 * ((font_size > 0) ? font_size : 10 * PANGO_SCALE);
 
   gtk_widget_queue_resize (GTK_WIDGET (chartable));
 }
@@ -1139,16 +1143,6 @@ gucharmap_chartable_button_release (GtkWidget *widget,
   return FALSE;
 }
 
-static gint
-compute_drag_font_size (GucharmapChartable *chartable)
-{
-  gint font_size;
-
-  font_size = pango_font_description_get_size (chartable->font_desc);
-
-  return 5 * ((font_size > 0) ? font_size : 10 * PANGO_SCALE);
-}
-
 static void
 gucharmap_chartable_drag_begin (GtkWidget *widget,
                                 GdkDragContext *context)
@@ -1158,7 +1152,7 @@ gucharmap_chartable_drag_begin (GtkWidget *widget,
 
   drag_icon = create_glyph_pixmap (chartable,
                                    gucharmap_chartable_get_active_character (chartable),
-                                   compute_drag_font_size (chartable),
+                                   chartable->drag_font_size,
                                    FALSE);
   gtk_drag_set_icon_pixmap (context, gtk_widget_get_colormap (widget), 
                             drag_icon, NULL, -8, -8);
