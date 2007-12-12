@@ -1595,6 +1595,9 @@ gucharmap_chartable_init (GucharmapChartable *chartable)
   chartable->zoom_image = NULL;
   chartable->snap_pow2_enabled = FALSE;
 
+/* This didn't fix the slow expose events either: */
+/*  gtk_widget_set_double_buffered (widget, FALSE); */
+
   gtk_widget_set_events (widget,
           GDK_EXPOSURE_MASK | GDK_KEY_PRESS_MASK | GDK_BUTTON_PRESS_MASK |
           GDK_BUTTON_RELEASE_MASK | GDK_BUTTON3_MOTION_MASK |
