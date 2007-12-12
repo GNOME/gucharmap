@@ -531,8 +531,8 @@ destroy_zoom_window (GucharmapChartable *chartable)
 }
 
 static void
-set_active_cell (GucharmapChartable *chartable,
-                 guint           cell)
+gucharmap_chartable_set_active_cell (GucharmapChartable *chartable,
+                                     guint cell)
 {
   chartable->old_active_cell = chartable->active_cell;
   chartable->old_page_first_cell = chartable->page_first_cell;
@@ -561,6 +561,8 @@ set_active_cell (GucharmapChartable *chartable,
     }
 
   g_object_notify (G_OBJECT (chartable), "active-character");
+
+  /* FIXMEchpe: update the scroll adjustment! */
 }
 
 static void
@@ -568,7 +570,7 @@ set_active_char (GucharmapChartable *chartable,
                  gunichar        wc)
 {
   guint cell = gucharmap_codepoint_list_get_index (chartable->codepoint_list, wc);
-  set_active_cell (chartable, cell);
+  gucharmap_chartable_set_active_cell (chartable, cell);
 }
 
 static void
@@ -1057,12 +1059,12 @@ gucharmap_chartable_button_press (GtkWidget *widget,
   /* single-click */ 
   else if (event->button == 1 && event->type == GDK_BUTTON_PRESS) 
     {
-      set_active_cell (chartable, get_cell_at_xy (chartable, event->x, event->y));
+      gucharmap_chartable_set_active_cell (chartable, get_cell_at_xy (chartable, event->x, event->y));
       _gucharmap_chartable_redraw (chartable, TRUE);
     }
   else if (event->button == 3)
     {
-      set_active_cell (chartable, get_cell_at_xy (chartable, event->x, event->y));
+      gucharmap_chartable_set_active_cell (chartable, get_cell_at_xy (chartable, event->x, event->y));
 
       make_zoom_window (chartable);
       _gucharmap_chartable_redraw (chartable, FALSE);
@@ -1322,7 +1324,7 @@ gucharmap_chartable_motion_notify (GtkWidget *widget,
       if ((gint)cell != chartable->active_cell)
         {
           gtk_widget_hide (chartable->zoom_window);
-          set_active_cell (chartable, cell);
+          gucharmap_chartable_set_active_cell (chartable, cell);
           _gucharmap_chartable_redraw (chartable, FALSE);
         }
 
@@ -1545,7 +1547,7 @@ gucharmap_chartable_move_cursor_left_right (GucharmapChartable *chartable,
 
   if (new_cell >= 0 &&
       new_cell <= chartable->last_cell)
-    set_active_cell (chartable, new_cell);
+    gucharmap_chartable_set_active_cell (chartable, new_cell);
 }
 
 static void
@@ -1557,7 +1559,7 @@ gucharmap_chartable_move_cursor_up_down (GucharmapChartable *chartable,
   new_cell = chartable->active_cell + chartable->cols * count;
   if (new_cell >= 0 &&
       new_cell <= chartable->last_cell)
-    set_active_cell (chartable, new_cell);
+    gucharmap_chartable_set_active_cell (chartable, new_cell);
 }
 
 static void
@@ -1569,7 +1571,7 @@ gucharmap_chartable_move_cursor_page_up_down (GucharmapChartable *chartable,
   page_size = chartable->cols * chartable->rows;
   new_cell = chartable->active_cell + page_size * count;
   new_cell = CLAMP (new_cell, 0, chartable->last_cell);
-  set_active_cell (chartable, new_cell);
+  gucharmap_chartable_set_active_cell (chartable, new_cell);
 }
 
 static void
@@ -1583,7 +1585,7 @@ gucharmap_chartable_move_cursor_start_end (GucharmapChartable *chartable,
   else
     new_cell = 0;
 
-  set_active_cell (chartable, new_cell);
+  gucharmap_chartable_set_active_cell (chartable, new_cell);
 }
 
 static gboolean
