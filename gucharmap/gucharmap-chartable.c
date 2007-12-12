@@ -116,6 +116,7 @@ gucharmap_chartable_set_font_desc (GucharmapChartable *chartable,
 
   /* FIXMEchpe: check pango_font_description_get_size_is_absolute() ! */
   font_size = pango_font_description_get_size (chartable->font_desc);
+  /* FIXMEchpe bug 329481 */
   chartable->bare_minimal_column_width = PANGO_PIXELS (3.0 * font_size);
   chartable->bare_minimal_row_height = PANGO_PIXELS (2.5 * font_size);
 
