@@ -155,25 +155,13 @@ _gucharmap_chartable_cell_column (GucharmapChartable *chartable,
     return (cell - chartable->page_first_cell) % chartable->cols;
 }
 
-static gint
-minimal_column_width (GucharmapChartable *chartable)
-{
-  GtkWidget *widget = GTK_WIDGET (chartable);
-  gint total_extra_pixels;
-  gint bare_minimal_width = chartable->bare_minimal_column_width;
-
-  total_extra_pixels = widget->allocation.width - (chartable->cols * bare_minimal_width + 1);
-
-  return bare_minimal_width + total_extra_pixels / chartable->cols;
-}
-
 /* not all columns are necessarily the same width because of padding */
 gint
 _gucharmap_chartable_column_width (GucharmapChartable *chartable, gint col)
 {
   GtkWidget *widget = GTK_WIDGET (chartable);
-  gint num_padded_columns;
-  gint min_col_w = minimal_column_width (chartable);
+  int num_padded_columns;
+  int min_col_w = chartable->minimal_column_width;
 
   num_padded_columns = widget->allocation.width - (min_col_w * chartable->cols + 1);
 
@@ -198,25 +186,13 @@ _gucharmap_chartable_x_offset (GucharmapChartable *chartable, gint col)
   return x;
 }
 
-static gint
-minimal_row_height (GucharmapChartable *chartable)
-{
-  GtkWidget *widget = GTK_WIDGET (chartable);
-  gint total_extra_pixels;
-  gint bare_minimal_height = chartable->bare_minimal_row_height;
-
-  total_extra_pixels = widget->allocation.height - (chartable->rows * bare_minimal_height + 1);
-
-  return bare_minimal_height + total_extra_pixels / chartable->rows;
-}
-
 /* not all rows are necessarily the same height because of padding */
 gint
 _gucharmap_chartable_row_height (GucharmapChartable *chartable, gint row)
 {
   GtkWidget *widget = GTK_WIDGET (chartable);
-  gint num_padded_rows;
-  gint min_row_h = minimal_row_height (chartable);
+  int num_padded_rows;
+  int min_row_h = chartable->minimal_row_height;
 
   num_padded_rows = widget->allocation.height - (min_row_h * chartable->rows + 1);
 
@@ -807,7 +783,7 @@ copy_rows (GucharmapChartable *chartable, gint row_offset)
   gint from_row, to_row;
 
   num_padded_rows = widget->allocation.height -
-                    (minimal_row_height (chartable) * chartable->rows + 1);
+                    (chartable->minimal_row_height * chartable->rows + 1);
 
   if (ABS (row_offset) < chartable->rows - num_padded_rows)
     {
@@ -1365,6 +1341,7 @@ gucharmap_chartable_size_allocate (GtkWidget *widget,
 {
   GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (widget);
   int old_rows, old_cols;
+  int total_extra_pixels;
 
   GTK_WIDGET_CLASS (gucharmap_chartable_parent_class)->size_allocate (widget, allocation);
 
@@ -1385,6 +1362,12 @@ gucharmap_chartable_size_allocate (GtkWidget *widget,
     chartable->cols = 1;
 
   chartable->page_size = chartable->rows * chartable->cols;
+
+  total_extra_pixels = widget->allocation.width - (chartable->cols * chartable->bare_minimal_column_width + 1);
+  chartable->minimal_column_width = chartable->bare_minimal_column_width + total_extra_pixels / chartable->cols;
+
+  total_extra_pixels = widget->allocation.height - (chartable->rows * chartable->bare_minimal_row_height + 1);
+  chartable->minimal_row_height = chartable->bare_minimal_row_height + total_extra_pixels / chartable->rows;
 
   /* force pixmap to be redrawn on next expose event */
   if (chartable->pixmap != NULL)

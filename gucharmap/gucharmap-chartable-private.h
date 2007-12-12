@@ -33,13 +33,15 @@ struct _GucharmapChartable
   PangoFontDescription *font_desc;
   int drag_font_size;
 
-  int bare_minimal_column_width;
-  int bare_minimal_row_height;
-
-  /* rows and columns on a page */
+  /* Geometry */
+  int bare_minimal_column_width; /* depends only on font_desc */
+  int bare_minimal_row_height;   /* depends only on font_desc */
+  int minimal_column_width;      /* depends on font_desc and size allocation */
+  int minimal_row_height;        /* depends on font_desc and size allocation */
   int rows;
   int cols;
   int page_size;       /* rows * cols */
+
   int page_first_cell; /* the cell index of the top left corner */
   int active_cell;     /* the active cell index */
   int old_page_first_cell;
