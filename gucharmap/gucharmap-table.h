@@ -44,8 +44,8 @@ struct _GucharmapTable
   /* rows and columns on a page */
   gint _unused_1, _unused_2;
 
+  GtkWidget *drawing_area;
   GtkWidget *scrolled_window;
-  GtkWidget *chartable;
 
   gpointer _unused_4;
   gpointer _unused_5;

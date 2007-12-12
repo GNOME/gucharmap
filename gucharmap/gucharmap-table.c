@@ -63,17 +63,17 @@ gucharmap_table_init (GucharmapTable *chartable)
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (chartable->scrolled_window),
                                   GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
 
-  chartable->chartable = gucharmap_chartable_new ();
-  g_signal_connect (GUCHARMAP_CHARTABLE (chartable->chartable), "activate",
+  chartable->drawing_area = gucharmap_chartable_new ();
+  g_signal_connect (GUCHARMAP_CHARTABLE (chartable->drawing_area), "activate",
                     G_CALLBACK (activate), chartable);
-  g_signal_connect (GUCHARMAP_CHARTABLE (chartable->chartable), "status-message",
+  g_signal_connect (GUCHARMAP_CHARTABLE (chartable->drawing_area), "status-message",
                     G_CALLBACK (status_message), chartable);
-  g_signal_connect (GUCHARMAP_CHARTABLE (chartable->chartable), "notify::active-character",
+  g_signal_connect (GUCHARMAP_CHARTABLE (chartable->drawing_area), "notify::active-character",
                     G_CALLBACK (sync_active_char), chartable);
 
   gtk_container_add (GTK_CONTAINER (chartable->scrolled_window),
-                     chartable->chartable);
-  gtk_widget_show (chartable->chartable);
+                     chartable->drawing_area);
+  gtk_widget_show (chartable->drawing_area);
 
   gtk_box_pack_start (GTK_BOX (chartable), chartable->scrolled_window,
                       TRUE, TRUE, 0);
@@ -119,61 +119,61 @@ gucharmap_table_new (void)
 void
 gucharmap_table_zoom_enable (GucharmapTable *chartable)
 {
-  gucharmap_chartable_set_zoom_enabled (GUCHARMAP_CHARTABLE (chartable->chartable), TRUE);
+  gucharmap_chartable_set_zoom_enabled (GUCHARMAP_CHARTABLE (chartable->drawing_area), TRUE);
 }
 
 void
 gucharmap_table_zoom_disable (GucharmapTable *chartable)
 {
-  gucharmap_chartable_set_zoom_enabled (GUCHARMAP_CHARTABLE (chartable->chartable), FALSE);
+  gucharmap_chartable_set_zoom_enabled (GUCHARMAP_CHARTABLE (chartable->drawing_area), FALSE);
 }
 
 void 
 gucharmap_table_set_font (GucharmapTable *chartable, const gchar *font_name)
 {
-  gucharmap_chartable_set_font (GUCHARMAP_CHARTABLE (chartable->chartable), font_name);
+  gucharmap_chartable_set_font (GUCHARMAP_CHARTABLE (chartable->drawing_area), font_name);
 }
 
 gunichar 
 gucharmap_table_get_active_character (GucharmapTable *chartable)
 {
-  return gucharmap_chartable_get_active_character (GUCHARMAP_CHARTABLE (chartable->chartable));
+  return gucharmap_chartable_get_active_character (GUCHARMAP_CHARTABLE (chartable->drawing_area));
 }
 
 void
 gucharmap_table_set_active_character (GucharmapTable *chartable, 
                                       gunichar        wc)
 {
-  gucharmap_chartable_set_active_character (GUCHARMAP_CHARTABLE (chartable->chartable), wc);
+  gucharmap_chartable_set_active_character (GUCHARMAP_CHARTABLE (chartable->drawing_area), wc);
 }
 
 void
 gucharmap_table_grab_focus (GucharmapTable *chartable)
 {
-  gtk_widget_grab_focus (chartable->chartable);
+  gtk_widget_grab_focus (chartable->drawing_area);
 }
 
 void 
 gucharmap_table_set_snap_pow2 (GucharmapTable *chartable, gboolean snap)
 {
-  gucharmap_chartable_set_snap_pow2 (GUCHARMAP_CHARTABLE (chartable->chartable), snap);
+  gucharmap_chartable_set_snap_pow2 (GUCHARMAP_CHARTABLE (chartable->drawing_area), snap);
 }
 
 void
 gucharmap_table_set_codepoint_list (GucharmapTable         *chartable,
                                     GucharmapCodepointList *list)
 {
-  gucharmap_chartable_set_codepoint_list (GUCHARMAP_CHARTABLE (chartable->chartable), list);
+  gucharmap_chartable_set_codepoint_list (GUCHARMAP_CHARTABLE (chartable->drawing_area), list);
 }
 
 GucharmapCodepointList *
 gucharmap_table_get_codepoint_list (GucharmapTable *chartable)
 {
-  return gucharmap_chartable_get_codepoint_list (GUCHARMAP_CHARTABLE (chartable->chartable));
+  return gucharmap_chartable_get_codepoint_list (GUCHARMAP_CHARTABLE (chartable->drawing_area));
 }
 
 gint
 gucharmap_table_get_active_cell (GucharmapTable *chartable)
 {
-  return gucharmap_chartable_get_active_cell (GUCHARMAP_CHARTABLE (chartable->chartable));
+  return gucharmap_chartable_get_active_cell (GUCHARMAP_CHARTABLE (chartable->drawing_area));
 }
