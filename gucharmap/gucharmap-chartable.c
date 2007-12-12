@@ -1871,6 +1871,11 @@ gucharmap_chartable_init (GucharmapChartable *chartable)
   gtk_widget_show_all (GTK_WIDGET (chartable));
 }
 
+/**
+ * gucharmap_chartable_new:
+ *
+ * Returns: a new #GucharmapChartable
+ */
 GtkWidget *
 gucharmap_chartable_new (void)
 {
