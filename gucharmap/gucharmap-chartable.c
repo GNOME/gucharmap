@@ -550,8 +550,14 @@ gucharmap_chartable_set_active_cell (GucharmapChartable *chartable,
     
       if (chartable->old_page_first_cell + offset < 0)
         chartable->page_first_cell = 0;
-      else if (chartable->old_page_first_cell + offset > chartable->last_cell - (chartable->last_cell % chartable->cols) - chartable->cols * (chartable->rows - 1))
-        chartable->page_first_cell = chartable->last_cell - (chartable->last_cell % chartable->cols) - chartable->cols * (chartable->rows - 1);
+      else if (chartable->old_page_first_cell +
+               offset >
+               chartable->last_cell -
+               (chartable->last_cell % chartable->cols) -
+               chartable->cols * (chartable->rows - 1))
+        chartable->page_first_cell = chartable->last_cell -
+                                     (chartable->last_cell % chartable->cols) -
+                                     chartable->cols * (chartable->rows - 1);
       else
         chartable->page_first_cell = chartable->old_page_first_cell + offset;
     
