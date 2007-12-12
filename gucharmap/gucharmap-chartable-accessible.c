@@ -1,5 +1,4 @@
-/* $Id$ */
-/* 
+/*
  * Copyright (c) 2003  Sun Microsystems Inc.
  *
  * This library is free software; you can redistribute it and/or
@@ -18,30 +17,29 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifdef HAVE_CONFIG_H
-# include <config.h>
-#endif
+#include <config.h>
 
 #include <string.h>
+
 #include <gtk/gtk.h>
 
 #include "gucharmap.h"
+#include "gucharmap-chartable.h"
 #include "gucharmap-chartable-private.h"
-#include "chartable_accessible.h"
-#include "charcell_accessible.h"
+#include "gucharmap-chartable-accessible.h"
+#include "gucharmap-chartable-cell-accessible.h"
 
 typedef struct
 {
   AtkObject *cell;
   gint      index;
-}
-CharcellAccessibleInfo;
+} GucharmapChartableCellAccessibleInfo;
 
 static gpointer parent_class = NULL;
 
 
 static GList*
-get_cell_list (ChartableAccessible *table)
+get_cell_list (GucharmapChartableAccessible *table)
 {
   gpointer data;
 
@@ -50,16 +48,16 @@ get_cell_list (ChartableAccessible *table)
 }
 
 static void
-set_cell_list (ChartableAccessible *table, gpointer data)
+set_cell_list (GucharmapChartableAccessible *table, gpointer data)
 {
   g_object_set_data (G_OBJECT (table), "chartable-cell-data", data);
 }
 
 static AtkObject*
-find_cell (ChartableAccessible *table,
+find_cell (GucharmapChartableAccessible *table,
 	   gint index)
 {
-  CharcellAccessibleInfo *info;
+  GucharmapChartableCellAccessibleInfo *info;
   GList *cell_list;
   GList *l;
 
@@ -67,7 +65,7 @@ find_cell (ChartableAccessible *table,
 
   for (l = cell_list; l; l = l->next)
     {
-      info = (CharcellAccessibleInfo *) (l->data);
+      info = (GucharmapChartableCellAccessibleInfo *) (l->data);
 
       if (index == info->index)
         return info->cell;
@@ -77,51 +75,51 @@ find_cell (ChartableAccessible *table,
 }
 
 
-static GucharmapTable*
+static GucharmapChartable*
 get_chartable (GtkWidget *table)
 {
   GtkWidget *widget;
 
   g_return_val_if_fail (GTK_IS_DRAWING_AREA (table), NULL);
   widget = table->parent;
-  g_return_val_if_fail (IS_GUCHARMAP_TABLE (widget), NULL);
-  return GUCHARMAP_TABLE (widget);
+  g_return_val_if_fail (IS_GUCHARMAP_CHARTABLE (widget), NULL);
+  return GUCHARMAP_CHARTABLE (widget);
 }
 
 
 static void
-set_cell_visibility (GucharmapTable  *chartable,
-                     CharcellAccessible  *cell,
+set_cell_visibility (GucharmapChartable  *chartable,
+                     GucharmapChartableCellAccessible  *cell,
                      gboolean emit_signal)
 {
-  charcell_accessible_add_state (cell, ATK_STATE_VISIBLE, emit_signal);
+  gucharmap_chartable_cell_accessible_add_state (cell, ATK_STATE_VISIBLE, emit_signal);
 
   if (cell->index >= chartable->page_first_cell &&
       cell->index < chartable->page_first_cell 
                     + chartable->rows * chartable->cols)
     {
-      charcell_accessible_add_state (cell, ATK_STATE_SHOWING, emit_signal);
+      gucharmap_chartable_cell_accessible_add_state (cell, ATK_STATE_SHOWING, emit_signal);
     }
   else 
     {
-      charcell_accessible_remove_state (cell, ATK_STATE_SHOWING, emit_signal);
+      gucharmap_chartable_cell_accessible_remove_state (cell, ATK_STATE_SHOWING, emit_signal);
     }
 }
 
 
-static CharcellAccessibleInfo*
-find_cell_info (ChartableAccessible *table,
+static GucharmapChartableCellAccessibleInfo*
+find_cell_info (GucharmapChartableAccessible *table,
 		AtkObject *cell,
 		GList **list)
 {
   GList *l;
   GList *cell_list;
-  CharcellAccessibleInfo *cell_info;
+  GucharmapChartableCellAccessibleInfo *cell_info;
 
   cell_list = get_cell_list (table);
   for (l = cell_list; l; l= l->next)
     {
-      cell_info = (CharcellAccessibleInfo *) l->data;
+      cell_info = (GucharmapChartableCellAccessibleInfo *) l->data;
       if (cell_info->cell == cell)
         {
           if (list)
@@ -135,10 +133,10 @@ find_cell_info (ChartableAccessible *table,
 
 
 static void
-cell_info_remove (ChartableAccessible  *table,
+cell_info_remove (GucharmapChartableAccessible  *table,
 		  AtkObject *cell)
 {
-  CharcellAccessibleInfo *info;
+  GucharmapChartableCellAccessibleInfo *info;
   GList *l, *cell_list;
 
   info = find_cell_info (table, cell, &l);
@@ -160,25 +158,25 @@ cell_destroyed (gpointer data)
   AtkObject *cell;
   AtkObject *parent;
 
-  g_return_if_fail (IS_CHARCELL_ACCESSIBLE (data));
+  g_return_if_fail (IS_GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE (data));
 
   cell = ATK_OBJECT (data);
  
   parent = atk_object_get_parent (cell); 
-  g_return_if_fail (IS_CHARTABLE_ACCESSIBLE (parent));
-  cell_info_remove (CHARTABLE_ACCESSIBLE (parent), cell);
+  g_return_if_fail (IS_GUCHARMAP_CHARTABLE_ACCESSIBLE (parent));
+  cell_info_remove (GUCHARMAP_CHARTABLE_ACCESSIBLE (parent), cell);
 }
 
 
 static void
-cell_info_new (ChartableAccessible *table,
+cell_info_new (GucharmapChartableAccessible *table,
                AtkObject *cell,
                gint index)
 {
-  CharcellAccessibleInfo *info;
+  GucharmapChartableCellAccessibleInfo *info;
   GList *cell_list;
 
-  info = g_new (CharcellAccessibleInfo, 1);
+  info = g_new (GucharmapChartableCellAccessibleInfo, 1);
   info->cell = cell;
   info->index = index;
 
@@ -193,12 +191,12 @@ cell_info_new (ChartableAccessible *table,
 
 
 static AtkObject*
-chartable_accessible_ref_child (AtkObject *obj, gint i)
+gucharmap_chartable_accessible_ref_child (AtkObject *obj, gint i)
 {
   GtkWidget *widget;
-  GucharmapTable *chartable;
+  GucharmapChartable *chartable;
   AtkObject *child;
-  ChartableAccessible *table;
+  GucharmapChartableAccessible *table;
   gchar* name;
 
   widget = GTK_ACCESSIBLE (obj)->widget;
@@ -213,7 +211,7 @@ chartable_accessible_ref_child (AtkObject *obj, gint i)
   if (i > UNICHAR_MAX)
     return NULL;
 
-  table = CHARTABLE_ACCESSIBLE (obj);
+  table = GUCHARMAP_CHARTABLE_ACCESSIBLE (obj);
   /*
    * Check whether the child is cached
    */
@@ -223,14 +221,14 @@ chartable_accessible_ref_child (AtkObject *obj, gint i)
       return g_object_ref (child);
     } 
 
-  child = charcell_accessible_new ();
-  charcell_accessible_init (CHARCELL_ACCESSIBLE (child), 
+  child = gucharmap_chartable_cell_accessible_new ();
+  gucharmap_chartable_cell_accessible_init (GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE (child),
                             GTK_WIDGET (chartable), obj, i);
   /* Set the name of the cell */
   name = g_strdup_printf("U+%4.4X %s", i, gucharmap_get_unicode_name (i));
   atk_object_set_name (child, name);
   g_free (name);
-  set_cell_visibility (chartable, CHARCELL_ACCESSIBLE (child), FALSE);
+  set_cell_visibility (chartable, GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE (child), FALSE);
   cell_info_new (table, child, i);
 
   return child; 
@@ -238,12 +236,12 @@ chartable_accessible_ref_child (AtkObject *obj, gint i)
 
 
 static AtkObject* 
-chartable_accessible_ref_at (AtkTable *table,
+gucharmap_chartable_accessible_ref_at (AtkTable *table,
                              gint    row,
                              gint    column)
 {
   GtkWidget *widget;
-  GucharmapTable *chartable;
+  GucharmapChartable *chartable;
   AtkObject *child;
   gint index;
 
@@ -258,20 +256,20 @@ chartable_accessible_ref_at (AtkTable *table,
 
   index =  row * chartable->cols + column;
 
-  child = chartable_accessible_ref_child (ATK_OBJECT (table), index);
+  child = gucharmap_chartable_accessible_ref_child (ATK_OBJECT (table), index);
 
   return child;
 }
 
 
 static AtkObject*
-chartable_accessible_ref_accessible_at_point (AtkComponent *component,
+gucharmap_chartable_accessible_ref_accessible_at_point (AtkComponent *component,
                                               gint x, 
                                               gint y,
                                               AtkCoordType coord_type)
 {
   GtkWidget *widget;
-  GucharmapTable *chartable;
+  GucharmapChartable *chartable;
   gint x_pos, y_pos;
   gint row, col;
 
@@ -294,7 +292,7 @@ chartable_accessible_ref_accessible_at_point (AtkComponent *component,
 
   for (col = 0; col < chartable->cols; col++) 
     {
-      if (x_pos < _gucharmap_table_x_offset (chartable, col))
+      if (x_pos < _gucharmap_chartable_x_offset (chartable, col))
         {
           col--;
           break;
@@ -305,7 +303,7 @@ chartable_accessible_ref_accessible_at_point (AtkComponent *component,
 
   for (row = 0; row < chartable->rows; row++) 
     {
-      if (y_pos < _gucharmap_table_y_offset (chartable, row))
+      if (y_pos < _gucharmap_chartable_y_offset (chartable, row))
         {
           row--;
           break;
@@ -316,21 +314,21 @@ chartable_accessible_ref_accessible_at_point (AtkComponent *component,
 
   row += chartable->page_first_cell / chartable->cols;
 
-  return chartable_accessible_ref_at (ATK_TABLE (component), row, col);
+  return gucharmap_chartable_accessible_ref_at (ATK_TABLE (component), row, col);
 }
 
 
 static void
-chartable_accessible_component_interface_init (AtkComponentIface *iface)
+gucharmap_chartable_accessible_component_interface_init (AtkComponentIface *iface)
 {
   g_return_if_fail (iface != NULL);
 
-  iface->ref_accessible_at_point = chartable_accessible_ref_accessible_at_point;
+  iface->ref_accessible_at_point = gucharmap_chartable_accessible_ref_accessible_at_point;
 }
 
 
 static AtkStateSet*
-chartable_accessible_ref_state_set (AtkObject *obj)
+gucharmap_chartable_accessible_ref_state_set (AtkObject *obj)
 {
   AtkStateSet *state_set;
   GtkWidget *widget;
@@ -346,10 +344,10 @@ chartable_accessible_ref_state_set (AtkObject *obj)
 
 
 static gint
-chartable_accessible_get_n_children (AtkObject *obj)
+gucharmap_chartable_accessible_get_n_children (AtkObject *obj)
 {
   GtkWidget *widget;
-  GucharmapTable *chartable;
+  GucharmapChartable *chartable;
 
   widget = GTK_ACCESSIBLE (obj)->widget;
   if (widget == NULL)
@@ -365,7 +363,7 @@ chartable_accessible_get_n_children (AtkObject *obj)
 
 
 static void
-clear_cached_data (ChartableAccessible *table)
+clear_cached_data (GucharmapChartableAccessible *table)
 {
   GList *l;
   GList *cell_list;
@@ -397,12 +395,12 @@ get_focus_object (AtkObject *obj)
 }
 
 static void
-chartable_accessible_finalize (GObject *obj)
+gucharmap_chartable_accessible_finalize (GObject *obj)
 {
-  ChartableAccessible *table;
+  GucharmapChartableAccessible *table;
   AtkObject *focus_obj;
 
-  table = CHARTABLE_ACCESSIBLE (obj);
+  table = GUCHARMAP_CHARTABLE_ACCESSIBLE (obj);
 
   focus_obj = get_focus_object (ATK_OBJECT (obj));
   if (focus_obj)
@@ -417,28 +415,28 @@ chartable_accessible_finalize (GObject *obj)
 static void
 traverse_cells (AtkObject *obj)
 {
-  ChartableAccessible *table;
+  GucharmapChartableAccessible *table;
   GtkWidget *widget;
   GList *l;
   GList *cell_list;
-  GucharmapTable *chartable;
-  CharcellAccessibleInfo *info;
+  GucharmapChartable *chartable;
+  GucharmapChartableCellAccessibleInfo *info;
 
-  g_return_if_fail (IS_CHARTABLE_ACCESSIBLE (obj));
+  g_return_if_fail (IS_GUCHARMAP_CHARTABLE_ACCESSIBLE (obj));
 
   widget = GTK_ACCESSIBLE (obj)->widget;
   if (!widget)
     /* Widget is being deleted */
     return;
   
-  table = CHARTABLE_ACCESSIBLE (obj);
+  table = GUCHARMAP_CHARTABLE_ACCESSIBLE (obj);
   chartable = get_chartable (widget);
 
   cell_list = get_cell_list (table);
   for (l = cell_list; l; l = l->next)
     {
       info = l->data;
-      set_cell_visibility (chartable, CHARCELL_ACCESSIBLE (info->cell), TRUE);
+      set_cell_visibility (chartable, GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE (info->cell), TRUE);
     }
   g_signal_emit_by_name (obj, "visible_data_changed"); 
 }
@@ -463,35 +461,35 @@ size_allocated (GtkWidget     *widget,
 
 
 static AtkObject*
-find_object (GucharmapTable   *chartable,
+find_object (GucharmapChartable   *chartable,
              gunichar  uc,
              AtkObject *obj)
 {
   gint row, column;
 
   row = uc / chartable->cols;
-  column = _gucharmap_table_cell_column (chartable, uc);
+  column = _gucharmap_chartable_cell_column (chartable, uc);
 
   return atk_table_ref_at (ATK_TABLE (obj), row, column);
 }
 
 static void
-active_char_set (GucharmapTable  *chartable,
-                 guint    ui,
-                 gpointer data)
+sync_active_char (GucharmapChartable  *chartable,
+                  GParamSpec *pspec,
+                  gpointer data)
 {
   gunichar uc;
   AtkObject *child;
   AtkObject *focus_obj;
 
-  uc = (gunichar) ui;
+  uc = gucharmap_chartable_get_active_character (chartable);
 
   child = find_object (chartable, uc, data);
   focus_obj = get_focus_object (data);
   if (focus_obj != child)
     {
-      charcell_accessible_remove_state (CHARCELL_ACCESSIBLE (focus_obj), ATK_STATE_FOCUSED, FALSE);
-      charcell_accessible_add_state (CHARCELL_ACCESSIBLE (child), ATK_STATE_FOCUSED, FALSE);
+      gucharmap_chartable_cell_accessible_remove_state (GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE (focus_obj), ATK_STATE_FOCUSED, FALSE);
+      gucharmap_chartable_cell_accessible_add_state (GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE (child), ATK_STATE_FOCUSED, FALSE);
     }  
   g_object_unref (focus_obj);
   set_focus_object (data, child);
@@ -500,25 +498,25 @@ active_char_set (GucharmapTable  *chartable,
 
 
 static void
-chartable_accessible_initialize (AtkObject *obj,
+gucharmap_chartable_accessible_initialize (AtkObject *obj,
                                  gpointer  data)
 {
   GtkWidget *widget;
   AtkObject *focus_obj;
-  ChartableAccessible *table;
-  GucharmapTable *chartable;
+  GucharmapChartableAccessible *table;
+  GucharmapChartable *chartable;
 
   ATK_OBJECT_CLASS (parent_class)->initialize (obj, data);
 
   widget = GTK_WIDGET (data);
-  table = CHARTABLE_ACCESSIBLE (obj);
+  table = GUCHARMAP_CHARTABLE_ACCESSIBLE (obj);
   chartable = get_chartable (widget);
-  g_signal_connect (chartable->adjustment, "value_changed",
+  g_signal_connect (chartable->vadjustment, "value-changed",
                     G_CALLBACK (adjustment_changed), obj);
-  g_signal_connect (widget, "size_allocate",
+  g_signal_connect (widget, "size-allocate",
                     G_CALLBACK (size_allocated), obj);
-  g_signal_connect (chartable, "set_active_char",
-                    G_CALLBACK (active_char_set), obj);
+  g_signal_connect (chartable, "notify::active-character",
+                    G_CALLBACK (sync_active_char), obj);
 
   focus_obj = find_object (chartable, chartable->active_cell, obj);
   set_focus_object (obj, focus_obj);  
@@ -526,27 +524,27 @@ chartable_accessible_initialize (AtkObject *obj,
 
 
 static void
-chartable_accessible_class_init (ChartableAccessibleClass *klass)
+gucharmap_chartable_accessible_class_init (GucharmapChartableAccessibleClass *klass)
 {
   GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
   AtkObjectClass *class = ATK_OBJECT_CLASS (klass);
 
   parent_class = g_type_class_peek_parent (klass);
 
-  class->get_n_children = chartable_accessible_get_n_children;
-  class->ref_child = chartable_accessible_ref_child;
-  class->ref_state_set = chartable_accessible_ref_state_set;
-  class->initialize = chartable_accessible_initialize;
+  class->get_n_children = gucharmap_chartable_accessible_get_n_children;
+  class->ref_child = gucharmap_chartable_accessible_ref_child;
+  class->ref_state_set = gucharmap_chartable_accessible_ref_state_set;
+  class->initialize = gucharmap_chartable_accessible_initialize;
 
-  gobject_class->finalize = chartable_accessible_finalize;
+  gobject_class->finalize = gucharmap_chartable_accessible_finalize;
 }
 
 
 static gint
-chartable_accessible_get_n_columns (AtkTable *table)
+gucharmap_chartable_accessible_get_n_columns (AtkTable *table)
 {
   GtkWidget *widget;
-  GucharmapTable *chartable;
+  GucharmapChartable *chartable;
 
   widget = GTK_ACCESSIBLE (table)->widget;
   if (widget == NULL)
@@ -562,7 +560,7 @@ chartable_accessible_get_n_columns (AtkTable *table)
 
 
 static gint
-chartable_accessible_get_column_extent_at (AtkTable       *table,
+gucharmap_chartable_accessible_get_column_extent_at (AtkTable       *table,
                                            gint           row,
                                            gint           column)
 {
@@ -578,10 +576,10 @@ chartable_accessible_get_column_extent_at (AtkTable       *table,
 
 
 static gint
-chartable_accessible_get_n_rows (AtkTable *table)
+gucharmap_chartable_accessible_get_n_rows (AtkTable *table)
 {
   GtkWidget *widget;
-  GucharmapTable *chartable;
+  GucharmapChartable *chartable;
   gint n_rows;
 
   widget = GTK_ACCESSIBLE (table)->widget;
@@ -600,7 +598,7 @@ chartable_accessible_get_n_rows (AtkTable *table)
 
  
 static gint
-chartable_accessible_get_row_extent_at (AtkTable *table,
+gucharmap_chartable_accessible_get_row_extent_at (AtkTable *table,
                                         gint    row,
                                         gint    column)
 {
@@ -616,12 +614,12 @@ chartable_accessible_get_row_extent_at (AtkTable *table,
 
  
 static gint
-chartable_accessible_get_index_at (AtkTable *table,
+gucharmap_chartable_accessible_get_index_at (AtkTable *table,
                                    gint     row,
                                    gint     column)
 {
   GtkWidget *widget;
-  GucharmapTable *chartable;
+  GucharmapChartable *chartable;
 
   widget = GTK_ACCESSIBLE (table)->widget;
   if (widget == NULL)
@@ -637,11 +635,11 @@ chartable_accessible_get_index_at (AtkTable *table,
 
 
 static gint
-chartable_accessible_get_column_at_index (AtkTable *table,
+gucharmap_chartable_accessible_get_column_at_index (AtkTable *table,
                                           gint     index)
 {
   GtkWidget *widget;
-  GucharmapTable *chartable;
+  GucharmapChartable *chartable;
 
   widget = GTK_ACCESSIBLE (table)->widget;
   if (widget == NULL)
@@ -657,11 +655,11 @@ chartable_accessible_get_column_at_index (AtkTable *table,
 
 
 static gint
-chartable_accessible_get_row_at_index (AtkTable *table,
+gucharmap_chartable_accessible_get_row_at_index (AtkTable *table,
                                        gint     index)
 {
   GtkWidget *widget;
-  GucharmapTable *chartable;
+  GucharmapChartable *chartable;
 
   widget = GTK_ACCESSIBLE (table)->widget;
   if (widget == NULL)
@@ -677,23 +675,23 @@ chartable_accessible_get_row_at_index (AtkTable *table,
 
 
 static void
-chartable_accessible_table_interface_init (AtkTableIface *iface)
+gucharmap_chartable_accessible_table_interface_init (AtkTableIface *iface)
 {
   g_return_if_fail (iface != NULL);
 
-  iface->ref_at = chartable_accessible_ref_at;
-  iface->get_n_columns = chartable_accessible_get_n_columns;
-  iface->get_column_extent_at = chartable_accessible_get_column_extent_at;
-  iface->get_n_rows = chartable_accessible_get_n_rows;
-  iface->get_row_extent_at = chartable_accessible_get_row_extent_at;
-  iface->get_index_at = chartable_accessible_get_index_at;
-  iface->get_column_at_index = chartable_accessible_get_column_at_index;
-  iface->get_row_at_index = chartable_accessible_get_row_at_index;
+  iface->ref_at = gucharmap_chartable_accessible_ref_at;
+  iface->get_n_columns = gucharmap_chartable_accessible_get_n_columns;
+  iface->get_column_extent_at = gucharmap_chartable_accessible_get_column_extent_at;
+  iface->get_n_rows = gucharmap_chartable_accessible_get_n_rows;
+  iface->get_row_extent_at = gucharmap_chartable_accessible_get_row_extent_at;
+  iface->get_index_at = gucharmap_chartable_accessible_get_index_at;
+  iface->get_column_at_index = gucharmap_chartable_accessible_get_column_at_index;
+  iface->get_row_at_index = gucharmap_chartable_accessible_get_row_at_index;
 }
 
 
 GType
-chartable_accessible_get_type (void)
+gucharmap_chartable_accessible_get_type (void)
 {
   static GType type = 0;
 
@@ -701,13 +699,13 @@ chartable_accessible_get_type (void)
   {
     static GTypeInfo tinfo =
     {
-      sizeof (ChartableAccessibleClass),
+      sizeof (GucharmapChartableAccessibleClass),
       (GBaseInitFunc) NULL, /* base init */
       (GBaseFinalizeFunc) NULL, /* base finalize */
-      (GClassInitFunc) chartable_accessible_class_init, /* class init */
+      (GClassInitFunc) gucharmap_chartable_accessible_class_init, /* class init */
       (GClassFinalizeFunc) NULL, /* class finalize */
       NULL, /* class data */
-      sizeof (ChartableAccessible), /* instance size */
+      sizeof (GucharmapChartableAccessible), /* instance size */
       0, /* nb preallocs */
       (GInstanceInitFunc) NULL, /* instance init */
       NULL /* value table */
@@ -715,14 +713,14 @@ chartable_accessible_get_type (void)
 
     static const GInterfaceInfo atk_table_info =
     {
-        (GInterfaceInitFunc) chartable_accessible_table_interface_init,
+        (GInterfaceInitFunc) gucharmap_chartable_accessible_table_interface_init,
         (GInterfaceFinalizeFunc) NULL,
         NULL
     };
 
     static const GInterfaceInfo atk_component_info =
     {
-        (GInterfaceInitFunc) chartable_accessible_component_interface_init,
+        (GInterfaceInitFunc) gucharmap_chartable_accessible_component_interface_init,
         (GInterfaceFinalizeFunc) NULL,
         NULL
     };
@@ -745,7 +743,7 @@ chartable_accessible_get_type (void)
     tinfo.instance_size = query.instance_size;
 
     type = g_type_register_static (derived_atk_type,
-                                   "ChartableAccessible", &tinfo, 0);
+                                   "GucharmapChartableAccessible", &tinfo, 0);
 
     g_type_add_interface_static (type, ATK_TYPE_TABLE,
                                  &atk_table_info);
@@ -758,14 +756,14 @@ chartable_accessible_get_type (void)
 
 
 AtkObject* 
-chartable_accessible_new (GtkWidget *widget)
+gucharmap_chartable_accessible_new (GtkWidget *widget)
 {
   GObject *object;
   AtkObject *accessible;
 
   g_return_val_if_fail (GTK_IS_DRAWING_AREA (widget), NULL);
 
-  object = g_object_new (chartable_accessible_get_type (), NULL);
+  object = g_object_new (gucharmap_chartable_accessible_get_type (), NULL);
   accessible = ATK_OBJECT (object);
 
   atk_object_initialize (accessible, widget);
@@ -773,4 +771,3 @@ chartable_accessible_new (GtkWidget *widget)
   accessible->role = ATK_ROLE_TABLE;
   return accessible;
 }
-

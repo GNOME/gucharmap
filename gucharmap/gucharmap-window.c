@@ -1,4 +1,3 @@
-/* $Id$ */
 /*
  * Copyright (c) 2004 Noah Levitt
  *

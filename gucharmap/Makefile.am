@@ -1,4 +1,3 @@
-## $Id: Makefile.am,v 1.82 2006/09/04 22:41:10 behdad Exp $
 ##
 ## Copyright (c) 2003  Noah Levitt
 ##
@@ -17,6 +16,8 @@
 ## 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
 ##
 
+NULL =
+
 localedir = $(datadir)/locale
 
 BUILT_SOURCES = gucharmap-marshal.c gucharmap-marshal.h
@@ -24,31 +25,30 @@ BUILT_SOURCES = gucharmap-marshal.c gucharmap-marshal.h
 lib_LTLIBRARIES = libgucharmap.la
 
 libgucharmap_la_SOURCES = \
-                          gucharmap-marshal.c gucharmap-marshal.h \
-                          gucharmap-intl.c gucharmap-intl.h \
-                          gucharmap-charmap.c gucharmap-charmap.h \
-                          gucharmap-chartable.c gucharmap-chartable.h gucharmap-chartable-private.h \
-                          gucharmap-mini-fontsel.c gucharmap-mini-fontsel.h \
-                          gucharmap-table.c gucharmap-table.h \
-                          gucharmap-unicode-info.c gucharmap-unicode-info.h \
-                          gucharmap-window.c gucharmap-window.h \
-			  gucharmap-codepoint-list.c gucharmap-codepoint-list.h \
-			  gucharmap-script-codepoint-list.c gucharmap-script-codepoint-list.h \
-			  gucharmap-chapters-model.c gucharmap-chapters-model.h \
-			  gucharmap-chapters.c gucharmap-chapters.h \
-			  gucharmap-chapters-view.c gucharmap-chapters-view.h \
-			  gucharmap-block-chapters-model.c gucharmap-block-chapters-model.h \
-			  gucharmap-block-chapters.c gucharmap-block-chapters.h \
-			  gucharmap-script-chapters-model.c gucharmap-script-chapters-model.h \
-			  gucharmap-script-chapters.c gucharmap-script-chapters.h \
-			  unicode-blocks.h unicode-categories.h unicode-names.h \
-			  unicode-nameslist.h unicode-scripts.h unicode-unihan.h \
-			  gucharmap-search-dialog.h gucharmap-search-dialog.c \
-			  gucharmap-settings.h gucharmap-settings.c
-
-#                           chartable_accessible.c chartable_accessible.h \
-#                           charcell_accessible.c charcell_accessible.h \
-#
+	gucharmap-block-chapters.c gucharmap-block-chapters.h \
+	gucharmap-block-chapters-model.c gucharmap-block-chapters-model.h \
+	gucharmap-chapters.c gucharmap-chapters.h \
+	gucharmap-chapters-model.c gucharmap-chapters-model.h \
+	gucharmap-chapters-view.c gucharmap-chapters-view.h \
+	gucharmap-charmap.c gucharmap-charmap.h \
+	gucharmap-chartable-accessible.c gucharmap-chartable-accessible.h \
+	gucharmap-chartable-cell-accessible.c gucharmap-chartable-cell-accessible.h \
+	gucharmap-chartable.c gucharmap-chartable.h gucharmap-chartable-private.h \
+	gucharmap-codepoint-list.c gucharmap-codepoint-list.h \
+	gucharmap-intl.c gucharmap-intl.h \
+	gucharmap-marshal.c gucharmap-marshal.h \
+	gucharmap-mini-fontsel.c gucharmap-mini-fontsel.h \
+	gucharmap-script-chapters.c gucharmap-script-chapters.h \
+	gucharmap-script-chapters-model.c gucharmap-script-chapters-model.h \
+	gucharmap-script-codepoint-list.c gucharmap-script-codepoint-list.h \
+	gucharmap-search-dialog.h gucharmap-search-dialog.c \
+	gucharmap-settings.h gucharmap-settings.c \
+	gucharmap-table.c gucharmap-table.h \
+	gucharmap-unicode-info.c gucharmap-unicode-info.h \
+	gucharmap-window.c gucharmap-window.h \
+	unicode-blocks.h unicode-categories.h unicode-names.h \
+	unicode-nameslist.h unicode-scripts.h unicode-unihan.h \
+	$(NULL)
 
 libgucharmap_la_CPPFLAGS = \
 	-I$(top_srcdir)			\
@@ -75,24 +75,25 @@ libgucharmap_la_LIBADD = \
 	$(INTL_LIBS)
 
 libgucharmapincludedir = $(includedir)/gucharmap
-libgucharmapinclude_HEADERS = gucharmap.h \
-			      gucharmap-block-chapters.h \
-			      gucharmap-block-chapters-model.h \
-			      gucharmap-chapters.h \
-			      gucharmap-chapters-model.h \
-			      gucharmap-chapters-view.h \
-                              gucharmap-charmap.h \
-			      gucharmap-codepoint-list.h \
-                              gucharmap-mini-fontsel.h \
-			      gucharmap-script-chapters.h \
-			      gucharmap-script-chapters-model.h \
-			      gucharmap-script-codepoint-list.h \
-			      gucharmap-search-dialog.h \
-                              gucharmap-table.h \
-                              gucharmap-unicode-info.h \
-                              gucharmap-window.h \
-			      gucharmap-settings.h
-
+libgucharmapinclude_HEADERS = \
+	gucharmap-block-chapters.h \
+	gucharmap-block-chapters-model.h \
+	gucharmap-chapters.h \
+	gucharmap-chapters-model.h \
+	gucharmap-chapters-view.h \
+	gucharmap-charmap.h \
+	gucharmap-codepoint-list.h \
+	gucharmap.h \
+	gucharmap-mini-fontsel.h \
+	gucharmap-script-chapters.h \
+	gucharmap-script-chapters-model.h \
+	gucharmap-script-codepoint-list.h \
+	gucharmap-search-dialog.h \
+	gucharmap-settings.h \
+	gucharmap-table.h \
+	gucharmap-unicode-info.h \
+	gucharmap-window.h \
+	$(NULL)
 
 bin_PROGRAMS = gucharmap
 

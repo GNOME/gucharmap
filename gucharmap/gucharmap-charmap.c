@@ -1,4 +1,3 @@
-/* $Id$ */
 /*
  * Copyright (c) 2004 Noah Levitt
  *
@@ -30,7 +29,6 @@
 #include "gucharmap-intl.h"
 #include "gucharmap-marshal.h"
 #include "gucharmap-settings.h"
-#include "chartable_accessible.h"
 
 gboolean _gucharmap_unicode_has_nameslist_entry (gunichar uc);
 

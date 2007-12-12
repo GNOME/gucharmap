@@ -21,6 +21,66 @@
 
 G_BEGIN_DECLS
 
+struct _GucharmapChartable
+{
+  GtkDrawingArea parent_instance;
+
+  /* scrollable implementation */
+  GtkAdjustment *vadjustment;
+  gulong vadjustment_changed_handler_id;
+
+  /* Font */
+  PangoFontDescription *font_desc;
+  int drag_font_size;
+
+  int bare_minimal_column_width;
+  int bare_minimal_row_height;
+
+  /* rows and columns on a page */
+  gint rows, cols;
+
+  GdkPixmap *pixmap;
+
+  PangoLayout *pango_layout;
+
+  gint page_first_cell;
+  gint active_cell;
+  gint old_page_first_cell;
+  gint old_active_cell;
+
+  GtkWidget *zoom_window;
+  GtkWidget *zoom_image;
+
+  /* for dragging (#114534) */
+  gdouble click_x, click_y; 
+
+  GtkTargetList *target_list;
+
+  GucharmapCodepointList *codepoint_list;
+  int last_cell; /* from gucharmap_codepoint_list_get_last_index */
+  gboolean codepoint_list_changed;
+
+  /* Settings */
+  guint snap_pow2_enabled : 1;
+  guint zoom_mode_enabled : 1;
+};
+
+struct _GucharmapChartableClass
+{
+  GtkDrawingAreaClass parent_class;
+
+  void    (* set_scroll_adjustments) (GucharmapChartable *chartable,
+                                      GtkAdjustment      *hadjustment,
+                                      GtkAdjustment      *vadjustment);
+  gboolean (* move_cursor)           (GucharmapChartable *chartable,
+                                      GtkMovementStep     step,
+                                      gint                count);
+  void (* activate) (GucharmapChartable *chartable);
+
+  void (* set_active_char) (GucharmapChartable *chartable, guint ch);
+  void (* gucharmap_chartable_emit_status_message) (GucharmapChartable *chartable, const gchar *message);
+};
+
 gint _gucharmap_chartable_cell_column	(GucharmapChartable *chartable,
 					 guint cell);
 gint _gucharmap_chartable_column_width	(GucharmapChartable *chartable,
