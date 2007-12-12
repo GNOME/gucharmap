@@ -1425,6 +1425,11 @@ gucharmap_chartable_set_adjustments (GucharmapChartable *chartable,
                                      GtkAdjustment *hadjustment,
                                      GtkAdjustment *vadjustment)
 {
+  if (vadjustment)
+    g_return_if_fail (GTK_IS_ADJUSTMENT (vadjustment));
+  else
+    vadjustment = GTK_ADJUSTMENT (gtk_adjustment_new (0.0, 0.0, 0.0, 0.0, 0.0, 0.0));
+
   if (chartable->vadjustment)
     {
       g_signal_handler_disconnect (chartable->vadjustment,
@@ -1436,14 +1441,14 @@ gucharmap_chartable_set_adjustments (GucharmapChartable *chartable,
 
   if (vadjustment)
     {
-      chartable->vadjustment = g_object_ref (vadjustment);
+      chartable->vadjustment = g_object_ref_sink (vadjustment);
       chartable->vadjustment_changed_handler_id =
           g_signal_connect (vadjustment, "value-changed",
                             G_CALLBACK (vadjustment_value_changed_cb),
                             chartable);
     }
-  
-  // FIXMEchpe what about the hadjustment ?
+
+  update_scrollbar_adjustment (chartable);
 
   // and remember to update the accessible too!!!
   // see gtkiconview.c for example
