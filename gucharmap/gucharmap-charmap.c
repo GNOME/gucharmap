@@ -298,7 +298,7 @@ set_details (GucharmapCharmap *charmap,
   gunichar2 *utf16;
 
   buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (charmap->details));
-  gtk_text_buffer_set_text (buffer, "", -1);
+  gtk_text_buffer_set_text (buffer, "", 0);
 
   gtk_text_buffer_get_start_iter (buffer, &iter);
   gtk_text_buffer_place_cursor (buffer, &iter);
@@ -499,7 +499,8 @@ active_char_set (GtkWidget        *widget,
   const gchar **temps;
   gint i;
 
-  set_details (charmap, wc);
+  if (charmap->showing_details_page)
+    set_details (charmap, wc);
 
   g_idle_add (gucharmap_active_char_save, GUINT_TO_POINTER(wc));
 
@@ -767,8 +768,27 @@ make_details_page (GucharmapCharmap *charmap)
   return scrolled_window;
 }
 
+static void
+notebook_switch_page (GtkNotebook *notebook,
+                      GtkNotebookPage *page /* useless */,
+                      guint page_num,
+                      GucharmapCharmap *charmap)
+{
+  charmap->showing_details_page = (page_num == 1);
+
+  if (charmap->showing_details_page)
+    set_details (charmap, gucharmap_table_get_active_character (charmap->chartable));
+  else
+    {
+      GtkTextBuffer *buffer;
+
+      buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (charmap->details));
+      gtk_text_buffer_set_text (buffer, "", 0);
+    }
+}
+
 static GtkWidget *
-make_chartable_pane (GucharmapCharmap       *charmap)
+make_chartable_pane (GucharmapCharmap *charmap)
 {
   GtkWidget *notebook;
 
@@ -821,6 +841,8 @@ gucharmap_charmap_new (GucharmapChapters *chapters)
   pane2 = make_chartable_pane (charmap);
   gtk_paned_pack1 (GTK_PANED (charmap), GTK_WIDGET (chapters), FALSE, TRUE);
   gtk_paned_pack2 (GTK_PANED (charmap), pane2, TRUE, TRUE);
+  g_signal_connect (pane2, "switch-page",
+                    G_CALLBACK (notebook_switch_page), charmap);
 
   gucharmap_charmap_go_to_character (charmap, gucharmap_settings_get_last_char ());
 

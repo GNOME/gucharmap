@@ -47,8 +47,8 @@ struct _GucharmapCharmap
 
   GucharmapTable *chartable;
 
-  /* rows and columns on a page */
-  gint rows, cols;
+  gint _unused_1;
+  gboolean showing_details_page;
 
   GtkWidget *details;  /* GtkTextView * */
 
