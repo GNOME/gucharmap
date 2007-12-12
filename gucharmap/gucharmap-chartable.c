@@ -94,7 +94,7 @@ struct _GucharmapChartableClass
   void (* activate) (GucharmapChartable *chartable);
 
   void (* set_active_char) (GucharmapChartable *chartable, guint ch);
-  void (* status_message) (GucharmapChartable *chartable, const gchar *message);
+  void (* gucharmap_chartable_emit_status_message) (GucharmapChartable *chartable, const gchar *message);
 };
 
 enum 
@@ -142,7 +142,8 @@ gucharmap_chartable_set_font_desc (GucharmapChartable *chartable,
 }
 
 static void
-status_message (GucharmapChartable *chartable, const gchar *message)
+gucharmap_chartable_emit_status_message (GucharmapChartable *chartable,
+                                         const char *message)
 {
   g_signal_emit (chartable, signals[STATUS_MESSAGE], 0, message);
 }
@@ -1202,12 +1203,12 @@ gucharmap_chartable_drag_data_received (GtkWidget *widget,
   wc = g_utf8_get_char_validated (text, -1);
 
   if (wc == (gunichar)(-2) || wc == (gunichar)(-1) || wc > UNICHAR_MAX)
-    status_message (chartable, _("Unknown character, unable to identify."));
+    gucharmap_chartable_emit_status_message (chartable, _("Unknown character, unable to identify."));
   else if (gucharmap_codepoint_list_get_index (chartable->codepoint_list, wc) == (guint)(-1))
-    status_message (chartable, _("Not found."));
+    gucharmap_chartable_emit_status_message (chartable, _("Not found."));
   else
     {
-      status_message (chartable, _("Character found."));
+      gucharmap_chartable_emit_status_message (chartable, _("Character found."));
       set_active_char (chartable, wc);
       _gucharmap_chartable_redraw (chartable, TRUE);
     }
@@ -1675,7 +1676,7 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
 
   signals[STATUS_MESSAGE] =
     g_signal_new ("status-message", gucharmap_chartable_get_type (), G_SIGNAL_RUN_FIRST,
-                  G_STRUCT_OFFSET (GucharmapChartableClass, status_message),
+                  G_STRUCT_OFFSET (GucharmapChartableClass, gucharmap_chartable_emit_status_message),
                   NULL, NULL, g_cclosure_marshal_VOID__STRING, G_TYPE_NONE,
                   1, G_TYPE_STRING);
 
