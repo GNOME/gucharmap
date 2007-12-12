@@ -1174,6 +1174,9 @@ gucharmap_chartable_expose_event (GtkWidget *widget,
                                   GdkEventExpose *event)
 {
   GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (widget);
+  GdkRectangle *rects;
+  int i, n_rects;
+  GdkGC *gc;
 
   gdk_window_set_back_pixmap (widget->window, NULL, FALSE);
 
@@ -1195,11 +1198,6 @@ gucharmap_chartable_expose_event (GtkWidget *widget,
 #endif
     }
 
-#if 1
-{
-  GdkRectangle *rects;
-  int i, n_rects;
-
   if (gdk_region_empty (event->region))
     return FALSE;
 
@@ -1207,6 +1205,7 @@ gucharmap_chartable_expose_event (GtkWidget *widget,
   if (n_rects == 0)
     return FALSE;
 
+#if 1
   {
     g_print ("Exposing area %d:%d@(%d,%d) with %d rects ", event->area.width, event->area.height,
              event->area.x, event->area.y, n_rects);
@@ -1215,16 +1214,17 @@ gucharmap_chartable_expose_event (GtkWidget *widget,
     }
     g_print ("\n");
   }
-}
 #endif
 
-  /* FIXMEchpe: maybe draw each region separately? */
-  gdk_draw_drawable (widget->window,
-                     widget->style->fg_gc[GTK_STATE_NORMAL],
-                     chartable->pixmap,
-                     event->area.x, event->area.y,
-                     event->area.x, event->area.y,
-                     event->area.width, event->area.height);
+  gc = widget->style->fg_gc[GTK_STATE_NORMAL];
+  for (i = 0; i < n_rects; ++i) {
+    gdk_draw_drawable (widget->window,
+                       gc,
+                       chartable->pixmap,
+                       rects[i].x, rects[i].y,
+                       rects[i].x, rects[i].y,
+                       rects[i].width, rects[i].height);
+  }
 
   /* no need to chain up */
   return FALSE;
