@@ -1089,7 +1089,7 @@ gucharmap_chartable_button_press (GtkWidget *widget,
   /* double-click */
   if (event->button == 1 && event->type == GDK_2BUTTON_PRESS)
     {
-      g_signal_emit (chartable, signals[ACTIVATE], 0, gucharmap_chartable_get_active_character (chartable));
+      g_signal_emit (chartable, signals[ACTIVATE], 0);
     }
   /* single-click */ 
   else if (event->button == 1 && event->type == GDK_BUTTON_PRESS) 
@@ -1557,7 +1557,7 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
   klass->activate = NULL;
   klass->set_active_char = NULL;
 
-  widget_class->activate_signal =
+  widget_class->activate_signal = signals[ACTIVATE] =
     g_signal_new ("activate",
                   G_TYPE_FROM_CLASS (object_class),
                   G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
