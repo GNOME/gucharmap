@@ -39,18 +39,15 @@ typedef struct
 static gpointer gucharmap_chartable_accessible_parent_class;
 
 static GList*
-get_cell_list (GucharmapChartableAccessible *table)
+get_cell_list (GucharmapChartableAccessible *accessible)
 {
-  gpointer data;
-
-  data = g_object_get_data (G_OBJECT (table), "chartable-cell-data");
-  return (GList *)data;
+  return accessible->cells;
 }
 
 static void
-set_cell_list (GucharmapChartableAccessible *table, gpointer data)
+set_cell_list (GucharmapChartableAccessible *accessible, GList *list)
 {
-  g_object_set_data (G_OBJECT (table), "chartable-cell-data", data);
+  accessible->cells = list;
 }
 
 static AtkObject*
