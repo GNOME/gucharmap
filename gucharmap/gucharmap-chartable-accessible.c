@@ -35,8 +35,7 @@ typedef struct
   gint      index;
 } GucharmapChartableCellAccessibleInfo;
 
-static gpointer parent_class = NULL;
-
+static gpointer gucharmap_chartable_accessible_parent_class;
 
 static GList*
 get_cell_list (GucharmapChartableAccessible *table)
@@ -222,7 +221,7 @@ gucharmap_chartable_accessible_ref_child (AtkObject *obj, gint i)
     } 
 
   child = gucharmap_chartable_cell_accessible_new ();
-  gucharmap_chartable_cell_accessible_init (GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE (child),
+  gucharmap_chartable_cell_accessible_initialise (GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE (child),
                             GTK_WIDGET (chartable), obj, i);
   /* Set the name of the cell */
   name = g_strdup_printf("U+%4.4X %s", i, gucharmap_get_unicode_name (i));
@@ -333,7 +332,7 @@ gucharmap_chartable_accessible_ref_state_set (AtkObject *obj)
   AtkStateSet *state_set;
   GtkWidget *widget;
 
-  state_set = ATK_OBJECT_CLASS (parent_class)->ref_state_set (obj);
+  state_set = ATK_OBJECT_CLASS (gucharmap_chartable_accessible_parent_class)->ref_state_set (obj);
   widget = GTK_ACCESSIBLE (obj)->widget;
 
   if (widget != NULL)
@@ -408,9 +407,8 @@ gucharmap_chartable_accessible_finalize (GObject *obj)
 
   clear_cached_data (table);
 
-  G_OBJECT_CLASS (parent_class)->finalize (obj);
+  G_OBJECT_CLASS (gucharmap_chartable_accessible_parent_class)->finalize (obj);
 }
-
 
 static void
 traverse_cells (AtkObject *obj)
@@ -506,7 +504,7 @@ gucharmap_chartable_accessible_initialize (AtkObject *obj,
   GucharmapChartableAccessible *table;
   GucharmapChartable *chartable;
 
-  ATK_OBJECT_CLASS (parent_class)->initialize (obj, data);
+  ATK_OBJECT_CLASS (gucharmap_chartable_accessible_parent_class)->initialize (obj, data);
 
   widget = GTK_WIDGET (data);
   table = GUCHARMAP_CHARTABLE_ACCESSIBLE (obj);
@@ -528,8 +526,6 @@ gucharmap_chartable_accessible_class_init (GucharmapChartableAccessibleClass *kl
 {
   GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
   AtkObjectClass *class = ATK_OBJECT_CLASS (klass);
-
-  parent_class = g_type_class_peek_parent (klass);
 
   class->get_n_children = gucharmap_chartable_accessible_get_n_children;
   class->ref_child = gucharmap_chartable_accessible_ref_child;
@@ -689,85 +685,84 @@ gucharmap_chartable_accessible_table_interface_init (AtkTableIface *iface)
   iface->get_row_at_index = gucharmap_chartable_accessible_get_row_at_index;
 }
 
-
 GType
 gucharmap_chartable_accessible_get_type (void)
 {
-  static GType type = 0;
+  static volatile gsize type__volatile = 0;
 
-  if (!type)
-  {
-    static GTypeInfo tinfo =
+  if (g_once_init_enter (&type__volatile))
     {
-      sizeof (GucharmapChartableAccessibleClass),
-      (GBaseInitFunc) NULL, /* base init */
-      (GBaseFinalizeFunc) NULL, /* base finalize */
-      (GClassInitFunc) gucharmap_chartable_accessible_class_init, /* class init */
-      (GClassFinalizeFunc) NULL, /* class finalize */
-      NULL, /* class data */
-      sizeof (GucharmapChartableAccessible), /* instance size */
-      0, /* nb preallocs */
-      (GInstanceInitFunc) NULL, /* instance init */
-      NULL /* value table */
-    };
+      GTypeInfo typeinfo =
+      {
+        sizeof (GucharmapChartableAccessibleClass),
+        (GBaseInitFunc) NULL, /* base init */
+        (GBaseFinalizeFunc) NULL, /* base finalize */
+        (GClassInitFunc) gucharmap_chartable_accessible_class_init, /* class init */
+        (GClassFinalizeFunc) NULL, /* class finalize */
+        NULL, /* class data */
+        sizeof (GucharmapChartableAccessible), /* instance size */
+        0, /* nb preallocs */
+        (GInstanceInitFunc) NULL, /* instance init */
+        NULL /* value table */
+      };
+      const GInterfaceInfo atk_table_info =
+      {
+          (GInterfaceInitFunc) gucharmap_chartable_accessible_table_interface_init,
+          (GInterfaceFinalizeFunc) NULL,
+          NULL
+      };
+      const GInterfaceInfo atk_component_info =
+      {
+          (GInterfaceInitFunc) gucharmap_chartable_accessible_component_interface_init,
+          (GInterfaceFinalizeFunc) NULL,
+          NULL
+      };
+      AtkObjectFactory *factory;
+      GType derived_type;
+      GTypeQuery query;
+      GType derived_atk_type;
+      GType type;
 
-    static const GInterfaceInfo atk_table_info =
-    {
-        (GInterfaceInitFunc) gucharmap_chartable_accessible_table_interface_init,
-        (GInterfaceFinalizeFunc) NULL,
-        NULL
-    };
+      /* Figure out the size of the class and instance we are deriving from */
+      derived_type = g_type_parent (GUCHARMAP_TYPE_CHARTABLE);
+      factory = atk_registry_get_factory (atk_get_default_registry (), 
+                                          derived_type);
+      derived_atk_type = atk_object_factory_get_accessible_type (factory);
+      g_type_query (derived_atk_type, &query);
+      typeinfo.class_size = query.class_size;
+      typeinfo.instance_size = query.instance_size;
 
-    static const GInterfaceInfo atk_component_info =
-    {
-        (GInterfaceInitFunc) gucharmap_chartable_accessible_component_interface_init,
-        (GInterfaceFinalizeFunc) NULL,
-        NULL
-    };
+      type = g_type_register_static (derived_atk_type,
+                                     "GucharmapChartableAccessible",
+                                     &typeinfo, 0);
 
-    /*
-     * Figure out the size of the class and instance
-     * we are deriving from
-     */
-    AtkObjectFactory *factory;
-    GType derived_type;
-    GTypeQuery query;
-    GType derived_atk_type;
+      g_type_add_interface_static (type, ATK_TYPE_TABLE,
+                                   &atk_table_info);
+      g_type_add_interface_static (type, ATK_TYPE_COMPONENT,
+                                   &atk_component_info);
 
-    derived_type = g_type_parent (GTK_TYPE_DRAWING_AREA);
-    factory = atk_registry_get_factory (atk_get_default_registry (), 
-                                        derived_type);
-    derived_atk_type = atk_object_factory_get_accessible_type (factory);
-    g_type_query (derived_atk_type, &query);
-    tinfo.class_size = query.class_size;
-    tinfo.instance_size = query.instance_size;
+      g_once_init_leave (&type__volatile, type);
+    }
 
-    type = g_type_register_static (derived_atk_type,
-                                   "GucharmapChartableAccessible", &tinfo, 0);
-
-    g_type_add_interface_static (type, ATK_TYPE_TABLE,
-                                 &atk_table_info);
-    g_type_add_interface_static (type, ATK_TYPE_COMPONENT,
-                                 &atk_component_info);
-  }
-
-  return type;
+  return type__volatile;
 }
 
+/* API */
 
 AtkObject* 
-gucharmap_chartable_accessible_new (GtkWidget *widget)
+gucharmap_chartable_accessible_new (GucharmapChartable *chartable)
 {
   GObject *object;
   AtkObject *accessible;
 
-  g_return_val_if_fail (GTK_IS_DRAWING_AREA (widget), NULL);
+  g_assert (IS_GUCHARMAP_CHARTABLE (chartable));
 
   object = g_object_new (gucharmap_chartable_accessible_get_type (), NULL);
   accessible = ATK_OBJECT (object);
 
-  atk_object_initialize (accessible, widget);
-
+  /* atk is fucked up... */
+  atk_object_initialize (accessible, GTK_WIDGET (chartable));
   accessible->role = ATK_ROLE_TABLE;
+
   return accessible;
 }

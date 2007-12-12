@@ -26,29 +26,32 @@
 #include "gucharmap.h"
 #include "gucharmap-chartable.h"
 #include "gucharmap-chartable-private.h"
+#include "gucharmap-chartable-accessible.h"
 #include "gucharmap-chartable-cell-accessible.h"
 
-gpointer parent_class; /* FIXME */
+static void gucharmap_chartable_cell_accessible_class_init (GucharmapChartableCellAccessibleClass *klass);
+static void gucharmap_chartable_cell_accessible_init (GucharmapChartableCellAccessible *cell);
+static void gucharmap_chartable_cell_accessible_component_interface_init (AtkComponentIface *iface);
+static void gucharmap_chartable_cell_accessible_action_interface_init (AtkActionIface *iface);
+
+G_DEFINE_TYPE_WITH_CODE (GucharmapChartableCellAccessible,
+                         gucharmap_chartable_cell_accessible,
+                         ATK_TYPE_OBJECT,
+                         G_IMPLEMENT_INTERFACE (ATK_TYPE_COMPONENT,
+                                                gucharmap_chartable_cell_accessible_component_interface_init)
+                         G_IMPLEMENT_INTERFACE (ATK_TYPE_ACTION,
+                                                gucharmap_chartable_cell_accessible_action_interface_init))
 
 static void
-gucharmap_chartable_cell_accessible_object_finalize (GObject *obj)
+gucharmap_chartable_cell_accessible_destroyed (GtkWidget       *widget,
+                    GucharmapChartableCellAccessible        *cell)
 {
-  GucharmapChartableCellAccessible *cell = GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE (obj);
-
-  if (cell->activate_description)
-      g_free (cell->activate_description);
-
-  if (cell->action_idle_handler)
-    {
-      g_source_remove (cell->action_idle_handler);
-      cell->action_idle_handler = 0;
-    }
-     
-  if (cell->state_set)
-    g_object_unref (cell->state_set);
-  G_OBJECT_CLASS (parent_class)->finalize (obj);
+  /*
+   * This is the signal handler for the "destroy" signal for the
+   * GtkWidget. We set the  pointer location to NULL;
+   */
+  cell->widget = NULL;
 }
-
 
 static gint
 gucharmap_chartable_cell_accessible_get_index_in_parent (AtkObject *obj)
@@ -72,33 +75,7 @@ gucharmap_chartable_cell_accessible_ref_state_set (AtkObject *obj)
   return cell->state_set;
 }
 
-
-static void	 
-gucharmap_chartable_cell_accessible_class_init (GucharmapChartableCellAccessibleClass *klass)
-{
-  AtkObjectClass *atk_object_class = ATK_OBJECT_CLASS (klass);
-  GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-  object_class->finalize = gucharmap_chartable_cell_accessible_object_finalize;
-
-  atk_object_class->get_index_in_parent = gucharmap_chartable_cell_accessible_get_index_in_parent;
-  atk_object_class->ref_state_set = gucharmap_chartable_cell_accessible_ref_state_set;
-}
-
-
 static void
-gucharmap_chartable_cell_accessible_object_init (GucharmapChartableCellAccessible *cell)
-{
-  cell->state_set = atk_state_set_new ();
-  cell->widget = NULL;
-  cell->index = 0;
-  cell->action_idle_handler = 0;
-  atk_state_set_add_state (cell->state_set, ATK_STATE_TRANSIENT);
-  atk_state_set_add_state (cell->state_set, ATK_STATE_ENABLED);
-}
-
-
-static void 
 gucharmap_chartable_cell_accessible_get_extents (AtkComponent *component,
                                  gint         *x,
                                  gint         *y,
@@ -156,16 +133,6 @@ gucharmap_chartable_cell_accessible_grab_focus (AtkComponent *component)
   gucharmap_chartable_set_active_character (chartable, cell->index);
   _gucharmap_chartable_redraw (chartable, TRUE);
   return TRUE;
-}
-
-
-static void
-gucharmap_chartable_cell_accessible_component_interface_init (AtkComponentIface *iface)
-{
-  g_return_if_fail (iface != NULL);
-
-  iface->get_extents = gucharmap_chartable_cell_accessible_get_extents;
-  iface->grab_focus = gucharmap_chartable_cell_accessible_grab_focus;
 }
 
 
@@ -255,63 +222,64 @@ gucharmap_chartable_cell_accessible_action_set_description (AtkAction   *action,
 
 }
 
+static void
+gucharmap_chartable_cell_accessible_init (GucharmapChartableCellAccessible *cell)
+{
+  cell->state_set = atk_state_set_new ();
+  cell->widget = NULL;
+  cell->index = 0;
+  cell->action_idle_handler = 0;
+  atk_state_set_add_state (cell->state_set, ATK_STATE_TRANSIENT);
+  atk_state_set_add_state (cell->state_set, ATK_STATE_ENABLED);
+}
+
+static void
+gucharmap_chartable_cell_accessible_object_finalize (GObject *obj)
+{
+  GucharmapChartableCellAccessible *cell = GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE (obj);
+
+  if (cell->activate_description)
+      g_free (cell->activate_description);
+
+  if (cell->action_idle_handler)
+    {
+      g_source_remove (cell->action_idle_handler);
+      cell->action_idle_handler = 0;
+    }
+     
+  if (cell->state_set)
+    g_object_unref (cell->state_set);
+
+  G_OBJECT_CLASS (gucharmap_chartable_cell_accessible_parent_class)->finalize (obj);
+}
+
+static void
+gucharmap_chartable_cell_accessible_class_init (GucharmapChartableCellAccessibleClass *klass)
+{
+  AtkObjectClass *atk_object_class = ATK_OBJECT_CLASS (klass);
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
+
+  object_class->finalize = gucharmap_chartable_cell_accessible_object_finalize;
+
+  atk_object_class->get_index_in_parent = gucharmap_chartable_cell_accessible_get_index_in_parent;
+  atk_object_class->ref_state_set = gucharmap_chartable_cell_accessible_ref_state_set;
+}
+
+static void
+gucharmap_chartable_cell_accessible_component_interface_init (AtkComponentIface *iface)
+{
+  iface->get_extents = gucharmap_chartable_cell_accessible_get_extents;
+  iface->grab_focus = gucharmap_chartable_cell_accessible_grab_focus;
+}
 
 static void
 gucharmap_chartable_cell_accessible_action_interface_init (AtkActionIface *iface)
 {
-  g_return_if_fail (iface != NULL);
-
   iface->get_n_actions = gucharmap_chartable_cell_accessible_action_get_n_actions;
   iface->do_action = gucharmap_chartable_cell_accessible_action_do_action;
   iface->get_name = gucharmap_chartable_cell_accessible_action_get_name;
   iface->get_description = gucharmap_chartable_cell_accessible_action_get_description;
   iface->set_description = gucharmap_chartable_cell_accessible_action_set_description;
-}
-
-
-GType
-gucharmap_chartable_cell_accessible_get_type (void)
-{
-  static GType type = 0;
-
-  if (!type)
-    {
-      static const GTypeInfo tinfo =
-      {
-        sizeof (GucharmapChartableCellAccessibleClass),
-        (GBaseInitFunc) NULL, /* base init */
-        (GBaseFinalizeFunc) NULL, /* base finalize */
-        (GClassInitFunc) gucharmap_chartable_cell_accessible_class_init, /* class init */
-        (GClassFinalizeFunc) NULL, /* class finalize */
-        NULL, /* class data */
-        sizeof (GucharmapChartableCellAccessible), /* instance size */
-        0, /* nb preallocs */
-        (GInstanceInitFunc) gucharmap_chartable_cell_accessible_object_init, /* instance init */
-        NULL /* value table */
-      };
-
-      static const GInterfaceInfo atk_component_info =
-      {
-        (GInterfaceInitFunc) gucharmap_chartable_cell_accessible_component_interface_init,
-        (GInterfaceFinalizeFunc) NULL,
-        NULL
-      };
-
-     static const GInterfaceInfo atk_action_info =
-     {
-       (GInterfaceInitFunc) gucharmap_chartable_cell_accessible_action_interface_init,
-       (GInterfaceFinalizeFunc) NULL,
-       NULL
-     };
-
-      type = g_type_register_static (ATK_TYPE_OBJECT,
-                                     "GucharmapChartableCellAccessible", &tinfo, 0);
-      g_type_add_interface_static (type, ATK_TYPE_COMPONENT,
-                                   &atk_component_info);
-      g_type_add_interface_static (type, ATK_TYPE_ACTION,
-                                   &atk_action_info);
-    }
-  return type;
 }
 
 /* API */
@@ -332,24 +300,11 @@ gucharmap_chartable_cell_accessible_new (void)
   return atk_object;
 }
 
-
-static void
-gucharmap_chartable_cell_accessible_destroyed (GtkWidget       *widget,
-                    GucharmapChartableCellAccessible        *cell)
-{
-  /*
-   * This is the signal handler for the "destroy" signal for the 
-   * GtkWidget. We set the  pointer location to NULL;
-   */
-  cell->widget = NULL;
-}
-
-
-void 
-gucharmap_chartable_cell_accessible_init (GucharmapChartableCellAccessible   *cell,
-                          GtkWidget *widget,
-                          AtkObject *parent,
-                          gint      index)
+void
+gucharmap_chartable_cell_accessible_initialise (GucharmapChartableCellAccessible   *cell,
+                                                GtkWidget *widget,
+                                                AtkObject *parent,
+                                                gint      index)
 {
   g_return_if_fail (IS_GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE (cell));
   g_return_if_fail (GTK_IS_WIDGET (widget));
@@ -357,19 +312,18 @@ gucharmap_chartable_cell_accessible_init (GucharmapChartableCellAccessible   *ce
   cell->widget = widget;
   atk_object_set_parent (ATK_OBJECT (cell), parent);
   cell->index = index;
-  cell->activate_description = g_strdup ("Activate the cell");
+  cell->activate_description = g_strdup ("Activate the cell"); /* FIXMEchpe i18n !! */
 
   g_signal_connect_object (G_OBJECT (widget),
                            "destroy",
-                           G_CALLBACK (gucharmap_chartable_cell_accessible_destroyed ),
+                           G_CALLBACK (gucharmap_chartable_cell_accessible_destroyed),
                            cell, 0);
 }
 
-
 gboolean
-gucharmap_chartable_cell_accessible_add_state (GucharmapChartableCellAccessible      *cell, 
-                               AtkStateType state_type,
-                               gboolean     emit_signal)
+gucharmap_chartable_cell_accessible_add_state (GucharmapChartableCellAccessible      *cell,
+                                               AtkStateType state_type,
+                                               gboolean     emit_signal)
 {
   if (!atk_state_set_contains_state (cell->state_set, state_type))
     {
@@ -396,11 +350,10 @@ gucharmap_chartable_cell_accessible_add_state (GucharmapChartableCellAccessible 
     return FALSE;
 }
 
-
 gboolean
-gucharmap_chartable_cell_accessible_remove_state (GucharmapChartableCellAccessible *cell, 
-                                  AtkStateType state_type,
-                                  gboolean emit_signal)
+gucharmap_chartable_cell_accessible_remove_state (GucharmapChartableCellAccessible *cell,
+                                                  AtkStateType state_type,
+                                                  gboolean emit_signal)
 {
   if (atk_state_set_contains_state (cell->state_set, state_type))
     {
@@ -426,5 +379,3 @@ gucharmap_chartable_cell_accessible_remove_state (GucharmapChartableCellAccessib
   else
     return FALSE;
 }
-
- 

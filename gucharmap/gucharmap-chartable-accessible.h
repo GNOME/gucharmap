@@ -22,6 +22,8 @@
 
 #include <gtk/gtkaccessible.h>
 
+#include "gucharmap-chartable.h"
+
 G_BEGIN_DECLS
 
 #define GUCHARMAP_CHARTABLE_ACCESSIBLE(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), gucharmap_chartable_accessible_get_type (), GucharmapChartableAccessible))
@@ -45,7 +47,7 @@ struct _GucharmapChartableAccessibleClass
 
 GType gucharmap_chartable_accessible_get_type (void);
 
-AtkObject *gucharmap_chartable_accessible_new (GtkWidget *widget);
+AtkObject *gucharmap_chartable_accessible_new (GucharmapChartable *chartable);
 
 G_END_DECLS
 

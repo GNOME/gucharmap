@@ -53,10 +53,10 @@ GType gucharmap_chartable_cell_accessible_get_type (void);
 
 AtkObject* gucharmap_chartable_cell_accessible_new (void);
 
-void gucharmap_chartable_cell_accessible_init (GucharmapChartableCellAccessible *cell,
-                                               GtkWidget          *widget, 
-                                               AtkObject          *parent,
-                                               gint                index);
+void gucharmap_chartable_cell_accessible_initialise (GucharmapChartableCellAccessible *cell,
+                                                     GtkWidget          *widget,
+                                                     AtkObject          *parent,
+                                                     gint                index);
 
 gboolean gucharmap_chartable_cell_accessible_add_state (GucharmapChartableCellAccessible *cell,
                                                         AtkStateType        state_type,

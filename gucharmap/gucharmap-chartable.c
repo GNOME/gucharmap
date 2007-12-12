@@ -21,8 +21,10 @@
  */
 
 #include "config.h"
+
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
+
 #include "gucharmap-marshal.h"
 #include "gucharmap-intl.h"
 #include "gucharmap-chartable.h"
@@ -56,6 +58,44 @@ static guint signals[NUM_SIGNALS];
 static void
 set_top_row (GucharmapChartable *chartable, 
              gint            row);
+
+/* ATK factory */
+
+#ifdef ENABLE_ACCESSIBLE
+
+typedef AtkObjectFactory      GucharmapChartableAccessibleFactory;
+typedef AtkObjectFactoryClass GucharmapChartableAccessibleFactoryClass;
+
+static void
+gucharmap_chartable_accessible_factory_init (GucharmapChartableAccessibleFactory *factory)
+{
+}
+
+static AtkObject*
+gucharmap_chartable_accessible_factory_create_accessible (GObject *obj)
+{
+  return gucharmap_chartable_accessible_new (GUCHARMAP_CHARTABLE (obj));
+}
+
+static GType
+gucharmap_chartable_accessible_factory_get_accessible_type (void)
+{
+  return gucharmap_chartable_accessible_get_type ();
+}
+
+static void
+gucharmap_chartable_accessible_factory_class_init (AtkObjectFactoryClass *klass)
+{
+  klass->create_accessible = gucharmap_chartable_accessible_factory_create_accessible;
+  klass->get_accessible_type = gucharmap_chartable_accessible_factory_get_accessible_type;
+}
+
+static GType gucharmap_chartable_accessible_factory_get_type (void);
+G_DEFINE_TYPE (GucharmapChartableAccessibleFactory, gucharmap_chartable_accessible_factory, ATK_TYPE_OBJECT_FACTORY)
+
+#endif
+
+/* Type definition */
 
 G_DEFINE_TYPE (GucharmapChartable, gucharmap_chartable, GTK_TYPE_DRAWING_AREA)
 
@@ -201,21 +241,6 @@ _gucharmap_chartable_y_offset (GucharmapChartable *chartable, gint row)
 
   return y;
 }
-
-#ifdef ENABLE_ACCESSIBLE
-
-static AtkObject*
-chartable_accessible_factory_create_accessible (GObject *obj)
-{
-  GtkWidget *widget;
-
-  g_return_val_if_fail (GTK_IS_WIDGET (obj), NULL);
-
-  widget = GTK_WIDGET (obj);
-  return gucharmap_chartable_accessible_new (widget);
-}
-
-#endif
 
 static void
 set_top_row (GucharmapChartable *chartable, 
@@ -506,54 +531,6 @@ destroy_zoom_window (GucharmapChartable *chartable)
       gtk_widget_destroy (zoom_window);
     }
 }
-
-#ifdef ENABLE_ACCESSIBLE
-
-static GType
-chartable_accessible_factory_get_accessible_type (void)
-{
-  return gucharmap_chartable_accessible_get_type ();
-}
-
-static void
-chartable_accessible_factory_class_init (AtkObjectFactoryClass *klass)
-{
-#ifdef ENABLE_ACCESSIBLE
-  klass->create_accessible = chartable_accessible_factory_create_accessible;
-#endif
-  klass->get_accessible_type = chartable_accessible_factory_get_accessible_type;
-
-  _gucharmap_intl_ensure_initialized ();
-}
-
-static GType
-chartable_accessible_factory_get_type (void)
-{
-  static GType t = 0;
-
-  if (!t)
-    {
-      static const GTypeInfo tinfo =
-      {
-        sizeof (AtkObjectFactoryClass),
-        NULL,
-        NULL,
-        (GClassInitFunc) chartable_accessible_factory_class_init,
-        NULL,
-        NULL,
-        sizeof (AtkObjectClass),
-        0,
-        NULL,
-        NULL
-      };
-      t = g_type_register_static (ATK_TYPE_OBJECT_FACTORY,
-                                  "ChartableAccessibleFactory",
-                                  &tinfo, 0);
-    }
-  return t;
-}
-
-#endif
 
 static void
 set_active_cell (GucharmapChartable *chartable,
@@ -1591,11 +1568,6 @@ gucharmap_chartable_init (GucharmapChartable *chartable)
   chartable->zoom_image = NULL;
   chartable->snap_pow2_enabled = FALSE;
 
-#ifdef ENABLE_ACCESSIBLE
-  accessible = gtk_widget_get_accessible (GTK_WIDGET (chartable));
-  atk_object_set_name (accessible, _("Character Table"));
-#endif
-
   gtk_widget_set_events (widget,
           GDK_EXPOSURE_MASK | GDK_KEY_PRESS_MASK | GDK_BUTTON_PRESS_MASK |
           GDK_BUTTON_RELEASE_MASK | GDK_BUTTON3_MOTION_MASK |
@@ -1613,12 +1585,16 @@ gucharmap_chartable_init (GucharmapChartable *chartable)
   GTK_WIDGET_SET_FLAGS (widget, GTK_CAN_FOCUS);
 
 #ifdef ENABLE_ACCESSIBLE
-  if (GTK_IS_ACCESSIBLE (gtk_widget_get_accessible (widget)))
+  accessible = gtk_widget_get_accessible (widget);
+  if (GTK_IS_ACCESSIBLE (accessible))
     {
       /* Accessibility support is enabled */
+      atk_object_set_name (accessible, _("Character Table"));
+
+      /* FIXMEchpe: move this to class_init ? */
       atk_registry_set_factory_type (atk_get_default_registry (),
-                                     GTK_TYPE_DRAWING_AREA,
-                                     chartable_accessible_factory_get_type ());
+                                     gucharmap_chartable_get_type (),
+                                     gucharmap_chartable_accessible_factory_get_type ());
     }
 #endif
 
