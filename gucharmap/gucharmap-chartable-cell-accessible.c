@@ -237,8 +237,7 @@ gucharmap_chartable_cell_accessible_object_finalize (GObject *obj)
 {
   GucharmapChartableCellAccessible *cell = GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE (obj);
 
-  if (cell->activate_description)
-      g_free (cell->activate_description);
+  g_free (cell->activate_description);
 
   if (cell->action_idle_handler)
     {
