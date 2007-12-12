@@ -536,6 +536,30 @@ view_by (GtkAction        *action,
   gucharmap_settings_set_chapters_mode (mode);
 }
 
+#ifdef DEBUG_chpe
+static void
+move_to_next_screen_cb (GtkAction *action,
+                        GtkWidget *widget)
+{
+  GdkScreen *screen;
+  GdkDisplay *display;
+  int number_of_screens, screen_num;
+
+  screen = gtk_widget_get_screen (widget);
+  display = gdk_screen_get_display (screen);
+  screen_num = gdk_screen_get_number (screen);
+  number_of_screens =  gdk_display_get_n_screens (display);
+
+  if ((screen_num + 1) < number_of_screens) {
+    screen = gdk_display_get_screen (display, screen_num + 1);
+  } else {
+    screen = gdk_display_get_screen (display, 0);
+  }
+
+  gtk_window_set_screen (GTK_WINDOW (widget), screen);
+}
+#endif
+
 /* create the menu entries */
 /* tooltips are NULL because they are never actually shown in the program */
 
@@ -576,7 +600,12 @@ static const GtkActionEntry menu_entries[] =
   { "HelpContents", GTK_STOCK_HELP, N_("_Contents"), "F1",
     NULL, G_CALLBACK (help_contents) },
   { "About", GTK_STOCK_ABOUT, N_("_About"), NULL,
-    NULL, G_CALLBACK (help_about) }
+    NULL, G_CALLBACK (help_about) },
+
+#ifdef DEBUG_chpe
+  { "MoveNextScreen", NULL, "Move window to next screen", NULL,
+    NULL, G_CALLBACK (move_to_next_screen_cb) },
+#endif
 };
 
 static const GtkRadioActionEntry radio_menu_entries [] =
@@ -591,6 +620,9 @@ static const char ui_info [] =
 "  <menubar name=\"MenuBar\">"
 "    <menu name=\"FileMenu\" action=\"File\">"
 "	 <menuitem name=\"FileQuitMenu\" action=\"Quit\" />"
+#ifdef DEBUG_chpe
+"        <menuitem action=\"MoveNextScreen\" />"
+#endif
 "    </menu>"
 "    <menu name=\"ViewMenu\" action=\"View\">"
 "	 <menuitem name=\"ViewByScriptMenu\" action=\"ByScript\" />"
