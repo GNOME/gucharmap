@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License along
  * with this program; if not, write to the Free Software Foundation, Inc.,
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
+ * 59 Temple Place, Suite 330, Boston, MA 02110-1301  USA
  */
 
 #include "config.h"
@@ -391,7 +391,7 @@ help_about (GtkAction       *action,
        "the GNU General Public License and Unicode Copyright for more details."),
     N_("You should have received a copy of the GNU General Public License "
        "along with Gucharmap; if not, write to the Free Software Foundation, Inc., "
-       "59 Temple Place, Suite 330, Boston, MA  02111-1307  USA"),
+       "59 Temple Place, Suite 330, Boston, MA  02110-1301  USA"),
     N_("Also you should have received a copy of the Unicode Copyright along "
        "with Gucharmap; you can always find it at Unicode's website: "
        "http://www.unicode.org/copyright.html")
