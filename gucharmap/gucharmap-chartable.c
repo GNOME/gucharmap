@@ -526,7 +526,7 @@ gucharmap_chartable_set_active_cell (GucharmapChartable *chartable,
     {
       /* move the page_first_cell as far as active_cell has moved */
       int offset = chartable->active_cell - chartable->old_active_cell;
-    
+
       if (chartable->old_page_first_cell + offset < 0)
         chartable->page_first_cell = 0;
       else if (chartable->old_page_first_cell +
@@ -540,6 +540,10 @@ gucharmap_chartable_set_active_cell (GucharmapChartable *chartable,
       else
         chartable->page_first_cell = chartable->old_page_first_cell + offset;
     
+      /* FIXMEchpe: this should be fixed in the conditions above, but just do it for now: */
+      if (chartable->page_first_cell < 0)
+        chartable->page_first_cell = 0;
+
       /* round down so that it's a multiple of chartable->cols */
       chartable->page_first_cell -= (chartable->page_first_cell % chartable->cols);
     
