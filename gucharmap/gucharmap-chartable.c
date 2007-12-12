@@ -278,6 +278,38 @@ chartable_accessible_factory_create_accessible (GObject *obj)
 
 #endif
 
+static void
+set_top_row (GucharmapChartable *chartable, 
+             gint            row)
+{
+  gint r, c;
+
+  g_return_if_fail (row >= 0 && row <= chartable->last_cell / chartable->cols);
+
+  chartable->old_page_first_cell = chartable->page_first_cell;
+  chartable->old_active_cell = chartable->active_cell;
+
+  chartable->page_first_cell = row * chartable->cols;
+
+  /* character is still on the visible page */
+  if (chartable->active_cell - chartable->page_first_cell >= 0
+      && chartable->active_cell - chartable->page_first_cell < chartable->rows * chartable->cols)
+    return;
+
+  c = chartable->old_active_cell % chartable->cols;
+
+  if (chartable->page_first_cell < chartable->old_page_first_cell)
+    r = chartable->rows - 1;
+  else
+    r = 0;
+
+  chartable->active_cell = chartable->page_first_cell + r * chartable->cols + c;
+  if (chartable->active_cell > chartable->last_cell)
+    chartable->active_cell = chartable->last_cell;
+
+  g_object_notify (G_OBJECT (chartable), "active-character");
+}
+
 static gint
 compute_zoom_font_size (GucharmapChartable *chartable)
 {
@@ -1602,6 +1634,60 @@ gucharmap_chartable_move_cursor (GucharmapChartable *chartable,
   return TRUE;
 }
 
+/* does all the initial construction */
+static void
+gucharmap_chartable_init (GucharmapChartable *chartable)
+{
+  GtkWidget *widget = GTK_WIDGET (chartable);
+#ifdef ENABLE_ACCESSIBLE
+  AtkObject *accessible;
+#endif
+
+  chartable->page_first_cell = 0;
+  chartable->active_cell = 0;
+  chartable->rows = 1;
+  chartable->cols = 1;
+  chartable->zoom_mode_enabled = FALSE;
+  chartable->zoom_window = NULL;
+  chartable->zoom_image = NULL;
+  chartable->snap_pow2_enabled = FALSE;
+
+#ifdef ENABLE_ACCESSIBLE
+  accessible = gtk_widget_get_accessible (GTK_WIDGET (chartable));
+  atk_object_set_name (accessible, _("Character Table"));
+#endif
+
+  gtk_widget_set_events (widget,
+          GDK_EXPOSURE_MASK | GDK_KEY_PRESS_MASK | GDK_BUTTON_PRESS_MASK |
+          GDK_BUTTON_RELEASE_MASK | GDK_BUTTON3_MOTION_MASK |
+          GDK_BUTTON1_MOTION_MASK | GDK_FOCUS_CHANGE_MASK | GDK_SCROLL_MASK);
+
+  chartable->target_list = gtk_target_list_new (NULL, 0);
+  gtk_target_list_add_text_targets (chartable->target_list, 0);
+
+  gtk_drag_dest_set (widget, GTK_DEST_DEFAULT_ALL,
+                     NULL, 0,
+                     GDK_ACTION_COPY);
+  gtk_drag_dest_add_text_targets (widget);
+
+  /* this is required to get key_press events */
+  GTK_WIDGET_SET_FLAGS (widget, GTK_CAN_FOCUS);
+
+#ifdef ENABLE_ACCESSIBLE
+  if (GTK_IS_ACCESSIBLE (gtk_widget_get_accessible (widget)))
+    {
+      /* Accessibility support is enabled */
+      atk_registry_set_factory_type (atk_get_default_registry (),
+                                     GTK_TYPE_DRAWING_AREA,
+                                     chartable_accessible_factory_get_type ());
+    }
+#endif
+
+  gucharmap_chartable_set_codepoint_list (chartable, NULL);
+
+  gtk_widget_show_all (GTK_WIDGET (chartable));
+}
+
 static void
 gucharmap_chartable_finalize (GObject *object)
 {
@@ -1823,91 +1909,7 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
 #endif
 }
 
-static void
-set_top_row (GucharmapChartable *chartable, 
-             gint            row)
-{
-  gint r, c;
-
-  g_return_if_fail (row >= 0 && row <= chartable->last_cell / chartable->cols);
-
-  chartable->old_page_first_cell = chartable->page_first_cell;
-  chartable->old_active_cell = chartable->active_cell;
-
-  chartable->page_first_cell = row * chartable->cols;
-
-  /* character is still on the visible page */
-  if (chartable->active_cell - chartable->page_first_cell >= 0
-      && chartable->active_cell - chartable->page_first_cell < chartable->rows * chartable->cols)
-    return;
-
-  c = chartable->old_active_cell % chartable->cols;
-
-  if (chartable->page_first_cell < chartable->old_page_first_cell)
-    r = chartable->rows - 1;
-  else
-    r = 0;
-
-  chartable->active_cell = chartable->page_first_cell + r * chartable->cols + c;
-  if (chartable->active_cell > chartable->last_cell)
-    chartable->active_cell = chartable->last_cell;
-
-  g_object_notify (G_OBJECT (chartable), "active-character");
-}
-
-/* does all the initial construction */
-static void
-gucharmap_chartable_init (GucharmapChartable *chartable)
-{
-  GtkWidget *widget = GTK_WIDGET (chartable);
-#ifdef ENABLE_ACCESSIBLE
-  AtkObject *accessible;
-#endif
-
-  chartable->page_first_cell = 0;
-  chartable->active_cell = 0;
-  chartable->rows = 1;
-  chartable->cols = 1;
-  chartable->zoom_mode_enabled = FALSE;
-  chartable->zoom_window = NULL;
-  chartable->zoom_image = NULL;
-  chartable->snap_pow2_enabled = FALSE;
-
-#ifdef ENABLE_ACCESSIBLE
-  accessible = gtk_widget_get_accessible (GTK_WIDGET (chartable));
-  atk_object_set_name (accessible, _("Character Table"));
-#endif
-
-  gtk_widget_set_events (widget,
-          GDK_EXPOSURE_MASK | GDK_KEY_PRESS_MASK | GDK_BUTTON_PRESS_MASK |
-          GDK_BUTTON_RELEASE_MASK | GDK_BUTTON3_MOTION_MASK |
-          GDK_BUTTON1_MOTION_MASK | GDK_FOCUS_CHANGE_MASK | GDK_SCROLL_MASK);
-
-  chartable->target_list = gtk_target_list_new (NULL, 0);
-  gtk_target_list_add_text_targets (chartable->target_list, 0);
-
-  gtk_drag_dest_set (widget, GTK_DEST_DEFAULT_ALL,
-                     NULL, 0,
-                     GDK_ACTION_COPY);
-  gtk_drag_dest_add_text_targets (widget);
-
-  /* this is required to get key_press events */
-  GTK_WIDGET_SET_FLAGS (widget, GTK_CAN_FOCUS);
-
-#ifdef ENABLE_ACCESSIBLE
-  if (GTK_IS_ACCESSIBLE (gtk_widget_get_accessible (widget)))
-    {
-      /* Accessibility support is enabled */
-      atk_registry_set_factory_type (atk_get_default_registry (),
-                                     GTK_TYPE_DRAWING_AREA,
-                                     chartable_accessible_factory_get_type ());
-    }
-#endif
-
-  gucharmap_chartable_set_codepoint_list (chartable, NULL);
-
-  gtk_widget_show_all (GTK_WIDGET (chartable));
-}
+/* public API */
 
 /**
  * gucharmap_chartable_new:
