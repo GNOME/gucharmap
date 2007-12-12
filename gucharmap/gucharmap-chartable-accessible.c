@@ -274,19 +274,6 @@ gucharmap_chartable_accessible_get_n_children (AtkObject *obj)
 }
 
 static void
-set_focus_object (AtkObject *obj,
-                  AtkObject *focus_obj)
-{
-  g_object_set_data (G_OBJECT (obj), "chartable-accessible-focus-object", focus_obj);
-}
-
-static AtkObject*
-get_focus_object (AtkObject *obj)
-{
-  return g_object_get_data (G_OBJECT (obj), "chartable-accessible-focus-object");
-}
-
-static void
 gucharmap_chartable_accessible_init (GucharmapChartableAccessible *accessible)
 {
   accessible->cells = g_array_new (FALSE, TRUE, sizeof (GucharmapChartableCellAccessibleInfo));
@@ -295,17 +282,13 @@ gucharmap_chartable_accessible_init (GucharmapChartableAccessible *accessible)
 static void
 gucharmap_chartable_accessible_finalize (GObject *obj)
 {
-  GucharmapChartableAccessible *table;
-  AtkObject *focus_obj;
-
-  table = GUCHARMAP_CHARTABLE_ACCESSIBLE (obj);
-
-  focus_obj = get_focus_object (ATK_OBJECT (obj));
-  if (focus_obj)
-    g_object_unref (focus_obj);
+  GucharmapChartableAccessible *accessible = GUCHARMAP_CHARTABLE_ACCESSIBLE (obj);
+   
+  if (accessible->focus_obj)
+    g_object_unref (accessible->focus_obj);
 
   /* FIXME: don't we need to remove the weak references from the cells?? */
-  g_array_free (table->cells, TRUE);
+  g_array_free (accessible->cells, TRUE);
 
   G_OBJECT_CLASS (gucharmap_chartable_accessible_parent_class)->finalize (obj);
 }
@@ -357,7 +340,7 @@ size_allocated (GtkWidget     *widget,
   gucharmap_chartable_accessible_update_all_cells (ATK_OBJECT (data));
 }
 
-static AtkObject*
+static AtkObject* /* reference */
 find_object (GucharmapChartable   *chartable,
              gunichar  uc,
              AtkObject *obj)
@@ -373,7 +356,7 @@ find_object (GucharmapChartable   *chartable,
 static void
 sync_active_char (GucharmapChartable  *chartable,
                   GParamSpec *pspec,
-                  gpointer data)
+                  GucharmapChartableAccessible *accessible)
 {
   gunichar uc;
   AtkObject *child;
@@ -381,16 +364,22 @@ sync_active_char (GucharmapChartable  *chartable,
 
   uc = gucharmap_chartable_get_active_character (chartable);
 
-  child = find_object (chartable, uc, data);
-  focus_obj = get_focus_object (data);
+  child = find_object (chartable, uc, ATK_OBJECT (accessible));
+  focus_obj = accessible->focus_obj;
   if (focus_obj != child)
     {
-      gucharmap_chartable_cell_accessible_remove_state (GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE (focus_obj), ATK_STATE_FOCUSED, FALSE);
+      if (focus_obj)
+        gucharmap_chartable_cell_accessible_remove_state (GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE (focus_obj), ATK_STATE_FOCUSED, FALSE);
+
       gucharmap_chartable_cell_accessible_add_state (GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE (child), ATK_STATE_FOCUSED, FALSE);
-    }  
-  g_object_unref (focus_obj);
-  set_focus_object (data, child);
-  g_signal_emit_by_name (data, "active-descendant-changed", child);
+    }
+
+  if (focus_obj)
+    g_object_unref (focus_obj);
+
+  accessible->focus_obj = child; /* adopts the reference from find_object */
+
+  g_signal_emit_by_name (accessible, "active-descendant-changed", child);
 }
 
 static void
@@ -422,7 +411,7 @@ gucharmap_chartable_accessible_initialize (AtkObject *obj,
                                            gpointer  data)
 {
   GtkWidget *widget;
-  AtkObject *focus_obj;
+  AtkObject *focus_obj, *old_focus_obj;
   GucharmapChartableAccessible *accessible;
   GucharmapChartable *chartable;
 
@@ -452,7 +441,10 @@ gucharmap_chartable_accessible_initialize (AtkObject *obj,
                     G_CALLBACK (sync_active_char), obj);
 
   focus_obj = find_object (chartable, chartable->active_cell, obj);
-  set_focus_object (obj, focus_obj);  
+  old_focus_obj = accessible->focus_obj;
+  accessible->focus_obj = focus_obj; /* adopts the reference from find_object */
+  if (old_focus_obj)
+    g_object_unref (old_focus_obj);
 }
 
 static void

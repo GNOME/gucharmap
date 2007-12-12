@@ -41,6 +41,7 @@ struct _GucharmapChartableAccessible
   GtkAccessible parent_instance;
   GtkAdjustment *vadjustment;
   GArray *cells;
+  AtkObject *focus_obj;
 };
 
 struct _GucharmapChartableAccessibleClass
