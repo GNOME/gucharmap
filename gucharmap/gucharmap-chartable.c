@@ -56,9 +56,6 @@ static void gucharmap_chartable_class_init (GucharmapChartableClass *klass);
 static void gucharmap_chartable_finalize   (GObject *object);
 
 static guint signals[NUM_SIGNALS];
-static void
-set_top_row (GucharmapChartable *chartable, 
-             gint            row);
 
 /* ATK factory */
 
