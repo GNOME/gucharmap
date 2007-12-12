@@ -89,8 +89,8 @@ struct _GucharmapChartableClass
   gboolean (* move_cursor)           (GucharmapChartable *chartable,
                                       GtkMovementStep     step,
                                       gint                count);
+  void (* activate) (GucharmapChartable *chartable);
 
-  void (* activate) (GucharmapChartable *chartable, gunichar uc);
   void (* set_active_char) (GucharmapChartable *chartable, guint ch);
   void (* status_message) (GucharmapChartable *chartable, const gchar *message);
 };
@@ -1146,10 +1146,6 @@ gucharmap_chartable_key_press_event (GtkWidget *widget,
         gucharmap_chartable_zoom_enable (chartable);
         break;
 
-      case GDK_Return: case GDK_KP_Enter: case GDK_space:
-	g_signal_emit (chartable, signals[ACTIVATE], 0, gucharmap_chartable_get_active_character (chartable));
-        return TRUE;
-
       /* pass on other keys, like tab and stuff that shifts focus */
       default:
         break;
@@ -1452,6 +1448,15 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
   klass->activate = NULL;
   klass->set_active_char = NULL;
 
+  widget_class->activate_signal =
+    g_signal_new ("activate",
+                  G_TYPE_FROM_CLASS (object_class),
+                  G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
+                  G_STRUCT_OFFSET (GucharmapChartableClass, activate),
+                  NULL, NULL,
+                  g_cclosure_marshal_VOID__VOID,
+                  G_TYPE_NONE,
+                  0);
   widget_class->set_scroll_adjustments_signal =
     g_signal_new ("set-scroll-adjustments",
                   G_TYPE_FROM_CLASS (object_class),
@@ -1461,12 +1466,6 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
                   _gucharmap_marshal_VOID__OBJECT_OBJECT,
                   G_TYPE_NONE, 2,
                   GTK_TYPE_ADJUSTMENT, GTK_TYPE_ADJUSTMENT);
-
-  signals[ACTIVATE] =
-    g_signal_new ("activate", gucharmap_chartable_get_type (), G_SIGNAL_RUN_FIRST,
-                  G_STRUCT_OFFSET (GucharmapChartableClass, activate),
-                  NULL, NULL, g_cclosure_marshal_VOID__UINT, G_TYPE_NONE,
-                  1, G_TYPE_UINT);
 
   signals[SET_ACTIVE_CHAR] =
     g_signal_new ("set-active-char", gucharmap_chartable_get_type (),
@@ -1571,6 +1570,16 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
   gucharmap_chartable_add_move_binding (binding_set, GDK_L, 0,
                                         GTK_MOVEMENT_VISUAL_POSITIONS, 1);
 #endif
+  
+  /* Activate */
+  gtk_binding_entry_add_signal (binding_set, GDK_Return, 0,
+                                "activate", 0);
+  gtk_binding_entry_add_signal (binding_set, GDK_ISO_Enter, 0,
+                                "activate", 0);
+  gtk_binding_entry_add_signal (binding_set, GDK_KP_Enter, 0,
+                                "activate", 0);
+  gtk_binding_entry_add_signal (binding_set, GDK_space, 0,
+                                "activate", 0);
 }
 
 static void

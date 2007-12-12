@@ -37,9 +37,10 @@ enum
 static guint signals[NUM_SIGNALS];
 
 static void
-activate (GucharmapChartable *real_table, guint value, GucharmapTable *chartable)
+activate (GucharmapChartable *real_table, GucharmapTable *chartable)
 {
-  g_signal_emit (chartable, signals[ACTIVATE], 0, value);
+  g_signal_emit (chartable, signals[ACTIVATE], 0,
+                 gucharmap_chartable_get_active_character (real_table));
 }
 
 static void
