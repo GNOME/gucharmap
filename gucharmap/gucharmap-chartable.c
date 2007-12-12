@@ -1050,18 +1050,21 @@ vadjustment_value_changed_cb (GtkAdjustment *adjustment, GucharmapChartable *cha
   _gucharmap_chartable_redraw (chartable, TRUE);
 }
 
-/* redraws the screen from the backing pixmap */
-static gint
-expose_event (GtkWidget *widget, 
-              GdkEventExpose *event, 
-              GucharmapChartable *chartable)
+/* GtkWidget class methods */
+
+static gboolean
+gucharmap_chartable_expose_event (GtkWidget *widget, 
+                                  GdkEventExpose *event)
 {
+  GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (widget);
+
   gdk_window_set_back_pixmap (widget->window, NULL, FALSE);
 
   if (chartable->pixmap == NULL)
     {
       draw_chartable_from_scratch (chartable);
 
+      /* FIXMEchpe: WHY TF does expose event influence the zoom popup?? */
       /* the zoom window may need to be redrawn and repositioned */
       if (chartable->zoom_window)
         {
@@ -1073,6 +1076,7 @@ expose_event (GtkWidget *widget,
         }
     }
 
+  /* FIXMEchpe: maybe draw each region separately? */
   gdk_draw_drawable (widget->window,
                      widget->style->fg_gc[GTK_STATE_NORMAL],
                      chartable->pixmap,
@@ -1080,10 +1084,9 @@ expose_event (GtkWidget *widget,
                      event->area.x, event->area.y,
                      event->area.width, event->area.height);
 
+  /* no need to chain up */
   return FALSE;
 }
-
-/* GtkWidget class methods */
 
 static void
 gucharmap_chartable_size_allocate (GtkWidget *widget,
@@ -1206,6 +1209,7 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
 
   object_class->finalize = gucharmap_chartable_finalize;
 
+  widget_class->expose_event = gucharmap_chartable_expose_event;
   widget_class->size_allocate = gucharmap_chartable_size_allocate;
   widget_class->style_set = gucharmap_chartable_style_set;
   
@@ -1723,8 +1727,6 @@ gucharmap_chartable_init (GucharmapChartable *chartable)
   chartable->target_list = gtk_target_list_new (NULL, 0);
   gtk_target_list_add_text_targets (chartable->target_list, 0);
 
-  g_signal_connect (G_OBJECT (widget), "expose-event",
-                    G_CALLBACK (expose_event), chartable);
   g_signal_connect (G_OBJECT (widget), "key-press-event",
                     G_CALLBACK (key_press_event), chartable);
   g_signal_connect (G_OBJECT (widget), "key-release-event",
