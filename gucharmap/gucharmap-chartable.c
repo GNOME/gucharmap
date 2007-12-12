@@ -1623,6 +1623,7 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
 
   object_class->finalize = gucharmap_chartable_finalize;
 
+  widget_class->drag_begin = gucharmap_chartable_drag_begin;
   widget_class->drag_data_get = gucharmap_chartable_drag_data_get;
   widget_class->drag_data_received = gucharmap_chartable_drag_data_received;
   widget_class->button_press_event = gucharmap_chartable_button_press;
@@ -1636,10 +1637,6 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
   widget_class->size_allocate = gucharmap_chartable_size_allocate;
   widget_class->size_request = gucharmap_chartable_size_request;
   widget_class->style_set = gucharmap_chartable_style_set;
-
-  /* XXX: We use this instead of gtk_drag_source_set due to #114534 */
-  /* FIXMEchpe: investigate if this can be removed now */
-  widget_class->drag_begin = gucharmap_chartable_drag_begin;
 
   klass->set_scroll_adjustments = gucharmap_chartable_set_adjustments;
   klass->move_cursor = gucharmap_chartable_move_cursor;
