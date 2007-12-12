@@ -109,6 +109,7 @@ G_DEFINE_TYPE (GucharmapChartableAccessibleFactory, gucharmap_chartable_accessib
 G_DEFINE_TYPE (GucharmapChartable, gucharmap_chartable, GTK_TYPE_DRAWING_AREA)
 
 /* utility functions */
+
 static void
 gucharmap_chartable_set_font_desc (GucharmapChartable *chartable,
                                    PangoFontDescription *font_desc /* adopting */)
@@ -170,7 +171,6 @@ _gucharmap_chartable_cell_column (GucharmapChartable *chartable,
 gint
 _gucharmap_chartable_column_width (GucharmapChartable *chartable, gint col)
 {
-  GtkWidget *widget = GTK_WIDGET (chartable);
   int num_padded_columns = chartable->n_padded_columns;
   int min_col_w = chartable->minimal_column_width;
 
@@ -199,7 +199,6 @@ _gucharmap_chartable_x_offset (GucharmapChartable *chartable, gint col)
 gint
 _gucharmap_chartable_row_height (GucharmapChartable *chartable, gint row)
 {
-  GtkWidget *widget = GTK_WIDGET (chartable);
   int num_padded_rows = chartable->n_padded_rows;
   int min_row_h = chartable->minimal_row_height;
 
