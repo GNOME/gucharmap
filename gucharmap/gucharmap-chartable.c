@@ -1131,6 +1131,53 @@ gucharmap_chartable_focus_out_event (GtkWidget *widget,
   return GTK_WIDGET_CLASS (gucharmap_chartable_parent_class)->focus_out_event (widget, event);
 }
 
+static gboolean
+gucharmap_chartable_key_press_event (GtkWidget *widget,
+                                     GdkEventKey *event)
+{
+  GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (widget);
+
+  if (event->state & (GDK_MOD1_MASK | GDK_CONTROL_MASK))
+    return GTK_WIDGET_CLASS (gucharmap_chartable_parent_class)->key_press_event (widget, event);
+
+  switch (event->keyval)
+    {
+      case GDK_Shift_L: case GDK_Shift_R:
+        gucharmap_chartable_zoom_enable (chartable);
+        break;
+
+      case GDK_Return: case GDK_KP_Enter: case GDK_space:
+	g_signal_emit (chartable, signals[ACTIVATE], 0, gucharmap_chartable_get_active_character (chartable));
+        return TRUE;
+
+      /* pass on other keys, like tab and stuff that shifts focus */
+      default:
+        break;
+    }
+
+  return GTK_WIDGET_CLASS (gucharmap_chartable_parent_class)->key_press_event (widget, event);
+}
+
+static gboolean
+gucharmap_chartable_key_release_event (GtkWidget *widget,
+                                       GdkEventKey *event)
+{
+  GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (widget);
+
+  switch (event->keyval)
+    {
+      /* XXX: If the group(shift_toggle) Xkb option is set, then releasing
+       * the shift key gives either ISO_Next_Group or ISO_Prev_Group. Is
+       * there a better way to handle this case? */
+      case GDK_Shift_L: case GDK_Shift_R:
+      case GDK_ISO_Next_Group: case GDK_ISO_Prev_Group:
+        gucharmap_chartable_zoom_disable (chartable);
+        break;
+    }
+
+  return GTK_WIDGET_CLASS (gucharmap_chartable_parent_class)->key_release_event (widget, event);
+}
+
 static void
 gucharmap_chartable_size_allocate (GtkWidget *widget,
                                    GtkAllocation *allocation)
@@ -1394,6 +1441,8 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
   widget_class->expose_event = gucharmap_chartable_expose_event;
   widget_class->focus_in_event = gucharmap_chartable_focus_in_event;
   widget_class->focus_out_event = gucharmap_chartable_focus_out_event;
+  widget_class->key_press_event = gucharmap_chartable_key_press_event;
+  widget_class->key_release_event = gucharmap_chartable_key_release_event;
   widget_class->size_allocate = gucharmap_chartable_size_allocate;
   widget_class->size_request = gucharmap_chartable_size_request;
   widget_class->style_set = gucharmap_chartable_style_set;
@@ -1522,53 +1571,6 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
   gucharmap_chartable_add_move_binding (binding_set, GDK_L, 0,
                                         GTK_MOVEMENT_VISUAL_POSITIONS, 1);
 #endif
-}
-
-static gint
-key_release_event (GtkWidget *widget,
-                   GdkEventKey *event,
-                   GucharmapChartable *chartable)
-{
-  switch (event->keyval)
-    {
-      /* XXX: If the group(shift_toggle) Xkb option is set, then releasing
-       * the shift key gives either ISO_Next_Group or ISO_Prev_Group. Is
-       * there a better way to handle this case? */
-      case GDK_Shift_L: case GDK_Shift_R:
-      case GDK_ISO_Next_Group: case GDK_ISO_Prev_Group:
-        gucharmap_chartable_zoom_disable (chartable);
-        break;
-    }
-
-  return FALSE;
-}
-
-static gint
-key_press_event (GtkWidget *widget, 
-                 GdkEventKey *event, 
-                 GucharmapChartable *chartable)
-{
-  if (event->state & (GDK_MOD1_MASK | GDK_CONTROL_MASK))
-    return FALSE;
-
-  switch (event->keyval)
-    {
-      case GDK_Shift_L: case GDK_Shift_R:
-        gucharmap_chartable_zoom_enable (chartable);
-        return FALSE;
-
-      case GDK_Return: case GDK_KP_Enter: case GDK_space:
-	g_signal_emit (chartable, signals[ACTIVATE], 0, gucharmap_chartable_get_active_character (chartable));
-        return TRUE;
-
-      /* pass on other keys, like tab and stuff that shifts focus */
-      default:
-        return FALSE;
-    }
-
-  _gucharmap_chartable_redraw (chartable, TRUE); /* FIXMEchpe necessary? */
-
-  return TRUE;
 }
 
 static void
@@ -1813,10 +1815,6 @@ gucharmap_chartable_init (GucharmapChartable *chartable)
   chartable->target_list = gtk_target_list_new (NULL, 0);
   gtk_target_list_add_text_targets (chartable->target_list, 0);
 
-  g_signal_connect (G_OBJECT (widget), "key-press-event",
-                    G_CALLBACK (key_press_event), chartable);
-  g_signal_connect (G_OBJECT (widget), "key-release-event",
-                    G_CALLBACK (key_release_event), chartable);
   g_signal_connect (G_OBJECT (widget), "button-press-event",
                     G_CALLBACK (button_press_event), chartable);
   g_signal_connect (G_OBJECT (widget), "button-release-event",
