@@ -1226,6 +1226,8 @@ gucharmap_chartable_expose_event (GtkWidget *widget,
                        rects[i].width, rects[i].height);
   }
 
+  g_free (rects);
+
   /* no need to chain up */
   return FALSE;
 }
