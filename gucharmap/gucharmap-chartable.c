@@ -1067,6 +1067,72 @@ vadjustment_value_changed_cb (GtkAdjustment *adjustment, GucharmapChartable *cha
 
 /* GtkWidget class methods */
 
+/*  - single click with left button: activate character under pointer
+ *  - double-click with left button: add active character to text_to_copy
+ *  - single-click with middle button: jump to selection_primary
+ */
+static gboolean
+gucharmap_chartable_button_press (GtkWidget *widget,
+                                  GdkEventButton *event)
+{
+  GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (widget);
+
+  /* in case we lost keyboard focus and are clicking to get it back */
+  gtk_widget_grab_focus (widget);
+
+  if (event->button == 1)
+    {
+      chartable->click_x = event->x;
+      chartable->click_y = event->y;
+    }
+
+  /* double-click */
+  if (event->button == 1 && event->type == GDK_2BUTTON_PRESS)
+    {
+      g_signal_emit (chartable, signals[ACTIVATE], 0, gucharmap_chartable_get_active_character (chartable));
+    }
+  /* single-click */ 
+  else if (event->button == 1 && event->type == GDK_BUTTON_PRESS) 
+    {
+      set_active_cell (chartable, get_cell_at_xy (chartable, event->x, event->y));
+      _gucharmap_chartable_redraw (chartable, TRUE);
+    }
+  else if (event->button == 3)
+    {
+      set_active_cell (chartable, get_cell_at_xy (chartable, event->x, event->y));
+
+      make_zoom_window (chartable);
+      _gucharmap_chartable_redraw (chartable, FALSE);
+
+      if (chartable->active_cell == chartable->old_active_cell)
+        update_zoom_window (chartable); 
+
+      place_zoom_window (chartable, event->x_root, event->y_root);
+      gtk_widget_show (chartable->zoom_window);
+    }
+
+  /* XXX: [need to return false so it gets drag events] */
+  /* actually return true because we handle drag_begin because of
+   * http://bugzilla.gnome.org/show_bug.cgi?id=114534 */
+  return TRUE;
+}
+
+static gboolean
+gucharmap_chartable_button_release (GtkWidget *widget,
+                                    GdkEventButton *event)
+{
+  GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (widget);
+  gboolean (* button_press_event) (GtkWidget *, GdkEventButton *) =
+    GTK_WIDGET_CLASS (gucharmap_chartable_parent_class)->button_release_event;
+
+  if (!chartable->zoom_mode_enabled && event->button == 3)
+    destroy_zoom_window (chartable);
+
+  if (button_press_event)
+    return button_press_event (widget, event);
+  return FALSE;
+}
+
 static gboolean
 gucharmap_chartable_expose_event (GtkWidget *widget, 
                                   GdkEventExpose *event)
@@ -1172,6 +1238,46 @@ gucharmap_chartable_key_release_event (GtkWidget *widget,
     }
 
   return GTK_WIDGET_CLASS (gucharmap_chartable_parent_class)->key_release_event (widget, event);
+}
+
+static gboolean
+gucharmap_chartable_motion_notify (GtkWidget *widget,
+                                   GdkEventMotion *event)
+{
+  GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (widget);
+  gboolean (* motion_notify_event) (GtkWidget *, GdkEventMotion *) =
+    GTK_WIDGET_CLASS (gucharmap_chartable_parent_class)->motion_notify_event;
+
+  if ((event->state & GDK_BUTTON1_MASK) != 0 &&
+      gtk_drag_check_threshold (widget,
+                                chartable->click_x,
+                                chartable->click_y,
+                                event->x,
+                                event->y))
+    {
+      gtk_drag_begin (widget, chartable->target_list,
+                      GDK_ACTION_COPY, 1, (GdkEvent *) event);
+    }
+
+  if ((event->state & GDK_BUTTON3_MASK) != 0 &&
+      chartable->zoom_window)
+    {
+      guint cell = get_cell_at_xy (chartable, MAX (0, event->x), MAX (0, event->y));
+
+      if ((gint)cell != chartable->active_cell)
+        {
+          gtk_widget_hide (chartable->zoom_window);
+          set_active_cell (chartable, cell);
+          _gucharmap_chartable_redraw (chartable, FALSE);
+        }
+
+      place_zoom_window (chartable, event->x_root, event->y_root);
+      gtk_widget_show (chartable->zoom_window);
+    }
+
+  if (motion_notify_event)
+    motion_notify_event (widget, event);
+  return FALSE;
 }
 
 static void
@@ -1434,11 +1540,14 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
 
   object_class->finalize = gucharmap_chartable_finalize;
 
+  widget_class->button_press_event = gucharmap_chartable_button_press;
+  widget_class->button_release_event = gucharmap_chartable_button_release;
   widget_class->expose_event = gucharmap_chartable_expose_event;
   widget_class->focus_in_event = gucharmap_chartable_focus_in_event;
   widget_class->focus_out_event = gucharmap_chartable_focus_out_event;
   widget_class->key_press_event = gucharmap_chartable_key_press_event;
   widget_class->key_release_event = gucharmap_chartable_key_release_event;
+  widget_class->motion_notify_event = gucharmap_chartable_motion_notify;
   widget_class->size_allocate = gucharmap_chartable_size_allocate;
   widget_class->size_request = gucharmap_chartable_size_request;
   widget_class->style_set = gucharmap_chartable_style_set;
@@ -1621,99 +1730,6 @@ status_message (GucharmapChartable *chartable, const gchar *message)
   g_signal_emit (chartable, signals[STATUS_MESSAGE], 0, message);
 }
 
-/*  - single click with left button: activate character under pointer
- *  - double-click with left button: add active character to text_to_copy
- *  - single-click with middle button: jump to selection_primary
- */
-static gint
-button_press_event (GtkWidget *widget, 
-                    GdkEventButton *event, 
-                    GucharmapChartable *chartable)
-{
-  /* in case we lost keyboard focus and are clicking to get it back */
-  gtk_widget_grab_focus (widget);
-
-  if (event->button == 1)
-    {
-      chartable->click_x = event->x;
-      chartable->click_y = event->y;
-    }
-
-  /* double-click */
-  if (event->button == 1 && event->type == GDK_2BUTTON_PRESS)
-    {
-      g_signal_emit (chartable, signals[ACTIVATE], 0, gucharmap_chartable_get_active_character (chartable));
-    }
-  /* single-click */ 
-  else if (event->button == 1 && event->type == GDK_BUTTON_PRESS) 
-    {
-      set_active_cell (chartable, get_cell_at_xy (chartable, event->x, event->y));
-      _gucharmap_chartable_redraw (chartable, TRUE);
-    }
-  else if (event->button == 3)
-    {
-      set_active_cell (chartable, get_cell_at_xy (chartable, event->x, event->y));
-
-      make_zoom_window (chartable);
-      _gucharmap_chartable_redraw (chartable, FALSE);
-
-      if (chartable->active_cell == chartable->old_active_cell)
-        update_zoom_window (chartable); 
-
-      place_zoom_window (chartable, event->x_root, event->y_root);
-      gtk_widget_show (chartable->zoom_window);
-    }
-
-  /* XXX: [need to return false so it gets drag events] */
-  /* actually return true because we handle drag_begin because of
-   * http://bugzilla.gnome.org/show_bug.cgi?id=114534 */
-  return TRUE;
-}
-
-static gint
-button_release_event (GtkWidget *widget, 
-                      GdkEventButton *event, 
-                      GucharmapChartable *chartable)
-{
-  if (!chartable->zoom_mode_enabled && event->button == 3)
-    destroy_zoom_window (chartable);
-
-  return FALSE;
-}
-
-static gint
-motion_notify_event (GtkWidget *widget, 
-                     GdkEventMotion *event, 
-                     GucharmapChartable *chartable)
-{
-  if ((event->state & GDK_BUTTON1_MASK) != 0
-      && gtk_drag_check_threshold (widget, 
-                                   chartable->click_x, 
-                                   chartable->click_y, 
-                                   event->x, 
-                                   event->y))
-    {
-      gtk_drag_begin (widget, chartable->target_list,
-                      GDK_ACTION_COPY, 1, (GdkEvent *) event);
-    }
-
-  if ((event->state & GDK_BUTTON3_MASK) != 0 && chartable->zoom_window)
-    {
-      guint cell = get_cell_at_xy (chartable, MAX (0, event->x), MAX (0, event->y));
-
-      if ((gint)cell != chartable->active_cell)
-        {
-          gtk_widget_hide (chartable->zoom_window);
-          set_active_cell (chartable, cell);
-          _gucharmap_chartable_redraw (chartable, FALSE);
-        }
-
-      place_zoom_window (chartable, event->x_root, event->y_root);
-      gtk_widget_show (chartable->zoom_window);
-    }
-
-  return FALSE;
-}
 
 static void
 drag_data_received (GtkWidget *widget,
@@ -1823,13 +1839,6 @@ gucharmap_chartable_init (GucharmapChartable *chartable)
 
   chartable->target_list = gtk_target_list_new (NULL, 0);
   gtk_target_list_add_text_targets (chartable->target_list, 0);
-
-  g_signal_connect (G_OBJECT (widget), "button-press-event",
-                    G_CALLBACK (button_press_event), chartable);
-  g_signal_connect (G_OBJECT (widget), "button-release-event",
-                    G_CALLBACK (button_release_event), chartable);
-  g_signal_connect (G_OBJECT (widget), "motion-notify-event",
-                    G_CALLBACK (motion_notify_event), chartable);
 
   gtk_drag_dest_set (widget, GTK_DEST_DEFAULT_ALL,
                      NULL, 0,
