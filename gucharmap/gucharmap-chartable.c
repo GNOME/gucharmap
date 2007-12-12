@@ -58,8 +58,6 @@ struct _GucharmapChartable
   GtkWidget *zoom_image;
   gboolean zoom_mode_enabled;
 
-  gboolean snap_pow2_enabled;
-
   /* for dragging (#114534) */
   gdouble click_x, click_y; 
 
@@ -67,6 +65,9 @@ struct _GucharmapChartable
 
   GucharmapCodepointList *codepoint_list;
   gboolean codepoint_list_changed;
+
+  /* Settings */
+  gboolean snap_pow2_enabled;
 };
 
 struct _GucharmapChartableClass
@@ -1136,7 +1137,16 @@ gucharmap_chartable_style_set (GtkWidget *widget,
     g_object_unref (chartable->pixmap);
   chartable->pixmap = NULL;
 
-  gtk_widget_queue_draw (widget);
+  if (chartable->pango_layout)
+    g_object_unref (chartable->pango_layout);
+
+  chartable->pango_layout = gtk_widget_create_pango_layout (widget, NULL);
+  pango_layout_set_font_description (chartable->pango_layout,
+                                     widget->style->font_desc);
+
+  /* FIXME: necessary? */
+  /* gtk_widget_queue_draw (widget); */
+  gtk_widget_queue_resize (widget);
 }
 
 /* GucharmapChartable class methods */
@@ -1687,6 +1697,11 @@ gucharmap_chartable_init (GucharmapChartable *chartable)
   AtkObject *accessible;
 #endif
 
+  chartable->font_name = NULL;
+  chartable->page_first_cell = 0;
+  chartable->active_cell = 0;
+  chartable->rows = 1;
+  chartable->cols = 1;
   chartable->zoom_mode_enabled = FALSE;
   chartable->zoom_window = NULL;
   chartable->snap_pow2_enabled = FALSE;
@@ -1756,18 +1771,13 @@ gucharmap_chartable_init (GucharmapChartable *chartable)
 
   gtk_widget_show_all (GTK_WIDGET (chartable));
 
-  chartable->font_name = NULL;
 
 //  FIXME do it on style-set
-  chartable->pango_layout = gtk_widget_create_pango_layout (widget, NULL);
+//   chartable->pango_layout = gtk_widget_create_pango_layout (widget, NULL);
+// 
+//   pango_layout_set_font_description (chartable->pango_layout,
+//                                      widget->style->font_desc);
 
-  pango_layout_set_font_description (chartable->pango_layout,
-                                     widget->style->font_desc);
-
-  chartable->page_first_cell = 0;
-  chartable->active_cell = 0;
-  chartable->rows = 1;
-  chartable->cols = 1;
 }
 
 GtkWidget *
@@ -1809,33 +1819,19 @@ gucharmap_chartable_set_font (GucharmapChartable *chartable, const gchar *font_n
   if (chartable->font_name != NULL
       && g_ascii_strcasecmp (chartable->font_name, font_name) == 0)
     return;
-  else
-    {
-      g_free (chartable->font_name);
-      chartable->font_name = NULL;
-      chartable->font_name = g_strdup (font_name);
-    }
+      
+  g_free (chartable->font_name);
+  chartable->font_name = g_strdup (font_name);
 
   font_desc = pango_font_description_from_string (chartable->font_name);
 
-  /* FIXMEchpe remove this, just assert GTK_WIDGET_REALIZED! */
   /* ensure style so that this has an effect even before it's realized */
   gtk_widget_ensure_style (widget);
   gtk_widget_modify_font (widget, font_desc);
-
-  /* new pango layout for the new font */
-  g_object_unref (chartable->pango_layout);
-  chartable->pango_layout = gtk_widget_create_pango_layout (widget, NULL);
-
-  pango_layout_set_font_description (chartable->pango_layout,
-                                     widget->style->font_desc);
-
   pango_font_description_free (font_desc);
 
-  /* force pixmap to be redrawn on next expose event */
-  if (chartable->pixmap != NULL)
-    g_object_unref (chartable->pixmap);
-  chartable->pixmap = NULL;
+  /* the style-set handler is going to do the rest of the work */
+  return;
 }
 
 gunichar 
@@ -1858,13 +1854,13 @@ gucharmap_chartable_set_active_character (GucharmapChartable *chartable,
 void
 gucharmap_chartable_set_snap_pow2 (GucharmapChartable *chartable, gboolean snap)
 {
+  snap = snap != FALSE;
+
   if (snap != chartable->snap_pow2_enabled)
     {
-      GtkWidget *widget = GTK_WIDGET (chartable);
       chartable->snap_pow2_enabled = snap;
 
-      /* sends "size-allocate" */
-      gtk_widget_queue_resize (widget); 
+      gtk_widget_queue_resize (GTK_WIDGET (chartable));
     }
 }
 
