@@ -1316,8 +1316,10 @@ gucharmap_chartable_key_release_event (GtkWidget *widget,
       /* XXX: If the group(shift_toggle) Xkb option is set, then releasing
        * the shift key gives either ISO_Next_Group or ISO_Prev_Group. Is
        * there a better way to handle this case? */
-      case GDK_Shift_L: case GDK_Shift_R:
-      case GDK_ISO_Next_Group: case GDK_ISO_Prev_Group:
+      case GDK_Shift_L:
+      case GDK_Shift_R:
+      case GDK_ISO_Next_Group:
+      case GDK_ISO_Prev_Group:
         gucharmap_chartable_set_zoom_enabled (chartable, FALSE);
         break;
     }
