@@ -285,35 +285,7 @@ gucharmap_mini_font_selection_new (void)
                                    NULL));
 }
 
-
-GType
-gucharmap_mini_font_selection_get_type (void)
-{
-  static GType gucharmap_mini_font_selection_type = 0;
-
-  if (gucharmap_mini_font_selection_type == 0)
-    {
-      const GTypeInfo gucharmap_mini_font_selection_info =
-      {
-        sizeof (GucharmapMiniFontSelectionClass),
-        NULL,           /* base_init */
-        NULL,           /* base_finalize */
-        (GClassInitFunc) gucharmap_mini_font_selection_class_init,
-        NULL,           /* class_finalize */
-        NULL,           /* class_data */
-        sizeof (GucharmapMiniFontSelection),
-        0,              /* n_preallocs */
-        (GInstanceInitFunc) gucharmap_mini_font_selection_init
-      };
-
-      gucharmap_mini_font_selection_type = g_type_register_static (
-              GTK_TYPE_HBOX, "GucharmapMiniFontSelection", 
-              &gucharmap_mini_font_selection_info, 0);
-    }
-
-  return gucharmap_mini_font_selection_type;
-}
-
+G_DEFINE_TYPE (GucharmapMiniFontSelection, gucharmap_mini_font_selection, GTK_TYPE_HBOX)
 
 /* XXX: should do error checking */
 gboolean 

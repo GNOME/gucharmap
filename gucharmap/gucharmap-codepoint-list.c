@@ -65,6 +65,11 @@ default_get_last_index (GucharmapCodepointList *list)
 }
 
 static void
+gucharmap_codepoint_list_init (GucharmapCodepointList *list)
+{
+}
+
+static void
 gucharmap_codepoint_list_class_init (GucharmapCodepointListClass *clazz)
 {
   g_type_class_add_private (clazz, sizeof (DefaultCodepointListPrivate));
@@ -75,31 +80,7 @@ gucharmap_codepoint_list_class_init (GucharmapCodepointListClass *clazz)
   clazz->get_last_index = default_get_last_index;
 }
 
-GType
-gucharmap_codepoint_list_get_type (void)
-{
-  static GType t = 0;
-
-  if (t == 0)
-    {
-      static const GTypeInfo type_info =
-        {
-          sizeof (GucharmapCodepointListClass),
-          NULL,
-          NULL,
-          (GClassInitFunc) gucharmap_codepoint_list_class_init,
-          NULL,
-          NULL,
-          sizeof (GucharmapCodepointList),
-          0,
-          NULL
-        };
-
-      t = g_type_register_static (G_TYPE_OBJECT, "GucharmapCodepointList", &type_info, 0);
-    }
-
-  return t;
-}
+G_DEFINE_TYPE (GucharmapCodepointList, gucharmap_codepoint_list, G_TYPE_OBJECT)
 
 /**
  * gucharmap_codepoint_list_get_char:

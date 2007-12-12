@@ -266,33 +266,7 @@ gucharmap_script_codepoint_list_init (GucharmapScriptCodepointList *guscl)
   priv->ranges = NULL;
 }
 
-GType
-gucharmap_script_codepoint_list_get_type (void)
-{
-  static GType t = 0;
-
-  if (t == 0)
-    {
-      static const GTypeInfo type_info =
-        {
-          sizeof (GucharmapScriptCodepointListClass),
-          NULL,
-          NULL,
-          (GClassInitFunc) gucharmap_script_codepoint_list_class_init,
-          NULL,
-          NULL,
-          sizeof (GucharmapScriptCodepointList),
-          0,
-          (GInstanceInitFunc) gucharmap_script_codepoint_list_init,
-          NULL
-        };
-
-      t = g_type_register_static (gucharmap_codepoint_list_get_type (), 
-                                  "GucharmapScriptCodepointList", &type_info, 0);
-    }
-
-  return t;
-}
+G_DEFINE_TYPE (GucharmapScriptCodepointList, gucharmap_script_codepoint_list, gucharmap_codepoint_list_get_type ())
 
 /**
  * gucharmap_script_codepoint_list_new:

@@ -850,32 +850,7 @@ gucharmap_search_dialog_class_init (GucharmapSearchDialogClass *clazz)
   _gucharmap_intl_ensure_initialized ();
 }
 
-GType
-gucharmap_search_dialog_get_type (void)
-{
-  static GType t = 0;
-
-  if (t == 0)
-    {
-      static const GTypeInfo type_info =
-        {
-          sizeof (GucharmapSearchDialogClass),
-          NULL,
-          NULL,
-          (GClassInitFunc) gucharmap_search_dialog_class_init,
-          NULL,
-          NULL,
-          sizeof (GucharmapSearchDialog),
-          0,
-          (GInstanceInitFunc) gucharmap_search_dialog_init,
-          NULL
-        };
-
-      t = g_type_register_static (gtk_dialog_get_type (), "GucharmapSearchDialog", &type_info, 0);
-    }
-
-  return t;
-}
+G_DEFINE_TYPE (GucharmapSearchDialog, gucharmap_search_dialog, GTK_TYPE_DIALOG)
 
 GtkWidget * 
 gucharmap_search_dialog_new (GucharmapWindow *guw)

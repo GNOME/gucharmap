@@ -934,36 +934,9 @@ gucharmap_window_class_init (GucharmapWindowClass *clazz)
   _gucharmap_intl_ensure_initialized ();
 }
 
-GType 
-gucharmap_window_get_type (void)
-{
-  static GType gucharmap_window_type = 0;
+G_DEFINE_TYPE (GucharmapWindow, gucharmap_window, GTK_TYPE_WINDOW)
 
-  if (! gucharmap_window_type)
-    {
-      static const GTypeInfo gucharmap_window_info =
-        {
-          sizeof (GucharmapWindowClass),
-          NULL,
-          NULL,
-          (GClassInitFunc) gucharmap_window_class_init,
-          NULL,
-          NULL,
-          sizeof (GucharmapWindow),
-          0,
-          (GInstanceInitFunc) gucharmap_window_init
-        };
-
-      gucharmap_window_type = g_type_register_static (GTK_TYPE_WINDOW,
-                                                      "GucharmapWindow",
-                                                      &gucharmap_window_info,
-                                                      0);
-    }
-
-  return gucharmap_window_type;
-}
-
-GtkWidget * 
+GtkWidget *
 gucharmap_window_new (void)
 {
   return GTK_WIDGET (g_object_new (gucharmap_window_get_type (), NULL));
