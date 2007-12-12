@@ -21,6 +21,7 @@
 #define GUCHARMAP_CHARTABLE_ACCESSIBLE_H
 
 #include <gtk/gtkaccessible.h>
+#include <gtk/gtkadjustment.h>
 
 #include "gucharmap-chartable.h"
 
@@ -38,6 +39,7 @@ typedef struct _GucharmapChartableAccessibleClass GucharmapChartableAccessibleCl
 struct _GucharmapChartableAccessible
 {
   GtkAccessible parent_instance;
+  GtkAdjustment *vadjustment;
 };
 
 struct _GucharmapChartableAccessibleClass

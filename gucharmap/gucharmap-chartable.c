@@ -1473,9 +1473,6 @@ gucharmap_chartable_set_adjustments (GucharmapChartable *chartable,
     }
 
   update_scrollbar_adjustment (chartable);
-
-  // and remember to update the accessible too!!!
-  // see gtkiconview.c for example
 }
 
 static void
