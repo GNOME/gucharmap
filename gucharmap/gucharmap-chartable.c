@@ -500,19 +500,15 @@ make_zoom_window (GucharmapChartable *chartable)
   if (chartable->zoom_window)
     return;
 
-  chartable->zoom_window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+  chartable->zoom_window = gtk_window_new (GTK_WINDOW_POPUP);
+  gtk_window_set_resizable (GTK_WINDOW (chartable->zoom_window), FALSE);
+  gtk_window_set_screen (GTK_WINDOW (chartable->zoom_window),
+                         gtk_widget_get_screen (widget));
+
   chartable->zoom_image = gtk_image_new ();
   gtk_container_add (GTK_CONTAINER (chartable->zoom_window),
                      chartable->zoom_image);
   gtk_widget_show (chartable->zoom_image);
-
-  gtk_window_set_resizable (GTK_WINDOW (chartable->zoom_window), FALSE);
-  gtk_window_set_type_hint (GTK_WINDOW (chartable->zoom_window), 
-                            GDK_WINDOW_TYPE_HINT_UTILITY);
-  gtk_window_set_decorated (GTK_WINDOW (chartable->zoom_window), FALSE);
-
-  gtk_window_set_screen (GTK_WINDOW (chartable->zoom_window),
-                         gtk_widget_get_screen (widget));
 }
 
 static void
