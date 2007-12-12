@@ -1737,6 +1737,7 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
   /* Keybindings */
   binding_set = gtk_binding_set_by_class (klass);
 
+  /* Cursor movement */
   gucharmap_chartable_add_move_binding (binding_set, GDK_Up, 0,
                                         GTK_MOVEMENT_DISPLAY_LINES, -1);
   gucharmap_chartable_add_move_binding (binding_set, GDK_KP_Up, 0,
@@ -1869,6 +1870,7 @@ gucharmap_chartable_init (GucharmapChartable *chartable)
   chartable->cols = 1;
   chartable->zoom_mode_enabled = FALSE;
   chartable->zoom_window = NULL;
+  chartable->zoom_image = NULL;
   chartable->snap_pow2_enabled = FALSE;
 
 #ifdef ENABLE_ACCESSIBLE
@@ -1955,6 +1957,13 @@ gucharmap_chartable_set_zoom_enabled (GucharmapChartable *chartable,
     }
 }
 
+/**
+ * gucharmap_chartable_set_font:
+ * @chartable: a #GucharmapChartable
+ * @font_name:
+ *
+ * Sets @font_name as the font to use to display the character table.
+ */
 void 
 gucharmap_chartable_set_font (GucharmapChartable *chartable, const char *font_name)
 {
@@ -1970,10 +1979,16 @@ gucharmap_chartable_set_font (GucharmapChartable *chartable, const char *font_na
       return;
     }
 
-  gucharmap_chartable_set_font_desc (chartable, font_desc);
+  gucharmap_chartable_set_font_desc (chartable, font_desc /* adopting */);
 }
 
-gunichar 
+/**
+ * gucharmap_chartable_get_active_character:
+ * @chartable: a #GucharmapChartable
+ *
+ * Returns: the currently selected character
+ */
+gunichar
 gucharmap_chartable_get_active_character (GucharmapChartable *chartable)
 {
   if (!chartable->codepoint_list)
@@ -1982,16 +1997,32 @@ gucharmap_chartable_get_active_character (GucharmapChartable *chartable)
   return gucharmap_codepoint_list_get_char (chartable->codepoint_list, chartable->active_cell);
 }
 
+/**
+ * gucharmap_chartable_get_active_character:
+ * @chartable: a #GucharmapChartable
+ * @wc: a unicode character (UTF-32)
+ *
+ * Sets @wc as the selected character.
+ */
 void
 gucharmap_chartable_set_active_character (GucharmapChartable *chartable, 
-                                      gunichar        wc)
+                                          gunichar wc)
 {
   set_active_char (chartable, wc);
   _gucharmap_chartable_redraw (chartable, TRUE);
 }
 
+/**
+ * gucharmap_chartable_set_snap_pow2:
+ * @chartable: a #GucharmapChartable
+ * @snap: whether to enable or disable snapping
+ *
+ * Sets whether the number columns the character table shows should
+ * always be a power of 2.
+ */
 void
-gucharmap_chartable_set_snap_pow2 (GucharmapChartable *chartable, gboolean snap)
+gucharmap_chartable_set_snap_pow2 (GucharmapChartable *chartable,
+                                   gboolean snap)
 {
   snap = snap != FALSE;
 
@@ -2003,6 +2034,16 @@ gucharmap_chartable_set_snap_pow2 (GucharmapChartable *chartable, gboolean snap)
     }
 }
 
+/**
+ * gucharmap_chartable_get_active_character:
+ * @chartable: a #GucharmapChartable
+ * @list: a #GucharmapCodepointList
+ *
+ * Sets the codepoint list to show in the character table.
+ * 
+ * Note: this function adopts the refcount of @list instead
+ * of adding its own reference.
+ */
 void
 gucharmap_chartable_set_codepoint_list (GucharmapChartable     *chartable,
                                         GucharmapCodepointList *list /* adopting */)
@@ -2036,12 +2077,24 @@ gucharmap_chartable_set_codepoint_list (GucharmapChartable     *chartable,
   gtk_widget_queue_draw (widget);
 }
 
+/**
+ * gucharmap_chartable_get_codepoint_list:
+ * @chartable: a #GucharmapChartable
+ *
+ * Returns: the current codepoint list
+ */
 GucharmapCodepointList *
 gucharmap_chartable_get_codepoint_list (GucharmapChartable *chartable)
 {
   return chartable->codepoint_list;
 }
 
+/**
+ * gucharmap_chartable_get_active_cell:
+ * @chartable: a #GucharmapChartable
+ *
+ * Returns: the currently selected cell
+ */
 gint
 gucharmap_chartable_get_active_cell (GucharmapChartable *chartable)
 {
