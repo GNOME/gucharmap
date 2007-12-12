@@ -137,6 +137,12 @@ gucharmap_chartable_set_font_desc (GucharmapChartable *chartable,
   gtk_widget_queue_resize (GTK_WIDGET (chartable));
 }
 
+static void
+status_message (GucharmapChartable *chartable, const gchar *message)
+{
+  g_signal_emit (chartable, signals[STATUS_MESSAGE], 0, message);
+}
+
 /* depends on directionality */
 static guint
 get_cell_at_rowcol (GucharmapChartable *chartable,
@@ -1133,6 +1139,90 @@ gucharmap_chartable_button_release (GtkWidget *widget,
   return FALSE;
 }
 
+static gint
+compute_drag_font_size (GucharmapChartable *chartable)
+{
+  gint font_size;
+
+  font_size = pango_font_description_get_size (chartable->font_desc);
+
+  return 5 * ((font_size > 0) ? font_size : 10 * PANGO_SCALE);
+}
+
+static void
+gucharmap_chartable_drag_begin (GtkWidget *widget,
+                                GdkDragContext *context)
+{
+  GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (widget);
+  GdkPixmap *drag_icon;
+
+  drag_icon = create_glyph_pixmap (chartable,
+                                   gucharmap_chartable_get_active_character (chartable),
+                                   compute_drag_font_size (chartable),
+                                   FALSE);
+  gtk_drag_set_icon_pixmap (context, gtk_widget_get_colormap (widget), 
+                            drag_icon, NULL, -8, -8);
+  g_object_unref (drag_icon);
+
+  /* no need to chain up */
+}
+
+static void
+gucharmap_chartable_drag_data_get (GtkWidget *widget, 
+                                   GdkDragContext *context,
+                                   GtkSelectionData *selection_data,
+                                   guint info,
+                                   guint time)
+
+{
+  GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (widget);
+  gchar buf[7];
+  gint n;
+
+  n = g_unichar_to_utf8 (gucharmap_codepoint_list_get_char (chartable->codepoint_list, chartable->active_cell), buf);
+  gtk_selection_data_set_text (selection_data, buf, n);
+
+  /* no need to chain up */
+}
+
+static void
+gucharmap_chartable_drag_data_received (GtkWidget *widget,
+                                        GdkDragContext *context,
+                                        gint x, gint y,
+                                        GtkSelectionData *selection_data,
+                                        guint info,
+                                        guint time)
+{
+  GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (widget);
+  gchar *text;
+  gunichar wc;
+
+  if (selection_data->length <= 0 || selection_data->data == NULL)
+    return;
+
+  text = (gchar *) gtk_selection_data_get_text (selection_data);
+
+  if (text == NULL) /* XXX: say something in the statusbar? */
+    return;
+
+  wc = g_utf8_get_char_validated (text, -1);
+
+  if (wc == (gunichar)(-2) || wc == (gunichar)(-1) || wc > UNICHAR_MAX)
+    status_message (chartable, _("Unknown character, unable to identify."));
+  else if (gucharmap_codepoint_list_get_index (chartable->codepoint_list, wc) == (guint)(-1))
+    status_message (chartable, _("Not found."));
+  else
+    {
+      status_message (chartable, _("Character found."));
+      set_active_char (chartable, wc);
+      _gucharmap_chartable_redraw (chartable, TRUE);
+    }
+
+  g_free (text);
+
+  /* no need to chain up */
+}
+
 static gboolean
 gucharmap_chartable_expose_event (GtkWidget *widget, 
                                   GdkEventExpose *event)
@@ -1540,6 +1630,8 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
 
   object_class->finalize = gucharmap_chartable_finalize;
 
+  widget_class->drag_data_get = gucharmap_chartable_drag_data_get;
+  widget_class->drag_data_received = gucharmap_chartable_drag_data_received;
   widget_class->button_press_event = gucharmap_chartable_button_press;
   widget_class->button_release_event = gucharmap_chartable_button_release;
   widget_class->expose_event = gucharmap_chartable_expose_event;
@@ -1551,6 +1643,10 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
   widget_class->size_allocate = gucharmap_chartable_size_allocate;
   widget_class->size_request = gucharmap_chartable_size_request;
   widget_class->style_set = gucharmap_chartable_style_set;
+
+  /* XXX: We use this instead of gtk_drag_source_set due to #114534 */
+  /* FIXMEchpe: investigate if this can be removed now */
+  widget_class->drag_begin = gucharmap_chartable_drag_begin;
 
   klass->set_scroll_adjustments = gucharmap_chartable_set_adjustments;
   klass->move_cursor = gucharmap_chartable_move_cursor;
@@ -1721,91 +1817,6 @@ set_top_row (GucharmapChartable *chartable,
                  gucharmap_chartable_get_active_character (chartable));
 }
 
-static void
-status_message (GucharmapChartable *chartable, const gchar *message)
-{
-  g_signal_emit (chartable, signals[STATUS_MESSAGE], 0, message);
-}
-
-
-static void
-drag_data_received (GtkWidget *widget,
-                    GdkDragContext *context,
-                    gint x, gint y,
-                    GtkSelectionData *selection_data,
-                    guint info,
-                    guint time,
-                    GucharmapChartable *chartable)
-{
-  gchar *text;
-  gunichar wc;
-
-  if (selection_data->length <= 0 || selection_data->data == NULL)
-    return;
-
-  text = (gchar *) gtk_selection_data_get_text (selection_data);
-
-  if (text == NULL) /* XXX: say something in the statusbar? */
-    return;
-
-  wc = g_utf8_get_char_validated (text, -1);
-
-  if (wc == (gunichar)(-2) || wc == (gunichar)(-1) || wc > UNICHAR_MAX)
-    status_message (chartable, _("Unknown character, unable to identify."));
-  else if (gucharmap_codepoint_list_get_index (chartable->codepoint_list, wc) == (guint)(-1))
-    status_message (chartable, _("Not found."));
-  else
-    {
-      status_message (chartable, _("Character found."));
-      set_active_char (chartable, wc);
-      _gucharmap_chartable_redraw (chartable, TRUE);
-    }
-
-  g_free (text);
-}
-
-static gint
-compute_drag_font_size (GucharmapChartable *chartable)
-{
-  gint font_size;
-
-  font_size = pango_font_description_get_size (chartable->font_desc);
-
-  return 5 * ((font_size > 0) ? font_size : 10 * PANGO_SCALE);
-}
-
-static void
-drag_begin (GtkWidget *widget, 
-            GdkDragContext *context,
-            GucharmapChartable *chartable)
-{
-  GdkPixmap *drag_icon;
-
-  drag_icon = create_glyph_pixmap (chartable,
-                                   gucharmap_chartable_get_active_character (chartable),
-                                   compute_drag_font_size (chartable),
-                                   FALSE);
-  gtk_drag_set_icon_pixmap (context, gtk_widget_get_colormap (widget), 
-                            drag_icon, NULL, -8, -8);
-  g_object_unref (drag_icon);
-}
-
-static void
-drag_data_get (GtkWidget *widget, 
-               GdkDragContext *context,
-               GtkSelectionData *selection_data,
-               guint info,
-               guint time,
-               GucharmapChartable *chartable)
-
-{
-  gchar buf[7];
-  gint n;
-
-  n = g_unichar_to_utf8 (gucharmap_codepoint_list_get_char (chartable->codepoint_list, chartable->active_cell), buf);
-  gtk_selection_data_set_text (selection_data, buf, n);
-}
-
 /* does all the initial construction */
 static void
 gucharmap_chartable_init (GucharmapChartable *chartable)
@@ -1841,17 +1852,6 @@ gucharmap_chartable_init (GucharmapChartable *chartable)
                      NULL, 0,
                      GDK_ACTION_COPY);
   gtk_drag_dest_add_text_targets (widget);
-
-  g_signal_connect (G_OBJECT (widget), "drag-data-received",
-                    G_CALLBACK (drag_data_received), chartable);
-
-  /* XXX: gtk_drag_source_set removed due to #114534 (do it by hand) */
-
-  g_signal_connect (G_OBJECT (widget), "drag-begin",
-                    G_CALLBACK (drag_begin), chartable);
-
-  g_signal_connect (G_OBJECT (widget), "drag-data-get",
-                    G_CALLBACK (drag_data_get), chartable);
 
   /* this is required to get key_press events */
   GTK_WIDGET_SET_FLAGS (widget, GTK_CAN_FOCUS);
