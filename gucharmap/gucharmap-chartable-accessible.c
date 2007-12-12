@@ -70,10 +70,7 @@ cell_destroyed (GucharmapChartableCellAccessible *cell)
   guint n_cells, n;
   GucharmapChartableAccessible *accessible;
 
-  g_assert (IS_GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE (cell));
-
   parent = atk_object_get_parent (ATK_OBJECT (cell));
-  g_assert (IS_GUCHARMAP_CHARTABLE_ACCESSIBLE (parent));
   accessible = GUCHARMAP_CHARTABLE_ACCESSIBLE (parent);
   priv = GET_PRIVATE (accessible);
 
@@ -310,8 +307,6 @@ gucharmap_chartable_accessible_update_all_cells (AtkObject *obj)
   GPtrArray *cells;
   guint n_cells, n;
 
-  g_assert (IS_GUCHARMAP_CHARTABLE_ACCESSIBLE (obj));
-
   widget = GTK_ACCESSIBLE (obj)->widget;
   if (!widget)
     /* Widget is being deleted */
@@ -346,7 +341,6 @@ size_allocated (GtkWidget     *widget,
                 GtkAllocation *alloc,
                 gpointer      data)
 {
-  g_assert (ATK_IS_OBJECT (data));
   gucharmap_chartable_accessible_update_all_cells (ATK_OBJECT (data));
 }
 
@@ -750,8 +744,6 @@ gucharmap_chartable_accessible_new (GucharmapChartable *chartable)
 {
   GObject *object;
   AtkObject *accessible;
-
-  g_assert (IS_GUCHARMAP_CHARTABLE (chartable));
 
   object = g_object_new (gucharmap_chartable_accessible_get_type (), NULL);
   accessible = ATK_OBJECT (object);

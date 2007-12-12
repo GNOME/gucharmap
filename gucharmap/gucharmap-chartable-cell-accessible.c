@@ -57,10 +57,7 @@ gucharmap_chartable_cell_accessible_destroyed (GtkWidget       *widget,
 static gint
 gucharmap_chartable_cell_accessible_get_index_in_parent (AtkObject *obj)
 {
-  GucharmapChartableCellAccessible *cell;
-
-  g_assert (IS_GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE (obj));
-  cell = GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE (obj);
+  GucharmapChartableCellAccessible *cell = GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE (obj);
 
   return cell->index;
 }
@@ -89,8 +86,6 @@ gucharmap_chartable_cell_accessible_get_extents (AtkComponent *component,
   GucharmapChartable *chartable;
   gint real_x, real_y, real_width, real_height;
   gint row, column;
-
-  g_assert (IS_GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE (component));
 
   cell = GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE (component);
 
@@ -123,16 +118,13 @@ gucharmap_chartable_cell_accessible_get_extents (AtkComponent *component,
 static gboolean 
 gucharmap_chartable_cell_accessible_grab_focus (AtkComponent *component)
 {
-  GucharmapChartableCellAccessible *cell;
+  GucharmapChartableCellAccessible *cell = GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE (component);
   GucharmapChartable *chartable;
-
-  g_assert (IS_GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE (component));
-
-  cell = GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE (component);
 
   chartable = GUCHARMAP_CHARTABLE (cell->widget);
   /* FIXME: this looks wrong, index is the index in the codepoint list, not the character itself */
   gucharmap_chartable_set_active_character (chartable, cell->index);
+
   return TRUE;
 }
 
@@ -303,9 +295,6 @@ gucharmap_chartable_cell_accessible_initialise (GucharmapChartableCellAccessible
                                                 AtkObject *parent,
                                                 gint      index)
 {
-  g_assert (IS_GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE (cell));
-  g_return_if_fail (GTK_IS_WIDGET (widget));
-
   cell->widget = widget;
   atk_object_set_parent (ATK_OBJECT (cell), parent);
   cell->index = index;
