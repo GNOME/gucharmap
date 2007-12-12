@@ -1371,7 +1371,7 @@ gucharmap_chartable_size_allocate (GtkWidget *widget,
                                    GtkAllocation *allocation)
 {
   GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (widget);
-  gint old_rows, old_cols;
+  int old_rows, old_cols;
 
   GTK_WIDGET_CLASS (gucharmap_chartable_parent_class)->size_allocate (widget, allocation);
 
@@ -1592,9 +1592,6 @@ gucharmap_chartable_move_cursor (GucharmapChartable *chartable,
     default:
       g_assert_not_reached ();
     }
-
-//   chartable->priv->ctrl_pressed = FALSE;
-//   chartable->priv->shift_pressed = FALSE;
 
   _gucharmap_chartable_redraw (chartable, TRUE);
 
