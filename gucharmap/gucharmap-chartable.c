@@ -1780,7 +1780,9 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
                   GTK_TYPE_MOVEMENT_STEP,
                   G_TYPE_INT);
 
-  /* not using g_param_spec_unichar on purpose */
+  /* Not using g_param_spec_unichar on purpose, since it disallows certain values
+   * we want (it's performing a g_unichar_validate).
+   */
   g_object_class_install_property
     (object_class,
      PROP_ACTIVE_CHAR,
