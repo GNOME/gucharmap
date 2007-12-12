@@ -180,6 +180,7 @@ cell_info_new (GucharmapChartableAccessible *table,
   info->index = index;
 
   cell_list = get_cell_list (table);
+  /* FIXME: g_list_append? come on! */
   set_cell_list (table, g_list_append (cell_list, info));
   /* Setup weak reference notification */
 
