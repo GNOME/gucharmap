@@ -74,20 +74,6 @@ find_cell (GucharmapChartableAccessible *table,
   return NULL;
 }
 
-//FIXMEchpe
-
-static GucharmapChartable*
-get_chartable (GtkWidget *table)
-{
-  GtkWidget *widget;
-
-  g_return_val_if_fail (GTK_IS_DRAWING_AREA (table), NULL);
-  widget = table->parent;
-  g_return_val_if_fail (IS_GUCHARMAP_CHARTABLE (widget), NULL);
-  return GUCHARMAP_CHARTABLE (widget);
-}
-
-
 static void
 set_cell_visibility (GucharmapChartable  *chartable,
                      GucharmapChartableCellAccessible  *cell,
@@ -206,14 +192,12 @@ gucharmap_chartable_accessible_ref_child (AtkObject *obj, gint i)
     /* State is defunct */
     return NULL;
 
-  chartable = get_chartable (widget); 
-  if (!chartable)
-    return NULL;
-
   if (i > UNICHAR_MAX)
     return NULL;
 
+  chartable = GUCHARMAP_CHARTABLE (widget);
   table = GUCHARMAP_CHARTABLE_ACCESSIBLE (obj);
+
   /*
    * Check whether the child is cached
    */
@@ -252,9 +236,7 @@ gucharmap_chartable_accessible_ref_at (AtkTable *table,
     /* State is defunct */
     return NULL;
 
-  chartable = get_chartable (widget); 
-  if (!chartable)
-    return NULL;
+  chartable = GUCHARMAP_CHARTABLE (widget);
 
   index =  row * chartable->cols + column;
 
@@ -280,11 +262,9 @@ gucharmap_chartable_accessible_ref_accessible_at_point (AtkComponent *component,
     /* State is defunct */
     return NULL;
 
-  chartable = get_chartable (widget); 
-  if (!chartable)
-    return NULL;
+  chartable = GUCHARMAP_CHARTABLE (widget);
 
-  atk_component_get_extents (component, &x_pos, &y_pos, 
+  atk_component_get_extents (component, &x_pos, &y_pos,
                              NULL, NULL, coord_type);
 
   /* Find cell at offset x - x_pos, y - y_pos */
@@ -344,20 +324,15 @@ gucharmap_chartable_accessible_ref_state_set (AtkObject *obj)
   return state_set;
 }
 
-
+/* FIXMEchpe: shouldn't this get the number from the chartable's codepoint list instead?? */
 static gint
 gucharmap_chartable_accessible_get_n_children (AtkObject *obj)
 {
   GtkWidget *widget;
-  GucharmapChartable *chartable;
 
   widget = GTK_ACCESSIBLE (obj)->widget;
   if (widget == NULL)
     /* State is defunct */
-    return 0;
-
-  chartable = get_chartable (widget); 
-  if (!chartable)
     return 0;
 
   return UNICHAR_MAX + 1;
@@ -431,7 +406,7 @@ traverse_cells (AtkObject *obj)
     return;
   
   table = GUCHARMAP_CHARTABLE_ACCESSIBLE (obj);
-  chartable = get_chartable (widget);
+  chartable = GUCHARMAP_CHARTABLE (widget);
 
   cell_list = get_cell_list (table);
   for (l = cell_list; l; l = l->next)
@@ -534,7 +509,8 @@ gucharmap_chartable_accessible_initialize (AtkObject *obj,
 
   widget = GTK_WIDGET (data);
   accessible = GUCHARMAP_CHARTABLE_ACCESSIBLE (obj);
-  chartable = get_chartable (widget);
+  chartable = GUCHARMAP_CHARTABLE (widget);
+
   if (chartable->vadjustment)
     {
       GtkAdjustment **adjustment_ptr = &accessible->vadjustment;
@@ -630,9 +606,7 @@ gucharmap_chartable_accessible_get_n_columns (AtkTable *table)
     /* State is defunct */
     return 0;
 
-  chartable = get_chartable (widget); 
-  if (!chartable)
-    return 0;
+  chartable = GUCHARMAP_CHARTABLE (widget);
 
   return chartable->cols;
 }
@@ -666,11 +640,9 @@ gucharmap_chartable_accessible_get_n_rows (AtkTable *table)
     /* State is defunct */
     return 0;
 
-  chartable = get_chartable (widget); 
-  if (!chartable)
-    return 0;
+  chartable = GUCHARMAP_CHARTABLE (widget);
 
-  n_rows = UNICHAR_MAX / chartable->cols + 1; 
+  n_rows = UNICHAR_MAX / chartable->cols + 1;
 
   return n_rows;
 }
@@ -705,9 +677,7 @@ gucharmap_chartable_accessible_get_index_at (AtkTable *table,
     /* State is defunct */
     return -1;
 
-  chartable = get_chartable (widget); 
-  if (!chartable)
-    return -1;
+  chartable = GUCHARMAP_CHARTABLE (widget);
 
   return row * chartable->cols + column;
 }
@@ -725,9 +695,7 @@ gucharmap_chartable_accessible_get_column_at_index (AtkTable *table,
     /* State is defunct */
     return -1;
 
-  chartable = get_chartable (widget); 
-  if (!chartable)
-    return -1;
+  chartable = GUCHARMAP_CHARTABLE (widget);
 
   return index % chartable->cols;
 }
@@ -745,9 +713,7 @@ gucharmap_chartable_accessible_get_row_at_index (AtkTable *table,
     /* State is defunct */
     return -1;
 
-  chartable = get_chartable (widget); 
-  if (!chartable)
-    return -1;
+  chartable = GUCHARMAP_CHARTABLE (widget);
 
   return index / chartable->cols;
 }
