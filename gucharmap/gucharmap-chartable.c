@@ -1334,9 +1334,17 @@ gucharmap_chartable_motion_notify (GtkWidget *widget,
 static void
 gucharmap_chartable_realize (GtkWidget *widget)
 {
+  GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (widget);
+
   GTK_WIDGET_CLASS (gucharmap_chartable_parent_class)->realize (widget);
 
   gdk_window_set_back_pixmap (widget->window, NULL, FALSE);
+    
+  if (chartable->pixmap != NULL)
+    {
+      g_object_unref (chartable->pixmap);
+      chartable->pixmap = NULL;
+    }
 }
 
 static void
