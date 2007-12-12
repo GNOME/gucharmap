@@ -41,6 +41,9 @@ struct _GucharmapChartable
   GtkAdjustment *vadjustment;
   gulong vadjustment_changed_handler_id;
 
+  /* Font */
+  PangoFontDescription *font_desc;
+
   /* rows and columns on a page */
   gint rows, cols;
 
@@ -130,8 +133,7 @@ _gucharmap_chartable_cell_column (GucharmapChartable *chartable,
 static gint
 bare_minimal_column_width (GucharmapChartable *chartable)
 {
-  GtkWidget *widget = GTK_WIDGET (chartable);
-  return PANGO_PIXELS (3.0 * pango_font_description_get_size (widget->style->font_desc));
+  return PANGO_PIXELS (3.0 * pango_font_description_get_size (chartable->font_desc));
 }
 
 static gint
@@ -181,8 +183,7 @@ _gucharmap_chartable_x_offset (GucharmapChartable *chartable, gint col)
 static gint
 bare_minimal_row_height (GucharmapChartable *chartable)
 {
-  GtkWidget *widget = GTK_WIDGET (chartable);
-  return PANGO_PIXELS (2.5 * pango_font_description_get_size (widget->style->font_desc));
+  return PANGO_PIXELS (2.5 * pango_font_description_get_size (chartable->font_desc));
 }
 
 static gint
@@ -258,8 +259,8 @@ compute_zoom_font_size (GucharmapChartable *chartable)
   limit = (0.3 * screen_height) / bare_minimal_row_height (chartable);
   scale = CLAMP (limit, 1.0, 12.0);
 
-  font_size = pango_font_description_get_size (
-          gtk_widget_get_style (widget)->font_desc);
+  font_size = pango_font_description_get_size (chartable->font_desc);
+  /* FIXMEchpe absolute size ? */
 
   return scale * ((font_size > 0) ? font_size : 10 * PANGO_SCALE);
 }
@@ -307,13 +308,11 @@ layout_scaled_glyph (GucharmapChartable *chartable,
                      gint font_size,
                      gchar **font_family)
 {
-  GtkWidget *widget = GTK_WIDGET (chartable);
   PangoFontDescription *font_desc;
   PangoLayout *layout;
   gchar buf[11];
 
-  font_desc = pango_font_description_copy (
-          gtk_widget_get_style (widget)->font_desc);
+  font_desc = pango_font_description_copy (chartable->font_desc);
   pango_font_description_set_size (font_desc, font_size);
 
   layout = pango_layout_new (pango_layout_get_context (chartable->pango_layout));
@@ -1140,9 +1139,12 @@ gucharmap_chartable_style_set (GtkWidget *widget,
   if (chartable->pango_layout)
     g_object_unref (chartable->pango_layout);
 
+  if (chartable->font_desc == NULL)
+    chartable->font_desc = pango_font_description_copy (widget->style->font_desc);
+
   chartable->pango_layout = gtk_widget_create_pango_layout (widget, NULL);
   pango_layout_set_font_description (chartable->pango_layout,
-                                     widget->style->font_desc);
+                                     chartable->font_desc);
 
   /* FIXME: necessary? */
   /* gtk_widget_queue_draw (widget); */
@@ -1185,7 +1187,8 @@ gucharmap_chartable_finalize (GObject *object)
 {
   GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (object);
 
-  g_free (chartable->font_name);
+  if (chartable->font_desc)
+    pango_font_description_free (chartable->font_desc);
 
   if (chartable->pango_layout)
     g_object_unref (chartable->pango_layout);
@@ -1650,8 +1653,7 @@ compute_drag_font_size (GucharmapChartable *chartable)
 {
   gint font_size;
 
-  font_size = pango_font_description_get_size (
-          gtk_widget_get_style (GTK_WIDGET (chartable))->font_desc);
+  font_size = pango_font_description_get_size (chartable->font_desc);
 
   return 5 * ((font_size > 0) ? font_size : 10 * PANGO_SCALE);
 }
@@ -1772,12 +1774,8 @@ gucharmap_chartable_init (GucharmapChartable *chartable)
   gtk_widget_show_all (GTK_WIDGET (chartable));
 
 
-//  FIXME do it on style-set
-//   chartable->pango_layout = gtk_widget_create_pango_layout (widget, NULL);
-// 
-//   pango_layout_set_font_description (chartable->pango_layout,
-//                                      widget->style->font_desc);
-
+// FIXME do it on style-set
+  chartable->pango_layout = gtk_widget_create_pango_layout (widget, NULL);
 }
 
 GtkWidget *
@@ -1810,28 +1808,29 @@ gucharmap_chartable_zoom_disable (GucharmapChartable *chartable)
 }
 
 void 
-gucharmap_chartable_set_font (GucharmapChartable *chartable, const gchar *font_name)
+gucharmap_chartable_set_font (GucharmapChartable *chartable, const char *font_name)
 {
   GtkWidget *widget = GTK_WIDGET (chartable);
   PangoFontDescription *font_desc;
 
-  /* if it's the same as the current font, do nothing */
-  if (chartable->font_name != NULL
-      && g_ascii_strcasecmp (chartable->font_name, font_name) == 0)
-    return;
-      
-  g_free (chartable->font_name);
-  chartable->font_name = g_strdup (font_name);
+  g_return_if_fail (font_name != NULL);
 
-  font_desc = pango_font_description_from_string (chartable->font_name);
+  font_desc = pango_font_description_from_string (font_name);
+  if (chartable->font_desc &&
+      pango_font_description_equal (font_desc, chartable->font_desc))
+    {
+      pango_font_description_free (font_desc);
+      return;
+    }
 
-  /* ensure style so that this has an effect even before it's realized */
-  gtk_widget_ensure_style (widget);
-  gtk_widget_modify_font (widget, font_desc);
-  pango_font_description_free (font_desc);
+  if (chartable->font_desc)
+    pango_font_description_free (chartable->font_desc);
+  chartable->font_desc = font_desc;
+ 
+  if (chartable->pango_layout)
+     pango_layout_set_font_description (chartable->pango_layout, font_desc);
 
-  /* the style-set handler is going to do the rest of the work */
-  return;
+  gtk_widget_queue_resize (widget);
 }
 
 gunichar 
