@@ -24,6 +24,7 @@
 #include <gtk/gtk.h>
 
 #include "gucharmap.h"
+#include "gucharmap-intl.h"
 #include "gucharmap-chartable.h"
 #include "gucharmap-chartable-private.h"
 #include "gucharmap-chartable-accessible.h"
@@ -764,6 +765,7 @@ gucharmap_chartable_accessible_new (GucharmapChartable *chartable)
   /* atk is fucked up... */
   atk_object_initialize (accessible, GTK_WIDGET (chartable));
   accessible->role = ATK_ROLE_TABLE;
+  atk_object_set_name (accessible, _("Character Table"));
 
   return accessible;
 }

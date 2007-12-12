@@ -1418,6 +1418,43 @@ gucharmap_chartable_style_set (GtkWidget *widget,
   gtk_widget_queue_resize (widget);
 }
 
+#ifdef ENABLE_ACCESSIBLE
+
+static AtkObject *
+gucharmap_chartable_get_accessible (GtkWidget *widget)
+{
+  static gboolean first_time = TRUE;
+
+  if (first_time)
+    {
+      AtkObjectFactory *factory;
+      AtkRegistry *registry;
+      GType derived_type; 
+      GType derived_atk_type; 
+
+      /*
+       * Figure out whether accessibility is enabled by looking at the
+       * type of the accessible object which would be created for
+       * the parent type of GtkIconView.
+       */
+      derived_type = g_type_parent (GUCHARMAP_TYPE_CHARTABLE);
+
+      registry = atk_get_default_registry ();
+      factory = atk_registry_get_factory (registry,
+                                          derived_type);
+      derived_atk_type = atk_object_factory_get_accessible_type (factory);
+      if (g_type_is_a (derived_atk_type, GTK_TYPE_ACCESSIBLE)) 
+	atk_registry_set_factory_type (registry, 
+				       GUCHARMAP_TYPE_CHARTABLE,
+				       gucharmap_chartable_accessible_factory_get_type ());
+      first_time = FALSE;
+    }
+
+  return GTK_WIDGET_CLASS (gucharmap_chartable_parent_class)->get_accessible (widget);
+}
+
+#endif
+
 /* GucharmapChartable class methods */
 
 static void
@@ -1583,9 +1620,6 @@ static void
 gucharmap_chartable_init (GucharmapChartable *chartable)
 {
   GtkWidget *widget = GTK_WIDGET (chartable);
-#ifdef ENABLE_ACCESSIBLE
-  AtkObject *accessible;
-#endif
 
   chartable->page_first_cell = 0;
   chartable->active_cell = 0;
@@ -1614,20 +1648,6 @@ gucharmap_chartable_init (GucharmapChartable *chartable)
 
   /* this is required to get key_press events */
   GTK_WIDGET_SET_FLAGS (widget, GTK_CAN_FOCUS);
-
-#ifdef ENABLE_ACCESSIBLE
-  accessible = gtk_widget_get_accessible (widget);
-  if (GTK_IS_ACCESSIBLE (accessible))
-    {
-      /* Accessibility support is enabled */
-      atk_object_set_name (accessible, _("Character Table"));
-
-      /* FIXMEchpe: move this to class_init ? */
-      atk_registry_set_factory_type (atk_get_default_registry (),
-                                     gucharmap_chartable_get_type (),
-                                     gucharmap_chartable_accessible_factory_get_type ());
-    }
-#endif
 
   gucharmap_chartable_set_codepoint_list (chartable, NULL);
 
@@ -1711,6 +1731,9 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
   widget_class->size_allocate = gucharmap_chartable_size_allocate;
   widget_class->size_request = gucharmap_chartable_size_request;
   widget_class->style_set = gucharmap_chartable_style_set;
+#ifdef ENABLE_ACCESSIBLE
+  widget_class->get_accessible = gucharmap_chartable_get_accessible;
+#endif
 
   klass->set_scroll_adjustments = gucharmap_chartable_set_adjustments;
   klass->move_cursor = gucharmap_chartable_move_cursor;

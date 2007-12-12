@@ -1,5 +1,3 @@
-/* $Id$ */
-
 #ifndef GUCHARMAP_INTL_H
 #define GUCHARMAP_INTL_H
 
