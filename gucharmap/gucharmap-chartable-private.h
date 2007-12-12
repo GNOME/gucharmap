@@ -78,7 +78,7 @@ struct _GucharmapChartableClass
   void (* activate) (GucharmapChartable *chartable);
 
   void (* set_active_char) (GucharmapChartable *chartable, guint ch);
-  void (* gucharmap_chartable_emit_status_message) (GucharmapChartable *chartable, const gchar *message);
+  void (* status_message) (GucharmapChartable *chartable, const gchar *message);
 };
 
 gint _gucharmap_chartable_cell_column	(GucharmapChartable *chartable,

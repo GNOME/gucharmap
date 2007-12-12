@@ -1765,7 +1765,7 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
 
   signals[STATUS_MESSAGE] =
     g_signal_new ("status-message", gucharmap_chartable_get_type (), G_SIGNAL_RUN_FIRST,
-                  G_STRUCT_OFFSET (GucharmapChartableClass, gucharmap_chartable_emit_status_message),
+                  G_STRUCT_OFFSET (GucharmapChartableClass, status_message),
                   NULL, NULL, g_cclosure_marshal_VOID__STRING, G_TYPE_NONE,
                   1, G_TYPE_STRING);
 
