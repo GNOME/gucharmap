@@ -1,3 +1,14 @@
+2007-12-10  Christian Persch  <chpe@gnome.org>
+
+        * gucharmap/gucharmap-table.[ch]:
+        R gucharmap/cartable_accessible.[ch]:
+        R gucharmap/charcell_accessible.[ch]
+        A gucharmap/gucharmap-chartable.[ch]:
+        A gucharmap/gucharmap-chartable-accessible.[ch]:
+        A gucharmap/gucharmap-chartable-cell-accessible.[ch]: Refactored.
+        Split the real chartable out of gucharmap-table.
+        Fix bugs #396243, #501915 and many others.
+
 2007-12-06  Christian Persch  <chpe@gnome.org>
 
 	* gucharmap/gucharmap-table.c: (create_glyph_pixmap),
