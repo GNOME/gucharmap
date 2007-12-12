@@ -68,7 +68,7 @@ gucharmap_charmap_class_init (GucharmapCharmapClass *clazz)
       g_signal_new ("status-message", gucharmap_charmap_get_type (), 
                     G_SIGNAL_RUN_FIRST,
                     G_STRUCT_OFFSET (GucharmapCharmapClass, status_message),
-                    NULL, NULL, _gucharmap_marshal_VOID__STRING, G_TYPE_NONE, 
+                    NULL, NULL, g_cclosure_marshal_VOID__STRING, G_TYPE_NONE,
                     1, G_TYPE_STRING);
 
   gucharmap_charmap_signals[LINK_CLICKED] =

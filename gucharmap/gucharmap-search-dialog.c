@@ -841,11 +841,11 @@ gucharmap_search_dialog_class_init (GucharmapSearchDialogClass *clazz)
   gucharmap_search_dialog_signals[SEARCH_START] =
       g_signal_new ("search-start", gucharmap_search_dialog_get_type (), G_SIGNAL_RUN_FIRST, 
                     G_STRUCT_OFFSET (GucharmapSearchDialogClass, search_start), NULL, NULL, 
-                    _gucharmap_marshal_VOID__VOID, G_TYPE_NONE, 0);
+                    g_cclosure_marshal_VOID__VOID, G_TYPE_NONE, 0);
   gucharmap_search_dialog_signals[SEARCH_FINISH] =
       g_signal_new ("search-finish", gucharmap_search_dialog_get_type (), G_SIGNAL_RUN_FIRST, 
                     G_STRUCT_OFFSET (GucharmapSearchDialogClass, search_finish), NULL, NULL, 
-                    _gucharmap_marshal_VOID__UINT, G_TYPE_NONE, 1, G_TYPE_UINT);
+                    g_cclosure_marshal_VOID__UINT, G_TYPE_NONE, 1, G_TYPE_UINT);
 
   _gucharmap_intl_ensure_initialized ();
 }

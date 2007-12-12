@@ -23,13 +23,13 @@ BUILT_SOURCES = gucharmap-marshal.c gucharmap-marshal.h
 
 lib_LTLIBRARIES = libgucharmap.la
 
-libgucharmap_la_SOURCES = gucharmap-marshal.c gucharmap-marshal.h \
+libgucharmap_la_SOURCES = \
+                          gucharmap-marshal.c gucharmap-marshal.h \
                           gucharmap-intl.c gucharmap-intl.h \
-                          chartable_accessible.c chartable_accessible.h \
-                          charcell_accessible.c charcell_accessible.h \
                           gucharmap-charmap.c gucharmap-charmap.h \
+                          gucharmap-chartable.c gucharmap-chartable.h gucharmap-chartable-private.h \
                           gucharmap-mini-fontsel.c gucharmap-mini-fontsel.h \
-                          gucharmap-table.c gucharmap-table.h gucharmap-table-private.h \
+                          gucharmap-table.c gucharmap-table.h \
                           gucharmap-unicode-info.c gucharmap-unicode-info.h \
                           gucharmap-window.c gucharmap-window.h \
 			  gucharmap-codepoint-list.c gucharmap-codepoint-list.h \
@@ -45,6 +45,10 @@ libgucharmap_la_SOURCES = gucharmap-marshal.c gucharmap-marshal.h \
 			  unicode-nameslist.h unicode-scripts.h unicode-unihan.h \
 			  gucharmap-search-dialog.h gucharmap-search-dialog.c \
 			  gucharmap-settings.h gucharmap-settings.c
+
+#                           chartable_accessible.c chartable_accessible.h \
+#                           charcell_accessible.c charcell_accessible.h \
+#
 
 libgucharmap_la_CPPFLAGS = \
 	-I$(top_srcdir)			\
@@ -126,14 +130,16 @@ endif
 
 gucharmap-marshal.h: $(srcdir)/gucharmap-marshal.list
 	( @GLIB_GENMARSHAL@ --prefix=_gucharmap_marshal $(srcdir)/gucharmap-marshal.list \
-                            --header > gucharmap-marshal.h.tmp \
+                            --header \
+                            --internal > gucharmap-marshal.h.tmp \
 	  && mv gucharmap-marshal.h.tmp gucharmap-marshal.h ) \
         || ( rm -f gucharmap-marshal.h.tmp && exit 1 )
 
 gucharmap-marshal.c: $(srcdir)/gucharmap-marshal.list
 	( @GLIB_GENMARSHAL@ --prefix=_gucharmap_marshal $(srcdir)/gucharmap-marshal.list \
 			    --header \
-                            --body > gucharmap-marshal.c.tmp \
+                            --body \
+                            --internal > gucharmap-marshal.c.tmp \
           && mv gucharmap-marshal.c.tmp gucharmap-marshal.c ) \
         || ( rm -f gucharmap-marshal.c.tmp && exit 1 )
 
