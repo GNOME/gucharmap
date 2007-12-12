@@ -1866,8 +1866,7 @@ gucharmap_chartable_init (GucharmapChartable *chartable)
     }
 #endif
 
-    /* FIXMEchpe: try NULL ?? */
-  gucharmap_chartable_set_codepoint_list (chartable, NULL);// gucharmap_codepoint_list_new (0, UNICHAR_MAX));
+  gucharmap_chartable_set_codepoint_list (chartable, NULL);
 
   gtk_widget_show_all (GTK_WIDGET (chartable));
 }
