@@ -44,9 +44,10 @@ activate (GucharmapChartable *real_table, GucharmapTable *chartable)
 }
 
 static void
-set_active_char (GucharmapChartable *real_table, guint value, GucharmapTable *chartable)
+sync_active_char (GucharmapChartable *real_table, GParamSpec *pspec, GucharmapTable *chartable)
 {
-  g_signal_emit (chartable, signals[SET_ACTIVE_CHAR], 0, value);
+  g_signal_emit (chartable, signals[SET_ACTIVE_CHAR], 0,
+                 gucharmap_chartable_get_active_character (real_table));
 }
 
 static void
@@ -65,10 +66,10 @@ gucharmap_table_init (GucharmapTable *chartable)
   chartable->chartable = gucharmap_chartable_new ();
   g_signal_connect (GUCHARMAP_CHARTABLE (chartable->chartable), "activate",
                     G_CALLBACK (activate), chartable);
-  g_signal_connect (GUCHARMAP_CHARTABLE (chartable->chartable), "set-active-char",
-                    G_CALLBACK (set_active_char), chartable);
   g_signal_connect (GUCHARMAP_CHARTABLE (chartable->chartable), "status-message",
                     G_CALLBACK (status_message), chartable);
+  g_signal_connect (GUCHARMAP_CHARTABLE (chartable->chartable), "notify::active-character",
+                    G_CALLBACK (sync_active_char), chartable);
 
   gtk_container_add (GTK_CONTAINER (chartable->scrolled_window),
                      chartable->chartable);

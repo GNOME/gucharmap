@@ -99,10 +99,15 @@ struct _GucharmapChartableClass
 enum 
 {
   ACTIVATE,
-  SET_ACTIVE_CHAR,
   STATUS_MESSAGE,
   MOVE_CURSOR,
   NUM_SIGNALS
+};
+
+enum
+{
+  PROP_0,
+  PROP_ACTIVE_CHAR
 };
 
 static void gucharmap_chartable_class_init (GucharmapChartableClass *klass);
@@ -609,8 +614,7 @@ set_active_cell (GucharmapChartable *chartable,
         chartable->page_first_cell += chartable->cols;
     }
 
-  g_signal_emit (chartable, signals[SET_ACTIVE_CHAR], 0,
-                 gucharmap_codepoint_list_get_char (chartable->codepoint_list, chartable->active_cell));
+  g_object_notify (G_OBJECT (chartable), "active-character");
 }
 
 static void
@@ -1615,6 +1619,42 @@ gucharmap_chartable_finalize (GObject *object)
 }
 
 static void
+gucharmap_chartable_set_property (GObject *object,
+                                  guint prop_id,
+                                  const GValue *value,
+                                  GParamSpec *pspec)
+{
+  GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (object);
+
+  switch (prop_id) {
+    case PROP_ACTIVE_CHAR:
+      gucharmap_chartable_set_active_character (chartable, g_value_get_uint (value));
+      break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
+  }
+}
+
+static void
+gucharmap_chartable_get_property (GObject *object,
+                                  guint prop_id,
+                                  GValue *value,
+                                  GParamSpec *pspec)
+{
+  GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (object);
+
+  switch (prop_id) {
+    case PROP_ACTIVE_CHAR:
+      g_value_set_uint (value, gucharmap_chartable_get_active_character (chartable));
+      break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
+  }
+}
+
+static void
 gucharmap_chartable_class_init (GucharmapChartableClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
@@ -1622,6 +1662,8 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
   GtkBindingSet *binding_set;
 
   object_class->finalize = gucharmap_chartable_finalize;
+  object_class->get_property = gucharmap_chartable_get_property;
+  object_class->set_property = gucharmap_chartable_set_property;
 
   widget_class->drag_begin = gucharmap_chartable_drag_begin;
   widget_class->drag_data_get = gucharmap_chartable_drag_data_get;
@@ -1662,13 +1704,6 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
                   G_TYPE_NONE, 2,
                   GTK_TYPE_ADJUSTMENT, GTK_TYPE_ADJUSTMENT);
 
-  signals[SET_ACTIVE_CHAR] =
-    g_signal_new ("set-active-char", gucharmap_chartable_get_type (),
-                  G_SIGNAL_RUN_FIRST,
-                  G_STRUCT_OFFSET (GucharmapChartableClass, set_active_char),
-                  NULL, NULL, g_cclosure_marshal_VOID__UINT, G_TYPE_NONE,
-                  1, G_TYPE_UINT);
-
   signals[STATUS_MESSAGE] =
     g_signal_new ("status-message", gucharmap_chartable_get_type (), G_SIGNAL_RUN_FIRST,
                   G_STRUCT_OFFSET (GucharmapChartableClass, gucharmap_chartable_emit_status_message),
@@ -1685,6 +1720,19 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
                   G_TYPE_BOOLEAN, 2,
                   GTK_TYPE_MOVEMENT_STEP,
                   G_TYPE_INT);
+
+  /* not using g_param_spec_unichar on purpose */
+  g_object_class_install_property
+    (object_class,
+     PROP_ACTIVE_CHAR,
+     g_param_spec_uint ("active-character", NULL, NULL,
+                        0,
+                        UNICHAR_MAX,
+                        0,
+                        G_PARAM_READWRITE |
+                        G_PARAM_STATIC_NAME |
+                        G_PARAM_STATIC_NICK |
+                        G_PARAM_STATIC_BLURB));
 
   /* Keybindings */
   binding_set = gtk_binding_set_by_class (klass);
@@ -1803,8 +1851,7 @@ set_top_row (GucharmapChartable *chartable,
   if (chartable->active_cell > chartable->last_cell)
     chartable->active_cell = chartable->last_cell;
 
-  g_signal_emit (chartable, signals[SET_ACTIVE_CHAR], 0,
-                 gucharmap_chartable_get_active_character (chartable));
+  g_object_notify (G_OBJECT (chartable), "active-character");
 }
 
 /* does all the initial construction */
@@ -1982,8 +2029,7 @@ gucharmap_chartable_set_codepoint_list (GucharmapChartable     *chartable,
 
   chartable->last_cell = gucharmap_codepoint_list_get_last_index (chartable->codepoint_list);
 
-  g_signal_emit (chartable, signals[SET_ACTIVE_CHAR], 0,
-                 gucharmap_chartable_get_active_character (chartable));
+  g_object_notify (G_OBJECT (chartable), "active-character");
 
   update_scrollbar_adjustment (chartable);
 
