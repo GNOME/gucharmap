@@ -534,20 +534,23 @@ static void
 gucharmap_chartable_set_active_cell (GucharmapChartable *chartable,
                                      guint cell)
 {
+  int _cell = (int) cell;
+
   chartable->old_active_cell = chartable->active_cell;
   chartable->old_page_first_cell = chartable->page_first_cell;
 
-  chartable->active_cell = cell;
+  chartable->active_cell = _cell;
 
   /* update page, if necessary */
-  if ((gint)cell - chartable->page_first_cell >= chartable->page_size  || (gint)cell < chartable->page_first_cell)
+  if (_cell < chartable->page_first_cell ||
+      _cell - chartable->page_first_cell >= chartable->page_size)
     {
       /* move the page_first_cell as far as active_cell has moved */
-      gint offset = (gint) chartable->active_cell - (gint) chartable->old_active_cell;
+      int offset = chartable->active_cell - chartable->old_active_cell;
     
-      if ((gint) chartable->old_page_first_cell + offset < 0)
+      if (chartable->old_page_first_cell + offset < 0)
         chartable->page_first_cell = 0;
-      else if ((gint) chartable->old_page_first_cell + offset > chartable->last_cell - (chartable->last_cell % chartable->cols) - chartable->cols * (chartable->rows - 1))
+      else if (chartable->old_page_first_cell + offset > chartable->last_cell - (chartable->last_cell % chartable->cols) - chartable->cols * (chartable->rows - 1))
         chartable->page_first_cell = chartable->last_cell - (chartable->last_cell % chartable->cols) - chartable->cols * (chartable->rows - 1);
       else
         chartable->page_first_cell = chartable->old_page_first_cell + offset;
