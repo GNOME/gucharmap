@@ -1083,6 +1083,8 @@ expose_event (GtkWidget *widget,
   return FALSE;
 }
 
+/* GtkWidget class methods */
+
 static void
 gucharmap_chartable_size_allocate (GtkWidget *widget,
                                GtkAllocation *allocation)
@@ -1120,6 +1122,24 @@ gucharmap_chartable_size_allocate (GtkWidget *widget,
 
   update_scrollbar_adjustment (chartable);
 }
+
+
+static void
+gucharmap_chartable_style_set (GtkWidget *widget, 
+                               GtkStyle *previous_style)
+{
+  GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (widget);
+
+  GTK_WIDGET_CLASS (gucharmap_chartable_parent_class)->style_set (widget, previous_style);
+
+  if (chartable->pixmap != NULL)
+    g_object_unref (chartable->pixmap);
+  chartable->pixmap = NULL;
+
+  gtk_widget_queue_draw (widget);
+}
+
+/* GucharmapChartable class methods */
 
 static void
 gucharmap_chartable_set_adjustments (GucharmapChartable *chartable,
@@ -1174,6 +1194,7 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
   object_class->finalize = gucharmap_chartable_finalize;
 
   widget_class->size_allocate = gucharmap_chartable_size_allocate;
+  widget_class->style_set = gucharmap_chartable_style_set;
   
   klass->set_scroll_adjustments = gucharmap_chartable_set_adjustments;
   klass->activate = NULL;
@@ -1579,18 +1600,6 @@ mouse_wheel_event (GtkWidget *widget,
 }
 
 static void
-style_set (GtkWidget *widget, 
-           GtkStyle *previous_style, 
-           GucharmapChartable *chartable)
-{
-  if (chartable->pixmap != NULL)
-    g_object_unref (chartable->pixmap);
-  chartable->pixmap = NULL;
-
-  gtk_widget_queue_draw (widget);
-}
-
-static void
 drag_data_received (GtkWidget *widget,
                     GdkDragContext *context,
                     gint x, gint y,
@@ -1715,8 +1724,6 @@ gucharmap_chartable_init (GucharmapChartable *chartable)
                     G_CALLBACK (focus_out_event), chartable);
   g_signal_connect (G_OBJECT (widget), "scroll-event",
                     G_CALLBACK (mouse_wheel_event), chartable);
-  g_signal_connect (G_OBJECT (widget), "style-set",
-                    G_CALLBACK (style_set), chartable);
 
   gtk_drag_dest_set (widget, GTK_DEST_DEFAULT_ALL,
                      NULL, 0,
