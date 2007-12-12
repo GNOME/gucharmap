@@ -43,6 +43,8 @@ struct _GucharmapChartable
 
   /* Font */
   PangoFontDescription *font_desc;
+  int bare_minimal_column_width;
+  int bare_minimal_row_height;
 
   /* rows and columns on a page */
   gint rows, cols;
@@ -109,6 +111,8 @@ static void
 gucharmap_chartable_set_font_desc (GucharmapChartable *chartable,
                                    PangoFontDescription *font_desc /* adopting */)
 {
+  int font_size;
+
   if (chartable->font_desc)
     pango_font_description_free (chartable->font_desc);
 
@@ -116,6 +120,11 @@ gucharmap_chartable_set_font_desc (GucharmapChartable *chartable,
  
   if (chartable->pango_layout)
      pango_layout_set_font_description (chartable->pango_layout, font_desc);
+
+  /* FIXMEchpe: check pango_font_description_get_size_is_absolute() ! */
+  font_size = pango_font_description_get_size (chartable->font_desc);
+  chartable->bare_minimal_column_width = PANGO_PIXELS (3.0 * font_size);
+  chartable->bare_minimal_row_height = PANGO_PIXELS (2.5 * font_size);
 
   gtk_widget_queue_resize (GTK_WIDGET (chartable));
 }
@@ -145,19 +154,12 @@ _gucharmap_chartable_cell_column (GucharmapChartable *chartable,
     return (cell - chartable->page_first_cell) % chartable->cols;
 }
 
-/* computes the column width based solely on the font size */
-static gint
-bare_minimal_column_width (GucharmapChartable *chartable)
-{
-  return PANGO_PIXELS (3.0 * pango_font_description_get_size (chartable->font_desc));
-}
-
 static gint
 minimal_column_width (GucharmapChartable *chartable)
 {
   GtkWidget *widget = GTK_WIDGET (chartable);
   gint total_extra_pixels;
-  gint bare_minimal_width = bare_minimal_column_width (chartable);
+  gint bare_minimal_width = chartable->bare_minimal_column_width;
 
   total_extra_pixels = widget->allocation.width - (chartable->cols * bare_minimal_width + 1);
 
@@ -195,19 +197,12 @@ _gucharmap_chartable_x_offset (GucharmapChartable *chartable, gint col)
   return x;
 }
 
-/* computes the row height based solely on the font size */
-static gint
-bare_minimal_row_height (GucharmapChartable *chartable)
-{
-  return PANGO_PIXELS (2.5 * pango_font_description_get_size (chartable->font_desc));
-}
-
 static gint
 minimal_row_height (GucharmapChartable *chartable)
 {
   GtkWidget *widget = GTK_WIDGET (chartable);
   gint total_extra_pixels;
-  gint bare_minimal_height = bare_minimal_row_height (chartable);
+  gint bare_minimal_height = chartable->bare_minimal_row_height;
 
   total_extra_pixels = widget->allocation.height - (chartable->rows * bare_minimal_height + 1);
 
@@ -272,7 +267,7 @@ compute_zoom_font_size (GucharmapChartable *chartable)
   screen_height = gdk_screen_get_height (
           gtk_widget_get_screen (widget));
 
-  limit = (0.3 * screen_height) / bare_minimal_row_height (chartable);
+  limit = (0.3 * screen_height) / chartable->bare_minimal_row_height;
   scale = CLAMP (limit, 1.0, 12.0);
 
   font_size = pango_font_description_get_size (chartable->font_desc);
@@ -1119,11 +1114,11 @@ gucharmap_chartable_size_allocate (GtkWidget *widget,
   old_cols = chartable->cols;
 
   if (chartable->snap_pow2_enabled)
-    chartable->cols = 1 << g_bit_nth_msf ((allocation->width - 1) / bare_minimal_column_width (chartable), -1);
+    chartable->cols = 1 << g_bit_nth_msf ((allocation->width - 1) / chartable->bare_minimal_column_width, -1);
   else
-    chartable->cols = (allocation->width - 1) / bare_minimal_column_width (chartable);
+    chartable->cols = (allocation->width - 1) / chartable->bare_minimal_column_width;
 
-  chartable->rows = (allocation->height - 1) / bare_minimal_row_height (chartable);
+  chartable->rows = (allocation->height - 1) / chartable->bare_minimal_row_height;
 
   /* avoid a horrible floating point exception crash */
   if (chartable->rows < 1)
