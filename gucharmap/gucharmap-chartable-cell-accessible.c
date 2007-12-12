@@ -153,8 +153,7 @@ idle_do_action (gpointer data)
 
   chartable = GUCHARMAP_CHARTABLE (cell->widget);
   gucharmap_chartable_set_active_character (chartable, cell->index);
-  _gucharmap_chartable_redraw (chartable, TRUE);
-  g_signal_emit_by_name (chartable, "activate", cell->index);
+  g_signal_emit_by_name (chartable, "activate");
   return FALSE; 
 }
 
