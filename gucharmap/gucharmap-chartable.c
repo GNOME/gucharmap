@@ -56,7 +56,6 @@ struct _GucharmapChartable
 
   GdkPixmap *pixmap;
 
-  gchar *font_name;
   PangoLayout *pango_layout;
 
   gint page_first_cell;
@@ -1823,7 +1822,6 @@ gucharmap_chartable_init (GucharmapChartable *chartable)
   AtkObject *accessible;
 #endif
 
-  chartable->font_name = NULL;
   chartable->page_first_cell = 0;
   chartable->active_cell = 0;
   chartable->rows = 1;
