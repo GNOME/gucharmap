@@ -38,6 +38,8 @@ struct _GucharmapChartable
   int bare_minimal_row_height;   /* depends only on font_desc */
   int minimal_column_width;      /* depends on font_desc and size allocation */
   int minimal_row_height;        /* depends on font_desc and size allocation */
+  int n_padded_columns;          /* columns 0..n-1 will be 1px wider than minimal_column_width */
+  int n_padded_rows;             /* rows 0..n-1 will be 1px taller than minimal_row_height */
   int rows;
   int cols;
   int page_size;       /* rows * cols */

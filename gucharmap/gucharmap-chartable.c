@@ -160,10 +160,8 @@ gint
 _gucharmap_chartable_column_width (GucharmapChartable *chartable, gint col)
 {
   GtkWidget *widget = GTK_WIDGET (chartable);
-  int num_padded_columns;
+  int num_padded_columns = chartable->n_padded_columns;
   int min_col_w = chartable->minimal_column_width;
-
-  num_padded_columns = widget->allocation.width - (min_col_w * chartable->cols + 1);
 
   if (chartable->cols - col <= num_padded_columns)
     return min_col_w + 1;
@@ -191,10 +189,8 @@ gint
 _gucharmap_chartable_row_height (GucharmapChartable *chartable, gint row)
 {
   GtkWidget *widget = GTK_WIDGET (chartable);
-  int num_padded_rows;
+  int num_padded_rows = chartable->n_padded_rows;
   int min_row_h = chartable->minimal_row_height;
-
-  num_padded_rows = widget->allocation.height - (min_row_h * chartable->rows + 1);
 
   if (chartable->rows - row <= num_padded_rows)
     return min_row_h + 1;
@@ -779,11 +775,8 @@ static void
 copy_rows (GucharmapChartable *chartable, gint row_offset)
 {
   GtkWidget *widget = GTK_WIDGET (chartable);
-  gint num_padded_rows;
+  gint num_padded_rows = chartable->n_padded_rows;
   gint from_row, to_row;
-
-  num_padded_rows = widget->allocation.height -
-                    (chartable->minimal_row_height * chartable->rows + 1);
 
   if (ABS (row_offset) < chartable->rows - num_padded_rows)
     {
@@ -1365,9 +1358,11 @@ gucharmap_chartable_size_allocate (GtkWidget *widget,
 
   total_extra_pixels = widget->allocation.width - (chartable->cols * chartable->bare_minimal_column_width + 1);
   chartable->minimal_column_width = chartable->bare_minimal_column_width + total_extra_pixels / chartable->cols;
+  chartable->n_padded_columns = widget->allocation.width - (chartable->minimal_column_width * chartable->cols + 1);
 
   total_extra_pixels = widget->allocation.height - (chartable->rows * chartable->bare_minimal_row_height + 1);
   chartable->minimal_row_height = chartable->bare_minimal_row_height + total_extra_pixels / chartable->rows;
+  chartable->n_padded_rows = widget->allocation.height - (chartable->minimal_row_height * chartable->rows + 1);
 
   /* force pixmap to be redrawn on next expose event */
   if (chartable->pixmap != NULL)
