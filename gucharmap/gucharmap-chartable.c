@@ -1360,7 +1360,7 @@ gucharmap_chartable_size_allocate (GtkWidget *widget,
   old_cols = chartable->cols;
 
   if (chartable->snap_pow2_enabled)
-    chartable->cols = 1 << g_bit_nth_msf ((allocation->width - 1) / chartable->bare_minimal_column_width, -1);
+    chartable->cols = (1 << g_bit_nth_msf ((allocation->width - 1) / chartable->bare_minimal_column_width, -1));
   else
     chartable->cols = (allocation->width - 1) / chartable->bare_minimal_column_width;
 
