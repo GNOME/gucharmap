@@ -1103,6 +1103,34 @@ gucharmap_chartable_expose_event (GtkWidget *widget,
   return FALSE;
 }
 
+static gboolean
+gucharmap_chartable_focus_in_event (GtkWidget *widget, 
+                                    GdkEventFocus *event)
+{
+  GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (widget);
+
+  if (chartable->pixmap != NULL)
+    draw_and_expose_cell (chartable, chartable->active_cell);
+
+  return GTK_WIDGET_CLASS (gucharmap_chartable_parent_class)->focus_in_event (widget, event);
+}
+
+static gboolean
+gucharmap_chartable_focus_out_event (GtkWidget *widget,
+                                     GdkEventFocus *event)
+{
+  GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (widget);
+
+  gucharmap_chartable_zoom_disable (chartable);
+
+  if (chartable->pixmap != NULL)
+    draw_and_expose_cell (chartable, chartable->active_cell);
+
+  /* FIXME: the parent's handler already does a draw... */
+
+  return GTK_WIDGET_CLASS (gucharmap_chartable_parent_class)->focus_out_event (widget, event);
+}
+
 static void
 gucharmap_chartable_size_allocate (GtkWidget *widget,
                                    GtkAllocation *allocation)
@@ -1302,8 +1330,6 @@ gucharmap_chartable_move_cursor (GucharmapChartable *chartable,
                                  GtkMovementStep     step,
                                  int                 count)
 {
-//   GdkModifierType state;
-
   g_return_val_if_fail (step == GTK_MOVEMENT_LOGICAL_POSITIONS ||
                         step == GTK_MOVEMENT_VISUAL_POSITIONS ||
                         step == GTK_MOVEMENT_DISPLAY_LINES ||
@@ -1312,18 +1338,6 @@ gucharmap_chartable_move_cursor (GucharmapChartable *chartable,
 
   if (!GTK_WIDGET_HAS_FOCUS (GTK_WIDGET (chartable)))
     return FALSE;
-
-//   gucharmap_chartable_stop_editing (chartable, FALSE);
-//   gtk_widget_grab_focus (GTK_WIDGET (chartable));
-// 
-//   if (gtk_get_current_event_state (&state))
-//     {
-//       if ((state & GDK_CONTROL_MASK) == GDK_CONTROL_MASK)
-//         chartable->priv->ctrl_pressed = TRUE;
-//       if ((state & GDK_SHIFT_MASK) == GDK_SHIFT_MASK)
-//         chartable->priv->shift_pressed = TRUE;
-//     }
-//   /* else we assume not pressed */
 
   switch (step)
     {
@@ -1378,6 +1392,8 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
   object_class->finalize = gucharmap_chartable_finalize;
 
   widget_class->expose_event = gucharmap_chartable_expose_event;
+  widget_class->focus_in_event = gucharmap_chartable_focus_in_event;
+  widget_class->focus_out_event = gucharmap_chartable_focus_out_event;
   widget_class->size_allocate = gucharmap_chartable_size_allocate;
   widget_class->size_request = gucharmap_chartable_size_request;
   widget_class->style_set = gucharmap_chartable_style_set;
@@ -1522,13 +1538,11 @@ key_release_event (GtkWidget *widget,
       case GDK_ISO_Next_Group: case GDK_ISO_Prev_Group:
         gucharmap_chartable_zoom_disable (chartable);
         break;
-
     }
 
   return FALSE;
 }
 
-/* mostly for moving around in the chartable */
 static gint
 key_press_event (GtkWidget *widget, 
                  GdkEventKey *event, 
@@ -1537,7 +1551,6 @@ key_press_event (GtkWidget *widget,
   if (event->state & (GDK_MOD1_MASK | GDK_CONTROL_MASK))
     return FALSE;
 
-  /* move the cursor or whatever depending on which key was pressed */
   switch (event->keyval)
     {
       case GDK_Shift_L: case GDK_Shift_R:
@@ -1553,7 +1566,7 @@ key_press_event (GtkWidget *widget,
         return FALSE;
     }
 
-  _gucharmap_chartable_redraw (chartable, TRUE);
+  _gucharmap_chartable_redraw (chartable, TRUE); /* FIXMEchpe necessary? */
 
   return TRUE;
 }
@@ -1687,30 +1700,6 @@ motion_notify_event (GtkWidget *widget,
       place_zoom_window (chartable, event->x_root, event->y_root);
       gtk_widget_show (chartable->zoom_window);
     }
-
-  return FALSE;
-}
-
-static gboolean
-focus_out_event (GtkWidget *widget, 
-                       GdkEventFocus *event,
-                       GucharmapChartable *chartable)
-{
-  gucharmap_chartable_zoom_disable (chartable);
-
-  if (chartable->pixmap != NULL)
-    draw_and_expose_cell (chartable, chartable->active_cell);
-
-  return FALSE;
-}
-
-static gboolean
-focus_in_event (GtkWidget *widget, 
-                GdkEventFocus *event,
-                GucharmapChartable *chartable)
-{
-  if (chartable->pixmap != NULL)
-    draw_and_expose_cell (chartable, chartable->active_cell);
 
   return FALSE;
 }
@@ -1887,10 +1876,6 @@ gucharmap_chartable_init (GucharmapChartable *chartable)
                     G_CALLBACK (button_release_event), chartable);
   g_signal_connect (G_OBJECT (widget), "motion-notify-event",
                     G_CALLBACK (motion_notify_event), chartable);
-  g_signal_connect (G_OBJECT (widget), "focus-in-event",
-                    G_CALLBACK (focus_in_event), chartable);
-  g_signal_connect (G_OBJECT (widget), "focus-out-event",
-                    G_CALLBACK (focus_out_event), chartable);
   g_signal_connect (G_OBJECT (widget), "scroll-event",
                     G_CALLBACK (mouse_wheel_event), chartable);
 
