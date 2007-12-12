@@ -940,6 +940,19 @@ _gucharmap_table_redraw (GucharmapTable *chartable,
   chartable->old_active_cell = chartable->active_cell;
 }
 
+static void
+update_scrollbar_adjustment (GucharmapTable *chartable)
+{
+  chartable->adjustment->value = 1.0 * chartable->page_first_cell / chartable->cols; 
+  chartable->adjustment->lower = 0.0;
+  chartable->adjustment->upper = 1.0 * ( get_last_cell (chartable) / chartable->cols + 1 );
+  chartable->adjustment->step_increment = 3.0;
+  chartable->adjustment->page_increment = 1.0 * chartable->rows;
+  chartable->adjustment->page_size = chartable->rows;
+
+  gtk_adjustment_changed (chartable->adjustment);
+}
+
 /* redraws the screen from the backing pixmap */
 static gint
 expose_event (GtkWidget *widget, 
@@ -974,67 +987,13 @@ expose_event (GtkWidget *widget,
 }
 
 static void
-gucharmap_table_finalize (GObject *object)
+gucharmap_table_size_allocate (GtkWidget *widget,
+                               GtkAllocation *allocation)
 {
-  GucharmapTable *chartable = GUCHARMAP_TABLE (object);
-
-  g_free (chartable->font_name);
-
-  if (chartable->pango_layout)
-    g_object_unref (chartable->pango_layout);
-
-  gtk_target_list_unref (chartable->target_list);
-
-  G_OBJECT_CLASS (gucharmap_table_parent_class)->finalize (object);
-}
-
-static void
-gucharmap_table_class_init (GucharmapTableClass *clazz)
-{
-  clazz->activate = NULL;
-  clazz->set_active_char = NULL;
-
-  G_OBJECT_CLASS (clazz)->finalize = gucharmap_table_finalize;
-
-  gucharmap_table_signals[ACTIVATE] =
-      g_signal_new ("activate", gucharmap_table_get_type (), G_SIGNAL_RUN_FIRST,
-                    G_STRUCT_OFFSET (GucharmapTableClass, activate),
-                    NULL, NULL, _gucharmap_marshal_VOID__UINT, G_TYPE_NONE, 
-		    1, G_TYPE_UINT);
-
-  gucharmap_table_signals[SET_ACTIVE_CHAR] =
-      g_signal_new ("set_active_char", gucharmap_table_get_type (), 
-                    G_SIGNAL_RUN_FIRST,
-                    G_STRUCT_OFFSET (GucharmapTableClass, set_active_char),
-                    NULL, NULL, _gucharmap_marshal_VOID__UINT, G_TYPE_NONE, 
-		    1, G_TYPE_UINT);
-
-  gucharmap_table_signals[STATUS_MESSAGE] =
-      g_signal_new ("status-message", gucharmap_table_get_type (), G_SIGNAL_RUN_FIRST,
-                    G_STRUCT_OFFSET (GucharmapTableClass, status_message),
-                    NULL, NULL, _gucharmap_marshal_VOID__STRING, G_TYPE_NONE, 
-		    1, G_TYPE_STRING);
-}
-
-static void
-update_scrollbar_adjustment (GucharmapTable *chartable)
-{
-  chartable->adjustment->value = 1.0 * chartable->page_first_cell / chartable->cols; 
-  chartable->adjustment->lower = 0.0;
-  chartable->adjustment->upper = 1.0 * ( get_last_cell (chartable) / chartable->cols + 1 );
-  chartable->adjustment->step_increment = 3.0;
-  chartable->adjustment->page_increment = 1.0 * chartable->rows;
-  chartable->adjustment->page_size = chartable->rows;
-
-  gtk_adjustment_changed (chartable->adjustment);
-}
-
-static void
-size_allocate (GtkWidget *widget, 
-               GtkAllocation *allocation, 
-               GucharmapTable *chartable)
-{
+  GucharmapTable *chartable = GUCHARMAP_TABLE (widget);
   gint old_rows, old_cols;
+
+  GTK_WIDGET_CLASS (gucharmap_table_parent_class)->size_allocate (widget, allocation);
 
   old_rows = chartable->rows;
   old_cols = chartable->cols;
@@ -1063,6 +1022,54 @@ size_allocate (GtkWidget *widget,
   chartable->page_first_cell = chartable->active_cell - (chartable->active_cell % chartable->cols);
 
   update_scrollbar_adjustment (chartable);
+}
+
+static void
+gucharmap_table_finalize (GObject *object)
+{
+  GucharmapTable *chartable = GUCHARMAP_TABLE (object);
+
+  g_free (chartable->font_name);
+
+  if (chartable->pango_layout)
+    g_object_unref (chartable->pango_layout);
+
+  gtk_target_list_unref (chartable->target_list);
+
+  G_OBJECT_CLASS (gucharmap_table_parent_class)->finalize (object);
+}
+
+static void
+gucharmap_table_class_init (GucharmapTableClass *clazz)
+{
+  GObjectClass *object_class = G_OBJECT_CLASS (clazz);
+  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (clazz);
+
+  object_class->finalize = gucharmap_table_finalize;
+
+  widget_class->size_allocate = gucharmap_table_size_allocate;
+
+  clazz->activate = NULL;
+  clazz->set_active_char = NULL;
+
+  gucharmap_table_signals[ACTIVATE] =
+      g_signal_new ("activate", gucharmap_table_get_type (), G_SIGNAL_RUN_FIRST,
+                    G_STRUCT_OFFSET (GucharmapTableClass, activate),
+                    NULL, NULL, _gucharmap_marshal_VOID__UINT, G_TYPE_NONE, 
+		    1, G_TYPE_UINT);
+
+  gucharmap_table_signals[SET_ACTIVE_CHAR] =
+      g_signal_new ("set_active_char", gucharmap_table_get_type (), 
+                    G_SIGNAL_RUN_FIRST,
+                    G_STRUCT_OFFSET (GucharmapTableClass, set_active_char),
+                    NULL, NULL, _gucharmap_marshal_VOID__UINT, G_TYPE_NONE, 
+		    1, G_TYPE_UINT);
+
+  gucharmap_table_signals[STATUS_MESSAGE] =
+      g_signal_new ("status-message", gucharmap_table_get_type (), G_SIGNAL_RUN_FIRST,
+                    G_STRUCT_OFFSET (GucharmapTableClass, status_message),
+                    NULL, NULL, _gucharmap_marshal_VOID__STRING, G_TYPE_NONE, 
+		    1, G_TYPE_STRING);
 }
 
 static void
@@ -1569,8 +1576,6 @@ gucharmap_table_init (GucharmapTable *chartable)
 
   g_signal_connect (G_OBJECT (chartable->drawing_area), "expose-event",
                     G_CALLBACK (expose_event), chartable);
-  g_signal_connect (G_OBJECT (chartable->drawing_area), "size-allocate",
-                    G_CALLBACK (size_allocate), chartable);
   g_signal_connect (G_OBJECT (chartable->drawing_area), "key-press-event",
                     G_CALLBACK (key_press_event), chartable);
   g_signal_connect (G_OBJECT (chartable->drawing_area), "key-release-event",
