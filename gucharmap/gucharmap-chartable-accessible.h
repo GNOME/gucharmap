@@ -40,7 +40,7 @@ struct _GucharmapChartableAccessible
 {
   GtkAccessible parent_instance;
   GtkAdjustment *vadjustment;
-  GList *cells;
+  GArray *cells;
 };
 
 struct _GucharmapChartableAccessibleClass

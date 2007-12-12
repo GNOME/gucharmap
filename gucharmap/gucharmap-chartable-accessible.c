@@ -38,34 +38,20 @@ typedef struct
 
 static gpointer gucharmap_chartable_accessible_parent_class;
 
-static GList*
-get_cell_list (GucharmapChartableAccessible *accessible)
+static AtkObject *
+get_cell_by_index (GucharmapChartableAccessible *accessible,
+                   int index)
 {
-  return accessible->cells;
-}
+  GArray *cells = accessible->cells;
+  guint n_cells, n;
 
-static void
-set_cell_list (GucharmapChartableAccessible *accessible, GList *list)
-{
-  accessible->cells = list;
-}
-
-static AtkObject*
-find_cell (GucharmapChartableAccessible *table,
-	   gint index)
-{
-  GucharmapChartableCellAccessibleInfo *info;
-  GList *cell_list;
-  GList *l;
-
-  cell_list = get_cell_list (table);
-
-  for (l = cell_list; l; l = l->next)
+  n_cells = cells->len;
+  for (n = 0; n < n_cells; ++n)
     {
-      info = (GucharmapChartableCellAccessibleInfo *) (l->data);
+      GucharmapChartableCellAccessibleInfo info = g_array_index (cells, GucharmapChartableCellAccessibleInfo, n);
 
-      if (index == info->index)
-        return info->cell;
+      if (index == info.index)
+        return info.cell;
     }
 
   return NULL;
@@ -90,133 +76,88 @@ set_cell_visibility (GucharmapChartable  *chartable,
     }
 }
 
-
-static GucharmapChartableCellAccessibleInfo*
-find_cell_info (GucharmapChartableAccessible *table,
-		AtkObject *cell,
-		GList **list)
-{
-  GList *l;
-  GList *cell_list;
-  GucharmapChartableCellAccessibleInfo *cell_info;
-
-  cell_list = get_cell_list (table);
-  for (l = cell_list; l; l= l->next)
-    {
-      cell_info = (GucharmapChartableCellAccessibleInfo *) l->data;
-      if (cell_info->cell == cell)
-        {
-          if (list)
-            *list = l;
-          return cell_info;
-        }
-    }
-
-  return NULL;
-}
-
-
-static void
-cell_info_remove (GucharmapChartableAccessible  *table,
-		  AtkObject *cell)
-{
-  GucharmapChartableCellAccessibleInfo *info;
-  GList *l, *cell_list;
-
-  info = find_cell_info (table, cell, &l);
-  if (info)
-    {
-      cell_list = get_cell_list (table);
-      set_cell_list (table, g_list_remove_link (cell_list, l));
-      g_free (info);
-      return;
-    }
-
-  g_warning ("No cell removed in cell_info_remove\n");
-}
-
-
 static void
 cell_destroyed (gpointer data)
 {
   AtkObject *cell;
   AtkObject *parent;
+  GArray *cells;
+  guint n_cells, n;
+  GucharmapChartableAccessible *accessible;
 
-  g_return_if_fail (IS_GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE (data));
+  g_assert (IS_GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE (data));
 
   cell = ATK_OBJECT (data);
  
   parent = atk_object_get_parent (cell); 
-  g_return_if_fail (IS_GUCHARMAP_CHARTABLE_ACCESSIBLE (parent));
-  cell_info_remove (GUCHARMAP_CHARTABLE_ACCESSIBLE (parent), cell);
+  g_assert (IS_GUCHARMAP_CHARTABLE_ACCESSIBLE (parent));
+  accessible = GUCHARMAP_CHARTABLE_ACCESSIBLE (parent);
+
+  cells = accessible->cells;
+  n_cells = cells->len;
+  for (n = 0; n < n_cells; ++n)
+    {
+      GucharmapChartableCellAccessibleInfo info = g_array_index (cells, GucharmapChartableCellAccessibleInfo, n);
+
+      if (cell == info.cell)
+        {
+          g_array_remove_index_fast (accessible->cells, n);
+          return;
+        }
+    }
+
+  g_warning ("Cell destroyed but was not in the cells cache?\n");
 }
-
-
-static void
-cell_info_new (GucharmapChartableAccessible *table,
-               AtkObject *cell,
-               gint index)
-{
-  GucharmapChartableCellAccessibleInfo *info;
-  GList *cell_list;
-
-  info = g_new (GucharmapChartableCellAccessibleInfo, 1);
-  info->cell = cell;
-  info->index = index;
-
-  cell_list = get_cell_list (table);
-  /* FIXME: g_list_append? come on! */
-  set_cell_list (table, g_list_append (cell_list, info));
-  /* Setup weak reference notification */
-
-  g_object_weak_ref (G_OBJECT (cell),
-                     (GWeakNotify) cell_destroyed,
-                     cell);
-}
-
 
 static AtkObject*
-gucharmap_chartable_accessible_ref_child (AtkObject *obj, gint i)
+gucharmap_chartable_accessible_ref_child (AtkObject *obj,
+                                          int index)
 {
   GtkWidget *widget;
   GucharmapChartable *chartable;
   AtkObject *child;
   GucharmapChartableAccessible *table;
   gchar* name;
+  GucharmapChartableCellAccessibleInfo info;
 
   widget = GTK_ACCESSIBLE (obj)->widget;
   if (widget == NULL)
     /* State is defunct */
     return NULL;
 
-  if (i > UNICHAR_MAX)
+  if (index > UNICHAR_MAX)
     return NULL;
 
-  chartable = GUCHARMAP_CHARTABLE (widget);
   table = GUCHARMAP_CHARTABLE_ACCESSIBLE (obj);
 
-  /*
-   * Check whether the child is cached
-   */
-  child = find_cell (table, i);
+  /* Check whether the child is cached */
+  child = get_cell_by_index (table, index);
   if (child)
-    {
-      return g_object_ref (child);
-    } 
+    return g_object_ref (child);
+
+  chartable = GUCHARMAP_CHARTABLE (widget);
 
   child = gucharmap_chartable_cell_accessible_new ();
   gucharmap_chartable_cell_accessible_initialise (GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE (child),
-                            GTK_WIDGET (chartable), obj, i);
+                            GTK_WIDGET (chartable), obj, index);
   /* Set the name of the cell */
-  name = g_strdup_printf("U+%4.4X %s", i, gucharmap_get_unicode_name (i));
+  name = g_strdup_printf("U+%4.4X %s", index, gucharmap_get_unicode_name (index));
   atk_object_set_name (child, name);
   g_free (name);
   set_cell_visibility (chartable, GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE (child), FALSE);
-  cell_info_new (table, child, i);
+
+  /* Store the cell in our cache */
+  info.cell = child;
+  info.index = index;
+  g_array_append_val (table->cells, info);
+
+  /* Setup weak reference notification */
+  g_object_weak_ref (G_OBJECT (child),
+                     (GWeakNotify) cell_destroyed,
+                     child);
 
   return child; 
 }
-
 
 static AtkObject* 
 gucharmap_chartable_accessible_ref_at (AtkTable *table,
@@ -241,7 +182,6 @@ gucharmap_chartable_accessible_ref_at (AtkTable *table,
 
   return child;
 }
-
 
 static AtkObject*
 gucharmap_chartable_accessible_ref_accessible_at_point (AtkComponent *component,
@@ -296,7 +236,6 @@ gucharmap_chartable_accessible_ref_accessible_at_point (AtkComponent *component,
   return gucharmap_chartable_accessible_ref_at (ATK_TABLE (component), row, col);
 }
 
-
 static void
 gucharmap_chartable_accessible_component_interface_init (AtkComponentIface *iface)
 {
@@ -304,7 +243,6 @@ gucharmap_chartable_accessible_component_interface_init (AtkComponentIface *ifac
 
   iface->ref_accessible_at_point = gucharmap_chartable_accessible_ref_accessible_at_point;
 }
-
 
 static AtkStateSet*
 gucharmap_chartable_accessible_ref_state_set (AtkObject *obj)
@@ -335,26 +273,6 @@ gucharmap_chartable_accessible_get_n_children (AtkObject *obj)
   return UNICHAR_MAX + 1;
 }
 
-
-static void
-clear_cached_data (GucharmapChartableAccessible *table)
-{
-  GList *l;
-  GList *cell_list;
-
-  cell_list = get_cell_list (table);
-  if (cell_list)
-    {
-      for (l = cell_list; l; l = l->next)
-        {
-          g_free (l->data);
-        }
-      g_list_free (cell_list);
-
-      set_cell_list (table, NULL);
-    }
-}
-
 static void
 set_focus_object (AtkObject *obj,
                   AtkObject *focus_obj)
@@ -369,6 +287,12 @@ get_focus_object (AtkObject *obj)
 }
 
 static void
+gucharmap_chartable_accessible_init (GucharmapChartableAccessible *accessible)
+{
+  accessible->cells = g_array_new (FALSE, TRUE, sizeof (GucharmapChartableCellAccessibleInfo));
+}
+
+static void
 gucharmap_chartable_accessible_finalize (GObject *obj)
 {
   GucharmapChartableAccessible *table;
@@ -380,58 +304,58 @@ gucharmap_chartable_accessible_finalize (GObject *obj)
   if (focus_obj)
     g_object_unref (focus_obj);
 
-  clear_cached_data (table);
+  /* FIXME: don't we need to remove the weak references from the cells?? */
+  g_array_free (table->cells, TRUE);
 
   G_OBJECT_CLASS (gucharmap_chartable_accessible_parent_class)->finalize (obj);
 }
 
 static void
-traverse_cells (AtkObject *obj)
+gucharmap_chartable_accessible_update_all_cells (AtkObject *obj)
 {
-  GucharmapChartableAccessible *table;
+  GucharmapChartableAccessible *accessible;
   GtkWidget *widget;
-  GList *l;
-  GList *cell_list;
   GucharmapChartable *chartable;
-  GucharmapChartableCellAccessibleInfo *info;
+  GArray *cells;
+  guint n_cells, n;
 
-  g_return_if_fail (IS_GUCHARMAP_CHARTABLE_ACCESSIBLE (obj));
+  g_assert (IS_GUCHARMAP_CHARTABLE_ACCESSIBLE (obj));
 
   widget = GTK_ACCESSIBLE (obj)->widget;
   if (!widget)
     /* Widget is being deleted */
     return;
   
-  table = GUCHARMAP_CHARTABLE_ACCESSIBLE (obj);
+  accessible = GUCHARMAP_CHARTABLE_ACCESSIBLE (obj);
   chartable = GUCHARMAP_CHARTABLE (widget);
 
-  cell_list = get_cell_list (table);
-  for (l = cell_list; l; l = l->next)
+  cells = accessible->cells;
+  n_cells = cells->len;
+  for (n = 0; n < n_cells; ++n)
     {
-      info = l->data;
-      set_cell_visibility (chartable, GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE (info->cell), TRUE);
-    }
-  g_signal_emit_by_name (obj, "visible_data_changed"); 
-}
+      GucharmapChartableCellAccessibleInfo info = g_array_index (cells, GucharmapChartableCellAccessibleInfo, n);
 
+      set_cell_visibility (chartable, GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE (info.cell), TRUE);
+    }
+
+  g_signal_emit_by_name (obj, "visible-data-changed");
+}
 
 static void
 adjustment_changed (GtkAdjustment *adj,
                     AtkObject     *obj)
 {
-  traverse_cells (obj);
+  gucharmap_chartable_accessible_update_all_cells (obj);
 }
-
 
 static void
 size_allocated (GtkWidget     *widget,
                 GtkAllocation *alloc,
                 gpointer      data)
 {
-  g_return_if_fail (ATK_IS_OBJECT (data));
-  traverse_cells (ATK_OBJECT (data));
+  g_assert (ATK_IS_OBJECT (data));
+  gucharmap_chartable_accessible_update_all_cells (ATK_OBJECT (data));
 }
-
 
 static AtkObject*
 find_object (GucharmapChartable   *chartable,
@@ -581,6 +505,8 @@ gucharmap_chartable_accessible_class_init (GucharmapChartableAccessibleClass *kl
   GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
   AtkObjectClass *atk_object_class = ATK_OBJECT_CLASS (klass);
   GtkAccessibleClass *accessible_class = GTK_ACCESSIBLE_CLASS (klass);
+
+  gucharmap_chartable_accessible_parent_class = g_type_class_peek_parent (klass);
 
   gobject_class->finalize = gucharmap_chartable_accessible_finalize;
 
@@ -748,7 +674,7 @@ gucharmap_chartable_accessible_get_type (void)
         NULL, /* class data */
         sizeof (GucharmapChartableAccessible), /* instance size */
         0, /* nb preallocs */
-        (GInstanceInitFunc) NULL, /* instance init */
+        (GInstanceInitFunc) gucharmap_chartable_accessible_init, /* instance init */
         NULL /* value table */
       };
       const GInterfaceInfo atk_table_info =
