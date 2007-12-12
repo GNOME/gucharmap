@@ -259,7 +259,7 @@ set_top_row (GucharmapChartable *chartable,
 
   /* character is still on the visible page */
   if (chartable->active_cell - chartable->page_first_cell >= 0
-      && chartable->active_cell - chartable->page_first_cell < chartable->rows * chartable->cols)
+      && chartable->active_cell - chartable->page_first_cell < chartable->page_size)
     return;
 
   c = chartable->old_active_cell % chartable->cols;
@@ -540,7 +540,7 @@ set_active_cell (GucharmapChartable *chartable,
   chartable->active_cell = cell;
 
   /* update page, if necessary */
-  if ((gint)cell - chartable->page_first_cell >= chartable->rows * chartable->cols || (gint)cell < chartable->page_first_cell)
+  if ((gint)cell - chartable->page_first_cell >= chartable->page_size  || (gint)cell < chartable->page_first_cell)
     {
       /* move the page_first_cell as far as active_cell has moved */
       gint offset = (gint) chartable->active_cell - (gint) chartable->old_active_cell;
@@ -556,7 +556,7 @@ set_active_cell (GucharmapChartable *chartable,
       chartable->page_first_cell -= (chartable->page_first_cell % chartable->cols);
     
       /* go back up if we should have rounded up */
-      if (chartable->active_cell - chartable->page_first_cell >= chartable->rows * chartable->cols)
+      if (chartable->active_cell - chartable->page_first_cell >= chartable->page_size)
         chartable->page_first_cell += chartable->cols;
     }
 
@@ -1375,6 +1375,8 @@ gucharmap_chartable_size_allocate (GtkWidget *widget,
     chartable->rows = 1;
   if (chartable->cols < 1)
     chartable->cols = 1;
+
+  chartable->page_size = chartable->rows * chartable->cols;
 
   /* force pixmap to be redrawn on next expose event */
   if (chartable->pixmap != NULL)

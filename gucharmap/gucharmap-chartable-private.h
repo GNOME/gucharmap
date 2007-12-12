@@ -37,7 +37,9 @@ struct _GucharmapChartable
   int bare_minimal_row_height;
 
   /* rows and columns on a page */
-  gint rows, cols;
+  int rows;
+  int cols;
+  int page_size; /* rows * cols */
 
   GdkPixmap *pixmap;
 
