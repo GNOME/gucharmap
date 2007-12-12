@@ -39,17 +39,17 @@ struct _GucharmapChartable
   /* rows and columns on a page */
   int rows;
   int cols;
-  int page_size; /* rows * cols */
+  int page_size;       /* rows * cols */
+  int page_first_cell; /* the cell index of the top left corner */
+  int active_cell;     /* the active cell index */
+  int old_page_first_cell;
+  int old_active_cell;
 
+  /* Drawing */
   GdkPixmap *pixmap;
-
   PangoLayout *pango_layout;
 
-  gint page_first_cell;
-  gint active_cell;
-  gint old_page_first_cell;
-  gint old_active_cell;
-
+  /* Zoom popup */
   GtkWidget *zoom_window;
   GtkWidget *zoom_image;
 
