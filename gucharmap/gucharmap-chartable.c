@@ -1098,7 +1098,7 @@ gucharmap_chartable_expose_event (GtkWidget *widget,
 
 static void
 gucharmap_chartable_size_allocate (GtkWidget *widget,
-                               GtkAllocation *allocation)
+                                   GtkAllocation *allocation)
 {
   GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (widget);
   gint old_rows, old_cols;
@@ -1134,6 +1134,15 @@ gucharmap_chartable_size_allocate (GtkWidget *widget,
   update_scrollbar_adjustment (chartable);
 }
 
+static void
+gucharmap_chartable_size_request (GtkWidget *widget,
+                                  GtkRequisition *requisition)
+{
+  GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (widget);
+  
+  requisition->width = chartable->bare_minimal_column_width;
+  requisition->height = chartable->bare_minimal_row_height;
+}
 
 static void
 gucharmap_chartable_style_set (GtkWidget *widget, 
@@ -1221,6 +1230,7 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
 
   widget_class->expose_event = gucharmap_chartable_expose_event;
   widget_class->size_allocate = gucharmap_chartable_size_allocate;
+  widget_class->size_request = gucharmap_chartable_size_request;
   widget_class->style_set = gucharmap_chartable_style_set;
   
   klass->set_scroll_adjustments = gucharmap_chartable_set_adjustments;
