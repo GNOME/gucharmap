@@ -1053,7 +1053,7 @@ update_scrollbar_adjustment (GucharmapChartable *chartable)
   vadjustment->upper = 1.0 * ( chartable->last_cell / chartable->cols + 1 );
   vadjustment->step_increment = 3.0;
   vadjustment->page_increment = 1.0 * chartable->rows;
-  vadjustment->page_size = chartable->rows;
+  vadjustment->page_size = chartable->rows; /* FIXMEchpe + 1 maybe? so scroll-wheel up/down scroll exactly half a page? */
 
   gtk_adjustment_changed (vadjustment);
 }
@@ -1705,59 +1705,6 @@ motion_notify_event (GtkWidget *widget,
 }
 
 static void
-mouse_wheel_up (GucharmapChartable *chartable)
-{
-  if (chartable->page_first_cell > chartable->rows * chartable->cols / 2)
-    set_top_row (chartable, (chartable->page_first_cell - chartable->rows * chartable->cols / 2) / chartable->cols);
-  else 
-    set_top_row (chartable, 0);
-
-  _gucharmap_chartable_redraw (chartable, TRUE);
-}
-
-static void
-mouse_wheel_down (GucharmapChartable *chartable)
-{
-  if ((gint) chartable->last_cell - chartable->rows * chartable->cols < 0)
-    {
-      set_top_row (chartable, 0);
-    }
-  else if (chartable->page_first_cell + chartable->rows * chartable->cols / 2 < chartable->last_cell - chartable->rows * chartable->cols)
-    {
-      set_top_row (chartable, (chartable->page_first_cell + chartable->rows * chartable->cols / 2) / chartable->cols);
-    }
-  else 
-    {
-      set_top_row (chartable, chartable->last_cell / chartable->cols - (chartable->rows - 1) );
-    }
-
-  _gucharmap_chartable_redraw (chartable, TRUE);
-}
-
-/* mouse wheel scrolls by half a page */
-static gboolean    
-mouse_wheel_event (GtkWidget *widget, 
-                   GdkEventScroll *event, 
-                   GucharmapChartable *chartable)
-{
-  switch (event->direction)
-    {
-      case GDK_SCROLL_UP:
-        mouse_wheel_up (chartable);
-        break;
-
-      case GDK_SCROLL_DOWN:
-        mouse_wheel_down (chartable);
-        break;
-
-      default:
-        break;
-    }
-
-  return TRUE;
-}
-
-static void
 drag_data_received (GtkWidget *widget,
                     GdkDragContext *context,
                     gint x, gint y,
@@ -1876,8 +1823,6 @@ gucharmap_chartable_init (GucharmapChartable *chartable)
                     G_CALLBACK (button_release_event), chartable);
   g_signal_connect (G_OBJECT (widget), "motion-notify-event",
                     G_CALLBACK (motion_notify_event), chartable);
-  g_signal_connect (G_OBJECT (widget), "scroll-event",
-                    G_CALLBACK (mouse_wheel_event), chartable);
 
   gtk_drag_dest_set (widget, GTK_DEST_DEFAULT_ALL,
                      NULL, 0,
