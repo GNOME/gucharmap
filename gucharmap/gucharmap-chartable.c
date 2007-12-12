@@ -1179,19 +1179,6 @@ gucharmap_chartable_expose_event (GtkWidget *widget,
   if (chartable->pixmap == NULL)
     {
       draw_chartable_from_scratch (chartable);
-
-#if 0
-      /* FIXMEchpe: WHY TF does expose event influence the zoom popup?? */
-      /* the zoom window may need to be redrawn and repositioned */
-      if (chartable->zoom_window)
-        {
-          gint x, y;
-
-          update_zoom_window (chartable);
-          get_appropriate_active_char_corner_xy (chartable, &x, &y);
-          place_zoom_window (chartable, x, y);
-        }
-#endif
     }
 
   if (gdk_region_empty (event->region))
