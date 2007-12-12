@@ -1201,7 +1201,7 @@ gucharmap_chartable_expose_event (GtkWidget *widget,
   if (n_rects == 0)
     return FALSE;
 
-#if 1
+#if 0
   {
     g_print ("Exposing area %d:%d@(%d,%d) with %d rects ", event->area.width, event->area.height,
              event->area.x, event->area.y, n_rects);
