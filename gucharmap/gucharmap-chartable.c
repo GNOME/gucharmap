@@ -104,6 +104,22 @@ set_top_row (GucharmapChartable *chartable,
 
 G_DEFINE_TYPE (GucharmapChartable, gucharmap_chartable, GTK_TYPE_DRAWING_AREA)
 
+/* utility functions */
+static void
+gucharmap_chartable_set_font_desc (GucharmapChartable *chartable,
+                                   PangoFontDescription *font_desc /* adopting */)
+{
+  if (chartable->font_desc)
+    pango_font_description_free (chartable->font_desc);
+
+  chartable->font_desc = font_desc;
+ 
+  if (chartable->pango_layout)
+     pango_layout_set_font_description (chartable->pango_layout, font_desc);
+
+  gtk_widget_queue_resize (GTK_WIDGET (chartable));
+}
+
 /* depends on directionality */
 static guint
 get_cell_at_rowcol (GucharmapChartable *chartable,
@@ -1033,14 +1049,16 @@ _gucharmap_chartable_redraw (GucharmapChartable *chartable,
 static void
 update_scrollbar_adjustment (GucharmapChartable *chartable)
 {
-  chartable->vadjustment->value = 1.0 * chartable->page_first_cell / chartable->cols;
-  chartable->vadjustment->lower = 0.0;
-  chartable->vadjustment->upper = 1.0 * ( get_last_cell (chartable) / chartable->cols + 1 );
-  chartable->vadjustment->step_increment = 3.0;
-  chartable->vadjustment->page_increment = 1.0 * chartable->rows;
-  chartable->vadjustment->page_size = chartable->rows;
+  GtkAdjustment *vadjustment = chartable->vadjustment;
 
-  gtk_adjustment_changed (chartable->vadjustment);
+  vadjustment->value = 1.0 * chartable->page_first_cell / chartable->cols;
+  vadjustment->lower = 0.0;
+  vadjustment->upper = 1.0 * ( get_last_cell (chartable) / chartable->cols + 1 );
+  vadjustment->step_increment = 3.0;
+  vadjustment->page_increment = 1.0 * chartable->rows;
+  vadjustment->page_size = chartable->rows;
+
+  gtk_adjustment_changed (vadjustment);
 }
 
 static void
@@ -1141,9 +1159,11 @@ gucharmap_chartable_style_set (GtkWidget *widget,
 
   if (chartable->pango_layout)
     g_object_unref (chartable->pango_layout);
+  chartable->pango_layout = NULL;
 
   if (chartable->font_desc == NULL)
-    chartable->font_desc = pango_font_description_copy (widget->style->font_desc);
+    gucharmap_chartable_set_font_desc (chartable,
+                                       pango_font_description_copy (widget->style->font_desc));
 
   chartable->pango_layout = gtk_widget_create_pango_layout (widget, NULL);
   pango_layout_set_font_description (chartable->pango_layout,
@@ -1774,10 +1794,6 @@ gucharmap_chartable_init (GucharmapChartable *chartable)
 #endif
 
   gtk_widget_show_all (GTK_WIDGET (chartable));
-
-
-// FIXME do it on style-set
-  chartable->pango_layout = gtk_widget_create_pango_layout (widget, NULL);
 }
 
 GtkWidget *
@@ -1812,7 +1828,6 @@ gucharmap_chartable_zoom_disable (GucharmapChartable *chartable)
 void 
 gucharmap_chartable_set_font (GucharmapChartable *chartable, const char *font_name)
 {
-  GtkWidget *widget = GTK_WIDGET (chartable);
   PangoFontDescription *font_desc;
 
   g_return_if_fail (font_name != NULL);
@@ -1825,14 +1840,7 @@ gucharmap_chartable_set_font (GucharmapChartable *chartable, const char *font_na
       return;
     }
 
-  if (chartable->font_desc)
-    pango_font_description_free (chartable->font_desc);
-  chartable->font_desc = font_desc;
- 
-  if (chartable->pango_layout)
-     pango_layout_set_font_description (chartable->pango_layout, font_desc);
-
-  gtk_widget_queue_resize (widget);
+  gucharmap_chartable_set_font_desc (chartable, font_desc);
 }
 
 gunichar 
