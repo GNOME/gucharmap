@@ -1175,6 +1175,11 @@ gucharmap_chartable_expose_event (GtkWidget *widget,
   int i, n_rects;
   GdkGC *gc;
 
+  /* Don't draw anything if we haven't set a codepoint list yet */
+  if (chartable->codepoint_list == NULL)
+    return FALSE;
+
+  /* FIXMEchpe why? */
   gdk_window_set_back_pixmap (widget->window, NULL, FALSE);
 
   if (chartable->pixmap == NULL)
