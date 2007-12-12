@@ -49,7 +49,8 @@ enum
 {
   PROP_0,
   PROP_ACTIVE_CHAR,
-  PROP_CODEPOINT_LIST
+  PROP_CODEPOINT_LIST,
+  PROP_SNAP_POW2,
 };
 
 static void gucharmap_chartable_class_init (GucharmapChartableClass *klass);
@@ -1694,6 +1695,9 @@ gucharmap_chartable_set_property (GObject *object,
     case PROP_CODEPOINT_LIST:
       gucharmap_chartable_set_codepoint_list (chartable, g_value_get_object (value));
       break;
+    case PROP_SNAP_POW2:
+      gucharmap_chartable_set_snap_pow2 (chartable, g_value_get_boolean (value));
+      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
@@ -1714,6 +1718,9 @@ gucharmap_chartable_get_property (GObject *object,
       break;
     case PROP_CODEPOINT_LIST:
       g_value_set_object (value, gucharmap_chartable_get_codepoint_list (chartable));
+      break;
+    case PROP_SNAP_POW2:
+      g_value_set_boolean (value, chartable->snap_pow2_enabled);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -1816,6 +1823,16 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
                           G_PARAM_STATIC_NAME |
                           G_PARAM_STATIC_NICK |
                           G_PARAM_STATIC_BLURB));
+
+  g_object_class_install_property
+    (object_class,
+     PROP_SNAP_POW2,
+     g_param_spec_boolean ("snap-power-2", NULL, NULL,
+                           FALSE,
+                           G_PARAM_READWRITE |
+                           G_PARAM_STATIC_NAME |
+                           G_PARAM_STATIC_NICK |
+                           G_PARAM_STATIC_BLURB));
 
   /* Keybindings */
   binding_set = gtk_binding_set_by_class (klass);
@@ -2030,6 +2047,8 @@ gucharmap_chartable_set_snap_pow2 (GucharmapChartable *chartable,
       chartable->snap_pow2_enabled = snap;
 
       gtk_widget_queue_resize (GTK_WIDGET (chartable));
+
+      g_object_notify (G_OBJECT (chartable), "snap-power-2");
     }
 }
 
