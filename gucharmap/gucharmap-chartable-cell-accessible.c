@@ -130,8 +130,8 @@ gucharmap_chartable_cell_accessible_grab_focus (AtkComponent *component)
   cell = GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE (component);
 
   chartable = GUCHARMAP_CHARTABLE (cell->widget);
+  /* FIXME: this looks wrong, index is the index in the codepoint list, not the character itself */
   gucharmap_chartable_set_active_character (chartable, cell->index);
-  _gucharmap_chartable_redraw (chartable, TRUE);
   return TRUE;
 }
 
