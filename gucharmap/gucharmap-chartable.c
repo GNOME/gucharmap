@@ -1179,9 +1179,6 @@ gucharmap_chartable_expose_event (GtkWidget *widget,
   if (chartable->codepoint_list == NULL)
     return FALSE;
 
-  /* FIXMEchpe why? */
-  gdk_window_set_back_pixmap (widget->window, NULL, FALSE);
-
   if (chartable->pixmap == NULL)
     {
       draw_chartable_from_scratch (chartable);
@@ -1332,6 +1329,14 @@ gucharmap_chartable_motion_notify (GtkWidget *widget,
   if (motion_notify_event)
     motion_notify_event (widget, event);
   return FALSE;
+}
+
+static void
+gucharmap_chartable_realize (GtkWidget *widget)
+{
+  GTK_WIDGET_CLASS (gucharmap_chartable_parent_class)->realize (widget);
+
+  gdk_window_set_back_pixmap (widget->window, NULL, FALSE);
 }
 
 static void
@@ -1718,6 +1723,7 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
   widget_class->key_press_event = gucharmap_chartable_key_press_event;
   widget_class->key_release_event = gucharmap_chartable_key_release_event;
   widget_class->motion_notify_event = gucharmap_chartable_motion_notify;
+  widget_class->realize = gucharmap_chartable_realize;
   widget_class->size_allocate = gucharmap_chartable_size_allocate;
   widget_class->size_request = gucharmap_chartable_size_request;
   widget_class->style_set = gucharmap_chartable_style_set;
