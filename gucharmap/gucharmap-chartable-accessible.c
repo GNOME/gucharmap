@@ -664,6 +664,20 @@ gucharmap_chartable_accessible_table_interface_init (AtkTableIface *iface)
   iface->get_row_at_index = gucharmap_chartable_accessible_get_row_at_index;
 }
 
+#if 0
+/* See http://bugzilla.gnome.org/show_bug.cgi?id=502840 */
+#include <atk/atktype.h>
+
+ATK_DEFINE_TYPE_WITH_CODE (GucharmapChartableAccessible,
+                           gucharmap_chartable_accessible,
+                           GUCHARMAP_TYPE_CHARTABLE,
+                           G_IMPLEMENT_INTERFACE (ATK_TYPE_TABLE,
+                                                  gucharmap_chartable_accessible_table_interface_init)
+                           G_IMPLEMENT_INTERFACE (ATK_TYPE_COMPONENT,
+                                                  gucharmap_chartable_accessible_component_interface_init))
+
+#else
+
 GType
 gucharmap_chartable_accessible_get_type (void)
 {
@@ -725,6 +739,7 @@ gucharmap_chartable_accessible_get_type (void)
 
   return type__volatile;
 }
+#endif
 
 /* API */
 
