@@ -1181,6 +1181,7 @@ gucharmap_chartable_expose_event (GtkWidget *widget,
     {
       draw_chartable_from_scratch (chartable);
 
+#if 0
       /* FIXMEchpe: WHY TF does expose event influence the zoom popup?? */
       /* the zoom window may need to be redrawn and repositioned */
       if (chartable->zoom_window)
@@ -1191,7 +1192,31 @@ gucharmap_chartable_expose_event (GtkWidget *widget,
           get_appropriate_active_char_corner_xy (chartable, &x, &y);
           place_zoom_window (chartable, x, y);
         }
+#endif
     }
+
+#if 1
+{
+  GdkRectangle *rects;
+  int i, n_rects;
+
+  if (gdk_region_empty (event->region))
+    return FALSE;
+
+  gdk_region_get_rectangles (event->region, &rects, &n_rects);
+  if (n_rects == 0)
+    return FALSE;
+
+  {
+    g_print ("Exposing area %d:%d@(%d,%d) with %d rects ", event->area.width, event->area.height,
+             event->area.x, event->area.y, n_rects);
+    for (i = 0; i < n_rects; ++i) {
+      g_print ("[Rect %d:%d@(%d,%d)] ", rects[i].width, rects[i].height, rects[i].x, rects[i].y);
+    }
+    g_print ("\n");
+  }
+}
+#endif
 
   /* FIXMEchpe: maybe draw each region separately? */
   gdk_draw_drawable (widget->window,
