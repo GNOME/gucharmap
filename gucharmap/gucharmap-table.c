@@ -118,13 +118,13 @@ gucharmap_table_new (void)
 void
 gucharmap_table_zoom_enable (GucharmapTable *chartable)
 {
-  gucharmap_chartable_zoom_enable (GUCHARMAP_CHARTABLE (chartable->chartable));
+  gucharmap_chartable_set_zoom_enabled (GUCHARMAP_CHARTABLE (chartable->chartable), TRUE);
 }
 
 void
 gucharmap_table_zoom_disable (GucharmapTable *chartable)
 {
-  gucharmap_chartable_zoom_disable (GUCHARMAP_CHARTABLE (chartable->chartable));
+  gucharmap_chartable_set_zoom_enabled (GUCHARMAP_CHARTABLE (chartable->chartable), FALSE);
 }
 
 void 

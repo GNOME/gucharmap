@@ -44,8 +44,8 @@ void gucharmap_chartable_set_font (GucharmapChartable *chartable,
 gunichar gucharmap_chartable_get_active_character (GucharmapChartable *chartable);
 void gucharmap_chartable_set_active_character (GucharmapChartable *chartable, 
                                                gunichar uc);
-void gucharmap_chartable_zoom_enable (GucharmapChartable *chartable);
-void gucharmap_chartable_zoom_disable (GucharmapChartable *chartable);
+void gucharmap_chartable_set_zoom_enabled (GucharmapChartable *chartable,
+                                           gboolean enabled);
 void gucharmap_chartable_set_snap_pow2 (GucharmapChartable *chartable,
                                         gboolean snap);
 void gucharmap_chartable_set_codepoint_list (GucharmapChartable         *chartable,

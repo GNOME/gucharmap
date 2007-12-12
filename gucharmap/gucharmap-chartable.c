@@ -1277,7 +1277,7 @@ gucharmap_chartable_focus_out_event (GtkWidget *widget,
 {
   GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (widget);
 
-  gucharmap_chartable_zoom_disable (chartable);
+  gucharmap_chartable_set_zoom_enabled (chartable, FALSE);
 
   if (chartable->pixmap != NULL)
     draw_and_expose_cell (chartable, chartable->active_cell);
@@ -1299,7 +1299,7 @@ gucharmap_chartable_key_press_event (GtkWidget *widget,
   switch (event->keyval)
     {
       case GDK_Shift_L: case GDK_Shift_R:
-        gucharmap_chartable_zoom_enable (chartable);
+        gucharmap_chartable_set_zoom_enabled (chartable, TRUE);
         break;
 
       /* pass on other keys, like tab and stuff that shifts focus */
@@ -1323,7 +1323,7 @@ gucharmap_chartable_key_release_event (GtkWidget *widget,
        * there a better way to handle this case? */
       case GDK_Shift_L: case GDK_Shift_R:
       case GDK_ISO_Next_Group: case GDK_ISO_Prev_Group:
-        gucharmap_chartable_zoom_disable (chartable);
+        gucharmap_chartable_set_zoom_enabled (chartable, FALSE);
         break;
     }
 
@@ -1882,27 +1882,41 @@ gucharmap_chartable_new (void)
   return GTK_WIDGET (g_object_new (gucharmap_chartable_get_type (), NULL));
 }
 
+/**
+ * gucharmap_chartable_set_zoom_enabled:
+ * @chartable: a #GucharmapChartable
+ * @enabled: whether to enable zoom mode
+ *
+ * Enables or disables the zoom popup.
+ */
 void
-gucharmap_chartable_zoom_enable (GucharmapChartable *chartable)
+gucharmap_chartable_set_zoom_enabled (GucharmapChartable *chartable,
+                                      gboolean enabled)
 {
   gint x, y;
 
-  chartable->zoom_mode_enabled = TRUE;
+  g_return_if_fail (IS_GUCHARMAP_CHARTABLE (chartable));
 
-  make_zoom_window (chartable);
-  update_zoom_window (chartable);
+  enabled = enabled != FALSE;
+  if (chartable->zoom_mode_enabled == enabled)
+    return;
 
-  get_appropriate_active_char_corner_xy (chartable, &x, &y);
-  place_zoom_window (chartable, x, y);
+  chartable->zoom_mode_enabled = enabled;
 
-  gtk_widget_show (chartable->zoom_window);
-}
+  if (enabled)
+    {
+      make_zoom_window (chartable);
+      update_zoom_window (chartable);
 
-void
-gucharmap_chartable_zoom_disable (GucharmapChartable *chartable)
-{
-  chartable->zoom_mode_enabled = FALSE;
-  destroy_zoom_window (chartable);
+      get_appropriate_active_char_corner_xy (chartable, &x, &y);
+      place_zoom_window (chartable, x, y);
+
+      gtk_widget_show (chartable->zoom_window);
+    }
+  else
+    {
+      destroy_zoom_window (chartable);
+    }
 }
 
 void 
