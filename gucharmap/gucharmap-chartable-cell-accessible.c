@@ -58,7 +58,7 @@ gucharmap_chartable_cell_accessible_get_index_in_parent (AtkObject *obj)
 {
   GucharmapChartableCellAccessible *cell;
 
-  g_return_val_if_fail (IS_GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE (obj), 0);
+  g_assert (IS_GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE (obj));
   cell = GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE (obj);
 
   return cell->index;
@@ -89,7 +89,7 @@ gucharmap_chartable_cell_accessible_get_extents (AtkComponent *component,
   gint real_x, real_y, real_width, real_height;
   gint row, column;
 
-  g_return_if_fail (IS_GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE (component));
+  g_assert (IS_GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE (component));
 
   cell = GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE (component);
 
@@ -125,7 +125,7 @@ gucharmap_chartable_cell_accessible_grab_focus (AtkComponent *component)
   GucharmapChartableCellAccessible *cell;
   GucharmapChartable *chartable;
 
-  g_return_val_if_fail (IS_GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE (component), FALSE);
+  g_assert (IS_GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE (component));
 
   cell = GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE (component);
 
@@ -292,8 +292,6 @@ gucharmap_chartable_cell_accessible_new (void)
 
   object = g_object_new (gucharmap_chartable_cell_accessible_get_type (), NULL);
 
-  g_return_val_if_fail (object != NULL, NULL);
-
   atk_object = ATK_OBJECT (object);
   atk_object->role = ATK_ROLE_TABLE_CELL;
 
@@ -306,7 +304,7 @@ gucharmap_chartable_cell_accessible_initialise (GucharmapChartableCellAccessible
                                                 AtkObject *parent,
                                                 gint      index)
 {
-  g_return_if_fail (IS_GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE (cell));
+  g_assert (IS_GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE (cell));
   g_return_if_fail (GTK_IS_WIDGET (widget));
 
   cell->widget = widget;
