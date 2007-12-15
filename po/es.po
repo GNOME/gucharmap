@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-12 19:36+0000\n"
-"PO-Revision-Date: 2007-12-13 15:05+0100\n"
+"POT-Creation-Date: 2007-12-15 11:37+0000\n"
+"PO-Revision-Date: 2007-12-15 21:46+0100\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Spanish <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -35,7 +35,7 @@ msgstr "Inserte caracteres especiales en los documentos"
 msgid "Canonical decomposition:"
 msgstr "Descomposición canónica:"
 
-#: ../gucharmap/gucharmap-charmap.c:308
+#: ../gucharmap/gucharmap-charmap.c:308 ../gucharmap/gucharmap-chartable.c:371
 msgid "[not a printable character]"
 msgstr "[no es un carácter imprimible]"
 
@@ -131,6 +131,23 @@ msgstr "_Tabla de caracteres"
 #: ../gucharmap/gucharmap-charmap.c:809
 msgid "Character _Details"
 msgstr "_Detalles del carácter"
+
+#: ../gucharmap/gucharmap-chartable.c:1150
+msgid "Unknown character, unable to identify."
+msgstr "Carácter desconocido, imposible identificarlo."
+
+#: ../gucharmap/gucharmap-chartable.c:1152
+#: ../gucharmap/gucharmap-search-dialog.c:596
+msgid "Not found."
+msgstr "No encontrado."
+
+#: ../gucharmap/gucharmap-chartable.c:1155
+msgid "Character found."
+msgstr "Carácter encontrado."
+
+#: ../gucharmap/gucharmap-chartable-accessible.c:754
+msgid "Character Table"
+msgstr "Tabla de caracteres"
 
 #: ../gucharmap/gucharmap-mini-fontsel.c:228
 msgid "Font"
@@ -353,8 +370,8 @@ msgid ""
 "Gucharmap; if not, write to the Free Software Foundation, Inc., 59 Temple "
 "Place, Suite 330, Boston, MA  02110-1301  USA"
 msgstr ""
-"Debería haber recibido una copia de la Licencia Pública General de GNU junto con "
-"Gucharmap; si no, escriba a la Free Software Foundation, Inc, 59 Temple "
+"Debería haber recibido una copia de la Licencia Pública General de GNU junto "
+"con Gucharmap; si no, escriba a la Free Software Foundation, Inc, 59 Temple "
 "Place, Suite 330, Boston, MA 02110-1301 USA"
 
 #: ../gucharmap/gucharmap-window.c:395
@@ -1158,10 +1175,6 @@ msgstr "Yi"
 #: ../gucharmap/gucharmap-search-dialog.c:550
 msgid "Information"
 msgstr "Información"
-
-#: ../gucharmap/gucharmap-search-dialog.c:596
-msgid "Not found."
-msgstr "No encontrado."
 
 #. follow hig guidelines
 #: ../gucharmap/gucharmap-search-dialog.c:754
