@@ -21,8 +21,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gucharmap HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-04 03:17+0000\n"
-"PO-Revision-Date: 2007-12-04 07:42+0200\n"
+"POT-Creation-Date: 2007-12-15 11:37+0000\n"
+"PO-Revision-Date: 2007-12-17 00:28+0200\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -30,7 +30,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../gucharmap.desktop.in.h:1 ../gucharmap/gucharmap-window.c:837
+#: ../gucharmap.desktop.in.h:1 ../gucharmap/gucharmap-window.c:923
 msgid "Character Map"
 msgstr "Märgikaart"
 
@@ -38,142 +38,150 @@ msgstr "Märgikaart"
 msgid "Insert special characters into documents"
 msgstr "Erimärkide lisamine dokumentidesse"
 
-#: ../gucharmap/gucharmap-charmap.c:268
+#: ../gucharmap/gucharmap-charmap.c:267
 msgid "Canonical decomposition:"
 msgstr ""
 
-#: ../gucharmap/gucharmap-charmap.c:309 ../gucharmap/gucharmap-table.c:295
+#: ../gucharmap/gucharmap-charmap.c:308 ../gucharmap/gucharmap-chartable.c:371
 msgid "[not a printable character]"
 msgstr "[pole prinditav märk]"
 
-#: ../gucharmap/gucharmap-charmap.c:323
+#: ../gucharmap/gucharmap-charmap.c:322
 msgid "General Character Properties"
 msgstr "Märgi üldised omadused"
 
 #. character category
-#: ../gucharmap/gucharmap-charmap.c:326
+#: ../gucharmap/gucharmap-charmap.c:325
 msgid "Unicode category:"
 msgstr "Unikoodi liigitus:"
 
-#: ../gucharmap/gucharmap-charmap.c:335
+#: ../gucharmap/gucharmap-charmap.c:334
 msgid "Various Useful Representations"
 msgstr "Mitmesugused kasulikud esitusviisid"
 
-#: ../gucharmap/gucharmap-charmap.c:345
+#: ../gucharmap/gucharmap-charmap.c:344
 msgid "UTF-8:"
 msgstr "UTF-8:"
 
-#: ../gucharmap/gucharmap-charmap.c:353
+#: ../gucharmap/gucharmap-charmap.c:352
 msgid "UTF-16:"
 msgstr "UTF-16:"
 
-#: ../gucharmap/gucharmap-charmap.c:364
+#: ../gucharmap/gucharmap-charmap.c:363
 msgid "C octal escaped UTF-8:"
 msgstr "C kaheksandkoodis väljendatud UTF-8:"
 
-#: ../gucharmap/gucharmap-charmap.c:374
+#: ../gucharmap/gucharmap-charmap.c:373
 msgid "XML decimal entity:"
 msgstr "XML-i kümnendsüsteemi olem:"
 
-#: ../gucharmap/gucharmap-charmap.c:385
+#: ../gucharmap/gucharmap-charmap.c:384
 msgid "Annotations and Cross References"
 msgstr "Kommentaarid ja ristviited"
 
-#: ../gucharmap/gucharmap-charmap.c:392
+#: ../gucharmap/gucharmap-charmap.c:391
 msgid "Alias names:"
 msgstr "Teised nimed:"
 
-#: ../gucharmap/gucharmap-charmap.c:401
+#: ../gucharmap/gucharmap-charmap.c:400
 msgid "Notes:"
 msgstr "Märkused:"
 
-#: ../gucharmap/gucharmap-charmap.c:410
+#: ../gucharmap/gucharmap-charmap.c:409
 msgid "See also:"
 msgstr "Vaata ka:"
 
-#: ../gucharmap/gucharmap-charmap.c:419
+#: ../gucharmap/gucharmap-charmap.c:418
 msgid "Approximate equivalents:"
 msgstr "Ligikaudu samaväärsed:"
 
-#: ../gucharmap/gucharmap-charmap.c:428
+#: ../gucharmap/gucharmap-charmap.c:427
 msgid "Equivalents:"
 msgstr "Samaväärsed:"
 
-#: ../gucharmap/gucharmap-charmap.c:444
+#: ../gucharmap/gucharmap-charmap.c:443
 msgid "CJK Ideograph Information"
 msgstr "CJK ideograafide andmed"
 
-#: ../gucharmap/gucharmap-charmap.c:449
+#: ../gucharmap/gucharmap-charmap.c:448
 msgid "Definition in English:"
 msgstr "Definitsioon inglise keeles:"
 
-#: ../gucharmap/gucharmap-charmap.c:454
+#: ../gucharmap/gucharmap-charmap.c:453
 msgid "Mandarin Pronunciation:"
 msgstr "Mandariinikeelne hääldus:"
 
-#: ../gucharmap/gucharmap-charmap.c:459
+#: ../gucharmap/gucharmap-charmap.c:458
 msgid "Cantonese Pronunciation:"
-msgstr ""
+msgstr "Kantoni hääldus:"
 
-#: ../gucharmap/gucharmap-charmap.c:464
+#: ../gucharmap/gucharmap-charmap.c:463
 msgid "Japanese On Pronunciation:"
 msgstr "Jaapani On-hääldus:"
 
-#: ../gucharmap/gucharmap-charmap.c:469
+#: ../gucharmap/gucharmap-charmap.c:468
 msgid "Japanese Kun Pronunciation:"
-msgstr "Jaapani Kun-hääldus"
+msgstr "Jaapani Kun-hääldus:"
 
-#: ../gucharmap/gucharmap-charmap.c:474
+#: ../gucharmap/gucharmap-charmap.c:473
 msgid "Tang Pronunciation:"
 msgstr ""
 
-#: ../gucharmap/gucharmap-charmap.c:479
+#: ../gucharmap/gucharmap-charmap.c:478
 msgid "Korean Pronunciation:"
 msgstr "Korea hääldus:"
 
-#: ../gucharmap/gucharmap-charmap.c:780
+#: ../gucharmap/gucharmap-charmap.c:806
 msgid "Characte_r Table"
 msgstr "_Märgitabel"
 
-#: ../gucharmap/gucharmap-charmap.c:783
+#: ../gucharmap/gucharmap-charmap.c:809
 msgid "Character _Details"
 msgstr "Märgi üksik_asjad"
 
-#: ../gucharmap/gucharmap-mini-fontsel.c:205
-msgid "Font"
-msgstr "Kirjatüüp"
-
-#: ../gucharmap/gucharmap-mini-fontsel.c:212
-msgid "Font Family"
-msgstr "Kirjatüübi pere"
-
-#: ../gucharmap/gucharmap-mini-fontsel.c:232
-msgid "Font Size"
-msgstr "Kirjasuurus "
-
-#. Unicode assigns "Common" as the script name for any character not
-#. * specifically listed in Scripts.txt
-#: ../gucharmap/gucharmap-script-codepoint-list.c:458
-#: ../gucharmap/unicode-scripts.h:26
-msgid "Common"
-msgstr "Üldine"
-
-#: ../gucharmap/gucharmap-table.c:1517
+#: ../gucharmap/gucharmap-chartable.c:1150
 msgid "Unknown character, unable to identify."
 msgstr "Tundmatu märk, ei saa tuvastada."
 
-#: ../gucharmap/gucharmap-table.c:1519
-#: ../gucharmap/gucharmap-search-dialog.c:595
+#: ../gucharmap/gucharmap-chartable.c:1152
+#: ../gucharmap/gucharmap-search-dialog.c:596
 msgid "Not found."
 msgstr "Ei leitud."
 
-#: ../gucharmap/gucharmap-table.c:1522
+#: ../gucharmap/gucharmap-chartable.c:1155
 msgid "Character found."
 msgstr "Märk leitud."
 
-#: ../gucharmap/gucharmap-table.c:1586
+#: ../gucharmap/gucharmap-chartable-accessible.c:754
 msgid "Character Table"
 msgstr "Märgitabel"
+
+#: ../gucharmap/gucharmap-mini-fontsel.c:228
+msgid "Font"
+msgstr "Kirjatüüp"
+
+#: ../gucharmap/gucharmap-mini-fontsel.c:242
+msgid "Font Family"
+msgstr "Kirjatüübi pere"
+
+#: ../gucharmap/gucharmap-mini-fontsel.c:260
+msgid "Font Size"
+msgstr "Kirjasuurus "
+
+#: ../gucharmap/gucharmap-settings.c:61 ../gucharmap/gucharmap-window.c:568
+msgid "_File"
+msgstr "_Fail"
+
+#: ../gucharmap/gucharmap-settings.c:92
+msgid "GConf could not be initialized."
+msgstr "GConf'i pole võimalik lähtestada."
+
+#. Unicode assigns "Common" as the script name for any character not
+#. * specifically listed in Scripts.txt
+#: ../gucharmap/gucharmap-script-codepoint-list.c:432
+#: ../gucharmap/unicode-scripts.h:26
+msgid "Common"
+msgstr "Üldine"
 
 #: ../gucharmap/gucharmap-unicode-info.c:96
 msgid "<Non Private Use High Surrogate>"
@@ -323,11 +331,11 @@ msgstr "Eraldaja, Lõik"
 msgid "Separator, Space"
 msgstr "Eraldaja, Tühik"
 
-#: ../gucharmap/gucharmap-window.c:190
+#: ../gucharmap/gucharmap-window.c:180
 msgid "Searching..."
 msgstr "Otsimine..."
 
-#: ../gucharmap/gucharmap-window.c:337
+#: ../gucharmap/gucharmap-window.c:380
 msgid ""
 "Gucharmap is free software; you can redistribute it and/or modify it under "
 "the terms of the GNU General Public License as published by the Free "
@@ -339,7 +347,7 @@ msgstr ""
 "Tarkvara Fondi poolt avaldatud; kas Litsentsi versioon number 2 või "
 "(vastavalt Teie valikule) ükskõik milline hilisem versioon."
 
-#: ../gucharmap/gucharmap-window.c:341
+#: ../gucharmap/gucharmap-window.c:384
 msgid ""
 "Permission is hereby granted, free of charge, to any person obtaining a copy "
 "of the Unicode data files to deal in them without restriction, including "
@@ -347,7 +355,7 @@ msgid ""
 "distribute, and/or sell copies."
 msgstr ""
 
-#: ../gucharmap/gucharmap-window.c:345
+#: ../gucharmap/gucharmap-window.c:388
 msgid ""
 "Gucharmap and the Unicode data files are distributed in the hope that they "
 "will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty "
@@ -359,17 +367,17 @@ msgstr ""
 "GARANTIITA või SOBIVUSELE TEATUD KINDLAKS EESMÄRGIKS.  Üksikasjade suhtes "
 "vaata GNU Üldist Avalikku Litsentsi ja Unicode autoriõiguseid."
 
-#: ../gucharmap/gucharmap-window.c:349
+#: ../gucharmap/gucharmap-window.c:392
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "Gucharmap; if not, write to the Free Software Foundation, Inc., 59 Temple "
-"Place, Suite 330, Boston, MA  02111-1307  USA"
+"Place, Suite 330, Boston, MA  02110-1301  USA"
 msgstr ""
-"Te peaks olema saanud GNU Üldise Avaliku Litsentsi koopia koos selle "
-"programmiga, kui ei, siis võtke ühendust Free Software Foundation'iga, 59 "
+"Te peaks olema saanud GNU Üldise Avaliku Litsentsi koopia koos "
+"Gucharmap'iga. Kui ei, siis võtke ühendust Free Software Foundation'iga, 59 "
 "Temple Place - Suite 330, Boston, MA 02111-1307, USA"
 
-#: ../gucharmap/gucharmap-window.c:352
+#: ../gucharmap/gucharmap-window.c:395
 msgid ""
 "Also you should have received a copy of the Unicode Copyright along with "
 "Gucharmap; you can always find it at Unicode's website: http://www.unicode."
@@ -379,7 +387,7 @@ msgstr ""
 "koopia. Seda on alati võimalik leida Unicode veebilehelt: http://www.unicode."
 "org/copyright.html"
 
-#: ../gucharmap/gucharmap-window.c:363
+#: ../gucharmap/gucharmap-window.c:408
 msgid ""
 "GNOME Character Map\n"
 "based on the Unicode Character Database"
@@ -387,119 +395,119 @@ msgstr ""
 "GNOME märgikaart\n"
 "põhineb Unicode märkide anmdebaasil"
 
-#: ../gucharmap/gucharmap-window.c:369 ../gucharmap/main.c:76
+#: ../gucharmap/gucharmap-window.c:414 ../gucharmap/main.c:58
 msgid "Gucharmap"
 msgstr "Gucharmap"
 
-#: ../gucharmap/gucharmap-window.c:371
+#: ../gucharmap/gucharmap-window.c:416
 msgid "translator-credits"
 msgstr ""
 "Priit Laes <amd@tt.ee>, 2005.\n"
 "Ivar Smolin <amd@tt.ee>, 2005-2007."
 
-#: ../gucharmap/gucharmap-window.c:468 ../gucharmap/gucharmap-window.c:513
+#: ../gucharmap/gucharmap-window.c:522 ../gucharmap/gucharmap-window.c:595
 msgid "Next Script"
 msgstr "Järgmine tähestik"
 
-#: ../gucharmap/gucharmap-window.c:468 ../gucharmap/gucharmap-window.c:515
+#: ../gucharmap/gucharmap-window.c:522 ../gucharmap/gucharmap-window.c:597
 msgid "Previous Script"
 msgstr "Eelmine tähestik"
 
-#: ../gucharmap/gucharmap-window.c:473 ../gucharmap/gucharmap-window.c:627
+#: ../gucharmap/gucharmap-window.c:528 ../gucharmap/gucharmap-window.c:715
 msgid "Next Block"
 msgstr "Järgmine blokk"
 
-#: ../gucharmap/gucharmap-window.c:473 ../gucharmap/gucharmap-window.c:627
+#: ../gucharmap/gucharmap-window.c:528 ../gucharmap/gucharmap-window.c:715
 msgid "Previous Block"
 msgstr "Eelmine blokk"
 
-#: ../gucharmap/gucharmap-window.c:486
-msgid "_File"
-msgstr "_Fail"
-
-#: ../gucharmap/gucharmap-window.c:487
+#: ../gucharmap/gucharmap-window.c:569
 msgid "_View"
 msgstr "_Vaade"
 
-#: ../gucharmap/gucharmap-window.c:488
+#: ../gucharmap/gucharmap-window.c:570
 msgid "_Search"
 msgstr "_Otsing"
 
-#: ../gucharmap/gucharmap-window.c:489
+#: ../gucharmap/gucharmap-window.c:571
 msgid "_Go"
 msgstr "_Liikumine"
 
-#: ../gucharmap/gucharmap-window.c:490
+#: ../gucharmap/gucharmap-window.c:572
 msgid "_Help"
 msgstr "_Abi"
 
-#: ../gucharmap/gucharmap-window.c:492
+#: ../gucharmap/gucharmap-window.c:574
 msgid "_Quit"
 msgstr "_Välju"
 
-#: ../gucharmap/gucharmap-window.c:495
+#: ../gucharmap/gucharmap-window.c:577
 msgid "Zoom _In"
 msgstr "_Suurenda"
 
-#: ../gucharmap/gucharmap-window.c:497
+#: ../gucharmap/gucharmap-window.c:579
 msgid "Zoom _Out"
 msgstr "_Vähenda"
 
-#: ../gucharmap/gucharmap-window.c:499
+#: ../gucharmap/gucharmap-window.c:581
 msgid "_Normal Size"
 msgstr "_Tavasuurus"
 
-#: ../gucharmap/gucharmap-window.c:502
+#: ../gucharmap/gucharmap-window.c:584
 msgid "_Find..."
 msgstr "_Otsing..."
 
-#: ../gucharmap/gucharmap-window.c:504
+#: ../gucharmap/gucharmap-window.c:586
 msgid "Find _Next"
 msgstr "Otsi _järgmist"
 
-#: ../gucharmap/gucharmap-window.c:506
+#: ../gucharmap/gucharmap-window.c:588
 msgid "Find _Previous"
 msgstr "Otsi _eelmist"
 
-#: ../gucharmap/gucharmap-window.c:509
+#: ../gucharmap/gucharmap-window.c:591
 msgid "_Next Character"
 msgstr "_Järgmine märk"
 
-#: ../gucharmap/gucharmap-window.c:511
+#: ../gucharmap/gucharmap-window.c:593
 msgid "_Previous Character"
 msgstr "_Eelmine märk"
 
-#: ../gucharmap/gucharmap-window.c:519
+#: ../gucharmap/gucharmap-window.c:600
 msgid "_Contents"
 msgstr "_Sisukord"
 
-#: ../gucharmap/gucharmap-window.c:522
+#: ../gucharmap/gucharmap-window.c:602
 msgid "_About"
 msgstr "_Programmist lähemalt"
 
-#: ../gucharmap/gucharmap-window.c:528
+#: ../gucharmap/gucharmap-window.c:613
 msgid "By _Script"
 msgstr "Tä_hestiku kaupa"
 
-#: ../gucharmap/gucharmap-window.c:530
+#: ../gucharmap/gucharmap-window.c:615
 msgid "By _Unicode Block"
 msgstr "_Unikoodi bloki järgi"
 
-#: ../gucharmap/gucharmap-window.c:594
-msgid "Snap Columns to Power of Two"
-msgstr "Määra veeru laius kahe astme järgi"
+#: ../gucharmap/gucharmap-window.c:680
+msgid "Snap _Columns to Power of Two"
+msgstr "Määra _veeru laius kahe astme järgi"
 
-#: ../gucharmap/gucharmap-window.c:727
+#: ../gucharmap/gucharmap-window.c:813
 msgid "_Text to copy:"
 msgstr "Kop_eeritav tekst:"
 
-#: ../gucharmap/gucharmap-window.c:748
+#: ../gucharmap/gucharmap-window.c:834
 msgid "Copy to the clipboard."
 msgstr "Lõikelauale kopeerimine."
 
-#: ../gucharmap/main.c:36
+#: ../gucharmap/main.c:41
 msgid "Font to start with; ex: 'Serif 27'"
 msgstr "Käivitamisel kasutatav kirjatüüp, näiteks: 'Serif 27'"
+
+#: ../gucharmap/main.c:41
+msgid "FONT"
+msgstr "KIRJATÜÜP"
 
 #: ../gucharmap/unicode-blocks.h:20
 msgid "Basic Latin"
@@ -1165,43 +1173,43 @@ msgstr "Phags-pa"
 msgid "Yi"
 msgstr "Yi"
 
-#: ../gucharmap/gucharmap-block-chapters.c:61
-msgid "All"
-msgstr "Kõik"
-
-#: ../gucharmap/gucharmap-block-chapters.c:79
-msgid "Unicode Block"
-msgstr "Unikoodi blokk"
-
-#: ../gucharmap/gucharmap-script-chapters.c:76
-msgid "Script"
-msgstr "Tähestik"
-
-#: ../gucharmap/gucharmap-search-dialog.c:549
+#: ../gucharmap/gucharmap-search-dialog.c:550
 msgid "Information"
 msgstr "Teave"
 
 #. follow hig guidelines
-#: ../gucharmap/gucharmap-search-dialog.c:753
+#: ../gucharmap/gucharmap-search-dialog.c:754
 msgid "Find"
 msgstr "Otsing"
 
-#: ../gucharmap/gucharmap-search-dialog.c:767
+#: ../gucharmap/gucharmap-search-dialog.c:768
 msgid "_Previous"
 msgstr "_Eelmine"
 
-#: ../gucharmap/gucharmap-search-dialog.c:774
+#: ../gucharmap/gucharmap-search-dialog.c:775
 msgid "_Next"
 msgstr "_Järgmine"
 
-#: ../gucharmap/gucharmap-search-dialog.c:784
+#: ../gucharmap/gucharmap-search-dialog.c:785
 msgid "_Search:"
 msgstr "_Otsing:"
 
-#: ../gucharmap/gucharmap-search-dialog.c:794
+#: ../gucharmap/gucharmap-search-dialog.c:795
 msgid "Match _whole word"
 msgstr "Otsitakse _täpset sõnavastet"
 
-#: ../gucharmap/gucharmap-search-dialog.c:799
+#: ../gucharmap/gucharmap-search-dialog.c:800
 msgid "Search in character _details"
 msgstr "Otsitakse _märgi üksikasjadest"
+
+#: ../gucharmap/gucharmap-block-chapters-model.c:52
+msgid "All"
+msgstr "Kõik"
+
+#: ../gucharmap/gucharmap-block-chapters-model.c:130
+msgid "Unicode Block"
+msgstr "Unikoodi blokk"
+
+#: ../gucharmap/gucharmap-script-chapters-model.c:131
+msgid "Script"
+msgstr "Tähestik"
