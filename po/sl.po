@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-03-18 14:09+0000\n"
-"PO-Revision-Date: 2007-12-13 17:14+0100\n"
+"PO-Revision-Date: 2007-12-20 14:22+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -35,6 +35,7 @@ msgid "Canonical decomposition:"
 msgstr "Kanonska razčlemba"
 
 #: ../gucharmap/gucharmap-charmap.c:308
+#: ../gucharmap/gucharmap-chartable.c:371
 msgid "[not a printable character]"
 msgstr "[znaka ni možno tiskati]"
 
@@ -130,6 +131,23 @@ msgstr "Razpredelnica _Znakov"
 #: ../gucharmap/gucharmap-charmap.c:809
 msgid "Character _Details"
 msgstr "_Podrobnosti znakov"
+
+#: ../gucharmap/gucharmap-chartable.c:1150
+msgid "Unknown character, unable to identify."
+msgstr "Neznan znak, ki ga ni mogoče določiti."
+
+#: ../gucharmap/gucharmap-chartable.c:1152
+#: ../gucharmap/gucharmap-search-dialog.c:596
+msgid "Not found."
+msgstr "Ni najden."
+
+#: ../gucharmap/gucharmap-chartable.c:1155
+msgid "Character found."
+msgstr "Znak najden."
+
+#: ../gucharmap/gucharmap-chartable-accessible.c:754
+msgid "Character Table"
+msgstr "Razpredelnica znakov"
 
 #: ../gucharmap/gucharmap-mini-fontsel.c:228
 msgid "Font"
@@ -1176,10 +1194,6 @@ msgstr "Yi"
 #: ../gucharmap/gucharmap-search-dialog.c:550
 msgid "Information"
 msgstr "Podatek"
-
-#: ../gucharmap/gucharmap-search-dialog.c:596
-msgid "Not found."
-msgstr "Ni najden."
 
 #. follow hig guidelines
 #: ../gucharmap/gucharmap-search-dialog.c:754
