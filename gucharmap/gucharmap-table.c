@@ -164,7 +164,8 @@ gucharmap_table_set_codepoint_list (GucharmapTable         *chartable,
                                     GucharmapCodepointList *list)
 {
   gucharmap_chartable_set_codepoint_list (GUCHARMAP_CHARTABLE (chartable->drawing_area), list);
-  g_object_unref (list); /* ABI compat */
+  if (list)
+    g_object_unref (list); /* ABI compat */
 }
 
 GucharmapCodepointList *
