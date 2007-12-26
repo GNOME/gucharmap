@@ -130,6 +130,7 @@ LIBGUCHARMAP_LT_VERSION=6:2:0
 AC_SUBST([LIBGUCHARMAP_LT_VERSION])
 
 AC_CONFIG_FILES([
+gucharmap.desktop.in
 gucharmap.pc
 Makefile
 gucharmap/Makefile 
