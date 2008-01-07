@@ -19,7 +19,7 @@ dnl
 
 AC_PREREQ([2.56])
 
-AC_INIT([GNOME Character Map],[1.10.1],[http://bugzilla.gnome.org/enter_bug.cgi?product=gucharmap],[gucharmap])
+AC_INIT([GNOME Character Map],[1.10.2],[http://bugzilla.gnome.org/enter_bug.cgi?product=gucharmap],[gucharmap])
 
 AC_CONFIG_SRCDIR([gucharmap/gucharmap.h])
 AC_CONFIG_HEADERS([config.h])
@@ -122,7 +122,7 @@ fi
 # - If binary compatibility has been broken (eg removed or changed interfaces)
 #   change to C+1:0:0
 # - If the interface is the same as the previous version, change to C:R+1:A
-LIBGUCHARMAP_LT_VERSION=6:2:0
+LIBGUCHARMAP_LT_VERSION=6:3:0
 AC_SUBST([LIBGUCHARMAP_LT_VERSION])
 
 AC_CONFIG_FILES([
