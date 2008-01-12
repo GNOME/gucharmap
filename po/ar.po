@@ -4,20 +4,20 @@
 #
 # Arafat Medini <lumina@silverpen.de>, 2004.
 # Djihed Afifi <djihed@gmail.com>, 2006.
-# Khaled Hosny <khaledhosny@eglug.org>, 2007.
+# Khaled Hosny <khaledhosny@eglug.org>, 2007, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: gucharmap.HEAD\n"
+"Project-Id-Version: gucharmap.HEAD.ar\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-12-23 11:55+0000\n"
-"PO-Revision-Date: 2007-12-23 11:59+0100\n"
-"Last-Translator: Djihed Afifi <djihed@gmail.com>\n"
-"Language-Team: Arabic <doc@arabeyes.org>\n"
+"PO-Revision-Date: 2008-01-11 23:11+0200\n"
+"Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
+"Language-Team: Arabic <doc@eglug.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms: nplurals=4; plural=n==1 ? 0 : n==2 ? 1 : n>=3 && n<=10 ? 2 : 3\n"
+"Plural-Forms:  nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n>=3 && n<=10 ? 3 : n>=11 && n<=99 ? 4 : 5;\n"
 
 #: ../gucharmap.desktop.in.h:1
 #: ../gucharmap/gucharmap-window.c:923
@@ -39,7 +39,7 @@ msgstr "[محرف لا يمكن طباعته]"
 
 #: ../gucharmap/gucharmap-charmap.c:322
 msgid "General Character Properties"
-msgstr "الخصائص العامة للمحرف"
+msgstr "خصائص المحرف العامة"
 
 #. character category
 #: ../gucharmap/gucharmap-charmap.c:325
@@ -64,7 +64,7 @@ msgstr "C octal escaped UTF-8:"
 
 #: ../gucharmap/gucharmap-charmap.c:373
 msgid "XML decimal entity:"
-msgstr "عدد عشري ل XML"
+msgstr "عدد XML عشري"
 
 #: ../gucharmap/gucharmap-charmap.c:384
 msgid "Annotations and Cross References"
@@ -80,7 +80,7 @@ msgstr "ملاحظات:"
 
 #: ../gucharmap/gucharmap-charmap.c:409
 msgid "See also:"
-msgstr "راجع أيضا:"
+msgstr "انظر أيضا:"
 
 #: ../gucharmap/gucharmap-charmap.c:418
 msgid "Approximate equivalents:"
@@ -92,11 +92,11 @@ msgstr "النظائر:"
 
 #: ../gucharmap/gucharmap-charmap.c:443
 msgid "CJK Ideograph Information"
-msgstr "معلومات ايديوجرافات ص.ي.ك."
+msgstr "معلومات ايديوجرافات ص‌ي‌ك"
 
 #: ../gucharmap/gucharmap-charmap.c:448
 msgid "Definition in English:"
-msgstr "التعريف بالانكليزية:"
+msgstr "التعريف بالإنجليزية:"
 
 #: ../gucharmap/gucharmap-charmap.c:453
 msgid "Mandarin Pronunciation:"
@@ -166,22 +166,22 @@ msgstr "_ملف"
 
 #: ../gucharmap/gucharmap-settings.c:92
 msgid "GConf could not be initialized."
-msgstr "لم يمكن ابتداء GConf."
+msgstr "تعذّر تمهيد GConf."
 
 #. Unicode assigns "Common" as the script name for any character not
 #. * specifically listed in Scripts.txt
 #: ../gucharmap/gucharmap-script-codepoint-list.c:432
 #: ../gucharmap/unicode-scripts.h:26
 msgid "Common"
-msgstr "متداول"
+msgstr "شائع"
 
 #: ../gucharmap/gucharmap-unicode-info.c:96
 msgid "<Non Private Use High Surrogate>"
-msgstr "<بديل عال غير متاح للاستخام الشخصي>"
+msgstr "<بديل عال غير متاح للاستخام الخاص>"
 
 #: ../gucharmap/gucharmap-unicode-info.c:98
 msgid "<Private Use High Surrogate>"
-msgstr "<بديل عال للاستخام الشخصي>"
+msgstr "<بديل عال للاستخام الخاص>"
 
 #: ../gucharmap/gucharmap-unicode-info.c:100
 msgid "<Low Surrogate>"
@@ -189,15 +189,15 @@ msgstr "<بديل منخفض>"
 
 #: ../gucharmap/gucharmap-unicode-info.c:102
 msgid "<Private Use>"
-msgstr "<إستخدام شخصي>"
+msgstr "<استخدام خاص>"
 
 #: ../gucharmap/gucharmap-unicode-info.c:104
 msgid "<Plane 15 Private Use>"
-msgstr "<سطح 15 للإستخدام الشخصي>"
+msgstr "<مستوى 15 للاستخدام الخاص>"
 
 #: ../gucharmap/gucharmap-unicode-info.c:106
 msgid "<Plane 16 Private Use>"
-msgstr "<سطح 16 للإستخدام الشخصي>"
+msgstr "<مستوى 16 للاستخدام الخاص>"
 
 #: ../gucharmap/gucharmap-unicode-info.c:111
 msgid "<not assigned>"
@@ -205,23 +205,23 @@ msgstr "<غير مسند>"
 
 #: ../gucharmap/gucharmap-unicode-info.c:124
 msgid "Other, Control"
-msgstr "مغاير، موجه"
+msgstr "آخر، تحكم"
 
 #: ../gucharmap/gucharmap-unicode-info.c:125
 msgid "Other, Format"
-msgstr "مغاير، تهيئة"
+msgstr "آخر، تهيئة"
 
 #: ../gucharmap/gucharmap-unicode-info.c:126
 msgid "Other, Not Assigned"
-msgstr "مغاير، غير مسند"
+msgstr "آخر، غير مسند"
 
 #: ../gucharmap/gucharmap-unicode-info.c:127
 msgid "Other, Private Use"
-msgstr "مغاير، للإستخدام الشخصي"
+msgstr "آخر، للاستخدام الخاص"
 
 #: ../gucharmap/gucharmap-unicode-info.c:128
 msgid "Other, Surrogate"
-msgstr "مغاير، بديل"
+msgstr "آخر، بديل"
 
 #: ../gucharmap/gucharmap-unicode-info.c:129
 msgid "Letter, Lowercase"
@@ -229,11 +229,11 @@ msgstr "حرف، صغير"
 
 #: ../gucharmap/gucharmap-unicode-info.c:130
 msgid "Letter, Modifier"
-msgstr "حرف، مغير"
+msgstr "حرف، مُغير"
 
 #: ../gucharmap/gucharmap-unicode-info.c:131
 msgid "Letter, Other"
-msgstr "حرف، مغاير"
+msgstr "حرف، آخر"
 
 #: ../gucharmap/gucharmap-unicode-info.c:132
 msgid "Letter, Titlecase"
@@ -245,19 +245,19 @@ msgstr "حرف، كبير"
 
 #: ../gucharmap/gucharmap-unicode-info.c:134
 msgid "Mark, Spacing Combining"
-msgstr "علامة، اتحاد التباعد"
+msgstr "علامة، تركيبية فاصلة"
 
 #: ../gucharmap/gucharmap-unicode-info.c:135
 msgid "Mark, Enclosing"
-msgstr "علامة، احتواء"
+msgstr "علامة، حاوية"
 
 #: ../gucharmap/gucharmap-unicode-info.c:136
 msgid "Mark, Non-Spacing"
-msgstr "علامة، لا تباعد"
+msgstr "علامة، غير فاصلة"
 
 #: ../gucharmap/gucharmap-unicode-info.c:137
 msgid "Number, Decimal Digit"
-msgstr "عدد، عدد رقمي عشري"
+msgstr "عدد، رقم عشري"
 
 #: ../gucharmap/gucharmap-unicode-info.c:138
 msgid "Number, Letter"
@@ -265,35 +265,35 @@ msgstr "عدد، حرف"
 
 #: ../gucharmap/gucharmap-unicode-info.c:139
 msgid "Number, Other"
-msgstr "عدد، مغاير"
+msgstr "عدد، آخر"
 
 #: ../gucharmap/gucharmap-unicode-info.c:140
 msgid "Punctuation, Connector"
-msgstr "تنقيط، رابط"
+msgstr "ترقيم، رابط"
 
 #: ../gucharmap/gucharmap-unicode-info.c:141
 msgid "Punctuation, Dash"
-msgstr "تنقيط، خط فاصل"
+msgstr "ترقيم، شرطة"
 
 #: ../gucharmap/gucharmap-unicode-info.c:142
 msgid "Punctuation, Close"
-msgstr "تنقيط، مغلق"
+msgstr "ترقيم، مغلق"
 
 #: ../gucharmap/gucharmap-unicode-info.c:143
 msgid "Punctuation, Final Quote"
-msgstr "تنقيط، علامة تصريح قافلة"
+msgstr "ترقيم، اقتباس أخير"
 
 #: ../gucharmap/gucharmap-unicode-info.c:144
 msgid "Punctuation, Initial Quote"
-msgstr "تنقيط، علامة تصريح فاتحة"
+msgstr "ترقيم، اقتباس أول"
 
 #: ../gucharmap/gucharmap-unicode-info.c:145
 msgid "Punctuation, Other"
-msgstr "تنقيط، مغاير"
+msgstr "ترقيم، آخر"
 
 #: ../gucharmap/gucharmap-unicode-info.c:146
 msgid "Punctuation, Open"
-msgstr "تنقيط، فاتح"
+msgstr "ترقيم، فاتح"
 
 #: ../gucharmap/gucharmap-unicode-info.c:147
 msgid "Symbol, Currency"
@@ -301,7 +301,7 @@ msgstr "رمز، عملة"
 
 #: ../gucharmap/gucharmap-unicode-info.c:148
 msgid "Symbol, Modifier"
-msgstr "رمز، مغير"
+msgstr "رمز، مُغير"
 
 #: ../gucharmap/gucharmap-unicode-info.c:149
 msgid "Symbol, Math"
@@ -309,7 +309,7 @@ msgstr "رمز، رياضيات"
 
 #: ../gucharmap/gucharmap-unicode-info.c:150
 msgid "Symbol, Other"
-msgstr "رمز، مغاير"
+msgstr "رمز، آخر"
 
 #: ../gucharmap/gucharmap-unicode-info.c:151
 msgid "Separator, Line"
@@ -325,7 +325,7 @@ msgstr "فاصل، فراغ"
 
 #: ../gucharmap/gucharmap-window.c:180
 msgid "Searching..."
-msgstr "يجري البحث..."
+msgstr "يبحث..."
 
 #: ../gucharmap/gucharmap-window.c:380
 msgid "Gucharmap is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version."
@@ -333,7 +333,7 @@ msgstr "خريطة المحارف برنامج حر؛ يمكنك توزيعه و
 
 #: ../gucharmap/gucharmap-window.c:384
 msgid "Permission is hereby granted, free of charge, to any person obtaining a copy of the Unicode data files to deal in them without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, and/or sell copies."
-msgstr "Permission is hereby granted, free of charge, to any person obtaining a copy of the Unicode data files to deal in them without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, and/or sell copies."
+msgstr "يُصرّح، بدون مقابل، لأي شخص يحصل على نسخة من بيانات يونيكود بالتعامل معها بلا قيود، شاملة بلا قيد حق الاستعمال، والنسخ، والتعديل، والدمج، والنشر، والتوزيع، و/أو بيع نُسخ."
 
 #: ../gucharmap/gucharmap-window.c:388
 msgid "Gucharmap and the Unicode data files are distributed in the hope that they will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License and Unicode Copyright for more details."
@@ -341,11 +341,13 @@ msgstr "توزع خريطة المحارف وملفات بيانات يونيك�
 
 #: ../gucharmap/gucharmap-window.c:392
 msgid "You should have received a copy of the GNU General Public License along with Gucharmap; if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02110-1301  USA"
-msgstr "من المفترض أنك تلقيت نسخة من رخصة جنو العمومية مع هذا البرنامج؛ إذا لم يحدث هذا فاكتب إلىFree Software Fondation Inc., 59 Temple Place - Suite 330, Boston, MA 02111 - 1307, USA"
+msgstr ""
+"من المفترض أنك تلقيت نسخة من رخصة جنو العمومية مع هذا البرنامج؛ إذا لم يحدث هذا فاكتب إلى\n"
+"Free Software Fondation Inc., 59 Temple Place - Suite 330, Boston, MA 02111 - 1307, USA"
 
 #: ../gucharmap/gucharmap-window.c:395
 msgid "Also you should have received a copy of the Unicode Copyright along with Gucharmap; you can always find it at Unicode's website: http://www.unicode.org/copyright.html"
-msgstr "يفترض أيضا أن تتلقى نسخة من حقوق نسخ ملفات بيانات يونيكود مع خريطة المحارف؛ يمكنك العثور عليها في موقع يونيكود: http://www.unicode.org/copyright.html"
+msgstr "يفترض أيضا أن تتلقى نسخة من حقوق نشر ملفات بيانات يونيكود مع خريطة المحارف؛ يمكنك العثور عليها في موقع يونيكود: http://www.unicode.org/copyright.html"
 
 #: ../gucharmap/gucharmap-window.c:408
 msgid ""
@@ -371,12 +373,12 @@ msgstr ""
 #: ../gucharmap/gucharmap-window.c:522
 #: ../gucharmap/gucharmap-window.c:595
 msgid "Next Script"
-msgstr "المخطوط التالي"
+msgstr "نظام الكتابة التالي"
 
 #: ../gucharmap/gucharmap-window.c:522
 #: ../gucharmap/gucharmap-window.c:597
 msgid "Previous Script"
-msgstr "المخطوط السابق"
+msgstr "نظام الكتابة السابق"
 
 #: ../gucharmap/gucharmap-window.c:528
 #: ../gucharmap/gucharmap-window.c:715
@@ -390,15 +392,15 @@ msgstr "القالب السابق"
 
 #: ../gucharmap/gucharmap-window.c:569
 msgid "_View"
-msgstr "ا_عرض"
+msgstr "_عرض"
 
 #: ../gucharmap/gucharmap-window.c:570
 msgid "_Search"
-msgstr "ا_بحث"
+msgstr "_بحث"
 
 #: ../gucharmap/gucharmap-window.c:571
 msgid "_Go"
-msgstr "_اذهب"
+msgstr "ا_ذهب"
 
 #: ../gucharmap/gucharmap-window.c:572
 msgid "_Help"
@@ -410,11 +412,11 @@ msgstr "ا_خرج"
 
 #: ../gucharmap/gucharmap-window.c:577
 msgid "Zoom _In"
-msgstr "ت_كبير"
+msgstr "_قرّب"
 
 #: ../gucharmap/gucharmap-window.c:579
 msgid "Zoom _Out"
-msgstr "ت_صغير"
+msgstr "_بعّد"
 
 #: ../gucharmap/gucharmap-window.c:581
 msgid "_Normal Size"
@@ -442,23 +444,23 @@ msgstr "المحرف ال_سابق"
 
 #: ../gucharmap/gucharmap-window.c:600
 msgid "_Contents"
-msgstr "_المحتويات"
+msgstr "ال_محتويات"
 
 #: ../gucharmap/gucharmap-window.c:602
 msgid "_About"
-msgstr "_حوْل"
+msgstr "_عنْ"
 
 #: ../gucharmap/gucharmap-window.c:613
 msgid "By _Script"
-msgstr "باعتبار ال_مخطوط"
+msgstr "ب_نظام الكتابة"
 
 #: ../gucharmap/gucharmap-window.c:615
 msgid "By _Unicode Block"
-msgstr "باعتبار قالب _يونيكود"
+msgstr "بقالب _يونيكود"
 
 #: ../gucharmap/gucharmap-window.c:680
 msgid "Snap _Columns to Power of Two"
-msgstr "الصق الأعمدة لمضاعفات 2"
+msgstr "الصق الأعمدة لمضاعفات اثنين"
 
 #: ../gucharmap/gucharmap-window.c:813
 msgid "_Text to copy:"
@@ -470,7 +472,7 @@ msgstr "انسخ للحافظة."
 
 #: ../gucharmap/main.c:41
 msgid "Font to start with; ex: 'Serif 27'"
-msgstr "الخط للبدأ به؛ مثلا: 'Serif 27'"
+msgstr "خط للبدأ به؛ مثلا: 'Serif 27'"
 
 #: ../gucharmap/main.c:41
 msgid "FONT"
@@ -482,7 +484,7 @@ msgstr "لاتيني بسيط"
 
 #: ../gucharmap/unicode-blocks.h:21
 msgid "Latin-1 Supplement"
-msgstr "تكميليات لاتيني_1"
+msgstr "تكميليات لاتيني-1"
 
 #: ../gucharmap/unicode-blocks.h:22
 msgid "Latin Extended-A"
@@ -498,15 +500,15 @@ msgstr "امتدادات IPA"
 
 #: ../gucharmap/unicode-blocks.h:25
 msgid "Spacing Modifier Letters"
-msgstr "حروف مغيرة للتباعد"
+msgstr "حروف مُغيرة فاصلة"
 
 #: ../gucharmap/unicode-blocks.h:26
 msgid "Combining Diacritical Marks"
-msgstr "علامات تشكيل موحدة"
+msgstr "علامات تشكيل تركيبية"
 
 #: ../gucharmap/unicode-blocks.h:27
 msgid "Greek and Coptic"
-msgstr "إغريقي و قبطي"
+msgstr "يوناني وقبطي"
 
 #: ../gucharmap/unicode-blocks.h:28
 #: ../gucharmap/unicode-scripts.h:30
@@ -548,7 +550,7 @@ msgstr "تاأنا"
 
 #: ../gucharmap/unicode-blocks.h:36
 msgid "NKo"
-msgstr "NKo"
+msgstr "نكو"
 
 #: ../gucharmap/unicode-blocks.h:37
 #: ../gucharmap/unicode-scripts.h:32
@@ -680,7 +682,7 @@ msgstr "تاغبنوا"
 #: ../gucharmap/unicode-blocks.h:63
 #: ../gucharmap/unicode-scripts.h:49
 msgid "Khmer"
-msgstr "الخمارية"
+msgstr "الخميرية"
 
 #: ../gucharmap/unicode-blocks.h:64
 #: ../gucharmap/unicode-scripts.h:55
@@ -704,7 +706,7 @@ msgstr "تاي لو الجديد"
 
 #: ../gucharmap/unicode-blocks.h:68
 msgid "Khmer Symbols"
-msgstr "رموز الخمارية"
+msgstr "رموز الخميرية"
 
 #: ../gucharmap/unicode-blocks.h:69
 #: ../gucharmap/unicode-scripts.h:22
@@ -722,27 +724,27 @@ msgstr "امتدادات صوتية"
 
 #: ../gucharmap/unicode-blocks.h:72
 msgid "Phonetic Extensions Supplement"
-msgstr "تكميليات التمديدات الصوتية"
+msgstr "تكميليات الامتدادات الصوتية"
 
 #: ../gucharmap/unicode-blocks.h:73
 msgid "Combining Diacritical Marks Supplement"
-msgstr "علامات تشكيل موحدة للروز"
+msgstr "تكميلي علامات التشكيل التركيبية"
 
 #: ../gucharmap/unicode-blocks.h:74
 msgid "Latin Extended Additional"
-msgstr "لا تيني اضافي ممتد"
+msgstr "لا تيني ممتد إضافي"
 
 #: ../gucharmap/unicode-blocks.h:75
 msgid "Greek Extended"
-msgstr "إغريقي ممتد"
+msgstr "يوناني ممتد"
 
 #: ../gucharmap/unicode-blocks.h:76
 msgid "General Punctuation"
-msgstr "تنقيط عام"
+msgstr "ترقيم عام"
 
 #: ../gucharmap/unicode-blocks.h:77
 msgid "Superscripts and Subscripts"
-msgstr "حروف الفوقية و حروف التحتية"
+msgstr "حروف فوقية و حروف تحتية"
 
 #: ../gucharmap/unicode-blocks.h:78
 msgid "Currency Symbols"
@@ -750,7 +752,7 @@ msgstr "رموز العملات"
 
 #: ../gucharmap/unicode-blocks.h:79
 msgid "Combining Diacritical Marks for Symbols"
-msgstr "علامات تشكيل موحدة للرموز"
+msgstr "علامات تشكيل تركيبية للرموز"
 
 #: ../gucharmap/unicode-blocks.h:80
 msgid "Letterlike Symbols"
@@ -782,7 +784,7 @@ msgstr "تعرف بصري على المحارف"
 
 #: ../gucharmap/unicode-blocks.h:87
 msgid "Enclosed Alphanumerics"
-msgstr "إملائيات رقمية مضمنة"
+msgstr "أبجدي رقمي مضمن"
 
 #: ../gucharmap/unicode-blocks.h:88
 msgid "Box Drawing"
@@ -794,7 +796,7 @@ msgstr "عناصر مقولبة"
 
 #: ../gucharmap/unicode-blocks.h:90
 msgid "Geometric Shapes"
-msgstr "شكل هندسي"
+msgstr "أشكال هندسية"
 
 #: ../gucharmap/unicode-blocks.h:91
 msgid "Miscellaneous Symbols"
@@ -806,11 +808,11 @@ msgstr "رموز رسومية"
 
 #: ../gucharmap/unicode-blocks.h:93
 msgid "Miscellaneous Mathematical Symbols-A"
-msgstr "رموز رياضية متنوعة أ"
+msgstr "رموز رياضية متنوعة-أ"
 
 #: ../gucharmap/unicode-blocks.h:94
 msgid "Supplemental Arrows-A"
-msgstr "أسهم إضافية أ"
+msgstr "أسهم إضافية-أ"
 
 #: ../gucharmap/unicode-blocks.h:95
 msgid "Braille Patterns"
@@ -818,15 +820,15 @@ msgstr "أنماط برايل"
 
 #: ../gucharmap/unicode-blocks.h:96
 msgid "Supplemental Arrows-B"
-msgstr "أسهم إضافية ب"
+msgstr "أسهم إضافية-ب"
 
 #: ../gucharmap/unicode-blocks.h:97
 msgid "Miscellaneous Mathematical Symbols-B"
-msgstr "رموز رياضية متنوعة ب"
+msgstr "رموز رياضية متنوعة-ب"
 
 #: ../gucharmap/unicode-blocks.h:98
 msgid "Supplemental Mathematical Operators"
-msgstr "دوال رياضية اضافية"
+msgstr "علامات رياضية إضافية"
 
 #: ../gucharmap/unicode-blocks.h:99
 msgid "Miscellaneous Symbols and Arrows"
@@ -861,11 +863,11 @@ msgstr "إثيوبي ممتد"
 
 #: ../gucharmap/unicode-blocks.h:106
 msgid "Supplemental Punctuation"
-msgstr "تكميليات تنقيط"
+msgstr "تكميليات ترقيم"
 
 #: ../gucharmap/unicode-blocks.h:107
 msgid "CJK Radicals Supplement"
-msgstr "تكميليات جذور ص.ي.ك."
+msgstr "تكميليات جذور ص‌ي‌ك"
 
 #: ../gucharmap/unicode-blocks.h:108
 msgid "Kangxi Radicals"
@@ -873,11 +875,11 @@ msgstr "جذور كان هي"
 
 #: ../gucharmap/unicode-blocks.h:109
 msgid "Ideographic Description Characters"
-msgstr "رموز وصف الإديوجرافات"
+msgstr "رموز وصف الإديوغرافات"
 
 #: ../gucharmap/unicode-blocks.h:110
 msgid "CJK Symbols and Punctuation"
-msgstr "رموز و تنقيطات ص.ي.ك."
+msgstr "رموز و ترقيمات ص‌ي‌ك"
 
 #: ../gucharmap/unicode-blocks.h:111
 #: ../gucharmap/unicode-scripts.h:44
@@ -908,31 +910,31 @@ msgstr "بوبوموفو ممدد"
 
 #: ../gucharmap/unicode-blocks.h:117
 msgid "CJK Strokes"
-msgstr "نظام ص.ي.ك. "
+msgstr "نظام ص‌ي‌ك "
 
 #: ../gucharmap/unicode-blocks.h:118
 msgid "Katakana Phonetic Extensions"
-msgstr "الإمتدادات الصوتية للكتاكنا"
+msgstr "الامتدادات الصوتية للكتاكنا"
 
 #: ../gucharmap/unicode-blocks.h:119
 msgid "Enclosed CJK Letters and Months"
-msgstr "حروف و شهور ص.ي.ك. مضمنة"
+msgstr "حروف و شهور ص‌ي‌ك مضمنة"
 
 #: ../gucharmap/unicode-blocks.h:120
 msgid "CJK Compatibility"
-msgstr "توافق مع ص.ي.ك. "
+msgstr "توافق مع ص‌ي‌ك "
 
 #: ../gucharmap/unicode-blocks.h:121
 msgid "CJK Unified Ideographs Extension A"
-msgstr "إمتدادات أ للإيديوجرافات ص.ي.ك. الموحدة"
+msgstr "امتدادات أ لإديوغرافات ص‌ي‌ك الموحدة"
 
 #: ../gucharmap/unicode-blocks.h:122
 msgid "Yijing Hexagram Symbols"
-msgstr "رموز يي جِن للشكل السداسي"
+msgstr "رموز يي جِن السداسية"
 
 #: ../gucharmap/unicode-blocks.h:123
 msgid "CJK Unified Ideographs"
-msgstr "إديوغرافات ص.ي.ك. الموحدة"
+msgstr "إديوغرافات ص‌ي‌ك الموحدة"
 
 #: ../gucharmap/unicode-blocks.h:124
 msgid "Yi Syllables"
@@ -944,7 +946,7 @@ msgstr "جذور يي"
 
 #: ../gucharmap/unicode-blocks.h:126
 msgid "Modifier Tone Letters"
-msgstr "حروف مغيرة للتباعد"
+msgstr "حروف مغيرة للنغمة"
 
 #: ../gucharmap/unicode-blocks.h:127
 msgid "Latin Extended-D"
@@ -957,7 +959,7 @@ msgstr "سيولتي ناغري"
 
 #: ../gucharmap/unicode-blocks.h:129
 msgid "Phags-pa"
-msgstr "فاكس-با"
+msgstr "فاغس-با"
 
 #: ../gucharmap/unicode-blocks.h:130
 msgid "Hangul Syllables"
@@ -969,7 +971,7 @@ msgstr "بدائل عالية"
 
 #: ../gucharmap/unicode-blocks.h:132
 msgid "High Private Use Surrogates"
-msgstr "بدائل للإستخدام الشخصي الشديد"
+msgstr "بدائل عالية للاستخدام الخاص"
 
 #: ../gucharmap/unicode-blocks.h:133
 msgid "Low Surrogates"
@@ -977,23 +979,23 @@ msgstr "بدائل منخفضة"
 
 #: ../gucharmap/unicode-blocks.h:134
 msgid "Private Use Area"
-msgstr "مساحة للإستخدام الشخصي"
+msgstr "منطقة الاستخدام الخاص"
 
 #: ../gucharmap/unicode-blocks.h:135
 msgid "CJK Compatibility Ideographs"
-msgstr "إيديوغرافات التوافق مع ص.ي.ك."
+msgstr "إديوغرافات التوافق مع ص‌ي‌ك"
 
 #: ../gucharmap/unicode-blocks.h:136
 msgid "Alphabetic Presentation Forms"
-msgstr "أشكال للتقديم الألفبائي"
+msgstr "أشكال العرض الألفبائية"
 
 #: ../gucharmap/unicode-blocks.h:137
 msgid "Arabic Presentation Forms-A"
-msgstr "أشكال تقديم العربية_أ"
+msgstr "أشكال العرض العربية-أ"
 
 #: ../gucharmap/unicode-blocks.h:138
 msgid "Variation Selectors"
-msgstr "منتقيات الضروب"
+msgstr "منتقيات التنويعات"
 
 #: ../gucharmap/unicode-blocks.h:139
 msgid "Vertical Forms"
@@ -1001,27 +1003,27 @@ msgstr "الأشكال العمودية"
 
 #: ../gucharmap/unicode-blocks.h:140
 msgid "Combining Half Marks"
-msgstr "علامة نصفية مجمعة"
+msgstr "علامة تركيبية نصفية"
 
 #: ../gucharmap/unicode-blocks.h:141
 msgid "CJK Compatibility Forms"
-msgstr "أشكال التوافق مع ص.ي.ك."
+msgstr "أشكال التوافق مع ص‌ي‌ك"
 
 #: ../gucharmap/unicode-blocks.h:142
 msgid "Small Form Variants"
-msgstr "ضروب أشكال صغرى"
+msgstr "تنويعات صغرى"
 
 #: ../gucharmap/unicode-blocks.h:143
 msgid "Arabic Presentation Forms-B"
-msgstr "أشكال تقديم العربية_ب"
+msgstr "أشكال عرض العربية-ب"
 
 #: ../gucharmap/unicode-blocks.h:144
 msgid "Halfwidth and Fullwidth Forms"
-msgstr "أشكال ذات عرض نصفي و عرض كامل"
+msgstr "أشكال كاملة ونصفية العرض"
 
 #: ../gucharmap/unicode-blocks.h:145
 msgid "Specials"
-msgstr "خصائص"
+msgstr "خاصة"
 
 #: ../gucharmap/unicode-blocks.h:146
 msgid "Linear B Syllabary"
@@ -1037,7 +1039,7 @@ msgstr "الأرقام الإيجية"
 
 #: ../gucharmap/unicode-blocks.h:149
 msgid "Ancient Greek Numbers"
-msgstr "أرقام إغريقية قديمة"
+msgstr "أرقام يونانية قديمة"
 
 #: ../gucharmap/unicode-blocks.h:150
 #: ../gucharmap/unicode-scripts.h:60
@@ -1062,7 +1064,7 @@ msgstr "فارسية قديمة"
 #: ../gucharmap/unicode-blocks.h:154
 #: ../gucharmap/unicode-scripts.h:31
 msgid "Deseret"
-msgstr "ديسرت"
+msgstr "ديزرت"
 
 #: ../gucharmap/unicode-blocks.h:155
 #: ../gucharmap/unicode-scripts.h:67
@@ -1072,7 +1074,7 @@ msgstr "شافيان"
 #: ../gucharmap/unicode-blocks.h:156
 #: ../gucharmap/unicode-scripts.h:63
 msgid "Osmanya"
-msgstr "عثماني"
+msgstr "عثمانيا"
 
 #: ../gucharmap/unicode-blocks.h:157
 msgid "Cypriot Syllabary"
@@ -1091,11 +1093,11 @@ msgstr "خاروشذي"
 #: ../gucharmap/unicode-blocks.h:160
 #: ../gucharmap/unicode-scripts.h:28
 msgid "Cuneiform"
-msgstr "كونيفورم"
+msgstr "مسماري"
 
 #: ../gucharmap/unicode-blocks.h:161
 msgid "Cuneiform Numbers and Punctuation"
-msgstr "رموز و تنقيطات كونيفورم"
+msgstr "أعداد وترقيم مسماري"
 
 #: ../gucharmap/unicode-blocks.h:162
 msgid "Byzantine Musical Symbols"
@@ -1107,7 +1109,7 @@ msgstr "رموز موسيقية"
 
 #: ../gucharmap/unicode-blocks.h:164
 msgid "Ancient Greek Musical Notation"
-msgstr "رموز موسيقية إغريقية قديمة"
+msgstr "رموز موسيقية يونانية قديمة"
 
 #: ../gucharmap/unicode-blocks.h:165
 msgid "Tai Xuan Jing Symbols"
@@ -1119,27 +1121,27 @@ msgstr "تعداد أرقام رود"
 
 #: ../gucharmap/unicode-blocks.h:167
 msgid "Mathematical Alphanumeric Symbols"
-msgstr "رموز رياضية إملائية رقمية"
+msgstr "رموز رياضية أبجدي عددية"
 
 #: ../gucharmap/unicode-blocks.h:168
 msgid "CJK Unified Ideographs Extension B"
-msgstr "امتدادات ب للإيديوغرافات ص.ي.ك. الموحدة "
+msgstr "امتدادات ب لإديوغرافات ص‌ي‌ك الموحدة "
 
 #: ../gucharmap/unicode-blocks.h:169
 msgid "CJK Compatibility Ideographs Supplement"
-msgstr "الإديوغرافات التكميلية المتوافقة مع ص.ي.ك."
+msgstr "الإديوغرافات التكميلية المتوافقة مع ص‌ي‌ك"
 
 #: ../gucharmap/unicode-blocks.h:170
 msgid "Tags"
-msgstr "شارات"
+msgstr "وسوم"
 
 #: ../gucharmap/unicode-blocks.h:171
 msgid "Variation Selectors Supplement"
-msgstr "تكميليات منتقيات الضروب"
+msgstr "تكميليات منتقيات التنويعات"
 
 #: ../gucharmap/unicode-blocks.h:172
 msgid "Supplementary Private Use Area-A"
-msgstr "مساحة تكميلية للإستعمال الخاص-أ"
+msgstr "مساحة تكميلية للاستعمال الخاص-أ"
 
 #: ../gucharmap/unicode-blocks.h:173
 msgid "Supplementary Private Use Area-B"
@@ -1147,7 +1149,7 @@ msgstr "مساحة تكميلية للاستعمال الخاص-ب"
 
 #: ../gucharmap/unicode-scripts.h:21
 msgid "Braille"
-msgstr "براي"
+msgstr "بريل"
 
 #: ../gucharmap/unicode-scripts.h:24
 msgid "Canadian Aboriginal"
@@ -1159,7 +1161,7 @@ msgstr "قبرصي"
 
 #: ../gucharmap/unicode-scripts.h:37
 msgid "Greek"
-msgstr "إغريقي"
+msgstr "يوناني"
 
 #: ../gucharmap/unicode-scripts.h:40
 msgid "Han"
@@ -1167,7 +1169,7 @@ msgstr "هان"
 
 #: ../gucharmap/unicode-scripts.h:41
 msgid "Hangul"
-msgstr "هانكول"
+msgstr "هانغول"
 
 #: ../gucharmap/unicode-scripts.h:45
 msgid "Inherited"
@@ -1183,11 +1185,11 @@ msgstr "خطي ب"
 
 #: ../gucharmap/unicode-scripts.h:58
 msgid "Nko"
-msgstr "Nko"
+msgstr "نكو"
 
 #: ../gucharmap/unicode-scripts.h:64
 msgid "Phags Pa"
-msgstr "فاكس با"
+msgstr "فاغس با"
 
 #: ../gucharmap/unicode-scripts.h:81
 msgid "Yi"
@@ -1216,7 +1218,7 @@ msgstr "ا_بحث:"
 
 #: ../gucharmap/gucharmap-search-dialog.c:795
 msgid "Match _whole word"
-msgstr "طابق لك_امل الكلمة"
+msgstr "طابق ك_امل الكلمة"
 
 #: ../gucharmap/gucharmap-search-dialog.c:800
 msgid "Search in character _details"
@@ -1232,5 +1234,5 @@ msgstr "قالب يونيكود"
 
 #: ../gucharmap/gucharmap-script-chapters-model.c:131
 msgid "Script"
-msgstr "مخطوط"
+msgstr "نظام كتابة"
 
