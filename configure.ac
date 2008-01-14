@@ -14,7 +14,7 @@ dnl General Public License for more details.
 dnl
 dnl You should have received a copy of the GNU General Public License along
 dnl with this program; if not, write to the Free Software Foundation, Inc.,
-dnl 59 Temple Place, Suite 330, Boston, MA 02110-1301  USA
+dnl 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
 dnl
 
 AC_PREREQ([2.56])
@@ -32,8 +32,6 @@ AC_PROG_CC
 AC_DISABLE_STATIC
 AC_PROG_LIBTOOL
 IT_PROG_INTLTOOL([0.35.0])
-
-AM_PROG_CC_C_O
 
 # checks for stuff
 GETTEXT_PACKAGE=gucharmap
@@ -79,15 +77,12 @@ AC_ARG_ENABLE([gconf],
               [AS_HELP_STRING([--disable-gconf],
 	                      [don't build with gconf support])])
 if test "x$enable_gconf" != "xno"; then
-    GCONFPKGS="gconf-2.0"
     PKG_CHECK_MODULES(GCONF, gconf-2.0,
                 have_gconf=yes, have_gconf=no)
 else
-    GCONFPKGS=
     AC_MSG_NOTICE([GCONF support disabled with --disable-gconf])
     have_gconf=no
 fi  
-AC_SUBST([GCONFPKGS])
 
 AM_GCONF_SOURCE_2
 AC_PATH_PROG([GCONFTOOL],[gconftool-2],[no])
@@ -130,7 +125,6 @@ LIBGUCHARMAP_LT_VERSION=6:2:0
 AC_SUBST([LIBGUCHARMAP_LT_VERSION])
 
 AC_CONFIG_FILES([
-gucharmap.desktop.in
 gucharmap.pc
 Makefile
 gucharmap/Makefile 
