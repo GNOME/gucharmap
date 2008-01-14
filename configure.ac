@@ -19,7 +19,7 @@ dnl
 
 AC_PREREQ([2.56])
 
-AC_INIT([GNOME Character Map],[2.21.5],[http://bugzilla.gnome.org/enter_bug.cgi?product=gucharmap],[gucharmap])
+AC_INIT([GNOME Character Map],[2.21.90],[http://bugzilla.gnome.org/enter_bug.cgi?product=gucharmap],[gucharmap])
 
 AC_CONFIG_SRCDIR([gucharmap/gucharmap.h])
 AC_CONFIG_HEADERS([config.h])
