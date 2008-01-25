@@ -1,5 +1,11 @@
 2008-01-25  Christian Persch  <chpe@gnome.org>
 
+	* gucharmap/gucharmap-chapters.c: (gucharmap_chapters_constructor):
+	Select the chapter corresponding to the default character (which
+	depends on the locale). Should fix bug #510813.
+
+2008-01-25  Christian Persch  <chpe@gnome.org>
+
 	* configure.in:
 	* gucharmap.pc.in: Fix the .pc file after removal of gnome option.
 
