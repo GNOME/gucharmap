@@ -99,9 +99,12 @@ AC_SUBST(GTK_LIBS)
 AC_SUBST(GCONF_CFLAGS)
 AC_SUBST(GCONF_LIBS)
 
+GCONFPKGS=
 if test "x$have_gconf" = "xyes" ; then
     AC_DEFINE([HAVE_GCONF], [1], [Define if have gconf])
+    GCONFPKGS="gconf-2.0"
 fi
+AC_SUBST([GCONFPKGS])
 
 GLIB_GENMARSHAL=`$PKG_CONFIG --variable=glib_genmarshal glib-2.0`
 AC_SUBST(GLIB_GENMARSHAL)
