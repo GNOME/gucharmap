@@ -22,6 +22,7 @@
 #include "gucharmap-chapters.h"
 #include "gucharmap-chapters-model.h"
 #include "gucharmap-chapters-view.h"
+#include "gucharmap-settings.h"
 #include "gucharmap-marshal.h"
 #include "gucharmap-intl.h"
 #include <string.h>
@@ -114,6 +115,7 @@ gucharmap_chapters_constructor (GType type,
   gtk_container_add (GTK_CONTAINER (chapters), chapters->tree_view);
   gtk_widget_show (chapters->tree_view);
 
+  gucharmap_chapters_go_to_character (chapters, gucharmap_settings_get_last_char ());
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (chapters->tree_view));
   g_signal_connect (selection, "changed", G_CALLBACK (selection_changed), chapters);
     
