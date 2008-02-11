@@ -1,24 +1,24 @@
 # Thai translation of gucharmap.
-# Copyright (C) 2004 Free Software Foundation, Inc.
+# Copyright (C) 2004-2008 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gucharmap package.
 # Surichat Sumrit <nook@opentle.org>, 2003, 2004.
 # Supranee Thirawatthanasuk <supranee@opentle.org>, 2004.
 # Chanchai Junlouchai <taz@opentle.org>, 2004.
-# Theppitak Karoonboonyanan <thep@linux.thai.net>, 2005.
+# Theppitak Karoonboonyanan <thep@linux.thai.net>, 2005-2008.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-27 11:04+0700\n"
-"PO-Revision-Date: 2006-08-27 11:06+0700\n"
+"POT-Creation-Date: 2008-02-11 08:47+0700\n"
+"PO-Revision-Date: 2008-02-11 12:54+0700\n"
 "Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
 "Language-Team: Thai <l10n>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
 
-#: gucharmap.desktop.in.h:1 gucharmap/gucharmap-window.c:837
+#: gucharmap.desktop.in.h:1 gucharmap/gucharmap-window.c:885
 msgid "Character Map"
 msgstr "ผังอักขระ"
 
@@ -26,118 +26,126 @@ msgstr "ผังอักขระ"
 msgid "Insert special characters into documents"
 msgstr "แทรกอักขระพิเศษเข้าในเอกสาร"
 
-#: gucharmap/gucharmap-charmap.c:268
+#: gucharmap/gucharmap-charmap.c:269
 msgid "Canonical decomposition:"
 msgstr "ส่วนประกอบบัญญัติไว้:"
 
-#: gucharmap/gucharmap-charmap.c:309 gucharmap/gucharmap-table.c:294
+#: gucharmap/gucharmap-charmap.c:310 gucharmap/gucharmap-table.c:286
 msgid "[not a printable character]"
 msgstr "[ไม่ใช่อักขระที่สามารถพิมพ์ได้]"
 
-#: gucharmap/gucharmap-charmap.c:323
+#: gucharmap/gucharmap-charmap.c:324
 msgid "General Character Properties"
 msgstr "คุณสมบัติของอักขระทั่วไป"
 
 #. character category
-#: gucharmap/gucharmap-charmap.c:326
+#: gucharmap/gucharmap-charmap.c:327
 msgid "Unicode category:"
 msgstr "รายการยูนิโค้ด:"
 
-#: gucharmap/gucharmap-charmap.c:335
+#: gucharmap/gucharmap-charmap.c:336
 msgid "Various Useful Representations"
 msgstr "การแทนค่าที่น่าสนใจ"
 
-#: gucharmap/gucharmap-charmap.c:345
+#: gucharmap/gucharmap-charmap.c:346
 msgid "UTF-8:"
 msgstr "UTF-8:"
 
-#: gucharmap/gucharmap-charmap.c:353
+#: gucharmap/gucharmap-charmap.c:354
 msgid "UTF-16:"
 msgstr "UTF-16:"
 
-#: gucharmap/gucharmap-charmap.c:364
+#: gucharmap/gucharmap-charmap.c:365
 msgid "C octal escaped UTF-8:"
 msgstr "UTF-8 หลีกเป็นฐานแปดแบบภาษาซี:"
 
-#: gucharmap/gucharmap-charmap.c:374
+#: gucharmap/gucharmap-charmap.c:375
 msgid "XML decimal entity:"
 msgstr "เอนทิตีตัวอ้างอิงฐานสิบแบบ XML:"
 
-#: gucharmap/gucharmap-charmap.c:385
+#: gucharmap/gucharmap-charmap.c:386
 msgid "Annotations and Cross References"
 msgstr "คำอธิบายและการอ้างอิงข้าม"
 
-#: gucharmap/gucharmap-charmap.c:392
+#: gucharmap/gucharmap-charmap.c:393
 msgid "Alias names:"
 msgstr "นามแฝง:"
 
-#: gucharmap/gucharmap-charmap.c:401
+#: gucharmap/gucharmap-charmap.c:402
 msgid "Notes:"
 msgstr "หมายเหตุ:"
 
-#: gucharmap/gucharmap-charmap.c:410
+#: gucharmap/gucharmap-charmap.c:411
 msgid "See also:"
 msgstr "ดูประกอบ:"
 
-#: gucharmap/gucharmap-charmap.c:419
+#: gucharmap/gucharmap-charmap.c:420
 msgid "Approximate equivalents:"
 msgstr "รูปแบบใกล้เคียง:"
 
-#: gucharmap/gucharmap-charmap.c:428
+#: gucharmap/gucharmap-charmap.c:429
 msgid "Equivalents:"
 msgstr "เท่ากัน:"
 
-#: gucharmap/gucharmap-charmap.c:444
+#: gucharmap/gucharmap-charmap.c:445
 msgid "CJK Ideograph Information"
 msgstr "ข้อมูลอักษรภาพ CJK"
 
-#: gucharmap/gucharmap-charmap.c:449
+#: gucharmap/gucharmap-charmap.c:450
 msgid "Definition in English:"
 msgstr "คำนิยามในภาษาอังกฤษ:"
 
-#: gucharmap/gucharmap-charmap.c:454
+#: gucharmap/gucharmap-charmap.c:455
 msgid "Mandarin Pronunciation:"
 msgstr "การออกเสียงภาษาจีนกลาง:"
 
-#: gucharmap/gucharmap-charmap.c:459
+#: gucharmap/gucharmap-charmap.c:460
 msgid "Cantonese Pronunciation:"
 msgstr "การออกเสียงสำเนียงกวางตุ้ง:"
 
-#: gucharmap/gucharmap-charmap.c:464
+#: gucharmap/gucharmap-charmap.c:465
 msgid "Japanese On Pronunciation:"
 msgstr "การออกเสียง On ของภาษาญี่ปุ่น:"
 
-#: gucharmap/gucharmap-charmap.c:469
+#: gucharmap/gucharmap-charmap.c:470
 msgid "Japanese Kun Pronunciation:"
 msgstr "การออกเสียง Kun ของภาษาญี่ปุ่น:"
 
-#: gucharmap/gucharmap-charmap.c:474
+#: gucharmap/gucharmap-charmap.c:475
 msgid "Tang Pronunciation:"
-msgstr ""
+msgstr "การออกเสียงในราชวงศ์ถัง:"
 
-#: gucharmap/gucharmap-charmap.c:479
+#: gucharmap/gucharmap-charmap.c:480
 msgid "Korean Pronunciation:"
 msgstr "การออกเสียงภาษาเกาหลี:"
 
-#: gucharmap/gucharmap-charmap.c:780
+#: gucharmap/gucharmap-charmap.c:788
 msgid "Characte_r Table"
 msgstr "_ตารางอักขระ"
 
-#: gucharmap/gucharmap-charmap.c:783
+#: gucharmap/gucharmap-charmap.c:791
 msgid "Character _Details"
 msgstr "_รายละเอียดของอักขระ"
 
-#: gucharmap/gucharmap-mini-fontsel.c:205
+#: gucharmap/gucharmap-mini-fontsel.c:228
 msgid "Font"
 msgstr "แบบอักษร"
 
-#: gucharmap/gucharmap-mini-fontsel.c:212
+#: gucharmap/gucharmap-mini-fontsel.c:242
 msgid "Font Family"
 msgstr "ตระกูลแบบอักษร"
 
-#: gucharmap/gucharmap-mini-fontsel.c:232
+#: gucharmap/gucharmap-mini-fontsel.c:260
 msgid "Font Size"
 msgstr "ขนาดแบบอักษร"
+
+#: gucharmap/gucharmap-settings.c:61 gucharmap/gucharmap-window.c:538
+msgid "_File"
+msgstr "แ_ฟ้ม"
+
+#: gucharmap/gucharmap-settings.c:92
+msgid "GConf could not be initialized."
+msgstr "ไม่สามารถตั้งต้น GConf ได้"
 
 #. Unicode assigns "Common" as the script name for any character not
 #. * specifically listed in Scripts.txt
@@ -146,20 +154,20 @@ msgstr "ขนาดแบบอักษร"
 msgid "Common"
 msgstr "ปกติ"
 
-#: gucharmap/gucharmap-table.c:1513
+#: gucharmap/gucharmap-table.c:1497
 msgid "Unknown character, unable to identify."
 msgstr "อักขระที่ไม่รู้จัก ไม่สามารถระบุได้"
 
-#: gucharmap/gucharmap-table.c:1515
-#: gucharmap/gucharmap-search-dialog.c:595
+#: gucharmap/gucharmap-table.c:1499
+#: gucharmap/gucharmap-search-dialog.c:596
 msgid "Not found."
 msgstr "ไม่พบ"
 
-#: gucharmap/gucharmap-table.c:1518
+#: gucharmap/gucharmap-table.c:1502
 msgid "Character found."
 msgstr "พบอักขระ"
 
-#: gucharmap/gucharmap-table.c:1582
+#: gucharmap/gucharmap-table.c:1566
 msgid "Character Table"
 msgstr "ตารางอักขระ"
 
@@ -311,11 +319,11 @@ msgstr "เครื่องหมายแบ่ง, ย่อหน้า"
 msgid "Separator, Space"
 msgstr "เครื่องหมายแบ่ง, ช่องว่าง"
 
-#: gucharmap/gucharmap-window.c:188
+#: gucharmap/gucharmap-window.c:181
 msgid "Searching..."
 msgstr "กำลังค้นหา..."
 
-#: gucharmap/gucharmap-window.c:337
+#: gucharmap/gucharmap-window.c:381
 msgid ""
 "Gucharmap is free software; you can redistribute it and/or modify it under "
 "the terms of the GNU General Public License as published by the Free "
@@ -326,7 +334,7 @@ msgstr ""
 "ภายใต้เงื่อนไขของ GNU General Public License ที่เผยแพร่โดยมูลนิธิซอฟต์แวร์เสรี "
 "ไม่ว่าจะเป็นสัญญาอนุญาตรุ่นที่ 2 หรือรุ่นถัดมา (ตามแต่คุณจะเลือก)"
 
-#: gucharmap/gucharmap-window.c:341
+#: gucharmap/gucharmap-window.c:385
 msgid ""
 "Permission is hereby granted, free of charge, to any person obtaining a copy "
 "of the Unicode data files to deal in them without restriction, including "
@@ -337,7 +345,7 @@ msgstr ""
 "กับแฟ้มข้อมูลได้โดยไม่มีข้อจำกัด รวมถึงและไม่จำกัดเพียงสิทธิ์ที่จะใช้งาน ทำสำเนา ดัดแปลง "
 "รวมเข้ากับข้อมูลอื่น ติดประกาศ แจกจ่าย และ/หรือ ขายฉบับสำเนา"
 
-#: gucharmap/gucharmap-window.c:345
+#: gucharmap/gucharmap-window.c:389
 msgid ""
 "Gucharmap and the Unicode data files are distributed in the hope that they "
 "will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty "
@@ -349,7 +357,7 @@ msgstr ""
 "_ความเหมาะสมสำหรับวัตถุประสงค์เฉพาะกิจใดๆ_ กรุณาอ่าน GNU General Public License "
 "เพื่อดูรายละเอียดเพิ่มเติม"
 
-#: gucharmap/gucharmap-window.c:349
+#: gucharmap/gucharmap-window.c:393
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "Gucharmap; if not, write to the Free Software Foundation, Inc., 59 Temple "
@@ -359,7 +367,7 @@ msgstr ""
 "กรุณาติดต่อไปที่ Free Software Foundation, Inc., 59 Temple Place, Suite 330, "
 "Boston, MA  02111-1307  USA"
 
-#: gucharmap/gucharmap-window.c:352
+#: gucharmap/gucharmap-window.c:396
 msgid ""
 "Also you should have received a copy of the Unicode Copyright along with "
 "Gucharmap; you can always find it at Unicode's website: http://www.unicode."
@@ -368,7 +376,7 @@ msgstr ""
 "นอกจากนี้ คุณควรจะได้รับสำเนาของ Unicode Copyright มาพร้อมกับ Gucharmap ด้วย "
 "ซึ่งมีให้ดาวน์โหลดตลอดเวลาที่เว็บไซต์ของยูนิโค้ด: http://www.unicode.org/copyright.html"
 
-#: gucharmap/gucharmap-window.c:363
+#: gucharmap/gucharmap-window.c:409
 msgid ""
 "GNOME Character Map\n"
 "based on the Unicode Character Database"
@@ -376,11 +384,11 @@ msgstr ""
 "ผังอักขระของ GNOME\n"
 "โดยใช้ฐานข้อมูลอักขระของยูนิโค้ด"
 
-#: gucharmap/gucharmap-window.c:369 gucharmap/main.c:76
+#: gucharmap/gucharmap-window.c:415 gucharmap/main.c:58
 msgid "Gucharmap"
 msgstr "Gucharmap"
 
-#: gucharmap/gucharmap-window.c:371
+#: gucharmap/gucharmap-window.c:417
 msgid "translator-credits"
 msgstr ""
 "สุริชาติ สัมฤทธิ์\n"
@@ -388,109 +396,109 @@ msgstr ""
 "ชาญชัย จันฤๅชัย\n"
 "เทพพิทักษ์ การุญบุญญานันท์"
 
-#: gucharmap/gucharmap-window.c:468 gucharmap/gucharmap-window.c:513
+#: gucharmap/gucharmap-window.c:516 gucharmap/gucharmap-window.c:565
 msgid "Next Script"
 msgstr "ภาษาเขียนถัดไป"
 
-#: gucharmap/gucharmap-window.c:468 gucharmap/gucharmap-window.c:515
+#: gucharmap/gucharmap-window.c:516 gucharmap/gucharmap-window.c:567
 msgid "Previous Script"
 msgstr "ภาษาเขียนก่อนหน้า"
 
-#: gucharmap/gucharmap-window.c:473 gucharmap/gucharmap-window.c:627
+#: gucharmap/gucharmap-window.c:522 gucharmap/gucharmap-window.c:677
 msgid "Next Block"
-msgstr "บล็อกถัดไป"
+msgstr "บล็อคถัดไป"
 
-#: gucharmap/gucharmap-window.c:473 gucharmap/gucharmap-window.c:627
+#: gucharmap/gucharmap-window.c:522 gucharmap/gucharmap-window.c:677
 msgid "Previous Block"
-msgstr "บล็อกก่อนหน้า "
+msgstr "บล็อคก่อนหน้า "
 
-#: gucharmap/gucharmap-window.c:486
-msgid "_File"
-msgstr "แ_ฟ้ม"
-
-#: gucharmap/gucharmap-window.c:487
+#: gucharmap/gucharmap-window.c:539
 msgid "_View"
-msgstr "_มุมมอง"
+msgstr "มุ_มมอง"
 
-#: gucharmap/gucharmap-window.c:488
+#: gucharmap/gucharmap-window.c:540
 msgid "_Search"
 msgstr "_ค้นหา"
 
-#: gucharmap/gucharmap-window.c:489
+#: gucharmap/gucharmap-window.c:541
 msgid "_Go"
 msgstr "ไ_ป"
 
-#: gucharmap/gucharmap-window.c:490
+#: gucharmap/gucharmap-window.c:542
 msgid "_Help"
 msgstr "_วิธีใช้"
 
-#: gucharmap/gucharmap-window.c:492
+#: gucharmap/gucharmap-window.c:544
 msgid "_Quit"
 msgstr "_ออก"
 
-#: gucharmap/gucharmap-window.c:495
+#: gucharmap/gucharmap-window.c:547
 msgid "Zoom _In"
 msgstr "ขยายเ_ข้า"
 
-#: gucharmap/gucharmap-window.c:497
+#: gucharmap/gucharmap-window.c:549
 msgid "Zoom _Out"
 msgstr "ขยาย_ออก"
 
-#: gucharmap/gucharmap-window.c:499
+#: gucharmap/gucharmap-window.c:551
 msgid "_Normal Size"
 msgstr "ขนาด_ปกติ"
 
-#: gucharmap/gucharmap-window.c:502
+#: gucharmap/gucharmap-window.c:554
 msgid "_Find..."
 msgstr "_หา..."
 
-#: gucharmap/gucharmap-window.c:504
+#: gucharmap/gucharmap-window.c:556
 msgid "Find _Next"
 msgstr "หา_ต่อ"
 
-#: gucharmap/gucharmap-window.c:506
+#: gucharmap/gucharmap-window.c:558
 msgid "Find _Previous"
 msgstr "หา_ก่อนหน้า"
 
-#: gucharmap/gucharmap-window.c:509
+#: gucharmap/gucharmap-window.c:561
 msgid "_Next Character"
 msgstr "อักขระ_ต่อไป"
 
-#: gucharmap/gucharmap-window.c:511
+#: gucharmap/gucharmap-window.c:563
 msgid "_Previous Character"
 msgstr "อักขระ_ก่อนหน้า"
 
-#: gucharmap/gucharmap-window.c:519
+#: gucharmap/gucharmap-window.c:570
 msgid "_Contents"
 msgstr "เ_นื้อหา"
 
-#: gucharmap/gucharmap-window.c:522
+#: gucharmap/gucharmap-window.c:572
 msgid "_About"
 msgstr "เ_กี่ยวกับ"
 
-#: gucharmap/gucharmap-window.c:528
+#: gucharmap/gucharmap-window.c:578
 msgid "By _Script"
 msgstr "เรียงตาม_ภาษาเขียน"
 
-#: gucharmap/gucharmap-window.c:530
+#: gucharmap/gucharmap-window.c:580
 msgid "By _Unicode Block"
-msgstr "เรียงตามบล็อกของ_ยูนิโค้ด"
+msgstr "เรียงตามบล็อคของยู_นิโค้ด"
 
-#: gucharmap/gucharmap-window.c:594
-msgid "Snap Columns to Power of Two"
-msgstr "จัดคอลัมน์เป็นจำนวนทวีคูณของสอง"
+#: gucharmap/gucharmap-window.c:642
+msgid "Snap _Columns to Power of Two"
+msgstr "จัดคอลัมน์เป็นจำนวนทวีคูณของ_สอง"
 
-#: gucharmap/gucharmap-window.c:727
+#: gucharmap/gucharmap-window.c:775
 msgid "_Text to copy:"
 msgstr "_ข้อความที่จะคัดลอก:"
 
-#: gucharmap/gucharmap-window.c:748
+#: gucharmap/gucharmap-window.c:796
 msgid "Copy to the clipboard."
 msgstr "ทำสำเนาไปยังคลิปบอร์ด"
 
-#: gucharmap/main.c:36
+#: gucharmap/main.c:41
 msgid "Font to start with; ex: 'Serif 27'"
-msgstr "ฟอนต์ที่จะใช้ตอนเริ่มต้น ตัวอย่าง: 'Serif 27'"
+msgstr "แบบอักษรที่จะใช้ตอนเริ่มต้น เช่น: 'Serif 27'"
+
+#: gucharmap/main.c:41
+msgid "FONT"
+msgstr "FONT"
 
 #: gucharmap/unicode-blocks.h:20
 msgid "Basic Latin"
@@ -554,11 +562,11 @@ msgstr "อารบิก ส่วนเสริม"
 
 #: gucharmap/unicode-blocks.h:35 gucharmap/unicode-scripts.h:76
 msgid "Thaana"
-msgstr ""
+msgstr "ทานะ"
 
 #: gucharmap/unicode-blocks.h:36
 msgid "NKo"
-msgstr ""
+msgstr "เอ็นโก"
 
 #: gucharmap/unicode-blocks.h:37 gucharmap/unicode-scripts.h:32
 msgid "Devanagari"
@@ -622,7 +630,7 @@ msgstr "จอร์เจีย"
 
 #: gucharmap/unicode-blocks.h:52
 msgid "Hangul Jamo"
-msgstr "ฮังกูล, จาโม"
+msgstr "ฮันกึล, จาโม"
 
 #: gucharmap/unicode-blocks.h:53 gucharmap/unicode-scripts.h:33
 msgid "Ethiopic"
@@ -638,7 +646,7 @@ msgstr "เชโรกี"
 
 #: gucharmap/unicode-blocks.h:56
 msgid "Unified Canadian Aboriginal Syllabics"
-msgstr ""
+msgstr "รูปพยางค์รวมภาษาชนเผ่าพื้นเมืองแคนาดา"
 
 #: gucharmap/unicode-blocks.h:57 gucharmap/unicode-scripts.h:59
 msgid "Ogham"
@@ -654,15 +662,15 @@ msgstr "ตากาล็อก"
 
 #: gucharmap/unicode-blocks.h:60 gucharmap/unicode-scripts.h:42
 msgid "Hanunoo"
-msgstr ""
+msgstr "ฮานูโนโอ"
 
 #: gucharmap/unicode-blocks.h:61 gucharmap/unicode-scripts.h:23
 msgid "Buhid"
-msgstr ""
+msgstr "บูฮิด"
 
 #: gucharmap/unicode-blocks.h:62 gucharmap/unicode-scripts.h:72
 msgid "Tagbanwa"
-msgstr ""
+msgstr "ตักบันวา"
 
 #: gucharmap/unicode-blocks.h:63 gucharmap/unicode-scripts.h:49
 msgid "Khmer"
@@ -674,7 +682,7 @@ msgstr "มองโกเลีย"
 
 #: gucharmap/unicode-blocks.h:65 gucharmap/unicode-scripts.h:52
 msgid "Limbu"
-msgstr ""
+msgstr "ลิมบู"
 
 #: gucharmap/unicode-blocks.h:66 gucharmap/unicode-scripts.h:73
 msgid "Tai Le"
@@ -690,11 +698,11 @@ msgstr "เขมร, สัญลักษณ์"
 
 #: gucharmap/unicode-blocks.h:69 gucharmap/unicode-scripts.h:22
 msgid "Buginese"
-msgstr ""
+msgstr "บูกินีส"
 
 #: gucharmap/unicode-blocks.h:70 gucharmap/unicode-scripts.h:18
 msgid "Balinese"
-msgstr ""
+msgstr "บาหลี"
 
 #: gucharmap/unicode-blocks.h:71
 msgid "Phonetic Extensions"
@@ -770,7 +778,7 @@ msgstr "วาดกล่อง"
 
 #: gucharmap/unicode-blocks.h:89
 msgid "Block Elements"
-msgstr "ชิ้นส่วนบล็อก"
+msgstr "ชิ้นส่วนบล็อค"
 
 #: gucharmap/unicode-blocks.h:90
 msgid "Geometric Shapes"
@@ -814,7 +822,7 @@ msgstr "สัญลักษณ์และลูกศรจิปาถะ"
 
 #: gucharmap/unicode-blocks.h:100 gucharmap/unicode-scripts.h:35
 msgid "Glagolitic"
-msgstr ""
+msgstr "กลาโกลิติก"
 
 #: gucharmap/unicode-blocks.h:101
 msgid "Latin Extended-C"
@@ -830,7 +838,7 @@ msgstr "จอร์เจีย ส่วนเสริม"
 
 #: gucharmap/unicode-blocks.h:104 gucharmap/unicode-scripts.h:79
 msgid "Tifinagh"
-msgstr ""
+msgstr "ทิฟินาค"
 
 #: gucharmap/unicode-blocks.h:105
 msgid "Ethiopic Extended"
@@ -858,7 +866,7 @@ msgstr "เครื่องหมายและสัญลักษณ์ CJ
 
 #: gucharmap/unicode-blocks.h:111 gucharmap/unicode-scripts.h:44
 msgid "Hiragana"
-msgstr "ฮิรากานะ"
+msgstr "ฮิรางานะ"
 
 #: gucharmap/unicode-blocks.h:112 gucharmap/unicode-scripts.h:47
 msgid "Katakana"
@@ -870,11 +878,11 @@ msgstr "ปอพอมอฟอ (จู้อิน)"
 
 #: gucharmap/unicode-blocks.h:114
 msgid "Hangul Compatibility Jamo"
-msgstr "จาโมฮังกูล เพื่อใช้ข้ามระบบ"
+msgstr "จาโมฮันกึล เพื่อใช้ข้ามระบบ"
 
 #: gucharmap/unicode-blocks.h:115
 msgid "Kanbun"
-msgstr ""
+msgstr "คันบุน"
 
 #: gucharmap/unicode-blocks.h:116
 msgid "Bopomofo Extended"
@@ -910,11 +918,11 @@ msgstr "อักษรภาพ CJK รวม"
 
 #: gucharmap/unicode-blocks.h:124
 msgid "Yi Syllables"
-msgstr ""
+msgstr "อี้, พยางค์"
 
 #: gucharmap/unicode-blocks.h:125
 msgid "Yi Radicals"
-msgstr ""
+msgstr "อี้, รากอักษร"
 
 #: gucharmap/unicode-blocks.h:126
 msgid "Modifier Tone Letters"
@@ -926,15 +934,15 @@ msgstr "ละติน ส่วนขยาย D"
 
 #: gucharmap/unicode-blocks.h:128 gucharmap/unicode-scripts.h:69
 msgid "Syloti Nagri"
-msgstr ""
+msgstr "สิลฒีนาครี"
 
 #: gucharmap/unicode-blocks.h:129
 msgid "Phags-pa"
-msgstr ""
+msgstr "พัคสปะ"
 
 #: gucharmap/unicode-blocks.h:130
 msgid "Hangul Syllables"
-msgstr "ฮังกูล, พยางค์"
+msgstr "ฮันกึล, พยางค์"
 
 #: gucharmap/unicode-blocks.h:131
 msgid "High Surrogates"
@@ -1038,7 +1046,7 @@ msgstr "เชเวียน"
 
 #: gucharmap/unicode-blocks.h:156 gucharmap/unicode-scripts.h:63
 msgid "Osmanya"
-msgstr ""
+msgstr "ออสมันยา"
 
 #: gucharmap/unicode-blocks.h:157
 msgid "Cypriot Syllabary"
@@ -1050,7 +1058,7 @@ msgstr "ฟินิเชียน"
 
 #: gucharmap/unicode-blocks.h:159 gucharmap/unicode-scripts.h:48
 msgid "Kharoshthi"
-msgstr ""
+msgstr "ขโรษฐี"
 
 #: gucharmap/unicode-blocks.h:160 gucharmap/unicode-scripts.h:28
 msgid "Cuneiform"
@@ -1074,11 +1082,11 @@ msgstr "เครื่องหมายดนตรีกรีกโบรา
 
 #: gucharmap/unicode-blocks.h:165
 msgid "Tai Xuan Jing Symbols"
-msgstr ""
+msgstr "สัญลักษณ์ไท่สวนจิง"
 
 #: gucharmap/unicode-blocks.h:166
 msgid "Counting Rod Numerals"
-msgstr ""
+msgstr "ตัวเลขติ้วนับ"
 
 #: gucharmap/unicode-blocks.h:167
 msgid "Mathematical Alphanumeric Symbols"
@@ -1114,7 +1122,7 @@ msgstr "อักษรเบรลล์"
 
 #: gucharmap/unicode-scripts.h:24
 msgid "Canadian Aboriginal"
-msgstr ""
+msgstr "ภาษาชนเผ่าพื้นเมืองแคนาดา"
 
 #: gucharmap/unicode-scripts.h:29
 msgid "Cypriot"
@@ -1130,11 +1138,11 @@ msgstr "ฮั่น"
 
 #: gucharmap/unicode-scripts.h:41
 msgid "Hangul"
-msgstr "ฮังกูล"
+msgstr "ฮันกึล"
 
 #: gucharmap/unicode-scripts.h:45
 msgid "Inherited"
-msgstr ""
+msgstr "ตามอักขระที่ประกอบ"
 
 #: gucharmap/unicode-scripts.h:51
 msgid "Latin"
@@ -1146,56 +1154,56 @@ msgstr "ลิเนียร์ B"
 
 #: gucharmap/unicode-scripts.h:58
 msgid "Nko"
-msgstr ""
+msgstr "เอ็นโก"
 
 #: gucharmap/unicode-scripts.h:64
 msgid "Phags Pa"
-msgstr ""
+msgstr "พัคสปะ"
 
 #: gucharmap/unicode-scripts.h:81
 msgid "Yi"
-msgstr ""
+msgstr "อี้"
 
-#: gucharmap/gucharmap-block-chapters.c:61
-msgid "All"
-msgstr "ทั้งหมด"
-
-#: gucharmap/gucharmap-block-chapters.c:79
-msgid "Unicode Block"
-msgstr "บล็อกของยูนิโค้ด"
-
-#: gucharmap/gucharmap-script-chapters.c:76
-msgid "Script"
-msgstr "ภาษาเขียน"
-
-#: gucharmap/gucharmap-search-dialog.c:549
+#: gucharmap/gucharmap-search-dialog.c:550
 msgid "Information"
 msgstr "ข้อมูล"
 
 #. follow hig guidelines
-#: gucharmap/gucharmap-search-dialog.c:753
+#: gucharmap/gucharmap-search-dialog.c:754
 msgid "Find"
 msgstr "ค้นหา"
 
-#: gucharmap/gucharmap-search-dialog.c:767
+#: gucharmap/gucharmap-search-dialog.c:768
 msgid "_Previous"
 msgstr "_ก่อนหน้า"
 
-#: gucharmap/gucharmap-search-dialog.c:774
+#: gucharmap/gucharmap-search-dialog.c:775
 msgid "_Next"
 msgstr "_ถัดไป"
 
-#: gucharmap/gucharmap-search-dialog.c:784
+#: gucharmap/gucharmap-search-dialog.c:785
 msgid "_Search:"
 msgstr "_ค้นหา:"
 
-#: gucharmap/gucharmap-search-dialog.c:794
+#: gucharmap/gucharmap-search-dialog.c:795
 msgid "Match _whole word"
 msgstr "ค้นหา_ทั้งคำ"
 
-#: gucharmap/gucharmap-search-dialog.c:799
+#: gucharmap/gucharmap-search-dialog.c:800
 msgid "Search in character _details"
 msgstr "ค้นหาในเนื้อหา_รายละเอียดของอักขระ"
+
+#: gucharmap/gucharmap-block-chapters-model.c:52
+msgid "All"
+msgstr "ทั้งหมด"
+
+#: gucharmap/gucharmap-block-chapters-model.c:130
+msgid "Unicode Block"
+msgstr "บล็อคของยูนิโค้ด"
+
+#: gucharmap/gucharmap-script-chapters-model.c:131
+msgid "Script"
+msgstr "ภาษาเขียน"
 
 #~ msgid "Unicode Character Map"
 #~ msgstr "ตารางตัวอักษรยูนิโค้ด"
