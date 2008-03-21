@@ -120,23 +120,24 @@ static void
 gucharmap_chartable_set_font_desc_internal (GucharmapChartable *chartable,
                                             PangoFontDescription *font_desc /* adopting */)
 {
+  GucharmapChartablePrivate *priv = chartable->priv;
   int font_size;
 
-  if (chartable->font_desc)
-    pango_font_description_free (chartable->font_desc);
+  if (priv->font_desc)
+    pango_font_description_free (priv->font_desc);
 
-  chartable->font_desc = font_desc;
+  priv->font_desc = font_desc;
  
-  if (chartable->pango_layout)
-     pango_layout_set_font_description (chartable->pango_layout, font_desc);
+  if (priv->pango_layout)
+     pango_layout_set_font_description (priv->pango_layout, font_desc);
 
   /* FIXMEchpe: check pango_font_description_get_size_is_absolute() ! */
-  font_size = pango_font_description_get_size (chartable->font_desc);
+  font_size = pango_font_description_get_size (priv->font_desc);
   /* FIXMEchpe bug 329481 */
-  chartable->bare_minimal_column_width = PANGO_PIXELS (3.0 * font_size);
-  chartable->bare_minimal_row_height = PANGO_PIXELS (2.5 * font_size);
+  priv->bare_minimal_column_width = PANGO_PIXELS (3.0 * font_size);
+  priv->bare_minimal_row_height = PANGO_PIXELS (2.5 * font_size);
 
-  chartable->drag_font_size = 5 * ((font_size > 0) ? font_size : 10 * PANGO_SCALE);
+  priv->drag_font_size = 5 * ((font_size > 0) ? font_size : 10 * PANGO_SCALE);
 
   gtk_widget_queue_resize (GTK_WIDGET (chartable));
 }
@@ -278,14 +279,15 @@ get_root_coords_at_active_char (GucharmapChartable *chartable,
                                 gint *x_root, 
                                 gint *y_root)
 {
+  GucharmapChartablePrivate *priv = chartable->priv;
   GtkWidget *widget = GTK_WIDGET (chartable);
   gint x, y;
   gint row, col;
 
   gdk_window_get_origin (widget->window, &x, &y);
 
-  row = (chartable->active_cell - chartable->page_first_cell) / chartable->cols;
-  col = _gucharmap_chartable_cell_column (chartable, chartable->active_cell);
+  row = (priv->active_cell - priv->page_first_cell) / priv->cols;
+  col = _gucharmap_chartable_cell_column (chartable, priv->active_cell);
 
   *x_root = x + _gucharmap_chartable_x_offset (chartable, col);
   *y_root = y + _gucharmap_chartable_y_offset (chartable, row);
@@ -294,12 +296,13 @@ get_root_coords_at_active_char (GucharmapChartable *chartable,
 static void
 get_active_cell_rect (GucharmapChartable *chartable, GdkRectangle *rect)
 {
+  GucharmapChartablePrivate *priv = chartable->priv;
   int row, col;
 
   get_root_coords_at_active_char (chartable, &rect->x, &rect->y);
 
-  row = (chartable->active_cell - chartable->page_first_cell) / chartable->cols;
-  col = _gucharmap_chartable_cell_column (chartable, chartable->active_cell);
+  row = (priv->active_cell - priv->page_first_cell) / priv->cols;
+  col = _gucharmap_chartable_cell_column (chartable, priv->active_cell);
 
   rect->width = _gucharmap_chartable_column_width (chartable, col);
   rect->height = _gucharmap_chartable_row_height (chartable, row);
@@ -311,18 +314,19 @@ get_appropriate_upper_left_xy (GucharmapChartable *chartable,
                                gint x_root, gint y_root,
                                gint *x,     gint *y)
 {
+  GucharmapChartablePrivate *priv = chartable->priv;
   gint row, col;
 
-  row = (chartable->active_cell - chartable->page_first_cell) / chartable->cols;
-  col = _gucharmap_chartable_cell_column (chartable, chartable->active_cell);
+  row = (priv->active_cell - priv->page_first_cell) / priv->cols;
+  col = _gucharmap_chartable_cell_column (chartable, priv->active_cell);
 
   *x = x_root;
   *y = y_root;
 
-  if (row >= chartable->rows / 2)
+  if (row >= priv->rows / 2)
     *y -= height;
 
-  if (col >= chartable->cols / 2)
+  if (col >= priv->cols / 2)
     *x -= width;
 }
 
@@ -332,11 +336,13 @@ get_cell_at_rowcol (GucharmapChartable *chartable,
                     gint            row,
                     gint            col)
 {
+  GucharmapChartablePrivate *priv = chartable->priv;
   GtkWidget *widget = GTK_WIDGET (chartable);
+
   if (gtk_widget_get_direction (widget) == GTK_TEXT_DIR_RTL)
-    return chartable->page_first_cell + row * chartable->cols + (chartable->cols - col - 1);
+    return priv->page_first_cell + row * priv->cols + (priv->cols - col - 1);
   else
-    return chartable->page_first_cell + row * chartable->cols + col;
+    return priv->page_first_cell + row * priv->cols + col;
 }
 
 /* Depends on directionality. Column 0 is the furthest left.  */
@@ -344,21 +350,24 @@ gint
 _gucharmap_chartable_cell_column (GucharmapChartable *chartable,
                               guint cell)
 {
+  GucharmapChartablePrivate *priv = chartable->priv;
   GtkWidget *widget = GTK_WIDGET (chartable);
+
   if (gtk_widget_get_direction (widget) == GTK_TEXT_DIR_RTL)
-    return chartable->cols - (cell - chartable->page_first_cell) % chartable->cols - 1;
+    return priv->cols - (cell - priv->page_first_cell) % priv->cols - 1;
   else
-    return (cell - chartable->page_first_cell) % chartable->cols;
+    return (cell - priv->page_first_cell) % priv->cols;
 }
 
 /* not all columns are necessarily the same width because of padding */
 gint
 _gucharmap_chartable_column_width (GucharmapChartable *chartable, gint col)
 {
-  int num_padded_columns = chartable->n_padded_columns;
-  int min_col_w = chartable->minimal_column_width;
+  GucharmapChartablePrivate *priv = chartable->priv;
+  int num_padded_columns = priv->n_padded_columns;
+  int min_col_w = priv->minimal_column_width;
 
-  if (chartable->cols - col <= num_padded_columns)
+  if (priv->cols - col <= num_padded_columns)
     return min_col_w + 1;
   else
     return min_col_w;
@@ -383,10 +392,11 @@ _gucharmap_chartable_x_offset (GucharmapChartable *chartable, gint col)
 gint
 _gucharmap_chartable_row_height (GucharmapChartable *chartable, gint row)
 {
-  int num_padded_rows = chartable->n_padded_rows;
-  int min_row_h = chartable->minimal_row_height;
+  GucharmapChartablePrivate *priv = chartable->priv;
+  int num_padded_rows = priv->n_padded_rows;
+  int min_row_h = priv->minimal_row_height;
 
-  if (chartable->rows - row <= num_padded_rows)
+  if (priv->rows - row <= num_padded_rows)
     return min_row_h + 1;
   else
     return min_row_h;
@@ -411,30 +421,31 @@ static void
 set_top_row (GucharmapChartable *chartable, 
              gint            row)
 {
+  GucharmapChartablePrivate *priv = chartable->priv;
   gint r, c;
 
-  g_return_if_fail (row >= 0 && row <= chartable->last_cell / chartable->cols);
+  g_return_if_fail (row >= 0 && row <= priv->last_cell / priv->cols);
 
-  chartable->old_page_first_cell = chartable->page_first_cell;
-  chartable->old_active_cell = chartable->active_cell;
+  priv->old_page_first_cell = priv->page_first_cell;
+  priv->old_active_cell = priv->active_cell;
 
-  chartable->page_first_cell = row * chartable->cols;
+  priv->page_first_cell = row * priv->cols;
 
   /* character is still on the visible page */
-  if (chartable->active_cell - chartable->page_first_cell >= 0
-      && chartable->active_cell - chartable->page_first_cell < chartable->page_size)
+  if (priv->active_cell - priv->page_first_cell >= 0
+      && priv->active_cell - priv->page_first_cell < priv->page_size)
     return;
 
-  c = chartable->old_active_cell % chartable->cols;
+  c = priv->old_active_cell % priv->cols;
 
-  if (chartable->page_first_cell < chartable->old_page_first_cell)
-    r = chartable->rows - 1;
+  if (priv->page_first_cell < priv->old_page_first_cell)
+    r = priv->rows - 1;
   else
     r = 0;
 
-  chartable->active_cell = chartable->page_first_cell + r * chartable->cols + c;
-  if (chartable->active_cell > chartable->last_cell)
-    chartable->active_cell = chartable->last_cell;
+  priv->active_cell = priv->page_first_cell + r * priv->cols + c;
+  if (priv->active_cell > priv->last_cell)
+    priv->active_cell = priv->last_cell;
 
   g_object_notify (G_OBJECT (chartable), "active-character");
 }
@@ -442,19 +453,19 @@ set_top_row (GucharmapChartable *chartable,
 static gint
 compute_zoom_font_size (GucharmapChartable *chartable)
 {
+  GucharmapChartablePrivate *priv = chartable->priv;
   GtkWidget *widget = GTK_WIDGET (chartable);
   gint screen_height;
   gdouble limit;
   gdouble scale;
   gint font_size;
 
-  screen_height = gdk_screen_get_height (
-          gtk_widget_get_screen (widget));
+  screen_height = gdk_screen_get_height (gtk_widget_get_screen (widget));
 
-  limit = (0.3 * screen_height) / chartable->bare_minimal_row_height;
+  limit = (0.3 * screen_height) / priv->bare_minimal_row_height;
   scale = CLAMP (limit, 1.0, 12.0);
 
-  font_size = pango_font_description_get_size (chartable->font_desc);
+  font_size = pango_font_description_get_size (priv->font_desc);
   /* FIXMEchpe absolute size ? */
 
   return scale * ((font_size > 0) ? font_size : 10 * PANGO_SCALE);
@@ -503,14 +514,15 @@ layout_scaled_glyph (GucharmapChartable *chartable,
                      gint font_size,
                      gchar **font_family)
 {
+  GucharmapChartablePrivate *priv = chartable->priv;
   PangoFontDescription *font_desc;
   PangoLayout *layout;
   gchar buf[11];
 
-  font_desc = pango_font_description_copy (chartable->font_desc);
+  font_desc = pango_font_description_copy (priv->font_desc);
   pango_font_description_set_size (font_desc, font_size);
 
-  layout = pango_layout_new (pango_layout_get_context (chartable->pango_layout));
+  layout = pango_layout_new (pango_layout_get_context (priv->pango_layout));
 
   pango_layout_set_font_description (layout, font_desc);
 
@@ -607,32 +619,34 @@ create_glyph_pixmap (GucharmapChartable *chartable,
 static void
 place_zoom_window (GucharmapChartable *chartable, gint x_root, gint y_root)
 {
+  GucharmapChartablePrivate *priv = chartable->priv;
   GdkPixmap *pixmap;
   gint width, height, x, y;
 
-  if (!chartable->zoom_window)
+  if (!priv->zoom_window)
     return;
 
-  gtk_image_get_pixmap (GTK_IMAGE (chartable->zoom_image), &pixmap, NULL);
+  gtk_image_get_pixmap (GTK_IMAGE (priv->zoom_image), &pixmap, NULL);
   if (!pixmap)
     return;
 
   gdk_drawable_get_size (GDK_DRAWABLE (pixmap), &width, &height);
   get_appropriate_upper_left_xy (chartable, width, height,
                                  x_root, y_root, &x, &y);
-  gtk_window_move (GTK_WINDOW (chartable->zoom_window), x, y);
+  gtk_window_move (GTK_WINDOW (priv->zoom_window), x, y);
 }
 
 static void
 place_zoom_window_on_active_cell (GucharmapChartable *chartable)
 {
+  GucharmapChartablePrivate *priv = chartable->priv;
   GdkPixmap *pixmap;
   GdkRectangle rect, keepout_rect;
 
-  if (!chartable->zoom_window)
+  if (!priv->zoom_window)
     return;
 
-  gtk_image_get_pixmap (GTK_IMAGE (chartable->zoom_image), &pixmap, NULL);
+  gtk_image_get_pixmap (GTK_IMAGE (priv->zoom_image), &pixmap, NULL);
   if (!pixmap)
     return;
 
@@ -644,53 +658,57 @@ place_zoom_window_on_active_cell (GucharmapChartable *chartable)
   position_rectangle_on_screen (GTK_WIDGET (chartable),
                                 &rect,
                                 &keepout_rect);
-  gtk_window_move (GTK_WINDOW (chartable->zoom_window), rect.x, rect.y);
+  gtk_window_move (GTK_WINDOW (priv->zoom_window), rect.x, rect.y);
 }
 
 static void
 update_zoom_window (GucharmapChartable *chartable)
 {
+  GucharmapChartablePrivate *priv = chartable->priv;
   GdkPixmap *pixmap;
 
   pixmap = create_glyph_pixmap (chartable,
                                 gucharmap_chartable_get_active_character (chartable),
                                 compute_zoom_font_size (chartable),
                                 TRUE);
-  gtk_image_set_from_pixmap (GTK_IMAGE (chartable->zoom_image), pixmap, NULL);
+  gtk_image_set_from_pixmap (GTK_IMAGE (priv->zoom_image), pixmap, NULL);
   g_object_unref (pixmap);
 }
 
 static void
 make_zoom_window (GucharmapChartable *chartable)
 {
+  GucharmapChartablePrivate *priv = chartable->priv;
   GtkWidget *widget = GTK_WIDGET (chartable);
 
   /* if there is already a zoom window, do nothing */
-  if (chartable->zoom_window || !chartable->zoom_mode_enabled)
+  if (priv->zoom_window || !priv->zoom_mode_enabled)
     return;
 
-  chartable->zoom_window = gtk_window_new (GTK_WINDOW_POPUP);
-  gtk_window_set_resizable (GTK_WINDOW (chartable->zoom_window), FALSE);
-  gtk_window_set_screen (GTK_WINDOW (chartable->zoom_window),
+  priv->zoom_window = gtk_window_new (GTK_WINDOW_POPUP);
+  gtk_window_set_resizable (GTK_WINDOW (priv->zoom_window), FALSE);
+  gtk_window_set_screen (GTK_WINDOW (priv->zoom_window),
                          gtk_widget_get_screen (widget));
 
-  chartable->zoom_image = gtk_image_new ();
-  gtk_container_add (GTK_CONTAINER (chartable->zoom_window),
-                     chartable->zoom_image);
-  gtk_widget_show (chartable->zoom_image);
+  priv->zoom_image = gtk_image_new ();
+  gtk_container_add (GTK_CONTAINER (priv->zoom_window),
+                     priv->zoom_image);
+  gtk_widget_show (priv->zoom_image);
 }
 
 static void
 destroy_zoom_window (GucharmapChartable *chartable)
 {
-  if (chartable->zoom_window)
+  GucharmapChartablePrivate *priv = chartable->priv;
+
+  if (priv->zoom_window)
     {
       GtkWidget *widget = GTK_WIDGET (chartable);
       GtkWidget *zoom_window;
 
-      zoom_window = chartable->zoom_window;
-      chartable->zoom_window = NULL;
-      chartable->zoom_image = NULL;
+      zoom_window = priv->zoom_window;
+      priv->zoom_window = NULL;
+      priv->zoom_image = NULL;
 
       gdk_window_set_cursor (widget->window, NULL);
       gtk_widget_destroy (zoom_window);
@@ -700,7 +718,9 @@ destroy_zoom_window (GucharmapChartable *chartable)
 static void
 gucharmap_chartable_show_zoom (GucharmapChartable *chartable)
 {
-  if (!chartable->zoom_mode_enabled)
+  GucharmapChartablePrivate *priv = chartable->priv;
+
+  if (!priv->zoom_mode_enabled)
     return;
 
   make_zoom_window (chartable);
@@ -708,7 +728,7 @@ gucharmap_chartable_show_zoom (GucharmapChartable *chartable)
 
   place_zoom_window_on_active_cell (chartable);
 
-  gtk_widget_show (chartable->zoom_window);
+  gtk_widget_show (priv->zoom_window);
 
   g_object_notify (G_OBJECT (chartable), "zoom-showing");
 }
@@ -725,43 +745,44 @@ static void
 gucharmap_chartable_set_active_cell (GucharmapChartable *chartable,
                                      guint cell)
 {
+  GucharmapChartablePrivate *priv = chartable->priv;
   int _cell = (int) cell;
 
-  chartable->old_active_cell = chartable->active_cell;
-  chartable->old_page_first_cell = chartable->page_first_cell;
+  priv->old_active_cell = priv->active_cell;
+  priv->old_page_first_cell = priv->page_first_cell;
 
-  chartable->active_cell = _cell;
+  priv->active_cell = _cell;
 
   /* update page, if necessary */
-  if (_cell < chartable->page_first_cell ||
-      _cell - chartable->page_first_cell >= chartable->page_size)
+  if (_cell < priv->page_first_cell ||
+      _cell - priv->page_first_cell >= priv->page_size)
     {
       /* move the page_first_cell as far as active_cell has moved */
-      int offset = chartable->active_cell - chartable->old_active_cell;
+      int offset = priv->active_cell - priv->old_active_cell;
 
-      if (chartable->old_page_first_cell + offset < 0)
-        chartable->page_first_cell = 0;
-      else if (chartable->old_page_first_cell +
+      if (priv->old_page_first_cell + offset < 0)
+        priv->page_first_cell = 0;
+      else if (priv->old_page_first_cell +
                offset >
-               chartable->last_cell -
-               (chartable->last_cell % chartable->cols) -
-               chartable->cols * (chartable->rows - 1))
-        chartable->page_first_cell = chartable->last_cell -
-                                     (chartable->last_cell % chartable->cols) -
-                                     chartable->cols * (chartable->rows - 1);
+               priv->last_cell -
+               (priv->last_cell % priv->cols) -
+               priv->cols * (priv->rows - 1))
+        priv->page_first_cell = priv->last_cell -
+                                     (priv->last_cell % priv->cols) -
+                                     priv->cols * (priv->rows - 1);
       else
-        chartable->page_first_cell = chartable->old_page_first_cell + offset;
+        priv->page_first_cell = priv->old_page_first_cell + offset;
     
       /* FIXMEchpe: this should be fixed in the conditions above, but just do it for now: */
-      if (chartable->page_first_cell < 0)
-        chartable->page_first_cell = 0;
+      if (priv->page_first_cell < 0)
+        priv->page_first_cell = 0;
 
-      /* round down so that it's a multiple of chartable->cols */
-      chartable->page_first_cell -= (chartable->page_first_cell % chartable->cols);
+      /* round down so that it's a multiple of priv->cols */
+      priv->page_first_cell -= (priv->page_first_cell % priv->cols);
     
       /* go back up if we should have rounded up */
-      if (chartable->active_cell - chartable->page_first_cell >= chartable->page_size)
-        chartable->page_first_cell += chartable->cols;
+      if (priv->active_cell - priv->page_first_cell >= priv->page_size)
+        priv->page_first_cell += priv->cols;
     }
 
   g_object_notify (G_OBJECT (chartable), "active-character");
@@ -773,7 +794,9 @@ static void
 set_active_char (GucharmapChartable *chartable,
                  gunichar        wc)
 {
-  guint cell = gucharmap_codepoint_list_get_index (chartable->codepoint_list, wc);
+  GucharmapChartablePrivate *priv = chartable->priv;
+
+  guint cell = gucharmap_codepoint_list_get_index (priv->codepoint_list, wc);
   if (cell == -1) {
     gtk_widget_error_bell (GTK_WIDGET (chartable));
     return;
@@ -785,6 +808,7 @@ set_active_char (GucharmapChartable *chartable,
 static void
 draw_borders (GucharmapChartable *chartable)
 {
+  GucharmapChartablePrivate *priv = chartable->priv;
   GtkWidget *widget = GTK_WIDGET (chartable);
   gint x, y, col, row;
 
@@ -792,25 +816,25 @@ draw_borders (GucharmapChartable *chartable)
    * around widgets, so we use it for the lines */
 
   /* vertical lines */
-  gdk_draw_line (chartable->pixmap,
+  gdk_draw_line (priv->pixmap,
                  widget->style->dark_gc[GTK_STATE_NORMAL],
                  0, 0, 0, widget->allocation.height - 1);
-  for (col = 0, x = 0;  col < chartable->cols;  col++)
+  for (col = 0, x = 0;  col < priv->cols;  col++)
     {
       x += _gucharmap_chartable_column_width (chartable, col);
-      gdk_draw_line (chartable->pixmap,
+      gdk_draw_line (priv->pixmap,
                      widget->style->dark_gc[GTK_STATE_NORMAL],
                      x, 0, x, widget->allocation.height - 1);
     }
 
   /* horizontal lines */
-  gdk_draw_line (chartable->pixmap,
+  gdk_draw_line (priv->pixmap,
                  widget->style->dark_gc[GTK_STATE_NORMAL],
                  0, 0, widget->allocation.width - 1, 0);
-  for (row = 0, y = 0;  row < chartable->rows;  row++)
+  for (row = 0, y = 0;  row < priv->rows;  row++)
     {
       y += _gucharmap_chartable_row_height (chartable, row);
-      gdk_draw_line (chartable->pixmap,
+      gdk_draw_line (priv->pixmap,
                      widget->style->dark_gc[GTK_STATE_NORMAL],
                      0, y, widget->allocation.width - 1, y);
     }
@@ -819,14 +843,16 @@ draw_borders (GucharmapChartable *chartable)
 static void
 set_scrollbar_adjustment (GucharmapChartable *chartable)
 {
+  GucharmapChartablePrivate *priv = chartable->priv;
+
   /* block our "value_changed" handler */
-  g_signal_handler_block (G_OBJECT (chartable->vadjustment),
-                          chartable->vadjustment_changed_handler_id);
+  g_signal_handler_block (G_OBJECT (priv->vadjustment),
+                          priv->vadjustment_changed_handler_id);
 
-  gtk_adjustment_set_value (chartable->vadjustment, 1.0 * chartable->page_first_cell / chartable->cols);
+  gtk_adjustment_set_value (priv->vadjustment, 1.0 * priv->page_first_cell / priv->cols);
 
-  g_signal_handler_unblock (G_OBJECT (chartable->vadjustment),
-                            chartable->vadjustment_changed_handler_id);
+  g_signal_handler_unblock (G_OBJECT (priv->vadjustment),
+                            priv->vadjustment_changed_handler_id);
 }
 
 /* for mouse clicks */
@@ -835,21 +861,22 @@ get_cell_at_xy (GucharmapChartable *chartable,
                 gint            x, 
                 gint            y)
 {
+  GucharmapChartablePrivate *priv = chartable->priv;
   gint r, c, x0, y0;
   guint cell;
 
-  for (c = 0, x0 = 0;  x0 <= x && c < chartable->cols;  c++)
+  for (c = 0, x0 = 0;  x0 <= x && c < priv->cols;  c++)
     x0 += _gucharmap_chartable_column_width (chartable, c);
 
-  for (r = 0, y0 = 0;  y0 <= y && r < chartable->rows;  r++)
+  for (r = 0, y0 = 0;  y0 <= y && r < priv->rows;  r++)
     y0 += _gucharmap_chartable_row_height (chartable, r);
 
   /* cell = rowcol_to_unichar (chartable, r-1, c-1); */
   cell = get_cell_at_rowcol (chartable, r-1, c-1);
 
   /* XXX: check this somewhere else? */
-  if (cell > chartable->last_cell)
-    return chartable->last_cell;
+  if (cell > priv->last_cell)
+    return priv->last_cell;
 
   return cell;
 }
@@ -859,6 +886,7 @@ draw_character (GucharmapChartable *chartable,
                 gint            row, 
                 gint            col)
 {
+  GucharmapChartablePrivate *priv = chartable->priv;
   GtkWidget *widget = GTK_WIDGET (chartable);
   gint padding_x, padding_y;
   gint char_width, char_height;
@@ -870,14 +898,14 @@ draw_character (GucharmapChartable *chartable,
   gint n;
 
   cell = get_cell_at_rowcol (chartable, row, col);
-  wc = gucharmap_codepoint_list_get_char (chartable->codepoint_list, cell);
+  wc = gucharmap_codepoint_list_get_char (priv->codepoint_list, cell);
 
   if (wc > UNICHAR_MAX || !gucharmap_unichar_validate (wc) || !gucharmap_unichar_isdefined (wc))
     return;
 
-  if (GTK_WIDGET_HAS_FOCUS (widget) && (gint)cell == chartable->active_cell)
+  if (GTK_WIDGET_HAS_FOCUS (widget) && (gint)cell == priv->active_cell)
     gc = widget->style->text_gc[GTK_STATE_SELECTED];
-  else if ((gint)cell == chartable->active_cell)
+  else if ((gint)cell == priv->active_cell)
     gc = widget->style->text_gc[GTK_STATE_ACTIVE];
   else
     gc = widget->style->text_gc[GTK_STATE_NORMAL];
@@ -886,23 +914,24 @@ draw_character (GucharmapChartable *chartable,
   square_height = _gucharmap_chartable_row_height (chartable, row) - 1;
 
   n = gucharmap_unichar_to_printable_utf8 (wc, buf); 
-  pango_layout_set_text (chartable->pango_layout, buf, n);
+  pango_layout_set_text (priv->pango_layout, buf, n);
 
-  pango_layout_get_pixel_size (chartable->pango_layout, &char_width, &char_height);
+  pango_layout_get_pixel_size (priv->pango_layout, &char_width, &char_height);
 
   /* (square_width - char_width)/2 is the smaller half */
   padding_x = (square_width - char_width) - (square_width - char_width)/2;
   padding_y = (square_height - char_height) - (square_height - char_height)/2;
 
-  gdk_draw_layout (chartable->pixmap, gc,
+  gdk_draw_layout (priv->pixmap, gc,
                    _gucharmap_chartable_x_offset (chartable, col) + padding_x,
                    _gucharmap_chartable_y_offset (chartable, row) + padding_y,
-                   chartable->pango_layout);
+                   priv->pango_layout);
 }
 
 static void
 draw_square_bg (GucharmapChartable *chartable, gint row, gint col)
 {
+  GucharmapChartablePrivate *priv = chartable->priv;
   GtkWidget *widget = GTK_WIDGET (chartable);
   gint square_width, square_height; 
   GdkGC *gc;
@@ -911,15 +940,15 @@ draw_square_bg (GucharmapChartable *chartable, gint row, gint col)
   gunichar wc;
 
   cell = get_cell_at_rowcol (chartable, row, col);
-  wc = gucharmap_codepoint_list_get_char (chartable->codepoint_list, cell);
+  wc = gucharmap_codepoint_list_get_char (priv->codepoint_list, cell);
 
   gc = gdk_gc_new (GDK_DRAWABLE (widget->window));
 
-  if (GTK_WIDGET_HAS_FOCUS (widget) && (gint)cell == chartable->active_cell)
+  if (GTK_WIDGET_HAS_FOCUS (widget) && (gint)cell == priv->active_cell)
     untinted = widget->style->base[GTK_STATE_SELECTED];
-  else if ((gint)cell == chartable->active_cell)
+  else if ((gint)cell == priv->active_cell)
     untinted = widget->style->base[GTK_STATE_ACTIVE];
-  else if ((gint)cell > chartable->last_cell)
+  else if ((gint)cell > priv->last_cell)
     untinted = widget->style->dark[GTK_STATE_NORMAL];
   else if (! gucharmap_unichar_validate (wc))
     untinted = widget->style->fg[GTK_STATE_INSENSITIVE];
@@ -933,7 +962,7 @@ draw_square_bg (GucharmapChartable *chartable, gint row, gint col)
   square_width = _gucharmap_chartable_column_width (chartable, col) - 1;
   square_height = _gucharmap_chartable_row_height (chartable, row) - 1;
 
-  gdk_draw_rectangle (chartable->pixmap, gc, TRUE, 
+  gdk_draw_rectangle (priv->pixmap, gc, TRUE,
                       _gucharmap_chartable_x_offset (chartable, col), 
 		      _gucharmap_chartable_y_offset (chartable, row),
                       square_width, square_height);
@@ -945,6 +974,7 @@ static void
 expose_square (GucharmapChartable *chartable, gint row, gint col)
 {
   GtkWidget *widget = GTK_WIDGET (chartable);
+
   gtk_widget_queue_draw_area (widget,
                               _gucharmap_chartable_x_offset (chartable, col),
                               _gucharmap_chartable_y_offset (chartable, row),
@@ -963,10 +993,12 @@ static void
 draw_and_expose_cell (GucharmapChartable *chartable,
                       guint cell)
 {
-  gint row = (cell - chartable->page_first_cell) / chartable->cols;
+  GucharmapChartablePrivate *priv = chartable->priv;
+
+  gint row = (cell - priv->page_first_cell) / priv->cols;
   gint col = _gucharmap_chartable_cell_column (chartable, cell);
 
-  if (row >= 0 && row < chartable->rows && col >= 0 && col < chartable->cols)
+  if (row >= 0 && row < priv->rows && col >= 0 && col < priv->cols)
     {
       draw_square (chartable, row, col);
       expose_square (chartable, row, col);
@@ -977,6 +1009,7 @@ draw_and_expose_cell (GucharmapChartable *chartable,
 static void
 draw_chartable_from_scratch (GucharmapChartable *chartable)
 {
+  GucharmapChartablePrivate *priv = chartable->priv;
   GtkWidget *widget = GTK_WIDGET (chartable);
   gint row, col;
 
@@ -985,8 +1018,8 @@ draw_chartable_from_scratch (GucharmapChartable *chartable)
   if (!GTK_WIDGET_REALIZED (chartable))
     return;
 
-  if (chartable->pixmap == NULL)
-    chartable->pixmap = gdk_pixmap_new (
+  if (priv->pixmap == NULL)
+    priv->pixmap = gdk_pixmap_new (
 	    widget->window, 
 	    widget->allocation.width,
 	    widget->allocation.height, -1);
@@ -994,8 +1027,8 @@ draw_chartable_from_scratch (GucharmapChartable *chartable)
   draw_borders (chartable);
 
   /* draw the characters */
-  for (row = 0;  row < chartable->rows;  row++)
-    for (col = 0;  col < chartable->cols;  col++)
+  for (row = 0;  row < priv->rows;  row++)
+    for (col = 0;  col < priv->cols;  col++)
       {
         draw_square_bg (chartable, row, col);
         draw_character (chartable, row, col);
@@ -1005,11 +1038,12 @@ draw_chartable_from_scratch (GucharmapChartable *chartable)
 static void
 copy_rows (GucharmapChartable *chartable, gint row_offset)
 {
+  GucharmapChartablePrivate *priv = chartable->priv;
   GtkWidget *widget = GTK_WIDGET (chartable);
-  gint num_padded_rows = chartable->n_padded_rows;
+  gint num_padded_rows = priv->n_padded_rows;
   gint from_row, to_row;
 
-  if (ABS (row_offset) < chartable->rows - num_padded_rows)
+  if (ABS (row_offset) < priv->rows - num_padded_rows)
     {
       gint num_rows, height;
 
@@ -1017,22 +1051,22 @@ copy_rows (GucharmapChartable *chartable, gint row_offset)
         {
           from_row = row_offset;
           to_row = 0;
-          num_rows = chartable->rows - num_padded_rows - from_row;
+          num_rows = priv->rows - num_padded_rows - from_row;
         }
       else
         {
           from_row = 0;
           to_row = -row_offset;
-          num_rows = chartable->rows - num_padded_rows - to_row;
+          num_rows = priv->rows - num_padded_rows - to_row;
         }
 
       height = _gucharmap_chartable_y_offset (chartable, num_rows) 
                - _gucharmap_chartable_y_offset (chartable, 0) - 1;
 
       gdk_draw_drawable (
-              chartable->pixmap,
+              priv->pixmap,
               widget->style->base_gc[GTK_STATE_NORMAL],
-              chartable->pixmap, 
+              priv->pixmap,
               0, _gucharmap_chartable_y_offset (chartable, from_row), 
               0, _gucharmap_chartable_y_offset (chartable, to_row),
               widget->allocation.width, height);
@@ -1043,20 +1077,20 @@ copy_rows (GucharmapChartable *chartable, gint row_offset)
       /* don't need num_rows or height, cuz we can go off the end */
       if (row_offset > 0)
         {
-          from_row = chartable->rows - num_padded_rows + row_offset;
-          to_row = chartable->rows - num_padded_rows;
+          from_row = priv->rows - num_padded_rows + row_offset;
+          to_row = priv->rows - num_padded_rows;
         }
       else
         {
-          from_row = chartable->rows - num_padded_rows;
-          to_row = chartable->rows - num_padded_rows - row_offset;
+          from_row = priv->rows - num_padded_rows;
+          to_row = priv->rows - num_padded_rows - row_offset;
         }
 
       /* it's ok to go off the end (so use allocation.height) */
       gdk_draw_drawable (
-              chartable->pixmap,
+              priv->pixmap,
               widget->style->base_gc[GTK_STATE_NORMAL],
-              chartable->pixmap, 
+              priv->pixmap,
               0, _gucharmap_chartable_y_offset (chartable, from_row), 
               0, _gucharmap_chartable_y_offset (chartable, to_row),
               widget->allocation.width, 
@@ -1067,12 +1101,13 @@ copy_rows (GucharmapChartable *chartable, gint row_offset)
 static void
 redraw_rows (GucharmapChartable *chartable, gint row_offset)
 {
+  GucharmapChartablePrivate *priv = chartable->priv;
   gint row, col, start_row, end_row;
 
   if (row_offset > 0) 
     {
-      start_row = chartable->rows - row_offset;
-      end_row = chartable->rows - 1;
+      start_row = priv->rows - row_offset;
+      end_row = priv->rows - 1;
     }
   else
     {
@@ -1080,13 +1115,13 @@ redraw_rows (GucharmapChartable *chartable, gint row_offset)
       end_row = -row_offset - 1;
     }
 
-  for (row = 0;  row <= chartable->rows;  row++)
+  for (row = 0;  row <= priv->rows;  row++)
     {
       gboolean draw_row = FALSE;
 
       draw_row = draw_row || (row >= start_row && row <= end_row);
 
-      if (row + row_offset >= 0 && row + row_offset <= chartable->rows)
+      if (row + row_offset >= 0 && row + row_offset <= priv->rows)
         {
           draw_row = draw_row || (_gucharmap_chartable_row_height (chartable, row) 
                                   != _gucharmap_chartable_row_height (chartable,  
@@ -1095,7 +1130,7 @@ redraw_rows (GucharmapChartable *chartable, gint row_offset)
 
       if (draw_row)
         {
-          for (col = 0;  col < chartable->cols;  col++)
+          for (col = 0;  col < priv->cols;  col++)
             draw_square (chartable, row, col);
         }
     }
@@ -1107,11 +1142,12 @@ void
 _gucharmap_chartable_redraw (GucharmapChartable *chartable, 
                          gboolean        move_zoom)
 {
+  GucharmapChartablePrivate *priv = chartable->priv;
   GtkWidget *widget = GTK_WIDGET (chartable);
   gint row_offset;
   gboolean actives_done = FALSE;
 
-  row_offset = ((gint) chartable->page_first_cell - (gint) chartable->old_page_first_cell) / chartable->cols;
+  row_offset = ((gint) priv->page_first_cell - (gint) priv->old_page_first_cell) / priv->cols;
 
 #ifdef G_OS_WIN32
 
@@ -1126,14 +1162,14 @@ _gucharmap_chartable_redraw (GucharmapChartable *chartable,
 
 #else /* #ifdef G_OS_WIN32 */
 
-  if (chartable->codepoint_list_changed 
-          || row_offset >= chartable->rows 
-          || row_offset <= -chartable->rows)
+  if (priv->codepoint_list_changed
+          || row_offset >= priv->rows
+          || row_offset <= -priv->rows)
     {
       draw_chartable_from_scratch (chartable);
       gtk_widget_queue_draw (widget);
       actives_done = TRUE;
-      chartable->codepoint_list_changed = FALSE;
+      priv->codepoint_list_changed = FALSE;
     }
   else if (row_offset != 0)
     {
@@ -1145,43 +1181,44 @@ _gucharmap_chartable_redraw (GucharmapChartable *chartable,
 
 #endif
 
-  if (chartable->active_cell != chartable->old_active_cell)
+  if (priv->active_cell != priv->old_active_cell)
     {
       set_scrollbar_adjustment (chartable); /* XXX */
 
       if (!actives_done)
         {
-          draw_and_expose_cell (chartable, chartable->old_active_cell);
-          draw_and_expose_cell (chartable, chartable->active_cell);
+          draw_and_expose_cell (chartable, priv->old_active_cell);
+          draw_and_expose_cell (chartable, priv->active_cell);
         }
 
-      if (chartable->zoom_window)
+      if (priv->zoom_window)
         update_zoom_window (chartable);
 
-      if (move_zoom && chartable->zoom_window)
+      if (move_zoom && priv->zoom_window)
         {
           place_zoom_window_on_active_cell (chartable);
         }
     }
 
-  chartable->old_page_first_cell = chartable->page_first_cell;
-  chartable->old_active_cell = chartable->active_cell;
+  priv->old_page_first_cell = priv->page_first_cell;
+  priv->old_active_cell = priv->active_cell;
 }
 
 static void
 update_scrollbar_adjustment (GucharmapChartable *chartable)
 {
-  GtkAdjustment *vadjustment = chartable->vadjustment;
+  GucharmapChartablePrivate *priv = chartable->priv;
+  GtkAdjustment *vadjustment = priv->vadjustment;
 
   if (!vadjustment)
     return;
 
-  vadjustment->value = 1.0 * chartable->page_first_cell / chartable->cols;
+  vadjustment->value = 1.0 * priv->page_first_cell / priv->cols;
   vadjustment->lower = 0.0;
-  vadjustment->upper = 1.0 * ( chartable->last_cell / chartable->cols + 1 );
+  vadjustment->upper = 1.0 * ( priv->last_cell / priv->cols + 1 );
   vadjustment->step_increment = 3.0;
-  vadjustment->page_increment = 1.0 * chartable->rows;
-  vadjustment->page_size = chartable->rows; /* FIXMEchpe + 1 maybe? so scroll-wheel up/down scroll exactly half a page? */
+  vadjustment->page_increment = 1.0 * priv->rows;
+  vadjustment->page_size = priv->rows; /* FIXMEchpe + 1 maybe? so scroll-wheel up/down scroll exactly half a page? */
 
   gtk_adjustment_changed (vadjustment);
 }
@@ -1204,14 +1241,15 @@ gucharmap_chartable_button_press (GtkWidget *widget,
                                   GdkEventButton *event)
 {
   GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (widget);
+  GucharmapChartablePrivate *priv = chartable->priv;
 
   /* in case we lost keyboard focus and are clicking to get it back */
   gtk_widget_grab_focus (widget);
 
   if (event->button == 1)
     {
-      chartable->click_x = event->x;
-      chartable->click_y = event->y;
+      priv->click_x = event->x;
+      priv->click_y = event->y;
     }
 
   /* double-click */
@@ -1230,16 +1268,16 @@ gucharmap_chartable_button_press (GtkWidget *widget,
       gucharmap_chartable_set_active_cell (chartable, get_cell_at_xy (chartable, event->x, event->y));
       _gucharmap_chartable_redraw (chartable, FALSE); /* FIXMEchpe */
 
-      if (chartable->zoom_mode_enabled)
+      if (priv->zoom_mode_enabled)
       {
         make_zoom_window (chartable);
 
         /* FIXME: shouldn't this be "!=" ? */
-        if (chartable->active_cell == chartable->old_active_cell)
+        if (priv->active_cell == priv->old_active_cell)
           update_zoom_window (chartable); 
 
         place_zoom_window (chartable, event->x_root, event->y_root);
-        gtk_widget_show (chartable->zoom_window);
+        gtk_widget_show (priv->zoom_window);
         g_object_notify (G_OBJECT (chartable), "zoom-showing");
       }
     }
@@ -1271,11 +1309,12 @@ gucharmap_chartable_drag_begin (GtkWidget *widget,
                                 GdkDragContext *context)
 {
   GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (widget);
+  GucharmapChartablePrivate *priv = chartable->priv;
   GdkPixmap *drag_icon;
 
   drag_icon = create_glyph_pixmap (chartable,
                                    gucharmap_chartable_get_active_character (chartable),
-                                   chartable->drag_font_size,
+                                   priv->drag_font_size,
                                    FALSE);
   gtk_drag_set_icon_pixmap (context, gtk_widget_get_colormap (widget), 
                             drag_icon, NULL, -8, -8);
@@ -1293,10 +1332,11 @@ gucharmap_chartable_drag_data_get (GtkWidget *widget,
 
 {
   GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (widget);
+  GucharmapChartablePrivate *priv = chartable->priv;
   gchar buf[7];
   gint n;
 
-  n = g_unichar_to_utf8 (gucharmap_codepoint_list_get_char (chartable->codepoint_list, chartable->active_cell), buf);
+  n = g_unichar_to_utf8 (gucharmap_codepoint_list_get_char (priv->codepoint_list, priv->active_cell), buf);
   gtk_selection_data_set_text (selection_data, buf, n);
 
   /* no need to chain up */
@@ -1311,6 +1351,7 @@ gucharmap_chartable_drag_data_received (GtkWidget *widget,
                                         guint time)
 {
   GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (widget);
+  GucharmapChartablePrivate *priv = chartable->priv;
   gchar *text;
   gunichar wc;
 
@@ -1326,7 +1367,7 @@ gucharmap_chartable_drag_data_received (GtkWidget *widget,
 
   if (wc == (gunichar)(-2) || wc == (gunichar)(-1) || wc > UNICHAR_MAX)
     gucharmap_chartable_emit_status_message (chartable, _("Unknown character, unable to identify."));
-  else if (gucharmap_codepoint_list_get_index (chartable->codepoint_list, wc) == (guint)(-1))
+  else if (gucharmap_codepoint_list_get_index (priv->codepoint_list, wc) == (guint)(-1))
     gucharmap_chartable_emit_status_message (chartable, _("Not found."));
   else
     {
@@ -1345,15 +1386,16 @@ gucharmap_chartable_expose_event (GtkWidget *widget,
                                   GdkEventExpose *event)
 {
   GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (widget);
+  GucharmapChartablePrivate *priv = chartable->priv;
   GdkRectangle *rects;
   int i, n_rects;
   GdkGC *gc;
 
   /* Don't draw anything if we haven't set a codepoint list yet */
-  if (chartable->codepoint_list == NULL)
+  if (priv->codepoint_list == NULL)
     return FALSE;
 
-  if (chartable->pixmap == NULL)
+  if (priv->pixmap == NULL)
     {
       draw_chartable_from_scratch (chartable);
     }
@@ -1380,7 +1422,7 @@ gucharmap_chartable_expose_event (GtkWidget *widget,
   for (i = 0; i < n_rects; ++i) {
     gdk_draw_drawable (widget->window,
                        gc,
-                       chartable->pixmap,
+                       priv->pixmap,
                        rects[i].x, rects[i].y,
                        rects[i].x, rects[i].y,
                        rects[i].width, rects[i].height);
@@ -1397,9 +1439,10 @@ gucharmap_chartable_focus_in_event (GtkWidget *widget,
                                     GdkEventFocus *event)
 {
   GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (widget);
+  GucharmapChartablePrivate *priv = chartable->priv;
 
-  if (chartable->pixmap != NULL)
-    draw_and_expose_cell (chartable, chartable->active_cell);
+  if (priv->pixmap != NULL)
+    draw_and_expose_cell (chartable, priv->active_cell);
 
   return GTK_WIDGET_CLASS (gucharmap_chartable_parent_class)->focus_in_event (widget, event);
 }
@@ -1409,11 +1452,12 @@ gucharmap_chartable_focus_out_event (GtkWidget *widget,
                                      GdkEventFocus *event)
 {
   GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (widget);
+  GucharmapChartablePrivate *priv = chartable->priv;
 
   gucharmap_chartable_hide_zoom (chartable);
 
-  if (chartable->pixmap != NULL)
-    draw_and_expose_cell (chartable, chartable->active_cell);
+  if (priv->pixmap != NULL)
+    draw_and_expose_cell (chartable, priv->active_cell);
 
   /* FIXME: the parent's handler already does a draw... */
 
@@ -1448,7 +1492,7 @@ gucharmap_chartable_key_release_event (GtkWidget *widget,
                                        GdkEventKey *event)
 {
   GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (widget);
-
+  
   switch (event->keyval)
     {
       /* XXX: If the group(shift_toggle) Xkb option is set, then releasing
@@ -1470,35 +1514,36 @@ gucharmap_chartable_motion_notify (GtkWidget *widget,
                                    GdkEventMotion *event)
 {
   GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (widget);
+  GucharmapChartablePrivate *priv = chartable->priv;
   gboolean (* motion_notify_event) (GtkWidget *, GdkEventMotion *) =
     GTK_WIDGET_CLASS (gucharmap_chartable_parent_class)->motion_notify_event;
 
   if ((event->state & GDK_BUTTON1_MASK) &&
       gtk_drag_check_threshold (widget,
-                                chartable->click_x,
-                                chartable->click_y,
+                                priv->click_x,
+                                priv->click_y,
                                 event->x,
                                 event->y) &&
       gucharmap_unichar_validate (gucharmap_chartable_get_active_character (chartable)))
     {
-      gtk_drag_begin (widget, chartable->target_list,
+      gtk_drag_begin (widget, priv->target_list,
                       GDK_ACTION_COPY, 1, (GdkEvent *) event);
     }
 
   if ((event->state & GDK_BUTTON3_MASK) != 0 &&
-      chartable->zoom_window)
+      priv->zoom_window)
     {
       guint cell = get_cell_at_xy (chartable, MAX (0, event->x), MAX (0, event->y));
 
-      if ((gint)cell != chartable->active_cell)
+      if ((gint)cell != priv->active_cell)
         {
-          gtk_widget_hide (chartable->zoom_window);
+          gtk_widget_hide (priv->zoom_window);
           gucharmap_chartable_set_active_cell (chartable, cell);
           _gucharmap_chartable_redraw (chartable, FALSE);
         }
 
       place_zoom_window (chartable, event->x_root, event->y_root);
-      gtk_widget_show (chartable->zoom_window);
+      gtk_widget_show (priv->zoom_window);
     }
 
   if (motion_notify_event)
@@ -1510,15 +1555,16 @@ static void
 gucharmap_chartable_realize (GtkWidget *widget)
 {
   GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (widget);
+  GucharmapChartablePrivate *priv = chartable->priv;
 
   GTK_WIDGET_CLASS (gucharmap_chartable_parent_class)->realize (widget);
 
   gdk_window_set_back_pixmap (widget->window, NULL, FALSE);
     
-  if (chartable->pixmap != NULL)
+  if (priv->pixmap != NULL)
     {
-      g_object_unref (chartable->pixmap);
-      chartable->pixmap = NULL;
+      g_object_unref (priv->pixmap);
+      priv->pixmap = NULL;
     }
 }
 
@@ -1527,46 +1573,47 @@ gucharmap_chartable_size_allocate (GtkWidget *widget,
                                    GtkAllocation *allocation)
 {
   GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (widget);
+  GucharmapChartablePrivate *priv = chartable->priv;
   int old_rows, old_cols;
   int total_extra_pixels;
 
   GTK_WIDGET_CLASS (gucharmap_chartable_parent_class)->size_allocate (widget, allocation);
 
-  old_rows = chartable->rows;
-  old_cols = chartable->cols;
+  old_rows = priv->rows;
+  old_cols = priv->cols;
 
-  if (chartable->snap_pow2_enabled)
-    chartable->cols = (1 << g_bit_nth_msf ((allocation->width - 1) / chartable->bare_minimal_column_width, -1));
+  if (priv->snap_pow2_enabled)
+    priv->cols = (1 << g_bit_nth_msf ((allocation->width - 1) / priv->bare_minimal_column_width, -1));
   else
-    chartable->cols = (allocation->width - 1) / chartable->bare_minimal_column_width;
+    priv->cols = (allocation->width - 1) / priv->bare_minimal_column_width;
 
-  chartable->rows = (allocation->height - 1) / chartable->bare_minimal_row_height;
+  priv->rows = (allocation->height - 1) / priv->bare_minimal_row_height;
 
   /* avoid a horrible floating point exception crash */
-  if (chartable->rows < 1)
-    chartable->rows = 1;
-  if (chartable->cols < 1)
-    chartable->cols = 1;
+  if (priv->rows < 1)
+    priv->rows = 1;
+  if (priv->cols < 1)
+    priv->cols = 1;
 
-  chartable->page_size = chartable->rows * chartable->cols;
+  priv->page_size = priv->rows * priv->cols;
 
-  total_extra_pixels = widget->allocation.width - (chartable->cols * chartable->bare_minimal_column_width + 1);
-  chartable->minimal_column_width = chartable->bare_minimal_column_width + total_extra_pixels / chartable->cols;
-  chartable->n_padded_columns = widget->allocation.width - (chartable->minimal_column_width * chartable->cols + 1);
+  total_extra_pixels = widget->allocation.width - (priv->cols * priv->bare_minimal_column_width + 1);
+  priv->minimal_column_width = priv->bare_minimal_column_width + total_extra_pixels / priv->cols;
+  priv->n_padded_columns = widget->allocation.width - (priv->minimal_column_width * priv->cols + 1);
 
-  total_extra_pixels = widget->allocation.height - (chartable->rows * chartable->bare_minimal_row_height + 1);
-  chartable->minimal_row_height = chartable->bare_minimal_row_height + total_extra_pixels / chartable->rows;
-  chartable->n_padded_rows = widget->allocation.height - (chartable->minimal_row_height * chartable->rows + 1);
+  total_extra_pixels = widget->allocation.height - (priv->rows * priv->bare_minimal_row_height + 1);
+  priv->minimal_row_height = priv->bare_minimal_row_height + total_extra_pixels / priv->rows;
+  priv->n_padded_rows = widget->allocation.height - (priv->minimal_row_height * priv->rows + 1);
 
   /* force pixmap to be redrawn on next expose event */
-  if (chartable->pixmap != NULL)
-    g_object_unref (chartable->pixmap);
-  chartable->pixmap = NULL;
+  if (priv->pixmap != NULL)
+    g_object_unref (priv->pixmap);
+  priv->pixmap = NULL;
 
-  if (chartable->rows == old_rows && chartable->cols == old_cols)
+  if (priv->rows == old_rows && priv->cols == old_cols)
     return;
 
-  chartable->page_first_cell = chartable->active_cell - (chartable->active_cell % chartable->cols);
+  priv->page_first_cell = priv->active_cell - (priv->active_cell % priv->cols);
 
   update_scrollbar_adjustment (chartable);
 }
@@ -1576,9 +1623,10 @@ gucharmap_chartable_size_request (GtkWidget *widget,
                                   GtkRequisition *requisition)
 {
   GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (widget);
+  GucharmapChartablePrivate *priv = chartable->priv;
   
-  requisition->width = chartable->bare_minimal_column_width;
-  requisition->height = chartable->bare_minimal_row_height;
+  requisition->width = priv->bare_minimal_column_width;
+  requisition->height = priv->bare_minimal_row_height;
 }
 
 static void
@@ -1586,24 +1634,25 @@ gucharmap_chartable_style_set (GtkWidget *widget,
                                GtkStyle *previous_style)
 {
   GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (widget);
+  GucharmapChartablePrivate *priv = chartable->priv;
 
   GTK_WIDGET_CLASS (gucharmap_chartable_parent_class)->style_set (widget, previous_style);
 
-  if (chartable->pixmap != NULL)
-    g_object_unref (chartable->pixmap);
-  chartable->pixmap = NULL;
+  if (priv->pixmap != NULL)
+    g_object_unref (priv->pixmap);
+  priv->pixmap = NULL;
 
-  if (chartable->pango_layout)
-    g_object_unref (chartable->pango_layout);
-  chartable->pango_layout = NULL;
+  if (priv->pango_layout)
+    g_object_unref (priv->pango_layout);
+  priv->pango_layout = NULL;
 
-  if (chartable->font_desc == NULL)
+  if (priv->font_desc == NULL)
     gucharmap_chartable_set_font_desc (chartable,
                                        pango_font_description_copy (widget->style->font_desc));
 
-  chartable->pango_layout = gtk_widget_create_pango_layout (widget, NULL);
-  pango_layout_set_font_description (chartable->pango_layout,
-                                     chartable->font_desc);
+  priv->pango_layout = gtk_widget_create_pango_layout (widget, NULL);
+  pango_layout_set_font_description (priv->pango_layout,
+                                     priv->font_desc);
 
   /* FIXME: necessary? */
   /* gtk_widget_queue_draw (widget); */
@@ -1654,24 +1703,26 @@ gucharmap_chartable_set_adjustments (GucharmapChartable *chartable,
                                      GtkAdjustment *hadjustment,
                                      GtkAdjustment *vadjustment)
 {
+  GucharmapChartablePrivate *priv = chartable->priv;
+
   if (vadjustment)
     g_return_if_fail (GTK_IS_ADJUSTMENT (vadjustment));
   else
     vadjustment = GTK_ADJUSTMENT (gtk_adjustment_new (0.0, 0.0, 0.0, 0.0, 0.0, 0.0));
 
-  if (chartable->vadjustment)
+  if (priv->vadjustment)
     {
-      g_signal_handler_disconnect (chartable->vadjustment,
-                                   chartable->vadjustment_changed_handler_id);
-      chartable->vadjustment_changed_handler_id = 0;
-      g_object_unref (chartable->vadjustment);
-      chartable->vadjustment = NULL;
+      g_signal_handler_disconnect (priv->vadjustment,
+                                   priv->vadjustment_changed_handler_id);
+      priv->vadjustment_changed_handler_id = 0;
+      g_object_unref (priv->vadjustment);
+      priv->vadjustment = NULL;
     }
 
   if (vadjustment)
     {
-      chartable->vadjustment = g_object_ref_sink (vadjustment);
-      chartable->vadjustment_changed_handler_id =
+      priv->vadjustment = g_object_ref_sink (vadjustment);
+      priv->vadjustment_changed_handler_id =
           g_signal_connect (vadjustment, "value-changed",
                             G_CALLBACK (vadjustment_value_changed_cb),
                             chartable);
@@ -1715,16 +1766,17 @@ static void
 gucharmap_chartable_move_cursor_left_right (GucharmapChartable *chartable,
                                             int count)
 {
+  GucharmapChartablePrivate *priv = chartable->priv;
   GtkWidget *widget = GTK_WIDGET (chartable);
   gboolean is_rtl;
   int offset, new_cell;
 
   is_rtl = (gtk_widget_get_direction (widget) == GTK_TEXT_DIR_RTL);
   offset = is_rtl ? -count : count;
-  new_cell = chartable->active_cell + offset;
+  new_cell = priv->active_cell + offset;
 
   if (new_cell >= 0 &&
-      new_cell <= chartable->last_cell)
+      new_cell <= priv->last_cell)
     gucharmap_chartable_set_active_cell (chartable, new_cell);
 }
 
@@ -1732,11 +1784,12 @@ static void
 gucharmap_chartable_move_cursor_up_down (GucharmapChartable *chartable,
                                          int count)
 {
+  GucharmapChartablePrivate *priv = chartable->priv;
   int new_cell;
 
-  new_cell = chartable->active_cell + chartable->cols * count;
+  new_cell = priv->active_cell + priv->cols * count;
   if (new_cell >= 0 &&
-      new_cell <= chartable->last_cell)
+      new_cell <= priv->last_cell)
     gucharmap_chartable_set_active_cell (chartable, new_cell);
 }
 
@@ -1744,11 +1797,12 @@ static void
 gucharmap_chartable_move_cursor_page_up_down (GucharmapChartable *chartable,
                                               int count)
 {
+  GucharmapChartablePrivate *priv = chartable->priv;
   int page_size, new_cell;
 
-  page_size = chartable->cols * chartable->rows;
-  new_cell = chartable->active_cell + page_size * count;
-  new_cell = CLAMP (new_cell, 0, chartable->last_cell);
+  page_size = priv->cols * priv->rows;
+  new_cell = priv->active_cell + page_size * count;
+  new_cell = CLAMP (new_cell, 0, priv->last_cell);
   gucharmap_chartable_set_active_cell (chartable, new_cell);
 }
 
@@ -1756,10 +1810,11 @@ static void
 gucharmap_chartable_move_cursor_start_end (GucharmapChartable *chartable,
                                            int count)
 {
+  GucharmapChartablePrivate *priv = chartable->priv;
   int new_cell;
 
   if (count > 0)
-    new_cell = chartable->last_cell;
+    new_cell = priv->last_cell;
   else
     new_cell = 0;
 
@@ -1870,15 +1925,18 @@ static void
 gucharmap_chartable_init (GucharmapChartable *chartable)
 {
   GtkWidget *widget = GTK_WIDGET (chartable);
+  GucharmapChartablePrivate *priv;
 
-  chartable->page_first_cell = 0;
-  chartable->active_cell = 0;
-  chartable->rows = 1;
-  chartable->cols = 1;
-  chartable->zoom_mode_enabled = TRUE;
-  chartable->zoom_window = NULL;
-  chartable->zoom_image = NULL;
-  chartable->snap_pow2_enabled = FALSE;
+  priv = chartable->priv = G_TYPE_INSTANCE_GET_PRIVATE (chartable, GUCHARMAP_TYPE_CHARTABLE, GucharmapChartablePrivate);
+  
+  priv->page_first_cell = 0;
+  priv->active_cell = 0;
+  priv->rows = 1;
+  priv->cols = 1;
+  priv->zoom_mode_enabled = TRUE;
+  priv->zoom_window = NULL;
+  priv->zoom_image = NULL;
+  priv->snap_pow2_enabled = FALSE;
 
 /* This didn't fix the slow expose events either: */
 /*  gtk_widget_set_double_buffered (widget, FALSE); */
@@ -1888,8 +1946,8 @@ gucharmap_chartable_init (GucharmapChartable *chartable)
           GDK_BUTTON_RELEASE_MASK | GDK_BUTTON3_MOTION_MASK |
           GDK_BUTTON1_MOTION_MASK | GDK_FOCUS_CHANGE_MASK | GDK_SCROLL_MASK);
 
-  chartable->target_list = gtk_target_list_new (NULL, 0);
-  gtk_target_list_add_text_targets (chartable->target_list, 0);
+  priv->target_list = gtk_target_list_new (NULL, 0);
+  gtk_target_list_add_text_targets (priv->target_list, 0);
 
   gtk_drag_dest_set (widget, GTK_DEST_DEFAULT_ALL,
                      NULL, 0,
@@ -1908,17 +1966,18 @@ static void
 gucharmap_chartable_finalize (GObject *object)
 {
   GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (object);
+  GucharmapChartablePrivate *priv = chartable->priv;
 
-  if (chartable->font_desc)
-    pango_font_description_free (chartable->font_desc);
+  if (priv->font_desc)
+    pango_font_description_free (priv->font_desc);
 
-  if (chartable->pango_layout)
-    g_object_unref (chartable->pango_layout);
+  if (priv->pango_layout)
+    g_object_unref (priv->pango_layout);
 
-  gtk_target_list_unref (chartable->target_list);
+  gtk_target_list_unref (priv->target_list);
 
-  if (chartable->codepoint_list)
-    g_object_unref (chartable->codepoint_list);
+  if (priv->codepoint_list)
+    g_object_unref (priv->codepoint_list);
 
   destroy_zoom_window (chartable);
 
@@ -1963,6 +2022,7 @@ gucharmap_chartable_get_property (GObject *object,
                                   GParamSpec *pspec)
 {
   GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (object);
+  GucharmapChartablePrivate *priv = chartable->priv;
 
   switch (prop_id) {
     case PROP_ACTIVE_CHAR:
@@ -1972,16 +2032,16 @@ gucharmap_chartable_get_property (GObject *object,
       g_value_set_object (value, gucharmap_chartable_get_codepoint_list (chartable));
       break;
     case PROP_FONT_DESC:
-      g_value_set_boxed (value, chartable->font_desc);
+      g_value_set_boxed (value, priv->font_desc);
       break;
     case PROP_SNAP_POW2:
-      g_value_set_boolean (value, chartable->snap_pow2_enabled);
+      g_value_set_boolean (value, priv->snap_pow2_enabled);
       break;
     case PROP_ZOOM_ENABLED:
-      g_value_set_boolean (value, chartable->zoom_mode_enabled);
+      g_value_set_boolean (value, priv->zoom_mode_enabled);
       break;
     case PROP_ZOOM_SHOWING:
-      g_value_set_boolean (value, chartable->zoom_window != NULL);
+      g_value_set_boolean (value, priv->zoom_window != NULL);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -1995,6 +2055,8 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
   GtkBindingSet *binding_set;
+
+  g_type_class_add_private (object_class, sizeof (GucharmapChartablePrivate));
 
   object_class->finalize = gucharmap_chartable_finalize;
   object_class->get_property = gucharmap_chartable_get_property;
@@ -2268,18 +2330,21 @@ void
 gucharmap_chartable_set_zoom_enabled (GucharmapChartable *chartable,
                                       gboolean enabled)
 {
+  GucharmapChartablePrivate *priv;
   GObject *object;
 
   g_return_if_fail (GUCHARMAP_IS_CHARTABLE (chartable));
 
+  priv = chartable->priv;
+
   enabled = enabled != FALSE;
-  if (chartable->zoom_mode_enabled == enabled)
+  if (priv->zoom_mode_enabled == enabled)
     return;
 
   object = G_OBJECT (chartable);
   g_object_freeze_notify (object);
 
-  chartable->zoom_mode_enabled = enabled;
+  priv->zoom_mode_enabled = enabled;
   if (!enabled)
     gucharmap_chartable_hide_zoom (chartable);
 
@@ -2298,7 +2363,7 @@ gucharmap_chartable_get_zoom_enabled (GucharmapChartable *chartable)
 {
   g_return_val_if_fail (GUCHARMAP_IS_CHARTABLE (chartable), FALSE);
 
-  return chartable->zoom_mode_enabled;
+  return chartable->priv->zoom_mode_enabled;
 }
 
 /**
@@ -2311,14 +2376,17 @@ gucharmap_chartable_get_zoom_enabled (GucharmapChartable *chartable)
 void 
 gucharmap_chartable_set_font (GucharmapChartable *chartable, const char *font_name)
 {
+  GucharmapChartablePrivate *priv;
   PangoFontDescription *font_desc;
 
   g_return_if_fail (GUCHARMAP_IS_CHARTABLE (chartable));
   g_return_if_fail (font_name != NULL);
 
+  priv = chartable->priv;
+
   font_desc = pango_font_description_from_string (font_name);
-  if (chartable->font_desc &&
-      pango_font_description_equal (font_desc, chartable->font_desc))
+  if (priv->font_desc &&
+      pango_font_description_equal (font_desc, priv->font_desc))
     {
       pango_font_description_free (font_desc);
       return;
@@ -2338,11 +2406,15 @@ void
 gucharmap_chartable_set_font_desc (GucharmapChartable *chartable,
                                    PangoFontDescription *font_desc)
 {
+  GucharmapChartablePrivate *priv;
+
   g_return_if_fail (GUCHARMAP_IS_CHARTABLE (chartable));
   g_return_if_fail (font_desc != NULL);
 
-  if (chartable->font_desc &&
-      pango_font_description_equal (font_desc, chartable->font_desc))
+  priv = chartable->priv;
+
+  if (priv->font_desc &&
+      pango_font_description_equal (font_desc, priv->font_desc))
     return;
 
   gucharmap_chartable_set_font_desc_internal (chartable,
@@ -2358,10 +2430,12 @@ gucharmap_chartable_set_font_desc (GucharmapChartable *chartable,
 gunichar
 gucharmap_chartable_get_active_character (GucharmapChartable *chartable)
 {
-  if (!chartable->codepoint_list)
+  GucharmapChartablePrivate *priv = chartable->priv;
+
+  if (!priv->codepoint_list)
     return 0;
 
-  return gucharmap_codepoint_list_get_char (chartable->codepoint_list, chartable->active_cell);
+  return gucharmap_codepoint_list_get_char (priv->codepoint_list, priv->active_cell);
 }
 
 /**
@@ -2391,11 +2465,13 @@ void
 gucharmap_chartable_set_snap_pow2 (GucharmapChartable *chartable,
                                    gboolean snap)
 {
+  GucharmapChartablePrivate *priv = chartable->priv;
+
   snap = snap != FALSE;
 
-  if (snap != chartable->snap_pow2_enabled)
+  if (snap != priv->snap_pow2_enabled)
     {
-      chartable->snap_pow2_enabled = snap;
+      priv->snap_pow2_enabled = snap;
 
       gtk_widget_queue_resize (GTK_WIDGET (chartable));
 
@@ -2414,6 +2490,7 @@ void
 gucharmap_chartable_set_codepoint_list (GucharmapChartable     *chartable,
                                         GucharmapCodepointList *codepoint_list)
 {
+  GucharmapChartablePrivate *priv = chartable->priv;
   GObject *object = G_OBJECT (chartable);
   GtkWidget *widget = GTK_WIDGET (chartable);
 
@@ -2421,22 +2498,22 @@ gucharmap_chartable_set_codepoint_list (GucharmapChartable     *chartable,
 
   if (codepoint_list)
     g_object_ref (codepoint_list);
-  if (chartable->codepoint_list)
-    g_object_unref (chartable->codepoint_list);
-  chartable->codepoint_list = codepoint_list;
-  chartable->codepoint_list_changed = TRUE;
+  if (priv->codepoint_list)
+    g_object_unref (priv->codepoint_list);
+  priv->codepoint_list = codepoint_list;
+  priv->codepoint_list_changed = TRUE;
 
-  chartable->active_cell = 0;
-  chartable->page_first_cell = 0;
+  priv->active_cell = 0;
+  priv->page_first_cell = 0;
   if (codepoint_list)
-    chartable->last_cell = gucharmap_codepoint_list_get_last_index (codepoint_list);
+    priv->last_cell = gucharmap_codepoint_list_get_last_index (codepoint_list);
   else
-    chartable->last_cell = 0;
+    priv->last_cell = 0;
 
   /* force pixmap to be redrawn */
-  if (chartable->pixmap != NULL)
-    g_object_unref (chartable->pixmap);
-  chartable->pixmap = NULL;
+  if (priv->pixmap != NULL)
+    g_object_unref (priv->pixmap);
+  priv->pixmap = NULL;
 
   g_object_notify (object, "codepoint-list");
   g_object_notify (object, "active-character");
@@ -2457,7 +2534,9 @@ gucharmap_chartable_set_codepoint_list (GucharmapChartable     *chartable,
 GucharmapCodepointList *
 gucharmap_chartable_get_codepoint_list (GucharmapChartable *chartable)
 {
-  return chartable->codepoint_list;
+  GucharmapChartablePrivate *priv = chartable->priv;
+
+  return priv->codepoint_list;
 }
 
 /**
@@ -2469,5 +2548,7 @@ gucharmap_chartable_get_codepoint_list (GucharmapChartable *chartable)
 gint
 gucharmap_chartable_get_active_cell (GucharmapChartable *chartable)
 {
-  return chartable->active_cell;
+  GucharmapChartablePrivate *priv = chartable->priv;
+
+  return priv->active_cell;
 }

@@ -33,9 +33,6 @@ typedef struct _GucharmapScriptChaptersModelClass GucharmapScriptChaptersModelCl
 typedef struct _GucharmapCodepointList GucharmapCodepointList;
 typedef struct _GucharmapCodepointListClass GucharmapCodepointListClass;
 
-typedef struct _GucharmapChartable GucharmapChartable;
-typedef struct _GucharmapChartableClass GucharmapChartableClass;
-
 typedef struct _GucharmapChaptersView GucharmapChaptersView;
 typedef struct _GucharmapChaptersViewClass GucharmapChaptersViewClass;
 

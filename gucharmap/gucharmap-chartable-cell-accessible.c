@@ -84,6 +84,7 @@ gucharmap_chartable_cell_accessible_get_extents (AtkComponent *component,
   GucharmapChartableCellAccessible *cell;
   AtkObject *cell_parent;
   GucharmapChartable *chartable;
+  GucharmapChartablePrivate *chartable_priv;
   gint real_x, real_y, real_width, real_height;
   gint row, column;
 
@@ -95,12 +96,14 @@ gucharmap_chartable_cell_accessible_get_extents (AtkComponent *component,
    * Is the cell visible on the screen
    */
   chartable = GUCHARMAP_CHARTABLE (cell->widget);
-  if (cell->index >= chartable->page_first_cell && cell->index < chartable->page_first_cell + chartable->rows * chartable->cols)
+  chartable_priv = chartable->priv;
+
+  if (cell->index >= chartable_priv->page_first_cell && cell->index < chartable_priv->page_first_cell + chartable_priv->rows * chartable_priv->cols)
     {
       atk_component_get_extents (ATK_COMPONENT (cell_parent), 
                                  &real_x, &real_y, &real_width, &real_height, 
                                  coord_type);
-      row = (cell->index - chartable->page_first_cell)/ chartable->cols;
+      row = (cell->index - chartable_priv->page_first_cell)/ chartable_priv->cols;
       column = _gucharmap_chartable_cell_column (chartable, cell->index);
       *x = real_x + _gucharmap_chartable_x_offset (chartable, column);
       *y = real_y + _gucharmap_chartable_y_offset (chartable, row);

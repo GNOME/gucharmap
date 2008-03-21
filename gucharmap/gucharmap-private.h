@@ -19,6 +19,7 @@
 
 #include <gtk/gtk.h>
 
+#include "gucharmap.h"
 #include "gucharmap-types.h"
 
 #define I_(string) g_intern_static_string (string)
@@ -79,27 +80,7 @@ struct _GucharmapChaptersViewClass
 };
 
 
-struct _GucharmapChartableCellAccessible
-{
-  AtkObject parent;
-
-  GtkWidget    *widget;
-  int           index;
-  AtkStateSet  *state_set;
-  gchar        *activate_description;
-  guint         action_idle_handler;
-};
-
-struct _GucharmapChartableCellAccessibleClass
-{
-  AtkObjectClass parent_class;
-};
-
-
-struct _GucharmapChartable
-{
-  GtkDrawingArea parent_instance;
-
+struct _GucharmapChartablePrivate {
   /* scrollable implementation */
   GtkAdjustment *vadjustment;
   gulong vadjustment_changed_handler_id;
@@ -146,23 +127,23 @@ struct _GucharmapChartable
   guint zoom_mode_enabled : 1;
 };
 
-struct _GucharmapChartableClass
+
+struct _GucharmapChartableCellAccessible
 {
-  GtkDrawingAreaClass parent_class;
+  AtkObject parent;
 
-  void    (* set_scroll_adjustments) (GucharmapChartable *chartable,
-                                      GtkAdjustment      *hadjustment,
-                                      GtkAdjustment      *vadjustment);
-  gboolean (* move_cursor)           (GucharmapChartable *chartable,
-                                      GtkMovementStep     step,
-                                      gint                count);
-  void (* activate) (GucharmapChartable *chartable);
-  void (* copy_clipboard) (GucharmapChartable *chartable);
-  void (* paste_clipboard) (GucharmapChartable *chartable);
-
-  void (* set_active_char) (GucharmapChartable *chartable, guint ch);
-  void (* status_message) (GucharmapChartable *chartable, const gchar *message);
+  GtkWidget    *widget;
+  int           index;
+  AtkStateSet  *state_set;
+  gchar        *activate_description;
+  guint         action_idle_handler;
 };
+
+struct _GucharmapChartableCellAccessibleClass
+{
+  AtkObjectClass parent_class;
+};
+
 
 gint _gucharmap_chartable_cell_column	(GucharmapChartable *chartable,
 					 guint cell);

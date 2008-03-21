@@ -32,10 +32,40 @@ G_BEGIN_DECLS
 
 #define GUCHARMAP_TYPE_CHARTABLE             (gucharmap_chartable_get_type ())
 #define GUCHARMAP_CHARTABLE(o)               (G_TYPE_CHECK_INSTANCE_CAST ((o), GUCHARMAP_TYPE_CHARTABLE, GucharmapChartable))
-#define GUCHARMAP_CHARTABLE_CLASS(k) (G_TYPE_CHECK_CLASS_CAST((k), GUCHARMAP_TYPE_CHARTABLE, GucharmapChartableClass))
+#define GUCHARMAP_CHARTABLE_CLASS(k)         (G_TYPE_CHECK_CLASS_CAST((k), GUCHARMAP_TYPE_CHARTABLE, GucharmapChartableClass))
 #define GUCHARMAP_IS_CHARTABLE(o)            (G_TYPE_CHECK_INSTANCE_TYPE ((o), GUCHARMAP_TYPE_CHARTABLE))
 #define GUCHARMAP_IS_CHARTABLE_CLASS(k)      (G_TYPE_CHECK_CLASS_TYPE ((k), GUCHARMAP_TYPE_CHARTABLE))
 #define GUCHARMAP_CHARTABLE_GET_CLASS(o)     (G_TYPE_INSTANCE_GET_CLASS ((o), GUCHARMAP_TYPE_CHARTABLE, GucharmapChartableClass))
+
+typedef struct _GucharmapChartable        GucharmapChartable;
+typedef struct _GucharmapChartablePrivate GucharmapChartablePrivate;
+typedef struct _GucharmapChartableClass   GucharmapChartableClass;
+
+struct _GucharmapChartable
+{
+  GtkDrawingArea parent_instance;
+
+  /*< private >*/
+  GucharmapChartablePrivate *priv;
+};
+
+struct _GucharmapChartableClass
+{
+  GtkDrawingAreaClass parent_class;
+
+  void    (* set_scroll_adjustments) (GucharmapChartable *chartable,
+                                      GtkAdjustment      *hadjustment,
+                                      GtkAdjustment      *vadjustment);
+  gboolean (* move_cursor)           (GucharmapChartable *chartable,
+                                      GtkMovementStep     step,
+                                      gint                count);
+  void (* activate) (GucharmapChartable *chartable);
+  void (* copy_clipboard) (GucharmapChartable *chartable);
+  void (* paste_clipboard) (GucharmapChartable *chartable);
+
+  void (* set_active_char) (GucharmapChartable *chartable, guint ch);
+  void (* status_message) (GucharmapChartable *chartable, const gchar *message);
+};
 
 GType gucharmap_chartable_get_type (void);
 GtkWidget * gucharmap_chartable_new (void);
