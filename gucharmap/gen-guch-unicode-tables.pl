@@ -470,6 +470,47 @@ EOT
 #     # etc 
 # };
 # 
+
+sub print_names_list
+{
+    my ($out, $nameslist_hash, $token, $variable_name) = @_;
+
+    print $out "static const char ", $variable_name, "_strings[] = \n";
+
+    my @names_pairs;
+    my %names_offsets;
+    my $offset = 0;
+
+    for my $wc (sort {$a <=> $b} keys %{$nameslist_hash})
+    {
+        next if not exists $nameslist_hash->{$wc}->{$token};
+        for my $value (@{$nameslist_hash->{$wc}->{$token}->{'values'}}) {
+            push @names_pairs, [$wc, $value];
+            next if exists $names_offsets{$value};
+
+            $names_offsets{$value} = $offset;
+            $offset += length($value) + 1;
+
+            my $printvalue = $value;
+            $printvalue =~ s/\\/\\\\/g;
+            $printvalue =~ s/\"/\\"/g;
+
+            printf $out (qq/  "\%s\\0"\n/, $printvalue);
+        }
+    }
+
+    print $out "  ;\n\n";
+
+    print $out "static const UnicharStringIndex ", $variable_name, "[] = \n";
+    print $out "{\n";
+    foreach my $pair (@names_pairs) {
+	my ($wc, $value) = @{$pair};
+        printf $out (qq/  { 0x%04X, %d },\n/, $wc, $names_offsets{$value});
+    }
+    print $out "  { (gunichar)(-1), 0 } /* end marker */ \n";
+    print $out "};\n\n";
+}
+
 sub process_nameslist_txt ($)
 {
     my ($nameslist_txt) = @_;
@@ -498,8 +539,6 @@ sub process_nameslist_txt ($)
         elsif ($line =~ /^\s+=\s+(.+)$/)
         {
             my $value = $1;
-            $value =~ s/\\/\\\\/g;
-            $value =~ s/\"/\\"/g;
 
             if (not defined $nameslist_hash->{$wc}->{'='}->{'index'}) {
                 $nameslist_hash->{$wc}->{'='}->{'index'} = $equal_i;
@@ -511,8 +550,6 @@ sub process_nameslist_txt ($)
         elsif ($line =~ /^\s+\*\s+(.+)$/)
         {
             my $value = $1;
-            $value =~ s/\\/\\\\/g;
-            $value =~ s/\"/\\"/g;
 
             if (not defined $nameslist_hash->{$wc}->{'*'}->{'index'}) {
                 $nameslist_hash->{$wc}->{'*'}->{'index'} = $star_i;
@@ -524,8 +561,6 @@ sub process_nameslist_txt ($)
         elsif ($line =~ /^\s+#\s+(.+)$/)
         {
             my $value = $1;
-            $value =~ s/\\/\\\\/g;
-            $value =~ s/\"/\\"/g;
 
             if (not defined $nameslist_hash->{$wc}->{'#'}->{'index'}) {
                 $nameslist_hash->{$wc}->{'#'}->{'index'} = $pound_i;
@@ -537,8 +572,6 @@ sub process_nameslist_txt ($)
         elsif ($line =~ /^\s+:\s+(.+)$/)
         {
             my $value = $1;
-            $value =~ s/\\/\\\\/g;
-            $value =~ s/\"/\\"/g;
 
             if (not defined $nameslist_hash->{$wc}->{':'}->{'index'}) {
                 $nameslist_hash->{$wc}->{':'}->{'index'} = $colon_i;
@@ -574,14 +607,14 @@ sub process_nameslist_txt ($)
 
     print $out "#include <glib/gunicode.h>\n\n";
 
-    print $out "typedef struct _UnicharString UnicharString;\n";
+    print $out "typedef struct _UnicharStringIndex UnicharStringIndex;\n";
     print $out "typedef struct _UnicharUnichar UnicharUnichar;\n";
     print $out "typedef struct _NamesList NamesList;\n\n";
 
-    print $out "struct _UnicharString\n";
+    print $out "struct _UnicharStringIndex\n";
     print $out "{\n";
     print $out "  gunichar index;\n";
-    print $out "  const gchar *value;\n";
+    print $out "  guint32 string_index;\n";
     print $out "}; \n\n";
 
     print $out "struct _UnicharUnichar\n";
@@ -600,41 +633,10 @@ sub process_nameslist_txt ($)
     print $out "  gint16 colons_index;\n";
     print $out "};\n\n";
 
-    print $out "static const UnicharString names_list_equals[] = \n";
-    print $out "{\n";
-    for $wc (sort {$a <=> $b} keys %{$nameslist_hash})
-    {
-        next if not exists $nameslist_hash->{$wc}->{'='};
-        for my $value (@{$nameslist_hash->{$wc}->{'='}->{'values'}}) {
-            printf $out (qq/  { 0x%04X, "\%s" },\n/, $wc, $value);
-        }
-    }
-    print $out "  { (gunichar)(-1), 0 }\n";
-    print $out "};\n\n";
-
-    print $out "static const UnicharString names_list_stars[] = \n";
-    print $out "{\n";
-    for $wc (sort {$a <=> $b} keys %{$nameslist_hash})
-    {
-        next if not exists $nameslist_hash->{$wc}->{'*'};
-        for my $value (@{$nameslist_hash->{$wc}->{'*'}->{'values'}}) {
-            printf $out (qq/  { 0x%04X, "\%s" },\n/, $wc, $value);
-        }
-    }
-    print $out "  { (gunichar)(-1), 0 }\n";
-    print $out "};\n\n";
-
-    print $out "static const UnicharString names_list_pounds[] = \n";
-    print $out "{\n";
-    for $wc (sort {$a <=> $b} keys %{$nameslist_hash})
-    {
-        next if not exists $nameslist_hash->{$wc}->{'#'};
-        for my $value (@{$nameslist_hash->{$wc}->{'#'}->{'values'}}) {
-            printf $out (qq/  { 0x%04X, "\%s" },\n/, $wc, $value);
-        }
-    }
-    print $out "  { (gunichar)(-1), 0 }\n";
-    print $out "};\n\n";
+    print_names_list($out, $nameslist_hash, '=', "names_list_equals");
+    print_names_list($out, $nameslist_hash, '*', "names_list_stars");
+    print_names_list($out, $nameslist_hash, '#', "names_list_pounds");
+    print_names_list($out, $nameslist_hash, ':', "names_list_colons");
 
     print $out "static const UnicharUnichar names_list_exes[] = \n";
     print $out "{\n";
@@ -643,18 +645,6 @@ sub process_nameslist_txt ($)
         next if not exists $nameslist_hash->{$wc}->{'x'};
         for my $value (@{$nameslist_hash->{$wc}->{'x'}->{'values'}}) {
             printf $out (qq/  { 0x%04X, 0x%04X },\n/, $wc, $value);
-        }
-    }
-    print $out "  { (gunichar)(-1), 0 }\n";
-    print $out "};\n\n";
-
-    print $out "static const UnicharString names_list_colons[] = \n";
-    print $out "{\n";
-    for $wc (sort {$a <=> $b} keys %{$nameslist_hash})
-    {
-        next if not exists $nameslist_hash->{$wc}->{':'};
-        for my $value (@{$nameslist_hash->{$wc}->{':'}->{'values'}}) {
-            printf $out (qq/  { 0x%04X, "\%s" },\n/, $wc, $value);
         }
     }
     print $out "  { (gunichar)(-1), 0 }\n";

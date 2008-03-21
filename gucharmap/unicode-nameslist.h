@@ -8,14 +8,14 @@
 
 #include <glib/gunicode.h>
 
-typedef struct _UnicharString UnicharString;
+typedef struct _UnicharStringIndex UnicharStringIndex;
 typedef struct _UnicharUnichar UnicharUnichar;
 typedef struct _NamesList NamesList;
 
-struct _UnicharString
+struct _UnicharStringIndex
 {
   gunichar index;
-  const gchar *value;
+  guint32 string_index;
 }; 
 
 struct _UnicharUnichar
@@ -34,6120 +34,14846 @@ struct _NamesList
   gint16 colons_index;
 };
 
-static const UnicharString names_list_equals[] = 
+static const char names_list_equals_strings[] = 
+  "NULL\0"
+  "START OF HEADING\0"
+  "START OF TEXT\0"
+  "END OF TEXT\0"
+  "END OF TRANSMISSION\0"
+  "ENQUIRY\0"
+  "ACKNOWLEDGE\0"
+  "BELL\0"
+  "BACKSPACE\0"
+  "CHARACTER TABULATION\0"
+  "horizontal tabulation (HT), tab\0"
+  "LINE FEED (LF)\0"
+  "new line (NL), end of line (EOL)\0"
+  "LINE TABULATION\0"
+  "vertical tabulation (VT)\0"
+  "FORM FEED (FF)\0"
+  "CARRIAGE RETURN (CR)\0"
+  "SHIFT OUT\0"
+  "SHIFT IN\0"
+  "DATA LINK ESCAPE\0"
+  "DEVICE CONTROL ONE\0"
+  "DEVICE CONTROL TWO\0"
+  "DEVICE CONTROL THREE\0"
+  "DEVICE CONTROL FOUR\0"
+  "NEGATIVE ACKNOWLEDGE\0"
+  "SYNCHRONOUS IDLE\0"
+  "END OF TRANSMISSION BLOCK\0"
+  "CANCEL\0"
+  "END OF MEDIUM\0"
+  "SUBSTITUTE\0"
+  "ESCAPE\0"
+  "INFORMATION SEPARATOR FOUR\0"
+  "file separator (FS)\0"
+  "INFORMATION SEPARATOR THREE\0"
+  "group separator (GS)\0"
+  "INFORMATION SEPARATOR TWO\0"
+  "record separator (RS)\0"
+  "INFORMATION SEPARATOR ONE\0"
+  "unit separator (US)\0"
+  "factorial\0"
+  "bang\0"
+  "pound sign, hash, crosshatch, octothorpe\0"
+  "milreis, escudo\0"
+  "apostrophe-quote (1.0)\0"
+  "APL quote\0"
+  "opening parenthesis (1.0)\0"
+  "closing parenthesis (1.0)\0"
+  "star (on phone keypads)\0"
+  "decimal separator\0"
+  "hyphen or minus sign\0"
+  "period, dot, decimal point\0"
+  "slash, virgule\0"
+  "at sign\0"
+  "opening square bracket (1.0)\0"
+  "backslash\0"
+  "closing square bracket (1.0)\0"
+  "spacing underscore (1.0)\0"
+  "opening curly bracket (1.0)\0"
+  "left brace\0"
+  "vertical bar\0"
+  "closing curly bracket (1.0)\0"
+  "right brace\0"
+  "DELETE\0"
+  "BREAK PERMITTED HERE\0"
+  "NO BREAK HERE\0"
+  "NEXT LINE (NEL)\0"
+  "START OF SELECTED AREA\0"
+  "END OF SELECTED AREA\0"
+  "CHARACTER TABULATION SET\0"
+  "CHARACTER TABULATION WITH JUSTIFICATION\0"
+  "LINE TABULATION SET\0"
+  "PARTIAL LINE FORWARD\0"
+  "PARTIAL LINE BACKWARD\0"
+  "REVERSE LINE FEED\0"
+  "SINGLE SHIFT TWO\0"
+  "SINGLE SHIFT THREE\0"
+  "DEVICE CONTROL STRING\0"
+  "PRIVATE USE ONE\0"
+  "PRIVATE USE TWO\0"
+  "SET TRANSMIT STATE\0"
+  "CANCEL CHARACTER\0"
+  "MESSAGE WAITING\0"
+  "START OF GUARDED AREA\0"
+  "END OF GUARDED AREA\0"
+  "START OF STRING\0"
+  "SINGLE CHARACTER INTRODUCER\0"
+  "CONTROL SEQUENCE INTRODUCER\0"
+  "STRING TERMINATOR\0"
+  "OPERATING SYSTEM COMMAND\0"
+  "PRIVACY MESSAGE\0"
+  "APPLICATION PROGRAM COMMAND\0"
+  "pound sterling, Irish punt, Italian lira, Turkish lira, etc.\0"
+  "yuan sign\0"
+  "broken vertical bar (1.0)\0"
+  "parted rule (in typography)\0"
+  "left guillemet\0"
+  "chevrons (in typography)\0"
+  "angled dash (in typography)\0"
+  "discretionary hyphen\0"
+  "registered trade mark sign (1.0)\0"
+  "overline, APL overbar\0"
+  "squared\0"
+  "cubed\0"
+  "paragraph sign\0"
+  "midpoint (in typography)\0"
+  "Georgian comma\0"
+  "Greek middle dot (ano teleia)\0"
+  "right guillemet\0"
+  "turned question mark\0"
+  "latin capital ligature ae (1.0)\0"
+  "z notation Cartesian product\0"
+  "o slash\0"
+  "Eszett\0"
+  "latin small ligature ae (1.0)\0"
+  "ash (from Old English æsc)\0"
+  "i dot\0"
+  "latin small letter apostrophe n (1.0)\0"
+  "ethel (from Old English eðel)\0"
+  "reversed Polish-hook o\0"
+  "turned e\0"
+  "epsilon\0"
+  "script f\0"
+  "Florin currency symbol (Netherlands)\0"
+  "function symbol\0"
+  "barred i, i bar\0"
+  "barred l\0"
+  "barred lambda, lambda bar\0"
+  "barred o, o bar\0"
+  "script v\0"
+  "barred z, z bar\0"
+  "wen\0"
+  "pipe\0"
+  "double pipe\0"
+  "double-barred pipe\0"
+  "latin letter exclamation mark (1.0)\0"
+  "latin small letter script a (1.0)\0"
+  "d retroflex hook\0"
+  "closed reversed epsilon\0"
+  "latin small letter baby gamma (1.0)\0"
+  "o bar\0"
+  "long leg turned iota (a misnomer)\0"
+  "latin small letter script v (1.0)\0"
+  "caret, wedge\0"
+  "dram\0"
+  "reversed glottal stop\0"
+  "bullseye\0"
+  "closed epsilon\0"
+  "apostrophe\0"
+  "hacek\0"
+  "Greek varia\0"
+  "stress mark\0"
+  "Greek oxia, tonos\0"
+  "hat\0"
+  "long\0"
+  "overscore, vinculum\0"
+  "short\0"
+  "Greek vrachy\0"
+  "derivative (Newtonian notation)\0"
+  "double dot above, umlaut\0"
+  "Greek dialytika\0"
+  "double derivative\0"
+  "hoi\0"
+  "hacek, V above\0"
+  "cedilla above\0"
+  "Greek psili, smooth breathing mark\0"
+  "Greek dasia, rough breathing mark\0"
+  "nang\0"
+  "nasal hook\0"
+  "underline, underscore\0"
+  "double underline, double underscore\0"
+  "short slash overlay\0"
+  "long slash overlay\0"
+  "greek non-spacing iota below (1.0)\0"
+  "iota subscript\0"
+  "ligature tie below, papyrological hyphen\0"
+  "ligature tie\0"
+  "dexia keraia\0"
+  "aristeri keraia\0"
+  "erotimatiko\0"
+  "gamma function\0"
+  "iota adscript\0"
+  "lambda\0"
+  "stigma (the Modern Greek name for this letterform)\0"
+  "curled beta\0"
+  "script theta\0"
+  "omega pi\0"
+  "script kappa\0"
+  "tailed rho\0"
+  "greek small letter lunate sigma (1.0)\0"
+  "straight epsilon\0"
+  "reversed straight epsilon\0"
+  "antisigma\0"
+  "sigma periestigmenon\0"
+  "antisigma periestigmenon\0"
+  "Old Cyrillic yest\0"
+  "Old Cyrillic zelo\0"
+  "Old Cyrillic i\0"
+  "Old Cyrillic derv\0"
+  "armenian modifier letter right half ring (1.0)\0"
+  "shesht\0"
+  "batsaganchakan nshan\0"
+  "bowt\0"
+  "hartsakan nshan\0"
+  "patiw\0"
+  "vertsaket\0"
+  "yentamna\0"
+  "atnah\0"
+  "segolta\0"
+  "tarha, me'ayla ~ mayla\0"
+  "tsinorit, zinorit; tsinor, zinor\0"
+  "teres\0"
+  "pazer gadol\0"
+  "pazer qatan\0"
+  "yored\0"
+  "azla\0"
+  "galgal\0"
+  "tsinor; zarqa\0"
+  "shuruq\0"
+  "siluq\0"
+  "legarmeh\0"
+  "aleph\0"
+  "zade\0"
+  "tsvey vovn\0"
+  "tsvey yudn\0"
+  "kashida\0"
+  "arabic letter hamzah on ha (1.0)\0"
+  "izafet\0"
+  "Arabic jazm\0"
+  "SAM\0"
+  "anunasika\0"
+  "bindu\0"
+  "candra\0"
+  "halant (the preferred Hindi name)\0"
+  "purna viram\0"
+  "deergh viram\0"
+  "Bengali va, wa\0"
+  "hasant (Bengali term for halant)\0"
+  "bengali letter va with lower diagonal (1.0)\0"
+  "aira\0"
+  "pairin bindi\0"
+  "kanna\0"
+  "sihari\0"
+  "bihari\0"
+  "aunkar\0"
+  "dulainkar\0"
+  "lanvan\0"
+  "dulanvan\0"
+  "hora\0"
+  "kanaura\0"
+  "ja\0"
+  "dda\0"
+  "ddha\0"
+  "ya\0"
+  "aytham\0"
+  "sunna\0"
+  "halant (the preferred name)\0"
+  "cha\0"
+  "chha\0"
+  "nha\0"
+  "ta\0"
+  "tta\0"
+  "hard da\0"
+  "hard dda\0"
+  "hard na\0"
+  "tha\0"
+  "ttha\0"
+  "soft da\0"
+  "soft dda\0"
+  "zha\0"
+  "soft sha\0"
+  "sha\0"
+  "chandrakkala (the preferred name)\0"
+  "vowel half-u\0"
+  "anusvara\0"
+  "visarga\0"
+  "sinhala letter a\0"
+  "sinhala letter aa\0"
+  "sinhala letter ae\0"
+  "sinhala letter aae\0"
+  "sinhala letter i\0"
+  "sinhala letter ii\0"
+  "sinhala letter u\0"
+  "sinhala letter uu\0"
+  "sinhala letter vocalic r\0"
+  "sinhala letter vocalic rr\0"
+  "sinhala letter vocalic l\0"
+  "sinhala letter vocalic ll\0"
+  "sinhala letter e\0"
+  "sinhala letter ee\0"
+  "sinhala letter ai\0"
+  "sinhala letter o\0"
+  "sinhala letter oo\0"
+  "sinhala letter au\0"
+  "sinhala letter ka\0"
+  "sinhala letter kha\0"
+  "sinhala letter ga\0"
+  "sinhala letter gha\0"
+  "sinhala letter nga\0"
+  "sinhala letter nnga\0"
+  "sinhala letter ca\0"
+  "sinhala letter cha\0"
+  "sinhala letter ja\0"
+  "sinhala letter jha\0"
+  "sinhala letter nya\0"
+  "sinhala letter jnya\0"
+  "sinhala letter nyja\0"
+  "sinhala letter tta\0"
+  "sinhala letter ttha\0"
+  "sinhala letter dda\0"
+  "sinhala letter ddha\0"
+  "sinhala letter nna\0"
+  "sinhala letter nndda\0"
+  "sinhala letter ta\0"
+  "sinhala letter tha\0"
+  "sinhala letter da\0"
+  "sinhala letter dha\0"
+  "sinhala letter na\0"
+  "sinhala letter nda\0"
+  "sinhala letter pa\0"
+  "sinhala letter pha\0"
+  "sinhala letter ba\0"
+  "sinhala letter bha\0"
+  "sinhala letter ma\0"
+  "sinhala letter mba\0"
+  "sinhala letter ya\0"
+  "sinhala letter ra\0"
+  "sinhala letter la\0"
+  "sinhala letter va\0"
+  "sinhala letter sha\0"
+  "sinhala letter ssa\0"
+  "sinhala letter sa\0"
+  "sinhala letter ha\0"
+  "sinhala letter lla\0"
+  "sinhala letter fa\0"
+  "virama\0"
+  "sinhala vowel sign aa\0"
+  "sinhala vowel sign ae\0"
+  "sinhala vowel sign aae\0"
+  "sinhala vowel sign i\0"
+  "sinhala vowel sign ii\0"
+  "sinhala vowel sign u\0"
+  "sinhala vowel sign uu\0"
+  "sinhala vowel sign vocalic r\0"
+  "sinhala vowel sign e\0"
+  "sinhala vowel sign ee\0"
+  "sinhala vowel sign ai\0"
+  "sinhala vowel sign o\0"
+  "sinhala vowel sign oo\0"
+  "sinhala vowel sign au\0"
+  "sinhala vowel sign vocalic l\0"
+  "sinhala vowel sign vocalic rr\0"
+  "sinhala vowel sign vocalic ll\0"
+  "ho nok huk\0"
+  "paiyan noi\0"
+  "sara uue\0"
+  "sara ai mai muan\0"
+  "sara ai mai malai\0"
+  "lakkhang yao\0"
+  "mai yamok\0"
+  "mai taikhu\0"
+  "nikkhahit\0"
+  "ko kay\0"
+  "kho khay\0"
+  "kho khuay\0"
+  "ngo ngu, ngo ngua\0"
+  "co cok, co cua\0"
+  "so sang\0"
+  "nyo nyung\0"
+  "do dek\0"
+  "to ta\0"
+  "tho thong\0"
+  "tho thung\0"
+  "no nok\0"
+  "bo be, bo bet\0"
+  "po pa\0"
+  "pho pheng\0"
+  "fo fa\0"
+  "pho phu\0"
+  "mo mew, mo ma\0"
+  "yo ya\0"
+  "ro rot\0"
+  "lo ling\0"
+  "wo wi\0"
+  "so sya\0"
+  "ho hay, ho han\0"
+  "o o\0"
+  "ho hya, ho hyan\0"
+  "mai kong\0"
+  "nyo fyang\0"
+  "mai muan\0"
+  "mai may\0"
+  "reversed sha\0"
+  "a-chung\0"
+  "srog med\0"
+  "wa-zur, wa-btags\0"
+  "ya-btags\0"
+  "ra-btags\0"
+  "reversed subjoined sha\0"
+  "aukmyit\0"
+  "killer (when rendered visibly)\0"
+  "G\0"
+  "GG\0"
+  "N\0"
+  "D\0"
+  "DD\0"
+  "R\0"
+  "M\0"
+  "B\0"
+  "BB\0"
+  "S\0"
+  "SS\0"
+  "J\0"
+  "JJ\0"
+  "C\0"
+  "K\0"
+  "T\0"
+  "P\0"
+  "H\0"
+  "A\0"
+  "AE\0"
+  "YA\0"
+  "YAE\0"
+  "EO\0"
+  "E\0"
+  "YEO\0"
+  "YE\0"
+  "O\0"
+  "WA\0"
+  "WAE\0"
+  "OE\0"
+  "YO\0"
+  "U\0"
+  "WEO\0"
+  "WE\0"
+  "WI\0"
+  "YU\0"
+  "EU\0"
+  "YI\0"
+  "I\0"
+  "GS\0"
+  "NJ\0"
+  "NH\0"
+  "L\0"
+  "LG\0"
+  "LM\0"
+  "LB\0"
+  "LS\0"
+  "LT\0"
+  "LP\0"
+  "LH\0"
+  "BS\0"
+  "NG\0"
+  "srak am\0"
+  "srak ah\0"
+  "ardhacandra\0"
+  "candrabindu\0"
+  "repha\0"
+  "a\0"
+  "aa\0"
+  "i\0"
+  "ii\0"
+  "u\0"
+  "uu\0"
+  "vocalic r\0"
+  "vocalic rr\0"
+  "vocalic l\0"
+  "vocalic ll\0"
+  "e\0"
+  "ai\0"
+  "o\0"
+  "au\0"
+  "kha\0"
+  "gha\0"
+  "jha\0"
+  "nna\0"
+  "dha\0"
+  "pha\0"
+  "bha\0"
+  "ssa\0"
+  "nukta\0"
+  "ae\0"
+  "oe\0"
+  "section\0"
+  "honorific section\0"
+  "punctuation ring\0"
+  "colon\0"
+  "danda\0"
+  "double danda\0"
+  "line-breaking hyphen\0"
+  "mutton quad\0"
+  "nut\0"
+  "mutton\0"
+  "thick space\0"
+  "mid space\0"
+  "quotation dash\0"
+  "single turned comma quotation mark\0"
+  "single comma quotation mark\0"
+  "low single comma quotation mark\0"
+  "single reversed comma quotation mark\0"
+  "double turned comma quotation mark\0"
+  "double comma quotation mark\0"
+  "low double comma quotation mark\0"
+  "double reversed comma quotation mark\0"
+  "obelisk, obelus, long cross\0"
+  "diesis, double obelisk\0"
+  "black small circle\0"
+  "three dot leader\0"
+  "permille, per thousand\0"
+  "permyriad\0"
+  "minutes, feet\0"
+  "seconds, inches\0"
+  "lines (old measure, 1/12 of an inch)\0"
+  "left pointing single guillemet\0"
+  "right pointing single guillemet\0"
+  "Japanese kome\0"
+  "Urdu paragraph separator\0"
+  "spacing overscore\0"
+  "Greek enotikon\0"
+  "z notation sequence concatenation\0"
+  "solidus (in typography)\0"
+  "abzüglich (German), med avdrag av (Swedish), piska (Swedish, \"whip\")\0"
+  "phul, puspika\0"
+  "Greek pentonkion\0"
+  "quincunx\0"
+  "Epidaurean acrophonic symbol three\0"
+  "invisible comma\0"
+  "third derivative\0"
+  "fourth derivative\0"
+  "JIS composition circle\0"
+  "Cyrillic combining ten thousands sign\0"
+  "z notation finite function diacritic\0"
+  "actuarial bend\0"
+  "contraction operator\0"
+  "long double slash overlay\0"
+  "the set of complex numbers\0"
+  "degrees Centigrade\0"
+  "clone\0"
+  "real number symbol\0"
+  "Hamiltonian operator\0"
+  "Hilbert space\0"
+  "height, specific enthalpy, ...\0"
+  "imaginary part\0"
+  "Laplace transform\0"
+  "mathematical symbol 'ell'\0"
+  "liter (traditional symbol)\0"
+  "pounds\0"
+  "natural number\0"
+  "published\0"
+  "phonorecord sign\0"
+  "Weierstrass elliptic function\0"
+  "the set of rational numbers\0"
+  "Riemann Integral\0"
+  "real part\0"
+  "the set of real numbers\0"
+  "recipe\0"
+  "cross ratio\0"
+  "the set of integers\0"
+  "mho\0"
+  "Bernoulli function\0"
+  "error\0"
+  "natural exponent\0"
+  "emf (electromotive force)\0"
+  "Fourier transform\0"
+  "Claudian digamma inversum\0"
+  "M-matrix (physics)\0"
+  "German Mark currency symbol, before WWII\0"
+  "order, of inferior order to\0"
+  "first transfinite cardinal (countable)\0"
+  "second transfinite cardinal (the continuum)\0"
+  "third transfinite cardinal (functions of a real variable)\0"
+  "fourth transfinite cardinal\0"
+  "game\0"
+  "apostrophic C\0"
+  "Claudian antisigma\0"
+  "z notation total function\0"
+  "z notation relation\0"
+  "fast cursor left\0"
+  "fast cursor up\0"
+  "z notation total surjection\0"
+  "fast cursor right\0"
+  "form feed\0"
+  "fast cursor down\0"
+  "z notation total injection\0"
+  "z notation maplet\0"
+  "depth symbol\0"
+  "electrolysis\0"
+  "line feed\0"
+  "home\0"
+  "tab with shift tab\0"
+  "page up\0"
+  "page down\0"
+  "leftward tab\0"
+  "rightward tab\0"
+  "shift\0"
+  "caps lock\0"
+  "level 2 lock\0"
+  "numerics lock\0"
+  "level 3 select\0"
+  "level 3 lock\0"
+  "group lock\0"
+  "end\0"
+  "scrolling\0"
+  "z notation partial function\0"
+  "z notation partial relation\0"
+  "z notation finite function\0"
+  "z notation finite relation\0"
+  "universal quantifier\0"
+  "existential quantifier\0"
+  "null set\0"
+  "Laplace operator\0"
+  "forward difference\0"
+  "symmetric difference of sets\0"
+  "backward difference\0"
+  "gradient, del\0"
+  "such that\0"
+  "q.e.d.\0"
+  "product sign\0"
+  "coproduct sign\0"
+  "summation sign\0"
+  "composite function\0"
+  "APL jot\0"
+  "radical sign\0"
+  "angle arc\0"
+  "APL stile\0"
+  "wedge, conjunction\0"
+  "vee, disjunction\0"
+  "cap, hat\0"
+  "cup\0"
+  "saturating subtraction\0"
+  "varies with (proportional to)\0"
+  "difference between\0"
+  "similar to\0"
+  "not\0"
+  "cycle\0"
+  "APL tilde\0"
+  "lazy S\0"
+  "most positive\0"
+  "alternating current\0"
+  "asymptotic to\0"
+  "nearly equals\0"
+  "approximately equal to\0"
+  "corresponds to\0"
+  "equiangular\0"
+  "equal to by definition\0"
+  "plaintiff, quantic\0"
+  "lower rank than\0"
+  "higher rank than\0"
+  "included in set\0"
+  "includes in set\0"
+  "z notation bag addition\0"
+  "direct sum\0"
+  "vector pointing into page\0"
+  "symmetric difference\0"
+  "tensor product\0"
+  "direct product\0"
+  "vector pointing out of page\0"
+  "turnstile\0"
+  "proves, implies, yields\0"
+  "reducible\0"
+  "reverse turnstile\0"
+  "non-theorem, does not yield\0"
+  "top\0"
+  "base, bottom\0"
+  "reduces to\0"
+  "statement is true, valid\0"
+  "is a tautology\0"
+  "satisfies\0"
+  "results in\0"
+  "z notation generalised intersection\0"
+  "z notation generalised union\0"
+  "proper intersection\0"
+  "APL upstile\0"
+  "APL downstile\0"
+  "beginning of line\0"
+  "Kissen (pillow)\0"
+  "command key (1.0)\0"
+  "line marker\0"
+  "enter key\0"
+  "delete to the right key\0"
+  "clear key\0"
+  "delete to the left key\0"
+  "up tack underbar\0"
+  "up tack jot\0"
+  "down tack overbar\0"
+  "down tack jot\0"
+  "down tack diaeresis\0"
+  "hoot\0"
+  "holler\0"
+  "smirk\0"
+  "center\0"
+  "control\0"
+  "pause\0"
+  "interrupt\0"
+  "escape\0"
+  "left moustache\0"
+  "right moustache\0"
+  "transit\0"
+  "on us\0"
+  "dash\0"
+  "Videotex Mosaic DG 15\0"
+  "Videotex Mosaic DG 14\0"
+  "Videotex Mosaic DG 16\0"
+  "Videotex Mosaic DG 17\0"
+  "Videotex Mosaic DG 18\0"
+  "Videotex Mosaic DG 19\0"
+  "Videotex Mosaic DG 20\0"
+  "Videotex Mosaic DG 03\0"
+  "Videotex Mosaic DG 21\0"
+  "Videotex Mosaic DG 04\0"
+  "Videotex Mosaic DG 22\0"
+  "Videotex Mosaic DG 02\0"
+  "Videotex Mosaic DG 23\0"
+  "Videotex Mosaic DG 01\0"
+  "Videotex Mosaic DG 24\0"
+  "Videotex Mosaic DG 13\0"
+  "solid\0"
+  "moding mark (in ideographic text)\0"
+  "quadrature\0"
+  "histogram marker\0"
+  "trine\0"
+  "z notation range restriction\0"
+  "forward arrow indicator\0"
+  "Hamilton operator\0"
+  "z notation domain restriction\0"
+  "backward arrow indicator\0"
+  "tainome (Japanese, a kind of bullet)\0"
+  "always (modal operator)\0"
+  "clear weather\0"
+  "cloudy weather\0"
+  "rainy weather\0"
+  "snowy weather\0"
+  "St. Andrew's Cross\0"
+  "showery weather\0"
+  "tea or coffee, depending on locale\0"
+  "fist (typographic term)\0"
+  "poison\0"
+  "Constantine's cross, Christogram\0"
+  "symbol of iran (1.0)\0"
+  "Gurmukhi khanda\0"
+  "qian2\0"
+  "dui4\0"
+  "li2\0"
+  "zhen4\0"
+  "xun4\0"
+  "kan3\0"
+  "gen4\0"
+  "kun1\0"
+  "have a nice day!\0"
+  "compass\0"
+  "Venus\0"
+  "Mars\0"
+  "minim (alternate glyph)\0"
+  "minim, drop\0"
+  "valentine\0"
+  "z notation infix bag count\0"
+  "mining, working day (in timetables)\0"
+  "nautical term, harbor (on maps)\0"
+  "military term, battleground (on maps), killed in action\0"
+  "medical term\0"
+  "legal term, jurisprudence\0"
+  "chemical term, chemistry\0"
+  "botanical term\0"
+  "technology, tools\0"
+  "nuclear installation (on maps)\0"
+  "lesbianism\0"
+  "male homosexuality\0"
+  "bisexuality\0"
+  "transgendered sexuality\0"
+  "hermaphrodite (in entomology)\0"
+  "ferrous iron sulphate (alchemy and older chemistry)\0"
+  "magnesium (alchemy and older chemistry)\0"
+  "asexuality, sexless, genderless\0"
+  "engaged, betrothed\0"
+  "engaged, betrothed (genealogy)\0"
+  "buried (genealogy)\0"
+  "cremated (genealogy)\0"
+  "sextile\0"
+  "starburst\0"
+  "jack\0"
+  "turbofan\0"
+  "Aldus leaf\0"
+  "hedera, ivy leaf\0"
+  "orthogonal to\0"
+  "pullback\0"
+  "pushout\0"
+  "radial component\0"
+  "never (modal operator)\0"
+  "was never (modal operator)\0"
+  "will never be (modal operator)\0"
+  "was always (modal operator)\0"
+  "will always be (modal operator)\0"
+  "z notation left bag bracket\0"
+  "z notation right bag bracket\0"
+  "bra\0"
+  "z notation left sequence bracket\0"
+  "ket\0"
+  "z notation right sequence bracket\0"
+  "z notation left chevron bracket\0"
+  "z notation right chevron bracket\0"
+  "maps from\0"
+  "maps to\0"
+  "z notation partial surjection\0"
+  "z notation finite surjection\0"
+  "z notation partial injection\0"
+  "z notation finite injection\0"
+  "bijective mapping\0"
+  "z notation bijection\0"
+  "z notation surjective injection\0"
+  "z notation finite surjective injection\0"
+  "vertical bowtie\0"
+  "white framus\0"
+  "ISOtech entity &iinfin;\0"
+  "D'Alembertian\0"
+  "tautological equivalent\0"
+  "colon right arrow\0"
+  "z notation schema hiding\0"
+  "merge\0"
+  "upper integral\0"
+  "lower integral\0"
+  "large bowtie\0"
+  "positive difference or sum\0"
+  "sum or positive difference\0"
+  "nim-addition\0"
+  "z notation bag subtraction\0"
+  "identical and parallel to\0"
+  "absolute continuity\0"
+  "not independent\0"
+  "independent\0"
+  "ordinarily satisfies\0"
+  "independence\0"
+  "necessarily satisfies\0"
+  "interleave\0"
+  "Dijkstra choice\0"
+  "n-ary Dijkstra choice\0"
+  "Tuareg yab\0"
+  "Tuareg yaw\0"
+  "Adrar yaj\0"
+  "harpoon yaz\0"
+  "tamatart\0"
+  "diple periestigmene\0"
+  "left abstract syntax bracket\0"
+  "right abstract syntax bracket\0"
+  "single dot Bangjeom\0"
+  "double dot Bangjeom\0"
+  "SHI\0"
+  "JI (not unique)\0"
+  "CHI\0"
+  "SMALL TSU\0"
+  "TSU\0"
+  "ZU (not unique)\0"
+  "FU\0"
+  "cae om\0"
+  "tateten\0"
+  "kaeriten re\0"
+  "maru-iti, symbol of unification\0"
+  "kabusiki-gaisya\0"
+  "halant, virama\0"
+  "BYTE ORDER MARK (BOM), ZWNBSP\0"
+  "ideogram B129 flour\0"
+  "ideogram B109 ox\0"
+  "ideogram B030 figs\0"
+  "ideogram B106 sheep\0"
+  "ideogram B031 flax\0"
+  "ideogram B108 pig\0"
+  "ideogram B144 saffron\0"
+  "ideogram B107 goat\0"
+  "fruit\0"
+  "saffron\0"
+  "ointment\0"
+  "honey\0"
+  "cheese\0"
+  "pugio\0"
+  "\"gupio\", inverted sword\0"
+  "halant\0"
+  "double whole-rest, breve rest\0"
+  "semibreve rest\0"
+  "minim rest\0"
+  "crochet rest\0"
+  "Greek instrumental notation symbol-3\0"
+  "Greek instrumental notation symbol-21\0"
+  "Greek instrumental notation symbol-9\0"
+  "Greek instrumental notation symbol-44\0"
+  "Greek instrumental notation symbol-41\0"
+  "Greek instrumental notation symbol-35\0"
+  "Greek instrumental notation symbol-15\0"
+  "Greek instrumental notation symbol-28\0"
+  "Greek instrumental notation symbol-20\0"
+  "ren\0"
+  "tian ren\0"
+  "di ren\0"
+  "ren tian\0"
+  "ren di\0"
+  "ren ren\0"
+  "power set\0"
+  "New Testament majority text\0"
+  "Septuagint, Greek Old Testament\0"
+  "\\imath\0"
+  "\\jmath\0"
+  ;
+
+static const UnicharStringIndex names_list_equals[] = 
 {
-  { 0x0000, "NULL" },
-  { 0x0001, "START OF HEADING" },
-  { 0x0002, "START OF TEXT" },
-  { 0x0003, "END OF TEXT" },
-  { 0x0004, "END OF TRANSMISSION" },
-  { 0x0005, "ENQUIRY" },
-  { 0x0006, "ACKNOWLEDGE" },
-  { 0x0007, "BELL" },
-  { 0x0008, "BACKSPACE" },
-  { 0x0009, "CHARACTER TABULATION" },
-  { 0x0009, "horizontal tabulation (HT), tab" },
-  { 0x000A, "LINE FEED (LF)" },
-  { 0x000A, "new line (NL), end of line (EOL)" },
-  { 0x000B, "LINE TABULATION" },
-  { 0x000B, "vertical tabulation (VT)" },
-  { 0x000C, "FORM FEED (FF)" },
-  { 0x000D, "CARRIAGE RETURN (CR)" },
-  { 0x000E, "SHIFT OUT" },
-  { 0x000F, "SHIFT IN" },
-  { 0x0010, "DATA LINK ESCAPE" },
-  { 0x0011, "DEVICE CONTROL ONE" },
-  { 0x0012, "DEVICE CONTROL TWO" },
-  { 0x0013, "DEVICE CONTROL THREE" },
-  { 0x0014, "DEVICE CONTROL FOUR" },
-  { 0x0015, "NEGATIVE ACKNOWLEDGE" },
-  { 0x0016, "SYNCHRONOUS IDLE" },
-  { 0x0017, "END OF TRANSMISSION BLOCK" },
-  { 0x0018, "CANCEL" },
-  { 0x0019, "END OF MEDIUM" },
-  { 0x001A, "SUBSTITUTE" },
-  { 0x001B, "ESCAPE" },
-  { 0x001C, "INFORMATION SEPARATOR FOUR" },
-  { 0x001C, "file separator (FS)" },
-  { 0x001D, "INFORMATION SEPARATOR THREE" },
-  { 0x001D, "group separator (GS)" },
-  { 0x001E, "INFORMATION SEPARATOR TWO" },
-  { 0x001E, "record separator (RS)" },
-  { 0x001F, "INFORMATION SEPARATOR ONE" },
-  { 0x001F, "unit separator (US)" },
-  { 0x0021, "factorial" },
-  { 0x0021, "bang" },
-  { 0x0023, "pound sign, hash, crosshatch, octothorpe" },
-  { 0x0024, "milreis, escudo" },
-  { 0x0027, "apostrophe-quote (1.0)" },
-  { 0x0027, "APL quote" },
-  { 0x0028, "opening parenthesis (1.0)" },
-  { 0x0029, "closing parenthesis (1.0)" },
-  { 0x002A, "star (on phone keypads)" },
-  { 0x002C, "decimal separator" },
-  { 0x002D, "hyphen or minus sign" },
-  { 0x002E, "period, dot, decimal point" },
-  { 0x002F, "slash, virgule" },
-  { 0x0040, "at sign" },
-  { 0x005B, "opening square bracket (1.0)" },
-  { 0x005C, "backslash" },
-  { 0x005D, "closing square bracket (1.0)" },
-  { 0x005F, "spacing underscore (1.0)" },
-  { 0x007B, "opening curly bracket (1.0)" },
-  { 0x007B, "left brace" },
-  { 0x007C, "vertical bar" },
-  { 0x007D, "closing curly bracket (1.0)" },
-  { 0x007D, "right brace" },
-  { 0x007F, "DELETE" },
-  { 0x0082, "BREAK PERMITTED HERE" },
-  { 0x0083, "NO BREAK HERE" },
-  { 0x0085, "NEXT LINE (NEL)" },
-  { 0x0086, "START OF SELECTED AREA" },
-  { 0x0087, "END OF SELECTED AREA" },
-  { 0x0088, "CHARACTER TABULATION SET" },
-  { 0x0089, "CHARACTER TABULATION WITH JUSTIFICATION" },
-  { 0x008A, "LINE TABULATION SET" },
-  { 0x008B, "PARTIAL LINE FORWARD" },
-  { 0x008C, "PARTIAL LINE BACKWARD" },
-  { 0x008D, "REVERSE LINE FEED" },
-  { 0x008E, "SINGLE SHIFT TWO" },
-  { 0x008F, "SINGLE SHIFT THREE" },
-  { 0x0090, "DEVICE CONTROL STRING" },
-  { 0x0091, "PRIVATE USE ONE" },
-  { 0x0092, "PRIVATE USE TWO" },
-  { 0x0093, "SET TRANSMIT STATE" },
-  { 0x0094, "CANCEL CHARACTER" },
-  { 0x0095, "MESSAGE WAITING" },
-  { 0x0096, "START OF GUARDED AREA" },
-  { 0x0097, "END OF GUARDED AREA" },
-  { 0x0098, "START OF STRING" },
-  { 0x009A, "SINGLE CHARACTER INTRODUCER" },
-  { 0x009B, "CONTROL SEQUENCE INTRODUCER" },
-  { 0x009C, "STRING TERMINATOR" },
-  { 0x009D, "OPERATING SYSTEM COMMAND" },
-  { 0x009E, "PRIVACY MESSAGE" },
-  { 0x009F, "APPLICATION PROGRAM COMMAND" },
-  { 0x00A3, "pound sterling, Irish punt, Italian lira, Turkish lira, etc." },
-  { 0x00A5, "yuan sign" },
-  { 0x00A6, "broken vertical bar (1.0)" },
-  { 0x00A6, "parted rule (in typography)" },
-  { 0x00AB, "left guillemet" },
-  { 0x00AB, "chevrons (in typography)" },
-  { 0x00AC, "angled dash (in typography)" },
-  { 0x00AD, "discretionary hyphen" },
-  { 0x00AE, "registered trade mark sign (1.0)" },
-  { 0x00AF, "overline, APL overbar" },
-  { 0x00B2, "squared" },
-  { 0x00B3, "cubed" },
-  { 0x00B6, "paragraph sign" },
-  { 0x00B7, "midpoint (in typography)" },
-  { 0x00B7, "Georgian comma" },
-  { 0x00B7, "Greek middle dot (ano teleia)" },
-  { 0x00BB, "right guillemet" },
-  { 0x00BF, "turned question mark" },
-  { 0x00C6, "latin capital ligature ae (1.0)" },
-  { 0x00D7, "z notation Cartesian product" },
-  { 0x00D8, "o slash" },
-  { 0x00DF, "Eszett" },
-  { 0x00E6, "latin small ligature ae (1.0)" },
-  { 0x00E6, "ash (from Old English æsc)" },
-  { 0x00F8, "o slash" },
-  { 0x0130, "i dot" },
-  { 0x0149, "latin small letter apostrophe n (1.0)" },
-  { 0x0153, "ethel (from Old English eðel)" },
-  { 0x018D, "reversed Polish-hook o" },
-  { 0x018E, "turned e" },
-  { 0x0190, "epsilon" },
-  { 0x0192, "script f" },
-  { 0x0192, "Florin currency symbol (Netherlands)" },
-  { 0x0192, "function symbol" },
-  { 0x0197, "barred i, i bar" },
-  { 0x019A, "barred l" },
-  { 0x019B, "barred lambda, lambda bar" },
-  { 0x019F, "barred o, o bar" },
-  { 0x01B2, "script v" },
-  { 0x01B6, "barred z, z bar" },
-  { 0x01BF, "wen" },
-  { 0x01C0, "pipe" },
-  { 0x01C1, "double pipe" },
-  { 0x01C2, "double-barred pipe" },
-  { 0x01C3, "latin letter exclamation mark (1.0)" },
-  { 0x01F7, "wen" },
-  { 0x0251, "latin small letter script a (1.0)" },
-  { 0x0256, "d retroflex hook" },
-  { 0x025B, "epsilon" },
-  { 0x025E, "closed reversed epsilon" },
-  { 0x0264, "latin small letter baby gamma (1.0)" },
-  { 0x0268, "barred i, i bar" },
-  { 0x0275, "o bar" },
-  { 0x027F, "long leg turned iota (a misnomer)" },
-  { 0x028B, "latin small letter script v (1.0)" },
-  { 0x028C, "caret, wedge" },
-  { 0x0292, "dram" },
-  { 0x0295, "reversed glottal stop" },
-  { 0x0298, "bullseye" },
-  { 0x029A, "closed epsilon" },
-  { 0x02BC, "apostrophe" },
-  { 0x02C7, "hacek" },
-  { 0x0300, "Greek varia" },
-  { 0x0301, "stress mark" },
-  { 0x0301, "Greek oxia, tonos" },
-  { 0x0302, "hat" },
-  { 0x0304, "long" },
-  { 0x0305, "overscore, vinculum" },
-  { 0x0306, "short" },
-  { 0x0306, "Greek vrachy" },
-  { 0x0307, "derivative (Newtonian notation)" },
-  { 0x0308, "double dot above, umlaut" },
-  { 0x0308, "Greek dialytika" },
-  { 0x0308, "double derivative" },
-  { 0x0309, "hoi" },
-  { 0x030C, "hacek, V above" },
-  { 0x0312, "cedilla above" },
-  { 0x0313, "Greek psili, smooth breathing mark" },
-  { 0x0314, "Greek dasia, rough breathing mark" },
-  { 0x0323, "nang" },
-  { 0x0328, "nasal hook" },
-  { 0x0332, "underline, underscore" },
-  { 0x0333, "double underline, double underscore" },
-  { 0x0337, "short slash overlay" },
-  { 0x0338, "long slash overlay" },
-  { 0x0345, "greek non-spacing iota below (1.0)" },
-  { 0x0345, "iota subscript" },
-  { 0x035C, "ligature tie below, papyrological hyphen" },
-  { 0x0361, "ligature tie" },
-  { 0x0374, "dexia keraia" },
-  { 0x0375, "aristeri keraia" },
-  { 0x037A, "iota subscript" },
-  { 0x037E, "erotimatiko" },
-  { 0x0393, "gamma function" },
-  { 0x0399, "iota adscript" },
-  { 0x03BB, "lambda" },
-  { 0x03C2, "stigma (the Modern Greek name for this letterform)" },
-  { 0x03D0, "curled beta" },
-  { 0x03D1, "script theta" },
-  { 0x03D6, "omega pi" },
-  { 0x03F0, "script kappa" },
-  { 0x03F1, "tailed rho" },
-  { 0x03F2, "greek small letter lunate sigma (1.0)" },
-  { 0x03F5, "straight epsilon" },
-  { 0x03F6, "reversed straight epsilon" },
-  { 0x03FD, "antisigma" },
-  { 0x03FE, "sigma periestigmenon" },
-  { 0x03FF, "antisigma periestigmenon" },
-  { 0x0454, "Old Cyrillic yest" },
-  { 0x0455, "Old Cyrillic zelo" },
-  { 0x0456, "Old Cyrillic i" },
-  { 0x045B, "Old Cyrillic derv" },
-  { 0x055A, "armenian modifier letter right half ring (1.0)" },
-  { 0x055B, "shesht" },
-  { 0x055C, "batsaganchakan nshan" },
-  { 0x055D, "bowt" },
-  { 0x055E, "hartsakan nshan" },
-  { 0x055F, "patiw" },
-  { 0x0589, "vertsaket" },
-  { 0x058A, "yentamna" },
-  { 0x0591, "atnah" },
-  { 0x0592, "segolta" },
-  { 0x0596, "tarha, me'ayla ~ mayla" },
-  { 0x0598, "tsinorit, zinorit; tsinor, zinor" },
-  { 0x059C, "teres" },
-  { 0x059F, "pazer gadol" },
-  { 0x05A1, "pazer qatan" },
-  { 0x05A5, "yored" },
-  { 0x05A8, "azla" },
-  { 0x05AA, "galgal" },
-  { 0x05AE, "tsinor; zarqa" },
-  { 0x05BC, "shuruq" },
-  { 0x05BD, "siluq" },
-  { 0x05C0, "legarmeh" },
-  { 0x05D0, "aleph" },
-  { 0x05E6, "zade" },
-  { 0x05F0, "tsvey vovn" },
-  { 0x05F2, "tsvey yudn" },
-  { 0x0640, "kashida" },
-  { 0x06C0, "arabic letter hamzah on ha (1.0)" },
-  { 0x06C0, "izafet" },
-  { 0x06E1, "Arabic jazm" },
-  { 0x070F, "SAM" },
-  { 0x0901, "anunasika" },
-  { 0x0902, "bindu" },
-  { 0x0945, "candra" },
-  { 0x094D, "halant (the preferred Hindi name)" },
-  { 0x0964, "purna viram" },
-  { 0x0965, "deergh viram" },
-  { 0x09AC, "Bengali va, wa" },
-  { 0x09CD, "hasant (Bengali term for halant)" },
-  { 0x09F1, "bengali letter va with lower diagonal (1.0)" },
-  { 0x0A05, "aira" },
-  { 0x0A3C, "pairin bindi" },
-  { 0x0A3E, "kanna" },
-  { 0x0A3F, "sihari" },
-  { 0x0A40, "bihari" },
-  { 0x0A41, "aunkar" },
-  { 0x0A42, "dulainkar" },
-  { 0x0A47, "lanvan" },
-  { 0x0A48, "dulanvan" },
-  { 0x0A4B, "hora" },
-  { 0x0A4C, "kanaura" },
-  { 0x0B2F, "ja" },
-  { 0x0B5C, "dda" },
-  { 0x0B5D, "ddha" },
-  { 0x0B5F, "ya" },
-  { 0x0B83, "aytham" },
-  { 0x0C02, "sunna" },
-  { 0x0C4D, "halant (the preferred name)" },
-  { 0x0D1A, "cha" },
-  { 0x0D1B, "chha" },
-  { 0x0D1E, "nha" },
-  { 0x0D1F, "ta" },
-  { 0x0D20, "tta" },
-  { 0x0D21, "hard da" },
-  { 0x0D22, "hard dda" },
-  { 0x0D23, "hard na" },
-  { 0x0D24, "tha" },
-  { 0x0D25, "ttha" },
-  { 0x0D26, "soft da" },
-  { 0x0D27, "soft dda" },
-  { 0x0D34, "zha" },
-  { 0x0D36, "soft sha" },
-  { 0x0D37, "sha" },
-  { 0x0D4D, "chandrakkala (the preferred name)" },
-  { 0x0D4D, "vowel half-u" },
-  { 0x0D82, "anusvara" },
-  { 0x0D83, "visarga" },
-  { 0x0D85, "sinhala letter a" },
-  { 0x0D86, "sinhala letter aa" },
-  { 0x0D87, "sinhala letter ae" },
-  { 0x0D88, "sinhala letter aae" },
-  { 0x0D89, "sinhala letter i" },
-  { 0x0D8A, "sinhala letter ii" },
-  { 0x0D8B, "sinhala letter u" },
-  { 0x0D8C, "sinhala letter uu" },
-  { 0x0D8D, "sinhala letter vocalic r" },
-  { 0x0D8E, "sinhala letter vocalic rr" },
-  { 0x0D8F, "sinhala letter vocalic l" },
-  { 0x0D90, "sinhala letter vocalic ll" },
-  { 0x0D91, "sinhala letter e" },
-  { 0x0D92, "sinhala letter ee" },
-  { 0x0D93, "sinhala letter ai" },
-  { 0x0D94, "sinhala letter o" },
-  { 0x0D95, "sinhala letter oo" },
-  { 0x0D96, "sinhala letter au" },
-  { 0x0D9A, "sinhala letter ka" },
-  { 0x0D9B, "sinhala letter kha" },
-  { 0x0D9C, "sinhala letter ga" },
-  { 0x0D9D, "sinhala letter gha" },
-  { 0x0D9E, "sinhala letter nga" },
-  { 0x0D9F, "sinhala letter nnga" },
-  { 0x0DA0, "sinhala letter ca" },
-  { 0x0DA1, "sinhala letter cha" },
-  { 0x0DA2, "sinhala letter ja" },
-  { 0x0DA3, "sinhala letter jha" },
-  { 0x0DA4, "sinhala letter nya" },
-  { 0x0DA5, "sinhala letter jnya" },
-  { 0x0DA6, "sinhala letter nyja" },
-  { 0x0DA7, "sinhala letter tta" },
-  { 0x0DA8, "sinhala letter ttha" },
-  { 0x0DA9, "sinhala letter dda" },
-  { 0x0DAA, "sinhala letter ddha" },
-  { 0x0DAB, "sinhala letter nna" },
-  { 0x0DAC, "sinhala letter nndda" },
-  { 0x0DAD, "sinhala letter ta" },
-  { 0x0DAE, "sinhala letter tha" },
-  { 0x0DAF, "sinhala letter da" },
-  { 0x0DB0, "sinhala letter dha" },
-  { 0x0DB1, "sinhala letter na" },
-  { 0x0DB3, "sinhala letter nda" },
-  { 0x0DB4, "sinhala letter pa" },
-  { 0x0DB5, "sinhala letter pha" },
-  { 0x0DB6, "sinhala letter ba" },
-  { 0x0DB7, "sinhala letter bha" },
-  { 0x0DB8, "sinhala letter ma" },
-  { 0x0DB9, "sinhala letter mba" },
-  { 0x0DBA, "sinhala letter ya" },
-  { 0x0DBB, "sinhala letter ra" },
-  { 0x0DBD, "sinhala letter la" },
-  { 0x0DC0, "sinhala letter va" },
-  { 0x0DC1, "sinhala letter sha" },
-  { 0x0DC2, "sinhala letter ssa" },
-  { 0x0DC3, "sinhala letter sa" },
-  { 0x0DC4, "sinhala letter ha" },
-  { 0x0DC5, "sinhala letter lla" },
-  { 0x0DC6, "sinhala letter fa" },
-  { 0x0DCA, "virama" },
-  { 0x0DCF, "sinhala vowel sign aa" },
-  { 0x0DD0, "sinhala vowel sign ae" },
-  { 0x0DD1, "sinhala vowel sign aae" },
-  { 0x0DD2, "sinhala vowel sign i" },
-  { 0x0DD3, "sinhala vowel sign ii" },
-  { 0x0DD4, "sinhala vowel sign u" },
-  { 0x0DD6, "sinhala vowel sign uu" },
-  { 0x0DD8, "sinhala vowel sign vocalic r" },
-  { 0x0DD9, "sinhala vowel sign e" },
-  { 0x0DDA, "sinhala vowel sign ee" },
-  { 0x0DDB, "sinhala vowel sign ai" },
-  { 0x0DDC, "sinhala vowel sign o" },
-  { 0x0DDD, "sinhala vowel sign oo" },
-  { 0x0DDE, "sinhala vowel sign au" },
-  { 0x0DDF, "sinhala vowel sign vocalic l" },
-  { 0x0DF2, "sinhala vowel sign vocalic rr" },
-  { 0x0DF3, "sinhala vowel sign vocalic ll" },
-  { 0x0E2E, "ho nok huk" },
-  { 0x0E2F, "paiyan noi" },
-  { 0x0E37, "sara uue" },
-  { 0x0E43, "sara ai mai muan" },
-  { 0x0E44, "sara ai mai malai" },
-  { 0x0E45, "lakkhang yao" },
-  { 0x0E46, "mai yamok" },
-  { 0x0E47, "mai taikhu" },
-  { 0x0E4D, "nikkhahit" },
-  { 0x0E81, "ko kay" },
-  { 0x0E82, "kho khay" },
-  { 0x0E84, "kho khuay" },
-  { 0x0E87, "ngo ngu, ngo ngua" },
-  { 0x0E88, "co cok, co cua" },
-  { 0x0E8A, "so sang" },
-  { 0x0E8D, "nyo nyung" },
-  { 0x0E94, "do dek" },
-  { 0x0E95, "to ta" },
-  { 0x0E96, "tho thong" },
-  { 0x0E97, "tho thung" },
-  { 0x0E99, "no nok" },
-  { 0x0E9A, "bo be, bo bet" },
-  { 0x0E9B, "po pa" },
-  { 0x0E9C, "pho pheng" },
-  { 0x0E9D, "fo fa" },
-  { 0x0E9E, "pho phu" },
-  { 0x0EA1, "mo mew, mo ma" },
-  { 0x0EA2, "yo ya" },
-  { 0x0EA3, "ro rot" },
-  { 0x0EA5, "lo ling" },
-  { 0x0EA7, "wo wi" },
-  { 0x0EAA, "so sya" },
-  { 0x0EAB, "ho hay, ho han" },
-  { 0x0EAD, "o o" },
-  { 0x0EAE, "ho hya, ho hyan" },
-  { 0x0EBB, "mai kong" },
-  { 0x0EBD, "nyo fyang" },
-  { 0x0EC3, "mai muan" },
-  { 0x0EC4, "mai may" },
-  { 0x0F65, "reversed sha" },
-  { 0x0F71, "a-chung" },
-  { 0x0F7E, "anusvara" },
-  { 0x0F7F, "visarga" },
-  { 0x0F84, "srog med" },
-  { 0x0FAD, "wa-zur, wa-btags" },
-  { 0x0FB0, "a-chung" },
-  { 0x0FB1, "ya-btags" },
-  { 0x0FB2, "ra-btags" },
-  { 0x0FB5, "reversed subjoined sha" },
-  { 0x1037, "aukmyit" },
-  { 0x1039, "killer (when rendered visibly)" },
-  { 0x1100, "G" },
-  { 0x1101, "GG" },
-  { 0x1102, "N" },
-  { 0x1103, "D" },
-  { 0x1104, "DD" },
-  { 0x1105, "R" },
-  { 0x1106, "M" },
-  { 0x1107, "B" },
-  { 0x1108, "BB" },
-  { 0x1109, "S" },
-  { 0x110A, "SS" },
-  { 0x110C, "J" },
-  { 0x110D, "JJ" },
-  { 0x110E, "C" },
-  { 0x110F, "K" },
-  { 0x1110, "T" },
-  { 0x1111, "P" },
-  { 0x1112, "H" },
-  { 0x1161, "A" },
-  { 0x1162, "AE" },
-  { 0x1163, "YA" },
-  { 0x1164, "YAE" },
-  { 0x1165, "EO" },
-  { 0x1166, "E" },
-  { 0x1167, "YEO" },
-  { 0x1168, "YE" },
-  { 0x1169, "O" },
-  { 0x116A, "WA" },
-  { 0x116B, "WAE" },
-  { 0x116C, "OE" },
-  { 0x116D, "YO" },
-  { 0x116E, "U" },
-  { 0x116F, "WEO" },
-  { 0x1170, "WE" },
-  { 0x1171, "WI" },
-  { 0x1172, "YU" },
-  { 0x1173, "EU" },
-  { 0x1174, "YI" },
-  { 0x1175, "I" },
-  { 0x11A8, "G" },
-  { 0x11A9, "GG" },
-  { 0x11AA, "GS" },
-  { 0x11AB, "N" },
-  { 0x11AC, "NJ" },
-  { 0x11AD, "NH" },
-  { 0x11AE, "D" },
-  { 0x11AF, "L" },
-  { 0x11B0, "LG" },
-  { 0x11B1, "LM" },
-  { 0x11B2, "LB" },
-  { 0x11B3, "LS" },
-  { 0x11B4, "LT" },
-  { 0x11B5, "LP" },
-  { 0x11B6, "LH" },
-  { 0x11B7, "M" },
-  { 0x11B8, "B" },
-  { 0x11B9, "BS" },
-  { 0x11BA, "S" },
-  { 0x11BB, "SS" },
-  { 0x11BC, "NG" },
-  { 0x11BD, "J" },
-  { 0x11BE, "C" },
-  { 0x11BF, "K" },
-  { 0x11C0, "T" },
-  { 0x11C1, "P" },
-  { 0x11C2, "H" },
-  { 0x17C6, "srak am" },
-  { 0x17C6, "anusvara" },
-  { 0x17C7, "srak ah" },
-  { 0x17C7, "visarga" },
-  { 0x1B00, "ardhacandra" },
-  { 0x1B01, "candrabindu" },
-  { 0x1B02, "anusvara" },
-  { 0x1B03, "repha" },
-  { 0x1B04, "visarga" },
-  { 0x1B05, "a" },
-  { 0x1B06, "aa" },
-  { 0x1B07, "i" },
-  { 0x1B08, "ii" },
-  { 0x1B09, "u" },
-  { 0x1B0A, "uu" },
-  { 0x1B0B, "vocalic r" },
-  { 0x1B0C, "vocalic rr" },
-  { 0x1B0D, "vocalic l" },
-  { 0x1B0E, "vocalic ll" },
-  { 0x1B0F, "e" },
-  { 0x1B10, "ai" },
-  { 0x1B11, "o" },
-  { 0x1B12, "au" },
-  { 0x1B14, "kha" },
-  { 0x1B16, "gha" },
-  { 0x1B19, "cha" },
-  { 0x1B1B, "jha" },
-  { 0x1B1D, "tta" },
-  { 0x1B1E, "ttha" },
-  { 0x1B1F, "dda" },
-  { 0x1B20, "ddha" },
-  { 0x1B21, "nna" },
-  { 0x1B23, "tha" },
-  { 0x1B25, "dha" },
-  { 0x1B28, "pha" },
-  { 0x1B2A, "bha" },
-  { 0x1B30, "sha" },
-  { 0x1B31, "ssa" },
-  { 0x1B34, "nukta" },
-  { 0x1B35, "aa" },
-  { 0x1B36, "i" },
-  { 0x1B37, "ii" },
-  { 0x1B38, "u" },
-  { 0x1B39, "uu" },
-  { 0x1B3A, "vocalic r" },
-  { 0x1B3B, "vocalic rr" },
-  { 0x1B3C, "vocalic l" },
-  { 0x1B3D, "vocalic ll" },
-  { 0x1B3E, "e" },
-  { 0x1B3F, "ai" },
-  { 0x1B40, "o" },
-  { 0x1B41, "au" },
-  { 0x1B42, "ae" },
-  { 0x1B43, "oe" },
-  { 0x1B44, "virama" },
-  { 0x1B5A, "section" },
-  { 0x1B5B, "honorific section" },
-  { 0x1B5C, "punctuation ring" },
-  { 0x1B5D, "colon" },
-  { 0x1B5E, "danda" },
-  { 0x1B5F, "double danda" },
-  { 0x1B60, "line-breaking hyphen" },
-  { 0x2001, "mutton quad" },
-  { 0x2002, "nut" },
-  { 0x2003, "mutton" },
-  { 0x2004, "thick space" },
-  { 0x2005, "mid space" },
-  { 0x2015, "quotation dash" },
-  { 0x2018, "single turned comma quotation mark" },
-  { 0x2019, "single comma quotation mark" },
-  { 0x201A, "low single comma quotation mark" },
-  { 0x201B, "single reversed comma quotation mark" },
-  { 0x201C, "double turned comma quotation mark" },
-  { 0x201D, "double comma quotation mark" },
-  { 0x201E, "low double comma quotation mark" },
-  { 0x201F, "double reversed comma quotation mark" },
-  { 0x2020, "obelisk, obelus, long cross" },
-  { 0x2021, "diesis, double obelisk" },
-  { 0x2022, "black small circle" },
-  { 0x2026, "three dot leader" },
-  { 0x2030, "permille, per thousand" },
-  { 0x2031, "permyriad" },
-  { 0x2032, "minutes, feet" },
-  { 0x2033, "seconds, inches" },
-  { 0x2034, "lines (old measure, 1/12 of an inch)" },
-  { 0x2039, "left pointing single guillemet" },
-  { 0x203A, "right pointing single guillemet" },
-  { 0x203B, "Japanese kome" },
-  { 0x203B, "Urdu paragraph separator" },
-  { 0x203E, "spacing overscore" },
-  { 0x203F, "Greek enotikon" },
-  { 0x2040, "z notation sequence concatenation" },
-  { 0x2044, "solidus (in typography)" },
-  { 0x2052, "abzüglich (German), med avdrag av (Swedish), piska (Swedish, \"whip\")" },
-  { 0x2055, "phul, puspika" },
-  { 0x2059, "Greek pentonkion" },
-  { 0x2059, "quincunx" },
-  { 0x205D, "Epidaurean acrophonic symbol three" },
-  { 0x2063, "invisible comma" },
-  { 0x20DB, "third derivative" },
-  { 0x20DC, "fourth derivative" },
-  { 0x20DD, "JIS composition circle" },
-  { 0x20DD, "Cyrillic combining ten thousands sign" },
-  { 0x20E6, "z notation finite function diacritic" },
-  { 0x20E7, "actuarial bend" },
-  { 0x20E9, "contraction operator" },
-  { 0x20EB, "long double slash overlay" },
-  { 0x2102, "the set of complex numbers" },
-  { 0x2103, "degrees Centigrade" },
-  { 0x2104, "clone" },
-  { 0x210A, "real number symbol" },
-  { 0x210B, "Hamiltonian operator" },
-  { 0x210C, "Hilbert space" },
-  { 0x210E, "height, specific enthalpy, ..." },
-  { 0x2111, "imaginary part" },
-  { 0x2112, "Laplace transform" },
-  { 0x2113, "mathematical symbol 'ell'" },
-  { 0x2113, "liter (traditional symbol)" },
-  { 0x2114, "pounds" },
-  { 0x2115, "natural number" },
-  { 0x2117, "published" },
-  { 0x2117, "phonorecord sign" },
-  { 0x2118, "Weierstrass elliptic function" },
-  { 0x211A, "the set of rational numbers" },
-  { 0x211B, "Riemann Integral" },
-  { 0x211C, "real part" },
-  { 0x211D, "the set of real numbers" },
-  { 0x211E, "recipe" },
-  { 0x211E, "cross ratio" },
-  { 0x2124, "the set of integers" },
-  { 0x2127, "mho" },
-  { 0x212C, "Bernoulli function" },
-  { 0x212F, "error" },
-  { 0x212F, "natural exponent" },
-  { 0x2130, "emf (electromotive force)" },
-  { 0x2131, "Fourier transform" },
-  { 0x2132, "Claudian digamma inversum" },
-  { 0x2133, "M-matrix (physics)" },
-  { 0x2133, "German Mark currency symbol, before WWII" },
-  { 0x2134, "order, of inferior order to" },
-  { 0x2135, "first transfinite cardinal (countable)" },
-  { 0x2136, "second transfinite cardinal (the continuum)" },
-  { 0x2137, "third transfinite cardinal (functions of a real variable)" },
-  { 0x2138, "fourth transfinite cardinal" },
-  { 0x2141, "game" },
-  { 0x2183, "apostrophic C" },
-  { 0x2183, "Claudian antisigma" },
-  { 0x2192, "z notation total function" },
-  { 0x2194, "z notation relation" },
-  { 0x219E, "fast cursor left" },
-  { 0x219F, "fast cursor up" },
-  { 0x21A0, "z notation total surjection" },
-  { 0x21A0, "fast cursor right" },
-  { 0x21A1, "form feed" },
-  { 0x21A1, "fast cursor down" },
-  { 0x21A3, "z notation total injection" },
-  { 0x21A6, "z notation maplet" },
-  { 0x21A7, "depth symbol" },
-  { 0x21AF, "electrolysis" },
-  { 0x21B4, "line feed" },
-  { 0x21B8, "home" },
-  { 0x21B9, "tab with shift tab" },
-  { 0x21DE, "page up" },
-  { 0x21DF, "page down" },
-  { 0x21E4, "leftward tab" },
-  { 0x21E5, "rightward tab" },
-  { 0x21E7, "shift" },
-  { 0x21EA, "caps lock" },
-  { 0x21EB, "level 2 lock" },
-  { 0x21EC, "caps lock" },
-  { 0x21ED, "numerics lock" },
-  { 0x21EE, "level 3 select" },
-  { 0x21EF, "level 3 lock" },
-  { 0x21F0, "group lock" },
-  { 0x21F1, "home" },
-  { 0x21F2, "end" },
-  { 0x21F3, "scrolling" },
-  { 0x21F8, "z notation partial function" },
-  { 0x21F9, "z notation partial relation" },
-  { 0x21FB, "z notation finite function" },
-  { 0x21FC, "z notation finite relation" },
-  { 0x2200, "universal quantifier" },
-  { 0x2203, "existential quantifier" },
-  { 0x2205, "null set" },
-  { 0x2206, "Laplace operator" },
-  { 0x2206, "forward difference" },
-  { 0x2206, "symmetric difference of sets" },
-  { 0x2207, "backward difference" },
-  { 0x2207, "gradient, del" },
-  { 0x220B, "such that" },
-  { 0x220E, "q.e.d." },
-  { 0x220F, "product sign" },
-  { 0x2210, "coproduct sign" },
-  { 0x2211, "summation sign" },
-  { 0x2218, "composite function" },
-  { 0x2218, "APL jot" },
-  { 0x221A, "radical sign" },
-  { 0x2222, "angle arc" },
-  { 0x2223, "such that" },
-  { 0x2223, "APL stile" },
-  { 0x2227, "wedge, conjunction" },
-  { 0x2228, "vee, disjunction" },
-  { 0x2229, "cap, hat" },
-  { 0x222A, "cup" },
-  { 0x2238, "saturating subtraction" },
-  { 0x223C, "varies with (proportional to)" },
-  { 0x223C, "difference between" },
-  { 0x223C, "similar to" },
-  { 0x223C, "not" },
-  { 0x223C, "cycle" },
-  { 0x223C, "APL tilde" },
-  { 0x223D, "lazy S" },
-  { 0x223E, "most positive" },
-  { 0x223F, "alternating current" },
-  { 0x2248, "asymptotic to" },
-  { 0x2252, "nearly equals" },
-  { 0x2257, "approximately equal to" },
-  { 0x2259, "corresponds to" },
-  { 0x225C, "equiangular" },
-  { 0x225C, "equal to by definition" },
-  { 0x226C, "plaintiff, quantic" },
-  { 0x227A, "lower rank than" },
-  { 0x227B, "higher rank than" },
-  { 0x2282, "included in set" },
-  { 0x2283, "includes in set" },
-  { 0x228E, "z notation bag addition" },
-  { 0x2295, "direct sum" },
-  { 0x2295, "vector pointing into page" },
-  { 0x2296, "symmetric difference" },
-  { 0x2297, "tensor product" },
-  { 0x2297, "vector pointing into page" },
-  { 0x2299, "direct product" },
-  { 0x2299, "vector pointing out of page" },
-  { 0x22A2, "turnstile" },
-  { 0x22A2, "proves, implies, yields" },
-  { 0x22A2, "reducible" },
-  { 0x22A3, "reverse turnstile" },
-  { 0x22A3, "non-theorem, does not yield" },
-  { 0x22A4, "top" },
-  { 0x22A5, "base, bottom" },
-  { 0x22A6, "reduces to" },
-  { 0x22A8, "statement is true, valid" },
-  { 0x22A8, "is a tautology" },
-  { 0x22A8, "satisfies" },
-  { 0x22A8, "results in" },
-  { 0x22C2, "z notation generalised intersection" },
-  { 0x22C3, "z notation generalised union" },
-  { 0x22D4, "proper intersection" },
-  { 0x2308, "APL upstile" },
-  { 0x230A, "APL downstile" },
-  { 0x2310, "beginning of line" },
-  { 0x2311, "Kissen (pillow)" },
-  { 0x2318, "command key (1.0)" },
-  { 0x2319, "line marker" },
-  { 0x2324, "enter key" },
-  { 0x2326, "delete to the right key" },
-  { 0x2327, "clear key" },
-  { 0x232B, "delete to the left key" },
-  { 0x234A, "up tack underbar" },
-  { 0x234E, "up tack jot" },
-  { 0x2351, "down tack overbar" },
-  { 0x2355, "down tack jot" },
-  { 0x2361, "down tack diaeresis" },
-  { 0x2364, "hoot" },
-  { 0x2365, "holler" },
-  { 0x2368, "smirk" },
-  { 0x2385, "center" },
-  { 0x2388, "control" },
-  { 0x2389, "pause" },
-  { 0x238A, "interrupt" },
-  { 0x238B, "escape" },
-  { 0x23B0, "left moustache" },
-  { 0x23B1, "right moustache" },
-  { 0x2446, "transit" },
-  { 0x2448, "on us" },
-  { 0x2449, "dash" },
-  { 0x2500, "Videotex Mosaic DG 15" },
-  { 0x2502, "Videotex Mosaic DG 14" },
-  { 0x250C, "Videotex Mosaic DG 16" },
-  { 0x2510, "Videotex Mosaic DG 17" },
-  { 0x2514, "Videotex Mosaic DG 18" },
-  { 0x2518, "Videotex Mosaic DG 19" },
-  { 0x251C, "Videotex Mosaic DG 20" },
-  { 0x251D, "Videotex Mosaic DG 03" },
-  { 0x2524, "Videotex Mosaic DG 21" },
-  { 0x2525, "Videotex Mosaic DG 04" },
-  { 0x252C, "Videotex Mosaic DG 22" },
-  { 0x252F, "Videotex Mosaic DG 02" },
-  { 0x2534, "Videotex Mosaic DG 23" },
-  { 0x2537, "Videotex Mosaic DG 01" },
-  { 0x253C, "Videotex Mosaic DG 24" },
-  { 0x253F, "Videotex Mosaic DG 13" },
-  { 0x2588, "solid" },
-  { 0x25A0, "moding mark (in ideographic text)" },
-  { 0x25A1, "quadrature" },
-  { 0x25AE, "histogram marker" },
-  { 0x25B3, "trine" },
-  { 0x25B7, "z notation range restriction" },
-  { 0x25BB, "forward arrow indicator" },
-  { 0x25BD, "Hamilton operator" },
-  { 0x25C1, "z notation domain restriction" },
-  { 0x25C5, "backward arrow indicator" },
-  { 0x25C9, "tainome (Japanese, a kind of bullet)" },
-  { 0x25FB, "always (modal operator)" },
-  { 0x2600, "clear weather" },
-  { 0x2601, "cloudy weather" },
-  { 0x2602, "rainy weather" },
-  { 0x2603, "snowy weather" },
-  { 0x2613, "St. Andrew's Cross" },
-  { 0x2614, "showery weather" },
-  { 0x2615, "tea or coffee, depending on locale" },
-  { 0x261E, "fist (typographic term)" },
-  { 0x2620, "poison" },
-  { 0x2627, "Constantine's cross, Christogram" },
-  { 0x262B, "symbol of iran (1.0)" },
-  { 0x262C, "Gurmukhi khanda" },
-  { 0x2630, "qian2" },
-  { 0x2631, "dui4" },
-  { 0x2632, "li2" },
-  { 0x2633, "zhen4" },
-  { 0x2634, "xun4" },
-  { 0x2635, "kan3" },
-  { 0x2636, "gen4" },
-  { 0x2637, "kun1" },
-  { 0x263A, "have a nice day!" },
-  { 0x263C, "compass" },
-  { 0x2640, "Venus" },
-  { 0x2642, "Mars" },
-  { 0x264D, "minim (alternate glyph)" },
-  { 0x264F, "minim, drop" },
-  { 0x2665, "valentine" },
-  { 0x266F, "z notation infix bag count" },
-  { 0x2692, "mining, working day (in timetables)" },
-  { 0x2693, "nautical term, harbor (on maps)" },
-  { 0x2694, "military term, battleground (on maps), killed in action" },
-  { 0x2695, "medical term" },
-  { 0x2696, "legal term, jurisprudence" },
-  { 0x2697, "chemical term, chemistry" },
-  { 0x2698, "botanical term" },
-  { 0x2699, "technology, tools" },
-  { 0x269B, "nuclear installation (on maps)" },
-  { 0x26A2, "lesbianism" },
-  { 0x26A3, "male homosexuality" },
-  { 0x26A4, "bisexuality" },
-  { 0x26A5, "transgendered sexuality" },
-  { 0x26A5, "hermaphrodite (in entomology)" },
-  { 0x26A6, "transgendered sexuality" },
-  { 0x26A7, "transgendered sexuality" },
-  { 0x26A8, "ferrous iron sulphate (alchemy and older chemistry)" },
-  { 0x26A9, "magnesium (alchemy and older chemistry)" },
-  { 0x26AA, "asexuality, sexless, genderless" },
-  { 0x26AA, "engaged, betrothed" },
-  { 0x26AC, "engaged, betrothed (genealogy)" },
-  { 0x26B0, "buried (genealogy)" },
-  { 0x26B1, "cremated (genealogy)" },
-  { 0x2736, "sextile" },
-  { 0x273A, "starburst" },
-  { 0x2749, "jack" },
-  { 0x274B, "turbofan" },
-  { 0x2766, "Aldus leaf" },
-  { 0x2767, "hedera, ivy leaf" },
-  { 0x27C2, "orthogonal to" },
-  { 0x27D3, "pullback" },
-  { 0x27D4, "pushout" },
-  { 0x27DF, "radial component" },
-  { 0x27E1, "never (modal operator)" },
-  { 0x27E2, "was never (modal operator)" },
-  { 0x27E3, "will never be (modal operator)" },
-  { 0x27E4, "was always (modal operator)" },
-  { 0x27E5, "will always be (modal operator)" },
-  { 0x27E6, "z notation left bag bracket" },
-  { 0x27E7, "z notation right bag bracket" },
-  { 0x27E8, "bra" },
-  { 0x27E8, "z notation left sequence bracket" },
-  { 0x27E9, "ket" },
-  { 0x27E9, "z notation right sequence bracket" },
-  { 0x27EA, "z notation left chevron bracket" },
-  { 0x27EB, "z notation right chevron bracket" },
-  { 0x27FB, "maps from" },
-  { 0x27FC, "maps to" },
-  { 0x2900, "z notation partial surjection" },
-  { 0x2901, "z notation finite surjection" },
-  { 0x2905, "maps to" },
-  { 0x2906, "maps from" },
-  { 0x2907, "maps to" },
-  { 0x2914, "z notation partial injection" },
-  { 0x2915, "z notation finite injection" },
-  { 0x2916, "bijective mapping" },
-  { 0x2916, "z notation bijection" },
-  { 0x2917, "z notation surjective injection" },
-  { 0x2918, "z notation finite surjective injection" },
-  { 0x29D6, "vertical bowtie" },
-  { 0x29D6, "white framus" },
-  { 0x29DC, "ISOtech entity &iinfin;" },
-  { 0x29E0, "D'Alembertian" },
-  { 0x29E6, "tautological equivalent" },
-  { 0x29F4, "colon right arrow" },
-  { 0x29F9, "z notation schema hiding" },
-  { 0x2A07, "merge" },
-  { 0x2A1B, "upper integral" },
-  { 0x2A1C, "lower integral" },
-  { 0x2A1D, "large bowtie" },
-  { 0x2A24, "positive difference or sum" },
-  { 0x2A26, "sum or positive difference" },
-  { 0x2A27, "nim-addition" },
-  { 0x2A41, "z notation bag subtraction" },
-  { 0x2A68, "identical and parallel to" },
-  { 0x2AA1, "absolute continuity" },
-  { 0x2ADC, "not independent" },
-  { 0x2ADD, "independent" },
-  { 0x2AE2, "ordinarily satisfies" },
-  { 0x2AEB, "independence" },
-  { 0x2AF1, "necessarily satisfies" },
-  { 0x2AF4, "interleave" },
-  { 0x2AFE, "Dijkstra choice" },
-  { 0x2AFF, "n-ary Dijkstra choice" },
-  { 0x2D40, "Tuareg yab" },
-  { 0x2D53, "Tuareg yaw" },
-  { 0x2D58, "Adrar yaj" },
-  { 0x2D64, "harpoon yaz" },
-  { 0x2D6F, "tamatart" },
-  { 0x2E16, "diple periestigmene" },
-  { 0x301A, "left abstract syntax bracket" },
-  { 0x301B, "right abstract syntax bracket" },
-  { 0x302E, "single dot Bangjeom" },
-  { 0x302F, "double dot Bangjeom" },
-  { 0x3057, "SHI" },
-  { 0x3058, "JI (not unique)" },
-  { 0x3061, "CHI" },
-  { 0x3062, "JI (not unique)" },
-  { 0x3063, "SMALL TSU" },
-  { 0x3064, "TSU" },
-  { 0x3065, "ZU (not unique)" },
-  { 0x3075, "FU" },
-  { 0x30B7, "SHI" },
-  { 0x30B8, "JI (not unique)" },
-  { 0x30C1, "CHI" },
-  { 0x30C2, "JI (not unique)" },
-  { 0x30C3, "SMALL TSU" },
-  { 0x30C4, "TSU" },
-  { 0x30C5, "ZU (not unique)" },
-  { 0x30D5, "FU" },
-  { 0x3164, "cae om" },
-  { 0x3190, "tateten" },
-  { 0x3191, "kaeriten re" },
-  { 0x3280, "maru-iti, symbol of unification" },
-  { 0x337F, "kabusiki-gaisya" },
-  { 0xA806, "halant, virama" },
-  { 0xFEFF, "BYTE ORDER MARK (BOM), ZWNBSP" },
-  { 0x1000E, "ideogram B129 flour" },
-  { 0x10018, "ideogram B109 ox" },
-  { 0x1001B, "ideogram B030 figs" },
-  { 0x10025, "ideogram B106 sheep" },
-  { 0x1002D, "ideogram B031 flax" },
-  { 0x10042, "ideogram B108 pig" },
-  { 0x10049, "ideogram B144 saffron" },
-  { 0x10052, "ideogram B107 goat" },
-  { 0x10093, "fruit" },
-  { 0x10094, "saffron" },
-  { 0x10098, "ointment" },
-  { 0x10099, "honey" },
-  { 0x100A4, "cheese" },
-  { 0x100C9, "pugio" },
-  { 0x100CB, "\"gupio\", inverted sword" },
-  { 0x10A3F, "halant" },
-  { 0x1D13A, "double whole-rest, breve rest" },
-  { 0x1D13B, "semibreve rest" },
-  { 0x1D13C, "minim rest" },
-  { 0x1D13D, "crochet rest" },
-  { 0x1D202, "Greek instrumental notation symbol-3" },
-  { 0x1D205, "Greek instrumental notation symbol-21" },
-  { 0x1D206, "Greek instrumental notation symbol-9" },
-  { 0x1D208, "Greek instrumental notation symbol-44" },
-  { 0x1D20D, "Greek instrumental notation symbol-41" },
-  { 0x1D20E, "Greek instrumental notation symbol-35" },
-  { 0x1D211, "Greek instrumental notation symbol-15" },
-  { 0x1D213, "Greek instrumental notation symbol-28" },
-  { 0x1D21C, "Greek instrumental notation symbol-20" },
-  { 0x1D300, "ren" },
-  { 0x1D301, "tian ren" },
-  { 0x1D302, "di ren" },
-  { 0x1D303, "ren tian" },
-  { 0x1D304, "ren di" },
-  { 0x1D305, "ren ren" },
-  { 0x1D4AB, "power set" },
-  { 0x1D510, "New Testament majority text" },
-  { 0x1D516, "Septuagint, Greek Old Testament" },
-  { 0x1D6A4, "\\imath" },
-  { 0x1D6A5, "\\jmath" },
-  { (gunichar)(-1), 0 }
+  { 0x0000, 0 },
+  { 0x0001, 5 },
+  { 0x0002, 22 },
+  { 0x0003, 36 },
+  { 0x0004, 48 },
+  { 0x0005, 68 },
+  { 0x0006, 76 },
+  { 0x0007, 88 },
+  { 0x0008, 93 },
+  { 0x0009, 103 },
+  { 0x0009, 124 },
+  { 0x000A, 156 },
+  { 0x000A, 171 },
+  { 0x000B, 204 },
+  { 0x000B, 220 },
+  { 0x000C, 245 },
+  { 0x000D, 260 },
+  { 0x000E, 281 },
+  { 0x000F, 291 },
+  { 0x0010, 300 },
+  { 0x0011, 317 },
+  { 0x0012, 336 },
+  { 0x0013, 355 },
+  { 0x0014, 376 },
+  { 0x0015, 396 },
+  { 0x0016, 417 },
+  { 0x0017, 434 },
+  { 0x0018, 460 },
+  { 0x0019, 467 },
+  { 0x001A, 481 },
+  { 0x001B, 492 },
+  { 0x001C, 499 },
+  { 0x001C, 526 },
+  { 0x001D, 546 },
+  { 0x001D, 574 },
+  { 0x001E, 595 },
+  { 0x001E, 621 },
+  { 0x001F, 643 },
+  { 0x001F, 669 },
+  { 0x0021, 689 },
+  { 0x0021, 699 },
+  { 0x0023, 704 },
+  { 0x0024, 745 },
+  { 0x0027, 761 },
+  { 0x0027, 784 },
+  { 0x0028, 794 },
+  { 0x0029, 820 },
+  { 0x002A, 846 },
+  { 0x002C, 870 },
+  { 0x002D, 888 },
+  { 0x002E, 909 },
+  { 0x002F, 936 },
+  { 0x0040, 951 },
+  { 0x005B, 959 },
+  { 0x005C, 988 },
+  { 0x005D, 998 },
+  { 0x005F, 1027 },
+  { 0x007B, 1052 },
+  { 0x007B, 1080 },
+  { 0x007C, 1091 },
+  { 0x007D, 1104 },
+  { 0x007D, 1132 },
+  { 0x007F, 1144 },
+  { 0x0082, 1151 },
+  { 0x0083, 1172 },
+  { 0x0085, 1186 },
+  { 0x0086, 1202 },
+  { 0x0087, 1225 },
+  { 0x0088, 1246 },
+  { 0x0089, 1271 },
+  { 0x008A, 1311 },
+  { 0x008B, 1331 },
+  { 0x008C, 1352 },
+  { 0x008D, 1374 },
+  { 0x008E, 1392 },
+  { 0x008F, 1409 },
+  { 0x0090, 1428 },
+  { 0x0091, 1450 },
+  { 0x0092, 1466 },
+  { 0x0093, 1482 },
+  { 0x0094, 1501 },
+  { 0x0095, 1518 },
+  { 0x0096, 1534 },
+  { 0x0097, 1556 },
+  { 0x0098, 1576 },
+  { 0x009A, 1592 },
+  { 0x009B, 1620 },
+  { 0x009C, 1648 },
+  { 0x009D, 1666 },
+  { 0x009E, 1691 },
+  { 0x009F, 1707 },
+  { 0x00A3, 1735 },
+  { 0x00A5, 1796 },
+  { 0x00A6, 1806 },
+  { 0x00A6, 1832 },
+  { 0x00AB, 1860 },
+  { 0x00AB, 1875 },
+  { 0x00AC, 1900 },
+  { 0x00AD, 1928 },
+  { 0x00AE, 1949 },
+  { 0x00AF, 1982 },
+  { 0x00B2, 2004 },
+  { 0x00B3, 2012 },
+  { 0x00B6, 2018 },
+  { 0x00B7, 2033 },
+  { 0x00B7, 2058 },
+  { 0x00B7, 2073 },
+  { 0x00BB, 2103 },
+  { 0x00BF, 2119 },
+  { 0x00C6, 2140 },
+  { 0x00D7, 2172 },
+  { 0x00D8, 2201 },
+  { 0x00DF, 2209 },
+  { 0x00E6, 2216 },
+  { 0x00E6, 2246 },
+  { 0x00F8, 2201 },
+  { 0x0130, 2274 },
+  { 0x0149, 2280 },
+  { 0x0153, 2318 },
+  { 0x018D, 2349 },
+  { 0x018E, 2372 },
+  { 0x0190, 2381 },
+  { 0x0192, 2389 },
+  { 0x0192, 2398 },
+  { 0x0192, 2435 },
+  { 0x0197, 2451 },
+  { 0x019A, 2467 },
+  { 0x019B, 2476 },
+  { 0x019F, 2502 },
+  { 0x01B2, 2518 },
+  { 0x01B6, 2527 },
+  { 0x01BF, 2543 },
+  { 0x01C0, 2547 },
+  { 0x01C1, 2552 },
+  { 0x01C2, 2564 },
+  { 0x01C3, 2583 },
+  { 0x01F7, 2543 },
+  { 0x0251, 2619 },
+  { 0x0256, 2653 },
+  { 0x025B, 2381 },
+  { 0x025E, 2670 },
+  { 0x0264, 2694 },
+  { 0x0268, 2451 },
+  { 0x0275, 2730 },
+  { 0x027F, 2736 },
+  { 0x028B, 2770 },
+  { 0x028C, 2804 },
+  { 0x0292, 2817 },
+  { 0x0295, 2822 },
+  { 0x0298, 2844 },
+  { 0x029A, 2853 },
+  { 0x02BC, 2868 },
+  { 0x02C7, 2879 },
+  { 0x0300, 2885 },
+  { 0x0301, 2897 },
+  { 0x0301, 2909 },
+  { 0x0302, 2927 },
+  { 0x0304, 2931 },
+  { 0x0305, 2936 },
+  { 0x0306, 2956 },
+  { 0x0306, 2962 },
+  { 0x0307, 2975 },
+  { 0x0308, 3007 },
+  { 0x0308, 3032 },
+  { 0x0308, 3048 },
+  { 0x0309, 3066 },
+  { 0x030C, 3070 },
+  { 0x0312, 3085 },
+  { 0x0313, 3099 },
+  { 0x0314, 3134 },
+  { 0x0323, 3168 },
+  { 0x0328, 3173 },
+  { 0x0332, 3184 },
+  { 0x0333, 3206 },
+  { 0x0337, 3242 },
+  { 0x0338, 3262 },
+  { 0x0345, 3281 },
+  { 0x0345, 3316 },
+  { 0x035C, 3331 },
+  { 0x0361, 3372 },
+  { 0x0374, 3385 },
+  { 0x0375, 3398 },
+  { 0x037A, 3316 },
+  { 0x037E, 3414 },
+  { 0x0393, 3426 },
+  { 0x0399, 3441 },
+  { 0x03BB, 3455 },
+  { 0x03C2, 3462 },
+  { 0x03D0, 3513 },
+  { 0x03D1, 3525 },
+  { 0x03D6, 3538 },
+  { 0x03F0, 3547 },
+  { 0x03F1, 3560 },
+  { 0x03F2, 3571 },
+  { 0x03F5, 3609 },
+  { 0x03F6, 3626 },
+  { 0x03FD, 3652 },
+  { 0x03FE, 3662 },
+  { 0x03FF, 3683 },
+  { 0x0454, 3708 },
+  { 0x0455, 3726 },
+  { 0x0456, 3744 },
+  { 0x045B, 3759 },
+  { 0x055A, 3777 },
+  { 0x055B, 3824 },
+  { 0x055C, 3831 },
+  { 0x055D, 3852 },
+  { 0x055E, 3857 },
+  { 0x055F, 3873 },
+  { 0x0589, 3879 },
+  { 0x058A, 3889 },
+  { 0x0591, 3898 },
+  { 0x0592, 3904 },
+  { 0x0596, 3912 },
+  { 0x0598, 3935 },
+  { 0x059C, 3968 },
+  { 0x059F, 3974 },
+  { 0x05A1, 3986 },
+  { 0x05A5, 3998 },
+  { 0x05A8, 4004 },
+  { 0x05AA, 4009 },
+  { 0x05AE, 4016 },
+  { 0x05BC, 4030 },
+  { 0x05BD, 4037 },
+  { 0x05C0, 4043 },
+  { 0x05D0, 4052 },
+  { 0x05E6, 4058 },
+  { 0x05F0, 4063 },
+  { 0x05F2, 4074 },
+  { 0x0640, 4085 },
+  { 0x06C0, 4093 },
+  { 0x06C0, 4126 },
+  { 0x06E1, 4133 },
+  { 0x070F, 4145 },
+  { 0x0901, 4149 },
+  { 0x0902, 4159 },
+  { 0x0945, 4165 },
+  { 0x094D, 4172 },
+  { 0x0964, 4206 },
+  { 0x0965, 4218 },
+  { 0x09AC, 4231 },
+  { 0x09CD, 4246 },
+  { 0x09F1, 4279 },
+  { 0x0A05, 4323 },
+  { 0x0A3C, 4328 },
+  { 0x0A3E, 4341 },
+  { 0x0A3F, 4347 },
+  { 0x0A40, 4354 },
+  { 0x0A41, 4361 },
+  { 0x0A42, 4368 },
+  { 0x0A47, 4378 },
+  { 0x0A48, 4385 },
+  { 0x0A4B, 4394 },
+  { 0x0A4C, 4399 },
+  { 0x0B2F, 4407 },
+  { 0x0B5C, 4410 },
+  { 0x0B5D, 4414 },
+  { 0x0B5F, 4419 },
+  { 0x0B83, 4422 },
+  { 0x0C02, 4429 },
+  { 0x0C4D, 4435 },
+  { 0x0D1A, 4463 },
+  { 0x0D1B, 4467 },
+  { 0x0D1E, 4472 },
+  { 0x0D1F, 4476 },
+  { 0x0D20, 4479 },
+  { 0x0D21, 4483 },
+  { 0x0D22, 4491 },
+  { 0x0D23, 4500 },
+  { 0x0D24, 4508 },
+  { 0x0D25, 4512 },
+  { 0x0D26, 4517 },
+  { 0x0D27, 4525 },
+  { 0x0D34, 4534 },
+  { 0x0D36, 4538 },
+  { 0x0D37, 4547 },
+  { 0x0D4D, 4551 },
+  { 0x0D4D, 4585 },
+  { 0x0D82, 4598 },
+  { 0x0D83, 4607 },
+  { 0x0D85, 4615 },
+  { 0x0D86, 4632 },
+  { 0x0D87, 4650 },
+  { 0x0D88, 4668 },
+  { 0x0D89, 4687 },
+  { 0x0D8A, 4704 },
+  { 0x0D8B, 4722 },
+  { 0x0D8C, 4739 },
+  { 0x0D8D, 4757 },
+  { 0x0D8E, 4782 },
+  { 0x0D8F, 4808 },
+  { 0x0D90, 4833 },
+  { 0x0D91, 4859 },
+  { 0x0D92, 4876 },
+  { 0x0D93, 4894 },
+  { 0x0D94, 4912 },
+  { 0x0D95, 4929 },
+  { 0x0D96, 4947 },
+  { 0x0D9A, 4965 },
+  { 0x0D9B, 4983 },
+  { 0x0D9C, 5002 },
+  { 0x0D9D, 5020 },
+  { 0x0D9E, 5039 },
+  { 0x0D9F, 5058 },
+  { 0x0DA0, 5078 },
+  { 0x0DA1, 5096 },
+  { 0x0DA2, 5115 },
+  { 0x0DA3, 5133 },
+  { 0x0DA4, 5152 },
+  { 0x0DA5, 5171 },
+  { 0x0DA6, 5191 },
+  { 0x0DA7, 5211 },
+  { 0x0DA8, 5230 },
+  { 0x0DA9, 5250 },
+  { 0x0DAA, 5269 },
+  { 0x0DAB, 5289 },
+  { 0x0DAC, 5308 },
+  { 0x0DAD, 5329 },
+  { 0x0DAE, 5347 },
+  { 0x0DAF, 5366 },
+  { 0x0DB0, 5384 },
+  { 0x0DB1, 5403 },
+  { 0x0DB3, 5421 },
+  { 0x0DB4, 5440 },
+  { 0x0DB5, 5458 },
+  { 0x0DB6, 5477 },
+  { 0x0DB7, 5495 },
+  { 0x0DB8, 5514 },
+  { 0x0DB9, 5532 },
+  { 0x0DBA, 5551 },
+  { 0x0DBB, 5569 },
+  { 0x0DBD, 5587 },
+  { 0x0DC0, 5605 },
+  { 0x0DC1, 5623 },
+  { 0x0DC2, 5642 },
+  { 0x0DC3, 5661 },
+  { 0x0DC4, 5679 },
+  { 0x0DC5, 5697 },
+  { 0x0DC6, 5716 },
+  { 0x0DCA, 5734 },
+  { 0x0DCF, 5741 },
+  { 0x0DD0, 5763 },
+  { 0x0DD1, 5785 },
+  { 0x0DD2, 5808 },
+  { 0x0DD3, 5829 },
+  { 0x0DD4, 5851 },
+  { 0x0DD6, 5872 },
+  { 0x0DD8, 5894 },
+  { 0x0DD9, 5923 },
+  { 0x0DDA, 5944 },
+  { 0x0DDB, 5966 },
+  { 0x0DDC, 5988 },
+  { 0x0DDD, 6009 },
+  { 0x0DDE, 6031 },
+  { 0x0DDF, 6053 },
+  { 0x0DF2, 6082 },
+  { 0x0DF3, 6112 },
+  { 0x0E2E, 6142 },
+  { 0x0E2F, 6153 },
+  { 0x0E37, 6164 },
+  { 0x0E43, 6173 },
+  { 0x0E44, 6190 },
+  { 0x0E45, 6208 },
+  { 0x0E46, 6221 },
+  { 0x0E47, 6231 },
+  { 0x0E4D, 6242 },
+  { 0x0E81, 6252 },
+  { 0x0E82, 6259 },
+  { 0x0E84, 6268 },
+  { 0x0E87, 6278 },
+  { 0x0E88, 6296 },
+  { 0x0E8A, 6311 },
+  { 0x0E8D, 6319 },
+  { 0x0E94, 6329 },
+  { 0x0E95, 6336 },
+  { 0x0E96, 6342 },
+  { 0x0E97, 6352 },
+  { 0x0E99, 6362 },
+  { 0x0E9A, 6369 },
+  { 0x0E9B, 6383 },
+  { 0x0E9C, 6389 },
+  { 0x0E9D, 6399 },
+  { 0x0E9E, 6405 },
+  { 0x0EA1, 6413 },
+  { 0x0EA2, 6427 },
+  { 0x0EA3, 6433 },
+  { 0x0EA5, 6440 },
+  { 0x0EA7, 6448 },
+  { 0x0EAA, 6454 },
+  { 0x0EAB, 6461 },
+  { 0x0EAD, 6476 },
+  { 0x0EAE, 6480 },
+  { 0x0EBB, 6496 },
+  { 0x0EBD, 6505 },
+  { 0x0EC3, 6515 },
+  { 0x0EC4, 6524 },
+  { 0x0F65, 6532 },
+  { 0x0F71, 6545 },
+  { 0x0F7E, 4598 },
+  { 0x0F7F, 4607 },
+  { 0x0F84, 6553 },
+  { 0x0FAD, 6562 },
+  { 0x0FB0, 6545 },
+  { 0x0FB1, 6579 },
+  { 0x0FB2, 6588 },
+  { 0x0FB5, 6597 },
+  { 0x1037, 6620 },
+  { 0x1039, 6628 },
+  { 0x1100, 6659 },
+  { 0x1101, 6661 },
+  { 0x1102, 6664 },
+  { 0x1103, 6666 },
+  { 0x1104, 6668 },
+  { 0x1105, 6671 },
+  { 0x1106, 6673 },
+  { 0x1107, 6675 },
+  { 0x1108, 6677 },
+  { 0x1109, 6680 },
+  { 0x110A, 6682 },
+  { 0x110C, 6685 },
+  { 0x110D, 6687 },
+  { 0x110E, 6690 },
+  { 0x110F, 6692 },
+  { 0x1110, 6694 },
+  { 0x1111, 6696 },
+  { 0x1112, 6698 },
+  { 0x1161, 6700 },
+  { 0x1162, 6702 },
+  { 0x1163, 6705 },
+  { 0x1164, 6708 },
+  { 0x1165, 6712 },
+  { 0x1166, 6715 },
+  { 0x1167, 6717 },
+  { 0x1168, 6721 },
+  { 0x1169, 6724 },
+  { 0x116A, 6726 },
+  { 0x116B, 6729 },
+  { 0x116C, 6733 },
+  { 0x116D, 6736 },
+  { 0x116E, 6739 },
+  { 0x116F, 6741 },
+  { 0x1170, 6745 },
+  { 0x1171, 6748 },
+  { 0x1172, 6751 },
+  { 0x1173, 6754 },
+  { 0x1174, 6757 },
+  { 0x1175, 6760 },
+  { 0x11A8, 6659 },
+  { 0x11A9, 6661 },
+  { 0x11AA, 6762 },
+  { 0x11AB, 6664 },
+  { 0x11AC, 6765 },
+  { 0x11AD, 6768 },
+  { 0x11AE, 6666 },
+  { 0x11AF, 6771 },
+  { 0x11B0, 6773 },
+  { 0x11B1, 6776 },
+  { 0x11B2, 6779 },
+  { 0x11B3, 6782 },
+  { 0x11B4, 6785 },
+  { 0x11B5, 6788 },
+  { 0x11B6, 6791 },
+  { 0x11B7, 6673 },
+  { 0x11B8, 6675 },
+  { 0x11B9, 6794 },
+  { 0x11BA, 6680 },
+  { 0x11BB, 6682 },
+  { 0x11BC, 6797 },
+  { 0x11BD, 6685 },
+  { 0x11BE, 6690 },
+  { 0x11BF, 6692 },
+  { 0x11C0, 6694 },
+  { 0x11C1, 6696 },
+  { 0x11C2, 6698 },
+  { 0x17C6, 6800 },
+  { 0x17C6, 4598 },
+  { 0x17C7, 6808 },
+  { 0x17C7, 4607 },
+  { 0x1B00, 6816 },
+  { 0x1B01, 6828 },
+  { 0x1B02, 4598 },
+  { 0x1B03, 6840 },
+  { 0x1B04, 4607 },
+  { 0x1B05, 6846 },
+  { 0x1B06, 6848 },
+  { 0x1B07, 6851 },
+  { 0x1B08, 6853 },
+  { 0x1B09, 6856 },
+  { 0x1B0A, 6858 },
+  { 0x1B0B, 6861 },
+  { 0x1B0C, 6871 },
+  { 0x1B0D, 6882 },
+  { 0x1B0E, 6892 },
+  { 0x1B0F, 6903 },
+  { 0x1B10, 6905 },
+  { 0x1B11, 6908 },
+  { 0x1B12, 6910 },
+  { 0x1B14, 6913 },
+  { 0x1B16, 6917 },
+  { 0x1B19, 4463 },
+  { 0x1B1B, 6921 },
+  { 0x1B1D, 4479 },
+  { 0x1B1E, 4512 },
+  { 0x1B1F, 4410 },
+  { 0x1B20, 4414 },
+  { 0x1B21, 6925 },
+  { 0x1B23, 4508 },
+  { 0x1B25, 6929 },
+  { 0x1B28, 6933 },
+  { 0x1B2A, 6937 },
+  { 0x1B30, 4547 },
+  { 0x1B31, 6941 },
+  { 0x1B34, 6945 },
+  { 0x1B35, 6848 },
+  { 0x1B36, 6851 },
+  { 0x1B37, 6853 },
+  { 0x1B38, 6856 },
+  { 0x1B39, 6858 },
+  { 0x1B3A, 6861 },
+  { 0x1B3B, 6871 },
+  { 0x1B3C, 6882 },
+  { 0x1B3D, 6892 },
+  { 0x1B3E, 6903 },
+  { 0x1B3F, 6905 },
+  { 0x1B40, 6908 },
+  { 0x1B41, 6910 },
+  { 0x1B42, 6951 },
+  { 0x1B43, 6954 },
+  { 0x1B44, 5734 },
+  { 0x1B5A, 6957 },
+  { 0x1B5B, 6965 },
+  { 0x1B5C, 6983 },
+  { 0x1B5D, 7000 },
+  { 0x1B5E, 7006 },
+  { 0x1B5F, 7012 },
+  { 0x1B60, 7025 },
+  { 0x2001, 7046 },
+  { 0x2002, 7058 },
+  { 0x2003, 7062 },
+  { 0x2004, 7069 },
+  { 0x2005, 7081 },
+  { 0x2015, 7091 },
+  { 0x2018, 7106 },
+  { 0x2019, 7141 },
+  { 0x201A, 7169 },
+  { 0x201B, 7201 },
+  { 0x201C, 7238 },
+  { 0x201D, 7273 },
+  { 0x201E, 7301 },
+  { 0x201F, 7333 },
+  { 0x2020, 7370 },
+  { 0x2021, 7398 },
+  { 0x2022, 7421 },
+  { 0x2026, 7440 },
+  { 0x2030, 7457 },
+  { 0x2031, 7480 },
+  { 0x2032, 7490 },
+  { 0x2033, 7504 },
+  { 0x2034, 7520 },
+  { 0x2039, 7557 },
+  { 0x203A, 7588 },
+  { 0x203B, 7620 },
+  { 0x203B, 7634 },
+  { 0x203E, 7659 },
+  { 0x203F, 7677 },
+  { 0x2040, 7692 },
+  { 0x2044, 7726 },
+  { 0x2052, 7750 },
+  { 0x2055, 7820 },
+  { 0x2059, 7834 },
+  { 0x2059, 7851 },
+  { 0x205D, 7860 },
+  { 0x2063, 7895 },
+  { 0x20DB, 7911 },
+  { 0x20DC, 7928 },
+  { 0x20DD, 7946 },
+  { 0x20DD, 7969 },
+  { 0x20E6, 8007 },
+  { 0x20E7, 8044 },
+  { 0x20E9, 8059 },
+  { 0x20EB, 8080 },
+  { 0x2102, 8106 },
+  { 0x2103, 8133 },
+  { 0x2104, 8152 },
+  { 0x210A, 8158 },
+  { 0x210B, 8177 },
+  { 0x210C, 8198 },
+  { 0x210E, 8212 },
+  { 0x2111, 8243 },
+  { 0x2112, 8258 },
+  { 0x2113, 8276 },
+  { 0x2113, 8302 },
+  { 0x2114, 8329 },
+  { 0x2115, 8336 },
+  { 0x2117, 8351 },
+  { 0x2117, 8361 },
+  { 0x2118, 8378 },
+  { 0x211A, 8408 },
+  { 0x211B, 8436 },
+  { 0x211C, 8453 },
+  { 0x211D, 8463 },
+  { 0x211E, 8487 },
+  { 0x211E, 8494 },
+  { 0x2124, 8506 },
+  { 0x2127, 8526 },
+  { 0x212C, 8530 },
+  { 0x212F, 8549 },
+  { 0x212F, 8555 },
+  { 0x2130, 8572 },
+  { 0x2131, 8598 },
+  { 0x2132, 8616 },
+  { 0x2133, 8642 },
+  { 0x2133, 8661 },
+  { 0x2134, 8702 },
+  { 0x2135, 8730 },
+  { 0x2136, 8769 },
+  { 0x2137, 8813 },
+  { 0x2138, 8871 },
+  { 0x2141, 8899 },
+  { 0x2183, 8904 },
+  { 0x2183, 8918 },
+  { 0x2192, 8937 },
+  { 0x2194, 8963 },
+  { 0x219E, 8983 },
+  { 0x219F, 9000 },
+  { 0x21A0, 9015 },
+  { 0x21A0, 9043 },
+  { 0x21A1, 9061 },
+  { 0x21A1, 9071 },
+  { 0x21A3, 9088 },
+  { 0x21A6, 9115 },
+  { 0x21A7, 9133 },
+  { 0x21AF, 9146 },
+  { 0x21B4, 9159 },
+  { 0x21B8, 9169 },
+  { 0x21B9, 9174 },
+  { 0x21DE, 9193 },
+  { 0x21DF, 9201 },
+  { 0x21E4, 9211 },
+  { 0x21E5, 9224 },
+  { 0x21E7, 9238 },
+  { 0x21EA, 9244 },
+  { 0x21EB, 9254 },
+  { 0x21EC, 9244 },
+  { 0x21ED, 9267 },
+  { 0x21EE, 9281 },
+  { 0x21EF, 9296 },
+  { 0x21F0, 9309 },
+  { 0x21F1, 9169 },
+  { 0x21F2, 9320 },
+  { 0x21F3, 9324 },
+  { 0x21F8, 9334 },
+  { 0x21F9, 9362 },
+  { 0x21FB, 9390 },
+  { 0x21FC, 9417 },
+  { 0x2200, 9444 },
+  { 0x2203, 9465 },
+  { 0x2205, 9488 },
+  { 0x2206, 9497 },
+  { 0x2206, 9514 },
+  { 0x2206, 9533 },
+  { 0x2207, 9562 },
+  { 0x2207, 9582 },
+  { 0x220B, 9596 },
+  { 0x220E, 9606 },
+  { 0x220F, 9613 },
+  { 0x2210, 9626 },
+  { 0x2211, 9641 },
+  { 0x2218, 9656 },
+  { 0x2218, 9675 },
+  { 0x221A, 9683 },
+  { 0x2222, 9696 },
+  { 0x2223, 9596 },
+  { 0x2223, 9706 },
+  { 0x2227, 9716 },
+  { 0x2228, 9735 },
+  { 0x2229, 9752 },
+  { 0x222A, 9761 },
+  { 0x2238, 9765 },
+  { 0x223C, 9788 },
+  { 0x223C, 9818 },
+  { 0x223C, 9837 },
+  { 0x223C, 9848 },
+  { 0x223C, 9852 },
+  { 0x223C, 9858 },
+  { 0x223D, 9868 },
+  { 0x223E, 9875 },
+  { 0x223F, 9889 },
+  { 0x2248, 9909 },
+  { 0x2252, 9923 },
+  { 0x2257, 9937 },
+  { 0x2259, 9960 },
+  { 0x225C, 9975 },
+  { 0x225C, 9987 },
+  { 0x226C, 10010 },
+  { 0x227A, 10029 },
+  { 0x227B, 10045 },
+  { 0x2282, 10062 },
+  { 0x2283, 10078 },
+  { 0x228E, 10094 },
+  { 0x2295, 10118 },
+  { 0x2295, 10129 },
+  { 0x2296, 10155 },
+  { 0x2297, 10176 },
+  { 0x2297, 10129 },
+  { 0x2299, 10191 },
+  { 0x2299, 10206 },
+  { 0x22A2, 10234 },
+  { 0x22A2, 10244 },
+  { 0x22A2, 10268 },
+  { 0x22A3, 10278 },
+  { 0x22A3, 10296 },
+  { 0x22A4, 10324 },
+  { 0x22A5, 10328 },
+  { 0x22A6, 10341 },
+  { 0x22A8, 10352 },
+  { 0x22A8, 10377 },
+  { 0x22A8, 10392 },
+  { 0x22A8, 10402 },
+  { 0x22C2, 10413 },
+  { 0x22C3, 10449 },
+  { 0x22D4, 10478 },
+  { 0x2308, 10498 },
+  { 0x230A, 10510 },
+  { 0x2310, 10524 },
+  { 0x2311, 10542 },
+  { 0x2318, 10558 },
+  { 0x2319, 10576 },
+  { 0x2324, 10588 },
+  { 0x2326, 10598 },
+  { 0x2327, 10622 },
+  { 0x232B, 10632 },
+  { 0x234A, 10655 },
+  { 0x234E, 10672 },
+  { 0x2351, 10684 },
+  { 0x2355, 10702 },
+  { 0x2361, 10716 },
+  { 0x2364, 10736 },
+  { 0x2365, 10741 },
+  { 0x2368, 10748 },
+  { 0x2385, 10754 },
+  { 0x2388, 10761 },
+  { 0x2389, 10769 },
+  { 0x238A, 10775 },
+  { 0x238B, 10785 },
+  { 0x23B0, 10792 },
+  { 0x23B1, 10807 },
+  { 0x2446, 10823 },
+  { 0x2448, 10831 },
+  { 0x2449, 10837 },
+  { 0x2500, 10842 },
+  { 0x2502, 10864 },
+  { 0x250C, 10886 },
+  { 0x2510, 10908 },
+  { 0x2514, 10930 },
+  { 0x2518, 10952 },
+  { 0x251C, 10974 },
+  { 0x251D, 10996 },
+  { 0x2524, 11018 },
+  { 0x2525, 11040 },
+  { 0x252C, 11062 },
+  { 0x252F, 11084 },
+  { 0x2534, 11106 },
+  { 0x2537, 11128 },
+  { 0x253C, 11150 },
+  { 0x253F, 11172 },
+  { 0x2588, 11194 },
+  { 0x25A0, 11200 },
+  { 0x25A1, 11234 },
+  { 0x25AE, 11245 },
+  { 0x25B3, 11262 },
+  { 0x25B7, 11268 },
+  { 0x25BB, 11297 },
+  { 0x25BD, 11321 },
+  { 0x25C1, 11339 },
+  { 0x25C5, 11369 },
+  { 0x25C9, 11394 },
+  { 0x25FB, 11431 },
+  { 0x2600, 11455 },
+  { 0x2601, 11469 },
+  { 0x2602, 11484 },
+  { 0x2603, 11498 },
+  { 0x2613, 11512 },
+  { 0x2614, 11531 },
+  { 0x2615, 11547 },
+  { 0x261E, 11582 },
+  { 0x2620, 11606 },
+  { 0x2627, 11613 },
+  { 0x262B, 11646 },
+  { 0x262C, 11667 },
+  { 0x2630, 11683 },
+  { 0x2631, 11689 },
+  { 0x2632, 11694 },
+  { 0x2633, 11698 },
+  { 0x2634, 11704 },
+  { 0x2635, 11709 },
+  { 0x2636, 11714 },
+  { 0x2637, 11719 },
+  { 0x263A, 11724 },
+  { 0x263C, 11741 },
+  { 0x2640, 11749 },
+  { 0x2642, 11755 },
+  { 0x264D, 11760 },
+  { 0x264F, 11784 },
+  { 0x2665, 11796 },
+  { 0x266F, 11806 },
+  { 0x2692, 11833 },
+  { 0x2693, 11869 },
+  { 0x2694, 11901 },
+  { 0x2695, 11957 },
+  { 0x2696, 11970 },
+  { 0x2697, 11996 },
+  { 0x2698, 12021 },
+  { 0x2699, 12036 },
+  { 0x269B, 12054 },
+  { 0x26A2, 12085 },
+  { 0x26A3, 12096 },
+  { 0x26A4, 12115 },
+  { 0x26A5, 12127 },
+  { 0x26A5, 12151 },
+  { 0x26A6, 12127 },
+  { 0x26A7, 12127 },
+  { 0x26A8, 12181 },
+  { 0x26A9, 12233 },
+  { 0x26AA, 12273 },
+  { 0x26AA, 12305 },
+  { 0x26AC, 12324 },
+  { 0x26B0, 12355 },
+  { 0x26B1, 12374 },
+  { 0x2736, 12395 },
+  { 0x273A, 12403 },
+  { 0x2749, 12413 },
+  { 0x274B, 12418 },
+  { 0x2766, 12427 },
+  { 0x2767, 12438 },
+  { 0x27C2, 12455 },
+  { 0x27D3, 12469 },
+  { 0x27D4, 12478 },
+  { 0x27DF, 12486 },
+  { 0x27E1, 12503 },
+  { 0x27E2, 12526 },
+  { 0x27E3, 12553 },
+  { 0x27E4, 12584 },
+  { 0x27E5, 12612 },
+  { 0x27E6, 12644 },
+  { 0x27E7, 12672 },
+  { 0x27E8, 12701 },
+  { 0x27E8, 12705 },
+  { 0x27E9, 12738 },
+  { 0x27E9, 12742 },
+  { 0x27EA, 12776 },
+  { 0x27EB, 12808 },
+  { 0x27FB, 12841 },
+  { 0x27FC, 12851 },
+  { 0x2900, 12859 },
+  { 0x2901, 12889 },
+  { 0x2905, 12851 },
+  { 0x2906, 12841 },
+  { 0x2907, 12851 },
+  { 0x2914, 12918 },
+  { 0x2915, 12947 },
+  { 0x2916, 12975 },
+  { 0x2916, 12993 },
+  { 0x2917, 13014 },
+  { 0x2918, 13046 },
+  { 0x29D6, 13085 },
+  { 0x29D6, 13101 },
+  { 0x29DC, 13114 },
+  { 0x29E0, 13138 },
+  { 0x29E6, 13152 },
+  { 0x29F4, 13176 },
+  { 0x29F9, 13194 },
+  { 0x2A07, 13219 },
+  { 0x2A1B, 13225 },
+  { 0x2A1C, 13240 },
+  { 0x2A1D, 13255 },
+  { 0x2A24, 13268 },
+  { 0x2A26, 13295 },
+  { 0x2A27, 13322 },
+  { 0x2A41, 13335 },
+  { 0x2A68, 13362 },
+  { 0x2AA1, 13388 },
+  { 0x2ADC, 13408 },
+  { 0x2ADD, 13424 },
+  { 0x2AE2, 13436 },
+  { 0x2AEB, 13457 },
+  { 0x2AF1, 13470 },
+  { 0x2AF4, 13492 },
+  { 0x2AFE, 13503 },
+  { 0x2AFF, 13519 },
+  { 0x2D40, 13541 },
+  { 0x2D53, 13552 },
+  { 0x2D58, 13563 },
+  { 0x2D64, 13573 },
+  { 0x2D6F, 13585 },
+  { 0x2E16, 13594 },
+  { 0x301A, 13614 },
+  { 0x301B, 13643 },
+  { 0x302E, 13673 },
+  { 0x302F, 13693 },
+  { 0x3057, 13713 },
+  { 0x3058, 13717 },
+  { 0x3061, 13733 },
+  { 0x3062, 13717 },
+  { 0x3063, 13737 },
+  { 0x3064, 13747 },
+  { 0x3065, 13751 },
+  { 0x3075, 13767 },
+  { 0x30B7, 13713 },
+  { 0x30B8, 13717 },
+  { 0x30C1, 13733 },
+  { 0x30C2, 13717 },
+  { 0x30C3, 13737 },
+  { 0x30C4, 13747 },
+  { 0x30C5, 13751 },
+  { 0x30D5, 13767 },
+  { 0x3164, 13770 },
+  { 0x3190, 13777 },
+  { 0x3191, 13785 },
+  { 0x3280, 13797 },
+  { 0x337F, 13829 },
+  { 0xA806, 13845 },
+  { 0xFEFF, 13860 },
+  { 0x1000E, 13890 },
+  { 0x10018, 13910 },
+  { 0x1001B, 13927 },
+  { 0x10025, 13946 },
+  { 0x1002D, 13966 },
+  { 0x10042, 13985 },
+  { 0x10049, 14003 },
+  { 0x10052, 14025 },
+  { 0x10093, 14044 },
+  { 0x10094, 14050 },
+  { 0x10098, 14058 },
+  { 0x10099, 14067 },
+  { 0x100A4, 14073 },
+  { 0x100C9, 14080 },
+  { 0x100CB, 14086 },
+  { 0x10A3F, 14110 },
+  { 0x1D13A, 14117 },
+  { 0x1D13B, 14147 },
+  { 0x1D13C, 14162 },
+  { 0x1D13D, 14173 },
+  { 0x1D202, 14186 },
+  { 0x1D205, 14223 },
+  { 0x1D206, 14261 },
+  { 0x1D208, 14298 },
+  { 0x1D20D, 14336 },
+  { 0x1D20E, 14374 },
+  { 0x1D211, 14412 },
+  { 0x1D213, 14450 },
+  { 0x1D21C, 14488 },
+  { 0x1D300, 14526 },
+  { 0x1D301, 14530 },
+  { 0x1D302, 14539 },
+  { 0x1D303, 14546 },
+  { 0x1D304, 14555 },
+  { 0x1D305, 14562 },
+  { 0x1D4AB, 14570 },
+  { 0x1D510, 14580 },
+  { 0x1D516, 14608 },
+  { 0x1D6A4, 14640 },
+  { 0x1D6A5, 14647 },
+  { (gunichar)(-1), 0 } /* end marker */ 
 };
 
-static const UnicharString names_list_stars[] = 
+static const char names_list_stars_strings[] = 
+  "sometimes considered a control code\0"
+  "other space characters: 2000-200A\0"
+  "neutral (vertical), used as opening or closing quotation mark\0"
+  "preferred characters in English for paired quotation marks are 201C & 201D\0"
+  "glyph may have one or two vertical bars\0"
+  "other currency symbol characters: 20A0-20B5\0"
+  "neutral (vertical) glyph with mixed usage\0"
+  "2019 is preferred for apostrophe\0"
+  "preferred characters in English for paired quotation marks are 2018 & 2019\0"
+  "see discussion on semantics of paired bracketing characters\0"
+  "used for either hyphen or minus sign\0"
+  "may be rendered as a raised decimal point in old style numbers\0"
+  "this, and not 037E, is the preferred character for 'Greek question mark'\0"
+  "other related characters: 2241-2263\0"
+  "Turkish and Azerbaijani use 0131 for lowercase\0"
+  "other bracket characters: 27E6-27EB, 2983-2998, 3008-301B\0"
+  "this is a spacing character\0"
+  "Turkish and Azerbaijani use 0130 for uppercase\0"
+  "used in pairs to indicate absolute value\0"
+  "formerly known as INDEX\0"
+  "commonly abbreviated as NBSP\0"
+  "Spanish, Asturian, Galician\0"
+  "glyph may have one or two crossbars\0"
+  "paragraph sign in some European usage\0"
+  "Spanish\0"
+  "usually opening, sometimes closing\0"
+  "commonly abbreviated as SHY\0"
+  "other superscript digit characters: 2070-2079\0"
+  "section sign in some European usage\0"
+  "other spacing accent characters: 02D8-02DB\0"
+  "usually closing, sometimes opening\0"
+  "bar may be horizontal or slanted\0"
+  "other fraction characters: 2153-215E\0"
+  "German\0"
+  "uppercase is \"SS\"\0"
+  "in origin a ligature of 017F and 0073\0"
+  "Portuguese\0"
+  "Danish, Norwegian, Swedish, Walloon\0"
+  "Danish, Norwegian, Icelandic, Faroese, Old English, French, IPA\0"
+  "Italian, Malagasy\0"
+  "Icelandic, Faroese, Old English, IPA\0"
+  "Portuguese, Estonian\0"
+  "Danish, Norwegian, Faroese, IPA\0"
+  "French, Italian\0"
+  "Czech, Slovak, Icelandic, Faroese, Welsh, Malagasy\0"
+  "Icelandic, Old English, phonetics\0"
+  "Runic letter borrowed into Latin script\0"
+  "French\0"
+  "Latvian, Latin, ...\0"
+  "Romanian, Vietnamese, Latin, ...\0"
+  "Polish, Lithuanian, ...\0"
+  "Polish, Croatian, ...\0"
+  "Esperanto\0"
+  "Maltese, Irish Gaelic (old orthography)\0"
+  "Czech, Slovak, Slovenian, and many other languages\0"
+  "the form using caron/hacek is preferred in all contexts\0"
+  "Czech, Slovak\0"
+  "the form using apostrophe is preferred in typesetting\0"
+  "Croatian, Vietnamese, Sami\0"
+  "an alternate glyph with the stroke through the bowl is used in Americanist orthographies\0"
+  "Malay, Latin, ...\0"
+  "Lithuanian\0"
+  "Czech, ...\0"
+  "Turkish, Azerbaijani\0"
+  "Latvian\0"
+  "there are three major glyph variants\0"
+  "Maltese, IPA, ...\0"
+  "Greenlandic (old orthography)\0"
+  "Latin, ...\0"
+  "Lithuanian, ...\0"
+  "lowercase is 0069\0"
+  "uppercase is 0049\0"
+  "Dutch\0"
+  "Slovak\0"
+  "some fonts show the middle dot inside the L, but the preferred form has the dot following the L\0"
+  "Catalan legacy compatibility character for ISO 6937\0"
+  "preferred representation for Catalan: 006C 00B7\0"
+  "Polish, ...\0"
+  "Afrikaans\0"
+  "legacy compatibility character for ISO/IEC 6937\0"
+  "uppercase is 02BC 004E\0"
+  "glyph may also have appearance of large form of the small letter\0"
+  "Sami, Mende, IPA, ...\0"
+  "Latin\0"
+  "Hungarian\0"
+  "French, IPA, Old Icelandic, Old English, ...\0"
+  "Slovak, ...\0"
+  "Livonian\0"
+  "Polish, Indic transliteration, ...\0"
+  "Turkish, Azerbaijani, Romanian, ...\0"
+  "this character is used in both Turkish and Romanian data\0"
+  "a glyph variant with comma below is preferred for Romanian\0"
+  "Czech, Estonian, Finnish, Slovak, and many other languages\0"
+  "Romanian, Semitic transliteration, ...\0"
+  "this character is used in Romanian data\0"
+  "Sami\0"
+  "Latvian, Lithuanian, Latin, ...\0"
+  "Latin, Esperanto, ...\0"
+  "Welsh\0"
+  "French, Igbo\0"
+  "Czech, Estonian, Finnish, Slovak, Slovenian, and many other languages\0"
+  "in common use in Roman types until the 18th century\0"
+  "in current use in Fraktur and Gaelic types\0"
+  "Americanist and Indo-Europeanist usage for phonetic beta\0"
+  "Americanist orthographies use an alternate glyph with the stroke through the bowl\0"
+  "Old Saxon\0"
+  "uppercase is 0243\0"
+  "Zulu, Pan-Nigerian alphabet\0"
+  "Zhuang (old orthography)\0"
+  "former Soviet minority language scripts\0"
+  "Zhuang tone three is Cyrillic ze\0"
+  "Zhuang tone four is Cyrillic che\0"
+  "typographically a turned C\0"
+  "African\0"
+  "Ewe\0"
+  "Pan-Nigerian alphabet\0"
+  "former-Soviet minority language scripts\0"
+  "archaic phonetic for labialized alveolar fricative\0"
+  "recommended spellings 007A 02B7 or 007A 032B\0"
+  "lowercase is 01DD\0"
+  "Azerbaijani, ...\0"
+  "used as abbreviation convention for folder\0"
+  "Gothic transliteration\0"
+  "uppercase is 01F6\0"
+  "ISO 6438 gives lowercase as 026A, not 0268\0"
+  "Hausa, Pan-Nigerian alphabet\0"
+  "Americanist phonetic usage for 026C\0"
+  "Americanist phonetic usage\0"
+  "archaic phonetic for Japanese 3093\0"
+  "recommended spelling for syllabic n is 006E 0329\0"
+  "Lakota (indicates nasalization of vowel)\0"
+  "lowercase is 0275\0"
+  "Vietnamese\0"
+  "Pan-Turkic Latin alphabets\0"
+  "Old Norse\0"
+  "from German Standard DIN 31624 and ISO 5246-2\0"
+  "lowercase is 0280\0"
+  "typographically a reversed S\0"
+  "archaic phonetic for labialized palatoalveolar or palatal fricative\0"
+  "Twi\0"
+  "recommended spellings 0283 02B7, 00E7 02B7, 0068 0265, etc.\0"
+  "archaic phonetic for palatalized alveolar or dental stop\0"
+  "recommended spelling 0074 02B2\0"
+  "a glyph variant with hook at the right also occurs\0"
+  "typographically based on turned capital Greek omega\0"
+  "a glyph variant with hook at the left also occurs\0"
+  "Bini, Esoko, and other Edo languages in West Africa\0"
+  "Pan-Turkic Latin orthography\0"
+  "handwritten variant of Latin \"z\"\0"
+  "African, Skolt Sami\0"
+  "lowercase is 0292\0"
+  "archaic phonetic for voiced pharyngeal fricative\0"
+  "sometimes typographically rendered with a turned digit 3\0"
+  "recommended spelling 0295\0"
+  "archaic phonetic for labialized voiced palatoalveolar or palatal fricative\0"
+  "recommended spellings 0292 02B7 or 006A 02B7\0"
+  "archaic phonetic for [dz] affricate\0"
+  "recommended spellings 0292 or 0064 007A\0"
+  "archaic phonetic for [ts] affricate\0"
+  "recommended spelling 0074 0073\0"
+  "letter form is actually derived from ligation of ts, rather than inverted glottal stop\0"
+  "replaced by \"w\" in modern transcriptions of Old English\0"
+  "uppercase is 01F7\0"
+  "Khoisan tradition\0"
+  "\"c\" in Zulu orthography\0"
+  "\"x\" in Zulu orthography\0"
+  "\"q\" in Zulu orthography\0"
+  "Pinyin third tone\0"
+  "Pinyin first tone\0"
+  "Pinyin second tone\0"
+  "Pinyin fourth tone\0"
+  "all other usages of schwa are 0259\0"
+  "uppercase is 018E\0"
+  "Livonian, Uralicist usage\0"
+  "Uralicist usage\0"
+  "Old Norse, Old English\0"
+  "Skolt Sami\0"
+  "Sami, Iroquoian, Old Icelandic\0"
+  "Old Icelandic\0"
+  "IPA and many languages\0"
+  "Macedonian and Serbian transliteration\0"
+  "lowercase is 0195\0"
+  "lowercase is 01BF\0"
+  "Pinyin\0"
+  "Romanian, when distinct comma below form is required\0"
+  "Middle English, Scots\0"
+  "Finnish Romany\0"
+  "Lakota\0"
+  "phonetic use in Sinology\0"
+  "Algonquin, Huron\0"
+  "Middle High German\0"
+  "also Cornish\0"
+  "used in Africanist linguistics\0"
+  "Sencoten\0"
+  "lowercase is 2C65\0"
+  "used in Americanist linguistics\0"
+  "lowercase is 019A\0"
+  "lowercase is 2C66\0"
+  "casing use in Chipewyan, Dogrib, Slavey (Canadian aboriginal orthographies)\0"
+  "lowercase is 0180\0"
+  "lowercase is 0289\0"
+  "lowercase is 028C\0"
+  "low central unrounded vowel\0"
+  "low back unrounded vowel\0"
+  "low back rounded vowel\0"
+  "implosive bilabial stop\0"
+  "typographically a turned c\0"
+  "lower-mid back rounded vowel\0"
+  "voiceless alveolo-palatal laminal fricative\0"
+  "used in transcription of Mandarin Chinese\0"
+  "sound spelled with 015B in Polish\0"
+  "voiced retroflex stop\0"
+  "implosive dental or alveolar stop\0"
+  "Ewe, Pan-Nigerian alphabet\0"
+  "upper-mid central unrounded vowel\0"
+  "mid-central unrounded vowel\0"
+  "variant uppercase form 018E is associated with 01DD\0"
+  "rhotacized schwa\0"
+  "lower-mid front unrounded vowel\0"
+  "lower-mid central unrounded vowel\0"
+  "rhotacized lower-mid central vowel\0"
+  "lower-mid central rounded vowel\0"
+  "voiced palatal stop\0"
+  "typographically a turned f, but better thought of as a form of j\0"
+  "\"gy\" in Hungarian orthography\0"
+  "also archaic phonetic for palatoalveolar affricate 02A4\0"
+  "implosive velar stop\0"
+  "voiced velar stop\0"
+  "voiced uvular stop\0"
+  "voiced velar fricative\0"
+  "upper-mid back unrounded vowel\0"
+  "voiced rounded palatal approximant\0"
+  "breathy-voiced glottal fricative\0"
+  "voiceless coarticulated velar and palatoalveolar fricative\0"
+  "\"tj\" or \"kj\" or \"sj\" in some Swedish dialects\0"
+  "high central unrounded vowel\0"
+  "ISO 6438 gives lowercase of 0197 as 026A, not 0268\0"
+  "semi-high front unrounded vowel\0"
+  "preferred use is 026A latin letter small capital i\0"
+  "preferred IPA alternate for 0269\0"
+  "velarized voiced alveolar lateral approximant\0"
+  "uppercase is 2C62\0"
+  "voiceless alveolar lateral fricative\0"
+  "voiced retroflex lateral\0"
+  "voiced lateral fricative\0"
+  "\"dhl\" in Zulu orthography\0"
+  "high back unrounded vowel\0"
+  "voiced velar approximant\0"
+  "voiced labiodental nasal\0"
+  "voiced palatal nasal\0"
+  "voiced retroflex nasal\0"
+  "voiced uvular nasal\0"
+  "rounded mid-central vowel, i.e. rounded schwa\0"
+  "uppercase is 019F\0"
+  "low front rounded vowel\0"
+  "semi-high back rounded vowel\0"
+  "preferred use is 028A latin small letter upsilon\0"
+  "voiceless bilabial fricative\0"
+  "voiced alveolar approximant\0"
+  "voiced lateral flap\0"
+  "voiced retroflex approximant\0"
+  "voiced strident apico-alveolar trill\0"
+  "sound spelled with 0159 in Czech\0"
+  "preferred phonetic representation for Czech is 0072 031D\0"
+  "in current use in Gaelic types (as glyph variant of 0072)\0"
+  "voiced retroflex flap\0"
+  "uppercase is 2C64\0"
+  "voiced alveolar flap or tap\0"
+  "apical dental vowel\0"
+  "used by linguists working on Chinese and other Sino-Tibetan languages\0"
+  "IPA spelling - 007A 0329\0"
+  "voiced uvular trill\0"
+  "Germanic, Old Norse\0"
+  "uppercase is 01A6\0"
+  "voiced uvular fricative or approximant\0"
+  "voiceless retroflex fricative\0"
+  "voiceless postalveolar fricative\0"
+  "implosive palatal stop\0"
+  "typographically based on 025F, not on 0283\0"
+  "apical retroflex vowel\0"
+  "IPA spelling - 0290 0329\0"
+  "in origin 027F plus the retroflex hook 0322, despite its name\0"
+  "palatalized voiceless postalveolar fricative\0"
+  "suggested spelling - 0283 02B2\0"
+  "dental click (sound of \"tsk tsk\")\0"
+  "voiceless retroflex stop\0"
+  "high central rounded vowel\0"
+  "uppercase is 0244\0"
+  "preferred IPA alternate to 0277\0"
+  "voiced labiodental approximant\0"
+  "lower-mid back unrounded vowel\0"
+  "uppercase is 0245\0"
+  "voiceless rounded labiovelar approximant\0"
+  "voiced lateral approximant\0"
+  "semi-high front rounded vowel\0"
+  "voiced retroflex fricative\0"
+  "voiced alveolo-palatal laminal fricative\0"
+  "sound spelled with 017A in Polish\0"
+  "voiced postalveolar fricative\0"
+  "mistakenly named yogh in Unicode 1.0\0"
+  "uppercase is 01B7\0"
+  "palatalized voiced postalveolar fricative\0"
+  "this is a caseless letter\0"
+  "used in IPA, other phonetic notations, and those orthographies which use a caseless glottal stop\0"
+  "voiced pharyngeal fricative\0"
+  "ain\0"
+  "lateral click\0"
+  "palatal (or alveolar) click\0"
+  "bilabial trill\0"
+  "lower-mid front rounded vowel\0"
+  "non-IPA alternate for the preferred 0153\0"
+  "voiced uvular implosive\0"
+  "voiceless epiglottal fricative\0"
+  "voiced palatal fricative\0"
+  "proposed for velar click\0"
+  "velar lateral approximant\0"
+  "voiceless uvular implosive\0"
+  "voiced epiglottal stop\0"
+  "voiced epiglottal fricative\0"
+  "voiced dental affricate\0"
+  "voiced postalveolar affricate\0"
+  "voiced alveolo-palatal affricate\0"
+  "voiceless dental affricate\0"
+  "voiceless postalveolar affricate\0"
+  "voiceless alveolo-palatal affricate\0"
+  "velopharyngeal fricative\0"
+  "lateral alveolar fricative (lisp)\0"
+  "voiced lateral alveolar fricative\0"
+  "audible lip smack\0"
+  "audible teeth gnashing\0"
+  "aspiration\0"
+  "breathy voiced, murmured\0"
+  "palatalization\0"
+  "preceding four used for r-coloring or r-offglides\0"
+  "labialization\0"
+  "common Americanist usage for 02B2\0"
+  "primary stress, emphasis\0"
+  "transliteration of mjagkij znak (Cyrillic soft sign: palatalization)\0"
+  "exaggerated stress, contrastive stress\0"
+  "transliteration of tverdyj znak (Cyrillic hard sign: no palatalization)\0"
+  "typographical alternate for 02BD or 02BF\0"
+  "used in Hawai`ian orthography as `okina (glottal stop)\0"
+  "glottal stop, glottalization, ejective\0"
+  "spacing clone of Greek smooth breathing mark\0"
+  "many languages use this as a letter of their alphabets\0"
+  "2019 is the preferred character for a punctuation apostrophe\0"
+  "weak aspiration\0"
+  "spacing clone of Greek rough breathing mark\0"
+  "transliteration of Arabic hamza (glottal stop)\0"
+  "transliteration of Arabic ain (voiced pharyngeal fricative)\0"
+  "ejective or glottalized\0"
+  "typographical alternate for 02BC or 02BE\0"
+  "typographical alternate for 02BF\0"
+  "fronted articulation\0"
+  "backed articulation\0"
+  "raised articulation\0"
+  "lowered articulation\0"
+  "rising-falling tone, falling tone, secondary stress, etc.\0"
+  "falling-rising tone\0"
+  "Mandarin Chinese third tone\0"
+  "primary stress, downstep\0"
+  "precedes letter or syllable modified\0"
+  "high level tone\0"
+  "precedes or follows letter or syllable modified\0"
+  "Mandarin Chinese first tone\0"
+  "high-rising tone (IPA), high tone, primary stress\0"
+  "Mandarin Chinese second tone\0"
+  "high-falling tone (IPA), low tone, secondary or tertiary stress\0"
+  "Mandarin Chinese fourth tone\0"
+  "secondary stress\0"
+  "low level tone\0"
+  "low-falling tone\0"
+  "low-rising tone\0"
+  "length mark\0"
+  "half-length mark\0"
+  "more rounded articulation\0"
+  "less rounded articulation\0"
+  "vowel raising or closing\0"
+  "vowel lowering or opening\0"
+  "advanced or fronted articulation\0"
+  "retracted or backed articulation\0"
+  "glyph may have small end-serifs\0"
+  "Mandarin Chinese fifth tone (light or neutral)\0"
+  "rhotacization in vowel\0"
+  "often ligated: 025A = 0259 + 02DE; 025D = 025C + 02DE\0"
+  "Swedish grave accent\0"
+  "these modifier letters are occasionally used in transcription of affricates\0"
+  "Nenets\0"
+  "IPA: nasalization\0"
+  "Vietnamese tone mark\0"
+  "distinguish from the following\0"
+  "connects on left and right\0"
+  "kerns left or right of circumflex over vowels\0"
+  "Hungarian, Chuvash\0"
+  "this is not the Greek tonos\0"
+  "Marshallese\0"
+  "Serbian and Croatian poetics\0"
+  "Latvian (but not used in decomposition)\0"
+  "Americanist: ejective or glottalization\0"
+  "IPA: unreleased stop\0"
+  "IPA: open variety of vowel\0"
+  "IPA: vowel raising or closing\0"
+  "IPA: vowel lowering or opening\0"
+  "IPA: advanced or fronted articulation\0"
+  "IPA: retracted or backed articulation\0"
+  "IPA: palatalization\0"
+  "IPA: retroflexion\0"
+  "IPA: closer variety of vowel\0"
+  "Americanist and Indo-Europeanist: retraction or retroflexion\0"
+  "Semiticist: velarization or pharyngealization\0"
+  "IPA: breathy-voice or murmur\0"
+  "IPA: voiceless\0"
+  "vocalic (in Latin transliteration of Indic sonorants)\0"
+  "Madurese\0"
+  "Romanian, Latvian, Livonian\0"
+  "French, Turkish, Azerbaijani\0"
+  "Americanist: nasalization\0"
+  "Polish, Lithuanian\0"
+  "IPA: syllabic\0"
+  "Yoruba\0"
+  "IPA: dental\0"
+  "IPA: labialization\0"
+  "IPA: voiced\0"
+  "Americanist: fronted articulation\0"
+  "Hittite transcription\0"
+  "Americanist: fronted articulation (variant of 032D)\0"
+  "Indo-Europeanist: semivowel\0"
+  "IPA: creaky voice\0"
+  "IPA: velarization or pharyngealization\0"
+  "Cyrillic palatalization\0"
+  "use of this character is discouraged\0"
+  "note special casing issues\0"
+  "IPA: dentolabial\0"
+  "IPA: alveolar\0"
+  "IPA: strong articulation\0"
+  "IPA: weak articulation\0"
+  "IPA: denasal\0"
+  "IPA: nasal escape\0"
+  "IPA: velopharyngeal friction\0"
+  "IPA: labial spreading\0"
+  "IPA: whistled articulation\0"
+  "commonly abbreviated as CGJ\0"
+  "has no visible glyph\0"
+  "the name of this character is misleading; it does not actually join graphemes\0"
+  "Latin transliterations of the Southern Min dialects of Chinese\0"
+  "Kharoshthi transliteration\0"
+  "Latin abbreviation, Lithuanian phonetics and mediaevalist transcriptions\0"
+  "a common glyph alternate connects the horizontal midpoints of the characters\0"
+  "IPA: sliding articulation\0"
+  "indicates numeric use of letters\0"
+  "sentence-final punctuation\0"
+  "003B is the preferred character\0"
+  "functions in Greek like a semicolon\0"
+  "00B7 is the preferred character\0"
+  "math constant 3.141592...\0"
+  "not to be confused with the actual stigma letter\0"
+  "used symbolically with a numeric value 200\0"
+  "the ordinary Greek letter, showing considerable glyph variation\0"
+  "in mathematical contexts, the loopy glyph is preferred, to contrast with 03D5\0"
+  "used as a technical symbol\0"
+  "used as a technical symbol, with a stroked glyph\0"
+  "maps to \"phi1\" symbol entities\0"
+  "a variant of pi, looking like omega\0"
+  "used as an ampersand\0"
+  "the Q-shaped archaic koppas are the ordinary alphabetic letters and can also be used as symbols with a numeric value of 90 in classical and pre-classical texts\0"
+  "apparently in origin a cursive form of digamma\0"
+  "the name \"stigma\" originally applied to a medieval sigma-tau ligature, whose shape was confusably similar to the cursive digamma\0"
+  "used as a symbol with a numeric value of 6\0"
+  "used in modern Greek as a symbol with a numeric value of 90, as in the dating of legal documentation\0"
+  "used as a symbol with a numeric value of 900\0"
+  "used as technical symbol\0"
+  "used with abbreviations containing 03C1\0"
+  "Macedonian\0"
+  "Russian, ...\0"
+  "Serbian\0"
+  "Ukrainian\0"
+  "Serbian, Azerbaijani, Altay\0"
+  "Serbian, Macedonian\0"
+  "Macedonian, Bulgarian\0"
+  "Byelorussian, Uzbek\0"
+  "Serbian, Macedonian, Abkhasian\0"
+  "basic Old Cyrillic uk is unified with cyrillic letter u\0"
+  "the exact identity of these broad omegas is unclear and may require revision of glyphs\0"
+  "use 20DD for ten thousands sign\0"
+  "Kildin Sami\0"
+  "Azerbaijani, Bashkir, ...\0"
+  "full bar form preferred over half-barred \"F\"-type\0"
+  "Abkhasian, Yakut\0"
+  "Tatar, ...\0"
+  "Bashkir\0"
+  "letterforms with right hooks are preferred, although occasional variants with left hooks occur\0"
+  "Abkhasian, Tajik, ...\0"
+  "Azerbaijani\0"
+  "Abkhasian\0"
+  "Bashkir, ...\0"
+  "Altay, Mari, Yakut\0"
+  "this is not a decomposable ligature\0"
+  "Bashkir, Chuvash\0"
+  "in Chuvashia, letterforms identical to or similar in form to 00E7 regularly occur\0"
+  "stem is straight, unlike LETTER U\0"
+  "Kazakh\0"
+  "Abkhasian, Tajik, Uzbek\0"
+  "Abkhasian, Tajik\0"
+  "originally derived from Latin \"h\", but uppercase form 04BA is closer to an inverted che (0427)\0"
+  "ogonek form preferred\0"
+  "aspiration sign in many Caucasian languages\0"
+  "is usually not cased, but the formal lowercase is 04CF\0"
+  "Moldavian\0"
+  "Khanty, Chukchi\0"
+  "Khanty, Chukchi, Nenets\0"
+  "Yupik\0"
+  "Enets, Khanty\0"
+  "Chukchi, Itelmen, Khanty\0"
+  "may also be used for Georgian\0"
+  "This character is to be used when Zarqa or Tsinor are placed above, and also for Tsinorit.\0"
+  "This character is to be used when Zarqa or Tsinor are placed above left.\0"
+  "furtive patah is not a distinct character\0"
+  "falls within the base letter\0"
+  "may be used as a Hebrew accent sof pasuq\0"
+  "may be treated as spacing punctuation, not as a point\0"
+  "may be used as a Hebrew punctuation colon\0"
+  "punctum extraordinarium (Psalms 27:13)\0"
+  "does not historically derive from the letter nun\0"
+  "also used with Thaana and Syriac in modern text\0"
+  "represents sallallahu alayhe wasallam \"may God's peace and blessings be upon him\"\0"
+  "represents alayhe assalam \"upon him be peace\"\0"
+  "represents rahmatullah alayhe \"may God have mercy upon him\"\0"
+  "represents radi allahu 'anhu \"may God be pleased with him\"\0"
+  "sign placed over the name or nom-de-plume of a poet, or in some writings used to mark all proper names\0"
+  "marks a recommended pause position in some Korans published in Iran and Pakistan\0"
+  "should not be confused with the small TAH sign used as a diacritic for some letters such as 0679\0"
+  "inserted to stretch characters\0"
+  "also used with Syriac\0"
+  "represents YEH-shaped letter with no dots in any positional form\0"
+  "marks absence of a vowel after the base consonant\0"
+  "used in some Korans to mark a long vowel as ignored\0"
+  "can have a variety of shapes, including a circular one and a shape that looks like '06E1'\0"
+  "Kashmiri and Baluchi\0"
+  "indicates nasalization in Urdu\0"
+  "Pashto\0"
+  "African languages\0"
+  "Ormuri, African languages\0"
+  "Kalami\0"
+  "actually a vowel sign, despite the name\0"
+  "Koranic Arabic\0"
+  "Baluchi, Kashmiri\0"
+  "forms digraphs\0"
+  "Urdu\0"
+  "Sindhi\0"
+  "Persian, Urdu, ...\0"
+  "Pashto letter \"dze\"\0"
+  "not used in modern Pashto\0"
+  "Lahnda\0"
+  "older shape for DUL, now obsolete in Sindhi\0"
+  "Burushaski\0"
+  "current shape used for DUL\0"
+  "old Urdu, not in current use\0"
+  "Kurdish\0"
+  "Dargwa\0"
+  "Moroccan Arabic\0"
+  "Turkic\0"
+  "Berber, Burushaski\0"
+  "old Hausa\0"
+  "old Malay\0"
+  "Adighe\0"
+  "Maghrib Arabic\0"
+  "Ingush\0"
+  "Middle Eastern Arabic for foreign words\0"
+  "North African Arabic for foreign words\0"
+  "Tunisian Arabic\0"
+  "may appear like an Arabic KAF (0643) with a ring below the base\0"
+  "Uighur, Kazakh, old Malay, ...\0"
+  "Berber\0"
+  "not used in Sindhi\0"
+  "forms aspirate digraphs\0"
+  "actually a ligature, not an independent letter\0"
+  "Kashmiri\0"
+  "Kirghiz\0"
+  "Uighur, Kurdish, Kazakh\0"
+  "Uighur\0"
+  "Kazakh, Kirghiz\0"
+  "Uighur, Kazakh\0"
+  "Arabic, Persian, Urdu, ...\0"
+  "initial and medial forms of this letter have dots\0"
+  "Pashto, Sindhi\0"
+  "Pashto, Uighur\0"
+  "used as the letter bbeh in Sindhi\0"
+  "Uighur, Kazakh, Kirghiz\0"
+  "smaller than the typical circular shape used for 0652\0"
+  "presentation form of 0652, using font technology to select the variant is preferred\0"
+  "used in some Korans to mark absence of a vowel\0"
+  "there is a range of acceptable glyphs for this character\0"
+  "Persian has a different glyph than Sindhi and Urdu\0"
+  "Persian, Sindhi, and Urdu share glyph different from Arabic\0"
+  "Persian, Sindhi, and Urdu have glyphs different from Arabic\0"
+  "Urdu and Sindhi have glyphs different from Arabic\0"
+  "marks the end of a paragraph\0"
+  "marks interrogations, imperatives, and pauses, especially in Biblical texts\0"
+  "marks subordinate clauses and minor pauses, especially in Biblical texts\0"
+  "marks expressions of wonder and has a distinct pausal value in Biblical texts\0"
+  "used at the end of verses of supplications\0"
+  "joins two words closely together in a context to which a rising tone is suitable\0"
+  "marks a dependent clause\0"
+  "marks the end of a subdivision of the apodosis, or latter part of a Biblical verse\0"
+  "marks a minor phrase division\0"
+  "marks the end of a real or rhetorical question\0"
+  "a contraction mark, mostly used in East Syriac\0"
+  "placed at the end of an incomplete word\0"
+  "marks the beginning of a phrase, word, or morpheme that has a marginal note\0"
+  "marks the end of a section with a marginal note\0"
+  "marks the beginning of a Syriac abbreviation\0"
+  "used in East Syriac texts to indicate an etymological Alaph\0"
+  "used in Garshuni documents\0"
+  "ambiguous form for undifferentiated early dalath/rish\0"
+  "mostly used in East Syriac texts\0"
+  "used in Christian Palestinian Aramaic\0"
+  "feminine marker used with the Taw feminine suffix\0"
+  "indicates a plosive pronunciation\0"
+  "indicates an aspirated (spirantized) pronunciation\0"
+  "accent mark used in ancient manuscripts\0"
+  "diacritic used in Turoyo for letters not found in Syriac\0"
+  "indication of a silent letter\0"
+  "also used to indicate numbers multiplied by a certain constant\0"
+  "a music mark\0"
+  "also used in the Syrian Orthodox Anaphora book to mark the breaking of the Eucharist bread\0"
+  "a diacritic cross used in liturgical texts\0"
+  "Saraiki\0"
+  "Shina\0"
+  "old Malay, preferred to 06AC\0"
+  "Moroccan Arabic, Amazigh, Burushaski\0"
+  "Maba\0"
+  "Saraiki, Pathwari\0"
+  "Gojri\0"
+  "Torwali, Ormuri\0"
+  "Ormuri\0"
+  "Kalami, Ormuri\0"
+  "for transcribing Dravidian short e\0"
+  "for transcribing Dravidian short o\0"
+  "for transcribing Dravidian alveolar n\0"
+  "for transcribing Dravidian alveolar r\0"
+  "half form is represented as \"Eyelash RA\"\0"
+  "for transcribing Dravidian l\0"
+  "for extending the alphabet to new letters\0"
+  "stands to the left of the consonant\0"
+  "for transcribing Dravidian vowels\0"
+  "suppresses inherent vowel\0"
+  "mostly used for Rigvedic svarita, with rare use for Yajurvedic udatta\0"
+  "phrase separator\0"
+  "used for writing Limbu in Devanagari\0"
+  "a glyph variant has the connecting top bar\0"
+  "Assamese\0"
+  "not in current usage\0"
+  "nasalization\0"
+  "doubles following consonant\0"
+  "base for vowels\0"
+  "God is One\0"
+  "used with Sanskrit text\0"
+  "pieces left of and above the consonant\0"
+  "not used in Tamil\0"
+  "preferred name is halant\0"
+  "obsolete historic letter\0"
+  "name is a mistake for LLLA\0"
+  "archaic form of the /au/ dependent vowel\0"
+  "used alone to write the /au/ dependent vowel in modern texts\0"
+  "dental\0"
+  "retroflex\0"
+  "independent vowel letter used to write Sanskrit\0"
+  "ellipsis, abbreviation\0"
+  "Pali virama\0"
+  "special vowel length indication used with 0E24 or 0E26\0"
+  "repetition\0"
+  "cancellation mark\0"
+  "final nasal\0"
+  "used as a bullet\0"
+  "used to mark end of long sections\0"
+  "used in combination with 0E30 to mark end of a verse\0"
+  "used to mark end of chapter or document\0"
+  "name is a mistake for fo sung\0"
+  "name is a mistake for fo tam\0"
+  "name is a mistake, lo ling is the mnemonic for 0EA5\0"
+  "name is a mistake, lo loot is the mnemonic for 0EA3\0"
+  "vowel shortener\0"
+  "final nasal or long o vowel\0"
+  "honorific; marks beginning of text or start of new folio\0"
+  "follows and ligates with initial yig-mgo\0"
+  "separates sections of meaning equivalent to topics and sub-topics\0"
+  "list enumerator, used in Bhutan\0"
+  "petition honorific, used in Bhutan\0"
+  "morpheme delimiter (approximate meaning)\0"
+  "the normal tsheg; provides a break opportunity\0"
+  "character name is a misnomer\0"
+  "a non-breaking tsheg; inhibits line breaking\0"
+  "marks end of a section of text (tshig-grub)\0"
+  "marks end of a whole topic (don-tshan)\0"
+  "shad which follows a tsheg-bar that starts a new line\0"
+  "used as a comma-like text delimiter\0"
+  "combines with digits\0"
+  "honorific, emphasis; used like underlining\0"
+  "marks point of text insertion or annotation\0"
+  "emphasis; used like underlining\0"
+  "a lenition mark\0"
+  "brackets\0"
+  "used for bracketing with a roof over\0"
+  "marks which combine with digits\0"
+  "when followed by a subjoined letter = ra mgo\0"
+  "base for dependent vowels\0"
+  "used only in transliteration and transcription\0"
+  "common, vowel-lengthening mark\0"
+  "use of this character is strongly discouraged\0"
+  "transliteration of Sanskrit avagraha\0"
+  "always followed by 0F82\0"
+  "rare, only used for full-sized subjoined letter\0"
+  "often repeated three times; indicates a refrain\0"
+  "marks a heavy drum beat\0"
+  "marks a light drum beat\0"
+  "symbol of a small Tibetan hand drum\0"
+  "symbol of a Tibetan cymbal\0"
+  "symbol of a Tibetan hand bell\0"
+  "the double body symbol\0"
+  "the tri-kaya or triple body symbol\0"
+  "the quadruple body symbol, a form of the swastika\0"
+  "used in Bhutan\0"
+  "also represents the glottal stop as a consonant\0"
+  "a tone mark\0"
+  "Inuktitut (AI), Carrier (U)\0"
+  "Inuktitut\0"
+  "Carrier (O)\0"
+  "Inuktitut (U), Carrier (E)\0"
+  "Inuktitut (UU)\0"
+  "East Cree\0"
+  "Moose Cree (Y), Algonquian (GLOTTAL STOP)\0"
+  "West Cree (T), East Cree (Y), Inuktitut (GLOTTAL STOP)\0"
+  "Athapascan (B/P), Sayisi (I), Carrier (G)\0"
+  "West Cree (K), Athapascan (K), Carrier (KH)\0"
+  "N Cree (SH), Sayisi (R), Carrier (NG)\0"
+  "Algonquian (S), Chipewyan (R), Sayisi (S)\0"
+  "West Cree (N), Athapascan (D/T), Sayisi (N), Carrier (N)\0"
+  "West Cree (W), Sayisi (O)\0"
+  "Chipewyan (TT), South Slavey (GH)\0"
+  "Algonquian (H), Carrier (R)\0"
+  "Moose Cree (W), Athapascan (Y), Sayisi (YU)\0"
+  "West Cree (C), Sayisi (D)\0"
+  "Athapascan (N), Sayisi (AI)\0"
+  "N Cree (L), Carrier (D)\0"
+  "Inuktitut (PAI), Athapascan (BE), Carrier (HU)\0"
+  "Inuktitut (PU), Athapascan (BO), Carrier (HE)\0"
+  "Inuktitut (PUU)\0"
+  "Athapascan (BA), Carrier (HA)\0"
+  "Sayisi (G)\0"
+  "Inuktitut (TAI), Athapascan (DI), Carrier (DU)\0"
+  "Athapascan (DE), Carrier (DO)\0"
+  "Inuktitut (TU), Athapascan (DO), Carrier (DE), Sayisi (DU)\0"
+  "Inuktitut (TUU)\0"
+  "Athapascan (DA)\0"
+  "South Slavey (DEH)\0"
+  "South Slavey (DIH)\0"
+  "South Slavey (DOH)\0"
+  "South Slavey (DAH)\0"
+  "Inuktitut (KAI)\0"
+  "Inuktitut (KU), Sayisi (KU)\0"
+  "Inuktitut (KUU)\0"
+  "Inuktitut (GAI), Athapascan (DHE), Sayisi (THE)\0"
+  "Inuktitut (GAAI)\0"
+  "Inuktitut (GI), Athapascan (DHI), Sayisi (THI)\0"
+  "Inuktitut (GII)\0"
+  "Inuktitut (GU), Athapascan (DHO), Sayisi (THO)\0"
+  "Inuktitut (GUU)\0"
+  "Inuktitut (GA), Athapascan (DHA), Sayisi (THA)\0"
+  "Inuktitut (GAA)\0"
+  "Inuktitut (G), Sayisi (T)\0"
+  "Athapascan (DH)\0"
+  "Inuktitut (MAI)\0"
+  "Inuktitut (MU), Sayisi (MU)\0"
+  "Inuktitut (MUU)\0"
+  "Carrier (M)\0"
+  "Inuktitut (NAI)\0"
+  "Inuktitut (NU), Sayisi (NU)\0"
+  "Inuktitut (NUU)\0"
+  "Inuktitut (LAI)\0"
+  "Inuktitut (LU)\0"
+  "Inuktitut (LUU)\0"
+  "Inuktitut (SAI)\0"
+  "Inuktitut (SU), Sayisi (SU)\0"
+  "Inuktitut (SUU)\0"
+  "Inuktitut (YAI)\0"
+  "Inuktitut (YU)\0"
+  "Inuktitut (YUU)\0"
+  "Inuktitut (RAI)\0"
+  "Athapascan (LE)\0"
+  "Athapascan (LI)\0"
+  "Inuktitut (RU)\0"
+  "Inuktitut (RUU)\0"
+  "Sayisi (LU)\0"
+  "Inuktitut (FAI)\0"
+  "Sayisi (TE)\0"
+  "Sayisi (TI)\0"
+  "Sayisi (TU)\0"
+  "Sayisi (TA)\0"
+  "Sayisi (TTHU)\0"
+  "probably a mistaken interpretation of an asterisk used to mark a proper noun\0"
+  "Algonquian\0"
+  "Inuktitut (QU)\0"
+  "Inuktitut (QUU)\0"
+  "Sayisi (KLE)\0"
+  "Sayisi (KLI)\0"
+  "Sayisi (KLU)\0"
+  "Sayisi (KLA)\0"
+  "Inuktitut (NGU)\0"
+  "Inuktitut (NGUU)\0"
+  "Sayisi (SHU)\0"
+  "Inuktitut (LHU)\0"
+  "Inuktitut (LHUU)\0"
+  "Sayisi (HU)\0"
+  "Athapascan (ZA), Sayisi (TZO), South Slavey (DHA)\0"
+  "Athapascan (ZO), Sayisi (TZU), South Slavey (DHO)\0"
+  "Athapascan (ZE), Sayisi (TZE), South Slavey (DHE)\0"
+  "Athapascan (ZI), Sayisi (TZI), South Slavey (DHI)\0"
+  "used as a symbol to denote Christ\0"
+  "Inuktitut (NNGU)\0"
+  "Inuktitut (NNGUU)\0"
+  "glyph is blank in \"stemless\" style fonts\0"
+  "marks beginning of Ogham text\0"
+  "marks end of Ogham text\0"
+  "golden number 17\0"
+  "golden number 18\0"
+  "golden number 19\0"
+  "as this character belongs to the first register, its correct transliteration is nna, not nno\0"
+  "used only for Pali/Sanskrit transliteration\0"
+  "as this character belongs to the first register, its correct transliteration is ssa, not sso\0"
+  "glottal stop\0"
+  "originally intended only for Pali/Sanskrit transliteration\0"
+  "use of this character is strongly discouraged; 17A2 should be used instead\0"
+  "use of this character is discouraged; the sequence 17A2 17B6 should be used instead\0"
+  "obsolete ligature for the sequence 17A7 1780\0"
+  "use of the sequence is now preferred\0"
+  "this is a variant for 17B1, used in only two words\0"
+  "17B1 is the normal variant of this vowel\0"
+  "final nasalization\0"
+  "this character is usually regarded as a vowel sign am, along with om and aam\0"
+  "inserts a short inherent vowel with abrupt glottal stop\0"
+  "the preferred transliteration is yukaleakpintu\0"
+  "changes the second register to the first\0"
+  "the preferred transliteration is muusekatoan\0"
+  "changes the first register to the second\0"
+  "the preferred transliteration is treisap\0"
+  "shortens the vowel sound in the previous orthographic syllable\0"
+  "the preferred transliteration is bantak\0"
+  "a diacritic historically corresponding to the repha form of ra in Devanagari\0"
+  "indicates that the base character is not pronounced\0"
+  "sign used with some exclamations\0"
+  "denotes stressed intonation in some single-consonant words\0"
+  "denotes deviation from the general rules of pronunciation, mostly used in loan words from Pali/Sanskrit, French, and so on\0"
+  "mostly obsolete, a \"killer\"\0"
+  "indicates that the base character is the final consonant of a word without its inherent vowel sound\0"
+  "functions to indicate that the following Khmer letter is to be rendered subscripted\0"
+  "shape shown is arbitrary and is not visibly rendered\0"
+  "originally intended as part of lunar date symbols\0"
+  "use of this character is strongly discouraged in favor of the complete set of lunar date symbols\0"
+  "functions as a full stop, period\0"
+  "indicates the end of a section or a text\0"
+  "functions as colon\0"
+  "the preferred transliteration is camnoc pii kuuh\0"
+  "repetition sign\0"
+  "et cetera\0"
+  "use of this character is discouraged; other abbreviations for et cetera also exist\0"
+  "preferred spelling: 17D4 179B 17D4\0"
+  "indicates the beginning of a book or a treatise\0"
+  "the preferred transliteration is phnek moan\0"
+  "indicates the end of a book or treatise\0"
+  "this forms a pair with 17D9\0"
+  "the preferred transliteration is koomoot\0"
+  "rare, shows an omitted Sanskrit vowel, like an apostrophe\0"
+  "the preferred transliteration is avakraha sannya\0"
+  "mostly obsolete\0"
+  "indicates that the base character is the final consonant of a word with its inherent vowel sound\0"
+  "marks the end of a chapter\0"
+  "not a format control character, but simply a hyphen for Todo\0"
+  "abbreviated FVS1\0"
+  "abbreviated FVS2\0"
+  "abbreviated FVS3\0"
+  "abbreviated MVS\0"
+  "conjunction: and\0"
+  "perfective\0"
+  "represents the first August in a leap year\0"
+  "represents the second August in a leap year\0"
+  "glyph can also have sideways orientation\0"
+  "represents a semi-voiced [p]\0"
+  "glyph can also have turned orientation\0"
+  "represents a voiceless uvular trill\0"
+  "in italic style, the glyph is obliqued, not italicized\0"
+  "more appropriate equivalence would be to 1D08\0"
+  "Georgian transcription\0"
+  "older Irish phonetic notation\0"
+  "American dictionary usage\0"
+  "used with different meanings by Americanists and Oxford dictionaries\0"
+  "used by Russianists\0"
+  "used by Americanists\0"
+  "uppercase is 2C63\0"
+  "used by Americanists and Oxford dictionaries\0"
+  "Glagolitic\0"
+  "Irish Gaelic (old orthography)\0"
+  "Indic transliteration\0"
+  "Semitic transliteration\0"
+  "Macedonian transliteration\0"
+  "see ISO 15919 on the use of dot below versus ring below in Indic transliteration\0"
+  "in current use in Gaelic types (as glyph variant of 1E61)\0"
+  "half an em\0"
+  "nominally, a space equal to the type size in points\0"
+  "may scale by the condensation factor of a font\0"
+  "in computer typography sometimes equated to thin space\0"
+  "space equal to tabular width of a font\0"
+  "this is equivalent to the digit width of fonts with fixed-width digits\0"
+  "space equal to narrow punctuation of a font\0"
+  "a fifth of an em (or sometimes a sixth)\0"
+  "thinner than a thin space\0"
+  "in traditional typography, the thinnest space available\0"
+  "commonly abbreviated ZWSP\0"
+  "this character is intended for line break control; it has no width, but its presence between two characters does not prevent increased letter spacing in justification\0"
+  "commonly abbreviated ZWNJ\0"
+  "commonly abbreviated ZWJ\0"
+  "commonly abbreviated LRM\0"
+  "commonly abbreviated RLM\0"
+  "may be used in pairs to offset parenthetical text\0"
+  "long dash introducing quoted text\0"
+  "used in pairs to indicate norm of a matrix\0"
+  "this is the preferred character (as opposed to 201B)\0"
+  "this is the preferred character to use for apostrophe\0"
+  "used as opening single quotation mark in some languages\0"
+  "has same semantic as 2018, but differs in appearance\0"
+  "this is the preferred character (as opposed to 201F)\0"
+  "used as opening double quotation mark in some languages\0"
+  "has same semantic as 201C, but differs in appearance\0"
+  "also used as an Armenian semicolon (mijaket)\0"
+  "may be used to represent this semantic unambiguously\0"
+  "commonly abbreviated LRE\0"
+  "commonly abbreviated RLE\0"
+  "commonly abbreviated PDF\0"
+  "commonly abbreviated LRO\0"
+  "commonly abbreviated RLO\0"
+  "commonly abbreviated NNBSP\0"
+  "used, for example, in measures of blood alcohol content, salinity, etc.\0"
+  "percent of a percent, rarely used\0"
+  "proofreader's mark: insert here\0"
+  "for composing arbitrary fractions\0"
+  "Irish Gaelic, Old English, ...\0"
+  "editing mark\0"
+  "a common glyph variant and fallback representation looks like ./.\0"
+  "may also be used as a dingbat to indicate correctness\0"
+  "used in Finno-Ugric Phonetic Alphabet to indicate a related borrowed form with different sound\0"
+  "used as a punctuation mark with Syloti Nagri, Bengali and other Indic scripts\0"
+  "historically used to indicate the end of a sentence or change of speaker\0"
+  "extends from baseline to cap height\0"
+  "used by scribes in the margin as highlighter mark\0"
+  "this is centered on the line, but extends beyond top and bottom of the line\0"
+  "used in dictionaries to indicate legal but undesirable word break\0"
+  "glyph extends the whole height of the line\0"
+  "abbreviated MMSP\0"
+  "four-eighteenths of an em\0"
+  "commonly abbreviated WJ\0"
+  "a zero width non-breaking space (only)\0"
+  "intended for disambiguation of functions for byte order mark\0"
+  "contiguity operator indicating application of a function\0"
+  "contiguity operator indicating multiplication\0"
+  "contiguity operator indicating that adjacent mathematical symbols form a list, e.g. when no visible comma is used between multiple indices\0"
+  "intended for ECU, but not widely used\0"
+  "historical character; this is NOT the euro!\0"
+  "Costa Rica, El Salvador\0"
+  "Brazil\0"
+  "France\0"
+  "intended for lira, but not widely used\0"
+  "preferred character for lira is 00A3\0"
+  "USA (1/10 cent)\0"
+  "Nigeria\0"
+  "Spain\0"
+  "India\0"
+  "Korea\0"
+  "Israel\0"
+  "Vietnam\0"
+  "currency sign for the European Monetary Union\0"
+  "euro, not ecu\0"
+  "Laos\0"
+  "Mongolia\0"
+  "also transliterated as tugrug, tugric, tugrog, togrog, tögrög\0"
+  "Greece\0"
+  "Philippines\0"
+  "the Mexican peso is indicated with the dollar sign\0"
+  "Paraguay\0"
+  "Often represented by G. or Gs.\0"
+  "former Argentinian currency\0"
+  "Ukraine\0"
+  "Ghana\0"
+  "glyph may look like '023B' or like C with a short vertical stroke through the upper arm\0"
+  "vector\0"
+  "negation\0"
+  "occasional variant for negation\0"
+  "rotation\0"
+  "prohibition\0"
+  "tensor\0"
+  "extends the full width of the base character\0"
+  "simply a mathematical italic h; this character's name results from legacy usage\0"
+  "despite its character name, this symbol is derived from a special italicized version of the small letter l\0"
+  "the SI recommended symbol for liter is 006C\0"
+  "actually this has the form of a lowercase calligraphic p, despite its name\0"
+  "typical forms for this symbol may use lower case, small caps or superscripted letter shapes\0"
+  "SI unit of resistance, named after G. S. Ohm, German physicist\0"
+  "preferred representation is 03A9\0"
+  "archaic unit of conductance (= the SI unit siemens)\0"
+  "typographically a turned greek capital letter omega\0"
+  "unique element fulfilling a description (logic)\0"
+  "non SI length unit (=0.1 nm) named after A. J. Ångström, Swedish physicist\0"
+  "preferred representation is 00C5\0"
+  "used in European packaging\0"
+  "lowercase is 214E\0"
+  "intended for use with 20DD\0"
+  "a binding signature mark\0"
+  "sometimes used for the differential\0"
+  "sometimes used for the natural exponent\0"
+  "sometimes used for the imaginary unit\0"
+  "used in linear logic\0"
+  "abbreviates the word 'per'\0"
+  "uppercase is 2132\0"
+  "used in combination with C and I to form large numbers\0"
+  "lowercase is 2184\0"
+  "IPA: egressive airflow\0"
+  "IPA: ingressive airflow\0"
+  "negation of 2190\0"
+  "negation of 2192\0"
+  "negation of 2194\0"
+  "may indicate a carriage return or new line\0"
+  "negation of 21D0\0"
+  "negation of 21D4\0"
+  "negation of 21D2\0"
+  "used in linguistics to indicate a null morpheme or phonological \"zero\"\0"
+  "used for Laplacian operator (written with superscript 2)\0"
+  "originates in math pi fonts; not the straight epsilon\0"
+  "generic division operator\0"
+  "clockwise or anticlockwise arrows do not reverse during layout mirroring\0"
+  "reversed tilde and lazy S are glyph variants\0"
+  "also used to denote the universal quantifier\0"
+  "also used to denote the existential quantifier\0"
+  "APL\0"
+  "these four ellipses are used for matrix row/column elision\0"
+  "from ISO 2047\0"
+  "symbol for End of Transmission\0"
+  "set of four \"crop\" corners, arranged facing outward\0"
+  "used as a command delimiter in some very old computers\0"
+  "set of four \"quine\" corners, for quincuncial arrangement\0"
+  "these are also used in mathematics in upper and lower pairs\0"
+  "preferred naming for APL tack symbols now follows the London Convention in ISO/IEC 13751:2000 (APL Extended)\0"
+  "symbol for Negative Acknowledge\0"
+  "from ISO 9995-7\0"
+  "keyboard symbol for No Break Space\0"
+  "symbol for End of Medium\0"
+  "used for extension of arrows\0"
+  "only used for terminal emulation\0"
+  "may be shown with either hollow or filled glyph\0"
+  "UI symbol to eject media\0"
+  "graphic for space\0"
+  "keyboard symbol for undoable delete\0"
+  "25%\0"
+  "50%\0"
+  "75%\0"
+  "may be used to represent a missing ideograph\0"
+  "note that the reference glyph for this character is intentionally larger than the dotted circle glyph used to indicate combining characters in this standard; see, for example, 0300\0"
+  "can be used to indicate a wait\0"
+  "used as generic symbol for recycling or to indicate that material is recyclable\0"
+  "polyethylene terephthalate\0"
+  "high density polyethylene\0"
+  "vinyl, polyvinyl chloride\0"
+  "low density polyethylene\0"
+  "polypropylene\0"
+  "polystyrene\0"
+  "other plastics\0"
+  "used together with other text and labels to indicate the type of material to be recycled\0"
+  "used to indicate 100% recycled paper content\0"
+  "percentage of recycled paper content indicated in overlay or next to this symbol\0"
+  "both inclined or upright renderings of this symbol are common\0"
+  "signifies a commercial term or commerce\0"
+  "glyph shows a heraldic staff with a winged wheel\0"
+  "a glyph variant has the two circles on the same line\0"
+  "base for male or female sign\0"
+  "UI symbol for record function\0"
+  "can represent wedding ring\0"
+  "Historically, the Maltese cross took many forms; the shape shown in the Zapf Dingbats is similar to one known as the Cross Formée.\0"
+  "used by Euclid\0"
+  "relation, typeset with additional spacing\0"
+  "used as form of possibility in modal logic\0"
+  "while this character is imaged as a fixed-width blank in many fonts, it does not act as a space\0"
+  "medium-small-sized black circle\0"
+  "used for Bourbakist intervals\0"
+  "four close dots vertical\0"
+  "forms part of a graduated set of circles with enclosed black circle of different sizes\0"
+  "vertical bar crossed by two horizontals\0"
+  "relational database theory\0"
+  "black stands slightly better (chess notation)\0"
+  "white stands slightly better (chess notation)\0"
+  "an equational logic symbol, not a computing science symbol\0"
+  "non-independence (original concept) is related to forking\0"
+  "independence (original concept) is related to non-forking\0"
+  "probability theory\0"
+  "logic\0"
+  "often n-ary\0"
+  "lowercase is 026B\0"
+  "lowercase is 1D7D\0"
+  "lowercase is 027D\0"
+  "uppercase is 023A\0"
+  "uppercase is 023E\0"
+  "medium rounded o\0"
+  "used as an opening raised omission bracket\0"
+  "used as an opening or closing raised omission bracket\0"
+  "used as a closing or opening raised omission bracket\0"
+  "glyph variants may look like '00F7' or '2238'\0"
+  "contrary to its formal name this symbol points upwards\0"
+  "contrary to its formal name this symbol points downwards\0"
+  "used in ancient Near-Eastern linguistics\0"
+  "hyphen in Fraktur text uses 002D or 2010, but with a '2E17' glyph in Fraktur fonts\0"
+  "used in N'Ko\0"
+  "form used on left side\0"
+  "form used at top\0"
+  "form used on right side\0"
+  "form used at bottom\0"
+  "form used (rarely) at bottom\0"
+  "used as quotation marks\0"
+  "substitute for ideograph not in font\0"
+  "sometimes depicted as double prime quotation mark\0"
+  "this is a mistaken analogue to 201D; 301F is preferred\0"
+  "may be depicted as low inverse double prime quotation mark\0"
+  "the preceding two semantic characters are preferred to the following three glyphic forms\0"
+  "the preceding two are glyphs used in conjunction with the following glyph\0"
+  "informal abbreviation for Japanese -masu ending\0"
+  "marks the start of a song part in Japanese\0"
+  "visual indicator that the following ideograph is to be taken as a variant of the intended character\0"
+  "visual indicator of a screen space for half of an ideograph\0"
+  "archaic velar nasal\0"
+  "archaic glottal stop\0"
+  "Monday\0"
+  "Tuesday\0"
+  "Wednesday\0"
+  "Thursday\0"
+  "Friday\0"
+  "Saturday\0"
+  "Sunday\0"
+  "incorporated\0"
+  "limited\0"
+  "company\0"
+  "from\0"
+  "to\0"
+  "postal code mark\0"
+  "name seal\0"
+  "holiday\0"
+  "apartment\0"
+  "alpha\0"
+  "ampere\0"
+  "are (unit of area)\0"
+  "inning\0"
+  "inch\0"
+  "won (Korean currency)\0"
+  "escudo (Portuguese currency)\0"
+  "acre\0"
+  "ounce\0"
+  "ohm\0"
+  "kai-ri: nautical mile\0"
+  "carat\0"
+  "calorie\0"
+  "gallon\0"
+  "gamma\0"
+  "giga-\0"
+  "guinea\0"
+  "curie\0"
+  "guilder\0"
+  "kilo-\0"
+  "kilogram\0"
+  "kilometer\0"
+  "kilowatt\0"
+  "gram\0"
+  "gram ton\0"
+  "cruzeiro (Brazilian currency)\0"
+  "krone\0"
+  "case\0"
+  "koruna (Czech currency)\0"
+  "co-op\0"
+  "cycle\0"
+  "centime\0"
+  "shilling\0"
+  "centi-\0"
+  "cent\0"
+  "dozen\0"
+  "deci-\0"
+  "dollar\0"
+  "ton\0"
+  "nano-\0"
+  "knot, nautical mile\0"
+  "heights\0"
+  "percent\0"
+  "parts\0"
+  "barrel\0"
+  "piaster\0"
+  "picul (unit of weight)\0"
+  "pico-\0"
+  "building\0"
+  "farad\0"
+  "feet\0"
+  "bushel\0"
+  "franc\0"
+  "hectare\0"
+  "peso\0"
+  "pfennig\0"
+  "hertz\0"
+  "pence\0"
+  "page\0"
+  "beta\0"
+  "point\0"
+  "volt, bolt\0"
+  "hon: volume\0"
+  "pound\0"
+  "hall\0"
+  "horn\0"
+  "micro-\0"
+  "mile\0"
+  "mach\0"
+  "mark\0"
+  "mansion (i.e. better quality apartment)\0"
+  "micron\0"
+  "milli-\0"
+  "millibar\0"
+  "mega-\0"
+  "megaton\0"
+  "meter\0"
+  "yard\0"
+  "yuan (Chinese currency)\0"
+  "liter\0"
+  "lira\0"
+  "rupee\0"
+  "ruble\0"
+  "rem (unit of radiation)\0"
+  "roentgen\0"
+  "watt\0"
+  "name is a misnomer\0"
+  "Mongolian, Chinese, Tibetan, Sanskrit\0"
+  "Chinese, Tibetan\0"
+  "Mongolian, Chinese, Uighur, Tibetan\0"
+  "Chinese, Tibetan, Sanskrit\0"
+  "Mongolian, Chinese, Tibetan\0"
+  "Mongolian, Uighur, Tibetan, Sanskrit\0"
+  "Mongolian, Uighur\0"
+  "Mongolian, Chinese\0"
+  "Chinese, Uighur\0"
+  "language usage unknown\0"
+  "created by reversal of A862\0"
+  "Mongolian, Chinese, Uighur\0"
+  "Sanskrit\0"
+  "Chinese\0"
+  "Tibetan, Sanskrit\0"
+  "Tibetan\0"
+  "marks beginning of text\0"
+  "a unified CJK ideograph, not a compatibility ideograph, despite its name\0"
+  "a glyph variant of 05BF\0"
+  "this form of AYIN has no descender, for use with marks placed below the letter\0"
+  "these are abbreviated VS1, and so on\0"
+  "misspelling of \"BRACKET\" in character name is a known defect\0"
+  "sesame dots are used beside vertical text for emphasis\0"
+  "for compatibility with certain legacy character sets\0"
+  "may be used to detect byte order by contrast with the noncharacter code point FFFE\0"
+  "use as an indication of non-breaking is deprecated; see 2060 instead\0"
+  "the most commonly occurring glyph variant looks like doubled parentheses\0"
+  "sometimes treated as fullwidth overline\0"
+  "marks start of annotated text\0"
+  "marks start of annotating character(s)\0"
+  "marks end of annotation block\0"
+  "used as placeholder in text for an otherwise unspecified object\0"
+  "used to replace an incoming character whose value is unknown or unrepresentable in Unicode\0"
+  "compare the use of 001A as a control character to indicate the substitute function\0"
+  "the value FFFE is guaranteed not to be a Unicode character at all\0"
+  "may be used to detect byte order by contrast with FEFF which is a character\0"
+  "the value FFFF is guaranteed not to be a Unicode character at all\0"
+  "the shape of this ideogram is only partially known\0"
+  "top line is at cap height, unlike 10111\0"
+  "formed by making a circular indentation with the end of the stylus\0"
+  "called diargon by some authorities\0"
+  "called triargon by some authorities\0"
+  "used in intonation formulas instead of nu, before phonemes a, i, o, u\0"
+  "used in intonation formulas instead of nu, before phoneme e\0"
+  "misspelling of \"FTHORA\" in character name is a known defect\0"
+  "vocal E\0"
+  "vocal first sharp of E\0"
+  "vocal or instrumental second sharp of E\0"
+  "vocal F\0"
+  "vocal first sharp of F\0"
+  "vocal second sharp of F\0"
+  "instrumental second sharp of d\0"
+  "vocal G\0"
+  "instrumental second sharp of G\0"
+  "vocal first sharp of G\0"
+  "vocal second sharp of G\0"
+  "instrumental first sharp of e´\0"
+  "vocal A\0"
+  "this is a modification of 039F and is therefore not the same as 03D8\0"
+  "vocal first sharp of A\0"
+  "vocal second sharp of A\0"
+  "vocal B\0"
+  "vocal first sharp of B\0"
+  "instrumental first sharp of d´\0"
+  "vocal second sharp of B\0"
+  "instrumental first sharp of b\0"
+  "vocal c\0"
+  "unlike 1D23B this character has a glyph variant that looks like a horizontal line\0"
+  "vocal first sharp of c\0"
+  "vocal second sharp of c\0"
+  "instrumental second sharp of B\0"
+  "vocal d\0"
+  "vocal first sharp of d\0"
+  "instrumental g\0"
+  "this is a modification of 0395 and is therefore not the same as 0046\0"
+  "vocal second sharp of d\0"
+  "vocal e\0"
+  "vocal first sharp of e\0"
+  "this is a modification of 0392 and is therefore not the same as 0052\0"
+  "vocal second sharp of e\0"
+  "vocal first sharp of g´\0"
+  "vocal second sharp of g´\0"
+  "vocal a´\0"
+  "vocal first sharp of a´\0"
+  "vocal second sharp of a´\0"
+  "instrumental first sharp of d\0"
+  "instrumental E\0"
+  "instrumental first sharp of E\0"
+  "instrumental F\0"
+  "instrumental first sharp of F\0"
+  "instrumental G\0"
+  "instrumental first sharp of G\0"
+  "instrumental first sharp of A\0"
+  "instrumental second sharp of A\0"
+  "instrumental B\0"
+  "instrumental first sharp of B\0"
+  "instrumental first sharp of c\0"
+  "instrumental second sharp of c\0"
+  "instrumental d\0"
+  "instrumental first sharp of e\0"
+  "instrumental second sharp of e\0"
+  "instrumental f\0"
+  "instrumental first sharp of f\0"
+  "instrumental second sharp of f\0"
+  "instrumental first sharp of g\0"
+  "instrumental second sharp of g\0"
+  "instrumental first sharp of a\0"
+  "instrumental second sharp of b\0"
+  "instrumental c´\0"
+  "instrumental first sharp of c´\0"
+  "instrumental second sharp of c´\0"
+  "instrumental d´\0"
+  "instrumental second sharp of d´\0"
+  "instrumental e´\0"
+  "instrumental second sharp of e´\0"
+  "instrumental first sharp of f´\0"
+  "similar but not identical to 002F\0"
+  "instrumental second sharp of f´\0"
+  "similar but not identical to 005C\0"
+  "instrumental g´\0"
+  "instrumental first sharp of g´\0"
+  "instrumental second sharp of g´\0"
+  "instrumental a´\0"
+  "instrumental first sharp of a´\0"
+  "instrumental second sharp of a´\0"
+  "usually associated with human (Chinese ren), rather than earth\0"
+  "the value 1FFFE is guaranteed not to be a Unicode character at all\0"
+  "the value 1FFFF is guaranteed not to be a Unicode character at all\0"
+  "the value 2FFFE is guaranteed not to be a Unicode character at all\0"
+  "the value 2FFFF is guaranteed not to be a Unicode character at all\0"
+  "the value 3FFFE is guaranteed not to be a Unicode character at all\0"
+  "the value 3FFFF is guaranteed not to be a Unicode character at all\0"
+  "the value 4FFFE is guaranteed not to be a Unicode character at all\0"
+  "the value 4FFFF is guaranteed not to be a Unicode character at all\0"
+  "the value 5FFFE is guaranteed not to be a Unicode character at all\0"
+  "the value 5FFFF is guaranteed not to be a Unicode character at all\0"
+  "the value 6FFFE is guaranteed not to be a Unicode character at all\0"
+  "the value 6FFFF is guaranteed not to be a Unicode character at all\0"
+  "the value 7FFFE is guaranteed not to be a Unicode character at all\0"
+  "the value 7FFFF is guaranteed not to be a Unicode character at all\0"
+  "the value 8FFFE is guaranteed not to be a Unicode character at all\0"
+  "the value 8FFFF is guaranteed not to be a Unicode character at all\0"
+  "the value 9FFFE is guaranteed not to be a Unicode character at all\0"
+  "the value 9FFFF is guaranteed not to be a Unicode character at all\0"
+  "the value AFFFE is guaranteed not to be a Unicode character at all\0"
+  "the value AFFFF is guaranteed not to be a Unicode character at all\0"
+  "the value BFFFE is guaranteed not to be a Unicode character at all\0"
+  "the value BFFFF is guaranteed not to be a Unicode character at all\0"
+  "the value CFFFE is guaranteed not to be a Unicode character at all\0"
+  "the value CFFFF is guaranteed not to be a Unicode character at all\0"
+  "the value DFFFE is guaranteed not to be a Unicode character at all\0"
+  "the value DFFFF is guaranteed not to be a Unicode character at all\0"
+  "these are abbreviated VS17, and so on\0"
+  "the value EFFFE is guaranteed not to be a Unicode character at all\0"
+  "the value EFFFF is guaranteed not to be a Unicode character at all\0"
+  "the value FFFFE is guaranteed not to be a Unicode character at all\0"
+  "the value FFFFF is guaranteed not to be a Unicode character at all\0"
+  "the value 10FFFE is guaranteed not to be a Unicode character at all\0"
+  "the value 10FFFF is guaranteed not to be a Unicode character at all\0"
+  ;
+
+static const UnicharStringIndex names_list_stars[] = 
 {
-  { 0x0020, "sometimes considered a control code" },
-  { 0x0020, "other space characters: 2000-200A" },
-  { 0x0022, "neutral (vertical), used as opening or closing quotation mark" },
-  { 0x0022, "preferred characters in English for paired quotation marks are 201C & 201D" },
-  { 0x0024, "glyph may have one or two vertical bars" },
-  { 0x0024, "other currency symbol characters: 20A0-20B5" },
-  { 0x0027, "neutral (vertical) glyph with mixed usage" },
-  { 0x0027, "2019 is preferred for apostrophe" },
-  { 0x0027, "preferred characters in English for paired quotation marks are 2018 & 2019" },
-  { 0x0029, "see discussion on semantics of paired bracketing characters" },
-  { 0x002D, "used for either hyphen or minus sign" },
-  { 0x002E, "may be rendered as a raised decimal point in old style numbers" },
-  { 0x003B, "this, and not 037E, is the preferred character for 'Greek question mark'" },
-  { 0x003D, "other related characters: 2241-2263" },
-  { 0x0049, "Turkish and Azerbaijani use 0131 for lowercase" },
-  { 0x005B, "other bracket characters: 27E6-27EB, 2983-2998, 3008-301B" },
-  { 0x005E, "this is a spacing character" },
-  { 0x005F, "this is a spacing character" },
-  { 0x0060, "this is a spacing character" },
-  { 0x0069, "Turkish and Azerbaijani use 0130 for uppercase" },
-  { 0x007C, "used in pairs to indicate absolute value" },
-  { 0x007E, "this is a spacing character" },
-  { 0x0084, "formerly known as INDEX" },
-  { 0x00A0, "commonly abbreviated as NBSP" },
-  { 0x00A1, "Spanish, Asturian, Galician" },
-  { 0x00A4, "other currency symbol characters: 20A0-20B5" },
-  { 0x00A5, "glyph may have one or two crossbars" },
-  { 0x00A7, "paragraph sign in some European usage" },
-  { 0x00A8, "this is a spacing character" },
-  { 0x00AA, "Spanish" },
-  { 0x00AB, "usually opening, sometimes closing" },
-  { 0x00AD, "commonly abbreviated as SHY" },
-  { 0x00AF, "this is a spacing character" },
-  { 0x00B0, "this is a spacing character" },
-  { 0x00B2, "other superscript digit characters: 2070-2079" },
-  { 0x00B4, "this is a spacing character" },
-  { 0x00B6, "section sign in some European usage" },
-  { 0x00B8, "this is a spacing character" },
-  { 0x00B8, "other spacing accent characters: 02D8-02DB" },
-  { 0x00BA, "Spanish" },
-  { 0x00BB, "usually closing, sometimes opening" },
-  { 0x00BC, "bar may be horizontal or slanted" },
-  { 0x00BC, "other fraction characters: 2153-215E" },
-  { 0x00BD, "bar may be horizontal or slanted" },
-  { 0x00BE, "bar may be horizontal or slanted" },
-  { 0x00BF, "Spanish" },
-  { 0x00DF, "German" },
-  { 0x00DF, "uppercase is \"SS\"" },
-  { 0x00DF, "in origin a ligature of 017F and 0073" },
-  { 0x00E3, "Portuguese" },
-  { 0x00E5, "Danish, Norwegian, Swedish, Walloon" },
-  { 0x00E6, "Danish, Norwegian, Icelandic, Faroese, Old English, French, IPA" },
-  { 0x00EC, "Italian, Malagasy" },
-  { 0x00F0, "Icelandic, Faroese, Old English, IPA" },
-  { 0x00F5, "Portuguese, Estonian" },
-  { 0x00F8, "Danish, Norwegian, Faroese, IPA" },
-  { 0x00F9, "French, Italian" },
-  { 0x00FD, "Czech, Slovak, Icelandic, Faroese, Welsh, Malagasy" },
-  { 0x00FE, "Icelandic, Old English, phonetics" },
-  { 0x00FE, "Runic letter borrowed into Latin script" },
-  { 0x00FF, "French" },
-  { 0x0101, "Latvian, Latin, ..." },
-  { 0x0103, "Romanian, Vietnamese, Latin, ..." },
-  { 0x0105, "Polish, Lithuanian, ..." },
-  { 0x0107, "Polish, Croatian, ..." },
-  { 0x0109, "Esperanto" },
-  { 0x010B, "Maltese, Irish Gaelic (old orthography)" },
-  { 0x010D, "Czech, Slovak, Slovenian, and many other languages" },
-  { 0x010E, "the form using caron/hacek is preferred in all contexts" },
-  { 0x010F, "Czech, Slovak" },
-  { 0x010F, "the form using apostrophe is preferred in typesetting" },
-  { 0x0111, "Croatian, Vietnamese, Sami" },
-  { 0x0111, "an alternate glyph with the stroke through the bowl is used in Americanist orthographies" },
-  { 0x0113, "Latvian, Latin, ..." },
-  { 0x0115, "Malay, Latin, ..." },
-  { 0x0117, "Lithuanian" },
-  { 0x0119, "Polish, Lithuanian, ..." },
-  { 0x011B, "Czech, ..." },
-  { 0x011D, "Esperanto" },
-  { 0x011F, "Turkish, Azerbaijani" },
-  { 0x0121, "Maltese, Irish Gaelic (old orthography)" },
-  { 0x0123, "Latvian" },
-  { 0x0123, "there are three major glyph variants" },
-  { 0x0125, "Esperanto" },
-  { 0x0127, "Maltese, IPA, ..." },
-  { 0x0129, "Greenlandic (old orthography)" },
-  { 0x012B, "Latvian, Latin, ..." },
-  { 0x012D, "Latin, ..." },
-  { 0x012F, "Lithuanian, ..." },
-  { 0x0130, "Turkish, Azerbaijani" },
-  { 0x0130, "lowercase is 0069" },
-  { 0x0131, "Turkish, Azerbaijani" },
-  { 0x0131, "uppercase is 0049" },
-  { 0x0133, "Dutch" },
-  { 0x0135, "Esperanto" },
-  { 0x0137, "Latvian" },
-  { 0x0138, "Greenlandic (old orthography)" },
-  { 0x013A, "Slovak" },
-  { 0x013C, "Latvian" },
-  { 0x013D, "the form using apostrophe is preferred in typesetting" },
-  { 0x013E, "Slovak" },
-  { 0x013E, "the form using apostrophe is preferred in typesetting" },
-  { 0x013F, "some fonts show the middle dot inside the L, but the preferred form has the dot following the L" },
-  { 0x0140, "Catalan legacy compatibility character for ISO 6937" },
-  { 0x0140, "preferred representation for Catalan: 006C 00B7" },
-  { 0x0142, "Polish, ..." },
-  { 0x0144, "Polish, ..." },
-  { 0x0146, "Latvian" },
-  { 0x0148, "Czech, Slovak" },
-  { 0x0149, "Afrikaans" },
-  { 0x0149, "legacy compatibility character for ISO/IEC 6937" },
-  { 0x0149, "uppercase is 02BC 004E" },
-  { 0x014A, "glyph may also have appearance of large form of the small letter" },
-  { 0x014B, "Sami, Mende, IPA, ..." },
-  { 0x014D, "Latvian, Latin, ..." },
-  { 0x014F, "Latin" },
-  { 0x0151, "Hungarian" },
-  { 0x0153, "French, IPA, Old Icelandic, Old English, ..." },
-  { 0x0155, "Slovak, ..." },
-  { 0x0157, "Livonian" },
-  { 0x0159, "Czech, ..." },
-  { 0x015B, "Polish, Indic transliteration, ..." },
-  { 0x015D, "Esperanto" },
-  { 0x015F, "Turkish, Azerbaijani, Romanian, ..." },
-  { 0x015F, "this character is used in both Turkish and Romanian data" },
-  { 0x015F, "a glyph variant with comma below is preferred for Romanian" },
-  { 0x0161, "Czech, Estonian, Finnish, Slovak, and many other languages" },
-  { 0x0163, "Romanian, Semitic transliteration, ..." },
-  { 0x0163, "this character is used in Romanian data" },
-  { 0x0163, "a glyph variant with comma below is preferred for Romanian" },
-  { 0x0164, "the form using caron/hacek is preferred in all contexts" },
-  { 0x0165, "Czech, Slovak" },
-  { 0x0165, "the form using apostrophe is preferred in typesetting" },
-  { 0x0167, "Sami" },
-  { 0x0169, "Greenlandic (old orthography)" },
-  { 0x016B, "Latvian, Lithuanian, Latin, ..." },
-  { 0x016D, "Latin, Esperanto, ..." },
-  { 0x016F, "Czech, ..." },
-  { 0x0171, "Hungarian" },
-  { 0x0173, "Lithuanian" },
-  { 0x0175, "Welsh" },
-  { 0x0177, "Welsh" },
-  { 0x0178, "French, Igbo" },
-  { 0x017A, "Polish, ..." },
-  { 0x017C, "Polish, ..." },
-  { 0x017E, "Czech, Estonian, Finnish, Slovak, Slovenian, and many other languages" },
-  { 0x017F, "in common use in Roman types until the 18th century" },
-  { 0x017F, "in current use in Fraktur and Gaelic types" },
-  { 0x0180, "Americanist and Indo-Europeanist usage for phonetic beta" },
-  { 0x0180, "Americanist orthographies use an alternate glyph with the stroke through the bowl" },
-  { 0x0180, "Old Saxon" },
-  { 0x0180, "uppercase is 0243" },
-  { 0x0181, "Zulu, Pan-Nigerian alphabet" },
-  { 0x0183, "Zhuang (old orthography)" },
-  { 0x0183, "former Soviet minority language scripts" },
-  { 0x0185, "Zhuang (old orthography)" },
-  { 0x0185, "Zhuang tone three is Cyrillic ze" },
-  { 0x0185, "Zhuang tone four is Cyrillic che" },
-  { 0x0186, "typographically a turned C" },
-  { 0x0186, "African" },
-  { 0x0188, "African" },
-  { 0x0189, "Ewe" },
-  { 0x018A, "Pan-Nigerian alphabet" },
-  { 0x018C, "former-Soviet minority language scripts" },
-  { 0x018C, "Zhuang (old orthography)" },
-  { 0x018D, "archaic phonetic for labialized alveolar fricative" },
-  { 0x018D, "recommended spellings 007A 02B7 or 007A 032B" },
-  { 0x018E, "Pan-Nigerian alphabet" },
-  { 0x018E, "lowercase is 01DD" },
-  { 0x018F, "Azerbaijani, ..." },
-  { 0x0190, "African" },
-  { 0x0191, "African" },
-  { 0x0192, "used as abbreviation convention for folder" },
-  { 0x0193, "African" },
-  { 0x0194, "African" },
-  { 0x0195, "Gothic transliteration" },
-  { 0x0195, "uppercase is 01F6" },
-  { 0x0196, "African" },
-  { 0x0197, "African" },
-  { 0x0197, "ISO 6438 gives lowercase as 026A, not 0268" },
-  { 0x0199, "Hausa, Pan-Nigerian alphabet" },
-  { 0x019A, "Americanist phonetic usage for 026C" },
-  { 0x019B, "Americanist phonetic usage" },
-  { 0x019C, "Zhuang (old orthography)" },
-  { 0x019D, "African" },
-  { 0x019E, "archaic phonetic for Japanese 3093" },
-  { 0x019E, "recommended spelling for syllabic n is 006E 0329" },
-  { 0x019E, "Lakota (indicates nasalization of vowel)" },
-  { 0x019F, "lowercase is 0275" },
-  { 0x019F, "African" },
-  { 0x01A1, "Vietnamese" },
-  { 0x01A3, "Pan-Turkic Latin alphabets" },
-  { 0x01A5, "African" },
-  { 0x01A6, "Old Norse" },
-  { 0x01A6, "from German Standard DIN 31624 and ISO 5246-2" },
-  { 0x01A6, "lowercase is 0280" },
-  { 0x01A8, "Zhuang (old orthography)" },
-  { 0x01A8, "typographically a reversed S" },
-  { 0x01A9, "African" },
-  { 0x01AA, "archaic phonetic for labialized palatoalveolar or palatal fricative" },
-  { 0x01AA, "Twi" },
-  { 0x01AA, "recommended spellings 0283 02B7, 00E7 02B7, 0068 0265, etc." },
-  { 0x01AB, "archaic phonetic for palatalized alveolar or dental stop" },
-  { 0x01AB, "recommended spelling 0074 02B2" },
-  { 0x01AC, "a glyph variant with hook at the right also occurs" },
-  { 0x01AD, "African" },
-  { 0x01AE, "African" },
-  { 0x01B0, "Vietnamese" },
-  { 0x01B1, "African" },
-  { 0x01B1, "typographically based on turned capital Greek omega" },
-  { 0x01B2, "African" },
-  { 0x01B3, "a glyph variant with hook at the left also occurs" },
-  { 0x01B4, "Bini, Esoko, and other Edo languages in West Africa" },
-  { 0x01B6, "Pan-Turkic Latin orthography" },
-  { 0x01B6, "handwritten variant of Latin \"z\"" },
-  { 0x01B7, "African, Skolt Sami" },
-  { 0x01B7, "lowercase is 0292" },
-  { 0x01B9, "archaic phonetic for voiced pharyngeal fricative" },
-  { 0x01B9, "sometimes typographically rendered with a turned digit 3" },
-  { 0x01B9, "recommended spelling 0295" },
-  { 0x01BA, "archaic phonetic for labialized voiced palatoalveolar or palatal fricative" },
-  { 0x01BA, "Twi" },
-  { 0x01BA, "recommended spellings 0292 02B7 or 006A 02B7" },
-  { 0x01BB, "archaic phonetic for [dz] affricate" },
-  { 0x01BB, "recommended spellings 0292 or 0064 007A" },
-  { 0x01BD, "Zhuang (old orthography)" },
-  { 0x01BE, "archaic phonetic for [ts] affricate" },
-  { 0x01BE, "recommended spelling 0074 0073" },
-  { 0x01BE, "letter form is actually derived from ligation of ts, rather than inverted glottal stop" },
-  { 0x01BF, "Runic letter borrowed into Latin script" },
-  { 0x01BF, "replaced by \"w\" in modern transcriptions of Old English" },
-  { 0x01BF, "uppercase is 01F7" },
-  { 0x01C0, "Khoisan tradition" },
-  { 0x01C0, "\"c\" in Zulu orthography" },
-  { 0x01C1, "Khoisan tradition" },
-  { 0x01C1, "\"x\" in Zulu orthography" },
-  { 0x01C2, "Khoisan tradition" },
-  { 0x01C3, "Khoisan tradition" },
-  { 0x01C3, "\"q\" in Zulu orthography" },
-  { 0x01CE, "Pinyin third tone" },
-  { 0x01D0, "Pinyin third tone" },
-  { 0x01D2, "Pinyin third tone" },
-  { 0x01D4, "Pinyin third tone" },
-  { 0x01D6, "Pinyin first tone" },
-  { 0x01D8, "Pinyin second tone" },
-  { 0x01DA, "Pinyin third tone" },
-  { 0x01DC, "Pinyin fourth tone" },
-  { 0x01DD, "Pan-Nigerian alphabet" },
-  { 0x01DD, "all other usages of schwa are 0259" },
-  { 0x01DD, "uppercase is 018E" },
-  { 0x01DF, "Livonian, Uralicist usage" },
-  { 0x01E1, "Uralicist usage" },
-  { 0x01E3, "Old Norse, Old English" },
-  { 0x01E5, "Skolt Sami" },
-  { 0x01E7, "Skolt Sami" },
-  { 0x01E9, "Skolt Sami" },
-  { 0x01EB, "Sami, Iroquoian, Old Icelandic" },
-  { 0x01ED, "Old Icelandic" },
-  { 0x01EF, "Skolt Sami" },
-  { 0x01F0, "IPA and many languages" },
-  { 0x01F5, "Macedonian and Serbian transliteration" },
-  { 0x01F6, "lowercase is 0195" },
-  { 0x01F7, "lowercase is 01BF" },
-  { 0x01F9, "Pinyin" },
-  { 0x0219, "Romanian, when distinct comma below form is required" },
-  { 0x021B, "Romanian, when distinct comma below form is required" },
-  { 0x021D, "Middle English, Scots" },
-  { 0x021F, "Finnish Romany" },
-  { 0x0220, "Lakota" },
-  { 0x0221, "phonetic use in Sinology" },
-  { 0x0223, "Algonquin, Huron" },
-  { 0x0225, "Middle High German" },
-  { 0x0227, "Uralicist usage" },
-  { 0x0233, "also Cornish" },
-  { 0x0238, "used in Africanist linguistics" },
-  { 0x0239, "used in Africanist linguistics" },
-  { 0x023A, "Sencoten" },
-  { 0x023A, "lowercase is 2C65" },
-  { 0x023B, "Sencoten" },
-  { 0x023C, "used in Americanist linguistics" },
-  { 0x023D, "Sencoten" },
-  { 0x023D, "lowercase is 019A" },
-  { 0x023E, "Sencoten" },
-  { 0x023E, "lowercase is 2C66" },
-  { 0x0242, "casing use in Chipewyan, Dogrib, Slavey (Canadian aboriginal orthographies)" },
-  { 0x0243, "lowercase is 0180" },
-  { 0x0244, "lowercase is 0289" },
-  { 0x0245, "lowercase is 028C" },
-  { 0x0250, "low central unrounded vowel" },
-  { 0x0251, "low back unrounded vowel" },
-  { 0x0252, "low back rounded vowel" },
-  { 0x0253, "implosive bilabial stop" },
-  { 0x0253, "Pan-Nigerian alphabet" },
-  { 0x0254, "typographically a turned c" },
-  { 0x0254, "lower-mid back rounded vowel" },
-  { 0x0255, "voiceless alveolo-palatal laminal fricative" },
-  { 0x0255, "used in transcription of Mandarin Chinese" },
-  { 0x0255, "sound spelled with 015B in Polish" },
-  { 0x0256, "voiced retroflex stop" },
-  { 0x0257, "implosive dental or alveolar stop" },
-  { 0x0257, "Ewe, Pan-Nigerian alphabet" },
-  { 0x0258, "upper-mid central unrounded vowel" },
-  { 0x0259, "mid-central unrounded vowel" },
-  { 0x0259, "variant uppercase form 018E is associated with 01DD" },
-  { 0x025A, "rhotacized schwa" },
-  { 0x025B, "lower-mid front unrounded vowel" },
-  { 0x025C, "lower-mid central unrounded vowel" },
-  { 0x025D, "rhotacized lower-mid central vowel" },
-  { 0x025E, "lower-mid central rounded vowel" },
-  { 0x025F, "voiced palatal stop" },
-  { 0x025F, "typographically a turned f, but better thought of as a form of j" },
-  { 0x025F, "\"gy\" in Hungarian orthography" },
-  { 0x025F, "also archaic phonetic for palatoalveolar affricate 02A4" },
-  { 0x0260, "implosive velar stop" },
-  { 0x0261, "voiced velar stop" },
-  { 0x0262, "voiced uvular stop" },
-  { 0x0263, "voiced velar fricative" },
-  { 0x0264, "upper-mid back unrounded vowel" },
-  { 0x0265, "voiced rounded palatal approximant" },
-  { 0x0266, "breathy-voiced glottal fricative" },
-  { 0x0267, "voiceless coarticulated velar and palatoalveolar fricative" },
-  { 0x0267, "\"tj\" or \"kj\" or \"sj\" in some Swedish dialects" },
-  { 0x0268, "high central unrounded vowel" },
-  { 0x0268, "ISO 6438 gives lowercase of 0197 as 026A, not 0268" },
-  { 0x0269, "semi-high front unrounded vowel" },
-  { 0x0269, "preferred use is 026A latin letter small capital i" },
-  { 0x026A, "semi-high front unrounded vowel" },
-  { 0x026A, "preferred IPA alternate for 0269" },
-  { 0x026B, "velarized voiced alveolar lateral approximant" },
-  { 0x026B, "uppercase is 2C62" },
-  { 0x026C, "voiceless alveolar lateral fricative" },
-  { 0x026D, "voiced retroflex lateral" },
-  { 0x026E, "voiced lateral fricative" },
-  { 0x026E, "\"dhl\" in Zulu orthography" },
-  { 0x026F, "high back unrounded vowel" },
-  { 0x0270, "voiced velar approximant" },
-  { 0x0271, "voiced labiodental nasal" },
-  { 0x0272, "voiced palatal nasal" },
-  { 0x0273, "voiced retroflex nasal" },
-  { 0x0274, "voiced uvular nasal" },
-  { 0x0275, "rounded mid-central vowel, i.e. rounded schwa" },
-  { 0x0275, "uppercase is 019F" },
-  { 0x0276, "low front rounded vowel" },
-  { 0x0277, "semi-high back rounded vowel" },
-  { 0x0277, "preferred use is 028A latin small letter upsilon" },
-  { 0x0278, "voiceless bilabial fricative" },
-  { 0x0279, "voiced alveolar approximant" },
-  { 0x027A, "voiced lateral flap" },
-  { 0x027B, "voiced retroflex approximant" },
-  { 0x027C, "voiced strident apico-alveolar trill" },
-  { 0x027C, "sound spelled with 0159 in Czech" },
-  { 0x027C, "preferred phonetic representation for Czech is 0072 031D" },
-  { 0x027C, "in current use in Gaelic types (as glyph variant of 0072)" },
-  { 0x027D, "voiced retroflex flap" },
-  { 0x027D, "uppercase is 2C64" },
-  { 0x027E, "voiced alveolar flap or tap" },
-  { 0x027F, "apical dental vowel" },
-  { 0x027F, "used by linguists working on Chinese and other Sino-Tibetan languages" },
-  { 0x027F, "IPA spelling - 007A 0329" },
-  { 0x0280, "voiced uvular trill" },
-  { 0x0280, "Germanic, Old Norse" },
-  { 0x0280, "uppercase is 01A6" },
-  { 0x0281, "voiced uvular fricative or approximant" },
-  { 0x0282, "voiceless retroflex fricative" },
-  { 0x0283, "voiceless postalveolar fricative" },
-  { 0x0284, "implosive palatal stop" },
-  { 0x0284, "typographically based on 025F, not on 0283" },
-  { 0x0285, "apical retroflex vowel" },
-  { 0x0285, "used by linguists working on Chinese and other Sino-Tibetan languages" },
-  { 0x0285, "IPA spelling - 0290 0329" },
-  { 0x0285, "in origin 027F plus the retroflex hook 0322, despite its name" },
-  { 0x0286, "palatalized voiceless postalveolar fricative" },
-  { 0x0286, "suggested spelling - 0283 02B2" },
-  { 0x0287, "dental click (sound of \"tsk tsk\")" },
-  { 0x0288, "voiceless retroflex stop" },
-  { 0x0289, "high central rounded vowel" },
-  { 0x0289, "uppercase is 0244" },
-  { 0x028A, "semi-high back rounded vowel" },
-  { 0x028A, "preferred IPA alternate to 0277" },
-  { 0x028B, "voiced labiodental approximant" },
-  { 0x028C, "lower-mid back unrounded vowel" },
-  { 0x028C, "uppercase is 0245" },
-  { 0x028D, "voiceless rounded labiovelar approximant" },
-  { 0x028E, "voiced lateral approximant" },
-  { 0x028F, "semi-high front rounded vowel" },
-  { 0x0290, "voiced retroflex fricative" },
-  { 0x0291, "voiced alveolo-palatal laminal fricative" },
-  { 0x0291, "sound spelled with 017A in Polish" },
-  { 0x0292, "voiced postalveolar fricative" },
-  { 0x0292, "mistakenly named yogh in Unicode 1.0" },
-  { 0x0292, "uppercase is 01B7" },
-  { 0x0292, "Skolt Sami" },
-  { 0x0293, "palatalized voiced postalveolar fricative" },
-  { 0x0294, "this is a caseless letter" },
-  { 0x0294, "used in IPA, other phonetic notations, and those orthographies which use a caseless glottal stop" },
-  { 0x0295, "voiced pharyngeal fricative" },
-  { 0x0295, "ain" },
-  { 0x0296, "lateral click" },
-  { 0x0297, "palatal (or alveolar) click" },
-  { 0x0299, "bilabial trill" },
-  { 0x029A, "lower-mid front rounded vowel" },
-  { 0x029A, "non-IPA alternate for the preferred 0153" },
-  { 0x029B, "voiced uvular implosive" },
-  { 0x029C, "voiceless epiglottal fricative" },
-  { 0x029D, "voiced palatal fricative" },
-  { 0x029E, "proposed for velar click" },
-  { 0x029F, "velar lateral approximant" },
-  { 0x02A0, "voiceless uvular implosive" },
-  { 0x02A1, "voiced epiglottal stop" },
-  { 0x02A2, "voiced epiglottal fricative" },
-  { 0x02A3, "voiced dental affricate" },
-  { 0x02A4, "voiced postalveolar affricate" },
-  { 0x02A5, "voiced alveolo-palatal affricate" },
-  { 0x02A6, "voiceless dental affricate" },
-  { 0x02A7, "voiceless postalveolar affricate" },
-  { 0x02A8, "voiceless alveolo-palatal affricate" },
-  { 0x02A9, "velopharyngeal fricative" },
-  { 0x02AA, "lateral alveolar fricative (lisp)" },
-  { 0x02AB, "voiced lateral alveolar fricative" },
-  { 0x02AC, "audible lip smack" },
-  { 0x02AD, "audible teeth gnashing" },
-  { 0x02B0, "aspiration" },
-  { 0x02B1, "breathy voiced, murmured" },
-  { 0x02B2, "palatalization" },
-  { 0x02B6, "preceding four used for r-coloring or r-offglides" },
-  { 0x02B7, "labialization" },
-  { 0x02B8, "palatalization" },
-  { 0x02B8, "common Americanist usage for 02B2" },
-  { 0x02B9, "primary stress, emphasis" },
-  { 0x02B9, "transliteration of mjagkij znak (Cyrillic soft sign: palatalization)" },
-  { 0x02BA, "exaggerated stress, contrastive stress" },
-  { 0x02BA, "transliteration of tverdyj znak (Cyrillic hard sign: no palatalization)" },
-  { 0x02BB, "typographical alternate for 02BD or 02BF" },
-  { 0x02BB, "used in Hawai`ian orthography as `okina (glottal stop)" },
-  { 0x02BC, "glottal stop, glottalization, ejective" },
-  { 0x02BC, "spacing clone of Greek smooth breathing mark" },
-  { 0x02BC, "many languages use this as a letter of their alphabets" },
-  { 0x02BC, "2019 is the preferred character for a punctuation apostrophe" },
-  { 0x02BD, "weak aspiration" },
-  { 0x02BD, "spacing clone of Greek rough breathing mark" },
-  { 0x02BE, "transliteration of Arabic hamza (glottal stop)" },
-  { 0x02BF, "transliteration of Arabic ain (voiced pharyngeal fricative)" },
-  { 0x02C0, "ejective or glottalized" },
-  { 0x02C0, "typographical alternate for 02BC or 02BE" },
-  { 0x02C1, "typographical alternate for 02BF" },
-  { 0x02C2, "fronted articulation" },
-  { 0x02C3, "backed articulation" },
-  { 0x02C4, "raised articulation" },
-  { 0x02C5, "lowered articulation" },
-  { 0x02C6, "rising-falling tone, falling tone, secondary stress, etc." },
-  { 0x02C7, "falling-rising tone" },
-  { 0x02C7, "Mandarin Chinese third tone" },
-  { 0x02C8, "primary stress, downstep" },
-  { 0x02C8, "precedes letter or syllable modified" },
-  { 0x02C9, "high level tone" },
-  { 0x02C9, "precedes or follows letter or syllable modified" },
-  { 0x02C9, "Mandarin Chinese first tone" },
-  { 0x02CA, "high-rising tone (IPA), high tone, primary stress" },
-  { 0x02CA, "Mandarin Chinese second tone" },
-  { 0x02CB, "high-falling tone (IPA), low tone, secondary or tertiary stress" },
-  { 0x02CB, "Mandarin Chinese fourth tone" },
-  { 0x02CC, "secondary stress" },
-  { 0x02CC, "precedes letter or syllable modified" },
-  { 0x02CD, "low level tone" },
-  { 0x02CE, "low-falling tone" },
-  { 0x02CF, "low-rising tone" },
-  { 0x02D0, "length mark" },
-  { 0x02D1, "half-length mark" },
-  { 0x02D2, "more rounded articulation" },
-  { 0x02D3, "less rounded articulation" },
-  { 0x02D4, "vowel raising or closing" },
-  { 0x02D5, "vowel lowering or opening" },
-  { 0x02D6, "advanced or fronted articulation" },
-  { 0x02D7, "retracted or backed articulation" },
-  { 0x02D7, "glyph may have small end-serifs" },
-  { 0x02D9, "Mandarin Chinese fifth tone (light or neutral)" },
-  { 0x02DE, "rhotacization in vowel" },
-  { 0x02DE, "often ligated: 025A = 0259 + 02DE; 025D = 025C + 02DE" },
-  { 0x02DF, "Swedish grave accent" },
-  { 0x02E0, "these modifier letters are occasionally used in transcription of affricates" },
-  { 0x02EE, "Nenets" },
-  { 0x0303, "IPA: nasalization" },
-  { 0x0303, "Vietnamese tone mark" },
-  { 0x0304, "distinguish from the following" },
-  { 0x0305, "connects on left and right" },
-  { 0x0309, "kerns left or right of circumflex over vowels" },
-  { 0x0309, "Vietnamese tone mark" },
-  { 0x030B, "Hungarian, Chuvash" },
-  { 0x030D, "this is not the Greek tonos" },
-  { 0x030D, "Marshallese" },
-  { 0x030E, "Marshallese" },
-  { 0x030F, "Serbian and Croatian poetics" },
-  { 0x0312, "Latvian (but not used in decomposition)" },
-  { 0x0313, "Americanist: ejective or glottalization" },
-  { 0x031A, "IPA: unreleased stop" },
-  { 0x031B, "Vietnamese" },
-  { 0x031C, "IPA: open variety of vowel" },
-  { 0x031D, "IPA: vowel raising or closing" },
-  { 0x031E, "IPA: vowel lowering or opening" },
-  { 0x031F, "IPA: advanced or fronted articulation" },
-  { 0x0320, "IPA: retracted or backed articulation" },
-  { 0x0320, "glyph may have small end-serifs" },
-  { 0x0321, "IPA: palatalization" },
-  { 0x0322, "IPA: retroflexion" },
-  { 0x0323, "IPA: closer variety of vowel" },
-  { 0x0323, "Americanist and Indo-Europeanist: retraction or retroflexion" },
-  { 0x0323, "Semiticist: velarization or pharyngealization" },
-  { 0x0323, "Vietnamese tone mark" },
-  { 0x0324, "IPA: breathy-voice or murmur" },
-  { 0x0325, "IPA: voiceless" },
-  { 0x0325, "vocalic (in Latin transliteration of Indic sonorants)" },
-  { 0x0325, "Madurese" },
-  { 0x0326, "Romanian, Latvian, Livonian" },
-  { 0x0327, "French, Turkish, Azerbaijani" },
-  { 0x0328, "Americanist: nasalization" },
-  { 0x0328, "Polish, Lithuanian" },
-  { 0x0329, "IPA: syllabic" },
-  { 0x0329, "Yoruba" },
-  { 0x032A, "IPA: dental" },
-  { 0x032B, "IPA: labialization" },
-  { 0x032C, "IPA: voiced" },
-  { 0x032D, "Americanist: fronted articulation" },
-  { 0x032E, "Hittite transcription" },
-  { 0x032F, "Americanist: fronted articulation (variant of 032D)" },
-  { 0x032F, "Indo-Europeanist: semivowel" },
-  { 0x0330, "IPA: creaky voice" },
-  { 0x0332, "connects on left and right" },
-  { 0x0333, "connects on left and right" },
-  { 0x0334, "IPA: velarization or pharyngealization" },
-  { 0x033E, "Cyrillic palatalization" },
-  { 0x0344, "use of this character is discouraged" },
-  { 0x0345, "note special casing issues" },
-  { 0x0346, "IPA: dentolabial" },
-  { 0x0347, "IPA: alveolar" },
-  { 0x0348, "IPA: strong articulation" },
-  { 0x0349, "IPA: weak articulation" },
-  { 0x034A, "IPA: denasal" },
-  { 0x034B, "IPA: nasal escape" },
-  { 0x034C, "IPA: velopharyngeal friction" },
-  { 0x034D, "IPA: labial spreading" },
-  { 0x034E, "IPA: whistled articulation" },
-  { 0x034F, "commonly abbreviated as CGJ" },
-  { 0x034F, "has no visible glyph" },
-  { 0x034F, "the name of this character is misleading; it does not actually join graphemes" },
-  { 0x0358, "Latin transliterations of the Southern Min dialects of Chinese" },
-  { 0x035A, "Kharoshthi transliteration" },
-  { 0x035B, "Latin abbreviation, Lithuanian phonetics and mediaevalist transcriptions" },
-  { 0x035C, "a common glyph alternate connects the horizontal midpoints of the characters" },
-  { 0x0362, "IPA: sliding articulation" },
-  { 0x0374, "indicates numeric use of letters" },
-  { 0x0375, "indicates numeric use of letters" },
-  { 0x037E, "sentence-final punctuation" },
-  { 0x037E, "003B is the preferred character" },
-  { 0x0387, "functions in Greek like a semicolon" },
-  { 0x0387, "00B7 is the preferred character" },
-  { 0x03C0, "math constant 3.141592..." },
-  { 0x03C2, "not to be confused with the actual stigma letter" },
-  { 0x03C3, "used symbolically with a numeric value 200" },
-  { 0x03C6, "the ordinary Greek letter, showing considerable glyph variation" },
-  { 0x03C6, "in mathematical contexts, the loopy glyph is preferred, to contrast with 03D5" },
-  { 0x03D1, "used as a technical symbol" },
-  { 0x03D5, "used as a technical symbol, with a stroked glyph" },
-  { 0x03D5, "maps to \"phi1\" symbol entities" },
-  { 0x03D6, "used as a technical symbol" },
-  { 0x03D6, "a variant of pi, looking like omega" },
-  { 0x03D7, "used as an ampersand" },
-  { 0x03D9, "the Q-shaped archaic koppas are the ordinary alphabetic letters and can also be used as symbols with a numeric value of 90 in classical and pre-classical texts" },
-  { 0x03DA, "apparently in origin a cursive form of digamma" },
-  { 0x03DA, "the name \"stigma\" originally applied to a medieval sigma-tau ligature, whose shape was confusably similar to the cursive digamma" },
-  { 0x03DA, "used as a symbol with a numeric value of 6" },
-  { 0x03DD, "used as a symbol with a numeric value of 6" },
-  { 0x03DF, "used in modern Greek as a symbol with a numeric value of 90, as in the dating of legal documentation" },
-  { 0x03E1, "used as a symbol with a numeric value of 900" },
-  { 0x03F0, "used as technical symbol" },
-  { 0x03F1, "used as technical symbol" },
-  { 0x03FC, "used with abbreviations containing 03C1" },
-  { 0x0450, "Macedonian" },
-  { 0x0451, "Russian, ..." },
-  { 0x0452, "Serbian" },
-  { 0x0453, "Macedonian" },
-  { 0x0455, "Macedonian" },
-  { 0x0457, "Ukrainian" },
-  { 0x0458, "Serbian, Azerbaijani, Altay" },
-  { 0x0459, "Serbian, Macedonian" },
-  { 0x045A, "Serbian, Macedonian" },
-  { 0x045B, "Serbian" },
-  { 0x045C, "Macedonian" },
-  { 0x045D, "Macedonian, Bulgarian" },
-  { 0x045E, "Byelorussian, Uzbek" },
-  { 0x045F, "Serbian, Macedonian, Abkhasian" },
-  { 0x0478, "basic Old Cyrillic uk is unified with cyrillic letter u" },
-  { 0x047D, "the exact identity of these broad omegas is unclear and may require revision of glyphs" },
-  { 0x0488, "use 20DD for ten thousands sign" },
-  { 0x048B, "Kildin Sami" },
-  { 0x048D, "Kildin Sami" },
-  { 0x048F, "Kildin Sami" },
-  { 0x0491, "Ukrainian" },
-  { 0x0493, "Azerbaijani, Bashkir, ..." },
-  { 0x0493, "full bar form preferred over half-barred \"F\"-type" },
-  { 0x0495, "Abkhasian, Yakut" },
-  { 0x0497, "Tatar, ..." },
-  { 0x0499, "Bashkir" },
-  { 0x0499, "letterforms with right hooks are preferred, although occasional variants with left hooks occur" },
-  { 0x049B, "Abkhasian, Tajik, ..." },
-  { 0x049D, "Azerbaijani" },
-  { 0x049F, "Abkhasian" },
-  { 0x04A3, "Bashkir, ..." },
-  { 0x04A5, "Altay, Mari, Yakut" },
-  { 0x04A5, "this is not a decomposable ligature" },
-  { 0x04A7, "Abkhasian" },
-  { 0x04AB, "Bashkir, Chuvash" },
-  { 0x04AB, "letterforms with right hooks are preferred, although occasional variants with left hooks occur" },
-  { 0x04AB, "in Chuvashia, letterforms identical to or similar in form to 00E7 regularly occur" },
-  { 0x04AD, "Abkhasian" },
-  { 0x04AF, "stem is straight, unlike LETTER U" },
-  { 0x04AF, "Azerbaijani, Bashkir, ..." },
-  { 0x04B1, "Kazakh" },
-  { 0x04B3, "Abkhasian, Tajik, Uzbek" },
-  { 0x04B5, "Abkhasian" },
-  { 0x04B5, "this is not a decomposable ligature" },
-  { 0x04B7, "Abkhasian, Tajik" },
-  { 0x04B9, "Azerbaijani" },
-  { 0x04BB, "originally derived from Latin \"h\", but uppercase form 04BA is closer to an inverted che (0427)" },
-  { 0x04BB, "Azerbaijani, Bashkir, ..." },
-  { 0x04BF, "ogonek form preferred" },
-  { 0x04C0, "aspiration sign in many Caucasian languages" },
-  { 0x04C0, "is usually not cased, but the formal lowercase is 04CF" },
-  { 0x04C2, "Moldavian" },
-  { 0x04C4, "Khanty, Chukchi" },
-  { 0x04C6, "Kildin Sami" },
-  { 0x04C8, "Khanty, Chukchi, Nenets" },
-  { 0x04CA, "Kildin Sami" },
-  { 0x04CE, "Kildin Sami" },
-  { 0x04D5, "this is not a decomposable ligature" },
-  { 0x04ED, "Kildin Sami" },
-  { 0x04F7, "Yupik" },
-  { 0x0511, "Enets, Khanty" },
-  { 0x0513, "Chukchi, Itelmen, Khanty" },
-  { 0x0589, "may also be used for Georgian" },
-  { 0x0598, "This character is to be used when Zarqa or Tsinor are placed above, and also for Tsinorit." },
-  { 0x05AE, "This character is to be used when Zarqa or Tsinor are placed above left." },
-  { 0x05B7, "furtive patah is not a distinct character" },
-  { 0x05BC, "falls within the base letter" },
-  { 0x05BD, "may be used as a Hebrew accent sof pasuq" },
-  { 0x05C0, "may be treated as spacing punctuation, not as a point" },
-  { 0x05C3, "may be used as a Hebrew punctuation colon" },
-  { 0x05C5, "punctum extraordinarium (Psalms 27:13)" },
-  { 0x05C6, "does not historically derive from the letter nun" },
-  { 0x060C, "also used with Thaana and Syriac in modern text" },
-  { 0x0610, "represents sallallahu alayhe wasallam \"may God's peace and blessings be upon him\"" },
-  { 0x0611, "represents alayhe assalam \"upon him be peace\"" },
-  { 0x0612, "represents rahmatullah alayhe \"may God have mercy upon him\"" },
-  { 0x0613, "represents radi allahu 'anhu \"may God be pleased with him\"" },
-  { 0x0614, "sign placed over the name or nom-de-plume of a poet, or in some writings used to mark all proper names" },
-  { 0x0615, "marks a recommended pause position in some Korans published in Iran and Pakistan" },
-  { 0x0615, "should not be confused with the small TAH sign used as a diacritic for some letters such as 0679" },
-  { 0x061B, "also used with Thaana and Syriac in modern text" },
-  { 0x061F, "also used with Thaana and Syriac in modern text" },
-  { 0x0640, "inserted to stretch characters" },
-  { 0x0640, "also used with Syriac" },
-  { 0x0649, "represents YEH-shaped letter with no dots in any positional form" },
-  { 0x0652, "marks absence of a vowel after the base consonant" },
-  { 0x0652, "used in some Korans to mark a long vowel as ignored" },
-  { 0x0652, "can have a variety of shapes, including a circular one and a shape that looks like '06E1'" },
-  { 0x0658, "Kashmiri and Baluchi" },
-  { 0x0658, "indicates nasalization in Urdu" },
-  { 0x0659, "Pashto" },
-  { 0x065A, "African languages" },
-  { 0x065B, "African languages" },
-  { 0x065C, "African languages" },
-  { 0x065D, "Ormuri, African languages" },
-  { 0x065E, "Kalami" },
-  { 0x0670, "actually a vowel sign, despite the name" },
-  { 0x0671, "Koranic Arabic" },
-  { 0x0672, "Baluchi, Kashmiri" },
-  { 0x0673, "Baluchi, Kashmiri" },
-  { 0x0674, "Kazakh" },
-  { 0x0674, "forms digraphs" },
-  { 0x0675, "Kazakh" },
-  { 0x0676, "Kazakh" },
-  { 0x0677, "Kazakh" },
-  { 0x0678, "Kazakh" },
-  { 0x0679, "Urdu" },
-  { 0x067A, "Sindhi" },
-  { 0x067B, "Sindhi" },
-  { 0x067C, "Pashto" },
-  { 0x067D, "Sindhi" },
-  { 0x067E, "Persian, Urdu, ..." },
-  { 0x067F, "Sindhi" },
-  { 0x0680, "Sindhi" },
-  { 0x0681, "Pashto letter \"dze\"" },
-  { 0x0682, "not used in modern Pashto" },
-  { 0x0683, "Sindhi" },
-  { 0x0684, "Sindhi" },
-  { 0x0685, "Pashto" },
-  { 0x0686, "Persian, Urdu, ..." },
-  { 0x0687, "Sindhi" },
-  { 0x0688, "Urdu" },
-  { 0x0689, "Pashto" },
-  { 0x068A, "Sindhi" },
-  { 0x068B, "Lahnda" },
-  { 0x068C, "Sindhi" },
-  { 0x068D, "Sindhi" },
-  { 0x068E, "older shape for DUL, now obsolete in Sindhi" },
-  { 0x068E, "Burushaski" },
-  { 0x068F, "Sindhi" },
-  { 0x068F, "current shape used for DUL" },
-  { 0x0690, "old Urdu, not in current use" },
-  { 0x0691, "Urdu" },
-  { 0x0692, "Kurdish" },
-  { 0x0693, "Pashto" },
-  { 0x0694, "Kurdish" },
-  { 0x0695, "Kurdish" },
-  { 0x0696, "Pashto" },
-  { 0x0697, "Dargwa" },
-  { 0x0698, "Persian, Urdu, ..." },
-  { 0x0699, "Sindhi" },
-  { 0x069A, "Pashto" },
-  { 0x069C, "Moroccan Arabic" },
-  { 0x069D, "Turkic" },
-  { 0x069E, "Berber, Burushaski" },
-  { 0x069F, "old Hausa" },
-  { 0x06A0, "old Malay" },
-  { 0x06A1, "Adighe" },
-  { 0x06A2, "Maghrib Arabic" },
-  { 0x06A3, "Ingush" },
-  { 0x06A4, "Middle Eastern Arabic for foreign words" },
-  { 0x06A4, "Kurdish" },
-  { 0x06A5, "North African Arabic for foreign words" },
-  { 0x06A6, "Sindhi" },
-  { 0x06A7, "Maghrib Arabic" },
-  { 0x06A8, "Tunisian Arabic" },
-  { 0x06A9, "Persian, Urdu, ..." },
-  { 0x06AB, "Pashto" },
-  { 0x06AB, "may appear like an Arabic KAF (0643) with a ring below the base" },
-  { 0x06AC, "old Malay" },
-  { 0x06AD, "Uighur, Kazakh, old Malay, ..." },
-  { 0x06AE, "Berber" },
-  { 0x06AF, "Persian, Urdu, ..." },
-  { 0x06B0, "Lahnda" },
-  { 0x06B1, "Sindhi" },
-  { 0x06B2, "not used in Sindhi" },
-  { 0x06B3, "Sindhi" },
-  { 0x06B4, "not used in Sindhi" },
-  { 0x06B5, "Kurdish" },
-  { 0x06B6, "Kurdish" },
-  { 0x06B7, "Kurdish" },
-  { 0x06BA, "Urdu" },
-  { 0x06BB, "Sindhi" },
-  { 0x06BC, "Pashto" },
-  { 0x06BD, "old Malay" },
-  { 0x06BE, "Urdu" },
-  { 0x06BE, "forms aspirate digraphs" },
-  { 0x06C0, "Urdu" },
-  { 0x06C0, "actually a ligature, not an independent letter" },
-  { 0x06C1, "Urdu" },
-  { 0x06C2, "Urdu" },
-  { 0x06C2, "actually a ligature, not an independent letter" },
-  { 0x06C3, "Urdu" },
-  { 0x06C4, "Kashmiri" },
-  { 0x06C5, "Kirghiz" },
-  { 0x06C6, "Uighur, Kurdish, Kazakh" },
-  { 0x06C7, "Kirghiz" },
-  { 0x06C8, "Uighur" },
-  { 0x06C9, "Kazakh, Kirghiz" },
-  { 0x06CA, "Kurdish" },
-  { 0x06CB, "Uighur, Kazakh" },
-  { 0x06CC, "Arabic, Persian, Urdu, ..." },
-  { 0x06CC, "initial and medial forms of this letter have dots" },
-  { 0x06CD, "Pashto, Sindhi" },
-  { 0x06CE, "Kurdish" },
-  { 0x06D0, "Pashto, Uighur" },
-  { 0x06D0, "used as the letter bbeh in Sindhi" },
-  { 0x06D1, "old Malay" },
-  { 0x06D2, "Urdu" },
-  { 0x06D3, "Urdu" },
-  { 0x06D3, "actually a ligature, not an independent letter" },
-  { 0x06D4, "Urdu" },
-  { 0x06D5, "Uighur, Kazakh, Kirghiz" },
-  { 0x06DF, "smaller than the typical circular shape used for 0652" },
-  { 0x06E1, "presentation form of 0652, using font technology to select the variant is preferred" },
-  { 0x06E1, "used in some Korans to mark absence of a vowel" },
-  { 0x06E9, "there is a range of acceptable glyphs for this character" },
-  { 0x06F4, "Persian has a different glyph than Sindhi and Urdu" },
-  { 0x06F5, "Persian, Sindhi, and Urdu share glyph different from Arabic" },
-  { 0x06F6, "Persian, Sindhi, and Urdu have glyphs different from Arabic" },
-  { 0x06F7, "Urdu and Sindhi have glyphs different from Arabic" },
-  { 0x0700, "marks the end of a paragraph" },
-  { 0x0701, "marks interrogations, imperatives, and pauses, especially in Biblical texts" },
-  { 0x0702, "marks subordinate clauses and minor pauses, especially in Biblical texts" },
-  { 0x0703, "marks expressions of wonder and has a distinct pausal value in Biblical texts" },
-  { 0x0704, "used at the end of verses of supplications" },
-  { 0x0705, "joins two words closely together in a context to which a rising tone is suitable" },
-  { 0x0706, "marks a dependent clause" },
-  { 0x0707, "marks the end of a subdivision of the apodosis, or latter part of a Biblical verse" },
-  { 0x0708, "marks a minor phrase division" },
-  { 0x0709, "marks the end of a real or rhetorical question" },
-  { 0x070A, "a contraction mark, mostly used in East Syriac" },
-  { 0x070A, "placed at the end of an incomplete word" },
-  { 0x070B, "marks the beginning of a phrase, word, or morpheme that has a marginal note" },
-  { 0x070C, "marks the end of a section with a marginal note" },
-  { 0x070D, "marks the beginning of a phrase, word, or morpheme that has a marginal note" },
-  { 0x070F, "marks the beginning of a Syriac abbreviation" },
-  { 0x0711, "used in East Syriac texts to indicate an etymological Alaph" },
-  { 0x0714, "used in Garshuni documents" },
-  { 0x0716, "ambiguous form for undifferentiated early dalath/rish" },
-  { 0x071C, "used in Garshuni documents" },
-  { 0x071E, "mostly used in East Syriac texts" },
-  { 0x0727, "used in Christian Palestinian Aramaic" },
-  { 0x0740, "feminine marker used with the Taw feminine suffix" },
-  { 0x0741, "indicates a plosive pronunciation" },
-  { 0x0742, "indicates an aspirated (spirantized) pronunciation" },
-  { 0x0743, "accent mark used in ancient manuscripts" },
-  { 0x0744, "accent mark used in ancient manuscripts" },
-  { 0x0745, "diacritic used in Turoyo for letters not found in Syriac" },
-  { 0x0746, "diacritic used in Turoyo for letters not found in Syriac" },
-  { 0x0747, "indication of a silent letter" },
-  { 0x0748, "indication of a silent letter" },
-  { 0x0748, "also used to indicate numbers multiplied by a certain constant" },
-  { 0x0749, "a music mark" },
-  { 0x0749, "also used in the Syrian Orthodox Anaphora book to mark the breaking of the Eucharist bread" },
-  { 0x074A, "a diacritic cross used in liturgical texts" },
-  { 0x0759, "Saraiki" },
-  { 0x075C, "Shina" },
-  { 0x0762, "old Malay, preferred to 06AC" },
-  { 0x0763, "Moroccan Arabic, Amazigh, Burushaski" },
-  { 0x0766, "Maba" },
-  { 0x0768, "Saraiki, Pathwari" },
-  { 0x0769, "Gojri" },
-  { 0x076B, "Torwali, Ormuri" },
-  { 0x076C, "Ormuri" },
-  { 0x076D, "Kalami, Ormuri" },
-  { 0x090E, "for transcribing Dravidian short e" },
-  { 0x0912, "for transcribing Dravidian short o" },
-  { 0x0929, "for transcribing Dravidian alveolar n" },
-  { 0x0931, "for transcribing Dravidian alveolar r" },
-  { 0x0931, "half form is represented as \"Eyelash RA\"" },
-  { 0x0934, "for transcribing Dravidian l" },
-  { 0x093C, "for extending the alphabet to new letters" },
-  { 0x093F, "stands to the left of the consonant" },
-  { 0x0946, "for transcribing Dravidian vowels" },
-  { 0x094A, "for transcribing Dravidian vowels" },
-  { 0x094D, "suppresses inherent vowel" },
-  { 0x0951, "mostly used for Rigvedic svarita, with rare use for Yajurvedic udatta" },
-  { 0x0964, "phrase separator" },
-  { 0x097D, "used for writing Limbu in Devanagari" },
-  { 0x097D, "a glyph variant has the connecting top bar" },
-  { 0x09BC, "for extending the alphabet to new letters" },
-  { 0x09BF, "stands to the left of the consonant" },
-  { 0x09C7, "stands to the left of the consonant" },
-  { 0x09C8, "stands to the left of the consonant" },
-  { 0x09F0, "Assamese" },
-  { 0x09F1, "Assamese" },
-  { 0x09F4, "not in current usage" },
-  { 0x09F5, "not in current usage" },
-  { 0x09F6, "not in current usage" },
-  { 0x0A3C, "for extending the alphabet to new letters" },
-  { 0x0A3F, "stands to the left of the consonant" },
-  { 0x0A70, "nasalization" },
-  { 0x0A71, "doubles following consonant" },
-  { 0x0A72, "base for vowels" },
-  { 0x0A73, "base for vowels" },
-  { 0x0A74, "God is One" },
-  { 0x0A8C, "used with Sanskrit text" },
-  { 0x0ABC, "for extending the alphabet to new letters" },
-  { 0x0ABF, "stands to the left of the consonant" },
-  { 0x0B3C, "for extending the alphabet to new letters" },
-  { 0x0B47, "stands to the left of the consonant" },
-  { 0x0B48, "pieces left of and above the consonant" },
-  { 0x0B82, "not used in Tamil" },
-  { 0x0BC6, "stands to the left of the consonant" },
-  { 0x0BC7, "stands to the left of the consonant" },
-  { 0x0BC8, "stands to the left of the consonant" },
-  { 0x0CCD, "preferred name is halant" },
-  { 0x0CDE, "obsolete historic letter" },
-  { 0x0CDE, "name is a mistake for LLLA" },
-  { 0x0D46, "stands to the left of the consonant" },
-  { 0x0D47, "stands to the left of the consonant" },
-  { 0x0D48, "stands to the left of the consonant" },
-  { 0x0D4C, "archaic form of the /au/ dependent vowel" },
-  { 0x0D57, "used alone to write the /au/ dependent vowel in modern texts" },
-  { 0x0DBD, "dental" },
-  { 0x0DC2, "retroflex" },
-  { 0x0DC3, "dental" },
-  { 0x0DC5, "retroflex" },
-  { 0x0E24, "independent vowel letter used to write Sanskrit" },
-  { 0x0E26, "independent vowel letter used to write Sanskrit" },
-  { 0x0E2F, "ellipsis, abbreviation" },
-  { 0x0E3A, "Pali virama" },
-  { 0x0E45, "special vowel length indication used with 0E24 or 0E26" },
-  { 0x0E46, "repetition" },
-  { 0x0E4C, "cancellation mark" },
-  { 0x0E4D, "final nasal" },
-  { 0x0E4F, "used as a bullet" },
-  { 0x0E5A, "used to mark end of long sections" },
-  { 0x0E5A, "used in combination with 0E30 to mark end of a verse" },
-  { 0x0E5B, "used to mark end of chapter or document" },
-  { 0x0E9D, "name is a mistake for fo sung" },
-  { 0x0E9F, "name is a mistake for fo tam" },
-  { 0x0EA3, "name is a mistake, lo ling is the mnemonic for 0EA5" },
-  { 0x0EA5, "name is a mistake, lo loot is the mnemonic for 0EA3" },
-  { 0x0EB1, "vowel shortener" },
-  { 0x0EC6, "repetition" },
-  { 0x0ECD, "final nasal or long o vowel" },
-  { 0x0F04, "honorific; marks beginning of text or start of new folio" },
-  { 0x0F05, "follows and ligates with initial yig-mgo" },
-  { 0x0F08, "separates sections of meaning equivalent to topics and sub-topics" },
-  { 0x0F09, "list enumerator, used in Bhutan" },
-  { 0x0F0A, "petition honorific, used in Bhutan" },
-  { 0x0F0B, "morpheme delimiter (approximate meaning)" },
-  { 0x0F0B, "the normal tsheg; provides a break opportunity" },
-  { 0x0F0B, "character name is a misnomer" },
-  { 0x0F0C, "a non-breaking tsheg; inhibits line breaking" },
-  { 0x0F0C, "character name is a misnomer" },
-  { 0x0F0D, "marks end of a section of text (tshig-grub)" },
-  { 0x0F0E, "marks end of a whole topic (don-tshan)" },
-  { 0x0F11, "shad which follows a tsheg-bar that starts a new line" },
-  { 0x0F14, "used as a comma-like text delimiter" },
-  { 0x0F18, "combines with digits" },
-  { 0x0F19, "combines with digits" },
-  { 0x0F34, "repetition" },
-  { 0x0F35, "honorific, emphasis; used like underlining" },
-  { 0x0F36, "marks point of text insertion or annotation" },
-  { 0x0F37, "emphasis; used like underlining" },
-  { 0x0F39, "a lenition mark" },
-  { 0x0F3B, "brackets" },
-  { 0x0F3D, "used for bracketing with a roof over" },
-  { 0x0F3F, "marks which combine with digits" },
-  { 0x0F62, "when followed by a subjoined letter = ra mgo" },
-  { 0x0F68, "base for dependent vowels" },
-  { 0x0F6A, "used only in transliteration and transcription" },
-  { 0x0F71, "common, vowel-lengthening mark" },
-  { 0x0F73, "use of this character is discouraged" },
-  { 0x0F75, "use of this character is discouraged" },
-  { 0x0F77, "use of this character is strongly discouraged" },
-  { 0x0F79, "use of this character is strongly discouraged" },
-  { 0x0F81, "use of this character is discouraged" },
-  { 0x0F85, "transliteration of Sanskrit avagraha" },
-  { 0x0F8A, "always followed by 0F82" },
-  { 0x0FB0, "rare, only used for full-sized subjoined letter" },
-  { 0x0FBE, "often repeated three times; indicates a refrain" },
-  { 0x0FBF, "marks point of text insertion or annotation" },
-  { 0x0FC0, "marks a heavy drum beat" },
-  { 0x0FC1, "marks a light drum beat" },
-  { 0x0FC2, "symbol of a small Tibetan hand drum" },
-  { 0x0FC3, "symbol of a Tibetan cymbal" },
-  { 0x0FC4, "symbol of a Tibetan hand bell" },
-  { 0x0FCA, "the double body symbol" },
-  { 0x0FCB, "the tri-kaya or triple body symbol" },
-  { 0x0FCC, "the quadruple body symbol, a form of the swastika" },
-  { 0x0FD0, "used in Bhutan" },
-  { 0x0FD1, "used in Bhutan" },
-  { 0x1021, "also represents the glottal stop as a consonant" },
-  { 0x1031, "stands to the left of the consonant" },
-  { 0x1037, "a tone mark" },
-  { 0x1401, "Inuktitut (AI), Carrier (U)" },
-  { 0x1402, "Inuktitut" },
-  { 0x1403, "Carrier (O)" },
-  { 0x1405, "Inuktitut (U), Carrier (E)" },
-  { 0x1406, "Inuktitut (UU)" },
-  { 0x141C, "East Cree" },
-  { 0x141E, "Moose Cree (Y), Algonquian (GLOTTAL STOP)" },
-  { 0x141F, "West Cree (T), East Cree (Y), Inuktitut (GLOTTAL STOP)" },
-  { 0x141F, "Athapascan (B/P), Sayisi (I), Carrier (G)" },
-  { 0x1420, "West Cree (K), Athapascan (K), Carrier (KH)" },
-  { 0x1421, "N Cree (SH), Sayisi (R), Carrier (NG)" },
-  { 0x1422, "Algonquian (S), Chipewyan (R), Sayisi (S)" },
-  { 0x1423, "West Cree (N), Athapascan (D/T), Sayisi (N), Carrier (N)" },
-  { 0x1424, "West Cree (W), Sayisi (O)" },
-  { 0x1425, "Chipewyan (TT), South Slavey (GH)" },
-  { 0x1426, "Algonquian (H), Carrier (R)" },
-  { 0x1427, "Moose Cree (W), Athapascan (Y), Sayisi (YU)" },
-  { 0x1428, "West Cree (C), Sayisi (D)" },
-  { 0x1429, "Athapascan (N), Sayisi (AI)" },
-  { 0x142A, "N Cree (L), Carrier (D)" },
-  { 0x142F, "Inuktitut (PAI), Athapascan (BE), Carrier (HU)" },
-  { 0x1430, "Inuktitut" },
-  { 0x1433, "Inuktitut (PU), Athapascan (BO), Carrier (HE)" },
-  { 0x1434, "Inuktitut (PUU)" },
-  { 0x1438, "Athapascan (BA), Carrier (HA)" },
-  { 0x144A, "Sayisi (G)" },
-  { 0x144C, "Inuktitut (TAI), Athapascan (DI), Carrier (DU)" },
-  { 0x144D, "Inuktitut" },
-  { 0x144E, "Athapascan (DE), Carrier (DO)" },
-  { 0x1450, "Inuktitut (TU), Athapascan (DO), Carrier (DE), Sayisi (DU)" },
-  { 0x1451, "Inuktitut (TUU)" },
-  { 0x1455, "Athapascan (DA)" },
-  { 0x1467, "South Slavey (DEH)" },
-  { 0x1468, "South Slavey (DIH)" },
-  { 0x1469, "South Slavey (DOH)" },
-  { 0x146A, "South Slavey (DAH)" },
-  { 0x146B, "Inuktitut (KAI)" },
-  { 0x146C, "Inuktitut" },
-  { 0x146F, "Inuktitut (KU), Sayisi (KU)" },
-  { 0x1470, "Inuktitut (KUU)" },
-  { 0x1484, "East Cree" },
-  { 0x1489, "Inuktitut (GAI), Athapascan (DHE), Sayisi (THE)" },
-  { 0x148A, "Inuktitut (GAAI)" },
-  { 0x148B, "Inuktitut (GI), Athapascan (DHI), Sayisi (THI)" },
-  { 0x148C, "Inuktitut (GII)" },
-  { 0x148D, "Inuktitut (GU), Athapascan (DHO), Sayisi (THO)" },
-  { 0x148E, "Inuktitut (GUU)" },
-  { 0x1490, "Inuktitut (GA), Athapascan (DHA), Sayisi (THA)" },
-  { 0x1491, "Inuktitut (GAA)" },
-  { 0x14A1, "Inuktitut (G), Sayisi (T)" },
-  { 0x14A2, "Athapascan (DH)" },
-  { 0x14A3, "Inuktitut (MAI)" },
-  { 0x14A4, "Inuktitut" },
-  { 0x14A7, "Inuktitut (MU), Sayisi (MU)" },
-  { 0x14A8, "Inuktitut (MUU)" },
-  { 0x14BC, "Carrier (M)" },
-  { 0x14C0, "Inuktitut (NAI)" },
-  { 0x14C1, "Inuktitut" },
-  { 0x14C4, "Inuktitut (NU), Sayisi (NU)" },
-  { 0x14C5, "Inuktitut (NUU)" },
-  { 0x14D3, "Inuktitut (LAI)" },
-  { 0x14D4, "Inuktitut" },
-  { 0x14D7, "Inuktitut (LU)" },
-  { 0x14D8, "Inuktitut (LUU)" },
-  { 0x14ED, "Inuktitut (SAI)" },
-  { 0x14EE, "Inuktitut" },
-  { 0x14F1, "Inuktitut (SU), Sayisi (SU)" },
-  { 0x14F2, "Inuktitut (SUU)" },
-  { 0x1526, "Inuktitut (YAI)" },
-  { 0x1527, "Inuktitut" },
-  { 0x152A, "Inuktitut (YU)" },
-  { 0x152B, "Inuktitut (YUU)" },
-  { 0x1542, "Inuktitut (RAI)" },
-  { 0x1543, "Athapascan (LE)" },
-  { 0x1544, "Athapascan (LI)" },
-  { 0x1545, "Inuktitut" },
-  { 0x1548, "Inuktitut (RU)" },
-  { 0x1549, "Inuktitut (RUU)" },
-  { 0x154A, "Sayisi (LU)" },
-  { 0x1553, "Inuktitut (FAI)" },
-  { 0x1554, "Inuktitut" },
-  { 0x155E, "Sayisi (TE)" },
-  { 0x1560, "Sayisi (TI)" },
-  { 0x1564, "Sayisi (TU)" },
-  { 0x1566, "Sayisi (TA)" },
-  { 0x156D, "Sayisi (TTHU)" },
-  { 0x156F, "probably a mistaken interpretation of an asterisk used to mark a proper noun" },
-  { 0x157D, "Algonquian" },
-  { 0x157E, "Inuktitut" },
-  { 0x1581, "Inuktitut (QU)" },
-  { 0x1582, "Inuktitut (QUU)" },
-  { 0x1586, "Sayisi (KLE)" },
-  { 0x1587, "Sayisi (KLI)" },
-  { 0x1588, "Sayisi (KLU)" },
-  { 0x1589, "Sayisi (KLA)" },
-  { 0x158E, "Inuktitut" },
-  { 0x1591, "Inuktitut (NGU)" },
-  { 0x1592, "Inuktitut (NGUU)" },
-  { 0x1599, "Sayisi (SHU)" },
-  { 0x15A2, "Inuktitut (LHU)" },
-  { 0x15A3, "Inuktitut (LHUU)" },
-  { 0x15C2, "Sayisi (HU)" },
-  { 0x1614, "Athapascan (ZA), Sayisi (TZO), South Slavey (DHA)" },
-  { 0x1615, "Athapascan (ZO), Sayisi (TZU), South Slavey (DHO)" },
-  { 0x161A, "Athapascan (ZE), Sayisi (TZE), South Slavey (DHE)" },
-  { 0x161B, "Athapascan (ZI), Sayisi (TZI), South Slavey (DHI)" },
-  { 0x166D, "Algonquian" },
-  { 0x166D, "used as a symbol to denote Christ" },
-  { 0x1673, "Inuktitut (NNGU)" },
-  { 0x1674, "Inuktitut (NNGUU)" },
-  { 0x1680, "glyph is blank in \"stemless\" style fonts" },
-  { 0x169B, "marks beginning of Ogham text" },
-  { 0x169C, "marks end of Ogham text" },
-  { 0x16EE, "golden number 17" },
-  { 0x16EF, "golden number 18" },
-  { 0x16F0, "golden number 19" },
-  { 0x178E, "as this character belongs to the first register, its correct transliteration is nna, not nno" },
-  { 0x179D, "used only for Pali/Sanskrit transliteration" },
-  { 0x179E, "used only for Pali/Sanskrit transliteration" },
-  { 0x179E, "as this character belongs to the first register, its correct transliteration is ssa, not sso" },
-  { 0x17A2, "glottal stop" },
-  { 0x17A3, "originally intended only for Pali/Sanskrit transliteration" },
-  { 0x17A3, "use of this character is strongly discouraged; 17A2 should be used instead" },
-  { 0x17A4, "used only for Pali/Sanskrit transliteration" },
-  { 0x17A4, "use of this character is discouraged; the sequence 17A2 17B6 should be used instead" },
-  { 0x17A8, "obsolete ligature for the sequence 17A7 1780" },
-  { 0x17A8, "use of the sequence is now preferred" },
-  { 0x17B2, "this is a variant for 17B1, used in only two words" },
-  { 0x17B2, "17B1 is the normal variant of this vowel" },
-  { 0x17C6, "final nasalization" },
-  { 0x17C6, "this character is usually regarded as a vowel sign am, along with om and aam" },
-  { 0x17C8, "inserts a short inherent vowel with abrupt glottal stop" },
-  { 0x17C8, "the preferred transliteration is yukaleakpintu" },
-  { 0x17C9, "changes the second register to the first" },
-  { 0x17C9, "the preferred transliteration is muusekatoan" },
-  { 0x17CA, "changes the first register to the second" },
-  { 0x17CA, "the preferred transliteration is treisap" },
-  { 0x17CB, "shortens the vowel sound in the previous orthographic syllable" },
-  { 0x17CB, "the preferred transliteration is bantak" },
-  { 0x17CC, "a diacritic historically corresponding to the repha form of ra in Devanagari" },
-  { 0x17CD, "indicates that the base character is not pronounced" },
-  { 0x17CE, "sign used with some exclamations" },
-  { 0x17CF, "denotes stressed intonation in some single-consonant words" },
-  { 0x17D0, "denotes deviation from the general rules of pronunciation, mostly used in loan words from Pali/Sanskrit, French, and so on" },
-  { 0x17D1, "mostly obsolete, a \"killer\"" },
-  { 0x17D1, "indicates that the base character is the final consonant of a word without its inherent vowel sound" },
-  { 0x17D2, "functions to indicate that the following Khmer letter is to be rendered subscripted" },
-  { 0x17D2, "shape shown is arbitrary and is not visibly rendered" },
-  { 0x17D3, "originally intended as part of lunar date symbols" },
-  { 0x17D3, "use of this character is strongly discouraged in favor of the complete set of lunar date symbols" },
-  { 0x17D4, "functions as a full stop, period" },
-  { 0x17D5, "indicates the end of a section or a text" },
-  { 0x17D6, "functions as colon" },
-  { 0x17D6, "the preferred transliteration is camnoc pii kuuh" },
-  { 0x17D7, "repetition sign" },
-  { 0x17D8, "et cetera" },
-  { 0x17D8, "use of this character is discouraged; other abbreviations for et cetera also exist" },
-  { 0x17D8, "preferred spelling: 17D4 179B 17D4" },
-  { 0x17D9, "indicates the beginning of a book or a treatise" },
-  { 0x17D9, "the preferred transliteration is phnek moan" },
-  { 0x17DA, "indicates the end of a book or treatise" },
-  { 0x17DA, "this forms a pair with 17D9" },
-  { 0x17DA, "the preferred transliteration is koomoot" },
-  { 0x17DC, "rare, shows an omitted Sanskrit vowel, like an apostrophe" },
-  { 0x17DC, "the preferred transliteration is avakraha sannya" },
-  { 0x17DD, "mostly obsolete" },
-  { 0x17DD, "indicates that the base character is the final consonant of a word with its inherent vowel sound" },
-  { 0x1805, "marks the end of a chapter" },
-  { 0x1806, "not a format control character, but simply a hyphen for Todo" },
-  { 0x180B, "abbreviated FVS1" },
-  { 0x180C, "abbreviated FVS2" },
-  { 0x180D, "abbreviated FVS3" },
-  { 0x180E, "abbreviated MVS" },
-  { 0x19DE, "conjunction: and" },
-  { 0x19DF, "perfective" },
-  { 0x19E0, "represents the first August in a leap year" },
-  { 0x19F0, "represents the second August in a leap year" },
-  { 0x1D02, "glyph can also have sideways orientation" },
-  { 0x1D14, "glyph can also have sideways orientation" },
-  { 0x1D18, "represents a semi-voiced [p]" },
-  { 0x1D1E, "glyph can also have turned orientation" },
-  { 0x1D29, "represents a voiceless uvular trill" },
-  { 0x1D2B, "in italic style, the glyph is obliqued, not italicized" },
-  { 0x1D4C, "more appropriate equivalence would be to 1D08" },
-  { 0x1D77, "Georgian transcription" },
-  { 0x1D79, "older Irish phonetic notation" },
-  { 0x1D7A, "American dictionary usage" },
-  { 0x1D7B, "used with different meanings by Americanists and Oxford dictionaries" },
-  { 0x1D7C, "used by Russianists" },
-  { 0x1D7D, "used by Americanists" },
-  { 0x1D7D, "uppercase is 2C63" },
-  { 0x1D7E, "used by Americanists" },
-  { 0x1D7F, "used by Americanists and Oxford dictionaries" },
-  { 0x1DC3, "Glagolitic" },
-  { 0x1E03, "Irish Gaelic (old orthography)" },
-  { 0x1E0B, "Irish Gaelic (old orthography)" },
-  { 0x1E0D, "Indic transliteration" },
-  { 0x1E11, "Livonian" },
-  { 0x1E1F, "Irish Gaelic (old orthography)" },
-  { 0x1E25, "Indic transliteration" },
-  { 0x1E2B, "Semitic transliteration" },
-  { 0x1E31, "Macedonian transliteration" },
-  { 0x1E37, "Indic transliteration" },
-  { 0x1E37, "see ISO 15919 on the use of dot below versus ring below in Indic transliteration" },
-  { 0x1E39, "Indic transliteration" },
-  { 0x1E3B, "Indic transliteration" },
-  { 0x1E41, "Irish Gaelic (old orthography)" },
-  { 0x1E43, "Indic transliteration" },
-  { 0x1E45, "Indic transliteration" },
-  { 0x1E47, "Indic transliteration" },
-  { 0x1E49, "Indic transliteration" },
-  { 0x1E57, "Irish Gaelic (old orthography)" },
-  { 0x1E5B, "Indic transliteration" },
-  { 0x1E5B, "see ISO 15919 on the use of dot below versus ring below in Indic transliteration" },
-  { 0x1E5D, "Indic transliteration" },
-  { 0x1E5F, "Indic transliteration" },
-  { 0x1E61, "Irish Gaelic (old orthography)" },
-  { 0x1E63, "Indic transliteration" },
-  { 0x1E6B, "Irish Gaelic (old orthography)" },
-  { 0x1E6D, "Indic transliteration" },
-  { 0x1E6F, "Semitic transliteration" },
-  { 0x1E81, "Welsh" },
-  { 0x1E83, "Welsh" },
-  { 0x1E85, "Welsh" },
-  { 0x1E93, "Indic transliteration" },
-  { 0x1E95, "Semitic transliteration" },
-  { 0x1E96, "Semitic transliteration" },
-  { 0x1E9B, "in current use in Gaelic types (as glyph variant of 1E61)" },
-  { 0x1EF3, "Welsh" },
-  { 0x2002, "half an em" },
-  { 0x2003, "nominally, a space equal to the type size in points" },
-  { 0x2003, "may scale by the condensation factor of a font" },
-  { 0x2006, "in computer typography sometimes equated to thin space" },
-  { 0x2007, "space equal to tabular width of a font" },
-  { 0x2007, "this is equivalent to the digit width of fonts with fixed-width digits" },
-  { 0x2008, "space equal to narrow punctuation of a font" },
-  { 0x2009, "a fifth of an em (or sometimes a sixth)" },
-  { 0x200A, "thinner than a thin space" },
-  { 0x200A, "in traditional typography, the thinnest space available" },
-  { 0x200B, "commonly abbreviated ZWSP" },
-  { 0x200B, "this character is intended for line break control; it has no width, but its presence between two characters does not prevent increased letter spacing in justification" },
-  { 0x200C, "commonly abbreviated ZWNJ" },
-  { 0x200D, "commonly abbreviated ZWJ" },
-  { 0x200E, "commonly abbreviated LRM" },
-  { 0x200F, "commonly abbreviated RLM" },
-  { 0x2014, "may be used in pairs to offset parenthetical text" },
-  { 0x2015, "long dash introducing quoted text" },
-  { 0x2016, "used in pairs to indicate norm of a matrix" },
-  { 0x2017, "this is a spacing character" },
-  { 0x2018, "this is the preferred character (as opposed to 201B)" },
-  { 0x2019, "this is the preferred character to use for apostrophe" },
-  { 0x201A, "used as opening single quotation mark in some languages" },
-  { 0x201B, "has same semantic as 2018, but differs in appearance" },
-  { 0x201C, "this is the preferred character (as opposed to 201F)" },
-  { 0x201E, "used as opening double quotation mark in some languages" },
-  { 0x201F, "has same semantic as 201C, but differs in appearance" },
-  { 0x2024, "also used as an Armenian semicolon (mijaket)" },
-  { 0x2028, "may be used to represent this semantic unambiguously" },
-  { 0x2029, "may be used to represent this semantic unambiguously" },
-  { 0x202A, "commonly abbreviated LRE" },
-  { 0x202B, "commonly abbreviated RLE" },
-  { 0x202C, "commonly abbreviated PDF" },
-  { 0x202D, "commonly abbreviated LRO" },
-  { 0x202E, "commonly abbreviated RLO" },
-  { 0x202F, "commonly abbreviated NNBSP" },
-  { 0x2030, "used, for example, in measures of blood alcohol content, salinity, etc." },
-  { 0x2031, "percent of a percent, rarely used" },
-  { 0x2039, "usually opening, sometimes closing" },
-  { 0x203A, "usually closing, sometimes opening" },
-  { 0x2041, "proofreader's mark: insert here" },
-  { 0x2044, "for composing arbitrary fractions" },
-  { 0x204A, "Irish Gaelic, Old English, ..." },
-  { 0x2050, "editing mark" },
-  { 0x2052, "a common glyph variant and fallback representation looks like ./." },
-  { 0x2052, "may also be used as a dingbat to indicate correctness" },
-  { 0x2052, "used in Finno-Ugric Phonetic Alphabet to indicate a related borrowed form with different sound" },
-  { 0x2055, "used as a punctuation mark with Syloti Nagri, Bengali and other Indic scripts" },
-  { 0x205A, "historically used to indicate the end of a sentence or change of speaker" },
-  { 0x205A, "extends from baseline to cap height" },
-  { 0x205B, "used by scribes in the margin as highlighter mark" },
-  { 0x205B, "this is centered on the line, but extends beyond top and bottom of the line" },
-  { 0x205C, "used by scribes in the margin as highlighter mark" },
-  { 0x205E, "used in dictionaries to indicate legal but undesirable word break" },
-  { 0x205E, "glyph extends the whole height of the line" },
-  { 0x205F, "abbreviated MMSP" },
-  { 0x205F, "four-eighteenths of an em" },
-  { 0x2060, "commonly abbreviated WJ" },
-  { 0x2060, "a zero width non-breaking space (only)" },
-  { 0x2060, "intended for disambiguation of functions for byte order mark" },
-  { 0x2061, "contiguity operator indicating application of a function" },
-  { 0x2062, "contiguity operator indicating multiplication" },
-  { 0x2063, "contiguity operator indicating that adjacent mathematical symbols form a list, e.g. when no visible comma is used between multiple indices" },
-  { 0x20A0, "intended for ECU, but not widely used" },
-  { 0x20A0, "historical character; this is NOT the euro!" },
-  { 0x20A1, "Costa Rica, El Salvador" },
-  { 0x20A2, "Brazil" },
-  { 0x20A3, "France" },
-  { 0x20A4, "intended for lira, but not widely used" },
-  { 0x20A4, "preferred character for lira is 00A3" },
-  { 0x20A5, "USA (1/10 cent)" },
-  { 0x20A6, "Nigeria" },
-  { 0x20A7, "Spain" },
-  { 0x20A8, "India" },
-  { 0x20A9, "Korea" },
-  { 0x20AA, "Israel" },
-  { 0x20AB, "Vietnam" },
-  { 0x20AC, "currency sign for the European Monetary Union" },
-  { 0x20AC, "euro, not ecu" },
-  { 0x20AD, "Laos" },
-  { 0x20AE, "Mongolia" },
-  { 0x20AE, "also transliterated as tugrug, tugric, tugrog, togrog, tögrög" },
-  { 0x20AF, "Greece" },
-  { 0x20B1, "Philippines" },
-  { 0x20B1, "the Mexican peso is indicated with the dollar sign" },
-  { 0x20B2, "Paraguay" },
-  { 0x20B2, "Often represented by G. or Gs." },
-  { 0x20B3, "former Argentinian currency" },
-  { 0x20B4, "Ukraine" },
-  { 0x20B5, "Ghana" },
-  { 0x20B5, "glyph may look like '023B' or like C with a short vertical stroke through the upper arm" },
-  { 0x20D1, "vector" },
-  { 0x20D2, "negation" },
-  { 0x20D3, "occasional variant for negation" },
-  { 0x20D5, "rotation" },
-  { 0x20D7, "vector" },
-  { 0x20E0, "prohibition" },
-  { 0x20E1, "tensor" },
-  { 0x20E9, "extends the full width of the base character" },
-  { 0x210E, "simply a mathematical italic h; this character's name results from legacy usage" },
-  { 0x2113, "despite its character name, this symbol is derived from a special italicized version of the small letter l" },
-  { 0x2113, "the SI recommended symbol for liter is 006C" },
-  { 0x2118, "actually this has the form of a lowercase calligraphic p, despite its name" },
-  { 0x2121, "typical forms for this symbol may use lower case, small caps or superscripted letter shapes" },
-  { 0x2126, "SI unit of resistance, named after G. S. Ohm, German physicist" },
-  { 0x2126, "preferred representation is 03A9" },
-  { 0x2127, "archaic unit of conductance (= the SI unit siemens)" },
-  { 0x2127, "typographically a turned greek capital letter omega" },
-  { 0x2129, "unique element fulfilling a description (logic)" },
-  { 0x212B, "non SI length unit (=0.1 nm) named after A. J. Ångström, Swedish physicist" },
-  { 0x212B, "preferred representation is 00C5" },
-  { 0x212E, "used in European packaging" },
-  { 0x2132, "lowercase is 214E" },
-  { 0x2139, "intended for use with 20DD" },
-  { 0x213A, "a binding signature mark" },
-  { 0x213B, "typical forms for this symbol may use lower case, small caps or superscripted letter shapes" },
-  { 0x2145, "sometimes used for the differential" },
-  { 0x2146, "sometimes used for the differential" },
-  { 0x2147, "sometimes used for the natural exponent" },
-  { 0x2148, "sometimes used for the imaginary unit" },
-  { 0x2149, "sometimes used for the imaginary unit" },
-  { 0x214B, "used in linear logic" },
-  { 0x214C, "abbreviates the word 'per'" },
-  { 0x214E, "uppercase is 2132" },
-  { 0x2183, "used in combination with C and I to form large numbers" },
-  { 0x2183, "lowercase is 2184" },
-  { 0x2191, "IPA: egressive airflow" },
-  { 0x2193, "IPA: ingressive airflow" },
-  { 0x219A, "negation of 2190" },
-  { 0x219B, "negation of 2192" },
-  { 0x21AE, "negation of 2194" },
-  { 0x21B5, "may indicate a carriage return or new line" },
-  { 0x21CD, "negation of 21D0" },
-  { 0x21CE, "negation of 21D4" },
-  { 0x21CF, "negation of 21D2" },
-  { 0x2205, "used in linguistics to indicate a null morpheme or phonological \"zero\"" },
-  { 0x2207, "used for Laplacian operator (written with superscript 2)" },
-  { 0x220A, "originates in math pi fonts; not the straight epsilon" },
-  { 0x2215, "generic division operator" },
-  { 0x2233, "clockwise or anticlockwise arrows do not reverse during layout mirroring" },
-  { 0x223D, "reversed tilde and lazy S are glyph variants" },
-  { 0x224C, "reversed tilde and lazy S are glyph variants" },
-  { 0x22C0, "also used to denote the universal quantifier" },
-  { 0x22C1, "also used to denote the existential quantifier" },
-  { 0x22C6, "APL" },
-  { 0x22EE, "these four ellipses are used for matrix row/column elision" },
-  { 0x2301, "from ISO 2047" },
-  { 0x2301, "symbol for End of Transmission" },
-  { 0x230C, "set of four \"crop\" corners, arranged facing outward" },
-  { 0x2311, "used as a command delimiter in some very old computers" },
-  { 0x231C, "set of four \"quine\" corners, for quincuncial arrangement" },
-  { 0x231C, "these are also used in mathematics in upper and lower pairs" },
-  { 0x234A, "preferred naming for APL tack symbols now follows the London Convention in ISO/IEC 13751:2000 (APL Extended)" },
-  { 0x237B, "from ISO 2047" },
-  { 0x237B, "symbol for Negative Acknowledge" },
-  { 0x237D, "from ISO 9995-7" },
-  { 0x237D, "keyboard symbol for No Break Space" },
-  { 0x237E, "from ISO 2047" },
-  { 0x237F, "from ISO 2047" },
-  { 0x237F, "symbol for End of Medium" },
-  { 0x23AF, "used for extension of arrows" },
-  { 0x23B6, "only used for terminal emulation" },
-  { 0x23CE, "may be shown with either hollow or filled glyph" },
-  { 0x23CF, "UI symbol to eject media" },
-  { 0x23D0, "used for extension of arrows" },
-  { 0x2422, "graphic for space" },
-  { 0x2423, "graphic for space" },
-  { 0x2425, "from ISO 9995-7" },
-  { 0x2425, "keyboard symbol for undoable delete" },
-  { 0x2426, "from ISO 2047" },
-  { 0x2591, "25%" },
-  { 0x2592, "50%" },
-  { 0x2593, "75%" },
-  { 0x25A1, "may be used to represent a missing ideograph" },
-  { 0x25CC, "note that the reference glyph for this character is intentionally larger than the dotted circle glyph used to indicate combining characters in this standard; see, for example, 0300" },
-  { 0x2615, "can be used to indicate a wait" },
-  { 0x2619, "a binding signature mark" },
-  { 0x2672, "used as generic symbol for recycling or to indicate that material is recyclable" },
-  { 0x2673, "polyethylene terephthalate" },
-  { 0x2674, "high density polyethylene" },
-  { 0x2675, "vinyl, polyvinyl chloride" },
-  { 0x2676, "low density polyethylene" },
-  { 0x2677, "polypropylene" },
-  { 0x2678, "polystyrene" },
-  { 0x2679, "other plastics" },
-  { 0x267A, "used together with other text and labels to indicate the type of material to be recycled" },
-  { 0x267C, "used to indicate 100% recycled paper content" },
-  { 0x267D, "percentage of recycled paper content indicated in overlay or next to this symbol" },
-  { 0x2695, "both inclined or upright renderings of this symbol are common" },
-  { 0x269A, "signifies a commercial term or commerce" },
-  { 0x269A, "glyph shows a heraldic staff with a winged wheel" },
-  { 0x26A3, "a glyph variant has the two circles on the same line" },
-  { 0x26A4, "a glyph variant has the two circles on the same line" },
-  { 0x26AA, "base for male or female sign" },
-  { 0x26AB, "UI symbol for record function" },
-  { 0x26AC, "can represent wedding ring" },
-  { 0x2720, "Historically, the Maltese cross took many forms; the shape shown in the Zapf Dingbats is similar to one known as the Cross Formée." },
-  { 0x27C0, "used by Euclid" },
-  { 0x27C1, "used by Euclid" },
-  { 0x27C2, "relation, typeset with additional spacing" },
-  { 0x27E0, "used as form of possibility in modal logic" },
-  { 0x2800, "while this character is imaged as a fixed-width blank in many fonts, it does not act as a space" },
-  { 0x2981, "medium-small-sized black circle" },
-  { 0x2986, "used for Bourbakist intervals" },
-  { 0x2999, "four close dots vertical" },
-  { 0x29BF, "forms part of a graduated set of circles with enclosed black circle of different sizes" },
-  { 0x29E7, "vertical bar crossed by two horizontals" },
-  { 0x2A1D, "relational database theory" },
-  { 0x2A1E, "relational database theory" },
-  { 0x2A71, "black stands slightly better (chess notation)" },
-  { 0x2A72, "white stands slightly better (chess notation)" },
-  { 0x2ADC, "an equational logic symbol, not a computing science symbol" },
-  { 0x2ADC, "non-independence (original concept) is related to forking" },
-  { 0x2ADD, "an equational logic symbol, not a computing science symbol" },
-  { 0x2ADD, "independence (original concept) is related to non-forking" },
-  { 0x2AEB, "probability theory" },
-  { 0x2AF6, "logic" },
-  { 0x2AFC, "often n-ary" },
-  { 0x2C62, "lowercase is 026B" },
-  { 0x2C63, "lowercase is 1D7D" },
-  { 0x2C64, "lowercase is 027D" },
-  { 0x2C65, "uppercase is 023A" },
-  { 0x2C66, "uppercase is 023E" },
-  { 0x2C77, "medium rounded o" },
-  { 0x2E0B, "used as an opening raised omission bracket" },
-  { 0x2E0C, "used as an opening or closing raised omission bracket" },
-  { 0x2E0D, "used as a closing or opening raised omission bracket" },
-  { 0x2E13, "glyph variants may look like '00F7' or '2238'" },
-  { 0x2E14, "contrary to its formal name this symbol points upwards" },
-  { 0x2E15, "contrary to its formal name this symbol points downwards" },
-  { 0x2E17, "used in ancient Near-Eastern linguistics" },
-  { 0x2E17, "hyphen in Fraktur text uses 002D or 2010, but with a '2E17' glyph in Fraktur fonts" },
-  { 0x2E1D, "used in N'Ko" },
-  { 0x2E85, "form used on left side" },
-  { 0x2E88, "form used at top" },
-  { 0x2E89, "form used on right side" },
-  { 0x2E8A, "form used at top" },
-  { 0x2E8B, "form used at bottom" },
-  { 0x2E8C, "form used at top" },
-  { 0x2E8D, "form used at top" },
-  { 0x2E96, "form used on left side" },
-  { 0x2E97, "form used at bottom" },
-  { 0x2E98, "form used on left side" },
-  { 0x2E99, "form used on right side" },
-  { 0x2EA1, "form used on left side" },
-  { 0x2EA2, "form used (rarely) at bottom" },
-  { 0x2EA3, "form used at bottom" },
-  { 0x2EA4, "form used at top" },
-  { 0x2EA5, "form used at top" },
-  { 0x2EA8, "form used on left side" },
-  { 0x2EA9, "form used on left side" },
-  { 0x2EAA, "form used on left side" },
-  { 0x2EAB, "form used at top" },
-  { 0x2EAF, "form used on left side" },
-  { 0x2EB0, "form used on left side" },
-  { 0x2EB6, "form used on left side" },
-  { 0x2EB7, "form used at top" },
-  { 0x2EC2, "form used on left side" },
-  { 0x2EC3, "form used at top" },
-  { 0x2EC4, "form used on left side" },
-  { 0x2ECA, "form used on left side" },
-  { 0x2ECF, "form used on right side" },
-  { 0x2ED2, "form used on left side" },
-  { 0x2ED6, "form used on left side" },
-  { 0x2EDD, "form used at bottom" },
-  { 0x2EDE, "form used on left side" },
-  { 0x2EDF, "form used on left side" },
-  { 0x2EE0, "form used on left side" },
-  { 0x300D, "used as quotation marks" },
-  { 0x300F, "used as quotation marks" },
-  { 0x3013, "substitute for ideograph not in font" },
-  { 0x301D, "sometimes depicted as double prime quotation mark" },
-  { 0x301E, "this is a mistaken analogue to 201D; 301F is preferred" },
-  { 0x301F, "may be depicted as low inverse double prime quotation mark" },
-  { 0x3032, "the preceding two semantic characters are preferred to the following three glyphic forms" },
-  { 0x3034, "the preceding two are glyphs used in conjunction with the following glyph" },
-  { 0x303C, "informal abbreviation for Japanese -masu ending" },
-  { 0x303D, "marks the start of a song part in Japanese" },
-  { 0x303E, "visual indicator that the following ideograph is to be taken as a variant of the intended character" },
-  { 0x303F, "visual indicator of a screen space for half of an ideograph" },
-  { 0x3181, "archaic velar nasal" },
-  { 0x3186, "archaic glottal stop" },
-  { 0x322A, "Monday" },
-  { 0x322B, "Tuesday" },
-  { 0x322C, "Wednesday" },
-  { 0x322D, "Thursday" },
-  { 0x322E, "Friday" },
-  { 0x322F, "Saturday" },
-  { 0x3230, "Sunday" },
-  { 0x3231, "incorporated" },
-  { 0x3232, "limited" },
-  { 0x3233, "company" },
-  { 0x3242, "from" },
-  { 0x3243, "to" },
-  { 0x327E, "postal code mark" },
-  { 0x328A, "Monday" },
-  { 0x328B, "Tuesday" },
-  { 0x328C, "Wednesday" },
-  { 0x328D, "Thursday" },
-  { 0x328E, "Friday" },
-  { 0x328F, "Saturday" },
-  { 0x3290, "Sunday" },
-  { 0x3291, "incorporated" },
-  { 0x3292, "limited" },
-  { 0x3293, "company" },
-  { 0x329E, "name seal" },
-  { 0x32A1, "holiday" },
-  { 0x3300, "apartment" },
-  { 0x3301, "alpha" },
-  { 0x3302, "ampere" },
-  { 0x3303, "are (unit of area)" },
-  { 0x3304, "inning" },
-  { 0x3305, "inch" },
-  { 0x3306, "won (Korean currency)" },
-  { 0x3307, "escudo (Portuguese currency)" },
-  { 0x3308, "acre" },
-  { 0x3309, "ounce" },
-  { 0x330A, "ohm" },
-  { 0x330B, "kai-ri: nautical mile" },
-  { 0x330C, "carat" },
-  { 0x330D, "calorie" },
-  { 0x330E, "gallon" },
-  { 0x330F, "gamma" },
-  { 0x3310, "giga-" },
-  { 0x3311, "guinea" },
-  { 0x3312, "curie" },
-  { 0x3313, "guilder" },
-  { 0x3314, "kilo-" },
-  { 0x3315, "kilogram" },
-  { 0x3316, "kilometer" },
-  { 0x3317, "kilowatt" },
-  { 0x3318, "gram" },
-  { 0x3319, "gram ton" },
-  { 0x331A, "cruzeiro (Brazilian currency)" },
-  { 0x331B, "krone" },
-  { 0x331C, "case" },
-  { 0x331D, "koruna (Czech currency)" },
-  { 0x331E, "co-op" },
-  { 0x331F, "cycle" },
-  { 0x3320, "centime" },
-  { 0x3321, "shilling" },
-  { 0x3322, "centi-" },
-  { 0x3323, "cent" },
-  { 0x3324, "dozen" },
-  { 0x3325, "deci-" },
-  { 0x3326, "dollar" },
-  { 0x3327, "ton" },
-  { 0x3328, "nano-" },
-  { 0x3329, "knot, nautical mile" },
-  { 0x332A, "heights" },
-  { 0x332B, "percent" },
-  { 0x332C, "parts" },
-  { 0x332D, "barrel" },
-  { 0x332E, "piaster" },
-  { 0x332F, "picul (unit of weight)" },
-  { 0x3330, "pico-" },
-  { 0x3331, "building" },
-  { 0x3332, "farad" },
-  { 0x3333, "feet" },
-  { 0x3334, "bushel" },
-  { 0x3335, "franc" },
-  { 0x3336, "hectare" },
-  { 0x3337, "peso" },
-  { 0x3338, "pfennig" },
-  { 0x3339, "hertz" },
-  { 0x333A, "pence" },
-  { 0x333B, "page" },
-  { 0x333C, "beta" },
-  { 0x333D, "point" },
-  { 0x333E, "volt, bolt" },
-  { 0x333F, "hon: volume" },
-  { 0x3340, "pound" },
-  { 0x3341, "hall" },
-  { 0x3342, "horn" },
-  { 0x3343, "micro-" },
-  { 0x3344, "mile" },
-  { 0x3345, "mach" },
-  { 0x3346, "mark" },
-  { 0x3347, "mansion (i.e. better quality apartment)" },
-  { 0x3348, "micron" },
-  { 0x3349, "milli-" },
-  { 0x334A, "millibar" },
-  { 0x334B, "mega-" },
-  { 0x334C, "megaton" },
-  { 0x334D, "meter" },
-  { 0x334E, "yard" },
-  { 0x334F, "yard" },
-  { 0x3350, "yuan (Chinese currency)" },
-  { 0x3351, "liter" },
-  { 0x3352, "lira" },
-  { 0x3353, "rupee" },
-  { 0x3354, "ruble" },
-  { 0x3355, "rem (unit of radiation)" },
-  { 0x3356, "roentgen" },
-  { 0x3357, "watt" },
-  { 0x337F, "incorporated" },
-  { 0xA015, "name is a misnomer" },
-  { 0xA840, "Mongolian, Chinese, Tibetan, Sanskrit" },
-  { 0xA843, "Mongolian, Chinese, Tibetan, Sanskrit" },
-  { 0xA844, "Chinese, Tibetan" },
-  { 0xA845, "Mongolian, Chinese, Uighur, Tibetan" },
-  { 0xA846, "Mongolian, Chinese, Uighur, Tibetan" },
-  { 0xA847, "Chinese, Tibetan, Sanskrit" },
-  { 0xA848, "Mongolian, Chinese, Tibetan, Sanskrit" },
-  { 0xA84C, "Mongolian, Chinese, Tibetan, Sanskrit" },
-  { 0xA84D, "Chinese, Tibetan, Sanskrit" },
-  { 0xA850, "Chinese, Tibetan, Sanskrit" },
-  { 0xA851, "Mongolian, Chinese, Tibetan, Sanskrit" },
-  { 0xA852, "Chinese, Tibetan, Sanskrit" },
-  { 0xA854, "Chinese, Tibetan" },
-  { 0xA855, "Mongolian, Chinese, Tibetan" },
-  { 0xA858, "Mongolian, Uighur, Tibetan, Sanskrit" },
-  { 0xA862, "Mongolian, Uighur" },
-  { 0xA863, "Mongolian, Chinese" },
-  { 0xA864, "Chinese, Uighur" },
-  { 0xA865, "language usage unknown" },
-  { 0xA865, "created by reversal of A862" },
-  { 0xA866, "Mongolian, Chinese, Uighur" },
-  { 0xA867, "Chinese, Tibetan, Sanskrit" },
-  { 0xA868, "Chinese, Tibetan, Sanskrit" },
-  { 0xA869, "Sanskrit" },
-  { 0xA86A, "Sanskrit" },
-  { 0xA86B, "Sanskrit" },
-  { 0xA86C, "Sanskrit" },
-  { 0xA86D, "Chinese" },
-  { 0xA86E, "Chinese" },
-  { 0xA86F, "Chinese" },
-  { 0xA870, "Chinese" },
-  { 0xA871, "Tibetan, Sanskrit" },
-  { 0xA872, "Tibetan" },
-  { 0xA873, "Sanskrit" },
-  { 0xA874, "Tibetan" },
-  { 0xA874, "marks beginning of text" },
-  { 0xA875, "Tibetan" },
-  { 0xA875, "marks beginning of text" },
-  { 0xA876, "Tibetan" },
-  { 0xA877, "Tibetan" },
-  { 0xFA0E, "a unified CJK ideograph, not a compatibility ideograph, despite its name" },
-  { 0xFA0F, "a unified CJK ideograph, not a compatibility ideograph, despite its name" },
-  { 0xFA11, "a unified CJK ideograph, not a compatibility ideograph, despite its name" },
-  { 0xFA13, "a unified CJK ideograph, not a compatibility ideograph, despite its name" },
-  { 0xFA14, "a unified CJK ideograph, not a compatibility ideograph, despite its name" },
-  { 0xFA1F, "a unified CJK ideograph, not a compatibility ideograph, despite its name" },
-  { 0xFA21, "a unified CJK ideograph, not a compatibility ideograph, despite its name" },
-  { 0xFA23, "a unified CJK ideograph, not a compatibility ideograph, despite its name" },
-  { 0xFA24, "a unified CJK ideograph, not a compatibility ideograph, despite its name" },
-  { 0xFA27, "a unified CJK ideograph, not a compatibility ideograph, despite its name" },
-  { 0xFA28, "a unified CJK ideograph, not a compatibility ideograph, despite its name" },
-  { 0xFA29, "a unified CJK ideograph, not a compatibility ideograph, despite its name" },
-  { 0xFB1E, "a glyph variant of 05BF" },
-  { 0xFB20, "this form of AYIN has no descender, for use with marks placed below the letter" },
-  { 0xFE00, "these are abbreviated VS1, and so on" },
-  { 0xFE18, "misspelling of \"BRACKET\" in character name is a known defect" },
-  { 0xFE46, "sesame dots are used beside vertical text for emphasis" },
-  { 0xFE73, "for compatibility with certain legacy character sets" },
-  { 0xFEFF, "may be used to detect byte order by contrast with the noncharacter code point FFFE" },
-  { 0xFEFF, "use as an indication of non-breaking is deprecated; see 2060 instead" },
-  { 0xFF60, "the most commonly occurring glyph variant looks like doubled parentheses" },
-  { 0xFFE3, "sometimes treated as fullwidth overline" },
-  { 0xFFF9, "marks start of annotated text" },
-  { 0xFFFA, "marks start of annotating character(s)" },
-  { 0xFFFB, "marks end of annotation block" },
-  { 0xFFFC, "used as placeholder in text for an otherwise unspecified object" },
-  { 0xFFFD, "used to replace an incoming character whose value is unknown or unrepresentable in Unicode" },
-  { 0xFFFD, "compare the use of 001A as a control character to indicate the substitute function" },
-  { 0xFFFE, "the value FFFE is guaranteed not to be a Unicode character at all" },
-  { 0xFFFE, "may be used to detect byte order by contrast with FEFF which is a character" },
-  { 0xFFFF, "the value FFFF is guaranteed not to be a Unicode character at all" },
-  { 0x100BF, "the shape of this ideogram is only partially known" },
-  { 0x100D5, "the shape of this ideogram is only partially known" },
-  { 0x100D6, "the shape of this ideogram is only partially known" },
-  { 0x100FA, "the shape of this ideogram is only partially known" },
-  { 0x1015E, "top line is at cap height, unlike 10111" },
-  { 0x10A3F, "suppresses inherent vowel" },
-  { 0x10A3F, "shape shown is arbitrary and is not visibly rendered" },
-  { 0x122B9, "formed by making a circular indentation with the end of the stylus" },
-  { 0x1D098, "called diargon by some authorities" },
-  { 0x1D099, "called triargon by some authorities" },
-  { 0x1D0B4, "used in intonation formulas instead of nu, before phonemes a, i, o, u" },
-  { 0x1D0B5, "used in intonation formulas instead of nu, before phoneme e" },
-  { 0x1D0C5, "misspelling of \"FTHORA\" in character name is a known defect" },
-  { 0x1D200, "vocal E" },
-  { 0x1D201, "vocal first sharp of E" },
-  { 0x1D202, "vocal or instrumental second sharp of E" },
-  { 0x1D203, "vocal F" },
-  { 0x1D204, "vocal first sharp of F" },
-  { 0x1D205, "vocal second sharp of F" },
-  { 0x1D205, "instrumental second sharp of d" },
-  { 0x1D206, "vocal G" },
-  { 0x1D206, "instrumental second sharp of G" },
-  { 0x1D207, "vocal first sharp of G" },
-  { 0x1D208, "vocal second sharp of G" },
-  { 0x1D208, "instrumental first sharp of e´" },
-  { 0x1D209, "vocal A" },
-  { 0x1D209, "this is a modification of 039F and is therefore not the same as 03D8" },
-  { 0x1D20A, "vocal first sharp of A" },
-  { 0x1D20B, "vocal second sharp of A" },
-  { 0x1D20C, "vocal B" },
-  { 0x1D20D, "vocal first sharp of B" },
-  { 0x1D20D, "instrumental first sharp of d´" },
-  { 0x1D20E, "vocal second sharp of B" },
-  { 0x1D20E, "instrumental first sharp of b" },
-  { 0x1D20F, "vocal c" },
-  { 0x1D20F, "unlike 1D23B this character has a glyph variant that looks like a horizontal line" },
-  { 0x1D210, "vocal first sharp of c" },
-  { 0x1D211, "vocal second sharp of c" },
-  { 0x1D211, "instrumental second sharp of B" },
-  { 0x1D212, "vocal d" },
-  { 0x1D213, "vocal first sharp of d" },
-  { 0x1D213, "instrumental g" },
-  { 0x1D213, "this is a modification of 0395 and is therefore not the same as 0046" },
-  { 0x1D214, "vocal second sharp of d" },
-  { 0x1D215, "vocal e" },
-  { 0x1D216, "vocal first sharp of e" },
-  { 0x1D216, "this is a modification of 0392 and is therefore not the same as 0052" },
-  { 0x1D217, "vocal second sharp of e" },
-  { 0x1D218, "vocal first sharp of g´" },
-  { 0x1D219, "vocal second sharp of g´" },
-  { 0x1D21A, "vocal a´" },
-  { 0x1D21B, "vocal first sharp of a´" },
-  { 0x1D21C, "vocal second sharp of a´" },
-  { 0x1D21C, "instrumental first sharp of d" },
-  { 0x1D21D, "instrumental E" },
-  { 0x1D21E, "instrumental first sharp of E" },
-  { 0x1D21F, "instrumental F" },
-  { 0x1D220, "instrumental first sharp of F" },
-  { 0x1D221, "instrumental G" },
-  { 0x1D222, "instrumental first sharp of G" },
-  { 0x1D223, "instrumental first sharp of A" },
-  { 0x1D224, "instrumental second sharp of A" },
-  { 0x1D225, "instrumental B" },
-  { 0x1D226, "instrumental first sharp of B" },
-  { 0x1D227, "instrumental first sharp of c" },
-  { 0x1D228, "instrumental second sharp of c" },
-  { 0x1D229, "instrumental d" },
-  { 0x1D22A, "instrumental first sharp of e" },
-  { 0x1D22B, "instrumental second sharp of e" },
-  { 0x1D22C, "instrumental f" },
-  { 0x1D22D, "instrumental first sharp of f" },
-  { 0x1D22E, "instrumental second sharp of f" },
-  { 0x1D22F, "instrumental first sharp of g" },
-  { 0x1D230, "instrumental second sharp of g" },
-  { 0x1D231, "instrumental first sharp of a" },
-  { 0x1D232, "instrumental second sharp of b" },
-  { 0x1D233, "instrumental c´" },
-  { 0x1D234, "instrumental first sharp of c´" },
-  { 0x1D235, "instrumental second sharp of c´" },
-  { 0x1D236, "instrumental d´" },
-  { 0x1D237, "instrumental second sharp of d´" },
-  { 0x1D238, "instrumental e´" },
-  { 0x1D239, "instrumental second sharp of e´" },
-  { 0x1D23A, "instrumental first sharp of f´" },
-  { 0x1D23A, "similar but not identical to 002F" },
-  { 0x1D23B, "instrumental second sharp of f´" },
-  { 0x1D23B, "similar but not identical to 005C" },
-  { 0x1D23C, "instrumental g´" },
-  { 0x1D23D, "instrumental first sharp of g´" },
-  { 0x1D23E, "instrumental second sharp of g´" },
-  { 0x1D23F, "instrumental a´" },
-  { 0x1D240, "instrumental first sharp of a´" },
-  { 0x1D241, "instrumental second sharp of a´" },
-  { 0x1D300, "usually associated with human (Chinese ren), rather than earth" },
-  { 0x1FFFE, "the value 1FFFE is guaranteed not to be a Unicode character at all" },
-  { 0x1FFFF, "the value 1FFFF is guaranteed not to be a Unicode character at all" },
-  { 0x2FFFE, "the value 2FFFE is guaranteed not to be a Unicode character at all" },
-  { 0x2FFFF, "the value 2FFFF is guaranteed not to be a Unicode character at all" },
-  { 0x3FFFE, "the value 3FFFE is guaranteed not to be a Unicode character at all" },
-  { 0x3FFFF, "the value 3FFFF is guaranteed not to be a Unicode character at all" },
-  { 0x4FFFE, "the value 4FFFE is guaranteed not to be a Unicode character at all" },
-  { 0x4FFFF, "the value 4FFFF is guaranteed not to be a Unicode character at all" },
-  { 0x5FFFE, "the value 5FFFE is guaranteed not to be a Unicode character at all" },
-  { 0x5FFFF, "the value 5FFFF is guaranteed not to be a Unicode character at all" },
-  { 0x6FFFE, "the value 6FFFE is guaranteed not to be a Unicode character at all" },
-  { 0x6FFFF, "the value 6FFFF is guaranteed not to be a Unicode character at all" },
-  { 0x7FFFE, "the value 7FFFE is guaranteed not to be a Unicode character at all" },
-  { 0x7FFFF, "the value 7FFFF is guaranteed not to be a Unicode character at all" },
-  { 0x8FFFE, "the value 8FFFE is guaranteed not to be a Unicode character at all" },
-  { 0x8FFFF, "the value 8FFFF is guaranteed not to be a Unicode character at all" },
-  { 0x9FFFE, "the value 9FFFE is guaranteed not to be a Unicode character at all" },
-  { 0x9FFFF, "the value 9FFFF is guaranteed not to be a Unicode character at all" },
-  { 0xAFFFE, "the value AFFFE is guaranteed not to be a Unicode character at all" },
-  { 0xAFFFF, "the value AFFFF is guaranteed not to be a Unicode character at all" },
-  { 0xBFFFE, "the value BFFFE is guaranteed not to be a Unicode character at all" },
-  { 0xBFFFF, "the value BFFFF is guaranteed not to be a Unicode character at all" },
-  { 0xCFFFE, "the value CFFFE is guaranteed not to be a Unicode character at all" },
-  { 0xCFFFF, "the value CFFFF is guaranteed not to be a Unicode character at all" },
-  { 0xDFFFE, "the value DFFFE is guaranteed not to be a Unicode character at all" },
-  { 0xDFFFF, "the value DFFFF is guaranteed not to be a Unicode character at all" },
-  { 0xE0100, "these are abbreviated VS17, and so on" },
-  { 0xEFFFE, "the value EFFFE is guaranteed not to be a Unicode character at all" },
-  { 0xEFFFF, "the value EFFFF is guaranteed not to be a Unicode character at all" },
-  { 0xFFFFE, "the value FFFFE is guaranteed not to be a Unicode character at all" },
-  { 0xFFFFF, "the value FFFFF is guaranteed not to be a Unicode character at all" },
-  { 0x10FFFE, "the value 10FFFE is guaranteed not to be a Unicode character at all" },
-  { 0x10FFFF, "the value 10FFFF is guaranteed not to be a Unicode character at all" },
-  { (gunichar)(-1), 0 }
+  { 0x0020, 0 },
+  { 0x0020, 36 },
+  { 0x0022, 70 },
+  { 0x0022, 132 },
+  { 0x0024, 207 },
+  { 0x0024, 247 },
+  { 0x0027, 291 },
+  { 0x0027, 333 },
+  { 0x0027, 366 },
+  { 0x0029, 441 },
+  { 0x002D, 501 },
+  { 0x002E, 538 },
+  { 0x003B, 601 },
+  { 0x003D, 674 },
+  { 0x0049, 710 },
+  { 0x005B, 757 },
+  { 0x005E, 815 },
+  { 0x005F, 815 },
+  { 0x0060, 815 },
+  { 0x0069, 843 },
+  { 0x007C, 890 },
+  { 0x007E, 815 },
+  { 0x0084, 931 },
+  { 0x00A0, 955 },
+  { 0x00A1, 984 },
+  { 0x00A4, 247 },
+  { 0x00A5, 1012 },
+  { 0x00A7, 1048 },
+  { 0x00A8, 815 },
+  { 0x00AA, 1086 },
+  { 0x00AB, 1094 },
+  { 0x00AD, 1129 },
+  { 0x00AF, 815 },
+  { 0x00B0, 815 },
+  { 0x00B2, 1157 },
+  { 0x00B4, 815 },
+  { 0x00B6, 1203 },
+  { 0x00B8, 815 },
+  { 0x00B8, 1239 },
+  { 0x00BA, 1086 },
+  { 0x00BB, 1282 },
+  { 0x00BC, 1317 },
+  { 0x00BC, 1350 },
+  { 0x00BD, 1317 },
+  { 0x00BE, 1317 },
+  { 0x00BF, 1086 },
+  { 0x00DF, 1387 },
+  { 0x00DF, 1394 },
+  { 0x00DF, 1412 },
+  { 0x00E3, 1450 },
+  { 0x00E5, 1461 },
+  { 0x00E6, 1497 },
+  { 0x00EC, 1561 },
+  { 0x00F0, 1579 },
+  { 0x00F5, 1616 },
+  { 0x00F8, 1637 },
+  { 0x00F9, 1669 },
+  { 0x00FD, 1685 },
+  { 0x00FE, 1736 },
+  { 0x00FE, 1770 },
+  { 0x00FF, 1810 },
+  { 0x0101, 1817 },
+  { 0x0103, 1837 },
+  { 0x0105, 1870 },
+  { 0x0107, 1894 },
+  { 0x0109, 1916 },
+  { 0x010B, 1926 },
+  { 0x010D, 1966 },
+  { 0x010E, 2017 },
+  { 0x010F, 2073 },
+  { 0x010F, 2087 },
+  { 0x0111, 2141 },
+  { 0x0111, 2168 },
+  { 0x0113, 1817 },
+  { 0x0115, 2257 },
+  { 0x0117, 2275 },
+  { 0x0119, 1870 },
+  { 0x011B, 2286 },
+  { 0x011D, 1916 },
+  { 0x011F, 2297 },
+  { 0x0121, 1926 },
+  { 0x0123, 2318 },
+  { 0x0123, 2326 },
+  { 0x0125, 1916 },
+  { 0x0127, 2363 },
+  { 0x0129, 2381 },
+  { 0x012B, 1817 },
+  { 0x012D, 2411 },
+  { 0x012F, 2422 },
+  { 0x0130, 2297 },
+  { 0x0130, 2438 },
+  { 0x0131, 2297 },
+  { 0x0131, 2456 },
+  { 0x0133, 2474 },
+  { 0x0135, 1916 },
+  { 0x0137, 2318 },
+  { 0x0138, 2381 },
+  { 0x013A, 2480 },
+  { 0x013C, 2318 },
+  { 0x013D, 2087 },
+  { 0x013E, 2480 },
+  { 0x013E, 2087 },
+  { 0x013F, 2487 },
+  { 0x0140, 2583 },
+  { 0x0140, 2635 },
+  { 0x0142, 2683 },
+  { 0x0144, 2683 },
+  { 0x0146, 2318 },
+  { 0x0148, 2073 },
+  { 0x0149, 2695 },
+  { 0x0149, 2705 },
+  { 0x0149, 2753 },
+  { 0x014A, 2776 },
+  { 0x014B, 2841 },
+  { 0x014D, 1817 },
+  { 0x014F, 2863 },
+  { 0x0151, 2869 },
+  { 0x0153, 2879 },
+  { 0x0155, 2924 },
+  { 0x0157, 2936 },
+  { 0x0159, 2286 },
+  { 0x015B, 2945 },
+  { 0x015D, 1916 },
+  { 0x015F, 2980 },
+  { 0x015F, 3016 },
+  { 0x015F, 3073 },
+  { 0x0161, 3132 },
+  { 0x0163, 3191 },
+  { 0x0163, 3230 },
+  { 0x0163, 3073 },
+  { 0x0164, 2017 },
+  { 0x0165, 2073 },
+  { 0x0165, 2087 },
+  { 0x0167, 3270 },
+  { 0x0169, 2381 },
+  { 0x016B, 3275 },
+  { 0x016D, 3307 },
+  { 0x016F, 2286 },
+  { 0x0171, 2869 },
+  { 0x0173, 2275 },
+  { 0x0175, 3329 },
+  { 0x0177, 3329 },
+  { 0x0178, 3335 },
+  { 0x017A, 2683 },
+  { 0x017C, 2683 },
+  { 0x017E, 3348 },
+  { 0x017F, 3418 },
+  { 0x017F, 3470 },
+  { 0x0180, 3513 },
+  { 0x0180, 3570 },
+  { 0x0180, 3652 },
+  { 0x0180, 3662 },
+  { 0x0181, 3680 },
+  { 0x0183, 3708 },
+  { 0x0183, 3733 },
+  { 0x0185, 3708 },
+  { 0x0185, 3773 },
+  { 0x0185, 3806 },
+  { 0x0186, 3839 },
+  { 0x0186, 3866 },
+  { 0x0188, 3866 },
+  { 0x0189, 3874 },
+  { 0x018A, 3878 },
+  { 0x018C, 3900 },
+  { 0x018C, 3708 },
+  { 0x018D, 3940 },
+  { 0x018D, 3991 },
+  { 0x018E, 3878 },
+  { 0x018E, 4036 },
+  { 0x018F, 4054 },
+  { 0x0190, 3866 },
+  { 0x0191, 3866 },
+  { 0x0192, 4071 },
+  { 0x0193, 3866 },
+  { 0x0194, 3866 },
+  { 0x0195, 4114 },
+  { 0x0195, 4137 },
+  { 0x0196, 3866 },
+  { 0x0197, 3866 },
+  { 0x0197, 4155 },
+  { 0x0199, 4198 },
+  { 0x019A, 4227 },
+  { 0x019B, 4263 },
+  { 0x019C, 3708 },
+  { 0x019D, 3866 },
+  { 0x019E, 4290 },
+  { 0x019E, 4325 },
+  { 0x019E, 4374 },
+  { 0x019F, 4415 },
+  { 0x019F, 3866 },
+  { 0x01A1, 4433 },
+  { 0x01A3, 4444 },
+  { 0x01A5, 3866 },
+  { 0x01A6, 4471 },
+  { 0x01A6, 4481 },
+  { 0x01A6, 4527 },
+  { 0x01A8, 3708 },
+  { 0x01A8, 4545 },
+  { 0x01A9, 3866 },
+  { 0x01AA, 4574 },
+  { 0x01AA, 4642 },
+  { 0x01AA, 4646 },
+  { 0x01AB, 4706 },
+  { 0x01AB, 4763 },
+  { 0x01AC, 4794 },
+  { 0x01AD, 3866 },
+  { 0x01AE, 3866 },
+  { 0x01B0, 4433 },
+  { 0x01B1, 3866 },
+  { 0x01B1, 4845 },
+  { 0x01B2, 3866 },
+  { 0x01B3, 4897 },
+  { 0x01B4, 4947 },
+  { 0x01B6, 4999 },
+  { 0x01B6, 5028 },
+  { 0x01B7, 5061 },
+  { 0x01B7, 5081 },
+  { 0x01B9, 5099 },
+  { 0x01B9, 5148 },
+  { 0x01B9, 5205 },
+  { 0x01BA, 5231 },
+  { 0x01BA, 4642 },
+  { 0x01BA, 5306 },
+  { 0x01BB, 5351 },
+  { 0x01BB, 5387 },
+  { 0x01BD, 3708 },
+  { 0x01BE, 5427 },
+  { 0x01BE, 5463 },
+  { 0x01BE, 5494 },
+  { 0x01BF, 1770 },
+  { 0x01BF, 5581 },
+  { 0x01BF, 5637 },
+  { 0x01C0, 5655 },
+  { 0x01C0, 5673 },
+  { 0x01C1, 5655 },
+  { 0x01C1, 5697 },
+  { 0x01C2, 5655 },
+  { 0x01C3, 5655 },
+  { 0x01C3, 5721 },
+  { 0x01CE, 5745 },
+  { 0x01D0, 5745 },
+  { 0x01D2, 5745 },
+  { 0x01D4, 5745 },
+  { 0x01D6, 5763 },
+  { 0x01D8, 5781 },
+  { 0x01DA, 5745 },
+  { 0x01DC, 5800 },
+  { 0x01DD, 3878 },
+  { 0x01DD, 5819 },
+  { 0x01DD, 5854 },
+  { 0x01DF, 5872 },
+  { 0x01E1, 5898 },
+  { 0x01E3, 5914 },
+  { 0x01E5, 5937 },
+  { 0x01E7, 5937 },
+  { 0x01E9, 5937 },
+  { 0x01EB, 5948 },
+  { 0x01ED, 5979 },
+  { 0x01EF, 5937 },
+  { 0x01F0, 5993 },
+  { 0x01F5, 6016 },
+  { 0x01F6, 6055 },
+  { 0x01F7, 6073 },
+  { 0x01F9, 6091 },
+  { 0x0219, 6098 },
+  { 0x021B, 6098 },
+  { 0x021D, 6151 },
+  { 0x021F, 6173 },
+  { 0x0220, 6188 },
+  { 0x0221, 6195 },
+  { 0x0223, 6220 },
+  { 0x0225, 6237 },
+  { 0x0227, 5898 },
+  { 0x0233, 6256 },
+  { 0x0238, 6269 },
+  { 0x0239, 6269 },
+  { 0x023A, 6300 },
+  { 0x023A, 6309 },
+  { 0x023B, 6300 },
+  { 0x023C, 6327 },
+  { 0x023D, 6300 },
+  { 0x023D, 6359 },
+  { 0x023E, 6300 },
+  { 0x023E, 6377 },
+  { 0x0242, 6395 },
+  { 0x0243, 6471 },
+  { 0x0244, 6489 },
+  { 0x0245, 6507 },
+  { 0x0250, 6525 },
+  { 0x0251, 6553 },
+  { 0x0252, 6578 },
+  { 0x0253, 6601 },
+  { 0x0253, 3878 },
+  { 0x0254, 6625 },
+  { 0x0254, 6652 },
+  { 0x0255, 6681 },
+  { 0x0255, 6725 },
+  { 0x0255, 6767 },
+  { 0x0256, 6801 },
+  { 0x0257, 6823 },
+  { 0x0257, 6857 },
+  { 0x0258, 6884 },
+  { 0x0259, 6918 },
+  { 0x0259, 6946 },
+  { 0x025A, 6998 },
+  { 0x025B, 7015 },
+  { 0x025C, 7047 },
+  { 0x025D, 7081 },
+  { 0x025E, 7116 },
+  { 0x025F, 7148 },
+  { 0x025F, 7168 },
+  { 0x025F, 7233 },
+  { 0x025F, 7263 },
+  { 0x0260, 7319 },
+  { 0x0261, 7340 },
+  { 0x0262, 7358 },
+  { 0x0263, 7377 },
+  { 0x0264, 7400 },
+  { 0x0265, 7431 },
+  { 0x0266, 7466 },
+  { 0x0267, 7499 },
+  { 0x0267, 7558 },
+  { 0x0268, 7604 },
+  { 0x0268, 7633 },
+  { 0x0269, 7684 },
+  { 0x0269, 7716 },
+  { 0x026A, 7684 },
+  { 0x026A, 7767 },
+  { 0x026B, 7800 },
+  { 0x026B, 7846 },
+  { 0x026C, 7864 },
+  { 0x026D, 7901 },
+  { 0x026E, 7926 },
+  { 0x026E, 7951 },
+  { 0x026F, 7977 },
+  { 0x0270, 8003 },
+  { 0x0271, 8028 },
+  { 0x0272, 8053 },
+  { 0x0273, 8074 },
+  { 0x0274, 8097 },
+  { 0x0275, 8117 },
+  { 0x0275, 8163 },
+  { 0x0276, 8181 },
+  { 0x0277, 8205 },
+  { 0x0277, 8234 },
+  { 0x0278, 8283 },
+  { 0x0279, 8312 },
+  { 0x027A, 8340 },
+  { 0x027B, 8360 },
+  { 0x027C, 8389 },
+  { 0x027C, 8426 },
+  { 0x027C, 8459 },
+  { 0x027C, 8516 },
+  { 0x027D, 8574 },
+  { 0x027D, 8596 },
+  { 0x027E, 8614 },
+  { 0x027F, 8642 },
+  { 0x027F, 8662 },
+  { 0x027F, 8732 },
+  { 0x0280, 8757 },
+  { 0x0280, 8777 },
+  { 0x0280, 8797 },
+  { 0x0281, 8815 },
+  { 0x0282, 8854 },
+  { 0x0283, 8884 },
+  { 0x0284, 8917 },
+  { 0x0284, 8940 },
+  { 0x0285, 8983 },
+  { 0x0285, 8662 },
+  { 0x0285, 9006 },
+  { 0x0285, 9031 },
+  { 0x0286, 9093 },
+  { 0x0286, 9138 },
+  { 0x0287, 9169 },
+  { 0x0288, 9203 },
+  { 0x0289, 9228 },
+  { 0x0289, 9255 },
+  { 0x028A, 8205 },
+  { 0x028A, 9273 },
+  { 0x028B, 9305 },
+  { 0x028C, 9336 },
+  { 0x028C, 9367 },
+  { 0x028D, 9385 },
+  { 0x028E, 9426 },
+  { 0x028F, 9453 },
+  { 0x0290, 9483 },
+  { 0x0291, 9510 },
+  { 0x0291, 9551 },
+  { 0x0292, 9585 },
+  { 0x0292, 9615 },
+  { 0x0292, 9652 },
+  { 0x0292, 5937 },
+  { 0x0293, 9670 },
+  { 0x0294, 9712 },
+  { 0x0294, 9738 },
+  { 0x0295, 9835 },
+  { 0x0295, 9863 },
+  { 0x0296, 9867 },
+  { 0x0297, 9881 },
+  { 0x0299, 9909 },
+  { 0x029A, 9924 },
+  { 0x029A, 9954 },
+  { 0x029B, 9995 },
+  { 0x029C, 10019 },
+  { 0x029D, 10050 },
+  { 0x029E, 10075 },
+  { 0x029F, 10100 },
+  { 0x02A0, 10126 },
+  { 0x02A1, 10153 },
+  { 0x02A2, 10176 },
+  { 0x02A3, 10204 },
+  { 0x02A4, 10228 },
+  { 0x02A5, 10258 },
+  { 0x02A6, 10291 },
+  { 0x02A7, 10318 },
+  { 0x02A8, 10351 },
+  { 0x02A9, 10387 },
+  { 0x02AA, 10412 },
+  { 0x02AB, 10446 },
+  { 0x02AC, 10480 },
+  { 0x02AD, 10498 },
+  { 0x02B0, 10521 },
+  { 0x02B1, 10532 },
+  { 0x02B2, 10557 },
+  { 0x02B6, 10572 },
+  { 0x02B7, 10622 },
+  { 0x02B8, 10557 },
+  { 0x02B8, 10636 },
+  { 0x02B9, 10670 },
+  { 0x02B9, 10695 },
+  { 0x02BA, 10764 },
+  { 0x02BA, 10803 },
+  { 0x02BB, 10875 },
+  { 0x02BB, 10916 },
+  { 0x02BC, 10971 },
+  { 0x02BC, 11010 },
+  { 0x02BC, 11055 },
+  { 0x02BC, 11110 },
+  { 0x02BD, 11171 },
+  { 0x02BD, 11187 },
+  { 0x02BE, 11231 },
+  { 0x02BF, 11278 },
+  { 0x02C0, 11338 },
+  { 0x02C0, 11362 },
+  { 0x02C1, 11403 },
+  { 0x02C2, 11436 },
+  { 0x02C3, 11457 },
+  { 0x02C4, 11477 },
+  { 0x02C5, 11497 },
+  { 0x02C6, 11518 },
+  { 0x02C7, 11576 },
+  { 0x02C7, 11596 },
+  { 0x02C8, 11624 },
+  { 0x02C8, 11649 },
+  { 0x02C9, 11686 },
+  { 0x02C9, 11702 },
+  { 0x02C9, 11750 },
+  { 0x02CA, 11778 },
+  { 0x02CA, 11828 },
+  { 0x02CB, 11857 },
+  { 0x02CB, 11921 },
+  { 0x02CC, 11950 },
+  { 0x02CC, 11649 },
+  { 0x02CD, 11967 },
+  { 0x02CE, 11982 },
+  { 0x02CF, 11999 },
+  { 0x02D0, 12015 },
+  { 0x02D1, 12027 },
+  { 0x02D2, 12044 },
+  { 0x02D3, 12070 },
+  { 0x02D4, 12096 },
+  { 0x02D5, 12121 },
+  { 0x02D6, 12147 },
+  { 0x02D7, 12180 },
+  { 0x02D7, 12213 },
+  { 0x02D9, 12245 },
+  { 0x02DE, 12292 },
+  { 0x02DE, 12315 },
+  { 0x02DF, 12369 },
+  { 0x02E0, 12390 },
+  { 0x02EE, 12466 },
+  { 0x0303, 12473 },
+  { 0x0303, 12491 },
+  { 0x0304, 12512 },
+  { 0x0305, 12543 },
+  { 0x0309, 12570 },
+  { 0x0309, 12491 },
+  { 0x030B, 12616 },
+  { 0x030D, 12635 },
+  { 0x030D, 12663 },
+  { 0x030E, 12663 },
+  { 0x030F, 12675 },
+  { 0x0312, 12704 },
+  { 0x0313, 12744 },
+  { 0x031A, 12784 },
+  { 0x031B, 4433 },
+  { 0x031C, 12805 },
+  { 0x031D, 12832 },
+  { 0x031E, 12862 },
+  { 0x031F, 12893 },
+  { 0x0320, 12931 },
+  { 0x0320, 12213 },
+  { 0x0321, 12969 },
+  { 0x0322, 12989 },
+  { 0x0323, 13007 },
+  { 0x0323, 13036 },
+  { 0x0323, 13097 },
+  { 0x0323, 12491 },
+  { 0x0324, 13143 },
+  { 0x0325, 13172 },
+  { 0x0325, 13187 },
+  { 0x0325, 13241 },
+  { 0x0326, 13250 },
+  { 0x0327, 13278 },
+  { 0x0328, 13307 },
+  { 0x0328, 13333 },
+  { 0x0329, 13352 },
+  { 0x0329, 13366 },
+  { 0x032A, 13373 },
+  { 0x032B, 13385 },
+  { 0x032C, 13404 },
+  { 0x032D, 13416 },
+  { 0x032E, 13450 },
+  { 0x032F, 13472 },
+  { 0x032F, 13524 },
+  { 0x0330, 13552 },
+  { 0x0332, 12543 },
+  { 0x0333, 12543 },
+  { 0x0334, 13570 },
+  { 0x033E, 13609 },
+  { 0x0344, 13633 },
+  { 0x0345, 13670 },
+  { 0x0346, 13697 },
+  { 0x0347, 13714 },
+  { 0x0348, 13728 },
+  { 0x0349, 13753 },
+  { 0x034A, 13776 },
+  { 0x034B, 13789 },
+  { 0x034C, 13807 },
+  { 0x034D, 13836 },
+  { 0x034E, 13858 },
+  { 0x034F, 13885 },
+  { 0x034F, 13913 },
+  { 0x034F, 13934 },
+  { 0x0358, 14012 },
+  { 0x035A, 14075 },
+  { 0x035B, 14102 },
+  { 0x035C, 14175 },
+  { 0x0362, 14252 },
+  { 0x0374, 14278 },
+  { 0x0375, 14278 },
+  { 0x037E, 14311 },
+  { 0x037E, 14338 },
+  { 0x0387, 14370 },
+  { 0x0387, 14406 },
+  { 0x03C0, 14438 },
+  { 0x03C2, 14464 },
+  { 0x03C3, 14513 },
+  { 0x03C6, 14556 },
+  { 0x03C6, 14620 },
+  { 0x03D1, 14698 },
+  { 0x03D5, 14725 },
+  { 0x03D5, 14774 },
+  { 0x03D6, 14698 },
+  { 0x03D6, 14805 },
+  { 0x03D7, 14841 },
+  { 0x03D9, 14862 },
+  { 0x03DA, 15022 },
+  { 0x03DA, 15069 },
+  { 0x03DA, 15198 },
+  { 0x03DD, 15198 },
+  { 0x03DF, 15241 },
+  { 0x03E1, 15342 },
+  { 0x03F0, 15387 },
+  { 0x03F1, 15387 },
+  { 0x03FC, 15412 },
+  { 0x0450, 15452 },
+  { 0x0451, 15463 },
+  { 0x0452, 15476 },
+  { 0x0453, 15452 },
+  { 0x0455, 15452 },
+  { 0x0457, 15484 },
+  { 0x0458, 15494 },
+  { 0x0459, 15522 },
+  { 0x045A, 15522 },
+  { 0x045B, 15476 },
+  { 0x045C, 15452 },
+  { 0x045D, 15542 },
+  { 0x045E, 15564 },
+  { 0x045F, 15584 },
+  { 0x0478, 15615 },
+  { 0x047D, 15671 },
+  { 0x0488, 15758 },
+  { 0x048B, 15790 },
+  { 0x048D, 15790 },
+  { 0x048F, 15790 },
+  { 0x0491, 15484 },
+  { 0x0493, 15802 },
+  { 0x0493, 15828 },
+  { 0x0495, 15878 },
+  { 0x0497, 15895 },
+  { 0x0499, 15906 },
+  { 0x0499, 15914 },
+  { 0x049B, 16009 },
+  { 0x049D, 16031 },
+  { 0x049F, 16043 },
+  { 0x04A3, 16053 },
+  { 0x04A5, 16066 },
+  { 0x04A5, 16085 },
+  { 0x04A7, 16043 },
+  { 0x04AB, 16121 },
+  { 0x04AB, 15914 },
+  { 0x04AB, 16138 },
+  { 0x04AD, 16043 },
+  { 0x04AF, 16220 },
+  { 0x04AF, 15802 },
+  { 0x04B1, 16254 },
+  { 0x04B3, 16261 },
+  { 0x04B5, 16043 },
+  { 0x04B5, 16085 },
+  { 0x04B7, 16285 },
+  { 0x04B9, 16031 },
+  { 0x04BB, 16302 },
+  { 0x04BB, 15802 },
+  { 0x04BF, 16397 },
+  { 0x04C0, 16419 },
+  { 0x04C0, 16463 },
+  { 0x04C2, 16518 },
+  { 0x04C4, 16528 },
+  { 0x04C6, 15790 },
+  { 0x04C8, 16544 },
+  { 0x04CA, 15790 },
+  { 0x04CE, 15790 },
+  { 0x04D5, 16085 },
+  { 0x04ED, 15790 },
+  { 0x04F7, 16568 },
+  { 0x0511, 16574 },
+  { 0x0513, 16588 },
+  { 0x0589, 16613 },
+  { 0x0598, 16643 },
+  { 0x05AE, 16734 },
+  { 0x05B7, 16807 },
+  { 0x05BC, 16849 },
+  { 0x05BD, 16878 },
+  { 0x05C0, 16919 },
+  { 0x05C3, 16973 },
+  { 0x05C5, 17015 },
+  { 0x05C6, 17054 },
+  { 0x060C, 17103 },
+  { 0x0610, 17151 },
+  { 0x0611, 17233 },
+  { 0x0612, 17279 },
+  { 0x0613, 17339 },
+  { 0x0614, 17398 },
+  { 0x0615, 17501 },
+  { 0x0615, 17582 },
+  { 0x061B, 17103 },
+  { 0x061F, 17103 },
+  { 0x0640, 17679 },
+  { 0x0640, 17710 },
+  { 0x0649, 17732 },
+  { 0x0652, 17797 },
+  { 0x0652, 17847 },
+  { 0x0652, 17899 },
+  { 0x0658, 17989 },
+  { 0x0658, 18010 },
+  { 0x0659, 18041 },
+  { 0x065A, 18048 },
+  { 0x065B, 18048 },
+  { 0x065C, 18048 },
+  { 0x065D, 18066 },
+  { 0x065E, 18092 },
+  { 0x0670, 18099 },
+  { 0x0671, 18139 },
+  { 0x0672, 18154 },
+  { 0x0673, 18154 },
+  { 0x0674, 16254 },
+  { 0x0674, 18172 },
+  { 0x0675, 16254 },
+  { 0x0676, 16254 },
+  { 0x0677, 16254 },
+  { 0x0678, 16254 },
+  { 0x0679, 18187 },
+  { 0x067A, 18192 },
+  { 0x067B, 18192 },
+  { 0x067C, 18041 },
+  { 0x067D, 18192 },
+  { 0x067E, 18199 },
+  { 0x067F, 18192 },
+  { 0x0680, 18192 },
+  { 0x0681, 18218 },
+  { 0x0682, 18238 },
+  { 0x0683, 18192 },
+  { 0x0684, 18192 },
+  { 0x0685, 18041 },
+  { 0x0686, 18199 },
+  { 0x0687, 18192 },
+  { 0x0688, 18187 },
+  { 0x0689, 18041 },
+  { 0x068A, 18192 },
+  { 0x068B, 18264 },
+  { 0x068C, 18192 },
+  { 0x068D, 18192 },
+  { 0x068E, 18271 },
+  { 0x068E, 18315 },
+  { 0x068F, 18192 },
+  { 0x068F, 18326 },
+  { 0x0690, 18353 },
+  { 0x0691, 18187 },
+  { 0x0692, 18382 },
+  { 0x0693, 18041 },
+  { 0x0694, 18382 },
+  { 0x0695, 18382 },
+  { 0x0696, 18041 },
+  { 0x0697, 18390 },
+  { 0x0698, 18199 },
+  { 0x0699, 18192 },
+  { 0x069A, 18041 },
+  { 0x069C, 18397 },
+  { 0x069D, 18413 },
+  { 0x069E, 18420 },
+  { 0x069F, 18439 },
+  { 0x06A0, 18449 },
+  { 0x06A1, 18459 },
+  { 0x06A2, 18466 },
+  { 0x06A3, 18481 },
+  { 0x06A4, 18488 },
+  { 0x06A4, 18382 },
+  { 0x06A5, 18528 },
+  { 0x06A6, 18192 },
+  { 0x06A7, 18466 },
+  { 0x06A8, 18567 },
+  { 0x06A9, 18199 },
+  { 0x06AB, 18041 },
+  { 0x06AB, 18583 },
+  { 0x06AC, 18449 },
+  { 0x06AD, 18647 },
+  { 0x06AE, 18678 },
+  { 0x06AF, 18199 },
+  { 0x06B0, 18264 },
+  { 0x06B1, 18192 },
+  { 0x06B2, 18685 },
+  { 0x06B3, 18192 },
+  { 0x06B4, 18685 },
+  { 0x06B5, 18382 },
+  { 0x06B6, 18382 },
+  { 0x06B7, 18382 },
+  { 0x06BA, 18187 },
+  { 0x06BB, 18192 },
+  { 0x06BC, 18041 },
+  { 0x06BD, 18449 },
+  { 0x06BE, 18187 },
+  { 0x06BE, 18704 },
+  { 0x06C0, 18187 },
+  { 0x06C0, 18728 },
+  { 0x06C1, 18187 },
+  { 0x06C2, 18187 },
+  { 0x06C2, 18728 },
+  { 0x06C3, 18187 },
+  { 0x06C4, 18775 },
+  { 0x06C5, 18784 },
+  { 0x06C6, 18792 },
+  { 0x06C7, 18784 },
+  { 0x06C8, 18816 },
+  { 0x06C9, 18823 },
+  { 0x06CA, 18382 },
+  { 0x06CB, 18839 },
+  { 0x06CC, 18854 },
+  { 0x06CC, 18881 },
+  { 0x06CD, 18931 },
+  { 0x06CE, 18382 },
+  { 0x06D0, 18946 },
+  { 0x06D0, 18961 },
+  { 0x06D1, 18449 },
+  { 0x06D2, 18187 },
+  { 0x06D3, 18187 },
+  { 0x06D3, 18728 },
+  { 0x06D4, 18187 },
+  { 0x06D5, 18995 },
+  { 0x06DF, 19019 },
+  { 0x06E1, 19073 },
+  { 0x06E1, 19157 },
+  { 0x06E9, 19204 },
+  { 0x06F4, 19261 },
+  { 0x06F5, 19312 },
+  { 0x06F6, 19372 },
+  { 0x06F7, 19432 },
+  { 0x0700, 19482 },
+  { 0x0701, 19511 },
+  { 0x0702, 19587 },
+  { 0x0703, 19660 },
+  { 0x0704, 19738 },
+  { 0x0705, 19781 },
+  { 0x0706, 19862 },
+  { 0x0707, 19887 },
+  { 0x0708, 19970 },
+  { 0x0709, 20000 },
+  { 0x070A, 20047 },
+  { 0x070A, 20094 },
+  { 0x070B, 20134 },
+  { 0x070C, 20210 },
+  { 0x070D, 20134 },
+  { 0x070F, 20258 },
+  { 0x0711, 20303 },
+  { 0x0714, 20363 },
+  { 0x0716, 20390 },
+  { 0x071C, 20363 },
+  { 0x071E, 20444 },
+  { 0x0727, 20477 },
+  { 0x0740, 20515 },
+  { 0x0741, 20565 },
+  { 0x0742, 20599 },
+  { 0x0743, 20650 },
+  { 0x0744, 20650 },
+  { 0x0745, 20690 },
+  { 0x0746, 20690 },
+  { 0x0747, 20747 },
+  { 0x0748, 20747 },
+  { 0x0748, 20777 },
+  { 0x0749, 20840 },
+  { 0x0749, 20853 },
+  { 0x074A, 20944 },
+  { 0x0759, 20987 },
+  { 0x075C, 20995 },
+  { 0x0762, 21001 },
+  { 0x0763, 21030 },
+  { 0x0766, 21067 },
+  { 0x0768, 21072 },
+  { 0x0769, 21090 },
+  { 0x076B, 21096 },
+  { 0x076C, 21112 },
+  { 0x076D, 21119 },
+  { 0x090E, 21134 },
+  { 0x0912, 21169 },
+  { 0x0929, 21204 },
+  { 0x0931, 21242 },
+  { 0x0931, 21280 },
+  { 0x0934, 21321 },
+  { 0x093C, 21350 },
+  { 0x093F, 21392 },
+  { 0x0946, 21428 },
+  { 0x094A, 21428 },
+  { 0x094D, 21462 },
+  { 0x0951, 21488 },
+  { 0x0964, 21558 },
+  { 0x097D, 21575 },
+  { 0x097D, 21612 },
+  { 0x09BC, 21350 },
+  { 0x09BF, 21392 },
+  { 0x09C7, 21392 },
+  { 0x09C8, 21392 },
+  { 0x09F0, 21655 },
+  { 0x09F1, 21655 },
+  { 0x09F4, 21664 },
+  { 0x09F5, 21664 },
+  { 0x09F6, 21664 },
+  { 0x0A3C, 21350 },
+  { 0x0A3F, 21392 },
+  { 0x0A70, 21685 },
+  { 0x0A71, 21698 },
+  { 0x0A72, 21726 },
+  { 0x0A73, 21726 },
+  { 0x0A74, 21742 },
+  { 0x0A8C, 21753 },
+  { 0x0ABC, 21350 },
+  { 0x0ABF, 21392 },
+  { 0x0B3C, 21350 },
+  { 0x0B47, 21392 },
+  { 0x0B48, 21777 },
+  { 0x0B82, 21816 },
+  { 0x0BC6, 21392 },
+  { 0x0BC7, 21392 },
+  { 0x0BC8, 21392 },
+  { 0x0CCD, 21834 },
+  { 0x0CDE, 21859 },
+  { 0x0CDE, 21884 },
+  { 0x0D46, 21392 },
+  { 0x0D47, 21392 },
+  { 0x0D48, 21392 },
+  { 0x0D4C, 21911 },
+  { 0x0D57, 21952 },
+  { 0x0DBD, 22013 },
+  { 0x0DC2, 22020 },
+  { 0x0DC3, 22013 },
+  { 0x0DC5, 22020 },
+  { 0x0E24, 22030 },
+  { 0x0E26, 22030 },
+  { 0x0E2F, 22078 },
+  { 0x0E3A, 22101 },
+  { 0x0E45, 22113 },
+  { 0x0E46, 22168 },
+  { 0x0E4C, 22179 },
+  { 0x0E4D, 22197 },
+  { 0x0E4F, 22209 },
+  { 0x0E5A, 22226 },
+  { 0x0E5A, 22260 },
+  { 0x0E5B, 22313 },
+  { 0x0E9D, 22353 },
+  { 0x0E9F, 22383 },
+  { 0x0EA3, 22412 },
+  { 0x0EA5, 22464 },
+  { 0x0EB1, 22516 },
+  { 0x0EC6, 22168 },
+  { 0x0ECD, 22532 },
+  { 0x0F04, 22560 },
+  { 0x0F05, 22617 },
+  { 0x0F08, 22658 },
+  { 0x0F09, 22724 },
+  { 0x0F0A, 22756 },
+  { 0x0F0B, 22791 },
+  { 0x0F0B, 22832 },
+  { 0x0F0B, 22879 },
+  { 0x0F0C, 22908 },
+  { 0x0F0C, 22879 },
+  { 0x0F0D, 22953 },
+  { 0x0F0E, 22997 },
+  { 0x0F11, 23036 },
+  { 0x0F14, 23090 },
+  { 0x0F18, 23126 },
+  { 0x0F19, 23126 },
+  { 0x0F34, 22168 },
+  { 0x0F35, 23147 },
+  { 0x0F36, 23190 },
+  { 0x0F37, 23234 },
+  { 0x0F39, 23266 },
+  { 0x0F3B, 23282 },
+  { 0x0F3D, 23291 },
+  { 0x0F3F, 23328 },
+  { 0x0F62, 23360 },
+  { 0x0F68, 23405 },
+  { 0x0F6A, 23431 },
+  { 0x0F71, 23478 },
+  { 0x0F73, 13633 },
+  { 0x0F75, 13633 },
+  { 0x0F77, 23509 },
+  { 0x0F79, 23509 },
+  { 0x0F81, 13633 },
+  { 0x0F85, 23555 },
+  { 0x0F8A, 23592 },
+  { 0x0FB0, 23616 },
+  { 0x0FBE, 23664 },
+  { 0x0FBF, 23190 },
+  { 0x0FC0, 23712 },
+  { 0x0FC1, 23736 },
+  { 0x0FC2, 23760 },
+  { 0x0FC3, 23796 },
+  { 0x0FC4, 23823 },
+  { 0x0FCA, 23853 },
+  { 0x0FCB, 23876 },
+  { 0x0FCC, 23911 },
+  { 0x0FD0, 23961 },
+  { 0x0FD1, 23961 },
+  { 0x1021, 23976 },
+  { 0x1031, 21392 },
+  { 0x1037, 24024 },
+  { 0x1401, 24036 },
+  { 0x1402, 24064 },
+  { 0x1403, 24074 },
+  { 0x1405, 24086 },
+  { 0x1406, 24113 },
+  { 0x141C, 24128 },
+  { 0x141E, 24138 },
+  { 0x141F, 24180 },
+  { 0x141F, 24235 },
+  { 0x1420, 24277 },
+  { 0x1421, 24321 },
+  { 0x1422, 24359 },
+  { 0x1423, 24401 },
+  { 0x1424, 24458 },
+  { 0x1425, 24484 },
+  { 0x1426, 24518 },
+  { 0x1427, 24546 },
+  { 0x1428, 24590 },
+  { 0x1429, 24616 },
+  { 0x142A, 24644 },
+  { 0x142F, 24668 },
+  { 0x1430, 24064 },
+  { 0x1433, 24715 },
+  { 0x1434, 24761 },
+  { 0x1438, 24777 },
+  { 0x144A, 24807 },
+  { 0x144C, 24818 },
+  { 0x144D, 24064 },
+  { 0x144E, 24865 },
+  { 0x1450, 24895 },
+  { 0x1451, 24954 },
+  { 0x1455, 24970 },
+  { 0x1467, 24986 },
+  { 0x1468, 25005 },
+  { 0x1469, 25024 },
+  { 0x146A, 25043 },
+  { 0x146B, 25062 },
+  { 0x146C, 24064 },
+  { 0x146F, 25078 },
+  { 0x1470, 25106 },
+  { 0x1484, 24128 },
+  { 0x1489, 25122 },
+  { 0x148A, 25170 },
+  { 0x148B, 25187 },
+  { 0x148C, 25234 },
+  { 0x148D, 25250 },
+  { 0x148E, 25297 },
+  { 0x1490, 25313 },
+  { 0x1491, 25360 },
+  { 0x14A1, 25376 },
+  { 0x14A2, 25402 },
+  { 0x14A3, 25418 },
+  { 0x14A4, 24064 },
+  { 0x14A7, 25434 },
+  { 0x14A8, 25462 },
+  { 0x14BC, 25478 },
+  { 0x14C0, 25490 },
+  { 0x14C1, 24064 },
+  { 0x14C4, 25506 },
+  { 0x14C5, 25534 },
+  { 0x14D3, 25550 },
+  { 0x14D4, 24064 },
+  { 0x14D7, 25566 },
+  { 0x14D8, 25581 },
+  { 0x14ED, 25597 },
+  { 0x14EE, 24064 },
+  { 0x14F1, 25613 },
+  { 0x14F2, 25641 },
+  { 0x1526, 25657 },
+  { 0x1527, 24064 },
+  { 0x152A, 25673 },
+  { 0x152B, 25688 },
+  { 0x1542, 25704 },
+  { 0x1543, 25720 },
+  { 0x1544, 25736 },
+  { 0x1545, 24064 },
+  { 0x1548, 25752 },
+  { 0x1549, 25767 },
+  { 0x154A, 25783 },
+  { 0x1553, 25795 },
+  { 0x1554, 24064 },
+  { 0x155E, 25811 },
+  { 0x1560, 25823 },
+  { 0x1564, 25835 },
+  { 0x1566, 25847 },
+  { 0x156D, 25859 },
+  { 0x156F, 25873 },
+  { 0x157D, 25950 },
+  { 0x157E, 24064 },
+  { 0x1581, 25961 },
+  { 0x1582, 25976 },
+  { 0x1586, 25992 },
+  { 0x1587, 26005 },
+  { 0x1588, 26018 },
+  { 0x1589, 26031 },
+  { 0x158E, 24064 },
+  { 0x1591, 26044 },
+  { 0x1592, 26060 },
+  { 0x1599, 26077 },
+  { 0x15A2, 26090 },
+  { 0x15A3, 26106 },
+  { 0x15C2, 26123 },
+  { 0x1614, 26135 },
+  { 0x1615, 26185 },
+  { 0x161A, 26235 },
+  { 0x161B, 26285 },
+  { 0x166D, 25950 },
+  { 0x166D, 26335 },
+  { 0x1673, 26369 },
+  { 0x1674, 26386 },
+  { 0x1680, 26404 },
+  { 0x169B, 26445 },
+  { 0x169C, 26475 },
+  { 0x16EE, 26499 },
+  { 0x16EF, 26516 },
+  { 0x16F0, 26533 },
+  { 0x178E, 26550 },
+  { 0x179D, 26643 },
+  { 0x179E, 26643 },
+  { 0x179E, 26687 },
+  { 0x17A2, 26780 },
+  { 0x17A3, 26793 },
+  { 0x17A3, 26852 },
+  { 0x17A4, 26643 },
+  { 0x17A4, 26927 },
+  { 0x17A8, 27011 },
+  { 0x17A8, 27056 },
+  { 0x17B2, 27093 },
+  { 0x17B2, 27144 },
+  { 0x17C6, 27185 },
+  { 0x17C6, 27204 },
+  { 0x17C8, 27281 },
+  { 0x17C8, 27337 },
+  { 0x17C9, 27384 },
+  { 0x17C9, 27425 },
+  { 0x17CA, 27470 },
+  { 0x17CA, 27511 },
+  { 0x17CB, 27552 },
+  { 0x17CB, 27615 },
+  { 0x17CC, 27655 },
+  { 0x17CD, 27732 },
+  { 0x17CE, 27784 },
+  { 0x17CF, 27817 },
+  { 0x17D0, 27876 },
+  { 0x17D1, 27999 },
+  { 0x17D1, 28027 },
+  { 0x17D2, 28127 },
+  { 0x17D2, 28211 },
+  { 0x17D3, 28264 },
+  { 0x17D3, 28314 },
+  { 0x17D4, 28411 },
+  { 0x17D5, 28444 },
+  { 0x17D6, 28485 },
+  { 0x17D6, 28504 },
+  { 0x17D7, 28553 },
+  { 0x17D8, 28569 },
+  { 0x17D8, 28579 },
+  { 0x17D8, 28662 },
+  { 0x17D9, 28697 },
+  { 0x17D9, 28745 },
+  { 0x17DA, 28789 },
+  { 0x17DA, 28829 },
+  { 0x17DA, 28857 },
+  { 0x17DC, 28898 },
+  { 0x17DC, 28956 },
+  { 0x17DD, 29005 },
+  { 0x17DD, 29021 },
+  { 0x1805, 29118 },
+  { 0x1806, 29145 },
+  { 0x180B, 29206 },
+  { 0x180C, 29223 },
+  { 0x180D, 29240 },
+  { 0x180E, 29257 },
+  { 0x19DE, 29273 },
+  { 0x19DF, 29290 },
+  { 0x19E0, 29301 },
+  { 0x19F0, 29344 },
+  { 0x1D02, 29388 },
+  { 0x1D14, 29388 },
+  { 0x1D18, 29429 },
+  { 0x1D1E, 29458 },
+  { 0x1D29, 29497 },
+  { 0x1D2B, 29533 },
+  { 0x1D4C, 29588 },
+  { 0x1D77, 29634 },
+  { 0x1D79, 29657 },
+  { 0x1D7A, 29687 },
+  { 0x1D7B, 29713 },
+  { 0x1D7C, 29782 },
+  { 0x1D7D, 29802 },
+  { 0x1D7D, 29823 },
+  { 0x1D7E, 29802 },
+  { 0x1D7F, 29841 },
+  { 0x1DC3, 29886 },
+  { 0x1E03, 29897 },
+  { 0x1E0B, 29897 },
+  { 0x1E0D, 29928 },
+  { 0x1E11, 2936 },
+  { 0x1E1F, 29897 },
+  { 0x1E25, 29928 },
+  { 0x1E2B, 29950 },
+  { 0x1E31, 29974 },
+  { 0x1E37, 29928 },
+  { 0x1E37, 30001 },
+  { 0x1E39, 29928 },
+  { 0x1E3B, 29928 },
+  { 0x1E41, 29897 },
+  { 0x1E43, 29928 },
+  { 0x1E45, 29928 },
+  { 0x1E47, 29928 },
+  { 0x1E49, 29928 },
+  { 0x1E57, 29897 },
+  { 0x1E5B, 29928 },
+  { 0x1E5B, 30001 },
+  { 0x1E5D, 29928 },
+  { 0x1E5F, 29928 },
+  { 0x1E61, 29897 },
+  { 0x1E63, 29928 },
+  { 0x1E6B, 29897 },
+  { 0x1E6D, 29928 },
+  { 0x1E6F, 29950 },
+  { 0x1E81, 3329 },
+  { 0x1E83, 3329 },
+  { 0x1E85, 3329 },
+  { 0x1E93, 29928 },
+  { 0x1E95, 29950 },
+  { 0x1E96, 29950 },
+  { 0x1E9B, 30082 },
+  { 0x1EF3, 3329 },
+  { 0x2002, 30140 },
+  { 0x2003, 30151 },
+  { 0x2003, 30203 },
+  { 0x2006, 30250 },
+  { 0x2007, 30305 },
+  { 0x2007, 30344 },
+  { 0x2008, 30415 },
+  { 0x2009, 30459 },
+  { 0x200A, 30499 },
+  { 0x200A, 30525 },
+  { 0x200B, 30581 },
+  { 0x200B, 30607 },
+  { 0x200C, 30774 },
+  { 0x200D, 30800 },
+  { 0x200E, 30825 },
+  { 0x200F, 30850 },
+  { 0x2014, 30875 },
+  { 0x2015, 30925 },
+  { 0x2016, 30959 },
+  { 0x2017, 815 },
+  { 0x2018, 31002 },
+  { 0x2019, 31055 },
+  { 0x201A, 31109 },
+  { 0x201B, 31165 },
+  { 0x201C, 31218 },
+  { 0x201E, 31271 },
+  { 0x201F, 31327 },
+  { 0x2024, 31380 },
+  { 0x2028, 31425 },
+  { 0x2029, 31425 },
+  { 0x202A, 31478 },
+  { 0x202B, 31503 },
+  { 0x202C, 31528 },
+  { 0x202D, 31553 },
+  { 0x202E, 31578 },
+  { 0x202F, 31603 },
+  { 0x2030, 31630 },
+  { 0x2031, 31702 },
+  { 0x2039, 1094 },
+  { 0x203A, 1282 },
+  { 0x2041, 31736 },
+  { 0x2044, 31768 },
+  { 0x204A, 31802 },
+  { 0x2050, 31833 },
+  { 0x2052, 31846 },
+  { 0x2052, 31912 },
+  { 0x2052, 31966 },
+  { 0x2055, 32061 },
+  { 0x205A, 32139 },
+  { 0x205A, 32212 },
+  { 0x205B, 32248 },
+  { 0x205B, 32298 },
+  { 0x205C, 32248 },
+  { 0x205E, 32374 },
+  { 0x205E, 32440 },
+  { 0x205F, 32483 },
+  { 0x205F, 32500 },
+  { 0x2060, 32526 },
+  { 0x2060, 32550 },
+  { 0x2060, 32589 },
+  { 0x2061, 32650 },
+  { 0x2062, 32707 },
+  { 0x2063, 32753 },
+  { 0x20A0, 32892 },
+  { 0x20A0, 32930 },
+  { 0x20A1, 32974 },
+  { 0x20A2, 32998 },
+  { 0x20A3, 33005 },
+  { 0x20A4, 33012 },
+  { 0x20A4, 33051 },
+  { 0x20A5, 33088 },
+  { 0x20A6, 33104 },
+  { 0x20A7, 33112 },
+  { 0x20A8, 33118 },
+  { 0x20A9, 33124 },
+  { 0x20AA, 33130 },
+  { 0x20AB, 33137 },
+  { 0x20AC, 33145 },
+  { 0x20AC, 33191 },
+  { 0x20AD, 33205 },
+  { 0x20AE, 33210 },
+  { 0x20AE, 33219 },
+  { 0x20AF, 33283 },
+  { 0x20B1, 33290 },
+  { 0x20B1, 33302 },
+  { 0x20B2, 33353 },
+  { 0x20B2, 33362 },
+  { 0x20B3, 33393 },
+  { 0x20B4, 33421 },
+  { 0x20B5, 33429 },
+  { 0x20B5, 33435 },
+  { 0x20D1, 33523 },
+  { 0x20D2, 33530 },
+  { 0x20D3, 33539 },
+  { 0x20D5, 33571 },
+  { 0x20D7, 33523 },
+  { 0x20E0, 33580 },
+  { 0x20E1, 33592 },
+  { 0x20E9, 33599 },
+  { 0x210E, 33644 },
+  { 0x2113, 33724 },
+  { 0x2113, 33831 },
+  { 0x2118, 33875 },
+  { 0x2121, 33950 },
+  { 0x2126, 34042 },
+  { 0x2126, 34105 },
+  { 0x2127, 34138 },
+  { 0x2127, 34190 },
+  { 0x2129, 34242 },
+  { 0x212B, 34290 },
+  { 0x212B, 34367 },
+  { 0x212E, 34400 },
+  { 0x2132, 34427 },
+  { 0x2139, 34445 },
+  { 0x213A, 34472 },
+  { 0x213B, 33950 },
+  { 0x2145, 34497 },
+  { 0x2146, 34497 },
+  { 0x2147, 34533 },
+  { 0x2148, 34573 },
+  { 0x2149, 34573 },
+  { 0x214B, 34611 },
+  { 0x214C, 34632 },
+  { 0x214E, 34659 },
+  { 0x2183, 34677 },
+  { 0x2183, 34732 },
+  { 0x2191, 34750 },
+  { 0x2193, 34773 },
+  { 0x219A, 34797 },
+  { 0x219B, 34814 },
+  { 0x21AE, 34831 },
+  { 0x21B5, 34848 },
+  { 0x21CD, 34891 },
+  { 0x21CE, 34908 },
+  { 0x21CF, 34925 },
+  { 0x2205, 34942 },
+  { 0x2207, 35013 },
+  { 0x220A, 35070 },
+  { 0x2215, 35124 },
+  { 0x2233, 35150 },
+  { 0x223D, 35223 },
+  { 0x224C, 35223 },
+  { 0x22C0, 35268 },
+  { 0x22C1, 35313 },
+  { 0x22C6, 35360 },
+  { 0x22EE, 35364 },
+  { 0x2301, 35423 },
+  { 0x2301, 35437 },
+  { 0x230C, 35468 },
+  { 0x2311, 35520 },
+  { 0x231C, 35575 },
+  { 0x231C, 35632 },
+  { 0x234A, 35692 },
+  { 0x237B, 35423 },
+  { 0x237B, 35801 },
+  { 0x237D, 35833 },
+  { 0x237D, 35849 },
+  { 0x237E, 35423 },
+  { 0x237F, 35423 },
+  { 0x237F, 35884 },
+  { 0x23AF, 35909 },
+  { 0x23B6, 35938 },
+  { 0x23CE, 35971 },
+  { 0x23CF, 36019 },
+  { 0x23D0, 35909 },
+  { 0x2422, 36044 },
+  { 0x2423, 36044 },
+  { 0x2425, 35833 },
+  { 0x2425, 36062 },
+  { 0x2426, 35423 },
+  { 0x2591, 36098 },
+  { 0x2592, 36102 },
+  { 0x2593, 36106 },
+  { 0x25A1, 36110 },
+  { 0x25CC, 36155 },
+  { 0x2615, 36336 },
+  { 0x2619, 34472 },
+  { 0x2672, 36367 },
+  { 0x2673, 36447 },
+  { 0x2674, 36474 },
+  { 0x2675, 36500 },
+  { 0x2676, 36526 },
+  { 0x2677, 36551 },
+  { 0x2678, 36565 },
+  { 0x2679, 36577 },
+  { 0x267A, 36592 },
+  { 0x267C, 36681 },
+  { 0x267D, 36726 },
+  { 0x2695, 36807 },
+  { 0x269A, 36869 },
+  { 0x269A, 36909 },
+  { 0x26A3, 36958 },
+  { 0x26A4, 36958 },
+  { 0x26AA, 37011 },
+  { 0x26AB, 37040 },
+  { 0x26AC, 37070 },
+  { 0x2720, 37097 },
+  { 0x27C0, 37229 },
+  { 0x27C1, 37229 },
+  { 0x27C2, 37244 },
+  { 0x27E0, 37286 },
+  { 0x2800, 37329 },
+  { 0x2981, 37425 },
+  { 0x2986, 37457 },
+  { 0x2999, 37487 },
+  { 0x29BF, 37512 },
+  { 0x29E7, 37599 },
+  { 0x2A1D, 37639 },
+  { 0x2A1E, 37639 },
+  { 0x2A71, 37666 },
+  { 0x2A72, 37712 },
+  { 0x2ADC, 37758 },
+  { 0x2ADC, 37817 },
+  { 0x2ADD, 37758 },
+  { 0x2ADD, 37875 },
+  { 0x2AEB, 37933 },
+  { 0x2AF6, 37952 },
+  { 0x2AFC, 37958 },
+  { 0x2C62, 37970 },
+  { 0x2C63, 37988 },
+  { 0x2C64, 38006 },
+  { 0x2C65, 38024 },
+  { 0x2C66, 38042 },
+  { 0x2C77, 38060 },
+  { 0x2E0B, 38077 },
+  { 0x2E0C, 38120 },
+  { 0x2E0D, 38174 },
+  { 0x2E13, 38227 },
+  { 0x2E14, 38273 },
+  { 0x2E15, 38328 },
+  { 0x2E17, 38385 },
+  { 0x2E17, 38426 },
+  { 0x2E1D, 38509 },
+  { 0x2E85, 38522 },
+  { 0x2E88, 38545 },
+  { 0x2E89, 38562 },
+  { 0x2E8A, 38545 },
+  { 0x2E8B, 38586 },
+  { 0x2E8C, 38545 },
+  { 0x2E8D, 38545 },
+  { 0x2E96, 38522 },
+  { 0x2E97, 38586 },
+  { 0x2E98, 38522 },
+  { 0x2E99, 38562 },
+  { 0x2EA1, 38522 },
+  { 0x2EA2, 38606 },
+  { 0x2EA3, 38586 },
+  { 0x2EA4, 38545 },
+  { 0x2EA5, 38545 },
+  { 0x2EA8, 38522 },
+  { 0x2EA9, 38522 },
+  { 0x2EAA, 38522 },
+  { 0x2EAB, 38545 },
+  { 0x2EAF, 38522 },
+  { 0x2EB0, 38522 },
+  { 0x2EB6, 38522 },
+  { 0x2EB7, 38545 },
+  { 0x2EC2, 38522 },
+  { 0x2EC3, 38545 },
+  { 0x2EC4, 38522 },
+  { 0x2ECA, 38522 },
+  { 0x2ECF, 38562 },
+  { 0x2ED2, 38522 },
+  { 0x2ED6, 38522 },
+  { 0x2EDD, 38586 },
+  { 0x2EDE, 38522 },
+  { 0x2EDF, 38522 },
+  { 0x2EE0, 38522 },
+  { 0x300D, 38635 },
+  { 0x300F, 38635 },
+  { 0x3013, 38659 },
+  { 0x301D, 38696 },
+  { 0x301E, 38746 },
+  { 0x301F, 38801 },
+  { 0x3032, 38860 },
+  { 0x3034, 38949 },
+  { 0x303C, 39023 },
+  { 0x303D, 39071 },
+  { 0x303E, 39114 },
+  { 0x303F, 39214 },
+  { 0x3181, 39274 },
+  { 0x3186, 39294 },
+  { 0x322A, 39315 },
+  { 0x322B, 39322 },
+  { 0x322C, 39330 },
+  { 0x322D, 39340 },
+  { 0x322E, 39349 },
+  { 0x322F, 39356 },
+  { 0x3230, 39365 },
+  { 0x3231, 39372 },
+  { 0x3232, 39385 },
+  { 0x3233, 39393 },
+  { 0x3242, 39401 },
+  { 0x3243, 39406 },
+  { 0x327E, 39409 },
+  { 0x328A, 39315 },
+  { 0x328B, 39322 },
+  { 0x328C, 39330 },
+  { 0x328D, 39340 },
+  { 0x328E, 39349 },
+  { 0x328F, 39356 },
+  { 0x3290, 39365 },
+  { 0x3291, 39372 },
+  { 0x3292, 39385 },
+  { 0x3293, 39393 },
+  { 0x329E, 39426 },
+  { 0x32A1, 39436 },
+  { 0x3300, 39444 },
+  { 0x3301, 39454 },
+  { 0x3302, 39460 },
+  { 0x3303, 39467 },
+  { 0x3304, 39486 },
+  { 0x3305, 39493 },
+  { 0x3306, 39498 },
+  { 0x3307, 39520 },
+  { 0x3308, 39549 },
+  { 0x3309, 39554 },
+  { 0x330A, 39560 },
+  { 0x330B, 39564 },
+  { 0x330C, 39586 },
+  { 0x330D, 39592 },
+  { 0x330E, 39600 },
+  { 0x330F, 39607 },
+  { 0x3310, 39613 },
+  { 0x3311, 39619 },
+  { 0x3312, 39626 },
+  { 0x3313, 39632 },
+  { 0x3314, 39640 },
+  { 0x3315, 39646 },
+  { 0x3316, 39655 },
+  { 0x3317, 39665 },
+  { 0x3318, 39674 },
+  { 0x3319, 39679 },
+  { 0x331A, 39688 },
+  { 0x331B, 39718 },
+  { 0x331C, 39724 },
+  { 0x331D, 39729 },
+  { 0x331E, 39753 },
+  { 0x331F, 39759 },
+  { 0x3320, 39765 },
+  { 0x3321, 39773 },
+  { 0x3322, 39782 },
+  { 0x3323, 39789 },
+  { 0x3324, 39794 },
+  { 0x3325, 39800 },
+  { 0x3326, 39806 },
+  { 0x3327, 39813 },
+  { 0x3328, 39817 },
+  { 0x3329, 39823 },
+  { 0x332A, 39843 },
+  { 0x332B, 39851 },
+  { 0x332C, 39859 },
+  { 0x332D, 39865 },
+  { 0x332E, 39872 },
+  { 0x332F, 39880 },
+  { 0x3330, 39903 },
+  { 0x3331, 39909 },
+  { 0x3332, 39918 },
+  { 0x3333, 39924 },
+  { 0x3334, 39929 },
+  { 0x3335, 39936 },
+  { 0x3336, 39942 },
+  { 0x3337, 39950 },
+  { 0x3338, 39955 },
+  { 0x3339, 39963 },
+  { 0x333A, 39969 },
+  { 0x333B, 39975 },
+  { 0x333C, 39980 },
+  { 0x333D, 39985 },
+  { 0x333E, 39991 },
+  { 0x333F, 40002 },
+  { 0x3340, 40014 },
+  { 0x3341, 40020 },
+  { 0x3342, 40025 },
+  { 0x3343, 40030 },
+  { 0x3344, 40037 },
+  { 0x3345, 40042 },
+  { 0x3346, 40047 },
+  { 0x3347, 40052 },
+  { 0x3348, 40092 },
+  { 0x3349, 40099 },
+  { 0x334A, 40106 },
+  { 0x334B, 40115 },
+  { 0x334C, 40121 },
+  { 0x334D, 40129 },
+  { 0x334E, 40135 },
+  { 0x334F, 40135 },
+  { 0x3350, 40140 },
+  { 0x3351, 40164 },
+  { 0x3352, 40170 },
+  { 0x3353, 40175 },
+  { 0x3354, 40181 },
+  { 0x3355, 40187 },
+  { 0x3356, 40211 },
+  { 0x3357, 40220 },
+  { 0x337F, 39372 },
+  { 0xA015, 40225 },
+  { 0xA840, 40244 },
+  { 0xA843, 40244 },
+  { 0xA844, 40282 },
+  { 0xA845, 40299 },
+  { 0xA846, 40299 },
+  { 0xA847, 40335 },
+  { 0xA848, 40244 },
+  { 0xA84C, 40244 },
+  { 0xA84D, 40335 },
+  { 0xA850, 40335 },
+  { 0xA851, 40244 },
+  { 0xA852, 40335 },
+  { 0xA854, 40282 },
+  { 0xA855, 40362 },
+  { 0xA858, 40390 },
+  { 0xA862, 40427 },
+  { 0xA863, 40445 },
+  { 0xA864, 40464 },
+  { 0xA865, 40480 },
+  { 0xA865, 40503 },
+  { 0xA866, 40531 },
+  { 0xA867, 40335 },
+  { 0xA868, 40335 },
+  { 0xA869, 40558 },
+  { 0xA86A, 40558 },
+  { 0xA86B, 40558 },
+  { 0xA86C, 40558 },
+  { 0xA86D, 40567 },
+  { 0xA86E, 40567 },
+  { 0xA86F, 40567 },
+  { 0xA870, 40567 },
+  { 0xA871, 40575 },
+  { 0xA872, 40593 },
+  { 0xA873, 40558 },
+  { 0xA874, 40593 },
+  { 0xA874, 40601 },
+  { 0xA875, 40593 },
+  { 0xA875, 40601 },
+  { 0xA876, 40593 },
+  { 0xA877, 40593 },
+  { 0xFA0E, 40625 },
+  { 0xFA0F, 40625 },
+  { 0xFA11, 40625 },
+  { 0xFA13, 40625 },
+  { 0xFA14, 40625 },
+  { 0xFA1F, 40625 },
+  { 0xFA21, 40625 },
+  { 0xFA23, 40625 },
+  { 0xFA24, 40625 },
+  { 0xFA27, 40625 },
+  { 0xFA28, 40625 },
+  { 0xFA29, 40625 },
+  { 0xFB1E, 40698 },
+  { 0xFB20, 40722 },
+  { 0xFE00, 40801 },
+  { 0xFE18, 40838 },
+  { 0xFE46, 40899 },
+  { 0xFE73, 40954 },
+  { 0xFEFF, 41007 },
+  { 0xFEFF, 41090 },
+  { 0xFF60, 41159 },
+  { 0xFFE3, 41232 },
+  { 0xFFF9, 41272 },
+  { 0xFFFA, 41302 },
+  { 0xFFFB, 41341 },
+  { 0xFFFC, 41371 },
+  { 0xFFFD, 41435 },
+  { 0xFFFD, 41526 },
+  { 0xFFFE, 41609 },
+  { 0xFFFE, 41675 },
+  { 0xFFFF, 41751 },
+  { 0x100BF, 41817 },
+  { 0x100D5, 41817 },
+  { 0x100D6, 41817 },
+  { 0x100FA, 41817 },
+  { 0x1015E, 41868 },
+  { 0x10A3F, 21462 },
+  { 0x10A3F, 28211 },
+  { 0x122B9, 41908 },
+  { 0x1D098, 41975 },
+  { 0x1D099, 42010 },
+  { 0x1D0B4, 42046 },
+  { 0x1D0B5, 42116 },
+  { 0x1D0C5, 42176 },
+  { 0x1D200, 42236 },
+  { 0x1D201, 42244 },
+  { 0x1D202, 42267 },
+  { 0x1D203, 42307 },
+  { 0x1D204, 42315 },
+  { 0x1D205, 42338 },
+  { 0x1D205, 42362 },
+  { 0x1D206, 42393 },
+  { 0x1D206, 42401 },
+  { 0x1D207, 42432 },
+  { 0x1D208, 42455 },
+  { 0x1D208, 42479 },
+  { 0x1D209, 42511 },
+  { 0x1D209, 42519 },
+  { 0x1D20A, 42588 },
+  { 0x1D20B, 42611 },
+  { 0x1D20C, 42635 },
+  { 0x1D20D, 42643 },
+  { 0x1D20D, 42666 },
+  { 0x1D20E, 42698 },
+  { 0x1D20E, 42722 },
+  { 0x1D20F, 42752 },
+  { 0x1D20F, 42760 },
+  { 0x1D210, 42842 },
+  { 0x1D211, 42865 },
+  { 0x1D211, 42889 },
+  { 0x1D212, 42920 },
+  { 0x1D213, 42928 },
+  { 0x1D213, 42951 },
+  { 0x1D213, 42966 },
+  { 0x1D214, 43035 },
+  { 0x1D215, 43059 },
+  { 0x1D216, 43067 },
+  { 0x1D216, 43090 },
+  { 0x1D217, 43159 },
+  { 0x1D218, 43183 },
+  { 0x1D219, 43208 },
+  { 0x1D21A, 43234 },
+  { 0x1D21B, 43244 },
+  { 0x1D21C, 43269 },
+  { 0x1D21C, 43295 },
+  { 0x1D21D, 43325 },
+  { 0x1D21E, 43340 },
+  { 0x1D21F, 43370 },
+  { 0x1D220, 43385 },
+  { 0x1D221, 43415 },
+  { 0x1D222, 43430 },
+  { 0x1D223, 43460 },
+  { 0x1D224, 43490 },
+  { 0x1D225, 43521 },
+  { 0x1D226, 43536 },
+  { 0x1D227, 43566 },
+  { 0x1D228, 43596 },
+  { 0x1D229, 43627 },
+  { 0x1D22A, 43642 },
+  { 0x1D22B, 43672 },
+  { 0x1D22C, 43703 },
+  { 0x1D22D, 43718 },
+  { 0x1D22E, 43748 },
+  { 0x1D22F, 43779 },
+  { 0x1D230, 43809 },
+  { 0x1D231, 43840 },
+  { 0x1D232, 43870 },
+  { 0x1D233, 43901 },
+  { 0x1D234, 43918 },
+  { 0x1D235, 43950 },
+  { 0x1D236, 43983 },
+  { 0x1D237, 44000 },
+  { 0x1D238, 44033 },
+  { 0x1D239, 44050 },
+  { 0x1D23A, 44083 },
+  { 0x1D23A, 44115 },
+  { 0x1D23B, 44149 },
+  { 0x1D23B, 44182 },
+  { 0x1D23C, 44216 },
+  { 0x1D23D, 44233 },
+  { 0x1D23E, 44265 },
+  { 0x1D23F, 44298 },
+  { 0x1D240, 44315 },
+  { 0x1D241, 44347 },
+  { 0x1D300, 44380 },
+  { 0x1FFFE, 44443 },
+  { 0x1FFFF, 44510 },
+  { 0x2FFFE, 44577 },
+  { 0x2FFFF, 44644 },
+  { 0x3FFFE, 44711 },
+  { 0x3FFFF, 44778 },
+  { 0x4FFFE, 44845 },
+  { 0x4FFFF, 44912 },
+  { 0x5FFFE, 44979 },
+  { 0x5FFFF, 45046 },
+  { 0x6FFFE, 45113 },
+  { 0x6FFFF, 45180 },
+  { 0x7FFFE, 45247 },
+  { 0x7FFFF, 45314 },
+  { 0x8FFFE, 45381 },
+  { 0x8FFFF, 45448 },
+  { 0x9FFFE, 45515 },
+  { 0x9FFFF, 45582 },
+  { 0xAFFFE, 45649 },
+  { 0xAFFFF, 45716 },
+  { 0xBFFFE, 45783 },
+  { 0xBFFFF, 45850 },
+  { 0xCFFFE, 45917 },
+  { 0xCFFFF, 45984 },
+  { 0xDFFFE, 46051 },
+  { 0xDFFFF, 46118 },
+  { 0xE0100, 46185 },
+  { 0xEFFFE, 46223 },
+  { 0xEFFFF, 46290 },
+  { 0xFFFFE, 46357 },
+  { 0xFFFFF, 46424 },
+  { 0x10FFFE, 46491 },
+  { 0x10FFFF, 46559 },
+  { (gunichar)(-1), 0 } /* end marker */ 
 };
 
-static const UnicharString names_list_pounds[] = 
+static const char names_list_pounds_strings[] = 
+  "<noBreak> 0020\0"
+  "0020 0308\0"
+  "<super> 0061\0"
+  "0020 0304\0"
+  "<super> 0032\0"
+  "<super> 0033\0"
+  "0020 0301\0"
+  "03BC greek small letter mu\0"
+  "0020 0327\0"
+  "<super> 0031\0"
+  "<super> 006F\0"
+  "<fraction> 0031 2044 0034\0"
+  "<fraction> 0031 2044 0032\0"
+  "<fraction> 0033 2044 0034\0"
+  "0049 004A\0"
+  "0069 006A\0"
+  "004C 00B7\0"
+  "006C 00B7\0"
+  "02BC 006E\0"
+  "0073 latin small letter s\0"
+  "0044 017D\0"
+  "0044 017E\0"
+  "0064 017E\0"
+  "004C 004A\0"
+  "004C 006A\0"
+  "006C 006A\0"
+  "004E 004A\0"
+  "004E 006A\0"
+  "006E 006A\0"
+  "0044 005A\0"
+  "0044 007A\0"
+  "0064 007A\0"
+  "<super> 0068\0"
+  "<super> 0266\0"
+  "<super> 006A\0"
+  "<super> 0072\0"
+  "<super> 0279\0"
+  "<super> 027B\0"
+  "<super> 0281\0"
+  "<super> 0077\0"
+  "<super> 0079\0"
+  "0020 0306\0"
+  "0020 0307\0"
+  "0020 030A\0"
+  "0020 0328\0"
+  "0020 0303\0"
+  "0020 030B\0"
+  "<super> 0263\0"
+  "<super> 006C\0"
+  "<super> 0073\0"
+  "<super> 0078\0"
+  "<super> 0295\0"
+  "0020 0345\0"
+  "03B2 greek small letter beta\0"
+  "03B8 greek small letter theta\0"
+  "03A5 greek capital letter upsilon\0"
+  "03C6 greek small letter phi\0"
+  "03C0 greek small letter pi\0"
+  "03BA greek small letter kappa\0"
+  "03C1 greek small letter rho\0"
+  "03C2 greek small letter final sigma\0"
+  "0398 greek capital letter theta\0"
+  "03B5 greek small letter epsilon\0"
+  "03A3 greek capital letter sigma\0"
+  "0565 0582\0"
+  "0627 0674\0"
+  "0648 0674\0"
+  "06C7 0674\0"
+  "064A 0674\0"
+  "0E4D 0E32\0"
+  "0ECD 0EB2\0"
+  "0EAB 0E99\0"
+  "0EAB 0EA1\0"
+  "<noBreak> 0F0B\0"
+  "0FB2 0F81\0"
+  "0FB3 0F81\0"
+  "<super> 10DC\0"
+  "<super> 0041\0"
+  "<super> 00C6\0"
+  "<super> 0042\0"
+  "<super> 0044\0"
+  "<super> 0045\0"
+  "<super> 018E\0"
+  "<super> 0047\0"
+  "<super> 0048\0"
+  "<super> 0049\0"
+  "<super> 004A\0"
+  "<super> 004B\0"
+  "<super> 004C\0"
+  "<super> 004D\0"
+  "<super> 004E\0"
+  "<super> 004F\0"
+  "<super> 0222\0"
+  "<super> 0050\0"
+  "<super> 0052\0"
+  "<super> 0054\0"
+  "<super> 0055\0"
+  "<super> 0057\0"
+  "<super> 0250\0"
+  "<super> 0251\0"
+  "<super> 1D02\0"
+  "<super> 0062\0"
+  "<super> 0064\0"
+  "<super> 0065\0"
+  "<super> 0259\0"
+  "<super> 025B\0"
+  "<super> 025C\0"
+  "<super> 0067\0"
+  "<super> 006B\0"
+  "<super> 006D\0"
+  "<super> 014B\0"
+  "<super> 0254\0"
+  "<super> 1D16\0"
+  "<super> 1D17\0"
+  "<super> 0070\0"
+  "<super> 0074\0"
+  "<super> 0075\0"
+  "<super> 1D1D\0"
+  "<super> 026F\0"
+  "<super> 0076\0"
+  "<super> 1D25\0"
+  "<super> 03B2\0"
+  "<super> 03B3\0"
+  "<super> 03B4\0"
+  "<super> 03C6\0"
+  "<super> 03C7\0"
+  "<sub> 0069\0"
+  "<sub> 0072\0"
+  "<sub> 0075\0"
+  "<sub> 0076\0"
+  "<sub> 03B2\0"
+  "<sub> 03B3\0"
+  "<sub> 03C1\0"
+  "<sub> 03C6\0"
+  "<sub> 03C7\0"
+  "<super> 043D\0"
+  "<super> 0252\0"
+  "<super> 0063\0"
+  "<super> 0255\0"
+  "<super> 00F0\0"
+  "<super> 0066\0"
+  "<super> 025F\0"
+  "<super> 0261\0"
+  "<super> 0265\0"
+  "<super> 0268\0"
+  "<super> 0269\0"
+  "<super> 026A\0"
+  "<super> 1D7B\0"
+  "<super> 029D\0"
+  "<super> 026D\0"
+  "<super> 1D85\0"
+  "<super> 029F\0"
+  "<super> 0271\0"
+  "<super> 0270\0"
+  "<super> 0272\0"
+  "<super> 0273\0"
+  "<super> 0274\0"
+  "<super> 0275\0"
+  "<super> 0278\0"
+  "<super> 0282\0"
+  "<super> 0283\0"
+  "<super> 01AB\0"
+  "<super> 0289\0"
+  "<super> 028A\0"
+  "<super> 1D1C\0"
+  "<super> 028B\0"
+  "<super> 028C\0"
+  "<super> 007A\0"
+  "<super> 0290\0"
+  "<super> 0291\0"
+  "<super> 0292\0"
+  "<super> 03B8\0"
+  "0061 02BE\0"
+  "0020 0313\0"
+  "0020 0342\0"
+  "0020 0314\0"
+  "0020 space\0"
+  "<noBreak> 2010\0"
+  "0020 0333\0"
+  "002E full stop\0"
+  "002E 002E\0"
+  "002E 002E 002E\0"
+  "2032 2032\0"
+  "2032 2032 2032\0"
+  "2035 2035\0"
+  "2035 2035 2035\0"
+  "0021 0021\0"
+  "0020 0305\0"
+  "003F 003F\0"
+  "003F 0021\0"
+  "0021 003F\0"
+  "2032 2032 2032 2032\0"
+  "<super> 0030\0"
+  "<super> 0069\0"
+  "<super> 0034\0"
+  "<super> 0035\0"
+  "<super> 0036\0"
+  "<super> 0037\0"
+  "<super> 0038\0"
+  "<super> 0039\0"
+  "<super> 002B\0"
+  "<super> 2212\0"
+  "<super> 003D\0"
+  "<super> 0028\0"
+  "<super> 0029\0"
+  "<super> 006E\0"
+  "<sub> 0030\0"
+  "<sub> 0031\0"
+  "<sub> 0032\0"
+  "<sub> 0033\0"
+  "<sub> 0034\0"
+  "<sub> 0035\0"
+  "<sub> 0036\0"
+  "<sub> 0037\0"
+  "<sub> 0038\0"
+  "<sub> 0039\0"
+  "<sub> 002B\0"
+  "<sub> 2212\0"
+  "<sub> 003D\0"
+  "<sub> 0028\0"
+  "<sub> 0029\0"
+  "<sub> 0061\0"
+  "<sub> 0065\0"
+  "<sub> 006F\0"
+  "<sub> 0078\0"
+  "<sub> 0259\0"
+  "0052 0073\0"
+  "0061 002F 0063\0"
+  "0061 002F 0073\0"
+  "<font> 0043 latin capital letter c\0"
+  "00B0 0043\0"
+  "0063 002F 006F\0"
+  "0063 002F 0075\0"
+  "0190 latin capital letter open e\0"
+  "00B0 0046\0"
+  "<font> 0067 latin small letter g\0"
+  "<font> 0048 latin capital letter h\0"
+  "<font> 0068 latin small letter h\0"
+  "<font> 0127 latin small letter h with stroke\0"
+  "<font> 0049 latin capital letter i\0"
+  "<font> 004C latin capital letter l\0"
+  "<font> 006C latin small letter l\0"
+  "<font> 004E latin capital letter n\0"
+  "004E 006F\0"
+  "<font> 0050 latin capital letter p\0"
+  "<font> 0051 latin capital letter q\0"
+  "<font> 0052 latin capital letter r\0"
+  "<super> 0053 004D\0"
+  "0054 0045 004C\0"
+  "<super> 0054 004D\0"
+  "<font> 005A latin capital letter z\0"
+  "<font> 0042 latin capital letter b\0"
+  "<font> 0065 latin small letter e\0"
+  "<font> 0045 latin capital letter e\0"
+  "<font> 0046 latin capital letter f\0"
+  "<font> 004D latin capital letter m\0"
+  "<font> 006F latin small letter o\0"
+  "05D0 hebrew letter alef\0"
+  "05D1 hebrew letter bet\0"
+  "05D2 hebrew letter gimel\0"
+  "05D3 hebrew letter dalet\0"
+  "<font> 0069 latin small letter i\0"
+  "0046 0041 0058\0"
+  "<font> 03C0 greek small letter pi\0"
+  "<font> 03B3 greek small letter gamma\0"
+  "<font> 0393 greek capital letter gamma\0"
+  "<font> 03A0 greek capital letter pi\0"
+  "<font> 2211 n-ary summation\0"
+  "<font> 0044 latin capital letter d\0"
+  "<font> 0064 latin small letter d\0"
+  "<font> 006A latin small letter j\0"
+  "<fraction> 0031 2044 0033\0"
+  "<fraction> 0032 2044 0033\0"
+  "<fraction> 0031 2044 0035\0"
+  "<fraction> 0032 2044 0035\0"
+  "<fraction> 0033 2044 0035\0"
+  "<fraction> 0034 2044 0035\0"
+  "<fraction> 0031 2044 0036\0"
+  "<fraction> 0035 2044 0036\0"
+  "<fraction> 0031 2044 0038\0"
+  "<fraction> 0033 2044 0038\0"
+  "<fraction> 0035 2044 0038\0"
+  "<fraction> 0037 2044 0038\0"
+  "<fraction> 0031 2044\0"
+  "0049 latin capital letter i\0"
+  "0049 0049\0"
+  "0049 0049 0049\0"
+  "0049 0056\0"
+  "0056 latin capital letter v\0"
+  "0056 0049\0"
+  "0056 0049 0049\0"
+  "0056 0049 0049 0049\0"
+  "0049 0058\0"
+  "0058 latin capital letter x\0"
+  "0058 0049\0"
+  "0058 0049 0049\0"
+  "004C latin capital letter l\0"
+  "0043 latin capital letter c\0"
+  "0044 latin capital letter d\0"
+  "004D latin capital letter m\0"
+  "0069 latin small letter i\0"
+  "0069 0069\0"
+  "0069 0069 0069\0"
+  "0069 0076\0"
+  "0076 latin small letter v\0"
+  "0076 0069\0"
+  "0076 0069 0069\0"
+  "0076 0069 0069 0069\0"
+  "0069 0078\0"
+  "0078 latin small letter x\0"
+  "0078 0069\0"
+  "0078 0069 0069\0"
+  "006C latin small letter l\0"
+  "0063 latin small letter c\0"
+  "0064 latin small letter d\0"
+  "006D latin small letter m\0"
+  "222B 222B\0"
+  "222B 222B 222B\0"
+  "222E 222E\0"
+  "222E 222E 222E\0"
+  "<circle> 0031\0"
+  "<circle> 0032\0"
+  "<circle> 0033\0"
+  "<circle> 0034\0"
+  "<circle> 0035\0"
+  "<circle> 0036\0"
+  "<circle> 0037\0"
+  "<circle> 0038\0"
+  "<circle> 0039\0"
+  "<circle> 0031 0030\0"
+  "<circle> 0031 0031\0"
+  "<circle> 0031 0032\0"
+  "<circle> 0031 0033\0"
+  "<circle> 0031 0034\0"
+  "<circle> 0031 0035\0"
+  "<circle> 0031 0036\0"
+  "<circle> 0031 0037\0"
+  "<circle> 0031 0038\0"
+  "<circle> 0031 0039\0"
+  "<circle> 0032 0030\0"
+  "0028 0031 0029\0"
+  "0028 0032 0029\0"
+  "0028 0033 0029\0"
+  "0028 0034 0029\0"
+  "0028 0035 0029\0"
+  "0028 0036 0029\0"
+  "0028 0037 0029\0"
+  "0028 0038 0029\0"
+  "0028 0039 0029\0"
+  "0028 0031 0030 0029\0"
+  "0028 0031 0031 0029\0"
+  "0028 0031 0032 0029\0"
+  "0028 0031 0033 0029\0"
+  "0028 0031 0034 0029\0"
+  "0028 0031 0035 0029\0"
+  "0028 0031 0036 0029\0"
+  "0028 0031 0037 0029\0"
+  "0028 0031 0038 0029\0"
+  "0028 0031 0039 0029\0"
+  "0028 0032 0030 0029\0"
+  "0031 002E\0"
+  "0032 002E\0"
+  "0033 002E\0"
+  "0034 002E\0"
+  "0035 002E\0"
+  "0036 002E\0"
+  "0037 002E\0"
+  "0038 002E\0"
+  "0039 002E\0"
+  "0031 0030 002E\0"
+  "0031 0031 002E\0"
+  "0031 0032 002E\0"
+  "0031 0033 002E\0"
+  "0031 0034 002E\0"
+  "0031 0035 002E\0"
+  "0031 0036 002E\0"
+  "0031 0037 002E\0"
+  "0031 0038 002E\0"
+  "0031 0039 002E\0"
+  "0032 0030 002E\0"
+  "0028 0061 0029\0"
+  "0028 0062 0029\0"
+  "0028 0063 0029\0"
+  "0028 0064 0029\0"
+  "0028 0065 0029\0"
+  "0028 0066 0029\0"
+  "0028 0067 0029\0"
+  "0028 0068 0029\0"
+  "0028 0069 0029\0"
+  "0028 006A 0029\0"
+  "0028 006B 0029\0"
+  "0028 006C 0029\0"
+  "0028 006D 0029\0"
+  "0028 006E 0029\0"
+  "0028 006F 0029\0"
+  "0028 0070 0029\0"
+  "0028 0071 0029\0"
+  "0028 0072 0029\0"
+  "0028 0073 0029\0"
+  "0028 0074 0029\0"
+  "0028 0075 0029\0"
+  "0028 0076 0029\0"
+  "0028 0077 0029\0"
+  "0028 0078 0029\0"
+  "0028 0079 0029\0"
+  "0028 007A 0029\0"
+  "<circle> 0041\0"
+  "<circle> 0042\0"
+  "<circle> 0043\0"
+  "<circle> 0044\0"
+  "<circle> 0045\0"
+  "<circle> 0046\0"
+  "<circle> 0047\0"
+  "<circle> 0048\0"
+  "<circle> 0049\0"
+  "<circle> 004A\0"
+  "<circle> 004B\0"
+  "<circle> 004C\0"
+  "<circle> 004D\0"
+  "<circle> 004E\0"
+  "<circle> 004F\0"
+  "<circle> 0050\0"
+  "<circle> 0051\0"
+  "<circle> 0052\0"
+  "<circle> 0053\0"
+  "<circle> 0054\0"
+  "<circle> 0055\0"
+  "<circle> 0056\0"
+  "<circle> 0057\0"
+  "<circle> 0058\0"
+  "<circle> 0059\0"
+  "<circle> 005A\0"
+  "<circle> 0061\0"
+  "<circle> 0062\0"
+  "<circle> 0063\0"
+  "<circle> 0064\0"
+  "<circle> 0065\0"
+  "<circle> 0066\0"
+  "<circle> 0067\0"
+  "<circle> 0068\0"
+  "<circle> 0069\0"
+  "<circle> 006A\0"
+  "<circle> 006B\0"
+  "<circle> 006C\0"
+  "<circle> 006D\0"
+  "<circle> 006E\0"
+  "<circle> 006F\0"
+  "<circle> 0070\0"
+  "<circle> 0071\0"
+  "<circle> 0072\0"
+  "<circle> 0073\0"
+  "<circle> 0074\0"
+  "<circle> 0075\0"
+  "<circle> 0076\0"
+  "<circle> 0077\0"
+  "<circle> 0078\0"
+  "<circle> 0079\0"
+  "<circle> 007A\0"
+  "<circle> 0030\0"
+  "222B 222B 222B 222B\0"
+  "003A 003A 003D\0"
+  "003D 003D\0"
+  "003D 003D 003D\0"
+  "<super> 2D61\0"
+  "6BCD\0"
+  "9F9F\0"
+  "4E00\0"
+  "4E28\0"
+  "4E36\0"
+  "4E3F\0"
+  "4E59\0"
+  "4E85\0"
+  "4E8C\0"
+  "4EA0\0"
+  "4EBA\0"
+  "513F\0"
+  "5165\0"
+  "516B\0"
+  "5182\0"
+  "5196\0"
+  "51AB\0"
+  "51E0\0"
+  "51F5\0"
+  "5200\0"
+  "529B\0"
+  "52F9\0"
+  "5315\0"
+  "531A\0"
+  "5338\0"
+  "5341\0"
+  "535C\0"
+  "5369\0"
+  "5382\0"
+  "53B6\0"
+  "53C8\0"
+  "53E3\0"
+  "56D7\0"
+  "571F\0"
+  "58EB\0"
+  "5902\0"
+  "590A\0"
+  "5915\0"
+  "5927\0"
+  "5973\0"
+  "5B50\0"
+  "5B80\0"
+  "5BF8\0"
+  "5C0F\0"
+  "5C22\0"
+  "5C38\0"
+  "5C6E\0"
+  "5C71\0"
+  "5DDB\0"
+  "5DE5\0"
+  "5DF1\0"
+  "5DFE\0"
+  "5E72\0"
+  "5E7A\0"
+  "5E7F\0"
+  "5EF4\0"
+  "5EFE\0"
+  "5F0B\0"
+  "5F13\0"
+  "5F50\0"
+  "5F61\0"
+  "5F73\0"
+  "5FC3\0"
+  "6208\0"
+  "6236\0"
+  "624B\0"
+  "652F\0"
+  "6534\0"
+  "6587\0"
+  "6597\0"
+  "65A4\0"
+  "65B9\0"
+  "65E0\0"
+  "65E5\0"
+  "66F0\0"
+  "6708\0"
+  "6728\0"
+  "6B20\0"
+  "6B62\0"
+  "6B79\0"
+  "6BB3\0"
+  "6BCB\0"
+  "6BD4\0"
+  "6BDB\0"
+  "6C0F\0"
+  "6C14\0"
+  "6C34\0"
+  "706B\0"
+  "722A\0"
+  "7236\0"
+  "723B\0"
+  "723F\0"
+  "7247\0"
+  "7259\0"
+  "725B\0"
+  "72AC\0"
+  "7384\0"
+  "7389\0"
+  "74DC\0"
+  "74E6\0"
+  "7518\0"
+  "751F\0"
+  "7528\0"
+  "7530\0"
+  "758B\0"
+  "7592\0"
+  "7676\0"
+  "767D\0"
+  "76AE\0"
+  "76BF\0"
+  "76EE\0"
+  "77DB\0"
+  "77E2\0"
+  "77F3\0"
+  "793A\0"
+  "79B8\0"
+  "79BE\0"
+  "7A74\0"
+  "7ACB\0"
+  "7AF9\0"
+  "7C73\0"
+  "7CF8\0"
+  "7F36\0"
+  "7F51\0"
+  "7F8A\0"
+  "7FBD\0"
+  "8001\0"
+  "800C\0"
+  "8012\0"
+  "8033\0"
+  "807F\0"
+  "8089\0"
+  "81E3\0"
+  "81EA\0"
+  "81F3\0"
+  "81FC\0"
+  "820C\0"
+  "821B\0"
+  "821F\0"
+  "826E\0"
+  "8272\0"
+  "8278\0"
+  "864D\0"
+  "866B\0"
+  "8840\0"
+  "884C\0"
+  "8863\0"
+  "897E\0"
+  "898B\0"
+  "89D2\0"
+  "8A00\0"
+  "8C37\0"
+  "8C46\0"
+  "8C55\0"
+  "8C78\0"
+  "8C9D\0"
+  "8D64\0"
+  "8D70\0"
+  "8DB3\0"
+  "8EAB\0"
+  "8ECA\0"
+  "8F9B\0"
+  "8FB0\0"
+  "8FB5\0"
+  "9091\0"
+  "9149\0"
+  "91C6\0"
+  "91CC\0"
+  "91D1\0"
+  "9577\0"
+  "9580\0"
+  "961C\0"
+  "96B6\0"
+  "96B9\0"
+  "96E8\0"
+  "9751\0"
+  "975E\0"
+  "9762\0"
+  "9769\0"
+  "97CB\0"
+  "97ED\0"
+  "97F3\0"
+  "9801\0"
+  "98A8\0"
+  "98DB\0"
+  "98DF\0"
+  "9996\0"
+  "9999\0"
+  "99AC\0"
+  "9AA8\0"
+  "9AD8\0"
+  "9ADF\0"
+  "9B25\0"
+  "9B2F\0"
+  "9B32\0"
+  "9B3C\0"
+  "9B5A\0"
+  "9CE5\0"
+  "9E75\0"
+  "9E7F\0"
+  "9EA5\0"
+  "9EBB\0"
+  "9EC3\0"
+  "9ECD\0"
+  "9ED1\0"
+  "9EF9\0"
+  "9EFD\0"
+  "9F0E\0"
+  "9F13\0"
+  "9F20\0"
+  "9F3B\0"
+  "9F4A\0"
+  "9F52\0"
+  "9F8D\0"
+  "9F9C\0"
+  "9FA0\0"
+  "<wide> 0020\0"
+  "3012 postal mark\0"
+  "5344\0"
+  "5345\0"
+  "0020 3099\0"
+  "0020 309A\0"
+  "<vertical> 3088 308A\0"
+  "<vertical> 30B3 30C8\0"
+  "1100 hangul choseong kiyeok\0"
+  "1101 hangul choseong ssangkiyeok\0"
+  "11AA hangul jongseong kiyeok-sios\0"
+  "1102 hangul choseong nieun\0"
+  "11AC hangul jongseong nieun-cieuc\0"
+  "11AD hangul jongseong nieun-hieuh\0"
+  "1103 hangul choseong tikeut\0"
+  "1104 hangul choseong ssangtikeut\0"
+  "1105 hangul choseong rieul\0"
+  "11B0 hangul jongseong rieul-kiyeok\0"
+  "11B1 hangul jongseong rieul-mieum\0"
+  "11B2 hangul jongseong rieul-pieup\0"
+  "11B3 hangul jongseong rieul-sios\0"
+  "11B4 hangul jongseong rieul-thieuth\0"
+  "11B5 hangul jongseong rieul-phieuph\0"
+  "111A hangul choseong rieul-hieuh\0"
+  "1106 hangul choseong mieum\0"
+  "1107 hangul choseong pieup\0"
+  "1108 hangul choseong ssangpieup\0"
+  "1121 hangul choseong pieup-sios\0"
+  "1109 hangul choseong sios\0"
+  "110A hangul choseong ssangsios\0"
+  "110B hangul choseong ieung\0"
+  "110C hangul choseong cieuc\0"
+  "110D hangul choseong ssangcieuc\0"
+  "110E hangul choseong chieuch\0"
+  "110F hangul choseong khieukh\0"
+  "1110 hangul choseong thieuth\0"
+  "1111 hangul choseong phieuph\0"
+  "1112 hangul choseong hieuh\0"
+  "1161 hangul jungseong a\0"
+  "1162 hangul jungseong ae\0"
+  "1163 hangul jungseong ya\0"
+  "1164 hangul jungseong yae\0"
+  "1165 hangul jungseong eo\0"
+  "1166 hangul jungseong e\0"
+  "1167 hangul jungseong yeo\0"
+  "1168 hangul jungseong ye\0"
+  "1169 hangul jungseong o\0"
+  "116A hangul jungseong wa\0"
+  "116B hangul jungseong wae\0"
+  "116C hangul jungseong oe\0"
+  "116D hangul jungseong yo\0"
+  "116E hangul jungseong u\0"
+  "116F hangul jungseong weo\0"
+  "1170 hangul jungseong we\0"
+  "1171 hangul jungseong wi\0"
+  "1172 hangul jungseong yu\0"
+  "1173 hangul jungseong eu\0"
+  "1174 hangul jungseong yi\0"
+  "1175 hangul jungseong i\0"
+  "1160 hangul jungseong filler\0"
+  "1114 hangul choseong ssangnieun\0"
+  "1115 hangul choseong nieun-tikeut\0"
+  "11C7 hangul jongseong nieun-sios\0"
+  "11C8 hangul jongseong nieun-pansios\0"
+  "11CC hangul jongseong rieul-kiyeok-sios\0"
+  "11CE hangul jongseong rieul-tikeut\0"
+  "11D3 hangul jongseong rieul-pieup-sios\0"
+  "11D7 hangul jongseong rieul-pansios\0"
+  "11D9 hangul jongseong rieul-yeorinhieuh\0"
+  "111C hangul choseong mieum-pieup\0"
+  "11DD hangul jongseong mieum-sios\0"
+  "11DF hangul jongseong mieum-pansios\0"
+  "111D hangul choseong kapyeounmieum\0"
+  "111E hangul choseong pieup-kiyeok\0"
+  "1120 hangul choseong pieup-tikeut\0"
+  "1122 hangul choseong pieup-sios-kiyeok\0"
+  "1123 hangul choseong pieup-sios-tikeut\0"
+  "1127 hangul choseong pieup-cieuc\0"
+  "1129 hangul choseong pieup-thieuth\0"
+  "112B hangul choseong kapyeounpieup\0"
+  "112C hangul choseong kapyeounssangpieup\0"
+  "112D hangul choseong sios-kiyeok\0"
+  "112E hangul choseong sios-nieun\0"
+  "112F hangul choseong sios-tikeut\0"
+  "1132 hangul choseong sios-pieup\0"
+  "1136 hangul choseong sios-cieuc\0"
+  "1140 hangul choseong pansios\0"
+  "1147 hangul choseong ssangieung\0"
+  "114C hangul choseong yesieung\0"
+  "11F1 hangul jongseong yesieung-sios\0"
+  "11F2 hangul jongseong yesieung-pansios\0"
+  "1157 hangul choseong kapyeounphieuph\0"
+  "1158 hangul choseong ssanghieuh\0"
+  "1159 hangul choseong yeorinhieuh\0"
+  "1184 hangul jungseong yo-ya\0"
+  "1185 hangul jungseong yo-yae\0"
+  "1188 hangul jungseong yo-i\0"
+  "1191 hangul jungseong yu-yeo\0"
+  "1192 hangul jungseong yu-ye\0"
+  "1194 hangul jungseong yu-i\0"
+  "119E hangul jungseong araea\0"
+  "11A1 hangul jungseong araea-i\0"
+  "<super> 4E00\0"
+  "<super> 4E8C\0"
+  "<super> 4E09\0"
+  "<super> 56DB\0"
+  "<super> 4E0A\0"
+  "<super> 4E2D\0"
+  "<super> 4E0B\0"
+  "<super> 7532\0"
+  "<super> 4E59\0"
+  "<super> 4E19\0"
+  "<super> 4E01\0"
+  "<super> 5929\0"
+  "<super> 5730\0"
+  "<super> 4EBA\0"
+  "0028 1100 0029\0"
+  "0028 1102 0029\0"
+  "0028 1103 0029\0"
+  "0028 1105 0029\0"
+  "0028 1106 0029\0"
+  "0028 1107 0029\0"
+  "0028 1109 0029\0"
+  "0028 110B 0029\0"
+  "0028 110C 0029\0"
+  "0028 110E 0029\0"
+  "0028 110F 0029\0"
+  "0028 1110 0029\0"
+  "0028 1111 0029\0"
+  "0028 1112 0029\0"
+  "0028 1100 1161 0029\0"
+  "0028 1102 1161 0029\0"
+  "0028 1103 1161 0029\0"
+  "0028 1105 1161 0029\0"
+  "0028 1106 1161 0029\0"
+  "0028 1107 1161 0029\0"
+  "0028 1109 1161 0029\0"
+  "0028 110B 1161 0029\0"
+  "0028 110C 1161 0029\0"
+  "0028 110E 1161 0029\0"
+  "0028 110F 1161 0029\0"
+  "0028 1110 1161 0029\0"
+  "0028 1111 1161 0029\0"
+  "0028 1112 1161 0029\0"
+  "0028 110C 116E 0029\0"
+  "0028 110B 1169 110C 1165 11AB 0029\0"
+  "0028 110B 1169 1112 116E 0029\0"
+  "0028 4E00 0029\0"
+  "0028 4E8C 0029\0"
+  "0028 4E09 0029\0"
+  "0028 56DB 0029\0"
+  "0028 4E94 0029\0"
+  "0028 516D 0029\0"
+  "0028 4E03 0029\0"
+  "0028 516B 0029\0"
+  "0028 4E5D 0029\0"
+  "0028 5341 0029\0"
+  "0028 6708 0029\0"
+  "0028 706B 0029\0"
+  "0028 6C34 0029\0"
+  "0028 6728 0029\0"
+  "0028 91D1 0029\0"
+  "0028 571F 0029\0"
+  "0028 65E5 0029\0"
+  "0028 682A 0029\0"
+  "0028 6709 0029\0"
+  "0028 793E 0029\0"
+  "0028 540D 0029\0"
+  "0028 7279 0029\0"
+  "0028 8CA1 0029\0"
+  "0028 795D 0029\0"
+  "0028 52B4 0029\0"
+  "0028 4EE3 0029\0"
+  "0028 547C 0029\0"
+  "0028 5B66 0029\0"
+  "0028 76E3 0029\0"
+  "0028 4F01 0029\0"
+  "0028 8CC7 0029\0"
+  "0028 5354 0029\0"
+  "0028 796D 0029\0"
+  "0028 4F11 0029\0"
+  "0028 81EA 0029\0"
+  "0028 81F3 0029\0"
+  "<square> 0050 0054 0045\0"
+  "<circle> 0032 0031\0"
+  "<circle> 0032 0032\0"
+  "<circle> 0032 0033\0"
+  "<circle> 0032 0034\0"
+  "<circle> 0032 0035\0"
+  "<circle> 0032 0036\0"
+  "<circle> 0032 0037\0"
+  "<circle> 0032 0038\0"
+  "<circle> 0032 0039\0"
+  "<circle> 0033 0030\0"
+  "<circle> 0033 0031\0"
+  "<circle> 0033 0032\0"
+  "<circle> 0033 0033\0"
+  "<circle> 0033 0034\0"
+  "<circle> 0033 0035\0"
+  "<circle> 1100\0"
+  "<circle> 1102\0"
+  "<circle> 1103\0"
+  "<circle> 1105\0"
+  "<circle> 1106\0"
+  "<circle> 1107\0"
+  "<circle> 1109\0"
+  "<circle> 110B\0"
+  "<circle> 110C\0"
+  "<circle> 110E\0"
+  "<circle> 110F\0"
+  "<circle> 1110\0"
+  "<circle> 1111\0"
+  "<circle> 1112\0"
+  "<circle> 1100 1161\0"
+  "<circle> 1102 1161\0"
+  "<circle> 1103 1161\0"
+  "<circle> 1105 1161\0"
+  "<circle> 1106 1161\0"
+  "<circle> 1107 1161\0"
+  "<circle> 1109 1161\0"
+  "<circle> 110B 1161\0"
+  "<circle> 110C 1161\0"
+  "<circle> 110E 1161\0"
+  "<circle> 110F 1161\0"
+  "<circle> 1110 1161\0"
+  "<circle> 1111 1161\0"
+  "<circle> 1112 1161\0"
+  "<circle> 110E 1161 11B7 1100 1169\0"
+  "<circle> 110C 116E 110B 1174\0"
+  "<circle> 110B 116E\0"
+  "<circle> 4E00\0"
+  "<circle> 4E8C\0"
+  "<circle> 4E09\0"
+  "<circle> 56DB\0"
+  "<circle> 4E94\0"
+  "<circle> 516D\0"
+  "<circle> 4E03\0"
+  "<circle> 516B\0"
+  "<circle> 4E5D\0"
+  "<circle> 5341\0"
+  "<circle> 6708\0"
+  "<circle> 706B\0"
+  "<circle> 6C34\0"
+  "<circle> 6728\0"
+  "<circle> 91D1\0"
+  "<circle> 571F\0"
+  "<circle> 65E5\0"
+  "<circle> 682A\0"
+  "<circle> 6709\0"
+  "<circle> 793E\0"
+  "<circle> 540D\0"
+  "<circle> 7279\0"
+  "<circle> 8CA1\0"
+  "<circle> 795D\0"
+  "<circle> 52B4\0"
+  "<circle> 79D8\0"
+  "<circle> 7537\0"
+  "<circle> 5973\0"
+  "<circle> 9069\0"
+  "<circle> 512A\0"
+  "<circle> 5370\0"
+  "<circle> 6CE8\0"
+  "<circle> 9805\0"
+  "<circle> 4F11\0"
+  "<circle> 5199\0"
+  "<circle> 6B63\0"
+  "<circle> 4E0A\0"
+  "<circle> 4E2D\0"
+  "<circle> 4E0B\0"
+  "<circle> 5DE6\0"
+  "<circle> 53F3\0"
+  "<circle> 533B\0"
+  "<circle> 5B97\0"
+  "<circle> 5B66\0"
+  "<circle> 76E3\0"
+  "<circle> 4F01\0"
+  "<circle> 8CC7\0"
+  "<circle> 5354\0"
+  "<circle> 591C\0"
+  "<circle> 0033 0036\0"
+  "<circle> 0033 0037\0"
+  "<circle> 0033 0038\0"
+  "<circle> 0033 0039\0"
+  "<circle> 0034 0030\0"
+  "<circle> 0034 0031\0"
+  "<circle> 0034 0032\0"
+  "<circle> 0034 0033\0"
+  "<circle> 0034 0034\0"
+  "<circle> 0034 0035\0"
+  "<circle> 0034 0036\0"
+  "<circle> 0034 0037\0"
+  "<circle> 0034 0038\0"
+  "<circle> 0034 0039\0"
+  "<circle> 0035 0030\0"
+  "0031 6708\0"
+  "0032 6708\0"
+  "0033 6708\0"
+  "0034 6708\0"
+  "0035 6708\0"
+  "0036 6708\0"
+  "0037 6708\0"
+  "0038 6708\0"
+  "0039 6708\0"
+  "0031 0030 6708\0"
+  "0031 0031 6708\0"
+  "0031 0032 6708\0"
+  "<square> 0048 0067\0"
+  "<square> 0065 0072 0067\0"
+  "<square> 0065 0056\0"
+  "<square> 004C 0054 0044\0"
+  "<circle> 30A2\0"
+  "<circle> 30A4\0"
+  "<circle> 30A6\0"
+  "<circle> 30A8\0"
+  "<circle> 30AA\0"
+  "<circle> 30AB\0"
+  "<circle> 30AD\0"
+  "<circle> 30AF\0"
+  "<circle> 30B1\0"
+  "<circle> 30B3\0"
+  "<circle> 30B5\0"
+  "<circle> 30B7\0"
+  "<circle> 30B9\0"
+  "<circle> 30BB\0"
+  "<circle> 30BD\0"
+  "<circle> 30BF\0"
+  "<circle> 30C1\0"
+  "<circle> 30C4\0"
+  "<circle> 30C6\0"
+  "<circle> 30C8\0"
+  "<circle> 30CA\0"
+  "<circle> 30CB\0"
+  "<circle> 30CC\0"
+  "<circle> 30CD\0"
+  "<circle> 30CE\0"
+  "<circle> 30CF\0"
+  "<circle> 30D2\0"
+  "<circle> 30D5\0"
+  "<circle> 30D8\0"
+  "<circle> 30DB\0"
+  "<circle> 30DE\0"
+  "<circle> 30DF\0"
+  "<circle> 30E0\0"
+  "<circle> 30E1\0"
+  "<circle> 30E2\0"
+  "<circle> 30E4\0"
+  "<circle> 30E6\0"
+  "<circle> 30E8\0"
+  "<circle> 30E9\0"
+  "<circle> 30EA\0"
+  "<circle> 30EB\0"
+  "<circle> 30EC\0"
+  "<circle> 30ED\0"
+  "<circle> 30EF\0"
+  "<circle> 30F0\0"
+  "<circle> 30F1\0"
+  "<circle> 30F2\0"
+  "<square> 30A2 30D1 30FC 30C8\0"
+  "<square> 30A2 30EB 30D5 30A1\0"
+  "<square> 30A2 30F3 30DA 30A2\0"
+  "<square> 30A2 30FC 30EB\0"
+  "<square> 30A4 30CB 30F3 30B0\0"
+  "<square> 30A4 30F3 30C1\0"
+  "<square> 30A6 30A9 30F3\0"
+  "<square> 30A8 30B9 30AF 30FC 30C9\0"
+  "<square> 30A8 30FC 30AB 30FC\0"
+  "<square> 30AA 30F3 30B9\0"
+  "<square> 30AA 30FC 30E0\0"
+  "<square> 30AB 30A4 30EA\0"
+  "<square> 30AB 30E9 30C3 30C8\0"
+  "<square> 30AB 30ED 30EA 30FC\0"
+  "<square> 30AC 30ED 30F3\0"
+  "<square> 30AC 30F3 30DE\0"
+  "<square> 30AE 30AC\0"
+  "<square> 30AE 30CB 30FC\0"
+  "<square> 30AD 30E5 30EA 30FC\0"
+  "<square> 30AE 30EB 30C0 30FC\0"
+  "<square> 30AD 30ED\0"
+  "<square> 30AD 30ED 30B0 30E9 30E0\0"
+  "<square> 30AD 30ED 30E1 30FC 30C8 30EB\0"
+  "<square> 30AD 30ED 30EF 30C3 30C8\0"
+  "<square> 30B0 30E9 30E0\0"
+  "<square> 30B0 30E9 30E0 30C8 30F3\0"
+  "<square> 30AF 30EB 30BC 30A4 30ED\0"
+  "<square> 30AF 30ED 30FC 30CD\0"
+  "<square> 30B1 30FC 30B9\0"
+  "<square> 30B3 30EB 30CA\0"
+  "<square> 30B3 30FC 30DD\0"
+  "<square> 30B5 30A4 30AF 30EB\0"
+  "<square> 30B5 30F3 30C1 30FC 30E0\0"
+  "<square> 30B7 30EA 30F3 30B0\0"
+  "<square> 30BB 30F3 30C1\0"
+  "<square> 30BB 30F3 30C8\0"
+  "<square> 30C0 30FC 30B9\0"
+  "<square> 30C7 30B7\0"
+  "<square> 30C9 30EB\0"
+  "<square> 30C8 30F3\0"
+  "<square> 30CA 30CE\0"
+  "<square> 30CE 30C3 30C8\0"
+  "<square> 30CF 30A4 30C4\0"
+  "<square> 30D1 30FC 30BB 30F3 30C8\0"
+  "<square> 30D1 30FC 30C4\0"
+  "<square> 30D0 30FC 30EC 30EB\0"
+  "<square> 30D4 30A2 30B9 30C8 30EB\0"
+  "<square> 30D4 30AF 30EB\0"
+  "<square> 30D4 30B3\0"
+  "<square> 30D3 30EB\0"
+  "<square> 30D5 30A1 30E9 30C3 30C9\0"
+  "<square> 30D5 30A3 30FC 30C8\0"
+  "<square> 30D6 30C3 30B7 30A7 30EB\0"
+  "<square> 30D5 30E9 30F3\0"
+  "<square> 30D8 30AF 30BF 30FC 30EB\0"
+  "<square> 30DA 30BD\0"
+  "<square> 30DA 30CB 30D2\0"
+  "<square> 30D8 30EB 30C4\0"
+  "<square> 30DA 30F3 30B9\0"
+  "<square> 30DA 30FC 30B8\0"
+  "<square> 30D9 30FC 30BF\0"
+  "<square> 30DD 30A4 30F3 30C8\0"
+  "<square> 30DC 30EB 30C8\0"
+  "<square> 30DB 30F3\0"
+  "<square> 30DD 30F3 30C9\0"
+  "<square> 30DB 30FC 30EB\0"
+  "<square> 30DB 30FC 30F3\0"
+  "<square> 30DE 30A4 30AF 30ED\0"
+  "<square> 30DE 30A4 30EB\0"
+  "<square> 30DE 30C3 30CF\0"
+  "<square> 30DE 30EB 30AF\0"
+  "<square> 30DE 30F3 30B7 30E7 30F3\0"
+  "<square> 30DF 30AF 30ED 30F3\0"
+  "<square> 30DF 30EA\0"
+  "<square> 30DF 30EA 30D0 30FC 30EB\0"
+  "<square> 30E1 30AC\0"
+  "<square> 30E1 30AC 30C8 30F3\0"
+  "<square> 30E1 30FC 30C8 30EB\0"
+  "<square> 30E4 30FC 30C9\0"
+  "<square> 30E4 30FC 30EB\0"
+  "<square> 30E6 30A2 30F3\0"
+  "<square> 30EA 30C3 30C8 30EB\0"
+  "<square> 30EA 30E9\0"
+  "<square> 30EB 30D4 30FC\0"
+  "<square> 30EB 30FC 30D6 30EB\0"
+  "<square> 30EC 30E0\0"
+  "<square> 30EC 30F3 30C8 30B2 30F3\0"
+  "<square> 30EF 30C3 30C8\0"
+  "0030 70B9\0"
+  "0031 70B9\0"
+  "0032 70B9\0"
+  "0033 70B9\0"
+  "0034 70B9\0"
+  "0035 70B9\0"
+  "0036 70B9\0"
+  "0037 70B9\0"
+  "0038 70B9\0"
+  "0039 70B9\0"
+  "0031 0030 70B9\0"
+  "0031 0031 70B9\0"
+  "0031 0032 70B9\0"
+  "0031 0033 70B9\0"
+  "0031 0034 70B9\0"
+  "0031 0035 70B9\0"
+  "0031 0036 70B9\0"
+  "0031 0037 70B9\0"
+  "0031 0038 70B9\0"
+  "0031 0039 70B9\0"
+  "0032 0030 70B9\0"
+  "0032 0031 70B9\0"
+  "0032 0032 70B9\0"
+  "0032 0033 70B9\0"
+  "0032 0034 70B9\0"
+  "<square> 0068 0050 0061\0"
+  "<square> 0064 0061\0"
+  "<square> 0041 0055\0"
+  "<square> 0062 0061 0072\0"
+  "<square> 006F 0056\0"
+  "<square> 0070 0063\0"
+  "<square> 0064 006D\0"
+  "<square> 0064 006D 00B2\0"
+  "<square> 0064 006D 00B3\0"
+  "<square> 0049 0055\0"
+  "<square> 5E73 6210\0"
+  "<square> 662D 548C\0"
+  "<square> 5927 6B63\0"
+  "<square> 660E 6CBB\0"
+  "<square> 682A 5F0F 4F1A 793E\0"
+  "<square> 0070 0041\0"
+  "<square> 006E 0041\0"
+  "<square> 03BC 0041\0"
+  "<square> 006D 0041\0"
+  "<square> 006B 0041\0"
+  "<square> 004B 0042\0"
+  "<square> 004D 0042\0"
+  "<square> 0047 0042\0"
+  "<square> 0063 0061 006C\0"
+  "<square> 006B 0063 0061 006C\0"
+  "<square> 0070 0046\0"
+  "<square> 006E 0046\0"
+  "<square> 03BC 0046\0"
+  "<square> 03BC 0067\0"
+  "<square> 006D 0067\0"
+  "<square> 006B 0067\0"
+  "<square> 0048 007A\0"
+  "<square> 006B 0048 007A\0"
+  "<square> 004D 0048 007A\0"
+  "<square> 0047 0048 007A\0"
+  "<square> 0054 0048 007A\0"
+  "<square> 03BC 2113\0"
+  "<square> 006D 2113\0"
+  "<square> 0064 2113\0"
+  "<square> 006B 2113\0"
+  "<square> 0066 006D\0"
+  "<square> 006E 006D\0"
+  "<square> 03BC 006D\0"
+  "<square> 006D 006D\0"
+  "<square> 0063 006D\0"
+  "<square> 006B 006D\0"
+  "<square> 006D 006D 00B2\0"
+  "<square> 0063 006D 00B2\0"
+  "<square> 006D 00B2\0"
+  "<square> 006B 006D 00B2\0"
+  "<square> 006D 006D 00B3\0"
+  "<square> 0063 006D 00B3\0"
+  "<square> 006D 00B3\0"
+  "<square> 006B 006D 00B3\0"
+  "<square> 006D 2215 0073\0"
+  "<square> 006D 2215 0073 00B2\0"
+  "<square> 0050 0061\0"
+  "<square> 006B 0050 0061\0"
+  "<square> 004D 0050 0061\0"
+  "<square> 0047 0050 0061\0"
+  "<square> 0072 0061 0064\0"
+  "<square> 0072 0061 0064 2215 0073\0"
+  "<square> 0072 0061 0064 2215 0073 00B2\0"
+  "<square> 0070 0073\0"
+  "<square> 006E 0073\0"
+  "<square> 03BC 0073\0"
+  "<square> 006D 0073\0"
+  "<square> 0070 0056\0"
+  "<square> 006E 0056\0"
+  "<square> 03BC 0056\0"
+  "<square> 006D 0056\0"
+  "<square> 006B 0056\0"
+  "<square> 004D 0056\0"
+  "<square> 0070 0057\0"
+  "<square> 006E 0057\0"
+  "<square> 03BC 0057\0"
+  "<square> 006D 0057\0"
+  "<square> 006B 0057\0"
+  "<square> 004D 0057\0"
+  "<square> 006B 03A9\0"
+  "<square> 004D 03A9\0"
+  "<square> 0061 002E 006D 002E\0"
+  "<square> 0042 0071\0"
+  "<square> 0063 0063\0"
+  "<square> 0063 0064\0"
+  "<square> 0043 2215 006B 0067\0"
+  "<square> 0043 006F 002E\0"
+  "<square> 0064 0042\0"
+  "<square> 0047 0079\0"
+  "<square> 0068 0061\0"
+  "<square> 0048 0050\0"
+  "<square> 0069 006E\0"
+  "<square> 004B 004B\0"
+  "<square> 004B 004D\0"
+  "<square> 006B 0074\0"
+  "<square> 006C 006D\0"
+  "<square> 006C 006E\0"
+  "<square> 006C 006F 0067\0"
+  "<square> 006C 0078\0"
+  "<square> 006D 0062\0"
+  "<square> 006D 0069 006C\0"
+  "<square> 006D 006F 006C\0"
+  "<square> 0050 0048\0"
+  "<square> 0070 002E 006D 002E\0"
+  "<square> 0050 0050 004D\0"
+  "<square> 0050 0052\0"
+  "<square> 0073 0072\0"
+  "<square> 0053 0076\0"
+  "<square> 0057 0062\0"
+  "<square> 0056 2215 006D\0"
+  "<square> 0041 2215 006D\0"
+  "0031 65E5\0"
+  "0032 65E5\0"
+  "0033 65E5\0"
+  "0034 65E5\0"
+  "0035 65E5\0"
+  "0036 65E5\0"
+  "0037 65E5\0"
+  "0038 65E5\0"
+  "0039 65E5\0"
+  "0031 0030 65E5\0"
+  "0031 0031 65E5\0"
+  "0031 0032 65E5\0"
+  "0031 0033 65E5\0"
+  "0031 0034 65E5\0"
+  "0031 0035 65E5\0"
+  "0031 0036 65E5\0"
+  "0031 0037 65E5\0"
+  "0031 0038 65E5\0"
+  "0031 0039 65E5\0"
+  "0032 0030 65E5\0"
+  "0032 0031 65E5\0"
+  "0032 0032 65E5\0"
+  "0032 0033 65E5\0"
+  "0032 0034 65E5\0"
+  "0032 0035 65E5\0"
+  "0032 0036 65E5\0"
+  "0032 0037 65E5\0"
+  "0032 0038 65E5\0"
+  "0032 0039 65E5\0"
+  "0033 0030 65E5\0"
+  "0033 0031 65E5\0"
+  "<square> 0067 0061 006C\0"
+  "0066 0066\0"
+  "0066 0069\0"
+  "0066 006C\0"
+  "0066 0066 0069\0"
+  "0066 0066 006C\0"
+  "017F 0074\0"
+  "0073 0074\0"
+  "0574 0576\0"
+  "0574 0565\0"
+  "0574 056B\0"
+  "057E 0576\0"
+  "0574 056D\0"
+  "<font> 05E2 hebrew letter ayin\0"
+  "<font> 05D0 hebrew letter alef\0"
+  "<font> 05D3 hebrew letter dalet\0"
+  "<font> 05D4 hebrew letter he\0"
+  "<font> 05DB hebrew letter kaf\0"
+  "<font> 05DC hebrew letter lamed\0"
+  "<font> 05DD hebrew letter final mem\0"
+  "<font> 05E8 hebrew letter resh\0"
+  "<font> 05EA hebrew letter tav\0"
+  "<font> 002B plus sign\0"
+  "05D0 05DC\0"
+  "<isolated> 0671\0"
+  "<final> 0671\0"
+  "<isolated> 067B\0"
+  "<final> 067B\0"
+  "<initial> 067B\0"
+  "<medial> 067B\0"
+  "<isolated> 067E\0"
+  "<final> 067E\0"
+  "<initial> 067E\0"
+  "<medial> 067E\0"
+  "<isolated> 0680\0"
+  "<final> 0680\0"
+  "<initial> 0680\0"
+  "<medial> 0680\0"
+  "<isolated> 067A\0"
+  "<final> 067A\0"
+  "<initial> 067A\0"
+  "<medial> 067A\0"
+  "<isolated> 067F\0"
+  "<final> 067F\0"
+  "<initial> 067F\0"
+  "<medial> 067F\0"
+  "<isolated> 0679\0"
+  "<final> 0679\0"
+  "<initial> 0679\0"
+  "<medial> 0679\0"
+  "<isolated> 06A4\0"
+  "<final> 06A4\0"
+  "<initial> 06A4\0"
+  "<medial> 06A4\0"
+  "<isolated> 06A6\0"
+  "<final> 06A6\0"
+  "<initial> 06A6\0"
+  "<medial> 06A6\0"
+  "<isolated> 0684\0"
+  "<final> 0684\0"
+  "<initial> 0684\0"
+  "<medial> 0684\0"
+  "<isolated> 0683\0"
+  "<final> 0683\0"
+  "<initial> 0683\0"
+  "<medial> 0683\0"
+  "<isolated> 0686\0"
+  "<final> 0686\0"
+  "<initial> 0686\0"
+  "<medial> 0686\0"
+  "<isolated> 0687\0"
+  "<final> 0687\0"
+  "<initial> 0687\0"
+  "<medial> 0687\0"
+  "<isolated> 068D\0"
+  "<final> 068D\0"
+  "<isolated> 068C\0"
+  "<final> 068C\0"
+  "<isolated> 068E\0"
+  "<final> 068E\0"
+  "<isolated> 0688\0"
+  "<final> 0688\0"
+  "<isolated> 0698\0"
+  "<final> 0698\0"
+  "<isolated> 0691\0"
+  "<final> 0691\0"
+  "<isolated> 06A9\0"
+  "<final> 06A9\0"
+  "<initial> 06A9\0"
+  "<medial> 06A9\0"
+  "<isolated> 06AF\0"
+  "<final> 06AF\0"
+  "<initial> 06AF\0"
+  "<medial> 06AF\0"
+  "<isolated> 06B3\0"
+  "<final> 06B3\0"
+  "<initial> 06B3\0"
+  "<medial> 06B3\0"
+  "<isolated> 06B1\0"
+  "<final> 06B1\0"
+  "<initial> 06B1\0"
+  "<medial> 06B1\0"
+  "<isolated> 06BA\0"
+  "<final> 06BA\0"
+  "<isolated> 06BB\0"
+  "<final> 06BB\0"
+  "<initial> 06BB\0"
+  "<medial> 06BB\0"
+  "<isolated> 06C0\0"
+  "<final> 06C0\0"
+  "<isolated> 06C1\0"
+  "<final> 06C1\0"
+  "<initial> 06C1\0"
+  "<medial> 06C1\0"
+  "<isolated> 06BE\0"
+  "<final> 06BE\0"
+  "<initial> 06BE\0"
+  "<medial> 06BE\0"
+  "<isolated> 06D2\0"
+  "<final> 06D2\0"
+  "<isolated> 06D3\0"
+  "<final> 06D3\0"
+  "<isolated> 06AD\0"
+  "<final> 06AD\0"
+  "<initial> 06AD\0"
+  "<medial> 06AD\0"
+  "<isolated> 06C7\0"
+  "<final> 06C7\0"
+  "<isolated> 06C6\0"
+  "<final> 06C6\0"
+  "<isolated> 06C8\0"
+  "<final> 06C8\0"
+  "<isolated> 0677\0"
+  "<isolated> 06CB\0"
+  "<final> 06CB\0"
+  "<isolated> 06C5\0"
+  "<final> 06C5\0"
+  "<isolated> 06C9\0"
+  "<final> 06C9\0"
+  "<isolated> 06D0\0"
+  "<final> 06D0\0"
+  "<initial> 06D0\0"
+  "<medial> 06D0\0"
+  "<initial> 0649\0"
+  "<medial> 0649\0"
+  "<isolated> 0626 0627\0"
+  "<final> 0626 0627\0"
+  "<isolated> 0626 06D5\0"
+  "<final> 0626 06D5\0"
+  "<isolated> 0626 0648\0"
+  "<final> 0626 0648\0"
+  "<isolated> 0626 06C7\0"
+  "<final> 0626 06C7\0"
+  "<isolated> 0626 06C6\0"
+  "<final> 0626 06C6\0"
+  "<isolated> 0626 06C8\0"
+  "<final> 0626 06C8\0"
+  "<isolated> 0626 06D0\0"
+  "<final> 0626 06D0\0"
+  "<initial> 0626 06D0\0"
+  "<isolated> 0626 0649\0"
+  "<final> 0626 0649\0"
+  "<initial> 0626 0649\0"
+  "<isolated> 06CC\0"
+  "<final> 06CC\0"
+  "<initial> 06CC\0"
+  "<medial> 06CC\0"
+  "<isolated> 0626 062C\0"
+  "<isolated> 0626 062D\0"
+  "<isolated> 0626 0645\0"
+  "<isolated> 0626 064A\0"
+  "<isolated> 0628 062C\0"
+  "<isolated> 0628 062D\0"
+  "<isolated> 0628 062E\0"
+  "<isolated> 0628 0645\0"
+  "<isolated> 0628 0649\0"
+  "<isolated> 0628 064A\0"
+  "<isolated> 062A 062C\0"
+  "<isolated> 062A 062D\0"
+  "<isolated> 062A 062E\0"
+  "<isolated> 062A 0645\0"
+  "<isolated> 062A 0649\0"
+  "<isolated> 062A 064A\0"
+  "<isolated> 062B 062C\0"
+  "<isolated> 062B 0645\0"
+  "<isolated> 062B 0649\0"
+  "<isolated> 062B 064A\0"
+  "<isolated> 062C 062D\0"
+  "<isolated> 062C 0645\0"
+  "<isolated> 062D 062C\0"
+  "<isolated> 062D 0645\0"
+  "<isolated> 062E 062C\0"
+  "<isolated> 062E 062D\0"
+  "<isolated> 062E 0645\0"
+  "<isolated> 0633 062C\0"
+  "<isolated> 0633 062D\0"
+  "<isolated> 0633 062E\0"
+  "<isolated> 0633 0645\0"
+  "<isolated> 0635 062D\0"
+  "<isolated> 0635 0645\0"
+  "<isolated> 0636 062C\0"
+  "<isolated> 0636 062D\0"
+  "<isolated> 0636 062E\0"
+  "<isolated> 0636 0645\0"
+  "<isolated> 0637 062D\0"
+  "<isolated> 0637 0645\0"
+  "<isolated> 0638 0645\0"
+  "<isolated> 0639 062C\0"
+  "<isolated> 0639 0645\0"
+  "<isolated> 063A 062C\0"
+  "<isolated> 063A 0645\0"
+  "<isolated> 0641 062C\0"
+  "<isolated> 0641 062D\0"
+  "<isolated> 0641 062E\0"
+  "<isolated> 0641 0645\0"
+  "<isolated> 0641 0649\0"
+  "<isolated> 0641 064A\0"
+  "<isolated> 0642 062D\0"
+  "<isolated> 0642 0645\0"
+  "<isolated> 0642 0649\0"
+  "<isolated> 0642 064A\0"
+  "<isolated> 0643 0627\0"
+  "<isolated> 0643 062C\0"
+  "<isolated> 0643 062D\0"
+  "<isolated> 0643 062E\0"
+  "<isolated> 0643 0644\0"
+  "<isolated> 0643 0645\0"
+  "<isolated> 0643 0649\0"
+  "<isolated> 0643 064A\0"
+  "<isolated> 0644 062C\0"
+  "<isolated> 0644 062D\0"
+  "<isolated> 0644 062E\0"
+  "<isolated> 0644 0645\0"
+  "<isolated> 0644 0649\0"
+  "<isolated> 0644 064A\0"
+  "<isolated> 0645 062C\0"
+  "<isolated> 0645 062D\0"
+  "<isolated> 0645 062E\0"
+  "<isolated> 0645 0645\0"
+  "<isolated> 0645 0649\0"
+  "<isolated> 0645 064A\0"
+  "<isolated> 0646 062C\0"
+  "<isolated> 0646 062D\0"
+  "<isolated> 0646 062E\0"
+  "<isolated> 0646 0645\0"
+  "<isolated> 0646 0649\0"
+  "<isolated> 0646 064A\0"
+  "<isolated> 0647 062C\0"
+  "<isolated> 0647 0645\0"
+  "<isolated> 0647 0649\0"
+  "<isolated> 0647 064A\0"
+  "<isolated> 064A 062C\0"
+  "<isolated> 064A 062D\0"
+  "<isolated> 064A 062E\0"
+  "<isolated> 064A 0645\0"
+  "<isolated> 064A 0649\0"
+  "<isolated> 064A 064A\0"
+  "<isolated> 0630 0670\0"
+  "<isolated> 0631 0670\0"
+  "<isolated> 0649 0670\0"
+  "<isolated> 0020 064C 0651\0"
+  "<isolated> 0020 064D 0651\0"
+  "<isolated> 0020 064E 0651\0"
+  "<isolated> 0020 064F 0651\0"
+  "<isolated> 0020 0650 0651\0"
+  "<isolated> 0020 0651 0670\0"
+  "<final> 0626 0631\0"
+  "<final> 0626 0632\0"
+  "<final> 0626 0645\0"
+  "<final> 0626 0646\0"
+  "<final> 0626 064A\0"
+  "<final> 0628 0631\0"
+  "<final> 0628 0632\0"
+  "<final> 0628 0645\0"
+  "<final> 0628 0646\0"
+  "<final> 0628 0649\0"
+  "<final> 0628 064A\0"
+  "<final> 062A 0631\0"
+  "<final> 062A 0632\0"
+  "<final> 062A 0645\0"
+  "<final> 062A 0646\0"
+  "<final> 062A 0649\0"
+  "<final> 062A 064A\0"
+  "<final> 062B 0631\0"
+  "<final> 062B 0632\0"
+  "<final> 062B 0645\0"
+  "<final> 062B 0646\0"
+  "<final> 062B 0649\0"
+  "<final> 062B 064A\0"
+  "<final> 0641 0649\0"
+  "<final> 0641 064A\0"
+  "<final> 0642 0649\0"
+  "<final> 0642 064A\0"
+  "<final> 0643 0627\0"
+  "<final> 0643 0644\0"
+  "<final> 0643 0645\0"
+  "<final> 0643 0649\0"
+  "<final> 0643 064A\0"
+  "<final> 0644 0645\0"
+  "<final> 0644 0649\0"
+  "<final> 0644 064A\0"
+  "<final> 0645 0627\0"
+  "<final> 0645 0645\0"
+  "<final> 0646 0631\0"
+  "<final> 0646 0632\0"
+  "<final> 0646 0645\0"
+  "<final> 0646 0646\0"
+  "<final> 0646 0649\0"
+  "<final> 0646 064A\0"
+  "<final> 0649 0670\0"
+  "<final> 064A 0631\0"
+  "<final> 064A 0632\0"
+  "<final> 064A 0645\0"
+  "<final> 064A 0646\0"
+  "<final> 064A 0649\0"
+  "<final> 064A 064A\0"
+  "<initial> 0626 062C\0"
+  "<initial> 0626 062D\0"
+  "<initial> 0626 062E\0"
+  "<initial> 0626 0645\0"
+  "<initial> 0626 0647\0"
+  "<initial> 0628 062C\0"
+  "<initial> 0628 062D\0"
+  "<initial> 0628 062E\0"
+  "<initial> 0628 0645\0"
+  "<initial> 0628 0647\0"
+  "<initial> 062A 062C\0"
+  "<initial> 062A 062D\0"
+  "<initial> 062A 062E\0"
+  "<initial> 062A 0645\0"
+  "<initial> 062A 0647\0"
+  "<initial> 062B 0645\0"
+  "<initial> 062C 062D\0"
+  "<initial> 062C 0645\0"
+  "<initial> 062D 062C\0"
+  "<initial> 062D 0645\0"
+  "<initial> 062E 062C\0"
+  "<initial> 062E 0645\0"
+  "<initial> 0633 062C\0"
+  "<initial> 0633 062D\0"
+  "<initial> 0633 062E\0"
+  "<initial> 0633 0645\0"
+  "<initial> 0635 062D\0"
+  "<initial> 0635 062E\0"
+  "<initial> 0635 0645\0"
+  "<initial> 0636 062C\0"
+  "<initial> 0636 062D\0"
+  "<initial> 0636 062E\0"
+  "<initial> 0636 0645\0"
+  "<initial> 0637 062D\0"
+  "<initial> 0638 0645\0"
+  "<initial> 0639 062C\0"
+  "<initial> 0639 0645\0"
+  "<initial> 063A 062C\0"
+  "<initial> 063A 0645\0"
+  "<initial> 0641 062C\0"
+  "<initial> 0641 062D\0"
+  "<initial> 0641 062E\0"
+  "<initial> 0641 0645\0"
+  "<initial> 0642 062D\0"
+  "<initial> 0642 0645\0"
+  "<initial> 0643 062C\0"
+  "<initial> 0643 062D\0"
+  "<initial> 0643 062E\0"
+  "<initial> 0643 0644\0"
+  "<initial> 0643 0645\0"
+  "<initial> 0644 062C\0"
+  "<initial> 0644 062D\0"
+  "<initial> 0644 062E\0"
+  "<initial> 0644 0645\0"
+  "<initial> 0644 0647\0"
+  "<initial> 0645 062C\0"
+  "<initial> 0645 062D\0"
+  "<initial> 0645 062E\0"
+  "<initial> 0645 0645\0"
+  "<initial> 0646 062C\0"
+  "<initial> 0646 062D\0"
+  "<initial> 0646 062E\0"
+  "<initial> 0646 0645\0"
+  "<initial> 0646 0647\0"
+  "<initial> 0647 062C\0"
+  "<initial> 0647 0645\0"
+  "<initial> 0647 0670\0"
+  "<initial> 064A 062C\0"
+  "<initial> 064A 062D\0"
+  "<initial> 064A 062E\0"
+  "<initial> 064A 0645\0"
+  "<initial> 064A 0647\0"
+  "<medial> 0626 0645\0"
+  "<medial> 0626 0647\0"
+  "<medial> 0628 0645\0"
+  "<medial> 0628 0647\0"
+  "<medial> 062A 0645\0"
+  "<medial> 062A 0647\0"
+  "<medial> 062B 0645\0"
+  "<medial> 062B 0647\0"
+  "<medial> 0633 0645\0"
+  "<medial> 0633 0647\0"
+  "<medial> 0634 0645\0"
+  "<medial> 0634 0647\0"
+  "<medial> 0643 0644\0"
+  "<medial> 0643 0645\0"
+  "<medial> 0644 0645\0"
+  "<medial> 0646 0645\0"
+  "<medial> 0646 0647\0"
+  "<medial> 064A 0645\0"
+  "<medial> 064A 0647\0"
+  "<medial> 0640 064E 0651\0"
+  "<medial> 0640 064F 0651\0"
+  "<medial> 0640 0650 0651\0"
+  "<isolated> 0637 0649\0"
+  "<isolated> 0637 064A\0"
+  "<isolated> 0639 0649\0"
+  "<isolated> 0639 064A\0"
+  "<isolated> 063A 0649\0"
+  "<isolated> 063A 064A\0"
+  "<isolated> 0633 0649\0"
+  "<isolated> 0633 064A\0"
+  "<isolated> 0634 0649\0"
+  "<isolated> 0634 064A\0"
+  "<isolated> 062D 0649\0"
+  "<isolated> 062D 064A\0"
+  "<isolated> 062C 0649\0"
+  "<isolated> 062C 064A\0"
+  "<isolated> 062E 0649\0"
+  "<isolated> 062E 064A\0"
+  "<isolated> 0635 0649\0"
+  "<isolated> 0635 064A\0"
+  "<isolated> 0636 0649\0"
+  "<isolated> 0636 064A\0"
+  "<isolated> 0634 062C\0"
+  "<isolated> 0634 062D\0"
+  "<isolated> 0634 062E\0"
+  "<isolated> 0634 0645\0"
+  "<isolated> 0634 0631\0"
+  "<isolated> 0633 0631\0"
+  "<isolated> 0635 0631\0"
+  "<isolated> 0636 0631\0"
+  "<final> 0637 0649\0"
+  "<final> 0637 064A\0"
+  "<final> 0639 0649\0"
+  "<final> 0639 064A\0"
+  "<final> 063A 0649\0"
+  "<final> 063A 064A\0"
+  "<final> 0633 0649\0"
+  "<final> 0633 064A\0"
+  "<final> 0634 0649\0"
+  "<final> 0634 064A\0"
+  "<final> 062D 0649\0"
+  "<final> 062D 064A\0"
+  "<final> 062C 0649\0"
+  "<final> 062C 064A\0"
+  "<final> 062E 0649\0"
+  "<final> 062E 064A\0"
+  "<final> 0635 0649\0"
+  "<final> 0635 064A\0"
+  "<final> 0636 0649\0"
+  "<final> 0636 064A\0"
+  "<final> 0634 062C\0"
+  "<final> 0634 062D\0"
+  "<final> 0634 062E\0"
+  "<final> 0634 0645\0"
+  "<final> 0634 0631\0"
+  "<final> 0633 0631\0"
+  "<final> 0635 0631\0"
+  "<final> 0636 0631\0"
+  "<initial> 0634 062C\0"
+  "<initial> 0634 062D\0"
+  "<initial> 0634 062E\0"
+  "<initial> 0634 0645\0"
+  "<initial> 0633 0647\0"
+  "<initial> 0634 0647\0"
+  "<initial> 0637 0645\0"
+  "<medial> 0633 062C\0"
+  "<medial> 0633 062D\0"
+  "<medial> 0633 062E\0"
+  "<medial> 0634 062C\0"
+  "<medial> 0634 062D\0"
+  "<medial> 0634 062E\0"
+  "<medial> 0637 0645\0"
+  "<medial> 0638 0645\0"
+  "<final> 0627 064B\0"
+  "<isolated> 0627 064B\0"
+  "<initial> 062A 062C 0645\0"
+  "<final> 062A 062D 062C\0"
+  "<initial> 062A 062D 062C\0"
+  "<initial> 062A 062D 0645\0"
+  "<initial> 062A 062E 0645\0"
+  "<initial> 062A 0645 062C\0"
+  "<initial> 062A 0645 062D\0"
+  "<initial> 062A 0645 062E\0"
+  "<final> 062C 0645 062D\0"
+  "<initial> 062C 0645 062D\0"
+  "<final> 062D 0645 064A\0"
+  "<final> 062D 0645 0649\0"
+  "<initial> 0633 062D 062C\0"
+  "<initial> 0633 062C 062D\0"
+  "<final> 0633 062C 0649\0"
+  "<final> 0633 0645 062D\0"
+  "<initial> 0633 0645 062D\0"
+  "<initial> 0633 0645 062C\0"
+  "<final> 0633 0645 0645\0"
+  "<initial> 0633 0645 0645\0"
+  "<final> 0635 062D 062D\0"
+  "<initial> 0635 062D 062D\0"
+  "<final> 0635 0645 0645\0"
+  "<final> 0634 062D 0645\0"
+  "<initial> 0634 062D 0645\0"
+  "<final> 0634 062C 064A\0"
+  "<final> 0634 0645 062E\0"
+  "<initial> 0634 0645 062E\0"
+  "<final> 0634 0645 0645\0"
+  "<initial> 0634 0645 0645\0"
+  "<final> 0636 062D 0649\0"
+  "<final> 0636 062E 0645\0"
+  "<initial> 0636 062E 0645\0"
+  "<final> 0637 0645 062D\0"
+  "<initial> 0637 0645 062D\0"
+  "<initial> 0637 0645 0645\0"
+  "<final> 0637 0645 064A\0"
+  "<final> 0639 062C 0645\0"
+  "<final> 0639 0645 0645\0"
+  "<initial> 0639 0645 0645\0"
+  "<final> 0639 0645 0649\0"
+  "<final> 063A 0645 0645\0"
+  "<final> 063A 0645 064A\0"
+  "<final> 063A 0645 0649\0"
+  "<final> 0641 062E 0645\0"
+  "<initial> 0641 062E 0645\0"
+  "<final> 0642 0645 062D\0"
+  "<final> 0642 0645 0645\0"
+  "<final> 0644 062D 0645\0"
+  "<final> 0644 062D 064A\0"
+  "<final> 0644 062D 0649\0"
+  "<initial> 0644 062C 062C\0"
+  "<final> 0644 062C 062C\0"
+  "<final> 0644 062E 0645\0"
+  "<initial> 0644 062E 0645\0"
+  "<final> 0644 0645 062D\0"
+  "<initial> 0644 0645 062D\0"
+  "<initial> 0645 062D 062C\0"
+  "<initial> 0645 062D 0645\0"
+  "<final> 0645 062D 064A\0"
+  "<initial> 0645 062C 062D\0"
+  "<initial> 0645 062C 0645\0"
+  "<initial> 0645 062E 062C\0"
+  "<initial> 0645 062E 0645\0"
+  "<initial> 0645 062C 062E\0"
+  "<initial> 0647 0645 062C\0"
+  "<initial> 0647 0645 0645\0"
+  "<initial> 0646 062D 0645\0"
+  "<final> 0646 062D 0649\0"
+  "<final> 0646 062C 0645\0"
+  "<initial> 0646 062C 0645\0"
+  "<final> 0646 062C 0649\0"
+  "<final> 0646 0645 064A\0"
+  "<final> 0646 0645 0649\0"
+  "<final> 064A 0645 0645\0"
+  "<initial> 064A 0645 0645\0"
+  "<final> 0628 062E 064A\0"
+  "<final> 062A 062C 064A\0"
+  "<final> 062A 062C 0649\0"
+  "<final> 062A 062E 064A\0"
+  "<final> 062A 062E 0649\0"
+  "<final> 062A 0645 064A\0"
+  "<final> 062A 0645 0649\0"
+  "<final> 062C 0645 064A\0"
+  "<final> 062C 062D 0649\0"
+  "<final> 062C 0645 0649\0"
+  "<final> 0633 062E 0649\0"
+  "<final> 0635 062D 064A\0"
+  "<final> 0634 062D 064A\0"
+  "<final> 0636 062D 064A\0"
+  "<final> 0644 062C 064A\0"
+  "<final> 0644 0645 064A\0"
+  "<final> 064A 062D 064A\0"
+  "<final> 064A 062C 064A\0"
+  "<final> 064A 0645 064A\0"
+  "<final> 0645 0645 064A\0"
+  "<final> 0642 0645 064A\0"
+  "<final> 0646 062D 064A\0"
+  "<initial> 0642 0645 062D\0"
+  "<initial> 0644 062D 0645\0"
+  "<final> 0639 0645 064A\0"
+  "<final> 0643 0645 064A\0"
+  "<initial> 0646 062C 062D\0"
+  "<final> 0645 062E 064A\0"
+  "<initial> 0644 062C 0645\0"
+  "<final> 0643 0645 0645\0"
+  "<final> 0644 062C 0645\0"
+  "<final> 0646 062C 062D\0"
+  "<final> 062C 062D 064A\0"
+  "<final> 062D 062C 064A\0"
+  "<final> 0645 062C 064A\0"
+  "<final> 0641 0645 064A\0"
+  "<final> 0628 062D 064A\0"
+  "<initial> 0643 0645 0645\0"
+  "<initial> 0639 062C 0645\0"
+  "<initial> 0635 0645 0645\0"
+  "<final> 0633 062E 064A\0"
+  "<final> 0646 062C 064A\0"
+  "<isolated> 0635 0644 06D2\0"
+  "<isolated> 0642 0644 06D2\0"
+  "<isolated> 0627 0644 0644 0647\0"
+  "<isolated> 0627 0643 0628 0631\0"
+  "<isolated> 0645 062D 0645 062F\0"
+  "<isolated> 0635 0644 0639 0645\0"
+  "<isolated> 0631 0633 0648 0644\0"
+  "<isolated> 0639 0644 064A 0647\0"
+  "<isolated> 0648 0633 0644 0645\0"
+  "<isolated> 0635 0644 0649\0"
+  "<isolated> 0635 0644 0649 0020 0627 0644 0644 0647 0020 0639 0644 064A 0647 0020 0648 0633 0644 0645\0"
+  "<isolated> 062C 0644 0020 062C 0644 0627 0644 0647\0"
+  "<isolated> 0631 06CC 0627 0644\0"
+  "<vertical> 002C\0"
+  "<vertical> 3001\0"
+  "<vertical> 3002\0"
+  "<vertical> 003A\0"
+  "<vertical> 003B\0"
+  "<vertical> 0021\0"
+  "<vertical> 003F\0"
+  "<vertical> 3016\0"
+  "<vertical> 3017\0"
+  "<vertical> 2026\0"
+  "<vertical> 2025\0"
+  "<vertical> 2014\0"
+  "<vertical> 2013\0"
+  "<vertical> 005F\0"
+  "<vertical> 0028\0"
+  "<vertical> 0029\0"
+  "<vertical> 007B\0"
+  "<vertical> 007D\0"
+  "<vertical> 3014\0"
+  "<vertical> 3015\0"
+  "<vertical> 3010\0"
+  "<vertical> 3011\0"
+  "<vertical> 300A\0"
+  "<vertical> 300B\0"
+  "<vertical> 3008\0"
+  "<vertical> 3009\0"
+  "<vertical> 300C\0"
+  "<vertical> 300D\0"
+  "<vertical> 300E\0"
+  "<vertical> 300F\0"
+  "<vertical> 005B\0"
+  "<vertical> 005D\0"
+  "203E overline\0"
+  "005F low line\0"
+  "<small> 002C\0"
+  "<small> 3001\0"
+  "<small> 002E\0"
+  "<small> 003B\0"
+  "<small> 003A\0"
+  "<small> 003F\0"
+  "<small> 0021\0"
+  "<small> 2014\0"
+  "<small> 0028\0"
+  "<small> 0029\0"
+  "<small> 007B\0"
+  "<small> 007D\0"
+  "<small> 3014\0"
+  "<small> 3015\0"
+  "<small> 0023\0"
+  "<small> 0026\0"
+  "<small> 002A\0"
+  "<small> 002B\0"
+  "<small> 002D\0"
+  "<small> 003C\0"
+  "<small> 003E\0"
+  "<small> 003D\0"
+  "<small> 005C\0"
+  "<small> 0024\0"
+  "<small> 0025\0"
+  "<small> 0040\0"
+  "<isolated> 0020 064B\0"
+  "<medial> 0640 064B\0"
+  "<isolated> 0020 064C\0"
+  "<isolated> 0020 064D\0"
+  "<isolated> 0020 064E\0"
+  "<medial> 0640 064E\0"
+  "<isolated> 0020 064F\0"
+  "<medial> 0640 064F\0"
+  "<isolated> 0020 0650\0"
+  "<medial> 0640 0650\0"
+  "<isolated> 0020 0651\0"
+  "<medial> 0640 0651\0"
+  "<isolated> 0020 0652\0"
+  "<medial> 0640 0652\0"
+  "<isolated> 0621\0"
+  "<isolated> 0622\0"
+  "<final> 0622\0"
+  "<isolated> 0623\0"
+  "<final> 0623\0"
+  "<isolated> 0624\0"
+  "<final> 0624\0"
+  "<isolated> 0625\0"
+  "<final> 0625\0"
+  "<isolated> 0626\0"
+  "<final> 0626\0"
+  "<initial> 0626\0"
+  "<medial> 0626\0"
+  "<isolated> 0627\0"
+  "<final> 0627\0"
+  "<isolated> 0628\0"
+  "<final> 0628\0"
+  "<initial> 0628\0"
+  "<medial> 0628\0"
+  "<isolated> 0629\0"
+  "<final> 0629\0"
+  "<isolated> 062A\0"
+  "<final> 062A\0"
+  "<initial> 062A\0"
+  "<medial> 062A\0"
+  "<isolated> 062B\0"
+  "<final> 062B\0"
+  "<initial> 062B\0"
+  "<medial> 062B\0"
+  "<isolated> 062C\0"
+  "<final> 062C\0"
+  "<initial> 062C\0"
+  "<medial> 062C\0"
+  "<isolated> 062D\0"
+  "<final> 062D\0"
+  "<initial> 062D\0"
+  "<medial> 062D\0"
+  "<isolated> 062E\0"
+  "<final> 062E\0"
+  "<initial> 062E\0"
+  "<medial> 062E\0"
+  "<isolated> 062F\0"
+  "<final> 062F\0"
+  "<isolated> 0630\0"
+  "<final> 0630\0"
+  "<isolated> 0631\0"
+  "<final> 0631\0"
+  "<isolated> 0632\0"
+  "<final> 0632\0"
+  "<isolated> 0633\0"
+  "<final> 0633\0"
+  "<initial> 0633\0"
+  "<medial> 0633\0"
+  "<isolated> 0634\0"
+  "<final> 0634\0"
+  "<initial> 0634\0"
+  "<medial> 0634\0"
+  "<isolated> 0635\0"
+  "<final> 0635\0"
+  "<initial> 0635\0"
+  "<medial> 0635\0"
+  "<isolated> 0636\0"
+  "<final> 0636\0"
+  "<initial> 0636\0"
+  "<medial> 0636\0"
+  "<isolated> 0637\0"
+  "<final> 0637\0"
+  "<initial> 0637\0"
+  "<medial> 0637\0"
+  "<isolated> 0638\0"
+  "<final> 0638\0"
+  "<initial> 0638\0"
+  "<medial> 0638\0"
+  "<isolated> 0639\0"
+  "<final> 0639\0"
+  "<initial> 0639\0"
+  "<medial> 0639\0"
+  "<isolated> 063A\0"
+  "<final> 063A\0"
+  "<initial> 063A\0"
+  "<medial> 063A\0"
+  "<isolated> 0641\0"
+  "<final> 0641\0"
+  "<initial> 0641\0"
+  "<medial> 0641\0"
+  "<isolated> 0642\0"
+  "<final> 0642\0"
+  "<initial> 0642\0"
+  "<medial> 0642\0"
+  "<isolated> 0643\0"
+  "<final> 0643\0"
+  "<initial> 0643\0"
+  "<medial> 0643\0"
+  "<isolated> 0644\0"
+  "<final> 0644\0"
+  "<initial> 0644\0"
+  "<medial> 0644\0"
+  "<isolated> 0645\0"
+  "<final> 0645\0"
+  "<initial> 0645\0"
+  "<medial> 0645\0"
+  "<isolated> 0646\0"
+  "<final> 0646\0"
+  "<initial> 0646\0"
+  "<medial> 0646\0"
+  "<isolated> 0647\0"
+  "<final> 0647\0"
+  "<initial> 0647\0"
+  "<medial> 0647\0"
+  "<isolated> 0648\0"
+  "<final> 0648\0"
+  "<isolated> 0649\0"
+  "<final> 0649\0"
+  "<isolated> 064A\0"
+  "<final> 064A\0"
+  "<initial> 064A\0"
+  "<medial> 064A\0"
+  "<isolated> 0644 0622\0"
+  "<final> 0644 0622\0"
+  "<isolated> 0644 0623\0"
+  "<final> 0644 0623\0"
+  "<isolated> 0644 0625\0"
+  "<final> 0644 0625\0"
+  "<isolated> 0644 0627\0"
+  "<final> 0644 0627\0"
+  "<wide> 0021\0"
+  "<wide> 0022\0"
+  "<wide> 0023\0"
+  "<wide> 0024\0"
+  "<wide> 0025\0"
+  "<wide> 0026\0"
+  "<wide> 0027\0"
+  "<wide> 0028\0"
+  "<wide> 0029\0"
+  "<wide> 002A\0"
+  "<wide> 002B\0"
+  "<wide> 002C\0"
+  "<wide> 002D\0"
+  "<wide> 002E\0"
+  "<wide> 002F\0"
+  "<wide> 0030\0"
+  "<wide> 0031\0"
+  "<wide> 0032\0"
+  "<wide> 0033\0"
+  "<wide> 0034\0"
+  "<wide> 0035\0"
+  "<wide> 0036\0"
+  "<wide> 0037\0"
+  "<wide> 0038\0"
+  "<wide> 0039\0"
+  "<wide> 003A\0"
+  "<wide> 003B\0"
+  "<wide> 003C\0"
+  "<wide> 003D\0"
+  "<wide> 003E\0"
+  "<wide> 003F\0"
+  "<wide> 0040\0"
+  "<wide> 0041\0"
+  "<wide> 0042\0"
+  "<wide> 0043\0"
+  "<wide> 0044\0"
+  "<wide> 0045\0"
+  "<wide> 0046\0"
+  "<wide> 0047\0"
+  "<wide> 0048\0"
+  "<wide> 0049\0"
+  "<wide> 004A\0"
+  "<wide> 004B\0"
+  "<wide> 004C\0"
+  "<wide> 004D\0"
+  "<wide> 004E\0"
+  "<wide> 004F\0"
+  "<wide> 0050\0"
+  "<wide> 0051\0"
+  "<wide> 0052\0"
+  "<wide> 0053\0"
+  "<wide> 0054\0"
+  "<wide> 0055\0"
+  "<wide> 0056\0"
+  "<wide> 0057\0"
+  "<wide> 0058\0"
+  "<wide> 0059\0"
+  "<wide> 005A\0"
+  "<wide> 005B\0"
+  "<wide> 005C\0"
+  "<wide> 005D\0"
+  "<wide> 005E\0"
+  "<wide> 005F\0"
+  "<wide> 0060\0"
+  "<wide> 0061\0"
+  "<wide> 0062\0"
+  "<wide> 0063\0"
+  "<wide> 0064\0"
+  "<wide> 0065\0"
+  "<wide> 0066\0"
+  "<wide> 0067\0"
+  "<wide> 0068\0"
+  "<wide> 0069\0"
+  "<wide> 006A\0"
+  "<wide> 006B\0"
+  "<wide> 006C\0"
+  "<wide> 006D\0"
+  "<wide> 006E\0"
+  "<wide> 006F\0"
+  "<wide> 0070\0"
+  "<wide> 0071\0"
+  "<wide> 0072\0"
+  "<wide> 0073\0"
+  "<wide> 0074\0"
+  "<wide> 0075\0"
+  "<wide> 0076\0"
+  "<wide> 0077\0"
+  "<wide> 0078\0"
+  "<wide> 0079\0"
+  "<wide> 007A\0"
+  "<wide> 007B\0"
+  "<wide> 007C\0"
+  "<wide> 007D\0"
+  "<wide> 007E\0"
+  "<wide> 2985\0"
+  "<wide> 2986\0"
+  "<narrow> 3002\0"
+  "<narrow> 300C\0"
+  "<narrow> 300D\0"
+  "<narrow> 3001\0"
+  "<narrow> 30FB\0"
+  "<narrow> 30F2\0"
+  "<narrow> 30A1\0"
+  "<narrow> 30A3\0"
+  "<narrow> 30A5\0"
+  "<narrow> 30A7\0"
+  "<narrow> 30A9\0"
+  "<narrow> 30E3\0"
+  "<narrow> 30E5\0"
+  "<narrow> 30E7\0"
+  "<narrow> 30C3\0"
+  "<narrow> 30FC\0"
+  "<narrow> 30A2\0"
+  "<narrow> 30A4\0"
+  "<narrow> 30A6\0"
+  "<narrow> 30A8\0"
+  "<narrow> 30AA\0"
+  "<narrow> 30AB\0"
+  "<narrow> 30AD\0"
+  "<narrow> 30AF\0"
+  "<narrow> 30B1\0"
+  "<narrow> 30B3\0"
+  "<narrow> 30B5\0"
+  "<narrow> 30B7\0"
+  "<narrow> 30B9\0"
+  "<narrow> 30BB\0"
+  "<narrow> 30BD\0"
+  "<narrow> 30BF\0"
+  "<narrow> 30C1\0"
+  "<narrow> 30C4\0"
+  "<narrow> 30C6\0"
+  "<narrow> 30C8\0"
+  "<narrow> 30CA\0"
+  "<narrow> 30CB\0"
+  "<narrow> 30CC\0"
+  "<narrow> 30CD\0"
+  "<narrow> 30CE\0"
+  "<narrow> 30CF\0"
+  "<narrow> 30D2\0"
+  "<narrow> 30D5\0"
+  "<narrow> 30D8\0"
+  "<narrow> 30DB\0"
+  "<narrow> 30DE\0"
+  "<narrow> 30DF\0"
+  "<narrow> 30E0\0"
+  "<narrow> 30E1\0"
+  "<narrow> 30E2\0"
+  "<narrow> 30E4\0"
+  "<narrow> 30E6\0"
+  "<narrow> 30E8\0"
+  "<narrow> 30E9\0"
+  "<narrow> 30EA\0"
+  "<narrow> 30EB\0"
+  "<narrow> 30EC\0"
+  "<narrow> 30ED\0"
+  "<narrow> 30EF\0"
+  "<narrow> 30F3\0"
+  "<narrow> 3099\0"
+  "<narrow> 309A\0"
+  "<narrow> 3164\0"
+  "<narrow> 3131\0"
+  "<narrow> 3132\0"
+  "<narrow> 3133\0"
+  "<narrow> 3134\0"
+  "<narrow> 3135\0"
+  "<narrow> 3136\0"
+  "<narrow> 3137\0"
+  "<narrow> 3138\0"
+  "<narrow> 3139\0"
+  "<narrow> 313A\0"
+  "<narrow> 313B\0"
+  "<narrow> 313C\0"
+  "<narrow> 313D\0"
+  "<narrow> 313E\0"
+  "<narrow> 313F\0"
+  "<narrow> 3140\0"
+  "<narrow> 3141\0"
+  "<narrow> 3142\0"
+  "<narrow> 3143\0"
+  "<narrow> 3144\0"
+  "<narrow> 3145\0"
+  "<narrow> 3146\0"
+  "<narrow> 3147\0"
+  "<narrow> 3148\0"
+  "<narrow> 3149\0"
+  "<narrow> 314A\0"
+  "<narrow> 314B\0"
+  "<narrow> 314C\0"
+  "<narrow> 314D\0"
+  "<narrow> 314E\0"
+  "<narrow> 314F\0"
+  "<narrow> 3150\0"
+  "<narrow> 3151\0"
+  "<narrow> 3152\0"
+  "<narrow> 3153\0"
+  "<narrow> 3154\0"
+  "<narrow> 3155\0"
+  "<narrow> 3156\0"
+  "<narrow> 3157\0"
+  "<narrow> 3158\0"
+  "<narrow> 3159\0"
+  "<narrow> 315A\0"
+  "<narrow> 315B\0"
+  "<narrow> 315C\0"
+  "<narrow> 315D\0"
+  "<narrow> 315E\0"
+  "<narrow> 315F\0"
+  "<narrow> 3160\0"
+  "<narrow> 3161\0"
+  "<narrow> 3162\0"
+  "<narrow> 3163\0"
+  "<wide> 00A2\0"
+  "<wide> 00A3\0"
+  "<wide> 00AC\0"
+  "<wide> 00AF\0"
+  "<wide> 00A6\0"
+  "<wide> 00A5\0"
+  "<wide> 20A9\0"
+  "<narrow> 2502\0"
+  "<narrow> 2190\0"
+  "<narrow> 2191\0"
+  "<narrow> 2192\0"
+  "<narrow> 2193\0"
+  "<narrow> 25A0\0"
+  "<narrow> 25CB\0"
+  "<font> 0041 latin capital letter a\0"
+  "<font> 0047 latin capital letter g\0"
+  "<font> 004A latin capital letter j\0"
+  "<font> 004B latin capital letter k\0"
+  "<font> 004F latin capital letter o\0"
+  "<font> 0053 latin capital letter s\0"
+  "<font> 0054 latin capital letter t\0"
+  "<font> 0055 latin capital letter u\0"
+  "<font> 0056 latin capital letter v\0"
+  "<font> 0057 latin capital letter w\0"
+  "<font> 0058 latin capital letter x\0"
+  "<font> 0059 latin capital letter y\0"
+  "<font> 0061 latin small letter a\0"
+  "<font> 0062 latin small letter b\0"
+  "<font> 0063 latin small letter c\0"
+  "<font> 0066 latin small letter f\0"
+  "<font> 006B latin small letter k\0"
+  "<font> 006D latin small letter m\0"
+  "<font> 006E latin small letter n\0"
+  "<font> 0070 latin small letter p\0"
+  "<font> 0071 latin small letter q\0"
+  "<font> 0072 latin small letter r\0"
+  "<font> 0073 latin small letter s\0"
+  "<font> 0074 latin small letter t\0"
+  "<font> 0075 latin small letter u\0"
+  "<font> 0076 latin small letter v\0"
+  "<font> 0077 latin small letter w\0"
+  "<font> 0078 latin small letter x\0"
+  "<font> 0079 latin small letter y\0"
+  "<font> 007A latin small letter z\0"
+  "<font> 0131 latin small letter dotless i\0"
+  "<font> 0237 latin small letter dotless j\0"
+  "<font> 0391 greek capital letter alpha\0"
+  "<font> 0392 greek capital letter beta\0"
+  "<font> 0394 greek capital letter delta\0"
+  "<font> 0395 greek capital letter epsilon\0"
+  "<font> 0396 greek capital letter zeta\0"
+  "<font> 0397 greek capital letter eta\0"
+  "<font> 0398 greek capital letter theta\0"
+  "<font> 0399 greek capital letter iota\0"
+  "<font> 039A greek capital letter kappa\0"
+  "<font> 039B greek capital letter lamda\0"
+  "<font> 039C greek capital letter mu\0"
+  "<font> 039D greek capital letter nu\0"
+  "<font> 039E greek capital letter xi\0"
+  "<font> 039F greek capital letter omicron\0"
+  "<font> 03A1 greek capital letter rho\0"
+  "<font> 03F4 greek capital theta symbol\0"
+  "<font> 03A3 greek capital letter sigma\0"
+  "<font> 03A4 greek capital letter tau\0"
+  "<font> 03A5 greek capital letter upsilon\0"
+  "<font> 03A6 greek capital letter phi\0"
+  "<font> 03A7 greek capital letter chi\0"
+  "<font> 03A8 greek capital letter psi\0"
+  "<font> 03A9 greek capital letter omega\0"
+  "<font> 2207 nabla\0"
+  "<font> 03B1 greek small letter alpha\0"
+  "<font> 03B2 greek small letter beta\0"
+  "<font> 03B4 greek small letter delta\0"
+  "<font> 03B5 greek small letter epsilon\0"
+  "<font> 03B6 greek small letter zeta\0"
+  "<font> 03B7 greek small letter eta\0"
+  "<font> 03B8 greek small letter theta\0"
+  "<font> 03B9 greek small letter iota\0"
+  "<font> 03BA greek small letter kappa\0"
+  "<font> 03BB greek small letter lamda\0"
+  "<font> 03BC greek small letter mu\0"
+  "<font> 03BD greek small letter nu\0"
+  "<font> 03BE greek small letter xi\0"
+  "<font> 03BF greek small letter omicron\0"
+  "<font> 03C1 greek small letter rho\0"
+  "<font> 03C2 greek small letter final sigma\0"
+  "<font> 03C3 greek small letter sigma\0"
+  "<font> 03C4 greek small letter tau\0"
+  "<font> 03C5 greek small letter upsilon\0"
+  "<font> 03C6 greek small letter phi\0"
+  "<font> 03C7 greek small letter chi\0"
+  "<font> 03C8 greek small letter psi\0"
+  "<font> 03C9 greek small letter omega\0"
+  "<font> 2202 partial differential\0"
+  "<font> 03F5 greek lunate epsilon symbol\0"
+  "<font> 03D1 greek theta symbol\0"
+  "<font> 03F0 greek kappa symbol\0"
+  "<font> 03D5 greek phi symbol\0"
+  "<font> 03F1 greek rho symbol\0"
+  "<font> 03D6 greek pi symbol\0"
+  "<font> 03DC greek letter digamma\0"
+  "<font> 03DD greek small letter digamma\0"
+  "<font> 0030 digit zero\0"
+  "<font> 0031 digit one\0"
+  "<font> 0032 digit two\0"
+  "<font> 0033 digit three\0"
+  "<font> 0034 digit four\0"
+  "<font> 0035 digit five\0"
+  "<font> 0036 digit six\0"
+  "<font> 0037 digit seven\0"
+  "<font> 0038 digit eight\0"
+  "<font> 0039 digit nine\0"
+  ;
+
+static const UnicharStringIndex names_list_pounds[] = 
 {
-  { 0x00A0, "<noBreak> 0020" },
-  { 0x00A8, "0020 0308" },
-  { 0x00AA, "<super> 0061" },
-  { 0x00AF, "0020 0304" },
-  { 0x00B2, "<super> 0032" },
-  { 0x00B3, "<super> 0033" },
-  { 0x00B4, "0020 0301" },
-  { 0x00B5, "03BC greek small letter mu" },
-  { 0x00B8, "0020 0327" },
-  { 0x00B9, "<super> 0031" },
-  { 0x00BA, "<super> 006F" },
-  { 0x00BC, "<fraction> 0031 2044 0034" },
-  { 0x00BD, "<fraction> 0031 2044 0032" },
-  { 0x00BE, "<fraction> 0033 2044 0034" },
-  { 0x0132, "0049 004A" },
-  { 0x0133, "0069 006A" },
-  { 0x013F, "004C 00B7" },
-  { 0x0140, "006C 00B7" },
-  { 0x0149, "02BC 006E" },
-  { 0x017F, "0073 latin small letter s" },
-  { 0x01C4, "0044 017D" },
-  { 0x01C5, "0044 017E" },
-  { 0x01C6, "0064 017E" },
-  { 0x01C7, "004C 004A" },
-  { 0x01C8, "004C 006A" },
-  { 0x01C9, "006C 006A" },
-  { 0x01CA, "004E 004A" },
-  { 0x01CB, "004E 006A" },
-  { 0x01CC, "006E 006A" },
-  { 0x01F1, "0044 005A" },
-  { 0x01F2, "0044 007A" },
-  { 0x01F3, "0064 007A" },
-  { 0x02B0, "<super> 0068" },
-  { 0x02B1, "<super> 0266" },
-  { 0x02B2, "<super> 006A" },
-  { 0x02B3, "<super> 0072" },
-  { 0x02B4, "<super> 0279" },
-  { 0x02B5, "<super> 027B" },
-  { 0x02B6, "<super> 0281" },
-  { 0x02B7, "<super> 0077" },
-  { 0x02B8, "<super> 0079" },
-  { 0x02D8, "0020 0306" },
-  { 0x02D9, "0020 0307" },
-  { 0x02DA, "0020 030A" },
-  { 0x02DB, "0020 0328" },
-  { 0x02DC, "0020 0303" },
-  { 0x02DD, "0020 030B" },
-  { 0x02E0, "<super> 0263" },
-  { 0x02E1, "<super> 006C" },
-  { 0x02E2, "<super> 0073" },
-  { 0x02E3, "<super> 0078" },
-  { 0x02E4, "<super> 0295" },
-  { 0x037A, "0020 0345" },
-  { 0x0384, "0020 0301" },
-  { 0x03D0, "03B2 greek small letter beta" },
-  { 0x03D1, "03B8 greek small letter theta" },
-  { 0x03D2, "03A5 greek capital letter upsilon" },
-  { 0x03D5, "03C6 greek small letter phi" },
-  { 0x03D6, "03C0 greek small letter pi" },
-  { 0x03F0, "03BA greek small letter kappa" },
-  { 0x03F1, "03C1 greek small letter rho" },
-  { 0x03F2, "03C2 greek small letter final sigma" },
-  { 0x03F4, "0398 greek capital letter theta" },
-  { 0x03F5, "03B5 greek small letter epsilon" },
-  { 0x03F9, "03A3 greek capital letter sigma" },
-  { 0x0587, "0565 0582" },
-  { 0x0675, "0627 0674" },
-  { 0x0676, "0648 0674" },
-  { 0x0677, "06C7 0674" },
-  { 0x0678, "064A 0674" },
-  { 0x0E33, "0E4D 0E32" },
-  { 0x0EB3, "0ECD 0EB2" },
-  { 0x0EDC, "0EAB 0E99" },
-  { 0x0EDD, "0EAB 0EA1" },
-  { 0x0F0C, "<noBreak> 0F0B" },
-  { 0x0F77, "0FB2 0F81" },
-  { 0x0F79, "0FB3 0F81" },
-  { 0x10FC, "<super> 10DC" },
-  { 0x1D2C, "<super> 0041" },
-  { 0x1D2D, "<super> 00C6" },
-  { 0x1D2E, "<super> 0042" },
-  { 0x1D30, "<super> 0044" },
-  { 0x1D31, "<super> 0045" },
-  { 0x1D32, "<super> 018E" },
-  { 0x1D33, "<super> 0047" },
-  { 0x1D34, "<super> 0048" },
-  { 0x1D35, "<super> 0049" },
-  { 0x1D36, "<super> 004A" },
-  { 0x1D37, "<super> 004B" },
-  { 0x1D38, "<super> 004C" },
-  { 0x1D39, "<super> 004D" },
-  { 0x1D3A, "<super> 004E" },
-  { 0x1D3C, "<super> 004F" },
-  { 0x1D3D, "<super> 0222" },
-  { 0x1D3E, "<super> 0050" },
-  { 0x1D3F, "<super> 0052" },
-  { 0x1D40, "<super> 0054" },
-  { 0x1D41, "<super> 0055" },
-  { 0x1D42, "<super> 0057" },
-  { 0x1D43, "<super> 0061" },
-  { 0x1D44, "<super> 0250" },
-  { 0x1D45, "<super> 0251" },
-  { 0x1D46, "<super> 1D02" },
-  { 0x1D47, "<super> 0062" },
-  { 0x1D48, "<super> 0064" },
-  { 0x1D49, "<super> 0065" },
-  { 0x1D4A, "<super> 0259" },
-  { 0x1D4B, "<super> 025B" },
-  { 0x1D4C, "<super> 025C" },
-  { 0x1D4D, "<super> 0067" },
-  { 0x1D4F, "<super> 006B" },
-  { 0x1D50, "<super> 006D" },
-  { 0x1D51, "<super> 014B" },
-  { 0x1D52, "<super> 006F" },
-  { 0x1D53, "<super> 0254" },
-  { 0x1D54, "<super> 1D16" },
-  { 0x1D55, "<super> 1D17" },
-  { 0x1D56, "<super> 0070" },
-  { 0x1D57, "<super> 0074" },
-  { 0x1D58, "<super> 0075" },
-  { 0x1D59, "<super> 1D1D" },
-  { 0x1D5A, "<super> 026F" },
-  { 0x1D5B, "<super> 0076" },
-  { 0x1D5C, "<super> 1D25" },
-  { 0x1D5D, "<super> 03B2" },
-  { 0x1D5E, "<super> 03B3" },
-  { 0x1D5F, "<super> 03B4" },
-  { 0x1D60, "<super> 03C6" },
-  { 0x1D61, "<super> 03C7" },
-  { 0x1D62, "<sub> 0069" },
-  { 0x1D63, "<sub> 0072" },
-  { 0x1D64, "<sub> 0075" },
-  { 0x1D65, "<sub> 0076" },
-  { 0x1D66, "<sub> 03B2" },
-  { 0x1D67, "<sub> 03B3" },
-  { 0x1D68, "<sub> 03C1" },
-  { 0x1D69, "<sub> 03C6" },
-  { 0x1D6A, "<sub> 03C7" },
-  { 0x1D78, "<super> 043D" },
-  { 0x1D9B, "<super> 0252" },
-  { 0x1D9C, "<super> 0063" },
-  { 0x1D9D, "<super> 0255" },
-  { 0x1D9E, "<super> 00F0" },
-  { 0x1D9F, "<super> 025C" },
-  { 0x1DA0, "<super> 0066" },
-  { 0x1DA1, "<super> 025F" },
-  { 0x1DA2, "<super> 0261" },
-  { 0x1DA3, "<super> 0265" },
-  { 0x1DA4, "<super> 0268" },
-  { 0x1DA5, "<super> 0269" },
-  { 0x1DA6, "<super> 026A" },
-  { 0x1DA7, "<super> 1D7B" },
-  { 0x1DA8, "<super> 029D" },
-  { 0x1DA9, "<super> 026D" },
-  { 0x1DAA, "<super> 1D85" },
-  { 0x1DAB, "<super> 029F" },
-  { 0x1DAC, "<super> 0271" },
-  { 0x1DAD, "<super> 0270" },
-  { 0x1DAE, "<super> 0272" },
-  { 0x1DAF, "<super> 0273" },
-  { 0x1DB0, "<super> 0274" },
-  { 0x1DB1, "<super> 0275" },
-  { 0x1DB2, "<super> 0278" },
-  { 0x1DB3, "<super> 0282" },
-  { 0x1DB4, "<super> 0283" },
-  { 0x1DB5, "<super> 01AB" },
-  { 0x1DB6, "<super> 0289" },
-  { 0x1DB7, "<super> 028A" },
-  { 0x1DB8, "<super> 1D1C" },
-  { 0x1DB9, "<super> 028B" },
-  { 0x1DBA, "<super> 028C" },
-  { 0x1DBB, "<super> 007A" },
-  { 0x1DBC, "<super> 0290" },
-  { 0x1DBD, "<super> 0291" },
-  { 0x1DBE, "<super> 0292" },
-  { 0x1DBF, "<super> 03B8" },
-  { 0x1E9A, "0061 02BE" },
-  { 0x1FBD, "0020 0313" },
-  { 0x1FBF, "0020 0313" },
-  { 0x1FC0, "0020 0342" },
-  { 0x1FFE, "0020 0314" },
-  { 0x2002, "0020 space" },
-  { 0x2003, "0020 space" },
-  { 0x2004, "0020 space" },
-  { 0x2005, "0020 space" },
-  { 0x2006, "0020 space" },
-  { 0x2007, "<noBreak> 0020" },
-  { 0x2008, "0020 space" },
-  { 0x2009, "0020 space" },
-  { 0x200A, "0020 space" },
-  { 0x2011, "<noBreak> 2010" },
-  { 0x2017, "0020 0333" },
-  { 0x2024, "002E full stop" },
-  { 0x2025, "002E 002E" },
-  { 0x2026, "002E 002E 002E" },
-  { 0x202F, "<noBreak> 0020" },
-  { 0x2033, "2032 2032" },
-  { 0x2034, "2032 2032 2032" },
-  { 0x2036, "2035 2035" },
-  { 0x2037, "2035 2035 2035" },
-  { 0x203C, "0021 0021" },
-  { 0x203E, "0020 0305" },
-  { 0x2047, "003F 003F" },
-  { 0x2048, "003F 0021" },
-  { 0x2049, "0021 003F" },
-  { 0x2057, "2032 2032 2032 2032" },
-  { 0x205F, "0020 space" },
-  { 0x2070, "<super> 0030" },
-  { 0x2071, "<super> 0069" },
-  { 0x2074, "<super> 0034" },
-  { 0x2075, "<super> 0035" },
-  { 0x2076, "<super> 0036" },
-  { 0x2077, "<super> 0037" },
-  { 0x2078, "<super> 0038" },
-  { 0x2079, "<super> 0039" },
-  { 0x207A, "<super> 002B" },
-  { 0x207B, "<super> 2212" },
-  { 0x207C, "<super> 003D" },
-  { 0x207D, "<super> 0028" },
-  { 0x207E, "<super> 0029" },
-  { 0x207F, "<super> 006E" },
-  { 0x2080, "<sub> 0030" },
-  { 0x2081, "<sub> 0031" },
-  { 0x2082, "<sub> 0032" },
-  { 0x2083, "<sub> 0033" },
-  { 0x2084, "<sub> 0034" },
-  { 0x2085, "<sub> 0035" },
-  { 0x2086, "<sub> 0036" },
-  { 0x2087, "<sub> 0037" },
-  { 0x2088, "<sub> 0038" },
-  { 0x2089, "<sub> 0039" },
-  { 0x208A, "<sub> 002B" },
-  { 0x208B, "<sub> 2212" },
-  { 0x208C, "<sub> 003D" },
-  { 0x208D, "<sub> 0028" },
-  { 0x208E, "<sub> 0029" },
-  { 0x2090, "<sub> 0061" },
-  { 0x2091, "<sub> 0065" },
-  { 0x2092, "<sub> 006F" },
-  { 0x2093, "<sub> 0078" },
-  { 0x2094, "<sub> 0259" },
-  { 0x20A8, "0052 0073" },
-  { 0x2100, "0061 002F 0063" },
-  { 0x2101, "0061 002F 0073" },
-  { 0x2102, "<font> 0043 latin capital letter c" },
-  { 0x2103, "00B0 0043" },
-  { 0x2105, "0063 002F 006F" },
-  { 0x2106, "0063 002F 0075" },
-  { 0x2107, "0190 latin capital letter open e" },
-  { 0x2109, "00B0 0046" },
-  { 0x210A, "<font> 0067 latin small letter g" },
-  { 0x210B, "<font> 0048 latin capital letter h" },
-  { 0x210C, "<font> 0048 latin capital letter h" },
-  { 0x210D, "<font> 0048 latin capital letter h" },
-  { 0x210E, "<font> 0068 latin small letter h" },
-  { 0x210F, "<font> 0127 latin small letter h with stroke" },
-  { 0x2110, "<font> 0049 latin capital letter i" },
-  { 0x2111, "<font> 0049 latin capital letter i" },
-  { 0x2112, "<font> 004C latin capital letter l" },
-  { 0x2113, "<font> 006C latin small letter l" },
-  { 0x2115, "<font> 004E latin capital letter n" },
-  { 0x2116, "004E 006F" },
-  { 0x2119, "<font> 0050 latin capital letter p" },
-  { 0x211A, "<font> 0051 latin capital letter q" },
-  { 0x211B, "<font> 0052 latin capital letter r" },
-  { 0x211C, "<font> 0052 latin capital letter r" },
-  { 0x211D, "<font> 0052 latin capital letter r" },
-  { 0x2120, "<super> 0053 004D" },
-  { 0x2121, "0054 0045 004C" },
-  { 0x2122, "<super> 0054 004D" },
-  { 0x2124, "<font> 005A latin capital letter z" },
-  { 0x2128, "<font> 005A latin capital letter z" },
-  { 0x212C, "<font> 0042 latin capital letter b" },
-  { 0x212D, "<font> 0043 latin capital letter c" },
-  { 0x212F, "<font> 0065 latin small letter e" },
-  { 0x2130, "<font> 0045 latin capital letter e" },
-  { 0x2131, "<font> 0046 latin capital letter f" },
-  { 0x2133, "<font> 004D latin capital letter m" },
-  { 0x2134, "<font> 006F latin small letter o" },
-  { 0x2135, "05D0 hebrew letter alef" },
-  { 0x2136, "05D1 hebrew letter bet" },
-  { 0x2137, "05D2 hebrew letter gimel" },
-  { 0x2138, "05D3 hebrew letter dalet" },
-  { 0x2139, "<font> 0069 latin small letter i" },
-  { 0x213B, "0046 0041 0058" },
-  { 0x213C, "<font> 03C0 greek small letter pi" },
-  { 0x213D, "<font> 03B3 greek small letter gamma" },
-  { 0x213E, "<font> 0393 greek capital letter gamma" },
-  { 0x213F, "<font> 03A0 greek capital letter pi" },
-  { 0x2140, "<font> 2211 n-ary summation" },
-  { 0x2145, "<font> 0044 latin capital letter d" },
-  { 0x2146, "<font> 0064 latin small letter d" },
-  { 0x2147, "<font> 0065 latin small letter e" },
-  { 0x2148, "<font> 0069 latin small letter i" },
-  { 0x2149, "<font> 006A latin small letter j" },
-  { 0x2153, "<fraction> 0031 2044 0033" },
-  { 0x2154, "<fraction> 0032 2044 0033" },
-  { 0x2155, "<fraction> 0031 2044 0035" },
-  { 0x2156, "<fraction> 0032 2044 0035" },
-  { 0x2157, "<fraction> 0033 2044 0035" },
-  { 0x2158, "<fraction> 0034 2044 0035" },
-  { 0x2159, "<fraction> 0031 2044 0036" },
-  { 0x215A, "<fraction> 0035 2044 0036" },
-  { 0x215B, "<fraction> 0031 2044 0038" },
-  { 0x215C, "<fraction> 0033 2044 0038" },
-  { 0x215D, "<fraction> 0035 2044 0038" },
-  { 0x215E, "<fraction> 0037 2044 0038" },
-  { 0x215F, "<fraction> 0031 2044" },
-  { 0x2160, "0049 latin capital letter i" },
-  { 0x2161, "0049 0049" },
-  { 0x2162, "0049 0049 0049" },
-  { 0x2163, "0049 0056" },
-  { 0x2164, "0056 latin capital letter v" },
-  { 0x2165, "0056 0049" },
-  { 0x2166, "0056 0049 0049" },
-  { 0x2167, "0056 0049 0049 0049" },
-  { 0x2168, "0049 0058" },
-  { 0x2169, "0058 latin capital letter x" },
-  { 0x216A, "0058 0049" },
-  { 0x216B, "0058 0049 0049" },
-  { 0x216C, "004C latin capital letter l" },
-  { 0x216D, "0043 latin capital letter c" },
-  { 0x216E, "0044 latin capital letter d" },
-  { 0x216F, "004D latin capital letter m" },
-  { 0x2170, "0069 latin small letter i" },
-  { 0x2171, "0069 0069" },
-  { 0x2172, "0069 0069 0069" },
-  { 0x2173, "0069 0076" },
-  { 0x2174, "0076 latin small letter v" },
-  { 0x2175, "0076 0069" },
-  { 0x2176, "0076 0069 0069" },
-  { 0x2177, "0076 0069 0069 0069" },
-  { 0x2178, "0069 0078" },
-  { 0x2179, "0078 latin small letter x" },
-  { 0x217A, "0078 0069" },
-  { 0x217B, "0078 0069 0069" },
-  { 0x217C, "006C latin small letter l" },
-  { 0x217D, "0063 latin small letter c" },
-  { 0x217E, "0064 latin small letter d" },
-  { 0x217F, "006D latin small letter m" },
-  { 0x222C, "222B 222B" },
-  { 0x222D, "222B 222B 222B" },
-  { 0x222F, "222E 222E" },
-  { 0x2230, "222E 222E 222E" },
-  { 0x2460, "<circle> 0031" },
-  { 0x2461, "<circle> 0032" },
-  { 0x2462, "<circle> 0033" },
-  { 0x2463, "<circle> 0034" },
-  { 0x2464, "<circle> 0035" },
-  { 0x2465, "<circle> 0036" },
-  { 0x2466, "<circle> 0037" },
-  { 0x2467, "<circle> 0038" },
-  { 0x2468, "<circle> 0039" },
-  { 0x2469, "<circle> 0031 0030" },
-  { 0x246A, "<circle> 0031 0031" },
-  { 0x246B, "<circle> 0031 0032" },
-  { 0x246C, "<circle> 0031 0033" },
-  { 0x246D, "<circle> 0031 0034" },
-  { 0x246E, "<circle> 0031 0035" },
-  { 0x246F, "<circle> 0031 0036" },
-  { 0x2470, "<circle> 0031 0037" },
-  { 0x2471, "<circle> 0031 0038" },
-  { 0x2472, "<circle> 0031 0039" },
-  { 0x2473, "<circle> 0032 0030" },
-  { 0x2474, "0028 0031 0029" },
-  { 0x2475, "0028 0032 0029" },
-  { 0x2476, "0028 0033 0029" },
-  { 0x2477, "0028 0034 0029" },
-  { 0x2478, "0028 0035 0029" },
-  { 0x2479, "0028 0036 0029" },
-  { 0x247A, "0028 0037 0029" },
-  { 0x247B, "0028 0038 0029" },
-  { 0x247C, "0028 0039 0029" },
-  { 0x247D, "0028 0031 0030 0029" },
-  { 0x247E, "0028 0031 0031 0029" },
-  { 0x247F, "0028 0031 0032 0029" },
-  { 0x2480, "0028 0031 0033 0029" },
-  { 0x2481, "0028 0031 0034 0029" },
-  { 0x2482, "0028 0031 0035 0029" },
-  { 0x2483, "0028 0031 0036 0029" },
-  { 0x2484, "0028 0031 0037 0029" },
-  { 0x2485, "0028 0031 0038 0029" },
-  { 0x2486, "0028 0031 0039 0029" },
-  { 0x2487, "0028 0032 0030 0029" },
-  { 0x2488, "0031 002E" },
-  { 0x2489, "0032 002E" },
-  { 0x248A, "0033 002E" },
-  { 0x248B, "0034 002E" },
-  { 0x248C, "0035 002E" },
-  { 0x248D, "0036 002E" },
-  { 0x248E, "0037 002E" },
-  { 0x248F, "0038 002E" },
-  { 0x2490, "0039 002E" },
-  { 0x2491, "0031 0030 002E" },
-  { 0x2492, "0031 0031 002E" },
-  { 0x2493, "0031 0032 002E" },
-  { 0x2494, "0031 0033 002E" },
-  { 0x2495, "0031 0034 002E" },
-  { 0x2496, "0031 0035 002E" },
-  { 0x2497, "0031 0036 002E" },
-  { 0x2498, "0031 0037 002E" },
-  { 0x2499, "0031 0038 002E" },
-  { 0x249A, "0031 0039 002E" },
-  { 0x249B, "0032 0030 002E" },
-  { 0x249C, "0028 0061 0029" },
-  { 0x249D, "0028 0062 0029" },
-  { 0x249E, "0028 0063 0029" },
-  { 0x249F, "0028 0064 0029" },
-  { 0x24A0, "0028 0065 0029" },
-  { 0x24A1, "0028 0066 0029" },
-  { 0x24A2, "0028 0067 0029" },
-  { 0x24A3, "0028 0068 0029" },
-  { 0x24A4, "0028 0069 0029" },
-  { 0x24A5, "0028 006A 0029" },
-  { 0x24A6, "0028 006B 0029" },
-  { 0x24A7, "0028 006C 0029" },
-  { 0x24A8, "0028 006D 0029" },
-  { 0x24A9, "0028 006E 0029" },
-  { 0x24AA, "0028 006F 0029" },
-  { 0x24AB, "0028 0070 0029" },
-  { 0x24AC, "0028 0071 0029" },
-  { 0x24AD, "0028 0072 0029" },
-  { 0x24AE, "0028 0073 0029" },
-  { 0x24AF, "0028 0074 0029" },
-  { 0x24B0, "0028 0075 0029" },
-  { 0x24B1, "0028 0076 0029" },
-  { 0x24B2, "0028 0077 0029" },
-  { 0x24B3, "0028 0078 0029" },
-  { 0x24B4, "0028 0079 0029" },
-  { 0x24B5, "0028 007A 0029" },
-  { 0x24B6, "<circle> 0041" },
-  { 0x24B7, "<circle> 0042" },
-  { 0x24B8, "<circle> 0043" },
-  { 0x24B9, "<circle> 0044" },
-  { 0x24BA, "<circle> 0045" },
-  { 0x24BB, "<circle> 0046" },
-  { 0x24BC, "<circle> 0047" },
-  { 0x24BD, "<circle> 0048" },
-  { 0x24BE, "<circle> 0049" },
-  { 0x24BF, "<circle> 004A" },
-  { 0x24C0, "<circle> 004B" },
-  { 0x24C1, "<circle> 004C" },
-  { 0x24C2, "<circle> 004D" },
-  { 0x24C3, "<circle> 004E" },
-  { 0x24C4, "<circle> 004F" },
-  { 0x24C5, "<circle> 0050" },
-  { 0x24C6, "<circle> 0051" },
-  { 0x24C7, "<circle> 0052" },
-  { 0x24C8, "<circle> 0053" },
-  { 0x24C9, "<circle> 0054" },
-  { 0x24CA, "<circle> 0055" },
-  { 0x24CB, "<circle> 0056" },
-  { 0x24CC, "<circle> 0057" },
-  { 0x24CD, "<circle> 0058" },
-  { 0x24CE, "<circle> 0059" },
-  { 0x24CF, "<circle> 005A" },
-  { 0x24D0, "<circle> 0061" },
-  { 0x24D1, "<circle> 0062" },
-  { 0x24D2, "<circle> 0063" },
-  { 0x24D3, "<circle> 0064" },
-  { 0x24D4, "<circle> 0065" },
-  { 0x24D5, "<circle> 0066" },
-  { 0x24D6, "<circle> 0067" },
-  { 0x24D7, "<circle> 0068" },
-  { 0x24D8, "<circle> 0069" },
-  { 0x24D9, "<circle> 006A" },
-  { 0x24DA, "<circle> 006B" },
-  { 0x24DB, "<circle> 006C" },
-  { 0x24DC, "<circle> 006D" },
-  { 0x24DD, "<circle> 006E" },
-  { 0x24DE, "<circle> 006F" },
-  { 0x24DF, "<circle> 0070" },
-  { 0x24E0, "<circle> 0071" },
-  { 0x24E1, "<circle> 0072" },
-  { 0x24E2, "<circle> 0073" },
-  { 0x24E3, "<circle> 0074" },
-  { 0x24E4, "<circle> 0075" },
-  { 0x24E5, "<circle> 0076" },
-  { 0x24E6, "<circle> 0077" },
-  { 0x24E7, "<circle> 0078" },
-  { 0x24E8, "<circle> 0079" },
-  { 0x24E9, "<circle> 007A" },
-  { 0x24EA, "<circle> 0030" },
-  { 0x2A0C, "222B 222B 222B 222B" },
-  { 0x2A74, "003A 003A 003D" },
-  { 0x2A75, "003D 003D" },
-  { 0x2A76, "003D 003D 003D" },
-  { 0x2D6F, "<super> 2D61" },
-  { 0x2E9F, "6BCD" },
-  { 0x2EF3, "9F9F" },
-  { 0x2F00, "4E00" },
-  { 0x2F01, "4E28" },
-  { 0x2F02, "4E36" },
-  { 0x2F03, "4E3F" },
-  { 0x2F04, "4E59" },
-  { 0x2F05, "4E85" },
-  { 0x2F06, "4E8C" },
-  { 0x2F07, "4EA0" },
-  { 0x2F08, "4EBA" },
-  { 0x2F09, "513F" },
-  { 0x2F0A, "5165" },
-  { 0x2F0B, "516B" },
-  { 0x2F0C, "5182" },
-  { 0x2F0D, "5196" },
-  { 0x2F0E, "51AB" },
-  { 0x2F0F, "51E0" },
-  { 0x2F10, "51F5" },
-  { 0x2F11, "5200" },
-  { 0x2F12, "529B" },
-  { 0x2F13, "52F9" },
-  { 0x2F14, "5315" },
-  { 0x2F15, "531A" },
-  { 0x2F16, "5338" },
-  { 0x2F17, "5341" },
-  { 0x2F18, "535C" },
-  { 0x2F19, "5369" },
-  { 0x2F1A, "5382" },
-  { 0x2F1B, "53B6" },
-  { 0x2F1C, "53C8" },
-  { 0x2F1D, "53E3" },
-  { 0x2F1E, "56D7" },
-  { 0x2F1F, "571F" },
-  { 0x2F20, "58EB" },
-  { 0x2F21, "5902" },
-  { 0x2F22, "590A" },
-  { 0x2F23, "5915" },
-  { 0x2F24, "5927" },
-  { 0x2F25, "5973" },
-  { 0x2F26, "5B50" },
-  { 0x2F27, "5B80" },
-  { 0x2F28, "5BF8" },
-  { 0x2F29, "5C0F" },
-  { 0x2F2A, "5C22" },
-  { 0x2F2B, "5C38" },
-  { 0x2F2C, "5C6E" },
-  { 0x2F2D, "5C71" },
-  { 0x2F2E, "5DDB" },
-  { 0x2F2F, "5DE5" },
-  { 0x2F30, "5DF1" },
-  { 0x2F31, "5DFE" },
-  { 0x2F32, "5E72" },
-  { 0x2F33, "5E7A" },
-  { 0x2F34, "5E7F" },
-  { 0x2F35, "5EF4" },
-  { 0x2F36, "5EFE" },
-  { 0x2F37, "5F0B" },
-  { 0x2F38, "5F13" },
-  { 0x2F39, "5F50" },
-  { 0x2F3A, "5F61" },
-  { 0x2F3B, "5F73" },
-  { 0x2F3C, "5FC3" },
-  { 0x2F3D, "6208" },
-  { 0x2F3E, "6236" },
-  { 0x2F3F, "624B" },
-  { 0x2F40, "652F" },
-  { 0x2F41, "6534" },
-  { 0x2F42, "6587" },
-  { 0x2F43, "6597" },
-  { 0x2F44, "65A4" },
-  { 0x2F45, "65B9" },
-  { 0x2F46, "65E0" },
-  { 0x2F47, "65E5" },
-  { 0x2F48, "66F0" },
-  { 0x2F49, "6708" },
-  { 0x2F4A, "6728" },
-  { 0x2F4B, "6B20" },
-  { 0x2F4C, "6B62" },
-  { 0x2F4D, "6B79" },
-  { 0x2F4E, "6BB3" },
-  { 0x2F4F, "6BCB" },
-  { 0x2F50, "6BD4" },
-  { 0x2F51, "6BDB" },
-  { 0x2F52, "6C0F" },
-  { 0x2F53, "6C14" },
-  { 0x2F54, "6C34" },
-  { 0x2F55, "706B" },
-  { 0x2F56, "722A" },
-  { 0x2F57, "7236" },
-  { 0x2F58, "723B" },
-  { 0x2F59, "723F" },
-  { 0x2F5A, "7247" },
-  { 0x2F5B, "7259" },
-  { 0x2F5C, "725B" },
-  { 0x2F5D, "72AC" },
-  { 0x2F5E, "7384" },
-  { 0x2F5F, "7389" },
-  { 0x2F60, "74DC" },
-  { 0x2F61, "74E6" },
-  { 0x2F62, "7518" },
-  { 0x2F63, "751F" },
-  { 0x2F64, "7528" },
-  { 0x2F65, "7530" },
-  { 0x2F66, "758B" },
-  { 0x2F67, "7592" },
-  { 0x2F68, "7676" },
-  { 0x2F69, "767D" },
-  { 0x2F6A, "76AE" },
-  { 0x2F6B, "76BF" },
-  { 0x2F6C, "76EE" },
-  { 0x2F6D, "77DB" },
-  { 0x2F6E, "77E2" },
-  { 0x2F6F, "77F3" },
-  { 0x2F70, "793A" },
-  { 0x2F71, "79B8" },
-  { 0x2F72, "79BE" },
-  { 0x2F73, "7A74" },
-  { 0x2F74, "7ACB" },
-  { 0x2F75, "7AF9" },
-  { 0x2F76, "7C73" },
-  { 0x2F77, "7CF8" },
-  { 0x2F78, "7F36" },
-  { 0x2F79, "7F51" },
-  { 0x2F7A, "7F8A" },
-  { 0x2F7B, "7FBD" },
-  { 0x2F7C, "8001" },
-  { 0x2F7D, "800C" },
-  { 0x2F7E, "8012" },
-  { 0x2F7F, "8033" },
-  { 0x2F80, "807F" },
-  { 0x2F81, "8089" },
-  { 0x2F82, "81E3" },
-  { 0x2F83, "81EA" },
-  { 0x2F84, "81F3" },
-  { 0x2F85, "81FC" },
-  { 0x2F86, "820C" },
-  { 0x2F87, "821B" },
-  { 0x2F88, "821F" },
-  { 0x2F89, "826E" },
-  { 0x2F8A, "8272" },
-  { 0x2F8B, "8278" },
-  { 0x2F8C, "864D" },
-  { 0x2F8D, "866B" },
-  { 0x2F8E, "8840" },
-  { 0x2F8F, "884C" },
-  { 0x2F90, "8863" },
-  { 0x2F91, "897E" },
-  { 0x2F92, "898B" },
-  { 0x2F93, "89D2" },
-  { 0x2F94, "8A00" },
-  { 0x2F95, "8C37" },
-  { 0x2F96, "8C46" },
-  { 0x2F97, "8C55" },
-  { 0x2F98, "8C78" },
-  { 0x2F99, "8C9D" },
-  { 0x2F9A, "8D64" },
-  { 0x2F9B, "8D70" },
-  { 0x2F9C, "8DB3" },
-  { 0x2F9D, "8EAB" },
-  { 0x2F9E, "8ECA" },
-  { 0x2F9F, "8F9B" },
-  { 0x2FA0, "8FB0" },
-  { 0x2FA1, "8FB5" },
-  { 0x2FA2, "9091" },
-  { 0x2FA3, "9149" },
-  { 0x2FA4, "91C6" },
-  { 0x2FA5, "91CC" },
-  { 0x2FA6, "91D1" },
-  { 0x2FA7, "9577" },
-  { 0x2FA8, "9580" },
-  { 0x2FA9, "961C" },
-  { 0x2FAA, "96B6" },
-  { 0x2FAB, "96B9" },
-  { 0x2FAC, "96E8" },
-  { 0x2FAD, "9751" },
-  { 0x2FAE, "975E" },
-  { 0x2FAF, "9762" },
-  { 0x2FB0, "9769" },
-  { 0x2FB1, "97CB" },
-  { 0x2FB2, "97ED" },
-  { 0x2FB3, "97F3" },
-  { 0x2FB4, "9801" },
-  { 0x2FB5, "98A8" },
-  { 0x2FB6, "98DB" },
-  { 0x2FB7, "98DF" },
-  { 0x2FB8, "9996" },
-  { 0x2FB9, "9999" },
-  { 0x2FBA, "99AC" },
-  { 0x2FBB, "9AA8" },
-  { 0x2FBC, "9AD8" },
-  { 0x2FBD, "9ADF" },
-  { 0x2FBE, "9B25" },
-  { 0x2FBF, "9B2F" },
-  { 0x2FC0, "9B32" },
-  { 0x2FC1, "9B3C" },
-  { 0x2FC2, "9B5A" },
-  { 0x2FC3, "9CE5" },
-  { 0x2FC4, "9E75" },
-  { 0x2FC5, "9E7F" },
-  { 0x2FC6, "9EA5" },
-  { 0x2FC7, "9EBB" },
-  { 0x2FC8, "9EC3" },
-  { 0x2FC9, "9ECD" },
-  { 0x2FCA, "9ED1" },
-  { 0x2FCB, "9EF9" },
-  { 0x2FCC, "9EFD" },
-  { 0x2FCD, "9F0E" },
-  { 0x2FCE, "9F13" },
-  { 0x2FCF, "9F20" },
-  { 0x2FD0, "9F3B" },
-  { 0x2FD1, "9F4A" },
-  { 0x2FD2, "9F52" },
-  { 0x2FD3, "9F8D" },
-  { 0x2FD4, "9F9C" },
-  { 0x2FD5, "9FA0" },
-  { 0x3000, "<wide> 0020" },
-  { 0x3036, "3012 postal mark" },
-  { 0x3038, "5341" },
-  { 0x3039, "5344" },
-  { 0x303A, "5345" },
-  { 0x309B, "0020 3099" },
-  { 0x309C, "0020 309A" },
-  { 0x309F, "<vertical> 3088 308A" },
-  { 0x30FF, "<vertical> 30B3 30C8" },
-  { 0x3131, "1100 hangul choseong kiyeok" },
-  { 0x3132, "1101 hangul choseong ssangkiyeok" },
-  { 0x3133, "11AA hangul jongseong kiyeok-sios" },
-  { 0x3134, "1102 hangul choseong nieun" },
-  { 0x3135, "11AC hangul jongseong nieun-cieuc" },
-  { 0x3136, "11AD hangul jongseong nieun-hieuh" },
-  { 0x3137, "1103 hangul choseong tikeut" },
-  { 0x3138, "1104 hangul choseong ssangtikeut" },
-  { 0x3139, "1105 hangul choseong rieul" },
-  { 0x313A, "11B0 hangul jongseong rieul-kiyeok" },
-  { 0x313B, "11B1 hangul jongseong rieul-mieum" },
-  { 0x313C, "11B2 hangul jongseong rieul-pieup" },
-  { 0x313D, "11B3 hangul jongseong rieul-sios" },
-  { 0x313E, "11B4 hangul jongseong rieul-thieuth" },
-  { 0x313F, "11B5 hangul jongseong rieul-phieuph" },
-  { 0x3140, "111A hangul choseong rieul-hieuh" },
-  { 0x3141, "1106 hangul choseong mieum" },
-  { 0x3142, "1107 hangul choseong pieup" },
-  { 0x3143, "1108 hangul choseong ssangpieup" },
-  { 0x3144, "1121 hangul choseong pieup-sios" },
-  { 0x3145, "1109 hangul choseong sios" },
-  { 0x3146, "110A hangul choseong ssangsios" },
-  { 0x3147, "110B hangul choseong ieung" },
-  { 0x3148, "110C hangul choseong cieuc" },
-  { 0x3149, "110D hangul choseong ssangcieuc" },
-  { 0x314A, "110E hangul choseong chieuch" },
-  { 0x314B, "110F hangul choseong khieukh" },
-  { 0x314C, "1110 hangul choseong thieuth" },
-  { 0x314D, "1111 hangul choseong phieuph" },
-  { 0x314E, "1112 hangul choseong hieuh" },
-  { 0x314F, "1161 hangul jungseong a" },
-  { 0x3150, "1162 hangul jungseong ae" },
-  { 0x3151, "1163 hangul jungseong ya" },
-  { 0x3152, "1164 hangul jungseong yae" },
-  { 0x3153, "1165 hangul jungseong eo" },
-  { 0x3154, "1166 hangul jungseong e" },
-  { 0x3155, "1167 hangul jungseong yeo" },
-  { 0x3156, "1168 hangul jungseong ye" },
-  { 0x3157, "1169 hangul jungseong o" },
-  { 0x3158, "116A hangul jungseong wa" },
-  { 0x3159, "116B hangul jungseong wae" },
-  { 0x315A, "116C hangul jungseong oe" },
-  { 0x315B, "116D hangul jungseong yo" },
-  { 0x315C, "116E hangul jungseong u" },
-  { 0x315D, "116F hangul jungseong weo" },
-  { 0x315E, "1170 hangul jungseong we" },
-  { 0x315F, "1171 hangul jungseong wi" },
-  { 0x3160, "1172 hangul jungseong yu" },
-  { 0x3161, "1173 hangul jungseong eu" },
-  { 0x3162, "1174 hangul jungseong yi" },
-  { 0x3163, "1175 hangul jungseong i" },
-  { 0x3164, "1160 hangul jungseong filler" },
-  { 0x3165, "1114 hangul choseong ssangnieun" },
-  { 0x3166, "1115 hangul choseong nieun-tikeut" },
-  { 0x3167, "11C7 hangul jongseong nieun-sios" },
-  { 0x3168, "11C8 hangul jongseong nieun-pansios" },
-  { 0x3169, "11CC hangul jongseong rieul-kiyeok-sios" },
-  { 0x316A, "11CE hangul jongseong rieul-tikeut" },
-  { 0x316B, "11D3 hangul jongseong rieul-pieup-sios" },
-  { 0x316C, "11D7 hangul jongseong rieul-pansios" },
-  { 0x316D, "11D9 hangul jongseong rieul-yeorinhieuh" },
-  { 0x316E, "111C hangul choseong mieum-pieup" },
-  { 0x316F, "11DD hangul jongseong mieum-sios" },
-  { 0x3170, "11DF hangul jongseong mieum-pansios" },
-  { 0x3171, "111D hangul choseong kapyeounmieum" },
-  { 0x3172, "111E hangul choseong pieup-kiyeok" },
-  { 0x3173, "1120 hangul choseong pieup-tikeut" },
-  { 0x3174, "1122 hangul choseong pieup-sios-kiyeok" },
-  { 0x3175, "1123 hangul choseong pieup-sios-tikeut" },
-  { 0x3176, "1127 hangul choseong pieup-cieuc" },
-  { 0x3177, "1129 hangul choseong pieup-thieuth" },
-  { 0x3178, "112B hangul choseong kapyeounpieup" },
-  { 0x3179, "112C hangul choseong kapyeounssangpieup" },
-  { 0x317A, "112D hangul choseong sios-kiyeok" },
-  { 0x317B, "112E hangul choseong sios-nieun" },
-  { 0x317C, "112F hangul choseong sios-tikeut" },
-  { 0x317D, "1132 hangul choseong sios-pieup" },
-  { 0x317E, "1136 hangul choseong sios-cieuc" },
-  { 0x317F, "1140 hangul choseong pansios" },
-  { 0x3180, "1147 hangul choseong ssangieung" },
-  { 0x3181, "114C hangul choseong yesieung" },
-  { 0x3182, "11F1 hangul jongseong yesieung-sios" },
-  { 0x3183, "11F2 hangul jongseong yesieung-pansios" },
-  { 0x3184, "1157 hangul choseong kapyeounphieuph" },
-  { 0x3185, "1158 hangul choseong ssanghieuh" },
-  { 0x3186, "1159 hangul choseong yeorinhieuh" },
-  { 0x3187, "1184 hangul jungseong yo-ya" },
-  { 0x3188, "1185 hangul jungseong yo-yae" },
-  { 0x3189, "1188 hangul jungseong yo-i" },
-  { 0x318A, "1191 hangul jungseong yu-yeo" },
-  { 0x318B, "1192 hangul jungseong yu-ye" },
-  { 0x318C, "1194 hangul jungseong yu-i" },
-  { 0x318D, "119E hangul jungseong araea" },
-  { 0x318E, "11A1 hangul jungseong araea-i" },
-  { 0x3192, "<super> 4E00" },
-  { 0x3193, "<super> 4E8C" },
-  { 0x3194, "<super> 4E09" },
-  { 0x3195, "<super> 56DB" },
-  { 0x3196, "<super> 4E0A" },
-  { 0x3197, "<super> 4E2D" },
-  { 0x3198, "<super> 4E0B" },
-  { 0x3199, "<super> 7532" },
-  { 0x319A, "<super> 4E59" },
-  { 0x319B, "<super> 4E19" },
-  { 0x319C, "<super> 4E01" },
-  { 0x319D, "<super> 5929" },
-  { 0x319E, "<super> 5730" },
-  { 0x319F, "<super> 4EBA" },
-  { 0x3200, "0028 1100 0029" },
-  { 0x3201, "0028 1102 0029" },
-  { 0x3202, "0028 1103 0029" },
-  { 0x3203, "0028 1105 0029" },
-  { 0x3204, "0028 1106 0029" },
-  { 0x3205, "0028 1107 0029" },
-  { 0x3206, "0028 1109 0029" },
-  { 0x3207, "0028 110B 0029" },
-  { 0x3208, "0028 110C 0029" },
-  { 0x3209, "0028 110E 0029" },
-  { 0x320A, "0028 110F 0029" },
-  { 0x320B, "0028 1110 0029" },
-  { 0x320C, "0028 1111 0029" },
-  { 0x320D, "0028 1112 0029" },
-  { 0x320E, "0028 1100 1161 0029" },
-  { 0x320F, "0028 1102 1161 0029" },
-  { 0x3210, "0028 1103 1161 0029" },
-  { 0x3211, "0028 1105 1161 0029" },
-  { 0x3212, "0028 1106 1161 0029" },
-  { 0x3213, "0028 1107 1161 0029" },
-  { 0x3214, "0028 1109 1161 0029" },
-  { 0x3215, "0028 110B 1161 0029" },
-  { 0x3216, "0028 110C 1161 0029" },
-  { 0x3217, "0028 110E 1161 0029" },
-  { 0x3218, "0028 110F 1161 0029" },
-  { 0x3219, "0028 1110 1161 0029" },
-  { 0x321A, "0028 1111 1161 0029" },
-  { 0x321B, "0028 1112 1161 0029" },
-  { 0x321C, "0028 110C 116E 0029" },
-  { 0x321D, "0028 110B 1169 110C 1165 11AB 0029" },
-  { 0x321E, "0028 110B 1169 1112 116E 0029" },
-  { 0x3220, "0028 4E00 0029" },
-  { 0x3221, "0028 4E8C 0029" },
-  { 0x3222, "0028 4E09 0029" },
-  { 0x3223, "0028 56DB 0029" },
-  { 0x3224, "0028 4E94 0029" },
-  { 0x3225, "0028 516D 0029" },
-  { 0x3226, "0028 4E03 0029" },
-  { 0x3227, "0028 516B 0029" },
-  { 0x3228, "0028 4E5D 0029" },
-  { 0x3229, "0028 5341 0029" },
-  { 0x322A, "0028 6708 0029" },
-  { 0x322B, "0028 706B 0029" },
-  { 0x322C, "0028 6C34 0029" },
-  { 0x322D, "0028 6728 0029" },
-  { 0x322E, "0028 91D1 0029" },
-  { 0x322F, "0028 571F 0029" },
-  { 0x3230, "0028 65E5 0029" },
-  { 0x3231, "0028 682A 0029" },
-  { 0x3232, "0028 6709 0029" },
-  { 0x3233, "0028 793E 0029" },
-  { 0x3234, "0028 540D 0029" },
-  { 0x3235, "0028 7279 0029" },
-  { 0x3236, "0028 8CA1 0029" },
-  { 0x3237, "0028 795D 0029" },
-  { 0x3238, "0028 52B4 0029" },
-  { 0x3239, "0028 4EE3 0029" },
-  { 0x323A, "0028 547C 0029" },
-  { 0x323B, "0028 5B66 0029" },
-  { 0x323C, "0028 76E3 0029" },
-  { 0x323D, "0028 4F01 0029" },
-  { 0x323E, "0028 8CC7 0029" },
-  { 0x323F, "0028 5354 0029" },
-  { 0x3240, "0028 796D 0029" },
-  { 0x3241, "0028 4F11 0029" },
-  { 0x3242, "0028 81EA 0029" },
-  { 0x3243, "0028 81F3 0029" },
-  { 0x3250, "<square> 0050 0054 0045" },
-  { 0x3251, "<circle> 0032 0031" },
-  { 0x3252, "<circle> 0032 0032" },
-  { 0x3253, "<circle> 0032 0033" },
-  { 0x3254, "<circle> 0032 0034" },
-  { 0x3255, "<circle> 0032 0035" },
-  { 0x3256, "<circle> 0032 0036" },
-  { 0x3257, "<circle> 0032 0037" },
-  { 0x3258, "<circle> 0032 0038" },
-  { 0x3259, "<circle> 0032 0039" },
-  { 0x325A, "<circle> 0033 0030" },
-  { 0x325B, "<circle> 0033 0031" },
-  { 0x325C, "<circle> 0033 0032" },
-  { 0x325D, "<circle> 0033 0033" },
-  { 0x325E, "<circle> 0033 0034" },
-  { 0x325F, "<circle> 0033 0035" },
-  { 0x3260, "<circle> 1100" },
-  { 0x3261, "<circle> 1102" },
-  { 0x3262, "<circle> 1103" },
-  { 0x3263, "<circle> 1105" },
-  { 0x3264, "<circle> 1106" },
-  { 0x3265, "<circle> 1107" },
-  { 0x3266, "<circle> 1109" },
-  { 0x3267, "<circle> 110B" },
-  { 0x3268, "<circle> 110C" },
-  { 0x3269, "<circle> 110E" },
-  { 0x326A, "<circle> 110F" },
-  { 0x326B, "<circle> 1110" },
-  { 0x326C, "<circle> 1111" },
-  { 0x326D, "<circle> 1112" },
-  { 0x326E, "<circle> 1100 1161" },
-  { 0x326F, "<circle> 1102 1161" },
-  { 0x3270, "<circle> 1103 1161" },
-  { 0x3271, "<circle> 1105 1161" },
-  { 0x3272, "<circle> 1106 1161" },
-  { 0x3273, "<circle> 1107 1161" },
-  { 0x3274, "<circle> 1109 1161" },
-  { 0x3275, "<circle> 110B 1161" },
-  { 0x3276, "<circle> 110C 1161" },
-  { 0x3277, "<circle> 110E 1161" },
-  { 0x3278, "<circle> 110F 1161" },
-  { 0x3279, "<circle> 1110 1161" },
-  { 0x327A, "<circle> 1111 1161" },
-  { 0x327B, "<circle> 1112 1161" },
-  { 0x327C, "<circle> 110E 1161 11B7 1100 1169" },
-  { 0x327D, "<circle> 110C 116E 110B 1174" },
-  { 0x327E, "<circle> 110B 116E" },
-  { 0x3280, "<circle> 4E00" },
-  { 0x3281, "<circle> 4E8C" },
-  { 0x3282, "<circle> 4E09" },
-  { 0x3283, "<circle> 56DB" },
-  { 0x3284, "<circle> 4E94" },
-  { 0x3285, "<circle> 516D" },
-  { 0x3286, "<circle> 4E03" },
-  { 0x3287, "<circle> 516B" },
-  { 0x3288, "<circle> 4E5D" },
-  { 0x3289, "<circle> 5341" },
-  { 0x328A, "<circle> 6708" },
-  { 0x328B, "<circle> 706B" },
-  { 0x328C, "<circle> 6C34" },
-  { 0x328D, "<circle> 6728" },
-  { 0x328E, "<circle> 91D1" },
-  { 0x328F, "<circle> 571F" },
-  { 0x3290, "<circle> 65E5" },
-  { 0x3291, "<circle> 682A" },
-  { 0x3292, "<circle> 6709" },
-  { 0x3293, "<circle> 793E" },
-  { 0x3294, "<circle> 540D" },
-  { 0x3295, "<circle> 7279" },
-  { 0x3296, "<circle> 8CA1" },
-  { 0x3297, "<circle> 795D" },
-  { 0x3298, "<circle> 52B4" },
-  { 0x3299, "<circle> 79D8" },
-  { 0x329A, "<circle> 7537" },
-  { 0x329B, "<circle> 5973" },
-  { 0x329C, "<circle> 9069" },
-  { 0x329D, "<circle> 512A" },
-  { 0x329E, "<circle> 5370" },
-  { 0x329F, "<circle> 6CE8" },
-  { 0x32A0, "<circle> 9805" },
-  { 0x32A1, "<circle> 4F11" },
-  { 0x32A2, "<circle> 5199" },
-  { 0x32A3, "<circle> 6B63" },
-  { 0x32A4, "<circle> 4E0A" },
-  { 0x32A5, "<circle> 4E2D" },
-  { 0x32A6, "<circle> 4E0B" },
-  { 0x32A7, "<circle> 5DE6" },
-  { 0x32A8, "<circle> 53F3" },
-  { 0x32A9, "<circle> 533B" },
-  { 0x32AA, "<circle> 5B97" },
-  { 0x32AB, "<circle> 5B66" },
-  { 0x32AC, "<circle> 76E3" },
-  { 0x32AD, "<circle> 4F01" },
-  { 0x32AE, "<circle> 8CC7" },
-  { 0x32AF, "<circle> 5354" },
-  { 0x32B0, "<circle> 591C" },
-  { 0x32B1, "<circle> 0033 0036" },
-  { 0x32B2, "<circle> 0033 0037" },
-  { 0x32B3, "<circle> 0033 0038" },
-  { 0x32B4, "<circle> 0033 0039" },
-  { 0x32B5, "<circle> 0034 0030" },
-  { 0x32B6, "<circle> 0034 0031" },
-  { 0x32B7, "<circle> 0034 0032" },
-  { 0x32B8, "<circle> 0034 0033" },
-  { 0x32B9, "<circle> 0034 0034" },
-  { 0x32BA, "<circle> 0034 0035" },
-  { 0x32BB, "<circle> 0034 0036" },
-  { 0x32BC, "<circle> 0034 0037" },
-  { 0x32BD, "<circle> 0034 0038" },
-  { 0x32BE, "<circle> 0034 0039" },
-  { 0x32BF, "<circle> 0035 0030" },
-  { 0x32C0, "0031 6708" },
-  { 0x32C1, "0032 6708" },
-  { 0x32C2, "0033 6708" },
-  { 0x32C3, "0034 6708" },
-  { 0x32C4, "0035 6708" },
-  { 0x32C5, "0036 6708" },
-  { 0x32C6, "0037 6708" },
-  { 0x32C7, "0038 6708" },
-  { 0x32C8, "0039 6708" },
-  { 0x32C9, "0031 0030 6708" },
-  { 0x32CA, "0031 0031 6708" },
-  { 0x32CB, "0031 0032 6708" },
-  { 0x32CC, "<square> 0048 0067" },
-  { 0x32CD, "<square> 0065 0072 0067" },
-  { 0x32CE, "<square> 0065 0056" },
-  { 0x32CF, "<square> 004C 0054 0044" },
-  { 0x32D0, "<circle> 30A2" },
-  { 0x32D1, "<circle> 30A4" },
-  { 0x32D2, "<circle> 30A6" },
-  { 0x32D3, "<circle> 30A8" },
-  { 0x32D4, "<circle> 30AA" },
-  { 0x32D5, "<circle> 30AB" },
-  { 0x32D6, "<circle> 30AD" },
-  { 0x32D7, "<circle> 30AF" },
-  { 0x32D8, "<circle> 30B1" },
-  { 0x32D9, "<circle> 30B3" },
-  { 0x32DA, "<circle> 30B5" },
-  { 0x32DB, "<circle> 30B7" },
-  { 0x32DC, "<circle> 30B9" },
-  { 0x32DD, "<circle> 30BB" },
-  { 0x32DE, "<circle> 30BD" },
-  { 0x32DF, "<circle> 30BF" },
-  { 0x32E0, "<circle> 30C1" },
-  { 0x32E1, "<circle> 30C4" },
-  { 0x32E2, "<circle> 30C6" },
-  { 0x32E3, "<circle> 30C8" },
-  { 0x32E4, "<circle> 30CA" },
-  { 0x32E5, "<circle> 30CB" },
-  { 0x32E6, "<circle> 30CC" },
-  { 0x32E7, "<circle> 30CD" },
-  { 0x32E8, "<circle> 30CE" },
-  { 0x32E9, "<circle> 30CF" },
-  { 0x32EA, "<circle> 30D2" },
-  { 0x32EB, "<circle> 30D5" },
-  { 0x32EC, "<circle> 30D8" },
-  { 0x32ED, "<circle> 30DB" },
-  { 0x32EE, "<circle> 30DE" },
-  { 0x32EF, "<circle> 30DF" },
-  { 0x32F0, "<circle> 30E0" },
-  { 0x32F1, "<circle> 30E1" },
-  { 0x32F2, "<circle> 30E2" },
-  { 0x32F3, "<circle> 30E4" },
-  { 0x32F4, "<circle> 30E6" },
-  { 0x32F5, "<circle> 30E8" },
-  { 0x32F6, "<circle> 30E9" },
-  { 0x32F7, "<circle> 30EA" },
-  { 0x32F8, "<circle> 30EB" },
-  { 0x32F9, "<circle> 30EC" },
-  { 0x32FA, "<circle> 30ED" },
-  { 0x32FB, "<circle> 30EF" },
-  { 0x32FC, "<circle> 30F0" },
-  { 0x32FD, "<circle> 30F1" },
-  { 0x32FE, "<circle> 30F2" },
-  { 0x3300, "<square> 30A2 30D1 30FC 30C8" },
-  { 0x3301, "<square> 30A2 30EB 30D5 30A1" },
-  { 0x3302, "<square> 30A2 30F3 30DA 30A2" },
-  { 0x3303, "<square> 30A2 30FC 30EB" },
-  { 0x3304, "<square> 30A4 30CB 30F3 30B0" },
-  { 0x3305, "<square> 30A4 30F3 30C1" },
-  { 0x3306, "<square> 30A6 30A9 30F3" },
-  { 0x3307, "<square> 30A8 30B9 30AF 30FC 30C9" },
-  { 0x3308, "<square> 30A8 30FC 30AB 30FC" },
-  { 0x3309, "<square> 30AA 30F3 30B9" },
-  { 0x330A, "<square> 30AA 30FC 30E0" },
-  { 0x330B, "<square> 30AB 30A4 30EA" },
-  { 0x330C, "<square> 30AB 30E9 30C3 30C8" },
-  { 0x330D, "<square> 30AB 30ED 30EA 30FC" },
-  { 0x330E, "<square> 30AC 30ED 30F3" },
-  { 0x330F, "<square> 30AC 30F3 30DE" },
-  { 0x3310, "<square> 30AE 30AC" },
-  { 0x3311, "<square> 30AE 30CB 30FC" },
-  { 0x3312, "<square> 30AD 30E5 30EA 30FC" },
-  { 0x3313, "<square> 30AE 30EB 30C0 30FC" },
-  { 0x3314, "<square> 30AD 30ED" },
-  { 0x3315, "<square> 30AD 30ED 30B0 30E9 30E0" },
-  { 0x3316, "<square> 30AD 30ED 30E1 30FC 30C8 30EB" },
-  { 0x3317, "<square> 30AD 30ED 30EF 30C3 30C8" },
-  { 0x3318, "<square> 30B0 30E9 30E0" },
-  { 0x3319, "<square> 30B0 30E9 30E0 30C8 30F3" },
-  { 0x331A, "<square> 30AF 30EB 30BC 30A4 30ED" },
-  { 0x331B, "<square> 30AF 30ED 30FC 30CD" },
-  { 0x331C, "<square> 30B1 30FC 30B9" },
-  { 0x331D, "<square> 30B3 30EB 30CA" },
-  { 0x331E, "<square> 30B3 30FC 30DD" },
-  { 0x331F, "<square> 30B5 30A4 30AF 30EB" },
-  { 0x3320, "<square> 30B5 30F3 30C1 30FC 30E0" },
-  { 0x3321, "<square> 30B7 30EA 30F3 30B0" },
-  { 0x3322, "<square> 30BB 30F3 30C1" },
-  { 0x3323, "<square> 30BB 30F3 30C8" },
-  { 0x3324, "<square> 30C0 30FC 30B9" },
-  { 0x3325, "<square> 30C7 30B7" },
-  { 0x3326, "<square> 30C9 30EB" },
-  { 0x3327, "<square> 30C8 30F3" },
-  { 0x3328, "<square> 30CA 30CE" },
-  { 0x3329, "<square> 30CE 30C3 30C8" },
-  { 0x332A, "<square> 30CF 30A4 30C4" },
-  { 0x332B, "<square> 30D1 30FC 30BB 30F3 30C8" },
-  { 0x332C, "<square> 30D1 30FC 30C4" },
-  { 0x332D, "<square> 30D0 30FC 30EC 30EB" },
-  { 0x332E, "<square> 30D4 30A2 30B9 30C8 30EB" },
-  { 0x332F, "<square> 30D4 30AF 30EB" },
-  { 0x3330, "<square> 30D4 30B3" },
-  { 0x3331, "<square> 30D3 30EB" },
-  { 0x3332, "<square> 30D5 30A1 30E9 30C3 30C9" },
-  { 0x3333, "<square> 30D5 30A3 30FC 30C8" },
-  { 0x3334, "<square> 30D6 30C3 30B7 30A7 30EB" },
-  { 0x3335, "<square> 30D5 30E9 30F3" },
-  { 0x3336, "<square> 30D8 30AF 30BF 30FC 30EB" },
-  { 0x3337, "<square> 30DA 30BD" },
-  { 0x3338, "<square> 30DA 30CB 30D2" },
-  { 0x3339, "<square> 30D8 30EB 30C4" },
-  { 0x333A, "<square> 30DA 30F3 30B9" },
-  { 0x333B, "<square> 30DA 30FC 30B8" },
-  { 0x333C, "<square> 30D9 30FC 30BF" },
-  { 0x333D, "<square> 30DD 30A4 30F3 30C8" },
-  { 0x333E, "<square> 30DC 30EB 30C8" },
-  { 0x333F, "<square> 30DB 30F3" },
-  { 0x3340, "<square> 30DD 30F3 30C9" },
-  { 0x3341, "<square> 30DB 30FC 30EB" },
-  { 0x3342, "<square> 30DB 30FC 30F3" },
-  { 0x3343, "<square> 30DE 30A4 30AF 30ED" },
-  { 0x3344, "<square> 30DE 30A4 30EB" },
-  { 0x3345, "<square> 30DE 30C3 30CF" },
-  { 0x3346, "<square> 30DE 30EB 30AF" },
-  { 0x3347, "<square> 30DE 30F3 30B7 30E7 30F3" },
-  { 0x3348, "<square> 30DF 30AF 30ED 30F3" },
-  { 0x3349, "<square> 30DF 30EA" },
-  { 0x334A, "<square> 30DF 30EA 30D0 30FC 30EB" },
-  { 0x334B, "<square> 30E1 30AC" },
-  { 0x334C, "<square> 30E1 30AC 30C8 30F3" },
-  { 0x334D, "<square> 30E1 30FC 30C8 30EB" },
-  { 0x334E, "<square> 30E4 30FC 30C9" },
-  { 0x334F, "<square> 30E4 30FC 30EB" },
-  { 0x3350, "<square> 30E6 30A2 30F3" },
-  { 0x3351, "<square> 30EA 30C3 30C8 30EB" },
-  { 0x3352, "<square> 30EA 30E9" },
-  { 0x3353, "<square> 30EB 30D4 30FC" },
-  { 0x3354, "<square> 30EB 30FC 30D6 30EB" },
-  { 0x3355, "<square> 30EC 30E0" },
-  { 0x3356, "<square> 30EC 30F3 30C8 30B2 30F3" },
-  { 0x3357, "<square> 30EF 30C3 30C8" },
-  { 0x3358, "0030 70B9" },
-  { 0x3359, "0031 70B9" },
-  { 0x335A, "0032 70B9" },
-  { 0x335B, "0033 70B9" },
-  { 0x335C, "0034 70B9" },
-  { 0x335D, "0035 70B9" },
-  { 0x335E, "0036 70B9" },
-  { 0x335F, "0037 70B9" },
-  { 0x3360, "0038 70B9" },
-  { 0x3361, "0039 70B9" },
-  { 0x3362, "0031 0030 70B9" },
-  { 0x3363, "0031 0031 70B9" },
-  { 0x3364, "0031 0032 70B9" },
-  { 0x3365, "0031 0033 70B9" },
-  { 0x3366, "0031 0034 70B9" },
-  { 0x3367, "0031 0035 70B9" },
-  { 0x3368, "0031 0036 70B9" },
-  { 0x3369, "0031 0037 70B9" },
-  { 0x336A, "0031 0038 70B9" },
-  { 0x336B, "0031 0039 70B9" },
-  { 0x336C, "0032 0030 70B9" },
-  { 0x336D, "0032 0031 70B9" },
-  { 0x336E, "0032 0032 70B9" },
-  { 0x336F, "0032 0033 70B9" },
-  { 0x3370, "0032 0034 70B9" },
-  { 0x3371, "<square> 0068 0050 0061" },
-  { 0x3372, "<square> 0064 0061" },
-  { 0x3373, "<square> 0041 0055" },
-  { 0x3374, "<square> 0062 0061 0072" },
-  { 0x3375, "<square> 006F 0056" },
-  { 0x3376, "<square> 0070 0063" },
-  { 0x3377, "<square> 0064 006D" },
-  { 0x3378, "<square> 0064 006D 00B2" },
-  { 0x3379, "<square> 0064 006D 00B3" },
-  { 0x337A, "<square> 0049 0055" },
-  { 0x337B, "<square> 5E73 6210" },
-  { 0x337C, "<square> 662D 548C" },
-  { 0x337D, "<square> 5927 6B63" },
-  { 0x337E, "<square> 660E 6CBB" },
-  { 0x337F, "<square> 682A 5F0F 4F1A 793E" },
-  { 0x3380, "<square> 0070 0041" },
-  { 0x3381, "<square> 006E 0041" },
-  { 0x3382, "<square> 03BC 0041" },
-  { 0x3383, "<square> 006D 0041" },
-  { 0x3384, "<square> 006B 0041" },
-  { 0x3385, "<square> 004B 0042" },
-  { 0x3386, "<square> 004D 0042" },
-  { 0x3387, "<square> 0047 0042" },
-  { 0x3388, "<square> 0063 0061 006C" },
-  { 0x3389, "<square> 006B 0063 0061 006C" },
-  { 0x338A, "<square> 0070 0046" },
-  { 0x338B, "<square> 006E 0046" },
-  { 0x338C, "<square> 03BC 0046" },
-  { 0x338D, "<square> 03BC 0067" },
-  { 0x338E, "<square> 006D 0067" },
-  { 0x338F, "<square> 006B 0067" },
-  { 0x3390, "<square> 0048 007A" },
-  { 0x3391, "<square> 006B 0048 007A" },
-  { 0x3392, "<square> 004D 0048 007A" },
-  { 0x3393, "<square> 0047 0048 007A" },
-  { 0x3394, "<square> 0054 0048 007A" },
-  { 0x3395, "<square> 03BC 2113" },
-  { 0x3396, "<square> 006D 2113" },
-  { 0x3397, "<square> 0064 2113" },
-  { 0x3398, "<square> 006B 2113" },
-  { 0x3399, "<square> 0066 006D" },
-  { 0x339A, "<square> 006E 006D" },
-  { 0x339B, "<square> 03BC 006D" },
-  { 0x339C, "<square> 006D 006D" },
-  { 0x339D, "<square> 0063 006D" },
-  { 0x339E, "<square> 006B 006D" },
-  { 0x339F, "<square> 006D 006D 00B2" },
-  { 0x33A0, "<square> 0063 006D 00B2" },
-  { 0x33A1, "<square> 006D 00B2" },
-  { 0x33A2, "<square> 006B 006D 00B2" },
-  { 0x33A3, "<square> 006D 006D 00B3" },
-  { 0x33A4, "<square> 0063 006D 00B3" },
-  { 0x33A5, "<square> 006D 00B3" },
-  { 0x33A6, "<square> 006B 006D 00B3" },
-  { 0x33A7, "<square> 006D 2215 0073" },
-  { 0x33A8, "<square> 006D 2215 0073 00B2" },
-  { 0x33A9, "<square> 0050 0061" },
-  { 0x33AA, "<square> 006B 0050 0061" },
-  { 0x33AB, "<square> 004D 0050 0061" },
-  { 0x33AC, "<square> 0047 0050 0061" },
-  { 0x33AD, "<square> 0072 0061 0064" },
-  { 0x33AE, "<square> 0072 0061 0064 2215 0073" },
-  { 0x33AF, "<square> 0072 0061 0064 2215 0073 00B2" },
-  { 0x33B0, "<square> 0070 0073" },
-  { 0x33B1, "<square> 006E 0073" },
-  { 0x33B2, "<square> 03BC 0073" },
-  { 0x33B3, "<square> 006D 0073" },
-  { 0x33B4, "<square> 0070 0056" },
-  { 0x33B5, "<square> 006E 0056" },
-  { 0x33B6, "<square> 03BC 0056" },
-  { 0x33B7, "<square> 006D 0056" },
-  { 0x33B8, "<square> 006B 0056" },
-  { 0x33B9, "<square> 004D 0056" },
-  { 0x33BA, "<square> 0070 0057" },
-  { 0x33BB, "<square> 006E 0057" },
-  { 0x33BC, "<square> 03BC 0057" },
-  { 0x33BD, "<square> 006D 0057" },
-  { 0x33BE, "<square> 006B 0057" },
-  { 0x33BF, "<square> 004D 0057" },
-  { 0x33C0, "<square> 006B 03A9" },
-  { 0x33C1, "<square> 004D 03A9" },
-  { 0x33C2, "<square> 0061 002E 006D 002E" },
-  { 0x33C3, "<square> 0042 0071" },
-  { 0x33C4, "<square> 0063 0063" },
-  { 0x33C5, "<square> 0063 0064" },
-  { 0x33C6, "<square> 0043 2215 006B 0067" },
-  { 0x33C7, "<square> 0043 006F 002E" },
-  { 0x33C8, "<square> 0064 0042" },
-  { 0x33C9, "<square> 0047 0079" },
-  { 0x33CA, "<square> 0068 0061" },
-  { 0x33CB, "<square> 0048 0050" },
-  { 0x33CC, "<square> 0069 006E" },
-  { 0x33CD, "<square> 004B 004B" },
-  { 0x33CE, "<square> 004B 004D" },
-  { 0x33CF, "<square> 006B 0074" },
-  { 0x33D0, "<square> 006C 006D" },
-  { 0x33D1, "<square> 006C 006E" },
-  { 0x33D2, "<square> 006C 006F 0067" },
-  { 0x33D3, "<square> 006C 0078" },
-  { 0x33D4, "<square> 006D 0062" },
-  { 0x33D5, "<square> 006D 0069 006C" },
-  { 0x33D6, "<square> 006D 006F 006C" },
-  { 0x33D7, "<square> 0050 0048" },
-  { 0x33D8, "<square> 0070 002E 006D 002E" },
-  { 0x33D9, "<square> 0050 0050 004D" },
-  { 0x33DA, "<square> 0050 0052" },
-  { 0x33DB, "<square> 0073 0072" },
-  { 0x33DC, "<square> 0053 0076" },
-  { 0x33DD, "<square> 0057 0062" },
-  { 0x33DE, "<square> 0056 2215 006D" },
-  { 0x33DF, "<square> 0041 2215 006D" },
-  { 0x33E0, "0031 65E5" },
-  { 0x33E1, "0032 65E5" },
-  { 0x33E2, "0033 65E5" },
-  { 0x33E3, "0034 65E5" },
-  { 0x33E4, "0035 65E5" },
-  { 0x33E5, "0036 65E5" },
-  { 0x33E6, "0037 65E5" },
-  { 0x33E7, "0038 65E5" },
-  { 0x33E8, "0039 65E5" },
-  { 0x33E9, "0031 0030 65E5" },
-  { 0x33EA, "0031 0031 65E5" },
-  { 0x33EB, "0031 0032 65E5" },
-  { 0x33EC, "0031 0033 65E5" },
-  { 0x33ED, "0031 0034 65E5" },
-  { 0x33EE, "0031 0035 65E5" },
-  { 0x33EF, "0031 0036 65E5" },
-  { 0x33F0, "0031 0037 65E5" },
-  { 0x33F1, "0031 0038 65E5" },
-  { 0x33F2, "0031 0039 65E5" },
-  { 0x33F3, "0032 0030 65E5" },
-  { 0x33F4, "0032 0031 65E5" },
-  { 0x33F5, "0032 0032 65E5" },
-  { 0x33F6, "0032 0033 65E5" },
-  { 0x33F7, "0032 0034 65E5" },
-  { 0x33F8, "0032 0035 65E5" },
-  { 0x33F9, "0032 0036 65E5" },
-  { 0x33FA, "0032 0037 65E5" },
-  { 0x33FB, "0032 0038 65E5" },
-  { 0x33FC, "0032 0039 65E5" },
-  { 0x33FD, "0033 0030 65E5" },
-  { 0x33FE, "0033 0031 65E5" },
-  { 0x33FF, "<square> 0067 0061 006C" },
-  { 0xFB00, "0066 0066" },
-  { 0xFB01, "0066 0069" },
-  { 0xFB02, "0066 006C" },
-  { 0xFB03, "0066 0066 0069" },
-  { 0xFB04, "0066 0066 006C" },
-  { 0xFB05, "017F 0074" },
-  { 0xFB06, "0073 0074" },
-  { 0xFB13, "0574 0576" },
-  { 0xFB14, "0574 0565" },
-  { 0xFB15, "0574 056B" },
-  { 0xFB16, "057E 0576" },
-  { 0xFB17, "0574 056D" },
-  { 0xFB20, "<font> 05E2 hebrew letter ayin" },
-  { 0xFB21, "<font> 05D0 hebrew letter alef" },
-  { 0xFB22, "<font> 05D3 hebrew letter dalet" },
-  { 0xFB23, "<font> 05D4 hebrew letter he" },
-  { 0xFB24, "<font> 05DB hebrew letter kaf" },
-  { 0xFB25, "<font> 05DC hebrew letter lamed" },
-  { 0xFB26, "<font> 05DD hebrew letter final mem" },
-  { 0xFB27, "<font> 05E8 hebrew letter resh" },
-  { 0xFB28, "<font> 05EA hebrew letter tav" },
-  { 0xFB29, "<font> 002B plus sign" },
-  { 0xFB4F, "05D0 05DC" },
-  { 0xFB50, "<isolated> 0671" },
-  { 0xFB51, "<final> 0671" },
-  { 0xFB52, "<isolated> 067B" },
-  { 0xFB53, "<final> 067B" },
-  { 0xFB54, "<initial> 067B" },
-  { 0xFB55, "<medial> 067B" },
-  { 0xFB56, "<isolated> 067E" },
-  { 0xFB57, "<final> 067E" },
-  { 0xFB58, "<initial> 067E" },
-  { 0xFB59, "<medial> 067E" },
-  { 0xFB5A, "<isolated> 0680" },
-  { 0xFB5B, "<final> 0680" },
-  { 0xFB5C, "<initial> 0680" },
-  { 0xFB5D, "<medial> 0680" },
-  { 0xFB5E, "<isolated> 067A" },
-  { 0xFB5F, "<final> 067A" },
-  { 0xFB60, "<initial> 067A" },
-  { 0xFB61, "<medial> 067A" },
-  { 0xFB62, "<isolated> 067F" },
-  { 0xFB63, "<final> 067F" },
-  { 0xFB64, "<initial> 067F" },
-  { 0xFB65, "<medial> 067F" },
-  { 0xFB66, "<isolated> 0679" },
-  { 0xFB67, "<final> 0679" },
-  { 0xFB68, "<initial> 0679" },
-  { 0xFB69, "<medial> 0679" },
-  { 0xFB6A, "<isolated> 06A4" },
-  { 0xFB6B, "<final> 06A4" },
-  { 0xFB6C, "<initial> 06A4" },
-  { 0xFB6D, "<medial> 06A4" },
-  { 0xFB6E, "<isolated> 06A6" },
-  { 0xFB6F, "<final> 06A6" },
-  { 0xFB70, "<initial> 06A6" },
-  { 0xFB71, "<medial> 06A6" },
-  { 0xFB72, "<isolated> 0684" },
-  { 0xFB73, "<final> 0684" },
-  { 0xFB74, "<initial> 0684" },
-  { 0xFB75, "<medial> 0684" },
-  { 0xFB76, "<isolated> 0683" },
-  { 0xFB77, "<final> 0683" },
-  { 0xFB78, "<initial> 0683" },
-  { 0xFB79, "<medial> 0683" },
-  { 0xFB7A, "<isolated> 0686" },
-  { 0xFB7B, "<final> 0686" },
-  { 0xFB7C, "<initial> 0686" },
-  { 0xFB7D, "<medial> 0686" },
-  { 0xFB7E, "<isolated> 0687" },
-  { 0xFB7F, "<final> 0687" },
-  { 0xFB80, "<initial> 0687" },
-  { 0xFB81, "<medial> 0687" },
-  { 0xFB82, "<isolated> 068D" },
-  { 0xFB83, "<final> 068D" },
-  { 0xFB84, "<isolated> 068C" },
-  { 0xFB85, "<final> 068C" },
-  { 0xFB86, "<isolated> 068E" },
-  { 0xFB87, "<final> 068E" },
-  { 0xFB88, "<isolated> 0688" },
-  { 0xFB89, "<final> 0688" },
-  { 0xFB8A, "<isolated> 0698" },
-  { 0xFB8B, "<final> 0698" },
-  { 0xFB8C, "<isolated> 0691" },
-  { 0xFB8D, "<final> 0691" },
-  { 0xFB8E, "<isolated> 06A9" },
-  { 0xFB8F, "<final> 06A9" },
-  { 0xFB90, "<initial> 06A9" },
-  { 0xFB91, "<medial> 06A9" },
-  { 0xFB92, "<isolated> 06AF" },
-  { 0xFB93, "<final> 06AF" },
-  { 0xFB94, "<initial> 06AF" },
-  { 0xFB95, "<medial> 06AF" },
-  { 0xFB96, "<isolated> 06B3" },
-  { 0xFB97, "<final> 06B3" },
-  { 0xFB98, "<initial> 06B3" },
-  { 0xFB99, "<medial> 06B3" },
-  { 0xFB9A, "<isolated> 06B1" },
-  { 0xFB9B, "<final> 06B1" },
-  { 0xFB9C, "<initial> 06B1" },
-  { 0xFB9D, "<medial> 06B1" },
-  { 0xFB9E, "<isolated> 06BA" },
-  { 0xFB9F, "<final> 06BA" },
-  { 0xFBA0, "<isolated> 06BB" },
-  { 0xFBA1, "<final> 06BB" },
-  { 0xFBA2, "<initial> 06BB" },
-  { 0xFBA3, "<medial> 06BB" },
-  { 0xFBA4, "<isolated> 06C0" },
-  { 0xFBA5, "<final> 06C0" },
-  { 0xFBA6, "<isolated> 06C1" },
-  { 0xFBA7, "<final> 06C1" },
-  { 0xFBA8, "<initial> 06C1" },
-  { 0xFBA9, "<medial> 06C1" },
-  { 0xFBAA, "<isolated> 06BE" },
-  { 0xFBAB, "<final> 06BE" },
-  { 0xFBAC, "<initial> 06BE" },
-  { 0xFBAD, "<medial> 06BE" },
-  { 0xFBAE, "<isolated> 06D2" },
-  { 0xFBAF, "<final> 06D2" },
-  { 0xFBB0, "<isolated> 06D3" },
-  { 0xFBB1, "<final> 06D3" },
-  { 0xFBD3, "<isolated> 06AD" },
-  { 0xFBD4, "<final> 06AD" },
-  { 0xFBD5, "<initial> 06AD" },
-  { 0xFBD6, "<medial> 06AD" },
-  { 0xFBD7, "<isolated> 06C7" },
-  { 0xFBD8, "<final> 06C7" },
-  { 0xFBD9, "<isolated> 06C6" },
-  { 0xFBDA, "<final> 06C6" },
-  { 0xFBDB, "<isolated> 06C8" },
-  { 0xFBDC, "<final> 06C8" },
-  { 0xFBDD, "<isolated> 0677" },
-  { 0xFBDE, "<isolated> 06CB" },
-  { 0xFBDF, "<final> 06CB" },
-  { 0xFBE0, "<isolated> 06C5" },
-  { 0xFBE1, "<final> 06C5" },
-  { 0xFBE2, "<isolated> 06C9" },
-  { 0xFBE3, "<final> 06C9" },
-  { 0xFBE4, "<isolated> 06D0" },
-  { 0xFBE5, "<final> 06D0" },
-  { 0xFBE6, "<initial> 06D0" },
-  { 0xFBE7, "<medial> 06D0" },
-  { 0xFBE8, "<initial> 0649" },
-  { 0xFBE9, "<medial> 0649" },
-  { 0xFBEA, "<isolated> 0626 0627" },
-  { 0xFBEB, "<final> 0626 0627" },
-  { 0xFBEC, "<isolated> 0626 06D5" },
-  { 0xFBED, "<final> 0626 06D5" },
-  { 0xFBEE, "<isolated> 0626 0648" },
-  { 0xFBEF, "<final> 0626 0648" },
-  { 0xFBF0, "<isolated> 0626 06C7" },
-  { 0xFBF1, "<final> 0626 06C7" },
-  { 0xFBF2, "<isolated> 0626 06C6" },
-  { 0xFBF3, "<final> 0626 06C6" },
-  { 0xFBF4, "<isolated> 0626 06C8" },
-  { 0xFBF5, "<final> 0626 06C8" },
-  { 0xFBF6, "<isolated> 0626 06D0" },
-  { 0xFBF7, "<final> 0626 06D0" },
-  { 0xFBF8, "<initial> 0626 06D0" },
-  { 0xFBF9, "<isolated> 0626 0649" },
-  { 0xFBFA, "<final> 0626 0649" },
-  { 0xFBFB, "<initial> 0626 0649" },
-  { 0xFBFC, "<isolated> 06CC" },
-  { 0xFBFD, "<final> 06CC" },
-  { 0xFBFE, "<initial> 06CC" },
-  { 0xFBFF, "<medial> 06CC" },
-  { 0xFC00, "<isolated> 0626 062C" },
-  { 0xFC01, "<isolated> 0626 062D" },
-  { 0xFC02, "<isolated> 0626 0645" },
-  { 0xFC03, "<isolated> 0626 0649" },
-  { 0xFC04, "<isolated> 0626 064A" },
-  { 0xFC05, "<isolated> 0628 062C" },
-  { 0xFC06, "<isolated> 0628 062D" },
-  { 0xFC07, "<isolated> 0628 062E" },
-  { 0xFC08, "<isolated> 0628 0645" },
-  { 0xFC09, "<isolated> 0628 0649" },
-  { 0xFC0A, "<isolated> 0628 064A" },
-  { 0xFC0B, "<isolated> 062A 062C" },
-  { 0xFC0C, "<isolated> 062A 062D" },
-  { 0xFC0D, "<isolated> 062A 062E" },
-  { 0xFC0E, "<isolated> 062A 0645" },
-  { 0xFC0F, "<isolated> 062A 0649" },
-  { 0xFC10, "<isolated> 062A 064A" },
-  { 0xFC11, "<isolated> 062B 062C" },
-  { 0xFC12, "<isolated> 062B 0645" },
-  { 0xFC13, "<isolated> 062B 0649" },
-  { 0xFC14, "<isolated> 062B 064A" },
-  { 0xFC15, "<isolated> 062C 062D" },
-  { 0xFC16, "<isolated> 062C 0645" },
-  { 0xFC17, "<isolated> 062D 062C" },
-  { 0xFC18, "<isolated> 062D 0645" },
-  { 0xFC19, "<isolated> 062E 062C" },
-  { 0xFC1A, "<isolated> 062E 062D" },
-  { 0xFC1B, "<isolated> 062E 0645" },
-  { 0xFC1C, "<isolated> 0633 062C" },
-  { 0xFC1D, "<isolated> 0633 062D" },
-  { 0xFC1E, "<isolated> 0633 062E" },
-  { 0xFC1F, "<isolated> 0633 0645" },
-  { 0xFC20, "<isolated> 0635 062D" },
-  { 0xFC21, "<isolated> 0635 0645" },
-  { 0xFC22, "<isolated> 0636 062C" },
-  { 0xFC23, "<isolated> 0636 062D" },
-  { 0xFC24, "<isolated> 0636 062E" },
-  { 0xFC25, "<isolated> 0636 0645" },
-  { 0xFC26, "<isolated> 0637 062D" },
-  { 0xFC27, "<isolated> 0637 0645" },
-  { 0xFC28, "<isolated> 0638 0645" },
-  { 0xFC29, "<isolated> 0639 062C" },
-  { 0xFC2A, "<isolated> 0639 0645" },
-  { 0xFC2B, "<isolated> 063A 062C" },
-  { 0xFC2C, "<isolated> 063A 0645" },
-  { 0xFC2D, "<isolated> 0641 062C" },
-  { 0xFC2E, "<isolated> 0641 062D" },
-  { 0xFC2F, "<isolated> 0641 062E" },
-  { 0xFC30, "<isolated> 0641 0645" },
-  { 0xFC31, "<isolated> 0641 0649" },
-  { 0xFC32, "<isolated> 0641 064A" },
-  { 0xFC33, "<isolated> 0642 062D" },
-  { 0xFC34, "<isolated> 0642 0645" },
-  { 0xFC35, "<isolated> 0642 0649" },
-  { 0xFC36, "<isolated> 0642 064A" },
-  { 0xFC37, "<isolated> 0643 0627" },
-  { 0xFC38, "<isolated> 0643 062C" },
-  { 0xFC39, "<isolated> 0643 062D" },
-  { 0xFC3A, "<isolated> 0643 062E" },
-  { 0xFC3B, "<isolated> 0643 0644" },
-  { 0xFC3C, "<isolated> 0643 0645" },
-  { 0xFC3D, "<isolated> 0643 0649" },
-  { 0xFC3E, "<isolated> 0643 064A" },
-  { 0xFC3F, "<isolated> 0644 062C" },
-  { 0xFC40, "<isolated> 0644 062D" },
-  { 0xFC41, "<isolated> 0644 062E" },
-  { 0xFC42, "<isolated> 0644 0645" },
-  { 0xFC43, "<isolated> 0644 0649" },
-  { 0xFC44, "<isolated> 0644 064A" },
-  { 0xFC45, "<isolated> 0645 062C" },
-  { 0xFC46, "<isolated> 0645 062D" },
-  { 0xFC47, "<isolated> 0645 062E" },
-  { 0xFC48, "<isolated> 0645 0645" },
-  { 0xFC49, "<isolated> 0645 0649" },
-  { 0xFC4A, "<isolated> 0645 064A" },
-  { 0xFC4B, "<isolated> 0646 062C" },
-  { 0xFC4C, "<isolated> 0646 062D" },
-  { 0xFC4D, "<isolated> 0646 062E" },
-  { 0xFC4E, "<isolated> 0646 0645" },
-  { 0xFC4F, "<isolated> 0646 0649" },
-  { 0xFC50, "<isolated> 0646 064A" },
-  { 0xFC51, "<isolated> 0647 062C" },
-  { 0xFC52, "<isolated> 0647 0645" },
-  { 0xFC53, "<isolated> 0647 0649" },
-  { 0xFC54, "<isolated> 0647 064A" },
-  { 0xFC55, "<isolated> 064A 062C" },
-  { 0xFC56, "<isolated> 064A 062D" },
-  { 0xFC57, "<isolated> 064A 062E" },
-  { 0xFC58, "<isolated> 064A 0645" },
-  { 0xFC59, "<isolated> 064A 0649" },
-  { 0xFC5A, "<isolated> 064A 064A" },
-  { 0xFC5B, "<isolated> 0630 0670" },
-  { 0xFC5C, "<isolated> 0631 0670" },
-  { 0xFC5D, "<isolated> 0649 0670" },
-  { 0xFC5E, "<isolated> 0020 064C 0651" },
-  { 0xFC5F, "<isolated> 0020 064D 0651" },
-  { 0xFC60, "<isolated> 0020 064E 0651" },
-  { 0xFC61, "<isolated> 0020 064F 0651" },
-  { 0xFC62, "<isolated> 0020 0650 0651" },
-  { 0xFC63, "<isolated> 0020 0651 0670" },
-  { 0xFC64, "<final> 0626 0631" },
-  { 0xFC65, "<final> 0626 0632" },
-  { 0xFC66, "<final> 0626 0645" },
-  { 0xFC67, "<final> 0626 0646" },
-  { 0xFC68, "<final> 0626 0649" },
-  { 0xFC69, "<final> 0626 064A" },
-  { 0xFC6A, "<final> 0628 0631" },
-  { 0xFC6B, "<final> 0628 0632" },
-  { 0xFC6C, "<final> 0628 0645" },
-  { 0xFC6D, "<final> 0628 0646" },
-  { 0xFC6E, "<final> 0628 0649" },
-  { 0xFC6F, "<final> 0628 064A" },
-  { 0xFC70, "<final> 062A 0631" },
-  { 0xFC71, "<final> 062A 0632" },
-  { 0xFC72, "<final> 062A 0645" },
-  { 0xFC73, "<final> 062A 0646" },
-  { 0xFC74, "<final> 062A 0649" },
-  { 0xFC75, "<final> 062A 064A" },
-  { 0xFC76, "<final> 062B 0631" },
-  { 0xFC77, "<final> 062B 0632" },
-  { 0xFC78, "<final> 062B 0645" },
-  { 0xFC79, "<final> 062B 0646" },
-  { 0xFC7A, "<final> 062B 0649" },
-  { 0xFC7B, "<final> 062B 064A" },
-  { 0xFC7C, "<final> 0641 0649" },
-  { 0xFC7D, "<final> 0641 064A" },
-  { 0xFC7E, "<final> 0642 0649" },
-  { 0xFC7F, "<final> 0642 064A" },
-  { 0xFC80, "<final> 0643 0627" },
-  { 0xFC81, "<final> 0643 0644" },
-  { 0xFC82, "<final> 0643 0645" },
-  { 0xFC83, "<final> 0643 0649" },
-  { 0xFC84, "<final> 0643 064A" },
-  { 0xFC85, "<final> 0644 0645" },
-  { 0xFC86, "<final> 0644 0649" },
-  { 0xFC87, "<final> 0644 064A" },
-  { 0xFC88, "<final> 0645 0627" },
-  { 0xFC89, "<final> 0645 0645" },
-  { 0xFC8A, "<final> 0646 0631" },
-  { 0xFC8B, "<final> 0646 0632" },
-  { 0xFC8C, "<final> 0646 0645" },
-  { 0xFC8D, "<final> 0646 0646" },
-  { 0xFC8E, "<final> 0646 0649" },
-  { 0xFC8F, "<final> 0646 064A" },
-  { 0xFC90, "<final> 0649 0670" },
-  { 0xFC91, "<final> 064A 0631" },
-  { 0xFC92, "<final> 064A 0632" },
-  { 0xFC93, "<final> 064A 0645" },
-  { 0xFC94, "<final> 064A 0646" },
-  { 0xFC95, "<final> 064A 0649" },
-  { 0xFC96, "<final> 064A 064A" },
-  { 0xFC97, "<initial> 0626 062C" },
-  { 0xFC98, "<initial> 0626 062D" },
-  { 0xFC99, "<initial> 0626 062E" },
-  { 0xFC9A, "<initial> 0626 0645" },
-  { 0xFC9B, "<initial> 0626 0647" },
-  { 0xFC9C, "<initial> 0628 062C" },
-  { 0xFC9D, "<initial> 0628 062D" },
-  { 0xFC9E, "<initial> 0628 062E" },
-  { 0xFC9F, "<initial> 0628 0645" },
-  { 0xFCA0, "<initial> 0628 0647" },
-  { 0xFCA1, "<initial> 062A 062C" },
-  { 0xFCA2, "<initial> 062A 062D" },
-  { 0xFCA3, "<initial> 062A 062E" },
-  { 0xFCA4, "<initial> 062A 0645" },
-  { 0xFCA5, "<initial> 062A 0647" },
-  { 0xFCA6, "<initial> 062B 0645" },
-  { 0xFCA7, "<initial> 062C 062D" },
-  { 0xFCA8, "<initial> 062C 0645" },
-  { 0xFCA9, "<initial> 062D 062C" },
-  { 0xFCAA, "<initial> 062D 0645" },
-  { 0xFCAB, "<initial> 062E 062C" },
-  { 0xFCAC, "<initial> 062E 0645" },
-  { 0xFCAD, "<initial> 0633 062C" },
-  { 0xFCAE, "<initial> 0633 062D" },
-  { 0xFCAF, "<initial> 0633 062E" },
-  { 0xFCB0, "<initial> 0633 0645" },
-  { 0xFCB1, "<initial> 0635 062D" },
-  { 0xFCB2, "<initial> 0635 062E" },
-  { 0xFCB3, "<initial> 0635 0645" },
-  { 0xFCB4, "<initial> 0636 062C" },
-  { 0xFCB5, "<initial> 0636 062D" },
-  { 0xFCB6, "<initial> 0636 062E" },
-  { 0xFCB7, "<initial> 0636 0645" },
-  { 0xFCB8, "<initial> 0637 062D" },
-  { 0xFCB9, "<initial> 0638 0645" },
-  { 0xFCBA, "<initial> 0639 062C" },
-  { 0xFCBB, "<initial> 0639 0645" },
-  { 0xFCBC, "<initial> 063A 062C" },
-  { 0xFCBD, "<initial> 063A 0645" },
-  { 0xFCBE, "<initial> 0641 062C" },
-  { 0xFCBF, "<initial> 0641 062D" },
-  { 0xFCC0, "<initial> 0641 062E" },
-  { 0xFCC1, "<initial> 0641 0645" },
-  { 0xFCC2, "<initial> 0642 062D" },
-  { 0xFCC3, "<initial> 0642 0645" },
-  { 0xFCC4, "<initial> 0643 062C" },
-  { 0xFCC5, "<initial> 0643 062D" },
-  { 0xFCC6, "<initial> 0643 062E" },
-  { 0xFCC7, "<initial> 0643 0644" },
-  { 0xFCC8, "<initial> 0643 0645" },
-  { 0xFCC9, "<initial> 0644 062C" },
-  { 0xFCCA, "<initial> 0644 062D" },
-  { 0xFCCB, "<initial> 0644 062E" },
-  { 0xFCCC, "<initial> 0644 0645" },
-  { 0xFCCD, "<initial> 0644 0647" },
-  { 0xFCCE, "<initial> 0645 062C" },
-  { 0xFCCF, "<initial> 0645 062D" },
-  { 0xFCD0, "<initial> 0645 062E" },
-  { 0xFCD1, "<initial> 0645 0645" },
-  { 0xFCD2, "<initial> 0646 062C" },
-  { 0xFCD3, "<initial> 0646 062D" },
-  { 0xFCD4, "<initial> 0646 062E" },
-  { 0xFCD5, "<initial> 0646 0645" },
-  { 0xFCD6, "<initial> 0646 0647" },
-  { 0xFCD7, "<initial> 0647 062C" },
-  { 0xFCD8, "<initial> 0647 0645" },
-  { 0xFCD9, "<initial> 0647 0670" },
-  { 0xFCDA, "<initial> 064A 062C" },
-  { 0xFCDB, "<initial> 064A 062D" },
-  { 0xFCDC, "<initial> 064A 062E" },
-  { 0xFCDD, "<initial> 064A 0645" },
-  { 0xFCDE, "<initial> 064A 0647" },
-  { 0xFCDF, "<medial> 0626 0645" },
-  { 0xFCE0, "<medial> 0626 0647" },
-  { 0xFCE1, "<medial> 0628 0645" },
-  { 0xFCE2, "<medial> 0628 0647" },
-  { 0xFCE3, "<medial> 062A 0645" },
-  { 0xFCE4, "<medial> 062A 0647" },
-  { 0xFCE5, "<medial> 062B 0645" },
-  { 0xFCE6, "<medial> 062B 0647" },
-  { 0xFCE7, "<medial> 0633 0645" },
-  { 0xFCE8, "<medial> 0633 0647" },
-  { 0xFCE9, "<medial> 0634 0645" },
-  { 0xFCEA, "<medial> 0634 0647" },
-  { 0xFCEB, "<medial> 0643 0644" },
-  { 0xFCEC, "<medial> 0643 0645" },
-  { 0xFCED, "<medial> 0644 0645" },
-  { 0xFCEE, "<medial> 0646 0645" },
-  { 0xFCEF, "<medial> 0646 0647" },
-  { 0xFCF0, "<medial> 064A 0645" },
-  { 0xFCF1, "<medial> 064A 0647" },
-  { 0xFCF2, "<medial> 0640 064E 0651" },
-  { 0xFCF3, "<medial> 0640 064F 0651" },
-  { 0xFCF4, "<medial> 0640 0650 0651" },
-  { 0xFCF5, "<isolated> 0637 0649" },
-  { 0xFCF6, "<isolated> 0637 064A" },
-  { 0xFCF7, "<isolated> 0639 0649" },
-  { 0xFCF8, "<isolated> 0639 064A" },
-  { 0xFCF9, "<isolated> 063A 0649" },
-  { 0xFCFA, "<isolated> 063A 064A" },
-  { 0xFCFB, "<isolated> 0633 0649" },
-  { 0xFCFC, "<isolated> 0633 064A" },
-  { 0xFCFD, "<isolated> 0634 0649" },
-  { 0xFCFE, "<isolated> 0634 064A" },
-  { 0xFCFF, "<isolated> 062D 0649" },
-  { 0xFD00, "<isolated> 062D 064A" },
-  { 0xFD01, "<isolated> 062C 0649" },
-  { 0xFD02, "<isolated> 062C 064A" },
-  { 0xFD03, "<isolated> 062E 0649" },
-  { 0xFD04, "<isolated> 062E 064A" },
-  { 0xFD05, "<isolated> 0635 0649" },
-  { 0xFD06, "<isolated> 0635 064A" },
-  { 0xFD07, "<isolated> 0636 0649" },
-  { 0xFD08, "<isolated> 0636 064A" },
-  { 0xFD09, "<isolated> 0634 062C" },
-  { 0xFD0A, "<isolated> 0634 062D" },
-  { 0xFD0B, "<isolated> 0634 062E" },
-  { 0xFD0C, "<isolated> 0634 0645" },
-  { 0xFD0D, "<isolated> 0634 0631" },
-  { 0xFD0E, "<isolated> 0633 0631" },
-  { 0xFD0F, "<isolated> 0635 0631" },
-  { 0xFD10, "<isolated> 0636 0631" },
-  { 0xFD11, "<final> 0637 0649" },
-  { 0xFD12, "<final> 0637 064A" },
-  { 0xFD13, "<final> 0639 0649" },
-  { 0xFD14, "<final> 0639 064A" },
-  { 0xFD15, "<final> 063A 0649" },
-  { 0xFD16, "<final> 063A 064A" },
-  { 0xFD17, "<final> 0633 0649" },
-  { 0xFD18, "<final> 0633 064A" },
-  { 0xFD19, "<final> 0634 0649" },
-  { 0xFD1A, "<final> 0634 064A" },
-  { 0xFD1B, "<final> 062D 0649" },
-  { 0xFD1C, "<final> 062D 064A" },
-  { 0xFD1D, "<final> 062C 0649" },
-  { 0xFD1E, "<final> 062C 064A" },
-  { 0xFD1F, "<final> 062E 0649" },
-  { 0xFD20, "<final> 062E 064A" },
-  { 0xFD21, "<final> 0635 0649" },
-  { 0xFD22, "<final> 0635 064A" },
-  { 0xFD23, "<final> 0636 0649" },
-  { 0xFD24, "<final> 0636 064A" },
-  { 0xFD25, "<final> 0634 062C" },
-  { 0xFD26, "<final> 0634 062D" },
-  { 0xFD27, "<final> 0634 062E" },
-  { 0xFD28, "<final> 0634 0645" },
-  { 0xFD29, "<final> 0634 0631" },
-  { 0xFD2A, "<final> 0633 0631" },
-  { 0xFD2B, "<final> 0635 0631" },
-  { 0xFD2C, "<final> 0636 0631" },
-  { 0xFD2D, "<initial> 0634 062C" },
-  { 0xFD2E, "<initial> 0634 062D" },
-  { 0xFD2F, "<initial> 0634 062E" },
-  { 0xFD30, "<initial> 0634 0645" },
-  { 0xFD31, "<initial> 0633 0647" },
-  { 0xFD32, "<initial> 0634 0647" },
-  { 0xFD33, "<initial> 0637 0645" },
-  { 0xFD34, "<medial> 0633 062C" },
-  { 0xFD35, "<medial> 0633 062D" },
-  { 0xFD36, "<medial> 0633 062E" },
-  { 0xFD37, "<medial> 0634 062C" },
-  { 0xFD38, "<medial> 0634 062D" },
-  { 0xFD39, "<medial> 0634 062E" },
-  { 0xFD3A, "<medial> 0637 0645" },
-  { 0xFD3B, "<medial> 0638 0645" },
-  { 0xFD3C, "<final> 0627 064B" },
-  { 0xFD3D, "<isolated> 0627 064B" },
-  { 0xFD50, "<initial> 062A 062C 0645" },
-  { 0xFD51, "<final> 062A 062D 062C" },
-  { 0xFD52, "<initial> 062A 062D 062C" },
-  { 0xFD53, "<initial> 062A 062D 0645" },
-  { 0xFD54, "<initial> 062A 062E 0645" },
-  { 0xFD55, "<initial> 062A 0645 062C" },
-  { 0xFD56, "<initial> 062A 0645 062D" },
-  { 0xFD57, "<initial> 062A 0645 062E" },
-  { 0xFD58, "<final> 062C 0645 062D" },
-  { 0xFD59, "<initial> 062C 0645 062D" },
-  { 0xFD5A, "<final> 062D 0645 064A" },
-  { 0xFD5B, "<final> 062D 0645 0649" },
-  { 0xFD5C, "<initial> 0633 062D 062C" },
-  { 0xFD5D, "<initial> 0633 062C 062D" },
-  { 0xFD5E, "<final> 0633 062C 0649" },
-  { 0xFD5F, "<final> 0633 0645 062D" },
-  { 0xFD60, "<initial> 0633 0645 062D" },
-  { 0xFD61, "<initial> 0633 0645 062C" },
-  { 0xFD62, "<final> 0633 0645 0645" },
-  { 0xFD63, "<initial> 0633 0645 0645" },
-  { 0xFD64, "<final> 0635 062D 062D" },
-  { 0xFD65, "<initial> 0635 062D 062D" },
-  { 0xFD66, "<final> 0635 0645 0645" },
-  { 0xFD67, "<final> 0634 062D 0645" },
-  { 0xFD68, "<initial> 0634 062D 0645" },
-  { 0xFD69, "<final> 0634 062C 064A" },
-  { 0xFD6A, "<final> 0634 0645 062E" },
-  { 0xFD6B, "<initial> 0634 0645 062E" },
-  { 0xFD6C, "<final> 0634 0645 0645" },
-  { 0xFD6D, "<initial> 0634 0645 0645" },
-  { 0xFD6E, "<final> 0636 062D 0649" },
-  { 0xFD6F, "<final> 0636 062E 0645" },
-  { 0xFD70, "<initial> 0636 062E 0645" },
-  { 0xFD71, "<final> 0637 0645 062D" },
-  { 0xFD72, "<initial> 0637 0645 062D" },
-  { 0xFD73, "<initial> 0637 0645 0645" },
-  { 0xFD74, "<final> 0637 0645 064A" },
-  { 0xFD75, "<final> 0639 062C 0645" },
-  { 0xFD76, "<final> 0639 0645 0645" },
-  { 0xFD77, "<initial> 0639 0645 0645" },
-  { 0xFD78, "<final> 0639 0645 0649" },
-  { 0xFD79, "<final> 063A 0645 0645" },
-  { 0xFD7A, "<final> 063A 0645 064A" },
-  { 0xFD7B, "<final> 063A 0645 0649" },
-  { 0xFD7C, "<final> 0641 062E 0645" },
-  { 0xFD7D, "<initial> 0641 062E 0645" },
-  { 0xFD7E, "<final> 0642 0645 062D" },
-  { 0xFD7F, "<final> 0642 0645 0645" },
-  { 0xFD80, "<final> 0644 062D 0645" },
-  { 0xFD81, "<final> 0644 062D 064A" },
-  { 0xFD82, "<final> 0644 062D 0649" },
-  { 0xFD83, "<initial> 0644 062C 062C" },
-  { 0xFD84, "<final> 0644 062C 062C" },
-  { 0xFD85, "<final> 0644 062E 0645" },
-  { 0xFD86, "<initial> 0644 062E 0645" },
-  { 0xFD87, "<final> 0644 0645 062D" },
-  { 0xFD88, "<initial> 0644 0645 062D" },
-  { 0xFD89, "<initial> 0645 062D 062C" },
-  { 0xFD8A, "<initial> 0645 062D 0645" },
-  { 0xFD8B, "<final> 0645 062D 064A" },
-  { 0xFD8C, "<initial> 0645 062C 062D" },
-  { 0xFD8D, "<initial> 0645 062C 0645" },
-  { 0xFD8E, "<initial> 0645 062E 062C" },
-  { 0xFD8F, "<initial> 0645 062E 0645" },
-  { 0xFD92, "<initial> 0645 062C 062E" },
-  { 0xFD93, "<initial> 0647 0645 062C" },
-  { 0xFD94, "<initial> 0647 0645 0645" },
-  { 0xFD95, "<initial> 0646 062D 0645" },
-  { 0xFD96, "<final> 0646 062D 0649" },
-  { 0xFD97, "<final> 0646 062C 0645" },
-  { 0xFD98, "<initial> 0646 062C 0645" },
-  { 0xFD99, "<final> 0646 062C 0649" },
-  { 0xFD9A, "<final> 0646 0645 064A" },
-  { 0xFD9B, "<final> 0646 0645 0649" },
-  { 0xFD9C, "<final> 064A 0645 0645" },
-  { 0xFD9D, "<initial> 064A 0645 0645" },
-  { 0xFD9E, "<final> 0628 062E 064A" },
-  { 0xFD9F, "<final> 062A 062C 064A" },
-  { 0xFDA0, "<final> 062A 062C 0649" },
-  { 0xFDA1, "<final> 062A 062E 064A" },
-  { 0xFDA2, "<final> 062A 062E 0649" },
-  { 0xFDA3, "<final> 062A 0645 064A" },
-  { 0xFDA4, "<final> 062A 0645 0649" },
-  { 0xFDA5, "<final> 062C 0645 064A" },
-  { 0xFDA6, "<final> 062C 062D 0649" },
-  { 0xFDA7, "<final> 062C 0645 0649" },
-  { 0xFDA8, "<final> 0633 062E 0649" },
-  { 0xFDA9, "<final> 0635 062D 064A" },
-  { 0xFDAA, "<final> 0634 062D 064A" },
-  { 0xFDAB, "<final> 0636 062D 064A" },
-  { 0xFDAC, "<final> 0644 062C 064A" },
-  { 0xFDAD, "<final> 0644 0645 064A" },
-  { 0xFDAE, "<final> 064A 062D 064A" },
-  { 0xFDAF, "<final> 064A 062C 064A" },
-  { 0xFDB0, "<final> 064A 0645 064A" },
-  { 0xFDB1, "<final> 0645 0645 064A" },
-  { 0xFDB2, "<final> 0642 0645 064A" },
-  { 0xFDB3, "<final> 0646 062D 064A" },
-  { 0xFDB4, "<initial> 0642 0645 062D" },
-  { 0xFDB5, "<initial> 0644 062D 0645" },
-  { 0xFDB6, "<final> 0639 0645 064A" },
-  { 0xFDB7, "<final> 0643 0645 064A" },
-  { 0xFDB8, "<initial> 0646 062C 062D" },
-  { 0xFDB9, "<final> 0645 062E 064A" },
-  { 0xFDBA, "<initial> 0644 062C 0645" },
-  { 0xFDBB, "<final> 0643 0645 0645" },
-  { 0xFDBC, "<final> 0644 062C 0645" },
-  { 0xFDBD, "<final> 0646 062C 062D" },
-  { 0xFDBE, "<final> 062C 062D 064A" },
-  { 0xFDBF, "<final> 062D 062C 064A" },
-  { 0xFDC0, "<final> 0645 062C 064A" },
-  { 0xFDC1, "<final> 0641 0645 064A" },
-  { 0xFDC2, "<final> 0628 062D 064A" },
-  { 0xFDC3, "<initial> 0643 0645 0645" },
-  { 0xFDC4, "<initial> 0639 062C 0645" },
-  { 0xFDC5, "<initial> 0635 0645 0645" },
-  { 0xFDC6, "<final> 0633 062E 064A" },
-  { 0xFDC7, "<final> 0646 062C 064A" },
-  { 0xFDF0, "<isolated> 0635 0644 06D2" },
-  { 0xFDF1, "<isolated> 0642 0644 06D2" },
-  { 0xFDF2, "<isolated> 0627 0644 0644 0647" },
-  { 0xFDF3, "<isolated> 0627 0643 0628 0631" },
-  { 0xFDF4, "<isolated> 0645 062D 0645 062F" },
-  { 0xFDF5, "<isolated> 0635 0644 0639 0645" },
-  { 0xFDF6, "<isolated> 0631 0633 0648 0644" },
-  { 0xFDF7, "<isolated> 0639 0644 064A 0647" },
-  { 0xFDF8, "<isolated> 0648 0633 0644 0645" },
-  { 0xFDF9, "<isolated> 0635 0644 0649" },
-  { 0xFDFA, "<isolated> 0635 0644 0649 0020 0627 0644 0644 0647 0020 0639 0644 064A 0647 0020 0648 0633 0644 0645" },
-  { 0xFDFB, "<isolated> 062C 0644 0020 062C 0644 0627 0644 0647" },
-  { 0xFDFC, "<isolated> 0631 06CC 0627 0644" },
-  { 0xFE10, "<vertical> 002C" },
-  { 0xFE11, "<vertical> 3001" },
-  { 0xFE12, "<vertical> 3002" },
-  { 0xFE13, "<vertical> 003A" },
-  { 0xFE14, "<vertical> 003B" },
-  { 0xFE15, "<vertical> 0021" },
-  { 0xFE16, "<vertical> 003F" },
-  { 0xFE17, "<vertical> 3016" },
-  { 0xFE18, "<vertical> 3017" },
-  { 0xFE19, "<vertical> 2026" },
-  { 0xFE30, "<vertical> 2025" },
-  { 0xFE31, "<vertical> 2014" },
-  { 0xFE32, "<vertical> 2013" },
-  { 0xFE33, "<vertical> 005F" },
-  { 0xFE34, "<vertical> 005F" },
-  { 0xFE35, "<vertical> 0028" },
-  { 0xFE36, "<vertical> 0029" },
-  { 0xFE37, "<vertical> 007B" },
-  { 0xFE38, "<vertical> 007D" },
-  { 0xFE39, "<vertical> 3014" },
-  { 0xFE3A, "<vertical> 3015" },
-  { 0xFE3B, "<vertical> 3010" },
-  { 0xFE3C, "<vertical> 3011" },
-  { 0xFE3D, "<vertical> 300A" },
-  { 0xFE3E, "<vertical> 300B" },
-  { 0xFE3F, "<vertical> 3008" },
-  { 0xFE40, "<vertical> 3009" },
-  { 0xFE41, "<vertical> 300C" },
-  { 0xFE42, "<vertical> 300D" },
-  { 0xFE43, "<vertical> 300E" },
-  { 0xFE44, "<vertical> 300F" },
-  { 0xFE47, "<vertical> 005B" },
-  { 0xFE48, "<vertical> 005D" },
-  { 0xFE49, "203E overline" },
-  { 0xFE4A, "203E overline" },
-  { 0xFE4B, "203E overline" },
-  { 0xFE4C, "203E overline" },
-  { 0xFE4D, "005F low line" },
-  { 0xFE4E, "005F low line" },
-  { 0xFE4F, "005F low line" },
-  { 0xFE50, "<small> 002C" },
-  { 0xFE51, "<small> 3001" },
-  { 0xFE52, "<small> 002E" },
-  { 0xFE54, "<small> 003B" },
-  { 0xFE55, "<small> 003A" },
-  { 0xFE56, "<small> 003F" },
-  { 0xFE57, "<small> 0021" },
-  { 0xFE58, "<small> 2014" },
-  { 0xFE59, "<small> 0028" },
-  { 0xFE5A, "<small> 0029" },
-  { 0xFE5B, "<small> 007B" },
-  { 0xFE5C, "<small> 007D" },
-  { 0xFE5D, "<small> 3014" },
-  { 0xFE5E, "<small> 3015" },
-  { 0xFE5F, "<small> 0023" },
-  { 0xFE60, "<small> 0026" },
-  { 0xFE61, "<small> 002A" },
-  { 0xFE62, "<small> 002B" },
-  { 0xFE63, "<small> 002D" },
-  { 0xFE64, "<small> 003C" },
-  { 0xFE65, "<small> 003E" },
-  { 0xFE66, "<small> 003D" },
-  { 0xFE68, "<small> 005C" },
-  { 0xFE69, "<small> 0024" },
-  { 0xFE6A, "<small> 0025" },
-  { 0xFE6B, "<small> 0040" },
-  { 0xFE70, "<isolated> 0020 064B" },
-  { 0xFE71, "<medial> 0640 064B" },
-  { 0xFE72, "<isolated> 0020 064C" },
-  { 0xFE74, "<isolated> 0020 064D" },
-  { 0xFE76, "<isolated> 0020 064E" },
-  { 0xFE77, "<medial> 0640 064E" },
-  { 0xFE78, "<isolated> 0020 064F" },
-  { 0xFE79, "<medial> 0640 064F" },
-  { 0xFE7A, "<isolated> 0020 0650" },
-  { 0xFE7B, "<medial> 0640 0650" },
-  { 0xFE7C, "<isolated> 0020 0651" },
-  { 0xFE7D, "<medial> 0640 0651" },
-  { 0xFE7E, "<isolated> 0020 0652" },
-  { 0xFE7F, "<medial> 0640 0652" },
-  { 0xFE80, "<isolated> 0621" },
-  { 0xFE81, "<isolated> 0622" },
-  { 0xFE82, "<final> 0622" },
-  { 0xFE83, "<isolated> 0623" },
-  { 0xFE84, "<final> 0623" },
-  { 0xFE85, "<isolated> 0624" },
-  { 0xFE86, "<final> 0624" },
-  { 0xFE87, "<isolated> 0625" },
-  { 0xFE88, "<final> 0625" },
-  { 0xFE89, "<isolated> 0626" },
-  { 0xFE8A, "<final> 0626" },
-  { 0xFE8B, "<initial> 0626" },
-  { 0xFE8C, "<medial> 0626" },
-  { 0xFE8D, "<isolated> 0627" },
-  { 0xFE8E, "<final> 0627" },
-  { 0xFE8F, "<isolated> 0628" },
-  { 0xFE90, "<final> 0628" },
-  { 0xFE91, "<initial> 0628" },
-  { 0xFE92, "<medial> 0628" },
-  { 0xFE93, "<isolated> 0629" },
-  { 0xFE94, "<final> 0629" },
-  { 0xFE95, "<isolated> 062A" },
-  { 0xFE96, "<final> 062A" },
-  { 0xFE97, "<initial> 062A" },
-  { 0xFE98, "<medial> 062A" },
-  { 0xFE99, "<isolated> 062B" },
-  { 0xFE9A, "<final> 062B" },
-  { 0xFE9B, "<initial> 062B" },
-  { 0xFE9C, "<medial> 062B" },
-  { 0xFE9D, "<isolated> 062C" },
-  { 0xFE9E, "<final> 062C" },
-  { 0xFE9F, "<initial> 062C" },
-  { 0xFEA0, "<medial> 062C" },
-  { 0xFEA1, "<isolated> 062D" },
-  { 0xFEA2, "<final> 062D" },
-  { 0xFEA3, "<initial> 062D" },
-  { 0xFEA4, "<medial> 062D" },
-  { 0xFEA5, "<isolated> 062E" },
-  { 0xFEA6, "<final> 062E" },
-  { 0xFEA7, "<initial> 062E" },
-  { 0xFEA8, "<medial> 062E" },
-  { 0xFEA9, "<isolated> 062F" },
-  { 0xFEAA, "<final> 062F" },
-  { 0xFEAB, "<isolated> 0630" },
-  { 0xFEAC, "<final> 0630" },
-  { 0xFEAD, "<isolated> 0631" },
-  { 0xFEAE, "<final> 0631" },
-  { 0xFEAF, "<isolated> 0632" },
-  { 0xFEB0, "<final> 0632" },
-  { 0xFEB1, "<isolated> 0633" },
-  { 0xFEB2, "<final> 0633" },
-  { 0xFEB3, "<initial> 0633" },
-  { 0xFEB4, "<medial> 0633" },
-  { 0xFEB5, "<isolated> 0634" },
-  { 0xFEB6, "<final> 0634" },
-  { 0xFEB7, "<initial> 0634" },
-  { 0xFEB8, "<medial> 0634" },
-  { 0xFEB9, "<isolated> 0635" },
-  { 0xFEBA, "<final> 0635" },
-  { 0xFEBB, "<initial> 0635" },
-  { 0xFEBC, "<medial> 0635" },
-  { 0xFEBD, "<isolated> 0636" },
-  { 0xFEBE, "<final> 0636" },
-  { 0xFEBF, "<initial> 0636" },
-  { 0xFEC0, "<medial> 0636" },
-  { 0xFEC1, "<isolated> 0637" },
-  { 0xFEC2, "<final> 0637" },
-  { 0xFEC3, "<initial> 0637" },
-  { 0xFEC4, "<medial> 0637" },
-  { 0xFEC5, "<isolated> 0638" },
-  { 0xFEC6, "<final> 0638" },
-  { 0xFEC7, "<initial> 0638" },
-  { 0xFEC8, "<medial> 0638" },
-  { 0xFEC9, "<isolated> 0639" },
-  { 0xFECA, "<final> 0639" },
-  { 0xFECB, "<initial> 0639" },
-  { 0xFECC, "<medial> 0639" },
-  { 0xFECD, "<isolated> 063A" },
-  { 0xFECE, "<final> 063A" },
-  { 0xFECF, "<initial> 063A" },
-  { 0xFED0, "<medial> 063A" },
-  { 0xFED1, "<isolated> 0641" },
-  { 0xFED2, "<final> 0641" },
-  { 0xFED3, "<initial> 0641" },
-  { 0xFED4, "<medial> 0641" },
-  { 0xFED5, "<isolated> 0642" },
-  { 0xFED6, "<final> 0642" },
-  { 0xFED7, "<initial> 0642" },
-  { 0xFED8, "<medial> 0642" },
-  { 0xFED9, "<isolated> 0643" },
-  { 0xFEDA, "<final> 0643" },
-  { 0xFEDB, "<initial> 0643" },
-  { 0xFEDC, "<medial> 0643" },
-  { 0xFEDD, "<isolated> 0644" },
-  { 0xFEDE, "<final> 0644" },
-  { 0xFEDF, "<initial> 0644" },
-  { 0xFEE0, "<medial> 0644" },
-  { 0xFEE1, "<isolated> 0645" },
-  { 0xFEE2, "<final> 0645" },
-  { 0xFEE3, "<initial> 0645" },
-  { 0xFEE4, "<medial> 0645" },
-  { 0xFEE5, "<isolated> 0646" },
-  { 0xFEE6, "<final> 0646" },
-  { 0xFEE7, "<initial> 0646" },
-  { 0xFEE8, "<medial> 0646" },
-  { 0xFEE9, "<isolated> 0647" },
-  { 0xFEEA, "<final> 0647" },
-  { 0xFEEB, "<initial> 0647" },
-  { 0xFEEC, "<medial> 0647" },
-  { 0xFEED, "<isolated> 0648" },
-  { 0xFEEE, "<final> 0648" },
-  { 0xFEEF, "<isolated> 0649" },
-  { 0xFEF0, "<final> 0649" },
-  { 0xFEF1, "<isolated> 064A" },
-  { 0xFEF2, "<final> 064A" },
-  { 0xFEF3, "<initial> 064A" },
-  { 0xFEF4, "<medial> 064A" },
-  { 0xFEF5, "<isolated> 0644 0622" },
-  { 0xFEF6, "<final> 0644 0622" },
-  { 0xFEF7, "<isolated> 0644 0623" },
-  { 0xFEF8, "<final> 0644 0623" },
-  { 0xFEF9, "<isolated> 0644 0625" },
-  { 0xFEFA, "<final> 0644 0625" },
-  { 0xFEFB, "<isolated> 0644 0627" },
-  { 0xFEFC, "<final> 0644 0627" },
-  { 0xFF01, "<wide> 0021" },
-  { 0xFF02, "<wide> 0022" },
-  { 0xFF03, "<wide> 0023" },
-  { 0xFF04, "<wide> 0024" },
-  { 0xFF05, "<wide> 0025" },
-  { 0xFF06, "<wide> 0026" },
-  { 0xFF07, "<wide> 0027" },
-  { 0xFF08, "<wide> 0028" },
-  { 0xFF09, "<wide> 0029" },
-  { 0xFF0A, "<wide> 002A" },
-  { 0xFF0B, "<wide> 002B" },
-  { 0xFF0C, "<wide> 002C" },
-  { 0xFF0D, "<wide> 002D" },
-  { 0xFF0E, "<wide> 002E" },
-  { 0xFF0F, "<wide> 002F" },
-  { 0xFF10, "<wide> 0030" },
-  { 0xFF11, "<wide> 0031" },
-  { 0xFF12, "<wide> 0032" },
-  { 0xFF13, "<wide> 0033" },
-  { 0xFF14, "<wide> 0034" },
-  { 0xFF15, "<wide> 0035" },
-  { 0xFF16, "<wide> 0036" },
-  { 0xFF17, "<wide> 0037" },
-  { 0xFF18, "<wide> 0038" },
-  { 0xFF19, "<wide> 0039" },
-  { 0xFF1A, "<wide> 003A" },
-  { 0xFF1B, "<wide> 003B" },
-  { 0xFF1C, "<wide> 003C" },
-  { 0xFF1D, "<wide> 003D" },
-  { 0xFF1E, "<wide> 003E" },
-  { 0xFF1F, "<wide> 003F" },
-  { 0xFF20, "<wide> 0040" },
-  { 0xFF21, "<wide> 0041" },
-  { 0xFF22, "<wide> 0042" },
-  { 0xFF23, "<wide> 0043" },
-  { 0xFF24, "<wide> 0044" },
-  { 0xFF25, "<wide> 0045" },
-  { 0xFF26, "<wide> 0046" },
-  { 0xFF27, "<wide> 0047" },
-  { 0xFF28, "<wide> 0048" },
-  { 0xFF29, "<wide> 0049" },
-  { 0xFF2A, "<wide> 004A" },
-  { 0xFF2B, "<wide> 004B" },
-  { 0xFF2C, "<wide> 004C" },
-  { 0xFF2D, "<wide> 004D" },
-  { 0xFF2E, "<wide> 004E" },
-  { 0xFF2F, "<wide> 004F" },
-  { 0xFF30, "<wide> 0050" },
-  { 0xFF31, "<wide> 0051" },
-  { 0xFF32, "<wide> 0052" },
-  { 0xFF33, "<wide> 0053" },
-  { 0xFF34, "<wide> 0054" },
-  { 0xFF35, "<wide> 0055" },
-  { 0xFF36, "<wide> 0056" },
-  { 0xFF37, "<wide> 0057" },
-  { 0xFF38, "<wide> 0058" },
-  { 0xFF39, "<wide> 0059" },
-  { 0xFF3A, "<wide> 005A" },
-  { 0xFF3B, "<wide> 005B" },
-  { 0xFF3C, "<wide> 005C" },
-  { 0xFF3D, "<wide> 005D" },
-  { 0xFF3E, "<wide> 005E" },
-  { 0xFF3F, "<wide> 005F" },
-  { 0xFF40, "<wide> 0060" },
-  { 0xFF41, "<wide> 0061" },
-  { 0xFF42, "<wide> 0062" },
-  { 0xFF43, "<wide> 0063" },
-  { 0xFF44, "<wide> 0064" },
-  { 0xFF45, "<wide> 0065" },
-  { 0xFF46, "<wide> 0066" },
-  { 0xFF47, "<wide> 0067" },
-  { 0xFF48, "<wide> 0068" },
-  { 0xFF49, "<wide> 0069" },
-  { 0xFF4A, "<wide> 006A" },
-  { 0xFF4B, "<wide> 006B" },
-  { 0xFF4C, "<wide> 006C" },
-  { 0xFF4D, "<wide> 006D" },
-  { 0xFF4E, "<wide> 006E" },
-  { 0xFF4F, "<wide> 006F" },
-  { 0xFF50, "<wide> 0070" },
-  { 0xFF51, "<wide> 0071" },
-  { 0xFF52, "<wide> 0072" },
-  { 0xFF53, "<wide> 0073" },
-  { 0xFF54, "<wide> 0074" },
-  { 0xFF55, "<wide> 0075" },
-  { 0xFF56, "<wide> 0076" },
-  { 0xFF57, "<wide> 0077" },
-  { 0xFF58, "<wide> 0078" },
-  { 0xFF59, "<wide> 0079" },
-  { 0xFF5A, "<wide> 007A" },
-  { 0xFF5B, "<wide> 007B" },
-  { 0xFF5C, "<wide> 007C" },
-  { 0xFF5D, "<wide> 007D" },
-  { 0xFF5E, "<wide> 007E" },
-  { 0xFF5F, "<wide> 2985" },
-  { 0xFF60, "<wide> 2986" },
-  { 0xFF61, "<narrow> 3002" },
-  { 0xFF62, "<narrow> 300C" },
-  { 0xFF63, "<narrow> 300D" },
-  { 0xFF64, "<narrow> 3001" },
-  { 0xFF65, "<narrow> 30FB" },
-  { 0xFF66, "<narrow> 30F2" },
-  { 0xFF67, "<narrow> 30A1" },
-  { 0xFF68, "<narrow> 30A3" },
-  { 0xFF69, "<narrow> 30A5" },
-  { 0xFF6A, "<narrow> 30A7" },
-  { 0xFF6B, "<narrow> 30A9" },
-  { 0xFF6C, "<narrow> 30E3" },
-  { 0xFF6D, "<narrow> 30E5" },
-  { 0xFF6E, "<narrow> 30E7" },
-  { 0xFF6F, "<narrow> 30C3" },
-  { 0xFF70, "<narrow> 30FC" },
-  { 0xFF71, "<narrow> 30A2" },
-  { 0xFF72, "<narrow> 30A4" },
-  { 0xFF73, "<narrow> 30A6" },
-  { 0xFF74, "<narrow> 30A8" },
-  { 0xFF75, "<narrow> 30AA" },
-  { 0xFF76, "<narrow> 30AB" },
-  { 0xFF77, "<narrow> 30AD" },
-  { 0xFF78, "<narrow> 30AF" },
-  { 0xFF79, "<narrow> 30B1" },
-  { 0xFF7A, "<narrow> 30B3" },
-  { 0xFF7B, "<narrow> 30B5" },
-  { 0xFF7C, "<narrow> 30B7" },
-  { 0xFF7D, "<narrow> 30B9" },
-  { 0xFF7E, "<narrow> 30BB" },
-  { 0xFF7F, "<narrow> 30BD" },
-  { 0xFF80, "<narrow> 30BF" },
-  { 0xFF81, "<narrow> 30C1" },
-  { 0xFF82, "<narrow> 30C4" },
-  { 0xFF83, "<narrow> 30C6" },
-  { 0xFF84, "<narrow> 30C8" },
-  { 0xFF85, "<narrow> 30CA" },
-  { 0xFF86, "<narrow> 30CB" },
-  { 0xFF87, "<narrow> 30CC" },
-  { 0xFF88, "<narrow> 30CD" },
-  { 0xFF89, "<narrow> 30CE" },
-  { 0xFF8A, "<narrow> 30CF" },
-  { 0xFF8B, "<narrow> 30D2" },
-  { 0xFF8C, "<narrow> 30D5" },
-  { 0xFF8D, "<narrow> 30D8" },
-  { 0xFF8E, "<narrow> 30DB" },
-  { 0xFF8F, "<narrow> 30DE" },
-  { 0xFF90, "<narrow> 30DF" },
-  { 0xFF91, "<narrow> 30E0" },
-  { 0xFF92, "<narrow> 30E1" },
-  { 0xFF93, "<narrow> 30E2" },
-  { 0xFF94, "<narrow> 30E4" },
-  { 0xFF95, "<narrow> 30E6" },
-  { 0xFF96, "<narrow> 30E8" },
-  { 0xFF97, "<narrow> 30E9" },
-  { 0xFF98, "<narrow> 30EA" },
-  { 0xFF99, "<narrow> 30EB" },
-  { 0xFF9A, "<narrow> 30EC" },
-  { 0xFF9B, "<narrow> 30ED" },
-  { 0xFF9C, "<narrow> 30EF" },
-  { 0xFF9D, "<narrow> 30F3" },
-  { 0xFF9E, "<narrow> 3099" },
-  { 0xFF9F, "<narrow> 309A" },
-  { 0xFFA0, "<narrow> 3164" },
-  { 0xFFA1, "<narrow> 3131" },
-  { 0xFFA2, "<narrow> 3132" },
-  { 0xFFA3, "<narrow> 3133" },
-  { 0xFFA4, "<narrow> 3134" },
-  { 0xFFA5, "<narrow> 3135" },
-  { 0xFFA6, "<narrow> 3136" },
-  { 0xFFA7, "<narrow> 3137" },
-  { 0xFFA8, "<narrow> 3138" },
-  { 0xFFA9, "<narrow> 3139" },
-  { 0xFFAA, "<narrow> 313A" },
-  { 0xFFAB, "<narrow> 313B" },
-  { 0xFFAC, "<narrow> 313C" },
-  { 0xFFAD, "<narrow> 313D" },
-  { 0xFFAE, "<narrow> 313E" },
-  { 0xFFAF, "<narrow> 313F" },
-  { 0xFFB0, "<narrow> 3140" },
-  { 0xFFB1, "<narrow> 3141" },
-  { 0xFFB2, "<narrow> 3142" },
-  { 0xFFB3, "<narrow> 3143" },
-  { 0xFFB4, "<narrow> 3144" },
-  { 0xFFB5, "<narrow> 3145" },
-  { 0xFFB6, "<narrow> 3146" },
-  { 0xFFB7, "<narrow> 3147" },
-  { 0xFFB8, "<narrow> 3148" },
-  { 0xFFB9, "<narrow> 3149" },
-  { 0xFFBA, "<narrow> 314A" },
-  { 0xFFBB, "<narrow> 314B" },
-  { 0xFFBC, "<narrow> 314C" },
-  { 0xFFBD, "<narrow> 314D" },
-  { 0xFFBE, "<narrow> 314E" },
-  { 0xFFC2, "<narrow> 314F" },
-  { 0xFFC3, "<narrow> 3150" },
-  { 0xFFC4, "<narrow> 3151" },
-  { 0xFFC5, "<narrow> 3152" },
-  { 0xFFC6, "<narrow> 3153" },
-  { 0xFFC7, "<narrow> 3154" },
-  { 0xFFCA, "<narrow> 3155" },
-  { 0xFFCB, "<narrow> 3156" },
-  { 0xFFCC, "<narrow> 3157" },
-  { 0xFFCD, "<narrow> 3158" },
-  { 0xFFCE, "<narrow> 3159" },
-  { 0xFFCF, "<narrow> 315A" },
-  { 0xFFD2, "<narrow> 315B" },
-  { 0xFFD3, "<narrow> 315C" },
-  { 0xFFD4, "<narrow> 315D" },
-  { 0xFFD5, "<narrow> 315E" },
-  { 0xFFD6, "<narrow> 315F" },
-  { 0xFFD7, "<narrow> 3160" },
-  { 0xFFDA, "<narrow> 3161" },
-  { 0xFFDB, "<narrow> 3162" },
-  { 0xFFDC, "<narrow> 3163" },
-  { 0xFFE0, "<wide> 00A2" },
-  { 0xFFE1, "<wide> 00A3" },
-  { 0xFFE2, "<wide> 00AC" },
-  { 0xFFE3, "<wide> 00AF" },
-  { 0xFFE4, "<wide> 00A6" },
-  { 0xFFE5, "<wide> 00A5" },
-  { 0xFFE6, "<wide> 20A9" },
-  { 0xFFE8, "<narrow> 2502" },
-  { 0xFFE9, "<narrow> 2190" },
-  { 0xFFEA, "<narrow> 2191" },
-  { 0xFFEB, "<narrow> 2192" },
-  { 0xFFEC, "<narrow> 2193" },
-  { 0xFFED, "<narrow> 25A0" },
-  { 0xFFEE, "<narrow> 25CB" },
-  { 0x1D400, "<font> 0041 latin capital letter a" },
-  { 0x1D401, "<font> 0042 latin capital letter b" },
-  { 0x1D402, "<font> 0043 latin capital letter c" },
-  { 0x1D403, "<font> 0044 latin capital letter d" },
-  { 0x1D404, "<font> 0045 latin capital letter e" },
-  { 0x1D405, "<font> 0046 latin capital letter f" },
-  { 0x1D406, "<font> 0047 latin capital letter g" },
-  { 0x1D407, "<font> 0048 latin capital letter h" },
-  { 0x1D408, "<font> 0049 latin capital letter i" },
-  { 0x1D409, "<font> 004A latin capital letter j" },
-  { 0x1D40A, "<font> 004B latin capital letter k" },
-  { 0x1D40B, "<font> 004C latin capital letter l" },
-  { 0x1D40C, "<font> 004D latin capital letter m" },
-  { 0x1D40D, "<font> 004E latin capital letter n" },
-  { 0x1D40E, "<font> 004F latin capital letter o" },
-  { 0x1D40F, "<font> 0050 latin capital letter p" },
-  { 0x1D410, "<font> 0051 latin capital letter q" },
-  { 0x1D411, "<font> 0052 latin capital letter r" },
-  { 0x1D412, "<font> 0053 latin capital letter s" },
-  { 0x1D413, "<font> 0054 latin capital letter t" },
-  { 0x1D414, "<font> 0055 latin capital letter u" },
-  { 0x1D415, "<font> 0056 latin capital letter v" },
-  { 0x1D416, "<font> 0057 latin capital letter w" },
-  { 0x1D417, "<font> 0058 latin capital letter x" },
-  { 0x1D418, "<font> 0059 latin capital letter y" },
-  { 0x1D419, "<font> 005A latin capital letter z" },
-  { 0x1D41A, "<font> 0061 latin small letter a" },
-  { 0x1D41B, "<font> 0062 latin small letter b" },
-  { 0x1D41C, "<font> 0063 latin small letter c" },
-  { 0x1D41D, "<font> 0064 latin small letter d" },
-  { 0x1D41E, "<font> 0065 latin small letter e" },
-  { 0x1D41F, "<font> 0066 latin small letter f" },
-  { 0x1D420, "<font> 0067 latin small letter g" },
-  { 0x1D421, "<font> 0068 latin small letter h" },
-  { 0x1D422, "<font> 0069 latin small letter i" },
-  { 0x1D423, "<font> 006A latin small letter j" },
-  { 0x1D424, "<font> 006B latin small letter k" },
-  { 0x1D425, "<font> 006C latin small letter l" },
-  { 0x1D426, "<font> 006D latin small letter m" },
-  { 0x1D427, "<font> 006E latin small letter n" },
-  { 0x1D428, "<font> 006F latin small letter o" },
-  { 0x1D429, "<font> 0070 latin small letter p" },
-  { 0x1D42A, "<font> 0071 latin small letter q" },
-  { 0x1D42B, "<font> 0072 latin small letter r" },
-  { 0x1D42C, "<font> 0073 latin small letter s" },
-  { 0x1D42D, "<font> 0074 latin small letter t" },
-  { 0x1D42E, "<font> 0075 latin small letter u" },
-  { 0x1D42F, "<font> 0076 latin small letter v" },
-  { 0x1D430, "<font> 0077 latin small letter w" },
-  { 0x1D431, "<font> 0078 latin small letter x" },
-  { 0x1D432, "<font> 0079 latin small letter y" },
-  { 0x1D433, "<font> 007A latin small letter z" },
-  { 0x1D434, "<font> 0041 latin capital letter a" },
-  { 0x1D435, "<font> 0042 latin capital letter b" },
-  { 0x1D436, "<font> 0043 latin capital letter c" },
-  { 0x1D437, "<font> 0044 latin capital letter d" },
-  { 0x1D438, "<font> 0045 latin capital letter e" },
-  { 0x1D439, "<font> 0046 latin capital letter f" },
-  { 0x1D43A, "<font> 0047 latin capital letter g" },
-  { 0x1D43B, "<font> 0048 latin capital letter h" },
-  { 0x1D43C, "<font> 0049 latin capital letter i" },
-  { 0x1D43D, "<font> 004A latin capital letter j" },
-  { 0x1D43E, "<font> 004B latin capital letter k" },
-  { 0x1D43F, "<font> 004C latin capital letter l" },
-  { 0x1D440, "<font> 004D latin capital letter m" },
-  { 0x1D441, "<font> 004E latin capital letter n" },
-  { 0x1D442, "<font> 004F latin capital letter o" },
-  { 0x1D443, "<font> 0050 latin capital letter p" },
-  { 0x1D444, "<font> 0051 latin capital letter q" },
-  { 0x1D445, "<font> 0052 latin capital letter r" },
-  { 0x1D446, "<font> 0053 latin capital letter s" },
-  { 0x1D447, "<font> 0054 latin capital letter t" },
-  { 0x1D448, "<font> 0055 latin capital letter u" },
-  { 0x1D449, "<font> 0056 latin capital letter v" },
-  { 0x1D44A, "<font> 0057 latin capital letter w" },
-  { 0x1D44B, "<font> 0058 latin capital letter x" },
-  { 0x1D44C, "<font> 0059 latin capital letter y" },
-  { 0x1D44D, "<font> 005A latin capital letter z" },
-  { 0x1D44E, "<font> 0061 latin small letter a" },
-  { 0x1D44F, "<font> 0062 latin small letter b" },
-  { 0x1D450, "<font> 0063 latin small letter c" },
-  { 0x1D451, "<font> 0064 latin small letter d" },
-  { 0x1D452, "<font> 0065 latin small letter e" },
-  { 0x1D453, "<font> 0066 latin small letter f" },
-  { 0x1D454, "<font> 0067 latin small letter g" },
-  { 0x1D456, "<font> 0069 latin small letter i" },
-  { 0x1D457, "<font> 006A latin small letter j" },
-  { 0x1D458, "<font> 006B latin small letter k" },
-  { 0x1D459, "<font> 006C latin small letter l" },
-  { 0x1D45A, "<font> 006D latin small letter m" },
-  { 0x1D45B, "<font> 006E latin small letter n" },
-  { 0x1D45C, "<font> 006F latin small letter o" },
-  { 0x1D45D, "<font> 0070 latin small letter p" },
-  { 0x1D45E, "<font> 0071 latin small letter q" },
-  { 0x1D45F, "<font> 0072 latin small letter r" },
-  { 0x1D460, "<font> 0073 latin small letter s" },
-  { 0x1D461, "<font> 0074 latin small letter t" },
-  { 0x1D462, "<font> 0075 latin small letter u" },
-  { 0x1D463, "<font> 0076 latin small letter v" },
-  { 0x1D464, "<font> 0077 latin small letter w" },
-  { 0x1D465, "<font> 0078 latin small letter x" },
-  { 0x1D466, "<font> 0079 latin small letter y" },
-  { 0x1D467, "<font> 007A latin small letter z" },
-  { 0x1D468, "<font> 0041 latin capital letter a" },
-  { 0x1D469, "<font> 0042 latin capital letter b" },
-  { 0x1D46A, "<font> 0043 latin capital letter c" },
-  { 0x1D46B, "<font> 0044 latin capital letter d" },
-  { 0x1D46C, "<font> 0045 latin capital letter e" },
-  { 0x1D46D, "<font> 0046 latin capital letter f" },
-  { 0x1D46E, "<font> 0047 latin capital letter g" },
-  { 0x1D46F, "<font> 0048 latin capital letter h" },
-  { 0x1D470, "<font> 0049 latin capital letter i" },
-  { 0x1D471, "<font> 004A latin capital letter j" },
-  { 0x1D472, "<font> 004B latin capital letter k" },
-  { 0x1D473, "<font> 004C latin capital letter l" },
-  { 0x1D474, "<font> 004D latin capital letter m" },
-  { 0x1D475, "<font> 004E latin capital letter n" },
-  { 0x1D476, "<font> 004F latin capital letter o" },
-  { 0x1D477, "<font> 0050 latin capital letter p" },
-  { 0x1D478, "<font> 0051 latin capital letter q" },
-  { 0x1D479, "<font> 0052 latin capital letter r" },
-  { 0x1D47A, "<font> 0053 latin capital letter s" },
-  { 0x1D47B, "<font> 0054 latin capital letter t" },
-  { 0x1D47C, "<font> 0055 latin capital letter u" },
-  { 0x1D47D, "<font> 0056 latin capital letter v" },
-  { 0x1D47E, "<font> 0057 latin capital letter w" },
-  { 0x1D47F, "<font> 0058 latin capital letter x" },
-  { 0x1D480, "<font> 0059 latin capital letter y" },
-  { 0x1D481, "<font> 005A latin capital letter z" },
-  { 0x1D482, "<font> 0061 latin small letter a" },
-  { 0x1D483, "<font> 0062 latin small letter b" },
-  { 0x1D484, "<font> 0063 latin small letter c" },
-  { 0x1D485, "<font> 0064 latin small letter d" },
-  { 0x1D486, "<font> 0065 latin small letter e" },
-  { 0x1D487, "<font> 0066 latin small letter f" },
-  { 0x1D488, "<font> 0067 latin small letter g" },
-  { 0x1D489, "<font> 0068 latin small letter h" },
-  { 0x1D48A, "<font> 0069 latin small letter i" },
-  { 0x1D48B, "<font> 006A latin small letter j" },
-  { 0x1D48C, "<font> 006B latin small letter k" },
-  { 0x1D48D, "<font> 006C latin small letter l" },
-  { 0x1D48E, "<font> 006D latin small letter m" },
-  { 0x1D48F, "<font> 006E latin small letter n" },
-  { 0x1D490, "<font> 006F latin small letter o" },
-  { 0x1D491, "<font> 0070 latin small letter p" },
-  { 0x1D492, "<font> 0071 latin small letter q" },
-  { 0x1D493, "<font> 0072 latin small letter r" },
-  { 0x1D494, "<font> 0073 latin small letter s" },
-  { 0x1D495, "<font> 0074 latin small letter t" },
-  { 0x1D496, "<font> 0075 latin small letter u" },
-  { 0x1D497, "<font> 0076 latin small letter v" },
-  { 0x1D498, "<font> 0077 latin small letter w" },
-  { 0x1D499, "<font> 0078 latin small letter x" },
-  { 0x1D49A, "<font> 0079 latin small letter y" },
-  { 0x1D49B, "<font> 007A latin small letter z" },
-  { 0x1D49C, "<font> 0041 latin capital letter a" },
-  { 0x1D49E, "<font> 0043 latin capital letter c" },
-  { 0x1D49F, "<font> 0044 latin capital letter d" },
-  { 0x1D4A2, "<font> 0047 latin capital letter g" },
-  { 0x1D4A5, "<font> 004A latin capital letter j" },
-  { 0x1D4A6, "<font> 004B latin capital letter k" },
-  { 0x1D4A9, "<font> 004E latin capital letter n" },
-  { 0x1D4AA, "<font> 004F latin capital letter o" },
-  { 0x1D4AB, "<font> 0050 latin capital letter p" },
-  { 0x1D4AC, "<font> 0051 latin capital letter q" },
-  { 0x1D4AE, "<font> 0053 latin capital letter s" },
-  { 0x1D4AF, "<font> 0054 latin capital letter t" },
-  { 0x1D4B0, "<font> 0055 latin capital letter u" },
-  { 0x1D4B1, "<font> 0056 latin capital letter v" },
-  { 0x1D4B2, "<font> 0057 latin capital letter w" },
-  { 0x1D4B3, "<font> 0058 latin capital letter x" },
-  { 0x1D4B4, "<font> 0059 latin capital letter y" },
-  { 0x1D4B5, "<font> 005A latin capital letter z" },
-  { 0x1D4B6, "<font> 0061 latin small letter a" },
-  { 0x1D4B7, "<font> 0062 latin small letter b" },
-  { 0x1D4B8, "<font> 0063 latin small letter c" },
-  { 0x1D4B9, "<font> 0064 latin small letter d" },
-  { 0x1D4BB, "<font> 0066 latin small letter f" },
-  { 0x1D4BD, "<font> 0068 latin small letter h" },
-  { 0x1D4BE, "<font> 0069 latin small letter i" },
-  { 0x1D4BF, "<font> 006A latin small letter j" },
-  { 0x1D4C0, "<font> 006B latin small letter k" },
-  { 0x1D4C1, "<font> 006C latin small letter l" },
-  { 0x1D4C2, "<font> 006D latin small letter m" },
-  { 0x1D4C3, "<font> 006E latin small letter n" },
-  { 0x1D4C5, "<font> 0070 latin small letter p" },
-  { 0x1D4C6, "<font> 0071 latin small letter q" },
-  { 0x1D4C7, "<font> 0072 latin small letter r" },
-  { 0x1D4C8, "<font> 0073 latin small letter s" },
-  { 0x1D4C9, "<font> 0074 latin small letter t" },
-  { 0x1D4CA, "<font> 0075 latin small letter u" },
-  { 0x1D4CB, "<font> 0076 latin small letter v" },
-  { 0x1D4CC, "<font> 0077 latin small letter w" },
-  { 0x1D4CD, "<font> 0078 latin small letter x" },
-  { 0x1D4CE, "<font> 0079 latin small letter y" },
-  { 0x1D4CF, "<font> 007A latin small letter z" },
-  { 0x1D4D0, "<font> 0041 latin capital letter a" },
-  { 0x1D4D1, "<font> 0042 latin capital letter b" },
-  { 0x1D4D2, "<font> 0043 latin capital letter c" },
-  { 0x1D4D3, "<font> 0044 latin capital letter d" },
-  { 0x1D4D4, "<font> 0045 latin capital letter e" },
-  { 0x1D4D5, "<font> 0046 latin capital letter f" },
-  { 0x1D4D6, "<font> 0047 latin capital letter g" },
-  { 0x1D4D7, "<font> 0048 latin capital letter h" },
-  { 0x1D4D8, "<font> 0049 latin capital letter i" },
-  { 0x1D4D9, "<font> 004A latin capital letter j" },
-  { 0x1D4DA, "<font> 004B latin capital letter k" },
-  { 0x1D4DB, "<font> 004C latin capital letter l" },
-  { 0x1D4DC, "<font> 004D latin capital letter m" },
-  { 0x1D4DD, "<font> 004E latin capital letter n" },
-  { 0x1D4DE, "<font> 004F latin capital letter o" },
-  { 0x1D4DF, "<font> 0050 latin capital letter p" },
-  { 0x1D4E0, "<font> 0051 latin capital letter q" },
-  { 0x1D4E1, "<font> 0052 latin capital letter r" },
-  { 0x1D4E2, "<font> 0053 latin capital letter s" },
-  { 0x1D4E3, "<font> 0054 latin capital letter t" },
-  { 0x1D4E4, "<font> 0055 latin capital letter u" },
-  { 0x1D4E5, "<font> 0056 latin capital letter v" },
-  { 0x1D4E6, "<font> 0057 latin capital letter w" },
-  { 0x1D4E7, "<font> 0058 latin capital letter x" },
-  { 0x1D4E8, "<font> 0059 latin capital letter y" },
-  { 0x1D4E9, "<font> 005A latin capital letter z" },
-  { 0x1D4EA, "<font> 0061 latin small letter a" },
-  { 0x1D4EB, "<font> 0062 latin small letter b" },
-  { 0x1D4EC, "<font> 0063 latin small letter c" },
-  { 0x1D4ED, "<font> 0064 latin small letter d" },
-  { 0x1D4EE, "<font> 0065 latin small letter e" },
-  { 0x1D4EF, "<font> 0066 latin small letter f" },
-  { 0x1D4F0, "<font> 0067 latin small letter g" },
-  { 0x1D4F1, "<font> 0068 latin small letter h" },
-  { 0x1D4F2, "<font> 0069 latin small letter i" },
-  { 0x1D4F3, "<font> 006A latin small letter j" },
-  { 0x1D4F4, "<font> 006B latin small letter k" },
-  { 0x1D4F5, "<font> 006C latin small letter l" },
-  { 0x1D4F6, "<font> 006D latin small letter m" },
-  { 0x1D4F7, "<font> 006E latin small letter n" },
-  { 0x1D4F8, "<font> 006F latin small letter o" },
-  { 0x1D4F9, "<font> 0070 latin small letter p" },
-  { 0x1D4FA, "<font> 0071 latin small letter q" },
-  { 0x1D4FB, "<font> 0072 latin small letter r" },
-  { 0x1D4FC, "<font> 0073 latin small letter s" },
-  { 0x1D4FD, "<font> 0074 latin small letter t" },
-  { 0x1D4FE, "<font> 0075 latin small letter u" },
-  { 0x1D4FF, "<font> 0076 latin small letter v" },
-  { 0x1D500, "<font> 0077 latin small letter w" },
-  { 0x1D501, "<font> 0078 latin small letter x" },
-  { 0x1D502, "<font> 0079 latin small letter y" },
-  { 0x1D503, "<font> 007A latin small letter z" },
-  { 0x1D504, "<font> 0041 latin capital letter a" },
-  { 0x1D505, "<font> 0042 latin capital letter b" },
-  { 0x1D507, "<font> 0044 latin capital letter d" },
-  { 0x1D508, "<font> 0045 latin capital letter e" },
-  { 0x1D509, "<font> 0046 latin capital letter f" },
-  { 0x1D50A, "<font> 0047 latin capital letter g" },
-  { 0x1D50D, "<font> 004A latin capital letter j" },
-  { 0x1D50E, "<font> 004B latin capital letter k" },
-  { 0x1D50F, "<font> 004C latin capital letter l" },
-  { 0x1D510, "<font> 004D latin capital letter m" },
-  { 0x1D511, "<font> 004E latin capital letter n" },
-  { 0x1D512, "<font> 004F latin capital letter o" },
-  { 0x1D513, "<font> 0050 latin capital letter p" },
-  { 0x1D514, "<font> 0051 latin capital letter q" },
-  { 0x1D516, "<font> 0053 latin capital letter s" },
-  { 0x1D517, "<font> 0054 latin capital letter t" },
-  { 0x1D518, "<font> 0055 latin capital letter u" },
-  { 0x1D519, "<font> 0056 latin capital letter v" },
-  { 0x1D51A, "<font> 0057 latin capital letter w" },
-  { 0x1D51B, "<font> 0058 latin capital letter x" },
-  { 0x1D51C, "<font> 0059 latin capital letter y" },
-  { 0x1D51E, "<font> 0061 latin small letter a" },
-  { 0x1D51F, "<font> 0062 latin small letter b" },
-  { 0x1D520, "<font> 0063 latin small letter c" },
-  { 0x1D521, "<font> 0064 latin small letter d" },
-  { 0x1D522, "<font> 0065 latin small letter e" },
-  { 0x1D523, "<font> 0066 latin small letter f" },
-  { 0x1D524, "<font> 0067 latin small letter g" },
-  { 0x1D525, "<font> 0068 latin small letter h" },
-  { 0x1D526, "<font> 0069 latin small letter i" },
-  { 0x1D527, "<font> 006A latin small letter j" },
-  { 0x1D528, "<font> 006B latin small letter k" },
-  { 0x1D529, "<font> 006C latin small letter l" },
-  { 0x1D52A, "<font> 006D latin small letter m" },
-  { 0x1D52B, "<font> 006E latin small letter n" },
-  { 0x1D52C, "<font> 006F latin small letter o" },
-  { 0x1D52D, "<font> 0070 latin small letter p" },
-  { 0x1D52E, "<font> 0071 latin small letter q" },
-  { 0x1D52F, "<font> 0072 latin small letter r" },
-  { 0x1D530, "<font> 0073 latin small letter s" },
-  { 0x1D531, "<font> 0074 latin small letter t" },
-  { 0x1D532, "<font> 0075 latin small letter u" },
-  { 0x1D533, "<font> 0076 latin small letter v" },
-  { 0x1D534, "<font> 0077 latin small letter w" },
-  { 0x1D535, "<font> 0078 latin small letter x" },
-  { 0x1D536, "<font> 0079 latin small letter y" },
-  { 0x1D537, "<font> 007A latin small letter z" },
-  { 0x1D538, "<font> 0041 latin capital letter a" },
-  { 0x1D539, "<font> 0042 latin capital letter b" },
-  { 0x1D53B, "<font> 0044 latin capital letter d" },
-  { 0x1D53C, "<font> 0045 latin capital letter e" },
-  { 0x1D53D, "<font> 0046 latin capital letter f" },
-  { 0x1D53E, "<font> 0047 latin capital letter g" },
-  { 0x1D540, "<font> 0049 latin capital letter i" },
-  { 0x1D541, "<font> 004A latin capital letter j" },
-  { 0x1D542, "<font> 004B latin capital letter k" },
-  { 0x1D543, "<font> 004C latin capital letter l" },
-  { 0x1D544, "<font> 004D latin capital letter m" },
-  { 0x1D546, "<font> 004F latin capital letter o" },
-  { 0x1D54A, "<font> 0053 latin capital letter s" },
-  { 0x1D54B, "<font> 0054 latin capital letter t" },
-  { 0x1D54C, "<font> 0055 latin capital letter u" },
-  { 0x1D54D, "<font> 0056 latin capital letter v" },
-  { 0x1D54E, "<font> 0057 latin capital letter w" },
-  { 0x1D54F, "<font> 0058 latin capital letter x" },
-  { 0x1D550, "<font> 0059 latin capital letter y" },
-  { 0x1D552, "<font> 0061 latin small letter a" },
-  { 0x1D553, "<font> 0062 latin small letter b" },
-  { 0x1D554, "<font> 0063 latin small letter c" },
-  { 0x1D555, "<font> 0064 latin small letter d" },
-  { 0x1D556, "<font> 0065 latin small letter e" },
-  { 0x1D557, "<font> 0066 latin small letter f" },
-  { 0x1D558, "<font> 0067 latin small letter g" },
-  { 0x1D559, "<font> 0068 latin small letter h" },
-  { 0x1D55A, "<font> 0069 latin small letter i" },
-  { 0x1D55B, "<font> 006A latin small letter j" },
-  { 0x1D55C, "<font> 006B latin small letter k" },
-  { 0x1D55D, "<font> 006C latin small letter l" },
-  { 0x1D55E, "<font> 006D latin small letter m" },
-  { 0x1D55F, "<font> 006E latin small letter n" },
-  { 0x1D560, "<font> 006F latin small letter o" },
-  { 0x1D561, "<font> 0070 latin small letter p" },
-  { 0x1D562, "<font> 0071 latin small letter q" },
-  { 0x1D563, "<font> 0072 latin small letter r" },
-  { 0x1D564, "<font> 0073 latin small letter s" },
-  { 0x1D565, "<font> 0074 latin small letter t" },
-  { 0x1D566, "<font> 0075 latin small letter u" },
-  { 0x1D567, "<font> 0076 latin small letter v" },
-  { 0x1D568, "<font> 0077 latin small letter w" },
-  { 0x1D569, "<font> 0078 latin small letter x" },
-  { 0x1D56A, "<font> 0079 latin small letter y" },
-  { 0x1D56B, "<font> 007A latin small letter z" },
-  { 0x1D56C, "<font> 0041 latin capital letter a" },
-  { 0x1D56D, "<font> 0042 latin capital letter b" },
-  { 0x1D56E, "<font> 0043 latin capital letter c" },
-  { 0x1D56F, "<font> 0044 latin capital letter d" },
-  { 0x1D570, "<font> 0045 latin capital letter e" },
-  { 0x1D571, "<font> 0046 latin capital letter f" },
-  { 0x1D572, "<font> 0047 latin capital letter g" },
-  { 0x1D573, "<font> 0048 latin capital letter h" },
-  { 0x1D574, "<font> 0049 latin capital letter i" },
-  { 0x1D575, "<font> 004A latin capital letter j" },
-  { 0x1D576, "<font> 004B latin capital letter k" },
-  { 0x1D577, "<font> 004C latin capital letter l" },
-  { 0x1D578, "<font> 004D latin capital letter m" },
-  { 0x1D579, "<font> 004E latin capital letter n" },
-  { 0x1D57A, "<font> 004F latin capital letter o" },
-  { 0x1D57B, "<font> 0050 latin capital letter p" },
-  { 0x1D57C, "<font> 0051 latin capital letter q" },
-  { 0x1D57D, "<font> 0052 latin capital letter r" },
-  { 0x1D57E, "<font> 0053 latin capital letter s" },
-  { 0x1D57F, "<font> 0054 latin capital letter t" },
-  { 0x1D580, "<font> 0055 latin capital letter u" },
-  { 0x1D581, "<font> 0056 latin capital letter v" },
-  { 0x1D582, "<font> 0057 latin capital letter w" },
-  { 0x1D583, "<font> 0058 latin capital letter x" },
-  { 0x1D584, "<font> 0059 latin capital letter y" },
-  { 0x1D585, "<font> 005A latin capital letter z" },
-  { 0x1D586, "<font> 0061 latin small letter a" },
-  { 0x1D587, "<font> 0062 latin small letter b" },
-  { 0x1D588, "<font> 0063 latin small letter c" },
-  { 0x1D589, "<font> 0064 latin small letter d" },
-  { 0x1D58A, "<font> 0065 latin small letter e" },
-  { 0x1D58B, "<font> 0066 latin small letter f" },
-  { 0x1D58C, "<font> 0067 latin small letter g" },
-  { 0x1D58D, "<font> 0068 latin small letter h" },
-  { 0x1D58E, "<font> 0069 latin small letter i" },
-  { 0x1D58F, "<font> 006A latin small letter j" },
-  { 0x1D590, "<font> 006B latin small letter k" },
-  { 0x1D591, "<font> 006C latin small letter l" },
-  { 0x1D592, "<font> 006D latin small letter m" },
-  { 0x1D593, "<font> 006E latin small letter n" },
-  { 0x1D594, "<font> 006F latin small letter o" },
-  { 0x1D595, "<font> 0070 latin small letter p" },
-  { 0x1D596, "<font> 0071 latin small letter q" },
-  { 0x1D597, "<font> 0072 latin small letter r" },
-  { 0x1D598, "<font> 0073 latin small letter s" },
-  { 0x1D599, "<font> 0074 latin small letter t" },
-  { 0x1D59A, "<font> 0075 latin small letter u" },
-  { 0x1D59B, "<font> 0076 latin small letter v" },
-  { 0x1D59C, "<font> 0077 latin small letter w" },
-  { 0x1D59D, "<font> 0078 latin small letter x" },
-  { 0x1D59E, "<font> 0079 latin small letter y" },
-  { 0x1D59F, "<font> 007A latin small letter z" },
-  { 0x1D5A0, "<font> 0041 latin capital letter a" },
-  { 0x1D5A1, "<font> 0042 latin capital letter b" },
-  { 0x1D5A2, "<font> 0043 latin capital letter c" },
-  { 0x1D5A3, "<font> 0044 latin capital letter d" },
-  { 0x1D5A4, "<font> 0045 latin capital letter e" },
-  { 0x1D5A5, "<font> 0046 latin capital letter f" },
-  { 0x1D5A6, "<font> 0047 latin capital letter g" },
-  { 0x1D5A7, "<font> 0048 latin capital letter h" },
-  { 0x1D5A8, "<font> 0049 latin capital letter i" },
-  { 0x1D5A9, "<font> 004A latin capital letter j" },
-  { 0x1D5AA, "<font> 004B latin capital letter k" },
-  { 0x1D5AB, "<font> 004C latin capital letter l" },
-  { 0x1D5AC, "<font> 004D latin capital letter m" },
-  { 0x1D5AD, "<font> 004E latin capital letter n" },
-  { 0x1D5AE, "<font> 004F latin capital letter o" },
-  { 0x1D5AF, "<font> 0050 latin capital letter p" },
-  { 0x1D5B0, "<font> 0051 latin capital letter q" },
-  { 0x1D5B1, "<font> 0052 latin capital letter r" },
-  { 0x1D5B2, "<font> 0053 latin capital letter s" },
-  { 0x1D5B3, "<font> 0054 latin capital letter t" },
-  { 0x1D5B4, "<font> 0055 latin capital letter u" },
-  { 0x1D5B5, "<font> 0056 latin capital letter v" },
-  { 0x1D5B6, "<font> 0057 latin capital letter w" },
-  { 0x1D5B7, "<font> 0058 latin capital letter x" },
-  { 0x1D5B8, "<font> 0059 latin capital letter y" },
-  { 0x1D5B9, "<font> 005A latin capital letter z" },
-  { 0x1D5BA, "<font> 0061 latin small letter a" },
-  { 0x1D5BB, "<font> 0062 latin small letter b" },
-  { 0x1D5BC, "<font> 0063 latin small letter c" },
-  { 0x1D5BD, "<font> 0064 latin small letter d" },
-  { 0x1D5BE, "<font> 0065 latin small letter e" },
-  { 0x1D5BF, "<font> 0066 latin small letter f" },
-  { 0x1D5C0, "<font> 0067 latin small letter g" },
-  { 0x1D5C1, "<font> 0068 latin small letter h" },
-  { 0x1D5C2, "<font> 0069 latin small letter i" },
-  { 0x1D5C3, "<font> 006A latin small letter j" },
-  { 0x1D5C4, "<font> 006B latin small letter k" },
-  { 0x1D5C5, "<font> 006C latin small letter l" },
-  { 0x1D5C6, "<font> 006D latin small letter m" },
-  { 0x1D5C7, "<font> 006E latin small letter n" },
-  { 0x1D5C8, "<font> 006F latin small letter o" },
-  { 0x1D5C9, "<font> 0070 latin small letter p" },
-  { 0x1D5CA, "<font> 0071 latin small letter q" },
-  { 0x1D5CB, "<font> 0072 latin small letter r" },
-  { 0x1D5CC, "<font> 0073 latin small letter s" },
-  { 0x1D5CD, "<font> 0074 latin small letter t" },
-  { 0x1D5CE, "<font> 0075 latin small letter u" },
-  { 0x1D5CF, "<font> 0076 latin small letter v" },
-  { 0x1D5D0, "<font> 0077 latin small letter w" },
-  { 0x1D5D1, "<font> 0078 latin small letter x" },
-  { 0x1D5D2, "<font> 0079 latin small letter y" },
-  { 0x1D5D3, "<font> 007A latin small letter z" },
-  { 0x1D5D4, "<font> 0041 latin capital letter a" },
-  { 0x1D5D5, "<font> 0042 latin capital letter b" },
-  { 0x1D5D6, "<font> 0043 latin capital letter c" },
-  { 0x1D5D7, "<font> 0044 latin capital letter d" },
-  { 0x1D5D8, "<font> 0045 latin capital letter e" },
-  { 0x1D5D9, "<font> 0046 latin capital letter f" },
-  { 0x1D5DA, "<font> 0047 latin capital letter g" },
-  { 0x1D5DB, "<font> 0048 latin capital letter h" },
-  { 0x1D5DC, "<font> 0049 latin capital letter i" },
-  { 0x1D5DD, "<font> 004A latin capital letter j" },
-  { 0x1D5DE, "<font> 004B latin capital letter k" },
-  { 0x1D5DF, "<font> 004C latin capital letter l" },
-  { 0x1D5E0, "<font> 004D latin capital letter m" },
-  { 0x1D5E1, "<font> 004E latin capital letter n" },
-  { 0x1D5E2, "<font> 004F latin capital letter o" },
-  { 0x1D5E3, "<font> 0050 latin capital letter p" },
-  { 0x1D5E4, "<font> 0051 latin capital letter q" },
-  { 0x1D5E5, "<font> 0052 latin capital letter r" },
-  { 0x1D5E6, "<font> 0053 latin capital letter s" },
-  { 0x1D5E7, "<font> 0054 latin capital letter t" },
-  { 0x1D5E8, "<font> 0055 latin capital letter u" },
-  { 0x1D5E9, "<font> 0056 latin capital letter v" },
-  { 0x1D5EA, "<font> 0057 latin capital letter w" },
-  { 0x1D5EB, "<font> 0058 latin capital letter x" },
-  { 0x1D5EC, "<font> 0059 latin capital letter y" },
-  { 0x1D5ED, "<font> 005A latin capital letter z" },
-  { 0x1D5EE, "<font> 0061 latin small letter a" },
-  { 0x1D5EF, "<font> 0062 latin small letter b" },
-  { 0x1D5F0, "<font> 0063 latin small letter c" },
-  { 0x1D5F1, "<font> 0064 latin small letter d" },
-  { 0x1D5F2, "<font> 0065 latin small letter e" },
-  { 0x1D5F3, "<font> 0066 latin small letter f" },
-  { 0x1D5F4, "<font> 0067 latin small letter g" },
-  { 0x1D5F5, "<font> 0068 latin small letter h" },
-  { 0x1D5F6, "<font> 0069 latin small letter i" },
-  { 0x1D5F7, "<font> 006A latin small letter j" },
-  { 0x1D5F8, "<font> 006B latin small letter k" },
-  { 0x1D5F9, "<font> 006C latin small letter l" },
-  { 0x1D5FA, "<font> 006D latin small letter m" },
-  { 0x1D5FB, "<font> 006E latin small letter n" },
-  { 0x1D5FC, "<font> 006F latin small letter o" },
-  { 0x1D5FD, "<font> 0070 latin small letter p" },
-  { 0x1D5FE, "<font> 0071 latin small letter q" },
-  { 0x1D5FF, "<font> 0072 latin small letter r" },
-  { 0x1D600, "<font> 0073 latin small letter s" },
-  { 0x1D601, "<font> 0074 latin small letter t" },
-  { 0x1D602, "<font> 0075 latin small letter u" },
-  { 0x1D603, "<font> 0076 latin small letter v" },
-  { 0x1D604, "<font> 0077 latin small letter w" },
-  { 0x1D605, "<font> 0078 latin small letter x" },
-  { 0x1D606, "<font> 0079 latin small letter y" },
-  { 0x1D607, "<font> 007A latin small letter z" },
-  { 0x1D608, "<font> 0041 latin capital letter a" },
-  { 0x1D609, "<font> 0042 latin capital letter b" },
-  { 0x1D60A, "<font> 0043 latin capital letter c" },
-  { 0x1D60B, "<font> 0044 latin capital letter d" },
-  { 0x1D60C, "<font> 0045 latin capital letter e" },
-  { 0x1D60D, "<font> 0046 latin capital letter f" },
-  { 0x1D60E, "<font> 0047 latin capital letter g" },
-  { 0x1D60F, "<font> 0048 latin capital letter h" },
-  { 0x1D610, "<font> 0049 latin capital letter i" },
-  { 0x1D611, "<font> 004A latin capital letter j" },
-  { 0x1D612, "<font> 004B latin capital letter k" },
-  { 0x1D613, "<font> 004C latin capital letter l" },
-  { 0x1D614, "<font> 004D latin capital letter m" },
-  { 0x1D615, "<font> 004E latin capital letter n" },
-  { 0x1D616, "<font> 004F latin capital letter o" },
-  { 0x1D617, "<font> 0050 latin capital letter p" },
-  { 0x1D618, "<font> 0051 latin capital letter q" },
-  { 0x1D619, "<font> 0052 latin capital letter r" },
-  { 0x1D61A, "<font> 0053 latin capital letter s" },
-  { 0x1D61B, "<font> 0054 latin capital letter t" },
-  { 0x1D61C, "<font> 0055 latin capital letter u" },
-  { 0x1D61D, "<font> 0056 latin capital letter v" },
-  { 0x1D61E, "<font> 0057 latin capital letter w" },
-  { 0x1D61F, "<font> 0058 latin capital letter x" },
-  { 0x1D620, "<font> 0059 latin capital letter y" },
-  { 0x1D621, "<font> 005A latin capital letter z" },
-  { 0x1D622, "<font> 0061 latin small letter a" },
-  { 0x1D623, "<font> 0062 latin small letter b" },
-  { 0x1D624, "<font> 0063 latin small letter c" },
-  { 0x1D625, "<font> 0064 latin small letter d" },
-  { 0x1D626, "<font> 0065 latin small letter e" },
-  { 0x1D627, "<font> 0066 latin small letter f" },
-  { 0x1D628, "<font> 0067 latin small letter g" },
-  { 0x1D629, "<font> 0068 latin small letter h" },
-  { 0x1D62A, "<font> 0069 latin small letter i" },
-  { 0x1D62B, "<font> 006A latin small letter j" },
-  { 0x1D62C, "<font> 006B latin small letter k" },
-  { 0x1D62D, "<font> 006C latin small letter l" },
-  { 0x1D62E, "<font> 006D latin small letter m" },
-  { 0x1D62F, "<font> 006E latin small letter n" },
-  { 0x1D630, "<font> 006F latin small letter o" },
-  { 0x1D631, "<font> 0070 latin small letter p" },
-  { 0x1D632, "<font> 0071 latin small letter q" },
-  { 0x1D633, "<font> 0072 latin small letter r" },
-  { 0x1D634, "<font> 0073 latin small letter s" },
-  { 0x1D635, "<font> 0074 latin small letter t" },
-  { 0x1D636, "<font> 0075 latin small letter u" },
-  { 0x1D637, "<font> 0076 latin small letter v" },
-  { 0x1D638, "<font> 0077 latin small letter w" },
-  { 0x1D639, "<font> 0078 latin small letter x" },
-  { 0x1D63A, "<font> 0079 latin small letter y" },
-  { 0x1D63B, "<font> 007A latin small letter z" },
-  { 0x1D63C, "<font> 0041 latin capital letter a" },
-  { 0x1D63D, "<font> 0042 latin capital letter b" },
-  { 0x1D63E, "<font> 0043 latin capital letter c" },
-  { 0x1D63F, "<font> 0044 latin capital letter d" },
-  { 0x1D640, "<font> 0045 latin capital letter e" },
-  { 0x1D641, "<font> 0046 latin capital letter f" },
-  { 0x1D642, "<font> 0047 latin capital letter g" },
-  { 0x1D643, "<font> 0048 latin capital letter h" },
-  { 0x1D644, "<font> 0049 latin capital letter i" },
-  { 0x1D645, "<font> 004A latin capital letter j" },
-  { 0x1D646, "<font> 004B latin capital letter k" },
-  { 0x1D647, "<font> 004C latin capital letter l" },
-  { 0x1D648, "<font> 004D latin capital letter m" },
-  { 0x1D649, "<font> 004E latin capital letter n" },
-  { 0x1D64A, "<font> 004F latin capital letter o" },
-  { 0x1D64B, "<font> 0050 latin capital letter p" },
-  { 0x1D64C, "<font> 0051 latin capital letter q" },
-  { 0x1D64D, "<font> 0052 latin capital letter r" },
-  { 0x1D64E, "<font> 0053 latin capital letter s" },
-  { 0x1D64F, "<font> 0054 latin capital letter t" },
-  { 0x1D650, "<font> 0055 latin capital letter u" },
-  { 0x1D651, "<font> 0056 latin capital letter v" },
-  { 0x1D652, "<font> 0057 latin capital letter w" },
-  { 0x1D653, "<font> 0058 latin capital letter x" },
-  { 0x1D654, "<font> 0059 latin capital letter y" },
-  { 0x1D655, "<font> 005A latin capital letter z" },
-  { 0x1D656, "<font> 0061 latin small letter a" },
-  { 0x1D657, "<font> 0062 latin small letter b" },
-  { 0x1D658, "<font> 0063 latin small letter c" },
-  { 0x1D659, "<font> 0064 latin small letter d" },
-  { 0x1D65A, "<font> 0065 latin small letter e" },
-  { 0x1D65B, "<font> 0066 latin small letter f" },
-  { 0x1D65C, "<font> 0067 latin small letter g" },
-  { 0x1D65D, "<font> 0068 latin small letter h" },
-  { 0x1D65E, "<font> 0069 latin small letter i" },
-  { 0x1D65F, "<font> 006A latin small letter j" },
-  { 0x1D660, "<font> 006B latin small letter k" },
-  { 0x1D661, "<font> 006C latin small letter l" },
-  { 0x1D662, "<font> 006D latin small letter m" },
-  { 0x1D663, "<font> 006E latin small letter n" },
-  { 0x1D664, "<font> 006F latin small letter o" },
-  { 0x1D665, "<font> 0070 latin small letter p" },
-  { 0x1D666, "<font> 0071 latin small letter q" },
-  { 0x1D667, "<font> 0072 latin small letter r" },
-  { 0x1D668, "<font> 0073 latin small letter s" },
-  { 0x1D669, "<font> 0074 latin small letter t" },
-  { 0x1D66A, "<font> 0075 latin small letter u" },
-  { 0x1D66B, "<font> 0076 latin small letter v" },
-  { 0x1D66C, "<font> 0077 latin small letter w" },
-  { 0x1D66D, "<font> 0078 latin small letter x" },
-  { 0x1D66E, "<font> 0079 latin small letter y" },
-  { 0x1D66F, "<font> 007A latin small letter z" },
-  { 0x1D670, "<font> 0041 latin capital letter a" },
-  { 0x1D671, "<font> 0042 latin capital letter b" },
-  { 0x1D672, "<font> 0043 latin capital letter c" },
-  { 0x1D673, "<font> 0044 latin capital letter d" },
-  { 0x1D674, "<font> 0045 latin capital letter e" },
-  { 0x1D675, "<font> 0046 latin capital letter f" },
-  { 0x1D676, "<font> 0047 latin capital letter g" },
-  { 0x1D677, "<font> 0048 latin capital letter h" },
-  { 0x1D678, "<font> 0049 latin capital letter i" },
-  { 0x1D679, "<font> 004A latin capital letter j" },
-  { 0x1D67A, "<font> 004B latin capital letter k" },
-  { 0x1D67B, "<font> 004C latin capital letter l" },
-  { 0x1D67C, "<font> 004D latin capital letter m" },
-  { 0x1D67D, "<font> 004E latin capital letter n" },
-  { 0x1D67E, "<font> 004F latin capital letter o" },
-  { 0x1D67F, "<font> 0050 latin capital letter p" },
-  { 0x1D680, "<font> 0051 latin capital letter q" },
-  { 0x1D681, "<font> 0052 latin capital letter r" },
-  { 0x1D682, "<font> 0053 latin capital letter s" },
-  { 0x1D683, "<font> 0054 latin capital letter t" },
-  { 0x1D684, "<font> 0055 latin capital letter u" },
-  { 0x1D685, "<font> 0056 latin capital letter v" },
-  { 0x1D686, "<font> 0057 latin capital letter w" },
-  { 0x1D687, "<font> 0058 latin capital letter x" },
-  { 0x1D688, "<font> 0059 latin capital letter y" },
-  { 0x1D689, "<font> 005A latin capital letter z" },
-  { 0x1D68A, "<font> 0061 latin small letter a" },
-  { 0x1D68B, "<font> 0062 latin small letter b" },
-  { 0x1D68C, "<font> 0063 latin small letter c" },
-  { 0x1D68D, "<font> 0064 latin small letter d" },
-  { 0x1D68E, "<font> 0065 latin small letter e" },
-  { 0x1D68F, "<font> 0066 latin small letter f" },
-  { 0x1D690, "<font> 0067 latin small letter g" },
-  { 0x1D691, "<font> 0068 latin small letter h" },
-  { 0x1D692, "<font> 0069 latin small letter i" },
-  { 0x1D693, "<font> 006A latin small letter j" },
-  { 0x1D694, "<font> 006B latin small letter k" },
-  { 0x1D695, "<font> 006C latin small letter l" },
-  { 0x1D696, "<font> 006D latin small letter m" },
-  { 0x1D697, "<font> 006E latin small letter n" },
-  { 0x1D698, "<font> 006F latin small letter o" },
-  { 0x1D699, "<font> 0070 latin small letter p" },
-  { 0x1D69A, "<font> 0071 latin small letter q" },
-  { 0x1D69B, "<font> 0072 latin small letter r" },
-  { 0x1D69C, "<font> 0073 latin small letter s" },
-  { 0x1D69D, "<font> 0074 latin small letter t" },
-  { 0x1D69E, "<font> 0075 latin small letter u" },
-  { 0x1D69F, "<font> 0076 latin small letter v" },
-  { 0x1D6A0, "<font> 0077 latin small letter w" },
-  { 0x1D6A1, "<font> 0078 latin small letter x" },
-  { 0x1D6A2, "<font> 0079 latin small letter y" },
-  { 0x1D6A3, "<font> 007A latin small letter z" },
-  { 0x1D6A4, "<font> 0131 latin small letter dotless i" },
-  { 0x1D6A5, "<font> 0237 latin small letter dotless j" },
-  { 0x1D6A8, "<font> 0391 greek capital letter alpha" },
-  { 0x1D6A9, "<font> 0392 greek capital letter beta" },
-  { 0x1D6AA, "<font> 0393 greek capital letter gamma" },
-  { 0x1D6AB, "<font> 0394 greek capital letter delta" },
-  { 0x1D6AC, "<font> 0395 greek capital letter epsilon" },
-  { 0x1D6AD, "<font> 0396 greek capital letter zeta" },
-  { 0x1D6AE, "<font> 0397 greek capital letter eta" },
-  { 0x1D6AF, "<font> 0398 greek capital letter theta" },
-  { 0x1D6B0, "<font> 0399 greek capital letter iota" },
-  { 0x1D6B1, "<font> 039A greek capital letter kappa" },
-  { 0x1D6B2, "<font> 039B greek capital letter lamda" },
-  { 0x1D6B3, "<font> 039C greek capital letter mu" },
-  { 0x1D6B4, "<font> 039D greek capital letter nu" },
-  { 0x1D6B5, "<font> 039E greek capital letter xi" },
-  { 0x1D6B6, "<font> 039F greek capital letter omicron" },
-  { 0x1D6B7, "<font> 03A0 greek capital letter pi" },
-  { 0x1D6B8, "<font> 03A1 greek capital letter rho" },
-  { 0x1D6B9, "<font> 03F4 greek capital theta symbol" },
-  { 0x1D6BA, "<font> 03A3 greek capital letter sigma" },
-  { 0x1D6BB, "<font> 03A4 greek capital letter tau" },
-  { 0x1D6BC, "<font> 03A5 greek capital letter upsilon" },
-  { 0x1D6BD, "<font> 03A6 greek capital letter phi" },
-  { 0x1D6BE, "<font> 03A7 greek capital letter chi" },
-  { 0x1D6BF, "<font> 03A8 greek capital letter psi" },
-  { 0x1D6C0, "<font> 03A9 greek capital letter omega" },
-  { 0x1D6C1, "<font> 2207 nabla" },
-  { 0x1D6C2, "<font> 03B1 greek small letter alpha" },
-  { 0x1D6C3, "<font> 03B2 greek small letter beta" },
-  { 0x1D6C4, "<font> 03B3 greek small letter gamma" },
-  { 0x1D6C5, "<font> 03B4 greek small letter delta" },
-  { 0x1D6C6, "<font> 03B5 greek small letter epsilon" },
-  { 0x1D6C7, "<font> 03B6 greek small letter zeta" },
-  { 0x1D6C8, "<font> 03B7 greek small letter eta" },
-  { 0x1D6C9, "<font> 03B8 greek small letter theta" },
-  { 0x1D6CA, "<font> 03B9 greek small letter iota" },
-  { 0x1D6CB, "<font> 03BA greek small letter kappa" },
-  { 0x1D6CC, "<font> 03BB greek small letter lamda" },
-  { 0x1D6CD, "<font> 03BC greek small letter mu" },
-  { 0x1D6CE, "<font> 03BD greek small letter nu" },
-  { 0x1D6CF, "<font> 03BE greek small letter xi" },
-  { 0x1D6D0, "<font> 03BF greek small letter omicron" },
-  { 0x1D6D1, "<font> 03C0 greek small letter pi" },
-  { 0x1D6D2, "<font> 03C1 greek small letter rho" },
-  { 0x1D6D3, "<font> 03C2 greek small letter final sigma" },
-  { 0x1D6D4, "<font> 03C3 greek small letter sigma" },
-  { 0x1D6D5, "<font> 03C4 greek small letter tau" },
-  { 0x1D6D6, "<font> 03C5 greek small letter upsilon" },
-  { 0x1D6D7, "<font> 03C6 greek small letter phi" },
-  { 0x1D6D8, "<font> 03C7 greek small letter chi" },
-  { 0x1D6D9, "<font> 03C8 greek small letter psi" },
-  { 0x1D6DA, "<font> 03C9 greek small letter omega" },
-  { 0x1D6DB, "<font> 2202 partial differential" },
-  { 0x1D6DC, "<font> 03F5 greek lunate epsilon symbol" },
-  { 0x1D6DD, "<font> 03D1 greek theta symbol" },
-  { 0x1D6DE, "<font> 03F0 greek kappa symbol" },
-  { 0x1D6DF, "<font> 03D5 greek phi symbol" },
-  { 0x1D6E0, "<font> 03F1 greek rho symbol" },
-  { 0x1D6E1, "<font> 03D6 greek pi symbol" },
-  { 0x1D6E2, "<font> 0391 greek capital letter alpha" },
-  { 0x1D6E3, "<font> 0392 greek capital letter beta" },
-  { 0x1D6E4, "<font> 0393 greek capital letter gamma" },
-  { 0x1D6E5, "<font> 0394 greek capital letter delta" },
-  { 0x1D6E6, "<font> 0395 greek capital letter epsilon" },
-  { 0x1D6E7, "<font> 0396 greek capital letter zeta" },
-  { 0x1D6E8, "<font> 0397 greek capital letter eta" },
-  { 0x1D6E9, "<font> 0398 greek capital letter theta" },
-  { 0x1D6EA, "<font> 0399 greek capital letter iota" },
-  { 0x1D6EB, "<font> 039A greek capital letter kappa" },
-  { 0x1D6EC, "<font> 039B greek capital letter lamda" },
-  { 0x1D6ED, "<font> 039C greek capital letter mu" },
-  { 0x1D6EE, "<font> 039D greek capital letter nu" },
-  { 0x1D6EF, "<font> 039E greek capital letter xi" },
-  { 0x1D6F0, "<font> 039F greek capital letter omicron" },
-  { 0x1D6F1, "<font> 03A0 greek capital letter pi" },
-  { 0x1D6F2, "<font> 03A1 greek capital letter rho" },
-  { 0x1D6F3, "<font> 03F4 greek capital theta symbol" },
-  { 0x1D6F4, "<font> 03A3 greek capital letter sigma" },
-  { 0x1D6F5, "<font> 03A4 greek capital letter tau" },
-  { 0x1D6F6, "<font> 03A5 greek capital letter upsilon" },
-  { 0x1D6F7, "<font> 03A6 greek capital letter phi" },
-  { 0x1D6F8, "<font> 03A7 greek capital letter chi" },
-  { 0x1D6F9, "<font> 03A8 greek capital letter psi" },
-  { 0x1D6FA, "<font> 03A9 greek capital letter omega" },
-  { 0x1D6FB, "<font> 2207 nabla" },
-  { 0x1D6FC, "<font> 03B1 greek small letter alpha" },
-  { 0x1D6FD, "<font> 03B2 greek small letter beta" },
-  { 0x1D6FE, "<font> 03B3 greek small letter gamma" },
-  { 0x1D6FF, "<font> 03B4 greek small letter delta" },
-  { 0x1D700, "<font> 03B5 greek small letter epsilon" },
-  { 0x1D701, "<font> 03B6 greek small letter zeta" },
-  { 0x1D702, "<font> 03B7 greek small letter eta" },
-  { 0x1D703, "<font> 03B8 greek small letter theta" },
-  { 0x1D704, "<font> 03B9 greek small letter iota" },
-  { 0x1D705, "<font> 03BA greek small letter kappa" },
-  { 0x1D706, "<font> 03BB greek small letter lamda" },
-  { 0x1D707, "<font> 03BC greek small letter mu" },
-  { 0x1D708, "<font> 03BD greek small letter nu" },
-  { 0x1D709, "<font> 03BE greek small letter xi" },
-  { 0x1D70A, "<font> 03BF greek small letter omicron" },
-  { 0x1D70B, "<font> 03C0 greek small letter pi" },
-  { 0x1D70C, "<font> 03C1 greek small letter rho" },
-  { 0x1D70D, "<font> 03C2 greek small letter final sigma" },
-  { 0x1D70E, "<font> 03C3 greek small letter sigma" },
-  { 0x1D70F, "<font> 03C4 greek small letter tau" },
-  { 0x1D710, "<font> 03C5 greek small letter upsilon" },
-  { 0x1D711, "<font> 03C6 greek small letter phi" },
-  { 0x1D712, "<font> 03C7 greek small letter chi" },
-  { 0x1D713, "<font> 03C8 greek small letter psi" },
-  { 0x1D714, "<font> 03C9 greek small letter omega" },
-  { 0x1D715, "<font> 2202 partial differential" },
-  { 0x1D716, "<font> 03F5 greek lunate epsilon symbol" },
-  { 0x1D717, "<font> 03D1 greek theta symbol" },
-  { 0x1D718, "<font> 03F0 greek kappa symbol" },
-  { 0x1D719, "<font> 03D5 greek phi symbol" },
-  { 0x1D71A, "<font> 03F1 greek rho symbol" },
-  { 0x1D71B, "<font> 03D6 greek pi symbol" },
-  { 0x1D71C, "<font> 0391 greek capital letter alpha" },
-  { 0x1D71D, "<font> 0392 greek capital letter beta" },
-  { 0x1D71E, "<font> 0393 greek capital letter gamma" },
-  { 0x1D71F, "<font> 0394 greek capital letter delta" },
-  { 0x1D720, "<font> 0395 greek capital letter epsilon" },
-  { 0x1D721, "<font> 0396 greek capital letter zeta" },
-  { 0x1D722, "<font> 0397 greek capital letter eta" },
-  { 0x1D723, "<font> 0398 greek capital letter theta" },
-  { 0x1D724, "<font> 0399 greek capital letter iota" },
-  { 0x1D725, "<font> 039A greek capital letter kappa" },
-  { 0x1D726, "<font> 039B greek capital letter lamda" },
-  { 0x1D727, "<font> 039C greek capital letter mu" },
-  { 0x1D728, "<font> 039D greek capital letter nu" },
-  { 0x1D729, "<font> 039E greek capital letter xi" },
-  { 0x1D72A, "<font> 039F greek capital letter omicron" },
-  { 0x1D72B, "<font> 03A0 greek capital letter pi" },
-  { 0x1D72C, "<font> 03A1 greek capital letter rho" },
-  { 0x1D72D, "<font> 03F4 greek capital theta symbol" },
-  { 0x1D72E, "<font> 03A3 greek capital letter sigma" },
-  { 0x1D72F, "<font> 03A4 greek capital letter tau" },
-  { 0x1D730, "<font> 03A5 greek capital letter upsilon" },
-  { 0x1D731, "<font> 03A6 greek capital letter phi" },
-  { 0x1D732, "<font> 03A7 greek capital letter chi" },
-  { 0x1D733, "<font> 03A8 greek capital letter psi" },
-  { 0x1D734, "<font> 03A9 greek capital letter omega" },
-  { 0x1D735, "<font> 2207 nabla" },
-  { 0x1D736, "<font> 03B1 greek small letter alpha" },
-  { 0x1D737, "<font> 03B2 greek small letter beta" },
-  { 0x1D738, "<font> 03B3 greek small letter gamma" },
-  { 0x1D739, "<font> 03B4 greek small letter delta" },
-  { 0x1D73A, "<font> 03B5 greek small letter epsilon" },
-  { 0x1D73B, "<font> 03B6 greek small letter zeta" },
-  { 0x1D73C, "<font> 03B7 greek small letter eta" },
-  { 0x1D73D, "<font> 03B8 greek small letter theta" },
-  { 0x1D73E, "<font> 03B9 greek small letter iota" },
-  { 0x1D73F, "<font> 03BA greek small letter kappa" },
-  { 0x1D740, "<font> 03BB greek small letter lamda" },
-  { 0x1D741, "<font> 03BC greek small letter mu" },
-  { 0x1D742, "<font> 03BD greek small letter nu" },
-  { 0x1D743, "<font> 03BE greek small letter xi" },
-  { 0x1D744, "<font> 03BF greek small letter omicron" },
-  { 0x1D745, "<font> 03C0 greek small letter pi" },
-  { 0x1D746, "<font> 03C1 greek small letter rho" },
-  { 0x1D747, "<font> 03C2 greek small letter final sigma" },
-  { 0x1D748, "<font> 03C3 greek small letter sigma" },
-  { 0x1D749, "<font> 03C4 greek small letter tau" },
-  { 0x1D74A, "<font> 03C5 greek small letter upsilon" },
-  { 0x1D74B, "<font> 03C6 greek small letter phi" },
-  { 0x1D74C, "<font> 03C7 greek small letter chi" },
-  { 0x1D74D, "<font> 03C8 greek small letter psi" },
-  { 0x1D74E, "<font> 03C9 greek small letter omega" },
-  { 0x1D74F, "<font> 2202 partial differential" },
-  { 0x1D750, "<font> 03F5 greek lunate epsilon symbol" },
-  { 0x1D751, "<font> 03D1 greek theta symbol" },
-  { 0x1D752, "<font> 03F0 greek kappa symbol" },
-  { 0x1D753, "<font> 03D5 greek phi symbol" },
-  { 0x1D754, "<font> 03F1 greek rho symbol" },
-  { 0x1D755, "<font> 03D6 greek pi symbol" },
-  { 0x1D756, "<font> 0391 greek capital letter alpha" },
-  { 0x1D757, "<font> 0392 greek capital letter beta" },
-  { 0x1D758, "<font> 0393 greek capital letter gamma" },
-  { 0x1D759, "<font> 0394 greek capital letter delta" },
-  { 0x1D75A, "<font> 0395 greek capital letter epsilon" },
-  { 0x1D75B, "<font> 0396 greek capital letter zeta" },
-  { 0x1D75C, "<font> 0397 greek capital letter eta" },
-  { 0x1D75D, "<font> 0398 greek capital letter theta" },
-  { 0x1D75E, "<font> 0399 greek capital letter iota" },
-  { 0x1D75F, "<font> 039A greek capital letter kappa" },
-  { 0x1D760, "<font> 039B greek capital letter lamda" },
-  { 0x1D761, "<font> 039C greek capital letter mu" },
-  { 0x1D762, "<font> 039D greek capital letter nu" },
-  { 0x1D763, "<font> 039E greek capital letter xi" },
-  { 0x1D764, "<font> 039F greek capital letter omicron" },
-  { 0x1D765, "<font> 03A0 greek capital letter pi" },
-  { 0x1D766, "<font> 03A1 greek capital letter rho" },
-  { 0x1D767, "<font> 03F4 greek capital theta symbol" },
-  { 0x1D768, "<font> 03A3 greek capital letter sigma" },
-  { 0x1D769, "<font> 03A4 greek capital letter tau" },
-  { 0x1D76A, "<font> 03A5 greek capital letter upsilon" },
-  { 0x1D76B, "<font> 03A6 greek capital letter phi" },
-  { 0x1D76C, "<font> 03A7 greek capital letter chi" },
-  { 0x1D76D, "<font> 03A8 greek capital letter psi" },
-  { 0x1D76E, "<font> 03A9 greek capital letter omega" },
-  { 0x1D76F, "<font> 2207 nabla" },
-  { 0x1D770, "<font> 03B1 greek small letter alpha" },
-  { 0x1D771, "<font> 03B2 greek small letter beta" },
-  { 0x1D772, "<font> 03B3 greek small letter gamma" },
-  { 0x1D773, "<font> 03B4 greek small letter delta" },
-  { 0x1D774, "<font> 03B5 greek small letter epsilon" },
-  { 0x1D775, "<font> 03B6 greek small letter zeta" },
-  { 0x1D776, "<font> 03B7 greek small letter eta" },
-  { 0x1D777, "<font> 03B8 greek small letter theta" },
-  { 0x1D778, "<font> 03B9 greek small letter iota" },
-  { 0x1D779, "<font> 03BA greek small letter kappa" },
-  { 0x1D77A, "<font> 03BB greek small letter lamda" },
-  { 0x1D77B, "<font> 03BC greek small letter mu" },
-  { 0x1D77C, "<font> 03BD greek small letter nu" },
-  { 0x1D77D, "<font> 03BE greek small letter xi" },
-  { 0x1D77E, "<font> 03BF greek small letter omicron" },
-  { 0x1D77F, "<font> 03C0 greek small letter pi" },
-  { 0x1D780, "<font> 03C1 greek small letter rho" },
-  { 0x1D781, "<font> 03C2 greek small letter final sigma" },
-  { 0x1D782, "<font> 03C3 greek small letter sigma" },
-  { 0x1D783, "<font> 03C4 greek small letter tau" },
-  { 0x1D784, "<font> 03C5 greek small letter upsilon" },
-  { 0x1D785, "<font> 03C6 greek small letter phi" },
-  { 0x1D786, "<font> 03C7 greek small letter chi" },
-  { 0x1D787, "<font> 03C8 greek small letter psi" },
-  { 0x1D788, "<font> 03C9 greek small letter omega" },
-  { 0x1D789, "<font> 2202 partial differential" },
-  { 0x1D78A, "<font> 03F5 greek lunate epsilon symbol" },
-  { 0x1D78B, "<font> 03D1 greek theta symbol" },
-  { 0x1D78C, "<font> 03F0 greek kappa symbol" },
-  { 0x1D78D, "<font> 03D5 greek phi symbol" },
-  { 0x1D78E, "<font> 03F1 greek rho symbol" },
-  { 0x1D78F, "<font> 03D6 greek pi symbol" },
-  { 0x1D790, "<font> 0391 greek capital letter alpha" },
-  { 0x1D791, "<font> 0392 greek capital letter beta" },
-  { 0x1D792, "<font> 0393 greek capital letter gamma" },
-  { 0x1D793, "<font> 0394 greek capital letter delta" },
-  { 0x1D794, "<font> 0395 greek capital letter epsilon" },
-  { 0x1D795, "<font> 0396 greek capital letter zeta" },
-  { 0x1D796, "<font> 0397 greek capital letter eta" },
-  { 0x1D797, "<font> 0398 greek capital letter theta" },
-  { 0x1D798, "<font> 0399 greek capital letter iota" },
-  { 0x1D799, "<font> 039A greek capital letter kappa" },
-  { 0x1D79A, "<font> 039B greek capital letter lamda" },
-  { 0x1D79B, "<font> 039C greek capital letter mu" },
-  { 0x1D79C, "<font> 039D greek capital letter nu" },
-  { 0x1D79D, "<font> 039E greek capital letter xi" },
-  { 0x1D79E, "<font> 039F greek capital letter omicron" },
-  { 0x1D79F, "<font> 03A0 greek capital letter pi" },
-  { 0x1D7A0, "<font> 03A1 greek capital letter rho" },
-  { 0x1D7A1, "<font> 03F4 greek capital theta symbol" },
-  { 0x1D7A2, "<font> 03A3 greek capital letter sigma" },
-  { 0x1D7A3, "<font> 03A4 greek capital letter tau" },
-  { 0x1D7A4, "<font> 03A5 greek capital letter upsilon" },
-  { 0x1D7A5, "<font> 03A6 greek capital letter phi" },
-  { 0x1D7A6, "<font> 03A7 greek capital letter chi" },
-  { 0x1D7A7, "<font> 03A8 greek capital letter psi" },
-  { 0x1D7A8, "<font> 03A9 greek capital letter omega" },
-  { 0x1D7A9, "<font> 2207 nabla" },
-  { 0x1D7AA, "<font> 03B1 greek small letter alpha" },
-  { 0x1D7AB, "<font> 03B2 greek small letter beta" },
-  { 0x1D7AC, "<font> 03B3 greek small letter gamma" },
-  { 0x1D7AD, "<font> 03B4 greek small letter delta" },
-  { 0x1D7AE, "<font> 03B5 greek small letter epsilon" },
-  { 0x1D7AF, "<font> 03B6 greek small letter zeta" },
-  { 0x1D7B0, "<font> 03B7 greek small letter eta" },
-  { 0x1D7B1, "<font> 03B8 greek small letter theta" },
-  { 0x1D7B2, "<font> 03B9 greek small letter iota" },
-  { 0x1D7B3, "<font> 03BA greek small letter kappa" },
-  { 0x1D7B4, "<font> 03BB greek small letter lamda" },
-  { 0x1D7B5, "<font> 03BC greek small letter mu" },
-  { 0x1D7B6, "<font> 03BD greek small letter nu" },
-  { 0x1D7B7, "<font> 03BE greek small letter xi" },
-  { 0x1D7B8, "<font> 03BF greek small letter omicron" },
-  { 0x1D7B9, "<font> 03C0 greek small letter pi" },
-  { 0x1D7BA, "<font> 03C1 greek small letter rho" },
-  { 0x1D7BB, "<font> 03C2 greek small letter final sigma" },
-  { 0x1D7BC, "<font> 03C3 greek small letter sigma" },
-  { 0x1D7BD, "<font> 03C4 greek small letter tau" },
-  { 0x1D7BE, "<font> 03C5 greek small letter upsilon" },
-  { 0x1D7BF, "<font> 03C6 greek small letter phi" },
-  { 0x1D7C0, "<font> 03C7 greek small letter chi" },
-  { 0x1D7C1, "<font> 03C8 greek small letter psi" },
-  { 0x1D7C2, "<font> 03C9 greek small letter omega" },
-  { 0x1D7C3, "<font> 2202 partial differential" },
-  { 0x1D7C4, "<font> 03F5 greek lunate epsilon symbol" },
-  { 0x1D7C5, "<font> 03D1 greek theta symbol" },
-  { 0x1D7C6, "<font> 03F0 greek kappa symbol" },
-  { 0x1D7C7, "<font> 03D5 greek phi symbol" },
-  { 0x1D7C8, "<font> 03F1 greek rho symbol" },
-  { 0x1D7C9, "<font> 03D6 greek pi symbol" },
-  { 0x1D7CA, "<font> 03DC greek letter digamma" },
-  { 0x1D7CB, "<font> 03DD greek small letter digamma" },
-  { 0x1D7CE, "<font> 0030 digit zero" },
-  { 0x1D7CF, "<font> 0031 digit one" },
-  { 0x1D7D0, "<font> 0032 digit two" },
-  { 0x1D7D1, "<font> 0033 digit three" },
-  { 0x1D7D2, "<font> 0034 digit four" },
-  { 0x1D7D3, "<font> 0035 digit five" },
-  { 0x1D7D4, "<font> 0036 digit six" },
-  { 0x1D7D5, "<font> 0037 digit seven" },
-  { 0x1D7D6, "<font> 0038 digit eight" },
-  { 0x1D7D7, "<font> 0039 digit nine" },
-  { 0x1D7D8, "<font> 0030 digit zero" },
-  { 0x1D7D9, "<font> 0031 digit one" },
-  { 0x1D7DA, "<font> 0032 digit two" },
-  { 0x1D7DB, "<font> 0033 digit three" },
-  { 0x1D7DC, "<font> 0034 digit four" },
-  { 0x1D7DD, "<font> 0035 digit five" },
-  { 0x1D7DE, "<font> 0036 digit six" },
-  { 0x1D7DF, "<font> 0037 digit seven" },
-  { 0x1D7E0, "<font> 0038 digit eight" },
-  { 0x1D7E1, "<font> 0039 digit nine" },
-  { 0x1D7E2, "<font> 0030 digit zero" },
-  { 0x1D7E3, "<font> 0031 digit one" },
-  { 0x1D7E4, "<font> 0032 digit two" },
-  { 0x1D7E5, "<font> 0033 digit three" },
-  { 0x1D7E6, "<font> 0034 digit four" },
-  { 0x1D7E7, "<font> 0035 digit five" },
-  { 0x1D7E8, "<font> 0036 digit six" },
-  { 0x1D7E9, "<font> 0037 digit seven" },
-  { 0x1D7EA, "<font> 0038 digit eight" },
-  { 0x1D7EB, "<font> 0039 digit nine" },
-  { 0x1D7EC, "<font> 0030 digit zero" },
-  { 0x1D7ED, "<font> 0031 digit one" },
-  { 0x1D7EE, "<font> 0032 digit two" },
-  { 0x1D7EF, "<font> 0033 digit three" },
-  { 0x1D7F0, "<font> 0034 digit four" },
-  { 0x1D7F1, "<font> 0035 digit five" },
-  { 0x1D7F2, "<font> 0036 digit six" },
-  { 0x1D7F3, "<font> 0037 digit seven" },
-  { 0x1D7F4, "<font> 0038 digit eight" },
-  { 0x1D7F5, "<font> 0039 digit nine" },
-  { 0x1D7F6, "<font> 0030 digit zero" },
-  { 0x1D7F7, "<font> 0031 digit one" },
-  { 0x1D7F8, "<font> 0032 digit two" },
-  { 0x1D7F9, "<font> 0033 digit three" },
-  { 0x1D7FA, "<font> 0034 digit four" },
-  { 0x1D7FB, "<font> 0035 digit five" },
-  { 0x1D7FC, "<font> 0036 digit six" },
-  { 0x1D7FD, "<font> 0037 digit seven" },
-  { 0x1D7FE, "<font> 0038 digit eight" },
-  { 0x1D7FF, "<font> 0039 digit nine" },
-  { (gunichar)(-1), 0 }
+  { 0x00A0, 0 },
+  { 0x00A8, 15 },
+  { 0x00AA, 25 },
+  { 0x00AF, 38 },
+  { 0x00B2, 48 },
+  { 0x00B3, 61 },
+  { 0x00B4, 74 },
+  { 0x00B5, 84 },
+  { 0x00B8, 111 },
+  { 0x00B9, 121 },
+  { 0x00BA, 134 },
+  { 0x00BC, 147 },
+  { 0x00BD, 173 },
+  { 0x00BE, 199 },
+  { 0x0132, 225 },
+  { 0x0133, 235 },
+  { 0x013F, 245 },
+  { 0x0140, 255 },
+  { 0x0149, 265 },
+  { 0x017F, 275 },
+  { 0x01C4, 301 },
+  { 0x01C5, 311 },
+  { 0x01C6, 321 },
+  { 0x01C7, 331 },
+  { 0x01C8, 341 },
+  { 0x01C9, 351 },
+  { 0x01CA, 361 },
+  { 0x01CB, 371 },
+  { 0x01CC, 381 },
+  { 0x01F1, 391 },
+  { 0x01F2, 401 },
+  { 0x01F3, 411 },
+  { 0x02B0, 421 },
+  { 0x02B1, 434 },
+  { 0x02B2, 447 },
+  { 0x02B3, 460 },
+  { 0x02B4, 473 },
+  { 0x02B5, 486 },
+  { 0x02B6, 499 },
+  { 0x02B7, 512 },
+  { 0x02B8, 525 },
+  { 0x02D8, 538 },
+  { 0x02D9, 548 },
+  { 0x02DA, 558 },
+  { 0x02DB, 568 },
+  { 0x02DC, 578 },
+  { 0x02DD, 588 },
+  { 0x02E0, 598 },
+  { 0x02E1, 611 },
+  { 0x02E2, 624 },
+  { 0x02E3, 637 },
+  { 0x02E4, 650 },
+  { 0x037A, 663 },
+  { 0x0384, 74 },
+  { 0x03D0, 673 },
+  { 0x03D1, 702 },
+  { 0x03D2, 732 },
+  { 0x03D5, 766 },
+  { 0x03D6, 794 },
+  { 0x03F0, 821 },
+  { 0x03F1, 851 },
+  { 0x03F2, 879 },
+  { 0x03F4, 915 },
+  { 0x03F5, 947 },
+  { 0x03F9, 979 },
+  { 0x0587, 1011 },
+  { 0x0675, 1021 },
+  { 0x0676, 1031 },
+  { 0x0677, 1041 },
+  { 0x0678, 1051 },
+  { 0x0E33, 1061 },
+  { 0x0EB3, 1071 },
+  { 0x0EDC, 1081 },
+  { 0x0EDD, 1091 },
+  { 0x0F0C, 1101 },
+  { 0x0F77, 1116 },
+  { 0x0F79, 1126 },
+  { 0x10FC, 1136 },
+  { 0x1D2C, 1149 },
+  { 0x1D2D, 1162 },
+  { 0x1D2E, 1175 },
+  { 0x1D30, 1188 },
+  { 0x1D31, 1201 },
+  { 0x1D32, 1214 },
+  { 0x1D33, 1227 },
+  { 0x1D34, 1240 },
+  { 0x1D35, 1253 },
+  { 0x1D36, 1266 },
+  { 0x1D37, 1279 },
+  { 0x1D38, 1292 },
+  { 0x1D39, 1305 },
+  { 0x1D3A, 1318 },
+  { 0x1D3C, 1331 },
+  { 0x1D3D, 1344 },
+  { 0x1D3E, 1357 },
+  { 0x1D3F, 1370 },
+  { 0x1D40, 1383 },
+  { 0x1D41, 1396 },
+  { 0x1D42, 1409 },
+  { 0x1D43, 25 },
+  { 0x1D44, 1422 },
+  { 0x1D45, 1435 },
+  { 0x1D46, 1448 },
+  { 0x1D47, 1461 },
+  { 0x1D48, 1474 },
+  { 0x1D49, 1487 },
+  { 0x1D4A, 1500 },
+  { 0x1D4B, 1513 },
+  { 0x1D4C, 1526 },
+  { 0x1D4D, 1539 },
+  { 0x1D4F, 1552 },
+  { 0x1D50, 1565 },
+  { 0x1D51, 1578 },
+  { 0x1D52, 134 },
+  { 0x1D53, 1591 },
+  { 0x1D54, 1604 },
+  { 0x1D55, 1617 },
+  { 0x1D56, 1630 },
+  { 0x1D57, 1643 },
+  { 0x1D58, 1656 },
+  { 0x1D59, 1669 },
+  { 0x1D5A, 1682 },
+  { 0x1D5B, 1695 },
+  { 0x1D5C, 1708 },
+  { 0x1D5D, 1721 },
+  { 0x1D5E, 1734 },
+  { 0x1D5F, 1747 },
+  { 0x1D60, 1760 },
+  { 0x1D61, 1773 },
+  { 0x1D62, 1786 },
+  { 0x1D63, 1797 },
+  { 0x1D64, 1808 },
+  { 0x1D65, 1819 },
+  { 0x1D66, 1830 },
+  { 0x1D67, 1841 },
+  { 0x1D68, 1852 },
+  { 0x1D69, 1863 },
+  { 0x1D6A, 1874 },
+  { 0x1D78, 1885 },
+  { 0x1D9B, 1898 },
+  { 0x1D9C, 1911 },
+  { 0x1D9D, 1924 },
+  { 0x1D9E, 1937 },
+  { 0x1D9F, 1526 },
+  { 0x1DA0, 1950 },
+  { 0x1DA1, 1963 },
+  { 0x1DA2, 1976 },
+  { 0x1DA3, 1989 },
+  { 0x1DA4, 2002 },
+  { 0x1DA5, 2015 },
+  { 0x1DA6, 2028 },
+  { 0x1DA7, 2041 },
+  { 0x1DA8, 2054 },
+  { 0x1DA9, 2067 },
+  { 0x1DAA, 2080 },
+  { 0x1DAB, 2093 },
+  { 0x1DAC, 2106 },
+  { 0x1DAD, 2119 },
+  { 0x1DAE, 2132 },
+  { 0x1DAF, 2145 },
+  { 0x1DB0, 2158 },
+  { 0x1DB1, 2171 },
+  { 0x1DB2, 2184 },
+  { 0x1DB3, 2197 },
+  { 0x1DB4, 2210 },
+  { 0x1DB5, 2223 },
+  { 0x1DB6, 2236 },
+  { 0x1DB7, 2249 },
+  { 0x1DB8, 2262 },
+  { 0x1DB9, 2275 },
+  { 0x1DBA, 2288 },
+  { 0x1DBB, 2301 },
+  { 0x1DBC, 2314 },
+  { 0x1DBD, 2327 },
+  { 0x1DBE, 2340 },
+  { 0x1DBF, 2353 },
+  { 0x1E9A, 2366 },
+  { 0x1FBD, 2376 },
+  { 0x1FBF, 2376 },
+  { 0x1FC0, 2386 },
+  { 0x1FFE, 2396 },
+  { 0x2002, 2406 },
+  { 0x2003, 2406 },
+  { 0x2004, 2406 },
+  { 0x2005, 2406 },
+  { 0x2006, 2406 },
+  { 0x2007, 0 },
+  { 0x2008, 2406 },
+  { 0x2009, 2406 },
+  { 0x200A, 2406 },
+  { 0x2011, 2417 },
+  { 0x2017, 2432 },
+  { 0x2024, 2442 },
+  { 0x2025, 2457 },
+  { 0x2026, 2467 },
+  { 0x202F, 0 },
+  { 0x2033, 2482 },
+  { 0x2034, 2492 },
+  { 0x2036, 2507 },
+  { 0x2037, 2517 },
+  { 0x203C, 2532 },
+  { 0x203E, 2542 },
+  { 0x2047, 2552 },
+  { 0x2048, 2562 },
+  { 0x2049, 2572 },
+  { 0x2057, 2582 },
+  { 0x205F, 2406 },
+  { 0x2070, 2602 },
+  { 0x2071, 2615 },
+  { 0x2074, 2628 },
+  { 0x2075, 2641 },
+  { 0x2076, 2654 },
+  { 0x2077, 2667 },
+  { 0x2078, 2680 },
+  { 0x2079, 2693 },
+  { 0x207A, 2706 },
+  { 0x207B, 2719 },
+  { 0x207C, 2732 },
+  { 0x207D, 2745 },
+  { 0x207E, 2758 },
+  { 0x207F, 2771 },
+  { 0x2080, 2784 },
+  { 0x2081, 2795 },
+  { 0x2082, 2806 },
+  { 0x2083, 2817 },
+  { 0x2084, 2828 },
+  { 0x2085, 2839 },
+  { 0x2086, 2850 },
+  { 0x2087, 2861 },
+  { 0x2088, 2872 },
+  { 0x2089, 2883 },
+  { 0x208A, 2894 },
+  { 0x208B, 2905 },
+  { 0x208C, 2916 },
+  { 0x208D, 2927 },
+  { 0x208E, 2938 },
+  { 0x2090, 2949 },
+  { 0x2091, 2960 },
+  { 0x2092, 2971 },
+  { 0x2093, 2982 },
+  { 0x2094, 2993 },
+  { 0x20A8, 3004 },
+  { 0x2100, 3014 },
+  { 0x2101, 3029 },
+  { 0x2102, 3044 },
+  { 0x2103, 3079 },
+  { 0x2105, 3089 },
+  { 0x2106, 3104 },
+  { 0x2107, 3119 },
+  { 0x2109, 3152 },
+  { 0x210A, 3162 },
+  { 0x210B, 3195 },
+  { 0x210C, 3195 },
+  { 0x210D, 3195 },
+  { 0x210E, 3230 },
+  { 0x210F, 3263 },
+  { 0x2110, 3308 },
+  { 0x2111, 3308 },
+  { 0x2112, 3343 },
+  { 0x2113, 3378 },
+  { 0x2115, 3411 },
+  { 0x2116, 3446 },
+  { 0x2119, 3456 },
+  { 0x211A, 3491 },
+  { 0x211B, 3526 },
+  { 0x211C, 3526 },
+  { 0x211D, 3526 },
+  { 0x2120, 3561 },
+  { 0x2121, 3579 },
+  { 0x2122, 3594 },
+  { 0x2124, 3612 },
+  { 0x2128, 3612 },
+  { 0x212C, 3647 },
+  { 0x212D, 3044 },
+  { 0x212F, 3682 },
+  { 0x2130, 3715 },
+  { 0x2131, 3750 },
+  { 0x2133, 3785 },
+  { 0x2134, 3820 },
+  { 0x2135, 3853 },
+  { 0x2136, 3877 },
+  { 0x2137, 3900 },
+  { 0x2138, 3925 },
+  { 0x2139, 3950 },
+  { 0x213B, 3983 },
+  { 0x213C, 3998 },
+  { 0x213D, 4032 },
+  { 0x213E, 4069 },
+  { 0x213F, 4108 },
+  { 0x2140, 4144 },
+  { 0x2145, 4172 },
+  { 0x2146, 4207 },
+  { 0x2147, 3682 },
+  { 0x2148, 3950 },
+  { 0x2149, 4240 },
+  { 0x2153, 4273 },
+  { 0x2154, 4299 },
+  { 0x2155, 4325 },
+  { 0x2156, 4351 },
+  { 0x2157, 4377 },
+  { 0x2158, 4403 },
+  { 0x2159, 4429 },
+  { 0x215A, 4455 },
+  { 0x215B, 4481 },
+  { 0x215C, 4507 },
+  { 0x215D, 4533 },
+  { 0x215E, 4559 },
+  { 0x215F, 4585 },
+  { 0x2160, 4606 },
+  { 0x2161, 4634 },
+  { 0x2162, 4644 },
+  { 0x2163, 4659 },
+  { 0x2164, 4669 },
+  { 0x2165, 4697 },
+  { 0x2166, 4707 },
+  { 0x2167, 4722 },
+  { 0x2168, 4742 },
+  { 0x2169, 4752 },
+  { 0x216A, 4780 },
+  { 0x216B, 4790 },
+  { 0x216C, 4805 },
+  { 0x216D, 4833 },
+  { 0x216E, 4861 },
+  { 0x216F, 4889 },
+  { 0x2170, 4917 },
+  { 0x2171, 4943 },
+  { 0x2172, 4953 },
+  { 0x2173, 4968 },
+  { 0x2174, 4978 },
+  { 0x2175, 5004 },
+  { 0x2176, 5014 },
+  { 0x2177, 5029 },
+  { 0x2178, 5049 },
+  { 0x2179, 5059 },
+  { 0x217A, 5085 },
+  { 0x217B, 5095 },
+  { 0x217C, 5110 },
+  { 0x217D, 5136 },
+  { 0x217E, 5162 },
+  { 0x217F, 5188 },
+  { 0x222C, 5214 },
+  { 0x222D, 5224 },
+  { 0x222F, 5239 },
+  { 0x2230, 5249 },
+  { 0x2460, 5264 },
+  { 0x2461, 5278 },
+  { 0x2462, 5292 },
+  { 0x2463, 5306 },
+  { 0x2464, 5320 },
+  { 0x2465, 5334 },
+  { 0x2466, 5348 },
+  { 0x2467, 5362 },
+  { 0x2468, 5376 },
+  { 0x2469, 5390 },
+  { 0x246A, 5409 },
+  { 0x246B, 5428 },
+  { 0x246C, 5447 },
+  { 0x246D, 5466 },
+  { 0x246E, 5485 },
+  { 0x246F, 5504 },
+  { 0x2470, 5523 },
+  { 0x2471, 5542 },
+  { 0x2472, 5561 },
+  { 0x2473, 5580 },
+  { 0x2474, 5599 },
+  { 0x2475, 5614 },
+  { 0x2476, 5629 },
+  { 0x2477, 5644 },
+  { 0x2478, 5659 },
+  { 0x2479, 5674 },
+  { 0x247A, 5689 },
+  { 0x247B, 5704 },
+  { 0x247C, 5719 },
+  { 0x247D, 5734 },
+  { 0x247E, 5754 },
+  { 0x247F, 5774 },
+  { 0x2480, 5794 },
+  { 0x2481, 5814 },
+  { 0x2482, 5834 },
+  { 0x2483, 5854 },
+  { 0x2484, 5874 },
+  { 0x2485, 5894 },
+  { 0x2486, 5914 },
+  { 0x2487, 5934 },
+  { 0x2488, 5954 },
+  { 0x2489, 5964 },
+  { 0x248A, 5974 },
+  { 0x248B, 5984 },
+  { 0x248C, 5994 },
+  { 0x248D, 6004 },
+  { 0x248E, 6014 },
+  { 0x248F, 6024 },
+  { 0x2490, 6034 },
+  { 0x2491, 6044 },
+  { 0x2492, 6059 },
+  { 0x2493, 6074 },
+  { 0x2494, 6089 },
+  { 0x2495, 6104 },
+  { 0x2496, 6119 },
+  { 0x2497, 6134 },
+  { 0x2498, 6149 },
+  { 0x2499, 6164 },
+  { 0x249A, 6179 },
+  { 0x249B, 6194 },
+  { 0x249C, 6209 },
+  { 0x249D, 6224 },
+  { 0x249E, 6239 },
+  { 0x249F, 6254 },
+  { 0x24A0, 6269 },
+  { 0x24A1, 6284 },
+  { 0x24A2, 6299 },
+  { 0x24A3, 6314 },
+  { 0x24A4, 6329 },
+  { 0x24A5, 6344 },
+  { 0x24A6, 6359 },
+  { 0x24A7, 6374 },
+  { 0x24A8, 6389 },
+  { 0x24A9, 6404 },
+  { 0x24AA, 6419 },
+  { 0x24AB, 6434 },
+  { 0x24AC, 6449 },
+  { 0x24AD, 6464 },
+  { 0x24AE, 6479 },
+  { 0x24AF, 6494 },
+  { 0x24B0, 6509 },
+  { 0x24B1, 6524 },
+  { 0x24B2, 6539 },
+  { 0x24B3, 6554 },
+  { 0x24B4, 6569 },
+  { 0x24B5, 6584 },
+  { 0x24B6, 6599 },
+  { 0x24B7, 6613 },
+  { 0x24B8, 6627 },
+  { 0x24B9, 6641 },
+  { 0x24BA, 6655 },
+  { 0x24BB, 6669 },
+  { 0x24BC, 6683 },
+  { 0x24BD, 6697 },
+  { 0x24BE, 6711 },
+  { 0x24BF, 6725 },
+  { 0x24C0, 6739 },
+  { 0x24C1, 6753 },
+  { 0x24C2, 6767 },
+  { 0x24C3, 6781 },
+  { 0x24C4, 6795 },
+  { 0x24C5, 6809 },
+  { 0x24C6, 6823 },
+  { 0x24C7, 6837 },
+  { 0x24C8, 6851 },
+  { 0x24C9, 6865 },
+  { 0x24CA, 6879 },
+  { 0x24CB, 6893 },
+  { 0x24CC, 6907 },
+  { 0x24CD, 6921 },
+  { 0x24CE, 6935 },
+  { 0x24CF, 6949 },
+  { 0x24D0, 6963 },
+  { 0x24D1, 6977 },
+  { 0x24D2, 6991 },
+  { 0x24D3, 7005 },
+  { 0x24D4, 7019 },
+  { 0x24D5, 7033 },
+  { 0x24D6, 7047 },
+  { 0x24D7, 7061 },
+  { 0x24D8, 7075 },
+  { 0x24D9, 7089 },
+  { 0x24DA, 7103 },
+  { 0x24DB, 7117 },
+  { 0x24DC, 7131 },
+  { 0x24DD, 7145 },
+  { 0x24DE, 7159 },
+  { 0x24DF, 7173 },
+  { 0x24E0, 7187 },
+  { 0x24E1, 7201 },
+  { 0x24E2, 7215 },
+  { 0x24E3, 7229 },
+  { 0x24E4, 7243 },
+  { 0x24E5, 7257 },
+  { 0x24E6, 7271 },
+  { 0x24E7, 7285 },
+  { 0x24E8, 7299 },
+  { 0x24E9, 7313 },
+  { 0x24EA, 7327 },
+  { 0x2A0C, 7341 },
+  { 0x2A74, 7361 },
+  { 0x2A75, 7376 },
+  { 0x2A76, 7386 },
+  { 0x2D6F, 7401 },
+  { 0x2E9F, 7414 },
+  { 0x2EF3, 7419 },
+  { 0x2F00, 7424 },
+  { 0x2F01, 7429 },
+  { 0x2F02, 7434 },
+  { 0x2F03, 7439 },
+  { 0x2F04, 7444 },
+  { 0x2F05, 7449 },
+  { 0x2F06, 7454 },
+  { 0x2F07, 7459 },
+  { 0x2F08, 7464 },
+  { 0x2F09, 7469 },
+  { 0x2F0A, 7474 },
+  { 0x2F0B, 7479 },
+  { 0x2F0C, 7484 },
+  { 0x2F0D, 7489 },
+  { 0x2F0E, 7494 },
+  { 0x2F0F, 7499 },
+  { 0x2F10, 7504 },
+  { 0x2F11, 7509 },
+  { 0x2F12, 7514 },
+  { 0x2F13, 7519 },
+  { 0x2F14, 7524 },
+  { 0x2F15, 7529 },
+  { 0x2F16, 7534 },
+  { 0x2F17, 7539 },
+  { 0x2F18, 7544 },
+  { 0x2F19, 7549 },
+  { 0x2F1A, 7554 },
+  { 0x2F1B, 7559 },
+  { 0x2F1C, 7564 },
+  { 0x2F1D, 7569 },
+  { 0x2F1E, 7574 },
+  { 0x2F1F, 7579 },
+  { 0x2F20, 7584 },
+  { 0x2F21, 7589 },
+  { 0x2F22, 7594 },
+  { 0x2F23, 7599 },
+  { 0x2F24, 7604 },
+  { 0x2F25, 7609 },
+  { 0x2F26, 7614 },
+  { 0x2F27, 7619 },
+  { 0x2F28, 7624 },
+  { 0x2F29, 7629 },
+  { 0x2F2A, 7634 },
+  { 0x2F2B, 7639 },
+  { 0x2F2C, 7644 },
+  { 0x2F2D, 7649 },
+  { 0x2F2E, 7654 },
+  { 0x2F2F, 7659 },
+  { 0x2F30, 7664 },
+  { 0x2F31, 7669 },
+  { 0x2F32, 7674 },
+  { 0x2F33, 7679 },
+  { 0x2F34, 7684 },
+  { 0x2F35, 7689 },
+  { 0x2F36, 7694 },
+  { 0x2F37, 7699 },
+  { 0x2F38, 7704 },
+  { 0x2F39, 7709 },
+  { 0x2F3A, 7714 },
+  { 0x2F3B, 7719 },
+  { 0x2F3C, 7724 },
+  { 0x2F3D, 7729 },
+  { 0x2F3E, 7734 },
+  { 0x2F3F, 7739 },
+  { 0x2F40, 7744 },
+  { 0x2F41, 7749 },
+  { 0x2F42, 7754 },
+  { 0x2F43, 7759 },
+  { 0x2F44, 7764 },
+  { 0x2F45, 7769 },
+  { 0x2F46, 7774 },
+  { 0x2F47, 7779 },
+  { 0x2F48, 7784 },
+  { 0x2F49, 7789 },
+  { 0x2F4A, 7794 },
+  { 0x2F4B, 7799 },
+  { 0x2F4C, 7804 },
+  { 0x2F4D, 7809 },
+  { 0x2F4E, 7814 },
+  { 0x2F4F, 7819 },
+  { 0x2F50, 7824 },
+  { 0x2F51, 7829 },
+  { 0x2F52, 7834 },
+  { 0x2F53, 7839 },
+  { 0x2F54, 7844 },
+  { 0x2F55, 7849 },
+  { 0x2F56, 7854 },
+  { 0x2F57, 7859 },
+  { 0x2F58, 7864 },
+  { 0x2F59, 7869 },
+  { 0x2F5A, 7874 },
+  { 0x2F5B, 7879 },
+  { 0x2F5C, 7884 },
+  { 0x2F5D, 7889 },
+  { 0x2F5E, 7894 },
+  { 0x2F5F, 7899 },
+  { 0x2F60, 7904 },
+  { 0x2F61, 7909 },
+  { 0x2F62, 7914 },
+  { 0x2F63, 7919 },
+  { 0x2F64, 7924 },
+  { 0x2F65, 7929 },
+  { 0x2F66, 7934 },
+  { 0x2F67, 7939 },
+  { 0x2F68, 7944 },
+  { 0x2F69, 7949 },
+  { 0x2F6A, 7954 },
+  { 0x2F6B, 7959 },
+  { 0x2F6C, 7964 },
+  { 0x2F6D, 7969 },
+  { 0x2F6E, 7974 },
+  { 0x2F6F, 7979 },
+  { 0x2F70, 7984 },
+  { 0x2F71, 7989 },
+  { 0x2F72, 7994 },
+  { 0x2F73, 7999 },
+  { 0x2F74, 8004 },
+  { 0x2F75, 8009 },
+  { 0x2F76, 8014 },
+  { 0x2F77, 8019 },
+  { 0x2F78, 8024 },
+  { 0x2F79, 8029 },
+  { 0x2F7A, 8034 },
+  { 0x2F7B, 8039 },
+  { 0x2F7C, 8044 },
+  { 0x2F7D, 8049 },
+  { 0x2F7E, 8054 },
+  { 0x2F7F, 8059 },
+  { 0x2F80, 8064 },
+  { 0x2F81, 8069 },
+  { 0x2F82, 8074 },
+  { 0x2F83, 8079 },
+  { 0x2F84, 8084 },
+  { 0x2F85, 8089 },
+  { 0x2F86, 8094 },
+  { 0x2F87, 8099 },
+  { 0x2F88, 8104 },
+  { 0x2F89, 8109 },
+  { 0x2F8A, 8114 },
+  { 0x2F8B, 8119 },
+  { 0x2F8C, 8124 },
+  { 0x2F8D, 8129 },
+  { 0x2F8E, 8134 },
+  { 0x2F8F, 8139 },
+  { 0x2F90, 8144 },
+  { 0x2F91, 8149 },
+  { 0x2F92, 8154 },
+  { 0x2F93, 8159 },
+  { 0x2F94, 8164 },
+  { 0x2F95, 8169 },
+  { 0x2F96, 8174 },
+  { 0x2F97, 8179 },
+  { 0x2F98, 8184 },
+  { 0x2F99, 8189 },
+  { 0x2F9A, 8194 },
+  { 0x2F9B, 8199 },
+  { 0x2F9C, 8204 },
+  { 0x2F9D, 8209 },
+  { 0x2F9E, 8214 },
+  { 0x2F9F, 8219 },
+  { 0x2FA0, 8224 },
+  { 0x2FA1, 8229 },
+  { 0x2FA2, 8234 },
+  { 0x2FA3, 8239 },
+  { 0x2FA4, 8244 },
+  { 0x2FA5, 8249 },
+  { 0x2FA6, 8254 },
+  { 0x2FA7, 8259 },
+  { 0x2FA8, 8264 },
+  { 0x2FA9, 8269 },
+  { 0x2FAA, 8274 },
+  { 0x2FAB, 8279 },
+  { 0x2FAC, 8284 },
+  { 0x2FAD, 8289 },
+  { 0x2FAE, 8294 },
+  { 0x2FAF, 8299 },
+  { 0x2FB0, 8304 },
+  { 0x2FB1, 8309 },
+  { 0x2FB2, 8314 },
+  { 0x2FB3, 8319 },
+  { 0x2FB4, 8324 },
+  { 0x2FB5, 8329 },
+  { 0x2FB6, 8334 },
+  { 0x2FB7, 8339 },
+  { 0x2FB8, 8344 },
+  { 0x2FB9, 8349 },
+  { 0x2FBA, 8354 },
+  { 0x2FBB, 8359 },
+  { 0x2FBC, 8364 },
+  { 0x2FBD, 8369 },
+  { 0x2FBE, 8374 },
+  { 0x2FBF, 8379 },
+  { 0x2FC0, 8384 },
+  { 0x2FC1, 8389 },
+  { 0x2FC2, 8394 },
+  { 0x2FC3, 8399 },
+  { 0x2FC4, 8404 },
+  { 0x2FC5, 8409 },
+  { 0x2FC6, 8414 },
+  { 0x2FC7, 8419 },
+  { 0x2FC8, 8424 },
+  { 0x2FC9, 8429 },
+  { 0x2FCA, 8434 },
+  { 0x2FCB, 8439 },
+  { 0x2FCC, 8444 },
+  { 0x2FCD, 8449 },
+  { 0x2FCE, 8454 },
+  { 0x2FCF, 8459 },
+  { 0x2FD0, 8464 },
+  { 0x2FD1, 8469 },
+  { 0x2FD2, 8474 },
+  { 0x2FD3, 8479 },
+  { 0x2FD4, 8484 },
+  { 0x2FD5, 8489 },
+  { 0x3000, 8494 },
+  { 0x3036, 8506 },
+  { 0x3038, 7539 },
+  { 0x3039, 8523 },
+  { 0x303A, 8528 },
+  { 0x309B, 8533 },
+  { 0x309C, 8543 },
+  { 0x309F, 8553 },
+  { 0x30FF, 8574 },
+  { 0x3131, 8595 },
+  { 0x3132, 8623 },
+  { 0x3133, 8656 },
+  { 0x3134, 8690 },
+  { 0x3135, 8717 },
+  { 0x3136, 8751 },
+  { 0x3137, 8785 },
+  { 0x3138, 8813 },
+  { 0x3139, 8846 },
+  { 0x313A, 8873 },
+  { 0x313B, 8908 },
+  { 0x313C, 8942 },
+  { 0x313D, 8976 },
+  { 0x313E, 9009 },
+  { 0x313F, 9045 },
+  { 0x3140, 9081 },
+  { 0x3141, 9114 },
+  { 0x3142, 9141 },
+  { 0x3143, 9168 },
+  { 0x3144, 9200 },
+  { 0x3145, 9232 },
+  { 0x3146, 9258 },
+  { 0x3147, 9289 },
+  { 0x3148, 9316 },
+  { 0x3149, 9343 },
+  { 0x314A, 9375 },
+  { 0x314B, 9404 },
+  { 0x314C, 9433 },
+  { 0x314D, 9462 },
+  { 0x314E, 9491 },
+  { 0x314F, 9518 },
+  { 0x3150, 9542 },
+  { 0x3151, 9567 },
+  { 0x3152, 9592 },
+  { 0x3153, 9618 },
+  { 0x3154, 9643 },
+  { 0x3155, 9667 },
+  { 0x3156, 9693 },
+  { 0x3157, 9718 },
+  { 0x3158, 9742 },
+  { 0x3159, 9767 },
+  { 0x315A, 9793 },
+  { 0x315B, 9818 },
+  { 0x315C, 9843 },
+  { 0x315D, 9867 },
+  { 0x315E, 9893 },
+  { 0x315F, 9918 },
+  { 0x3160, 9943 },
+  { 0x3161, 9968 },
+  { 0x3162, 9993 },
+  { 0x3163, 10018 },
+  { 0x3164, 10042 },
+  { 0x3165, 10071 },
+  { 0x3166, 10103 },
+  { 0x3167, 10137 },
+  { 0x3168, 10170 },
+  { 0x3169, 10206 },
+  { 0x316A, 10246 },
+  { 0x316B, 10281 },
+  { 0x316C, 10320 },
+  { 0x316D, 10356 },
+  { 0x316E, 10396 },
+  { 0x316F, 10429 },
+  { 0x3170, 10462 },
+  { 0x3171, 10498 },
+  { 0x3172, 10533 },
+  { 0x3173, 10567 },
+  { 0x3174, 10601 },
+  { 0x3175, 10640 },
+  { 0x3176, 10679 },
+  { 0x3177, 10712 },
+  { 0x3178, 10747 },
+  { 0x3179, 10782 },
+  { 0x317A, 10822 },
+  { 0x317B, 10855 },
+  { 0x317C, 10887 },
+  { 0x317D, 10920 },
+  { 0x317E, 10952 },
+  { 0x317F, 10984 },
+  { 0x3180, 11013 },
+  { 0x3181, 11045 },
+  { 0x3182, 11075 },
+  { 0x3183, 11111 },
+  { 0x3184, 11150 },
+  { 0x3185, 11187 },
+  { 0x3186, 11219 },
+  { 0x3187, 11252 },
+  { 0x3188, 11280 },
+  { 0x3189, 11309 },
+  { 0x318A, 11336 },
+  { 0x318B, 11365 },
+  { 0x318C, 11393 },
+  { 0x318D, 11420 },
+  { 0x318E, 11448 },
+  { 0x3192, 11478 },
+  { 0x3193, 11491 },
+  { 0x3194, 11504 },
+  { 0x3195, 11517 },
+  { 0x3196, 11530 },
+  { 0x3197, 11543 },
+  { 0x3198, 11556 },
+  { 0x3199, 11569 },
+  { 0x319A, 11582 },
+  { 0x319B, 11595 },
+  { 0x319C, 11608 },
+  { 0x319D, 11621 },
+  { 0x319E, 11634 },
+  { 0x319F, 11647 },
+  { 0x3200, 11660 },
+  { 0x3201, 11675 },
+  { 0x3202, 11690 },
+  { 0x3203, 11705 },
+  { 0x3204, 11720 },
+  { 0x3205, 11735 },
+  { 0x3206, 11750 },
+  { 0x3207, 11765 },
+  { 0x3208, 11780 },
+  { 0x3209, 11795 },
+  { 0x320A, 11810 },
+  { 0x320B, 11825 },
+  { 0x320C, 11840 },
+  { 0x320D, 11855 },
+  { 0x320E, 11870 },
+  { 0x320F, 11890 },
+  { 0x3210, 11910 },
+  { 0x3211, 11930 },
+  { 0x3212, 11950 },
+  { 0x3213, 11970 },
+  { 0x3214, 11990 },
+  { 0x3215, 12010 },
+  { 0x3216, 12030 },
+  { 0x3217, 12050 },
+  { 0x3218, 12070 },
+  { 0x3219, 12090 },
+  { 0x321A, 12110 },
+  { 0x321B, 12130 },
+  { 0x321C, 12150 },
+  { 0x321D, 12170 },
+  { 0x321E, 12205 },
+  { 0x3220, 12235 },
+  { 0x3221, 12250 },
+  { 0x3222, 12265 },
+  { 0x3223, 12280 },
+  { 0x3224, 12295 },
+  { 0x3225, 12310 },
+  { 0x3226, 12325 },
+  { 0x3227, 12340 },
+  { 0x3228, 12355 },
+  { 0x3229, 12370 },
+  { 0x322A, 12385 },
+  { 0x322B, 12400 },
+  { 0x322C, 12415 },
+  { 0x322D, 12430 },
+  { 0x322E, 12445 },
+  { 0x322F, 12460 },
+  { 0x3230, 12475 },
+  { 0x3231, 12490 },
+  { 0x3232, 12505 },
+  { 0x3233, 12520 },
+  { 0x3234, 12535 },
+  { 0x3235, 12550 },
+  { 0x3236, 12565 },
+  { 0x3237, 12580 },
+  { 0x3238, 12595 },
+  { 0x3239, 12610 },
+  { 0x323A, 12625 },
+  { 0x323B, 12640 },
+  { 0x323C, 12655 },
+  { 0x323D, 12670 },
+  { 0x323E, 12685 },
+  { 0x323F, 12700 },
+  { 0x3240, 12715 },
+  { 0x3241, 12730 },
+  { 0x3242, 12745 },
+  { 0x3243, 12760 },
+  { 0x3250, 12775 },
+  { 0x3251, 12799 },
+  { 0x3252, 12818 },
+  { 0x3253, 12837 },
+  { 0x3254, 12856 },
+  { 0x3255, 12875 },
+  { 0x3256, 12894 },
+  { 0x3257, 12913 },
+  { 0x3258, 12932 },
+  { 0x3259, 12951 },
+  { 0x325A, 12970 },
+  { 0x325B, 12989 },
+  { 0x325C, 13008 },
+  { 0x325D, 13027 },
+  { 0x325E, 13046 },
+  { 0x325F, 13065 },
+  { 0x3260, 13084 },
+  { 0x3261, 13098 },
+  { 0x3262, 13112 },
+  { 0x3263, 13126 },
+  { 0x3264, 13140 },
+  { 0x3265, 13154 },
+  { 0x3266, 13168 },
+  { 0x3267, 13182 },
+  { 0x3268, 13196 },
+  { 0x3269, 13210 },
+  { 0x326A, 13224 },
+  { 0x326B, 13238 },
+  { 0x326C, 13252 },
+  { 0x326D, 13266 },
+  { 0x326E, 13280 },
+  { 0x326F, 13299 },
+  { 0x3270, 13318 },
+  { 0x3271, 13337 },
+  { 0x3272, 13356 },
+  { 0x3273, 13375 },
+  { 0x3274, 13394 },
+  { 0x3275, 13413 },
+  { 0x3276, 13432 },
+  { 0x3277, 13451 },
+  { 0x3278, 13470 },
+  { 0x3279, 13489 },
+  { 0x327A, 13508 },
+  { 0x327B, 13527 },
+  { 0x327C, 13546 },
+  { 0x327D, 13580 },
+  { 0x327E, 13609 },
+  { 0x3280, 13628 },
+  { 0x3281, 13642 },
+  { 0x3282, 13656 },
+  { 0x3283, 13670 },
+  { 0x3284, 13684 },
+  { 0x3285, 13698 },
+  { 0x3286, 13712 },
+  { 0x3287, 13726 },
+  { 0x3288, 13740 },
+  { 0x3289, 13754 },
+  { 0x328A, 13768 },
+  { 0x328B, 13782 },
+  { 0x328C, 13796 },
+  { 0x328D, 13810 },
+  { 0x328E, 13824 },
+  { 0x328F, 13838 },
+  { 0x3290, 13852 },
+  { 0x3291, 13866 },
+  { 0x3292, 13880 },
+  { 0x3293, 13894 },
+  { 0x3294, 13908 },
+  { 0x3295, 13922 },
+  { 0x3296, 13936 },
+  { 0x3297, 13950 },
+  { 0x3298, 13964 },
+  { 0x3299, 13978 },
+  { 0x329A, 13992 },
+  { 0x329B, 14006 },
+  { 0x329C, 14020 },
+  { 0x329D, 14034 },
+  { 0x329E, 14048 },
+  { 0x329F, 14062 },
+  { 0x32A0, 14076 },
+  { 0x32A1, 14090 },
+  { 0x32A2, 14104 },
+  { 0x32A3, 14118 },
+  { 0x32A4, 14132 },
+  { 0x32A5, 14146 },
+  { 0x32A6, 14160 },
+  { 0x32A7, 14174 },
+  { 0x32A8, 14188 },
+  { 0x32A9, 14202 },
+  { 0x32AA, 14216 },
+  { 0x32AB, 14230 },
+  { 0x32AC, 14244 },
+  { 0x32AD, 14258 },
+  { 0x32AE, 14272 },
+  { 0x32AF, 14286 },
+  { 0x32B0, 14300 },
+  { 0x32B1, 14314 },
+  { 0x32B2, 14333 },
+  { 0x32B3, 14352 },
+  { 0x32B4, 14371 },
+  { 0x32B5, 14390 },
+  { 0x32B6, 14409 },
+  { 0x32B7, 14428 },
+  { 0x32B8, 14447 },
+  { 0x32B9, 14466 },
+  { 0x32BA, 14485 },
+  { 0x32BB, 14504 },
+  { 0x32BC, 14523 },
+  { 0x32BD, 14542 },
+  { 0x32BE, 14561 },
+  { 0x32BF, 14580 },
+  { 0x32C0, 14599 },
+  { 0x32C1, 14609 },
+  { 0x32C2, 14619 },
+  { 0x32C3, 14629 },
+  { 0x32C4, 14639 },
+  { 0x32C5, 14649 },
+  { 0x32C6, 14659 },
+  { 0x32C7, 14669 },
+  { 0x32C8, 14679 },
+  { 0x32C9, 14689 },
+  { 0x32CA, 14704 },
+  { 0x32CB, 14719 },
+  { 0x32CC, 14734 },
+  { 0x32CD, 14753 },
+  { 0x32CE, 14777 },
+  { 0x32CF, 14796 },
+  { 0x32D0, 14820 },
+  { 0x32D1, 14834 },
+  { 0x32D2, 14848 },
+  { 0x32D3, 14862 },
+  { 0x32D4, 14876 },
+  { 0x32D5, 14890 },
+  { 0x32D6, 14904 },
+  { 0x32D7, 14918 },
+  { 0x32D8, 14932 },
+  { 0x32D9, 14946 },
+  { 0x32DA, 14960 },
+  { 0x32DB, 14974 },
+  { 0x32DC, 14988 },
+  { 0x32DD, 15002 },
+  { 0x32DE, 15016 },
+  { 0x32DF, 15030 },
+  { 0x32E0, 15044 },
+  { 0x32E1, 15058 },
+  { 0x32E2, 15072 },
+  { 0x32E3, 15086 },
+  { 0x32E4, 15100 },
+  { 0x32E5, 15114 },
+  { 0x32E6, 15128 },
+  { 0x32E7, 15142 },
+  { 0x32E8, 15156 },
+  { 0x32E9, 15170 },
+  { 0x32EA, 15184 },
+  { 0x32EB, 15198 },
+  { 0x32EC, 15212 },
+  { 0x32ED, 15226 },
+  { 0x32EE, 15240 },
+  { 0x32EF, 15254 },
+  { 0x32F0, 15268 },
+  { 0x32F1, 15282 },
+  { 0x32F2, 15296 },
+  { 0x32F3, 15310 },
+  { 0x32F4, 15324 },
+  { 0x32F5, 15338 },
+  { 0x32F6, 15352 },
+  { 0x32F7, 15366 },
+  { 0x32F8, 15380 },
+  { 0x32F9, 15394 },
+  { 0x32FA, 15408 },
+  { 0x32FB, 15422 },
+  { 0x32FC, 15436 },
+  { 0x32FD, 15450 },
+  { 0x32FE, 15464 },
+  { 0x3300, 15478 },
+  { 0x3301, 15507 },
+  { 0x3302, 15536 },
+  { 0x3303, 15565 },
+  { 0x3304, 15589 },
+  { 0x3305, 15618 },
+  { 0x3306, 15642 },
+  { 0x3307, 15666 },
+  { 0x3308, 15700 },
+  { 0x3309, 15729 },
+  { 0x330A, 15753 },
+  { 0x330B, 15777 },
+  { 0x330C, 15801 },
+  { 0x330D, 15830 },
+  { 0x330E, 15859 },
+  { 0x330F, 15883 },
+  { 0x3310, 15907 },
+  { 0x3311, 15926 },
+  { 0x3312, 15950 },
+  { 0x3313, 15979 },
+  { 0x3314, 16008 },
+  { 0x3315, 16027 },
+  { 0x3316, 16061 },
+  { 0x3317, 16100 },
+  { 0x3318, 16134 },
+  { 0x3319, 16158 },
+  { 0x331A, 16192 },
+  { 0x331B, 16226 },
+  { 0x331C, 16255 },
+  { 0x331D, 16279 },
+  { 0x331E, 16303 },
+  { 0x331F, 16327 },
+  { 0x3320, 16356 },
+  { 0x3321, 16390 },
+  { 0x3322, 16419 },
+  { 0x3323, 16443 },
+  { 0x3324, 16467 },
+  { 0x3325, 16491 },
+  { 0x3326, 16510 },
+  { 0x3327, 16529 },
+  { 0x3328, 16548 },
+  { 0x3329, 16567 },
+  { 0x332A, 16591 },
+  { 0x332B, 16615 },
+  { 0x332C, 16649 },
+  { 0x332D, 16673 },
+  { 0x332E, 16702 },
+  { 0x332F, 16736 },
+  { 0x3330, 16760 },
+  { 0x3331, 16779 },
+  { 0x3332, 16798 },
+  { 0x3333, 16832 },
+  { 0x3334, 16861 },
+  { 0x3335, 16895 },
+  { 0x3336, 16919 },
+  { 0x3337, 16953 },
+  { 0x3338, 16972 },
+  { 0x3339, 16996 },
+  { 0x333A, 17020 },
+  { 0x333B, 17044 },
+  { 0x333C, 17068 },
+  { 0x333D, 17092 },
+  { 0x333E, 17121 },
+  { 0x333F, 17145 },
+  { 0x3340, 17164 },
+  { 0x3341, 17188 },
+  { 0x3342, 17212 },
+  { 0x3343, 17236 },
+  { 0x3344, 17265 },
+  { 0x3345, 17289 },
+  { 0x3346, 17313 },
+  { 0x3347, 17337 },
+  { 0x3348, 17371 },
+  { 0x3349, 17400 },
+  { 0x334A, 17419 },
+  { 0x334B, 17453 },
+  { 0x334C, 17472 },
+  { 0x334D, 17501 },
+  { 0x334E, 17530 },
+  { 0x334F, 17554 },
+  { 0x3350, 17578 },
+  { 0x3351, 17602 },
+  { 0x3352, 17631 },
+  { 0x3353, 17650 },
+  { 0x3354, 17674 },
+  { 0x3355, 17703 },
+  { 0x3356, 17722 },
+  { 0x3357, 17756 },
+  { 0x3358, 17780 },
+  { 0x3359, 17790 },
+  { 0x335A, 17800 },
+  { 0x335B, 17810 },
+  { 0x335C, 17820 },
+  { 0x335D, 17830 },
+  { 0x335E, 17840 },
+  { 0x335F, 17850 },
+  { 0x3360, 17860 },
+  { 0x3361, 17870 },
+  { 0x3362, 17880 },
+  { 0x3363, 17895 },
+  { 0x3364, 17910 },
+  { 0x3365, 17925 },
+  { 0x3366, 17940 },
+  { 0x3367, 17955 },
+  { 0x3368, 17970 },
+  { 0x3369, 17985 },
+  { 0x336A, 18000 },
+  { 0x336B, 18015 },
+  { 0x336C, 18030 },
+  { 0x336D, 18045 },
+  { 0x336E, 18060 },
+  { 0x336F, 18075 },
+  { 0x3370, 18090 },
+  { 0x3371, 18105 },
+  { 0x3372, 18129 },
+  { 0x3373, 18148 },
+  { 0x3374, 18167 },
+  { 0x3375, 18191 },
+  { 0x3376, 18210 },
+  { 0x3377, 18229 },
+  { 0x3378, 18248 },
+  { 0x3379, 18272 },
+  { 0x337A, 18296 },
+  { 0x337B, 18315 },
+  { 0x337C, 18334 },
+  { 0x337D, 18353 },
+  { 0x337E, 18372 },
+  { 0x337F, 18391 },
+  { 0x3380, 18420 },
+  { 0x3381, 18439 },
+  { 0x3382, 18458 },
+  { 0x3383, 18477 },
+  { 0x3384, 18496 },
+  { 0x3385, 18515 },
+  { 0x3386, 18534 },
+  { 0x3387, 18553 },
+  { 0x3388, 18572 },
+  { 0x3389, 18596 },
+  { 0x338A, 18625 },
+  { 0x338B, 18644 },
+  { 0x338C, 18663 },
+  { 0x338D, 18682 },
+  { 0x338E, 18701 },
+  { 0x338F, 18720 },
+  { 0x3390, 18739 },
+  { 0x3391, 18758 },
+  { 0x3392, 18782 },
+  { 0x3393, 18806 },
+  { 0x3394, 18830 },
+  { 0x3395, 18854 },
+  { 0x3396, 18873 },
+  { 0x3397, 18892 },
+  { 0x3398, 18911 },
+  { 0x3399, 18930 },
+  { 0x339A, 18949 },
+  { 0x339B, 18968 },
+  { 0x339C, 18987 },
+  { 0x339D, 19006 },
+  { 0x339E, 19025 },
+  { 0x339F, 19044 },
+  { 0x33A0, 19068 },
+  { 0x33A1, 19092 },
+  { 0x33A2, 19111 },
+  { 0x33A3, 19135 },
+  { 0x33A4, 19159 },
+  { 0x33A5, 19183 },
+  { 0x33A6, 19202 },
+  { 0x33A7, 19226 },
+  { 0x33A8, 19250 },
+  { 0x33A9, 19279 },
+  { 0x33AA, 19298 },
+  { 0x33AB, 19322 },
+  { 0x33AC, 19346 },
+  { 0x33AD, 19370 },
+  { 0x33AE, 19394 },
+  { 0x33AF, 19428 },
+  { 0x33B0, 19467 },
+  { 0x33B1, 19486 },
+  { 0x33B2, 19505 },
+  { 0x33B3, 19524 },
+  { 0x33B4, 19543 },
+  { 0x33B5, 19562 },
+  { 0x33B6, 19581 },
+  { 0x33B7, 19600 },
+  { 0x33B8, 19619 },
+  { 0x33B9, 19638 },
+  { 0x33BA, 19657 },
+  { 0x33BB, 19676 },
+  { 0x33BC, 19695 },
+  { 0x33BD, 19714 },
+  { 0x33BE, 19733 },
+  { 0x33BF, 19752 },
+  { 0x33C0, 19771 },
+  { 0x33C1, 19790 },
+  { 0x33C2, 19809 },
+  { 0x33C3, 19838 },
+  { 0x33C4, 19857 },
+  { 0x33C5, 19876 },
+  { 0x33C6, 19895 },
+  { 0x33C7, 19924 },
+  { 0x33C8, 19948 },
+  { 0x33C9, 19967 },
+  { 0x33CA, 19986 },
+  { 0x33CB, 20005 },
+  { 0x33CC, 20024 },
+  { 0x33CD, 20043 },
+  { 0x33CE, 20062 },
+  { 0x33CF, 20081 },
+  { 0x33D0, 20100 },
+  { 0x33D1, 20119 },
+  { 0x33D2, 20138 },
+  { 0x33D3, 20162 },
+  { 0x33D4, 20181 },
+  { 0x33D5, 20200 },
+  { 0x33D6, 20224 },
+  { 0x33D7, 20248 },
+  { 0x33D8, 20267 },
+  { 0x33D9, 20296 },
+  { 0x33DA, 20320 },
+  { 0x33DB, 20339 },
+  { 0x33DC, 20358 },
+  { 0x33DD, 20377 },
+  { 0x33DE, 20396 },
+  { 0x33DF, 20420 },
+  { 0x33E0, 20444 },
+  { 0x33E1, 20454 },
+  { 0x33E2, 20464 },
+  { 0x33E3, 20474 },
+  { 0x33E4, 20484 },
+  { 0x33E5, 20494 },
+  { 0x33E6, 20504 },
+  { 0x33E7, 20514 },
+  { 0x33E8, 20524 },
+  { 0x33E9, 20534 },
+  { 0x33EA, 20549 },
+  { 0x33EB, 20564 },
+  { 0x33EC, 20579 },
+  { 0x33ED, 20594 },
+  { 0x33EE, 20609 },
+  { 0x33EF, 20624 },
+  { 0x33F0, 20639 },
+  { 0x33F1, 20654 },
+  { 0x33F2, 20669 },
+  { 0x33F3, 20684 },
+  { 0x33F4, 20699 },
+  { 0x33F5, 20714 },
+  { 0x33F6, 20729 },
+  { 0x33F7, 20744 },
+  { 0x33F8, 20759 },
+  { 0x33F9, 20774 },
+  { 0x33FA, 20789 },
+  { 0x33FB, 20804 },
+  { 0x33FC, 20819 },
+  { 0x33FD, 20834 },
+  { 0x33FE, 20849 },
+  { 0x33FF, 20864 },
+  { 0xFB00, 20888 },
+  { 0xFB01, 20898 },
+  { 0xFB02, 20908 },
+  { 0xFB03, 20918 },
+  { 0xFB04, 20933 },
+  { 0xFB05, 20948 },
+  { 0xFB06, 20958 },
+  { 0xFB13, 20968 },
+  { 0xFB14, 20978 },
+  { 0xFB15, 20988 },
+  { 0xFB16, 20998 },
+  { 0xFB17, 21008 },
+  { 0xFB20, 21018 },
+  { 0xFB21, 21049 },
+  { 0xFB22, 21080 },
+  { 0xFB23, 21112 },
+  { 0xFB24, 21141 },
+  { 0xFB25, 21171 },
+  { 0xFB26, 21203 },
+  { 0xFB27, 21239 },
+  { 0xFB28, 21270 },
+  { 0xFB29, 21300 },
+  { 0xFB4F, 21322 },
+  { 0xFB50, 21332 },
+  { 0xFB51, 21348 },
+  { 0xFB52, 21361 },
+  { 0xFB53, 21377 },
+  { 0xFB54, 21390 },
+  { 0xFB55, 21405 },
+  { 0xFB56, 21419 },
+  { 0xFB57, 21435 },
+  { 0xFB58, 21448 },
+  { 0xFB59, 21463 },
+  { 0xFB5A, 21477 },
+  { 0xFB5B, 21493 },
+  { 0xFB5C, 21506 },
+  { 0xFB5D, 21521 },
+  { 0xFB5E, 21535 },
+  { 0xFB5F, 21551 },
+  { 0xFB60, 21564 },
+  { 0xFB61, 21579 },
+  { 0xFB62, 21593 },
+  { 0xFB63, 21609 },
+  { 0xFB64, 21622 },
+  { 0xFB65, 21637 },
+  { 0xFB66, 21651 },
+  { 0xFB67, 21667 },
+  { 0xFB68, 21680 },
+  { 0xFB69, 21695 },
+  { 0xFB6A, 21709 },
+  { 0xFB6B, 21725 },
+  { 0xFB6C, 21738 },
+  { 0xFB6D, 21753 },
+  { 0xFB6E, 21767 },
+  { 0xFB6F, 21783 },
+  { 0xFB70, 21796 },
+  { 0xFB71, 21811 },
+  { 0xFB72, 21825 },
+  { 0xFB73, 21841 },
+  { 0xFB74, 21854 },
+  { 0xFB75, 21869 },
+  { 0xFB76, 21883 },
+  { 0xFB77, 21899 },
+  { 0xFB78, 21912 },
+  { 0xFB79, 21927 },
+  { 0xFB7A, 21941 },
+  { 0xFB7B, 21957 },
+  { 0xFB7C, 21970 },
+  { 0xFB7D, 21985 },
+  { 0xFB7E, 21999 },
+  { 0xFB7F, 22015 },
+  { 0xFB80, 22028 },
+  { 0xFB81, 22043 },
+  { 0xFB82, 22057 },
+  { 0xFB83, 22073 },
+  { 0xFB84, 22086 },
+  { 0xFB85, 22102 },
+  { 0xFB86, 22115 },
+  { 0xFB87, 22131 },
+  { 0xFB88, 22144 },
+  { 0xFB89, 22160 },
+  { 0xFB8A, 22173 },
+  { 0xFB8B, 22189 },
+  { 0xFB8C, 22202 },
+  { 0xFB8D, 22218 },
+  { 0xFB8E, 22231 },
+  { 0xFB8F, 22247 },
+  { 0xFB90, 22260 },
+  { 0xFB91, 22275 },
+  { 0xFB92, 22289 },
+  { 0xFB93, 22305 },
+  { 0xFB94, 22318 },
+  { 0xFB95, 22333 },
+  { 0xFB96, 22347 },
+  { 0xFB97, 22363 },
+  { 0xFB98, 22376 },
+  { 0xFB99, 22391 },
+  { 0xFB9A, 22405 },
+  { 0xFB9B, 22421 },
+  { 0xFB9C, 22434 },
+  { 0xFB9D, 22449 },
+  { 0xFB9E, 22463 },
+  { 0xFB9F, 22479 },
+  { 0xFBA0, 22492 },
+  { 0xFBA1, 22508 },
+  { 0xFBA2, 22521 },
+  { 0xFBA3, 22536 },
+  { 0xFBA4, 22550 },
+  { 0xFBA5, 22566 },
+  { 0xFBA6, 22579 },
+  { 0xFBA7, 22595 },
+  { 0xFBA8, 22608 },
+  { 0xFBA9, 22623 },
+  { 0xFBAA, 22637 },
+  { 0xFBAB, 22653 },
+  { 0xFBAC, 22666 },
+  { 0xFBAD, 22681 },
+  { 0xFBAE, 22695 },
+  { 0xFBAF, 22711 },
+  { 0xFBB0, 22724 },
+  { 0xFBB1, 22740 },
+  { 0xFBD3, 22753 },
+  { 0xFBD4, 22769 },
+  { 0xFBD5, 22782 },
+  { 0xFBD6, 22797 },
+  { 0xFBD7, 22811 },
+  { 0xFBD8, 22827 },
+  { 0xFBD9, 22840 },
+  { 0xFBDA, 22856 },
+  { 0xFBDB, 22869 },
+  { 0xFBDC, 22885 },
+  { 0xFBDD, 22898 },
+  { 0xFBDE, 22914 },
+  { 0xFBDF, 22930 },
+  { 0xFBE0, 22943 },
+  { 0xFBE1, 22959 },
+  { 0xFBE2, 22972 },
+  { 0xFBE3, 22988 },
+  { 0xFBE4, 23001 },
+  { 0xFBE5, 23017 },
+  { 0xFBE6, 23030 },
+  { 0xFBE7, 23045 },
+  { 0xFBE8, 23059 },
+  { 0xFBE9, 23074 },
+  { 0xFBEA, 23088 },
+  { 0xFBEB, 23109 },
+  { 0xFBEC, 23127 },
+  { 0xFBED, 23148 },
+  { 0xFBEE, 23166 },
+  { 0xFBEF, 23187 },
+  { 0xFBF0, 23205 },
+  { 0xFBF1, 23226 },
+  { 0xFBF2, 23244 },
+  { 0xFBF3, 23265 },
+  { 0xFBF4, 23283 },
+  { 0xFBF5, 23304 },
+  { 0xFBF6, 23322 },
+  { 0xFBF7, 23343 },
+  { 0xFBF8, 23361 },
+  { 0xFBF9, 23381 },
+  { 0xFBFA, 23402 },
+  { 0xFBFB, 23420 },
+  { 0xFBFC, 23440 },
+  { 0xFBFD, 23456 },
+  { 0xFBFE, 23469 },
+  { 0xFBFF, 23484 },
+  { 0xFC00, 23498 },
+  { 0xFC01, 23519 },
+  { 0xFC02, 23540 },
+  { 0xFC03, 23381 },
+  { 0xFC04, 23561 },
+  { 0xFC05, 23582 },
+  { 0xFC06, 23603 },
+  { 0xFC07, 23624 },
+  { 0xFC08, 23645 },
+  { 0xFC09, 23666 },
+  { 0xFC0A, 23687 },
+  { 0xFC0B, 23708 },
+  { 0xFC0C, 23729 },
+  { 0xFC0D, 23750 },
+  { 0xFC0E, 23771 },
+  { 0xFC0F, 23792 },
+  { 0xFC10, 23813 },
+  { 0xFC11, 23834 },
+  { 0xFC12, 23855 },
+  { 0xFC13, 23876 },
+  { 0xFC14, 23897 },
+  { 0xFC15, 23918 },
+  { 0xFC16, 23939 },
+  { 0xFC17, 23960 },
+  { 0xFC18, 23981 },
+  { 0xFC19, 24002 },
+  { 0xFC1A, 24023 },
+  { 0xFC1B, 24044 },
+  { 0xFC1C, 24065 },
+  { 0xFC1D, 24086 },
+  { 0xFC1E, 24107 },
+  { 0xFC1F, 24128 },
+  { 0xFC20, 24149 },
+  { 0xFC21, 24170 },
+  { 0xFC22, 24191 },
+  { 0xFC23, 24212 },
+  { 0xFC24, 24233 },
+  { 0xFC25, 24254 },
+  { 0xFC26, 24275 },
+  { 0xFC27, 24296 },
+  { 0xFC28, 24317 },
+  { 0xFC29, 24338 },
+  { 0xFC2A, 24359 },
+  { 0xFC2B, 24380 },
+  { 0xFC2C, 24401 },
+  { 0xFC2D, 24422 },
+  { 0xFC2E, 24443 },
+  { 0xFC2F, 24464 },
+  { 0xFC30, 24485 },
+  { 0xFC31, 24506 },
+  { 0xFC32, 24527 },
+  { 0xFC33, 24548 },
+  { 0xFC34, 24569 },
+  { 0xFC35, 24590 },
+  { 0xFC36, 24611 },
+  { 0xFC37, 24632 },
+  { 0xFC38, 24653 },
+  { 0xFC39, 24674 },
+  { 0xFC3A, 24695 },
+  { 0xFC3B, 24716 },
+  { 0xFC3C, 24737 },
+  { 0xFC3D, 24758 },
+  { 0xFC3E, 24779 },
+  { 0xFC3F, 24800 },
+  { 0xFC40, 24821 },
+  { 0xFC41, 24842 },
+  { 0xFC42, 24863 },
+  { 0xFC43, 24884 },
+  { 0xFC44, 24905 },
+  { 0xFC45, 24926 },
+  { 0xFC46, 24947 },
+  { 0xFC47, 24968 },
+  { 0xFC48, 24989 },
+  { 0xFC49, 25010 },
+  { 0xFC4A, 25031 },
+  { 0xFC4B, 25052 },
+  { 0xFC4C, 25073 },
+  { 0xFC4D, 25094 },
+  { 0xFC4E, 25115 },
+  { 0xFC4F, 25136 },
+  { 0xFC50, 25157 },
+  { 0xFC51, 25178 },
+  { 0xFC52, 25199 },
+  { 0xFC53, 25220 },
+  { 0xFC54, 25241 },
+  { 0xFC55, 25262 },
+  { 0xFC56, 25283 },
+  { 0xFC57, 25304 },
+  { 0xFC58, 25325 },
+  { 0xFC59, 25346 },
+  { 0xFC5A, 25367 },
+  { 0xFC5B, 25388 },
+  { 0xFC5C, 25409 },
+  { 0xFC5D, 25430 },
+  { 0xFC5E, 25451 },
+  { 0xFC5F, 25477 },
+  { 0xFC60, 25503 },
+  { 0xFC61, 25529 },
+  { 0xFC62, 25555 },
+  { 0xFC63, 25581 },
+  { 0xFC64, 25607 },
+  { 0xFC65, 25625 },
+  { 0xFC66, 25643 },
+  { 0xFC67, 25661 },
+  { 0xFC68, 23402 },
+  { 0xFC69, 25679 },
+  { 0xFC6A, 25697 },
+  { 0xFC6B, 25715 },
+  { 0xFC6C, 25733 },
+  { 0xFC6D, 25751 },
+  { 0xFC6E, 25769 },
+  { 0xFC6F, 25787 },
+  { 0xFC70, 25805 },
+  { 0xFC71, 25823 },
+  { 0xFC72, 25841 },
+  { 0xFC73, 25859 },
+  { 0xFC74, 25877 },
+  { 0xFC75, 25895 },
+  { 0xFC76, 25913 },
+  { 0xFC77, 25931 },
+  { 0xFC78, 25949 },
+  { 0xFC79, 25967 },
+  { 0xFC7A, 25985 },
+  { 0xFC7B, 26003 },
+  { 0xFC7C, 26021 },
+  { 0xFC7D, 26039 },
+  { 0xFC7E, 26057 },
+  { 0xFC7F, 26075 },
+  { 0xFC80, 26093 },
+  { 0xFC81, 26111 },
+  { 0xFC82, 26129 },
+  { 0xFC83, 26147 },
+  { 0xFC84, 26165 },
+  { 0xFC85, 26183 },
+  { 0xFC86, 26201 },
+  { 0xFC87, 26219 },
+  { 0xFC88, 26237 },
+  { 0xFC89, 26255 },
+  { 0xFC8A, 26273 },
+  { 0xFC8B, 26291 },
+  { 0xFC8C, 26309 },
+  { 0xFC8D, 26327 },
+  { 0xFC8E, 26345 },
+  { 0xFC8F, 26363 },
+  { 0xFC90, 26381 },
+  { 0xFC91, 26399 },
+  { 0xFC92, 26417 },
+  { 0xFC93, 26435 },
+  { 0xFC94, 26453 },
+  { 0xFC95, 26471 },
+  { 0xFC96, 26489 },
+  { 0xFC97, 26507 },
+  { 0xFC98, 26527 },
+  { 0xFC99, 26547 },
+  { 0xFC9A, 26567 },
+  { 0xFC9B, 26587 },
+  { 0xFC9C, 26607 },
+  { 0xFC9D, 26627 },
+  { 0xFC9E, 26647 },
+  { 0xFC9F, 26667 },
+  { 0xFCA0, 26687 },
+  { 0xFCA1, 26707 },
+  { 0xFCA2, 26727 },
+  { 0xFCA3, 26747 },
+  { 0xFCA4, 26767 },
+  { 0xFCA5, 26787 },
+  { 0xFCA6, 26807 },
+  { 0xFCA7, 26827 },
+  { 0xFCA8, 26847 },
+  { 0xFCA9, 26867 },
+  { 0xFCAA, 26887 },
+  { 0xFCAB, 26907 },
+  { 0xFCAC, 26927 },
+  { 0xFCAD, 26947 },
+  { 0xFCAE, 26967 },
+  { 0xFCAF, 26987 },
+  { 0xFCB0, 27007 },
+  { 0xFCB1, 27027 },
+  { 0xFCB2, 27047 },
+  { 0xFCB3, 27067 },
+  { 0xFCB4, 27087 },
+  { 0xFCB5, 27107 },
+  { 0xFCB6, 27127 },
+  { 0xFCB7, 27147 },
+  { 0xFCB8, 27167 },
+  { 0xFCB9, 27187 },
+  { 0xFCBA, 27207 },
+  { 0xFCBB, 27227 },
+  { 0xFCBC, 27247 },
+  { 0xFCBD, 27267 },
+  { 0xFCBE, 27287 },
+  { 0xFCBF, 27307 },
+  { 0xFCC0, 27327 },
+  { 0xFCC1, 27347 },
+  { 0xFCC2, 27367 },
+  { 0xFCC3, 27387 },
+  { 0xFCC4, 27407 },
+  { 0xFCC5, 27427 },
+  { 0xFCC6, 27447 },
+  { 0xFCC7, 27467 },
+  { 0xFCC8, 27487 },
+  { 0xFCC9, 27507 },
+  { 0xFCCA, 27527 },
+  { 0xFCCB, 27547 },
+  { 0xFCCC, 27567 },
+  { 0xFCCD, 27587 },
+  { 0xFCCE, 27607 },
+  { 0xFCCF, 27627 },
+  { 0xFCD0, 27647 },
+  { 0xFCD1, 27667 },
+  { 0xFCD2, 27687 },
+  { 0xFCD3, 27707 },
+  { 0xFCD4, 27727 },
+  { 0xFCD5, 27747 },
+  { 0xFCD6, 27767 },
+  { 0xFCD7, 27787 },
+  { 0xFCD8, 27807 },
+  { 0xFCD9, 27827 },
+  { 0xFCDA, 27847 },
+  { 0xFCDB, 27867 },
+  { 0xFCDC, 27887 },
+  { 0xFCDD, 27907 },
+  { 0xFCDE, 27927 },
+  { 0xFCDF, 27947 },
+  { 0xFCE0, 27966 },
+  { 0xFCE1, 27985 },
+  { 0xFCE2, 28004 },
+  { 0xFCE3, 28023 },
+  { 0xFCE4, 28042 },
+  { 0xFCE5, 28061 },
+  { 0xFCE6, 28080 },
+  { 0xFCE7, 28099 },
+  { 0xFCE8, 28118 },
+  { 0xFCE9, 28137 },
+  { 0xFCEA, 28156 },
+  { 0xFCEB, 28175 },
+  { 0xFCEC, 28194 },
+  { 0xFCED, 28213 },
+  { 0xFCEE, 28232 },
+  { 0xFCEF, 28251 },
+  { 0xFCF0, 28270 },
+  { 0xFCF1, 28289 },
+  { 0xFCF2, 28308 },
+  { 0xFCF3, 28332 },
+  { 0xFCF4, 28356 },
+  { 0xFCF5, 28380 },
+  { 0xFCF6, 28401 },
+  { 0xFCF7, 28422 },
+  { 0xFCF8, 28443 },
+  { 0xFCF9, 28464 },
+  { 0xFCFA, 28485 },
+  { 0xFCFB, 28506 },
+  { 0xFCFC, 28527 },
+  { 0xFCFD, 28548 },
+  { 0xFCFE, 28569 },
+  { 0xFCFF, 28590 },
+  { 0xFD00, 28611 },
+  { 0xFD01, 28632 },
+  { 0xFD02, 28653 },
+  { 0xFD03, 28674 },
+  { 0xFD04, 28695 },
+  { 0xFD05, 28716 },
+  { 0xFD06, 28737 },
+  { 0xFD07, 28758 },
+  { 0xFD08, 28779 },
+  { 0xFD09, 28800 },
+  { 0xFD0A, 28821 },
+  { 0xFD0B, 28842 },
+  { 0xFD0C, 28863 },
+  { 0xFD0D, 28884 },
+  { 0xFD0E, 28905 },
+  { 0xFD0F, 28926 },
+  { 0xFD10, 28947 },
+  { 0xFD11, 28968 },
+  { 0xFD12, 28986 },
+  { 0xFD13, 29004 },
+  { 0xFD14, 29022 },
+  { 0xFD15, 29040 },
+  { 0xFD16, 29058 },
+  { 0xFD17, 29076 },
+  { 0xFD18, 29094 },
+  { 0xFD19, 29112 },
+  { 0xFD1A, 29130 },
+  { 0xFD1B, 29148 },
+  { 0xFD1C, 29166 },
+  { 0xFD1D, 29184 },
+  { 0xFD1E, 29202 },
+  { 0xFD1F, 29220 },
+  { 0xFD20, 29238 },
+  { 0xFD21, 29256 },
+  { 0xFD22, 29274 },
+  { 0xFD23, 29292 },
+  { 0xFD24, 29310 },
+  { 0xFD25, 29328 },
+  { 0xFD26, 29346 },
+  { 0xFD27, 29364 },
+  { 0xFD28, 29382 },
+  { 0xFD29, 29400 },
+  { 0xFD2A, 29418 },
+  { 0xFD2B, 29436 },
+  { 0xFD2C, 29454 },
+  { 0xFD2D, 29472 },
+  { 0xFD2E, 29492 },
+  { 0xFD2F, 29512 },
+  { 0xFD30, 29532 },
+  { 0xFD31, 29552 },
+  { 0xFD32, 29572 },
+  { 0xFD33, 29592 },
+  { 0xFD34, 29612 },
+  { 0xFD35, 29631 },
+  { 0xFD36, 29650 },
+  { 0xFD37, 29669 },
+  { 0xFD38, 29688 },
+  { 0xFD39, 29707 },
+  { 0xFD3A, 29726 },
+  { 0xFD3B, 29745 },
+  { 0xFD3C, 29764 },
+  { 0xFD3D, 29782 },
+  { 0xFD50, 29803 },
+  { 0xFD51, 29828 },
+  { 0xFD52, 29851 },
+  { 0xFD53, 29876 },
+  { 0xFD54, 29901 },
+  { 0xFD55, 29926 },
+  { 0xFD56, 29951 },
+  { 0xFD57, 29976 },
+  { 0xFD58, 30001 },
+  { 0xFD59, 30024 },
+  { 0xFD5A, 30049 },
+  { 0xFD5B, 30072 },
+  { 0xFD5C, 30095 },
+  { 0xFD5D, 30120 },
+  { 0xFD5E, 30145 },
+  { 0xFD5F, 30168 },
+  { 0xFD60, 30191 },
+  { 0xFD61, 30216 },
+  { 0xFD62, 30241 },
+  { 0xFD63, 30264 },
+  { 0xFD64, 30289 },
+  { 0xFD65, 30312 },
+  { 0xFD66, 30337 },
+  { 0xFD67, 30360 },
+  { 0xFD68, 30383 },
+  { 0xFD69, 30408 },
+  { 0xFD6A, 30431 },
+  { 0xFD6B, 30454 },
+  { 0xFD6C, 30479 },
+  { 0xFD6D, 30502 },
+  { 0xFD6E, 30527 },
+  { 0xFD6F, 30550 },
+  { 0xFD70, 30573 },
+  { 0xFD71, 30598 },
+  { 0xFD72, 30621 },
+  { 0xFD73, 30646 },
+  { 0xFD74, 30671 },
+  { 0xFD75, 30694 },
+  { 0xFD76, 30717 },
+  { 0xFD77, 30740 },
+  { 0xFD78, 30765 },
+  { 0xFD79, 30788 },
+  { 0xFD7A, 30811 },
+  { 0xFD7B, 30834 },
+  { 0xFD7C, 30857 },
+  { 0xFD7D, 30880 },
+  { 0xFD7E, 30905 },
+  { 0xFD7F, 30928 },
+  { 0xFD80, 30951 },
+  { 0xFD81, 30974 },
+  { 0xFD82, 30997 },
+  { 0xFD83, 31020 },
+  { 0xFD84, 31045 },
+  { 0xFD85, 31068 },
+  { 0xFD86, 31091 },
+  { 0xFD87, 31116 },
+  { 0xFD88, 31139 },
+  { 0xFD89, 31164 },
+  { 0xFD8A, 31189 },
+  { 0xFD8B, 31214 },
+  { 0xFD8C, 31237 },
+  { 0xFD8D, 31262 },
+  { 0xFD8E, 31287 },
+  { 0xFD8F, 31312 },
+  { 0xFD92, 31337 },
+  { 0xFD93, 31362 },
+  { 0xFD94, 31387 },
+  { 0xFD95, 31412 },
+  { 0xFD96, 31437 },
+  { 0xFD97, 31460 },
+  { 0xFD98, 31483 },
+  { 0xFD99, 31508 },
+  { 0xFD9A, 31531 },
+  { 0xFD9B, 31554 },
+  { 0xFD9C, 31577 },
+  { 0xFD9D, 31600 },
+  { 0xFD9E, 31625 },
+  { 0xFD9F, 31648 },
+  { 0xFDA0, 31671 },
+  { 0xFDA1, 31694 },
+  { 0xFDA2, 31717 },
+  { 0xFDA3, 31740 },
+  { 0xFDA4, 31763 },
+  { 0xFDA5, 31786 },
+  { 0xFDA6, 31809 },
+  { 0xFDA7, 31832 },
+  { 0xFDA8, 31855 },
+  { 0xFDA9, 31878 },
+  { 0xFDAA, 31901 },
+  { 0xFDAB, 31924 },
+  { 0xFDAC, 31947 },
+  { 0xFDAD, 31970 },
+  { 0xFDAE, 31993 },
+  { 0xFDAF, 32016 },
+  { 0xFDB0, 32039 },
+  { 0xFDB1, 32062 },
+  { 0xFDB2, 32085 },
+  { 0xFDB3, 32108 },
+  { 0xFDB4, 32131 },
+  { 0xFDB5, 32156 },
+  { 0xFDB6, 32181 },
+  { 0xFDB7, 32204 },
+  { 0xFDB8, 32227 },
+  { 0xFDB9, 32252 },
+  { 0xFDBA, 32275 },
+  { 0xFDBB, 32300 },
+  { 0xFDBC, 32323 },
+  { 0xFDBD, 32346 },
+  { 0xFDBE, 32369 },
+  { 0xFDBF, 32392 },
+  { 0xFDC0, 32415 },
+  { 0xFDC1, 32438 },
+  { 0xFDC2, 32461 },
+  { 0xFDC3, 32484 },
+  { 0xFDC4, 32509 },
+  { 0xFDC5, 32534 },
+  { 0xFDC6, 32559 },
+  { 0xFDC7, 32582 },
+  { 0xFDF0, 32605 },
+  { 0xFDF1, 32631 },
+  { 0xFDF2, 32657 },
+  { 0xFDF3, 32688 },
+  { 0xFDF4, 32719 },
+  { 0xFDF5, 32750 },
+  { 0xFDF6, 32781 },
+  { 0xFDF7, 32812 },
+  { 0xFDF8, 32843 },
+  { 0xFDF9, 32874 },
+  { 0xFDFA, 32900 },
+  { 0xFDFB, 33001 },
+  { 0xFDFC, 33052 },
+  { 0xFE10, 33083 },
+  { 0xFE11, 33099 },
+  { 0xFE12, 33115 },
+  { 0xFE13, 33131 },
+  { 0xFE14, 33147 },
+  { 0xFE15, 33163 },
+  { 0xFE16, 33179 },
+  { 0xFE17, 33195 },
+  { 0xFE18, 33211 },
+  { 0xFE19, 33227 },
+  { 0xFE30, 33243 },
+  { 0xFE31, 33259 },
+  { 0xFE32, 33275 },
+  { 0xFE33, 33291 },
+  { 0xFE34, 33291 },
+  { 0xFE35, 33307 },
+  { 0xFE36, 33323 },
+  { 0xFE37, 33339 },
+  { 0xFE38, 33355 },
+  { 0xFE39, 33371 },
+  { 0xFE3A, 33387 },
+  { 0xFE3B, 33403 },
+  { 0xFE3C, 33419 },
+  { 0xFE3D, 33435 },
+  { 0xFE3E, 33451 },
+  { 0xFE3F, 33467 },
+  { 0xFE40, 33483 },
+  { 0xFE41, 33499 },
+  { 0xFE42, 33515 },
+  { 0xFE43, 33531 },
+  { 0xFE44, 33547 },
+  { 0xFE47, 33563 },
+  { 0xFE48, 33579 },
+  { 0xFE49, 33595 },
+  { 0xFE4A, 33595 },
+  { 0xFE4B, 33595 },
+  { 0xFE4C, 33595 },
+  { 0xFE4D, 33609 },
+  { 0xFE4E, 33609 },
+  { 0xFE4F, 33609 },
+  { 0xFE50, 33623 },
+  { 0xFE51, 33636 },
+  { 0xFE52, 33649 },
+  { 0xFE54, 33662 },
+  { 0xFE55, 33675 },
+  { 0xFE56, 33688 },
+  { 0xFE57, 33701 },
+  { 0xFE58, 33714 },
+  { 0xFE59, 33727 },
+  { 0xFE5A, 33740 },
+  { 0xFE5B, 33753 },
+  { 0xFE5C, 33766 },
+  { 0xFE5D, 33779 },
+  { 0xFE5E, 33792 },
+  { 0xFE5F, 33805 },
+  { 0xFE60, 33818 },
+  { 0xFE61, 33831 },
+  { 0xFE62, 33844 },
+  { 0xFE63, 33857 },
+  { 0xFE64, 33870 },
+  { 0xFE65, 33883 },
+  { 0xFE66, 33896 },
+  { 0xFE68, 33909 },
+  { 0xFE69, 33922 },
+  { 0xFE6A, 33935 },
+  { 0xFE6B, 33948 },
+  { 0xFE70, 33961 },
+  { 0xFE71, 33982 },
+  { 0xFE72, 34001 },
+  { 0xFE74, 34022 },
+  { 0xFE76, 34043 },
+  { 0xFE77, 34064 },
+  { 0xFE78, 34083 },
+  { 0xFE79, 34104 },
+  { 0xFE7A, 34123 },
+  { 0xFE7B, 34144 },
+  { 0xFE7C, 34163 },
+  { 0xFE7D, 34184 },
+  { 0xFE7E, 34203 },
+  { 0xFE7F, 34224 },
+  { 0xFE80, 34243 },
+  { 0xFE81, 34259 },
+  { 0xFE82, 34275 },
+  { 0xFE83, 34288 },
+  { 0xFE84, 34304 },
+  { 0xFE85, 34317 },
+  { 0xFE86, 34333 },
+  { 0xFE87, 34346 },
+  { 0xFE88, 34362 },
+  { 0xFE89, 34375 },
+  { 0xFE8A, 34391 },
+  { 0xFE8B, 34404 },
+  { 0xFE8C, 34419 },
+  { 0xFE8D, 34433 },
+  { 0xFE8E, 34449 },
+  { 0xFE8F, 34462 },
+  { 0xFE90, 34478 },
+  { 0xFE91, 34491 },
+  { 0xFE92, 34506 },
+  { 0xFE93, 34520 },
+  { 0xFE94, 34536 },
+  { 0xFE95, 34549 },
+  { 0xFE96, 34565 },
+  { 0xFE97, 34578 },
+  { 0xFE98, 34593 },
+  { 0xFE99, 34607 },
+  { 0xFE9A, 34623 },
+  { 0xFE9B, 34636 },
+  { 0xFE9C, 34651 },
+  { 0xFE9D, 34665 },
+  { 0xFE9E, 34681 },
+  { 0xFE9F, 34694 },
+  { 0xFEA0, 34709 },
+  { 0xFEA1, 34723 },
+  { 0xFEA2, 34739 },
+  { 0xFEA3, 34752 },
+  { 0xFEA4, 34767 },
+  { 0xFEA5, 34781 },
+  { 0xFEA6, 34797 },
+  { 0xFEA7, 34810 },
+  { 0xFEA8, 34825 },
+  { 0xFEA9, 34839 },
+  { 0xFEAA, 34855 },
+  { 0xFEAB, 34868 },
+  { 0xFEAC, 34884 },
+  { 0xFEAD, 34897 },
+  { 0xFEAE, 34913 },
+  { 0xFEAF, 34926 },
+  { 0xFEB0, 34942 },
+  { 0xFEB1, 34955 },
+  { 0xFEB2, 34971 },
+  { 0xFEB3, 34984 },
+  { 0xFEB4, 34999 },
+  { 0xFEB5, 35013 },
+  { 0xFEB6, 35029 },
+  { 0xFEB7, 35042 },
+  { 0xFEB8, 35057 },
+  { 0xFEB9, 35071 },
+  { 0xFEBA, 35087 },
+  { 0xFEBB, 35100 },
+  { 0xFEBC, 35115 },
+  { 0xFEBD, 35129 },
+  { 0xFEBE, 35145 },
+  { 0xFEBF, 35158 },
+  { 0xFEC0, 35173 },
+  { 0xFEC1, 35187 },
+  { 0xFEC2, 35203 },
+  { 0xFEC3, 35216 },
+  { 0xFEC4, 35231 },
+  { 0xFEC5, 35245 },
+  { 0xFEC6, 35261 },
+  { 0xFEC7, 35274 },
+  { 0xFEC8, 35289 },
+  { 0xFEC9, 35303 },
+  { 0xFECA, 35319 },
+  { 0xFECB, 35332 },
+  { 0xFECC, 35347 },
+  { 0xFECD, 35361 },
+  { 0xFECE, 35377 },
+  { 0xFECF, 35390 },
+  { 0xFED0, 35405 },
+  { 0xFED1, 35419 },
+  { 0xFED2, 35435 },
+  { 0xFED3, 35448 },
+  { 0xFED4, 35463 },
+  { 0xFED5, 35477 },
+  { 0xFED6, 35493 },
+  { 0xFED7, 35506 },
+  { 0xFED8, 35521 },
+  { 0xFED9, 35535 },
+  { 0xFEDA, 35551 },
+  { 0xFEDB, 35564 },
+  { 0xFEDC, 35579 },
+  { 0xFEDD, 35593 },
+  { 0xFEDE, 35609 },
+  { 0xFEDF, 35622 },
+  { 0xFEE0, 35637 },
+  { 0xFEE1, 35651 },
+  { 0xFEE2, 35667 },
+  { 0xFEE3, 35680 },
+  { 0xFEE4, 35695 },
+  { 0xFEE5, 35709 },
+  { 0xFEE6, 35725 },
+  { 0xFEE7, 35738 },
+  { 0xFEE8, 35753 },
+  { 0xFEE9, 35767 },
+  { 0xFEEA, 35783 },
+  { 0xFEEB, 35796 },
+  { 0xFEEC, 35811 },
+  { 0xFEED, 35825 },
+  { 0xFEEE, 35841 },
+  { 0xFEEF, 35854 },
+  { 0xFEF0, 35870 },
+  { 0xFEF1, 35883 },
+  { 0xFEF2, 35899 },
+  { 0xFEF3, 35912 },
+  { 0xFEF4, 35927 },
+  { 0xFEF5, 35941 },
+  { 0xFEF6, 35962 },
+  { 0xFEF7, 35980 },
+  { 0xFEF8, 36001 },
+  { 0xFEF9, 36019 },
+  { 0xFEFA, 36040 },
+  { 0xFEFB, 36058 },
+  { 0xFEFC, 36079 },
+  { 0xFF01, 36097 },
+  { 0xFF02, 36109 },
+  { 0xFF03, 36121 },
+  { 0xFF04, 36133 },
+  { 0xFF05, 36145 },
+  { 0xFF06, 36157 },
+  { 0xFF07, 36169 },
+  { 0xFF08, 36181 },
+  { 0xFF09, 36193 },
+  { 0xFF0A, 36205 },
+  { 0xFF0B, 36217 },
+  { 0xFF0C, 36229 },
+  { 0xFF0D, 36241 },
+  { 0xFF0E, 36253 },
+  { 0xFF0F, 36265 },
+  { 0xFF10, 36277 },
+  { 0xFF11, 36289 },
+  { 0xFF12, 36301 },
+  { 0xFF13, 36313 },
+  { 0xFF14, 36325 },
+  { 0xFF15, 36337 },
+  { 0xFF16, 36349 },
+  { 0xFF17, 36361 },
+  { 0xFF18, 36373 },
+  { 0xFF19, 36385 },
+  { 0xFF1A, 36397 },
+  { 0xFF1B, 36409 },
+  { 0xFF1C, 36421 },
+  { 0xFF1D, 36433 },
+  { 0xFF1E, 36445 },
+  { 0xFF1F, 36457 },
+  { 0xFF20, 36469 },
+  { 0xFF21, 36481 },
+  { 0xFF22, 36493 },
+  { 0xFF23, 36505 },
+  { 0xFF24, 36517 },
+  { 0xFF25, 36529 },
+  { 0xFF26, 36541 },
+  { 0xFF27, 36553 },
+  { 0xFF28, 36565 },
+  { 0xFF29, 36577 },
+  { 0xFF2A, 36589 },
+  { 0xFF2B, 36601 },
+  { 0xFF2C, 36613 },
+  { 0xFF2D, 36625 },
+  { 0xFF2E, 36637 },
+  { 0xFF2F, 36649 },
+  { 0xFF30, 36661 },
+  { 0xFF31, 36673 },
+  { 0xFF32, 36685 },
+  { 0xFF33, 36697 },
+  { 0xFF34, 36709 },
+  { 0xFF35, 36721 },
+  { 0xFF36, 36733 },
+  { 0xFF37, 36745 },
+  { 0xFF38, 36757 },
+  { 0xFF39, 36769 },
+  { 0xFF3A, 36781 },
+  { 0xFF3B, 36793 },
+  { 0xFF3C, 36805 },
+  { 0xFF3D, 36817 },
+  { 0xFF3E, 36829 },
+  { 0xFF3F, 36841 },
+  { 0xFF40, 36853 },
+  { 0xFF41, 36865 },
+  { 0xFF42, 36877 },
+  { 0xFF43, 36889 },
+  { 0xFF44, 36901 },
+  { 0xFF45, 36913 },
+  { 0xFF46, 36925 },
+  { 0xFF47, 36937 },
+  { 0xFF48, 36949 },
+  { 0xFF49, 36961 },
+  { 0xFF4A, 36973 },
+  { 0xFF4B, 36985 },
+  { 0xFF4C, 36997 },
+  { 0xFF4D, 37009 },
+  { 0xFF4E, 37021 },
+  { 0xFF4F, 37033 },
+  { 0xFF50, 37045 },
+  { 0xFF51, 37057 },
+  { 0xFF52, 37069 },
+  { 0xFF53, 37081 },
+  { 0xFF54, 37093 },
+  { 0xFF55, 37105 },
+  { 0xFF56, 37117 },
+  { 0xFF57, 37129 },
+  { 0xFF58, 37141 },
+  { 0xFF59, 37153 },
+  { 0xFF5A, 37165 },
+  { 0xFF5B, 37177 },
+  { 0xFF5C, 37189 },
+  { 0xFF5D, 37201 },
+  { 0xFF5E, 37213 },
+  { 0xFF5F, 37225 },
+  { 0xFF60, 37237 },
+  { 0xFF61, 37249 },
+  { 0xFF62, 37263 },
+  { 0xFF63, 37277 },
+  { 0xFF64, 37291 },
+  { 0xFF65, 37305 },
+  { 0xFF66, 37319 },
+  { 0xFF67, 37333 },
+  { 0xFF68, 37347 },
+  { 0xFF69, 37361 },
+  { 0xFF6A, 37375 },
+  { 0xFF6B, 37389 },
+  { 0xFF6C, 37403 },
+  { 0xFF6D, 37417 },
+  { 0xFF6E, 37431 },
+  { 0xFF6F, 37445 },
+  { 0xFF70, 37459 },
+  { 0xFF71, 37473 },
+  { 0xFF72, 37487 },
+  { 0xFF73, 37501 },
+  { 0xFF74, 37515 },
+  { 0xFF75, 37529 },
+  { 0xFF76, 37543 },
+  { 0xFF77, 37557 },
+  { 0xFF78, 37571 },
+  { 0xFF79, 37585 },
+  { 0xFF7A, 37599 },
+  { 0xFF7B, 37613 },
+  { 0xFF7C, 37627 },
+  { 0xFF7D, 37641 },
+  { 0xFF7E, 37655 },
+  { 0xFF7F, 37669 },
+  { 0xFF80, 37683 },
+  { 0xFF81, 37697 },
+  { 0xFF82, 37711 },
+  { 0xFF83, 37725 },
+  { 0xFF84, 37739 },
+  { 0xFF85, 37753 },
+  { 0xFF86, 37767 },
+  { 0xFF87, 37781 },
+  { 0xFF88, 37795 },
+  { 0xFF89, 37809 },
+  { 0xFF8A, 37823 },
+  { 0xFF8B, 37837 },
+  { 0xFF8C, 37851 },
+  { 0xFF8D, 37865 },
+  { 0xFF8E, 37879 },
+  { 0xFF8F, 37893 },
+  { 0xFF90, 37907 },
+  { 0xFF91, 37921 },
+  { 0xFF92, 37935 },
+  { 0xFF93, 37949 },
+  { 0xFF94, 37963 },
+  { 0xFF95, 37977 },
+  { 0xFF96, 37991 },
+  { 0xFF97, 38005 },
+  { 0xFF98, 38019 },
+  { 0xFF99, 38033 },
+  { 0xFF9A, 38047 },
+  { 0xFF9B, 38061 },
+  { 0xFF9C, 38075 },
+  { 0xFF9D, 38089 },
+  { 0xFF9E, 38103 },
+  { 0xFF9F, 38117 },
+  { 0xFFA0, 38131 },
+  { 0xFFA1, 38145 },
+  { 0xFFA2, 38159 },
+  { 0xFFA3, 38173 },
+  { 0xFFA4, 38187 },
+  { 0xFFA5, 38201 },
+  { 0xFFA6, 38215 },
+  { 0xFFA7, 38229 },
+  { 0xFFA8, 38243 },
+  { 0xFFA9, 38257 },
+  { 0xFFAA, 38271 },
+  { 0xFFAB, 38285 },
+  { 0xFFAC, 38299 },
+  { 0xFFAD, 38313 },
+  { 0xFFAE, 38327 },
+  { 0xFFAF, 38341 },
+  { 0xFFB0, 38355 },
+  { 0xFFB1, 38369 },
+  { 0xFFB2, 38383 },
+  { 0xFFB3, 38397 },
+  { 0xFFB4, 38411 },
+  { 0xFFB5, 38425 },
+  { 0xFFB6, 38439 },
+  { 0xFFB7, 38453 },
+  { 0xFFB8, 38467 },
+  { 0xFFB9, 38481 },
+  { 0xFFBA, 38495 },
+  { 0xFFBB, 38509 },
+  { 0xFFBC, 38523 },
+  { 0xFFBD, 38537 },
+  { 0xFFBE, 38551 },
+  { 0xFFC2, 38565 },
+  { 0xFFC3, 38579 },
+  { 0xFFC4, 38593 },
+  { 0xFFC5, 38607 },
+  { 0xFFC6, 38621 },
+  { 0xFFC7, 38635 },
+  { 0xFFCA, 38649 },
+  { 0xFFCB, 38663 },
+  { 0xFFCC, 38677 },
+  { 0xFFCD, 38691 },
+  { 0xFFCE, 38705 },
+  { 0xFFCF, 38719 },
+  { 0xFFD2, 38733 },
+  { 0xFFD3, 38747 },
+  { 0xFFD4, 38761 },
+  { 0xFFD5, 38775 },
+  { 0xFFD6, 38789 },
+  { 0xFFD7, 38803 },
+  { 0xFFDA, 38817 },
+  { 0xFFDB, 38831 },
+  { 0xFFDC, 38845 },
+  { 0xFFE0, 38859 },
+  { 0xFFE1, 38871 },
+  { 0xFFE2, 38883 },
+  { 0xFFE3, 38895 },
+  { 0xFFE4, 38907 },
+  { 0xFFE5, 38919 },
+  { 0xFFE6, 38931 },
+  { 0xFFE8, 38943 },
+  { 0xFFE9, 38957 },
+  { 0xFFEA, 38971 },
+  { 0xFFEB, 38985 },
+  { 0xFFEC, 38999 },
+  { 0xFFED, 39013 },
+  { 0xFFEE, 39027 },
+  { 0x1D400, 39041 },
+  { 0x1D401, 3647 },
+  { 0x1D402, 3044 },
+  { 0x1D403, 4172 },
+  { 0x1D404, 3715 },
+  { 0x1D405, 3750 },
+  { 0x1D406, 39076 },
+  { 0x1D407, 3195 },
+  { 0x1D408, 3308 },
+  { 0x1D409, 39111 },
+  { 0x1D40A, 39146 },
+  { 0x1D40B, 3343 },
+  { 0x1D40C, 3785 },
+  { 0x1D40D, 3411 },
+  { 0x1D40E, 39181 },
+  { 0x1D40F, 3456 },
+  { 0x1D410, 3491 },
+  { 0x1D411, 3526 },
+  { 0x1D412, 39216 },
+  { 0x1D413, 39251 },
+  { 0x1D414, 39286 },
+  { 0x1D415, 39321 },
+  { 0x1D416, 39356 },
+  { 0x1D417, 39391 },
+  { 0x1D418, 39426 },
+  { 0x1D419, 3612 },
+  { 0x1D41A, 39461 },
+  { 0x1D41B, 39494 },
+  { 0x1D41C, 39527 },
+  { 0x1D41D, 4207 },
+  { 0x1D41E, 3682 },
+  { 0x1D41F, 39560 },
+  { 0x1D420, 3162 },
+  { 0x1D421, 3230 },
+  { 0x1D422, 3950 },
+  { 0x1D423, 4240 },
+  { 0x1D424, 39593 },
+  { 0x1D425, 3378 },
+  { 0x1D426, 39626 },
+  { 0x1D427, 39659 },
+  { 0x1D428, 3820 },
+  { 0x1D429, 39692 },
+  { 0x1D42A, 39725 },
+  { 0x1D42B, 39758 },
+  { 0x1D42C, 39791 },
+  { 0x1D42D, 39824 },
+  { 0x1D42E, 39857 },
+  { 0x1D42F, 39890 },
+  { 0x1D430, 39923 },
+  { 0x1D431, 39956 },
+  { 0x1D432, 39989 },
+  { 0x1D433, 40022 },
+  { 0x1D434, 39041 },
+  { 0x1D435, 3647 },
+  { 0x1D436, 3044 },
+  { 0x1D437, 4172 },
+  { 0x1D438, 3715 },
+  { 0x1D439, 3750 },
+  { 0x1D43A, 39076 },
+  { 0x1D43B, 3195 },
+  { 0x1D43C, 3308 },
+  { 0x1D43D, 39111 },
+  { 0x1D43E, 39146 },
+  { 0x1D43F, 3343 },
+  { 0x1D440, 3785 },
+  { 0x1D441, 3411 },
+  { 0x1D442, 39181 },
+  { 0x1D443, 3456 },
+  { 0x1D444, 3491 },
+  { 0x1D445, 3526 },
+  { 0x1D446, 39216 },
+  { 0x1D447, 39251 },
+  { 0x1D448, 39286 },
+  { 0x1D449, 39321 },
+  { 0x1D44A, 39356 },
+  { 0x1D44B, 39391 },
+  { 0x1D44C, 39426 },
+  { 0x1D44D, 3612 },
+  { 0x1D44E, 39461 },
+  { 0x1D44F, 39494 },
+  { 0x1D450, 39527 },
+  { 0x1D451, 4207 },
+  { 0x1D452, 3682 },
+  { 0x1D453, 39560 },
+  { 0x1D454, 3162 },
+  { 0x1D456, 3950 },
+  { 0x1D457, 4240 },
+  { 0x1D458, 39593 },
+  { 0x1D459, 3378 },
+  { 0x1D45A, 39626 },
+  { 0x1D45B, 39659 },
+  { 0x1D45C, 3820 },
+  { 0x1D45D, 39692 },
+  { 0x1D45E, 39725 },
+  { 0x1D45F, 39758 },
+  { 0x1D460, 39791 },
+  { 0x1D461, 39824 },
+  { 0x1D462, 39857 },
+  { 0x1D463, 39890 },
+  { 0x1D464, 39923 },
+  { 0x1D465, 39956 },
+  { 0x1D466, 39989 },
+  { 0x1D467, 40022 },
+  { 0x1D468, 39041 },
+  { 0x1D469, 3647 },
+  { 0x1D46A, 3044 },
+  { 0x1D46B, 4172 },
+  { 0x1D46C, 3715 },
+  { 0x1D46D, 3750 },
+  { 0x1D46E, 39076 },
+  { 0x1D46F, 3195 },
+  { 0x1D470, 3308 },
+  { 0x1D471, 39111 },
+  { 0x1D472, 39146 },
+  { 0x1D473, 3343 },
+  { 0x1D474, 3785 },
+  { 0x1D475, 3411 },
+  { 0x1D476, 39181 },
+  { 0x1D477, 3456 },
+  { 0x1D478, 3491 },
+  { 0x1D479, 3526 },
+  { 0x1D47A, 39216 },
+  { 0x1D47B, 39251 },
+  { 0x1D47C, 39286 },
+  { 0x1D47D, 39321 },
+  { 0x1D47E, 39356 },
+  { 0x1D47F, 39391 },
+  { 0x1D480, 39426 },
+  { 0x1D481, 3612 },
+  { 0x1D482, 39461 },
+  { 0x1D483, 39494 },
+  { 0x1D484, 39527 },
+  { 0x1D485, 4207 },
+  { 0x1D486, 3682 },
+  { 0x1D487, 39560 },
+  { 0x1D488, 3162 },
+  { 0x1D489, 3230 },
+  { 0x1D48A, 3950 },
+  { 0x1D48B, 4240 },
+  { 0x1D48C, 39593 },
+  { 0x1D48D, 3378 },
+  { 0x1D48E, 39626 },
+  { 0x1D48F, 39659 },
+  { 0x1D490, 3820 },
+  { 0x1D491, 39692 },
+  { 0x1D492, 39725 },
+  { 0x1D493, 39758 },
+  { 0x1D494, 39791 },
+  { 0x1D495, 39824 },
+  { 0x1D496, 39857 },
+  { 0x1D497, 39890 },
+  { 0x1D498, 39923 },
+  { 0x1D499, 39956 },
+  { 0x1D49A, 39989 },
+  { 0x1D49B, 40022 },
+  { 0x1D49C, 39041 },
+  { 0x1D49E, 3044 },
+  { 0x1D49F, 4172 },
+  { 0x1D4A2, 39076 },
+  { 0x1D4A5, 39111 },
+  { 0x1D4A6, 39146 },
+  { 0x1D4A9, 3411 },
+  { 0x1D4AA, 39181 },
+  { 0x1D4AB, 3456 },
+  { 0x1D4AC, 3491 },
+  { 0x1D4AE, 39216 },
+  { 0x1D4AF, 39251 },
+  { 0x1D4B0, 39286 },
+  { 0x1D4B1, 39321 },
+  { 0x1D4B2, 39356 },
+  { 0x1D4B3, 39391 },
+  { 0x1D4B4, 39426 },
+  { 0x1D4B5, 3612 },
+  { 0x1D4B6, 39461 },
+  { 0x1D4B7, 39494 },
+  { 0x1D4B8, 39527 },
+  { 0x1D4B9, 4207 },
+  { 0x1D4BB, 39560 },
+  { 0x1D4BD, 3230 },
+  { 0x1D4BE, 3950 },
+  { 0x1D4BF, 4240 },
+  { 0x1D4C0, 39593 },
+  { 0x1D4C1, 3378 },
+  { 0x1D4C2, 39626 },
+  { 0x1D4C3, 39659 },
+  { 0x1D4C5, 39692 },
+  { 0x1D4C6, 39725 },
+  { 0x1D4C7, 39758 },
+  { 0x1D4C8, 39791 },
+  { 0x1D4C9, 39824 },
+  { 0x1D4CA, 39857 },
+  { 0x1D4CB, 39890 },
+  { 0x1D4CC, 39923 },
+  { 0x1D4CD, 39956 },
+  { 0x1D4CE, 39989 },
+  { 0x1D4CF, 40022 },
+  { 0x1D4D0, 39041 },
+  { 0x1D4D1, 3647 },
+  { 0x1D4D2, 3044 },
+  { 0x1D4D3, 4172 },
+  { 0x1D4D4, 3715 },
+  { 0x1D4D5, 3750 },
+  { 0x1D4D6, 39076 },
+  { 0x1D4D7, 3195 },
+  { 0x1D4D8, 3308 },
+  { 0x1D4D9, 39111 },
+  { 0x1D4DA, 39146 },
+  { 0x1D4DB, 3343 },
+  { 0x1D4DC, 3785 },
+  { 0x1D4DD, 3411 },
+  { 0x1D4DE, 39181 },
+  { 0x1D4DF, 3456 },
+  { 0x1D4E0, 3491 },
+  { 0x1D4E1, 3526 },
+  { 0x1D4E2, 39216 },
+  { 0x1D4E3, 39251 },
+  { 0x1D4E4, 39286 },
+  { 0x1D4E5, 39321 },
+  { 0x1D4E6, 39356 },
+  { 0x1D4E7, 39391 },
+  { 0x1D4E8, 39426 },
+  { 0x1D4E9, 3612 },
+  { 0x1D4EA, 39461 },
+  { 0x1D4EB, 39494 },
+  { 0x1D4EC, 39527 },
+  { 0x1D4ED, 4207 },
+  { 0x1D4EE, 3682 },
+  { 0x1D4EF, 39560 },
+  { 0x1D4F0, 3162 },
+  { 0x1D4F1, 3230 },
+  { 0x1D4F2, 3950 },
+  { 0x1D4F3, 4240 },
+  { 0x1D4F4, 39593 },
+  { 0x1D4F5, 3378 },
+  { 0x1D4F6, 39626 },
+  { 0x1D4F7, 39659 },
+  { 0x1D4F8, 3820 },
+  { 0x1D4F9, 39692 },
+  { 0x1D4FA, 39725 },
+  { 0x1D4FB, 39758 },
+  { 0x1D4FC, 39791 },
+  { 0x1D4FD, 39824 },
+  { 0x1D4FE, 39857 },
+  { 0x1D4FF, 39890 },
+  { 0x1D500, 39923 },
+  { 0x1D501, 39956 },
+  { 0x1D502, 39989 },
+  { 0x1D503, 40022 },
+  { 0x1D504, 39041 },
+  { 0x1D505, 3647 },
+  { 0x1D507, 4172 },
+  { 0x1D508, 3715 },
+  { 0x1D509, 3750 },
+  { 0x1D50A, 39076 },
+  { 0x1D50D, 39111 },
+  { 0x1D50E, 39146 },
+  { 0x1D50F, 3343 },
+  { 0x1D510, 3785 },
+  { 0x1D511, 3411 },
+  { 0x1D512, 39181 },
+  { 0x1D513, 3456 },
+  { 0x1D514, 3491 },
+  { 0x1D516, 39216 },
+  { 0x1D517, 39251 },
+  { 0x1D518, 39286 },
+  { 0x1D519, 39321 },
+  { 0x1D51A, 39356 },
+  { 0x1D51B, 39391 },
+  { 0x1D51C, 39426 },
+  { 0x1D51E, 39461 },
+  { 0x1D51F, 39494 },
+  { 0x1D520, 39527 },
+  { 0x1D521, 4207 },
+  { 0x1D522, 3682 },
+  { 0x1D523, 39560 },
+  { 0x1D524, 3162 },
+  { 0x1D525, 3230 },
+  { 0x1D526, 3950 },
+  { 0x1D527, 4240 },
+  { 0x1D528, 39593 },
+  { 0x1D529, 3378 },
+  { 0x1D52A, 39626 },
+  { 0x1D52B, 39659 },
+  { 0x1D52C, 3820 },
+  { 0x1D52D, 39692 },
+  { 0x1D52E, 39725 },
+  { 0x1D52F, 39758 },
+  { 0x1D530, 39791 },
+  { 0x1D531, 39824 },
+  { 0x1D532, 39857 },
+  { 0x1D533, 39890 },
+  { 0x1D534, 39923 },
+  { 0x1D535, 39956 },
+  { 0x1D536, 39989 },
+  { 0x1D537, 40022 },
+  { 0x1D538, 39041 },
+  { 0x1D539, 3647 },
+  { 0x1D53B, 4172 },
+  { 0x1D53C, 3715 },
+  { 0x1D53D, 3750 },
+  { 0x1D53E, 39076 },
+  { 0x1D540, 3308 },
+  { 0x1D541, 39111 },
+  { 0x1D542, 39146 },
+  { 0x1D543, 3343 },
+  { 0x1D544, 3785 },
+  { 0x1D546, 39181 },
+  { 0x1D54A, 39216 },
+  { 0x1D54B, 39251 },
+  { 0x1D54C, 39286 },
+  { 0x1D54D, 39321 },
+  { 0x1D54E, 39356 },
+  { 0x1D54F, 39391 },
+  { 0x1D550, 39426 },
+  { 0x1D552, 39461 },
+  { 0x1D553, 39494 },
+  { 0x1D554, 39527 },
+  { 0x1D555, 4207 },
+  { 0x1D556, 3682 },
+  { 0x1D557, 39560 },
+  { 0x1D558, 3162 },
+  { 0x1D559, 3230 },
+  { 0x1D55A, 3950 },
+  { 0x1D55B, 4240 },
+  { 0x1D55C, 39593 },
+  { 0x1D55D, 3378 },
+  { 0x1D55E, 39626 },
+  { 0x1D55F, 39659 },
+  { 0x1D560, 3820 },
+  { 0x1D561, 39692 },
+  { 0x1D562, 39725 },
+  { 0x1D563, 39758 },
+  { 0x1D564, 39791 },
+  { 0x1D565, 39824 },
+  { 0x1D566, 39857 },
+  { 0x1D567, 39890 },
+  { 0x1D568, 39923 },
+  { 0x1D569, 39956 },
+  { 0x1D56A, 39989 },
+  { 0x1D56B, 40022 },
+  { 0x1D56C, 39041 },
+  { 0x1D56D, 3647 },
+  { 0x1D56E, 3044 },
+  { 0x1D56F, 4172 },
+  { 0x1D570, 3715 },
+  { 0x1D571, 3750 },
+  { 0x1D572, 39076 },
+  { 0x1D573, 3195 },
+  { 0x1D574, 3308 },
+  { 0x1D575, 39111 },
+  { 0x1D576, 39146 },
+  { 0x1D577, 3343 },
+  { 0x1D578, 3785 },
+  { 0x1D579, 3411 },
+  { 0x1D57A, 39181 },
+  { 0x1D57B, 3456 },
+  { 0x1D57C, 3491 },
+  { 0x1D57D, 3526 },
+  { 0x1D57E, 39216 },
+  { 0x1D57F, 39251 },
+  { 0x1D580, 39286 },
+  { 0x1D581, 39321 },
+  { 0x1D582, 39356 },
+  { 0x1D583, 39391 },
+  { 0x1D584, 39426 },
+  { 0x1D585, 3612 },
+  { 0x1D586, 39461 },
+  { 0x1D587, 39494 },
+  { 0x1D588, 39527 },
+  { 0x1D589, 4207 },
+  { 0x1D58A, 3682 },
+  { 0x1D58B, 39560 },
+  { 0x1D58C, 3162 },
+  { 0x1D58D, 3230 },
+  { 0x1D58E, 3950 },
+  { 0x1D58F, 4240 },
+  { 0x1D590, 39593 },
+  { 0x1D591, 3378 },
+  { 0x1D592, 39626 },
+  { 0x1D593, 39659 },
+  { 0x1D594, 3820 },
+  { 0x1D595, 39692 },
+  { 0x1D596, 39725 },
+  { 0x1D597, 39758 },
+  { 0x1D598, 39791 },
+  { 0x1D599, 39824 },
+  { 0x1D59A, 39857 },
+  { 0x1D59B, 39890 },
+  { 0x1D59C, 39923 },
+  { 0x1D59D, 39956 },
+  { 0x1D59E, 39989 },
+  { 0x1D59F, 40022 },
+  { 0x1D5A0, 39041 },
+  { 0x1D5A1, 3647 },
+  { 0x1D5A2, 3044 },
+  { 0x1D5A3, 4172 },
+  { 0x1D5A4, 3715 },
+  { 0x1D5A5, 3750 },
+  { 0x1D5A6, 39076 },
+  { 0x1D5A7, 3195 },
+  { 0x1D5A8, 3308 },
+  { 0x1D5A9, 39111 },
+  { 0x1D5AA, 39146 },
+  { 0x1D5AB, 3343 },
+  { 0x1D5AC, 3785 },
+  { 0x1D5AD, 3411 },
+  { 0x1D5AE, 39181 },
+  { 0x1D5AF, 3456 },
+  { 0x1D5B0, 3491 },
+  { 0x1D5B1, 3526 },
+  { 0x1D5B2, 39216 },
+  { 0x1D5B3, 39251 },
+  { 0x1D5B4, 39286 },
+  { 0x1D5B5, 39321 },
+  { 0x1D5B6, 39356 },
+  { 0x1D5B7, 39391 },
+  { 0x1D5B8, 39426 },
+  { 0x1D5B9, 3612 },
+  { 0x1D5BA, 39461 },
+  { 0x1D5BB, 39494 },
+  { 0x1D5BC, 39527 },
+  { 0x1D5BD, 4207 },
+  { 0x1D5BE, 3682 },
+  { 0x1D5BF, 39560 },
+  { 0x1D5C0, 3162 },
+  { 0x1D5C1, 3230 },
+  { 0x1D5C2, 3950 },
+  { 0x1D5C3, 4240 },
+  { 0x1D5C4, 39593 },
+  { 0x1D5C5, 3378 },
+  { 0x1D5C6, 39626 },
+  { 0x1D5C7, 39659 },
+  { 0x1D5C8, 3820 },
+  { 0x1D5C9, 39692 },
+  { 0x1D5CA, 39725 },
+  { 0x1D5CB, 39758 },
+  { 0x1D5CC, 39791 },
+  { 0x1D5CD, 39824 },
+  { 0x1D5CE, 39857 },
+  { 0x1D5CF, 39890 },
+  { 0x1D5D0, 39923 },
+  { 0x1D5D1, 39956 },
+  { 0x1D5D2, 39989 },
+  { 0x1D5D3, 40022 },
+  { 0x1D5D4, 39041 },
+  { 0x1D5D5, 3647 },
+  { 0x1D5D6, 3044 },
+  { 0x1D5D7, 4172 },
+  { 0x1D5D8, 3715 },
+  { 0x1D5D9, 3750 },
+  { 0x1D5DA, 39076 },
+  { 0x1D5DB, 3195 },
+  { 0x1D5DC, 3308 },
+  { 0x1D5DD, 39111 },
+  { 0x1D5DE, 39146 },
+  { 0x1D5DF, 3343 },
+  { 0x1D5E0, 3785 },
+  { 0x1D5E1, 3411 },
+  { 0x1D5E2, 39181 },
+  { 0x1D5E3, 3456 },
+  { 0x1D5E4, 3491 },
+  { 0x1D5E5, 3526 },
+  { 0x1D5E6, 39216 },
+  { 0x1D5E7, 39251 },
+  { 0x1D5E8, 39286 },
+  { 0x1D5E9, 39321 },
+  { 0x1D5EA, 39356 },
+  { 0x1D5EB, 39391 },
+  { 0x1D5EC, 39426 },
+  { 0x1D5ED, 3612 },
+  { 0x1D5EE, 39461 },
+  { 0x1D5EF, 39494 },
+  { 0x1D5F0, 39527 },
+  { 0x1D5F1, 4207 },
+  { 0x1D5F2, 3682 },
+  { 0x1D5F3, 39560 },
+  { 0x1D5F4, 3162 },
+  { 0x1D5F5, 3230 },
+  { 0x1D5F6, 3950 },
+  { 0x1D5F7, 4240 },
+  { 0x1D5F8, 39593 },
+  { 0x1D5F9, 3378 },
+  { 0x1D5FA, 39626 },
+  { 0x1D5FB, 39659 },
+  { 0x1D5FC, 3820 },
+  { 0x1D5FD, 39692 },
+  { 0x1D5FE, 39725 },
+  { 0x1D5FF, 39758 },
+  { 0x1D600, 39791 },
+  { 0x1D601, 39824 },
+  { 0x1D602, 39857 },
+  { 0x1D603, 39890 },
+  { 0x1D604, 39923 },
+  { 0x1D605, 39956 },
+  { 0x1D606, 39989 },
+  { 0x1D607, 40022 },
+  { 0x1D608, 39041 },
+  { 0x1D609, 3647 },
+  { 0x1D60A, 3044 },
+  { 0x1D60B, 4172 },
+  { 0x1D60C, 3715 },
+  { 0x1D60D, 3750 },
+  { 0x1D60E, 39076 },
+  { 0x1D60F, 3195 },
+  { 0x1D610, 3308 },
+  { 0x1D611, 39111 },
+  { 0x1D612, 39146 },
+  { 0x1D613, 3343 },
+  { 0x1D614, 3785 },
+  { 0x1D615, 3411 },
+  { 0x1D616, 39181 },
+  { 0x1D617, 3456 },
+  { 0x1D618, 3491 },
+  { 0x1D619, 3526 },
+  { 0x1D61A, 39216 },
+  { 0x1D61B, 39251 },
+  { 0x1D61C, 39286 },
+  { 0x1D61D, 39321 },
+  { 0x1D61E, 39356 },
+  { 0x1D61F, 39391 },
+  { 0x1D620, 39426 },
+  { 0x1D621, 3612 },
+  { 0x1D622, 39461 },
+  { 0x1D623, 39494 },
+  { 0x1D624, 39527 },
+  { 0x1D625, 4207 },
+  { 0x1D626, 3682 },
+  { 0x1D627, 39560 },
+  { 0x1D628, 3162 },
+  { 0x1D629, 3230 },
+  { 0x1D62A, 3950 },
+  { 0x1D62B, 4240 },
+  { 0x1D62C, 39593 },
+  { 0x1D62D, 3378 },
+  { 0x1D62E, 39626 },
+  { 0x1D62F, 39659 },
+  { 0x1D630, 3820 },
+  { 0x1D631, 39692 },
+  { 0x1D632, 39725 },
+  { 0x1D633, 39758 },
+  { 0x1D634, 39791 },
+  { 0x1D635, 39824 },
+  { 0x1D636, 39857 },
+  { 0x1D637, 39890 },
+  { 0x1D638, 39923 },
+  { 0x1D639, 39956 },
+  { 0x1D63A, 39989 },
+  { 0x1D63B, 40022 },
+  { 0x1D63C, 39041 },
+  { 0x1D63D, 3647 },
+  { 0x1D63E, 3044 },
+  { 0x1D63F, 4172 },
+  { 0x1D640, 3715 },
+  { 0x1D641, 3750 },
+  { 0x1D642, 39076 },
+  { 0x1D643, 3195 },
+  { 0x1D644, 3308 },
+  { 0x1D645, 39111 },
+  { 0x1D646, 39146 },
+  { 0x1D647, 3343 },
+  { 0x1D648, 3785 },
+  { 0x1D649, 3411 },
+  { 0x1D64A, 39181 },
+  { 0x1D64B, 3456 },
+  { 0x1D64C, 3491 },
+  { 0x1D64D, 3526 },
+  { 0x1D64E, 39216 },
+  { 0x1D64F, 39251 },
+  { 0x1D650, 39286 },
+  { 0x1D651, 39321 },
+  { 0x1D652, 39356 },
+  { 0x1D653, 39391 },
+  { 0x1D654, 39426 },
+  { 0x1D655, 3612 },
+  { 0x1D656, 39461 },
+  { 0x1D657, 39494 },
+  { 0x1D658, 39527 },
+  { 0x1D659, 4207 },
+  { 0x1D65A, 3682 },
+  { 0x1D65B, 39560 },
+  { 0x1D65C, 3162 },
+  { 0x1D65D, 3230 },
+  { 0x1D65E, 3950 },
+  { 0x1D65F, 4240 },
+  { 0x1D660, 39593 },
+  { 0x1D661, 3378 },
+  { 0x1D662, 39626 },
+  { 0x1D663, 39659 },
+  { 0x1D664, 3820 },
+  { 0x1D665, 39692 },
+  { 0x1D666, 39725 },
+  { 0x1D667, 39758 },
+  { 0x1D668, 39791 },
+  { 0x1D669, 39824 },
+  { 0x1D66A, 39857 },
+  { 0x1D66B, 39890 },
+  { 0x1D66C, 39923 },
+  { 0x1D66D, 39956 },
+  { 0x1D66E, 39989 },
+  { 0x1D66F, 40022 },
+  { 0x1D670, 39041 },
+  { 0x1D671, 3647 },
+  { 0x1D672, 3044 },
+  { 0x1D673, 4172 },
+  { 0x1D674, 3715 },
+  { 0x1D675, 3750 },
+  { 0x1D676, 39076 },
+  { 0x1D677, 3195 },
+  { 0x1D678, 3308 },
+  { 0x1D679, 39111 },
+  { 0x1D67A, 39146 },
+  { 0x1D67B, 3343 },
+  { 0x1D67C, 3785 },
+  { 0x1D67D, 3411 },
+  { 0x1D67E, 39181 },
+  { 0x1D67F, 3456 },
+  { 0x1D680, 3491 },
+  { 0x1D681, 3526 },
+  { 0x1D682, 39216 },
+  { 0x1D683, 39251 },
+  { 0x1D684, 39286 },
+  { 0x1D685, 39321 },
+  { 0x1D686, 39356 },
+  { 0x1D687, 39391 },
+  { 0x1D688, 39426 },
+  { 0x1D689, 3612 },
+  { 0x1D68A, 39461 },
+  { 0x1D68B, 39494 },
+  { 0x1D68C, 39527 },
+  { 0x1D68D, 4207 },
+  { 0x1D68E, 3682 },
+  { 0x1D68F, 39560 },
+  { 0x1D690, 3162 },
+  { 0x1D691, 3230 },
+  { 0x1D692, 3950 },
+  { 0x1D693, 4240 },
+  { 0x1D694, 39593 },
+  { 0x1D695, 3378 },
+  { 0x1D696, 39626 },
+  { 0x1D697, 39659 },
+  { 0x1D698, 3820 },
+  { 0x1D699, 39692 },
+  { 0x1D69A, 39725 },
+  { 0x1D69B, 39758 },
+  { 0x1D69C, 39791 },
+  { 0x1D69D, 39824 },
+  { 0x1D69E, 39857 },
+  { 0x1D69F, 39890 },
+  { 0x1D6A0, 39923 },
+  { 0x1D6A1, 39956 },
+  { 0x1D6A2, 39989 },
+  { 0x1D6A3, 40022 },
+  { 0x1D6A4, 40055 },
+  { 0x1D6A5, 40096 },
+  { 0x1D6A8, 40137 },
+  { 0x1D6A9, 40176 },
+  { 0x1D6AA, 4069 },
+  { 0x1D6AB, 40214 },
+  { 0x1D6AC, 40253 },
+  { 0x1D6AD, 40294 },
+  { 0x1D6AE, 40332 },
+  { 0x1D6AF, 40369 },
+  { 0x1D6B0, 40408 },
+  { 0x1D6B1, 40446 },
+  { 0x1D6B2, 40485 },
+  { 0x1D6B3, 40524 },
+  { 0x1D6B4, 40560 },
+  { 0x1D6B5, 40596 },
+  { 0x1D6B6, 40632 },
+  { 0x1D6B7, 4108 },
+  { 0x1D6B8, 40673 },
+  { 0x1D6B9, 40710 },
+  { 0x1D6BA, 40749 },
+  { 0x1D6BB, 40788 },
+  { 0x1D6BC, 40825 },
+  { 0x1D6BD, 40866 },
+  { 0x1D6BE, 40903 },
+  { 0x1D6BF, 40940 },
+  { 0x1D6C0, 40977 },
+  { 0x1D6C1, 41016 },
+  { 0x1D6C2, 41034 },
+  { 0x1D6C3, 41071 },
+  { 0x1D6C4, 4032 },
+  { 0x1D6C5, 41107 },
+  { 0x1D6C6, 41144 },
+  { 0x1D6C7, 41183 },
+  { 0x1D6C8, 41219 },
+  { 0x1D6C9, 41254 },
+  { 0x1D6CA, 41291 },
+  { 0x1D6CB, 41327 },
+  { 0x1D6CC, 41364 },
+  { 0x1D6CD, 41401 },
+  { 0x1D6CE, 41435 },
+  { 0x1D6CF, 41469 },
+  { 0x1D6D0, 41503 },
+  { 0x1D6D1, 3998 },
+  { 0x1D6D2, 41542 },
+  { 0x1D6D3, 41577 },
+  { 0x1D6D4, 41620 },
+  { 0x1D6D5, 41657 },
+  { 0x1D6D6, 41692 },
+  { 0x1D6D7, 41731 },
+  { 0x1D6D8, 41766 },
+  { 0x1D6D9, 41801 },
+  { 0x1D6DA, 41836 },
+  { 0x1D6DB, 41873 },
+  { 0x1D6DC, 41906 },
+  { 0x1D6DD, 41946 },
+  { 0x1D6DE, 41977 },
+  { 0x1D6DF, 42008 },
+  { 0x1D6E0, 42037 },
+  { 0x1D6E1, 42066 },
+  { 0x1D6E2, 40137 },
+  { 0x1D6E3, 40176 },
+  { 0x1D6E4, 4069 },
+  { 0x1D6E5, 40214 },
+  { 0x1D6E6, 40253 },
+  { 0x1D6E7, 40294 },
+  { 0x1D6E8, 40332 },
+  { 0x1D6E9, 40369 },
+  { 0x1D6EA, 40408 },
+  { 0x1D6EB, 40446 },
+  { 0x1D6EC, 40485 },
+  { 0x1D6ED, 40524 },
+  { 0x1D6EE, 40560 },
+  { 0x1D6EF, 40596 },
+  { 0x1D6F0, 40632 },
+  { 0x1D6F1, 4108 },
+  { 0x1D6F2, 40673 },
+  { 0x1D6F3, 40710 },
+  { 0x1D6F4, 40749 },
+  { 0x1D6F5, 40788 },
+  { 0x1D6F6, 40825 },
+  { 0x1D6F7, 40866 },
+  { 0x1D6F8, 40903 },
+  { 0x1D6F9, 40940 },
+  { 0x1D6FA, 40977 },
+  { 0x1D6FB, 41016 },
+  { 0x1D6FC, 41034 },
+  { 0x1D6FD, 41071 },
+  { 0x1D6FE, 4032 },
+  { 0x1D6FF, 41107 },
+  { 0x1D700, 41144 },
+  { 0x1D701, 41183 },
+  { 0x1D702, 41219 },
+  { 0x1D703, 41254 },
+  { 0x1D704, 41291 },
+  { 0x1D705, 41327 },
+  { 0x1D706, 41364 },
+  { 0x1D707, 41401 },
+  { 0x1D708, 41435 },
+  { 0x1D709, 41469 },
+  { 0x1D70A, 41503 },
+  { 0x1D70B, 3998 },
+  { 0x1D70C, 41542 },
+  { 0x1D70D, 41577 },
+  { 0x1D70E, 41620 },
+  { 0x1D70F, 41657 },
+  { 0x1D710, 41692 },
+  { 0x1D711, 41731 },
+  { 0x1D712, 41766 },
+  { 0x1D713, 41801 },
+  { 0x1D714, 41836 },
+  { 0x1D715, 41873 },
+  { 0x1D716, 41906 },
+  { 0x1D717, 41946 },
+  { 0x1D718, 41977 },
+  { 0x1D719, 42008 },
+  { 0x1D71A, 42037 },
+  { 0x1D71B, 42066 },
+  { 0x1D71C, 40137 },
+  { 0x1D71D, 40176 },
+  { 0x1D71E, 4069 },
+  { 0x1D71F, 40214 },
+  { 0x1D720, 40253 },
+  { 0x1D721, 40294 },
+  { 0x1D722, 40332 },
+  { 0x1D723, 40369 },
+  { 0x1D724, 40408 },
+  { 0x1D725, 40446 },
+  { 0x1D726, 40485 },
+  { 0x1D727, 40524 },
+  { 0x1D728, 40560 },
+  { 0x1D729, 40596 },
+  { 0x1D72A, 40632 },
+  { 0x1D72B, 4108 },
+  { 0x1D72C, 40673 },
+  { 0x1D72D, 40710 },
+  { 0x1D72E, 40749 },
+  { 0x1D72F, 40788 },
+  { 0x1D730, 40825 },
+  { 0x1D731, 40866 },
+  { 0x1D732, 40903 },
+  { 0x1D733, 40940 },
+  { 0x1D734, 40977 },
+  { 0x1D735, 41016 },
+  { 0x1D736, 41034 },
+  { 0x1D737, 41071 },
+  { 0x1D738, 4032 },
+  { 0x1D739, 41107 },
+  { 0x1D73A, 41144 },
+  { 0x1D73B, 41183 },
+  { 0x1D73C, 41219 },
+  { 0x1D73D, 41254 },
+  { 0x1D73E, 41291 },
+  { 0x1D73F, 41327 },
+  { 0x1D740, 41364 },
+  { 0x1D741, 41401 },
+  { 0x1D742, 41435 },
+  { 0x1D743, 41469 },
+  { 0x1D744, 41503 },
+  { 0x1D745, 3998 },
+  { 0x1D746, 41542 },
+  { 0x1D747, 41577 },
+  { 0x1D748, 41620 },
+  { 0x1D749, 41657 },
+  { 0x1D74A, 41692 },
+  { 0x1D74B, 41731 },
+  { 0x1D74C, 41766 },
+  { 0x1D74D, 41801 },
+  { 0x1D74E, 41836 },
+  { 0x1D74F, 41873 },
+  { 0x1D750, 41906 },
+  { 0x1D751, 41946 },
+  { 0x1D752, 41977 },
+  { 0x1D753, 42008 },
+  { 0x1D754, 42037 },
+  { 0x1D755, 42066 },
+  { 0x1D756, 40137 },
+  { 0x1D757, 40176 },
+  { 0x1D758, 4069 },
+  { 0x1D759, 40214 },
+  { 0x1D75A, 40253 },
+  { 0x1D75B, 40294 },
+  { 0x1D75C, 40332 },
+  { 0x1D75D, 40369 },
+  { 0x1D75E, 40408 },
+  { 0x1D75F, 40446 },
+  { 0x1D760, 40485 },
+  { 0x1D761, 40524 },
+  { 0x1D762, 40560 },
+  { 0x1D763, 40596 },
+  { 0x1D764, 40632 },
+  { 0x1D765, 4108 },
+  { 0x1D766, 40673 },
+  { 0x1D767, 40710 },
+  { 0x1D768, 40749 },
+  { 0x1D769, 40788 },
+  { 0x1D76A, 40825 },
+  { 0x1D76B, 40866 },
+  { 0x1D76C, 40903 },
+  { 0x1D76D, 40940 },
+  { 0x1D76E, 40977 },
+  { 0x1D76F, 41016 },
+  { 0x1D770, 41034 },
+  { 0x1D771, 41071 },
+  { 0x1D772, 4032 },
+  { 0x1D773, 41107 },
+  { 0x1D774, 41144 },
+  { 0x1D775, 41183 },
+  { 0x1D776, 41219 },
+  { 0x1D777, 41254 },
+  { 0x1D778, 41291 },
+  { 0x1D779, 41327 },
+  { 0x1D77A, 41364 },
+  { 0x1D77B, 41401 },
+  { 0x1D77C, 41435 },
+  { 0x1D77D, 41469 },
+  { 0x1D77E, 41503 },
+  { 0x1D77F, 3998 },
+  { 0x1D780, 41542 },
+  { 0x1D781, 41577 },
+  { 0x1D782, 41620 },
+  { 0x1D783, 41657 },
+  { 0x1D784, 41692 },
+  { 0x1D785, 41731 },
+  { 0x1D786, 41766 },
+  { 0x1D787, 41801 },
+  { 0x1D788, 41836 },
+  { 0x1D789, 41873 },
+  { 0x1D78A, 41906 },
+  { 0x1D78B, 41946 },
+  { 0x1D78C, 41977 },
+  { 0x1D78D, 42008 },
+  { 0x1D78E, 42037 },
+  { 0x1D78F, 42066 },
+  { 0x1D790, 40137 },
+  { 0x1D791, 40176 },
+  { 0x1D792, 4069 },
+  { 0x1D793, 40214 },
+  { 0x1D794, 40253 },
+  { 0x1D795, 40294 },
+  { 0x1D796, 40332 },
+  { 0x1D797, 40369 },
+  { 0x1D798, 40408 },
+  { 0x1D799, 40446 },
+  { 0x1D79A, 40485 },
+  { 0x1D79B, 40524 },
+  { 0x1D79C, 40560 },
+  { 0x1D79D, 40596 },
+  { 0x1D79E, 40632 },
+  { 0x1D79F, 4108 },
+  { 0x1D7A0, 40673 },
+  { 0x1D7A1, 40710 },
+  { 0x1D7A2, 40749 },
+  { 0x1D7A3, 40788 },
+  { 0x1D7A4, 40825 },
+  { 0x1D7A5, 40866 },
+  { 0x1D7A6, 40903 },
+  { 0x1D7A7, 40940 },
+  { 0x1D7A8, 40977 },
+  { 0x1D7A9, 41016 },
+  { 0x1D7AA, 41034 },
+  { 0x1D7AB, 41071 },
+  { 0x1D7AC, 4032 },
+  { 0x1D7AD, 41107 },
+  { 0x1D7AE, 41144 },
+  { 0x1D7AF, 41183 },
+  { 0x1D7B0, 41219 },
+  { 0x1D7B1, 41254 },
+  { 0x1D7B2, 41291 },
+  { 0x1D7B3, 41327 },
+  { 0x1D7B4, 41364 },
+  { 0x1D7B5, 41401 },
+  { 0x1D7B6, 41435 },
+  { 0x1D7B7, 41469 },
+  { 0x1D7B8, 41503 },
+  { 0x1D7B9, 3998 },
+  { 0x1D7BA, 41542 },
+  { 0x1D7BB, 41577 },
+  { 0x1D7BC, 41620 },
+  { 0x1D7BD, 41657 },
+  { 0x1D7BE, 41692 },
+  { 0x1D7BF, 41731 },
+  { 0x1D7C0, 41766 },
+  { 0x1D7C1, 41801 },
+  { 0x1D7C2, 41836 },
+  { 0x1D7C3, 41873 },
+  { 0x1D7C4, 41906 },
+  { 0x1D7C5, 41946 },
+  { 0x1D7C6, 41977 },
+  { 0x1D7C7, 42008 },
+  { 0x1D7C8, 42037 },
+  { 0x1D7C9, 42066 },
+  { 0x1D7CA, 42094 },
+  { 0x1D7CB, 42127 },
+  { 0x1D7CE, 42166 },
+  { 0x1D7CF, 42189 },
+  { 0x1D7D0, 42211 },
+  { 0x1D7D1, 42233 },
+  { 0x1D7D2, 42257 },
+  { 0x1D7D3, 42280 },
+  { 0x1D7D4, 42303 },
+  { 0x1D7D5, 42325 },
+  { 0x1D7D6, 42349 },
+  { 0x1D7D7, 42373 },
+  { 0x1D7D8, 42166 },
+  { 0x1D7D9, 42189 },
+  { 0x1D7DA, 42211 },
+  { 0x1D7DB, 42233 },
+  { 0x1D7DC, 42257 },
+  { 0x1D7DD, 42280 },
+  { 0x1D7DE, 42303 },
+  { 0x1D7DF, 42325 },
+  { 0x1D7E0, 42349 },
+  { 0x1D7E1, 42373 },
+  { 0x1D7E2, 42166 },
+  { 0x1D7E3, 42189 },
+  { 0x1D7E4, 42211 },
+  { 0x1D7E5, 42233 },
+  { 0x1D7E6, 42257 },
+  { 0x1D7E7, 42280 },
+  { 0x1D7E8, 42303 },
+  { 0x1D7E9, 42325 },
+  { 0x1D7EA, 42349 },
+  { 0x1D7EB, 42373 },
+  { 0x1D7EC, 42166 },
+  { 0x1D7ED, 42189 },
+  { 0x1D7EE, 42211 },
+  { 0x1D7EF, 42233 },
+  { 0x1D7F0, 42257 },
+  { 0x1D7F1, 42280 },
+  { 0x1D7F2, 42303 },
+  { 0x1D7F3, 42325 },
+  { 0x1D7F4, 42349 },
+  { 0x1D7F5, 42373 },
+  { 0x1D7F6, 42166 },
+  { 0x1D7F7, 42189 },
+  { 0x1D7F8, 42211 },
+  { 0x1D7F9, 42233 },
+  { 0x1D7FA, 42257 },
+  { 0x1D7FB, 42280 },
+  { 0x1D7FC, 42303 },
+  { 0x1D7FD, 42325 },
+  { 0x1D7FE, 42349 },
+  { 0x1D7FF, 42373 },
+  { (gunichar)(-1), 0 } /* end marker */ 
+};
+
+static const char names_list_colons_strings[] = 
+  "0041 0300\0"
+  "0041 0301\0"
+  "0041 0302\0"
+  "0041 0303\0"
+  "0041 0308\0"
+  "0041 030A\0"
+  "0043 0327\0"
+  "0045 0300\0"
+  "0045 0301\0"
+  "0045 0302\0"
+  "0045 0308\0"
+  "0049 0300\0"
+  "0049 0301\0"
+  "0049 0302\0"
+  "0049 0308\0"
+  "004E 0303\0"
+  "004F 0300\0"
+  "004F 0301\0"
+  "004F 0302\0"
+  "004F 0303\0"
+  "004F 0308\0"
+  "0055 0300\0"
+  "0055 0301\0"
+  "0055 0302\0"
+  "0055 0308\0"
+  "0059 0301\0"
+  "0061 0300\0"
+  "0061 0301\0"
+  "0061 0302\0"
+  "0061 0303\0"
+  "0061 0308\0"
+  "0061 030A\0"
+  "0063 0327\0"
+  "0065 0300\0"
+  "0065 0301\0"
+  "0065 0302\0"
+  "0065 0308\0"
+  "0069 0300\0"
+  "0069 0301\0"
+  "0069 0302\0"
+  "0069 0308\0"
+  "006E 0303\0"
+  "006F 0300\0"
+  "006F 0301\0"
+  "006F 0302\0"
+  "006F 0303\0"
+  "006F 0308\0"
+  "0075 0300\0"
+  "0075 0301\0"
+  "0075 0302\0"
+  "0075 0308\0"
+  "0079 0301\0"
+  "0079 0308\0"
+  "0041 0304\0"
+  "0061 0304\0"
+  "0041 0306\0"
+  "0061 0306\0"
+  "0041 0328\0"
+  "0061 0328\0"
+  "0043 0301\0"
+  "0063 0301\0"
+  "0043 0302\0"
+  "0063 0302\0"
+  "0043 0307\0"
+  "0063 0307\0"
+  "0043 030C\0"
+  "0063 030C\0"
+  "0044 030C\0"
+  "0064 030C\0"
+  "0045 0304\0"
+  "0065 0304\0"
+  "0045 0306\0"
+  "0065 0306\0"
+  "0045 0307\0"
+  "0065 0307\0"
+  "0045 0328\0"
+  "0065 0328\0"
+  "0045 030C\0"
+  "0065 030C\0"
+  "0047 0302\0"
+  "0067 0302\0"
+  "0047 0306\0"
+  "0067 0306\0"
+  "0047 0307\0"
+  "0067 0307\0"
+  "0047 0327\0"
+  "0067 0327\0"
+  "0048 0302\0"
+  "0068 0302\0"
+  "0049 0303\0"
+  "0069 0303\0"
+  "0049 0304\0"
+  "0069 0304\0"
+  "0049 0306\0"
+  "0069 0306\0"
+  "0049 0328\0"
+  "0069 0328\0"
+  "0049 0307\0"
+  "004A 0302\0"
+  "006A 0302\0"
+  "004B 0327\0"
+  "006B 0327\0"
+  "004C 0301\0"
+  "006C 0301\0"
+  "004C 0327\0"
+  "006C 0327\0"
+  "004C 030C\0"
+  "006C 030C\0"
+  "004E 0301\0"
+  "006E 0301\0"
+  "004E 0327\0"
+  "006E 0327\0"
+  "004E 030C\0"
+  "006E 030C\0"
+  "004F 0304\0"
+  "006F 0304\0"
+  "004F 0306\0"
+  "006F 0306\0"
+  "004F 030B\0"
+  "006F 030B\0"
+  "0052 0301\0"
+  "0072 0301\0"
+  "0052 0327\0"
+  "0072 0327\0"
+  "0052 030C\0"
+  "0072 030C\0"
+  "0053 0301\0"
+  "0073 0301\0"
+  "0053 0302\0"
+  "0073 0302\0"
+  "0053 0327\0"
+  "0073 0327\0"
+  "0053 030C\0"
+  "0073 030C\0"
+  "0054 0327\0"
+  "0074 0327\0"
+  "0054 030C\0"
+  "0074 030C\0"
+  "0055 0303\0"
+  "0075 0303\0"
+  "0055 0304\0"
+  "0075 0304\0"
+  "0055 0306\0"
+  "0075 0306\0"
+  "0055 030A\0"
+  "0075 030A\0"
+  "0055 030B\0"
+  "0075 030B\0"
+  "0055 0328\0"
+  "0075 0328\0"
+  "0057 0302\0"
+  "0077 0302\0"
+  "0059 0302\0"
+  "0079 0302\0"
+  "0059 0308\0"
+  "005A 0301\0"
+  "007A 0301\0"
+  "005A 0307\0"
+  "007A 0307\0"
+  "005A 030C\0"
+  "007A 030C\0"
+  "004F 031B\0"
+  "006F 031B\0"
+  "0055 031B\0"
+  "0075 031B\0"
+  "0041 030C\0"
+  "0061 030C\0"
+  "0049 030C\0"
+  "0069 030C\0"
+  "004F 030C\0"
+  "006F 030C\0"
+  "0055 030C\0"
+  "0075 030C\0"
+  "00DC 0304\0"
+  "00FC 0304\0"
+  "00DC 0301\0"
+  "00FC 0301\0"
+  "00DC 030C\0"
+  "00FC 030C\0"
+  "00DC 0300\0"
+  "00FC 0300\0"
+  "00C4 0304\0"
+  "00E4 0304\0"
+  "0226 0304\0"
+  "0227 0304\0"
+  "00C6 0304\0"
+  "00E6 0304\0"
+  "0047 030C\0"
+  "0067 030C\0"
+  "004B 030C\0"
+  "006B 030C\0"
+  "004F 0328\0"
+  "006F 0328\0"
+  "01EA 0304\0"
+  "01EB 0304\0"
+  "01B7 030C\0"
+  "0292 030C\0"
+  "006A 030C\0"
+  "0047 0301\0"
+  "0067 0301\0"
+  "004E 0300\0"
+  "006E 0300\0"
+  "00C5 0301\0"
+  "00E5 0301\0"
+  "00C6 0301\0"
+  "00E6 0301\0"
+  "00D8 0301\0"
+  "00F8 0301\0"
+  "0041 030F\0"
+  "0061 030F\0"
+  "0041 0311\0"
+  "0061 0311\0"
+  "0045 030F\0"
+  "0065 030F\0"
+  "0045 0311\0"
+  "0065 0311\0"
+  "0049 030F\0"
+  "0069 030F\0"
+  "0049 0311\0"
+  "0069 0311\0"
+  "004F 030F\0"
+  "006F 030F\0"
+  "004F 0311\0"
+  "006F 0311\0"
+  "0052 030F\0"
+  "0072 030F\0"
+  "0052 0311\0"
+  "0072 0311\0"
+  "0055 030F\0"
+  "0075 030F\0"
+  "0055 0311\0"
+  "0075 0311\0"
+  "0053 0326\0"
+  "0073 0326\0"
+  "0054 0326\0"
+  "0074 0326\0"
+  "0048 030C\0"
+  "0068 030C\0"
+  "0041 0307\0"
+  "0061 0307\0"
+  "0045 0327\0"
+  "0065 0327\0"
+  "00D6 0304\0"
+  "00F6 0304\0"
+  "00D5 0304\0"
+  "00F5 0304\0"
+  "004F 0307\0"
+  "006F 0307\0"
+  "022E 0304\0"
+  "022F 0304\0"
+  "0059 0304\0"
+  "0079 0304\0"
+  "0300 combining grave accent\0"
+  "0301 combining acute accent\0"
+  "0313 combining comma above\0"
+  "0308 0301\0"
+  "02B9 modifier letter prime\0"
+  "003B semicolon\0"
+  "00A8 0301\0"
+  "0391 0301\0"
+  "00B7 middle dot\0"
+  "0395 0301\0"
+  "0397 0301\0"
+  "0399 0301\0"
+  "039F 0301\0"
+  "03A5 0301\0"
+  "03A9 0301\0"
+  "03CA 0301\0"
+  "0399 0308\0"
+  "03A5 0308\0"
+  "03B1 0301\0"
+  "03B5 0301\0"
+  "03B7 0301\0"
+  "03B9 0301\0"
+  "03CB 0301\0"
+  "03B9 0308\0"
+  "03C5 0308\0"
+  "03BF 0301\0"
+  "03C5 0301\0"
+  "03C9 0301\0"
+  "03D2 0301\0"
+  "03D2 0308\0"
+  "0415 0300\0"
+  "0415 0308\0"
+  "0413 0301\0"
+  "0406 0308\0"
+  "041A 0301\0"
+  "0418 0300\0"
+  "0423 0306\0"
+  "0418 0306\0"
+  "0438 0306\0"
+  "0435 0300\0"
+  "0435 0308\0"
+  "0433 0301\0"
+  "0456 0308\0"
+  "043A 0301\0"
+  "0438 0300\0"
+  "0443 0306\0"
+  "0474 030F\0"
+  "0475 030F\0"
+  "0416 0306\0"
+  "0436 0306\0"
+  "0410 0306\0"
+  "0430 0306\0"
+  "0410 0308\0"
+  "0430 0308\0"
+  "0415 0306\0"
+  "0435 0306\0"
+  "04D8 0308\0"
+  "04D9 0308\0"
+  "0416 0308\0"
+  "0436 0308\0"
+  "0417 0308\0"
+  "0437 0308\0"
+  "0418 0304\0"
+  "0438 0304\0"
+  "0418 0308\0"
+  "0438 0308\0"
+  "041E 0308\0"
+  "043E 0308\0"
+  "04E8 0308\0"
+  "04E9 0308\0"
+  "042D 0308\0"
+  "044D 0308\0"
+  "0423 0304\0"
+  "0443 0304\0"
+  "0423 0308\0"
+  "0443 0308\0"
+  "0423 030B\0"
+  "0443 030B\0"
+  "0427 0308\0"
+  "0447 0308\0"
+  "042B 0308\0"
+  "044B 0308\0"
+  "0627 0653\0"
+  "0627 0654\0"
+  "0648 0654\0"
+  "0627 0655\0"
+  "064A 0654\0"
+  "06D5 0654\0"
+  "06C1 0654\0"
+  "06D2 0654\0"
+  "0928 093C\0"
+  "0930 093C\0"
+  "0933 093C\0"
+  "0915 093C\0"
+  "0916 093C\0"
+  "0917 093C\0"
+  "091C 093C\0"
+  "0921 093C\0"
+  "0922 093C\0"
+  "092B 093C\0"
+  "092F 093C\0"
+  "09C7 09BE\0"
+  "09C7 09D7\0"
+  "09A1 09BC\0"
+  "09A2 09BC\0"
+  "09AF 09BC\0"
+  "0A32 0A3C\0"
+  "0A38 0A3C\0"
+  "0A16 0A3C\0"
+  "0A17 0A3C\0"
+  "0A1C 0A3C\0"
+  "0A2B 0A3C\0"
+  "0B47 0B56\0"
+  "0B47 0B3E\0"
+  "0B47 0B57\0"
+  "0B21 0B3C\0"
+  "0B22 0B3C\0"
+  "0B92 0BD7\0"
+  "0BC6 0BBE\0"
+  "0BC7 0BBE\0"
+  "0BC6 0BD7\0"
+  "0C46 0C56\0"
+  "0CBF 0CD5\0"
+  "0CC6 0CD5\0"
+  "0CC6 0CD6\0"
+  "0CC6 0CC2\0"
+  "0CCA 0CD5\0"
+  "0D46 0D3E\0"
+  "0D47 0D3E\0"
+  "0D46 0D57\0"
+  "0DD9 0DCA\0"
+  "0DD9 0DCF\0"
+  "0DDC 0DCA\0"
+  "0DD9 0DDF\0"
+  "0F42 0FB7\0"
+  "0F4C 0FB7\0"
+  "0F51 0FB7\0"
+  "0F56 0FB7\0"
+  "0F5B 0FB7\0"
+  "0F40 0FB5\0"
+  "0F71 0F72\0"
+  "0F71 0F74\0"
+  "0FB2 0F80\0"
+  "0FB3 0F80\0"
+  "0F71 0F80\0"
+  "0F92 0FB7\0"
+  "0F9C 0FB7\0"
+  "0FA1 0FB7\0"
+  "0FA6 0FB7\0"
+  "0FAB 0FB7\0"
+  "0F90 0FB5\0"
+  "1025 102E\0"
+  "1B05 1B35\0"
+  "1B07 1B35\0"
+  "1B09 1B35\0"
+  "1B0B 1B35\0"
+  "1B0D 1B35\0"
+  "1B11 1B35\0"
+  "1B3A 1B35\0"
+  "1B3C 1B35\0"
+  "1B3E 1B35\0"
+  "1B3F 1B35\0"
+  "1B42 1B35\0"
+  "0041 0325\0"
+  "0061 0325\0"
+  "0042 0307\0"
+  "0062 0307\0"
+  "0042 0323\0"
+  "0062 0323\0"
+  "0042 0331\0"
+  "0062 0331\0"
+  "00C7 0301\0"
+  "00E7 0301\0"
+  "0044 0307\0"
+  "0064 0307\0"
+  "0044 0323\0"
+  "0064 0323\0"
+  "0044 0331\0"
+  "0064 0331\0"
+  "0044 0327\0"
+  "0064 0327\0"
+  "0044 032D\0"
+  "0064 032D\0"
+  "0112 0300\0"
+  "0113 0300\0"
+  "0112 0301\0"
+  "0113 0301\0"
+  "0045 032D\0"
+  "0065 032D\0"
+  "0045 0330\0"
+  "0065 0330\0"
+  "0228 0306\0"
+  "0229 0306\0"
+  "0046 0307\0"
+  "0066 0307\0"
+  "0047 0304\0"
+  "0067 0304\0"
+  "0048 0307\0"
+  "0068 0307\0"
+  "0048 0323\0"
+  "0068 0323\0"
+  "0048 0308\0"
+  "0068 0308\0"
+  "0048 0327\0"
+  "0068 0327\0"
+  "0048 032E\0"
+  "0068 032E\0"
+  "0049 0330\0"
+  "0069 0330\0"
+  "00CF 0301\0"
+  "00EF 0301\0"
+  "004B 0301\0"
+  "006B 0301\0"
+  "004B 0323\0"
+  "006B 0323\0"
+  "004B 0331\0"
+  "006B 0331\0"
+  "004C 0323\0"
+  "006C 0323\0"
+  "1E36 0304\0"
+  "1E37 0304\0"
+  "004C 0331\0"
+  "006C 0331\0"
+  "004C 032D\0"
+  "006C 032D\0"
+  "004D 0301\0"
+  "006D 0301\0"
+  "004D 0307\0"
+  "006D 0307\0"
+  "004D 0323\0"
+  "006D 0323\0"
+  "004E 0307\0"
+  "006E 0307\0"
+  "004E 0323\0"
+  "006E 0323\0"
+  "004E 0331\0"
+  "006E 0331\0"
+  "004E 032D\0"
+  "006E 032D\0"
+  "00D5 0301\0"
+  "00F5 0301\0"
+  "00D5 0308\0"
+  "00F5 0308\0"
+  "014C 0300\0"
+  "014D 0300\0"
+  "014C 0301\0"
+  "014D 0301\0"
+  "0050 0301\0"
+  "0070 0301\0"
+  "0050 0307\0"
+  "0070 0307\0"
+  "0052 0307\0"
+  "0072 0307\0"
+  "0052 0323\0"
+  "0072 0323\0"
+  "1E5A 0304\0"
+  "1E5B 0304\0"
+  "0052 0331\0"
+  "0072 0331\0"
+  "0053 0307\0"
+  "0073 0307\0"
+  "0053 0323\0"
+  "0073 0323\0"
+  "015A 0307\0"
+  "015B 0307\0"
+  "0160 0307\0"
+  "0161 0307\0"
+  "1E62 0307\0"
+  "1E63 0307\0"
+  "0054 0307\0"
+  "0074 0307\0"
+  "0054 0323\0"
+  "0074 0323\0"
+  "0054 0331\0"
+  "0074 0331\0"
+  "0054 032D\0"
+  "0074 032D\0"
+  "0055 0324\0"
+  "0075 0324\0"
+  "0055 0330\0"
+  "0075 0330\0"
+  "0055 032D\0"
+  "0075 032D\0"
+  "0168 0301\0"
+  "0169 0301\0"
+  "016A 0308\0"
+  "016B 0308\0"
+  "0056 0303\0"
+  "0076 0303\0"
+  "0056 0323\0"
+  "0076 0323\0"
+  "0057 0300\0"
+  "0077 0300\0"
+  "0057 0301\0"
+  "0077 0301\0"
+  "0057 0308\0"
+  "0077 0308\0"
+  "0057 0307\0"
+  "0077 0307\0"
+  "0057 0323\0"
+  "0077 0323\0"
+  "0058 0307\0"
+  "0078 0307\0"
+  "0058 0308\0"
+  "0078 0308\0"
+  "0059 0307\0"
+  "0079 0307\0"
+  "005A 0302\0"
+  "007A 0302\0"
+  "005A 0323\0"
+  "007A 0323\0"
+  "005A 0331\0"
+  "007A 0331\0"
+  "0068 0331\0"
+  "0074 0308\0"
+  "0077 030A\0"
+  "0079 030A\0"
+  "017F 0307\0"
+  "0041 0323\0"
+  "0061 0323\0"
+  "0041 0309\0"
+  "0061 0309\0"
+  "00C2 0301\0"
+  "00E2 0301\0"
+  "00C2 0300\0"
+  "00E2 0300\0"
+  "00C2 0309\0"
+  "00E2 0309\0"
+  "00C2 0303\0"
+  "00E2 0303\0"
+  "1EA0 0302\0"
+  "1EA1 0302\0"
+  "0102 0301\0"
+  "0103 0301\0"
+  "0102 0300\0"
+  "0103 0300\0"
+  "0102 0309\0"
+  "0103 0309\0"
+  "0102 0303\0"
+  "0103 0303\0"
+  "1EA0 0306\0"
+  "1EA1 0306\0"
+  "0045 0323\0"
+  "0065 0323\0"
+  "0045 0309\0"
+  "0065 0309\0"
+  "0045 0303\0"
+  "0065 0303\0"
+  "00CA 0301\0"
+  "00EA 0301\0"
+  "00CA 0300\0"
+  "00EA 0300\0"
+  "00CA 0309\0"
+  "00EA 0309\0"
+  "00CA 0303\0"
+  "00EA 0303\0"
+  "1EB8 0302\0"
+  "1EB9 0302\0"
+  "0049 0309\0"
+  "0069 0309\0"
+  "0049 0323\0"
+  "0069 0323\0"
+  "004F 0323\0"
+  "006F 0323\0"
+  "004F 0309\0"
+  "006F 0309\0"
+  "00D4 0301\0"
+  "00F4 0301\0"
+  "00D4 0300\0"
+  "00F4 0300\0"
+  "00D4 0309\0"
+  "00F4 0309\0"
+  "00D4 0303\0"
+  "00F4 0303\0"
+  "1ECC 0302\0"
+  "1ECD 0302\0"
+  "01A0 0301\0"
+  "01A1 0301\0"
+  "01A0 0300\0"
+  "01A1 0300\0"
+  "01A0 0309\0"
+  "01A1 0309\0"
+  "01A0 0303\0"
+  "01A1 0303\0"
+  "01A0 0323\0"
+  "01A1 0323\0"
+  "0055 0323\0"
+  "0075 0323\0"
+  "0055 0309\0"
+  "0075 0309\0"
+  "01AF 0301\0"
+  "01B0 0301\0"
+  "01AF 0300\0"
+  "01B0 0300\0"
+  "01AF 0309\0"
+  "01B0 0309\0"
+  "01AF 0303\0"
+  "01B0 0303\0"
+  "01AF 0323\0"
+  "01B0 0323\0"
+  "0059 0300\0"
+  "0079 0300\0"
+  "0059 0323\0"
+  "0079 0323\0"
+  "0059 0309\0"
+  "0079 0309\0"
+  "0059 0303\0"
+  "0079 0303\0"
+  "03B1 0313\0"
+  "03B1 0314\0"
+  "1F00 0300\0"
+  "1F01 0300\0"
+  "1F00 0301\0"
+  "1F01 0301\0"
+  "1F00 0342\0"
+  "1F01 0342\0"
+  "0391 0313\0"
+  "0391 0314\0"
+  "1F08 0300\0"
+  "1F09 0300\0"
+  "1F08 0301\0"
+  "1F09 0301\0"
+  "1F08 0342\0"
+  "1F09 0342\0"
+  "03B5 0313\0"
+  "03B5 0314\0"
+  "1F10 0300\0"
+  "1F11 0300\0"
+  "1F10 0301\0"
+  "1F11 0301\0"
+  "0395 0313\0"
+  "0395 0314\0"
+  "1F18 0300\0"
+  "1F19 0300\0"
+  "1F18 0301\0"
+  "1F19 0301\0"
+  "03B7 0313\0"
+  "03B7 0314\0"
+  "1F20 0300\0"
+  "1F21 0300\0"
+  "1F20 0301\0"
+  "1F21 0301\0"
+  "1F20 0342\0"
+  "1F21 0342\0"
+  "0397 0313\0"
+  "0397 0314\0"
+  "1F28 0300\0"
+  "1F29 0300\0"
+  "1F28 0301\0"
+  "1F29 0301\0"
+  "1F28 0342\0"
+  "1F29 0342\0"
+  "03B9 0313\0"
+  "03B9 0314\0"
+  "1F30 0300\0"
+  "1F31 0300\0"
+  "1F30 0301\0"
+  "1F31 0301\0"
+  "1F30 0342\0"
+  "1F31 0342\0"
+  "0399 0313\0"
+  "0399 0314\0"
+  "1F38 0300\0"
+  "1F39 0300\0"
+  "1F38 0301\0"
+  "1F39 0301\0"
+  "1F38 0342\0"
+  "1F39 0342\0"
+  "03BF 0313\0"
+  "03BF 0314\0"
+  "1F40 0300\0"
+  "1F41 0300\0"
+  "1F40 0301\0"
+  "1F41 0301\0"
+  "039F 0313\0"
+  "039F 0314\0"
+  "1F48 0300\0"
+  "1F49 0300\0"
+  "1F48 0301\0"
+  "1F49 0301\0"
+  "03C5 0313\0"
+  "03C5 0314\0"
+  "1F50 0300\0"
+  "1F51 0300\0"
+  "1F50 0301\0"
+  "1F51 0301\0"
+  "1F50 0342\0"
+  "1F51 0342\0"
+  "03A5 0314\0"
+  "1F59 0300\0"
+  "1F59 0301\0"
+  "1F59 0342\0"
+  "03C9 0313\0"
+  "03C9 0314\0"
+  "1F60 0300\0"
+  "1F61 0300\0"
+  "1F60 0301\0"
+  "1F61 0301\0"
+  "1F60 0342\0"
+  "1F61 0342\0"
+  "03A9 0313\0"
+  "03A9 0314\0"
+  "1F68 0300\0"
+  "1F69 0300\0"
+  "1F68 0301\0"
+  "1F69 0301\0"
+  "1F68 0342\0"
+  "1F69 0342\0"
+  "03B1 0300\0"
+  "03AC greek small letter alpha with tonos\0"
+  "03B5 0300\0"
+  "03AD greek small letter epsilon with tonos\0"
+  "03B7 0300\0"
+  "03AE greek small letter eta with tonos\0"
+  "03B9 0300\0"
+  "03AF greek small letter iota with tonos\0"
+  "03BF 0300\0"
+  "03CC greek small letter omicron with tonos\0"
+  "03C5 0300\0"
+  "03CD greek small letter upsilon with tonos\0"
+  "03C9 0300\0"
+  "03CE greek small letter omega with tonos\0"
+  "1F00 0345\0"
+  "1F01 0345\0"
+  "1F02 0345\0"
+  "1F03 0345\0"
+  "1F04 0345\0"
+  "1F05 0345\0"
+  "1F06 0345\0"
+  "1F07 0345\0"
+  "1F08 0345\0"
+  "1F09 0345\0"
+  "1F0A 0345\0"
+  "1F0B 0345\0"
+  "1F0C 0345\0"
+  "1F0D 0345\0"
+  "1F0E 0345\0"
+  "1F0F 0345\0"
+  "1F20 0345\0"
+  "1F21 0345\0"
+  "1F22 0345\0"
+  "1F23 0345\0"
+  "1F24 0345\0"
+  "1F25 0345\0"
+  "1F26 0345\0"
+  "1F27 0345\0"
+  "1F28 0345\0"
+  "1F29 0345\0"
+  "1F2A 0345\0"
+  "1F2B 0345\0"
+  "1F2C 0345\0"
+  "1F2D 0345\0"
+  "1F2E 0345\0"
+  "1F2F 0345\0"
+  "1F60 0345\0"
+  "1F61 0345\0"
+  "1F62 0345\0"
+  "1F63 0345\0"
+  "1F64 0345\0"
+  "1F65 0345\0"
+  "1F66 0345\0"
+  "1F67 0345\0"
+  "1F68 0345\0"
+  "1F69 0345\0"
+  "1F6A 0345\0"
+  "1F6B 0345\0"
+  "1F6C 0345\0"
+  "1F6D 0345\0"
+  "1F6E 0345\0"
+  "1F6F 0345\0"
+  "03B1 0306\0"
+  "03B1 0304\0"
+  "1F70 0345\0"
+  "03B1 0345\0"
+  "03AC 0345\0"
+  "03B1 0342\0"
+  "1FB6 0345\0"
+  "0391 0306\0"
+  "0391 0304\0"
+  "0391 0300\0"
+  "0386 greek capital letter alpha with tonos\0"
+  "0391 0345\0"
+  "03B9 greek small letter iota\0"
+  "00A8 0342\0"
+  "1F74 0345\0"
+  "03B7 0345\0"
+  "03AE 0345\0"
+  "03B7 0342\0"
+  "1FC6 0345\0"
+  "0395 0300\0"
+  "0388 greek capital letter epsilon with tonos\0"
+  "0397 0300\0"
+  "0389 greek capital letter eta with tonos\0"
+  "0397 0345\0"
+  "1FBF 0300\0"
+  "1FBF 0301\0"
+  "1FBF 0342\0"
+  "03B9 0306\0"
+  "03B9 0304\0"
+  "03CA 0300\0"
+  "0390 greek small letter iota with dialytika and tonos\0"
+  "03B9 0342\0"
+  "03CA 0342\0"
+  "0399 0306\0"
+  "0399 0304\0"
+  "0399 0300\0"
+  "038A greek capital letter iota with tonos\0"
+  "1FFE 0300\0"
+  "1FFE 0301\0"
+  "1FFE 0342\0"
+  "03C5 0306\0"
+  "03C5 0304\0"
+  "03CB 0300\0"
+  "03B0 greek small letter upsilon with dialytika and tonos\0"
+  "03C1 0313\0"
+  "03C1 0314\0"
+  "03C5 0342\0"
+  "03CB 0342\0"
+  "03A5 0306\0"
+  "03A5 0304\0"
+  "03A5 0300\0"
+  "038E greek capital letter upsilon with tonos\0"
+  "03A1 0314\0"
+  "00A8 0300\0"
+  "0385 greek dialytika tonos\0"
+  "0060 grave accent\0"
+  "1F7C 0345\0"
+  "03C9 0345\0"
+  "03CE 0345\0"
+  "03C9 0342\0"
+  "1FF6 0345\0"
+  "039F 0300\0"
+  "038C greek capital letter omicron with tonos\0"
+  "03A9 0300\0"
+  "038F greek capital letter omega with tonos\0"
+  "03A9 0345\0"
+  "00B4 acute accent\0"
+  "2002 en space\0"
+  "2003 em space\0"
+  "03A9 greek capital letter omega\0"
+  "004B latin capital letter k\0"
+  "00C5 latin capital letter a with ring above\0"
+  "2190 0338\0"
+  "2192 0338\0"
+  "2194 0338\0"
+  "21D0 0338\0"
+  "21D4 0338\0"
+  "21D2 0338\0"
+  "2203 0338\0"
+  "2208 0338\0"
+  "220B 0338\0"
+  "2223 0338\0"
+  "2225 0338\0"
+  "223C 0338\0"
+  "2243 0338\0"
+  "2245 0338\0"
+  "2248 0338\0"
+  "003D 0338\0"
+  "2261 0338\0"
+  "224D 0338\0"
+  "003C 0338\0"
+  "003E 0338\0"
+  "2264 0338\0"
+  "2265 0338\0"
+  "2272 0338\0"
+  "2273 0338\0"
+  "2276 0338\0"
+  "2277 0338\0"
+  "227A 0338\0"
+  "227B 0338\0"
+  "2282 0338\0"
+  "2283 0338\0"
+  "2286 0338\0"
+  "2287 0338\0"
+  "22A2 0338\0"
+  "22A8 0338\0"
+  "22A9 0338\0"
+  "22AB 0338\0"
+  "227C 0338\0"
+  "227D 0338\0"
+  "2291 0338\0"
+  "2292 0338\0"
+  "22B2 0338\0"
+  "22B3 0338\0"
+  "22B4 0338\0"
+  "22B5 0338\0"
+  "3008 left angle bracket\0"
+  "3009 right angle bracket\0"
+  "2ADD 0338\0"
+  "304B 3099\0"
+  "304D 3099\0"
+  "304F 3099\0"
+  "3051 3099\0"
+  "3053 3099\0"
+  "3055 3099\0"
+  "3057 3099\0"
+  "3059 3099\0"
+  "305B 3099\0"
+  "305D 3099\0"
+  "305F 3099\0"
+  "3061 3099\0"
+  "3064 3099\0"
+  "3066 3099\0"
+  "3068 3099\0"
+  "306F 3099\0"
+  "306F 309A\0"
+  "3072 3099\0"
+  "3072 309A\0"
+  "3075 3099\0"
+  "3075 309A\0"
+  "3078 3099\0"
+  "3078 309A\0"
+  "307B 3099\0"
+  "307B 309A\0"
+  "3046 3099\0"
+  "309D 3099\0"
+  "30AB 3099\0"
+  "30AD 3099\0"
+  "30AF 3099\0"
+  "30B1 3099\0"
+  "30B3 3099\0"
+  "30B5 3099\0"
+  "30B7 3099\0"
+  "30B9 3099\0"
+  "30BB 3099\0"
+  "30BD 3099\0"
+  "30BF 3099\0"
+  "30C1 3099\0"
+  "30C4 3099\0"
+  "30C6 3099\0"
+  "30C8 3099\0"
+  "30CF 3099\0"
+  "30CF 309A\0"
+  "30D2 3099\0"
+  "30D2 309A\0"
+  "30D5 3099\0"
+  "30D5 309A\0"
+  "30D8 3099\0"
+  "30D8 309A\0"
+  "30DB 3099\0"
+  "30DB 309A\0"
+  "30A6 3099\0"
+  "30EF 3099\0"
+  "30F0 3099\0"
+  "30F1 3099\0"
+  "30F2 3099\0"
+  "30FD 3099\0"
+  "8C48\0"
+  "66F4\0"
+  "8ECA\0"
+  "8CC8\0"
+  "6ED1\0"
+  "4E32\0"
+  "53E5\0"
+  "9F9C\0"
+  "5951\0"
+  "91D1\0"
+  "5587\0"
+  "5948\0"
+  "61F6\0"
+  "7669\0"
+  "7F85\0"
+  "863F\0"
+  "87BA\0"
+  "88F8\0"
+  "908F\0"
+  "6A02\0"
+  "6D1B\0"
+  "70D9\0"
+  "73DE\0"
+  "843D\0"
+  "916A\0"
+  "99F1\0"
+  "4E82\0"
+  "5375\0"
+  "6B04\0"
+  "721B\0"
+  "862D\0"
+  "9E1E\0"
+  "5D50\0"
+  "6FEB\0"
+  "85CD\0"
+  "8964\0"
+  "62C9\0"
+  "81D8\0"
+  "881F\0"
+  "5ECA\0"
+  "6717\0"
+  "6D6A\0"
+  "72FC\0"
+  "90CE\0"
+  "4F86\0"
+  "51B7\0"
+  "52DE\0"
+  "64C4\0"
+  "6AD3\0"
+  "7210\0"
+  "76E7\0"
+  "8001\0"
+  "8606\0"
+  "865C\0"
+  "8DEF\0"
+  "9732\0"
+  "9B6F\0"
+  "9DFA\0"
+  "788C\0"
+  "797F\0"
+  "7DA0\0"
+  "83C9\0"
+  "9304\0"
+  "9E7F\0"
+  "8AD6\0"
+  "58DF\0"
+  "5F04\0"
+  "7C60\0"
+  "807E\0"
+  "7262\0"
+  "78CA\0"
+  "8CC2\0"
+  "96F7\0"
+  "58D8\0"
+  "5C62\0"
+  "6A13\0"
+  "6DDA\0"
+  "6F0F\0"
+  "7D2F\0"
+  "7E37\0"
+  "964B\0"
+  "52D2\0"
+  "808B\0"
+  "51DC\0"
+  "51CC\0"
+  "7A1C\0"
+  "7DBE\0"
+  "83F1\0"
+  "9675\0"
+  "8B80\0"
+  "62CF\0"
+  "8AFE\0"
+  "4E39\0"
+  "5BE7\0"
+  "6012\0"
+  "7387\0"
+  "7570\0"
+  "5317\0"
+  "78FB\0"
+  "4FBF\0"
+  "5FA9\0"
+  "4E0D\0"
+  "6CCC\0"
+  "6578\0"
+  "7D22\0"
+  "53C3\0"
+  "585E\0"
+  "7701\0"
+  "8449\0"
+  "8AAA\0"
+  "6BBA\0"
+  "8FB0\0"
+  "6C88\0"
+  "62FE\0"
+  "82E5\0"
+  "63A0\0"
+  "7565\0"
+  "4EAE\0"
+  "5169\0"
+  "51C9\0"
+  "6881\0"
+  "7CE7\0"
+  "826F\0"
+  "8AD2\0"
+  "91CF\0"
+  "52F5\0"
+  "5442\0"
+  "5973\0"
+  "5EEC\0"
+  "65C5\0"
+  "6FFE\0"
+  "792A\0"
+  "95AD\0"
+  "9A6A\0"
+  "9E97\0"
+  "9ECE\0"
+  "529B\0"
+  "66C6\0"
+  "6B77\0"
+  "8F62\0"
+  "5E74\0"
+  "6190\0"
+  "6200\0"
+  "649A\0"
+  "6F23\0"
+  "7149\0"
+  "7489\0"
+  "79CA\0"
+  "7DF4\0"
+  "806F\0"
+  "8F26\0"
+  "84EE\0"
+  "9023\0"
+  "934A\0"
+  "5217\0"
+  "52A3\0"
+  "54BD\0"
+  "70C8\0"
+  "88C2\0"
+  "5EC9\0"
+  "5FF5\0"
+  "637B\0"
+  "6BAE\0"
+  "7C3E\0"
+  "7375\0"
+  "4EE4\0"
+  "56F9\0"
+  "5DBA\0"
+  "601C\0"
+  "73B2\0"
+  "7469\0"
+  "7F9A\0"
+  "8046\0"
+  "9234\0"
+  "96F6\0"
+  "9748\0"
+  "9818\0"
+  "4F8B\0"
+  "79AE\0"
+  "91B4\0"
+  "96B8\0"
+  "60E1\0"
+  "4E86\0"
+  "50DA\0"
+  "5BEE\0"
+  "5C3F\0"
+  "6599\0"
+  "71CE\0"
+  "7642\0"
+  "84FC\0"
+  "907C\0"
+  "9F8D\0"
+  "6688\0"
+  "962E\0"
+  "5289\0"
+  "677B\0"
+  "67F3\0"
+  "6D41\0"
+  "6E9C\0"
+  "7409\0"
+  "7559\0"
+  "786B\0"
+  "7D10\0"
+  "985E\0"
+  "516D\0"
+  "622E\0"
+  "9678\0"
+  "502B\0"
+  "5D19\0"
+  "6DEA\0"
+  "8F2A\0"
+  "5F8B\0"
+  "6144\0"
+  "6817\0"
+  "9686\0"
+  "5229\0"
+  "540F\0"
+  "5C65\0"
+  "6613\0"
+  "674E\0"
+  "68A8\0"
+  "6CE5\0"
+  "7406\0"
+  "75E2\0"
+  "7F79\0"
+  "88CF\0"
+  "88E1\0"
+  "91CC\0"
+  "96E2\0"
+  "533F\0"
+  "6EBA\0"
+  "541D\0"
+  "71D0\0"
+  "7498\0"
+  "85FA\0"
+  "96A3\0"
+  "9C57\0"
+  "9E9F\0"
+  "6797\0"
+  "6DCB\0"
+  "81E8\0"
+  "7ACB\0"
+  "7B20\0"
+  "7C92\0"
+  "72C0\0"
+  "7099\0"
+  "8B58\0"
+  "4EC0\0"
+  "8336\0"
+  "523A\0"
+  "5207\0"
+  "5EA6\0"
+  "62D3\0"
+  "7CD6\0"
+  "5B85\0"
+  "6D1E\0"
+  "66B4\0"
+  "8F3B\0"
+  "884C\0"
+  "964D\0"
+  "898B\0"
+  "5ED3\0"
+  "5140\0"
+  "55C0\0"
+  "585A\0"
+  "6674\0"
+  "51DE\0"
+  "732A\0"
+  "76CA\0"
+  "793C\0"
+  "795E\0"
+  "7965\0"
+  "798F\0"
+  "9756\0"
+  "7CBE\0"
+  "7FBD\0"
+  "8612\0"
+  "8AF8\0"
+  "9038\0"
+  "90FD\0"
+  "98EF\0"
+  "98FC\0"
+  "9928\0"
+  "9DB4\0"
+  "4FAE\0"
+  "50E7\0"
+  "514D\0"
+  "52C9\0"
+  "52E4\0"
+  "5351\0"
+  "559D\0"
+  "5606\0"
+  "5668\0"
+  "5840\0"
+  "58A8\0"
+  "5C64\0"
+  "5C6E\0"
+  "6094\0"
+  "6168\0"
+  "618E\0"
+  "61F2\0"
+  "654F\0"
+  "65E2\0"
+  "6691\0"
+  "6885\0"
+  "6D77\0"
+  "6E1A\0"
+  "6F22\0"
+  "716E\0"
+  "722B\0"
+  "7422\0"
+  "7891\0"
+  "793E\0"
+  "7949\0"
+  "7948\0"
+  "7950\0"
+  "7956\0"
+  "795D\0"
+  "798D\0"
+  "798E\0"
+  "7A40\0"
+  "7A81\0"
+  "7BC0\0"
+  "7E09\0"
+  "7E41\0"
+  "7F72\0"
+  "8005\0"
+  "81ED\0"
+  "8279\0"
+  "8457\0"
+  "8910\0"
+  "8996\0"
+  "8B01\0"
+  "8B39\0"
+  "8CD3\0"
+  "8D08\0"
+  "8FB6\0"
+  "96E3\0"
+  "97FF\0"
+  "983B\0"
+  "4E26\0"
+  "51B5\0"
+  "5168\0"
+  "4F80\0"
+  "5145\0"
+  "5180\0"
+  "52C7\0"
+  "52FA\0"
+  "5555\0"
+  "5599\0"
+  "55E2\0"
+  "58B3\0"
+  "5944\0"
+  "5954\0"
+  "5A62\0"
+  "5B28\0"
+  "5ED2\0"
+  "5ED9\0"
+  "5F69\0"
+  "5FAD\0"
+  "60D8\0"
+  "614E\0"
+  "6108\0"
+  "6160\0"
+  "6234\0"
+  "63C4\0"
+  "641C\0"
+  "6452\0"
+  "6556\0"
+  "671B\0"
+  "6756\0"
+  "6B79\0"
+  "6EDB\0"
+  "6ECB\0"
+  "701E\0"
+  "77A7\0"
+  "7235\0"
+  "72AF\0"
+  "7471\0"
+  "7506\0"
+  "753B\0"
+  "761D\0"
+  "761F\0"
+  "76DB\0"
+  "76F4\0"
+  "774A\0"
+  "7740\0"
+  "78CC\0"
+  "7AB1\0"
+  "7C7B\0"
+  "7D5B\0"
+  "7F3E\0"
+  "8352\0"
+  "83EF\0"
+  "8779\0"
+  "8941\0"
+  "8986\0"
+  "8ABF\0"
+  "8ACB\0"
+  "8AED\0"
+  "8B8A\0"
+  "8F38\0"
+  "9072\0"
+  "9199\0"
+  "9276\0"
+  "967C\0"
+  "97DB\0"
+  "980B\0"
+  "9B12\0"
+  "2284A\0"
+  "22844\0"
+  "233D5\0"
+  "3B9D\0"
+  "4018\0"
+  "4039\0"
+  "25249\0"
+  "25CD0\0"
+  "27ED3\0"
+  "9F43\0"
+  "9F8E\0"
+  "05D9 05B4\0"
+  "05F2 05B7\0"
+  "05E9 05C1\0"
+  "05E9 05C2\0"
+  "FB49 05C1\0"
+  "FB49 05C2\0"
+  "05D0 05B7\0"
+  "05D0 05B8\0"
+  "05D0 05BC\0"
+  "05D1 05BC\0"
+  "05D2 05BC\0"
+  "05D3 05BC\0"
+  "05D4 05BC\0"
+  "05D5 05BC\0"
+  "05D6 05BC\0"
+  "05D8 05BC\0"
+  "05D9 05BC\0"
+  "05DA 05BC\0"
+  "05DB 05BC\0"
+  "05DC 05BC\0"
+  "05DE 05BC\0"
+  "05E0 05BC\0"
+  "05E1 05BC\0"
+  "05E3 05BC\0"
+  "05E4 05BC\0"
+  "05E6 05BC\0"
+  "05E7 05BC\0"
+  "05E8 05BC\0"
+  "05E9 05BC\0"
+  "05EA 05BC\0"
+  "05D5 05B9\0"
+  "05D1 05BF\0"
+  "05DB 05BF\0"
+  "05E4 05BF\0"
+  "1D157 1D165\0"
+  "1D158 1D165\0"
+  "1D15F 1D16E\0"
+  "1D15F 1D16F\0"
+  "1D15F 1D170\0"
+  "1D15F 1D171\0"
+  "1D15F 1D172\0"
+  "1D1B9 1D165\0"
+  "1D1BA 1D165\0"
+  "1D1BB 1D16E\0"
+  "1D1BC 1D16E\0"
+  "1D1BB 1D16F\0"
+  "1D1BC 1D16F\0"
+  "4E3D\0"
+  "4E38\0"
+  "4E41\0"
+  "20122\0"
+  "4F60\0"
+  "4FBB\0"
+  "5002\0"
+  "507A\0"
+  "5099\0"
+  "50CF\0"
+  "349E\0"
+  "2063A\0"
+  "5154\0"
+  "5164\0"
+  "5177\0"
+  "2051C\0"
+  "34B9\0"
+  "5167\0"
+  "518D\0"
+  "2054B\0"
+  "5197\0"
+  "51A4\0"
+  "4ECC\0"
+  "51AC\0"
+  "291DF\0"
+  "51F5\0"
+  "5203\0"
+  "34DF\0"
+  "523B\0"
+  "5246\0"
+  "5272\0"
+  "5277\0"
+  "3515\0"
+  "5305\0"
+  "5306\0"
+  "5349\0"
+  "535A\0"
+  "5373\0"
+  "537D\0"
+  "537F\0"
+  "20A2C\0"
+  "7070\0"
+  "53CA\0"
+  "53DF\0"
+  "20B63\0"
+  "53EB\0"
+  "53F1\0"
+  "5406\0"
+  "549E\0"
+  "5438\0"
+  "5448\0"
+  "5468\0"
+  "54A2\0"
+  "54F6\0"
+  "5510\0"
+  "5553\0"
+  "5563\0"
+  "5584\0"
+  "55AB\0"
+  "55B3\0"
+  "55C2\0"
+  "5716\0"
+  "5717\0"
+  "5651\0"
+  "5674\0"
+  "58EE\0"
+  "57CE\0"
+  "57F4\0"
+  "580D\0"
+  "578B\0"
+  "5832\0"
+  "5831\0"
+  "58AC\0"
+  "214E4\0"
+  "58F2\0"
+  "58F7\0"
+  "5906\0"
+  "591A\0"
+  "5922\0"
+  "5962\0"
+  "216A8\0"
+  "216EA\0"
+  "59EC\0"
+  "5A1B\0"
+  "5A27\0"
+  "59D8\0"
+  "5A66\0"
+  "36EE\0"
+  "36FC\0"
+  "5B08\0"
+  "5B3E\0"
+  "219C8\0"
+  "5BC3\0"
+  "5BD8\0"
+  "5BF3\0"
+  "21B18\0"
+  "5BFF\0"
+  "5C06\0"
+  "5F53\0"
+  "5C22\0"
+  "3781\0"
+  "5C60\0"
+  "5CC0\0"
+  "5C8D\0"
+  "21DE4\0"
+  "5D43\0"
+  "21DE6\0"
+  "5D6E\0"
+  "5D6B\0"
+  "5D7C\0"
+  "5DE1\0"
+  "5DE2\0"
+  "382F\0"
+  "5DFD\0"
+  "5E28\0"
+  "5E3D\0"
+  "5E69\0"
+  "3862\0"
+  "22183\0"
+  "387C\0"
+  "5EB0\0"
+  "5EB3\0"
+  "5EB6\0"
+  "2A392\0"
+  "5EFE\0"
+  "22331\0"
+  "8201\0"
+  "5F22\0"
+  "38C7\0"
+  "232B8\0"
+  "261DA\0"
+  "5F62\0"
+  "5F6B\0"
+  "38E3\0"
+  "5F9A\0"
+  "5FCD\0"
+  "5FD7\0"
+  "5FF9\0"
+  "6081\0"
+  "393A\0"
+  "391C\0"
+  "226D4\0"
+  "60C7\0"
+  "6148\0"
+  "614C\0"
+  "617A\0"
+  "61B2\0"
+  "61A4\0"
+  "61AF\0"
+  "61DE\0"
+  "6210\0"
+  "621B\0"
+  "625D\0"
+  "62B1\0"
+  "62D4\0"
+  "6350\0"
+  "22B0C\0"
+  "633D\0"
+  "62FC\0"
+  "6368\0"
+  "6383\0"
+  "63E4\0"
+  "22BF1\0"
+  "6422\0"
+  "63C5\0"
+  "63A9\0"
+  "3A2E\0"
+  "6469\0"
+  "647E\0"
+  "649D\0"
+  "6477\0"
+  "3A6C\0"
+  "656C\0"
+  "2300A\0"
+  "65E3\0"
+  "66F8\0"
+  "6649\0"
+  "3B19\0"
+  "3B08\0"
+  "3AE4\0"
+  "5192\0"
+  "5195\0"
+  "6700\0"
+  "669C\0"
+  "80AD\0"
+  "43D9\0"
+  "6721\0"
+  "675E\0"
+  "6753\0"
+  "233C3\0"
+  "3B49\0"
+  "67FA\0"
+  "6785\0"
+  "6852\0"
+  "2346D\0"
+  "688E\0"
+  "681F\0"
+  "6914\0"
+  "6942\0"
+  "69A3\0"
+  "69EA\0"
+  "6AA8\0"
+  "236A3\0"
+  "6ADB\0"
+  "3C18\0"
+  "6B21\0"
+  "238A7\0"
+  "6B54\0"
+  "3C4E\0"
+  "6B72\0"
+  "6B9F\0"
+  "6BBB\0"
+  "23A8D\0"
+  "21D0B\0"
+  "23AFA\0"
+  "6C4E\0"
+  "23CBC\0"
+  "6CBF\0"
+  "6CCD\0"
+  "6C67\0"
+  "6D16\0"
+  "6D3E\0"
+  "6D69\0"
+  "6D78\0"
+  "6D85\0"
+  "23D1E\0"
+  "6D34\0"
+  "6E2F\0"
+  "6E6E\0"
+  "3D33\0"
+  "6EC7\0"
+  "23ED1\0"
+  "6DF9\0"
+  "6F6E\0"
+  "23F5E\0"
+  "23F8E\0"
+  "6FC6\0"
+  "7039\0"
+  "701B\0"
+  "3D96\0"
+  "704A\0"
+  "707D\0"
+  "7077\0"
+  "70AD\0"
+  "20525\0"
+  "7145\0"
+  "24263\0"
+  "719C\0"
+  "243AB\0"
+  "7228\0"
+  "7250\0"
+  "24608\0"
+  "7280\0"
+  "7295\0"
+  "24735\0"
+  "24814\0"
+  "737A\0"
+  "738B\0"
+  "3EAC\0"
+  "73A5\0"
+  "3EB8\0"
+  "7447\0"
+  "745C\0"
+  "7485\0"
+  "74CA\0"
+  "3F1B\0"
+  "7524\0"
+  "24C36\0"
+  "753E\0"
+  "24C92\0"
+  "2219F\0"
+  "7610\0"
+  "24FA1\0"
+  "24FB8\0"
+  "25044\0"
+  "3FFC\0"
+  "4008\0"
+  "250F3\0"
+  "250F2\0"
+  "25119\0"
+  "25133\0"
+  "771E\0"
+  "771F\0"
+  "778B\0"
+  "4046\0"
+  "4096\0"
+  "2541D\0"
+  "784E\0"
+  "40E3\0"
+  "25626\0"
+  "2569A\0"
+  "256C5\0"
+  "79EB\0"
+  "412F\0"
+  "7A4A\0"
+  "7A4F\0"
+  "2597C\0"
+  "25AA7\0"
+  "7AEE\0"
+  "4202\0"
+  "25BAB\0"
+  "7BC6\0"
+  "7BC9\0"
+  "4227\0"
+  "25C80\0"
+  "7CD2\0"
+  "42A0\0"
+  "7CE8\0"
+  "7CE3\0"
+  "7D00\0"
+  "25F86\0"
+  "7D63\0"
+  "4301\0"
+  "7DC7\0"
+  "7E02\0"
+  "7E45\0"
+  "4334\0"
+  "26228\0"
+  "26247\0"
+  "4359\0"
+  "262D9\0"
+  "7F7A\0"
+  "2633E\0"
+  "7F95\0"
+  "7FFA\0"
+  "264DA\0"
+  "26523\0"
+  "8060\0"
+  "265A8\0"
+  "8070\0"
+  "2335F\0"
+  "43D5\0"
+  "80B2\0"
+  "8103\0"
+  "440B\0"
+  "813E\0"
+  "5AB5\0"
+  "267A7\0"
+  "267B5\0"
+  "23393\0"
+  "2339C\0"
+  "8204\0"
+  "8F9E\0"
+  "446B\0"
+  "8291\0"
+  "828B\0"
+  "829D\0"
+  "52B3\0"
+  "82B1\0"
+  "82B3\0"
+  "82BD\0"
+  "82E6\0"
+  "26B3C\0"
+  "831D\0"
+  "8363\0"
+  "83AD\0"
+  "8323\0"
+  "83BD\0"
+  "83E7\0"
+  "8353\0"
+  "83CA\0"
+  "83CC\0"
+  "83DC\0"
+  "26C36\0"
+  "26D6B\0"
+  "26CD5\0"
+  "452B\0"
+  "84F1\0"
+  "84F3\0"
+  "8516\0"
+  "273CA\0"
+  "8564\0"
+  "26F2C\0"
+  "455D\0"
+  "4561\0"
+  "26FB1\0"
+  "270D2\0"
+  "456B\0"
+  "8650\0"
+  "8667\0"
+  "8669\0"
+  "86A9\0"
+  "8688\0"
+  "870E\0"
+  "86E2\0"
+  "8728\0"
+  "876B\0"
+  "8786\0"
+  "45D7\0"
+  "87E1\0"
+  "8801\0"
+  "45F9\0"
+  "8860\0"
+  "8863\0"
+  "27667\0"
+  "88D7\0"
+  "88DE\0"
+  "4635\0"
+  "88FA\0"
+  "34BB\0"
+  "278AE\0"
+  "27966\0"
+  "46BE\0"
+  "46C7\0"
+  "8AA0\0"
+  "8C55\0"
+  "27CA8\0"
+  "8CAB\0"
+  "8CC1\0"
+  "8D1B\0"
+  "8D77\0"
+  "27F2F\0"
+  "20804\0"
+  "8DCB\0"
+  "8DBC\0"
+  "8DF0\0"
+  "208DE\0"
+  "8ED4\0"
+  "285D2\0"
+  "285ED\0"
+  "9094\0"
+  "90F1\0"
+  "9111\0"
+  "2872E\0"
+  "911B\0"
+  "9238\0"
+  "92D7\0"
+  "92D8\0"
+  "927C\0"
+  "93F9\0"
+  "9415\0"
+  "28BFA\0"
+  "958B\0"
+  "4995\0"
+  "95B7\0"
+  "28D77\0"
+  "49E6\0"
+  "96C3\0"
+  "5DB2\0"
+  "9723\0"
+  "29145\0"
+  "2921A\0"
+  "4A6E\0"
+  "4A76\0"
+  "97E0\0"
+  "2940A\0"
+  "4AB2\0"
+  "29496\0"
+  "9829\0"
+  "295B6\0"
+  "98E2\0"
+  "4B33\0"
+  "9929\0"
+  "99A7\0"
+  "99C2\0"
+  "99FE\0"
+  "4BCE\0"
+  "29B30\0"
+  "9C40\0"
+  "9CFD\0"
+  "4CCE\0"
+  "4CED\0"
+  "9D67\0"
+  "2A0CE\0"
+  "4CF8\0"
+  "2A105\0"
+  "2A20E\0"
+  "2A291\0"
+  "9EBB\0"
+  "4D56\0"
+  "9EF9\0"
+  "9EFE\0"
+  "9F05\0"
+  "9F0F\0"
+  "9F16\0"
+  "9F3B\0"
+  "2A600\0"
+  ;
+
+static const UnicharStringIndex names_list_colons[] = 
+{
+  { 0x00C0, 0 },
+  { 0x00C1, 10 },
+  { 0x00C2, 20 },
+  { 0x00C3, 30 },
+  { 0x00C4, 40 },
+  { 0x00C5, 50 },
+  { 0x00C7, 60 },
+  { 0x00C8, 70 },
+  { 0x00C9, 80 },
+  { 0x00CA, 90 },
+  { 0x00CB, 100 },
+  { 0x00CC, 110 },
+  { 0x00CD, 120 },
+  { 0x00CE, 130 },
+  { 0x00CF, 140 },
+  { 0x00D1, 150 },
+  { 0x00D2, 160 },
+  { 0x00D3, 170 },
+  { 0x00D4, 180 },
+  { 0x00D5, 190 },
+  { 0x00D6, 200 },
+  { 0x00D9, 210 },
+  { 0x00DA, 220 },
+  { 0x00DB, 230 },
+  { 0x00DC, 240 },
+  { 0x00DD, 250 },
+  { 0x00E0, 260 },
+  { 0x00E1, 270 },
+  { 0x00E2, 280 },
+  { 0x00E3, 290 },
+  { 0x00E4, 300 },
+  { 0x00E5, 310 },
+  { 0x00E7, 320 },
+  { 0x00E8, 330 },
+  { 0x00E9, 340 },
+  { 0x00EA, 350 },
+  { 0x00EB, 360 },
+  { 0x00EC, 370 },
+  { 0x00ED, 380 },
+  { 0x00EE, 390 },
+  { 0x00EF, 400 },
+  { 0x00F1, 410 },
+  { 0x00F2, 420 },
+  { 0x00F3, 430 },
+  { 0x00F4, 440 },
+  { 0x00F5, 450 },
+  { 0x00F6, 460 },
+  { 0x00F9, 470 },
+  { 0x00FA, 480 },
+  { 0x00FB, 490 },
+  { 0x00FC, 500 },
+  { 0x00FD, 510 },
+  { 0x00FF, 520 },
+  { 0x0100, 530 },
+  { 0x0101, 540 },
+  { 0x0102, 550 },
+  { 0x0103, 560 },
+  { 0x0104, 570 },
+  { 0x0105, 580 },
+  { 0x0106, 590 },
+  { 0x0107, 600 },
+  { 0x0108, 610 },
+  { 0x0109, 620 },
+  { 0x010A, 630 },
+  { 0x010B, 640 },
+  { 0x010C, 650 },
+  { 0x010D, 660 },
+  { 0x010E, 670 },
+  { 0x010F, 680 },
+  { 0x0112, 690 },
+  { 0x0113, 700 },
+  { 0x0114, 710 },
+  { 0x0115, 720 },
+  { 0x0116, 730 },
+  { 0x0117, 740 },
+  { 0x0118, 750 },
+  { 0x0119, 760 },
+  { 0x011A, 770 },
+  { 0x011B, 780 },
+  { 0x011C, 790 },
+  { 0x011D, 800 },
+  { 0x011E, 810 },
+  { 0x011F, 820 },
+  { 0x0120, 830 },
+  { 0x0121, 840 },
+  { 0x0122, 850 },
+  { 0x0123, 860 },
+  { 0x0124, 870 },
+  { 0x0125, 880 },
+  { 0x0128, 890 },
+  { 0x0129, 900 },
+  { 0x012A, 910 },
+  { 0x012B, 920 },
+  { 0x012C, 930 },
+  { 0x012D, 940 },
+  { 0x012E, 950 },
+  { 0x012F, 960 },
+  { 0x0130, 970 },
+  { 0x0134, 980 },
+  { 0x0135, 990 },
+  { 0x0136, 1000 },
+  { 0x0137, 1010 },
+  { 0x0139, 1020 },
+  { 0x013A, 1030 },
+  { 0x013B, 1040 },
+  { 0x013C, 1050 },
+  { 0x013D, 1060 },
+  { 0x013E, 1070 },
+  { 0x0143, 1080 },
+  { 0x0144, 1090 },
+  { 0x0145, 1100 },
+  { 0x0146, 1110 },
+  { 0x0147, 1120 },
+  { 0x0148, 1130 },
+  { 0x014C, 1140 },
+  { 0x014D, 1150 },
+  { 0x014E, 1160 },
+  { 0x014F, 1170 },
+  { 0x0150, 1180 },
+  { 0x0151, 1190 },
+  { 0x0154, 1200 },
+  { 0x0155, 1210 },
+  { 0x0156, 1220 },
+  { 0x0157, 1230 },
+  { 0x0158, 1240 },
+  { 0x0159, 1250 },
+  { 0x015A, 1260 },
+  { 0x015B, 1270 },
+  { 0x015C, 1280 },
+  { 0x015D, 1290 },
+  { 0x015E, 1300 },
+  { 0x015F, 1310 },
+  { 0x0160, 1320 },
+  { 0x0161, 1330 },
+  { 0x0162, 1340 },
+  { 0x0163, 1350 },
+  { 0x0164, 1360 },
+  { 0x0165, 1370 },
+  { 0x0168, 1380 },
+  { 0x0169, 1390 },
+  { 0x016A, 1400 },
+  { 0x016B, 1410 },
+  { 0x016C, 1420 },
+  { 0x016D, 1430 },
+  { 0x016E, 1440 },
+  { 0x016F, 1450 },
+  { 0x0170, 1460 },
+  { 0x0171, 1470 },
+  { 0x0172, 1480 },
+  { 0x0173, 1490 },
+  { 0x0174, 1500 },
+  { 0x0175, 1510 },
+  { 0x0176, 1520 },
+  { 0x0177, 1530 },
+  { 0x0178, 1540 },
+  { 0x0179, 1550 },
+  { 0x017A, 1560 },
+  { 0x017B, 1570 },
+  { 0x017C, 1580 },
+  { 0x017D, 1590 },
+  { 0x017E, 1600 },
+  { 0x01A0, 1610 },
+  { 0x01A1, 1620 },
+  { 0x01AF, 1630 },
+  { 0x01B0, 1640 },
+  { 0x01CD, 1650 },
+  { 0x01CE, 1660 },
+  { 0x01CF, 1670 },
+  { 0x01D0, 1680 },
+  { 0x01D1, 1690 },
+  { 0x01D2, 1700 },
+  { 0x01D3, 1710 },
+  { 0x01D4, 1720 },
+  { 0x01D5, 1730 },
+  { 0x01D6, 1740 },
+  { 0x01D7, 1750 },
+  { 0x01D8, 1760 },
+  { 0x01D9, 1770 },
+  { 0x01DA, 1780 },
+  { 0x01DB, 1790 },
+  { 0x01DC, 1800 },
+  { 0x01DE, 1810 },
+  { 0x01DF, 1820 },
+  { 0x01E0, 1830 },
+  { 0x01E1, 1840 },
+  { 0x01E2, 1850 },
+  { 0x01E3, 1860 },
+  { 0x01E6, 1870 },
+  { 0x01E7, 1880 },
+  { 0x01E8, 1890 },
+  { 0x01E9, 1900 },
+  { 0x01EA, 1910 },
+  { 0x01EB, 1920 },
+  { 0x01EC, 1930 },
+  { 0x01ED, 1940 },
+  { 0x01EE, 1950 },
+  { 0x01EF, 1960 },
+  { 0x01F0, 1970 },
+  { 0x01F4, 1980 },
+  { 0x01F5, 1990 },
+  { 0x01F8, 2000 },
+  { 0x01F9, 2010 },
+  { 0x01FA, 2020 },
+  { 0x01FB, 2030 },
+  { 0x01FC, 2040 },
+  { 0x01FD, 2050 },
+  { 0x01FE, 2060 },
+  { 0x01FF, 2070 },
+  { 0x0200, 2080 },
+  { 0x0201, 2090 },
+  { 0x0202, 2100 },
+  { 0x0203, 2110 },
+  { 0x0204, 2120 },
+  { 0x0205, 2130 },
+  { 0x0206, 2140 },
+  { 0x0207, 2150 },
+  { 0x0208, 2160 },
+  { 0x0209, 2170 },
+  { 0x020A, 2180 },
+  { 0x020B, 2190 },
+  { 0x020C, 2200 },
+  { 0x020D, 2210 },
+  { 0x020E, 2220 },
+  { 0x020F, 2230 },
+  { 0x0210, 2240 },
+  { 0x0211, 2250 },
+  { 0x0212, 2260 },
+  { 0x0213, 2270 },
+  { 0x0214, 2280 },
+  { 0x0215, 2290 },
+  { 0x0216, 2300 },
+  { 0x0217, 2310 },
+  { 0x0218, 2320 },
+  { 0x0219, 2330 },
+  { 0x021A, 2340 },
+  { 0x021B, 2350 },
+  { 0x021E, 2360 },
+  { 0x021F, 2370 },
+  { 0x0226, 2380 },
+  { 0x0227, 2390 },
+  { 0x0228, 2400 },
+  { 0x0229, 2410 },
+  { 0x022A, 2420 },
+  { 0x022B, 2430 },
+  { 0x022C, 2440 },
+  { 0x022D, 2450 },
+  { 0x022E, 2460 },
+  { 0x022F, 2470 },
+  { 0x0230, 2480 },
+  { 0x0231, 2490 },
+  { 0x0232, 2500 },
+  { 0x0233, 2510 },
+  { 0x0340, 2520 },
+  { 0x0341, 2548 },
+  { 0x0343, 2576 },
+  { 0x0344, 2603 },
+  { 0x0374, 2613 },
+  { 0x037E, 2640 },
+  { 0x0385, 2655 },
+  { 0x0386, 2665 },
+  { 0x0387, 2675 },
+  { 0x0388, 2691 },
+  { 0x0389, 2701 },
+  { 0x038A, 2711 },
+  { 0x038C, 2721 },
+  { 0x038E, 2731 },
+  { 0x038F, 2741 },
+  { 0x0390, 2751 },
+  { 0x03AA, 2761 },
+  { 0x03AB, 2771 },
+  { 0x03AC, 2781 },
+  { 0x03AD, 2791 },
+  { 0x03AE, 2801 },
+  { 0x03AF, 2811 },
+  { 0x03B0, 2821 },
+  { 0x03CA, 2831 },
+  { 0x03CB, 2841 },
+  { 0x03CC, 2851 },
+  { 0x03CD, 2861 },
+  { 0x03CE, 2871 },
+  { 0x03D3, 2881 },
+  { 0x03D4, 2891 },
+  { 0x0400, 2901 },
+  { 0x0401, 2911 },
+  { 0x0403, 2921 },
+  { 0x0407, 2931 },
+  { 0x040C, 2941 },
+  { 0x040D, 2951 },
+  { 0x040E, 2961 },
+  { 0x0419, 2971 },
+  { 0x0439, 2981 },
+  { 0x0450, 2991 },
+  { 0x0451, 3001 },
+  { 0x0453, 3011 },
+  { 0x0457, 3021 },
+  { 0x045C, 3031 },
+  { 0x045D, 3041 },
+  { 0x045E, 3051 },
+  { 0x0476, 3061 },
+  { 0x0477, 3071 },
+  { 0x04C1, 3081 },
+  { 0x04C2, 3091 },
+  { 0x04D0, 3101 },
+  { 0x04D1, 3111 },
+  { 0x04D2, 3121 },
+  { 0x04D3, 3131 },
+  { 0x04D6, 3141 },
+  { 0x04D7, 3151 },
+  { 0x04DA, 3161 },
+  { 0x04DB, 3171 },
+  { 0x04DC, 3181 },
+  { 0x04DD, 3191 },
+  { 0x04DE, 3201 },
+  { 0x04DF, 3211 },
+  { 0x04E2, 3221 },
+  { 0x04E3, 3231 },
+  { 0x04E4, 3241 },
+  { 0x04E5, 3251 },
+  { 0x04E6, 3261 },
+  { 0x04E7, 3271 },
+  { 0x04EA, 3281 },
+  { 0x04EB, 3291 },
+  { 0x04EC, 3301 },
+  { 0x04ED, 3311 },
+  { 0x04EE, 3321 },
+  { 0x04EF, 3331 },
+  { 0x04F0, 3341 },
+  { 0x04F1, 3351 },
+  { 0x04F2, 3361 },
+  { 0x04F3, 3371 },
+  { 0x04F4, 3381 },
+  { 0x04F5, 3391 },
+  { 0x04F8, 3401 },
+  { 0x04F9, 3411 },
+  { 0x0622, 3421 },
+  { 0x0623, 3431 },
+  { 0x0624, 3441 },
+  { 0x0625, 3451 },
+  { 0x0626, 3461 },
+  { 0x06C0, 3471 },
+  { 0x06C2, 3481 },
+  { 0x06D3, 3491 },
+  { 0x0929, 3501 },
+  { 0x0931, 3511 },
+  { 0x0934, 3521 },
+  { 0x0958, 3531 },
+  { 0x0959, 3541 },
+  { 0x095A, 3551 },
+  { 0x095B, 3561 },
+  { 0x095C, 3571 },
+  { 0x095D, 3581 },
+  { 0x095E, 3591 },
+  { 0x095F, 3601 },
+  { 0x09CB, 3611 },
+  { 0x09CC, 3621 },
+  { 0x09DC, 3631 },
+  { 0x09DD, 3641 },
+  { 0x09DF, 3651 },
+  { 0x0A33, 3661 },
+  { 0x0A36, 3671 },
+  { 0x0A59, 3681 },
+  { 0x0A5A, 3691 },
+  { 0x0A5B, 3701 },
+  { 0x0A5E, 3711 },
+  { 0x0B48, 3721 },
+  { 0x0B4B, 3731 },
+  { 0x0B4C, 3741 },
+  { 0x0B5C, 3751 },
+  { 0x0B5D, 3761 },
+  { 0x0B94, 3771 },
+  { 0x0BCA, 3781 },
+  { 0x0BCB, 3791 },
+  { 0x0BCC, 3801 },
+  { 0x0C48, 3811 },
+  { 0x0CC0, 3821 },
+  { 0x0CC7, 3831 },
+  { 0x0CC8, 3841 },
+  { 0x0CCA, 3851 },
+  { 0x0CCB, 3861 },
+  { 0x0D4A, 3871 },
+  { 0x0D4B, 3881 },
+  { 0x0D4C, 3891 },
+  { 0x0DDA, 3901 },
+  { 0x0DDC, 3911 },
+  { 0x0DDD, 3921 },
+  { 0x0DDE, 3931 },
+  { 0x0F43, 3941 },
+  { 0x0F4D, 3951 },
+  { 0x0F52, 3961 },
+  { 0x0F57, 3971 },
+  { 0x0F5C, 3981 },
+  { 0x0F69, 3991 },
+  { 0x0F73, 4001 },
+  { 0x0F75, 4011 },
+  { 0x0F76, 4021 },
+  { 0x0F78, 4031 },
+  { 0x0F81, 4041 },
+  { 0x0F93, 4051 },
+  { 0x0F9D, 4061 },
+  { 0x0FA2, 4071 },
+  { 0x0FA7, 4081 },
+  { 0x0FAC, 4091 },
+  { 0x0FB9, 4101 },
+  { 0x1026, 4111 },
+  { 0x1B06, 4121 },
+  { 0x1B08, 4131 },
+  { 0x1B0A, 4141 },
+  { 0x1B0C, 4151 },
+  { 0x1B0E, 4161 },
+  { 0x1B12, 4171 },
+  { 0x1B3B, 4181 },
+  { 0x1B3D, 4191 },
+  { 0x1B40, 4201 },
+  { 0x1B41, 4211 },
+  { 0x1B43, 4221 },
+  { 0x1E00, 4231 },
+  { 0x1E01, 4241 },
+  { 0x1E02, 4251 },
+  { 0x1E03, 4261 },
+  { 0x1E04, 4271 },
+  { 0x1E05, 4281 },
+  { 0x1E06, 4291 },
+  { 0x1E07, 4301 },
+  { 0x1E08, 4311 },
+  { 0x1E09, 4321 },
+  { 0x1E0A, 4331 },
+  { 0x1E0B, 4341 },
+  { 0x1E0C, 4351 },
+  { 0x1E0D, 4361 },
+  { 0x1E0E, 4371 },
+  { 0x1E0F, 4381 },
+  { 0x1E10, 4391 },
+  { 0x1E11, 4401 },
+  { 0x1E12, 4411 },
+  { 0x1E13, 4421 },
+  { 0x1E14, 4431 },
+  { 0x1E15, 4441 },
+  { 0x1E16, 4451 },
+  { 0x1E17, 4461 },
+  { 0x1E18, 4471 },
+  { 0x1E19, 4481 },
+  { 0x1E1A, 4491 },
+  { 0x1E1B, 4501 },
+  { 0x1E1C, 4511 },
+  { 0x1E1D, 4521 },
+  { 0x1E1E, 4531 },
+  { 0x1E1F, 4541 },
+  { 0x1E20, 4551 },
+  { 0x1E21, 4561 },
+  { 0x1E22, 4571 },
+  { 0x1E23, 4581 },
+  { 0x1E24, 4591 },
+  { 0x1E25, 4601 },
+  { 0x1E26, 4611 },
+  { 0x1E27, 4621 },
+  { 0x1E28, 4631 },
+  { 0x1E29, 4641 },
+  { 0x1E2A, 4651 },
+  { 0x1E2B, 4661 },
+  { 0x1E2C, 4671 },
+  { 0x1E2D, 4681 },
+  { 0x1E2E, 4691 },
+  { 0x1E2F, 4701 },
+  { 0x1E30, 4711 },
+  { 0x1E31, 4721 },
+  { 0x1E32, 4731 },
+  { 0x1E33, 4741 },
+  { 0x1E34, 4751 },
+  { 0x1E35, 4761 },
+  { 0x1E36, 4771 },
+  { 0x1E37, 4781 },
+  { 0x1E38, 4791 },
+  { 0x1E39, 4801 },
+  { 0x1E3A, 4811 },
+  { 0x1E3B, 4821 },
+  { 0x1E3C, 4831 },
+  { 0x1E3D, 4841 },
+  { 0x1E3E, 4851 },
+  { 0x1E3F, 4861 },
+  { 0x1E40, 4871 },
+  { 0x1E41, 4881 },
+  { 0x1E42, 4891 },
+  { 0x1E43, 4901 },
+  { 0x1E44, 4911 },
+  { 0x1E45, 4921 },
+  { 0x1E46, 4931 },
+  { 0x1E47, 4941 },
+  { 0x1E48, 4951 },
+  { 0x1E49, 4961 },
+  { 0x1E4A, 4971 },
+  { 0x1E4B, 4981 },
+  { 0x1E4C, 4991 },
+  { 0x1E4D, 5001 },
+  { 0x1E4E, 5011 },
+  { 0x1E4F, 5021 },
+  { 0x1E50, 5031 },
+  { 0x1E51, 5041 },
+  { 0x1E52, 5051 },
+  { 0x1E53, 5061 },
+  { 0x1E54, 5071 },
+  { 0x1E55, 5081 },
+  { 0x1E56, 5091 },
+  { 0x1E57, 5101 },
+  { 0x1E58, 5111 },
+  { 0x1E59, 5121 },
+  { 0x1E5A, 5131 },
+  { 0x1E5B, 5141 },
+  { 0x1E5C, 5151 },
+  { 0x1E5D, 5161 },
+  { 0x1E5E, 5171 },
+  { 0x1E5F, 5181 },
+  { 0x1E60, 5191 },
+  { 0x1E61, 5201 },
+  { 0x1E62, 5211 },
+  { 0x1E63, 5221 },
+  { 0x1E64, 5231 },
+  { 0x1E65, 5241 },
+  { 0x1E66, 5251 },
+  { 0x1E67, 5261 },
+  { 0x1E68, 5271 },
+  { 0x1E69, 5281 },
+  { 0x1E6A, 5291 },
+  { 0x1E6B, 5301 },
+  { 0x1E6C, 5311 },
+  { 0x1E6D, 5321 },
+  { 0x1E6E, 5331 },
+  { 0x1E6F, 5341 },
+  { 0x1E70, 5351 },
+  { 0x1E71, 5361 },
+  { 0x1E72, 5371 },
+  { 0x1E73, 5381 },
+  { 0x1E74, 5391 },
+  { 0x1E75, 5401 },
+  { 0x1E76, 5411 },
+  { 0x1E77, 5421 },
+  { 0x1E78, 5431 },
+  { 0x1E79, 5441 },
+  { 0x1E7A, 5451 },
+  { 0x1E7B, 5461 },
+  { 0x1E7C, 5471 },
+  { 0x1E7D, 5481 },
+  { 0x1E7E, 5491 },
+  { 0x1E7F, 5501 },
+  { 0x1E80, 5511 },
+  { 0x1E81, 5521 },
+  { 0x1E82, 5531 },
+  { 0x1E83, 5541 },
+  { 0x1E84, 5551 },
+  { 0x1E85, 5561 },
+  { 0x1E86, 5571 },
+  { 0x1E87, 5581 },
+  { 0x1E88, 5591 },
+  { 0x1E89, 5601 },
+  { 0x1E8A, 5611 },
+  { 0x1E8B, 5621 },
+  { 0x1E8C, 5631 },
+  { 0x1E8D, 5641 },
+  { 0x1E8E, 5651 },
+  { 0x1E8F, 5661 },
+  { 0x1E90, 5671 },
+  { 0x1E91, 5681 },
+  { 0x1E92, 5691 },
+  { 0x1E93, 5701 },
+  { 0x1E94, 5711 },
+  { 0x1E95, 5721 },
+  { 0x1E96, 5731 },
+  { 0x1E97, 5741 },
+  { 0x1E98, 5751 },
+  { 0x1E99, 5761 },
+  { 0x1E9B, 5771 },
+  { 0x1EA0, 5781 },
+  { 0x1EA1, 5791 },
+  { 0x1EA2, 5801 },
+  { 0x1EA3, 5811 },
+  { 0x1EA4, 5821 },
+  { 0x1EA5, 5831 },
+  { 0x1EA6, 5841 },
+  { 0x1EA7, 5851 },
+  { 0x1EA8, 5861 },
+  { 0x1EA9, 5871 },
+  { 0x1EAA, 5881 },
+  { 0x1EAB, 5891 },
+  { 0x1EAC, 5901 },
+  { 0x1EAD, 5911 },
+  { 0x1EAE, 5921 },
+  { 0x1EAF, 5931 },
+  { 0x1EB0, 5941 },
+  { 0x1EB1, 5951 },
+  { 0x1EB2, 5961 },
+  { 0x1EB3, 5971 },
+  { 0x1EB4, 5981 },
+  { 0x1EB5, 5991 },
+  { 0x1EB6, 6001 },
+  { 0x1EB7, 6011 },
+  { 0x1EB8, 6021 },
+  { 0x1EB9, 6031 },
+  { 0x1EBA, 6041 },
+  { 0x1EBB, 6051 },
+  { 0x1EBC, 6061 },
+  { 0x1EBD, 6071 },
+  { 0x1EBE, 6081 },
+  { 0x1EBF, 6091 },
+  { 0x1EC0, 6101 },
+  { 0x1EC1, 6111 },
+  { 0x1EC2, 6121 },
+  { 0x1EC3, 6131 },
+  { 0x1EC4, 6141 },
+  { 0x1EC5, 6151 },
+  { 0x1EC6, 6161 },
+  { 0x1EC7, 6171 },
+  { 0x1EC8, 6181 },
+  { 0x1EC9, 6191 },
+  { 0x1ECA, 6201 },
+  { 0x1ECB, 6211 },
+  { 0x1ECC, 6221 },
+  { 0x1ECD, 6231 },
+  { 0x1ECE, 6241 },
+  { 0x1ECF, 6251 },
+  { 0x1ED0, 6261 },
+  { 0x1ED1, 6271 },
+  { 0x1ED2, 6281 },
+  { 0x1ED3, 6291 },
+  { 0x1ED4, 6301 },
+  { 0x1ED5, 6311 },
+  { 0x1ED6, 6321 },
+  { 0x1ED7, 6331 },
+  { 0x1ED8, 6341 },
+  { 0x1ED9, 6351 },
+  { 0x1EDA, 6361 },
+  { 0x1EDB, 6371 },
+  { 0x1EDC, 6381 },
+  { 0x1EDD, 6391 },
+  { 0x1EDE, 6401 },
+  { 0x1EDF, 6411 },
+  { 0x1EE0, 6421 },
+  { 0x1EE1, 6431 },
+  { 0x1EE2, 6441 },
+  { 0x1EE3, 6451 },
+  { 0x1EE4, 6461 },
+  { 0x1EE5, 6471 },
+  { 0x1EE6, 6481 },
+  { 0x1EE7, 6491 },
+  { 0x1EE8, 6501 },
+  { 0x1EE9, 6511 },
+  { 0x1EEA, 6521 },
+  { 0x1EEB, 6531 },
+  { 0x1EEC, 6541 },
+  { 0x1EED, 6551 },
+  { 0x1EEE, 6561 },
+  { 0x1EEF, 6571 },
+  { 0x1EF0, 6581 },
+  { 0x1EF1, 6591 },
+  { 0x1EF2, 6601 },
+  { 0x1EF3, 6611 },
+  { 0x1EF4, 6621 },
+  { 0x1EF5, 6631 },
+  { 0x1EF6, 6641 },
+  { 0x1EF7, 6651 },
+  { 0x1EF8, 6661 },
+  { 0x1EF9, 6671 },
+  { 0x1F00, 6681 },
+  { 0x1F01, 6691 },
+  { 0x1F02, 6701 },
+  { 0x1F03, 6711 },
+  { 0x1F04, 6721 },
+  { 0x1F05, 6731 },
+  { 0x1F06, 6741 },
+  { 0x1F07, 6751 },
+  { 0x1F08, 6761 },
+  { 0x1F09, 6771 },
+  { 0x1F0A, 6781 },
+  { 0x1F0B, 6791 },
+  { 0x1F0C, 6801 },
+  { 0x1F0D, 6811 },
+  { 0x1F0E, 6821 },
+  { 0x1F0F, 6831 },
+  { 0x1F10, 6841 },
+  { 0x1F11, 6851 },
+  { 0x1F12, 6861 },
+  { 0x1F13, 6871 },
+  { 0x1F14, 6881 },
+  { 0x1F15, 6891 },
+  { 0x1F18, 6901 },
+  { 0x1F19, 6911 },
+  { 0x1F1A, 6921 },
+  { 0x1F1B, 6931 },
+  { 0x1F1C, 6941 },
+  { 0x1F1D, 6951 },
+  { 0x1F20, 6961 },
+  { 0x1F21, 6971 },
+  { 0x1F22, 6981 },
+  { 0x1F23, 6991 },
+  { 0x1F24, 7001 },
+  { 0x1F25, 7011 },
+  { 0x1F26, 7021 },
+  { 0x1F27, 7031 },
+  { 0x1F28, 7041 },
+  { 0x1F29, 7051 },
+  { 0x1F2A, 7061 },
+  { 0x1F2B, 7071 },
+  { 0x1F2C, 7081 },
+  { 0x1F2D, 7091 },
+  { 0x1F2E, 7101 },
+  { 0x1F2F, 7111 },
+  { 0x1F30, 7121 },
+  { 0x1F31, 7131 },
+  { 0x1F32, 7141 },
+  { 0x1F33, 7151 },
+  { 0x1F34, 7161 },
+  { 0x1F35, 7171 },
+  { 0x1F36, 7181 },
+  { 0x1F37, 7191 },
+  { 0x1F38, 7201 },
+  { 0x1F39, 7211 },
+  { 0x1F3A, 7221 },
+  { 0x1F3B, 7231 },
+  { 0x1F3C, 7241 },
+  { 0x1F3D, 7251 },
+  { 0x1F3E, 7261 },
+  { 0x1F3F, 7271 },
+  { 0x1F40, 7281 },
+  { 0x1F41, 7291 },
+  { 0x1F42, 7301 },
+  { 0x1F43, 7311 },
+  { 0x1F44, 7321 },
+  { 0x1F45, 7331 },
+  { 0x1F48, 7341 },
+  { 0x1F49, 7351 },
+  { 0x1F4A, 7361 },
+  { 0x1F4B, 7371 },
+  { 0x1F4C, 7381 },
+  { 0x1F4D, 7391 },
+  { 0x1F50, 7401 },
+  { 0x1F51, 7411 },
+  { 0x1F52, 7421 },
+  { 0x1F53, 7431 },
+  { 0x1F54, 7441 },
+  { 0x1F55, 7451 },
+  { 0x1F56, 7461 },
+  { 0x1F57, 7471 },
+  { 0x1F59, 7481 },
+  { 0x1F5B, 7491 },
+  { 0x1F5D, 7501 },
+  { 0x1F5F, 7511 },
+  { 0x1F60, 7521 },
+  { 0x1F61, 7531 },
+  { 0x1F62, 7541 },
+  { 0x1F63, 7551 },
+  { 0x1F64, 7561 },
+  { 0x1F65, 7571 },
+  { 0x1F66, 7581 },
+  { 0x1F67, 7591 },
+  { 0x1F68, 7601 },
+  { 0x1F69, 7611 },
+  { 0x1F6A, 7621 },
+  { 0x1F6B, 7631 },
+  { 0x1F6C, 7641 },
+  { 0x1F6D, 7651 },
+  { 0x1F6E, 7661 },
+  { 0x1F6F, 7671 },
+  { 0x1F70, 7681 },
+  { 0x1F71, 7691 },
+  { 0x1F72, 7732 },
+  { 0x1F73, 7742 },
+  { 0x1F74, 7785 },
+  { 0x1F75, 7795 },
+  { 0x1F76, 7834 },
+  { 0x1F77, 7844 },
+  { 0x1F78, 7884 },
+  { 0x1F79, 7894 },
+  { 0x1F7A, 7937 },
+  { 0x1F7B, 7947 },
+  { 0x1F7C, 7990 },
+  { 0x1F7D, 8000 },
+  { 0x1F80, 8041 },
+  { 0x1F81, 8051 },
+  { 0x1F82, 8061 },
+  { 0x1F83, 8071 },
+  { 0x1F84, 8081 },
+  { 0x1F85, 8091 },
+  { 0x1F86, 8101 },
+  { 0x1F87, 8111 },
+  { 0x1F88, 8121 },
+  { 0x1F89, 8131 },
+  { 0x1F8A, 8141 },
+  { 0x1F8B, 8151 },
+  { 0x1F8C, 8161 },
+  { 0x1F8D, 8171 },
+  { 0x1F8E, 8181 },
+  { 0x1F8F, 8191 },
+  { 0x1F90, 8201 },
+  { 0x1F91, 8211 },
+  { 0x1F92, 8221 },
+  { 0x1F93, 8231 },
+  { 0x1F94, 8241 },
+  { 0x1F95, 8251 },
+  { 0x1F96, 8261 },
+  { 0x1F97, 8271 },
+  { 0x1F98, 8281 },
+  { 0x1F99, 8291 },
+  { 0x1F9A, 8301 },
+  { 0x1F9B, 8311 },
+  { 0x1F9C, 8321 },
+  { 0x1F9D, 8331 },
+  { 0x1F9E, 8341 },
+  { 0x1F9F, 8351 },
+  { 0x1FA0, 8361 },
+  { 0x1FA1, 8371 },
+  { 0x1FA2, 8381 },
+  { 0x1FA3, 8391 },
+  { 0x1FA4, 8401 },
+  { 0x1FA5, 8411 },
+  { 0x1FA6, 8421 },
+  { 0x1FA7, 8431 },
+  { 0x1FA8, 8441 },
+  { 0x1FA9, 8451 },
+  { 0x1FAA, 8461 },
+  { 0x1FAB, 8471 },
+  { 0x1FAC, 8481 },
+  { 0x1FAD, 8491 },
+  { 0x1FAE, 8501 },
+  { 0x1FAF, 8511 },
+  { 0x1FB0, 8521 },
+  { 0x1FB1, 8531 },
+  { 0x1FB2, 8541 },
+  { 0x1FB3, 8551 },
+  { 0x1FB4, 8561 },
+  { 0x1FB6, 8571 },
+  { 0x1FB7, 8581 },
+  { 0x1FB8, 8591 },
+  { 0x1FB9, 8601 },
+  { 0x1FBA, 8611 },
+  { 0x1FBB, 8621 },
+  { 0x1FBC, 8664 },
+  { 0x1FBE, 8674 },
+  { 0x1FC1, 8703 },
+  { 0x1FC2, 8713 },
+  { 0x1FC3, 8723 },
+  { 0x1FC4, 8733 },
+  { 0x1FC6, 8743 },
+  { 0x1FC7, 8753 },
+  { 0x1FC8, 8763 },
+  { 0x1FC9, 8773 },
+  { 0x1FCA, 8818 },
+  { 0x1FCB, 8828 },
+  { 0x1FCC, 8869 },
+  { 0x1FCD, 8879 },
+  { 0x1FCE, 8889 },
+  { 0x1FCF, 8899 },
+  { 0x1FD0, 8909 },
+  { 0x1FD1, 8919 },
+  { 0x1FD2, 8929 },
+  { 0x1FD3, 8939 },
+  { 0x1FD6, 8993 },
+  { 0x1FD7, 9003 },
+  { 0x1FD8, 9013 },
+  { 0x1FD9, 9023 },
+  { 0x1FDA, 9033 },
+  { 0x1FDB, 9043 },
+  { 0x1FDD, 9085 },
+  { 0x1FDE, 9095 },
+  { 0x1FDF, 9105 },
+  { 0x1FE0, 9115 },
+  { 0x1FE1, 9125 },
+  { 0x1FE2, 9135 },
+  { 0x1FE3, 9145 },
+  { 0x1FE4, 9202 },
+  { 0x1FE5, 9212 },
+  { 0x1FE6, 9222 },
+  { 0x1FE7, 9232 },
+  { 0x1FE8, 9242 },
+  { 0x1FE9, 9252 },
+  { 0x1FEA, 9262 },
+  { 0x1FEB, 9272 },
+  { 0x1FEC, 9317 },
+  { 0x1FED, 9327 },
+  { 0x1FEE, 9337 },
+  { 0x1FEF, 9364 },
+  { 0x1FF2, 9382 },
+  { 0x1FF3, 9392 },
+  { 0x1FF4, 9402 },
+  { 0x1FF6, 9412 },
+  { 0x1FF7, 9422 },
+  { 0x1FF8, 9432 },
+  { 0x1FF9, 9442 },
+  { 0x1FFA, 9487 },
+  { 0x1FFB, 9497 },
+  { 0x1FFC, 9540 },
+  { 0x1FFD, 9550 },
+  { 0x2000, 9568 },
+  { 0x2001, 9582 },
+  { 0x2126, 9596 },
+  { 0x212A, 9628 },
+  { 0x212B, 9656 },
+  { 0x219A, 9700 },
+  { 0x219B, 9710 },
+  { 0x21AE, 9720 },
+  { 0x21CD, 9730 },
+  { 0x21CE, 9740 },
+  { 0x21CF, 9750 },
+  { 0x2204, 9760 },
+  { 0x2209, 9770 },
+  { 0x220C, 9780 },
+  { 0x2224, 9790 },
+  { 0x2226, 9800 },
+  { 0x2241, 9810 },
+  { 0x2244, 9820 },
+  { 0x2247, 9830 },
+  { 0x2249, 9840 },
+  { 0x2260, 9850 },
+  { 0x2262, 9860 },
+  { 0x226D, 9870 },
+  { 0x226E, 9880 },
+  { 0x226F, 9890 },
+  { 0x2270, 9900 },
+  { 0x2271, 9910 },
+  { 0x2274, 9920 },
+  { 0x2275, 9930 },
+  { 0x2278, 9940 },
+  { 0x2279, 9950 },
+  { 0x2280, 9960 },
+  { 0x2281, 9970 },
+  { 0x2284, 9980 },
+  { 0x2285, 9990 },
+  { 0x2288, 10000 },
+  { 0x2289, 10010 },
+  { 0x22AC, 10020 },
+  { 0x22AD, 10030 },
+  { 0x22AE, 10040 },
+  { 0x22AF, 10050 },
+  { 0x22E0, 10060 },
+  { 0x22E1, 10070 },
+  { 0x22E2, 10080 },
+  { 0x22E3, 10090 },
+  { 0x22EA, 10100 },
+  { 0x22EB, 10110 },
+  { 0x22EC, 10120 },
+  { 0x22ED, 10130 },
+  { 0x2329, 10140 },
+  { 0x232A, 10164 },
+  { 0x2ADC, 10189 },
+  { 0x304C, 10199 },
+  { 0x304E, 10209 },
+  { 0x3050, 10219 },
+  { 0x3052, 10229 },
+  { 0x3054, 10239 },
+  { 0x3056, 10249 },
+  { 0x3058, 10259 },
+  { 0x305A, 10269 },
+  { 0x305C, 10279 },
+  { 0x305E, 10289 },
+  { 0x3060, 10299 },
+  { 0x3062, 10309 },
+  { 0x3065, 10319 },
+  { 0x3067, 10329 },
+  { 0x3069, 10339 },
+  { 0x3070, 10349 },
+  { 0x3071, 10359 },
+  { 0x3073, 10369 },
+  { 0x3074, 10379 },
+  { 0x3076, 10389 },
+  { 0x3077, 10399 },
+  { 0x3079, 10409 },
+  { 0x307A, 10419 },
+  { 0x307C, 10429 },
+  { 0x307D, 10439 },
+  { 0x3094, 10449 },
+  { 0x309E, 10459 },
+  { 0x30AC, 10469 },
+  { 0x30AE, 10479 },
+  { 0x30B0, 10489 },
+  { 0x30B2, 10499 },
+  { 0x30B4, 10509 },
+  { 0x30B6, 10519 },
+  { 0x30B8, 10529 },
+  { 0x30BA, 10539 },
+  { 0x30BC, 10549 },
+  { 0x30BE, 10559 },
+  { 0x30C0, 10569 },
+  { 0x30C2, 10579 },
+  { 0x30C5, 10589 },
+  { 0x30C7, 10599 },
+  { 0x30C9, 10609 },
+  { 0x30D0, 10619 },
+  { 0x30D1, 10629 },
+  { 0x30D3, 10639 },
+  { 0x30D4, 10649 },
+  { 0x30D6, 10659 },
+  { 0x30D7, 10669 },
+  { 0x30D9, 10679 },
+  { 0x30DA, 10689 },
+  { 0x30DC, 10699 },
+  { 0x30DD, 10709 },
+  { 0x30F4, 10719 },
+  { 0x30F7, 10729 },
+  { 0x30F8, 10739 },
+  { 0x30F9, 10749 },
+  { 0x30FA, 10759 },
+  { 0x30FE, 10769 },
+  { 0xF900, 10779 },
+  { 0xF901, 10784 },
+  { 0xF902, 10789 },
+  { 0xF903, 10794 },
+  { 0xF904, 10799 },
+  { 0xF905, 10804 },
+  { 0xF906, 10809 },
+  { 0xF907, 10814 },
+  { 0xF908, 10814 },
+  { 0xF909, 10819 },
+  { 0xF90A, 10824 },
+  { 0xF90B, 10829 },
+  { 0xF90C, 10834 },
+  { 0xF90D, 10839 },
+  { 0xF90E, 10844 },
+  { 0xF90F, 10849 },
+  { 0xF910, 10854 },
+  { 0xF911, 10859 },
+  { 0xF912, 10864 },
+  { 0xF913, 10869 },
+  { 0xF914, 10874 },
+  { 0xF915, 10879 },
+  { 0xF916, 10884 },
+  { 0xF917, 10889 },
+  { 0xF918, 10894 },
+  { 0xF919, 10899 },
+  { 0xF91A, 10904 },
+  { 0xF91B, 10909 },
+  { 0xF91C, 10914 },
+  { 0xF91D, 10919 },
+  { 0xF91E, 10924 },
+  { 0xF91F, 10929 },
+  { 0xF920, 10934 },
+  { 0xF921, 10939 },
+  { 0xF922, 10944 },
+  { 0xF923, 10949 },
+  { 0xF924, 10954 },
+  { 0xF925, 10959 },
+  { 0xF926, 10964 },
+  { 0xF927, 10969 },
+  { 0xF928, 10974 },
+  { 0xF929, 10979 },
+  { 0xF92A, 10984 },
+  { 0xF92B, 10989 },
+  { 0xF92C, 10994 },
+  { 0xF92D, 10999 },
+  { 0xF92E, 11004 },
+  { 0xF92F, 11009 },
+  { 0xF930, 11014 },
+  { 0xF931, 11019 },
+  { 0xF932, 11024 },
+  { 0xF933, 11029 },
+  { 0xF934, 11034 },
+  { 0xF935, 11039 },
+  { 0xF936, 11044 },
+  { 0xF937, 11049 },
+  { 0xF938, 11054 },
+  { 0xF939, 11059 },
+  { 0xF93A, 11064 },
+  { 0xF93B, 11069 },
+  { 0xF93C, 11074 },
+  { 0xF93D, 11079 },
+  { 0xF93E, 11084 },
+  { 0xF93F, 11089 },
+  { 0xF940, 11094 },
+  { 0xF941, 11099 },
+  { 0xF942, 11104 },
+  { 0xF943, 11109 },
+  { 0xF944, 11114 },
+  { 0xF945, 11119 },
+  { 0xF946, 11124 },
+  { 0xF947, 11129 },
+  { 0xF948, 11134 },
+  { 0xF949, 11139 },
+  { 0xF94A, 11144 },
+  { 0xF94B, 11149 },
+  { 0xF94C, 11154 },
+  { 0xF94D, 11159 },
+  { 0xF94E, 11164 },
+  { 0xF94F, 11169 },
+  { 0xF950, 11174 },
+  { 0xF951, 11179 },
+  { 0xF952, 11184 },
+  { 0xF953, 11189 },
+  { 0xF954, 11194 },
+  { 0xF955, 11199 },
+  { 0xF956, 11204 },
+  { 0xF957, 11209 },
+  { 0xF958, 11214 },
+  { 0xF959, 11219 },
+  { 0xF95A, 11224 },
+  { 0xF95B, 11229 },
+  { 0xF95C, 10874 },
+  { 0xF95D, 11234 },
+  { 0xF95E, 11239 },
+  { 0xF95F, 11244 },
+  { 0xF960, 11249 },
+  { 0xF961, 11254 },
+  { 0xF962, 11259 },
+  { 0xF963, 11264 },
+  { 0xF964, 11269 },
+  { 0xF965, 11274 },
+  { 0xF966, 11279 },
+  { 0xF967, 11284 },
+  { 0xF968, 11289 },
+  { 0xF969, 11294 },
+  { 0xF96A, 11299 },
+  { 0xF96B, 11304 },
+  { 0xF96C, 11309 },
+  { 0xF96D, 11314 },
+  { 0xF96E, 11319 },
+  { 0xF96F, 11324 },
+  { 0xF970, 11329 },
+  { 0xF971, 11334 },
+  { 0xF972, 11339 },
+  { 0xF973, 11344 },
+  { 0xF974, 11349 },
+  { 0xF975, 11354 },
+  { 0xF976, 11359 },
+  { 0xF977, 11364 },
+  { 0xF978, 11369 },
+  { 0xF979, 11374 },
+  { 0xF97A, 11379 },
+  { 0xF97B, 11384 },
+  { 0xF97C, 11389 },
+  { 0xF97D, 11394 },
+  { 0xF97E, 11399 },
+  { 0xF97F, 11404 },
+  { 0xF980, 11409 },
+  { 0xF981, 11414 },
+  { 0xF982, 11419 },
+  { 0xF983, 11424 },
+  { 0xF984, 11429 },
+  { 0xF985, 11434 },
+  { 0xF986, 11439 },
+  { 0xF987, 11444 },
+  { 0xF988, 11449 },
+  { 0xF989, 11454 },
+  { 0xF98A, 11459 },
+  { 0xF98B, 11464 },
+  { 0xF98C, 11469 },
+  { 0xF98D, 11474 },
+  { 0xF98E, 11479 },
+  { 0xF98F, 11484 },
+  { 0xF990, 11489 },
+  { 0xF991, 11494 },
+  { 0xF992, 11499 },
+  { 0xF993, 11504 },
+  { 0xF994, 11509 },
+  { 0xF995, 11514 },
+  { 0xF996, 11519 },
+  { 0xF997, 11524 },
+  { 0xF998, 11529 },
+  { 0xF999, 11534 },
+  { 0xF99A, 11539 },
+  { 0xF99B, 11544 },
+  { 0xF99C, 11549 },
+  { 0xF99D, 11554 },
+  { 0xF99E, 11559 },
+  { 0xF99F, 11564 },
+  { 0xF9A0, 11569 },
+  { 0xF9A1, 11324 },
+  { 0xF9A2, 11574 },
+  { 0xF9A3, 11579 },
+  { 0xF9A4, 11584 },
+  { 0xF9A5, 11589 },
+  { 0xF9A6, 11594 },
+  { 0xF9A7, 11599 },
+  { 0xF9A8, 11604 },
+  { 0xF9A9, 11609 },
+  { 0xF9AA, 11244 },
+  { 0xF9AB, 11614 },
+  { 0xF9AC, 11619 },
+  { 0xF9AD, 11624 },
+  { 0xF9AE, 11629 },
+  { 0xF9AF, 11634 },
+  { 0xF9B0, 11639 },
+  { 0xF9B1, 11644 },
+  { 0xF9B2, 11649 },
+  { 0xF9B3, 11654 },
+  { 0xF9B4, 11659 },
+  { 0xF9B5, 11664 },
+  { 0xF9B6, 11669 },
+  { 0xF9B7, 11674 },
+  { 0xF9B8, 11679 },
+  { 0xF9B9, 11684 },
+  { 0xF9BA, 11689 },
+  { 0xF9BB, 11694 },
+  { 0xF9BC, 11699 },
+  { 0xF9BD, 11704 },
+  { 0xF9BE, 11709 },
+  { 0xF9BF, 10874 },
+  { 0xF9C0, 11714 },
+  { 0xF9C1, 11719 },
+  { 0xF9C2, 11724 },
+  { 0xF9C3, 11729 },
+  { 0xF9C4, 11734 },
+  { 0xF9C5, 11739 },
+  { 0xF9C6, 11744 },
+  { 0xF9C7, 11749 },
+  { 0xF9C8, 11754 },
+  { 0xF9C9, 11759 },
+  { 0xF9CA, 11764 },
+  { 0xF9CB, 11769 },
+  { 0xF9CC, 11774 },
+  { 0xF9CD, 11779 },
+  { 0xF9CE, 11784 },
+  { 0xF9CF, 11789 },
+  { 0xF9D0, 11794 },
+  { 0xF9D1, 11799 },
+  { 0xF9D2, 11804 },
+  { 0xF9D3, 11809 },
+  { 0xF9D4, 11814 },
+  { 0xF9D5, 11819 },
+  { 0xF9D6, 11824 },
+  { 0xF9D7, 11829 },
+  { 0xF9D8, 11834 },
+  { 0xF9D9, 11839 },
+  { 0xF9DA, 11844 },
+  { 0xF9DB, 11254 },
+  { 0xF9DC, 11849 },
+  { 0xF9DD, 11854 },
+  { 0xF9DE, 11859 },
+  { 0xF9DF, 11864 },
+  { 0xF9E0, 11869 },
+  { 0xF9E1, 11874 },
+  { 0xF9E2, 11879 },
+  { 0xF9E3, 11884 },
+  { 0xF9E4, 11889 },
+  { 0xF9E5, 11894 },
+  { 0xF9E6, 11899 },
+  { 0xF9E7, 11904 },
+  { 0xF9E8, 11909 },
+  { 0xF9E9, 11914 },
+  { 0xF9EA, 11919 },
+  { 0xF9EB, 11924 },
+  { 0xF9EC, 11929 },
+  { 0xF9ED, 11934 },
+  { 0xF9EE, 11939 },
+  { 0xF9EF, 11944 },
+  { 0xF9F0, 11949 },
+  { 0xF9F1, 11954 },
+  { 0xF9F2, 11959 },
+  { 0xF9F3, 11964 },
+  { 0xF9F4, 11969 },
+  { 0xF9F5, 11974 },
+  { 0xF9F6, 11979 },
+  { 0xF9F7, 11984 },
+  { 0xF9F8, 11989 },
+  { 0xF9F9, 11994 },
+  { 0xF9FA, 11999 },
+  { 0xF9FB, 12004 },
+  { 0xF9FC, 12009 },
+  { 0xF9FD, 12014 },
+  { 0xF9FE, 12019 },
+  { 0xF9FF, 12024 },
+  { 0xFA00, 12029 },
+  { 0xFA01, 12034 },
+  { 0xFA02, 12039 },
+  { 0xFA03, 12044 },
+  { 0xFA04, 12049 },
+  { 0xFA05, 12054 },
+  { 0xFA06, 12059 },
+  { 0xFA07, 12064 },
+  { 0xFA08, 12069 },
+  { 0xFA09, 12074 },
+  { 0xFA0A, 12079 },
+  { 0xFA0B, 12084 },
+  { 0xFA0C, 12089 },
+  { 0xFA0D, 12094 },
+  { 0xFA10, 12099 },
+  { 0xFA12, 12104 },
+  { 0xFA15, 12109 },
+  { 0xFA16, 12114 },
+  { 0xFA17, 12119 },
+  { 0xFA18, 12124 },
+  { 0xFA19, 12129 },
+  { 0xFA1A, 12134 },
+  { 0xFA1B, 12139 },
+  { 0xFA1C, 12144 },
+  { 0xFA1D, 12149 },
+  { 0xFA1E, 12154 },
+  { 0xFA20, 12159 },
+  { 0xFA22, 12164 },
+  { 0xFA25, 12169 },
+  { 0xFA26, 12174 },
+  { 0xFA2A, 12179 },
+  { 0xFA2B, 12184 },
+  { 0xFA2C, 12189 },
+  { 0xFA2D, 12194 },
+  { 0xFA30, 12199 },
+  { 0xFA31, 12204 },
+  { 0xFA32, 12209 },
+  { 0xFA33, 12214 },
+  { 0xFA34, 12219 },
+  { 0xFA35, 12224 },
+  { 0xFA36, 12229 },
+  { 0xFA37, 12234 },
+  { 0xFA38, 12239 },
+  { 0xFA39, 12244 },
+  { 0xFA3A, 12249 },
+  { 0xFA3B, 12254 },
+  { 0xFA3C, 12259 },
+  { 0xFA3D, 12264 },
+  { 0xFA3E, 12269 },
+  { 0xFA3F, 12274 },
+  { 0xFA40, 12279 },
+  { 0xFA41, 12284 },
+  { 0xFA42, 12289 },
+  { 0xFA43, 12294 },
+  { 0xFA44, 12299 },
+  { 0xFA45, 12304 },
+  { 0xFA46, 12309 },
+  { 0xFA47, 12314 },
+  { 0xFA48, 12319 },
+  { 0xFA49, 12324 },
+  { 0xFA4A, 12329 },
+  { 0xFA4B, 12334 },
+  { 0xFA4C, 12339 },
+  { 0xFA4D, 12344 },
+  { 0xFA4E, 12349 },
+  { 0xFA4F, 12354 },
+  { 0xFA50, 12359 },
+  { 0xFA51, 12364 },
+  { 0xFA52, 12369 },
+  { 0xFA53, 12374 },
+  { 0xFA54, 12379 },
+  { 0xFA55, 12384 },
+  { 0xFA56, 12389 },
+  { 0xFA57, 11519 },
+  { 0xFA58, 12394 },
+  { 0xFA59, 12399 },
+  { 0xFA5A, 12404 },
+  { 0xFA5B, 12409 },
+  { 0xFA5C, 12414 },
+  { 0xFA5D, 12419 },
+  { 0xFA5E, 12419 },
+  { 0xFA5F, 12424 },
+  { 0xFA60, 12429 },
+  { 0xFA61, 12434 },
+  { 0xFA62, 12439 },
+  { 0xFA63, 12444 },
+  { 0xFA64, 12449 },
+  { 0xFA65, 12454 },
+  { 0xFA66, 12459 },
+  { 0xFA67, 12169 },
+  { 0xFA68, 12464 },
+  { 0xFA69, 12469 },
+  { 0xFA6A, 12474 },
+  { 0xFA70, 12479 },
+  { 0xFA71, 12484 },
+  { 0xFA72, 12489 },
+  { 0xFA73, 12494 },
+  { 0xFA74, 12499 },
+  { 0xFA75, 12504 },
+  { 0xFA76, 12509 },
+  { 0xFA77, 12514 },
+  { 0xFA78, 12229 },
+  { 0xFA79, 12519 },
+  { 0xFA7A, 12524 },
+  { 0xFA7B, 12529 },
+  { 0xFA7C, 12099 },
+  { 0xFA7D, 12534 },
+  { 0xFA7E, 12539 },
+  { 0xFA7F, 12544 },
+  { 0xFA80, 12549 },
+  { 0xFA81, 12554 },
+  { 0xFA82, 12559 },
+  { 0xFA83, 12564 },
+  { 0xFA84, 12569 },
+  { 0xFA85, 12574 },
+  { 0xFA86, 12579 },
+  { 0xFA87, 12584 },
+  { 0xFA88, 12589 },
+  { 0xFA89, 12274 },
+  { 0xFA8A, 12594 },
+  { 0xFA8B, 12279 },
+  { 0xFA8C, 12599 },
+  { 0xFA8D, 12604 },
+  { 0xFA8E, 12609 },
+  { 0xFA8F, 12614 },
+  { 0xFA90, 12619 },
+  { 0xFA91, 12104 },
+  { 0xFA92, 10979 },
+  { 0xFA93, 12624 },
+  { 0xFA94, 12629 },
+  { 0xFA95, 12634 },
+  { 0xFA96, 11329 },
+  { 0xFA97, 11764 },
+  { 0xFA98, 12639 },
+  { 0xFA99, 12644 },
+  { 0xFA9A, 12314 },
+  { 0xFA9B, 12649 },
+  { 0xFA9C, 12319 },
+  { 0xFA9D, 12654 },
+  { 0xFA9E, 12659 },
+  { 0xFA9F, 12664 },
+  { 0xFAA0, 12114 },
+  { 0xFAA1, 12669 },
+  { 0xFAA2, 12674 },
+  { 0xFAA3, 12679 },
+  { 0xFAA4, 12684 },
+  { 0xFAA5, 12689 },
+  { 0xFAA6, 12119 },
+  { 0xFAA7, 12694 },
+  { 0xFAA8, 12699 },
+  { 0xFAA9, 12704 },
+  { 0xFAAA, 12709 },
+  { 0xFAAB, 12714 },
+  { 0xFAAC, 12719 },
+  { 0xFAAD, 12389 },
+  { 0xFAAE, 12724 },
+  { 0xFAAF, 12729 },
+  { 0xFAB0, 11519 },
+  { 0xFAB1, 12734 },
+  { 0xFAB2, 12409 },
+  { 0xFAB3, 12739 },
+  { 0xFAB4, 12744 },
+  { 0xFAB5, 12749 },
+  { 0xFAB6, 12754 },
+  { 0xFAB7, 12759 },
+  { 0xFAB8, 12434 },
+  { 0xFAB9, 12764 },
+  { 0xFABA, 12164 },
+  { 0xFABB, 12769 },
+  { 0xFABC, 12439 },
+  { 0xFABD, 11234 },
+  { 0xFABE, 12774 },
+  { 0xFABF, 12444 },
+  { 0xFAC0, 12779 },
+  { 0xFAC1, 12454 },
+  { 0xFAC2, 12784 },
+  { 0xFAC3, 12789 },
+  { 0xFAC4, 12794 },
+  { 0xFAC5, 12799 },
+  { 0xFAC6, 12804 },
+  { 0xFAC7, 12464 },
+  { 0xFAC8, 12144 },
+  { 0xFAC9, 12809 },
+  { 0xFACA, 12469 },
+  { 0xFACB, 12814 },
+  { 0xFACC, 12474 },
+  { 0xFACD, 12819 },
+  { 0xFACE, 10814 },
+  { 0xFACF, 12824 },
+  { 0xFAD0, 12830 },
+  { 0xFAD1, 12836 },
+  { 0xFAD2, 12842 },
+  { 0xFAD3, 12847 },
+  { 0xFAD4, 12852 },
+  { 0xFAD5, 12857 },
+  { 0xFAD6, 12863 },
+  { 0xFAD7, 12869 },
+  { 0xFAD8, 12875 },
+  { 0xFAD9, 12880 },
+  { 0xFB1D, 12885 },
+  { 0xFB1F, 12895 },
+  { 0xFB2A, 12905 },
+  { 0xFB2B, 12915 },
+  { 0xFB2C, 12925 },
+  { 0xFB2D, 12935 },
+  { 0xFB2E, 12945 },
+  { 0xFB2F, 12955 },
+  { 0xFB30, 12965 },
+  { 0xFB31, 12975 },
+  { 0xFB32, 12985 },
+  { 0xFB33, 12995 },
+  { 0xFB34, 13005 },
+  { 0xFB35, 13015 },
+  { 0xFB36, 13025 },
+  { 0xFB38, 13035 },
+  { 0xFB39, 13045 },
+  { 0xFB3A, 13055 },
+  { 0xFB3B, 13065 },
+  { 0xFB3C, 13075 },
+  { 0xFB3E, 13085 },
+  { 0xFB40, 13095 },
+  { 0xFB41, 13105 },
+  { 0xFB43, 13115 },
+  { 0xFB44, 13125 },
+  { 0xFB46, 13135 },
+  { 0xFB47, 13145 },
+  { 0xFB48, 13155 },
+  { 0xFB49, 13165 },
+  { 0xFB4A, 13175 },
+  { 0xFB4B, 13185 },
+  { 0xFB4C, 13195 },
+  { 0xFB4D, 13205 },
+  { 0xFB4E, 13215 },
+  { 0x1D15E, 13225 },
+  { 0x1D15F, 13237 },
+  { 0x1D160, 13249 },
+  { 0x1D161, 13261 },
+  { 0x1D162, 13273 },
+  { 0x1D163, 13285 },
+  { 0x1D164, 13297 },
+  { 0x1D1BB, 13309 },
+  { 0x1D1BC, 13321 },
+  { 0x1D1BD, 13333 },
+  { 0x1D1BE, 13345 },
+  { 0x1D1BF, 13357 },
+  { 0x1D1C0, 13369 },
+  { 0x2F800, 13381 },
+  { 0x2F801, 13386 },
+  { 0x2F802, 13391 },
+  { 0x2F803, 13396 },
+  { 0x2F804, 13402 },
+  { 0x2F805, 12199 },
+  { 0x2F806, 13407 },
+  { 0x2F807, 13412 },
+  { 0x2F808, 13417 },
+  { 0x2F809, 13422 },
+  { 0x2F80A, 12204 },
+  { 0x2F80B, 13427 },
+  { 0x2F80C, 13432 },
+  { 0x2F80D, 13437 },
+  { 0x2F80E, 12209 },
+  { 0x2F80F, 13443 },
+  { 0x2F810, 13448 },
+  { 0x2F811, 13453 },
+  { 0x2F812, 13458 },
+  { 0x2F813, 13464 },
+  { 0x2F814, 13469 },
+  { 0x2F815, 13474 },
+  { 0x2F816, 13479 },
+  { 0x2F817, 13485 },
+  { 0x2F818, 13490 },
+  { 0x2F819, 13495 },
+  { 0x2F81A, 13500 },
+  { 0x2F81B, 12484 },
+  { 0x2F81C, 13505 },
+  { 0x2F81D, 13511 },
+  { 0x2F81E, 13516 },
+  { 0x2F81F, 13521 },
+  { 0x2F820, 13526 },
+  { 0x2F821, 13531 },
+  { 0x2F822, 13536 },
+  { 0x2F823, 13541 },
+  { 0x2F824, 13546 },
+  { 0x2F825, 12509 },
+  { 0x2F826, 12214 },
+  { 0x2F827, 12219 },
+  { 0x2F828, 12514 },
+  { 0x2F829, 13551 },
+  { 0x2F82A, 13556 },
+  { 0x2F82B, 11264 },
+  { 0x2F82C, 13561 },
+  { 0x2F82D, 12224 },
+  { 0x2F82E, 13566 },
+  { 0x2F82F, 13571 },
+  { 0x2F830, 13576 },
+  { 0x2F831, 13581 },
+  { 0x2F832, 13581 },
+  { 0x2F833, 13581 },
+  { 0x2F834, 13586 },
+  { 0x2F835, 13592 },
+  { 0x2F836, 13597 },
+  { 0x2F837, 13602 },
+  { 0x2F838, 13607 },
+  { 0x2F839, 13613 },
+  { 0x2F83A, 13618 },
+  { 0x2F83B, 13623 },
+  { 0x2F83C, 13628 },
+  { 0x2F83D, 13633 },
+  { 0x2F83E, 13638 },
+  { 0x2F83F, 13643 },
+  { 0x2F840, 13648 },
+  { 0x2F841, 13653 },
+  { 0x2F842, 13658 },
+  { 0x2F843, 13663 },
+  { 0x2F844, 13668 },
+  { 0x2F845, 13673 },
+  { 0x2F846, 13673 },
+  { 0x2F847, 12524 },
+  { 0x2F848, 13678 },
+  { 0x2F849, 13683 },
+  { 0x2F84A, 13688 },
+  { 0x2F84B, 13693 },
+  { 0x2F84C, 12234 },
+  { 0x2F84D, 13698 },
+  { 0x2F84E, 13703 },
+  { 0x2F84F, 13708 },
+  { 0x2F850, 12029 },
+  { 0x2F851, 13713 },
+  { 0x2F852, 13718 },
+  { 0x2F853, 13723 },
+  { 0x2F854, 13728 },
+  { 0x2F855, 13733 },
+  { 0x2F856, 13738 },
+  { 0x2F857, 13743 },
+  { 0x2F858, 13748 },
+  { 0x2F859, 13753 },
+  { 0x2F85A, 13759 },
+  { 0x2F85B, 13764 },
+  { 0x2F85C, 13769 },
+  { 0x2F85D, 13774 },
+  { 0x2F85E, 13779 },
+  { 0x2F85F, 13784 },
+  { 0x2F860, 13789 },
+  { 0x2F861, 13795 },
+  { 0x2F862, 13801 },
+  { 0x2F863, 13806 },
+  { 0x2F864, 13811 },
+  { 0x2F865, 13816 },
+  { 0x2F866, 13821 },
+  { 0x2F867, 13826 },
+  { 0x2F868, 13831 },
+  { 0x2F869, 13836 },
+  { 0x2F86A, 13841 },
+  { 0x2F86B, 13841 },
+  { 0x2F86C, 13846 },
+  { 0x2F86D, 13852 },
+  { 0x2F86E, 13857 },
+  { 0x2F86F, 11244 },
+  { 0x2F870, 13862 },
+  { 0x2F871, 13867 },
+  { 0x2F872, 13873 },
+  { 0x2F873, 13878 },
+  { 0x2F874, 13883 },
+  { 0x2F875, 13888 },
+  { 0x2F876, 13893 },
+  { 0x2F877, 13898 },
+  { 0x2F878, 12259 },
+  { 0x2F879, 13903 },
+  { 0x2F87A, 13908 },
+  { 0x2F87B, 13913 },
+  { 0x2F87C, 13919 },
+  { 0x2F87D, 13924 },
+  { 0x2F87E, 13930 },
+  { 0x2F87F, 13935 },
+  { 0x2F880, 13940 },
+  { 0x2F881, 13945 },
+  { 0x2F882, 13950 },
+  { 0x2F883, 13955 },
+  { 0x2F884, 13960 },
+  { 0x2F885, 13965 },
+  { 0x2F886, 13970 },
+  { 0x2F887, 13975 },
+  { 0x2F888, 13980 },
+  { 0x2F889, 13985 },
+  { 0x2F88A, 13991 },
+  { 0x2F88B, 13996 },
+  { 0x2F88C, 14001 },
+  { 0x2F88D, 14006 },
+  { 0x2F88E, 10974 },
+  { 0x2F88F, 14011 },
+  { 0x2F890, 14017 },
+  { 0x2F891, 14022 },
+  { 0x2F892, 14022 },
+  { 0x2F893, 14028 },
+  { 0x2F894, 14033 },
+  { 0x2F895, 14033 },
+  { 0x2F896, 14038 },
+  { 0x2F897, 14043 },
+  { 0x2F898, 14049 },
+  { 0x2F899, 14055 },
+  { 0x2F89A, 14060 },
+  { 0x2F89B, 14065 },
+  { 0x2F89C, 14070 },
+  { 0x2F89D, 14075 },
+  { 0x2F89E, 14080 },
+  { 0x2F89F, 14085 },
+  { 0x2F8A0, 14090 },
+  { 0x2F8A1, 14095 },
+  { 0x2F8A2, 14100 },
+  { 0x2F8A3, 12264 },
+  { 0x2F8A4, 14105 },
+  { 0x2F8A5, 14111 },
+  { 0x2F8A6, 14116 },
+  { 0x2F8A7, 14121 },
+  { 0x2F8A8, 12584 },
+  { 0x2F8A9, 14121 },
+  { 0x2F8AA, 14126 },
+  { 0x2F8AB, 12274 },
+  { 0x2F8AC, 14131 },
+  { 0x2F8AD, 14136 },
+  { 0x2F8AE, 14141 },
+  { 0x2F8AF, 14146 },
+  { 0x2F8B0, 12279 },
+  { 0x2F8B1, 10839 },
+  { 0x2F8B2, 14151 },
+  { 0x2F8B3, 14156 },
+  { 0x2F8B4, 14161 },
+  { 0x2F8B5, 14166 },
+  { 0x2F8B6, 14171 },
+  { 0x2F8B7, 14176 },
+  { 0x2F8B8, 14181 },
+  { 0x2F8B9, 14187 },
+  { 0x2F8BA, 14192 },
+  { 0x2F8BB, 14197 },
+  { 0x2F8BC, 14202 },
+  { 0x2F8BD, 14207 },
+  { 0x2F8BE, 14212 },
+  { 0x2F8BF, 14218 },
+  { 0x2F8C0, 14223 },
+  { 0x2F8C1, 14228 },
+  { 0x2F8C2, 14233 },
+  { 0x2F8C3, 14238 },
+  { 0x2F8C4, 14243 },
+  { 0x2F8C5, 14248 },
+  { 0x2F8C6, 14253 },
+  { 0x2F8C7, 14258 },
+  { 0x2F8C8, 12284 },
+  { 0x2F8C9, 14263 },
+  { 0x2F8CA, 14268 },
+  { 0x2F8CB, 14274 },
+  { 0x2F8CC, 14279 },
+  { 0x2F8CD, 14284 },
+  { 0x2F8CE, 14289 },
+  { 0x2F8CF, 12294 },
+  { 0x2F8D0, 14294 },
+  { 0x2F8D1, 14299 },
+  { 0x2F8D2, 14304 },
+  { 0x2F8D3, 14309 },
+  { 0x2F8D4, 14314 },
+  { 0x2F8D5, 14319 },
+  { 0x2F8D6, 14324 },
+  { 0x2F8D7, 14329 },
+  { 0x2F8D8, 10979 },
+  { 0x2F8D9, 12624 },
+  { 0x2F8DA, 14334 },
+  { 0x2F8DB, 14339 },
+  { 0x2F8DC, 14344 },
+  { 0x2F8DD, 14349 },
+  { 0x2F8DE, 14355 },
+  { 0x2F8DF, 14360 },
+  { 0x2F8E0, 14365 },
+  { 0x2F8E1, 14370 },
+  { 0x2F8E2, 12299 },
+  { 0x2F8E3, 14375 },
+  { 0x2F8E4, 14381 },
+  { 0x2F8E5, 14386 },
+  { 0x2F8E6, 14391 },
+  { 0x2F8E7, 12842 },
+  { 0x2F8E8, 14396 },
+  { 0x2F8E9, 14401 },
+  { 0x2F8EA, 14406 },
+  { 0x2F8EB, 14411 },
+  { 0x2F8EC, 14416 },
+  { 0x2F8ED, 14422 },
+  { 0x2F8EE, 14427 },
+  { 0x2F8EF, 14432 },
+  { 0x2F8F0, 14437 },
+  { 0x2F8F1, 14443 },
+  { 0x2F8F2, 14448 },
+  { 0x2F8F3, 14453 },
+  { 0x2F8F4, 14458 },
+  { 0x2F8F5, 11329 },
+  { 0x2F8F6, 14463 },
+  { 0x2F8F7, 14468 },
+  { 0x2F8F8, 14474 },
+  { 0x2F8F9, 14480 },
+  { 0x2F8FA, 14486 },
+  { 0x2F8FB, 14491 },
+  { 0x2F8FC, 14497 },
+  { 0x2F8FD, 14502 },
+  { 0x2F8FE, 14507 },
+  { 0x2F8FF, 14512 },
+  { 0x2F900, 14517 },
+  { 0x2F901, 12304 },
+  { 0x2F902, 11764 },
+  { 0x2F903, 14522 },
+  { 0x2F904, 14527 },
+  { 0x2F905, 14532 },
+  { 0x2F906, 14537 },
+  { 0x2F907, 14543 },
+  { 0x2F908, 14548 },
+  { 0x2F909, 14553 },
+  { 0x2F90A, 14558 },
+  { 0x2F90B, 12644 },
+  { 0x2F90C, 14563 },
+  { 0x2F90D, 14568 },
+  { 0x2F90E, 14574 },
+  { 0x2F90F, 14579 },
+  { 0x2F910, 14584 },
+  { 0x2F911, 14590 },
+  { 0x2F912, 14596 },
+  { 0x2F913, 14601 },
+  { 0x2F914, 12649 },
+  { 0x2F915, 14606 },
+  { 0x2F916, 14611 },
+  { 0x2F917, 14616 },
+  { 0x2F918, 14621 },
+  { 0x2F919, 14626 },
+  { 0x2F91A, 14631 },
+  { 0x2F91B, 14636 },
+  { 0x2F91C, 14642 },
+  { 0x2F91D, 14647 },
+  { 0x2F91E, 14653 },
+  { 0x2F91F, 14658 },
+  { 0x2F920, 14664 },
+  { 0x2F921, 12659 },
+  { 0x2F922, 14669 },
+  { 0x2F923, 14674 },
+  { 0x2F924, 14680 },
+  { 0x2F925, 14685 },
+  { 0x2F926, 14690 },
+  { 0x2F927, 14696 },
+  { 0x2F928, 14702 },
+  { 0x2F929, 14707 },
+  { 0x2F92A, 14712 },
+  { 0x2F92B, 14717 },
+  { 0x2F92C, 14722 },
+  { 0x2F92D, 14722 },
+  { 0x2F92E, 14727 },
+  { 0x2F92F, 14732 },
+  { 0x2F930, 12669 },
+  { 0x2F931, 14737 },
+  { 0x2F932, 14742 },
+  { 0x2F933, 14747 },
+  { 0x2F934, 14752 },
+  { 0x2F935, 14757 },
+  { 0x2F936, 14763 },
+  { 0x2F937, 14768 },
+  { 0x2F938, 11259 },
+  { 0x2F939, 14774 },
+  { 0x2F93A, 14780 },
+  { 0x2F93B, 14785 },
+  { 0x2F93C, 14791 },
+  { 0x2F93D, 14797 },
+  { 0x2F93E, 14803 },
+  { 0x2F93F, 14808 },
+  { 0x2F940, 12699 },
+  { 0x2F941, 14813 },
+  { 0x2F942, 14819 },
+  { 0x2F943, 14825 },
+  { 0x2F944, 14831 },
+  { 0x2F945, 14837 },
+  { 0x2F946, 14842 },
+  { 0x2F947, 14842 },
+  { 0x2F948, 12704 },
+  { 0x2F949, 12852 },
+  { 0x2F94A, 14847 },
+  { 0x2F94B, 14852 },
+  { 0x2F94C, 14857 },
+  { 0x2F94D, 14862 },
+  { 0x2F94E, 14868 },
+  { 0x2F94F, 11069 },
+  { 0x2F950, 12714 },
+  { 0x2F951, 14873 },
+  { 0x2F952, 14878 },
+  { 0x2F953, 12359 },
+  { 0x2F954, 14884 },
+  { 0x2F955, 14890 },
+  { 0x2F956, 12139 },
+  { 0x2F957, 14896 },
+  { 0x2F958, 14901 },
+  { 0x2F959, 12379 },
+  { 0x2F95A, 14906 },
+  { 0x2F95B, 14911 },
+  { 0x2F95C, 14916 },
+  { 0x2F95D, 14922 },
+  { 0x2F95E, 14922 },
+  { 0x2F95F, 14928 },
+  { 0x2F960, 14933 },
+  { 0x2F961, 14938 },
+  { 0x2F962, 14944 },
+  { 0x2F963, 14949 },
+  { 0x2F964, 14954 },
+  { 0x2F965, 14959 },
+  { 0x2F966, 14965 },
+  { 0x2F967, 14970 },
+  { 0x2F968, 14975 },
+  { 0x2F969, 14980 },
+  { 0x2F96A, 14985 },
+  { 0x2F96B, 14990 },
+  { 0x2F96C, 14996 },
+  { 0x2F96D, 15001 },
+  { 0x2F96E, 15006 },
+  { 0x2F96F, 15011 },
+  { 0x2F970, 15016 },
+  { 0x2F971, 15021 },
+  { 0x2F972, 15026 },
+  { 0x2F973, 15032 },
+  { 0x2F974, 15038 },
+  { 0x2F975, 15043 },
+  { 0x2F976, 15049 },
+  { 0x2F977, 15054 },
+  { 0x2F978, 15060 },
+  { 0x2F979, 15065 },
+  { 0x2F97A, 12409 },
+  { 0x2F97B, 15070 },
+  { 0x2F97C, 15076 },
+  { 0x2F97D, 15082 },
+  { 0x2F97E, 15087 },
+  { 0x2F97F, 15093 },
+  { 0x2F980, 15098 },
+  { 0x2F981, 15104 },
+  { 0x2F982, 15109 },
+  { 0x2F983, 15114 },
+  { 0x2F984, 15119 },
+  { 0x2F985, 15124 },
+  { 0x2F986, 15129 },
+  { 0x2F987, 15134 },
+  { 0x2F988, 15140 },
+  { 0x2F989, 15146 },
+  { 0x2F98A, 15152 },
+  { 0x2F98B, 14028 },
+  { 0x2F98C, 15158 },
+  { 0x2F98D, 15163 },
+  { 0x2F98E, 15168 },
+  { 0x2F98F, 15173 },
+  { 0x2F990, 15178 },
+  { 0x2F991, 15183 },
+  { 0x2F992, 15188 },
+  { 0x2F993, 15193 },
+  { 0x2F994, 15198 },
+  { 0x2F995, 15203 },
+  { 0x2F996, 15208 },
+  { 0x2F997, 15213 },
+  { 0x2F998, 11349 },
+  { 0x2F999, 15219 },
+  { 0x2F99A, 15224 },
+  { 0x2F99B, 15229 },
+  { 0x2F99C, 15234 },
+  { 0x2F99D, 15239 },
+  { 0x2F99E, 15244 },
+  { 0x2F99F, 12424 },
+  { 0x2F9A0, 15249 },
+  { 0x2F9A1, 15254 },
+  { 0x2F9A2, 15259 },
+  { 0x2F9A3, 15264 },
+  { 0x2F9A4, 15269 },
+  { 0x2F9A5, 15275 },
+  { 0x2F9A6, 15281 },
+  { 0x2F9A7, 15287 },
+  { 0x2F9A8, 15292 },
+  { 0x2F9A9, 15297 },
+  { 0x2F9AA, 15302 },
+  { 0x2F9AB, 15307 },
+  { 0x2F9AC, 15313 },
+  { 0x2F9AD, 15318 },
+  { 0x2F9AE, 15324 },
+  { 0x2F9AF, 15329 },
+  { 0x2F9B0, 15334 },
+  { 0x2F9B1, 15340 },
+  { 0x2F9B2, 15346 },
+  { 0x2F9B3, 15351 },
+  { 0x2F9B4, 11044 },
+  { 0x2F9B5, 15356 },
+  { 0x2F9B6, 15361 },
+  { 0x2F9B7, 15366 },
+  { 0x2F9B8, 15371 },
+  { 0x2F9B9, 15376 },
+  { 0x2F9BA, 15381 },
+  { 0x2F9BB, 12749 },
+  { 0x2F9BC, 15386 },
+  { 0x2F9BD, 15391 },
+  { 0x2F9BE, 15396 },
+  { 0x2F9BF, 15401 },
+  { 0x2F9C0, 15406 },
+  { 0x2F9C1, 15411 },
+  { 0x2F9C2, 15416 },
+  { 0x2F9C3, 15421 },
+  { 0x2F9C4, 15426 },
+  { 0x2F9C5, 15431 },
+  { 0x2F9C6, 15437 },
+  { 0x2F9C7, 15442 },
+  { 0x2F9C8, 15447 },
+  { 0x2F9C9, 15452 },
+  { 0x2F9CA, 15457 },
+  { 0x2F9CB, 15462 },
+  { 0x2F9CC, 15468 },
+  { 0x2F9CD, 15474 },
+  { 0x2F9CE, 15479 },
+  { 0x2F9CF, 15484 },
+  { 0x2F9D0, 12774 },
+  { 0x2F9D1, 12779 },
+  { 0x2F9D2, 15489 },
+  { 0x2F9D3, 15494 },
+  { 0x2F9D4, 15500 },
+  { 0x2F9D5, 15505 },
+  { 0x2F9D6, 15510 },
+  { 0x2F9D7, 15515 },
+  { 0x2F9D8, 15520 },
+  { 0x2F9D9, 15526 },
+  { 0x2F9DA, 15532 },
+  { 0x2F9DB, 15537 },
+  { 0x2F9DC, 15542 },
+  { 0x2F9DD, 15547 },
+  { 0x2F9DE, 15553 },
+  { 0x2F9DF, 12784 },
+  { 0x2F9E0, 15558 },
+  { 0x2F9E1, 15564 },
+  { 0x2F9E2, 15570 },
+  { 0x2F9E3, 15575 },
+  { 0x2F9E4, 15580 },
+  { 0x2F9E5, 15585 },
+  { 0x2F9E6, 15591 },
+  { 0x2F9E7, 15596 },
+  { 0x2F9E8, 15601 },
+  { 0x2F9E9, 15606 },
+  { 0x2F9EA, 15611 },
+  { 0x2F9EB, 15616 },
+  { 0x2F9EC, 15621 },
+  { 0x2F9ED, 15626 },
+  { 0x2F9EE, 15632 },
+  { 0x2F9EF, 15637 },
+  { 0x2F9F0, 15642 },
+  { 0x2F9F1, 15647 },
+  { 0x2F9F2, 15653 },
+  { 0x2F9F3, 15658 },
+  { 0x2F9F4, 15663 },
+  { 0x2F9F5, 15668 },
+  { 0x2F9F6, 15673 },
+  { 0x2F9F7, 15679 },
+  { 0x2F9F8, 15685 },
+  { 0x2F9F9, 15690 },
+  { 0x2F9FA, 15695 },
+  { 0x2F9FB, 15700 },
+  { 0x2F9FC, 15706 },
+  { 0x2F9FD, 15711 },
+  { 0x2F9FE, 12814 },
+  { 0x2F9FF, 12814 },
+  { 0x2FA00, 15717 },
+  { 0x2FA01, 15722 },
+  { 0x2FA02, 15728 },
+  { 0x2FA03, 15733 },
+  { 0x2FA04, 15738 },
+  { 0x2FA05, 15743 },
+  { 0x2FA06, 15748 },
+  { 0x2FA07, 15753 },
+  { 0x2FA08, 15758 },
+  { 0x2FA09, 15763 },
+  { 0x2FA0A, 12819 },
+  { 0x2FA0B, 15769 },
+  { 0x2FA0C, 15774 },
+  { 0x2FA0D, 15779 },
+  { 0x2FA0E, 15784 },
+  { 0x2FA0F, 15789 },
+  { 0x2FA10, 15794 },
+  { 0x2FA11, 15800 },
+  { 0x2FA12, 15805 },
+  { 0x2FA13, 15811 },
+  { 0x2FA14, 15817 },
+  { 0x2FA15, 15823 },
+  { 0x2FA16, 15828 },
+  { 0x2FA17, 15833 },
+  { 0x2FA18, 15838 },
+  { 0x2FA19, 15843 },
+  { 0x2FA1A, 15848 },
+  { 0x2FA1B, 15853 },
+  { 0x2FA1C, 15858 },
+  { 0x2FA1D, 15863 },
+  { (gunichar)(-1), 0 } /* end marker */ 
 };
 
 static const UnicharUnichar names_list_exes[] = 
@@ -7719,2054 +16445,6 @@ static const UnicharUnichar names_list_exes[] =
   { 0x1D6A4, 0xD456 },
   { 0x1D6A5, 0x0237 },
   { 0x1D6A5, 0xD457 },
-  { (gunichar)(-1), 0 }
-};
-
-static const UnicharString names_list_colons[] = 
-{
-  { 0x00C0, "0041 0300" },
-  { 0x00C1, "0041 0301" },
-  { 0x00C2, "0041 0302" },
-  { 0x00C3, "0041 0303" },
-  { 0x00C4, "0041 0308" },
-  { 0x00C5, "0041 030A" },
-  { 0x00C7, "0043 0327" },
-  { 0x00C8, "0045 0300" },
-  { 0x00C9, "0045 0301" },
-  { 0x00CA, "0045 0302" },
-  { 0x00CB, "0045 0308" },
-  { 0x00CC, "0049 0300" },
-  { 0x00CD, "0049 0301" },
-  { 0x00CE, "0049 0302" },
-  { 0x00CF, "0049 0308" },
-  { 0x00D1, "004E 0303" },
-  { 0x00D2, "004F 0300" },
-  { 0x00D3, "004F 0301" },
-  { 0x00D4, "004F 0302" },
-  { 0x00D5, "004F 0303" },
-  { 0x00D6, "004F 0308" },
-  { 0x00D9, "0055 0300" },
-  { 0x00DA, "0055 0301" },
-  { 0x00DB, "0055 0302" },
-  { 0x00DC, "0055 0308" },
-  { 0x00DD, "0059 0301" },
-  { 0x00E0, "0061 0300" },
-  { 0x00E1, "0061 0301" },
-  { 0x00E2, "0061 0302" },
-  { 0x00E3, "0061 0303" },
-  { 0x00E4, "0061 0308" },
-  { 0x00E5, "0061 030A" },
-  { 0x00E7, "0063 0327" },
-  { 0x00E8, "0065 0300" },
-  { 0x00E9, "0065 0301" },
-  { 0x00EA, "0065 0302" },
-  { 0x00EB, "0065 0308" },
-  { 0x00EC, "0069 0300" },
-  { 0x00ED, "0069 0301" },
-  { 0x00EE, "0069 0302" },
-  { 0x00EF, "0069 0308" },
-  { 0x00F1, "006E 0303" },
-  { 0x00F2, "006F 0300" },
-  { 0x00F3, "006F 0301" },
-  { 0x00F4, "006F 0302" },
-  { 0x00F5, "006F 0303" },
-  { 0x00F6, "006F 0308" },
-  { 0x00F9, "0075 0300" },
-  { 0x00FA, "0075 0301" },
-  { 0x00FB, "0075 0302" },
-  { 0x00FC, "0075 0308" },
-  { 0x00FD, "0079 0301" },
-  { 0x00FF, "0079 0308" },
-  { 0x0100, "0041 0304" },
-  { 0x0101, "0061 0304" },
-  { 0x0102, "0041 0306" },
-  { 0x0103, "0061 0306" },
-  { 0x0104, "0041 0328" },
-  { 0x0105, "0061 0328" },
-  { 0x0106, "0043 0301" },
-  { 0x0107, "0063 0301" },
-  { 0x0108, "0043 0302" },
-  { 0x0109, "0063 0302" },
-  { 0x010A, "0043 0307" },
-  { 0x010B, "0063 0307" },
-  { 0x010C, "0043 030C" },
-  { 0x010D, "0063 030C" },
-  { 0x010E, "0044 030C" },
-  { 0x010F, "0064 030C" },
-  { 0x0112, "0045 0304" },
-  { 0x0113, "0065 0304" },
-  { 0x0114, "0045 0306" },
-  { 0x0115, "0065 0306" },
-  { 0x0116, "0045 0307" },
-  { 0x0117, "0065 0307" },
-  { 0x0118, "0045 0328" },
-  { 0x0119, "0065 0328" },
-  { 0x011A, "0045 030C" },
-  { 0x011B, "0065 030C" },
-  { 0x011C, "0047 0302" },
-  { 0x011D, "0067 0302" },
-  { 0x011E, "0047 0306" },
-  { 0x011F, "0067 0306" },
-  { 0x0120, "0047 0307" },
-  { 0x0121, "0067 0307" },
-  { 0x0122, "0047 0327" },
-  { 0x0123, "0067 0327" },
-  { 0x0124, "0048 0302" },
-  { 0x0125, "0068 0302" },
-  { 0x0128, "0049 0303" },
-  { 0x0129, "0069 0303" },
-  { 0x012A, "0049 0304" },
-  { 0x012B, "0069 0304" },
-  { 0x012C, "0049 0306" },
-  { 0x012D, "0069 0306" },
-  { 0x012E, "0049 0328" },
-  { 0x012F, "0069 0328" },
-  { 0x0130, "0049 0307" },
-  { 0x0134, "004A 0302" },
-  { 0x0135, "006A 0302" },
-  { 0x0136, "004B 0327" },
-  { 0x0137, "006B 0327" },
-  { 0x0139, "004C 0301" },
-  { 0x013A, "006C 0301" },
-  { 0x013B, "004C 0327" },
-  { 0x013C, "006C 0327" },
-  { 0x013D, "004C 030C" },
-  { 0x013E, "006C 030C" },
-  { 0x0143, "004E 0301" },
-  { 0x0144, "006E 0301" },
-  { 0x0145, "004E 0327" },
-  { 0x0146, "006E 0327" },
-  { 0x0147, "004E 030C" },
-  { 0x0148, "006E 030C" },
-  { 0x014C, "004F 0304" },
-  { 0x014D, "006F 0304" },
-  { 0x014E, "004F 0306" },
-  { 0x014F, "006F 0306" },
-  { 0x0150, "004F 030B" },
-  { 0x0151, "006F 030B" },
-  { 0x0154, "0052 0301" },
-  { 0x0155, "0072 0301" },
-  { 0x0156, "0052 0327" },
-  { 0x0157, "0072 0327" },
-  { 0x0158, "0052 030C" },
-  { 0x0159, "0072 030C" },
-  { 0x015A, "0053 0301" },
-  { 0x015B, "0073 0301" },
-  { 0x015C, "0053 0302" },
-  { 0x015D, "0073 0302" },
-  { 0x015E, "0053 0327" },
-  { 0x015F, "0073 0327" },
-  { 0x0160, "0053 030C" },
-  { 0x0161, "0073 030C" },
-  { 0x0162, "0054 0327" },
-  { 0x0163, "0074 0327" },
-  { 0x0164, "0054 030C" },
-  { 0x0165, "0074 030C" },
-  { 0x0168, "0055 0303" },
-  { 0x0169, "0075 0303" },
-  { 0x016A, "0055 0304" },
-  { 0x016B, "0075 0304" },
-  { 0x016C, "0055 0306" },
-  { 0x016D, "0075 0306" },
-  { 0x016E, "0055 030A" },
-  { 0x016F, "0075 030A" },
-  { 0x0170, "0055 030B" },
-  { 0x0171, "0075 030B" },
-  { 0x0172, "0055 0328" },
-  { 0x0173, "0075 0328" },
-  { 0x0174, "0057 0302" },
-  { 0x0175, "0077 0302" },
-  { 0x0176, "0059 0302" },
-  { 0x0177, "0079 0302" },
-  { 0x0178, "0059 0308" },
-  { 0x0179, "005A 0301" },
-  { 0x017A, "007A 0301" },
-  { 0x017B, "005A 0307" },
-  { 0x017C, "007A 0307" },
-  { 0x017D, "005A 030C" },
-  { 0x017E, "007A 030C" },
-  { 0x01A0, "004F 031B" },
-  { 0x01A1, "006F 031B" },
-  { 0x01AF, "0055 031B" },
-  { 0x01B0, "0075 031B" },
-  { 0x01CD, "0041 030C" },
-  { 0x01CE, "0061 030C" },
-  { 0x01CF, "0049 030C" },
-  { 0x01D0, "0069 030C" },
-  { 0x01D1, "004F 030C" },
-  { 0x01D2, "006F 030C" },
-  { 0x01D3, "0055 030C" },
-  { 0x01D4, "0075 030C" },
-  { 0x01D5, "00DC 0304" },
-  { 0x01D6, "00FC 0304" },
-  { 0x01D7, "00DC 0301" },
-  { 0x01D8, "00FC 0301" },
-  { 0x01D9, "00DC 030C" },
-  { 0x01DA, "00FC 030C" },
-  { 0x01DB, "00DC 0300" },
-  { 0x01DC, "00FC 0300" },
-  { 0x01DE, "00C4 0304" },
-  { 0x01DF, "00E4 0304" },
-  { 0x01E0, "0226 0304" },
-  { 0x01E1, "0227 0304" },
-  { 0x01E2, "00C6 0304" },
-  { 0x01E3, "00E6 0304" },
-  { 0x01E6, "0047 030C" },
-  { 0x01E7, "0067 030C" },
-  { 0x01E8, "004B 030C" },
-  { 0x01E9, "006B 030C" },
-  { 0x01EA, "004F 0328" },
-  { 0x01EB, "006F 0328" },
-  { 0x01EC, "01EA 0304" },
-  { 0x01ED, "01EB 0304" },
-  { 0x01EE, "01B7 030C" },
-  { 0x01EF, "0292 030C" },
-  { 0x01F0, "006A 030C" },
-  { 0x01F4, "0047 0301" },
-  { 0x01F5, "0067 0301" },
-  { 0x01F8, "004E 0300" },
-  { 0x01F9, "006E 0300" },
-  { 0x01FA, "00C5 0301" },
-  { 0x01FB, "00E5 0301" },
-  { 0x01FC, "00C6 0301" },
-  { 0x01FD, "00E6 0301" },
-  { 0x01FE, "00D8 0301" },
-  { 0x01FF, "00F8 0301" },
-  { 0x0200, "0041 030F" },
-  { 0x0201, "0061 030F" },
-  { 0x0202, "0041 0311" },
-  { 0x0203, "0061 0311" },
-  { 0x0204, "0045 030F" },
-  { 0x0205, "0065 030F" },
-  { 0x0206, "0045 0311" },
-  { 0x0207, "0065 0311" },
-  { 0x0208, "0049 030F" },
-  { 0x0209, "0069 030F" },
-  { 0x020A, "0049 0311" },
-  { 0x020B, "0069 0311" },
-  { 0x020C, "004F 030F" },
-  { 0x020D, "006F 030F" },
-  { 0x020E, "004F 0311" },
-  { 0x020F, "006F 0311" },
-  { 0x0210, "0052 030F" },
-  { 0x0211, "0072 030F" },
-  { 0x0212, "0052 0311" },
-  { 0x0213, "0072 0311" },
-  { 0x0214, "0055 030F" },
-  { 0x0215, "0075 030F" },
-  { 0x0216, "0055 0311" },
-  { 0x0217, "0075 0311" },
-  { 0x0218, "0053 0326" },
-  { 0x0219, "0073 0326" },
-  { 0x021A, "0054 0326" },
-  { 0x021B, "0074 0326" },
-  { 0x021E, "0048 030C" },
-  { 0x021F, "0068 030C" },
-  { 0x0226, "0041 0307" },
-  { 0x0227, "0061 0307" },
-  { 0x0228, "0045 0327" },
-  { 0x0229, "0065 0327" },
-  { 0x022A, "00D6 0304" },
-  { 0x022B, "00F6 0304" },
-  { 0x022C, "00D5 0304" },
-  { 0x022D, "00F5 0304" },
-  { 0x022E, "004F 0307" },
-  { 0x022F, "006F 0307" },
-  { 0x0230, "022E 0304" },
-  { 0x0231, "022F 0304" },
-  { 0x0232, "0059 0304" },
-  { 0x0233, "0079 0304" },
-  { 0x0340, "0300 combining grave accent" },
-  { 0x0341, "0301 combining acute accent" },
-  { 0x0343, "0313 combining comma above" },
-  { 0x0344, "0308 0301" },
-  { 0x0374, "02B9 modifier letter prime" },
-  { 0x037E, "003B semicolon" },
-  { 0x0385, "00A8 0301" },
-  { 0x0386, "0391 0301" },
-  { 0x0387, "00B7 middle dot" },
-  { 0x0388, "0395 0301" },
-  { 0x0389, "0397 0301" },
-  { 0x038A, "0399 0301" },
-  { 0x038C, "039F 0301" },
-  { 0x038E, "03A5 0301" },
-  { 0x038F, "03A9 0301" },
-  { 0x0390, "03CA 0301" },
-  { 0x03AA, "0399 0308" },
-  { 0x03AB, "03A5 0308" },
-  { 0x03AC, "03B1 0301" },
-  { 0x03AD, "03B5 0301" },
-  { 0x03AE, "03B7 0301" },
-  { 0x03AF, "03B9 0301" },
-  { 0x03B0, "03CB 0301" },
-  { 0x03CA, "03B9 0308" },
-  { 0x03CB, "03C5 0308" },
-  { 0x03CC, "03BF 0301" },
-  { 0x03CD, "03C5 0301" },
-  { 0x03CE, "03C9 0301" },
-  { 0x03D3, "03D2 0301" },
-  { 0x03D4, "03D2 0308" },
-  { 0x0400, "0415 0300" },
-  { 0x0401, "0415 0308" },
-  { 0x0403, "0413 0301" },
-  { 0x0407, "0406 0308" },
-  { 0x040C, "041A 0301" },
-  { 0x040D, "0418 0300" },
-  { 0x040E, "0423 0306" },
-  { 0x0419, "0418 0306" },
-  { 0x0439, "0438 0306" },
-  { 0x0450, "0435 0300" },
-  { 0x0451, "0435 0308" },
-  { 0x0453, "0433 0301" },
-  { 0x0457, "0456 0308" },
-  { 0x045C, "043A 0301" },
-  { 0x045D, "0438 0300" },
-  { 0x045E, "0443 0306" },
-  { 0x0476, "0474 030F" },
-  { 0x0477, "0475 030F" },
-  { 0x04C1, "0416 0306" },
-  { 0x04C2, "0436 0306" },
-  { 0x04D0, "0410 0306" },
-  { 0x04D1, "0430 0306" },
-  { 0x04D2, "0410 0308" },
-  { 0x04D3, "0430 0308" },
-  { 0x04D6, "0415 0306" },
-  { 0x04D7, "0435 0306" },
-  { 0x04DA, "04D8 0308" },
-  { 0x04DB, "04D9 0308" },
-  { 0x04DC, "0416 0308" },
-  { 0x04DD, "0436 0308" },
-  { 0x04DE, "0417 0308" },
-  { 0x04DF, "0437 0308" },
-  { 0x04E2, "0418 0304" },
-  { 0x04E3, "0438 0304" },
-  { 0x04E4, "0418 0308" },
-  { 0x04E5, "0438 0308" },
-  { 0x04E6, "041E 0308" },
-  { 0x04E7, "043E 0308" },
-  { 0x04EA, "04E8 0308" },
-  { 0x04EB, "04E9 0308" },
-  { 0x04EC, "042D 0308" },
-  { 0x04ED, "044D 0308" },
-  { 0x04EE, "0423 0304" },
-  { 0x04EF, "0443 0304" },
-  { 0x04F0, "0423 0308" },
-  { 0x04F1, "0443 0308" },
-  { 0x04F2, "0423 030B" },
-  { 0x04F3, "0443 030B" },
-  { 0x04F4, "0427 0308" },
-  { 0x04F5, "0447 0308" },
-  { 0x04F8, "042B 0308" },
-  { 0x04F9, "044B 0308" },
-  { 0x0622, "0627 0653" },
-  { 0x0623, "0627 0654" },
-  { 0x0624, "0648 0654" },
-  { 0x0625, "0627 0655" },
-  { 0x0626, "064A 0654" },
-  { 0x06C0, "06D5 0654" },
-  { 0x06C2, "06C1 0654" },
-  { 0x06D3, "06D2 0654" },
-  { 0x0929, "0928 093C" },
-  { 0x0931, "0930 093C" },
-  { 0x0934, "0933 093C" },
-  { 0x0958, "0915 093C" },
-  { 0x0959, "0916 093C" },
-  { 0x095A, "0917 093C" },
-  { 0x095B, "091C 093C" },
-  { 0x095C, "0921 093C" },
-  { 0x095D, "0922 093C" },
-  { 0x095E, "092B 093C" },
-  { 0x095F, "092F 093C" },
-  { 0x09CB, "09C7 09BE" },
-  { 0x09CC, "09C7 09D7" },
-  { 0x09DC, "09A1 09BC" },
-  { 0x09DD, "09A2 09BC" },
-  { 0x09DF, "09AF 09BC" },
-  { 0x0A33, "0A32 0A3C" },
-  { 0x0A36, "0A38 0A3C" },
-  { 0x0A59, "0A16 0A3C" },
-  { 0x0A5A, "0A17 0A3C" },
-  { 0x0A5B, "0A1C 0A3C" },
-  { 0x0A5E, "0A2B 0A3C" },
-  { 0x0B48, "0B47 0B56" },
-  { 0x0B4B, "0B47 0B3E" },
-  { 0x0B4C, "0B47 0B57" },
-  { 0x0B5C, "0B21 0B3C" },
-  { 0x0B5D, "0B22 0B3C" },
-  { 0x0B94, "0B92 0BD7" },
-  { 0x0BCA, "0BC6 0BBE" },
-  { 0x0BCB, "0BC7 0BBE" },
-  { 0x0BCC, "0BC6 0BD7" },
-  { 0x0C48, "0C46 0C56" },
-  { 0x0CC0, "0CBF 0CD5" },
-  { 0x0CC7, "0CC6 0CD5" },
-  { 0x0CC8, "0CC6 0CD6" },
-  { 0x0CCA, "0CC6 0CC2" },
-  { 0x0CCB, "0CCA 0CD5" },
-  { 0x0D4A, "0D46 0D3E" },
-  { 0x0D4B, "0D47 0D3E" },
-  { 0x0D4C, "0D46 0D57" },
-  { 0x0DDA, "0DD9 0DCA" },
-  { 0x0DDC, "0DD9 0DCF" },
-  { 0x0DDD, "0DDC 0DCA" },
-  { 0x0DDE, "0DD9 0DDF" },
-  { 0x0F43, "0F42 0FB7" },
-  { 0x0F4D, "0F4C 0FB7" },
-  { 0x0F52, "0F51 0FB7" },
-  { 0x0F57, "0F56 0FB7" },
-  { 0x0F5C, "0F5B 0FB7" },
-  { 0x0F69, "0F40 0FB5" },
-  { 0x0F73, "0F71 0F72" },
-  { 0x0F75, "0F71 0F74" },
-  { 0x0F76, "0FB2 0F80" },
-  { 0x0F78, "0FB3 0F80" },
-  { 0x0F81, "0F71 0F80" },
-  { 0x0F93, "0F92 0FB7" },
-  { 0x0F9D, "0F9C 0FB7" },
-  { 0x0FA2, "0FA1 0FB7" },
-  { 0x0FA7, "0FA6 0FB7" },
-  { 0x0FAC, "0FAB 0FB7" },
-  { 0x0FB9, "0F90 0FB5" },
-  { 0x1026, "1025 102E" },
-  { 0x1B06, "1B05 1B35" },
-  { 0x1B08, "1B07 1B35" },
-  { 0x1B0A, "1B09 1B35" },
-  { 0x1B0C, "1B0B 1B35" },
-  { 0x1B0E, "1B0D 1B35" },
-  { 0x1B12, "1B11 1B35" },
-  { 0x1B3B, "1B3A 1B35" },
-  { 0x1B3D, "1B3C 1B35" },
-  { 0x1B40, "1B3E 1B35" },
-  { 0x1B41, "1B3F 1B35" },
-  { 0x1B43, "1B42 1B35" },
-  { 0x1E00, "0041 0325" },
-  { 0x1E01, "0061 0325" },
-  { 0x1E02, "0042 0307" },
-  { 0x1E03, "0062 0307" },
-  { 0x1E04, "0042 0323" },
-  { 0x1E05, "0062 0323" },
-  { 0x1E06, "0042 0331" },
-  { 0x1E07, "0062 0331" },
-  { 0x1E08, "00C7 0301" },
-  { 0x1E09, "00E7 0301" },
-  { 0x1E0A, "0044 0307" },
-  { 0x1E0B, "0064 0307" },
-  { 0x1E0C, "0044 0323" },
-  { 0x1E0D, "0064 0323" },
-  { 0x1E0E, "0044 0331" },
-  { 0x1E0F, "0064 0331" },
-  { 0x1E10, "0044 0327" },
-  { 0x1E11, "0064 0327" },
-  { 0x1E12, "0044 032D" },
-  { 0x1E13, "0064 032D" },
-  { 0x1E14, "0112 0300" },
-  { 0x1E15, "0113 0300" },
-  { 0x1E16, "0112 0301" },
-  { 0x1E17, "0113 0301" },
-  { 0x1E18, "0045 032D" },
-  { 0x1E19, "0065 032D" },
-  { 0x1E1A, "0045 0330" },
-  { 0x1E1B, "0065 0330" },
-  { 0x1E1C, "0228 0306" },
-  { 0x1E1D, "0229 0306" },
-  { 0x1E1E, "0046 0307" },
-  { 0x1E1F, "0066 0307" },
-  { 0x1E20, "0047 0304" },
-  { 0x1E21, "0067 0304" },
-  { 0x1E22, "0048 0307" },
-  { 0x1E23, "0068 0307" },
-  { 0x1E24, "0048 0323" },
-  { 0x1E25, "0068 0323" },
-  { 0x1E26, "0048 0308" },
-  { 0x1E27, "0068 0308" },
-  { 0x1E28, "0048 0327" },
-  { 0x1E29, "0068 0327" },
-  { 0x1E2A, "0048 032E" },
-  { 0x1E2B, "0068 032E" },
-  { 0x1E2C, "0049 0330" },
-  { 0x1E2D, "0069 0330" },
-  { 0x1E2E, "00CF 0301" },
-  { 0x1E2F, "00EF 0301" },
-  { 0x1E30, "004B 0301" },
-  { 0x1E31, "006B 0301" },
-  { 0x1E32, "004B 0323" },
-  { 0x1E33, "006B 0323" },
-  { 0x1E34, "004B 0331" },
-  { 0x1E35, "006B 0331" },
-  { 0x1E36, "004C 0323" },
-  { 0x1E37, "006C 0323" },
-  { 0x1E38, "1E36 0304" },
-  { 0x1E39, "1E37 0304" },
-  { 0x1E3A, "004C 0331" },
-  { 0x1E3B, "006C 0331" },
-  { 0x1E3C, "004C 032D" },
-  { 0x1E3D, "006C 032D" },
-  { 0x1E3E, "004D 0301" },
-  { 0x1E3F, "006D 0301" },
-  { 0x1E40, "004D 0307" },
-  { 0x1E41, "006D 0307" },
-  { 0x1E42, "004D 0323" },
-  { 0x1E43, "006D 0323" },
-  { 0x1E44, "004E 0307" },
-  { 0x1E45, "006E 0307" },
-  { 0x1E46, "004E 0323" },
-  { 0x1E47, "006E 0323" },
-  { 0x1E48, "004E 0331" },
-  { 0x1E49, "006E 0331" },
-  { 0x1E4A, "004E 032D" },
-  { 0x1E4B, "006E 032D" },
-  { 0x1E4C, "00D5 0301" },
-  { 0x1E4D, "00F5 0301" },
-  { 0x1E4E, "00D5 0308" },
-  { 0x1E4F, "00F5 0308" },
-  { 0x1E50, "014C 0300" },
-  { 0x1E51, "014D 0300" },
-  { 0x1E52, "014C 0301" },
-  { 0x1E53, "014D 0301" },
-  { 0x1E54, "0050 0301" },
-  { 0x1E55, "0070 0301" },
-  { 0x1E56, "0050 0307" },
-  { 0x1E57, "0070 0307" },
-  { 0x1E58, "0052 0307" },
-  { 0x1E59, "0072 0307" },
-  { 0x1E5A, "0052 0323" },
-  { 0x1E5B, "0072 0323" },
-  { 0x1E5C, "1E5A 0304" },
-  { 0x1E5D, "1E5B 0304" },
-  { 0x1E5E, "0052 0331" },
-  { 0x1E5F, "0072 0331" },
-  { 0x1E60, "0053 0307" },
-  { 0x1E61, "0073 0307" },
-  { 0x1E62, "0053 0323" },
-  { 0x1E63, "0073 0323" },
-  { 0x1E64, "015A 0307" },
-  { 0x1E65, "015B 0307" },
-  { 0x1E66, "0160 0307" },
-  { 0x1E67, "0161 0307" },
-  { 0x1E68, "1E62 0307" },
-  { 0x1E69, "1E63 0307" },
-  { 0x1E6A, "0054 0307" },
-  { 0x1E6B, "0074 0307" },
-  { 0x1E6C, "0054 0323" },
-  { 0x1E6D, "0074 0323" },
-  { 0x1E6E, "0054 0331" },
-  { 0x1E6F, "0074 0331" },
-  { 0x1E70, "0054 032D" },
-  { 0x1E71, "0074 032D" },
-  { 0x1E72, "0055 0324" },
-  { 0x1E73, "0075 0324" },
-  { 0x1E74, "0055 0330" },
-  { 0x1E75, "0075 0330" },
-  { 0x1E76, "0055 032D" },
-  { 0x1E77, "0075 032D" },
-  { 0x1E78, "0168 0301" },
-  { 0x1E79, "0169 0301" },
-  { 0x1E7A, "016A 0308" },
-  { 0x1E7B, "016B 0308" },
-  { 0x1E7C, "0056 0303" },
-  { 0x1E7D, "0076 0303" },
-  { 0x1E7E, "0056 0323" },
-  { 0x1E7F, "0076 0323" },
-  { 0x1E80, "0057 0300" },
-  { 0x1E81, "0077 0300" },
-  { 0x1E82, "0057 0301" },
-  { 0x1E83, "0077 0301" },
-  { 0x1E84, "0057 0308" },
-  { 0x1E85, "0077 0308" },
-  { 0x1E86, "0057 0307" },
-  { 0x1E87, "0077 0307" },
-  { 0x1E88, "0057 0323" },
-  { 0x1E89, "0077 0323" },
-  { 0x1E8A, "0058 0307" },
-  { 0x1E8B, "0078 0307" },
-  { 0x1E8C, "0058 0308" },
-  { 0x1E8D, "0078 0308" },
-  { 0x1E8E, "0059 0307" },
-  { 0x1E8F, "0079 0307" },
-  { 0x1E90, "005A 0302" },
-  { 0x1E91, "007A 0302" },
-  { 0x1E92, "005A 0323" },
-  { 0x1E93, "007A 0323" },
-  { 0x1E94, "005A 0331" },
-  { 0x1E95, "007A 0331" },
-  { 0x1E96, "0068 0331" },
-  { 0x1E97, "0074 0308" },
-  { 0x1E98, "0077 030A" },
-  { 0x1E99, "0079 030A" },
-  { 0x1E9B, "017F 0307" },
-  { 0x1EA0, "0041 0323" },
-  { 0x1EA1, "0061 0323" },
-  { 0x1EA2, "0041 0309" },
-  { 0x1EA3, "0061 0309" },
-  { 0x1EA4, "00C2 0301" },
-  { 0x1EA5, "00E2 0301" },
-  { 0x1EA6, "00C2 0300" },
-  { 0x1EA7, "00E2 0300" },
-  { 0x1EA8, "00C2 0309" },
-  { 0x1EA9, "00E2 0309" },
-  { 0x1EAA, "00C2 0303" },
-  { 0x1EAB, "00E2 0303" },
-  { 0x1EAC, "1EA0 0302" },
-  { 0x1EAD, "1EA1 0302" },
-  { 0x1EAE, "0102 0301" },
-  { 0x1EAF, "0103 0301" },
-  { 0x1EB0, "0102 0300" },
-  { 0x1EB1, "0103 0300" },
-  { 0x1EB2, "0102 0309" },
-  { 0x1EB3, "0103 0309" },
-  { 0x1EB4, "0102 0303" },
-  { 0x1EB5, "0103 0303" },
-  { 0x1EB6, "1EA0 0306" },
-  { 0x1EB7, "1EA1 0306" },
-  { 0x1EB8, "0045 0323" },
-  { 0x1EB9, "0065 0323" },
-  { 0x1EBA, "0045 0309" },
-  { 0x1EBB, "0065 0309" },
-  { 0x1EBC, "0045 0303" },
-  { 0x1EBD, "0065 0303" },
-  { 0x1EBE, "00CA 0301" },
-  { 0x1EBF, "00EA 0301" },
-  { 0x1EC0, "00CA 0300" },
-  { 0x1EC1, "00EA 0300" },
-  { 0x1EC2, "00CA 0309" },
-  { 0x1EC3, "00EA 0309" },
-  { 0x1EC4, "00CA 0303" },
-  { 0x1EC5, "00EA 0303" },
-  { 0x1EC6, "1EB8 0302" },
-  { 0x1EC7, "1EB9 0302" },
-  { 0x1EC8, "0049 0309" },
-  { 0x1EC9, "0069 0309" },
-  { 0x1ECA, "0049 0323" },
-  { 0x1ECB, "0069 0323" },
-  { 0x1ECC, "004F 0323" },
-  { 0x1ECD, "006F 0323" },
-  { 0x1ECE, "004F 0309" },
-  { 0x1ECF, "006F 0309" },
-  { 0x1ED0, "00D4 0301" },
-  { 0x1ED1, "00F4 0301" },
-  { 0x1ED2, "00D4 0300" },
-  { 0x1ED3, "00F4 0300" },
-  { 0x1ED4, "00D4 0309" },
-  { 0x1ED5, "00F4 0309" },
-  { 0x1ED6, "00D4 0303" },
-  { 0x1ED7, "00F4 0303" },
-  { 0x1ED8, "1ECC 0302" },
-  { 0x1ED9, "1ECD 0302" },
-  { 0x1EDA, "01A0 0301" },
-  { 0x1EDB, "01A1 0301" },
-  { 0x1EDC, "01A0 0300" },
-  { 0x1EDD, "01A1 0300" },
-  { 0x1EDE, "01A0 0309" },
-  { 0x1EDF, "01A1 0309" },
-  { 0x1EE0, "01A0 0303" },
-  { 0x1EE1, "01A1 0303" },
-  { 0x1EE2, "01A0 0323" },
-  { 0x1EE3, "01A1 0323" },
-  { 0x1EE4, "0055 0323" },
-  { 0x1EE5, "0075 0323" },
-  { 0x1EE6, "0055 0309" },
-  { 0x1EE7, "0075 0309" },
-  { 0x1EE8, "01AF 0301" },
-  { 0x1EE9, "01B0 0301" },
-  { 0x1EEA, "01AF 0300" },
-  { 0x1EEB, "01B0 0300" },
-  { 0x1EEC, "01AF 0309" },
-  { 0x1EED, "01B0 0309" },
-  { 0x1EEE, "01AF 0303" },
-  { 0x1EEF, "01B0 0303" },
-  { 0x1EF0, "01AF 0323" },
-  { 0x1EF1, "01B0 0323" },
-  { 0x1EF2, "0059 0300" },
-  { 0x1EF3, "0079 0300" },
-  { 0x1EF4, "0059 0323" },
-  { 0x1EF5, "0079 0323" },
-  { 0x1EF6, "0059 0309" },
-  { 0x1EF7, "0079 0309" },
-  { 0x1EF8, "0059 0303" },
-  { 0x1EF9, "0079 0303" },
-  { 0x1F00, "03B1 0313" },
-  { 0x1F01, "03B1 0314" },
-  { 0x1F02, "1F00 0300" },
-  { 0x1F03, "1F01 0300" },
-  { 0x1F04, "1F00 0301" },
-  { 0x1F05, "1F01 0301" },
-  { 0x1F06, "1F00 0342" },
-  { 0x1F07, "1F01 0342" },
-  { 0x1F08, "0391 0313" },
-  { 0x1F09, "0391 0314" },
-  { 0x1F0A, "1F08 0300" },
-  { 0x1F0B, "1F09 0300" },
-  { 0x1F0C, "1F08 0301" },
-  { 0x1F0D, "1F09 0301" },
-  { 0x1F0E, "1F08 0342" },
-  { 0x1F0F, "1F09 0342" },
-  { 0x1F10, "03B5 0313" },
-  { 0x1F11, "03B5 0314" },
-  { 0x1F12, "1F10 0300" },
-  { 0x1F13, "1F11 0300" },
-  { 0x1F14, "1F10 0301" },
-  { 0x1F15, "1F11 0301" },
-  { 0x1F18, "0395 0313" },
-  { 0x1F19, "0395 0314" },
-  { 0x1F1A, "1F18 0300" },
-  { 0x1F1B, "1F19 0300" },
-  { 0x1F1C, "1F18 0301" },
-  { 0x1F1D, "1F19 0301" },
-  { 0x1F20, "03B7 0313" },
-  { 0x1F21, "03B7 0314" },
-  { 0x1F22, "1F20 0300" },
-  { 0x1F23, "1F21 0300" },
-  { 0x1F24, "1F20 0301" },
-  { 0x1F25, "1F21 0301" },
-  { 0x1F26, "1F20 0342" },
-  { 0x1F27, "1F21 0342" },
-  { 0x1F28, "0397 0313" },
-  { 0x1F29, "0397 0314" },
-  { 0x1F2A, "1F28 0300" },
-  { 0x1F2B, "1F29 0300" },
-  { 0x1F2C, "1F28 0301" },
-  { 0x1F2D, "1F29 0301" },
-  { 0x1F2E, "1F28 0342" },
-  { 0x1F2F, "1F29 0342" },
-  { 0x1F30, "03B9 0313" },
-  { 0x1F31, "03B9 0314" },
-  { 0x1F32, "1F30 0300" },
-  { 0x1F33, "1F31 0300" },
-  { 0x1F34, "1F30 0301" },
-  { 0x1F35, "1F31 0301" },
-  { 0x1F36, "1F30 0342" },
-  { 0x1F37, "1F31 0342" },
-  { 0x1F38, "0399 0313" },
-  { 0x1F39, "0399 0314" },
-  { 0x1F3A, "1F38 0300" },
-  { 0x1F3B, "1F39 0300" },
-  { 0x1F3C, "1F38 0301" },
-  { 0x1F3D, "1F39 0301" },
-  { 0x1F3E, "1F38 0342" },
-  { 0x1F3F, "1F39 0342" },
-  { 0x1F40, "03BF 0313" },
-  { 0x1F41, "03BF 0314" },
-  { 0x1F42, "1F40 0300" },
-  { 0x1F43, "1F41 0300" },
-  { 0x1F44, "1F40 0301" },
-  { 0x1F45, "1F41 0301" },
-  { 0x1F48, "039F 0313" },
-  { 0x1F49, "039F 0314" },
-  { 0x1F4A, "1F48 0300" },
-  { 0x1F4B, "1F49 0300" },
-  { 0x1F4C, "1F48 0301" },
-  { 0x1F4D, "1F49 0301" },
-  { 0x1F50, "03C5 0313" },
-  { 0x1F51, "03C5 0314" },
-  { 0x1F52, "1F50 0300" },
-  { 0x1F53, "1F51 0300" },
-  { 0x1F54, "1F50 0301" },
-  { 0x1F55, "1F51 0301" },
-  { 0x1F56, "1F50 0342" },
-  { 0x1F57, "1F51 0342" },
-  { 0x1F59, "03A5 0314" },
-  { 0x1F5B, "1F59 0300" },
-  { 0x1F5D, "1F59 0301" },
-  { 0x1F5F, "1F59 0342" },
-  { 0x1F60, "03C9 0313" },
-  { 0x1F61, "03C9 0314" },
-  { 0x1F62, "1F60 0300" },
-  { 0x1F63, "1F61 0300" },
-  { 0x1F64, "1F60 0301" },
-  { 0x1F65, "1F61 0301" },
-  { 0x1F66, "1F60 0342" },
-  { 0x1F67, "1F61 0342" },
-  { 0x1F68, "03A9 0313" },
-  { 0x1F69, "03A9 0314" },
-  { 0x1F6A, "1F68 0300" },
-  { 0x1F6B, "1F69 0300" },
-  { 0x1F6C, "1F68 0301" },
-  { 0x1F6D, "1F69 0301" },
-  { 0x1F6E, "1F68 0342" },
-  { 0x1F6F, "1F69 0342" },
-  { 0x1F70, "03B1 0300" },
-  { 0x1F71, "03AC greek small letter alpha with tonos" },
-  { 0x1F72, "03B5 0300" },
-  { 0x1F73, "03AD greek small letter epsilon with tonos" },
-  { 0x1F74, "03B7 0300" },
-  { 0x1F75, "03AE greek small letter eta with tonos" },
-  { 0x1F76, "03B9 0300" },
-  { 0x1F77, "03AF greek small letter iota with tonos" },
-  { 0x1F78, "03BF 0300" },
-  { 0x1F79, "03CC greek small letter omicron with tonos" },
-  { 0x1F7A, "03C5 0300" },
-  { 0x1F7B, "03CD greek small letter upsilon with tonos" },
-  { 0x1F7C, "03C9 0300" },
-  { 0x1F7D, "03CE greek small letter omega with tonos" },
-  { 0x1F80, "1F00 0345" },
-  { 0x1F81, "1F01 0345" },
-  { 0x1F82, "1F02 0345" },
-  { 0x1F83, "1F03 0345" },
-  { 0x1F84, "1F04 0345" },
-  { 0x1F85, "1F05 0345" },
-  { 0x1F86, "1F06 0345" },
-  { 0x1F87, "1F07 0345" },
-  { 0x1F88, "1F08 0345" },
-  { 0x1F89, "1F09 0345" },
-  { 0x1F8A, "1F0A 0345" },
-  { 0x1F8B, "1F0B 0345" },
-  { 0x1F8C, "1F0C 0345" },
-  { 0x1F8D, "1F0D 0345" },
-  { 0x1F8E, "1F0E 0345" },
-  { 0x1F8F, "1F0F 0345" },
-  { 0x1F90, "1F20 0345" },
-  { 0x1F91, "1F21 0345" },
-  { 0x1F92, "1F22 0345" },
-  { 0x1F93, "1F23 0345" },
-  { 0x1F94, "1F24 0345" },
-  { 0x1F95, "1F25 0345" },
-  { 0x1F96, "1F26 0345" },
-  { 0x1F97, "1F27 0345" },
-  { 0x1F98, "1F28 0345" },
-  { 0x1F99, "1F29 0345" },
-  { 0x1F9A, "1F2A 0345" },
-  { 0x1F9B, "1F2B 0345" },
-  { 0x1F9C, "1F2C 0345" },
-  { 0x1F9D, "1F2D 0345" },
-  { 0x1F9E, "1F2E 0345" },
-  { 0x1F9F, "1F2F 0345" },
-  { 0x1FA0, "1F60 0345" },
-  { 0x1FA1, "1F61 0345" },
-  { 0x1FA2, "1F62 0345" },
-  { 0x1FA3, "1F63 0345" },
-  { 0x1FA4, "1F64 0345" },
-  { 0x1FA5, "1F65 0345" },
-  { 0x1FA6, "1F66 0345" },
-  { 0x1FA7, "1F67 0345" },
-  { 0x1FA8, "1F68 0345" },
-  { 0x1FA9, "1F69 0345" },
-  { 0x1FAA, "1F6A 0345" },
-  { 0x1FAB, "1F6B 0345" },
-  { 0x1FAC, "1F6C 0345" },
-  { 0x1FAD, "1F6D 0345" },
-  { 0x1FAE, "1F6E 0345" },
-  { 0x1FAF, "1F6F 0345" },
-  { 0x1FB0, "03B1 0306" },
-  { 0x1FB1, "03B1 0304" },
-  { 0x1FB2, "1F70 0345" },
-  { 0x1FB3, "03B1 0345" },
-  { 0x1FB4, "03AC 0345" },
-  { 0x1FB6, "03B1 0342" },
-  { 0x1FB7, "1FB6 0345" },
-  { 0x1FB8, "0391 0306" },
-  { 0x1FB9, "0391 0304" },
-  { 0x1FBA, "0391 0300" },
-  { 0x1FBB, "0386 greek capital letter alpha with tonos" },
-  { 0x1FBC, "0391 0345" },
-  { 0x1FBE, "03B9 greek small letter iota" },
-  { 0x1FC1, "00A8 0342" },
-  { 0x1FC2, "1F74 0345" },
-  { 0x1FC3, "03B7 0345" },
-  { 0x1FC4, "03AE 0345" },
-  { 0x1FC6, "03B7 0342" },
-  { 0x1FC7, "1FC6 0345" },
-  { 0x1FC8, "0395 0300" },
-  { 0x1FC9, "0388 greek capital letter epsilon with tonos" },
-  { 0x1FCA, "0397 0300" },
-  { 0x1FCB, "0389 greek capital letter eta with tonos" },
-  { 0x1FCC, "0397 0345" },
-  { 0x1FCD, "1FBF 0300" },
-  { 0x1FCE, "1FBF 0301" },
-  { 0x1FCF, "1FBF 0342" },
-  { 0x1FD0, "03B9 0306" },
-  { 0x1FD1, "03B9 0304" },
-  { 0x1FD2, "03CA 0300" },
-  { 0x1FD3, "0390 greek small letter iota with dialytika and tonos" },
-  { 0x1FD6, "03B9 0342" },
-  { 0x1FD7, "03CA 0342" },
-  { 0x1FD8, "0399 0306" },
-  { 0x1FD9, "0399 0304" },
-  { 0x1FDA, "0399 0300" },
-  { 0x1FDB, "038A greek capital letter iota with tonos" },
-  { 0x1FDD, "1FFE 0300" },
-  { 0x1FDE, "1FFE 0301" },
-  { 0x1FDF, "1FFE 0342" },
-  { 0x1FE0, "03C5 0306" },
-  { 0x1FE1, "03C5 0304" },
-  { 0x1FE2, "03CB 0300" },
-  { 0x1FE3, "03B0 greek small letter upsilon with dialytika and tonos" },
-  { 0x1FE4, "03C1 0313" },
-  { 0x1FE5, "03C1 0314" },
-  { 0x1FE6, "03C5 0342" },
-  { 0x1FE7, "03CB 0342" },
-  { 0x1FE8, "03A5 0306" },
-  { 0x1FE9, "03A5 0304" },
-  { 0x1FEA, "03A5 0300" },
-  { 0x1FEB, "038E greek capital letter upsilon with tonos" },
-  { 0x1FEC, "03A1 0314" },
-  { 0x1FED, "00A8 0300" },
-  { 0x1FEE, "0385 greek dialytika tonos" },
-  { 0x1FEF, "0060 grave accent" },
-  { 0x1FF2, "1F7C 0345" },
-  { 0x1FF3, "03C9 0345" },
-  { 0x1FF4, "03CE 0345" },
-  { 0x1FF6, "03C9 0342" },
-  { 0x1FF7, "1FF6 0345" },
-  { 0x1FF8, "039F 0300" },
-  { 0x1FF9, "038C greek capital letter omicron with tonos" },
-  { 0x1FFA, "03A9 0300" },
-  { 0x1FFB, "038F greek capital letter omega with tonos" },
-  { 0x1FFC, "03A9 0345" },
-  { 0x1FFD, "00B4 acute accent" },
-  { 0x2000, "2002 en space" },
-  { 0x2001, "2003 em space" },
-  { 0x2126, "03A9 greek capital letter omega" },
-  { 0x212A, "004B latin capital letter k" },
-  { 0x212B, "00C5 latin capital letter a with ring above" },
-  { 0x219A, "2190 0338" },
-  { 0x219B, "2192 0338" },
-  { 0x21AE, "2194 0338" },
-  { 0x21CD, "21D0 0338" },
-  { 0x21CE, "21D4 0338" },
-  { 0x21CF, "21D2 0338" },
-  { 0x2204, "2203 0338" },
-  { 0x2209, "2208 0338" },
-  { 0x220C, "220B 0338" },
-  { 0x2224, "2223 0338" },
-  { 0x2226, "2225 0338" },
-  { 0x2241, "223C 0338" },
-  { 0x2244, "2243 0338" },
-  { 0x2247, "2245 0338" },
-  { 0x2249, "2248 0338" },
-  { 0x2260, "003D 0338" },
-  { 0x2262, "2261 0338" },
-  { 0x226D, "224D 0338" },
-  { 0x226E, "003C 0338" },
-  { 0x226F, "003E 0338" },
-  { 0x2270, "2264 0338" },
-  { 0x2271, "2265 0338" },
-  { 0x2274, "2272 0338" },
-  { 0x2275, "2273 0338" },
-  { 0x2278, "2276 0338" },
-  { 0x2279, "2277 0338" },
-  { 0x2280, "227A 0338" },
-  { 0x2281, "227B 0338" },
-  { 0x2284, "2282 0338" },
-  { 0x2285, "2283 0338" },
-  { 0x2288, "2286 0338" },
-  { 0x2289, "2287 0338" },
-  { 0x22AC, "22A2 0338" },
-  { 0x22AD, "22A8 0338" },
-  { 0x22AE, "22A9 0338" },
-  { 0x22AF, "22AB 0338" },
-  { 0x22E0, "227C 0338" },
-  { 0x22E1, "227D 0338" },
-  { 0x22E2, "2291 0338" },
-  { 0x22E3, "2292 0338" },
-  { 0x22EA, "22B2 0338" },
-  { 0x22EB, "22B3 0338" },
-  { 0x22EC, "22B4 0338" },
-  { 0x22ED, "22B5 0338" },
-  { 0x2329, "3008 left angle bracket" },
-  { 0x232A, "3009 right angle bracket" },
-  { 0x2ADC, "2ADD 0338" },
-  { 0x304C, "304B 3099" },
-  { 0x304E, "304D 3099" },
-  { 0x3050, "304F 3099" },
-  { 0x3052, "3051 3099" },
-  { 0x3054, "3053 3099" },
-  { 0x3056, "3055 3099" },
-  { 0x3058, "3057 3099" },
-  { 0x305A, "3059 3099" },
-  { 0x305C, "305B 3099" },
-  { 0x305E, "305D 3099" },
-  { 0x3060, "305F 3099" },
-  { 0x3062, "3061 3099" },
-  { 0x3065, "3064 3099" },
-  { 0x3067, "3066 3099" },
-  { 0x3069, "3068 3099" },
-  { 0x3070, "306F 3099" },
-  { 0x3071, "306F 309A" },
-  { 0x3073, "3072 3099" },
-  { 0x3074, "3072 309A" },
-  { 0x3076, "3075 3099" },
-  { 0x3077, "3075 309A" },
-  { 0x3079, "3078 3099" },
-  { 0x307A, "3078 309A" },
-  { 0x307C, "307B 3099" },
-  { 0x307D, "307B 309A" },
-  { 0x3094, "3046 3099" },
-  { 0x309E, "309D 3099" },
-  { 0x30AC, "30AB 3099" },
-  { 0x30AE, "30AD 3099" },
-  { 0x30B0, "30AF 3099" },
-  { 0x30B2, "30B1 3099" },
-  { 0x30B4, "30B3 3099" },
-  { 0x30B6, "30B5 3099" },
-  { 0x30B8, "30B7 3099" },
-  { 0x30BA, "30B9 3099" },
-  { 0x30BC, "30BB 3099" },
-  { 0x30BE, "30BD 3099" },
-  { 0x30C0, "30BF 3099" },
-  { 0x30C2, "30C1 3099" },
-  { 0x30C5, "30C4 3099" },
-  { 0x30C7, "30C6 3099" },
-  { 0x30C9, "30C8 3099" },
-  { 0x30D0, "30CF 3099" },
-  { 0x30D1, "30CF 309A" },
-  { 0x30D3, "30D2 3099" },
-  { 0x30D4, "30D2 309A" },
-  { 0x30D6, "30D5 3099" },
-  { 0x30D7, "30D5 309A" },
-  { 0x30D9, "30D8 3099" },
-  { 0x30DA, "30D8 309A" },
-  { 0x30DC, "30DB 3099" },
-  { 0x30DD, "30DB 309A" },
-  { 0x30F4, "30A6 3099" },
-  { 0x30F7, "30EF 3099" },
-  { 0x30F8, "30F0 3099" },
-  { 0x30F9, "30F1 3099" },
-  { 0x30FA, "30F2 3099" },
-  { 0x30FE, "30FD 3099" },
-  { 0xF900, "8C48" },
-  { 0xF901, "66F4" },
-  { 0xF902, "8ECA" },
-  { 0xF903, "8CC8" },
-  { 0xF904, "6ED1" },
-  { 0xF905, "4E32" },
-  { 0xF906, "53E5" },
-  { 0xF907, "9F9C" },
-  { 0xF908, "9F9C" },
-  { 0xF909, "5951" },
-  { 0xF90A, "91D1" },
-  { 0xF90B, "5587" },
-  { 0xF90C, "5948" },
-  { 0xF90D, "61F6" },
-  { 0xF90E, "7669" },
-  { 0xF90F, "7F85" },
-  { 0xF910, "863F" },
-  { 0xF911, "87BA" },
-  { 0xF912, "88F8" },
-  { 0xF913, "908F" },
-  { 0xF914, "6A02" },
-  { 0xF915, "6D1B" },
-  { 0xF916, "70D9" },
-  { 0xF917, "73DE" },
-  { 0xF918, "843D" },
-  { 0xF919, "916A" },
-  { 0xF91A, "99F1" },
-  { 0xF91B, "4E82" },
-  { 0xF91C, "5375" },
-  { 0xF91D, "6B04" },
-  { 0xF91E, "721B" },
-  { 0xF91F, "862D" },
-  { 0xF920, "9E1E" },
-  { 0xF921, "5D50" },
-  { 0xF922, "6FEB" },
-  { 0xF923, "85CD" },
-  { 0xF924, "8964" },
-  { 0xF925, "62C9" },
-  { 0xF926, "81D8" },
-  { 0xF927, "881F" },
-  { 0xF928, "5ECA" },
-  { 0xF929, "6717" },
-  { 0xF92A, "6D6A" },
-  { 0xF92B, "72FC" },
-  { 0xF92C, "90CE" },
-  { 0xF92D, "4F86" },
-  { 0xF92E, "51B7" },
-  { 0xF92F, "52DE" },
-  { 0xF930, "64C4" },
-  { 0xF931, "6AD3" },
-  { 0xF932, "7210" },
-  { 0xF933, "76E7" },
-  { 0xF934, "8001" },
-  { 0xF935, "8606" },
-  { 0xF936, "865C" },
-  { 0xF937, "8DEF" },
-  { 0xF938, "9732" },
-  { 0xF939, "9B6F" },
-  { 0xF93A, "9DFA" },
-  { 0xF93B, "788C" },
-  { 0xF93C, "797F" },
-  { 0xF93D, "7DA0" },
-  { 0xF93E, "83C9" },
-  { 0xF93F, "9304" },
-  { 0xF940, "9E7F" },
-  { 0xF941, "8AD6" },
-  { 0xF942, "58DF" },
-  { 0xF943, "5F04" },
-  { 0xF944, "7C60" },
-  { 0xF945, "807E" },
-  { 0xF946, "7262" },
-  { 0xF947, "78CA" },
-  { 0xF948, "8CC2" },
-  { 0xF949, "96F7" },
-  { 0xF94A, "58D8" },
-  { 0xF94B, "5C62" },
-  { 0xF94C, "6A13" },
-  { 0xF94D, "6DDA" },
-  { 0xF94E, "6F0F" },
-  { 0xF94F, "7D2F" },
-  { 0xF950, "7E37" },
-  { 0xF951, "964B" },
-  { 0xF952, "52D2" },
-  { 0xF953, "808B" },
-  { 0xF954, "51DC" },
-  { 0xF955, "51CC" },
-  { 0xF956, "7A1C" },
-  { 0xF957, "7DBE" },
-  { 0xF958, "83F1" },
-  { 0xF959, "9675" },
-  { 0xF95A, "8B80" },
-  { 0xF95B, "62CF" },
-  { 0xF95C, "6A02" },
-  { 0xF95D, "8AFE" },
-  { 0xF95E, "4E39" },
-  { 0xF95F, "5BE7" },
-  { 0xF960, "6012" },
-  { 0xF961, "7387" },
-  { 0xF962, "7570" },
-  { 0xF963, "5317" },
-  { 0xF964, "78FB" },
-  { 0xF965, "4FBF" },
-  { 0xF966, "5FA9" },
-  { 0xF967, "4E0D" },
-  { 0xF968, "6CCC" },
-  { 0xF969, "6578" },
-  { 0xF96A, "7D22" },
-  { 0xF96B, "53C3" },
-  { 0xF96C, "585E" },
-  { 0xF96D, "7701" },
-  { 0xF96E, "8449" },
-  { 0xF96F, "8AAA" },
-  { 0xF970, "6BBA" },
-  { 0xF971, "8FB0" },
-  { 0xF972, "6C88" },
-  { 0xF973, "62FE" },
-  { 0xF974, "82E5" },
-  { 0xF975, "63A0" },
-  { 0xF976, "7565" },
-  { 0xF977, "4EAE" },
-  { 0xF978, "5169" },
-  { 0xF979, "51C9" },
-  { 0xF97A, "6881" },
-  { 0xF97B, "7CE7" },
-  { 0xF97C, "826F" },
-  { 0xF97D, "8AD2" },
-  { 0xF97E, "91CF" },
-  { 0xF97F, "52F5" },
-  { 0xF980, "5442" },
-  { 0xF981, "5973" },
-  { 0xF982, "5EEC" },
-  { 0xF983, "65C5" },
-  { 0xF984, "6FFE" },
-  { 0xF985, "792A" },
-  { 0xF986, "95AD" },
-  { 0xF987, "9A6A" },
-  { 0xF988, "9E97" },
-  { 0xF989, "9ECE" },
-  { 0xF98A, "529B" },
-  { 0xF98B, "66C6" },
-  { 0xF98C, "6B77" },
-  { 0xF98D, "8F62" },
-  { 0xF98E, "5E74" },
-  { 0xF98F, "6190" },
-  { 0xF990, "6200" },
-  { 0xF991, "649A" },
-  { 0xF992, "6F23" },
-  { 0xF993, "7149" },
-  { 0xF994, "7489" },
-  { 0xF995, "79CA" },
-  { 0xF996, "7DF4" },
-  { 0xF997, "806F" },
-  { 0xF998, "8F26" },
-  { 0xF999, "84EE" },
-  { 0xF99A, "9023" },
-  { 0xF99B, "934A" },
-  { 0xF99C, "5217" },
-  { 0xF99D, "52A3" },
-  { 0xF99E, "54BD" },
-  { 0xF99F, "70C8" },
-  { 0xF9A0, "88C2" },
-  { 0xF9A1, "8AAA" },
-  { 0xF9A2, "5EC9" },
-  { 0xF9A3, "5FF5" },
-  { 0xF9A4, "637B" },
-  { 0xF9A5, "6BAE" },
-  { 0xF9A6, "7C3E" },
-  { 0xF9A7, "7375" },
-  { 0xF9A8, "4EE4" },
-  { 0xF9A9, "56F9" },
-  { 0xF9AA, "5BE7" },
-  { 0xF9AB, "5DBA" },
-  { 0xF9AC, "601C" },
-  { 0xF9AD, "73B2" },
-  { 0xF9AE, "7469" },
-  { 0xF9AF, "7F9A" },
-  { 0xF9B0, "8046" },
-  { 0xF9B1, "9234" },
-  { 0xF9B2, "96F6" },
-  { 0xF9B3, "9748" },
-  { 0xF9B4, "9818" },
-  { 0xF9B5, "4F8B" },
-  { 0xF9B6, "79AE" },
-  { 0xF9B7, "91B4" },
-  { 0xF9B8, "96B8" },
-  { 0xF9B9, "60E1" },
-  { 0xF9BA, "4E86" },
-  { 0xF9BB, "50DA" },
-  { 0xF9BC, "5BEE" },
-  { 0xF9BD, "5C3F" },
-  { 0xF9BE, "6599" },
-  { 0xF9BF, "6A02" },
-  { 0xF9C0, "71CE" },
-  { 0xF9C1, "7642" },
-  { 0xF9C2, "84FC" },
-  { 0xF9C3, "907C" },
-  { 0xF9C4, "9F8D" },
-  { 0xF9C5, "6688" },
-  { 0xF9C6, "962E" },
-  { 0xF9C7, "5289" },
-  { 0xF9C8, "677B" },
-  { 0xF9C9, "67F3" },
-  { 0xF9CA, "6D41" },
-  { 0xF9CB, "6E9C" },
-  { 0xF9CC, "7409" },
-  { 0xF9CD, "7559" },
-  { 0xF9CE, "786B" },
-  { 0xF9CF, "7D10" },
-  { 0xF9D0, "985E" },
-  { 0xF9D1, "516D" },
-  { 0xF9D2, "622E" },
-  { 0xF9D3, "9678" },
-  { 0xF9D4, "502B" },
-  { 0xF9D5, "5D19" },
-  { 0xF9D6, "6DEA" },
-  { 0xF9D7, "8F2A" },
-  { 0xF9D8, "5F8B" },
-  { 0xF9D9, "6144" },
-  { 0xF9DA, "6817" },
-  { 0xF9DB, "7387" },
-  { 0xF9DC, "9686" },
-  { 0xF9DD, "5229" },
-  { 0xF9DE, "540F" },
-  { 0xF9DF, "5C65" },
-  { 0xF9E0, "6613" },
-  { 0xF9E1, "674E" },
-  { 0xF9E2, "68A8" },
-  { 0xF9E3, "6CE5" },
-  { 0xF9E4, "7406" },
-  { 0xF9E5, "75E2" },
-  { 0xF9E6, "7F79" },
-  { 0xF9E7, "88CF" },
-  { 0xF9E8, "88E1" },
-  { 0xF9E9, "91CC" },
-  { 0xF9EA, "96E2" },
-  { 0xF9EB, "533F" },
-  { 0xF9EC, "6EBA" },
-  { 0xF9ED, "541D" },
-  { 0xF9EE, "71D0" },
-  { 0xF9EF, "7498" },
-  { 0xF9F0, "85FA" },
-  { 0xF9F1, "96A3" },
-  { 0xF9F2, "9C57" },
-  { 0xF9F3, "9E9F" },
-  { 0xF9F4, "6797" },
-  { 0xF9F5, "6DCB" },
-  { 0xF9F6, "81E8" },
-  { 0xF9F7, "7ACB" },
-  { 0xF9F8, "7B20" },
-  { 0xF9F9, "7C92" },
-  { 0xF9FA, "72C0" },
-  { 0xF9FB, "7099" },
-  { 0xF9FC, "8B58" },
-  { 0xF9FD, "4EC0" },
-  { 0xF9FE, "8336" },
-  { 0xF9FF, "523A" },
-  { 0xFA00, "5207" },
-  { 0xFA01, "5EA6" },
-  { 0xFA02, "62D3" },
-  { 0xFA03, "7CD6" },
-  { 0xFA04, "5B85" },
-  { 0xFA05, "6D1E" },
-  { 0xFA06, "66B4" },
-  { 0xFA07, "8F3B" },
-  { 0xFA08, "884C" },
-  { 0xFA09, "964D" },
-  { 0xFA0A, "898B" },
-  { 0xFA0B, "5ED3" },
-  { 0xFA0C, "5140" },
-  { 0xFA0D, "55C0" },
-  { 0xFA10, "585A" },
-  { 0xFA12, "6674" },
-  { 0xFA15, "51DE" },
-  { 0xFA16, "732A" },
-  { 0xFA17, "76CA" },
-  { 0xFA18, "793C" },
-  { 0xFA19, "795E" },
-  { 0xFA1A, "7965" },
-  { 0xFA1B, "798F" },
-  { 0xFA1C, "9756" },
-  { 0xFA1D, "7CBE" },
-  { 0xFA1E, "7FBD" },
-  { 0xFA20, "8612" },
-  { 0xFA22, "8AF8" },
-  { 0xFA25, "9038" },
-  { 0xFA26, "90FD" },
-  { 0xFA2A, "98EF" },
-  { 0xFA2B, "98FC" },
-  { 0xFA2C, "9928" },
-  { 0xFA2D, "9DB4" },
-  { 0xFA30, "4FAE" },
-  { 0xFA31, "50E7" },
-  { 0xFA32, "514D" },
-  { 0xFA33, "52C9" },
-  { 0xFA34, "52E4" },
-  { 0xFA35, "5351" },
-  { 0xFA36, "559D" },
-  { 0xFA37, "5606" },
-  { 0xFA38, "5668" },
-  { 0xFA39, "5840" },
-  { 0xFA3A, "58A8" },
-  { 0xFA3B, "5C64" },
-  { 0xFA3C, "5C6E" },
-  { 0xFA3D, "6094" },
-  { 0xFA3E, "6168" },
-  { 0xFA3F, "618E" },
-  { 0xFA40, "61F2" },
-  { 0xFA41, "654F" },
-  { 0xFA42, "65E2" },
-  { 0xFA43, "6691" },
-  { 0xFA44, "6885" },
-  { 0xFA45, "6D77" },
-  { 0xFA46, "6E1A" },
-  { 0xFA47, "6F22" },
-  { 0xFA48, "716E" },
-  { 0xFA49, "722B" },
-  { 0xFA4A, "7422" },
-  { 0xFA4B, "7891" },
-  { 0xFA4C, "793E" },
-  { 0xFA4D, "7949" },
-  { 0xFA4E, "7948" },
-  { 0xFA4F, "7950" },
-  { 0xFA50, "7956" },
-  { 0xFA51, "795D" },
-  { 0xFA52, "798D" },
-  { 0xFA53, "798E" },
-  { 0xFA54, "7A40" },
-  { 0xFA55, "7A81" },
-  { 0xFA56, "7BC0" },
-  { 0xFA57, "7DF4" },
-  { 0xFA58, "7E09" },
-  { 0xFA59, "7E41" },
-  { 0xFA5A, "7F72" },
-  { 0xFA5B, "8005" },
-  { 0xFA5C, "81ED" },
-  { 0xFA5D, "8279" },
-  { 0xFA5E, "8279" },
-  { 0xFA5F, "8457" },
-  { 0xFA60, "8910" },
-  { 0xFA61, "8996" },
-  { 0xFA62, "8B01" },
-  { 0xFA63, "8B39" },
-  { 0xFA64, "8CD3" },
-  { 0xFA65, "8D08" },
-  { 0xFA66, "8FB6" },
-  { 0xFA67, "9038" },
-  { 0xFA68, "96E3" },
-  { 0xFA69, "97FF" },
-  { 0xFA6A, "983B" },
-  { 0xFA70, "4E26" },
-  { 0xFA71, "51B5" },
-  { 0xFA72, "5168" },
-  { 0xFA73, "4F80" },
-  { 0xFA74, "5145" },
-  { 0xFA75, "5180" },
-  { 0xFA76, "52C7" },
-  { 0xFA77, "52FA" },
-  { 0xFA78, "559D" },
-  { 0xFA79, "5555" },
-  { 0xFA7A, "5599" },
-  { 0xFA7B, "55E2" },
-  { 0xFA7C, "585A" },
-  { 0xFA7D, "58B3" },
-  { 0xFA7E, "5944" },
-  { 0xFA7F, "5954" },
-  { 0xFA80, "5A62" },
-  { 0xFA81, "5B28" },
-  { 0xFA82, "5ED2" },
-  { 0xFA83, "5ED9" },
-  { 0xFA84, "5F69" },
-  { 0xFA85, "5FAD" },
-  { 0xFA86, "60D8" },
-  { 0xFA87, "614E" },
-  { 0xFA88, "6108" },
-  { 0xFA89, "618E" },
-  { 0xFA8A, "6160" },
-  { 0xFA8B, "61F2" },
-  { 0xFA8C, "6234" },
-  { 0xFA8D, "63C4" },
-  { 0xFA8E, "641C" },
-  { 0xFA8F, "6452" },
-  { 0xFA90, "6556" },
-  { 0xFA91, "6674" },
-  { 0xFA92, "6717" },
-  { 0xFA93, "671B" },
-  { 0xFA94, "6756" },
-  { 0xFA95, "6B79" },
-  { 0xFA96, "6BBA" },
-  { 0xFA97, "6D41" },
-  { 0xFA98, "6EDB" },
-  { 0xFA99, "6ECB" },
-  { 0xFA9A, "6F22" },
-  { 0xFA9B, "701E" },
-  { 0xFA9C, "716E" },
-  { 0xFA9D, "77A7" },
-  { 0xFA9E, "7235" },
-  { 0xFA9F, "72AF" },
-  { 0xFAA0, "732A" },
-  { 0xFAA1, "7471" },
-  { 0xFAA2, "7506" },
-  { 0xFAA3, "753B" },
-  { 0xFAA4, "761D" },
-  { 0xFAA5, "761F" },
-  { 0xFAA6, "76CA" },
-  { 0xFAA7, "76DB" },
-  { 0xFAA8, "76F4" },
-  { 0xFAA9, "774A" },
-  { 0xFAAA, "7740" },
-  { 0xFAAB, "78CC" },
-  { 0xFAAC, "7AB1" },
-  { 0xFAAD, "7BC0" },
-  { 0xFAAE, "7C7B" },
-  { 0xFAAF, "7D5B" },
-  { 0xFAB0, "7DF4" },
-  { 0xFAB1, "7F3E" },
-  { 0xFAB2, "8005" },
-  { 0xFAB3, "8352" },
-  { 0xFAB4, "83EF" },
-  { 0xFAB5, "8779" },
-  { 0xFAB6, "8941" },
-  { 0xFAB7, "8986" },
-  { 0xFAB8, "8996" },
-  { 0xFAB9, "8ABF" },
-  { 0xFABA, "8AF8" },
-  { 0xFABB, "8ACB" },
-  { 0xFABC, "8B01" },
-  { 0xFABD, "8AFE" },
-  { 0xFABE, "8AED" },
-  { 0xFABF, "8B39" },
-  { 0xFAC0, "8B8A" },
-  { 0xFAC1, "8D08" },
-  { 0xFAC2, "8F38" },
-  { 0xFAC3, "9072" },
-  { 0xFAC4, "9199" },
-  { 0xFAC5, "9276" },
-  { 0xFAC6, "967C" },
-  { 0xFAC7, "96E3" },
-  { 0xFAC8, "9756" },
-  { 0xFAC9, "97DB" },
-  { 0xFACA, "97FF" },
-  { 0xFACB, "980B" },
-  { 0xFACC, "983B" },
-  { 0xFACD, "9B12" },
-  { 0xFACE, "9F9C" },
-  { 0xFACF, "2284A" },
-  { 0xFAD0, "22844" },
-  { 0xFAD1, "233D5" },
-  { 0xFAD2, "3B9D" },
-  { 0xFAD3, "4018" },
-  { 0xFAD4, "4039" },
-  { 0xFAD5, "25249" },
-  { 0xFAD6, "25CD0" },
-  { 0xFAD7, "27ED3" },
-  { 0xFAD8, "9F43" },
-  { 0xFAD9, "9F8E" },
-  { 0xFB1D, "05D9 05B4" },
-  { 0xFB1F, "05F2 05B7" },
-  { 0xFB2A, "05E9 05C1" },
-  { 0xFB2B, "05E9 05C2" },
-  { 0xFB2C, "FB49 05C1" },
-  { 0xFB2D, "FB49 05C2" },
-  { 0xFB2E, "05D0 05B7" },
-  { 0xFB2F, "05D0 05B8" },
-  { 0xFB30, "05D0 05BC" },
-  { 0xFB31, "05D1 05BC" },
-  { 0xFB32, "05D2 05BC" },
-  { 0xFB33, "05D3 05BC" },
-  { 0xFB34, "05D4 05BC" },
-  { 0xFB35, "05D5 05BC" },
-  { 0xFB36, "05D6 05BC" },
-  { 0xFB38, "05D8 05BC" },
-  { 0xFB39, "05D9 05BC" },
-  { 0xFB3A, "05DA 05BC" },
-  { 0xFB3B, "05DB 05BC" },
-  { 0xFB3C, "05DC 05BC" },
-  { 0xFB3E, "05DE 05BC" },
-  { 0xFB40, "05E0 05BC" },
-  { 0xFB41, "05E1 05BC" },
-  { 0xFB43, "05E3 05BC" },
-  { 0xFB44, "05E4 05BC" },
-  { 0xFB46, "05E6 05BC" },
-  { 0xFB47, "05E7 05BC" },
-  { 0xFB48, "05E8 05BC" },
-  { 0xFB49, "05E9 05BC" },
-  { 0xFB4A, "05EA 05BC" },
-  { 0xFB4B, "05D5 05B9" },
-  { 0xFB4C, "05D1 05BF" },
-  { 0xFB4D, "05DB 05BF" },
-  { 0xFB4E, "05E4 05BF" },
-  { 0x1D15E, "1D157 1D165" },
-  { 0x1D15F, "1D158 1D165" },
-  { 0x1D160, "1D15F 1D16E" },
-  { 0x1D161, "1D15F 1D16F" },
-  { 0x1D162, "1D15F 1D170" },
-  { 0x1D163, "1D15F 1D171" },
-  { 0x1D164, "1D15F 1D172" },
-  { 0x1D1BB, "1D1B9 1D165" },
-  { 0x1D1BC, "1D1BA 1D165" },
-  { 0x1D1BD, "1D1BB 1D16E" },
-  { 0x1D1BE, "1D1BC 1D16E" },
-  { 0x1D1BF, "1D1BB 1D16F" },
-  { 0x1D1C0, "1D1BC 1D16F" },
-  { 0x2F800, "4E3D" },
-  { 0x2F801, "4E38" },
-  { 0x2F802, "4E41" },
-  { 0x2F803, "20122" },
-  { 0x2F804, "4F60" },
-  { 0x2F805, "4FAE" },
-  { 0x2F806, "4FBB" },
-  { 0x2F807, "5002" },
-  { 0x2F808, "507A" },
-  { 0x2F809, "5099" },
-  { 0x2F80A, "50E7" },
-  { 0x2F80B, "50CF" },
-  { 0x2F80C, "349E" },
-  { 0x2F80D, "2063A" },
-  { 0x2F80E, "514D" },
-  { 0x2F80F, "5154" },
-  { 0x2F810, "5164" },
-  { 0x2F811, "5177" },
-  { 0x2F812, "2051C" },
-  { 0x2F813, "34B9" },
-  { 0x2F814, "5167" },
-  { 0x2F815, "518D" },
-  { 0x2F816, "2054B" },
-  { 0x2F817, "5197" },
-  { 0x2F818, "51A4" },
-  { 0x2F819, "4ECC" },
-  { 0x2F81A, "51AC" },
-  { 0x2F81B, "51B5" },
-  { 0x2F81C, "291DF" },
-  { 0x2F81D, "51F5" },
-  { 0x2F81E, "5203" },
-  { 0x2F81F, "34DF" },
-  { 0x2F820, "523B" },
-  { 0x2F821, "5246" },
-  { 0x2F822, "5272" },
-  { 0x2F823, "5277" },
-  { 0x2F824, "3515" },
-  { 0x2F825, "52C7" },
-  { 0x2F826, "52C9" },
-  { 0x2F827, "52E4" },
-  { 0x2F828, "52FA" },
-  { 0x2F829, "5305" },
-  { 0x2F82A, "5306" },
-  { 0x2F82B, "5317" },
-  { 0x2F82C, "5349" },
-  { 0x2F82D, "5351" },
-  { 0x2F82E, "535A" },
-  { 0x2F82F, "5373" },
-  { 0x2F830, "537D" },
-  { 0x2F831, "537F" },
-  { 0x2F832, "537F" },
-  { 0x2F833, "537F" },
-  { 0x2F834, "20A2C" },
-  { 0x2F835, "7070" },
-  { 0x2F836, "53CA" },
-  { 0x2F837, "53DF" },
-  { 0x2F838, "20B63" },
-  { 0x2F839, "53EB" },
-  { 0x2F83A, "53F1" },
-  { 0x2F83B, "5406" },
-  { 0x2F83C, "549E" },
-  { 0x2F83D, "5438" },
-  { 0x2F83E, "5448" },
-  { 0x2F83F, "5468" },
-  { 0x2F840, "54A2" },
-  { 0x2F841, "54F6" },
-  { 0x2F842, "5510" },
-  { 0x2F843, "5553" },
-  { 0x2F844, "5563" },
-  { 0x2F845, "5584" },
-  { 0x2F846, "5584" },
-  { 0x2F847, "5599" },
-  { 0x2F848, "55AB" },
-  { 0x2F849, "55B3" },
-  { 0x2F84A, "55C2" },
-  { 0x2F84B, "5716" },
-  { 0x2F84C, "5606" },
-  { 0x2F84D, "5717" },
-  { 0x2F84E, "5651" },
-  { 0x2F84F, "5674" },
-  { 0x2F850, "5207" },
-  { 0x2F851, "58EE" },
-  { 0x2F852, "57CE" },
-  { 0x2F853, "57F4" },
-  { 0x2F854, "580D" },
-  { 0x2F855, "578B" },
-  { 0x2F856, "5832" },
-  { 0x2F857, "5831" },
-  { 0x2F858, "58AC" },
-  { 0x2F859, "214E4" },
-  { 0x2F85A, "58F2" },
-  { 0x2F85B, "58F7" },
-  { 0x2F85C, "5906" },
-  { 0x2F85D, "591A" },
-  { 0x2F85E, "5922" },
-  { 0x2F85F, "5962" },
-  { 0x2F860, "216A8" },
-  { 0x2F861, "216EA" },
-  { 0x2F862, "59EC" },
-  { 0x2F863, "5A1B" },
-  { 0x2F864, "5A27" },
-  { 0x2F865, "59D8" },
-  { 0x2F866, "5A66" },
-  { 0x2F867, "36EE" },
-  { 0x2F868, "36FC" },
-  { 0x2F869, "5B08" },
-  { 0x2F86A, "5B3E" },
-  { 0x2F86B, "5B3E" },
-  { 0x2F86C, "219C8" },
-  { 0x2F86D, "5BC3" },
-  { 0x2F86E, "5BD8" },
-  { 0x2F86F, "5BE7" },
-  { 0x2F870, "5BF3" },
-  { 0x2F871, "21B18" },
-  { 0x2F872, "5BFF" },
-  { 0x2F873, "5C06" },
-  { 0x2F874, "5F53" },
-  { 0x2F875, "5C22" },
-  { 0x2F876, "3781" },
-  { 0x2F877, "5C60" },
-  { 0x2F878, "5C6E" },
-  { 0x2F879, "5CC0" },
-  { 0x2F87A, "5C8D" },
-  { 0x2F87B, "21DE4" },
-  { 0x2F87C, "5D43" },
-  { 0x2F87D, "21DE6" },
-  { 0x2F87E, "5D6E" },
-  { 0x2F87F, "5D6B" },
-  { 0x2F880, "5D7C" },
-  { 0x2F881, "5DE1" },
-  { 0x2F882, "5DE2" },
-  { 0x2F883, "382F" },
-  { 0x2F884, "5DFD" },
-  { 0x2F885, "5E28" },
-  { 0x2F886, "5E3D" },
-  { 0x2F887, "5E69" },
-  { 0x2F888, "3862" },
-  { 0x2F889, "22183" },
-  { 0x2F88A, "387C" },
-  { 0x2F88B, "5EB0" },
-  { 0x2F88C, "5EB3" },
-  { 0x2F88D, "5EB6" },
-  { 0x2F88E, "5ECA" },
-  { 0x2F88F, "2A392" },
-  { 0x2F890, "5EFE" },
-  { 0x2F891, "22331" },
-  { 0x2F892, "22331" },
-  { 0x2F893, "8201" },
-  { 0x2F894, "5F22" },
-  { 0x2F895, "5F22" },
-  { 0x2F896, "38C7" },
-  { 0x2F897, "232B8" },
-  { 0x2F898, "261DA" },
-  { 0x2F899, "5F62" },
-  { 0x2F89A, "5F6B" },
-  { 0x2F89B, "38E3" },
-  { 0x2F89C, "5F9A" },
-  { 0x2F89D, "5FCD" },
-  { 0x2F89E, "5FD7" },
-  { 0x2F89F, "5FF9" },
-  { 0x2F8A0, "6081" },
-  { 0x2F8A1, "393A" },
-  { 0x2F8A2, "391C" },
-  { 0x2F8A3, "6094" },
-  { 0x2F8A4, "226D4" },
-  { 0x2F8A5, "60C7" },
-  { 0x2F8A6, "6148" },
-  { 0x2F8A7, "614C" },
-  { 0x2F8A8, "614E" },
-  { 0x2F8A9, "614C" },
-  { 0x2F8AA, "617A" },
-  { 0x2F8AB, "618E" },
-  { 0x2F8AC, "61B2" },
-  { 0x2F8AD, "61A4" },
-  { 0x2F8AE, "61AF" },
-  { 0x2F8AF, "61DE" },
-  { 0x2F8B0, "61F2" },
-  { 0x2F8B1, "61F6" },
-  { 0x2F8B2, "6210" },
-  { 0x2F8B3, "621B" },
-  { 0x2F8B4, "625D" },
-  { 0x2F8B5, "62B1" },
-  { 0x2F8B6, "62D4" },
-  { 0x2F8B7, "6350" },
-  { 0x2F8B8, "22B0C" },
-  { 0x2F8B9, "633D" },
-  { 0x2F8BA, "62FC" },
-  { 0x2F8BB, "6368" },
-  { 0x2F8BC, "6383" },
-  { 0x2F8BD, "63E4" },
-  { 0x2F8BE, "22BF1" },
-  { 0x2F8BF, "6422" },
-  { 0x2F8C0, "63C5" },
-  { 0x2F8C1, "63A9" },
-  { 0x2F8C2, "3A2E" },
-  { 0x2F8C3, "6469" },
-  { 0x2F8C4, "647E" },
-  { 0x2F8C5, "649D" },
-  { 0x2F8C6, "6477" },
-  { 0x2F8C7, "3A6C" },
-  { 0x2F8C8, "654F" },
-  { 0x2F8C9, "656C" },
-  { 0x2F8CA, "2300A" },
-  { 0x2F8CB, "65E3" },
-  { 0x2F8CC, "66F8" },
-  { 0x2F8CD, "6649" },
-  { 0x2F8CE, "3B19" },
-  { 0x2F8CF, "6691" },
-  { 0x2F8D0, "3B08" },
-  { 0x2F8D1, "3AE4" },
-  { 0x2F8D2, "5192" },
-  { 0x2F8D3, "5195" },
-  { 0x2F8D4, "6700" },
-  { 0x2F8D5, "669C" },
-  { 0x2F8D6, "80AD" },
-  { 0x2F8D7, "43D9" },
-  { 0x2F8D8, "6717" },
-  { 0x2F8D9, "671B" },
-  { 0x2F8DA, "6721" },
-  { 0x2F8DB, "675E" },
-  { 0x2F8DC, "6753" },
-  { 0x2F8DD, "233C3" },
-  { 0x2F8DE, "3B49" },
-  { 0x2F8DF, "67FA" },
-  { 0x2F8E0, "6785" },
-  { 0x2F8E1, "6852" },
-  { 0x2F8E2, "6885" },
-  { 0x2F8E3, "2346D" },
-  { 0x2F8E4, "688E" },
-  { 0x2F8E5, "681F" },
-  { 0x2F8E6, "6914" },
-  { 0x2F8E7, "3B9D" },
-  { 0x2F8E8, "6942" },
-  { 0x2F8E9, "69A3" },
-  { 0x2F8EA, "69EA" },
-  { 0x2F8EB, "6AA8" },
-  { 0x2F8EC, "236A3" },
-  { 0x2F8ED, "6ADB" },
-  { 0x2F8EE, "3C18" },
-  { 0x2F8EF, "6B21" },
-  { 0x2F8F0, "238A7" },
-  { 0x2F8F1, "6B54" },
-  { 0x2F8F2, "3C4E" },
-  { 0x2F8F3, "6B72" },
-  { 0x2F8F4, "6B9F" },
-  { 0x2F8F5, "6BBA" },
-  { 0x2F8F6, "6BBB" },
-  { 0x2F8F7, "23A8D" },
-  { 0x2F8F8, "21D0B" },
-  { 0x2F8F9, "23AFA" },
-  { 0x2F8FA, "6C4E" },
-  { 0x2F8FB, "23CBC" },
-  { 0x2F8FC, "6CBF" },
-  { 0x2F8FD, "6CCD" },
-  { 0x2F8FE, "6C67" },
-  { 0x2F8FF, "6D16" },
-  { 0x2F900, "6D3E" },
-  { 0x2F901, "6D77" },
-  { 0x2F902, "6D41" },
-  { 0x2F903, "6D69" },
-  { 0x2F904, "6D78" },
-  { 0x2F905, "6D85" },
-  { 0x2F906, "23D1E" },
-  { 0x2F907, "6D34" },
-  { 0x2F908, "6E2F" },
-  { 0x2F909, "6E6E" },
-  { 0x2F90A, "3D33" },
-  { 0x2F90B, "6ECB" },
-  { 0x2F90C, "6EC7" },
-  { 0x2F90D, "23ED1" },
-  { 0x2F90E, "6DF9" },
-  { 0x2F90F, "6F6E" },
-  { 0x2F910, "23F5E" },
-  { 0x2F911, "23F8E" },
-  { 0x2F912, "6FC6" },
-  { 0x2F913, "7039" },
-  { 0x2F914, "701E" },
-  { 0x2F915, "701B" },
-  { 0x2F916, "3D96" },
-  { 0x2F917, "704A" },
-  { 0x2F918, "707D" },
-  { 0x2F919, "7077" },
-  { 0x2F91A, "70AD" },
-  { 0x2F91B, "20525" },
-  { 0x2F91C, "7145" },
-  { 0x2F91D, "24263" },
-  { 0x2F91E, "719C" },
-  { 0x2F91F, "243AB" },
-  { 0x2F920, "7228" },
-  { 0x2F921, "7235" },
-  { 0x2F922, "7250" },
-  { 0x2F923, "24608" },
-  { 0x2F924, "7280" },
-  { 0x2F925, "7295" },
-  { 0x2F926, "24735" },
-  { 0x2F927, "24814" },
-  { 0x2F928, "737A" },
-  { 0x2F929, "738B" },
-  { 0x2F92A, "3EAC" },
-  { 0x2F92B, "73A5" },
-  { 0x2F92C, "3EB8" },
-  { 0x2F92D, "3EB8" },
-  { 0x2F92E, "7447" },
-  { 0x2F92F, "745C" },
-  { 0x2F930, "7471" },
-  { 0x2F931, "7485" },
-  { 0x2F932, "74CA" },
-  { 0x2F933, "3F1B" },
-  { 0x2F934, "7524" },
-  { 0x2F935, "24C36" },
-  { 0x2F936, "753E" },
-  { 0x2F937, "24C92" },
-  { 0x2F938, "7570" },
-  { 0x2F939, "2219F" },
-  { 0x2F93A, "7610" },
-  { 0x2F93B, "24FA1" },
-  { 0x2F93C, "24FB8" },
-  { 0x2F93D, "25044" },
-  { 0x2F93E, "3FFC" },
-  { 0x2F93F, "4008" },
-  { 0x2F940, "76F4" },
-  { 0x2F941, "250F3" },
-  { 0x2F942, "250F2" },
-  { 0x2F943, "25119" },
-  { 0x2F944, "25133" },
-  { 0x2F945, "771E" },
-  { 0x2F946, "771F" },
-  { 0x2F947, "771F" },
-  { 0x2F948, "774A" },
-  { 0x2F949, "4039" },
-  { 0x2F94A, "778B" },
-  { 0x2F94B, "4046" },
-  { 0x2F94C, "4096" },
-  { 0x2F94D, "2541D" },
-  { 0x2F94E, "784E" },
-  { 0x2F94F, "788C" },
-  { 0x2F950, "78CC" },
-  { 0x2F951, "40E3" },
-  { 0x2F952, "25626" },
-  { 0x2F953, "7956" },
-  { 0x2F954, "2569A" },
-  { 0x2F955, "256C5" },
-  { 0x2F956, "798F" },
-  { 0x2F957, "79EB" },
-  { 0x2F958, "412F" },
-  { 0x2F959, "7A40" },
-  { 0x2F95A, "7A4A" },
-  { 0x2F95B, "7A4F" },
-  { 0x2F95C, "2597C" },
-  { 0x2F95D, "25AA7" },
-  { 0x2F95E, "25AA7" },
-  { 0x2F95F, "7AEE" },
-  { 0x2F960, "4202" },
-  { 0x2F961, "25BAB" },
-  { 0x2F962, "7BC6" },
-  { 0x2F963, "7BC9" },
-  { 0x2F964, "4227" },
-  { 0x2F965, "25C80" },
-  { 0x2F966, "7CD2" },
-  { 0x2F967, "42A0" },
-  { 0x2F968, "7CE8" },
-  { 0x2F969, "7CE3" },
-  { 0x2F96A, "7D00" },
-  { 0x2F96B, "25F86" },
-  { 0x2F96C, "7D63" },
-  { 0x2F96D, "4301" },
-  { 0x2F96E, "7DC7" },
-  { 0x2F96F, "7E02" },
-  { 0x2F970, "7E45" },
-  { 0x2F971, "4334" },
-  { 0x2F972, "26228" },
-  { 0x2F973, "26247" },
-  { 0x2F974, "4359" },
-  { 0x2F975, "262D9" },
-  { 0x2F976, "7F7A" },
-  { 0x2F977, "2633E" },
-  { 0x2F978, "7F95" },
-  { 0x2F979, "7FFA" },
-  { 0x2F97A, "8005" },
-  { 0x2F97B, "264DA" },
-  { 0x2F97C, "26523" },
-  { 0x2F97D, "8060" },
-  { 0x2F97E, "265A8" },
-  { 0x2F97F, "8070" },
-  { 0x2F980, "2335F" },
-  { 0x2F981, "43D5" },
-  { 0x2F982, "80B2" },
-  { 0x2F983, "8103" },
-  { 0x2F984, "440B" },
-  { 0x2F985, "813E" },
-  { 0x2F986, "5AB5" },
-  { 0x2F987, "267A7" },
-  { 0x2F988, "267B5" },
-  { 0x2F989, "23393" },
-  { 0x2F98A, "2339C" },
-  { 0x2F98B, "8201" },
-  { 0x2F98C, "8204" },
-  { 0x2F98D, "8F9E" },
-  { 0x2F98E, "446B" },
-  { 0x2F98F, "8291" },
-  { 0x2F990, "828B" },
-  { 0x2F991, "829D" },
-  { 0x2F992, "52B3" },
-  { 0x2F993, "82B1" },
-  { 0x2F994, "82B3" },
-  { 0x2F995, "82BD" },
-  { 0x2F996, "82E6" },
-  { 0x2F997, "26B3C" },
-  { 0x2F998, "82E5" },
-  { 0x2F999, "831D" },
-  { 0x2F99A, "8363" },
-  { 0x2F99B, "83AD" },
-  { 0x2F99C, "8323" },
-  { 0x2F99D, "83BD" },
-  { 0x2F99E, "83E7" },
-  { 0x2F99F, "8457" },
-  { 0x2F9A0, "8353" },
-  { 0x2F9A1, "83CA" },
-  { 0x2F9A2, "83CC" },
-  { 0x2F9A3, "83DC" },
-  { 0x2F9A4, "26C36" },
-  { 0x2F9A5, "26D6B" },
-  { 0x2F9A6, "26CD5" },
-  { 0x2F9A7, "452B" },
-  { 0x2F9A8, "84F1" },
-  { 0x2F9A9, "84F3" },
-  { 0x2F9AA, "8516" },
-  { 0x2F9AB, "273CA" },
-  { 0x2F9AC, "8564" },
-  { 0x2F9AD, "26F2C" },
-  { 0x2F9AE, "455D" },
-  { 0x2F9AF, "4561" },
-  { 0x2F9B0, "26FB1" },
-  { 0x2F9B1, "270D2" },
-  { 0x2F9B2, "456B" },
-  { 0x2F9B3, "8650" },
-  { 0x2F9B4, "865C" },
-  { 0x2F9B5, "8667" },
-  { 0x2F9B6, "8669" },
-  { 0x2F9B7, "86A9" },
-  { 0x2F9B8, "8688" },
-  { 0x2F9B9, "870E" },
-  { 0x2F9BA, "86E2" },
-  { 0x2F9BB, "8779" },
-  { 0x2F9BC, "8728" },
-  { 0x2F9BD, "876B" },
-  { 0x2F9BE, "8786" },
-  { 0x2F9BF, "45D7" },
-  { 0x2F9C0, "87E1" },
-  { 0x2F9C1, "8801" },
-  { 0x2F9C2, "45F9" },
-  { 0x2F9C3, "8860" },
-  { 0x2F9C4, "8863" },
-  { 0x2F9C5, "27667" },
-  { 0x2F9C6, "88D7" },
-  { 0x2F9C7, "88DE" },
-  { 0x2F9C8, "4635" },
-  { 0x2F9C9, "88FA" },
-  { 0x2F9CA, "34BB" },
-  { 0x2F9CB, "278AE" },
-  { 0x2F9CC, "27966" },
-  { 0x2F9CD, "46BE" },
-  { 0x2F9CE, "46C7" },
-  { 0x2F9CF, "8AA0" },
-  { 0x2F9D0, "8AED" },
-  { 0x2F9D1, "8B8A" },
-  { 0x2F9D2, "8C55" },
-  { 0x2F9D3, "27CA8" },
-  { 0x2F9D4, "8CAB" },
-  { 0x2F9D5, "8CC1" },
-  { 0x2F9D6, "8D1B" },
-  { 0x2F9D7, "8D77" },
-  { 0x2F9D8, "27F2F" },
-  { 0x2F9D9, "20804" },
-  { 0x2F9DA, "8DCB" },
-  { 0x2F9DB, "8DBC" },
-  { 0x2F9DC, "8DF0" },
-  { 0x2F9DD, "208DE" },
-  { 0x2F9DE, "8ED4" },
-  { 0x2F9DF, "8F38" },
-  { 0x2F9E0, "285D2" },
-  { 0x2F9E1, "285ED" },
-  { 0x2F9E2, "9094" },
-  { 0x2F9E3, "90F1" },
-  { 0x2F9E4, "9111" },
-  { 0x2F9E5, "2872E" },
-  { 0x2F9E6, "911B" },
-  { 0x2F9E7, "9238" },
-  { 0x2F9E8, "92D7" },
-  { 0x2F9E9, "92D8" },
-  { 0x2F9EA, "927C" },
-  { 0x2F9EB, "93F9" },
-  { 0x2F9EC, "9415" },
-  { 0x2F9ED, "28BFA" },
-  { 0x2F9EE, "958B" },
-  { 0x2F9EF, "4995" },
-  { 0x2F9F0, "95B7" },
-  { 0x2F9F1, "28D77" },
-  { 0x2F9F2, "49E6" },
-  { 0x2F9F3, "96C3" },
-  { 0x2F9F4, "5DB2" },
-  { 0x2F9F5, "9723" },
-  { 0x2F9F6, "29145" },
-  { 0x2F9F7, "2921A" },
-  { 0x2F9F8, "4A6E" },
-  { 0x2F9F9, "4A76" },
-  { 0x2F9FA, "97E0" },
-  { 0x2F9FB, "2940A" },
-  { 0x2F9FC, "4AB2" },
-  { 0x2F9FD, "29496" },
-  { 0x2F9FE, "980B" },
-  { 0x2F9FF, "980B" },
-  { 0x2FA00, "9829" },
-  { 0x2FA01, "295B6" },
-  { 0x2FA02, "98E2" },
-  { 0x2FA03, "4B33" },
-  { 0x2FA04, "9929" },
-  { 0x2FA05, "99A7" },
-  { 0x2FA06, "99C2" },
-  { 0x2FA07, "99FE" },
-  { 0x2FA08, "4BCE" },
-  { 0x2FA09, "29B30" },
-  { 0x2FA0A, "9B12" },
-  { 0x2FA0B, "9C40" },
-  { 0x2FA0C, "9CFD" },
-  { 0x2FA0D, "4CCE" },
-  { 0x2FA0E, "4CED" },
-  { 0x2FA0F, "9D67" },
-  { 0x2FA10, "2A0CE" },
-  { 0x2FA11, "4CF8" },
-  { 0x2FA12, "2A105" },
-  { 0x2FA13, "2A20E" },
-  { 0x2FA14, "2A291" },
-  { 0x2FA15, "9EBB" },
-  { 0x2FA16, "4D56" },
-  { 0x2FA17, "9EF9" },
-  { 0x2FA18, "9EFE" },
-  { 0x2FA19, "9F05" },
-  { 0x2FA1A, "9F0F" },
-  { 0x2FA1B, "9F16" },
-  { 0x2FA1C, "9F3B" },
-  { 0x2FA1D, "2A600" },
   { (gunichar)(-1), 0 }
 };
 

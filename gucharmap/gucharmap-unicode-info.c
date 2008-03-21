@@ -390,7 +390,7 @@ gucharmap_get_nameslist_exes (gunichar uc)
 {
   const NamesList *nl;
   gunichar *exes;
-  gint i, count;
+  gunichar i, count;
   
   nl = get_nameslist (uc);
 
@@ -416,8 +416,8 @@ gucharmap_get_nameslist_equals (gunichar uc)
 {
   const NamesList *nl;
   const gchar **equals;
-  gint i, count;
-  
+  gunichar i, count;
+
   nl = get_nameslist (uc);
 
   if (nl == NULL || nl->equals_index == -1)
@@ -429,7 +429,7 @@ gucharmap_get_nameslist_equals (gunichar uc)
 
   equals = g_malloc ((count + 1) * sizeof (gchar *));
   for (i = 0;  i < count;  i++)
-    equals[i] = names_list_equals[nl->equals_index + i].value;
+    equals[i] = names_list_equals_strings + names_list_equals[nl->equals_index + i].string_index;
   equals[count] = NULL;
 
   return equals;
@@ -442,7 +442,7 @@ gucharmap_get_nameslist_stars (gunichar uc)
 {
   const NamesList *nl;
   const gchar **stars;
-  gint i, count;
+  gunichar i, count;
 
   nl = get_nameslist (uc);
 
@@ -455,7 +455,7 @@ gucharmap_get_nameslist_stars (gunichar uc)
 
   stars = g_malloc ((count + 1) * sizeof (gchar *));
   for (i = 0;  i < count;  i++)
-    stars[i] = names_list_stars[nl->stars_index + i].value;
+    stars[i] = names_list_stars_strings + names_list_stars[nl->stars_index + i].string_index;
   stars[count] = NULL;
 
   return stars;
@@ -468,7 +468,7 @@ gucharmap_get_nameslist_pounds (gunichar uc)
 {
   const NamesList *nl;
   const gchar **pounds;
-  gint i, count;
+  gunichar i, count;
   
   nl = get_nameslist (uc);
 
@@ -481,7 +481,7 @@ gucharmap_get_nameslist_pounds (gunichar uc)
 
   pounds = g_malloc ((count + 1) * sizeof (gchar *));
   for (i = 0;  i < count;  i++)
-    pounds[i] = names_list_pounds[nl->pounds_index + i].value;
+    pounds[i] = names_list_pounds_strings + names_list_pounds[nl->pounds_index + i].string_index;
   pounds[count] = NULL;
 
   return pounds;
@@ -494,8 +494,8 @@ gucharmap_get_nameslist_colons (gunichar uc)
 {
   const NamesList *nl;
   const gchar **colons;
-  gint i, count;
-  
+  gunichar i, count;
+
   nl = get_nameslist (uc);
 
   if (nl == NULL || nl->colons_index == -1)
@@ -507,7 +507,7 @@ gucharmap_get_nameslist_colons (gunichar uc)
 
   colons = g_malloc ((count + 1) * sizeof (gchar *));
   for (i = 0;  i < count;  i++)
-    colons[i] = names_list_colons[nl->colons_index + i].value;
+    colons[i] = names_list_colons_strings + names_list_colons[nl->colons_index + i].string_index;
   colons[count] = NULL;
 
   return colons;
