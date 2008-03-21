@@ -673,7 +673,6 @@ make_menu (GucharmapWindow *guw)
       NULL, G_CALLBACK (move_to_next_screen_cb) },
   #endif
   };
-
   const GtkRadioActionEntry radio_menu_entries[] =
   {
     { "ByScript", NULL, N_("By _Script"), NULL,
@@ -681,10 +680,16 @@ make_menu (GucharmapWindow *guw)
     { "ByUnicodeBlock", NULL, N_("By _Unicode Block"), NULL,
       NULL, VIEW_BY_BLOCK }
   };
+  const GtkToggleActionEntry toggle_menu_entries[] =
+  {
+    { "SnapColumns", NULL, N_("Snap _Columns to Power of Two"), NULL,
+      NULL,
+      G_CALLBACK (snap_cols_pow2), FALSE },
+  };
   GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
   GtkWidget *menubar;
+  GtkAction *action;
   guint forward_keysym, back_keysym;
-  GtkToggleAction *toggle_menu;
 
   if (gtk_widget_get_direction (GTK_WIDGET (guw)) == GTK_TEXT_DIR_RTL)
     {
@@ -701,11 +706,6 @@ make_menu (GucharmapWindow *guw)
   gtk_window_add_accel_group (GTK_WINDOW (guw), priv->accel_group);
   g_object_unref (priv->accel_group);
 
-  toggle_menu = gtk_toggle_action_new ( "SnapColumns",
-					_("Snap _Columns to Power of Two"),
-					NULL,
-					NULL);
-  g_signal_connect (G_OBJECT(toggle_menu), "toggled", G_CALLBACK (snap_cols_pow2), guw);
   /* make the menu bar */
 
   priv->uimanager = gtk_ui_manager_new();
@@ -726,10 +726,13 @@ make_menu (GucharmapWindow *guw)
 				      gucharmap_settings_get_chapters_mode(),
 				      G_CALLBACK (view_by),
 				      guw);
+  gtk_action_group_add_toggle_actions (priv->action_group,
+  				       toggle_menu_entries,
+				       G_N_ELEMENTS (toggle_menu_entries),
+				       guw);
 
-  gtk_action_group_add_action (priv->action_group,
-  			       GTK_ACTION (toggle_menu));
-  gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (toggle_menu),
+  action = gtk_action_group_get_action (priv->action_group, "SnapColumns");
+  gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
                                 gucharmap_settings_get_snap_pow2 ());
   gucharmap_window_set_file_menu_visible (guw, TRUE);
 
