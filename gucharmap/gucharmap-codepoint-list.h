@@ -35,6 +35,26 @@ G_BEGIN_DECLS
 #define GUCHARMAP_IS_CODEPOINT_LIST_CLASS(k)      (G_TYPE_CHECK_CLASS_TYPE ((k), GUCHARMAP_TYPE_CODEPOINT_LIST))
 #define GUCHARMAP_CODEPOINT_LIST_GET_CLASS(o)     (G_TYPE_INSTANCE_GET_CLASS ((o), GUCHARMAP_TYPE_CODEPOINT_LIST, GucharmapCodepointListClass))
 
+typedef struct _GucharmapScriptCodepointList GucharmapScriptCodepointList;
+typedef struct _GucharmapScriptCodepointListClass GucharmapScriptCodepointListClass;
+
+struct _GucharmapCodepointList
+{
+  GObject parent_instance;
+};
+
+struct _GucharmapCodepointListClass
+{
+  GObjectClass parent_class;
+
+  /* zero is the first index */
+  gint     (*get_last_index) (GucharmapCodepointList *list);
+  gunichar (*get_char)       (GucharmapCodepointList *list, 
+                              gint                    index);
+  gint     (*get_index)      (GucharmapCodepointList *list, 
+                              gunichar                wc);
+};
+
 GType                    gucharmap_codepoint_list_get_type       (void);
 GucharmapCodepointList * gucharmap_codepoint_list_new            (gunichar start,
                                                                   gunichar end);

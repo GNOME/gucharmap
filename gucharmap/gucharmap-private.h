@@ -144,24 +144,6 @@ void _gucharmap_chartable_redraw	(GucharmapChartable *chartable,
 					 gboolean move_zoom);
 
 
-struct _GucharmapCodepointList
-{
-  GObject parent;
-};
-
-struct _GucharmapCodepointListClass
-{
-  GObjectClass parent_class;
-
-  /* zero is the first index */
-  gint     (*get_last_index) (GucharmapCodepointList *list);
-  gunichar (*get_char)       (GucharmapCodepointList *list, 
-                              gint                    index);
-  gint     (*get_index)      (GucharmapCodepointList *list, 
-                              gunichar                wc);
-};
-
-
 struct _GucharmapScriptChaptersModel
 {
   GucharmapChaptersModel parent;

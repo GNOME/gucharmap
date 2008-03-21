@@ -24,9 +24,6 @@
 #ifndef GUCHARMAP_TYPES_H
 #define GUCHARMAP_TYPES_H
 
-typedef struct _GucharmapScriptCodepointList GucharmapScriptCodepointList;
-typedef struct _GucharmapScriptCodepointListClass GucharmapScriptCodepointListClass;
-
 typedef struct _GucharmapScriptChaptersModel GucharmapScriptChaptersModel;
 typedef struct _GucharmapScriptChaptersModelClass GucharmapScriptChaptersModelClass;
 
