@@ -51,7 +51,7 @@ EXTRA_DIST = \
 	$(NULL)
 
 pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = gucharmap.pc
+pkgconfig_DATA = gucharmap-2.pc
 
 DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper
 
