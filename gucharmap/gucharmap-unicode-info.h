@@ -27,10 +27,25 @@
 
 G_BEGIN_DECLS
 
+typedef enum {
+  GUCHARMAP_UNICODE_VERSION_UNASSIGNED,
+  GUCHARMAP_UNICODE_VERSION_1_1,
+  GUCHARMAP_UNICODE_VERSION_2_0,
+  GUCHARMAP_UNICODE_VERSION_2_1,
+  GUCHARMAP_UNICODE_VERSION_3_0,
+  GUCHARMAP_UNICODE_VERSION_3_1,
+  GUCHARMAP_UNICODE_VERSION_3_2,
+  GUCHARMAP_UNICODE_VERSION_4_0,
+  GUCHARMAP_UNICODE_VERSION_4_1,
+  GUCHARMAP_UNICODE_VERSION_5_0,
+  GUCHARMAP_UNICODE_VERSION_LATEST = GUCHARMAP_UNICODE_VERSION_5_0 /* private, will move forward with each revision */
+} GucharmapUnicodeVersion;
+
 /* return values are read-only */
 G_CONST_RETURN gchar *  gucharmap_get_unicode_name                (gunichar uc);
 G_CONST_RETURN gchar *  gucharmap_get_unicode_data_name           (gunichar uc);
 gint                    gucharmap_get_unicode_data_name_count     (void);
+GucharmapUnicodeVersion gucharmap_get_unicode_version             (gunichar wc);
 G_CONST_RETURN gchar *  gucharmap_get_unicode_category_name       (gunichar uc);
 gint                    gucharmap_get_unihan_count                (void);
 G_CONST_RETURN gchar *  gucharmap_get_unicode_kDefinition         (gunichar uc);
@@ -57,6 +72,8 @@ gboolean                gucharmap_unichar_isgraph                 (gunichar  wc)
 /* defined in gucharmap-script-codepoint-list.c */
 G_CONST_RETURN gchar ** gucharmap_unicode_list_scripts            (void);
 G_CONST_RETURN gchar *  gucharmap_unicode_get_script_for_char     (gunichar wc);
+
+G_CONST_RETURN gchar *  gucharmap_unicode_version_to_string       (GucharmapUnicodeVersion version);
 
 /* doesn't really belong here, but no better place was available */
 gunichar     gucharmap_unicode_get_locale_character (void);

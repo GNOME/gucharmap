@@ -27,6 +27,7 @@
 #include "unicode-blocks.h"
 #include "unicode-nameslist.h"
 #include "unicode-categories.h"
+#include "unicode-versions.h"
 #if ENABLE_UNIHAN
 # include "unicode-unihan.h"
 #endif
@@ -176,6 +177,41 @@ gint
 gucharmap_get_unicode_data_name_count (void)
 {
   return G_N_ELEMENTS (unicode_names);
+}
+
+/* does a binary search on unicode_versions */
+GucharmapUnicodeVersion
+gucharmap_get_unicode_version (gunichar uc)
+{
+  gint min = 0;
+  gint mid;
+  gint max = G_N_ELEMENTS (unicode_versions) - 1;
+
+  if (uc < unicode_versions[0].start || uc > unicode_versions[max].end)
+    return GUCHARMAP_UNICODE_VERSION_UNASSIGNED;;
+
+  while (max >= min)
+    {
+      mid = (min + max) / 2;
+
+      if (uc > unicode_versions[mid].end)
+        min = mid + 1;
+      else if (uc < unicode_versions[mid].start)
+        max = mid - 1;
+      else if ((uc >= unicode_versions[mid].start) && (uc <= unicode_versions[mid].end))
+        return unicode_versions[mid].version;
+    }
+
+  return GUCHARMAP_UNICODE_VERSION_UNASSIGNED;
+}
+
+G_CONST_RETURN gchar *
+gucharmap_unicode_version_to_string (GucharmapUnicodeVersion version)
+{
+  g_return_val_if_fail (version >= GUCHARMAP_UNICODE_VERSION_UNASSIGNED &&
+                        version <= GUCHARMAP_UNICODE_VERSION_LATEST, NULL);
+
+  return unicode_version_strings + unicode_version_string_offsets[version];
 }
 
 #if ENABLE_UNIHAN

@@ -422,6 +422,7 @@ set_details (GucharmapCharmap *charmap,
   const gchar **csarr;
   gunichar *ucs;
   gunichar2 *utf16;
+  GucharmapUnicodeVersion version;
 
   buffer = gtk_text_view_get_buffer (charmap->details_view);
   gtk_text_buffer_set_text (buffer, "", 0);
@@ -448,6 +449,13 @@ set_details (GucharmapCharmap *charmap,
   g_free (temp);
 
   insert_heading (charmap, buffer, &iter, _("General Character Properties"));
+
+  /* Unicode version */
+  version = gucharmap_get_unicode_version (uc);
+  if (version)
+    insert_vanilla_detail (charmap, buffer, &iter,
+                           _("In Unicode since:"),
+                           gucharmap_unicode_version_to_string (version));
 
   /* character category */
   insert_vanilla_detail (charmap, buffer, &iter, _("Unicode category:"),

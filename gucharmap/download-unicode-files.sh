@@ -8,9 +8,10 @@
 #  - NamesList.txt
 #  - Blocks.txt
 #  - Scripts.txt
+#  - DerivedAge.txt
 #
 
-FILES='UnicodeData.txt Unihan.zip NamesList.txt Blocks.txt Scripts.txt'
+FILES='UnicodeData.txt Unihan.zip NamesList.txt Blocks.txt Scripts.txt DerivedAge.txt'
 
 mkdir -p ${1:-unicode} 
 
