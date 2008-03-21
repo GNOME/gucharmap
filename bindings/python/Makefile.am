@@ -3,17 +3,18 @@ NULL =
 # FIXMEchpe: keep this in sync with gucharmap/Makefile.am !
 srcdirheaders = \
 	gucharmap-block-chapters-model.h \
+	gucharmap-block-codepoint-list.h \
 	gucharmap-chapters-model.h \
 	gucharmap-chapters-view.h \
 	gucharmap-charmap.h \
 	gucharmap-chartable.h \
 	gucharmap-codepoint-list.h \
-	gucharmap.h \
 	gucharmap-script-chapters-model.h \
 	gucharmap-script-codepoint-list.h \
 	gucharmap-unicode-info.h \
 	$(NULL)
 builddirheaders = \
+	gucharmap.h \
 	gucharmap-type-builtins.h \
 	$(NULL)
 
