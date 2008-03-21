@@ -38,8 +38,7 @@ enum
   NUM_SIGNALS
 };
 
-static guint gucharmap_search_dialog_signals[NUM_SIGNALS] = { 0, 0 };
-static GObjectClass *parent_class;
+static guint gucharmap_search_dialog_signals[NUM_SIGNALS];
 
 enum
 {
@@ -89,6 +88,10 @@ struct _GucharmapSearchDialogPrivate
   GtkWidget             *next_button;
 };
 
+static void gucharmap_search_dialog_class_init (GucharmapSearchDialogClass *klass);
+static void gucharmap_search_dialog_init       (GucharmapSearchDialog *dialog);
+
+G_DEFINE_TYPE (GucharmapSearchDialog, gucharmap_search_dialog, GTK_TYPE_DIALOG)
 
 static const gchar *
 utf8_strcasestr (const gchar *haystack, 
@@ -825,15 +828,13 @@ gucharmap_search_dialog_finalize (GObject *object)
   if (priv->search_state)
     gucharmap_search_state_free (priv->search_state);
 
-  parent_class->finalize (object);
+  G_OBJECT_CLASS (gucharmap_search_dialog_parent_class)->finalize (object);
 }
 
 static void
 gucharmap_search_dialog_class_init (GucharmapSearchDialogClass *clazz)
 {
   g_type_class_add_private (clazz, sizeof (GucharmapSearchDialogPrivate));
-
-  parent_class = (GObjectClass *) g_type_class_peek_parent (clazz);
 
   G_OBJECT_CLASS (clazz)->finalize = gucharmap_search_dialog_finalize;
 
@@ -850,9 +851,7 @@ gucharmap_search_dialog_class_init (GucharmapSearchDialogClass *clazz)
                     g_cclosure_marshal_VOID__UINT, G_TYPE_NONE, 1, G_TYPE_UINT);
 }
 
-G_DEFINE_TYPE (GucharmapSearchDialog, gucharmap_search_dialog, GTK_TYPE_DIALOG)
-
-GtkWidget * 
+GtkWidget *
 gucharmap_search_dialog_new (GucharmapWindow *guw)
 {
   GucharmapSearchDialog *search_dialog = g_object_new (gucharmap_search_dialog_get_type (), NULL);

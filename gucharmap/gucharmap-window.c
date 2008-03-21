@@ -65,9 +65,12 @@ struct _GucharmapWindowPrivate
   ChaptersMode chapters_mode; 
 };
 
-GdkCursor * _gucharmap_window_progress_cursor (void);
+static void gucharmap_window_class_init (GucharmapWindowClass *klass);
+static void gucharmap_window_init       (GucharmapWindow *window);
 
-static GtkWindowClass *parent_class = NULL;
+G_DEFINE_TYPE (GucharmapWindow, gucharmap_window, GTK_TYPE_WINDOW)
+
+GdkCursor * _gucharmap_window_progress_cursor (void);
 
 static void
 status_message (GtkWidget       *widget, 
@@ -976,19 +979,17 @@ window_finalize (GObject *object)
     g_free (priv->last_search);
     */
 #endif
-  G_OBJECT_CLASS (parent_class)->finalize (object);
+  G_OBJECT_CLASS (gucharmap_window_parent_class)->finalize (object);
 }
 
 static void
 gucharmap_window_class_init (GucharmapWindowClass *clazz)
 {
-  parent_class = g_type_class_peek_parent (clazz);
   GTK_WIDGET_CLASS (clazz)->show_all = show_all;
   G_OBJECT_CLASS (clazz)->finalize = window_finalize;
+
   g_type_class_add_private (clazz, sizeof (GucharmapWindowPrivate));
 }
-
-G_DEFINE_TYPE (GucharmapWindow, gucharmap_window, GTK_TYPE_WINDOW)
 
 GtkWidget *
 gucharmap_window_new (void)
