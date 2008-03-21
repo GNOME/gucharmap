@@ -22,6 +22,7 @@
 #include <gtk/gtk.h>
 #include <string.h>
 #include "gucharmap-unicode-info.h"
+#include "gucharmap-private.h"
 
 #include "unicode-names.h"
 #include "unicode-blocks.h"

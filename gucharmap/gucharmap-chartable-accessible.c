@@ -22,14 +22,15 @@
 
 #include <string.h>
 
+#include <glib/gi18n-lib.h>
+
 #include <gtk/gtk.h>
 
 #include "gucharmap.h"
-#include "gucharmap-intl.h"
 #include "gucharmap-chartable.h"
-#include "gucharmap-chartable-private.h"
 #include "gucharmap-chartable-accessible.h"
 #include "gucharmap-chartable-cell-accessible.h"
+#include "gucharmap-private.h"
 
 typedef struct
 {

@@ -19,9 +19,9 @@
 #include "config.h"
 #include <string.h>
 #include <gtk/gtk.h>
-#include "gucharmap-intl.h"
 #include "gucharmap-settings.h"
 #include "gucharmap-chapters-view.h"
+#include "gucharmap-private.h"
 #include "unicode-blocks.h"
 
 static void

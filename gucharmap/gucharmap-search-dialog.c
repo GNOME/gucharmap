@@ -18,6 +18,7 @@
  */
 
 #include "config.h"
+#include <glib/gi18n-lib.h>
 #include <gtk/gtk.h>
 #include <stdlib.h>
 #include <string.h>
@@ -25,7 +26,7 @@
 #include "gucharmap-window.h"
 #include "gucharmap-unicode-info.h"
 #include "gucharmap-marshal.h"
-#include "gucharmap-intl.h"
+#include "gucharmap-private.h"
 
 #define GUCHARMAP_SEARCH_DIALOG_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), gucharmap_search_dialog_get_type (), GucharmapSearchDialogPrivate))
 

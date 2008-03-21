@@ -20,6 +20,7 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <glib/gi18n-lib.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 #include "gucharmap-window.h"
@@ -27,9 +28,9 @@
 #include "gucharmap-unicode-info.h"
 #include "gucharmap-script-chapters-model.h"
 #include "gucharmap-block-chapters-model.h"
-#include "gucharmap-intl.h"
 #include "gucharmap-search-dialog.h"
 #include "gucharmap-settings.h"
+#include "gucharmap-private.h"
 
 #ifndef ICON_PATH
 # define ICON_PATH ""
@@ -949,6 +950,8 @@ gucharmap_window_init (GucharmapWindow *guw)
   gtk_window_set_icon_name (GTK_WINDOW (guw), "gucharmap");
 
   pack_stuff_in_window (guw);
+
+  gtk_widget_grab_focus (GTK_WIDGET (gucharmap_charmap_get_chartable (guw->charmap)));
 }
 
 static void

@@ -19,12 +19,13 @@
 
 #include "config.h"
 
+#include <glib/gi18n-lib.h>
 #include <gtk/gtk.h>
 #include <stdlib.h>
 #include <string.h>
 #include "gucharmap-mini-fontsel.h"
-#include "gucharmap-intl.h"
 #include "gucharmap-marshal.h"
+#include "gucharmap-private.h"
 
 enum
 {

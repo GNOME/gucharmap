@@ -24,6 +24,7 @@
 #define GUCHARMAP_WINDOW_H
 
 #include <gtk/gtk.h>
+#include <gucharmap/gucharmap-types.h>
 #include <gucharmap/gucharmap-charmap.h>
 #include <gucharmap/gucharmap-mini-fontsel.h>
 
@@ -34,21 +35,6 @@ G_BEGIN_DECLS
 #define GUCHARMAP_WINDOW_CLASS(clazz) (G_TYPE_CHECK_CLASS_CAST ((clazz), gucharmap_window_get_type (), GucharmapWindowClass))
 
 #define GUCHARMAP_IS_WINDOW(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), gucharmap_window_get_type ()))
-
-typedef struct _GucharmapWindow GucharmapWindow;
-typedef struct _GucharmapWindowClass GucharmapWindowClass;
-
-struct _GucharmapWindow
-{
-  GtkWindow parent;
-
-  GucharmapCharmap *charmap; 
-};
-
-struct _GucharmapWindowClass
-{
-  GtkWindowClass parent_class;
-};
 
 GType                        gucharmap_window_get_type                   (void);
 GtkWidget *                  gucharmap_window_new                        (void);

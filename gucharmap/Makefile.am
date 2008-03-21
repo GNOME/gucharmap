@@ -33,10 +33,10 @@ libgucharmap_la_SOURCES = \
 	gucharmap-chartable-cell-accessible.c gucharmap-chartable-cell-accessible.h \
 	gucharmap-chartable.c gucharmap-chartable.h gucharmap-chartable-private.h \
 	gucharmap-codepoint-list.c gucharmap-codepoint-list.h \
-	gucharmap-intl.h \
 	gucharmap-init.c gucharmap-init.h \
 	gucharmap-marshal.c gucharmap-marshal.h \
 	gucharmap-mini-fontsel.c gucharmap-mini-fontsel.h \
+	gucharmap-private.h \ 
 	gucharmap-script-chapters-model.c gucharmap-script-chapters-model.h \
 	gucharmap-script-codepoint-list.c gucharmap-script-codepoint-list.h \
 	gucharmap-search-dialog.h gucharmap-search-dialog.c \
@@ -87,6 +87,7 @@ libgucharmapinclude_HEADERS = \
 	gucharmap-script-codepoint-list.h \
 	gucharmap-search-dialog.h \
 	gucharmap-settings.h \
+	gucharmap-types.h \
 	gucharmap-unicode-info.h \
 	gucharmap-window.h \
 	$(NULL)

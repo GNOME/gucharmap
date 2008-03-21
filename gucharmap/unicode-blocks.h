@@ -7,6 +7,8 @@
 #define UNICODE_BLOCKS_H
 
 #include <glib/gunicode.h>
+#include <glib/gi18n-lib.h>
+
 typedef struct _UnicodeBlock UnicodeBlock;
 
 static const struct _UnicodeBlock

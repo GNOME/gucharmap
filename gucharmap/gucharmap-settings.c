@@ -25,7 +25,8 @@
 
 #include "gucharmap-chapters-model.h"
 #include "gucharmap-settings.h"
-#include "gucharmap-intl.h"
+#include "gucharmap-private.h"
+
 #if HAVE_GCONF
 #include <gconf/gconf-client.h>
 static GConfClient *client;

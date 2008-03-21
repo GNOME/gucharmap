@@ -22,14 +22,14 @@
 
 #include "config.h"
 
+#include <glib/gi18n-lib.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 
 #include "gucharmap-marshal.h"
-#include "gucharmap-intl.h"
 #include "gucharmap-chartable.h"
-#include "gucharmap-chartable-private.h"
 #include "gucharmap-unicode-info.h"
+#include "gucharmap-private.h"
 
 #define ENABLE_ACCESSIBLE
 

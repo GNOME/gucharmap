@@ -26,9 +26,9 @@
 
 #include "gucharmap.h"
 #include "gucharmap-chartable.h"
-#include "gucharmap-chartable-private.h"
 #include "gucharmap-chartable-accessible.h"
 #include "gucharmap-chartable-cell-accessible.h"
+#include "gucharmap-private.h"
 
 static void gucharmap_chartable_cell_accessible_class_init (GucharmapChartableCellAccessibleClass *klass);
 static void gucharmap_chartable_cell_accessible_init (GucharmapChartableCellAccessible *cell);

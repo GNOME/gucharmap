@@ -18,11 +18,12 @@
  * 59 Temple Place, Suite 330, Boston, MA 02110-1301  USA
  */
 
-#include "config.h"
+#include <config.h>
+#include <glib/gi18n-lib.h>
 #include "gucharmap-block-chapters-model.h"
-#include "gucharmap-intl.h"
 #include "gucharmap-settings.h"
 #include "unicode-blocks.h"
+#include "gucharmap-private.h"
 
 enum 
 {

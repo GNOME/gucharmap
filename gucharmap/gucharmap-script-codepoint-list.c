@@ -19,9 +19,9 @@
 
 #include "config.h"
 #include <glib.h>
-#include "gucharmap-intl.h"
 #include <string.h>
 #include "gucharmap-script-codepoint-list.h"
+#include "gucharmap-private.h"
 #include "unicode-scripts.h"
 
 typedef struct

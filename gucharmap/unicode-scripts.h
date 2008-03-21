@@ -7,7 +7,7 @@
 #define UNICODE_SCRIPTS_H
 
 #include <glib/gunicode.h>
-#include "gucharmap-intl.h"
+#include <glib/gi18n-lib.h>
 
 typedef struct _UnicodeScript UnicodeScript;
 

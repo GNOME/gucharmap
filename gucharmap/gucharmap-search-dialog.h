@@ -27,6 +27,7 @@
 #define GUCHARMAP_SEARCH_DIALOG_H
 
 #include <gtk/gtk.h>
+#include <gucharmap/gucharmap-types.h>
 #include <gucharmap/gucharmap-window.h>
 
 G_BEGIN_DECLS
@@ -39,23 +40,6 @@ typedef enum
   GUCHARMAP_DIRECTION_FORWARD = 1
 }
 GucharmapDirection;
-
-typedef struct _GucharmapSearchDialog GucharmapSearchDialog;
-typedef struct _GucharmapSearchDialogClass GucharmapSearchDialogClass;
-
-struct _GucharmapSearchDialog
-{
-  GtkDialog parent;
-};
-
-struct _GucharmapSearchDialogClass
-{
-  GtkDialogClass parent_class;
-
-  /* signals */
-  void (* search_start)  (void);
-  void (* search_finish) (gunichar found_char);
-};
 
 GType       gucharmap_search_dialog_get_type      (void);
 GtkWidget * gucharmap_search_dialog_new           (GucharmapWindow *parent);

@@ -22,7 +22,7 @@
 #define GUCHARMAP_CHARTABLE_ACCESSIBLE_H
 
 #include <gtk/gtkaccessible.h>
-
+#include <gucharmap/gucharmap-types.h>
 #include "gucharmap-chartable.h"
 
 G_BEGIN_DECLS

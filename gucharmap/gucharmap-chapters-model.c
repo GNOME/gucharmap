@@ -18,10 +18,13 @@
  * 59 Temple Place, Suite 330, Boston, MA 02110-1301  USA
  */
 
-#include "config.h"
+#include <config.h>
+
+#include <string.h>
+
 #include "gucharmap-chapters-model.h"
 #include "gucharmap-marshal.h"
-#include <string.h>
+#include "gucharmap-private.h"
 
 G_DEFINE_TYPE (GucharmapChaptersModel, gucharmap_chapters_model, GTK_TYPE_LIST_STORE)
 

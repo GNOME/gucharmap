@@ -30,7 +30,6 @@
 gint
 main (gint argc, gchar **argv)
 {
-  GucharmapChartable *chartable;
   GtkWidget *window;
   GdkScreen *screen;
   gint monitor;
@@ -98,9 +97,6 @@ main (gint argc, gchar **argv)
     }
 
   g_signal_connect (G_OBJECT (window), "destroy", G_CALLBACK (gtk_main_quit), NULL);
-
-  chartable = gucharmap_charmap_get_chartable (GUCHARMAP_WINDOW (window)->charmap);
-  gtk_widget_grab_focus (GTK_WIDGET (chartable));
 
   gtk_widget_show (window);
 

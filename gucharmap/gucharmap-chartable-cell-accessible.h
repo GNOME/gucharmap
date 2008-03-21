@@ -21,6 +21,7 @@
 #define GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE_H
 
 #include <atk/atk.h>
+#include <gucharmap/gucharmap-types.h>
 
 G_BEGIN_DECLS
 
@@ -32,22 +33,6 @@ G_BEGIN_DECLS
 
 typedef struct _GucharmapChartableCellAccessible      GucharmapChartableCellAccessible;
 typedef struct _GucharmapChartableCellAccessibleClass GucharmapChartableCellAccessibleClass;
-  
-struct _GucharmapChartableCellAccessible
-{
-  AtkObject parent;
-
-  GtkWidget    *widget;
-  int           index;
-  AtkStateSet  *state_set;
-  gchar        *activate_description;
-  guint         action_idle_handler;
-};
-
-struct _GucharmapChartableCellAccessibleClass
-{
-  AtkObjectClass parent_class;
-};
 
 GType gucharmap_chartable_cell_accessible_get_type (void);
 

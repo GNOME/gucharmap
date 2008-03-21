@@ -26,6 +26,7 @@
 #define GUCHARMAP_CHAPTERS_VIEW_H
 
 #include <gtk/gtktreeview.h>
+#include <gucharmap/gucharmap-types.h>
 #include <gucharmap/gucharmap-chapters-model.h>
 
 G_BEGIN_DECLS
@@ -42,24 +43,8 @@ G_BEGIN_DECLS
 #define GUCHARMAP_CHAPTERS_VIEW_GET_CLASS(obj) \
             (G_TYPE_INSTANCE_GET_CLASS ((obj), gucharmap_chapters_view_get_type (), GucharmapChaptersViewClass))
 
-typedef struct _GucharmapChaptersView GucharmapChaptersView;
-typedef struct _GucharmapChaptersViewClass GucharmapChaptersViewClass;
-
-struct _GucharmapChaptersView
-{
-  GtkTreeView parent_instance;
-
-  /*< private >*/
-  GtkTreeViewColumn *column;
-  GucharmapChaptersModel *model;
-};
-
-struct _GucharmapChaptersViewClass
-{
-  GtkTreeViewClass parent_class;
-};
-
 GType       gucharmap_chapters_view_get_type (void);
+
 GtkWidget * gucharmap_chapters_view_new      (void);
 
 void                    gucharmap_chapters_view_set_model (GucharmapChaptersView *view,

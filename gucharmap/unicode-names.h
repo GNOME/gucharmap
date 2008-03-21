@@ -8,7 +8,7 @@
 
 #include <glib/gunicode.h>
 
-#include "gucharmap-intl.h"
+#include <glib/gi18n-lib.h>
 
 static const char unicode_names_strings[] = \
   "<CJK Ideograph Extension A, First>\0"

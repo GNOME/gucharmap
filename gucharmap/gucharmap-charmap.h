@@ -24,6 +24,7 @@
 #define GUCHARMAP_CHARMAP_H
 
 #include <gtk/gtk.h>
+#include <gucharmap/gucharmap-types.h>
 #include <gucharmap/gucharmap-chartable.h>
 #include <gucharmap/gucharmap-chapters-model.h>
 #include <gucharmap/gucharmap-chapters-view.h>
@@ -40,9 +41,6 @@ G_BEGIN_DECLS
 
 #define GUCHARMAP_IS_CHARMAP(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), \
                                    gucharmap_charmap_get_type ()))
-
-typedef struct _GucharmapCharmap GucharmapCharmap;
-typedef struct _GucharmapCharmapClass GucharmapCharmapClass;
 
 GType                 gucharmap_charmap_get_type           (void);
 

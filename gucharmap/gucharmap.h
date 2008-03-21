@@ -21,6 +21,8 @@
 
 #define __GUCHARMAP_GUCHARMAP_H_INSIDE__
 
+#include <gucharmap/gucharmap-types.h>
+
 #include <gucharmap/gucharmap-block-chapters-model.h>
 #include <gucharmap/gucharmap-chapters-model.h>
 #include <gucharmap/gucharmap-charmap.h>

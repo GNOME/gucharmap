@@ -25,6 +25,7 @@
 #define GUCHARMAP_CHAPTERS_MODEL_H
 
 #include <gtk/gtkliststore.h>
+#include <gucharmap/gucharmap-types.h>
 #include <gucharmap/gucharmap-codepoint-list.h>
 
 G_BEGIN_DECLS
@@ -43,9 +44,6 @@ G_BEGIN_DECLS
 #define GUCHARMAP_CHAPTERS_MODEL_GET_CLASS(obj) \
             (G_TYPE_INSTANCE_GET_CLASS ((obj), gucharmap_chapters_model_get_type (), GucharmapChaptersModelClass))
 
-typedef struct _GucharmapChaptersModel GucharmapChaptersModel;
-typedef struct _GucharmapChaptersModelClass GucharmapChaptersModelClass;
-
 typedef enum
 {
   CHAPTERS_SCRIPT = 0,
@@ -56,27 +54,6 @@ ChaptersMode;
 enum {
   CHAPTERS_ID_COL    = 0,
   CHAPTERS_LABEL_COL = 1
-};
-
-struct _GucharmapChaptersModel
-{
-  GtkListStore parent_instance;
-
-  /*< protected >*/
-  GucharmapCodepointList *book_list;
-};
-
-struct _GucharmapChaptersModelClass
-{
-  GtkListStoreClass parent_class;
-
-  const char *title;
-  gboolean (* character_to_iter) (GucharmapChaptersModel *chapters,
-                                  gunichar wc,
-                                  GtkTreeIter *iter);
-  GucharmapCodepointList * (* get_codepoint_list) (GucharmapChaptersModel *chapters,
-                                                   GtkTreeIter *iter);
-  G_CONST_RETURN GucharmapCodepointList * (* get_book_codepoint_list) (GucharmapChaptersModel *chapters);
 };
 
 GType                                   gucharmap_chapters_model_get_type                (void);

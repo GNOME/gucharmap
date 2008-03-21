@@ -25,6 +25,7 @@
 #define GUCHARMAP_CODEPOINT_LIST_H
 
 #include <glib-object.h>
+#include <gucharmap/gucharmap-types.h>
 
 G_BEGIN_DECLS
 
@@ -39,26 +40,6 @@ G_BEGIN_DECLS
 
 #define GUCHARMAP_CODEPOINT_LIST_GET_CLASS(obj) \
              (G_TYPE_INSTANCE_GET_CLASS ((obj), gucharmap_codepoint_list_get_type (), GucharmapCodepointListClass))
-
-typedef struct _GucharmapCodepointList GucharmapCodepointList;
-typedef struct _GucharmapCodepointListClass GucharmapCodepointListClass;
-
-struct _GucharmapCodepointList
-{
-  GObject parent;
-};
-
-struct _GucharmapCodepointListClass
-{
-  GObjectClass parent_class;
-
-  /* zero is the first index */
-  gint     (*get_last_index) (GucharmapCodepointList *list);
-  gunichar (*get_char)       (GucharmapCodepointList *list, 
-                              gint                    index);
-  gint     (*get_index)      (GucharmapCodepointList *list, 
-                              gunichar                wc);
-};
 
 GType                    gucharmap_codepoint_list_get_type       (void);
 GucharmapCodepointList * gucharmap_codepoint_list_new            (gunichar start,

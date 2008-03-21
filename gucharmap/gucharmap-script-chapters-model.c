@@ -19,14 +19,16 @@
  */
 
 #include "config.h"
+
+#include <glib/gi18n-lib.h>
 #include <gtk/gtk.h>
 #include <stdlib.h>
 #include <string.h>
-#include "gucharmap-intl.h"
 #include "gucharmap-unicode-info.h"
 #include "gucharmap-script-chapters-model.h"
 #include "gucharmap-script-codepoint-list.h"
 #include "gucharmap-settings.h"
+#include "gucharmap-private.h"
 
 static void
 gucharmap_script_chapters_model_init (GucharmapScriptChaptersModel *model)
