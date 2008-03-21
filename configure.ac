@@ -38,7 +38,7 @@ AC_PREREQ([2.56])
 AC_INIT([GNOME Character Map],[gucharmap_version],[http://bugzilla.gnome.org/enter_bug.cgi?product=gucharmap],[gucharmap])
 
 AC_CONFIG_MACRO_DIR([m4])
-AC_CONFIG_SRCDIR([gucharmap/gucharmap.h])
+AC_CONFIG_SRCDIR([gucharmap/gucharmap.h.in])
 AC_CONFIG_HEADERS([config.h])
 
 AM_INIT_AUTOMAKE([1.9 gnu dist-bzip2 no-dist-gzip])
