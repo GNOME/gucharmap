@@ -979,8 +979,6 @@ gucharmap_window_class_init (GucharmapWindowClass *clazz)
   GTK_WIDGET_CLASS (clazz)->show_all = show_all;
   G_OBJECT_CLASS (clazz)->finalize = window_finalize;
   g_type_class_add_private (clazz, sizeof (GucharmapWindowPrivate));
-
-  _gucharmap_intl_ensure_initialized ();
 }
 
 G_DEFINE_TYPE (GucharmapWindow, gucharmap_window, GTK_TYPE_WINDOW)

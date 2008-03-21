@@ -848,8 +848,6 @@ gucharmap_search_dialog_class_init (GucharmapSearchDialogClass *clazz)
       g_signal_new ("search-finish", gucharmap_search_dialog_get_type (), G_SIGNAL_RUN_FIRST, 
                     G_STRUCT_OFFSET (GucharmapSearchDialogClass, search_finish), NULL, NULL, 
                     g_cclosure_marshal_VOID__UINT, G_TYPE_NONE, 1, G_TYPE_UINT);
-
-  _gucharmap_intl_ensure_initialized ();
 }
 
 G_DEFINE_TYPE (GucharmapSearchDialog, gucharmap_search_dialog, GTK_TYPE_DIALOG)

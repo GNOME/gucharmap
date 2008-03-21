@@ -118,8 +118,6 @@ gucharmap_charmap_class_init (GucharmapCharmapClass *clazz)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (clazz);
 
-  _gucharmap_intl_ensure_initialized ();
-
   object_class->set_property = gucharmap_charmap_set_property;
   object_class->finalize = gucharmap_charmap_finalize;
 
