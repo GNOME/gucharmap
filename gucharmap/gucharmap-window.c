@@ -688,20 +688,6 @@ make_menu (GucharmapWindow *guw)
   GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
   GtkWidget *menubar;
   GtkAction *action;
-  guint forward_keysym, back_keysym;
-
-  if (gtk_widget_get_direction (GTK_WIDGET (guw)) == GTK_TEXT_DIR_RTL)
-    {
-      forward_keysym = GDK_Left;
-      back_keysym = GDK_Right;
-    }
-  else
-    {
-      forward_keysym = GDK_Right;
-      back_keysym = GDK_Left;
-    }
-
-  /* make the menu bar */
 
   priv->uimanager = gtk_ui_manager_new();
 
