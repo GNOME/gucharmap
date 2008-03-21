@@ -756,15 +756,21 @@ sub process_scripts_txt ($)
 {
     my ($scripts_txt) = @_;
 
+    # Override script names
+    my %script_overrides =
+    (
+      "Nko" => "N\'Ko"
+    );
+
     my %script_hash;
     my %scripts;
 
-    open (my $scripts, $scripts_txt) or die;
+    open (my $scripts_file, $scripts_txt) or die;
     open (my $out, "> unicode-scripts.h") or die;
 
     print "processing $scripts_txt...";
 
-    while (my $line = <$scripts>)
+    while (my $line = <$scripts_file>)
     {
         my ($start, $end, $raw_script);
 
@@ -789,11 +795,15 @@ sub process_scripts_txt ($)
         $script =~ tr/_/ /;
         $script =~ s/(\w+)/\u\L$1/g;
 
+        if (exists $script_overrides{$script}) {
+                $script = $script_overrides{$script};
+        }
+
         $script_hash{$start} = { 'end' => $end, 'script' => $script };
         $scripts{$script} = 1;
     }
 
-    close ($scripts);
+    close ($scripts_file);
 
     # Adds Common to make sure works with UCD <= 4.0.0
     $scripts{"Common"} = 1; 
