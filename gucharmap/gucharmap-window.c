@@ -636,7 +636,7 @@ make_menu (GucharmapWindow *guw)
     { "Go", NULL, N_("_Go"), NULL, NULL, NULL },
     { "Help", NULL, N_("_Help"), NULL, NULL, NULL },
 
-    { "Quit", GTK_STOCK_QUIT, N_("_Quit"), "<control>Q",
+    { "Quit", GTK_STOCK_CLOSE, NULL, NULL,
       NULL, G_CALLBACK (gtk_main_quit) },
 
     { "ZoomIn", NULL, N_("Zoom _In"), "<control>plus",
