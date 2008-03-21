@@ -2,7 +2,7 @@ NULL =
 
 ACLOCAL_AMFLAGS = -I m4
 
-SUBDIRS = po pixmaps gucharmap bindings
+SUBDIRS = po pixmaps gucharmap bindings docs
 
 if HAVE_GNOME_DOC_UTILS
 SUBDIRS += help

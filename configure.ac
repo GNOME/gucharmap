@@ -59,11 +59,6 @@ GNOME_DEBUG_CHECK
 GNOME_COMPILE_WARNINGS([maximum])
 GNOME_MAINTAINER_MODE_DEFINES
 
-GNOME_DOC_INIT([0.9.0],[have_gdu=yes],[have_gdu=no])
-if test "$have_gdu" = "no"; then
-	AC_MSG_WARN([GNOME doc utils not found; disabling user manual])
-fi
-
 # check for win32
 case "$host" in
   *-*-mingw*) os_win32="yes" ;; 
@@ -238,6 +233,17 @@ fi
 
 AM_CONDITIONAL([ENABLE_PYTHON_BINDINGS],[test "$enable_python_bindings" = "yes"])
 
+# ***************
+# API & User Docs
+# ***************
+
+GNOME_DOC_INIT([0.9.0],[have_gdu=yes],[have_gdu=no])
+if test "$have_gdu" = "no"; then
+	AC_MSG_WARN([GNOME doc utils not found; disabling user manual])
+fi
+
+GTK_DOC_CHECK([1.0])
+
 # *****************************************************************************
 
 AC_SUBST([GUCHARMAP_VERSION_MAJOR],[gucharmap_version_major])
@@ -258,6 +264,8 @@ gucharmap.nsi
 gucharmap.spec
 bindings/Makefile
 bindings/python/Makefile
+docs/Makefile
+docs/reference/Makefile
 gucharmap/Makefile
 gucharmap/gucharmap.h
 help/Makefile
