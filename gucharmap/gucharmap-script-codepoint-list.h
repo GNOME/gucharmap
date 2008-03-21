@@ -24,7 +24,6 @@
 #define GUCHARMAP_SCRIPT_CODEPOINT_LIST_H
 
 #include <glib-object.h>
-#include <glib.h>
 
 #include <gucharmap/gucharmap-codepoint-list.h>
 

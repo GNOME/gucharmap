@@ -31,14 +31,19 @@
    (GUCHARMAP_VERSION_MAJOR == (major) && GUCHARMAP_VERSION_MINOR > (minor)) || \
    (GUCHARMAP_VERSION_MAJOR == (major) && GUCHARMAP_VERSION_MINOR == (minor) && GUCHARMAP_VERSION_MICRO >= (micro)))
 
-#include <gucharmap/gucharmap-block-chapters-model.h>
-#include <gucharmap/gucharmap-chapters-model.h>
-#include <gucharmap/gucharmap-charmap.h>
-#include <gucharmap/gucharmap-chartable.h>
 #include <gucharmap/gucharmap-codepoint-list.h>
-#include <gucharmap/gucharmap-script-chapters-model.h>
+#include <gucharmap/gucharmap-block-codepoint-list.h>
 #include <gucharmap/gucharmap-script-codepoint-list.h>
+
+#include <gucharmap/gucharmap-chapters-model.h>
+#include <gucharmap/gucharmap-block-chapters-model.h>
+#include <gucharmap/gucharmap-script-chapters-model.h>
+
+#include <gucharmap/gucharmap-chartable.h>
+#include <gucharmap/gucharmap-charmap.h>
+
 #include <gucharmap/gucharmap-type-builtins.h>
+
 #include <gucharmap/gucharmap-unicode-info.h>
 
 #undef __GUCHARMAP_GUCHARMAP_H_INSIDE__

@@ -29,7 +29,7 @@ G_BEGIN_DECLS
 
 #define GUCHARMAP_TYPE_CODEPOINT_LIST             (gucharmap_codepoint_list_get_type ())
 #define GUCHARMAP_CODEPOINT_LIST(o)               (G_TYPE_CHECK_INSTANCE_CAST ((o), GUCHARMAP_TYPE_CODEPOINT_LIST, GucharmapCodepointList))
-#define GUCHARMAP_CODEPOINT_LIST_CLASS(k) (G_TYPE_CHECK_CLASS_CAST((k), GUCHARMAP_TYPE_CODEPOINT_LIST, GucharmapCodepointListClass))
+#define GUCHARMAP_CODEPOINT_LIST_CLASS(k)         (G_TYPE_CHECK_CLASS_CAST((k), GUCHARMAP_TYPE_CODEPOINT_LIST, GucharmapCodepointListClass))
 #define GUCHARMAP_IS_CODEPOINT_LIST(o)            (G_TYPE_CHECK_INSTANCE_TYPE ((o), GUCHARMAP_TYPE_CODEPOINT_LIST))
 #define GUCHARMAP_IS_CODEPOINT_LIST_CLASS(k)      (G_TYPE_CHECK_CLASS_TYPE ((k), GUCHARMAP_TYPE_CODEPOINT_LIST))
 #define GUCHARMAP_CODEPOINT_LIST_GET_CLASS(o)     (G_TYPE_INSTANCE_GET_CLASS ((o), GUCHARMAP_TYPE_CODEPOINT_LIST, GucharmapCodepointListClass))
@@ -55,15 +55,15 @@ struct _GucharmapCodepointListClass
 };
 
 GType                    gucharmap_codepoint_list_get_type       (void);
-GucharmapCodepointList * gucharmap_codepoint_list_new            (gunichar start,
-                                                                  gunichar end);
-gunichar                 gucharmap_codepoint_list_get_char       (GucharmapCodepointList *list, 
+
+gunichar                 gucharmap_codepoint_list_get_char       (GucharmapCodepointList *list,
                                                                   gint                    index);
+
 gint                     gucharmap_codepoint_list_get_index      (GucharmapCodepointList *list, 
                                                                   gunichar                wc);
+
 gint                     gucharmap_codepoint_list_get_last_index (GucharmapCodepointList *list);
 
 G_END_DECLS
 
 #endif /* #ifndef GUCHARMAP_CODEPOINT_LIST_H */
-

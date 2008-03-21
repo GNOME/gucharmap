@@ -18,13 +18,13 @@
 
 NULL =
 
-localedir = $(datadir)/locale
-
 lib_LTLIBRARIES = libgucharmap.la
 
 libgucharmap_la_SOURCES = \
 	gucharmap-block-chapters-model.c \
 	gucharmap-block-chapters-model.h \
+	gucharmap-block-codepoint-list.c \
+	gucharmap-block-codepoint-list.h \
 	gucharmap-chapters-model.c \
 	gucharmap-chapters-model.h \
 	gucharmap-chapters-view.c \
@@ -64,7 +64,7 @@ libgucharmap_la_CPPFLAGS = \
 	-I$(top_srcdir)			\
 	-DGUCHARMAP_COMPILATION		\
 	-DDATADIR=\"$(datadir)\"	\
-	-DLOCALEDIR=\"$(localedir)\"	\
+	-DLOCALEDIR=\"$(datadir)/locale\"	\
 	$(DISABLE_DEPRECATED)		\
 	$(AM_CPPFLAGS)
 
@@ -116,7 +116,7 @@ gucharmap_SOURCES = \
 gucharmap_CPPFLAGS = \
 	-I$(top_srcdir)			\
 	-DDATADIR=\"$(datadir)\"	\
-	-DLOCALEDIR=\"$(localedir)\"	\
+	-DLOCALEDIR=\"$(datadir)/locale\"	\
 	$(DISABLE_DEPRECATED)		\
 	$(AM_CPPFLAGS)
 

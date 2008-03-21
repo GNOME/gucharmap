@@ -31,7 +31,7 @@ static GucharmapCodepointList *
 default_get_codepoint_list (GucharmapChaptersModel *chapters,
                             GtkTreeIter *iter)
 {
-  return gucharmap_codepoint_list_new (0, UNICHAR_MAX);
+  return gucharmap_block_codepoint_list_new (0, UNICHAR_MAX);
 }
 
 static void

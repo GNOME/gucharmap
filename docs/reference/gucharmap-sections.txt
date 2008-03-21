@@ -2,7 +2,6 @@
 <FILE>gucharmap-codepoint-list</FILE>
 <TITLE>GucharmapCodepointList</TITLE>
 GucharmapCodepointList
-gucharmap_codepoint_list_new
 gucharmap_codepoint_list_get_char
 gucharmap_codepoint_list_get_index
 gucharmap_codepoint_list_get_last_index
@@ -53,6 +52,22 @@ GUCHARMAP_CHAPTERS_MODEL_GET_CLASS
 </SECTION>
 
 <SECTION>
+<FILE>gucharmap-block-codepoint-list</FILE>
+GucharmapBlockCodepointListPrivate
+<TITLE>GucharmapBlockCodepointList</TITLE>
+GucharmapBlockCodepointList
+gucharmap_block_codepoint_list_new
+<SUBSECTION Standard>
+GUCHARMAP_BLOCK_CODEPOINT_LIST
+GUCHARMAP_IS_BLOCK_CODEPOINT_LIST
+GUCHARMAP_TYPE_BLOCK_CODEPOINT_LIST
+gucharmap_block_codepoint_list_get_type
+GUCHARMAP_BLOCK_CODEPOINT_LIST_CLASS
+GUCHARMAP_IS_BLOCK_CODEPOINT_LIST_CLASS
+GUCHARMAP_BLOCK_CODEPOINT_LIST_GET_CLASS
+</SECTION>
+
+<SECTION>
 <FILE>gucharmap-chartable</FILE>
 GucharmapChartablePrivate
 <TITLE>GucharmapChartable</TITLE>
@@ -95,6 +110,7 @@ GUCHARMAP_SCRIPT_CHAPTERS_MODEL_GET_CLASS
 
 <SECTION>
 <FILE>gucharmap-script-codepoint-list</FILE>
+GucharmapScriptCodepointListPrivate
 <TITLE>GucharmapScriptCodepointList</TITLE>
 GucharmapScriptCodepointList
 gucharmap_script_codepoint_list_new
@@ -194,13 +210,5 @@ gucharmap_unicode_list_scripts
 gucharmap_unicode_get_script_for_char
 gucharmap_unicode_version_to_string
 gucharmap_unicode_get_locale_character
-</SECTION>
-
-<SECTION>
-<FILE>gucharmap</FILE>
-GUCHARMAP_VERSION_MAJOR
-GUCHARMAP_VERSION_MINOR
-GUCHARMAP_VERSION_MICRO
-GUCHARMAP_CHECK_VERSION
 </SECTION>
 
