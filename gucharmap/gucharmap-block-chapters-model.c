@@ -56,10 +56,14 @@ gucharmap_block_chapters_model_init (GucharmapBlockChaptersModel *model)
 
   for (i = 0;  i < G_N_ELEMENTS (unicode_blocks); i++)
     {
+      const char *block_name;
+
+      block_name = unicode_blocks_strings + unicode_blocks[i].block_name_index;
+
       gtk_list_store_append (store, &iter);
       gtk_list_store_set (store, &iter,
-                          BLOCK_CHAPTERS_MODEL_ID, unicode_blocks[i].block_name,
-                          BLOCK_CHAPTERS_MODEL_LABEL, _(unicode_blocks[i].block_name), 
+                          BLOCK_CHAPTERS_MODEL_ID, block_name,
+                          BLOCK_CHAPTERS_MODEL_LABEL, _(block_name),
                           BLOCK_CHAPTERS_MODEL_UNICODE_BLOCK_PTR, unicode_blocks + i,
                           -1);
     }

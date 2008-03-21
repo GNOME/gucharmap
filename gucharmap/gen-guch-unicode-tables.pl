@@ -693,20 +693,47 @@ sub process_blocks_txt ($)
     print $out "#include <glib/gunicode.h>\n";
     print $out "#include <glib/gi18n-lib.h>\n\n";
 
+    my @blocks;
+    my $offset = 0;
+
+    while (my $line = <$blocks>)
+    {
+        $line =~ /^([0-9A-F]+)\.\.([0-9A-F]+); (.+)$/ or next;
+        push @blocks, [$1, $2, $3, $offset];
+        $offset += length($3) + 1;
+    }
+
+    print $out "/* for extraction by intltool */\n";
+    print $out "#if 0\n";
+    foreach my $block (@blocks)
+    {
+        my ($start, $end, $name, $offset) = @{$block};
+        print $out qq/  N_("$name"),\n/;
+    }
+    print $out "#endif /* 0 */\n\n";
+
+    print $out "static const char unicode_blocks_strings[] =\n";
+    foreach my $block (@blocks)
+    {
+        my ($start, $end, $name, $offset) = @{$block};
+        print $out qq/  "$name\\0"\n/;
+    }
+    print $out "  ;\n\n";
+
     print $out "typedef struct _UnicodeBlock UnicodeBlock;\n";
     print $out "\n";
     print $out "static const struct _UnicodeBlock\n";
     print $out "{\n";
     print $out "  gunichar start;\n";
     print $out "  gunichar end;\n";
-    print $out "  const gchar *block_name;\n";
+    print $out "  guint16 block_name_index;\n";
     print $out "}\n";
     print $out "unicode_blocks[] =\n";
     print $out "{\n";
-    while (my $line = <$blocks>)
+    foreach my $block (@blocks)
     {
-        $line =~ /^([0-9A-F]+)\.\.([0-9A-F]+); (.+)$/ or next;
-        print $out qq/  { 0x$1, 0x$2, N_("$3") },\n/;
+        my ($start, $end, $name, $offset) = @{$block};
+        print $out qq/  { 0x$start, 0x$end, $offset },\n/;
     }
     print $out "};\n\n";
 
