@@ -33,10 +33,27 @@ G_BEGIN_DECLS
 
 #define GUCHARMAP_TYPE_CHAPTERS_VIEW             (gucharmap_chapters_view_get_type ())
 #define GUCHARMAP_CHAPTERS_VIEW(o)               (G_TYPE_CHECK_INSTANCE_CAST ((o), GUCHARMAP_TYPE_CHAPTERS_VIEW, GucharmapChaptersView))
-#define GUCHARMAP_CHAPTERS_VIEW_CLASS(k) (G_TYPE_CHECK_CLASS_CAST((k), GUCHARMAP_TYPE_CHAPTERS_VIEW, GucharmapChaptersViewClass))
+#define GUCHARMAP_CHAPTERS_VIEW_CLASS(k)         (G_TYPE_CHECK_CLASS_CAST((k), GUCHARMAP_TYPE_CHAPTERS_VIEW, GucharmapChaptersViewClass))
 #define GUCHARMAP_IS_CHAPTERS_VIEW(o)            (G_TYPE_CHECK_INSTANCE_TYPE ((o), GUCHARMAP_TYPE_CHAPTERS_VIEW))
 #define GUCHARMAP_IS_CHAPTERS_VIEW_CLASS(k)      (G_TYPE_CHECK_CLASS_TYPE ((k), GUCHARMAP_TYPE_CHAPTERS_VIEW))
 #define GUCHARMAP_CHAPTERS_VIEW_GET_CLASS(o)     (G_TYPE_INSTANCE_GET_CLASS ((o), GUCHARMAP_TYPE_CHAPTERS_VIEW, GucharmapChaptersViewClass))
+
+typedef struct _GucharmapChaptersView         GucharmapChaptersView;
+typedef struct _GucharmapChaptersViewPrivate  GucharmapChaptersViewPrivate;
+typedef struct _GucharmapChaptersViewClass    GucharmapChaptersViewClass;
+
+struct _GucharmapChaptersView
+{
+  GtkTreeView parent_instance;
+
+  /*< private >*/
+  GucharmapChaptersViewPrivate *priv;
+};
+
+struct _GucharmapChaptersViewClass
+{
+  GtkTreeViewClass parent_class;
+};
 
 GType       gucharmap_chapters_view_get_type (void);
 

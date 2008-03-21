@@ -65,21 +65,6 @@ struct _GucharmapBlockChaptersModelClass
 };
 
 
-struct _GucharmapChaptersView
-{
-  GtkTreeView parent_instance;
-
-  /*< private >*/
-  GtkTreeViewColumn *column;
-  GucharmapChaptersModel *model;
-};
-
-struct _GucharmapChaptersViewClass
-{
-  GtkTreeViewClass parent_class;
-};
-
-
 struct _GucharmapChartablePrivate {
   /* scrollable implementation */
   GtkAdjustment *vadjustment;
