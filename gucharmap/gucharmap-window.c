@@ -826,6 +826,7 @@ status_realize (GtkWidget       *status,
 {
   GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
 
+  /* FIXMEchpe ewww... */
   /* increase the height a bit so it doesn't resize itself */
   gtk_widget_set_size_request (priv->status, -1, priv->status->allocation.height + 9);
 }
@@ -914,12 +915,6 @@ gucharmap_window_init (GucharmapWindow *guw)
 }
 
 static void
-show_all (GtkWidget *widget)
-{
-  gtk_widget_show (widget);
-}
-
-static void
 window_finalize (GObject *object)
 {
 #if 0
@@ -937,7 +932,6 @@ window_finalize (GObject *object)
 static void
 gucharmap_window_class_init (GucharmapWindowClass *clazz)
 {
-  GTK_WIDGET_CLASS (clazz)->show_all = show_all;
   G_OBJECT_CLASS (clazz)->finalize = window_finalize;
 
   g_type_class_add_private (clazz, sizeof (GucharmapWindowPrivate));
