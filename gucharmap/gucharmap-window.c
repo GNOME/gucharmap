@@ -164,7 +164,7 @@ search_start (GucharmapSearchDialog *search_dialog,
   GtkAction *action;
   GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
 
-  g_assert (IS_GUCHARMAP_WINDOW (guw));
+  g_assert (GUCHARMAP_IS_WINDOW (guw));
 
   cursor = _gucharmap_window_progress_cursor ();
   gdk_window_set_cursor (GTK_WIDGET (guw)->window, cursor);
@@ -211,7 +211,7 @@ search_find (GtkAction       *action,
              GucharmapWindow *guw)
 {
   GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
-  g_assert (IS_GUCHARMAP_WINDOW (guw));
+  g_assert (GUCHARMAP_IS_WINDOW (guw));
 
   if (priv->search_dialog == NULL)
     {

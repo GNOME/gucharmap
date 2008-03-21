@@ -34,7 +34,7 @@ G_BEGIN_DECLS
                                         gucharmap_charmap_get_type (),\
                                         GucharmapCharmapClass))
 
-#define IS_GUCHARMAP_CHARMAP(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), \
+#define GUCHARMAP_IS_CHARMAP(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), \
                                    gucharmap_charmap_get_type ()))
 
 typedef struct _GucharmapCharmap GucharmapCharmap;

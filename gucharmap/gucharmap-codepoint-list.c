@@ -94,7 +94,7 @@ gunichar
 gucharmap_codepoint_list_get_char (GucharmapCodepointList *list, 
                                    gint                    index)
 {
-  g_return_val_if_fail (IS_GUCHARMAP_CODEPOINT_LIST (list), (gunichar)(-1));
+  g_return_val_if_fail (GUCHARMAP_IS_CODEPOINT_LIST (list), (gunichar)(-1));
 
   return GUCHARMAP_CODEPOINT_LIST_GET_CLASS (list)->get_char (list, index);
 }
@@ -111,7 +111,7 @@ gint
 gucharmap_codepoint_list_get_index (GucharmapCodepointList *list, 
                                     gunichar                wc)
 {
-  g_return_val_if_fail (IS_GUCHARMAP_CODEPOINT_LIST (list), -1);
+  g_return_val_if_fail (GUCHARMAP_IS_CODEPOINT_LIST (list), -1);
 
   return GUCHARMAP_CODEPOINT_LIST_GET_CLASS (list)->get_index (list, wc);
 }
@@ -125,7 +125,7 @@ gucharmap_codepoint_list_get_index (GucharmapCodepointList *list,
 gint
 gucharmap_codepoint_list_get_last_index (GucharmapCodepointList *list)
 {
-  g_return_val_if_fail (IS_GUCHARMAP_CODEPOINT_LIST (list), -1);
+  g_return_val_if_fail (GUCHARMAP_IS_CODEPOINT_LIST (list), -1);
 
   return GUCHARMAP_CODEPOINT_LIST_GET_CLASS (list)->get_last_index (list);
 }

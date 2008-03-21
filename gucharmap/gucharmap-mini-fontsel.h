@@ -32,7 +32,7 @@ G_BEGIN_DECLS
         (G_TYPE_CHECK_CLASS_CAST ((clazz), gucharmap_mini_font_selection_get_type (), \
                                   GucharmapMiniFontSelectionClass))
 
-#define IS_GUCHARMAP_MINI_FONT_SELECTION(obj) \
+#define GUCHARMAP_IS_MINI_FONT_SELECTION(obj) \
         G_TYPE_CHECK_INSTANCE_TYPE ((obj), gucharmap_mini_font_selection_get_type ())
 
 typedef struct _GucharmapMiniFontSelection GucharmapMiniFontSelection;

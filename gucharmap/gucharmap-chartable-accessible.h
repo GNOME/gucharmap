@@ -29,8 +29,8 @@ G_BEGIN_DECLS
 
 #define GUCHARMAP_CHARTABLE_ACCESSIBLE(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), gucharmap_chartable_accessible_get_type (), GucharmapChartableAccessible))
 #define GUCHARMAP_CHARTABLE_ACCESSIBLE_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), gucharmap_chartable_accessible_get_type (), GucharmapChartableAccessibleClass))
-#define IS_GUCHARMAP_CHARTABLE_ACCESSIBLE(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), gucharmap_chartable_accessible_get_type ()))
-#define IS_GUCHARMAP_CHARTABLE_ACCESSIBLE_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), gucharmap_chartable_accessible_get_type ()))
+#define GUCHARMAP_IS_CHARTABLE_ACCESSIBLE(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), gucharmap_chartable_accessible_get_type ()))
+#define GUCHARMAP_IS_CHARTABLE_ACCESSIBLE_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), gucharmap_chartable_accessible_get_type ()))
 #define GUCHARMAP_CHARTABLE_ACCESSIBLE_GET_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS ((obj), gucharmap_chartable_accessible_get_type (), GucharmapChartableAccessibleClass))
 
 typedef struct _GucharmapChartableAccessible      GucharmapChartableAccessible;

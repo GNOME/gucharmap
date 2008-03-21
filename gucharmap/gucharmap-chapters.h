@@ -35,7 +35,7 @@ G_BEGIN_DECLS
 #define GUCHARMAP_CHAPTERS_CLASS(clazz) \
             (G_TYPE_CHECK_CLASS_CAST ((clazz), gucharmap_chapters_get_type (), GucharmapChaptersClass))
 
-#define IS_GUCHARMAP_CHAPTERS(obj) \
+#define GUCHARMAP_IS_CHAPTERS(obj) \
             (G_TYPE_CHECK_INSTANCE_TYPE ((obj), gucharmap_chapters_get_type ()))
 
 #define GUCHARMAP_CHAPTERS_GET_CLASS(obj) \

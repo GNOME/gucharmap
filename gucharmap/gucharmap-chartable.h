@@ -32,7 +32,7 @@ G_BEGIN_DECLS
 
 #define GUCHARMAP_CHARTABLE_CLASS(clazz) (G_TYPE_CHECK_CLASS_CAST ((clazz), gucharmap_chartable_get_type (), GucharmapChartableClass))
 
-#define IS_GUCHARMAP_CHARTABLE(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), gucharmap_chartable_get_type ()))
+#define GUCHARMAP_IS_CHARTABLE(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), gucharmap_chartable_get_type ()))
 
 typedef struct _GucharmapChartable GucharmapChartable;
 typedef struct _GucharmapChartableClass GucharmapChartableClass;

@@ -1949,7 +1949,7 @@ gucharmap_chartable_set_zoom_enabled (GucharmapChartable *chartable,
 {
   gint x, y;
 
-  g_return_if_fail (IS_GUCHARMAP_CHARTABLE (chartable));
+  g_return_if_fail (GUCHARMAP_IS_CHARTABLE (chartable));
 
   enabled = enabled != FALSE;
   if (chartable->zoom_mode_enabled == enabled)

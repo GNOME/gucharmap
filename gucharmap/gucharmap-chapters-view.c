@@ -193,7 +193,7 @@ gucharmap_chapters_view_select_character (GucharmapChaptersView *view,
 {
   GtkTreeIter iter;
 
-  g_return_val_if_fail (IS_GUCHARMAP_CHAPTERS_VIEW (view), FALSE);
+  g_return_val_if_fail (GUCHARMAP_IS_CHAPTERS_VIEW (view), FALSE);
 
   if (wc > UNICHAR_MAX)
     return FALSE;
@@ -222,7 +222,7 @@ gucharmap_chapters_view_get_codepoint_list (GucharmapChaptersView *view)
   GtkTreeSelection *selection;
   GtkTreeIter iter;
   
-  g_return_val_if_fail (IS_GUCHARMAP_CHAPTERS_VIEW (view), NULL);
+  g_return_val_if_fail (GUCHARMAP_IS_CHAPTERS_VIEW (view), NULL);
 
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (view));
   if (!gtk_tree_selection_get_selected (selection, NULL, &iter))
@@ -241,7 +241,7 @@ gucharmap_chapters_view_get_codepoint_list (GucharmapChaptersView *view)
 G_CONST_RETURN GucharmapCodepointList * 
 gucharmap_chapters_view_get_book_codepoint_list (GucharmapChaptersView *view)
 {
-  g_return_val_if_fail (IS_GUCHARMAP_CHAPTERS_VIEW (view), NULL);
+  g_return_val_if_fail (GUCHARMAP_IS_CHAPTERS_VIEW (view), NULL);
 
   return gucharmap_chapters_model_get_book_codepoint_list (view->model);
 }

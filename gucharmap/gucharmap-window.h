@@ -31,7 +31,7 @@ G_BEGIN_DECLS
 
 #define GUCHARMAP_WINDOW_CLASS(clazz) (G_TYPE_CHECK_CLASS_CAST ((clazz), gucharmap_window_get_type (), GucharmapWindowClass))
 
-#define IS_GUCHARMAP_WINDOW(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), gucharmap_window_get_type ()))
+#define GUCHARMAP_IS_WINDOW(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), gucharmap_window_get_type ()))
 
 typedef struct _GucharmapWindow GucharmapWindow;
 typedef struct _GucharmapWindowClass GucharmapWindowClass;

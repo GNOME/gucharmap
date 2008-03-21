@@ -74,7 +74,7 @@ GucharmapCodepointList *
 gucharmap_chapters_model_get_codepoint_list (GucharmapChaptersModel *chapters,
                                        GtkTreeIter       *iter)
 {
-  g_return_val_if_fail (IS_GUCHARMAP_CHAPTERS_MODEL (chapters), NULL);
+  g_return_val_if_fail (GUCHARMAP_IS_CHAPTERS_MODEL (chapters), NULL);
 
   return GUCHARMAP_CHAPTERS_MODEL_GET_CLASS (chapters)->get_codepoint_list (chapters, iter);
 }
@@ -89,7 +89,7 @@ gucharmap_chapters_model_get_codepoint_list (GucharmapChaptersModel *chapters,
 G_CONST_RETURN GucharmapCodepointList * 
 gucharmap_chapters_model_get_book_codepoint_list (GucharmapChaptersModel *chapters)
 {
-  g_return_val_if_fail (IS_GUCHARMAP_CHAPTERS_MODEL (chapters), NULL);
+  g_return_val_if_fail (GUCHARMAP_IS_CHAPTERS_MODEL (chapters), NULL);
 
   return GUCHARMAP_CHAPTERS_MODEL_GET_CLASS (chapters)->get_book_codepoint_list (chapters);
 }
@@ -107,7 +107,7 @@ gucharmap_chapters_model_character_to_iter (GucharmapChaptersModel *chapters,
                                       gunichar           wc,
                                       GtkTreeIter       *iter)
 {
-  g_return_val_if_fail (IS_GUCHARMAP_CHAPTERS_MODEL (chapters), FALSE);
+  g_return_val_if_fail (GUCHARMAP_IS_CHAPTERS_MODEL (chapters), FALSE);
 
   return GUCHARMAP_CHAPTERS_MODEL_GET_CLASS (chapters)->character_to_iter (chapters, wc, iter);
 }
@@ -115,7 +115,7 @@ gucharmap_chapters_model_character_to_iter (GucharmapChaptersModel *chapters,
 const char *
 gucharmap_chapters_model_get_title (GucharmapChaptersModel *chapters)
 {
-  g_return_val_if_fail (IS_GUCHARMAP_CHAPTERS_MODEL (chapters), NULL);
+  g_return_val_if_fail (GUCHARMAP_IS_CHAPTERS_MODEL (chapters), NULL);
 
   return GUCHARMAP_CHAPTERS_MODEL_GET_CLASS (chapters)->title;
 }
@@ -130,7 +130,7 @@ gucharmap_chapters_model_id_to_iter (GucharmapChaptersModel *chapters_model,
   char *str;
   int match;
 
-  g_return_val_if_fail (IS_GUCHARMAP_CHAPTERS_MODEL (model), FALSE);
+  g_return_val_if_fail (GUCHARMAP_IS_CHAPTERS_MODEL (model), FALSE);
 
   if (!id)
     return FALSE;

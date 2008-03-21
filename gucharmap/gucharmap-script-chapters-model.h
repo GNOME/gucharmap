@@ -31,7 +31,7 @@ G_BEGIN_DECLS
 #define GUCHARMAP_SCRIPT_CHAPTERS_MODEL_CLASS(clazz) \
             (G_TYPE_CHECK_CLASS_CAST ((clazz), gucharmap_script_chapters_model_get_type (), GucharmapScriptChaptersModelClass))
 
-#define IS_GUCHARMAP_SCRIPT_CHAPTERS_MODEL(obj) \
+#define GUCHARMAP_IS_SCRIPT_CHAPTERS_MODEL(obj) \
             (G_TYPE_CHECK_INSTANCE_TYPE ((obj), gucharmap_script_chapters_model_get_type ()))
 
 #define GUCHARMAP_SCRIPT_CHAPTERS_MODEL_GET_CLASS(obj) \

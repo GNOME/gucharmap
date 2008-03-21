@@ -210,7 +210,7 @@ gucharmap_chapters_get_model (GucharmapChapters *chapters)
 GucharmapCodepointList * 
 gucharmap_chapters_get_codepoint_list (GucharmapChapters *chapters)
 {
-  g_return_val_if_fail (IS_GUCHARMAP_CHAPTERS (chapters), NULL);
+  g_return_val_if_fail (GUCHARMAP_IS_CHAPTERS (chapters), NULL);
 
   return GUCHARMAP_CHAPTERS_GET_CLASS (chapters)->get_codepoint_list (chapters);
 }
@@ -225,7 +225,7 @@ gucharmap_chapters_get_codepoint_list (GucharmapChapters *chapters)
 G_CONST_RETURN GucharmapCodepointList * 
 gucharmap_chapters_get_book_codepoint_list (GucharmapChapters *chapters)
 {
-  g_return_val_if_fail (IS_GUCHARMAP_CHAPTERS (chapters), NULL);
+  g_return_val_if_fail (GUCHARMAP_IS_CHAPTERS (chapters), NULL);
 
   return GUCHARMAP_CHAPTERS_GET_CLASS (chapters)->get_book_codepoint_list (chapters);
 }
@@ -241,7 +241,7 @@ gboolean
 gucharmap_chapters_go_to_character (GucharmapChapters *chapters, 
                                     gunichar           wc)
 {
-  g_return_val_if_fail (IS_GUCHARMAP_CHAPTERS (chapters), FALSE);
+  g_return_val_if_fail (GUCHARMAP_IS_CHAPTERS (chapters), FALSE);
 
   return GUCHARMAP_CHAPTERS_GET_CLASS (chapters)->go_to_character (chapters, wc);
 }

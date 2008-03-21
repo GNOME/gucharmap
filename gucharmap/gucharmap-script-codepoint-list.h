@@ -33,7 +33,7 @@ G_BEGIN_DECLS
 #define GUCHARMAP_SCRIPT_CODEPOINT_LIST_CLASS(clazz) \
             (G_TYPE_CHECK_CLASS_CAST ((clazz), gucharmap_script_codepoint_list_get_type (), GucharmapScriptCodepointListClass))
 
-#define IS_GUCHARMAP_SCRIPT_CODEPOINT_LIST(obj) \
+#define GUCHARMAP_IS_SCRIPT_CODEPOINT_LIST(obj) \
              (G_TYPE_CHECK_INSTANCE_TYPE ((obj), gucharmap_script_codepoint_list_get_type ()))
 
 #define GUCHARMAP_SCRIPT_CODEPOINT_LIST_GET_CLASS(obj) \
