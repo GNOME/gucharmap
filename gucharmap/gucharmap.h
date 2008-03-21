@@ -41,6 +41,7 @@
 #include <gucharmap/gucharmap-script-chapters-model.h>
 #include <gucharmap/gucharmap-script-codepoint-list.h>
 #include <gucharmap/gucharmap-unicode-info.h>
+#include <gucharmap/gucharmap-type-builtins.h>
 
 #undef __GUCHARMAP_GUCHARMAP_H_INSIDE__
 
