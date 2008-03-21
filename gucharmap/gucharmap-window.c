@@ -70,8 +70,6 @@ static void gucharmap_window_init       (GucharmapWindow *window);
 
 G_DEFINE_TYPE (GucharmapWindow, gucharmap_window, GTK_TYPE_WINDOW)
 
-GdkCursor * _gucharmap_window_progress_cursor (void);
-
 static void
 status_message (GtkWidget       *widget, 
                 const gchar     *message, 
@@ -686,7 +684,6 @@ make_menu (GucharmapWindow *guw)
 {
   GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
   GtkWidget *menubar;
-  GtkAction *action;
   guint forward_keysym, back_keysym;
   GtkToggleAction *toggle_menu;
 
@@ -764,13 +761,7 @@ make_menu (GucharmapWindow *guw)
 
   gtk_widget_show_all (menubar);
 
-  if (! priv->file_menu_visible)
-    {
-      action = gtk_action_group_get_action (priv->action_group, "File");
-      gtk_action_set_visible (action, FALSE);
-      action = gtk_action_group_get_action (priv->action_group, "Quit");
-      gtk_action_set_sensitive (action, FALSE);
-    }
+  gucharmap_window_set_file_menu_visible (guw, TRUE);
 
   return menubar;
 }
@@ -1032,20 +1023,10 @@ gucharmap_window_set_file_menu_visible (GucharmapWindow *guw,
 
   priv->file_menu_visible = visible;
 
-  if (priv->file_menu_visible)
-    {
-      action = gtk_action_group_get_action (priv->action_group, "File");
-      gtk_action_set_visible (action, TRUE);
-      action = gtk_action_group_get_action (priv->action_group, "Quit");
-      gtk_action_set_sensitive (action, TRUE);
-    }
-  else
-    {
-      action = gtk_action_group_get_action (priv->action_group, "File");
-      gtk_action_set_visible (action, FALSE);
-      action = gtk_action_group_get_action (priv->action_group, "Quit");
-      gtk_action_set_sensitive (action, FALSE);
-    }
+  action = gtk_action_group_get_action (priv->action_group, "File");
+  gtk_action_set_visible (action, visible);
+  action = gtk_action_group_get_action (priv->action_group, "Quit");
+  gtk_action_set_sensitive (action, visible);
 }
 
 GucharmapMiniFontSelection *

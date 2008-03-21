@@ -293,4 +293,4 @@ struct _GucharmapWindowClass
   GtkWindowClass parent_class;
 };
 
-
+GdkCursor * _gucharmap_window_progress_cursor (void);
