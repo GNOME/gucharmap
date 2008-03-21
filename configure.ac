@@ -63,8 +63,6 @@ GNOME_COMPILE_WARNINGS([maximum])
 GNOME_MAINTAINER_MODE_DEFINES
 
 GNOME_DOC_INIT([0.9.0],[have_gdu=yes],[have_gdu=no])
-AM_CONDITIONAL(HAVE_GNOME_DOC_UTILS, test "$have_gdu" = "yes")
-
 if test "$have_gdu" = "no"; then
 	AC_MSG_WARN([GNOME doc utils not found; disabling user manual])
 fi
@@ -128,6 +126,24 @@ AC_ARG_ENABLE(unihan,
 if test "x$enable_unihan" != "xno" ; then
     AC_DEFINE([ENABLE_UNIHAN],[1],[Define if you want CJK ideograph information])
 fi
+
+# Some utilities
+AC_PROG_LN_S
+
+# AC_PATH_PROG([GTK_BUILDER_CONVERT],[gtk-builder-convert],[false])
+# if test "$GTK_BUILDER_CONVERT" = "false"; then
+#   AC_MSG_ERROR([gtk-builder-convert not found])
+# fi
+# 
+# AC_PATH_PROG([XMLLINT],[xmllint],[false])
+# if test "$XMLLINT" = "false"; then
+#   AC_MSG_ERROR([xmllint not found])
+# fi
+# 
+# AC_PATH_PROG([HEXDUMP],[hexdump],[false])
+# if test "$HEXDUMP" = "false"; then
+#   AC_MSG_ERROR([hexdump not found])
+# fi
 
 AC_SUBST([GUCHARMAP_VERSION_MAJOR],[gucharmap_version_major])
 AC_SUBST([GUCHARMAP_VERSION_MINOR],[gucharmap_version_minor])
