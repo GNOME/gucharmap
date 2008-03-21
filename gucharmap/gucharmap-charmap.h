@@ -40,34 +40,6 @@ G_BEGIN_DECLS
 typedef struct _GucharmapCharmap GucharmapCharmap;
 typedef struct _GucharmapCharmapClass GucharmapCharmapClass;
 
-struct _GucharmapCharmap
-{
-  GtkHPaned parent;
-
-  GucharmapTable *chartable;
-
-  gint _unused_1;
-  gboolean showing_details_page;
-
-  GtkWidget *details;  /* GtkTextView * */
-
-  GdkCursor *hand_cursor;
-  GdkCursor *regular_cursor;
-  gboolean hovering_over_link;
-};
-
-
-struct _GucharmapCharmapClass
-{
-  GtkHPanedClass parent_class;
-
-  void (* status_message) (GucharmapCharmap *charmap, const gchar *message);
-  void (* link_clicked) (GucharmapCharmap *charmap, 
-                         gunichar old_character,
-                         gunichar new_character);
-};
-
-
 GType                 gucharmap_charmap_get_type           (void);
 GtkWidget *           gucharmap_charmap_new                (GucharmapChapters *chapters);
 void                  gucharmap_charmap_set_font           (GucharmapCharmap  *charmap, 
@@ -78,6 +50,10 @@ GucharmapTable *      gucharmap_charmap_get_chartable      (GucharmapCharmap  *c
 void                  gucharmap_charmap_set_chapters       (GucharmapCharmap  *charmap,
                                                             GucharmapChapters *chapters);
 GucharmapChapters *   gucharmap_charmap_get_chapters       (GucharmapCharmap  *charmap);
+
+
+
+GucharmapTable *gucharmap_charmap_get_chartable (GucharmapCharmap *charmap);
 
 G_END_DECLS
 

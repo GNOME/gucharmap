@@ -30,6 +30,33 @@
 #include "gucharmap-marshal.h"
 #include "gucharmap-settings.h"
 
+struct _GucharmapCharmap
+{
+  GtkHPaned parent;
+
+  GucharmapTable *chartable;
+
+  gint _unused_1;
+  gboolean showing_details_page;
+
+  GtkWidget *details;  /* GtkTextView * */
+
+  GdkCursor *hand_cursor;
+  GdkCursor *regular_cursor;
+  gboolean hovering_over_link;
+};
+
+
+struct _GucharmapCharmapClass
+{
+  GtkHPanedClass parent_class;
+
+  void (* status_message) (GucharmapCharmap *charmap, const gchar *message);
+  void (* link_clicked) (GucharmapCharmap *charmap, 
+                         gunichar old_character,
+                         gunichar new_character);
+};
+
 gboolean _gucharmap_unicode_has_nameslist_entry (gunichar uc);
 
 enum 
@@ -871,6 +898,12 @@ gucharmap_charmap_go_to_character (GucharmapCharmap *charmap,
     gucharmap_table_set_active_character (charmap->chartable, wc);
 }
 
+/**
+ * gucharmap_charmap_get_chartable:
+ * @charmap:
+ *
+ * Returns: the #GucharmapChartable in @charmap
+ */
 GucharmapTable *
 gucharmap_charmap_get_chartable (GucharmapCharmap *charmap)
 {

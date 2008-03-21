@@ -641,7 +641,7 @@ _gucharmap_search_dialog_fire_search (GucharmapSearchDialog *search_dialog,
       if (priv->search_state)
         gucharmap_search_state_free (priv->search_state);
 
-      start_char = gucharmap_table_get_active_character (priv->guw->charmap->chartable);
+      start_char = gucharmap_table_get_active_character (gucharmap_charmap_get_chartable (priv->guw->charmap));
       start_index = gucharmap_codepoint_list_get_index (list, start_char);
       priv->search_state = gucharmap_search_state_new (list, gtk_entry_get_text (GTK_ENTRY (priv->entry)),
 			      start_index, direction,
@@ -650,7 +650,7 @@ _gucharmap_search_dialog_fire_search (GucharmapSearchDialog *search_dialog,
     }
   else
     {
-      start_char = gucharmap_table_get_active_character (priv->guw->charmap->chartable);
+      start_char = gucharmap_table_get_active_character (gucharmap_charmap_get_chartable (priv->guw->charmap));
       priv->search_state->start_index = gucharmap_codepoint_list_get_index (list, start_char);
       priv->search_state->curr_index = priv->search_state->start_index;
       priv->search_state->increment = direction;
