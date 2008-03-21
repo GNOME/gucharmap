@@ -24,10 +24,10 @@
 #define GUCHARMAP_CHARMAP_H
 
 #include <gtk/gtk.h>
-#include <gucharmap/gucharmap-types.h>
-#include <gucharmap/gucharmap-chartable.h>
+
 #include <gucharmap/gucharmap-chapters-model.h>
 #include <gucharmap/gucharmap-chapters-view.h>
+#include <gucharmap/gucharmap-chartable.h>
 
 G_BEGIN_DECLS
 

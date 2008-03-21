@@ -24,7 +24,6 @@
 #define GUCHARMAP_CODEPOINT_LIST_H
 
 #include <glib-object.h>
-#include <gucharmap/gucharmap-types.h>
 
 G_BEGIN_DECLS
 
@@ -35,8 +34,8 @@ G_BEGIN_DECLS
 #define GUCHARMAP_IS_CODEPOINT_LIST_CLASS(k)      (G_TYPE_CHECK_CLASS_TYPE ((k), GUCHARMAP_TYPE_CODEPOINT_LIST))
 #define GUCHARMAP_CODEPOINT_LIST_GET_CLASS(o)     (G_TYPE_INSTANCE_GET_CLASS ((o), GUCHARMAP_TYPE_CODEPOINT_LIST, GucharmapCodepointListClass))
 
-typedef struct _GucharmapScriptCodepointList GucharmapScriptCodepointList;
-typedef struct _GucharmapScriptCodepointListClass GucharmapScriptCodepointListClass;
+typedef struct _GucharmapCodepointList      GucharmapCodepointList;
+typedef struct _GucharmapCodepointListClass GucharmapCodepointListClass;
 
 struct _GucharmapCodepointList
 {

@@ -19,9 +19,11 @@
 
 #include <config.h>
 #include <glib/gi18n-lib.h>
-#include "gucharmap-block-chapters-model.h"
-#include "unicode-blocks.h"
+
+#include "gucharmap.h"
 #include "gucharmap-private.h"
+
+#include "unicode-blocks.h"
 
 enum 
 {
@@ -84,12 +86,15 @@ get_codepoint_list (GucharmapChaptersModel *chapters,
 }
 
 static G_CONST_RETURN GucharmapCodepointList * 
-get_book_codepoint_list (GucharmapChaptersModel *chapters)
+get_book_codepoint_list (GucharmapChaptersModel *model)
 {
-  if (chapters->book_list == NULL)
-    chapters->book_list = gucharmap_codepoint_list_new (0, UNICHAR_MAX);
+  GucharmapChaptersModelPrivate *model_priv = model->priv;
 
-  return chapters->book_list;
+  if (model_priv->book_list == NULL) {
+    model_priv->book_list = gucharmap_codepoint_list_new (0, UNICHAR_MAX);
+  }
+
+  return model_priv->book_list;
 }
 
 /* XXX linear search */

@@ -20,6 +20,7 @@
 
 #include <glib/gi18n-lib.h>
 
+#include "gucharmap.h"
 #include "gucharmap-private.h"
 
 G_GNUC_INTERNAL void

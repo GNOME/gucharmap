@@ -19,9 +19,6 @@
 
 #include <gtk/gtk.h>
 
-#include "gucharmap.h"
-#include "gucharmap-types.h"
-
 #define I_(string) g_intern_static_string (string)
 
 /* The last unicode character we support */
@@ -32,38 +29,9 @@ G_GNUC_INTERNAL void _gucharmap_intl_ensure_initialized (void);
 G_GNUC_INTERNAL gboolean _gucharmap_unicode_has_nameslist_entry (gunichar uc);
 
 
-struct _GucharmapChaptersModel
-{
-  GtkListStore parent_instance;
-
-  /*< protected >*/
+struct _GucharmapChaptersModelPrivate {
   GucharmapCodepointList *book_list;
 };
-
-struct _GucharmapChaptersModelClass
-{
-  GtkListStoreClass parent_class;
-
-  const char *title;
-  gboolean (* character_to_iter) (GucharmapChaptersModel *chapters,
-                                  gunichar wc,
-                                  GtkTreeIter *iter);
-  GucharmapCodepointList * (* get_codepoint_list) (GucharmapChaptersModel *chapters,
-                                                   GtkTreeIter *iter);
-  G_CONST_RETURN GucharmapCodepointList * (* get_book_codepoint_list) (GucharmapChaptersModel *chapters);
-};
-
-
-struct _GucharmapBlockChaptersModel
-{
-  GucharmapChaptersModel parent;
-};
-
-struct _GucharmapBlockChaptersModelClass
-{
-  GucharmapChaptersModelClass parent_class;
-};
-
 
 struct _GucharmapChartablePrivate {
   /* scrollable implementation */
@@ -112,24 +80,6 @@ struct _GucharmapChartablePrivate {
   guint zoom_mode_enabled : 1;
 };
 
-
-struct _GucharmapChartableCellAccessible
-{
-  AtkObject parent;
-
-  GtkWidget    *widget;
-  int           index;
-  AtkStateSet  *state_set;
-  gchar        *activate_description;
-  guint         action_idle_handler;
-};
-
-struct _GucharmapChartableCellAccessibleClass
-{
-  AtkObjectClass parent_class;
-};
-
-
 gint _gucharmap_chartable_cell_column	(GucharmapChartable *chartable,
 					 guint cell);
 gint _gucharmap_chartable_column_width	(GucharmapChartable *chartable,
@@ -142,38 +92,3 @@ gint _gucharmap_chartable_y_offset	(GucharmapChartable *chartable,
 					 gint row);
 void _gucharmap_chartable_redraw	(GucharmapChartable *chartable,
 					 gboolean move_zoom);
-
-
-struct _GucharmapScriptChaptersModel
-{
-  GucharmapChaptersModel parent;
-};
-
-struct _GucharmapScriptChaptersModelClass
-{
-  GucharmapChaptersModelClass parent_class;
-};
-
-
-struct _GucharmapScriptCodepointList
-{
-  GucharmapCodepointList parent;
-};
-
-struct _GucharmapScriptCodepointListClass
-{
-  GucharmapCodepointListClass parent_class;
-};
-
-
-struct _GucharmapFontCodepointList
-{
-  GucharmapCodepointList parent;
-
-  PangoCoverage *coverage;
-};
-
-struct _GucharmapFontCodepointListClass
-{
-  GucharmapCodepointListClass parent_class;
-};

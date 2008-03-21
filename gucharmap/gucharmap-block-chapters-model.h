@@ -26,7 +26,6 @@
 #ifndef GUCHARMAP_BLOCK_CHAPTERS_MODEL_H
 #define GUCHARMAP_BLOCK_CHAPTERS_MODEL_H
 
-#include <gucharmap/gucharmap-types.h>
 #include <gucharmap/gucharmap-chapters-model.h>
 
 G_BEGIN_DECLS
@@ -37,6 +36,19 @@ G_BEGIN_DECLS
 #define GUCHARMAP_IS_BLOCK_CHAPTERS_MODEL(o)            (G_TYPE_CHECK_INSTANCE_TYPE ((o), GUCHARMAP_TYPE_BLOCK_CHAPTERS_MODEL))
 #define GUCHARMAP_IS_BLOCK_CHAPTERS_MODEL_CLASS(k)      (G_TYPE_CHECK_CLASS_TYPE ((k), GUCHARMAP_TYPE_BLOCK_CHAPTERS_MODEL))
 #define GUCHARMAP_BLOCK_CHAPTERS_MODEL_GET_CLASS(o)     (G_TYPE_INSTANCE_GET_CLASS ((o), GUCHARMAP_TYPE_BLOCK_CHAPTERS_MODEL, GucharmapBlockChaptersModelClass))
+
+typedef struct _GucharmapBlockChaptersModel GucharmapBlockChaptersModel;
+typedef struct _GucharmapBlockChaptersModelClass GucharmapBlockChaptersModelClass;
+
+struct _GucharmapBlockChaptersModel
+{
+  GucharmapChaptersModel parent;
+};
+
+struct _GucharmapBlockChaptersModelClass
+{
+  GucharmapChaptersModelClass parent_class;
+};
 
 GType                   gucharmap_block_chapters_model_get_type (void);
 GucharmapChaptersModel* gucharmap_block_chapters_model_new      (void);

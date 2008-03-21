@@ -25,7 +25,7 @@
 #define GUCHARMAP_CHARTABLE_H
 
 #include <gtk/gtkdrawingarea.h>
-#include <gucharmap/gucharmap-types.h>
+
 #include <gucharmap/gucharmap-codepoint-list.h>
 
 G_BEGIN_DECLS

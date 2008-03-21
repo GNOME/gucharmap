@@ -18,7 +18,8 @@
 
 #include <config.h>
 #include <glib.h>
-#include "gucharmap-codepoint-list.h"
+
+#include "gucharmap.h"
 #include "gucharmap-private.h"
 
 typedef struct _DefaultCodepointListPrivate DefaultCodepointListPrivate;

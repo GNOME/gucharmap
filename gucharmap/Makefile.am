@@ -94,7 +94,6 @@ libgucharmapinclude_HEADERS = \
 	gucharmap.h \
 	gucharmap-script-chapters-model.h \
 	gucharmap-script-codepoint-list.h \
-	gucharmap-types.h \
 	gucharmap-unicode-info.h \
 	$(NULL)
 

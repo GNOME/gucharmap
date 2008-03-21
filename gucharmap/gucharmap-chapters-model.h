@@ -25,7 +25,7 @@
 #define GUCHARMAP_CHAPTERS_MODEL_H
 
 #include <gtk/gtkliststore.h>
-#include <gucharmap/gucharmap-types.h>
+
 #include <gucharmap/gucharmap-codepoint-list.h>
 
 G_BEGIN_DECLS
@@ -34,10 +34,36 @@ G_BEGIN_DECLS
 
 #define GUCHARMAP_TYPE_CHAPTERS_MODEL             (gucharmap_chapters_model_get_type ())
 #define GUCHARMAP_CHAPTERS_MODEL(o)               (G_TYPE_CHECK_INSTANCE_CAST ((o), GUCHARMAP_TYPE_CHAPTERS_MODEL, GucharmapChaptersModel))
-#define GUCHARMAP_CHAPTERS_MODEL_CLASS(k) (G_TYPE_CHECK_CLASS_CAST((k), GUCHARMAP_TYPE_CHAPTERS_MODEL, GucharmapChaptersModelClass))
+#define GUCHARMAP_CHAPTERS_MODEL_CLASS(k)         (G_TYPE_CHECK_CLASS_CAST((k), GUCHARMAP_TYPE_CHAPTERS_MODEL, GucharmapChaptersModelClass))
 #define GUCHARMAP_IS_CHAPTERS_MODEL(o)            (G_TYPE_CHECK_INSTANCE_TYPE ((o), GUCHARMAP_TYPE_CHAPTERS_MODEL))
 #define GUCHARMAP_IS_CHAPTERS_MODEL_CLASS(k)      (G_TYPE_CHECK_CLASS_TYPE ((k), GUCHARMAP_TYPE_CHAPTERS_MODEL))
 #define GUCHARMAP_CHAPTERS_MODEL_GET_CLASS(o)     (G_TYPE_INSTANCE_GET_CLASS ((o), GUCHARMAP_TYPE_CHAPTERS_MODEL, GucharmapChaptersModelClass))
+
+typedef struct _GucharmapChaptersModel        GucharmapChaptersModel;
+typedef struct _GucharmapChaptersModelPrivate GucharmapChaptersModelPrivate;
+typedef struct _GucharmapChaptersModelClass   GucharmapChaptersModelClass;
+
+struct _GucharmapChaptersModel
+{
+  GtkListStore parent_instance;
+
+  /*< protected >*/
+  GucharmapChaptersModelPrivate *priv;
+};
+
+struct _GucharmapChaptersModelClass
+{
+  GtkListStoreClass parent_class;
+
+  const char *title;
+  gboolean (* character_to_iter) (GucharmapChaptersModel *chapters,
+                                  gunichar wc,
+                                  GtkTreeIter *iter);
+  GucharmapCodepointList * (* get_codepoint_list) (GucharmapChaptersModel *chapters,
+                                                   GtkTreeIter *iter);
+  G_CONST_RETURN GucharmapCodepointList * (* get_book_codepoint_list) (GucharmapChaptersModel *chapters);
+};
+
 
 typedef enum
 {

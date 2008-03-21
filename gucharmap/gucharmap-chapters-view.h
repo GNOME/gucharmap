@@ -26,7 +26,7 @@
 #define GUCHARMAP_CHAPTERS_VIEW_H
 
 #include <gtk/gtktreeview.h>
-#include <gucharmap/gucharmap-types.h>
+
 #include <gucharmap/gucharmap-chapters-model.h>
 
 G_BEGIN_DECLS

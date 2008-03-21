@@ -21,9 +21,9 @@
 
 #include <string.h>
 
-#include "gucharmap-chapters-model.h"
-#include "gucharmap-marshal.h"
+#include "gucharmap.h"
 #include "gucharmap-private.h"
+#include "gucharmap-marshal.h"
 
 G_DEFINE_TYPE (GucharmapChaptersModel, gucharmap_chapters_model, GTK_TYPE_LIST_STORE)
 
@@ -35,29 +35,33 @@ default_get_codepoint_list (GucharmapChaptersModel *chapters,
 }
 
 static void
-gucharmap_chapters_model_init (GucharmapChaptersModel *chapters)
+gucharmap_chapters_model_init (GucharmapChaptersModel *model)
 {
+  model->priv = G_TYPE_INSTANCE_GET_PRIVATE (model, GUCHARMAP_TYPE_CHAPTERS_MODEL, GucharmapChaptersModelPrivate);
 }
 
 static void
 gucharmap_chapters_model_finalize (GObject *object)
 {
-  GucharmapChaptersModel *chapters = GUCHARMAP_CHAPTERS_MODEL (object);
+  GucharmapChaptersModel *model = GUCHARMAP_CHAPTERS_MODEL (object);
+  GucharmapChaptersModelPrivate *priv = model->priv;
 
-  if (chapters->book_list)
-    g_object_unref (chapters->book_list);
+  if (priv->book_list)
+    g_object_unref (priv->book_list);
 
   G_OBJECT_CLASS (gucharmap_chapters_model_parent_class)->finalize (object);
 }
 
 static void
-gucharmap_chapters_model_class_init (GucharmapChaptersModelClass *clazz)
+gucharmap_chapters_model_class_init (GucharmapChaptersModelClass *klass)
 {
-  GObjectClass *object_class = G_OBJECT_CLASS (clazz);
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
+
+  g_type_class_add_private (object_class, sizeof (GucharmapChaptersModelPrivate));
 
   object_class->finalize = gucharmap_chapters_model_finalize;
 
-  clazz->get_codepoint_list = default_get_codepoint_list;
+  klass->get_codepoint_list = default_get_codepoint_list;
 }
 
 /**

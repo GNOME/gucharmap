@@ -23,9 +23,8 @@
 #include <gtk/gtk.h>
 #include <stdlib.h>
 #include <string.h>
-#include "gucharmap-unicode-info.h"
-#include "gucharmap-script-chapters-model.h"
-#include "gucharmap-script-codepoint-list.h"
+
+#include "gucharmap.h"
 #include "gucharmap-private.h"
 
 static void
@@ -97,15 +96,17 @@ append_script (GtkTreeModel                 *model,
 static G_CONST_RETURN GucharmapCodepointList * 
 get_book_codepoint_list (GucharmapChaptersModel *chapters)
 {
-  if (chapters->book_list == NULL)
+  GucharmapChaptersModelPrivate *priv = chapters->priv;
+
+  if (priv->book_list == NULL)
     {
       GtkTreeModel *model = GTK_TREE_MODEL (chapters);
 
-      chapters->book_list = gucharmap_script_codepoint_list_new ();
-      gtk_tree_model_foreach (model, (GtkTreeModelForeachFunc) append_script, chapters->book_list);
+      priv->book_list = gucharmap_script_codepoint_list_new ();
+      gtk_tree_model_foreach (model, (GtkTreeModelForeachFunc) append_script, priv->book_list);
     }
 
-  return chapters->book_list;
+  return priv->book_list;
 }
 
 static gboolean
