@@ -37,12 +37,16 @@ G_BEGIN_DECLS
 #define GUCHARMAP_IS_SCRIPT_CODEPOINT_LIST_CLASS(k)      (G_TYPE_CHECK_CLASS_TYPE ((k), GUCHARMAP_TYPE_SCRIPT_CODEPOINT_LIST))
 #define GUCHARMAP_SCRIPT_CODEPOINT_LIST_GET_CLASS(o)     (G_TYPE_INSTANCE_GET_CLASS ((o), GUCHARMAP_TYPE_SCRIPT_CODEPOINT_LIST, GucharmapScriptCodepointListClass))
 
-typedef struct _GucharmapScriptCodepointList      GucharmapScriptCodepointList;
-typedef struct _GucharmapScriptCodepointListClass GucharmapScriptCodepointListClass;
+typedef struct _GucharmapScriptCodepointList        GucharmapScriptCodepointList;
+typedef struct _GucharmapScriptCodepointListPrivate GucharmapScriptCodepointListPrivate;
+typedef struct _GucharmapScriptCodepointListClass   GucharmapScriptCodepointListClass;
 
 struct _GucharmapScriptCodepointList
 {
   GucharmapCodepointList parent;
+
+  /*< private >*/
+  GucharmapScriptCodepointListPrivate *priv;
 };
 
 struct _GucharmapScriptCodepointListClass
