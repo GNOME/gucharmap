@@ -1,4 +1,3 @@
-/* $Id: gucharmap-script-chapters.c 1376 2007-12-03 21:42:48Z chpe $ */
 /*
  * Copyright (c) 2004 Noah Levitt
  * Copyright (C) 2007 Christian Persch
