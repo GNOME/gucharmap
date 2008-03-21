@@ -39,9 +39,9 @@ struct _GucharmapCharmap
 
   GdkCursor *hand_cursor;
   GdkCursor *regular_cursor;
-  gboolean hovering_over_link;
-  gboolean showing_details_page;
-  gboolean last_character_set;
+  guint hovering_over_link   : 1;
+  guint showing_details_page : 1;
+  guint last_character_set   : 1;
 };
 
 
