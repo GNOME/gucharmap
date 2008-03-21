@@ -19,7 +19,7 @@
  */
 
 #include "config.h"
-#include "gucharmap-chapters.h"
+#include "gucharmap-chapters-model.h"
 #include "gucharmap-marshal.h"
 #include <string.h>
 

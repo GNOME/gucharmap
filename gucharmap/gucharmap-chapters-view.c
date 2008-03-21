@@ -1,4 +1,3 @@
-/* $Id: gucharmap-block-chapters.c 1376 2007-12-03 21:42:48Z chpe $ */
 /*
  * Copyright (c) 2004 Noah Levitt
  *
@@ -71,6 +70,12 @@ GtkWidget *
 gucharmap_chapters_view_new (void)
 {
   return g_object_new (gucharmap_chapters_view_get_type (), NULL);
+}
+
+GucharmapChaptersModel *
+gucharmap_chapters_view_get_model (GucharmapChaptersView *view)
+{
+  return view->model;
 }
 
 void

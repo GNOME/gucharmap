@@ -26,7 +26,6 @@
 #include "gucharmap-unicode-info.h"
 #include "gucharmap-script-chapters-model.h"
 #include "gucharmap-script-codepoint-list.h"
-#include "gucharmap-chapters.h"
 #include "gucharmap-settings.h"
 
 static void

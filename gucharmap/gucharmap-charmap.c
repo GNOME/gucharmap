@@ -25,7 +25,6 @@
 
 #include "gucharmap-charmap.h"
 #include "gucharmap-unicode-info.h"
-#include "gucharmap-script-chapters.h"
 #include "gucharmap-intl.h"
 #include "gucharmap-marshal.h"
 #include "gucharmap-settings.h"
@@ -34,16 +33,16 @@ struct _GucharmapCharmap
 {
   GtkHPaned parent;
 
+  GucharmapChaptersView *chapters_view;
   GucharmapTable *chartable;
-
-  gint _unused_1;
-  gboolean showing_details_page;
 
   GtkWidget *details;  /* GtkTextView * */
 
   GdkCursor *hand_cursor;
   GdkCursor *regular_cursor;
   gboolean hovering_over_link;
+  gboolean showing_details_page;
+  gboolean last_character_set;
 };
 
 
@@ -57,16 +56,26 @@ struct _GucharmapCharmapClass
                          gunichar new_character);
 };
 
-gboolean _gucharmap_unicode_has_nameslist_entry (gunichar uc);
-
-enum 
+enum
 {
-  STATUS_MESSAGE = 0,
+  STATUS_MESSAGE,
   LINK_CLICKED,
   NUM_SIGNALS
 };
 
-static guint gucharmap_charmap_signals[NUM_SIGNALS] = { 0, 0 };
+enum {
+  PROP_0,
+  PROP_CHAPTERS_MODEL
+};
+
+static guint gucharmap_charmap_signals[NUM_SIGNALS];
+
+gboolean _gucharmap_unicode_has_nameslist_entry (gunichar uc);
+
+static void gucharmap_charmap_class_init (GucharmapCharmapClass *klass);
+static void gucharmap_charmap_init       (GucharmapCharmap *charmap);
+
+G_DEFINE_TYPE (GucharmapCharmap, gucharmap_charmap, GTK_TYPE_HPANED)
 
 static void
 status_message (GucharmapCharmap *charmap, const gchar *message)
@@ -76,36 +85,65 @@ status_message (GucharmapCharmap *charmap, const gchar *message)
 }
 
 static void 
-charmap_finalize (GObject *object)
+gucharmap_charmap_finalize (GObject *object)
 {
   GucharmapCharmap *charmap = GUCHARMAP_CHARMAP (object);
 
   gdk_cursor_unref (charmap->hand_cursor);
   gdk_cursor_unref (charmap->regular_cursor);
+
+  G_OBJECT_CLASS (gucharmap_charmap_parent_class)->finalize (object);
+}
+
+static void
+gucharmap_charmap_set_property (GObject *object,
+                                guint prop_id,
+                                const GValue *value,
+                                GParamSpec *pspec)
+{
+  GucharmapCharmap *charmap = GUCHARMAP_CHARMAP (object);
+
+  switch (prop_id) {
+    case PROP_CHAPTERS_MODEL:
+      gucharmap_charmap_set_chapters_model (charmap, g_value_get_object (value));
+      break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
+  }
 }
 
 static void
 gucharmap_charmap_class_init (GucharmapCharmapClass *clazz)
 {
+  GObjectClass *object_class = G_OBJECT_CLASS (clazz);
+
+  _gucharmap_intl_ensure_initialized ();
+
+  object_class->set_property = gucharmap_charmap_set_property;
+  object_class->finalize = gucharmap_charmap_finalize;
+
   clazz->status_message = NULL;
 
   gucharmap_charmap_signals[STATUS_MESSAGE] =
-      g_signal_new ("status-message", gucharmap_charmap_get_type (), 
+      g_signal_new (I_("status-message"), gucharmap_charmap_get_type (),
                     G_SIGNAL_RUN_FIRST,
                     G_STRUCT_OFFSET (GucharmapCharmapClass, status_message),
                     NULL, NULL, g_cclosure_marshal_VOID__STRING, G_TYPE_NONE,
                     1, G_TYPE_STRING);
 
   gucharmap_charmap_signals[LINK_CLICKED] =
-      g_signal_new ("link-clicked", gucharmap_charmap_get_type (), 
+      g_signal_new (I_("link-clicked"), gucharmap_charmap_get_type (),
                     G_SIGNAL_RUN_FIRST,
                     G_STRUCT_OFFSET (GucharmapCharmapClass, link_clicked),
                     NULL, NULL, _gucharmap_marshal_VOID__UINT_UINT, G_TYPE_NONE, 
                     2, G_TYPE_UINT, G_TYPE_UINT);
 
-  G_OBJECT_CLASS (clazz)->finalize = charmap_finalize;
-
-  _gucharmap_intl_ensure_initialized ();
+  g_object_class_install_property (object_class,
+                                   PROP_CHAPTERS_MODEL,
+                                   g_param_spec_object ("chapters-model", NULL, NULL,
+                                                        GUCHARMAP_TYPE_CHAPTERS_MODEL,
+                                                        G_PARAM_WRITABLE | G_PARAM_CONSTRUCT | G_PARAM_STATIC_NAME | G_PARAM_STATIC_NICK | G_PARAM_STATIC_BLURB));
 }
 
 static void
@@ -839,44 +877,62 @@ make_chartable_pane (GucharmapCharmap *charmap)
 }
 
 static void
-chapter_changed (GucharmapChapters *chapters,
-                 GucharmapCharmap  *charmap)
+chapters_view_selection_changed_cb (GtkTreeSelection *selection,
+                                    GucharmapCharmap *charmap)
 {
-  gucharmap_table_set_codepoint_list (charmap->chartable, gucharmap_chapters_get_codepoint_list (chapters));
+  GucharmapCodepointList *codepoint_list;
+  GtkTreeIter iter;
+
+  if (!gtk_tree_selection_get_selected (selection, NULL, &iter))
+    return;
+
+  codepoint_list = gucharmap_chapters_view_get_codepoint_list (charmap->chapters_view);
+  gucharmap_table_set_codepoint_list (charmap->chartable, codepoint_list);
+  // FIXME unref
 }
 
 static void
 gucharmap_charmap_init (GucharmapCharmap *charmap)
 {
-}
-
-GtkWidget *
-gucharmap_charmap_new (GucharmapChapters *chapters)
-{
-  GucharmapCharmap *charmap = g_object_new (gucharmap_charmap_get_type (), NULL);
+  GtkWidget *scrolled_window, *view;
+  GtkTreeSelection *selection;
   GtkWidget *pane2;
 
+  /* FIXME: move this to realize */
   charmap->hand_cursor = gdk_cursor_new (GDK_HAND2);
   charmap->regular_cursor = gdk_cursor_new (GDK_XTERM);
   charmap->hovering_over_link = FALSE;
-  gtk_widget_show (GTK_WIDGET (chapters));
 
-  g_signal_connect (G_OBJECT (chapters), "changed", G_CALLBACK (chapter_changed), charmap);
+  scrolled_window = gtk_scrolled_window_new (NULL, NULL);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
+                                  GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
+  gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolled_window),
+                                       GTK_SHADOW_ETCHED_IN);
+
+  view = gucharmap_chapters_view_new ();
+  charmap->chapters_view = GUCHARMAP_CHAPTERS_VIEW (view);
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (view));
+  g_signal_connect (selection, "changed",
+                    G_CALLBACK (chapters_view_selection_changed_cb), charmap);
+
+  gtk_container_add (GTK_CONTAINER (scrolled_window), view);
+  gtk_widget_show (view);
+  gtk_paned_pack1 (GTK_PANED (charmap), scrolled_window, FALSE, TRUE);
+  gtk_widget_show (scrolled_window);
 
   pane2 = make_chartable_pane (charmap);
-  gtk_paned_pack1 (GTK_PANED (charmap), GTK_WIDGET (chapters), FALSE, TRUE);
   gtk_paned_pack2 (GTK_PANED (charmap), pane2, TRUE, TRUE);
   g_signal_connect (pane2, "switch-page",
                     G_CALLBACK (notebook_switch_page), charmap);
-
-  gucharmap_charmap_go_to_character (charmap, gucharmap_settings_get_last_char ());
-
-  return GTK_WIDGET (charmap);
 }
 
-G_DEFINE_TYPE (GucharmapCharmap, gucharmap_charmap, GTK_TYPE_HPANED)
+GtkWidget *
+gucharmap_charmap_new (void)
+{
+  return g_object_new (gucharmap_charmap_get_type (), NULL);
+}
 
-void 
+void
 gucharmap_charmap_set_font (GucharmapCharmap *charmap, 
                             const gchar *font_name)
 {
@@ -887,12 +943,13 @@ void
 gucharmap_charmap_go_to_character (GucharmapCharmap *charmap, 
                                    gunichar          wc)
 {
-  GucharmapChapters *chapters = gucharmap_charmap_get_chapters (charmap);
   gboolean status;
 
-  status = gucharmap_chapters_go_to_character (chapters, wc);
+  /* FIXME: move wc validation up here? */
+
+  status = gucharmap_chapters_view_select_character (charmap->chapters_view, wc);
   if (!status)
-    g_warning ("gucharmap_chapters_go_to_character failed (%04X)\n", wc);
+    g_warning ("gucharmap_chapters_view_select_character failed (U+%04X)\n", wc);
 
   if (wc <= UNICHAR_MAX)
     gucharmap_table_set_active_character (charmap->chartable, wc);
@@ -911,20 +968,41 @@ gucharmap_charmap_get_chartable (GucharmapCharmap *charmap)
 }
 
 void
-gucharmap_charmap_set_chapters (GucharmapCharmap  *charmap,
-                                GucharmapChapters *chapters)
+gucharmap_charmap_set_chapters_model (GucharmapCharmap  *charmap,
+                                      GucharmapChaptersModel *model)
 {
-  gtk_container_remove (GTK_CONTAINER (charmap), GTK_PANED (charmap)->child1);
-  gtk_paned_pack1 (GTK_PANED (charmap), GTK_WIDGET (chapters), FALSE, TRUE);
-  g_signal_connect (G_OBJECT (chapters), "changed", G_CALLBACK (chapter_changed), charmap);
-  gtk_widget_show (GTK_WIDGET (chapters));
+  gunichar wc;
 
-  /* Keep the same character selected as before */
-  gucharmap_charmap_go_to_character (charmap, gucharmap_table_get_active_character (charmap->chartable));
+  gucharmap_chapters_view_set_model (charmap->chapters_view, model);
+  if (!model)
+    return;
+
+  if (charmap->last_character_set)
+    wc = gucharmap_table_get_active_character (charmap->chartable);
+  else
+    wc = gucharmap_settings_get_last_char ();
+
+  gucharmap_charmap_go_to_character (charmap, wc);
+  charmap->last_character_set = TRUE;
 }
 
-GucharmapChapters *
-gucharmap_charmap_get_chapters (GucharmapCharmap  *charmap)
+GucharmapChaptersModel *
+gucharmap_charmap_get_chapters_model (GucharmapCharmap *charmap)
 {
-  return GUCHARMAP_CHAPTERS (GTK_PANED (charmap)->child1);
+  return gucharmap_chapters_view_get_model (charmap->chapters_view);
 }
+
+GucharmapChaptersView *
+gucharmap_charmap_get_chapters_view  (GucharmapCharmap *charmap)
+{
+  return charmap->chapters_view;
+}
+
+GucharmapCodepointList *
+gucharmap_charmap_get_book_codepoint_list (GucharmapCharmap *charmap)
+{
+  GucharmapCodepointList *codepoint_list;
+  codepoint_list = (GucharmapCodepointList *) gucharmap_chapters_view_get_book_codepoint_list (charmap->chapters_view);
+  return g_object_ref (codepoint_list);
+}
+

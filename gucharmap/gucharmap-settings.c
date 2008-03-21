@@ -23,7 +23,7 @@
 #include <glib.h>
 #include <glib/gi18n-lib.h>
 
-#include "gucharmap-chapters.h"
+#include "gucharmap-chapters-model.h"
 #include "gucharmap-settings.h"
 #include "gucharmap-intl.h"
 #if HAVE_GCONF

@@ -25,8 +25,8 @@
 #include "gucharmap-window.h"
 #include "gucharmap-mini-fontsel.h"
 #include "gucharmap-unicode-info.h"
-#include "gucharmap-script-chapters.h"
-#include "gucharmap-block-chapters.h"
+#include "gucharmap-script-chapters-model.h"
+#include "gucharmap-block-chapters-model.h"
 #include "gucharmap-intl.h"
 #include "gucharmap-search-dialog.h"
 #include "gucharmap-settings.h"
@@ -481,16 +481,14 @@ static void
 next_chapter (GtkAction       *action,
               GucharmapWindow *guw)
 {
-  GucharmapChapters *chapters = gucharmap_charmap_get_chapters (guw->charmap);
-  gucharmap_chapters_next (chapters);
+  gucharmap_chapters_view_next (gucharmap_charmap_get_chapters_view (guw->charmap));
 }
 
 static void
 prev_chapter (GtkAction       *action,
               GucharmapWindow *guw)
 {
-  GucharmapChapters *chapters = gucharmap_charmap_get_chapters (guw->charmap);
-  gucharmap_chapters_previous (chapters);
+  gucharmap_chapters_view_previous (gucharmap_charmap_get_chapters_view (guw->charmap));
 }
 
 static void
@@ -513,6 +511,32 @@ enum {
 };
 
 static void
+set_chapters_model (GucharmapWindow *guw,
+                    ChaptersMode mode)
+{
+  GucharmapChaptersModel *model = NULL;
+
+  switch (mode)
+    {
+      case CHAPTERS_SCRIPT:
+      	model = gucharmap_script_chapters_model_new ();
+	chapters_set_labels (_("Next Script"), _("Previous Script"), guw);
+	break;
+      
+      case CHAPTERS_BLOCK:
+      	model = gucharmap_block_chapters_model_new ();
+	chapters_set_labels (_("Next Block"), _("Previous Block"), guw);
+	break;
+      
+      default:
+        g_assert_not_reached ();
+    }
+
+  gucharmap_charmap_set_chapters_model (guw->charmap, model);
+  g_object_unref (model);
+}
+
+static void
 view_by (GtkAction        *action,
 	 GtkRadioAction   *radioaction,
          GucharmapWindow  *guw)
@@ -522,14 +546,10 @@ view_by (GtkAction        *action,
   switch (gtk_radio_action_get_current_value (radioaction))
     {
       case VIEW_BY_SCRIPT:
-      	gucharmap_charmap_set_chapters (guw->charmap, GUCHARMAP_CHAPTERS (gucharmap_script_chapters_new ()));
-	chapters_set_labels (_("Next Script"), _("Previous Script"), guw);
         mode = CHAPTERS_SCRIPT;
 	break;
       
       case VIEW_BY_BLOCK:
-        gucharmap_charmap_set_chapters (guw->charmap, GUCHARMAP_CHAPTERS (gucharmap_block_chapters_new ()));
-	chapters_set_labels (_("Next Block"), _("Previous Block"), guw);
         mode = CHAPTERS_BLOCK;
 	break;
       
@@ -537,6 +557,7 @@ view_by (GtkAction        *action,
         g_assert_not_reached ();
     }
 
+  set_chapters_model (guw, mode);
   gucharmap_settings_set_chapters_mode (mode);
 }
 
@@ -854,25 +875,11 @@ static void
 pack_stuff_in_window (GucharmapWindow *guw)
 {
   GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
-  GtkWidget *chapters;
   GtkWidget *big_vbox;
   GtkWidget *hbox;
   GucharmapTable *chartable;
 
-  switch (priv->chapters_mode)
-    {
-      case CHAPTERS_SCRIPT:
-        chapters = gucharmap_script_chapters_new ();
-        break;
-
-      case CHAPTERS_BLOCK:
-        chapters = gucharmap_block_chapters_new ();
-        break;
-
-      default:
-        g_assert_not_reached ();
-    }
-  guw->charmap = GUCHARMAP_CHARMAP (gucharmap_charmap_new (GUCHARMAP_CHAPTERS (chapters)));
+  guw->charmap = GUCHARMAP_CHARMAP (gucharmap_charmap_new ());
 
   big_vbox = gtk_vbox_new (FALSE, 0);
   gtk_container_add (GTK_CONTAINER (guw), big_vbox);
@@ -920,6 +927,8 @@ pack_stuff_in_window (GucharmapWindow *guw)
   g_signal_connect (guw->charmap, "status-message", G_CALLBACK (status_message), guw);
 
   gtk_widget_show (big_vbox);
+
+  set_chapters_model (guw, priv->chapters_mode);
 }
 
 static void

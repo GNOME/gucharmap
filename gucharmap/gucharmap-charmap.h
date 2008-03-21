@@ -21,7 +21,8 @@
 
 #include <gtk/gtk.h>
 #include <gucharmap/gucharmap-table.h>
-#include <gucharmap/gucharmap-chapters.h>
+#include <gucharmap/gucharmap-chapters-model.h>
+#include <gucharmap/gucharmap-chapters-view.h>
 
 G_BEGIN_DECLS
 
@@ -41,19 +42,23 @@ typedef struct _GucharmapCharmap GucharmapCharmap;
 typedef struct _GucharmapCharmapClass GucharmapCharmapClass;
 
 GType                 gucharmap_charmap_get_type           (void);
-GtkWidget *           gucharmap_charmap_new                (GucharmapChapters *chapters);
+
+GtkWidget *           gucharmap_charmap_new                (void);
+
 void                  gucharmap_charmap_set_font           (GucharmapCharmap  *charmap, 
                                                             const gchar       *font_name);
 void                  gucharmap_charmap_go_to_character    (GucharmapCharmap  *charmap,
                                                             gunichar           uc);
 GucharmapTable *      gucharmap_charmap_get_chartable      (GucharmapCharmap  *charmap);
-void                  gucharmap_charmap_set_chapters       (GucharmapCharmap  *charmap,
-                                                            GucharmapChapters *chapters);
-GucharmapChapters *   gucharmap_charmap_get_chapters       (GucharmapCharmap  *charmap);
 
+GucharmapChaptersView *  gucharmap_charmap_get_chapters_view  (GucharmapCharmap       *charmap);
 
+void                     gucharmap_charmap_set_chapters_model (GucharmapCharmap       *charmap,
+                                                               GucharmapChaptersModel *model);
 
-GucharmapTable *gucharmap_charmap_get_chartable (GucharmapCharmap *charmap);
+GucharmapChaptersModel * gucharmap_charmap_get_chapters_model (GucharmapCharmap       *charmap);
+
+GucharmapCodepointList * gucharmap_charmap_get_book_codepoint_list (GucharmapCharmap *charmap);
 
 G_END_DECLS
 

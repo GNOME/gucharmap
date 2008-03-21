@@ -630,7 +630,7 @@ _gucharmap_search_dialog_fire_search (GucharmapSearchDialog *search_dialog,
   gdk_cursor_unref (cursor);
 
 
-  list = (GucharmapCodepointList *) gucharmap_chapters_get_book_codepoint_list (gucharmap_charmap_get_chapters (priv->guw->charmap));
+  list = gucharmap_charmap_get_book_codepoint_list (priv->guw->charmap);
 
   if (priv->search_state == NULL
       || list != priv->search_state->list
@@ -664,6 +664,8 @@ _gucharmap_search_dialog_fire_search (GucharmapSearchDialog *search_dialog,
 
   g_idle_add_full (G_PRIORITY_DEFAULT_IDLE, (GSourceFunc) idle_search, search_dialog, (GDestroyNotify) search_completed);
   g_signal_emit (search_dialog, gucharmap_search_dialog_signals[SEARCH_START], 0);
+
+  g_object_unref (list);
 }
 
 void

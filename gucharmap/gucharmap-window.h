@@ -1,4 +1,3 @@
-/* $Id$ */
 /*
  * Copyright (c) 2004 Noah Levitt
  *
@@ -16,7 +15,6 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02110-1301  USA
  */
-
 
 #ifndef GUCHARMAP_WINDOW_H
 #define GUCHARMAP_WINDOW_H

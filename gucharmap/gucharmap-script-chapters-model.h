@@ -21,7 +21,7 @@
 #ifndef GUCHARMAP_SCRIPT_CHAPTERS_MODEL_H
 #define GUCHARMAP_SCRIPT_CHAPTERS_MODEL_H
 
-#include <gucharmap/gucharmap-chapters.h>
+#include <gucharmap/gucharmap-chapters-model.h>
 
 G_BEGIN_DECLS
 

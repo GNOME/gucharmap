@@ -25,9 +25,7 @@ BUILT_SOURCES = gucharmap-marshal.c gucharmap-marshal.h
 lib_LTLIBRARIES = libgucharmap.la
 
 libgucharmap_la_SOURCES = \
-	gucharmap-block-chapters.c gucharmap-block-chapters.h \
 	gucharmap-block-chapters-model.c gucharmap-block-chapters-model.h \
-	gucharmap-chapters.c gucharmap-chapters.h \
 	gucharmap-chapters-model.c gucharmap-chapters-model.h \
 	gucharmap-chapters-view.c gucharmap-chapters-view.h \
 	gucharmap-charmap.c gucharmap-charmap.h \
@@ -38,7 +36,6 @@ libgucharmap_la_SOURCES = \
 	gucharmap-intl.c gucharmap-intl.h \
 	gucharmap-marshal.c gucharmap-marshal.h \
 	gucharmap-mini-fontsel.c gucharmap-mini-fontsel.h \
-	gucharmap-script-chapters.c gucharmap-script-chapters.h \
 	gucharmap-script-chapters-model.c gucharmap-script-chapters-model.h \
 	gucharmap-script-codepoint-list.c gucharmap-script-codepoint-list.h \
 	gucharmap-search-dialog.h gucharmap-search-dialog.c \
@@ -76,16 +73,13 @@ libgucharmap_la_LIBADD = \
 
 libgucharmapincludedir = $(includedir)/gucharmap
 libgucharmapinclude_HEADERS = \
-	gucharmap-block-chapters.h \
 	gucharmap-block-chapters-model.h \
-	gucharmap-chapters.h \
 	gucharmap-chapters-model.h \
 	gucharmap-chapters-view.h \
 	gucharmap-charmap.h \
 	gucharmap-codepoint-list.h \
 	gucharmap.h \
 	gucharmap-mini-fontsel.h \
-	gucharmap-script-chapters.h \
 	gucharmap-script-chapters-model.h \
 	gucharmap-script-codepoint-list.h \
 	gucharmap-search-dialog.h \

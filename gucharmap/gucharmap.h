@@ -27,9 +27,9 @@
 #include <gucharmap/gucharmap-mini-fontsel.h>
 #include <gucharmap/gucharmap-codepoint-list.h>
 #include <gucharmap/gucharmap-script-codepoint-list.h>
-#include <gucharmap/gucharmap-chapters.h>
-#include <gucharmap/gucharmap-block-chapters.h>
-#include <gucharmap/gucharmap-script-chapters.h>
+#include <gucharmap/gucharmap-chapters-model.h>
+#include <gucharmap/gucharmap-block-chapters-model.h>
+#include <gucharmap/gucharmap-script-chapters-model.h>
 #include <gucharmap/gucharmap-search-dialog.h>
 
 #endif /* #ifndef GUCHARMAP_H */
