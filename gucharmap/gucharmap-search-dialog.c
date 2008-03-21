@@ -381,14 +381,16 @@ static gboolean
 idle_search (GucharmapSearchDialog *search_dialog)
 {
   GucharmapSearchDialogPrivate *priv = GUCHARMAP_SEARCH_DIALOG_GET_PRIVATE (search_dialog);
-  GTimer *timer = g_timer_new ();
   gunichar wc;
+  GTimer *timer;
 
   /* search without leading and tailing spaces */
   /* with "match whole word" option, there's no need for leading and tailing spaces */
 
   if (quick_checks_before (priv->search_state))
     return FALSE;
+
+  timer = g_timer_new ();
 
   do
     {
@@ -403,6 +405,7 @@ idle_search (GucharmapSearchDialog *search_dialog)
       if (priv->search_state->search_string_value != -1 && priv->search_state->curr_index == priv->search_state->search_string_value)
 	{
 	  priv->search_state->found_index = priv->search_state->curr_index;
+          g_timer_destroy (timer);
 	  return FALSE;
 	}
 
@@ -410,13 +413,19 @@ idle_search (GucharmapSearchDialog *search_dialog)
       if (matches (search_dialog, wc, priv->search_state->search_string_nfd, priv->search_state->annotations))
         {
           priv->search_state->found_index = priv->search_state->curr_index;
+          g_timer_destroy (timer);
           return FALSE;
         }
 
       if (g_timer_elapsed (timer, NULL) > 0.050)
-        return TRUE;
+        {
+          g_timer_destroy (timer);
+          return TRUE;
+        }
     }
   while (priv->search_state->curr_index != priv->search_state->start_index);
+
+  g_timer_destroy (timer);
 
   if (quick_checks_after (priv->search_state))
     return FALSE;
