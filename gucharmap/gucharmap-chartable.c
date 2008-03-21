@@ -1295,12 +1295,13 @@ gucharmap_chartable_motion_notify (GtkWidget *widget,
   gboolean (* motion_notify_event) (GtkWidget *, GdkEventMotion *) =
     GTK_WIDGET_CLASS (gucharmap_chartable_parent_class)->motion_notify_event;
 
-  if ((event->state & GDK_BUTTON1_MASK) != 0 &&
+  if ((event->state & GDK_BUTTON1_MASK) &&
       gtk_drag_check_threshold (widget,
                                 chartable->click_x,
                                 chartable->click_y,
                                 event->x,
-                                event->y))
+                                event->y) &&
+      gucharmap_unichar_validate (gucharmap_chartable_get_active_character (chartable)))
     {
       gtk_drag_begin (widget, chartable->target_list,
                       GDK_ACTION_COPY, 1, (GdkEvent *) event);
