@@ -34,7 +34,7 @@ static void
 gucharmap_script_chapters_model_init (GucharmapScriptChaptersModel *model)
 {
   GtkListStore *store = GTK_LIST_STORE (model);
-  const gchar **unicode_scripts = gucharmap_unicode_list_scripts ();
+  const gchar **unicode_scripts;
   GtkTreeIter iter;
   guint i;
   GType types[] = {
@@ -44,6 +44,7 @@ gucharmap_script_chapters_model_init (GucharmapScriptChaptersModel *model)
 
   gtk_list_store_set_column_types (store, G_N_ELEMENTS (types), types);
 
+  unicode_scripts = gucharmap_unicode_list_scripts ();
   for (i = 0;  unicode_scripts[i]; i++)
     {
       gtk_list_store_append (store, &iter);
@@ -52,6 +53,7 @@ gucharmap_script_chapters_model_init (GucharmapScriptChaptersModel *model)
                           CHAPTERS_LABEL_COL, _(unicode_scripts[i]),
                           -1);
     }
+  g_free (unicode_scripts);
 
   gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (model),
                                         CHAPTERS_LABEL_COL, GTK_SORT_ASCENDING);

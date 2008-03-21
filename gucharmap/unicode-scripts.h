@@ -11,8 +11,8 @@
 
 typedef struct _UnicodeScript UnicodeScript;
 
-static const gchar *unicode_script_list[] =
-{
+/* for extraction by intltool */
+#if 0
   N_("Arabic"),
   N_("Armenian"),
   N_("Balinese"),
@@ -79,14 +79,152 @@ static const gchar *unicode_script_list[] =
   N_("Tifinagh"),
   N_("Ugaritic"),
   N_("Yi"),
-  NULL
+#endif /* 0 */
+
+static const gchar unicode_script_list_strings[] =
+  "Arabic\0"
+  "Armenian\0"
+  "Balinese\0"
+  "Bengali\0"
+  "Bopomofo\0"
+  "Braille\0"
+  "Buginese\0"
+  "Buhid\0"
+  "Canadian Aboriginal\0"
+  "Cherokee\0"
+  "Common\0"
+  "Coptic\0"
+  "Cuneiform\0"
+  "Cypriot\0"
+  "Cyrillic\0"
+  "Deseret\0"
+  "Devanagari\0"
+  "Ethiopic\0"
+  "Georgian\0"
+  "Glagolitic\0"
+  "Gothic\0"
+  "Greek\0"
+  "Gujarati\0"
+  "Gurmukhi\0"
+  "Han\0"
+  "Hangul\0"
+  "Hanunoo\0"
+  "Hebrew\0"
+  "Hiragana\0"
+  "Inherited\0"
+  "Kannada\0"
+  "Katakana\0"
+  "Kharoshthi\0"
+  "Khmer\0"
+  "Lao\0"
+  "Latin\0"
+  "Limbu\0"
+  "Linear B\0"
+  "Malayalam\0"
+  "Mongolian\0"
+  "Myanmar\0"
+  "New Tai Lue\0"
+  "Nko\0"
+  "Ogham\0"
+  "Old Italic\0"
+  "Old Persian\0"
+  "Oriya\0"
+  "Osmanya\0"
+  "Phags Pa\0"
+  "Phoenician\0"
+  "Runic\0"
+  "Shavian\0"
+  "Sinhala\0"
+  "Syloti Nagri\0"
+  "Syriac\0"
+  "Tagalog\0"
+  "Tagbanwa\0"
+  "Tai Le\0"
+  "Tamil\0"
+  "Telugu\0"
+  "Thaana\0"
+  "Thai\0"
+  "Tibetan\0"
+  "Tifinagh\0"
+  "Ugaritic\0"
+  "Yi\0"
+  ;
+
+static const guint16 unicode_script_list_offsets[] =
+{
+  0,
+  7,
+  16,
+  25,
+  33,
+  42,
+  50,
+  59,
+  65,
+  85,
+  94,
+  101,
+  108,
+  118,
+  126,
+  135,
+  143,
+  154,
+  163,
+  172,
+  183,
+  190,
+  196,
+  205,
+  214,
+  218,
+  225,
+  233,
+  240,
+  249,
+  259,
+  267,
+  276,
+  287,
+  293,
+  297,
+  303,
+  309,
+  318,
+  328,
+  338,
+  346,
+  358,
+  362,
+  368,
+  379,
+  391,
+  397,
+  405,
+  414,
+  425,
+  431,
+  439,
+  447,
+  460,
+  467,
+  475,
+  484,
+  491,
+  497,
+  504,
+  511,
+  516,
+  524,
+  533,
+  542,
 };
 
 static const struct _UnicodeScript
 {
   gunichar start;
   gunichar end;
-  gint     script_index;   /* index into unicode_script_list */
+  guint8 script_index;   /* index into unicode_script_list_offsets */
 }
 unicode_scripts[] =
 {

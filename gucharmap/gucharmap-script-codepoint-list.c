@@ -49,15 +49,15 @@ find_script (const gchar *script)
   gint min, mid, max;
 
   min = 0;
-  max = sizeof (unicode_script_list) / sizeof (gchar *) - 2;  /* it’s NULL-terminated */
+  max = G_N_ELEMENTS (unicode_script_list_offsets) - 1;
 
   while (max >= min) 
     {
       mid = (min + max) / 2;
 
-      if (strcmp (script, unicode_script_list[mid]) > 0)
+      if (strcmp (script, unicode_script_list_strings + unicode_script_list_offsets[mid]) > 0)
         min = mid + 1;
-      else if (strcmp (script, unicode_script_list[mid]) < 0)
+      else if (strcmp (script, unicode_script_list_strings + unicode_script_list_offsets[mid]) < 0)
         max = mid - 1;
       else
         return mid;
@@ -386,14 +386,28 @@ gucharmap_script_codepoint_list_append_script (GucharmapScriptCodepointList  *li
 /**
  * gucharmap_unicode_list_scripts:
  *
- * Return value: NULL-terminated array of script names. These have been
- * marked for translation with N_(). Neither the list nor the scripts
- * should be modified by the caller.
+ * Return value: %NULL-terminated array of script names. These have been
+ * marked for translation with N_().
+ * The strings in the array are owned by gucharmap and should not be
+ * modified or free; the array itself however is allocated and should
+ * be freed with g_free().
+ *
+ * Returns: a newly allocated %NULL-terminated array of strings
  **/
-G_CONST_RETURN gchar **
+const gchar **
 gucharmap_unicode_list_scripts (void)
 {
-  return unicode_script_list;
+  const char **scripts;
+  guint i;
+
+  scripts = (const char **) g_new (char*, G_N_ELEMENTS (unicode_script_list_offsets) + 1);
+  for (i = 0; i < G_N_ELEMENTS (unicode_script_list_offsets); ++i)
+    {
+      scripts[i] = unicode_script_list_strings + unicode_script_list_offsets[i];
+    }
+  scripts[i] = NULL;
+
+  return scripts;
 }
 
 /**
@@ -422,7 +436,7 @@ gucharmap_unicode_get_script_for_char (gunichar wc)
       else if (wc < unicode_scripts[mid].start)
         max = mid - 1;
       else
-        return unicode_script_list[unicode_scripts[mid].script_index];
+        return unicode_script_list_strings + unicode_script_list_offsets[unicode_scripts[mid].script_index];
     }
 
   /* Unicode assigns "Common" as the script name for any character not

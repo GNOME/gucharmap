@@ -779,23 +779,43 @@ sub process_scripts_txt ($)
 
     print $out "typedef struct _UnicodeScript UnicodeScript;\n\n";
 
-    print $out "static const gchar *unicode_script_list[] =\n";
-    print $out "{\n";
+    print $out "/* for extraction by intltool */\n";
+    print $out "#if 0\n";
     my $i = 0;
     for my $script (sort keys %scripts)
     {
         $scripts{$script} = $i;
-        print $out qq/  N_("$script"),\n/;
         $i++;
+
+        print $out qq/  N_("$script"),\n/;
     }
-    print $out "  NULL\n";
+    print $out "#endif /* 0 */\n\n";
+
+    print $out "static const gchar unicode_script_list_strings[] =\n";
+    my $offset = 0;
+    my %script_offsets;
+    for my $script (sort keys %scripts)
+    {
+        printf $out (qq/  "\%s\\0"\n/, $script);
+	$script_offsets{$script} = $offset;
+	$offset += length($script) + 1;
+    }
+    print $out "  ;\n\n";
+    undef $offset;
+
+    print $out "static const guint16 unicode_script_list_offsets[] =\n";
+    print $out "{\n";
+    for my $script (sort keys %scripts)
+    {
+        printf $out (qq/  \%d,\n/, $script_offsets{$script});
+    }
     print $out "};\n\n";
 
     print $out "static const struct _UnicodeScript\n";
     print $out "{\n";
     print $out "  gunichar start;\n";
     print $out "  gunichar end;\n";
-    print $out "  gint     script_index;   /* index into unicode_script_list */\n";
+    print $out "  guint8 script_index;   /* index into unicode_script_list_offsets */\n";
     print $out "}\n";
     print $out "unicode_scripts[] =\n";
     print $out "{\n";
