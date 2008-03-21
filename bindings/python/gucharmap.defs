@@ -42,6 +42,13 @@
   (gtype-id "GUCHARMAP_TYPE_CODEPOINT_LIST")
 )
 
+(define-object BlockCodepointList
+  (in-module "Gucharmap")
+  (parent "GucharmapCodepointList")
+  (c-name "GucharmapBlockCodepointList")
+  (gtype-id "GUCHARMAP_TYPE_BLOCK_CODEPOINT_LIST")
+)
+
 (define-object ScriptChaptersModel
   (in-module "Gucharmap")
   (parent "GucharmapChaptersModel")
@@ -100,6 +107,25 @@
   (c-name "gucharmap_block_chapters_model_new")
   (is-constructor-of "GucharmapBlockChaptersModel")
   (return-type "GucharmapChaptersModel*")
+)
+
+
+
+;; From gucharmap-block-codepoint-list.h
+
+(define-function gucharmap_block_codepoint_list_get_type
+  (c-name "gucharmap_block_codepoint_list_get_type")
+  (return-type "GType")
+)
+
+(define-function gucharmap_block_codepoint_list_new
+  (c-name "gucharmap_block_codepoint_list_new")
+  (is-constructor-of "GucharmapBlockCodepointList")
+  (return-type "GucharmapCodepointList*")
+  (parameters
+    '("gunichar" "start")
+    '("gunichar" "end")
+  )
 )
 
 
@@ -419,12 +445,6 @@
   (return-type "GucharmapCodepointList*")
 )
 
-(define-method get_active_cell
-  (of-object "GucharmapChartable")
-  (c-name "gucharmap_chartable_get_active_cell")
-  (return-type "gint")
-)
-
 
 
 ;; From gucharmap-codepoint-list.h
@@ -432,16 +452,6 @@
 (define-function gucharmap_codepoint_list_get_type
   (c-name "gucharmap_codepoint_list_get_type")
   (return-type "GType")
-)
-
-(define-function gucharmap_codepoint_list_new
-  (c-name "gucharmap_codepoint_list_new")
-  (is-constructor-of "GucharmapCodepointList")
-  (return-type "GucharmapCodepointList*")
-  (parameters
-    '("gunichar" "start")
-    '("gunichar" "end")
-  )
 )
 
 (define-method get_char
@@ -734,10 +744,6 @@
 
 
 
-;; From gucharmap.h
-
-
-
 ;; From gucharmap-type-builtins.h
 
 (define-function gucharmap_chapters_mode_get_type
@@ -749,5 +755,9 @@
   (c-name "gucharmap_unicode_version_get_type")
   (return-type "GType")
 )
+
+
+
+;; From gucharmap.h
 
 
