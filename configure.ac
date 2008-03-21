@@ -65,8 +65,6 @@ then
 fi
 AM_CONDITIONAL(OS_WIN32, test "x$os_win32" = "xyes")
 
-AC_DEFINE([UNICHAR_MAX],[0x0010ffff],[The last unicode character we support])
-
 # gtk is required
 GOBJECT_REQUIRED=2.3.0
 GTK_REQUIRED=2.12.0

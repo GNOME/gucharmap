@@ -23,6 +23,9 @@
 
 #define I_(string) g_intern_static_string (string)
 
+/* The last unicode character we support */
+#define UNICHAR_MAX (0x0010FFFFUL)
+
 
 struct _GucharmapChaptersModel
 {
