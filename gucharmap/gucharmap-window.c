@@ -603,8 +603,6 @@ gucharmap_window_set_chapters_model (GucharmapWindow *guw,
         g_assert_not_reached ();
     }
 
-    g_print ("set_chapters_model mode=%d\n", mode);
-    
   gucharmap_charmap_set_chapters_model (guw->charmap, model);
   g_object_unref (model);
 }
