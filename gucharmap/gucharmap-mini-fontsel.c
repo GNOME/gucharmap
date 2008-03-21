@@ -174,7 +174,7 @@ gucharmap_mini_font_selection_class_init (GucharmapMiniFontSelectionClass *clazz
   clazz->changed = NULL;
 
   gucharmap_mini_font_selection_signals[CHANGED] =
-      g_signal_new ("changed", gucharmap_mini_font_selection_get_type (), 
+      g_signal_new (I_("changed"), gucharmap_mini_font_selection_get_type (), 
 		    G_SIGNAL_RUN_FIRST,
                     G_STRUCT_OFFSET (GucharmapMiniFontSelectionClass, changed),
                     NULL, NULL, g_cclosure_marshal_VOID__VOID,

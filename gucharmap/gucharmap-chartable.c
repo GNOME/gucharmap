@@ -1764,7 +1764,7 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
   klass->set_active_char = NULL;
 
   widget_class->activate_signal = signals[ACTIVATE] =
-    g_signal_new ("activate",
+    g_signal_new (I_("activate"),
                   G_TYPE_FROM_CLASS (object_class),
                   G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
                   G_STRUCT_OFFSET (GucharmapChartableClass, activate),
@@ -1773,7 +1773,7 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
                   G_TYPE_NONE,
                   0);
   widget_class->set_scroll_adjustments_signal =
-    g_signal_new ("set-scroll-adjustments",
+    g_signal_new (I_("set-scroll-adjustments"),
                   G_TYPE_FROM_CLASS (object_class),
                   G_SIGNAL_RUN_LAST,
                   G_STRUCT_OFFSET (GucharmapChartableClass, set_scroll_adjustments),
@@ -1783,13 +1783,13 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
                   GTK_TYPE_ADJUSTMENT, GTK_TYPE_ADJUSTMENT);
 
   signals[STATUS_MESSAGE] =
-    g_signal_new ("status-message", gucharmap_chartable_get_type (), G_SIGNAL_RUN_FIRST,
+    g_signal_new (I_("status-message"), gucharmap_chartable_get_type (), G_SIGNAL_RUN_FIRST,
                   G_STRUCT_OFFSET (GucharmapChartableClass, status_message),
                   NULL, NULL, g_cclosure_marshal_VOID__STRING, G_TYPE_NONE,
                   1, G_TYPE_STRING);
 
   signals[MOVE_CURSOR] =
-    g_signal_new ("move-cursor",
+    g_signal_new (I_("move-cursor"),
                   G_TYPE_FROM_CLASS (object_class),
                   G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
                   G_STRUCT_OFFSET (GucharmapChartableClass, move_cursor),
