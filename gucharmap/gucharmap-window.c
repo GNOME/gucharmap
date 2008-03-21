@@ -430,8 +430,8 @@ enum {
 };
 
 static void
-set_chapters_model (GucharmapWindow *guw,
-                    GucharmapChaptersMode mode)
+gucharmap_window_set_chapters_model (GucharmapWindow *guw,
+                                     GucharmapChaptersMode mode)
 {
   GucharmapChaptersModel *model = NULL;
 
@@ -451,6 +451,8 @@ set_chapters_model (GucharmapWindow *guw,
         g_assert_not_reached ();
     }
 
+    g_print ("set_chapters_model mode=%d\n", mode);
+    
   gucharmap_charmap_set_chapters_model (guw->charmap, model);
   g_object_unref (model);
 }
@@ -476,7 +478,7 @@ view_by (GtkAction        *action,
         g_assert_not_reached ();
     }
 
-  set_chapters_model (guw, mode);
+  gucharmap_window_set_chapters_model (guw, mode);
   gucharmap_settings_set_chapters_mode (mode);
 }
 
@@ -824,7 +826,7 @@ pack_stuff_in_window (GucharmapWindow *guw)
 
   gtk_widget_show (big_vbox);
 
-  set_chapters_model (guw, guw->chapters_mode);
+  gucharmap_window_set_chapters_model (guw, gucharmap_settings_get_chapters_mode ());
 
   gucharmap_charmap_set_active_character (guw->charmap,
                                           gucharmap_settings_get_last_char ());
@@ -834,10 +836,6 @@ static void
 gucharmap_window_init (GucharmapWindow *guw)
 {
   gtk_window_set_title (GTK_WINDOW (guw), _("Character Map"));
-
-  guw->chapters_mode = gucharmap_settings_get_chapters_mode ();
-
-  guw->search_dialog = NULL;
 
   gtk_window_set_icon_name (GTK_WINDOW (guw), GUCHARMAP_ICON_NAME);
 
