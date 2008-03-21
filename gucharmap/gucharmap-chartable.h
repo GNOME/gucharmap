@@ -84,7 +84,6 @@ void gucharmap_chartable_set_snap_pow2 (GucharmapChartable *chartable,
 void gucharmap_chartable_set_codepoint_list (GucharmapChartable         *chartable,
                                              GucharmapCodepointList *list);
 GucharmapCodepointList * gucharmap_chartable_get_codepoint_list (GucharmapChartable *chartable);
-gint gucharmap_chartable_get_active_cell (GucharmapChartable *chartable);
 
 G_END_DECLS
 

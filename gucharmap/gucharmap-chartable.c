@@ -2538,17 +2538,3 @@ gucharmap_chartable_get_codepoint_list (GucharmapChartable *chartable)
 
   return priv->codepoint_list;
 }
-
-/**
- * gucharmap_chartable_get_active_cell:
- * @chartable: a #GucharmapChartable
- *
- * Returns: the currently selected cell
- */
-gint
-gucharmap_chartable_get_active_cell (GucharmapChartable *chartable)
-{
-  GucharmapChartablePrivate *priv = chartable->priv;
-
-  return priv->active_cell;
-}
