@@ -451,17 +451,11 @@ gucharmap_get_nameslist_colons (gunichar uc)
   return colons;
 }
 
-#define UNICODE_VALID(Char)                   \
-    ((Char) < 0x110000 &&                     \
-    ((Char) < 0xD800 || (Char) >= 0xE000) &&  \
-    ((Char) < 0xFDD0 || (Char) > 0xFDEF) &&   \
-    ((Char) & 0xFFFF) != 0xFFFE && ((Char) & 0xFFFF) != 0xFFFF)
-
-/* an up-to-date replacement for g_unichar_validate */
+/* Wrapper, in case we want to support a newer unicode version than glib */
 gboolean
 gucharmap_unichar_validate (gunichar ch)
 {
-  return UNICODE_VALID (ch);
+  return g_unichar_validate (ch);
 }
 
 /**
