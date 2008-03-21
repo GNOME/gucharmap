@@ -641,6 +641,8 @@ _gucharmap_search_dialog_fire_search (GucharmapSearchDialog *search_dialog,
 
 
   list = gucharmap_charmap_get_book_codepoint_list (priv->guw->charmap);
+  if (!list)
+    return;
 
   if (priv->search_state == NULL
       || list != priv->search_state->list
