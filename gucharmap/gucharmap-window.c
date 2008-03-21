@@ -284,7 +284,7 @@ snap_cols_pow2 (GtkAction        *action,
                 GucharmapWindow  *guw)
 {
   gboolean is_active = gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
-  gucharmap_table_set_snap_pow2 (gucharmap_charmap_get_chartable (guw->charmap), is_active);
+  gucharmap_chartable_set_snap_pow2 (gucharmap_charmap_get_chartable (guw->charmap), is_active);
   gucharmap_settings_set_snap_pow2 (is_active);
 }
 
@@ -428,13 +428,13 @@ prev_character (GtkAction       *action,
                 GucharmapWindow *guw)
 {
   GucharmapCodepointList *codepoint_list;
-  GucharmapTable *chartable;
+  GucharmapChartable *chartable;
   gint index, start;
   gunichar wc;
 
   chartable = gucharmap_charmap_get_chartable (guw->charmap);
-  start = index = gucharmap_table_get_active_cell (chartable);
-  codepoint_list = gucharmap_table_get_codepoint_list (chartable);
+  start = index = gucharmap_chartable_get_active_cell (chartable);
+  codepoint_list = gucharmap_chartable_get_codepoint_list (chartable);
 
   do
     {
@@ -447,7 +447,7 @@ prev_character (GtkAction       *action,
     }
   while ((!gucharmap_unichar_isdefined (wc) || !gucharmap_unichar_validate (wc)) && index != start);
 
-  gucharmap_table_set_active_character (chartable, wc);
+  gucharmap_chartable_set_active_character (chartable, wc);
 }
 
 static void
@@ -455,13 +455,13 @@ next_character (GtkAction       *action,
                 GucharmapWindow *guw)
 {
   GucharmapCodepointList *codepoint_list;
-  GucharmapTable *chartable;
+  GucharmapChartable *chartable;
   gint index, start;
   gunichar wc;
 
   chartable = gucharmap_charmap_get_chartable (guw->charmap);
-  start = index = gucharmap_table_get_active_cell (chartable);
-  codepoint_list = gucharmap_table_get_codepoint_list (chartable);
+  start = index = gucharmap_chartable_get_active_cell (chartable);
+  codepoint_list = gucharmap_chartable_get_codepoint_list (chartable);
 
   do
     {
@@ -474,7 +474,7 @@ next_character (GtkAction       *action,
     }
   while ((!gucharmap_unichar_isdefined (wc) || !gucharmap_unichar_validate (wc)) && index != start);
 
-  gucharmap_table_set_active_character (chartable, wc);
+  gucharmap_chartable_set_active_character (chartable, wc);
 }
 
 static void
@@ -777,21 +777,23 @@ fontsel_changed (GucharmapMiniFontSelection *fontsel,
 {
   gchar *font_name = gucharmap_mini_font_selection_get_font_name (fontsel);
 
-  gucharmap_table_set_font (gucharmap_charmap_get_chartable (guw->charmap), font_name);
+  /* FIXMEchpe! set font in the charmap instead */
+  gucharmap_chartable_set_font (gucharmap_charmap_get_chartable (guw->charmap), font_name);
   gucharmap_settings_set_font (font_name);
 
   g_free (font_name);
 }
 
 static void
-insert_character_in_text_to_copy (GucharmapTable  *chartable, 
-                                  gunichar         wc, 
+insert_character_in_text_to_copy (GucharmapChartable *chartable,
                                   GucharmapWindow *guw)
 {
   GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
   gchar ubuf[7];
   gint pos;
+  gunichar wc;
 
+  wc = gucharmap_chartable_get_active_character (chartable);
   g_return_if_fail (gucharmap_unichar_validate (wc));
 
   /* don't do anything if text_to_copy is not active */
@@ -877,7 +879,7 @@ pack_stuff_in_window (GucharmapWindow *guw)
   GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
   GtkWidget *big_vbox;
   GtkWidget *hbox;
-  GucharmapTable *chartable;
+  GucharmapChartable *chartable;
 
   guw->charmap = GUCHARMAP_CHARMAP (gucharmap_charmap_new ());
 

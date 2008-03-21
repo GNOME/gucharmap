@@ -34,9 +34,8 @@ struct _GucharmapCharmap
   GtkHPaned parent;
 
   GucharmapChaptersView *chapters_view;
-  GucharmapTable *chartable;
-
-  GtkWidget *details;  /* GtkTextView * */
+  GucharmapChartable *chartable;
+  GtkTextView *details_view;
 
   GdkCursor *hand_cursor;
   GdkCursor *regular_cursor;
@@ -78,13 +77,6 @@ static void gucharmap_charmap_init       (GucharmapCharmap *charmap);
 G_DEFINE_TYPE (GucharmapCharmap, gucharmap_charmap, GTK_TYPE_HPANED)
 
 static void
-status_message (GucharmapCharmap *charmap, const gchar *message)
-{
-  g_signal_emit (charmap, gucharmap_charmap_signals[STATUS_MESSAGE], 
-                 0, message);
-}
-
-static void 
 gucharmap_charmap_finalize (GObject *object)
 {
   GucharmapCharmap *charmap = GUCHARMAP_CHARMAP (object);
@@ -122,8 +114,6 @@ gucharmap_charmap_class_init (GucharmapCharmapClass *clazz)
 
   object_class->set_property = gucharmap_charmap_set_property;
   object_class->finalize = gucharmap_charmap_finalize;
-
-  clazz->status_message = NULL;
 
   gucharmap_charmap_signals[STATUS_MESSAGE] =
       g_signal_new (I_("status-message"), gucharmap_charmap_get_type (),
@@ -360,7 +350,7 @@ set_details (GucharmapCharmap *charmap,
   gunichar *ucs;
   gunichar2 *utf16;
 
-  buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (charmap->details));
+  buffer = gtk_text_view_get_buffer (charmap->details_view);
   gtk_text_buffer_set_text (buffer, "", 0);
 
   gtk_text_buffer_get_start_iter (buffer, &iter);
@@ -553,21 +543,32 @@ gucharmap_active_char_save (gpointer last_char)
 }
 
 static void
-active_char_set (GtkWidget        *widget, 
-                 gunichar          wc, 
-                 GucharmapCharmap *charmap)
+chartable_status_message (GucharmapCharmap *charmap,
+                          const gchar *message)
+{
+  g_signal_emit (charmap, gucharmap_charmap_signals[STATUS_MESSAGE], 
+                 0, message);
+}
+
+static void
+chartable_sync_active_char (GtkWidget *widget,
+                            GParamSpec *pspec,
+                            GucharmapCharmap *charmap)
 {
   GString *gs;
   const gchar *temp;
   const gchar **temps;
   gint i;
+  gunichar wc;
+
+  wc = gucharmap_chartable_get_active_character (charmap->chartable);
 
   if (charmap->showing_details_page)
     set_details (charmap, wc);
 
   g_idle_add (gucharmap_active_char_save, GUINT_TO_POINTER(wc));
 
-  gs = g_string_new (NULL);
+  gs = g_string_sized_new (256);
   g_string_append_printf (gs, "U+%4.4X %s", wc, 
                           gucharmap_get_unicode_name (wc));
 
@@ -595,7 +596,7 @@ active_char_set (GtkWidget        *widget,
       g_free (temps);
     }
 
-  status_message (charmap, gs->str);
+  chartable_status_message (charmap, gs->str);
   g_string_free (gs, TRUE);
 }
 
@@ -606,13 +607,13 @@ create_tags (GucharmapCharmap *charmap)
   GtkTextBuffer *buffer;
   gint default_font_size;
 
-  buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (charmap->details));
+  buffer = gtk_text_view_get_buffer (charmap->details_view);
 
   default_font_size = pango_font_description_get_size (
           GTK_WIDGET (charmap)->style->font_desc);
 
-  gtk_text_buffer_create_tag (buffer, "gimongous", 
-                              "size", 8 * default_font_size, 
+  gtk_text_buffer_create_tag (buffer, "gimongous",
+                              "size", 8 * default_font_size,
                               "left-margin", PANGO_PIXELS (5 * default_font_size),
                               NULL);
   gtk_text_buffer_create_tag (buffer, "bold",
@@ -644,7 +645,7 @@ follow_if_link (GucharmapCharmap *charmap,
       if (uc != (gunichar)(-1)) 
         {
           g_signal_emit (charmap, gucharmap_charmap_signals[LINK_CLICKED], 0, 
-                         gucharmap_table_get_active_character (charmap->chartable), 
+                         gucharmap_chartable_get_active_character (charmap->chartable), 
                          uc);
           gucharmap_charmap_go_to_character (charmap, uc);
           break;
@@ -726,9 +727,9 @@ set_cursor_if_appropriate (GucharmapCharmap *charmap,
   GtkTextIter iter;
   gboolean hovering_over_link = FALSE;
 
-  buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (charmap->details));
+  buffer = gtk_text_view_get_buffer (charmap->details_view);
 
-  gtk_text_view_get_iter_at_location (GTK_TEXT_VIEW (charmap->details), 
+  gtk_text_view_get_iter_at_location (charmap->details_view,
                                       &iter, x, y);
 
   tags = gtk_text_iter_get_tags (&iter);
@@ -753,9 +754,9 @@ set_cursor_if_appropriate (GucharmapCharmap *charmap,
       charmap->hovering_over_link = hovering_over_link;
 
       if (hovering_over_link)
-        gdk_window_set_cursor (gtk_text_view_get_window (GTK_TEXT_VIEW (charmap->details), GTK_TEXT_WINDOW_TEXT), charmap->hand_cursor);
+        gdk_window_set_cursor (gtk_text_view_get_window (charmap->details_view, GTK_TEXT_WINDOW_TEXT), charmap->hand_cursor);
       else
-        gdk_window_set_cursor (gtk_text_view_get_window (GTK_TEXT_VIEW (charmap->details), GTK_TEXT_WINDOW_TEXT), charmap->regular_cursor);
+        gdk_window_set_cursor (gtk_text_view_get_window (charmap->details_view, GTK_TEXT_WINDOW_TEXT), charmap->regular_cursor);
     }
 
   if (tags) 
@@ -797,40 +798,6 @@ details_visibility_notify_event (GtkWidget *text_view,
   return FALSE;
 }
 
-static GtkWidget *
-make_details_page (GucharmapCharmap *charmap)
-{
-  GtkWidget *scrolled_window = NULL;
-
-  scrolled_window = gtk_scrolled_window_new (NULL, NULL);
-  gtk_widget_show (scrolled_window);
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
-                                  GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-  gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolled_window), 
-                                       GTK_SHADOW_ETCHED_IN);
-
-  charmap->details = gtk_text_view_new ();
-  gtk_widget_show (charmap->details);
-  gtk_text_view_set_editable (GTK_TEXT_VIEW (charmap->details), FALSE);
-  gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (charmap->details), 
-                               GTK_WRAP_WORD);
-
-  g_signal_connect (G_OBJECT (charmap->details), "key-press-event",
-                    G_CALLBACK (details_key_press_event), charmap);
-  g_signal_connect (G_OBJECT (charmap->details), "event-after",
-                    G_CALLBACK (details_event_after), charmap);
-  g_signal_connect (G_OBJECT (charmap->details), "motion-notify-event", 
-                    G_CALLBACK (details_motion_notify_event), charmap);
-  g_signal_connect (G_OBJECT (charmap->details), "visibility-notify-event", 
-                    G_CALLBACK (details_visibility_notify_event), charmap);
-
-  create_tags (charmap);
-
-  gtk_container_add (GTK_CONTAINER (scrolled_window), charmap->details);
-
-  return scrolled_window;
-}
-
 static void
 notebook_switch_page (GtkNotebook *notebook,
                       GtkNotebookPage *page /* useless */,
@@ -840,40 +807,14 @@ notebook_switch_page (GtkNotebook *notebook,
   charmap->showing_details_page = (page_num == 1);
 
   if (charmap->showing_details_page)
-    set_details (charmap, gucharmap_table_get_active_character (charmap->chartable));
+    set_details (charmap, gucharmap_chartable_get_active_character (charmap->chartable));
   else
     {
       GtkTextBuffer *buffer;
 
-      buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (charmap->details));
+      buffer = gtk_text_view_get_buffer (charmap->details_view);
       gtk_text_buffer_set_text (buffer, "", 0);
     }
-}
-
-static GtkWidget *
-make_chartable_pane (GucharmapCharmap *charmap)
-{
-  GtkWidget *notebook;
-
-  notebook = gtk_notebook_new ();
-  gtk_widget_show (notebook);
-
-  charmap->chartable = GUCHARMAP_TABLE (gucharmap_table_new ());
-
-  gtk_widget_show (GTK_WIDGET (charmap->chartable));
-  g_signal_connect (G_OBJECT (charmap->chartable), "set-active-char", 
-                    G_CALLBACK (active_char_set), charmap);
-  g_signal_connect_swapped (G_OBJECT (charmap->chartable), "status-message", 
-                            G_CALLBACK (status_message), charmap);
-
-  gtk_notebook_append_page (
-          GTK_NOTEBOOK (notebook), GTK_WIDGET (charmap->chartable),
-          gtk_label_new_with_mnemonic (_("Characte_r Table")));
-  gtk_notebook_append_page (
-          GTK_NOTEBOOK (notebook), make_details_page (charmap), 
-          gtk_label_new_with_mnemonic (_("Character _Details")));
-
-  return notebook;
 }
 
 static void
@@ -887,22 +828,22 @@ chapters_view_selection_changed_cb (GtkTreeSelection *selection,
     return;
 
   codepoint_list = gucharmap_chapters_view_get_codepoint_list (charmap->chapters_view);
-  gucharmap_table_set_codepoint_list (charmap->chartable, codepoint_list);
-  // FIXME unref
+  gucharmap_chartable_set_codepoint_list (charmap->chartable, codepoint_list);
+  g_object_unref (codepoint_list);
 }
 
 static void
 gucharmap_charmap_init (GucharmapCharmap *charmap)
 {
-  GtkWidget *scrolled_window, *view;
+  GtkWidget *scrolled_window, *view, *notebook, *chartable, *textview;
   GtkTreeSelection *selection;
-  GtkWidget *pane2;
 
   /* FIXME: move this to realize */
   charmap->hand_cursor = gdk_cursor_new (GDK_HAND2);
   charmap->regular_cursor = gdk_cursor_new (GDK_XTERM);
   charmap->hovering_over_link = FALSE;
 
+  /* Left pane */
   scrolled_window = gtk_scrolled_window_new (NULL, NULL);
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
                                   GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
@@ -920,10 +861,70 @@ gucharmap_charmap_init (GucharmapCharmap *charmap)
   gtk_paned_pack1 (GTK_PANED (charmap), scrolled_window, FALSE, TRUE);
   gtk_widget_show (scrolled_window);
 
-  pane2 = make_chartable_pane (charmap);
-  gtk_paned_pack2 (GTK_PANED (charmap), pane2, TRUE, TRUE);
-  g_signal_connect (pane2, "switch-page",
+  /* Right pane */
+  notebook = gtk_notebook_new ();
+
+  /* Chartable page */
+  scrolled_window = gtk_scrolled_window_new (NULL, NULL);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
+                                  GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
+  gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolled_window),
+                                       GTK_SHADOW_NONE);
+
+  chartable = gucharmap_chartable_new ();
+  charmap->chartable = GUCHARMAP_CHARTABLE (chartable);
+
+  g_signal_connect_swapped (chartable, "status-message",
+                            G_CALLBACK (chartable_status_message), charmap);
+  g_signal_connect (chartable, "notify::active-character",
+                    G_CALLBACK (chartable_sync_active_char), charmap);
+
+  gtk_container_add (GTK_CONTAINER (scrolled_window), chartable);
+  gtk_widget_show (chartable);
+
+  gtk_notebook_append_page (GTK_NOTEBOOK (notebook),
+                            scrolled_window,
+                            gtk_label_new_with_mnemonic (_("Characte_r Table")));
+  gtk_widget_show (scrolled_window);
+
+  /* Details page */
+  scrolled_window = gtk_scrolled_window_new (NULL, NULL);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
+                                  GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+  gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolled_window), 
+                                       GTK_SHADOW_NONE);
+
+  textview = gtk_text_view_new ();
+  charmap->details_view = GTK_TEXT_VIEW (textview);
+  gtk_text_view_set_editable (GTK_TEXT_VIEW (textview), FALSE);
+  gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (textview),
+                               GTK_WRAP_WORD);
+
+  g_signal_connect (textview, "key-press-event",
+                    G_CALLBACK (details_key_press_event), charmap);
+  g_signal_connect (textview, "event-after",
+                    G_CALLBACK (details_event_after), charmap);
+  g_signal_connect (textview, "motion-notify-event",
+                    G_CALLBACK (details_motion_notify_event), charmap);
+  g_signal_connect (textview, "visibility-notify-event",
+                    G_CALLBACK (details_visibility_notify_event), charmap);
+
+  create_tags (charmap);
+
+  gtk_container_add (GTK_CONTAINER (scrolled_window), textview);
+  gtk_widget_show (textview);
+
+  gtk_notebook_append_page (GTK_NOTEBOOK (notebook),
+                            scrolled_window,
+                            gtk_label_new_with_mnemonic (_("Character _Details")));
+  gtk_widget_show (scrolled_window);
+
+  gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), 0);
+  g_signal_connect (notebook, "switch-page",
                     G_CALLBACK (notebook_switch_page), charmap);
+
+  gtk_paned_pack2 (GTK_PANED (charmap), notebook, TRUE, TRUE);
+  gtk_widget_show (notebook);
 }
 
 GtkWidget *
@@ -936,7 +937,7 @@ void
 gucharmap_charmap_set_font (GucharmapCharmap *charmap, 
                             const gchar *font_name)
 {
-  gucharmap_table_set_font (charmap->chartable, font_name);
+  gucharmap_chartable_set_font (charmap->chartable, font_name);
 }
 
 void
@@ -952,7 +953,7 @@ gucharmap_charmap_go_to_character (GucharmapCharmap *charmap,
     g_warning ("gucharmap_chapters_view_select_character failed (U+%04X)\n", wc);
 
   if (wc <= UNICHAR_MAX)
-    gucharmap_table_set_active_character (charmap->chartable, wc);
+    gucharmap_chartable_set_active_character (charmap->chartable, wc);
 }
 
 /**
@@ -961,7 +962,7 @@ gucharmap_charmap_go_to_character (GucharmapCharmap *charmap,
  *
  * Returns: the #GucharmapChartable in @charmap
  */
-GucharmapTable *
+GucharmapChartable *
 gucharmap_charmap_get_chartable (GucharmapCharmap *charmap)
 {
   return charmap->chartable;
@@ -978,7 +979,7 @@ gucharmap_charmap_set_chapters_model (GucharmapCharmap  *charmap,
     return;
 
   if (charmap->last_character_set)
-    wc = gucharmap_table_get_active_character (charmap->chartable);
+    wc = gucharmap_chartable_get_active_character (charmap->chartable);
   else
     wc = gucharmap_settings_get_last_char ();
 

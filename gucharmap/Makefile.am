@@ -40,7 +40,6 @@ libgucharmap_la_SOURCES = \
 	gucharmap-script-codepoint-list.c gucharmap-script-codepoint-list.h \
 	gucharmap-search-dialog.h gucharmap-search-dialog.c \
 	gucharmap-settings.h gucharmap-settings.c \
-	gucharmap-table.c gucharmap-table.h \
 	gucharmap-unicode-info.c gucharmap-unicode-info.h \
 	gucharmap-window.c gucharmap-window.h \
 	unicode-blocks.h unicode-categories.h unicode-names.h \
@@ -84,7 +83,6 @@ libgucharmapinclude_HEADERS = \
 	gucharmap-script-codepoint-list.h \
 	gucharmap-search-dialog.h \
 	gucharmap-settings.h \
-	gucharmap-table.h \
 	gucharmap-unicode-info.h \
 	gucharmap-window.h \
 	$(NULL)

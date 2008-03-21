@@ -20,12 +20,11 @@
 #define GUCHARMAP_CHARMAP_H
 
 #include <gtk/gtk.h>
-#include <gucharmap/gucharmap-table.h>
+#include <gucharmap/gucharmap-chartable.h>
 #include <gucharmap/gucharmap-chapters-model.h>
 #include <gucharmap/gucharmap-chapters-view.h>
 
 G_BEGIN_DECLS
-
 
 #define GUCHARMAP_CHARMAP(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), \
                                 gucharmap_charmap_get_type (), \
@@ -49,7 +48,8 @@ void                  gucharmap_charmap_set_font           (GucharmapCharmap  *c
                                                             const gchar       *font_name);
 void                  gucharmap_charmap_go_to_character    (GucharmapCharmap  *charmap,
                                                             gunichar           uc);
-GucharmapTable *      gucharmap_charmap_get_chartable      (GucharmapCharmap  *charmap);
+
+GucharmapChartable *      gucharmap_charmap_get_chartable     (GucharmapCharmap  *charmap);
 
 GucharmapChaptersView *  gucharmap_charmap_get_chapters_view  (GucharmapCharmap       *charmap);
 
@@ -63,4 +63,3 @@ GucharmapCodepointList * gucharmap_charmap_get_book_codepoint_list (GucharmapCha
 G_END_DECLS
 
 #endif  /* #ifndef GUCHARMAP_CHARMAP_H */
-

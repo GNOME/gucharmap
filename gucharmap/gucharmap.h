@@ -20,7 +20,7 @@
 #ifndef GUCHARMAP_H
 #define GUCHARMAP_H
 
-#include <gucharmap/gucharmap-table.h>
+#include <gucharmap/gucharmap-chartable.h>
 #include <gucharmap/gucharmap-charmap.h>
 #include <gucharmap/gucharmap-window.h>
 #include <gucharmap/gucharmap-unicode-info.h>
