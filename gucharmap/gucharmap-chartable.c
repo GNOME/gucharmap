@@ -51,6 +51,8 @@ enum
   PROP_ACTIVE_CHAR,
   PROP_CODEPOINT_LIST,
   PROP_SNAP_POW2,
+  PROP_ZOOM_ENABLED,
+  PROP_ZOOM_SHOWING
 };
 
 static void gucharmap_chartable_class_init (GucharmapChartableClass *klass);
@@ -141,6 +143,68 @@ gucharmap_chartable_emit_status_message (GucharmapChartable *chartable,
                                          const char *message)
 {
   g_signal_emit (chartable, signals[STATUS_MESSAGE], 0, message);
+}
+
+
+static void
+get_root_coords_at_active_char (GucharmapChartable *chartable, 
+                                gint *x_root, 
+                                gint *y_root)
+{
+  GtkWidget *widget = GTK_WIDGET (chartable);
+  gint x, y;
+  gint row, col;
+
+  gdk_window_get_origin (widget->window, &x, &y);
+
+  row = (chartable->active_cell - chartable->page_first_cell) / chartable->cols;
+  col = _gucharmap_chartable_cell_column (chartable, chartable->active_cell);
+
+  *x_root = x + _gucharmap_chartable_x_offset (chartable, col);
+  *y_root = y + _gucharmap_chartable_y_offset (chartable, row);
+}
+
+/* retunrs the coords of the innermost corner of the square */
+static void
+get_appropriate_active_char_corner_xy (GucharmapChartable *chartable, gint *x, gint *y)
+{
+  gint x0, y0;
+  gint row, col;
+
+  get_root_coords_at_active_char (chartable, &x0, &y0);
+
+  row = (chartable->active_cell - chartable->page_first_cell) / chartable->cols;
+  col = _gucharmap_chartable_cell_column (chartable, chartable->active_cell);
+
+  *x = x0;
+  *y = y0;
+
+  if (row < chartable->rows / 2)
+    *y += _gucharmap_chartable_row_height (chartable, row);
+
+  if (col < chartable->cols / 2)
+    *x += _gucharmap_chartable_column_width (chartable, col);
+}
+
+static void
+get_appropriate_upper_left_xy (GucharmapChartable *chartable, 
+                               gint width,  gint height,
+                               gint x_root, gint y_root,
+                               gint *x,     gint *y)
+{
+  gint row, col;
+
+  row = (chartable->active_cell - chartable->page_first_cell) / chartable->cols;
+  col = _gucharmap_chartable_cell_column (chartable, chartable->active_cell);
+
+  *x = x_root;
+  *y = y_root;
+
+  if (row >= chartable->rows / 2)
+    *y -= height;
+
+  if (col >= chartable->cols / 2)
+    *x -= width;
 }
 
 /* depends on directionality */
@@ -420,27 +484,6 @@ create_glyph_pixmap (GucharmapChartable *chartable,
   return pixmap;
 }
 
-static void
-get_appropriate_upper_left_xy (GucharmapChartable *chartable, 
-                               gint width,  gint height,
-                               gint x_root, gint y_root,
-                               gint *x,     gint *y)
-{
-  gint row, col;
-
-  row = (chartable->active_cell - chartable->page_first_cell) / chartable->cols;
-  col = _gucharmap_chartable_cell_column (chartable, chartable->active_cell);
-
-  *x = x_root;
-  *y = y_root;
-
-  if (row >= chartable->rows / 2)
-    *y -= height;
-
-  if (col >= chartable->cols / 2)
-    *x -= width;
-}
-
 /* places the zoom window toward the inside of the coordinates */
 static void
 place_zoom_window (GucharmapChartable *chartable, gint x_root, gint y_root)
@@ -448,7 +491,8 @@ place_zoom_window (GucharmapChartable *chartable, gint x_root, gint y_root)
   GdkPixmap *pixmap;
   gint width, height, x, y;
 
-  g_return_if_fail (chartable->zoom_window != NULL);
+  if (!chartable->zoom_window)
+    return;
 
   gtk_image_get_pixmap (GTK_IMAGE (chartable->zoom_image), &pixmap, NULL);
   if (!pixmap)
@@ -479,7 +523,7 @@ make_zoom_window (GucharmapChartable *chartable)
   GtkWidget *widget = GTK_WIDGET (chartable);
 
   /* if there is already a zoom window, do nothing */
-  if (chartable->zoom_window)
+  if (chartable->zoom_window || !chartable->zoom_mode_enabled)
     return;
 
   chartable->zoom_window = gtk_window_new (GTK_WINDOW_POPUP);
@@ -508,6 +552,34 @@ destroy_zoom_window (GucharmapChartable *chartable)
       gdk_window_set_cursor (widget->window, NULL);
       gtk_widget_destroy (zoom_window);
     }
+}
+
+static void
+gucharmap_chartable_show_zoom (GucharmapChartable *chartable)
+{
+  gint x, y;
+
+  if (!chartable->zoom_mode_enabled)
+    return;
+
+
+  make_zoom_window (chartable);
+  update_zoom_window (chartable);
+
+  get_appropriate_active_char_corner_xy (chartable, &x, &y);
+  place_zoom_window (chartable, x, y);
+
+  gtk_widget_show (chartable->zoom_window);
+
+  g_object_notify (G_OBJECT (chartable), "zoom-showing");
+}
+
+static void
+gucharmap_chartable_hide_zoom (GucharmapChartable *chartable)
+{
+  destroy_zoom_window (chartable);
+
+  g_object_notify (G_OBJECT (chartable), "zoom-showing");
 }
 
 static void
@@ -885,46 +957,6 @@ redraw_rows (GucharmapChartable *chartable, gint row_offset)
     }
 }
 
-static void
-get_root_coords_at_active_char (GucharmapChartable *chartable, 
-                                gint *x_root, 
-                                gint *y_root)
-{
-  GtkWidget *widget = GTK_WIDGET (chartable);
-  gint x, y;
-  gint row, col;
-
-  gdk_window_get_origin (widget->window, &x, &y);
-
-  row = (chartable->active_cell - chartable->page_first_cell) / chartable->cols;
-  col = _gucharmap_chartable_cell_column (chartable, chartable->active_cell);
-
-  *x_root = x + _gucharmap_chartable_x_offset (chartable, col);
-  *y_root = y + _gucharmap_chartable_y_offset (chartable, row);
-}
-
-/* retunrs the coords of the innermost corner of the square */
-static void
-get_appropriate_active_char_corner_xy (GucharmapChartable *chartable, gint *x, gint *y)
-{
-  gint x0, y0;
-  gint row, col;
-
-  get_root_coords_at_active_char (chartable, &x0, &y0);
-
-  row = (chartable->active_cell - chartable->page_first_cell) / chartable->cols;
-  col = _gucharmap_chartable_cell_column (chartable, chartable->active_cell);
-
-  *x = x0;
-  *y = y0;
-
-  if (row < chartable->rows / 2)
-    *y += _gucharmap_chartable_row_height (chartable, row);
-
-  if (col < chartable->cols / 2)
-    *x += _gucharmap_chartable_column_width (chartable, col);
-}
-
 /* Redraws whatever needs to be redrawn, in the character table and
  * everything, and exposes what needs to be exposed. */
 void
@@ -1055,15 +1087,20 @@ gucharmap_chartable_button_press (GtkWidget *widget,
   else if (event->button == 3)
     {
       gucharmap_chartable_set_active_cell (chartable, get_cell_at_xy (chartable, event->x, event->y));
+      _gucharmap_chartable_redraw (chartable, FALSE); /* FIXMEchpe */
 
-      make_zoom_window (chartable);
-      _gucharmap_chartable_redraw (chartable, FALSE);
+      if (chartable->zoom_mode_enabled)
+      {
+        make_zoom_window (chartable);
 
-      if (chartable->active_cell == chartable->old_active_cell)
-        update_zoom_window (chartable); 
+        /* FIXME: shouldn't this be "!=" ? */
+        if (chartable->active_cell == chartable->old_active_cell)
+          update_zoom_window (chartable); 
 
-      place_zoom_window (chartable, event->x_root, event->y_root);
-      gtk_widget_show (chartable->zoom_window);
+        place_zoom_window (chartable, event->x_root, event->y_root);
+        gtk_widget_show (chartable->zoom_window);
+        g_object_notify (G_OBJECT (chartable), "zoom-showing");
+      }
     }
 
   /* XXX: [need to return false so it gets drag events] */
@@ -1080,8 +1117,8 @@ gucharmap_chartable_button_release (GtkWidget *widget,
   gboolean (* button_press_event) (GtkWidget *, GdkEventButton *) =
     GTK_WIDGET_CLASS (gucharmap_chartable_parent_class)->button_release_event;
 
-  if (!chartable->zoom_mode_enabled && event->button == 3)
-    destroy_zoom_window (chartable);
+  if (event->button == 3)
+    gucharmap_chartable_hide_zoom (chartable);
 
   if (button_press_event)
     return button_press_event (widget, event);
@@ -1232,7 +1269,7 @@ gucharmap_chartable_focus_out_event (GtkWidget *widget,
 {
   GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (widget);
 
-  gucharmap_chartable_set_zoom_enabled (chartable, FALSE);
+  gucharmap_chartable_hide_zoom (chartable);
 
   if (chartable->pixmap != NULL)
     draw_and_expose_cell (chartable, chartable->active_cell);
@@ -1254,7 +1291,7 @@ gucharmap_chartable_key_press_event (GtkWidget *widget,
   switch (event->keyval)
     {
       case GDK_Shift_L: case GDK_Shift_R:
-        gucharmap_chartable_set_zoom_enabled (chartable, TRUE);
+        gucharmap_chartable_show_zoom (chartable);
         break;
 
       /* pass on other keys, like tab and stuff that shifts focus */
@@ -1280,7 +1317,7 @@ gucharmap_chartable_key_release_event (GtkWidget *widget,
       case GDK_Shift_R:
       case GDK_ISO_Next_Group:
       case GDK_ISO_Prev_Group:
-        gucharmap_chartable_set_zoom_enabled (chartable, FALSE);
+        gucharmap_chartable_hide_zoom (chartable);
         break;
     }
 
@@ -1633,7 +1670,7 @@ gucharmap_chartable_init (GucharmapChartable *chartable)
   chartable->active_cell = 0;
   chartable->rows = 1;
   chartable->cols = 1;
-  chartable->zoom_mode_enabled = FALSE;
+  chartable->zoom_mode_enabled = TRUE;
   chartable->zoom_window = NULL;
   chartable->zoom_image = NULL;
   chartable->snap_pow2_enabled = FALSE;
@@ -1678,6 +1715,8 @@ gucharmap_chartable_finalize (GObject *object)
   if (chartable->codepoint_list)
     g_object_unref (chartable->codepoint_list);
 
+  destroy_zoom_window (chartable);
+
   G_OBJECT_CLASS (gucharmap_chartable_parent_class)->finalize (object);
 }
 
@@ -1699,6 +1738,10 @@ gucharmap_chartable_set_property (GObject *object,
     case PROP_SNAP_POW2:
       gucharmap_chartable_set_snap_pow2 (chartable, g_value_get_boolean (value));
       break;
+    case PROP_ZOOM_ENABLED:
+      gucharmap_chartable_set_zoom_enabled (chartable, g_value_get_boolean (value));
+      break;
+    case PROP_ZOOM_SHOWING: /* not writable */
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
@@ -1722,6 +1765,12 @@ gucharmap_chartable_get_property (GObject *object,
       break;
     case PROP_SNAP_POW2:
       g_value_set_boolean (value, chartable->snap_pow2_enabled);
+      break;
+    case PROP_ZOOM_ENABLED:
+      g_value_set_boolean (value, chartable->zoom_mode_enabled);
+      break;
+    case PROP_ZOOM_SHOWING:
+      g_value_set_boolean (value, chartable->zoom_window != NULL);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -1831,6 +1880,26 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
      g_param_spec_boolean ("snap-power-2", NULL, NULL,
                            FALSE,
                            G_PARAM_READWRITE |
+                           G_PARAM_STATIC_NAME |
+                           G_PARAM_STATIC_NICK |
+                           G_PARAM_STATIC_BLURB));
+
+  g_object_class_install_property
+    (object_class,
+     PROP_ZOOM_ENABLED,
+     g_param_spec_boolean ("zoom-enabled", NULL, NULL,
+                           FALSE,
+                           G_PARAM_READWRITE |
+                           G_PARAM_STATIC_NAME |
+                           G_PARAM_STATIC_NICK |
+                           G_PARAM_STATIC_BLURB));
+
+  g_object_class_install_property
+    (object_class,
+     PROP_ZOOM_SHOWING,
+     g_param_spec_boolean ("zoom-showing", NULL, NULL,
+                           FALSE,
+                           G_PARAM_READABLE |
                            G_PARAM_STATIC_NAME |
                            G_PARAM_STATIC_NICK |
                            G_PARAM_STATIC_BLURB));
@@ -1948,7 +2017,7 @@ void
 gucharmap_chartable_set_zoom_enabled (GucharmapChartable *chartable,
                                       gboolean enabled)
 {
-  gint x, y;
+  GObject *object;
 
   g_return_if_fail (GUCHARMAP_IS_CHARTABLE (chartable));
 
@@ -1956,22 +2025,29 @@ gucharmap_chartable_set_zoom_enabled (GucharmapChartable *chartable,
   if (chartable->zoom_mode_enabled == enabled)
     return;
 
+  object = G_OBJECT (chartable);
+  g_object_freeze_notify (object);
+
   chartable->zoom_mode_enabled = enabled;
+  if (!enabled)
+    gucharmap_chartable_hide_zoom (chartable);
 
-  if (enabled)
-    {
-      make_zoom_window (chartable);
-      update_zoom_window (chartable);
+  g_object_notify (object, "zoom-enabled");
+  g_object_thaw_notify (object);
+}
 
-      get_appropriate_active_char_corner_xy (chartable, &x, &y);
-      place_zoom_window (chartable, x, y);
+/**
+ * gucharmap_chartable_get_zoom_enabled:
+ * @chartable: a #GucharmapChartable
+ *
+ * Returns: whether zooming is enabled
+ */
+gboolean
+gucharmap_chartable_get_zoom_enabled (GucharmapChartable *chartable)
+{
+  g_return_val_if_fail (GUCHARMAP_IS_CHARTABLE (chartable), FALSE);
 
-      gtk_widget_show (chartable->zoom_window);
-    }
-  else
-    {
-      destroy_zoom_window (chartable);
-    }
+  return chartable->zoom_mode_enabled;
 }
 
 /**
