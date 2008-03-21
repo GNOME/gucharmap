@@ -544,107 +544,6 @@ static const char ui_info [] =
     "</menu>"
   "</menubar>";
 
-static GtkWidget *
-make_menu (GucharmapWindow *guw)
-{
-  /* tooltips are NULL because they are never actually shown in the program */
-  const GtkActionEntry menu_entries[] =
-  {
-    { "File", NULL, N_("_File"), NULL, NULL, NULL },
-    { "View", NULL, N_("_View"), NULL, NULL, NULL },
-    { "Search", NULL, N_("_Search"), NULL, NULL, NULL },
-    { "Go", NULL, N_("_Go"), NULL, NULL, NULL },
-    { "Help", NULL, N_("_Help"), NULL, NULL, NULL },
-
-    { "Close", GTK_STOCK_CLOSE, NULL, NULL,
-      NULL, G_CALLBACK (gtk_main_quit) },
-
-    { "ZoomIn", GTK_STOCK_ZOOM_IN, NULL, NULL,
-      NULL, G_CALLBACK (font_bigger) },
-    { "ZoomOut", GTK_STOCK_ZOOM_OUT, NULL, NULL,
-      NULL, G_CALLBACK (font_smaller) },
-    { "NormalSize", GTK_STOCK_ZOOM_100, NULL, NULL,
-      NULL, G_CALLBACK (font_default) },
-
-    { "Find", GTK_STOCK_FIND, NULL, NULL,
-      NULL, G_CALLBACK (search_find) },
-    { "FindNext", GTK_STOCK_FIND, N_("Find _Next"), "<control>G",
-      NULL, G_CALLBACK (search_find_next) },
-    { "FindPrevious", GTK_STOCK_FIND, N_("Find _Previous"), "<shift><control>G",
-      NULL, G_CALLBACK (search_find_prev) },
-
-    { "NextCharacter", NULL, N_("_Next Character"), "<control>N",
-      NULL, G_CALLBACK (next_or_prev_character) },
-    { "PreviousCharacter", NULL, N_("_Previous Character"), "<control>P",
-      NULL, G_CALLBACK (next_or_prev_character) },
-    { "NextChapter", NULL, N_("Next Script"), "<control>Page_Down",
-      NULL, G_CALLBACK (next_chapter) },
-    { "PreviousChapter", NULL, N_("Previous Script"), "<control>Page_Up",
-      NULL, G_CALLBACK (prev_chapter) },
-
-    { "HelpContents", GTK_STOCK_HELP, N_("_Contents"), "F1",
-      NULL, G_CALLBACK (help_contents) },
-    { "About", GTK_STOCK_ABOUT, N_("_About"), NULL,
-      NULL, G_CALLBACK (help_about) },
-
-  #ifdef DEBUG_chpe
-    { "MoveNextScreen", NULL, "Move window to next screen", NULL,
-      NULL, G_CALLBACK (move_to_next_screen_cb) },
-  #endif
-  };
-  const GtkRadioActionEntry radio_menu_entries[] =
-  {
-    { "ByScript", NULL, N_("By _Script"), NULL,
-      NULL, VIEW_BY_SCRIPT },
-    { "ByUnicodeBlock", NULL, N_("By _Unicode Block"), NULL,
-      NULL, VIEW_BY_BLOCK }
-  };
-  const GtkToggleActionEntry toggle_menu_entries[] =
-  {
-    { "SnapColumns", NULL, N_("Snap _Columns to Power of Two"), NULL,
-      NULL,
-      G_CALLBACK (snap_cols_pow2), FALSE },
-  };
-  GtkWidget *menubar;
-  GtkAction *action;
-
-  guw->uimanager = gtk_ui_manager_new();
-
-  gtk_window_add_accel_group ( GTK_WINDOW (guw),
-  			       gtk_ui_manager_get_accel_group (guw->uimanager) );
-  
-  guw->action_group = gtk_action_group_new ("gucharmap_actions");
-  gtk_action_group_set_translation_domain (guw->action_group, GETTEXT_PACKAGE);
-
-  gtk_action_group_add_actions (guw->action_group,
-  				menu_entries,
-				G_N_ELEMENTS (menu_entries),
-				guw);
-  gtk_action_group_add_radio_actions (guw->action_group,
-  				      radio_menu_entries,
-				      G_N_ELEMENTS (radio_menu_entries),
-				      gucharmap_settings_get_chapters_mode(),
-				      G_CALLBACK (view_by),
-				      guw);
-  gtk_action_group_add_toggle_actions (guw->action_group,
-  				       toggle_menu_entries,
-				       G_N_ELEMENTS (toggle_menu_entries),
-				       guw);
-
-  action = gtk_action_group_get_action (guw->action_group, "SnapColumns");
-  gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
-                                gucharmap_settings_get_snap_pow2 ());
-
-  gtk_ui_manager_insert_action_group (guw->uimanager, guw->action_group, 0);
-  g_object_unref (guw->action_group);
-  
-  gtk_ui_manager_add_ui_from_string (guw->uimanager, ui_info, strlen (ui_info), NULL);
-  
-  menubar = gtk_ui_manager_get_widget (guw->uimanager, "/MenuBar");
-
-  return menubar;
-}
-
 static void
 fontsel_changed (GucharmapMiniFontSelection *fontsel, 
                  GucharmapWindow            *guw)
@@ -737,31 +636,125 @@ gucharmap_window_init (GucharmapWindow *guw)
   GtkWidget *button;
   GtkWidget *label;
   GucharmapChartable *chartable;
+  /* tooltips are NULL because they are never actually shown in the program */
+  const GtkActionEntry menu_entries[] =
+  {
+    { "File", NULL, N_("_File"), NULL, NULL, NULL },
+    { "View", NULL, N_("_View"), NULL, NULL, NULL },
+    { "Search", NULL, N_("_Search"), NULL, NULL, NULL },
+    { "Go", NULL, N_("_Go"), NULL, NULL, NULL },
+    { "Help", NULL, N_("_Help"), NULL, NULL, NULL },
+
+    { "Close", GTK_STOCK_CLOSE, NULL, NULL,
+      NULL, G_CALLBACK (gtk_main_quit) },
+
+    { "ZoomIn", GTK_STOCK_ZOOM_IN, NULL, NULL,
+      NULL, G_CALLBACK (font_bigger) },
+    { "ZoomOut", GTK_STOCK_ZOOM_OUT, NULL, NULL,
+      NULL, G_CALLBACK (font_smaller) },
+    { "NormalSize", GTK_STOCK_ZOOM_100, NULL, NULL,
+      NULL, G_CALLBACK (font_default) },
+
+    { "Find", GTK_STOCK_FIND, NULL, NULL,
+      NULL, G_CALLBACK (search_find) },
+    { "FindNext", GTK_STOCK_FIND, N_("Find _Next"), "<control>G",
+      NULL, G_CALLBACK (search_find_next) },
+    { "FindPrevious", GTK_STOCK_FIND, N_("Find _Previous"), "<shift><control>G",
+      NULL, G_CALLBACK (search_find_prev) },
+
+    { "NextCharacter", NULL, N_("_Next Character"), "<control>N",
+      NULL, G_CALLBACK (next_or_prev_character) },
+    { "PreviousCharacter", NULL, N_("_Previous Character"), "<control>P",
+      NULL, G_CALLBACK (next_or_prev_character) },
+    { "NextChapter", NULL, N_("Next Script"), "<control>Page_Down",
+      NULL, G_CALLBACK (next_chapter) },
+    { "PreviousChapter", NULL, N_("Previous Script"), "<control>Page_Up",
+      NULL, G_CALLBACK (prev_chapter) },
+
+    { "HelpContents", GTK_STOCK_HELP, N_("_Contents"), "F1",
+      NULL, G_CALLBACK (help_contents) },
+    { "About", GTK_STOCK_ABOUT, N_("_About"), NULL,
+      NULL, G_CALLBACK (help_about) },
+
+  #ifdef DEBUG_chpe
+    { "MoveNextScreen", NULL, "Move window to next screen", NULL,
+      NULL, G_CALLBACK (move_to_next_screen_cb) },
+  #endif
+  };
+  const GtkRadioActionEntry radio_menu_entries[] =
+  {
+    { "ByScript", NULL, N_("By _Script"), NULL,
+      NULL, VIEW_BY_SCRIPT },
+    { "ByUnicodeBlock", NULL, N_("By _Unicode Block"), NULL,
+      NULL, VIEW_BY_BLOCK }
+  };
+  const GtkToggleActionEntry toggle_menu_entries[] =
+  {
+    { "SnapColumns", NULL, N_("Snap _Columns to Power of Two"), NULL,
+      NULL,
+      G_CALLBACK (snap_cols_pow2), FALSE },
+  };
+  GtkWidget *menubar;
+  GtkAction *action;
 
   gtk_window_set_title (GTK_WINDOW (guw), _("Character Map"));
   gtk_window_set_icon_name (GTK_WINDOW (guw), GUCHARMAP_ICON_NAME);
 
+  /* UI manager setup */
+  guw->uimanager = gtk_ui_manager_new();
+
+  gtk_window_add_accel_group ( GTK_WINDOW (guw),
+  			       gtk_ui_manager_get_accel_group (guw->uimanager) );
+  
+  guw->action_group = gtk_action_group_new ("gucharmap_actions");
+  gtk_action_group_set_translation_domain (guw->action_group, GETTEXT_PACKAGE);
+
+  gtk_action_group_add_actions (guw->action_group,
+  				menu_entries,
+				G_N_ELEMENTS (menu_entries),
+				guw);
+  gtk_action_group_add_radio_actions (guw->action_group,
+  				      radio_menu_entries,
+				      G_N_ELEMENTS (radio_menu_entries),
+				      gucharmap_settings_get_chapters_mode(),
+				      G_CALLBACK (view_by),
+				      guw);
+  gtk_action_group_add_toggle_actions (guw->action_group,
+  				       toggle_menu_entries,
+				       G_N_ELEMENTS (toggle_menu_entries),
+				       guw);
+
+  action = gtk_action_group_get_action (guw->action_group, "SnapColumns");
+  gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
+                                gucharmap_settings_get_snap_pow2 ());
+
+  gtk_ui_manager_insert_action_group (guw->uimanager, guw->action_group, 0);
+  g_object_unref (guw->action_group);
+  
+  gtk_ui_manager_add_ui_from_string (guw->uimanager, ui_info, strlen (ui_info), NULL);
+  
+  /* Now the widgets */
+  big_vbox = gtk_vbox_new (FALSE, 0);
+  gtk_container_add (GTK_CONTAINER (guw), big_vbox);
+
+  /* First the menubar */
+  menubar = gtk_ui_manager_get_widget (guw->uimanager, "/MenuBar");
+  gtk_box_pack_start (GTK_BOX (big_vbox), menubar, FALSE, FALSE, 0);
+
+  /* The font selector */
+  guw->fontsel = gucharmap_mini_font_selection_new ();
+  g_signal_connect (guw->fontsel, "changed", G_CALLBACK (fontsel_changed), guw);
+  gtk_box_pack_start (GTK_BOX (big_vbox), guw->fontsel, FALSE, FALSE, 0);
+  gtk_widget_show (GTK_WIDGET (guw->fontsel));
+
+  /* The charmap */
   guw->charmap = GUCHARMAP_CHARMAP (gucharmap_charmap_new ());
   g_signal_connect (guw->charmap, "notify::active-character",
                     G_CALLBACK (charmap_sync_active_character), guw);
 
-  big_vbox = gtk_vbox_new (FALSE, 0);
-  gtk_container_add (GTK_CONTAINER (guw), big_vbox);
-
-  gtk_box_pack_start (GTK_BOX (big_vbox), make_menu (guw), FALSE, FALSE, 0);
-
-  hbox = gtk_hbox_new (FALSE, 0);
-  gtk_box_pack_start (GTK_BOX (big_vbox), hbox, FALSE, FALSE, 0);
-  gtk_widget_show (hbox);
-
   gtk_box_pack_start (GTK_BOX (big_vbox), GTK_WIDGET (guw->charmap),
                       TRUE, TRUE, 0);
   gtk_widget_show (GTK_WIDGET (guw->charmap));
-
-  guw->fontsel = gucharmap_mini_font_selection_new ();
-  g_signal_connect (guw->fontsel, "changed", G_CALLBACK (fontsel_changed), guw);
-  gtk_box_pack_start (GTK_BOX (hbox), guw->fontsel, FALSE, FALSE, 0);
-  gtk_widget_show (GTK_WIDGET (guw->fontsel));
 
   /* Text to copy entry + button */
   hbox = gtk_hbox_new (FALSE, 6);
@@ -772,16 +765,14 @@ gucharmap_window_init (GucharmapWindow *guw)
   gtk_widget_show (label);
 
   guw->text_to_copy_entry = gtk_entry_new ();
+  gtk_label_set_mnemonic_widget (GTK_LABEL (label), guw->text_to_copy_entry);
   g_signal_connect (G_OBJECT (guw->text_to_copy_entry), "changed",
                     G_CALLBACK (entry_changed_sensitize_button), button);
 
   gtk_box_pack_start (GTK_BOX (hbox), guw->text_to_copy_entry, TRUE, TRUE, 0);
   gtk_widget_show (guw->text_to_copy_entry);
 
-  gtk_label_set_mnemonic_widget (GTK_LABEL (label), guw->text_to_copy_entry);
-
-  /* the copy button */
-  button = gtk_button_new_from_stock (GTK_STOCK_COPY); 
+  button = gtk_button_new_from_stock (GTK_STOCK_COPY);
   gtk_widget_set_tooltip_text (button, _("Copy to the clipboard."));
   g_signal_connect (G_OBJECT (button), "clicked",
                     G_CALLBACK (edit_copy), guw);
@@ -796,7 +787,7 @@ gucharmap_window_init (GucharmapWindow *guw)
   chartable =gucharmap_charmap_get_chartable (guw->charmap);
   g_signal_connect (chartable, "activate", G_CALLBACK (insert_character_in_text_to_copy), guw);
 
-  
+  /* Finally the statusbar */
   hbox = gtk_hbox_new (FALSE, 0);
   gtk_box_pack_start (GTK_BOX (big_vbox), hbox, FALSE, FALSE, 0);
 
