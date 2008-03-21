@@ -16,7 +16,7 @@
  * 59 Temple Place, Suite 330, Boston, MA 02110-1301  USA
  */
 
-#include "config.h"
+#include <config.h>
 #include <string.h>
 #include <gtk/gtk.h>
 #include "gucharmap-settings.h"
