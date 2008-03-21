@@ -731,36 +731,13 @@ make_menu (GucharmapWindow *guw)
   			       GTK_ACTION (toggle_menu));
   gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (toggle_menu),
                                 gucharmap_settings_get_snap_pow2 ());
-  switch (priv->chapters_mode)
-    {
-      case CHAPTERS_SCRIPT:
-	break;
-      
-      case CHAPTERS_BLOCK:
-        chapters_set_labels (_("Next Block"), _("Previous Block"), guw);
-	break;
-      
-      default:
-        g_assert_not_reached ();
-    }
+  gucharmap_window_set_file_menu_visible (guw, TRUE);
 
-  gtk_ui_manager_insert_action_group (priv->uimanager,
-    					priv->action_group,
-					0);
+  gtk_ui_manager_insert_action_group (priv->uimanager, priv->action_group, 0);
   
-  if ( !gtk_ui_manager_add_ui_from_string (priv->uimanager,
-                                           ui_info,
-                                           -1,
-                                           NULL) )
-    {
-      g_message ("building menus failed.");
-  }
+  gtk_ui_manager_add_ui_from_string (priv->uimanager, ui_info, strlen (ui_info), NULL);
   
   menubar = gtk_ui_manager_get_widget (priv->uimanager, "/MenuBar");
-
-  gtk_widget_show_all (menubar);
-
-  gucharmap_window_set_file_menu_visible (guw, TRUE);
 
   return menubar;
 }
