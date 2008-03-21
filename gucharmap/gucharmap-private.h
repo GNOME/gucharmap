@@ -79,38 +79,6 @@ struct _GucharmapChaptersViewClass
 };
 
 
-struct _GucharmapCharmap
-{
-  GtkHPaned parent;
-
-  GucharmapChaptersView *chapters_view;
-  GucharmapChartable *chartable;
-  GtkTextView *details_view;
-  GtkTextTag *text_tag_gimongous;
-  GtkTextTag *text_tag_big;
-
-  PangoFontDescription *font_desc;
-
-  GdkCursor *hand_cursor;
-  GdkCursor *regular_cursor;
-
-  guint hovering_over_link   : 1;
-  guint showing_details_page : 1;
-  guint last_character_set   : 1;
-};
-
-
-struct _GucharmapCharmapClass
-{
-  GtkHPanedClass parent_class;
-
-  void (* status_message) (GucharmapCharmap *charmap, const gchar *message);
-  void (* link_clicked) (GucharmapCharmap *charmap, 
-                         gunichar old_character,
-                         gunichar new_character);
-};
-
-
 struct _GucharmapChartableCellAccessible
 {
   AtkObject parent;

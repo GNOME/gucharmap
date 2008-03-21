@@ -30,6 +30,23 @@
 #include "gucharmap-marshal.h"
 #include "gucharmap-private.h"
 
+struct _GucharmapCharmapPrivate {
+  GucharmapChaptersView *chapters_view;
+  GucharmapChartable *chartable;
+  GtkTextView *details_view;
+  GtkTextTag *text_tag_gimongous;
+  GtkTextTag *text_tag_big;
+
+  PangoFontDescription *font_desc;
+
+  GdkCursor *hand_cursor;
+  GdkCursor *regular_cursor;
+
+  guint hovering_over_link   : 1;
+  guint showing_details_page : 1;
+  guint last_character_set   : 1;
+};
+
 enum
 {
   STATUS_MESSAGE,
@@ -55,12 +72,13 @@ static void
 gucharmap_charmap_finalize (GObject *object)
 {
   GucharmapCharmap *charmap = GUCHARMAP_CHARMAP (object);
+  GucharmapCharmapPrivate *priv = charmap->priv;
 
-  gdk_cursor_unref (charmap->hand_cursor);
-  gdk_cursor_unref (charmap->regular_cursor);
+  gdk_cursor_unref (priv->hand_cursor);
+  gdk_cursor_unref (priv->regular_cursor);
 
-  if (charmap->font_desc)
-    pango_font_description_free (charmap->font_desc);
+  if (priv->font_desc)
+    pango_font_description_free (priv->font_desc);
 
   G_OBJECT_CLASS (gucharmap_charmap_parent_class)->finalize (object);
 }
@@ -72,13 +90,14 @@ gucharmap_charmap_get_property (GObject *object,
                                 GParamSpec *pspec)
 {
   GucharmapCharmap *charmap = GUCHARMAP_CHARMAP (object);
+  GucharmapCharmapPrivate *priv = charmap->priv;
 
   switch (prop_id) {
     case PROP_CHAPTERS_MODEL:
       g_value_set_object (value, gucharmap_charmap_get_chapters_model (charmap));
       break;
     case PROP_ACTIVE_CHAPTER:
-      g_value_take_string (value, gucharmap_chapters_view_get_selected (charmap->chapters_view));
+      g_value_take_string (value, gucharmap_chapters_view_get_selected (priv->chapters_view));
       break;
     case PROP_ACTIVE_CHARACTER:
       g_value_set_uint (value, gucharmap_charmap_get_active_character (charmap));
@@ -96,13 +115,14 @@ gucharmap_charmap_set_property (GObject *object,
                                 GParamSpec *pspec)
 {
   GucharmapCharmap *charmap = GUCHARMAP_CHARMAP (object);
+  GucharmapCharmapPrivate *priv = charmap->priv;
 
   switch (prop_id) {
     case PROP_CHAPTERS_MODEL:
       gucharmap_charmap_set_chapters_model (charmap, g_value_get_object (value));
       break;
     case PROP_ACTIVE_CHAPTER:
-      gucharmap_chapters_view_set_selected (charmap->chapters_view,
+      gucharmap_chapters_view_set_selected (priv->chapters_view,
                                             g_value_get_string (value));
       break;
     case PROP_ACTIVE_CHARACTER:
@@ -172,26 +192,28 @@ gucharmap_charmap_class_init (GucharmapCharmapClass *clazz)
                         G_PARAM_STATIC_NICK |
                         G_PARAM_STATIC_BLURB));
 
+  g_type_class_add_private (object_class, sizeof (GucharmapCharmapPrivate));
 }
 
 static void
 gucharmap_charmap_update_text_tags (GucharmapCharmap *charmap)
 {
+  GucharmapCharmapPrivate *priv = charmap->priv;
   GtkStyle *style;
   int default_font_size;
 
-  style = gtk_widget_get_style (GTK_WIDGET (charmap->details_view));
+  style = gtk_widget_get_style (GTK_WIDGET (priv->details_view));
   default_font_size = pango_font_description_get_size (style->font_desc);
 
-  if (charmap->font_desc)
-    g_object_set (charmap->text_tag_gimongous, "font-desc", charmap->font_desc, NULL);
+  if (priv->font_desc)
+    g_object_set (priv->text_tag_gimongous, "font-desc", priv->font_desc, NULL);
 
   /* FIXME: do we need to consider whether the font size is absolute or not? */
-  g_object_set (charmap->text_tag_gimongous,
+  g_object_set (priv->text_tag_gimongous,
                 "size", 8 * default_font_size,
                 "left-margin", PANGO_PIXELS (5 * default_font_size),
                 NULL);
-  g_object_set (charmap->text_tag_big,
+  g_object_set (priv->text_tag_big,
                 "size", default_font_size * 5 / 4,
                 NULL);
 }
@@ -200,14 +222,16 @@ static void
 gucharmap_charmap_set_font_desc_internal (GucharmapCharmap *charmap, 
                                           PangoFontDescription *font_desc)
 {
-  if (charmap->font_desc)
-    pango_font_description_free (charmap->font_desc);
+  GucharmapCharmapPrivate *priv = charmap->priv;
 
-  charmap->font_desc = font_desc; /* adopted */
+  if (priv->font_desc)
+    pango_font_description_free (priv->font_desc);
 
-  gucharmap_chartable_set_font_desc (charmap->chartable, font_desc);
+  priv->font_desc = font_desc; /* adopted */
 
-  if (gtk_widget_get_style (GTK_WIDGET (charmap->details_view)))
+  gucharmap_chartable_set_font_desc (priv->chartable, font_desc);
+
+  if (gtk_widget_get_style (GTK_WIDGET (priv->details_view)))
     gucharmap_charmap_update_text_tags (charmap);
 }
 
@@ -413,6 +437,7 @@ static void
 set_details (GucharmapCharmap *charmap,
              gunichar uc)
 {
+  GucharmapCharmapPrivate *priv = charmap->priv;
   GtkTextBuffer *buffer;
   GtkTextIter iter;
   GString *gstemp;
@@ -426,7 +451,7 @@ set_details (GucharmapCharmap *charmap,
   gunichar2 *utf16;
   GucharmapUnicodeVersion version;
 
-  buffer = gtk_text_view_get_buffer (charmap->details_view);
+  buffer = gtk_text_view_get_buffer (priv->details_view);
   gtk_text_buffer_set_text (buffer, "", 0);
 
   gtk_text_buffer_get_start_iter (buffer, &iter);
@@ -631,18 +656,19 @@ chartable_sync_active_char (GtkWidget *widget,
                             GParamSpec *pspec,
                             GucharmapCharmap *charmap)
 {
+  GucharmapCharmapPrivate *priv = charmap->priv;
   GString *gs;
   const gchar *temp;
   const gchar **temps;
   gint i;
   gunichar wc;
 
-  wc = gucharmap_chartable_get_active_character (charmap->chartable);
+  wc = gucharmap_chartable_get_active_character (priv->chartable);
 
   /* Forward the notification */
   g_object_notify (G_OBJECT (charmap), "active-character");
 
-  if (charmap->showing_details_page)
+  if (priv->showing_details_page)
     set_details (charmap, wc);
 
   gs = g_string_sized_new (256);
@@ -681,6 +707,7 @@ static void
 follow_if_link (GucharmapCharmap *charmap,
                 GtkTextIter *iter)
 {
+  GucharmapCharmapPrivate *priv = charmap->priv;
   GSList *tags = NULL, *tagp = NULL;
 
   tags = gtk_text_iter_get_tags (iter);
@@ -696,7 +723,7 @@ follow_if_link (GucharmapCharmap *charmap,
       if (uc != (gunichar)(-1)) 
         {
           g_signal_emit (charmap, gucharmap_charmap_signals[LINK_CLICKED], 0, 
-                         gucharmap_chartable_get_active_character (charmap->chartable), 
+                         gucharmap_chartable_get_active_character (priv->chartable),
                          uc);
           gucharmap_charmap_set_active_character (charmap, uc);
           break;
@@ -725,6 +752,7 @@ details_key_press_event (GtkWidget *text_view,
 
   switch (event->keyval)
     {
+      /* FIXMEchpe */
       case GDK_Return: 
       case GDK_KP_Enter:
         buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_view));
@@ -781,14 +809,15 @@ set_cursor_if_appropriate (GucharmapCharmap *charmap,
                            gint x,
                            gint y)
 {
+  GucharmapCharmapPrivate *priv = charmap->priv;
   GSList *tags = NULL, *tagp = NULL;
   GtkTextBuffer *buffer;
   GtkTextIter iter;
   gboolean hovering_over_link = FALSE;
 
-  buffer = gtk_text_view_get_buffer (charmap->details_view);
+  buffer = gtk_text_view_get_buffer (priv->details_view);
 
-  gtk_text_view_get_iter_at_location (charmap->details_view,
+  gtk_text_view_get_iter_at_location (priv->details_view,
                                       &iter, x, y);
 
   tags = gtk_text_iter_get_tags (&iter);
@@ -808,14 +837,14 @@ set_cursor_if_appropriate (GucharmapCharmap *charmap,
         }
     }
 
-  if (hovering_over_link != charmap->hovering_over_link)
+  if (hovering_over_link != priv->hovering_over_link)
     {
-      charmap->hovering_over_link = hovering_over_link;
+      priv->hovering_over_link = hovering_over_link;
 
       if (hovering_over_link)
-        gdk_window_set_cursor (gtk_text_view_get_window (charmap->details_view, GTK_TEXT_WINDOW_TEXT), charmap->hand_cursor);
+        gdk_window_set_cursor (gtk_text_view_get_window (priv->details_view, GTK_TEXT_WINDOW_TEXT), priv->hand_cursor);
       else
-        gdk_window_set_cursor (gtk_text_view_get_window (charmap->details_view, GTK_TEXT_WINDOW_TEXT), charmap->regular_cursor);
+        gdk_window_set_cursor (gtk_text_view_get_window (priv->details_view, GTK_TEXT_WINDOW_TEXT), priv->regular_cursor);
     }
 
   if (tags) 
@@ -863,15 +892,17 @@ notebook_switch_page (GtkNotebook *notebook,
                       guint page_num,
                       GucharmapCharmap *charmap)
 {
-  charmap->showing_details_page = (page_num == 1);
+  GucharmapCharmapPrivate *priv = charmap->priv;
 
-  if (charmap->showing_details_page)
-    set_details (charmap, gucharmap_chartable_get_active_character (charmap->chartable));
+  priv->showing_details_page = (page_num == 1);
+
+  if (priv->showing_details_page)
+    set_details (charmap, gucharmap_chartable_get_active_character (priv->chartable));
   else
     {
       GtkTextBuffer *buffer;
 
-      buffer = gtk_text_view_get_buffer (charmap->details_view);
+      buffer = gtk_text_view_get_buffer (priv->details_view);
       gtk_text_buffer_set_text (buffer, "", 0);
     }
 }
@@ -880,14 +911,15 @@ static void
 chapters_view_selection_changed_cb (GtkTreeSelection *selection,
                                     GucharmapCharmap *charmap)
 {
+  GucharmapCharmapPrivate *priv = charmap->priv;
   GucharmapCodepointList *codepoint_list;
   GtkTreeIter iter;
 
   if (!gtk_tree_selection_get_selected (selection, NULL, &iter))
     return;
 
-  codepoint_list = gucharmap_chapters_view_get_codepoint_list (charmap->chapters_view);
-  gucharmap_chartable_set_codepoint_list (charmap->chartable, codepoint_list);
+  codepoint_list = gucharmap_chapters_view_get_codepoint_list (priv->chapters_view);
+  gucharmap_chartable_set_codepoint_list (priv->chartable, codepoint_list);
   g_object_unref (codepoint_list);
 
   g_object_notify (G_OBJECT (charmap), "active-chapter");
@@ -896,14 +928,17 @@ chapters_view_selection_changed_cb (GtkTreeSelection *selection,
 static void
 gucharmap_charmap_init (GucharmapCharmap *charmap)
 {
+  GucharmapCharmapPrivate *priv;
   GtkWidget *scrolled_window, *view, *notebook, *chartable, *textview;
   GtkTreeSelection *selection;
   GtkTextBuffer *buffer;
 
+  priv = charmap->priv = G_TYPE_INSTANCE_GET_PRIVATE (charmap, GUCHARMAP_TYPE_CHARMAP, GucharmapCharmapPrivate);
+
   /* FIXME: move this to realize */
-  charmap->hand_cursor = gdk_cursor_new (GDK_HAND2);
-  charmap->regular_cursor = gdk_cursor_new (GDK_XTERM);
-  charmap->hovering_over_link = FALSE;
+  priv->hand_cursor = gdk_cursor_new (GDK_HAND2);
+  priv->regular_cursor = gdk_cursor_new (GDK_XTERM);
+  priv->hovering_over_link = FALSE;
 
   /* Left pane */
   scrolled_window = gtk_scrolled_window_new (NULL, NULL);
@@ -913,7 +948,7 @@ gucharmap_charmap_init (GucharmapCharmap *charmap)
                                        GTK_SHADOW_ETCHED_IN);
 
   view = gucharmap_chapters_view_new ();
-  charmap->chapters_view = GUCHARMAP_CHAPTERS_VIEW (view);
+  priv->chapters_view = GUCHARMAP_CHAPTERS_VIEW (view);
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (view));
   g_signal_connect (selection, "changed",
                     G_CALLBACK (chapters_view_selection_changed_cb), charmap);
@@ -934,7 +969,7 @@ gucharmap_charmap_init (GucharmapCharmap *charmap)
                                        GTK_SHADOW_NONE);
 
   chartable = gucharmap_chartable_new ();
-  charmap->chartable = GUCHARMAP_CHARTABLE (chartable);
+  priv->chartable = GUCHARMAP_CHARTABLE (chartable);
 
   g_signal_connect_swapped (chartable, "status-message",
                             G_CALLBACK (chartable_status_message), charmap);
@@ -957,7 +992,7 @@ gucharmap_charmap_init (GucharmapCharmap *charmap)
                                        GTK_SHADOW_NONE);
 
   textview = gtk_text_view_new ();
-  charmap->details_view = GTK_TEXT_VIEW (textview);
+  priv->details_view = GTK_TEXT_VIEW (textview);
   gtk_text_view_set_editable (GTK_TEXT_VIEW (textview), FALSE);
   gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (textview),
                                GTK_WRAP_WORD);
@@ -973,11 +1008,11 @@ gucharmap_charmap_init (GucharmapCharmap *charmap)
   g_signal_connect (textview, "visibility-notify-event",
                     G_CALLBACK (details_visibility_notify_event), charmap);
 
-  buffer = gtk_text_view_get_buffer (charmap->details_view);
-  charmap->text_tag_gimongous =
+  buffer = gtk_text_view_get_buffer (priv->details_view);
+  priv->text_tag_gimongous =
     gtk_text_buffer_create_tag (buffer, "gimongous",
                                 NULL);
-  charmap->text_tag_big =
+  priv->text_tag_big =
     gtk_text_buffer_create_tag (buffer, "big",
                                 NULL);
   gtk_text_buffer_create_tag (buffer, "bold",
@@ -1019,14 +1054,17 @@ void
 gucharmap_charmap_set_font (GucharmapCharmap *charmap, 
                             const gchar *font_name)
 {
+  GucharmapCharmapPrivate *priv;
   PangoFontDescription *font_desc;
 
   g_return_if_fail (GUCHARMAP_IS_CHARMAP (charmap));
   g_return_if_fail (font_name != NULL);
 
+  priv = charmap->priv;
+
   font_desc = pango_font_description_from_string (font_name);
-  if (charmap->font_desc &&
-      pango_font_description_equal (font_desc, charmap->font_desc))
+  if (priv->font_desc &&
+      pango_font_description_equal (font_desc, priv->font_desc))
     {
       pango_font_description_free (font_desc);
       return;
@@ -1046,11 +1084,14 @@ void
 gucharmap_charmap_set_font_desc (GucharmapCharmap *charmap,
                                  PangoFontDescription *font_desc)
 {
+  GucharmapCharmapPrivate *priv;
+
   g_return_if_fail (GUCHARMAP_IS_CHARMAP (charmap));
   g_return_if_fail (font_desc != NULL);
 
-  if (charmap->font_desc &&
-      pango_font_description_equal (font_desc, charmap->font_desc))
+  priv = charmap->priv;
+  if (priv->font_desc &&
+      pango_font_description_equal (font_desc, priv->font_desc))
     return;
 
   gucharmap_charmap_set_font_desc_internal (charmap,
@@ -1061,34 +1102,43 @@ void
 gucharmap_charmap_set_active_character (GucharmapCharmap *charmap,
                                         gunichar          wc)
 {
-  if (wc > UNICHAR_MAX)
+  GucharmapCharmapPrivate *priv;
+
+   if (wc > UNICHAR_MAX)
     return;
 
-  if (!gucharmap_chapters_view_select_character (charmap->chapters_view, wc)) {
+  priv = charmap->priv;
+  if (!gucharmap_chapters_view_select_character (priv->chapters_view, wc)) {
     g_warning ("gucharmap_chapters_view_select_character failed (U+%04X)\n", wc);
     return;
   }
 
-  gucharmap_chartable_set_active_character (charmap->chartable, wc);
+  gucharmap_chartable_set_active_character (priv->chartable, wc);
 }
 
 gunichar
 gucharmap_charmap_get_active_character (GucharmapCharmap *charmap)
 {
-  return gucharmap_chartable_get_active_character (charmap->chartable);
+  GucharmapCharmapPrivate *priv = charmap->priv;
+
+  return gucharmap_chartable_get_active_character (priv->chartable);
 }
 
 void
 gucharmap_charmap_set_active_chapter (GucharmapCharmap *charmap,
                                       const gchar *chapter)
 {
-  gucharmap_chapters_view_set_selected (charmap->chapters_view, chapter);
+  GucharmapCharmapPrivate *priv = charmap->priv;
+
+  gucharmap_chapters_view_set_selected (priv->chapters_view, chapter);
 }
 
 char *
 gucharmap_charmap_get_active_chapter (GucharmapCharmap *charmap)
 {
-  return gucharmap_chapters_view_get_selected (charmap->chapters_view);
+  GucharmapCharmapPrivate *priv = charmap->priv;
+
+  return gucharmap_chapters_view_get_selected (priv->chapters_view);
 }
 
 /**
@@ -1100,13 +1150,16 @@ gucharmap_charmap_get_active_chapter (GucharmapCharmap *charmap)
 GucharmapChartable *
 gucharmap_charmap_get_chartable (GucharmapCharmap *charmap)
 {
-  return charmap->chartable;
+  GucharmapCharmapPrivate *priv = charmap->priv;
+
+  return priv->chartable;
 }
 
 void
 gucharmap_charmap_set_chapters_model (GucharmapCharmap  *charmap,
                                       GucharmapChaptersModel *model)
 {
+  GucharmapCharmapPrivate *priv = charmap->priv;
   GObject *object = G_OBJECT (charmap);
   gunichar wc;
 
@@ -1114,18 +1167,18 @@ gucharmap_charmap_set_chapters_model (GucharmapCharmap  *charmap,
 
   g_object_notify (G_OBJECT (charmap), "chapters-model");
 
-  gucharmap_chapters_view_set_model (charmap->chapters_view, model);
+  gucharmap_chapters_view_set_model (priv->chapters_view, model);
   if (!model) {
     g_object_thaw_notify (object);
     return;
   }
 
-  if (charmap->last_character_set) {
-    wc = gucharmap_chartable_get_active_character (charmap->chartable);
+  if (priv->last_character_set) {
+    wc = gucharmap_chartable_get_active_character (priv->chartable);
     gucharmap_charmap_set_active_character (charmap, wc);
   }
 
-  charmap->last_character_set = TRUE;
+  priv->last_character_set = TRUE;
 
   g_object_thaw_notify (object);
 }
@@ -1133,19 +1186,25 @@ gucharmap_charmap_set_chapters_model (GucharmapCharmap  *charmap,
 GucharmapChaptersModel *
 gucharmap_charmap_get_chapters_model (GucharmapCharmap *charmap)
 {
-  return gucharmap_chapters_view_get_model (charmap->chapters_view);
+  GucharmapCharmapPrivate *priv = charmap->priv;
+
+  return gucharmap_chapters_view_get_model (priv->chapters_view);
 }
 
 GucharmapChaptersView *
 gucharmap_charmap_get_chapters_view  (GucharmapCharmap *charmap)
 {
-  return charmap->chapters_view;
+  GucharmapCharmapPrivate *priv = charmap->priv;
+
+  return priv->chapters_view;
 }
 
 GucharmapCodepointList *
 gucharmap_charmap_get_book_codepoint_list (GucharmapCharmap *charmap)
 {
+  GucharmapCharmapPrivate *priv = charmap->priv;
+
   GucharmapCodepointList *codepoint_list;
-  codepoint_list = (GucharmapCodepointList *) gucharmap_chapters_view_get_book_codepoint_list (charmap->chapters_view);
+  codepoint_list = (GucharmapCodepointList *) gucharmap_chapters_view_get_book_codepoint_list (priv->chapters_view);
   return g_object_ref (codepoint_list);
 }

@@ -36,9 +36,6 @@ typedef struct _GucharmapCodepointListClass GucharmapCodepointListClass;
 typedef struct _GucharmapChartable GucharmapChartable;
 typedef struct _GucharmapChartableClass GucharmapChartableClass;
 
-typedef struct _GucharmapCharmap GucharmapCharmap;
-typedef struct _GucharmapCharmapClass GucharmapCharmapClass;
-
 typedef struct _GucharmapChaptersView GucharmapChaptersView;
 typedef struct _GucharmapChaptersViewClass GucharmapChaptersViewClass;
 

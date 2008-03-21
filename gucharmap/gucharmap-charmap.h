@@ -38,6 +38,32 @@ G_BEGIN_DECLS
 #define GUCHARMAP_IS_CHARMAP_CLASS(k)      (G_TYPE_CHECK_CLASS_TYPE ((k), GUCHARMAP_TYPE_CHARMAP))
 #define GUCHARMAP_CHARMAP_GET_CLASS(o)     (G_TYPE_INSTANCE_GET_CLASS ((o), GUCHARMAP_TYPE_CHARMAP, GucharmapCharmapClass))
 
+typedef struct _GucharmapCharmap        GucharmapCharmap;
+typedef struct _GucharmapCharmapPrivate GucharmapCharmapPrivate;
+typedef struct _GucharmapCharmapClass   GucharmapCharmapClass;
+
+struct _GucharmapCharmap
+{
+  GtkHPaned parent;
+
+  /*< private >*/
+  GucharmapCharmapPrivate *priv;
+};
+
+struct _GucharmapCharmapClass
+{
+  GtkHPanedClass parent_class;
+
+  void (* status_message) (GucharmapCharmap *charmap, const gchar *message);
+  void (* link_clicked) (GucharmapCharmap *charmap, 
+                         gunichar old_character,
+                         gunichar new_character);
+  void (* _gucharmap_reserved0) (void);
+  void (* _gucharmap_reserved1) (void);
+  void (* _gucharmap_reserved2) (void);
+  void (* _gucharmap_reserved3) (void);
+};
+
 GType                 gucharmap_charmap_get_type           (void);
 
 GtkWidget *           gucharmap_charmap_new                (void);
