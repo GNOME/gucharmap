@@ -42,6 +42,11 @@ struct _ScriptCodepointListPrivate
             (G_TYPE_INSTANCE_GET_PRIVATE ((o), gucharmap_script_codepoint_list_get_type (), \
                                           ScriptCodepointListPrivate))
 
+static void gucharmap_script_codepoint_list_class_init (GucharmapScriptCodepointListClass *klass);
+static void gucharmap_script_codepoint_list_init       (GucharmapScriptCodepointList      *list);
+
+G_DEFINE_TYPE (GucharmapScriptCodepointList, gucharmap_script_codepoint_list, gucharmap_codepoint_list_get_type ())
+
 static gint
 find_script (const gchar *script)
 {
@@ -232,13 +237,30 @@ get_last_index (GucharmapCodepointList *list)
 }
 
 static void
-finalize (GObject *object)
+clear_ranges (GPtrArray *ranges)
+{
+  guint i, n;
+
+  n = ranges->len;
+  for (i = 0; i < n; ++i)
+    g_free (g_ptr_array_index (ranges, i));
+
+  g_ptr_array_set_size (ranges, 0);
+}
+
+static void
+gucharmap_script_codepoint_list_finalize (GObject *object)
 {
   GucharmapScriptCodepointList *guscl = GUCHARMAP_SCRIPT_CODEPOINT_LIST (object);
   ScriptCodepointListPrivate *priv = GUCHARMAP_SCRIPT_CODEPOINT_LIST_GET_PRIVATE (guscl);
 
   if (priv->ranges)
-    g_ptr_array_free (priv->ranges, TRUE);
+    {
+      clear_ranges (priv->ranges);
+      g_ptr_array_free (priv->ranges, TRUE);
+    }
+
+  G_OBJECT_CLASS (gucharmap_script_codepoint_list_parent_class)->finalize (object);
 }
 
 static void
@@ -253,7 +275,7 @@ gucharmap_script_codepoint_list_class_init (GucharmapScriptCodepointListClass *c
   codepoint_list_class->get_index = get_index;
   codepoint_list_class->get_last_index = get_last_index;
   
-  gobject_class->finalize = finalize;
+  gobject_class->finalize = gucharmap_script_codepoint_list_finalize;
 }
 
 static void 
@@ -262,8 +284,6 @@ gucharmap_script_codepoint_list_init (GucharmapScriptCodepointList *guscl)
   ScriptCodepointListPrivate *priv = GUCHARMAP_SCRIPT_CODEPOINT_LIST_GET_PRIVATE (guscl);
   priv->ranges = NULL;
 }
-
-G_DEFINE_TYPE (GucharmapScriptCodepointList, gucharmap_script_codepoint_list, gucharmap_codepoint_list_get_type ())
 
 /**
  * gucharmap_script_codepoint_list_new:
@@ -319,8 +339,12 @@ gucharmap_script_codepoint_list_set_scripts (GucharmapScriptCodepointList  *list
   ScriptCodepointListPrivate *priv = GUCHARMAP_SCRIPT_CODEPOINT_LIST_GET_PRIVATE (list);
   UnicodeRange *ranges;
   gint i, j, size;
-  
-  priv->ranges = g_ptr_array_new ();
+
+  if (priv->ranges)
+    clear_ranges (priv->ranges);
+  else
+    priv->ranges = g_ptr_array_new ();
+
   for (i = 0;  scripts[i];  i++)
     if (get_chars_for_script (scripts[i], &ranges, &size))
       {
