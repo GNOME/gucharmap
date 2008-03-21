@@ -83,6 +83,11 @@ GTK_REQUIRED=2.12.0
 
 PKG_CHECK_MODULES([GTK],[gtk+-2.0 >= $GTK_REQUIRED])
 
+GLIB_GENMARSHAL="$($PKG_CONFIG --variable=glib_genmarshal glib-2.0)"
+AC_SUBST([GLIB_GENMARSHAL])
+GLIB_MKENUMS="$($PKG_CONFIG --variable=glib_mkenums glib-2.0)"
+AC_SUBST([GLIB_MKENUMS])
+
 AC_ARG_ENABLE([gconf],
               [AS_HELP_STRING([--disable-gconf],
 	                      [don't build with gconf support])])
@@ -115,9 +120,6 @@ AC_SUBST(GCONF_LIBS)
 if test "x$have_gconf" = "xyes" ; then
     AC_DEFINE([HAVE_GCONF], [1], [Define if have gconf])
 fi
-
-GLIB_GENMARSHAL=`$PKG_CONFIG --variable=glib_genmarshal glib-2.0`
-AC_SUBST(GLIB_GENMARSHAL)
 
 AH_TEMPLATE([ENABLE_UNIHAN], [Define if you want CJK ideograph information])
 AC_ARG_ENABLE(unihan, 

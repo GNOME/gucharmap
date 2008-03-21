@@ -20,8 +20,6 @@ NULL =
 
 localedir = $(datadir)/locale
 
-BUILT_SOURCES = gucharmap-marshal.c gucharmap-marshal.h
-
 lib_LTLIBRARIES = libgucharmap.la
 
 libgucharmap_la_SOURCES = \
@@ -49,6 +47,8 @@ libgucharmap_la_SOURCES = \
 	gucharmap-script-chapters-model.h \
 	gucharmap-script-codepoint-list.c \
 	gucharmap-script-codepoint-list.h \
+	gucharmap-type-builtins.c \
+	gucharmap-type-builtins.h \
 	gucharmap-unicode-info.c \
 	gucharmap-unicode-info.h \
 	unicode-blocks.h \
@@ -144,6 +144,13 @@ gucharmaprc.o: gucharmaprc.rc
 	windres -i $< -o $@
 endif
 
+BUILT_SOURCES = \
+	gucharmap-marshal.c \
+	gucharmap-marshal.h \
+	gucharmap-type-builtins.c \
+	gucharmap-type-builtins.h \
+	$(NULL)
+
 gucharmap-marshal.h: $(srcdir)/gucharmap-marshal.list
 	( $(GLIB_GENMARSHAL) --prefix=_gucharmap_marshal $(srcdir)/gucharmap-marshal.list \
                             --header \
@@ -159,6 +166,21 @@ gucharmap-marshal.c: $(srcdir)/gucharmap-marshal.list
           && mv gucharmap-marshal.c.tmp gucharmap-marshal.c ) \
         || ( rm -f gucharmap-marshal.c.tmp && exit 1 )
 
+
+gucharmap-type-builtins.h: stamp-gucharmap-type-builtins.h
+	@true
+
+stamp-gucharmap-type-builtins.h: gucharmap-type-builtins.h.template $(libgucharmapinclude_HEADERS)
+	$(GLIB_MKENUMS) --template $< $(filter-out $<,$^) > xgen-gtbh \
+	&& (cmp -s xgen-gtbh gucharmap-type-builtins.h || cp xgen-gtbh gucharmap-type-builtins.h ) \
+	&& rm -f xgen-gtbh \
+	&& echo timestamp > $(@F)
+
+gucharmap-type-builtins.c: gucharmap-type-builtins.c.template $(libgucharmapinclude_HEADERS)
+	$(GLIB_MKENUMS) --template $< $(filter-out $<,$^) > xgen-gtbc \
+	&& (cmp -s xgen-gtbc gucharmap-type-builtins.c || cp xgen-gtbc gucharmap-type-builtins.c ) \
+	&& rm -f xgen-gtbc
+
 # printoptions.h: print.glade
 # 	$(GTK_BUILDER_CONVERT) --root custom_tab_container $< - | \
 # 		$(XMLLINT) --noblanks - | \
@@ -167,14 +189,17 @@ gucharmap-marshal.c: $(srcdir)/gucharmap-marshal.list
 # 	&& rm -f xgen-$(@F)
 
 # don't do the symlink stuff if this is windows
-if OS_WIN32
 
-install-exec-hook:
-        
-uninstall-local:
+EXTRA_DIST = \
+	gucharmap-marshal.list \
+	gucharmaprc.rc \
+	$(NULL)
 
-else
+CLEANFILES = \
+	$(BUILT_SOURCES) \
+	$(NULL)
 
+if !OS_WIN32
 # install a symlink to the binary called "charmap"
 install-exec-hook:
 	test -e "$(DESTDIR)$(bindir)/charmap" \
@@ -190,8 +215,4 @@ uninstall-local:
 	test -h "$(DESTDIR)$(bindir)/gnome-character-map" \
 	&& rm -f "$(DESTDIR)$(bindir)/gnome-character-map"
 
-endif
-
-CLEANFILES = gucharmap-marshal.c gucharmap-marshal.h
-
-EXTRA_DIST = gucharmap-marshal.list gucharmaprc.rc 
+endif # !OS_WIN32
