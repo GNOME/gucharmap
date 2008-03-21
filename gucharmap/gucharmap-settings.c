@@ -19,7 +19,9 @@
 
 #include <config.h>
 
+#include <errno.h>
 #include <string.h>
+
 #include <glib.h>
 #include <glib/gi18n-lib.h>
 
@@ -172,25 +174,28 @@ gunichar
 gucharmap_settings_get_last_char (void)
 {
   /* See bug 469053 */
-  gchar *str;
-  gunichar c;
+  gchar *str, *endptr;
+  guint64 value;
 
   if (!gucharmap_settings_initialized ()) {
       return gucharmap_settings_get_locale_character  ();
   }
 
   str = gconf_client_get_string (client, GCONF_PREFIX"/last_char", NULL);
-  if (!str) {
+  if (!str || !g_str_has_prefix (str, "U+")) {
+    g_free (str);
     return gucharmap_settings_get_locale_character  ();
   }
 
-  /* FIXME: use g_ascii_strtoull */
-  sscanf (str, "U+%X", &c);
-  g_free(str);
-  if (c > 0 && c < UNICHAR_MAX)
-    return c;
+  endptr = NULL;
+  errno = 0;
+  value = g_ascii_strtoull (str + 2 /* skip the "U+" */, &endptr, 16);
+  if (errno || endptr == str || value > UNICHAR_MAX) {
+    g_free (str);
+    return gucharmap_settings_get_locale_character  ();
+  }
 
-  return gucharmap_settings_get_locale_character  ();
+  return (gunichar) value;
 }
 
 void
