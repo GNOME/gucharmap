@@ -52,6 +52,7 @@ enum
   PROP_0,
   PROP_ACTIVE_CHAR,
   PROP_CODEPOINT_LIST,
+  PROP_FONT_DESC,
   PROP_SNAP_POW2,
   PROP_ZOOM_ENABLED,
   PROP_ZOOM_SHOWING
@@ -1939,6 +1940,9 @@ gucharmap_chartable_set_property (GObject *object,
     case PROP_CODEPOINT_LIST:
       gucharmap_chartable_set_codepoint_list (chartable, g_value_get_object (value));
       break;
+    case PROP_FONT_DESC:
+      gucharmap_chartable_set_font_desc (chartable, g_value_get_boxed (value));
+      break;
     case PROP_SNAP_POW2:
       gucharmap_chartable_set_snap_pow2 (chartable, g_value_get_boolean (value));
       break;
@@ -1966,6 +1970,9 @@ gucharmap_chartable_get_property (GObject *object,
       break;
     case PROP_CODEPOINT_LIST:
       g_value_set_object (value, gucharmap_chartable_get_codepoint_list (chartable));
+      break;
+    case PROP_FONT_DESC:
+      g_value_set_boxed (value, chartable->font_desc);
       break;
     case PROP_SNAP_POW2:
       g_value_set_boolean (value, chartable->snap_pow2_enabled);
@@ -2097,6 +2104,16 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
                           G_PARAM_STATIC_NAME |
                           G_PARAM_STATIC_NICK |
                           G_PARAM_STATIC_BLURB));
+
+  g_object_class_install_property
+    (object_class,
+     PROP_FONT_DESC,
+     g_param_spec_boxed ("font-desc", NULL, NULL,
+                         PANGO_TYPE_FONT_DESCRIPTION,
+                         G_PARAM_READWRITE |
+                         G_PARAM_STATIC_NAME |
+                         G_PARAM_STATIC_NICK |
+                         G_PARAM_STATIC_BLURB));
 
   g_object_class_install_property
     (object_class,
