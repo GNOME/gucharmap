@@ -794,7 +794,9 @@ insert_character_in_text_to_copy (GucharmapChartable *chartable,
   gunichar wc;
 
   wc = gucharmap_chartable_get_active_character (chartable);
-  g_return_if_fail (gucharmap_unichar_validate (wc));
+  /* Can't copy values that are not valid unicode characters */
+  if (!gucharmap_unichar_validate (wc))
+    return;
 
   /* don't do anything if text_to_copy is not active */
   if (!priv->text_to_copy_visible)
@@ -889,15 +891,17 @@ pack_stuff_in_window (GucharmapWindow *guw)
   gtk_box_pack_start (GTK_BOX (big_vbox), make_menu (guw), FALSE, FALSE, 0);
 
   hbox = gtk_hbox_new (FALSE, 0);
-  gtk_widget_show (hbox);
   gtk_box_pack_start (GTK_BOX (big_vbox), hbox, FALSE, FALSE, 0);
-  gtk_box_pack_start (GTK_BOX (big_vbox), GTK_WIDGET (guw->charmap), 
+  gtk_widget_show (hbox);
+
+  gtk_box_pack_start (GTK_BOX (big_vbox), GTK_WIDGET (guw->charmap),
                       TRUE, TRUE, 0);
+  gtk_widget_show (GTK_WIDGET (guw->charmap));
 
   priv->fontsel = gucharmap_mini_font_selection_new ();
   g_signal_connect (priv->fontsel, "changed", G_CALLBACK (fontsel_changed), guw);
   gtk_box_pack_start (GTK_BOX (hbox), priv->fontsel, FALSE, FALSE, 0);
-  gtk_widget_show (GTK_WIDGET (guw->charmap));
+  gtk_widget_show (GTK_WIDGET (priv->fontsel));
 
   priv->text_to_copy_container = make_text_to_copy (guw);
   gtk_container_set_border_width (GTK_CONTAINER (priv->text_to_copy_container), 6);
