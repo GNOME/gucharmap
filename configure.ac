@@ -1,27 +1,43 @@
-dnl $Id: configure.ac,v 1.138 2006/09/04 22:41:10 behdad Exp $
-dnl
-dnl Copyright (c) 2003  Noah Levitt
-dnl
-dnl This program is free software; you can redistribute it and/or modify it
-dnl under the terms of the GNU General Public License as published by the
-dnl Free Software Foundation; either version 2 of the License, or (at your
-dnl option) any later version.
-dnl
-dnl This program is distributed in the hope that it will be useful, but
-dnl WITHOUT ANY WARRANTY; without even the implied warranty of
-dnl MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-dnl General Public License for more details.
-dnl
-dnl You should have received a copy of the GNU General Public License along
-dnl with this program; if not, write to the Free Software Foundation, Inc.,
-dnl 59 Temple Place, Suite 330, Boston, MA 02110-1301  USA
-dnl
+# Copyright © 2003  Noah Levitt
+# Copyright © 2007, 2008 Christian Persch
+#
+# This program is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by the
+# Free Software Foundation; either version 2 of the License, or (at your
+# option) any later version.
+#
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along
+# with this program; if not, write to the Free Software Foundation, Inc.,
+# 59 Temple Place, Suite 330, Boston, MA 02110-1301  USA
+
+m4_define([gucharmap_version_major],[2])
+m4_define([gucharmap_version_minor],[23])
+m4_define([gucharmap_version_micro],[0])
+m4_define([gucharmap_version],[gucharmap_version_major.gucharmap_version_minor.gucharmap_version_micro])
+
+# Before making a release, the libtool version should be modified.
+# The string is of the form C:R:A.
+# - If interfaces have been changed or added, but binary compatibility has
+#   been preserved, change to C+1:0:A+1
+# - If binary compatibility has been broken (eg removed or changed interfaces)
+#   change to C+1:0:0
+# - If the interface is the same as the previous version, change to C:R+1:A
+m4_define([gucharmap_lt_current],[7])
+m4_define([gucharmap_lt_revision],[0])
+m4_define([gucharmap_lt_age],[0])
+m4_define([gucharmap_lt_version_info],[gucharmap_lt_current:gucharmap_lt_revision:gucharmap_lt_age])
+m4_define([gucharmap_lt_current_minus_age],[m4_eval(gucharmap_lt_current - gucharmap_lt_age)])
 
 AC_PREREQ([2.56])
 
-AC_INIT([GNOME Character Map],[2.23.0],[http://bugzilla.gnome.org/enter_bug.cgi?product=gucharmap],[gucharmap])
+AC_INIT([GNOME Character Map],[gucharmap_version],[http://bugzilla.gnome.org/enter_bug.cgi?product=gucharmap],[gucharmap])
 
-AC_CONFIG_SRCDIR([gucharmap/gucharmap.h])
+AC_CONFIG_SRCDIR([gucharmap/gucharmap-charmap.h])
 AC_CONFIG_HEADERS([config.h])
 AM_INIT_AUTOMAKE([1.9 gnu dist-bzip2 no-dist-gzip])
 
@@ -117,29 +133,27 @@ if test "x$enable_unihan" != "xno" ; then
     AC_DEFINE([ENABLE_UNIHAN],[1],[Define if you want CJK ideograph information])
 fi
 
-# Before making a release, the LIBGUCHARMAP_LT_VERSION string should be modified.
-# The string is of the form C:R:A.
-# - If interfaces have been changed or added, but binary compatibility has
-#   been preserved, change to C+1:0:A+1
-# - If binary compatibility has been broken (eg removed or changed interfaces)
-#   change to C+1:0:0
-# - If the interface is the same as the previous version, change to C:R+1:A
-LIBGUCHARMAP_LT_VERSION=7:0:0
-AC_SUBST([LIBGUCHARMAP_LT_VERSION])
+AC_SUBST([GUCHARMAP_VERSION_MAJOR],[gucharmap_version_major])
+AC_SUBST([GUCHARMAP_VERSION_MINOR],[gucharmap_version_minor])
+AC_SUBST([GUCHARMAP_VERSION_MICRO],[gucharmap_version_micro])
+AC_SUBST([LIBGUCHARMAP_LT_VERSION],[gucharmap_lt_version_info])
+AC_SUBST([LIBGUCHARMAP_LT_CURRENT_MINUS_AGE],[gucharmap_lt_current_minus_age])
 
 AC_CONFIG_FILES([
 gucharmap.desktop.in
 gucharmap-2.pc
 Makefile
-gucharmap/Makefile 
+gucharmap/Makefile
+gucharmap/gucharmap.h
 po/Makefile.in
-pixmaps/Makefile 
+pixmaps/Makefile
 help/Makefile
 help/it/Makefile
 help/ja/Makefile
 help/zh_CN/Makefile
 help/zh_TW/Makefile
 gucharmap.spec
-gucharmap.nsi])
+gucharmap.nsi
+])
 
 AC_OUTPUT
