@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005 Jason Allen
+ * Copyright © 2005 Jason Allen
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the

@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2005 Jason Allen
- * Copyright (C) 2007 Christian Persch
+ * Copyright © 2005 Jason Allen
+ * Copyright © 2007 Christian Persch
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
