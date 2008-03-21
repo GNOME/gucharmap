@@ -942,6 +942,9 @@ gucharmap_charmap_init (GucharmapCharmap *charmap)
   buffer = gtk_text_view_get_buffer (charmap->details_view);
   charmap->text_tag_gimongous =
     gtk_text_buffer_create_tag (buffer, "gimongous",
+#if 0 /* until #505786 is in a gtk release */
+                                "font-fallback", FALSE,
+#endif
                                 NULL);
   charmap->text_tag_big =
     gtk_text_buffer_create_tag (buffer, "big",
