@@ -85,6 +85,7 @@ libgucharmap_la_LIBADD = \
 libgucharmapincludedir = $(includedir)/gucharmap-2/gucharmap
 libgucharmapinclude_HEADERS = \
 	gucharmap-block-chapters-model.h \
+	gucharmap-block-codepoint-list.h \
 	gucharmap-chapters-model.h \
 	gucharmap-chapters-view.h \
 	gucharmap-charmap.h \
