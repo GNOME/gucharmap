@@ -34,9 +34,6 @@
 
 /* constants for hangul (de)composition, see UAX #15 */
 #define SBase 0xAC00
-#define LBase 0x1100
-#define VBase 0x1161
-#define TBase 0x11A7
 #define LCount 19
 #define VCount 21
 #define TCount 28
@@ -149,65 +146,6 @@ gucharmap_get_unicode_category_name (gunichar wc)
       case G_UNICODE_SPACE_SEPARATOR: return _("Separator, Space");
       default: return "";
     }
-}
-
-/* http://www.unicode.org/unicode/reports/tr15/#Hangul */
-static gunichar *
-hangul_decomposition (gunichar s, gsize *result_len)
-{
-  gunichar *r = g_malloc (3 * sizeof (gunichar));
-  gint SIndex = s - SBase;
-
-  /* not a hangul syllable */
-  if (SIndex < 0 || SIndex >= SCount)
-    {
-      r[0] = s;
-      *result_len = 1;
-    }
-  else
-    {
-      gunichar L = LBase + SIndex / NCount;
-      gunichar V = VBase + (SIndex % NCount) / TCount;
-      gunichar T = TBase + SIndex % TCount;
-
-      r[0] = L;
-      r[1] = V;
-
-      if (T != TBase) 
-        {
-          r[2] = T;
-          *result_len = 3;
-        }
-      else
-        *result_len = 2;
-    }
-
-  return r;
-}
-
-/*
- * See http://bugzilla.gnome.org/show_bug.cgi?id=100456
- *
- * gucharmap_unicode_canonical_decomposition:
- * @ch: a Unicode character.
- * @result_len: location to store the length of the return value.
- *
- * Computes the canonical decomposition of a Unicode character.  
- * 
- * Return value: a newly allocated string of Unicode characters.
- *   @result_len is set to the resulting length of the string.
- */
-gunichar *
-gucharmap_unicode_canonical_decomposition (gunichar ch, 
-                                           gsize *result_len)
-{
-  if (GLIB_CHECK_VERSION (2,3,1))
-    return g_unicode_canonical_decomposition (ch, result_len);
-  else
-    if (ch >= 0xac00 && ch <= 0xd7af)  /* Hangul syllable */
-      return hangul_decomposition (ch, result_len);
-    else 
-      return g_unicode_canonical_decomposition (ch, result_len);
 }
 
 /* does a binary search on unicode_names */

@@ -42,13 +42,6 @@ G_CONST_RETURN gchar *  gucharmap_get_unicode_kKorean             (gunichar uc);
 G_CONST_RETURN gchar *  gucharmap_get_unicode_kJapaneseKun        (gunichar uc);
 G_CONST_RETURN gchar *  gucharmap_get_unicode_kJapaneseOn         (gunichar uc);
 
-/* A wrapper for g_unicode_canonical_decomposition that also does hangul
- * decomposition. 
- * See http://bugzilla.gnome.org/show_bug.cgi?id=100456
- */
-gunichar *              gucharmap_unicode_canonical_decomposition (gunichar  ch, 
-                                                                   gsize    *result_len);
-
 /* nameslist stuff */
 G_CONST_RETURN gchar ** gucharmap_get_nameslist_stars             (gunichar  wc);
 G_CONST_RETURN gchar ** gucharmap_get_nameslist_equals            (gunichar  wc);

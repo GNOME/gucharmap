@@ -324,7 +324,7 @@ conditionally_insert_canonical_decomposition (GucharmapCharmap *charmap,
   gsize result_len;
   guint i;
 
-  decomposition = gucharmap_unicode_canonical_decomposition (uc, &result_len);
+  decomposition = g_unicode_canonical_decomposition (uc, &result_len);
 
   if (result_len == 1)
     {
