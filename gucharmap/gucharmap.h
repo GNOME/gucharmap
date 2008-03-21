@@ -22,17 +22,17 @@
 
 #define __GUCHARMAP_GUCHARMAP_H_INSIDE__
 
-#include <gucharmap/gucharmap-chartable.h>
-#include <gucharmap/gucharmap-charmap.h>
-#include <gucharmap/gucharmap-window.h>
-#include <gucharmap/gucharmap-unicode-info.h>
-#include <gucharmap/gucharmap-mini-fontsel.h>
-#include <gucharmap/gucharmap-codepoint-list.h>
-#include <gucharmap/gucharmap-script-codepoint-list.h>
-#include <gucharmap/gucharmap-chapters-model.h>
 #include <gucharmap/gucharmap-block-chapters-model.h>
+#include <gucharmap/gucharmap-chapters-model.h>
+#include <gucharmap/gucharmap-charmap.h>
+#include <gucharmap/gucharmap-chartable.h>
+#include <gucharmap/gucharmap-codepoint-list.h>
+#include <gucharmap/gucharmap-mini-fontsel.h>
 #include <gucharmap/gucharmap-script-chapters-model.h>
+#include <gucharmap/gucharmap-script-codepoint-list.h>
 #include <gucharmap/gucharmap-search-dialog.h>
+#include <gucharmap/gucharmap-unicode-info.h>
+#include <gucharmap/gucharmap-window.h>
 
 #undef __GUCHARMAP_GUCHARMAP_H_INSIDE__
 

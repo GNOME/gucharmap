@@ -55,8 +55,8 @@ get_first_non_underscore_char (const char *str)
   return 0;
 }
 
-static gunichar
-get_default_last_char (void)
+gunichar
+gucharmap_settings_get_locale_character (void)
 {
   return get_first_non_underscore_char (_("_File")); /* use a super-common string */
 }
@@ -175,12 +175,12 @@ gucharmap_settings_get_last_char (void)
   gunichar c;
 
   if (!gucharmap_settings_initialized ()) {
-      return get_default_last_char ();
+      return gucharmap_settings_get_locale_character  ();
   }
 
   str = gconf_client_get_string (client, GCONF_PREFIX"/last_char", NULL);
   if (!str) {
-    return get_default_last_char ();
+    return gucharmap_settings_get_locale_character  ();
   }
 
   /* FIXME: use g_ascii_strtoull */
@@ -189,7 +189,7 @@ gucharmap_settings_get_last_char (void)
   if (c > 0 && c < UNICHAR_MAX)
     return c;
 
-  return get_default_last_char ();
+  return gucharmap_settings_get_locale_character  ();
 }
 
 void
@@ -279,7 +279,7 @@ gucharmap_settings_set_font (gchar *fontname)
 gunichar
 gucharmap_settings_get_last_char (void)
 {
-  return get_default_last_char ();
+  return gucharmap_settings_get_locale_character  ();
 }
 
 void

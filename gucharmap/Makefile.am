@@ -71,17 +71,14 @@ libgucharmap_la_LIBADD = \
 	$(GCONF_LIBS)	\
 	$(INTL_LIBS)
 
-libgucharmapmainincludedir = $(includedir)/gucharmap-2
-libgucharmapmaininclude_HEADERS = \
-	gucharmap.h \
-	$(NULL)
-
 libgucharmapincludedir = $(includedir)/gucharmap-2/gucharmap
 libgucharmapinclude_HEADERS = \
+	gucharmap.h \
 	gucharmap-block-chapters-model.h \
 	gucharmap-chapters-model.h \
 	gucharmap-chapters-view.h \
 	gucharmap-charmap.h \
+	gucharmap-chartable.h \
 	gucharmap-codepoint-list.h \
 	gucharmap-mini-fontsel.h \
 	gucharmap-script-chapters-model.h \

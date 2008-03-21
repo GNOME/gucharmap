@@ -37,6 +37,8 @@ gboolean     gucharmap_settings_get_snap_pow2        (void);
 void         gucharmap_settings_set_snap_pow2        (gboolean snap_pow2);
 void         gucharmap_settings_add_window           (GtkWindow *window);
 
+gunichar     gucharmap_settings_get_locale_character (void);
+
 G_END_DECLS
 
 #endif  /* #ifndef GUCHARMAP_SETTINGS_H */

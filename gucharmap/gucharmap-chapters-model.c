@@ -104,8 +104,8 @@ gucharmap_chapters_model_get_book_codepoint_list (GucharmapChaptersModel *chapte
  **/
 gboolean
 gucharmap_chapters_model_character_to_iter (GucharmapChaptersModel *chapters,
-                                      gunichar           wc,
-                                      GtkTreeIter       *iter)
+                                            gunichar           wc,
+                                            GtkTreeIter       *iter)
 {
   g_return_val_if_fail (GUCHARMAP_IS_CHAPTERS_MODEL (chapters), FALSE);
 
