@@ -721,17 +721,12 @@ entry_changed (GtkObject             *object,
                GucharmapSearchDialog *search_dialog)
 {
   GucharmapSearchDialogPrivate *priv = GUCHARMAP_SEARCH_DIALOG_GET_PRIVATE (search_dialog);
+  gboolean is_empty;
 
-  if (_entry_is_empty (GTK_ENTRY (priv->entry)))
-    {
-      gtk_widget_set_sensitive (priv->prev_button, FALSE);
-      gtk_widget_set_sensitive (priv->next_button, FALSE);
-    }
-  else
-    {
-      gtk_widget_set_sensitive (priv->prev_button, TRUE);
-      gtk_widget_set_sensitive (priv->next_button, TRUE);
-    }
+  is_empty = _entry_is_empty (GTK_ENTRY (priv->entry));
+      
+  gtk_widget_set_sensitive (priv->prev_button, !is_empty);
+  gtk_widget_set_sensitive (priv->next_button, !is_empty);
 }
 
 static void 
