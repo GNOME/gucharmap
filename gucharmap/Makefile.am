@@ -189,6 +189,8 @@ gucharmap-type-builtins.c: gucharmap-type-builtins.c.template $(libgucharmapincl
 
 EXTRA_DIST = \
 	gucharmap-marshal.list \
+	gucharmap-type-builtins.c.template \
+	gucharmap-type-builtins.h.template \
 	gucharmaprc.rc \
 	$(NULL)
 
