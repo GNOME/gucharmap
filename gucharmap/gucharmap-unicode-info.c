@@ -612,7 +612,7 @@ gunichar
 gucharmap_unicode_get_locale_character (void)
 {
   GtkStockItem item;
-  if (!gtk_stock_lookup (GTK_STOCK_FILE, &item))
+  if (!gtk_stock_lookup (GTK_STOCK_FIND, &item))
     return 0;
 
   return get_first_non_underscore_char (item.label);
