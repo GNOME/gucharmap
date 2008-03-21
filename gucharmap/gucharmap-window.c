@@ -31,6 +31,8 @@
 #include "gucharmap-settings.h"
 #include "gucharmap-window.h"
 
+/* #define ENABLE_PRINTING */
+
 static void gucharmap_window_class_init (GucharmapWindowClass *klass);
 static void gucharmap_window_init       (GucharmapWindow *window);
 
@@ -49,6 +51,8 @@ show_error_dialog (GtkWindow *parent,
   g_signal_connect (dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
   gtk_window_present (GTK_WINDOW (dialog));
 }
+
+#ifdef ENABLE_PRINTING
 
 static void
 ensure_print_data (GucharmapWindow *guw)
@@ -131,7 +135,9 @@ gucharmap_window_print (GucharmapWindow *guw,
   }
 
   g_object_unref (op);
-}    
+}
+
+#endif /* ENABLE_PRINTING */
 
 static void
 status_message (GtkWidget       *widget, 
@@ -300,6 +306,8 @@ search_find_prev (GtkAction       *action,
     search_find (action, guw);
 }
 
+#ifdef ENABLE_PRINTING
+
 static void
 page_setup_done_cb (GtkPageSetup *page_setup,
                     GucharmapWindow *guw)
@@ -338,6 +346,8 @@ file_print (GtkAction *action,
 {
   gucharmap_window_print (guw, GTK_PRINT_OPERATION_ACTION_PRINT_DIALOG);
 }
+
+#endif /* ENABLE_PRINTING */
 
 static void
 close_window (GtkAction *action,
@@ -653,12 +663,14 @@ move_to_next_screen_cb (GtkAction *action,
 static const char ui_info [] =
   "<menubar name='MenuBar'>"
     "<menu action='File'>"
+#ifdef ENABLE_PRINTING
       "<menuitem action='PageSetup' />"
 #if 0
       "<menuitem action='PrintPreview' />"
 #endif
       "<menuitem action='Print' />"
       "<separator />"
+#endif /* ENABLE_PRINTING */
       "<menuitem action='Close' />"
 #ifdef DEBUG_chpe
       "<menuitem action='MoveNextScreen' />"
@@ -792,6 +804,7 @@ gucharmap_window_init (GucharmapWindow *guw)
     { "Go", NULL, N_("_Go"), NULL, NULL, NULL },
     { "Help", NULL, N_("_Help"), NULL, NULL, NULL },
 
+#ifdef ENABLE_PRINTING
     { "PageSetup", NULL, N_("Page _Setup"), NULL,
       NULL, G_CALLBACK (file_page_setup) },
 #if 0
@@ -800,6 +813,7 @@ gucharmap_window_init (GucharmapWindow *guw)
 #endif
     { "Print", GTK_STOCK_PRINT, NULL, NULL,
       NULL, G_CALLBACK (file_print) },
+#endif /* ENABLE_PRINTING */
     { "Close", GTK_STOCK_CLOSE, NULL, NULL,
       NULL, G_CALLBACK (close_window) },
 

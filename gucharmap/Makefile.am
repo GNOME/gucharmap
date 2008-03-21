@@ -159,12 +159,12 @@ gucharmap-marshal.c: $(srcdir)/gucharmap-marshal.list
           && mv gucharmap-marshal.c.tmp gucharmap-marshal.c ) \
         || ( rm -f gucharmap-marshal.c.tmp && exit 1 )
 
-printoptions.h: print.glade
-	$(GTK_BUILDER_CONVERT) --root custom_tab_container $< - | \
-		$(XMLLINT) --noblanks - | \
-		$(HEXDUMP) -v -e '"" 1/1 "0x%02x,""\n"' > xgen-$(@F) \
-	&& (cmp -s xgen-$(@F) $@ || cp -f xgen-$(@F) $@) \
-	&& rm -f xgen-$(@F)
+# printoptions.h: print.glade
+# 	$(GTK_BUILDER_CONVERT) --root custom_tab_container $< - | \
+# 		$(XMLLINT) --noblanks - | \
+# 		$(HEXDUMP) -v -e '"" 1/1 "0x%02x,""\n"' > xgen-$(@F) \
+# 	&& (cmp -s xgen-$(@F) $@ || cp -f xgen-$(@F) $@) \
+# 	&& rm -f xgen-$(@F)
 
 # don't do the symlink stuff if this is windows
 if OS_WIN32
@@ -178,9 +178,9 @@ else
 # install a symlink to the binary called "charmap"
 install-exec-hook:
 	test -e "$(DESTDIR)$(bindir)/charmap" \
-        || (cd "$(DESTDIR)$(bindir)" && ln -s gucharmap charmap) ; \
+        || (cd "$(DESTDIR)$(bindir)" && $(LN_S) gucharmap charmap) ; \
 	test -e "$(DESTDIR)$(bindir)/gnome-character-map" \
-        || (cd "$(DESTDIR)$(bindir)" && ln -s gucharmap gnome-character-map)
+        || (cd "$(DESTDIR)$(bindir)" && $(LN_S) gucharmap gnome-character-map)
 
 # remove bin/charmap if it's a symlink (it's a pain to test what it's
 # a symlink to)
