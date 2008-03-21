@@ -23,11 +23,10 @@
 #include <string.h>
 #include "gucharmap-search-dialog.h"
 #include "gucharmap-window.h"
-#include "gucharmap-unicode-info.h"
-#include "gucharmap-marshal.h"
-#include "gucharmap-private.h"
 
 #define GUCHARMAP_SEARCH_DIALOG_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), gucharmap_search_dialog_get_type (), GucharmapSearchDialogPrivate))
+
+#define I_(string) g_intern_static_string (string)
 
 enum
 {

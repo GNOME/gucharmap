@@ -25,6 +25,7 @@
 
 #include <gucharmap/gucharmap.h>
 #include "gucharmap-settings.h"
+#include "gucharmap-window.h"
 
 gint
 main (gint argc, gchar **argv)
@@ -55,6 +56,8 @@ main (gint argc, gchar **argv)
     }
 
   gucharmap_init ();
+  gucharmap_settings_initialize ();
+
   g_set_application_name (_("Gucharmap"));
   gtk_window_set_default_icon_name ("gucharmap");
 
@@ -101,6 +104,7 @@ main (gint argc, gchar **argv)
 
   gtk_main ();
 
+  gucharmap_settings_shutdown ();
   gucharmap_shutdown ();
 
   return 0;

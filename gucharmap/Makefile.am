@@ -35,14 +35,10 @@ libgucharmap_la_SOURCES = \
 	gucharmap-codepoint-list.c gucharmap-codepoint-list.h \
 	gucharmap-init.c gucharmap-init.h \
 	gucharmap-marshal.c gucharmap-marshal.h \
-	gucharmap-mini-fontsel.c gucharmap-mini-fontsel.h \
-	gucharmap-private.h \ 
+	gucharmap-private.h \
 	gucharmap-script-chapters-model.c gucharmap-script-chapters-model.h \
 	gucharmap-script-codepoint-list.c gucharmap-script-codepoint-list.h \
-	gucharmap-search-dialog.h gucharmap-search-dialog.c \
-	gucharmap-settings.h gucharmap-settings.c \
 	gucharmap-unicode-info.c gucharmap-unicode-info.h \
-	gucharmap-window.c gucharmap-window.h \
 	unicode-blocks.h unicode-categories.h unicode-names.h \
 	unicode-nameslist.h unicode-scripts.h unicode-unihan.h \
 	$(NULL)
@@ -58,7 +54,6 @@ libgucharmap_la_CPPFLAGS = \
 libgucharmap_la_CFLAGS = \
 	$(PANGO_CFLAGS)	\
 	$(GTK_CFLAGS)	\
-	$(GCONF_CFLAGS)	\
 	$(WARN_CFLAGS)	\
 	$(AM_CFLAGS)
 
@@ -69,7 +64,6 @@ libgucharmap_la_LDFLAGS = \
 
 libgucharmap_la_LIBADD = \
 	$(GTK_LIBS)	\
-	$(GCONF_LIBS)	\
 	$(INTL_LIBS)
 
 libgucharmapincludedir = $(includedir)/gucharmap-2/gucharmap
@@ -82,19 +76,25 @@ libgucharmapinclude_HEADERS = \
 	gucharmap-codepoint-list.h \
 	gucharmap.h \
 	gucharmap-init.h \
-	gucharmap-mini-fontsel.h \
 	gucharmap-script-chapters-model.h \
 	gucharmap-script-codepoint-list.h \
-	gucharmap-search-dialog.h \
-	gucharmap-settings.h \
 	gucharmap-types.h \
 	gucharmap-unicode-info.h \
-	gucharmap-window.h \
 	$(NULL)
 
 bin_PROGRAMS = gucharmap
 
-gucharmap_SOURCES = main.c
+gucharmap_SOURCES = \
+	gucharmap-mini-fontsel.c \
+	gucharmap-mini-fontsel.h \
+	gucharmap-search-dialog.c \
+	gucharmap-search-dialog.h \
+	gucharmap-settings.c \
+	gucharmap-settings.h \
+	gucharmap-window.c \
+ 	gucharmap-window.h \
+	main.c \
+	$(NULL)
 
 gucharmap_CPPFLAGS = \
 	-I$(top_srcdir)			\

@@ -24,20 +24,11 @@
 #ifndef GUCHARMAP_TYPES_H
 #define GUCHARMAP_TYPES_H
 
-typedef struct _GucharmapWindow GucharmapWindow;
-typedef struct _GucharmapWindowClass GucharmapWindowClass;
-
-typedef struct _GucharmapSearchDialog GucharmapSearchDialog;
-typedef struct _GucharmapSearchDialogClass GucharmapSearchDialogClass;
-
 typedef struct _GucharmapScriptCodepointList GucharmapScriptCodepointList;
 typedef struct _GucharmapScriptCodepointListClass GucharmapScriptCodepointListClass;
 
 typedef struct _GucharmapScriptChaptersModel GucharmapScriptChaptersModel;
 typedef struct _GucharmapScriptChaptersModelClass GucharmapScriptChaptersModelClass;
-
-typedef struct _GucharmapMiniFontSelection GucharmapMiniFontSelection;
-typedef struct _GucharmapMiniFontSelectionClass GucharmapMiniFontSelectionClass;
 
 typedef struct _GucharmapCodepointList GucharmapCodepointList;
 typedef struct _GucharmapCodepointListClass GucharmapCodepointListClass;

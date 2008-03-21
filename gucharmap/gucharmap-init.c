@@ -21,7 +21,6 @@
 #include <glib/gi18n-lib.h>
 
 #include "gucharmap-init.h"
-#include "gucharmap-settings.h"
 
 static guint initialization_count;
 
@@ -38,8 +37,6 @@ void gucharmap_init (void)
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 #endif
 #endif /* #ifdef ENABLE_NLS */
-
-  gucharmap_settings_initialize ();
 }
 
 void gucharmap_shutdown (void)
@@ -48,6 +45,4 @@ void gucharmap_shutdown (void)
 
   if (--initialization_count > 0)
     return;
-   
-  gucharmap_settings_shutdown ();
 }

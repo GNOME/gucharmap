@@ -24,45 +24,21 @@
 
 #include <glib.h>
 #include <glib/gi18n-lib.h>
-
-#include "gucharmap-chapters-model.h"
+#include <gucharmap/gucharmap.h>
 #include "gucharmap-settings.h"
-#include "gucharmap-private.h"
 
 #if HAVE_GCONF
 #include <gconf/gconf-client.h>
 static GConfClient *client;
 #endif
 
+/* The last unicode character we support */
+/* keep in sync with gucharmap-private.h! */
+#define UNICHAR_MAX (0x0010FFFFUL)
+
 #define WINDOW_STATE_TIMEOUT 1000 /* ms */
 
 #define GCONF_PREFIX "/apps/gucharmap"
-
-static gunichar
-get_first_non_underscore_char (const char *str)
-{
-  const char *p;
-
-  if (!str)
-    return 0;
-
-  for (p = str; p && *p; p = g_utf8_find_next_char (p, NULL))
-    {
-      gunichar ch;
-
-      ch = g_utf8_get_char (p);
-      if (g_unichar_isalpha (ch))
-        return ch;
-    }
-
-  return 0;
-}
-
-gunichar
-gucharmap_settings_get_locale_character (void)
-{
-  return get_first_non_underscore_char (_("_File")); /* use a super-common string */
-}
 
 static GucharmapChaptersMode
 get_default_chapters_mode (void)
@@ -178,13 +154,13 @@ gucharmap_settings_get_last_char (void)
   guint64 value;
 
   if (!gucharmap_settings_initialized ()) {
-      return gucharmap_settings_get_locale_character  ();
+      return gucharmap_unicode_get_locale_character ();
   }
 
   str = gconf_client_get_string (client, GCONF_PREFIX"/last_char", NULL);
   if (!str || !g_str_has_prefix (str, "U+")) {
     g_free (str);
-    return gucharmap_settings_get_locale_character  ();
+    return gucharmap_unicode_get_locale_character  ();
   }
 
   endptr = NULL;
@@ -192,7 +168,7 @@ gucharmap_settings_get_last_char (void)
   value = g_ascii_strtoull (str + 2 /* skip the "U+" */, &endptr, 16);
   if (errno || endptr == str || value > UNICHAR_MAX) {
     g_free (str);
-    return gucharmap_settings_get_locale_character  ();
+    return gucharmap_unicode_get_locale_character  ();
   }
 
   return (gunichar) value;
@@ -285,7 +261,7 @@ gucharmap_settings_set_font (gchar *fontname)
 gunichar
 gucharmap_settings_get_last_char (void)
 {
-  return gucharmap_settings_get_locale_character  ();
+  return gucharmap_unicode_get_locale_character  ();
 }
 
 void

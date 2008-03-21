@@ -58,6 +58,9 @@ gboolean                gucharmap_unichar_isgraph                 (gunichar  wc)
 G_CONST_RETURN gchar ** gucharmap_unicode_list_scripts            (void);
 G_CONST_RETURN gchar *  gucharmap_unicode_get_script_for_char     (gunichar wc);
 
+/* doesn't really belong here, but no better place was available */
+gunichar     gucharmap_unicode_get_locale_character (void);
+
 G_END_DECLS
 
 #endif  /* #ifndef GUCHARMAP_UNICODE_INFO_H */

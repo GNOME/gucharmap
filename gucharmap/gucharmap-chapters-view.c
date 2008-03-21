@@ -19,7 +19,7 @@
 #include <config.h>
 #include <string.h>
 #include <gtk/gtk.h>
-#include "gucharmap-settings.h"
+#include "gucharmap-unicode-info.h"
 #include "gucharmap-chapters-view.h"
 #include "gucharmap-private.h"
 #include "unicode-blocks.h"
@@ -255,5 +255,5 @@ gboolean
 gucharmap_chapters_view_select_locale (GucharmapChaptersView *view)
 {
   return gucharmap_chapters_view_select_character (view,
-                                                   gucharmap_settings_get_locale_character ());
+                                                   gucharmap_unicode_get_locale_character ());
 }

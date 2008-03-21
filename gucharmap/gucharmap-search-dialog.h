@@ -18,20 +18,33 @@
 
 /* GucharmapSearchDialog handles all aspects of searching */
 
-#if !defined (__GUCHARMAP_GUCHARMAP_H_INSIDE__) && !defined (GUCHARMAP_COMPILATION)
-#error "Only <gucharmap/gucharmap.h> can be included directly."
-#endif
-
 #ifndef GUCHARMAP_SEARCH_DIALOG_H
 #define GUCHARMAP_SEARCH_DIALOG_H
 
 #include <gtk/gtk.h>
-#include <gucharmap/gucharmap-types.h>
-#include <gucharmap/gucharmap-window.h>
+#include <gucharmap/gucharmap.h>
+#include "gucharmap-window.h"
 
 G_BEGIN_DECLS
 
 #define GUCHARMAP_SEARCH_DIALOG(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), gucharmap_search_dialog_get_type (), GucharmapSearchDialog))
+
+typedef struct _GucharmapSearchDialog GucharmapSearchDialog;
+typedef struct _GucharmapSearchDialogClass GucharmapSearchDialogClass;
+
+struct _GucharmapSearchDialog
+{
+  GtkDialog parent;
+};
+
+struct _GucharmapSearchDialogClass
+{
+  GtkDialogClass parent_class;
+
+  /* signals */
+  void (* search_start)  (void);
+  void (* search_finish) (gunichar found_char);
+};
 
 typedef enum
 {

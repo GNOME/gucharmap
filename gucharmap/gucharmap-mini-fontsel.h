@@ -16,15 +16,10 @@
  * 59 Temple Place, Suite 330, Boston, MA 02110-1301  USA
  */
 
-#if !defined (__GUCHARMAP_GUCHARMAP_H_INSIDE__) && !defined (GUCHARMAP_COMPILATION)
-#error "Only <gucharmap/gucharmap.h> can be included directly."
-#endif
-
 #ifndef GUCHARMAP_MINI_FONTSEL_H
 #define GUCHARMAP_MINI_FONTSEL_H
 
 #include <gtk/gtk.h>
-#include <gucharmap/gucharmap-types.h>
 
 G_BEGIN_DECLS
 
@@ -38,6 +33,34 @@ G_BEGIN_DECLS
 
 #define GUCHARMAP_IS_MINI_FONT_SELECTION(obj) \
         G_TYPE_CHECK_INSTANCE_TYPE ((obj), gucharmap_mini_font_selection_get_type ())
+
+typedef struct _GucharmapMiniFontSelection GucharmapMiniFontSelection;
+typedef struct _GucharmapMiniFontSelectionClass GucharmapMiniFontSelectionClass;
+
+struct _GucharmapMiniFontSelection
+{
+  GtkHBox parent;
+
+  GtkListStore         *family_store;
+  GtkWidget            *family; /* combo box */
+  GtkWidget            *bold;   /* toggle button*/
+  GtkWidget            *italic; /* toggle button*/
+
+  GtkObject            *size_adj; 
+  GtkWidget            *size;   /* spin button */
+  
+  PangoFontDescription *font_desc;
+
+  gint                  default_size;
+};
+
+struct _GucharmapMiniFontSelectionClass
+{
+  GtkHBoxClass parent_class;
+
+  void (* changed) (GucharmapMiniFontSelection *fontsel);
+};
+
 
 GType       gucharmap_mini_font_selection_get_type              (void);
 GtkWidget * gucharmap_mini_font_selection_new                   (void);

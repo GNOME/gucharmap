@@ -27,7 +27,6 @@
 #include "gucharmap-charmap.h"
 #include "gucharmap-unicode-info.h"
 #include "gucharmap-marshal.h"
-#include "gucharmap-settings.h"
 #include "gucharmap-private.h"
 
 enum
@@ -39,12 +38,12 @@ enum
 
 enum {
   PROP_0,
-  PROP_CHAPTERS_MODEL
+  PROP_CHAPTERS_MODEL,
+  PROP_ACTIVE_CHAPTER,
+  PROP_ACTIVE_CHARACTER,
 };
 
 static guint gucharmap_charmap_signals[NUM_SIGNALS];
-
-gboolean _gucharmap_unicode_has_nameslist_entry (gunichar uc);
 
 static void gucharmap_charmap_class_init (GucharmapCharmapClass *klass);
 static void gucharmap_charmap_init       (GucharmapCharmap *charmap);
@@ -66,6 +65,30 @@ gucharmap_charmap_finalize (GObject *object)
 }
 
 static void
+gucharmap_charmap_get_property (GObject *object,
+                                guint prop_id,
+                                GValue *value,
+                                GParamSpec *pspec)
+{
+  GucharmapCharmap *charmap = GUCHARMAP_CHARMAP (object);
+
+  switch (prop_id) {
+    case PROP_CHAPTERS_MODEL:
+      g_value_set_object (value, gucharmap_charmap_get_chapters_model (charmap));
+      break;
+    case PROP_ACTIVE_CHAPTER:
+      g_value_take_string (value, gucharmap_chapters_view_get_selected (charmap->chapters_view));
+      break;
+    case PROP_ACTIVE_CHARACTER:
+      g_value_set_uint (value, gucharmap_charmap_get_active_character (charmap));
+      break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
+  }
+}
+
+static void
 gucharmap_charmap_set_property (GObject *object,
                                 guint prop_id,
                                 const GValue *value,
@@ -76,6 +99,13 @@ gucharmap_charmap_set_property (GObject *object,
   switch (prop_id) {
     case PROP_CHAPTERS_MODEL:
       gucharmap_charmap_set_chapters_model (charmap, g_value_get_object (value));
+      break;
+    case PROP_ACTIVE_CHAPTER:
+      gucharmap_chapters_view_set_selected (charmap->chapters_view,
+                                            g_value_get_string (value));
+      break;
+    case PROP_ACTIVE_CHARACTER:
+      gucharmap_charmap_set_active_character (charmap, g_value_get_uint (value));
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -88,6 +118,7 @@ gucharmap_charmap_class_init (GucharmapCharmapClass *clazz)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (clazz);
 
+  object_class->get_property = gucharmap_charmap_get_property;
   object_class->set_property = gucharmap_charmap_set_property;
   object_class->finalize = gucharmap_charmap_finalize;
 
@@ -105,11 +136,39 @@ gucharmap_charmap_class_init (GucharmapCharmapClass *clazz)
                     NULL, NULL, _gucharmap_marshal_VOID__UINT_UINT, G_TYPE_NONE, 
                     2, G_TYPE_UINT, G_TYPE_UINT);
 
-  g_object_class_install_property (object_class,
-                                   PROP_CHAPTERS_MODEL,
-                                   g_param_spec_object ("chapters-model", NULL, NULL,
-                                                        GUCHARMAP_TYPE_CHAPTERS_MODEL,
-                                                        G_PARAM_WRITABLE | G_PARAM_CONSTRUCT | G_PARAM_STATIC_NAME | G_PARAM_STATIC_NICK | G_PARAM_STATIC_BLURB));
+  g_object_class_install_property
+    (object_class,
+     PROP_CHAPTERS_MODEL,
+     g_param_spec_object ("chapters-model", NULL, NULL,
+                         GUCHARMAP_TYPE_CHAPTERS_MODEL,
+                         G_PARAM_WRITABLE |
+                         G_PARAM_CONSTRUCT |
+                         G_PARAM_STATIC_NAME |
+                         G_PARAM_STATIC_NICK |
+                         G_PARAM_STATIC_BLURB));
+
+  g_object_class_install_property
+    (object_class,
+     PROP_ACTIVE_CHAPTER,
+     g_param_spec_string ("active-chapter", NULL, NULL,
+                          NULL,
+                          G_PARAM_READWRITE |
+                          G_PARAM_STATIC_NAME |
+                          G_PARAM_STATIC_NICK |
+                          G_PARAM_STATIC_BLURB));
+
+  g_object_class_install_property
+    (object_class,
+     PROP_ACTIVE_CHARACTER,
+     g_param_spec_uint ("active-character", NULL, NULL,
+                        0,
+                        UNICHAR_MAX,
+                        0,
+                        G_PARAM_READWRITE |
+                        G_PARAM_STATIC_NAME |
+                        G_PARAM_STATIC_NICK |
+                        G_PARAM_STATIC_BLURB));
+
 }
 
 static void
@@ -548,13 +607,6 @@ set_details (GucharmapCharmap *charmap,
 #endif /* #if ENABLE_UNIHAN */
 }
 
-static gboolean
-gucharmap_active_char_save (gpointer last_char)
-{
-  gucharmap_settings_set_last_char (GPOINTER_TO_UINT (last_char));
-  return FALSE;
-}
-
 static void
 chartable_status_message (GucharmapCharmap *charmap,
                           const gchar *message)
@@ -576,10 +628,11 @@ chartable_sync_active_char (GtkWidget *widget,
 
   wc = gucharmap_chartable_get_active_character (charmap->chartable);
 
+  /* Forward the notification */
+  g_object_notify (G_OBJECT (charmap), "active-character");
+
   if (charmap->showing_details_page)
     set_details (charmap, wc);
-
-  g_idle_add (gucharmap_active_char_save, GUINT_TO_POINTER(wc));
 
   gs = g_string_sized_new (256);
   g_string_append_printf (gs, "U+%4.4X %s", wc, 
@@ -634,7 +687,7 @@ follow_if_link (GucharmapCharmap *charmap,
           g_signal_emit (charmap, gucharmap_charmap_signals[LINK_CLICKED], 0, 
                          gucharmap_chartable_get_active_character (charmap->chartable), 
                          uc);
-          gucharmap_charmap_go_to_character (charmap, uc);
+          gucharmap_charmap_set_active_character (charmap, uc);
           break;
         }
     }
@@ -825,6 +878,8 @@ chapters_view_selection_changed_cb (GtkTreeSelection *selection,
   codepoint_list = gucharmap_chapters_view_get_codepoint_list (charmap->chapters_view);
   gucharmap_chartable_set_codepoint_list (charmap->chartable, codepoint_list);
   g_object_unref (codepoint_list);
+
+  g_object_notify (G_OBJECT (charmap), "active-chapter");
 }
 
 static void
@@ -995,19 +1050,37 @@ gucharmap_charmap_set_font_desc (GucharmapCharmap *charmap,
 }
 
 void
-gucharmap_charmap_go_to_character (GucharmapCharmap *charmap, 
-                                   gunichar          wc)
+gucharmap_charmap_set_active_character (GucharmapCharmap *charmap,
+                                        gunichar          wc)
 {
-  gboolean status;
+  if (wc > UNICHAR_MAX)
+    return;
 
-  /* FIXME: move wc validation up here? */
-
-  status = gucharmap_chapters_view_select_character (charmap->chapters_view, wc);
-  if (!status)
+  if (!gucharmap_chapters_view_select_character (charmap->chapters_view, wc)) {
     g_warning ("gucharmap_chapters_view_select_character failed (U+%04X)\n", wc);
+    return;
+  }
 
-  if (wc <= UNICHAR_MAX)
-    gucharmap_chartable_set_active_character (charmap->chartable, wc);
+  gucharmap_chartable_set_active_character (charmap->chartable, wc);
+}
+
+gunichar
+gucharmap_charmap_get_active_character (GucharmapCharmap *charmap)
+{
+  return gucharmap_chartable_get_active_character (charmap->chartable);
+}
+
+void
+gucharmap_charmap_set_active_chapter (GucharmapCharmap *charmap,
+                                      const gchar *chapter)
+{
+  gucharmap_chapters_view_set_selected (charmap->chapters_view, chapter);
+}
+
+char *
+gucharmap_charmap_get_active_chapter (GucharmapCharmap *charmap)
+{
+  return gucharmap_chapters_view_get_selected (charmap->chapters_view);
 }
 
 /**
@@ -1026,19 +1099,27 @@ void
 gucharmap_charmap_set_chapters_model (GucharmapCharmap  *charmap,
                                       GucharmapChaptersModel *model)
 {
+  GObject *object = G_OBJECT (charmap);
   gunichar wc;
 
+  g_object_freeze_notify (object);
+
+  g_object_notify (G_OBJECT (charmap), "chapters-model");
+
   gucharmap_chapters_view_set_model (charmap->chapters_view, model);
-  if (!model)
+  if (!model) {
+    g_object_thaw_notify (object);
     return;
+  }
 
-  if (charmap->last_character_set)
+  if (charmap->last_character_set) {
     wc = gucharmap_chartable_get_active_character (charmap->chartable);
-  else
-    wc = gucharmap_settings_get_last_char ();
+    gucharmap_charmap_set_active_character (charmap, wc);
+  }
 
-  gucharmap_charmap_go_to_character (charmap, wc);
   charmap->last_character_set = TRUE;
+
+  g_object_thaw_notify (object);
 }
 
 GucharmapChaptersModel *
@@ -1060,4 +1141,3 @@ gucharmap_charmap_get_book_codepoint_list (GucharmapCharmap *charmap)
   codepoint_list = (GucharmapCodepointList *) gucharmap_chapters_view_get_book_codepoint_list (charmap->chapters_view);
   return g_object_ref (codepoint_list);
 }
-

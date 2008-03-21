@@ -313,8 +313,6 @@ get_nameslist (gunichar uc)
   return NULL;
 }
 
-gboolean _gucharmap_unicode_has_nameslist_entry (gunichar uc);
-
 gboolean
 _gucharmap_unicode_has_nameslist_entry (gunichar uc)
 {
@@ -582,3 +580,40 @@ gucharmap_unichar_isgraph (gunichar uc)
           && t != G_UNICODE_SPACE_SEPARATOR);
 }
 
+static gunichar
+get_first_non_underscore_char (const char *str)
+{
+  const char *p;
+
+  if (!str)
+    return 0;
+
+  for (p = str; p && *p; p = g_utf8_find_next_char (p, NULL))
+    {
+      gunichar ch;
+
+      ch = g_utf8_get_char (p);
+      if (g_unichar_isalpha (ch))
+        return ch;
+    }
+
+  return 0;
+}
+
+/**
+ * gucharmap_unicode_get_locale_character:
+ *
+ * Determines a character that's commonly used in the current
+ * locale's script.
+ * 
+ * Returns: a unicode character
+ */
+gunichar
+gucharmap_unicode_get_locale_character (void)
+{
+  GtkStockItem item;
+  if (!gtk_stock_lookup (GTK_STOCK_FILE, &item))
+    return 0;
+
+  return get_first_non_underscore_char (item.label);
+}

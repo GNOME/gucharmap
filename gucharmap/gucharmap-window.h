@@ -16,17 +16,12 @@
  * 59 Temple Place, Suite 330, Boston, MA 02110-1301  USA
  */
  
-#if !defined (__GUCHARMAP_GUCHARMAP_H_INSIDE__) && !defined (GUCHARMAP_COMPILATION)
-#error "Only <gucharmap/gucharmap.h> can be included directly."
-#endif
-
 #ifndef GUCHARMAP_WINDOW_H
 #define GUCHARMAP_WINDOW_H
 
 #include <gtk/gtk.h>
-#include <gucharmap/gucharmap-types.h>
-#include <gucharmap/gucharmap-charmap.h>
-#include <gucharmap/gucharmap-mini-fontsel.h>
+#include <gucharmap/gucharmap.h>
+#include "gucharmap-mini-fontsel.h"
 
 G_BEGIN_DECLS
 
@@ -35,6 +30,42 @@ G_BEGIN_DECLS
 #define GUCHARMAP_WINDOW_CLASS(clazz) (G_TYPE_CHECK_CLASS_CAST ((clazz), gucharmap_window_get_type (), GucharmapWindowClass))
 
 #define GUCHARMAP_IS_WINDOW(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), gucharmap_window_get_type ()))
+
+typedef struct _GucharmapWindow GucharmapWindow;
+typedef struct _GucharmapWindowClass GucharmapWindowClass;
+
+struct _GucharmapWindow
+{
+  GtkWindow parent;
+
+  GucharmapCharmap *charmap;
+  GtkWidget *status;
+
+  GtkWidget *fontsel;
+  GtkWidget *text_to_copy_container; /* the thing to show/hide */
+  GtkWidget *text_to_copy_entry;
+
+  GtkUIManager *uimanager;
+
+  GtkActionGroup *action_group;
+
+  GtkWidget *search_dialog; /* takes care of all aspects of searching */
+
+  GtkWidget *progress;
+
+  guint save_last_char_idle_id;
+
+  guint font_selection_visible : 1;
+  guint text_to_copy_visible   : 1;
+  guint file_menu_visible      : 1;
+
+  GucharmapChaptersMode chapters_mode; 
+};
+
+struct _GucharmapWindowClass
+{
+  GtkWindowClass parent_class;
+};
 
 GType                        gucharmap_window_get_type                   (void);
 GtkWidget *                  gucharmap_window_new                        (void);
@@ -46,8 +77,8 @@ void                         gucharmap_window_set_file_menu_visible      (Guchar
                                                                           gboolean         visible);
 GucharmapMiniFontSelection * gucharmap_window_get_mini_font_selection    (GucharmapWindow *guw);
 
+GdkCursor *                 _gucharmap_window_progress_cursor (void);
+
 G_END_DECLS
 
 #endif /* #ifndef GUCHARMAP_WINDOW_H */
-
-

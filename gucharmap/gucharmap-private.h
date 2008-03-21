@@ -26,6 +26,8 @@
 /* The last unicode character we support */
 #define UNICHAR_MAX (0x0010FFFFUL)
 
+gboolean _gucharmap_unicode_has_nameslist_entry (gunichar uc);
+
 
 struct _GucharmapChaptersModel
 {
@@ -222,31 +224,6 @@ struct _GucharmapCodepointListClass
 };
 
 
-struct _GucharmapMiniFontSelection
-{
-  GtkHBox parent;
-
-  GtkListStore         *family_store;
-  GtkWidget            *family; /* combo box */
-  GtkWidget            *bold;   /* toggle button*/
-  GtkWidget            *italic; /* toggle button*/
-
-  GtkObject            *size_adj; 
-  GtkWidget            *size;   /* spin button */
-  
-  PangoFontDescription *font_desc;
-
-  gint                  default_size;
-};
-
-struct _GucharmapMiniFontSelectionClass
-{
-  GtkHBoxClass parent_class;
-
-  void (* changed) (GucharmapMiniFontSelection *fontsel);
-};
-
-
 struct _GucharmapScriptChaptersModel
 {
   GucharmapChaptersModel parent;
@@ -269,31 +246,14 @@ struct _GucharmapScriptCodepointListClass
 };
 
 
-struct _GucharmapSearchDialog
+struct _GucharmapFontCodepointList
 {
-  GtkDialog parent;
+  GucharmapCodepointList parent;
+
+  PangoCoverage *coverage;
 };
 
-struct _GucharmapSearchDialogClass
+struct _GucharmapFontCodepointListClass
 {
-  GtkDialogClass parent_class;
-
-  /* signals */
-  void (* search_start)  (void);
-  void (* search_finish) (gunichar found_char);
+  GucharmapCodepointListClass parent_class;
 };
-
-
-struct _GucharmapWindow
-{
-  GtkWindow parent;
-
-  GucharmapCharmap *charmap; 
-};
-
-struct _GucharmapWindowClass
-{
-  GtkWindowClass parent_class;
-};
-
-GdkCursor * _gucharmap_window_progress_cursor (void);

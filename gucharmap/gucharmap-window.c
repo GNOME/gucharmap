@@ -24,45 +24,8 @@
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 #include "gucharmap-window.h"
-#include "gucharmap-mini-fontsel.h"
-#include "gucharmap-unicode-info.h"
-#include "gucharmap-script-chapters-model.h"
-#include "gucharmap-block-chapters-model.h"
 #include "gucharmap-search-dialog.h"
 #include "gucharmap-settings.h"
-#include "gucharmap-private.h"
-
-#ifndef ICON_PATH
-# define ICON_PATH ""
-#endif
-
-#define GUCHARMAP_WINDOW_GET_PRIVATE(o) \
-            (G_TYPE_INSTANCE_GET_PRIVATE ((o), gucharmap_window_get_type (), GucharmapWindowPrivate))
-
-typedef struct _GucharmapWindowPrivate GucharmapWindowPrivate;
-
-struct _GucharmapWindowPrivate
-{
-  GtkWidget *status;
-
-  GtkWidget *fontsel;
-  GtkWidget *text_to_copy_container; /* the thing to show/hide */
-  GtkWidget *text_to_copy_entry;
-
-  GtkUIManager *uimanager;
-
-  GtkActionGroup *action_group;
-
-  GtkWidget *search_dialog; /* takes care of all aspects of searching */
-
-  GtkWidget *progress;
-
-  guint font_selection_visible : 1;
-  guint text_to_copy_visible   : 1;
-  guint file_menu_visible      : 1;
-
-  GucharmapChaptersMode chapters_mode; 
-};
 
 static void gucharmap_window_class_init (GucharmapWindowClass *klass);
 static void gucharmap_window_init       (GucharmapWindow *window);
@@ -74,31 +37,28 @@ status_message (GtkWidget       *widget,
                 const gchar     *message, 
                 GucharmapWindow *guw)
 {
-  GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
-
-  gtk_statusbar_pop (GTK_STATUSBAR (priv->status), 0); 
+  gtk_statusbar_pop (GTK_STATUSBAR (guw->status), 0);
 
   if (message)
-    gtk_statusbar_push (GTK_STATUSBAR (priv->status), 0, message);
+    gtk_statusbar_push (GTK_STATUSBAR (guw->status), 0, message);
 }
 
 static gboolean
 update_progress_bar (GucharmapWindow *guw)
 {
-  GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
   gdouble fraction_completed;
 
-  fraction_completed = gucharmap_search_dialog_get_completed (GUCHARMAP_SEARCH_DIALOG (priv->search_dialog));
+  fraction_completed = gucharmap_search_dialog_get_completed (GUCHARMAP_SEARCH_DIALOG (guw->search_dialog));
 
   if (fraction_completed < 0 || fraction_completed > 1)
     {
-      gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (priv->progress), 0);
-      gtk_progress_bar_set_text (GTK_PROGRESS_BAR (priv->progress), NULL);
+      gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (guw->progress), 0);
+      gtk_progress_bar_set_text (GTK_PROGRESS_BAR (guw->progress), NULL);
       return FALSE;
     }
   else
     {
-      gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (priv->progress), fraction_completed);
+      gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (guw->progress), fraction_completed);
       return TRUE;
     }
 }
@@ -163,22 +123,19 @@ search_start (GucharmapSearchDialog *search_dialog,
 {
   GdkCursor *cursor;
   GtkAction *action;
-  GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
-
-  g_assert (GUCHARMAP_IS_WINDOW (guw));
 
   cursor = _gucharmap_window_progress_cursor ();
   gdk_window_set_cursor (GTK_WIDGET (guw)->window, cursor);
   gdk_cursor_unref (cursor);
 
-  action = gtk_action_group_get_action (priv->action_group, "Find");
+  action = gtk_action_group_get_action (guw->action_group, "Find");
   gtk_action_set_sensitive (action, FALSE);
-  action = gtk_action_group_get_action (priv->action_group, "FindNext");
+  action = gtk_action_group_get_action (guw->action_group, "FindNext");
   gtk_action_set_sensitive (action, FALSE);
-  action = gtk_action_group_get_action (priv->action_group, "FindPrevious");
+  action = gtk_action_group_get_action (guw->action_group, "FindPrevious");
   gtk_action_set_sensitive (action, FALSE);
 
-  gtk_progress_bar_set_text (GTK_PROGRESS_BAR (priv->progress), _("Searching..."));
+  gtk_progress_bar_set_text (GTK_PROGRESS_BAR (guw->progress), _("Searching..."));
   g_timeout_add (100, (GSourceFunc) update_progress_bar, guw);
 }
 
@@ -187,23 +144,22 @@ search_finish (GucharmapSearchDialog *search_dialog,
                gunichar               found_char,
                GucharmapWindow       *guw)
 {
-  GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
   GtkAction *action;
 
-  gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (priv->progress), 0);
-  gtk_progress_bar_set_text (GTK_PROGRESS_BAR (priv->progress), NULL);
+  gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (guw->progress), 0);
+  gtk_progress_bar_set_text (GTK_PROGRESS_BAR (guw->progress), NULL);
 
   if (found_char != (gunichar)(-1))
-    gucharmap_charmap_go_to_character (guw->charmap, found_char);
+    gucharmap_charmap_set_active_character (guw->charmap, found_char);
   /* not-found dialog handled by GucharmapSearchDialog */
 
   gdk_window_set_cursor (GTK_WIDGET (guw)->window, NULL);
 
-  action = gtk_action_group_get_action (priv->action_group, "Find");
+  action = gtk_action_group_get_action (guw->action_group, "Find");
   gtk_action_set_sensitive (action, TRUE);
-  action = gtk_action_group_get_action (priv->action_group, "FindNext");
+  action = gtk_action_group_get_action (guw->action_group, "FindNext");
   gtk_action_set_sensitive (action, TRUE);
-  action = gtk_action_group_get_action (priv->action_group, "FindPrevious");
+  action = gtk_action_group_get_action (guw->action_group, "FindPrevious");
   gtk_action_set_sensitive (action, TRUE);
 }
 
@@ -211,27 +167,24 @@ static void
 search_find (GtkAction       *action, 
              GucharmapWindow *guw)
 {
-  GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
   g_assert (GUCHARMAP_IS_WINDOW (guw));
 
-  if (priv->search_dialog == NULL)
+  if (guw->search_dialog == NULL)
     {
-      priv->search_dialog = gucharmap_search_dialog_new (guw);
-      g_signal_connect (priv->search_dialog, "search-start", G_CALLBACK (search_start), guw);
-      g_signal_connect (priv->search_dialog, "search-finish", G_CALLBACK (search_finish), guw);
+      guw->search_dialog = gucharmap_search_dialog_new (guw);
+      g_signal_connect (guw->search_dialog, "search-start", G_CALLBACK (search_start), guw);
+      g_signal_connect (guw->search_dialog, "search-finish", G_CALLBACK (search_finish), guw);
     }
 
-  gtk_window_present (GTK_WINDOW (priv->search_dialog));
+  gtk_window_present (GTK_WINDOW (guw->search_dialog));
 }
 
 static void
 search_find_next (GtkAction       *action, 
                   GucharmapWindow *guw)
 {
-  GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
-
-  if (priv->search_dialog)
-    gucharmap_search_dialog_start_search (GUCHARMAP_SEARCH_DIALOG (priv->search_dialog), GUCHARMAP_DIRECTION_FORWARD);
+  if (guw->search_dialog)
+    gucharmap_search_dialog_start_search (GUCHARMAP_SEARCH_DIALOG (guw->search_dialog), GUCHARMAP_DIRECTION_FORWARD);
   else
     search_find (action, guw);
 }
@@ -240,10 +193,8 @@ static void
 search_find_prev (GtkAction       *action, 
                   GucharmapWindow *guw)
 {
-  GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
-
-  if (priv->search_dialog)
-    gucharmap_search_dialog_start_search (GUCHARMAP_SEARCH_DIALOG (priv->search_dialog), GUCHARMAP_DIRECTION_BACKWARD);
+  if (guw->search_dialog)
+    gucharmap_search_dialog_start_search (GUCHARMAP_SEARCH_DIALOG (guw->search_dialog), GUCHARMAP_DIRECTION_BACKWARD);
   else
     search_find (action, guw);
 }
@@ -252,32 +203,29 @@ static void
 font_bigger (GtkAction       *action, 
              GucharmapWindow *guw)
 {
-  GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
   gint size, increment;
 
-  size = gucharmap_mini_font_selection_get_font_size (GUCHARMAP_MINI_FONT_SELECTION (priv->fontsel));
+  size = gucharmap_mini_font_selection_get_font_size (GUCHARMAP_MINI_FONT_SELECTION (guw->fontsel));
   increment = MAX (size / 5, 1);
-  gucharmap_mini_font_selection_set_font_size (GUCHARMAP_MINI_FONT_SELECTION (priv->fontsel), size + increment);
+  gucharmap_mini_font_selection_set_font_size (GUCHARMAP_MINI_FONT_SELECTION (guw->fontsel), size + increment);
 }
 
 static void
 font_smaller (GtkAction       *action, 
               GucharmapWindow *guw)
 {
-  GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
   gint size, increment;
 
-  size = gucharmap_mini_font_selection_get_font_size (GUCHARMAP_MINI_FONT_SELECTION (priv->fontsel));
+  size = gucharmap_mini_font_selection_get_font_size (GUCHARMAP_MINI_FONT_SELECTION (guw->fontsel));
   increment = MAX (size / 5, 1);
-  gucharmap_mini_font_selection_set_font_size (GUCHARMAP_MINI_FONT_SELECTION (priv->fontsel), size - increment);
+  gucharmap_mini_font_selection_set_font_size (GUCHARMAP_MINI_FONT_SELECTION (guw->fontsel), size - increment);
 }
 
 static void
 font_default (GtkAction       *action, 
               GucharmapWindow *guw)
 {
-  GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
-  gucharmap_mini_font_selection_reset_font_size (GUCHARMAP_MINI_FONT_SELECTION (priv->fontsel));
+  gucharmap_mini_font_selection_reset_font_size (GUCHARMAP_MINI_FONT_SELECTION (guw->fontsel));
 }
 
 static void
@@ -498,11 +446,10 @@ chapters_set_labels (const gchar     *labelnext,
 		     GucharmapWindow *guw)
 {
   GtkAction *action;
-  GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
 
-  action = gtk_action_group_get_action (priv->action_group, "NextChapter");
+  action = gtk_action_group_get_action (guw->action_group, "NextChapter");
   g_object_set ( G_OBJECT (action), "label", labelnext, NULL);
-  action = gtk_action_group_get_action (priv->action_group, "PreviousChapter");
+  action = gtk_action_group_get_action (guw->action_group, "PreviousChapter");
   g_object_set ( G_OBJECT (action), "label", labelprev, NULL);
 }
 
@@ -685,44 +632,43 @@ make_menu (GucharmapWindow *guw)
       NULL,
       G_CALLBACK (snap_cols_pow2), FALSE },
   };
-  GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
   GtkWidget *menubar;
   GtkAction *action;
 
-  priv->uimanager = gtk_ui_manager_new();
+  guw->uimanager = gtk_ui_manager_new();
 
   gtk_window_add_accel_group ( GTK_WINDOW (guw),
-  			       gtk_ui_manager_get_accel_group (priv->uimanager) );
+  			       gtk_ui_manager_get_accel_group (guw->uimanager) );
   
-  priv->action_group = gtk_action_group_new ("gucharmap_actions");
-  gtk_action_group_set_translation_domain (priv->action_group, GETTEXT_PACKAGE);
+  guw->action_group = gtk_action_group_new ("gucharmap_actions");
+  gtk_action_group_set_translation_domain (guw->action_group, GETTEXT_PACKAGE);
 
-  gtk_action_group_add_actions (priv->action_group,
+  gtk_action_group_add_actions (guw->action_group,
   				menu_entries,
 				G_N_ELEMENTS (menu_entries),
 				guw);
-  gtk_action_group_add_radio_actions (priv->action_group,
+  gtk_action_group_add_radio_actions (guw->action_group,
   				      radio_menu_entries,
 				      G_N_ELEMENTS (radio_menu_entries),
 				      gucharmap_settings_get_chapters_mode(),
 				      G_CALLBACK (view_by),
 				      guw);
-  gtk_action_group_add_toggle_actions (priv->action_group,
+  gtk_action_group_add_toggle_actions (guw->action_group,
   				       toggle_menu_entries,
 				       G_N_ELEMENTS (toggle_menu_entries),
 				       guw);
 
-  action = gtk_action_group_get_action (priv->action_group, "SnapColumns");
+  action = gtk_action_group_get_action (guw->action_group, "SnapColumns");
   gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
                                 gucharmap_settings_get_snap_pow2 ());
   gucharmap_window_set_file_menu_visible (guw, TRUE);
 
-  gtk_ui_manager_insert_action_group (priv->uimanager, priv->action_group, 0);
-  g_object_unref (priv->action_group);
+  gtk_ui_manager_insert_action_group (guw->uimanager, guw->action_group, 0);
+  g_object_unref (guw->action_group);
   
-  gtk_ui_manager_add_ui_from_string (priv->uimanager, ui_info, strlen (ui_info), NULL);
+  gtk_ui_manager_add_ui_from_string (guw->uimanager, ui_info, strlen (ui_info), NULL);
   
-  menubar = gtk_ui_manager_get_widget (priv->uimanager, "/MenuBar");
+  menubar = gtk_ui_manager_get_widget (guw->uimanager, "/MenuBar");
 
   return menubar;
 }
@@ -743,7 +689,6 @@ static void
 insert_character_in_text_to_copy (GucharmapChartable *chartable,
                                   GucharmapWindow *guw)
 {
-  GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
   gchar ubuf[7];
   gint pos;
   gunichar wc;
@@ -754,27 +699,25 @@ insert_character_in_text_to_copy (GucharmapChartable *chartable,
     return;
 
   /* don't do anything if text_to_copy is not active */
-  if (!priv->text_to_copy_visible)
+  if (!guw->text_to_copy_visible)
     return;
 
   ubuf[g_unichar_to_utf8 (wc, ubuf)] = '\0';
-  gtk_editable_delete_selection (GTK_EDITABLE (priv->text_to_copy_entry));
-  pos = gtk_editable_get_position (GTK_EDITABLE (priv->text_to_copy_entry));
-  gtk_editable_insert_text (GTK_EDITABLE (priv->text_to_copy_entry), ubuf, -1, &pos);
-  gtk_editable_set_position (GTK_EDITABLE (priv->text_to_copy_entry), pos);
+  gtk_editable_delete_selection (GTK_EDITABLE (guw->text_to_copy_entry));
+  pos = gtk_editable_get_position (GTK_EDITABLE (guw->text_to_copy_entry));
+  gtk_editable_insert_text (GTK_EDITABLE (guw->text_to_copy_entry), ubuf, -1, &pos);
+  gtk_editable_set_position (GTK_EDITABLE (guw->text_to_copy_entry), pos);
 }
 
 static void
 edit_copy (GtkWidget *widget, GucharmapWindow *guw)
 {
-  GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
-
   /* if nothing is selected, select the whole thing */
   if (! gtk_editable_get_selection_bounds (
-              GTK_EDITABLE (priv->text_to_copy_entry), NULL, NULL))
-    gtk_editable_select_region (GTK_EDITABLE (priv->text_to_copy_entry), 0, -1);
+              GTK_EDITABLE (guw->text_to_copy_entry), NULL, NULL))
+    gtk_editable_select_region (GTK_EDITABLE (guw->text_to_copy_entry), 0, -1);
 
-  gtk_editable_copy_clipboard (GTK_EDITABLE (priv->text_to_copy_entry));
+  gtk_editable_copy_clipboard (GTK_EDITABLE (guw->text_to_copy_entry));
 }
 
 static void
@@ -787,7 +730,6 @@ entry_changed_sensitize_button (GtkEditable *editable, GtkWidget *button)
 static GtkWidget *
 make_text_to_copy (GucharmapWindow *guw)
 {
-  GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
   GtkWidget *button;
   GtkWidget *label;
   GtkWidget *hbox;
@@ -798,11 +740,11 @@ make_text_to_copy (GucharmapWindow *guw)
   gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
   gtk_widget_show (label);
 
-  priv->text_to_copy_entry = gtk_entry_new ();
-  gtk_box_pack_start (GTK_BOX (hbox), priv->text_to_copy_entry, TRUE, TRUE, 0);
-  gtk_widget_show (priv->text_to_copy_entry);
+  guw->text_to_copy_entry = gtk_entry_new ();
+  gtk_box_pack_start (GTK_BOX (hbox), guw->text_to_copy_entry, TRUE, TRUE, 0);
+  gtk_widget_show (guw->text_to_copy_entry);
 
-  gtk_label_set_mnemonic_widget (GTK_LABEL (label), priv->text_to_copy_entry);
+  gtk_label_set_mnemonic_widget (GTK_LABEL (label), guw->text_to_copy_entry);
 
   /* the copy button */
   button = gtk_button_new_from_stock (GTK_STOCK_COPY); 
@@ -812,7 +754,7 @@ make_text_to_copy (GucharmapWindow *guw)
                     G_CALLBACK (edit_copy), guw);
   gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
 
-  g_signal_connect (G_OBJECT (priv->text_to_copy_entry), "changed",
+  g_signal_connect (G_OBJECT (guw->text_to_copy_entry), "changed",
                     G_CALLBACK (entry_changed_sensitize_button), button);
 
   gtk_widget_set_tooltip_text (button, _("Copy to the clipboard."));
@@ -824,22 +766,46 @@ static void
 status_realize (GtkWidget       *status,
                 GucharmapWindow *guw)
 {
-  GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
-
   /* FIXMEchpe ewww... */
   /* increase the height a bit so it doesn't resize itself */
-  gtk_widget_set_size_request (priv->status, -1, priv->status->allocation.height + 9);
+  gtk_widget_set_size_request (guw->status, -1, guw->status->allocation.height + 9);
+}
+
+
+static gboolean
+save_last_char_idle_cb (GucharmapWindow *guw)
+{
+  gunichar wc;
+
+  guw->save_last_char_idle_id = 0;
+
+  wc = gucharmap_charmap_get_active_character (guw->charmap);
+  gucharmap_settings_set_last_char (wc);
+
+  return FALSE;
+}
+
+static void
+charmap_sync_active_character (GtkWidget *widget,
+                               GParamSpec *pspec,
+                               GucharmapWindow *guw)
+{
+  if (guw->save_last_char_idle_id != 0)
+    return;
+
+  guw->save_last_char_idle_id = g_idle_add ((GSourceFunc) save_last_char_idle_cb, guw);
 }
 
 static void
 pack_stuff_in_window (GucharmapWindow *guw)
 {
-  GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
   GtkWidget *big_vbox;
   GtkWidget *hbox;
   GucharmapChartable *chartable;
 
   guw->charmap = GUCHARMAP_CHARMAP (gucharmap_charmap_new ());
+  g_signal_connect (guw->charmap, "notify::active-character",
+                    G_CALLBACK (charmap_sync_active_character), guw);
 
   big_vbox = gtk_vbox_new (FALSE, 0);
   gtk_container_add (GTK_CONTAINER (guw), big_vbox);
@@ -854,14 +820,14 @@ pack_stuff_in_window (GucharmapWindow *guw)
                       TRUE, TRUE, 0);
   gtk_widget_show (GTK_WIDGET (guw->charmap));
 
-  priv->fontsel = gucharmap_mini_font_selection_new ();
-  g_signal_connect (priv->fontsel, "changed", G_CALLBACK (fontsel_changed), guw);
-  gtk_box_pack_start (GTK_BOX (hbox), priv->fontsel, FALSE, FALSE, 0);
-  gtk_widget_show (GTK_WIDGET (priv->fontsel));
+  guw->fontsel = gucharmap_mini_font_selection_new ();
+  g_signal_connect (guw->fontsel, "changed", G_CALLBACK (fontsel_changed), guw);
+  gtk_box_pack_start (GTK_BOX (hbox), guw->fontsel, FALSE, FALSE, 0);
+  gtk_widget_show (GTK_WIDGET (guw->fontsel));
 
-  priv->text_to_copy_container = make_text_to_copy (guw);
-  gtk_container_set_border_width (GTK_CONTAINER (priv->text_to_copy_container), 6);
-  gtk_box_pack_start (GTK_BOX (big_vbox), priv->text_to_copy_container, FALSE, FALSE, 0);
+  guw->text_to_copy_container = make_text_to_copy (guw);
+  gtk_container_set_border_width (GTK_CONTAINER (guw->text_to_copy_container), 6);
+  gtk_box_pack_start (GTK_BOX (big_vbox), guw->text_to_copy_container, FALSE, FALSE, 0);
   /* FIXMEchpe!! */
   chartable =gucharmap_charmap_get_chartable (guw->charmap);
   g_signal_connect (chartable, "activate", G_CALLBACK (insert_character_in_text_to_copy), guw);
@@ -870,14 +836,14 @@ pack_stuff_in_window (GucharmapWindow *guw)
   hbox = gtk_hbox_new (FALSE, 0);
   gtk_box_pack_start (GTK_BOX (big_vbox), hbox, FALSE, FALSE, 0);
 
-  priv->status = gtk_statusbar_new ();
-  gtk_statusbar_set_has_resize_grip (GTK_STATUSBAR (priv->status), FALSE);
-  gtk_box_pack_start (GTK_BOX (hbox), priv->status, TRUE, TRUE, 0);
-  gtk_widget_show (priv->status);
-  g_signal_connect (priv->status, "realize", G_CALLBACK (status_realize), guw);
+  guw->status = gtk_statusbar_new ();
+  gtk_statusbar_set_has_resize_grip (GTK_STATUSBAR (guw->status), FALSE);
+  gtk_box_pack_start (GTK_BOX (hbox), guw->status, TRUE, TRUE, 0);
+  gtk_widget_show (guw->status);
+  g_signal_connect (guw->status, "realize", G_CALLBACK (status_realize), guw);
 
-  priv->progress = gtk_progress_bar_new ();
-  gtk_box_pack_start (GTK_BOX (hbox), priv->progress, FALSE, FALSE, 0);
+  guw->progress = gtk_progress_bar_new ();
+  gtk_box_pack_start (GTK_BOX (hbox), guw->progress, FALSE, FALSE, 0);
 
 #if 0
   grip = gtk_statusbar_new ();
@@ -890,22 +856,23 @@ pack_stuff_in_window (GucharmapWindow *guw)
 
   gtk_widget_show (big_vbox);
 
-  set_chapters_model (guw, priv->chapters_mode);
+  set_chapters_model (guw, guw->chapters_mode);
+
+  gucharmap_charmap_set_active_character (guw->charmap,
+                                          gucharmap_settings_get_last_char ());
 }
 
 static void
 gucharmap_window_init (GucharmapWindow *guw)
 {
-  GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
-
   gtk_window_set_title (GTK_WINDOW (guw), _("Character Map"));
 
-  priv->font_selection_visible = FALSE;
-  priv->text_to_copy_visible = FALSE;
-  priv->file_menu_visible = FALSE;
-  priv->chapters_mode = gucharmap_settings_get_chapters_mode ();
+  guw->font_selection_visible = FALSE;
+  guw->text_to_copy_visible = FALSE;
+  guw->file_menu_visible = FALSE;
+  guw->chapters_mode = gucharmap_settings_get_chapters_mode ();
 
-  priv->search_dialog = NULL;
+  guw->search_dialog = NULL;
 
   gtk_window_set_icon_name (GTK_WINDOW (guw), "gucharmap");
 
@@ -917,24 +884,20 @@ gucharmap_window_init (GucharmapWindow *guw)
 static void
 window_finalize (GObject *object)
 {
-#if 0
   GucharmapWindow *guw = GUCHARMAP_WINDOW (object);
-  GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
 
-  /*
-  if (priv->last_search)
-    g_free (priv->last_search);
-    */
-#endif
+  if (guw->save_last_char_idle_id != 0)
+    g_source_remove (guw->save_last_char_idle_id);
+
   G_OBJECT_CLASS (gucharmap_window_parent_class)->finalize (object);
 }
 
 static void
-gucharmap_window_class_init (GucharmapWindowClass *clazz)
+gucharmap_window_class_init (GucharmapWindowClass *klass)
 {
-  G_OBJECT_CLASS (clazz)->finalize = window_finalize;
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  g_type_class_add_private (clazz, sizeof (GucharmapWindowPrivate));
+  object_class->finalize = window_finalize;
 }
 
 GtkWidget *
@@ -947,42 +910,36 @@ void
 gucharmap_window_set_font_selection_visible (GucharmapWindow *guw, 
                                              gboolean         visible)
 {
-  GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
+  guw->font_selection_visible = visible != FALSE;
 
-  priv->font_selection_visible = visible != FALSE;
-
-  g_object_set (priv->fontsel, "visible", visible, NULL);
+  g_object_set (guw->fontsel, "visible", visible, NULL);
 }
 
 void 
 gucharmap_window_set_text_to_copy_visible (GucharmapWindow *guw, 
                                            gboolean         visible)
 {
-  GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
+  guw->text_to_copy_visible = visible != FALSE;
 
-  priv->text_to_copy_visible = visible != FALSE;
-
-  g_object_set (priv->text_to_copy_container, "visible", visible, NULL);
+  g_object_set (guw->text_to_copy_container, "visible", visible, NULL);
 }
 
 void 
 gucharmap_window_set_file_menu_visible (GucharmapWindow *guw, 
                                         gboolean         visible)
 {
-  GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
   GtkAction *action;
 
-  priv->file_menu_visible = visible != FALSE;
+  guw->file_menu_visible = visible != FALSE;
 
-  action = gtk_action_group_get_action (priv->action_group, "File");
+  action = gtk_action_group_get_action (guw->action_group, "File");
   gtk_action_set_visible (action, visible);
-  action = gtk_action_group_get_action (priv->action_group, "Quit");
+  action = gtk_action_group_get_action (guw->action_group, "Quit");
   gtk_action_set_sensitive (action, visible);
 }
 
 GucharmapMiniFontSelection *
 gucharmap_window_get_mini_font_selection (GucharmapWindow *guw)
 {
-  GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
-  return GUCHARMAP_MINI_FONT_SELECTION (priv->fontsel);
+  return GUCHARMAP_MINI_FONT_SELECTION (guw->fontsel);
 }
