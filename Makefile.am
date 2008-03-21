@@ -36,7 +36,7 @@ EXTRA_DIST = \
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gucharmap-2.pc
 
-DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper
+DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper --disable-schemas-install
 
 DISTCLEANFILES = \
         gnome-doc-utils.make \
