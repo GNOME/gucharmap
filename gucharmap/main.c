@@ -71,7 +71,6 @@ main (gint argc, gchar **argv)
 
   gucharmap_settings_add_window (GTK_WINDOW (window));
 
-#if 0
   /* make the starting font 50% bigger than the default font */
   if (font == NULL) /* font could be set by command line option */
     {
@@ -96,7 +95,6 @@ main (gint argc, gchar **argv)
       else
         gucharmap_mini_font_selection_reset_font_size (fontsel);
     }
-#endif
 
   gtk_widget_show (window);
 

@@ -857,3 +857,8 @@ void
 gucharmap_window_set_font (GucharmapWindow *window)
 {
 }
+GucharmapMiniFontSelection *
+gucharmap_window_get_mini_font_selection (GucharmapWindow *guw)
+{
+  return GUCHARMAP_MINI_FONT_SELECTION (guw->fontsel);
+}
