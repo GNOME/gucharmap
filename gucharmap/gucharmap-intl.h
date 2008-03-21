@@ -5,6 +5,8 @@
 
 G_BEGIN_DECLS
 
+#define I_(string) g_intern_static_string (string)
+
 void _gucharmap_intl_ensure_initialized (void);
 
 G_END_DECLS
