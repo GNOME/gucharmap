@@ -153,6 +153,9 @@ gucharmap_charmap_update_text_tags (GucharmapCharmap *charmap)
   style = gtk_widget_get_style (GTK_WIDGET (charmap->details_view));
   default_font_size = pango_font_description_get_size (style->font_desc);
 
+  if (charmap->font_desc)
+    g_object_set (charmap->text_tag_gimongous, "font-desc", charmap->font_desc, NULL);
+
   /* FIXME: do we need to consider whether the font size is absolute or not? */
   g_object_set (charmap->text_tag_gimongous,
                 "size", 8 * default_font_size,
@@ -173,6 +176,9 @@ gucharmap_charmap_set_font_desc_internal (GucharmapCharmap *charmap,
   charmap->font_desc = font_desc; /* adopted */
 
   gucharmap_chartable_set_font_desc (charmap->chartable, font_desc);
+
+  if (gtk_widget_get_style (GTK_WIDGET (charmap->details_view)))
+    gucharmap_charmap_update_text_tags (charmap);
 }
 
 static void
