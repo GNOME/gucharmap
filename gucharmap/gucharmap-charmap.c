@@ -36,6 +36,8 @@ struct _GucharmapCharmap
   GucharmapChaptersView *chapters_view;
   GucharmapChartable *chartable;
   GtkTextView *details_view;
+  GtkTextTag *text_tag_gimongous;
+  GtkTextTag *text_tag_big;
 
   PangoFontDescription *font_desc;
 
@@ -140,6 +142,25 @@ gucharmap_charmap_class_init (GucharmapCharmapClass *clazz)
                                    g_param_spec_object ("chapters-model", NULL, NULL,
                                                         GUCHARMAP_TYPE_CHAPTERS_MODEL,
                                                         G_PARAM_WRITABLE | G_PARAM_CONSTRUCT | G_PARAM_STATIC_NAME | G_PARAM_STATIC_NICK | G_PARAM_STATIC_BLURB));
+}
+
+static void
+gucharmap_charmap_update_text_tags (GucharmapCharmap *charmap)
+{
+  GtkStyle *style;
+  int default_font_size;
+
+  style = gtk_widget_get_style (GTK_WIDGET (charmap->details_view));
+  default_font_size = pango_font_description_get_size (style->font_desc);
+
+  /* FIXME: do we need to consider whether the font size is absolute or not? */
+  g_object_set (charmap->text_tag_gimongous,
+                "size", 8 * default_font_size,
+                "left-margin", PANGO_PIXELS (5 * default_font_size),
+                NULL);
+  g_object_set (charmap->text_tag_big,
+                "size", default_font_size * 5 / 4,
+                NULL);
 }
 
 static void
@@ -618,32 +639,6 @@ chartable_sync_active_char (GtkWidget *widget,
   g_string_free (gs, TRUE);
 }
 
-/* this creates all the named text tags we'll be using in set_details */
-static void
-create_tags (GucharmapCharmap *charmap)
-{
-  GtkTextBuffer *buffer;
-  gint default_font_size;
-
-  buffer = gtk_text_view_get_buffer (charmap->details_view);
-
-  default_font_size = pango_font_description_get_size (
-          GTK_WIDGET (charmap)->style->font_desc);
-
-  gtk_text_buffer_create_tag (buffer, "gimongous",
-                              "size", 8 * default_font_size,
-                              "left-margin", PANGO_PIXELS (5 * default_font_size),
-                              NULL);
-  gtk_text_buffer_create_tag (buffer, "bold",
-                              "weight", PANGO_WEIGHT_BOLD,
-                              NULL);
-  gtk_text_buffer_create_tag (buffer, "big",
-                              "size", default_font_size * 5 / 4,
-                              NULL);
-  gtk_text_buffer_create_tag (buffer, "detail-value",
-                              NULL);
-}
-
 static void
 follow_if_link (GucharmapCharmap *charmap,
                 GtkTextIter *iter)
@@ -672,6 +667,14 @@ follow_if_link (GucharmapCharmap *charmap,
 
   if (tags) 
     g_slist_free (tags);
+}
+
+static void
+details_style_set (GtkWidget *widget,
+                   GtkStyle *previous_style,
+                   GucharmapCharmap *charmap)
+{
+  gucharmap_charmap_update_text_tags (charmap);
 }
 
 static gboolean
@@ -855,6 +858,7 @@ gucharmap_charmap_init (GucharmapCharmap *charmap)
 {
   GtkWidget *scrolled_window, *view, *notebook, *chartable, *textview;
   GtkTreeSelection *selection;
+  GtkTextBuffer *buffer;
 
   /* FIXME: move this to realize */
   charmap->hand_cursor = gdk_cursor_new (GDK_HAND2);
@@ -918,6 +922,8 @@ gucharmap_charmap_init (GucharmapCharmap *charmap)
   gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (textview),
                                GTK_WRAP_WORD);
 
+  g_signal_connect (textview, "style-set",
+                    G_CALLBACK (details_style_set), charmap);
   g_signal_connect (textview, "key-press-event",
                     G_CALLBACK (details_key_press_event), charmap);
   g_signal_connect (textview, "event-after",
@@ -927,7 +933,18 @@ gucharmap_charmap_init (GucharmapCharmap *charmap)
   g_signal_connect (textview, "visibility-notify-event",
                     G_CALLBACK (details_visibility_notify_event), charmap);
 
-  create_tags (charmap);
+  buffer = gtk_text_view_get_buffer (charmap->details_view);
+  charmap->text_tag_gimongous =
+    gtk_text_buffer_create_tag (buffer, "gimongous",
+                                NULL);
+  charmap->text_tag_big =
+    gtk_text_buffer_create_tag (buffer, "big",
+                                NULL);
+  gtk_text_buffer_create_tag (buffer, "bold",
+                              "weight", PANGO_WEIGHT_BOLD,
+                              NULL);
+  gtk_text_buffer_create_tag (buffer, "detail-value",
+                              NULL);
 
   gtk_container_add (GTK_CONTAINER (scrolled_window), textview);
   gtk_widget_show (textview);
