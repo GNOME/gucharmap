@@ -64,12 +64,12 @@ gucharmap_settings_get_locale_character (void)
   return get_first_non_underscore_char (_("_File")); /* use a super-common string */
 }
 
-static ChaptersMode
+static GucharmapChaptersMode
 get_default_chapters_mode (void)
 {
   /* XXX: In the future, do something based on chapters mode and locale 
    * or something. */
-  return CHAPTERS_SCRIPT;
+  return GUCHARMAP_CHAPTERS_SCRIPT;
 }
 
 static gchar *
@@ -114,10 +114,10 @@ gucharmap_settings_initialized (void)
   return (client != NULL);
 }
 
-ChaptersMode
+GucharmapChaptersMode
 gucharmap_settings_get_chapters_mode (void)
 {
-  ChaptersMode ret;
+  GucharmapChaptersMode ret;
   gchar *mode;
   
   mode = gconf_client_get_string (client, GCONF_PREFIX"/chapters_mode", NULL);
@@ -125,9 +125,9 @@ gucharmap_settings_get_chapters_mode (void)
     return get_default_chapters_mode ();
 
   if (strcmp (mode, "script") == 0)
-    ret = CHAPTERS_SCRIPT;
+    ret = GUCHARMAP_CHAPTERS_SCRIPT;
   else if (strcmp (mode, "block") == 0)
-    ret = CHAPTERS_BLOCK;
+    ret = GUCHARMAP_CHAPTERS_BLOCK;
   else
     ret = get_default_chapters_mode ();
 
@@ -136,15 +136,15 @@ gucharmap_settings_get_chapters_mode (void)
 }
 
 void
-gucharmap_settings_set_chapters_mode (ChaptersMode mode)
+gucharmap_settings_set_chapters_mode (GucharmapChaptersMode mode)
 {
   switch (mode)
     {
-      case CHAPTERS_SCRIPT:
+      case GUCHARMAP_CHAPTERS_SCRIPT:
         gconf_client_set_string (client, GCONF_PREFIX"/chapters_mode", "script", NULL);
       break;
 
-      case CHAPTERS_BLOCK:
+      case GUCHARMAP_CHAPTERS_BLOCK:
         gconf_client_set_string (client, GCONF_PREFIX"/chapters_mode", "block", NULL);
       break;
     }
@@ -265,7 +265,7 @@ gucharmap_settings_get_chapters_mode (void)
 }
 
 void
-gucharmap_settings_set_chapters_mode (ChaptersMode mode)
+gucharmap_settings_set_chapters_mode (GucharmapChaptersMode mode)
 {
   return;
 }

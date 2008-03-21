@@ -27,8 +27,8 @@ G_BEGIN_DECLS
 
 void         gucharmap_settings_initialize           (void);
 void         gucharmap_settings_shutdown             (void);
-ChaptersMode gucharmap_settings_get_chapters_mode    (void);
-void         gucharmap_settings_set_chapters_mode    (ChaptersMode mode);
+GucharmapChaptersMode gucharmap_settings_get_chapters_mode    (void);
+void         gucharmap_settings_set_chapters_mode    (GucharmapChaptersMode mode);
 gchar *      gucharmap_settings_get_font             (void);
 void         gucharmap_settings_set_font             (gchar *font);
 gunichar     gucharmap_settings_get_last_char        (void);

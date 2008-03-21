@@ -61,7 +61,7 @@ struct _GucharmapWindowPrivate
   guint text_to_copy_visible   : 1;
   guint file_menu_visible      : 1;
 
-  ChaptersMode chapters_mode; 
+  GucharmapChaptersMode chapters_mode; 
 };
 
 static void gucharmap_window_class_init (GucharmapWindowClass *klass);
@@ -513,18 +513,18 @@ enum {
 
 static void
 set_chapters_model (GucharmapWindow *guw,
-                    ChaptersMode mode)
+                    GucharmapChaptersMode mode)
 {
   GucharmapChaptersModel *model = NULL;
 
   switch (mode)
     {
-      case CHAPTERS_SCRIPT:
+      case GUCHARMAP_CHAPTERS_SCRIPT:
       	model = gucharmap_script_chapters_model_new ();
 	chapters_set_labels (_("Next Script"), _("Previous Script"), guw);
 	break;
       
-      case CHAPTERS_BLOCK:
+      case GUCHARMAP_CHAPTERS_BLOCK:
       	model = gucharmap_block_chapters_model_new ();
 	chapters_set_labels (_("Next Block"), _("Previous Block"), guw);
 	break;
@@ -542,16 +542,16 @@ view_by (GtkAction        *action,
 	 GtkRadioAction   *radioaction,
          GucharmapWindow  *guw)
 {
-  ChaptersMode mode;
+  GucharmapChaptersMode mode;
 
   switch (gtk_radio_action_get_current_value (radioaction))
     {
       case VIEW_BY_SCRIPT:
-        mode = CHAPTERS_SCRIPT;
+        mode = GUCHARMAP_CHAPTERS_SCRIPT;
 	break;
       
       case VIEW_BY_BLOCK:
-        mode = CHAPTERS_BLOCK;
+        mode = GUCHARMAP_CHAPTERS_BLOCK;
 	break;
       
       default:

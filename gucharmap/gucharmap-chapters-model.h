@@ -46,10 +46,9 @@ G_BEGIN_DECLS
 
 typedef enum
 {
-  CHAPTERS_SCRIPT = 0,
-  CHAPTERS_BLOCK  = 1
-}
-ChaptersMode;
+  GUCHARMAP_CHAPTERS_SCRIPT = 0,
+  GUCHARMAP_CHAPTERS_BLOCK  = 1
+} GucharmapChaptersMode;
 
 enum {
   CHAPTERS_ID_COL    = 0,
