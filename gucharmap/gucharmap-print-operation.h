@@ -16,15 +16,11 @@
 *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
-#if !defined (__GUCHARMAP_GUCHARMAP_H_INSIDE__) && !defined (GUCHARMAP_COMPILATION)
-#error "Only <gucharmap/gucharmap.h> can be included directly."
-#endif
-
 #ifndef GUCHARMAP_PRINT_OPERATION_H
 #define GUCHARMAP_PRINT_OPERATION_H
 
 #include <gtk/gtkprintoperation.h>
-#include "gucharmap-codepoint-list.h"
+#include <gucharmap/gucharmap.h>
 
 G_BEGIN_DECLS
 

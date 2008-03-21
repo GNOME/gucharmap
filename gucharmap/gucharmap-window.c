@@ -1,5 +1,6 @@
 /*
  * Copyright © 2004 Noah Levitt
+ * Copyright © 2007, 2008 Christian Persch
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -20,12 +21,15 @@
 
 #include <stdlib.h>
 #include <string.h>
+
 #include <glib/gi18n-lib.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
-#include "gucharmap-window.h"
+
+#include "gucharmap-print-operation.h"
 #include "gucharmap-search-dialog.h"
 #include "gucharmap-settings.h"
+#include "gucharmap-window.h"
 
 static void gucharmap_window_class_init (GucharmapWindowClass *klass);
 static void gucharmap_window_init       (GucharmapWindow *window);
@@ -319,12 +323,14 @@ file_page_setup (GtkAction *action,
                                          guw);
 }
 
+#if 0
 static void
 file_print_preview (GtkAction *action,
                     GucharmapWindow *guw)
 {
   gucharmap_window_print (guw, GTK_PRINT_OPERATION_ACTION_PREVIEW);
 }
+#endif
 
 static void
 file_print (GtkAction *action,
@@ -648,7 +654,9 @@ static const char ui_info [] =
   "<menubar name='MenuBar'>"
     "<menu action='File'>"
       "<menuitem action='PageSetup' />"
+#if 0
       "<menuitem action='PrintPreview' />"
+#endif
       "<menuitem action='Print' />"
       "<separator />"
       "<menuitem action='Close' />"
@@ -786,8 +794,10 @@ gucharmap_window_init (GucharmapWindow *guw)
 
     { "PageSetup", NULL, N_("Page _Setup"), NULL,
       NULL, G_CALLBACK (file_page_setup) },
+#if 0
     { "PrintPreview", GTK_STOCK_PRINT_PREVIEW, NULL, NULL,
       NULL, G_CALLBACK (file_print_preview) },
+#endif
     { "Print", GTK_STOCK_PRINT, NULL, NULL,
       NULL, G_CALLBACK (file_print) },
     { "Close", GTK_STOCK_CLOSE, NULL, NULL,

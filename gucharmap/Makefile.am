@@ -44,8 +44,6 @@ libgucharmap_la_SOURCES = \
 	gucharmap-init.c \
 	gucharmap-marshal.c \
 	gucharmap-marshal.h \
-	gucharmap-print-operation.c \
-	gucharmap-print-operation.h \
 	gucharmap-private.h \
 	gucharmap-script-chapters-model.c \
 	gucharmap-script-chapters-model.h \
@@ -105,6 +103,8 @@ bin_PROGRAMS = gucharmap
 gucharmap_SOURCES = \
 	gucharmap-mini-fontsel.c \
 	gucharmap-mini-fontsel.h \
+	gucharmap-print-operation.c \
+	gucharmap-print-operation.h \
 	gucharmap-search-dialog.c \
 	gucharmap-search-dialog.h \
 	gucharmap-settings.c \
@@ -158,6 +158,13 @@ gucharmap-marshal.c: $(srcdir)/gucharmap-marshal.list
                             --internal > gucharmap-marshal.c.tmp \
           && mv gucharmap-marshal.c.tmp gucharmap-marshal.c ) \
         || ( rm -f gucharmap-marshal.c.tmp && exit 1 )
+
+printoptions.h: print.glade
+	$(GTK_BUILDER_CONVERT) --root custom_tab_container $< - | \
+		$(XMLLINT) --noblanks - | \
+		$(HEXDUMP) -v -e '"" 1/1 "0x%02x,""\n"' > xgen-$(@F) \
+	&& (cmp -s xgen-$(@F) $@ || cp -f xgen-$(@F) $@) \
+	&& rm -f xgen-$(@F)
 
 # don't do the symlink stuff if this is windows
 if OS_WIN32

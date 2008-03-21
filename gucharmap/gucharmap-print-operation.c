@@ -20,14 +20,11 @@
 
 #include <gtk/gtk.h>
 
-#include "gucharmap-codepoint-list.h"
-#include "gucharmap-unicode-info.h"
-
 #include "gucharmap-print-operation.h"
 
 #define GUCHARMAP_PRINT_OPERATION_GET_PRIVATE(print_operation)(G_TYPE_INSTANCE_GET_PRIVATE ((print_operation), GUCHARMAP_TYPE_PRINT_OPERATION, GucharmapPrintOperationPrivate))
 
-#define GRID_LINE_WIDTH (2.0)
+#define GRID_LINE_WIDTH (0.25)
 
 struct _GucharmapPrintOperationPrivate
 {
@@ -76,6 +73,7 @@ draw_character_cell (GucharmapPrintOperation *print_operation,
   char utf8[7];
   int len;
   double x, y;
+  PangoRectangle ink_rect;
 
   wc = gucharmap_codepoint_list_get_char (priv->codepoint_list, character_index);
   if (!gucharmap_unichar_validate (wc))
@@ -83,6 +81,8 @@ draw_character_cell (GucharmapPrintOperation *print_operation,
 
   len = g_unichar_to_utf8 (wc, utf8);
   pango_layout_set_text (priv->character_layout, utf8, len);
+
+  pango_layout_get_extents (priv->character_layout, &ink_rect, NULL);
 
   /* FIXME: RTL? */
   x = col * priv->cell_width + priv->cell_margin_left;
@@ -173,6 +173,15 @@ gucharmap_print_operation_begin_print (GtkPrintOperation *operation,
 
   priv->cell_margin_left = priv->cell_margin_right = priv->cell_margin_top = priv->cell_margin_bottom = MARGIN;
   //XXX  calculate cell_width/height
+
+  priv->character_width = priv->cell_width -
+                          priv->cell_margin_left -
+                          priv->cell_margin_right;
+  priv->character_height = priv->cell_height -
+                           priv->cell_margin_top -
+                           priv->cell_margin_bottom -
+                           priv->info_text_gap -
+                           priv->info_text_height;
 
   priv->n_rows = height / priv->cell_height;
   page_size = priv->n_rows * priv->n_columns;
