@@ -19,11 +19,12 @@
 
 #include "config.h"
 
-#include <gtk/gtk.h>
 #include <stdlib.h>
-#include"gucharmap-intl.h"
-#include "gucharmap-window.h"
-#include "gucharmap-mini-fontsel.h"
+
+#include <glib/gi18n.h>
+#include <gtk/gtk.h>
+
+#include <gucharmap/gucharmap.h>
 #include "gucharmap-settings.h"
 
 gint

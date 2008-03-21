@@ -21,7 +21,7 @@
 
 #include <glib.h>
 #include <gtk/gtkwindow.h>
-#include <gucharmap/gucharmap-chapters-model.h>
+#include <gucharmap/gucharmap.h>
 
 G_BEGIN_DECLS
 

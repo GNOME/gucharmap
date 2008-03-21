@@ -18,6 +18,10 @@
 
 /* block means unicode block */
 
+#if !defined (__GUCHARMAP_GUCHARMAP_H_INSIDE__) && !defined (GUCHARMAP_COMPILATION)
+#error "Only <gucharmap/gucharmap.h> can be included directly."
+#endif
+
 #ifndef GUCHARMAP_CHAPTERS_VIEW_H
 #define GUCHARMAP_CHAPTERS_VIEW_H
 

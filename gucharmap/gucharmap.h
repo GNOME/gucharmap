@@ -20,6 +20,8 @@
 #ifndef GUCHARMAP_H
 #define GUCHARMAP_H
 
+#define __GUCHARMAP_GUCHARMAP_H_INSIDE__
+
 #include <gucharmap/gucharmap-chartable.h>
 #include <gucharmap/gucharmap-charmap.h>
 #include <gucharmap/gucharmap-window.h>
@@ -31,5 +33,7 @@
 #include <gucharmap/gucharmap-block-chapters-model.h>
 #include <gucharmap/gucharmap-script-chapters-model.h>
 #include <gucharmap/gucharmap-search-dialog.h>
+
+#undef __GUCHARMAP_GUCHARMAP_H_INSIDE__
 
 #endif /* #ifndef GUCHARMAP_H */

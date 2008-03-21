@@ -15,6 +15,10 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02110-1301  USA
  */
+ 
+#if !defined (__GUCHARMAP_GUCHARMAP_H_INSIDE__) && !defined (GUCHARMAP_COMPILATION)
+#error "Only <gucharmap/gucharmap.h> can be included directly."
+#endif
 
 #ifndef GUCHARMAP_WINDOW_H
 #define GUCHARMAP_WINDOW_H
