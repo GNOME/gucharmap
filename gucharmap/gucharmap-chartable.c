@@ -1599,9 +1599,6 @@ gucharmap_chartable_move_cursor (GucharmapChartable *chartable,
                         step == GTK_MOVEMENT_PAGES ||
                         step == GTK_MOVEMENT_BUFFER_ENDS, FALSE);
 
-  if (!GTK_WIDGET_HAS_FOCUS (GTK_WIDGET (chartable)))
-    return FALSE;
-
   switch (step)
     {
     case GTK_MOVEMENT_LOGICAL_POSITIONS:

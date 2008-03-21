@@ -371,59 +371,30 @@ help_about (GtkAction       *action,
   g_free (license_trans);
 }
 
-/* FIXMEchpe: make these methods on the codepoint list! */
 static void
-prev_character (GtkAction       *action,
-                GucharmapWindow *guw)
+next_or_prev_character (GtkAction       *action,
+                        GucharmapWindow *guw)
 {
-  GucharmapCodepointList *codepoint_list;
   GucharmapChartable *chartable;
-  gint index, start;
-  gunichar wc;
+  GucharmapChartableClass *klass;
+  GtkBindingSet *binding_set;
+  const char *name;
+  guint keyval = 0;
+
+  name = gtk_action_get_name (action);
+  if (strcmp (name, "NextCharacter") == 0) {
+    keyval = GDK_Right;
+  } else if (strcmp (name, "PreviousCharacter") == 0) {
+    keyval = GDK_Left;
+  }
 
   chartable = gucharmap_charmap_get_chartable (guw->charmap);
-  start = index = gucharmap_chartable_get_active_cell (chartable);
-  codepoint_list = gucharmap_chartable_get_codepoint_list (chartable);
-
-  do
-    {
-      index--;
-
-      if (index < 0)
-        index = gucharmap_codepoint_list_get_last_index (codepoint_list);
-
-      wc = gucharmap_codepoint_list_get_char (codepoint_list, index);
-    }
-  while ((!gucharmap_unichar_isdefined (wc) || !gucharmap_unichar_validate (wc)) && index != start);
-
-  gucharmap_chartable_set_active_character (chartable, wc);
-}
-
-static void
-next_character (GtkAction       *action,
-                GucharmapWindow *guw)
-{
-  GucharmapCodepointList *codepoint_list;
-  GucharmapChartable *chartable;
-  gint index, start;
-  gunichar wc;
-
-  chartable = gucharmap_charmap_get_chartable (guw->charmap);
-  start = index = gucharmap_chartable_get_active_cell (chartable);
-  codepoint_list = gucharmap_chartable_get_codepoint_list (chartable);
-
-  do
-    {
-      index++;
-
-      if (index > gucharmap_codepoint_list_get_last_index (codepoint_list))
-        index = 0;
-
-      wc = gucharmap_codepoint_list_get_char (codepoint_list, index);
-    }
-  while ((!gucharmap_unichar_isdefined (wc) || !gucharmap_unichar_validate (wc)) && index != start);
-
-  gucharmap_chartable_set_active_character (chartable, wc);
+  klass = GUCHARMAP_CHARTABLE_GET_CLASS (chartable);
+  binding_set = gtk_binding_set_by_class (klass);
+  gtk_binding_set_activate (gtk_binding_set_by_class (klass),
+                            keyval,
+                            0,
+                            GTK_OBJECT (chartable));
 }
 
 static void
@@ -601,9 +572,9 @@ make_menu (GucharmapWindow *guw)
       NULL, G_CALLBACK (search_find_prev) },
 
     { "NextCharacter", NULL, N_("_Next Character"), "<control>N",
-      NULL, G_CALLBACK (next_character) },
+      NULL, G_CALLBACK (next_or_prev_character) },
     { "PreviousCharacter", NULL, N_("_Previous Character"), "<control>P",
-      NULL, G_CALLBACK (prev_character) },
+      NULL, G_CALLBACK (next_or_prev_character) },
     { "NextChapter", NULL, N_("Next Script"), "<control>Page_Down",
       NULL, G_CALLBACK (next_chapter) },
     { "PreviousChapter", NULL, N_("Previous Script"), "<control>Page_Up",
