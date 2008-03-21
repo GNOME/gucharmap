@@ -59,7 +59,7 @@ main (gint argc, gchar **argv)
   gucharmap_settings_initialize ();
 
   g_set_application_name (_("Gucharmap"));
-  gtk_window_set_default_icon_name ("gucharmap");
+  gtk_window_set_default_icon_name (GUCHARMAP_ICON_NAME);
 
   window = gucharmap_window_new ();
   gucharmap_window_set_text_to_copy_visible (GUCHARMAP_WINDOW (window), TRUE);

@@ -68,6 +68,8 @@ struct _GucharmapWindowClass
   GtkWindowClass parent_class;
 };
 
+#define GUCHARMAP_ICON_NAME "gucharmap"
+
 GType                        gucharmap_window_get_type                   (void);
 GtkWidget *                  gucharmap_window_new                        (void);
 void                         gucharmap_window_set_font_selection_visible (GucharmapWindow *guw, 

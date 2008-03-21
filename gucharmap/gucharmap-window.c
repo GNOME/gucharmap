@@ -361,7 +361,7 @@ help_about (GtkAction       *action,
 			 "documenters", documenters,
 			 "license", license_trans,
 			 "program-name", _("Gucharmap"),
-			 "logo-icon-name", "gucharmap",
+			 "logo-icon-name", GUCHARMAP_ICON_NAME,
 			 "translator-credits", _("translator-credits"),
 			 "version", VERSION,
 			 "website", "http://live.gnome.org/Gucharmap",
@@ -845,7 +845,7 @@ gucharmap_window_init (GucharmapWindow *guw)
 
   guw->search_dialog = NULL;
 
-  gtk_window_set_icon_name (GTK_WINDOW (guw), "gucharmap");
+  gtk_window_set_icon_name (GTK_WINDOW (guw), GUCHARMAP_ICON_NAME);
 
   pack_stuff_in_window (guw);
 
