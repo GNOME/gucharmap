@@ -26,7 +26,9 @@
 /* The last unicode character we support */
 #define UNICHAR_MAX (0x0010FFFFUL)
 
-gboolean _gucharmap_unicode_has_nameslist_entry (gunichar uc);
+G_GNUC_INTERNAL void _gucharmap_intl_ensure_initialized (void);
+
+G_GNUC_INTERNAL gboolean _gucharmap_unicode_has_nameslist_entry (gunichar uc);
 
 
 struct _GucharmapChaptersModel

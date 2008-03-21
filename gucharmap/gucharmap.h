@@ -28,7 +28,6 @@
 #include <gucharmap/gucharmap-charmap.h>
 #include <gucharmap/gucharmap-chartable.h>
 #include <gucharmap/gucharmap-codepoint-list.h>
-#include <gucharmap/gucharmap-init.h>
 #include <gucharmap/gucharmap-script-chapters-model.h>
 #include <gucharmap/gucharmap-script-codepoint-list.h>
 #include <gucharmap/gucharmap-unicode-info.h>

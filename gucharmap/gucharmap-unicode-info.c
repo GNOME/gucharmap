@@ -62,6 +62,8 @@ gucharmap_get_unicode_name (gunichar wc)
 {
   static gchar buf[32];
 
+  _gucharmap_intl_ensure_initialized ();
+
   if ((wc >= 0x3400 && wc <= 0x4DB5)
       || (wc >= 0x4e00 && wc <= 0x9fa5) 
       || (wc >= 0x20000 && wc <= 0x2A6D6))
@@ -112,6 +114,8 @@ gucharmap_get_unicode_name (gunichar wc)
 G_CONST_RETURN gchar *
 gucharmap_get_unicode_category_name (gunichar wc)
 {
+  _gucharmap_intl_ensure_initialized ();
+
   switch (gucharmap_unichar_type (wc))
     {
       case G_UNICODE_CONTROL: return _("Other, Control");
@@ -349,7 +353,7 @@ get_nameslist (gunichar uc)
   return NULL;
 }
 
-gboolean
+G_GNUC_INTERNAL gboolean
 _gucharmap_unicode_has_nameslist_entry (gunichar uc)
 {
   return get_nameslist (uc) != NULL;

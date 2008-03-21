@@ -20,15 +20,14 @@
 
 #include <glib/gi18n-lib.h>
 
-#include "gucharmap-init.h"
+#include "gucharmap-private.h"
 
-static guint initialization_count;
-
-void gucharmap_init (void)
+G_GNUC_INTERNAL void
+_gucharmap_intl_ensure_initialized (void)
 {
-  g_return_if_fail (initialization_count == 0);
+  static gboolean initialised = FALSE;
 
-  if (initialization_count++ > 0)
+  if (initialised)
     return;
 
 #ifdef ENABLE_NLS
@@ -39,10 +38,3 @@ void gucharmap_init (void)
 #endif /* #ifdef ENABLE_NLS */
 }
 
-void gucharmap_shutdown (void)
-{
-  g_return_if_fail (initialization_count > 0);
-
-  if (--initialization_count > 0)
-    return;
-}

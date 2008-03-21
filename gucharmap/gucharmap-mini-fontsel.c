@@ -170,8 +170,6 @@ mini_font_selection_finalize (GObject *object)
 static void
 gucharmap_mini_font_selection_class_init (GucharmapMiniFontSelectionClass *clazz)
 {
-  clazz->changed = NULL;
-
   gucharmap_mini_font_selection_signals[CHANGED] =
       g_signal_new (I_("changed"), gucharmap_mini_font_selection_get_type (), 
 		    G_SIGNAL_RUN_FIRST,

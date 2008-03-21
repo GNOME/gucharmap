@@ -128,6 +128,8 @@ gucharmap_block_chapters_model_class_init (GucharmapBlockChaptersModelClass *cla
 {
   GucharmapChaptersModelClass *chapters_class = GUCHARMAP_CHAPTERS_MODEL_CLASS (clazz);
 
+  _gucharmap_intl_ensure_initialized ();
+
   chapters_class->title = _("Unicode Block");
   chapters_class->character_to_iter = character_to_iter;
   chapters_class->get_codepoint_list = get_codepoint_list;

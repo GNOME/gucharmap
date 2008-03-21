@@ -55,7 +55,6 @@ main (gint argc, gchar **argv)
       exit (1);
     }
 
-  gucharmap_init ();
   gucharmap_settings_initialize ();
 
   g_set_application_name (_("Gucharmap"));
@@ -104,7 +103,6 @@ main (gint argc, gchar **argv)
   gtk_main ();
 
   gucharmap_settings_shutdown ();
-  gucharmap_shutdown ();
 
   return 0;
 }

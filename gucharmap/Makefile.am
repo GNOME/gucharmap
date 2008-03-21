@@ -42,7 +42,6 @@ libgucharmap_la_SOURCES = \
 	gucharmap-codepoint-list.c \
 	gucharmap-codepoint-list.h \
 	gucharmap-init.c \
-	gucharmap-init.h \
 	gucharmap-marshal.c \
 	gucharmap-marshal.h \
 	gucharmap-private.h \
@@ -93,7 +92,6 @@ libgucharmapinclude_HEADERS = \
 	gucharmap-chartable.h \
 	gucharmap-codepoint-list.h \
 	gucharmap.h \
-	gucharmap-init.h \
 	gucharmap-script-chapters-model.h \
 	gucharmap-script-codepoint-list.h \
 	gucharmap-types.h \

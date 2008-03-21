@@ -269,6 +269,8 @@ gucharmap_script_codepoint_list_class_init (GucharmapScriptCodepointListClass *c
   GucharmapCodepointListClass *codepoint_list_class = GUCHARMAP_CODEPOINT_LIST_CLASS (clazz);
   GObjectClass *gobject_class = G_OBJECT_CLASS (clazz);
 
+  _gucharmap_intl_ensure_initialized ();
+
   g_type_class_add_private (codepoint_list_class, sizeof (ScriptCodepointListPrivate));
 
   codepoint_list_class->get_char = get_char;
