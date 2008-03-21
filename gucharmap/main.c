@@ -35,10 +35,10 @@ main (gint argc, gchar **argv)
   gint monitor;
   GdkRectangle rect;
   GError *error = NULL;
-  gchar *new_font = NULL;
+  gchar *font = NULL;
   GOptionEntry goptions[] =
   {
-    { "font", 0, 0, G_OPTION_ARG_STRING, &new_font,
+    { "font", 0, 0, G_OPTION_ARG_STRING, &font,
       N_("Font to start with; ex: 'Serif 27'"), N_("FONT") },
     { NULL }
   };
@@ -62,9 +62,6 @@ main (gint argc, gchar **argv)
   gtk_window_set_default_icon_name (GUCHARMAP_ICON_NAME);
 
   window = gucharmap_window_new ();
-  gucharmap_window_set_text_to_copy_visible (GUCHARMAP_WINDOW (window), TRUE);
-  gucharmap_window_set_font_selection_visible (GUCHARMAP_WINDOW (window), TRUE);
-  gucharmap_window_set_file_menu_visible (GUCHARMAP_WINDOW (window), TRUE);
 
   screen = gtk_window_get_screen (GTK_WINDOW (window));
   monitor = gdk_screen_get_monitor_at_point (screen, 0, 0);
@@ -74,25 +71,25 @@ main (gint argc, gchar **argv)
   gucharmap_settings_add_window (GTK_WINDOW (window));
 
   /* make the starting font 50% bigger than the default font */
-  if (new_font == NULL) /* new_font could be set by command line option */
+  if (font == NULL) /* font could be set by command line option */
     {
       GucharmapMiniFontSelection *fontsel = gucharmap_window_get_mini_font_selection (GUCHARMAP_WINDOW (window));
       gint default_size = PANGO_PIXELS (2.0 * pango_font_description_get_size (window->style->font_desc));
       gucharmap_mini_font_selection_set_default_font_size (fontsel, default_size);
 
-      new_font = gucharmap_settings_get_font ();
-      if (new_font)
+      font = gucharmap_settings_get_font ();
+      if (font)
         {
-          PangoFontDescription *fd = pango_font_description_from_string (new_font);
+          PangoFontDescription *fd = pango_font_description_from_string (font);
 
           /* revert to default font size */
           if (0 == pango_font_description_get_size (fd))
             gucharmap_mini_font_selection_reset_font_size (fontsel);
 	  else
-	    gucharmap_mini_font_selection_set_font_name (fontsel, new_font);
+	    gucharmap_mini_font_selection_set_font_name (fontsel, font);
 
           pango_font_description_free (fd);
-	  g_free (new_font);
+	  g_free (font);
         }
       else
         gucharmap_mini_font_selection_reset_font_size (fontsel);

@@ -56,10 +56,6 @@ struct _GucharmapWindow
 
   guint save_last_char_idle_id;
 
-  guint font_selection_visible : 1;
-  guint text_to_copy_visible   : 1;
-  guint file_menu_visible      : 1;
-
   GucharmapChaptersMode chapters_mode; 
 };
 
@@ -72,12 +68,6 @@ struct _GucharmapWindowClass
 
 GType                        gucharmap_window_get_type                   (void);
 GtkWidget *                  gucharmap_window_new                        (void);
-void                         gucharmap_window_set_font_selection_visible (GucharmapWindow *guw, 
-                                                                          gboolean         visible);
-void                         gucharmap_window_set_text_to_copy_visible   (GucharmapWindow *guw, 
-                                                                          gboolean         visible);
-void                         gucharmap_window_set_file_menu_visible      (GucharmapWindow *guw, 
-                                                                          gboolean         visible);
 GucharmapMiniFontSelection * gucharmap_window_get_mini_font_selection    (GucharmapWindow *guw);
 
 GdkCursor *                 _gucharmap_window_progress_cursor (void);

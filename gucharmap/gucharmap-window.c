@@ -632,7 +632,6 @@ make_menu (GucharmapWindow *guw)
   action = gtk_action_group_get_action (guw->action_group, "SnapColumns");
   gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
                                 gucharmap_settings_get_snap_pow2 ());
-  gucharmap_window_set_file_menu_visible (guw, TRUE);
 
   gtk_ui_manager_insert_action_group (guw->uimanager, guw->action_group, 0);
   g_object_unref (guw->action_group);
@@ -661,16 +660,12 @@ insert_character_in_text_to_copy (GucharmapChartable *chartable,
                                   GucharmapWindow *guw)
 {
   gchar ubuf[7];
-  gint pos;
+  gint pos = -1;
   gunichar wc;
 
   wc = gucharmap_chartable_get_active_character (chartable);
   /* Can't copy values that are not valid unicode characters */
   if (!gucharmap_unichar_validate (wc))
-    return;
-
-  /* don't do anything if text_to_copy is not active */
-  if (!guw->text_to_copy_visible)
     return;
 
   ubuf[g_unichar_to_utf8 (wc, ubuf)] = '\0';
@@ -799,6 +794,8 @@ pack_stuff_in_window (GucharmapWindow *guw)
   guw->text_to_copy_container = make_text_to_copy (guw);
   gtk_container_set_border_width (GTK_CONTAINER (guw->text_to_copy_container), 6);
   gtk_box_pack_start (GTK_BOX (big_vbox), guw->text_to_copy_container, FALSE, FALSE, 0);
+  gtk_widget_show (guw->text_to_copy_container);
+
   /* FIXMEchpe!! */
   chartable =gucharmap_charmap_get_chartable (guw->charmap);
   g_signal_connect (chartable, "activate", G_CALLBACK (insert_character_in_text_to_copy), guw);
@@ -838,9 +835,6 @@ gucharmap_window_init (GucharmapWindow *guw)
 {
   gtk_window_set_title (GTK_WINDOW (guw), _("Character Map"));
 
-  guw->font_selection_visible = FALSE;
-  guw->text_to_copy_visible = FALSE;
-  guw->file_menu_visible = FALSE;
   guw->chapters_mode = gucharmap_settings_get_chapters_mode ();
 
   guw->search_dialog = NULL;
@@ -875,38 +869,6 @@ GtkWidget *
 gucharmap_window_new (void)
 {
   return GTK_WIDGET (g_object_new (gucharmap_window_get_type (), NULL));
-}
-
-void 
-gucharmap_window_set_font_selection_visible (GucharmapWindow *guw, 
-                                             gboolean         visible)
-{
-  guw->font_selection_visible = visible != FALSE;
-
-  g_object_set (guw->fontsel, "visible", visible, NULL);
-}
-
-void 
-gucharmap_window_set_text_to_copy_visible (GucharmapWindow *guw, 
-                                           gboolean         visible)
-{
-  guw->text_to_copy_visible = visible != FALSE;
-
-  g_object_set (guw->text_to_copy_container, "visible", visible, NULL);
-}
-
-void 
-gucharmap_window_set_file_menu_visible (GucharmapWindow *guw, 
-                                        gboolean         visible)
-{
-  GtkAction *action;
-
-  guw->file_menu_visible = visible != FALSE;
-
-  action = gtk_action_group_get_action (guw->action_group, "File");
-  gtk_action_set_visible (action, visible);
-  action = gtk_action_group_get_action (guw->action_group, "Close");
-  gtk_action_set_sensitive (action, visible);
 }
 
 GucharmapMiniFontSelection *
