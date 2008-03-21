@@ -777,8 +777,7 @@ fontsel_changed (GucharmapMiniFontSelection *fontsel,
 {
   gchar *font_name = gucharmap_mini_font_selection_get_font_name (fontsel);
 
-  /* FIXMEchpe! set font in the charmap instead */
-  gucharmap_chartable_set_font (gucharmap_charmap_get_chartable (guw->charmap), font_name);
+  gucharmap_charmap_set_font (guw->charmap, font_name);
   gucharmap_settings_set_font (font_name);
 
   g_free (font_name);

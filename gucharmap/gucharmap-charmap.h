@@ -44,12 +44,16 @@ GType                 gucharmap_charmap_get_type           (void);
 
 GtkWidget *           gucharmap_charmap_new                (void);
 
-void                  gucharmap_charmap_set_font           (GucharmapCharmap  *charmap, 
-                                                            const gchar       *font_name);
 void                  gucharmap_charmap_go_to_character    (GucharmapCharmap  *charmap,
                                                             gunichar           uc);
 
-GucharmapChartable *      gucharmap_charmap_get_chartable     (GucharmapCharmap  *charmap);
+void                     gucharmap_charmap_set_font           (GucharmapCharmap  *charmap,
+                                                               const gchar       *font_name);
+
+void                     gucharmap_charmap_set_font_desc      (GucharmapCharmap  *charmap,
+                                                               PangoFontDescription *font_desc);
+
+GucharmapChartable *     gucharmap_charmap_get_chartable      (GucharmapCharmap  *charmap);
 
 GucharmapChaptersView *  gucharmap_charmap_get_chapters_view  (GucharmapCharmap       *charmap);
 

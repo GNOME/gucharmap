@@ -37,8 +37,11 @@ struct _GucharmapCharmap
   GucharmapChartable *chartable;
   GtkTextView *details_view;
 
+  PangoFontDescription *font_desc;
+
   GdkCursor *hand_cursor;
   GdkCursor *regular_cursor;
+
   guint hovering_over_link   : 1;
   guint showing_details_page : 1;
   guint last_character_set   : 1;
@@ -83,6 +86,9 @@ gucharmap_charmap_finalize (GObject *object)
 
   gdk_cursor_unref (charmap->hand_cursor);
   gdk_cursor_unref (charmap->regular_cursor);
+
+  if (charmap->font_desc)
+    pango_font_description_free (charmap->font_desc);
 
   G_OBJECT_CLASS (gucharmap_charmap_parent_class)->finalize (object);
 }
@@ -134,6 +140,18 @@ gucharmap_charmap_class_init (GucharmapCharmapClass *clazz)
                                    g_param_spec_object ("chapters-model", NULL, NULL,
                                                         GUCHARMAP_TYPE_CHAPTERS_MODEL,
                                                         G_PARAM_WRITABLE | G_PARAM_CONSTRUCT | G_PARAM_STATIC_NAME | G_PARAM_STATIC_NICK | G_PARAM_STATIC_BLURB));
+}
+
+static void
+gucharmap_charmap_set_font_desc_internal (GucharmapCharmap *charmap, 
+                                          PangoFontDescription *font_desc)
+{
+  if (charmap->font_desc)
+    pango_font_description_free (charmap->font_desc);
+
+  charmap->font_desc = font_desc; /* adopted */
+
+  gucharmap_chartable_set_font_desc (charmap->chartable, font_desc);
 }
 
 static void
@@ -933,11 +951,53 @@ gucharmap_charmap_new (void)
   return g_object_new (gucharmap_charmap_get_type (), NULL);
 }
 
+/**
+ * gucharmap_chartable_set_font:
+ * @chartable: a #GucharmapChartable
+ * @font_name:
+ *
+ * Sets @font_name as the font to use to display the character table.
+ */
 void
 gucharmap_charmap_set_font (GucharmapCharmap *charmap, 
                             const gchar *font_name)
 {
-  gucharmap_chartable_set_font (charmap->chartable, font_name);
+  PangoFontDescription *font_desc;
+
+  g_return_if_fail (GUCHARMAP_IS_CHARMAP (charmap));
+  g_return_if_fail (font_name != NULL);
+
+  font_desc = pango_font_description_from_string (font_name);
+  if (charmap->font_desc &&
+      pango_font_description_equal (font_desc, charmap->font_desc))
+    {
+      pango_font_description_free (font_desc);
+      return;
+    }
+
+  gucharmap_charmap_set_font_desc_internal (charmap, font_desc /* adopting */);
+}
+
+/**
+ * gucharmap_chartable_set_font_desc:
+ * @chartable: a #GucharmapChartable
+ * @font_desc: a #PangoFontDescription
+ *
+ * Sets @font_desc as the font to use to display the character table.
+ */
+void
+gucharmap_charmap_set_font_desc (GucharmapCharmap *charmap,
+                                 PangoFontDescription *font_desc)
+{
+  g_return_if_fail (GUCHARMAP_IS_CHARMAP (charmap));
+  g_return_if_fail (font_desc != NULL);
+
+  if (charmap->font_desc &&
+      pango_font_description_equal (font_desc, charmap->font_desc))
+    return;
+
+  gucharmap_charmap_set_font_desc_internal (charmap,
+                                            pango_font_description_copy (font_desc));
 }
 
 void

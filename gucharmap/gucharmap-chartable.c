@@ -112,8 +112,8 @@ G_DEFINE_TYPE (GucharmapChartable, gucharmap_chartable, GTK_TYPE_DRAWING_AREA)
 /* utility functions */
 
 static void
-gucharmap_chartable_set_font_desc (GucharmapChartable *chartable,
-                                   PangoFontDescription *font_desc /* adopting */)
+gucharmap_chartable_set_font_desc_internal (GucharmapChartable *chartable,
+                                            PangoFontDescription *font_desc /* adopting */)
 {
   int font_size;
 
@@ -1985,6 +1985,7 @@ gucharmap_chartable_set_font (GucharmapChartable *chartable, const char *font_na
 {
   PangoFontDescription *font_desc;
 
+  g_return_if_fail (GUCHARMAP_IS_CHARTABLE (chartable));
   g_return_if_fail (font_name != NULL);
 
   font_desc = pango_font_description_from_string (font_name);
@@ -1996,6 +1997,28 @@ gucharmap_chartable_set_font (GucharmapChartable *chartable, const char *font_na
     }
 
   gucharmap_chartable_set_font_desc (chartable, font_desc /* adopting */);
+}
+
+/**
+ * gucharmap_chartable_set_font_desc:
+ * @chartable: a #GucharmapChartable
+ * @font_desc: a #PangoFontDescription
+ *
+ * Sets @font_desc as the font to use to display the character table.
+ */
+void
+gucharmap_chartable_set_font_desc (GucharmapChartable *chartable,
+                                   PangoFontDescription *font_desc)
+{
+  g_return_if_fail (GUCHARMAP_IS_CHARTABLE (chartable));
+  g_return_if_fail (font_desc != NULL);
+
+  if (chartable->font_desc &&
+      pango_font_description_equal (font_desc, chartable->font_desc))
+    return;
+
+  gucharmap_chartable_set_font_desc_internal (chartable,
+                                              pango_font_description_copy (font_desc));
 }
 
 /**
