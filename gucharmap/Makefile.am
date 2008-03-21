@@ -69,7 +69,6 @@ libgucharmap_la_CPPFLAGS = \
 	$(AM_CPPFLAGS)
 
 libgucharmap_la_CFLAGS = \
-	$(PANGO_CFLAGS)	\
 	$(GTK_CFLAGS)	\
 	$(WARN_CFLAGS)	\
 	$(AM_CFLAGS)
@@ -122,7 +121,6 @@ gucharmap_CPPFLAGS = \
 	$(AM_CPPFLAGS)
 
 gucharmap_CFLAGS = \
-	$(PANGO_CFLAGS)	\
 	$(GTK_CFLAGS)	\
 	$(GCONF_CFLAGS)	\
 	$(WARN_CFLAGS)	\
@@ -133,7 +131,6 @@ gucharmap_LDFLAGS = \
 
 gucharmap_LDADD = \
 	libgucharmap.la	\
-	$(PANGO_LIBS)	\
 	$(GTK_LIBS)	\
 	$(GCONF_LIBS)	\
 	$(INTL_LIBS)
