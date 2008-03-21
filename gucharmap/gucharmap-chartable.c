@@ -205,11 +205,10 @@ position_rectangle (GdkRectangle *position_rect,
       break;
 
     case POSITION_RIGHT_ALIGN_BOTTOM:
-      rect.x += target_rect->width;
+      rect.y -= rect.height - target_rect->height;
       /* fall-through */
     case POSITION_RIGHT_ALIGN_TOP:
       rect.x += target_rect->width;
-      rect.y -= rect.height - target_rect->height;
       break;
 
     case POSITION_TOP_ALIGN_RIGHT:
@@ -244,7 +243,7 @@ position_rectangle_on_screen (GtkWidget *widget,
   GdkRectangle monitor;
   int monitor_num;
   GdkScreen *screen;
-  const PositionType positions[] = {
+  static const PositionType positions[] = {
     POSITION_DOWN_ALIGN_LEFT,
     POSITION_TOP_ALIGN_LEFT,
     POSITION_RIGHT_ALIGN_TOP,
