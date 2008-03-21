@@ -27,11 +27,11 @@ struct _UnicharUnichar
 struct _NamesList
 {
   gunichar index;
-  gint equals_index;  /* -1 means */
-  gint stars_index;   /* this character */
-  gint exes_index;    /* doesn't */
-  gint pounds_index;  /* have any */
-  gint colons_index;
+  gint16 equals_index;  /* -1 means */
+  gint16 stars_index;   /* this character */
+  gint16 exes_index;    /* doesn't */
+  gint16 pounds_index;  /* have any */
+  gint16 colons_index;
 };
 
 static const UnicharString names_list_equals[] = 

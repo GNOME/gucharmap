@@ -593,11 +593,11 @@ sub process_nameslist_txt ($)
     print $out "struct _NamesList\n";
     print $out "{\n";
     print $out "  gunichar index;\n";
-    print $out "  gint equals_index;  /* -1 means */\n";
-    print $out "  gint stars_index;   /* this character */\n";
-    print $out "  gint exes_index;    /* doesn't */\n";
-    print $out "  gint pounds_index;  /* have any */\n";
-    print $out "  gint colons_index;\n";
+    print $out "  gint16 equals_index;  /* -1 means */\n";
+    print $out "  gint16 stars_index;   /* this character */\n";
+    print $out "  gint16 exes_index;    /* doesn't */\n";
+    print $out "  gint16 pounds_index;  /* have any */\n";
+    print $out "  gint16 colons_index;\n";
     print $out "};\n\n";
 
     print $out "static const UnicharString names_list_equals[] = \n";

@@ -348,7 +348,7 @@ get_nameslist (gunichar uc)
   static const NamesList *most_recent_result;
   gint min = 0;
   gint mid;
-  gint max = sizeof (names_list) / sizeof (NamesList) - 1;
+  gint max = G_N_ELEMENTS (names_list) - 1;
 
   if (uc < names_list[0].index || uc > names_list[max].index)
     return NULL;
