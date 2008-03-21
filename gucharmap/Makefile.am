@@ -127,14 +127,14 @@ gucharmaprc.o: gucharmaprc.rc
 endif
 
 gucharmap-marshal.h: $(srcdir)/gucharmap-marshal.list
-	( @GLIB_GENMARSHAL@ --prefix=_gucharmap_marshal $(srcdir)/gucharmap-marshal.list \
+	( $(GLIB_GENMARSHAL) --prefix=_gucharmap_marshal $(srcdir)/gucharmap-marshal.list \
                             --header \
                             --internal > gucharmap-marshal.h.tmp \
 	  && mv gucharmap-marshal.h.tmp gucharmap-marshal.h ) \
         || ( rm -f gucharmap-marshal.h.tmp && exit 1 )
 
 gucharmap-marshal.c: $(srcdir)/gucharmap-marshal.list
-	( @GLIB_GENMARSHAL@ --prefix=_gucharmap_marshal $(srcdir)/gucharmap-marshal.list \
+	( $(GLIB_GENMARSHAL) --prefix=_gucharmap_marshal $(srcdir)/gucharmap-marshal.list \
 			    --header \
                             --body \
                             --internal > gucharmap-marshal.c.tmp \
