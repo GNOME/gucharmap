@@ -37,8 +37,10 @@ AC_PREREQ([2.56])
 
 AC_INIT([GNOME Character Map],[gucharmap_version],[http://bugzilla.gnome.org/enter_bug.cgi?product=gucharmap],[gucharmap])
 
-AC_CONFIG_SRCDIR([gucharmap/gucharmap-charmap.h])
+AC_CONFIG_MACRO_DIR([m4])
+AC_CONFIG_SRCDIR([gucharmap/gucharmap.h])
 AC_CONFIG_HEADERS([config.h])
+
 AM_INIT_AUTOMAKE([1.9 gnu dist-bzip2 no-dist-gzip])
 
 AM_MAINTAINER_MODE
@@ -52,11 +54,6 @@ IT_PROG_INTLTOOL([0.35.0])
 AM_PROG_CC_C_O
 
 # checks for stuff
-GETTEXT_PACKAGE=gucharmap
-AC_SUBST(GETTEXT_PACKAGE)
-AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE],["$GETTEXT_PACKAGE"],[Define the gettext package to be used])
-AM_GLIB_GNU_GETTEXT
-
 GNOME_COMMON_INIT
 GNOME_DEBUG_CHECK
 GNOME_COMPILE_WARNINGS([maximum])
@@ -80,7 +77,6 @@ fi
 AM_CONDITIONAL(OS_WIN32, test "x$os_win32" = "xyes")
 
 GTK_REQUIRED=2.12.0
-
 PKG_CHECK_MODULES([GTK],[gtk+-2.0 >= $GTK_REQUIRED])
 
 GLIB_GENMARSHAL="$($PKG_CONFIG --variable=glib_genmarshal glib-2.0)"
@@ -107,9 +103,6 @@ AC_PATH_PROG([GCONFTOOL],[gconftool-2],[no])
 
 # checks for funcs 
 AC_CHECK_FUNCS([bind_textdomain_codeset])
-
-AC_SUBST(PANGO_CFLAGS)
-AC_SUBST(PANGO_LIBS)
 
 AC_SUBST(GTK_CFLAGS)
 AC_SUBST(GTK_LIBS)
@@ -147,27 +140,133 @@ AC_PROG_LN_S
 #   AC_MSG_ERROR([hexdump not found])
 # fi
 
+# ****
+# i18n
+# ****
+
+GETTEXT_PACKAGE=gucharmap
+AC_SUBST([GETTEXT_PACKAGE])
+AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE],["$GETTEXT_PACKAGE"],[The gucharmap gettext domain])
+AM_GLIB_GNU_GETTEXT
+
+# ********
+# Bindings
+# ********
+
+AC_MSG_CHECKING([whether python bindings are requested])
+AC_ARG_ENABLE([python-bindings],
+        AS_HELP_STRING([--enable-python-bindings],[Enable python bindings]),
+        [],[enable_python_bindings=no])
+AC_MSG_RESULT([$enable_python_bindings])
+
+if test "$enable_python_bindings" = "yes"; then
+  AM_PATH_PYTHON([2.4])
+  AM_CHECK_PYTHON_HEADERS([],[AC_MSG_ERROR([Python headers not found])])
+
+  PY_PREFIX=`$PYTHON -c 'import sys ; print sys.prefix'`
+  PY_EXEC_PREFIX=`$PYTHON -c 'import sys ; print sys.exec_prefix'`
+  PYTHON_LIBS="-lpython$PYTHON_VERSION"
+  PYTHON_LIB_LOC="-L$PY_EXEC_PREFIX/lib/python$PYTHON_VERSION/config"
+  PYTHON_CFLAGS="-I$PY_PREFIX/include/python$PYTHON_VERSION"
+  PYTHON_MAKEFILE="$PY_EXEC_PREFIX/lib/python$PYTHON_VERSION/config/Makefile"
+  PYTHON_LOCALMODLIBS=`sed -n -e 's/^LOCALMODLIBS=\(.*\)/\1/p' $PYTHON_MAKEFILE`
+  PYTHON_BASEMODLIBS=`sed -n -e 's/^BASEMODLIBS=\(.*\)/\1/p' $PYTHON_MAKEFILE`
+  PYTHON_OTHER_LIBS=`sed -n -e 's/^LIBS=\(.*\)/\1/p' $PYTHON_MAKEFILE`
+  PYTHON_EXTRA_LIBS="$PYTHON_LOCALMODLIBS $PYTHON_BASEMODLIBS $PYTHON_OTHER_LIBS"
+  AC_SUBST([PYTHON_LIBS])
+  AC_SUBST([PYTHON_LIB_LOC])
+  AC_SUBST([PYTHON_CFLAGS])
+  AC_SUBST([PYTHON_EXTRA_LIBS])
+
+  dnl FIXME: do we really need this test?
+  AC_MSG_CHECKING([whether we can build a shared library depending on libpython])
+  rm -rf testpython
+  mkdir testpython
+  cd testpython
+  cat > testpython.c <<EOF
+#include <Python.h>
+int testpython (void)
+{
+Py_Exit (0);
+}
+EOF
+  if /bin/sh ../libtool --mode=compile ${CC} $PYTHON_CFLAGS -c testpython.c >/dev/null 2>&1 && \
+          /bin/sh ../libtool --mode=link ${CC} -o testpython.la -rpath `pwd` -module -avoid-version $PYTHON_LIB_LOC testpython.lo $PYTHON_LIBS $PYTHON_EXTRA_LIBS >/dev/null 2>&1 && \
+          grep 'dlname.*testpython' testpython.la >/dev/null 2>&1; then
+          AC_MSG_RESULT([yes])
+  else
+          AC_MSG_ERROR([Can't link to libpython])
+  fi
+  cd ..
+  rm -rf testpython
+  
+  PYGTK_REQUIRED=2.7.1
+  PKG_CHECK_MODULES([PYGTK],[pygtk-2.0 >= $PYGTK_REQUIRED])
+
+  AC_SUBST([PYGTK_CFLAGS])
+  AC_SUBST([PYGTK_LIBS])
+
+  AC_MSG_CHECKING([for pygtk defs])
+  PYGTK_DEFSDIR=`$PKG_CONFIG --variable=defsdir pygtk-2.0`
+  AC_MSG_RESULT([$PYGTK_DEFSDIR])
+
+  AC_MSG_CHECKING([for pygtk codegen])
+  PYGTK_CODEGEN="$PYTHON `$PKG_CONFIG --variable=codegendir pygtk-2.0`/codegen.py"
+  AC_MSG_RESULT([$PYGTK_CODEGEN])
+
+  AC_MSG_CHECKING([for pygtk h2def])
+  PYGTK_H2DEF="$PYTHON `$PKG_CONFIG --variable=codegendir pygtk-2.0`/h2def.py"
+  AC_MSG_RESULT([$PYGTK_H2DEF])
+
+  AC_SUBST([PYGTK_DEFSDIR])
+  AC_SUBST([PYGTK_CODEGEN])
+  AC_SUBST([PYGTK_H2DEF])
+
+  dnl Check for -fno-strict-aliasing
+  FLAGS="-fno-strict-aliasing"
+  save_CFLAGS="$CFLAGS"
+  CFLAGS="$CFLAGS $FLAGS"
+  AC_MSG_CHECKING([whether [$]CC understands $FLAGS])
+  AC_TRY_COMPILE([], [], [compiler_has_option=yes], [compiler_has_option=no])
+  CFLAGS="$save_CFLAGS"
+  AC_MSG_RESULT($compiler_has_option)
+  if test $compiler_has_option = yes; then
+          NO_STRICT_ALIASING_CFLAGS="$FLAGS"
+  fi
+  AC_SUBST([NO_STRICT_ALIASING_CFLAGS])
+fi
+
+AM_CONDITIONAL([ENABLE_PYTHON_BINDINGS],[test "$enable_python_bindings" = "yes"])
+
+# *****************************************************************************
+
 AC_SUBST([GUCHARMAP_VERSION_MAJOR],[gucharmap_version_major])
 AC_SUBST([GUCHARMAP_VERSION_MINOR],[gucharmap_version_minor])
 AC_SUBST([GUCHARMAP_VERSION_MICRO],[gucharmap_version_micro])
 AC_SUBST([LIBGUCHARMAP_LT_VERSION],[gucharmap_lt_version_info])
 AC_SUBST([LIBGUCHARMAP_LT_CURRENT_MINUS_AGE],[gucharmap_lt_current_minus_age])
 
+AC_SUBST([AM_CPPFLAGS])
+AC_SUBST([AM_CFLAGS])
+AC_SUBST([AM_LDFLAGS])
+
 AC_CONFIG_FILES([
-gucharmap.desktop.in
-gucharmap-2.pc
 Makefile
+gucharmap-2.pc
+gucharmap.desktop.in
+gucharmap.nsi
+gucharmap.spec
+bindings/Makefile
+bindings/python/Makefile
 gucharmap/Makefile
 gucharmap/gucharmap.h
-po/Makefile.in
-pixmaps/Makefile
 help/Makefile
 help/it/Makefile
 help/ja/Makefile
 help/zh_CN/Makefile
 help/zh_TW/Makefile
-gucharmap.spec
-gucharmap.nsi
+pixmaps/Makefile
+po/Makefile.in
 ])
 
 AC_OUTPUT
