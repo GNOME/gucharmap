@@ -135,7 +135,7 @@ search_start (GucharmapSearchDialog *search_dialog,
   action = gtk_action_group_get_action (guw->action_group, "FindPrevious");
   gtk_action_set_sensitive (action, FALSE);
 
-  gtk_progress_bar_set_text (GTK_PROGRESS_BAR (guw->progress), _("Searching..."));
+  gtk_progress_bar_set_text (GTK_PROGRESS_BAR (guw->progress), _("Searching…"));
   g_timeout_add (100, (GSourceFunc) update_progress_bar, guw);
 }
 
