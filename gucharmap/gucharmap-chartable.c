@@ -42,6 +42,8 @@ enum
   ACTIVATE,
   STATUS_MESSAGE,
   MOVE_CURSOR,
+  COPY_CLIPBOARD,
+  PASTE_CLIPBOARD,
   NUM_SIGNALS
 };
 
@@ -1793,6 +1795,31 @@ gucharmap_chartable_move_cursor (GucharmapChartable *chartable,
   return TRUE;
 }
 
+static void
+gucharmap_chartable_copy_clipboard (GucharmapChartable *chartable)
+{
+  GtkClipboard *clipboard;
+  gunichar wc;
+  gchar utf8[7];
+  gsize len;
+
+  wc = gucharmap_chartable_get_active_character (chartable);
+  if (!gucharmap_unichar_validate (wc))
+    return;
+
+  len = g_unichar_to_utf8 (wc, utf8);
+
+  clipboard = gtk_widget_get_clipboard (GTK_WIDGET (chartable),
+                                        GDK_SELECTION_CLIPBOARD);
+  gtk_clipboard_set_text (clipboard, utf8, len);
+}
+
+static void
+gucharmap_chartable_paste_clipboard (GucharmapChartable *chartable)
+{
+  /* FIXMEchpe */
+}
+
 /* does all the initial construction */
 static void
 gucharmap_chartable_init (GucharmapChartable *chartable)
@@ -1944,6 +1971,8 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
   klass->set_scroll_adjustments = gucharmap_chartable_set_adjustments;
   klass->move_cursor = gucharmap_chartable_move_cursor;
   klass->activate = NULL;
+  klass->copy_clipboard = gucharmap_chartable_copy_clipboard;
+  klass->paste_clipboard = gucharmap_chartable_paste_clipboard;
   klass->set_active_char = NULL;
 
   widget_class->activate_signal = signals[ACTIVATE] =
@@ -1981,6 +2010,24 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
                   G_TYPE_BOOLEAN, 2,
                   GTK_TYPE_MOVEMENT_STEP,
                   G_TYPE_INT);
+
+  signals[COPY_CLIPBOARD] =
+    g_signal_new (I_("copy-clipboard"),
+                  G_OBJECT_CLASS_TYPE (object_class),
+                  G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
+                  G_STRUCT_OFFSET (GucharmapChartableClass, copy_clipboard),
+                  NULL, NULL,
+                  g_cclosure_marshal_VOID__VOID,
+                  G_TYPE_NONE, 0);
+
+  signals[PASTE_CLIPBOARD] =
+    g_signal_new (I_("paste-clipboard"),
+                  G_OBJECT_CLASS_TYPE (object_class),
+                  G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
+                  G_STRUCT_OFFSET (GucharmapChartableClass, paste_clipboard),
+                  NULL, NULL,
+                  g_cclosure_marshal_VOID__VOID,
+                  G_TYPE_NONE, 0);
 
   /* Not using g_param_spec_unichar on purpose, since it disallows certain values
    * we want (it's performing a g_unichar_validate).
@@ -2096,6 +2143,16 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
                                 "activate", 0);
   gtk_binding_entry_add_signal (binding_set, GDK_space, 0,
                                 "activate", 0);
+
+  /* Clipboard actions */
+  gtk_binding_entry_add_signal (binding_set, GDK_c, GDK_CONTROL_MASK,
+                                "copy-clipboard", 0);
+  gtk_binding_entry_add_signal (binding_set, GDK_Insert, GDK_CONTROL_MASK,
+                                "copy-clipboard", 0);
+  gtk_binding_entry_add_signal (binding_set, GDK_v, GDK_CONTROL_MASK,
+                                "paste-clipboard", 0);
+  gtk_binding_entry_add_signal (binding_set, GDK_Insert, GDK_SHIFT_MASK,
+                                "paste-clipboard", 0);
 
 #if 0
   /* VI keybindings */

@@ -187,6 +187,8 @@ struct _GucharmapChartableClass
                                       GtkMovementStep     step,
                                       gint                count);
   void (* activate) (GucharmapChartable *chartable);
+  void (* copy_clipboard) (GucharmapChartable *chartable);
+  void (* paste_clipboard) (GucharmapChartable *chartable);
 
   void (* set_active_char) (GucharmapChartable *chartable, guint ch);
   void (* status_message) (GucharmapChartable *chartable, const gchar *message);
