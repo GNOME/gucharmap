@@ -509,7 +509,7 @@ move_to_next_screen_cb (GtkAction *action,
 static const char ui_info [] =
   "<menubar name='MenuBar'>"
     "<menu action='File'>"
-      "<menuitem action='Quit' />"
+      "<menuitem action='Close' />"
 #ifdef DEBUG_chpe
       "<menuitem action='MoveNextScreen' />"
 #endif
@@ -554,17 +554,17 @@ make_menu (GucharmapWindow *guw)
     { "Go", NULL, N_("_Go"), NULL, NULL, NULL },
     { "Help", NULL, N_("_Help"), NULL, NULL, NULL },
 
-    { "Quit", GTK_STOCK_CLOSE, NULL, NULL,
+    { "Close", GTK_STOCK_CLOSE, NULL, NULL,
       NULL, G_CALLBACK (gtk_main_quit) },
 
-    { "ZoomIn", NULL, N_("Zoom _In"), "<control>plus",
+    { "ZoomIn", GTK_STOCK_ZOOM_IN, NULL, NULL,
       NULL, G_CALLBACK (font_bigger) },
-    { "ZoomOut", NULL, N_("Zoom _Out"), "<control>minus",
+    { "ZoomOut", GTK_STOCK_ZOOM_OUT, NULL, NULL,
       NULL, G_CALLBACK (font_smaller) },
-    { "NormalSize", NULL, N_("_Normal Size"), "<control>equal",
+    { "NormalSize", GTK_STOCK_ZOOM_100, NULL, NULL,
       NULL, G_CALLBACK (font_default) },
 
-    { "Find", GTK_STOCK_FIND, N_("_Find..."), "<control>F",
+    { "Find", GTK_STOCK_FIND, NULL, NULL,
       NULL, G_CALLBACK (search_find) },
     { "FindNext", GTK_STOCK_FIND, N_("Find _Next"), "<control>G",
       NULL, G_CALLBACK (search_find_next) },
@@ -905,7 +905,7 @@ gucharmap_window_set_file_menu_visible (GucharmapWindow *guw,
 
   action = gtk_action_group_get_action (guw->action_group, "File");
   gtk_action_set_visible (action, visible);
-  action = gtk_action_group_get_action (guw->action_group, "Quit");
+  action = gtk_action_group_get_action (guw->action_group, "Close");
   gtk_action_set_sensitive (action, visible);
 }
 
