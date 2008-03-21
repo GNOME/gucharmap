@@ -81,13 +81,9 @@ then
 fi
 AM_CONDITIONAL(OS_WIN32, test "x$os_win32" = "xyes")
 
-# gtk is required
-GOBJECT_REQUIRED=2.3.0
 GTK_REQUIRED=2.12.0
 
-PKG_CHECK_MODULES([GTK],[
-  gobject-2.0 >= $GOBJECT_REQUIRED
-  gtk+-2.0 >= $GTK_REQUIRED])
+PKG_CHECK_MODULES([GTK],[gtk+-2.0 >= $GTK_REQUIRED])
 
 AC_ARG_ENABLE([gconf],
               [AS_HELP_STRING([--disable-gconf],
