@@ -145,6 +145,177 @@ gucharmap_chartable_emit_status_message (GucharmapChartable *chartable,
   g_signal_emit (chartable, signals[STATUS_MESSAGE], 0, message);
 }
 
+/**
+ * position_rectangle:
+ * @rect: the rectangle to position
+ * @reference_point: point to position on
+ * @gravity: how to position @rect wrt. @reference_rect
+ * @direction: the text direction
+ * @keepout_rect: a rectangle to avoid. @reference_point must be one of its corners
+ * @bounding_rect: the bounding rectangle
+ *
+ * Returns: %TRUE if @rect could be positioned on @reference_point
+ * with positioning according to @gravity inside @bounding_rect
+ */ 
+static gboolean
+position_rectangle (GdkRectangle *position_rect,
+                    GdkPoint *reference_point,
+                    GdkGravity gravity,
+                    GtkTextDirection direction,
+                    GdkRectangle *keepout_rect,
+                    GdkRectangle *bounding_rect)
+{
+  GdkRectangle rect;
+  gboolean is_rtl = direction == GTK_TEXT_DIR_RTL;
+
+  rect.x = reference_point->x;
+  rect.y = reference_point->y;
+  rect.width = position_rect->width;
+  rect.height = position_rect->height;
+
+  /* First position the rect on the reference point */
+  switch (gravity) {
+    case GDK_GRAVITY_NORTH_WEST:
+    case GDK_GRAVITY_NORTH:
+    case GDK_GRAVITY_NORTH_EAST:
+      rect.y -= rect.height;
+      break;
+    default:
+      break;
+  }
+
+  switch (gravity) {
+    case GDK_GRAVITY_NORTH_WEST:
+    case GDK_GRAVITY_WEST:
+    case GDK_GRAVITY_SOUTH_WEST:
+      if (!is_rtl)
+        rect.x -= rect.width;
+      break;
+
+    case GDK_GRAVITY_EAST:
+    case GDK_GRAVITY_SOUTH_EAST:
+    case GDK_GRAVITY_NORTH_EAST:
+    case GDK_GRAVITY_NORTH:
+    case GDK_GRAVITY_SOUTH:
+      if (is_rtl)
+        rect.x -= rect.width;
+      break;
+
+    default:
+      break;
+  }
+
+  /* If the rect intersects with @keepout_rect, we push it out */
+  if (gdk_rectangle_intersect (&rect, keepout_rect, NULL)) {
+    switch (gravity) {
+      case GDK_GRAVITY_NORTH_WEST:
+      case GDK_GRAVITY_NORTH:
+      case GDK_GRAVITY_NORTH_EAST:
+        rect.y -= keepout_rect->height;
+        break;
+
+      case GDK_GRAVITY_SOUTH_WEST:
+      case GDK_GRAVITY_SOUTH:
+      case GDK_GRAVITY_SOUTH_EAST:
+        rect.y += keepout_rect->height;
+        break;
+
+      default:
+        break;
+    }
+
+    switch (gravity) {
+      case GDK_GRAVITY_NORTH_WEST:
+      case GDK_GRAVITY_SOUTH_WEST:
+      case GDK_GRAVITY_WEST:
+        if (!is_rtl)
+          rect.x -= keepout_rect->width;
+        break;
+
+      case GDK_GRAVITY_NORTH_EAST:
+      case GDK_GRAVITY_EAST:
+      case GDK_GRAVITY_SOUTH_EAST:
+        if (!is_rtl)
+          rect.x += keepout_rect->width;
+        break;
+
+      case GDK_GRAVITY_NORTH:
+      case GDK_GRAVITY_SOUTH:
+/*        if (is_rtl)
+          rect.x -= keepout_rect->width;
+        else
+          rect.x += keepout_rect->width;*/
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  if (gdk_rectangle_intersect (&rect, keepout_rect, NULL)) {
+    g_warning ("Still intersecting with the keepout rect!\n");
+  }
+
+  *position_rect = rect;
+
+  return rect.x >= bounding_rect->x &&
+         rect.y >= bounding_rect->y &&
+         rect.x + rect.width <= bounding_rect->x + bounding_rect->width &&
+         rect.y + rect.height <= bounding_rect->y + bounding_rect->height;
+}
+
+static gboolean
+position_rectangle_on_screen (GtkWidget *widget,
+                              GdkRectangle *rectangle,
+                              GdkRectangle *keepout_rect)
+{
+  GtkTextDirection direction;
+  GdkRectangle monitor;
+  int monitor_num;
+  GdkPoint point;
+  GdkScreen *screen;
+  
+  direction = gtk_widget_get_direction (widget);
+  screen = gtk_widget_get_screen (widget);
+  monitor_num = gdk_screen_get_monitor_at_window (screen, widget->window);
+  if (monitor_num < 0)
+    monitor_num = 0;
+  gdk_screen_get_monitor_geometry (screen, monitor_num, &monitor);
+
+  point.x = keepout_rect->x;
+  point.y = keepout_rect->y;
+
+  if (position_rectangle (rectangle,
+                          &point,
+                          GDK_GRAVITY_SOUTH,
+                          direction,
+                          keepout_rect,
+                          &monitor))
+    return TRUE;
+  if (position_rectangle (rectangle,
+                          &point,
+                          GDK_GRAVITY_NORTH,
+                          direction,
+                          keepout_rect,
+                          &monitor))
+    return TRUE;
+  if (position_rectangle (rectangle,
+                          &point,
+                          GDK_GRAVITY_EAST,
+                          direction,
+                          keepout_rect,
+                          &monitor))
+    return TRUE;
+  if (position_rectangle (rectangle,
+                          &point,
+                          GDK_GRAVITY_WEST,
+                          direction,
+                          keepout_rect,
+                          &monitor))
+    return TRUE;
+
+  return FALSE;
+}
 
 static void
 get_root_coords_at_active_char (GucharmapChartable *chartable, 
@@ -164,26 +335,18 @@ get_root_coords_at_active_char (GucharmapChartable *chartable,
   *y_root = y + _gucharmap_chartable_y_offset (chartable, row);
 }
 
-/* retunrs the coords of the innermost corner of the square */
 static void
-get_appropriate_active_char_corner_xy (GucharmapChartable *chartable, gint *x, gint *y)
+get_active_cell_rect (GucharmapChartable *chartable, GdkRectangle *rect)
 {
-  gint x0, y0;
-  gint row, col;
+  int row, col;
 
-  get_root_coords_at_active_char (chartable, &x0, &y0);
+  get_root_coords_at_active_char (chartable, &rect->x, &rect->y);
 
   row = (chartable->active_cell - chartable->page_first_cell) / chartable->cols;
   col = _gucharmap_chartable_cell_column (chartable, chartable->active_cell);
 
-  *x = x0;
-  *y = y0;
-
-  if (row < chartable->rows / 2)
-    *y += _gucharmap_chartable_row_height (chartable, row);
-
-  if (col < chartable->cols / 2)
-    *x += _gucharmap_chartable_column_width (chartable, col);
+  rect->width = _gucharmap_chartable_column_width (chartable, col);
+  rect->height = _gucharmap_chartable_row_height (chartable, row);
 }
 
 static void
@@ -505,6 +668,30 @@ place_zoom_window (GucharmapChartable *chartable, gint x_root, gint y_root)
 }
 
 static void
+place_zoom_window_on_active_cell (GucharmapChartable *chartable)
+{
+  GdkPixmap *pixmap;
+  GdkRectangle rect, keepout_rect;
+
+  if (!chartable->zoom_window)
+    return;
+
+  gtk_image_get_pixmap (GTK_IMAGE (chartable->zoom_image), &pixmap, NULL);
+  if (!pixmap)
+    return;
+
+  get_active_cell_rect (chartable, &keepout_rect);
+
+  rect.x = rect.y = 0;
+  gdk_drawable_get_size (GDK_DRAWABLE (pixmap), &rect.width, &rect.height);
+
+  position_rectangle_on_screen (GTK_WIDGET (chartable),
+                                &rect,
+                                &keepout_rect);
+  gtk_window_move (GTK_WINDOW (chartable->zoom_window), rect.x, rect.y);
+}
+
+static void
 update_zoom_window (GucharmapChartable *chartable)
 {
   GdkPixmap *pixmap;
@@ -557,17 +744,13 @@ destroy_zoom_window (GucharmapChartable *chartable)
 static void
 gucharmap_chartable_show_zoom (GucharmapChartable *chartable)
 {
-  gint x, y;
-
   if (!chartable->zoom_mode_enabled)
     return;
-
 
   make_zoom_window (chartable);
   update_zoom_window (chartable);
 
-  get_appropriate_active_char_corner_xy (chartable, &x, &y);
-  place_zoom_window (chartable, x, y);
+  place_zoom_window_on_active_cell (chartable);
 
   gtk_widget_show (chartable->zoom_window);
 
@@ -1016,10 +1199,7 @@ _gucharmap_chartable_redraw (GucharmapChartable *chartable,
 
       if (move_zoom && chartable->zoom_window)
         {
-          gint x, y;
-
-          get_appropriate_active_char_corner_xy (chartable, &x, &y);
-          place_zoom_window (chartable, x, y);
+          place_zoom_window_on_active_cell (chartable);
         }
     }
 
