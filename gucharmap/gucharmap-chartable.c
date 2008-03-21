@@ -1677,6 +1677,9 @@ gucharmap_chartable_finalize (GObject *object)
 
   gtk_target_list_unref (chartable->target_list);
 
+  if (chartable->codepoint_list)
+    g_object_unref (chartable->codepoint_list);
+
   G_OBJECT_CLASS (gucharmap_chartable_parent_class)->finalize (object);
 }
 
