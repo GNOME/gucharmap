@@ -108,6 +108,3 @@ FIXXREF_OPTIONS = \
 	--extra-dir=$(CAIRO_PREFIX)/share/gtk-doc/html/cairo
 
 include $(top_srcdir)/gtk-doc.make
-
-# Other files to distribute
-EXTRA_DIST += version.xml.in
