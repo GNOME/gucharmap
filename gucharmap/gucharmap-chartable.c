@@ -145,6 +145,17 @@ gucharmap_chartable_emit_status_message (GucharmapChartable *chartable,
   g_signal_emit (chartable, signals[STATUS_MESSAGE], 0, message);
 }
 
+typedef enum {
+  POSITION_DOWN_ALIGN_LEFT,
+  POSITION_DOWN_ALIGN_RIGHT,
+  POSITION_RIGHT_ALIGN_TOP,
+  POSITION_RIGHT_ALIGN_BOTTOM,
+  POSITION_TOP_ALIGN_LEFT,
+  POSITION_TOP_ALIGN_RIGHT,
+  POSITION_LEFT_ALIGN_TOP,
+  POSITION_LEFT_ALIGN_BOTTOM
+} PositionType;
+
 /**
  * position_rectangle:
  * @rect: the rectangle to position
@@ -159,101 +170,48 @@ gucharmap_chartable_emit_status_message (GucharmapChartable *chartable,
  */ 
 static gboolean
 position_rectangle (GdkRectangle *position_rect,
-                    GdkPoint *reference_point,
-                    GdkGravity gravity,
+                    PositionType position,
                     GtkTextDirection direction,
-                    GdkRectangle *keepout_rect,
+                    GdkRectangle *target_rect,
                     GdkRectangle *bounding_rect)
 {
   GdkRectangle rect;
-  gboolean is_rtl = direction == GTK_TEXT_DIR_RTL;
+//  gboolean is_rtl = direction == GTK_TEXT_DIR_RTL;
 
-  rect.x = reference_point->x;
-  rect.y = reference_point->y;
+  rect.x = target_rect->x;
+  rect.y = target_rect->y;
   rect.width = position_rect->width;
   rect.height = position_rect->height;
 
-  /* First position the rect on the reference point */
-  switch (gravity) {
-    case GDK_GRAVITY_NORTH_WEST:
-    case GDK_GRAVITY_NORTH:
-    case GDK_GRAVITY_NORTH_EAST:
+  switch (position) {
+    case POSITION_DOWN_ALIGN_RIGHT:
+      rect.x -= rect.width - target_rect->width;
+      /* fall-through */
+    case POSITION_DOWN_ALIGN_LEFT:
+      rect.y += target_rect->height;
+      break;
+
+    case POSITION_RIGHT_ALIGN_BOTTOM:
+      rect.x += target_rect->width;
+      /* fall-through */
+    case POSITION_RIGHT_ALIGN_TOP:
+      rect.x += target_rect->width;
+      rect.y -= rect.height - target_rect->height;
+      break;
+
+    case POSITION_TOP_ALIGN_RIGHT:
+      rect.x -= rect.width - target_rect->width;
+      /* fall-through */
+    case POSITION_TOP_ALIGN_LEFT:
       rect.y -= rect.height;
       break;
-    default:
+
+    case POSITION_LEFT_ALIGN_BOTTOM:
+      rect.y -= rect.height - target_rect->height;
+      /* fall-through */
+    case POSITION_LEFT_ALIGN_TOP:
+      rect.x -= rect.width;
       break;
-  }
-
-  switch (gravity) {
-    case GDK_GRAVITY_NORTH_WEST:
-    case GDK_GRAVITY_WEST:
-    case GDK_GRAVITY_SOUTH_WEST:
-      if (!is_rtl)
-        rect.x -= rect.width;
-      break;
-
-    case GDK_GRAVITY_EAST:
-    case GDK_GRAVITY_SOUTH_EAST:
-    case GDK_GRAVITY_NORTH_EAST:
-    case GDK_GRAVITY_NORTH:
-    case GDK_GRAVITY_SOUTH:
-      if (is_rtl)
-        rect.x -= rect.width;
-      break;
-
-    default:
-      break;
-  }
-
-  /* If the rect intersects with @keepout_rect, we push it out */
-  if (gdk_rectangle_intersect (&rect, keepout_rect, NULL)) {
-    switch (gravity) {
-      case GDK_GRAVITY_NORTH_WEST:
-      case GDK_GRAVITY_NORTH:
-      case GDK_GRAVITY_NORTH_EAST:
-        rect.y -= keepout_rect->height;
-        break;
-
-      case GDK_GRAVITY_SOUTH_WEST:
-      case GDK_GRAVITY_SOUTH:
-      case GDK_GRAVITY_SOUTH_EAST:
-        rect.y += keepout_rect->height;
-        break;
-
-      default:
-        break;
-    }
-
-    switch (gravity) {
-      case GDK_GRAVITY_NORTH_WEST:
-      case GDK_GRAVITY_SOUTH_WEST:
-      case GDK_GRAVITY_WEST:
-        if (!is_rtl)
-          rect.x -= keepout_rect->width;
-        break;
-
-      case GDK_GRAVITY_NORTH_EAST:
-      case GDK_GRAVITY_EAST:
-      case GDK_GRAVITY_SOUTH_EAST:
-        if (!is_rtl)
-          rect.x += keepout_rect->width;
-        break;
-
-      case GDK_GRAVITY_NORTH:
-      case GDK_GRAVITY_SOUTH:
-/*        if (is_rtl)
-          rect.x -= keepout_rect->width;
-        else
-          rect.x += keepout_rect->width;*/
-        break;
-
-      default:
-        break;
-    }
-  }
-
-  if (gdk_rectangle_intersect (&rect, keepout_rect, NULL)) {
-    g_warning ("Still intersecting with the keepout rect!\n");
   }
 
   *position_rect = rect;
@@ -267,13 +225,23 @@ position_rectangle (GdkRectangle *position_rect,
 static gboolean
 position_rectangle_on_screen (GtkWidget *widget,
                               GdkRectangle *rectangle,
-                              GdkRectangle *keepout_rect)
+                              GdkRectangle *target_rect)
 {
   GtkTextDirection direction;
   GdkRectangle monitor;
   int monitor_num;
-  GdkPoint point;
   GdkScreen *screen;
+  const PositionType positions[] = {
+    POSITION_DOWN_ALIGN_LEFT,
+    POSITION_TOP_ALIGN_LEFT,
+    POSITION_RIGHT_ALIGN_TOP,
+    POSITION_LEFT_ALIGN_TOP,
+    POSITION_DOWN_ALIGN_RIGHT,
+    POSITION_TOP_ALIGN_RIGHT,
+    POSITION_RIGHT_ALIGN_BOTTOM,
+    POSITION_LEFT_ALIGN_BOTTOM
+  };
+  guint i;
   
   direction = gtk_widget_get_direction (widget);
   screen = gtk_widget_get_screen (widget);
@@ -282,37 +250,10 @@ position_rectangle_on_screen (GtkWidget *widget,
     monitor_num = 0;
   gdk_screen_get_monitor_geometry (screen, monitor_num, &monitor);
 
-  point.x = keepout_rect->x;
-  point.y = keepout_rect->y;
-
-  if (position_rectangle (rectangle,
-                          &point,
-                          GDK_GRAVITY_SOUTH,
-                          direction,
-                          keepout_rect,
-                          &monitor))
-    return TRUE;
-  if (position_rectangle (rectangle,
-                          &point,
-                          GDK_GRAVITY_NORTH,
-                          direction,
-                          keepout_rect,
-                          &monitor))
-    return TRUE;
-  if (position_rectangle (rectangle,
-                          &point,
-                          GDK_GRAVITY_EAST,
-                          direction,
-                          keepout_rect,
-                          &monitor))
-    return TRUE;
-  if (position_rectangle (rectangle,
-                          &point,
-                          GDK_GRAVITY_WEST,
-                          direction,
-                          keepout_rect,
-                          &monitor))
-    return TRUE;
+  for (i = 0; i < G_N_ELEMENTS (positions); ++i) {
+    if (position_rectangle (rectangle, positions[i], direction, target_rect, &monitor))
+      return TRUE;
+  }
 
   return FALSE;
 }
