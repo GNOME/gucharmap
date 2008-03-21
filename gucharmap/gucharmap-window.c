@@ -44,7 +44,6 @@ typedef struct _GucharmapWindowPrivate GucharmapWindowPrivate;
 struct _GucharmapWindowPrivate
 {
   GtkWidget *status;
-  GtkAccelGroup *accel_group;
 
   GtkWidget *fontsel;
   GtkWidget *text_to_copy_container; /* the thing to show/hide */
@@ -701,10 +700,6 @@ make_menu (GucharmapWindow *guw)
       forward_keysym = GDK_Right;
       back_keysym = GDK_Left;
     }
-
-  priv->accel_group = gtk_accel_group_new ();
-  gtk_window_add_accel_group (GTK_WINDOW (guw), priv->accel_group);
-  g_object_unref (priv->accel_group);
 
   /* make the menu bar */
 
