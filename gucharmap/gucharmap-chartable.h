@@ -30,14 +30,12 @@
 
 G_BEGIN_DECLS
 
-#define GUCHARMAP_TYPE_CHARTABLE (gucharmap_chartable_get_type ())
-
-#define GUCHARMAP_CHARTABLE(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), \
-                              gucharmap_chartable_get_type (), GucharmapChartable))
-
-#define GUCHARMAP_CHARTABLE_CLASS(clazz) (G_TYPE_CHECK_CLASS_CAST ((clazz), gucharmap_chartable_get_type (), GucharmapChartableClass))
-
-#define GUCHARMAP_IS_CHARTABLE(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), gucharmap_chartable_get_type ()))
+#define GUCHARMAP_TYPE_CHARTABLE             (gucharmap_chartable_get_type ())
+#define GUCHARMAP_CHARTABLE(o)               (G_TYPE_CHECK_INSTANCE_CAST ((o), GUCHARMAP_TYPE_CHARTABLE, GucharmapChartable))
+#define GUCHARMAP_CHARTABLE_CLASS(k) (G_TYPE_CHECK_CLASS_CAST((k), GUCHARMAP_TYPE_CHARTABLE, GucharmapChartableClass))
+#define GUCHARMAP_IS_CHARTABLE(o)            (G_TYPE_CHECK_INSTANCE_TYPE ((o), GUCHARMAP_TYPE_CHARTABLE))
+#define GUCHARMAP_IS_CHARTABLE_CLASS(k)      (G_TYPE_CHECK_CLASS_TYPE ((k), GUCHARMAP_TYPE_CHARTABLE))
+#define GUCHARMAP_CHARTABLE_GET_CLASS(o)     (G_TYPE_INSTANCE_GET_CLASS ((o), GUCHARMAP_TYPE_CHARTABLE, GucharmapChartableClass))
 
 GType gucharmap_chartable_get_type (void);
 GtkWidget * gucharmap_chartable_new (void);

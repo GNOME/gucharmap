@@ -31,17 +31,12 @@
 
 G_BEGIN_DECLS
 
-#define GUCHARMAP_CHAPTERS_VIEW(obj) \
-            (G_TYPE_CHECK_INSTANCE_CAST ((obj), gucharmap_chapters_view_get_type (), GucharmapChaptersView))
-
-#define GUCHARMAP_CHAPTERS_VIEW_CLASS(clazz) \
-            (G_TYPE_CHECK_CLASS_CAST ((clazz), gucharmap_chapters_view_get_type (), GucharmapChaptersViewClass))
-
-#define GUCHARMAP_IS_CHAPTERS_VIEW(obj) \
-            (G_TYPE_CHECK_INSTANCE_TYPE ((obj), gucharmap_chapters_view_get_type ()))
-
-#define GUCHARMAP_CHAPTERS_VIEW_GET_CLASS(obj) \
-            (G_TYPE_INSTANCE_GET_CLASS ((obj), gucharmap_chapters_view_get_type (), GucharmapChaptersViewClass))
+#define GUCHARMAP_TYPE_CHAPTERS_VIEW             (gucharmap_chapters_view_get_type ())
+#define GUCHARMAP_CHAPTERS_VIEW(o)               (G_TYPE_CHECK_INSTANCE_CAST ((o), GUCHARMAP_TYPE_CHAPTERS_VIEW, GucharmapChaptersView))
+#define GUCHARMAP_CHAPTERS_VIEW_CLASS(k) (G_TYPE_CHECK_CLASS_CAST((k), GUCHARMAP_TYPE_CHAPTERS_VIEW, GucharmapChaptersViewClass))
+#define GUCHARMAP_IS_CHAPTERS_VIEW(o)            (G_TYPE_CHECK_INSTANCE_TYPE ((o), GUCHARMAP_TYPE_CHAPTERS_VIEW))
+#define GUCHARMAP_IS_CHAPTERS_VIEW_CLASS(k)      (G_TYPE_CHECK_CLASS_TYPE ((k), GUCHARMAP_TYPE_CHAPTERS_VIEW))
+#define GUCHARMAP_CHAPTERS_VIEW_GET_CLASS(o)     (G_TYPE_INSTANCE_GET_CLASS ((o), GUCHARMAP_TYPE_CHAPTERS_VIEW, GucharmapChaptersViewClass))
 
 GType       gucharmap_chapters_view_get_type (void);
 

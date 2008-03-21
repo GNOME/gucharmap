@@ -31,17 +31,12 @@
 
 G_BEGIN_DECLS
 
-#define GUCHARMAP_BLOCK_CHAPTERS_MODEL(obj) \
-            (G_TYPE_CHECK_INSTANCE_CAST ((obj), gucharmap_block_chapters_model_get_type (), GucharmapBlockChaptersModel))
-
-#define GUCHARMAP_BLOCK_CHAPTERS_MODEL_CLASS(clazz) \
-            (G_TYPE_CHECK_CLASS_CAST ((clazz), gucharmap_block_chapters_model_get_type (), GucharmapBlockChaptersModelClass))
-
-#define GUCHARMAP_IS_BLOCK_CHAPTERS_MODEL(obj) \
-            (G_TYPE_CHECK_INSTANCE_TYPE ((obj), gucharmap_block_chapters_model_get_type ()))
-
-#define GUCHARMAP_BLOCK_CHAPTERS_MODEL_GET_CLASS(obj) \
-            (G_TYPE_INSTANCE_GET_CLASS ((obj), gucharmap_block_chapters_model_get_type (), GucharmapBlockChaptersModelClass))
+#define GUCHARMAP_TYPE_BLOCK_CHAPTERS_MODEL             (gucharmap_block_chapters_model_get_type ())
+#define GUCHARMAP_BLOCK_CHAPTERS_MODEL(o)               (G_TYPE_CHECK_INSTANCE_CAST ((o), GUCHARMAP_TYPE_BLOCK_CHAPTERS_MODEL, GucharmapBlockChaptersModel))
+#define GUCHARMAP_BLOCK_CHAPTERS_MODEL_CLASS(k) (G_TYPE_CHECK_CLASS_CAST((k), GUCHARMAP_TYPE_BLOCK_CHAPTERS_MODEL, GucharmapBlockChaptersModelClass))
+#define GUCHARMAP_IS_BLOCK_CHAPTERS_MODEL(o)            (G_TYPE_CHECK_INSTANCE_TYPE ((o), GUCHARMAP_TYPE_BLOCK_CHAPTERS_MODEL))
+#define GUCHARMAP_IS_BLOCK_CHAPTERS_MODEL_CLASS(k)      (G_TYPE_CHECK_CLASS_TYPE ((k), GUCHARMAP_TYPE_BLOCK_CHAPTERS_MODEL))
+#define GUCHARMAP_BLOCK_CHAPTERS_MODEL_GET_CLASS(o)     (G_TYPE_INSTANCE_GET_CLASS ((o), GUCHARMAP_TYPE_BLOCK_CHAPTERS_MODEL, GucharmapBlockChaptersModelClass))
 
 GType                   gucharmap_block_chapters_model_get_type (void);
 GucharmapChaptersModel* gucharmap_block_chapters_model_new      (void);

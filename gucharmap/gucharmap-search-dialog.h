@@ -27,7 +27,12 @@
 
 G_BEGIN_DECLS
 
-#define GUCHARMAP_SEARCH_DIALOG(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), gucharmap_search_dialog_get_type (), GucharmapSearchDialog))
+#define GUCHARMAP_TYPE_SEARCH_DIALOG             (gucharmap_search_dialog_get_type ())
+#define GUCHARMAP_SEARCH_DIALOG(o)               (G_TYPE_CHECK_INSTANCE_CAST ((o), GUCHARMAP_TYPE_SEARCH_DIALOG, GucharmapSearchDialog))
+#define GUCHARMAP_SEARCH_DIALOG_CLASS(k) (G_TYPE_CHECK_CLASS_CAST((k), GUCHARMAP_TYPE_SEARCH_DIALOG, GucharmapSearchDialogClass))
+#define GUCHARMAP_IS_SEARCH_DIALOG(o)            (G_TYPE_CHECK_INSTANCE_TYPE ((o), GUCHARMAP_TYPE_SEARCH_DIALOG))
+#define GUCHARMAP_IS_SEARCH_DIALOG_CLASS(k)      (G_TYPE_CHECK_CLASS_TYPE ((k), GUCHARMAP_TYPE_SEARCH_DIALOG))
+#define GUCHARMAP_SEARCH_DIALOG_GET_CLASS(o)     (G_TYPE_INSTANCE_GET_CLASS ((o), GUCHARMAP_TYPE_SEARCH_DIALOG, GucharmapSearchDialogClass))
 
 typedef struct _GucharmapSearchDialog GucharmapSearchDialog;
 typedef struct _GucharmapSearchDialogClass GucharmapSearchDialogClass;

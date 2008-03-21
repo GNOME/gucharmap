@@ -27,11 +27,12 @@
 
 G_BEGIN_DECLS
 
-#define GUCHARMAP_CHARTABLE_ACCESSIBLE(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), gucharmap_chartable_accessible_get_type (), GucharmapChartableAccessible))
-#define GUCHARMAP_CHARTABLE_ACCESSIBLE_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), gucharmap_chartable_accessible_get_type (), GucharmapChartableAccessibleClass))
-#define GUCHARMAP_IS_CHARTABLE_ACCESSIBLE(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), gucharmap_chartable_accessible_get_type ()))
-#define GUCHARMAP_IS_CHARTABLE_ACCESSIBLE_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), gucharmap_chartable_accessible_get_type ()))
-#define GUCHARMAP_CHARTABLE_ACCESSIBLE_GET_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS ((obj), gucharmap_chartable_accessible_get_type (), GucharmapChartableAccessibleClass))
+#define GUCHARMAP_TYPE_CHARTABLE_ACCESSIBLE             (gucharmap_chartable_accessible_get_type ())
+#define GUCHARMAP_CHARTABLE_ACCESSIBLE(o)               (G_TYPE_CHECK_INSTANCE_CAST ((o), GUCHARMAP_TYPE_CHARTABLE_ACCESSIBLE, GucharmapChartableAccessible))
+#define GUCHARMAP_CHARTABLE_ACCESSIBLE_CLASS(k) (G_TYPE_CHECK_CLASS_CAST((k), GUCHARMAP_TYPE_CHARTABLE_ACCESSIBLE, GucharmapChartableAccessibleClass))
+#define GUCHARMAP_IS_CHARTABLE_ACCESSIBLE(o)            (G_TYPE_CHECK_INSTANCE_TYPE ((o), GUCHARMAP_TYPE_CHARTABLE_ACCESSIBLE))
+#define GUCHARMAP_IS_CHARTABLE_ACCESSIBLE_CLASS(k)      (G_TYPE_CHECK_CLASS_TYPE ((k), GUCHARMAP_TYPE_CHARTABLE_ACCESSIBLE))
+#define GUCHARMAP_CHARTABLE_ACCESSIBLE_GET_CLASS(o)     (G_TYPE_INSTANCE_GET_CLASS ((o), GUCHARMAP_TYPE_CHARTABLE_ACCESSIBLE, GucharmapChartableAccessibleClass))
 
 typedef struct _GucharmapChartableAccessible      GucharmapChartableAccessible;
 typedef struct _GucharmapChartableAccessibleClass GucharmapChartableAccessibleClass;

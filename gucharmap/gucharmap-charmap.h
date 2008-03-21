@@ -31,16 +31,12 @@
 
 G_BEGIN_DECLS
 
-#define GUCHARMAP_CHARMAP(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), \
-                                gucharmap_charmap_get_type (), \
-                                GucharmapCharmap))
-
-#define GUCHARMAP_CHARMAP_CLASS(clazz) (G_TYPE_CHECK_CLASS_CAST ((clazz), \
-                                        gucharmap_charmap_get_type (),\
-                                        GucharmapCharmapClass))
-
-#define GUCHARMAP_IS_CHARMAP(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), \
-                                   gucharmap_charmap_get_type ()))
+#define GUCHARMAP_TYPE_CHARMAP             (gucharmap_charmap_get_type ())
+#define GUCHARMAP_CHARMAP(o)               (G_TYPE_CHECK_INSTANCE_CAST ((o), GUCHARMAP_TYPE_CHARMAP, GucharmapCharmap))
+#define GUCHARMAP_CHARMAP_CLASS(k) (G_TYPE_CHECK_CLASS_CAST((k), GUCHARMAP_TYPE_CHARMAP, GucharmapCharmapClass))
+#define GUCHARMAP_IS_CHARMAP(o)            (G_TYPE_CHECK_INSTANCE_TYPE ((o), GUCHARMAP_TYPE_CHARMAP))
+#define GUCHARMAP_IS_CHARMAP_CLASS(k)      (G_TYPE_CHECK_CLASS_TYPE ((k), GUCHARMAP_TYPE_CHARMAP))
+#define GUCHARMAP_CHARMAP_GET_CLASS(o)     (G_TYPE_INSTANCE_GET_CLASS ((o), GUCHARMAP_TYPE_CHARMAP, GucharmapCharmapClass))
 
 GType                 gucharmap_charmap_get_type           (void);
 

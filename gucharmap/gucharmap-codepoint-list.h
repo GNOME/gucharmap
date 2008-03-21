@@ -28,17 +28,12 @@
 
 G_BEGIN_DECLS
 
-#define GUCHARMAP_CODEPOINT_LIST(obj) \
-            (G_TYPE_CHECK_INSTANCE_CAST ((obj), gucharmap_codepoint_list_get_type (), GucharmapCodepointList))
-
-#define GUCHARMAP_CODEPOINT_LIST_CLASS(clazz) \
-            (G_TYPE_CHECK_CLASS_CAST ((clazz), gucharmap_codepoint_list_get_type (), GucharmapCodepointListClass))
-
-#define GUCHARMAP_IS_CODEPOINT_LIST(obj) \
-             (G_TYPE_CHECK_INSTANCE_TYPE ((obj), gucharmap_codepoint_list_get_type ()))
-
-#define GUCHARMAP_CODEPOINT_LIST_GET_CLASS(obj) \
-             (G_TYPE_INSTANCE_GET_CLASS ((obj), gucharmap_codepoint_list_get_type (), GucharmapCodepointListClass))
+#define GUCHARMAP_TYPE_CODEPOINT_LIST             (gucharmap_codepoint_list_get_type ())
+#define GUCHARMAP_CODEPOINT_LIST(o)               (G_TYPE_CHECK_INSTANCE_CAST ((o), GUCHARMAP_TYPE_CODEPOINT_LIST, GucharmapCodepointList))
+#define GUCHARMAP_CODEPOINT_LIST_CLASS(k) (G_TYPE_CHECK_CLASS_CAST((k), GUCHARMAP_TYPE_CODEPOINT_LIST, GucharmapCodepointListClass))
+#define GUCHARMAP_IS_CODEPOINT_LIST(o)            (G_TYPE_CHECK_INSTANCE_TYPE ((o), GUCHARMAP_TYPE_CODEPOINT_LIST))
+#define GUCHARMAP_IS_CODEPOINT_LIST_CLASS(k)      (G_TYPE_CHECK_CLASS_TYPE ((k), GUCHARMAP_TYPE_CODEPOINT_LIST))
+#define GUCHARMAP_CODEPOINT_LIST_GET_CLASS(o)     (G_TYPE_INSTANCE_GET_CLASS ((o), GUCHARMAP_TYPE_CODEPOINT_LIST, GucharmapCodepointListClass))
 
 GType                    gucharmap_codepoint_list_get_type       (void);
 GucharmapCodepointList * gucharmap_codepoint_list_new            (gunichar start,

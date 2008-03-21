@@ -23,16 +23,12 @@
 
 G_BEGIN_DECLS
 
-#define GUCHARMAP_MINI_FONT_SELECTION(obj) \
-        (G_TYPE_CHECK_INSTANCE_CAST ((obj), gucharmap_mini_font_selection_get_type (), \
-                                     GucharmapMiniFontSelection))
-
-#define GUCHARMAP_MINI_FONT_SELECTION_CLASS(clazz) \
-        (G_TYPE_CHECK_CLASS_CAST ((clazz), gucharmap_mini_font_selection_get_type (), \
-                                  GucharmapMiniFontSelectionClass))
-
-#define GUCHARMAP_IS_MINI_FONT_SELECTION(obj) \
-        G_TYPE_CHECK_INSTANCE_TYPE ((obj), gucharmap_mini_font_selection_get_type ())
+#define GUCHARMAP_TYPE_MINI_FONT_SELECTION             (gucharmap_mini_font_selection_get_type ())
+#define GUCHARMAP_MINI_FONT_SELECTION(o)               (G_TYPE_CHECK_INSTANCE_CAST ((o), GUCHARMAP_TYPE_MINI_FONT_SELECTION, GucharmapMiniFontSelection))
+#define GUCHARMAP_MINI_FONT_SELECTION_CLASS(k) (G_TYPE_CHECK_CLASS_CAST((k), GUCHARMAP_TYPE_MINI_FONT_SELECTION, GucharmapMiniFontSelectionClass))
+#define GUCHARMAP_IS_MINI_FONT_SELECTION(o)            (G_TYPE_CHECK_INSTANCE_TYPE ((o), GUCHARMAP_TYPE_MINI_FONT_SELECTION))
+#define GUCHARMAP_IS_MINI_FONT_SELECTION_CLASS(k)      (G_TYPE_CHECK_CLASS_TYPE ((k), GUCHARMAP_TYPE_MINI_FONT_SELECTION))
+#define GUCHARMAP_MINI_FONT_SELECTION_GET_CLASS(o)     (G_TYPE_INSTANCE_GET_CLASS ((o), GUCHARMAP_TYPE_MINI_FONT_SELECTION, GucharmapMiniFontSelectionClass))
 
 typedef struct _GucharmapMiniFontSelection GucharmapMiniFontSelection;
 typedef struct _GucharmapMiniFontSelectionClass GucharmapMiniFontSelectionClass;

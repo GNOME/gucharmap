@@ -32,17 +32,12 @@ G_BEGIN_DECLS
 
 #define GUCHARMAP_TYPE_CHAPTERS_MODEL (gucharmap_chapters_model_get_type ())
 
-#define GUCHARMAP_CHAPTERS_MODEL(obj) \
-            (G_TYPE_CHECK_INSTANCE_CAST ((obj), gucharmap_chapters_model_get_type (), GucharmapChaptersModel))
-
-#define GUCHARMAP_CHAPTERS_MODEL_CLASS(clazz) \
-            (G_TYPE_CHECK_CLASS_CAST ((clazz), gucharmap_chapters_model_get_type (), GucharmapChaptersModelClass))
-
-#define GUCHARMAP_IS_CHAPTERS_MODEL(obj) \
-            (G_TYPE_CHECK_INSTANCE_TYPE ((obj), gucharmap_chapters_model_get_type ()))
-
-#define GUCHARMAP_CHAPTERS_MODEL_GET_CLASS(obj) \
-            (G_TYPE_INSTANCE_GET_CLASS ((obj), gucharmap_chapters_model_get_type (), GucharmapChaptersModelClass))
+#define GUCHARMAP_TYPE_CHAPTERS_MODEL             (gucharmap_chapters_model_get_type ())
+#define GUCHARMAP_CHAPTERS_MODEL(o)               (G_TYPE_CHECK_INSTANCE_CAST ((o), GUCHARMAP_TYPE_CHAPTERS_MODEL, GucharmapChaptersModel))
+#define GUCHARMAP_CHAPTERS_MODEL_CLASS(k) (G_TYPE_CHECK_CLASS_CAST((k), GUCHARMAP_TYPE_CHAPTERS_MODEL, GucharmapChaptersModelClass))
+#define GUCHARMAP_IS_CHAPTERS_MODEL(o)            (G_TYPE_CHECK_INSTANCE_TYPE ((o), GUCHARMAP_TYPE_CHAPTERS_MODEL))
+#define GUCHARMAP_IS_CHAPTERS_MODEL_CLASS(k)      (G_TYPE_CHECK_CLASS_TYPE ((k), GUCHARMAP_TYPE_CHAPTERS_MODEL))
+#define GUCHARMAP_CHAPTERS_MODEL_GET_CLASS(o)     (G_TYPE_INSTANCE_GET_CLASS ((o), GUCHARMAP_TYPE_CHAPTERS_MODEL, GucharmapChaptersModelClass))
 
 typedef enum
 {
