@@ -773,6 +773,11 @@ set_active_char (GucharmapChartable *chartable,
                  gunichar        wc)
 {
   guint cell = gucharmap_codepoint_list_get_index (chartable->codepoint_list, wc);
+  if (cell == -1) {
+    gtk_widget_error_bell (GTK_WIDGET (chartable));
+    return;
+  }
+
   gucharmap_chartable_set_active_cell (chartable, cell);
 }
 
@@ -1815,9 +1820,48 @@ gucharmap_chartable_copy_clipboard (GucharmapChartable *chartable)
 }
 
 static void
+gucharmap_chartable_paste_received_cb (GtkClipboard *clipboard,
+                                       const char *text,
+                                       gpointer user_data)
+{
+  gpointer *data = (gpointer *) user_data;
+  GucharmapChartable *chartable = *data;
+  gunichar wc;
+
+  g_slice_free (gpointer, data);
+
+  if (!chartable)
+    return;
+
+  g_object_remove_weak_pointer (G_OBJECT (chartable), data);
+
+  wc = g_utf8_get_char_validated (text, -1);
+  if (wc == 0 ||
+      !gucharmap_unichar_validate (wc)) {
+    gtk_widget_error_bell (GTK_WIDGET (chartable));
+  }
+
+  gucharmap_chartable_set_active_character (chartable, wc);
+}
+
+static void
 gucharmap_chartable_paste_clipboard (GucharmapChartable *chartable)
 {
-  /* FIXMEchpe */
+  GtkClipboard *clipboard;
+  gpointer *data;
+
+  if (!GTK_WIDGET_REALIZED (chartable))
+    return;
+
+  data = g_slice_new (gpointer);
+  *data = chartable;
+  g_object_add_weak_pointer (G_OBJECT (chartable), data);
+
+  clipboard = gtk_widget_get_clipboard (GTK_WIDGET (chartable),
+                                        GDK_SELECTION_CLIPBOARD);
+  gtk_clipboard_request_text (clipboard,
+                              gucharmap_chartable_paste_received_cb,
+                              data);
 }
 
 /* does all the initial construction */
