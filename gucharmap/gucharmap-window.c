@@ -732,6 +732,7 @@ make_menu (GucharmapWindow *guw)
   gucharmap_window_set_file_menu_visible (guw, TRUE);
 
   gtk_ui_manager_insert_action_group (priv->uimanager, priv->action_group, 0);
+  g_object_unref (priv->action_group);
   
   gtk_ui_manager_add_ui_from_string (priv->uimanager, ui_info, strlen (ui_info), NULL);
   
