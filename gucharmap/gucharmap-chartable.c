@@ -156,27 +156,40 @@ typedef enum {
   POSITION_LEFT_ALIGN_BOTTOM
 } PositionType;
 
+static const PositionType rtl_position[] = {
+  POSITION_DOWN_ALIGN_RIGHT,
+  POSITION_DOWN_ALIGN_LEFT,
+  POSITION_LEFT_ALIGN_TOP,
+  POSITION_LEFT_ALIGN_BOTTOM,
+  POSITION_TOP_ALIGN_RIGHT,
+  POSITION_TOP_ALIGN_LEFT,
+  POSITION_RIGHT_ALIGN_TOP,
+  POSITION_RIGHT_ALIGN_BOTTOM
+};
+
 /**
  * position_rectangle:
- * @rect: the rectangle to position
- * @reference_point: point to position on
- * @gravity: how to position @rect wrt. @reference_rect
- * @direction: the text direction
- * @keepout_rect: a rectangle to avoid. @reference_point must be one of its corners
+ * @rect: the rectangle to position. Inout; width and height must be initialised
+ * @target_rect: the rectangle to position @rect on
  * @bounding_rect: the bounding rectangle
+ * @position: how to position the rectangle
+ * @direction: the text direction
  *
  * Returns: %TRUE if @rect could be positioned on @reference_point
  * with positioning according to @gravity inside @bounding_rect
  */ 
 static gboolean
 position_rectangle (GdkRectangle *position_rect,
-                    PositionType position,
-                    GtkTextDirection direction,
                     GdkRectangle *target_rect,
-                    GdkRectangle *bounding_rect)
+                    GdkRectangle *bounding_rect,
+                    PositionType position,
+                    GtkTextDirection direction)
 {
   GdkRectangle rect;
-//  gboolean is_rtl = direction == GTK_TEXT_DIR_RTL;
+
+  if (direction == GTK_TEXT_DIR_RTL) {
+    position = rtl_position[position];
+  }
 
   rect.x = target_rect->x;
   rect.y = target_rect->y;
@@ -251,7 +264,7 @@ position_rectangle_on_screen (GtkWidget *widget,
   gdk_screen_get_monitor_geometry (screen, monitor_num, &monitor);
 
   for (i = 0; i < G_N_ELEMENTS (positions); ++i) {
-    if (position_rectangle (rectangle, positions[i], direction, target_rect, &monitor))
+    if (position_rectangle (rectangle, target_rect, &monitor, positions[i], direction))
       return TRUE;
   }
 
