@@ -200,6 +200,13 @@ search_find_prev (GtkAction       *action,
 }
 
 static void
+close_window (GtkAction *action,
+              GtkWidget *widget)
+{
+  gtk_widget_destroy (widget);
+}
+
+static void
 font_bigger (GtkAction       *action, 
              GucharmapWindow *guw)
 {
@@ -646,7 +653,7 @@ gucharmap_window_init (GucharmapWindow *guw)
     { "Help", NULL, N_("_Help"), NULL, NULL, NULL },
 
     { "Close", GTK_STOCK_CLOSE, NULL, NULL,
-      NULL, G_CALLBACK (gtk_main_quit) },
+      NULL, G_CALLBACK (close_window) },
 
     { "ZoomIn", GTK_STOCK_ZOOM_IN, NULL, NULL,
       NULL, G_CALLBACK (font_bigger) },
@@ -846,8 +853,7 @@ gucharmap_window_new (void)
   return GTK_WIDGET (g_object_new (gucharmap_window_get_type (), NULL));
 }
 
-GucharmapMiniFontSelection *
-gucharmap_window_get_mini_font_selection (GucharmapWindow *guw)
+void
+gucharmap_window_set_font (GucharmapWindow *window)
 {
-  return GUCHARMAP_MINI_FONT_SELECTION (guw->fontsel);
 }

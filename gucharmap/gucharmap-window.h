@@ -63,11 +63,13 @@ struct _GucharmapWindowClass
 
 #define GUCHARMAP_ICON_NAME "gucharmap"
 
-GType                        gucharmap_window_get_type                   (void);
-GtkWidget *                  gucharmap_window_new                        (void);
-GucharmapMiniFontSelection * gucharmap_window_get_mini_font_selection    (GucharmapWindow *guw);
+GType       gucharmap_window_get_type  (void);
 
-GdkCursor *                 _gucharmap_window_progress_cursor (void);
+GtkWidget * gucharmap_window_new       (void);
+
+void        gucharmap_window_set_font  (GucharmapWindow *window); 
+
+GdkCursor *_gucharmap_window_progress_cursor (void);
 
 G_END_DECLS
 
