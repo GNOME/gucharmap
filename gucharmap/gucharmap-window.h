@@ -54,6 +54,9 @@ struct _GucharmapWindow
   GtkWidget *progress;
 
   guint save_last_char_idle_id;
+
+  GtkPageSetup *page_setup;
+  GtkPrintSettings *print_settings;
 };
 
 struct _GucharmapWindowClass

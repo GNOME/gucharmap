@@ -44,6 +44,8 @@ libgucharmap_la_SOURCES = \
 	gucharmap-init.c \
 	gucharmap-marshal.c \
 	gucharmap-marshal.h \
+	gucharmap-print-operation.c \
+	gucharmap-print-operation.h \
 	gucharmap-private.h \
 	gucharmap-script-chapters-model.c \
 	gucharmap-script-chapters-model.h \

@@ -33,6 +33,103 @@ static void gucharmap_window_init       (GucharmapWindow *window);
 G_DEFINE_TYPE (GucharmapWindow, gucharmap_window, GTK_TYPE_WINDOW)
 
 static void
+show_error_dialog (GtkWindow *parent,
+                   GError *error)
+{
+  GtkWidget *dialog;
+
+  dialog = gtk_message_dialog_new (parent,
+                                   GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+                                   GTK_MESSAGE_ERROR, GTK_BUTTONS_OK,
+                                   "%s", error->message);
+  g_signal_connect (dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
+  gtk_window_present (GTK_WINDOW (dialog));
+}
+
+static void
+ensure_print_data (GucharmapWindow *guw)
+{
+  if (!guw->page_setup) {
+    guw->page_setup = gtk_page_setup_new ();
+  }
+
+  if (!guw->print_settings) {
+    guw->print_settings = gtk_print_settings_new ();
+  }
+}
+
+static void
+print_operation_done_cb (GtkPrintOperation *operation,
+                         GtkPrintOperationResult result,
+                         GucharmapWindow *guw)
+{
+  if (result == GTK_PRINT_OPERATION_RESULT_ERROR) {
+    GError *error = NULL;
+
+    gtk_print_operation_get_error (operation, &error);
+    show_error_dialog (GTK_WINDOW (guw), error);
+    g_error_free (error);
+  } else if (result == GTK_PRINT_OPERATION_RESULT_APPLY) {
+    if (guw->print_settings)
+      g_object_unref (guw->print_settings);
+    guw->print_settings = g_object_ref (gtk_print_operation_get_print_settings (operation));
+  }
+}
+
+static void
+gucharmap_window_print (GucharmapWindow *guw,
+                        GtkPrintOperationAction action)
+{
+  GtkPrintOperation *op;
+  PangoFontDescription *font_desc;
+  GucharmapCodepointList *codepoint_list;
+  GucharmapChartable *chartable;
+  char *chapter, *filename;
+  GtkPrintOperationResult rv;
+  GError *error = NULL;
+
+  chartable = gucharmap_charmap_get_chartable (guw->charmap);
+  g_object_get (chartable,
+                "codepoint-list", &codepoint_list,
+                "font-desc", &font_desc,
+                NULL);
+
+  op = gucharmap_print_operation_new (codepoint_list, font_desc);
+  if (codepoint_list)
+    g_object_unref (codepoint_list);
+  if (font_desc)
+    pango_font_description_free (font_desc);
+
+  ensure_print_data (guw);
+  if (guw->page_setup)
+    gtk_print_operation_set_default_page_setup (op, guw->page_setup);
+  if (guw->print_settings)
+    gtk_print_operation_set_print_settings (op, guw->print_settings);
+
+  chapter = gucharmap_charmap_get_active_chapter (guw->charmap);
+  if (chapter) {
+    filename = g_strconcat (chapter, ".pdf", NULL);
+    gtk_print_operation_set_export_filename (op, filename);
+    g_free (filename);
+    g_free (chapter);
+  }
+
+  gtk_print_operation_set_allow_async (op, TRUE);
+  gtk_print_operation_set_show_progress (op, TRUE);
+
+  g_signal_connect (op, "done",
+                    G_CALLBACK (print_operation_done_cb), guw);
+
+  rv = gtk_print_operation_run (op, action, GTK_WINDOW (guw), &error);
+  if (rv == GTK_PRINT_OPERATION_RESULT_ERROR) {
+    show_error_dialog (GTK_WINDOW (guw), error);
+    g_error_free (error);
+  }
+
+  g_object_unref (op);
+}    
+
+static void
 status_message (GtkWidget       *widget, 
                 const gchar     *message, 
                 GucharmapWindow *guw)
@@ -200,6 +297,43 @@ search_find_prev (GtkAction       *action,
 }
 
 static void
+page_setup_done_cb (GtkPageSetup *page_setup,
+                    GucharmapWindow *guw)
+{
+  if (page_setup) {
+    g_object_unref (guw->page_setup);
+    guw->page_setup = page_setup;
+  }
+}
+
+static void
+file_page_setup (GtkAction *action,
+                 GucharmapWindow *guw)
+{
+  ensure_print_data (guw);
+
+  gtk_print_run_page_setup_dialog_async (GTK_WINDOW (guw),
+                                         guw->page_setup,
+                                         guw->print_settings,
+                                         (GtkPageSetupDoneFunc) page_setup_done_cb,
+                                         guw);
+}
+
+static void
+file_print_preview (GtkAction *action,
+                    GucharmapWindow *guw)
+{
+  gucharmap_window_print (guw, GTK_PRINT_OPERATION_ACTION_PREVIEW);
+}
+
+static void
+file_print (GtkAction *action,
+            GucharmapWindow *guw)
+{
+  gucharmap_window_print (guw, GTK_PRINT_OPERATION_ACTION_PRINT_DIALOG);
+}
+
+static void
 close_window (GtkAction *action,
               GtkWidget *widget)
 {
@@ -259,14 +393,7 @@ open_url (GtkWindow *parent,
   g_free (command);
 
   if (error) {
-    GtkWidget *d;
-
-    d = gtk_message_dialog_new (parent,
-                                GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-                                GTK_MESSAGE_ERROR, GTK_BUTTONS_OK,
-                                "%s", error->message);
-    g_signal_connect (d, "response", G_CALLBACK (gtk_widget_destroy), NULL);
-    gtk_window_present (GTK_WINDOW (d));
+    show_error_dialog (parent, error);
     g_error_free (error);
   }
 }
@@ -322,6 +449,7 @@ help_about (GtkAction       *action,
       "Noah Levitt <nlevitt@columbia.edu>", 
       "Daniel Elstner <daniel.elstner@gmx.net>", 
       "Padraig O'Briain <Padraig.Obriain@sun.com>",
+      "Christian Persch <" "chpe" "\100" "gnome" "." "org" ">",
       NULL 
     };
 
@@ -361,10 +489,11 @@ help_about (GtkAction       *action,
 
   gtk_show_about_dialog (GTK_WINDOW (guw),
   			 "authors", authors,
-			 "comments", _("GNOME Character Map\n"
+			 "comments", _("GNOME Character Map "
 				       "based on the Unicode Character Database"),
-			 "copyright", "Copyright © 2004 Noah Levitt <nlevitt@columbia.edu>\n"
-				      "Copyright © 1991-2005 Unicode, Inc.",
+			 "copyright", "Copyright © 2004 Noah Levitt\n"
+				      "Copyright © 1991-2006 Unicode, Inc.\n"
+				      "Copyright © 2007, 2008 Christian Persch",
 			 "documenters", documenters,
 			 "license", license_trans,
 			 "program-name", _("Gucharmap"),
@@ -518,6 +647,10 @@ move_to_next_screen_cb (GtkAction *action,
 static const char ui_info [] =
   "<menubar name='MenuBar'>"
     "<menu action='File'>"
+      "<menuitem action='PageSetup' />"
+      "<menuitem action='PrintPreview' />"
+      "<menuitem action='Print' />"
+      "<separator />"
       "<menuitem action='Close' />"
 #ifdef DEBUG_chpe
       "<menuitem action='MoveNextScreen' />"
@@ -610,7 +743,6 @@ status_realize (GtkWidget       *status,
   gtk_widget_set_size_request (guw->status, -1, guw->status->allocation.height + 9);
 }
 
-
 static gboolean
 save_last_char_idle_cb (GucharmapWindow *guw)
 {
@@ -652,6 +784,12 @@ gucharmap_window_init (GucharmapWindow *guw)
     { "Go", NULL, N_("_Go"), NULL, NULL, NULL },
     { "Help", NULL, N_("_Help"), NULL, NULL, NULL },
 
+    { "PageSetup", NULL, N_("Page _Setup"), NULL,
+      NULL, G_CALLBACK (file_page_setup) },
+    { "PrintPreview", GTK_STOCK_PRINT_PREVIEW, NULL, NULL,
+      NULL, G_CALLBACK (file_print_preview) },
+    { "Print", GTK_STOCK_PRINT, NULL, NULL,
+      NULL, G_CALLBACK (file_print) },
     { "Close", GTK_STOCK_CLOSE, NULL, NULL,
       NULL, G_CALLBACK (close_window) },
 
@@ -833,6 +971,12 @@ gucharmap_window_finalize (GObject *object)
 
   if (guw->save_last_char_idle_id != 0)
     g_source_remove (guw->save_last_char_idle_id);
+
+  if (guw->page_setup)
+    g_object_unref (guw->page_setup);
+
+  if (guw->print_settings)
+    g_object_unref (guw->print_settings);
 
   G_OBJECT_CLASS (gucharmap_window_parent_class)->finalize (object);
 }
