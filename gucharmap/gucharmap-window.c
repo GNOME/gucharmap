@@ -588,60 +588,6 @@ move_to_next_screen_cb (GtkAction *action,
 #endif
 
 /* create the menu entries */
-/* tooltips are NULL because they are never actually shown in the program */
-
-static const GtkActionEntry menu_entries[] =
-{
-  { "File", NULL, N_("_File"), NULL, NULL, NULL },
-  { "View", NULL, N_("_View"), NULL, NULL, NULL },
-  { "Search", NULL, N_("_Search"), NULL, NULL, NULL },
-  { "Go", NULL, N_("_Go"), NULL, NULL, NULL },
-  { "Help", NULL, N_("_Help"), NULL, NULL, NULL },
-
-  { "Quit", GTK_STOCK_QUIT, N_("_Quit"), "<control>Q",
-    NULL, G_CALLBACK (gtk_main_quit) },
-
-  { "ZoomIn", NULL, N_("Zoom _In"), "<control>plus",
-    NULL, G_CALLBACK (font_bigger) },
-  { "ZoomOut", NULL, N_("Zoom _Out"), "<control>minus",
-    NULL, G_CALLBACK (font_smaller) },
-  { "NormalSize", NULL, N_("_Normal Size"), "<control>equal",
-    NULL, G_CALLBACK (font_default) },
-
-  { "Find", GTK_STOCK_FIND, N_("_Find..."), "<control>F",
-    NULL, G_CALLBACK (search_find) },
-  { "FindNext", GTK_STOCK_FIND, N_("Find _Next"), "<control>G",
-    NULL, G_CALLBACK (search_find_next) },
-  { "FindPrevious", GTK_STOCK_FIND, N_("Find _Previous"), "<shift><control>G",
-    NULL, G_CALLBACK (search_find_prev) },
-
-  { "NextCharacter", NULL, N_("_Next Character"), "<control>N",
-    NULL, G_CALLBACK (next_character) },
-  { "PreviousCharacter", NULL, N_("_Previous Character"), "<control>P",
-    NULL, G_CALLBACK (prev_character) },
-  { "NextChapter", NULL, N_("Next Script"), "<control>Page_Down",
-    NULL, G_CALLBACK (next_chapter) },
-  { "PreviousChapter", NULL, N_("Previous Script"), "<control>Page_Up",
-    NULL, G_CALLBACK (prev_chapter) },
-
-  { "HelpContents", GTK_STOCK_HELP, N_("_Contents"), "F1",
-    NULL, G_CALLBACK (help_contents) },
-  { "About", GTK_STOCK_ABOUT, N_("_About"), NULL,
-    NULL, G_CALLBACK (help_about) },
-
-#ifdef DEBUG_chpe
-  { "MoveNextScreen", NULL, "Move window to next screen", NULL,
-    NULL, G_CALLBACK (move_to_next_screen_cb) },
-#endif
-};
-
-static const GtkRadioActionEntry radio_menu_entries [] =
-{
-  { "ByScript", NULL, N_("By _Script"), NULL,
-    NULL, VIEW_BY_SCRIPT },
-  { "ByUnicodeBlock", NULL, N_("By _Unicode Block"), NULL,
-    NULL, VIEW_BY_BLOCK }
-};
 
 static const char ui_info [] =
   "<menubar name='MenuBar'>"
@@ -682,6 +628,59 @@ static const char ui_info [] =
 static GtkWidget *
 make_menu (GucharmapWindow *guw)
 {
+  /* tooltips are NULL because they are never actually shown in the program */
+  const GtkActionEntry menu_entries[] =
+  {
+    { "File", NULL, N_("_File"), NULL, NULL, NULL },
+    { "View", NULL, N_("_View"), NULL, NULL, NULL },
+    { "Search", NULL, N_("_Search"), NULL, NULL, NULL },
+    { "Go", NULL, N_("_Go"), NULL, NULL, NULL },
+    { "Help", NULL, N_("_Help"), NULL, NULL, NULL },
+
+    { "Quit", GTK_STOCK_QUIT, N_("_Quit"), "<control>Q",
+      NULL, G_CALLBACK (gtk_main_quit) },
+
+    { "ZoomIn", NULL, N_("Zoom _In"), "<control>plus",
+      NULL, G_CALLBACK (font_bigger) },
+    { "ZoomOut", NULL, N_("Zoom _Out"), "<control>minus",
+      NULL, G_CALLBACK (font_smaller) },
+    { "NormalSize", NULL, N_("_Normal Size"), "<control>equal",
+      NULL, G_CALLBACK (font_default) },
+
+    { "Find", GTK_STOCK_FIND, N_("_Find..."), "<control>F",
+      NULL, G_CALLBACK (search_find) },
+    { "FindNext", GTK_STOCK_FIND, N_("Find _Next"), "<control>G",
+      NULL, G_CALLBACK (search_find_next) },
+    { "FindPrevious", GTK_STOCK_FIND, N_("Find _Previous"), "<shift><control>G",
+      NULL, G_CALLBACK (search_find_prev) },
+
+    { "NextCharacter", NULL, N_("_Next Character"), "<control>N",
+      NULL, G_CALLBACK (next_character) },
+    { "PreviousCharacter", NULL, N_("_Previous Character"), "<control>P",
+      NULL, G_CALLBACK (prev_character) },
+    { "NextChapter", NULL, N_("Next Script"), "<control>Page_Down",
+      NULL, G_CALLBACK (next_chapter) },
+    { "PreviousChapter", NULL, N_("Previous Script"), "<control>Page_Up",
+      NULL, G_CALLBACK (prev_chapter) },
+
+    { "HelpContents", GTK_STOCK_HELP, N_("_Contents"), "F1",
+      NULL, G_CALLBACK (help_contents) },
+    { "About", GTK_STOCK_ABOUT, N_("_About"), NULL,
+      NULL, G_CALLBACK (help_about) },
+
+  #ifdef DEBUG_chpe
+    { "MoveNextScreen", NULL, "Move window to next screen", NULL,
+      NULL, G_CALLBACK (move_to_next_screen_cb) },
+  #endif
+  };
+
+  const GtkRadioActionEntry radio_menu_entries[] =
+  {
+    { "ByScript", NULL, N_("By _Script"), NULL,
+      NULL, VIEW_BY_SCRIPT },
+    { "ByUnicodeBlock", NULL, N_("By _Unicode Block"), NULL,
+      NULL, VIEW_BY_BLOCK }
+  };
   GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
   GtkWidget *menubar;
   guint forward_keysym, back_keysym;
