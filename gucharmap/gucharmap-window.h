@@ -43,7 +43,6 @@ struct _GucharmapWindow
   GtkWidget *status;
 
   GtkWidget *fontsel;
-  GtkWidget *text_to_copy_container; /* the thing to show/hide */
   GtkWidget *text_to_copy_entry;
 
   GtkUIManager *uimanager;
@@ -55,8 +54,6 @@ struct _GucharmapWindow
   GtkWidget *progress;
 
   guint save_last_char_idle_id;
-
-  GucharmapChaptersMode chapters_mode; 
 };
 
 struct _GucharmapWindowClass

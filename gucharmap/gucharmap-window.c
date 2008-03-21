@@ -695,41 +695,6 @@ entry_changed_sensitize_button (GtkEditable *editable, GtkWidget *button)
   gtk_widget_set_sensitive (button, entry_text[0] != '\0');
 }
 
-static GtkWidget *
-make_text_to_copy (GucharmapWindow *guw)
-{
-  GtkWidget *button;
-  GtkWidget *label;
-  GtkWidget *hbox;
-
-  hbox = gtk_hbox_new (FALSE, 6);
-
-  label = gtk_label_new_with_mnemonic (_("_Text to copy:"));
-  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-  gtk_widget_show (label);
-
-  guw->text_to_copy_entry = gtk_entry_new ();
-  gtk_box_pack_start (GTK_BOX (hbox), guw->text_to_copy_entry, TRUE, TRUE, 0);
-  gtk_widget_show (guw->text_to_copy_entry);
-
-  gtk_label_set_mnemonic_widget (GTK_LABEL (label), guw->text_to_copy_entry);
-
-  /* the copy button */
-  button = gtk_button_new_from_stock (GTK_STOCK_COPY); 
-  gtk_widget_show (button);
-  gtk_widget_set_sensitive (button, FALSE);
-  g_signal_connect (G_OBJECT (button), "clicked",
-                    G_CALLBACK (edit_copy), guw);
-  gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
-
-  g_signal_connect (G_OBJECT (guw->text_to_copy_entry), "changed",
-                    G_CALLBACK (entry_changed_sensitize_button), button);
-
-  gtk_widget_set_tooltip_text (button, _("Copy to the clipboard."));
-
-  return hbox;
-}
-
 static void
 status_realize (GtkWidget       *status,
                 GucharmapWindow *guw)
@@ -765,11 +730,16 @@ charmap_sync_active_character (GtkWidget *widget,
 }
 
 static void
-pack_stuff_in_window (GucharmapWindow *guw)
+gucharmap_window_init (GucharmapWindow *guw)
 {
   GtkWidget *big_vbox;
   GtkWidget *hbox;
+  GtkWidget *button;
+  GtkWidget *label;
   GucharmapChartable *chartable;
+
+  gtk_window_set_title (GTK_WINDOW (guw), _("Character Map"));
+  gtk_window_set_icon_name (GTK_WINDOW (guw), GUCHARMAP_ICON_NAME);
 
   guw->charmap = GUCHARMAP_CHARMAP (gucharmap_charmap_new ());
   g_signal_connect (guw->charmap, "notify::active-character",
@@ -793,10 +763,34 @@ pack_stuff_in_window (GucharmapWindow *guw)
   gtk_box_pack_start (GTK_BOX (hbox), guw->fontsel, FALSE, FALSE, 0);
   gtk_widget_show (GTK_WIDGET (guw->fontsel));
 
-  guw->text_to_copy_container = make_text_to_copy (guw);
-  gtk_container_set_border_width (GTK_CONTAINER (guw->text_to_copy_container), 6);
-  gtk_box_pack_start (GTK_BOX (big_vbox), guw->text_to_copy_container, FALSE, FALSE, 0);
-  gtk_widget_show (guw->text_to_copy_container);
+  /* Text to copy entry + button */
+  hbox = gtk_hbox_new (FALSE, 6);
+  gtk_container_set_border_width (GTK_CONTAINER (hbox), 6);
+
+  label = gtk_label_new_with_mnemonic (_("_Text to copy:"));
+  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+  gtk_widget_show (label);
+
+  guw->text_to_copy_entry = gtk_entry_new ();
+  g_signal_connect (G_OBJECT (guw->text_to_copy_entry), "changed",
+                    G_CALLBACK (entry_changed_sensitize_button), button);
+
+  gtk_box_pack_start (GTK_BOX (hbox), guw->text_to_copy_entry, TRUE, TRUE, 0);
+  gtk_widget_show (guw->text_to_copy_entry);
+
+  gtk_label_set_mnemonic_widget (GTK_LABEL (label), guw->text_to_copy_entry);
+
+  /* the copy button */
+  button = gtk_button_new_from_stock (GTK_STOCK_COPY); 
+  gtk_widget_set_tooltip_text (button, _("Copy to the clipboard."));
+  g_signal_connect (G_OBJECT (button), "clicked",
+                    G_CALLBACK (edit_copy), guw);
+  gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
+  gtk_widget_show (button);
+  gtk_widget_set_sensitive (button, FALSE);
+
+  gtk_box_pack_start (GTK_BOX (big_vbox), hbox, FALSE, FALSE, 0);
+  gtk_widget_show (hbox);
 
   /* FIXMEchpe!! */
   chartable =gucharmap_charmap_get_chartable (guw->charmap);
@@ -830,22 +824,12 @@ pack_stuff_in_window (GucharmapWindow *guw)
 
   gucharmap_charmap_set_active_character (guw->charmap,
                                           gucharmap_settings_get_last_char ());
-}
-
-static void
-gucharmap_window_init (GucharmapWindow *guw)
-{
-  gtk_window_set_title (GTK_WINDOW (guw), _("Character Map"));
-
-  gtk_window_set_icon_name (GTK_WINDOW (guw), GUCHARMAP_ICON_NAME);
-
-  pack_stuff_in_window (guw);
 
   gtk_widget_grab_focus (GTK_WIDGET (gucharmap_charmap_get_chartable (guw->charmap)));
 }
 
 static void
-window_finalize (GObject *object)
+gucharmap_window_finalize (GObject *object)
 {
   GucharmapWindow *guw = GUCHARMAP_WINDOW (object);
 
@@ -860,8 +844,10 @@ gucharmap_window_class_init (GucharmapWindowClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  object_class->finalize = window_finalize;
+  object_class->finalize = gucharmap_window_finalize;
 }
+
+/* Public API */
 
 GtkWidget *
 gucharmap_window_new (void)
