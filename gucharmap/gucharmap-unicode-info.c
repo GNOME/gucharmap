@@ -192,7 +192,7 @@ gucharmap_get_unicode_version (gunichar uc)
   gint max = G_N_ELEMENTS (unicode_versions) - 1;
 
   if (uc < unicode_versions[0].start || uc > unicode_versions[max].end)
-    return GUCHARMAP_UNICODE_VERSION_UNASSIGNED;;
+    return GUCHARMAP_UNICODE_VERSION_UNASSIGNED;
 
   while (max >= min)
     {
@@ -215,7 +215,10 @@ gucharmap_unicode_version_to_string (GucharmapUnicodeVersion version)
   g_return_val_if_fail (version >= GUCHARMAP_UNICODE_VERSION_UNASSIGNED &&
                         version <= GUCHARMAP_UNICODE_VERSION_LATEST, NULL);
 
-  return unicode_version_strings + unicode_version_string_offsets[version];
+  if (G_UNLIKELY (version == GUCHARMAP_UNICODE_VERSION_UNASSIGNED))
+    return NULL;
+
+  return unicode_version_strings + unicode_version_string_offsets[version - 1];
 }
 
 #if ENABLE_UNIHAN

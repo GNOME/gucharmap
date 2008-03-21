@@ -454,7 +454,7 @@ set_details (GucharmapCharmap *charmap,
 
   /* Unicode version */
   version = gucharmap_get_unicode_version (uc);
-  if (version)
+  if (version != GUCHARMAP_UNICODE_VERSION_UNASSIGNED)
     insert_vanilla_detail (charmap, buffer, &iter,
                            _("In Unicode since:"),
                            gucharmap_unicode_version_to_string (version));
