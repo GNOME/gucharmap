@@ -58,9 +58,9 @@ struct _GucharmapWindowPrivate
 
   GtkWidget *progress;
 
-  gboolean font_selection_visible;
-  gboolean text_to_copy_visible;
-  gboolean file_menu_visible;
+  guint font_selection_visible : 1;
+  guint text_to_copy_visible   : 1;
+  guint file_menu_visible      : 1;
 
   ChaptersMode chapters_mode; 
 };
@@ -993,12 +993,10 @@ gucharmap_window_set_font_selection_visible (GucharmapWindow *guw,
                                              gboolean         visible)
 {
   GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
-  priv->font_selection_visible = visible;
 
-  if (priv->font_selection_visible)
-    gtk_widget_show (priv->fontsel);
-  else
-    gtk_widget_hide (priv->fontsel);
+  priv->font_selection_visible = visible != FALSE;
+
+  g_object_set (priv->fontsel, "visible", visible, NULL);
 }
 
 void 
@@ -1006,12 +1004,10 @@ gucharmap_window_set_text_to_copy_visible (GucharmapWindow *guw,
                                            gboolean         visible)
 {
   GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
-  priv->text_to_copy_visible = visible;
 
-  if (priv->text_to_copy_visible)
-    gtk_widget_show (priv->text_to_copy_container);
-  else
-    gtk_widget_hide (priv->text_to_copy_container);
+  priv->text_to_copy_visible = visible != FALSE;
+
+  g_object_set (priv->text_to_copy_container, "visible", visible, NULL);
 }
 
 void 
@@ -1021,7 +1017,7 @@ gucharmap_window_set_file_menu_visible (GucharmapWindow *guw,
   GucharmapWindowPrivate *priv = GUCHARMAP_WINDOW_GET_PRIVATE (guw);
   GtkAction *action;
 
-  priv->file_menu_visible = visible;
+  priv->file_menu_visible = visible != FALSE;
 
   action = gtk_action_group_get_action (priv->action_group, "File");
   gtk_action_set_visible (action, visible);
