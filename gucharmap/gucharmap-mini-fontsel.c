@@ -288,10 +288,18 @@ gboolean
 gucharmap_mini_font_selection_set_font_name (GucharmapMiniFontSelection *fontsel,
                                              const gchar *fontname)
 {
+
+  PangoFontDescription *fd = pango_font_description_from_string (fontname);
+  if (pango_font_description_get_family (fd) == NULL)
+    {
+      const gchar *fam = pango_font_description_get_family (fontsel->font_desc);
+      pango_font_description_set_family (fd, fam);
+    }
+
   pango_font_description_free (fontsel->font_desc);
-
-  fontsel->font_desc = pango_font_description_from_string (fontname);
-
+  
+  fontsel->font_desc = fd;
+  
   update_font_familiy_combo (fontsel);
     
   /* treat oblique and italic both as italic */
