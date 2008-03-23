@@ -14,7 +14,7 @@
  *
  * You should have received a copy of the GNU General Public License along
  * with this program; if not, write to the Free Software Foundation, Inc.,
- * 59 Temple Place, Suite 330, Boston, MA 02110-1301  USA
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  */
 
 #include "config.h"
@@ -35,6 +35,9 @@ main (gint argc, gchar **argv)
   GdkRectangle rect;
   GError *error = NULL;
   gchar *new_font = NULL;
+  gint default_size = 0;
+  GucharmapMiniFontSelection *fontsel = NULL;
+
   GOptionEntry goptions[] =
   {
     { "font", 0, 0, G_OPTION_ARG_STRING, &new_font,
@@ -73,27 +76,29 @@ main (gint argc, gchar **argv)
   /* make the starting font 50% bigger than the default font */
   if (new_font == NULL) /* new_font could be set by command line option */
     {
-      GucharmapMiniFontSelection *fontsel = gucharmap_window_get_mini_font_selection (GUCHARMAP_WINDOW (window));
-      gint default_size = PANGO_PIXELS (2.0 * pango_font_description_get_size (window->style->font_desc));
-      gucharmap_mini_font_selection_set_default_font_size (fontsel, default_size);
-
       new_font = gucharmap_settings_get_font ();
-      if (new_font)
-        {
-          PangoFontDescription *fd = pango_font_description_from_string (new_font);
-
-          /* revert to default font size */
-          if (0 == pango_font_description_get_size (fd))
-            gucharmap_mini_font_selection_reset_font_size (fontsel);
-	  else
-	    gucharmap_mini_font_selection_set_font_name (fontsel, new_font);
-
-          pango_font_description_free (fd);
-	  g_free (new_font);
-        }
-      else
-        gucharmap_mini_font_selection_reset_font_size (fontsel);
     }
+
+  fontsel = gucharmap_window_get_mini_font_selection (GUCHARMAP_WINDOW (window));
+  default_size = PANGO_PIXELS (2.0 * pango_font_description_get_size (window->style->font_desc));
+  gucharmap_mini_font_selection_set_default_font_size (fontsel, default_size);
+
+  if (new_font)
+  {
+    PangoFontDescription *fd = pango_font_description_from_string (new_font);
+
+    gucharmap_mini_font_selection_set_font_name (fontsel, new_font);
+
+    gint size = pango_font_description_get_size (fd);
+    if (0 != size)
+      gucharmap_mini_font_selection_set_default_font_size (fontsel, 
+      							 PANGO_PIXELS (size));
+
+    pango_font_description_free (fd);
+    g_free (new_font);
+  }
+  gucharmap_mini_font_selection_reset_font_size (fontsel);
+    
 
   g_signal_connect (G_OBJECT (window), "destroy", G_CALLBACK (gtk_main_quit), NULL);
 

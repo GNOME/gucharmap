@@ -14,7 +14,7 @@
  *
  * You should have received a copy of the GNU General Public License along
  * with this program; if not, write to the Free Software Foundation, Inc.,
- * 59 Temple Place, Suite 330, Boston, MA 02110-1301  USA
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  */
 
 #include "config.h"
@@ -176,7 +176,7 @@ gucharmap_mini_font_selection_class_init (GucharmapMiniFontSelectionClass *clazz
       g_signal_new ("changed", gucharmap_mini_font_selection_get_type (), 
 		    G_SIGNAL_RUN_FIRST,
                     G_STRUCT_OFFSET (GucharmapMiniFontSelectionClass, changed),
-                    NULL, NULL, g_cclosure_marshal_VOID__VOID,
+                    NULL, NULL, _gucharmap_marshal_VOID__VOID,
                     G_TYPE_NONE, 0);
 
   G_OBJECT_CLASS (clazz)->finalize = mini_font_selection_finalize;
@@ -285,17 +285,53 @@ gucharmap_mini_font_selection_new (void)
                                    NULL));
 }
 
-G_DEFINE_TYPE (GucharmapMiniFontSelection, gucharmap_mini_font_selection, GTK_TYPE_HBOX)
+
+GType
+gucharmap_mini_font_selection_get_type (void)
+{
+  static GType gucharmap_mini_font_selection_type = 0;
+
+  if (gucharmap_mini_font_selection_type == 0)
+    {
+      const GTypeInfo gucharmap_mini_font_selection_info =
+      {
+        sizeof (GucharmapMiniFontSelectionClass),
+        NULL,           /* base_init */
+        NULL,           /* base_finalize */
+        (GClassInitFunc) gucharmap_mini_font_selection_class_init,
+        NULL,           /* class_finalize */
+        NULL,           /* class_data */
+        sizeof (GucharmapMiniFontSelection),
+        0,              /* n_preallocs */
+        (GInstanceInitFunc) gucharmap_mini_font_selection_init
+      };
+
+      gucharmap_mini_font_selection_type = g_type_register_static (
+              GTK_TYPE_HBOX, "GucharmapMiniFontSelection", 
+              &gucharmap_mini_font_selection_info, 0);
+    }
+
+  return gucharmap_mini_font_selection_type;
+}
+
 
 /* XXX: should do error checking */
 gboolean 
 gucharmap_mini_font_selection_set_font_name (GucharmapMiniFontSelection *fontsel,
                                              const gchar *fontname)
 {
+
+  PangoFontDescription *fd = pango_font_description_from_string (fontname);
+  if (pango_font_description_get_family (fd) == NULL)
+    {
+      gchar *fam = pango_font_description_get_family (fontsel->font_desc);
+      pango_font_description_set_family (fd, fam);
+    }
+
   pango_font_description_free (fontsel->font_desc);
-
-  fontsel->font_desc = pango_font_description_from_string (fontname);
-
+  
+  fontsel->font_desc = fd;
+  
   update_font_familiy_combo (fontsel);
     
   /* treat oblique and italic both as italic */
