@@ -129,7 +129,7 @@ gucharmap_chartable_set_font_desc_internal (GucharmapChartable *chartable,
   priv->font_desc = font_desc;
  
   if (priv->pango_layout)
-     pango_layout_set_font_description (priv->pango_layout, font_desc);
+    pango_layout_set_font_description (priv->pango_layout, font_desc);
 
   /* FIXMEchpe: check pango_font_description_get_size_is_absolute() ! */
   font_size = pango_font_description_get_size (priv->font_desc);
@@ -140,6 +140,8 @@ gucharmap_chartable_set_font_desc_internal (GucharmapChartable *chartable,
   priv->drag_font_size = 5 * ((font_size > 0) ? font_size : 10 * PANGO_SCALE);
 
   gtk_widget_queue_resize (GTK_WIDGET (chartable));
+
+  g_object_notify (G_OBJECT (chartable), "font-desc");
 }
 
 static void
