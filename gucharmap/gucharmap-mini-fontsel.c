@@ -395,9 +395,11 @@ gucharmap_mini_font_selection_change_font_size (GucharmapMiniFontSelection *font
 {
   int size, new_size;
 
-  size = pango_font_description_get_size (fontsel->font_desc);
+  g_return_if_fail (factor > 0.0f);
 
-  new_size = (float) size * factor / (float) PANGO_SCALE;
+  size = get_font_size (fontsel);
+  new_size = (float) size * factor;
+
   if (factor > 1.0f)
     new_size = MAX (new_size, size + 1);
   else if (factor < 1.0f)
