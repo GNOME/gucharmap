@@ -76,11 +76,10 @@ void      gucharmap_charmap_set_active_chapter (GucharmapCharmap *charmap,
                                                 const gchar *chapter);
 char *    gucharmap_charmap_get_active_chapter (GucharmapCharmap *charmap);
 
-void                     gucharmap_charmap_set_font           (GucharmapCharmap  *charmap,
-                                                               const gchar       *font_name);
-
 void                     gucharmap_charmap_set_font_desc      (GucharmapCharmap  *charmap,
                                                                PangoFontDescription *font_desc);
+
+PangoFontDescription *   gucharmap_charmap_get_font_desc      (GucharmapCharmap  *charmap);
 
 GucharmapChartable *     gucharmap_charmap_get_chartable      (GucharmapCharmap  *charmap);
 

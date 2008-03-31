@@ -104,7 +104,7 @@ gucharmap_charmap_get_property (GObject *object,
       g_value_set_uint (value, gucharmap_charmap_get_active_character (charmap));
       break;
     case PROP_FONT_DESC:
-      g_value_set_boxed (value, priv->font_desc);
+      g_value_set_boxed (value, gucharmap_charmap_get_font_desc (charmap));
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -1063,36 +1063,6 @@ gucharmap_charmap_new (void)
 }
 
 /**
- * gucharmap_chartable_set_font:
- * @chartable: a #GucharmapChartable
- * @font_name:
- *
- * Sets @font_name as the font to use to display the character table.
- */
-void
-gucharmap_charmap_set_font (GucharmapCharmap *charmap, 
-                            const gchar *font_name)
-{
-  GucharmapCharmapPrivate *priv;
-  PangoFontDescription *font_desc;
-
-  g_return_if_fail (GUCHARMAP_IS_CHARMAP (charmap));
-  g_return_if_fail (font_name != NULL);
-
-  priv = charmap->priv;
-
-  font_desc = pango_font_description_from_string (font_name);
-  if (priv->font_desc &&
-      pango_font_description_equal (font_desc, priv->font_desc))
-    {
-      pango_font_description_free (font_desc);
-      return;
-    }
-
-  gucharmap_charmap_set_font_desc_internal (charmap, font_desc /* adopting */);
-}
-
-/**
  * gucharmap_chartable_set_font_desc:
  * @chartable: a #GucharmapChartable
  * @font_desc: a #PangoFontDescription
@@ -1115,6 +1085,21 @@ gucharmap_charmap_set_font_desc (GucharmapCharmap *charmap,
 
   gucharmap_charmap_set_font_desc_internal (charmap,
                                             pango_font_description_copy (font_desc));
+}
+
+/**
+ * gucharmap_charmap_get_font_desc:
+ * @charmap: a #GucharmapCharmap
+ *
+ * Returns: the #PangoFontDescription used to display the character table.
+ *   The returned object is owned by @charmap and must not be modified or freed.
+ */
+PangoFontDescription *
+gucharmap_charmap_get_font_desc (GucharmapCharmap *charmap)
+{
+  g_return_val_if_fail (GUCHARMAP_IS_CHARMAP (charmap), NULL);
+
+  return charmap->priv->font_desc;
 }
 
 void
