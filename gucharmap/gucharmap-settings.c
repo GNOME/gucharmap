@@ -179,6 +179,8 @@ gucharmap_settings_get_last_char (void)
     return gucharmap_unicode_get_locale_character  ();
   }
 
+  g_free (str);
+
   return (gunichar) value;
 }
 
