@@ -839,11 +839,11 @@ gucharmap_window_init (GucharmapWindow *guw)
     { "Close", GTK_STOCK_CLOSE, NULL, NULL,
       NULL, G_CALLBACK (close_window) },
 
-    { "ZoomIn", GTK_STOCK_ZOOM_IN, NULL, NULL,
+    { "ZoomIn", GTK_STOCK_ZOOM_IN, NULL, "<control>plus",
       NULL, G_CALLBACK (font_bigger) },
-    { "ZoomOut", GTK_STOCK_ZOOM_OUT, NULL, NULL,
+    { "ZoomOut", GTK_STOCK_ZOOM_OUT, NULL, "<control>minus",
       NULL, G_CALLBACK (font_smaller) },
-    { "NormalSize", GTK_STOCK_ZOOM_100, NULL, NULL,
+    { "NormalSize", GTK_STOCK_ZOOM_100, NULL, "<control>0",
       NULL, G_CALLBACK (font_default) },
 
     { "Find", GTK_STOCK_FIND, NULL, NULL,
