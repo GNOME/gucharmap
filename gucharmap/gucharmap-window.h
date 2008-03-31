@@ -67,7 +67,7 @@ struct _GucharmapWindowClass
   GtkWindowClass parent_class;
 };
 
-#define GUCHARMAP_ICON_NAME "gucharmap"
+#define GUCHARMAP_ICON_NAME "accessories-character-map"
 
 GType       gucharmap_window_get_type  (void);
 

@@ -1,5 +1,3 @@
-## $Id: Makefile.am,v 1.10 2006/03/26 20:39:44 behdad Exp $
-##
 ## Copyright (c) 2002  Noah Levitt <nlevitt@users.sourceforge.net>
 ##
 ## This program is free software; you can redistribute it and/or modify it
@@ -17,21 +15,4 @@
 ## 59 Temple Place, Suite 330, Boston, MA 02110-1301  USA
 ##
 
-
-icondir = $(datadir)/icons/hicolor/48x48/apps
-icon_DATA = gucharmap.png
-
-gtk_update_icon_cache = gtk-update-icon-cache -f -t $(datadir)/icons/hicolor
-
-install-data-hook: update-icon-cache
-uninstall-hook: update-icon-cache
-update-icon-cache:
-	@-if test -z "$(DESTDIR)"; then \
-		echo "Updating Gtk icon cache."; \
-		$(gtk_update_icon_cache); \
-	else \
-		echo "*** Icon cache not updated.  After (un)install, run this:"; \
-		echo "***   $(gtk_update_icon_cache)"; \
-	fi
-
-EXTRA_DIST = $(icon_DATA) gucharmap.ico
+EXTRA_DIST = gucharmap.ico
