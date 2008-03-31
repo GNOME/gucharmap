@@ -69,10 +69,9 @@ struct _GucharmapChartableClass
 
 GType gucharmap_chartable_get_type (void);
 GtkWidget * gucharmap_chartable_new (void);
-void gucharmap_chartable_set_font (GucharmapChartable *chartable, 
-                                   const gchar *font_name);
-void gucharmap_chartable_set_font_desc (GucharmapChartable *chartable, 
+void gucharmap_chartable_set_font_desc (GucharmapChartable *chartable,
                                         PangoFontDescription *font_desc);
+PangoFontDescription * gucharmap_chartable_get_font_desc (GucharmapChartable *chartable);
 gunichar gucharmap_chartable_get_active_character (GucharmapChartable *chartable);
 void gucharmap_chartable_set_active_character (GucharmapChartable *chartable, 
                                                gunichar uc);

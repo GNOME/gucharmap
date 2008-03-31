@@ -2034,7 +2034,7 @@ gucharmap_chartable_get_property (GObject *object,
       g_value_set_object (value, gucharmap_chartable_get_codepoint_list (chartable));
       break;
     case PROP_FONT_DESC:
-      g_value_set_boxed (value, priv->font_desc);
+      g_value_set_boxed (value, gucharmap_chartable_get_font_desc (chartable));
       break;
     case PROP_SNAP_POW2:
       g_value_set_boolean (value, priv->snap_pow2_enabled);
@@ -2369,35 +2369,6 @@ gucharmap_chartable_get_zoom_enabled (GucharmapChartable *chartable)
 }
 
 /**
- * gucharmap_chartable_set_font:
- * @chartable: a #GucharmapChartable
- * @font_name:
- *
- * Sets @font_name as the font to use to display the character table.
- */
-void 
-gucharmap_chartable_set_font (GucharmapChartable *chartable, const char *font_name)
-{
-  GucharmapChartablePrivate *priv;
-  PangoFontDescription *font_desc;
-
-  g_return_if_fail (GUCHARMAP_IS_CHARTABLE (chartable));
-  g_return_if_fail (font_name != NULL);
-
-  priv = chartable->priv;
-
-  font_desc = pango_font_description_from_string (font_name);
-  if (priv->font_desc &&
-      pango_font_description_equal (font_desc, priv->font_desc))
-    {
-      pango_font_description_free (font_desc);
-      return;
-    }
-
-  gucharmap_chartable_set_font_desc (chartable, font_desc /* adopting */);
-}
-
-/**
  * gucharmap_chartable_set_font_desc:
  * @chartable: a #GucharmapChartable
  * @font_desc: a #PangoFontDescription
@@ -2421,6 +2392,21 @@ gucharmap_chartable_set_font_desc (GucharmapChartable *chartable,
 
   gucharmap_chartable_set_font_desc_internal (chartable,
                                               pango_font_description_copy (font_desc));
+}
+
+/**
+ * gucharmap_chartable_get_font_desc:
+ * @chartable: a #GucharmapChartable
+ *
+ * Returns: the #PangoFontDescription used to display the character table.
+ *   The returned object is owned by @chartable and must not be modified or freed.
+ */
+PangoFontDescription *
+gucharmap_chartable_get_font_desc (GucharmapChartable *chartable)
+{
+  g_return_val_if_fail (GUCHARMAP_IS_CHARTABLE (chartable), NULL);
+
+  return chartable->priv->font_desc;
 }
 
 /**
