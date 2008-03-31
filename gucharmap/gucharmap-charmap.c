@@ -237,7 +237,8 @@ gucharmap_charmap_update_text_tags (GucharmapCharmap *charmap)
 
 static void
 gucharmap_charmap_set_font_desc_internal (GucharmapCharmap *charmap, 
-                                          PangoFontDescription *font_desc)
+                                          PangoFontDescription *font_desc /* adopting */,
+                                          gboolean in_notification)
 {
   GucharmapCharmapPrivate *priv = charmap->priv;
 
@@ -246,7 +247,8 @@ gucharmap_charmap_set_font_desc_internal (GucharmapCharmap *charmap,
 
   priv->font_desc = font_desc; /* adopted */
 
-  gucharmap_chartable_set_font_desc (priv->chartable, font_desc);
+  if (!in_notification)
+    gucharmap_chartable_set_font_desc (priv->chartable, font_desc);
 
   if (gtk_widget_get_style (GTK_WIDGET (priv->details_view)))
     gucharmap_charmap_update_text_tags (charmap);
@@ -723,6 +725,21 @@ chartable_sync_active_char (GtkWidget *widget,
 }
 
 static void
+chartable_sync_font_desc (GucharmapChartable *chartable,
+                          GParamSpec *pspec,
+                          GucharmapCharmap *charmap)
+{
+  PangoFontDescription *font_desc;
+  
+  g_print ("sync_font_desc\n");
+  
+  font_desc = gucharmap_chartable_get_font_desc (chartable);
+  gucharmap_charmap_set_font_desc_internal (charmap,
+                                            pango_font_description_copy (font_desc),
+                                            TRUE);
+}
+
+static void
 follow_if_link (GucharmapCharmap *charmap,
                 GtkTextIter *iter)
 {
@@ -994,6 +1011,8 @@ gucharmap_charmap_init (GucharmapCharmap *charmap)
                             G_CALLBACK (chartable_status_message), charmap);
   g_signal_connect (chartable, "notify::active-character",
                     G_CALLBACK (chartable_sync_active_char), charmap);
+  g_signal_connect (chartable, "notify::font-desc",
+                    G_CALLBACK (chartable_sync_font_desc), charmap);
 
   gtk_container_add (GTK_CONTAINER (scrolled_window), chartable);
   gtk_widget_show (chartable);
@@ -1084,7 +1103,8 @@ gucharmap_charmap_set_font_desc (GucharmapCharmap *charmap,
     return;
 
   gucharmap_charmap_set_font_desc_internal (charmap,
-                                            pango_font_description_copy (font_desc));
+                                            pango_font_description_copy (font_desc),
+                                            FALSE);
 }
 
 /**
