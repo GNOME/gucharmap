@@ -580,11 +580,10 @@ search_completed (GucharmapSearchDialog *search_dialog)
   g_signal_emit (search_dialog, gucharmap_search_dialog_signals[SEARCH_FINISH], 0, found_char);
 
   if (found_char == (gunichar)(-1))
-    information_dialog (search_dialog, _("Not found."));
-  else
     {
-      gtk_widget_set_sensitive (priv->prev_button, TRUE);
-      gtk_widget_set_sensitive (priv->next_button, TRUE);
+      information_dialog (search_dialog, _("Not found."));
+      gtk_widget_set_sensitive (priv->prev_button, FALSE);
+      gtk_widget_set_sensitive (priv->next_button, FALSE);
     }
 
   gdk_window_set_cursor (GTK_WIDGET (search_dialog)->window, NULL);
@@ -612,10 +611,12 @@ _gucharmap_search_dialog_fire_search (GucharmapSearchDialog *search_dialog,
   gunichar start_char;
   gint start_index;
 
+  if (priv->search_state && priv->search_state->searching) /* Already searching */
+    return;
+
   GdkCursor *cursor = _gucharmap_window_progress_cursor ();
   gdk_window_set_cursor (GTK_WIDGET (search_dialog)->window, cursor);
   gdk_cursor_unref (cursor);
-
 
   list = gucharmap_charmap_get_book_codepoint_list (priv->guw->charmap);
   if (!list)
@@ -644,9 +645,6 @@ _gucharmap_search_dialog_fire_search (GucharmapSearchDialog *search_dialog,
       priv->search_state->curr_index = priv->search_state->start_index;
       priv->search_state->increment = direction;
     }
-
-  gtk_widget_set_sensitive (priv->prev_button, FALSE);
-  gtk_widget_set_sensitive (priv->next_button, FALSE);
 
   priv->search_state->searching = TRUE;
   priv->search_state->strings_checked = 0;
