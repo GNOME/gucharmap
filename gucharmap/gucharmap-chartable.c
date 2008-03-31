@@ -1570,6 +1570,8 @@ gucharmap_chartable_realize (GtkWidget *widget)
     }
 }
 
+#define FIRST_CELL_IN_SAME_ROW(x) ((x) - ((x) % priv->cols))
+
 static void
 gucharmap_chartable_size_allocate (GtkWidget *widget,
                                    GtkAllocation *allocation)
@@ -1578,6 +1580,7 @@ gucharmap_chartable_size_allocate (GtkWidget *widget,
   GucharmapChartablePrivate *priv = chartable->priv;
   int old_rows, old_cols;
   int total_extra_pixels;
+  int new_first_cell;
 
   GTK_WIDGET_CLASS (gucharmap_chartable_parent_class)->size_allocate (widget, allocation);
 
@@ -1615,7 +1618,17 @@ gucharmap_chartable_size_allocate (GtkWidget *widget,
   if (priv->rows == old_rows && priv->cols == old_cols)
     return;
 
-  priv->page_first_cell = priv->active_cell - (priv->active_cell % priv->cols);
+  /* Need to recalculate the first cell, see bug #517188 */
+  new_first_cell = FIRST_CELL_IN_SAME_ROW (priv->active_cell);
+  if ((new_first_cell + priv->rows*priv->cols) > (priv->last_cell))
+    {
+      /* last cell is visible, so make sure it is in the last row */
+      new_first_cell = FIRST_CELL_IN_SAME_ROW (priv->last_cell) - priv->page_size + priv->cols;
+
+      if (new_first_cell < 0)
+        new_first_cell = 0;
+    }
+  priv->page_first_cell = new_first_cell;
 
   update_scrollbar_adjustment (chartable);
 }
