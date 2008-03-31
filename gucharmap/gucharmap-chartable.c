@@ -1648,9 +1648,12 @@ gucharmap_chartable_style_set (GtkWidget *widget,
     g_object_unref (priv->pango_layout);
   priv->pango_layout = NULL;
 
-  if (priv->font_desc == NULL)
-    gucharmap_chartable_set_font_desc (chartable,
-                                       pango_font_description_copy (widget->style->font_desc));
+  if (priv->font_desc == NULL) {
+    PangoFontDescription *font_desc;
+
+    font_desc = pango_font_description_copy (widget->style->font_desc);
+    gucharmap_chartable_set_font_desc_internal (chartable, font_desc);
+  }
 
   priv->pango_layout = gtk_widget_create_pango_layout (widget, NULL);
   pango_layout_set_font_description (priv->pango_layout,
@@ -2010,7 +2013,9 @@ gucharmap_chartable_set_property (GObject *object,
     case PROP_ZOOM_ENABLED:
       gucharmap_chartable_set_zoom_enabled (chartable, g_value_get_boolean (value));
       break;
-    case PROP_ZOOM_SHOWING: /* not writable */
+    case PROP_ZOOM_SHOWING:
+      /* not writable */
+      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
