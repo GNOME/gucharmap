@@ -1,6 +1,6 @@
 /*
  * Copyright © 2004 Noah Levitt
- * Copyright © 2007 Christian Persch
+ * Copyright © 2007, 2008 Christian Persch
  *
  * Some code copied from gtk+/gtk/gtkiconview:
  * Copyright © 2002, 2004  Anders Carlsson <andersca@gnu.org>
@@ -1652,6 +1652,8 @@ gucharmap_chartable_style_set (GtkWidget *widget,
     PangoFontDescription *font_desc;
 
     font_desc = pango_font_description_copy (widget->style->font_desc);
+    pango_font_description_set_size (font_desc,
+                                     2.0 * pango_font_description_get_size (font_desc));
     gucharmap_chartable_set_font_desc_internal (chartable, font_desc);
   }
 

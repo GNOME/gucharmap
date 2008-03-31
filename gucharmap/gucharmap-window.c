@@ -31,6 +31,8 @@
 #include "gucharmap-settings.h"
 #include "gucharmap-window.h"
 
+#define FONT_CHANGE_FACTOR (1.189207115f) /* 2^(0.25) */
+
 /* #define ENABLE_PRINTING */
 
 static void gucharmap_window_class_init (GucharmapWindowClass *klass);
@@ -360,22 +362,16 @@ static void
 font_bigger (GtkAction       *action, 
              GucharmapWindow *guw)
 {
-  gint size, increment;
-
-  size = gucharmap_mini_font_selection_get_font_size (GUCHARMAP_MINI_FONT_SELECTION (guw->fontsel));
-  increment = MAX (size / 5, 1);
-  gucharmap_mini_font_selection_set_font_size (GUCHARMAP_MINI_FONT_SELECTION (guw->fontsel), size + increment);
+  gucharmap_mini_font_selection_change_font_size (GUCHARMAP_MINI_FONT_SELECTION (guw->fontsel),
+                                                  FONT_CHANGE_FACTOR);
 }
 
 static void
 font_smaller (GtkAction       *action, 
               GucharmapWindow *guw)
 {
-  gint size, increment;
-
-  size = gucharmap_mini_font_selection_get_font_size (GUCHARMAP_MINI_FONT_SELECTION (guw->fontsel));
-  increment = MAX (size / 5, 1);
-  gucharmap_mini_font_selection_set_font_size (GUCHARMAP_MINI_FONT_SELECTION (guw->fontsel), size - increment);
+  gucharmap_mini_font_selection_change_font_size (GUCHARMAP_MINI_FONT_SELECTION (guw->fontsel),
+                                                  1.0f / FONT_CHANGE_FACTOR);
 }
 
 static void
@@ -703,18 +699,6 @@ static const char ui_info [] =
   "</menubar>";
 
 static void
-fontsel_changed (GucharmapMiniFontSelection *fontsel, 
-                 GucharmapWindow            *guw)
-{
-  gchar *font_name = gucharmap_mini_font_selection_get_font_name (fontsel);
-
-  gucharmap_charmap_set_font (guw->charmap, font_name);
-  gucharmap_settings_set_font (font_name);
-
-  g_free (font_name);
-}
-
-static void
 insert_character_in_text_to_copy (GucharmapChartable *chartable,
                                   GucharmapWindow *guw)
 {
@@ -772,6 +756,46 @@ save_last_char_idle_cb (GucharmapWindow *guw)
   gucharmap_settings_set_last_char (wc);
 
   return FALSE;
+}
+
+static void
+fontsel_sync_font_desc (GucharmapMiniFontSelection *fontsel,
+                        GParamSpec *pspec,
+                        GucharmapWindow *guw)
+{
+  PangoFontDescription *font_desc;
+  char *font;
+
+  if (guw->in_notification)
+    return;
+
+  font_desc = gucharmap_mini_font_selection_get_font_desc (fontsel);
+
+  guw->in_notification = TRUE;
+  gucharmap_charmap_set_font_desc (guw->charmap, font_desc);
+  guw->in_notification = FALSE;
+
+  font = pango_font_description_to_string (font_desc);
+  gucharmap_settings_set_font (font);
+  g_free (font);
+}
+
+static void
+charmap_sync_font_desc (GucharmapCharmap *charmap,
+                        GParamSpec *pspec,
+                        GucharmapWindow *guw)
+{
+  PangoFontDescription *font_desc;
+
+  if (guw->in_notification)
+    return;
+
+  font_desc = gucharmap_charmap_get_font_desc (charmap);
+
+  guw->in_notification = TRUE;
+  gucharmap_mini_font_selection_set_font_desc (GUCHARMAP_MINI_FONT_SELECTION (guw->fontsel),
+                                               font_desc);
+  guw->in_notification = FALSE;
 }
 
 static void
@@ -910,7 +934,8 @@ gucharmap_window_init (GucharmapWindow *guw)
 
   /* The font selector */
   guw->fontsel = gucharmap_mini_font_selection_new ();
-  g_signal_connect (guw->fontsel, "changed", G_CALLBACK (fontsel_changed), guw);
+  g_signal_connect (guw->fontsel, "notify::font-desc",
+                    G_CALLBACK (fontsel_sync_font_desc), guw);
   gtk_box_pack_start (GTK_BOX (big_vbox), guw->fontsel, FALSE, FALSE, 0);
   gtk_widget_show (GTK_WIDGET (guw->fontsel));
 
@@ -918,6 +943,8 @@ gucharmap_window_init (GucharmapWindow *guw)
   guw->charmap = GUCHARMAP_CHARMAP (gucharmap_charmap_new ());
   g_signal_connect (guw->charmap, "notify::active-character",
                     G_CALLBACK (charmap_sync_active_character), guw);
+  g_signal_connect (guw->charmap, "notify::font-desc",
+                    G_CALLBACK (charmap_sync_font_desc), guw);
 
   gtk_box_pack_start (GTK_BOX (big_vbox), GTK_WIDGET (guw->charmap),
                       TRUE, TRUE, 0);
@@ -1020,11 +1047,19 @@ gucharmap_window_new (void)
 }
 
 void
-gucharmap_window_set_font (GucharmapWindow *window)
+gucharmap_window_set_font (GucharmapWindow *guw,
+                           const char *font)
 {
-}
-GucharmapMiniFontSelection *
-gucharmap_window_get_mini_font_selection (GucharmapWindow *guw)
-{
-  return GUCHARMAP_MINI_FONT_SELECTION (guw->fontsel);
+  PangoFontDescription *font_desc;
+
+  g_return_if_fail (GUCHARMAP_IS_WINDOW (guw));
+
+  g_assert (!GTK_WIDGET_REALIZED (guw));
+
+  if (!font)
+    return;
+
+  font_desc = pango_font_description_from_string (font);
+  gucharmap_charmap_set_font_desc (guw->charmap, font_desc);
+  pango_font_description_free (font_desc);
 }

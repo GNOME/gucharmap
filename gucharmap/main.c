@@ -1,5 +1,6 @@
 /*
  * Copyright © 2004 Noah Levitt
+ * Copyright © 2007, 2008 Christian Persch
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -34,15 +35,11 @@ main (gint argc, gchar **argv)
   GdkScreen *screen;
   gint monitor;
   GdkRectangle rect;
-  GucharmapMiniFontSelection *fontsel;
-  char *font_setting;
-  char *font = NULL;
-  PangoFontDescription *font_desc = NULL;
   GError *error = NULL;
-  char *font_arg = NULL;
+  char *font = NULL;
   GOptionEntry goptions[] =
   {
-    { "font", 0, 0, G_OPTION_ARG_STRING, &font_arg,
+    { "font", 0, 0, G_OPTION_ARG_STRING, &font,
       N_("Font to start with; ex: 'Serif 27'"), N_("FONT") },
     { NULL }
   };
@@ -61,7 +58,7 @@ main (gint argc, gchar **argv)
 
   gucharmap_settings_initialize ();
 
-  g_set_application_name (_("Gucharmap"));
+  g_set_application_name (_("Character Map"));
   gtk_window_set_default_icon_name (GUCHARMAP_ICON_NAME);
 
   window = gucharmap_window_new ();
@@ -73,44 +70,19 @@ main (gint argc, gchar **argv)
   gdk_screen_get_monitor_geometry (screen, monitor, &rect);
   gtk_window_set_default_size (GTK_WINDOW (window), rect.width * 9/16, rect.height * 9/16);
 
-  /* FIXMEchpe: move all this into gucharmap-window */
-  fontsel = gucharmap_window_get_mini_font_selection (GUCHARMAP_WINDOW (window));
+  /* No --font argument, use the stored font (if any) */
+  if (!font)
+    font = gucharmap_settings_get_font ();
 
-  font_desc = pango_font_description_copy (window->style->font_desc);
-  pango_font_description_set_size (font_desc, 
-                                   2.0 * pango_font_description_get_size (font_desc));
-
-  font_setting = gucharmap_settings_get_font ();
-  if (font_setting) {
-    PangoFontDescription *font_setting_desc;
-
-    font_setting_desc = pango_font_description_from_string (font_setting);
-    pango_font_description_merge (font_desc, font_setting_desc, TRUE);
-    pango_font_description_free (font_setting_desc);
-    g_free (font_setting);
-  }
-
-  if (font_arg) {
-    PangoFontDescription *font_argDesc = pango_font_description_from_string (font_arg);
-    pango_font_description_merge (font_desc, font_argDesc, TRUE);
-    pango_font_description_free (font_argDesc);
-    g_free (font_arg);
-  }
-
-  /* FIXME: convert here from PangoFontDescription to char *, then in 
-   * gucharmap_mini_font_selection_set_font_name convert back to PangoFontDescription */
-  font = pango_font_description_to_string (font_desc);
-  gucharmap_mini_font_selection_set_font_name (fontsel, font);
-  g_free (font);
-
-  gucharmap_mini_font_selection_set_default_font_size (fontsel, 
-            PANGO_PIXELS (pango_font_description_get_size (font_desc)));
-  pango_font_description_free (font_desc);
-
-  gucharmap_mini_font_selection_reset_font_size (fontsel);
+  if (font)
+    {
+      gucharmap_window_set_font (GUCHARMAP_WINDOW (window), font);
+      g_free (font);
+    }
 
   gucharmap_settings_add_window (GTK_WINDOW (window));
-  gtk_widget_show (window);
+
+  gtk_window_present (GTK_WINDOW (window));
 
   gtk_main ();
 

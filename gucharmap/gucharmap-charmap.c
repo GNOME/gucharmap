@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2004 Noah Levitt
- * Copyright (c) 2007 Christian Persch
+ * Copyright (c) 2007, 2008 Christian Persch
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -241,6 +241,13 @@ gucharmap_charmap_set_font_desc_internal (GucharmapCharmap *charmap,
                                           gboolean in_notification)
 {
   GucharmapCharmapPrivate *priv = charmap->priv;
+  GObject *object = G_OBJECT (charmap);
+  gboolean equal;
+
+  g_object_freeze_notify (object);
+
+  equal = priv->font_desc != NULL &&
+          pango_font_description_equal (priv->font_desc, font_desc);
 
   if (priv->font_desc)
     pango_font_description_free (priv->font_desc);
@@ -253,7 +260,10 @@ gucharmap_charmap_set_font_desc_internal (GucharmapCharmap *charmap,
   if (gtk_widget_get_style (GTK_WIDGET (priv->details_view)))
     gucharmap_charmap_update_text_tags (charmap);
 
-  g_object_notify (G_OBJECT (charmap), "font-desc");
+  if (!equal)
+    g_object_notify (G_OBJECT (charmap), "font-desc");
+
+  g_object_thaw_notify (object);
 }
 
 static void
@@ -729,14 +739,14 @@ chartable_sync_font_desc (GucharmapChartable *chartable,
                           GParamSpec *pspec,
                           GucharmapCharmap *charmap)
 {
+  GucharmapCharmapPrivate *priv = charmap->priv;
   PangoFontDescription *font_desc;
-  
-  g_print ("sync_font_desc\n");
   
   font_desc = gucharmap_chartable_get_font_desc (chartable);
   gucharmap_charmap_set_font_desc_internal (charmap,
                                             pango_font_description_copy (font_desc),
-                                            TRUE);
+                                   //FIXME         FALSE,
+                                            priv->font_desc != NULL /* Do notify if we didn't have a font desc yet */);
 }
 
 static void

@@ -1,5 +1,6 @@
 /*
  * Copyright © 2004 Noah Levitt
+ * Copyright © 2008 Christian Persch
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -25,7 +26,7 @@ G_BEGIN_DECLS
 
 #define GUCHARMAP_TYPE_MINI_FONT_SELECTION             (gucharmap_mini_font_selection_get_type ())
 #define GUCHARMAP_MINI_FONT_SELECTION(o)               (G_TYPE_CHECK_INSTANCE_CAST ((o), GUCHARMAP_TYPE_MINI_FONT_SELECTION, GucharmapMiniFontSelection))
-#define GUCHARMAP_MINI_FONT_SELECTION_CLASS(k) (G_TYPE_CHECK_CLASS_CAST((k), GUCHARMAP_TYPE_MINI_FONT_SELECTION, GucharmapMiniFontSelectionClass))
+#define GUCHARMAP_MINI_FONT_SELECTION_CLASS(k)         (G_TYPE_CHECK_CLASS_CAST((k), GUCHARMAP_TYPE_MINI_FONT_SELECTION, GucharmapMiniFontSelectionClass))
 #define GUCHARMAP_IS_MINI_FONT_SELECTION(o)            (G_TYPE_CHECK_INSTANCE_TYPE ((o), GUCHARMAP_TYPE_MINI_FONT_SELECTION))
 #define GUCHARMAP_IS_MINI_FONT_SELECTION_CLASS(k)      (G_TYPE_CHECK_CLASS_TYPE ((k), GUCHARMAP_TYPE_MINI_FONT_SELECTION))
 #define GUCHARMAP_MINI_FONT_SELECTION_GET_CLASS(o)     (G_TYPE_INSTANCE_GET_CLASS ((o), GUCHARMAP_TYPE_MINI_FONT_SELECTION, GucharmapMiniFontSelectionClass))
@@ -53,25 +54,23 @@ struct _GucharmapMiniFontSelection
 struct _GucharmapMiniFontSelectionClass
 {
   GtkHBoxClass parent_class;
-
-  void (* changed) (GucharmapMiniFontSelection *fontsel);
 };
 
 
-GType       gucharmap_mini_font_selection_get_type              (void);
-GtkWidget * gucharmap_mini_font_selection_new                   (void);
-gboolean    gucharmap_mini_font_selection_set_font_name         (GucharmapMiniFontSelection *fontsel,
-                                                                 const gchar                *fontname);
-gchar *     gucharmap_mini_font_selection_get_font_name         (GucharmapMiniFontSelection *fontsel);
-gint        gucharmap_mini_font_selection_get_font_size         (GucharmapMiniFontSelection *fontsel);
-void        gucharmap_mini_font_selection_set_font_size         (GucharmapMiniFontSelection *fontsel,
-                                                                 gint                        size);
-void        gucharmap_mini_font_selection_set_default_font_size (GucharmapMiniFontSelection *fontsel, 
-                                                                 gint                        size);
-void        gucharmap_mini_font_selection_reset_font_size       (GucharmapMiniFontSelection *fontsel);
+GType                  gucharmap_mini_font_selection_get_type         (void);
+
+GtkWidget *            gucharmap_mini_font_selection_new              (void);
+
+void                   gucharmap_mini_font_selection_set_font_desc    (GucharmapMiniFontSelection *fontsel,
+                                                                       PangoFontDescription       *font_desc);
+
+PangoFontDescription * gucharmap_mini_font_selection_get_font_desc    (GucharmapMiniFontSelection *fontsel);
+
+void                   gucharmap_mini_font_selection_change_font_size (GucharmapMiniFontSelection *fontsel,
+                                                                       float factor);
+
+void                   gucharmap_mini_font_selection_reset_font_size  (GucharmapMiniFontSelection *fontsel);
 
 G_END_DECLS
 
-
 #endif /* #ifndef GUCHARMAP_MINI_FONTSEL_H */
-
