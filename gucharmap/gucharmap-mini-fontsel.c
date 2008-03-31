@@ -323,6 +323,10 @@ gucharmap_mini_font_selection_init (GucharmapMiniFontSelection *fontsel)
   gtk_box_pack_start (GTK_BOX (fontsel), fontsel->italic, FALSE, FALSE, 0);
   gtk_box_pack_start (GTK_BOX (fontsel), fontsel->size, FALSE, FALSE, 0);
 
+  gtk_combo_box_set_focus_on_click (GTK_COMBO_BOX (fontsel->family), FALSE);
+  gtk_button_set_focus_on_click (GTK_BUTTON (fontsel->bold), FALSE);
+  gtk_button_set_focus_on_click (GTK_BUTTON (fontsel->italic), FALSE);
+
   gtk_container_set_border_width (GTK_CONTAINER (fontsel), 6);
 
   gtk_widget_show_all (GTK_WIDGET (fontsel));
