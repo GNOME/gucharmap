@@ -129,11 +129,19 @@ gucharmap_settings_set_chapters_mode (GucharmapChaptersMode mode)
 gchar *
 gucharmap_settings_get_font (void)
 {
+  char *font;
+
   if (!gucharmap_settings_initialized ()) {
       return get_default_font ();
   }
   
-  return gconf_client_get_string (client, GCONF_PREFIX"/font", NULL);
+  font = gconf_client_get_string (client, GCONF_PREFIX"/font", NULL);
+  if (!font || !font[0]) {
+    g_free (font);
+    return NULL;
+  }
+
+  return font;
 }
 
 void
