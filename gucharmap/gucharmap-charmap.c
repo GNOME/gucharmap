@@ -59,6 +59,7 @@ enum {
   PROP_CHAPTERS_MODEL,
   PROP_ACTIVE_CHAPTER,
   PROP_ACTIVE_CHARACTER,
+  PROP_FONT_DESC
 };
 
 static guint gucharmap_charmap_signals[NUM_SIGNALS];
@@ -102,6 +103,9 @@ gucharmap_charmap_get_property (GObject *object,
     case PROP_ACTIVE_CHARACTER:
       g_value_set_uint (value, gucharmap_charmap_get_active_character (charmap));
       break;
+    case PROP_FONT_DESC:
+      g_value_set_boxed (value, priv->font_desc);
+      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
@@ -127,6 +131,9 @@ gucharmap_charmap_set_property (GObject *object,
       break;
     case PROP_ACTIVE_CHARACTER:
       gucharmap_charmap_set_active_character (charmap, g_value_get_uint (value));
+      break;
+    case PROP_FONT_DESC:
+      gucharmap_charmap_set_font_desc (charmap, g_value_get_boxed (value));
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -192,6 +199,16 @@ gucharmap_charmap_class_init (GucharmapCharmapClass *clazz)
                         G_PARAM_STATIC_NICK |
                         G_PARAM_STATIC_BLURB));
 
+  g_object_class_install_property
+    (object_class,
+     PROP_FONT_DESC,
+     g_param_spec_boxed ("font-desc", NULL, NULL,
+                         PANGO_TYPE_FONT_DESCRIPTION,
+                         G_PARAM_READWRITE |
+                         G_PARAM_STATIC_NAME |
+                         G_PARAM_STATIC_NICK |
+                         G_PARAM_STATIC_BLURB));
+
   g_type_class_add_private (object_class, sizeof (GucharmapCharmapPrivate));
 }
 
@@ -233,6 +250,8 @@ gucharmap_charmap_set_font_desc_internal (GucharmapCharmap *charmap,
 
   if (gtk_widget_get_style (GTK_WIDGET (priv->details_view)))
     gucharmap_charmap_update_text_tags (charmap);
+
+  g_object_notify (G_OBJECT (charmap), "font-desc");
 }
 
 static void
