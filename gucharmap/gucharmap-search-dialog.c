@@ -552,43 +552,21 @@ information_dialog (GucharmapSearchDialog *search_dialog,
                     const gchar           *message)
 {
   GucharmapSearchDialogPrivate *priv = GUCHARMAP_SEARCH_DIALOG_GET_PRIVATE (search_dialog);
-  GtkWidget *dialog, *hbox, *icon, *label;
+  GtkWidget *dialog;
 
-  /* follow hig guidelines */
-  dialog = gtk_dialog_new ();
+  dialog = gtk_message_dialog_new (GTK_WIDGET_VISIBLE (search_dialog) ?
+                                     GTK_WINDOW (search_dialog) :
+                                     GTK_WINDOW (priv->guw),
+                                   GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+                                   GTK_MESSAGE_INFO,
+                                   GTK_BUTTONS_OK,
+                                   "%s", message);
   gtk_window_set_title (GTK_WINDOW (dialog), _("Information"));
-  gtk_container_set_border_width (GTK_CONTAINER (dialog), 6);
-  gtk_dialog_set_has_separator (GTK_DIALOG (dialog), FALSE);
-  gtk_window_set_destroy_with_parent (GTK_WINDOW (dialog), TRUE);
-  gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dialog)->vbox), 12);
-  gtk_window_set_icon (GTK_WINDOW (dialog), gtk_window_get_icon (GTK_WINDOW (search_dialog)));
+  gtk_window_set_icon_name (GTK_WINDOW (dialog), GUCHARMAP_ICON_NAME);
   gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
-  gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
-
-  if (GTK_WIDGET_VISIBLE (search_dialog))
-    gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (search_dialog));
-  else
-    gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (priv->guw));
-
-  gtk_dialog_add_button (GTK_DIALOG (dialog), GTK_STOCK_OK, GTK_RESPONSE_ACCEPT);
-
-  hbox = gtk_hbox_new (FALSE, 12);
-  gtk_widget_show (hbox);
-  gtk_container_set_border_width (GTK_CONTAINER (hbox), 6);
-  gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), hbox, FALSE, FALSE, 0);
-
-  icon = gtk_image_new_from_stock (GTK_STOCK_DIALOG_INFO, GTK_ICON_SIZE_DIALOG);
-  gtk_widget_show (icon);
-  gtk_box_pack_start (GTK_BOX (hbox), icon, FALSE, FALSE, 0);
-
-  label = gtk_label_new (message);
-  gtk_widget_show (label);
-  gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
-  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-
   g_signal_connect (dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
 
-  gtk_widget_show (dialog);
+  gtk_window_present (GTK_WINDOW (dialog));
 }
 
 static void
