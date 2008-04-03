@@ -682,6 +682,12 @@ sub process_blocks_txt ($)
 {
     my ($blocks_txt) = @_;
 
+    # Override script names
+    my %block_overrides =
+    (
+      "NKo" => "N\'Ko"
+    );
+
     open (my $blocks, $blocks_txt) or die;
     open (my $out, "> unicode-blocks.h") or die;
 
@@ -704,8 +710,15 @@ sub process_blocks_txt ($)
     while (my $line = <$blocks>)
     {
         $line =~ /^([0-9A-F]+)\.\.([0-9A-F]+); (.+)$/ or next;
-        push @blocks, [$1, $2, $3, $offset];
-        $offset += length($3) + 1;
+
+        my ($start,$end,$block) = ($1, $2, $3);
+
+        if (exists $block_overrides{$block}) {
+                $block = $block_overrides{$block};
+        }
+
+        push @blocks, [$start, $end, $block, $offset];
+        $offset += length($block) + 1;
     }
 
     print $out "/* for extraction by intltool */\n";
