@@ -1,5 +1,3 @@
-dnl $Id: configure.ac,v 1.138 2006/09/04 22:41:10 behdad Exp $
-dnl
 dnl Copyright (c) 2003  Noah Levitt
 dnl
 dnl This program is free software; you can redistribute it and/or modify it
@@ -19,7 +17,7 @@ dnl
 
 AC_PREREQ([2.56])
 
-AC_INIT([GNOME Character Map],[2.22.1],[http://bugzilla.gnome.org/enter_bug.cgi?product=gucharmap],[gucharmap])
+AC_INIT([GNOME Character Map],[2.22.2],[http://bugzilla.gnome.org/enter_bug.cgi?product=gucharmap],[gucharmap])
 
 AC_CONFIG_SRCDIR([gucharmap/gucharmap.h])
 AC_CONFIG_HEADERS([config.h])
