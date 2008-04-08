@@ -71,8 +71,9 @@ then
 fi
 AM_CONDITIONAL(OS_WIN32, test "x$os_win32" = "xyes")
 
+GLIB_REQUIRED=2.16.3
 GTK_REQUIRED=2.12.0
-PKG_CHECK_MODULES([GTK],[gtk+-2.0 >= $GTK_REQUIRED])
+PKG_CHECK_MODULES([GTK],[glib-2.0 >= $GLIB_REQUIRED gtk+-2.0 >= $GTK_REQUIRED])
 
 GLIB_GENMARSHAL="$($PKG_CONFIG --variable=glib_genmarshal glib-2.0)"
 AC_SUBST([GLIB_GENMARSHAL])

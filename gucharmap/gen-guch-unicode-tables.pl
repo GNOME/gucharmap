@@ -14,6 +14,7 @@
 # usage: ./gen-guch-unicode-tables.pl UNICODE-VERSION DIRECTORY
 # where DIRECTORY contains UnicodeData.txt Unihan.zip NamesList.txt Blocks.txt Scripts.txt
 #
+# NOTE! Some code copied from glib/glib/gen-unicode-tables.pl; keep in sync!
 
 use strict;
 use vars ('$UNZIP', '$ICONV');
