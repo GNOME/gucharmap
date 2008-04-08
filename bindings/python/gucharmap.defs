@@ -65,16 +65,6 @@
 
 ;; Enumerations and flags ...
 
-(define-enum ChaptersMode
-  (in-module "Gucharmap")
-  (c-name "GucharmapChaptersMode")
-  (gtype-id "GUCHARMAP_TYPE_CHAPTERS_MODE")
-  (values
-    '("script" "GUCHARMAP_CHAPTERS_SCRIPT")
-    '("block" "GUCHARMAP_CHAPTERS_BLOCK")
-  )
-)
-
 (define-enum UnicodeVersion
   (in-module "Gucharmap")
   (c-name "GucharmapUnicodeVersion")

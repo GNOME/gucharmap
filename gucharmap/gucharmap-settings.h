@@ -25,6 +25,12 @@
 
 G_BEGIN_DECLS
 
+typedef enum
+{
+  GUCHARMAP_CHAPTERS_SCRIPT = 0,
+  GUCHARMAP_CHAPTERS_BLOCK  = 1
+} GucharmapChaptersMode;
+
 void         gucharmap_settings_initialize           (void);
 void         gucharmap_settings_shutdown             (void);
 GucharmapChaptersMode gucharmap_settings_get_chapters_mode    (void);

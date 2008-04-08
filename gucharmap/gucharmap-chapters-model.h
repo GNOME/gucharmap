@@ -65,12 +65,6 @@ struct _GucharmapChaptersModelClass
 };
 
 
-typedef enum
-{
-  GUCHARMAP_CHAPTERS_SCRIPT = 0,
-  GUCHARMAP_CHAPTERS_BLOCK  = 1
-} GucharmapChaptersMode;
-
 enum {
   CHAPTERS_ID_COL    = 0,
   CHAPTERS_LABEL_COL = 1
