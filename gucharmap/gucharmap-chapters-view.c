@@ -200,7 +200,7 @@ gucharmap_chapters_view_set_selected (GucharmapChaptersView *view,
 }
 
 /**
- * gucharmap_chapters_view_settings_init:
+ * gucharmap_chapters_view_select_character:
  * @view: a #GucharmapChaptersView
  * @wc: a character
  *
