@@ -915,10 +915,6 @@ gucharmap_window_init (GucharmapWindow *guw)
 				       G_N_ELEMENTS (toggle_menu_entries),
 				       guw);
 
-  action = gtk_action_group_get_action (guw->action_group, "SnapColumns");
-  gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
-                                gucharmap_settings_get_snap_pow2 ());
-
   gtk_ui_manager_insert_action_group (guw->uimanager, guw->action_group, 0);
   g_object_unref (guw->action_group);
   
@@ -1005,6 +1001,10 @@ gucharmap_window_init (GucharmapWindow *guw)
   g_signal_connect (guw->charmap, "status-message", G_CALLBACK (status_message), guw);
 
   gtk_widget_show (big_vbox);
+
+  action = gtk_action_group_get_action (guw->action_group, "SnapColumns");
+  gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action),
+                                gucharmap_settings_get_snap_pow2 ());
 
   gucharmap_window_set_chapters_model (guw, gucharmap_settings_get_chapters_mode ());
 
