@@ -20,7 +20,7 @@
 #define GUCHARMAP_SETTINGS_H
 
 #include <glib.h>
-#include <gtk/gtkwindow.h>
+#include <gtk/gtk.h>
 #include <gucharmap/gucharmap.h>
 
 G_BEGIN_DECLS

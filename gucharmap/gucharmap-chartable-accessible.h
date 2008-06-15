@@ -21,7 +21,7 @@
 #ifndef GUCHARMAP_CHARTABLE_ACCESSIBLE_H
 #define GUCHARMAP_CHARTABLE_ACCESSIBLE_H
 
-#include <gtk/gtkaccessible.h>
+#include <gtk/gtk.h>
 
 #include "gucharmap-chartable.h"
 

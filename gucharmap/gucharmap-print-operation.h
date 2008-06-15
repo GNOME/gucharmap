@@ -19,7 +19,7 @@
 #ifndef GUCHARMAP_PRINT_OPERATION_H
 #define GUCHARMAP_PRINT_OPERATION_H
 
-#include <gtk/gtkprintoperation.h>
+#include <gtk/gtk.h>
 
 #include <gucharmap/gucharmap.h>
 

@@ -24,7 +24,7 @@
 #ifndef GUCHARMAP_CHAPTERS_MODEL_H
 #define GUCHARMAP_CHAPTERS_MODEL_H
 
-#include <gtk/gtkliststore.h>
+#include <gtk/gtk.h>
 
 #include <gucharmap/gucharmap-codepoint-list.h>
 

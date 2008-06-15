@@ -25,7 +25,7 @@
 #ifndef GUCHARMAP_CHAPTERS_VIEW_H
 #define GUCHARMAP_CHAPTERS_VIEW_H
 
-#include <gtk/gtktreeview.h>
+#include <gtk/gtk.h>
 
 #include <gucharmap/gucharmap-chapters-model.h>
 

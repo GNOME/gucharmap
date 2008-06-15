@@ -24,7 +24,7 @@
 #ifndef GUCHARMAP_CHARTABLE_H
 #define GUCHARMAP_CHARTABLE_H
 
-#include <gtk/gtkdrawingarea.h>
+#include <gtk/gtk.h>
 
 #include <gucharmap/gucharmap-codepoint-list.h>
 
