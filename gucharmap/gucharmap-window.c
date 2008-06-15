@@ -504,7 +504,7 @@ help_about (GtkAction       *action,
 			 "comments", _("GNOME Character Map "
 				       "based on the Unicode Character Database"),
 			 "copyright", "Copyright © 2004 Noah Levitt\n"
-				      "Copyright © 1991-2006 Unicode, Inc.\n"
+				      "Copyright © 1991-2008 Unicode, Inc.\n"
 				      "Copyright © 2007, 2008 Christian Persch",
 			 "documenters", documenters,
 			 "license", license_trans,
