@@ -145,7 +145,7 @@
 (define-method get_book_codepoint_list
   (of-object "GucharmapChaptersModel")
   (c-name "gucharmap_chapters_model_get_book_codepoint_list")
-  (return-type "const-GucharmapCodepointList*")
+  (return-type "GucharmapCodepointList*")
 )
 
 (define-method character_to_iter
@@ -216,7 +216,7 @@
 (define-method get_book_codepoint_list
   (of-object "GucharmapChaptersView")
   (c-name "gucharmap_chapters_view_get_book_codepoint_list")
-  (return-type "const-GucharmapCodepointList*")
+  (return-type "GucharmapCodepointList*")
 )
 
 (define-method next
@@ -297,15 +297,6 @@
   (return-type "char*")
 )
 
-(define-method set_font
-  (of-object "GucharmapCharmap")
-  (c-name "gucharmap_charmap_set_font")
-  (return-type "none")
-  (parameters
-    '("const-gchar*" "font_name")
-  )
-)
-
 (define-method set_font_desc
   (of-object "GucharmapCharmap")
   (c-name "gucharmap_charmap_set_font_desc")
@@ -361,15 +352,6 @@
   (c-name "gucharmap_chartable_new")
   (is-constructor-of "GucharmapChartable")
   (return-type "GtkWidget*")
-)
-
-(define-method set_font
-  (of-object "GucharmapChartable")
-  (c-name "gucharmap_chartable_set_font")
-  (return-type "none")
-  (parameters
-    '("const-gchar*" "font_name")
-  )
 )
 
 (define-method set_font_desc
