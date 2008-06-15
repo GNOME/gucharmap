@@ -76,6 +76,9 @@ void      gucharmap_charmap_set_active_chapter (GucharmapCharmap *charmap,
                                                 const gchar *chapter);
 char *    gucharmap_charmap_get_active_chapter (GucharmapCharmap *charmap);
 
+void gucharmap_charmap_next_chapter     (GucharmapCharmap *charmap);
+void gucharmap_charmap_previous_chapter (GucharmapCharmap *charmap);
+
 void                     gucharmap_charmap_set_font_desc      (GucharmapCharmap  *charmap,
                                                                PangoFontDescription *font_desc);
 

@@ -548,14 +548,14 @@ static void
 next_chapter (GtkAction       *action,
               GucharmapWindow *guw)
 {
-  gucharmap_chapters_view_next (gucharmap_charmap_get_chapters_view (guw->charmap));
+  gucharmap_charmap_next_chapter (guw->charmap);
 }
 
 static void
 prev_chapter (GtkAction       *action,
               GucharmapWindow *guw)
 {
-  gucharmap_chapters_view_previous (gucharmap_charmap_get_chapters_view (guw->charmap));
+  gucharmap_charmap_previous_chapter (guw->charmap);
 }
 
 static void

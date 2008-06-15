@@ -1256,6 +1256,22 @@ gucharmap_charmap_get_active_chapter (GucharmapCharmap *charmap)
   return gucharmap_chapters_view_get_selected (priv->chapters_view);
 }
 
+void
+gucharmap_charmap_next_chapter (GucharmapCharmap *charmap)
+{
+  GucharmapCharmapPrivate *priv = charmap->priv;
+
+  gucharmap_chapters_view_next (priv->chapters_view);
+}
+
+void
+gucharmap_charmap_previous_chapter (GucharmapCharmap *charmap)
+{
+  GucharmapCharmapPrivate *priv = charmap->priv;
+
+  gucharmap_chapters_view_previous (priv->chapters_view);
+}
+
 GucharmapChartable *
 gucharmap_charmap_get_chartable (GucharmapCharmap *charmap)
 {
