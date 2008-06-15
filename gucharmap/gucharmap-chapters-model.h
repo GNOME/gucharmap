@@ -47,7 +47,7 @@ struct _GucharmapChaptersModel
 {
   GtkListStore parent_instance;
 
-  /*< protected >*/
+  /*< private >*/
   GucharmapChaptersModelPrivate *priv;
 };
 

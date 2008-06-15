@@ -36,11 +36,15 @@ G_BEGIN_DECLS
 #define GUCHARMAP_SCRIPT_CHAPTERS_MODEL_GET_CLASS(o)     (G_TYPE_INSTANCE_GET_CLASS ((o), GUCHARMAP_TYPE_SCRIPT_CHAPTERS_MODEL, GucharmapScriptChaptersModelClass))
 
 typedef struct _GucharmapScriptChaptersModel        GucharmapScriptChaptersModel;
+typedef struct _GucharmapScriptChaptersModelPrivate GucharmapScriptChaptersModelPrivate;
 typedef struct _GucharmapScriptChaptersModelClass   GucharmapScriptChaptersModelClass;
 
 struct _GucharmapScriptChaptersModel
 {
   GucharmapChaptersModel parent;
+
+  /*< private >*/
+  GucharmapScriptChaptersModelPrivate *priv;
 };
 
 struct _GucharmapScriptChaptersModelClass

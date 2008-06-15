@@ -38,11 +38,15 @@ G_BEGIN_DECLS
 #define GUCHARMAP_BLOCK_CHAPTERS_MODEL_GET_CLASS(o)     (G_TYPE_INSTANCE_GET_CLASS ((o), GUCHARMAP_TYPE_BLOCK_CHAPTERS_MODEL, GucharmapBlockChaptersModelClass))
 
 typedef struct _GucharmapBlockChaptersModel GucharmapBlockChaptersModel;
+typedef struct _GucharmapBlockChaptersModelPrivate GucharmapBlockChaptersModelPrivate;
 typedef struct _GucharmapBlockChaptersModelClass GucharmapBlockChaptersModelClass;
 
 struct _GucharmapBlockChaptersModel
 {
   GucharmapChaptersModel parent;
+
+  /*< private >*/
+  GucharmapBlockChaptersModelPrivate *priv;
 };
 
 struct _GucharmapBlockChaptersModelClass

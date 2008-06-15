@@ -34,12 +34,16 @@ G_BEGIN_DECLS
 #define GUCHARMAP_IS_CODEPOINT_LIST_CLASS(k)      (G_TYPE_CHECK_CLASS_TYPE ((k), GUCHARMAP_TYPE_CODEPOINT_LIST))
 #define GUCHARMAP_CODEPOINT_LIST_GET_CLASS(o)     (G_TYPE_INSTANCE_GET_CLASS ((o), GUCHARMAP_TYPE_CODEPOINT_LIST, GucharmapCodepointListClass))
 
-typedef struct _GucharmapCodepointList      GucharmapCodepointList;
-typedef struct _GucharmapCodepointListClass GucharmapCodepointListClass;
+typedef struct _GucharmapCodepointList        GucharmapCodepointList;
+typedef struct _GucharmapCodepointListPrivate GucharmapCodepointListPrivate;
+typedef struct _GucharmapCodepointListClass   GucharmapCodepointListClass;
 
 struct _GucharmapCodepointList
 {
   GObject parent_instance;
+
+  /*< private >*/
+  GucharmapCodepointListPrivate *priv;
 };
 
 struct _GucharmapCodepointListClass
