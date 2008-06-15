@@ -1,5 +1,5 @@
-##
 ## Copyright © 2003  Noah Levitt
+## Copyright © 2008  Christian Persch
 ##
 ## This program is free software; you can redistribute it and/or modify it
 ## under the terms of the GNU General Public License as published by the

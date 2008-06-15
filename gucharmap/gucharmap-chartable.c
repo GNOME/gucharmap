@@ -2488,6 +2488,21 @@ gucharmap_chartable_set_snap_pow2 (GucharmapChartable *chartable,
 }
 
 /**
+ * gucharmap_chartable_get_snap_pow2:
+ * @chartable: a #GucharmapChartable
+ *
+ * Returns whether the number of columns the character table shows is
+ * always a power of 2.
+ */
+gboolean
+gucharmap_chartable_get_snap_pow2 (GucharmapChartable *chartable)
+{
+  GucharmapChartablePrivate *priv = chartable->priv;
+
+  return priv->snap_pow2_enabled;
+}
+
+/**
  * gucharmap_chartable_get_active_character:
  * @chartable: a #GucharmapChartable
  * @list: a #GucharmapCodepointList

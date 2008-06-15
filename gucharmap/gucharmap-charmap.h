@@ -88,6 +88,8 @@ void                     gucharmap_charmap_set_chapters_model (GucharmapCharmap 
 
 GucharmapChaptersModel * gucharmap_charmap_get_chapters_model (GucharmapCharmap       *charmap);
 
+GucharmapCodepointList * gucharmap_charmap_get_active_codepoint_list (GucharmapCharmap *charmap);
+
 GucharmapCodepointList * gucharmap_charmap_get_book_codepoint_list (GucharmapCharmap *charmap);
 
 void     gucharmap_charmap_set_chapters_visible (GucharmapCharmap *charmap,
@@ -111,6 +113,10 @@ void gucharmap_charmap_set_active_page (GucharmapCharmap *charmap,
                                         int page);
 
 int  gucharmap_charmap_get_active_page (GucharmapCharmap *charmap);
+
+void gucharmap_charmap_set_snap_pow2 (GucharmapCharmap *charmap,
+                                      gboolean snap);
+gboolean gucharmap_charmap_get_snap_pow2 (GucharmapCharmap *charmap);
 
 /* private; FIXMEchpe remove */
 GucharmapChartable *     gucharmap_charmap_get_chartable      (GucharmapCharmap  *charmap);

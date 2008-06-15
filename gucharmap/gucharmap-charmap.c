@@ -61,7 +61,9 @@ enum {
   PROP_CHAPTERS_MODEL,
   PROP_ACTIVE_CHAPTER,
   PROP_ACTIVE_CHARACTER,
+  PROP_ACTIVE_CODEPOINT_LIST,
   PROP_ACTIVE_PAGE,
+  PROP_SNAP_POW2,
   PROP_FONT_DESC
 };
 
@@ -106,11 +108,17 @@ gucharmap_charmap_get_property (GObject *object,
     case PROP_ACTIVE_CHARACTER:
       g_value_set_uint (value, gucharmap_charmap_get_active_character (charmap));
       break;
+    case PROP_ACTIVE_CODEPOINT_LIST:
+      g_value_set_object (value, gucharmap_charmap_get_active_codepoint_list (charmap));
+      break;
     case PROP_ACTIVE_PAGE:
       g_value_set_uint (value, gucharmap_charmap_get_active_page (charmap));
       break;
     case PROP_FONT_DESC:
       g_value_set_boxed (value, gucharmap_charmap_get_font_desc (charmap));
+      break;
+    case PROP_SNAP_POW2:
+      g_value_set_boolean (value, gucharmap_charmap_get_snap_pow2 (charmap));
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -144,6 +152,10 @@ gucharmap_charmap_set_property (GObject *object,
     case PROP_FONT_DESC:
       gucharmap_charmap_set_font_desc (charmap, g_value_get_boxed (value));
       break;
+    case PROP_SNAP_POW2:
+      gucharmap_charmap_set_snap_pow2 (charmap, g_value_get_boolean (value));
+      break;
+    case PROP_ACTIVE_CODEPOINT_LIST: /* read-only */
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
@@ -210,6 +222,16 @@ gucharmap_charmap_class_init (GucharmapCharmapClass *clazz)
 
   g_object_class_install_property
     (object_class,
+     PROP_ACTIVE_CODEPOINT_LIST,
+     g_param_spec_object ("active-codepoint-list", NULL, NULL,
+                          GUCHARMAP_TYPE_CODEPOINT_LIST,
+                          G_PARAM_READABLE |
+                          G_PARAM_STATIC_NAME |
+                          G_PARAM_STATIC_NICK |
+                          G_PARAM_STATIC_BLURB));
+
+  g_object_class_install_property
+    (object_class,
      PROP_ACTIVE_PAGE,
      g_param_spec_uint ("active-page", NULL, NULL,
                         0,
@@ -229,6 +251,16 @@ gucharmap_charmap_class_init (GucharmapCharmapClass *clazz)
                          G_PARAM_STATIC_NAME |
                          G_PARAM_STATIC_NICK |
                          G_PARAM_STATIC_BLURB));
+
+  g_object_class_install_property
+    (object_class,
+     PROP_SNAP_POW2,
+     g_param_spec_boolean ("snap-power-2", NULL, NULL,
+                           FALSE,
+                           G_PARAM_READWRITE |
+                           G_PARAM_STATIC_NAME |
+                           G_PARAM_STATIC_NICK |
+                           G_PARAM_STATIC_BLURB));
 
   g_type_class_add_private (object_class, sizeof (GucharmapCharmapPrivate));
 }
@@ -771,6 +803,24 @@ chartable_sync_font_desc (GucharmapChartable *chartable,
 }
 
 static void
+chartable_notify_cb (GtkWidget *widget,
+                     GParamSpec *pspec,
+                     GObject *charmap)
+{
+  const char *prop_name;
+
+  if (pspec->name == I_("codepoint-list"))
+    prop_name = "active-codepoint-list";
+  else if (pspec->name == I_("snap-pow2"))
+    prop_name = pspec->name;
+  else
+    return;
+
+  /* Forward the notification */
+  g_object_notify (charmap, prop_name);
+}
+
+static void
 follow_if_link (GucharmapCharmap *charmap,
                 GtkTextIter *iter)
 {
@@ -1047,6 +1097,10 @@ gucharmap_charmap_init (GucharmapCharmap *charmap)
                     G_CALLBACK (chartable_sync_active_char), charmap);
   g_signal_connect (chartable, "notify::font-desc",
                     G_CALLBACK (chartable_sync_font_desc), charmap);
+  g_signal_connect (chartable, "notify::codepoint-list",
+                    G_CALLBACK (chartable_notify_cb), charmap);
+  g_signal_connect (chartable, "notify::snap-pow2",
+                    G_CALLBACK (chartable_notify_cb), charmap);
 
   gtk_container_add (GTK_CONTAINER (scrolled_window), chartable);
   gtk_widget_show (chartable);
@@ -1325,3 +1379,43 @@ gucharmap_charmap_get_active_page (GucharmapCharmap *charmap)
   return priv->active_page;
 }
 
+GucharmapCodepointList *
+gucharmap_charmap_get_active_codepoint_list (GucharmapCharmap *charmap)
+{
+  GucharmapCharmapPrivate *priv = charmap->priv;
+
+  return gucharmap_chartable_get_codepoint_list (priv->chartable);
+}
+
+/**
+ * gucharmap_charmap_set_snap_pow2:
+ * @charmap: a #GucharmapCharmap
+ * @snap: whether to enable or disable snapping
+ *
+ * Sets whether the number columns the character table shows should
+ * always be a power of 2.
+ */
+void
+gucharmap_charmap_set_snap_pow2 (GucharmapCharmap *charmap,
+                                 gboolean snap)
+{
+  GucharmapCharmapPrivate *priv = charmap->priv;
+
+  /* This will cause us to emit our prop notification too */
+  gucharmap_chartable_set_snap_pow2 (priv->chartable, snap);
+}
+
+/**
+ * gucharmap_charmap_get_snap_pow2:
+ * @charmap: a #GucharmapCharmap
+ *
+ * Returns whether the number of columns the character table shows is
+ * always a power of 2.
+ */
+gboolean
+gucharmap_charmap_get_snap_pow2 (GucharmapCharmap *charmap)
+{
+  GucharmapCharmapPrivate *priv = charmap->priv;
+
+  return gucharmap_chartable_get_snap_pow2 (priv->chartable);
+}

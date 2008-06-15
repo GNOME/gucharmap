@@ -98,9 +98,8 @@ gucharmap_window_print (GucharmapWindow *guw,
   GtkPrintOperationResult rv;
   GError *error = NULL;
 
-  chartable = gucharmap_charmap_get_chartable (guw->charmap);
-  g_object_get (chartable,
-                "codepoint-list", &codepoint_list,
+  g_object_get (guw->charmap,
+                "active-codepoint-list", &codepoint_list,
                 "font-desc", &font_desc,
                 NULL);
 
@@ -386,7 +385,7 @@ snap_cols_pow2 (GtkAction        *action,
                 GucharmapWindow  *guw)
 {
   gboolean is_active = gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
-  gucharmap_chartable_set_snap_pow2 (gucharmap_charmap_get_chartable (guw->charmap), is_active);
+  gucharmap_charmap_set_snap_pow2 (guw->charmap, is_active);
   gucharmap_settings_set_snap_pow2 (is_active);
 }
 
@@ -975,7 +974,7 @@ gucharmap_window_init (GucharmapWindow *guw)
   gtk_widget_show (hbox);
 
   /* FIXMEchpe!! */
-  chartable =gucharmap_charmap_get_chartable (guw->charmap);
+  chartable = gucharmap_charmap_get_chartable (guw->charmap);
   g_signal_connect (chartable, "activate", G_CALLBACK (insert_character_in_text_to_copy), guw);
 
   /* Finally the statusbar */

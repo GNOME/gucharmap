@@ -80,6 +80,7 @@ void gucharmap_chartable_set_zoom_enabled (GucharmapChartable *chartable,
 gboolean gucharmap_chartable_get_zoom_enabled (GucharmapChartable *chartable);
 void gucharmap_chartable_set_snap_pow2 (GucharmapChartable *chartable,
                                         gboolean snap);
+gboolean gucharmap_chartable_get_snap_pow2 (GucharmapChartable *chartable);
 void gucharmap_chartable_set_codepoint_list (GucharmapChartable         *chartable,
                                              GucharmapCodepointList *list);
 GucharmapCodepointList * gucharmap_chartable_get_codepoint_list (GucharmapChartable *chartable);
