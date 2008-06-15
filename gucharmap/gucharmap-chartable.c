@@ -1915,6 +1915,7 @@ gucharmap_chartable_paste_received_cb (GtkClipboard *clipboard,
   if (wc == 0 ||
       !gucharmap_unichar_validate (wc)) {
     gtk_widget_error_bell (GTK_WIDGET (chartable));
+    return;
   }
 
   gucharmap_chartable_set_active_character (chartable, wc);
