@@ -46,14 +46,15 @@ gucharmap_script_chapters_model_init (GucharmapScriptChaptersModel *model)
     {
       gtk_list_store_append (store, &iter);
       gtk_list_store_set (store, &iter,
-                          CHAPTERS_ID_COL, unicode_scripts[i],
-                          CHAPTERS_LABEL_COL, _(unicode_scripts[i]),
+                          GUCHARMAP_CHAPTERS_MODEL_COLUMN_ID, unicode_scripts[i],
+                          GUCHARMAP_CHAPTERS_MODEL_COLUMN_LABEL, _(unicode_scripts[i]),
                           -1);
     }
   g_free (unicode_scripts);
 
   gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (model),
-                                        CHAPTERS_LABEL_COL, GTK_SORT_ASCENDING);
+                                        GUCHARMAP_CHAPTERS_MODEL_COLUMN_LABEL,
+                                        GTK_SORT_ASCENDING);
 }
 
 static GucharmapCodepointList *
@@ -64,7 +65,7 @@ get_codepoint_list (GucharmapChaptersModel *chapters,
   GucharmapCodepointList *list;
   gchar *script_untranslated;
 
-  gtk_tree_model_get (model, iter, CHAPTERS_ID_COL, &script_untranslated, -1);
+  gtk_tree_model_get (model, iter, GUCHARMAP_CHAPTERS_MODEL_COLUMN_ID, &script_untranslated, -1);
 
   list = gucharmap_script_codepoint_list_new ();
   if (!gucharmap_script_codepoint_list_set_script (GUCHARMAP_SCRIPT_CODEPOINT_LIST (list), script_untranslated))
@@ -86,7 +87,7 @@ append_script (GtkTreeModel                 *model,
 {
   gchar *script_untranslated;
 
-  gtk_tree_model_get (model, iter, CHAPTERS_ID_COL, &script_untranslated, -1);
+  gtk_tree_model_get (model, iter, GUCHARMAP_CHAPTERS_MODEL_COLUMN_ID, &script_untranslated, -1);
 
   gucharmap_script_codepoint_list_append_script (list, script_untranslated);
 

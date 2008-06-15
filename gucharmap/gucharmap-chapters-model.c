@@ -145,7 +145,7 @@ gucharmap_chapters_model_id_to_iter (GucharmapChaptersModel *chapters_model,
     return FALSE;
 
   do {
-    gtk_tree_model_get(model, &iter, CHAPTERS_ID_COL, &str, -1);
+    gtk_tree_model_get(model, &iter, GUCHARMAP_CHAPTERS_MODEL_COLUMN_ID, &str, -1);
     match = strcmp (id, str);
     g_free(str);
     if (0 == match) {

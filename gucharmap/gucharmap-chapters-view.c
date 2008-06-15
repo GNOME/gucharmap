@@ -61,7 +61,7 @@ gucharmap_chapters_view_init (GucharmapChaptersView *view)
   cell = gtk_cell_renderer_text_new ();
   column = priv->column = gtk_tree_view_column_new ();
   gtk_tree_view_column_pack_start (column, cell, FALSE);
-  gtk_tree_view_column_add_attribute (column, cell, "text", CHAPTERS_LABEL_COL);
+  gtk_tree_view_column_add_attribute (column, cell, "text", GUCHARMAP_CHAPTERS_MODEL_COLUMN_LABEL);
   gtk_tree_view_append_column (tree_view, column);
 
   selection = gtk_tree_view_get_selection (tree_view);
@@ -172,7 +172,7 @@ gucharmap_chapters_view_get_selected (GucharmapChaptersView *view)
   gchar *name = NULL;
 
   if (gtk_tree_selection_get_selected (selection, &model, &iter))
-    gtk_tree_model_get(model, &iter, CHAPTERS_ID_COL, &name, -1);
+    gtk_tree_model_get(model, &iter, GUCHARMAP_CHAPTERS_MODEL_COLUMN_ID, &name, -1);
 
   return name;
 }

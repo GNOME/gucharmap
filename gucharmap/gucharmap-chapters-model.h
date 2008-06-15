@@ -66,8 +66,8 @@ struct _GucharmapChaptersModelClass
 
 
 enum {
-  CHAPTERS_ID_COL    = 0,
-  CHAPTERS_LABEL_COL = 1
+  GUCHARMAP_CHAPTERS_MODEL_COLUMN_ID    = 0,
+  GUCHARMAP_CHAPTERS_MODEL_COLUMN_LABEL = 1
 };
 
 GType                    gucharmap_chapters_model_get_type                (void);
