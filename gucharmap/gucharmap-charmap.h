@@ -81,8 +81,6 @@ void                     gucharmap_charmap_set_font_desc      (GucharmapCharmap 
 
 PangoFontDescription *   gucharmap_charmap_get_font_desc      (GucharmapCharmap  *charmap);
 
-GucharmapChartable *     gucharmap_charmap_get_chartable      (GucharmapCharmap  *charmap);
-
 GucharmapChaptersView *  gucharmap_charmap_get_chapters_view  (GucharmapCharmap       *charmap);
 
 void                     gucharmap_charmap_set_chapters_model (GucharmapCharmap       *charmap,
@@ -91,6 +89,31 @@ void                     gucharmap_charmap_set_chapters_model (GucharmapCharmap 
 GucharmapChaptersModel * gucharmap_charmap_get_chapters_model (GucharmapCharmap       *charmap);
 
 GucharmapCodepointList * gucharmap_charmap_get_book_codepoint_list (GucharmapCharmap *charmap);
+
+void     gucharmap_charmap_set_chapters_visible (GucharmapCharmap *charmap,
+                                                 gboolean visible);
+
+gboolean gucharmap_charmap_get_chapters_visible (GucharmapCharmap *charmap);
+
+typedef enum {
+  GUCHARMAP_CHARMAP_PAGE_CHARTABLE,
+  GUCHARMAP_CHARMAP_PAGE_DETAILS
+} GucharmapCharmapPageType;
+
+void     gucharmap_charmap_set_page_visible (GucharmapCharmap *charmap,
+                                             int page,
+                                             gboolean visible);
+
+gboolean gucharmap_charmap_get_page_visible (GucharmapCharmap *charmap,
+                                             int page);
+
+void gucharmap_charmap_set_active_page (GucharmapCharmap *charmap,
+                                        int page);
+
+int  gucharmap_charmap_get_active_page (GucharmapCharmap *charmap);
+
+/* private; FIXMEchpe remove */
+GucharmapChartable *     gucharmap_charmap_get_chartable      (GucharmapCharmap  *charmap);
 
 G_END_DECLS
 
