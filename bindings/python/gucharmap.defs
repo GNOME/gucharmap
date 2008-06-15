@@ -65,6 +65,16 @@
 
 ;; Enumerations and flags ...
 
+(define-enum CharmapPageType
+  (in-module "Gucharmap")
+  (c-name "GucharmapCharmapPageType")
+  (gtype-id "GUCHARMAP_TYPE_CHARMAP_PAGE_TYPE")
+  (values
+    '("chartable" "GUCHARMAP_CHARMAP_PAGE_CHARTABLE")
+    '("details" "GUCHARMAP_CHARMAP_PAGE_DETAILS")
+  )
+)
+
 (define-enum UnicodeVersion
   (in-module "Gucharmap")
   (c-name "GucharmapUnicodeVersion")
@@ -297,6 +307,18 @@
   (return-type "char*")
 )
 
+(define-method next_chapter
+  (of-object "GucharmapCharmap")
+  (c-name "gucharmap_charmap_next_chapter")
+  (return-type "none")
+)
+
+(define-method previous_chapter
+  (of-object "GucharmapCharmap")
+  (c-name "gucharmap_charmap_previous_chapter")
+  (return-type "none")
+)
+
 (define-method set_font_desc
   (of-object "GucharmapCharmap")
   (c-name "gucharmap_charmap_set_font_desc")
@@ -306,10 +328,10 @@
   )
 )
 
-(define-method get_chartable
+(define-method get_font_desc
   (of-object "GucharmapCharmap")
-  (c-name "gucharmap_charmap_get_chartable")
-  (return-type "GucharmapChartable*")
+  (c-name "gucharmap_charmap_get_font_desc")
+  (return-type "PangoFontDescription*")
 )
 
 (define-method get_chapters_view
@@ -333,10 +355,86 @@
   (return-type "GucharmapChaptersModel*")
 )
 
+(define-method get_active_codepoint_list
+  (of-object "GucharmapCharmap")
+  (c-name "gucharmap_charmap_get_active_codepoint_list")
+  (return-type "GucharmapCodepointList*")
+)
+
 (define-method get_book_codepoint_list
   (of-object "GucharmapCharmap")
   (c-name "gucharmap_charmap_get_book_codepoint_list")
   (return-type "GucharmapCodepointList*")
+)
+
+(define-method set_chapters_visible
+  (of-object "GucharmapCharmap")
+  (c-name "gucharmap_charmap_set_chapters_visible")
+  (return-type "none")
+  (parameters
+    '("gboolean" "visible")
+  )
+)
+
+(define-method get_chapters_visible
+  (of-object "GucharmapCharmap")
+  (c-name "gucharmap_charmap_get_chapters_visible")
+  (return-type "gboolean")
+)
+
+(define-method set_page_visible
+  (of-object "GucharmapCharmap")
+  (c-name "gucharmap_charmap_set_page_visible")
+  (return-type "none")
+  (parameters
+    '("int" "page")
+    '("gboolean" "visible")
+  )
+)
+
+(define-method get_page_visible
+  (of-object "GucharmapCharmap")
+  (c-name "gucharmap_charmap_get_page_visible")
+  (return-type "gboolean")
+  (parameters
+    '("int" "page")
+  )
+)
+
+(define-method set_active_page
+  (of-object "GucharmapCharmap")
+  (c-name "gucharmap_charmap_set_active_page")
+  (return-type "none")
+  (parameters
+    '("int" "page")
+  )
+)
+
+(define-method get_active_page
+  (of-object "GucharmapCharmap")
+  (c-name "gucharmap_charmap_get_active_page")
+  (return-type "int")
+)
+
+(define-method set_snap_pow2
+  (of-object "GucharmapCharmap")
+  (c-name "gucharmap_charmap_set_snap_pow2")
+  (return-type "none")
+  (parameters
+    '("gboolean" "snap")
+  )
+)
+
+(define-method get_snap_pow2
+  (of-object "GucharmapCharmap")
+  (c-name "gucharmap_charmap_get_snap_pow2")
+  (return-type "gboolean")
+)
+
+(define-method get_chartable
+  (of-object "GucharmapCharmap")
+  (c-name "gucharmap_charmap_get_chartable")
+  (return-type "GucharmapChartable*")
 )
 
 
@@ -361,6 +459,12 @@
   (parameters
     '("PangoFontDescription*" "font_desc")
   )
+)
+
+(define-method get_font_desc
+  (of-object "GucharmapChartable")
+  (c-name "gucharmap_chartable_get_font_desc")
+  (return-type "PangoFontDescription*")
 )
 
 (define-method get_active_character
@@ -400,6 +504,12 @@
   (parameters
     '("gboolean" "snap")
   )
+)
+
+(define-method get_snap_pow2
+  (of-object "GucharmapChartable")
+  (c-name "gucharmap_chartable_get_snap_pow2")
+  (return-type "gboolean")
 )
 
 (define-method set_codepoint_list
@@ -718,8 +828,8 @@
 
 ;; From gucharmap-type-builtins.h
 
-(define-function gucharmap_chapters_mode_get_type
-  (c-name "gucharmap_chapters_mode_get_type")
+(define-function gucharmap_charmap_page_type_get_type
+  (c-name "gucharmap_charmap_page_type_get_type")
   (return-type "GType")
 )
 
