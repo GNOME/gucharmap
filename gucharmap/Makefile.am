@@ -61,11 +61,16 @@ libgucharmap_la_SOURCES = \
 	$(NULL)
 
 libgucharmap_la_CPPFLAGS = \
-	-I$(top_srcdir)			\
-	-DGUCHARMAP_COMPILATION		\
-	-DDATADIR=\"$(datadir)\"	\
-	-DLOCALEDIR=\"$(datadir)/locale\"	\
-	$(DISABLE_DEPRECATED)		\
+	-I$(top_srcdir) \
+	-DGUCHARMAP_COMPILATION \
+	-DDATADIR=\"$(datadir)\" \
+	-DLOCALEDIR=\"$(datadir)/locale\" \
+	-DG_DISABLE_SINGLE_INCLUDES \
+	-DPANGO_DISABLE_SINGLE_INCLUDES \
+	-DGDK_DISABLE_SINGLE_INCLUDES \
+	-DGDK_PIXBUF_DISABLE_SINGLE_INCLUDES \
+	-DGTK_DISABLE_SINGLE_INCLUDES \
+	$(DISABLE_DEPRECATED) \
 	$(AM_CPPFLAGS)
 
 libgucharmap_la_CFLAGS = \
@@ -115,10 +120,15 @@ gucharmap_SOURCES = \
 	$(NULL)
 
 gucharmap_CPPFLAGS = \
-	-I$(top_srcdir)			\
-	-DDATADIR=\"$(datadir)\"	\
-	-DLOCALEDIR=\"$(datadir)/locale\"	\
-	$(DISABLE_DEPRECATED)		\
+	-I$(top_srcdir) \
+	-DDATADIR=\"$(datadir)\" \
+	-DLOCALEDIR=\"$(datadir)/locale\" \
+	-DG_DISABLE_SINGLE_INCLUDES \
+	-DPANGO_DISABLE_SINGLE_INCLUDES \
+	-DGDK_DISABLE_SINGLE_INCLUDES \
+	-DGDK_PIXBUF_DISABLE_SINGLE_INCLUDES \
+	-DGTK_DISABLE_SINGLE_INCLUDES \
+	$(DISABLE_DEPRECATED) \
 	$(AM_CPPFLAGS)
 
 gucharmap_CFLAGS = \

@@ -6,7 +6,7 @@
 #ifndef UNICODE_NAMESLIST_H
 #define UNICODE_NAMESLIST_H
 
-#include <glib/gunicode.h>
+#include <glib.h>
 
 typedef struct _UnicharStringIndex UnicharStringIndex;
 typedef struct _UnicharUnichar UnicharUnichar;

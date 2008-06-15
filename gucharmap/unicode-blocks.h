@@ -6,7 +6,7 @@
 #ifndef UNICODE_BLOCKS_H
 #define UNICODE_BLOCKS_H
 
-#include <glib/gunicode.h>
+#include <glib.h>
 #include <glib/gi18n-lib.h>
 
 /* for extraction by intltool */

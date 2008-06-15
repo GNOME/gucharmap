@@ -6,7 +6,7 @@
 #ifndef UNICODE_SCRIPTS_H
 #define UNICODE_SCRIPTS_H
 
-#include <glib/gunicode.h>
+#include <glib.h>
 #include <glib/gi18n-lib.h>
 
 typedef struct _UnicodeScript UnicodeScript;

@@ -6,7 +6,7 @@
 #ifndef UNICODE_NAMES_H
 #define UNICODE_NAMES_H
 
-#include <glib/gunicode.h>
+#include <glib.h>
 
 #include <glib/gi18n-lib.h>
 

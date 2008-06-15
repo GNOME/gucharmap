@@ -6,7 +6,7 @@
 #ifndef UNICODE_VERSIONS_H
 #define UNICODE_VERSIONS_H
 
-#include <glib/gunicode.h>
+#include <glib.h>
 #include <glib/gi18n-lib.h>
 
 typedef struct {

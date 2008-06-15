@@ -6,7 +6,7 @@
 #ifndef UNICODE_CATEGORIES_H
 #define UNICODE_CATEGORIES_H
 
-#include <glib/gunicode.h>
+#include <glib.h>
 
 typedef struct _UnicodeCategory UnicodeCategory;
 

@@ -100,7 +100,7 @@ sub process_unicode_data_txt ($)
     print $out "#ifndef UNICODE_NAMES_H\n";
     print $out "#define UNICODE_NAMES_H\n\n";
 
-    print $out "#include <glib/gunicode.h>\n\n";
+    print $out "#include <glib.h>\n\n";
     print $out "#include <glib/gi18n-lib.h>\n\n";
 
     my @unicode_pairs;
@@ -232,7 +232,7 @@ EOT
     print $out "#ifndef UNICODE_CATEGORIES_H\n";
     print $out "#define UNICODE_CATEGORIES_H\n\n";
 
-    print $out "#include <glib/gunicode.h>\n\n";
+    print $out "#include <glib.h>\n\n";
 
     print $out "typedef struct _UnicodeCategory UnicodeCategory;\n\n";
 
@@ -308,7 +308,7 @@ sub process_unihan_zip ($)
     print $out "#ifndef UNICODE_UNIHAN_H\n";
     print $out "#define UNICODE_UNIHAN_H\n\n";
 
-    print $out "#include <glib/gunicode.h>\n\n";
+    print $out "#include <glib.h>\n\n";
 
     print $out "typedef struct _Unihan Unihan;\n\n";
 
@@ -611,7 +611,7 @@ sub process_nameslist_txt ($)
     print $out "#ifndef UNICODE_NAMESLIST_H\n";
     print $out "#define UNICODE_NAMESLIST_H\n\n";
 
-    print $out "#include <glib/gunicode.h>\n\n";
+    print $out "#include <glib.h>\n\n";
 
     print $out "typedef struct _UnicharStringIndex UnicharStringIndex;\n";
     print $out "typedef struct _UnicharUnichar UnicharUnichar;\n";
@@ -702,7 +702,7 @@ sub process_blocks_txt ($)
     print $out "#ifndef UNICODE_BLOCKS_H\n";
     print $out "#define UNICODE_BLOCKS_H\n\n";
 
-    print $out "#include <glib/gunicode.h>\n";
+    print $out "#include <glib.h>\n";
     print $out "#include <glib/gi18n-lib.h>\n\n";
 
     my @blocks;
@@ -830,7 +830,7 @@ sub process_scripts_txt ($)
     print $out "#ifndef UNICODE_SCRIPTS_H\n";
     print $out "#define UNICODE_SCRIPTS_H\n\n";
 
-    print $out "#include <glib/gunicode.h>\n";
+    print $out "#include <glib.h>\n";
     print $out "#include <glib/gi18n-lib.h>\n\n";
 
     print $out "typedef struct _UnicodeScript UnicodeScript;\n\n";
@@ -943,7 +943,7 @@ sub process_versions_txt ($)
     print $out "#ifndef UNICODE_VERSIONS_H\n";
     print $out "#define UNICODE_VERSIONS_H\n\n";
 
-    print $out "#include <glib/gunicode.h>\n";
+    print $out "#include <glib.h>\n";
     print $out "#include <glib/gi18n-lib.h>\n\n";
 
     print $out "typedef struct {\n";

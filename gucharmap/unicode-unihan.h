@@ -6,7 +6,7 @@
 #ifndef UNICODE_UNIHAN_H
 #define UNICODE_UNIHAN_H
 
-#include <glib/gunicode.h>
+#include <glib.h>
 
 typedef struct _Unihan Unihan;
 
