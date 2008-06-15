@@ -455,9 +455,10 @@ gucharmap_search_state_get_found_char (GucharmapSearchState *search_state)
 static void
 gucharmap_search_state_free (GucharmapSearchState *search_state)
 {
+  g_object_unref (search_state->list);
   g_free (search_state->search_string_nfd_temp);
   g_free (search_state->search_string_nfc);
-  g_free (search_state);
+  g_slice_free (GucharmapSearchState, search_state);
 }
 
 /**
@@ -475,7 +476,7 @@ gucharmap_search_state_free (GucharmapSearchState *search_state)
  * Return value: the new #GucharmapSearchState.
  **/
 static GucharmapSearchState * 
-gucharmap_search_state_new (const GucharmapCodepointList *list, 
+gucharmap_search_state_new (GucharmapCodepointList       *list,
                             const gchar                  *search_string, 
                             gint                          start_index, 
                             GucharmapDirection            direction, 
@@ -487,9 +488,9 @@ gucharmap_search_state_new (const GucharmapCodepointList *list,
 
   g_assert (direction == GUCHARMAP_DIRECTION_BACKWARD || direction == GUCHARMAP_DIRECTION_FORWARD);
 
-  search_state = g_new (GucharmapSearchState, 1);
+  search_state = g_slice_new (GucharmapSearchState);
 
-  search_state->list = (GucharmapCodepointList *) list;
+  search_state->list = g_object_ref (list);
   search_state->list_num_chars = gucharmap_codepoint_list_get_last_index (search_state->list) + 1;
 
   search_state->search_string = g_strdup (search_string);

@@ -65,8 +65,8 @@ GucharmapChaptersModel *gucharmap_chapters_view_get_model (GucharmapChaptersView
 
 gboolean           gucharmap_chapters_view_select_character (GucharmapChaptersView *view,
                                                              gunichar           wc);
-GucharmapCodepointList *                gucharmap_chapters_view_get_codepoint_list      (GucharmapChaptersView *view);
-G_CONST_RETURN GucharmapCodepointList * gucharmap_chapters_view_get_book_codepoint_list (GucharmapChaptersView *view);
+GucharmapCodepointList * gucharmap_chapters_view_get_codepoint_list      (GucharmapChaptersView *view);
+GucharmapCodepointList * gucharmap_chapters_view_get_book_codepoint_list (GucharmapChaptersView *view);
 
 void               gucharmap_chapters_view_next         (GucharmapChaptersView *view);
 void               gucharmap_chapters_view_previous     (GucharmapChaptersView *view);

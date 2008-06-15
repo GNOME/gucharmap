@@ -1238,7 +1238,5 @@ gucharmap_charmap_get_book_codepoint_list (GucharmapCharmap *charmap)
 {
   GucharmapCharmapPrivate *priv = charmap->priv;
 
-  GucharmapCodepointList *codepoint_list;
-  codepoint_list = (GucharmapCodepointList *) gucharmap_chapters_view_get_book_codepoint_list (priv->chapters_view);
-  return g_object_ref (codepoint_list);
+  return gucharmap_chapters_view_get_book_codepoint_list (priv->chapters_view);
 }

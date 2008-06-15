@@ -61,7 +61,7 @@ struct _GucharmapChaptersModelClass
                                   GtkTreeIter *iter);
   GucharmapCodepointList * (* get_codepoint_list) (GucharmapChaptersModel *chapters,
                                                    GtkTreeIter *iter);
-  G_CONST_RETURN GucharmapCodepointList * (* get_book_codepoint_list) (GucharmapChaptersModel *chapters);
+  GucharmapCodepointList * (* get_book_codepoint_list) (GucharmapChaptersModel *chapters);
 };
 
 
@@ -70,17 +70,17 @@ enum {
   CHAPTERS_LABEL_COL = 1
 };
 
-GType                                   gucharmap_chapters_model_get_type                (void);
-GucharmapCodepointList *                gucharmap_chapters_model_get_codepoint_list      (GucharmapChaptersModel *chapters,
+GType                    gucharmap_chapters_model_get_type                (void);
+GucharmapCodepointList * gucharmap_chapters_model_get_codepoint_list      (GucharmapChaptersModel *chapters,
                                                                                           GtkTreeIter            *iter);
-const char *                            gucharmap_chapters_model_get_title               (GucharmapChaptersModel *chapters);
-G_CONST_RETURN GucharmapCodepointList * gucharmap_chapters_model_get_book_codepoint_list (GucharmapChaptersModel *chapters);
-gboolean                                gucharmap_chapters_model_character_to_iter       (GucharmapChaptersModel *chapters,
-                                                                                          gunichar                wc,
-                                                                                          GtkTreeIter            *iter);
-gboolean                                gucharmap_chapters_model_id_to_iter              (GucharmapChaptersModel *model,
-                                                                                          const char             *id,
-                                                                                          GtkTreeIter            *iter);
+const char *             gucharmap_chapters_model_get_title               (GucharmapChaptersModel *chapters);
+GucharmapCodepointList * gucharmap_chapters_model_get_book_codepoint_list (GucharmapChaptersModel *chapters);
+gboolean                 gucharmap_chapters_model_character_to_iter       (GucharmapChaptersModel *chapters,
+                                                                           gunichar                wc,
+                                                                           GtkTreeIter            *iter);
+gboolean                 gucharmap_chapters_model_id_to_iter              (GucharmapChaptersModel *model,
+                                                                           const char             *id,
+                                                                           GtkTreeIter            *iter);
 
 G_END_DECLS
 

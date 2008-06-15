@@ -85,7 +85,7 @@ get_codepoint_list (GucharmapChaptersModel *chapters,
   return gucharmap_block_codepoint_list_new (unicode_block->start, unicode_block->end);
 }
 
-static G_CONST_RETURN GucharmapCodepointList * 
+static GucharmapCodepointList *
 get_book_codepoint_list (GucharmapChaptersModel *model)
 {
   GucharmapChaptersModelPrivate *model_priv = model->priv;
@@ -94,7 +94,7 @@ get_book_codepoint_list (GucharmapChaptersModel *model)
     model_priv->book_list = gucharmap_block_codepoint_list_new (0, UNICHAR_MAX);
   }
 
-  return model_priv->book_list;
+  return g_object_ref (model_priv->book_list);
 }
 
 /* XXX linear search */

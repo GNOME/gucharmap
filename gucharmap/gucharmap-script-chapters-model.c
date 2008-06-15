@@ -93,7 +93,7 @@ append_script (GtkTreeModel                 *model,
   return FALSE;
 }
 
-static G_CONST_RETURN GucharmapCodepointList * 
+static GucharmapCodepointList *
 get_book_codepoint_list (GucharmapChaptersModel *chapters)
 {
   GucharmapChaptersModelPrivate *priv = chapters->priv;
@@ -106,7 +106,7 @@ get_book_codepoint_list (GucharmapChaptersModel *chapters)
       gtk_tree_model_foreach (model, (GtkTreeModelForeachFunc) append_script, priv->book_list);
     }
 
-  return priv->book_list;
+  return g_object_ref (priv->book_list);
 }
 
 static gboolean
@@ -134,7 +134,6 @@ gucharmap_script_chapters_model_class_init (GucharmapScriptChaptersModelClass *c
   chapters_class->character_to_iter = character_to_iter;
   chapters_class->get_codepoint_list = get_codepoint_list;
   chapters_class->get_book_codepoint_list = get_book_codepoint_list;
-
 }
 
 G_DEFINE_TYPE (GucharmapScriptChaptersModel, gucharmap_script_chapters_model, GUCHARMAP_TYPE_CHAPTERS_MODEL)

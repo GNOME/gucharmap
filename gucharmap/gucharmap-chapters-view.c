@@ -256,10 +256,10 @@ gucharmap_chapters_view_get_codepoint_list (GucharmapChaptersView *view)
  * gucharmap_chapters_view_get_codepoint_list:
  * @view: a #GucharmapChaptersView
  *
- * Return value: a #GucharmapCodepointList representing all the characters
- * in all the chapters. It should not be modified or freed.
+ * Return value: a reference to a #GucharmapCodepointList representing all the characters
+ * in all the chapters. It should not be modified, but must be g_object_unref()'d after use.
  **/
-G_CONST_RETURN GucharmapCodepointList * 
+GucharmapCodepointList *
 gucharmap_chapters_view_get_book_codepoint_list (GucharmapChaptersView *view)
 {
   GucharmapChaptersViewPrivate *priv = view->priv;

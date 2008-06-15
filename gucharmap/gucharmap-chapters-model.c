@@ -89,10 +89,10 @@ gucharmap_chapters_model_get_codepoint_list (GucharmapChaptersModel *chapters,
  * gucharmap_chapters_model_get_codepoint_list:
  * @chapters: a #GucharmapChaptersModel
  *
- * Return value: a #GucharmapCodepointList representing all the characters
- * in all the chapters. It should not be modified or freed.
+ * Return value: a reference to a #GucharmapCodepointList representing all the characters
+ * in all the chapters. It should not be modified, but must be g_object_unref()'d after use.
  **/
-G_CONST_RETURN GucharmapCodepointList * 
+GucharmapCodepointList *
 gucharmap_chapters_model_get_book_codepoint_list (GucharmapChaptersModel *chapters)
 {
   g_return_val_if_fail (GUCHARMAP_IS_CHAPTERS_MODEL (chapters), NULL);
