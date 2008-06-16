@@ -25,6 +25,7 @@ pkgconfig_DATA = gucharmap-2.pc
 
 EXTRA_DIST = \
 	ChangeLog.pre-2-23 \
+	ChangeLog.README \
 	autogen.sh \
 	gtkrc.win32 \
 	gnome-doc-utils.make \
