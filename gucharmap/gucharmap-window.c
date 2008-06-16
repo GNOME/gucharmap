@@ -811,10 +811,7 @@ charmap_sync_active_character (GtkWidget *widget,
 static void
 gucharmap_window_init (GucharmapWindow *guw)
 {
-  GtkWidget *big_vbox;
-  GtkWidget *hbox;
-  GtkWidget *button;
-  GtkWidget *label;
+  GtkWidget *big_vbox, *hbox, *bbox, *button, *label;
   GucharmapChartable *chartable;
   /* tooltips are NULL because they are never actually shown in the program */
   const GtkActionEntry menu_entries[] =
@@ -953,10 +950,14 @@ gucharmap_window_init (GucharmapWindow *guw)
   gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
   gtk_widget_show (label);
 
+  bbox = gtk_hbutton_box_new ();
+
   button = gtk_button_new_from_stock (GTK_STOCK_COPY);
   gtk_widget_set_tooltip_text (button, _("Copy to the clipboard."));
   g_signal_connect (G_OBJECT (button), "clicked",
                     G_CALLBACK (edit_copy), guw);
+  gtk_box_pack_start (GTK_BOX (bbox), button, FALSE, FALSE, 0);
+  gtk_widget_show (button);
 
   gtk_widget_set_sensitive (button, FALSE);
   guw->text_to_copy_entry = gtk_entry_new ();
@@ -967,8 +968,8 @@ gucharmap_window_init (GucharmapWindow *guw)
   gtk_box_pack_start (GTK_BOX (hbox), guw->text_to_copy_entry, TRUE, TRUE, 0);
   gtk_widget_show (guw->text_to_copy_entry);
 
-  gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
-  gtk_widget_show (button);
+  gtk_box_pack_end (GTK_BOX (hbox), bbox, FALSE, FALSE, 0);
+  gtk_widget_show (bbox);
 
   gtk_box_pack_start (GTK_BOX (big_vbox), hbox, FALSE, FALSE, 0);
   gtk_widget_show (hbox);
