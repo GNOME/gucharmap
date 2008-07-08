@@ -847,6 +847,13 @@ gucharmap_search_dialog_new (GucharmapWindow *guw)
   return GTK_WIDGET (search_dialog);
 }
 
+void
+gucharmap_search_dialog_present (GucharmapSearchDialog *search_dialog)
+{
+  gtk_widget_grab_focus (GUCHARMAP_SEARCH_DIALOG_GET_PRIVATE (search_dialog)->entry);
+  gtk_window_present (GTK_WINDOW (search_dialog));
+}
+
 gdouble
 gucharmap_search_dialog_get_completed (GucharmapSearchDialog *search_dialog)
 {

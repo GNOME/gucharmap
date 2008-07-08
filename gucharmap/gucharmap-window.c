@@ -284,7 +284,7 @@ search_find (GtkAction       *action,
       g_signal_connect (guw->search_dialog, "search-finish", G_CALLBACK (search_finish), guw);
     }
 
-  gtk_window_present (GTK_WINDOW (guw->search_dialog));
+  gucharmap_search_dialog_present (GUCHARMAP_SEARCH_DIALOG (guw->search_dialog));
 }
 
 static void
