@@ -1,22 +1,22 @@
 # Përkthimi i mesazheve të gucharmap në shqip
 # This file is distributed under the same license as the gucharmap package.
-# Copyright (C) 2006, 2007 Free Software Foundation, Inc.
+# Copyright (C) 2006, 2007, 2008 Free Software Foundation, Inc.
 #
-# Laurent Dhima <laurenti@alblinux.net>, 2003, 2004, 2006, 2007.
+# Laurent Dhima <laurenti@alblinux.net>, 2003, 2004, 2006, 2007, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: gucharmap HEAD\n"
+"Project-Id-Version: gucharmap gnome-2-22\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-19 11:31+0100\n"
-"PO-Revision-Date: 2007-03-19 11:29+0100\n"
+"POT-Creation-Date: 2008-03-21 11:55+0100\n"
+"PO-Revision-Date: 2008-03-21 18:47+0100\n"
 "Last-Translator: Laurent Dhima <laurenti@alblinux.net>\n"
-"Language-Team: albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
+"Language-Team: Albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../gucharmap.desktop.in.h:1 ../gucharmap/gucharmap-window.c:837
+#: ../gucharmap.desktop.in.h:1 ../gucharmap/gucharmap-window.c:885
 msgid "Character Map"
 msgstr "Harta e simboleve"
 
@@ -24,118 +24,129 @@ msgstr "Harta e simboleve"
 msgid "Insert special characters into documents"
 msgstr "Shto simbole të veçantë në dokumente"
 
-#: ../gucharmap/gucharmap-charmap.c:268
+#: ../gucharmap/gucharmap-charmap.c:269
 msgid "Canonical decomposition:"
 msgstr "Dekompozimi kanonik:"
 
-#: ../gucharmap/gucharmap-charmap.c:309 ../gucharmap/gucharmap-table.c:295
+#: ../gucharmap/gucharmap-charmap.c:310 ../gucharmap/gucharmap-table.c:286
 msgid "[not a printable character]"
 msgstr "[nuk është një simbol i printueshëm]"
 
-#: ../gucharmap/gucharmap-charmap.c:323
+#: ../gucharmap/gucharmap-charmap.c:324
 msgid "General Character Properties"
 msgstr "Pronësitë e përgjithshme të simbolit"
 
 #. character category
-#: ../gucharmap/gucharmap-charmap.c:326
+#: ../gucharmap/gucharmap-charmap.c:327
 msgid "Unicode category:"
 msgstr "Kategoria unicode:"
 
-#: ../gucharmap/gucharmap-charmap.c:335
+#: ../gucharmap/gucharmap-charmap.c:336
 msgid "Various Useful Representations"
 msgstr "Përfaqsime të ndryshme të nevojshme"
 
-#: ../gucharmap/gucharmap-charmap.c:345
+#: ../gucharmap/gucharmap-charmap.c:346
 msgid "UTF-8:"
 msgstr "UTF-8:"
 
-#: ../gucharmap/gucharmap-charmap.c:353
+#: ../gucharmap/gucharmap-charmap.c:354
 msgid "UTF-16:"
 msgstr "UTF-16:"
 
-#: ../gucharmap/gucharmap-charmap.c:364
+# (pofilter) unchanged: please translate
+#: ../gucharmap/gucharmap-charmap.c:365
 msgid "C octal escaped UTF-8:"
 msgstr "C octal escaped UTF-8:"
 
-#: ../gucharmap/gucharmap-charmap.c:374
+#: ../gucharmap/gucharmap-charmap.c:375
 msgid "XML decimal entity:"
 msgstr "Entiteti dhjetor XML:"
 
-#: ../gucharmap/gucharmap-charmap.c:385
+#: ../gucharmap/gucharmap-charmap.c:386
 msgid "Annotations and Cross References"
 msgstr "Shënime dhe riferime të kryqëzuara"
 
-#: ../gucharmap/gucharmap-charmap.c:392
+#: ../gucharmap/gucharmap-charmap.c:393
 msgid "Alias names:"
 msgstr "Pseudonime:"
 
-#: ../gucharmap/gucharmap-charmap.c:401
+#: ../gucharmap/gucharmap-charmap.c:402
 msgid "Notes:"
 msgstr "Shënime:"
 
-#: ../gucharmap/gucharmap-charmap.c:410
+#: ../gucharmap/gucharmap-charmap.c:411
 msgid "See also:"
 msgstr "Shiko gjithashtu:"
 
-#: ../gucharmap/gucharmap-charmap.c:419
+#: ../gucharmap/gucharmap-charmap.c:420
 msgid "Approximate equivalents:"
 msgstr "Ekuivalentë të afërt:"
 
-#: ../gucharmap/gucharmap-charmap.c:428
+#: ../gucharmap/gucharmap-charmap.c:429
 msgid "Equivalents:"
 msgstr "Ekuivalentë:"
 
-#: ../gucharmap/gucharmap-charmap.c:444
+#: ../gucharmap/gucharmap-charmap.c:445
 msgid "CJK Ideograph Information"
 msgstr "Përcaktimi i ideogramave CJK"
 
-#: ../gucharmap/gucharmap-charmap.c:449
+#: ../gucharmap/gucharmap-charmap.c:450
 msgid "Definition in English:"
 msgstr "Përcaktimi në anglisht:"
 
-#: ../gucharmap/gucharmap-charmap.c:454
+#: ../gucharmap/gucharmap-charmap.c:455
 msgid "Mandarin Pronunciation:"
 msgstr "Shqiptimi mandarin:"
 
-#: ../gucharmap/gucharmap-charmap.c:459
+#: ../gucharmap/gucharmap-charmap.c:460
 msgid "Cantonese Pronunciation:"
 msgstr "Shqiptimi cantonese:"
 
-#: ../gucharmap/gucharmap-charmap.c:464
+#: ../gucharmap/gucharmap-charmap.c:465
 msgid "Japanese On Pronunciation:"
 msgstr "Shqiptimi japonez on:"
 
-#: ../gucharmap/gucharmap-charmap.c:469
+#: ../gucharmap/gucharmap-charmap.c:470
 msgid "Japanese Kun Pronunciation:"
 msgstr "Shqiptimi japonez kun:"
 
-#: ../gucharmap/gucharmap-charmap.c:474
+#: ../gucharmap/gucharmap-charmap.c:475
 msgid "Tang Pronunciation:"
 msgstr "Shqiptimi tang:"
 
-#: ../gucharmap/gucharmap-charmap.c:479
+#: ../gucharmap/gucharmap-charmap.c:480
 msgid "Korean Pronunciation:"
 msgstr "Shqiptimi korean:"
 
-#: ../gucharmap/gucharmap-charmap.c:780
+#: ../gucharmap/gucharmap-charmap.c:788
 msgid "Characte_r Table"
 msgstr "Tabela e simbolev_e"
 
-#: ../gucharmap/gucharmap-charmap.c:783
+#: ../gucharmap/gucharmap-charmap.c:791
 msgid "Character _Details"
 msgstr "_Detajet e simboleve"
 
-#: ../gucharmap/gucharmap-mini-fontsel.c:205
+#: ../gucharmap/gucharmap-mini-fontsel.c:228
 msgid "Font"
 msgstr "Gërmat"
 
-#: ../gucharmap/gucharmap-mini-fontsel.c:212
+#: ../gucharmap/gucharmap-mini-fontsel.c:242
 msgid "Font Family"
 msgstr "Familja e gërmave"
 
-#: ../gucharmap/gucharmap-mini-fontsel.c:232
+#: ../gucharmap/gucharmap-mini-fontsel.c:260
 msgid "Font Size"
 msgstr "Madhësia e gërmave"
+
+# (pofilter) unchanged: please translate
+#: ../gucharmap/gucharmap-settings.c:61 ../gucharmap/gucharmap-window.c:538
+msgid "_File"
+msgstr "_File"
+
+# (pofilter) simplecaps: checks the capitalisation of two strings isn't wildly different
+#: ../gucharmap/gucharmap-settings.c:92
+msgid "GConf could not be initialized."
+msgstr "E pamundur përgatitja e GConf."
 
 #. Unicode assigns "Common" as the script name for any character not
 #. * specifically listed in Scripts.txt
@@ -144,20 +155,20 @@ msgstr "Madhësia e gërmave"
 msgid "Common"
 msgstr "Të përbashkët"
 
-#: ../gucharmap/gucharmap-table.c:1517
+#: ../gucharmap/gucharmap-table.c:1497
 msgid "Unknown character, unable to identify."
 msgstr "Simbol i panjohur, identifikimi është i pamundur."
 
-#: ../gucharmap/gucharmap-table.c:1519
-#: ../gucharmap/gucharmap-search-dialog.c:595
+#: ../gucharmap/gucharmap-table.c:1499
+#: ../gucharmap/gucharmap-search-dialog.c:596
 msgid "Not found."
 msgstr "Nuk u gjet."
 
-#: ../gucharmap/gucharmap-table.c:1522
+#: ../gucharmap/gucharmap-table.c:1502
 msgid "Character found."
 msgstr "Simboli u gjet."
 
-#: ../gucharmap/gucharmap-table.c:1586
+#: ../gucharmap/gucharmap-table.c:1566
 msgid "Character Table"
 msgstr "Tabela e simboleve"
 
@@ -309,11 +320,11 @@ msgstr "Ndarës, paragraf"
 msgid "Separator, Space"
 msgstr "Ndarës, hapësirë"
 
-#: ../gucharmap/gucharmap-window.c:190
+#: ../gucharmap/gucharmap-window.c:181
 msgid "Searching..."
 msgstr "Duke kërkuar..."
 
-#: ../gucharmap/gucharmap-window.c:337
+#: ../gucharmap/gucharmap-window.c:381
 msgid ""
 "Gucharmap is free software; you can redistribute it and/or modify it under "
 "the terms of the GNU General Public License as published by the Free "
@@ -325,7 +336,7 @@ msgstr ""
 "nga Free Software Foundation; duke zgjedhur midis versionit 2 të Liçencës "
 "ose (sipas dëshirës) çdo version tjetër të mëvonshëm."
 
-#: ../gucharmap/gucharmap-window.c:341
+#: ../gucharmap/gucharmap-window.c:385
 msgid ""
 "Permission is hereby granted, free of charge, to any person obtaining a copy "
 "of the Unicode data files to deal in them without restriction, including "
@@ -337,7 +348,8 @@ msgstr ""
 "kufizim, përfshirë pa kufizim të drejtën e përdorimit, kopjimit, ndryshimit, "
 "bashkimit, publikimit, shpërndarjes, dhe/apo shitjes së kopjeve."
 
-#: ../gucharmap/gucharmap-window.c:345
+# (pofilter) acronyms: acronyms should not be translated: WITHOUT, ANY, WARRANTY, MERCHANTABILITY, FITNESS, FOR, PARTICULAR, PURPOSE, GNU
+#: ../gucharmap/gucharmap-window.c:389
 msgid ""
 "Gucharmap and the Unicode data files are distributed in the hope that they "
 "will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty "
@@ -349,7 +361,7 @@ msgstr ""
 "PËRDORIMIT PËR NJË QËLLIM TË VEÇANTË.  Shiko Liçencën Publike të "
 "Përgjithshme dhe Copyright e Unicode për hollësi të tjera."
 
-#: ../gucharmap/gucharmap-window.c:349
+#: ../gucharmap/gucharmap-window.c:393
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "Gucharmap; if not, write to the Free Software Foundation, Inc., 59 Temple "
@@ -359,7 +371,7 @@ msgstr ""
 "bashku me Gucharmap; nëse jo, kërkoje tek Free Software Foundation, Inc., 59 "
 "Temple Place, Suite 330, Boston, MA  02111-1307  USA"
 
-#: ../gucharmap/gucharmap-window.c:352
+#: ../gucharmap/gucharmap-window.c:396
 msgid ""
 "Also you should have received a copy of the Unicode Copyright along with "
 "Gucharmap; you can always find it at Unicode's website: http://www.unicode."
@@ -369,7 +381,7 @@ msgstr ""
 "Gucharmap; sidoqoftë mund ta merrni tek siti i Unicode: http://www.unicode."
 "org/copyright.html"
 
-#: ../gucharmap/gucharmap-window.c:363
+#: ../gucharmap/gucharmap-window.c:409
 msgid ""
 "GNOME Character Map\n"
 "based on the Unicode Character Database"
@@ -377,118 +389,124 @@ msgstr ""
 "Harta e simboleve të GNOME\n"
 "bazuar në databazën e simboleve Unicode"
 
-#: ../gucharmap/gucharmap-window.c:369 ../gucharmap/main.c:76
+# (pofilter) unchanged: please translate
+#: ../gucharmap/gucharmap-window.c:415 ../gucharmap/main.c:58
 msgid "Gucharmap"
 msgstr "Gucharmap"
 
-#: ../gucharmap/gucharmap-window.c:371
+# (pofilter) credits: checks for messages containing translation credits instead of normal translations.
+#: ../gucharmap/gucharmap-window.c:417
 msgid "translator-credits"
 msgstr "Laurent Dhima <laurenti@alblinux.net>"
 
-#: ../gucharmap/gucharmap-window.c:468 ../gucharmap/gucharmap-window.c:513
+#: ../gucharmap/gucharmap-window.c:516 ../gucharmap/gucharmap-window.c:565
 msgid "Next Script"
 msgstr "Script-i në vazhdim"
 
-#: ../gucharmap/gucharmap-window.c:468 ../gucharmap/gucharmap-window.c:515
+#: ../gucharmap/gucharmap-window.c:516 ../gucharmap/gucharmap-window.c:567
 msgid "Previous Script"
 msgstr "Script-i paraardhës"
 
-#: ../gucharmap/gucharmap-window.c:473 ../gucharmap/gucharmap-window.c:627
+#: ../gucharmap/gucharmap-window.c:522 ../gucharmap/gucharmap-window.c:677
 msgid "Next Block"
 msgstr "Blloku në vazhdim"
 
-#: ../gucharmap/gucharmap-window.c:473 ../gucharmap/gucharmap-window.c:627
+#: ../gucharmap/gucharmap-window.c:522 ../gucharmap/gucharmap-window.c:677
 msgid "Previous Block"
 msgstr "Blloku paraardhës"
 
-#: ../gucharmap/gucharmap-window.c:486
-msgid "_File"
-msgstr "_File"
-
-#: ../gucharmap/gucharmap-window.c:487
+#: ../gucharmap/gucharmap-window.c:539
 msgid "_View"
 msgstr "_Shfaq"
 
-#: ../gucharmap/gucharmap-window.c:488
+#: ../gucharmap/gucharmap-window.c:540
 msgid "_Search"
 msgstr "_Kërko"
 
-#: ../gucharmap/gucharmap-window.c:489
+#: ../gucharmap/gucharmap-window.c:541
 msgid "_Go"
 msgstr "_Shko"
 
-#: ../gucharmap/gucharmap-window.c:490
+#: ../gucharmap/gucharmap-window.c:542
 msgid "_Help"
 msgstr "_Ndihmë"
 
-#: ../gucharmap/gucharmap-window.c:492
+#: ../gucharmap/gucharmap-window.c:544
 msgid "_Quit"
 msgstr "_Dalja"
 
-#: ../gucharmap/gucharmap-window.c:495
+#: ../gucharmap/gucharmap-window.c:547
 msgid "Zoom _In"
 msgstr "Z_madho"
 
-#: ../gucharmap/gucharmap-window.c:497
+#: ../gucharmap/gucharmap-window.c:549
 msgid "Zoom _Out"
 msgstr "Z_vogëlo"
 
-#: ../gucharmap/gucharmap-window.c:499
+#: ../gucharmap/gucharmap-window.c:551
 msgid "_Normal Size"
 msgstr "Madhësia _Normale"
 
-#: ../gucharmap/gucharmap-window.c:502
+#: ../gucharmap/gucharmap-window.c:554
 msgid "_Find..."
 msgstr "_Gjej..."
 
-#: ../gucharmap/gucharmap-window.c:504
+#: ../gucharmap/gucharmap-window.c:556
 msgid "Find _Next"
 msgstr "Gjej _pasardhësen"
 
-#: ../gucharmap/gucharmap-window.c:506
+#: ../gucharmap/gucharmap-window.c:558
 msgid "Find _Previous"
 msgstr "Gjej p_araardhësen"
 
-#: ../gucharmap/gucharmap-window.c:509
+#: ../gucharmap/gucharmap-window.c:561
 msgid "_Next Character"
 msgstr "Simboli _pasardhës"
 
-#: ../gucharmap/gucharmap-window.c:511
+#: ../gucharmap/gucharmap-window.c:563
 msgid "_Previous Character"
 msgstr "Simboli p_araardhës"
 
-#: ../gucharmap/gucharmap-window.c:519
+#: ../gucharmap/gucharmap-window.c:570
 msgid "_Contents"
 msgstr "_Përmbajtja"
 
-#: ../gucharmap/gucharmap-window.c:522
+#: ../gucharmap/gucharmap-window.c:572
 msgid "_About"
 msgstr "_Informacione"
 
-#: ../gucharmap/gucharmap-window.c:528
+#: ../gucharmap/gucharmap-window.c:578
 msgid "By _Script"
-msgstr "Nga _Script"
+msgstr "Për _shkrim"
 
-#: ../gucharmap/gucharmap-window.c:530
+#: ../gucharmap/gucharmap-window.c:580
 msgid "By _Unicode Block"
-msgstr "Sipas bllokut _Unicode"
+msgstr "Për bllok _Unicode"
 
-#: ../gucharmap/gucharmap-window.c:594
-#, fuzzy
-msgid "Snap Columns to Power of Two"
-msgstr "Kollonat nga"
+# (pofilter) accelerators: accelerator _ is missing from translation
+# (pofilter) isreview: Check if the unit has been marked review.
+#: ../gucharmap/gucharmap-window.c:642
+msgid "Snap _Columns to Power of Two"
+msgstr "Ndaj _kollonat në fuqi të dytë"
 
-#: ../gucharmap/gucharmap-window.c:727
+#: ../gucharmap/gucharmap-window.c:775
 msgid "_Text to copy:"
 msgstr "_Teksti që duhet kopjuar:"
 
-#: ../gucharmap/gucharmap-window.c:748
+#: ../gucharmap/gucharmap-window.c:796
 msgid "Copy to the clipboard."
 msgstr "Kopjoje tek shënimet."
 
-#: ../gucharmap/main.c:36
+# (pofilter) sentencecount: The number of sentences differ: 1 versus 2
+#: ../gucharmap/main.c:41
 msgid "Font to start with; ex: 'Serif 27'"
 msgstr "Lloji i gërmës nga duhet filluar, p.sh. 'Serif 27'"
+
+# (pofilter) accelerators: accelerator _ does not occur in original and should not be in translation
+# (pofilter) acronyms: acronyms should not be translated: FONT
+#: ../gucharmap/main.c:41
+msgid "FONT"
+msgstr "LLOJI_GËRMAVE"
 
 #: ../gucharmap/unicode-blocks.h:20
 msgid "Basic Latin"
@@ -522,6 +540,7 @@ msgstr "Shenja diakritike të kombinuara"
 msgid "Greek and Coptic"
 msgstr "Greqisht dhe coptic"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:28 ../gucharmap/unicode-scripts.h:30
 msgid "Cyrillic"
 msgstr "Cyrillic"
@@ -550,18 +569,22 @@ msgstr "Siriane"
 msgid "Arabic Supplement"
 msgstr "Arabe shtesë"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:35 ../gucharmap/unicode-scripts.h:76
 msgid "Thaana"
 msgstr "Thaana"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:36
 msgid "NKo"
 msgstr "NKo"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:37 ../gucharmap/unicode-scripts.h:32
 msgid "Devanagari"
 msgstr "Devanagari"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:38 ../gucharmap/unicode-scripts.h:19
 msgid "Bengali"
 msgstr "Bengali"
@@ -570,18 +593,22 @@ msgstr "Bengali"
 msgid "Gurmukhi"
 msgstr "Gurmuki"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:40 ../gucharmap/unicode-scripts.h:38
 msgid "Gujarati"
 msgstr "Gujarati"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:41 ../gucharmap/unicode-scripts.h:62
 msgid "Oriya"
 msgstr "Oriya"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:42 ../gucharmap/unicode-scripts.h:74
 msgid "Tamil"
 msgstr "Tamil"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:43 ../gucharmap/unicode-scripts.h:75
 msgid "Telugu"
 msgstr "Telugu"
@@ -594,14 +621,17 @@ msgstr "Kanada"
 msgid "Malayalam"
 msgstr "Malajalam"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:46 ../gucharmap/unicode-scripts.h:68
 msgid "Sinhala"
 msgstr "Sinhala"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:47 ../gucharmap/unicode-scripts.h:77
 msgid "Thai"
 msgstr "Thai"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:48 ../gucharmap/unicode-scripts.h:50
 msgid "Lao"
 msgstr "Lao"
@@ -610,6 +640,7 @@ msgstr "Lao"
 msgid "Tibetan"
 msgstr "Tibetiane"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:50 ../gucharmap/unicode-scripts.h:56
 msgid "Myanmar"
 msgstr "Myanmar"
@@ -618,6 +649,7 @@ msgstr "Myanmar"
 msgid "Georgian"
 msgstr "Gjeorgjisht"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:52
 msgid "Hangul Jamo"
 msgstr "Hangul Jamo"
@@ -630,38 +662,47 @@ msgstr "Etiope"
 msgid "Ethiopic Supplement"
 msgstr "Etiope shtesë"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:55 ../gucharmap/unicode-scripts.h:25
 msgid "Cherokee"
 msgstr "Cherokee"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:56
 msgid "Unified Canadian Aboriginal Syllabics"
 msgstr "Unified Canadian Aboriginal Syllabics"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:57 ../gucharmap/unicode-scripts.h:59
 msgid "Ogham"
 msgstr "Ogham"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:58 ../gucharmap/unicode-scripts.h:66
 msgid "Runic"
 msgstr "Runic"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:59 ../gucharmap/unicode-scripts.h:71
 msgid "Tagalog"
 msgstr "Tagalog"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:60 ../gucharmap/unicode-scripts.h:42
 msgid "Hanunoo"
 msgstr "Hanunoo"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:61 ../gucharmap/unicode-scripts.h:23
 msgid "Buhid"
 msgstr "Buhid"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:62 ../gucharmap/unicode-scripts.h:72
 msgid "Tagbanwa"
 msgstr "Tagbanwa"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:63 ../gucharmap/unicode-scripts.h:49
 msgid "Khmer"
 msgstr "Khmer"
@@ -670,10 +711,12 @@ msgstr "Khmer"
 msgid "Mongolian"
 msgstr "Mongoliane"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:65 ../gucharmap/unicode-scripts.h:52
 msgid "Limbu"
 msgstr "Limbu"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:66 ../gucharmap/unicode-scripts.h:73
 msgid "Tai Le"
 msgstr "Tai Le"
@@ -686,10 +729,12 @@ msgstr "Tai Lue e re"
 msgid "Khmer Symbols"
 msgstr "Simbole Khmer"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:69 ../gucharmap/unicode-scripts.h:22
 msgid "Buginese"
 msgstr "Buginese"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:70 ../gucharmap/unicode-scripts.h:18
 msgid "Balinese"
 msgstr "Balinese"
@@ -778,6 +823,7 @@ msgstr "Forma gjeometrike"
 msgid "Miscellaneous Symbols"
 msgstr "Simbole të ndryshëm"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:92
 msgid "Dingbats"
 msgstr "Dingbats"
@@ -810,6 +856,7 @@ msgstr "Operatorë matematikë suplementarë"
 msgid "Miscellaneous Symbols and Arrows"
 msgstr "Simbole e shigjeta të ndryshme"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:100 ../gucharmap/unicode-scripts.h:35
 msgid "Glagolitic"
 msgstr "Glagolitic"
@@ -818,6 +865,7 @@ msgstr "Glagolitic"
 msgid "Latin Extended-C"
 msgstr "Latinishte e zgjeruar-C"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:102 ../gucharmap/unicode-scripts.h:27
 msgid "Coptic"
 msgstr "Coptic"
@@ -826,6 +874,7 @@ msgstr "Coptic"
 msgid "Georgian Supplement"
 msgstr "Georgjisht shtesë"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:104 ../gucharmap/unicode-scripts.h:79
 msgid "Tifinagh"
 msgstr "Tifinagh"
@@ -854,14 +903,17 @@ msgstr "Simbole përshkrimi ideografike"
 msgid "CJK Symbols and Punctuation"
 msgstr "Simbole dhe pikëshënime CJK"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:111 ../gucharmap/unicode-scripts.h:44
 msgid "Hiragana"
 msgstr "Hiragana"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:112 ../gucharmap/unicode-scripts.h:47
 msgid "Katakana"
 msgstr "Katakana"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:113 ../gucharmap/unicode-scripts.h:20
 msgid "Bopomofo"
 msgstr "Bopomofo"
@@ -870,6 +922,7 @@ msgstr "Bopomofo"
 msgid "Hangul Compatibility Jamo"
 msgstr "Hangul kompatibël jamo"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:115
 msgid "Kanbun"
 msgstr "Kanbun"
@@ -878,6 +931,7 @@ msgstr "Kanbun"
 msgid "Bopomofo Extended"
 msgstr "Bopomofo e zgjeruar"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:117
 msgid "CJK Strokes"
 msgstr "CJK Strokes"
@@ -906,6 +960,7 @@ msgstr "Simbole heksagrame Yijing"
 msgid "CJK Unified Ideographs"
 msgstr "Ideografikë të unifikuar CJK"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:124
 msgid "Yi Syllables"
 msgstr "Yi Syllables"
@@ -914,6 +969,7 @@ msgstr "Yi Syllables"
 msgid "Yi Radicals"
 msgstr "Radikale Yi"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:126
 msgid "Modifier Tone Letters"
 msgstr "Modifier Tone Letters"
@@ -922,14 +978,17 @@ msgstr "Modifier Tone Letters"
 msgid "Latin Extended-D"
 msgstr "Latinishte e zgjeruar-D"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:128 ../gucharmap/unicode-scripts.h:69
 msgid "Syloti Nagri"
 msgstr "Syloti Nagri"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:129
 msgid "Phags-pa"
 msgstr "Phags-pa"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:130
 msgid "Hangul Syllables"
 msgstr "Hangul Syllables"
@@ -994,6 +1053,7 @@ msgstr "Forma me gjërësi të plotë dhe të përgjysmuar"
 msgid "Specials"
 msgstr "Specialë"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:146
 msgid "Linear B Syllabary"
 msgstr "Linear B Syllabary"
@@ -1014,10 +1074,12 @@ msgstr "Numra të Greqisë antike"
 msgid "Old Italic"
 msgstr "Italike antike"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:151 ../gucharmap/unicode-scripts.h:36
 msgid "Gothic"
 msgstr "Gothic"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:152 ../gucharmap/unicode-scripts.h:80
 msgid "Ugaritic"
 msgstr "Ugaritic"
@@ -1026,10 +1088,12 @@ msgstr "Ugaritic"
 msgid "Old Persian"
 msgstr "Persishte e vjetër"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:154 ../gucharmap/unicode-scripts.h:31
 msgid "Deseret"
 msgstr "Deseret"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:155 ../gucharmap/unicode-scripts.h:67
 msgid "Shavian"
 msgstr "Shavian"
@@ -1042,10 +1106,12 @@ msgstr "Osmania"
 msgid "Cypriot Syllabary"
 msgstr "Silabari Qiproite"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:158 ../gucharmap/unicode-scripts.h:65
 msgid "Phoenician"
 msgstr "Phoenician"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:159 ../gucharmap/unicode-scripts.h:48
 msgid "Kharoshthi"
 msgstr "Kharoshthi"
@@ -1075,13 +1141,12 @@ msgid "Tai Xuan Jing Symbols"
 msgstr "Simbolet Tai Xuan Jing"
 
 #: ../gucharmap/unicode-blocks.h:166
-#, fuzzy
 msgid "Counting Rod Numerals"
-msgstr "Counting Rod Numerals"
+msgstr "Viza numerale"
 
 #: ../gucharmap/unicode-blocks.h:167
 msgid "Mathematical Alphanumeric Symbols"
-msgstr "Simbolet alfanumerikë matematikore"
+msgstr "Simbole alfanumerikë matematikorë"
 
 #: ../gucharmap/unicode-blocks.h:168
 msgid "CJK Unified Ideographs Extension B"
@@ -1091,6 +1156,7 @@ msgstr "Ideografikë të zgjeruar B të unifikuar CJK"
 msgid "CJK Compatibility Ideographs Supplement"
 msgstr "Shtesë e ideografikëve kompatibël CJK"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-blocks.h:170
 msgid "Tags"
 msgstr "Tags"
@@ -1107,6 +1173,7 @@ msgstr "Zonë përdorimi privat suplementare-A"
 msgid "Supplementary Private Use Area-B"
 msgstr "Zonë përdorimi privat suplementare-B"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-scripts.h:21
 msgid "Braille"
 msgstr "Braille"
@@ -1123,14 +1190,17 @@ msgstr "Qiproite"
 msgid "Greek"
 msgstr "Greqisht"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-scripts.h:40
 msgid "Han"
 msgstr "Han"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-scripts.h:41
 msgid "Hangul"
 msgstr "Hangul"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-scripts.h:45
 msgid "Inherited"
 msgstr "Inherited"
@@ -1139,59 +1209,64 @@ msgstr "Inherited"
 msgid "Latin"
 msgstr "Latinishte"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-scripts.h:53
 msgid "Linear B"
 msgstr "Linear B"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-scripts.h:58
 msgid "Nko"
 msgstr "Nko"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-scripts.h:64
 msgid "Phags Pa"
 msgstr "Phags Pa"
 
+# (pofilter) unchanged: please translate
 #: ../gucharmap/unicode-scripts.h:81
 msgid "Yi"
 msgstr "Yi"
 
-#: ../gucharmap/gucharmap-block-chapters.c:61
-msgid "All"
-msgstr "Gjithçka"
-
-#: ../gucharmap/gucharmap-block-chapters.c:79
-msgid "Unicode Block"
-msgstr "Blloku unicode"
-
-#: ../gucharmap/gucharmap-script-chapters.c:76
-msgid "Script"
-msgstr "Script"
-
-#: ../gucharmap/gucharmap-search-dialog.c:549
+#: ../gucharmap/gucharmap-search-dialog.c:550
 msgid "Information"
 msgstr "Informacione"
 
 #. follow hig guidelines
-#: ../gucharmap/gucharmap-search-dialog.c:753
+#: ../gucharmap/gucharmap-search-dialog.c:754
 msgid "Find"
 msgstr "Gjej"
 
-#: ../gucharmap/gucharmap-search-dialog.c:767
+#: ../gucharmap/gucharmap-search-dialog.c:768
 msgid "_Previous"
 msgstr "_Paraardhësja"
 
-#: ../gucharmap/gucharmap-search-dialog.c:774
+#: ../gucharmap/gucharmap-search-dialog.c:775
 msgid "_Next"
 msgstr "_Pasardhëse"
 
-#: ../gucharmap/gucharmap-search-dialog.c:784
+#: ../gucharmap/gucharmap-search-dialog.c:785
 msgid "_Search:"
 msgstr "_Kërko:"
 
-#: ../gucharmap/gucharmap-search-dialog.c:794
+#: ../gucharmap/gucharmap-search-dialog.c:795
 msgid "Match _whole word"
 msgstr "_Krejt fjala"
 
-#: ../gucharmap/gucharmap-search-dialog.c:799
+#: ../gucharmap/gucharmap-search-dialog.c:800
 msgid "Search in character _details"
 msgstr "Kërko tek _detajet e simboleve"
+
+#: ../gucharmap/gucharmap-block-chapters-model.c:52
+msgid "All"
+msgstr "Gjithçka"
+
+#: ../gucharmap/gucharmap-block-chapters-model.c:130
+msgid "Unicode Block"
+msgstr "Blloku unicode"
+
+# (pofilter) unchanged: please translate
+#: ../gucharmap/gucharmap-script-chapters-model.c:131
+msgid "Script"
+msgstr "Script"
