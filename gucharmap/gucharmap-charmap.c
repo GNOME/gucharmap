@@ -31,6 +31,9 @@
 #include "gucharmap-private.h"
 
 struct _GucharmapCharmapPrivate {
+  GtkOrientation orientation;
+  GtkWidgetClass *paned_class;
+
   GtkWidget *notebook;
   GucharmapChaptersView *chapters_view;
   GucharmapChartable *chartable;
@@ -58,6 +61,7 @@ enum
 
 enum {
   PROP_0,
+  PROP_ORIENTATION,
   PROP_CHAPTERS_MODEL,
   PROP_ACTIVE_CHAPTER,
   PROP_ACTIVE_CHARACTER,
@@ -72,7 +76,7 @@ static guint gucharmap_charmap_signals[NUM_SIGNALS];
 static void gucharmap_charmap_class_init (GucharmapCharmapClass *klass);
 static void gucharmap_charmap_init       (GucharmapCharmap *charmap);
 
-G_DEFINE_TYPE (GucharmapCharmap, gucharmap_charmap, GTK_TYPE_HPANED)
+G_DEFINE_TYPE (GucharmapCharmap, gucharmap_charmap, GTK_TYPE_PANED)
 
 static void
 gucharmap_charmap_finalize (GObject *object)
@@ -85,6 +89,8 @@ gucharmap_charmap_finalize (GObject *object)
 
   if (priv->font_desc)
     pango_font_description_free (priv->font_desc);
+
+  g_type_class_unref (priv->paned_class);
 
   G_OBJECT_CLASS (gucharmap_charmap_parent_class)->finalize (object);
 }
@@ -99,6 +105,9 @@ gucharmap_charmap_get_property (GObject *object,
   GucharmapCharmapPrivate *priv = charmap->priv;
 
   switch (prop_id) {
+    case PROP_ORIENTATION:
+      g_value_set_enum (value, gucharmap_charmap_get_orientation (charmap));
+      break;
     case PROP_CHAPTERS_MODEL:
       g_value_set_object (value, gucharmap_charmap_get_chapters_model (charmap));
       break;
@@ -136,6 +145,9 @@ gucharmap_charmap_set_property (GObject *object,
   GucharmapCharmapPrivate *priv = charmap->priv;
 
   switch (prop_id) {
+    case PROP_ORIENTATION:
+      gucharmap_charmap_set_orientation (charmap, g_value_get_enum (value));
+      break;
     case PROP_CHAPTERS_MODEL:
       gucharmap_charmap_set_chapters_model (charmap, g_value_get_object (value));
       break;
@@ -163,15 +175,39 @@ gucharmap_charmap_set_property (GObject *object,
 }
 
 static void
-gucharmap_charmap_class_init (GucharmapCharmapClass *clazz)
+gucharmap_charmap_size_request (GtkWidget *widget,
+                                GtkRequisition *requisition)
 {
-  GObjectClass *object_class = G_OBJECT_CLASS (clazz);
+  GucharmapCharmap *charmap = GUCHARMAP_CHARMAP (widget);
+  GucharmapCharmapPrivate *priv = charmap->priv;
+
+  priv->paned_class->size_request (widget, requisition);
+}
+
+static void
+gucharmap_charmap_size_allocate (GtkWidget *widget,
+                                 GtkAllocation  *allocation)
+{
+  GucharmapCharmap *charmap = GUCHARMAP_CHARMAP (widget);
+  GucharmapCharmapPrivate *priv = charmap->priv;
+
+  priv->paned_class->size_allocate (widget, allocation);
+}
+
+static void
+gucharmap_charmap_class_init (GucharmapCharmapClass *klass)
+{
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   _gucharmap_intl_ensure_initialized ();
 
   object_class->get_property = gucharmap_charmap_get_property;
   object_class->set_property = gucharmap_charmap_set_property;
   object_class->finalize = gucharmap_charmap_finalize;
+
+  widget_class->size_request = gucharmap_charmap_size_request;
+  widget_class->size_allocate = gucharmap_charmap_size_allocate;
 
   gucharmap_charmap_signals[STATUS_MESSAGE] =
       g_signal_new (I_("status-message"), gucharmap_charmap_get_type (),
@@ -186,6 +222,18 @@ gucharmap_charmap_class_init (GucharmapCharmapClass *clazz)
                     G_STRUCT_OFFSET (GucharmapCharmapClass, link_clicked),
                     NULL, NULL, _gucharmap_marshal_VOID__UINT_UINT, G_TYPE_NONE, 
                     2, G_TYPE_UINT, G_TYPE_UINT);
+
+  g_object_class_install_property
+    (object_class,
+     PROP_ORIENTATION,
+     g_param_spec_enum ("orientation", NULL, NULL,
+                        GTK_TYPE_ORIENTATION,
+                        GTK_ORIENTATION_HORIZONTAL,
+                        G_PARAM_READWRITE |
+                        G_PARAM_CONSTRUCT |
+                        G_PARAM_STATIC_NAME |
+                        G_PARAM_STATIC_NICK |
+                        G_PARAM_STATIC_BLURB));
 
   g_object_class_install_property
     (object_class,
@@ -1170,6 +1218,47 @@ GtkWidget *
 gucharmap_charmap_new (void)
 {
   return g_object_new (gucharmap_charmap_get_type (), NULL);
+}
+
+void
+gucharmap_charmap_set_orientation (GucharmapCharmap *charmap,
+                                   GtkOrientation orientation)
+{
+  GucharmapCharmapPrivate *priv;
+  GtkPaned *paned = GTK_PANED (charmap);
+
+  g_return_if_fail (GUCHARMAP_IS_CHARMAP (charmap));
+  priv = charmap->priv;
+
+  priv->orientation = orientation;
+
+  if (priv->paned_class)
+    g_type_class_unref (priv->paned_class);
+
+  switch (orientation) {
+    case GTK_ORIENTATION_HORIZONTAL:
+      priv->paned_class = g_type_class_ref (GTK_TYPE_HPANED);
+
+      paned->cursor_type = GDK_SB_H_DOUBLE_ARROW;
+      paned->orientation = GTK_ORIENTATION_VERTICAL;
+      break;
+    case GTK_ORIENTATION_VERTICAL:
+      priv->paned_class = g_type_class_ref (GTK_TYPE_VPANED);
+
+      paned->cursor_type = GDK_SB_V_DOUBLE_ARROW;
+      paned->orientation = GTK_ORIENTATION_HORIZONTAL;
+      break;
+  }
+
+  g_object_notify (G_OBJECT (charmap), "orientation");
+}
+
+GtkOrientation
+gucharmap_charmap_get_orientation (GucharmapCharmap *charmap)
+{
+  g_return_val_if_fail (GUCHARMAP_IS_CHARMAP (charmap), GTK_ORIENTATION_HORIZONTAL);
+
+  return charmap->priv->orientation;
 }
 
 /**

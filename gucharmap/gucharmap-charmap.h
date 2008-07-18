@@ -44,7 +44,7 @@ typedef struct _GucharmapCharmapClass   GucharmapCharmapClass;
 
 struct _GucharmapCharmap
 {
-  GtkHPaned parent;
+  GtkPaned parent;
 
   /*< private >*/
   GucharmapCharmapPrivate *priv;
@@ -52,7 +52,7 @@ struct _GucharmapCharmap
 
 struct _GucharmapCharmapClass
 {
-  GtkHPanedClass parent_class;
+  GtkPanedClass parent_class;
 
   void (* status_message) (GucharmapCharmap *charmap, const gchar *message);
   void (* link_clicked) (GucharmapCharmap *charmap, 
@@ -67,6 +67,10 @@ struct _GucharmapCharmapClass
 GType                 gucharmap_charmap_get_type           (void);
 
 GtkWidget *           gucharmap_charmap_new                (void);
+
+void           gucharmap_charmap_set_orientation (GucharmapCharmap *charmap,
+                                                  GtkOrientation orientation);
+GtkOrientation gucharmap_charmap_get_orientation (GucharmapCharmap *charmap);
 
 void      gucharmap_charmap_set_active_character (GucharmapCharmap *charmap,
                                                   gunichar           uc);
