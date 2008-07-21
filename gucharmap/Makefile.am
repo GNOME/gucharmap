@@ -208,6 +208,7 @@ EXTRA_DIST = \
 	$(NULL)
 
 CLEANFILES = \
+	stamp-gucharmap-type-builtins.h \
 	$(BUILT_SOURCES) \
 	$(NULL)
 
