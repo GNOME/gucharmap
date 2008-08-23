@@ -391,17 +391,22 @@ snap_cols_pow2 (GtkAction        *action,
 
 static void
 open_url (GtkWindow *parent,
-          const char *url)
+          const char *uri,
+          guint32 user_time)
 {
+  GdkAppLaunchContext *context;
   GError *error = NULL;
-  GdkScreen *screen;
-  char *command;
 
-  screen = gtk_widget_get_screen (GTK_WIDGET (parent));
+  context = gdk_app_launch_context_new ();
+  gdk_app_launch_context_set_timestamp (context, user_time);
 
-  command = g_strconcat ("gnome-open ", url, NULL);
-  gdk_spawn_command_line_on_screen (screen, command, &error);
-  g_free (command);
+  if (parent)
+    gdk_app_launch_context_set_screen (context, gtk_widget_get_screen (GTK_WIDGET (parent)));
+  else
+    gdk_app_launch_context_set_screen (context, gdk_screen_get_default ());
+
+  g_app_info_launch_default_for_uri (uri, G_APP_LAUNCH_CONTEXT (context), &error);
+  g_object_unref (context);
 
   if (error) {
     show_error_dialog (parent, error);
@@ -411,7 +416,7 @@ open_url (GtkWindow *parent,
 
 static void
 help_contents (GtkAction *action,
-               GtkWindow *window)
+               GucharmapWindow *window)
 {
   const char *lang;
   char *uri = NULL, *url;
@@ -439,7 +444,7 @@ help_contents (GtkAction *action,
     return;
 
   url = g_strconcat ("ghelp://", uri, NULL);
-  open_url (window, url);
+  open_url (GTK_WINDOW (window), url, gtk_get_current_event_time ());
   g_free (url);
 }
 
@@ -448,7 +453,7 @@ about_open_url (GtkAboutDialog *about,
                 const char *link,
                 gpointer data)
 {
-  open_url (GTK_WINDOW (about), link);
+  open_url (GTK_WINDOW (about), link, gtk_get_current_event_time ());
 }
 
 static void
