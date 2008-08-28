@@ -394,21 +394,15 @@ open_url (GtkWindow *parent,
           const char *uri,
           guint32 user_time)
 {
-  GdkAppLaunchContext *context;
+  GdkScreen *screen;
   GError *error = NULL;
 
-  context = gdk_app_launch_context_new ();
-  gdk_app_launch_context_set_timestamp (context, user_time);
-
   if (parent)
-    gdk_app_launch_context_set_screen (context, gtk_widget_get_screen (GTK_WIDGET (parent)));
+    screen = gtk_widget_get_screen (GTK_WIDGET (parent));
   else
-    gdk_app_launch_context_set_screen (context, gdk_screen_get_default ());
+    screen = gdk_screen_get_default ();
 
-  g_app_info_launch_default_for_uri (uri, G_APP_LAUNCH_CONTEXT (context), &error);
-  g_object_unref (context);
-
-  if (error) {
+  if (!gtk_show_uri (screen, uri, user_time, &error)) {
     show_error_dialog (parent, error);
     g_error_free (error);
   }
