@@ -432,6 +432,9 @@ help_contents (GtkAction *action,
     if (g_file_test (uri, G_FILE_TEST_EXISTS)) {
       break;
     }
+
+    g_free (uri);
+    uri = NULL;
   }
 
   if (!uri)
