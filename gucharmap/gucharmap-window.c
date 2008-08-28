@@ -424,9 +424,9 @@ help_contents (GtkAction *action,
     }
  
     uri = g_build_filename (DATADIR,
-                            "/gnome/help/gucharmap/",
+                            "gnome", "help", "gucharmap",
                             lang,
-                            "/gucharmap.xml",
+                            "gucharmap.xml",
                             NULL);
 					
     if (g_file_test (uri, G_FILE_TEST_EXISTS)) {
