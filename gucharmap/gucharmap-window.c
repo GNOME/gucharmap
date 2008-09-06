@@ -442,6 +442,7 @@ help_contents (GtkAction *action,
 
   url = g_strconcat ("ghelp://", uri, NULL);
   open_url (GTK_WINDOW (window), url, gtk_get_current_event_time ());
+  g_free (uri);
   g_free (url);
 }
 
