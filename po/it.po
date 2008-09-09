@@ -3,329 +3,333 @@
 # Luigi Maselli <riccio at inmail sk>, 2003.
 # Alessio Frusciante <algol@firenze.linux.it>, 2003, 2006, 2007
 # Luca Ferretti <elle.uca@libero.it>, 2008
+# Milo Casagrande <milo@ubuntu.com>, 2008
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-27 10:18+0100\n"
-"PO-Revision-Date: 2008-03-27 10:27+0100\n"
-"Last-Translator: Luca Ferretti <elle.uca@libero.it>\n"
+"POT-Creation-Date: 2008-09-09 22:44+0200\n"
+"PO-Revision-Date: 2008-09-09 22:43+0200\n"
+"Last-Translator: Milo Casagrande <milo@ubuntu.com>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../gucharmap.desktop.in.h:1 ../gucharmap/gucharmap-window.c:885
+#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:890
+#: ../gucharmap/main.c:61
 msgid "Character Map"
 msgstr "Tabella caratteri"
 
-#: ../gucharmap.desktop.in.h:2
+#: ../gucharmap.desktop.in.in.h:2
 msgid "Insert special characters into documents"
 msgstr "Inserisce caratteri speciali nei documenti"
 
-#: ../gucharmap/gucharmap-charmap.c:269
+#: ../gucharmap/gucharmap-charmap.c:553
 msgid "Canonical decomposition:"
 msgstr "Scomposizione canonica:"
 
-#: ../gucharmap/gucharmap-charmap.c:310 ../gucharmap/gucharmap-table.c:286
+#: ../gucharmap/gucharmap-charmap.c:596 ../gucharmap/gucharmap-chartable.c:568
 msgid "[not a printable character]"
 msgstr "[carattere non stampabile]"
 
-#: ../gucharmap/gucharmap-charmap.c:324
+#: ../gucharmap/gucharmap-charmap.c:610
 msgid "General Character Properties"
 msgstr "Proprietà generali del carattere"
 
+# GNOME 2.24
+#: ../gucharmap/gucharmap-charmap.c:616
+msgid "In Unicode since:"
+msgstr "Nella categoria Unicode da:"
+
 #. character category
-#: ../gucharmap/gucharmap-charmap.c:327
+#: ../gucharmap/gucharmap-charmap.c:620
 msgid "Unicode category:"
 msgstr "Categoria Unicode:"
 
-#: ../gucharmap/gucharmap-charmap.c:336
+#: ../gucharmap/gucharmap-charmap.c:629
 msgid "Various Useful Representations"
 msgstr "Varie rappresentazioni utili"
 
-#: ../gucharmap/gucharmap-charmap.c:346
+#: ../gucharmap/gucharmap-charmap.c:639
 msgid "UTF-8:"
 msgstr "UTF-8:"
 
-#: ../gucharmap/gucharmap-charmap.c:354
+#: ../gucharmap/gucharmap-charmap.c:647
 msgid "UTF-16:"
 msgstr "UTF-16:"
 
-#: ../gucharmap/gucharmap-charmap.c:365
+#: ../gucharmap/gucharmap-charmap.c:658
 msgid "C octal escaped UTF-8:"
 msgstr "UTF-8 escaped ottale C:"
 
-#: ../gucharmap/gucharmap-charmap.c:375
+#: ../gucharmap/gucharmap-charmap.c:668
 msgid "XML decimal entity:"
 msgstr "Entità XML decimale:"
 
-#: ../gucharmap/gucharmap-charmap.c:386
+#: ../gucharmap/gucharmap-charmap.c:679
 msgid "Annotations and Cross References"
 msgstr "Annotazioni e riferimenti incrociati"
 
-#: ../gucharmap/gucharmap-charmap.c:393
+#: ../gucharmap/gucharmap-charmap.c:686
 msgid "Alias names:"
 msgstr "Pseudonimi:"
 
-#: ../gucharmap/gucharmap-charmap.c:402
+#: ../gucharmap/gucharmap-charmap.c:695
 msgid "Notes:"
 msgstr "Note:"
 
-#: ../gucharmap/gucharmap-charmap.c:411
+#: ../gucharmap/gucharmap-charmap.c:704
 msgid "See also:"
 msgstr "Vedi anche:"
 
-#: ../gucharmap/gucharmap-charmap.c:420
+#: ../gucharmap/gucharmap-charmap.c:713
 msgid "Approximate equivalents:"
 msgstr "Equivalenti approssimati:"
 
-#: ../gucharmap/gucharmap-charmap.c:429
+#: ../gucharmap/gucharmap-charmap.c:722
 msgid "Equivalents:"
 msgstr "Equivalenti:"
 
-#: ../gucharmap/gucharmap-charmap.c:445
+#: ../gucharmap/gucharmap-charmap.c:738
 msgid "CJK Ideograph Information"
 msgstr "Informazione ideogramma CJK"
 
-#: ../gucharmap/gucharmap-charmap.c:450
+#: ../gucharmap/gucharmap-charmap.c:743
 msgid "Definition in English:"
 msgstr "Definizione in inglese:"
 
-#: ../gucharmap/gucharmap-charmap.c:455
+#: ../gucharmap/gucharmap-charmap.c:748
 msgid "Mandarin Pronunciation:"
 msgstr "Pronuncia mandarina:"
 
-#: ../gucharmap/gucharmap-charmap.c:460
+#: ../gucharmap/gucharmap-charmap.c:753
 msgid "Cantonese Pronunciation:"
 msgstr "Pronuncia cantonese"
 
-#: ../gucharmap/gucharmap-charmap.c:465
+#: ../gucharmap/gucharmap-charmap.c:758
 msgid "Japanese On Pronunciation:"
 msgstr "Pronuncia giapponese on:"
 
-#: ../gucharmap/gucharmap-charmap.c:470
+#: ../gucharmap/gucharmap-charmap.c:763
 msgid "Japanese Kun Pronunciation:"
 msgstr "Pronuncia giapponese kun:"
 
-#: ../gucharmap/gucharmap-charmap.c:475
+#: ../gucharmap/gucharmap-charmap.c:768
 msgid "Tang Pronunciation:"
 msgstr "Pronuncia tang:"
 
-#: ../gucharmap/gucharmap-charmap.c:480
+#: ../gucharmap/gucharmap-charmap.c:773
 msgid "Korean Pronunciation:"
 msgstr "Pronuncia coreana:"
 
-#: ../gucharmap/gucharmap-charmap.c:788
+#: ../gucharmap/gucharmap-charmap.c:1158
 msgid "Characte_r Table"
 msgstr "Tabella ca_ratteri"
 
-#: ../gucharmap/gucharmap-charmap.c:791
+#: ../gucharmap/gucharmap-charmap.c:1204
 msgid "Character _Details"
 msgstr "Dettagli _carattere"
 
-#: ../gucharmap/gucharmap-mini-fontsel.c:228
+#: ../gucharmap/gucharmap-chartable.c:1371
+msgid "Unknown character, unable to identify."
+msgstr "Carattere sconosciuto, impossibile da identificare."
+
+#: ../gucharmap/gucharmap-chartable.c:1373
+#: ../gucharmap/gucharmap-search-dialog.c:585
+msgid "Not found."
+msgstr "Non trovato."
+
+#: ../gucharmap/gucharmap-chartable.c:1376
+msgid "Character found."
+msgstr "Carattere trovato."
+
+#: ../gucharmap/gucharmap-chartable-accessible.c:771
+msgid "Character Table"
+msgstr "Tabella caratteri"
+
+#: ../gucharmap/gucharmap-mini-fontsel.c:280
 msgid "Font"
 msgstr "Tipo carattere"
 
 # GNOME-2-22
-#: ../gucharmap/gucharmap-mini-fontsel.c:242
+#: ../gucharmap/gucharmap-mini-fontsel.c:293
 msgid "Font Family"
 msgstr "Famiglia carattere"
 
-#: ../gucharmap/gucharmap-mini-fontsel.c:260
+#: ../gucharmap/gucharmap-mini-fontsel.c:311
 msgid "Font Size"
 msgstr "Dimensione carattere"
 
-#: ../gucharmap/gucharmap-settings.c:61 ../gucharmap/gucharmap-window.c:538
-msgid "_File"
-msgstr "_File"
-
 # GNOME-2-22
-#: ../gucharmap/gucharmap-settings.c:92
+#: ../gucharmap/gucharmap-settings.c:71
 msgid "GConf could not be initialized."
 msgstr "Non è possibile inizializzare GConf."
 
 #. Unicode assigns "Common" as the script name for any character not
 #. * specifically listed in Scripts.txt
-#: ../gucharmap/gucharmap-script-codepoint-list.c:458
-#: ../gucharmap/unicode-scripts.h:26
+#: ../gucharmap/gucharmap-script-codepoint-list.c:463
+#: ../gucharmap/unicode-scripts.h:28
 msgid "Common"
 msgstr "Comune"
 
-#: ../gucharmap/gucharmap-table.c:1497
-msgid "Unknown character, unable to identify."
-msgstr "Carattere sconosciuto, impossibile da identificare."
-
-#: ../gucharmap/gucharmap-table.c:1499
-#: ../gucharmap/gucharmap-search-dialog.c:596
-msgid "Not found."
-msgstr "Non trovato."
-
-#: ../gucharmap/gucharmap-table.c:1502
-msgid "Character found."
-msgstr "Carattere trovato."
-
-#: ../gucharmap/gucharmap-table.c:1566
-msgid "Character Table"
-msgstr "Tabella caratteri"
-
-#: ../gucharmap/gucharmap-unicode-info.c:96
+#: ../gucharmap/gucharmap-unicode-info.c:94
 msgid "<Non Private Use High Surrogate>"
 msgstr "<Surrogato alto per uso non privato>"
 
-#: ../gucharmap/gucharmap-unicode-info.c:98
+#: ../gucharmap/gucharmap-unicode-info.c:96
 msgid "<Private Use High Surrogate>"
 msgstr "<Surrogato alto per uso privato>"
 
-#: ../gucharmap/gucharmap-unicode-info.c:100
+#: ../gucharmap/gucharmap-unicode-info.c:98
 msgid "<Low Surrogate>"
 msgstr "<Surrogati bassi>"
 
-#: ../gucharmap/gucharmap-unicode-info.c:102
+#: ../gucharmap/gucharmap-unicode-info.c:100
 msgid "<Private Use>"
 msgstr "<Uso privato>"
 
-#: ../gucharmap/gucharmap-unicode-info.c:104
+#: ../gucharmap/gucharmap-unicode-info.c:102
 msgid "<Plane 15 Private Use>"
 msgstr "<Uso privato piano 15>"
 
-#: ../gucharmap/gucharmap-unicode-info.c:106
+#: ../gucharmap/gucharmap-unicode-info.c:104
 msgid "<Plane 16 Private Use>"
 msgstr "<Uso privato piano 16>"
 
-#: ../gucharmap/gucharmap-unicode-info.c:111
+#: ../gucharmap/gucharmap-unicode-info.c:109
 msgid "<not assigned>"
 msgstr "<non assegnato>"
 
-#: ../gucharmap/gucharmap-unicode-info.c:124
+#: ../gucharmap/gucharmap-unicode-info.c:122
 msgid "Other, Control"
 msgstr "Altro, controllo"
 
-#: ../gucharmap/gucharmap-unicode-info.c:125
+#: ../gucharmap/gucharmap-unicode-info.c:123
 msgid "Other, Format"
 msgstr "Altro, formato"
 
-#: ../gucharmap/gucharmap-unicode-info.c:126
+#: ../gucharmap/gucharmap-unicode-info.c:124
 msgid "Other, Not Assigned"
 msgstr "Altro, non assegnato"
 
-#: ../gucharmap/gucharmap-unicode-info.c:127
+#: ../gucharmap/gucharmap-unicode-info.c:125
 msgid "Other, Private Use"
 msgstr "Altro, uso privato"
 
-#: ../gucharmap/gucharmap-unicode-info.c:128
+#: ../gucharmap/gucharmap-unicode-info.c:126
 msgid "Other, Surrogate"
 msgstr "Altro, surrogato"
 
-#: ../gucharmap/gucharmap-unicode-info.c:129
+#: ../gucharmap/gucharmap-unicode-info.c:127
 msgid "Letter, Lowercase"
 msgstr "Lettera, minuscola"
 
-#: ../gucharmap/gucharmap-unicode-info.c:130
+#: ../gucharmap/gucharmap-unicode-info.c:128
 msgid "Letter, Modifier"
 msgstr "Lettera, modificatrice"
 
-#: ../gucharmap/gucharmap-unicode-info.c:131
+#: ../gucharmap/gucharmap-unicode-info.c:129
 msgid "Letter, Other"
 msgstr "Lettera, altra"
 
-#: ../gucharmap/gucharmap-unicode-info.c:132
+#: ../gucharmap/gucharmap-unicode-info.c:130
 msgid "Letter, Titlecase"
 msgstr "Lettera, titolatrice"
 
-#: ../gucharmap/gucharmap-unicode-info.c:133
+#: ../gucharmap/gucharmap-unicode-info.c:131
 msgid "Letter, Uppercase"
 msgstr "Lettera, maiuscolo"
 
-#: ../gucharmap/gucharmap-unicode-info.c:134
+#: ../gucharmap/gucharmap-unicode-info.c:132
 msgid "Mark, Spacing Combining"
 msgstr "Segno, combinabile con spaziatura"
 
-#: ../gucharmap/gucharmap-unicode-info.c:135
+#: ../gucharmap/gucharmap-unicode-info.c:133
 msgid "Mark, Enclosing"
 msgstr "Segno, racchiuso"
 
-#: ../gucharmap/gucharmap-unicode-info.c:136
+#: ../gucharmap/gucharmap-unicode-info.c:134
 msgid "Mark, Non-Spacing"
 msgstr "Segno, senza spaziatura"
 
-#: ../gucharmap/gucharmap-unicode-info.c:137
+#: ../gucharmap/gucharmap-unicode-info.c:135
 msgid "Number, Decimal Digit"
 msgstr "Numero, cifra decimale"
 
-#: ../gucharmap/gucharmap-unicode-info.c:138
+#: ../gucharmap/gucharmap-unicode-info.c:136
 msgid "Number, Letter"
 msgstr "Numero, lettera"
 
-#: ../gucharmap/gucharmap-unicode-info.c:139
+#: ../gucharmap/gucharmap-unicode-info.c:137
 msgid "Number, Other"
 msgstr "Numero, altro"
 
-#: ../gucharmap/gucharmap-unicode-info.c:140
+#: ../gucharmap/gucharmap-unicode-info.c:138
 msgid "Punctuation, Connector"
 msgstr "Punteggiatura, raccordo"
 
-#: ../gucharmap/gucharmap-unicode-info.c:141
+#: ../gucharmap/gucharmap-unicode-info.c:139
 msgid "Punctuation, Dash"
 msgstr "Punteggiatura, trattino"
 
 # GNOME-2-22
-#: ../gucharmap/gucharmap-unicode-info.c:142
+#: ../gucharmap/gucharmap-unicode-info.c:140
 msgid "Punctuation, Close"
 msgstr "Punteggiatura, chiusa"
 
 # GNOME-2-22
-#: ../gucharmap/gucharmap-unicode-info.c:143
+#: ../gucharmap/gucharmap-unicode-info.c:141
 msgid "Punctuation, Final Quote"
 msgstr "Punteggiatura, fine citazione"
 
-#: ../gucharmap/gucharmap-unicode-info.c:144
+#: ../gucharmap/gucharmap-unicode-info.c:142
 msgid "Punctuation, Initial Quote"
 msgstr "Punteggiatura, inizio citazione"
 
-#: ../gucharmap/gucharmap-unicode-info.c:145
+#: ../gucharmap/gucharmap-unicode-info.c:143
 msgid "Punctuation, Other"
 msgstr "Punteggiatura, altra"
 
-#: ../gucharmap/gucharmap-unicode-info.c:146
+#: ../gucharmap/gucharmap-unicode-info.c:144
 msgid "Punctuation, Open"
 msgstr "Punteggiatura, aperta"
 
-#: ../gucharmap/gucharmap-unicode-info.c:147
+#: ../gucharmap/gucharmap-unicode-info.c:145
 msgid "Symbol, Currency"
 msgstr "Simbolo, valuta"
 
-#: ../gucharmap/gucharmap-unicode-info.c:148
+#: ../gucharmap/gucharmap-unicode-info.c:146
 msgid "Symbol, Modifier"
 msgstr "Simbolo, modificatore"
 
-#: ../gucharmap/gucharmap-unicode-info.c:149
+#: ../gucharmap/gucharmap-unicode-info.c:147
 msgid "Symbol, Math"
 msgstr "Simbolo, matematico"
 
-#: ../gucharmap/gucharmap-unicode-info.c:150
+#: ../gucharmap/gucharmap-unicode-info.c:148
 msgid "Symbol, Other"
 msgstr "Simbolo, altro"
 
-#: ../gucharmap/gucharmap-unicode-info.c:151
+#: ../gucharmap/gucharmap-unicode-info.c:149
 msgid "Separator, Line"
 msgstr "Separatore, linea"
 
-#: ../gucharmap/gucharmap-unicode-info.c:152
+#: ../gucharmap/gucharmap-unicode-info.c:150
 msgid "Separator, Paragraph"
 msgstr "Separatore, paragrafo"
 
-#: ../gucharmap/gucharmap-unicode-info.c:153
+#: ../gucharmap/gucharmap-unicode-info.c:151
 msgid "Separator, Space"
 msgstr "Separatore, spazio"
 
-#: ../gucharmap/gucharmap-window.c:181
-msgid "Searching..."
-msgstr "Ricerca in corso..."
+# GNOME 2.24
+#: ../gucharmap/gucharmap-window.c:246
+msgid "Searching…"
+msgstr "Ricerca..."
 
-#: ../gucharmap/gucharmap-window.c:381
+#: ../gucharmap/gucharmap-window.c:478
 msgid ""
 "Gucharmap is free software; you can redistribute it and/or modify it under "
 "the terms of the GNU General Public License as published by the Free "
@@ -338,31 +342,43 @@ msgstr ""
 "versione successiva."
 
 # GNOME-2-22
-#: ../gucharmap/gucharmap-window.c:385
+#: ../gucharmap/gucharmap-window.c:482
 msgid ""
 "Permission is hereby granted, free of charge, to any person obtaining a copy "
 "of the Unicode data files to deal in them without restriction, including "
 "without limitation the rights to use, copy, modify, merge, publish, "
 "distribute, and/or sell copies."
-msgstr "A chiunque ottenga una copia dei file di dati Unicode è concesso il permesso, senza oneri, di distribuirli senza restrizioni, ivi incluso senza limitazione dei diritti di uso, copia, modifica, unione, pubblicazione, distribuzione e/o vendita di copie."
+msgstr ""
+"A chiunque ottenga una copia dei file di dati Unicode è concesso il "
+"permesso, senza oneri, di distribuirli senza restrizioni, ivi incluso senza "
+"limitazione dei diritti di uso, copia, modifica, unione, pubblicazione, "
+"distribuzione e/o vendita di copie."
 
 # GNOME-2-22
-#: ../gucharmap/gucharmap-window.c:389
+#: ../gucharmap/gucharmap-window.c:486
 msgid ""
 "Gucharmap and the Unicode data files are distributed in the hope that they "
 "will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty "
 "of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General "
 "Public License and Unicode Copyright for more details."
-msgstr "Gucharmap e i file dei dati Unicode sono distribuiti nella speranza che siano utile, ma SENZA ALCUNA GARANZIA, comprese anche la garanzia implicita di VENDIBILITÀ e di ADEGUATEZZA A UN PARTICOLARE SCOPO. Vedere la Licenza Pubblica Generale GNU e il Copyright Unicode per maggiori dettagli."
+msgstr ""
+"Gucharmap e i file dei dati Unicode sono distribuiti nella speranza che "
+"siano utile, ma SENZA ALCUNA GARANZIA, comprese anche la garanzia implicita "
+"di VENDIBILITÀ e di ADEGUATEZZA A UN PARTICOLARE SCOPO. Vedere la Licenza "
+"Pubblica Generale GNU e il Copyright Unicode per maggiori dettagli."
 
-#: ../gucharmap/gucharmap-window.c:393
+# GNOME 2.24
+#: ../gucharmap/gucharmap-window.c:490
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "Gucharmap; if not, write to the Free Software Foundation, Inc., 59 Temple "
-"Place, Suite 330, Boston, MA  02111-1307  USA"
-msgstr "Gucharmap deve essere distribuito assieme a una copia della Licenza Pubblica Generica GNU; in caso contrario, se ne può ottenere una scrivendo alla Free Software Foundation, Inc. , 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA "
+"Place, Suite 330, Boston, MA  02110-1301  USA"
+msgstr ""
+"Una copia della GNU General Public License dovrebbe essere stata fornita con "
+"questo programma. In caso contrario scrivere a: Free Software Foundation, "
+"Inc. 51 Franklin Street, Fifth Floor, Boston, MA 02111-1301, USA"
 
-#: ../gucharmap/gucharmap-window.c:396
+#: ../gucharmap/gucharmap-window.c:493
 msgid ""
 "Also you should have received a copy of the Unicode Copyright along with "
 "Gucharmap; you can always find it at Unicode's website: http://www.unicode."
@@ -372,554 +388,571 @@ msgstr ""
 "Unicode; lo si può trovare al sito web Unicode:  http://www.unicode.org/"
 "copyright.html"
 
-#: ../gucharmap/gucharmap-window.c:409
-msgid ""
-"GNOME Character Map\n"
-"based on the Unicode Character Database"
-msgstr ""
-"Mappa dei caratteri di GNOME\n"
-"basata sul database dei caratteri Unicode"
+# GNOME 2.24
+#: ../gucharmap/gucharmap-window.c:506
+msgid "GNOME Character Map based on the Unicode Character Database"
+msgstr "Mappa dei caratteri di GNOME basata sul database dei caratteri Unicode"
 
-#: ../gucharmap/gucharmap-window.c:415 ../gucharmap/main.c:61
+#: ../gucharmap/gucharmap-window.c:513
 msgid "Gucharmap"
 msgstr "Gucharmap"
 
-#: ../gucharmap/gucharmap-window.c:417
+#: ../gucharmap/gucharmap-window.c:515
 msgid "translator-credits"
 msgstr ""
 "Alessio Frusciante <algol@firenze.linux.it>\n"
 "Luigi Maselli <riccio at inmail sk>"
 
-#: ../gucharmap/gucharmap-window.c:516 ../gucharmap/gucharmap-window.c:565
+#: ../gucharmap/gucharmap-window.c:592 ../gucharmap/gucharmap-window.c:859
 msgid "Next Script"
 msgstr "Scrittura successiva"
 
-#: ../gucharmap/gucharmap-window.c:516 ../gucharmap/gucharmap-window.c:567
+#: ../gucharmap/gucharmap-window.c:592 ../gucharmap/gucharmap-window.c:861
 msgid "Previous Script"
 msgstr "Scrittura precedente"
 
-#: ../gucharmap/gucharmap-window.c:522 ../gucharmap/gucharmap-window.c:677
+#: ../gucharmap/gucharmap-window.c:597
 msgid "Next Block"
 msgstr "Blocco successivo"
 
-#: ../gucharmap/gucharmap-window.c:522 ../gucharmap/gucharmap-window.c:677
+#: ../gucharmap/gucharmap-window.c:597
 msgid "Previous Block"
 msgstr "Blocco precedente"
 
-#: ../gucharmap/gucharmap-window.c:539
+#: ../gucharmap/gucharmap-window.c:822
+msgid "_File"
+msgstr "_File"
+
+#: ../gucharmap/gucharmap-window.c:823
 msgid "_View"
 msgstr "_Visualizza"
 
-#: ../gucharmap/gucharmap-window.c:540
+#: ../gucharmap/gucharmap-window.c:824
 msgid "_Search"
 msgstr "_Cerca"
 
-#: ../gucharmap/gucharmap-window.c:541
+#: ../gucharmap/gucharmap-window.c:825
 msgid "_Go"
 msgstr "V_ai"
 
-#: ../gucharmap/gucharmap-window.c:542
+#: ../gucharmap/gucharmap-window.c:826
 msgid "_Help"
 msgstr "A_iuto"
 
-#: ../gucharmap/gucharmap-window.c:544
-msgid "_Quit"
-msgstr "_Esci"
+# GNOME 2.24
+#: ../gucharmap/gucharmap-window.c:829
+msgid "Page _Setup"
+msgstr "_Impostazione pagina"
 
-#: ../gucharmap/gucharmap-window.c:547
-msgid "Zoom _In"
-msgstr "Aum_enta ingrandimento"
-
-#: ../gucharmap/gucharmap-window.c:549
-msgid "Zoom _Out"
-msgstr "Rid_uci ingrandimento"
-
-#: ../gucharmap/gucharmap-window.c:551
-msgid "_Normal Size"
-msgstr "Dimensione _normale"
-
-#: ../gucharmap/gucharmap-window.c:554
-msgid "_Find..."
-msgstr "Tr_ova..."
-
-#: ../gucharmap/gucharmap-window.c:556
+#: ../gucharmap/gucharmap-window.c:850
 msgid "Find _Next"
 msgstr "Trova successi_vo"
 
-#: ../gucharmap/gucharmap-window.c:558
+#: ../gucharmap/gucharmap-window.c:852
 msgid "Find _Previous"
 msgstr "Trova pr_ecedente"
 
-#: ../gucharmap/gucharmap-window.c:561
+#: ../gucharmap/gucharmap-window.c:855
 msgid "_Next Character"
 msgstr "Carattere su_ccessivo"
 
-#: ../gucharmap/gucharmap-window.c:563
+#: ../gucharmap/gucharmap-window.c:857
 msgid "_Previous Character"
 msgstr "Carattere pr_ecedente"
 
-#: ../gucharmap/gucharmap-window.c:570
+#: ../gucharmap/gucharmap-window.c:864
 msgid "_Contents"
 msgstr "_Sommario"
 
-#: ../gucharmap/gucharmap-window.c:572
+#: ../gucharmap/gucharmap-window.c:866
 msgid "_About"
 msgstr "_Informazioni"
 
-#: ../gucharmap/gucharmap-window.c:578
+#: ../gucharmap/gucharmap-window.c:876
 msgid "By _Script"
 msgstr "Per _scrittura"
 
-#: ../gucharmap/gucharmap-window.c:580
+#: ../gucharmap/gucharmap-window.c:878
 msgid "By _Unicode Block"
 msgstr "Per blocco _Unicode"
 
 # GNOME-2-22
-#: ../gucharmap/gucharmap-window.c:642
+#: ../gucharmap/gucharmap-window.c:883
 msgid "Snap _Columns to Power of Two"
 msgstr "Spezza _colonne in potenze di due"
 
-#: ../gucharmap/gucharmap-window.c:775
+#: ../gucharmap/gucharmap-window.c:952
 msgid "_Text to copy:"
 msgstr "_Testo da copiare:"
 
-#: ../gucharmap/gucharmap-window.c:796
+#: ../gucharmap/gucharmap-window.c:959
 msgid "Copy to the clipboard."
 msgstr "Copia negli appunti."
 
-#: ../gucharmap/main.c:44
+#: ../gucharmap/main.c:43
 msgid "Font to start with; ex: 'Serif 27'"
 msgstr "Tipo di carattere iniziale; es: 'Serif 27'"
 
 # GNOME-222
-#: ../gucharmap/main.c:44
+#: ../gucharmap/main.c:43
 msgid "FONT"
 msgstr "TIPO_CARATTERE"
 
-#: ../gucharmap/unicode-blocks.h:20
+#: ../gucharmap/unicode-blocks.h:14
 msgid "Basic Latin"
 msgstr "Latino base"
 
-#: ../gucharmap/unicode-blocks.h:21
+#: ../gucharmap/unicode-blocks.h:15
 msgid "Latin-1 Supplement"
 msgstr "Supplemento Latino-1"
 
-#: ../gucharmap/unicode-blocks.h:22
+#: ../gucharmap/unicode-blocks.h:16
 msgid "Latin Extended-A"
 msgstr "Latino esteso-A"
 
-#: ../gucharmap/unicode-blocks.h:23
+#: ../gucharmap/unicode-blocks.h:17
 msgid "Latin Extended-B"
 msgstr "Latino esteso-B"
 
-#: ../gucharmap/unicode-blocks.h:24
+#: ../gucharmap/unicode-blocks.h:18
 msgid "IPA Extensions"
 msgstr "Estensioni IPA"
 
-#: ../gucharmap/unicode-blocks.h:25
+#: ../gucharmap/unicode-blocks.h:19
 msgid "Spacing Modifier Letters"
 msgstr "Lettere che modificano la spaziatura"
 
-#: ../gucharmap/unicode-blocks.h:26
+#: ../gucharmap/unicode-blocks.h:20
 msgid "Combining Diacritical Marks"
 msgstr "Segni diacritici combinabili"
 
-#: ../gucharmap/unicode-blocks.h:27
+#: ../gucharmap/unicode-blocks.h:21
 msgid "Greek and Coptic"
 msgstr "Greco e copto"
 
-#: ../gucharmap/unicode-blocks.h:28 ../gucharmap/unicode-scripts.h:30
+#: ../gucharmap/unicode-blocks.h:22 ../gucharmap/unicode-scripts.h:32
 msgid "Cyrillic"
 msgstr "Cirillico"
 
-#: ../gucharmap/unicode-blocks.h:29
+#: ../gucharmap/unicode-blocks.h:23
 msgid "Cyrillic Supplement"
 msgstr "Supplemento cirillico"
 
-#: ../gucharmap/unicode-blocks.h:30 ../gucharmap/unicode-scripts.h:17
+#: ../gucharmap/unicode-blocks.h:24 ../gucharmap/unicode-scripts.h:17
 msgid "Armenian"
 msgstr "Armeno"
 
-#: ../gucharmap/unicode-blocks.h:31 ../gucharmap/unicode-scripts.h:43
+#: ../gucharmap/unicode-blocks.h:25 ../gucharmap/unicode-scripts.h:45
 msgid "Hebrew"
 msgstr "Ebraico"
 
-#: ../gucharmap/unicode-blocks.h:32 ../gucharmap/unicode-scripts.h:16
+#: ../gucharmap/unicode-blocks.h:26 ../gucharmap/unicode-scripts.h:16
 msgid "Arabic"
 msgstr "Arabo"
 
-#: ../gucharmap/unicode-blocks.h:33 ../gucharmap/unicode-scripts.h:70
+#: ../gucharmap/unicode-blocks.h:27 ../gucharmap/unicode-scripts.h:80
 msgid "Syriac"
 msgstr "Siriano"
 
-#: ../gucharmap/unicode-blocks.h:34
+#: ../gucharmap/unicode-blocks.h:28
 msgid "Arabic Supplement"
 msgstr "Supplemento Arabo"
 
-#: ../gucharmap/unicode-blocks.h:35 ../gucharmap/unicode-scripts.h:76
+#: ../gucharmap/unicode-blocks.h:29 ../gucharmap/unicode-scripts.h:86
 msgid "Thaana"
 msgstr "Thaana"
 
-#: ../gucharmap/unicode-blocks.h:36
-msgid "NKo"
-msgstr "NKo"
+# GNOME 2.24
+#: ../gucharmap/unicode-blocks.h:30 ../gucharmap/unicode-scripts.h:63
+msgid "N'Ko"
+msgstr "N'Ko"
 
-#: ../gucharmap/unicode-blocks.h:37 ../gucharmap/unicode-scripts.h:32
+#: ../gucharmap/unicode-blocks.h:31 ../gucharmap/unicode-scripts.h:34
 msgid "Devanagari"
 msgstr "Devanagari"
 
-#: ../gucharmap/unicode-blocks.h:38 ../gucharmap/unicode-scripts.h:19
+#: ../gucharmap/unicode-blocks.h:32 ../gucharmap/unicode-scripts.h:19
 msgid "Bengali"
 msgstr "Bengali"
 
-#: ../gucharmap/unicode-blocks.h:39 ../gucharmap/unicode-scripts.h:39
+#: ../gucharmap/unicode-blocks.h:33 ../gucharmap/unicode-scripts.h:41
 msgid "Gurmukhi"
 msgstr "Gurmukhi"
 
-#: ../gucharmap/unicode-blocks.h:40 ../gucharmap/unicode-scripts.h:38
+#: ../gucharmap/unicode-blocks.h:34 ../gucharmap/unicode-scripts.h:40
 msgid "Gujarati"
 msgstr "Gujarati"
 
-#: ../gucharmap/unicode-blocks.h:41 ../gucharmap/unicode-scripts.h:62
+#: ../gucharmap/unicode-blocks.h:35 ../gucharmap/unicode-scripts.h:69
 msgid "Oriya"
 msgstr "Oriya"
 
-#: ../gucharmap/unicode-blocks.h:42 ../gucharmap/unicode-scripts.h:74
+#: ../gucharmap/unicode-blocks.h:36 ../gucharmap/unicode-scripts.h:84
 msgid "Tamil"
 msgstr "Tamil"
 
-#: ../gucharmap/unicode-blocks.h:43 ../gucharmap/unicode-scripts.h:75
+#: ../gucharmap/unicode-blocks.h:37 ../gucharmap/unicode-scripts.h:85
 msgid "Telugu"
 msgstr "Telugu"
 
-#: ../gucharmap/unicode-blocks.h:44 ../gucharmap/unicode-scripts.h:46
+#: ../gucharmap/unicode-blocks.h:38 ../gucharmap/unicode-scripts.h:48
 msgid "Kannada"
 msgstr "Kannada"
 
-#: ../gucharmap/unicode-blocks.h:45 ../gucharmap/unicode-scripts.h:54
+#: ../gucharmap/unicode-blocks.h:39 ../gucharmap/unicode-scripts.h:60
 msgid "Malayalam"
 msgstr "Malayalam"
 
-#: ../gucharmap/unicode-blocks.h:46 ../gucharmap/unicode-scripts.h:68
+#: ../gucharmap/unicode-blocks.h:40 ../gucharmap/unicode-scripts.h:77
 msgid "Sinhala"
 msgstr "Sinhala"
 
-#: ../gucharmap/unicode-blocks.h:47 ../gucharmap/unicode-scripts.h:77
+#: ../gucharmap/unicode-blocks.h:41 ../gucharmap/unicode-scripts.h:87
 msgid "Thai"
 msgstr "Tailandese"
 
-#: ../gucharmap/unicode-blocks.h:48 ../gucharmap/unicode-scripts.h:50
+#: ../gucharmap/unicode-blocks.h:42 ../gucharmap/unicode-scripts.h:53
 msgid "Lao"
 msgstr "Laotiano"
 
-#: ../gucharmap/unicode-blocks.h:49 ../gucharmap/unicode-scripts.h:78
+#: ../gucharmap/unicode-blocks.h:43 ../gucharmap/unicode-scripts.h:88
 msgid "Tibetan"
 msgstr "Tibetano"
 
-#: ../gucharmap/unicode-blocks.h:50 ../gucharmap/unicode-scripts.h:56
+#: ../gucharmap/unicode-blocks.h:44 ../gucharmap/unicode-scripts.h:62
 msgid "Myanmar"
 msgstr "Birmano"
 
-#: ../gucharmap/unicode-blocks.h:51 ../gucharmap/unicode-scripts.h:34
+#: ../gucharmap/unicode-blocks.h:45 ../gucharmap/unicode-scripts.h:36
 msgid "Georgian"
 msgstr "Georgiano"
 
-#: ../gucharmap/unicode-blocks.h:52
+#: ../gucharmap/unicode-blocks.h:46
 msgid "Hangul Jamo"
 msgstr "Hangul Jamo"
 
-#: ../gucharmap/unicode-blocks.h:53 ../gucharmap/unicode-scripts.h:33
+#: ../gucharmap/unicode-blocks.h:47 ../gucharmap/unicode-scripts.h:35
 msgid "Ethiopic"
 msgstr "Etiope"
 
-#: ../gucharmap/unicode-blocks.h:54
+#: ../gucharmap/unicode-blocks.h:48
 msgid "Ethiopic Supplement"
 msgstr "Supplemento Etiope"
 
-#: ../gucharmap/unicode-blocks.h:55 ../gucharmap/unicode-scripts.h:25
+#: ../gucharmap/unicode-blocks.h:49 ../gucharmap/unicode-scripts.h:27
 msgid "Cherokee"
 msgstr "Cherokee"
 
-#: ../gucharmap/unicode-blocks.h:56
+#: ../gucharmap/unicode-blocks.h:50
 msgid "Unified Canadian Aboriginal Syllabics"
 msgstr "Sillabe aborigene canadesi unificate"
 
-#: ../gucharmap/unicode-blocks.h:57 ../gucharmap/unicode-scripts.h:59
+#: ../gucharmap/unicode-blocks.h:51 ../gucharmap/unicode-scripts.h:65
 msgid "Ogham"
 msgstr "Ogham"
 
-#: ../gucharmap/unicode-blocks.h:58 ../gucharmap/unicode-scripts.h:66
+#: ../gucharmap/unicode-blocks.h:52 ../gucharmap/unicode-scripts.h:74
 msgid "Runic"
 msgstr "Runico"
 
-#: ../gucharmap/unicode-blocks.h:59 ../gucharmap/unicode-scripts.h:71
+#: ../gucharmap/unicode-blocks.h:53 ../gucharmap/unicode-scripts.h:81
 msgid "Tagalog"
 msgstr "Tagalog"
 
-#: ../gucharmap/unicode-blocks.h:60 ../gucharmap/unicode-scripts.h:42
+#: ../gucharmap/unicode-blocks.h:54 ../gucharmap/unicode-scripts.h:44
 msgid "Hanunoo"
 msgstr "Hanunoo"
 
-#: ../gucharmap/unicode-blocks.h:61 ../gucharmap/unicode-scripts.h:23
+#: ../gucharmap/unicode-blocks.h:55 ../gucharmap/unicode-scripts.h:23
 msgid "Buhid"
 msgstr "Buhid"
 
-#: ../gucharmap/unicode-blocks.h:62 ../gucharmap/unicode-scripts.h:72
+#: ../gucharmap/unicode-blocks.h:56 ../gucharmap/unicode-scripts.h:82
 msgid "Tagbanwa"
 msgstr "Tagbanwa"
 
-#: ../gucharmap/unicode-blocks.h:63 ../gucharmap/unicode-scripts.h:49
+#: ../gucharmap/unicode-blocks.h:57 ../gucharmap/unicode-scripts.h:52
 msgid "Khmer"
 msgstr "Khmer"
 
-#: ../gucharmap/unicode-blocks.h:64 ../gucharmap/unicode-scripts.h:55
+#: ../gucharmap/unicode-blocks.h:58 ../gucharmap/unicode-scripts.h:61
 msgid "Mongolian"
 msgstr "Mongolo"
 
-#: ../gucharmap/unicode-blocks.h:65 ../gucharmap/unicode-scripts.h:52
+#: ../gucharmap/unicode-blocks.h:59 ../gucharmap/unicode-scripts.h:56
 msgid "Limbu"
 msgstr "Limbu"
 
-#: ../gucharmap/unicode-blocks.h:66 ../gucharmap/unicode-scripts.h:73
+#: ../gucharmap/unicode-blocks.h:60 ../gucharmap/unicode-scripts.h:83
 msgid "Tai Le"
 msgstr "Tai Le"
 
-#: ../gucharmap/unicode-blocks.h:67 ../gucharmap/unicode-scripts.h:57
+#: ../gucharmap/unicode-blocks.h:61 ../gucharmap/unicode-scripts.h:64
 msgid "New Tai Lue"
 msgstr "Nuovo Tai Lue"
 
-#: ../gucharmap/unicode-blocks.h:68
+#: ../gucharmap/unicode-blocks.h:62
 msgid "Khmer Symbols"
 msgstr "Simboli Khmer"
 
-#: ../gucharmap/unicode-blocks.h:69 ../gucharmap/unicode-scripts.h:22
+#: ../gucharmap/unicode-blocks.h:63 ../gucharmap/unicode-scripts.h:22
 msgid "Buginese"
 msgstr "Buginese"
 
-#: ../gucharmap/unicode-blocks.h:70 ../gucharmap/unicode-scripts.h:18
+#: ../gucharmap/unicode-blocks.h:64 ../gucharmap/unicode-scripts.h:18
 msgid "Balinese"
 msgstr "Balinese"
 
-#: ../gucharmap/unicode-blocks.h:71
+# GNOME 2.24
+#: ../gucharmap/unicode-blocks.h:65 ../gucharmap/unicode-scripts.h:78
+msgid "Sundanese"
+msgstr "Sundanese"
+
+# GNOME 2.24
+#: ../gucharmap/unicode-blocks.h:66 ../gucharmap/unicode-scripts.h:55
+msgid "Lepcha"
+msgstr "Lepcha"
+
+# GNOME 2.24
+#: ../gucharmap/unicode-blocks.h:67 ../gucharmap/unicode-scripts.h:66
+msgid "Ol Chiki"
+msgstr "Ol Chiki"
+
+#: ../gucharmap/unicode-blocks.h:68
 msgid "Phonetic Extensions"
 msgstr "Estensioni fonetiche"
 
-#: ../gucharmap/unicode-blocks.h:72
+#: ../gucharmap/unicode-blocks.h:69
 msgid "Phonetic Extensions Supplement"
 msgstr "Supplemento estensioni fonetiche"
 
-#: ../gucharmap/unicode-blocks.h:73
+#: ../gucharmap/unicode-blocks.h:70
 msgid "Combining Diacritical Marks Supplement"
 msgstr "Supplemento segni diacritici combinabili"
 
-#: ../gucharmap/unicode-blocks.h:74
+#: ../gucharmap/unicode-blocks.h:71
 msgid "Latin Extended Additional"
 msgstr "Latino aggiuntivo esteso"
 
-#: ../gucharmap/unicode-blocks.h:75
+#: ../gucharmap/unicode-blocks.h:72
 msgid "Greek Extended"
 msgstr "Greco esteso"
 
-#: ../gucharmap/unicode-blocks.h:76
+#: ../gucharmap/unicode-blocks.h:73
 msgid "General Punctuation"
 msgstr "Punteggiatura generica"
 
-#: ../gucharmap/unicode-blocks.h:77
+#: ../gucharmap/unicode-blocks.h:74
 msgid "Superscripts and Subscripts"
 msgstr "Apici e pedici"
 
-#: ../gucharmap/unicode-blocks.h:78
+#: ../gucharmap/unicode-blocks.h:75
 msgid "Currency Symbols"
 msgstr "Simboli valuta"
 
-#: ../gucharmap/unicode-blocks.h:79
+#: ../gucharmap/unicode-blocks.h:76
 msgid "Combining Diacritical Marks for Symbols"
 msgstr "Segni diacritici combinabili per simboli"
 
-#: ../gucharmap/unicode-blocks.h:80
+#: ../gucharmap/unicode-blocks.h:77
 msgid "Letterlike Symbols"
 msgstr "Simboli tipo lettere"
 
-#: ../gucharmap/unicode-blocks.h:81
+#: ../gucharmap/unicode-blocks.h:78
 msgid "Number Forms"
 msgstr "Forme di numeri"
 
-#: ../gucharmap/unicode-blocks.h:82
+#: ../gucharmap/unicode-blocks.h:79
 msgid "Arrows"
 msgstr "Frecce"
 
-#: ../gucharmap/unicode-blocks.h:83
+#: ../gucharmap/unicode-blocks.h:80
 msgid "Mathematical Operators"
 msgstr "Operatori matematici"
 
-#: ../gucharmap/unicode-blocks.h:84
+#: ../gucharmap/unicode-blocks.h:81
 msgid "Miscellaneous Technical"
 msgstr "Simboli tecnici vari"
 
-#: ../gucharmap/unicode-blocks.h:85
+#: ../gucharmap/unicode-blocks.h:82
 msgid "Control Pictures"
 msgstr "Immagini di controllo"
 
-#: ../gucharmap/unicode-blocks.h:86
+#: ../gucharmap/unicode-blocks.h:83
 msgid "Optical Character Recognition"
 msgstr "Riconoscimento ottico caratteri"
 
-#: ../gucharmap/unicode-blocks.h:87
+#: ../gucharmap/unicode-blocks.h:84
 msgid "Enclosed Alphanumerics"
 msgstr "Alfanumerici racchiusi"
 
-#: ../gucharmap/unicode-blocks.h:88
+#: ../gucharmap/unicode-blocks.h:85
 msgid "Box Drawing"
 msgstr "Disegno riquadri"
 
-#: ../gucharmap/unicode-blocks.h:89
+#: ../gucharmap/unicode-blocks.h:86
 msgid "Block Elements"
 msgstr "Elementi blocco"
 
-#: ../gucharmap/unicode-blocks.h:90
+#: ../gucharmap/unicode-blocks.h:87
 msgid "Geometric Shapes"
 msgstr "Forme geometriche"
 
-#: ../gucharmap/unicode-blocks.h:91
+#: ../gucharmap/unicode-blocks.h:88
 msgid "Miscellaneous Symbols"
 msgstr "Simboli vari"
 
-#: ../gucharmap/unicode-blocks.h:92
+#: ../gucharmap/unicode-blocks.h:89
 msgid "Dingbats"
 msgstr "Dingbats"
 
 # ripetizione a pipistrello
-#: ../gucharmap/unicode-blocks.h:93
+#: ../gucharmap/unicode-blocks.h:90
 msgid "Miscellaneous Mathematical Symbols-A"
 msgstr "Simboli matematici vari - A"
 
-#: ../gucharmap/unicode-blocks.h:94
+#: ../gucharmap/unicode-blocks.h:91
 msgid "Supplemental Arrows-A"
 msgstr "Frecce supplementari - A"
 
-#: ../gucharmap/unicode-blocks.h:95
+#: ../gucharmap/unicode-blocks.h:92
 msgid "Braille Patterns"
 msgstr "Campioni Braille"
 
-#: ../gucharmap/unicode-blocks.h:96
+#: ../gucharmap/unicode-blocks.h:93
 msgid "Supplemental Arrows-B"
 msgstr "Frecce supplementari - B"
 
-#: ../gucharmap/unicode-blocks.h:97
+#: ../gucharmap/unicode-blocks.h:94
 msgid "Miscellaneous Mathematical Symbols-B"
 msgstr "Simboli matematici vari - B"
 
-#: ../gucharmap/unicode-blocks.h:98
+#: ../gucharmap/unicode-blocks.h:95
 msgid "Supplemental Mathematical Operators"
 msgstr "Operatori matematici supplementari"
 
-#: ../gucharmap/unicode-blocks.h:99
+#: ../gucharmap/unicode-blocks.h:96
 msgid "Miscellaneous Symbols and Arrows"
 msgstr "Simboli e frecce vari"
 
-#: ../gucharmap/unicode-blocks.h:100 ../gucharmap/unicode-scripts.h:35
+#: ../gucharmap/unicode-blocks.h:97 ../gucharmap/unicode-scripts.h:37
 msgid "Glagolitic"
 msgstr "Glagolitico"
 
-#: ../gucharmap/unicode-blocks.h:101
+#: ../gucharmap/unicode-blocks.h:98
 msgid "Latin Extended-C"
 msgstr "Latino esteso-C"
 
-#: ../gucharmap/unicode-blocks.h:102 ../gucharmap/unicode-scripts.h:27
+#: ../gucharmap/unicode-blocks.h:99 ../gucharmap/unicode-scripts.h:29
 msgid "Coptic"
 msgstr "Copto"
 
-#: ../gucharmap/unicode-blocks.h:103
+#: ../gucharmap/unicode-blocks.h:100
 msgid "Georgian Supplement"
 msgstr "Supplemento georgiano"
 
-#: ../gucharmap/unicode-blocks.h:104 ../gucharmap/unicode-scripts.h:79
+#: ../gucharmap/unicode-blocks.h:101 ../gucharmap/unicode-scripts.h:89
 msgid "Tifinagh"
 msgstr "Tifinagh"
 
-#: ../gucharmap/unicode-blocks.h:105
+#: ../gucharmap/unicode-blocks.h:102
 msgid "Ethiopic Extended"
 msgstr "Etiope esteso"
 
-#: ../gucharmap/unicode-blocks.h:106
+# GNOME 2.24
+#: ../gucharmap/unicode-blocks.h:103
+msgid "Cyrillic Extended-A"
+msgstr "Cirillico esteso-A"
+
+#: ../gucharmap/unicode-blocks.h:104
 msgid "Supplemental Punctuation"
 msgstr "Punteggiatura supplementare"
 
-#: ../gucharmap/unicode-blocks.h:107
+#: ../gucharmap/unicode-blocks.h:105
 msgid "CJK Radicals Supplement"
 msgstr "Radicali CJK supplementari"
 
-#: ../gucharmap/unicode-blocks.h:108
+#: ../gucharmap/unicode-blocks.h:106
 msgid "Kangxi Radicals"
 msgstr "Radicali Kangxi"
 
-#: ../gucharmap/unicode-blocks.h:109
+#: ../gucharmap/unicode-blocks.h:107
 msgid "Ideographic Description Characters"
 msgstr "Caratteri di descrizione ideogrammi"
 
-#: ../gucharmap/unicode-blocks.h:110
+#: ../gucharmap/unicode-blocks.h:108
 msgid "CJK Symbols and Punctuation"
 msgstr "Simboli CJK e punteggiatura"
 
-#: ../gucharmap/unicode-blocks.h:111 ../gucharmap/unicode-scripts.h:44
+#: ../gucharmap/unicode-blocks.h:109 ../gucharmap/unicode-scripts.h:46
 msgid "Hiragana"
 msgstr "Hiragana"
 
-#: ../gucharmap/unicode-blocks.h:112 ../gucharmap/unicode-scripts.h:47
+#: ../gucharmap/unicode-blocks.h:110 ../gucharmap/unicode-scripts.h:49
 msgid "Katakana"
 msgstr "Katakana"
 
-#: ../gucharmap/unicode-blocks.h:113 ../gucharmap/unicode-scripts.h:20
+#: ../gucharmap/unicode-blocks.h:111 ../gucharmap/unicode-scripts.h:20
 msgid "Bopomofo"
 msgstr "Bopomofo"
 
-#: ../gucharmap/unicode-blocks.h:114
+#: ../gucharmap/unicode-blocks.h:112
 msgid "Hangul Compatibility Jamo"
 msgstr "Jamo compatibilità hangul"
 
-#: ../gucharmap/unicode-blocks.h:115
+#: ../gucharmap/unicode-blocks.h:113
 msgid "Kanbun"
 msgstr "Kanbun"
 
-#: ../gucharmap/unicode-blocks.h:116
+#: ../gucharmap/unicode-blocks.h:114
 msgid "Bopomofo Extended"
 msgstr "Bopomofo esteso"
 
-#: ../gucharmap/unicode-blocks.h:117
+#: ../gucharmap/unicode-blocks.h:115
 msgid "CJK Strokes"
 msgstr "Tratti CJK"
 
-#: ../gucharmap/unicode-blocks.h:118
+#: ../gucharmap/unicode-blocks.h:116
 msgid "Katakana Phonetic Extensions"
 msgstr "Estensioni fonetiche Katakana"
 
-#: ../gucharmap/unicode-blocks.h:119
+#: ../gucharmap/unicode-blocks.h:117
 msgid "Enclosed CJK Letters and Months"
 msgstr "Lettere CJK racchiuse e mesi"
 
-#: ../gucharmap/unicode-blocks.h:120
+#: ../gucharmap/unicode-blocks.h:118
 msgid "CJK Compatibility"
 msgstr "Compatibilità CJK"
 
-#: ../gucharmap/unicode-blocks.h:121
+#: ../gucharmap/unicode-blocks.h:119
 msgid "CJK Unified Ideographs Extension A"
 msgstr "Estensione A ideogrammi unificati CJK"
 
-#: ../gucharmap/unicode-blocks.h:122
+#: ../gucharmap/unicode-blocks.h:120
 msgid "Yijing Hexagram Symbols"
 msgstr "Simboli esagrammi Yijing"
 
-#: ../gucharmap/unicode-blocks.h:123
+#: ../gucharmap/unicode-blocks.h:121
 msgid "CJK Unified Ideographs"
 msgstr "Ideogrammi CJK unificati"
 
-#: ../gucharmap/unicode-blocks.h:124
+#: ../gucharmap/unicode-blocks.h:122
 msgid "Yi Syllables"
 msgstr "Sillabe Yi"
 
-#: ../gucharmap/unicode-blocks.h:125
+#: ../gucharmap/unicode-blocks.h:123
 msgid "Yi Radicals"
 msgstr "Radicali Yi"
+
+# GNOME 2.24
+#: ../gucharmap/unicode-blocks.h:124 ../gucharmap/unicode-scripts.h:91
+msgid "Vai"
+msgstr "Vai"
+
+# GNOME 2.24
+#: ../gucharmap/unicode-blocks.h:125
+msgid "Cyrillic Extended-B"
+msgstr "Cirillico esteso-B"
 
 #: ../gucharmap/unicode-blocks.h:126
 msgid "Modifier Tone Letters"
@@ -929,7 +962,7 @@ msgstr "Lettere modificatrici di toni"
 msgid "Latin Extended-D"
 msgstr "Latino esteso-D"
 
-#: ../gucharmap/unicode-blocks.h:128 ../gucharmap/unicode-scripts.h:69
+#: ../gucharmap/unicode-blocks.h:128 ../gucharmap/unicode-scripts.h:79
 msgid "Syloti Nagri"
 msgstr "Syloti Nagri"
 
@@ -937,182 +970,237 @@ msgstr "Syloti Nagri"
 msgid "Phags-pa"
 msgstr "Phags-pa"
 
-#: ../gucharmap/unicode-blocks.h:130
+# GNOME 2.24
+#: ../gucharmap/unicode-blocks.h:130 ../gucharmap/unicode-scripts.h:75
+msgid "Saurashtra"
+msgstr "Saurashtra"
+
+# GNOME 2.24
+#: ../gucharmap/unicode-blocks.h:131 ../gucharmap/unicode-scripts.h:50
+msgid "Kayah Li"
+msgstr "Kayah Li"
+
+# GNOME 2.24
+#: ../gucharmap/unicode-blocks.h:132 ../gucharmap/unicode-scripts.h:73
+msgid "Rejang"
+msgstr "Rejang"
+
+# GNOME 2.24
+#: ../gucharmap/unicode-blocks.h:133 ../gucharmap/unicode-scripts.h:26
+msgid "Cham"
+msgstr "Cham"
+
+#: ../gucharmap/unicode-blocks.h:134
 msgid "Hangul Syllables"
 msgstr "Sillabe Hangul"
 
-#: ../gucharmap/unicode-blocks.h:131
+#: ../gucharmap/unicode-blocks.h:135
 msgid "High Surrogates"
 msgstr "Surrogati alti"
 
 # ?
-#: ../gucharmap/unicode-blocks.h:132
+#: ../gucharmap/unicode-blocks.h:136
 msgid "High Private Use Surrogates"
 msgstr "Surrogati per uso privato alto"
 
 # ?
-#: ../gucharmap/unicode-blocks.h:133
+#: ../gucharmap/unicode-blocks.h:137
 msgid "Low Surrogates"
 msgstr "Surrogati bassi"
 
 # ?
-#: ../gucharmap/unicode-blocks.h:134
+#: ../gucharmap/unicode-blocks.h:138
 msgid "Private Use Area"
 msgstr "Area uso privato"
 
-#: ../gucharmap/unicode-blocks.h:135
+#: ../gucharmap/unicode-blocks.h:139
 msgid "CJK Compatibility Ideographs"
 msgstr "Compatibilità ideogrammi CJK"
 
-#: ../gucharmap/unicode-blocks.h:136
+#: ../gucharmap/unicode-blocks.h:140
 msgid "Alphabetic Presentation Forms"
 msgstr "Forme di presentazione alfabetica"
 
-#: ../gucharmap/unicode-blocks.h:137
+#: ../gucharmap/unicode-blocks.h:141
 msgid "Arabic Presentation Forms-A"
 msgstr "Forme di presentazione araba - A"
 
-#: ../gucharmap/unicode-blocks.h:138
+#: ../gucharmap/unicode-blocks.h:142
 msgid "Variation Selectors"
 msgstr "Selettori di variazioni"
 
-#: ../gucharmap/unicode-blocks.h:139
+#: ../gucharmap/unicode-blocks.h:143
 msgid "Vertical Forms"
 msgstr "Forme verticali"
 
-#: ../gucharmap/unicode-blocks.h:140
+#: ../gucharmap/unicode-blocks.h:144
 msgid "Combining Half Marks"
 msgstr "Mezzi segni combinabili"
 
-#: ../gucharmap/unicode-blocks.h:141
+#: ../gucharmap/unicode-blocks.h:145
 msgid "CJK Compatibility Forms"
 msgstr "Forme compatibilità CJK"
 
-#: ../gucharmap/unicode-blocks.h:142
+#: ../gucharmap/unicode-blocks.h:146
 msgid "Small Form Variants"
 msgstr "Varianti piccole"
 
-#: ../gucharmap/unicode-blocks.h:143
+#: ../gucharmap/unicode-blocks.h:147
 msgid "Arabic Presentation Forms-B"
 msgstr "Forme di presentazione araba - B"
 
-#: ../gucharmap/unicode-blocks.h:144
+#: ../gucharmap/unicode-blocks.h:148
 msgid "Halfwidth and Fullwidth Forms"
 msgstr "Forme a larghezza piena e dimezzata"
 
-#: ../gucharmap/unicode-blocks.h:145
+#: ../gucharmap/unicode-blocks.h:149
 msgid "Specials"
 msgstr "Speciali"
 
-#: ../gucharmap/unicode-blocks.h:146
+#: ../gucharmap/unicode-blocks.h:150
 msgid "Linear B Syllabary"
 msgstr "Sillabario lineare B"
 
-#: ../gucharmap/unicode-blocks.h:147
+#: ../gucharmap/unicode-blocks.h:151
 msgid "Linear B Ideograms"
 msgstr "Ideogrammi lineari B"
 
-#: ../gucharmap/unicode-blocks.h:148
+#: ../gucharmap/unicode-blocks.h:152
 msgid "Aegean Numbers"
 msgstr "Numeri egei"
 
-#: ../gucharmap/unicode-blocks.h:149
+#: ../gucharmap/unicode-blocks.h:153
 msgid "Ancient Greek Numbers"
 msgstr "Antichi numeri greci"
 
-#: ../gucharmap/unicode-blocks.h:150 ../gucharmap/unicode-scripts.h:60
+# GNOME 2.24
+#: ../gucharmap/unicode-blocks.h:154
+msgid "Ancient Symbols"
+msgstr "Simboli antici"
+
+# GNOME 2.24
+#: ../gucharmap/unicode-blocks.h:155
+msgid "Phaistos Disc"
+msgstr "Disco di Festo"
+
+# GNOME 2.24
+#: ../gucharmap/unicode-blocks.h:156 ../gucharmap/unicode-scripts.h:58
+msgid "Lycian"
+msgstr "Lingua licia"
+
+# GNOME 2.24
+#: ../gucharmap/unicode-blocks.h:157 ../gucharmap/unicode-scripts.h:25
+msgid "Carian"
+msgstr "Lingua caria"
+
+#: ../gucharmap/unicode-blocks.h:158 ../gucharmap/unicode-scripts.h:67
 msgid "Old Italic"
 msgstr "Corsivo antico"
 
-#: ../gucharmap/unicode-blocks.h:151 ../gucharmap/unicode-scripts.h:36
+#: ../gucharmap/unicode-blocks.h:159 ../gucharmap/unicode-scripts.h:38
 msgid "Gothic"
 msgstr "Gotico"
 
-#: ../gucharmap/unicode-blocks.h:152 ../gucharmap/unicode-scripts.h:80
+#: ../gucharmap/unicode-blocks.h:160 ../gucharmap/unicode-scripts.h:90
 msgid "Ugaritic"
 msgstr "Ugaritico"
 
-#: ../gucharmap/unicode-blocks.h:153 ../gucharmap/unicode-scripts.h:61
+#: ../gucharmap/unicode-blocks.h:161 ../gucharmap/unicode-scripts.h:68
 msgid "Old Persian"
 msgstr "Antico persiano"
 
-#: ../gucharmap/unicode-blocks.h:154 ../gucharmap/unicode-scripts.h:31
+#: ../gucharmap/unicode-blocks.h:162 ../gucharmap/unicode-scripts.h:33
 msgid "Deseret"
 msgstr "Deseret"
 
-#: ../gucharmap/unicode-blocks.h:155 ../gucharmap/unicode-scripts.h:67
+#: ../gucharmap/unicode-blocks.h:163 ../gucharmap/unicode-scripts.h:76
 msgid "Shavian"
 msgstr "Shavian"
 
-#: ../gucharmap/unicode-blocks.h:156 ../gucharmap/unicode-scripts.h:63
+#: ../gucharmap/unicode-blocks.h:164 ../gucharmap/unicode-scripts.h:70
 msgid "Osmanya"
 msgstr "Osmanya"
 
-#: ../gucharmap/unicode-blocks.h:157
+#: ../gucharmap/unicode-blocks.h:165
 msgid "Cypriot Syllabary"
 msgstr "Sillabario cipriota"
 
-#: ../gucharmap/unicode-blocks.h:158 ../gucharmap/unicode-scripts.h:65
+#: ../gucharmap/unicode-blocks.h:166 ../gucharmap/unicode-scripts.h:72
 msgid "Phoenician"
 msgstr "Fenicio"
 
-#: ../gucharmap/unicode-blocks.h:159 ../gucharmap/unicode-scripts.h:48
+# GNOME 2.24
+#: ../gucharmap/unicode-blocks.h:167 ../gucharmap/unicode-scripts.h:59
+msgid "Lydian"
+msgstr "Lingua lydia"
+
+#: ../gucharmap/unicode-blocks.h:168 ../gucharmap/unicode-scripts.h:51
 msgid "Kharoshthi"
 msgstr "Kharoshthi"
 
-#: ../gucharmap/unicode-blocks.h:160 ../gucharmap/unicode-scripts.h:28
+#: ../gucharmap/unicode-blocks.h:169 ../gucharmap/unicode-scripts.h:30
 msgid "Cuneiform"
 msgstr "Cuneiforme"
 
-#: ../gucharmap/unicode-blocks.h:161
+#: ../gucharmap/unicode-blocks.h:170
 msgid "Cuneiform Numbers and Punctuation"
 msgstr "Numeri e punteggiatura cuneiformi"
 
-#: ../gucharmap/unicode-blocks.h:162
+#: ../gucharmap/unicode-blocks.h:171
 msgid "Byzantine Musical Symbols"
 msgstr "Simboli musicali bizantini"
 
-#: ../gucharmap/unicode-blocks.h:163
+#: ../gucharmap/unicode-blocks.h:172
 msgid "Musical Symbols"
 msgstr "Simboli musicali"
 
-#: ../gucharmap/unicode-blocks.h:164
+#: ../gucharmap/unicode-blocks.h:173
 msgid "Ancient Greek Musical Notation"
 msgstr "Antica notazione musicale greca"
 
-#: ../gucharmap/unicode-blocks.h:165
+#: ../gucharmap/unicode-blocks.h:174
 msgid "Tai Xuan Jing Symbols"
 msgstr "Simboli Tai Xuan Jing"
 
-#: ../gucharmap/unicode-blocks.h:166
+#: ../gucharmap/unicode-blocks.h:175
 msgid "Counting Rod Numerals"
 msgstr "Barre numerali"
 
-#: ../gucharmap/unicode-blocks.h:167
+#: ../gucharmap/unicode-blocks.h:176
 msgid "Mathematical Alphanumeric Symbols"
 msgstr "Simboli alfanumerici matematici"
 
-#: ../gucharmap/unicode-blocks.h:168
+# GNOME 2.24
+#: ../gucharmap/unicode-blocks.h:177
+msgid "Mahjong Tiles"
+msgstr "Tessere mahjong"
+
+# GNOME 2.24
+#: ../gucharmap/unicode-blocks.h:178
+msgid "Domino Tiles"
+msgstr "Tessere domino"
+
+#: ../gucharmap/unicode-blocks.h:179
 msgid "CJK Unified Ideographs Extension B"
 msgstr "Ideogrammi CJK unificati estensione B"
 
-#: ../gucharmap/unicode-blocks.h:169
+#: ../gucharmap/unicode-blocks.h:180
 msgid "CJK Compatibility Ideographs Supplement"
 msgstr "Supplemento ideogrammi compatibili CJK"
 
-#: ../gucharmap/unicode-blocks.h:170
+#: ../gucharmap/unicode-blocks.h:181
 msgid "Tags"
 msgstr "Cartellini"
 
-#: ../gucharmap/unicode-blocks.h:171
+#: ../gucharmap/unicode-blocks.h:182
 msgid "Variation Selectors Supplement"
 msgstr "Selettori di variazioni supplementari"
 
-#: ../gucharmap/unicode-blocks.h:172
+#: ../gucharmap/unicode-blocks.h:183
 msgid "Supplementary Private Use Area-A"
 msgstr "Area-A a uso privato supplementare"
 
-#: ../gucharmap/unicode-blocks.h:173
+#: ../gucharmap/unicode-blocks.h:184
 msgid "Supplementary Private Use Area-B"
 msgstr "Area-B a uso privato supplementare"
 
@@ -1124,83 +1212,97 @@ msgstr "Braille"
 msgid "Canadian Aboriginal"
 msgstr "Aborigeni canadesi"
 
-#: ../gucharmap/unicode-scripts.h:29
+#: ../gucharmap/unicode-scripts.h:31
 msgid "Cypriot"
 msgstr "Cipriota"
 
-#: ../gucharmap/unicode-scripts.h:37
+#: ../gucharmap/unicode-scripts.h:39
 msgid "Greek"
 msgstr "Greco"
 
-#: ../gucharmap/unicode-scripts.h:40
+#: ../gucharmap/unicode-scripts.h:42
 msgid "Han"
 msgstr "Han"
 
-#: ../gucharmap/unicode-scripts.h:41
+#: ../gucharmap/unicode-scripts.h:43
 msgid "Hangul"
 msgstr "Hangul"
 
-#: ../gucharmap/unicode-scripts.h:45
+#: ../gucharmap/unicode-scripts.h:47
 msgid "Inherited"
 msgstr "Ereditate"
 
-#: ../gucharmap/unicode-scripts.h:51
+#: ../gucharmap/unicode-scripts.h:54
 msgid "Latin"
 msgstr "Latino"
 
-#: ../gucharmap/unicode-scripts.h:53
+#: ../gucharmap/unicode-scripts.h:57
 msgid "Linear B"
 msgstr "Lineare B"
 
-#: ../gucharmap/unicode-scripts.h:58
-msgid "Nko"
-msgstr "Nko"
-
-#: ../gucharmap/unicode-scripts.h:64
+#: ../gucharmap/unicode-scripts.h:71
 msgid "Phags Pa"
 msgstr "Phags Pa"
 
-#: ../gucharmap/unicode-scripts.h:81
+#: ../gucharmap/unicode-scripts.h:92
 msgid "Yi"
 msgstr "Yi"
 
-#: ../gucharmap/gucharmap-search-dialog.c:550
+#: ../gucharmap/gucharmap-search-dialog.c:565
 msgid "Information"
 msgstr "Informazioni"
 
 #. follow hig guidelines
-#: ../gucharmap/gucharmap-search-dialog.c:754
+#: ../gucharmap/gucharmap-search-dialog.c:739
 msgid "Find"
 msgstr "Trova"
 
-#: ../gucharmap/gucharmap-search-dialog.c:768
+#: ../gucharmap/gucharmap-search-dialog.c:753
 msgid "_Previous"
 msgstr "_Precedente"
 
-#: ../gucharmap/gucharmap-search-dialog.c:775
+#: ../gucharmap/gucharmap-search-dialog.c:760
 msgid "_Next"
 msgstr "_Successivo"
 
-#: ../gucharmap/gucharmap-search-dialog.c:785
+#: ../gucharmap/gucharmap-search-dialog.c:770
 msgid "_Search:"
 msgstr "_Cerca:"
 
-#: ../gucharmap/gucharmap-search-dialog.c:795
+#: ../gucharmap/gucharmap-search-dialog.c:780
 msgid "Match _whole word"
 msgstr "_Parola intera"
 
-#: ../gucharmap/gucharmap-search-dialog.c:800
+#: ../gucharmap/gucharmap-search-dialog.c:785
 msgid "Search in character _details"
 msgstr "Cerca nei _dettagli del carattere"
 
-#: ../gucharmap/gucharmap-block-chapters-model.c:52
+#: ../gucharmap/gucharmap-block-chapters-model.c:53
 msgid "All"
 msgstr "Tutti"
 
-#: ../gucharmap/gucharmap-block-chapters-model.c:130
+#: ../gucharmap/gucharmap-block-chapters-model.c:138
 msgid "Unicode Block"
 msgstr "Blocchi Unicode"
 
-#: ../gucharmap/gucharmap-script-chapters-model.c:131
+#: ../gucharmap/gucharmap-script-chapters-model.c:134
 msgid "Script"
 msgstr "Scrittura"
+
+#~ msgid "_Quit"
+#~ msgstr "_Esci"
+
+#~ msgid "Zoom _In"
+#~ msgstr "Aum_enta ingrandimento"
+
+#~ msgid "Zoom _Out"
+#~ msgstr "Rid_uci ingrandimento"
+
+#~ msgid "_Normal Size"
+#~ msgstr "Dimensione _normale"
+
+#~ msgid "_Find..."
+#~ msgstr "Tr_ova..."
+
+#~ msgid "Nko"
+#~ msgstr "Nko"
