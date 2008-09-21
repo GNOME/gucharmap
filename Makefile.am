@@ -59,7 +59,7 @@ endif
 # Only build this when in a git or svn checkout.
 
 ChangeLog:
-	@if test -f $(top_srcdir)/.git/HEAD; then \
+	if test -f $(top_srcdir)/.git/HEAD; then \
 		git log --stat > $@; \
 	elif test -f $(top_srcdir)/.svn/entries; then \
 		svn log -v --xml -r HEAD:1520 $(SVN_ROOT)/$(SVN_MODULE)/$(SVN_BRANCH) | \
