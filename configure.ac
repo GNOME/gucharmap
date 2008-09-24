@@ -47,7 +47,10 @@ AC_CONFIG_HEADERS([config.h])
 
 AM_INIT_AUTOMAKE([1.9 foreign dist-bzip2 no-dist-gzip])
 
-AM_MAINTAINER_MODE
+if test -z "$enable_maintainer_mode"; then
+  enable_maintainer_mode=yes
+fi
+AM_MAINTAINER_MODE([enable])
 
 # checks for progs
 AC_PROG_CC
