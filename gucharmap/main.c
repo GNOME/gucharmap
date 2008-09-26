@@ -27,13 +27,25 @@
 #include <gucharmap/gucharmap.h>
 #include "gucharmap-settings.h"
 #include "gucharmap-window.h"
+ 
+static gboolean
+option_version_cb (const gchar *option_name,
+                   const gchar *value,
+                   gpointer     data,
+                   GError     **error)
+{
+  g_printerr ("%s %s\n", _("GNOME Character Map"), VERSION);
 
-gint
-main (gint argc, gchar **argv)
+  exit (EXIT_SUCCESS);
+  return FALSE;
+}
+
+int
+main (int argc, char **argv)
 {
   GtkWidget *window;
   GdkScreen *screen;
-  gint monitor;
+  int monitor;
   GdkRectangle rect;
   GError *error = NULL;
   char *font = NULL;
@@ -41,6 +53,8 @@ main (gint argc, gchar **argv)
   {
     { "font", 0, 0, G_OPTION_ARG_STRING, &font,
       N_("Font to start with; ex: 'Serif 27'"), N_("FONT") },
+    { "version", 0, G_OPTION_FLAG_HIDDEN | G_OPTION_FLAG_NO_ARG, 
+      G_OPTION_ARG_CALLBACK, option_version_cb, NULL, NULL },
     { NULL }
   };
 
