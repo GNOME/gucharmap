@@ -502,20 +502,19 @@ help_about (GtkAction       *action,
   gtk_about_dialog_set_url_hook (about_open_url, NULL, NULL);
 
   gtk_show_about_dialog (GTK_WINDOW (guw),
-  			 "authors", authors,
-			 "comments", _("GNOME Character Map "
-				       "based on the Unicode Character Database"),
+			 "program-name", _("GNOME Character Map"),
+			 "version", VERSION,
+			 "comments", _("Based on the Unicode Character Database"),
 			 "copyright", "Copyright © 2004 Noah Levitt\n"
 				      "Copyright © 1991-2008 Unicode, Inc.\n"
 				      "Copyright © 2007, 2008 Christian Persch",
 			 "documenters", documenters,
 			 "license", license_trans,
-			 "program-name", _("Gucharmap"),
-			 "logo-icon-name", GUCHARMAP_ICON_NAME,
-			 "translator-credits", _("translator-credits"),
-			 "version", VERSION,
-			 "website", "http://live.gnome.org/Gucharmap",
 			 "wrap-license", TRUE,
+			 "logo-icon-name", GUCHARMAP_ICON_NAME,
+  			 "authors", authors,
+			 "translator-credits", _("translator-credits"),
+			 "website", "http://live.gnome.org/Gucharmap",
 			 NULL);
 
   g_free (license_trans);
