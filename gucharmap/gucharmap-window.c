@@ -455,6 +455,21 @@ about_open_url (GtkAboutDialog *about,
 }
 
 static void
+about_email_hook (GtkAboutDialog *about,
+		  const char *email_address,
+		  gpointer user_data)
+{
+  char *escaped, *uri;
+
+  escaped = g_uri_escape_string (email_address, NULL, FALSE);
+  uri = g_strdup_printf ("mailto:%s", escaped);
+  g_free (escaped);
+
+  open_url (GTK_WINDOW (about), uri, gtk_get_current_event_time ());
+  g_free (uri);
+}
+
+static void
 help_about (GtkAction       *action, 
             GucharmapWindow *guw)
 {
@@ -500,6 +515,7 @@ help_about (GtkAction       *action,
 			       _(license[4]), "\n\n", NULL);
 
   gtk_about_dialog_set_url_hook (about_open_url, NULL, NULL);
+  gtk_about_dialog_set_email_hook (about_email_hook, NULL, NULL);
 
   gtk_show_about_dialog (GTK_WINDOW (guw),
 			 "program-name", _("GNOME Character Map"),
