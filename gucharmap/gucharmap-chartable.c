@@ -1911,6 +1911,9 @@ gucharmap_chartable_paste_received_cb (GtkClipboard *clipboard,
 
   g_object_remove_weak_pointer (G_OBJECT (chartable), data);
 
+  if (!text)
+    return;
+
   wc = g_utf8_get_char_validated (text, -1);
   if (wc == 0 ||
       !gucharmap_unichar_validate (wc)) {
