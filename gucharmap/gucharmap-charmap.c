@@ -242,11 +242,6 @@ gucharmap_charmap_class_init (GucharmapCharmapClass *klass)
                     2, G_TYPE_UINT, G_TYPE_UINT);
 
 #if !GTK_CHECK_VERSION (2, 15, 0)
-  /**
-   * GucharmapCharmap:orientation:
-   *
-   * Deprecated: 2.25.0
-   */
   g_object_class_install_property
     (object_class,
      PROP_ORIENTATION,
