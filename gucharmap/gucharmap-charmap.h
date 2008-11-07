@@ -68,9 +68,11 @@ GType                 gucharmap_charmap_get_type           (void);
 
 GtkWidget *           gucharmap_charmap_new                (void);
 
+#ifndef GUCHARMAP_DISABLE_DEPRECATED
 void           gucharmap_charmap_set_orientation (GucharmapCharmap *charmap,
                                                   GtkOrientation orientation);
 GtkOrientation gucharmap_charmap_get_orientation (GucharmapCharmap *charmap);
+#endif
 
 void      gucharmap_charmap_set_active_character (GucharmapCharmap *charmap,
                                                   gunichar           uc);

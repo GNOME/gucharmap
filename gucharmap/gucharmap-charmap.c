@@ -31,8 +31,10 @@
 #include "gucharmap-private.h"
 
 struct _GucharmapCharmapPrivate {
+#if !GTK_CHECK_VERSION (2, 15, 0)
   GtkOrientation orientation;
   GtkWidgetClass *paned_class;
+#endif
 
   GtkWidget *notebook;
   GucharmapChaptersView *chapters_view;
@@ -61,7 +63,9 @@ enum
 
 enum {
   PROP_0,
+#if !GTK_CHECK_VERSION (2, 15, 0)
   PROP_ORIENTATION,
+#endif
   PROP_CHAPTERS_MODEL,
   PROP_ACTIVE_CHAPTER,
   PROP_ACTIVE_CHARACTER,
@@ -90,7 +94,9 @@ gucharmap_charmap_finalize (GObject *object)
   if (priv->font_desc)
     pango_font_description_free (priv->font_desc);
 
+#if !GTK_CHECK_VERSION (2, 15, 0)
   g_type_class_unref (priv->paned_class);
+#endif
 
   G_OBJECT_CLASS (gucharmap_charmap_parent_class)->finalize (object);
 }
@@ -105,9 +111,11 @@ gucharmap_charmap_get_property (GObject *object,
   GucharmapCharmapPrivate *priv = charmap->priv;
 
   switch (prop_id) {
+#if !GTK_CHECK_VERSION (2, 15, 0)
     case PROP_ORIENTATION:
       g_value_set_enum (value, gucharmap_charmap_get_orientation (charmap));
       break;
+#endif
     case PROP_CHAPTERS_MODEL:
       g_value_set_object (value, gucharmap_charmap_get_chapters_model (charmap));
       break;
@@ -145,9 +153,11 @@ gucharmap_charmap_set_property (GObject *object,
   GucharmapCharmapPrivate *priv = charmap->priv;
 
   switch (prop_id) {
+#if !GTK_CHECK_VERSION (2, 15, 0)
     case PROP_ORIENTATION:
       gucharmap_charmap_set_orientation (charmap, g_value_get_enum (value));
       break;
+#endif
     case PROP_CHAPTERS_MODEL:
       gucharmap_charmap_set_chapters_model (charmap, g_value_get_object (value));
       break;
@@ -174,6 +184,8 @@ gucharmap_charmap_set_property (GObject *object,
   }
 }
 
+#if !GTK_CHECK_VERSION (2, 15, 0)
+
 static void
 gucharmap_charmap_size_request (GtkWidget *widget,
                                 GtkRequisition *requisition)
@@ -194,11 +206,15 @@ gucharmap_charmap_size_allocate (GtkWidget *widget,
   priv->paned_class->size_allocate (widget, allocation);
 }
 
+#endif /* GTK < 2.15.0 */
+
 static void
 gucharmap_charmap_class_init (GucharmapCharmapClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
+#if !GTK_CHECK_VERSION (2, 15, 0)
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+#endif
 
   _gucharmap_intl_ensure_initialized ();
 
@@ -206,8 +222,10 @@ gucharmap_charmap_class_init (GucharmapCharmapClass *klass)
   object_class->set_property = gucharmap_charmap_set_property;
   object_class->finalize = gucharmap_charmap_finalize;
 
+#if !GTK_CHECK_VERSION (2, 15, 0)
   widget_class->size_request = gucharmap_charmap_size_request;
   widget_class->size_allocate = gucharmap_charmap_size_allocate;
+#endif
 
   gucharmap_charmap_signals[STATUS_MESSAGE] =
       g_signal_new (I_("status-message"), gucharmap_charmap_get_type (),
@@ -223,6 +241,12 @@ gucharmap_charmap_class_init (GucharmapCharmapClass *klass)
                     NULL, NULL, _gucharmap_marshal_VOID__UINT_UINT, G_TYPE_NONE, 
                     2, G_TYPE_UINT, G_TYPE_UINT);
 
+#if !GTK_CHECK_VERSION (2, 15, 0)
+  /**
+   * GucharmapCharmap:orientation:
+   *
+   * Deprecated: 2.25.0
+   */
   g_object_class_install_property
     (object_class,
      PROP_ORIENTATION,
@@ -234,6 +258,7 @@ gucharmap_charmap_class_init (GucharmapCharmapClass *klass)
                         G_PARAM_STATIC_NAME |
                         G_PARAM_STATIC_NICK |
                         G_PARAM_STATIC_BLURB));
+#endif
 
   g_object_class_install_property
     (object_class,
@@ -1217,13 +1242,27 @@ gucharmap_charmap_init (GucharmapCharmap *charmap)
 GtkWidget *
 gucharmap_charmap_new (void)
 {
-  return g_object_new (gucharmap_charmap_get_type (), NULL);
+  return g_object_new (GUCHARMAP_TYPE_CHARMAP,
+                       "orientation", GTK_ORIENTATION_HORIZONTAL,
+                       NULL);
 }
 
+#ifndef GUCHARMAP_DISABLE_DEPRECATED_SOURCE
+
+/**
+ * gucharmap_charmap_set_orientation:
+ * @charmap:
+ * @orientation:
+ *
+ * Deprecated: 2.25.0
+ */
 void
 gucharmap_charmap_set_orientation (GucharmapCharmap *charmap,
                                    GtkOrientation orientation)
 {
+#if GTK_CHECK_VERSION (2, 15, 0)
+  gtk_orientable_set_orientation (GTK_ORIENTABLE (charmap), orientation);
+#else
   GucharmapCharmapPrivate *priv;
   GtkPaned *paned = GTK_PANED (charmap);
 
@@ -1251,15 +1290,28 @@ gucharmap_charmap_set_orientation (GucharmapCharmap *charmap,
   }
 
   g_object_notify (G_OBJECT (charmap), "orientation");
+#endif
 }
 
+/**
+ * gucharmap_charmap_get_orientation:
+ * @charmap:
+ *
+ * Deprecated: 2.25.0
+ */
 GtkOrientation
 gucharmap_charmap_get_orientation (GucharmapCharmap *charmap)
 {
   g_return_val_if_fail (GUCHARMAP_IS_CHARMAP (charmap), GTK_ORIENTATION_HORIZONTAL);
 
+#if GTK_CHECK_VERSION (2, 15, 0)
+  return gtk_orientable_get_orientation (GTK_ORIENTABLE (charmap));
+#else
   return charmap->priv->orientation;
+#endif
 }
+
+#endif /* !GUCHARMAP_DISABLE_DEPRECATED_SOURCE */
 
 /**
  * gucharmap_chartable_set_font_desc:
