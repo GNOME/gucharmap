@@ -423,8 +423,8 @@ help_contents (GtkAction *action,
       continue;
     }
  
-    uri = g_build_filename (DATADIR,
-                            "gnome", "help", "gucharmap",
+    uri = g_build_filename (HELPDIR,
+                            "gucharmap", /* DOC_MODULE */
                             lang,
                             "gucharmap.xml",
                             NULL);
