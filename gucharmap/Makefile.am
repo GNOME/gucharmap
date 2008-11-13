@@ -125,6 +125,7 @@ gucharmap_CPPFLAGS = \
 	-I$(top_srcdir) \
 	-DDATADIR=\"$(datadir)\" \
 	-DLOCALEDIR=\"$(datadir)/locale\" \
+	-DHELPDIR=\"$(HELP_DIR)\" \
 	-DG_DISABLE_SINGLE_INCLUDES \
 	-DPANGO_DISABLE_SINGLE_INCLUDES \
 	-DATK_DISABLE_SINGLE_INCLUDES \
