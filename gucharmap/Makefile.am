@@ -200,7 +200,33 @@ gucharmap-type-builtins.c: gucharmap-type-builtins.c.template $(libgucharmapincl
 # 	&& (cmp -s xgen-$(@F) $@ || cp -f xgen-$(@F) $@) \
 # 	&& rm -f xgen-$(@F)
 
-# don't do the symlink stuff if this is windows
+if ENABLE_INTROSPECTION
+
+girdir = $(GIRDIR)
+gir_DATA = Gucharmap-2.0.gir
+
+typelibdir = $(GIRTYPELIBDIR)
+typelib_DATA = Gucharmap-2.0.typelib
+
+Gucharmap-2.0.gir: $(G_IR_SCANNER) libgucharmap.la $(libgucharmapinclude_HEADERS) Makefile
+	$(G_IR_SCANNER) \
+		--verbose \
+		--namespace=Gucharmap \
+		--nsversion=2.0 \
+		--include=GObject-2.0 \
+		--include=Gtk-2.0 \
+		--library=gucharmap \
+		--output $@ \
+		--pkg gtk+-2.0 \
+		-I$(top_srcdir) \
+		-I$(top_builddir) \
+		-DGUCHARMAP_COMPILATION \
+		$(filter %.h,$^)
+
+%.typelib: %.gir $(G_IR_COMPILER)
+	$(G_IR_COMPILER) --includedir=$(srcdir) --includedir=. $(G_IR_COMPILER_OPTS) $< -o $@
+
+endif # ENABLE_INTROSPECTION
 
 EXTRA_DIST = \
 	gucharmap-marshal.list \
@@ -212,8 +238,11 @@ EXTRA_DIST = \
 CLEANFILES = \
 	stamp-gucharmap-type-builtins.h \
 	$(BUILT_SOURCES) \
+	$(gir_DATA) \
+	$(typelib_DATA) \
 	$(NULL)
 
+# don't do the symlink stuff if this is windows
 if !OS_WIN32
 # install a symlink to the binary called "charmap"
 install-exec-hook:

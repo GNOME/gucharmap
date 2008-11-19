@@ -152,9 +152,9 @@ AC_SUBST([GETTEXT_PACKAGE])
 AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE],["$GETTEXT_PACKAGE"],[The gucharmap gettext domain])
 AM_GLIB_GNU_GETTEXT
 
-# ********
-# Bindings
-# ********
+# ***************
+# Python Bindings
+# ***************
 
 AC_MSG_CHECKING([whether python bindings are requested])
 AC_ARG_ENABLE([python-bindings],
@@ -218,6 +218,34 @@ if test "$enable_python_bindings" = "yes"; then
 fi
 
 AM_CONDITIONAL([ENABLE_PYTHON_BINDINGS],[test "$enable_python_bindings" = "yes"])
+
+# ***
+# GIR 
+# ***
+
+AC_MSG_CHECKING([whether GObject introspection is requested])
+AC_ARG_ENABLE([introspection],
+        AS_HELP_STRING([--enable-introspection],[Enable GObject introspection]),
+        [],[enable_introspection=no])
+AC_MSG_RESULT([$enable_introspection])
+
+if test "$enable_introspection" = "yes"; then
+  GOBJECT_INTROSPECTION_REQUIRED=0.6
+  PKG_CHECK_MODULES([GOBJECT_INTROSPECTION],[gobject-introspection-1.0 >= $GOBJECT_INTROSPECTION_REQUIRED])
+
+  G_IR_SCANNER="$($PKG_CONFIG --variable=g_ir_scanner gobject-introspection-1.0)"
+  G_IR_COMPILER="$($PKG_CONFIG --variable=g_ir_compiler gobject-introspection-1.0)"
+  G_IR_GENERATE="$($PKG_CONFIG --variable=g_ir_generate gobject-introspection-1.0)"
+  GIRDIR="$($PKG_CONFIG --variable=girdir gobject-introspection-1.0)"
+  GIRTYPELIBDIR="$($PKG_CONFIG --variable=typelibdir gobject-introspection-1.0)"
+  AC_SUBST([G_IR_SCANNER])
+  AC_SUBST([G_IR_COMPILER])
+  AC_SUBST([G_IR_GENERATE])
+  AC_SUBST([GIRDIR])
+  AC_SUBST([GIRTYPELIBDIR])
+fi
+
+AM_CONDITIONAL([ENABLE_INTROSPECTION],[test "$enable_introspection" = "yes"])
 
 # ***************
 # API & User Docs
