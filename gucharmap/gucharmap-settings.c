@@ -238,13 +238,7 @@ gucharmap_settings_initialized (void)
   return FALSE;
 }
 
-void
-gucharmap_settings_set_chapter (gchar *chapter)
-{
-  return;
-}
-
-ChaptersMode
+GucharmapChaptersMode
 gucharmap_settings_get_chapters_mode (void)
 {
   return get_default_chapters_mode();
