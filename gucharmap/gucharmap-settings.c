@@ -27,7 +27,7 @@
 #include <gucharmap/gucharmap.h>
 #include "gucharmap-settings.h"
 
-#if HAVE_GCONF
+#ifdef HAVE_GCONF
 #include <gconf/gconf-client.h>
 static GConfClient *client;
 #endif
@@ -60,7 +60,7 @@ get_default_snap_pow2 (void)
   return FALSE;
 }
 
-#if HAVE_GCONF
+#ifdef HAVE_GCONF
 
 void
 gucharmap_settings_initialize (void)
