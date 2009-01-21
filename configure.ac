@@ -88,16 +88,17 @@ GLIB_MKENUMS="$($PKG_CONFIG --variable=glib_mkenums glib-2.0)"
 AC_SUBST([GLIB_MKENUMS])
 
 AC_ARG_ENABLE([gconf],
-              [AS_HELP_STRING([--disable-gconf],
-	                      [don't build with gconf support])])
-if test "x$enable_gconf" != "xno"; then
-    GCONFPKGS="gconf-2.0"
-    PKG_CHECK_MODULES(GCONF, gconf-2.0,
-                have_gconf=yes, have_gconf=no)
+    [AS_HELP_STRING([--disable-gconf],[don't build with gconf support])],
+    [],[enable_gconf=yes])
+
+if test "$enable_gconf" = "yes"; then
+    GCONFPKGS="gconf-2.0 gthread-2.0"
+    PKG_CHECK_MODULES([GCONF],[$GCONFPKGS])
+
+    AC_DEFINE([HAVE_GCONF], [1], [Define if have gconf])
 else
     GCONFPKGS=
     AC_MSG_NOTICE([GCONF support disabled with --disable-gconf])
-    have_gconf=no
 fi  
 AC_SUBST([GCONFPKGS])
 
@@ -112,10 +113,6 @@ AC_SUBST(GTK_LIBS)
 
 AC_SUBST(GCONF_CFLAGS)
 AC_SUBST(GCONF_LIBS)
-
-if test "x$have_gconf" = "xyes" ; then
-    AC_DEFINE([HAVE_GCONF], [1], [Define if have gconf])
-fi
 
 AH_TEMPLATE([ENABLE_UNIHAN], [Define if you want CJK ideograph information])
 AC_ARG_ENABLE(unihan, 
