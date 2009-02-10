@@ -17,8 +17,8 @@
 
 m4_define([gucharmap_version_major],[2])
 m4_define([gucharmap_version_minor],[25])
-m4_define([gucharmap_version_micro],[0])
-m4_define([gucharmap_version_extra],[-svn])
+m4_define([gucharmap_version_micro],[91])
+m4_define([gucharmap_version_extra],[])
 m4_define([gucharmap_version],[gucharmap_version_major.gucharmap_version_minor.gucharmap_version_micro()gucharmap_version_extra])
 
 # This can be either "trunk" or "branches/gnome-x-y"
