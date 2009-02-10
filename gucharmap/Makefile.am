@@ -209,6 +209,7 @@ typelibdir = $(GIRTYPELIBDIR)
 typelib_DATA = Gucharmap-2.0.typelib
 
 Gucharmap-2.0.gir: $(G_IR_SCANNER) libgucharmap.la $(libgucharmapinclude_HEADERS) Makefile
+	PKG_CONFIG_PATH=$(top_builddir):$$PKG_CONFIG_PATH \
 	$(G_IR_SCANNER) \
 		--verbose \
 		--namespace=Gucharmap \
@@ -216,8 +217,10 @@ Gucharmap-2.0.gir: $(G_IR_SCANNER) libgucharmap.la $(libgucharmapinclude_HEADERS
 		--include=GObject-2.0 \
 		--include=Gtk-2.0 \
 		--library=gucharmap \
+		--libtool="$(LIBTOOL)" \
 		--output $@ \
 		--pkg gtk+-2.0 \
+		--pkg gucharmap-2 \
 		-I$(top_srcdir) \
 		-I$(top_builddir) \
 		-DGUCHARMAP_COMPILATION \
