@@ -1,18 +1,31 @@
 # Dutch translation of gucharmap
-# Copyright (C) 2003 The Free Software Foundation, Inc.
+#
 # This file is distributed under the same license as the gucharmap package.
+#
 # Tino Meinen <a.t.meinen@chello.nl>, 2005, 2006, 2008.
 # Sebastien Bruggeman <seba@ulyssis.org>, 2004, 2005.
-# Wouter Bolsterlee <wbolster@gnome.org>, 2008
+# Wouter Bolsterlee <wbolster@gnome.org>, 2008–2009
 #
 # character    - teken
 # radicals     - stamwoorden
+# extension    - uitbreiding
+# extended     - uitbreiding (jawel, ook)
+# supplemental - aanvullend
+# additional   - additionele
+# other        - overig
+# modifier     - aanpassen(d)
+#
+# 
+# LET OP! Op 20090214 heeft Wouter Bolsterlee deze vertaling geheel nagelopen
+# en een heleboel fouten verbeterd. Gelieve eerst met hem contact op te nemen
+# voordat je toevoegingen/wijzigingen doorvoert!
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-08 12:39+0100\n"
-"PO-Revision-Date: 2008-05-07 20:31+0200\n"
+"POT-Creation-Date: 2009-02-14 01:25+0100\n"
+"PO-Revision-Date: 2009-02-14 02:20+0100\n"
 "Last-Translator: Tino Meinen <a.t.meinen@chello.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
 "MIME-Version: 1.0\n"
@@ -22,8 +35,8 @@ msgstr ""
 # Dit komt in het gnome menu Hulpmiddelen
 #
 # speciale tekens/lettertekens/tekentabel/tekens en symbolen
-#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:891
-#: ../gucharmap/main.c:61
+#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:905
+#: ../gucharmap/main.c:80
 msgid "Character Map"
 msgstr "Tekens en symbolen"
 
@@ -33,115 +46,113 @@ msgid "Insert special characters into documents"
 msgstr "Speciale tekens invoegen in documenten"
 
 # canoniek: gezaghebbend
-#: ../gucharmap/gucharmap-charmap.c:452
+#: ../gucharmap/gucharmap-charmap.c:573
 msgid "Canonical decomposition:"
 msgstr "Canonieke ontleding:"
 
-#: ../gucharmap/gucharmap-charmap.c:495 ../gucharmap/gucharmap-chartable.c:568
+#: ../gucharmap/gucharmap-charmap.c:616 ../gucharmap/gucharmap-chartable.c:568
 msgid "[not a printable character]"
 msgstr "[niet afdrukbaar teken]"
 
-#: ../gucharmap/gucharmap-charmap.c:509
+#: ../gucharmap/gucharmap-charmap.c:630
 msgid "General Character Properties"
-msgstr "Algemene details voor het teken"
+msgstr "Algemene tekendetails"
 
-#: ../gucharmap/gucharmap-charmap.c:515
+#: ../gucharmap/gucharmap-charmap.c:636
 msgid "In Unicode since:"
 msgstr "In Unicode sinds:"
 
 #. character category
-#: ../gucharmap/gucharmap-charmap.c:519
+#: ../gucharmap/gucharmap-charmap.c:640
 msgid "Unicode category:"
-msgstr "Unicode categorie:"
+msgstr "Unicode-categorie:"
 
-#: ../gucharmap/gucharmap-charmap.c:528
+#: ../gucharmap/gucharmap-charmap.c:649
 msgid "Various Useful Representations"
 msgstr "Verschillende handige representaties"
 
-#: ../gucharmap/gucharmap-charmap.c:538
+#: ../gucharmap/gucharmap-charmap.c:659
 msgid "UTF-8:"
 msgstr "UTF-8:"
 
-#: ../gucharmap/gucharmap-charmap.c:546
+#: ../gucharmap/gucharmap-charmap.c:667
 msgid "UTF-16:"
 msgstr "UTF-16:"
 
-#: ../gucharmap/gucharmap-charmap.c:557
+#: ../gucharmap/gucharmap-charmap.c:678
 msgid "C octal escaped UTF-8:"
 msgstr "C-vorm (octal escaped UTF-8):"
 
 # entity: iets bestaands/wezen
 # het is het teken in een voor XML begrijpelijke vorm
 # schrijfwijze/representatie
-#: ../gucharmap/gucharmap-charmap.c:567
+#: ../gucharmap/gucharmap-charmap.c:688
 msgid "XML decimal entity:"
 msgstr "XML-vorm (decimaal):"
 
-#: ../gucharmap/gucharmap-charmap.c:578
+#: ../gucharmap/gucharmap-charmap.c:699
 msgid "Annotations and Cross References"
 msgstr "Aantekeningen en kruisverwijzingen"
 
 # aliassen/aliasnamen
-#: ../gucharmap/gucharmap-charmap.c:585
+#: ../gucharmap/gucharmap-charmap.c:706
 msgid "Alias names:"
 msgstr "Aliasnamen:"
 
-#: ../gucharmap/gucharmap-charmap.c:594
+#: ../gucharmap/gucharmap-charmap.c:715
 msgid "Notes:"
 msgstr "Opmerkingen:"
 
-#: ../gucharmap/gucharmap-charmap.c:603
+#: ../gucharmap/gucharmap-charmap.c:724
 msgid "See also:"
 msgstr "Zie ook:"
 
-# bijna hetzelfde/equivalenten bij benadering
-# bij benadering equivalent/gelijkwaardig
-#: ../gucharmap/gucharmap-charmap.c:612
+#: ../gucharmap/gucharmap-charmap.c:733
 msgid "Approximate equivalents:"
-msgstr "Bij benadering equivalent:"
+msgstr "Bijna-equivalenten:"
 
-#: ../gucharmap/gucharmap-charmap.c:621
+#: ../gucharmap/gucharmap-charmap.c:742
 msgid "Equivalents:"
 msgstr "Equivalenten:"
 
-#: ../gucharmap/gucharmap-charmap.c:637
+#: ../gucharmap/gucharmap-charmap.c:758
 msgid "CJK Ideograph Information"
-msgstr "CJK ideogram-informatie"
+msgstr "CJK-ideograminformatie"
 
-#: ../gucharmap/gucharmap-charmap.c:642
+#: ../gucharmap/gucharmap-charmap.c:763
 msgid "Definition in English:"
 msgstr "Definitie in het Engels:"
 
-#: ../gucharmap/gucharmap-charmap.c:647
+#: ../gucharmap/gucharmap-charmap.c:768
 msgid "Mandarin Pronunciation:"
 msgstr "Mandarijnse uitspraak:"
 
-#: ../gucharmap/gucharmap-charmap.c:652
+#: ../gucharmap/gucharmap-charmap.c:773
 msgid "Cantonese Pronunciation:"
 msgstr "Kantonese uitspraak:"
 
-#: ../gucharmap/gucharmap-charmap.c:657
+#: ../gucharmap/gucharmap-charmap.c:778
 msgid "Japanese On Pronunciation:"
-msgstr "Japanse On uitspraak:"
+msgstr "Japanse On-uitspraak:"
 
-#: ../gucharmap/gucharmap-charmap.c:662
+#: ../gucharmap/gucharmap-charmap.c:783
 msgid "Japanese Kun Pronunciation:"
-msgstr "Japanse Kun uitspraak:"
+msgstr "Japanse Kun-uitspraak:"
 
-#: ../gucharmap/gucharmap-charmap.c:667
+#: ../gucharmap/gucharmap-charmap.c:788
 msgid "Tang Pronunciation:"
-msgstr "Tang uitspraak:"
+msgstr "Tang-uitspraak:"
 
-#: ../gucharmap/gucharmap-charmap.c:672
+#: ../gucharmap/gucharmap-charmap.c:793
 msgid "Korean Pronunciation:"
 msgstr "Koreaanse uitspraak:"
 
-#: ../gucharmap/gucharmap-charmap.c:1032
+#: ../gucharmap/gucharmap-charmap.c:1178
 msgid "Characte_r Table"
 msgstr "_Tekentabel"
 
 # de _d wordt gebruikt in Beel_d
-#: ../gucharmap/gucharmap-charmap.c:1077
+#: ../gucharmap/gucharmap-charmap.c:1224
 msgid "Character _Details"
 msgstr "Teke_ndetails"
 
@@ -151,7 +162,7 @@ msgid "Unknown character, unable to identify."
 msgstr "Onbekend teken, kon het niet identificeren."
 
 #: ../gucharmap/gucharmap-chartable.c:1373
-#: ../gucharmap/gucharmap-search-dialog.c:584
+#: ../gucharmap/gucharmap-search-dialog.c:585
 msgid "Not found."
 msgstr "Niet gevonden."
 
@@ -173,7 +184,7 @@ msgstr "Lettertypefamilie"
 
 #: ../gucharmap/gucharmap-mini-fontsel.c:311
 msgid "Font Size"
-msgstr "Lettertypegrootte"
+msgstr "Lettergrootte"
 
 #: ../gucharmap/gucharmap-settings.c:71
 msgid "GConf could not be initialized."
@@ -184,11 +195,11 @@ msgstr "Kon GConf niet initialiseren."
 #: ../gucharmap/gucharmap-script-codepoint-list.c:463
 #: ../gucharmap/unicode-scripts.h:28
 msgid "Common"
-msgstr "Vaak gebruikt"
+msgstr "Algemeen"
 
 #: ../gucharmap/gucharmap-unicode-info.c:94
 msgid "<Non Private Use High Surrogate>"
-msgstr "<Hoge surrogaten voor niet privaatgebruik>"
+msgstr "<Hoge surrogaten voor niet-privaatgebruik>"
 
 #: ../gucharmap/gucharmap-unicode-info.c:96
 msgid "<Private Use High Surrogate>"
@@ -216,135 +227,129 @@ msgstr "<niet toegewezen>"
 
 #: ../gucharmap/gucharmap-unicode-info.c:122
 msgid "Other, Control"
-msgstr "Andere, Sturing"
+msgstr "Overig, Sturing"
 
 #: ../gucharmap/gucharmap-unicode-info.c:123
 msgid "Other, Format"
-msgstr "Andere, Formaat"
+msgstr "Overig, Formaat"
 
 #: ../gucharmap/gucharmap-unicode-info.c:124
 msgid "Other, Not Assigned"
-msgstr "Andere, Niet toegewezen"
+msgstr "Overig, Niet toegewezen"
 
 #: ../gucharmap/gucharmap-unicode-info.c:125
 msgid "Other, Private Use"
-msgstr "Andere, Privaatgebruik"
+msgstr "Overig, Privaatgebruik"
 
 #: ../gucharmap/gucharmap-unicode-info.c:126
 msgid "Other, Surrogate"
-msgstr "Andere, Surrogaat"
+msgstr "Overig, Surrogaat"
 
 #: ../gucharmap/gucharmap-unicode-info.c:127
 msgid "Letter, Lowercase"
-msgstr "Letter, Kleine letter"
+msgstr "Letter, onderkast"
 
 #: ../gucharmap/gucharmap-unicode-info.c:128
 msgid "Letter, Modifier"
-msgstr "Letter, Bepaling"
+msgstr "Letter, aanpassend"
 
 #: ../gucharmap/gucharmap-unicode-info.c:129
 msgid "Letter, Other"
-msgstr "Letter, Andere"
+msgstr "Letter, Overig"
 
 #: ../gucharmap/gucharmap-unicode-info.c:130
 msgid "Letter, Titlecase"
-msgstr "Letter, Klein kapitaal"
+msgstr "Letter, klein kapitaal"
 
 #: ../gucharmap/gucharmap-unicode-info.c:131
 msgid "Letter, Uppercase"
-msgstr "Letter, Hoofdletter"
+msgstr "Letter, bovenkast"
 
 #: ../gucharmap/gucharmap-unicode-info.c:132
 msgid "Mark, Spacing Combining"
-msgstr "Teken, Combinerend spatiëring"
+msgstr "Teken, combinerend spatiëring"
 
 #: ../gucharmap/gucharmap-unicode-info.c:133
 msgid "Mark, Enclosing"
-msgstr "Teken, Omsluiten"
+msgstr "Teken, omsluitend"
 
 #: ../gucharmap/gucharmap-unicode-info.c:134
 msgid "Mark, Non-Spacing"
-msgstr "Teken, Niet-spatiëring"
+msgstr "Teken, niet-spatiëring"
 
 #: ../gucharmap/gucharmap-unicode-info.c:135
 msgid "Number, Decimal Digit"
-msgstr "Getal, Decimaal cijfer"
+msgstr "Getal, decimaal cijfer"
 
-# teken/letter
 #: ../gucharmap/gucharmap-unicode-info.c:136
 msgid "Number, Letter"
-msgstr "Getal, Letter"
+msgstr "Getal, letter"
 
 #: ../gucharmap/gucharmap-unicode-info.c:137
 msgid "Number, Other"
-msgstr "Getal, Andere"
+msgstr "Getal, overig"
 
 #: ../gucharmap/gucharmap-unicode-info.c:138
 msgid "Punctuation, Connector"
-msgstr "Leesteken, Verbindingsstuk"
+msgstr "Leesteken, verbindingsstuk"
 
 #: ../gucharmap/gucharmap-unicode-info.c:139
 msgid "Punctuation, Dash"
-msgstr "Leesteken, Streep"
+msgstr "Leesteken, streep"
 
-# open/close
-# opening/ afsluiting/sluiting
 #: ../gucharmap/gucharmap-unicode-info.c:140
 msgid "Punctuation, Close"
-msgstr "Leesteken, Afsluiting"
+msgstr "Leesteken, afsluiten"
 
 #: ../gucharmap/gucharmap-unicode-info.c:141
 msgid "Punctuation, Final Quote"
-msgstr "Leesteken, Afsluitende aanhalingsteken"
+msgstr "Leesteken, aanhalingsteken sluiten"
 
-# openings/beginnende aanhalingsteken
 #: ../gucharmap/gucharmap-unicode-info.c:142
 msgid "Punctuation, Initial Quote"
-msgstr "Leesteken, Beginnende aanhalingsteken"
+msgstr "Leesteken, aanhalingsteken openen"
 
 #: ../gucharmap/gucharmap-unicode-info.c:143
 msgid "Punctuation, Other"
-msgstr "Leesteken, Andere"
+msgstr "Leesteken, overig"
 
-# open/close
-# opening/afsluiting
 #: ../gucharmap/gucharmap-unicode-info.c:144
 msgid "Punctuation, Open"
-msgstr "Leesteken, Opening"
+msgstr "Leesteken, openen"
 
 #: ../gucharmap/gucharmap-unicode-info.c:145
 msgid "Symbol, Currency"
-msgstr "Symbool, Valuta"
+msgstr "Symbool, valuta"
 
 #: ../gucharmap/gucharmap-unicode-info.c:146
 msgid "Symbol, Modifier"
-msgstr "Symbool, Bepaling"
+msgstr "Symbool, aanpassend"
 
 #: ../gucharmap/gucharmap-unicode-info.c:147
 msgid "Symbol, Math"
-msgstr "Symbool, Wiskundig"
+msgstr "Symbool, wiskundig"
 
 #: ../gucharmap/gucharmap-unicode-info.c:148
 msgid "Symbol, Other"
-msgstr "Symbool, Andere"
+msgstr "Symbool, overig"
 
 #: ../gucharmap/gucharmap-unicode-info.c:149
 msgid "Separator, Line"
-msgstr "Scheiding, Lijn"
+msgstr "Scheiding, lijn"
 
 #: ../gucharmap/gucharmap-unicode-info.c:150
 msgid "Separator, Paragraph"
-msgstr "Scheiding, Paragraaf"
+msgstr "Scheiding, alinea"
 
 #: ../gucharmap/gucharmap-unicode-info.c:151
 msgid "Separator, Space"
-msgstr "Scheiding, Spatie"
+msgstr "Scheiding, spatie"
 
-#: ../gucharmap/gucharmap-window.c:247
+#: ../gucharmap/gucharmap-window.c:246
 msgid "Searching…"
 msgstr "Zoeken…"
 
-#: ../gucharmap/gucharmap-window.c:476
+#: ../gucharmap/gucharmap-window.c:493
 msgid ""
 "Gucharmap is free software; you can redistribute it and/or modify it under "
 "the terms of the GNU General Public License as published by the Free "
@@ -353,10 +358,10 @@ msgid ""
 msgstr ""
 "Gucharmap is vrije software; u mag het herdistribueren en/of aanpassen onder "
 "de voorwaarden van de GNU General Public License zoals die gepubliceerd is "
-"door de Free Software Foundation; ofwel versie 2 van de licentie of (als u "
+"door de Free Software Foundation; ofwel versie 2 van de licentie of (zo u "
 "wilt) een latere versie."
 
-#: ../gucharmap/gucharmap-window.c:480
+#: ../gucharmap/gucharmap-window.c:497
 msgid ""
 "Permission is hereby granted, free of charge, to any person obtaining a copy "
 "of the Unicode data files to deal in them without restriction, including "
@@ -370,7 +375,7 @@ msgstr ""
 "verkopen van kopieën."
 
 # auteursrecht/copyright
-#: ../gucharmap/gucharmap-window.c:484
+#: ../gucharmap/gucharmap-window.c:501
 msgid ""
 "Gucharmap and the Unicode data files are distributed in the hope that they "
 "will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty "
@@ -383,7 +388,7 @@ msgstr ""
 "DOEL.  Zie de GNU General Public License en het Unicode auteursrecht voor "
 "meer informatie."
 
-#: ../gucharmap/gucharmap-window.c:488
+#: ../gucharmap/gucharmap-window.c:505
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "Gucharmap; if not, write to the Free Software Foundation, Inc., 59 Temple "
@@ -393,7 +398,7 @@ msgstr ""
 "ontvangen; zo niet, schrijf dan naar de Free Software Foundation, Inc., 59 "
 "Temple Place, Suite 330, Boston, MA  02111-1307  USA"
 
-#: ../gucharmap/gucharmap-window.c:491
+#: ../gucharmap/gucharmap-window.c:508
 msgid ""
 "Also you should have received a copy of the Unicode Copyright along with "
 "Gucharmap; you can always find it at Unicode's website: http://www.unicode."
@@ -403,15 +408,15 @@ msgstr ""
 "gekregen; u kunt deze altijd vinden op de website van Unicode op: http://www."
 "unicode.org/copyright.html\""
 
-#: ../gucharmap/gucharmap-window.c:504
-msgid "GNOME Character Map based on the Unicode Character Database"
-msgstr "Gnome lettertekens gebaseerd op de Unicode Character Database"
+#: ../gucharmap/gucharmap-window.c:521 ../gucharmap/main.c:37
+msgid "GNOME Character Map"
+msgstr "Tekens en symbolen"
 
-#: ../gucharmap/gucharmap-window.c:511
-msgid "Gucharmap"
-msgstr "Gucharmap"
+#: ../gucharmap/gucharmap-window.c:523
+msgid "Based on the Unicode Character Database 5.1"
+msgstr "Gebaseerd op de Unicode Character Database 5.1"
 
-#: ../gucharmap/gucharmap-window.c:513
+#: ../gucharmap/gucharmap-window.c:532
 msgid "translator-credits"
 msgstr ""
 "Wouter Bolsterlee\n"
@@ -420,118 +425,117 @@ msgstr ""
 "\n"
 "Kijk voor meer informatie op http://nl.gnome.org/"
 
-#: ../gucharmap/gucharmap-window.c:590 ../gucharmap/gucharmap-window.c:860
+#: ../gucharmap/gucharmap-window.c:607 ../gucharmap/gucharmap-window.c:874
 msgid "Next Script"
 msgstr "Volgend schrift"
 
-#: ../gucharmap/gucharmap-window.c:590 ../gucharmap/gucharmap-window.c:862
+#: ../gucharmap/gucharmap-window.c:607 ../gucharmap/gucharmap-window.c:876
 msgid "Previous Script"
 msgstr "Vorig schrift"
 
-#: ../gucharmap/gucharmap-window.c:595
+#: ../gucharmap/gucharmap-window.c:612
 msgid "Next Block"
 msgstr "Volgend blok"
 
-#: ../gucharmap/gucharmap-window.c:595
+#: ../gucharmap/gucharmap-window.c:612
 msgid "Previous Block"
 msgstr "Vorig blok"
 
-#: ../gucharmap/gucharmap-window.c:823
+#: ../gucharmap/gucharmap-window.c:837
 msgid "_File"
 msgstr "_Bestand"
 
-#: ../gucharmap/gucharmap-window.c:824
+#: ../gucharmap/gucharmap-window.c:838
 msgid "_View"
 msgstr "Beel_d"
 
-#: ../gucharmap/gucharmap-window.c:825
+#: ../gucharmap/gucharmap-window.c:839
 msgid "_Search"
 msgstr "_Zoeken"
 
-#: ../gucharmap/gucharmap-window.c:826
+#: ../gucharmap/gucharmap-window.c:840
 msgid "_Go"
 msgstr "_Ga naar"
 
-#: ../gucharmap/gucharmap-window.c:827
+#: ../gucharmap/gucharmap-window.c:841
 msgid "_Help"
 msgstr "_Hulp"
 
-#: ../gucharmap/gucharmap-window.c:830
+#: ../gucharmap/gucharmap-window.c:844
 msgid "Page _Setup"
 msgstr "Pagina-i_nstellingen"
 
-#: ../gucharmap/gucharmap-window.c:851
+#: ../gucharmap/gucharmap-window.c:865
 msgid "Find _Next"
 msgstr "V_olgende zoeken"
 
-#: ../gucharmap/gucharmap-window.c:853
+#: ../gucharmap/gucharmap-window.c:867
 msgid "Find _Previous"
 msgstr "Vo_rige zoeken"
 
-#: ../gucharmap/gucharmap-window.c:856
+#: ../gucharmap/gucharmap-window.c:870
 msgid "_Next Character"
 msgstr "V_olgend teken"
 
-#: ../gucharmap/gucharmap-window.c:858
+#: ../gucharmap/gucharmap-window.c:872
 msgid "_Previous Character"
 msgstr "Vo_rig teken"
 
-#: ../gucharmap/gucharmap-window.c:865
+#: ../gucharmap/gucharmap-window.c:879
 msgid "_Contents"
 msgstr "In_houd"
 
-#: ../gucharmap/gucharmap-window.c:867
+#: ../gucharmap/gucharmap-window.c:881
 msgid "_About"
 msgstr "I_nfo"
 
-#: ../gucharmap/gucharmap-window.c:877
+#: ../gucharmap/gucharmap-window.c:891
 msgid "By _Script"
 msgstr "Per _schrift"
 
-#: ../gucharmap/gucharmap-window.c:879
+#: ../gucharmap/gucharmap-window.c:893
 msgid "By _Unicode Block"
 msgstr "Per _Unicode-blok"
 
 # eenvoudiger maar niet helemaal juist: even aantallen kolommen.
-#: ../gucharmap/gucharmap-window.c:884
+#: ../gucharmap/gucharmap-window.c:898
 msgid "Snap _Columns to Power of Two"
 msgstr "Aantal _kolommen is macht van 2"
 
 # de _k wordt gebruikt voor de knop _kopieren en de T voor Tekentabel
-#: ../gucharmap/gucharmap-window.c:957
+#: ../gucharmap/gucharmap-window.c:967
 msgid "_Text to copy:"
-msgstr "Te k_opiëren tekst:"
+msgstr "Te _kopiëren tekst:"
 
-#: ../gucharmap/gucharmap-window.c:962
+#: ../gucharmap/gucharmap-window.c:974
 msgid "Copy to the clipboard."
 msgstr "Kopiëren naar het klembord."
 
-#: ../gucharmap/main.c:43
+# 27‽ 24 is veel gangbaarder in fatsoenlijke typografie! :) (Wouter Bolsterlee)
+#: ../gucharmap/main.c:55
 msgid "Font to start with; ex: 'Serif 27'"
-msgstr "Lettertype om mee te beginnen; bv. 'Serif 27'"
+msgstr "Lettertype om mee te beginnen; bv. ‘Serif 24’"
 
-#: ../gucharmap/main.c:43
+#: ../gucharmap/main.c:55
 msgid "FONT"
 msgstr "LETTERTYPE"
 
 # voor consistentie met de andere vormen met Latijns
 #: ../gucharmap/unicode-blocks.h:14
 msgid "Basic Latin"
-msgstr "Latijns basis"
+msgstr "Latijns (basis)"
 
-# aanvulling/supplement
 #: ../gucharmap/unicode-blocks.h:15
 msgid "Latin-1 Supplement"
-msgstr "Latijns-1 aanvulling"
+msgstr "Latijns-1 (aanvulling)"
 
-# uitbreiding/verlengd/vergroot/uitgebreid/extensie
 #: ../gucharmap/unicode-blocks.h:16
 msgid "Latin Extended-A"
-msgstr "Latijns uitgebreid-A"
+msgstr "Latijns (uitbreiding A)"
 
 #: ../gucharmap/unicode-blocks.h:17
 msgid "Latin Extended-B"
-msgstr "Latijns uitgebreid-B"
+msgstr "Latijns (uitbreiding B)"
 
 # IPA: International Phonetic Alphabet
 # fonetische tekens
@@ -560,7 +564,7 @@ msgstr "Cyrillisch"
 
 #: ../gucharmap/unicode-blocks.h:23
 msgid "Cyrillic Supplement"
-msgstr "Cyrillisch aanvulling"
+msgstr "Cyrillisch (aanvulling)"
 
 #: ../gucharmap/unicode-blocks.h:24 ../gucharmap/unicode-scripts.h:17
 msgid "Armenian"
@@ -576,11 +580,11 @@ msgstr "Arabisch"
 
 #: ../gucharmap/unicode-blocks.h:27 ../gucharmap/unicode-scripts.h:80
 msgid "Syriac"
-msgstr "Syriac"
+msgstr "Syrisch"
 
 #: ../gucharmap/unicode-blocks.h:28
 msgid "Arabic Supplement"
-msgstr "Arabisch aanvulling"
+msgstr "Arabisch (aanvulling)"
 
 #: ../gucharmap/unicode-blocks.h:29 ../gucharmap/unicode-scripts.h:86
 msgid "Thaana"
@@ -660,15 +664,18 @@ msgstr "Ethiopisch"
 
 #: ../gucharmap/unicode-blocks.h:48
 msgid "Ethiopic Supplement"
-msgstr "Ethiopisch aanvulling"
+msgstr "Ethiopisch (aanvulling)"
 
 #: ../gucharmap/unicode-blocks.h:49 ../gucharmap/unicode-scripts.h:27
 msgid "Cherokee"
 msgstr "Cherokee"
 
+# Het schrift heet ‘Canadian Aboriginal syllabics’, dus dat laten we maar
+# onvertaald bij gebrek aan een fatsoenlijke Nederlandse vertaling. Let op, er
+# staat ‘syllabics’, niet ‘syllables’! (Wouter Bolsterlee)
 #: ../gucharmap/unicode-blocks.h:50
 msgid "Unified Canadian Aboriginal Syllabics"
-msgstr "Verenigde Canadese Aboriginal syllaben"
+msgstr "Verenigde Canadese Aboriginal Syllabics"
 
 #: ../gucharmap/unicode-blocks.h:51 ../gucharmap/unicode-scripts.h:65
 msgid "Ogham"
@@ -706,13 +713,15 @@ msgstr "Mongools"
 msgid "Limbu"
 msgstr "Limbu"
 
+# Let op, dis is NIET Thai(s) (Wouter Bolsterlee)
 #: ../gucharmap/unicode-blocks.h:60 ../gucharmap/unicode-scripts.h:83
 msgid "Tai Le"
-msgstr "Thai Le"
+msgstr "Tai Le"
 
+# Let op, dis is NIET Thai(s) (Wouter Bolsterlee)
 #: ../gucharmap/unicode-blocks.h:61 ../gucharmap/unicode-scripts.h:64
 msgid "New Tai Lue"
-msgstr "Nieuw Thai Lue"
+msgstr "Nieuw Tai Lü"
 
 #: ../gucharmap/unicode-blocks.h:62
 msgid "Khmer Symbols"
@@ -726,7 +735,8 @@ msgstr "Buginees"
 msgid "Balinese"
 msgstr "Balinees"
 
-# Soedanees?
+# Let op: Het Sundanees is een West-Javaans schrift. Dit is niet hetzelfde als
+# Soedanees! (Wouter Bolsterlee)
 #: ../gucharmap/unicode-blocks.h:65 ../gucharmap/unicode-scripts.h:78
 msgid "Sundanese"
 msgstr "Sundanees"
@@ -745,19 +755,19 @@ msgstr "Fonetische uitbreidingen"
 
 #: ../gucharmap/unicode-blocks.h:69
 msgid "Phonetic Extensions Supplement"
-msgstr "Fonetische uitbreidingen aanvulling"
+msgstr "Fonetische uitbreidingen (aanvulling)"
 
 #: ../gucharmap/unicode-blocks.h:70
 msgid "Combining Diacritical Marks Supplement"
-msgstr "Combinerende diakritische tekens aanvulling"
+msgstr "Combinerende diakritische tekens (aanvulling)"
 
 #: ../gucharmap/unicode-blocks.h:71
 msgid "Latin Extended Additional"
-msgstr "Latijns uitgebreid bijkomend"
+msgstr "Latijns (additionele uitbreiding)"
 
 #: ../gucharmap/unicode-blocks.h:72
 msgid "Greek Extended"
-msgstr "Grieks uitgebreid"
+msgstr "Grieks (uitbreiding)"
 
 #: ../gucharmap/unicode-blocks.h:73
 msgid "General Punctuation"
@@ -819,7 +829,7 @@ msgstr "Celtekeningen"
 
 #: ../gucharmap/unicode-blocks.h:86
 msgid "Block Elements"
-msgstr "Blok-elementen"
+msgstr "Blokelementen"
 
 #: ../gucharmap/unicode-blocks.h:87
 msgid "Geometric Shapes"
@@ -835,11 +845,11 @@ msgstr "Dingbats"
 
 #: ../gucharmap/unicode-blocks.h:90
 msgid "Miscellaneous Mathematical Symbols-A"
-msgstr "Gemengde wiskundige symbolen-A"
+msgstr "Gemengde wiskundige symbolen A"
 
 #: ../gucharmap/unicode-blocks.h:91
 msgid "Supplemental Arrows-A"
-msgstr "Aanvulling Pijlen-A"
+msgstr "Aanvullende pijlen A"
 
 #: ../gucharmap/unicode-blocks.h:92
 msgid "Braille Patterns"
@@ -847,15 +857,15 @@ msgstr "Braille-patronen"
 
 #: ../gucharmap/unicode-blocks.h:93
 msgid "Supplemental Arrows-B"
-msgstr "Aanvulling pijlen-B"
+msgstr "Aanvullende pijlen B"
 
 #: ../gucharmap/unicode-blocks.h:94
 msgid "Miscellaneous Mathematical Symbols-B"
-msgstr "Gemengde wiskundige symbolen-B"
+msgstr "Gemengde wiskundige symbolen B"
 
 #: ../gucharmap/unicode-blocks.h:95
 msgid "Supplemental Mathematical Operators"
-msgstr "Aanvulling wiskundige operatoren"
+msgstr "Aanvullende wiskundige operatoren"
 
 #: ../gucharmap/unicode-blocks.h:96
 msgid "Miscellaneous Symbols and Arrows"
@@ -865,10 +875,9 @@ msgstr "Gemengde symbolen en pijlen"
 msgid "Glagolitic"
 msgstr "Glagolitisch"
 
-# uitbreiding/verlengd/vergroot/uitgebreid/extensie
 #: ../gucharmap/unicode-blocks.h:98
 msgid "Latin Extended-C"
-msgstr "Latijns uitgebreid-C"
+msgstr "Latijns (uitbreiding C)"
 
 #: ../gucharmap/unicode-blocks.h:99 ../gucharmap/unicode-scripts.h:29
 msgid "Coptic"
@@ -876,7 +885,7 @@ msgstr "Koptisch"
 
 #: ../gucharmap/unicode-blocks.h:100
 msgid "Georgian Supplement"
-msgstr "Georgisch aanvulling"
+msgstr "Georgisch (aanvulling)"
 
 #: ../gucharmap/unicode-blocks.h:101 ../gucharmap/unicode-scripts.h:89
 msgid "Tifinagh"
@@ -884,20 +893,19 @@ msgstr "Tifinagh"
 
 #: ../gucharmap/unicode-blocks.h:102
 msgid "Ethiopic Extended"
-msgstr "Ethiopisch uitgebreid"
+msgstr "Ethiopisch (uitbreiding)"
 
-# uitbreiding/verlengd/vergroot/uitgebreid/extensie
 #: ../gucharmap/unicode-blocks.h:103
 msgid "Cyrillic Extended-A"
-msgstr "Cyrillisch uitgebreid-A"
+msgstr "Cyrillisch (uitbreiding A)"
 
 #: ../gucharmap/unicode-blocks.h:104
 msgid "Supplemental Punctuation"
-msgstr "Aanvulling leestekens"
+msgstr "Aanvullende leestekens"
 
 #: ../gucharmap/unicode-blocks.h:105
 msgid "CJK Radicals Supplement"
-msgstr "CJK-stamwoorden aanvulling"
+msgstr "CJK-stamwoorden (aanvulling)"
 
 #: ../gucharmap/unicode-blocks.h:106
 msgid "Kangxi Radicals"
@@ -907,10 +915,9 @@ msgstr "Kangxi-stamwoorden"
 msgid "Ideographic Description Characters"
 msgstr "Ideografische beschrijvings-karakters"
 
-# leestekens/punctuatie
 #: ../gucharmap/unicode-blocks.h:108
 msgid "CJK Symbols and Punctuation"
-msgstr "CJK-symbolen en leestekens"
+msgstr "CJK-symbolen en -leestekens"
 
 #: ../gucharmap/unicode-blocks.h:109 ../gucharmap/unicode-scripts.h:46
 msgid "Hiragana"
@@ -934,7 +941,7 @@ msgstr "Kanbun"
 
 #: ../gucharmap/unicode-blocks.h:114
 msgid "Bopomofo Extended"
-msgstr "Bopomofo uitgebreid"
+msgstr "Bopomofo (uitbreiding)"
 
 #: ../gucharmap/unicode-blocks.h:115
 msgid "CJK Strokes"
@@ -942,19 +949,19 @@ msgstr "CJK-strepen"
 
 #: ../gucharmap/unicode-blocks.h:116
 msgid "Katakana Phonetic Extensions"
-msgstr "Katakana fonetische uitbreidingen"
+msgstr "Katakana (fonetische uitbreidingen)"
 
 #: ../gucharmap/unicode-blocks.h:117
 msgid "Enclosed CJK Letters and Months"
-msgstr "Ingesloten CJK-tekens en maanden"
+msgstr "Ingesloten CJK-tekens en -maanden"
 
 #: ../gucharmap/unicode-blocks.h:118
 msgid "CJK Compatibility"
-msgstr "CJK compatibiliteit"
+msgstr "CJK-compatibiliteit"
 
 #: ../gucharmap/unicode-blocks.h:119
 msgid "CJK Unified Ideographs Extension A"
-msgstr "CJK verenigde ideogrammen uitbreiding A"
+msgstr "Verenigde CJK-ideogrammen (uitbreiding A)"
 
 #: ../gucharmap/unicode-blocks.h:120
 msgid "Yijing Hexagram Symbols"
@@ -978,16 +985,15 @@ msgstr "Vai"
 
 #: ../gucharmap/unicode-blocks.h:125
 msgid "Cyrillic Extended-B"
-msgstr "Cyrillisch uitgebreid-B"
+msgstr "Cyrillisch (uitbreiding B)"
 
 #: ../gucharmap/unicode-blocks.h:126
 msgid "Modifier Tone Letters"
 msgstr "Toonwijziging-tekens"
 
-# uitbreiding/verlengd/vergroot/uitgebreid/extensie
 #: ../gucharmap/unicode-blocks.h:127
 msgid "Latin Extended-D"
-msgstr "Latijns uitgebreid-D"
+msgstr "Latijns (uitbreiding D)"
 
 #: ../gucharmap/unicode-blocks.h:128 ../gucharmap/unicode-scripts.h:79
 msgid "Syloti Nagri"
@@ -1015,7 +1021,7 @@ msgstr "Cham"
 
 #: ../gucharmap/unicode-blocks.h:134
 msgid "Hangul Syllables"
-msgstr "Hangul syllaben"
+msgstr "Hangul-lettergrepen"
 
 #: ../gucharmap/unicode-blocks.h:135
 msgid "High Surrogates"
@@ -1047,7 +1053,7 @@ msgstr "Arabische presentatievormen-A"
 
 #: ../gucharmap/unicode-blocks.h:142
 msgid "Variation Selectors"
-msgstr "Variantie Selectoren"
+msgstr "Variantie-selectoren"
 
 #: ../gucharmap/unicode-blocks.h:143
 msgid "Vertical Forms"
@@ -1055,11 +1061,11 @@ msgstr "Verticale vormen"
 
 #: ../gucharmap/unicode-blocks.h:144
 msgid "Combining Half Marks"
-msgstr "Combinerende halve tekens"
+msgstr "Combinerende halve markering"
 
 #: ../gucharmap/unicode-blocks.h:145
 msgid "CJK Compatibility Forms"
-msgstr "CJK compatibiliteitsvormen"
+msgstr "CJK-compatibiliteitsvormen"
 
 #: ../gucharmap/unicode-blocks.h:146
 msgid "Small Form Variants"
@@ -1067,26 +1073,27 @@ msgstr "Kleine-vormvarianten"
 
 #: ../gucharmap/unicode-blocks.h:147
 msgid "Arabic Presentation Forms-B"
-msgstr "Arabische presentatievormen-B"
+msgstr "Arabische presentatievormen B"
 
 #: ../gucharmap/unicode-blocks.h:148
 msgid "Halfwidth and Fullwidth Forms"
-msgstr "Halve- en volle breedte vormen"
+msgstr "Halve- en volle-breedtevormen"
 
 #: ../gucharmap/unicode-blocks.h:149
 msgid "Specials"
 msgstr "Speciaal"
 
 # Het lineair-b is een schrift! Het is dus *NIET* een B die lineair is.
-# dus NIET: Lineaire B. Dat is fout!
+# dus NIET: Lineaire B. Dat is fout! (Tino Meinen)
+# Ja Tino, dat wisten we al. (Wouter Bolsterlee)
 #: ../gucharmap/unicode-blocks.h:150
 msgid "Linear B Syllabary"
-msgstr "Lineair-B syllaben"
+msgstr "Lineair-B-lettergrepen"
 
 # Het lineair-b is een schrift. Het is dus *NIET* een B die lineair is.
 #: ../gucharmap/unicode-blocks.h:151
 msgid "Linear B Ideograms"
-msgstr "Lineair-B ideogrammen"
+msgstr "Lineair-B-ideogrammen"
 
 #: ../gucharmap/unicode-blocks.h:152
 msgid "Aegean Numbers"
@@ -1147,11 +1154,11 @@ msgstr "Osmaans"
 
 #: ../gucharmap/unicode-blocks.h:165
 msgid "Cypriot Syllabary"
-msgstr "Cypriotische syllaben"
+msgstr "Cypriotisch (syllabisch)"
 
 #: ../gucharmap/unicode-blocks.h:166 ../gucharmap/unicode-scripts.h:72
 msgid "Phoenician"
-msgstr "Phoenitisch"
+msgstr "Fenicisch"
 
 #: ../gucharmap/unicode-blocks.h:167 ../gucharmap/unicode-scripts.h:59
 msgid "Lydian"
@@ -1164,12 +1171,11 @@ msgstr "Kharosthi"
 
 #: ../gucharmap/unicode-blocks.h:169 ../gucharmap/unicode-scripts.h:30
 msgid "Cuneiform"
-msgstr "Cuneiform"
+msgstr "Spijkerschrift"
 
-# leestekens/punctuatie
 #: ../gucharmap/unicode-blocks.h:170
 msgid "Cuneiform Numbers and Punctuation"
-msgstr "Cuneiform-getallen en leestekens"
+msgstr "Spijkerschrift-getallen en -leestekens"
 
 #: ../gucharmap/unicode-blocks.h:171
 msgid "Byzantine Musical Symbols"
@@ -1187,10 +1193,9 @@ msgstr "Oudgriekse muzieknotatie"
 msgid "Tai Xuan Jing Symbols"
 msgstr "Tai Xuan Jing symbolen"
 
-# is dit de juiste vertaling?
 #: ../gucharmap/unicode-blocks.h:175
 msgid "Counting Rod Numerals"
-msgstr "Telraam nummers"
+msgstr "Telraam-getallen"
 
 #: ../gucharmap/unicode-blocks.h:176
 msgid "Mathematical Alphanumeric Symbols"
@@ -1206,11 +1211,12 @@ msgstr "Domino-stenen"
 
 #: ../gucharmap/unicode-blocks.h:179
 msgid "CJK Unified Ideographs Extension B"
-msgstr "CJK verenigde ideogrammen uitbreiding B"
+msgstr "Verenigde CJK-ideogrammen (uitbreiding B)"
 
+# Drie keer woordwaarde! (Wouter Bolsterlee)
 #: ../gucharmap/unicode-blocks.h:180
 msgid "CJK Compatibility Ideographs Supplement"
-msgstr "CJK compatibiliteits-ideogrammen aanvulling"
+msgstr "CJK-compatibiliteitideogrammen (aanvulling)"
 
 #: ../gucharmap/unicode-blocks.h:181
 msgid "Tags"
@@ -1218,7 +1224,7 @@ msgstr "Tags"
 
 #: ../gucharmap/unicode-blocks.h:182
 msgid "Variation Selectors Supplement"
-msgstr "Variatie selectoren aanvulling"
+msgstr "Variatie-selectoren (aanvulling)"
 
 #: ../gucharmap/unicode-blocks.h:183
 msgid "Supplementary Private Use Area-A"
@@ -1232,7 +1238,6 @@ msgstr "Aanvullend gebied voor privaatgebruik-B"
 msgid "Braille"
 msgstr "Braille"
 
-# Canadees Aboriginal
 #: ../gucharmap/unicode-scripts.h:24
 msgid "Canadian Aboriginal"
 msgstr "Canadese Aboriginal-tekens"
@@ -1255,11 +1260,13 @@ msgstr "Hangul"
 
 #: ../gucharmap/unicode-scripts.h:47
 msgid "Inherited"
-msgstr "Over geërfd"
+msgstr "Overerfd"
 
+# Ja, met een s erachter. Het gaat om het schrift hier, niet om de taal.
+# (Wouter Bolsterlee)
 #: ../gucharmap/unicode-scripts.h:54
 msgid "Latin"
-msgstr "Latijn"
+msgstr "Latijns"
 
 #: ../gucharmap/unicode-scripts.h:57
 msgid "Linear B"
@@ -1273,33 +1280,32 @@ msgstr "Phags Pa"
 msgid "Yi"
 msgstr "Yi"
 
-#: ../gucharmap/gucharmap-search-dialog.c:564
+#: ../gucharmap/gucharmap-search-dialog.c:565
 msgid "Information"
 msgstr "Informatie"
 
 #. follow hig guidelines
-#: ../gucharmap/gucharmap-search-dialog.c:738
+#: ../gucharmap/gucharmap-search-dialog.c:739
 msgid "Find"
 msgstr "Zoeken"
 
-#: ../gucharmap/gucharmap-search-dialog.c:752
+#: ../gucharmap/gucharmap-search-dialog.c:753
 msgid "_Previous"
 msgstr "Vo_rige"
 
-#: ../gucharmap/gucharmap-search-dialog.c:759
+#: ../gucharmap/gucharmap-search-dialog.c:760
 msgid "_Next"
 msgstr "V_olgende"
 
-#: ../gucharmap/gucharmap-search-dialog.c:769
+#: ../gucharmap/gucharmap-search-dialog.c:770
 msgid "_Search:"
 msgstr "_Zoeken:"
 
-# _V wordt gebruikt in _Volgende
-#: ../gucharmap/gucharmap-search-dialog.c:779
+#: ../gucharmap/gucharmap-search-dialog.c:780
 msgid "Match _whole word"
 msgstr "Volledig _woord moet overeenstemmen"
 
-#: ../gucharmap/gucharmap-search-dialog.c:784
+#: ../gucharmap/gucharmap-search-dialog.c:785
 msgid "Search in character _details"
 msgstr "Zoeken in teken_details"
 
@@ -1311,30 +1317,6 @@ msgstr "Alles"
 msgid "Unicode Block"
 msgstr "Unicode-blok"
 
-#: ../gucharmap/gucharmap-script-chapters-model.c:133
+#: ../gucharmap/gucharmap-script-chapters-model.c:134
 msgid "Script"
 msgstr "Schrift"
-
-#~ msgid "Zoom _In"
-#~ msgstr "In_zoomen"
-
-#~ msgid "Zoom _Out"
-#~ msgstr "_Uitzoomen"
-
-#~ msgid "_Normal Size"
-#~ msgstr "_Normale grootte"
-
-#~ msgid "Clipboard is empty."
-#~ msgstr "Klembord is leeg."
-
-#~ msgid "There is no selected text."
-#~ msgstr "Er is geen geselecteerde tekst."
-
-#~ msgid "First character in clipboard not found."
-#~ msgstr "Eerste teken in _klembord niet gevonden."
-
-#~ msgid "Nothing to search for."
-#~ msgstr "Niets om naar te zoeken."
-
-#~ msgid "Character in _Clipboard"
-#~ msgstr "Teken in _klembord"
