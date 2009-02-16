@@ -220,7 +220,7 @@ gucharmap_print_operation_draw_page (GtkPrintOperation *operation,
   start_index = page_nr * page_size;
   last_index = start_index + page_size - 1;
   last_index = MIN (last_index, priv->last_codepoint_index);
-  g_assert (i <= priv->last_codepoint_index);
+  /* g_assert (i <= priv->last_codepoint_index); */
 
   cr = gtk_print_context_get_cairo_context (context);
 
