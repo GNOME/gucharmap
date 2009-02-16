@@ -862,9 +862,9 @@ gucharmap_window_init (GucharmapWindow *guw)
 
     { "Find", GTK_STOCK_FIND, NULL, NULL,
       NULL, G_CALLBACK (search_find) },
-    { "FindNext", GTK_STOCK_FIND, N_("Find _Next"), "<control>G",
+    { "FindNext", NULL, N_("Find _Next"), "<control>G",
       NULL, G_CALLBACK (search_find_next) },
-    { "FindPrevious", GTK_STOCK_FIND, N_("Find _Previous"), "<shift><control>G",
+    { "FindPrevious", NULL, N_("Find _Previous"), "<shift><control>G",
       NULL, G_CALLBACK (search_find_prev) },
 
     { "NextCharacter", NULL, N_("_Next Character"), "<control>N",
