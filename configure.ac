@@ -16,13 +16,10 @@
 # 59 Temple Place, Suite 330, Boston, MA 02110-1301  USA
 
 m4_define([gucharmap_version_major],[2])
-m4_define([gucharmap_version_minor],[25])
-m4_define([gucharmap_version_micro],[91])
+m4_define([gucharmap_version_minor],[26])
+m4_define([gucharmap_version_micro],[0])
 m4_define([gucharmap_version_extra],[])
 m4_define([gucharmap_version],[gucharmap_version_major.gucharmap_version_minor.gucharmap_version_micro()gucharmap_version_extra])
-
-# This can be either "trunk" or "branches/gnome-x-y"
-m4_define([gucharmap_branch],["trunk"])
 
 # Before making a release, the libtool version should be modified.
 # The string is of the form C:R:A.
@@ -266,10 +263,6 @@ AC_SUBST([LIBGUCHARMAP_LT_CURRENT_MINUS_AGE],[gucharmap_lt_current_minus_age])
 AC_SUBST([AM_CPPFLAGS])
 AC_SUBST([AM_CFLAGS])
 AC_SUBST([AM_LDFLAGS])
-
-AC_SUBST([SVN_ROOT],[http://svn.gnome.org/svn])
-AC_SUBST([SVN_MODULE],[gucharmap])
-AC_SUBST([SVN_BRANCH],[gucharmap_branch])
 
 AC_CONFIG_FILES([
 Makefile
