@@ -761,6 +761,11 @@ gucharmap_search_dialog_init (GucharmapSearchDialog *search_dialog)
   gtk_dialog_add_action_widget (GTK_DIALOG (search_dialog), priv->next_button, GUCHARMAP_RESPONSE_NEXT);
 
   gtk_dialog_set_default_response (GTK_DIALOG (search_dialog), GUCHARMAP_RESPONSE_NEXT);
+  gtk_dialog_set_alternative_button_order (GTK_DIALOG (search_dialog),
+                                           GUCHARMAP_RESPONSE_PREVIOUS,
+                                           GUCHARMAP_RESPONSE_NEXT,
+                                           GTK_RESPONSE_CLOSE,
+                                           -1);
 
   hbox = gtk_hbox_new (FALSE, 12);
   gtk_widget_show (hbox);
