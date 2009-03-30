@@ -147,7 +147,7 @@ family_combo_changed (GtkComboBox *combo,
 static int
 get_font_size (GucharmapMiniFontSelection *fontsel)
 {
-  return pango_font_description_get_size (fontsel->font_desc) / PANGO_SCALE;
+  return PANGO_PIXELS (pango_font_description_get_size (fontsel->font_desc));
 }
 
 /* size is in points */
