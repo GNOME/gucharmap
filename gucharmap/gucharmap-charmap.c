@@ -1309,7 +1309,7 @@ gucharmap_charmap_get_orientation (GucharmapCharmap *charmap)
 #endif /* !GUCHARMAP_DISABLE_DEPRECATED_SOURCE */
 
 /**
- * gucharmap_chartable_set_font_desc:
+ * gucharmap_charmap_set_font_desc:
  * @chartable: a #GucharmapChartable
  * @font_desc: a #PangoFontDescription
  *
