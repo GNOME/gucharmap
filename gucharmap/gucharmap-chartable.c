@@ -63,6 +63,15 @@ static void gucharmap_chartable_finalize   (GObject *object);
 
 static guint signals[NUM_SIGNALS];
 
+#define DEFAULT_FONT_SIZE (20.0 * (double) PANGO_SCALE)
+
+/* These are chosen for compatibility with the older code that
+ * didn't scale the font size by resolution and used 3 and 2.5 here, resp.
+ * Where exactly these factors came from, I don't know.
+ */
+#define FACTOR_WIDTH (2.25) /* 3 / (96 / 72) */
+#define FACTOR_HEIGHT (1.875) /* 2.5 / (96 / 72) */
+
 /** Notes
  *
  * 1. Table geometry
@@ -121,7 +130,6 @@ gucharmap_chartable_set_font_desc_internal (GucharmapChartable *chartable,
                                             PangoFontDescription *font_desc /* adopting */)
 {
   GucharmapChartablePrivate *priv = chartable->priv;
-  int font_size;
 
   if (priv->font_desc)
     pango_font_description_free (priv->font_desc);
@@ -130,14 +138,6 @@ gucharmap_chartable_set_font_desc_internal (GucharmapChartable *chartable,
  
   if (priv->pango_layout)
     pango_layout_set_font_description (priv->pango_layout, font_desc);
-
-  /* FIXMEchpe: check pango_font_description_get_size_is_absolute() ! */
-  font_size = pango_font_description_get_size (priv->font_desc);
-  /* FIXMEchpe bug 329481 */
-  priv->bare_minimal_column_width = PANGO_PIXELS (3.0 * font_size);
-  priv->bare_minimal_row_height = PANGO_PIXELS (2.5 * font_size);
-
-  priv->drag_font_size = 5 * ((font_size > 0) ? font_size : 10 * PANGO_SCALE);
 
   gtk_widget_queue_resize (GTK_WIDGET (chartable));
 
@@ -452,27 +452,6 @@ set_top_row (GucharmapChartable *chartable,
   g_object_notify (G_OBJECT (chartable), "active-character");
 }
 
-static gint
-compute_zoom_font_size (GucharmapChartable *chartable)
-{
-  GucharmapChartablePrivate *priv = chartable->priv;
-  GtkWidget *widget = GTK_WIDGET (chartable);
-  gint screen_height;
-  gdouble limit;
-  gdouble scale;
-  gint font_size;
-
-  screen_height = gdk_screen_get_height (gtk_widget_get_screen (widget));
-
-  limit = (0.3 * screen_height) / priv->bare_minimal_row_height;
-  scale = CLAMP (limit, 1.0, 12.0);
-
-  font_size = pango_font_description_get_size (priv->font_desc);
-  /* FIXMEchpe absolute size ? */
-
-  return scale * ((font_size > 0) ? font_size : 10 * PANGO_SCALE);
-}
-
 /* returns the font family of the last glyph item in the first line of the
  * layout; should be freed by caller */
 static gchar *
@@ -513,8 +492,8 @@ get_font (PangoLayout *layout)
 static PangoLayout *
 layout_scaled_glyph (GucharmapChartable *chartable, 
                      gunichar uc, 
-                     gint font_size,
-                     gchar **font_family)
+                     double font_factor,
+                     char **font_family)
 {
   GucharmapChartablePrivate *priv = chartable->priv;
   PangoFontDescription *font_desc;
@@ -522,7 +501,13 @@ layout_scaled_glyph (GucharmapChartable *chartable,
   gchar buf[11];
 
   font_desc = pango_font_description_copy (priv->font_desc);
-  pango_font_description_set_size (font_desc, font_size);
+
+  if (pango_font_description_get_size_is_absolute (priv->font_desc))
+    pango_font_description_set_absolute_size (font_desc,
+                                              font_factor * pango_font_description_get_size (priv->font_desc));
+  else
+    pango_font_description_set_size (font_desc,
+                                     font_factor * pango_font_description_get_size (priv->font_desc));
 
   layout = pango_layout_new (pango_layout_get_context (priv->pango_layout));
 
@@ -542,7 +527,7 @@ layout_scaled_glyph (GucharmapChartable *chartable,
 static GdkPixmap *
 create_glyph_pixmap (GucharmapChartable *chartable,
                      gunichar wc,
-                     gint font_size,
+                     double font_factor,
                      gboolean draw_font_family)
 {
   GtkWidget *widget = GTK_WIDGET (chartable);
@@ -553,13 +538,13 @@ create_glyph_pixmap (GucharmapChartable *chartable,
   gint pixmap_width, pixmap_height;
   GtkStyle *style;
   GdkPixmap *pixmap;
-  gchar *family;
+  char *family;
 
   /* Apply the scaling.  Unfortunately not all fonts seem to be scalable.
    * We could fall back to GdkPixbuf scaling, but that looks butt ugly :-/
    */
   pango_layout = layout_scaled_glyph (chartable, wc,
-                                      font_size, &family);
+                                      font_factor, &family);
   pango_layout_get_pixel_extents (pango_layout, &char_rect, NULL);
 
   if (draw_font_family)
@@ -663,15 +648,51 @@ place_zoom_window_on_active_cell (GucharmapChartable *chartable)
   gtk_window_move (GTK_WINDOW (priv->zoom_window), rect.x, rect.y);
 }
 
+static int
+get_font_size_px (GucharmapChartable *chartable)
+{
+  GucharmapChartablePrivate *priv = chartable->priv;
+  GtkWidget *widget = GTK_WIDGET (chartable);
+  GdkScreen *screen;
+  double resolution;
+  int font_size;
+
+  g_assert (priv->font_desc != NULL);
+
+  screen = gtk_widget_get_screen (widget);
+  resolution = gdk_screen_get_resolution (screen);
+  if (resolution < 0.0) /* will be -1 if the resolution is not defined in the GdkScreen */
+    resolution = 96.0;
+
+  if (pango_font_description_get_size_is_absolute (priv->font_desc))
+    font_size = pango_font_description_get_size (priv->font_desc);
+  else
+    font_size = ((double) pango_font_description_get_size (priv->font_desc)) * resolution / 72.0;
+
+  if (PANGO_PIXELS (font_size) <= 0)
+    font_size = DEFAULT_FONT_SIZE * resolution / 72.0;
+
+  return PANGO_PIXELS (font_size);
+}
+
 static void
 update_zoom_window (GucharmapChartable *chartable)
 {
   GucharmapChartablePrivate *priv = chartable->priv;
+  GtkWidget *widget = GTK_WIDGET (chartable);
   GdkPixmap *pixmap;
+  double scale;
+  int font_size_px, screen_height;
+
+  font_size_px = get_font_size_px (chartable);
+  screen_height = gdk_screen_get_height (gtk_widget_get_screen (widget));
+
+  scale = (0.3 * screen_height) / (FACTOR_WIDTH * font_size_px);
+  scale = CLAMP (scale, 1.0, 12.0);
 
   pixmap = create_glyph_pixmap (chartable,
                                 gucharmap_chartable_get_active_character (chartable),
-                                compute_zoom_font_size (chartable),
+                                scale,
                                 TRUE);
   gtk_image_set_from_pixmap (GTK_IMAGE (priv->zoom_image), pixmap, NULL);
   g_object_unref (pixmap);
@@ -1311,12 +1332,19 @@ gucharmap_chartable_drag_begin (GtkWidget *widget,
                                 GdkDragContext *context)
 {
   GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (widget);
-  GucharmapChartablePrivate *priv = chartable->priv;
   GdkPixmap *drag_icon;
+  double scale;
+  int font_size_px, screen_height;
+
+  font_size_px = get_font_size_px (chartable);
+  screen_height = gdk_screen_get_height (gtk_widget_get_screen (widget));
+
+  scale = (0.3 * screen_height) / (FACTOR_WIDTH * font_size_px);
+  scale = CLAMP (scale, 1.0, 5.0);
 
   drag_icon = create_glyph_pixmap (chartable,
                                    gucharmap_chartable_get_active_character (chartable),
-                                   priv->drag_font_size,
+                                   scale,
                                    FALSE);
   gtk_drag_set_icon_pixmap (context, gtk_widget_get_colormap (widget), 
                             drag_icon, NULL, -8, -8);
@@ -1581,18 +1609,26 @@ gucharmap_chartable_size_allocate (GtkWidget *widget,
   int old_rows, old_cols;
   int total_extra_pixels;
   int new_first_cell;
+  int bare_minimal_column_width, bare_minimal_row_height;
+  int font_size_px;
 
   GTK_WIDGET_CLASS (gucharmap_chartable_parent_class)->size_allocate (widget, allocation);
 
   old_rows = priv->rows;
   old_cols = priv->cols;
 
-  if (priv->snap_pow2_enabled)
-    priv->cols = (1 << g_bit_nth_msf ((allocation->width - 1) / priv->bare_minimal_column_width, -1));
-  else
-    priv->cols = (allocation->width - 1) / priv->bare_minimal_column_width;
+  font_size_px = get_font_size_px (chartable);
 
-  priv->rows = (allocation->height - 1) / priv->bare_minimal_row_height;
+  /* FIXMEchpe bug 329481 */
+  bare_minimal_column_width = FACTOR_WIDTH * font_size_px;
+  bare_minimal_row_height = FACTOR_HEIGHT * font_size_px;
+
+  if (priv->snap_pow2_enabled)
+    priv->cols = (1 << g_bit_nth_msf ((allocation->width - 1) / bare_minimal_column_width, -1));
+  else
+    priv->cols = (allocation->width - 1) / bare_minimal_column_width;
+
+  priv->rows = (allocation->height - 1) / bare_minimal_row_height;
 
   /* avoid a horrible floating point exception crash */
   if (priv->rows < 1)
@@ -1602,12 +1638,12 @@ gucharmap_chartable_size_allocate (GtkWidget *widget,
 
   priv->page_size = priv->rows * priv->cols;
 
-  total_extra_pixels = widget->allocation.width - (priv->cols * priv->bare_minimal_column_width + 1);
-  priv->minimal_column_width = priv->bare_minimal_column_width + total_extra_pixels / priv->cols;
+  total_extra_pixels = widget->allocation.width - (priv->cols * bare_minimal_column_width + 1);
+  priv->minimal_column_width = bare_minimal_column_width + total_extra_pixels / priv->cols;
   priv->n_padded_columns = widget->allocation.width - (priv->minimal_column_width * priv->cols + 1);
 
-  total_extra_pixels = widget->allocation.height - (priv->rows * priv->bare_minimal_row_height + 1);
-  priv->minimal_row_height = priv->bare_minimal_row_height + total_extra_pixels / priv->rows;
+  total_extra_pixels = widget->allocation.height - (priv->rows * bare_minimal_row_height + 1);
+  priv->minimal_row_height = bare_minimal_row_height + total_extra_pixels / priv->rows;
   priv->n_padded_rows = widget->allocation.height - (priv->minimal_row_height * priv->rows + 1);
 
   /* force pixmap to be redrawn on next expose event */
@@ -1638,10 +1674,12 @@ gucharmap_chartable_size_request (GtkWidget *widget,
                                   GtkRequisition *requisition)
 {
   GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (widget);
-  GucharmapChartablePrivate *priv = chartable->priv;
-  
-  requisition->width = priv->bare_minimal_column_width;
-  requisition->height = priv->bare_minimal_row_height;
+  int font_size_px;
+
+  font_size_px = get_font_size_px (chartable);
+
+  requisition->width = FACTOR_WIDTH * font_size_px;
+  requisition->height = FACTOR_HEIGHT * font_size_px;
 }
 
 static void
@@ -1665,9 +1703,17 @@ gucharmap_chartable_style_set (GtkWidget *widget,
     PangoFontDescription *font_desc;
 
     font_desc = pango_font_description_copy (widget->style->font_desc);
-    pango_font_description_set_size (font_desc,
-                                     2.0 * pango_font_description_get_size (font_desc));
-    gucharmap_chartable_set_font_desc_internal (chartable, font_desc);
+
+    /* Use twice the size of the style's font */
+    if (pango_font_description_get_size_is_absolute (font_desc))
+      pango_font_description_set_absolute_size (font_desc,
+                                                2 * pango_font_description_get_size (font_desc));
+    else
+      pango_font_description_set_size (font_desc,
+                                       2 * pango_font_description_get_size (font_desc));
+
+    gucharmap_chartable_set_font_desc_internal (chartable, font_desc /* adopts */);
+    g_assert (priv->font_desc != NULL);
   }
 
   priv->pango_layout = gtk_widget_create_pango_layout (widget, NULL);
