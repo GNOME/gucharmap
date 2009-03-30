@@ -1,9 +1,8 @@
  - Maybe change the keyboard and mouse navigation to do prelight stuff;
    only blue when you click or press enter or whatever?
 
- - Paste to jump to a character [DONE]
-
- - Fix the mini_fontsel quirks and bugs. [DONE]
+ - Paste to jump to a character [done only in the case the chartable is focused
+   and the pasted character is in the current script/block]
 
  - Write gtk docs for the charmap and mini_fontsel widgets.
 
@@ -13,13 +12,7 @@
  - Think about the search; should it find computed hangul syllables,
    etc?
 
- - Write or solicit some help. The F1 kind.
- 
  - Edit menu. [UGLY. Not planning to do it.]
-
- - Font selection should be tabbable-to. [DONE]
-
- - Menu item(s) to enter and exit zoom mode. [DONE, then removed]
 
  - Maybe make the size of the zoom font configurable?
 
@@ -43,3 +36,9 @@
  - Include as much of the unidata as makes sense.
 
  - Hide gucharmap-chartable-*accessible.[ch] symbols.
+
+- Fix zoom window positioning; sometimes it doesn't work.
+
+- Fix expose slowness.
+
+- GucharmapScriptCodepointList should use GUnicodeScript instead of strings
