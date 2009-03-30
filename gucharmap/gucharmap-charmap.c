@@ -1310,7 +1310,7 @@ gucharmap_charmap_get_orientation (GucharmapCharmap *charmap)
 
 /**
  * gucharmap_charmap_set_font_desc:
- * @chartable: a #GucharmapChartable
+ * @charmap:
  * @font_desc: a #PangoFontDescription
  *
  * Sets @font_desc as the font to use to display the character table.
