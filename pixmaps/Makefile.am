@@ -16,3 +16,5 @@
 ##
 
 EXTRA_DIST = gucharmap.ico
+
+-include $(top_srcdir)/git.mk

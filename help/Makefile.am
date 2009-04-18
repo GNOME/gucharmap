@@ -13,3 +13,5 @@ DOC_LINGUAS = bg ca de el en_GB es fi fr ko oc pt_BR ru sv vi
 # configure.ac's AC_CONFIG_FILES, and remove your directory from
 # the SUBDIRS below.
 SUBDIRS = it ja zh_CN zh_TW
+
+-include $(top_srcdir)/git.mk

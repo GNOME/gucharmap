@@ -263,3 +263,5 @@ uninstall-local:
 	&& rm -f "$(DESTDIR)$(bindir)/gnome-character-map"
 
 endif # !OS_WIN32
+
+-include $(top_srcdir)/git.mk

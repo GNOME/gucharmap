@@ -84,3 +84,5 @@ regenerate-python-binding:
 		$(sort $(addprefix $(top_srcdir)/gucharmap/,$(srcdirheaders)) \
 		       $(addprefix $(top_builddir)/gucharmap/,$(builddirheaders))) \
 		> gucharmap.defs.new
+
+-include $(top_srcdir)/git.mk

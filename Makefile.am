@@ -1,6 +1,7 @@
 NULL =
 
 ACLOCAL_AMFLAGS = -I m4
+GITIGNOREFILES = m4
 
 SUBDIRS = po pixmaps gucharmap bindings docs
 
@@ -41,8 +42,29 @@ DISTCHECK_CONFIGURE_FLAGS = \
 	--enable-gtk-doc
 
 DISTCLEANFILES = \
-        gnome-doc-utils.make \
 	$(schema_DATA)
+MAINTAINERCLEANFILES = \
+	$(srcdir)/INSTALL \
+	$(srcdir)/aclocal.m4 \
+	$(srcdir)/autoscan.log \
+	$(srcdir)/compile \
+	$(srcdir)/config.guess \
+	$(srcdir)/config.h.in \
+	$(srcdir)/config.sub \
+	$(srcdir)/configure.scan \
+	$(srcdir)/depcomp \
+	$(srcdir)/install-sh \
+	$(srcdir)/ltmain.sh \
+	$(srcdir)/missing \
+	$(srcdir)/mkinstalldirs \
+	$(srcdir)/omf.make \
+	$(srcdir)/xmldocs.make \
+	$(srcdir)/gtk-doc.make \
+	$(srcdir)/gnome-doc-utils.make \
+	$(srcdir)/ChangeLog \
+	$(desktop_DATA) \
+	$(schema_DATA) \
+	`find "$(srcdir)" -type f -name Makefile.in -print`
 
 install-data-local: $(schema_DATA)
 if GCONF_SCHEMAS_INSTALL
@@ -65,3 +87,5 @@ dist: ChangeLog
 
 @INTLTOOL_DESKTOP_RULE@
 @INTLTOOL_SCHEMAS_RULE@
+
+-include $(top_srcdir)/git.mk

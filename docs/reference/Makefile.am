@@ -108,3 +108,5 @@ FIXXREF_OPTIONS = \
 	--extra-dir=$(CAIRO_PREFIX)/share/gtk-doc/html/cairo
 
 include $(top_srcdir)/gtk-doc.make
+
+-include $(top_srcdir)/git.mk
