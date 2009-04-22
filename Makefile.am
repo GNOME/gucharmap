@@ -41,8 +41,11 @@ DISTCHECK_CONFIGURE_FLAGS = \
 	--disable-schemas-install \
 	--enable-gtk-doc
 
-DISTCLEANFILES = \
-	$(schema_DATA)
+CLEANFILES = \
+	$(desktop_DATA) \
+	$(schema_DATA) \
+	$(NULL)
+
 MAINTAINERCLEANFILES = \
 	$(srcdir)/INSTALL \
 	$(srcdir)/aclocal.m4 \
@@ -61,9 +64,6 @@ MAINTAINERCLEANFILES = \
 	$(srcdir)/xmldocs.make \
 	$(srcdir)/gtk-doc.make \
 	$(srcdir)/gnome-doc-utils.make \
-	$(srcdir)/ChangeLog \
-	$(desktop_DATA) \
-	$(schema_DATA) \
 	`find "$(srcdir)" -type f -name Makefile.in -print`
 
 install-data-local: $(schema_DATA)
