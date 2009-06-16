@@ -39,7 +39,8 @@ typedef enum {
   GUCHARMAP_UNICODE_VERSION_4_1,
   GUCHARMAP_UNICODE_VERSION_5_0,
   GUCHARMAP_UNICODE_VERSION_5_1,
-  GUCHARMAP_UNICODE_VERSION_LATEST = GUCHARMAP_UNICODE_VERSION_5_1 /* private, will move forward with each revision */
+  GUCHARMAP_UNICODE_VERSION_5_2,
+  GUCHARMAP_UNICODE_VERSION_LATEST = GUCHARMAP_UNICODE_VERSION_5_2 /* private, will move forward with each revision */
 } GucharmapUnicodeVersion;
 
 /* return values are read-only */
