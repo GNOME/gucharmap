@@ -106,8 +106,11 @@ libgucharmapinclude_HEADERS = \
 	gucharmap.h \
 	gucharmap-script-chapters-model.h \
 	gucharmap-script-codepoint-list.h \
-	gucharmap-type-builtins.h \
 	gucharmap-unicode-info.h \
+	$(NULL)
+
+nodist_libgucharmapinclude_HEADERS = \
+	gucharmap-type-builtins.h \
 	$(NULL)
 
 bin_PROGRAMS = gucharmap
