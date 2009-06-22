@@ -20,6 +20,13 @@ NULL =
 
 lib_LTLIBRARIES = libgucharmap.la
 
+BUILT_SOURCES = \
+	gucharmap-marshal.c \
+	gucharmap-marshal.h \
+	gucharmap-type-builtins.c \
+	gucharmap-type-builtins.h \
+	$(NULL)
+
 libgucharmap_la_SOURCES = \
 	gucharmap-block-chapters-model.c \
 	gucharmap-block-chapters-model.h \
@@ -40,15 +47,11 @@ libgucharmap_la_SOURCES = \
 	gucharmap-codepoint-list.c \
 	gucharmap-codepoint-list.h \
 	gucharmap-init.c \
-	gucharmap-marshal.c \
-	gucharmap-marshal.h \
 	gucharmap-private.h \
 	gucharmap-script-chapters-model.c \
 	gucharmap-script-chapters-model.h \
 	gucharmap-script-codepoint-list.c \
 	gucharmap-script-codepoint-list.h \
-	gucharmap-type-builtins.c \
-	gucharmap-type-builtins.h \
 	gucharmap-unicode-info.c \
 	gucharmap-unicode-info.h \
 	unicode-blocks.h \
@@ -59,6 +62,8 @@ libgucharmap_la_SOURCES = \
 	unicode-unihan.h \
 	unicode-versions.h \
 	$(NULL)
+
+nodist_libgucharmap_la_SOURCES = $(BUILT_SOURCES)
 
 libgucharmap_la_CPPFLAGS = \
 	-I$(top_srcdir) \
@@ -156,13 +161,6 @@ gucharmaprc.o: gucharmaprc.rc
 	windres -i $< -o $@
 endif
 
-BUILT_SOURCES = \
-	gucharmap-marshal.c \
-	gucharmap-marshal.h \
-	gucharmap-type-builtins.c \
-	gucharmap-type-builtins.h \
-	$(NULL)
-
 gucharmap-marshal.h: $(srcdir)/gucharmap-marshal.list
 	( $(GLIB_GENMARSHAL) --prefix=_gucharmap_marshal $(srcdir)/gucharmap-marshal.list \
                             --header \
@@ -214,12 +212,12 @@ Gucharmap-2.0.gir: $(G_IR_SCANNER) libgucharmap.la $(libgucharmapinclude_HEADERS
 		--verbose \
 		--namespace=Gucharmap \
 		--nsversion=2.0 \
+		--include=GLib-2.0 \
 		--include=GObject-2.0 \
 		--include=Gtk-2.0 \
 		--library=gucharmap \
 		--libtool="$(LIBTOOL)" \
 		--output $@ \
-		--pkg gtk+-2.0 \
 		--pkg gucharmap-2 \
 		-I$(top_srcdir) \
 		-I$(top_builddir) \
