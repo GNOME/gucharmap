@@ -18,7 +18,7 @@
 m4_define([gucharmap_version_major],[2])
 m4_define([gucharmap_version_minor],[26])
 m4_define([gucharmap_version_micro],[3])
-m4_define([gucharmap_version_extra],[])
+m4_define([gucharmap_version_extra],[.1])
 m4_define([gucharmap_version],[gucharmap_version_major.gucharmap_version_minor.gucharmap_version_micro()gucharmap_version_extra])
 
 # Before making a release, the libtool version should be modified.
