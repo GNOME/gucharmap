@@ -711,22 +711,12 @@ set_button_stock_image_and_label (GtkButton *button,
                                   gchar     *stock_id,
                                   gchar     *mnemonic)
 {
-  GtkWidget *hbox, *image, *label, *align;
-
-  align = gtk_alignment_new (0.5, 0.5, 0.0, 0.0);
-  gtk_container_add (GTK_CONTAINER (button), align);
-
-  hbox = gtk_hbox_new (FALSE, 2);
-  gtk_container_add (GTK_CONTAINER (align), hbox);
+  GtkWidget *image;
 
   image = gtk_image_new_from_stock (stock_id, GTK_ICON_SIZE_BUTTON);
-  gtk_box_pack_start (GTK_BOX (hbox), image, FALSE, FALSE, 0);
-
-  label = gtk_label_new_with_mnemonic (mnemonic);
-  gtk_label_set_mnemonic_widget (GTK_LABEL (label), GTK_WIDGET (button));
-  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-
-  gtk_widget_show_all (align);
+  gtk_button_set_image (button, image);
+  gtk_button_set_label (button, mnemonic);
+  gtk_button_set_use_underline (button, TRUE);
 }
 
 static void
