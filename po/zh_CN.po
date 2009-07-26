@@ -1,24 +1,27 @@
 # gucharmap zh_CN.po
-# Copyright (C) 2003 Free Software Foundation, Inc.
+# Copyright (C) 2003-2009 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gucharmap package.
 # LIANG ChangTai <beos@turbolinux.com.cn>, 2003
 # Funda Wang <fundawang@linux.net.cn>, 2004
 # Cai Qian <caiqian@gnome.org>, 2005
+# Ray Wang <raywang@gnome.org>, 2009.
+# Aron Xu <aronxu@gnome.org>, 2009.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-23 04:49+0000\n"
-"PO-Revision-Date: 2008-09-24 21:17+0800\n"
-"Last-Translator: Yang Zhang <zyangmath@gmail.com>\n"
-"Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=gucharmap&component=general\n"
+"POT-Creation-Date: 2009-07-18 05:31+0000\n"
+"PO-Revision-Date: 2009-04-30 16:48+0800\n"
+"Last-Translator: Aron Xu <aronxu@gnome.org>\n"
+"Language-Team: Chinese (Simplified) <i18n-zh@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:890
-#: ../gucharmap/main.c:61
+#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:905
+#: ../gucharmap/main.c:80
 msgid "Character Map"
 msgstr "字符映射表"
 
@@ -26,121 +29,121 @@ msgstr "字符映射表"
 msgid "Insert special characters into documents"
 msgstr "在文档中插入特殊字符"
 
-#: ../gucharmap/gucharmap-charmap.c:553
+#: ../gucharmap/gucharmap-charmap.c:573
 msgid "Canonical decomposition:"
 msgstr "规范化分解："
 
-#: ../gucharmap/gucharmap-charmap.c:596 ../gucharmap/gucharmap-chartable.c:568
+#: ../gucharmap/gucharmap-charmap.c:616 ../gucharmap/gucharmap-chartable.c:553
 msgid "[not a printable character]"
 msgstr "[非可打印字符]"
 
-#: ../gucharmap/gucharmap-charmap.c:610
+#: ../gucharmap/gucharmap-charmap.c:630
 msgid "General Character Properties"
 msgstr "字符常规属性"
 
-#: ../gucharmap/gucharmap-charmap.c:616
+#: ../gucharmap/gucharmap-charmap.c:636
 msgid "In Unicode since:"
 msgstr "被此后的 Unicode 版本包含："
 
 #. character category
-#: ../gucharmap/gucharmap-charmap.c:620
+#: ../gucharmap/gucharmap-charmap.c:640
 msgid "Unicode category:"
 msgstr "Unicode 分类："
 
-#: ../gucharmap/gucharmap-charmap.c:629
+#: ../gucharmap/gucharmap-charmap.c:649
 msgid "Various Useful Representations"
 msgstr "其它有用的表示"
 
-#: ../gucharmap/gucharmap-charmap.c:639
+#: ../gucharmap/gucharmap-charmap.c:659
 msgid "UTF-8:"
 msgstr "UTF-8："
 
-#: ../gucharmap/gucharmap-charmap.c:647
+#: ../gucharmap/gucharmap-charmap.c:667
 msgid "UTF-16:"
 msgstr "UTF-16："
 
-#: ../gucharmap/gucharmap-charmap.c:658
+#: ../gucharmap/gucharmap-charmap.c:678
 msgid "C octal escaped UTF-8:"
 msgstr "C 八进制转码的 UTF-8："
 
-#: ../gucharmap/gucharmap-charmap.c:668
+#: ../gucharmap/gucharmap-charmap.c:688
 msgid "XML decimal entity:"
 msgstr "XML 十进制实体："
 
-#: ../gucharmap/gucharmap-charmap.c:679
+#: ../gucharmap/gucharmap-charmap.c:699
 msgid "Annotations and Cross References"
 msgstr "注解和交叉引用"
 
-#: ../gucharmap/gucharmap-charmap.c:686
+#: ../gucharmap/gucharmap-charmap.c:706
 msgid "Alias names:"
 msgstr "别名："
 
-#: ../gucharmap/gucharmap-charmap.c:695
+#: ../gucharmap/gucharmap-charmap.c:715
 msgid "Notes:"
 msgstr "附注："
 
-#: ../gucharmap/gucharmap-charmap.c:704
+#: ../gucharmap/gucharmap-charmap.c:724
 msgid "See also:"
 msgstr "另见："
 
-#: ../gucharmap/gucharmap-charmap.c:713
+#: ../gucharmap/gucharmap-charmap.c:733
 msgid "Approximate equivalents:"
 msgstr "近似等价字符："
 
-#: ../gucharmap/gucharmap-charmap.c:722
+#: ../gucharmap/gucharmap-charmap.c:742
 msgid "Equivalents:"
 msgstr "等价字符："
 
-#: ../gucharmap/gucharmap-charmap.c:738
+#: ../gucharmap/gucharmap-charmap.c:758
 msgid "CJK Ideograph Information"
 msgstr "CJK 表意字符信息"
 
-#: ../gucharmap/gucharmap-charmap.c:743
+#: ../gucharmap/gucharmap-charmap.c:763
 msgid "Definition in English:"
 msgstr "英文定义："
 
-#: ../gucharmap/gucharmap-charmap.c:748
+#: ../gucharmap/gucharmap-charmap.c:768
 msgid "Mandarin Pronunciation:"
 msgstr "普通话发音："
 
-#: ../gucharmap/gucharmap-charmap.c:753
+#: ../gucharmap/gucharmap-charmap.c:773
 msgid "Cantonese Pronunciation:"
 msgstr "粤语发音："
 
-#: ../gucharmap/gucharmap-charmap.c:758
+#: ../gucharmap/gucharmap-charmap.c:778
 msgid "Japanese On Pronunciation:"
 msgstr "日文音读："
 
-#: ../gucharmap/gucharmap-charmap.c:763
+#: ../gucharmap/gucharmap-charmap.c:783
 msgid "Japanese Kun Pronunciation:"
 msgstr "日文训读："
 
-#: ../gucharmap/gucharmap-charmap.c:768
+#: ../gucharmap/gucharmap-charmap.c:788
 msgid "Tang Pronunciation:"
 msgstr "唐音·古中国发音："
 
-#: ../gucharmap/gucharmap-charmap.c:773
+#: ../gucharmap/gucharmap-charmap.c:793
 msgid "Korean Pronunciation:"
 msgstr "韩语发音："
 
-#: ../gucharmap/gucharmap-charmap.c:1158
+#: ../gucharmap/gucharmap-charmap.c:1178
 msgid "Characte_r Table"
 msgstr "字符表(_R)"
 
-#: ../gucharmap/gucharmap-charmap.c:1204
+#: ../gucharmap/gucharmap-charmap.c:1224
 msgid "Character _Details"
 msgstr "字符细节(_D)"
 
-#: ../gucharmap/gucharmap-chartable.c:1371
+#: ../gucharmap/gucharmap-chartable.c:1399
 msgid "Unknown character, unable to identify."
 msgstr "未知字符，无法分辨。"
 
-#: ../gucharmap/gucharmap-chartable.c:1373
+#: ../gucharmap/gucharmap-chartable.c:1401
 #: ../gucharmap/gucharmap-search-dialog.c:585
 msgid "Not found."
 msgstr "未查到。"
 
-#: ../gucharmap/gucharmap-chartable.c:1376
+#: ../gucharmap/gucharmap-chartable.c:1404
 msgid "Character found."
 msgstr "字符已找到。"
 
@@ -323,7 +326,7 @@ msgstr "分隔符，空格"
 msgid "Searching…"
 msgstr "正在搜索..."
 
-#: ../gucharmap/gucharmap-window.c:478
+#: ../gucharmap/gucharmap-window.c:493
 msgid ""
 "Gucharmap is free software; you can redistribute it and/or modify it under "
 "the terms of the GNU General Public License as published by the Free "
@@ -333,7 +336,7 @@ msgstr ""
 "Gucharmap 是自由软件；您可以按照自由软件基金会所发表的 GNU GPL 协议自由发放"
 "和/或修改它；GPL 协议应该采用第二版或以后的任何版本。"
 
-#: ../gucharmap/gucharmap-window.c:482
+#: ../gucharmap/gucharmap-window.c:497
 msgid ""
 "Permission is hereby granted, free of charge, to any person obtaining a copy "
 "of the Unicode data files to deal in them without restriction, including "
@@ -343,7 +346,7 @@ msgstr ""
 "特此免费授予任何获得 Unicode 数据文件拷贝的个人以不受限制的处理该文件的权利，"
 "包括不受限制的使用、拷贝、修改、合并、出版、分发，以及/或者出售拷贝的权利。"
 
-#: ../gucharmap/gucharmap-window.c:486
+#: ../gucharmap/gucharmap-window.c:501
 msgid ""
 "Gucharmap and the Unicode data files are distributed in the hope that they "
 "will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty "
@@ -354,7 +357,7 @@ msgstr ""
 "保证；对于以任何用途使用它所造成的任何直接或间接后果都不承担任何责任。请参看 "
 "GNU GPL 协议中的细节。"
 
-#: ../gucharmap/gucharmap-window.c:490
+#: ../gucharmap/gucharmap-window.c:505
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "Gucharmap; if not, write to the Free Software Foundation, Inc., 59 Temple "
@@ -364,7 +367,7 @@ msgstr ""
 "请给自由软件基金会写信，地址是 59 Temple Place, Suite 330, Boston, MA  02111-"
 "1301  USA"
 
-#: ../gucharmap/gucharmap-window.c:493
+#: ../gucharmap/gucharmap-window.c:508
 msgid ""
 "Also you should have received a copy of the Unicode Copyright along with "
 "Gucharmap; you can always find it at Unicode's website: http://www.unicode."
@@ -373,110 +376,112 @@ msgstr ""
 "同时，您应该与 Gucharmap 同时收到了 Unicode 版权声明的副本；您总是可以在 "
 "Unicode 的网站上找到该版权声明 http://www.unicode.org/copyright.html"
 
-#: ../gucharmap/gucharmap-window.c:506
-msgid "GNOME Character Map based on the Unicode Character Database"
-msgstr "基于 Unicode 字符数据库的 GNOME 字符映射表"
+#: ../gucharmap/gucharmap-window.c:521 ../gucharmap/main.c:37
+msgid "GNOME Character Map"
+msgstr "GNOME 字符映射表"
 
-#: ../gucharmap/gucharmap-window.c:513
-msgid "Gucharmap"
-msgstr "Gucharmap"
+#: ../gucharmap/gucharmap-window.c:523
+msgid "Based on the Unicode Character Database 5.1"
+msgstr "基于 Unicode 字符数据库 5.1"
 
-#: ../gucharmap/gucharmap-window.c:515
+#: ../gucharmap/gucharmap-window.c:532
 msgid "translator-credits"
 msgstr ""
 "梁昌泰 <beos@turbolinux.com.cn>\n"
 "苏  哲 <suzhe@turbolinux.com.cn>\n"
-"蔡  芊 <caiqian@gnome.org>"
+"蔡  芊 <caiqian@gnome.org>\n"
+"Ray Wang <raywang@gnome.org>\n"
+"Aron Xu <aronxu@gnome.org>"
 
-#: ../gucharmap/gucharmap-window.c:592 ../gucharmap/gucharmap-window.c:859
+#: ../gucharmap/gucharmap-window.c:607 ../gucharmap/gucharmap-window.c:874
 msgid "Next Script"
 msgstr "下一语言"
 
-#: ../gucharmap/gucharmap-window.c:592 ../gucharmap/gucharmap-window.c:861
+#: ../gucharmap/gucharmap-window.c:607 ../gucharmap/gucharmap-window.c:876
 msgid "Previous Script"
 msgstr "上一语言"
 
-#: ../gucharmap/gucharmap-window.c:597
+#: ../gucharmap/gucharmap-window.c:612
 msgid "Next Block"
 msgstr "下一区块"
 
-#: ../gucharmap/gucharmap-window.c:597
+#: ../gucharmap/gucharmap-window.c:612
 msgid "Previous Block"
 msgstr "上一区块"
 
-#: ../gucharmap/gucharmap-window.c:822
+#: ../gucharmap/gucharmap-window.c:837
 msgid "_File"
 msgstr "文件(_F)"
 
-#: ../gucharmap/gucharmap-window.c:823
+#: ../gucharmap/gucharmap-window.c:838
 msgid "_View"
 msgstr "查看(_V)"
 
-#: ../gucharmap/gucharmap-window.c:824
+#: ../gucharmap/gucharmap-window.c:839
 msgid "_Search"
 msgstr "搜索(_S)"
 
-#: ../gucharmap/gucharmap-window.c:825
+#: ../gucharmap/gucharmap-window.c:840
 msgid "_Go"
 msgstr "转到(_G)"
 
-#: ../gucharmap/gucharmap-window.c:826
+#: ../gucharmap/gucharmap-window.c:841
 msgid "_Help"
 msgstr "帮助(_H)"
 
-#: ../gucharmap/gucharmap-window.c:829
+#: ../gucharmap/gucharmap-window.c:844
 msgid "Page _Setup"
 msgstr "页面设置(_S)"
 
-#: ../gucharmap/gucharmap-window.c:850
+#: ../gucharmap/gucharmap-window.c:865
 msgid "Find _Next"
 msgstr "查找下一个(_N)"
 
-#: ../gucharmap/gucharmap-window.c:852
+#: ../gucharmap/gucharmap-window.c:867
 msgid "Find _Previous"
 msgstr "查找上一个(_P)"
 
-#: ../gucharmap/gucharmap-window.c:855
+#: ../gucharmap/gucharmap-window.c:870
 msgid "_Next Character"
 msgstr "下一个字符(_N)"
 
-#: ../gucharmap/gucharmap-window.c:857
+#: ../gucharmap/gucharmap-window.c:872
 msgid "_Previous Character"
 msgstr "上一个字符(_P)"
 
-#: ../gucharmap/gucharmap-window.c:864
+#: ../gucharmap/gucharmap-window.c:879
 msgid "_Contents"
 msgstr "目录(_C)"
 
-#: ../gucharmap/gucharmap-window.c:866
+#: ../gucharmap/gucharmap-window.c:881
 msgid "_About"
 msgstr "关于(_A)"
 
-#: ../gucharmap/gucharmap-window.c:876
+#: ../gucharmap/gucharmap-window.c:891
 msgid "By _Script"
 msgstr "按语言(_S)"
 
-#: ../gucharmap/gucharmap-window.c:878
+#: ../gucharmap/gucharmap-window.c:893
 msgid "By _Unicode Block"
 msgstr "按 _Unicode 区块"
 
-#: ../gucharmap/gucharmap-window.c:883
+#: ../gucharmap/gucharmap-window.c:898
 msgid "Snap _Columns to Power of Two"
 msgstr "将列数设定为二的 N 次方"
 
-#: ../gucharmap/gucharmap-window.c:952
+#: ../gucharmap/gucharmap-window.c:967
 msgid "_Text to copy:"
 msgstr "要复制的文本(_T)："
 
-#: ../gucharmap/gucharmap-window.c:959
+#: ../gucharmap/gucharmap-window.c:974
 msgid "Copy to the clipboard."
 msgstr "复制到剪贴板。"
 
-#: ../gucharmap/main.c:43
+#: ../gucharmap/main.c:55
 msgid "Font to start with; ex: 'Serif 27'"
 msgstr "起始使用字体，如“Serif 27”"
 
-#: ../gucharmap/main.c:43
+#: ../gucharmap/main.c:55
 msgid "FONT"
 msgstr "字体"
 
@@ -546,7 +551,7 @@ msgstr "马尔代夫塔安那文"
 
 #: ../gucharmap/unicode-blocks.h:30 ../gucharmap/unicode-scripts.h:63
 msgid "N'Ko"
-msgstr "N'Ko"
+msgstr ""
 
 #: ../gucharmap/unicode-blocks.h:31 ../gucharmap/unicode-scripts.h:34
 msgid "Devanagari"
@@ -646,7 +651,7 @@ msgstr "菲律宾哈鲁喏文"
 
 #: ../gucharmap/unicode-blocks.h:55 ../gucharmap/unicode-scripts.h:23
 msgid "Buhid"
-msgstr "Buhid"
+msgstr ""
 
 #: ../gucharmap/unicode-blocks.h:56 ../gucharmap/unicode-scripts.h:82
 msgid "Tagbanwa"
@@ -694,7 +699,7 @@ msgstr "雷布查语"
 
 #: ../gucharmap/unicode-blocks.h:67 ../gucharmap/unicode-scripts.h:66
 msgid "Ol Chiki"
-msgstr "Ol Chiki"
+msgstr ""
 
 #: ../gucharmap/unicode-blocks.h:68
 msgid "Phonetic Extensions"
@@ -922,7 +927,7 @@ msgstr "彝文偏旁部首"
 
 #: ../gucharmap/unicode-blocks.h:124 ../gucharmap/unicode-scripts.h:91
 msgid "Vai"
-msgstr "Vai"
+msgstr ""
 
 #: ../gucharmap/unicode-blocks.h:125
 msgid "Cyrillic Extended-B"
@@ -938,11 +943,11 @@ msgstr "拉丁文扩展 D"
 
 #: ../gucharmap/unicode-blocks.h:128 ../gucharmap/unicode-scripts.h:79
 msgid "Syloti Nagri"
-msgstr "Syloti Nagri"
+msgstr ""
 
 #: ../gucharmap/unicode-blocks.h:129
 msgid "Phags-pa"
-msgstr "Phags-pa"
+msgstr ""
 
 #: ../gucharmap/unicode-blocks.h:130 ../gucharmap/unicode-scripts.h:75
 msgid "Saurashtra"
@@ -950,11 +955,11 @@ msgstr "索拉什特拉语"
 
 #: ../gucharmap/unicode-blocks.h:131 ../gucharmap/unicode-scripts.h:50
 msgid "Kayah Li"
-msgstr "Kayah Li"
+msgstr ""
 
 #: ../gucharmap/unicode-blocks.h:132 ../gucharmap/unicode-scripts.h:73
 msgid "Rejang"
-msgstr "Rejang"
+msgstr "拉让语"
 
 #: ../gucharmap/unicode-blocks.h:133 ../gucharmap/unicode-scripts.h:26
 msgid "Cham"
@@ -1186,7 +1191,7 @@ msgstr "汉语"
 
 #: ../gucharmap/unicode-scripts.h:43
 msgid "Hangul"
-msgstr "韩文"
+msgstr "韩语"
 
 #: ../gucharmap/unicode-scripts.h:47
 msgid "Inherited"
@@ -1202,7 +1207,7 @@ msgstr "线性 B"
 
 #: ../gucharmap/unicode-scripts.h:71
 msgid "Phags Pa"
-msgstr "Phags Pa"
+msgstr ""
 
 #: ../gucharmap/unicode-scripts.h:92
 msgid "Yi"
@@ -1213,27 +1218,27 @@ msgid "Information"
 msgstr "信息"
 
 #. follow hig guidelines
-#: ../gucharmap/gucharmap-search-dialog.c:739
+#: ../gucharmap/gucharmap-search-dialog.c:729
 msgid "Find"
 msgstr "查找"
 
-#: ../gucharmap/gucharmap-search-dialog.c:753
+#: ../gucharmap/gucharmap-search-dialog.c:743
 msgid "_Previous"
 msgstr "上一个(_P)"
 
-#: ../gucharmap/gucharmap-search-dialog.c:760
+#: ../gucharmap/gucharmap-search-dialog.c:750
 msgid "_Next"
 msgstr "下一个(_N)"
 
-#: ../gucharmap/gucharmap-search-dialog.c:770
+#: ../gucharmap/gucharmap-search-dialog.c:765
 msgid "_Search:"
 msgstr "搜索(_S)："
 
-#: ../gucharmap/gucharmap-search-dialog.c:780
+#: ../gucharmap/gucharmap-search-dialog.c:775
 msgid "Match _whole word"
 msgstr "匹配整个单词(_W)"
 
-#: ../gucharmap/gucharmap-search-dialog.c:785
+#: ../gucharmap/gucharmap-search-dialog.c:780
 msgid "Search in character _details"
 msgstr "在字符细节中搜索(_D)"
 
@@ -1246,5 +1251,9 @@ msgid "Unicode Block"
 msgstr "Unicode 区块"
 
 #: ../gucharmap/gucharmap-script-chapters-model.c:134
+#, fuzzy
 msgid "Script"
 msgstr "语言"
+
+#~ msgid "Gucharmap"
+#~ msgstr "Gucharmap"
