@@ -44,6 +44,8 @@ AC_CONFIG_HEADERS([config.h])
 
 AM_INIT_AUTOMAKE([1.9 foreign dist-bzip2 no-dist-gzip])
 
+m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([no])])
+
 if test -z "$enable_maintainer_mode"; then
   enable_maintainer_mode=yes
 fi

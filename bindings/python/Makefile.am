@@ -72,7 +72,7 @@ EXTRA_DIST = \
 gucharmap.c: gucharmap.defs gucharmap.override
 
 .defs.c:
-	(cd $(srcdir)\
+	$(AM_V_GEN) (cd $(srcdir)\
 	 && $(PYGTK_CODEGEN) \
 	    --override $*.override \
 	    --prefix py$* $*.defs) > gen-$*.c \
@@ -80,7 +80,7 @@ gucharmap.c: gucharmap.defs gucharmap.override
 	&& rm -f gen-$*.c
 
 regenerate-python-binding:
-	$(PYGTK_H2DEF) \
+	$(AM_V_GEN) $(PYGTK_H2DEF) \
 		$(sort $(addprefix $(top_srcdir)/gucharmap/,$(srcdirheaders)) \
 		       $(addprefix $(top_builddir)/gucharmap/,$(builddirheaders))) \
 		> gucharmap.defs.new

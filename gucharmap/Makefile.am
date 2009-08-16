@@ -161,18 +161,18 @@ gucharmap_LDADD = \
 if OS_WIN32
 gucharmap_LDADD += gucharmaprc.o
 gucharmaprc.o: gucharmaprc.rc
-	windres -i $< -o $@
+	$(AM_V_GEN) windres -i $< -o $@
 endif
 
 gucharmap-marshal.h: $(srcdir)/gucharmap-marshal.list
-	( $(GLIB_GENMARSHAL) --prefix=_gucharmap_marshal $(srcdir)/gucharmap-marshal.list \
+	$(AM_V_GEN) ( $(GLIB_GENMARSHAL) --prefix=_gucharmap_marshal $(srcdir)/gucharmap-marshal.list \
                             --header \
                             --internal > gucharmap-marshal.h.tmp \
 	  && mv gucharmap-marshal.h.tmp gucharmap-marshal.h ) \
         || ( rm -f gucharmap-marshal.h.tmp && exit 1 )
 
 gucharmap-marshal.c: $(srcdir)/gucharmap-marshal.list
-	( $(GLIB_GENMARSHAL) --prefix=_gucharmap_marshal $(srcdir)/gucharmap-marshal.list \
+	$(AM_V_GEN) ( $(GLIB_GENMARSHAL) --prefix=_gucharmap_marshal $(srcdir)/gucharmap-marshal.list \
 			    --header \
                             --body \
                             --internal > gucharmap-marshal.c.tmp \
@@ -184,18 +184,18 @@ gucharmap-type-builtins.h: stamp-gucharmap-type-builtins.h
 	@true
 
 stamp-gucharmap-type-builtins.h: gucharmap-type-builtins.h.template $(libgucharmapinclude_HEADERS)
-	$(GLIB_MKENUMS) --template $< $(filter-out $<,$^) > xgen-gtbh \
+	$(AM_V_GEN) $(GLIB_MKENUMS) --template $< $(filter-out $<,$^) > xgen-gtbh \
 	&& (cmp -s xgen-gtbh gucharmap-type-builtins.h || cp xgen-gtbh gucharmap-type-builtins.h ) \
 	&& rm -f xgen-gtbh \
 	&& echo timestamp > $(@F)
 
 gucharmap-type-builtins.c: gucharmap-type-builtins.c.template $(libgucharmapinclude_HEADERS)
-	$(GLIB_MKENUMS) --template $< $(filter-out $<,$^) > xgen-gtbc \
+	$(AM_V_GEN) $(GLIB_MKENUMS) --template $< $(filter-out $<,$^) > xgen-gtbc \
 	&& (cmp -s xgen-gtbc gucharmap-type-builtins.c || cp xgen-gtbc gucharmap-type-builtins.c ) \
 	&& rm -f xgen-gtbc
 
 # printoptions.h: print.glade
-# 	$(GTK_BUILDER_CONVERT) --root custom_tab_container $< - | \
+# 	$(AM_V_GEN) $(GTK_BUILDER_CONVERT) --root custom_tab_container $< - | \
 # 		$(XMLLINT) --noblanks - | \
 # 		$(HEXDUMP) -v -e '"" 1/1 "0x%02x,""\n"' > xgen-$(@F) \
 # 	&& (cmp -s xgen-$(@F) $@ || cp -f xgen-$(@F) $@) \
@@ -210,7 +210,7 @@ typelibdir = $(GIRTYPELIBDIR)
 typelib_DATA = Gucharmap-2.0.typelib
 
 Gucharmap-2.0.gir: $(G_IR_SCANNER) libgucharmap.la $(libgucharmapinclude_HEADERS) Makefile
-	PKG_CONFIG_PATH=$(top_builddir):$$PKG_CONFIG_PATH \
+	$(AM_V_GEN) PKG_CONFIG_PATH=$(top_builddir):$$PKG_CONFIG_PATH \
 	$(G_IR_SCANNER) \
 		--verbose \
 		--namespace=Gucharmap \
@@ -228,7 +228,7 @@ Gucharmap-2.0.gir: $(G_IR_SCANNER) libgucharmap.la $(libgucharmapinclude_HEADERS
 		$(filter %.h,$^)
 
 %.typelib: %.gir $(G_IR_COMPILER)
-	$(G_IR_COMPILER) --includedir=$(srcdir) --includedir=. $(G_IR_COMPILER_OPTS) $< -o $@
+	$(AM_V_GEN) $(G_IR_COMPILER) --includedir=$(srcdir) --includedir=. $(G_IR_COMPILER_OPTS) $< -o $@
 
 endif # ENABLE_INTROSPECTION
 
