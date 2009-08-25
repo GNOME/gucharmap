@@ -1,37 +1,4 @@
-This is the README for gucharmap.
-
 gucharmap is a featureful unicode character map.
-
-
-COMPILING
-
-gucharmap uses GTK+ 2.6 or later, which you can get from
-http://gtk.org/. 
-
-If GNOME is available, gucharmap uses it, but only to make the Help
-menu.
-
-To compile and install, do the usual
-
-   ./configure
-   make
-   make install
-
-There are two extra ./configure options:
-
-  --disable-gnome disables GNOME-only functionality, even if the GNOME
-    libraries are found. 
-
-  --disable-unihan disables CJK ideograph information. The ideograph
-    information includes definition and pronunciations in several
-    languages, and is extracted from [3]. Omitting the ideograph
-    information will reduce gucharmap's size by roughly 2 megabytes.
-
-
-CREDITS
-
-gucharmap is Copyright (c) 2003 Noah Levitt, and is licensed to you
-under the terms of the GPL. See the file COPYING.
 
 Large portions of gucharmap are generated from files published by
 unicode.org.  For the license information see the file named
@@ -46,7 +13,3 @@ Data was gathered from the following URLs:
 gucharmap was influenced by Juliusz Chroboczek's ucm
 (http://www.pps.jussieu.fr/~jch/software/files/ucm-0.3.tar.gz), the
 Windows charmap, and GNOME's gcharmap.
-
-
-Noah Levitt <nlevitt аt columbia.edu>
-$Id$
