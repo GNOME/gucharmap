@@ -66,6 +66,9 @@ gucharmap_chapters_view_init (GucharmapChaptersView *view)
 
   selection = gtk_tree_view_get_selection (tree_view);
   gtk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
+
+  gtk_tree_view_set_search_column (tree_view, GUCHARMAP_CHAPTERS_MODEL_COLUMN_LABEL);
+  gtk_tree_view_set_enable_search (tree_view, TRUE);
 }
 
 static void
