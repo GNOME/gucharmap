@@ -1,19 +1,20 @@
 # Thai translation of gucharmap.
-# Copyright (C) 2004-2009 Free Software Foundation, Inc.
+# Copyright (C) 2004-2010 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gucharmap package.
 # Surichat Sumrit <nook@opentle.org>, 2003, 2004.
 # Supranee Thirawatthanasuk <supranee@opentle.org>, 2004.
 # Chanchai Junlouchai <taz@opentle.org>, 2004.
-# Theppitak Karoonboonyanan <thep@linux.thai.net>, 2005-2009.
+# Theppitak Karoonboonyanan <thep@linux.thai.net>, 2005-2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-11 17:25+0700\n"
-"PO-Revision-Date: 2009-02-11 17:27+0700\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=gucharmap&component=general\n"
+"POT-Creation-Date: 2009-10-22 16:19+0000\n"
+"PO-Revision-Date: 2010-02-21 23:16+0700\n"
 "Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
-"Language-Team: Thai <l10n>\n"
+"Language-Team: Thai <thai-l10n@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -31,7 +32,7 @@ msgstr "แทรกอักขระพิเศษเข้าในเอก
 msgid "Canonical decomposition:"
 msgstr "ส่วนประกอบบัญญัติไว้:"
 
-#: gucharmap/gucharmap-charmap.c:616 gucharmap/gucharmap-chartable.c:568
+#: gucharmap/gucharmap-charmap.c:616 gucharmap/gucharmap-chartable.c:553
 msgid "[not a printable character]"
 msgstr "[ไม่ใช่อักขระที่สามารถพิมพ์ได้]"
 
@@ -132,16 +133,16 @@ msgstr "_ตารางอักขระ"
 msgid "Character _Details"
 msgstr "_รายละเอียดของอักขระ"
 
-#: gucharmap/gucharmap-chartable.c:1371
+#: gucharmap/gucharmap-chartable.c:1399
 msgid "Unknown character, unable to identify."
 msgstr "อักขระที่ไม่รู้จัก ไม่สามารถระบุได้"
 
-#: gucharmap/gucharmap-chartable.c:1373
+#: gucharmap/gucharmap-chartable.c:1401
 #: gucharmap/gucharmap-search-dialog.c:585
 msgid "Not found."
 msgstr "ไม่พบ"
 
-#: gucharmap/gucharmap-chartable.c:1376
+#: gucharmap/gucharmap-chartable.c:1404
 msgid "Character found."
 msgstr "พบอักขระ"
 
@@ -168,7 +169,7 @@ msgstr "ไม่สามารถตั้งต้น GConf ได้"
 #. Unicode assigns "Common" as the script name for any character not
 #. * specifically listed in Scripts.txt
 #: gucharmap/gucharmap-script-codepoint-list.c:463
-#: gucharmap/unicode-scripts.h:28
+#: gucharmap/unicode-scripts.h:30
 msgid "Common"
 msgstr "ปกติ"
 
@@ -382,8 +383,8 @@ msgid "GNOME Character Map"
 msgstr "ผังอักขระของ GNOME"
 
 #: gucharmap/gucharmap-window.c:523
-msgid "Based on the Unicode Character Database 5.1"
-msgstr "โดยใช้ฐานข้อมูลอักขระของยูนิโค้ด 5.1"
+msgid "Based on the Unicode Character Database 5.2"
+msgstr "โดยใช้ฐานข้อมูลอักขระของยูนิโค้ด 5.2"
 
 #: gucharmap/gucharmap-window.c:532
 msgid "translator-credits"
@@ -517,7 +518,7 @@ msgstr "เครื่องหมายกำกับเสียงเขี
 msgid "Greek and Coptic"
 msgstr "กรีกและคอปติก"
 
-#: gucharmap/unicode-blocks.h:22 gucharmap/unicode-scripts.h:32
+#: gucharmap/unicode-blocks.h:22 gucharmap/unicode-scripts.h:34
 msgid "Cyrillic"
 msgstr "ซีริลลิก"
 
@@ -529,7 +530,7 @@ msgstr "ซีริลลิก ส่วนเสริม"
 msgid "Armenian"
 msgstr "อาร์เมเนียน"
 
-#: gucharmap/unicode-blocks.h:25 gucharmap/unicode-scripts.h:45
+#: gucharmap/unicode-blocks.h:25 gucharmap/unicode-scripts.h:48
 msgid "Hebrew"
 msgstr "ฮีบรู"
 
@@ -537,7 +538,7 @@ msgstr "ฮีบรู"
 msgid "Arabic"
 msgstr "อารบิก"
 
-#: gucharmap/unicode-blocks.h:27 gucharmap/unicode-scripts.h:80
+#: gucharmap/unicode-blocks.h:27 gucharmap/unicode-scripts.h:93
 msgid "Syriac"
 msgstr "ซีริแอก"
 
@@ -545,671 +546,775 @@ msgstr "ซีริแอก"
 msgid "Arabic Supplement"
 msgstr "อารบิก ส่วนเสริม"
 
-#: gucharmap/unicode-blocks.h:29 gucharmap/unicode-scripts.h:86
+#: gucharmap/unicode-blocks.h:29 gucharmap/unicode-scripts.h:101
 msgid "Thaana"
 msgstr "ทานะ"
 
-#: gucharmap/unicode-blocks.h:30 gucharmap/unicode-scripts.h:63
+#: gucharmap/unicode-blocks.h:30 gucharmap/unicode-scripts.h:73
 msgid "N'Ko"
 msgstr "เอ็นโก"
 
-#: gucharmap/unicode-blocks.h:31 gucharmap/unicode-scripts.h:34
+#: gucharmap/unicode-blocks.h:31 gucharmap/unicode-scripts.h:87
+msgid "Samaritan"
+msgstr "สะมาเรีย"
+
+#: gucharmap/unicode-blocks.h:32 gucharmap/unicode-scripts.h:36
 msgid "Devanagari"
 msgstr "เทวนาครี"
 
-#: gucharmap/unicode-blocks.h:32 gucharmap/unicode-scripts.h:19
+#: gucharmap/unicode-blocks.h:33 gucharmap/unicode-scripts.h:21
 msgid "Bengali"
 msgstr "เบ็งกาลี"
 
-#: gucharmap/unicode-blocks.h:33 gucharmap/unicode-scripts.h:41
+#: gucharmap/unicode-blocks.h:34 gucharmap/unicode-scripts.h:44
 msgid "Gurmukhi"
 msgstr "คุรุมุขี"
 
-#: gucharmap/unicode-blocks.h:34 gucharmap/unicode-scripts.h:40
+#: gucharmap/unicode-blocks.h:35 gucharmap/unicode-scripts.h:43
 msgid "Gujarati"
 msgstr "คุชราตี"
 
-#: gucharmap/unicode-blocks.h:35 gucharmap/unicode-scripts.h:69
+#: gucharmap/unicode-blocks.h:36 gucharmap/unicode-scripts.h:81
 msgid "Oriya"
 msgstr "โอริยา"
 
-#: gucharmap/unicode-blocks.h:36 gucharmap/unicode-scripts.h:84
+#: gucharmap/unicode-blocks.h:37 gucharmap/unicode-scripts.h:99
 msgid "Tamil"
 msgstr "ทมิฬ"
 
-#: gucharmap/unicode-blocks.h:37 gucharmap/unicode-scripts.h:85
+#: gucharmap/unicode-blocks.h:38 gucharmap/unicode-scripts.h:100
 msgid "Telugu"
 msgstr "เตลุคู"
 
-#: gucharmap/unicode-blocks.h:38 gucharmap/unicode-scripts.h:48
+#: gucharmap/unicode-blocks.h:39 gucharmap/unicode-scripts.h:56
 msgid "Kannada"
 msgstr "กัณณาท"
 
-#: gucharmap/unicode-blocks.h:39 gucharmap/unicode-scripts.h:60
+#: gucharmap/unicode-blocks.h:40 gucharmap/unicode-scripts.h:69
 msgid "Malayalam"
-msgstr "มะละยาลัม"
+msgstr "มลยาฬัม"
 
-#: gucharmap/unicode-blocks.h:40 gucharmap/unicode-scripts.h:77
+#: gucharmap/unicode-blocks.h:41 gucharmap/unicode-scripts.h:90
 msgid "Sinhala"
 msgstr "สิงหล"
 
-#: gucharmap/unicode-blocks.h:41 gucharmap/unicode-scripts.h:87
+#: gucharmap/unicode-blocks.h:42 gucharmap/unicode-scripts.h:102
 msgid "Thai"
 msgstr "ไทย"
 
-#: gucharmap/unicode-blocks.h:42 gucharmap/unicode-scripts.h:53
+#: gucharmap/unicode-blocks.h:43 gucharmap/unicode-scripts.h:61
 msgid "Lao"
 msgstr "ลาว"
 
-#: gucharmap/unicode-blocks.h:43 gucharmap/unicode-scripts.h:88
+#: gucharmap/unicode-blocks.h:44 gucharmap/unicode-scripts.h:103
 msgid "Tibetan"
 msgstr "ทิเบต"
 
-#: gucharmap/unicode-blocks.h:44 gucharmap/unicode-scripts.h:62
+#: gucharmap/unicode-blocks.h:45 gucharmap/unicode-scripts.h:72
 msgid "Myanmar"
 msgstr "พม่า"
 
-#: gucharmap/unicode-blocks.h:45 gucharmap/unicode-scripts.h:36
+#: gucharmap/unicode-blocks.h:46 gucharmap/unicode-scripts.h:39
 msgid "Georgian"
 msgstr "จอร์เจีย"
 
-#: gucharmap/unicode-blocks.h:46
+#: gucharmap/unicode-blocks.h:47
 msgid "Hangul Jamo"
 msgstr "ฮันกึล, จาโม"
 
-#: gucharmap/unicode-blocks.h:47 gucharmap/unicode-scripts.h:35
+#: gucharmap/unicode-blocks.h:48 gucharmap/unicode-scripts.h:38
 msgid "Ethiopic"
 msgstr "เอธิโอเปีย"
 
-#: gucharmap/unicode-blocks.h:48
+#: gucharmap/unicode-blocks.h:49
 msgid "Ethiopic Supplement"
 msgstr "เอธิโอเปีย ส่วนเสริม"
 
-#: gucharmap/unicode-blocks.h:49 gucharmap/unicode-scripts.h:27
+#: gucharmap/unicode-blocks.h:50 gucharmap/unicode-scripts.h:29
 msgid "Cherokee"
-msgstr "เชโรกี"
+msgstr "เชอโรกี"
 
-#: gucharmap/unicode-blocks.h:50
+#: gucharmap/unicode-blocks.h:51
 msgid "Unified Canadian Aboriginal Syllabics"
 msgstr "รูปพยางค์รวมภาษาชนเผ่าพื้นเมืองแคนาดา"
 
-#: gucharmap/unicode-blocks.h:51 gucharmap/unicode-scripts.h:65
+#: gucharmap/unicode-blocks.h:52 gucharmap/unicode-scripts.h:75
 msgid "Ogham"
 msgstr "ออกัม"
 
-#: gucharmap/unicode-blocks.h:52 gucharmap/unicode-scripts.h:74
+#: gucharmap/unicode-blocks.h:53 gucharmap/unicode-scripts.h:86
 msgid "Runic"
 msgstr "รูนิก"
 
-#: gucharmap/unicode-blocks.h:53 gucharmap/unicode-scripts.h:81
+#: gucharmap/unicode-blocks.h:54 gucharmap/unicode-scripts.h:94
 msgid "Tagalog"
 msgstr "ตากาล็อก"
 
-#: gucharmap/unicode-blocks.h:54 gucharmap/unicode-scripts.h:44
+#: gucharmap/unicode-blocks.h:55 gucharmap/unicode-scripts.h:47
 msgid "Hanunoo"
 msgstr "ฮานูโนโอ"
 
-#: gucharmap/unicode-blocks.h:55 gucharmap/unicode-scripts.h:23
+#: gucharmap/unicode-blocks.h:56 gucharmap/unicode-scripts.h:25
 msgid "Buhid"
 msgstr "บูฮิด"
 
-#: gucharmap/unicode-blocks.h:56 gucharmap/unicode-scripts.h:82
+#: gucharmap/unicode-blocks.h:57 gucharmap/unicode-scripts.h:95
 msgid "Tagbanwa"
 msgstr "ตักบันวา"
 
-#: gucharmap/unicode-blocks.h:57 gucharmap/unicode-scripts.h:52
+#: gucharmap/unicode-blocks.h:58 gucharmap/unicode-scripts.h:60
 msgid "Khmer"
 msgstr "เขมร"
 
-#: gucharmap/unicode-blocks.h:58 gucharmap/unicode-scripts.h:61
+#: gucharmap/unicode-blocks.h:59 gucharmap/unicode-scripts.h:71
 msgid "Mongolian"
 msgstr "มองโกเลีย"
 
-#: gucharmap/unicode-blocks.h:59 gucharmap/unicode-scripts.h:56
+#: gucharmap/unicode-blocks.h:60
+msgid "Unified Canadian Aboriginal Syllabics Extended"
+msgstr "รูปพยางค์รวมภาษาชนเผ่าพื้นเมืองแคนาดา ส่วนขยาย"
+
+#: gucharmap/unicode-blocks.h:61 gucharmap/unicode-scripts.h:64
 msgid "Limbu"
 msgstr "ลิมบู"
 
-#: gucharmap/unicode-blocks.h:60 gucharmap/unicode-scripts.h:83
+#: gucharmap/unicode-blocks.h:62 gucharmap/unicode-scripts.h:96
 msgid "Tai Le"
 msgstr "ไทลื้อ"
 
-#: gucharmap/unicode-blocks.h:61 gucharmap/unicode-scripts.h:64
+#: gucharmap/unicode-blocks.h:63 gucharmap/unicode-scripts.h:74
 msgid "New Tai Lue"
 msgstr "ไทลื้อใหม่"
 
-#: gucharmap/unicode-blocks.h:62
+#: gucharmap/unicode-blocks.h:64
 msgid "Khmer Symbols"
 msgstr "เขมร, สัญลักษณ์"
 
-#: gucharmap/unicode-blocks.h:63 gucharmap/unicode-scripts.h:22
+#: gucharmap/unicode-blocks.h:65 gucharmap/unicode-scripts.h:24
 msgid "Buginese"
 msgstr "บูกินีส"
 
-#: gucharmap/unicode-blocks.h:64 gucharmap/unicode-scripts.h:18
+#: gucharmap/unicode-blocks.h:66 gucharmap/unicode-scripts.h:97
+msgid "Tai Tham"
+msgstr "ธรรมล้านนา"
+
+#: gucharmap/unicode-blocks.h:67 gucharmap/unicode-scripts.h:19
 msgid "Balinese"
 msgstr "บาหลี"
 
-#: gucharmap/unicode-blocks.h:65 gucharmap/unicode-scripts.h:78
+#: gucharmap/unicode-blocks.h:68 gucharmap/unicode-scripts.h:91
 msgid "Sundanese"
 msgstr "ซุนดา"
 
-#: gucharmap/unicode-blocks.h:66 gucharmap/unicode-scripts.h:55
+#: gucharmap/unicode-blocks.h:69 gucharmap/unicode-scripts.h:63
 msgid "Lepcha"
 msgstr "เลปชา"
 
-#: gucharmap/unicode-blocks.h:67 gucharmap/unicode-scripts.h:66
+#: gucharmap/unicode-blocks.h:70 gucharmap/unicode-scripts.h:76
 msgid "Ol Chiki"
 msgstr ""
 
-#: gucharmap/unicode-blocks.h:68
+#: gucharmap/unicode-blocks.h:71
+msgid "Vedic Extensions"
+msgstr "ส่วนขยายพระเวท"
+
+#: gucharmap/unicode-blocks.h:72
 msgid "Phonetic Extensions"
 msgstr "ส่วนขยายสัทศาสตร์"
 
-#: gucharmap/unicode-blocks.h:69
+#: gucharmap/unicode-blocks.h:73
 msgid "Phonetic Extensions Supplement"
 msgstr "ส่วนขยายสัทศาสตร์ ส่วนเสริม"
 
-#: gucharmap/unicode-blocks.h:70
+#: gucharmap/unicode-blocks.h:74
 msgid "Combining Diacritical Marks Supplement"
 msgstr "เครื่องหมายกำกับเสียงเขียนประกอบ ส่วนเสริม"
 
-#: gucharmap/unicode-blocks.h:71
+#: gucharmap/unicode-blocks.h:75
 msgid "Latin Extended Additional"
 msgstr "ละติน ส่วนขยายเพิ่มเติม"
 
-#: gucharmap/unicode-blocks.h:72
+#: gucharmap/unicode-blocks.h:76
 msgid "Greek Extended"
 msgstr "กรีก ส่วนขยาย"
 
-#: gucharmap/unicode-blocks.h:73
+#: gucharmap/unicode-blocks.h:77
 msgid "General Punctuation"
 msgstr "เครื่องหมายวรรคตอนทั่วไป"
 
-#: gucharmap/unicode-blocks.h:74
+#: gucharmap/unicode-blocks.h:78
 msgid "Superscripts and Subscripts"
 msgstr "ตัวยกและตัวห้อย"
 
-#: gucharmap/unicode-blocks.h:75
+#: gucharmap/unicode-blocks.h:79
 msgid "Currency Symbols"
 msgstr "สัญลักษณ์หน่วยเงิน"
 
-#: gucharmap/unicode-blocks.h:76
+#: gucharmap/unicode-blocks.h:80
 msgid "Combining Diacritical Marks for Symbols"
 msgstr "เครื่องหมายกำกับเสียงเขียนประกอบสำหรับสัญลักษณ์"
 
-#: gucharmap/unicode-blocks.h:77
+#: gucharmap/unicode-blocks.h:81
 msgid "Letterlike Symbols"
 msgstr "สัญลักษณ์คล้ายตัวอักษร"
 
-#: gucharmap/unicode-blocks.h:78
+#: gucharmap/unicode-blocks.h:82
 msgid "Number Forms"
 msgstr "รูปแบบตัวเลข"
 
-#: gucharmap/unicode-blocks.h:79
+#: gucharmap/unicode-blocks.h:83
 msgid "Arrows"
 msgstr "ลูกศร"
 
-#: gucharmap/unicode-blocks.h:80
+#: gucharmap/unicode-blocks.h:84
 msgid "Mathematical Operators"
 msgstr "ตัวกระทำคณิตศาสตร์"
 
-#: gucharmap/unicode-blocks.h:81
+#: gucharmap/unicode-blocks.h:85
 msgid "Miscellaneous Technical"
 msgstr "ทางเทคนิคเบ็ดเตล็ด"
 
-#: gucharmap/unicode-blocks.h:82
+#: gucharmap/unicode-blocks.h:86
 msgid "Control Pictures"
 msgstr "รูปภาพอักขระควบคุม"
 
-#: gucharmap/unicode-blocks.h:83
+#: gucharmap/unicode-blocks.h:87
 msgid "Optical Character Recognition"
 msgstr "โอซีอาร์"
 
-#: gucharmap/unicode-blocks.h:84
+#: gucharmap/unicode-blocks.h:88
 msgid "Enclosed Alphanumerics"
 msgstr "อักษรเลขในกรอบ"
 
-#: gucharmap/unicode-blocks.h:85
+#: gucharmap/unicode-blocks.h:89
 msgid "Box Drawing"
 msgstr "วาดกล่อง"
 
-#: gucharmap/unicode-blocks.h:86
+#: gucharmap/unicode-blocks.h:90
 msgid "Block Elements"
 msgstr "ชิ้นส่วนบล็อค"
 
-#: gucharmap/unicode-blocks.h:87
+#: gucharmap/unicode-blocks.h:91
 msgid "Geometric Shapes"
 msgstr "รูปทรงเรขาคณิต"
 
-#: gucharmap/unicode-blocks.h:88
+#: gucharmap/unicode-blocks.h:92
 msgid "Miscellaneous Symbols"
 msgstr "สัญลักษณ์เบ็ดเตล็ด"
 
-#: gucharmap/unicode-blocks.h:89
+#: gucharmap/unicode-blocks.h:93
 msgid "Dingbats"
 msgstr "ดิงแบตส์"
 
-#: gucharmap/unicode-blocks.h:90
+#: gucharmap/unicode-blocks.h:94
 msgid "Miscellaneous Mathematical Symbols-A"
 msgstr "สัญลักษณ์คณิตศาสตร์จิปาถะ A"
 
-#: gucharmap/unicode-blocks.h:91
+#: gucharmap/unicode-blocks.h:95
 msgid "Supplemental Arrows-A"
 msgstr "ลูกศร ส่วนเสริม A"
 
-#: gucharmap/unicode-blocks.h:92
+#: gucharmap/unicode-blocks.h:96
 msgid "Braille Patterns"
 msgstr "อักษรเบรลล์"
 
-#: gucharmap/unicode-blocks.h:93
+#: gucharmap/unicode-blocks.h:97
 msgid "Supplemental Arrows-B"
 msgstr "ลูกศร ส่วนเสริม B"
 
-#: gucharmap/unicode-blocks.h:94
+#: gucharmap/unicode-blocks.h:98
 msgid "Miscellaneous Mathematical Symbols-B"
 msgstr "สัญลักษณ์คณิตศาสตร์จิปาถะ B"
 
-#: gucharmap/unicode-blocks.h:95
+#: gucharmap/unicode-blocks.h:99
 msgid "Supplemental Mathematical Operators"
 msgstr "ตัวกระทำคณิตศาสตร์ส่วนเสริม"
 
-#: gucharmap/unicode-blocks.h:96
+#: gucharmap/unicode-blocks.h:100
 msgid "Miscellaneous Symbols and Arrows"
 msgstr "สัญลักษณ์และลูกศรจิปาถะ"
 
-#: gucharmap/unicode-blocks.h:97 gucharmap/unicode-scripts.h:37
+#: gucharmap/unicode-blocks.h:101 gucharmap/unicode-scripts.h:40
 msgid "Glagolitic"
 msgstr "กลาโกลิติก"
 
-#: gucharmap/unicode-blocks.h:98
+#: gucharmap/unicode-blocks.h:102
 msgid "Latin Extended-C"
 msgstr "ละติน ส่วนขยาย C"
 
-#: gucharmap/unicode-blocks.h:99 gucharmap/unicode-scripts.h:29
+#: gucharmap/unicode-blocks.h:103 gucharmap/unicode-scripts.h:31
 msgid "Coptic"
 msgstr "คอปติก"
 
-#: gucharmap/unicode-blocks.h:100
+#: gucharmap/unicode-blocks.h:104
 msgid "Georgian Supplement"
 msgstr "จอร์เจีย ส่วนเสริม"
 
-#: gucharmap/unicode-blocks.h:101 gucharmap/unicode-scripts.h:89
+#: gucharmap/unicode-blocks.h:105 gucharmap/unicode-scripts.h:104
 msgid "Tifinagh"
 msgstr "ทิฟินาค"
 
-#: gucharmap/unicode-blocks.h:102
+#: gucharmap/unicode-blocks.h:106
 msgid "Ethiopic Extended"
 msgstr "เอธิโอเปีย ส่วนขยาย"
 
-#: gucharmap/unicode-blocks.h:103
+#: gucharmap/unicode-blocks.h:107
 msgid "Cyrillic Extended-A"
 msgstr "ซีริลลิก ส่วนขยาย A"
 
-#: gucharmap/unicode-blocks.h:104
+#: gucharmap/unicode-blocks.h:108
 msgid "Supplemental Punctuation"
 msgstr "เครื่องหมายวรรคตอน ส่วนเสริม"
 
-#: gucharmap/unicode-blocks.h:105
+#: gucharmap/unicode-blocks.h:109
 msgid "CJK Radicals Supplement"
 msgstr "อักษรธาตุ CJK ส่วนเสริม"
 
-#: gucharmap/unicode-blocks.h:106
+#: gucharmap/unicode-blocks.h:110
 msgid "Kangxi Radicals"
 msgstr "รากคำคังซี"
 
-#: gucharmap/unicode-blocks.h:107
+#: gucharmap/unicode-blocks.h:111
 msgid "Ideographic Description Characters"
 msgstr "อักขระบรรยายอักษรภาพ"
 
-#: gucharmap/unicode-blocks.h:108
+#: gucharmap/unicode-blocks.h:112
 msgid "CJK Symbols and Punctuation"
 msgstr "เครื่องหมายและสัญลักษณ์ CJK"
 
-#: gucharmap/unicode-blocks.h:109 gucharmap/unicode-scripts.h:46
+#: gucharmap/unicode-blocks.h:113 gucharmap/unicode-scripts.h:49
 msgid "Hiragana"
 msgstr "ฮิรางานะ"
 
-#: gucharmap/unicode-blocks.h:110 gucharmap/unicode-scripts.h:49
+#: gucharmap/unicode-blocks.h:114 gucharmap/unicode-scripts.h:57
 msgid "Katakana"
 msgstr "คาตาคานะ"
 
-#: gucharmap/unicode-blocks.h:111 gucharmap/unicode-scripts.h:20
+#: gucharmap/unicode-blocks.h:115 gucharmap/unicode-scripts.h:22
 msgid "Bopomofo"
 msgstr "ปอพอมอฟอ (จู้อิน)"
 
-#: gucharmap/unicode-blocks.h:112
+#: gucharmap/unicode-blocks.h:116
 msgid "Hangul Compatibility Jamo"
 msgstr "จาโมฮันกึล เพื่อใช้ข้ามระบบ"
 
-#: gucharmap/unicode-blocks.h:113
+#: gucharmap/unicode-blocks.h:117
 msgid "Kanbun"
 msgstr "คันบุน"
 
-#: gucharmap/unicode-blocks.h:114
+#: gucharmap/unicode-blocks.h:118
 msgid "Bopomofo Extended"
 msgstr "ปอพอมอฟอ (จู้อิน) ส่วนขยาย"
 
-#: gucharmap/unicode-blocks.h:115
+#: gucharmap/unicode-blocks.h:119
 msgid "CJK Strokes"
 msgstr "เส้นขีด CJK"
 
-#: gucharmap/unicode-blocks.h:116
+#: gucharmap/unicode-blocks.h:120
 msgid "Katakana Phonetic Extensions"
 msgstr "คาตาคานะ ส่วนขยายสัทศาสตร์"
 
-#: gucharmap/unicode-blocks.h:117
+#: gucharmap/unicode-blocks.h:121
 msgid "Enclosed CJK Letters and Months"
 msgstr "อักษรและเดือน CJK ในวงเล็บ"
 
-#: gucharmap/unicode-blocks.h:118
+#: gucharmap/unicode-blocks.h:122
 msgid "CJK Compatibility"
 msgstr "อักขระ CJK เพื่อใช้ข้ามระบบ"
 
-#: gucharmap/unicode-blocks.h:119
+#: gucharmap/unicode-blocks.h:123
 msgid "CJK Unified Ideographs Extension A"
 msgstr "อักษรภาพ CJK รวม ส่วนขยาย A"
 
-#: gucharmap/unicode-blocks.h:120
+#: gucharmap/unicode-blocks.h:124
 msgid "Yijing Hexagram Symbols"
 msgstr "สัญลักษณ์แผนภูมิหกเส้นอี้จิง"
 
-#: gucharmap/unicode-blocks.h:121
+#: gucharmap/unicode-blocks.h:125
 msgid "CJK Unified Ideographs"
 msgstr "อักษรภาพ CJK รวม"
 
-#: gucharmap/unicode-blocks.h:122
+#: gucharmap/unicode-blocks.h:126
 msgid "Yi Syllables"
 msgstr "อี้, พยางค์"
 
-#: gucharmap/unicode-blocks.h:123
+#: gucharmap/unicode-blocks.h:127
 msgid "Yi Radicals"
 msgstr "อี้, รากอักษร"
 
-#: gucharmap/unicode-blocks.h:124 gucharmap/unicode-scripts.h:91
+#: gucharmap/unicode-blocks.h:128 gucharmap/unicode-scripts.h:66
+msgid "Lisu"
+msgstr "ลีซอ"
+
+#: gucharmap/unicode-blocks.h:129 gucharmap/unicode-scripts.h:106
 msgid "Vai"
 msgstr ""
 
-#: gucharmap/unicode-blocks.h:125
+#: gucharmap/unicode-blocks.h:130
 msgid "Cyrillic Extended-B"
 msgstr "ซีริลลิก ส่วนขยาย B"
 
-#: gucharmap/unicode-blocks.h:126
+#: gucharmap/unicode-blocks.h:131 gucharmap/unicode-scripts.h:20
+msgid "Bamum"
+msgstr ""
+
+#: gucharmap/unicode-blocks.h:132
 msgid "Modifier Tone Letters"
 msgstr "ตัวขยายวรรณยุกต์"
 
-#: gucharmap/unicode-blocks.h:127
+#: gucharmap/unicode-blocks.h:133
 msgid "Latin Extended-D"
 msgstr "ละติน ส่วนขยาย D"
 
-#: gucharmap/unicode-blocks.h:128 gucharmap/unicode-scripts.h:79
+#: gucharmap/unicode-blocks.h:134 gucharmap/unicode-scripts.h:92
 msgid "Syloti Nagri"
 msgstr "สิลอฏีนาครี"
 
-#: gucharmap/unicode-blocks.h:129
+#: gucharmap/unicode-blocks.h:135
+msgid "Common Indic Number Forms"
+msgstr "รูปแบบตัวเลขสามัญตระกูลอินเดีย"
+
+#: gucharmap/unicode-blocks.h:136
 msgid "Phags-pa"
 msgstr "ผัคสปะ"
 
-#: gucharmap/unicode-blocks.h:130 gucharmap/unicode-scripts.h:75
+#: gucharmap/unicode-blocks.h:137 gucharmap/unicode-scripts.h:88
 msgid "Saurashtra"
-msgstr ""
+msgstr "เสาราษฎร์"
 
-#: gucharmap/unicode-blocks.h:131 gucharmap/unicode-scripts.h:50
+#: gucharmap/unicode-blocks.h:138
+msgid "Devanagari Extended"
+msgstr "เทวนาครี ส่วนขยาย"
+
+#: gucharmap/unicode-blocks.h:139 gucharmap/unicode-scripts.h:58
 msgid "Kayah Li"
 msgstr "คยาห์"
 
-#: gucharmap/unicode-blocks.h:132 gucharmap/unicode-scripts.h:73
+#: gucharmap/unicode-blocks.h:140 gucharmap/unicode-scripts.h:85
 msgid "Rejang"
 msgstr ""
 
-#: gucharmap/unicode-blocks.h:133 gucharmap/unicode-scripts.h:26
+#: gucharmap/unicode-blocks.h:141
+msgid "Hangul Jamo Extended-A"
+msgstr "ฮันกึล, จาโม, ส่วนขยาย A"
+
+#: gucharmap/unicode-blocks.h:142 gucharmap/unicode-scripts.h:54
+msgid "Javanese"
+msgstr "ชวา"
+
+#: gucharmap/unicode-blocks.h:143 gucharmap/unicode-scripts.h:28
 msgid "Cham"
 msgstr "จาม"
 
-#: gucharmap/unicode-blocks.h:134
+#: gucharmap/unicode-blocks.h:144
+msgid "Myanmar Extended-A"
+msgstr "พม่า ส่วนขยาย A"
+
+#: gucharmap/unicode-blocks.h:145 gucharmap/unicode-scripts.h:98
+msgid "Tai Viet"
+msgstr "ไทเวียด"
+
+#: gucharmap/unicode-blocks.h:146 gucharmap/unicode-scripts.h:70
+msgid "Meetei Mayek"
+msgstr "มณีปุรี"
+
+#: gucharmap/unicode-blocks.h:147
 msgid "Hangul Syllables"
 msgstr "ฮันกึล, พยางค์"
 
-#: gucharmap/unicode-blocks.h:135
+#: gucharmap/unicode-blocks.h:148
+msgid "Hangul Jamo Extended-B"
+msgstr "ฮันกึล, จาโม, ส่วนขยาย B"
+
+#: gucharmap/unicode-blocks.h:149
 msgid "High Surrogates"
 msgstr "ตัวแทนครึ่งบน"
 
-#: gucharmap/unicode-blocks.h:136
+#: gucharmap/unicode-blocks.h:150
 msgid "High Private Use Surrogates"
 msgstr "ตัวแทนครึ่งบน ส่วนใช้งานเอกชน"
 
-#: gucharmap/unicode-blocks.h:137
+#: gucharmap/unicode-blocks.h:151
 msgid "Low Surrogates"
 msgstr "ตัวแทนครึ่งล่าง"
 
-#: gucharmap/unicode-blocks.h:138
+#: gucharmap/unicode-blocks.h:152
 msgid "Private Use Area"
 msgstr "พื้นที่ใช้งานเอกชน"
 
-#: gucharmap/unicode-blocks.h:139
+#: gucharmap/unicode-blocks.h:153
 msgid "CJK Compatibility Ideographs"
 msgstr "อักษรภาพ CJK เพื่อใช้ข้ามระบบ"
 
-#: gucharmap/unicode-blocks.h:140
+#: gucharmap/unicode-blocks.h:154
 msgid "Alphabetic Presentation Forms"
 msgstr "รูปแบบแสดงผลอักขระ"
 
-#: gucharmap/unicode-blocks.h:141
+#: gucharmap/unicode-blocks.h:155
 msgid "Arabic Presentation Forms-A"
 msgstr "รูปแบบแสดงผลอารบิก A"
 
-#: gucharmap/unicode-blocks.h:142
+#: gucharmap/unicode-blocks.h:156
 msgid "Variation Selectors"
 msgstr "ตัวเลือกรูปเขียน"
 
-#: gucharmap/unicode-blocks.h:143
+#: gucharmap/unicode-blocks.h:157
 msgid "Vertical Forms"
 msgstr "รูปแบบแนวตั้ง"
 
-#: gucharmap/unicode-blocks.h:144
+#: gucharmap/unicode-blocks.h:158
 msgid "Combining Half Marks"
 msgstr "เครื่องหมายเขียนประกอบครึ่งซีก"
 
-#: gucharmap/unicode-blocks.h:145
+#: gucharmap/unicode-blocks.h:159
 msgid "CJK Compatibility Forms"
 msgstr "รูปแบบอักษร CJK เพื่อใช้ข้ามระบบ"
 
-#: gucharmap/unicode-blocks.h:146
+#: gucharmap/unicode-blocks.h:160
 msgid "Small Form Variants"
 msgstr "อักษรแบบเล็ก"
 
-#: gucharmap/unicode-blocks.h:147
+#: gucharmap/unicode-blocks.h:161
 msgid "Arabic Presentation Forms-B"
 msgstr "รูปแบบแสดงผลอารบิก B"
 
-#: gucharmap/unicode-blocks.h:148
+#: gucharmap/unicode-blocks.h:162
 msgid "Halfwidth and Fullwidth Forms"
 msgstr "รูปแบบครึ่งความกว้างและเต็มความกว้าง"
 
-#: gucharmap/unicode-blocks.h:149
+#: gucharmap/unicode-blocks.h:163
 msgid "Specials"
 msgstr "พิเศษ"
 
-#: gucharmap/unicode-blocks.h:150
+#: gucharmap/unicode-blocks.h:164
 msgid "Linear B Syllabary"
 msgstr "ลิเนียร์ B, พยางค์"
 
-#: gucharmap/unicode-blocks.h:151
+#: gucharmap/unicode-blocks.h:165
 msgid "Linear B Ideograms"
 msgstr "ลิเนียร์ B, อักษรภาพ"
 
-#: gucharmap/unicode-blocks.h:152
+#: gucharmap/unicode-blocks.h:166
 msgid "Aegean Numbers"
 msgstr "ตัวเลขอีเจียน"
 
-#: gucharmap/unicode-blocks.h:153
+#: gucharmap/unicode-blocks.h:167
 msgid "Ancient Greek Numbers"
 msgstr "ตัวเลขกรีกโบราณ"
 
-#: gucharmap/unicode-blocks.h:154
+#: gucharmap/unicode-blocks.h:168
 msgid "Ancient Symbols"
 msgstr "สัญลักษณ์โบราณ"
 
-#: gucharmap/unicode-blocks.h:155
+#: gucharmap/unicode-blocks.h:169
 msgid "Phaistos Disc"
-msgstr ""
+msgstr "แผ่นจานไฟส์ทอส"
 
-#: gucharmap/unicode-blocks.h:156 gucharmap/unicode-scripts.h:58
+#: gucharmap/unicode-blocks.h:170 gucharmap/unicode-scripts.h:67
 msgid "Lycian"
-msgstr ""
+msgstr "ลิเชีย"
 
-#: gucharmap/unicode-blocks.h:157 gucharmap/unicode-scripts.h:25
+#: gucharmap/unicode-blocks.h:171 gucharmap/unicode-scripts.h:27
 msgid "Carian"
-msgstr ""
+msgstr "แคเรีย"
 
-#: gucharmap/unicode-blocks.h:158 gucharmap/unicode-scripts.h:67
+#: gucharmap/unicode-blocks.h:172 gucharmap/unicode-scripts.h:77
 msgid "Old Italic"
 msgstr "อิตาลิกเก่า"
 
-#: gucharmap/unicode-blocks.h:159 gucharmap/unicode-scripts.h:38
+#: gucharmap/unicode-blocks.h:173 gucharmap/unicode-scripts.h:41
 msgid "Gothic"
 msgstr "โกธิก"
 
-#: gucharmap/unicode-blocks.h:160 gucharmap/unicode-scripts.h:90
+#: gucharmap/unicode-blocks.h:174 gucharmap/unicode-scripts.h:105
 msgid "Ugaritic"
 msgstr "ยูการิติก"
 
-#: gucharmap/unicode-blocks.h:161 gucharmap/unicode-scripts.h:68
+#: gucharmap/unicode-blocks.h:175 gucharmap/unicode-scripts.h:78
 msgid "Old Persian"
 msgstr "เปอร์เซียเก่า"
 
-#: gucharmap/unicode-blocks.h:162 gucharmap/unicode-scripts.h:33
+#: gucharmap/unicode-blocks.h:176 gucharmap/unicode-scripts.h:35
 msgid "Deseret"
 msgstr "เดเซอเร็ต"
 
-#: gucharmap/unicode-blocks.h:163 gucharmap/unicode-scripts.h:76
+#: gucharmap/unicode-blocks.h:177 gucharmap/unicode-scripts.h:89
 msgid "Shavian"
 msgstr "เชเวียน"
 
-#: gucharmap/unicode-blocks.h:164 gucharmap/unicode-scripts.h:70
+#: gucharmap/unicode-blocks.h:178 gucharmap/unicode-scripts.h:82
 msgid "Osmanya"
 msgstr "ออสมันยา"
 
-#: gucharmap/unicode-blocks.h:165
+#: gucharmap/unicode-blocks.h:179
 msgid "Cypriot Syllabary"
 msgstr "ซิพริออต, พยางค์"
 
-#: gucharmap/unicode-blocks.h:166 gucharmap/unicode-scripts.h:72
+#: gucharmap/unicode-blocks.h:180 gucharmap/unicode-scripts.h:50
+msgid "Imperial Aramaic"
+msgstr "อาราเมอิกจักรวรรดิ"
+
+#: gucharmap/unicode-blocks.h:181 gucharmap/unicode-scripts.h:84
 msgid "Phoenician"
 msgstr "ฟินิเชียน"
 
-#: gucharmap/unicode-blocks.h:167 gucharmap/unicode-scripts.h:59
+#: gucharmap/unicode-blocks.h:182 gucharmap/unicode-scripts.h:68
 msgid "Lydian"
-msgstr ""
+msgstr "ลิเดีย"
 
-#: gucharmap/unicode-blocks.h:168 gucharmap/unicode-scripts.h:51
+#: gucharmap/unicode-blocks.h:183 gucharmap/unicode-scripts.h:59
 msgid "Kharoshthi"
 msgstr "ขโรษฐี"
 
-#: gucharmap/unicode-blocks.h:169 gucharmap/unicode-scripts.h:30
+#: gucharmap/unicode-blocks.h:184 gucharmap/unicode-scripts.h:79
+msgid "Old South Arabian"
+msgstr "อาระเบียใต้เก่า"
+
+#: gucharmap/unicode-blocks.h:185 gucharmap/unicode-scripts.h:18
+msgid "Avestan"
+msgstr "อเวสตะ"
+
+#: gucharmap/unicode-blocks.h:186 gucharmap/unicode-scripts.h:53
+msgid "Inscriptional Parthian"
+msgstr "พาร์เทียจารึก"
+
+#: gucharmap/unicode-blocks.h:187 gucharmap/unicode-scripts.h:52
+msgid "Inscriptional Pahlavi"
+msgstr "พาลาวีจารึก"
+
+#: gucharmap/unicode-blocks.h:188 gucharmap/unicode-scripts.h:80
+msgid "Old Turkic"
+msgstr "เตอร์กิกเก่า"
+
+#: gucharmap/unicode-blocks.h:189
+msgid "Rumi Numeral Symbols"
+msgstr "เครื่องหมายตัวเลขรูมี"
+
+#: gucharmap/unicode-blocks.h:190 gucharmap/unicode-scripts.h:55
+msgid "Kaithi"
+msgstr "ไกถี"
+
+#: gucharmap/unicode-blocks.h:191 gucharmap/unicode-scripts.h:32
 msgid "Cuneiform"
 msgstr "คูนิฟอร์ม"
 
-#: gucharmap/unicode-blocks.h:170
+#: gucharmap/unicode-blocks.h:192
 msgid "Cuneiform Numbers and Punctuation"
 msgstr "ตัวเลขและเครื่องหมายคูนิฟอร์ม"
 
-#: gucharmap/unicode-blocks.h:171
+#: gucharmap/unicode-blocks.h:193 gucharmap/unicode-scripts.h:37
+msgid "Egyptian Hieroglyphs"
+msgstr "ไฮโรกลิฟอียิปต์"
+
+#: gucharmap/unicode-blocks.h:194
 msgid "Byzantine Musical Symbols"
 msgstr "เครื่องหมายดนตรีไบแซนไทน์"
 
-#: gucharmap/unicode-blocks.h:172
+#: gucharmap/unicode-blocks.h:195
 msgid "Musical Symbols"
 msgstr "เครื่องหมายดนตรี"
 
-#: gucharmap/unicode-blocks.h:173
+#: gucharmap/unicode-blocks.h:196
 msgid "Ancient Greek Musical Notation"
 msgstr "เครื่องหมายดนตรีกรีกโบราณ"
 
-#: gucharmap/unicode-blocks.h:174
+#: gucharmap/unicode-blocks.h:197
 msgid "Tai Xuan Jing Symbols"
 msgstr "สัญลักษณ์ไท่สวนจิง"
 
-#: gucharmap/unicode-blocks.h:175
+#: gucharmap/unicode-blocks.h:198
 msgid "Counting Rod Numerals"
 msgstr "ตัวเลขติ้วนับ"
 
-#: gucharmap/unicode-blocks.h:176
+#: gucharmap/unicode-blocks.h:199
 msgid "Mathematical Alphanumeric Symbols"
 msgstr "สัญลักษณ์อักษรคณิตศาสตร์"
 
-#: gucharmap/unicode-blocks.h:177
+#: gucharmap/unicode-blocks.h:200
 msgid "Mahjong Tiles"
 msgstr "ไพ่นกกระจอก"
 
-#: gucharmap/unicode-blocks.h:178
+#: gucharmap/unicode-blocks.h:201
 msgid "Domino Tiles"
 msgstr "โดมิโน"
 
-#: gucharmap/unicode-blocks.h:179
+#: gucharmap/unicode-blocks.h:202
+msgid "Enclosed Alphanumeric Supplement"
+msgstr "อักษรเลขในกรอบ ส่วนเสริม"
+
+#: gucharmap/unicode-blocks.h:203
+msgid "Enclosed Ideographic Supplement"
+msgstr "อักษรภาพในกรอบ ส่วนเสริม"
+
+#: gucharmap/unicode-blocks.h:204
 msgid "CJK Unified Ideographs Extension B"
 msgstr "อักษรภาพ CJK รวม ส่วนขยาย B"
 
-#: gucharmap/unicode-blocks.h:180
+#: gucharmap/unicode-blocks.h:205
+msgid "CJK Unified Ideographs Extension C"
+msgstr "อักษรภาพ CJK รวม ส่วนขยาย C"
+
+#: gucharmap/unicode-blocks.h:206
 msgid "CJK Compatibility Ideographs Supplement"
 msgstr "อักษรภาพ CJK เพื่อใช้ข้ามระบบ ส่วนเสริม"
 
-#: gucharmap/unicode-blocks.h:181
+#: gucharmap/unicode-blocks.h:207
 msgid "Tags"
 msgstr "แท็ก"
 
-#: gucharmap/unicode-blocks.h:182
+#: gucharmap/unicode-blocks.h:208
 msgid "Variation Selectors Supplement"
 msgstr "ตัวเลือกรูปเขียน ส่วนเสริม"
 
-#: gucharmap/unicode-blocks.h:183
+#: gucharmap/unicode-blocks.h:209
 msgid "Supplementary Private Use Area-A"
 msgstr "พื้นที่ใช้งานเอกชน ส่วนเสริม A"
 
-#: gucharmap/unicode-blocks.h:184
+#: gucharmap/unicode-blocks.h:210
 msgid "Supplementary Private Use Area-B"
 msgstr "พื้นที่ใช้งานเอกชน ส่วนเสริม B"
 
-#: gucharmap/unicode-scripts.h:21
+#: gucharmap/unicode-scripts.h:23
 msgid "Braille"
 msgstr "อักษรเบรลล์"
 
-#: gucharmap/unicode-scripts.h:24
+#: gucharmap/unicode-scripts.h:26
 msgid "Canadian Aboriginal"
 msgstr "ภาษาชนเผ่าพื้นเมืองแคนาดา"
 
-#: gucharmap/unicode-scripts.h:31
+#: gucharmap/unicode-scripts.h:33
 msgid "Cypriot"
 msgstr "ซิพริออต"
 
-#: gucharmap/unicode-scripts.h:39
+#: gucharmap/unicode-scripts.h:42
 msgid "Greek"
 msgstr "กรีก"
 
-#: gucharmap/unicode-scripts.h:42
+#: gucharmap/unicode-scripts.h:45
 msgid "Han"
 msgstr "ฮั่น"
 
-#: gucharmap/unicode-scripts.h:43
+#: gucharmap/unicode-scripts.h:46
 msgid "Hangul"
 msgstr "ฮันกึล"
 
-#: gucharmap/unicode-scripts.h:47
+#: gucharmap/unicode-scripts.h:51
 msgid "Inherited"
 msgstr "ตามอักขระที่ประกอบ"
 
-#: gucharmap/unicode-scripts.h:54
+#: gucharmap/unicode-scripts.h:62
 msgid "Latin"
 msgstr "ละติน"
 
-#: gucharmap/unicode-scripts.h:57
+#: gucharmap/unicode-scripts.h:65
 msgid "Linear B"
 msgstr "ลิเนียร์ B"
 
-#: gucharmap/unicode-scripts.h:71
+#: gucharmap/unicode-scripts.h:83
 msgid "Phags Pa"
 msgstr "พัคสปะ"
 
-#: gucharmap/unicode-scripts.h:92
+#: gucharmap/unicode-scripts.h:107
 msgid "Yi"
 msgstr "อี้"
 
@@ -1218,27 +1323,27 @@ msgid "Information"
 msgstr "ข้อมูล"
 
 #. follow hig guidelines
-#: gucharmap/gucharmap-search-dialog.c:739
+#: gucharmap/gucharmap-search-dialog.c:729
 msgid "Find"
 msgstr "ค้นหา"
 
-#: gucharmap/gucharmap-search-dialog.c:753
+#: gucharmap/gucharmap-search-dialog.c:743
 msgid "_Previous"
 msgstr "_ก่อนหน้า"
 
-#: gucharmap/gucharmap-search-dialog.c:760
+#: gucharmap/gucharmap-search-dialog.c:750
 msgid "_Next"
 msgstr "_ถัดไป"
 
-#: gucharmap/gucharmap-search-dialog.c:770
+#: gucharmap/gucharmap-search-dialog.c:765
 msgid "_Search:"
 msgstr "_ค้นหา:"
 
-#: gucharmap/gucharmap-search-dialog.c:780
+#: gucharmap/gucharmap-search-dialog.c:775
 msgid "Match _whole word"
 msgstr "ค้นหา_ทั้งคำ"
 
-#: gucharmap/gucharmap-search-dialog.c:785
+#: gucharmap/gucharmap-search-dialog.c:780
 msgid "Search in character _details"
 msgstr "ค้นหาในเนื้อหา_รายละเอียดของอักขระ"
 
