@@ -16,9 +16,9 @@
 # 59 Temple Place, Suite 330, Boston, MA 02110-1301  USA
 
 m4_define([gucharmap_version_major],[2])
-m4_define([gucharmap_version_minor],[29])
-m4_define([gucharmap_version_micro],[1])
-m4_define([gucharmap_version_extra],[-git])
+m4_define([gucharmap_version_minor],[30])
+m4_define([gucharmap_version_micro],[0])
+m4_define([gucharmap_version_extra],[])
 m4_define([gucharmap_version],[gucharmap_version_major.gucharmap_version_minor.gucharmap_version_micro()gucharmap_version_extra])
 
 # Before making a release, the libtool version should be modified.
@@ -44,7 +44,7 @@ AC_CONFIG_HEADERS([config.h])
 
 AM_INIT_AUTOMAKE([1.9 foreign dist-bzip2 no-dist-gzip])
 
-m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([no])])
+m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
 
 if test -z "$enable_maintainer_mode"; then
   enable_maintainer_mode=yes
