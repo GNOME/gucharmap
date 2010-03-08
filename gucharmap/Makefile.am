@@ -92,7 +92,7 @@ libgucharmap_la_LDFLAGS = \
 
 libgucharmap_la_LIBADD = \
 	$(GTK_LIBS)	\
-	$(INTL_LIBS)
+	$(INTLLIBS)
 
 libgucharmapincludedir = $(includedir)/gucharmap-2/gucharmap
 libgucharmapinclude_HEADERS = \
