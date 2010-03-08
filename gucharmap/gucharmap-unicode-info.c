@@ -67,7 +67,8 @@ gucharmap_get_unicode_name (gunichar wc)
 
   if ((wc >= 0x3400 && wc <= 0x4DB5)
       || (wc >= 0x4e00 && wc <= 0x9fcb)
-      || (wc >= 0x20000 && wc <= 0x2A6D6))
+      || (wc >= 0x20000 && wc <= 0x2A6D6)
+      || (wc >= 0x2a700 && wc <= 0x2b734))
     {
       g_snprintf (buf, sizeof (buf), "CJK UNIFIED IDEOGRAPH-%04X", wc);
       return buf;
