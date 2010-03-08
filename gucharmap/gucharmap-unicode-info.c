@@ -73,6 +73,10 @@ gucharmap_get_unicode_name (gunichar wc)
       g_snprintf (buf, sizeof (buf), "CJK UNIFIED IDEOGRAPH-%04X", wc);
       return buf;
     }
+  /* FIXME: handle U+F900..U+FAFF CJK COMPATIBILITY IDEOGRAPH U+%04X and
+   * U+2F800..U+2FA1D CJK COMPATIBILITY IDEOGRAPH U+%04X here,
+   * instead of via gucharmap_get_unicode_data_name below, to save some space?
+    */
   else if (wc >= 0xac00 && wc <= 0xd7af)
     {
       /* compute hangul syllable name as per UAX #15 */
