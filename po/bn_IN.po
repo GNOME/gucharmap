@@ -1,21 +1,21 @@
 # translation of bn_IN.po to Bengali INDIA
 # Bengali India translation of gucharmap
 # This file is distributed under the same license as the gucharmap package.
-# Copyright (C) 2003, 2006, 2009 Free Software Foundation, Inc.
+# Copyright (C) 2003, 2006, 2009, 2010 Free Software Foundation, Inc.
 #
 # Sayamindu Dasgupta <unmadindu@Softhome.net>, 2003.
 # Mahay Alam Khan <makl10n@yahoo.com>, 2005.
 # Samia Niamatullah <mailsamia2001@yahoo.com>, 2005.
 # Runa Bhattacharjee <runabh@gmail.com>, 2006.
-# Runa Bhattacharjee <runab@redhat.com>, 2009.
+# Runa Bhattacharjee <runab@redhat.com>, 2009, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: bn_IN\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gucharmap&component=general\n"
-"POT-Creation-Date: 2009-01-12 18:59+0000\n"
-"PO-Revision-Date: 2009-03-10 17:04+0530\n"
+"POT-Creation-Date: 2010-03-29 09:47+0000\n"
+"PO-Revision-Date: 2010-04-15 12:51+0530\n"
 "Last-Translator: Runa Bhattacharjee <runab@redhat.com>\n"
-"Language-Team: Bengali INDIA <discuss@lists.ankur.org.in>\n"
+"Language-Team: Bengali INDIA <anubad@lists.ankur.org.in>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -39,7 +39,7 @@ msgstr "নথিপত্রের মধ্যে বিশেষ অক্ষ
 msgid "Canonical decomposition:"
 msgstr "ক্যানোনিকাল ডিকম্পোসিশন:"
 
-#: ../gucharmap/gucharmap-charmap.c:616 ../gucharmap/gucharmap-chartable.c:568
+#: ../gucharmap/gucharmap-charmap.c:616 ../gucharmap/gucharmap-chartable.c:553
 msgid "[not a printable character]"
 msgstr "[প্রিন্ট করারযোগ্য অক্ষর নয়]"
 
@@ -49,7 +49,6 @@ msgstr "অক্ষরের সাধারণ বৈশিষ্ট্য"
 
 # msgstr "অক্ষরের সাধারণ বৈশিষ্ট্য"
 #: ../gucharmap/gucharmap-charmap.c:636
-#| msgid "Unicode category:"
 msgid "In Unicode since:"
 msgstr "Unicode-এ অন্তর্ভুক্তির সময়কাল:"
 
@@ -157,17 +156,17 @@ msgstr "অক্ষরের বিবরণ (_D)"
 
 # msgstr "কোন টেক্সট চিহ্নিত করা হয় নি।"
 # "নি" শব্দটা "নাই" এর চলিত রূপ। এটা সবসময় আলাদা বসবে। মাত্র কয়েক দিন আগে ব্যাপারটা জানতে পারছি ;-)
-#: ../gucharmap/gucharmap-chartable.c:1371
+#: ../gucharmap/gucharmap-chartable.c:1399
 msgid "Unknown character, unable to identify."
 msgstr "অজানা অক্ষর, সনাক্ত করতে ব্যর্থ।"
 
-#: ../gucharmap/gucharmap-chartable.c:1373
+#: ../gucharmap/gucharmap-chartable.c:1401
 #: ../gucharmap/gucharmap-search-dialog.c:585
 msgid "Not found."
 msgstr "পাওয়া যায়নি।"
 
 # msgstr "অজ্ঞাত অক্ষর, সনাক্ত করা সম্ভব হয় নি।"
-#: ../gucharmap/gucharmap-chartable.c:1376
+#: ../gucharmap/gucharmap-chartable.c:1404
 msgid "Character found."
 msgstr "অক্ষর পাওয়া গেছে।"
 
@@ -360,7 +359,6 @@ msgstr "বিভাজক, শূণ্যস্থান"
 
 # msgstr "প্রদর্শন (_দ)"
 #: ../gucharmap/gucharmap-window.c:246
-#| msgid "Searching..."
 msgid "Searching…"
 msgstr "অনুসন্ধান করা হচ্ছে..."
 
@@ -398,18 +396,14 @@ msgstr ""
 "Public License পড়ুন।"
 
 #: ../gucharmap/gucharmap-window.c:505
-#| msgid ""
-#| "You should have received a copy of the GNU General Public License along "
-#| "with Gucharmap; if not, write to the Free Software Foundation, Inc., 59 "
-#| "Temple Place, Suite 330, Boston, MA  02111-1307  USA"
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "Gucharmap; if not, write to the Free Software Foundation, Inc., 59 Temple "
 "Place, Suite 330, Boston, MA  02110-1301  USA"
 msgstr ""
 "Gucharmap-র সাথে GNU General Public License-র একটি প্রতিলিপি উপলব্ধ হওয়া উচিত; "
-"না থাকলে নিম্নলিখিত ঠিকানায় লিখে তা সংগ্রহ করুন Free Software Foundation, Inc., 59 Temple "
-"Place, Suite 330, Boston, MA  02110-1301  USA"
+"না থাকলে নিম্নলিখিত ঠিকানায় লিখে তা সংগ্রহ করুন Free Software Foundation, Inc., "
+"59 Temple Place, Suite 330, Boston, MA  02110-1301  USA"
 
 #: ../gucharmap/gucharmap-window.c:508
 msgid ""
@@ -423,14 +417,10 @@ msgstr ""
 
 # msgstr "অক্ষর খুঁজে পাওয়া গেছে।" <-- "গেছে" শব্দটা কথ্য ভাষায় ব্যবহৃত হয়।
 #: ../gucharmap/gucharmap-window.c:521 ../gucharmap/main.c:37
-#| msgid "Character Map"
 msgid "GNOME Character Map"
 msgstr "GNOME অক্ষরের ম্যাপ"
 
 #: ../gucharmap/gucharmap-window.c:523
-#| msgid ""
-#| "GNOME Character Map\n"
-#| "based on the Unicode Character Database"
 msgid "Based on the Unicode Character Database 5.1"
 msgstr "Unicode Character Database 5.1-র উপর ভিত্তি করে নির্মিত"
 
@@ -477,7 +467,7 @@ msgstr "গন্তব্য (_G)"
 
 #: ../gucharmap/gucharmap-window.c:841
 msgid "_Help"
-msgstr "সহায়তা (_H)"
+msgstr "সাহায্য (_H)"
 
 #: ../gucharmap/gucharmap-window.c:844
 msgid "Page _Setup"
@@ -502,7 +492,7 @@ msgstr "পূর্ববর্তী অক্ষর (_P)"
 
 #: ../gucharmap/gucharmap-window.c:879
 msgid "_Contents"
-msgstr "সূচি (_C)"
+msgstr "সূচিপত্র (_C)"
 
 #: ../gucharmap/gucharmap-window.c:881
 msgid "_About"
@@ -517,7 +507,6 @@ msgid "By _Unicode Block"
 msgstr "ইউনিকোড ব্লক অনুযায়ী (_U)"
 
 #: ../gucharmap/gucharmap-window.c:898
-#| msgid "Snap Columns to Power of Two"
 msgid "Snap _Columns to Power of Two"
 msgstr "দুইয়ের ঘাত অনুযায়ী কলাম স্ন্যাপ করা হবে (_C)"
 
@@ -609,7 +598,6 @@ msgstr "থানা"
 
 # http://www.ethnologue.com/show_language.asp?code=emk
 #: ../gucharmap/unicode-blocks.h:30 ../gucharmap/unicode-scripts.h:63
-#| msgid "NKo"
 msgid "N'Ko"
 msgstr "নকো"
 
@@ -933,7 +921,6 @@ msgid "Ethiopic Extended"
 msgstr "ইথিওপিক এক্সটেন্ডেড"
 
 #: ../gucharmap/unicode-blocks.h:103
-#| msgid "Latin Extended-A"
 msgid "Cyrillic Extended-A"
 msgstr "সিরিলিক এক্সটেনডেড-A"
 
@@ -1025,7 +1012,6 @@ msgid "Vai"
 msgstr "ওয়াই"
 
 #: ../gucharmap/unicode-blocks.h:125
-#| msgid "Latin Extended-B"
 msgid "Cyrillic Extended-B"
 msgstr "সিরিলিক এক্সটেনডেড-B"
 
@@ -1059,7 +1045,6 @@ msgstr "রেজাং"
 
 # msgstr "সমন্বিত কানাডীয় আদিবাসী সিলেবিক্স" <-- ভয়াবহ!
 #: ../gucharmap/unicode-blocks.h:133 ../gucharmap/unicode-scripts.h:26
-#| msgid "Ogham"
 msgid "Cham"
 msgstr "ছাম"
 
@@ -1159,7 +1144,6 @@ msgid "Ancient Greek Numbers"
 msgstr "পুরাতন গ্রিক সংখ্যা"
 
 #: ../gucharmap/unicode-blocks.h:154
-#| msgid "Currency Symbols"
 msgid "Ancient Symbols"
 msgstr "পুরাতন চিহ্ন"
 
@@ -1172,7 +1156,6 @@ msgid "Lycian"
 msgstr "লাইসিয়ান"
 
 #: ../gucharmap/unicode-blocks.h:157 ../gucharmap/unicode-scripts.h:25
-#| msgid "Shavian"
 msgid "Carian"
 msgstr "কারিয়ান"
 
@@ -1346,29 +1329,29 @@ msgstr "তথ্য"
 
 # msgstr "অনুসন্ধান করার মত কিছু নেই।"
 #. follow hig guidelines
-#: ../gucharmap/gucharmap-search-dialog.c:739
+#: ../gucharmap/gucharmap-search-dialog.c:729
 msgid "Find"
 msgstr "অনুসন্ধান"
 
 # msgstr "পরবর্তীটি খোঁজা হোক (_প)"
-#: ../gucharmap/gucharmap-search-dialog.c:753
+#: ../gucharmap/gucharmap-search-dialog.c:743
 msgid "_Previous"
 msgstr "পূর্ববর্তী (_P)"
 
-#: ../gucharmap/gucharmap-search-dialog.c:760
+#: ../gucharmap/gucharmap-search-dialog.c:750
 msgid "_Next"
 msgstr "পরবর্তী (_N)"
 
 # "খোঁজ" নাকি "খোঁজা" ?
-#: ../gucharmap/gucharmap-search-dialog.c:770
+#: ../gucharmap/gucharmap-search-dialog.c:765
 msgid "_Search:"
 msgstr "অনুসন্ধান:(_S)"
 
-#: ../gucharmap/gucharmap-search-dialog.c:780
+#: ../gucharmap/gucharmap-search-dialog.c:775
 msgid "Match _whole word"
 msgstr "সম্পূর্ণ শব্দ মেলানো হবে (_w)"
 
-#: ../gucharmap/gucharmap-search-dialog.c:785
+#: ../gucharmap/gucharmap-search-dialog.c:780
 msgid "Search in character _details"
 msgstr "অক্ষরের বিবরণে অনুসন্ধান করা হবে (_d)"
 
