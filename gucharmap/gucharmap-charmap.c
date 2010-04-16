@@ -1049,7 +1049,7 @@ details_motion_notify_event (GtkWidget *text_view,
 
   set_cursor_if_appropriate (charmap, x, y);
 
-  gdk_window_get_pointer (text_view->window, NULL, NULL, NULL);
+  gdk_window_get_pointer (gtk_widget_get_window (text_view), NULL, NULL, NULL);
   return FALSE;
 }
 
@@ -1060,7 +1060,7 @@ details_visibility_notify_event (GtkWidget *text_view,
 {
   gint wx, wy, bx, by;
 
-  gdk_window_get_pointer (text_view->window, &wx, &wy, NULL);
+  gdk_window_get_pointer (gtk_widget_get_window (text_view), &wx, &wy, NULL);
 
   gtk_text_view_window_to_buffer_coords (GTK_TEXT_VIEW (text_view), 
                                          GTK_TEXT_WINDOW_WIDGET,
@@ -1482,7 +1482,11 @@ gucharmap_charmap_get_chapters_visible (GucharmapCharmap *charmap)
 {
   GucharmapCharmapPrivate *priv = charmap->priv;
 
+#if GTK_CHECK_VERSION (2,18,0)
+  return gtk_widget_get_visible (GTK_WIDGET (priv->chapters_view));
+#else
   return GTK_WIDGET_VISIBLE (priv->chapters_view);
+#endif
 }
 
 void
@@ -1511,7 +1515,11 @@ gucharmap_charmap_get_page_visible (GucharmapCharmap *charmap,
   if (!page_widget)
     return FALSE;
 
+#if GTK_CHECK_VERSION (2,18,0)
+  return gtk_widget_get_visible (page_widget);
+#else
   return GTK_WIDGET_VISIBLE (page_widget);
+#endif
 }
 
 void

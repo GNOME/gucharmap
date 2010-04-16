@@ -233,7 +233,7 @@ search_start (GucharmapSearchDialog *search_dialog,
   GtkAction *action;
 
   cursor = _gucharmap_window_progress_cursor ();
-  gdk_window_set_cursor (GTK_WIDGET (guw)->window, cursor);
+  gdk_window_set_cursor (gtk_widget_get_window (GTK_WIDGET (guw)), cursor);
   gdk_cursor_unref (cursor);
 
   action = gtk_action_group_get_action (guw->action_group, "Find");
@@ -261,7 +261,7 @@ search_finish (GucharmapSearchDialog *search_dialog,
     gucharmap_charmap_set_active_character (guw->charmap, found_char);
   /* not-found dialog handled by GucharmapSearchDialog */
 
-  gdk_window_set_cursor (GTK_WIDGET (guw)->window, NULL);
+  gdk_window_set_cursor (gtk_widget_get_window (GTK_WIDGET (guw)), NULL);
 
   action = gtk_action_group_get_action (guw->action_group, "Find");
   gtk_action_set_sensitive (action, TRUE);
@@ -757,9 +757,18 @@ static void
 status_realize (GtkWidget       *status,
                 GucharmapWindow *guw)
 {
+#if GTK_CHECK_VERSION (2,18,0)
+  GtkAllocation allocation;
+
+  gtk_widget_get_allocation (guw->status, &allocation);
+#endif
   /* FIXMEchpe ewww... */
   /* increase the height a bit so it doesn't resize itself */
+#if GTK_CHECK_VERSION (2,18,0)
+  gtk_widget_set_size_request (guw->status, -1, allocation.height + 9);
+#else
   gtk_widget_set_size_request (guw->status, -1, guw->status->allocation.height + 9);
+#endif
 }
 
 static gboolean
@@ -1073,7 +1082,11 @@ gucharmap_window_set_font (GucharmapWindow *guw,
 
   g_return_if_fail (GUCHARMAP_IS_WINDOW (guw));
 
+#if GTK_CHECK_VERSION (2,20,0)
+  g_assert (!gtk_widget_get_realized (GTK_WIDGET (guw)));
+#else
   g_assert (!GTK_WIDGET_REALIZED (guw));
+#endif
 
   if (!font)
     return;
