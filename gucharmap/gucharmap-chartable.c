@@ -833,59 +833,45 @@ draw_borders (GucharmapChartable *chartable)
 {
   GucharmapChartablePrivate *priv = chartable->priv;
   GtkWidget *widget = GTK_WIDGET (chartable);
-#if GTK_CHECK_VERSION (2,18,0)
-  GtkAllocation allocation;
-#endif
+  GtkAllocation *allocation;
   GtkStyle *style;
   gint x, y, col, row;
+#if GTK_CHECK_VERSION (2, 18, 0)
+  GtkAllocation widget_allocation;
+
+  gtk_widget_get_allocation (widget, &widget_allocation);
+  allocation = &widget_allocation;
+#else
+  allocation = &widget->allocation;
+#endif
 
   /* dark_gc[GTK_STATE_NORMAL] seems to be what is used to draw the borders
    * around widgets, so we use it for the lines */
 
   style = gtk_widget_get_style (widget);
 
-#if GTK_CHECK_VERSION (2,18,0)
-  gtk_widget_get_allocation (widget, &allocation);
-#endif
-
   /* vertical lines */
   gdk_draw_line (priv->pixmap,
                  style->dark_gc[GTK_STATE_NORMAL],
-#if GTK_CHECK_VERSION (2,18,0)
-                 0, 0, 0, allocation.height - 1);
-#else
-                 0, 0, 0, widget->allocation.height - 1);
-#endif
+                 0, 0, 0, allocation->height - 1);
   for (col = 0, x = 0;  col < priv->cols;  col++)
     {
       x += _gucharmap_chartable_column_width (chartable, col);
       gdk_draw_line (priv->pixmap,
                      style->dark_gc[GTK_STATE_NORMAL],
-#if GTK_CHECK_VERSION (2,18,0)
-                     x, 0, x, allocation.height - 1);
-#else
-                     x, 0, x, widget->allocation.height - 1);
-#endif
+                     x, 0, x, allocation->height - 1);
     }
 
   /* horizontal lines */
   gdk_draw_line (priv->pixmap,
                  style->dark_gc[GTK_STATE_NORMAL],
-#if GTK_CHECK_VERSION (2,18,0)
-                 0, 0, allocation.width - 1, 0);
-#else
-                 0, 0, widget->allocation.width - 1, 0);
-#endif
+                 0, 0, allocation->width - 1, 0);
   for (row = 0, y = 0;  row < priv->rows;  row++)
     {
       y += _gucharmap_chartable_row_height (chartable, row);
       gdk_draw_line (priv->pixmap,
                      style->dark_gc[GTK_STATE_NORMAL],
-#if GTK_CHECK_VERSION (2,18,0)
-                     0, y, allocation.width - 1, y);
-#else
-                     0, y, widget->allocation.width - 1, y);
-#endif
+                     0, y, allocation->width - 1, y);
     }
 }
 
@@ -955,7 +941,7 @@ draw_character (GucharmapChartable *chartable,
 
   style = gtk_widget_get_style (widget);
 
-#if GTK_CHECK_VERSION (2,18,0)
+#if GTK_CHECK_VERSION (2, 18, 0)
   if (gtk_widget_has_focus (widget) && (gint)cell == priv->active_cell)
 #else
   if (GTK_WIDGET_HAS_FOCUS (widget) && (gint)cell == priv->active_cell)
@@ -1003,7 +989,7 @@ draw_square_bg (GucharmapChartable *chartable, gint row, gint col)
 
   style = gtk_widget_get_style (widget);
 
-#if GTK_CHECK_VERSION (2,18,0)
+#if GTK_CHECK_VERSION (2, 18, 0)
   if (gtk_widget_has_focus (widget) && (gint)cell == priv->active_cell)
 #else
   if (GTK_WIDGET_HAS_FOCUS (widget) && (gint)cell == priv->active_cell)
@@ -1074,34 +1060,31 @@ draw_chartable_from_scratch (GucharmapChartable *chartable)
 {
   GucharmapChartablePrivate *priv = chartable->priv;
   GtkWidget *widget = GTK_WIDGET (chartable);
-#if GTK_CHECK_VERSION (2,18,0)
-  GtkAllocation allocation;
-#endif
   gint row, col;
+  GtkAllocation *allocation;
+#if GTK_CHECK_VERSION (2, 18, 0)
+  GtkAllocation widget_allocation;
+
+  gtk_widget_get_allocation (widget, &widget_allocation);
+  allocation = &widget_allocation;
+#else
+  allocation = &widget->allocation;
+#endif
 
   /* drawing area may not be exposed yet when restoring last char setting
    */
-#if GTK_CHECK_VERSION (2,20,0)
+#if GTK_CHECK_VERSION (2, 20, 0)
   if (!gtk_widget_get_realized (GTK_WIDGET (chartable)))
 #else
   if (!GTK_WIDGET_REALIZED (chartable))
 #endif
     return;
 
-#if GTK_CHECK_VERSION (2,18,0)
-  gtk_widget_get_allocation (widget, &allocation);
-#endif
-
   if (priv->pixmap == NULL)
     priv->pixmap = gdk_pixmap_new (
 	    gtk_widget_get_window (widget),
-#if GTK_CHECK_VERSION (2,18,0)
-	    allocation.width,
-	    allocation.height, -1);
-#else
-            widget->allocation.width,
-            widget->allocation.height, -1);
-#endif
+	    allocation->width,
+	    allocation->height, -1);
 
   draw_borders (chartable);
 
@@ -1119,15 +1102,20 @@ copy_rows (GucharmapChartable *chartable, gint row_offset)
 {
   GucharmapChartablePrivate *priv = chartable->priv;
   GtkWidget *widget = GTK_WIDGET (chartable);
-#if GTK_CHECK_VERSION (2,18,0)
-  GtkAllocation allocation;
-#endif
   gint num_padded_rows = priv->n_padded_rows;
   gint from_row, to_row;
+  GtkStyle *style;
+  GtkAllocation *allocation;
+#if GTK_CHECK_VERSION (2, 18, 0)
+  GtkAllocation widget_allocation;
 
-#if GTK_CHECK_VERSION (2,18,0)
-  gtk_widget_get_allocation (widget, &allocation);
+  gtk_widget_get_allocation (widget, &widget_allocation);
+  allocation = &widget_allocation;
+#else
+  allocation = &widget->allocation;
 #endif
+
+  style = gtk_widget_get_style (widget);
 
   if (ABS (row_offset) < priv->rows - num_padded_rows)
     {
@@ -1151,15 +1139,11 @@ copy_rows (GucharmapChartable *chartable, gint row_offset)
 
       gdk_draw_drawable (
               priv->pixmap,
-              (gtk_widget_get_style (widget))->base_gc[GTK_STATE_NORMAL],
+              style->base_gc[GTK_STATE_NORMAL],
               priv->pixmap,
               0, _gucharmap_chartable_y_offset (chartable, from_row), 
               0, _gucharmap_chartable_y_offset (chartable, to_row),
-#if GTK_CHECK_VERSION (2,18,0)
-              allocation.width, height);
-#else
-              widget->allocation.width, height);
-#endif
+              allocation->width, height);
     }
 
   if (ABS (row_offset) < num_padded_rows)
@@ -1179,17 +1163,12 @@ copy_rows (GucharmapChartable *chartable, gint row_offset)
       /* it's ok to go off the end (so use allocation.height) */
       gdk_draw_drawable (
               priv->pixmap,
-              (gtk_widget_get_style (widget))->base_gc[GTK_STATE_NORMAL],
+              style->base_gc[GTK_STATE_NORMAL],
               priv->pixmap,
               0, _gucharmap_chartable_y_offset (chartable, from_row), 
               0, _gucharmap_chartable_y_offset (chartable, to_row),
-#if GTK_CHECK_VERSION (2,18,0)
-              allocation.width,
-              allocation.height);
-#else
-              widget->allocation.width, 
-              widget->allocation.height);
-#endif
+              allocation->width,
+              allocation->height);
     }
 }
 
@@ -1304,16 +1283,31 @@ update_scrollbar_adjustment (GucharmapChartable *chartable)
 {
   GucharmapChartablePrivate *priv = chartable->priv;
   GtkAdjustment *vadjustment = priv->vadjustment;
+#if 0
+  GObject *vadjustment_object = G_OBJECT (vadjustment);
+#endif
 
   if (!vadjustment)
     return;
 
+  vadjustment->value = 1.0 * priv->page_first_cell / priv->cols;
+  vadjustment->lower = 0.0;
+  vadjustment->upper = 1.0 * ( priv->last_cell / priv->cols + 1 );
+  vadjustment->step_increment = 3.0;
+  vadjustment->page_increment = 1.0 * priv->rows;
+  vadjustment->page_size = priv->rows; /* FIXMEchpe + 1 maybe? so scroll-wheel up/down scroll exactly half a page? */
+
+#if 0
+  g_object_freeze_notify (vadjustment_object);
   gtk_adjustment_set_value (vadjustment, 1.0 * priv->page_first_cell / priv->cols);
   gtk_adjustment_set_lower (vadjustment, 0.0);
   gtk_adjustment_set_upper (vadjustment, 1.0 * ( priv->last_cell / priv->cols + 1 ));
   gtk_adjustment_set_step_increment (vadjustment, 3.0);
   gtk_adjustment_set_page_increment (vadjustment, 1.0 * priv->rows);
+  /* FIXMEchpe: shouldn't set page size at all! */
   gtk_adjustment_set_page_size (vadjustment, priv->rows); /* FIXMEchpe + 1 maybe? so scroll-wheel up/down scroll exactly half a page? */
+  g_object_thaw_notify (vadjustment_object);
+#endif
 
   gtk_adjustment_changed (vadjustment);
 }
@@ -1457,7 +1451,8 @@ gucharmap_chartable_drag_data_received (GtkWidget *widget,
   gchar *text;
   gunichar wc;
 
-  if (gtk_selection_data_get_length (selection_data) <= 0 || gtk_selection_data_get_data (selection_data) == NULL)
+  if (gtk_selection_data_get_length (selection_data) <= 0 ||
+      gtk_selection_data_get_data (selection_data) == NULL)
     return;
 
   text = (gchar *) gtk_selection_data_get_text (selection_data);
@@ -1492,6 +1487,8 @@ gucharmap_chartable_expose_event (GtkWidget *widget,
   GdkRectangle *rects;
   int i, n_rects;
   GdkGC *gc;
+  GtkStyle *style;
+  GdkWindow *window;
 
   /* Don't draw anything if we haven't set a codepoint list yet */
   if (priv->codepoint_list == NULL)
@@ -1520,9 +1517,12 @@ gucharmap_chartable_expose_event (GtkWidget *widget,
   }
 #endif
 
-  gc = (gtk_widget_get_style (widget))->fg_gc[GTK_STATE_NORMAL];
+  style = gtk_widget_get_style (widget);
+  window = gtk_widget_get_window (widget);
+
+  gc = style->fg_gc[GTK_STATE_NORMAL];
   for (i = 0; i < n_rects; ++i) {
-    gdk_draw_drawable (gtk_widget_get_window (widget),
+    gdk_draw_drawable (window,
                        gc,
                        priv->pixmap,
                        rects[i].x, rects[i].y,
@@ -1678,16 +1678,23 @@ gucharmap_chartable_size_allocate (GtkWidget *widget,
 {
   GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (widget);
   GucharmapChartablePrivate *priv = chartable->priv;
-#if GTK_CHECK_VERSION (2,18,0)
-  GtkAllocation widget_allocation;
-#endif
   int old_rows, old_cols;
   int total_extra_pixels;
   int new_first_cell;
   int bare_minimal_column_width, bare_minimal_row_height;
   int font_size_px;
+#if GTK_CHECK_VERSION (2, 18, 0)
+  GtkAllocation widget_allocation;
+#endif
 
   GTK_WIDGET_CLASS (gucharmap_chartable_parent_class)->size_allocate (widget, allocation);
+
+#if GTK_CHECK_VERSION (2, 18, 0)
+  gtk_widget_get_allocation (widget, &widget_allocation);
+  allocation = &widget_allocation;
+#else
+  allocation = &widget->allocation;
+#endif
 
   old_rows = priv->rows;
   old_cols = priv->cols;
@@ -1713,27 +1720,13 @@ gucharmap_chartable_size_allocate (GtkWidget *widget,
 
   priv->page_size = priv->rows * priv->cols;
 
-#if GTK_CHECK_VERSION (2,18,0)
-  gtk_widget_get_allocation (widget, &widget_allocation);
-#endif
-
-#if GTK_CHECK_VERSION (2,18,0)
-  total_extra_pixels = widget_allocation.width - (priv->cols * bare_minimal_column_width + 1);
+  total_extra_pixels = allocation->width - (priv->cols * bare_minimal_column_width + 1);
   priv->minimal_column_width = bare_minimal_column_width + total_extra_pixels / priv->cols;
-  priv->n_padded_columns = widget_allocation.width - (priv->minimal_column_width * priv->cols + 1);
+  priv->n_padded_columns = allocation->width - (priv->minimal_column_width * priv->cols + 1);
 
-  total_extra_pixels = widget_allocation.height - (priv->rows * bare_minimal_row_height + 1);
+  total_extra_pixels = allocation->height - (priv->rows * bare_minimal_row_height + 1);
   priv->minimal_row_height = bare_minimal_row_height + total_extra_pixels / priv->rows;
-  priv->n_padded_rows = widget_allocation.height - (priv->minimal_row_height * priv->rows + 1);
-#else
-  total_extra_pixels = widget->allocation.width - (priv->cols * bare_minimal_column_width + 1);
-  priv->minimal_column_width = bare_minimal_column_width + total_extra_pixels / priv->cols;
-  priv->n_padded_columns = widget->allocation.width - (priv->minimal_column_width * priv->cols + 1);
-
-  total_extra_pixels = widget->allocation.height - (priv->rows * bare_minimal_row_height + 1);
-  priv->minimal_row_height = bare_minimal_row_height + total_extra_pixels / priv->rows;
-  priv->n_padded_rows = widget->allocation.height - (priv->minimal_row_height * priv->rows + 1);
-#endif
+  priv->n_padded_rows = allocation->height - (priv->minimal_row_height * priv->rows + 1);
 
   /* force pixmap to be redrawn on next expose event */
   if (priv->pixmap != NULL)
@@ -1789,9 +1782,11 @@ gucharmap_chartable_style_set (GtkWidget *widget,
   priv->pango_layout = NULL;
 
   if (priv->font_desc == NULL) {
+    GtkStyle *style;
     PangoFontDescription *font_desc;
 
-    font_desc = pango_font_description_copy ((gtk_widget_get_style (widget))->font_desc);
+    style = gtk_widget_get_style (widget);
+    font_desc = pango_font_description_copy (style->font_desc);
 
     /* Use twice the size of the style's font */
     if (pango_font_description_get_size_is_absolute (font_desc))
@@ -2065,7 +2060,7 @@ gucharmap_chartable_paste_clipboard (GucharmapChartable *chartable)
   GtkClipboard *clipboard;
   gpointer *data;
 
-#if GTK_CHECK_VERSION (2,20,0)
+#if GTK_CHECK_VERSION (2, 20, 0)
   if (!gtk_widget_get_realized (GTK_WIDGET (chartable)))
 #else
   if (!GTK_WIDGET_REALIZED (chartable))
@@ -2118,7 +2113,7 @@ gucharmap_chartable_init (GucharmapChartable *chartable)
   gtk_drag_dest_add_text_targets (widget);
 
   /* this is required to get key_press events */
-#if GTK_CHECK_VERSION (2,18,0)
+#if GTK_CHECK_VERSION (2, 18, 0)
   gtk_widget_set_can_focus (widget, TRUE);
 #else
   GTK_WIDGET_SET_FLAGS (widget, GTK_CAN_FOCUS);

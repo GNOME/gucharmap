@@ -757,18 +757,19 @@ static void
 status_realize (GtkWidget       *status,
                 GucharmapWindow *guw)
 {
-#if GTK_CHECK_VERSION (2,18,0)
-  GtkAllocation allocation;
+  GtkAllocation *allocation;
+#if GTK_CHECK_VERSION (2, 18, 0)
+  GtkAllocation widget_allocation;
 
-  gtk_widget_get_allocation (guw->status, &allocation);
+  gtk_widget_get_allocation (guw->status, &widget_allocation);
+  allocation = &widget_allocation;
+#else
+  allocation = &guw->status->allocation;
 #endif
+
   /* FIXMEchpe ewww... */
   /* increase the height a bit so it doesn't resize itself */
-#if GTK_CHECK_VERSION (2,18,0)
-  gtk_widget_set_size_request (guw->status, -1, allocation.height + 9);
-#else
-  gtk_widget_set_size_request (guw->status, -1, guw->status->allocation.height + 9);
-#endif
+  gtk_widget_set_size_request (guw->status, -1, allocation->height + 9);
 }
 
 static gboolean

@@ -267,10 +267,12 @@ static void
 gucharmap_mini_font_selection_init (GucharmapMiniFontSelection *fontsel)
 {
   GtkCellRenderer *renderer;
+  GtkStyle *style;
   AtkObject *accessib;
 
   gtk_widget_ensure_style (GTK_WIDGET (fontsel));
-  fontsel->font_desc = pango_font_description_copy ((gtk_widget_get_style (GTK_WIDGET (fontsel)))->font_desc);
+  style = gtk_widget_get_style (GTK_WIDGET (fontsel));
+  fontsel->font_desc = pango_font_description_copy (style->font_desc);
   fontsel->default_size = -1;
 
   fontsel->size_adj = gtk_adjustment_new (MIN_FONT_SIZE, 
@@ -415,8 +417,12 @@ gucharmap_mini_font_selection_change_font_size (GucharmapMiniFontSelection *font
 void
 gucharmap_mini_font_selection_reset_font_size (GucharmapMiniFontSelection *fontsel)
 {
-  if (fontsel->default_size > 0)
+  if (fontsel->default_size > 0) {
     set_font_size (fontsel, fontsel->default_size);
-  else
-    set_font_size (fontsel, pango_font_description_get_size ((gtk_widget_get_style (GTK_WIDGET (fontsel)))->font_desc) * 2.0f / PANGO_SCALE);
+  } else {
+    GtkStyle *style;
+
+    style = gtk_widget_get_style (GTK_WIDGET (fontsel));
+    set_font_size (fontsel, pango_font_description_get_size (style->font_desc) * 2.0f / PANGO_SCALE);
+  }
 }

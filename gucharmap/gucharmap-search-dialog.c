@@ -727,14 +727,16 @@ static void
 gucharmap_search_dialog_init (GucharmapSearchDialog *search_dialog)
 {
   GucharmapSearchDialogPrivate *priv = GUCHARMAP_SEARCH_DIALOG_GET_PRIVATE (search_dialog);
-  GtkWidget *hbox, *label;
+  GtkWidget *hbox, *label, *content_area;
+
+  content_area = gtk_dialog_get_content_area (GTK_DIALOG (search_dialog));
 
   /* follow hig guidelines */
   gtk_window_set_title (GTK_WINDOW (search_dialog), _("Find"));
   gtk_container_set_border_width (GTK_CONTAINER (search_dialog), 6);
   gtk_dialog_set_has_separator (GTK_DIALOG (search_dialog), FALSE);
   gtk_window_set_destroy_with_parent (GTK_WINDOW (search_dialog), TRUE);
-  gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (search_dialog))), 12);
+  gtk_box_set_spacing (GTK_BOX (content_area), 12);
   gtk_window_set_resizable (GTK_WINDOW (search_dialog), FALSE);
 
   g_signal_connect (search_dialog, "delete-event", G_CALLBACK (gtk_widget_hide_on_delete), NULL);
@@ -772,7 +774,7 @@ gucharmap_search_dialog_init (GucharmapSearchDialog *search_dialog)
   hbox = gtk_hbox_new (FALSE, 12);
   gtk_widget_show (hbox);
   gtk_container_set_border_width (GTK_CONTAINER (hbox), 6);
-  gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (search_dialog))), hbox, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (content_area), hbox, FALSE, FALSE, 0);
 
   label = gtk_label_new_with_mnemonic (_("_Search:"));
   gtk_widget_show (label);
@@ -786,12 +788,12 @@ gucharmap_search_dialog_init (GucharmapSearchDialog *search_dialog)
 
   priv->whole_word_option = gtk_check_button_new_with_mnemonic (_("Match _whole word"));
   gtk_widget_show (priv->whole_word_option);
-  gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (search_dialog))), priv->whole_word_option, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (content_area), priv->whole_word_option, FALSE, FALSE, 0);
   g_signal_connect (priv->whole_word_option, "toggled", G_CALLBACK (entry_changed), search_dialog);
 
   priv->annotations_option = gtk_check_button_new_with_mnemonic (_("Search in character _details"));
   gtk_widget_show (priv->annotations_option);
-  gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (search_dialog))), priv->annotations_option, FALSE, FALSE, 0);
+  gtk_box_pack_start (GTK_BOX (content_area), priv->annotations_option, FALSE, FALSE, 0);
   g_signal_connect (priv->annotations_option, "toggled", G_CALLBACK (entry_changed), search_dialog);
 
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), priv->entry);

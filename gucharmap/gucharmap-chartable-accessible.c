@@ -105,8 +105,8 @@ gucharmap_chartable_accessible_ref_child (AtkObject *obj,
   GPtrArray *cells;
   guint n_cells, n;
 
-#if GTK_CHECK_VERSION(2,21,0)
- widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (obj));
+#if GTK_CHECK_VERSION (2, 21, 0)
+  widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (obj));
 #else
   widget = GTK_ACCESSIBLE (obj)->widget;
 #endif
@@ -163,8 +163,8 @@ gucharmap_chartable_accessible_ref_at (AtkTable *table,
   AtkObject *child;
   gint index;
 
-#if GTK_CHECK_VERSION(2,21,0)
- widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (table));
+#if GTK_CHECK_VERSION (2, 21, 0)
+  widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (table));
 #else
   widget = GTK_ACCESSIBLE (table)->widget;
 #endif
@@ -194,8 +194,8 @@ gucharmap_chartable_accessible_ref_accessible_at_point (AtkComponent *component,
   gint x_pos, y_pos;
   gint row, col;
 
-#if GTK_CHECK_VERSION(2,21,0)
- widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (component));
+#if GTK_CHECK_VERSION (2, 21, 0)
+  widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (component));
 #else
   widget = GTK_ACCESSIBLE (component)->widget;
 #endif
@@ -256,8 +256,8 @@ gucharmap_chartable_accessible_ref_state_set (AtkObject *obj)
   GtkWidget *widget;
 
   state_set = ATK_OBJECT_CLASS (gucharmap_chartable_accessible_parent_class)->ref_state_set (obj);
-#if GTK_CHECK_VERSION(2,21,0)
- widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (obj));
+#if GTK_CHECK_VERSION (2, 21, 0)
+  widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (obj));
 #else
   widget = GTK_ACCESSIBLE (obj)->widget;
 #endif
@@ -275,8 +275,8 @@ gucharmap_chartable_accessible_get_n_children (AtkObject *obj)
 {
   GtkWidget *widget;
 
-#if GTK_CHECK_VERSION(2,21,0)
- widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (obj));
+#if GTK_CHECK_VERSION (2, 21, 0)
+  widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (obj));
 #else
   widget = GTK_ACCESSIBLE (obj)->widget;
 #endif
@@ -333,8 +333,8 @@ gucharmap_chartable_accessible_update_all_cells (AtkObject *obj)
   GPtrArray *cells;
   guint n_cells, n;
 
-#if GTK_CHECK_VERSION(2,21,0)
- widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (obj));
+#if GTK_CHECK_VERSION (2, 21, 0)
+  widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (obj));
 #else
   widget = GTK_ACCESSIBLE (obj)->widget;
 #endif
@@ -522,7 +522,7 @@ gucharmap_chartable_accessible_destroyed (GtkWidget *widget,
 static void
 gucharmap_chartable_accessible_connect_widget_destroyed (GtkAccessible *accessible)
 {
-#if GTK_CHECK_VERSION(2,21,0)
+#if GTK_CHECK_VERSION (2, 21, 0)
   if (gtk_accessible_get_widget (accessible))
     {
       g_signal_connect_after (gtk_accessible_get_widget (accessible),
@@ -567,8 +567,8 @@ gucharmap_chartable_accessible_get_n_columns (AtkTable *table)
   GucharmapChartable *chartable;
   GucharmapChartablePrivate *chartable_priv;
 
-#if GTK_CHECK_VERSION(2,21,0)
- widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (table));
+#if GTK_CHECK_VERSION (2, 21, 0)
+  widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (table));
 #else
   widget = GTK_ACCESSIBLE (table)->widget;
 #endif
@@ -590,8 +590,8 @@ gucharmap_chartable_accessible_get_column_extent_at (AtkTable       *table,
 {
   GtkWidget *widget;
 
-#if GTK_CHECK_VERSION(2,21,0)
- widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (table));
+#if GTK_CHECK_VERSION (2, 21, 0)
+  widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (table));
 #else
   widget = GTK_ACCESSIBLE (table)->widget;
 #endif
@@ -611,8 +611,8 @@ gucharmap_chartable_accessible_get_n_rows (AtkTable *table)
   GucharmapChartablePrivate *chartable_priv;
   gint n_rows;
 
-#if GTK_CHECK_VERSION(2,21,0)
- widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (table));
+#if GTK_CHECK_VERSION (2, 21, 0)
+  widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (table));
 #else
   widget = GTK_ACCESSIBLE (table)->widget;
 #endif
@@ -636,8 +636,8 @@ gucharmap_chartable_accessible_get_row_extent_at (AtkTable *table,
 {
   GtkWidget *widget;
 
-#if GTK_CHECK_VERSION(2,21,0)
- widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (table));
+#if GTK_CHECK_VERSION (2, 21, 0)
+  widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (table));
 #else
   widget = GTK_ACCESSIBLE (table)->widget;
 #endif
@@ -658,8 +658,8 @@ gucharmap_chartable_accessible_get_index_at (AtkTable *table,
   GucharmapChartable *chartable;
   GucharmapChartablePrivate *chartable_priv;
 
-#if GTK_CHECK_VERSION(2,21,0)
- widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (table));
+#if GTK_CHECK_VERSION (2, 21, 0)
+  widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (table));
 #else
   widget = GTK_ACCESSIBLE (table)->widget;
 #endif
@@ -682,8 +682,8 @@ gucharmap_chartable_accessible_get_column_at_index (AtkTable *table,
   GucharmapChartable *chartable;
   GucharmapChartablePrivate *chartable_priv;
 
-#if GTK_CHECK_VERSION(2,21,0)
- widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (table));
+#if GTK_CHECK_VERSION (2, 21, 0)
+  widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (table));
 #else
   widget = GTK_ACCESSIBLE (table)->widget;
 #endif
@@ -706,8 +706,8 @@ gucharmap_chartable_accessible_get_row_at_index (AtkTable *table,
   GucharmapChartable *chartable;
   GucharmapChartablePrivate *chartable_priv;
 
-#if GTK_CHECK_VERSION(2,21,0)
- widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (table));
+#if GTK_CHECK_VERSION (2, 21, 0)
+  widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (table));
 #else
   widget = GTK_ACCESSIBLE (table)->widget;
 #endif
