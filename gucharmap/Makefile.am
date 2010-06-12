@@ -113,9 +113,13 @@ nodist_libgucharmapinclude_HEADERS = \
 	gucharmap-type-builtins.h \
 	$(NULL)
 
-bin_PROGRAMS = gucharmap-@GUCHARMAP_API_MAJOR_VERSION@.@GUCHARMAP_API_MINOR_VERSION@
+if ENABLE_CHARMAP
+bin_PROGRAMS = gucharmap
+else
+noinst_PROGRAMS = gucharmap
+endif
 
-gucharmap_@GUCHARMAP_API_MAJOR_VERSION@_@GUCHARMAP_API_MINOR_VERSION@_SOURCES = \
+gucharmap_SOURCES = \
 	gucharmap-mini-fontsel.c \
 	gucharmap-mini-fontsel.h \
 	gucharmap-print-operation.c \
@@ -129,7 +133,7 @@ gucharmap_@GUCHARMAP_API_MAJOR_VERSION@_@GUCHARMAP_API_MINOR_VERSION@_SOURCES = 
 	main.c \
 	$(NULL)
 
-gucharmap_@GUCHARMAP_API_MAJOR_VERSION@_@GUCHARMAP_API_MINOR_VERSION@_CPPFLAGS = \
+gucharmap_CPPFLAGS = \
 	-I$(top_srcdir) \
 	-DDATADIR=\"$(datadir)\" \
 	-DLOCALEDIR=\"$(datadir)/locale\" \
@@ -143,23 +147,23 @@ gucharmap_@GUCHARMAP_API_MAJOR_VERSION@_@GUCHARMAP_API_MINOR_VERSION@_CPPFLAGS =
 	$(DISABLE_DEPRECATED) \
 	$(AM_CPPFLAGS)
 
-gucharmap_@GUCHARMAP_API_MAJOR_VERSION@_@GUCHARMAP_API_MINOR_VERSION@_CFLAGS = \
+gucharmap_CFLAGS = \
 	$(GTK_CFLAGS)	\
 	$(GCONF_CFLAGS)	\
 	$(WARN_CFLAGS)	\
 	$(AM_CFLAGS)
 
-gucharmap_@GUCHARMAP_API_MAJOR_VERSION@_@GUCHARMAP_API_MINOR_VERSION@_LDFLAGS = \
+gucharmap_LDFLAGS = \
 	$(AM_LDFLAGS)
 
-gucharmap_@GUCHARMAP_API_MAJOR_VERSION@_@GUCHARMAP_API_MINOR_VERSION@_LDADD = \
+gucharmap_LDADD = \
 	libgucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@.la	\
 	$(GTK_LIBS)	\
 	$(GCONF_LIBS)	\
 	$(INTL_LIBS)
 
 if OS_WIN32
-gucharmap_@GUCHARMAP_API_MAJOR_VERSION@_@GUCHARMAP_API_MINOR_VERSION@_LDADD += gucharmaprc.o
+gucharmap_LDADD += gucharmaprc.o
 gucharmaprc.o: gucharmaprc.rc
 	$(AM_V_GEN) windres -i $< -o $@
 endif
@@ -250,10 +254,12 @@ CLEANFILES = \
 	$(typelib_DATA) \
 	$(NULL)
 
+if ENABLE_CHARMAP
+
 # don't do the symlink stuff if this is windows
 if !OS_WIN32
 # install a symlink to the binary called "charmap"
-install-exec-hook: install-exec-compat-symlinks
+install-exec-hook:
 	test -e "$(DESTDIR)$(bindir)/charmap" \
         || (cd "$(DESTDIR)$(bindir)" && $(LN_S) gucharmap charmap) ; \
 	test -e "$(DESTDIR)$(bindir)/gnome-character-map" \
@@ -269,12 +275,6 @@ uninstall-local:
 
 endif # !OS_WIN32
 
-install-exec-compat-symlinks:
-if HAVE_GTK_2
-if !OS_WIN32
-	test -e "$(DESTDIR)$(bindir)/gucharmap" \
-        || (cd "$(DESTDIR)$(bindir)" && $(LN_S) gucharmap-2.0 gucharmap) ;
-endif
-endif
+endif # ENABLE_CHARMAP
 
 -include $(top_srcdir)/git.mk

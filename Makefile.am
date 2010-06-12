@@ -9,8 +9,10 @@ if HAVE_GTK_2
 SUBDIRS += bindings
 endif
 
+if ENABLE_CHARMAP
 if HAVE_GNOME_DOC_UTILS
 SUBDIRS += help
+endif
 endif
 
 distuninstallcheck_listfiles = find . -type -f -print | grep -v scrollkeeper
@@ -68,6 +70,7 @@ MAINTAINERCLEANFILES = \
 	$(srcdir)/gnome-doc-utils.make \
 	`find "$(srcdir)" -type f -name Makefile.in -print`
 
+if ENABLE_CHARMAP
 install-data-local: $(schema_DATA)
 if GCONF_SCHEMAS_INSTALL
 	if test -z "$(DESTDIR)" ; then \
@@ -75,8 +78,8 @@ if GCONF_SCHEMAS_INSTALL
 			GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $$p 2>&1 > /dev/null; \
 		done \
 	fi
-endif
-
+endif # GCONF_SCHEMAS_INSTALL
+endif # ENABLE_CHARMAP
 
 ChangeLog:
 	$(AM_V_GEN) if test -f $(top_srcdir)/.git/HEAD; then \

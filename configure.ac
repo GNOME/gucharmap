@@ -148,6 +148,19 @@ AC_SUBST([GCONFPKGS])
 AM_GCONF_SOURCE_2
 AC_PATH_PROG([GCONFTOOL],[gconftool-2],[no])
 
+AC_MSG_CHECKING([whether to build the charmap programme])
+AC_ARG_ENABLE([charmap],
+  [AS_HELP_STRING([--disable-charmap],[disable building the charmap programme])],
+  [],
+  [case "$with_gtk" in
+     2.0) enable_charmap=yes ;;
+     3.0) enable_charmap=no  ;;
+   esac
+  ])
+AC_MSG_RESULT([$enable_charmap])
+
+AM_CONDITIONAL([ENABLE_CHARMAP],[test "$enable_charmap" = "yes"])
+
 # checks for funcs 
 AC_CHECK_FUNCS([bind_textdomain_codeset])
 
