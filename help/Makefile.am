@@ -12,6 +12,11 @@ DOC_LINGUAS = bg ca cs de el en_GB es fi fr ko oc pt_BR ru sv vi
 # Please remember also to remove help/langcode/Makefile from toplevel
 # configure.ac's AC_CONFIG_FILES, and remove your directory from
 # the SUBDIRS below.
-SUBDIRS = it ja zh_CN zh_TW
+#
+# Only continue to support these for gtk 2
+
+if HAVE_GTK_2
+SUBDIRS = it ja zh_CN zh_HK zh_TW
+endif
 
 -include $(top_srcdir)/git.mk

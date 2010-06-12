@@ -18,7 +18,7 @@
 
 NULL =
 
-lib_LTLIBRARIES = libgucharmap.la
+lib_LTLIBRARIES = libgucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@.la
 
 BUILT_SOURCES = \
 	gucharmap-marshal.c \
@@ -27,7 +27,7 @@ BUILT_SOURCES = \
 	gucharmap-type-builtins.h \
 	$(NULL)
 
-libgucharmap_la_SOURCES = \
+libgucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@_la_SOURCES = \
 	gucharmap-block-chapters-model.c \
 	gucharmap-block-chapters-model.h \
 	gucharmap-block-codepoint-list.c \
@@ -63,9 +63,9 @@ libgucharmap_la_SOURCES = \
 	unicode-versions.h \
 	$(NULL)
 
-nodist_libgucharmap_la_SOURCES = $(BUILT_SOURCES)
+nodist_libgucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@_la_SOURCES = $(BUILT_SOURCES)
 
-libgucharmap_la_CPPFLAGS = \
+libgucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@_la_CPPFLAGS = \
 	-I$(top_srcdir) \
 	-DGUCHARMAP_COMPILATION \
 	-DDATADIR=\"$(datadir)\" \
@@ -80,21 +80,21 @@ libgucharmap_la_CPPFLAGS = \
 	$(DISABLE_DEPRECATED) \
 	$(AM_CPPFLAGS)
 
-libgucharmap_la_CFLAGS = \
+libgucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@_la_CFLAGS = \
 	$(GTK_CFLAGS)	\
 	$(WARN_CFLAGS)	\
 	$(AM_CFLAGS)
 
-libgucharmap_la_LDFLAGS = \
+libgucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@_la_LDFLAGS = \
 	-version-info $(LIBGUCHARMAP_LT_VERSION)	\
 	-export-symbols-regex "^gucharmap_*"		\
 	$(AM_LDFLAGS)
 
-libgucharmap_la_LIBADD = \
+libgucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@_la_LIBADD = \
 	$(GTK_LIBS)	\
 	$(INTLLIBS)
 
-libgucharmapincludedir = $(includedir)/gucharmap-2/gucharmap
+libgucharmapincludedir = $(includedir)/gucharmap-$(GUCHARMAP_API_VERSION)/gucharmap
 libgucharmapinclude_HEADERS = \
 	gucharmap-block-chapters-model.h \
 	gucharmap-block-codepoint-list.h \
@@ -113,9 +113,9 @@ nodist_libgucharmapinclude_HEADERS = \
 	gucharmap-type-builtins.h \
 	$(NULL)
 
-bin_PROGRAMS = gucharmap
+bin_PROGRAMS = gucharmap-@GUCHARMAP_API_MAJOR_VERSION@.@GUCHARMAP_API_MINOR_VERSION@
 
-gucharmap_SOURCES = \
+gucharmap_@GUCHARMAP_API_MAJOR_VERSION@_@GUCHARMAP_API_MINOR_VERSION@_SOURCES = \
 	gucharmap-mini-fontsel.c \
 	gucharmap-mini-fontsel.h \
 	gucharmap-print-operation.c \
@@ -129,7 +129,7 @@ gucharmap_SOURCES = \
 	main.c \
 	$(NULL)
 
-gucharmap_CPPFLAGS = \
+gucharmap_@GUCHARMAP_API_MAJOR_VERSION@_@GUCHARMAP_API_MINOR_VERSION@_CPPFLAGS = \
 	-I$(top_srcdir) \
 	-DDATADIR=\"$(datadir)\" \
 	-DLOCALEDIR=\"$(datadir)/locale\" \
@@ -143,23 +143,23 @@ gucharmap_CPPFLAGS = \
 	$(DISABLE_DEPRECATED) \
 	$(AM_CPPFLAGS)
 
-gucharmap_CFLAGS = \
+gucharmap_@GUCHARMAP_API_MAJOR_VERSION@_@GUCHARMAP_API_MINOR_VERSION@_CFLAGS = \
 	$(GTK_CFLAGS)	\
 	$(GCONF_CFLAGS)	\
 	$(WARN_CFLAGS)	\
 	$(AM_CFLAGS)
 
-gucharmap_LDFLAGS = \
+gucharmap_@GUCHARMAP_API_MAJOR_VERSION@_@GUCHARMAP_API_MINOR_VERSION@_LDFLAGS = \
 	$(AM_LDFLAGS)
 
-gucharmap_LDADD = \
-	libgucharmap.la	\
+gucharmap_@GUCHARMAP_API_MAJOR_VERSION@_@GUCHARMAP_API_MINOR_VERSION@_LDADD = \
+	libgucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@.la	\
 	$(GTK_LIBS)	\
 	$(GCONF_LIBS)	\
 	$(INTL_LIBS)
 
 if OS_WIN32
-gucharmap_LDADD += gucharmaprc.o
+gucharmap_@GUCHARMAP_API_MAJOR_VERSION@_@GUCHARMAP_API_MINOR_VERSION@_LDADD += gucharmaprc.o
 gucharmaprc.o: gucharmaprc.rc
 	$(AM_V_GEN) windres -i $< -o $@
 endif
@@ -204,12 +204,16 @@ gucharmap-type-builtins.c: gucharmap-type-builtins.c.template $(libgucharmapincl
 if ENABLE_INTROSPECTION
 
 girdir = $(GIRDIR)
-gir_DATA = Gucharmap-2.0.gir
+gir_DATA = Gucharmap-$(GUCHARMAP_API_VERSION).gir
 
 typelibdir = $(GIRTYPELIBDIR)
-typelib_DATA = Gucharmap-2.0.typelib
+typelib_DATA = Gucharmap-$(GUCHARMAP_API_VERSION).typelib
 
-Gucharmap-2.0.gir: $(G_IR_SCANNER) libgucharmap.la $(libgucharmapinclude_HEADERS) Makefile
+if HAVE_GTK_3
+Gucharmap-$(GUCHARMAP_API_VERSION).gir: $(G_IR_SCANNER) libgucharmap-$(GUCHARMAP_API_VERSION).la $(libgucharmapinclude_HEADERS) Makefile
+else
+Gucharmap-$(GUCHARMAP_API_VERSION).gir: $(G_IR_SCANNER) libgucharmap.la $(libgucharmapinclude_HEADERS) Makefile
+endif
 	$(AM_V_GEN) PKG_CONFIG_PATH=$(top_builddir):$$PKG_CONFIG_PATH \
 	$(G_IR_SCANNER) \
 		--verbose \
@@ -217,11 +221,11 @@ Gucharmap-2.0.gir: $(G_IR_SCANNER) libgucharmap.la $(libgucharmapinclude_HEADERS
 		--nsversion=2.0 \
 		--include=GLib-2.0 \
 		--include=GObject-2.0 \
-		--include=Gtk-2.0 \
-		--library=gucharmap \
+		--include=Gtk-$(GTK_API_VERSION) \
+		--library=gucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@ \
 		--libtool="$(LIBTOOL)" \
 		--output $@ \
-		--pkg gucharmap-2 \
+		--pkg gucharmap-$(GUCHARMAP_API_PC_VERSION) \
 		-I$(top_srcdir) \
 		-I$(top_builddir) \
 		-DGUCHARMAP_COMPILATION \
@@ -249,7 +253,7 @@ CLEANFILES = \
 # don't do the symlink stuff if this is windows
 if !OS_WIN32
 # install a symlink to the binary called "charmap"
-install-exec-hook:
+install-exec-hook: install-exec-compat-symlinks
 	test -e "$(DESTDIR)$(bindir)/charmap" \
         || (cd "$(DESTDIR)$(bindir)" && $(LN_S) gucharmap charmap) ; \
 	test -e "$(DESTDIR)$(bindir)/gnome-character-map" \
@@ -264,5 +268,13 @@ uninstall-local:
 	&& rm -f "$(DESTDIR)$(bindir)/gnome-character-map"
 
 endif # !OS_WIN32
+
+install-exec-compat-symlinks:
+if HAVE_GTK_2
+if !OS_WIN32
+	test -e "$(DESTDIR)$(bindir)/gucharmap" \
+        || (cd "$(DESTDIR)$(bindir)" && $(LN_S) gucharmap-2.0 gucharmap) ;
+endif
+endif
 
 -include $(top_srcdir)/git.mk

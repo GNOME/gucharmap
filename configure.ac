@@ -77,9 +77,53 @@ then
 fi
 AM_CONDITIONAL(OS_WIN32, test "x$os_win32" = "xyes")
 
+# Which gtk+ API version to compile against
+
+AC_MSG_CHECKING([which gtk+ version to compile against])
+AC_ARG_WITH([gtk],
+  [AS_HELP_STRING([--with-gtk=2.0|3.0],[which gtk+ version to compile against (default: 2.0)])],
+  [case "$with_gtk" in
+     2.0|3.0) ;;
+     *) AC_MSG_ERROR([invalid gtk version specified]) ;;
+   esac],
+  [with_gtk=2.0])
+AC_MSG_RESULT([$with_gtk])
+
+case "$with_gtk" in
+  2.0) GTK_API_VERSION=2.0
+       GTK_REQUIRED=2.14.0
+       GUCHARMAP_API_VERSION=2.0
+       GUCHARMAP_API_MAJOR_VERSION=2
+       GUCHARMAP_API_MINOR_VERSION=0
+       GUCHARMAP_API_PC_VERSION=2
+       GUCHARMAP_LIBRARY_SUFFIX=
+       ;;
+  2.0) GTK_API_VERSION=3.0
+       GTK_REQUIRED=2.90.0
+       GUCHARMAP_API_VERSION=3.0
+       GUCHARMAP_API_MAJOR_VERSION=3
+       GUCHARMAP_API_MINOR_VERSION=0
+       GUCHARMAP_API_PC_VERSION=3.0
+       GUCHARMAP_LIBRARY_SUFFIX="-$GUCHARMAP_API_VERSION"
+       ;;
+esac
+
+AC_SUBST([GTK_API_VERSION])
+AC_SUBST([GUCHARMAP_API_VERSION])
+AC_SUBST([GUCHARMAP_API_MAJOR_VERSION])
+AC_SUBST([GUCHARMAP_API_MINOR_VERSION])
+AC_SUBST([GUCHARMAP_API_PC_VERSION])
+AC_SUBST([GUCHARMAP_LIBRARY_SUFFIX_U],[AS_TR_SH([$GUCHARMAP_LIBRARY_SUFFIX])])
+
+AM_CONDITIONAL([HAVE_GTK_2],[test "$with_gtk" = "2.0"])
+AM_CONDITIONAL([HAVE_GTK_3],[test "$with_gtk" = "3.0"])
+
 GLIB_REQUIRED=2.16.3
-GTK_REQUIRED=2.14.0
-PKG_CHECK_MODULES([GTK],[glib-2.0 >= $GLIB_REQUIRED gtk+-2.0 >= $GTK_REQUIRED])
+
+PKG_CHECK_MODULES([GTK],[
+  glib-2.0 >= $GLIB_REQUIRED
+  gtk+-$GTK_API_VERSION >= $GTK_REQUIRED
+])
 
 GLIB_GENMARSHAL="$($PKG_CONFIG --variable=glib_genmarshal glib-2.0)"
 AC_SUBST([GLIB_GENMARSHAL])
@@ -152,6 +196,10 @@ AM_GLIB_GNU_GETTEXT
 # Python Bindings
 # ***************
 
+# Only support this on gtk+-2.0; on 3.0 you should just use gobject-introspection
+
+if test "$with_gtk" = "2.0"; then
+
 AC_MSG_CHECKING([whether python bindings are requested])
 AC_ARG_ENABLE([python-bindings],
         AS_HELP_STRING([--enable-python-bindings],[Enable python bindings]),
@@ -212,6 +260,10 @@ if test "$enable_python_bindings" = "yes"; then
   AC_SUBST([NO_STRICT_ALIASING_CFLAGS])
 fi
 
+else # with_gtk = 3.0
+  enable_python_bindings=no
+fi # with_gtk = 2.0
+
 AM_CONDITIONAL([ENABLE_PYTHON_BINDINGS],[test "$enable_python_bindings" = "yes"])
 
 # ***
@@ -267,7 +319,6 @@ AC_SUBST([AM_LDFLAGS])
 
 AC_CONFIG_FILES([
 Makefile
-gucharmap-2.pc
 gucharmap.desktop.in
 gucharmap.nsi
 gucharmap.spec
@@ -281,9 +332,12 @@ help/Makefile
 help/it/Makefile
 help/ja/Makefile
 help/zh_CN/Makefile
+help/zh_HK/Makefile
 help/zh_TW/Makefile
 pixmaps/Makefile
 po/Makefile.in
 ])
+
+AC_CONFIG_FILES([gucharmap-${GUCHARMAP_API_PC_VERSION}.pc:gucharmap.pc.in],[GUCHARMAP_API_PC_VERSION=$GUCHARMAP_API_PC_VERSION])
 
 AC_OUTPUT

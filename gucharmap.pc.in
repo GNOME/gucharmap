@@ -6,7 +6,7 @@ includedir=@includedir@
 Name: gucharmap
 Description: GTK+ Unicode Character Map
 Version: @VERSION@
-Requires: gtk+-2.0 glib-2.0
+Requires: gtk+-@GTK_API_VERSION@ glib-2.0
 Requires.private: @GCONFPKGS@
-Libs: -L${libdir} -lgucharmap
-Cflags: -I${includedir}/gucharmap-2
+Libs: -L${libdir} -lgucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@
+Cflags: -I${includedir}/gucharmap-@GUCHARMAP_API_VERSION@

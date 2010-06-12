@@ -3,6 +3,9 @@ NULL =
 # The name of the module.
 DOC_MODULE = gucharmap
 
+# Uncomment for versioned docs and specify the version of the module, e.g. '2'.
+DOC_MODULE_VERSION = $(GUCHARMAP_API_VERSION)
+
 # The top-level SGML file.
 DOC_MAIN_SGML_FILE = gucharmap-docs.sgml
 
@@ -47,7 +50,7 @@ INCLUDES = \
 	$(GTK_CFLAGS)
 
 GTKDOC_LIBS = \
-	$(top_builddir)/gucharmap/libgucharmap.la \
+	$(top_builddir)/gucharmap/libgucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@.la \
 	$(GTK_LIBS) \
 	$(INTL_LIBS)
 

@@ -3,7 +3,11 @@ NULL =
 ACLOCAL_AMFLAGS = -I m4
 GITIGNOREFILES = m4
 
-SUBDIRS = po pixmaps gucharmap bindings docs
+SUBDIRS = po pixmaps gucharmap docs
+
+if HAVE_GTK_2
+SUBDIRS += bindings
+endif
 
 if HAVE_GNOME_DOC_UTILS
 SUBDIRS += help
@@ -22,7 +26,7 @@ schema_in_files   = gucharmap.schemas.in
 schema_DATA       = $(schema_in_files:.schemas.in=.schemas)
 
 pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = gucharmap-2.pc
+pkgconfig_DATA = gucharmap-$(GUCHARMAP_API_PC_VERSION).pc
 
 EXTRA_DIST = \
 	ChangeLog.pre-2-23 \
