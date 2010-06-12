@@ -151,12 +151,7 @@ AC_PATH_PROG([GCONFTOOL],[gconftool-2],[no])
 AC_MSG_CHECKING([whether to build the charmap programme])
 AC_ARG_ENABLE([charmap],
   [AS_HELP_STRING([--disable-charmap],[disable building the charmap programme])],
-  [],
-  [case "$with_gtk" in
-     2.0) enable_charmap=yes ;;
-     3.0) enable_charmap=no  ;;
-   esac
-  ])
+  [],[enable_charmap=yes])
 AC_MSG_RESULT([$enable_charmap])
 
 AM_CONDITIONAL([ENABLE_CHARMAP],[test "$enable_charmap" = "yes"])
