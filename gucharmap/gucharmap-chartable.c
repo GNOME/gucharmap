@@ -1283,23 +1283,19 @@ update_scrollbar_adjustment (GucharmapChartable *chartable)
 {
   GucharmapChartablePrivate *priv = chartable->priv;
   GtkAdjustment *vadjustment = priv->vadjustment;
-  GObject *vadjustment_object = G_OBJECT (vadjustment);
 
   if (!vadjustment)
     return;
 
-  g_object_freeze_notify (vadjustment_object);
-
-  gtk_adjustment_set_lower (vadjustment, 0.0);
-  gtk_adjustment_set_upper (vadjustment, 1.0 * ( priv->last_cell / priv->cols + 1 ));
-  gtk_adjustment_set_step_increment (vadjustment, 3.0);
-  gtk_adjustment_set_page_increment (vadjustment, 1.0 * priv->rows);
-  /* FIXMEchpe: shouldn't set page size at all! */
-  gtk_adjustment_set_page_size (vadjustment, priv->rows); /* FIXMEchpe + 1 maybe? so scroll-wheel up/down scroll exactly half a page? */
-
-  gtk_adjustment_set_value (vadjustment, 1.0 * priv->page_first_cell / priv->cols);
-
-  g_object_thaw_notify (vadjustment_object);
+  gtk_adjustment_configure (vadjustment,
+                            1.0 * priv->page_first_cell / priv->cols,
+                            0.0,
+                            1.0 * ( priv->last_cell / priv->cols + 1 ),
+                            3.0,
+                            1.0 * priv->rows,
+                            /* FIXMEchpe: shouldn't set page size at all! */
+                            /* FIXMEchpe + 1 maybe? so scroll-wheel up/down scroll exactly half a page? */
+                            priv->rows);
 }
 
 static void
