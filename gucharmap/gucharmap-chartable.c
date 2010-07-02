@@ -1470,7 +1470,13 @@ gucharmap_chartable_expose_event (GtkWidget *widget,
 {
   GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (widget);
   GucharmapChartablePrivate *priv = chartable->priv;
+#if GTK_CHECK_VERSION(2,90,5)
+  cairo_rectangle_int_t *rect;
+  cairo_rectangle_int_t r;
+#else
   GdkRectangle *rects;
+  GdkRectangle *rect;
+#endif
   int i, n_rects;
   GdkGC *gc;
   GtkStyle *style;
@@ -1485,10 +1491,16 @@ gucharmap_chartable_expose_event (GtkWidget *widget,
       draw_chartable_from_scratch (chartable);
     }
 
+#if GTK_CHECK_VERSION(2,90,5)
+  if (cairo_region_is_empty (event->region))
+    return FALSE;
+  n_rects = cairo_region_num_rectangles (event->region);
+#else
   if (gdk_region_empty (event->region))
     return FALSE;
-
   gdk_region_get_rectangles (event->region, &rects, &n_rects);
+#endif
+
   if (n_rects == 0)
     return FALSE;
 
@@ -1508,12 +1520,18 @@ gucharmap_chartable_expose_event (GtkWidget *widget,
 
   gc = style->fg_gc[GTK_STATE_NORMAL];
   for (i = 0; i < n_rects; ++i) {
+#if GTK_CHECK_VERSION(2,90,5)
+    cairo_region_get_rectangle (event->region, i, &r);
+    rect = &r;
+#else
+    rect = rects + i;
+#endif
     gdk_draw_drawable (window,
                        gc,
                        priv->pixmap,
-                       rects[i].x, rects[i].y,
-                       rects[i].x, rects[i].y,
-                       rects[i].width, rects[i].height);
+                       rect->x, rect->y,
+                       rect->x, rect->y,
+                       rect->width, rect->height);
   }
 
   g_free (rects);
