@@ -1534,7 +1534,10 @@ gucharmap_chartable_expose_event (GtkWidget *widget,
                        rect->width, rect->height);
   }
 
+#if GTK_CHECK_VERSION(2,90,5)
+#else
   g_free (rects);
+#endif
 
   /* no need to chain up */
   return FALSE;
