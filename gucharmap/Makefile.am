@@ -213,16 +213,12 @@ gir_DATA = Gucharmap-$(GUCHARMAP_API_VERSION).gir
 typelibdir = $(GIRTYPELIBDIR)
 typelib_DATA = Gucharmap-$(GUCHARMAP_API_VERSION).typelib
 
-if HAVE_GTK_3
-Gucharmap-$(GUCHARMAP_API_VERSION).gir: $(G_IR_SCANNER) libgucharmap-$(GUCHARMAP_API_VERSION).la $(libgucharmapinclude_HEADERS) Makefile
-else
-Gucharmap-$(GUCHARMAP_API_VERSION).gir: $(G_IR_SCANNER) libgucharmap.la $(libgucharmapinclude_HEADERS) Makefile
-endif
+Gucharmap-$(GUCHARMAP_API_VERSION).gir: $(G_IR_SCANNER) libgucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@.la $(libgucharmapinclude_HEADERS) Makefile
 	$(AM_V_GEN) PKG_CONFIG_PATH=$(top_builddir):$$PKG_CONFIG_PATH \
 	$(G_IR_SCANNER) \
 		--verbose \
 		--namespace=Gucharmap \
-		--nsversion=2.0 \
+		--nsversion=$(GUCHARMAP_API_VERSION) \
 		--include=GLib-2.0 \
 		--include=GObject-2.0 \
 		--include=Gtk-$(GTK_API_VERSION) \
