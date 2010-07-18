@@ -1073,7 +1073,11 @@ details_visibility_notify_event (GtkWidget *text_view,
 
 static void
 notebook_switch_page (GtkNotebook *notebook,
-                      GtkNotebookPage *page /* useless */,
+#if GTK_CHECK_VERSION (2, 90, 6)
+                      GtkWidget *page,
+#else
+                      gpointer page /* useless */,
+#endif
                       guint page_num,
                       GucharmapCharmap *charmap)
 {
