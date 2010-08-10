@@ -4,7 +4,7 @@
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
- * Free Software Foundation; either version 2 of the License, or (at your
+ * Free Software Foundation; either version 3 of the License, or (at your
  * option) any later version.
  *
  * This program is distributed in the hope that it will be useful, but
@@ -492,7 +492,7 @@ help_about (GtkAction       *action,
   const gchar *license[] = {
     N_("Gucharmap is free software; you can redistribute it and/or modify "
        "it under the terms of the GNU General Public License as published by "
-       "the Free Software Foundation; either version 2 of the License, or "
+       "the Free Software Foundation; either version 3 of the License, or "
        "(at your option) any later version."),
     N_("Permission is hereby granted, free of charge, to any person obtaining "
        "a copy of the Unicode data files to deal in them without restriction, "
