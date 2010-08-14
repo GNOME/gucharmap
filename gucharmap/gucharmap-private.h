@@ -52,11 +52,8 @@ struct _GucharmapChartablePrivate {
 
   int page_first_cell; /* the cell index of the top left corner */
   int active_cell;     /* the active cell index */
-  int old_page_first_cell;
-  int old_active_cell;
 
   /* Drawing */
-  GdkPixmap *pixmap;
   PangoLayout *pango_layout;
 
   /* Zoom popup */

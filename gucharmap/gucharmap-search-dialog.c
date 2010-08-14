@@ -615,11 +615,12 @@ _gucharmap_search_dialog_fire_search (GucharmapSearchDialog *search_dialog,
   GucharmapCodepointList *list;
   gunichar start_char;
   gint start_index;
+  GdkCursor *cursor;
 
   if (priv->search_state && priv->search_state->searching) /* Already searching */
     return;
 
-  GdkCursor *cursor = _gucharmap_window_progress_cursor ();
+  cursor = gdk_cursor_new_for_display (gtk_widget_get_display (GTK_WIDGET (search_dialog)), GDK_WATCH);
   gdk_window_set_cursor (gtk_widget_get_window (GTK_WIDGET (search_dialog)), cursor);
   gdk_cursor_unref (cursor);
 
