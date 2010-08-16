@@ -43,7 +43,8 @@ EXTRA_DIST = \
 DISTCHECK_CONFIGURE_FLAGS = \
 	--disable-scrollkeeper \
 	--disable-schemas-install \
-	--enable-gtk-doc
+	--enable-gtk-doc \
+	--disable-introspection
 
 CLEANFILES = \
 	$(desktop_DATA) \
