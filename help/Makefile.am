@@ -16,7 +16,7 @@ DOC_LINGUAS = bg ca cs de el en_GB es fi fr ko oc pt_BR ru sv vi zh_CN
 # Only continue to support these for gtk 2
 
 if HAVE_GTK_2
-SUBDIRS = it ja zh_CN zh_HK zh_TW
+SUBDIRS = it ja zh_HK zh_TW
 endif
 
 -include $(top_srcdir)/git.mk
