@@ -599,7 +599,7 @@ sub process_nameslist_txt ($)
 
             $colon_i++;
         }
-        elsif ($line =~ /^\s+x\s+.*([0-9A-F]{4,6})\)$/)  # this one is different
+        elsif ($line =~ /^\s+x\s+.*?([0-9A-F]{4,6})\)$/)  # this one is different
         {
             my $value = hex ($1);
 
