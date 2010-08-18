@@ -529,12 +529,25 @@ sub process_nameslist_txt ($)
     my $wc = 0;
 
     my $nameslist_hash;
+    my $in_multiline_comment = 0;
 
     while (my $line = <$nameslist>)
     {
+        if ($in_multiline_comment && $line =~ /^\t/)
+        {
+            next;
+        }
+
         chomp ($line);
 
-        if ($line =~ /^@/)
+        $in_multiline_comment = 0;
+
+        if ($line =~ /^@\+/)
+        {
+            $in_multiline_comment = 1;
+            next;
+        }
+        elsif ($line =~ /^@/)
         {
             next;
         }
