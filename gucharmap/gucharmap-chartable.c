@@ -834,25 +834,29 @@ get_cell_at_xy (GucharmapChartable *chartable,
 static void
 draw_character (GucharmapChartable *chartable,
                 cairo_t            *cr,
+#if GTK_CHECK_VERSION (2, 90, 5)
+                cairo_rectangle_int_t  *rect,
+#else
+                GdkRectangle *rect,
+#endif
                 gint            row,
                 gint            col)
 {
   GucharmapChartablePrivate *priv = chartable->priv;
   GtkWidget *widget = GTK_WIDGET (chartable);
-  gint padding_x, padding_y;
-  gint char_width, char_height;
-  gint square_width, square_height;
+  int n, char_width, char_height;
   gunichar wc;
   guint cell;
   GtkStyle *style;
   GdkColor *color;
   gchar buf[10];
-  gint n;
 
   cell = get_cell_at_rowcol (chartable, row, col);
   wc = gucharmap_codepoint_list_get_char (priv->codepoint_list, cell);
 
-  if (wc > UNICHAR_MAX || !gucharmap_unichar_validate (wc) || !gucharmap_unichar_isdefined (wc))
+  if (wc > UNICHAR_MAX ||
+      !gucharmap_unichar_validate (wc) || 
+      !gucharmap_unichar_isdefined (wc))
     return;
 
   n = gucharmap_unichar_to_printable_utf8 (wc, buf);
@@ -878,24 +882,15 @@ draw_character (GucharmapChartable *chartable,
 
   gdk_cairo_set_source_color (cr, color);
 
-  square_width = _gucharmap_chartable_column_width (chartable, col) - 1;
-  square_height = _gucharmap_chartable_row_height (chartable, row) - 1;
+  cairo_rectangle (cr, 
+                   rect->x + 1, rect->y + 1, 
+                   rect->width - 2, rect->height - 2);
+  cairo_clip (cr);
 
   pango_layout_get_pixel_size (priv->pango_layout, &char_width, &char_height);
-
-  /* (square_width - char_width)/2 is the smaller half */
-  padding_x = (square_width - char_width) - (square_width - char_width)/2;
-  padding_y = (square_height - char_height) - (square_height - char_height)/2;
-
-  cairo_rectangle (cr,
-                   _gucharmap_chartable_x_offset (chartable, col) + 1,
-                   _gucharmap_chartable_y_offset (chartable, row) + 1,
-                   _gucharmap_chartable_column_width (chartable, col) - 2,
-                   _gucharmap_chartable_row_height (chartable, row) - 2);
-  cairo_clip (cr);
-  cairo_move_to (cr,
-                 _gucharmap_chartable_x_offset (chartable, col) + padding_x,
-                 _gucharmap_chartable_y_offset (chartable, row) + padding_y);
+  cairo_move_to (cr, 
+                 rect->x + (rect->width - char_width - 2 + 1) / 2,
+                 rect->y + (rect->height - char_height - 2 + 1) / 2);
   pango_cairo_show_layout (cr, priv->pango_layout);
 
   cairo_restore (cr);
@@ -929,6 +924,11 @@ expose_cell (GucharmapChartable *chartable,
 static void
 draw_square_bg (GucharmapChartable *chartable,
                 cairo_t *cr,
+#if GTK_CHECK_VERSION (2, 90, 5)
+                cairo_rectangle_int_t  *rect,
+#else
+                GdkRectangle *rect,
+#endif
                 gint row,
                 gint col)
 {
@@ -963,11 +963,7 @@ draw_square_bg (GucharmapChartable *chartable,
   cairo_set_line_width (cr, 1);
   cairo_set_line_cap (cr, CAIRO_LINE_CAP_SQUARE);
 
-  cairo_rectangle (cr,
-                   _gucharmap_chartable_x_offset (chartable, col),
-                   _gucharmap_chartable_y_offset (chartable, row),
-                   _gucharmap_chartable_column_width (chartable, col),
-                   _gucharmap_chartable_row_height (chartable, row));
+  cairo_rectangle (cr, rect->x, rect->y, rect->width, rect->height);
   cairo_fill (cr);
 
   cairo_restore (cr);
@@ -1027,30 +1023,6 @@ draw_borders (GucharmapChartable *chartable,
 
   cairo_stroke (cr);
   cairo_restore (cr);
-}
-
-static void
-gucharmap_chartable_draw (GucharmapChartable *chartable,
-                          cairo_t *cr,
-                          int start_row,
-                          int end_row,
-                          int start_col,
-                          int end_col)
-{
-  int row, col;
-
-  gucharmap_chartable_ensure_pango_layout (chartable);
-
-  for (row = start_row;  row < end_row; ++row)
-    {
-      for (col = start_col;  col < end_col; ++col)
-        {
-          draw_square_bg (chartable, cr, row, col);
-          draw_character (chartable, cr, row, col);
-        }
-    }
-
-  draw_borders (chartable, cr);
 }
 
 static void
@@ -1326,11 +1298,12 @@ gucharmap_chartable_expose_event (GtkWidget *widget,
   GucharmapChartablePrivate *priv = chartable->priv;
   GtkStyle *style;
   cairo_t *cr;
+  int row, col;
 
   if (event->window != gtk_widget_get_window (widget))
     return FALSE;
 
-#if GTK_CHECK_VERSION(2,90,5)
+#if GTK_CHECK_VERSION (2, 90, 5)
   if (cairo_region_is_empty (event->region))
     return FALSE;
 #else
@@ -1362,14 +1335,42 @@ gucharmap_chartable_expose_event (GtkWidget *widget,
   gdk_cairo_region (cr, event->region);
   cairo_fill (cr);
 
-  if (priv->codepoint_list == NULL) {
-    cairo_destroy (cr);
-    return FALSE;
-  }
+  if (priv->codepoint_list == NULL)
+    goto expose_done;
 
-  gucharmap_chartable_draw (chartable, cr,
-                            0, priv->rows,
-                            0, priv->cols);
+  gucharmap_chartable_ensure_pango_layout (chartable);
+
+  for (row = priv->rows - 1; row >= 0; --row)
+    {
+      for (col = priv->cols - 1; col >= 0; --col)
+        {
+#if GTK_CHECK_VERSION (2, 90, 5)
+          cairo_rectangle_int_t rect;
+#else
+          GdkRectangle rect;
+#endif
+
+          rect.x = _gucharmap_chartable_x_offset (chartable, col);
+          rect.y = _gucharmap_chartable_y_offset (chartable, row);
+          rect.width = _gucharmap_chartable_column_width (chartable, col);
+          rect.height = _gucharmap_chartable_row_height (chartable, row);
+
+#if GTK_CHECK_VERSION (2, 90, 5)
+          if (cairo_region_contains_rectangle (event->region, &rect) == CAIRO_REGION_OVERLAP_OUT)
+            continue;
+#else
+          if (gdk_region_rect_in (event->region, &rect) == GDK_OVERLAP_RECTANGLE_OUT)
+            continue;
+#endif
+
+          draw_square_bg (chartable, cr, &rect, row, col);
+          draw_character (chartable, cr, &rect, row, col);
+        }
+    }
+
+  draw_borders (chartable, cr);
+
+expose_done:
 
   cairo_destroy (cr);
 
