@@ -90,6 +90,10 @@ void                     gucharmap_charmap_set_font_desc      (GucharmapCharmap 
 
 PangoFontDescription *   gucharmap_charmap_get_font_desc      (GucharmapCharmap  *charmap);
 
+void                     gucharmap_charmap_set_font_fallback  (GucharmapCharmap *charmap,
+                                                               gboolean enable_font_fallback);
+gboolean                 gucharmap_charmap_get_font_fallback  (GucharmapCharmap *charmap);
+
 GucharmapChaptersView *  gucharmap_charmap_get_chapters_view  (GucharmapCharmap       *charmap);
 
 void                     gucharmap_charmap_set_chapters_model (GucharmapCharmap       *charmap,

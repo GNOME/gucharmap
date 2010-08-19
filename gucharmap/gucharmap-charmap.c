@@ -72,7 +72,8 @@ enum {
   PROP_ACTIVE_CODEPOINT_LIST,
   PROP_ACTIVE_PAGE,
   PROP_SNAP_POW2,
-  PROP_FONT_DESC
+  PROP_FONT_DESC,
+  PROP_FONT_FALLBACK
 };
 
 static guint gucharmap_charmap_signals[NUM_SIGNALS];
@@ -134,6 +135,9 @@ gucharmap_charmap_get_property (GObject *object,
     case PROP_FONT_DESC:
       g_value_set_boxed (value, gucharmap_charmap_get_font_desc (charmap));
       break;
+    case PROP_FONT_FALLBACK:
+      g_value_set_boolean (value, gucharmap_charmap_get_font_fallback (charmap));
+      break;
     case PROP_SNAP_POW2:
       g_value_set_boolean (value, gucharmap_charmap_get_snap_pow2 (charmap));
       break;
@@ -173,6 +177,9 @@ gucharmap_charmap_set_property (GObject *object,
       break;
     case PROP_FONT_DESC:
       gucharmap_charmap_set_font_desc (charmap, g_value_get_boxed (value));
+      break;
+    case PROP_FONT_FALLBACK:
+      gucharmap_charmap_set_font_fallback (charmap, g_value_get_boolean (value));
       break;
     case PROP_SNAP_POW2:
       gucharmap_charmap_set_snap_pow2 (charmap, g_value_get_boolean (value));
@@ -319,6 +326,20 @@ gucharmap_charmap_class_init (GucharmapCharmapClass *klass)
                          G_PARAM_STATIC_NAME |
                          G_PARAM_STATIC_NICK |
                          G_PARAM_STATIC_BLURB));
+
+  /**
+   * GucharmapCharmap:font-fallback:
+   *
+   * Whether font fallback is enabled.
+   *
+   * Since: 2.34
+   */
+  g_object_class_install_property
+    (object_class,
+     PROP_FONT_FALLBACK,
+     g_param_spec_boolean ("font-fallback", NULL, NULL,
+                           TRUE,
+                           G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property
     (object_class,
@@ -1351,6 +1372,41 @@ gucharmap_charmap_get_font_desc (GucharmapCharmap *charmap)
   g_return_val_if_fail (GUCHARMAP_IS_CHARMAP (charmap), NULL);
 
   return charmap->priv->font_desc;
+}
+
+/**
+ * gucharmap_charmap_set_font_fallback:
+ * @charmap: a #GucharmapCharmap
+ * @enable_font_fallback: whether to enable font fallback
+ *
+ * Since: 2.34
+ */
+void 
+gucharmap_charmap_set_font_fallback (GucharmapCharmap *charmap,
+                                     gboolean enable_font_fallback)
+{
+  g_return_if_fail (GUCHARMAP_IS_CHARMAP (charmap));
+
+  gucharmap_chartable_set_font_fallback (charmap->priv->chartable, 
+                                         enable_font_fallback);
+
+  g_object_notify (G_OBJECT (charmap), "font-fallback");
+}
+
+/**
+ * gucharmap_charmap_get_font_fallback:
+ * @charmap: a #GucharmapCharmap
+ *
+ * Returns: whether font fallback is enabled
+ *
+ * Since: 2.34
+ */
+gboolean
+gucharmap_charmap_get_font_fallback (GucharmapCharmap *charmap)
+{
+  g_return_val_if_fail (GUCHARMAP_IS_CHARMAP (charmap), FALSE);
+
+  return gucharmap_chartable_get_font_fallback (charmap->priv->chartable);
 }
 
 void

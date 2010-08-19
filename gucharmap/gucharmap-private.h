@@ -72,6 +72,7 @@ struct _GucharmapChartablePrivate {
   /* Settings */
   guint snap_pow2_enabled : 1;
   guint zoom_mode_enabled : 1;
+  guint font_fallback     : 1;
 };
 
 gint _gucharmap_chartable_cell_column	(GucharmapChartable *chartable,

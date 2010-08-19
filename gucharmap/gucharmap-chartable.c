@@ -1,6 +1,6 @@
 /*
  * Copyright © 2004 Noah Levitt
- * Copyright © 2007, 2008 Christian Persch
+ * Copyright © 2007, 2008, 2010 Christian Persch
  *
  * Some code copied from gtk+/gtk/gtkiconview:
  * Copyright © 2002, 2004  Anders Carlsson <andersca@gnu.org>
@@ -61,6 +61,7 @@ enum
   PROP_ACTIVE_CHAR,
   PROP_CODEPOINT_LIST,
   PROP_FONT_DESC,
+  PROP_FONT_FALLBACK,
   PROP_SNAP_POW2,
   PROP_ZOOM_ENABLED,
   PROP_ZOOM_SHOWING
@@ -136,20 +137,56 @@ G_DEFINE_TYPE (GucharmapChartable, gucharmap_chartable, GTK_TYPE_DRAWING_AREA)
 /* utility functions */
 
 static void
+gucharmap_chartable_clear_pango_layout (GucharmapChartable *chartable)
+{
+  GucharmapChartablePrivate *priv = chartable->priv;
+
+  if (priv->pango_layout == NULL)
+    return;
+  g_object_unref (priv->pango_layout);
+  priv->pango_layout = NULL;
+}
+
+static void
+gucharmap_chartable_ensure_pango_layout (GucharmapChartable *chartable)
+{
+  GucharmapChartablePrivate *priv = chartable->priv;
+
+  if (priv->pango_layout != NULL)
+    return;
+
+  priv->pango_layout = gtk_widget_create_pango_layout (GTK_WIDGET (chartable), NULL);
+  pango_layout_set_font_description (priv->pango_layout,
+                                     priv->font_desc);
+
+  if (priv->font_fallback == FALSE) 
+    {
+      PangoAttrList *list;
+
+      list = pango_attr_list_new ();
+      pango_attr_list_insert (list, pango_attr_fallback_new (FALSE));
+      pango_layout_set_attributes (priv->pango_layout, list);
+      pango_attr_list_unref (list);
+    }
+}
+
+static void
 gucharmap_chartable_set_font_desc_internal (GucharmapChartable *chartable,
                                             PangoFontDescription *font_desc /* adopting */)
 {
   GucharmapChartablePrivate *priv = chartable->priv;
+  GtkWidget *widget;
 
   if (priv->font_desc)
     pango_font_description_free (priv->font_desc);
 
   priv->font_desc = font_desc;
- 
-  if (priv->pango_layout)
-    pango_layout_set_font_description (priv->pango_layout, font_desc);
 
-  gtk_widget_queue_resize (GTK_WIDGET (chartable));
+  gucharmap_chartable_clear_pango_layout (chartable);
+
+  widget = GTK_WIDGET (chartable);
+  if (gtk_widget_get_realized (widget))
+    gtk_widget_queue_resize (widget);
 
   g_object_notify (G_OBJECT (chartable), "font-desc");
 }
@@ -486,12 +523,23 @@ layout_scaled_glyph (GucharmapChartable *chartable,
     pango_font_description_set_size (font_desc,
                                      font_factor * pango_font_description_get_size (priv->font_desc));
 
+  gucharmap_chartable_ensure_pango_layout (chartable);
   layout = pango_layout_new (pango_layout_get_context (priv->pango_layout));
 
   pango_layout_set_font_description (layout, font_desc);
 
   buf[gucharmap_unichar_to_printable_utf8 (uc, buf)] = '\0';
   pango_layout_set_text (layout, buf, -1);
+
+  if (priv->font_fallback == FALSE) 
+    {
+      PangoAttrList *list;
+
+      list = pango_attr_list_new ();
+      pango_attr_list_insert (list, pango_attr_fallback_new (FALSE));
+      pango_layout_set_attributes (layout, list);
+      pango_attr_list_unref (list);
+    }
 
   if (font_family)
     *font_family = get_font (layout);
@@ -807,6 +855,16 @@ draw_character (GucharmapChartable *chartable,
   if (wc > UNICHAR_MAX || !gucharmap_unichar_validate (wc) || !gucharmap_unichar_isdefined (wc))
     return;
 
+  n = gucharmap_unichar_to_printable_utf8 (wc, buf);
+  pango_layout_set_text (priv->pango_layout, buf, n);
+
+  /* Keep the square empty if font fallback is disabled and the
+   * font has no glyph for this cell.
+   */
+  if (!priv->font_fallback &&
+      pango_layout_get_unknown_glyphs_count (priv->pango_layout) > 0)
+    return;
+
   cairo_save (cr);
 
   style = gtk_widget_get_style (widget);
@@ -822,9 +880,6 @@ draw_character (GucharmapChartable *chartable,
 
   square_width = _gucharmap_chartable_column_width (chartable, col) - 1;
   square_height = _gucharmap_chartable_row_height (chartable, row) - 1;
-
-  n = gucharmap_unichar_to_printable_utf8 (wc, buf);
-  pango_layout_set_text (priv->pango_layout, buf, n);
 
   pango_layout_get_pixel_size (priv->pango_layout, &char_width, &char_height);
 
@@ -983,6 +1038,8 @@ gucharmap_chartable_draw (GucharmapChartable *chartable,
                           int end_col)
 {
   int row, col;
+
+  gucharmap_chartable_ensure_pango_layout (chartable);
 
   for (row = start_row;  row < end_row; ++row)
     {
@@ -1532,9 +1589,7 @@ gucharmap_chartable_style_set (GtkWidget *widget,
 
   GTK_WIDGET_CLASS (gucharmap_chartable_parent_class)->style_set (widget, previous_style);
 
-  if (priv->pango_layout)
-    g_object_unref (priv->pango_layout);
-  priv->pango_layout = NULL;
+  gucharmap_chartable_clear_pango_layout (chartable);
 
   if (priv->font_desc == NULL) {
     GtkStyle *style;
@@ -1554,10 +1609,6 @@ gucharmap_chartable_style_set (GtkWidget *widget,
     gucharmap_chartable_set_font_desc_internal (chartable, font_desc /* adopts */);
     g_assert (priv->font_desc != NULL);
   }
-
-  priv->pango_layout = gtk_widget_create_pango_layout (widget, NULL);
-  pango_layout_set_font_description (priv->pango_layout,
-                                     priv->font_desc);
 
   /* FIXME: necessary? */
   /* gtk_widget_queue_draw (widget); */
@@ -1834,6 +1885,7 @@ gucharmap_chartable_init (GucharmapChartable *chartable)
   priv->zoom_window = NULL;
   priv->zoom_image = NULL;
   priv->snap_pow2_enabled = FALSE;
+  priv->font_fallback = TRUE;
 
 /* This didn't fix the slow expose events either: */
 /*  gtk_widget_set_double_buffered (widget, FALSE); */
@@ -1872,8 +1924,7 @@ gucharmap_chartable_finalize (GObject *object)
   if (priv->font_desc)
     pango_font_description_free (priv->font_desc);
 
-  if (priv->pango_layout)
-    g_object_unref (priv->pango_layout);
+  gucharmap_chartable_clear_pango_layout (chartable);
 
   gtk_target_list_unref (priv->target_list);
 
@@ -1902,6 +1953,9 @@ gucharmap_chartable_set_property (GObject *object,
       break;
     case PROP_FONT_DESC:
       gucharmap_chartable_set_font_desc (chartable, g_value_get_boxed (value));
+      break;
+    case PROP_FONT_FALLBACK:
+      gucharmap_chartable_set_font_fallback (chartable, g_value_get_boolean (value));
       break;
     case PROP_SNAP_POW2:
       gucharmap_chartable_set_snap_pow2 (chartable, g_value_get_boolean (value));
@@ -1936,6 +1990,9 @@ gucharmap_chartable_get_property (GObject *object,
       break;
     case PROP_FONT_DESC:
       g_value_set_boxed (value, gucharmap_chartable_get_font_desc (chartable));
+      break;
+    case PROP_FONT_FALLBACK:
+      g_value_set_boolean (value, gucharmap_chartable_get_font_fallback (chartable));
       break;
     case PROP_SNAP_POW2:
       g_value_set_boolean (value, priv->snap_pow2_enabled);
@@ -2088,6 +2145,20 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
                          G_PARAM_STATIC_NAME |
                          G_PARAM_STATIC_NICK |
                          G_PARAM_STATIC_BLURB));
+
+  /**
+   * GucharmapChartable:font-fallback:
+   *
+   * Whether font fallback is enabled.
+   *
+   * Since: 2.34
+   */
+  g_object_class_install_property
+    (object_class,
+     PROP_FONT_FALLBACK,
+     g_param_spec_boolean ("font-fallback", NULL, NULL,
+                           TRUE,
+                           G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property
     (object_class,
@@ -2317,6 +2388,53 @@ gucharmap_chartable_get_font_desc (GucharmapChartable *chartable)
   g_return_val_if_fail (GUCHARMAP_IS_CHARTABLE (chartable), NULL);
 
   return chartable->priv->font_desc;
+}
+
+/**
+ * gucharmap_chartable_set_font_fallback:
+ * @chartable: a #GucharmapChartable
+ * @enable_font_fallback: whether to enable font fallback
+ *
+ * Since: 2.34
+ */
+void 
+gucharmap_chartable_set_font_fallback (GucharmapChartable *chartable,
+                                       gboolean enable_font_fallback)
+{
+  GucharmapChartablePrivate *priv;
+  GtkWidget *widget;
+
+  g_return_if_fail (GUCHARMAP_IS_CHARTABLE (chartable));
+
+  priv = chartable->priv;
+  enable_font_fallback = enable_font_fallback != FALSE;
+  if (enable_font_fallback == priv->font_fallback)
+    return;
+
+  priv->font_fallback = enable_font_fallback;
+  g_object_notify (G_OBJECT (chartable), "font-fallback");
+
+  gucharmap_chartable_clear_pango_layout (chartable);
+
+  widget = GTK_WIDGET (chartable);
+  if (gtk_widget_get_realized (widget))
+    gtk_widget_queue_draw (widget);
+}
+
+/**
+ * gucharmap_chartable_get_font_fallback:
+ * @chartable: a #GucharmapChartable
+ *
+ * Returns: whether font fallback is enabled
+ *
+ * Since: 2.34
+ */
+gboolean
+gucharmap_chartable_get_font_fallback (GucharmapChartable *chartable)
+{
+  g_return_val_if_fail (GUCHARMAP_IS_CHARTABLE (chartable), FALSE);
+
+  return chartable->priv->font_fallback;
 }
 
 /**

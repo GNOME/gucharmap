@@ -336,6 +336,16 @@ snap_cols_pow2 (GtkAction        *action,
 }
 
 static void
+no_font_fallback_toggled_cb (GtkAction       *action, 
+                             GucharmapWindow *guw)
+{
+  gboolean is_active = gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
+
+  gucharmap_charmap_set_font_fallback (guw->charmap, !is_active);
+/*  gucharmap_settings_set_font_fallback (is_active); */
+}
+
+static void
 open_url (GtkWindow *parent,
           const char *uri,
           guint32 user_time)
@@ -637,6 +647,7 @@ static const char ui_info [] =
       "<menuitem action='ByScript' />"
       "<menuitem action='ByUnicodeBlock' />"
       "<separator />"
+      "<menuitem action='ShowOnlyGlyphsInFont' />"
       "<menuitem action='SnapColumns' />"
       "<separator />"
       "<menuitem action='ZoomIn' />"
@@ -851,6 +862,9 @@ gucharmap_window_init (GucharmapWindow *guw)
   };
   const GtkToggleActionEntry toggle_menu_entries[] =
   {
+    { "ShowOnlyGlyphsInFont", NULL, N_("Sho_w only glyphs from this font"), NULL,
+      NULL,
+      G_CALLBACK (no_font_fallback_toggled_cb), FALSE },
     { "SnapColumns", NULL, N_("Snap _Columns to Power of Two"), NULL,
       NULL,
       G_CALLBACK (snap_cols_pow2), FALSE },
