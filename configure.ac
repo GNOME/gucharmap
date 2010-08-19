@@ -16,9 +16,9 @@
 # 59 Temple Place, Suite 330, Boston, MA 02110-1301  USA
 
 m4_define([gucharmap_version_major],[2])
-m4_define([gucharmap_version_minor],[31])
-m4_define([gucharmap_version_micro],[90])
-m4_define([gucharmap_version_extra],[])
+m4_define([gucharmap_version_minor],[33])
+m4_define([gucharmap_version_micro],[0])
+m4_define([gucharmap_version_extra],[+git])
 m4_define([gucharmap_version],[gucharmap_version_major.gucharmap_version_minor.gucharmap_version_micro()gucharmap_version_extra])
 
 # Before making a release, the libtool version should be modified.
