@@ -5,10 +5,6 @@ GITIGNOREFILES = m4
 
 SUBDIRS = po pixmaps gucharmap docs
 
-if HAVE_GTK_2
-SUBDIRS += bindings
-endif
-
 if ENABLE_CHARMAP
 if HAVE_GNOME_DOC_UTILS
 SUBDIRS += help

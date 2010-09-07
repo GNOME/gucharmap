@@ -200,80 +200,6 @@ AC_SUBST([GETTEXT_PACKAGE])
 AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE],["$GETTEXT_PACKAGE"],[The gucharmap gettext domain])
 AM_GLIB_GNU_GETTEXT
 
-# ***************
-# Python Bindings
-# ***************
-
-# Only support this on gtk+-2.0; on 3.0 you should just use gobject-introspection
-
-if test "$with_gtk" = "2.0"; then
-
-AC_MSG_CHECKING([whether python bindings are requested])
-AC_ARG_ENABLE([python-bindings],
-        AS_HELP_STRING([--enable-python-bindings],[Enable python bindings]),
-        [],[enable_python_bindings=no])
-AC_MSG_RESULT([$enable_python_bindings])
-
-if test "$enable_python_bindings" = "yes"; then
-  AM_PATH_PYTHON([2.4])
-  AM_CHECK_PYTHON_HEADERS([],[AC_MSG_ERROR([Python headers not found])])
-
-  PY_PREFIX=`$PYTHON -c 'import sys ; print sys.prefix'`
-  PY_EXEC_PREFIX=`$PYTHON -c 'import sys ; print sys.exec_prefix'`
-  PYTHON_LIBS="-lpython$PYTHON_VERSION"
-  PYTHON_LIB_LOC="-L$PY_EXEC_PREFIX/lib/python$PYTHON_VERSION/config"
-  PYTHON_CFLAGS="-I$PY_PREFIX/include/python$PYTHON_VERSION"
-  PYTHON_MAKEFILE="$PY_EXEC_PREFIX/lib/python$PYTHON_VERSION/config/Makefile"
-  PYTHON_BASEMODLIBS=`sed -n -e 's/^BASEMODLIBS=\(.*\)/\1/p' $PYTHON_MAKEFILE`
-  PYTHON_OTHER_LIBS=`sed -n -e 's/^LIBS=\(.*\)/\1/p' $PYTHON_MAKEFILE`
-  PYTHON_EXTRA_LIBS="$PYTHON_BASEMODLIBS $PYTHON_OTHER_LIBS"
-  AC_SUBST([PYTHON_LIBS])
-  AC_SUBST([PYTHON_LIB_LOC])
-  AC_SUBST([PYTHON_CFLAGS])
-  AC_SUBST([PYTHON_EXTRA_LIBS])
-
-  PYGTK_REQUIRED=2.7.1
-  PKG_CHECK_MODULES([PYGTK],[pygtk-2.0 >= $PYGTK_REQUIRED])
-
-  AC_SUBST([PYGTK_CFLAGS])
-  AC_SUBST([PYGTK_LIBS])
-
-  AC_MSG_CHECKING([for pygtk defs])
-  PYGTK_DEFSDIR=`$PKG_CONFIG --variable=defsdir pygtk-2.0`
-  AC_MSG_RESULT([$PYGTK_DEFSDIR])
-
-  AC_MSG_CHECKING([for pygtk codegen])
-  PYGTK_CODEGEN="$PYTHON `$PKG_CONFIG --variable=codegendir pygtk-2.0`/codegen.py"
-  AC_MSG_RESULT([$PYGTK_CODEGEN])
-
-  AC_MSG_CHECKING([for pygtk h2def])
-  PYGTK_H2DEF="$PYTHON `$PKG_CONFIG --variable=codegendir pygtk-2.0`/h2def.py"
-  AC_MSG_RESULT([$PYGTK_H2DEF])
-
-  AC_SUBST([PYGTK_DEFSDIR])
-  AC_SUBST([PYGTK_CODEGEN])
-  AC_SUBST([PYGTK_H2DEF])
-
-  dnl Check for -fno-strict-aliasing
-  FLAGS="-fno-strict-aliasing"
-  save_CFLAGS="$CFLAGS"
-  CFLAGS="$CFLAGS $FLAGS"
-  AC_MSG_CHECKING([whether [$]CC understands $FLAGS])
-  AC_TRY_COMPILE([], [], [compiler_has_option=yes], [compiler_has_option=no])
-  CFLAGS="$save_CFLAGS"
-  AC_MSG_RESULT($compiler_has_option)
-  if test $compiler_has_option = yes; then
-          NO_STRICT_ALIASING_CFLAGS="$FLAGS"
-  fi
-  AC_SUBST([NO_STRICT_ALIASING_CFLAGS])
-fi
-
-else # with_gtk = 3.0
-  enable_python_bindings=no
-fi # with_gtk = 2.0
-
-AM_CONDITIONAL([ENABLE_PYTHON_BINDINGS],[test "$enable_python_bindings" = "yes"])
-
 # ***
 # GIR 
 # ***
@@ -330,8 +256,6 @@ Makefile
 gucharmap.desktop.in
 gucharmap.nsi
 gucharmap.spec
-bindings/Makefile
-bindings/python/Makefile
 docs/Makefile
 docs/reference/Makefile
 gucharmap/Makefile
