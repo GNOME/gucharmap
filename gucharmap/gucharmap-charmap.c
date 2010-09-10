@@ -21,9 +21,15 @@
 
 #include <glib/gi18n-lib.h>
 #include <gtk/gtk.h>
-#include <gdk/gdkkeysyms.h>
 #include <stdlib.h>
 #include <string.h>
+
+#if GTK_CHECK_VERSION (2, 90, 7)
+#define GDK_KEY(symbol) GDK_KEY_##symbol
+#else
+#include <gdk/gdkkeysyms.h>
+#define GDK_KEY(symbol) GDK_##symbol
+#endif
 
 #include "gucharmap-charmap.h"
 #include "gucharmap-unicode-info.h"
@@ -958,9 +964,9 @@ details_key_press_event (GtkWidget *text_view,
 
   switch (event->keyval)
     {
-      case GDK_Return:
-      case GDK_ISO_Enter:
-      case GDK_KP_Enter:
+      case GDK_KEY (Return):
+      case GDK_KEY (ISO_Enter):
+      case GDK_KEY (KP_Enter):
         buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (text_view));
         gtk_text_buffer_get_iter_at_mark (buffer, &iter, 
                                           gtk_text_buffer_get_insert (buffer));

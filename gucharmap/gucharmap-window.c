@@ -24,7 +24,13 @@
 
 #include <glib/gi18n-lib.h>
 #include <gtk/gtk.h>
+
+#if GTK_CHECK_VERSION (2, 90, 7)
+#define GDK_KEY(symbol) GDK_KEY_##symbol
+#else
 #include <gdk/gdkkeysyms.h>
+#define GDK_KEY(symbol) GDK_##symbol
+#endif
 
 #include "gucharmap-print-operation.h"
 #include "gucharmap-search-dialog.h"
@@ -504,9 +510,9 @@ next_or_prev_character (GtkAction       *action,
 
   name = gtk_action_get_name (action);
   if (strcmp (name, "NextCharacter") == 0) {
-    keyval = GDK_Right;
+    keyval = GDK_KEY (Right);
   } else if (strcmp (name, "PreviousCharacter") == 0) {
-    keyval = GDK_Left;
+    keyval = GDK_KEY (Left);
   }
 
   chartable = gucharmap_charmap_get_chartable (guw->charmap);

@@ -24,7 +24,13 @@
 
 #include <glib/gi18n-lib.h>
 #include <gtk/gtk.h>
+
+#if GTK_CHECK_VERSION (2, 90, 7)
+#define GDK_KEY(symbol) GDK_KEY_##symbol
+#else
 #include <gdk/gdkkeysyms.h>
+#define GDK_KEY(symbol) GDK_##symbol
+#endif
 
 #include "gucharmap-marshal.h"
 #include "gucharmap-chartable.h"
@@ -1417,7 +1423,7 @@ gucharmap_chartable_key_press_event (GtkWidget *widget,
 
   switch (event->keyval)
     {
-      case GDK_Shift_L: case GDK_Shift_R:
+      case GDK_KEY (Shift_L): case GDK_KEY (Shift_R):
         gucharmap_chartable_show_zoom (chartable);
         break;
 
@@ -1440,10 +1446,10 @@ gucharmap_chartable_key_release_event (GtkWidget *widget,
       /* XXX: If the group(shift_toggle) Xkb option is set, then releasing
        * the shift key gives either ISO_Next_Group or ISO_Prev_Group. Is
        * there a better way to handle this case? */
-      case GDK_Shift_L:
-      case GDK_Shift_R:
-      case GDK_ISO_Next_Group:
-      case GDK_ISO_Prev_Group:
+      case GDK_KEY (Shift_L):
+      case GDK_KEY (Shift_R):
+      case GDK_KEY (ISO_Next_Group):
+      case GDK_KEY (ISO_Prev_Group):
         gucharmap_chartable_hide_zoom (chartable);
         break;
     }
@@ -2195,97 +2201,97 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
   binding_set = gtk_binding_set_by_class (klass);
 
   /* Cursor movement */
-  gucharmap_chartable_add_move_binding (binding_set, GDK_Up, 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (Up), 0,
                                         GTK_MOVEMENT_DISPLAY_LINES, -1);
-  gucharmap_chartable_add_move_binding (binding_set, GDK_KP_Up, 0,
-                                        GTK_MOVEMENT_DISPLAY_LINES, -1);
-
-  gucharmap_chartable_add_move_binding (binding_set, GDK_Down, 0,
-                                        GTK_MOVEMENT_DISPLAY_LINES, 1);
-  gucharmap_chartable_add_move_binding (binding_set, GDK_KP_Down, 0,
-                                        GTK_MOVEMENT_DISPLAY_LINES, 1);
-
-  gucharmap_chartable_add_move_binding (binding_set, GDK_p, GDK_CONTROL_MASK,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (KP_Up), 0,
                                         GTK_MOVEMENT_DISPLAY_LINES, -1);
 
-  gucharmap_chartable_add_move_binding (binding_set, GDK_n, GDK_CONTROL_MASK,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (Down), 0,
+                                        GTK_MOVEMENT_DISPLAY_LINES, 1);
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (KP_Down), 0,
                                         GTK_MOVEMENT_DISPLAY_LINES, 1);
 
-  gucharmap_chartable_add_move_binding (binding_set, GDK_Home, 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (p), GDK_CONTROL_MASK,
+                                        GTK_MOVEMENT_DISPLAY_LINES, -1);
+
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (n), GDK_CONTROL_MASK,
+                                        GTK_MOVEMENT_DISPLAY_LINES, 1);
+
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (Home), 0,
                                         GTK_MOVEMENT_BUFFER_ENDS, -1);
-  gucharmap_chartable_add_move_binding (binding_set, GDK_KP_Home, 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (KP_Home), 0,
                                         GTK_MOVEMENT_BUFFER_ENDS, -1);
 
-  gucharmap_chartable_add_move_binding (binding_set, GDK_End, 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (End), 0,
                                         GTK_MOVEMENT_BUFFER_ENDS, 1);
-  gucharmap_chartable_add_move_binding (binding_set, GDK_KP_End, 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (KP_End), 0,
                                         GTK_MOVEMENT_BUFFER_ENDS, 1);
 
-  gucharmap_chartable_add_move_binding (binding_set, GDK_Page_Up, 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (Page_Up), 0,
                                         GTK_MOVEMENT_PAGES, -1);
-  gucharmap_chartable_add_move_binding (binding_set, GDK_KP_Page_Up, 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (KP_Page_Up), 0,
                                         GTK_MOVEMENT_PAGES, -1);
 
-  gucharmap_chartable_add_move_binding (binding_set, GDK_Page_Down, 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (Page_Down), 0,
                                         GTK_MOVEMENT_PAGES, 1);
-  gucharmap_chartable_add_move_binding (binding_set, GDK_KP_Page_Down, 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (KP_Page_Down), 0,
                                         GTK_MOVEMENT_PAGES, 1);
 
-  gucharmap_chartable_add_move_binding (binding_set, GDK_Left, 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (Left), 0,
                                         GTK_MOVEMENT_VISUAL_POSITIONS, -1);
-  gucharmap_chartable_add_move_binding (binding_set, GDK_KP_Left, 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (KP_Left), 0,
                                         GTK_MOVEMENT_VISUAL_POSITIONS, -1);
 
-  gucharmap_chartable_add_move_binding (binding_set, GDK_Right, 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (Right), 0,
                                         GTK_MOVEMENT_VISUAL_POSITIONS, 1);
-  gucharmap_chartable_add_move_binding (binding_set, GDK_KP_Right, 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (KP_Right), 0,
                                         GTK_MOVEMENT_VISUAL_POSITIONS, 1);
   
   /* Activate */
-  gtk_binding_entry_add_signal (binding_set, GDK_Return, 0,
+  gtk_binding_entry_add_signal (binding_set, GDK_KEY (Return), 0,
                                 "activate", 0);
-  gtk_binding_entry_add_signal (binding_set, GDK_ISO_Enter, 0,
+  gtk_binding_entry_add_signal (binding_set, GDK_KEY (ISO_Enter), 0,
                                 "activate", 0);
-  gtk_binding_entry_add_signal (binding_set, GDK_KP_Enter, 0,
+  gtk_binding_entry_add_signal (binding_set, GDK_KEY (KP_Enter), 0,
                                 "activate", 0);
-  gtk_binding_entry_add_signal (binding_set, GDK_space, 0,
+  gtk_binding_entry_add_signal (binding_set, GDK_KEY (space), 0,
                                 "activate", 0);
 
   /* Clipboard actions */
-  gtk_binding_entry_add_signal (binding_set, GDK_c, GDK_CONTROL_MASK,
+  gtk_binding_entry_add_signal (binding_set, GDK_KEY (c), GDK_CONTROL_MASK,
                                 "copy-clipboard", 0);
-  gtk_binding_entry_add_signal (binding_set, GDK_Insert, GDK_CONTROL_MASK,
+  gtk_binding_entry_add_signal (binding_set, GDK_KEY (Insert), GDK_CONTROL_MASK,
                                 "copy-clipboard", 0);
-  gtk_binding_entry_add_signal (binding_set, GDK_v, GDK_CONTROL_MASK,
+  gtk_binding_entry_add_signal (binding_set, GDK_KEY (v), GDK_CONTROL_MASK,
                                 "paste-clipboard", 0);
-  gtk_binding_entry_add_signal (binding_set, GDK_Insert, GDK_SHIFT_MASK,
+  gtk_binding_entry_add_signal (binding_set, GDK_KEY (Insert), GDK_SHIFT_MASK,
                                 "paste-clipboard", 0);
 
 #if 0
   /* VI keybindings */
-  gucharmap_chartable_add_move_binding (binding_set, GDK_k, 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (k), 0,
                                         GTK_MOVEMENT_DISPLAY_LINES, -1);
-  gucharmap_chartable_add_move_binding (binding_set, GDK_K, 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (K), 0,
                                         GTK_MOVEMENT_DISPLAY_LINES, -1);
 
-  gucharmap_chartable_add_move_binding (binding_set, GDK_j, 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (j), 0,
                                         GTK_MOVEMENT_DISPLAY_LINES, 1);
-  gucharmap_chartable_add_move_binding (binding_set, GDK_J, 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (J), 0,
                                         GTK_MOVEMENT_DISPLAY_LINES, 1);
 
-  gucharmap_chartable_add_move_binding (binding_set, GDK_b, 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (b), 0,
                                         GTK_MOVEMENT_PAGES, -1);
-  gucharmap_chartable_add_move_binding (binding_set, GDK_B, 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (B), 0,
                                         GTK_MOVEMENT_PAGES, -1);
 
-  gucharmap_chartable_add_move_binding (binding_set, GDK_h, 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (h), 0,
                                         GTK_MOVEMENT_VISUAL_POSITIONS, -1);
-  gucharmap_chartable_add_move_binding (binding_set, GDK_H, 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (H), 0,
                                         GTK_MOVEMENT_VISUAL_POSITIONS, -1);
 
-  gucharmap_chartable_add_move_binding (binding_set, GDK_l, 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (l), 0,
                                         GTK_MOVEMENT_VISUAL_POSITIONS, 1);
-  gucharmap_chartable_add_move_binding (binding_set, GDK_L, 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (L), 0,
                                         GTK_MOVEMENT_VISUAL_POSITIONS, 1);
 #endif
 }
