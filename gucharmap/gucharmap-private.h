@@ -58,7 +58,8 @@ struct _GucharmapChartablePrivate {
 
   /* Zoom popup */
   GtkWidget *zoom_window;
-  GtkWidget *zoom_image;
+  int zoom_image_width;
+  int zoom_image_height;
 
   /* for dragging (#114534) */
   gdouble click_x, click_y; 

@@ -555,11 +555,142 @@ layout_scaled_glyph (GucharmapChartable *chartable,
   return layout;
 }
 
+#if GTK_CHECK_VERSION (2, 90, 8)
+
+static cairo_surface_t *
+create_glyph_surface (GucharmapChartable *chartable,
+                      gunichar wc,
+                      double font_factor,
+                      gboolean draw_font_family,
+                      int *zoom_surface_width,
+                      int *zoom_surface_height)
+{
+  GtkWidget *widget = GTK_WIDGET (chartable);
+  enum { PADDING = 8 };
+
+  PangoLayout *pango_layout, *pango_layout2 = NULL;
+  PangoRectangle char_rect, family_rect;
+  gint width, height;
+  GtkStyle *style;
+  char *family;
+  cairo_surface_t *surface;
+  cairo_t *cr;
+
+  /* Apply the scaling.  Unfortunately not all fonts seem to be scalable.
+   * We could fall back to GdkPixbuf scaling, but that looks butt ugly :-/
+   */
+  pango_layout = layout_scaled_glyph (chartable, wc,
+                                      font_factor, &family);
+  pango_layout_get_pixel_extents (pango_layout, &char_rect, NULL);
+
+  if (draw_font_family)
+    {
+      if (family == NULL)
+        family = g_strdup (_("[not a printable character]"));
+
+      pango_layout2 = gtk_widget_create_pango_layout (GTK_WIDGET (chartable), family);
+      pango_layout_get_pixel_extents (pango_layout2, NULL, &family_rect);
+
+      /* Make the GdkPixmap large enough to account for possible offsets in the
+       * ink extents of the glyph. */
+      width  = MAX (char_rect.width, family_rect.width)  + 2 * PADDING;
+      height = family_rect.height + char_rect.height + 4 * PADDING;
+    }
+  else
+    {
+      width  = char_rect.width + 2 * PADDING;
+      height = char_rect.height + 2 * PADDING;
+    }
+
+  style = gtk_widget_get_style (widget);
+
+  surface = gdk_window_create_similar_surface (gtk_widget_get_window (widget),
+                                               CAIRO_CONTENT_COLOR,
+                                               width, height);
+  cr = cairo_create (surface);
+
+  gdk_cairo_set_source_color (cr, &style->base[GTK_STATE_NORMAL]);
+  cairo_rectangle (cr, 0, 0, width, height);
+  cairo_fill (cr);
+
+  gdk_cairo_set_source_color (cr, &style->fg[GTK_STATE_INSENSITIVE]);
+  cairo_set_line_width (cr, 1);
+  cairo_set_line_cap (cr, CAIRO_LINE_CAP_SQUARE);
+  cairo_rectangle (cr, 1.5, 1.5, width - 3, height - 3);
+  cairo_stroke (cr);
+
+  /* Now draw the glyph.  The coordinates are adapted
+   * in order to compensate negative char_rect offsets.
+   */
+  gdk_cairo_set_source_color (cr, &style->text[GTK_STATE_NORMAL]);
+  cairo_move_to (cr, -char_rect.x + PADDING, -char_rect.y + PADDING);
+  pango_cairo_show_layout (cr, pango_layout);
+  g_object_unref (pango_layout);
+
+  if (draw_font_family)
+    {
+      cairo_set_line_width (cr, 1);
+      cairo_set_line_cap (cr, CAIRO_LINE_CAP_SQUARE);
+      gdk_cairo_set_source_color (cr, &style->dark[GTK_STATE_NORMAL]);
+      cairo_move_to (cr, 6 + 1 + .5, char_rect.height + 2 * PADDING + .5);
+      cairo_line_to (cr, width - 3 - 6 - .5, char_rect.height + 2 * PADDING + .5);
+      cairo_stroke (cr);
+
+      gdk_cairo_set_source_color (cr, &style->text[GTK_STATE_NORMAL]);
+      cairo_move_to (cr, PADDING, height - PADDING - family_rect.height);
+      /* FIXME: clip here? */
+      pango_cairo_show_layout (cr, pango_layout2);
+
+      g_object_unref (pango_layout2);
+    }
+
+  g_free (family);
+
+  cairo_destroy (cr);
+
+  if (zoom_surface_width)
+    *zoom_surface_width = width;
+  if (zoom_surface_height)
+    *zoom_surface_height = height;
+
+  return surface;
+}
+
+static GdkPixbuf *
+create_glyph_pixbuf (GucharmapChartable *chartable,
+                     gunichar wc,
+                     double font_factor,
+                     gboolean draw_font_family,
+                     int *zoom_surface_width,
+                     int *zoom_surface_height)
+{
+  cairo_surface_t *surface;
+  int width, height;
+  GdkPixbuf *pixbuf;
+
+  surface = create_glyph_surface (chartable, wc, font_factor, draw_font_family,
+                                  &width, &height);
+  pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, FALSE, 8, width, height);
+  gdk_pixbuf_get_from_surface (pixbuf, surface, 0, 0, 0, 0, width, height);
+  cairo_surface_destroy (surface);
+
+  if (zoom_surface_width)
+    *zoom_surface_width = width;
+  if (zoom_surface_height)
+    *zoom_surface_height = height;
+
+  return pixbuf;
+}
+
+#else
+
 static GdkPixmap *
 create_glyph_pixmap (GucharmapChartable *chartable,
                      gunichar wc,
                      double font_factor,
-                     gboolean draw_font_family)
+                     gboolean draw_font_family,
+                     int *width,
+                     int *height)
 {
   GtkWidget *widget = GTK_WIDGET (chartable);
   enum { PADDING = 8 };
@@ -644,26 +775,29 @@ create_glyph_pixmap (GucharmapChartable *chartable,
 
   cairo_destroy (cr);
 
+  if (width)
+    *width = pixmap_width;
+  if (height)
+    *height = pixmap_height;
+
   return pixmap;
 }
+
+#endif /* GTK 2.90 */
 
 /* places the zoom window toward the inside of the coordinates */
 static void
 place_zoom_window (GucharmapChartable *chartable, gint x_root, gint y_root)
 {
   GucharmapChartablePrivate *priv = chartable->priv;
-  GdkPixmap *pixmap;
-  gint width, height, x, y;
+  int x, y;
 
   if (!priv->zoom_window)
     return;
 
-  gtk_image_get_pixmap (GTK_IMAGE (priv->zoom_image), &pixmap, NULL);
-  if (!pixmap)
-    return;
-
-  gdk_drawable_get_size (GDK_DRAWABLE (pixmap), &width, &height);
-  get_appropriate_upper_left_xy (chartable, width, height,
+  get_appropriate_upper_left_xy (chartable,
+                                 priv->zoom_image_width,
+                                 priv->zoom_image_height,
                                  x_root, y_root, &x, &y);
   gtk_window_move (GTK_WINDOW (priv->zoom_window), x, y);
 }
@@ -672,20 +806,16 @@ static void
 place_zoom_window_on_active_cell (GucharmapChartable *chartable)
 {
   GucharmapChartablePrivate *priv = chartable->priv;
-  GdkPixmap *pixmap;
   GdkRectangle rect, keepout_rect;
 
   if (!priv->zoom_window)
     return;
 
-  gtk_image_get_pixmap (GTK_IMAGE (priv->zoom_image), &pixmap, NULL);
-  if (!pixmap)
-    return;
-
   get_active_cell_rect (chartable, &keepout_rect);
 
   rect.x = rect.y = 0;
-  gdk_drawable_get_size (GDK_DRAWABLE (pixmap), &rect.width, &rect.height);
+  rect.width = priv->zoom_image_width;
+  rect.height = priv->zoom_image_height;
 
   position_rectangle_on_screen (GTK_WIDGET (chartable),
                                 &rect,
@@ -725,7 +855,6 @@ update_zoom_window (GucharmapChartable *chartable)
 {
   GucharmapChartablePrivate *priv = chartable->priv;
   GtkWidget *widget = GTK_WIDGET (chartable);
-  GdkPixmap *pixmap;
   double scale;
   int font_size_px, screen_height;
 
@@ -738,12 +867,37 @@ update_zoom_window (GucharmapChartable *chartable)
   scale = (0.3 * screen_height) / (FACTOR_WIDTH * font_size_px);
   scale = CLAMP (scale, 1.0, 12.0);
 
+#if GTK_CHECK_VERSION (2, 90, 8)
+{
+  GdkPixbuf *pixbuf;
+
+  pixbuf = create_glyph_pixbuf (chartable,
+                                gucharmap_chartable_get_active_character (chartable),
+                                scale,
+                                TRUE,
+                                &priv->zoom_image_width,
+                                &priv->zoom_image_height);
+  gtk_image_set_from_pixbuf (GTK_IMAGE (gtk_bin_get_child (GTK_BIN (priv->zoom_window))),
+                             pixbuf);
+  g_object_unref (pixbuf);
+}
+#else
+{
+  GdkPixmap *pixmap;
   pixmap = create_glyph_pixmap (chartable,
                                 gucharmap_chartable_get_active_character (chartable),
                                 scale,
-                                TRUE);
-  gtk_image_set_from_pixmap (GTK_IMAGE (priv->zoom_image), pixmap, NULL);
+                                TRUE,
+                                &priv->zoom_image_width,
+                                &priv->zoom_image_height);
+  gtk_image_set_from_pixmap (GTK_IMAGE (gtk_bin_get_child (GTK_BIN (priv->zoom_window))),
+                             pixmap, NULL);
   g_object_unref (pixmap);
+}
+#endif
+
+  gtk_window_resize (GTK_WINDOW (priv->zoom_window),
+                     priv->zoom_image_width, priv->zoom_image_height);
 }
 
 static void
@@ -751,6 +905,7 @@ make_zoom_window (GucharmapChartable *chartable)
 {
   GucharmapChartablePrivate *priv = chartable->priv;
   GtkWidget *widget = GTK_WIDGET (chartable);
+  GtkWidget *image;
 
   /* if there is already a zoom window, do nothing */
   if (priv->zoom_window || !priv->zoom_mode_enabled)
@@ -761,10 +916,9 @@ make_zoom_window (GucharmapChartable *chartable)
   gtk_window_set_screen (GTK_WINDOW (priv->zoom_window),
                          gtk_widget_get_screen (widget));
 
-  priv->zoom_image = gtk_image_new ();
-  gtk_container_add (GTK_CONTAINER (priv->zoom_window),
-                     priv->zoom_image);
-  gtk_widget_show (priv->zoom_image);
+  image = gtk_image_new ();
+  gtk_container_add (GTK_CONTAINER (priv->zoom_window), image);
+  gtk_widget_show (image);
 }
 
 static void
@@ -779,7 +933,6 @@ destroy_zoom_window (GucharmapChartable *chartable)
 
       zoom_window = priv->zoom_window;
       priv->zoom_window = NULL;
-      priv->zoom_image = NULL;
 
       gdk_window_set_cursor (gtk_widget_get_window (widget), NULL);
       gtk_widget_destroy (zoom_window);
@@ -1216,9 +1369,13 @@ gucharmap_chartable_drag_begin (GtkWidget *widget,
                                 GdkDragContext *context)
 {
   GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (widget);
-  GdkPixmap *drag_icon;
   double scale;
   int font_size_px, screen_height;
+#if GTK_CHECK_VERSION (2, 90, 8)
+  cairo_surface_t *drag_surface;
+#else
+  GdkPixmap *drag_icon;
+#endif
 
   font_size_px = get_font_size_px (chartable);
   screen_height = gdk_screen_get_height (gtk_widget_get_screen (widget));
@@ -1226,13 +1383,22 @@ gucharmap_chartable_drag_begin (GtkWidget *widget,
   scale = (0.3 * screen_height) / (FACTOR_WIDTH * font_size_px);
   scale = CLAMP (scale, 1.0, 5.0);
 
+#if GTK_CHECK_VERSION (2, 90, 8)
+  drag_surface = create_glyph_surface (chartable,
+                                       gucharmap_chartable_get_active_character (chartable),
+                                       scale,
+                                       FALSE, NULL, NULL);
+  gtk_drag_set_icon_surface (context, drag_surface);
+  cairo_surface_destroy (drag_surface);
+#else
   drag_icon = create_glyph_pixmap (chartable,
                                    gucharmap_chartable_get_active_character (chartable),
                                    scale,
-                                   FALSE);
+                                   FALSE, NULL, NULL);
   gtk_drag_set_icon_pixmap (context, gtk_widget_get_colormap (widget), 
                             drag_icon, NULL, -8, -8);
   g_object_unref (drag_icon);
+#endif
 
   /* no need to chain up */
 }
@@ -1890,7 +2056,6 @@ gucharmap_chartable_init (GucharmapChartable *chartable)
   priv->cols = 1;
   priv->zoom_mode_enabled = TRUE;
   priv->zoom_window = NULL;
-  priv->zoom_image = NULL;
   priv->snap_pow2_enabled = FALSE;
   priv->font_fallback = TRUE;
 
