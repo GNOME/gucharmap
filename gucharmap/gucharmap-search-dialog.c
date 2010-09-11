@@ -735,7 +735,9 @@ gucharmap_search_dialog_init (GucharmapSearchDialog *search_dialog)
   /* follow hig guidelines */
   gtk_window_set_title (GTK_WINDOW (search_dialog), _("Find"));
   gtk_container_set_border_width (GTK_CONTAINER (search_dialog), 6);
+#if !GTK_CHECK_VERSION (2, 90, 7)
   gtk_dialog_set_has_separator (GTK_DIALOG (search_dialog), FALSE);
+#endif
   gtk_window_set_destroy_with_parent (GTK_WINDOW (search_dialog), TRUE);
   gtk_box_set_spacing (GTK_BOX (content_area), 12);
   gtk_window_set_resizable (GTK_WINDOW (search_dialog), FALSE);
