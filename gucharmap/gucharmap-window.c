@@ -408,6 +408,7 @@ help_contents (GtkAction *action,
   g_free (url);
 }
 
+#if !GTK_CHECK_VERSION (2, 90, 8)
 static void
 about_open_url (GtkAboutDialog *about,
                 const char *link,
@@ -430,6 +431,7 @@ about_email_hook (GtkAboutDialog *about,
   open_url (GTK_WINDOW (about), uri, gtk_get_current_event_time ());
   g_free (uri);
 }
+#endif
 
 static void
 help_about (GtkAction       *action, 
@@ -476,8 +478,10 @@ help_about (GtkAction       *action,
 			       _(license[2]), "\n\n", _(license[3]), "\n\n",
 			       _(license[4]), "\n\n", NULL);
 
+#if !GTK_CHECK_VERSION (2, 90, 8)
   gtk_about_dialog_set_url_hook (about_open_url, NULL, NULL);
   gtk_about_dialog_set_email_hook (about_email_hook, NULL, NULL);
+#endif
 
   gtk_show_about_dialog (GTK_WINDOW (guw),
 			 "program-name", _("GNOME Character Map"),
