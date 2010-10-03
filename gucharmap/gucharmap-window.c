@@ -525,7 +525,11 @@ next_or_prev_character (GtkAction       *action,
   gtk_binding_set_activate (gtk_binding_set_by_class (klass),
                             keyval,
                             0,
+#if GTK_CHECK_VERSION (2, 91, 0)
+                            G_OBJECT (chartable));
+#else
                             GTK_OBJECT (chartable));
+#endif
 }
 
 static void

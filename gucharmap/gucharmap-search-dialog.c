@@ -699,7 +699,7 @@ search_find_response (GtkDialog *dialog,
 }
 
 static void
-entry_changed (GtkObject             *object,
+entry_changed (GObject               *object,
                GucharmapSearchDialog *search_dialog)
 {
   GucharmapSearchDialogPrivate *priv = GUCHARMAP_SEARCH_DIALOG_GET_PRIVATE (search_dialog);
