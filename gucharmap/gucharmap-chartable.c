@@ -670,7 +670,13 @@ create_glyph_pixbuf (GucharmapChartable *chartable,
 
   surface = create_glyph_surface (chartable, wc, font_factor, draw_font_family,
                                   &width, &height);
+#if GTK_CHECK_VERSION (2, 91, 0)
   pixbuf = gdk_pixbuf_get_from_surface (surface, 0, 0, width, height);
+#else
+  pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, FALSE, 8, width, height);
+  gdk_pixbuf_get_from_surface (pixbuf, surface, 0, 0, 0, 0, width, height);
+#endif
+
   cairo_surface_destroy (surface);
 
   if (zoom_surface_width)
