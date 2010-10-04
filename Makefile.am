@@ -40,7 +40,9 @@ DISTCHECK_CONFIGURE_FLAGS = \
 	--disable-scrollkeeper \
 	--disable-schemas-install \
 	--enable-gtk-doc \
-	--disable-introspection
+	--disable-introspection \
+	--enable-charmap \
+	--with-gtk=3.0
 
 CLEANFILES = \
 	$(desktop_DATA) \
