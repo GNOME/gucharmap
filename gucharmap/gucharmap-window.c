@@ -985,7 +985,9 @@ gucharmap_window_init (GucharmapWindow *guw)
   gtk_box_pack_start (GTK_BOX (big_vbox), hbox, FALSE, FALSE, 0);
 
   guw->status = gtk_statusbar_new ();
+#if !GTK_CHECK_VERSION (2, 91, 1)
   gtk_statusbar_set_has_resize_grip (GTK_STATUSBAR (guw->status), FALSE);
+#endif
   gtk_box_pack_start (GTK_BOX (hbox), guw->status, TRUE, TRUE, 0);
   gtk_widget_show (guw->status);
   g_signal_connect (guw->status, "realize", G_CALLBACK (status_realize), guw);
@@ -1014,6 +1016,10 @@ gucharmap_window_init (GucharmapWindow *guw)
                                           gucharmap_settings_get_last_char ());
 
   gtk_widget_grab_focus (GTK_WIDGET (gucharmap_charmap_get_chartable (guw->charmap)));
+
+#if GTK_CHECK_VERSION (2, 91, 1)
+  gtk_window_set_has_resize_grip (GTK_WINDOW (guw), TRUE);
+#endif
 }
 
 static void
