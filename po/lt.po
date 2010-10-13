@@ -6,24 +6,24 @@
 # Gintautas Miliauskas <gintas@akl.lt>, 2006.
 # Tomas Kuliavas <tokul@users.sourceforge.net>, 2007.
 # $Id:$
+# Rimas Kudelis <rq@akl.lt>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: lt\n"
-"Report-Msgid-Bugs-To: "
-"http://bugzilla.gnome.org/enter_bug.cgi?product=gucharmap&component=general\n"
-"POT-Creation-Date: 2010-03-27 20:02+0000\n"
-"PO-Revision-Date: 2010-03-28 18:15+0300\n"
-"Last-Translator: Žygimantas Beručka <zygis@gnome.org>\n"
-"Language-Team: Lithuanian <gnome-lt@lists.akl.lt>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-10-13 15:51+0300\n"
+"PO-Revision-Date: 2010-10-11 21:50+0300\n"
+"Last-Translator: Rimas Kudelis <rq@akl.lt>\n"
+"Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
 "Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%"
-"100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Virtaal 0.5.2\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
+"%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Virtaal 0.6.1\n"
 
-#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:905
+#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:915
 #: ../gucharmap/main.c:80
 msgid "Character Map"
 msgstr "Simbolių lentelė"
@@ -129,40 +129,40 @@ msgstr "Tangų tarimas:"
 msgid "Korean Pronunciation:"
 msgstr "Korėjietiškas tarimas:"
 
-#: ../gucharmap/gucharmap-charmap.c:1178
+#: ../gucharmap/gucharmap-charmap.c:1182
 msgid "Characte_r Table"
 msgstr "Simbolių _lentelė"
 
-#: ../gucharmap/gucharmap-charmap.c:1224
+#: ../gucharmap/gucharmap-charmap.c:1228
 msgid "Character _Details"
 msgstr "Simbolio _detalės"
 
-#: ../gucharmap/gucharmap-chartable.c:1399
+#: ../gucharmap/gucharmap-chartable.c:1452
 msgid "Unknown character, unable to identify."
 msgstr "Nežinomas simbolis, nepavyko atpažinti."
 
-#: ../gucharmap/gucharmap-chartable.c:1401
-#: ../gucharmap/gucharmap-search-dialog.c:585
+#: ../gucharmap/gucharmap-chartable.c:1454
+#: ../gucharmap/gucharmap-search-dialog.c:589
 msgid "Not found."
 msgstr "Nerasta."
 
-#: ../gucharmap/gucharmap-chartable.c:1404
+#: ../gucharmap/gucharmap-chartable.c:1457
 msgid "Character found."
 msgstr "Simbolis surastas."
 
-#: ../gucharmap/gucharmap-chartable-accessible.c:771
+#: ../gucharmap/gucharmap-chartable-accessible.c:829
 msgid "Character Table"
 msgstr "Simbolių lentelė"
 
-#: ../gucharmap/gucharmap-mini-fontsel.c:280
+#: ../gucharmap/gucharmap-mini-fontsel.c:282
 msgid "Font"
 msgstr "Šriftas"
 
-#: ../gucharmap/gucharmap-mini-fontsel.c:293
+#: ../gucharmap/gucharmap-mini-fontsel.c:295
 msgid "Font Family"
 msgstr "Šrifto šeima"
 
-#: ../gucharmap/gucharmap-mini-fontsel.c:311
+#: ../gucharmap/gucharmap-mini-fontsel.c:313
 msgid "Font Size"
 msgstr "Šrifto dydis"
 
@@ -333,13 +333,13 @@ msgstr "Ieškoma…"
 msgid ""
 "Gucharmap is free software; you can redistribute it and/or modify it under "
 "the terms of the GNU General Public License as published by the Free "
-"Software Foundation; either version 2 of the License, or (at your option) "
+"Software Foundation; either version 3 of the License, or (at your option) "
 "any later version."
 msgstr ""
-"Gucharmap yra laisva programinė įranga; galite ją platinti ir/ar modifikuoti "
-"GNU bendrosios viešosios licencijos sąlygomis, kurios paskelbtos Laisvosios "
-"programinės įrangos fondo; 2-osios arba (Jūsų pasirinkimu) bet kurios "
-"vėlesnės licencijos versijos sąlygomis."
+"„Gucharmap“ yra laisvoji programinė įranga. Jūs galite ją platinti ir/arba "
+"modifikuoti remdamiesi „Free Software Foundation“ paskelbtomis GNU "
+"Bendrosios Viešosios licencijos 3-osios arba (savo nuožiūra) bet kurios "
+"vėlesnės versijos sąlygomis."
 
 #: ../gucharmap/gucharmap-window.c:497
 msgid ""
@@ -388,7 +388,6 @@ msgid "GNOME Character Map"
 msgstr "GNOME simbolių lentelė"
 
 #: ../gucharmap/gucharmap-window.c:523
-#| msgid "Based on the Unicode Character Database 5.1"
 msgid "Based on the Unicode Character Database 5.2"
 msgstr "Paremta Unikodo simbolių duomenų baze 5.2"
 
@@ -398,11 +397,11 @@ msgstr ""
 "Žygimantas Beručka <zygis@gnome.org>,\n"
 "Tomas Kuliavas <tokul@users.sourceforge.net>"
 
-#: ../gucharmap/gucharmap-window.c:607 ../gucharmap/gucharmap-window.c:874
+#: ../gucharmap/gucharmap-window.c:607 ../gucharmap/gucharmap-window.c:884
 msgid "Next Script"
 msgstr "Kitas raštas"
 
-#: ../gucharmap/gucharmap-window.c:607 ../gucharmap/gucharmap-window.c:876
+#: ../gucharmap/gucharmap-window.c:607 ../gucharmap/gucharmap-window.c:886
 msgid "Previous Script"
 msgstr "Ankstesnis raštas"
 
@@ -414,71 +413,71 @@ msgstr "Kitas blokas"
 msgid "Previous Block"
 msgstr "Ankstesnis blokas"
 
-#: ../gucharmap/gucharmap-window.c:837
+#: ../gucharmap/gucharmap-window.c:847
 msgid "_File"
 msgstr "_Failas"
 
-#: ../gucharmap/gucharmap-window.c:838
+#: ../gucharmap/gucharmap-window.c:848
 msgid "_View"
 msgstr "R_odymas"
 
-#: ../gucharmap/gucharmap-window.c:839
+#: ../gucharmap/gucharmap-window.c:849
 msgid "_Search"
 msgstr "Pa_ieška"
 
-#: ../gucharmap/gucharmap-window.c:840
+#: ../gucharmap/gucharmap-window.c:850
 msgid "_Go"
 msgstr "_Eiti"
 
-#: ../gucharmap/gucharmap-window.c:841
+#: ../gucharmap/gucharmap-window.c:851
 msgid "_Help"
 msgstr "_Žinynas"
 
-#: ../gucharmap/gucharmap-window.c:844
+#: ../gucharmap/gucharmap-window.c:854
 msgid "Page _Setup"
 msgstr "Puslapio _nustatymai"
 
-#: ../gucharmap/gucharmap-window.c:865
+#: ../gucharmap/gucharmap-window.c:875
 msgid "Find _Next"
 msgstr "Ieškoti _kito"
 
-#: ../gucharmap/gucharmap-window.c:867
+#: ../gucharmap/gucharmap-window.c:877
 msgid "Find _Previous"
 msgstr "Ieškoti _ankstesnio"
 
-#: ../gucharmap/gucharmap-window.c:870
+#: ../gucharmap/gucharmap-window.c:880
 msgid "_Next Character"
 msgstr "_Kitas simbolis"
 
-#: ../gucharmap/gucharmap-window.c:872
+#: ../gucharmap/gucharmap-window.c:882
 msgid "_Previous Character"
 msgstr "_Ankstesnis simbolis"
 
-#: ../gucharmap/gucharmap-window.c:879
+#: ../gucharmap/gucharmap-window.c:889
 msgid "_Contents"
 msgstr "_Turinys"
 
-#: ../gucharmap/gucharmap-window.c:881
+#: ../gucharmap/gucharmap-window.c:891
 msgid "_About"
 msgstr "_Apie"
 
-#: ../gucharmap/gucharmap-window.c:891
+#: ../gucharmap/gucharmap-window.c:901
 msgid "By _Script"
 msgstr "Pagal _raštą"
 
-#: ../gucharmap/gucharmap-window.c:893
+#: ../gucharmap/gucharmap-window.c:903
 msgid "By _Unicode Block"
 msgstr "Pagal _Unicode bloką"
 
-#: ../gucharmap/gucharmap-window.c:898
+#: ../gucharmap/gucharmap-window.c:908
 msgid "Snap _Columns to Power of Two"
 msgstr "_Stulpelių plotis dalinasi iš dviejų"
 
-#: ../gucharmap/gucharmap-window.c:967
+#: ../gucharmap/gucharmap-window.c:977
 msgid "_Text to copy:"
 msgstr "Kopijuotinas _tekstas:"
 
-#: ../gucharmap/gucharmap-window.c:974
+#: ../gucharmap/gucharmap-window.c:984
 msgid "Copy to the clipboard."
 msgstr "Kopijuoti į atmintinę."
 
@@ -559,7 +558,6 @@ msgid "N'Ko"
 msgstr "NKo"
 
 #: ../gucharmap/unicode-blocks.h:31 ../gucharmap/unicode-scripts.h:87
-#| msgid "Carian"
 msgid "Samaritan"
 msgstr "Samariečių"
 
@@ -676,7 +674,6 @@ msgid "Mongolian"
 msgstr "Mongolų"
 
 #: ../gucharmap/unicode-blocks.h:60
-#| msgid "Unified Canadian Aboriginal Syllabics"
 msgid "Unified Canadian Aboriginal Syllabics Extended"
 msgstr "Suvienodinti išplėstiniai Kanados aborigenų skiemenys"
 
@@ -721,7 +718,6 @@ msgid "Ol Chiki"
 msgstr "Ol Chiki"
 
 #: ../gucharmap/unicode-blocks.h:71
-#| msgid "Phonetic Extensions"
 msgid "Vedic Extensions"
 msgstr "Vedų išplėtimai"
 
@@ -950,7 +946,6 @@ msgid "Yi Radicals"
 msgstr "Dži radikalai"
 
 #: ../gucharmap/unicode-blocks.h:128 ../gucharmap/unicode-scripts.h:66
-#| msgid "Limbu"
 msgid "Lisu"
 msgstr "﻿Lisu"
 
@@ -979,7 +974,6 @@ msgid "Syloti Nagri"
 msgstr "Syloti Nagri"
 
 #: ../gucharmap/unicode-blocks.h:135
-#| msgid "Number Forms"
 msgid "Common Indic Number Forms"
 msgstr "Bendrosios indiškos skaičių formos"
 
@@ -992,7 +986,6 @@ msgid "Saurashtra"
 msgstr "Saurashtra"
 
 #: ../gucharmap/unicode-blocks.h:138
-#| msgid "Devanagari"
 msgid "Devanagari Extended"
 msgstr "Devanagari išplėstinė"
 
@@ -1005,12 +998,10 @@ msgid "Rejang"
 msgstr "Rejang"
 
 #: ../gucharmap/unicode-blocks.h:141
-#| msgid "Latin Extended-A"
 msgid "Hangul Jamo Extended-A"
 msgstr "Hangul Jamo išplėstinis A"
 
 #: ../gucharmap/unicode-blocks.h:142 ../gucharmap/unicode-scripts.h:54
-#| msgid "Balinese"
 msgid "Javanese"
 msgstr "Javiečių"
 
@@ -1019,12 +1010,10 @@ msgid "Cham"
 msgstr "Cham"
 
 #: ../gucharmap/unicode-blocks.h:144
-#| msgid "Latin Extended-A"
 msgid "Myanmar Extended-A"
 msgstr "﻿Mianmaro išplėstinis A"
 
 #: ../gucharmap/unicode-blocks.h:145 ../gucharmap/unicode-scripts.h:98
-#| msgid "Tai Le"
 msgid "Tai Viet"
 msgstr "Tajų Vietnamo"
 
@@ -1037,7 +1026,6 @@ msgid "Hangul Syllables"
 msgstr "Hangulų skiemenys"
 
 #: ../gucharmap/unicode-blocks.h:148
-#| msgid "Latin Extended-B"
 msgid "Hangul Jamo Extended-B"
 msgstr "Hangul Jamo išplėstinis B"
 
@@ -1198,17 +1186,14 @@ msgid "Inscriptional Pahlavi"
 msgstr "Įrėžiamas pahlavų"
 
 #: ../gucharmap/unicode-blocks.h:188 ../gucharmap/unicode-scripts.h:80
-#| msgid "Old Italic"
 msgid "Old Turkic"
 msgstr "Senasis tiurkų"
 
 #: ../gucharmap/unicode-blocks.h:189
-#| msgid "Musical Symbols"
 msgid "Rumi Numeral Symbols"
 msgstr "Rumi skaitiniai simboliai"
 
 #: ../gucharmap/unicode-blocks.h:190 ../gucharmap/unicode-scripts.h:55
-#| msgid "Kharoshthi"
 msgid "Kaithi"
 msgstr "Kaithi"
 
@@ -1257,12 +1242,10 @@ msgid "Domino Tiles"
 msgstr "Domino kaladėlės"
 
 #: ../gucharmap/unicode-blocks.h:202
-#| msgid "Enclosed Alphanumerics"
 msgid "Enclosed Alphanumeric Supplement"
 msgstr "Apribotas alfaskaitinis papildymas"
 
 #: ../gucharmap/unicode-blocks.h:203
-#| msgid "Ethiopic Supplement"
 msgid "Enclosed Ideographic Supplement"
 msgstr "Apribotas ideografinis papildymas"
 
@@ -1271,7 +1254,6 @@ msgid "CJK Unified Ideographs Extension B"
 msgstr "CJK unifikuotas ideografų išplėtimas B"
 
 #: ../gucharmap/unicode-blocks.h:205
-#| msgid "CJK Unified Ideographs Extension A"
 msgid "CJK Unified Ideographs Extension C"
 msgstr "CJK unifikuotų ideografų išplėtimas C"
 
@@ -1339,32 +1321,32 @@ msgstr "Fags Pa"
 msgid "Yi"
 msgstr "Dži"
 
-#: ../gucharmap/gucharmap-search-dialog.c:565
+#: ../gucharmap/gucharmap-search-dialog.c:569
 msgid "Information"
 msgstr "Informacija"
 
 #. follow hig guidelines
-#: ../gucharmap/gucharmap-search-dialog.c:729
+#: ../gucharmap/gucharmap-search-dialog.c:735
 msgid "Find"
 msgstr "Rasti"
 
-#: ../gucharmap/gucharmap-search-dialog.c:743
+#: ../gucharmap/gucharmap-search-dialog.c:753
 msgid "_Previous"
 msgstr "_Ankstesnis"
 
-#: ../gucharmap/gucharmap-search-dialog.c:750
+#: ../gucharmap/gucharmap-search-dialog.c:764
 msgid "_Next"
 msgstr "_Kitas"
 
-#: ../gucharmap/gucharmap-search-dialog.c:765
+#: ../gucharmap/gucharmap-search-dialog.c:779
 msgid "_Search:"
 msgstr "_Ieškoti:"
 
-#: ../gucharmap/gucharmap-search-dialog.c:775
+#: ../gucharmap/gucharmap-search-dialog.c:789
 msgid "Match _whole word"
 msgstr "Atitikti _visą žodį"
 
-#: ../gucharmap/gucharmap-search-dialog.c:780
+#: ../gucharmap/gucharmap-search-dialog.c:794
 msgid "Search in character _details"
 msgstr "Ieškoti simbolio _informacijoje"
 
@@ -1372,11 +1354,11 @@ msgstr "Ieškoti simbolio _informacijoje"
 msgid "All"
 msgstr "Visi"
 
-#: ../gucharmap/gucharmap-block-chapters-model.c:190
+#: ../gucharmap/gucharmap-block-chapters-model.c:187
 msgid "Unicode Block"
 msgstr "Unicode blokas"
 
-#: ../gucharmap/gucharmap-script-chapters-model.c:134
+#: ../gucharmap/gucharmap-script-chapters-model.c:155
 msgid "Script"
 msgstr "Raštas"
 
