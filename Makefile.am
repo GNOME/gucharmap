@@ -42,7 +42,7 @@ DISTCHECK_CONFIGURE_FLAGS = \
 	--enable-gtk-doc \
 	--disable-introspection \
 	--enable-charmap \
-	--with-gtk=3.0
+	--with-gtk=2.0
 
 CLEANFILES = \
 	$(desktop_DATA) \
