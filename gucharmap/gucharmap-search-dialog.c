@@ -759,9 +759,9 @@ gucharmap_search_dialog_init (GucharmapSearchDialog *search_dialog)
 
   priv->next_button = gtk_button_new ();
 #if GTK_CHECK_VERSION (2,18,0)
-  gtk_widget_set_can_default (priv->prev_button, TRUE);
+  gtk_widget_set_can_default (priv->next_button, TRUE);
 #else
-  GTK_WIDGET_SET_FLAGS (priv->prev_button, GTK_CAN_DEFAULT);
+  GTK_WIDGET_SET_FLAGS (priv->next_button, GTK_CAN_DEFAULT);
 #endif
   gtk_widget_show (priv->next_button);
   set_button_stock_image_and_label (GTK_BUTTON (priv->next_button), GTK_STOCK_GO_FORWARD, _("_Next"));
