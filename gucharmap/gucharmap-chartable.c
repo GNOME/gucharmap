@@ -64,6 +64,10 @@ enum
 enum
 {
   PROP_0,
+#if GTK_CHECK_VERSION (2, 91, 2)
+  PROP_HADJUSTMENT,
+  PROP_VADJUSTMENT,
+#endif
   PROP_ACTIVE_CHAR,
   PROP_CODEPOINT_LIST,
   PROP_FONT_DESC,
@@ -138,7 +142,8 @@ G_DEFINE_TYPE (GucharmapChartableAccessibleFactory, gucharmap_chartable_accessib
 
 /* Type definition */
 
-G_DEFINE_TYPE (GucharmapChartable, gucharmap_chartable, GTK_TYPE_DRAWING_AREA)
+G_DEFINE_TYPE_WITH_CODE (GucharmapChartable, gucharmap_chartable, GTK_TYPE_DRAWING_AREA,
+                         G_IMPLEMENT_INTERFACE(GTK_TYPE_SCROLLABLE, NULL))
 
 /* utility functions */
 
@@ -1860,8 +1865,14 @@ gucharmap_chartable_get_accessible (GtkWidget *widget)
 /* GucharmapChartable class methods */
 
 static void
-gucharmap_chartable_set_adjustments (GucharmapChartable *chartable,
-                                     GtkAdjustment *hadjustment,
+gucharmap_chartable_set_hadjustment (GucharmapChartable *chartable,
+                                     GtkAdjustment *vadjustment)
+{
+  /* do nothing */
+}
+
+static void
+gucharmap_chartable_set_vadjustment (GucharmapChartable *chartable,
                                      GtkAdjustment *vadjustment)
 {
   GucharmapChartablePrivate *priv = chartable->priv;
@@ -1891,6 +1902,17 @@ gucharmap_chartable_set_adjustments (GucharmapChartable *chartable,
 
   update_scrollbar_adjustment (chartable);
 }
+
+#if !GTK_CHECK_VERSION (2, 91, 2)
+static void
+gucharmap_chartable_set_adjustments (GucharmapChartable *chartable,
+                                     GtkAdjustment *hadjustment,
+                                     GtkAdjustment *vadjustment)
+{
+  gucharmap_chartable_set_hadjustment (chartable, hadjustment);
+  gucharmap_chartable_set_vadjustment (chartable, vadjustment);
+}
+#endif
 
 static void
 gucharmap_chartable_add_move_binding (GtkBindingSet  *binding_set,
@@ -2149,6 +2171,14 @@ gucharmap_chartable_set_property (GObject *object,
   GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (object);
 
   switch (prop_id) {
+#if GTK_CHECK_VERSION (2, 91, 2)
+    case PROP_HADJUSTMENT:
+      gucharmap_chartable_set_hadjustment (chartable, g_value_get_object (value));
+      break;
+    case PROP_VADJUSTMENT:
+      gucharmap_chartable_set_vadjustment (chartable, g_value_get_object (value));
+      break;
+#endif
     case PROP_ACTIVE_CHAR:
       gucharmap_chartable_set_active_character (chartable, g_value_get_uint (value));
       break;
@@ -2186,6 +2216,14 @@ gucharmap_chartable_get_property (GObject *object,
   GucharmapChartablePrivate *priv = chartable->priv;
 
   switch (prop_id) {
+#if GTK_CHECK_VERSION (2, 91, 2)
+    case PROP_HADJUSTMENT:
+      g_value_set_object (value, NULL);
+      break;
+    case PROP_VADJUSTMENT:
+      g_value_set_object (value, priv->vadjustment);
+      break;
+#endif
     case PROP_ACTIVE_CHAR:
       g_value_set_uint (value, gucharmap_chartable_get_active_character (chartable));
       break;
@@ -2248,7 +2286,6 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
   widget_class->get_accessible = gucharmap_chartable_get_accessible;
 #endif
 
-  klass->set_scroll_adjustments = gucharmap_chartable_set_adjustments;
   klass->move_cursor = gucharmap_chartable_move_cursor;
   klass->activate = NULL;
   klass->copy_clipboard = gucharmap_chartable_copy_clipboard;
@@ -2264,6 +2301,15 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
                   g_cclosure_marshal_VOID__VOID,
                   G_TYPE_NONE,
                   0);
+
+#if GTK_CHECK_VERSION (2, 91, 2)
+  /* GtkScrollable interface properties */
+  g_object_class_override_property (object_class, PROP_HADJUSTMENT, "hadjustment");
+  g_object_class_override_property (object_class, PROP_VADJUSTMENT, "vadjustment");
+
+#else
+
+  klass->set_scroll_adjustments = gucharmap_chartable_set_adjustments;
 
   /**
    * GucharmapChartable::set-scroll-adjustments
@@ -2283,6 +2329,7 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
                   _gucharmap_marshal_VOID__OBJECT_OBJECT,
                   G_TYPE_NONE, 2,
                   GTK_TYPE_ADJUSTMENT, GTK_TYPE_ADJUSTMENT);
+#endif /* GTK 3.0 */
 
   signals[STATUS_MESSAGE] =
     g_signal_new (I_("status-message"), gucharmap_chartable_get_type (), G_SIGNAL_RUN_FIRST,
