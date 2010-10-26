@@ -37,6 +37,12 @@ struct _GucharmapChartablePrivate {
   /* scrollable implementation */
   GtkAdjustment *vadjustment;
   gulong vadjustment_changed_handler_id;
+#if GTK_CHECK_VERSION (2, 91, 2)
+  /* GtkScrollable impl */
+  GtkAdjustment *hadjustment; /* unused */
+  guint hscroll_policy : 1; /* unused */
+  guint vscroll_policy : 1;
+#endif
 
   /* Font */
   PangoFontDescription *font_desc;

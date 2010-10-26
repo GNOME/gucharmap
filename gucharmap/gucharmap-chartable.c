@@ -67,6 +67,8 @@ enum
 #if GTK_CHECK_VERSION (2, 91, 2)
   PROP_HADJUSTMENT,
   PROP_VADJUSTMENT,
+  PROP_HSCROLL_POLICY,
+  PROP_VSCROLL_POLICY,
 #endif
   PROP_ACTIVE_CHAR,
   PROP_CODEPOINT_LIST,
@@ -1866,9 +1868,17 @@ gucharmap_chartable_get_accessible (GtkWidget *widget)
 
 static void
 gucharmap_chartable_set_hadjustment (GucharmapChartable *chartable,
-                                     GtkAdjustment *vadjustment)
+                                     GtkAdjustment *hadjustment)
 {
-  /* do nothing */
+  GucharmapChartablePrivate *priv = chartable->priv;
+
+  if (hadjustment == priv->hadjustment)
+    return;
+
+  if (priv->hadjustment)
+    g_object_unref (priv->hadjustment);
+
+  priv->hadjustment = hadjustment ? g_object_ref_sink (hadjustment) : NULL;
 }
 
 static void
@@ -2103,7 +2113,7 @@ gucharmap_chartable_init (GucharmapChartable *chartable)
   GucharmapChartablePrivate *priv;
 
   priv = chartable->priv = G_TYPE_INSTANCE_GET_PRIVATE (chartable, GUCHARMAP_TYPE_CHARTABLE, GucharmapChartablePrivate);
-  
+
   priv->page_first_cell = 0;
   priv->active_cell = 0;
   priv->rows = 1;
@@ -2112,6 +2122,13 @@ gucharmap_chartable_init (GucharmapChartable *chartable)
   priv->zoom_window = NULL;
   priv->snap_pow2_enabled = FALSE;
   priv->font_fallback = TRUE;
+
+  priv->vadjustment = NULL;
+#if GTK_CHECK_VERSION (2, 91, 2)
+  priv->hadjustment = NULL;
+  priv->hscroll_policy = GTK_SCROLL_NATURAL;
+  priv->vscroll_policy = GTK_SCROLL_NATURAL;
+#endif
 
 /* This didn't fix the slow expose events either: */
 /*  gtk_widget_set_double_buffered (widget, FALSE); */
@@ -2169,6 +2186,7 @@ gucharmap_chartable_set_property (GObject *object,
                                   GParamSpec *pspec)
 {
   GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (object);
+  GucharmapChartablePrivate *priv = chartable->priv;
 
   switch (prop_id) {
 #if GTK_CHECK_VERSION (2, 91, 2)
@@ -2177,6 +2195,14 @@ gucharmap_chartable_set_property (GObject *object,
       break;
     case PROP_VADJUSTMENT:
       gucharmap_chartable_set_vadjustment (chartable, g_value_get_object (value));
+      break;
+    case PROP_HSCROLL_POLICY:
+      priv->hscroll_policy = g_value_get_enum (value);
+      gtk_widget_queue_resize_no_redraw (GTK_WIDGET (chartable));
+      break;
+    case PROP_VSCROLL_POLICY:
+      priv->vscroll_policy = g_value_get_enum (value);
+      gtk_widget_queue_resize_no_redraw (GTK_WIDGET (chartable));
       break;
 #endif
     case PROP_ACTIVE_CHAR:
@@ -2222,6 +2248,12 @@ gucharmap_chartable_get_property (GObject *object,
       break;
     case PROP_VADJUSTMENT:
       g_value_set_object (value, priv->vadjustment);
+      break;
+    case PROP_HSCROLL_POLICY:
+      g_value_set_enum (value, priv->hscroll_policy);
+      break;
+    case PROP_VSCROLL_POLICY:
+      g_value_set_enum (value, priv->vscroll_policy);
       break;
 #endif
     case PROP_ACTIVE_CHAR:
@@ -2306,6 +2338,8 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
   /* GtkScrollable interface properties */
   g_object_class_override_property (object_class, PROP_HADJUSTMENT, "hadjustment");
   g_object_class_override_property (object_class, PROP_VADJUSTMENT, "vadjustment");
+  g_object_class_override_property (object_class, PROP_HSCROLL_POLICY, "hscroll-policy");
+  g_object_class_override_property (object_class, PROP_VSCROLL_POLICY, "vscroll-policy");
 
 #else
 
