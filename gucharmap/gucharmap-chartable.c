@@ -1779,6 +1779,36 @@ gucharmap_chartable_size_allocate (GtkWidget *widget,
   update_scrollbar_adjustment (chartable);
 }
 
+#if GTK_CHECK_VERSION (2, 91, 0)
+
+static void
+gucharmap_chartable_get_preferred_width (GtkWidget *widget,
+                                         gint      *minimum,
+                                         gint      *natural)
+{
+  GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (widget);
+  int font_size_px;
+
+  font_size_px = get_font_size_px (chartable);
+
+  *minimum = *natural = FACTOR_WIDTH * font_size_px;
+}
+
+static void
+gucharmap_chartable_get_preferred_height (GtkWidget *widget,
+                                          gint      *minimum,
+                                          gint      *natural)
+{
+  GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (widget);
+  int font_size_px;
+
+  font_size_px = get_font_size_px (chartable);
+
+  *minimum = *natural = FACTOR_HEIGHT * font_size_px;
+}
+
+#else
+
 static void
 gucharmap_chartable_size_request (GtkWidget *widget,
                                   GtkRequisition *requisition)
@@ -1791,6 +1821,8 @@ gucharmap_chartable_size_request (GtkWidget *widget,
   requisition->width = FACTOR_WIDTH * font_size_px;
   requisition->height = FACTOR_HEIGHT * font_size_px;
 }
+
+#endif /* GTK 3.0 */
 
 static void
 gucharmap_chartable_style_set (GtkWidget *widget, 
@@ -2301,9 +2333,12 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
   widget_class->drag_data_received = gucharmap_chartable_drag_data_received;
   widget_class->button_press_event = gucharmap_chartable_button_press;
   widget_class->button_release_event = gucharmap_chartable_button_release;
-#if GTK_CHECK_VERSION (2, 90, 8)
+#if GTK_CHECK_VERSION (2, 91, 0)
+  widget_class->get_preferred_width = gucharmap_chartable_get_preferred_width;
+  widget_class->get_preferred_height = gucharmap_chartable_get_preferred_height;
   widget_class->draw = gucharmap_chartable_draw;
 #else
+  widget_class->size_request = gucharmap_chartable_size_request;
   widget_class->expose_event = gucharmap_chartable_expose_event;
 #endif
   widget_class->focus_in_event = gucharmap_chartable_focus_in_event;
@@ -2312,7 +2347,6 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
   widget_class->key_release_event = gucharmap_chartable_key_release_event;
   widget_class->motion_notify_event = gucharmap_chartable_motion_notify;
   widget_class->size_allocate = gucharmap_chartable_size_allocate;
-  widget_class->size_request = gucharmap_chartable_size_request;
   widget_class->style_set = gucharmap_chartable_style_set;
 #ifdef ENABLE_ACCESSIBLE
   widget_class->get_accessible = gucharmap_chartable_get_accessible;
