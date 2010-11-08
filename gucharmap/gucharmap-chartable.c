@@ -144,8 +144,12 @@ G_DEFINE_TYPE (GucharmapChartableAccessibleFactory, gucharmap_chartable_accessib
 
 /* Type definition */
 
+#if GTK_CHECK_VERSION (2, 91, 2)
 G_DEFINE_TYPE_WITH_CODE (GucharmapChartable, gucharmap_chartable, GTK_TYPE_DRAWING_AREA,
                          G_IMPLEMENT_INTERFACE(GTK_TYPE_SCROLLABLE, NULL))
+#else
+G_DEFINE_TYPE (GucharmapChartable, gucharmap_chartable, GTK_TYPE_DRAWING_AREA)
+#endif
 
 /* utility functions */
 
@@ -1898,6 +1902,7 @@ gucharmap_chartable_get_accessible (GtkWidget *widget)
 
 /* GucharmapChartable class methods */
 
+#if GTK_CHECK_VERSION (2, 91, 2)
 static void
 gucharmap_chartable_set_hadjustment (GucharmapChartable *chartable,
                                      GtkAdjustment *hadjustment)
@@ -1912,6 +1917,7 @@ gucharmap_chartable_set_hadjustment (GucharmapChartable *chartable,
 
   priv->hadjustment = hadjustment ? g_object_ref_sink (hadjustment) : NULL;
 }
+#endif
 
 static void
 gucharmap_chartable_set_vadjustment (GucharmapChartable *chartable,
@@ -1951,7 +1957,6 @@ gucharmap_chartable_set_adjustments (GucharmapChartable *chartable,
                                      GtkAdjustment *hadjustment,
                                      GtkAdjustment *vadjustment)
 {
-  gucharmap_chartable_set_hadjustment (chartable, hadjustment);
   gucharmap_chartable_set_vadjustment (chartable, vadjustment);
 }
 #endif
