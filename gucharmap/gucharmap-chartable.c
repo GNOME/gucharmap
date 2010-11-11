@@ -1038,22 +1038,6 @@ draw_square (GucharmapChartable *chartable, gint row, gint col)
   draw_character (chartable, row, col);
 }
 
-static void
-draw_and_expose_cell (GucharmapChartable *chartable,
-                      guint cell)
-{
-  GucharmapChartablePrivate *priv = chartable->priv;
-
-  gint row = (cell - priv->page_first_cell) / priv->cols;
-  gint col = _gucharmap_chartable_cell_column (chartable, cell);
-
-  if (row >= 0 && row < priv->rows && col >= 0 && col < priv->cols)
-    {
-      draw_square (chartable, row, col);
-      expose_square (chartable, row, col);
-    }
-}
-
 /* draws the backing store pixmap */
 static void
 draw_chartable_from_scratch (GucharmapChartable *chartable)
@@ -1095,6 +1079,26 @@ draw_chartable_from_scratch (GucharmapChartable *chartable)
         draw_square_bg (chartable, row, col);
         draw_character (chartable, row, col);
       }
+}
+
+static void
+draw_and_expose_cell (GucharmapChartable *chartable,
+                      guint cell)
+{
+  GucharmapChartablePrivate *priv = chartable->priv;
+  gint row, col;
+
+  if (priv->pixmap == NULL)
+    draw_chartable_from_scratch (chartable);
+
+  row = (cell - priv->page_first_cell) / priv->cols;
+  col = _gucharmap_chartable_cell_column (chartable, cell);
+
+  if (row >= 0 && row < priv->rows && col >= 0 && col < priv->cols)
+    {
+      draw_square (chartable, row, col);
+      expose_square (chartable, row, col);
+    }
 }
 
 static void
