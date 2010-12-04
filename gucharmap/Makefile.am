@@ -205,37 +205,6 @@ gucharmap-type-builtins.c: gucharmap-type-builtins.c.template $(libgucharmapincl
 # 	&& (cmp -s xgen-$(@F) $@ || cp -f xgen-$(@F) $@) \
 # 	&& rm -f xgen-$(@F)
 
-if ENABLE_INTROSPECTION
-
-girdir = $(GIRDIR)
-gir_DATA = Gucharmap-$(GUCHARMAP_API_VERSION).gir
-
-typelibdir = $(GIRTYPELIBDIR)
-typelib_DATA = Gucharmap-$(GUCHARMAP_API_VERSION).typelib
-
-Gucharmap-$(GUCHARMAP_API_VERSION).gir: $(G_IR_SCANNER) libgucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@.la $(libgucharmapinclude_HEADERS) Makefile
-	$(AM_V_GEN) PKG_CONFIG_PATH=$(top_builddir):$$PKG_CONFIG_PATH \
-	$(G_IR_SCANNER) \
-		--verbose \
-		--namespace=Gucharmap \
-		--nsversion=$(GUCHARMAP_API_VERSION) \
-		--include=GLib-2.0 \
-		--include=GObject-2.0 \
-		--include=Gtk-$(GTK_API_VERSION) \
-		--library=gucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@ \
-		--libtool="$(LIBTOOL)" \
-		--output $@ \
-		--pkg gucharmap-$(GUCHARMAP_API_PC_VERSION) \
-		-I$(top_srcdir) \
-		-I$(top_builddir) \
-		-DGUCHARMAP_COMPILATION \
-		$(filter %.h,$^)
-
-%.typelib: %.gir $(G_IR_COMPILER)
-	$(AM_V_GEN) $(G_IR_COMPILER) --includedir=$(srcdir) --includedir=. $(G_IR_COMPILER_OPTS) $< -o $@
-
-endif # ENABLE_INTROSPECTION
-
 EXTRA_DIST = \
 	gucharmap-marshal.list \
 	gucharmap-type-builtins.c.template \
@@ -246,9 +215,32 @@ EXTRA_DIST = \
 CLEANFILES = \
 	stamp-gucharmap-type-builtins.h \
 	$(BUILT_SOURCES) \
-	$(gir_DATA) \
-	$(typelib_DATA) \
 	$(NULL)
+
+# introspection
+
+if HAVE_INTROSPECTION
+-include $(INTROSPECTION_MAKEFILE)
+
+INTROSPECTION_SCANNER_ARGS = --add-include-path=$(srcdir) --warn-all
+INTROSPECTION_COMPILER_ARGS = --includedir=$(srcdir)
+
+Gucharmap-@GUCHARMAP_API_VERSION@.gir: libgucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@.la
+Gucharmap_@GUCHARMAP_API_VERSION_U@_gir_INCLUDES = Pango-1.0 Gdk-$(GTK_API_VERSION) Gtk-$(GTK_API_VERSION)
+Gucharmap_@GUCHARMAP_API_VERSION_U@_gir_CFLAGS = $(GTK_CFLAGS) -DGUCHARMAP_COMPILATION -I$(top_srcdir)
+Gucharmap_@GUCHARMAP_API_VERSION_U@_gir_LIBS = libgucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@.la
+Gucharmap_@GUCHARMAP_API_VERSION_U@_gir_FILES = $(filter-out unicode-%.h,$(libgucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@_la_SOURCES))
+
+INTROSPECTION_GIRS = Gucharmap-$(GUCHARMAP_API_VERSION).gir
+
+girdir = $(INTROSPECTION_GIRDIR)
+nodist_gir_DATA = $(INTROSPECTION_GIRS)
+
+typelibdir = $(INTROSPECTION_TYPELIBDIR)
+nodist_typelib_DATA = $(INTROSPECTION_GIRS:.gir=.typelib)
+
+CLEANFILES += $(nodist_gir_DATA) $(nodist_typelib_DATA)
+endif
 
 if ENABLE_CHARMAP
 

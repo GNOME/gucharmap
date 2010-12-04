@@ -110,6 +110,7 @@ esac
 
 AC_SUBST([GTK_API_VERSION])
 AC_SUBST([GUCHARMAP_API_VERSION])
+AC_SUBST([GUCHARMAP_API_VERSION_U],[AS_TR_SH([$GUCHARMAP_API_VERSION])])
 AC_SUBST([GUCHARMAP_API_MAJOR_VERSION])
 AC_SUBST([GUCHARMAP_API_MINOR_VERSION])
 AC_SUBST([GUCHARMAP_API_PC_VERSION])
@@ -200,33 +201,16 @@ AC_SUBST([GETTEXT_PACKAGE])
 AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE],["$GETTEXT_PACKAGE"],[The gucharmap gettext domain])
 AM_GLIB_GNU_GETTEXT
 
-# ***
-# GIR 
-# ***
+# *************
+# Introspection
+# *************
 
-AC_MSG_CHECKING([whether GObject introspection is requested])
-AC_ARG_ENABLE([introspection],
-        AS_HELP_STRING([--enable-introspection],[Enable GObject introspection]),
-        [],[enable_introspection=no])
-AC_MSG_RESULT([$enable_introspection])
-
-if test "$enable_introspection" = "yes"; then
-  GOBJECT_INTROSPECTION_REQUIRED=0.6
-  PKG_CHECK_MODULES([GOBJECT_INTROSPECTION],[gobject-introspection-1.0 >= $GOBJECT_INTROSPECTION_REQUIRED])
-
-  G_IR_SCANNER="$($PKG_CONFIG --variable=g_ir_scanner gobject-introspection-1.0)"
-  G_IR_COMPILER="$($PKG_CONFIG --variable=g_ir_compiler gobject-introspection-1.0)"
-  G_IR_GENERATE="$($PKG_CONFIG --variable=g_ir_generate gobject-introspection-1.0)"
-  GIRDIR="$($PKG_CONFIG --variable=girdir gobject-introspection-1.0)"
-  GIRTYPELIBDIR="$($PKG_CONFIG --variable=typelibdir gobject-introspection-1.0)"
-  AC_SUBST([G_IR_SCANNER])
-  AC_SUBST([G_IR_COMPILER])
-  AC_SUBST([G_IR_GENERATE])
-  AC_SUBST([GIRDIR])
-  AC_SUBST([GIRTYPELIBDIR])
+# No automagic please!
+if test -z "$enable_introspection"; then
+  enable_introspection=no
 fi
 
-AM_CONDITIONAL([ENABLE_INTROSPECTION],[test "$enable_introspection" = "yes"])
+GOBJECT_INTROSPECTION_CHECK([0.9.0])
 
 # ***************
 # API & User Docs
