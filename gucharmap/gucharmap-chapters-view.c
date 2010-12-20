@@ -79,12 +79,27 @@ gucharmap_chapters_view_class_init (GucharmapChaptersViewClass *klass)
 
 G_DEFINE_TYPE (GucharmapChaptersView, gucharmap_chapters_view, GTK_TYPE_TREE_VIEW)
 
+/**
+ * gucharmap_chapters_view_new:
+ *
+ * Creates a new #GucharmapChaptersView object.
+ *
+ * Returns: (transfer full): a new #GucharmapChaptersView
+ */
 GtkWidget * 
 gucharmap_chapters_view_new (void)
 {
   return g_object_new (gucharmap_chapters_view_get_type (), NULL);
 }
 
+/**
+ * gucharmap_chapters_view_get_model:
+ * @view: a #GucharmapChaptersView
+ *
+ * Gets the #GucharmapChaptersModel of #view.
+ *
+ * Returns: (transfer none): the #GucharmapChaptersModel
+ */
 GucharmapChaptersModel *
 gucharmap_chapters_view_get_model (GucharmapChaptersView *view)
 {
@@ -241,9 +256,9 @@ gucharmap_chapters_view_select_character (GucharmapChaptersView *view,
  * Creates a new #GucharmapCodepointList representing the characters in the
  * current chapter.
  *
- * Return value: the newly-created #GucharmapCodepointList, or NULL if
- * there is no chapter selected. The caller should release the result with
- * g_object_unref() when finished.
+ * Return value: (transfer full): the newly-created #GucharmapCodepointList,
+ * or NULL if there is no chapter selected. The caller should release the
+ * result with g_object_unref() when finished.
  **/
 GucharmapCodepointList * 
 gucharmap_chapters_view_get_codepoint_list (GucharmapChaptersView *view)
@@ -262,11 +277,12 @@ gucharmap_chapters_view_get_codepoint_list (GucharmapChaptersView *view)
 }
 
 /**
- * gucharmap_chapters_view_get_codepoint_list:
+ * gucharmap_chapters_view_get_book_codepoint_list:
  * @view: a #GucharmapChaptersView
  *
- * Return value: a reference to a #GucharmapCodepointList representing all the characters
- * in all the chapters. It should not be modified, but must be g_object_unref()'d after use.
+ * Return value: (transfer full): a reference to a #GucharmapCodepointList representing
+ * all the characters in all the chapters. It should not be modified, but must
+ * be g_object_unref()'d after use.
  **/
 GucharmapCodepointList *
 gucharmap_chapters_view_get_book_codepoint_list (GucharmapChaptersView *view)

@@ -72,9 +72,9 @@ gucharmap_chapters_model_class_init (GucharmapChaptersModelClass *klass)
  * Creates a new #GucharmapCodepointList representing the characters in the
  * current chapter.
  *
- * Return value: the newly-created #GucharmapCodepointList, or NULL if
- * there is no chapter selected. The caller should release the result with
- * g_object_unref() when finished.
+ * Return value: (transfer full): the newly-created #GucharmapCodepointList,
+ * or NULL if there is no chapter selected. The caller should release the
+ * result with g_object_unref() when finished.
  **/
 GucharmapCodepointList * 
 gucharmap_chapters_model_get_codepoint_list (GucharmapChaptersModel *chapters,
@@ -86,11 +86,12 @@ gucharmap_chapters_model_get_codepoint_list (GucharmapChaptersModel *chapters,
 }
 
 /**
- * gucharmap_chapters_model_get_codepoint_list:
+ * gucharmap_chapters_model_get_book_codepoint_list:
  * @chapters: a #GucharmapChaptersModel
  *
- * Return value: a reference to a #GucharmapCodepointList representing all the characters
- * in all the chapters. It should not be modified, but must be g_object_unref()'d after use.
+ * Return value: (transfer full): a reference to a #GucharmapCodepointList
+ * representing all the characters in all the chapters. It should not be
+ * modified, but must be g_object_unref()'d after use.
  **/
 GucharmapCodepointList *
 gucharmap_chapters_model_get_book_codepoint_list (GucharmapChaptersModel *chapters)

@@ -1474,6 +1474,12 @@ gucharmap_charmap_previous_chapter (GucharmapCharmap *charmap)
   gucharmap_chapters_view_previous (priv->chapters_view);
 }
 
+/**
+ * gucharmap_charmap_get_chartable:
+ * @charmap: a #GucharmapCharmap
+ *
+ * Returns: (transfer none): a #GucharmapChartable
+ */
 GucharmapChartable *
 gucharmap_charmap_get_chartable (GucharmapCharmap *charmap)
 {
@@ -1510,6 +1516,15 @@ gucharmap_charmap_set_chapters_model (GucharmapCharmap  *charmap,
   g_object_thaw_notify (object);
 }
 
+/**
+ * gucharmap_charmap_get_chapters_model:
+ * @charmap: a #GucharmapCharmap
+ *
+ * Gets the #GucharmapChaptersModel associated with the #GucharmapChaptersView
+ * of @charmap.
+ *
+ * Returns: (transfer none): a #GucharmapChaptersModel
+ */
 GucharmapChaptersModel *
 gucharmap_charmap_get_chapters_model (GucharmapCharmap *charmap)
 {
@@ -1518,14 +1533,29 @@ gucharmap_charmap_get_chapters_model (GucharmapCharmap *charmap)
   return gucharmap_chapters_view_get_model (priv->chapters_view);
 }
 
+/**
+ * gucharmap_charmap_get_chapters_view:
+ * @charmap: a #GucharmapCharmap
+ *
+ * Gets the #GucharmapChaptersView of @charmap
+ *
+ * Returns: (transfer none): the #GucharmapChaptersView
+ */
 GucharmapChaptersView *
-gucharmap_charmap_get_chapters_view  (GucharmapCharmap *charmap)
+gucharmap_charmap_get_chapters_view (GucharmapCharmap *charmap)
 {
   GucharmapCharmapPrivate *priv = charmap->priv;
 
   return priv->chapters_view;
 }
 
+/**
+ * gucharmap_charmap_get_book_codepoint_list:
+ * @charmap: a #GucharmapCharmap
+ *
+ * Returns: (transfer full): the GucharmapCodepointList. Must be freed with
+ * g_object_unref().
+ */
 GucharmapCodepointList *
 gucharmap_charmap_get_book_codepoint_list (GucharmapCharmap *charmap)
 {
@@ -1605,6 +1635,15 @@ gucharmap_charmap_get_active_page (GucharmapCharmap *charmap)
   return priv->active_page;
 }
 
+/**
+ * gucharmap_charmap_get_active_codepoint_list:
+ * @charmap: a #GucharmapCharmap
+ *
+ * Gets the @GucharmapCodepointList associated with the #GucharmapChartable of
+ * @charmap.
+ *
+ * Returns: (transfer none): the #GucharmapCodepointList
+ */
 GucharmapCodepointList *
 gucharmap_charmap_get_active_codepoint_list (GucharmapCharmap *charmap)
 {

@@ -394,8 +394,13 @@ gucharmap_get_nameslist_exes (gunichar uc)
   return exes;
 }
 
-/* returns newly allocated null-terminated array of gchar* */
-/* the items are const, but the array should be freed by the caller */
+/**
+ * gucharmap_get_nameslist_equals:
+ * @uc: a gunichar
+ *
+ * Returns: (transfer container): newly allocated null-terminated array of gchar*
+ * the items are const, but the array should be freed by the caller
+ */
 G_CONST_RETURN gchar **
 gucharmap_get_nameslist_equals (gunichar uc)
 {
@@ -420,8 +425,13 @@ gucharmap_get_nameslist_equals (gunichar uc)
   return equals;
 }
 
-/* returns newly allocated null-terminated array of gchar* */
-/* the items are const, but the array should be freed by the caller */
+/**
+ * gucharmap_get_nameslist_stars:
+ * @uc: a #gunichar
+ *
+ * Returns: (transfer container): newly allocated null-terminated array of gchar*
+ * the items are const, but the array should be freed by the caller
+ */
 G_CONST_RETURN gchar **
 gucharmap_get_nameslist_stars (gunichar uc)
 {
@@ -446,8 +456,13 @@ gucharmap_get_nameslist_stars (gunichar uc)
   return stars;
 }
 
-/* returns newly allocated null-terminated array of gchar* */
-/* the items are const, but the array should be freed by the caller */
+/**
+ * gucharmap_get_nameslist_pounds:
+ * @uc: a #gunichar
+ *
+ * Returns: (transfer container): newly allocated null-terminated array of gchar*
+ * the items are const, but the array should be freed by the caller
+ */
 G_CONST_RETURN gchar **
 gucharmap_get_nameslist_pounds (gunichar uc)
 {
@@ -472,8 +487,13 @@ gucharmap_get_nameslist_pounds (gunichar uc)
   return pounds;
 }
 
-/* returns newly allocated null-terminated array of gchar* */
-/* the items are const, but the array should be freed by the caller */
+/**
+ * gucharmap_get_nameslist_colons:
+ * @uc: a #gunichar
+ *
+ * Returns: (transfer container): newly allocated null-terminated array of gchar*
+ * the items are const, but the array should be freed by the caller
+ */
 G_CONST_RETURN gchar **
 gucharmap_get_nameslist_colons (gunichar uc)
 {
@@ -560,7 +580,7 @@ gucharmap_unichar_to_printable_utf8 (gunichar uc, gchar *outbuf)
 
 /**
  * gucharmap_unichar_type:
- * @c: a Unicode character
+ * @uc: a Unicode character
  * 
  * Classifies a Unicode character by type.
  * 

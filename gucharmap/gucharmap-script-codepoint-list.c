@@ -411,7 +411,7 @@ gucharmap_script_codepoint_list_append_script (GucharmapScriptCodepointList  *li
  * modified or free; the array itself however is allocated and should
  * be freed with g_free().
  *
- * Returns: a newly allocated %NULL-terminated array of strings
+ * Returns: (transfer container): a newly allocated %NULL-terminated array of strings
  **/
 const gchar **
 gucharmap_unicode_list_scripts (void)

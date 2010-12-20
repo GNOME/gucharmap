@@ -2783,7 +2783,7 @@ gucharmap_chartable_get_active_character (GucharmapChartable *chartable)
 }
 
 /**
- * gucharmap_chartable_get_active_character:
+ * gucharmap_chartable_set_active_character:
  * @chartable: a #GucharmapChartable
  * @wc: a unicode character (UTF-32)
  *
@@ -2838,9 +2838,9 @@ gucharmap_chartable_get_snap_pow2 (GucharmapChartable *chartable)
 }
 
 /**
- * gucharmap_chartable_get_active_character:
+ * gucharmap_chartable_set_codepoint_list:
  * @chartable: a #GucharmapChartable
- * @list: a #GucharmapCodepointList
+ * @codepoint_list: a #GucharmapCodepointList
  *
  * Sets the codepoint list to show in the character table.
  */
@@ -2882,7 +2882,7 @@ gucharmap_chartable_set_codepoint_list (GucharmapChartable     *chartable,
  * gucharmap_chartable_get_codepoint_list:
  * @chartable: a #GucharmapChartable
  *
- * Returns: the current codepoint list
+ * Returns: (transfer none): the current codepoint list
  */
 GucharmapCodepointList *
 gucharmap_chartable_get_codepoint_list (GucharmapChartable *chartable)

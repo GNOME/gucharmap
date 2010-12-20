@@ -48,7 +48,7 @@ typedef enum {
 G_CONST_RETURN gchar *  gucharmap_get_unicode_name                (gunichar uc);
 G_CONST_RETURN gchar *  gucharmap_get_unicode_data_name           (gunichar uc);
 gint                    gucharmap_get_unicode_data_name_count     (void);
-GucharmapUnicodeVersion gucharmap_get_unicode_version             (gunichar wc);
+GucharmapUnicodeVersion gucharmap_get_unicode_version             (gunichar uc);
 G_CONST_RETURN gchar *  gucharmap_get_unicode_category_name       (gunichar uc);
 gint                    gucharmap_get_unihan_count                (void);
 G_CONST_RETURN gchar *  gucharmap_get_unicode_kDefinition         (gunichar uc);
@@ -60,17 +60,17 @@ G_CONST_RETURN gchar *  gucharmap_get_unicode_kJapaneseKun        (gunichar uc);
 G_CONST_RETURN gchar *  gucharmap_get_unicode_kJapaneseOn         (gunichar uc);
 
 /* nameslist stuff */
-G_CONST_RETURN gchar ** gucharmap_get_nameslist_stars             (gunichar  wc);
-G_CONST_RETURN gchar ** gucharmap_get_nameslist_equals            (gunichar  wc);
-gunichar *              gucharmap_get_nameslist_exes              (gunichar  wc);
-G_CONST_RETURN gchar ** gucharmap_get_nameslist_pounds            (gunichar  wc);
-G_CONST_RETURN gchar ** gucharmap_get_nameslist_colons            (gunichar  wc);
-gboolean                gucharmap_unichar_validate                (gunichar  wc);
-gint                    gucharmap_unichar_to_printable_utf8       (gunichar  wc, 
+G_CONST_RETURN gchar ** gucharmap_get_nameslist_stars             (gunichar  uc);
+G_CONST_RETURN gchar ** gucharmap_get_nameslist_equals            (gunichar  uc);
+gunichar *              gucharmap_get_nameslist_exes              (gunichar  uc);
+G_CONST_RETURN gchar ** gucharmap_get_nameslist_pounds            (gunichar  uc);
+G_CONST_RETURN gchar ** gucharmap_get_nameslist_colons            (gunichar  uc);
+gboolean                gucharmap_unichar_validate                (gunichar  uc);
+gint                    gucharmap_unichar_to_printable_utf8       (gunichar  uc,
                                                                    gchar    *outbuf);
-GUnicodeType            gucharmap_unichar_type                    (gunichar  wc);
-gboolean                gucharmap_unichar_isdefined               (gunichar  wc);
-gboolean                gucharmap_unichar_isgraph                 (gunichar  wc);
+GUnicodeType            gucharmap_unichar_type                    (gunichar  uc);
+gboolean                gucharmap_unichar_isdefined               (gunichar  uc);
+gboolean                gucharmap_unichar_isgraph                 (gunichar  uc);
 
 /* defined in gucharmap-script-codepoint-list.c */
 G_CONST_RETURN gchar ** gucharmap_unicode_list_scripts            (void);

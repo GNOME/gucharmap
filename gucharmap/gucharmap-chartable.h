@@ -76,8 +76,8 @@ void gucharmap_chartable_set_font_fallback (GucharmapChartable *chartable,
                                             gboolean enable_font_fallback);
 gboolean gucharmap_chartable_get_font_fallback (GucharmapChartable *chartable);
 gunichar gucharmap_chartable_get_active_character (GucharmapChartable *chartable);
-void gucharmap_chartable_set_active_character (GucharmapChartable *chartable, 
-                                               gunichar uc);
+void gucharmap_chartable_set_active_character (GucharmapChartable *chartable,
+                                               gunichar wc);
 void gucharmap_chartable_set_zoom_enabled (GucharmapChartable *chartable,
                                            gboolean enabled);
 gboolean gucharmap_chartable_get_zoom_enabled (GucharmapChartable *chartable);
@@ -85,7 +85,7 @@ void gucharmap_chartable_set_snap_pow2 (GucharmapChartable *chartable,
                                         gboolean snap);
 gboolean gucharmap_chartable_get_snap_pow2 (GucharmapChartable *chartable);
 void gucharmap_chartable_set_codepoint_list (GucharmapChartable         *chartable,
-                                             GucharmapCodepointList *list);
+                                             GucharmapCodepointList *codepoint_list);
 GucharmapCodepointList * gucharmap_chartable_get_codepoint_list (GucharmapChartable *chartable);
 
 G_END_DECLS
