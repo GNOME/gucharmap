@@ -36,7 +36,7 @@ static GConfClient *client;
 /* keep in sync with gucharmap-private.h! */
 #define UNICHAR_MAX (0x0010FFFFUL)
 
-#define WINDOW_STATE_TIMEOUT 1000 /* ms */
+#define WINDOW_STATE_TIMEOUT 1 /* s */
 
 #define GCONF_PREFIX "/apps/gucharmap"
 
@@ -332,9 +332,9 @@ window_configure_event_cb (GtkWidget *widget,
     state->height = event->height;
 
     if (state->timeout_id == 0) {
-      state->timeout_id = g_timeout_add (WINDOW_STATE_TIMEOUT,
-                                         (GSourceFunc) window_state_timeout_cb,
-                                         state);
+      state->timeout_id = g_timeout_add_seconds (WINDOW_STATE_TIMEOUT,
+                                                 (GSourceFunc) window_state_timeout_cb,
+                                                 state);
     }
   }
 
