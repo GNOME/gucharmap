@@ -4,7 +4,7 @@
 #
 # Tino Meinen <a.t.meinen@chello.nl>, 2005, 2006, 2008
 # Sebastien Bruggeman <seba@ulyssis.org>, 2004, 2005
-# Wouter Bolsterlee <wbolster@gnome.org>, 2008–2010
+# Wouter Bolsterlee <wbolster@gnome.org>, 2008–2011
 #
 # character    - teken
 # radicals     - stamwoorden
@@ -26,7 +26,7 @@ msgstr ""
 "Project-Id-Version: gucharmap\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-02-11 22:29+0100\n"
-"PO-Revision-Date: 2011-02-11 22:28+0100\n"
+"PO-Revision-Date: 2011-02-26 18:41+0100\n"
 "Last-Translator: Wouter Bolsterlee <wbolster@gnome.org>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
 "Language: nl\n"
@@ -84,14 +84,14 @@ msgstr "UTF-16:"
 
 #: ../gucharmap/gucharmap-charmap.c:705
 msgid "C octal escaped UTF-8:"
-msgstr "C-vorm (octal escaped UTF-8):"
+msgstr "C-representatie (octal escaped UTF-8):"
 
 # entity: iets bestaands/wezen
 # het is het teken in een voor XML begrijpelijke vorm
 # schrijfwijze/representatie
 #: ../gucharmap/gucharmap-charmap.c:715
 msgid "XML decimal entity:"
-msgstr "XML-vorm (decimaal):"
+msgstr "XML-representatie (decimaal):"
 
 #: ../gucharmap/gucharmap-charmap.c:726
 msgid "Annotations and Cross References"
@@ -100,7 +100,7 @@ msgstr "Aantekeningen en kruisverwijzingen"
 # aliassen/aliasnamen
 #: ../gucharmap/gucharmap-charmap.c:733
 msgid "Alias names:"
-msgstr "Aliasnamen:"
+msgstr "Alternatieve namen:"
 
 #: ../gucharmap/gucharmap-charmap.c:742
 msgid "Notes:"
@@ -270,11 +270,11 @@ msgstr "Letter, bovenkast"
 
 #: ../gucharmap/gucharmap-unicode-info.c:138
 msgid "Mark, Spacing Combining"
-msgstr "Teken, combinerend spatiëring"
+msgstr "Markeringsteken, combinerende spatiëring"
 
 #: ../gucharmap/gucharmap-unicode-info.c:139
 msgid "Mark, Enclosing"
-msgstr "Teken, omsluitend"
+msgstr "Teken, omvattend"
 
 #: ../gucharmap/gucharmap-unicode-info.c:140
 msgid "Mark, Non-Spacing"
@@ -399,7 +399,7 @@ msgid ""
 msgstr ""
 "Bij Gucharmap moet u een kopie van de GNU General Public License hebben "
 "ontvangen; zo niet, schrijf dan naar de Free Software Foundation, Inc., 59 "
-"Temple Place, Suite 330, Boston, MA  02111-1307  USA"
+"Temple Place, Suite 330, Boston, MA  02111-1301  USA"
 
 #: ../gucharmap/gucharmap-window.c:472
 msgid ""
@@ -504,7 +504,6 @@ msgstr "Per _Unicode-blok"
 msgid "Sho_w only glyphs from this font"
 msgstr "_Alleen tekens in dit lettertype tonen"
 
-# eenvoudiger maar niet helemaal juist: even aantallen kolommen.
 #: ../gucharmap/gucharmap-window.c:882
 msgid "Snap _Columns to Power of Two"
 msgstr "Aantal _kolommen is macht van 2"
@@ -663,7 +662,7 @@ msgstr "Tibetaans"
 
 #: ../gucharmap/unicode-blocks.h:46 ../gucharmap/unicode-scripts.h:75
 msgid "Myanmar"
-msgstr "Myanmar"
+msgstr "Birmees (Myanmar)"
 
 #: ../gucharmap/unicode-blocks.h:47 ../gucharmap/unicode-scripts.h:41
 msgid "Georgian"
@@ -685,7 +684,7 @@ msgstr "Ethiopisch (aanvulling)"
 msgid "Cherokee"
 msgstr "Cherokee"
 
-# Het schrift heet ‘Canadian Aboriginal syllabics’, dus dat laten we maar
+# Het schrift heet ‘Canadian Aboriginal Syllabics’, dus dat laten we maar
 # onvertaald bij gebrek aan een fatsoenlijke Nederlandse vertaling. Let op, er
 # staat ‘syllabics’, niet ‘syllables’! (Wouter Bolsterlee)
 #: ../gucharmap/unicode-blocks.h:52
@@ -822,7 +821,7 @@ msgstr "Combinerende diakritische tekens voor symbolen"
 # bv de R voor reeele getallen en N voor natuurlijke getallen
 #: ../gucharmap/unicode-blocks.h:83
 msgid "Letterlike Symbols"
-msgstr "Symbolen die op letters lijken"
+msgstr "Op letters lijkende symbolen"
 
 # kan ook meer dan 10 zijn (bijv X of L)
 #: ../gucharmap/unicode-blocks.h:84
@@ -842,7 +841,7 @@ msgstr "Wiskundige operatoren"
 msgid "Miscellaneous Technical"
 msgstr "Gemengd technisch"
 
-# bv teken voor einde tekstm, teken voor beckspace, esc.
+# bv teken voor einde tekst, teken voor beckspace, esc.
 # afbeeldingen/figuren/tekens/plaatjes
 #: ../gucharmap/unicode-blocks.h:88
 msgid "Control Pictures"
@@ -1079,7 +1078,7 @@ msgstr "Cham"
 
 #: ../gucharmap/unicode-blocks.h:146
 msgid "Myanmar Extended-A"
-msgstr "Myanmar (uitbreiding A)"
+msgstr "Birmees (Myanmar) (uitbreiding A)"
 
 # Let op, dis is NIET Thai(s) (Wouter Bolsterlee)
 #: ../gucharmap/unicode-blocks.h:147 ../gucharmap/unicode-scripts.h:101
@@ -1128,11 +1127,11 @@ msgstr "Alfabetische presentatievormen"
 
 #: ../gucharmap/unicode-blocks.h:158
 msgid "Arabic Presentation Forms-A"
-msgstr "Arabische presentatievormen-A"
+msgstr "Arabische presentatievormen A"
 
 #: ../gucharmap/unicode-blocks.h:159
 msgid "Variation Selectors"
-msgstr "Variantie-selectoren"
+msgstr "Variatie-selectoren"
 
 #: ../gucharmap/unicode-blocks.h:160
 msgid "Vertical Forms"
@@ -1140,7 +1139,7 @@ msgstr "Verticale vormen"
 
 #: ../gucharmap/unicode-blocks.h:161
 msgid "Combining Half Marks"
-msgstr "Combinerende halve markering"
+msgstr "Combinerende halve markeringstekens"
 
 #: ../gucharmap/unicode-blocks.h:162
 msgid "CJK Compatibility Forms"
@@ -1162,17 +1161,13 @@ msgstr "Halve- en volle-breedtevormen"
 msgid "Specials"
 msgstr "Speciaal"
 
-# Het lineair-b is een schrift! Het is dus *NIET* een B die lineair is.
-# dus NIET: Lineaire B. Dat is fout! (Tino Meinen)
-# Ja Tino, dat wisten we al. (Wouter Bolsterlee)
 #: ../gucharmap/unicode-blocks.h:167
 msgid "Linear B Syllabary"
-msgstr "Lineair-B-lettergrepen"
+msgstr "Lineair B-lettergrepen"
 
-# Het lineair-b is een schrift. Het is dus *NIET* een B die lineair is.
 #: ../gucharmap/unicode-blocks.h:168
 msgid "Linear B Ideograms"
-msgstr "Lineair-B-ideogrammen"
+msgstr "Lineair B-ideogrammen"
 
 #: ../gucharmap/unicode-blocks.h:169
 msgid "Aegean Numbers"
@@ -1201,10 +1196,10 @@ msgstr "Lycisch"
 msgid "Carian"
 msgstr "Carisch"
 
-# Oud-italiaans/Ouditialiaans
+# Italisch / Etruskisch
 #: ../gucharmap/unicode-blocks.h:175 ../gucharmap/unicode-scripts.h:80
 msgid "Old Italic"
-msgstr "Oud-italiaans"
+msgstr "Oud-Italisch"
 
 #: ../gucharmap/unicode-blocks.h:176 ../gucharmap/unicode-scripts.h:43
 msgid "Gothic"
@@ -1393,11 +1388,11 @@ msgstr "Variatie-selectoren (aanvulling)"
 
 #: ../gucharmap/unicode-blocks.h:221
 msgid "Supplementary Private Use Area-A"
-msgstr "Aanvullend gebied voor privaatgebruik-A"
+msgstr "Aanvullend gebied voor privaatgebruik A"
 
 #: ../gucharmap/unicode-blocks.h:222
 msgid "Supplementary Private Use Area-B"
-msgstr "Aanvullend gebied voor privaatgebruik-B"
+msgstr "Aanvullend gebied voor privaatgebruik B"
 
 #: ../gucharmap/unicode-scripts.h:25
 msgid "Braille"
