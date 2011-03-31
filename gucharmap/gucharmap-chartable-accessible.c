@@ -444,6 +444,26 @@ gucharmap_chartable_accessible_set_scroll_adjustments (GucharmapChartable *chart
 }
 
 static void
+sync_adjustment (GucharmapChartable           *chartable,
+                 GParamSpec                   *pspec,
+                 GucharmapChartableAccessible *accessible)
+{
+  GtkAdjustment *hadjustment, *vadjustment;
+
+  g_object_get (chartable,
+                "hadjustment", &hadjustment,
+                "vadjustment", &vadjustment,
+                NULL);
+  /* hadjustment and vadjustment are set to NULL in
+     gtk_scrolled_window_remove() */
+  if (hadjustment && vadjustment)
+    gucharmap_chartable_accessible_set_scroll_adjustments (chartable,
+                                                           hadjustment,
+                                                           vadjustment,
+                                                           accessible);
+}
+
+static void
 gucharmap_chartable_accessible_initialize (AtkObject *obj,
                                            gpointer  data)
 {
@@ -473,9 +493,16 @@ gucharmap_chartable_accessible_initialize (AtkObject *obj,
                         G_CALLBACK (adjustment_changed), obj);
     }
 
+#if GTK_CHECK_VERSION (2, 91, 2)
+  g_signal_connect_after (chartable, "notify::hadjustment",
+                          G_CALLBACK (sync_adjustment), obj);
+  g_signal_connect_after (chartable, "notify::vadjustment",
+                          G_CALLBACK (sync_adjustment), obj);
+#else
   g_signal_connect_after (chartable, "set-scroll-adjustments",
                           G_CALLBACK (gucharmap_chartable_accessible_set_scroll_adjustments),
                           obj);
+#endif  /* GTK3 */
   g_signal_connect (widget, "size-allocate",
                     G_CALLBACK (size_allocated), obj);
   g_signal_connect (chartable, "notify::active-character",
@@ -511,6 +538,9 @@ gucharmap_chartable_accessible_destroyed (GtkWidget *widget,
   g_signal_handlers_disconnect_by_func (widget,
                                         G_CALLBACK (gucharmap_chartable_accessible_set_scroll_adjustments),
                                         obj);
+  g_signal_handlers_disconnect_by_func (widget,
+					G_CALLBACK (sync_adjustment),
+					obj);
   g_signal_handlers_disconnect_by_func (widget,
                                         G_CALLBACK (size_allocated),
                                         obj);
