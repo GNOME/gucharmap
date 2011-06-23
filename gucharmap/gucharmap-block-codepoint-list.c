@@ -135,6 +135,7 @@ gucharmap_block_codepoint_list_get_property (GObject *object,
       break;
     case PROP_LAST_CODEPOINT:
       g_value_set_uint (value, priv->end);
+      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
