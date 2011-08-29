@@ -1,1068 +1,1399 @@
-# translation of gucharmap.HEAD.po to Belarusian
-# This file is distributed under the same license as the PACKAGE package.
-# Copyright (C) 2003 Free Software Foundation, Inc.
-# Vital Khilko <dojlid@mova.org>, 2003
+# Vital Khilko <dojlid@mova.org>, 2003.
+# Ales Nyakhaychyk <nab@mail.by>, 2003.
+# Ihar Hrachyshka <ihar.hrachyshka@gmail.com>, 2011.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gucharmap HEAD\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-07-27 12:46+0200\n"
-"PO-Revision-Date: 2003-07-28 01:13+0300\n"
-"Last-Translator: Ales Nyakhaychyk <nab@mail.by>\n"
-"Language-Team: Belarusian <i18n@mova.org>\n"
+"Project-Id-Version: gucharmap.master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=gucharmap&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2011-08-04 12:02+0000\n"
+"PO-Revision-Date: 2011-08-29 12:23+0300\n"
+"Last-Translator: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>\n"
+"Language-Team: Belarusian <i18n-bel-gnome@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 0.9.6\n"
 
-#. ID
-#: gucharmap.desktop.in.h:1 gucharmap/gucharmap-window.c:386
-#: gucharmap/gucharmap-window.c:982 gucharmap/imgucharmap.c:209
-msgid "Unicode Character Map"
-msgstr "Табліца знакаў унікоду"
+#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:889
+#: ../gucharmap/main.c:80
+msgid "Character Map"
+msgstr "Табліца знакаў"
 
-#: gucharmap/gucharmap-charmap.c:397
+#: ../gucharmap.desktop.in.in.h:2
+msgid "Insert special characters into documents"
+msgstr "Устаўка знакаў у дакументы"
+
+#: ../gucharmap/gucharmap-charmap.c:600
 msgid "Canonical decomposition:"
-msgstr "Кананічная дэкампазыцыя:"
+msgstr "Кананічная дэкампазіцыя:"
 
-#: gucharmap/gucharmap-charmap.c:437 gucharmap/gucharmap-table.c:327
+#: ../gucharmap/gucharmap-charmap.c:643 ../gucharmap/gucharmap-chartable.c:600
+#: ../gucharmap/gucharmap-chartable.c:732
 msgid "[not a printable character]"
-msgstr "[знак не для друку]"
+msgstr "[знак непрыдатны для выяўлення]"
 
-#: gucharmap/gucharmap-charmap.c:457
+#: ../gucharmap/gucharmap-charmap.c:657
 msgid "General Character Properties"
-msgstr "Галоўныя ўласьцівасьці знака"
+msgstr "Асноўныя ўласцівасці знака"
+
+#: ../gucharmap/gucharmap-charmap.c:663
+msgid "In Unicode since:"
+msgstr "Падтрымка Унікода з:"
 
 #. character category
-#: gucharmap/gucharmap-charmap.c:460
+#: ../gucharmap/gucharmap-charmap.c:667
 msgid "Unicode category:"
-msgstr "Разрад унікоду:"
+msgstr "Катэгорыя Унікоду:"
 
-#: gucharmap/gucharmap-charmap.c:466
+#: ../gucharmap/gucharmap-charmap.c:676
 msgid "Various Useful Representations"
-msgstr "Разнастайныя карысныя прадстаўленьне"
+msgstr "Разнастайныя карысныя прадстаўленні"
 
-#: gucharmap/gucharmap-charmap.c:475
+#: ../gucharmap/gucharmap-charmap.c:686
 msgid "UTF-8:"
 msgstr "UTF-8:"
 
-#: gucharmap/gucharmap-charmap.c:483
-msgid "Octal escaped UTF-8:"
-msgstr "Васьмярычны UTF-8:"
+#: ../gucharmap/gucharmap-charmap.c:694
+msgid "UTF-16:"
+msgstr "UTF-16:"
 
-#: gucharmap/gucharmap-charmap.c:489
-msgid "Decimal entity reference:"
-msgstr ""
+#: ../gucharmap/gucharmap-charmap.c:705
+msgid "C octal escaped UTF-8:"
+msgstr "C-актэт (UTF-8):"
 
-#: gucharmap/gucharmap-charmap.c:495
+#: ../gucharmap/gucharmap-charmap.c:715
+msgid "XML decimal entity:"
+msgstr "Дзесятковы нумар XML:"
+
+#: ../gucharmap/gucharmap-charmap.c:726
 msgid "Annotations and Cross References"
-msgstr "Заўвагі й перакрыжаваныя спасылкі"
+msgstr "Анатацыі і перасылкі"
 
-#: gucharmap/gucharmap-charmap.c:502
+#: ../gucharmap/gucharmap-charmap.c:733
 msgid "Alias names:"
-msgstr "Сынонімы назваў:"
+msgstr "Псеўданімы:"
 
-#: gucharmap/gucharmap-charmap.c:511
+#: ../gucharmap/gucharmap-charmap.c:742
 msgid "Notes:"
 msgstr "Заўвагі:"
 
-#: gucharmap/gucharmap-charmap.c:520
+#: ../gucharmap/gucharmap-charmap.c:751
 msgid "See also:"
-msgstr "Глядзіце так сама:"
+msgstr "Таксама гл.:"
 
-#: gucharmap/gucharmap-charmap.c:529
+#: ../gucharmap/gucharmap-charmap.c:760
 msgid "Approximate equivalents:"
-msgstr "Блізкія па значэньню:"
+msgstr "Падобныя знакі:"
 
-#: gucharmap/gucharmap-charmap.c:538
+#: ../gucharmap/gucharmap-charmap.c:769
 msgid "Equivalents:"
-msgstr "Раўназначныя:"
+msgstr "Раўназначныя знакі:"
 
-#: gucharmap/gucharmap-charmap.c:553
+#: ../gucharmap/gucharmap-charmap.c:785
 msgid "CJK Ideograph Information"
-msgstr "Зьвесткі пра ўмоўныя знакі CJK"
+msgstr "Інфармацыя аб ідэаграме CJK"
 
-#: gucharmap/gucharmap-charmap.c:558
+#: ../gucharmap/gucharmap-charmap.c:790
 msgid "Definition in English:"
-msgstr "Ангельскамоўнае вызначэньне:"
+msgstr "Англійскае азначэнне:"
 
-#: gucharmap/gucharmap-charmap.c:563
+#: ../gucharmap/gucharmap-charmap.c:795
 msgid "Mandarin Pronunciation:"
-msgstr "Мандарынавая фанэтычная транскрыпцыя:"
+msgstr "Вымаўленне путунхуа:"
 
-#: gucharmap/gucharmap-charmap.c:568
+#: ../gucharmap/gucharmap-charmap.c:800
+msgid "Cantonese Pronunciation:"
+msgstr "Вымаўленне юэ:"
+
+#: ../gucharmap/gucharmap-charmap.c:805
 msgid "Japanese On Pronunciation:"
-msgstr "Японская фанэтычная транскрыпцыя Он:"
+msgstr "Японскае вымаўленне он'ёмі:"
 
-#: gucharmap/gucharmap-charmap.c:573
+#: ../gucharmap/gucharmap-charmap.c:810
 msgid "Japanese Kun Pronunciation:"
-msgstr "Японская фанэтычная транскрыпцыя Кун:"
+msgstr "Японскае вымаўленне кун'ёмі:"
 
-#: gucharmap/gucharmap-charmap.c:578
+#: ../gucharmap/gucharmap-charmap.c:815
 msgid "Tang Pronunciation:"
-msgstr "Фанэтычная транскрыпцыя Тэнг:"
+msgstr "Вымаўленне Тан:"
 
-#: gucharmap/gucharmap-charmap.c:583
+#: ../gucharmap/gucharmap-charmap.c:820
 msgid "Korean Pronunciation:"
-msgstr "Карэйская фанэтычная транскрыпцыя:"
+msgstr "Карэйскае вымаўленне:"
 
-#: gucharmap/gucharmap-charmap.c:890
+#: ../gucharmap/gucharmap-charmap.c:1209
 msgid "Characte_r Table"
-msgstr "Табліца _знакаў"
+msgstr "_Табліца знакаў"
 
-#: gucharmap/gucharmap-charmap.c:893
+#: ../gucharmap/gucharmap-charmap.c:1256
 msgid "Character _Details"
-msgstr "Падра_бязнасьці знака"
+msgstr "_Падрабязнасці аб знаку"
 
-#: gucharmap/gucharmap-charmap.c:911
-msgid "List of Unicode Blocks"
-msgstr "Сьпіс блёкаў Унікоду"
-
-#: gucharmap/gucharmap-mini-fontsel.c:197
-msgid "Font"
-msgstr "Шрыфт"
-
-#: gucharmap/gucharmap-mini-fontsel.c:204
-msgid "Font Family"
-msgstr "Сямейства шрыфтоў"
-
-#: gucharmap/gucharmap-mini-fontsel.c:208
-msgid "_Bold"
-msgstr "_Тлусты"
-
-#: gucharmap/gucharmap-mini-fontsel.c:213
-msgid "_Italic"
-msgstr "На_хілены"
-
-#: gucharmap/gucharmap-mini-fontsel.c:222
-msgid "Font Size"
-msgstr "Памер шрыфта"
-
-#: gucharmap/gucharmap-table.c:1417
-msgid "Clipboard is empty."
-msgstr "Буфэр абмену пусты."
-
-#: gucharmap/gucharmap-table.c:1419
-msgid "There is no selected text."
-msgstr "Няма вылучанага тэкста."
-
-#: gucharmap/gucharmap-table.c:1427 gucharmap/gucharmap-table.c:1690
+#: ../gucharmap/gucharmap-chartable.c:1466
 msgid "Unknown character, unable to identify."
-msgstr "Невядомы знак, немагчыма вызначыць."
+msgstr "Невядомы знак, яго не ўдалося апазнаць."
 
-#: gucharmap/gucharmap-table.c:1431 gucharmap/gucharmap-table.c:1694
+#: ../gucharmap/gucharmap-chartable.c:1468
+#: ../gucharmap/gucharmap-search-dialog.c:589
+msgid "Not found."
+msgstr "Не знойдзена."
+
+#: ../gucharmap/gucharmap-chartable.c:1471
 msgid "Character found."
-msgstr "Знак адшуканы."
+msgstr "Знак знойдзены."
 
-#: gucharmap/gucharmap-table.c:1761
+#: ../gucharmap/gucharmap-chartable-accessible.c:829
 msgid "Character Table"
 msgstr "Табліца знакаў"
 
-#: gucharmap/gucharmap-unicode-info.c:140
-#, c-format
-msgid "HANGUL SYLLABLE %s%s%s"
-msgstr "ХАНГУЛЬСКІ СЛОГ %s%s%s"
+#: ../gucharmap/gucharmap-mini-fontsel.c:282
+msgid "Font"
+msgstr "Шрыфт"
 
-#: gucharmap/gucharmap-unicode-info.c:151
-msgid "<CJK Ideograph Extension A>"
-msgstr "<Пашырэньне A ўмоўных знакаў CJK>"
+#: ../gucharmap/gucharmap-mini-fontsel.c:295
+msgid "Font Family"
+msgstr "Гарнітура"
 
-#: gucharmap/gucharmap-unicode-info.c:153
-msgid "<CJK Ideograph>"
-msgstr "<Умоўныя знакі CJK>"
+#: ../gucharmap/gucharmap-mini-fontsel.c:313
+msgid "Font Size"
+msgstr "Памер шрыфту"
 
-#: gucharmap/gucharmap-unicode-info.c:157
+#: ../gucharmap/gucharmap-settings.c:71
+msgid "GConf could not be initialized."
+msgstr "Не ўдалося ініцыяваць GConf."
+
+#. Unicode assigns "Common" as the script name for any character not
+#. * specifically listed in Scripts.txt
+#: ../gucharmap/gucharmap-script-codepoint-list.c:463
+#: ../gucharmap/unicode-scripts.h:32
+msgid "Common"
+msgstr "Агульныя знакі"
+
+#: ../gucharmap/gucharmap-unicode-info.c:100
 msgid "<Non Private Use High Surrogate>"
-msgstr ""
+msgstr "<Верхні сурагат не для асабістага выкарыстання>"
 
-#: gucharmap/gucharmap-unicode-info.c:159
+#: ../gucharmap/gucharmap-unicode-info.c:102
 msgid "<Private Use High Surrogate>"
-msgstr ""
+msgstr "<Верхні сурагат для асабістага выкарыстання>"
 
-#: gucharmap/gucharmap-unicode-info.c:161
-msgid "<Low Surrogate, Last>"
-msgstr ""
+#: ../gucharmap/gucharmap-unicode-info.c:104
+msgid "<Low Surrogate>"
+msgstr "<Ніжні сурагат>"
 
-#: gucharmap/gucharmap-unicode-info.c:163
+#: ../gucharmap/gucharmap-unicode-info.c:106
 msgid "<Private Use>"
-msgstr ""
+msgstr "<Для асабістага выкарыстання>"
 
-#: gucharmap/gucharmap-unicode-info.c:165
+#: ../gucharmap/gucharmap-unicode-info.c:108
 msgid "<Plane 15 Private Use>"
-msgstr ""
+msgstr "<Абшар 15 для асабістага выкарыстання>"
 
-#: gucharmap/gucharmap-unicode-info.c:167
+#: ../gucharmap/gucharmap-unicode-info.c:110
 msgid "<Plane 16 Private Use>"
-msgstr ""
+msgstr "<Абшар 16 для асабістага выкарыстання>"
 
-#: gucharmap/gucharmap-unicode-info.c:169
-msgid "<CJK Ideograph Extension B>"
-msgstr "<Пашырэньне B ўмоўных знакаў CJK>"
-
-#: gucharmap/gucharmap-unicode-info.c:174
+#: ../gucharmap/gucharmap-unicode-info.c:115
 msgid "<not assigned>"
-msgstr ""
+msgstr "<не прызначаны>"
 
-#: gucharmap/gucharmap-unicode-info.c:186
+#: ../gucharmap/gucharmap-unicode-info.c:128
 msgid "Other, Control"
-msgstr ""
+msgstr "Іншае, кіроўныя знакі"
 
-#: gucharmap/gucharmap-unicode-info.c:187
+#: ../gucharmap/gucharmap-unicode-info.c:129
 msgid "Other, Format"
-msgstr ""
+msgstr "Іншае, знакі фарматавання"
 
-#: gucharmap/gucharmap-unicode-info.c:188
+#: ../gucharmap/gucharmap-unicode-info.c:130
 msgid "Other, Not Assigned"
-msgstr ""
+msgstr "Іншае, не прызначана"
 
-#: gucharmap/gucharmap-unicode-info.c:189
+#: ../gucharmap/gucharmap-unicode-info.c:131
 msgid "Other, Private Use"
-msgstr ""
+msgstr "Іншае, для асабістага выкарыстання"
 
-#: gucharmap/gucharmap-unicode-info.c:190
+#: ../gucharmap/gucharmap-unicode-info.c:132
 msgid "Other, Surrogate"
-msgstr ""
+msgstr "Іншае, сурагат"
 
-#: gucharmap/gucharmap-unicode-info.c:191
+#: ../gucharmap/gucharmap-unicode-info.c:133
 msgid "Letter, Lowercase"
-msgstr ""
+msgstr "Літара, ніжні рэгістр"
 
-#: gucharmap/gucharmap-unicode-info.c:192
+#: ../gucharmap/gucharmap-unicode-info.c:134
 msgid "Letter, Modifier"
-msgstr ""
+msgstr "Літара, мадыфікатар"
 
-#: gucharmap/gucharmap-unicode-info.c:193
+#: ../gucharmap/gucharmap-unicode-info.c:135
 msgid "Letter, Other"
-msgstr ""
+msgstr "Літара, іншае"
 
-#: gucharmap/gucharmap-unicode-info.c:194
+#: ../gucharmap/gucharmap-unicode-info.c:136
 msgid "Letter, Titlecase"
-msgstr ""
+msgstr "Літара, загаловак"
 
-#: gucharmap/gucharmap-unicode-info.c:195
+#: ../gucharmap/gucharmap-unicode-info.c:137
 msgid "Letter, Uppercase"
-msgstr ""
+msgstr "Літара, верхні рэгістр"
 
-#: gucharmap/gucharmap-unicode-info.c:196
+#: ../gucharmap/gucharmap-unicode-info.c:138
 msgid "Mark, Spacing Combining"
-msgstr ""
+msgstr "Значок, спалучальны, патрабуе дадатковага месца ў радку"
 
-#: gucharmap/gucharmap-unicode-info.c:197
+#: ../gucharmap/gucharmap-unicode-info.c:139
 msgid "Mark, Enclosing"
-msgstr ""
+msgstr "Значок, які ўпісвае папярэдні знак"
 
-#: gucharmap/gucharmap-unicode-info.c:198
+#: ../gucharmap/gucharmap-unicode-info.c:140
 msgid "Mark, Non-Spacing"
-msgstr ""
+msgstr "Значок, не патрабуе дадатковага месца ў радку"
 
-#: gucharmap/gucharmap-unicode-info.c:199
+#: ../gucharmap/gucharmap-unicode-info.c:141
 msgid "Number, Decimal Digit"
-msgstr ""
+msgstr "Лічба, Дзесятковая сістэма злічэння"
 
-#: gucharmap/gucharmap-unicode-info.c:200
+#: ../gucharmap/gucharmap-unicode-info.c:142
 msgid "Number, Letter"
-msgstr ""
+msgstr "Лічба, літара"
 
-#: gucharmap/gucharmap-unicode-info.c:201
+#: ../gucharmap/gucharmap-unicode-info.c:143
 msgid "Number, Other"
-msgstr ""
+msgstr "Лічба, іншае"
 
-#: gucharmap/gucharmap-unicode-info.c:202
+#: ../gucharmap/gucharmap-unicode-info.c:144
 msgid "Punctuation, Connector"
-msgstr ""
+msgstr "Пунктуацыя, якая спалучае часткі слова"
 
-#: gucharmap/gucharmap-unicode-info.c:203
+#: ../gucharmap/gucharmap-unicode-info.c:145
 msgid "Punctuation, Dash"
-msgstr ""
+msgstr "Пунктуацыя, злучкі і працяжнікі"
 
-#: gucharmap/gucharmap-unicode-info.c:204
+#: ../gucharmap/gucharmap-unicode-info.c:146
 msgid "Punctuation, Close"
-msgstr ""
+msgstr "Пунктуацыя, закрывальны знак"
 
-#: gucharmap/gucharmap-unicode-info.c:205
+#: ../gucharmap/gucharmap-unicode-info.c:147
 msgid "Punctuation, Final Quote"
-msgstr ""
+msgstr "Пунктуацыя, закрывальны знак двукосся"
 
-#: gucharmap/gucharmap-unicode-info.c:206
+#: ../gucharmap/gucharmap-unicode-info.c:148
 msgid "Punctuation, Initial Quote"
-msgstr ""
+msgstr "Пунктуацыя, пачатковы знак двукосся"
 
-#: gucharmap/gucharmap-unicode-info.c:207
+#: ../gucharmap/gucharmap-unicode-info.c:149
 msgid "Punctuation, Other"
-msgstr ""
+msgstr "Пунктуацыя, іншае"
 
-#: gucharmap/gucharmap-unicode-info.c:208
+#: ../gucharmap/gucharmap-unicode-info.c:150
 msgid "Punctuation, Open"
-msgstr ""
+msgstr "Пунктуацыя, адкрывальны знак"
 
-#: gucharmap/gucharmap-unicode-info.c:209
+#: ../gucharmap/gucharmap-unicode-info.c:151
 msgid "Symbol, Currency"
-msgstr ""
+msgstr "Сімвал, валюта"
 
-#: gucharmap/gucharmap-unicode-info.c:210
+#: ../gucharmap/gucharmap-unicode-info.c:152
 msgid "Symbol, Modifier"
-msgstr ""
+msgstr "Сімвал, мадыфікатар"
 
-#: gucharmap/gucharmap-unicode-info.c:211
+#: ../gucharmap/gucharmap-unicode-info.c:153
 msgid "Symbol, Math"
-msgstr ""
+msgstr "Сімвал, матэматыка"
 
-#: gucharmap/gucharmap-unicode-info.c:212
+#: ../gucharmap/gucharmap-unicode-info.c:154
 msgid "Symbol, Other"
-msgstr ""
+msgstr "Сімвал, іншае"
 
-#: gucharmap/gucharmap-unicode-info.c:213
+#: ../gucharmap/gucharmap-unicode-info.c:155
 msgid "Separator, Line"
-msgstr ""
+msgstr "Падзяляльнік, падзел радкоў"
 
-#: gucharmap/gucharmap-unicode-info.c:214
+#: ../gucharmap/gucharmap-unicode-info.c:156
 msgid "Separator, Paragraph"
-msgstr ""
+msgstr "Падзяляльнік, падзел абзацаў"
 
-#: gucharmap/gucharmap-unicode-info.c:215
+#: ../gucharmap/gucharmap-unicode-info.c:157
 msgid "Separator, Space"
-msgstr ""
+msgstr "Падзяляльнік, прабелы"
 
-#: gucharmap/gucharmap-window.c:56
-msgid "Information"
-msgstr "Зьвесткі"
+#: ../gucharmap/gucharmap-window.c:198
+msgid "Searching…"
+msgstr "Пошук..."
 
-#: gucharmap/gucharmap-window.c:118
-#, c-format
+#: ../gucharmap/gucharmap-window.c:457
 msgid ""
-"Not a valid code point to jump to. Must be a hexadecimal number between 0 "
-"and %4.4X."
+"Gucharmap is free software; you can redistribute it and/or modify it under "
+"the terms of the GNU General Public License as published by the Free "
+"Software Foundation; either version 3 of the License, or (at your option) "
+"any later version."
 msgstr ""
-"немагчыма перайсьці да нерэчаіснага кода. Гэта мусіць быць шаснацацірычны "
-"нумар паміж 0 і %4.4X."
+"Gucharmap з'яўляецца свабодным апраграмаваннем. Вы можаце распаўсюджваць яго згодна з умовамі Агульнай Грамадскай Ліцэнзіі GNU (GPL), апублікаванай Фондам свабоднага апраграмавання, версіі 2 ці любой пазнейшай."
 
-#: gucharmap/gucharmap-window.c:142
-msgid "Jump to Unicode Code Point"
-msgstr "Перайсьці да кода Ўнікоду"
+#: ../gucharmap/gucharmap-window.c:461
+msgid ""
+"Permission is hereby granted, free of charge, to any person obtaining a copy "
+"of the Unicode data files to deal in them without restriction, including "
+"without limitation the rights to use, copy, modify, merge, publish, "
+"distribute, and/or sell copies."
+msgstr ""
+"Мы даем усім, хто атрымаў копію файлаў даных Унікоду, дазвол на іх бясплатнае неабмежаванае выкарыстанне, "
+"у тым ліку на карыстанне, капіраванне, мадыфікацыю, аб'яднанне з іншымі данымі, публікацыю, распаўсюджванне, а таксама продаж копій."
 
-#: gucharmap/gucharmap-window.c:159
-msgid "_Enter hexadecimal Unicode code point:"
-msgstr "_Увядзіце код Унікоду:"
+#: ../gucharmap/gucharmap-window.c:465
+msgid ""
+"Gucharmap and the Unicode data files are distributed in the hope that they "
+"will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty "
+"of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General "
+"Public License and Unicode Copyright for more details."
+msgstr ""
+"Gucharmap і файлы даных Унікоду распаўсюджваюцца з надзеяй, што яны будуць карыснымі, але без ніякіх гарантый, у тым ліку камерцыйнай вартасці і наогул іх карысці. Падрабязней глядзіце ў тэксце Агульнай Грамадскай Ліцэнзіі GNU (GPL)."
 
-#: gucharmap/gucharmap-window.c:218
-msgid "Not found."
-msgstr "Ня знойдзены."
+#: ../gucharmap/gucharmap-window.c:469
+msgid ""
+"You should have received a copy of the GNU General Public License along with "
+"Gucharmap; if not, write to the Free Software Foundation, Inc., 59 Temple "
+"Place, Suite 330, Boston, MA  02110-1301  USA"
+msgstr ""
+"Вы павінны былі атрымаць копію Агульнай Грамадскай Ліцэнзіі GNU (GPL) разам з Gucharmap. Калі вы не атрымалі яе, паведаміце пра гэта Фонду свабоднага апраграмавання на адрас: the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02110-1301  USA"
 
-#: gucharmap/gucharmap-window.c:222
-msgid "Nothing to search for."
-msgstr "Няма што шукаць."
+#: ../gucharmap/gucharmap-window.c:472
+msgid ""
+"Also you should have received a copy of the Unicode Copyright along with "
+"Gucharmap; you can always find it at Unicode's website: http://www.unicode."
+"org/copyright.html"
+msgstr ""
+"Таксама вы павінны былі атрымаць копію паведамлення аб аўтарскіх правах Унікоду разам з Gucharmap. Вы заўсёды можаце знайсці яе на сеціўнай пляцоўцы Унікоду: http://www.unicode.org/copyright.html"
 
-#: gucharmap/gucharmap-window.c:265
-msgid "Find"
-msgstr "Пошук"
+#: ../gucharmap/gucharmap-window.c:487 ../gucharmap/main.c:37
+msgid "GNOME Character Map"
+msgstr "Карта знакаў GNOME"
 
-#: gucharmap/gucharmap-window.c:281
-msgid "_Search:"
-msgstr "По_шук:"
+#: ../gucharmap/gucharmap-window.c:489
+msgid "Based on the Unicode Character Database 6.0.0"
+msgstr "На аснове базы даных знакаў Унікоду 6.0.0"
 
-#: gucharmap/gucharmap-window.c:379
+#: ../gucharmap/gucharmap-window.c:498
 msgid "translator-credits"
 msgstr ""
-"Беларуская спулка перакладчыкаў GNU/Linux "
-"Апошні перакладчык: "
-"\tАлесь Няхайчык <nab@mail.by> "
-"Хатняя старонка спулкі: "
-"\thttp://www.i18n.linux.by/ "
-"Электронная скрыня: "
-"\ti18n@mova.org"
+"Алесь Няхайчык <nab@mail.by>\n"
+"Ihar Hrachyshka <ihar.hrachyshka@gmail.com>"
 
-#: gucharmap/gucharmap-window.c:526
+#: ../gucharmap/gucharmap-window.c:577 ../gucharmap/gucharmap-window.c:855
+msgid "Next Script"
+msgstr "Да наступнага пісьма"
+
+#: ../gucharmap/gucharmap-window.c:577 ../gucharmap/gucharmap-window.c:857
+msgid "Previous Script"
+msgstr "Да папярэдняга пісьма"
+
+#: ../gucharmap/gucharmap-window.c:582
+msgid "Next Block"
+msgstr "Да наступнага блока"
+
+#: ../gucharmap/gucharmap-window.c:582
+msgid "Previous Block"
+msgstr "Да папярэдняга блока"
+
+#: ../gucharmap/gucharmap-window.c:818
 msgid "_File"
 msgstr "_Файл"
 
-#: gucharmap/gucharmap-window.c:528
+#: ../gucharmap/gucharmap-window.c:819
 msgid "_View"
-msgstr "_Выгляд"
+msgstr "_Від"
 
-#: gucharmap/gucharmap-window.c:530
+#: ../gucharmap/gucharmap-window.c:820
 msgid "_Search"
-msgstr "_Пошук"
+msgstr "По_шук"
 
-#: gucharmap/gucharmap-window.c:532
+#: ../gucharmap/gucharmap-window.c:821
 msgid "_Go"
-msgstr "_Пераход"
+msgstr "Пера_ход"
 
-#. ctrl-+ or ctrl-=
-#: gucharmap/gucharmap-window.c:553
-msgid "Zoom _In"
-msgstr "Маштаб _+"
-
-#. ctrl--
-#: gucharmap/gucharmap-window.c:565
-msgid "Zoom _Out"
-msgstr "Маштаб _-"
-
-#: gucharmap/gucharmap-window.c:577
-msgid "Snap Columns to Power of Two"
-msgstr ""
-
-#: gucharmap/gucharmap-window.c:588
-msgid "_Find..."
-msgstr "По_шук..."
-
-#: gucharmap/gucharmap-window.c:598
-msgid "Find _Next"
-msgstr "Шукаць _далей"
-
-#: gucharmap/gucharmap-window.c:608
-msgid "Find _Previous"
-msgstr "Шукаць _раней"
-
-#: gucharmap/gucharmap-window.c:623
-msgid "Code _Point..."
-msgstr "_Код..."
-
-#: gucharmap/gucharmap-window.c:630
-msgid "Character in _Clipboard"
-msgstr "Знак у _буфэры абмену"
-
-#: gucharmap/gucharmap-window.c:666
-msgid "_Next Character"
-msgstr "_Наступны знак"
-
-#: gucharmap/gucharmap-window.c:673
-msgid "_Previous Character"
-msgstr "_Папярэдні знак"
-
-#. make the help menu
-#: gucharmap/gucharmap-window.c:686
+#: ../gucharmap/gucharmap-window.c:822
 msgid "_Help"
-msgstr "_Даведка"
+msgstr "_Дапамога"
 
-#: gucharmap/gucharmap-window.c:777
+#: ../gucharmap/gucharmap-window.c:825
+msgid "Page _Setup"
+msgstr "Настройка _старонкі"
+
+#: ../gucharmap/gucharmap-window.c:846
+msgid "Find _Next"
+msgstr "_Шукаць наперад"
+
+#: ../gucharmap/gucharmap-window.c:848
+msgid "Find _Previous"
+msgstr "Шукаць _назад"
+
+#: ../gucharmap/gucharmap-window.c:851
+msgid "_Next Character"
+msgstr "Да _наступнага знака"
+
+#: ../gucharmap/gucharmap-window.c:853
+msgid "_Previous Character"
+msgstr "Да _папярэдняга знака"
+
+#: ../gucharmap/gucharmap-window.c:860
+msgid "_Contents"
+msgstr "_Змест"
+
+#: ../gucharmap/gucharmap-window.c:862
+msgid "_About"
+msgstr "_Аб праграме"
+
+#: ../gucharmap/gucharmap-window.c:872
+msgid "By _Script"
+msgstr "_Сістэмы пісьма"
+
+#: ../gucharmap/gucharmap-window.c:874
+msgid "By _Unicode Block"
+msgstr "_Блокі Унікоду"
+
+#: ../gucharmap/gucharmap-window.c:879
+msgid "Sho_w only glyphs from this font"
+msgstr "Паказваць толькі _гліфы шрыфту"
+
+#: ../gucharmap/gucharmap-window.c:882
+msgid "Snap _Columns to Power of Two"
+msgstr "Па_шырыць слупкі ўдвая"
+
+#: ../gucharmap/gucharmap-window.c:951
 msgid "_Text to copy:"
-msgstr "_Тэкст для капіяваньня:"
+msgstr "_Тэкст для капіравання:"
 
-#: gucharmap/gucharmap-window.c:798
+#: ../gucharmap/gucharmap-window.c:958
 msgid "Copy to the clipboard."
-msgstr "Скапіяваць у буфэр абмену."
+msgstr "Скапіраваць у буфер абмену."
 
-#: gucharmap/gucharmap-window.c:939
-msgid "Back"
-msgstr "Назад"
-
-#: gucharmap/gucharmap-window.c:947
-msgid "Forward"
-msgstr "Наперад"
-
-#: gucharmap/main.c:41
+#: ../gucharmap/main.c:55
 msgid "Font to start with; ex: 'Serif 27'"
-msgstr "Шрыфт пачынаецца з; напрыклад: \"Serif 27\""
+msgstr "Пачатковы шрыфт, напрыклад: \"Serif 27\""
 
-#: gucharmap/unicode/unicode_blocks.cI:7
+#: ../gucharmap/main.c:55
+msgid "FONT"
+msgstr "ШРЫФТ"
+
+#: ../gucharmap/unicode-blocks.h:14
 msgid "Basic Latin"
-msgstr "Асноўная лацінка"
+msgstr "Асноўная лацініца"
 
-#: gucharmap/unicode/unicode_blocks.cI:8
+#: ../gucharmap/unicode-blocks.h:15
 msgid "Latin-1 Supplement"
-msgstr "Дабаўлены Latin-1"
+msgstr "Дадатак Latin-1"
 
-#: gucharmap/unicode/unicode_blocks.cI:9
+#: ../gucharmap/unicode-blocks.h:16
 msgid "Latin Extended-A"
-msgstr "Пашыраная лацінка A"
+msgstr "Пашыраная лацініца A"
 
-#: gucharmap/unicode/unicode_blocks.cI:10
+#: ../gucharmap/unicode-blocks.h:17
 msgid "Latin Extended-B"
-msgstr "Пашыраная лацінка B"
+msgstr "Пашыраная лацініца B"
 
-#: gucharmap/unicode/unicode_blocks.cI:11
+#: ../gucharmap/unicode-blocks.h:18
 msgid "IPA Extensions"
-msgstr "Пашырэньні IPA"
+msgstr "Пашырэнні IPA"
 
-#: gucharmap/unicode/unicode_blocks.cI:12
+#: ../gucharmap/unicode-blocks.h:19
 msgid "Spacing Modifier Letters"
-msgstr ""
+msgstr "Літары-мадыфікатары, якія патрабуюць месца"
 
-#: gucharmap/unicode/unicode_blocks.cI:13
+#: ../gucharmap/unicode-blocks.h:20
 msgid "Combining Diacritical Marks"
-msgstr ""
+msgstr "Спалучальныя дыякрытычныя значкі"
 
-#: gucharmap/unicode/unicode_blocks.cI:14
+#: ../gucharmap/unicode-blocks.h:21
 msgid "Greek and Coptic"
-msgstr "Грэцкія й Копскія літары"
+msgstr "Грэцкія і копцкія знакі"
 
-#: gucharmap/unicode/unicode_blocks.cI:15
+#: ../gucharmap/unicode-blocks.h:22 ../gucharmap/unicode-scripts.h:36
 msgid "Cyrillic"
-msgstr "Кірылічныя літары"
+msgstr "Кірыліца"
 
-#: gucharmap/unicode/unicode_blocks.cI:16
-msgid "Cyrillic Supplementary"
-msgstr "Дадатковыя кірылічныя літары"
+#: ../gucharmap/unicode-blocks.h:23
+msgid "Cyrillic Supplement"
+msgstr "Дадатковыя кірылічныя знакі"
 
-#: gucharmap/unicode/unicode_blocks.cI:17
+#: ../gucharmap/unicode-blocks.h:24 ../gucharmap/unicode-scripts.h:17
 msgid "Armenian"
-msgstr "Армянскія літары"
+msgstr "Армянскае пісьмо"
 
-#: gucharmap/unicode/unicode_blocks.cI:18
+#: ../gucharmap/unicode-blocks.h:25 ../gucharmap/unicode-scripts.h:50
 msgid "Hebrew"
-msgstr "Габрайскія літары"
+msgstr "Іўрыт"
 
-#: gucharmap/unicode/unicode_blocks.cI:19
+#: ../gucharmap/unicode-blocks.h:26 ../gucharmap/unicode-scripts.h:16
 msgid "Arabic"
-msgstr "Арабскія іерогліфы"
+msgstr "Арабскае пісьмо"
 
-#: gucharmap/unicode/unicode_blocks.cI:20
+#: ../gucharmap/unicode-blocks.h:27 ../gucharmap/unicode-scripts.h:96
 msgid "Syriac"
-msgstr ""
+msgstr "Сірыйскае пісьмо"
 
-#: gucharmap/unicode/unicode_blocks.cI:21
+#: ../gucharmap/unicode-blocks.h:28
+msgid "Arabic Supplement"
+msgstr "Дадатковыя арабскія знакі"
+
+#: ../gucharmap/unicode-blocks.h:29 ../gucharmap/unicode-scripts.h:104
 msgid "Thaana"
-msgstr ""
+msgstr "Тана"
 
-#: gucharmap/unicode/unicode_blocks.cI:22
+#: ../gucharmap/unicode-blocks.h:30 ../gucharmap/unicode-scripts.h:76
+msgid "N'Ko"
+msgstr "Нко"
+
+#: ../gucharmap/unicode-blocks.h:31 ../gucharmap/unicode-scripts.h:90
+msgid "Samaritan"
+msgstr "Самарыцянскае пісьмо"
+
+#: ../gucharmap/unicode-blocks.h:32 ../gucharmap/unicode-scripts.h:72
+msgid "Mandaic"
+msgstr "Мандэйскае пісьмо"
+
+#: ../gucharmap/unicode-blocks.h:33 ../gucharmap/unicode-scripts.h:38
 msgid "Devanagari"
-msgstr ""
+msgstr "Дэванагары"
 
-#: gucharmap/unicode/unicode_blocks.cI:23
+#: ../gucharmap/unicode-blocks.h:34 ../gucharmap/unicode-scripts.h:22
 msgid "Bengali"
-msgstr "Бэнгальскія"
+msgstr "Бенгальскае пісьмо"
 
-#: gucharmap/unicode/unicode_blocks.cI:24
+#: ../gucharmap/unicode-blocks.h:35 ../gucharmap/unicode-scripts.h:46
 msgid "Gurmukhi"
-msgstr ""
+msgstr "Гурмукхі"
 
-#: gucharmap/unicode/unicode_blocks.cI:25
+#: ../gucharmap/unicode-blocks.h:36 ../gucharmap/unicode-scripts.h:45
 msgid "Gujarati"
-msgstr ""
+msgstr "Гуджараці"
 
-#: gucharmap/unicode/unicode_blocks.cI:26
+#: ../gucharmap/unicode-blocks.h:37 ../gucharmap/unicode-scripts.h:84
 msgid "Oriya"
-msgstr ""
+msgstr "Орыя"
 
-#: gucharmap/unicode/unicode_blocks.cI:27
+#: ../gucharmap/unicode-blocks.h:38 ../gucharmap/unicode-scripts.h:102
 msgid "Tamil"
-msgstr ""
+msgstr "Тамільскае пісьмо"
 
-#: gucharmap/unicode/unicode_blocks.cI:28
+#: ../gucharmap/unicode-blocks.h:39 ../gucharmap/unicode-scripts.h:103
 msgid "Telugu"
-msgstr ""
+msgstr "Тэлугу"
 
-#: gucharmap/unicode/unicode_blocks.cI:29
+#: ../gucharmap/unicode-blocks.h:40 ../gucharmap/unicode-scripts.h:58
 msgid "Kannada"
-msgstr ""
+msgstr "Канада"
 
-#: gucharmap/unicode/unicode_blocks.cI:30
+#: ../gucharmap/unicode-blocks.h:41 ../gucharmap/unicode-scripts.h:71
 msgid "Malayalam"
-msgstr ""
+msgstr "Малаялам"
 
-#: gucharmap/unicode/unicode_blocks.cI:31
+#: ../gucharmap/unicode-blocks.h:42 ../gucharmap/unicode-scripts.h:93
 msgid "Sinhala"
-msgstr ""
+msgstr "Сінгальскае пісьмо"
 
-#: gucharmap/unicode/unicode_blocks.cI:32
+#: ../gucharmap/unicode-blocks.h:43 ../gucharmap/unicode-scripts.h:105
 msgid "Thai"
-msgstr ""
+msgstr "Тайскае пісьмо"
 
-#: gucharmap/unicode/unicode_blocks.cI:33
+#: ../gucharmap/unicode-blocks.h:44 ../gucharmap/unicode-scripts.h:63
 msgid "Lao"
-msgstr ""
+msgstr "Лаоскае пісьмо"
 
-#: gucharmap/unicode/unicode_blocks.cI:34
+#: ../gucharmap/unicode-blocks.h:45 ../gucharmap/unicode-scripts.h:106
 msgid "Tibetan"
-msgstr ""
+msgstr "Тыбецкае пісьмо"
 
-#: gucharmap/unicode/unicode_blocks.cI:35
+#: ../gucharmap/unicode-blocks.h:46 ../gucharmap/unicode-scripts.h:75
 msgid "Myanmar"
-msgstr ""
+msgstr "М'янма"
 
-#: gucharmap/unicode/unicode_blocks.cI:36
+#: ../gucharmap/unicode-blocks.h:47 ../gucharmap/unicode-scripts.h:41
 msgid "Georgian"
-msgstr "Грузынскія літары"
+msgstr "Грузінскае пісьмо"
 
-#: gucharmap/unicode/unicode_blocks.cI:37
+#: ../gucharmap/unicode-blocks.h:48
 msgid "Hangul Jamo"
-msgstr ""
+msgstr "Хангыль"
 
-#: gucharmap/unicode/unicode_blocks.cI:38
+#: ../gucharmap/unicode-blocks.h:49 ../gucharmap/unicode-scripts.h:40
 msgid "Ethiopic"
-msgstr ""
+msgstr "Эфіопскае пісьмо"
 
-#: gucharmap/unicode/unicode_blocks.cI:39
+#: ../gucharmap/unicode-blocks.h:50
+msgid "Ethiopic Supplement"
+msgstr "Дадатковыя эфіопскія знакі"
+
+#: ../gucharmap/unicode-blocks.h:51 ../gucharmap/unicode-scripts.h:31
 msgid "Cherokee"
-msgstr ""
+msgstr "Чэрокі"
 
-#: gucharmap/unicode/unicode_blocks.cI:40
+#: ../gucharmap/unicode-blocks.h:52
 msgid "Unified Canadian Aboriginal Syllabics"
-msgstr ""
+msgstr "Аб'яднанае складовае пісьмо канадскіх абарыгенаў"
 
-#: gucharmap/unicode/unicode_blocks.cI:41
+#: ../gucharmap/unicode-blocks.h:53 ../gucharmap/unicode-scripts.h:78
 msgid "Ogham"
-msgstr ""
+msgstr "Огам"
 
-#: gucharmap/unicode/unicode_blocks.cI:42
+#: ../gucharmap/unicode-blocks.h:54 ../gucharmap/unicode-scripts.h:89
 msgid "Runic"
-msgstr ""
+msgstr "Рунічнае пісьмо"
 
-#: gucharmap/unicode/unicode_blocks.cI:43
+#: ../gucharmap/unicode-blocks.h:55 ../gucharmap/unicode-scripts.h:97
 msgid "Tagalog"
-msgstr ""
+msgstr "Тагальскае пісьмо"
 
-#: gucharmap/unicode/unicode_blocks.cI:44
+#: ../gucharmap/unicode-blocks.h:56 ../gucharmap/unicode-scripts.h:49
 msgid "Hanunoo"
-msgstr ""
+msgstr "Хануно'о"
 
-#: gucharmap/unicode/unicode_blocks.cI:45
+#: ../gucharmap/unicode-blocks.h:57 ../gucharmap/unicode-scripts.h:27
 msgid "Buhid"
-msgstr ""
+msgstr "Бухід"
 
-#: gucharmap/unicode/unicode_blocks.cI:46
+#: ../gucharmap/unicode-blocks.h:58 ../gucharmap/unicode-scripts.h:98
 msgid "Tagbanwa"
-msgstr ""
+msgstr "Тагбанва"
 
-#: gucharmap/unicode/unicode_blocks.cI:47
+#: ../gucharmap/unicode-blocks.h:59 ../gucharmap/unicode-scripts.h:62
 msgid "Khmer"
-msgstr ""
+msgstr "Кхмерскае пісьмо"
 
-#: gucharmap/unicode/unicode_blocks.cI:48
+#: ../gucharmap/unicode-blocks.h:60 ../gucharmap/unicode-scripts.h:74
 msgid "Mongolian"
-msgstr "Мангольскія літары"
+msgstr "Мангольскае пісьмо"
 
-#: gucharmap/unicode/unicode_blocks.cI:49
+#: ../gucharmap/unicode-blocks.h:61
+msgid "Unified Canadian Aboriginal Syllabics Extended"
+msgstr "Аб'яднанае складовае пісьмо канадскіх абарыгенаў, пашыранае"
+
+#: ../gucharmap/unicode-blocks.h:62 ../gucharmap/unicode-scripts.h:66
 msgid "Limbu"
-msgstr ""
+msgstr "Лімбу"
 
-#: gucharmap/unicode/unicode_blocks.cI:50
+#: ../gucharmap/unicode-blocks.h:63 ../gucharmap/unicode-scripts.h:99
 msgid "Tai Le"
-msgstr ""
+msgstr "Тайлэ"
 
-#: gucharmap/unicode/unicode_blocks.cI:51
+#: ../gucharmap/unicode-blocks.h:64 ../gucharmap/unicode-scripts.h:77
+msgid "New Tai Lue"
+msgstr "Новы тайлэ"
+
+#: ../gucharmap/unicode-blocks.h:65
 msgid "Khmer Symbols"
-msgstr ""
+msgstr "Кхмерскія сімвалы"
 
-#: gucharmap/unicode/unicode_blocks.cI:52
+#: ../gucharmap/unicode-blocks.h:66 ../gucharmap/unicode-scripts.h:26
+msgid "Buginese"
+msgstr "Бугійскае пісьмо"
+
+#: ../gucharmap/unicode-blocks.h:67 ../gucharmap/unicode-scripts.h:100
+msgid "Tai Tham"
+msgstr "Лана"
+
+#: ../gucharmap/unicode-blocks.h:68 ../gucharmap/unicode-scripts.h:19
+msgid "Balinese"
+msgstr "Балійскае пісьмо"
+
+#: ../gucharmap/unicode-blocks.h:69 ../gucharmap/unicode-scripts.h:94
+msgid "Sundanese"
+msgstr "Сунданскае пісьмо"
+
+#: ../gucharmap/unicode-blocks.h:70 ../gucharmap/unicode-scripts.h:21
+msgid "Batak"
+msgstr "Батацкае пісьмо"
+
+#: ../gucharmap/unicode-blocks.h:71 ../gucharmap/unicode-scripts.h:65
+msgid "Lepcha"
+msgstr "Лепча"
+
+#: ../gucharmap/unicode-blocks.h:72 ../gucharmap/unicode-scripts.h:79
+msgid "Ol Chiki"
+msgstr "Ол-чыкі"
+
+#: ../gucharmap/unicode-blocks.h:73
+msgid "Vedic Extensions"
+msgstr "Ведыйскія пашырэнні"
+
+#: ../gucharmap/unicode-blocks.h:74
 msgid "Phonetic Extensions"
-msgstr ""
+msgstr "Фанетычныя пашырэнні"
 
-#: gucharmap/unicode/unicode_blocks.cI:53
+#: ../gucharmap/unicode-blocks.h:75
+msgid "Phonetic Extensions Supplement"
+msgstr "Дадатковыя фанетычныя пашырэнні"
+
+#: ../gucharmap/unicode-blocks.h:76
+msgid "Combining Diacritical Marks Supplement"
+msgstr "Дадатковыя спалучальныя дыякрытычныя значкі"
+
+#: ../gucharmap/unicode-blocks.h:77
 msgid "Latin Extended Additional"
-msgstr ""
+msgstr "Дадатковыя пашыраныя лацінічныя знакі"
 
-#: gucharmap/unicode/unicode_blocks.cI:54
+#: ../gucharmap/unicode-blocks.h:78
 msgid "Greek Extended"
-msgstr ""
+msgstr "Пашыраныя грэцкія знакі"
 
-#: gucharmap/unicode/unicode_blocks.cI:55
+#: ../gucharmap/unicode-blocks.h:79
 msgid "General Punctuation"
-msgstr "Галоўныя знакі прыпынку"
+msgstr "Асноўная пунктуацыя"
 
-#: gucharmap/unicode/unicode_blocks.cI:56
+#: ../gucharmap/unicode-blocks.h:80
 msgid "Superscripts and Subscripts"
-msgstr ""
+msgstr "Знакі ў верхнім і ніжнім індэксе"
 
-#: gucharmap/unicode/unicode_blocks.cI:57
+#: ../gucharmap/unicode-blocks.h:81
 msgid "Currency Symbols"
-msgstr "Грашовыя знакі"
+msgstr "Сімвалы валют"
 
-#: gucharmap/unicode/unicode_blocks.cI:58
+#: ../gucharmap/unicode-blocks.h:82
 msgid "Combining Diacritical Marks for Symbols"
-msgstr ""
+msgstr "Спалучальныя дыякрытычныя значкі для сімвалаў"
 
-#: gucharmap/unicode/unicode_blocks.cI:59
+#: ../gucharmap/unicode-blocks.h:83
 msgid "Letterlike Symbols"
-msgstr ""
+msgstr "Сімвалы, падобныя на літары"
 
-#: gucharmap/unicode/unicode_blocks.cI:60
+#: ../gucharmap/unicode-blocks.h:84
 msgid "Number Forms"
-msgstr ""
+msgstr "Формы лічбаў"
 
-#: gucharmap/unicode/unicode_blocks.cI:61
+#: ../gucharmap/unicode-blocks.h:85
 msgid "Arrows"
 msgstr "Стрэлкі"
 
-#: gucharmap/unicode/unicode_blocks.cI:62
+#: ../gucharmap/unicode-blocks.h:86
 msgid "Mathematical Operators"
-msgstr "Матэматычныя дзеяньні"
+msgstr "Матэматычныя аператары"
 
-#: gucharmap/unicode/unicode_blocks.cI:63
+#: ../gucharmap/unicode-blocks.h:87
 msgid "Miscellaneous Technical"
-msgstr ""
+msgstr "Разнастайныя тэхнічныя знакі"
 
-#: gucharmap/unicode/unicode_blocks.cI:64
+#: ../gucharmap/unicode-blocks.h:88
 msgid "Control Pictures"
-msgstr ""
+msgstr "Кіроўныя рысункі"
 
-#: gucharmap/unicode/unicode_blocks.cI:65
+#: ../gucharmap/unicode-blocks.h:89
 msgid "Optical Character Recognition"
-msgstr "Аптычнае распазнаваньне знакаў"
+msgstr "Аптычнае распазнаванне знакаў"
 
-#: gucharmap/unicode/unicode_blocks.cI:66
+#: ../gucharmap/unicode-blocks.h:90
 msgid "Enclosed Alphanumerics"
-msgstr ""
+msgstr "Упісаныя літары і лічбы"
 
-#: gucharmap/unicode/unicode_blocks.cI:67
+#: ../gucharmap/unicode-blocks.h:91
 msgid "Box Drawing"
-msgstr ""
+msgstr "Псеўдаграфіка"
 
-#: gucharmap/unicode/unicode_blocks.cI:68
+#: ../gucharmap/unicode-blocks.h:92
 msgid "Block Elements"
-msgstr ""
+msgstr "Элементы блока"
 
-#: gucharmap/unicode/unicode_blocks.cI:69
+#: ../gucharmap/unicode-blocks.h:93
 msgid "Geometric Shapes"
-msgstr "Ґеамэтрычныя фігуры"
+msgstr "Геаметрычныя фігуры"
 
-#: gucharmap/unicode/unicode_blocks.cI:70
+#: ../gucharmap/unicode-blocks.h:94
 msgid "Miscellaneous Symbols"
-msgstr ""
+msgstr "Разнастайныя сімвалы"
 
-#: gucharmap/unicode/unicode_blocks.cI:71
+#: ../gucharmap/unicode-blocks.h:95
 msgid "Dingbats"
-msgstr ""
+msgstr "Дынгбат"
 
-#: gucharmap/unicode/unicode_blocks.cI:72
+#: ../gucharmap/unicode-blocks.h:96
 msgid "Miscellaneous Mathematical Symbols-A"
-msgstr ""
+msgstr "Разнастайныя матэматычныя сімвалы A"
 
-#: gucharmap/unicode/unicode_blocks.cI:73
+#: ../gucharmap/unicode-blocks.h:97
 msgid "Supplemental Arrows-A"
-msgstr ""
+msgstr "Дадатковыя стрэлкі A"
 
-#: gucharmap/unicode/unicode_blocks.cI:74
+#: ../gucharmap/unicode-blocks.h:98
 msgid "Braille Patterns"
-msgstr ""
+msgstr "Узор Брэйля"
 
-#: gucharmap/unicode/unicode_blocks.cI:75
+#: ../gucharmap/unicode-blocks.h:99
 msgid "Supplemental Arrows-B"
-msgstr ""
+msgstr "Дадатковыя стрэлкі B"
 
-#: gucharmap/unicode/unicode_blocks.cI:76
+#: ../gucharmap/unicode-blocks.h:100
 msgid "Miscellaneous Mathematical Symbols-B"
-msgstr ""
+msgstr "Разнастайныя матэматычныя сімвалы B"
 
-#: gucharmap/unicode/unicode_blocks.cI:77
+#: ../gucharmap/unicode-blocks.h:101
 msgid "Supplemental Mathematical Operators"
-msgstr ""
+msgstr "Дадатковыя матэматычныя аператары"
 
-#: gucharmap/unicode/unicode_blocks.cI:78
+#: ../gucharmap/unicode-blocks.h:102
 msgid "Miscellaneous Symbols and Arrows"
-msgstr ""
+msgstr "Разнастайныя сімвалы і стрэлкі"
 
-#: gucharmap/unicode/unicode_blocks.cI:79
+#: ../gucharmap/unicode-blocks.h:103 ../gucharmap/unicode-scripts.h:42
+msgid "Glagolitic"
+msgstr "Глаголіца"
+
+#: ../gucharmap/unicode-blocks.h:104
+msgid "Latin Extended-C"
+msgstr "Пашыраная лацініца C"
+
+#: ../gucharmap/unicode-blocks.h:105 ../gucharmap/unicode-scripts.h:33
+msgid "Coptic"
+msgstr "Копцкае пісьмо"
+
+#: ../gucharmap/unicode-blocks.h:106
+msgid "Georgian Supplement"
+msgstr "Дадатковыя грузінскія знакі"
+
+#: ../gucharmap/unicode-blocks.h:107 ../gucharmap/unicode-scripts.h:107
+msgid "Tifinagh"
+msgstr "Тыфінаг"
+
+#: ../gucharmap/unicode-blocks.h:108
+msgid "Ethiopic Extended"
+msgstr "Пашыранае эфіопскае пісьмо"
+
+#: ../gucharmap/unicode-blocks.h:109
+msgid "Cyrillic Extended-A"
+msgstr "Пашыраная кірыліца A"
+
+#: ../gucharmap/unicode-blocks.h:110
+msgid "Supplemental Punctuation"
+msgstr "Дадатковая пунктуацыя"
+
+#: ../gucharmap/unicode-blocks.h:111
 msgid "CJK Radicals Supplement"
-msgstr ""
+msgstr "Дадатковыя іерагліфічныя ключы CJK"
 
-#: gucharmap/unicode/unicode_blocks.cI:80
+#: ../gucharmap/unicode-blocks.h:112
 msgid "Kangxi Radicals"
-msgstr ""
+msgstr "Іерагліфічныя ключы Кансі"
 
-#: gucharmap/unicode/unicode_blocks.cI:81
+#: ../gucharmap/unicode-blocks.h:113
 msgid "Ideographic Description Characters"
-msgstr ""
+msgstr "Знакі апісання ідэаграмы"
 
-#: gucharmap/unicode/unicode_blocks.cI:82
+#: ../gucharmap/unicode-blocks.h:114
 msgid "CJK Symbols and Punctuation"
-msgstr ""
+msgstr "Сімвалы і пунктуацыя CJK"
 
-#: gucharmap/unicode/unicode_blocks.cI:83
+#: ../gucharmap/unicode-blocks.h:115 ../gucharmap/unicode-scripts.h:51
 msgid "Hiragana"
-msgstr ""
+msgstr "Хірагана"
 
-#: gucharmap/unicode/unicode_blocks.cI:84
+#: ../gucharmap/unicode-blocks.h:116 ../gucharmap/unicode-scripts.h:59
 msgid "Katakana"
-msgstr ""
+msgstr "Катакана"
 
-#: gucharmap/unicode/unicode_blocks.cI:85
+#: ../gucharmap/unicode-blocks.h:117 ../gucharmap/unicode-scripts.h:23
 msgid "Bopomofo"
-msgstr ""
+msgstr "Чжуінь"
 
-#: gucharmap/unicode/unicode_blocks.cI:86
+#: ../gucharmap/unicode-blocks.h:118
 msgid "Hangul Compatibility Jamo"
-msgstr ""
+msgstr "Сумяшчальны хангыль"
 
-#: gucharmap/unicode/unicode_blocks.cI:87
+#: ../gucharmap/unicode-blocks.h:119
 msgid "Kanbun"
-msgstr ""
+msgstr "Камбун"
 
-#: gucharmap/unicode/unicode_blocks.cI:88
+#: ../gucharmap/unicode-blocks.h:120
 msgid "Bopomofo Extended"
-msgstr ""
+msgstr "Пашыраны чжуінь"
 
-#: gucharmap/unicode/unicode_blocks.cI:89
+#: ../gucharmap/unicode-blocks.h:121
+msgid "CJK Strokes"
+msgstr "Іерагліфічныя рысы CJK"
+
+#: ../gucharmap/unicode-blocks.h:122
 msgid "Katakana Phonetic Extensions"
-msgstr ""
+msgstr "Фанетычныя пашырэнні катакана"
 
-#: gucharmap/unicode/unicode_blocks.cI:90
+#: ../gucharmap/unicode-blocks.h:123
 msgid "Enclosed CJK Letters and Months"
-msgstr ""
+msgstr "Упісаныя літары і месяцы CJK"
 
-#: gucharmap/unicode/unicode_blocks.cI:91
+#: ../gucharmap/unicode-blocks.h:124
 msgid "CJK Compatibility"
-msgstr "Сумяшчальнасьць CJK"
+msgstr "Сумяшчальныя знакі CJK"
 
-#: gucharmap/unicode/unicode_blocks.cI:92
+#: ../gucharmap/unicode-blocks.h:125
 msgid "CJK Unified Ideographs Extension A"
-msgstr ""
+msgstr "Пашырэнне ўніфікаваных ідэаграм CJK, A"
 
-#: gucharmap/unicode/unicode_blocks.cI:93
+#: ../gucharmap/unicode-blocks.h:126
 msgid "Yijing Hexagram Symbols"
-msgstr ""
+msgstr "Гексаграмы Кнігі перамен"
 
-#: gucharmap/unicode/unicode_blocks.cI:94
+#: ../gucharmap/unicode-blocks.h:127
 msgid "CJK Unified Ideographs"
-msgstr ""
+msgstr "Уніфікаваныя ідэаграмы CJK"
 
-#: gucharmap/unicode/unicode_blocks.cI:95
+#: ../gucharmap/unicode-blocks.h:128
 msgid "Yi Syllables"
-msgstr ""
+msgstr "Склады пісьма і"
 
-#: gucharmap/unicode/unicode_blocks.cI:96
+#: ../gucharmap/unicode-blocks.h:129
 msgid "Yi Radicals"
-msgstr ""
+msgstr "Іерагліфічныя ключы пісьма і"
 
-#: gucharmap/unicode/unicode_blocks.cI:97
+#: ../gucharmap/unicode-blocks.h:130 ../gucharmap/unicode-scripts.h:68
+msgid "Lisu"
+msgstr "Лісу"
+
+#: ../gucharmap/unicode-blocks.h:131 ../gucharmap/unicode-scripts.h:109
+msgid "Vai"
+msgstr "Ваі"
+
+#: ../gucharmap/unicode-blocks.h:132
+msgid "Cyrillic Extended-B"
+msgstr "Пашыраная кірыліца B"
+
+#: ../gucharmap/unicode-blocks.h:133 ../gucharmap/unicode-scripts.h:20
+msgid "Bamum"
+msgstr "Бамум"
+
+#: ../gucharmap/unicode-blocks.h:134
+msgid "Modifier Tone Letters"
+msgstr "Мадыфікатары тонаў літар"
+
+#: ../gucharmap/unicode-blocks.h:135
+msgid "Latin Extended-D"
+msgstr "Пашыраная лацініца D"
+
+#: ../gucharmap/unicode-blocks.h:136 ../gucharmap/unicode-scripts.h:95
+msgid "Syloti Nagri"
+msgstr "Сілоці-нагры"
+
+#: ../gucharmap/unicode-blocks.h:137
+msgid "Common Indic Number Forms"
+msgstr "Агульныя індыйскія формы лічбаў"
+
+#: ../gucharmap/unicode-blocks.h:138
+msgid "Phags-pa"
+msgstr "Пісьмо Пагба-ламы"
+
+#: ../gucharmap/unicode-blocks.h:139 ../gucharmap/unicode-scripts.h:91
+msgid "Saurashtra"
+msgstr "Саўраштра"
+
+#: ../gucharmap/unicode-blocks.h:140
+msgid "Devanagari Extended"
+msgstr "Пашыранае дэванагары"
+
+#: ../gucharmap/unicode-blocks.h:141 ../gucharmap/unicode-scripts.h:60
+msgid "Kayah Li"
+msgstr "Кая Лі"
+
+#: ../gucharmap/unicode-blocks.h:142 ../gucharmap/unicode-scripts.h:88
+msgid "Rejang"
+msgstr "Рэджангскае пісьмо"
+
+#: ../gucharmap/unicode-blocks.h:143
+msgid "Hangul Jamo Extended-A"
+msgstr "Пашыраны хангыль A"
+
+#: ../gucharmap/unicode-blocks.h:144 ../gucharmap/unicode-scripts.h:56
+msgid "Javanese"
+msgstr "Яванскае пісьмо"
+
+#: ../gucharmap/unicode-blocks.h:145 ../gucharmap/unicode-scripts.h:30
+msgid "Cham"
+msgstr "Чамскае пісьмо"
+
+#: ../gucharmap/unicode-blocks.h:146
+msgid "Myanmar Extended-A"
+msgstr "Пашыраная м'янма A"
+
+#: ../gucharmap/unicode-blocks.h:147 ../gucharmap/unicode-scripts.h:101
+msgid "Tai Viet"
+msgstr "Тай-в'ет"
+
+#: ../gucharmap/unicode-blocks.h:148
+msgid "Ethiopic Extended-A"
+msgstr "Пашыранае эфіопскае пісьмо A"
+
+#: ../gucharmap/unicode-blocks.h:149 ../gucharmap/unicode-scripts.h:73
+msgid "Meetei Mayek"
+msgstr "Маніпуры"
+
+#: ../gucharmap/unicode-blocks.h:150
 msgid "Hangul Syllables"
-msgstr ""
+msgstr "Склады хангыль"
 
-#: gucharmap/unicode/unicode_blocks.cI:98
+#: ../gucharmap/unicode-blocks.h:151
+msgid "Hangul Jamo Extended-B"
+msgstr "Пашыраны хангыль B"
+
+#: ../gucharmap/unicode-blocks.h:152
 msgid "High Surrogates"
-msgstr ""
+msgstr "Верхнія сурагаты"
 
-#: gucharmap/unicode/unicode_blocks.cI:99
+#: ../gucharmap/unicode-blocks.h:153
 msgid "High Private Use Surrogates"
-msgstr ""
+msgstr "Верхнія сурагаты для асабістага выкарыстання"
 
-#: gucharmap/unicode/unicode_blocks.cI:100
+#: ../gucharmap/unicode-blocks.h:154
 msgid "Low Surrogates"
-msgstr ""
+msgstr "Ніжнія сурагаты"
 
-#: gucharmap/unicode/unicode_blocks.cI:101
+#: ../gucharmap/unicode-blocks.h:155
 msgid "Private Use Area"
-msgstr ""
+msgstr "Дыяпазон для асабістага выкарыстання"
 
-#: gucharmap/unicode/unicode_blocks.cI:102
+#: ../gucharmap/unicode-blocks.h:156
 msgid "CJK Compatibility Ideographs"
-msgstr ""
+msgstr "Сумяшчальныя ідэаграмы CJK"
 
-#: gucharmap/unicode/unicode_blocks.cI:103
+#: ../gucharmap/unicode-blocks.h:157
 msgid "Alphabetic Presentation Forms"
-msgstr ""
+msgstr "Алфавітныя формы прадстаўлення"
 
-#: gucharmap/unicode/unicode_blocks.cI:104
+#: ../gucharmap/unicode-blocks.h:158
 msgid "Arabic Presentation Forms-A"
-msgstr ""
+msgstr "Арабскія формы прадстаўлення A"
 
-#: gucharmap/unicode/unicode_blocks.cI:105
+#: ../gucharmap/unicode-blocks.h:159
 msgid "Variation Selectors"
-msgstr ""
+msgstr "Коды выбару адмен гліфаў"
 
-#: gucharmap/unicode/unicode_blocks.cI:106
+#: ../gucharmap/unicode-blocks.h:160
+msgid "Vertical Forms"
+msgstr "Вертыкальныя формы"
+
+#: ../gucharmap/unicode-blocks.h:161
 msgid "Combining Half Marks"
-msgstr ""
+msgstr "Спалучальныя паўзначкі"
 
-#: gucharmap/unicode/unicode_blocks.cI:107
+#: ../gucharmap/unicode-blocks.h:162
 msgid "CJK Compatibility Forms"
-msgstr ""
+msgstr "Сумяшчальныя формы CJK"
 
-#: gucharmap/unicode/unicode_blocks.cI:108
+#: ../gucharmap/unicode-blocks.h:163
 msgid "Small Form Variants"
-msgstr ""
+msgstr "Паменшаныя адмены знакаў"
 
-#: gucharmap/unicode/unicode_blocks.cI:109
+#: ../gucharmap/unicode-blocks.h:164
 msgid "Arabic Presentation Forms-B"
-msgstr ""
+msgstr "Арабскія формы прадстаўлення B"
 
-#: gucharmap/unicode/unicode_blocks.cI:110
+#: ../gucharmap/unicode-blocks.h:165
 msgid "Halfwidth and Fullwidth Forms"
-msgstr ""
+msgstr "Паўшырокія і поўнашырокія формы"
 
-#: gucharmap/unicode/unicode_blocks.cI:111
+#: ../gucharmap/unicode-blocks.h:166
 msgid "Specials"
-msgstr "Адмысловыя"
+msgstr "Спецыяльныя знакі"
 
-#: gucharmap/unicode/unicode_blocks.cI:112
+#: ../gucharmap/unicode-blocks.h:167
 msgid "Linear B Syllabary"
-msgstr ""
+msgstr "Лінейнае складовае пісьмо B"
 
-#: gucharmap/unicode/unicode_blocks.cI:113
+#: ../gucharmap/unicode-blocks.h:168
 msgid "Linear B Ideograms"
-msgstr ""
+msgstr "Лінейкае ідэаграмнае пісьмо B"
 
-#: gucharmap/unicode/unicode_blocks.cI:114
+#: ../gucharmap/unicode-blocks.h:169
 msgid "Aegean Numbers"
-msgstr ""
+msgstr "Эгейскія лічбы"
 
-#: gucharmap/unicode/unicode_blocks.cI:115
+#: ../gucharmap/unicode-blocks.h:170
+msgid "Ancient Greek Numbers"
+msgstr "Старажытнагрэцкія лічбы"
+
+#: ../gucharmap/unicode-blocks.h:171
+msgid "Ancient Symbols"
+msgstr "Старажытныя сімвалы"
+
+#: ../gucharmap/unicode-blocks.h:172
+msgid "Phaistos Disc"
+msgstr "Фесцкі дыск"
+
+#: ../gucharmap/unicode-blocks.h:173 ../gucharmap/unicode-scripts.h:69
+msgid "Lycian"
+msgstr "Лікійскае пісьмо"
+
+#: ../gucharmap/unicode-blocks.h:174 ../gucharmap/unicode-scripts.h:29
+msgid "Carian"
+msgstr "Карыйскае пісьмо"
+
+#: ../gucharmap/unicode-blocks.h:175 ../gucharmap/unicode-scripts.h:80
 msgid "Old Italic"
-msgstr "Старыя Італійскія"
+msgstr "Этрускае пісьмо"
 
-#: gucharmap/unicode/unicode_blocks.cI:116
+#: ../gucharmap/unicode-blocks.h:176 ../gucharmap/unicode-scripts.h:43
 msgid "Gothic"
-msgstr "Гатычныя"
+msgstr "Гатычнае пісьмо"
 
-#: gucharmap/unicode/unicode_blocks.cI:117
+#: ../gucharmap/unicode-blocks.h:177 ../gucharmap/unicode-scripts.h:108
 msgid "Ugaritic"
-msgstr ""
+msgstr "Угарыцкае пісьмо"
 
-#: gucharmap/unicode/unicode_blocks.cI:118
+#: ../gucharmap/unicode-blocks.h:178 ../gucharmap/unicode-scripts.h:81
+msgid "Old Persian"
+msgstr "Старажытнаперсідскае пісьмо"
+
+#: ../gucharmap/unicode-blocks.h:179 ../gucharmap/unicode-scripts.h:37
 msgid "Deseret"
-msgstr ""
+msgstr "Дэзерэцкае пісьмо"
 
-#: gucharmap/unicode/unicode_blocks.cI:119
+#: ../gucharmap/unicode-blocks.h:180 ../gucharmap/unicode-scripts.h:92
 msgid "Shavian"
-msgstr ""
+msgstr "Алфавіт Шоў"
 
-#: gucharmap/unicode/unicode_blocks.cI:120
+#: ../gucharmap/unicode-blocks.h:181 ../gucharmap/unicode-scripts.h:85
 msgid "Osmanya"
-msgstr ""
+msgstr "Самалійскае пісьмо"
 
-#: gucharmap/unicode/unicode_blocks.cI:121
+#: ../gucharmap/unicode-blocks.h:182
 msgid "Cypriot Syllabary"
-msgstr ""
+msgstr "Кіпрскае складовае пісьмо"
 
-#: gucharmap/unicode/unicode_blocks.cI:122
+#: ../gucharmap/unicode-blocks.h:183 ../gucharmap/unicode-scripts.h:52
+msgid "Imperial Aramaic"
+msgstr "Імперскае арамейскае пісьмо"
+
+#: ../gucharmap/unicode-blocks.h:184 ../gucharmap/unicode-scripts.h:87
+msgid "Phoenician"
+msgstr "Фінікійскае пісьмо"
+
+#: ../gucharmap/unicode-blocks.h:185 ../gucharmap/unicode-scripts.h:70
+msgid "Lydian"
+msgstr "Лідыйскае пісьмо"
+
+#: ../gucharmap/unicode-blocks.h:186 ../gucharmap/unicode-scripts.h:61
+msgid "Kharoshthi"
+msgstr "Кхароштхі"
+
+#: ../gucharmap/unicode-blocks.h:187 ../gucharmap/unicode-scripts.h:82
+msgid "Old South Arabian"
+msgstr "Эпіграфічнае паўднёвааравійскае пісьмо"
+
+#: ../gucharmap/unicode-blocks.h:188 ../gucharmap/unicode-scripts.h:18
+msgid "Avestan"
+msgstr "Авеста"
+
+#: ../gucharmap/unicode-blocks.h:189 ../gucharmap/unicode-scripts.h:55
+msgid "Inscriptional Parthian"
+msgstr "Наскальнае парфянскае пісьмо"
+
+#: ../gucharmap/unicode-blocks.h:190 ../gucharmap/unicode-scripts.h:54
+msgid "Inscriptional Pahlavi"
+msgstr "Наскальнае пісьмо пехлеві"
+
+#: ../gucharmap/unicode-blocks.h:191 ../gucharmap/unicode-scripts.h:83
+msgid "Old Turkic"
+msgstr "Старажытнатурэцкае пісьмо"
+
+#: ../gucharmap/unicode-blocks.h:192
+msgid "Rumi Numeral Symbols"
+msgstr "Лічбавыя сімвалы Румі"
+
+#: ../gucharmap/unicode-blocks.h:193 ../gucharmap/unicode-scripts.h:24
+msgid "Brahmi"
+msgstr "Брахмі"
+
+#: ../gucharmap/unicode-blocks.h:194 ../gucharmap/unicode-scripts.h:57
+msgid "Kaithi"
+msgstr "Кайтхі"
+
+#: ../gucharmap/unicode-blocks.h:195 ../gucharmap/unicode-scripts.h:34
+msgid "Cuneiform"
+msgstr "Клінапіс"
+
+#: ../gucharmap/unicode-blocks.h:196
+msgid "Cuneiform Numbers and Punctuation"
+msgstr "Клінапіс, лічбы і пунктуацыя"
+
+#: ../gucharmap/unicode-blocks.h:197 ../gucharmap/unicode-scripts.h:39
+msgid "Egyptian Hieroglyphs"
+msgstr "Егіпецкія іерогліфы"
+
+#: ../gucharmap/unicode-blocks.h:198
+msgid "Bamum Supplement"
+msgstr "Дадатковыя знакі бамум"
+
+#: ../gucharmap/unicode-blocks.h:199
+msgid "Kana Supplement"
+msgstr "Дадатковыя знакі кана"
+
+#: ../gucharmap/unicode-blocks.h:200
 msgid "Byzantine Musical Symbols"
-msgstr ""
+msgstr "Візантыйскія музычныя сімвалы"
 
-#: gucharmap/unicode/unicode_blocks.cI:123
+#: ../gucharmap/unicode-blocks.h:201
 msgid "Musical Symbols"
-msgstr "Музычныя знакі"
+msgstr "Музычныя сімвалы"
 
-#: gucharmap/unicode/unicode_blocks.cI:124
+#: ../gucharmap/unicode-blocks.h:202
+msgid "Ancient Greek Musical Notation"
+msgstr "Старажытнагрэцкае музычнае пісьмо"
+
+#: ../gucharmap/unicode-blocks.h:203
 msgid "Tai Xuan Jing Symbols"
-msgstr ""
+msgstr "Сімвалы Ян Сюна"
 
-#: gucharmap/unicode/unicode_blocks.cI:125
+#: ../gucharmap/unicode-blocks.h:204
+msgid "Counting Rod Numerals"
+msgstr "Лічбы з лічыльных палачак"
+
+#: ../gucharmap/unicode-blocks.h:205
 msgid "Mathematical Alphanumeric Symbols"
-msgstr ""
+msgstr "Матэматычныя сімвалы літар і лічбаў"
 
-#: gucharmap/unicode/unicode_blocks.cI:126
+#: ../gucharmap/unicode-blocks.h:206
+msgid "Mahjong Tiles"
+msgstr "Косці для маджонгу"
+
+#: ../gucharmap/unicode-blocks.h:207
+msgid "Domino Tiles"
+msgstr "Косці для даміно"
+
+#: ../gucharmap/unicode-blocks.h:208
+msgid "Playing Cards"
+msgstr "Карты для гульні"
+
+#: ../gucharmap/unicode-blocks.h:209
+msgid "Enclosed Alphanumeric Supplement"
+msgstr "Дадатковыя ўпісаныя літары і лічбы"
+
+#: ../gucharmap/unicode-blocks.h:210
+msgid "Enclosed Ideographic Supplement"
+msgstr "Дадатковыя ўпісаныя ідэаграмы"
+
+#: ../gucharmap/unicode-blocks.h:211
+msgid "Miscellaneous Symbols And Pictographs"
+msgstr "Разнастайныя сімвалы і піктаграмы"
+
+#: ../gucharmap/unicode-blocks.h:212
+msgid "Emoticons"
+msgstr "Значкі эмоцый"
+
+#: ../gucharmap/unicode-blocks.h:213
+msgid "Transport And Map Symbols"
+msgstr "Сімвалы транспарту і картаграфіі"
+
+#: ../gucharmap/unicode-blocks.h:214
+msgid "Alchemical Symbols"
+msgstr "Алхімічныя сімвалы"
+
+#: ../gucharmap/unicode-blocks.h:215
 msgid "CJK Unified Ideographs Extension B"
-msgstr ""
+msgstr "Пашырэнне ўніфікаваных ідэаграм CJK, B"
 
-#: gucharmap/unicode/unicode_blocks.cI:127
+#: ../gucharmap/unicode-blocks.h:216
+msgid "CJK Unified Ideographs Extension C"
+msgstr "Пашырэнне ўніфікаваных ідэаграм CJK, C"
+
+#: ../gucharmap/unicode-blocks.h:217
+msgid "CJK Unified Ideographs Extension D"
+msgstr "Пашырэнне ўніфікаваных ідэаграм CJK, D"
+
+#: ../gucharmap/unicode-blocks.h:218
 msgid "CJK Compatibility Ideographs Supplement"
-msgstr ""
+msgstr "Дадатковыя сумяшчальныя ідэаграмы CJK"
 
-#: gucharmap/unicode/unicode_blocks.cI:128
+#: ../gucharmap/unicode-blocks.h:219
 msgid "Tags"
-msgstr ""
+msgstr "Тэгі"
 
-#: gucharmap/unicode/unicode_blocks.cI:129
+#: ../gucharmap/unicode-blocks.h:220
 msgid "Variation Selectors Supplement"
-msgstr ""
+msgstr "Дадатковыя коды выбару адмен гліфаў"
 
-#: gucharmap/unicode/unicode_blocks.cI:130
+#: ../gucharmap/unicode-blocks.h:221
 msgid "Supplementary Private Use Area-A"
-msgstr ""
+msgstr "Дадатковы дыяпазон для асабістага выкарыстання A"
 
-#: gucharmap/unicode/unicode_blocks.cI:131
+#: ../gucharmap/unicode-blocks.h:222
 msgid "Supplementary Private Use Area-B"
-msgstr ""
+msgstr "Дадатковы дыяпазон для асабістага выкарыстання B"
 
-#~ msgid "Zoom mode disabled."
-#~ msgstr "Рэжым маштабаваньня выключаны."
+#: ../gucharmap/unicode-scripts.h:25
+msgid "Braille"
+msgstr "Пісьмо Брэйля"
 
-#~ msgid "Zoom mode enabled. Press <Esc> to disable zoom."
-#~ msgstr "Рэжым маштабаваньня уключаны. Націсьніце <Esc> каб выключыць яго."
+#: ../gucharmap/unicode-scripts.h:28
+msgid "Canadian Aboriginal"
+msgstr "Пісьмо канадскіх абарыгенаў"
 
-#~ msgid "Zoom mode enabled."
-#~ msgstr "Рэжым маштабаваньня ўключаны."
+#: ../gucharmap/unicode-scripts.h:35
+msgid "Cypriot"
+msgstr "Кіпрскае пісьмо"
 
-#~ msgid "Character Map"
-#~ msgstr "Табліца сымбаляў"
+#: ../gucharmap/unicode-scripts.h:44
+msgid "Greek"
+msgstr "Грэцкае пісьмо"
 
-#~ msgid "Mandarin pronunciation"
-#~ msgstr "Фанэтычная транскрыпцыя Мандарын"
+#: ../gucharmap/unicode-scripts.h:47
+msgid "Han"
+msgstr "Хань"
 
-#~ msgid "Japanese On pronunciation"
-#~ msgstr "Японская фЫанэтычная транскрыпцыя Ан"
+#: ../gucharmap/unicode-scripts.h:48
+msgid "Hangul"
+msgstr "Хангыль"
 
-#~ msgid "Japanese Kun pronunciation"
-#~ msgstr "Японская фанэтычная транскрыпцыя Кун"
+#: ../gucharmap/unicode-scripts.h:53
+msgid "Inherited"
+msgstr "Знакі з успадкаванай моўнай атрыбуцыяй"
 
-#~ msgid "Cantonese pronunciation"
-#~ msgstr "Фанэтычная транскрыпцыя Кантону"
+#: ../gucharmap/unicode-scripts.h:64
+msgid "Latin"
+msgstr "Лацініца"
 
-#~ msgid "Tang pronunciation"
-#~ msgstr "Фанэтычная транскрыпцыя Тэнг"
+#: ../gucharmap/unicode-scripts.h:67
+msgid "Linear B"
+msgstr "Лінейнае пісьмо Б"
 
-#~ msgid "Korean pronunciation"
-#~ msgstr "Карэйская фанэтычная транскрыпцыя"
+#: ../gucharmap/unicode-scripts.h:86
+msgid "Phags Pa"
+msgstr "Пісьмо Пагба-ламы"
 
-#~ msgid "Details on the Current Character"
-#~ msgstr "падрабязнасьці па бягучым сымбалі"
+#: ../gucharmap/unicode-scripts.h:110
+msgid "Yi"
+msgstr "Пісьмо і"
 
-#~ msgid "category"
-#~ msgstr "катэгорыя"
+#: ../gucharmap/gucharmap-search-dialog.c:569
+msgid "Information"
+msgstr "Інфармацыя"
 
-#~ msgid "decomposition"
-#~ msgstr "дэкампазыцыя"
+#. follow hig guidelines
+#: ../gucharmap/gucharmap-search-dialog.c:736
+msgid "Find"
+msgstr "Пошук"
 
-#~ msgid "utf8"
-#~ msgstr "utf8"
+#: ../gucharmap/gucharmap-search-dialog.c:756
+msgid "_Previous"
+msgstr "Да _папярэдняга"
 
-#~ msgid "other_reps"
-#~ msgstr "іншыя_выбаркі"
+#: ../gucharmap/gucharmap-search-dialog.c:767
+msgid "_Next"
+msgstr "Да _наступнага"
 
-#~ msgid "kdefinition"
-#~ msgstr "kdefinition"
+#: ../gucharmap/gucharmap-search-dialog.c:782
+msgid "_Search:"
+msgstr "По_шук:"
 
-#~ msgid "kmandarin"
-#~ msgstr "kmandarin"
+#: ../gucharmap/gucharmap-search-dialog.c:792
+msgid "Match _whole word"
+msgstr "Шукаць поўны _адпаведнік"
 
-#~ msgid "kjapaneseon"
-#~ msgstr "kjapaneseon"
+#: ../gucharmap/gucharmap-search-dialog.c:797
+msgid "Search in character _details"
+msgstr "Шу_каць у падрабязных звестках аб знаку"
 
-#~ msgid "kjapanesekun"
-#~ msgstr "kjapanesekun"
+#: ../gucharmap/gucharmap-block-chapters-model.c:84
+msgid "All"
+msgstr "Усё"
 
-#~ msgid "kcantonese"
-#~ msgstr "kcantonese"
+#: ../gucharmap/gucharmap-block-chapters-model.c:187
+msgid "Unicode Block"
+msgstr "Блок Унікоду"
 
-#~ msgid "ktang"
-#~ msgstr "ktang"
-
-#~ msgid "kkorean"
-#~ msgstr "kkorean"
-
-#~ msgid "Go to hex code point"
-#~ msgstr "Ісьці да "
-
-#~ msgid "The selected code point is not a valid unicode character."
-#~ msgstr "Пазначаны код не зьяўляецца рэчаісным сымбалям Юнікода."
-
-#~ msgid "Text copied to clipboard."
-#~ msgstr "Тэкст скапіяваны ў буфэр абмену."
-
-#~ msgid "Search wrapped."
-#~ msgstr "Пошук згарнуты."
-
-#~ msgid ""
-#~ "Search for the next occurrence of this string in a character's Unicode "
-#~ "name."
-#~ msgstr ""
-#~ "Шукаць наступнае ўваходжаньне гэтага радка у назве зымбаляў Юнікода."
-
-#~ msgid "Char_map"
-#~ msgstr "Табліца_сымбаляў"
-
-#~ msgid "Expand/Collapse All"
-#~ msgstr "Пашырыць/Сьціснуць усё"
-
-#~ msgid "_Unicode Details"
-#~ msgstr "Падрабязнасьці _Юнікода"
-
-#~ msgid "Options"
-#~ msgstr "Парамэтры"
-
-#~ msgid "_Category"
-#~ msgstr "_Катэгорыя"
-
-#~ msgid "Canonical _Decomposition"
-#~ msgstr "Кананічная _дэкампазыцыя"
-
-#~ msgid "_UTF-8"
-#~ msgstr "_UTF-8"
-
-#~ msgid "_Cantonese Pronunciation"
-#~ msgstr "Фанэтычная транскрыпцыя Ка_нтону"
-
-#~ msgid "Font Style"
-#~ msgstr "Стыль шрыфта"
+#: ../gucharmap/gucharmap-script-chapters-model.c:155
+msgid "Script"
+msgstr "Пісьмо"
 
