@@ -67,6 +67,9 @@ main (int argc, char **argv)
   g_thread_init (NULL);
 #endif
 
+  /* Set programme name explicitly (see bug #653115) */
+  g_set_prgname("gucharmap");
+
   if (!gtk_init_with_args (&argc, &argv, "", goptions, GETTEXT_PACKAGE, &error))
     {
       g_printerr ("%s\n", error->message);
