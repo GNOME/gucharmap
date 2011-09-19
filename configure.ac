@@ -81,23 +81,16 @@ AM_CONDITIONAL(OS_WIN32, test "x$os_win32" = "xyes")
 
 AC_MSG_CHECKING([which gtk+ version to compile against])
 AC_ARG_WITH([gtk],
-  [AS_HELP_STRING([--with-gtk=2.0|3.0],[which gtk+ version to compile against (default: 2.0)])],
+  [AS_HELP_STRING([--with-gtk=3.0],[which gtk+ version to compile against (default: 2.0)])],
   [case "$with_gtk" in
-     2.0|3.0) ;;
-     *) AC_MSG_ERROR([invalid gtk version specified]) ;;
+     3.0) ;;
+     2.0) AC_MSG_ERROR([unsupported gtk version $with_gtk specified]) ;;
+     *) AC_MSG_ERROR([invalid gtk version $with_gtk specified]) ;;
    esac],
-  [with_gtk=2.0])
+  [with_gtk=3.0])
 AC_MSG_RESULT([$with_gtk])
 
 case "$with_gtk" in
-  2.0) GTK_API_VERSION=2.0
-       GTK_REQUIRED=2.14.0
-       GUCHARMAP_API_VERSION=2.0
-       GUCHARMAP_API_MAJOR_VERSION=2
-       GUCHARMAP_API_MINOR_VERSION=0
-       GUCHARMAP_API_PC_VERSION=2
-       GUCHARMAP_LIBRARY_SUFFIX=
-       ;;
   3.0) GTK_API_VERSION=3.0
        GTK_REQUIRED=3.0.0
        GUCHARMAP_API_VERSION=2.90
