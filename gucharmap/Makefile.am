@@ -210,6 +210,8 @@ EXTRA_DIST = \
 	gucharmap-type-builtins.c.template \
 	gucharmap-type-builtins.h.template \
 	gucharmaprc.rc \
+	download-unicode-files.sh \
+	gen-guch-unicode-tables.pl \
 	$(NULL)
 
 CLEANFILES = \
