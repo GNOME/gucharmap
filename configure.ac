@@ -81,7 +81,7 @@ AM_CONDITIONAL(OS_WIN32, test "x$os_win32" = "xyes")
 
 AC_MSG_CHECKING([which gtk+ version to compile against])
 AC_ARG_WITH([gtk],
-  [AS_HELP_STRING([--with-gtk=3.0],[which gtk+ version to compile against (default: 2.0)])],
+  [AS_HELP_STRING([--with-gtk=3.0],[which gtk+ version to compile against (default: 3.0)])],
   [case "$with_gtk" in
      3.0) ;;
      2.0) AC_MSG_ERROR([unsupported gtk version $with_gtk specified]) ;;
