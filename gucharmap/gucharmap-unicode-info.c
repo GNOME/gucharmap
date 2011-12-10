@@ -66,7 +66,7 @@ gucharmap_get_unicode_name (gunichar wc)
   _gucharmap_intl_ensure_initialized ();
 
   if ((wc >= 0x3400 && wc <= 0x4DB5)
-      || (wc >= 0x4e00 && wc <= 0x9fcb)
+      || (wc >= 0x4e00 && wc <= 0x9fcc)
       || (wc >= 0x20000 && wc <= 0x2A6D6)
       || (wc >= 0x2a700 && wc <= 0x2b734)
       || (wc >= 0x2b740 && wc <= 0x2b81d))
