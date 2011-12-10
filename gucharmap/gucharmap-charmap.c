@@ -24,8 +24,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "gucharmap-charmap.h"
-#include "gucharmap-unicode-info.h"
+#include "gucharmap.h"
 #include "gucharmap-marshal.h"
 #include "gucharmap-private.h"
 

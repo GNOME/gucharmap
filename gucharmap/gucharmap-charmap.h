@@ -68,12 +68,6 @@ GType                 gucharmap_charmap_get_type           (void);
 
 GtkWidget *           gucharmap_charmap_new                (void);
 
-#ifndef GUCHARMAP_DISABLE_DEPRECATED
-void           gucharmap_charmap_set_orientation (GucharmapCharmap *charmap,
-                                                  GtkOrientation orientation);
-GtkOrientation gucharmap_charmap_get_orientation (GucharmapCharmap *charmap);
-#endif
-
 void      gucharmap_charmap_set_active_character (GucharmapCharmap *charmap,
                                                   gunichar           uc);
 gunichar  gucharmap_charmap_get_active_character (GucharmapCharmap *charmap);
@@ -133,6 +127,18 @@ gboolean gucharmap_charmap_get_snap_pow2 (GucharmapCharmap *charmap);
 
 /* private; FIXMEchpe remove */
 GucharmapChartable *     gucharmap_charmap_get_chartable      (GucharmapCharmap  *charmap);
+
+/* Hide deprecated stuff from GI */
+
+#ifndef __GI_SCANNER__
+
+GUCHARMAP_DEPRECATED_FOR(gtk_orientable_set_orientation)
+void           gucharmap_charmap_set_orientation (GucharmapCharmap *charmap,
+                                                  GtkOrientation orientation);
+GUCHARMAP_DEPRECATED_FOR(gtk_orientable_get_orientation)
+GtkOrientation gucharmap_charmap_get_orientation (GucharmapCharmap *charmap);
+
+#endif /* !__GI_SCANNER__ */
 
 G_END_DECLS
 
