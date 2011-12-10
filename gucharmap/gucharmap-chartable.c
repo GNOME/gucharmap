@@ -25,13 +25,6 @@
 #include <glib/gi18n-lib.h>
 #include <gtk/gtk.h>
 
-#if GTK_CHECK_VERSION (2, 90, 7)
-#define GDK_KEY(symbol) GDK_KEY_##symbol
-#else
-#include <gdk/gdkkeysyms.h>
-#define GDK_KEY(symbol) GDK_##symbol
-#endif
-
 #include "gucharmap-marshal.h"
 #include "gucharmap-chartable.h"
 #include "gucharmap-unicode-info.h"
@@ -41,14 +34,6 @@
 
 #ifdef ENABLE_ACCESSIBLE
 #include "gucharmap-chartable-accessible.h"
-#endif
-
-#if !GTK_CHECK_VERSION (2, 18, 0)
-#define gtk_widget_has_focus(w) GTK_WIDGET_HAS_FOCUS(w)
-#endif
-
-#if !GTK_CHECK_VERSION (2, 20, 0)
-#define gtk_widget_get_realized(w) GTK_WIDGET_REALIZED (w)
 #endif
 
 enum
@@ -64,12 +49,10 @@ enum
 enum
 {
   PROP_0,
-#if GTK_CHECK_VERSION (2, 91, 2)
   PROP_HADJUSTMENT,
   PROP_VADJUSTMENT,
   PROP_HSCROLL_POLICY,
   PROP_VSCROLL_POLICY,
-#endif
   PROP_ACTIVE_CHAR,
   PROP_CODEPOINT_LIST,
   PROP_FONT_DESC,
@@ -144,12 +127,8 @@ G_DEFINE_TYPE (GucharmapChartableAccessibleFactory, gucharmap_chartable_accessib
 
 /* Type definition */
 
-#if GTK_CHECK_VERSION (2, 91, 2)
 G_DEFINE_TYPE_WITH_CODE (GucharmapChartable, gucharmap_chartable, GTK_TYPE_DRAWING_AREA,
                          G_IMPLEMENT_INTERFACE(GTK_TYPE_SCROLLABLE, NULL))
-#else
-G_DEFINE_TYPE (GucharmapChartable, gucharmap_chartable, GTK_TYPE_DRAWING_AREA)
-#endif
 
 /* utility functions */
 
@@ -566,8 +545,6 @@ layout_scaled_glyph (GucharmapChartable *chartable,
   return layout;
 }
 
-#if GTK_CHECK_VERSION (2, 90, 8)
-
 static cairo_surface_t *
 create_glyph_surface (GucharmapChartable *chartable,
                       gunichar wc,
@@ -681,13 +658,7 @@ create_glyph_pixbuf (GucharmapChartable *chartable,
 
   surface = create_glyph_surface (chartable, wc, font_factor, draw_font_family,
                                   &width, &height);
-#if GTK_CHECK_VERSION (2, 91, 0)
   pixbuf = gdk_pixbuf_get_from_surface (surface, 0, 0, width, height);
-#else
-  pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, FALSE, 8, width, height);
-  gdk_pixbuf_get_from_surface (pixbuf, surface, 0, 0, 0, 0, width, height);
-#endif
-
   cairo_surface_destroy (surface);
 
   if (zoom_surface_width)
@@ -697,109 +668,6 @@ create_glyph_pixbuf (GucharmapChartable *chartable,
 
   return pixbuf;
 }
-
-#else
-
-static GdkPixmap *
-create_glyph_pixmap (GucharmapChartable *chartable,
-                     gunichar wc,
-                     double font_factor,
-                     gboolean draw_font_family,
-                     int *width,
-                     int *height)
-{
-  GtkWidget *widget = GTK_WIDGET (chartable);
-  enum { PADDING = 8 };
-
-  PangoLayout *pango_layout, *pango_layout2 = NULL;
-  PangoRectangle char_rect, family_rect;
-  gint pixmap_width, pixmap_height;
-  GtkStyle *style;
-  GdkPixmap *pixmap;
-  char *family;
-  cairo_t *cr;
-
-  /* Apply the scaling.  Unfortunately not all fonts seem to be scalable.
-   * We could fall back to GdkPixbuf scaling, but that looks butt ugly :-/
-   */
-  pango_layout = layout_scaled_glyph (chartable, wc,
-                                      font_factor, &family);
-  pango_layout_get_pixel_extents (pango_layout, &char_rect, NULL);
-
-  if (draw_font_family)
-    {
-      if (family == NULL)
-        family = g_strdup (_("[not a printable character]"));
-
-      pango_layout2 = gtk_widget_create_pango_layout (GTK_WIDGET (chartable), family);
-      pango_layout_get_pixel_extents (pango_layout2, NULL, &family_rect);
-
-      /* Make the GdkPixmap large enough to account for possible offsets in the
-       * ink extents of the glyph. */
-      pixmap_width  = MAX (char_rect.width, family_rect.width)  + 2 * PADDING;
-      pixmap_height = family_rect.height + char_rect.height + 4 * PADDING;
-    }
-  else
-    {
-      pixmap_width  = char_rect.width + 2 * PADDING;
-      pixmap_height = char_rect.height + 2 * PADDING;
-    }
-
-  style = gtk_widget_get_style (widget);
-
-  pixmap = gdk_pixmap_new (gtk_widget_get_window (widget),
-                           pixmap_width, pixmap_height, -1);
-
-  cr = gdk_cairo_create (pixmap);
-
-  gdk_cairo_set_source_color (cr, &style->base[GTK_STATE_NORMAL]);
-  cairo_rectangle (cr, 0, 0, pixmap_width, pixmap_height);
-  cairo_fill (cr);
-
-  gdk_cairo_set_source_color (cr, &style->fg[GTK_STATE_INSENSITIVE]);
-  cairo_set_line_width (cr, 1);
-  cairo_set_line_cap (cr, CAIRO_LINE_CAP_SQUARE);
-  cairo_rectangle (cr, 1.5, 1.5, pixmap_width - 3, pixmap_height - 3);
-  cairo_stroke (cr);
-
-  /* Now draw the glyph.  The coordinates are adapted
-   * in order to compensate negative char_rect offsets. 
-   */
-  gdk_cairo_set_source_color (cr, &style->text[GTK_STATE_NORMAL]);
-  cairo_move_to (cr, -char_rect.x + PADDING, -char_rect.y + PADDING);
-  pango_cairo_show_layout (cr, pango_layout);
-  g_object_unref (pango_layout);
-
-  if (draw_font_family)
-    {
-      cairo_set_line_width (cr, 1);
-      cairo_set_line_cap (cr, CAIRO_LINE_CAP_SQUARE);
-      gdk_cairo_set_source_color (cr, &style->dark[GTK_STATE_NORMAL]);
-      cairo_move_to (cr, 6 + 1 + .5, char_rect.height + 2 * PADDING + .5);
-      cairo_line_to (cr, pixmap_width - 3 - 6 - .5, char_rect.height + 2 * PADDING + .5);
-      cairo_stroke (cr);
-
-      gdk_cairo_set_source_color (cr, &style->text[GTK_STATE_NORMAL]);
-      cairo_move_to (cr, PADDING, pixmap_height - PADDING - family_rect.height);
-      /* FIXME: clip here? */
-      pango_cairo_show_layout (cr, pango_layout2);
-
-      g_object_unref (pango_layout2);
-    }
-
-  g_free (family);
-
-  cairo_destroy (cr);
-
-  if (width)
-    *width = pixmap_width;
-  if (height)
-    *height = pixmap_height;
-
-  return pixmap;
-}
-
-#endif /* GTK 2.90 */
 
 /* places the zoom window toward the inside of the coordinates */
 static void
@@ -873,6 +741,7 @@ update_zoom_window (GucharmapChartable *chartable)
   GtkWidget *widget = GTK_WIDGET (chartable);
   double scale;
   int font_size_px, screen_height;
+  GdkPixbuf *pixbuf;
 
   if (priv->zoom_window == NULL)
     return;
@@ -883,10 +752,6 @@ update_zoom_window (GucharmapChartable *chartable)
   scale = (0.3 * screen_height) / (FACTOR_WIDTH * font_size_px);
   scale = CLAMP (scale, 1.0, 12.0);
 
-#if GTK_CHECK_VERSION (2, 90, 8)
-{
-  GdkPixbuf *pixbuf;
-
   pixbuf = create_glyph_pixbuf (chartable,
                                 gucharmap_chartable_get_active_character (chartable),
                                 scale,
@@ -896,21 +761,6 @@ update_zoom_window (GucharmapChartable *chartable)
   gtk_image_set_from_pixbuf (GTK_IMAGE (gtk_bin_get_child (GTK_BIN (priv->zoom_window))),
                              pixbuf);
   g_object_unref (pixbuf);
-}
-#else
-{
-  GdkPixmap *pixmap;
-  pixmap = create_glyph_pixmap (chartable,
-                                gucharmap_chartable_get_active_character (chartable),
-                                scale,
-                                TRUE,
-                                &priv->zoom_image_width,
-                                &priv->zoom_image_height);
-  gtk_image_set_from_pixmap (GTK_IMAGE (gtk_bin_get_child (GTK_BIN (priv->zoom_window))),
-                             pixmap, NULL);
-  g_object_unref (pixmap);
-}
-#endif
 
   gtk_window_resize (GTK_WINDOW (priv->zoom_window),
                      priv->zoom_image_width, priv->zoom_image_height);
@@ -1009,11 +859,7 @@ get_cell_at_xy (GucharmapChartable *chartable,
 static void
 draw_character (GucharmapChartable *chartable,
                 cairo_t            *cr,
-#if GTK_CHECK_VERSION (2, 90, 5)
                 cairo_rectangle_int_t  *rect,
-#else
-                GdkRectangle *rect,
-#endif
                 gint            row,
                 gint            col)
 {
@@ -1099,11 +945,7 @@ expose_cell (GucharmapChartable *chartable,
 static void
 draw_square_bg (GucharmapChartable *chartable,
                 cairo_t *cr,
-#if GTK_CHECK_VERSION (2, 90, 5)
                 cairo_rectangle_int_t  *rect,
-#else
-                GdkRectangle *rect,
-#endif
                 gint row,
                 gint col)
 {
@@ -1153,14 +995,10 @@ draw_borders (GucharmapChartable *chartable,
   GtkAllocation *allocation;
   GtkStyle *style;
   gint x, y, col, row;
-#if GTK_CHECK_VERSION (2, 18, 0)
   GtkAllocation widget_allocation;
 
   gtk_widget_get_allocation (widget, &widget_allocation);
   allocation = &widget_allocation;
-#else
-  allocation = &widget->allocation;
-#endif
 
   cairo_save (cr);
 
@@ -1387,11 +1225,7 @@ gucharmap_chartable_drag_begin (GtkWidget *widget,
   GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (widget);
   double scale;
   int font_size_px, screen_height;
-#if GTK_CHECK_VERSION (2, 90, 8)
   cairo_surface_t *drag_surface;
-#else
-  GdkPixmap *drag_icon;
-#endif
 
   font_size_px = get_font_size_px (chartable);
   screen_height = gdk_screen_get_height (gtk_widget_get_screen (widget));
@@ -1399,22 +1233,12 @@ gucharmap_chartable_drag_begin (GtkWidget *widget,
   scale = (0.3 * screen_height) / (FACTOR_WIDTH * font_size_px);
   scale = CLAMP (scale, 1.0, 5.0);
 
-#if GTK_CHECK_VERSION (2, 90, 8)
   drag_surface = create_glyph_surface (chartable,
                                        gucharmap_chartable_get_active_character (chartable),
                                        scale,
                                        FALSE, NULL, NULL);
   gtk_drag_set_icon_surface (context, drag_surface);
   cairo_surface_destroy (drag_surface);
-#else
-  drag_icon = create_glyph_pixmap (chartable,
-                                   gucharmap_chartable_get_active_character (chartable),
-                                   scale,
-                                   FALSE, NULL, NULL);
-  gtk_drag_set_icon_pixmap (context, gtk_widget_get_colormap (widget), 
-                            drag_icon, NULL, -8, -8);
-  g_object_unref (drag_icon);
-#endif
 
   /* no need to chain up */
 }
@@ -1478,34 +1302,17 @@ gucharmap_chartable_drag_data_received (GtkWidget *widget,
   /* no need to chain up */
 }
 
-#if GTK_CHECK_VERSION (2, 90, 8)
 static gboolean
 gucharmap_chartable_draw (GtkWidget *widget,
                           cairo_t *cr)
-#else
-static gboolean
-gucharmap_chartable_expose_event (GtkWidget *widget, 
-                                  GdkEventExpose *event)
-#endif
 {
   GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (widget);
   GucharmapChartablePrivate *priv = chartable->priv;
   GtkStyle *style;
   int row, col;
-#if GTK_CHECK_VERSION (2, 90, 8)
   cairo_rectangle_int_t clip_rect;
   cairo_region_t *region;
-#else
-  GdkRegion *region = event->region;
-  cairo_t *cr;
-#endif
 
-#if !GTK_CHECK_VERSION (2, 90, 8)
-  if (event->window != gtk_widget_get_window (widget))
-    return FALSE;
-#endif
-
-#if GTK_CHECK_VERSION (2, 90, 8)
   if (!gdk_cairo_get_clip_rectangle (cr, &clip_rect))
     return FALSE;
 
@@ -1515,10 +1322,6 @@ gucharmap_chartable_expose_event (GtkWidget *widget,
     cairo_region_destroy (region);
     return FALSE;
   }
-#else
-  if (gdk_region_empty (region))
-    return FALSE;
-#endif
 
 #if 0
   {
@@ -1535,12 +1338,6 @@ gucharmap_chartable_expose_event (GtkWidget *widget,
   }
 #endif
 
-#if !GTK_CHECK_VERSION (2, 90, 8)
-  cr = gdk_cairo_create (event->window);
-  gdk_cairo_region (cr, region);
-  cairo_clip (cr);
-#endif
-
   style = gtk_widget_get_style (widget);
   gdk_cairo_set_source_color (cr, &style->bg[GTK_STATE_NORMAL]);
   gdk_cairo_region (cr, region);
@@ -1555,24 +1352,15 @@ gucharmap_chartable_expose_event (GtkWidget *widget,
     {
       for (col = priv->cols - 1; col >= 0; --col)
         {
-#if GTK_CHECK_VERSION (2, 90, 5)
           cairo_rectangle_int_t rect;
-#else
-          GdkRectangle rect;
-#endif
 
           rect.x = _gucharmap_chartable_x_offset (chartable, col);
           rect.y = _gucharmap_chartable_y_offset (chartable, row);
           rect.width = _gucharmap_chartable_column_width (chartable, col);
           rect.height = _gucharmap_chartable_row_height (chartable, row);
 
-#if GTK_CHECK_VERSION (2, 90, 8)
           if (cairo_region_contains_rectangle (region, &rect) == CAIRO_REGION_OVERLAP_OUT)
             continue;
-#else
-          if (gdk_region_rect_in (region, &rect) == GDK_OVERLAP_RECTANGLE_OUT)
-            continue;
-#endif
 
           draw_square_bg (chartable, cr, &rect, row, col);
           draw_character (chartable, cr, &rect, row, col);
@@ -1583,11 +1371,7 @@ gucharmap_chartable_expose_event (GtkWidget *widget,
 
 expose_done:
 
-#if GTK_CHECK_VERSION (2, 90, 8)
   cairo_region_destroy (region);
-#else
-  cairo_destroy (cr);
-#endif
 
   /* no need to chain up */
   return FALSE;
@@ -1632,7 +1416,7 @@ gucharmap_chartable_key_press_event (GtkWidget *widget,
 
   switch (event->keyval)
     {
-      case GDK_KEY (Shift_L): case GDK_KEY (Shift_R):
+      case GDK_KEY_Shift_L: case GDK_KEY_Shift_R:
         gucharmap_chartable_show_zoom (chartable);
         break;
 
@@ -1655,10 +1439,10 @@ gucharmap_chartable_key_release_event (GtkWidget *widget,
       /* XXX: If the group(shift_toggle) Xkb option is set, then releasing
        * the shift key gives either ISO_Next_Group or ISO_Prev_Group. Is
        * there a better way to handle this case? */
-      case GDK_KEY (Shift_L):
-      case GDK_KEY (Shift_R):
-      case GDK_KEY (ISO_Next_Group):
-      case GDK_KEY (ISO_Prev_Group):
+      case GDK_KEY_Shift_L:
+      case GDK_KEY_Shift_R:
+      case GDK_KEY_ISO_Next_Group:
+      case GDK_KEY_ISO_Prev_Group:
         gucharmap_chartable_hide_zoom (chartable);
         break;
     }
@@ -1720,18 +1504,12 @@ gucharmap_chartable_size_allocate (GtkWidget *widget,
   int new_first_cell;
   int bare_minimal_column_width, bare_minimal_row_height;
   int font_size_px;
-#if GTK_CHECK_VERSION (2, 18, 0)
   GtkAllocation widget_allocation;
-#endif
 
   GTK_WIDGET_CLASS (gucharmap_chartable_parent_class)->size_allocate (widget, allocation);
 
-#if GTK_CHECK_VERSION (2, 18, 0)
   gtk_widget_get_allocation (widget, &widget_allocation);
   allocation = &widget_allocation;
-#else
-  allocation = &widget->allocation;
-#endif
 
   old_rows = priv->rows;
   old_cols = priv->cols;
@@ -1783,8 +1561,6 @@ gucharmap_chartable_size_allocate (GtkWidget *widget,
   update_scrollbar_adjustment (chartable);
 }
 
-#if GTK_CHECK_VERSION (2, 91, 0)
-
 static void
 gucharmap_chartable_get_preferred_width (GtkWidget *widget,
                                          gint      *minimum,
@@ -1810,23 +1586,6 @@ gucharmap_chartable_get_preferred_height (GtkWidget *widget,
 
   *minimum = *natural = FACTOR_HEIGHT * font_size_px;
 }
-
-#else
-
-static void
-gucharmap_chartable_size_request (GtkWidget *widget,
-                                  GtkRequisition *requisition)
-{
-  GucharmapChartable *chartable = GUCHARMAP_CHARTABLE (widget);
-  int font_size_px;
-
-  font_size_px = get_font_size_px (chartable);
-
-  requisition->width = FACTOR_WIDTH * font_size_px;
-  requisition->height = FACTOR_HEIGHT * font_size_px;
-}
-
-#endif /* GTK 3.0 */
 
 static void
 gucharmap_chartable_style_set (GtkWidget *widget, 
@@ -1902,7 +1661,6 @@ gucharmap_chartable_get_accessible (GtkWidget *widget)
 
 /* GucharmapChartable class methods */
 
-#if GTK_CHECK_VERSION (2, 91, 2)
 static void
 gucharmap_chartable_set_hadjustment (GucharmapChartable *chartable,
                                      GtkAdjustment *hadjustment)
@@ -1917,7 +1675,6 @@ gucharmap_chartable_set_hadjustment (GucharmapChartable *chartable,
 
   priv->hadjustment = hadjustment ? g_object_ref_sink (hadjustment) : NULL;
 }
-#endif
 
 static void
 gucharmap_chartable_set_vadjustment (GucharmapChartable *chartable,
@@ -1950,16 +1707,6 @@ gucharmap_chartable_set_vadjustment (GucharmapChartable *chartable,
 
   update_scrollbar_adjustment (chartable);
 }
-
-#if !GTK_CHECK_VERSION (2, 91, 2)
-static void
-gucharmap_chartable_set_adjustments (GucharmapChartable *chartable,
-                                     GtkAdjustment *hadjustment,
-                                     GtkAdjustment *vadjustment)
-{
-  gucharmap_chartable_set_vadjustment (chartable, vadjustment);
-}
-#endif
 
 static void
 gucharmap_chartable_add_move_binding (GtkBindingSet  *binding_set,
@@ -2161,11 +1908,9 @@ gucharmap_chartable_init (GucharmapChartable *chartable)
   priv->font_fallback = TRUE;
 
   priv->vadjustment = NULL;
-#if GTK_CHECK_VERSION (2, 91, 2)
   priv->hadjustment = NULL;
   priv->hscroll_policy = GTK_SCROLL_NATURAL;
   priv->vscroll_policy = GTK_SCROLL_NATURAL;
-#endif
 
 /* This didn't fix the slow expose events either: */
 /*  gtk_widget_set_double_buffered (widget, FALSE); */
@@ -2184,11 +1929,7 @@ gucharmap_chartable_init (GucharmapChartable *chartable)
   gtk_drag_dest_add_text_targets (widget);
 
   /* this is required to get key_press events */
-#if GTK_CHECK_VERSION (2, 18, 0)
   gtk_widget_set_can_focus (widget, TRUE);
-#else
-  GTK_WIDGET_SET_FLAGS (widget, GTK_CAN_FOCUS);
-#endif
 
   gucharmap_chartable_set_codepoint_list (chartable, NULL);
 
@@ -2226,7 +1967,6 @@ gucharmap_chartable_set_property (GObject *object,
   GucharmapChartablePrivate *priv = chartable->priv;
 
   switch (prop_id) {
-#if GTK_CHECK_VERSION (2, 91, 2)
     case PROP_HADJUSTMENT:
       gucharmap_chartable_set_hadjustment (chartable, g_value_get_object (value));
       break;
@@ -2241,7 +1981,6 @@ gucharmap_chartable_set_property (GObject *object,
       priv->vscroll_policy = g_value_get_enum (value);
       gtk_widget_queue_resize_no_redraw (GTK_WIDGET (chartable));
       break;
-#endif
     case PROP_ACTIVE_CHAR:
       gucharmap_chartable_set_active_character (chartable, g_value_get_uint (value));
       break;
@@ -2279,7 +2018,6 @@ gucharmap_chartable_get_property (GObject *object,
   GucharmapChartablePrivate *priv = chartable->priv;
 
   switch (prop_id) {
-#if GTK_CHECK_VERSION (2, 91, 2)
     case PROP_HADJUSTMENT:
       g_value_set_object (value, NULL);
       break;
@@ -2292,7 +2030,6 @@ gucharmap_chartable_get_property (GObject *object,
     case PROP_VSCROLL_POLICY:
       g_value_set_enum (value, priv->vscroll_policy);
       break;
-#endif
     case PROP_ACTIVE_CHAR:
       g_value_set_uint (value, gucharmap_chartable_get_active_character (chartable));
       break;
@@ -2338,14 +2075,9 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
   widget_class->drag_data_received = gucharmap_chartable_drag_data_received;
   widget_class->button_press_event = gucharmap_chartable_button_press;
   widget_class->button_release_event = gucharmap_chartable_button_release;
-#if GTK_CHECK_VERSION (2, 91, 0)
   widget_class->get_preferred_width = gucharmap_chartable_get_preferred_width;
   widget_class->get_preferred_height = gucharmap_chartable_get_preferred_height;
   widget_class->draw = gucharmap_chartable_draw;
-#else
-  widget_class->size_request = gucharmap_chartable_size_request;
-  widget_class->expose_event = gucharmap_chartable_expose_event;
-#endif
   widget_class->focus_in_event = gucharmap_chartable_focus_in_event;
   widget_class->focus_out_event = gucharmap_chartable_focus_out_event;
   widget_class->key_press_event = gucharmap_chartable_key_press_event;
@@ -2373,36 +2105,11 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
                   G_TYPE_NONE,
                   0);
 
-#if GTK_CHECK_VERSION (2, 91, 2)
   /* GtkScrollable interface properties */
   g_object_class_override_property (object_class, PROP_HADJUSTMENT, "hadjustment");
   g_object_class_override_property (object_class, PROP_VADJUSTMENT, "vadjustment");
   g_object_class_override_property (object_class, PROP_HSCROLL_POLICY, "hscroll-policy");
   g_object_class_override_property (object_class, PROP_VSCROLL_POLICY, "vscroll-policy");
-
-#else
-
-  klass->set_scroll_adjustments = gucharmap_chartable_set_adjustments;
-
-  /**
-   * GucharmapChartable::set-scroll-adjustments
-   * @horizontal: the horizontal #GtkAdjustment
-   * @vertical: the vertical #GtkAdjustment
-   *
-   * Set the scroll adjustments for the text view. Usually scrolled containers
-   * like #GtkScrolledWindow will emit this signal to connect two instances
-   * of #GtkScrollbar to the scroll directions of the #GucharmapChartable.
-   */
-  widget_class->set_scroll_adjustments_signal =
-    g_signal_new (I_("set-scroll-adjustments"),
-                  G_TYPE_FROM_CLASS (object_class),
-                  G_SIGNAL_RUN_LAST,
-                  G_STRUCT_OFFSET (GucharmapChartableClass, set_scroll_adjustments),
-                  NULL, NULL, 
-                  _gucharmap_marshal_VOID__OBJECT_OBJECT,
-                  G_TYPE_NONE, 2,
-                  GTK_TYPE_ADJUSTMENT, GTK_TYPE_ADJUSTMENT);
-#endif /* GTK 3.0 */
 
   signals[STATUS_MESSAGE] =
     g_signal_new (I_("status-message"), gucharmap_chartable_get_type (), G_SIGNAL_RUN_FIRST,
@@ -2522,97 +2229,97 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
   binding_set = gtk_binding_set_by_class (klass);
 
   /* Cursor movement */
-  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (Up), 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY_Up, 0,
                                         GTK_MOVEMENT_DISPLAY_LINES, -1);
-  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (KP_Up), 0,
-                                        GTK_MOVEMENT_DISPLAY_LINES, -1);
-
-  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (Down), 0,
-                                        GTK_MOVEMENT_DISPLAY_LINES, 1);
-  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (KP_Down), 0,
-                                        GTK_MOVEMENT_DISPLAY_LINES, 1);
-
-  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (p), GDK_CONTROL_MASK,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY_KP_Up, 0,
                                         GTK_MOVEMENT_DISPLAY_LINES, -1);
 
-  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (n), GDK_CONTROL_MASK,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY_Down, 0,
+                                        GTK_MOVEMENT_DISPLAY_LINES, 1);
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY_KP_Down, 0,
                                         GTK_MOVEMENT_DISPLAY_LINES, 1);
 
-  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (Home), 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY_p, GDK_CONTROL_MASK,
+                                        GTK_MOVEMENT_DISPLAY_LINES, -1);
+
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY_n, GDK_CONTROL_MASK,
+                                        GTK_MOVEMENT_DISPLAY_LINES, 1);
+
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY_Home, 0,
                                         GTK_MOVEMENT_BUFFER_ENDS, -1);
-  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (KP_Home), 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY_KP_Home, 0,
                                         GTK_MOVEMENT_BUFFER_ENDS, -1);
 
-  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (End), 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY_End, 0,
                                         GTK_MOVEMENT_BUFFER_ENDS, 1);
-  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (KP_End), 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY_KP_End, 0,
                                         GTK_MOVEMENT_BUFFER_ENDS, 1);
 
-  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (Page_Up), 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY_Page_Up, 0,
                                         GTK_MOVEMENT_PAGES, -1);
-  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (KP_Page_Up), 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY_KP_Page_Up, 0,
                                         GTK_MOVEMENT_PAGES, -1);
 
-  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (Page_Down), 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY_Page_Down, 0,
                                         GTK_MOVEMENT_PAGES, 1);
-  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (KP_Page_Down), 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY_KP_Page_Down, 0,
                                         GTK_MOVEMENT_PAGES, 1);
 
-  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (Left), 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY_Left, 0,
                                         GTK_MOVEMENT_VISUAL_POSITIONS, -1);
-  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (KP_Left), 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY_KP_Left, 0,
                                         GTK_MOVEMENT_VISUAL_POSITIONS, -1);
 
-  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (Right), 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY_Right, 0,
                                         GTK_MOVEMENT_VISUAL_POSITIONS, 1);
-  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (KP_Right), 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY_KP_Right, 0,
                                         GTK_MOVEMENT_VISUAL_POSITIONS, 1);
   
   /* Activate */
-  gtk_binding_entry_add_signal (binding_set, GDK_KEY (Return), 0,
+  gtk_binding_entry_add_signal (binding_set, GDK_KEY_Return, 0,
                                 "activate", 0);
-  gtk_binding_entry_add_signal (binding_set, GDK_KEY (ISO_Enter), 0,
+  gtk_binding_entry_add_signal (binding_set, GDK_KEY_ISO_Enter, 0,
                                 "activate", 0);
-  gtk_binding_entry_add_signal (binding_set, GDK_KEY (KP_Enter), 0,
+  gtk_binding_entry_add_signal (binding_set, GDK_KEY_KP_Enter, 0,
                                 "activate", 0);
-  gtk_binding_entry_add_signal (binding_set, GDK_KEY (space), 0,
+  gtk_binding_entry_add_signal (binding_set, GDK_KEY_space, 0,
                                 "activate", 0);
 
   /* Clipboard actions */
-  gtk_binding_entry_add_signal (binding_set, GDK_KEY (c), GDK_CONTROL_MASK,
+  gtk_binding_entry_add_signal (binding_set, GDK_KEY_c, GDK_CONTROL_MASK,
                                 "copy-clipboard", 0);
-  gtk_binding_entry_add_signal (binding_set, GDK_KEY (Insert), GDK_CONTROL_MASK,
+  gtk_binding_entry_add_signal (binding_set, GDK_KEY_Insert, GDK_CONTROL_MASK,
                                 "copy-clipboard", 0);
-  gtk_binding_entry_add_signal (binding_set, GDK_KEY (v), GDK_CONTROL_MASK,
+  gtk_binding_entry_add_signal (binding_set, GDK_KEY_v, GDK_CONTROL_MASK,
                                 "paste-clipboard", 0);
-  gtk_binding_entry_add_signal (binding_set, GDK_KEY (Insert), GDK_SHIFT_MASK,
+  gtk_binding_entry_add_signal (binding_set, GDK_KEY_Insert, GDK_SHIFT_MASK,
                                 "paste-clipboard", 0);
 
 #if 0
   /* VI keybindings */
-  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (k), 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY_k, 0,
                                         GTK_MOVEMENT_DISPLAY_LINES, -1);
-  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (K), 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY_K, 0,
                                         GTK_MOVEMENT_DISPLAY_LINES, -1);
 
-  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (j), 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY_j, 0,
                                         GTK_MOVEMENT_DISPLAY_LINES, 1);
-  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (J), 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY_J, 0,
                                         GTK_MOVEMENT_DISPLAY_LINES, 1);
 
-  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (b), 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY_b, 0,
                                         GTK_MOVEMENT_PAGES, -1);
-  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (B), 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY_B, 0,
                                         GTK_MOVEMENT_PAGES, -1);
 
-  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (h), 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY_h, 0,
                                         GTK_MOVEMENT_VISUAL_POSITIONS, -1);
-  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (H), 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY_H, 0,
                                         GTK_MOVEMENT_VISUAL_POSITIONS, -1);
 
-  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (l), 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY_l, 0,
                                         GTK_MOVEMENT_VISUAL_POSITIONS, 1);
-  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY (L), 0,
+  gucharmap_chartable_add_move_binding (binding_set, GDK_KEY_L, 0,
                                         GTK_MOVEMENT_VISUAL_POSITIONS, 1);
 #endif
 }

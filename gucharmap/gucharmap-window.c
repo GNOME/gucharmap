@@ -25,13 +25,6 @@
 #include <glib/gi18n-lib.h>
 #include <gtk/gtk.h>
 
-#if GTK_CHECK_VERSION (2, 90, 7)
-#define GDK_KEY(symbol) GDK_KEY_##symbol
-#else
-#include <gdk/gdkkeysyms.h>
-#define GDK_KEY(symbol) GDK_##symbol
-#endif
-
 #include "gucharmap-print-operation.h"
 #include "gucharmap-search-dialog.h"
 #include "gucharmap-settings.h"
@@ -408,31 +401,6 @@ help_contents (GtkAction *action,
   g_free (url);
 }
 
-#if !GTK_CHECK_VERSION (2, 90, 8)
-static void
-about_open_url (GtkAboutDialog *about,
-                const char *link,
-                gpointer data)
-{
-  open_url (GTK_WINDOW (about), link, gtk_get_current_event_time ());
-}
-
-static void
-about_email_hook (GtkAboutDialog *about,
-		  const char *email_address,
-		  gpointer user_data)
-{
-  char *escaped, *uri;
-
-  escaped = g_uri_escape_string (email_address, NULL, FALSE);
-  uri = g_strdup_printf ("mailto:%s", escaped);
-  g_free (escaped);
-
-  open_url (GTK_WINDOW (about), uri, gtk_get_current_event_time ());
-  g_free (uri);
-}
-#endif
-
 static void
 help_about (GtkAction       *action, 
             GucharmapWindow *guw)
@@ -478,11 +446,6 @@ help_about (GtkAction       *action,
 			       _(license[2]), "\n\n", _(license[3]), "\n\n",
 			       _(license[4]), "\n\n", NULL);
 
-#if !GTK_CHECK_VERSION (2, 90, 8)
-  gtk_about_dialog_set_url_hook (about_open_url, NULL, NULL);
-  gtk_about_dialog_set_email_hook (about_email_hook, NULL, NULL);
-#endif
-
   gtk_show_about_dialog (GTK_WINDOW (guw),
 			 "program-name", _("GNOME Character Map"),
 			 "version", VERSION,
@@ -515,9 +478,9 @@ next_or_prev_character (GtkAction       *action,
 
   name = gtk_action_get_name (action);
   if (strcmp (name, "NextCharacter") == 0) {
-    keyval = GDK_KEY (Right);
+    keyval = GDK_KEY_Right;
   } else if (strcmp (name, "PreviousCharacter") == 0) {
-    keyval = GDK_KEY (Left);
+    keyval = GDK_KEY_Left;
   }
 
   chartable = gucharmap_charmap_get_chartable (guw->charmap);
@@ -526,11 +489,7 @@ next_or_prev_character (GtkAction       *action,
   gtk_binding_set_activate (gtk_binding_set_by_class (klass),
                             keyval,
                             0,
-#if GTK_CHECK_VERSION (2, 91, 0)
                             G_OBJECT (chartable));
-#else
-                            GTK_OBJECT (chartable));
-#endif
 }
 
 static void
@@ -730,14 +689,10 @@ status_realize (GtkWidget       *status,
                 GucharmapWindow *guw)
 {
   GtkAllocation *allocation;
-#if GTK_CHECK_VERSION (2, 18, 0)
   GtkAllocation widget_allocation;
 
   gtk_widget_get_allocation (guw->status, &widget_allocation);
   allocation = &widget_allocation;
-#else
-  allocation = &guw->status->allocation;
-#endif
 
   /* FIXMEchpe ewww... */
   /* increase the height a bit so it doesn't resize itself */
@@ -986,9 +941,6 @@ gucharmap_window_init (GucharmapWindow *guw)
   gtk_box_pack_start (GTK_BOX (big_vbox), hbox, FALSE, FALSE, 0);
 
   guw->status = gtk_statusbar_new ();
-#if !GTK_CHECK_VERSION (2, 91, 1)
-  gtk_statusbar_set_has_resize_grip (GTK_STATUSBAR (guw->status), FALSE);
-#endif
   gtk_box_pack_start (GTK_BOX (hbox), guw->status, TRUE, TRUE, 0);
   gtk_widget_show (guw->status);
   g_signal_connect (guw->status, "realize", G_CALLBACK (status_realize), guw);
@@ -1018,9 +970,7 @@ gucharmap_window_init (GucharmapWindow *guw)
 
   gtk_widget_grab_focus (GTK_WIDGET (gucharmap_charmap_get_chartable (guw->charmap)));
 
-#if GTK_CHECK_VERSION (2, 91, 1)
   gtk_window_set_has_resize_grip (GTK_WINDOW (guw), TRUE);
-#endif
 }
 
 static void
@@ -1064,11 +1014,7 @@ gucharmap_window_set_font (GucharmapWindow *guw,
 
   g_return_if_fail (GUCHARMAP_IS_WINDOW (guw));
 
-#if GTK_CHECK_VERSION (2,20,0)
   g_assert (!gtk_widget_get_realized (GTK_WIDGET (guw)));
-#else
-  g_assert (!GTK_WIDGET_REALIZED (guw));
-#endif
 
   if (!font)
     return;

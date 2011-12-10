@@ -105,11 +105,7 @@ gucharmap_chartable_accessible_ref_child (AtkObject *obj,
   GPtrArray *cells;
   guint n_cells, n;
 
-#if GTK_CHECK_VERSION (2, 21, 0)
   widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (obj));
-#else
-  widget = GTK_ACCESSIBLE (obj)->widget;
-#endif
   if (widget == NULL)
     /* State is defunct */
     return NULL;
@@ -163,11 +159,7 @@ gucharmap_chartable_accessible_ref_at (AtkTable *table,
   AtkObject *child;
   gint index;
 
-#if GTK_CHECK_VERSION (2, 21, 0)
   widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (table));
-#else
-  widget = GTK_ACCESSIBLE (table)->widget;
-#endif
   if (widget == NULL)
     /* State is defunct */
     return NULL;
@@ -194,11 +186,7 @@ gucharmap_chartable_accessible_ref_accessible_at_point (AtkComponent *component,
   gint x_pos, y_pos;
   gint row, col;
 
-#if GTK_CHECK_VERSION (2, 21, 0)
   widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (component));
-#else
-  widget = GTK_ACCESSIBLE (component)->widget;
-#endif
   if (widget == NULL)
     /* State is defunct */
     return NULL;
@@ -256,11 +244,7 @@ gucharmap_chartable_accessible_ref_state_set (AtkObject *obj)
   GtkWidget *widget;
 
   state_set = ATK_OBJECT_CLASS (gucharmap_chartable_accessible_parent_class)->ref_state_set (obj);
-#if GTK_CHECK_VERSION (2, 21, 0)
   widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (obj));
-#else
-  widget = GTK_ACCESSIBLE (obj)->widget;
-#endif
 
   if (widget != NULL)
     atk_state_set_add_state (state_set, ATK_STATE_MANAGES_DESCENDANTS);
@@ -275,11 +259,7 @@ gucharmap_chartable_accessible_get_n_children (AtkObject *obj)
 {
   GtkWidget *widget;
 
-#if GTK_CHECK_VERSION (2, 21, 0)
   widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (obj));
-#else
-  widget = GTK_ACCESSIBLE (obj)->widget;
-#endif
   if (widget == NULL)
     /* State is defunct */
     return 0;
@@ -333,11 +313,7 @@ gucharmap_chartable_accessible_update_all_cells (AtkObject *obj)
   GPtrArray *cells;
   guint n_cells, n;
 
-#if GTK_CHECK_VERSION (2, 21, 0)
   widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (obj));
-#else
-  widget = GTK_ACCESSIBLE (obj)->widget;
-#endif
   if (!widget)
     /* Widget is being deleted */
     return;
@@ -493,16 +469,10 @@ gucharmap_chartable_accessible_initialize (AtkObject *obj,
                         G_CALLBACK (adjustment_changed), obj);
     }
 
-#if GTK_CHECK_VERSION (2, 91, 2)
   g_signal_connect_after (chartable, "notify::hadjustment",
                           G_CALLBACK (sync_adjustment), obj);
   g_signal_connect_after (chartable, "notify::vadjustment",
                           G_CALLBACK (sync_adjustment), obj);
-#else
-  g_signal_connect_after (chartable, "set-scroll-adjustments",
-                          G_CALLBACK (gucharmap_chartable_accessible_set_scroll_adjustments),
-                          obj);
-#endif  /* GTK3 */
   g_signal_connect (widget, "size-allocate",
                     G_CALLBACK (size_allocated), obj);
   g_signal_connect (chartable, "notify::active-character",
@@ -552,15 +522,9 @@ gucharmap_chartable_accessible_destroyed (GtkWidget *widget,
 static void
 gucharmap_chartable_accessible_connect_widget_destroyed (GtkAccessible *accessible)
 {
-#if GTK_CHECK_VERSION (2, 21, 0)
   if (gtk_accessible_get_widget (accessible))
     {
       g_signal_connect_after (gtk_accessible_get_widget (accessible),
-#else
-  if (accessible->widget)
-    {
-      g_signal_connect_after (accessible->widget,
-#endif
                               "destroy",
                               G_CALLBACK (gucharmap_chartable_accessible_destroyed),
                               accessible);
@@ -597,11 +561,7 @@ gucharmap_chartable_accessible_get_n_columns (AtkTable *table)
   GucharmapChartable *chartable;
   GucharmapChartablePrivate *chartable_priv;
 
-#if GTK_CHECK_VERSION (2, 21, 0)
   widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (table));
-#else
-  widget = GTK_ACCESSIBLE (table)->widget;
-#endif
   if (widget == NULL)
     /* State is defunct */
     return 0;
@@ -620,11 +580,7 @@ gucharmap_chartable_accessible_get_column_extent_at (AtkTable       *table,
 {
   GtkWidget *widget;
 
-#if GTK_CHECK_VERSION (2, 21, 0)
   widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (table));
-#else
-  widget = GTK_ACCESSIBLE (table)->widget;
-#endif
   if (widget == NULL)
     /* State is defunct */
     return 0;
@@ -641,11 +597,7 @@ gucharmap_chartable_accessible_get_n_rows (AtkTable *table)
   GucharmapChartablePrivate *chartable_priv;
   gint n_rows;
 
-#if GTK_CHECK_VERSION (2, 21, 0)
   widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (table));
-#else
-  widget = GTK_ACCESSIBLE (table)->widget;
-#endif
   if (widget == NULL)
     /* State is defunct */
     return 0;
@@ -666,11 +618,7 @@ gucharmap_chartable_accessible_get_row_extent_at (AtkTable *table,
 {
   GtkWidget *widget;
 
-#if GTK_CHECK_VERSION (2, 21, 0)
   widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (table));
-#else
-  widget = GTK_ACCESSIBLE (table)->widget;
-#endif
   if (widget == NULL)
     /* State is defunct */
     return 0;
@@ -688,11 +636,7 @@ gucharmap_chartable_accessible_get_index_at (AtkTable *table,
   GucharmapChartable *chartable;
   GucharmapChartablePrivate *chartable_priv;
 
-#if GTK_CHECK_VERSION (2, 21, 0)
   widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (table));
-#else
-  widget = GTK_ACCESSIBLE (table)->widget;
-#endif
   if (widget == NULL)
     /* State is defunct */
     return -1;
@@ -712,11 +656,7 @@ gucharmap_chartable_accessible_get_column_at_index (AtkTable *table,
   GucharmapChartable *chartable;
   GucharmapChartablePrivate *chartable_priv;
 
-#if GTK_CHECK_VERSION (2, 21, 0)
   widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (table));
-#else
-  widget = GTK_ACCESSIBLE (table)->widget;
-#endif
   if (widget == NULL)
     /* State is defunct */
     return -1;
@@ -736,11 +676,7 @@ gucharmap_chartable_accessible_get_row_at_index (AtkTable *table,
   GucharmapChartable *chartable;
   GucharmapChartablePrivate *chartable_priv;
 
-#if GTK_CHECK_VERSION (2, 21, 0)
   widget = gtk_accessible_get_widget (GTK_ACCESSIBLE (table));
-#else
-  widget = GTK_ACCESSIBLE (table)->widget;
-#endif
   if (widget == NULL)
     /* State is defunct */
     return -1;

@@ -555,11 +555,7 @@ information_dialog (GucharmapSearchDialog *search_dialog,
   GucharmapSearchDialogPrivate *priv = GUCHARMAP_SEARCH_DIALOG_GET_PRIVATE (search_dialog);
   GtkWidget *dialog;
 
-#if GTK_CHECK_VERSION (2,18,0)
   dialog = gtk_message_dialog_new (gtk_widget_get_visible (GTK_WIDGET (search_dialog)) ?
-#else
-  dialog = gtk_message_dialog_new (GTK_WIDGET_VISIBLE (search_dialog) ?
-#endif
                                      GTK_WINDOW (search_dialog) :
                                      GTK_WINDOW (priv->guw),
                                    GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
@@ -735,9 +731,6 @@ gucharmap_search_dialog_init (GucharmapSearchDialog *search_dialog)
   /* follow hig guidelines */
   gtk_window_set_title (GTK_WINDOW (search_dialog), _("Find"));
   gtk_container_set_border_width (GTK_CONTAINER (search_dialog), 6);
-#if !GTK_CHECK_VERSION (2, 90, 7)
-  gtk_dialog_set_has_separator (GTK_DIALOG (search_dialog), FALSE);
-#endif
   gtk_window_set_destroy_with_parent (GTK_WINDOW (search_dialog), TRUE);
   gtk_box_set_spacing (GTK_BOX (content_area), 12);
   gtk_window_set_resizable (GTK_WINDOW (search_dialog), FALSE);
@@ -748,21 +741,13 @@ gucharmap_search_dialog_init (GucharmapSearchDialog *search_dialog)
   gtk_dialog_add_button (GTK_DIALOG (search_dialog), GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE);
 
   priv->prev_button = gtk_button_new ();
-#if GTK_CHECK_VERSION (2,18,0)
   gtk_widget_set_can_default (priv->prev_button, TRUE);
-#else
-  GTK_WIDGET_SET_FLAGS (priv->prev_button, GTK_CAN_DEFAULT);
-#endif
   set_button_stock_image_and_label (GTK_BUTTON (priv->prev_button), GTK_STOCK_GO_BACK, _("_Previous"));
   gtk_dialog_add_action_widget (GTK_DIALOG (search_dialog), priv->prev_button, GUCHARMAP_RESPONSE_PREVIOUS);
   gtk_widget_show (priv->prev_button);
 
   priv->next_button = gtk_button_new ();
-#if GTK_CHECK_VERSION (2,18,0)
   gtk_widget_set_can_default (priv->next_button, TRUE);
-#else
-  GTK_WIDGET_SET_FLAGS (priv->next_button, GTK_CAN_DEFAULT);
-#endif
   gtk_widget_show (priv->next_button);
   set_button_stock_image_and_label (GTK_BUTTON (priv->next_button), GTK_STOCK_GO_FORWARD, _("_Next"));
   gtk_dialog_add_action_widget (GTK_DIALOG (search_dialog), priv->next_button, GUCHARMAP_RESPONSE_NEXT);
