@@ -59,6 +59,10 @@ gucharmap_chapters_view_init (GucharmapChaptersView *view)
   priv = view->priv = G_TYPE_INSTANCE_GET_PRIVATE (view, GUCHARMAP_TYPE_CHAPTERS_VIEW, GucharmapChaptersViewPrivate);
 
   cell = gtk_cell_renderer_text_new ();
+  g_object_set (cell, 
+                "ellipsize", PANGO_ELLIPSIZE_END,
+                "ellipsize-set", TRUE,
+                NULL);
   column = priv->column = gtk_tree_view_column_new ();
   gtk_tree_view_column_pack_start (column, cell, FALSE);
   gtk_tree_view_column_add_attribute (column, cell, "text", GUCHARMAP_CHAPTERS_MODEL_COLUMN_LABEL);

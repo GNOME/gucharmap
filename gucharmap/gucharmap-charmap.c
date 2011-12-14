@@ -1094,7 +1094,7 @@ gucharmap_charmap_init (GucharmapCharmap *charmap)
 
   gtk_container_add (GTK_CONTAINER (scrolled_window), view);
   gtk_widget_show (view);
-  gtk_paned_pack1 (GTK_PANED (charmap), scrolled_window, FALSE, TRUE);
+  gtk_paned_pack1 (GTK_PANED (charmap), scrolled_window, FALSE, FALSE);
   gtk_widget_show (scrolled_window);
 
   /* Right pane */
@@ -1182,7 +1182,7 @@ gucharmap_charmap_init (GucharmapCharmap *charmap)
   g_signal_connect (priv->notebook, "switch-page",
                     G_CALLBACK (notebook_switch_page), charmap);
 
-  gtk_paned_pack2 (GTK_PANED (charmap), priv->notebook, TRUE, TRUE);
+  gtk_paned_pack2 (GTK_PANED (charmap), priv->notebook, TRUE, FALSE);
   gtk_widget_show (priv->notebook);
 }
 
