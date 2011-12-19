@@ -88,6 +88,7 @@ libgucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@_la_CFLAGS = \
 libgucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@_la_LDFLAGS = \
 	-version-info $(LIBGUCHARMAP_LT_VERSION)	\
 	-export-symbols-regex "^gucharmap_*"		\
+	$(BSYMBOLIC_LDFLAG) \
 	$(AM_LDFLAGS)
 
 libgucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@_la_LIBADD = \

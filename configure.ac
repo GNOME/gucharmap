@@ -205,6 +205,30 @@ fi
 
 GOBJECT_INTROSPECTION_CHECK([0.9.0])
 
+##########################################################
+# Check for -Bsymbolic-functions linker flag used to avoid
+# intra-library PLT jumps, if available.
+##########################################################
+
+AC_ARG_ENABLE([Bsymbolic],
+  [AS_HELP_STRING([--disable-Bsymbolic],
+                  [disable linking with -Bsymbolic])],
+  [],[enable_Bsymbolic=yes])
+
+BSYMBOLIC_LDFLAG=
+if test "$enable_Bsymbolic" != "no"; then
+  CC_CHECK_LDFLAGS(["-Wl,-Bsymbolic-functions"],
+    [BSYMBOLIC_LDFLAG="-Wl,-Bsymbolic-functions"],
+    [if test "$enable_Bsymbolic" = "auto"; then
+       AC_MSG_WARN([-Bsymbolic not supported by ld; disabling])
+       enable_Bsymbolic=no
+     else
+       AC_MSG_ERROR([-Bsymbolic requested but not supported by ld. Use --disable-Bsymbolic to disable])
+     fi])
+fi
+
+AC_SUBST([BSYMBOLIC_LDFLAG])
+
 # ***************
 # API & User Docs
 # ***************
