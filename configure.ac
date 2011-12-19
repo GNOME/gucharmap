@@ -62,8 +62,6 @@ AM_PROG_CC_C_O
 # checks for stuff
 GNOME_COMMON_INIT
 GNOME_DEBUG_CHECK
-GNOME_COMPILE_WARNINGS([maximum])
-#GNOME_MAINTAINER_MODE_DEFINES
 
 # check for win32
 case "$host" in
@@ -228,6 +226,23 @@ if test "$enable_Bsymbolic" != "no"; then
 fi
 
 AC_SUBST([BSYMBOLIC_LDFLAG])
+
+# ***********
+# Compilation
+# ***********
+
+CC_CHECK_CFLAGS_APPEND([ \
+  -Wall -Wextra \
+  -Wformat-nonliteral -Werror=format-security \
+  -Wsign-compare -Werror=implicit-function-declaration \
+  -Wpointer-arith -Wwrite-strings -Wstrict-prototypes \
+  -Waggregate-return -Wcast-align -Wimplicit -Wuninitialized \
+  -Wmissing-prototypes -Wmissing-declarations -Wnested-externs \
+  -Wpacked -Wmissing-format-attribute -Wshadow \
+  -Wstrict-aliasing=2 -Winit-self -Wunsafe-loop-optimizations \
+  -Wdeclaration-after-statement -Wold-style-definition \
+  -Wno-missing-field-initializers -Wno-unused-parameter \
+  -fno-common -Wno-switch-enum])
 
 # ***************
 # API & User Docs
