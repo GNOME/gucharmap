@@ -309,7 +309,11 @@ position_rectangle_on_screen (GtkWidget *widget,
   monitor_num = gdk_screen_get_monitor_at_window (screen, gtk_widget_get_window (widget));
   if (monitor_num < 0)
     monitor_num = 0;
+#if GTK_CHECK_VERSION (3, 3, 5)
+  gdk_screen_get_monitor_workarea (screen, monitor_num, &monitor);
+#else
   gdk_screen_get_monitor_geometry (screen, monitor_num, &monitor);
+#endif
 
   for (i = 0; i < G_N_ELEMENTS (positions); ++i) {
     if (position_rectangle (rectangle, target_rect, &monitor, positions[i], direction))

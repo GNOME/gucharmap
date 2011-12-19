@@ -89,7 +89,11 @@ main (int argc, char **argv)
 
   screen = gtk_window_get_screen (GTK_WINDOW (window));
   monitor = gdk_screen_get_monitor_at_point (screen, 0, 0);
+#if GTK_CHECK_VERSION (3, 3, 5)
+  gdk_screen_get_monitor_workarea (screen, monitor, &rect);
+#else
   gdk_screen_get_monitor_geometry (screen, monitor, &rect);
+#endif
   gtk_window_set_default_size (GTK_WINDOW (window), rect.width * 9/16, rect.height * 9/16);
 
   /* No --font argument, use the stored font (if any) */
