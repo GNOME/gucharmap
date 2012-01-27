@@ -1180,6 +1180,9 @@ gucharmap_charmap_init (GucharmapCharmap *charmap)
 
   gtk_paned_pack2 (GTK_PANED (charmap), priv->notebook, TRUE, FALSE);
   gtk_widget_show (priv->notebook);
+
+  gtk_widget_set_hexpand (GTK_WIDGET (charmap), TRUE);
+  gtk_widget_set_vexpand (GTK_WIDGET (charmap), TRUE);
 }
 
 GtkWidget *

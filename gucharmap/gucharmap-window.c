@@ -743,7 +743,7 @@ charmap_sync_active_character (GtkWidget *widget,
 static void
 gucharmap_window_init (GucharmapWindow *guw)
 {
-  GtkWidget *big_vbox, *hbox, *bbox, *button, *label;
+  GtkWidget *grid, *button, *label;
   GucharmapChartable *chartable;
   /* tooltips are NULL because they are never actually shown in the program */
   const GtkActionEntry menu_entries[] =
@@ -855,16 +855,16 @@ gucharmap_window_init (GucharmapWindow *guw)
   gtk_ui_manager_add_ui_from_string (guw->uimanager, ui_info, strlen (ui_info), NULL);
   
   /* Now the widgets */
-  big_vbox = gtk_vbox_new (FALSE, 0);
-  gtk_container_add (GTK_CONTAINER (guw), big_vbox);
+  grid = gtk_grid_new ();
+  gtk_container_add (GTK_CONTAINER (guw), grid);
 
   /* First the menubar */
   menubar = gtk_ui_manager_get_widget (guw->uimanager, "/MenuBar");
-  gtk_box_pack_start (GTK_BOX (big_vbox), menubar, FALSE, FALSE, 0);
+  gtk_grid_attach (GTK_GRID (grid), menubar, 0, 0, 3, 1);
 
   /* The font selector */
   guw->fontsel = gucharmap_mini_font_selection_new ();
-  gtk_box_pack_start (GTK_BOX (big_vbox), guw->fontsel, FALSE, FALSE, 0);
+  gtk_grid_attach (GTK_GRID (grid), guw->fontsel, 0, 1, 3, 1);
   gtk_widget_show (GTK_WIDGET (guw->fontsel));
 
   /* The charmap */
@@ -872,41 +872,33 @@ gucharmap_window_init (GucharmapWindow *guw)
   g_signal_connect (guw->charmap, "notify::font-desc",
                     G_CALLBACK (charmap_sync_font_desc), guw);
 
-  gtk_box_pack_start (GTK_BOX (big_vbox), GTK_WIDGET (guw->charmap),
-                      TRUE, TRUE, 0);
+  gtk_grid_attach (GTK_GRID (grid), GTK_WIDGET (guw->charmap), 0, 2, 3, 1);
   gtk_widget_show (GTK_WIDGET (guw->charmap));
 
   /* Text to copy entry + button */
-  hbox = gtk_hbox_new (FALSE, 6);
-  gtk_container_set_border_width (GTK_CONTAINER (hbox), 6);
-
   label = gtk_label_new_with_mnemonic (_("_Text to copy:"));
-  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+  g_object_set (label, "margin", 6, NULL);
+  gtk_grid_attach (GTK_GRID (grid), label, 0, 3, 1, 1);
   gtk_widget_show (label);
 
-  bbox = gtk_hbutton_box_new ();
-
   button = gtk_button_new_from_stock (GTK_STOCK_COPY);
+  g_object_set (button, "margin", 6, NULL);
   gtk_widget_set_tooltip_text (button, _("Copy to the clipboard."));
   g_signal_connect (G_OBJECT (button), "clicked",
                     G_CALLBACK (edit_copy), guw);
-  gtk_box_pack_start (GTK_BOX (bbox), button, FALSE, FALSE, 0);
+  gtk_grid_attach (GTK_GRID (grid), button, 2, 3, 1, 1);
   gtk_widget_show (button);
 
   gtk_widget_set_sensitive (button, FALSE);
   guw->text_to_copy_entry = gtk_entry_new ();
+  g_object_set (guw->text_to_copy_entry, "margin", 6, NULL);
+  gtk_widget_set_hexpand (guw->text_to_copy_entry, TRUE);
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), guw->text_to_copy_entry);
   g_signal_connect (G_OBJECT (guw->text_to_copy_entry), "changed",
                     G_CALLBACK (entry_changed_sensitize_button), button);
 
-  gtk_box_pack_start (GTK_BOX (hbox), guw->text_to_copy_entry, TRUE, TRUE, 0);
+  gtk_grid_attach (GTK_GRID (grid), guw->text_to_copy_entry, 1, 3, 1, 1);
   gtk_widget_show (guw->text_to_copy_entry);
-
-  gtk_box_pack_end (GTK_BOX (hbox), bbox, FALSE, FALSE, 0);
-  gtk_widget_show (bbox);
-
-  gtk_box_pack_start (GTK_BOX (big_vbox), hbox, FALSE, FALSE, 0);
-  gtk_widget_show (hbox);
 
   /* FIXMEchpe!! */
   chartable = gucharmap_charmap_get_chartable (guw->charmap);
@@ -914,20 +906,13 @@ gucharmap_window_init (GucharmapWindow *guw)
 
   /* Finally the statusbar */
   guw->status = gtk_statusbar_new ();
-  gtk_box_pack_start (GTK_BOX (big_vbox), guw->status, FALSE, FALSE, 0);
+  gtk_grid_attach (GTK_GRID (grid), guw->status, 0, 4, 3, 1);
   gtk_widget_show (guw->status);
   g_signal_connect (guw->status, "realize", G_CALLBACK (status_realize), guw);
 
-#if 0
-  grip = gtk_statusbar_new ();
-  gtk_statusbar_set_has_resize_grip (GTK_STATUSBAR (grip), TRUE);
-  gtk_box_pack_start (GTK_BOX (hbox), grip, FALSE, FALSE, 0);
-#endif
-  gtk_widget_show_all (hbox);
-
   g_signal_connect (guw->charmap, "status-message", G_CALLBACK (status_message), guw);
 
-  gtk_widget_show (big_vbox);
+  gtk_widget_show (grid);
 
   gtk_widget_grab_focus (GTK_WIDGET (gucharmap_charmap_get_chartable (guw->charmap)));
 

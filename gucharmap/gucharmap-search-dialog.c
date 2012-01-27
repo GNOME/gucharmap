@@ -724,7 +724,7 @@ static void
 gucharmap_search_dialog_init (GucharmapSearchDialog *search_dialog)
 {
   GucharmapSearchDialogPrivate *priv = GUCHARMAP_SEARCH_DIALOG_GET_PRIVATE (search_dialog);
-  GtkWidget *hbox, *label, *content_area;
+  GtkWidget *grid, *label, *content_area;
 
   content_area = gtk_dialog_get_content_area (GTK_DIALOG (search_dialog));
 
@@ -759,19 +759,21 @@ gucharmap_search_dialog_init (GucharmapSearchDialog *search_dialog)
                                            GTK_RESPONSE_CLOSE,
                                            -1);
 
-  hbox = gtk_hbox_new (FALSE, 12);
-  gtk_widget_show (hbox);
-  gtk_container_set_border_width (GTK_CONTAINER (hbox), 6);
-  gtk_box_pack_start (GTK_BOX (content_area), hbox, FALSE, FALSE, 0);
+  grid = gtk_grid_new ();
+  gtk_grid_set_column_spacing (GTK_GRID (grid), 12);
+  gtk_widget_show (grid);
+  gtk_container_set_border_width (GTK_CONTAINER (grid), 6);
+  gtk_box_pack_start (GTK_BOX (content_area), grid, FALSE, FALSE, 0);
 
   label = gtk_label_new_with_mnemonic (_("_Search:"));
   gtk_widget_show (label);
-  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+  gtk_grid_attach (GTK_GRID (grid), label, 0, 0, 1, 1);
 
   priv->entry = gtk_entry_new ();
   gtk_widget_show (priv->entry);
+  gtk_widget_set_hexpand (priv->entry, TRUE);
   gtk_entry_set_activates_default (GTK_ENTRY (priv->entry), TRUE);
-  gtk_box_pack_start (GTK_BOX (hbox), priv->entry, TRUE, TRUE, 0);
+  gtk_grid_attach (GTK_GRID (grid), priv->entry, 1, 0, 1, 1);
   g_signal_connect (priv->entry, "changed", G_CALLBACK (entry_changed), search_dialog);
 
   priv->whole_word_option = gtk_check_button_new_with_mnemonic (_("Match _whole word"));
