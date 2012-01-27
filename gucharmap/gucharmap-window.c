@@ -150,26 +150,6 @@ status_message (GtkWidget       *widget,
     gtk_statusbar_push (GTK_STATUSBAR (guw->status), 0, message);
 }
 
-static gboolean
-update_progress_bar (GucharmapWindow *guw)
-{
-  gdouble fraction_completed;
-
-  fraction_completed = gucharmap_search_dialog_get_completed (GUCHARMAP_SEARCH_DIALOG (guw->search_dialog));
-
-  if (fraction_completed < 0 || fraction_completed > 1)
-    {
-      gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (guw->progress), 0);
-      gtk_progress_bar_set_text (GTK_PROGRESS_BAR (guw->progress), NULL);
-      return FALSE;
-    }
-  else
-    {
-      gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (guw->progress), fraction_completed);
-      return TRUE;
-    }
-}
-
 static void
 search_start (GucharmapSearchDialog *search_dialog,
               GucharmapWindow       *guw)
@@ -187,9 +167,6 @@ search_start (GucharmapSearchDialog *search_dialog,
   gtk_action_set_sensitive (action, FALSE);
   action = gtk_action_group_get_action (guw->action_group, "FindPrevious");
   gtk_action_set_sensitive (action, FALSE);
-
-  gtk_progress_bar_set_text (GTK_PROGRESS_BAR (guw->progress), _("Searching…"));
-  g_timeout_add (100, (GSourceFunc) update_progress_bar, guw);
 }
 
 static void
@@ -198,9 +175,6 @@ search_finish (GucharmapSearchDialog *search_dialog,
                GucharmapWindow       *guw)
 {
   GtkAction *action;
-
-  gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (guw->progress), 0);
-  gtk_progress_bar_set_text (GTK_PROGRESS_BAR (guw->progress), NULL);
 
   if (found_char != (gunichar)(-1))
     gucharmap_charmap_set_active_character (guw->charmap, found_char);
@@ -939,16 +913,10 @@ gucharmap_window_init (GucharmapWindow *guw)
   g_signal_connect (chartable, "activate", G_CALLBACK (insert_character_in_text_to_copy), guw);
 
   /* Finally the statusbar */
-  hbox = gtk_hbox_new (FALSE, 0);
-  gtk_box_pack_start (GTK_BOX (big_vbox), hbox, FALSE, FALSE, 0);
-
   guw->status = gtk_statusbar_new ();
-  gtk_box_pack_start (GTK_BOX (hbox), guw->status, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (big_vbox), guw->status, FALSE, FALSE, 0);
   gtk_widget_show (guw->status);
   g_signal_connect (guw->status, "realize", G_CALLBACK (status_realize), guw);
-
-  guw->progress = gtk_progress_bar_new ();
-  gtk_box_pack_start (GTK_BOX (hbox), guw->progress, FALSE, FALSE, 0);
 
 #if 0
   grip = gtk_statusbar_new ();

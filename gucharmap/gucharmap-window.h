@@ -53,8 +53,6 @@ struct _GucharmapWindow
 
   GtkWidget *search_dialog; /* takes care of all aspects of searching */
 
-  GtkWidget *progress;
-
   guint save_last_char_idle_id;
 
   GtkPageSetup *page_setup;
@@ -76,8 +74,6 @@ GtkWidget * gucharmap_window_new       (void);
 
 void        gucharmap_window_set_font  (GucharmapWindow *guw,
                                         const char *font);
-
-GdkCursor *_gucharmap_window_progress_cursor (void);
 
 G_END_DECLS
 
