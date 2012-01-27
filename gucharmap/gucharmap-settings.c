@@ -27,270 +27,10 @@
 #include <gucharmap/gucharmap.h>
 #include "gucharmap-settings.h"
 
-#ifdef HAVE_GCONF
-#include <gconf/gconf-client.h>
-static GConfClient *client;
-#endif
-
-/* The last unicode character we support */
-/* keep in sync with gucharmap-private.h! */
-#define UNICHAR_MAX (0x0010FFFFUL)
-
 #define WINDOW_STATE_TIMEOUT 1 /* s */
 
-#define GCONF_PREFIX "/apps/gucharmap"
-
-static GucharmapChaptersMode
-get_default_chapters_mode (void)
-{
-  /* XXX: In the future, do something based on chapters mode and locale 
-   * or something. */
-  return GUCHARMAP_CHAPTERS_SCRIPT;
-}
-
-static gchar *
-get_default_font (void)
-{
-  return NULL;
-}
-
-static gboolean
-get_default_snap_pow2 (void)
-{
-  return FALSE;
-}
-
-#ifdef HAVE_GCONF
-
-void
-gucharmap_settings_initialize (void)
-{
-  client = gconf_client_get_default ();
-
-  if (client == NULL) {
-    g_message(_("GConf could not be initialized."));
-    return;
-  }
-
-  gconf_client_add_dir (client, GCONF_PREFIX,
-                        GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
-}
-
-void
-gucharmap_settings_shutdown (void)
-{
-  gconf_client_remove_dir (client, GCONF_PREFIX, NULL);
-  g_object_unref(client);
-  client = NULL;
-}
-
-static gboolean
-gucharmap_settings_initialized (void) 
-{
-  return (client != NULL);
-}
-
-GucharmapChaptersMode
-gucharmap_settings_get_chapters_mode (void)
-{
-  GucharmapChaptersMode ret;
-  gchar *mode;
-  
-  mode = gconf_client_get_string (client, GCONF_PREFIX"/chapters_mode", NULL);
-  if (mode == NULL)
-    return get_default_chapters_mode ();
-
-  if (strcmp (mode, "script") == 0)
-    ret = GUCHARMAP_CHAPTERS_SCRIPT;
-  else if (strcmp (mode, "block") == 0)
-    ret = GUCHARMAP_CHAPTERS_BLOCK;
-  else
-    ret = get_default_chapters_mode ();
-
-  g_free (mode);
-  return ret;
-}
-
-void
-gucharmap_settings_set_chapters_mode (GucharmapChaptersMode mode)
-{
-  switch (mode)
-    {
-      case GUCHARMAP_CHAPTERS_SCRIPT:
-        gconf_client_set_string (client, GCONF_PREFIX"/chapters_mode", "script", NULL);
-      break;
-
-      case GUCHARMAP_CHAPTERS_BLOCK:
-        gconf_client_set_string (client, GCONF_PREFIX"/chapters_mode", "block", NULL);
-      break;
-    }
-}
-
-gchar *
-gucharmap_settings_get_font (void)
-{
-  char *font;
-
-  if (!gucharmap_settings_initialized ()) {
-      return get_default_font ();
-  }
-  
-  font = gconf_client_get_string (client, GCONF_PREFIX"/font", NULL);
-  if (!font || !font[0]) {
-    g_free (font);
-    return NULL;
-  }
-
-  return font;
-}
-
-void
-gucharmap_settings_set_font (gchar *fontname)
-{
-  if (!gucharmap_settings_initialized ()) {
-      return;
-  }
-  
-  gconf_client_set_string (client, GCONF_PREFIX"/font", fontname, NULL);
-}
-
-gunichar
-gucharmap_settings_get_last_char (void)
-{
-  /* See bug 469053 */
-  gchar *str, *endptr;
-  guint64 value;
-
-  if (!gucharmap_settings_initialized ()) {
-      return gucharmap_unicode_get_locale_character ();
-  }
-
-  str = gconf_client_get_string (client, GCONF_PREFIX"/last_char", NULL);
-  if (!str || !g_str_has_prefix (str, "U+")) {
-    g_free (str);
-    return gucharmap_unicode_get_locale_character  ();
-  }
-
-  endptr = NULL;
-  errno = 0;
-  value = g_ascii_strtoull (str + 2 /* skip the "U+" */, &endptr, 16);
-  if (errno || endptr == str || value > UNICHAR_MAX) {
-    g_free (str);
-    return gucharmap_unicode_get_locale_character  ();
-  }
-
-  g_free (str);
-
-  return (gunichar) value;
-}
-
-void
-gucharmap_settings_set_last_char (gunichar wc)
-{
-  char str[32];
-
-  if (!gucharmap_settings_initialized ()) {
-      return;
-  }
-  
-  g_snprintf (str, sizeof (str), "U+%04X", wc);
-  str[sizeof (str) - 1] = '\0';
-  gconf_client_set_string (client, GCONF_PREFIX"/last_char", str, NULL);
-}
-
-gboolean
-gucharmap_settings_get_snap_pow2 (void)
-{
-  if (!gucharmap_settings_initialized ()) {
-      return get_default_snap_pow2 ();
-  }
-  
-  return gconf_client_get_bool (client, GCONF_PREFIX"/snap_cols_pow2", NULL);
-}
-
-void
-gucharmap_settings_set_snap_pow2 (gboolean snap_pow2)
-{
-  if (!gucharmap_settings_initialized ()) {
-      return;
-  }
-  
-  gconf_client_set_bool (client, GCONF_PREFIX"/snap_cols_pow2", snap_pow2, NULL);
-}
-
-#else /* HAVE_GCONF */
-
-void
-gucharmap_settings_initialize (void)
-{
-  return;
-}
-
-void 
-gucharmap_settings_shutdown (void)
-{
-  return;
-}
-
-static gboolean
-gucharmap_settings_initialized (void)
-{
-  return FALSE;
-}
-
-GucharmapChaptersMode
-gucharmap_settings_get_chapters_mode (void)
-{
-  return get_default_chapters_mode();
-}
-
-void
-gucharmap_settings_set_chapters_mode (GucharmapChaptersMode mode)
-{
-  return;
-}
-
-gchar *
-gucharmap_settings_get_font (void)
-{
-  return get_default_font ();
-}
-
-void
-gucharmap_settings_set_font (gchar *fontname)
-{
-  return;
-}
-
-gunichar
-gucharmap_settings_get_last_char (void)
-{
-  return gucharmap_unicode_get_locale_character  ();
-}
-
-void
-gucharmap_settings_set_last_char (gunichar wc)
-{
-  return;
-}
-
-gboolean
-gucharmap_settings_get_snap_pow2 (void)
-{
-  return get_default_snap_pow2 ();
-}
-
-void
-gucharmap_settings_set_snap_pow2 (gboolean snap_pow2)
-{
-  return;
-}
-
-#endif /* HAVE_GCONF */
-
-#ifdef HAVE_GCONF
-
 typedef struct {
+  GSettings *settings;
   guint timeout_id;
   int width;
   int height;
@@ -301,8 +41,7 @@ typedef struct {
 static gboolean
 window_state_timeout_cb (WindowState *state)
 {
-  gconf_client_set_int (client, GCONF_PREFIX "/width", state->width, NULL);
-  gconf_client_set_int (client, GCONF_PREFIX "/height", state->height, NULL);
+  g_settings_set (state->settings, "size", "(ii)", state->width, state->height);
 
   state->timeout_id = 0;
   return FALSE;
@@ -317,6 +56,8 @@ free_window_state (WindowState *state)
     /* And store now */
     window_state_timeout_cb (state);
   }
+
+  g_object_unref (state->settings);
 
   g_slice_free (WindowState, state);
 }
@@ -348,17 +89,15 @@ window_state_event_cb (GtkWidget *widget,
 {
   if (event->changed_mask & GDK_WINDOW_STATE_MAXIMIZED) {
     state->is_maximised = (event->new_window_state & GDK_WINDOW_STATE_MAXIMIZED) != 0;
-    gconf_client_set_bool (client, GCONF_PREFIX "/maximized", state->is_maximised, NULL);
+    g_settings_set_boolean (state->settings, "maximized", state->is_maximised);
   }
   if (event->changed_mask & GDK_WINDOW_STATE_FULLSCREEN) {
     state->is_fullscreen = (event->new_window_state & GDK_WINDOW_STATE_FULLSCREEN) != 0;
-    gconf_client_set_bool (client, GCONF_PREFIX "/fullscreen", state->is_fullscreen, NULL);
+    g_settings_set_boolean (state->settings, "fullscreen", state->is_fullscreen);
   }
 
   return FALSE;
 }
-
-#endif /* HAVE_GCONF */
 
 /**
  * gucharma_settings_add_window:
@@ -371,7 +110,6 @@ window_state_event_cb (GtkWidget *widget,
 void
 gucharmap_settings_add_window (GtkWindow *window)
 {
-#ifdef HAVE_GCONF
   WindowState *state;
   int width, height;
   gboolean maximised, fullscreen;
@@ -380,6 +118,7 @@ gucharmap_settings_add_window (GtkWindow *window)
   g_return_if_fail (!gtk_widget_get_realized (GTK_WIDGET (window)));
 
   state = g_slice_new0 (WindowState);
+  state->settings = g_settings_new ("org.gnome.gucharmap.WindowState");
   g_object_set_data_full (G_OBJECT (window), "GamesConf::WindowState",
                           state, (GDestroyNotify) free_window_state);
 
@@ -388,10 +127,9 @@ gucharmap_settings_add_window (GtkWindow *window)
   g_signal_connect (window, "window-state-event",
                     G_CALLBACK (window_state_event_cb), state);
 
-  maximised = gconf_client_get_bool (client, GCONF_PREFIX "/maximized", NULL);
-  fullscreen = gconf_client_get_bool (client, GCONF_PREFIX "/fullscreen", NULL);
-  width = gconf_client_get_int (client, GCONF_PREFIX "/width", NULL);
-  height = gconf_client_get_int (client, GCONF_PREFIX "/height", NULL);
+  maximised = g_settings_get_boolean (state->settings, "maximized");
+  fullscreen = g_settings_get_boolean (state->settings, "fullscreen");
+  g_settings_get (state->settings, "size", "(ii)", &width, &height);
 
   if (width > 0 && height > 0) {
     gtk_window_set_default_size (GTK_WINDOW (window), width, height);
@@ -402,5 +140,4 @@ gucharmap_settings_add_window (GtkWindow *window)
   if (fullscreen) {
     gtk_window_fullscreen (GTK_WINDOW (window));
   }
-#endif /* HAVE_GCONF */
 }

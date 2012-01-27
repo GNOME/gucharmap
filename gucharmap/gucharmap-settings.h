@@ -31,16 +31,6 @@ typedef enum
   GUCHARMAP_CHAPTERS_BLOCK  = 1
 } GucharmapChaptersMode;
 
-void         gucharmap_settings_initialize           (void);
-void         gucharmap_settings_shutdown             (void);
-GucharmapChaptersMode gucharmap_settings_get_chapters_mode    (void);
-void         gucharmap_settings_set_chapters_mode    (GucharmapChaptersMode mode);
-gchar *      gucharmap_settings_get_font             (void);
-void         gucharmap_settings_set_font             (gchar *font);
-gunichar     gucharmap_settings_get_last_char        (void);
-void         gucharmap_settings_set_last_char        (gunichar wc);
-gboolean     gucharmap_settings_get_snap_pow2        (void);
-void         gucharmap_settings_set_snap_pow2        (gboolean snap_pow2);
 void         gucharmap_settings_add_window           (GtkWindow *window);
 
 G_END_DECLS

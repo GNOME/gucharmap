@@ -147,7 +147,6 @@ gucharmap_CPPFLAGS = \
 
 gucharmap_CFLAGS = \
 	$(GTK_CFLAGS)	\
-	$(GCONF_CFLAGS)	\
 	$(AM_CFLAGS)
 
 gucharmap_LDFLAGS = \
@@ -156,7 +155,6 @@ gucharmap_LDFLAGS = \
 gucharmap_LDADD = \
 	libgucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@.la	\
 	$(GTK_LIBS)	\
-	$(GCONF_LIBS)	\
 	$(INTL_LIBS)
 
 if OS_WIN32
@@ -263,5 +261,11 @@ uninstall-local:
 endif # !OS_WIN32
 
 endif # ENABLE_CHARMAP
+
+gsettings_ENUM_NAMESPACE = org.gnome.gucharmap
+gsettings_ENUM_FILES = gucharmap-settings.h
+gsettings_SCHEMAS = org.gnome.gucharmap.gschema.xml
+
+@GSETTINGS_RULES@
 
 -include $(top_srcdir)/git.mk

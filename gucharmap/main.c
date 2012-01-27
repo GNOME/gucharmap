@@ -25,7 +25,6 @@
 #include <gtk/gtk.h>
 
 #include <gucharmap/gucharmap.h>
-#include "gucharmap-settings.h"
 #include "gucharmap-window.h"
  
 static gboolean
@@ -78,8 +77,6 @@ main (int argc, char **argv)
       exit (1);
     }
 
-  gucharmap_settings_initialize ();
-
   g_set_application_name (_("Character Map"));
   gtk_window_set_default_icon_name (GUCHARMAP_ICON_NAME);
 
@@ -96,23 +93,15 @@ main (int argc, char **argv)
 #endif
   gtk_window_set_default_size (GTK_WINDOW (window), rect.width * 9/16, rect.height * 9/16);
 
-  /* No --font argument, use the stored font (if any) */
-  if (!font)
-    font = gucharmap_settings_get_font ();
-
   if (font)
     {
       gucharmap_window_set_font (GUCHARMAP_WINDOW (window), font);
       g_free (font);
     }
 
-  gucharmap_settings_add_window (GTK_WINDOW (window));
-
   gtk_window_present (GTK_WINDOW (window));
 
   gtk_main ();
-
-  gucharmap_settings_shutdown ();
 
   return 0;
 }

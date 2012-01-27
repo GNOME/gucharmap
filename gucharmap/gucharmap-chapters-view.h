@@ -75,8 +75,6 @@ gchar *            gucharmap_chapters_view_get_selected  (GucharmapChaptersView 
 gboolean           gucharmap_chapters_view_set_selected  (GucharmapChaptersView *view,
                                                           const gchar       *name);
 
-gboolean           gucharmap_chapters_view_select_locale (GucharmapChaptersView *view);
-
 G_END_DECLS
 
 #endif /* #ifndef GUCHARMAP_CHAPTERS_VIEW_H */

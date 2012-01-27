@@ -19,10 +19,6 @@ desktopdir = $(datadir)/applications
 desktop_in_files = gucharmap.desktop.in.in
 desktop_DATA 	 = $(desktop_in_files:.desktop.in.in=.desktop)
 
-schemadir         = $(GCONF_SCHEMA_FILE_DIR)
-schema_in_files   = gucharmap.schemas.in
-schema_DATA       = $(schema_in_files:.schemas.in=.schemas)
-
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gucharmap-$(GUCHARMAP_API_PC_VERSION).pc
 
@@ -32,7 +28,7 @@ EXTRA_DIST = \
 	autogen.sh \
 	gtkrc.win32 \
 	gnome-doc-utils.make \
-	$(schema_in_files) \
+	org.gnome.gucharmap.schema.xml.in \
 	COPYING.UNICODE \
 	$(NULL)
 
@@ -46,7 +42,7 @@ DISTCHECK_CONFIGURE_FLAGS = \
 
 CLEANFILES = \
 	$(desktop_DATA) \
-	$(schema_DATA) \
+	$(gsettings_schema) \
 	$(NULL)
 
 MAINTAINERCLEANFILES = \
@@ -69,17 +65,6 @@ MAINTAINERCLEANFILES = \
 	$(srcdir)/gnome-doc-utils.make \
 	`find "$(srcdir)" -type f -name Makefile.in -print`
 
-if ENABLE_CHARMAP
-install-data-local: $(schema_DATA)
-if GCONF_SCHEMAS_INSTALL
-	if test -z "$(DESTDIR)" ; then \
-		for p in $^ ; do \
-			GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $$p 2>&1 > /dev/null; \
-		done \
-	fi
-endif # GCONF_SCHEMAS_INSTALL
-endif # ENABLE_CHARMAP
-
 ChangeLog:
 	$(AM_V_GEN) if test -f $(top_srcdir)/.git/HEAD; then \
 		git log --stat > $@; \
@@ -90,6 +75,5 @@ dist: ChangeLog
 .PHONY: ChangeLog
 
 @INTLTOOL_DESKTOP_RULE@
-@INTLTOOL_SCHEMAS_RULE@
 
 -include $(top_srcdir)/git.mk

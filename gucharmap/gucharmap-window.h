@@ -40,6 +40,7 @@ struct _GucharmapWindow
 {
   GtkWindow parent;
 
+  GSettings *settings;
   GucharmapCharmap *charmap;
   GtkWidget *status;
 
