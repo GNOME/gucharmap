@@ -44,7 +44,7 @@ get_char (GucharmapCodepointList *list,
   GucharmapBlockCodepointList *block_list = GUCHARMAP_BLOCK_CODEPOINT_LIST (list);
   GucharmapBlockCodepointListPrivate *priv = block_list->priv;
 
-  if (index > (gint)priv->end - priv->start)
+  if (index > (gint) (priv->end - priv->start))
     return (gunichar)(-1);
   else
     return (gunichar) priv->start + index;
