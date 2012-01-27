@@ -618,7 +618,7 @@ _gucharmap_search_dialog_fire_search (GucharmapSearchDialog *search_dialog,
 
   cursor = gdk_cursor_new_for_display (gtk_widget_get_display (GTK_WIDGET (search_dialog)), GDK_WATCH);
   gdk_window_set_cursor (gtk_widget_get_window (GTK_WIDGET (search_dialog)), cursor);
-  gdk_cursor_unref (cursor);
+  g_object_unref (cursor);
 
   list = gucharmap_charmap_get_book_codepoint_list (priv->guw->charmap);
   if (!list)

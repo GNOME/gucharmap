@@ -179,7 +179,7 @@ search_start (GucharmapSearchDialog *search_dialog,
 
   cursor = gdk_cursor_new_for_display (gtk_widget_get_display (GTK_WIDGET (guw)), GDK_WATCH);
   gdk_window_set_cursor (gtk_widget_get_window (GTK_WIDGET (guw)), cursor);
-  gdk_cursor_unref (cursor);
+  g_object_unref (cursor);
 
   action = gtk_action_group_get_action (guw->action_group, "Find");
   gtk_action_set_sensitive (action, FALSE);
@@ -472,7 +472,6 @@ next_or_prev_character (GtkAction       *action,
 {
   GucharmapChartable *chartable;
   GucharmapChartableClass *klass;
-  GtkBindingSet *binding_set;
   const char *name;
   guint keyval = 0;
 
@@ -485,7 +484,6 @@ next_or_prev_character (GtkAction       *action,
 
   chartable = gucharmap_charmap_get_chartable (guw->charmap);
   klass = GUCHARMAP_CHARTABLE_GET_CLASS (chartable);
-  binding_set = gtk_binding_set_by_class (klass);
   gtk_binding_set_activate (gtk_binding_set_by_class (klass),
                             keyval,
                             0,

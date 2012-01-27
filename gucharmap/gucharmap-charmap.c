@@ -79,8 +79,8 @@ gucharmap_charmap_finalize (GObject *object)
   GucharmapCharmap *charmap = GUCHARMAP_CHARMAP (object);
   GucharmapCharmapPrivate *priv = charmap->priv;
 
-  gdk_cursor_unref (priv->hand_cursor);
-  gdk_cursor_unref (priv->regular_cursor);
+  g_object_unref (priv->hand_cursor);
+  g_object_unref (priv->regular_cursor);
 
   if (priv->font_desc)
     pango_font_description_free (priv->font_desc);
@@ -947,11 +947,8 @@ set_cursor_if_appropriate (GucharmapCharmap *charmap,
 {
   GucharmapCharmapPrivate *priv = charmap->priv;
   GSList *tags = NULL, *tagp = NULL;
-  GtkTextBuffer *buffer;
   GtkTextIter iter;
   gboolean hovering_over_link = FALSE;
-
-  buffer = gtk_text_view_get_buffer (priv->details_view);
 
   gtk_text_view_get_iter_at_location (priv->details_view,
                                       &iter, x, y);
@@ -1000,7 +997,6 @@ details_motion_notify_event (GtkWidget *text_view,
 
   set_cursor_if_appropriate (charmap, x, y);
 
-  gdk_window_get_pointer (gtk_widget_get_window (text_view), NULL, NULL, NULL);
   return FALSE;
 }
 

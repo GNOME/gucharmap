@@ -420,9 +420,9 @@ gucharmap_chartable_accessible_set_scroll_adjustments (GucharmapChartable *chart
 }
 
 static void
-sync_adjustment (GucharmapChartable           *chartable,
-                 GParamSpec                   *pspec,
-                 GucharmapChartableAccessible *accessible)
+sync_adjustment (GucharmapChartable *chartable,
+                 GParamSpec         *pspec,
+                 AtkObject          *accessible)
 {
   GtkAdjustment *hadjustment, *vadjustment;
 
