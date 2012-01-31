@@ -740,6 +740,21 @@ charmap_sync_active_character (GtkWidget *widget,
   guw->save_last_char_idle_id = g_idle_add ((GSourceFunc) save_last_char_idle_cb, guw);
 }
 
+static gboolean
+string_to_unichar_mapping (GVariant *value,
+                           gpointer *result,
+                           gpointer  user_data)
+{
+  const gchar *str;
+
+  str = g_variant_get_string (value, NULL);
+  if (g_utf8_strlen (str, -1) != 1)
+    return FALSE;
+
+  *result = GINT_TO_POINTER (g_utf8_get_char (str));
+  return TRUE;
+}
+
 static void
 gucharmap_window_init (GucharmapWindow *guw)
 {
@@ -817,7 +832,7 @@ gucharmap_window_init (GucharmapWindow *guw)
   };
   GtkWidget *menubar;
   GtkAction *action;
-  gchar *active;
+  gunichar active;
   gchar *font;
 
   guw->settings = g_settings_new ("org.gnome.gucharmap");
@@ -935,9 +950,8 @@ gucharmap_window_init (GucharmapWindow *guw)
   gucharmap_window_set_chapters_model (guw, g_settings_get_enum (guw->settings, "group-by"));
 
   /* active character */
-  active = g_settings_get_string (guw->settings, "last-char");
-  gucharmap_charmap_set_active_character (guw->charmap, g_utf8_get_char (active));
-  g_free (active);
+  active = (gsize) g_settings_get_mapped (guw->settings, "last-char", string_to_unichar_mapping, NULL);
+  gucharmap_charmap_set_active_character (guw->charmap, active);
 
   /* window geometry */
   gucharmap_settings_add_window (GTK_WINDOW (guw));
