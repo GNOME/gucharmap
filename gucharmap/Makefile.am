@@ -262,9 +262,9 @@ endif # !OS_WIN32
 
 endif # ENABLE_CHARMAP
 
-gsettings_ENUM_NAMESPACE = org.gnome.gucharmap
+gsettings_ENUM_NAMESPACE = org.gnome.Charmap
 gsettings_ENUM_FILES = gucharmap-settings.h
-gsettings_SCHEMAS = org.gnome.gucharmap.gschema.xml
+gsettings_SCHEMAS = org.gnome.Charmap.gschema.xml
 
 @GSETTINGS_RULES@
 

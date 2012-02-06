@@ -22,8 +22,8 @@
 -->
 
 <schemalist gettext-domain='gucharmap'>
-  <schema id='org.gnome.gucharmap' path='/org/gnome/gucharmap/'>
-    <key name='group-by' enum='org.gnome.gucharmap.GucharmapChaptersMode'>
+  <schema id='org.gnome.Charmap' path='/org/gnome/charmap/'>
+    <key name='group-by' enum='org.gnome.Charmap.GucharmapChaptersMode'>
       <summary>Character map grouping method</summary>
       <description>
         This is how the characters in the character map are grouped.
@@ -66,7 +66,7 @@
     </key>
   </schema>
 
-  <schema id='org.gnome.gucharmap.WindowState' path='/org/gnome/gucharmap/window-state/'>
+  <schema id='org.gnome.Charmap.WindowState' path='/org/gnome/charmap/window-state/'>
     <key name='maximized' type='b'>
       <default>false</default>
     </key>

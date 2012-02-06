@@ -834,7 +834,7 @@ gucharmap_window_init (GucharmapWindow *guw)
   gunichar active;
   gchar *font;
 
-  guw->settings = g_settings_new ("org.gnome.gucharmap");
+  guw->settings = g_settings_new ("org.gnome.Charmap");
 
   gtk_window_set_title (GTK_WINDOW (guw), _("Character Map"));
   gtk_window_set_icon_name (GTK_WINDOW (guw), GUCHARMAP_ICON_NAME);

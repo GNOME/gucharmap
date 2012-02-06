@@ -118,7 +118,7 @@ gucharmap_settings_add_window (GtkWindow *window)
   g_return_if_fail (!gtk_widget_get_realized (GTK_WIDGET (window)));
 
   state = g_slice_new0 (WindowState);
-  state->settings = g_settings_new ("org.gnome.gucharmap.WindowState");
+  state->settings = g_settings_new ("org.gnome.Charmap.WindowState");
   g_object_set_data_full (G_OBJECT (window), "GamesConf::WindowState",
                           state, (GDestroyNotify) free_window_state);
 

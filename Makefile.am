@@ -28,7 +28,6 @@ EXTRA_DIST = \
 	autogen.sh \
 	gtkrc.win32 \
 	gnome-doc-utils.make \
-	org.gnome.gucharmap.schema.xml.in \
 	COPYING.UNICODE \
 	$(NULL)
 
@@ -42,7 +41,6 @@ DISTCHECK_CONFIGURE_FLAGS = \
 
 CLEANFILES = \
 	$(desktop_DATA) \
-	$(gsettings_schema) \
 	$(NULL)
 
 MAINTAINERCLEANFILES = \
