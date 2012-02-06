@@ -266,6 +266,8 @@ gsettings_ENUM_NAMESPACE = org.gnome.Charmap
 gsettings_ENUM_FILES = gucharmap-settings.h
 gsettings_SCHEMAS = org.gnome.Charmap.gschema.xml
 
+EXTRA_DIST += $(gsettings_SCHEMAS)
+
 @GSETTINGS_RULES@
 
 -include $(top_srcdir)/git.mk
