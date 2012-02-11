@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap.master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-10 01:37+0300\n"
-"PO-Revision-Date: 2012-01-10 01:37+0300\n"
+"POT-Creation-Date: 2012-02-11 22:48+0300\n"
+"PO-Revision-Date: 2012-02-11 22:49+0300\n"
 "Last-Translator: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>\n"
 "Language-Team: Belarusian <i18n-bel-gnome@googlegroups.com>\n"
 "Language: be\n"
@@ -15,14 +15,22 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:845
-#: ../gucharmap/main.c:83
+#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:839
+#: ../gucharmap/main.c:80
 msgid "Character Map"
 msgstr "Табліца знакаў"
 
 #: ../gucharmap.desktop.in.in.h:2
 msgid "Insert special characters into documents"
 msgstr "Устаўка знакаў у дакументы"
+
+#: ../gucharmap/gucharmap-block-chapters-model.c:84
+msgid "All"
+msgstr "Усё"
+
+#: ../gucharmap/gucharmap-block-chapters-model.c:187
+msgid "Unicode Block"
+msgstr "Блок Унікоду"
 
 #: ../gucharmap/gucharmap-charmap.c:524
 msgid "Canonical decomposition:"
@@ -121,13 +129,17 @@ msgstr "Вымаўленне Тан:"
 msgid "Korean Pronunciation:"
 msgstr "Карэйскае вымаўленне:"
 
-#: ../gucharmap/gucharmap-charmap.c:1129
+#: ../gucharmap/gucharmap-charmap.c:1125
 msgid "Characte_r Table"
 msgstr "_Табліца знакаў"
 
-#: ../gucharmap/gucharmap-charmap.c:1176
+#: ../gucharmap/gucharmap-charmap.c:1172
 msgid "Character _Details"
 msgstr "_Падрабязнасці аб знаку"
+
+#: ../gucharmap/gucharmap-chartable-accessible.c:795
+msgid "Character Table"
+msgstr "Табліца знакаў"
 
 #: ../gucharmap/gucharmap-chartable.c:1294
 msgid "Unknown character, unable to identify."
@@ -142,10 +154,6 @@ msgstr "Не знойдзена."
 msgid "Character found."
 msgstr "Знак знойдзены."
 
-#: ../gucharmap/gucharmap-chartable-accessible.c:795
-msgid "Character Table"
-msgstr "Табліца знакаў"
-
 #: ../gucharmap/gucharmap-mini-fontsel.c:282
 msgid "Font"
 msgstr "Шрыфт"
@@ -158,9 +166,9 @@ msgstr "Гарнітура"
 msgid "Font Size"
 msgstr "Памер шрыфту"
 
-#: ../gucharmap/gucharmap-settings.c:71
-msgid "GConf could not be initialized."
-msgstr "Не ўдалося ініцыяваць GConf."
+#: ../gucharmap/gucharmap-script-chapters-model.c:155
+msgid "Script"
+msgstr "Пісьмо"
 
 #. Unicode assigns "Common" as the script name for any character not
 #. * specifically listed in Scripts.txt
@@ -168,6 +176,35 @@ msgstr "Не ўдалося ініцыяваць GConf."
 #: ../gucharmap/unicode-scripts.h:33
 msgid "Common"
 msgstr "Агульныя знакі"
+
+#: ../gucharmap/gucharmap-search-dialog.c:565
+msgid "Information"
+msgstr "Інфармацыя"
+
+#. follow hig guidelines
+#: ../gucharmap/gucharmap-search-dialog.c:732
+msgid "Find"
+msgstr "Пошук"
+
+#: ../gucharmap/gucharmap-search-dialog.c:745
+msgid "_Previous"
+msgstr "Да _папярэдняга"
+
+#: ../gucharmap/gucharmap-search-dialog.c:752
+msgid "_Next"
+msgstr "Да _наступнага"
+
+#: ../gucharmap/gucharmap-search-dialog.c:768
+msgid "_Search:"
+msgstr "По_шук:"
+
+#: ../gucharmap/gucharmap-search-dialog.c:779
+msgid "Match _whole word"
+msgstr "Шукаць поўны _адпаведнік"
+
+#: ../gucharmap/gucharmap-search-dialog.c:784
+msgid "Search in character _details"
+msgstr "Шу_каць у падрабязных звестках аб знаку"
 
 #: ../gucharmap/gucharmap-unicode-info.c:100
 msgid "<Non Private Use High Surrogate>"
@@ -317,11 +354,7 @@ msgstr "Падзяляльнік, падзел абзацаў"
 msgid "Separator, Space"
 msgstr "Падзяляльнік, прабелы"
 
-#: ../gucharmap/gucharmap-window.c:191
-msgid "Searching…"
-msgstr "Пошук..."
-
-#: ../gucharmap/gucharmap-window.c:425
+#: ../gucharmap/gucharmap-window.c:399
 msgid ""
 "Gucharmap is free software; you can redistribute it and/or modify it under "
 "the terms of the GNU General Public License as published by the Free "
@@ -332,7 +365,7 @@ msgstr ""
 "згодна з умовамі Агульнай Грамадскай Ліцэнзіі GNU (GPL), апублікаванай "
 "Фондам свабоднага апраграмавання, версіі 2 ці любой пазнейшай."
 
-#: ../gucharmap/gucharmap-window.c:429
+#: ../gucharmap/gucharmap-window.c:403
 msgid ""
 "Permission is hereby granted, free of charge, to any person obtaining a copy "
 "of the Unicode data files to deal in them without restriction, including "
@@ -344,7 +377,7 @@ msgstr ""
 "капіраванне, мадыфікацыю, аб'яднанне з іншымі данымі, публікацыю, "
 "распаўсюджванне, а таксама продаж копій."
 
-#: ../gucharmap/gucharmap-window.c:433
+#: ../gucharmap/gucharmap-window.c:407
 msgid ""
 "Gucharmap and the Unicode data files are distributed in the hope that they "
 "will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty "
@@ -356,7 +389,7 @@ msgstr ""
 "іх карысці. Падрабязней глядзіце ў тэксце Агульнай Грамадскай Ліцэнзіі GNU "
 "(GPL)."
 
-#: ../gucharmap/gucharmap-window.c:437
+#: ../gucharmap/gucharmap-window.c:411
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "Gucharmap; if not, write to the Free Software Foundation, Inc., 59 Temple "
@@ -367,7 +400,7 @@ msgstr ""
 "апраграмавання на адрас: the Free Software Foundation, Inc., 59 Temple "
 "Place, Suite 330, Boston, MA  02110-1301  USA"
 
-#: ../gucharmap/gucharmap-window.c:440
+#: ../gucharmap/gucharmap-window.c:414
 msgid ""
 "Also you should have received a copy of the Unicode Copyright along with "
 "Gucharmap; you can always find it at Unicode's website: http://www.unicode."
@@ -377,113 +410,114 @@ msgstr ""
 "Унікоду разам з Gucharmap. Вы заўсёды можаце знайсці яе на сеціўнай пляцоўцы "
 "Унікоду: http://www.unicode.org/copyright.html"
 
-#: ../gucharmap/gucharmap-window.c:450 ../gucharmap/main.c:37
+#: ../gucharmap/gucharmap-window.c:424 ../gucharmap/main.c:36
 msgid "GNOME Character Map"
 msgstr "Карта знакаў GNOME"
 
-#: ../gucharmap/gucharmap-window.c:452
-msgid "Based on the Unicode Character Database 6.1.0 (Beta)"
-msgstr "На аснове базы даных знакаў Унікоду 6.1.0 (Beta)"
+#: ../gucharmap/gucharmap-window.c:426
+msgid "Based on the Unicode Character Database 6.1.0"
+msgstr "На аснове базы даных знакаў Унікоду 6.1.0"
 
-#: ../gucharmap/gucharmap-window.c:462
+#: ../gucharmap/gucharmap-window.c:435
 msgid "translator-credits"
 msgstr ""
 "Алесь Няхайчык <nab@mail.by>\n"
 "Ihar Hrachyshka <ihar.hrachyshka@gmail.com>"
 
-#: ../gucharmap/gucharmap-window.c:537 ../gucharmap/gucharmap-window.c:811
+#: ../gucharmap/gucharmap-window.c:508 ../gucharmap/gucharmap-window.c:802
 msgid "Next Script"
 msgstr "Да наступнага пісьма"
 
-#: ../gucharmap/gucharmap-window.c:537 ../gucharmap/gucharmap-window.c:813
+#: ../gucharmap/gucharmap-window.c:508 ../gucharmap/gucharmap-window.c:804
 msgid "Previous Script"
 msgstr "Да папярэдняга пісьма"
 
-#: ../gucharmap/gucharmap-window.c:542
+#: ../gucharmap/gucharmap-window.c:513
 msgid "Next Block"
 msgstr "Да наступнага блока"
 
-#: ../gucharmap/gucharmap-window.c:542
+#: ../gucharmap/gucharmap-window.c:513
 msgid "Previous Block"
 msgstr "Да папярэдняга блока"
 
-#: ../gucharmap/gucharmap-window.c:774
+#: ../gucharmap/gucharmap-window.c:765
 msgid "_File"
 msgstr "_Файл"
 
-#: ../gucharmap/gucharmap-window.c:775
+#: ../gucharmap/gucharmap-window.c:766
 msgid "_View"
 msgstr "_Від"
 
-#: ../gucharmap/gucharmap-window.c:776
+#: ../gucharmap/gucharmap-window.c:767
 msgid "_Search"
 msgstr "По_шук"
 
-#: ../gucharmap/gucharmap-window.c:777
+#: ../gucharmap/gucharmap-window.c:768
 msgid "_Go"
 msgstr "Пера_ход"
 
-#: ../gucharmap/gucharmap-window.c:778
+#: ../gucharmap/gucharmap-window.c:769
 msgid "_Help"
 msgstr "_Дапамога"
 
-#: ../gucharmap/gucharmap-window.c:781
+#: ../gucharmap/gucharmap-window.c:772
 msgid "Page _Setup"
 msgstr "Настройка _старонкі"
 
-#: ../gucharmap/gucharmap-window.c:802
+#: ../gucharmap/gucharmap-window.c:793
 msgid "Find _Next"
 msgstr "_Шукаць наперад"
 
-#: ../gucharmap/gucharmap-window.c:804
+#: ../gucharmap/gucharmap-window.c:795
 msgid "Find _Previous"
 msgstr "Шукаць _назад"
 
-#: ../gucharmap/gucharmap-window.c:807
+#: ../gucharmap/gucharmap-window.c:798
 msgid "_Next Character"
 msgstr "Да _наступнага знака"
 
-#: ../gucharmap/gucharmap-window.c:809
+#: ../gucharmap/gucharmap-window.c:800
 msgid "_Previous Character"
 msgstr "Да _папярэдняга знака"
 
-#: ../gucharmap/gucharmap-window.c:816
+#: ../gucharmap/gucharmap-window.c:807
 msgid "_Contents"
 msgstr "_Змест"
 
-#: ../gucharmap/gucharmap-window.c:818
+#: ../gucharmap/gucharmap-window.c:809
 msgid "_About"
 msgstr "_Аб праграме"
 
-#: ../gucharmap/gucharmap-window.c:828
+#: ../gucharmap/gucharmap-window.c:819
 msgid "By _Script"
 msgstr "_Сістэмы пісьма"
 
-#: ../gucharmap/gucharmap-window.c:830
+#: ../gucharmap/gucharmap-window.c:821
 msgid "By _Unicode Block"
 msgstr "_Блокі Унікоду"
 
-#: ../gucharmap/gucharmap-window.c:835
+#: ../gucharmap/gucharmap-window.c:826
 msgid "Sho_w only glyphs from this font"
 msgstr "Паказваць толькі _гліфы шрыфту"
 
-#: ../gucharmap/gucharmap-window.c:838
+#: ../gucharmap/gucharmap-window.c:829
 msgid "Snap _Columns to Power of Two"
 msgstr "Па_шырыць слупкі ўдвая"
 
-#: ../gucharmap/gucharmap-window.c:907
+#. Text to copy entry + button
+#: ../gucharmap/gucharmap-window.c:893
 msgid "_Text to copy:"
 msgstr "_Тэкст для капіравання:"
 
-#: ../gucharmap/gucharmap-window.c:914
+#: ../gucharmap/gucharmap-window.c:900
 msgid "Copy to the clipboard."
 msgstr "Скапіраваць у буфер абмену."
 
-#: ../gucharmap/main.c:55
+#: ../gucharmap/main.c:54
 msgid "Font to start with; ex: 'Serif 27'"
 msgstr "Пачатковы шрыфт, напрыклад: \"Serif 27\""
 
-#: ../gucharmap/main.c:55
+#: ../gucharmap/main.c:54
 msgid "FONT"
 msgstr "ШРЫФТ"
 
@@ -1410,44 +1444,3 @@ msgstr "Пісьмо Пагба-ламы"
 #: ../gucharmap/unicode-scripts.h:117
 msgid "Yi"
 msgstr "Пісьмо і"
-
-#: ../gucharmap/gucharmap-search-dialog.c:565
-msgid "Information"
-msgstr "Інфармацыя"
-
-#. follow hig guidelines
-#: ../gucharmap/gucharmap-search-dialog.c:732
-msgid "Find"
-msgstr "Пошук"
-
-#: ../gucharmap/gucharmap-search-dialog.c:745
-msgid "_Previous"
-msgstr "Да _папярэдняга"
-
-#: ../gucharmap/gucharmap-search-dialog.c:752
-msgid "_Next"
-msgstr "Да _наступнага"
-
-#: ../gucharmap/gucharmap-search-dialog.c:767
-msgid "_Search:"
-msgstr "По_шук:"
-
-#: ../gucharmap/gucharmap-search-dialog.c:777
-msgid "Match _whole word"
-msgstr "Шукаць поўны _адпаведнік"
-
-#: ../gucharmap/gucharmap-search-dialog.c:782
-msgid "Search in character _details"
-msgstr "Шу_каць у падрабязных звестках аб знаку"
-
-#: ../gucharmap/gucharmap-block-chapters-model.c:84
-msgid "All"
-msgstr "Усё"
-
-#: ../gucharmap/gucharmap-block-chapters-model.c:187
-msgid "Unicode Block"
-msgstr "Блок Унікоду"
-
-#: ../gucharmap/gucharmap-script-chapters-model.c:155
-msgid "Script"
-msgstr "Пісьмо"
