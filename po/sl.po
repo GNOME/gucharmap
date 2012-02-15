@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gucharmap&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-01-14 21:35+0000\n"
-"PO-Revision-Date: 2012-01-15 13:36+0100\n"
+"POT-Creation-Date: 2012-02-11 19:50+0000\n"
+"PO-Revision-Date: 2012-02-15 20:30+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: \n"
@@ -23,14 +23,22 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 
 #: ../gucharmap.desktop.in.in.h:1
-#: ../gucharmap/gucharmap-window.c:845
-#: ../gucharmap/main.c:83
+#: ../gucharmap/gucharmap-window.c:839
+#: ../gucharmap/main.c:80
 msgid "Character Map"
 msgstr "Razpredelnica znakov"
 
 #: ../gucharmap.desktop.in.in.h:2
 msgid "Insert special characters into documents"
 msgstr "Vstavi posebne znake v dokumente"
+
+#: ../gucharmap/gucharmap-block-chapters-model.c:84
+msgid "All"
+msgstr "Vse"
+
+#: ../gucharmap/gucharmap-block-chapters-model.c:187
+msgid "Unicode Block"
+msgstr "Blok Unicode"
 
 #: ../gucharmap/gucharmap-charmap.c:524
 msgid "Canonical decomposition:"
@@ -130,13 +138,17 @@ msgstr "Tang izgovarjava:"
 msgid "Korean Pronunciation:"
 msgstr "Korejska izgovarjava:"
 
-#: ../gucharmap/gucharmap-charmap.c:1129
+#: ../gucharmap/gucharmap-charmap.c:1125
 msgid "Characte_r Table"
 msgstr "Razpredelnica _znakov"
 
-#: ../gucharmap/gucharmap-charmap.c:1176
+#: ../gucharmap/gucharmap-charmap.c:1172
 msgid "Character _Details"
 msgstr "_Podrobnosti znakov"
+
+#: ../gucharmap/gucharmap-chartable-accessible.c:795
+msgid "Character Table"
+msgstr "Razpredelnica znakov"
 
 #: ../gucharmap/gucharmap-chartable.c:1294
 msgid "Unknown character, unable to identify."
@@ -151,10 +163,6 @@ msgstr "Brez zadetkov."
 msgid "Character found."
 msgstr "Znak je najden."
 
-#: ../gucharmap/gucharmap-chartable-accessible.c:795
-msgid "Character Table"
-msgstr "Razpredelnica znakov"
-
 #: ../gucharmap/gucharmap-mini-fontsel.c:282
 msgid "Font"
 msgstr "Pisava"
@@ -167,9 +175,9 @@ msgstr "Družina pisav"
 msgid "Font Size"
 msgstr "Velikost pisave"
 
-#: ../gucharmap/gucharmap-settings.c:71
-msgid "GConf could not be initialized."
-msgstr "Predmeta GConf ni mogoče začeti."
+#: ../gucharmap/gucharmap-script-chapters-model.c:155
+msgid "Script"
+msgstr "Skript"
 
 #. Unicode assigns "Common" as the script name for any character not
 #. * specifically listed in Scripts.txt
@@ -177,6 +185,35 @@ msgstr "Predmeta GConf ni mogoče začeti."
 #: ../gucharmap/unicode-scripts.h:33
 msgid "Common"
 msgstr "Splošno"
+
+#: ../gucharmap/gucharmap-search-dialog.c:565
+msgid "Information"
+msgstr "Podrobnosti"
+
+#. follow hig guidelines
+#: ../gucharmap/gucharmap-search-dialog.c:732
+msgid "Find"
+msgstr "Najdi"
+
+#: ../gucharmap/gucharmap-search-dialog.c:745
+msgid "_Previous"
+msgstr "_Predhodni"
+
+#: ../gucharmap/gucharmap-search-dialog.c:752
+msgid "_Next"
+msgstr "_Naslednji"
+
+#: ../gucharmap/gucharmap-search-dialog.c:768
+msgid "_Search:"
+msgstr "_Iskanje:"
+
+#: ../gucharmap/gucharmap-search-dialog.c:779
+msgid "Match _whole word"
+msgstr "Skladnja _celih besed"
+
+#: ../gucharmap/gucharmap-search-dialog.c:784
+msgid "Search in character _details"
+msgstr "Išči med po_drobnostmi znakov"
 
 #: ../gucharmap/gucharmap-unicode-info.c:100
 msgid "<Non Private Use High Surrogate>"
@@ -326,138 +363,135 @@ msgstr "Ločilnik, odstavek"
 msgid "Separator, Space"
 msgstr "Ločilnik, presledek"
 
-#: ../gucharmap/gucharmap-window.c:191
-msgid "Searching…"
-msgstr "Iskanje ..."
-
-#: ../gucharmap/gucharmap-window.c:425
+#: ../gucharmap/gucharmap-window.c:399
 msgid "Gucharmap is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version."
 msgstr "Gucharmap je prosta programska oprema; lahko jo razširjate in/ali spreminjate pod pogoji Splošnega javnega dovoljenja GNU (GNU General Public License), kot ga je objavila ustanova Free Software Foundation; bodisi različice 2 ali (po vaši izbiri) katerekoli poznejše različice."
 
-#: ../gucharmap/gucharmap-window.c:429
+#: ../gucharmap/gucharmap-window.c:403
 msgid "Permission is hereby granted, free of charge, to any person obtaining a copy of the Unicode data files to deal in them without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, and/or sell copies."
 msgstr "Dovoljenje je tako podeljeno brezplačno in vsem ljudem, ki si lastijo izvod podatkovnih datotek Unicode. Uporabljate jih lahko brez omejitev, torej jih lahko uporabljate, kopirate, spreminjate, združujete, objavljate, razširjate in/ali prodajate kopije."
 
-#: ../gucharmap/gucharmap-window.c:433
+#: ../gucharmap/gucharmap-window.c:407
 msgid "Gucharmap and the Unicode data files are distributed in the hope that they will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License and Unicode Copyright for more details."
 msgstr "Gucharmap in podatkovne datoteke Unicode se razširjajo v upanju, da bodo uporabni, vendar BREZ VSAKRŠNEGA JAMSTVA; tudi brez posredne zagotovitve CENOVNE VREDNOSTI ali PRIMERNOSTI ZA DOLOČEN NAMEN.  Za podrobnosti glejte besedilo GNU General Public License."
 
-#: ../gucharmap/gucharmap-window.c:437
+#: ../gucharmap/gucharmap-window.c:411
 msgid "You should have received a copy of the GNU General Public License along with Gucharmap; if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02110-1301  USA"
 msgstr "Skupaj z Gucharmapom bi morali prejeti izvod splošne javne licence GNU (GNU General Public License); če ga niste, pišite na Free Software Foundation, Inc., Temple Place - Suite 330, Boston, MA 02111-1307, USA."
 
-#: ../gucharmap/gucharmap-window.c:440
+#: ../gucharmap/gucharmap-window.c:414
 msgid "Also you should have received a copy of the Unicode Copyright along with Gucharmap; you can always find it at Unicode's website: http://www.unicode.org/copyright.html"
 msgstr "Prav tako bi morali skupaj z Gucharmapom prejeti izvod avtorskih pravic Unicode; najdete jih lahko tudi na spletni strani Unicoda: http://www.unicode.org/copyright.html"
 
-#: ../gucharmap/gucharmap-window.c:450
-#: ../gucharmap/main.c:37
+#: ../gucharmap/gucharmap-window.c:424
+#: ../gucharmap/main.c:36
 msgid "GNOME Character Map"
 msgstr "GNOME razpredelnica znakov"
 
-#: ../gucharmap/gucharmap-window.c:452
-msgid "Based on the Unicode Character Database 6.1.0 (Beta)"
-msgstr "Zasnovano na podatkovni zbirki znakov Unicode 6.1.0(beta)"
+#: ../gucharmap/gucharmap-window.c:426
+msgid "Based on the Unicode Character Database 6.1.0"
+msgstr "Zasnovano na podatkovni zbirki znakov Unicode 6.1.0"
 
-#: ../gucharmap/gucharmap-window.c:462
+#: ../gucharmap/gucharmap-window.c:435
 msgid "translator-credits"
 msgstr "Matjaž Horvat <m@owca.info>, Matej Urbančič <mateju@svn.gnome.org>"
 
-#: ../gucharmap/gucharmap-window.c:537
-#: ../gucharmap/gucharmap-window.c:811
+#: ../gucharmap/gucharmap-window.c:508
+#: ../gucharmap/gucharmap-window.c:802
 msgid "Next Script"
 msgstr "Naslednji skript"
 
-#: ../gucharmap/gucharmap-window.c:537
-#: ../gucharmap/gucharmap-window.c:813
+#: ../gucharmap/gucharmap-window.c:508
+#: ../gucharmap/gucharmap-window.c:804
 msgid "Previous Script"
 msgstr "Predhodni skript"
 
-#: ../gucharmap/gucharmap-window.c:542
+#: ../gucharmap/gucharmap-window.c:513
 msgid "Next Block"
 msgstr "Naslednji blok"
 
-#: ../gucharmap/gucharmap-window.c:542
+#: ../gucharmap/gucharmap-window.c:513
 msgid "Previous Block"
 msgstr "Predhodni blok"
 
-#: ../gucharmap/gucharmap-window.c:774
+#: ../gucharmap/gucharmap-window.c:765
 msgid "_File"
 msgstr "_Datoteka"
 
-#: ../gucharmap/gucharmap-window.c:775
+#: ../gucharmap/gucharmap-window.c:766
 msgid "_View"
 msgstr "_Pogled"
 
-#: ../gucharmap/gucharmap-window.c:776
+#: ../gucharmap/gucharmap-window.c:767
 msgid "_Search"
 msgstr "_Iskanje"
 
-#: ../gucharmap/gucharmap-window.c:777
+#: ../gucharmap/gucharmap-window.c:768
 msgid "_Go"
 msgstr "_Pojdi"
 
-#: ../gucharmap/gucharmap-window.c:778
+#: ../gucharmap/gucharmap-window.c:769
 msgid "_Help"
 msgstr "Pomo_č"
 
-#: ../gucharmap/gucharmap-window.c:781
+#: ../gucharmap/gucharmap-window.c:772
 msgid "Page _Setup"
 msgstr "Nastavitev _strani"
 
-#: ../gucharmap/gucharmap-window.c:802
+#: ../gucharmap/gucharmap-window.c:793
 msgid "Find _Next"
 msgstr "Najdi _naslednje"
 
-#: ../gucharmap/gucharmap-window.c:804
+#: ../gucharmap/gucharmap-window.c:795
 msgid "Find _Previous"
 msgstr "Najdi _predhodne"
 
-#: ../gucharmap/gucharmap-window.c:807
+#: ../gucharmap/gucharmap-window.c:798
 msgid "_Next Character"
 msgstr "_Naslednji znak"
 
-#: ../gucharmap/gucharmap-window.c:809
+#: ../gucharmap/gucharmap-window.c:800
 msgid "_Previous Character"
 msgstr "_Predhodni znak"
 
-#: ../gucharmap/gucharmap-window.c:816
+#: ../gucharmap/gucharmap-window.c:807
 msgid "_Contents"
 msgstr "_Vsebina"
 
-#: ../gucharmap/gucharmap-window.c:818
+#: ../gucharmap/gucharmap-window.c:809
 msgid "_About"
 msgstr "_O programu"
 
-#: ../gucharmap/gucharmap-window.c:828
+#: ../gucharmap/gucharmap-window.c:819
 msgid "By _Script"
 msgstr "S _skriptom"
 
-#: ../gucharmap/gucharmap-window.c:830
+#: ../gucharmap/gucharmap-window.c:821
 msgid "By _Unicode Block"
 msgstr "Z blokom _Unicode"
 
-#: ../gucharmap/gucharmap-window.c:835
+#: ../gucharmap/gucharmap-window.c:826
 msgid "Sho_w only glyphs from this font"
 msgstr "_Pokaži le pismenke te pisave"
 
-#: ../gucharmap/gucharmap-window.c:838
+#: ../gucharmap/gucharmap-window.c:829
 msgid "Snap _Columns to Power of Two"
 msgstr "Poravnaj _stolpce po potenci števila dva"
 
-#: ../gucharmap/gucharmap-window.c:907
+#. Text to copy entry + button
+#: ../gucharmap/gucharmap-window.c:893
 msgid "_Text to copy:"
 msgstr "_Besedilo za kopiranje:"
 
-#: ../gucharmap/gucharmap-window.c:914
+#: ../gucharmap/gucharmap-window.c:900
 msgid "Copy to the clipboard."
 msgstr "Kopiraj v odložišče."
 
-#: ../gucharmap/main.c:55
+#: ../gucharmap/main.c:54
 msgid "Font to start with; ex: 'Serif 27'"
 msgstr "Začetna pisava; npr.: 'Serif 27'"
 
-#: ../gucharmap/main.c:55
+#: ../gucharmap/main.c:54
 msgid "FONT"
 msgstr "Pisava"
 
@@ -1475,44 +1509,8 @@ msgstr "Phags Pa"
 msgid "Yi"
 msgstr "Ji"
 
-#: ../gucharmap/gucharmap-search-dialog.c:565
-msgid "Information"
-msgstr "Podrobnosti"
+#~ msgid "GConf could not be initialized."
+#~ msgstr "Predmeta GConf ni mogoče začeti."
 
-#. follow hig guidelines
-#: ../gucharmap/gucharmap-search-dialog.c:732
-msgid "Find"
-msgstr "Najdi"
-
-#: ../gucharmap/gucharmap-search-dialog.c:745
-msgid "_Previous"
-msgstr "_Predhodni"
-
-#: ../gucharmap/gucharmap-search-dialog.c:752
-msgid "_Next"
-msgstr "_Naslednji"
-
-#: ../gucharmap/gucharmap-search-dialog.c:767
-msgid "_Search:"
-msgstr "_Iskanje:"
-
-#: ../gucharmap/gucharmap-search-dialog.c:777
-msgid "Match _whole word"
-msgstr "Skladnja _celih besed"
-
-#: ../gucharmap/gucharmap-search-dialog.c:782
-msgid "Search in character _details"
-msgstr "Išči med po_drobnostmi znakov"
-
-#: ../gucharmap/gucharmap-block-chapters-model.c:84
-msgid "All"
-msgstr "Vse"
-
-#: ../gucharmap/gucharmap-block-chapters-model.c:187
-msgid "Unicode Block"
-msgstr "Blok Unicode"
-
-#: ../gucharmap/gucharmap-script-chapters-model.c:155
-msgid "Script"
-msgstr "Skript"
-
+#~ msgid "Searching…"
+#~ msgstr "Iskanje ..."
