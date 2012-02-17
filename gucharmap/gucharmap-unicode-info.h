@@ -79,6 +79,9 @@ G_CONST_RETURN gchar *  gucharmap_unicode_get_script_for_char     (gunichar wc);
 
 G_CONST_RETURN gchar *  gucharmap_unicode_version_to_string       (GucharmapUnicodeVersion version);
 
+/* doesn't really belong here, but no better place was available */
+gunichar     gucharmap_unicode_get_locale_character (void);
+
 G_END_DECLS
 
 #endif  /* #ifndef GUCHARMAP_UNICODE_INFO_H */

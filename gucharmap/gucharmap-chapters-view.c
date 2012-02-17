@@ -297,3 +297,10 @@ gucharmap_chapters_view_get_book_codepoint_list (GucharmapChaptersView *view)
 
   return gucharmap_chapters_model_get_book_codepoint_list (priv->model);
 }
+
+gboolean
+gucharmap_chapters_view_select_locale (GucharmapChaptersView *view)
+{
+  return gucharmap_chapters_view_select_character (view,
+                                                   gucharmap_unicode_get_locale_character ());
+}
