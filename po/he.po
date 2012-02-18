@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-13 09:45+0200\n"
-"PO-Revision-Date: 2012-01-13 09:56+0200\n"
+"POT-Creation-Date: 2012-02-18 10:39+0200\n"
+"PO-Revision-Date: 2012-02-18 10:39+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "Language: he\n"
@@ -19,14 +19,22 @@ msgstr ""
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../gucharmap.desktop.in.in.h:1
-#: ../gucharmap/gucharmap-window.c:845
-#: ../gucharmap/main.c:83
+#: ../gucharmap/gucharmap-window.c:839
+#: ../gucharmap/main.c:80
 msgid "Character Map"
 msgstr "מפת תווים"
 
 #: ../gucharmap.desktop.in.in.h:2
 msgid "Insert special characters into documents"
 msgstr "הוספת תווים מיוחדים למסמכים"
+
+#: ../gucharmap/gucharmap-block-chapters-model.c:84
+msgid "All"
+msgstr "הכול"
+
+#: ../gucharmap/gucharmap-block-chapters-model.c:187
+msgid "Unicode Block"
+msgstr "מקטע יוניקוד"
 
 #: ../gucharmap/gucharmap-charmap.c:524
 msgid "Canonical decomposition:"
@@ -126,13 +134,17 @@ msgstr "הגייה בטאנג:"
 msgid "Korean Pronunciation:"
 msgstr "הגייה בקוריאנית:"
 
-#: ../gucharmap/gucharmap-charmap.c:1129
+#: ../gucharmap/gucharmap-charmap.c:1125
 msgid "Characte_r Table"
 msgstr "טבלת תווי_ם"
 
-#: ../gucharmap/gucharmap-charmap.c:1176
+#: ../gucharmap/gucharmap-charmap.c:1172
 msgid "Character _Details"
 msgstr "פרטי _תו"
+
+#: ../gucharmap/gucharmap-chartable-accessible.c:795
+msgid "Character Table"
+msgstr "טבלת תווים"
 
 #: ../gucharmap/gucharmap-chartable.c:1294
 msgid "Unknown character, unable to identify."
@@ -147,10 +159,6 @@ msgstr "לא נמצא."
 msgid "Character found."
 msgstr "התו נמצא."
 
-#: ../gucharmap/gucharmap-chartable-accessible.c:795
-msgid "Character Table"
-msgstr "טבלת תווים"
-
 #: ../gucharmap/gucharmap-mini-fontsel.c:282
 msgid "Font"
 msgstr "גופן"
@@ -163,9 +171,9 @@ msgstr "משפחת גופן"
 msgid "Font Size"
 msgstr "גודל גופן"
 
-#: ../gucharmap/gucharmap-settings.c:71
-msgid "GConf could not be initialized."
-msgstr "לא ניתן להפעיל את GConf."
+#: ../gucharmap/gucharmap-script-chapters-model.c:155
+msgid "Script"
+msgstr "כתב"
 
 #. Unicode assigns "Common" as the script name for any character not
 #. * specifically listed in Scripts.txt
@@ -173,6 +181,35 @@ msgstr "לא ניתן להפעיל את GConf."
 #: ../gucharmap/unicode-scripts.h:33
 msgid "Common"
 msgstr "נפוצים"
+
+#: ../gucharmap/gucharmap-search-dialog.c:565
+msgid "Information"
+msgstr "מידע"
+
+#. follow hig guidelines
+#: ../gucharmap/gucharmap-search-dialog.c:732
+msgid "Find"
+msgstr "חיפוש"
+
+#: ../gucharmap/gucharmap-search-dialog.c:745
+msgid "_Previous"
+msgstr "ה_קודם"
+
+#: ../gucharmap/gucharmap-search-dialog.c:752
+msgid "_Next"
+msgstr "ה_בא"
+
+#: ../gucharmap/gucharmap-search-dialog.c:768
+msgid "_Search:"
+msgstr "_חיפוש:"
+
+#: ../gucharmap/gucharmap-search-dialog.c:779
+msgid "Match _whole word"
+msgstr "חיפוש _כל המילה"
+
+#: ../gucharmap/gucharmap-search-dialog.c:784
+msgid "Search in character _details"
+msgstr "חיפוש בפרטי _התו"
 
 #: ../gucharmap/gucharmap-unicode-info.c:100
 msgid "<Non Private Use High Surrogate>"
@@ -322,40 +359,36 @@ msgstr "מפריד, פסקה"
 msgid "Separator, Space"
 msgstr "מפריד, רווח"
 
-#: ../gucharmap/gucharmap-window.c:191
-msgid "Searching…"
-msgstr "בחיפוש…"
-
-#: ../gucharmap/gucharmap-window.c:425
+#: ../gucharmap/gucharmap-window.c:399
 msgid "Gucharmap is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version."
 msgstr "Gucharmap is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version."
 
-#: ../gucharmap/gucharmap-window.c:429
+#: ../gucharmap/gucharmap-window.c:403
 msgid "Permission is hereby granted, free of charge, to any person obtaining a copy of the Unicode data files to deal in them without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, and/or sell copies."
 msgstr "Permission is hereby granted, free of charge, to any person obtaining a copy of the Unicode data files to deal in them without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, and/or sell copies."
 
-#: ../gucharmap/gucharmap-window.c:433
+#: ../gucharmap/gucharmap-window.c:407
 msgid "Gucharmap and the Unicode data files are distributed in the hope that they will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License and Unicode Copyright for more details."
 msgstr "Gucharmap and the Unicode data files are distributed in the hope that they will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License and Unicode Copyright for more details."
 
-#: ../gucharmap/gucharmap-window.c:437
+#: ../gucharmap/gucharmap-window.c:411
 msgid "You should have received a copy of the GNU General Public License along with Gucharmap; if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02110-1301  USA"
 msgstr "You should have received a copy of the GNU General Public License along with Gucharmap; if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02110-1301  USA"
 
-#: ../gucharmap/gucharmap-window.c:440
+#: ../gucharmap/gucharmap-window.c:414
 msgid "Also you should have received a copy of the Unicode Copyright along with Gucharmap; you can always find it at Unicode's website: http://www.unicode.org/copyright.html"
 msgstr "Also you should have received a copy of the Unicode Copyright along with Gucharmap; you can always find it at Unicode's website: http://www.unicode.org/copyright.html"
 
-#: ../gucharmap/gucharmap-window.c:450
-#: ../gucharmap/main.c:37
+#: ../gucharmap/gucharmap-window.c:424
+#: ../gucharmap/main.c:36
 msgid "GNOME Character Map"
 msgstr "מפת התווים של GNOME"
 
-#: ../gucharmap/gucharmap-window.c:452
-msgid "Based on the Unicode Character Database 6.1.0 (Beta)"
-msgstr "מבוססת על מאגר תווי ה־Unicode גרסה 6.1.0 (בטא)"
+#: ../gucharmap/gucharmap-window.c:426
+msgid "Based on the Unicode Character Database 6.1.0"
+msgstr "מבוססת על מאגר תווי ה־Unicode גרסה 6.1.0"
 
-#: ../gucharmap/gucharmap-window.c:462
+#: ../gucharmap/gucharmap-window.c:435
 msgid "translator-credits"
 msgstr ""
 "יניב אביר <https://launchpad.net/~yanivabir>\n"
@@ -364,101 +397,102 @@ msgstr ""
 "פרויקט תרגום GNOME לעברית:\n"
 "‏http://gnome-il.berlios.de"
 
-#: ../gucharmap/gucharmap-window.c:537
-#: ../gucharmap/gucharmap-window.c:811
+#: ../gucharmap/gucharmap-window.c:508
+#: ../gucharmap/gucharmap-window.c:802
 msgid "Next Script"
 msgstr "הכתב הבא"
 
-#: ../gucharmap/gucharmap-window.c:537
-#: ../gucharmap/gucharmap-window.c:813
+#: ../gucharmap/gucharmap-window.c:508
+#: ../gucharmap/gucharmap-window.c:804
 msgid "Previous Script"
 msgstr "הכתב הקודם"
 
-#: ../gucharmap/gucharmap-window.c:542
+#: ../gucharmap/gucharmap-window.c:513
 msgid "Next Block"
 msgstr "המקטע הבא"
 
-#: ../gucharmap/gucharmap-window.c:542
+#: ../gucharmap/gucharmap-window.c:513
 msgid "Previous Block"
 msgstr "המקטע הקודם"
 
-#: ../gucharmap/gucharmap-window.c:774
+#: ../gucharmap/gucharmap-window.c:765
 msgid "_File"
 msgstr "_קובץ"
 
-#: ../gucharmap/gucharmap-window.c:775
+#: ../gucharmap/gucharmap-window.c:766
 msgid "_View"
 msgstr "_תצוגה"
 
-#: ../gucharmap/gucharmap-window.c:776
+#: ../gucharmap/gucharmap-window.c:767
 msgid "_Search"
 msgstr "_חיפוש"
 
-#: ../gucharmap/gucharmap-window.c:777
+#: ../gucharmap/gucharmap-window.c:768
 msgid "_Go"
 msgstr "_מעבר"
 
-#: ../gucharmap/gucharmap-window.c:778
+#: ../gucharmap/gucharmap-window.c:769
 msgid "_Help"
 msgstr "ע_זרה"
 
-#: ../gucharmap/gucharmap-window.c:781
+#: ../gucharmap/gucharmap-window.c:772
 msgid "Page _Setup"
 msgstr "הגדרות _עמוד"
 
-#: ../gucharmap/gucharmap-window.c:802
+#: ../gucharmap/gucharmap-window.c:793
 msgid "Find _Next"
 msgstr "חיפוש ה_בא"
 
-#: ../gucharmap/gucharmap-window.c:804
+#: ../gucharmap/gucharmap-window.c:795
 msgid "Find _Previous"
 msgstr "חיפוש _קודם"
 
-#: ../gucharmap/gucharmap-window.c:807
+#: ../gucharmap/gucharmap-window.c:798
 msgid "_Next Character"
 msgstr "התו ה_בא"
 
-#: ../gucharmap/gucharmap-window.c:809
+#: ../gucharmap/gucharmap-window.c:800
 msgid "_Previous Character"
 msgstr "התו ה_קודם"
 
-#: ../gucharmap/gucharmap-window.c:816
+#: ../gucharmap/gucharmap-window.c:807
 msgid "_Contents"
 msgstr "_תוכן עניינים"
 
-#: ../gucharmap/gucharmap-window.c:818
+#: ../gucharmap/gucharmap-window.c:809
 msgid "_About"
 msgstr "על _אודות"
 
-#: ../gucharmap/gucharmap-window.c:828
+#: ../gucharmap/gucharmap-window.c:819
 msgid "By _Script"
 msgstr "לפי _כתב"
 
-#: ../gucharmap/gucharmap-window.c:830
+#: ../gucharmap/gucharmap-window.c:821
 msgid "By _Unicode Block"
 msgstr "לפי מ_קטע יוניקוד"
 
-#: ../gucharmap/gucharmap-window.c:835
+#: ../gucharmap/gucharmap-window.c:826
 msgid "Sho_w only glyphs from this font"
 msgstr "הצגת _גליפים מגופן זה בלבד"
 
-#: ../gucharmap/gucharmap-window.c:838
+#: ../gucharmap/gucharmap-window.c:829
 msgid "Snap _Columns to Power of Two"
 msgstr "הפרדה לעמודות ב_חזקות של שתיים"
 
-#: ../gucharmap/gucharmap-window.c:907
+#. Text to copy entry + button
+#: ../gucharmap/gucharmap-window.c:893
 msgid "_Text to copy:"
 msgstr "_טקסט להעתקה:"
 
-#: ../gucharmap/gucharmap-window.c:914
+#: ../gucharmap/gucharmap-window.c:900
 msgid "Copy to the clipboard."
 msgstr "העתקה ללוח הגזירים."
 
-#: ../gucharmap/main.c:55
+#: ../gucharmap/main.c:54
 msgid "Font to start with; ex: 'Serif 27'"
 msgstr "Font to start with; ex: 'Serif 27'"
 
-#: ../gucharmap/main.c:55
+#: ../gucharmap/main.c:54
 msgid "FONT"
 msgstr "FONT"
 
@@ -1476,46 +1510,11 @@ msgstr "פאגס פה"
 msgid "Yi"
 msgstr "יי"
 
-#: ../gucharmap/gucharmap-search-dialog.c:565
-msgid "Information"
-msgstr "מידע"
+#~ msgid "GConf could not be initialized."
+#~ msgstr "לא ניתן להפעיל את GConf."
 
-#. follow hig guidelines
-#: ../gucharmap/gucharmap-search-dialog.c:732
-msgid "Find"
-msgstr "חיפוש"
-
-#: ../gucharmap/gucharmap-search-dialog.c:745
-msgid "_Previous"
-msgstr "ה_קודם"
-
-#: ../gucharmap/gucharmap-search-dialog.c:752
-msgid "_Next"
-msgstr "ה_בא"
-
-#: ../gucharmap/gucharmap-search-dialog.c:767
-msgid "_Search:"
-msgstr "_חיפוש:"
-
-#: ../gucharmap/gucharmap-search-dialog.c:777
-msgid "Match _whole word"
-msgstr "חיפוש _כל המילה"
-
-#: ../gucharmap/gucharmap-search-dialog.c:782
-msgid "Search in character _details"
-msgstr "חיפוש בפרטי _התו"
-
-#: ../gucharmap/gucharmap-block-chapters-model.c:84
-msgid "All"
-msgstr "הכול"
-
-#: ../gucharmap/gucharmap-block-chapters-model.c:187
-msgid "Unicode Block"
-msgstr "מקטע יוניקוד"
-
-#: ../gucharmap/gucharmap-script-chapters-model.c:155
-msgid "Script"
-msgstr "כתב"
+#~ msgid "Searching…"
+#~ msgstr "בחיפוש…"
 
 #~ msgid "Gucharmap"
 #~ msgstr "Gucharmap"
