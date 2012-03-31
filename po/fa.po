@@ -9,9 +9,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gucharmap&component=general\n"
-"POT-Creation-Date: 2010-10-11 11:12+0000\n"
-"PO-Revision-Date: 2012-03-31 16:40+0330\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gucharmap&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2012-03-31 12:16+0000\n"
+"PO-Revision-Date: 2012-03-31 23:12+0330\n"
 "Last-Translator: Arash Mousavi <mousavi.arash@gmail.com>\n"
 "Language-Team: Persian\n"
 "MIME-Version: 1.0\n"
@@ -22,7 +22,7 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 
 #: ../gucharmap.desktop.in.in.h:1
-#: ../gucharmap/gucharmap-window.c:889
+#: ../gucharmap/gucharmap-window.c:839
 #: ../gucharmap/main.c:80
 msgid "Character Map"
 msgstr "جدول نویسه‌ها"
@@ -31,137 +31,139 @@ msgstr "جدول نویسه‌ها"
 msgid "Insert special characters into documents"
 msgstr "درج نویسه‌های خاص در نوشتار"
 
-#: ../gucharmap/gucharmap-charmap.c:600
+#: ../gucharmap/gucharmap-block-chapters-model.c:84
+msgid "All"
+msgstr "همه"
+
+#: ../gucharmap/gucharmap-block-chapters-model.c:187
+msgid "Unicode Block"
+msgstr "بلوک یونی‌کد"
+
+#: ../gucharmap/gucharmap-charmap.c:524
 msgid "Canonical decomposition:"
 msgstr "تجزیه‌ی متعارفی:"
 
-#: ../gucharmap/gucharmap-charmap.c:643
-#: ../gucharmap/gucharmap-chartable.c:589
-#: ../gucharmap/gucharmap-chartable.c:721
+#: ../gucharmap/gucharmap-charmap.c:567
+#: ../gucharmap/gucharmap-chartable.c:581
 msgid "[not a printable character]"
 msgstr "[‌نویسه‌ی چاپ‌نشدنی]"
 
-#: ../gucharmap/gucharmap-charmap.c:657
+#: ../gucharmap/gucharmap-charmap.c:581
 msgid "General Character Properties"
 msgstr "ویژگی‌های عمومی نویسه"
 
-#: ../gucharmap/gucharmap-charmap.c:663
-#| msgid "Unicode category:"
+#: ../gucharmap/gucharmap-charmap.c:587
 msgid "In Unicode since:"
 msgstr "در یونیکد از زمان:"
 
 #. character category
-#: ../gucharmap/gucharmap-charmap.c:667
+#: ../gucharmap/gucharmap-charmap.c:591
 msgid "Unicode category:"
 msgstr "دسته‌ی یونی‌کد:"
 
-#: ../gucharmap/gucharmap-charmap.c:676
+#: ../gucharmap/gucharmap-charmap.c:600
 msgid "Various Useful Representations"
 msgstr "نمایش‌های کاربردی گوناگون"
 
-#: ../gucharmap/gucharmap-charmap.c:686
+#: ../gucharmap/gucharmap-charmap.c:610
 msgid "UTF-8:"
 msgstr "‏UTF-8‏:"
 
-#: ../gucharmap/gucharmap-charmap.c:694
-#| msgid "UTF-8:"
+#: ../gucharmap/gucharmap-charmap.c:618
 msgid "UTF-16:"
 msgstr "UTF-16:"
 
-#: ../gucharmap/gucharmap-charmap.c:705
-#, fuzzy
+#: ../gucharmap/gucharmap-charmap.c:629
 #| msgid "Octal escaped UTF-8:"
 msgid "C octal escaped UTF-8:"
-msgstr "‏UTF-8 گریخته‌ی مبنای هشت:"
+msgstr "‏UTF-8 گریخته‌ی مبنای هشت C:"
 
-#: ../gucharmap/gucharmap-charmap.c:715
-#, fuzzy
+#: ../gucharmap/gucharmap-charmap.c:639
 #| msgid "Decimal entity reference:"
 msgid "XML decimal entity:"
-msgstr "ارجاع دهدهی نهاد:"
+msgstr "واحد دهدهی XML:"
 
-#: ../gucharmap/gucharmap-charmap.c:726
+#: ../gucharmap/gucharmap-charmap.c:650
 msgid "Annotations and Cross References"
 msgstr "توضیحات و ارجاعات"
 
-#: ../gucharmap/gucharmap-charmap.c:733
+#: ../gucharmap/gucharmap-charmap.c:657
 msgid "Alias names:"
 msgstr "نام‌های مستعار:"
 
-#: ../gucharmap/gucharmap-charmap.c:742
+#: ../gucharmap/gucharmap-charmap.c:666
 msgid "Notes:"
 msgstr "نکات:"
 
-#: ../gucharmap/gucharmap-charmap.c:751
+#: ../gucharmap/gucharmap-charmap.c:675
 msgid "See also:"
 msgstr "هم‌چنین نگاه کنید به:"
 
-#: ../gucharmap/gucharmap-charmap.c:760
+#: ../gucharmap/gucharmap-charmap.c:684
 msgid "Approximate equivalents:"
 msgstr "معادل‌های تقریبی:"
 
-#: ../gucharmap/gucharmap-charmap.c:769
+#: ../gucharmap/gucharmap-charmap.c:693
 msgid "Equivalents:"
 msgstr "معادل‌ها:"
 
-#: ../gucharmap/gucharmap-charmap.c:785
+#: ../gucharmap/gucharmap-charmap.c:709
 msgid "CJK Ideograph Information"
 msgstr "اطلاعات ایده‌نگار چ‌ژک"
 
-#: ../gucharmap/gucharmap-charmap.c:790
+#: ../gucharmap/gucharmap-charmap.c:714
 msgid "Definition in English:"
 msgstr "شرح به انگلیسی:"
 
-#: ../gucharmap/gucharmap-charmap.c:795
+#: ../gucharmap/gucharmap-charmap.c:719
 msgid "Mandarin Pronunciation:"
 msgstr "تلفظ ماندارین:"
 
-#: ../gucharmap/gucharmap-charmap.c:800
-#, fuzzy
+#: ../gucharmap/gucharmap-charmap.c:724
 #| msgid "Japanese On Pronunciation:"
 msgid "Cantonese Pronunciation:"
-msgstr "تلفظ ژاپنی اُن:"
+msgstr "تلفظ کانتونی:"
 
-#: ../gucharmap/gucharmap-charmap.c:805
+#: ../gucharmap/gucharmap-charmap.c:729
 msgid "Japanese On Pronunciation:"
 msgstr "تلفظ ژاپنی اُن:"
 
-#: ../gucharmap/gucharmap-charmap.c:810
+#: ../gucharmap/gucharmap-charmap.c:734
 msgid "Japanese Kun Pronunciation:"
 msgstr "تلفظ ژاپنی کون:"
 
-#: ../gucharmap/gucharmap-charmap.c:815
+#: ../gucharmap/gucharmap-charmap.c:739
 msgid "Tang Pronunciation:"
 msgstr "تلفظ تانگ:"
 
-#: ../gucharmap/gucharmap-charmap.c:820
+#: ../gucharmap/gucharmap-charmap.c:744
 msgid "Korean Pronunciation:"
 msgstr "تلفظ کره‌ای:"
 
-#: ../gucharmap/gucharmap-charmap.c:1209
+#: ../gucharmap/gucharmap-charmap.c:1125
 msgid "Characte_r Table"
 msgstr "جدول _نویسه‌ها"
 
-#: ../gucharmap/gucharmap-charmap.c:1255
+#: ../gucharmap/gucharmap-charmap.c:1172
 msgid "Character _Details"
 msgstr "_جزئیات نویسه"
 
-#: ../gucharmap/gucharmap-chartable.c:1455
+#: ../gucharmap/gucharmap-chartable-accessible.c:795
+msgid "Character Table"
+msgstr "جدول نویسه‌ها"
+
+#: ../gucharmap/gucharmap-chartable.c:1294
 msgid "Unknown character, unable to identify."
 msgstr "نویسه‌ی نامعلوم، شناسایی ممکن نیست."
 
-#: ../gucharmap/gucharmap-chartable.c:1457
-#: ../gucharmap/gucharmap-search-dialog.c:589
+#: ../gucharmap/gucharmap-chartable.c:1296
+#: ../gucharmap/gucharmap-search-dialog.c:585
 msgid "Not found."
 msgstr "یافت نشد."
 
-#: ../gucharmap/gucharmap-chartable.c:1460
+#: ../gucharmap/gucharmap-chartable.c:1299
 msgid "Character found."
 msgstr "نویسه پیدا شد."
-
-#: ../gucharmap/gucharmap-chartable-accessible.c:829
-msgid "Character Table"
-msgstr "جدول نویسه‌ها"
 
 #: ../gucharmap/gucharmap-mini-fontsel.c:282
 msgid "Font"
@@ -175,16 +177,45 @@ msgstr "خانواده‌ی قلم"
 msgid "Font Size"
 msgstr "اندازه‌ی قلم"
 
-#: ../gucharmap/gucharmap-settings.c:71
-msgid "GConf could not be initialized."
-msgstr "راه‌اندازی اولیه GConf امکان‌پذیر نیست."
+#: ../gucharmap/gucharmap-script-chapters-model.c:155
+msgid "Script"
+msgstr "خط"
 
 #. Unicode assigns "Common" as the script name for any character not
 #. * specifically listed in Scripts.txt
 #: ../gucharmap/gucharmap-script-codepoint-list.c:463
-#: ../gucharmap/unicode-scripts.h:32
+#: ../gucharmap/unicode-scripts.h:33
 msgid "Common"
 msgstr "مشترک"
+
+#: ../gucharmap/gucharmap-search-dialog.c:565
+msgid "Information"
+msgstr "اطلاعات"
+
+#. follow hig guidelines
+#: ../gucharmap/gucharmap-search-dialog.c:732
+msgid "Find"
+msgstr "پیدا کن"
+
+#: ../gucharmap/gucharmap-search-dialog.c:745
+msgid "_Previous"
+msgstr "_قبلی"
+
+#: ../gucharmap/gucharmap-search-dialog.c:752
+msgid "_Next"
+msgstr "_بعدی"
+
+#: ../gucharmap/gucharmap-search-dialog.c:768
+msgid "_Search:"
+msgstr "_جستجو:"
+
+#: ../gucharmap/gucharmap-search-dialog.c:779
+msgid "Match _whole word"
+msgstr "تطابق با _کل کلمه"
+
+#: ../gucharmap/gucharmap-search-dialog.c:784
+msgid "Search in character _details"
+msgstr "جستجو در _جزئیات نویسه‌ها"
 
 #: ../gucharmap/gucharmap-unicode-info.c:100
 msgid "<Non Private Use High Surrogate>"
@@ -334,42 +365,37 @@ msgstr "جداکننده، بند"
 msgid "Separator, Space"
 msgstr "جداکننده، فاصله"
 
-#: ../gucharmap/gucharmap-window.c:198
-#| msgid "Searching..."
-msgid "Searching…"
-msgstr "درحال جستجو..."
-
-#: ../gucharmap/gucharmap-window.c:457
+#: ../gucharmap/gucharmap-window.c:399
 msgid "Gucharmap is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version."
 msgstr "برنامه‌ی Gucharmap ناتیلوس نرم‌افزار آزاد است؛ شما می‌توانید آن را تحت شرایط اجازه‌نامه‌ی همگانی عمومی گنو که بنیاد نرم‌افزارهای آزاد منتشر کرده است،‌ تغییر دهید یا دوباره توزیع کنید. یا نسخه‌ی 2 اجازه‌نامه یا (به اختیار خودتان) هر نسخه‌ی بالاتر دیگری."
 
-#: ../gucharmap/gucharmap-window.c:461
+#: ../gucharmap/gucharmap-window.c:403
 msgid "Permission is hereby granted, free of charge, to any person obtaining a copy of the Unicode data files to deal in them without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, and/or sell copies."
-msgstr ""
+msgstr "بدینوسیله اجازه داده می‌شود، بدون هزینه، به هرکسی که یک رونوشت از اطلاعات پرونده‌های یونیکد بگیرد و از آنها بدون هیچ انحصاری استفاده کند، به اضافه‌ی هرگونه محدودیت در استفاده، رونوشت، تغییر، ادغام، انتشار، توزیع، و/یا فروش رونوشت‌ها."
 
-#: ../gucharmap/gucharmap-window.c:465
+#: ../gucharmap/gucharmap-window.c:407
 msgid "Gucharmap and the Unicode data files are distributed in the hope that they will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License and Unicode Copyright for more details."
 msgstr "برنامه Gucharmap و پرونده‌های اطلاعاتی یونیکد با این امید توزیع شده است که به درد بخور باشد، اما بدون هر گونه ضمانتی؛ حتی بدون ضمانت ضمنی قابل فروش بودن یا مناسب بودن برای یک هدف مشخص. برای جزئیات بیشتر به اجازه‌نامه‌ی همگانی عمومی گنو را ببینید."
 
-#: ../gucharmap/gucharmap-window.c:469
+#: ../gucharmap/gucharmap-window.c:411
 msgid "You should have received a copy of the GNU General Public License along with Gucharmap; if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02110-1301  USA"
 msgstr "شما باید نسخه‌ای از اجازه‌نامه‌ی همگانی عمومی گنو دریافت کرده باشد؛ اگر این طور نیست برای شرکت بنیاد نرم افزارهای آزاد به آدرس زیر بنویسید:Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA"
 
-#: ../gucharmap/gucharmap-window.c:472
+#: ../gucharmap/gucharmap-window.c:414
 msgid "Also you should have received a copy of the Unicode Copyright along with Gucharmap; you can always find it at Unicode's website: http://www.unicode.org/copyright.html"
 msgstr "همچنین شما باید نسخه‌ای از حق‌رونوشت یونیکد را همراه با Gucharmap دریافت کرده باشید؛ همیشه می‌توانید آن را از طریق پایگاه وب دریافت کنید: http://www.unicode.org/copyright.html"
 
-#: ../gucharmap/gucharmap-window.c:487
-#: ../gucharmap/main.c:37
-#| msgid "Character Map"
+#: ../gucharmap/gucharmap-window.c:424
+#: ../gucharmap/main.c:36
 msgid "GNOME Character Map"
 msgstr "جدول نویسه‌های گنوم"
 
-#: ../gucharmap/gucharmap-window.c:489
-msgid "Based on the Unicode Character Database 6.0.0"
-msgstr "براساس بانک اطلاعاتی نویسه‌های یونیکد نسخه ۶.۰.۰"
+#: ../gucharmap/gucharmap-window.c:426
+#| msgid "Based on the Unicode Character Database 6.0.0"
+msgid "Based on the Unicode Character Database 6.1.0"
+msgstr "براساس بانک اطلاعاتی نویسه‌های یونیکد نسخه ۶.۱.۰"
 
-#: ../gucharmap/gucharmap-window.c:498
+#: ../gucharmap/gucharmap-window.c:435
 msgid "translator-credits"
 msgstr ""
 "آرش موسوی <mousavi.arash@gmail.com>\n"
@@ -377,103 +403,103 @@ msgstr ""
 "روزبه پورنادر <roozbeh@sharif.edu>\n"
 "میلاد زکریا <meelad@bamdad.org>"
 
-#: ../gucharmap/gucharmap-window.c:577
-#: ../gucharmap/gucharmap-window.c:855
+#: ../gucharmap/gucharmap-window.c:508
+#: ../gucharmap/gucharmap-window.c:802
 msgid "Next Script"
 msgstr "خط بعد"
 
-#: ../gucharmap/gucharmap-window.c:577
-#: ../gucharmap/gucharmap-window.c:857
+#: ../gucharmap/gucharmap-window.c:508
+#: ../gucharmap/gucharmap-window.c:804
 msgid "Previous Script"
 msgstr "خط قبل"
 
-#: ../gucharmap/gucharmap-window.c:582
+#: ../gucharmap/gucharmap-window.c:513
 msgid "Next Block"
 msgstr "بلوک بعد"
 
-#: ../gucharmap/gucharmap-window.c:582
+#: ../gucharmap/gucharmap-window.c:513
 msgid "Previous Block"
 msgstr "بلوک قبل"
 
-#: ../gucharmap/gucharmap-window.c:818
+#: ../gucharmap/gucharmap-window.c:765
 msgid "_File"
 msgstr "_پرونده"
 
-#: ../gucharmap/gucharmap-window.c:819
+#: ../gucharmap/gucharmap-window.c:766
 msgid "_View"
 msgstr "_نمایش"
 
-#: ../gucharmap/gucharmap-window.c:820
+#: ../gucharmap/gucharmap-window.c:767
 msgid "_Search"
 msgstr "_جستجو"
 
-#: ../gucharmap/gucharmap-window.c:821
+#: ../gucharmap/gucharmap-window.c:768
 msgid "_Go"
 msgstr "_رفتن"
 
-#: ../gucharmap/gucharmap-window.c:822
+#: ../gucharmap/gucharmap-window.c:769
 msgid "_Help"
 msgstr "_راهنما"
 
-#: ../gucharmap/gucharmap-window.c:825
+#: ../gucharmap/gucharmap-window.c:772
 msgid "Page _Setup"
 msgstr "_برپاسازی صفحه"
 
-#: ../gucharmap/gucharmap-window.c:846
+#: ../gucharmap/gucharmap-window.c:793
 msgid "Find _Next"
 msgstr "یافتن _بعدی"
 
-#: ../gucharmap/gucharmap-window.c:848
+#: ../gucharmap/gucharmap-window.c:795
 msgid "Find _Previous"
 msgstr "یافتن _قبلی"
 
-#: ../gucharmap/gucharmap-window.c:851
+#: ../gucharmap/gucharmap-window.c:798
 msgid "_Next Character"
 msgstr "نویسه‌ی _بعد"
 
-#: ../gucharmap/gucharmap-window.c:853
+#: ../gucharmap/gucharmap-window.c:800
 msgid "_Previous Character"
 msgstr "نویسه‌ی _قبل"
 
-#: ../gucharmap/gucharmap-window.c:860
+#: ../gucharmap/gucharmap-window.c:807
 msgid "_Contents"
 msgstr "_محتویات"
 
-#: ../gucharmap/gucharmap-window.c:862
+#: ../gucharmap/gucharmap-window.c:809
 msgid "_About"
-msgstr "_راهنما"
+msgstr "_درباره"
 
-#: ../gucharmap/gucharmap-window.c:872
+#: ../gucharmap/gucharmap-window.c:819
 msgid "By _Script"
 msgstr "بر مبنای خط"
 
-#: ../gucharmap/gucharmap-window.c:874
+#: ../gucharmap/gucharmap-window.c:821
 msgid "By _Unicode Block"
 msgstr "بر مبنای بلوک‌ یونی‌کد"
 
-#: ../gucharmap/gucharmap-window.c:879
+#: ../gucharmap/gucharmap-window.c:826
 msgid "Sho_w only glyphs from this font"
 msgstr "فقط نمایش _نشان‌ها از این قلم"
 
-#: ../gucharmap/gucharmap-window.c:882
-#, fuzzy
+#: ../gucharmap/gucharmap-window.c:829
 #| msgid "Snap Columns to Power of Two"
 msgid "Snap _Columns to Power of Two"
-msgstr "تعداد ستون‌ها توانی از دو"
+msgstr "_ستون‌ها به توان دو"
 
-#: ../gucharmap/gucharmap-window.c:951
+#. Text to copy entry + button
+#: ../gucharmap/gucharmap-window.c:893
 msgid "_Text to copy:"
 msgstr "_متن برای رونوشت:"
 
-#: ../gucharmap/gucharmap-window.c:958
+#: ../gucharmap/gucharmap-window.c:900
 msgid "Copy to the clipboard."
 msgstr "نسخه‌برداری به تخته‌برش."
 
-#: ../gucharmap/main.c:55
+#: ../gucharmap/main.c:54
 msgid "Font to start with; ex: 'Serif 27'"
 msgstr "قلم شروع؛ مثلاً «Serif 27»"
 
-#: ../gucharmap/main.c:55
+#: ../gucharmap/main.c:54
 msgid "FONT"
 msgstr "FONT"
 
@@ -510,14 +536,13 @@ msgid "Greek and Coptic"
 msgstr "یونانی و قبطی"
 
 #: ../gucharmap/unicode-blocks.h:22
-#: ../gucharmap/unicode-scripts.h:36
+#: ../gucharmap/unicode-scripts.h:37
 msgid "Cyrillic"
 msgstr "سیریلی"
 
 #: ../gucharmap/unicode-blocks.h:23
-#| msgid "Cyrillic Supplementary"
 msgid "Cyrillic Supplement"
-msgstr "مکما سیریلی"
+msgstr "مکمل سیریلی"
 
 #: ../gucharmap/unicode-blocks.h:24
 #: ../gucharmap/unicode-scripts.h:17
@@ -525,7 +550,7 @@ msgid "Armenian"
 msgstr "ارمنی"
 
 #: ../gucharmap/unicode-blocks.h:25
-#: ../gucharmap/unicode-scripts.h:50
+#: ../gucharmap/unicode-scripts.h:51
 msgid "Hebrew"
 msgstr "عبری"
 
@@ -535,934 +560,949 @@ msgid "Arabic"
 msgstr "عربی"
 
 #: ../gucharmap/unicode-blocks.h:27
-#: ../gucharmap/unicode-scripts.h:96
+#: ../gucharmap/unicode-scripts.h:102
 msgid "Syriac"
 msgstr "سریانی"
 
 #: ../gucharmap/unicode-blocks.h:28
-#| msgid "Latin-1 Supplement"
 msgid "Arabic Supplement"
 msgstr "مکمل عربی"
 
 #: ../gucharmap/unicode-blocks.h:29
-#: ../gucharmap/unicode-scripts.h:104
+#: ../gucharmap/unicode-scripts.h:111
 msgid "Thaana"
 msgstr "تانا"
 
 #: ../gucharmap/unicode-blocks.h:30
-#: ../gucharmap/unicode-scripts.h:76
+#: ../gucharmap/unicode-scripts.h:80
 msgid "N'Ko"
-msgstr ""
+msgstr "نکو"
 
 #: ../gucharmap/unicode-blocks.h:31
-#: ../gucharmap/unicode-scripts.h:90
-#, fuzzy
+#: ../gucharmap/unicode-scripts.h:94
 #| msgid "Shavian"
 msgid "Samaritan"
-msgstr "شاوی"
+msgstr "سامری"
 
 #: ../gucharmap/unicode-blocks.h:32
-#: ../gucharmap/unicode-scripts.h:72
+#: ../gucharmap/unicode-scripts.h:73
 msgid "Mandaic"
 msgstr "مندایی"
 
 #: ../gucharmap/unicode-blocks.h:33
-#: ../gucharmap/unicode-scripts.h:38
+#| msgid "Latin Extended-A"
+msgid "Arabic Extended-A"
+msgstr "عربی گسترش‌یافته‐الف"
+
+#: ../gucharmap/unicode-blocks.h:34
+#: ../gucharmap/unicode-scripts.h:39
 msgid "Devanagari"
 msgstr "دوناگری"
 
-#: ../gucharmap/unicode-blocks.h:34
+#: ../gucharmap/unicode-blocks.h:35
 #: ../gucharmap/unicode-scripts.h:22
 msgid "Bengali"
 msgstr "بنگالی"
 
-#: ../gucharmap/unicode-blocks.h:35
-#: ../gucharmap/unicode-scripts.h:46
+#: ../gucharmap/unicode-blocks.h:36
+#: ../gucharmap/unicode-scripts.h:47
 msgid "Gurmukhi"
 msgstr "گورمکهی"
 
-#: ../gucharmap/unicode-blocks.h:36
-#: ../gucharmap/unicode-scripts.h:45
+#: ../gucharmap/unicode-blocks.h:37
+#: ../gucharmap/unicode-scripts.h:46
 msgid "Gujarati"
 msgstr "گجراتی"
 
-#: ../gucharmap/unicode-blocks.h:37
-#: ../gucharmap/unicode-scripts.h:84
+#: ../gucharmap/unicode-blocks.h:38
+#: ../gucharmap/unicode-scripts.h:88
 msgid "Oriya"
 msgstr "اوریه‌ای"
 
-#: ../gucharmap/unicode-blocks.h:38
-#: ../gucharmap/unicode-scripts.h:102
+#: ../gucharmap/unicode-blocks.h:39
+#: ../gucharmap/unicode-scripts.h:109
 msgid "Tamil"
 msgstr "تامیلی"
 
-#: ../gucharmap/unicode-blocks.h:39
-#: ../gucharmap/unicode-scripts.h:103
+#: ../gucharmap/unicode-blocks.h:40
+#: ../gucharmap/unicode-scripts.h:110
 msgid "Telugu"
 msgstr "تلوگویی"
 
-#: ../gucharmap/unicode-blocks.h:40
-#: ../gucharmap/unicode-scripts.h:58
+#: ../gucharmap/unicode-blocks.h:41
+#: ../gucharmap/unicode-scripts.h:59
 msgid "Kannada"
 msgstr "کناده‌ای"
 
-#: ../gucharmap/unicode-blocks.h:41
-#: ../gucharmap/unicode-scripts.h:71
+#: ../gucharmap/unicode-blocks.h:42
+#: ../gucharmap/unicode-scripts.h:72
 msgid "Malayalam"
 msgstr "مالایالامی"
 
-#: ../gucharmap/unicode-blocks.h:42
-#: ../gucharmap/unicode-scripts.h:93
-msgid "Sinhala"
-msgstr ""
-
 #: ../gucharmap/unicode-blocks.h:43
-#: ../gucharmap/unicode-scripts.h:105
+#: ../gucharmap/unicode-scripts.h:98
+msgid "Sinhala"
+msgstr "سینهالا"
+
+#: ../gucharmap/unicode-blocks.h:44
+#: ../gucharmap/unicode-scripts.h:112
 msgid "Thai"
 msgstr "تایلندی"
 
-#: ../gucharmap/unicode-blocks.h:44
-#: ../gucharmap/unicode-scripts.h:63
+#: ../gucharmap/unicode-blocks.h:45
+#: ../gucharmap/unicode-scripts.h:64
 msgid "Lao"
 msgstr "لائوسی"
 
-#: ../gucharmap/unicode-blocks.h:45
-#: ../gucharmap/unicode-scripts.h:106
+#: ../gucharmap/unicode-blocks.h:46
+#: ../gucharmap/unicode-scripts.h:113
 msgid "Tibetan"
 msgstr "تبتی"
 
-#: ../gucharmap/unicode-blocks.h:46
-#: ../gucharmap/unicode-scripts.h:75
+#: ../gucharmap/unicode-blocks.h:47
+#: ../gucharmap/unicode-scripts.h:79
 msgid "Myanmar"
 msgstr "میانمار"
 
-#: ../gucharmap/unicode-blocks.h:47
-#: ../gucharmap/unicode-scripts.h:41
+#: ../gucharmap/unicode-blocks.h:48
+#: ../gucharmap/unicode-scripts.h:42
 msgid "Georgian"
 msgstr "گرجی"
 
-#: ../gucharmap/unicode-blocks.h:48
-msgid "Hangul Jamo"
-msgstr ""
-
 #: ../gucharmap/unicode-blocks.h:49
-#: ../gucharmap/unicode-scripts.h:40
+msgid "Hangul Jamo"
+msgstr "هانگول جامو"
+
+#: ../gucharmap/unicode-blocks.h:50
+#: ../gucharmap/unicode-scripts.h:41
 msgid "Ethiopic"
 msgstr "اتیوپیایی"
 
-#: ../gucharmap/unicode-blocks.h:50
-#, fuzzy
+#: ../gucharmap/unicode-blocks.h:51
 #| msgid "Latin-1 Supplement"
 msgid "Ethiopic Supplement"
-msgstr "مکمل Latin-1"
+msgstr "مکمل اتیوپی"
 
-#: ../gucharmap/unicode-blocks.h:51
-#: ../gucharmap/unicode-scripts.h:31
+#: ../gucharmap/unicode-blocks.h:52
+#: ../gucharmap/unicode-scripts.h:32
 msgid "Cherokee"
 msgstr "چروکیایی"
 
-#: ../gucharmap/unicode-blocks.h:52
+#: ../gucharmap/unicode-blocks.h:53
 msgid "Unified Canadian Aboriginal Syllabics"
 msgstr "هجاهای بومی کانادایی یکی‌شده"
 
-#: ../gucharmap/unicode-blocks.h:53
-#: ../gucharmap/unicode-scripts.h:78
-msgid "Ogham"
-msgstr ""
-
 #: ../gucharmap/unicode-blocks.h:54
-#: ../gucharmap/unicode-scripts.h:89
+#: ../gucharmap/unicode-scripts.h:82
+msgid "Ogham"
+msgstr "اوغم"
+
+#: ../gucharmap/unicode-blocks.h:55
+#: ../gucharmap/unicode-scripts.h:93
 msgid "Runic"
 msgstr "رونی"
 
-#: ../gucharmap/unicode-blocks.h:55
-#: ../gucharmap/unicode-scripts.h:97
-msgid "Tagalog"
-msgstr ""
-
 #: ../gucharmap/unicode-blocks.h:56
-#: ../gucharmap/unicode-scripts.h:49
-msgid "Hanunoo"
-msgstr ""
+#: ../gucharmap/unicode-scripts.h:103
+msgid "Tagalog"
+msgstr "تاگالوگ"
 
 #: ../gucharmap/unicode-blocks.h:57
+#: ../gucharmap/unicode-scripts.h:50
+msgid "Hanunoo"
+msgstr "هانونو"
+
+#: ../gucharmap/unicode-blocks.h:58
 #: ../gucharmap/unicode-scripts.h:27
 msgid "Buhid"
 msgstr "بوهید"
 
-#: ../gucharmap/unicode-blocks.h:58
-#: ../gucharmap/unicode-scripts.h:98
-msgid "Tagbanwa"
-msgstr ""
-
 #: ../gucharmap/unicode-blocks.h:59
-#: ../gucharmap/unicode-scripts.h:62
+#: ../gucharmap/unicode-scripts.h:104
+msgid "Tagbanwa"
+msgstr "تاگبانوا"
+
+#: ../gucharmap/unicode-blocks.h:60
+#: ../gucharmap/unicode-scripts.h:63
 msgid "Khmer"
 msgstr "خمری"
 
-#: ../gucharmap/unicode-blocks.h:60
-#: ../gucharmap/unicode-scripts.h:74
+#: ../gucharmap/unicode-blocks.h:61
+#: ../gucharmap/unicode-scripts.h:78
 msgid "Mongolian"
 msgstr "مغولی"
 
-#: ../gucharmap/unicode-blocks.h:61
-#, fuzzy
+#: ../gucharmap/unicode-blocks.h:62
 #| msgid "Unified Canadian Aboriginal Syllabics"
 msgid "Unified Canadian Aboriginal Syllabics Extended"
-msgstr "هجاهای بومی کانادایی یکی‌شده"
+msgstr "گسترش یافته هجاهای بومی کانادایی یکی‌شده"
 
-#: ../gucharmap/unicode-blocks.h:62
-#: ../gucharmap/unicode-scripts.h:66
+#: ../gucharmap/unicode-blocks.h:63
+#: ../gucharmap/unicode-scripts.h:67
 msgid "Limbu"
 msgstr "لیمبو"
 
-#: ../gucharmap/unicode-blocks.h:63
-#: ../gucharmap/unicode-scripts.h:99
+#: ../gucharmap/unicode-blocks.h:64
+#: ../gucharmap/unicode-scripts.h:105
 msgid "Tai Le"
 msgstr "تای لی"
 
-#: ../gucharmap/unicode-blocks.h:64
-#: ../gucharmap/unicode-scripts.h:77
+#: ../gucharmap/unicode-blocks.h:65
+#: ../gucharmap/unicode-scripts.h:81
 msgid "New Tai Lue"
 msgstr "تای لو جدید"
 
-#: ../gucharmap/unicode-blocks.h:65
+#: ../gucharmap/unicode-blocks.h:66
 msgid "Khmer Symbols"
 msgstr "نمادهای خمری"
 
-#: ../gucharmap/unicode-blocks.h:66
+#: ../gucharmap/unicode-blocks.h:67
 #: ../gucharmap/unicode-scripts.h:26
 msgid "Buginese"
-msgstr ""
+msgstr "باگینسی"
 
-#: ../gucharmap/unicode-blocks.h:67
-#: ../gucharmap/unicode-scripts.h:100
+#: ../gucharmap/unicode-blocks.h:68
+#: ../gucharmap/unicode-scripts.h:106
 msgid "Tai Tham"
 msgstr "تای تام"
 
-#: ../gucharmap/unicode-blocks.h:68
+#: ../gucharmap/unicode-blocks.h:69
 #: ../gucharmap/unicode-scripts.h:19
 msgid "Balinese"
-msgstr ""
-
-#: ../gucharmap/unicode-blocks.h:69
-#: ../gucharmap/unicode-scripts.h:94
-msgid "Sundanese"
-msgstr ""
+msgstr "بالینسی"
 
 #: ../gucharmap/unicode-blocks.h:70
-#: ../gucharmap/unicode-scripts.h:21
-#, fuzzy
-#| msgid "Katakana"
-msgid "Batak"
-msgstr "کاتاکانا"
+#: ../gucharmap/unicode-scripts.h:100
+msgid "Sundanese"
+msgstr "سوندایی"
 
 #: ../gucharmap/unicode-blocks.h:71
-#: ../gucharmap/unicode-scripts.h:65
-msgid "Lepcha"
-msgstr ""
+#: ../gucharmap/unicode-scripts.h:21
+#| msgid "Katakana"
+msgid "Batak"
+msgstr "باتاکی"
 
 #: ../gucharmap/unicode-blocks.h:72
-#: ../gucharmap/unicode-scripts.h:79
-msgid "Ol Chiki"
-msgstr ""
+#: ../gucharmap/unicode-scripts.h:66
+msgid "Lepcha"
+msgstr "لِپچا"
 
 #: ../gucharmap/unicode-blocks.h:73
-#, fuzzy
-#| msgid "Phonetic Extensions"
-msgid "Vedic Extensions"
-msgstr "گسترش‌های فونتیک"
+#: ../gucharmap/unicode-scripts.h:83
+msgid "Ol Chiki"
+msgstr "اُل چیکی"
 
 #: ../gucharmap/unicode-blocks.h:74
-msgid "Phonetic Extensions"
-msgstr "گسترش‌های فونتیک"
+#| msgid "Latin-1 Supplement"
+msgid "Sundanese Supplement"
+msgstr "مکمل سوندایی"
 
 #: ../gucharmap/unicode-blocks.h:75
 #| msgid "Phonetic Extensions"
+msgid "Vedic Extensions"
+msgstr "گسترش‌های ودایی"
+
+#: ../gucharmap/unicode-blocks.h:76
+msgid "Phonetic Extensions"
+msgstr "گسترش‌های فونتیک"
+
+#: ../gucharmap/unicode-blocks.h:77
 msgid "Phonetic Extensions Supplement"
 msgstr "مکمل گسترش‌های فونتیک"
 
-#: ../gucharmap/unicode-blocks.h:76
-#, fuzzy
+#: ../gucharmap/unicode-blocks.h:78
 #| msgid "Combining Diacritical Marks"
 msgid "Combining Diacritical Marks Supplement"
-msgstr "اعراب‌های ترکیب‌شونده"
+msgstr "مکمل اعراب‌های ترکیب‌شونده"
 
-#: ../gucharmap/unicode-blocks.h:77
+#: ../gucharmap/unicode-blocks.h:79
 msgid "Latin Extended Additional"
 msgstr "لاتینی گسترش‌یافته اضافی"
 
-#: ../gucharmap/unicode-blocks.h:78
+#: ../gucharmap/unicode-blocks.h:80
 msgid "Greek Extended"
 msgstr "یونانی گسترش‌یافته"
 
-#: ../gucharmap/unicode-blocks.h:79
+#: ../gucharmap/unicode-blocks.h:81
 msgid "General Punctuation"
 msgstr "نقطه‌گذاری عمومی"
 
-#: ../gucharmap/unicode-blocks.h:80
+#: ../gucharmap/unicode-blocks.h:82
 msgid "Superscripts and Subscripts"
 msgstr "بالانوشت‌ها و زیرنوشت‌ها"
 
-#: ../gucharmap/unicode-blocks.h:81
+#: ../gucharmap/unicode-blocks.h:83
 msgid "Currency Symbols"
 msgstr "نمادهای واحد پول"
 
-#: ../gucharmap/unicode-blocks.h:82
+#: ../gucharmap/unicode-blocks.h:84
 msgid "Combining Diacritical Marks for Symbols"
 msgstr "اعراب‌های ترکیب‌شونده برای نمادها"
 
-#: ../gucharmap/unicode-blocks.h:83
+#: ../gucharmap/unicode-blocks.h:85
 msgid "Letterlike Symbols"
 msgstr "نمادهای شبیه حرف"
 
-#: ../gucharmap/unicode-blocks.h:84
+#: ../gucharmap/unicode-blocks.h:86
 msgid "Number Forms"
 msgstr "صورت‌های عددی"
 
-#: ../gucharmap/unicode-blocks.h:85
+#: ../gucharmap/unicode-blocks.h:87
 msgid "Arrows"
 msgstr "پیکان‌ها"
 
-#: ../gucharmap/unicode-blocks.h:86
+#: ../gucharmap/unicode-blocks.h:88
 msgid "Mathematical Operators"
 msgstr "عملگرهای ریاضی"
 
-#: ../gucharmap/unicode-blocks.h:87
+#: ../gucharmap/unicode-blocks.h:89
 msgid "Miscellaneous Technical"
 msgstr "فنی متفرقه"
 
-#: ../gucharmap/unicode-blocks.h:88
+#: ../gucharmap/unicode-blocks.h:90
 msgid "Control Pictures"
 msgstr "شکل‌های کنترلی"
 
-#: ../gucharmap/unicode-blocks.h:89
+#: ../gucharmap/unicode-blocks.h:91
 msgid "Optical Character Recognition"
 msgstr "تشخیص نوری نویسه‌ها"
 
-#: ../gucharmap/unicode-blocks.h:90
+#: ../gucharmap/unicode-blocks.h:92
 msgid "Enclosed Alphanumerics"
 msgstr "الفبارقمی‌های محصور"
 
-#: ../gucharmap/unicode-blocks.h:91
+#: ../gucharmap/unicode-blocks.h:93
 msgid "Box Drawing"
 msgstr "کادر‌کِشی"
 
-#: ../gucharmap/unicode-blocks.h:92
+#: ../gucharmap/unicode-blocks.h:94
 msgid "Block Elements"
 msgstr "اجزای بلوکی"
 
-#: ../gucharmap/unicode-blocks.h:93
+#: ../gucharmap/unicode-blocks.h:95
 msgid "Geometric Shapes"
 msgstr "شکل‌های هندسی"
 
-#: ../gucharmap/unicode-blocks.h:94
+#: ../gucharmap/unicode-blocks.h:96
 msgid "Miscellaneous Symbols"
 msgstr "نمادهای متفرقه"
 
-#: ../gucharmap/unicode-blocks.h:95
+#: ../gucharmap/unicode-blocks.h:97
 msgid "Dingbats"
 msgstr "تزئینی"
 
-#: ../gucharmap/unicode-blocks.h:96
+#: ../gucharmap/unicode-blocks.h:98
 msgid "Miscellaneous Mathematical Symbols-A"
 msgstr "نمادهای متفرقه ریاضی‐الف"
 
-#: ../gucharmap/unicode-blocks.h:97
+#: ../gucharmap/unicode-blocks.h:99
 msgid "Supplemental Arrows-A"
 msgstr "پیکان‌های تکمیلی‐الف"
 
-#: ../gucharmap/unicode-blocks.h:98
+#: ../gucharmap/unicode-blocks.h:100
 msgid "Braille Patterns"
 msgstr "الگوهای بریل"
 
-#: ../gucharmap/unicode-blocks.h:99
+#: ../gucharmap/unicode-blocks.h:101
 msgid "Supplemental Arrows-B"
 msgstr "پیکان‌های تکمیلی‐ب"
 
-#: ../gucharmap/unicode-blocks.h:100
+#: ../gucharmap/unicode-blocks.h:102
 msgid "Miscellaneous Mathematical Symbols-B"
 msgstr "نمادهای متفرقه‌ی ریاضی‐ب"
 
-#: ../gucharmap/unicode-blocks.h:101
+#: ../gucharmap/unicode-blocks.h:103
 msgid "Supplemental Mathematical Operators"
 msgstr "عملگرهای ریاضی تکمیلی"
 
-#: ../gucharmap/unicode-blocks.h:102
+#: ../gucharmap/unicode-blocks.h:104
 msgid "Miscellaneous Symbols and Arrows"
 msgstr "نمادها و پیکان‌های متفرقه"
 
-#: ../gucharmap/unicode-blocks.h:103
-#: ../gucharmap/unicode-scripts.h:42
-#, fuzzy
+#: ../gucharmap/unicode-blocks.h:105
+#: ../gucharmap/unicode-scripts.h:43
 #| msgid "Gothic"
 msgid "Glagolitic"
-msgstr "گوتیک"
+msgstr "گلاگولیتسه"
 
-#: ../gucharmap/unicode-blocks.h:104
-#, fuzzy
+#: ../gucharmap/unicode-blocks.h:106
 #| msgid "Latin Extended-A"
 msgid "Latin Extended-C"
-msgstr "لاتینی گسترش‌یافته‐الف"
+msgstr "لاتینی گسترش‌یافته‐پ"
 
-#: ../gucharmap/unicode-blocks.h:105
-#: ../gucharmap/unicode-scripts.h:33
-#| msgid "Gothic"
+#: ../gucharmap/unicode-blocks.h:107
+#: ../gucharmap/unicode-scripts.h:34
 msgid "Coptic"
 msgstr "کوپتیک"
 
-#: ../gucharmap/unicode-blocks.h:106
-#, fuzzy
+#: ../gucharmap/unicode-blocks.h:108
 #| msgid "Latin-1 Supplement"
 msgid "Georgian Supplement"
-msgstr "مکمل Latin-1"
-
-#: ../gucharmap/unicode-blocks.h:107
-#: ../gucharmap/unicode-scripts.h:107
-msgid "Tifinagh"
-msgstr ""
-
-#: ../gucharmap/unicode-blocks.h:108
-#, fuzzy
-#| msgid "Latin Extended-A"
-msgid "Ethiopic Extended"
-msgstr "لاتینی گسترش‌یافته‐الف"
+msgstr "مکمل گرجی"
 
 #: ../gucharmap/unicode-blocks.h:109
-#, fuzzy
-#| msgid "Latin Extended-A"
-msgid "Cyrillic Extended-A"
-msgstr "لاتینی گسترش‌یافته‐الف"
+#: ../gucharmap/unicode-scripts.h:114
+msgid "Tifinagh"
+msgstr "بربری"
 
 #: ../gucharmap/unicode-blocks.h:110
-#, fuzzy
-#| msgid "General Punctuation"
-msgid "Supplemental Punctuation"
-msgstr "نقطه‌گذاری عمومی"
+#| msgid "Latin Extended-A"
+msgid "Ethiopic Extended"
+msgstr "اتیوپی گسترش‌یافته"
 
 #: ../gucharmap/unicode-blocks.h:111
+#| msgid "Latin Extended-A"
+msgid "Cyrillic Extended-A"
+msgstr "سیریلیک گسترش‌یافته‐الف"
+
+#: ../gucharmap/unicode-blocks.h:112
+#| msgid "General Punctuation"
+msgid "Supplemental Punctuation"
+msgstr "نقطه‌گذاری مکمل"
+
+#: ../gucharmap/unicode-blocks.h:113
 msgid "CJK Radicals Supplement"
 msgstr "رادیکال‌های چ‌ژک تکمیلی"
 
-#: ../gucharmap/unicode-blocks.h:112
-msgid "Kangxi Radicals"
-msgstr ""
-
-#: ../gucharmap/unicode-blocks.h:113
-msgid "Ideographic Description Characters"
-msgstr ""
-
 #: ../gucharmap/unicode-blocks.h:114
+msgid "Kangxi Radicals"
+msgstr "کنگسی رادیکال"
+
+#: ../gucharmap/unicode-blocks.h:115
+msgid "Ideographic Description Characters"
+msgstr "نویسه‌های تشریحی ایده‌نگار"
+
+#: ../gucharmap/unicode-blocks.h:116
 msgid "CJK Symbols and Punctuation"
 msgstr "نمادها و نقطه‌گذاری چ‌ژک"
 
-#: ../gucharmap/unicode-blocks.h:115
-#: ../gucharmap/unicode-scripts.h:51
+#: ../gucharmap/unicode-blocks.h:117
+#: ../gucharmap/unicode-scripts.h:52
 msgid "Hiragana"
 msgstr "هیراگانا"
 
-#: ../gucharmap/unicode-blocks.h:116
-#: ../gucharmap/unicode-scripts.h:59
+#: ../gucharmap/unicode-blocks.h:118
+#: ../gucharmap/unicode-scripts.h:60
 msgid "Katakana"
 msgstr "کاتاکانا"
 
-#: ../gucharmap/unicode-blocks.h:117
+#: ../gucharmap/unicode-blocks.h:119
 #: ../gucharmap/unicode-scripts.h:23
 msgid "Bopomofo"
 msgstr "بوپوموفو"
 
-#: ../gucharmap/unicode-blocks.h:118
+#: ../gucharmap/unicode-blocks.h:120
 msgid "Hangul Compatibility Jamo"
-msgstr ""
+msgstr "جمو منطبق هنگول"
 
-#: ../gucharmap/unicode-blocks.h:119
+#: ../gucharmap/unicode-blocks.h:121
 msgid "Kanbun"
 msgstr "کانبون"
 
-#: ../gucharmap/unicode-blocks.h:120
+#: ../gucharmap/unicode-blocks.h:122
 msgid "Bopomofo Extended"
 msgstr "بوپوموفوی گسترش‌یافته"
 
-#: ../gucharmap/unicode-blocks.h:121
+#: ../gucharmap/unicode-blocks.h:123
 msgid "CJK Strokes"
-msgstr ""
+msgstr "استرس‌های چ‌ژک"
 
-#: ../gucharmap/unicode-blocks.h:122
+#: ../gucharmap/unicode-blocks.h:124
 msgid "Katakana Phonetic Extensions"
 msgstr "گسترش‌های فونتیکی کاتاکانا"
 
-#: ../gucharmap/unicode-blocks.h:123
+#: ../gucharmap/unicode-blocks.h:125
 msgid "Enclosed CJK Letters and Months"
 msgstr "حروف و ماه‌های چ‌ژک محصور"
 
-#: ../gucharmap/unicode-blocks.h:124
+#: ../gucharmap/unicode-blocks.h:126
 msgid "CJK Compatibility"
 msgstr "سازگاری چ‌ژک"
 
-#: ../gucharmap/unicode-blocks.h:125
+#: ../gucharmap/unicode-blocks.h:127
 msgid "CJK Unified Ideographs Extension A"
-msgstr "اندیشه‌نگارهای چ‌ژک یکی‌شده گسترش الف"
+msgstr "ایده‌نگارهای چ‌ژک یکی‌شده گسترش الف"
 
-#: ../gucharmap/unicode-blocks.h:126
+#: ../gucharmap/unicode-blocks.h:128
 msgid "Yijing Hexagram Symbols"
 msgstr "نمادهای شش‌تایی یی‌چینگ"
 
-#: ../gucharmap/unicode-blocks.h:127
+#: ../gucharmap/unicode-blocks.h:129
 msgid "CJK Unified Ideographs"
-msgstr "اندیشه‌نگارهای چ‌ژک یکی‌شده"
+msgstr "ایده‌نگارهای چ‌ژک یکی‌شده"
 
-#: ../gucharmap/unicode-blocks.h:128
+#: ../gucharmap/unicode-blocks.h:130
 msgid "Yi Syllables"
 msgstr "سیلاب‌های یی"
 
-#: ../gucharmap/unicode-blocks.h:129
+#: ../gucharmap/unicode-blocks.h:131
 msgid "Yi Radicals"
 msgstr "رادیکال‌های یی"
 
-#: ../gucharmap/unicode-blocks.h:130
-#: ../gucharmap/unicode-scripts.h:68
+#: ../gucharmap/unicode-blocks.h:132
+#: ../gucharmap/unicode-scripts.h:69
 msgid "Lisu"
 msgstr "لیسو"
 
-#: ../gucharmap/unicode-blocks.h:131
-#: ../gucharmap/unicode-scripts.h:109
+#: ../gucharmap/unicode-blocks.h:133
+#: ../gucharmap/unicode-scripts.h:116
 msgid "Vai"
 msgstr "وای"
 
-#: ../gucharmap/unicode-blocks.h:132
-#, fuzzy
+#: ../gucharmap/unicode-blocks.h:134
 #| msgid "Latin Extended-B"
 msgid "Cyrillic Extended-B"
-msgstr "لاتینی گسترش یافته‐ب"
+msgstr "سریلیک گسترش یافته‐ب"
 
-#: ../gucharmap/unicode-blocks.h:133
+#: ../gucharmap/unicode-blocks.h:135
 #: ../gucharmap/unicode-scripts.h:20
 msgid "Bamum"
 msgstr "باموم"
 
-#: ../gucharmap/unicode-blocks.h:134
-#, fuzzy
+#: ../gucharmap/unicode-blocks.h:136
 #| msgid "Spacing Modifier Letters"
 msgid "Modifier Tone Letters"
-msgstr "حروف تغییردهنده‌ی عرض‌دار"
+msgstr "حروف تغییردهنده‌ی آوایی"
 
-#: ../gucharmap/unicode-blocks.h:135
-#| msgid "Latin Extended-A"
+#: ../gucharmap/unicode-blocks.h:137
 msgid "Latin Extended-D"
 msgstr "لاتینی گسترش‌یافته‐د"
 
-#: ../gucharmap/unicode-blocks.h:136
-#: ../gucharmap/unicode-scripts.h:95
+#: ../gucharmap/unicode-blocks.h:138
+#: ../gucharmap/unicode-scripts.h:101
 msgid "Syloti Nagri"
 msgstr "سیلوتی ناگری"
 
-#: ../gucharmap/unicode-blocks.h:137
-#, fuzzy
+#: ../gucharmap/unicode-blocks.h:139
 #| msgid "Number Forms"
 msgid "Common Indic Number Forms"
-msgstr "صورت‌های عددی"
-
-#: ../gucharmap/unicode-blocks.h:138
-msgid "Phags-pa"
-msgstr ""
-
-#: ../gucharmap/unicode-blocks.h:139
-#: ../gucharmap/unicode-scripts.h:91
-msgid "Saurashtra"
-msgstr ""
+msgstr "صورت‌های عددی معمول هندی"
 
 #: ../gucharmap/unicode-blocks.h:140
-#| msgid "Devanagari"
+msgid "Phags-pa"
+msgstr "فاگس-پا"
+
+#: ../gucharmap/unicode-blocks.h:141
+#: ../gucharmap/unicode-scripts.h:95
+msgid "Saurashtra"
+msgstr "سائوراشترا"
+
+#: ../gucharmap/unicode-blocks.h:142
 msgid "Devanagari Extended"
 msgstr "دوناگری گسترش‌یافته"
 
-#: ../gucharmap/unicode-blocks.h:141
-#: ../gucharmap/unicode-scripts.h:60
-msgid "Kayah Li"
-msgstr ""
-
-#: ../gucharmap/unicode-blocks.h:142
-#: ../gucharmap/unicode-scripts.h:88
-msgid "Rejang"
-msgstr ""
-
 #: ../gucharmap/unicode-blocks.h:143
-#, fuzzy
-#| msgid "Latin Extended-A"
-msgid "Hangul Jamo Extended-A"
-msgstr "لاتینی گسترش‌یافته‐الف"
+#: ../gucharmap/unicode-scripts.h:61
+msgid "Kayah Li"
+msgstr "کایاح لی"
 
 #: ../gucharmap/unicode-blocks.h:144
-#: ../gucharmap/unicode-scripts.h:56
-msgid "Javanese"
-msgstr ""
+#: ../gucharmap/unicode-scripts.h:92
+msgid "Rejang"
+msgstr "ریجانگ"
 
 #: ../gucharmap/unicode-blocks.h:145
-#: ../gucharmap/unicode-scripts.h:30
-#, fuzzy
-#| msgid "Char_map"
-msgid "Cham"
-msgstr "نقشه‌نویسه"
+#| msgid "Latin Extended-A"
+msgid "Hangul Jamo Extended-A"
+msgstr "هانگول جامو گسترش‌یافته‐الف"
 
 #: ../gucharmap/unicode-blocks.h:146
-#, fuzzy
-#| msgid "Latin Extended-A"
-msgid "Myanmar Extended-A"
-msgstr "لاتینی گسترش‌یافته‐الف"
+#: ../gucharmap/unicode-scripts.h:57
+msgid "Javanese"
+msgstr "جاوه‌ای"
 
 #: ../gucharmap/unicode-blocks.h:147
-#: ../gucharmap/unicode-scripts.h:101
-msgid "Tai Viet"
-msgstr ""
+#: ../gucharmap/unicode-scripts.h:31
+#| msgid "Char_map"
+msgid "Cham"
+msgstr "چم"
 
 #: ../gucharmap/unicode-blocks.h:148
-#, fuzzy
 #| msgid "Latin Extended-A"
-msgid "Ethiopic Extended-A"
-msgstr "لاتینی گسترش‌یافته‐الف"
+msgid "Myanmar Extended-A"
+msgstr "میانمار گسترش‌یافته‐الف"
 
 #: ../gucharmap/unicode-blocks.h:149
-#: ../gucharmap/unicode-scripts.h:73
-msgid "Meetei Mayek"
-msgstr ""
+#: ../gucharmap/unicode-scripts.h:107
+msgid "Tai Viet"
+msgstr "تای ویتنام"
 
 #: ../gucharmap/unicode-blocks.h:150
+#| msgid "Phonetic Extensions"
+msgid "Meetei Mayek Extensions"
+msgstr "گسترش‌های میتی مایک"
+
+#: ../gucharmap/unicode-blocks.h:151
+#| msgid "Latin Extended-A"
+msgid "Ethiopic Extended-A"
+msgstr "اتیوپی گسترش‌یافته‐الف"
+
+#: ../gucharmap/unicode-blocks.h:152
+#: ../gucharmap/unicode-scripts.h:74
+msgid "Meetei Mayek"
+msgstr "میتی مایِک"
+
+#: ../gucharmap/unicode-blocks.h:153
 msgid "Hangul Syllables"
 msgstr "سیلاب‌های هانگول"
 
-#: ../gucharmap/unicode-blocks.h:151
-#, fuzzy
+#: ../gucharmap/unicode-blocks.h:154
 #| msgid "Latin Extended-B"
 msgid "Hangul Jamo Extended-B"
-msgstr "لاتینی گسترش یافته‐ب"
+msgstr "هانگول جام گسترش یافته‐ب"
 
-#: ../gucharmap/unicode-blocks.h:152
+#: ../gucharmap/unicode-blocks.h:155
 msgid "High Surrogates"
 msgstr "جایگزین‌های بالا"
 
-#: ../gucharmap/unicode-blocks.h:153
+#: ../gucharmap/unicode-blocks.h:156
 msgid "High Private Use Surrogates"
 msgstr "جایگزین‌های بالای خصوصی"
 
-#: ../gucharmap/unicode-blocks.h:154
+#: ../gucharmap/unicode-blocks.h:157
 msgid "Low Surrogates"
 msgstr "جایگزین‌های پایین"
 
-#: ../gucharmap/unicode-blocks.h:155
+#: ../gucharmap/unicode-blocks.h:158
 msgid "Private Use Area"
 msgstr "ناحیه‌ی خصوصی"
 
-#: ../gucharmap/unicode-blocks.h:156
+#: ../gucharmap/unicode-blocks.h:159
 msgid "CJK Compatibility Ideographs"
-msgstr "اندیشه‌نگارهای سازگاری چ‌ژک"
+msgstr "ایده‌نگارهای سازگاری چ‌ژک"
 
-#: ../gucharmap/unicode-blocks.h:157
+#: ../gucharmap/unicode-blocks.h:160
 msgid "Alphabetic Presentation Forms"
 msgstr "صورت‌های نمایشی الفبایی"
 
-#: ../gucharmap/unicode-blocks.h:158
+#: ../gucharmap/unicode-blocks.h:161
 msgid "Arabic Presentation Forms-A"
 msgstr "صورت‌های نمایشی عربی‐الف"
 
-#: ../gucharmap/unicode-blocks.h:159
+#: ../gucharmap/unicode-blocks.h:162
 msgid "Variation Selectors"
-msgstr ""
+msgstr "انواع انتخابگرها"
 
-#: ../gucharmap/unicode-blocks.h:160
-#| msgid "Number Forms"
+#: ../gucharmap/unicode-blocks.h:163
 msgid "Vertical Forms"
 msgstr "صورت‌های عمودی"
 
-#: ../gucharmap/unicode-blocks.h:161
+#: ../gucharmap/unicode-blocks.h:164
 msgid "Combining Half Marks"
 msgstr "نیم‌نشانه‌های ترکیب‌شونده"
 
-#: ../gucharmap/unicode-blocks.h:162
+#: ../gucharmap/unicode-blocks.h:165
 msgid "CJK Compatibility Forms"
 msgstr "صورت‌های سازگاری چ‌ژک"
 
-#: ../gucharmap/unicode-blocks.h:163
+#: ../gucharmap/unicode-blocks.h:166
 msgid "Small Form Variants"
-msgstr ""
+msgstr "انوع فرم کوچک"
 
-#: ../gucharmap/unicode-blocks.h:164
+#: ../gucharmap/unicode-blocks.h:167
 msgid "Arabic Presentation Forms-B"
 msgstr "صورت‌های نمایشی عربی‐ب"
 
-#: ../gucharmap/unicode-blocks.h:165
+#: ../gucharmap/unicode-blocks.h:168
 msgid "Halfwidth and Fullwidth Forms"
 msgstr "صورت‌های نیم‌عرض و تمام‌عرض"
 
-#: ../gucharmap/unicode-blocks.h:166
+#: ../gucharmap/unicode-blocks.h:169
 msgid "Specials"
 msgstr "خاص"
 
-#: ../gucharmap/unicode-blocks.h:167
+#: ../gucharmap/unicode-blocks.h:170
 msgid "Linear B Syllabary"
-msgstr ""
+msgstr "هجابندی خطی B"
 
-#: ../gucharmap/unicode-blocks.h:168
+#: ../gucharmap/unicode-blocks.h:171
 msgid "Linear B Ideograms"
-msgstr ""
+msgstr "مفهوم‌نگاشت‌های خطی B"
 
-#: ../gucharmap/unicode-blocks.h:169
+#: ../gucharmap/unicode-blocks.h:172
 msgid "Aegean Numbers"
 msgstr "اعداد اژه‌ای"
 
-#: ../gucharmap/unicode-blocks.h:170
-#| msgid "Aegean Numbers"
+#: ../gucharmap/unicode-blocks.h:173
 msgid "Ancient Greek Numbers"
 msgstr "اعداد یونانی باستانی"
 
-#: ../gucharmap/unicode-blocks.h:171
-#| msgid "Currency Symbols"
+#: ../gucharmap/unicode-blocks.h:174
 msgid "Ancient Symbols"
 msgstr "نمادهای قدیمی"
 
-#: ../gucharmap/unicode-blocks.h:172
+#: ../gucharmap/unicode-blocks.h:175
 msgid "Phaistos Disc"
-msgstr ""
+msgstr "صفحه فستوس"
 
-#: ../gucharmap/unicode-blocks.h:173
-#: ../gucharmap/unicode-scripts.h:69
+#: ../gucharmap/unicode-blocks.h:176
+#: ../gucharmap/unicode-scripts.h:70
 msgid "Lycian"
-msgstr ""
+msgstr "لیکیایی"
 
-#: ../gucharmap/unicode-blocks.h:174
+#: ../gucharmap/unicode-blocks.h:177
 #: ../gucharmap/unicode-scripts.h:29
-#| msgid "Shavian"
 msgid "Carian"
 msgstr "کاریایی"
 
-#: ../gucharmap/unicode-blocks.h:175
-#: ../gucharmap/unicode-scripts.h:80
+#: ../gucharmap/unicode-blocks.h:178
+#: ../gucharmap/unicode-scripts.h:84
 msgid "Old Italic"
 msgstr "ایتالیک قدیمی"
 
-#: ../gucharmap/unicode-blocks.h:176
-#: ../gucharmap/unicode-scripts.h:43
+#: ../gucharmap/unicode-blocks.h:179
+#: ../gucharmap/unicode-scripts.h:44
 msgid "Gothic"
 msgstr "گوتیک"
 
-#: ../gucharmap/unicode-blocks.h:177
-#: ../gucharmap/unicode-scripts.h:108
-msgid "Ugaritic"
-msgstr ""
-
-#: ../gucharmap/unicode-blocks.h:178
-#: ../gucharmap/unicode-scripts.h:81
-msgid "Old Persian"
-msgstr "فارسی قدیمی"
-
-#: ../gucharmap/unicode-blocks.h:179
-#: ../gucharmap/unicode-scripts.h:37
-msgid "Deseret"
-msgstr ""
-
 #: ../gucharmap/unicode-blocks.h:180
-#: ../gucharmap/unicode-scripts.h:92
-msgid "Shavian"
-msgstr "شاوی"
+#: ../gucharmap/unicode-scripts.h:115
+msgid "Ugaritic"
+msgstr "اوگاریتی"
 
 #: ../gucharmap/unicode-blocks.h:181
 #: ../gucharmap/unicode-scripts.h:85
-msgid "Osmanya"
-msgstr ""
+msgid "Old Persian"
+msgstr "فارسی قدیمی"
 
 #: ../gucharmap/unicode-blocks.h:182
+#: ../gucharmap/unicode-scripts.h:38
+msgid "Deseret"
+msgstr "دزرت"
+
+#: ../gucharmap/unicode-blocks.h:183
+#: ../gucharmap/unicode-scripts.h:97
+msgid "Shavian"
+msgstr "شاوی"
+
+#: ../gucharmap/unicode-blocks.h:184
+#: ../gucharmap/unicode-scripts.h:89
+msgid "Osmanya"
+msgstr "عثمانی"
+
+#: ../gucharmap/unicode-blocks.h:185
 msgid "Cypriot Syllabary"
 msgstr "سیلابی قبرسی"
 
-#: ../gucharmap/unicode-blocks.h:183
-#: ../gucharmap/unicode-scripts.h:52
-msgid "Imperial Aramaic"
-msgstr ""
-
-#: ../gucharmap/unicode-blocks.h:184
-#: ../gucharmap/unicode-scripts.h:87
-msgid "Phoenician"
-msgstr ""
-
-#: ../gucharmap/unicode-blocks.h:185
-#: ../gucharmap/unicode-scripts.h:70
-msgid "Lydian"
-msgstr ""
-
 #: ../gucharmap/unicode-blocks.h:186
-#: ../gucharmap/unicode-scripts.h:61
-msgid "Kharoshthi"
-msgstr ""
+#: ../gucharmap/unicode-scripts.h:53
+msgid "Imperial Aramaic"
+msgstr "ارمنی پادشاهی"
 
 #: ../gucharmap/unicode-blocks.h:187
-#: ../gucharmap/unicode-scripts.h:82
+#: ../gucharmap/unicode-scripts.h:91
+msgid "Phoenician"
+msgstr "فیتیقی"
+
+#: ../gucharmap/unicode-blocks.h:188
+#: ../gucharmap/unicode-scripts.h:71
+msgid "Lydian"
+msgstr "لیدیایی"
+
+#: ../gucharmap/unicode-blocks.h:189
+#: ../gucharmap/unicode-scripts.h:76
+msgid "Meroitic Hieroglyphs"
+msgstr "مریوتیک هیروگلیف"
+
+#: ../gucharmap/unicode-blocks.h:190
+#: ../gucharmap/unicode-scripts.h:75
+msgid "Meroitic Cursive"
+msgstr "مروتیک خط شکسته"
+
+#: ../gucharmap/unicode-blocks.h:191
+#: ../gucharmap/unicode-scripts.h:62
+msgid "Kharoshthi"
+msgstr "خروشتی"
+
+#: ../gucharmap/unicode-blocks.h:192
+#: ../gucharmap/unicode-scripts.h:86
 msgid "Old South Arabian"
 msgstr "عربی جنوبی قدیمی"
 
-#: ../gucharmap/unicode-blocks.h:188
+#: ../gucharmap/unicode-blocks.h:193
 #: ../gucharmap/unicode-scripts.h:18
 msgid "Avestan"
-msgstr ""
+msgstr "اوستایی"
 
-#: ../gucharmap/unicode-blocks.h:189
-#: ../gucharmap/unicode-scripts.h:55
+#: ../gucharmap/unicode-blocks.h:194
+#: ../gucharmap/unicode-scripts.h:56
 msgid "Inscriptional Parthian"
-msgstr ""
+msgstr "اشکانی خطی"
 
-#: ../gucharmap/unicode-blocks.h:190
-#: ../gucharmap/unicode-scripts.h:54
+#: ../gucharmap/unicode-blocks.h:195
+#: ../gucharmap/unicode-scripts.h:55
 msgid "Inscriptional Pahlavi"
-msgstr ""
+msgstr "پهلوی خطی"
 
-#: ../gucharmap/unicode-blocks.h:191
-#: ../gucharmap/unicode-scripts.h:83
-#| msgid "Old Italic"
+#: ../gucharmap/unicode-blocks.h:196
+#: ../gucharmap/unicode-scripts.h:87
 msgid "Old Turkic"
 msgstr "ترکی قدیمی"
 
-#: ../gucharmap/unicode-blocks.h:192
-#| msgid "Musical Symbols"
+#: ../gucharmap/unicode-blocks.h:197
 msgid "Rumi Numeral Symbols"
 msgstr "نمادهای عددی روسی"
 
-#: ../gucharmap/unicode-blocks.h:193
+#: ../gucharmap/unicode-blocks.h:198
 #: ../gucharmap/unicode-scripts.h:24
-#| msgid "Braille"
 msgid "Brahmi"
 msgstr "برهمی"
 
-#: ../gucharmap/unicode-blocks.h:194
-#: ../gucharmap/unicode-scripts.h:57
+#: ../gucharmap/unicode-blocks.h:199
+#: ../gucharmap/unicode-scripts.h:58
 msgid "Kaithi"
-msgstr ""
+msgstr "کایسی"
 
-#: ../gucharmap/unicode-blocks.h:195
-#: ../gucharmap/unicode-scripts.h:34
+#: ../gucharmap/unicode-blocks.h:200
+#: ../gucharmap/unicode-scripts.h:99
+msgid "Sora Sompeng"
+msgstr "سورا سومپنگ"
+
+#: ../gucharmap/unicode-blocks.h:201
+#: ../gucharmap/unicode-scripts.h:30
+#| msgid "Char_map"
+msgid "Chakma"
+msgstr "چاکما"
+
+#: ../gucharmap/unicode-blocks.h:202
+#: ../gucharmap/unicode-scripts.h:96
+#| msgid "Thaana"
+msgid "Sharada"
+msgstr "شارادا"
+
+#: ../gucharmap/unicode-blocks.h:203
+#: ../gucharmap/unicode-scripts.h:108
+#| msgid "Thai"
+msgid "Takri"
+msgstr "تاکری"
+
+#: ../gucharmap/unicode-blocks.h:204
+#: ../gucharmap/unicode-scripts.h:35
 msgid "Cuneiform"
-msgstr ""
+msgstr "خط میخی"
 
-#: ../gucharmap/unicode-blocks.h:196
-#| msgid "CJK Symbols and Punctuation"
+#: ../gucharmap/unicode-blocks.h:205
 msgid "Cuneiform Numbers and Punctuation"
 msgstr "نمادها و اعداد میخی"
 
-#: ../gucharmap/unicode-blocks.h:197
-#: ../gucharmap/unicode-scripts.h:39
+#: ../gucharmap/unicode-blocks.h:206
+#: ../gucharmap/unicode-scripts.h:40
 msgid "Egyptian Hieroglyphs"
-msgstr ""
+msgstr "هیروگلیف مصری"
 
-#: ../gucharmap/unicode-blocks.h:198
-#, fuzzy
+#: ../gucharmap/unicode-blocks.h:207
 #| msgid "Latin-1 Supplement"
 msgid "Bamum Supplement"
-msgstr "مکمل Latin-1"
+msgstr "مکمل باموم"
 
-#: ../gucharmap/unicode-blocks.h:199
-#, fuzzy
+#: ../gucharmap/unicode-blocks.h:208
+#: ../gucharmap/unicode-scripts.h:77
+msgid "Miao"
+msgstr "میائو"
+
+#: ../gucharmap/unicode-blocks.h:209
 #| msgid "Latin-1 Supplement"
 msgid "Kana Supplement"
-msgstr "مکمل Latin-1"
+msgstr "مکمل غنا"
 
-#: ../gucharmap/unicode-blocks.h:200
+#: ../gucharmap/unicode-blocks.h:210
 msgid "Byzantine Musical Symbols"
 msgstr "نمادهای موسیقی بیزانسی"
 
-#: ../gucharmap/unicode-blocks.h:201
+#: ../gucharmap/unicode-blocks.h:211
 msgid "Musical Symbols"
 msgstr "نمادهای موسیقی"
 
-#: ../gucharmap/unicode-blocks.h:202
+#: ../gucharmap/unicode-blocks.h:212
 msgid "Ancient Greek Musical Notation"
-msgstr ""
+msgstr "نت‌های موزیک‌های قدیمی یونانی"
 
-#: ../gucharmap/unicode-blocks.h:203
+#: ../gucharmap/unicode-blocks.h:213
 msgid "Tai Xuan Jing Symbols"
 msgstr "نمادهای تای خوای جینگ"
 
-#: ../gucharmap/unicode-blocks.h:204
+#: ../gucharmap/unicode-blocks.h:214
 msgid "Counting Rod Numerals"
-msgstr ""
+msgstr "اعداد راد شمارشی"
 
-#: ../gucharmap/unicode-blocks.h:205
+#: ../gucharmap/unicode-blocks.h:215
 msgid "Mathematical Alphanumeric Symbols"
 msgstr "نمادهای الفباعددی ریاضی"
 
-#: ../gucharmap/unicode-blocks.h:206
+#: ../gucharmap/unicode-blocks.h:216
+#| msgid "Mathematical Alphanumeric Symbols"
+msgid "Arabic Mathematical Alphabetic Symbols"
+msgstr "نمادهای الفبا عددی ریاضی عربی"
+
+#: ../gucharmap/unicode-blocks.h:217
 msgid "Mahjong Tiles"
 msgstr "مهره‌های ماهجانگ"
 
-#: ../gucharmap/unicode-blocks.h:207
+#: ../gucharmap/unicode-blocks.h:218
 msgid "Domino Tiles"
 msgstr "مهره‌های دومینو"
 
-#: ../gucharmap/unicode-blocks.h:208
+#: ../gucharmap/unicode-blocks.h:219
 msgid "Playing Cards"
 msgstr "کارت‌های بازی"
 
-#: ../gucharmap/unicode-blocks.h:209
-#, fuzzy
+#: ../gucharmap/unicode-blocks.h:220
 #| msgid "Enclosed Alphanumerics"
 msgid "Enclosed Alphanumeric Supplement"
-msgstr "الفبارقمی‌های محصور"
+msgstr "مکمل الفباعددی ضمیمه"
 
-#: ../gucharmap/unicode-blocks.h:210
-#, fuzzy
+#: ../gucharmap/unicode-blocks.h:221
 #| msgid "CJK Compatibility Ideographs Supplement"
 msgid "Enclosed Ideographic Supplement"
-msgstr "اندیشه‌نگارهای سازگاری چ‌ژک تکمیلی"
+msgstr "مکمل ایده‌نگارهای ضمیمه"
 
-#: ../gucharmap/unicode-blocks.h:211
-#| msgid "Miscellaneous Symbols and Arrows"
+#: ../gucharmap/unicode-blocks.h:222
 msgid "Miscellaneous Symbols And Pictographs"
 msgstr "نمادهای متفرقه یا علائم ویدئویی"
 
-#: ../gucharmap/unicode-blocks.h:212
-#| msgid "Options"
+#: ../gucharmap/unicode-blocks.h:223
 msgid "Emoticons"
 msgstr "شکلک‌ها"
 
-#: ../gucharmap/unicode-blocks.h:213
-#| msgid "Byzantine Musical Symbols"
+#: ../gucharmap/unicode-blocks.h:224
 msgid "Transport And Map Symbols"
 msgstr "نمادهای حمل و نقل و نقشه"
 
-#: ../gucharmap/unicode-blocks.h:214
-#| msgid "Musical Symbols"
+#: ../gucharmap/unicode-blocks.h:225
 msgid "Alchemical Symbols"
 msgstr "نمادهای شیمی"
 
-#: ../gucharmap/unicode-blocks.h:215
+#: ../gucharmap/unicode-blocks.h:226
 msgid "CJK Unified Ideographs Extension B"
-msgstr "اندیشه‌نگارهای چ‌ژک یکی‌شده گسترش ب"
+msgstr "ایده‌نگارهای چ‌ژک یکی‌شده گسترش ب"
 
-#: ../gucharmap/unicode-blocks.h:216
-#, fuzzy
+#: ../gucharmap/unicode-blocks.h:227
 #| msgid "CJK Unified Ideographs Extension A"
 msgid "CJK Unified Ideographs Extension C"
-msgstr "اندیشه‌نگارهای چ‌ژک یکی‌شده گسترش الف"
+msgstr "ایده‌نگارهای چ‌ژک یکی‌شده گسترش پ"
 
-#: ../gucharmap/unicode-blocks.h:217
-#, fuzzy
+#: ../gucharmap/unicode-blocks.h:228
 #| msgid "CJK Unified Ideographs Extension A"
 msgid "CJK Unified Ideographs Extension D"
-msgstr "اندیشه‌نگارهای چ‌ژک یکی‌شده گسترش الف"
+msgstr "ایده‌نگارهای چ‌ژک یکی‌شده گسترش چ"
 
-#: ../gucharmap/unicode-blocks.h:218
+#: ../gucharmap/unicode-blocks.h:229
 msgid "CJK Compatibility Ideographs Supplement"
-msgstr "اندیشه‌نگارهای سازگاری چ‌ژک تکمیلی"
+msgstr "ایده‌نگارهای سازگاری چ‌ژک تکمیلی"
 
-#: ../gucharmap/unicode-blocks.h:219
+#: ../gucharmap/unicode-blocks.h:230
 msgid "Tags"
 msgstr "برچسب‌ها"
 
-#: ../gucharmap/unicode-blocks.h:220
+#: ../gucharmap/unicode-blocks.h:231
 msgid "Variation Selectors Supplement"
-msgstr ""
+msgstr "مکمل انواع انتخابگرها"
 
-#: ../gucharmap/unicode-blocks.h:221
+#: ../gucharmap/unicode-blocks.h:232
 msgid "Supplementary Private Use Area-A"
 msgstr "ناحیه‌ی خصوصی تکمیلی‐الف"
 
-#: ../gucharmap/unicode-blocks.h:222
+#: ../gucharmap/unicode-blocks.h:233
 msgid "Supplementary Private Use Area-B"
 msgstr "ناحیه‌ی خصوصی تکمیلی‐ب"
 
@@ -1474,161 +1514,41 @@ msgstr "بریل"
 msgid "Canadian Aboriginal"
 msgstr "بومی کانادایی"
 
-#: ../gucharmap/unicode-scripts.h:35
+#: ../gucharmap/unicode-scripts.h:36
 msgid "Cypriot"
 msgstr "قبرسی"
 
-#: ../gucharmap/unicode-scripts.h:44
+#: ../gucharmap/unicode-scripts.h:45
 msgid "Greek"
 msgstr "یونانی"
 
-#: ../gucharmap/unicode-scripts.h:47
+#: ../gucharmap/unicode-scripts.h:48
 msgid "Han"
 msgstr "هان"
 
-#: ../gucharmap/unicode-scripts.h:48
+#: ../gucharmap/unicode-scripts.h:49
 msgid "Hangul"
 msgstr "هانگول"
 
-#: ../gucharmap/unicode-scripts.h:53
+#: ../gucharmap/unicode-scripts.h:54
 msgid "Inherited"
 msgstr "جانشین شده"
 
-#: ../gucharmap/unicode-scripts.h:64
+#: ../gucharmap/unicode-scripts.h:65
 msgid "Latin"
 msgstr "لاتینی"
 
-#: ../gucharmap/unicode-scripts.h:67
+#: ../gucharmap/unicode-scripts.h:68
 msgid "Linear B"
 msgstr "خطی B"
 
-#: ../gucharmap/unicode-scripts.h:86
+#: ../gucharmap/unicode-scripts.h:90
 msgid "Phags Pa"
-msgstr ""
+msgstr "فگس پا"
 
-#: ../gucharmap/unicode-scripts.h:110
+#: ../gucharmap/unicode-scripts.h:117
 msgid "Yi"
 msgstr "یی"
 
-#: ../gucharmap/gucharmap-search-dialog.c:569
-msgid "Information"
-msgstr "اطلاعات"
-
-#. follow hig guidelines
-#: ../gucharmap/gucharmap-search-dialog.c:736
-msgid "Find"
-msgstr "پیدا کن"
-
-#: ../gucharmap/gucharmap-search-dialog.c:756
-msgid "_Previous"
-msgstr "_قبلی"
-
-#: ../gucharmap/gucharmap-search-dialog.c:767
-msgid "_Next"
-msgstr "_بعدی"
-
-#: ../gucharmap/gucharmap-search-dialog.c:782
-msgid "_Search:"
-msgstr "_جستجو:"
-
-#: ../gucharmap/gucharmap-search-dialog.c:792
-msgid "Match _whole word"
-msgstr "تطابق با _کل کلمه"
-
-#: ../gucharmap/gucharmap-search-dialog.c:797
-#| msgid "Character _Details"
-msgid "Search in character _details"
-msgstr "جستجو در _جزئیات نویسه‌ها"
-
-#: ../gucharmap/gucharmap-block-chapters-model.c:84
-msgid "All"
-msgstr "همه"
-
-#: ../gucharmap/gucharmap-block-chapters-model.c:187
-msgid "Unicode Block"
-msgstr "بلوک یونی‌کد"
-
-#: ../gucharmap/gucharmap-script-chapters-model.c:155
-msgid "Script"
-msgstr "خط"
-
-#~ msgid "Zoom _In"
-#~ msgstr "زوم به _داخل"
-
-#~ msgid "Zoom _Out"
-#~ msgstr "زوم به _خارج"
-
-#~ msgid "_Normal Size"
-#~ msgstr "اندازه‌ی _عادی"
-
-#~ msgid "_Find..."
-#~ msgstr "_یافتن..."
-
-#~ msgid "Unicode Character Map"
-#~ msgstr "نقشه‌ی نویسه‌های یونی‌کد"
-
-#~ msgid "_Bold"
-#~ msgstr "_سیاه"
-
-#~ msgid "_Italic"
-#~ msgstr "_ایتالیک"
-
-#~ msgid "Clipboard is empty."
-#~ msgstr "تخته‌گیره خالی است"
-
-#~ msgid "Nothing to search for."
-#~ msgstr "چیزی برای جستجو نیست."
-
-#~ msgid "Character in _Clipboard"
-#~ msgstr "نویسه‌ی داخل _تخته‌گیره"
-
-#~ msgid "Zoom mode enabled. Press <Esc> to disable zoom."
-#~ msgstr "حالت زوم به کار افتاد. برای از کار انداختن <Esc> را بزنید."
-
-#~ msgid "Zoom mode disabled."
-#~ msgstr "حالت زوم از کار افتاد."
-
-#~ msgid ""
-#~ "Not a valid code point to jump to. Must be a hexadecimal number between 0 "
-#~ "and %4.4X."
-#~ msgstr ""
-#~ "شماره‌ی کد برای پرش مجاز نیست. باید یک عدد شانزده‌شانزدهی بین ۰ و %4.4X "
-#~ "باشد."
-
-#~ msgid "Go to hex code point"
-#~ msgstr "رفتن به شماره‌ی کد شانزده‌شانزدهی"
-
-#~ msgid "_Enter unicode code point"
-#~ msgstr "ورود شماره‌ی یونی‌کد"
-
-#~ msgid "The selected code point is not a valid unicode character."
-#~ msgstr "شماره‌ی یونی‌کد انتخاب‌شده نویسه‌ی معتبر یونی‌کدی نیست."
-
-#~ msgid "Text copied to clipboard."
-#~ msgstr "از متن به تخته‌برش نسخه‌برداری شد."
-
-#~ msgid "Search wrapped."
-#~ msgstr "جستجو دور خورد."
-
-#~ msgid ""
-#~ "Search for the next occurrence of this string in a character's Unicode "
-#~ "name."
-#~ msgstr "جستجو برای حضور بعدی این رشته در نام یک نویسه‌ی یونی‌کد."
-
-#~ msgid "Expand/Collapse All"
-#~ msgstr "باز کردن/بستن همه"
-
-#~ msgid "_Zoom Mode"
-#~ msgstr "حالت زوم"
-
-#~ msgid "_Unicode Details"
-#~ msgstr "جزئیات یونی‌کدی"
-
-#~ msgid "_Category"
-#~ msgstr "دسته"
-
-#~ msgid "_Hex Code Point..."
-#~ msgstr "شماره‌ی کد شانزده‌شانزدهی..."
-
-#~ msgid "Font Style"
-#~ msgstr "سبک قلم"
+#~ msgid "GConf could not be initialized."
+#~ msgstr "راه‌اندازی اولیه GConf امکان‌پذیر نیست."
