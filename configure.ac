@@ -233,8 +233,9 @@ GOBJECT_INTROSPECTION_CHECK([0.9.0])
 if test -z "$enable_vala"; then
   enable_vala=no
 fi
-# FIXMEchpe this looks bogus
-VAPIGEN_CHECK([0.16],[0.18])
+m4_ifdef([VAPIGEN_CHECK],
+  [VAPIGEN_CHECK([0.16],[0.18])],
+  [AM_CONDITIONAL([ENABLE_VAPIGEN],[false])])
 
 case "$with_gtk" in
   3.0) GUCHARMAP_GIR_VERSION=$GUCHARMAP_API_VERSION
