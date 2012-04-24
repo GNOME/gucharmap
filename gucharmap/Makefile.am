@@ -217,27 +217,51 @@ CLEANFILES = \
 # introspection
 
 if HAVE_INTROSPECTION
--include $(INTROSPECTION_MAKEFILE)
+include $(INTROSPECTION_MAKEFILE)
 
 INTROSPECTION_SCANNER_ARGS = --add-include-path=$(srcdir) --warn-all
 INTROSPECTION_COMPILER_ARGS = --includedir=$(srcdir)
 
-Gucharmap-@GUCHARMAP_API_VERSION@.gir: libgucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@.la
-Gucharmap_@GUCHARMAP_API_VERSION_U@_gir_INCLUDES = Pango-1.0 Gdk-$(GTK_API_VERSION) Gtk-$(GTK_API_VERSION)
-Gucharmap_@GUCHARMAP_API_VERSION_U@_gir_CFLAGS = $(GTK_CFLAGS) -DGUCHARMAP_COMPILATION -I$(top_srcdir)
-Gucharmap_@GUCHARMAP_API_VERSION_U@_gir_LIBS = libgucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@.la
-Gucharmap_@GUCHARMAP_API_VERSION_U@_gir_FILES = $(filter-out unicode-%.h,$(libgucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@_la_SOURCES))
+INTROSPECTION_GIRS = Gucharmap-$(GUCHARMAP_GIR_VERSION).gir
 
-INTROSPECTION_GIRS = Gucharmap-$(GUCHARMAP_API_VERSION).gir
+Gucharmap-@GUCHARMAP_GIR_VERSION@.gir: libgucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@.la
+Gucharmap_@GUCHARMAP_GIR_VERSION_U@_gir_INCLUDES = Pango-1.0 Gdk-$(GTK_API_VERSION) Gtk-$(GTK_API_VERSION)
+Gucharmap_@GUCHARMAP_GIR_VERSION_U@_gir_CFLAGS = $(GTK_CFLAGS) -DGUCHARMAP_COMPILATION -I$(top_srcdir)
+Gucharmap_@GUCHARMAP_GIR_VERSION_U@_gir_LIBS = libgucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@.la
+Gucharmap_@GUCHARMAP_GIR_VERSION_U@_gir_FILES = $(filter-out unicode-%.h,$(libgucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@_la_SOURCES))
 
-girdir = $(INTROSPECTION_GIRDIR)
+girdir = $(datadir)/gir-1.0
 nodist_gir_DATA = $(INTROSPECTION_GIRS)
 
-typelibdir = $(INTROSPECTION_TYPELIBDIR)
+typelibdir = $(libdir)/girepository-1.0
 nodist_typelib_DATA = $(INTROSPECTION_GIRS:.gir=.typelib)
 
 CLEANFILES += $(nodist_gir_DATA) $(nodist_typelib_DATA)
-endif
+
+if ENABLE_VAPIGEN
+include $(VAPIGEN_MAKEFILE)
+
+VAPIGEN_VAPIS = Gucharmap-$(GUCHARMAP_VAPI_VERSION).vapi
+
+Gucharmap_@GUCHARMAP_VAPI_VERSION_U@_vapi_DEPS = \
+	glib-2.0 \
+	pango \
+	gdk-$(GTK_API_VERSION) \
+	gtk+-$(GTK_API_VERSION) \
+	$(NULL)
+Gucharmap_@GUCHARMAP_VAPI_VERSION_U@_vapi_METADATADIRS = $(srcdir)
+Gucharmap_@GUCHARMAP_VAPI_VERSION_U@_vapi_VAPIDIRS = $(datadir)/vala-0.18/vapi
+Gucharmap_@GUCHARMAP_VAPI_VERSION_U@_vapi_FILES = Gucharmap-$(GUCHARMAP_GIR_VERSION).gir
+
+#vapidir = $(datadir)/vala/vapi
+vapidir = $(VAPIGEN_VAPIDIR)
+nodist_vapi_DATA = $(VAPIGEN_VAPIS) $(VAPIGEN_VAPIS:.vapi=.deps)
+
+CLEANFILES += $(nodist_vapi_DATA)
+
+endif # ENABLE_VAPIGEN
+
+endif # HAVE_INTROSPECTION
 
 if ENABLE_CHARMAP
 

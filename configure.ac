@@ -177,17 +177,6 @@ AC_SUBST([GETTEXT_PACKAGE])
 AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE],["$GETTEXT_PACKAGE"],[The gucharmap gettext domain])
 AM_GLIB_GNU_GETTEXT
 
-# *************
-# Introspection
-# *************
-
-# No automagic please!
-if test -z "$enable_introspection"; then
-  enable_introspection=no
-fi
-
-GOBJECT_INTROSPECTION_CHECK([0.9.0])
-
 ##########################################################
 # Check for -Bsymbolic-functions linker flag used to avoid
 # intra-library PLT jumps, if available.
@@ -228,6 +217,35 @@ CC_CHECK_CFLAGS_APPEND([ \
   -Wdeclaration-after-statement -Wold-style-definition \
   -Wno-missing-field-initializers -Wno-unused-parameter \
   -fno-common -Wno-switch-enum])
+
+# ********
+# Bindings
+# ********
+
+# No automagic please!
+if test -z "$enable_introspection"; then
+  enable_introspection=yes
+fi
+
+GOBJECT_INTROSPECTION_CHECK([0.9.0])
+
+# No automagic please!
+if test -z "$enable_vala"; then
+  enable_vala=no
+fi
+# FIXMEchpe this looks bogus
+VAPIGEN_CHECK([0.16],[0.18])
+
+case "$with_gtk" in
+  3.0) GUCHARMAP_GIR_VERSION=$GUCHARMAP_API_VERSION
+       GUCHARMAP_VAPI_VERSION=$GUCHARMAP_API_VERSION
+       ;;
+esac
+
+AC_SUBST([GUCHARMAP_GIR_VERSION])
+AC_SUBST([GUCHARMAP_GIR_VERSION_U],[AS_TR_SH([$GUCHARMAP_GIR_VERSION])])
+AC_SUBST([GUCHARMAP_VAPI_VERSION])
+AC_SUBST([GUCHARMAP_VAPI_VERSION_U],[AS_TR_SH([$GUCHARMAP_VAPI_VERSION])])
 
 # ***************
 # API & User Docs
