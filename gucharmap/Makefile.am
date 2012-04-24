@@ -243,6 +243,7 @@ include $(VAPIGEN_MAKEFILE)
 
 VAPIGEN_VAPIS = Gucharmap-$(GUCHARMAP_VAPI_VERSION).vapi
 
+Gucharmap-@GUCHARMAP_VAPI_VERSION@.vapi: Gucharmap-@GUCHARMAP_GIR_VERSION@.gir
 Gucharmap_@GUCHARMAP_VAPI_VERSION_U@_vapi_DEPS = \
 	glib-2.0 \
 	pango \
@@ -255,7 +256,7 @@ Gucharmap_@GUCHARMAP_VAPI_VERSION_U@_vapi_FILES = Gucharmap-$(GUCHARMAP_GIR_VERS
 
 #vapidir = $(datadir)/vala/vapi
 vapidir = $(VAPIGEN_VAPIDIR)
-nodist_vapi_DATA = $(VAPIGEN_VAPIS) $(VAPIGEN_VAPIS:.vapi=.deps)
+nodist_vapi_DATA = $(VAPIGEN_VAPIS)
 
 CLEANFILES += $(nodist_vapi_DATA)
 
