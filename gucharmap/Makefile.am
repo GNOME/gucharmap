@@ -111,6 +111,7 @@ nodist_libgucharmapinclude_HEADERS = \
 noinst_LTLIBRARIES = libgucharmapprivate.la
 
 libgucharmapprivate_la_SOURCES = \
+	gucharmap-internal.h \
 	gucharmap-mini-fontsel.c \
 	gucharmap-mini-fontsel.h \
 	gucharmap-print-operation.c \
@@ -150,12 +151,21 @@ else
 noinst_PROGRAMS = gucharmap
 endif
 
+gucharmap_DEPENDENCIES = \
+	libgucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@.la \
+	libgucharmapprivate.la
+	Gucharmap-$(GUCHARMAP_VAPI_VERSION).vapi \
+	Gucharmap-Private.vapi \
+	$(NULL)
+
 gucharmap_SOURCES = \
-	main.c \
+	config.vapi \
+	charmap.vala \
 	$(NULL)
 
 gucharmap_CPPFLAGS = \
 	-I$(top_srcdir) \
+	-DGETTEXT_PACKAGE=\"$(GETTEXT_PACKAGE)\" \
 	-DLOCALEDIR=\"$(datadir)/locale\" \
 	$(AM_CPPFLAGS)
 
@@ -165,6 +175,12 @@ gucharmap_CFLAGS = \
 
 gucharmap_LDFLAGS = \
 	$(AM_LDFLAGS)
+
+gucharmap_VALAFLAGS = \
+	--pkg glib-2.0 \
+	--pkg gtk+-3.0 \
+	--vapidir . --pkg Gucharmap-$(GUCHARMAP_VAPI_VERSION) --pkg Gucharmap-Private \
+	$(AM_VALAFLAGS)
 
 gucharmap_LDADD = \
 	libgucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@.la	\
@@ -240,6 +256,8 @@ INTROSPECTION_COMPILER_ARGS = --includedir=$(srcdir)
 INTROSPECTION_GIRS = Gucharmap-$(GUCHARMAP_GIR_VERSION).gir Gucharmap-Private.gir
 
 Gucharmap-@GUCHARMAP_GIR_VERSION@.gir: libgucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@.la
+Gucharmap_@GUCHARMAP_GIR_VERSION_U@_gir_EXPORT_PACKAGES = gucharmap-$(GUCHARMAP_API_PC_VERSION)
+Gucharmap_@GUCHARMAP_GIR_VERSION_U@_gir_SCANNERFLAGS = --c-include "gucharmap/gucharmap.h"
 Gucharmap_@GUCHARMAP_GIR_VERSION_U@_gir_INCLUDES = Pango-1.0 Gdk-$(GTK_API_VERSION) Gtk-$(GTK_API_VERSION)
 Gucharmap_@GUCHARMAP_GIR_VERSION_U@_gir_CFLAGS = $(GTK_CFLAGS) -DGUCHARMAP_COMPILATION -I$(top_srcdir) -I$(top_builddir)
 Gucharmap_@GUCHARMAP_GIR_VERSION_U@_gir_LIBS = libgucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@.la
@@ -251,7 +269,9 @@ Gucharmap_Private_gir_CFLAGS = $(GTK_CFLAGS) -DGUCHARMAP_COMPILATION -I$(top_src
 Gucharmap_Private_gir_LIBS = libgucharmapprivate.la
 Gucharmap_Private_gir_NAMESPACE = GucharmapPrivate
 Gucharmap_Private_gir_VERSION = $(GUCHARMAP_GIR_VERSION)
+Gucharmap_Private_gir_EXPORT_PACKAGES =
 Gucharmap_Private_gir_SCANNERFLAGS = \
+	--c-include "gucharmap-internal.h" \
 	--identifier-prefix=Gucharmap \
 	--symbol-prefix=gucharmap \
 	--include-uninstalled ./Gucharmap-$(GUCHARMAP_GIR_VERSION).gir \
