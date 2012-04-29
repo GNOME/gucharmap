@@ -71,12 +71,6 @@ libgucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@_la_CPPFLAGS = \
 	-DDATADIR=\"$(datadir)\" \
 	-DLOCALEDIR=\"$(datadir)/locale\" \
 	-DHELPDIR=\"$(HELP_DIR)\" \
-	-DG_DISABLE_SINGLE_INCLUDES \
-	-DPANGO_DISABLE_SINGLE_INCLUDES \
-	-DATK_DISABLE_SINGLE_INCLUDES \
-	-DGDK_DISABLE_SINGLE_INCLUDES \
-	-DGDK_PIXBUF_DISABLE_SINGLE_INCLUDES \
-	-DGTK_DISABLE_SINGLE_INCLUDES \
 	$(AM_CPPFLAGS)
 
 libgucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@_la_CFLAGS = \
@@ -112,13 +106,11 @@ nodist_libgucharmapinclude_HEADERS = \
 	gucharmap-type-builtins.h \
 	$(NULL)
 
-if ENABLE_CHARMAP
-bin_PROGRAMS = gucharmap
-else
-noinst_PROGRAMS = gucharmap
-endif
+# Gucharmap application private library, necessary for correct GIR & VAPI generation
 
-gucharmap_SOURCES = \
+noinst_LTLIBRARIES = libgucharmapprivate.la
+
+libgucharmapprivate_la_SOURCES = \
 	gucharmap-mini-fontsel.c \
 	gucharmap-mini-fontsel.h \
 	gucharmap-print-operation.c \
@@ -129,20 +121,42 @@ gucharmap_SOURCES = \
 	gucharmap-settings.h \
 	gucharmap-window.c \
  	gucharmap-window.h \
+	$(NULL)
+
+libgucharmapprivate_la_CPPFLAGS = \
+	-I$(top_srcdir) \
+	-DDATADIR=\"$(datadir)\" \
+	-DLOCALEDIR=\"$(datadir)/locale\" \
+	-DHELPDIR=\"$(HELP_DIR)\" \
+	$(AM_CPPFLAGS)
+
+libgucharmapprivate_la_CFLAGS = \
+	$(GTK_CFLAGS)	\
+	$(AM_CFLAGS)
+
+libgucharmapprivate_la_LDFLAGS = \
+	$(AM_LDFLAGS)
+
+libgucharmapprivate_la_LIBADD = \
+	libgucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@.la \
+	$(GTK_LIBS)	\
+	$(INTL_LIBS)
+
+# Charmap application
+
+if ENABLE_CHARMAP
+bin_PROGRAMS = gucharmap
+else
+noinst_PROGRAMS = gucharmap
+endif
+
+gucharmap_SOURCES = \
 	main.c \
 	$(NULL)
 
 gucharmap_CPPFLAGS = \
 	-I$(top_srcdir) \
-	-DDATADIR=\"$(datadir)\" \
 	-DLOCALEDIR=\"$(datadir)/locale\" \
-	-DHELPDIR=\"$(HELP_DIR)\" \
-	-DG_DISABLE_SINGLE_INCLUDES \
-	-DPANGO_DISABLE_SINGLE_INCLUDES \
-	-DATK_DISABLE_SINGLE_INCLUDES \
-	-DGDK_DISABLE_SINGLE_INCLUDES \
-	-DGDK_PIXBUF_DISABLE_SINGLE_INCLUDES \
-	-DGTK_DISABLE_SINGLE_INCLUDES \
 	$(AM_CPPFLAGS)
 
 gucharmap_CFLAGS = \
@@ -154,8 +168,10 @@ gucharmap_LDFLAGS = \
 
 gucharmap_LDADD = \
 	libgucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@.la	\
+	libgucharmapprivate.la \
 	$(GTK_LIBS)	\
 	$(INTL_LIBS)
+
 
 if OS_WIN32
 gucharmap_LDADD += gucharmaprc.o
@@ -216,16 +232,31 @@ CLEANFILES = \
 
 # introspection
 
+include $(INTROSPECTION_MAKEFILE)
+
 INTROSPECTION_SCANNER_ARGS = --add-include-path=$(srcdir) --warn-all
 INTROSPECTION_COMPILER_ARGS = --includedir=$(srcdir)
 
-INTROSPECTION_GIRS = Gucharmap-$(GUCHARMAP_GIR_VERSION).gir
+INTROSPECTION_GIRS = Gucharmap-$(GUCHARMAP_GIR_VERSION).gir Gucharmap-Private.gir
 
 Gucharmap-@GUCHARMAP_GIR_VERSION@.gir: libgucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@.la
 Gucharmap_@GUCHARMAP_GIR_VERSION_U@_gir_INCLUDES = Pango-1.0 Gdk-$(GTK_API_VERSION) Gtk-$(GTK_API_VERSION)
-Gucharmap_@GUCHARMAP_GIR_VERSION_U@_gir_CFLAGS = $(GTK_CFLAGS) -DGUCHARMAP_COMPILATION -I$(top_srcdir)
+Gucharmap_@GUCHARMAP_GIR_VERSION_U@_gir_CFLAGS = $(GTK_CFLAGS) -DGUCHARMAP_COMPILATION -I$(top_srcdir) -I$(top_builddir)
 Gucharmap_@GUCHARMAP_GIR_VERSION_U@_gir_LIBS = libgucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@.la
 Gucharmap_@GUCHARMAP_GIR_VERSION_U@_gir_FILES = $(filter-out unicode-%.h,$(libgucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@_la_SOURCES))
+
+Gucharmap-Private.gir: Gucharmap-$(GUCHARMAP_GIR_VERSION).gir libgucharmapprivate.la
+Gucharmap_Private_gir_INCLUDES = Pango-1.0 Gdk-$(GTK_API_VERSION) Gtk-$(GTK_API_VERSION)
+Gucharmap_Private_gir_CFLAGS = $(GTK_CFLAGS) -DGUCHARMAP_COMPILATION -I$(top_srcdir) -I$(top_builddir)
+Gucharmap_Private_gir_LIBS = libgucharmapprivate.la
+Gucharmap_Private_gir_NAMESPACE = GucharmapPrivate
+Gucharmap_Private_gir_VERSION = $(GUCHARMAP_GIR_VERSION)
+Gucharmap_Private_gir_SCANNERFLAGS = \
+	--identifier-prefix=Gucharmap \
+	--symbol-prefix=gucharmap \
+	--include-uninstalled ./Gucharmap-$(GUCHARMAP_GIR_VERSION).gir \
+	$(NULL)
+Gucharmap_Private_gir_FILES = $(filter gucharmap-%.h,$(libgucharmapprivate_la_SOURCES))
 
 girdir = $(datadir)/gir-1.0
 nodist_gir_DATA = Gucharmap-$(GUCHARMAP_GIR_VERSION).gir
@@ -237,7 +268,9 @@ CLEANFILES += $(INTROSPECTION_GIRS) $(INTROSPECTION_GIRS:.gir=.typelib)
 
 # Vala
 
-VAPIGEN_VAPIS = Gucharmap-$(GUCHARMAP_VAPI_VERSION).vapi
+include $(VAPIGEN_MAKEFILE)
+
+VAPIGEN_VAPIS = Gucharmap-$(GUCHARMAP_VAPI_VERSION).vapi Gucharmap-Private.vapi
 
 Gucharmap-@GUCHARMAP_VAPI_VERSION@.vapi: Gucharmap-@GUCHARMAP_GIR_VERSION@.gir
 Gucharmap_@GUCHARMAP_VAPI_VERSION_U@_vapi_DEPS = \
@@ -247,10 +280,21 @@ Gucharmap_@GUCHARMAP_VAPI_VERSION_U@_vapi_DEPS = \
 	gtk+-$(GTK_API_VERSION) \
 	$(NULL)
 Gucharmap_@GUCHARMAP_VAPI_VERSION_U@_vapi_METADATADIRS = $(srcdir)
-Gucharmap_@GUCHARMAP_VAPI_VERSION_U@_vapi_VAPIDIRS = $(datadir)/vala-0.18/vapi
 Gucharmap_@GUCHARMAP_VAPI_VERSION_U@_vapi_FILES = Gucharmap-$(GUCHARMAP_GIR_VERSION).gir
 
-#vapidir = $(datadir)/vala/vapi
+Gucharmap-Private.vapi: Gucharmap-$(GUCHARMAP_VAPI_VERSION).vapi Gucharmap-Private.gir
+Gucharmap_Private_vapi_DEPS = \
+	glib-2.0 \
+	pango \
+	gdk-$(GTK_API_VERSION) \
+	gtk+-$(GTK_API_VERSION) \
+	Gucharmap-$(GUCHARMAP_VAPI_VERSION) \
+	$(NULL)
+Gucharmap_Private_vapi_METADATADIRS = $(srcdir)
+Gucharmap_Private_vapi_GIRDIRS = . $(girdir)
+Gucharmap_Private_vapi_VAPIDIRS = . $(datadir)/vala-0.18/vapi
+Gucharmap_Private_vapi_FILES = Gucharmap-Private.gir
+
 vapidir = $(VAPIGEN_VAPIDIR)
 nodist_vapi_DATA = Gucharmap-$(GUCHARMAP_VAPI_VERSION).vapi
 
@@ -293,6 +337,4 @@ EXTRA_DIST += $(gsettings_SCHEMAS)
 
 # Includes
 
-include $(INTROSPECTION_MAKEFILE)
-include $(VAPIGEN_MAKEFILE)
 -include $(top_srcdir)/git.mk
