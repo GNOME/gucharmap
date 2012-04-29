@@ -42,13 +42,8 @@ AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_SRCDIR([gucharmap/gucharmap.h.in])
 AC_CONFIG_HEADERS([config.h])
 
-AM_INIT_AUTOMAKE([1.9 foreign dist-bzip2 no-dist-gzip])
-
-m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
-
-if test -z "$enable_maintainer_mode"; then
-  enable_maintainer_mode=yes
-fi
+AM_INIT_AUTOMAKE([1.11 foreign dist-bzip2 no-dist-gzip])
+AM_SILENT_RULES([yes])
 AM_MAINTAINER_MODE([enable])
 
 # checks for progs
