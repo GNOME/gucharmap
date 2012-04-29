@@ -59,8 +59,8 @@ AM_PROG_CC_C_O
 GNOME_COMMON_INIT
 GNOME_DEBUG_CHECK
 
-GLIB_REQUIRED=2.16.3
-GIO_REQUIRED=2.25.5
+GLIB_REQUIRED=2.32.0
+GIO_REQUIRED=2.32.0
 
 # check for win32
 case "$host" in
@@ -89,7 +89,7 @@ AC_MSG_RESULT([$with_gtk])
 
 case "$with_gtk" in
   3.0) GTK_API_VERSION=3.0
-       GTK_REQUIRED=3.0.0
+       GTK_REQUIRED=3.4.0
        GUCHARMAP_API_VERSION=2.90
        GUCHARMAP_API_MAJOR_VERSION=2
        GUCHARMAP_API_MINOR_VERSION=90
@@ -217,20 +217,10 @@ CC_CHECK_CFLAGS_APPEND([ \
 # Bindings
 # ********
 
-# No automagic please!
-if test -z "$enable_introspection"; then
-  enable_introspection=yes
-fi
+GOBJECT_INTROSPECTION_REQUIRE([1.0.0])
 
-GOBJECT_INTROSPECTION_CHECK([0.9.0])
-
-# No automagic please!
-if test -z "$enable_vala"; then
-  enable_vala=no
-fi
-m4_ifdef([VAPIGEN_CHECK],
-  [VAPIGEN_CHECK([0.16],[0.18])],
-  [AM_CONDITIONAL([ENABLE_VAPIGEN],[false])])
+enable_vala=no
+VAPIGEN_CHECK([0.16],[0.18])
 
 case "$with_gtk" in
   3.0) GUCHARMAP_GIR_VERSION=$GUCHARMAP_API_VERSION
@@ -242,6 +232,12 @@ AC_SUBST([GUCHARMAP_GIR_VERSION])
 AC_SUBST([GUCHARMAP_GIR_VERSION_U],[AS_TR_SH([$GUCHARMAP_GIR_VERSION])])
 AC_SUBST([GUCHARMAP_VAPI_VERSION])
 AC_SUBST([GUCHARMAP_VAPI_VERSION_U],[AS_TR_SH([$GUCHARMAP_VAPI_VERSION])])
+
+# ****
+# Vala
+# ****
+
+AM_PROG_VALAC
 
 # ***************
 # API & User Docs

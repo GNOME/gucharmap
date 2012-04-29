@@ -216,9 +216,6 @@ CLEANFILES = \
 
 # introspection
 
-if HAVE_INTROSPECTION
-include $(INTROSPECTION_MAKEFILE)
-
 INTROSPECTION_SCANNER_ARGS = --add-include-path=$(srcdir) --warn-all
 INTROSPECTION_COMPILER_ARGS = --includedir=$(srcdir)
 
@@ -231,15 +228,14 @@ Gucharmap_@GUCHARMAP_GIR_VERSION_U@_gir_LIBS = libgucharmap@GUCHARMAP_LIBRARY_SU
 Gucharmap_@GUCHARMAP_GIR_VERSION_U@_gir_FILES = $(filter-out unicode-%.h,$(libgucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@_la_SOURCES))
 
 girdir = $(datadir)/gir-1.0
-nodist_gir_DATA = $(INTROSPECTION_GIRS)
+nodist_gir_DATA = Gucharmap-$(GUCHARMAP_GIR_VERSION).gir
 
 typelibdir = $(libdir)/girepository-1.0
-nodist_typelib_DATA = $(INTROSPECTION_GIRS:.gir=.typelib)
+nodist_typelib_DATA = $(nodist_gir_DATA:.gir=.typelib)
 
-CLEANFILES += $(nodist_gir_DATA) $(nodist_typelib_DATA)
+CLEANFILES += $(INTROSPECTION_GIRS) $(INTROSPECTION_GIRS:.gir=.typelib)
 
-if ENABLE_VAPIGEN
-include $(VAPIGEN_MAKEFILE)
+# Vala
 
 VAPIGEN_VAPIS = Gucharmap-$(GUCHARMAP_VAPI_VERSION).vapi
 
@@ -256,13 +252,11 @@ Gucharmap_@GUCHARMAP_VAPI_VERSION_U@_vapi_FILES = Gucharmap-$(GUCHARMAP_GIR_VERS
 
 #vapidir = $(datadir)/vala/vapi
 vapidir = $(VAPIGEN_VAPIDIR)
-nodist_vapi_DATA = $(VAPIGEN_VAPIS)
+nodist_vapi_DATA = Gucharmap-$(GUCHARMAP_VAPI_VERSION).vapi
 
-CLEANFILES += $(nodist_vapi_DATA)
+CLEANFILES += $(VAPIGEN_VAPIS)
 
-endif # ENABLE_VAPIGEN
-
-endif # HAVE_INTROSPECTION
+# Legacy Charmap
 
 if ENABLE_CHARMAP
 
@@ -287,6 +281,8 @@ endif # !OS_WIN32
 
 endif # ENABLE_CHARMAP
 
+# GSettings schemas
+
 gsettings_ENUM_NAMESPACE = org.gnome.Charmap
 gsettings_ENUM_FILES = gucharmap-settings.h
 gsettings_SCHEMAS = org.gnome.Charmap.gschema.xml
@@ -295,4 +291,8 @@ EXTRA_DIST += $(gsettings_SCHEMAS)
 
 @GSETTINGS_RULES@
 
+# Includes
+
+include $(INTROSPECTION_MAKEFILE)
+include $(VAPIGEN_MAKEFILE)
 -include $(top_srcdir)/git.mk
