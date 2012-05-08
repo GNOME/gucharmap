@@ -994,9 +994,10 @@ gucharmap_window_class_init (GucharmapWindowClass *klass)
 /* Public API */
 
 GtkWidget *
-gucharmap_window_new (void)
+gucharmap_window_new (GtkApplication *application)
 {
-  return GTK_WIDGET (g_object_new (gucharmap_window_get_type (), NULL));
+  return GTK_WIDGET (g_object_new (gucharmap_window_get_type (),
+                     "application", application, NULL));
 }
 
 void

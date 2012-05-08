@@ -39,6 +39,14 @@ option_version_cb (const gchar *option_name,
   return FALSE;
 }
 
+static void
+gucharmap_activate (GApplication *application,
+                    gpointer      unused)
+{
+  GList *windows = gtk_application_get_windows (GTK_APPLICATION (application));
+  gtk_window_present (GTK_WINDOW (windows->data));
+}
+
 int
 main (int argc, char **argv)
 {
@@ -48,6 +56,8 @@ main (int argc, char **argv)
   GdkRectangle rect;
   GError *error = NULL;
   char *font = NULL;
+  GtkApplication *application;
+  guint status;
   GOptionEntry goptions[] =
   {
     { "font", 0, 0, G_OPTION_ARG_STRING, &font,
@@ -80,9 +90,12 @@ main (int argc, char **argv)
   g_set_application_name (_("Character Map"));
   gtk_window_set_default_icon_name (GUCHARMAP_ICON_NAME);
 
-  window = gucharmap_window_new ();
-  g_signal_connect (window, "destroy",
-                    G_CALLBACK (gtk_main_quit), NULL);
+  application = gtk_application_new ("org.gnome.Charmap",
+                                     G_APPLICATION_NON_UNIQUE);
+  g_signal_connect (application, "activate",
+                    G_CALLBACK (gucharmap_activate), NULL);
+
+  window = gucharmap_window_new (application);
 
   screen = gtk_window_get_screen (GTK_WINDOW (window));
   monitor = gdk_screen_get_monitor_at_point (screen, 0, 0);
@@ -101,7 +114,8 @@ main (int argc, char **argv)
 
   gtk_window_present (GTK_WINDOW (window));
 
-  gtk_main ();
+  status = g_application_run (G_APPLICATION (application), argc, argv);
+  g_object_unref (application);
 
-  return 0;
+  return status;
 }

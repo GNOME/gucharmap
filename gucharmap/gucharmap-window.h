@@ -70,7 +70,7 @@ struct _GucharmapWindowClass
 
 GType       gucharmap_window_get_type  (void);
 
-GtkWidget * gucharmap_window_new       (void);
+GtkWidget * gucharmap_window_new       (GtkApplication *application);
 
 void        gucharmap_window_set_font  (GucharmapWindow *guw,
                                         const char *font);
