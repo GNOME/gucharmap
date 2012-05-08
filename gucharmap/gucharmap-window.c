@@ -37,7 +37,7 @@
 static void gucharmap_window_class_init (GucharmapWindowClass *klass);
 static void gucharmap_window_init       (GucharmapWindow *window);
 
-G_DEFINE_TYPE (GucharmapWindow, gucharmap_window, GTK_TYPE_WINDOW)
+G_DEFINE_TYPE (GucharmapWindow, gucharmap_window, GTK_TYPE_APPLICATION_WINDOW)
 
 static void
 show_error_dialog (GtkWindow *parent,

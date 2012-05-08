@@ -95,6 +95,8 @@ main (int argc, char **argv)
   g_signal_connect (application, "activate",
                     G_CALLBACK (gucharmap_activate), NULL);
 
+  g_application_register (G_APPLICATION (application), NULL, NULL);
+
   window = gucharmap_window_new (application);
 
   screen = gtk_window_get_screen (GTK_WINDOW (window));
