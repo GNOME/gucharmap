@@ -47,10 +47,6 @@ struct _GucharmapWindow
   GtkWidget *fontsel;
   GtkWidget *text_to_copy_entry;
 
-  GtkUIManager *uimanager;
-
-  GtkActionGroup *action_group;
-
   GtkWidget *search_dialog; /* takes care of all aspects of searching */
 
   guint save_last_char_idle_id;

@@ -1,6 +1,7 @@
 /*
  * Copyright © 2004 Noah Levitt
  * Copyright © 2007, 2008 Christian Persch
+ * Copyright © 2012 Red Hat, Inc.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -31,8 +32,6 @@
 #include "gucharmap-window.h"
 
 #define FONT_CHANGE_FACTOR (1.189207115f) /* 2^(0.25) */
-
-#define UI_RESOURCE "/org/gnome/charmap/gucharmap-ui.xml"
 
 /* #define ENABLE_PRINTING */
 
@@ -157,18 +156,18 @@ search_start (GucharmapSearchDialog *search_dialog,
               GucharmapWindow       *guw)
 {
   GdkCursor *cursor;
-  GtkAction *action;
+  GAction *action;
 
   cursor = gdk_cursor_new_for_display (gtk_widget_get_display (GTK_WIDGET (guw)), GDK_WATCH);
   gdk_window_set_cursor (gtk_widget_get_window (GTK_WIDGET (guw)), cursor);
   g_object_unref (cursor);
 
-  action = gtk_action_group_get_action (guw->action_group, "Find");
-  gtk_action_set_sensitive (action, FALSE);
-  action = gtk_action_group_get_action (guw->action_group, "FindNext");
-  gtk_action_set_sensitive (action, FALSE);
-  action = gtk_action_group_get_action (guw->action_group, "FindPrevious");
-  gtk_action_set_sensitive (action, FALSE);
+  action = g_action_map_lookup_action (G_ACTION_MAP (guw), "find");
+  g_simple_action_set_enabled (G_SIMPLE_ACTION (action), FALSE);
+  action = g_action_map_lookup_action (G_ACTION_MAP (guw), "find-next");
+  g_simple_action_set_enabled (G_SIMPLE_ACTION (action), FALSE);
+  action = g_action_map_lookup_action (G_ACTION_MAP (guw), "find-previous");
+  g_simple_action_set_enabled (G_SIMPLE_ACTION (action), FALSE);
 }
 
 static void
@@ -176,7 +175,7 @@ search_finish (GucharmapSearchDialog *search_dialog,
                gunichar               found_char,
                GucharmapWindow       *guw)
 {
-  GtkAction *action;
+  GAction *action;
 
   if (found_char != (gunichar)(-1))
     gucharmap_charmap_set_active_character (guw->charmap, found_char);
@@ -184,18 +183,21 @@ search_finish (GucharmapSearchDialog *search_dialog,
 
   gdk_window_set_cursor (gtk_widget_get_window (GTK_WIDGET (guw)), NULL);
 
-  action = gtk_action_group_get_action (guw->action_group, "Find");
-  gtk_action_set_sensitive (action, TRUE);
-  action = gtk_action_group_get_action (guw->action_group, "FindNext");
-  gtk_action_set_sensitive (action, TRUE);
-  action = gtk_action_group_get_action (guw->action_group, "FindPrevious");
-  gtk_action_set_sensitive (action, TRUE);
+  action = g_action_map_lookup_action (G_ACTION_MAP (guw), "find");
+  g_simple_action_set_enabled (G_SIMPLE_ACTION (action), TRUE);
+  action = g_action_map_lookup_action (G_ACTION_MAP (guw), "find-next");
+  g_simple_action_set_enabled (G_SIMPLE_ACTION (action), TRUE);
+  action = g_action_map_lookup_action (G_ACTION_MAP (guw), "find-previous");
+  g_simple_action_set_enabled (G_SIMPLE_ACTION (action), TRUE);
 }
 
 static void
-search_find (GtkAction       *action, 
-             GucharmapWindow *guw)
+search_find (GSimpleAction *action,
+             GVariant      *parameter,
+             gpointer       data)
 {
+  GucharmapWindow *guw = data;
+
   g_assert (GUCHARMAP_IS_WINDOW (guw));
 
   if (guw->search_dialog == NULL)
@@ -209,23 +211,29 @@ search_find (GtkAction       *action,
 }
 
 static void
-search_find_next (GtkAction       *action, 
-                  GucharmapWindow *guw)
+search_find_next (GSimpleAction *action,
+                  GVariant      *parameter,
+                  gpointer       data)
 {
+  GucharmapWindow *guw = data;
+
   if (guw->search_dialog)
     gucharmap_search_dialog_start_search (GUCHARMAP_SEARCH_DIALOG (guw->search_dialog), GUCHARMAP_DIRECTION_FORWARD);
   else
-    search_find (action, guw);
+    search_find (action, NULL, guw);
 }
 
 static void
-search_find_prev (GtkAction       *action, 
-                  GucharmapWindow *guw)
+search_find_prev (GSimpleAction *action,
+                  GVariant      *parameter,
+                  gpointer       data)
 {
+  GucharmapWindow *guw = data;
+
   if (guw->search_dialog)
     gucharmap_search_dialog_start_search (GUCHARMAP_SEARCH_DIALOG (guw->search_dialog), GUCHARMAP_DIRECTION_BACKWARD);
   else
-    search_find (action, guw);
+    search_find (action, NULL, guw);
 }
 
 #ifdef ENABLE_PRINTING
@@ -241,9 +249,12 @@ page_setup_done_cb (GtkPageSetup *page_setup,
 }
 
 static void
-file_page_setup (GtkAction *action,
-                 GucharmapWindow *guw)
+file_page_setup (GSimpleAction *action,
+                 GVariant      *parameter,
+                 gpointer       data)
 {
+  GucharmapWindow *guw = data;
+
   ensure_print_data (guw);
 
   gtk_print_run_page_setup_dialog_async (GTK_WINDOW (guw),
@@ -255,68 +266,103 @@ file_page_setup (GtkAction *action,
 
 #if 0
 static void
-file_print_preview (GtkAction *action,
-                    GucharmapWindow *guw)
+file_print_preview (GSimpleAction *action,
+                    GVariant      *parameter,
+                    gpointer       data)
 {
+  GucharmapWindow *guw = data;
+
   gucharmap_window_print (guw, GTK_PRINT_OPERATION_ACTION_PREVIEW);
 }
 #endif
 
 static void
-file_print (GtkAction *action,
-            GucharmapWindow *guw)
+file_print (GSimpleAction *action,
+            GVariant      *parameter,
+            gpointer       data)
 {
+  GucharmapWindow *guw = data;
+
   gucharmap_window_print (guw, GTK_PRINT_OPERATION_ACTION_PRINT_DIALOG);
 }
 
 #endif /* ENABLE_PRINTING */
 
 static void
-close_window (GtkAction *action,
-              GtkWidget *widget)
+close_window (GSimpleAction *action,
+              GVariant      *parameter,
+              gpointer       data)
 {
+  GtkWidget *widget = data;
+
   gtk_widget_destroy (widget);
 }
 
 static void
-font_bigger (GtkAction       *action, 
-             GucharmapWindow *guw)
+font_bigger (GSimpleAction *action,
+             GVariant      *parameter,
+             gpointer       data)
 {
+  GucharmapWindow *guw = data;
+
   gucharmap_mini_font_selection_change_font_size (GUCHARMAP_MINI_FONT_SELECTION (guw->fontsel),
                                                   FONT_CHANGE_FACTOR);
 }
 
 static void
-font_smaller (GtkAction       *action, 
-              GucharmapWindow *guw)
+font_smaller (GSimpleAction *action,
+              GVariant      *parameter,
+              gpointer       data)
 {
+  GucharmapWindow *guw = data;
+
   gucharmap_mini_font_selection_change_font_size (GUCHARMAP_MINI_FONT_SELECTION (guw->fontsel),
                                                   1.0f / FONT_CHANGE_FACTOR);
 }
 
 static void
-font_default (GtkAction       *action, 
-              GucharmapWindow *guw)
+font_default (GSimpleAction *action,
+              GVariant      *parameter,
+              gpointer       data)
 {
+  GucharmapWindow *guw = data;
+
   gucharmap_mini_font_selection_reset_font_size (GUCHARMAP_MINI_FONT_SELECTION (guw->fontsel));
 }
 
 static void
-snap_cols_pow2 (GtkAction        *action, 
-                GucharmapWindow  *guw)
+snap_cols_pow2_changed (GSettings  *settings,
+                        const char *key,
+                        gpointer    data)
 {
-  gboolean is_active = gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
-  gucharmap_charmap_set_snap_pow2 (guw->charmap, is_active);
-  g_settings_set_boolean (guw->settings, "snap-cols-pow2", is_active);
+  GucharmapWindow  *guw = data;
+
+  gucharmap_charmap_set_snap_pow2 (guw->charmap,
+                                   g_settings_get_boolean (settings, key));
 }
 
 static void
-no_font_fallback_toggled_cb (GtkAction       *action, 
-                             GucharmapWindow *guw)
+toggle_action_activated (GSimpleAction *action,
+                         GVariant      *parameter,
+                         gpointer       data)
 {
-  gboolean is_active = gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
+  GVariant *state = g_action_get_state (G_ACTION (action));
+  gboolean value = g_variant_get_boolean (state);
+
+  g_action_change_state (G_ACTION (action), g_variant_new_boolean (!value));
+  g_variant_unref (state);
+}
+
+static void
+change_no_font_fallback (GSimpleAction *action,
+                         GVariant      *state,
+                         gpointer       data)
+{
+  GucharmapWindow *guw = data;
+  gboolean is_active = g_variant_get_boolean (state);
 
   gucharmap_charmap_set_font_fallback (guw->charmap, !is_active);
+  g_simple_action_set_state (action, state);
 /*  gucharmap_settings_set_font_fallback (is_active); */
 }
 
@@ -340,9 +386,11 @@ open_url (GtkWindow *parent,
 }
 
 static void
-help_contents (GtkAction *action,
-               GucharmapWindow *window)
+help_contents (GSimpleAction *action,
+               GVariant      *parameter,
+               gpointer       data)
 {
+  GucharmapWindow *window = data;
   const char *lang;
   char *uri = NULL, *url;
   guint i;
@@ -378,9 +426,11 @@ help_contents (GtkAction *action,
 }
 
 static void
-help_about (GtkAction       *action, 
-            GucharmapWindow *guw)
+help_about (GSimpleAction *action,
+            GVariant      *parameter,
+            gpointer       data)
 {
+  GucharmapWindow *guw = data;
   const gchar *authors[] =
     { 
       "Noah Levitt <nlevitt@columbia.edu>", 
@@ -442,19 +492,23 @@ help_about (GtkAction       *action,
 }
 
 static void
-next_or_prev_character (GtkAction       *action,
-                        GucharmapWindow *guw)
+next_or_prev_character (GSimpleAction *action,
+                        GVariant      *parameter,
+                        gpointer    data)
 {
+  GucharmapWindow *guw = data;
   GucharmapChartable *chartable;
   GucharmapChartableClass *klass;
   const char *name;
   guint keyval = 0;
 
-  name = gtk_action_get_name (action);
-  if (strcmp (name, "NextCharacter") == 0) {
+  name = g_action_get_name (G_ACTION (action));
+  if (strcmp (name, "next-character") == 0) {
     keyval = GDK_KEY_Right;
-  } else if (strcmp (name, "PreviousCharacter") == 0) {
+  } else if (strcmp (name, "previous-character") == 0) {
     keyval = GDK_KEY_Left;
+  } else {
+    g_assert_not_reached ();
   }
 
   chartable = gucharmap_charmap_get_chartable (guw->charmap);
@@ -466,16 +520,20 @@ next_or_prev_character (GtkAction       *action,
 }
 
 static void
-next_chapter (GtkAction       *action,
-              GucharmapWindow *guw)
+next_chapter (GSimpleAction *action,
+              GVariant      *parameter,
+              gpointer    data)
 {
+  GucharmapWindow *guw = data;
   gucharmap_charmap_next_chapter (guw->charmap);
 }
 
 static void
-prev_chapter (GtkAction       *action,
-              GucharmapWindow *guw)
+prev_chapter (GSimpleAction *action,
+              GVariant      *parameter,
+              gpointer    data)
 {
+  GucharmapWindow *guw = data;
   gucharmap_charmap_previous_chapter (guw->charmap);
 }
 
@@ -484,12 +542,20 @@ chapters_set_labels (const gchar     *labelnext,
 		     const gchar     *labelprev,
 		     GucharmapWindow *guw)
 {
-  GtkAction *action;
+  GtkApplication *app;
+  GMenuModel *model;
+  int n_items;
 
-  action = gtk_action_group_get_action (guw->action_group, "NextChapter");
-  g_object_set ( G_OBJECT (action), "label", labelnext, NULL);
-  action = gtk_action_group_get_action (guw->action_group, "PreviousChapter");
-  g_object_set ( G_OBJECT (action), "label", labelprev, NULL);
+  app = GTK_APPLICATION (g_application_get_default ());
+  g_return_if_fail (app != NULL);
+  model = G_MENU_MODEL (g_object_get_data (G_OBJECT (app), "go-chapter-menu"));
+
+  n_items = g_menu_model_get_n_items (model);
+  while (n_items--)
+    g_menu_remove (G_MENU (model), 0);
+
+  g_menu_append (G_MENU (model), labelnext, "win.next-chapter");
+  g_menu_append (G_MENU (model), labelprev, "win.previous-chapter");
 }
 
 enum {
@@ -524,35 +590,33 @@ gucharmap_window_set_chapters_model (GucharmapWindow *guw,
 }
 
 static void
-view_by (GtkAction        *action,
-	 GtkRadioAction   *radioaction,
-         GucharmapWindow  *guw)
+view_by (GSimpleAction *action,
+         GVariant      *parameter,
+         gpointer       data)
 {
+  GucharmapWindow  *guw = data;
   GucharmapChaptersMode mode;
+  const char *value = g_variant_get_string (parameter, NULL);
 
-  switch (gtk_radio_action_get_current_value (radioaction))
-    {
-      case VIEW_BY_SCRIPT:
-        mode = GUCHARMAP_CHAPTERS_SCRIPT;
-	break;
-      
-      case VIEW_BY_BLOCK:
-        mode = GUCHARMAP_CHAPTERS_BLOCK;
-	break;
-      
-      default:
-        g_assert_not_reached ();
-    }
+  if (strcmp (value, "script") == 0)
+    mode = GUCHARMAP_CHAPTERS_SCRIPT;
+  else if (strcmp (value, "block") == 0)
+    mode = GUCHARMAP_CHAPTERS_BLOCK;
+  else
+    g_assert_not_reached ();
 
   gucharmap_window_set_chapters_model (guw, mode);
   g_settings_set_enum (guw->settings, "group-by", mode);
+  g_action_change_state (G_ACTION (action), parameter);
 }
 
 #ifdef DEBUG_chpe
 static void
-move_to_next_screen_cb (GtkAction *action,
-                        GtkWidget *widget)
+move_to_next_screen_cb (GSimpleAction *action,
+                        GVariant      *parameter,
+                        gpointer       data)
 {
+  GtkWidget *widget = data;
   GdkScreen *screen;
   GdkDisplay *display;
   int number_of_screens, screen_num;
@@ -715,77 +779,43 @@ gucharmap_window_init (GucharmapWindow *guw)
   GtkWidget *grid, *button, *label;
   GucharmapChartable *chartable;
   /* tooltips are NULL because they are never actually shown in the program */
-  const GtkActionEntry menu_entries[] =
+  const GActionEntry menu_entries[] =
   {
-    { "File", NULL, N_("_File"), NULL, NULL, NULL },
-    { "View", NULL, N_("_View"), NULL, NULL, NULL },
-    { "Search", NULL, N_("_Search"), NULL, NULL, NULL },
-    { "Go", NULL, N_("_Go"), NULL, NULL, NULL },
-    { "Help", NULL, N_("_Help"), NULL, NULL, NULL },
-
 #ifdef ENABLE_PRINTING
-    { "PageSetup", NULL, N_("Page _Setup"), NULL,
-      NULL, G_CALLBACK (file_page_setup) },
+    { "page-setup", file_page_setup, NULL, NULL, NULL },
 #if 0
-    { "PrintPreview", GTK_STOCK_PRINT_PREVIEW, NULL, NULL,
-      NULL, G_CALLBACK (file_print_preview) },
+    { "print-preview", file_print_preview, NULL, NULL, NULL },
 #endif
-    { "Print", GTK_STOCK_PRINT, NULL, NULL,
-      NULL, G_CALLBACK (file_print) },
+    { "print", file_print, NULL, NULL, NULL },
 #endif /* ENABLE_PRINTING */
-    { "Close", GTK_STOCK_CLOSE, NULL, NULL,
-      NULL, G_CALLBACK (close_window) },
+    { "close", close_window, NULL, NULL, NULL },
 
-    { "ZoomIn", GTK_STOCK_ZOOM_IN, NULL, "<control>plus",
-      NULL, G_CALLBACK (font_bigger) },
-    { "ZoomOut", GTK_STOCK_ZOOM_OUT, NULL, "<control>minus",
-      NULL, G_CALLBACK (font_smaller) },
-    { "NormalSize", GTK_STOCK_ZOOM_100, NULL, "<control>0",
-      NULL, G_CALLBACK (font_default) },
+    { "zoom-in", font_bigger, NULL, NULL, NULL },
+    { "zoom-out", font_smaller, NULL, NULL, NULL },
+    { "normal-size", font_default, NULL, NULL, NULL },
 
-    { "Find", GTK_STOCK_FIND, NULL, NULL,
-      NULL, G_CALLBACK (search_find) },
-    { "FindNext", NULL, N_("Find _Next"), "<control>G",
-      NULL, G_CALLBACK (search_find_next) },
-    { "FindPrevious", NULL, N_("Find _Previous"), "<shift><control>G",
-      NULL, G_CALLBACK (search_find_prev) },
+    { "find", search_find, NULL, NULL, NULL },
+    { "find-next", search_find_next, NULL, NULL, NULL },
+    { "find-previous", search_find_prev, NULL, NULL, NULL },
 
-    { "NextCharacter", NULL, N_("_Next Character"), "<control>N",
-      NULL, G_CALLBACK (next_or_prev_character) },
-    { "PreviousCharacter", NULL, N_("_Previous Character"), "<control>P",
-      NULL, G_CALLBACK (next_or_prev_character) },
-    { "NextChapter", NULL, N_("Next Script"), "<control>Page_Down",
-      NULL, G_CALLBACK (next_chapter) },
-    { "PreviousChapter", NULL, N_("Previous Script"), "<control>Page_Up",
-      NULL, G_CALLBACK (prev_chapter) },
+    { "next-character", next_or_prev_character, NULL, NULL, NULL },
+    { "previous-character", next_or_prev_character, NULL, NULL, NULL },
+    { "next-chapter", next_chapter, NULL, NULL, NULL },
+    { "previous-chapter", prev_chapter, NULL, NULL, NULL },
 
-    { "HelpContents", GTK_STOCK_HELP, N_("_Contents"), "F1",
-      NULL, G_CALLBACK (help_contents) },
-    { "About", GTK_STOCK_ABOUT, N_("_About"), NULL,
-      NULL, G_CALLBACK (help_about) },
+    { "help", help_contents, NULL, NULL, NULL },
+    { "about", help_about, NULL, NULL, NULL },
 
   #ifdef DEBUG_chpe
-    { "MoveNextScreen", NULL, "Move window to next screen", NULL,
-      NULL, G_CALLBACK (move_to_next_screen_cb) },
+    { "move-next-screen", move_to_next_screen_cb, NULL, NULL, NULL },
   #endif
+
+    { "group-by", view_by, "s", "\"script\"", NULL },
+
+    { "show-only-glyphs-in-font", toggle_action_activated, NULL, "false",
+      change_no_font_fallback },
   };
-  const GtkRadioActionEntry radio_menu_entries[] =
-  {
-    { "ByScript", NULL, N_("By _Script"), NULL,
-      NULL, VIEW_BY_SCRIPT },
-    { "ByUnicodeBlock", NULL, N_("By _Unicode Block"), NULL,
-      NULL, VIEW_BY_BLOCK }
-  };
-  const GtkToggleActionEntry toggle_menu_entries[] =
-  {
-    { "ShowOnlyGlyphsInFont", NULL, N_("Sho_w only glyphs from this font"), NULL,
-      NULL,
-      G_CALLBACK (no_font_fallback_toggled_cb), FALSE },
-    { "SnapColumns", NULL, N_("Snap _Columns to Power of Two"), NULL,
-      NULL, NULL, FALSE },
-  };
-  GtkWidget *menubar;
-  GtkAction *action;
+  GAction *action;
   gunichar active;
   gchar *font;
 
@@ -794,71 +824,19 @@ gucharmap_window_init (GucharmapWindow *guw)
   gtk_window_set_title (GTK_WINDOW (guw), _("Character Map"));
   gtk_window_set_icon_name (GTK_WINDOW (guw), GUCHARMAP_ICON_NAME);
 
-  /* UI manager setup */
-  guw->uimanager = gtk_ui_manager_new();
+  g_action_map_add_action_entries (G_ACTION_MAP (guw),
+                                   menu_entries, G_N_ELEMENTS (menu_entries),
+                                   guw);
 
-  gtk_window_add_accel_group ( GTK_WINDOW (guw),
-  			       gtk_ui_manager_get_accel_group (guw->uimanager) );
-  
-  guw->action_group = gtk_action_group_new ("gucharmap_actions");
-  gtk_action_group_set_translation_domain (guw->action_group, GETTEXT_PACKAGE);
+  /* snap-to-power-of-two */
+  action = g_settings_create_action (guw->settings, "snap-cols-pow2");
+  g_action_map_add_action (G_ACTION_MAP (guw), action);
+  g_signal_connect (guw->settings, "changed::snap-cols-pow2",
+                    G_CALLBACK (snap_cols_pow2_changed), guw);
 
-  gtk_action_group_add_actions (guw->action_group,
-  				menu_entries,
-				G_N_ELEMENTS (menu_entries),
-				guw);
-  gtk_action_group_add_radio_actions (guw->action_group,
-  				      radio_menu_entries,
-				      G_N_ELEMENTS (radio_menu_entries),
-				      g_settings_get_enum (guw->settings, "group-by"),
-				      G_CALLBACK (view_by),
-				      guw);
-  gtk_action_group_add_toggle_actions (guw->action_group,
-  				       toggle_menu_entries,
-				       G_N_ELEMENTS (toggle_menu_entries),
-				       guw);
-
-  gtk_ui_manager_insert_action_group (guw->uimanager, guw->action_group, 0);
-  g_object_unref (guw->action_group);
-  
-  gtk_ui_manager_add_ui_from_resource (guw->uimanager, UI_RESOURCE, NULL);
-
-#ifdef ENABLE_PRINTING
-  {
-    guint merge_id = gtk_ui_manager_new_merge_id (guw->uimanager);
-
-    gtk_ui_manager_add_ui (guw->uimanager, merge_id,
-                           "/MenuBar/File/Printing",
-                           _("Page _Setup"), "PageSetup",
-                           GTK_UI_MANAGER_MENUITEM, FALSE);
-/*
-    gtk_ui_manager_add_ui (guw->uimanager, merge_id,
-                           "/MenuBar/File/Printing",
-                           _("Print Preview"), "PrintPreview",
-                           GTK_UI_MANAGER_MENUITEM, FALSE);
-*/
-    gtk_ui_manager_add_ui (guw->uimanager, merge_id,
-                           "/MenuBar/File/Printing",
-                           _("_Print"), "Print",
-                           GTK_UI_MANAGER_MENUITEM, FALSE);
-  }
-#endif
-
-#ifdef DEBUG_chpe
-  gtk_ui_manager_add_ui (guw->uimanager,
-                         gtk_ui_manager_new_merge_id (guw->uimanager),
-                         "/MenuBar/File/chpe",
-                         "Move window to next screen", "MoveNextScreen",
-                         GTK_UI_MANAGER_MENUITEM, FALSE);
-#endif
-  
   /* Now the widgets */
   grid = gtk_grid_new ();
   gtk_container_add (GTK_CONTAINER (guw), grid);
-
-  /* First the menubar */
-  menubar = gtk_ui_manager_get_widget (guw->uimanager, "/MenuBar");
-  gtk_grid_attach (GTK_GRID (grid), menubar, 0, 0, 3, 1);
 
   /* The font selector */
   guw->fontsel = gucharmap_mini_font_selection_new ();
@@ -925,10 +903,6 @@ gucharmap_window_init (GucharmapWindow *guw)
       g_free (font);
     }
 
-  /* snap-to-power-of-two */
-  action = gtk_action_group_get_action (guw->action_group, "SnapColumns");
-  gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), g_settings_get_boolean (guw->settings, "snap-cols-pow2"));
-
   /* group by */
   gucharmap_window_set_chapters_model (guw, g_settings_get_enum (guw->settings, "group-by"));
 
@@ -946,8 +920,6 @@ gucharmap_window_init (GucharmapWindow *guw)
                     G_CALLBACK (charmap_sync_active_character), guw);
   g_signal_connect (guw->fontsel, "notify::font-desc",
                     G_CALLBACK (fontsel_sync_font_desc), guw);
-  g_signal_connect (action, "activate",
-                    G_CALLBACK (snap_cols_pow2), guw);
 }
 
 static void

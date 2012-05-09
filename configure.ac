@@ -157,12 +157,12 @@ fi
 # if test "$GTK_BUILDER_CONVERT" = "false"; then
 #   AC_MSG_ERROR([gtk-builder-convert not found])
 # fi
-# 
-# AC_PATH_PROG([XMLLINT],[xmllint],[false])
-# if test "$XMLLINT" = "false"; then
-#   AC_MSG_ERROR([xmllint not found])
-# fi
-# 
+
+AC_PATH_PROG([XMLLINT],[xmllint],[false])
+if test "$XMLLINT" = "false"; then
+  AC_MSG_ERROR([xmllint not found])
+fi
+
 # AC_PATH_PROG([HEXDUMP],[hexdump],[false])
 # if test "$HEXDUMP" = "false"; then
 #   AC_MSG_ERROR([hexdump not found])

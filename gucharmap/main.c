@@ -26,6 +26,8 @@
 
 #include <gucharmap/gucharmap.h>
 #include "gucharmap-window.h"
+
+#define UI_RESOURCE "/org/gnome/charmap/gucharmap-menus.ui"
  
 static gboolean
 option_version_cb (const gchar *option_name,
@@ -37,6 +39,39 @@ option_version_cb (const gchar *option_name,
 
   exit (EXIT_SUCCESS);
   return FALSE;
+}
+
+static void
+startup_cb (GApplication *application,
+            gpointer      data)
+{
+  GtkBuilder *builder = gtk_builder_new ();
+  GMenuModel *model;
+
+  gtk_builder_add_from_resource (builder, UI_RESOURCE, NULL);
+
+#ifdef ENABLE_PRINTING
+  model = G_MENU_MODEL (gtk_builder_get_object (builder, "printing"));
+
+  g_menu_append (G_MENU (model), _("Page _Setup"), "win.page-setup");
+/* g_menu_append (G_MENU (model), _("Print Preview"), "win.print-preview"); */
+  g_menu_append (G_MENU (model), _("_Print"), "win.print");
+#endif
+
+  model = G_MENU_MODEL (gtk_builder_get_object (builder, "go-chapter"));
+  g_object_set_data (G_OBJECT (application), "go-chapter-menu", model);
+
+  model = G_MENU_MODEL (gtk_builder_get_object (builder, "menubar"));
+  gtk_application_set_menubar (GTK_APPLICATION (application), model);
+
+  gtk_application_add_accelerator (GTK_APPLICATION (application),
+                                   "<Primary>Page_Down", "win.next-chapter",
+                                   NULL);
+  gtk_application_add_accelerator (GTK_APPLICATION (application),
+                                   "<Primary>Page_Up", "win.previous-chapter",
+                                   NULL);
+
+  g_object_unref (builder);
 }
 
 static void
@@ -92,6 +127,7 @@ main (int argc, char **argv)
 
   application = gtk_application_new ("org.gnome.Charmap",
                                      G_APPLICATION_NON_UNIQUE);
+  g_signal_connect (application, "startup", G_CALLBACK (startup_cb), NULL);
   g_signal_connect (application, "activate",
                     G_CALLBACK (gucharmap_activate), NULL);
 
