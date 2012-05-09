@@ -32,6 +32,8 @@
 
 #define FONT_CHANGE_FACTOR (1.189207115f) /* 2^(0.25) */
 
+#define UI_RESOURCE "/org/gnome/charmap/gucharmap-ui.xml"
+
 /* #define ENABLE_PRINTING */
 
 static void gucharmap_window_class_init (GucharmapWindowClass *klass);
@@ -570,53 +572,6 @@ move_to_next_screen_cb (GtkAction *action,
 }
 #endif
 
-/* create the menu entries */
-
-static const char ui_info [] =
-  "<menubar name='MenuBar'>"
-    "<menu action='File'>"
-#ifdef ENABLE_PRINTING
-      "<menuitem action='PageSetup' />"
-#if 0
-      "<menuitem action='PrintPreview' />"
-#endif
-      "<menuitem action='Print' />"
-      "<separator />"
-#endif /* ENABLE_PRINTING */
-      "<menuitem action='Close' />"
-#ifdef DEBUG_chpe
-      "<menuitem action='MoveNextScreen' />"
-#endif
-    "</menu>"
-    "<menu action='View'>"
-      "<menuitem action='ByScript' />"
-      "<menuitem action='ByUnicodeBlock' />"
-      "<separator />"
-      "<menuitem action='ShowOnlyGlyphsInFont' />"
-      "<menuitem action='SnapColumns' />"
-      "<separator />"
-      "<menuitem action='ZoomIn' />"
-      "<menuitem action='ZoomOut' />"
-      "<menuitem action='NormalSize' />"
-    "</menu>"
-    "<menu action='Search'>"
-      "<menuitem action='Find' />"
-      "<menuitem action='FindNext' />"
-      "<menuitem action='FindPrevious' />"
-    "</menu>"
-    "<menu action='Go'>"
-      "<menuitem action='NextCharacter' />"
-      "<menuitem action='PreviousCharacter' />"
-      "<separator />"
-      "<menuitem action='NextChapter' />"
-      "<menuitem action='PreviousChapter' />"
-    "</menu>"
-    "<menu action='Help'>"
-      "<menuitem action='HelpContents' />"
-      "<menuitem action='About' />"
-    "</menu>"
-  "</menubar>";
-
 static void
 insert_character_in_text_to_copy (GucharmapChartable *chartable,
                                   GucharmapWindow *guw)
@@ -866,7 +821,36 @@ gucharmap_window_init (GucharmapWindow *guw)
   gtk_ui_manager_insert_action_group (guw->uimanager, guw->action_group, 0);
   g_object_unref (guw->action_group);
   
-  gtk_ui_manager_add_ui_from_string (guw->uimanager, ui_info, strlen (ui_info), NULL);
+  gtk_ui_manager_add_ui_from_resource (guw->uimanager, UI_RESOURCE, NULL);
+
+#ifdef ENABLE_PRINTING
+  {
+    guint merge_id = gtk_ui_manager_new_merge_id (guw->uimanager);
+
+    gtk_ui_manager_add_ui (guw->uimanager, merge_id,
+                           "/MenuBar/File/Printing",
+                           _("Page _Setup"), "PageSetup",
+                           GTK_UI_MANAGER_MENUITEM, FALSE);
+/*
+    gtk_ui_manager_add_ui (guw->uimanager, merge_id,
+                           "/MenuBar/File/Printing",
+                           _("Print Preview"), "PrintPreview",
+                           GTK_UI_MANAGER_MENUITEM, FALSE);
+*/
+    gtk_ui_manager_add_ui (guw->uimanager, merge_id,
+                           "/MenuBar/File/Printing",
+                           _("_Print"), "Print",
+                           GTK_UI_MANAGER_MENUITEM, FALSE);
+  }
+#endif
+
+#ifdef DEBUG_chpe
+  gtk_ui_manager_add_ui (guw->uimanager,
+                         gtk_ui_manager_new_merge_id (guw->uimanager),
+                         "/MenuBar/File/chpe",
+                         "Move window to next screen", "MoveNextScreen",
+                         GTK_UI_MANAGER_MENUITEM, FALSE);
+#endif
   
   /* Now the widgets */
   grid = gtk_grid_new ();

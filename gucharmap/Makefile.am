@@ -23,6 +23,8 @@ lib_LTLIBRARIES = libgucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@.la
 BUILT_SOURCES = \
 	gucharmap-marshal.c \
 	gucharmap-marshal.h \
+	gucharmap-resources.c \
+	gucharmap-resources.h \
 	gucharmap-type-builtins.c \
 	gucharmap-type-builtins.h \
 	$(NULL)
@@ -132,6 +134,11 @@ gucharmap_SOURCES = \
 	main.c \
 	$(NULL)
 
+nodist_gucharmap_SOURCES = \
+	gucharmap-resources.c \
+	gucharmap-resources.h \
+	$(NULL)
+
 gucharmap_CPPFLAGS = \
 	-I$(top_srcdir) \
 	-DDATADIR=\"$(datadir)\" \
@@ -156,6 +163,12 @@ gucharmap_LDADD = \
 	libgucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@.la	\
 	$(GTK_LIBS)	\
 	$(INTL_LIBS)
+
+dist_noinst_DATA = gucharmap-ui.xml
+
+gucharmap-resources.h gucharmap-resources.c: gucharmap.gresource.xml $(shell $(GLIB_COMPILE_RESOURCES) --generate-dependencies gucharmap.gresource.xml)
+	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(srcdir) \
+	                       --generate --c-name gucharmap $<
 
 if OS_WIN32
 gucharmap_LDADD += gucharmaprc.o
@@ -207,6 +220,7 @@ EXTRA_DIST = \
 	gucharmaprc.rc \
 	download-unicode-files.sh \
 	gen-guch-unicode-tables.pl \
+        gucharmap.gresource.xml.in \
 	$(NULL)
 
 CLEANFILES = \

@@ -147,6 +147,12 @@ fi
 # Some utilities
 AC_PROG_LN_S
 
+AC_ARG_VAR([GLIB_COMPILE_RESOURCES],[the glib-compile-resources programme])
+AC_PATH_PROG([GLIB_COMPILE_RESOURCES],[glib-compile-resources],[false])
+if test "$GLIB_COMPILE_RESOURCES" = "false"; then
+    AC_MSG_ERROR([glib-compile-resources not found])
+fi
+
 # AC_PATH_PROG([GTK_BUILDER_CONVERT],[gtk-builder-convert],[false])
 # if test "$GTK_BUILDER_CONVERT" = "false"; then
 #   AC_MSG_ERROR([gtk-builder-convert not found])
@@ -273,6 +279,7 @@ gucharmap.spec
 docs/Makefile
 docs/reference/Makefile
 gucharmap/Makefile
+gucharmap/gucharmap.gresource.xml
 gucharmap/gucharmap.h
 help/Makefile
 help/it/Makefile
