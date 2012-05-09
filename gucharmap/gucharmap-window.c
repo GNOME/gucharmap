@@ -939,11 +939,28 @@ gucharmap_window_finalize (GObject *object)
   G_OBJECT_CLASS (gucharmap_window_parent_class)->finalize (object);
 }
 
+static GObject *
+gucharmap_window_constructor (GType                  type,
+                              guint                  n_construct_properties,
+                              GObjectConstructParam *construct_params)
+{
+  GObject *object;
+
+  object = G_OBJECT_CLASS (gucharmap_window_parent_class)->constructor (type, n_construct_properties, construct_params);
+  g_object_bind_property (gtk_settings_get_default (),
+                          "gtk-shell-shows-app-menu",
+                          object, "show-menubar",
+                          G_BINDING_DEFAULT | G_BINDING_SYNC_CREATE | G_BINDING_INVERT_BOOLEAN);
+
+  return object;
+}
+
 static void
 gucharmap_window_class_init (GucharmapWindowClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
+  object_class->constructor = gucharmap_window_constructor;
   object_class->finalize = gucharmap_window_finalize;
 }
 

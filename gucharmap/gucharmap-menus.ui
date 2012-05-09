@@ -22,18 +22,17 @@
 -->
 
 <interface>
+  <menu id="app-menu">
+    <item><link name="section" id="shell-view-by"/>
+      <attribute name="label" translatable="yes">View By</attribute>
+    </item>
+    <item><link name="section" id="shell-view"></link></item>
+    <item><link name="section" id="shell-zoom"></link></item>
+    <item><link name="section" id="shell-find"></link></item>
+    <item><link name="section" id="general"></link></item>
+  </menu>
+
   <menu id="menubar">
-    <submenu>
-      <attribute name="label" translatable="yes">_File</attribute>
-      <item><link name="section" id="printing"/></item>
-      <section>
-        <item>
-          <attribute name="label" translatable="yes">_Close</attribute>
-          <attribute name="action">win.close</attribute>
-          <attribute name="accel">&lt;Primary&gt;w</attribute>
-        </item>
-      </section>
-    </submenu>
     <submenu>
       <attribute name="label" translatable="yes">_View</attribute>
       <section>
@@ -111,20 +110,6 @@
         </item>
       </section>
       <item><link name="section" id="go-chapter"/></item>
-    </submenu>
-    <submenu>
-      <attribute name="label" translatable="yes">_Help</attribute>
-      <section>
-        <item>
-          <attribute name="label" translatable="yes">_Contents</attribute>
-          <attribute name="action">win.help</attribute>
-          <attribute name="accel">F1</attribute>
-        </item>
-        <item>
-          <attribute name="label" translatable="yes">_About</attribute>
-          <attribute name="action">win.about</attribute>
-        </item>
-      </section>
     </submenu>
   </menu>
 </interface>
