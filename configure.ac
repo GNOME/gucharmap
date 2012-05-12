@@ -218,7 +218,7 @@ CC_CHECK_CFLAGS_APPEND([ \
 
 GOBJECT_INTROSPECTION_REQUIRE([1.0.0])
 
-enable_vala=yes
+enable_vala=no
 VAPIGEN_CHECK([0.16],[0.18])
 
 case "$with_gtk" in
