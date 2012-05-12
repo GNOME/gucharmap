@@ -38,7 +38,7 @@ typedef struct _GucharmapWindowClass GucharmapWindowClass;
 
 struct _GucharmapWindow
 {
-  GtkApplicationWindow parent;
+  GtkWindow parent;
 
   GSettings *settings;
   GucharmapCharmap *charmap;
@@ -63,14 +63,14 @@ struct _GucharmapWindow
 
 struct _GucharmapWindowClass
 {
-  GtkApplicationWindowClass parent_class;
+  GtkWindowClass parent_class;
 };
 
 #define GUCHARMAP_ICON_NAME "accessories-character-map"
 
 GType       gucharmap_window_get_type  (void);
 
-GtkWidget * gucharmap_window_new       (GApplication *application);
+GtkWidget * gucharmap_window_new       (void);
 
 void        gucharmap_window_set_font  (GucharmapWindow *guw,
                                         const char *font);

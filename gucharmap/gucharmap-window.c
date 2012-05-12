@@ -37,7 +37,7 @@
 static void gucharmap_window_class_init (GucharmapWindowClass *klass);
 static void gucharmap_window_init       (GucharmapWindow *window);
 
-G_DEFINE_TYPE (GucharmapWindow, gucharmap_window, GTK_TYPE_APPLICATION_WINDOW)
+G_DEFINE_TYPE (GucharmapWindow, gucharmap_window, GTK_TYPE_WINDOW)
 
 static void
 show_error_dialog (GtkWindow *parent,
@@ -994,11 +994,9 @@ gucharmap_window_class_init (GucharmapWindowClass *klass)
 /* Public API */
 
 GtkWidget *
-gucharmap_window_new (GApplication *application)
+gucharmap_window_new (void)
 {
-  return g_object_new (GUCHARMAP_TYPE_WINDOW,
-                       "application", application,
-                       NULL);
+  return GTK_WIDGET (g_object_new (gucharmap_window_get_type (), NULL));
 }
 
 void
