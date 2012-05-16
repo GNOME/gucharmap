@@ -158,6 +158,7 @@ fi
 #   AC_MSG_ERROR([gtk-builder-convert not found])
 # fi
 
+AC_ARG_VAR([XMLLINT],[the xmllint programme])
 AC_PATH_PROG([XMLLINT],[xmllint],[false])
 if test "$XMLLINT" = "false"; then
   AC_MSG_ERROR([xmllint not found])
