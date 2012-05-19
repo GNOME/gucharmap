@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-06 20:15+0100\n"
-"PO-Revision-Date: 2012-02-06 20:15+0100\n"
+"POT-Creation-Date: 2012-05-19 15:51+0200\n"
+"PO-Revision-Date: 2012-05-19 15:53+0200\n"
 "Last-Translator: Fran Dieguez <frandieguez@gnome.org>\n"
 "Language-Team: Galician <gnome-l10n-gl@gnome.org>\n"
 "Language: gl\n"
@@ -23,8 +23,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
-#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:839
-#: ../gucharmap/main.c:80
+#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:824
+#: ../gucharmap/main.c:305
 msgid "Character Map"
 msgstr "Mapa de caracteres"
 
@@ -36,7 +36,7 @@ msgstr "Inserir caracteres especiais nos documentos"
 msgid "All"
 msgstr "Todo"
 
-#: ../gucharmap/gucharmap-block-chapters-model.c:187
+#: ../gucharmap/gucharmap-block-chapters-model.c:187 ../gucharmap/main.c:123
 msgid "Unicode Block"
 msgstr "Bloque Unicode"
 
@@ -162,6 +162,70 @@ msgstr "Non se encontrou."
 msgid "Character found."
 msgstr "Carácter encontrado."
 
+#: ../gucharmap/gucharmap-menus.ui.h:1
+msgid "View By"
+msgstr "Ver por"
+
+#: ../gucharmap/gucharmap-menus.ui.h:2
+msgid "_View"
+msgstr "_Ver"
+
+#: ../gucharmap/gucharmap-menus.ui.h:3
+msgid "By _Script"
+msgstr "Por _script"
+
+#: ../gucharmap/gucharmap-menus.ui.h:4
+msgid "By _Unicode Block"
+msgstr "Por bloques _Unicode"
+
+#: ../gucharmap/gucharmap-menus.ui.h:5
+msgid "Sho_w only glyphs from this font"
+msgstr "Só mostrar os _glifos para esta fonte"
+
+#: ../gucharmap/gucharmap-menus.ui.h:6
+msgid "Snap _Columns to Power of Two"
+msgstr "Axustar _columnas á potencia de dous"
+
+#: ../gucharmap/gucharmap-menus.ui.h:7
+msgid "Zoom _In"
+msgstr "Ampl_iar"
+
+#: ../gucharmap/gucharmap-menus.ui.h:8
+msgid "Zoom _Out"
+msgstr "Afas_tar"
+
+#: ../gucharmap/gucharmap-menus.ui.h:9
+msgid "_Normal Size"
+msgstr "Tamaño _normal"
+
+#: ../gucharmap/gucharmap-menus.ui.h:10
+msgid "_Search"
+msgstr "_Buscar"
+
+#: ../gucharmap/gucharmap-menus.ui.h:11
+msgid "_Find"
+msgstr "_Buscar"
+
+#: ../gucharmap/gucharmap-menus.ui.h:12
+msgid "Find _Next"
+msgstr "Buscar _seguinte"
+
+#: ../gucharmap/gucharmap-menus.ui.h:13
+msgid "Find _Previous"
+msgstr "Buscar _anterior"
+
+#: ../gucharmap/gucharmap-menus.ui.h:14
+msgid "_Go"
+msgstr "_Ir"
+
+#: ../gucharmap/gucharmap-menus.ui.h:15
+msgid "_Next Character"
+msgstr "Carácter _seguinte"
+
+#: ../gucharmap/gucharmap-menus.ui.h:16
+msgid "_Previous Character"
+msgstr "Carácter _anterior"
+
 #: ../gucharmap/gucharmap-mini-fontsel.c:282
 msgid "Font"
 msgstr "Tipo de letra"
@@ -174,7 +238,7 @@ msgstr "Familia de tipo de letra"
 msgid "Font Size"
 msgstr "Tamaño do tipo de letra"
 
-#: ../gucharmap/gucharmap-script-chapters-model.c:155
+#: ../gucharmap/gucharmap-script-chapters-model.c:155 ../gucharmap/main.c:122
 msgid "Script"
 msgstr "Script"
 
@@ -362,7 +426,7 @@ msgstr "Separador, parágrafo"
 msgid "Separator, Space"
 msgstr "Separador, espazo"
 
-#: ../gucharmap/gucharmap-window.c:399
+#: ../gucharmap/gucharmap-window.c:451
 msgid ""
 "Gucharmap is free software; you can redistribute it and/or modify it under "
 "the terms of the GNU General Public License as published by the Free "
@@ -374,7 +438,7 @@ msgstr ""
 "Software Foundation; tanto na versión 3 da licenza como (segundo o seu "
 "criterio) en calquera versión posterior."
 
-#: ../gucharmap/gucharmap-window.c:403
+#: ../gucharmap/gucharmap-window.c:455
 msgid ""
 "Permission is hereby granted, free of charge, to any person obtaining a copy "
 "of the Unicode data files to deal in them without restriction, including "
@@ -386,7 +450,7 @@ msgstr ""
 "incluíndo os dereitos de usar, copiar, modificar, combinar, publicar, "
 "distribuír ou vender copias."
 
-#: ../gucharmap/gucharmap-window.c:407
+#: ../gucharmap/gucharmap-window.c:459
 msgid ""
 "Gucharmap and the Unicode data files are distributed in the hope that they "
 "will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty "
@@ -399,7 +463,7 @@ msgstr ""
 "detalles vexa a Licenza pública xeral GNU e os dereitos de autoría do "
 "Unicode."
 
-#: ../gucharmap/gucharmap-window.c:411
+#: ../gucharmap/gucharmap-window.c:463
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "Gucharmap; if not, write to the Free Software Foundation, Inc., 59 Temple "
@@ -409,7 +473,7 @@ msgstr ""
 "caso contrario, escriba á Free Software Foundation, Inc.,59 Temple Place, "
 "Suite 330, Boston, MA  02110-1301 USA"
 
-#: ../gucharmap/gucharmap-window.c:414
+#: ../gucharmap/gucharmap-window.c:466
 msgid ""
 "Also you should have received a copy of the Unicode Copyright along with "
 "Gucharmap; you can always find it at Unicode's website: http://www.unicode."
@@ -419,15 +483,15 @@ msgstr ""
 "Gucharmap; pode encontralo no sitio web de Unicode: http://www.unicode.org/"
 "copyright.html"
 
-#: ../gucharmap/gucharmap-window.c:424 ../gucharmap/main.c:36
+#: ../gucharmap/gucharmap-window.c:476 ../gucharmap/main.c:39
 msgid "GNOME Character Map"
 msgstr "Mapa de caracteres do Gnome"
 
-#: ../gucharmap/gucharmap-window.c:426
+#: ../gucharmap/gucharmap-window.c:478
 msgid "Based on the Unicode Character Database 6.1.0"
 msgstr "Baseado na Base de datos de caracteres Unicode 6.1.0"
 
-#: ../gucharmap/gucharmap-window.c:435
+#: ../gucharmap/gucharmap-window.c:487
 msgid "translator-credits"
 msgstr ""
 "Fran Diéguez <frandieguez@ubuntu.com>, 2009, 2010.\n"
@@ -436,100 +500,81 @@ msgstr ""
 "org>, 2009.\n"
 "Ignacio Casal Quinteiro <icq@svn.gnome.org>, 2005-2008."
 
-#: ../gucharmap/gucharmap-window.c:508 ../gucharmap/gucharmap-window.c:802
+#: ../gucharmap/gucharmap-window.c:576
 msgid "Next Script"
 msgstr "Script seguinte"
 
-#: ../gucharmap/gucharmap-window.c:508 ../gucharmap/gucharmap-window.c:804
+#: ../gucharmap/gucharmap-window.c:576
 msgid "Previous Script"
 msgstr "Script anterior"
 
-#: ../gucharmap/gucharmap-window.c:513
+#: ../gucharmap/gucharmap-window.c:581
 msgid "Next Block"
 msgstr "Bloque seguinte"
 
-#: ../gucharmap/gucharmap-window.c:513
+#: ../gucharmap/gucharmap-window.c:581
 msgid "Previous Block"
 msgstr "Bloque anterior"
 
-#: ../gucharmap/gucharmap-window.c:765
-msgid "_File"
-msgstr "_Ficheiro"
-
-#: ../gucharmap/gucharmap-window.c:766
-msgid "_View"
-msgstr "_Ver"
-
-#: ../gucharmap/gucharmap-window.c:767
-msgid "_Search"
-msgstr "_Buscar"
-
-#: ../gucharmap/gucharmap-window.c:768
-msgid "_Go"
-msgstr "_Ir"
-
-#: ../gucharmap/gucharmap-window.c:769
-msgid "_Help"
-msgstr "A_xuda"
-
-#: ../gucharmap/gucharmap-window.c:772
-msgid "Page _Setup"
-msgstr "_Configuración de páxina"
-
-#: ../gucharmap/gucharmap-window.c:793
-msgid "Find _Next"
-msgstr "Buscar _seguinte"
-
-#: ../gucharmap/gucharmap-window.c:795
-msgid "Find _Previous"
-msgstr "Buscar _anterior"
-
-#: ../gucharmap/gucharmap-window.c:798
-msgid "_Next Character"
-msgstr "Carácter _seguinte"
-
-#: ../gucharmap/gucharmap-window.c:800
-msgid "_Previous Character"
-msgstr "Carácter _anterior"
-
-#: ../gucharmap/gucharmap-window.c:807
-msgid "_Contents"
-msgstr "_Contidos"
-
-#: ../gucharmap/gucharmap-window.c:809
-msgid "_About"
-msgstr "_Sobre"
-
-#: ../gucharmap/gucharmap-window.c:819
-msgid "By _Script"
-msgstr "Por _script"
-
-#: ../gucharmap/gucharmap-window.c:821
-msgid "By _Unicode Block"
-msgstr "Por bloques _Unicode"
-
-#: ../gucharmap/gucharmap-window.c:826
-msgid "Sho_w only glyphs from this font"
-msgstr "Só mostrar os _glifos para esta fonte"
-
-#: ../gucharmap/gucharmap-window.c:829
-msgid "Snap _Columns to Power of Two"
-msgstr "Axustar _columnas á potencia de dous"
-
 #. Text to copy entry + button
-#: ../gucharmap/gucharmap-window.c:893
+#: ../gucharmap/gucharmap-window.c:855
 msgid "_Text to copy:"
 msgstr "_Texto para copiar:"
 
-#: ../gucharmap/gucharmap-window.c:900
+#: ../gucharmap/gucharmap-window.c:862
 msgid "Copy to the clipboard."
 msgstr "Copiar ao portapapeis."
 
-#: ../gucharmap/main.c:54
+#: ../gucharmap/main.c:134
+msgid "Show only glyphs from this font"
+msgstr "Só mostrar os glifos para esta fonte"
+
+#: ../gucharmap/main.c:146
+msgid "Zoom In"
+msgstr "Ampliar"
+
+#: ../gucharmap/main.c:147
+msgid "Zoom Out"
+msgstr "Afastar"
+
+#: ../gucharmap/main.c:148
+msgid "Normal Size"
+msgstr "Tamaño normal"
+
+#: ../gucharmap/main.c:159
+msgid "Find…"
+msgstr "Buscar…"
+
+#: ../gucharmap/main.c:168
+msgid "_Help"
+msgstr "A_xuda"
+
+#: ../gucharmap/main.c:169
+msgid "_About Character Map"
+msgstr "_Sobre Mapa de caracteres"
+
+#: ../gucharmap/main.c:170
+msgid "_Quit"
+msgstr "_Saír"
+
+#: ../gucharmap/main.c:170
+msgid "_Close"
+msgstr "Pe_char"
+
+#: ../gucharmap/main.c:229
+msgid "Page _Setup"
+msgstr "_Configuración de páxina"
+
+#. g_menu_append (G_MENU (model), _("Print Preview"), "win.print-preview");
+#: ../gucharmap/main.c:231
+msgid "_Print"
+msgstr "Im_primir"
+
+#: ../gucharmap/main.c:279
 msgid "Font to start with; ex: 'Serif 27'"
 msgstr "Tipo de letra coa cal comezar; por exemplo 'Serif 27'"
 
-#: ../gucharmap/main.c:54
+#: ../gucharmap/main.c:279
 msgid "FONT"
 msgstr "TIPO DE LETRA"
 
@@ -1456,6 +1501,15 @@ msgstr "Phags Pa"
 #: ../gucharmap/unicode-scripts.h:117
 msgid "Yi"
 msgstr "Yi"
+
+#~ msgid "_File"
+#~ msgstr "_Ficheiro"
+
+#~ msgid "_Contents"
+#~ msgstr "_Contidos"
+
+#~ msgid "_About"
+#~ msgstr "_Sobre"
 
 #~ msgid "GConf could not be initialized."
 #~ msgstr "Non foi posíbel inicializar o GConf."
