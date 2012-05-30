@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap 3.3.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-19 23:35+0100\n"
-"PO-Revision-Date: 2012-02-19 23:35+0100\n"
+"POT-Creation-Date: 2012-05-30 15:23+0200\n"
+"PO-Revision-Date: 2012-05-30 17:39+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: nb\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
-#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:839
-#: ../gucharmap/main.c:80
+#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:824
+#: ../gucharmap/main.c:305
 msgid "Character Map"
 msgstr "Tegnkart"
 
@@ -29,7 +29,7 @@ msgstr "Sett inn spesielle tegn i dokumenter"
 msgid "All"
 msgstr "Alle"
 
-#: ../gucharmap/gucharmap-block-chapters-model.c:187
+#: ../gucharmap/gucharmap-block-chapters-model.c:187 ../gucharmap/main.c:123
 msgid "Unicode Block"
 msgstr "Unicode-blokk"
 
@@ -155,6 +155,70 @@ msgstr "Ikke funnet."
 msgid "Character found."
 msgstr "Tegn funnet."
 
+#: ../gucharmap/gucharmap-menus.ui.h:1
+msgid "View By"
+msgstr "Vis etter"
+
+#: ../gucharmap/gucharmap-menus.ui.h:2
+msgid "_View"
+msgstr "_Vis"
+
+#: ../gucharmap/gucharmap-menus.ui.h:3
+msgid "By _Script"
+msgstr "Etter _skript"
+
+#: ../gucharmap/gucharmap-menus.ui.h:4
+msgid "By _Unicode Block"
+msgstr "Etter Unicode-blokk"
+
+#: ../gucharmap/gucharmap-menus.ui.h:5
+msgid "Sho_w only glyphs from this font"
+msgstr "_Vis kun glyfer fra denne skriften"
+
+#: ../gucharmap/gucharmap-menus.ui.h:6
+msgid "Snap _Columns to Power of Two"
+msgstr "Fest _kolonner i jevnt antall"
+
+#: ../gucharmap/gucharmap-menus.ui.h:7
+msgid "Zoom _In"
+msgstr "Zoom _inn"
+
+#: ../gucharmap/gucharmap-menus.ui.h:8
+msgid "Zoom _Out"
+msgstr "Zoom _ut"
+
+#: ../gucharmap/gucharmap-menus.ui.h:9
+msgid "_Normal Size"
+msgstr "_Normal størrelse"
+
+#: ../gucharmap/gucharmap-menus.ui.h:10
+msgid "_Search"
+msgstr "_Søk"
+
+#: ../gucharmap/gucharmap-menus.ui.h:11
+msgid "_Find"
+msgstr "_Finn"
+
+#: ../gucharmap/gucharmap-menus.ui.h:12
+msgid "Find _Next"
+msgstr "Finn _neste"
+
+#: ../gucharmap/gucharmap-menus.ui.h:13
+msgid "Find _Previous"
+msgstr "Finn _forrige"
+
+#: ../gucharmap/gucharmap-menus.ui.h:14
+msgid "_Go"
+msgstr "_Gå til"
+
+#: ../gucharmap/gucharmap-menus.ui.h:15
+msgid "_Next Character"
+msgstr "_Neste tegn"
+
+#: ../gucharmap/gucharmap-menus.ui.h:16
+msgid "_Previous Character"
+msgstr "_Forrige tegn"
+
 #: ../gucharmap/gucharmap-mini-fontsel.c:282
 msgid "Font"
 msgstr "Skrift"
@@ -167,7 +231,7 @@ msgstr "Skriftfamilie"
 msgid "Font Size"
 msgstr "Skriftstørrelse"
 
-#: ../gucharmap/gucharmap-script-chapters-model.c:155
+#: ../gucharmap/gucharmap-script-chapters-model.c:155 ../gucharmap/main.c:122
 msgid "Script"
 msgstr "Skript"
 
@@ -355,7 +419,7 @@ msgstr "Skilletegn, avsnitt"
 msgid "Separator, Space"
 msgstr "Skilletegn, mellomrom"
 
-#: ../gucharmap/gucharmap-window.c:399
+#: ../gucharmap/gucharmap-window.c:451
 msgid ""
 "Gucharmap is free software; you can redistribute it and/or modify it under "
 "the terms of the GNU General Public License as published by the Free "
@@ -367,7 +431,7 @@ msgstr ""
 "Software Foundation; enten versjon 3 av lisensen, eller (hvis du ønsker det) "
 "enhver senere versjon."
 
-#: ../gucharmap/gucharmap-window.c:403
+#: ../gucharmap/gucharmap-window.c:455
 msgid ""
 "Permission is hereby granted, free of charge, to any person obtaining a copy "
 "of the Unicode data files to deal in them without restriction, including "
@@ -378,7 +442,7 @@ msgstr ""
 "å håndtere dem uten begrensninger inklusive rett til å bruke, kopiere, "
 "endre, slå sammen, publisere, distribuere og/eller selge kopier av dem."
 
-#: ../gucharmap/gucharmap-window.c:407
+#: ../gucharmap/gucharmap-window.c:459
 msgid ""
 "Gucharmap and the Unicode data files are distributed in the hope that they "
 "will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty "
@@ -390,7 +454,7 @@ msgstr ""
 "SALGBART eller PASSER ET BESTEMT FORMÅL. Se GNU General Public License for "
 "detaljer."
 
-#: ../gucharmap/gucharmap-window.c:411
+#: ../gucharmap/gucharmap-window.c:463
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "Gucharmap; if not, write to the Free Software Foundation, Inc., 59 Temple "
@@ -400,7 +464,7 @@ msgstr ""
 "Nautilus. Hvis du ikke har det kan du skrive til Free Software Foundation, "
 "Inc. 59 Temple Place, Suite 330, Boston, MA 02110-1301 USA"
 
-#: ../gucharmap/gucharmap-window.c:414
+#: ../gucharmap/gucharmap-window.c:466
 msgid ""
 "Also you should have received a copy of the Unicode Copyright along with "
 "Gucharmap; you can always find it at Unicode's website: http://www.unicode."
@@ -410,112 +474,93 @@ msgstr ""
 "Gucharmap; du kan finne denne på nettsidene til Unicode konsortiet: http://"
 "www.unicode.org/copyright.html"
 
-#: ../gucharmap/gucharmap-window.c:424 ../gucharmap/main.c:36
+#: ../gucharmap/gucharmap-window.c:476 ../gucharmap/main.c:39
 msgid "GNOME Character Map"
 msgstr "GNOME tegnkart"
 
-#: ../gucharmap/gucharmap-window.c:426
+#: ../gucharmap/gucharmap-window.c:478
 msgid "Based on the Unicode Character Database 6.1.0"
 msgstr "Basert på Unicode tegndatabasen versjon 6.1.0"
 
-#: ../gucharmap/gucharmap-window.c:435
+#: ../gucharmap/gucharmap-window.c:487
 msgid "translator-credits"
 msgstr "Kjartan Maraas <kmaraas@gnome.org>"
 
-#: ../gucharmap/gucharmap-window.c:508 ../gucharmap/gucharmap-window.c:802
+#: ../gucharmap/gucharmap-window.c:576
 msgid "Next Script"
 msgstr "Neste skript"
 
-#: ../gucharmap/gucharmap-window.c:508 ../gucharmap/gucharmap-window.c:804
+#: ../gucharmap/gucharmap-window.c:576
 msgid "Previous Script"
 msgstr "Forrige skript"
 
-#: ../gucharmap/gucharmap-window.c:513
+#: ../gucharmap/gucharmap-window.c:581
 msgid "Next Block"
 msgstr "Neste blokk"
 
-#: ../gucharmap/gucharmap-window.c:513
+#: ../gucharmap/gucharmap-window.c:581
 msgid "Previous Block"
 msgstr "Forrige blokk"
 
-#: ../gucharmap/gucharmap-window.c:765
-msgid "_File"
-msgstr "_Fil"
-
-#: ../gucharmap/gucharmap-window.c:766
-msgid "_View"
-msgstr "_Vis"
-
-#: ../gucharmap/gucharmap-window.c:767
-msgid "_Search"
-msgstr "_Søk"
-
-#: ../gucharmap/gucharmap-window.c:768
-msgid "_Go"
-msgstr "_Gå til"
-
-#: ../gucharmap/gucharmap-window.c:769
-msgid "_Help"
-msgstr "_Hjelp"
-
-#: ../gucharmap/gucharmap-window.c:772
-msgid "Page _Setup"
-msgstr "_Sideoppsett"
-
-#: ../gucharmap/gucharmap-window.c:793
-msgid "Find _Next"
-msgstr "Finn _neste"
-
-#: ../gucharmap/gucharmap-window.c:795
-msgid "Find _Previous"
-msgstr "Finn _forrige"
-
-#: ../gucharmap/gucharmap-window.c:798
-msgid "_Next Character"
-msgstr "_Neste tegn"
-
-#: ../gucharmap/gucharmap-window.c:800
-msgid "_Previous Character"
-msgstr "_Forrige tegn"
-
-#: ../gucharmap/gucharmap-window.c:807
-msgid "_Contents"
-msgstr "_Innhold"
-
-#: ../gucharmap/gucharmap-window.c:809
-msgid "_About"
-msgstr "_Om"
-
-#: ../gucharmap/gucharmap-window.c:819
-msgid "By _Script"
-msgstr "Etter _skript"
-
-#: ../gucharmap/gucharmap-window.c:821
-msgid "By _Unicode Block"
-msgstr "Etter Unicode-blokk"
-
-#: ../gucharmap/gucharmap-window.c:826
-msgid "Sho_w only glyphs from this font"
-msgstr "_Vis kun glyfer fra denne skriften"
-
-#: ../gucharmap/gucharmap-window.c:829
-msgid "Snap _Columns to Power of Two"
-msgstr "Fest _kolonner i jevnt antall"
-
 #. Text to copy entry + button
-#: ../gucharmap/gucharmap-window.c:893
+#: ../gucharmap/gucharmap-window.c:855
 msgid "_Text to copy:"
 msgstr "_Tekst som skal kopieres:"
 
-#: ../gucharmap/gucharmap-window.c:900
+#: ../gucharmap/gucharmap-window.c:862
 msgid "Copy to the clipboard."
 msgstr "Kopier til utklippstavlen."
 
-#: ../gucharmap/main.c:54
+#: ../gucharmap/main.c:134
+msgid "Show only glyphs from this font"
+msgstr "Vis kun glyfer fra denne skriften"
+
+#: ../gucharmap/main.c:146
+msgid "Zoom In"
+msgstr "Zoom inn"
+
+#: ../gucharmap/main.c:147
+msgid "Zoom Out"
+msgstr "Zoom ut"
+
+#: ../gucharmap/main.c:148
+msgid "Normal Size"
+msgstr "Normal størrelse"
+
+#: ../gucharmap/main.c:159
+msgid "Find…"
+msgstr "Finn …"
+
+#: ../gucharmap/main.c:168
+msgid "_Help"
+msgstr "_Hjelp"
+
+#: ../gucharmap/main.c:169
+msgid "_About Character Map"
+msgstr "_Om tegnkart"
+
+#: ../gucharmap/main.c:170
+msgid "_Quit"
+msgstr "A_vslutt"
+
+#: ../gucharmap/main.c:170
+msgid "_Close"
+msgstr "_Lukk"
+
+#: ../gucharmap/main.c:229
+msgid "Page _Setup"
+msgstr "_Sideoppsett"
+
+#. g_menu_append (G_MENU (model), _("Print Preview"), "win.print-preview");
+#: ../gucharmap/main.c:231
+msgid "_Print"
+msgstr "_Skriv ut"
+
+#: ../gucharmap/main.c:279
 msgid "Font to start with; ex: 'Serif 27'"
 msgstr "Skrift som skal brukes ved oppstart; f.eks «Serif 27»"
 
-#: ../gucharmap/main.c:54
+#: ../gucharmap/main.c:279
 msgid "FONT"
 msgstr "SKRIFT"
 
