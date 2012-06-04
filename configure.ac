@@ -139,7 +139,7 @@ AC_SUBST(GTK_LIBS)
 AH_TEMPLATE([ENABLE_UNIHAN], [Define if you want CJK ideograph information])
 AC_ARG_ENABLE(unihan, 
               AC_HELP_STRING([--disable-unihan], 
-                             [don't build in CJK ideograph information]))
+                             [do not build in CJK ideograph information]))
 if test "x$enable_unihan" != "xno" ; then
     AC_DEFINE([ENABLE_UNIHAN],[1],[Define if you want CJK ideograph information])
 fi
@@ -283,10 +283,6 @@ gucharmap/Makefile
 gucharmap/gucharmap.gresource.xml
 gucharmap/gucharmap.h
 help/Makefile
-help/it/Makefile
-help/ja/Makefile
-help/zh_HK/Makefile
-help/zh_TW/Makefile
 pixmaps/Makefile
 po/Makefile.in
 ])
