@@ -521,7 +521,7 @@ sub process_nameslist_txt ($)
 {
     my ($nameslist_txt) = @_;
 
-    open (my $nameslist, "$ICONV -f 'ISO8859-1' -t 'UTF-8' $nameslist_txt |") or die;
+    open (my $nameslist, $nameslist_txt) or die;
 
     print "processing $nameslist_txt...";
 
