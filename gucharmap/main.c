@@ -28,7 +28,7 @@
 #include <gucharmap/gucharmap.h>
 #include "gucharmap-window.h"
 
-#define UI_RESOURCE "/org/gnome/charmap/gucharmap-menus.ui"
+#define UI_RESOURCE "/org/gnome/charmap/ui/menus.ui"
  
 static gboolean
 option_version_cb (const gchar *option_name,
@@ -91,85 +91,24 @@ change_toggle_state (GSimpleAction *action,
 }
 
 static void
-activate_quit (GSimpleAction *action,
-               GVariant      *parameter,
-               gpointer       data)
+activate_close (GSimpleAction *action,
+                GVariant      *parameter,
+                gpointer       user_data)
 {
-  g_list_foreach (gtk_application_get_windows (GTK_APPLICATION (data)),
-                  (GFunc)gtk_widget_destroy, NULL);
+  GList *windows, *l;
+
+  /* FIXME: use gtk_application_get_active_window() once it exists */
+  windows = gtk_application_get_windows (GTK_APPLICATION (user_data));
+  for (l = windows; l != NULL; l = l->next) {
+    GtkWidget *window = l->data;
+
+    if (!GTK_IS_APPLICATION_WINDOW (window))
+      continue;
+
+    gtk_widget_destroy (window);
+    break;
+  }
 }
-
-static void
-update_shell_app_menu (GtkSettings *settings,
-                       GParamSpec  *pspec,
-                       gpointer data)
-{
-  GObject *app = G_OBJECT (data);
-  GMenu *menu;
-  gboolean show_app_menu;
-
-  g_object_get (G_OBJECT (settings),
-                "gtk-shell-shows-app-menu", &show_app_menu,
-                NULL);
-
-  menu = g_object_get_data (app, "shell-view-by-section");
-
-  while (g_menu_model_get_n_items (G_MENU_MODEL (menu)) > 0)
-    g_menu_remove (menu, 0);
-
-  if (show_app_menu)
-    {
-      g_menu_append (menu, _("Script"), "app.group-by::script");
-      g_menu_append (menu, _("Unicode Block"), "app.group-by::block");
-    }
-
-
-  menu = g_object_get_data (app, "shell-view-section");
-
-  while (g_menu_model_get_n_items (G_MENU_MODEL (menu)) > 0)
-    g_menu_remove (menu, 0);
-
-  if (show_app_menu)
-    {
-      g_menu_append (menu, _("Show only glyphs from this font"),
-                     "app.show-only-glyphs-in-font");
-    }
-
-
-  menu = g_object_get_data (app, "shell-zoom-section");
-
-  while (g_menu_model_get_n_items (G_MENU_MODEL (menu)) > 0)
-    g_menu_remove (menu, 0);
-
-  if (show_app_menu)
-    {
-      g_menu_append (menu, _("Zoom In"), "app.zoom-in");
-      g_menu_append (menu, _("Zoom Out"), "app.zoom-out");
-      g_menu_append (menu, _("Normal Size"), "app.normal-size");
-    }
-
-
-  menu = g_object_get_data (app, "shell-find-section");
-
-  while (g_menu_model_get_n_items (G_MENU_MODEL (menu)) > 0)
-    g_menu_remove (menu, 0);
-
-  if (show_app_menu)
-    {
-      g_menu_append (menu, _("Find\342\200\246"), "app.find");
-    }
-
-
-  menu = g_object_get_data (app, "general-section");
-
-  while (g_menu_model_get_n_items (G_MENU_MODEL (menu)) > 0)
-    g_menu_remove (menu, 0);
-
-  g_menu_append (menu, _("_Help"), "app.help");
-  g_menu_append (menu, _("_About Character Map"), "app.about");
-  g_menu_append (menu, show_app_menu ? _("_Quit") : _("_Close"), "app.quit");
-}
-
 
 static void
 startup_cb (GApplication *application,
@@ -177,6 +116,8 @@ startup_cb (GApplication *application,
 {
   GtkBuilder *builder = gtk_builder_new ();
   GMenuModel *model;
+  gboolean show_app_menu;
+
   const GActionEntry app_entries[] =
   {
     { "group-by", activate_action, "s", "\"script\"", NULL },
@@ -192,34 +133,24 @@ startup_cb (GApplication *application,
 
     { "help", activate_action, NULL, NULL, NULL },
     { "about", activate_action, NULL, NULL, NULL },
-    { "quit", activate_quit, NULL, NULL, NULL },
+    { "close", activate_close, NULL, NULL, NULL },
   };
 
   g_action_map_add_action_entries (G_ACTION_MAP (application),
                                    app_entries, G_N_ELEMENTS (app_entries),
                                    application);
 
+
   gtk_builder_add_from_resource (builder, UI_RESOURCE, NULL);
 
   /* app menu */
-  model = G_MENU_MODEL (gtk_builder_get_object (builder, "app-menu"));
-  gtk_application_set_app_menu (GTK_APPLICATION (application), model);
-
-  model = G_MENU_MODEL (gtk_builder_get_object (builder, "shell-view-by"));
-  g_object_set_data (G_OBJECT (application), "shell-view-by-section", model);
-
-  model = G_MENU_MODEL (gtk_builder_get_object (builder, "shell-view"));
-  g_object_set_data (G_OBJECT (application), "shell-view-section", model);
-
-  model = G_MENU_MODEL (gtk_builder_get_object (builder, "shell-zoom"));
-  g_object_set_data (G_OBJECT (application), "shell-zoom-section", model);
-
-  model = G_MENU_MODEL (gtk_builder_get_object (builder, "shell-find"));
-  g_object_set_data (G_OBJECT (application), "shell-find-section", model);
-
-  model = G_MENU_MODEL (gtk_builder_get_object (builder, "general"));
-  g_object_set_data (G_OBJECT (application), "general-section", model);
-
+  g_object_get (gtk_settings_get_default (),
+                "gtk-shell-shows-app-menu", &show_app_menu,
+                NULL);
+  if (show_app_menu) {
+    model = G_MENU_MODEL (gtk_builder_get_object (builder, "app-menu"));
+    gtk_application_set_app_menu (GTK_APPLICATION (application), model);
+  }
 
   /* window menu */
 
@@ -246,9 +177,9 @@ startup_cb (GApplication *application,
   gtk_application_add_accelerator (GTK_APPLICATION (application),
                                    "F1", "app.help", NULL);
   gtk_application_add_accelerator (GTK_APPLICATION (application),
-                                   "<Primary>q", "app.quit", NULL);
+                                   "<Primary>q", "app.close", NULL);
   gtk_application_add_accelerator (GTK_APPLICATION (application),
-                                   "<Primary>w", "app.quit", NULL);
+                                   "<Primary>w", "app.close", NULL);
 
 
   g_object_unref (builder);
@@ -314,11 +245,6 @@ main (int argc, char **argv)
   g_application_register (G_APPLICATION (application), NULL, NULL);
 
   window = gucharmap_window_new (application);
-
-  g_signal_connect (gtk_widget_get_settings (window),
-                    "notify::gtk-shell-shows-app-menu",
-                    G_CALLBACK (update_shell_app_menu), application);
-  update_shell_app_menu (gtk_widget_get_settings (window), NULL, application);
 
   screen = gtk_window_get_screen (GTK_WINDOW (window));
   monitor = gdk_screen_get_monitor_at_point (screen, 0, 0);
