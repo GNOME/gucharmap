@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-03 08:25+0200\n"
+"POT-Creation-Date: 2012-06-27 16:10+0200\n"
 "PO-Revision-Date: 2012-06-03 08:22+0200\n"
 "Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
@@ -23,7 +23,7 @@ msgstr ""
 "X-Generator: Virtaal 0.7.0\n"
 
 #: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:824
-#: ../gucharmap/main.c:305
+#: ../gucharmap/main.c:236
 msgid "Character Map"
 msgstr "خريطة المحارف"
 
@@ -35,7 +35,7 @@ msgstr "أدرج محارف خاصة في المستندات"
 msgid "All"
 msgstr "الكل"
 
-#: ../gucharmap/gucharmap-block-chapters-model.c:187 ../gucharmap/main.c:123
+#: ../gucharmap/gucharmap-block-chapters-model.c:187
 msgid "Unicode Block"
 msgstr "قالب يونيكود"
 
@@ -162,68 +162,88 @@ msgid "Character found."
 msgstr "وجد المحرف."
 
 #: ../gucharmap/gucharmap-menus.ui.h:1
-msgid "View By"
-msgstr "اعرض حسب"
-
-#: ../gucharmap/gucharmap-menus.ui.h:2
-msgid "_View"
-msgstr "_عرض"
-
-#: ../gucharmap/gucharmap-menus.ui.h:3
 msgid "By _Script"
 msgstr "ب_نظام الكتابة"
 
-#: ../gucharmap/gucharmap-menus.ui.h:4
+#: ../gucharmap/gucharmap-menus.ui.h:2
 msgid "By _Unicode Block"
 msgstr "بقالب _يونيكود"
 
-#: ../gucharmap/gucharmap-menus.ui.h:5
+#: ../gucharmap/gucharmap-menus.ui.h:3
 msgid "Sho_w only glyphs from this font"
 msgstr "اعرض المحارف التي يحتويها _هذا الخط فقط"
 
-#: ../gucharmap/gucharmap-menus.ui.h:6
-msgid "Snap _Columns to Power of Two"
-msgstr "اجعل الأعمدة مضاعفات ا_ثنين"
-
-#: ../gucharmap/gucharmap-menus.ui.h:7
+#: ../gucharmap/gucharmap-menus.ui.h:4
 msgid "Zoom _In"
 msgstr "_قرّب"
 
-#: ../gucharmap/gucharmap-menus.ui.h:8
+#: ../gucharmap/gucharmap-menus.ui.h:5
 msgid "Zoom _Out"
 msgstr "_بعّد"
 
-#: ../gucharmap/gucharmap-menus.ui.h:9
+#: ../gucharmap/gucharmap-menus.ui.h:6
 msgid "_Normal Size"
 msgstr "ال_حجم العادي"
 
-#: ../gucharmap/gucharmap-menus.ui.h:10
-msgid "_Search"
-msgstr "_بحث"
-
-#: ../gucharmap/gucharmap-menus.ui.h:11
+#: ../gucharmap/gucharmap-menus.ui.h:7
 msgid "_Find"
 msgstr "ا_بحث"
 
+#: ../gucharmap/gucharmap-menus.ui.h:8
+msgid "_Help"
+msgstr "_مساعدة"
+
+#: ../gucharmap/gucharmap-menus.ui.h:9
+msgid "_About"
+msgstr "_عنْ"
+
+#: ../gucharmap/gucharmap-menus.ui.h:10
+msgid "_Close Window"
+msgstr "أ_غلق النافذة"
+
+#: ../gucharmap/gucharmap-menus.ui.h:11
+msgid "_File"
+msgstr "_ملف"
+
 #: ../gucharmap/gucharmap-menus.ui.h:12
+msgid "_Close"
+msgstr "أ_غلق"
+
+#: ../gucharmap/gucharmap-menus.ui.h:13
+msgid "_View"
+msgstr "_عرض"
+
+#: ../gucharmap/gucharmap-menus.ui.h:14
+msgid "Snap _Columns to Power of Two"
+msgstr "اجعل الأعمدة مضاعفات ا_ثنين"
+
+#: ../gucharmap/gucharmap-menus.ui.h:15
+msgid "_Search"
+msgstr "_بحث"
+
+#: ../gucharmap/gucharmap-menus.ui.h:16
 msgid "Find _Next"
 msgstr "ابحث عن ال_تالي"
 
-#: ../gucharmap/gucharmap-menus.ui.h:13
+#: ../gucharmap/gucharmap-menus.ui.h:17
 msgid "Find _Previous"
 msgstr "ابحث عن ال_سابق"
 
-#: ../gucharmap/gucharmap-menus.ui.h:14
+#: ../gucharmap/gucharmap-menus.ui.h:18
 msgid "_Go"
 msgstr "ا_ذهب"
 
-#: ../gucharmap/gucharmap-menus.ui.h:15
+#: ../gucharmap/gucharmap-menus.ui.h:19
 msgid "_Next Character"
 msgstr "المحرف ال_تالي"
 
-#: ../gucharmap/gucharmap-menus.ui.h:16
+#: ../gucharmap/gucharmap-menus.ui.h:20
 msgid "_Previous Character"
 msgstr "المحرف ال_سابق"
+
+#: ../gucharmap/gucharmap-menus.ui.h:21
+msgid "_Contents"
+msgstr "ال_محتويات"
 
 #: ../gucharmap/gucharmap-mini-fontsel.c:282
 msgid "Font"
@@ -237,7 +257,7 @@ msgstr "عائلة الخطوط"
 msgid "Font Size"
 msgstr "حجم الخط"
 
-#: ../gucharmap/gucharmap-script-chapters-model.c:155 ../gucharmap/main.c:122
+#: ../gucharmap/gucharmap-script-chapters-model.c:155
 msgid "Script"
 msgstr "نظام الكتابة"
 
@@ -483,8 +503,8 @@ msgid "GNOME Character Map"
 msgstr "خريطة محارف جنوم"
 
 #: ../gucharmap/gucharmap-window.c:478
-msgid "Based on the Unicode Character Database 6.1.0"
-msgstr "مبنية على قاعدة بيانات محارف يونيكود 6.1.0"
+msgid "Based on the Unicode Character Database 6.2.0"
+msgstr "مبنية على قاعدة بيانات محارف يونيكود 6.2.0"
 
 #: ../gucharmap/gucharmap-window.c:487
 msgid "translator-credits"
@@ -520,56 +540,20 @@ msgstr "_نص لينسخ:"
 msgid "Copy to the clipboard."
 msgstr "انسخ للحافظة."
 
-#: ../gucharmap/main.c:134
-msgid "Show only glyphs from this font"
-msgstr "اعرض المحارف التي يحتويها هذا الخط فقط"
-
-#: ../gucharmap/main.c:146
-msgid "Zoom In"
-msgstr "قرّب"
-
-#: ../gucharmap/main.c:147
-msgid "Zoom Out"
-msgstr "بعّد"
-
-#: ../gucharmap/main.c:148
-msgid "Normal Size"
-msgstr "الحجم العادي"
-
-#: ../gucharmap/main.c:159
-msgid "Find…"
-msgstr "ابحث…"
-
-#: ../gucharmap/main.c:168
-msgid "_Help"
-msgstr "_مساعدة"
-
-#: ../gucharmap/main.c:169
-msgid "_About Character Map"
-msgstr "_عن خريطة المحارف"
-
-#: ../gucharmap/main.c:170
-msgid "_Quit"
-msgstr "أ_نهِ"
-
-#: ../gucharmap/main.c:170
-msgid "_Close"
-msgstr "أ_غلق"
-
-#: ../gucharmap/main.c:229
+#: ../gucharmap/main.c:160
 msgid "Page _Setup"
 msgstr "إ_عداد الصفحة"
 
 #. g_menu_append (G_MENU (model), _("Print Preview"), "win.print-preview");
-#: ../gucharmap/main.c:231
+#: ../gucharmap/main.c:162
 msgid "_Print"
 msgstr "ا_طبع"
 
-#: ../gucharmap/main.c:279
+#: ../gucharmap/main.c:210
 msgid "Font to start with; ex: 'Serif 27'"
 msgstr "خط للبدء به؛ مثلا: 'Serif 27'"
 
-#: ../gucharmap/main.c:279
+#: ../gucharmap/main.c:210
 msgid "FONT"
 msgstr "خط"
 
@@ -1497,14 +1481,29 @@ msgstr "فاغس با"
 msgid "Yi"
 msgstr "يي"
 
-#~ msgid "_File"
-#~ msgstr "_ملف"
+#~ msgid "View By"
+#~ msgstr "اعرض حسب"
 
-#~ msgid "_Contents"
-#~ msgstr "ال_محتويات"
+#~ msgid "Show only glyphs from this font"
+#~ msgstr "اعرض المحارف التي يحتويها هذا الخط فقط"
 
-#~ msgid "_About"
-#~ msgstr "_عنْ"
+#~ msgid "Zoom In"
+#~ msgstr "قرّب"
+
+#~ msgid "Zoom Out"
+#~ msgstr "بعّد"
+
+#~ msgid "Normal Size"
+#~ msgstr "الحجم العادي"
+
+#~ msgid "Find…"
+#~ msgstr "ابحث…"
+
+#~ msgid "_About Character Map"
+#~ msgstr "_عن خريطة المحارف"
+
+#~ msgid "_Quit"
+#~ msgstr "أ_نهِ"
 
 #~ msgid "GConf could not be initialized."
 #~ msgstr "تعذّر تمهيد GConf."
