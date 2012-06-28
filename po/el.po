@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gucharmap&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-06-04 13:39+0000\n"
-"PO-Revision-Date: 2012-06-17 13:49+0200\n"
+"POT-Creation-Date: 2012-06-25 12:04+0000\n"
+"PO-Revision-Date: 2012-06-28 18:30+0200\n"
 "Last-Translator: Tom Tryfonidis <tomtryf@gmail.com>\n"
 "Language-Team: Greek <team@gnome.gr>\n"
 "MIME-Version: 1.0\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: ../gucharmap.desktop.in.in.h:1
 #: ../gucharmap/gucharmap-window.c:824
-#: ../gucharmap/main.c:305
+#: ../gucharmap/main.c:236
 msgid "Character Map"
 msgstr "Πίνακας Χαρακτήρων"
 
@@ -35,7 +35,6 @@ msgid "All"
 msgstr "Όλα"
 
 #: ../gucharmap/gucharmap-block-chapters-model.c:187
-#: ../gucharmap/main.c:123
 msgid "Unicode Block"
 msgstr "Μπλοκ Unicode"
 
@@ -163,69 +162,89 @@ msgid "Character found."
 msgstr "Ο χαρακτήρας βρέθηκε."
 
 #: ../gucharmap/gucharmap-menus.ui.h:1
-msgid "View By"
-msgstr "Προβολή κατά"
-
-#: ../gucharmap/gucharmap-menus.ui.h:2
-msgid "_View"
-msgstr "_Προβολή"
-
-#: ../gucharmap/gucharmap-menus.ui.h:3
 msgid "By _Script"
 msgstr "Κατά _γραφή"
 
-#: ../gucharmap/gucharmap-menus.ui.h:4
+#: ../gucharmap/gucharmap-menus.ui.h:2
 msgid "By _Unicode Block"
 msgstr "Κατά _μπλοκ Unicode"
 
-#: ../gucharmap/gucharmap-menus.ui.h:5
-#, fuzzy
+#: ../gucharmap/gucharmap-menus.ui.h:3
 msgid "Sho_w only glyphs from this font"
-msgstr "Εμφάνι_ση μόνο των χαρακτήρων από αυτή την γραμματοσειρά"
+msgstr "Εμφάνι_ση μόνο των γλύφων από αυτή την γραμματοσειρά"
 
-#: ../gucharmap/gucharmap-menus.ui.h:6
-msgid "Snap _Columns to Power of Two"
-msgstr "Αριθμός _στηλών αντιστοιχεί σε δύναμη του 2"
-
-#: ../gucharmap/gucharmap-menus.ui.h:7
+#: ../gucharmap/gucharmap-menus.ui.h:4
 msgid "Zoom _In"
 msgstr "Μεγέ_θυνση"
 
-#: ../gucharmap/gucharmap-menus.ui.h:8
+#: ../gucharmap/gucharmap-menus.ui.h:5
 msgid "Zoom _Out"
 msgstr "Σ_μίκρυνση"
 
-#: ../gucharmap/gucharmap-menus.ui.h:9
+#: ../gucharmap/gucharmap-menus.ui.h:6
 msgid "_Normal Size"
 msgstr "_Κανονικό μέγεθος"
 
-#: ../gucharmap/gucharmap-menus.ui.h:10
-msgid "_Search"
-msgstr "Ανα_ζήτηση"
-
-#: ../gucharmap/gucharmap-menus.ui.h:11
+#: ../gucharmap/gucharmap-menus.ui.h:7
 msgid "_Find"
 msgstr "Εύ_ρεση"
 
+#: ../gucharmap/gucharmap-menus.ui.h:8
+msgid "_Help"
+msgstr "_Βοήθεια"
+
+#: ../gucharmap/gucharmap-menus.ui.h:9
+msgid "_About"
+msgstr "Πε_ρί"
+
+#: ../gucharmap/gucharmap-menus.ui.h:10
+#| msgid "_Close"
+msgid "_Close Window"
+msgstr "_Κλείσιμο παραθύρου"
+
+#: ../gucharmap/gucharmap-menus.ui.h:11
+msgid "_File"
+msgstr "_Αρχείο"
+
 #: ../gucharmap/gucharmap-menus.ui.h:12
+msgid "_Close"
+msgstr "_Κλείσιμο"
+
+#: ../gucharmap/gucharmap-menus.ui.h:13
+msgid "_View"
+msgstr "_Προβολή"
+
+#: ../gucharmap/gucharmap-menus.ui.h:14
+msgid "Snap _Columns to Power of Two"
+msgstr "Αριθμός _στηλών αντιστοιχεί σε δύναμη του 2"
+
+#: ../gucharmap/gucharmap-menus.ui.h:15
+msgid "_Search"
+msgstr "Ανα_ζήτηση"
+
+#: ../gucharmap/gucharmap-menus.ui.h:16
 msgid "Find _Next"
 msgstr "Εύρεση Ε_πόμενου"
 
-#: ../gucharmap/gucharmap-menus.ui.h:13
+#: ../gucharmap/gucharmap-menus.ui.h:17
 msgid "Find _Previous"
 msgstr "Εύρεση Προη_γούμενου"
 
-#: ../gucharmap/gucharmap-menus.ui.h:14
+#: ../gucharmap/gucharmap-menus.ui.h:18
 msgid "_Go"
 msgstr "_Μετάβαση"
 
-#: ../gucharmap/gucharmap-menus.ui.h:15
+#: ../gucharmap/gucharmap-menus.ui.h:19
 msgid "_Next Character"
 msgstr "Ε_πόμενος χαρακτήρας"
 
-#: ../gucharmap/gucharmap-menus.ui.h:16
+#: ../gucharmap/gucharmap-menus.ui.h:20
 msgid "_Previous Character"
 msgstr "Προη_γούμενος χαρακτήρας"
+
+#: ../gucharmap/gucharmap-menus.ui.h:21
+msgid "_Contents"
+msgstr "_Περιεχόμενα"
 
 #: ../gucharmap/gucharmap-mini-fontsel.c:282
 msgid "Font"
@@ -240,7 +259,6 @@ msgid "Font Size"
 msgstr "Μέγεθος Γραμματοσειράς"
 
 #: ../gucharmap/gucharmap-script-chapters-model.c:155
-#: ../gucharmap/main.c:122
 msgid "Script"
 msgstr "Γραφή"
 
@@ -454,8 +472,9 @@ msgid "GNOME Character Map"
 msgstr "Πίνακας Χαρακτήρων GNOME"
 
 #: ../gucharmap/gucharmap-window.c:478
-msgid "Based on the Unicode Character Database 6.1.0"
-msgstr "Βασισμένο στη βάση δεδομένων χαρακτήρων του Unicode 6.1.0"
+#| msgid "Based on the Unicode Character Database 6.1.0"
+msgid "Based on the Unicode Character Database 6.2.0"
+msgstr "Βασισμένο στη βάση δεδομένων χαρακτήρων του Unicode 6.2.0"
 
 #: ../gucharmap/gucharmap-window.c:487
 msgid "translator-credits"
@@ -488,57 +507,20 @@ msgstr "_Κείμενο προς αντιγραφή:"
 msgid "Copy to the clipboard."
 msgstr "Αντιγραφή στο πρόχειρο."
 
-#: ../gucharmap/main.c:134
-#, fuzzy
-msgid "Show only glyphs from this font"
-msgstr "Εμφάνιση μόνο των χαρακτήρων από αυτή την γραμματοσειρά"
-
-#: ../gucharmap/main.c:146
-msgid "Zoom In"
-msgstr "Μεγέθυνση"
-
-#: ../gucharmap/main.c:147
-msgid "Zoom Out"
-msgstr "Σμίκρυνση"
-
-#: ../gucharmap/main.c:148
-msgid "Normal Size"
-msgstr "Κανονικό μέγεθος"
-
-#: ../gucharmap/main.c:159
-msgid "Find…"
-msgstr "Εύρεση..."
-
-#: ../gucharmap/main.c:168
-msgid "_Help"
-msgstr "_Βοήθεια"
-
-#: ../gucharmap/main.c:169
-msgid "_About Character Map"
-msgstr "_Περί Πίνακα Χαρακτήρων GNOME"
-
-#: ../gucharmap/main.c:170
-msgid "_Quit"
-msgstr "Έ_ξοδος"
-
-#: ../gucharmap/main.c:170
-msgid "_Close"
-msgstr "_Κλείσιμο"
-
-#: ../gucharmap/main.c:229
+#: ../gucharmap/main.c:160
 msgid "Page _Setup"
 msgstr "_Ρύθμιση σελίδας"
 
 #. g_menu_append (G_MENU (model), _("Print Preview"), "win.print-preview");
-#: ../gucharmap/main.c:231
+#: ../gucharmap/main.c:162
 msgid "_Print"
 msgstr "Ε_κτύπωση"
 
-#: ../gucharmap/main.c:279
+#: ../gucharmap/main.c:210
 msgid "Font to start with; ex: 'Serif 27'"
 msgstr "Αρχική γραμματοσειρά· πχ. 'Serif 27'"
 
-#: ../gucharmap/main.c:279
+#: ../gucharmap/main.c:210
 msgid "FONT"
 msgstr "ΓΡΑΜΜΑΤΟΣΕΙΡΑ"
 
@@ -1323,7 +1305,7 @@ msgstr "Μερόε ιερογλυφικά"
 #: ../gucharmap/unicode-blocks.h:190
 #: ../gucharmap/unicode-scripts.h:75
 msgid "Meroitic Cursive"
-msgstr ""
+msgstr "Καλλιγραφικά Μερόε"
 
 #: ../gucharmap/unicode-blocks.h:191
 #: ../gucharmap/unicode-scripts.h:62
@@ -1453,7 +1435,6 @@ msgid "Domino Tiles"
 msgstr "Πλακίδια Ντόμινο"
 
 #: ../gucharmap/unicode-blocks.h:219
-#, fuzzy
 msgid "Playing Cards"
 msgstr "Παίζοντας κάρτες"
 
@@ -1559,17 +1540,33 @@ msgstr "Phags Pa"
 msgid "Yi"
 msgstr "Yi"
 
+#~ msgid "View By"
+#~ msgstr "Προβολή κατά"
+
+#, fuzzy
+#~ msgid "Show only glyphs from this font"
+#~ msgstr "Εμφάνιση μόνο των χαρακτήρων από αυτή την γραμματοσειρά"
+
+#~ msgid "Zoom In"
+#~ msgstr "Μεγέθυνση"
+
+#~ msgid "Zoom Out"
+#~ msgstr "Σμίκρυνση"
+
+#~ msgid "Normal Size"
+#~ msgstr "Κανονικό μέγεθος"
+
+#~ msgid "Find…"
+#~ msgstr "Εύρεση..."
+
+#~ msgid "_About Character Map"
+#~ msgstr "_Περί Πίνακα Χαρακτήρων GNOME"
+
+#~ msgid "_Quit"
+#~ msgstr "Έ_ξοδος"
+
 #~ msgid "GConf could not be initialized."
 #~ msgstr "Αδυναμία αρχικοποίησης GConf."
 
 #~ msgid "Searching…"
 #~ msgstr "Αναζήτηση..."
-
-#~ msgid "_File"
-#~ msgstr "_Αρχείο"
-
-#~ msgid "_Contents"
-#~ msgstr "_Περιεχόμενα"
-
-#~ msgid "_About"
-#~ msgstr "Πε_ρί"
