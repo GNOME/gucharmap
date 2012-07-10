@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-26 07:33+0300\n"
-"PO-Revision-Date: 2012-05-26 07:35+0200\n"
+"POT-Creation-Date: 2012-07-10 23:56+0300\n"
+"PO-Revision-Date: 2012-07-10 23:56+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "Language: he\n"
@@ -20,7 +20,7 @@ msgstr ""
 
 #: ../gucharmap.desktop.in.in.h:1
 #: ../gucharmap/gucharmap-window.c:824
-#: ../gucharmap/main.c:305
+#: ../gucharmap/main.c:236
 msgid "Character Map"
 msgstr "מפת תווים"
 
@@ -33,7 +33,6 @@ msgid "All"
 msgstr "הכול"
 
 #: ../gucharmap/gucharmap-block-chapters-model.c:187
-#: ../gucharmap/main.c:123
 msgid "Unicode Block"
 msgstr "מקטע יוניקוד"
 
@@ -161,68 +160,88 @@ msgid "Character found."
 msgstr "התו נמצא."
 
 #: ../gucharmap/gucharmap-menus.ui.h:1
-msgid "View By"
-msgstr "הצגה לפי"
-
-#: ../gucharmap/gucharmap-menus.ui.h:2
-msgid "_View"
-msgstr "_תצוגה"
-
-#: ../gucharmap/gucharmap-menus.ui.h:3
 msgid "By _Script"
 msgstr "לפי _כתב"
 
-#: ../gucharmap/gucharmap-menus.ui.h:4
+#: ../gucharmap/gucharmap-menus.ui.h:2
 msgid "By _Unicode Block"
 msgstr "לפי מ_קטע יוניקוד"
 
-#: ../gucharmap/gucharmap-menus.ui.h:5
+#: ../gucharmap/gucharmap-menus.ui.h:3
 msgid "Sho_w only glyphs from this font"
 msgstr "הצגת _גליפים מגופן זה בלבד"
 
-#: ../gucharmap/gucharmap-menus.ui.h:6
-msgid "Snap _Columns to Power of Two"
-msgstr "הפרדה לעמודות ב_חזקות של שתיים"
-
-#: ../gucharmap/gucharmap-menus.ui.h:7
+#: ../gucharmap/gucharmap-menus.ui.h:4
 msgid "Zoom _In"
 msgstr "_התקרב"
 
-#: ../gucharmap/gucharmap-menus.ui.h:8
+#: ../gucharmap/gucharmap-menus.ui.h:5
 msgid "Zoom _Out"
 msgstr "_התרחק"
 
-#: ../gucharmap/gucharmap-menus.ui.h:9
+#: ../gucharmap/gucharmap-menus.ui.h:6
 msgid "_Normal Size"
 msgstr "_גודל רגיל"
 
-#: ../gucharmap/gucharmap-menus.ui.h:10
-msgid "_Search"
-msgstr "_חיפוש"
-
-#: ../gucharmap/gucharmap-menus.ui.h:11
+#: ../gucharmap/gucharmap-menus.ui.h:7
 msgid "_Find"
 msgstr "_חיפוש"
 
+#: ../gucharmap/gucharmap-menus.ui.h:8
+msgid "_Help"
+msgstr "ע_זרה"
+
+#: ../gucharmap/gucharmap-menus.ui.h:9
+msgid "_About"
+msgstr "על _אודות"
+
+#: ../gucharmap/gucharmap-menus.ui.h:10
+msgid "_Close Window"
+msgstr "_סגירת החלון"
+
+#: ../gucharmap/gucharmap-menus.ui.h:11
+msgid "_File"
+msgstr "_קובץ"
+
 #: ../gucharmap/gucharmap-menus.ui.h:12
+msgid "_Close"
+msgstr "_סגירה"
+
+#: ../gucharmap/gucharmap-menus.ui.h:13
+msgid "_View"
+msgstr "_תצוגה"
+
+#: ../gucharmap/gucharmap-menus.ui.h:14
+msgid "Snap _Columns to Power of Two"
+msgstr "הפרדה לעמודות ב_חזקות של שתיים"
+
+#: ../gucharmap/gucharmap-menus.ui.h:15
+msgid "_Search"
+msgstr "_חיפוש"
+
+#: ../gucharmap/gucharmap-menus.ui.h:16
 msgid "Find _Next"
 msgstr "חיפוש ה_בא"
 
-#: ../gucharmap/gucharmap-menus.ui.h:13
+#: ../gucharmap/gucharmap-menus.ui.h:17
 msgid "Find _Previous"
 msgstr "חיפוש _קודם"
 
-#: ../gucharmap/gucharmap-menus.ui.h:14
+#: ../gucharmap/gucharmap-menus.ui.h:18
 msgid "_Go"
 msgstr "_מעבר"
 
-#: ../gucharmap/gucharmap-menus.ui.h:15
+#: ../gucharmap/gucharmap-menus.ui.h:19
 msgid "_Next Character"
 msgstr "התו ה_בא"
 
-#: ../gucharmap/gucharmap-menus.ui.h:16
+#: ../gucharmap/gucharmap-menus.ui.h:20
 msgid "_Previous Character"
 msgstr "התו ה_קודם"
+
+#: ../gucharmap/gucharmap-menus.ui.h:21
+msgid "_Contents"
+msgstr "_תוכן עניינים"
 
 #: ../gucharmap/gucharmap-mini-fontsel.c:282
 msgid "Font"
@@ -237,7 +256,6 @@ msgid "Font Size"
 msgstr "גודל גופן"
 
 #: ../gucharmap/gucharmap-script-chapters-model.c:155
-#: ../gucharmap/main.c:122
 msgid "Script"
 msgstr "כתב"
 
@@ -451,8 +469,8 @@ msgid "GNOME Character Map"
 msgstr "מפת התווים של GNOME"
 
 #: ../gucharmap/gucharmap-window.c:478
-msgid "Based on the Unicode Character Database 6.1.0"
-msgstr "מבוססת על מאגר תווי ה־Unicode גרסה 6.1.0"
+msgid "Based on the Unicode Character Database 6.2.0"
+msgstr "מבוססת על מאגר תווי ה־Unicode גרסה 6.2.0"
 
 #: ../gucharmap/gucharmap-window.c:487
 msgid "translator-credits"
@@ -488,56 +506,20 @@ msgstr "_טקסט להעתקה:"
 msgid "Copy to the clipboard."
 msgstr "העתקה ללוח הגזירים."
 
-#: ../gucharmap/main.c:134
-msgid "Show only glyphs from this font"
-msgstr "הצגת גליפים מגופן זה בלבד"
-
-#: ../gucharmap/main.c:146
-msgid "Zoom In"
-msgstr "התקרבות"
-
-#: ../gucharmap/main.c:147
-msgid "Zoom Out"
-msgstr "התרחקות"
-
-#: ../gucharmap/main.c:148
-msgid "Normal Size"
-msgstr "גודל רגיל"
-
-#: ../gucharmap/main.c:159
-msgid "Find…"
-msgstr "חיפוש…"
-
-#: ../gucharmap/main.c:168
-msgid "_Help"
-msgstr "ע_זרה"
-
-#: ../gucharmap/main.c:169
-msgid "_About Character Map"
-msgstr "על _אודות מפת התווים"
-
-#: ../gucharmap/main.c:170
-msgid "_Quit"
-msgstr "_יציאה"
-
-#: ../gucharmap/main.c:170
-msgid "_Close"
-msgstr "_סגירה"
-
-#: ../gucharmap/main.c:229
+#: ../gucharmap/main.c:160
 msgid "Page _Setup"
 msgstr "הגדרות _עמוד"
 
 #. g_menu_append (G_MENU (model), _("Print Preview"), "win.print-preview");
-#: ../gucharmap/main.c:231
+#: ../gucharmap/main.c:162
 msgid "_Print"
 msgstr "ה_דפסה"
 
-#: ../gucharmap/main.c:279
+#: ../gucharmap/main.c:210
 msgid "Font to start with; ex: 'Serif 27'"
 msgstr "Font to start with; ex: 'Serif 27'"
 
-#: ../gucharmap/main.c:279
+#: ../gucharmap/main.c:210
 msgid "FONT"
 msgstr "FONT"
 
@@ -1555,14 +1537,29 @@ msgstr "פאגס פה"
 msgid "Yi"
 msgstr "יי"
 
-#~ msgid "_File"
-#~ msgstr "_קובץ"
+#~ msgid "View By"
+#~ msgstr "הצגה לפי"
 
-#~ msgid "_Contents"
-#~ msgstr "_תוכן עניינים"
+#~ msgid "Show only glyphs from this font"
+#~ msgstr "הצגת גליפים מגופן זה בלבד"
 
-#~ msgid "_About"
-#~ msgstr "על _אודות"
+#~ msgid "Zoom In"
+#~ msgstr "התקרבות"
+
+#~ msgid "Zoom Out"
+#~ msgstr "התרחקות"
+
+#~ msgid "Normal Size"
+#~ msgstr "גודל רגיל"
+
+#~ msgid "Find…"
+#~ msgstr "חיפוש…"
+
+#~ msgid "_About Character Map"
+#~ msgstr "על _אודות מפת התווים"
+
+#~ msgid "_Quit"
+#~ msgstr "_יציאה"
 
 #~ msgid "GConf could not be initialized."
 #~ msgstr "לא ניתן להפעיל את GConf."
