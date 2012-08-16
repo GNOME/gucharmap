@@ -1,10 +1,11 @@
-include $(top_srcdir)/gnome-doc-utils.make
-dist-hook: doc-dist-hook
+@YELP_HELP_RULES@
 
-DOC_MODULE = gucharmap
-DOC_ENTITIES = legal.xml
-DOC_INCLUDES = 
+HELP_ID = gucharmap
 
-DOC_LINGUAS = bg ca cs de el en_GB es fi fr gl ko oc pt_BR ru sl sv vi zh_CN
+HELP_FILES = \
+	index.docbook \
+	legal.xml
+
+HELP_LINGUAS = bg ca cs de el en_GB es fi fr gl ko oc pt_BR ru sl sv vi zh_CN
 
 -include $(top_srcdir)/git.mk

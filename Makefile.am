@@ -27,7 +27,6 @@ EXTRA_DIST = \
 	ChangeLog.README \
 	autogen.sh \
 	gtkrc.win32 \
-	gnome-doc-utils.make \
 	COPYING.UNICODE \
 	$(NULL)
 
@@ -57,10 +56,7 @@ MAINTAINERCLEANFILES = \
 	$(srcdir)/ltmain.sh \
 	$(srcdir)/missing \
 	$(srcdir)/mkinstalldirs \
-	$(srcdir)/omf.make \
-	$(srcdir)/xmldocs.make \
 	$(srcdir)/gtk-doc.make \
-	$(srcdir)/gnome-doc-utils.make \
 	`find "$(srcdir)" -type f -name Makefile.in -print`
 
 ChangeLog:
