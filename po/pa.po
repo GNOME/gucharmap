@@ -11,19 +11,19 @@ msgstr ""
 "Project-Id-Version: gucharmap.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gucharmap&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-02-06 15:59+0000\n"
-"PO-Revision-Date: 2012-03-15 07:16+0530\n"
+"POT-Creation-Date: 2012-06-25 12:04+0000\n"
+"PO-Revision-Date: 2012-08-17 06:54+0530\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi/Panjabi <punjabi-users@lists.sf.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.2\n"
+"X-Generator: Lokalize 1.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Language: pa\n"
 
-#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:839
-#: ../gucharmap/main.c:80
+#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:824
+#: ../gucharmap/main.c:236
 msgid "Character Map"
 msgstr "ਅੱਖਰ ਖਾਕਾ"
 
@@ -160,6 +160,91 @@ msgstr "ਲੱਭਿਆ ਨਹੀਂ।"
 #: ../gucharmap/gucharmap-chartable.c:1299
 msgid "Character found."
 msgstr "ਅੱਖਰ ਲੱਭਿਆ ਹੈ।"
+
+#: ../gucharmap/gucharmap-menus.ui.h:1
+msgid "By _Script"
+msgstr "ਸਕ੍ਰਿਪਟ ਅਨੁਸਾਰ(_S)"
+
+#: ../gucharmap/gucharmap-menus.ui.h:2
+msgid "By _Unicode Block"
+msgstr "ਯੂਨੀਕੋਡ ਬਲਾਕ ਮੁਤਾਬਕ(_U)"
+
+#: ../gucharmap/gucharmap-menus.ui.h:3
+msgid "Sho_w only glyphs from this font"
+msgstr "ਕੇਵਲ ਇਹ ਫੋਂਟ ਤੋਂ ਹੀ ਗਲਿਫ ਵੇਖੋ(_w)"
+
+#: ../gucharmap/gucharmap-menus.ui.h:4
+msgid "Zoom _In"
+msgstr "ਜ਼ੂਮ ਇਨ(_I)"
+
+#: ../gucharmap/gucharmap-menus.ui.h:5
+msgid "Zoom _Out"
+msgstr "ਜ਼ੂਮ ਆਊਟ(_O)"
+
+#: ../gucharmap/gucharmap-menus.ui.h:6
+msgid "_Normal Size"
+msgstr "ਸਧਾਰਨ ਅਕਾਰ(_N)"
+
+#: ../gucharmap/gucharmap-menus.ui.h:7
+#| msgid "Find"
+msgid "_Find"
+msgstr "ਖੋਜ(_F)"
+
+#: ../gucharmap/gucharmap-menus.ui.h:8
+msgid "_Help"
+msgstr "ਮੱਦਦ(_H)"
+
+#: ../gucharmap/gucharmap-menus.ui.h:9
+msgid "_About"
+msgstr "ਇਸ ਬਾਰੇ(_A)"
+
+#: ../gucharmap/gucharmap-menus.ui.h:10
+msgid "_Close Window"
+msgstr "ਵਿੰਡੋ ਬੰਦ ਕਰੋ(_C)"
+
+#: ../gucharmap/gucharmap-menus.ui.h:11
+msgid "_File"
+msgstr "ਫਾਇਲ(_F)"
+
+#: ../gucharmap/gucharmap-menus.ui.h:12
+msgid "_Close"
+msgstr "ਬੰਦ ਕਰੋ(_C)"
+
+#: ../gucharmap/gucharmap-menus.ui.h:13
+msgid "_View"
+msgstr "ਵੇਖੋ(_V)"
+
+#: ../gucharmap/gucharmap-menus.ui.h:14
+msgid "Snap _Columns to Power of Two"
+msgstr "ਕਾਲਮ ਨੂੰ ਦੋ ਦੀ ਘਾਤ ਬਰਾਬਰ ਫੈਲਾਓ(_C)"
+
+#: ../gucharmap/gucharmap-menus.ui.h:15
+msgid "_Search"
+msgstr "ਖੋਜ(_S)"
+
+#: ../gucharmap/gucharmap-menus.ui.h:16
+msgid "Find _Next"
+msgstr "ਅੱਗੇ ਖੋਜ(_N)"
+
+#: ../gucharmap/gucharmap-menus.ui.h:17
+msgid "Find _Previous"
+msgstr "ਪਿੱਛੇ ਖੋਜੋ(_P)"
+
+#: ../gucharmap/gucharmap-menus.ui.h:18
+msgid "_Go"
+msgstr "ਜਾਓ(_G)"
+
+#: ../gucharmap/gucharmap-menus.ui.h:19
+msgid "_Next Character"
+msgstr "ਅੱਗੇ ਅੱਖਰ(_N)"
+
+#: ../gucharmap/gucharmap-menus.ui.h:20
+msgid "_Previous Character"
+msgstr "ਪਿੱਛੇ ਅੱਖਰ(_P)"
+
+#: ../gucharmap/gucharmap-menus.ui.h:21
+msgid "_Contents"
+msgstr "ਸਮੱਗਰੀ(_C)"
 
 #: ../gucharmap/gucharmap-mini-fontsel.c:282
 msgid "Font"
@@ -361,7 +446,7 @@ msgstr "ਵੱਖਰੇਵਾਂ, ਪ੍ਹੈਰਾ"
 msgid "Separator, Space"
 msgstr "ਵੱਖਰੇਵਾਂ, ਫਾਸਲਾ"
 
-#: ../gucharmap/gucharmap-window.c:399
+#: ../gucharmap/gucharmap-window.c:451
 msgid ""
 "Gucharmap is free software; you can redistribute it and/or modify it under "
 "the terms of the GNU General Public License as published by the Free "
@@ -374,7 +459,7 @@ msgstr ""
 "ਮੁਤਾਬਕ) ਮੁੜ-ਵੰਡਿਆ "
 "ਜਾਂ ਸੋਧਿਆ ਜਾ ਸਕਦਾ ਹੈ।"
 
-#: ../gucharmap/gucharmap-window.c:403
+#: ../gucharmap/gucharmap-window.c:455
 msgid ""
 "Permission is hereby granted, free of charge, to any person obtaining a copy "
 "of the Unicode data files to deal in them without restriction, including "
@@ -387,7 +472,7 @@ msgstr ""
 "ਪਰਕਾਸ਼ਿਤ "
 "ਕਰਨ, ਨਕਲਾਂ ਵੰਡਣ ਜਾਂ ਵੇਚਣ ਦਾ ਅਧਿਕਾਰ ਵੀ ਹੈ।"
 
-#: ../gucharmap/gucharmap-window.c:407
+#: ../gucharmap/gucharmap-window.c:459
 msgid ""
 "Gucharmap and the Unicode data files are distributed in the hope that they "
 "will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty "
@@ -400,7 +485,7 @@ msgstr ""
 "ਨਹੀਂ ਹੈ। ਹੋਰ "
 "ਵੇਰਵੇ ਲਈ ਗੂਨ ਜਰਨਲ ਪਬਲਿਕ ਲਾਈਸੈਂਸ ਵੇਖੋ।"
 
-#: ../gucharmap/gucharmap-window.c:411
+#: ../gucharmap/gucharmap-window.c:463
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "Gucharmap; if not, write to the Free Software Foundation, Inc., 59 Temple "
@@ -411,7 +496,7 @@ msgstr ""
 "ਸਾਫਟਵੇਅਰ ਫਾਊਨਡੇਸ਼ਨ, ੫੯ ਟੈਂਪਲ ਪੈਲਸ, ਸੂਟੀ ੩੩੦, ਬੋਸਟਨ, ਐਮ ਏ ੦੨੧੧੦-੧੩੦੭ ਅਮਰੀਕਾ "
 "ਤੋਂ ਲਵੋ।"
 
-#: ../gucharmap/gucharmap-window.c:414
+#: ../gucharmap/gucharmap-window.c:466
 msgid ""
 "Also you should have received a copy of the Unicode Copyright along with "
 "Gucharmap; you can always find it at Unicode's website: http://www.unicode."
@@ -421,16 +506,16 @@ msgstr ""
 "ਸਕਦੇ ਹੋ, "
 "ਤੁਸੀਂ ਯੂਨੀਕੋਡ ਸਾਈਟ ਉੱਤੇ ਵੀ ਲੱਭ ਸਕਦੇ ਹੋ: http://www.unicode.org/copyright.html"
 
-#: ../gucharmap/gucharmap-window.c:424 ../gucharmap/main.c:36
+#: ../gucharmap/gucharmap-window.c:476 ../gucharmap/main.c:39
 msgid "GNOME Character Map"
 msgstr "ਗਨੋਮ ਅੱਖਰ ਮੈਪ"
 
-#: ../gucharmap/gucharmap-window.c:426
-#| msgid "Based on the Unicode Character Database 6.0.0"
-msgid "Based on the Unicode Character Database 6.1.0"
-msgstr "ਯੂਨੀਕੋਡ ਕਰੈਕਟਰ ਡਾਟਾਬੇਸ ੬.੧.੦ ਉੱਤੇ ਅਧਾਰਿਤ"
+#: ../gucharmap/gucharmap-window.c:478
+#| msgid "Based on the Unicode Character Database 6.1.0"
+msgid "Based on the Unicode Character Database 6.2.0"
+msgstr "ਯੂਨੀਕੋਡ ਕਰੈਕਟਰ ਡਾਟਾਬੇਸ ੬.੨.੦ ਉੱਤੇ ਅਧਾਰਿਤ"
 
-#: ../gucharmap/gucharmap-window.c:435
+#: ../gucharmap/gucharmap-window.c:487
 msgid "translator-credits"
 msgstr ""
 "ਜਸਵਿੰਦਰ ਸਿੰਘ ਫੂਲੇਵਾਲਾ ੨੦੦੪\n"
@@ -438,100 +523,45 @@ msgstr ""
 "ਪੰਜਾਬੀ ਓਪਨ ਸੋਰਸ ਟੀਮ (POST)\n"
 "http://www.satluj.com"
 
-#: ../gucharmap/gucharmap-window.c:508 ../gucharmap/gucharmap-window.c:802
+#: ../gucharmap/gucharmap-window.c:576
 msgid "Next Script"
 msgstr "ਸਕ੍ਰਿਪਟ ਅੱਗੇ"
 
-#: ../gucharmap/gucharmap-window.c:508 ../gucharmap/gucharmap-window.c:804
+#: ../gucharmap/gucharmap-window.c:576
 msgid "Previous Script"
 msgstr "ਸਕ੍ਰਿਪਟ ਪਿੱਛੇ"
 
-#: ../gucharmap/gucharmap-window.c:513
+#: ../gucharmap/gucharmap-window.c:581
 msgid "Next Block"
 msgstr "ਬਲਾਕ ਅੱਗੇ"
 
-#: ../gucharmap/gucharmap-window.c:513
+#: ../gucharmap/gucharmap-window.c:581
 msgid "Previous Block"
 msgstr "ਬਲਾਕ ਪਿੱਛੇ"
 
-#: ../gucharmap/gucharmap-window.c:765
-msgid "_File"
-msgstr "ਫਾਇਲ(_F)"
-
-#: ../gucharmap/gucharmap-window.c:766
-msgid "_View"
-msgstr "ਵੇਖੋ(_V)"
-
-#: ../gucharmap/gucharmap-window.c:767
-msgid "_Search"
-msgstr "ਖੋਜ(_S)"
-
-#: ../gucharmap/gucharmap-window.c:768
-msgid "_Go"
-msgstr "ਜਾਓ(_G)"
-
-#: ../gucharmap/gucharmap-window.c:769
-msgid "_Help"
-msgstr "ਮੱਦਦ(_H)"
-
-#: ../gucharmap/gucharmap-window.c:772
-msgid "Page _Setup"
-msgstr "ਪੇਜ ਸੈੱਟਅੱਪ(_S)"
-
-#: ../gucharmap/gucharmap-window.c:793
-msgid "Find _Next"
-msgstr "ਅੱਗੇ ਖੋਜ(_N)"
-
-#: ../gucharmap/gucharmap-window.c:795
-msgid "Find _Previous"
-msgstr "ਪਿੱਛੇ ਖੋਜੋ(_P)"
-
-#: ../gucharmap/gucharmap-window.c:798
-msgid "_Next Character"
-msgstr "ਅੱਗੇ ਅੱਖਰ(_N)"
-
-#: ../gucharmap/gucharmap-window.c:800
-msgid "_Previous Character"
-msgstr "ਪਿੱਛੇ ਅੱਖਰ(_P)"
-
-#: ../gucharmap/gucharmap-window.c:807
-msgid "_Contents"
-msgstr "ਸਮੱਗਰੀ(_C)"
-
-#: ../gucharmap/gucharmap-window.c:809
-msgid "_About"
-msgstr "ਇਸ ਬਾਰੇ(_A)"
-
-#: ../gucharmap/gucharmap-window.c:819
-msgid "By _Script"
-msgstr "ਸਕ੍ਰਿਪਟ ਅਨੁਸਾਰ(_S)"
-
-#: ../gucharmap/gucharmap-window.c:821
-msgid "By _Unicode Block"
-msgstr "ਯੂਨੀਕੋਡ ਬਲਾਕ ਮੁਤਾਬਕ(_U)"
-
-#: ../gucharmap/gucharmap-window.c:826
-msgid "Sho_w only glyphs from this font"
-msgstr "ਕੇਵਲ ਇਹ ਫੋਂਟ ਤੋਂ ਹੀ ਗਲਿਫ ਵੇਖੋ(_w)"
-
-#: ../gucharmap/gucharmap-window.c:829
-msgid "Snap _Columns to Power of Two"
-msgstr "ਕਾਲਮ ਨੂੰ ਦੋ ਦੀ ਘਾਤ ਬਰਾਬਰ ਫੈਲਾਓ(_C)"
-
 #. Text to copy entry + button
-#: ../gucharmap/gucharmap-window.c:893
+#: ../gucharmap/gucharmap-window.c:855
 msgid "_Text to copy:"
 msgstr "ਕਾਪੀ ਲਈ ਟੈਕਸਟ(_T):"
 
-#: ../gucharmap/gucharmap-window.c:900
+#: ../gucharmap/gucharmap-window.c:862
 msgid "Copy to the clipboard."
 msgstr "ਕਲਿੱਪਬਰੋਡ ਵਿੱਚ ਕਾਪੀ ਕਰੋ"
 
-#: ../gucharmap/main.c:54
+#: ../gucharmap/main.c:160
+msgid "Page _Setup"
+msgstr "ਪੇਜ ਸੈੱਟਅੱਪ(_S)"
+
+#. g_menu_append (G_MENU (model), _("Print Preview"), "win.print-preview");
+#: ../gucharmap/main.c:162
+msgid "_Print"
+msgstr "ਪਰਿੰਟ ਕਰੋ(_P)"
+
+#: ../gucharmap/main.c:210
 msgid "Font to start with; ex: 'Serif 27'"
 msgstr "ਸ਼ੁਰੂ ਕਰਨ ਲਈ ਫੋਂਟ; ਜਿਵੇਂ: 'Serif 27\""
 
-#: ../gucharmap/main.c:54
+#: ../gucharmap/main.c:210
 msgid "FONT"
 msgstr "ਫੋਂਟ"
 
@@ -612,7 +642,6 @@ msgid "Mandaic"
 msgstr "ਮੈਂਡਾਇਕ"
 
 #: ../gucharmap/unicode-blocks.h:33
-#| msgid "Latin Extended-A"
 msgid "Arabic Extended-A"
 msgstr "ਅਰਬੀ ਐਕਸਟੈਡਿਡ-A"
 
@@ -777,7 +806,6 @@ msgid "Ol Chiki"
 msgstr "ਓਲ ਚਿਕਿ"
 
 #: ../gucharmap/unicode-blocks.h:74
-#| msgid "Kana Supplement"
 msgid "Sundanese Supplement"
 msgstr "ਸੁਡਾਨੀ ਸਪਲੀਮੈਂਟ"
 
@@ -1082,7 +1110,6 @@ msgid "Tai Viet"
 msgstr "ਤਾਈ ਵਿਤ"
 
 #: ../gucharmap/unicode-blocks.h:150
-#| msgid "Meetei Mayek"
 msgid "Meetei Mayek Extensions"
 msgstr "ਮੀਤਿਈ ਮਾਯੇਕ ਇਕਸਟੈਂਸ਼ਨ"
 
@@ -1239,7 +1266,6 @@ msgid "Lydian"
 msgstr "ਲਯਡਿਆਨ"
 
 #: ../gucharmap/unicode-blocks.h:189 ../gucharmap/unicode-scripts.h:76
-#| msgid "Egyptian Hieroglyphs"
 msgid "Meroitic Hieroglyphs"
 msgstr "ਮਿਰੋਇਟਿਕ ਹਿਈਰੋਗਲਿਫ"
 
@@ -1288,17 +1314,14 @@ msgid "Sora Sompeng"
 msgstr "ਸੋਰਾ ਸੋਮਪੀਂਗ"
 
 #: ../gucharmap/unicode-blocks.h:201 ../gucharmap/unicode-scripts.h:30
-#| msgid "Cham"
 msgid "Chakma"
 msgstr "ਚਾਕਮਾ"
 
 #: ../gucharmap/unicode-blocks.h:202 ../gucharmap/unicode-scripts.h:96
-#| msgid "Thaana"
 msgid "Sharada"
 msgstr "ਸ਼ਾਰਦਾ"
 
 #: ../gucharmap/unicode-blocks.h:203 ../gucharmap/unicode-scripts.h:108
-#| msgid "Thai"
 msgid "Takri"
 msgstr "ਤਕਰੀ"
 
@@ -1351,7 +1374,6 @@ msgid "Mathematical Alphanumeric Symbols"
 msgstr "ਗਣਿਤ ਅੰਕੀ ਨਿਸ਼ਾਨ"
 
 #: ../gucharmap/unicode-blocks.h:216
-#| msgid "Mathematical Alphanumeric Symbols"
 msgid "Arabic Mathematical Alphabetic Symbols"
 msgstr "ਅਰਬੀ ਗਣਿਤ ਅੰਕੀ ਨਿਸ਼ਾਨ"
 
@@ -1478,15 +1500,6 @@ msgstr "ਯੀ"
 
 #~ msgid "_Quit"
 #~ msgstr "ਬਾਹਰ(_Q)"
-
-#~ msgid "Zoom _In"
-#~ msgstr "ਜ਼ੂਮ ਇਨ(_I)"
-
-#~ msgid "Zoom _Out"
-#~ msgstr "ਜ਼ੂਮ ਆਊਟ(_O)"
-
-#~ msgid "_Normal Size"
-#~ msgstr "ਸਧਾਰਨ ਅਕਾਰ(_N)"
 
 #~ msgid "_Find..."
 #~ msgstr "ਖੋਜ(_F)..."
