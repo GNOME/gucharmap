@@ -391,38 +391,9 @@ help_contents (GSimpleAction *action,
                gpointer       data)
 {
   GucharmapWindow *window = data;
-  const char *lang;
-  char *uri = NULL, *url;
-  guint i;
- 
-  const char * const * langs = g_get_language_names ();
-  for (i = 0; langs[i]; i++) {
-    lang = langs[i];
-    if (strchr (lang, '.')) {
-      continue;
-    }
- 
-    uri = g_build_filename (HELPDIR,
-                            "gucharmap", /* DOC_MODULE */
-                            lang,
-                            "gucharmap.xml",
-                            NULL);
-					
-    if (g_file_test (uri, G_FILE_TEST_EXISTS)) {
-      break;
-    }
-
-    g_free (uri);
-    uri = NULL;
-  }
-
-  if (!uri)
-    return;
-
-  url = g_strconcat ("help:", uri, NULL);
-  open_url (GTK_WINDOW (window), url, gtk_get_current_event_time ());
-  g_free (uri);
-  g_free (url);
+  open_url (GTK_WINDOW (window),
+            "help:gucharmap", /* DOC_MODULE */
+            gtk_get_current_event_time ());
 }
 
 static void
