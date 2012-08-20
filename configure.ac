@@ -255,11 +255,6 @@ AC_SUBST([GUCHARMAP_VAPI_VERSION_U],[AS_TR_SH([$GUCHARMAP_VAPI_VERSION])])
 # API & User Docs
 # ***************
 
-GNOME_DOC_INIT([0.9.0],[have_gdu=yes],[have_gdu=no])
-if test "$have_gdu" = "no"; then
-	AC_MSG_WARN([GNOME doc utils not found; disabling user manual])
-fi
-
 GTK_DOC_CHECK([1.0])
 
 # *****************************************************************************
