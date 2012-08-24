@@ -405,8 +405,8 @@ gucharmap_script_codepoint_list_append_script (GucharmapScriptCodepointList  *li
 /**
  * gucharmap_unicode_list_scripts:
  *
- * Return value: %NULL-terminated array of script names. These have been
- * marked for translation with N_().
+ * Returns an array of untranslated script names.
+ *
  * The strings in the array are owned by gucharmap and should not be
  * modified or free; the array itself however is allocated and should
  * be freed with g_free().

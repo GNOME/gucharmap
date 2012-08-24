@@ -526,7 +526,7 @@ gucharmap_unichar_validate (gunichar ch)
 }
 
 /**
- * gucharmap_unichar_to_printable_utf8
+ * gucharmap_unichar_to_printable_utf8:
  * @uc: a unicode character 
  * @outbuf: output buffer, must have at least 10 bytes of space.
  *          If %NULL, the length will be computed and returned
