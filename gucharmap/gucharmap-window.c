@@ -663,17 +663,10 @@ status_realize (GtkWidget       *status,
 static gboolean
 save_last_char_idle_cb (GucharmapWindow *guw)
 {
-  gchar outbuf[10];
-  gunichar wc;
-  gint len;
-
   guw->save_last_char_idle_id = 0;
 
-  wc = gucharmap_charmap_get_active_character (guw->charmap);
-  len = g_unichar_to_utf8 (wc, outbuf);
-  outbuf[len] = '\0';
-
-  g_settings_set_string (guw->settings, "last-char", outbuf);
+  g_settings_set_uint (guw->settings, "last-char", 
+                       gucharmap_charmap_get_active_character (guw->charmap));
 
   return FALSE;
 }
@@ -727,21 +720,6 @@ charmap_sync_active_character (GtkWidget *widget,
     return;
 
   guw->save_last_char_idle_id = g_idle_add ((GSourceFunc) save_last_char_idle_cb, guw);
-}
-
-static gboolean
-string_to_unichar_mapping (GVariant *value,
-                           gpointer *result,
-                           gpointer  user_data)
-{
-  const gchar *str;
-
-  str = g_variant_get_string (value, NULL);
-  if (g_utf8_strlen (str, -1) != 1)
-    return FALSE;
-
-  *result = GINT_TO_POINTER (g_utf8_get_char (str));
-  return TRUE;
 }
 
 static void
@@ -878,7 +856,7 @@ gucharmap_window_init (GucharmapWindow *guw)
   gucharmap_window_set_chapters_model (guw, g_settings_get_enum (guw->settings, "group-by"));
 
   /* active character */
-  active = (gsize) g_settings_get_mapped (guw->settings, "last-char", string_to_unichar_mapping, NULL);
+  active = g_settings_get_uint (guw->settings, "last-char");
   gucharmap_charmap_set_active_character (guw->charmap, active);
 
   /* window geometry */

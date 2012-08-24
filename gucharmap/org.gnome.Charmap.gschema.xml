@@ -52,17 +52,19 @@
       <default>false</default>
     </key>
 
-    <key name='last-char' type='s'>
+    <key name='last-char' type='u'>
+      <range min="0" max="0x10ffff" />
       <summary>Last selected character</summary>
       <description>
         This is the last character that was selected in the character
         map (and will be selected again when the character map is next
-        started).  If set, it should be a string with a single character.
+        started).
 
         By default, it is the first letter of the alphabet in the current
         locale.
       </description>
-      <default l10n='messages' context='First letter of alphabet'>'A'</default>
+      <!-- The unicode code point of the first letter of the alphabet -->
+      <default l10n='messages' context='First letter'>0x41</default>
     </key>
   </schema>
 
