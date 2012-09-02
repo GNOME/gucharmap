@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap.HEAD.ta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-28 14:09+0530\n"
-"PO-Revision-Date: 2012-02-28 14:21+0530\n"
+"POT-Creation-Date: 2012-09-02 15:37+0530\n"
+"PO-Revision-Date: 2012-09-02 15:45+0530\n"
 "Last-Translator: Dr.T.Vasudevan <agnihot3@gmail.com>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
 "Language: \n"
@@ -25,8 +25,8 @@ msgstr ""
 "\n"
 "\n"
 
-#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:839
-#: ../gucharmap/main.c:80
+#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:773
+#: ../gucharmap/main.c:236
 msgid "Character Map"
 msgstr "எழுத்து வரைபடம்"
 
@@ -364,7 +364,7 @@ msgstr "பிரிப்பான், பத்தி"
 msgid "Separator, Space"
 msgstr "பிரிப்பான், இடைவெளி"
 
-#: ../gucharmap/gucharmap-window.c:399
+#: ../gucharmap/gucharmap-window.c:422
 msgid ""
 "Gucharmap is free software; you can redistribute it and/or modify it under "
 "the terms of the GNU General Public License as published by the Free "
@@ -375,7 +375,7 @@ msgstr ""
 "பொது அனுமதிக்கான விதிகளின் இந்த 3ஆம் பதிப்புப் படியோ அல்லது (உங்கள் விருப்பப்படி) அடுத்த "
 "பதிப்புகள் படியோ  நீங்கள் (விருப்பப்படி) மாற்றலாம். அல்லது மீண்டும் பறிமாறலாம்."
 
-#: ../gucharmap/gucharmap-window.c:403
+#: ../gucharmap/gucharmap-window.c:426
 msgid ""
 "Permission is hereby granted, free of charge, to any person obtaining a copy "
 "of the Unicode data files to deal in them without restriction, including "
@@ -386,7 +386,7 @@ msgstr ""
 "பெறவும், அதை வரைமுறையின்றி கையாளவும், அதாவது, வரைமுறை இடாமல் பிரதி எடுக்க, மாற்ற, "
 "ஒருங்கிணைக்க, வெளியிட, விநியோகிக்க, மற்றும்/ அல்லது விற்க செல்லுபடியாகும்."
 
-#: ../gucharmap/gucharmap-window.c:407
+#: ../gucharmap/gucharmap-window.c:430
 msgid ""
 "Gucharmap and the Unicode data files are distributed in the hope that they "
 "will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty "
@@ -397,7 +397,7 @@ msgstr ""
 "குறிப்பிட்ட  செயலுக்கான தகுதி உள்பட எந்த உத்திரவாதமும் அளிக்கப்படவில்லை. மேற் கொண்டு "
 "விவரங்களுக்கு ஜிஎன்யு பொது அனுமதிக்கான விதிகளை பார்க்கவும்."
 
-#: ../gucharmap/gucharmap-window.c:411
+#: ../gucharmap/gucharmap-window.c:434
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "Gucharmap; if not, write to the Free Software Foundation, Inc., 59 Temple "
@@ -407,7 +407,7 @@ msgstr ""
 "கிடைத்திருக்கவேண்டும். இல்லையானால்  கீழ் கண்ட முகவரிக்கு கடிதம் எழுதவும். Free Software "
 "Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA"
 
-#: ../gucharmap/gucharmap-window.c:414
+#: ../gucharmap/gucharmap-window.c:437
 msgid ""
 "Also you should have received a copy of the Unicode Copyright along with "
 "Gucharmap; you can always find it at Unicode's website: http://www.unicode."
@@ -416,112 +416,57 @@ msgstr ""
 "குசார்மாப் உடன் யூனிகோடு காப்புரிமையின் பிரதி உங்களுக்கு கிடைத்திருக்க வேண்டும். இதை "
 "எப்போதுமே யூனிகோடு இணையத்தில் காணலாம்: http://www.unicode.org/copyright.html"
 
-#: ../gucharmap/gucharmap-window.c:424 ../gucharmap/main.c:36
+#: ../gucharmap/gucharmap-window.c:447 ../gucharmap/main.c:39
 msgid "GNOME Character Map"
 msgstr "GNOME எழுத்து ஒப்பீடு"
 
-#: ../gucharmap/gucharmap-window.c:426
-msgid "Based on the Unicode Character Database 6.1.0"
-msgstr "யூனிக்கோடு எழுத்துரு தரவுத்தளம் 6.1.0 ஐ அடிப்படையாக கொண்டது"
+#: ../gucharmap/gucharmap-window.c:449
+msgid "Based on the Unicode Character Database 6.2.0"
+msgstr "யூனிக்கோடு எழுத்துரு தரவுத்தளம் 6.2.0 ஐ அடிப்படையாக கொண்டது"
 
-#: ../gucharmap/gucharmap-window.c:435
+#: ../gucharmap/gucharmap-window.c:458
 msgid "translator-credits"
 msgstr "மொழிபெயர்ப்பர் - நன்றி அறிதல்"
 
-#: ../gucharmap/gucharmap-window.c:508 ../gucharmap/gucharmap-window.c:802
+#: ../gucharmap/gucharmap-window.c:547
 msgid "Next Script"
 msgstr "அடுத்த சிறுநிரல்"
 
-#: ../gucharmap/gucharmap-window.c:508 ../gucharmap/gucharmap-window.c:804
+#: ../gucharmap/gucharmap-window.c:547
 msgid "Previous Script"
 msgstr "முந்தைய சிறுநிரல்"
 
-#: ../gucharmap/gucharmap-window.c:513
+#: ../gucharmap/gucharmap-window.c:552
 msgid "Next Block"
 msgstr "அடுத்த பகுதி"
 
-#: ../gucharmap/gucharmap-window.c:513
+#: ../gucharmap/gucharmap-window.c:552
 msgid "Previous Block"
 msgstr "முந்தைய பகுதி"
 
-#: ../gucharmap/gucharmap-window.c:765
-msgid "_File"
-msgstr "_F கோப்பு"
-
-#: ../gucharmap/gucharmap-window.c:766
-msgid "_View"
-msgstr "_V காட்சி"
-
-#: ../gucharmap/gucharmap-window.c:767
-msgid "_Search"
-msgstr "_S தேடுக"
-
-#: ../gucharmap/gucharmap-window.c:768
-msgid "_Go"
-msgstr "_G போ"
-
-#: ../gucharmap/gucharmap-window.c:769
-msgid "_Help"
-msgstr "_H உதவி"
-
-#: ../gucharmap/gucharmap-window.c:772
-msgid "Page _Setup"
-msgstr "பக்கம் அமைப்பு (_S)"
-
-#: ../gucharmap/gucharmap-window.c:793
-msgid "Find _Next"
-msgstr "(_N)அடுத்ததை கண்டுபிடி"
-
-#: ../gucharmap/gucharmap-window.c:795
-msgid "Find _Previous"
-msgstr "(_P)முந்தையதை கண்டுபிடி"
-
-#: ../gucharmap/gucharmap-window.c:798
-msgid "_Next Character"
-msgstr "(_N)அடுத்த எழுத்து"
-
-#: ../gucharmap/gucharmap-window.c:800
-msgid "_Previous Character"
-msgstr "(_P)முந்தைய எழுத்து"
-
-#: ../gucharmap/gucharmap-window.c:807
-msgid "_Contents"
-msgstr "_C உள்ளடக்கங்கள்"
-
-#: ../gucharmap/gucharmap-window.c:809
-msgid "_About"
-msgstr "_A பற்றி"
-
-#: ../gucharmap/gucharmap-window.c:819
-msgid "By _Script"
-msgstr "(_S)சிறுநிரல் படி"
-
-#: ../gucharmap/gucharmap-window.c:821
-msgid "By _Unicode Block"
-msgstr "(_U)யூனிக்கோடு கட்டங்கள் படி"
-
-#: ../gucharmap/gucharmap-window.c:826
-msgid "Sho_w only glyphs from this font"
-msgstr "இந்த எழுத்துருவுக்கு மட்டும் வரையுருவை காட்டுக "
-
-#: ../gucharmap/gucharmap-window.c:829
-msgid "Snap _Columns to Power of Two"
-msgstr "_C நெடுவரிசைகளை இரண்டின்  வர்க்கங்களாக பிரி"
-
 #. Text to copy entry + button
-#: ../gucharmap/gucharmap-window.c:893
+#: ../gucharmap/gucharmap-window.c:804
 msgid "_Text to copy:"
 msgstr "(_T)படியெடுக்க வேண்டிய உரை:"
 
-#: ../gucharmap/gucharmap-window.c:900
+#: ../gucharmap/gucharmap-window.c:811
 msgid "Copy to the clipboard."
 msgstr "தற்காலிக நினைவிடத்தில் படியெடு"
 
-#: ../gucharmap/main.c:54
+#: ../gucharmap/main.c:160
+msgid "Page _Setup"
+msgstr "பக்கம் அமைப்பு (_S)"
+
+#. g_menu_append (G_MENU (model), _("Print Preview"), "win.print-preview");
+#: ../gucharmap/main.c:162
+msgid "_Print"
+msgstr "அச்சிடு (_P)"
+
+#: ../gucharmap/main.c:210
 msgid "Font to start with; ex: 'Serif 27'"
 msgstr "எழுத்துடு துவக்கம்; உம் 'Serif 27'"
 
-#: ../gucharmap/main.c:54
+#: ../gucharmap/main.c:210
 msgid "FONT"
 msgstr "FONT"
 
@@ -1448,6 +1393,51 @@ msgstr "பாக்ஸ்-பா"
 #: ../gucharmap/unicode-scripts.h:117
 msgid "Yi"
 msgstr "யி"
+
+#~ msgid "_File"
+#~ msgstr "_F கோப்பு"
+
+#~ msgid "_View"
+#~ msgstr "_V காட்சி"
+
+#~ msgid "_Search"
+#~ msgstr "_S தேடுக"
+
+#~ msgid "_Go"
+#~ msgstr "_G போ"
+
+#~ msgid "_Help"
+#~ msgstr "_H உதவி"
+
+#~ msgid "Find _Next"
+#~ msgstr "(_N)அடுத்ததை கண்டுபிடி"
+
+#~ msgid "Find _Previous"
+#~ msgstr "(_P)முந்தையதை கண்டுபிடி"
+
+#~ msgid "_Next Character"
+#~ msgstr "(_N)அடுத்த எழுத்து"
+
+#~ msgid "_Previous Character"
+#~ msgstr "(_P)முந்தைய எழுத்து"
+
+#~ msgid "_Contents"
+#~ msgstr "_C உள்ளடக்கங்கள்"
+
+#~ msgid "_About"
+#~ msgstr "_A பற்றி"
+
+#~ msgid "By _Script"
+#~ msgstr "(_S)சிறுநிரல் படி"
+
+#~ msgid "By _Unicode Block"
+#~ msgstr "(_U)யூனிக்கோடு கட்டங்கள் படி"
+
+#~ msgid "Sho_w only glyphs from this font"
+#~ msgstr "இந்த எழுத்துருவுக்கு மட்டும் வரையுருவை காட்டுக "
+
+#~ msgid "Snap _Columns to Power of Two"
+#~ msgstr "_C நெடுவரிசைகளை இரண்டின்  வர்க்கங்களாக பிரி"
 
 #~ msgid "GConf could not be initialized."
 #~ msgstr "ஜிகான்ஃப் ஐ துவக்க முடியவில்லை"
