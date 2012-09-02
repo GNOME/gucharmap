@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-19 10:59+0100\n"
-"PO-Revision-Date: 2012-02-19 11:02+0100\n"
+"POT-Creation-Date: 2012-09-02 10:59+0200\n"
+"PO-Revision-Date: 2012-09-02 10:59+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -20,8 +20,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../gucharmap.desktop.in.in.h:1
-#: ../gucharmap/gucharmap-window.c:839
-#: ../gucharmap/main.c:80
+#: ../gucharmap/gucharmap-window.c:773
+#: ../gucharmap/main.c:236
 msgid "Character Map"
 msgstr "Teckentabell"
 
@@ -160,6 +160,90 @@ msgstr "Hittades inte."
 #: ../gucharmap/gucharmap-chartable.c:1299
 msgid "Character found."
 msgstr "Tecken hittat."
+
+#: ../gucharmap/gucharmap-menus.ui.h:1
+msgid "By _Script"
+msgstr "Efter _skript"
+
+#: ../gucharmap/gucharmap-menus.ui.h:2
+msgid "By _Unicode Block"
+msgstr "Efter _Unicode-block"
+
+#: ../gucharmap/gucharmap-menus.ui.h:3
+msgid "Sho_w only glyphs from this font"
+msgstr "Visa en_dast glyfer från detta typsnitt"
+
+#: ../gucharmap/gucharmap-menus.ui.h:4
+msgid "Zoom _In"
+msgstr "Zooma _in"
+
+#: ../gucharmap/gucharmap-menus.ui.h:5
+msgid "Zoom _Out"
+msgstr "Zooma _ut"
+
+#: ../gucharmap/gucharmap-menus.ui.h:6
+msgid "_Normal Size"
+msgstr "_Normal storlek"
+
+#: ../gucharmap/gucharmap-menus.ui.h:7
+msgid "_Find"
+msgstr "_Sök"
+
+#: ../gucharmap/gucharmap-menus.ui.h:8
+msgid "_Help"
+msgstr "_Hjälp"
+
+#: ../gucharmap/gucharmap-menus.ui.h:9
+msgid "_About"
+msgstr "_Om"
+
+#: ../gucharmap/gucharmap-menus.ui.h:10
+msgid "_Close Window"
+msgstr "S_täng fönster"
+
+#: ../gucharmap/gucharmap-menus.ui.h:11
+msgid "_File"
+msgstr "_Arkiv"
+
+#: ../gucharmap/gucharmap-menus.ui.h:12
+msgid "_Close"
+msgstr "S_täng"
+
+#: ../gucharmap/gucharmap-menus.ui.h:13
+msgid "_View"
+msgstr "_Visa"
+
+#: ../gucharmap/gucharmap-menus.ui.h:14
+msgid "Snap _Columns to Power of Two"
+msgstr "Fäst _kolumner vid jämnt antal"
+
+#: ../gucharmap/gucharmap-menus.ui.h:15
+msgid "_Search"
+msgstr "_Sök"
+
+#: ../gucharmap/gucharmap-menus.ui.h:16
+msgid "Find _Next"
+msgstr "Sök _nästa"
+
+#: ../gucharmap/gucharmap-menus.ui.h:17
+msgid "Find _Previous"
+msgstr "Sök _föregående"
+
+#: ../gucharmap/gucharmap-menus.ui.h:18
+msgid "_Go"
+msgstr "_Gå"
+
+#: ../gucharmap/gucharmap-menus.ui.h:19
+msgid "_Next Character"
+msgstr "_Nästa tecken"
+
+#: ../gucharmap/gucharmap-menus.ui.h:20
+msgid "_Previous Character"
+msgstr "_Föregående tecken"
+
+#: ../gucharmap/gucharmap-menus.ui.h:21
+msgid "_Contents"
+msgstr "_Innehåll"
 
 #: ../gucharmap/gucharmap-mini-fontsel.c:282
 msgid "Font"
@@ -361,36 +445,36 @@ msgstr "Avskiljare, stycke"
 msgid "Separator, Space"
 msgstr "Avskiljare, blanksteg"
 
-#: ../gucharmap/gucharmap-window.c:399
+#: ../gucharmap/gucharmap-window.c:422
 msgid "Gucharmap is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version."
 msgstr "Gucharmap är fri programvara; du kan distribuera den och/eller modifiera den under villkoren för GNU General Public License som publicerats av Free Software Foundation; antingen version 3 av licensen, eller (upp till dig) en senare version."
 
-#: ../gucharmap/gucharmap-window.c:403
+#: ../gucharmap/gucharmap-window.c:426
 msgid "Permission is hereby granted, free of charge, to any person obtaining a copy of the Unicode data files to deal in them without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, and/or sell copies."
 msgstr "Tillåtelse ges härmed, helt gratis, till alla personer som hämtat en kopia av Unicode-datafilerna för att hantera dem utan restriktioner, inklusive obegränsad rättighet att använda, kopiera, ändra, sammanfoga, publicera, distribuera och/eller sälja kopior."
 
-#: ../gucharmap/gucharmap-window.c:407
+#: ../gucharmap/gucharmap-window.c:430
 msgid "Gucharmap and the Unicode data files are distributed in the hope that they will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License and Unicode Copyright for more details."
 msgstr "Gucharmap och Unicode-datafilerna distribueras i hopp om att de ska vara användbara, men UTAN NÅGON SOM HELST GARANTI, även utan underförstådd garanti om SÄLJBARHET eller LÄMPLIGHET FÖR NÅGOT SPECIELLT ÄNDAMÅL. Se GNU General Public License och Unicode Copyright för ytterligare information."
 
-#: ../gucharmap/gucharmap-window.c:411
+#: ../gucharmap/gucharmap-window.c:434
 msgid "You should have received a copy of the GNU General Public License along with Gucharmap; if not, write to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02110-1301  USA"
 msgstr "Du bör ha fått en kopia av GNU General Public License tillsammans med Gucharmap. Om inte, skriv till Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02110-1301  USA"
 
-#: ../gucharmap/gucharmap-window.c:414
+#: ../gucharmap/gucharmap-window.c:437
 msgid "Also you should have received a copy of the Unicode Copyright along with Gucharmap; you can always find it at Unicode's website: http://www.unicode.org/copyright.html"
 msgstr "Du bör även ha fått en kopia av Unicode Copyright tillsammans med Gucharmap; du kan alltid hitta den på Unicodes hemsida: http://www.unicode.org/copyright.html"
 
-#: ../gucharmap/gucharmap-window.c:424
-#: ../gucharmap/main.c:36
+#: ../gucharmap/gucharmap-window.c:447
+#: ../gucharmap/main.c:39
 msgid "GNOME Character Map"
 msgstr "Teckentabell för GNOME"
 
-#: ../gucharmap/gucharmap-window.c:426
-msgid "Based on the Unicode Character Database 6.1.0"
-msgstr "Baserad på Unicodes teckendatabas 6.1.0"
+#: ../gucharmap/gucharmap-window.c:449
+msgid "Based on the Unicode Character Database 6.2.0"
+msgstr "Baserad på Unicodes teckendatabas 6.2.0"
 
-#: ../gucharmap/gucharmap-window.c:435
+#: ../gucharmap/gucharmap-window.c:458
 msgid "translator-credits"
 msgstr ""
 "Daniel Nylander <po@danielnylander.se>\n"
@@ -399,102 +483,45 @@ msgstr ""
 "Skicka synpunkter på översättningen till\n"
 "<tp-sv@listor.tp-sv.se>."
 
-#: ../gucharmap/gucharmap-window.c:508
-#: ../gucharmap/gucharmap-window.c:802
+#: ../gucharmap/gucharmap-window.c:547
 msgid "Next Script"
 msgstr "Nästa skript"
 
-#: ../gucharmap/gucharmap-window.c:508
-#: ../gucharmap/gucharmap-window.c:804
+#: ../gucharmap/gucharmap-window.c:547
 msgid "Previous Script"
 msgstr "Föregående skript"
 
-#: ../gucharmap/gucharmap-window.c:513
+#: ../gucharmap/gucharmap-window.c:552
 msgid "Next Block"
 msgstr "Nästa block"
 
-#: ../gucharmap/gucharmap-window.c:513
+#: ../gucharmap/gucharmap-window.c:552
 msgid "Previous Block"
 msgstr "Föregående block"
 
-#: ../gucharmap/gucharmap-window.c:765
-msgid "_File"
-msgstr "_Arkiv"
-
-#: ../gucharmap/gucharmap-window.c:766
-msgid "_View"
-msgstr "_Visa"
-
-#: ../gucharmap/gucharmap-window.c:767
-msgid "_Search"
-msgstr "_Sök"
-
-#: ../gucharmap/gucharmap-window.c:768
-msgid "_Go"
-msgstr "_Gå"
-
-#: ../gucharmap/gucharmap-window.c:769
-msgid "_Help"
-msgstr "_Hjälp"
-
-#: ../gucharmap/gucharmap-window.c:772
-msgid "Page _Setup"
-msgstr "Sid_konfiguration"
-
-#: ../gucharmap/gucharmap-window.c:793
-msgid "Find _Next"
-msgstr "Sök _nästa"
-
-#: ../gucharmap/gucharmap-window.c:795
-msgid "Find _Previous"
-msgstr "Sök _föregående"
-
-#: ../gucharmap/gucharmap-window.c:798
-msgid "_Next Character"
-msgstr "_Nästa tecken"
-
-#: ../gucharmap/gucharmap-window.c:800
-msgid "_Previous Character"
-msgstr "_Föregående tecken"
-
-#: ../gucharmap/gucharmap-window.c:807
-msgid "_Contents"
-msgstr "_Innehåll"
-
-#: ../gucharmap/gucharmap-window.c:809
-msgid "_About"
-msgstr "_Om"
-
-#: ../gucharmap/gucharmap-window.c:819
-msgid "By _Script"
-msgstr "Efter _skript"
-
-#: ../gucharmap/gucharmap-window.c:821
-msgid "By _Unicode Block"
-msgstr "Efter _Unicode-block"
-
-#: ../gucharmap/gucharmap-window.c:826
-msgid "Sho_w only glyphs from this font"
-msgstr "Visa en_dast glyfer från detta typsnitt"
-
-#: ../gucharmap/gucharmap-window.c:829
-msgid "Snap _Columns to Power of Two"
-msgstr "Fäst _kolumner vid jämnt antal"
-
 #. Text to copy entry + button
-#: ../gucharmap/gucharmap-window.c:893
+#: ../gucharmap/gucharmap-window.c:804
 msgid "_Text to copy:"
 msgstr "_Text att kopiera:"
 
-#: ../gucharmap/gucharmap-window.c:900
+#: ../gucharmap/gucharmap-window.c:811
 msgid "Copy to the clipboard."
 msgstr "Kopiera till urklipp."
 
-#: ../gucharmap/main.c:54
+#: ../gucharmap/main.c:160
+msgid "Page _Setup"
+msgstr "Sid_konfiguration"
+
+#. g_menu_append (G_MENU (model), _("Print Preview"), "win.print-preview");
+#: ../gucharmap/main.c:162
+msgid "_Print"
+msgstr "Skriv _ut"
+
+#: ../gucharmap/main.c:210
 msgid "Font to start with; ex: 'Serif 27'"
 msgstr "Typsnitt att starta med; t.ex. \"Serif 27\""
 
-#: ../gucharmap/main.c:54
+#: ../gucharmap/main.c:210
 msgid "FONT"
 msgstr "TYPSNITT"
 
@@ -1523,15 +1550,6 @@ msgstr "Yi"
 
 #~ msgid "_Quit"
 #~ msgstr "_Avsluta"
-
-#~ msgid "Zoom _In"
-#~ msgstr "Zooma _in"
-
-#~ msgid "Zoom _Out"
-#~ msgstr "Zooma _ut"
-
-#~ msgid "_Normal Size"
-#~ msgstr "_Normal storlek"
 
 #~ msgid "_Find..."
 #~ msgstr "_Sök..."
