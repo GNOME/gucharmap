@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-04 01:38+0200\n"
-"PO-Revision-Date: 2012-09-04 01:45+0200\n"
+"POT-Creation-Date: 2012-09-13 19:13+0200\n"
+"PO-Revision-Date: 2012-09-13 19:14+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>\n"
 "Language: pl\n"
@@ -1493,3 +1493,65 @@ msgstr "Phags-Pa"
 #: ../gucharmap/unicode-scripts.h:117
 msgid "Yi"
 msgstr "Yi"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:1
+msgid "Character map grouping method"
+msgstr "Metoda grupowania mapy znaków"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:2
+msgid ""
+"This is how the characters in the character map are grouped. The characters "
+"can either be grouped by 'script' or 'block'."
+msgstr ""
+"Określa, jak grupowane są znaki na mapie: według pisma (\"script\") lub "
+"bloku (\"block\")."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
+msgid "Character map font description"
+msgstr "Opis czcionki mapy znaków"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:4
+msgid ""
+"The font to use for the character map. If set to 'nothing' then the default "
+"is the system font with the size doubled. Otherwise it should be a font "
+"description string like 'Sans 24'."
+msgstr ""
+"Czcionka używana przez mapę znaków. Jeśli ustawiono na wartość \"nothing\", "
+"to domyślna jest czcionka systemowa o podwójnym rozmiarze. W innym przypadku "
+"powinien to być ciąg opisu, taki jak \"Sans 24\"."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:5
+msgid "Snap number of columns to a power of two"
+msgstr "Łamanie liczby kolumn na potęgach dwójki"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:6
+msgid ""
+"The number of columns in the character map grid is determined by the width "
+"of the window. If this setting is 'true' then the value will be forced to "
+"the nearest power of two."
+msgstr ""
+"Liczba kolumn na siatce mapy znaków jest określana przez szerokość okna. "
+"Jeśli ustawiono na wartość \"true\", to liczba zostanie wymuszona na "
+"najbliższą potęgę dwójki."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:7
+msgid "Last selected character"
+msgstr "Ostatni zaznaczony znak"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:8
+msgid ""
+"This is the last character that was selected in the character map (and will "
+"be selected again when the character map is next started).\n"
+"\n"
+"By default, it is the first letter of the alphabet in the current locale."
+msgstr ""
+"To jest ostatni zaznaczony znak na mapie znaków. Zostanie on zaznaczony po "
+"następnym uruchomieniu mapy znaków.\n"
+"\n"
+"Domyślnie jest to pierwsza litera alfabetu bieżącej lokalizacji."
+
+#. The unicode code point of the first letter of the alphabet
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:12
+msgctxt "First letter"
+msgid "0x41"
+msgstr "0x41"
