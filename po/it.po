@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-26 21:57+0200\n"
-"PO-Revision-Date: 2012-08-26 21:56+0200\n"
+"POT-Creation-Date: 2012-09-13 21:12+0200\n"
+"PO-Revision-Date: 2012-09-13 21:11+0200\n"
 "Last-Translator: Milo Casagrande <milo@ubuntu.com>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "Language: it\n"
@@ -1482,3 +1482,67 @@ msgstr "Phags Pa"
 #: ../gucharmap/unicode-scripts.h:117
 msgid "Yi"
 msgstr "Yi"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:1
+msgid "Character map grouping method"
+msgstr "Metodo di raggruppamento della tabella"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:2
+msgid ""
+"This is how the characters in the character map are grouped. The characters "
+"can either be grouped by 'script' or 'block'."
+msgstr ""
+"Questo indica come sono raggruppati i caratteri nella mappa. I valori "
+"possono essere \"script\" o \"block\"."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
+msgid "Character map font description"
+msgstr "Descrizione del tipo di carattere della tabella"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:4
+msgid ""
+"The font to use for the character map. If set to 'nothing' then the default "
+"is the system font with the size doubled. Otherwise it should be a font "
+"description string like 'Sans 24'."
+msgstr ""
+"Il tipo di carattere utilizzato per la tabella. Se impostato a \"nothing\", "
+"viene utilizzato il carattere di sistema con la dimensione raddoppiata, "
+"altrimenti deve essere la descrizione di un tipo di carattere come \"Sans "
+"24\"."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:5
+msgid "Snap number of columns to a power of two"
+msgstr "Spezza il numero delle colonne in potenze di due"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:6
+msgid ""
+"The number of columns in the character map grid is determined by the width "
+"of the window. If this setting is 'true' then the value will be forced to "
+"the nearest power of two."
+msgstr ""
+"Il numero delle colonne nella griglia dei caratteri è determinato dalla "
+"larghezza della finestra. Se impostato a VERO allora il valore verrà forzato "
+"alla potenza di due più vicina."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:7
+msgid "Last selected character"
+msgstr "Ultimo carattere selezionato"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:8
+msgid ""
+"This is the last character that was selected in the character map (and will "
+"be selected again when the character map is next started).\n"
+"\n"
+"By default, it is the first letter of the alphabet in the current locale."
+msgstr ""
+"Questo è l'ultimo carattere selezionato nella tabella e verrà selezionato "
+"nuovamente al successivo avvio della tabella.\n"
+"\n"
+"Come impostazione predefinita è la prima lettera dell'alfabeto nella lingua "
+"corrente."
+
+#. The unicode code point of the first letter of the alphabet
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:12
+msgctxt "First letter"
+msgid "0x41"
+msgstr "0x41"
