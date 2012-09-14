@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: gucharmap\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=guchar"
 "map&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-06-25 12:04+0000\n"
-"PO-Revision-Date: 2012-08-06 09:40+0200\n"
+"POT-Creation-Date: 2012-09-13 16:31+0000\n"
+"PO-Revision-Date: 2012-09-14 06:14+0200\n"
 "Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: Serbian <gnom@prevod.org>\n"
 "Language: sr\n"
@@ -23,7 +23,7 @@ msgstr ""
 "n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Project-Style: gnome\n"
 
-#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:824
+#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:773
 #: ../gucharmap/main.c:236
 msgid "Character Map"
 msgstr "Таблица знакова"
@@ -446,7 +446,7 @@ msgstr "Разделник, пасус"
 msgid "Separator, Space"
 msgstr "Разделник, размак"
 
-#: ../gucharmap/gucharmap-window.c:451
+#: ../gucharmap/gucharmap-window.c:422
 msgid ""
 "Gucharmap is free software; you can redistribute it and/or modify it under "
 "the terms of the GNU General Public License as published by the Free "
@@ -459,7 +459,7 @@ msgstr ""
 "верзије."
 
 # bug(slobo): ово сам произвољно превео - усагласи са legal.xml преводом!
-#: ../gucharmap/gucharmap-window.c:455
+#: ../gucharmap/gucharmap-window.c:426
 msgid ""
 "Permission is hereby granted, free of charge, to any person obtaining a copy "
 "of the Unicode data files to deal in them without restriction, including "
@@ -471,7 +471,7 @@ msgstr ""
 "на коришћење, умножавање, приспајање, објављивање, дељење(растурање) и/или "
 "продају примерака."
 
-#: ../gucharmap/gucharmap-window.c:459
+#: ../gucharmap/gucharmap-window.c:430
 msgid ""
 "Gucharmap and the Unicode data files are distributed in the hope that they "
 "will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty "
@@ -483,7 +483,7 @@ msgstr ""
 "ТРЖИШНЕ ВРЕДНОСТИ или ПРИЛАГОЂЕНОСТИ ОДРЕЂЕНОЈ НАМЕНИ.  За више детаља "
 "прочитајте Гнуову општу јавну лиценцу и ауторска права Уникода."
 
-#: ../gucharmap/gucharmap-window.c:463
+#: ../gucharmap/gucharmap-window.c:434
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "Gucharmap; if not, write to the Free Software Foundation, Inc., 59 Temple "
@@ -494,7 +494,7 @@ msgstr ""
 "Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02110-1301  USA“"
 
 # bug(slobo): белешка самом себи овде промени редослед речи, конфузно је помало...
-#: ../gucharmap/gucharmap-window.c:466
+#: ../gucharmap/gucharmap-window.c:437
 msgid ""
 "Also you should have received a copy of the Unicode Copyright along with "
 "Gucharmap; you can always find it at Unicode's website: http://www.unicode."
@@ -504,15 +504,15 @@ msgstr ""
 "словну мапу; ако нисте можете да га пронађете на веб страници Уникода: "
 "„http://www.unicode.org/copyright.html“"
 
-#: ../gucharmap/gucharmap-window.c:476 ../gucharmap/main.c:39
+#: ../gucharmap/gucharmap-window.c:447 ../gucharmap/main.c:39
 msgid "GNOME Character Map"
 msgstr "Гномова таблица знакова"
 
-#: ../gucharmap/gucharmap-window.c:478
+#: ../gucharmap/gucharmap-window.c:449
 msgid "Based on the Unicode Character Database 6.2.0"
 msgstr "Засновано на бази података Уникод знакова 6.2.0"
 
-#: ../gucharmap/gucharmap-window.c:487
+#: ../gucharmap/gucharmap-window.c:458
 msgid "translator-credits"
 msgstr ""
 "Данило Шеган <danilo@prevod.org>\n"
@@ -521,28 +521,28 @@ msgstr ""
 "\n"
 "http://prevod.org — преводи на српски језик"
 
-#: ../gucharmap/gucharmap-window.c:576
+#: ../gucharmap/gucharmap-window.c:547
 msgid "Next Script"
 msgstr "Следеће писмо"
 
-#: ../gucharmap/gucharmap-window.c:576
+#: ../gucharmap/gucharmap-window.c:547
 msgid "Previous Script"
 msgstr "Претходно писмо"
 
-#: ../gucharmap/gucharmap-window.c:581
+#: ../gucharmap/gucharmap-window.c:552
 msgid "Next Block"
 msgstr "Следећи блок"
 
-#: ../gucharmap/gucharmap-window.c:581
+#: ../gucharmap/gucharmap-window.c:552
 msgid "Previous Block"
 msgstr "Претходни блок"
 
 #. Text to copy entry + button
-#: ../gucharmap/gucharmap-window.c:855
+#: ../gucharmap/gucharmap-window.c:804
 msgid "_Text to copy:"
 msgstr "_Текст за умножавање:"
 
-#: ../gucharmap/gucharmap-window.c:862
+#: ../gucharmap/gucharmap-window.c:811
 msgid "Copy to the clipboard."
 msgstr "Смести у списак исечака."
 
@@ -1487,3 +1487,69 @@ msgstr "Фагспа"
 #: ../gucharmap/unicode-scripts.h:117
 msgid "Yi"
 msgstr "Ји"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:1
+#| msgid "Character found."
+msgid "Character map grouping method"
+msgstr "Начин груписања Таблице знакова"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:2
+msgid ""
+"This is how the characters in the character map are grouped. The characters "
+"can either be grouped by 'script' or 'block'."
+msgstr ""
+"Ово одређује начин на који се групишу знакови у таблици знакова. Знакови "
+"могу бити груписани према „script“ (скрипти) или „block“ (блоку)."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
+#| msgid "Character found."
+msgid "Character map font description"
+msgstr "Опис словног лика Таблице знакова"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:4
+msgid ""
+"The font to use for the character map. If set to 'nothing' then the default "
+"is the system font with the size doubled. Otherwise it should be a font "
+"description string like 'Sans 24'."
+msgstr ""
+"Словни лик који ће бити коришћен за таблицу знакова. Ако је постављено на "
+"„nothing“ (ништа) онда се користи словни лик система удвостручене величине. "
+"У супротном би требало да стоји ниска која описује словни лик рецимо „Sans "
+"24“."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:5
+#| msgid "Snap _Columns to Power of Two"
+msgid "Snap number of columns to a power of two"
+msgstr "Број колона је степен двојке"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:6
+msgid ""
+"The number of columns in the character map grid is determined by the width "
+"of the window. If this setting is 'true' then the value will be forced to "
+"the nearest power of two."
+msgstr ""
+"Број колона у мрежи таблице знакова је одређен ширином прозора. Ако је ово "
+"подешавање изабрано (true) онда ће вредност бити присиљена на најближи "
+"степен двојке."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:7
+msgid "Last selected character"
+msgstr "Последњи изабрани знак"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:8
+msgid ""
+"This is the last character that was selected in the character map (and will "
+"be selected again when the character map is next started).\n"
+"\n"
+"By default, it is the first letter of the alphabet in the current locale."
+msgstr ""
+"Ово је последњи знак који је био изабран у таблици знакова (и биће поново "
+"изабран приликом следећег покретања таблице знакова).\n"
+"\n"
+"По основи, то је прво слово алфабета у текућем језику."
+
+#. The unicode code point of the first letter of the alphabet
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:12
+msgctxt "First letter"
+msgid "0x41"
+msgstr "0x41"
