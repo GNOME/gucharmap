@@ -9,16 +9,18 @@ msgstr ""
 "Project-Id-Version: gucharmap master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gucharmap&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-08-16 09:55+0000\n"
-"PO-Revision-Date: 2012-09-04 11:22+0700\n"
+"POT-Creation-Date: 2012-09-13 16:31+0000\n"
+"PO-Revision-Date: 2012-09-15 18:43+0700\n"
 "Last-Translator: Andika Triwidada <andika@gmail.com>\n"
 "Language-Team: Indonesian <gnome@i15n.org>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.3\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:824
+#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:773
 #: ../gucharmap/main.c:236
 msgid "Character Map"
 msgstr "Tabel Karakter"
@@ -441,7 +443,7 @@ msgstr "Pemisah, Paragraf"
 msgid "Separator, Space"
 msgstr "Pemisah, Spasi"
 
-#: ../gucharmap/gucharmap-window.c:451
+#: ../gucharmap/gucharmap-window.c:422
 msgid ""
 "Gucharmap is free software; you can redistribute it and/or modify it under "
 "the terms of the GNU General Public License as published by the Free "
@@ -453,7 +455,7 @@ msgstr ""
 "dipublikasikan oleh Free Software Foundation; baik versi 3 dari Lisensi atau "
 "(terserah pilihan Anda) versi setelahnya."
 
-#: ../gucharmap/gucharmap-window.c:455
+#: ../gucharmap/gucharmap-window.c:426
 msgid ""
 "Permission is hereby granted, free of charge, to any person obtaining a copy "
 "of the Unicode data files to deal in them without restriction, including "
@@ -465,7 +467,7 @@ msgstr ""
 "untuk menggunakan, menyalin, merubah, menggabungkan, menerbitkan, "
 "menyebarkan, dan atau menjual salinan."
 
-#: ../gucharmap/gucharmap-window.c:459
+#: ../gucharmap/gucharmap-window.c:430
 msgid ""
 "Gucharmap and the Unicode data files are distributed in the hope that they "
 "will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty "
@@ -477,7 +479,7 @@ msgstr ""
 "BEKERJA DENGAN BAIK. Lihat Lisensi Publik Umum GNU dan Hak cipta Unicode "
 "untuk lebih jelasnya."
 
-#: ../gucharmap/gucharmap-window.c:463
+#: ../gucharmap/gucharmap-window.c:434
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "Gucharmap; if not, write to the Free Software Foundation, Inc., 59 Temple "
@@ -487,7 +489,7 @@ msgstr ""
 "Gucharmap; jika tidak, kirimkan surat Anda ke Free Software Foundation, "
 "Inc., 59 Temple Place, Suite 330, Boston, MA  02110-1301  USA"
 
-#: ../gucharmap/gucharmap-window.c:466
+#: ../gucharmap/gucharmap-window.c:437
 msgid ""
 "Also you should have received a copy of the Unicode Copyright along with "
 "Gucharmap; you can always find it at Unicode's website: http://www.unicode."
@@ -497,42 +499,42 @@ msgstr ""
 "Gucharmap, anda selalu dapat menemukannya di website Unicode: http://www."
 "unicode.org/copyright.html"
 
-#: ../gucharmap/gucharmap-window.c:476 ../gucharmap/main.c:39
+#: ../gucharmap/gucharmap-window.c:447 ../gucharmap/main.c:39
 msgid "GNOME Character Map"
 msgstr "Tabel Karakter GNOME"
 
-#: ../gucharmap/gucharmap-window.c:478
+#: ../gucharmap/gucharmap-window.c:449
 msgid "Based on the Unicode Character Database 6.2.0"
 msgstr "Berdasar pada Basis Data Karakter Unicode 6.2.0"
 
-#: ../gucharmap/gucharmap-window.c:487
+#: ../gucharmap/gucharmap-window.c:458
 msgid "translator-credits"
 msgstr ""
 "Ahmad Riza H Nst <rizahnst@gnome.org>, 2003, 2004, 2006\n"
 "Andika Triwidada <andika@gmail.com>, 2011, 2012"
 
-#: ../gucharmap/gucharmap-window.c:576
+#: ../gucharmap/gucharmap-window.c:547
 msgid "Next Script"
 msgstr "Skrip Selanjutnya"
 
-#: ../gucharmap/gucharmap-window.c:576
+#: ../gucharmap/gucharmap-window.c:547
 msgid "Previous Script"
 msgstr "Skrip Sebelumnya"
 
-#: ../gucharmap/gucharmap-window.c:581
+#: ../gucharmap/gucharmap-window.c:552
 msgid "Next Block"
 msgstr "Blok Selanjutnya"
 
-#: ../gucharmap/gucharmap-window.c:581
+#: ../gucharmap/gucharmap-window.c:552
 msgid "Previous Block"
 msgstr "Blok Sebelumnya"
 
 #. Text to copy entry + button
-#: ../gucharmap/gucharmap-window.c:855
+#: ../gucharmap/gucharmap-window.c:804
 msgid "_Text to copy:"
 msgstr "_Teks yang hendak disalin:"
 
-#: ../gucharmap/gucharmap-window.c:862
+#: ../gucharmap/gucharmap-window.c:811
 msgid "Copy to the clipboard."
 msgstr "Salin ke papan klip."
 
@@ -1477,3 +1479,66 @@ msgstr "Phags Pa"
 msgid "Yi"
 msgstr "Yi"
 
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:1
+#| msgid "Character found."
+msgid "Character map grouping method"
+msgstr "Metoda pengelompokan peta karakter"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:2
+msgid ""
+"This is how the characters in the character map are grouped. The characters "
+"can either be grouped by 'script' or 'block'."
+msgstr ""
+"Ini adalah bagaimana karakter dalam peta karakter dikelompokkan. Karakter "
+"dapat dikelompokkan menurut 'skrip' atau 'blok'."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
+#| msgid "Character found."
+msgid "Character map font description"
+msgstr "Deskripsi fonta peta karakter"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:4
+msgid ""
+"The font to use for the character map. If set to 'nothing' then the default "
+"is the system font with the size doubled. Otherwise it should be a font "
+"description string like 'Sans 24'."
+msgstr ""
+"Fonta yang dipakai untuk peta karakter. Jika diisi 'nothing' maka bakunya "
+"adalah fonta sistem dengan ukuran digandakan. Bila tidak, itu mesti berupa "
+"string deskripsi fonta seperti 'Sans 24'."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:5
+#| msgid "Snap _Columns to Power of Two"
+msgid "Snap number of columns to a power of two"
+msgstr "Jadikan cacah kolom pangkat dari dua"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:6
+msgid ""
+"The number of columns in the character map grid is determined by the width "
+"of the window. If this setting is 'true' then the value will be forced to "
+"the nearest power of two."
+msgstr ""
+"Cacah kolom dalam kisi peta karakter ditentukan oleh lebar jendela. Bila "
+"nilai ini 'true' maka nilai akan dipaksa ke pangkat dua terdekat."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:7
+msgid "Last selected character"
+msgstr "Karakter yang terakhir dipilih"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:8
+msgid ""
+"This is the last character that was selected in the character map (and will "
+"be selected again when the character map is next started).\n"
+"\n"
+"By default, it is the first letter of the alphabet in the current locale."
+msgstr ""
+"Ini adalah karakter terakhir yang dipilih dalam peta karakter (dan akan "
+"dipilih lagi ketika peta karakter dijalankan lagi kali berikutnya).\n"
+"\n"
+"Secara baku, ini adalah huruf pertama alfabet dalam locale kini."
+
+#. The unicode code point of the first letter of the alphabet
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:12
+msgctxt "First letter"
+msgid "0x41"
+msgstr "0x41"
