@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 3.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-01 01:39+0100\n"
-"PO-Revision-Date: 2012-09-01 01:40+0000\n"
+"POT-Creation-Date: 2012-09-15 19:48+0100\n"
+"PO-Revision-Date: 2012-09-15 19:50+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
 "Language: pt\n"
@@ -1473,6 +1473,68 @@ msgstr "Phags Pa"
 #: ../gucharmap/unicode-scripts.h:117
 msgid "Yi"
 msgstr "Yi"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:1
+msgid "Character map grouping method"
+msgstr "Método de agrupamento do mapa de caracteres"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:2
+msgid ""
+"This is how the characters in the character map are grouped. The characters "
+"can either be grouped by 'script' or 'block'."
+msgstr ""
+"Isto é como são agrupados os caracteres no mapa de caracteres. Estes podem "
+"ser agrupados por 'script' ou 'block'."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
+msgid "Character map font description"
+msgstr "Descrição da fonte do mapa de caracteres"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:4
+msgid ""
+"The font to use for the character map. If set to 'nothing' then the default "
+"is the system font with the size doubled. Otherwise it should be a font "
+"description string like 'Sans 24'."
+msgstr ""
+"A fonte a utilizadar para o mapa de caracteres. Se definida como 'nothing' "
+"a omissão é a fonte de sistema com o tamanho duplicado. Caso contrário "
+"deverá ser uma expressão descritiva tal como 'Sans 24'."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:5
+msgid "Snap number of columns to a power of two"
+msgstr "Ajustar o número de colunas à potência de dois"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:6
+msgid ""
+"The number of columns in the character map grid is determined by the width "
+"of the window. If this setting is 'true' then the value will be forced to "
+"the nearest power of two."
+msgstr ""
+"O número de colunas na grelha de mapa de caracteres é determinada pela "
+"largura da janela. Se esta definição for 'true' então o valor ser+a forçado "
+"a ser a potência de dois mais próxima."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:7
+msgid "Last selected character"
+msgstr "Último caracter seleccionado"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:8
+msgid ""
+"This is the last character that was selected in the character map (and will "
+"be selected again when the character map is next started).\n"
+"\n"
+"By default, it is the first letter of the alphabet in the current locale."
+msgstr ""
+"Este é o último caracter que foi seleccionado no mapa de caracteres (e será "
+"seleccionado novamente quando o mapa de caracteres for iniciado da próxima vez).\n"
+"\n"
+"Por omissão, é a primeira letra do alfabeto no locale actual."
+
+#. The unicode code point of the first letter of the alphabet
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:12
+msgctxt "First letter"
+msgid "0x41"
+msgstr "0x41"
 
 #~ msgid "GConf could not be initialized."
 #~ msgstr "Incapaz de inicializar o GConf."
