@@ -15,15 +15,16 @@ msgstr ""
 "Project-Id-Version: gucharmap master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gucharmap&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-06-25 12:04+0000\n"
-"PO-Revision-Date: 2012-09-01 17:50+0200\n"
+"POT-Creation-Date: 2012-09-13 16:31+0000\n"
+"PO-Revision-Date: 2012-09-15 20:11+0200\n"
 "Last-Translator: Claude Paroz <claude@2xlibre.net>\n"
 "Language-Team: GNOME French team <gnomefr@traduc.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:824
+#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:773
 #: ../gucharmap/main.c:236
 msgid "Character Map"
 msgstr "Table de caractères"
@@ -446,7 +447,7 @@ msgstr "Séparateur, paragraphes"
 msgid "Separator, Space"
 msgstr "Séparateur, espace"
 
-#: ../gucharmap/gucharmap-window.c:451
+#: ../gucharmap/gucharmap-window.c:422
 msgid ""
 "Gucharmap is free software; you can redistribute it and/or modify it under "
 "the terms of the GNU General Public License as published by the Free "
@@ -458,7 +459,7 @@ msgstr ""
 "telle que publiée par la Free Software Foundation ; version 3 de la licence, "
 "ou encore (à votre choix) toute version ultérieure."
 
-#: ../gucharmap/gucharmap-window.c:455
+#: ../gucharmap/gucharmap-window.c:426
 msgid ""
 "Permission is hereby granted, free of charge, to any person obtaining a copy "
 "of the Unicode data files to deal in them without restriction, including "
@@ -470,7 +471,7 @@ msgstr ""
 "inclut, sans limitation aucune le droit d'utiliser, modifier, fusionner, "
 "publier, distribuer, et/ou en vendre des copies."
 
-#: ../gucharmap/gucharmap-window.c:459
+#: ../gucharmap/gucharmap-window.c:430
 msgid ""
 "Gucharmap and the Unicode data files are distributed in the hope that they "
 "will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty "
@@ -482,7 +483,7 @@ msgstr ""
 "implicite de COMMERCIALISATION ou D'ADAPTATION A UN OBJET PARTICULIER. Pour "
 "plus de détails voir la Licence Publique Générale GNU."
 
-#: ../gucharmap/gucharmap-window.c:463
+#: ../gucharmap/gucharmap-window.c:434
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "Gucharmap; if not, write to the Free Software Foundation, Inc., 59 Temple "
@@ -492,7 +493,7 @@ msgstr ""
 "Gucharmap ; si ce n'est pas le cas, écrivez à la Free Software Foundation "
 "Inc., 59 Temple Place, Suite 330, Boston, MA 02110-1301 USA"
 
-#: ../gucharmap/gucharmap-window.c:466
+#: ../gucharmap/gucharmap-window.c:437
 msgid ""
 "Also you should have received a copy of the Unicode Copyright along with "
 "Gucharmap; you can always find it at Unicode's website: http://www.unicode."
@@ -502,15 +503,15 @@ msgstr ""
 "Vous pouvez dans tous les cas le trouver sur le site web d'Unicode : http://"
 "www.unicode.org/copyright.html"
 
-#: ../gucharmap/gucharmap-window.c:476 ../gucharmap/main.c:39
+#: ../gucharmap/gucharmap-window.c:447 ../gucharmap/main.c:39
 msgid "GNOME Character Map"
 msgstr "Table de caractères GNOME"
 
-#: ../gucharmap/gucharmap-window.c:478
+#: ../gucharmap/gucharmap-window.c:449
 msgid "Based on the Unicode Character Database 6.2.0"
 msgstr "Basée sur la base de données des caractères Unicode 6.2.0"
 
-#: ../gucharmap/gucharmap-window.c:487
+#: ../gucharmap/gucharmap-window.c:458
 msgid "translator-credits"
 msgstr ""
 "Noah Levitt\n"
@@ -520,28 +521,28 @@ msgstr ""
 "Baptiste Mille-Mathias <baptiste.millemathias@gmail.com>\n"
 "Benoît Dejean <benoit@placenet.org>"
 
-#: ../gucharmap/gucharmap-window.c:576
+#: ../gucharmap/gucharmap-window.c:547
 msgid "Next Script"
 msgstr "Script suivant"
 
-#: ../gucharmap/gucharmap-window.c:576
+#: ../gucharmap/gucharmap-window.c:547
 msgid "Previous Script"
 msgstr "Script précédent"
 
-#: ../gucharmap/gucharmap-window.c:581
+#: ../gucharmap/gucharmap-window.c:552
 msgid "Next Block"
 msgstr "Bloc suivant"
 
-#: ../gucharmap/gucharmap-window.c:581
+#: ../gucharmap/gucharmap-window.c:552
 msgid "Previous Block"
 msgstr "Précédent précédent"
 
 #. Text to copy entry + button
-#: ../gucharmap/gucharmap-window.c:855
+#: ../gucharmap/gucharmap-window.c:804
 msgid "_Text to copy:"
 msgstr "Te_xte à copier :"
 
-#: ../gucharmap/gucharmap-window.c:862
+#: ../gucharmap/gucharmap-window.c:811
 msgid "Copy to the clipboard."
 msgstr "Copier dans le presse-papiers."
 
@@ -1486,3 +1487,68 @@ msgstr "Phags-pa"
 #: ../gucharmap/unicode-scripts.h:117
 msgid "Yi"
 msgstr "Yi"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:1
+msgid "Character map grouping method"
+msgstr "Méthode de regroupement de la table de caractères"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:2
+msgid ""
+"This is how the characters in the character map are grouped. The characters "
+"can either be grouped by 'script' or 'block'."
+msgstr ""
+"Il s'agit de la façon dont les caractères de la table de caractères sont "
+"regroupés. Les caractères peuvent être groupés soit par "
+"« script » ('script'), soit par « bloc » ('block')."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
+msgid "Character map font description"
+msgstr "Description de la police de la table de caractères"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:4
+msgid ""
+"The font to use for the character map. If set to 'nothing' then the default "
+"is the system font with the size doubled. Otherwise it should be a font "
+"description string like 'Sans 24'."
+msgstr ""
+"La police à utiliser pour la table de caractères. Si défini à 'nothing', "
+"alors le réglage par défaut est la police système avec la taille doublée. "
+"Autrement ce devrait être une chaîne de description de police comme 'Sans "
+"24'."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:5
+msgid "Snap number of columns to a power of two"
+msgstr "Ajuster le nombre de colonnes par puissances de 2"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:6
+msgid ""
+"The number of columns in the character map grid is determined by the width "
+"of the window. If this setting is 'true' then the value will be forced to "
+"the nearest power of two."
+msgstr ""
+"Le nombre de colonnes dans la grille de la table de caractères est "
+"déterminé par la largeur de la fenêtre. Si ce réglage est défini à 'true', "
+"alors la valeur sera forcée sur la plus proche puissance de deux."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:7
+msgid "Last selected character"
+msgstr "Dernier caractère sélectionné"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:8
+msgid ""
+"This is the last character that was selected in the character map (and will "
+"be selected again when the character map is next started).\n"
+"\n"
+"By default, it is the first letter of the alphabet in the current locale."
+msgstr ""
+"Il s'agit du dernier caractère qui a été sélectionné dans la table de "
+"caractères (et qui sera sélectionné à nouveau au prochain démarrage de la "
+"table de caractères).\n"
+"\n"
+"Par défaut, c'est la première lettre de l'alphabet dans la locale actuelle."
+
+#. The unicode code point of the first letter of the alphabet
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:12
+msgctxt "First letter"
+msgid "0x41"
+msgstr "0x41"
