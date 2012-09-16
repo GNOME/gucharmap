@@ -15,18 +15,18 @@ msgstr ""
 "Project-Id-Version: gucharmap\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gucharmap&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-06-25 12:04+0000\n"
-"PO-Revision-Date: 2012-09-09 11:01+0200\n"
+"POT-Creation-Date: 2012-09-13 16:31+0000\n"
+"PO-Revision-Date: 2012-09-17 00:11+0200\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
+"Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: cs\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: Lokalize 1.0\n"
 
-#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:824
+#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:773
 #: ../gucharmap/main.c:236
 msgid "Character Map"
 msgstr "Mapa znaků"
@@ -41,7 +41,7 @@ msgstr "Vše"
 
 #: ../gucharmap/gucharmap-block-chapters-model.c:187
 msgid "Unicode Block"
-msgstr "Blok Unicode"
+msgstr "Blok Unikódu"
 
 #: ../gucharmap/gucharmap-charmap.c:524
 msgid "Canonical decomposition:"
@@ -57,12 +57,12 @@ msgstr "Obecné vlastnosti znaku"
 
 #: ../gucharmap/gucharmap-charmap.c:587
 msgid "In Unicode since:"
-msgstr "V Unicode od:"
+msgstr "V Unikódu od:"
 
 #. character category
 #: ../gucharmap/gucharmap-charmap.c:591
 msgid "Unicode category:"
-msgstr "Kategorie Unicode:"
+msgstr "Kategorie Unikódu:"
 
 #: ../gucharmap/gucharmap-charmap.c:600
 msgid "Various Useful Representations"
@@ -171,7 +171,7 @@ msgstr "Podle pí_sma"
 
 #: ../gucharmap/gucharmap-menus.ui.h:2
 msgid "By _Unicode Block"
-msgstr "Podle _bloku Unicode"
+msgstr "Podle _bloku Unikódu"
 
 #: ../gucharmap/gucharmap-menus.ui.h:3
 msgid "Sho_w only glyphs from this font"
@@ -219,7 +219,7 @@ msgstr "_Zobrazit"
 
 #: ../gucharmap/gucharmap-menus.ui.h:14
 msgid "Snap _Columns to Power of Two"
-msgstr "Přich_ytit sloupce k mocninám dvojky"
+msgstr "Počet sloup_ců v mocninách dvojky"
 
 #: ../gucharmap/gucharmap-menus.ui.h:15
 msgid "_Search"
@@ -449,7 +449,7 @@ msgstr "Oddělovač, odstavec"
 msgid "Separator, Space"
 msgstr "Oddělovač, mezera"
 
-#: ../gucharmap/gucharmap-window.c:451
+#: ../gucharmap/gucharmap-window.c:422
 msgid ""
 "Gucharmap is free software; you can redistribute it and/or modify it under "
 "the terms of the GNU General Public License as published by the Free "
@@ -461,7 +461,7 @@ msgstr ""
 "to buď verze 3 této licence anebo (podle vlastního uvážení) kterékoliv "
 "pozdější verze."
 
-#: ../gucharmap/gucharmap-window.c:455
+#: ../gucharmap/gucharmap-window.c:426
 msgid ""
 "Permission is hereby granted, free of charge, to any person obtaining a copy "
 "of the Unicode data files to deal in them without restriction, including "
@@ -472,7 +472,7 @@ msgstr ""
 "daty o Unicode, aby s nimi nakládala bez omezení, včetně práv používat, "
 "kopírovat, modifikovat, slučovat, zveřejňovat šířit, a/nebo prodávat kopie."
 
-#: ../gucharmap/gucharmap-window.c:459
+#: ../gucharmap/gucharmap-window.c:430
 msgid ""
 "Gucharmap and the Unicode data files are distributed in the hope that they "
 "will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty "
@@ -484,7 +484,7 @@ msgstr ""
 "PRODEJNOSTI anebo VHODNOSTI PRO URČITÝ ÚČEL. Další podrobnosti hledejte v "
 "GNU General Public License a v Unicode Copyright."
 
-#: ../gucharmap/gucharmap-window.c:463
+#: ../gucharmap/gucharmap-window.c:434
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "Gucharmap; if not, write to the Free Software Foundation, Inc., 59 Temple "
@@ -494,7 +494,7 @@ msgstr ""
 "Gucharmap; pokud se tak nestalo, napište o ni Free Software Foundation, "
 "Inc., 59 Temple Place, Suite 330, Boston, MA  02110-1301, USA."
 
-#: ../gucharmap/gucharmap-window.c:466
+#: ../gucharmap/gucharmap-window.c:437
 msgid ""
 "Also you should have received a copy of the Unicode Copyright along with "
 "Gucharmap; you can always find it at Unicode's website: http://www.unicode."
@@ -504,15 +504,15 @@ msgstr ""
 "Gucharmap; tu lze najít na webové stránce Unicode: http://www.unicode.org/"
 "copyright.html"
 
-#: ../gucharmap/gucharmap-window.c:476 ../gucharmap/main.c:39
+#: ../gucharmap/gucharmap-window.c:447 ../gucharmap/main.c:39
 msgid "GNOME Character Map"
 msgstr "Mapa znaků GNOME"
 
-#: ../gucharmap/gucharmap-window.c:478
+#: ../gucharmap/gucharmap-window.c:449
 msgid "Based on the Unicode Character Database 6.2.0"
 msgstr "Vychází z Unicode Character Database 6.2.0"
 
-#: ../gucharmap/gucharmap-window.c:487
+#: ../gucharmap/gucharmap-window.c:458
 msgid "translator-credits"
 msgstr ""
 "Miloslav Trmač <mitr@volny.cz>\n"
@@ -521,28 +521,28 @@ msgstr ""
 "Petr Kovář <pknbe@volny.cz>\n"
 "Marek Černocký <marek@manet.cz>"
 
-#: ../gucharmap/gucharmap-window.c:576
+#: ../gucharmap/gucharmap-window.c:547
 msgid "Next Script"
 msgstr "Následující písmo"
 
-#: ../gucharmap/gucharmap-window.c:576
+#: ../gucharmap/gucharmap-window.c:547
 msgid "Previous Script"
 msgstr "Předchozí písmo"
 
-#: ../gucharmap/gucharmap-window.c:581
+#: ../gucharmap/gucharmap-window.c:552
 msgid "Next Block"
 msgstr "Další blok"
 
-#: ../gucharmap/gucharmap-window.c:581
+#: ../gucharmap/gucharmap-window.c:552
 msgid "Previous Block"
 msgstr "Předchozí blok"
 
 #. Text to copy entry + button
-#: ../gucharmap/gucharmap-window.c:855
+#: ../gucharmap/gucharmap-window.c:804
 msgid "_Text to copy:"
 msgstr "_Text ke zkopírování:"
 
-#: ../gucharmap/gucharmap-window.c:862
+#: ../gucharmap/gucharmap-window.c:811
 msgid "Copy to the clipboard."
 msgstr "Zkopírovat do schránky."
 
@@ -1486,3 +1486,64 @@ msgstr "Phags Pa"
 #: ../gucharmap/unicode-scripts.h:117
 msgid "Yi"
 msgstr "Yi"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:1
+msgid "Character map grouping method"
+msgstr "Způsob seskupování mapy znaků"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:2
+msgid ""
+"This is how the characters in the character map are grouped. The characters "
+"can either be grouped by 'script' or 'block'."
+msgstr ""
+"Jak se mají znaky v mapě znaků seskupovat. Seskupovat se mohou podle písma "
+"(„script“) nebo podle bloku Unikódu („block“)."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
+msgid "Character map font description"
+msgstr "Písmo pro zobrazování v mapě znaků"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:4
+msgid ""
+"The font to use for the character map. If set to 'nothing' then the default "
+"is the system font with the size doubled. Otherwise it should be a font "
+"description string like 'Sans 24'."
+msgstr ""
+"Písmo použité pro mapu znaků. Pokud je nastaveno na „nothing“, bude výchozím "
+"systémové písmo ve dvojnásobné velikosti. Pro nastavení konkrétního písma se "
+"používá popisný řetězec typu „Sans 24“."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:5
+msgid "Snap number of columns to a power of two"
+msgstr "Nastavovat počet sloupců jen v mocninách dvojky"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:6
+msgid ""
+"The number of columns in the character map grid is determined by the width "
+"of the window. If this setting is 'true' then the value will be forced to "
+"the nearest power of two."
+msgstr ""
+"Počet sloupců v mřížce mapy znaků se odvíjí od šířky okna. Pokud je toto "
+"nastavení „zapnuto“, bude počet nabývat pouze hodnot mocniny dvou."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:7
+msgid "Last selected character"
+msgstr "Poslední vybraný znak"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:8
+msgid ""
+"This is the last character that was selected in the character map (and will "
+"be selected again when the character map is next started).\n"
+"\n"
+"By default, it is the first letter of the alphabet in the current locale."
+msgstr ""
+"Toto je znak, který byl v mapě znaků vybrán jako poslední (a bude vybrán "
+"znovu, až bude mapa znaků znovu spuštěna).\n"
+"\n"
+"Jako výchozí hodnota je první znak abecedy v aktuálním národním prostředí."
+
+#. The unicode code point of the first letter of the alphabet
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:12
+msgctxt "First letter"
+msgid "0x41"
+msgstr "0x41"
