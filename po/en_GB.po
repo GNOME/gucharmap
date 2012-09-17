@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-05 19:35+0100\n"
-"PO-Revision-Date: 2012-09-05 19:35+0100\n"
+"POT-Creation-Date: 2012-09-17 21:09+0100\n"
+"PO-Revision-Date: 2012-09-17 21:09+0100\n"
 "Last-Translator: Bruce Cowan <bruce@bcowan.me.uk>\n"
 "Language-Team: British English <en@li.org>\n"
 "Language: en_GB\n"
@@ -1479,6 +1479,68 @@ msgstr "Phags Pa"
 #: ../gucharmap/unicode-scripts.h:117
 msgid "Yi"
 msgstr "Yi"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:1
+msgid "Character map grouping method"
+msgstr "Character map grouping method"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:2
+msgid ""
+"This is how the characters in the character map are grouped. The characters "
+"can either be grouped by 'script' or 'block'."
+msgstr ""
+"This is how the characters in the character map are grouped. The characters "
+"can either be grouped by 'script' or 'block'."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
+msgid "Character map font description"
+msgstr "Character map font description"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:4
+msgid ""
+"The font to use for the character map. If set to 'nothing' then the default "
+"is the system font with the size doubled. Otherwise it should be a font "
+"description string like 'Sans 24'."
+msgstr ""
+"The font to use for the character map. If set to 'nothing' then the default "
+"is the system font with the size doubled. Otherwise it should be a font "
+"description string like 'Sans 24'."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:5
+msgid "Snap number of columns to a power of two"
+msgstr "Snap number of columns to a power of two"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:6
+msgid ""
+"The number of columns in the character map grid is determined by the width "
+"of the window. If this setting is 'true' then the value will be forced to "
+"the nearest power of two."
+msgstr ""
+"The number of columns in the character map grid is determined by the width "
+"of the window. If this setting is 'true' then the value will be forced to "
+"the nearest power of two."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:7
+msgid "Last selected character"
+msgstr "Last selected character"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:8
+msgid ""
+"This is the last character that was selected in the character map (and will "
+"be selected again when the character map is next started).\n"
+"\n"
+"By default, it is the first letter of the alphabet in the current locale."
+msgstr ""
+"This is the last character that was selected in the character map (and will "
+"be selected again when the character map is next started).\n"
+"\n"
+"By default, it is the first letter of the alphabet in the current locale."
+
+#. The unicode code point of the first letter of the alphabet
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:12
+msgctxt "First letter"
+msgid "0x41"
+msgstr "0x41"
 
 #~ msgid "GConf could not be initialized."
 #~ msgstr "GConf could not be initialised."
