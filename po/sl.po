@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gucharmap&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-09-15 18:40+0000\n"
-"PO-Revision-Date: 2012-09-15 20:49+0100\n"
+"POT-Creation-Date: 2012-09-18 00:16+0000\n"
+"PO-Revision-Date: 2012-09-18 09:05+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: \n"
@@ -1542,7 +1542,7 @@ msgstr "Način skupinjenja znakov preglednic"
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:2
 msgid "This is how the characters in the character map are grouped. The characters can either be grouped by 'script' or 'block'."
-msgstr ""
+msgstr "Nastavitev določa način združevanja znakov v skupine. Ti so lahko združeni na osnovi oblike pisave (npr.: skript) ali pa po blokih."
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
 msgid "Character map font description"
@@ -1550,7 +1550,7 @@ msgstr "Opis pisave preglednice znakov"
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:4
 msgid "The font to use for the character map. If set to 'nothing' then the default is the system font with the size doubled. Otherwise it should be a font description string like 'Sans 24'."
-msgstr ""
+msgstr "Pisava za prikaz znakov v razpredelnici. V primeru, da vrednost ni izbrana, je uporabljena sistemska pisava s podvojeno velikostjo. Sicer je treba navesti opis pisave kot 'Sans 24', kjer številka določa velikost."
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:5
 msgid "Snap number of columns to a power of two"
@@ -1558,7 +1558,7 @@ msgstr "Poravnaj _stolpce po potenci števila dva"
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:6
 msgid "The number of columns in the character map grid is determined by the width of the window. If this setting is 'true' then the value will be forced to the nearest power of two."
-msgstr ""
+msgstr "Število stolpcev v razpredelnici znakov je določeno s širino okna. Izbrana možnost določa, da bo ta vrednost vedno vsiljena na število stolpcev, ki je najbližje potenci števila dva."
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:7
 msgid "Last selected character"
@@ -1570,6 +1570,9 @@ msgid ""
 "\n"
 "By default, it is the first letter of the alphabet in the current locale."
 msgstr ""
+"To je zadnji znak, ki je bil izbran iz razpredelnice znakov (in bo izbran ponovno, ko bo program znova zagnan).\n"
+"\n"
+"Privzeto je na tem mestu prva črka abecede trenutno dejavnih jezikovnih nastavitev sistema."
 
 #. The unicode code point of the first letter of the alphabet
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:12
