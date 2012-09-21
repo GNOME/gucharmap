@@ -12,14 +12,15 @@ msgstr ""
 "Project-Id-Version: gucharmap.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gucharmap&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-02-06 15:59+0000\n"
-"PO-Revision-Date: 2012-03-23 16:52+0530\n"
-"Last-Translator: chandankumar(ciypro) <chandankumar.093047@gmail.com>\n"
-"Language-Team: Hindi <indlinux-hindi@lists.sourceforge.net>\n"
+"POT-Creation-Date: 2012-09-13 16:31+0000\n"
+"PO-Revision-Date: 2012-09-21 08:44+0530\n"
+"Last-Translator: chandankumar <chandankumar.093047@gmail.com>\n"
+"Language-Team: Hindi <kde-i18n-doc@kde.org>\n"
+"Language: hi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.2\n"
+"X-Generator: Lokalize 1.4\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 "\n"
 "\n"
@@ -27,10 +28,9 @@ msgstr ""
 "\n"
 "\n"
 "\n"
-"Language: hi\n"
 
-#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:839
-#: ../gucharmap/main.c:80
+#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:773
+#: ../gucharmap/main.c:236
 msgid "Character Map"
 msgstr "अक्षर तालिका"
 
@@ -169,6 +169,92 @@ msgstr "नहीं मिले."
 #: ../gucharmap/gucharmap-chartable.c:1299
 msgid "Character found."
 msgstr "अक्षर मिले."
+
+#: ../gucharmap/gucharmap-menus.ui.h:1
+msgid "By _Script"
+msgstr "स्क्रिप्ट द्वारा (_S)"
+
+#: ../gucharmap/gucharmap-menus.ui.h:2
+msgid "By _Unicode Block"
+msgstr "यूनिकोड ब्लॉक द्वारा (_U)"
+
+#: ../gucharmap/gucharmap-menus.ui.h:3
+msgid "Sho_w only glyphs from this font"
+msgstr "इस फ़ॉन्ट से केवल glyphs दिखाएँ (_w)"
+
+#: ../gucharmap/gucharmap-menus.ui.h:4
+msgid "Zoom _In"
+msgstr "बड़ा आकार (_I)"
+
+#: ../gucharmap/gucharmap-menus.ui.h:5
+msgid "Zoom _Out"
+msgstr "छोटा आकार (_O)"
+
+#: ../gucharmap/gucharmap-menus.ui.h:6
+msgid "_Normal Size"
+msgstr "सामान्य आकार (_N)"
+
+#  follow hig guidelines
+#: ../gucharmap/gucharmap-menus.ui.h:7
+#| msgid "Find"
+msgid "_Find"
+msgstr "ढूँढें (_F)"
+
+#: ../gucharmap/gucharmap-menus.ui.h:8
+msgid "_Help"
+msgstr "मदद (_H)"
+
+#: ../gucharmap/gucharmap-menus.ui.h:9
+msgid "_About"
+msgstr "के बारे में (_A)"
+
+#: ../gucharmap/gucharmap-menus.ui.h:10
+msgid "_Close Window"
+msgstr "विंडो बंद करें (_C)"
+
+#: ../gucharmap/gucharmap-menus.ui.h:11
+msgid "_File"
+msgstr "फ़ाइल (_F)"
+
+#: ../gucharmap/gucharmap-menus.ui.h:12
+msgid "_Close"
+msgstr "बंद करें (_C)"
+
+#: ../gucharmap/gucharmap-menus.ui.h:13
+msgid "_View"
+msgstr "देखें (_V)"
+
+#: ../gucharmap/gucharmap-menus.ui.h:14
+msgid "Snap _Columns to Power of Two"
+msgstr "पावर ऑफ टू में स्तंभ स्नैप करता है (_C)"
+
+#: ../gucharmap/gucharmap-menus.ui.h:15
+msgid "_Search"
+msgstr "ढूंढें (_S)"
+
+#: ../gucharmap/gucharmap-menus.ui.h:16
+msgid "Find _Next"
+msgstr "अगला ढूंढें (_N)"
+
+#: ../gucharmap/gucharmap-menus.ui.h:17
+msgid "Find _Previous"
+msgstr "पिछला ढूंढें (_P)"
+
+#: ../gucharmap/gucharmap-menus.ui.h:18
+msgid "_Go"
+msgstr "जाएँ (_G)"
+
+#: ../gucharmap/gucharmap-menus.ui.h:19
+msgid "_Next Character"
+msgstr "अगला अक्षर (_N)"
+
+#: ../gucharmap/gucharmap-menus.ui.h:20
+msgid "_Previous Character"
+msgstr "पिछला अक्षर (_P)"
+
+#: ../gucharmap/gucharmap-menus.ui.h:21
+msgid "_Contents"
+msgstr "विषय सूची (_C)"
 
 #: ../gucharmap/gucharmap-mini-fontsel.c:282
 msgid "Font"
@@ -373,12 +459,7 @@ msgstr "पृथक्कारक, अनुच्छेद"
 msgid "Separator, Space"
 msgstr "पृथक्कारक, स्थान"
 
-#: ../gucharmap/gucharmap-window.c:399
-#| msgid ""
-#| "Gucharmap is free software; you can redistribute it and/or modify it "
-#| "under the terms of the GNU General Public License as published by the "
-#| "Free Software Foundation; either version 2 of the License, or (at your "
-#| "option) any later version."
+#: ../gucharmap/gucharmap-window.c:422
 msgid ""
 "Gucharmap is free software; you can redistribute it and/or modify it under "
 "the terms of the GNU General Public License as published by the Free "
@@ -389,10 +470,10 @@ msgstr ""
 "पब्लिक "
 "लाइसेंस के शर्त के अधीन रूपांतरित कर सकते हैंजैसा कि फ्री सॉफ्टवेयर फाउंडेशन "
 "के द्वारा प्रकाशित "
-"किया गया है; या तो लाइसेंस का संस्करण 2या कोई पश्चातवर्ती संस्करण "
-"(आपके विकल्प अनुसार)."
+"किया गया है; या तो लाइसेंस का संस्करण 2या कोई पश्चातवर्ती संस्करण (आपके "
+"विकल्प अनुसार)."
 
-#: ../gucharmap/gucharmap-window.c:403
+#: ../gucharmap/gucharmap-window.c:426
 msgid ""
 "Permission is hereby granted, free of charge, to any person obtaining a copy "
 "of the Unicode data files to deal in them without restriction, including "
@@ -404,7 +485,7 @@ msgstr ""
 "without limitation the rights to use, copy, modify, merge, publish, "
 "distribute, and/or sell copies."
 
-#: ../gucharmap/gucharmap-window.c:407
+#: ../gucharmap/gucharmap-window.c:430
 msgid ""
 "Gucharmap and the Unicode data files are distributed in the hope that they "
 "will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty "
@@ -416,7 +497,7 @@ msgstr ""
 "of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General "
 "Public License and Unicode Copyright for more details."
 
-#: ../gucharmap/gucharmap-window.c:411
+#: ../gucharmap/gucharmap-window.c:434
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "Gucharmap; if not, write to the Free Software Foundation, Inc., 59 Temple "
@@ -426,7 +507,7 @@ msgstr ""
 "Gucharmap; if not, write to the Free Software Foundation, Inc., 59 Temple "
 "Place, Suite 330, Boston, MA  02110-1301  USA"
 
-#: ../gucharmap/gucharmap-window.c:414
+#: ../gucharmap/gucharmap-window.c:437
 msgid ""
 "Also you should have received a copy of the Unicode Copyright along with "
 "Gucharmap; you can always find it at Unicode's website: http://www.unicode."
@@ -436,115 +517,60 @@ msgstr ""
 "Gucharmap; you can always find it at Unicode's website: http://www.unicode."
 "org/copyright.html"
 
-#: ../gucharmap/gucharmap-window.c:424 ../gucharmap/main.c:36
+#: ../gucharmap/gucharmap-window.c:447 ../gucharmap/main.c:39
 msgid "GNOME Character Map"
 msgstr "गनोम वर्ण मानचित्र"
 
-#: ../gucharmap/gucharmap-window.c:426
-#| msgid "Based on the Unicode Character Database 5.1"
-msgid "Based on the Unicode Character Database 6.1.0"
-msgstr "यूनीकोड वर्ण डेटाबेस 6.1.0 पर आधारित"
+#: ../gucharmap/gucharmap-window.c:449
+#| msgid "Based on the Unicode Character Database 6.1.0"
+msgid "Based on the Unicode Character Database 6.2.0"
+msgstr "यूनीकोड वर्ण डेटाबेस 6.2.0 पर आधारित"
 
-#: ../gucharmap/gucharmap-window.c:435
+#: ../gucharmap/gucharmap-window.c:458
 msgid "translator-credits"
 msgstr ""
-"जी. करूणाकर <karunakar@freedomink.org>, रविशंकर श्रीवास्तव<raviratlami@gmail."
-"com>"
+"जी. करूणाकर <karunakar@freedomink.org>, रविशंकर श्रीवास्तव<"
+"raviratlami@gmail.com>"
 
-#: ../gucharmap/gucharmap-window.c:508 ../gucharmap/gucharmap-window.c:802
+#: ../gucharmap/gucharmap-window.c:547
 msgid "Next Script"
 msgstr "अगला स्क्रिप्ट"
 
-#: ../gucharmap/gucharmap-window.c:508 ../gucharmap/gucharmap-window.c:804
+#: ../gucharmap/gucharmap-window.c:547
 msgid "Previous Script"
 msgstr "पिछला स्क्रिप्ट"
 
-#: ../gucharmap/gucharmap-window.c:513
+#: ../gucharmap/gucharmap-window.c:552
 msgid "Next Block"
 msgstr "अगला ब्लॉक"
 
-#: ../gucharmap/gucharmap-window.c:513
+#: ../gucharmap/gucharmap-window.c:552
 msgid "Previous Block"
 msgstr "पिछला ब्लॉक"
 
-#: ../gucharmap/gucharmap-window.c:765
-msgid "_File"
-msgstr "फ़ाइल (_F)"
-
-#: ../gucharmap/gucharmap-window.c:766
-msgid "_View"
-msgstr "देखें (_V)"
-
-#: ../gucharmap/gucharmap-window.c:767
-msgid "_Search"
-msgstr "ढूंढें (_S)"
-
-#: ../gucharmap/gucharmap-window.c:768
-msgid "_Go"
-msgstr "जाएँ (_G)"
-
-#: ../gucharmap/gucharmap-window.c:769
-msgid "_Help"
-msgstr "मदद (_H)"
-
-#: ../gucharmap/gucharmap-window.c:772
-msgid "Page _Setup"
-msgstr "पृष्ठ सेटअप (_S)"
-
-#: ../gucharmap/gucharmap-window.c:793
-msgid "Find _Next"
-msgstr "अगला ढूंढें (_N)"
-
-#: ../gucharmap/gucharmap-window.c:795
-msgid "Find _Previous"
-msgstr "पिछला ढूंढें (_P)"
-
-#: ../gucharmap/gucharmap-window.c:798
-msgid "_Next Character"
-msgstr "अगला अक्षर (_N)"
-
-#: ../gucharmap/gucharmap-window.c:800
-msgid "_Previous Character"
-msgstr "पिछला अक्षर (_P)"
-
-#: ../gucharmap/gucharmap-window.c:807
-msgid "_Contents"
-msgstr "विषय सूची (_C)"
-
-#: ../gucharmap/gucharmap-window.c:809
-msgid "_About"
-msgstr "के बारे में (_A)"
-
-#: ../gucharmap/gucharmap-window.c:819
-msgid "By _Script"
-msgstr "स्क्रिप्ट द्वारा (_S)"
-
-#: ../gucharmap/gucharmap-window.c:821
-msgid "By _Unicode Block"
-msgstr "यूनिकोड ब्लॉक द्वारा (_U)"
-
-#: ../gucharmap/gucharmap-window.c:826
-msgid "Sho_w only glyphs from this font"
-msgstr "इस फ़ॉन्ट से केवल glyphs दिखाएँ (_w)"
-
-#: ../gucharmap/gucharmap-window.c:829
-msgid "Snap _Columns to Power of Two"
-msgstr "पावर ऑफ टू में स्तंभ स्नैप करता है (_C)"
-
 #. Text to copy entry + button
-#: ../gucharmap/gucharmap-window.c:893
+#: ../gucharmap/gucharmap-window.c:804
 msgid "_Text to copy:"
 msgstr "पाठ जिसकी प्रतिलिपि करनी है: (_T)"
 
-#: ../gucharmap/gucharmap-window.c:900
+#: ../gucharmap/gucharmap-window.c:811
 msgid "Copy to the clipboard."
 msgstr "क्लिपबोर्ड पर प्रतिलिपि करें."
 
-#: ../gucharmap/main.c:54
+#: ../gucharmap/main.c:160
+msgid "Page _Setup"
+msgstr "पृष्ठ सेटअप (_S)"
+
+#. g_menu_append (G_MENU (model), _("Print Preview"), "win.print-preview");
+#: ../gucharmap/main.c:162
+msgid "_Print"
+msgstr "छापें (_P)"
+
+#: ../gucharmap/main.c:210
 msgid "Font to start with; ex: 'Serif 27'"
 msgstr "शुरुआती फ़ॉन्ट; जैसे कि 'सेरिफ़ 27'"
 
-#: ../gucharmap/main.c:54
+#: ../gucharmap/main.c:210
 msgid "FONT"
 msgstr "फ़ॉन्ट"
 
@@ -617,7 +643,6 @@ msgid "N'Ko"
 msgstr "N'Ko"
 
 #: ../gucharmap/unicode-blocks.h:31 ../gucharmap/unicode-scripts.h:94
-#| msgid "Carian"
 msgid "Samaritan"
 msgstr "सेमारितन"
 
@@ -626,7 +651,6 @@ msgid "Mandaic"
 msgstr "मनडेक"
 
 #: ../gucharmap/unicode-blocks.h:33
-#| msgid "Latin Extended-A"
 msgid "Arabic Extended-A"
 msgstr "अरबी विस्तारित-अ"
 
@@ -743,7 +767,6 @@ msgid "Mongolian"
 msgstr "मंगोलियाइ"
 
 #: ../gucharmap/unicode-blocks.h:62
-#| msgid "Unified Canadian Aboriginal Syllabics"
 msgid "Unified Canadian Aboriginal Syllabics Extended"
 msgstr "यूनिफ़ाइड कनाडाई अबार्जिनल सिलेबिक्स विस्तृत"
 
@@ -780,7 +803,6 @@ msgid "Sundanese"
 msgstr "सुडानी"
 
 #: ../gucharmap/unicode-blocks.h:71 ../gucharmap/unicode-scripts.h:21
-#| msgid "Katakana"
 msgid "Batak"
 msgstr "दलदल"
 
@@ -793,12 +815,10 @@ msgid "Ol Chiki"
 msgstr "ओल चिकी"
 
 #: ../gucharmap/unicode-blocks.h:74
-#| msgid "Latin-1 Supplement"
 msgid "Sundanese Supplement"
 msgstr "सुडानी संपूरक"
 
 #: ../gucharmap/unicode-blocks.h:75
-#| msgid "Phonetic Extensions"
 msgid "Vedic Extensions"
 msgstr "वैदिक विस्तारण"
 
@@ -1027,7 +1047,6 @@ msgid "Yi Radicals"
 msgstr "यी रेडिकल्स"
 
 #: ../gucharmap/unicode-blocks.h:132 ../gucharmap/unicode-scripts.h:69
-#| msgid "Limbu"
 msgid "Lisu"
 msgstr "लिसू"
 
@@ -1056,7 +1075,6 @@ msgid "Syloti Nagri"
 msgstr "स्यालोटी नागरी"
 
 #: ../gucharmap/unicode-blocks.h:139
-#| msgid "Number Forms"
 msgid "Common Indic Number Forms"
 msgstr "प्रचलित भारतीय संख्या रूप"
 
@@ -1069,7 +1087,6 @@ msgid "Saurashtra"
 msgstr "सौराष्ट्र"
 
 #: ../gucharmap/unicode-blocks.h:142
-#| msgid "Devanagari"
 msgid "Devanagari Extended"
 msgstr "देवनागरी विस्तारित"
 
@@ -1082,12 +1099,10 @@ msgid "Rejang"
 msgstr "रेजांग"
 
 #: ../gucharmap/unicode-blocks.h:145
-#| msgid "Latin Extended-A"
 msgid "Hangul Jamo Extended-A"
 msgstr "हांगुल जोमो विस्तारित-अ"
 
 #: ../gucharmap/unicode-blocks.h:146 ../gucharmap/unicode-scripts.h:57
-#| msgid "Balinese"
 msgid "Javanese"
 msgstr "जावानी"
 
@@ -1096,22 +1111,18 @@ msgid "Cham"
 msgstr "चाम"
 
 #: ../gucharmap/unicode-blocks.h:148
-#| msgid "Latin Extended-A"
 msgid "Myanmar Extended-A"
 msgstr "म्यांमार विस्तारित-अ"
 
 #: ../gucharmap/unicode-blocks.h:149 ../gucharmap/unicode-scripts.h:107
-#| msgid "Tai Le"
 msgid "Tai Viet"
 msgstr "ताइ वेत"
 
 #: ../gucharmap/unicode-blocks.h:150
-#| msgid "Phonetic Extensions"
 msgid "Meetei Mayek Extensions"
 msgstr "मीतेइ मयेक विस्तारण"
 
 #: ../gucharmap/unicode-blocks.h:151
-#| msgid "Ethiopic Extended"
 msgid "Ethiopic Extended-A"
 msgstr "इथोपिक विस्तारित-अ"
 
@@ -1124,7 +1135,6 @@ msgid "Hangul Syllables"
 msgstr "हांगुल अक्षर"
 
 #: ../gucharmap/unicode-blocks.h:154
-#| msgid "Latin Extended-B"
 msgid "Hangul Jamo Extended-B"
 msgstr "हांगुल जामो विस्तारित-ब"
 
@@ -1293,22 +1303,18 @@ msgid "Inscriptional Pahlavi"
 msgstr "शिलालेखात्मक पहलवी"
 
 #: ../gucharmap/unicode-blocks.h:196 ../gucharmap/unicode-scripts.h:87
-#| msgid "Old Italic"
 msgid "Old Turkic"
 msgstr "पुरानी तुर्की"
 
 #: ../gucharmap/unicode-blocks.h:197
-#| msgid "Musical Symbols"
 msgid "Rumi Numeral Symbols"
 msgstr "रूमी अंक प्रतीक"
 
 #: ../gucharmap/unicode-blocks.h:198 ../gucharmap/unicode-scripts.h:24
-#| msgid "Braille"
 msgid "Brahmi"
 msgstr "ब्राह्मी"
 
 #: ../gucharmap/unicode-blocks.h:199 ../gucharmap/unicode-scripts.h:58
-#| msgid "Kharoshthi"
 msgid "Kaithi"
 msgstr "कैथी"
 
@@ -1317,17 +1323,14 @@ msgid "Sora Sompeng"
 msgstr "सोरा सोम्पेंग"
 
 #: ../gucharmap/unicode-blocks.h:201 ../gucharmap/unicode-scripts.h:30
-#| msgid "Cham"
 msgid "Chakma"
 msgstr "चकमा"
 
 #: ../gucharmap/unicode-blocks.h:202 ../gucharmap/unicode-scripts.h:96
-#| msgid "Thaana"
 msgid "Sharada"
 msgstr "शारदा"
 
 #: ../gucharmap/unicode-blocks.h:203 ../gucharmap/unicode-scripts.h:108
-#| msgid "Thai"
 msgid "Takri"
 msgstr "तकरी"
 
@@ -1344,7 +1347,6 @@ msgid "Egyptian Hieroglyphs"
 msgstr "मिस्र हाइरोग्लिफ्स"
 
 #: ../gucharmap/unicode-blocks.h:207
-#| msgid "Arabic Supplement"
 msgid "Bamum Supplement"
 msgstr "बामुम संपूरक"
 
@@ -1353,7 +1355,6 @@ msgid "Miao"
 msgstr "मिओं"
 
 #: ../gucharmap/unicode-blocks.h:209
-#| msgid "Latin-1 Supplement"
 msgid "Kana Supplement"
 msgstr "काना संपूरक"
 
@@ -1382,7 +1383,6 @@ msgid "Mathematical Alphanumeric Symbols"
 msgstr "गणितीय और अक्षर-अंक चिह्न"
 
 #: ../gucharmap/unicode-blocks.h:216
-#| msgid "Mathematical Alphanumeric Symbols"
 msgid "Arabic Mathematical Alphabetic Symbols"
 msgstr "अरबी गणितीय वर्णमाला प्रतीक"
 
@@ -1399,17 +1399,14 @@ msgid "Playing Cards"
 msgstr "ताश खेल रहे हैं"
 
 #: ../gucharmap/unicode-blocks.h:220
-#| msgid "Enclosed Alphanumerics"
 msgid "Enclosed Alphanumeric Supplement"
 msgstr "अक्षरांकीय संपूरक संलग्न है"
 
 #: ../gucharmap/unicode-blocks.h:221
-#| msgid "Ethiopic Supplement"
 msgid "Enclosed Ideographic Supplement"
 msgstr " भाव चित्र संबंधी संपूरक संलग्न है"
 
 #: ../gucharmap/unicode-blocks.h:222
-#| msgid "Miscellaneous Symbols and Arrows"
 msgid "Miscellaneous Symbols And Pictographs"
 msgstr "विविध चिह्न और चित्रलेख"
 
@@ -1418,12 +1415,10 @@ msgid "Emoticons"
 msgstr "हँसमुख"
 
 #: ../gucharmap/unicode-blocks.h:224
-#| msgid "Byzantine Musical Symbols"
 msgid "Transport And Map Symbols"
 msgstr "परिवहन और नक्शा चिह्न"
 
 #: ../gucharmap/unicode-blocks.h:225
-#| msgid "Musical Symbols"
 msgid "Alchemical Symbols"
 msgstr "कीमियाई चिह्न"
 
@@ -1432,12 +1427,10 @@ msgid "CJK Unified Ideographs Extension B"
 msgstr "सीजेके संगतता आइडियोग्राफ्स विस्तारक बी"
 
 #: ../gucharmap/unicode-blocks.h:227
-#| msgid "CJK Unified Ideographs Extension A"
 msgid "CJK Unified Ideographs Extension C"
 msgstr "CJK एकीकृत भाव चित्र संबंधी विस्तार सी"
 
 #: ../gucharmap/unicode-blocks.h:228
-#| msgid "CJK Unified Ideographs Extension A"
 msgid "CJK Unified Ideographs Extension D"
 msgstr "CJK एकीकृत भाव चित्र संबंधी विस्तार डी"
 
@@ -1504,6 +1497,72 @@ msgstr "Phags Pa"
 #: ../gucharmap/unicode-scripts.h:117
 msgid "Yi"
 msgstr "यी"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:1
+#| msgid "Character found."
+msgid "Character map grouping method"
+msgstr "चरित्र नक्शा समूहीकरण विधि"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:2
+msgid ""
+"This is how the characters in the character map are grouped. The characters "
+"can either be grouped by 'script' or 'block'."
+msgstr ""
+"यह कैसे चरित्र नक्शे में वर्ण समूहीकृत कर रहे हैं. वर्ण या तो 'स्क्रिप्ट' या "
+"'ब्लॉक' द्वारा वर्गीकृत किया जा सकता है."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
+#| msgid "Character found."
+msgid "Character map font description"
+msgstr "चरित्र नक्शा फ़ॉन्ट वर्णन "
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:4
+msgid ""
+"The font to use for the character map. If set to 'nothing' then the default "
+"is the system font with the size doubled. Otherwise it should be a font "
+"description string like 'Sans 24'."
+msgstr ""
+"चरित्र नक्शा का उपयोग करने के लिए फ़ॉन्ट. अगर 'कुछ भी नहीं' सेट हैं तो दोगुनी "
+"आकार के "
+"साथ सिस्टम फ़ॉन्ट डिफॉल्ट है. अन्यथा यह 'संस 24' एक फंट विवरण स्ट्रिंग होना "
+"चाहिए."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:5
+#| msgid "Snap _Columns to Power of Two"
+msgid "Snap number of columns to a power of two"
+msgstr "स्तंभों की संख्या दो की एक शक्ति स्नैप करें"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:6
+msgid ""
+"The number of columns in the character map grid is determined by the width "
+"of the window. If this setting is 'true' then the value will be forced to "
+"the nearest power of two."
+msgstr ""
+"चरित्र नक्शा ग्रिड में स्तंभों की संख्या विंडो की चौड़ाई के द्वारा निर्धारित "
+"किया जाता है. "
+"यदि यह सेटिंग 'सही' है तो मान दो के पास शक्ति के लिए मजबूर हो जाएगा."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:7
+msgid "Last selected character"
+msgstr "अंतिम चयनित वर्ण"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:8
+msgid ""
+"This is the last character that was selected in the character map (and will "
+"be selected again when the character map is next started).\n"
+"\n"
+"By default, it is the first letter of the alphabet in the current locale."
+msgstr ""
+"यह आखिरी वर्ण है कि वर्ण नक्शा (और फिर चयन किया जाएगा जब "
+"चरित्र नक्शा अगले शुरू होता है) में चयनित किया गया है \n"
+"\n"
+" डिफ़ॉल्ट रूप से, यह मौजूदा लोकेल में वर्णमाला का पहला अक्षर है."
+
+#. The unicode code point of the first letter of the alphabet
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:12
+msgctxt "First letter"
+msgid "0x41"
+msgstr "0x41"
 
 #~ msgid "GConf could not be initialized."
 #~ msgstr "GConf आरंभीकृत नहीं किया जा सका."
