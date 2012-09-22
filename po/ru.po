@@ -23,8 +23,8 @@ msgstr ""
 "Project-Id-Version: gucharmap trunk\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gucharmap&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-09-13 16:31+0000\n"
-"PO-Revision-Date: 2012-09-18 00:14+0400\n"
+"POT-Creation-Date: 2012-09-18 00:15+0000\n"
+"PO-Revision-Date: 2012-09-22 13:06+0400\n"
 "Last-Translator: Yuri Myasoedov <omerta13@yandex.ru>\n"
 "Language-Team: русский <gnome-cyr@gnome.org>\n"
 "Language: \n"
@@ -1498,7 +1498,6 @@ msgid "Yi"
 msgstr "И"
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:1
-#| msgid "Character found."
 msgid "Character map grouping method"
 msgstr "Метод группировки таблицы символов"
 
@@ -1511,7 +1510,6 @@ msgstr ""
 "алфавитам («script»), либо по блокам («block»)."
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
-#| msgid "Character found."
 msgid "Character map font description"
 msgstr "Описание шрифта таблицы символов"
 
@@ -1526,10 +1524,9 @@ msgstr ""
 "случае, параметр должен быть строкой описания шрифта, например «Sans 24»."
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:5
-#, fuzzy
 #| msgid "Snap _Columns to Power of Two"
 msgid "Snap number of columns to a power of two"
-msgstr "_Число столбцов кратно двум"
+msgstr "Привязать количество столбцов к значению степени двойки"
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:6
 msgid ""
@@ -1537,6 +1534,9 @@ msgid ""
 "of the window. If this setting is 'true' then the value will be forced to "
 "the nearest power of two."
 msgstr ""
+"Количество столбцов таблицы символов определяется шириной окна. Если этот "
+"параметр установлен в значение «true», тогда значением будет ближайшее "
+"значение степени двойки."
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:7
 msgid "Last selected character"
@@ -1549,6 +1549,11 @@ msgid ""
 "\n"
 "By default, it is the first letter of the alphabet in the current locale."
 msgstr ""
+"Это последний символ, выбранный в таблице (этот символ будет снова выбран, "
+"когда таблица будет открыта в следующий раз).\n"
+"\n"
+"По умолчанию таким символом является первая буква алфавита в текущей "
+"используемой локали."
 
 #. The unicode code point of the first letter of the alphabet
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:12
