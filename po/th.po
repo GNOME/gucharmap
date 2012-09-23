@@ -11,15 +11,16 @@ msgstr ""
 "Project-Id-Version: gucharmap\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gucharmap&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-06-25 12:04+0000\n"
-"PO-Revision-Date: 2012-09-06 18:05+0700\n"
+"POT-Creation-Date: 2012-09-13 16:31+0000\n"
+"PO-Revision-Date: 2012-09-23 20:37+0700\n"
 "Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
+"Language: th\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:824
+#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:773
 #: ../gucharmap/main.c:236
 msgid "Character Map"
 msgstr "ผังอักขระ"
@@ -212,7 +213,7 @@ msgstr "มุ_มมอง"
 
 #: ../gucharmap/gucharmap-menus.ui.h:14
 msgid "Snap _Columns to Power of Two"
-msgstr "จัดคอลัมน์เป็นจำนวนทวีคูณของ_สอง"
+msgstr "จัดคอลัมน์เป็นจำนวนกำลังของ_สอง"
 
 #: ../gucharmap/gucharmap-menus.ui.h:15
 msgid "_Search"
@@ -442,7 +443,7 @@ msgstr "เครื่องหมายแบ่ง, ย่อหน้า"
 msgid "Separator, Space"
 msgstr "เครื่องหมายแบ่ง, ช่องว่าง"
 
-#: ../gucharmap/gucharmap-window.c:451
+#: ../gucharmap/gucharmap-window.c:422
 msgid ""
 "Gucharmap is free software; you can redistribute it and/or modify it under "
 "the terms of the GNU General Public License as published by the Free "
@@ -453,7 +454,7 @@ msgstr ""
 "ภายใต้เงื่อนไขของ GNU General Public License ที่เผยแพร่โดยมูลนิธิซอฟต์แวร์เสรี "
 "ไม่ว่าจะเป็นสัญญาอนุญาตรุ่นที่ 3 หรือรุ่นถัดมา (ตามแต่คุณจะเลือก)"
 
-#: ../gucharmap/gucharmap-window.c:455
+#: ../gucharmap/gucharmap-window.c:426
 msgid ""
 "Permission is hereby granted, free of charge, to any person obtaining a copy "
 "of the Unicode data files to deal in them without restriction, including "
@@ -464,7 +465,7 @@ msgstr ""
 "กับแฟ้มข้อมูลได้โดยไม่มีข้อจำกัด รวมถึงและไม่จำกัดเพียงสิทธิ์ที่จะใช้งาน ทำสำเนา ดัดแปลง "
 "รวมเข้ากับข้อมูลอื่น ติดประกาศ แจกจ่าย และ/หรือ ขายฉบับสำเนา"
 
-#: ../gucharmap/gucharmap-window.c:459
+#: ../gucharmap/gucharmap-window.c:430
 msgid ""
 "Gucharmap and the Unicode data files are distributed in the hope that they "
 "will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty "
@@ -476,7 +477,7 @@ msgstr ""
 "_ความเหมาะสมสำหรับวัตถุประสงค์เฉพาะกิจใดๆ_ กรุณาอ่าน GNU General Public License "
 "เพื่อดูรายละเอียดเพิ่มเติม"
 
-#: ../gucharmap/gucharmap-window.c:463
+#: ../gucharmap/gucharmap-window.c:434
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "Gucharmap; if not, write to the Free Software Foundation, Inc., 59 Temple "
@@ -486,7 +487,7 @@ msgstr ""
 "กรุณาติดต่อไปที่ Free Software Foundation, Inc., 59 Temple Place, Suite 330, "
 "Boston, MA  02110-1301  USA"
 
-#: ../gucharmap/gucharmap-window.c:466
+#: ../gucharmap/gucharmap-window.c:437
 msgid ""
 "Also you should have received a copy of the Unicode Copyright along with "
 "Gucharmap; you can always find it at Unicode's website: http://www.unicode."
@@ -495,15 +496,15 @@ msgstr ""
 "นอกจากนี้ คุณควรจะได้รับสำเนาของ Unicode Copyright มาพร้อมกับ Gucharmap ด้วย "
 "ซึ่งมีให้ดาวน์โหลดตลอดเวลาที่เว็บไซต์ของยูนิโค้ด: http://www.unicode.org/copyright.html"
 
-#: ../gucharmap/gucharmap-window.c:476 ../gucharmap/main.c:39
+#: ../gucharmap/gucharmap-window.c:447 ../gucharmap/main.c:39
 msgid "GNOME Character Map"
 msgstr "ผังอักขระของ GNOME"
 
-#: ../gucharmap/gucharmap-window.c:478
+#: ../gucharmap/gucharmap-window.c:449
 msgid "Based on the Unicode Character Database 6.2.0"
 msgstr "โดยใช้ฐานข้อมูลอักขระของยูนิโค้ด 6.2.0"
 
-#: ../gucharmap/gucharmap-window.c:487
+#: ../gucharmap/gucharmap-window.c:458
 msgid "translator-credits"
 msgstr ""
 "Surichat Sumrit <nook@opentle.org>\n"
@@ -511,28 +512,28 @@ msgstr ""
 "Chanchai Junlouchai <taz@opentle.org>\n"
 "Theppitak Karoonboonyanan <thep@linux.thai.net>"
 
-#: ../gucharmap/gucharmap-window.c:576
+#: ../gucharmap/gucharmap-window.c:547
 msgid "Next Script"
 msgstr "ภาษาเขียนถัดไป"
 
-#: ../gucharmap/gucharmap-window.c:576
+#: ../gucharmap/gucharmap-window.c:547
 msgid "Previous Script"
 msgstr "ภาษาเขียนก่อนหน้า"
 
-#: ../gucharmap/gucharmap-window.c:581
+#: ../gucharmap/gucharmap-window.c:552
 msgid "Next Block"
 msgstr "บล็อคถัดไป"
 
-#: ../gucharmap/gucharmap-window.c:581
+#: ../gucharmap/gucharmap-window.c:552
 msgid "Previous Block"
 msgstr "บล็อคก่อนหน้า "
 
 #. Text to copy entry + button
-#: ../gucharmap/gucharmap-window.c:855
+#: ../gucharmap/gucharmap-window.c:804
 msgid "_Text to copy:"
 msgstr "_ข้อความที่จะคัดลอก:"
 
-#: ../gucharmap/gucharmap-window.c:862
+#: ../gucharmap/gucharmap-window.c:811
 msgid "Copy to the clipboard."
 msgstr "ทำสำเนาไปยังคลิปบอร์ด"
 
@@ -627,7 +628,7 @@ msgstr "สะมาเรีย"
 
 #: ../gucharmap/unicode-blocks.h:32 ../gucharmap/unicode-scripts.h:73
 msgid "Mandaic"
-msgstr ""
+msgstr "มันดาอิก"
 
 #: ../gucharmap/unicode-blocks.h:33
 msgid "Arabic Extended-A"
@@ -791,7 +792,7 @@ msgstr "เลปชา"
 
 #: ../gucharmap/unicode-blocks.h:73 ../gucharmap/unicode-scripts.h:83
 msgid "Ol Chiki"
-msgstr ""
+msgstr "โอล จิกี"
 
 #: ../gucharmap/unicode-blocks.h:74
 msgid "Sundanese Supplement"
@@ -1031,7 +1032,7 @@ msgstr "ลีซอ"
 
 #: ../gucharmap/unicode-blocks.h:133 ../gucharmap/unicode-scripts.h:116
 msgid "Vai"
-msgstr ""
+msgstr "ไว"
 
 #: ../gucharmap/unicode-blocks.h:134
 msgid "Cyrillic Extended-B"
@@ -1039,7 +1040,7 @@ msgstr "ซีริลลิก ส่วนขยาย B"
 
 #: ../gucharmap/unicode-blocks.h:135 ../gucharmap/unicode-scripts.h:20
 msgid "Bamum"
-msgstr ""
+msgstr "บามุม"
 
 #: ../gucharmap/unicode-blocks.h:136
 msgid "Modifier Tone Letters"
@@ -1075,7 +1076,7 @@ msgstr "คยาห์"
 
 #: ../gucharmap/unicode-blocks.h:144 ../gucharmap/unicode-scripts.h:92
 msgid "Rejang"
-msgstr ""
+msgstr "เรอจัง"
 
 #: ../gucharmap/unicode-blocks.h:145
 msgid "Hangul Jamo Extended-A"
@@ -1327,7 +1328,7 @@ msgstr "ไฮโรกลิฟอียิปต์"
 
 #: ../gucharmap/unicode-blocks.h:207
 msgid "Bamum Supplement"
-msgstr ""
+msgstr "บามุม ส่วนเสริม"
 
 #: ../gucharmap/unicode-blocks.h:208 ../gucharmap/unicode-scripts.h:77
 msgid "Miao"
@@ -1476,6 +1477,65 @@ msgstr "พัคสปะ"
 #: ../gucharmap/unicode-scripts.h:117
 msgid "Yi"
 msgstr "อี้"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:1
+msgid "Character map grouping method"
+msgstr "วิธีการจัดกลุ่มผังอักขระ"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:2
+msgid ""
+"This is how the characters in the character map are grouped. The characters "
+"can either be grouped by 'script' or 'block'."
+msgstr ""
+"วิธีการจัดกลุ่มอักขระต่างๆ ในผังอักขระ ซึ่งอาจจัดกลุ่มตาม 'script' (ภาษาเขียน) หรือ 'block' "
+"(บล็อคยูนิโค้ด) ก็ได้"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
+msgid "Character map font description"
+msgstr "คำบรรยายแบบอักษรของผังอักขระ"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:4
+msgid ""
+"The font to use for the character map. If set to 'nothing' then the default "
+"is the system font with the size doubled. Otherwise it should be a font "
+"description string like 'Sans 24'."
+msgstr ""
+"แบบอักษรที่จะใช้กับผังอักขระ ถ้ากำหนดเป็น 'nothing' ก็จะใช้แบบอักษรของระบบโดยปริยาย "
+"โดยเพิ่มขนาดตัวอักษรเป็นสองเท่า มิฉะนั้น ก็กำหนดให้เป็นคำบรรยายแบบอักษร เช่น 'Sans 24'"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:5
+msgid "Snap number of columns to a power of two"
+msgstr "จัดคอลัมน์เป็นจำนวนกำลังของสอง"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:6
+msgid ""
+"The number of columns in the character map grid is determined by the width "
+"of the window. If this setting is 'true' then the value will be forced to "
+"the nearest power of two."
+msgstr ""
+"จำนวนคอลัมน์ของตารางในผังอักขระจะพิจารณาจากความกว้างของหน้าต่าง ถ้าค่าตั้งนี้เป็น 'true' "
+"ก็จะบังคับค่านี้ให้เป็นกำลังของสองที่ใกล้ที่สุด"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:7
+msgid "Last selected character"
+msgstr "อักขระที่เลือกล่าสุด"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:8
+msgid ""
+"This is the last character that was selected in the character map (and will "
+"be selected again when the character map is next started).\n"
+"\n"
+"By default, it is the first letter of the alphabet in the current locale."
+msgstr ""
+"อักขระล่าสุดที่เลือกในผังอักขระ และจะเลือกอีกเมื่อเปิดผังอักขระในครั้งต่อไป\n"
+"\n"
+"โดยปกติ ค่านี้จะเป็นตัวอักษรตัวแรกของอักขระของโลแคลปัจจุบัน"
+
+#. The unicode code point of the first letter of the alphabet
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:12
+msgctxt "First letter"
+msgid "0x41"
+msgstr "0x0e01"
 
 #~ msgid "GConf could not be initialized."
 #~ msgstr "ไม่สามารถตั้งต้น GConf ได้"
