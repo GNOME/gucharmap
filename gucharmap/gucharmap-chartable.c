@@ -1052,11 +1052,11 @@ update_scrollbar_adjustment (GucharmapChartable *chartable)
     return;
 
   gtk_adjustment_configure (vadjustment,
-                            1.0 * priv->page_first_cell / priv->cols,
-                            0.0 /* lower */,
-                            1.0 * ((priv->last_cell + priv->cols - 1) / priv->cols) /* upper */,
-                            3.0 /* step increment */,
-                            1.0 * priv->rows /* page increment */,
+                            priv->page_first_cell / priv->cols,
+                            0 /* lower */,
+                            priv->last_cell / priv->cols + 1 /* upper */,
+                            3 /* step increment */,
+                            priv->rows /* page increment */,
                             priv->rows);
 }
 
@@ -1085,20 +1085,13 @@ gucharmap_chartable_set_active_cell (GucharmapChartable *chartable,
     {
       int old_row = old_active_cell / priv->cols;
       int new_row = cell / priv->cols;
-      int row_delta = new_row - old_row;
-      int delta = row_delta * priv->cols;
-      int first_cell_on_last_page = priv->last_cell - (priv->last_cell % priv->cols) - priv->cols * (priv->rows - 1);
-      int new_page_first_cell = old_page_first_cell + delta;
+      int new_page_first_cell = old_page_first_cell + (new_row - old_row) * priv->cols;
+      int last_page_first_cell = (priv->last_cell / priv->cols - priv->rows + 1) * priv->cols;
 
-      if (new_page_first_cell < 0)
-        priv->page_first_cell = 0;
-      else if (new_page_first_cell > first_cell_on_last_page)
-        priv->page_first_cell = first_cell_on_last_page;
-      else
-        priv->page_first_cell = new_page_first_cell;
+      priv->page_first_cell = CLAMP (new_page_first_cell, 0, last_page_first_cell);
 
       if (priv->vadjustment)
-        gtk_adjustment_set_value (priv->vadjustment, 1.0 * priv->page_first_cell / priv->cols);
+        gtk_adjustment_set_value (priv->vadjustment, priv->page_first_cell / priv->cols);
     }
   else if (gtk_widget_get_realized (widget)) {
     expose_cell (chartable, old_active_cell);
