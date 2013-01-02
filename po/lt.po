@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lt\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gucharmap&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-09-13 16:31+0000\n"
-"PO-Revision-Date: 2012-09-13 22:26+0300\n"
+"POT-Creation-Date: 2012-10-27 23:29+0000\n"
+"PO-Revision-Date: 2013-01-02 23:04+0300\n"
 "Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
 "Language: lt\n"
@@ -31,6 +31,10 @@ msgstr "Simbolių lentelė"
 #: ../gucharmap.desktop.in.in.h:2
 msgid "Insert special characters into documents"
 msgstr "Įterpti į dokumentus specialius simbolius"
+
+#: ../gucharmap.desktop.in.in.h:3
+msgid "font;unicode;"
+msgstr "šriftas;unikodas;"
 
 #: ../gucharmap/gucharmap-block-chapters-model.c:84
 msgid "All"
@@ -150,16 +154,16 @@ msgstr "Simbolio _detalės"
 msgid "Character Table"
 msgstr "Simbolių lentelė"
 
-#: ../gucharmap/gucharmap-chartable.c:1294
+#: ../gucharmap/gucharmap-chartable.c:1287
 msgid "Unknown character, unable to identify."
 msgstr "Nežinomas simbolis, nepavyko atpažinti."
 
-#: ../gucharmap/gucharmap-chartable.c:1296
+#: ../gucharmap/gucharmap-chartable.c:1289
 #: ../gucharmap/gucharmap-search-dialog.c:585
 msgid "Not found."
 msgstr "Nerasta."
 
-#: ../gucharmap/gucharmap-chartable.c:1299
+#: ../gucharmap/gucharmap-chartable.c:1292
 msgid "Character found."
 msgstr "Simbolis surastas."
 
@@ -1539,7 +1543,6 @@ msgid "Yi"
 msgstr "Dži"
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:1
-#| msgid "Character found."
 msgid "Character map grouping method"
 msgstr "Simbolių žemėlapio grupavimo metodas"
 
@@ -1548,7 +1551,6 @@ msgid "This is how the characters in the character map are grouped. The characte
 msgstr "Šitaip simboliai yra grupuojami simbolių žemėlapyje. Simboliai gali būti sugrupuoti naudojant „script“ arba „block“."
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
-#| msgid "Character found."
 msgid "Character map font description"
 msgstr "Simbolių žemėlapio šrifto aprašymas"
 
@@ -1557,7 +1559,6 @@ msgid "The font to use for the character map. If set to 'nothing' then the defau
 msgstr "Simbolių žemėlapyje naudojamas šriftas. Jei nustatyta į „nothing“, tuomet naudojamas dvigubo dydžio numatytasis sistemos šriftas. Priešingu atveju tai turėtų būti šrifto aprašymas, pvz. „Sans 24“."
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:5
-#| msgid "Snap _Columns to Power of Two"
 msgid "Snap number of columns to a power of two"
 msgstr "Naudoti dvejeto laipsnių stulpelių skaičių"
 
