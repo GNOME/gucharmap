@@ -4,15 +4,15 @@
 # Maintainer: Danilo Šegan <dsegan@gmx.net>
 # Reviewed on 2004-02-12 by: Danilo Šegan <dsegan@gmx.net>\n"
 # Translated on 2010-08-21 by: Branko Kokanović <branko.kokanovic@gmail.com>
-# Miroslav Nikolić <miroslavnikolic@rocketmail.com>, 2010, 2012.
+# Miroslav Nikolić <miroslavnikolic@rocketmail.com>, 2010, 2012, 2013.
 # Miloš Popović <gpopac@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=guchar"
 "map&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-09-13 16:31+0000\n"
-"PO-Revision-Date: 2012-09-14 06:14+0200\n"
+"POT-Creation-Date: 2012-10-27 23:29+0000\n"
+"PO-Revision-Date: 2013-01-19 11:41+0200\n"
 "Last-Translator: Miroslav Nikolić <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: Serbian <gnom@prevod.org>\n"
 "Language: sr\n"
@@ -31,6 +31,10 @@ msgstr "Tablica znakova"
 #: ../gucharmap.desktop.in.in.h:2
 msgid "Insert special characters into documents"
 msgstr "Unesite naročite znake u dokumenta"
+
+#: ../gucharmap.desktop.in.in.h:3
+msgid "font;unicode;"
+msgstr "slovni lik;pismo;unikod;"
 
 #: ../gucharmap/gucharmap-block-chapters-model.c:84
 msgid "All"
@@ -149,16 +153,16 @@ msgstr "_Detalji o znaku"
 msgid "Character Table"
 msgstr "Tablica znakova"
 
-#: ../gucharmap/gucharmap-chartable.c:1294
+#: ../gucharmap/gucharmap-chartable.c:1287
 msgid "Unknown character, unable to identify."
 msgstr "Nepoznat znak, ne mogu da prepoznam."
 
-#: ../gucharmap/gucharmap-chartable.c:1296
+#: ../gucharmap/gucharmap-chartable.c:1289
 #: ../gucharmap/gucharmap-search-dialog.c:585
 msgid "Not found."
 msgstr "Nije nađen."
 
-#: ../gucharmap/gucharmap-chartable.c:1299
+#: ../gucharmap/gucharmap-chartable.c:1292
 msgid "Character found."
 msgstr "Znak je nađen."
 
@@ -518,6 +522,7 @@ msgstr ""
 "Danilo Šegan <danilo@prevod.org>\n"
 "Slobodan D. Sredojević <slobo@akrep.be>\n"
 "Branko Kokanović <branko.kokanovic@gmail.com>\n"
+"Miroslav Nikolić <miroslavnikolic@rocketmail.com>\n"
 "\n"
 "http://prevod.org — prevodi na srpski jezik"
 
@@ -1489,7 +1494,6 @@ msgid "Yi"
 msgstr "Ji"
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:1
-#| msgid "Character found."
 msgid "Character map grouping method"
 msgstr "Način grupisanja Tablice znakova"
 
@@ -1502,7 +1506,6 @@ msgstr ""
 "mogu biti grupisani prema „script“ (skripti) ili „block“ (bloku)."
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
-#| msgid "Character found."
 msgid "Character map font description"
 msgstr "Opis slovnog lika Tablice znakova"
 
@@ -1518,7 +1521,6 @@ msgstr ""
 "24“."
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:5
-#| msgid "Snap _Columns to Power of Two"
 msgid "Snap number of columns to a power of two"
 msgstr "Broj kolona je stepen dvojke"
 
