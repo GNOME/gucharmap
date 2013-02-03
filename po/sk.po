@@ -1,16 +1,16 @@
 # Slovak translations for gucharmap
-# Copyright (C) 2003-2006, 2008, 2012 Free Software Foundation, Inc.
+# Copyright (C) 2003-2006, 2008, 2012-2013 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gucharmap package.
 # Marcel Telka <marcel@telka.sk>, 2003-2006, 2008.
-# Ján Kyselica <kyselica.jan@gmail.sk>, 2012.
+# Ján Kyselica <kyselica.jan@gmail.sk>, 2012-2013.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gucharmap&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-12-24 19:36+0000\n"
-"PO-Revision-Date: 2012-12-30 11:49+0000\n"
+"POT-Creation-Date: 2012-12-30 12:10+0000\n"
+"PO-Revision-Date: 2013-02-03 15:45+0000\n"
 "Last-Translator: Ján Kyselica <kyselica.jan@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list AT gnome DOT org>\n"
 "Language: sk\n"
@@ -74,11 +74,9 @@ msgstr "UTF-8:"
 msgid "UTF-16:"
 msgstr "UTF-16:"
 
-# PK: escaped != escape
 #: ../gucharmap/gucharmap-charmap.c:629
-#, fuzzy
 msgid "C octal escaped UTF-8:"
-msgstr "C osmičkové escape UTF-8:"
+msgstr "C osmičkové escaped UTF-8:"
 
 #: ../gucharmap/gucharmap-charmap.c:639
 msgid "XML decimal entity:"
@@ -262,8 +260,8 @@ msgid "Font Size"
 msgstr "Veľkosť písma"
 
 # PK: neni to rukopis? kde to je?
+# JK: Label nad zoznamom druhov pisma
 #: ../gucharmap/gucharmap-script-chapters-model.c:155
-#, fuzzy
 msgid "Script"
 msgstr "Písmo"
 
@@ -303,19 +301,16 @@ msgstr "Hľadať _celé slová"
 msgid "Search in character _details"
 msgstr "Vyhľadávať v po_drobnostiach znakov"
 
-# PK: toto je co?
+# JK: Nahradza Unicode nazov pri pismach, ktore neboli oznacene konzorciom Unicode.
 #: ../gucharmap/gucharmap-unicode-info.c:100
-#, fuzzy
 msgid "<Non Private Use High Surrogate>"
-msgstr "<Nesúkromné použitie vyššie náhradné>"
+msgstr "<Vyššie náhradné pre nesúkromné použitie>"
 
 #: ../gucharmap/gucharmap-unicode-info.c:102
-#, fuzzy
 msgid "<Private Use High Surrogate>"
-msgstr "<Súkromné použitie vyššie náhradné>"
+msgstr "<Vyššie náhradné pre súkromné použitie>"
 
 #: ../gucharmap/gucharmap-unicode-info.c:104
-#, fuzzy
 msgid "<Low Surrogate>"
 msgstr "<Nižšie náhradné>"
 
@@ -324,19 +319,16 @@ msgid "<Private Use>"
 msgstr "<Súkromné použitie>"
 
 #: ../gucharmap/gucharmap-unicode-info.c:108
-#, fuzzy
 msgid "<Plane 15 Private Use>"
-msgstr "<Hladina 15 súkromné použitie>"
+msgstr "<Úroveň 15 pre súkromné použitie>"
 
 #: ../gucharmap/gucharmap-unicode-info.c:110
-#, fuzzy
 msgid "<Plane 16 Private Use>"
-msgstr "<Hladina 16 súkromné použitie>"
+msgstr "<Úroveň 16 pre súkromné použitie>"
 
 #: ../gucharmap/gucharmap-unicode-info.c:115
-#, fuzzy
 msgid "<not assigned>"
-msgstr "<nepridelené>"
+msgstr "<nepriradené>"
 
 #: ../gucharmap/gucharmap-unicode-info.c:128
 msgid "Other, Control"
@@ -348,7 +340,7 @@ msgstr "Ostatné, formát"
 
 #: ../gucharmap/gucharmap-unicode-info.c:130
 msgid "Other, Not Assigned"
-msgstr "Ostatné, nepridelené"
+msgstr "Ostatné, nepriradené"
 
 #: ../gucharmap/gucharmap-unicode-info.c:131
 msgid "Other, Private Use"
@@ -386,11 +378,9 @@ msgstr "Značka, spájanie medzery"
 msgid "Mark, Enclosing"
 msgstr "Značka, uzatváracia"
 
-# PK: toto je kde?
 #: ../gucharmap/gucharmap-unicode-info.c:140
-#, fuzzy
 msgid "Mark, Non-Spacing"
-msgstr "Značka, nie medzery"
+msgstr "Značka, Bez medzier"
 
 #: ../gucharmap/gucharmap-unicode-info.c:141
 msgid "Number, Decimal Digit"
@@ -521,15 +511,14 @@ msgid "GNOME Character Map"
 msgstr "Mapa znakov GNOME"
 
 # JK: Týka sa mapy znakov, preto ženský rod
-# PK: preco to je neprelozene?
 #: ../gucharmap/gucharmap-window.c:449
-#, fuzzy
 msgid "Based on the Unicode Character Database 6.2.0"
-msgstr "Založená na Unicode Character Database 6.2.0"
+msgstr "Založená na databáze Unicode znakov verzie 6.2.0"
 
 #: ../gucharmap/gucharmap-window.c:458
 msgid "translator-credits"
-msgstr "Marcel Telka <marcel@telka.sk>\n"
+msgstr ""
+"Marcel Telka <marcel@telka.sk>\n"
 "Ján Kyselica <kyselica.jan@gmail.com>"
 
 #: ../gucharmap/gucharmap-window.c:547
@@ -566,11 +555,9 @@ msgstr "_Nastavenie strany"
 msgid "_Print"
 msgstr "_Tlačiť"
 
-# PK: inde pismo
 #: ../gucharmap/main.c:210
-#, fuzzy
 msgid "Font to start with; ex: 'Serif 27'"
-msgstr "Font, s ktorým sa má začať; napr. „Serif 27“"
+msgstr "Písmo, s ktorým sa má začať; napr. „Serif 27“"
 
 #: ../gucharmap/main.c:210
 msgid "FONT"
@@ -586,11 +573,11 @@ msgstr "Latinka-1 doplnkové"
 
 #: ../gucharmap/unicode-blocks.h:16
 msgid "Latin Extended-A"
-msgstr "Latinka rozšírená-A"
+msgstr "Latinka rozšírené-A"
 
 #: ../gucharmap/unicode-blocks.h:17
 msgid "Latin Extended-B"
-msgstr "Latinka rozšírená-B"
+msgstr "Latinka rozšírené-B"
 
 #: ../gucharmap/unicode-blocks.h:18
 msgid "IPA Extensions"
@@ -614,7 +601,7 @@ msgstr "Cyrilika"
 
 #: ../gucharmap/unicode-blocks.h:23
 msgid "Cyrillic Supplement"
-msgstr "Cyrilika doplnkovée"
+msgstr "Cyrilika doplnkové"
 
 #: ../gucharmap/unicode-blocks.h:24 ../gucharmap/unicode-scripts.h:17
 msgid "Armenian"
@@ -652,11 +639,10 @@ msgstr "Samaritánske"
 msgid "Mandaic"
 msgstr "Mandaic"
 
-# PK: inde Arabske
+# DK: dal by som: Arabské rozšírené-A
 #: ../gucharmap/unicode-blocks.h:33
-#, fuzzy
 msgid "Arabic Extended-A"
-msgstr "Arabský rozšírený-A"
+msgstr "Arabské rozšírené-A"
 
 #: ../gucharmap/unicode-blocks.h:34 ../gucharmap/unicode-scripts.h:39
 msgid "Devanagari"
@@ -1030,20 +1016,17 @@ msgstr "Vložené CJK písmená a mesiace"
 msgid "CJK Compatibility"
 msgstr "CJK kompatibilita"
 
-# PK: preco nie zjednotene?
 #: ../gucharmap/unicode-blocks.h:127
-#, fuzzy
 msgid "CJK Unified Ideographs Extension A"
-msgstr "CJK unifikované symboly rozšírenie A"
+msgstr "CJK zjednotené symboly rozšírenie A"
 
 #: ../gucharmap/unicode-blocks.h:128
 msgid "Yijing Hexagram Symbols"
 msgstr "Yijing hexagram symboly"
 
 #: ../gucharmap/unicode-blocks.h:129
-#, fuzzy
 msgid "CJK Unified Ideographs"
-msgstr "CJK unifikované symboly"
+msgstr "CJK zjednotené symboly"
 
 #: ../gucharmap/unicode-blocks.h:130
 msgid "Yi Syllables"
@@ -1109,11 +1092,9 @@ msgstr "Rejang"
 msgid "Hangul Jamo Extended-A"
 msgstr "Hangul Jamo rozšírené-A"
 
-# PK: preco nie javske?
 #: ../gucharmap/unicode-blocks.h:146 ../gucharmap/unicode-scripts.h:57
-#, fuzzy
 msgid "Javanese"
-msgstr "Jávsky"
+msgstr "Jávske"
 
 #: ../gucharmap/unicode-blocks.h:147 ../gucharmap/unicode-scripts.h:31
 msgid "Cham"
@@ -1145,7 +1126,7 @@ msgstr "Hangul slabiky"
 
 #: ../gucharmap/unicode-blocks.h:154
 msgid "Hangul Jamo Extended-B"
-msgstr "Hangul Jamo rozšírená-B"
+msgstr "Hangul Jamo rozšírené-B"
 
 #: ../gucharmap/unicode-blocks.h:155
 msgid "High Surrogates"
@@ -1432,19 +1413,16 @@ msgid "Alchemical Symbols"
 msgstr "Alchymistické symboly"
 
 #: ../gucharmap/unicode-blocks.h:226
-#, fuzzy
 msgid "CJK Unified Ideographs Extension B"
-msgstr "CJK unifikované symboly rozšírenie B"
+msgstr "CJK zjednotené symboly rozšírenie B"
 
 #: ../gucharmap/unicode-blocks.h:227
-#, fuzzy
 msgid "CJK Unified Ideographs Extension C"
-msgstr "CJK unifikované symboly rozšírenie C"
+msgstr "CJK zjednotené symboly rozšírenie C"
 
 #: ../gucharmap/unicode-blocks.h:228
-#, fuzzy
 msgid "CJK Unified Ideographs Extension D"
-msgstr "CJK unifikované symboly rozšírenie D"
+msgstr "CJK zjednotené symboly rozšírenie D"
 
 #: ../gucharmap/unicode-blocks.h:229
 msgid "CJK Compatibility Ideographs Supplement"
@@ -1514,15 +1492,13 @@ msgstr "Yi"
 msgid "Character map grouping method"
 msgstr "Spôsob zoskupenia mapy znakov"
 
-# PK: su to keywords
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:2
-#, fuzzy
 msgid ""
 "This is how the characters in the character map are grouped. The characters "
 "can either be grouped by 'script' or 'block'."
 msgstr ""
 "Spôsob akým budú zoskupené znaky v mape znakov. Znaky môžu byť zoskupované "
-"podľa písma alebo bloku Unicode."
+"podľa písma („script“) alebo bloku („block“)."
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
 msgid "Character map font description"
