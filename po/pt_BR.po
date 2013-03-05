@@ -12,21 +12,22 @@
 # André Gondim <In Memoriam>, 2009.
 # Antonio Fernandes C. Neto <fernandesn@gnome.org> 2012.
 # Djavan Fagundes <djavan@comum.org>, 2012.
+# Rafael Ferreira <rafael.f.f1@gmail.com>, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=guchar"
-"map&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-09-13 16:31+0000\n"
-"PO-Revision-Date: 2012-09-17 20:04-0200\n"
-"Last-Translator: Djavan Fagundes <djavan@comum.org>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=gucharmap&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2013-02-27 17:08+0000\n"
+"PO-Revision-Date: 2013-03-03 17:10-0300\n"
+"Last-Translator: Rafael Ferreira <rafael.f.f1@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Virtaal 0.7.1\n"
+"X-Generator: Poedit 1.5.4\n"
 "X-Project-Style: gnome\n"
 
 #: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:773
@@ -37,6 +38,10 @@ msgstr "Mapa de caracteres"
 #: ../gucharmap.desktop.in.in.h:2
 msgid "Insert special characters into documents"
 msgstr "Insira caracteres especiais nos documentos"
+
+#: ../gucharmap.desktop.in.in.h:3
+msgid "font;unicode;"
+msgstr "fonte;unicode;"
 
 #: ../gucharmap/gucharmap-block-chapters-model.c:84
 msgid "All"
@@ -155,16 +160,16 @@ msgstr "_Detalhes do caractere"
 msgid "Character Table"
 msgstr "Tabela de caracteres"
 
-#: ../gucharmap/gucharmap-chartable.c:1294
+#: ../gucharmap/gucharmap-chartable.c:1287
 msgid "Unknown character, unable to identify."
 msgstr "Caractere desconhecido, não foi possível identificá-lo."
 
-#: ../gucharmap/gucharmap-chartable.c:1296
+#: ../gucharmap/gucharmap-chartable.c:1289
 #: ../gucharmap/gucharmap-search-dialog.c:585
 msgid "Not found."
 msgstr "Não localizado."
 
-#: ../gucharmap/gucharmap-chartable.c:1299
+#: ../gucharmap/gucharmap-chartable.c:1292
 msgid "Character found."
 msgstr "Caractere localizado."
 
@@ -193,7 +198,6 @@ msgid "_Normal Size"
 msgstr "Tamanho _Normal"
 
 #: ../gucharmap/gucharmap-menus.ui.h:7
-#| msgid "Find"
 msgid "_Find"
 msgstr "_Localizar"
 
@@ -496,8 +500,8 @@ msgid ""
 "Place, Suite 330, Boston, MA  02110-1301  USA"
 msgstr ""
 "Você deve ter recebido uma cópia da Licença Pública Geral GNU junto com o "
-"Gucharmap (Mapa de Caracteres); caso contrário, escreva para a Free Software "
-"Foundation, Inc., 51 Franklin Street, Fifth Floor, MA 02110-1301 USA."
+"Gucharmap (Mapa de caracteres); caso contrário, escreva para a Free Software "
+"Foundation, Inc., 51 Franklin Street, Fifth Floor, MA 02110-1301 USA"
 
 #: ../gucharmap/gucharmap-window.c:437
 msgid ""
@@ -514,7 +518,6 @@ msgid "GNOME Character Map"
 msgstr "Mapa de caracteres GNOME"
 
 #: ../gucharmap/gucharmap-window.c:449
-#| msgid "Based on the Unicode Character Database 6.1.0"
 msgid "Based on the Unicode Character Database 6.2.0"
 msgstr "Baseado no banco de dados de caracteres Unicode 6.2.0"
 
@@ -1499,7 +1502,6 @@ msgid "Yi"
 msgstr "Yi"
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:1
-#| msgid "Character found."
 msgid "Character map grouping method"
 msgstr "Método de agrupar caractere mapeado"
 
@@ -1512,7 +1514,6 @@ msgstr ""
 "caracteres podem também ser agrupados por \"script\" ou \"bloco\"."
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
-#| msgid "Character found."
 msgid "Character map font description"
 msgstr "Descrição da fonte de mapa de caractere"
 
@@ -1522,12 +1523,11 @@ msgid ""
 "is the system font with the size doubled. Otherwise it should be a font "
 "description string like 'Sans 24'."
 msgstr ""
-"A fonte usada para o mapa de caracteres. Se definido para \"nenhuma\", então o "
-"padrão será a fonte do sistema com o tamanho dobrado. Caso contrário, deve "
+"A fonte usada para o mapa de caracteres. Se definido para \"nenhuma\", então "
+"o padrão será a fonte do sistema com o tamanho dobrado. Caso contrário, deve "
 "ser uma descrição de fonte como \"Sans 24\"."
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:5
-#| msgid "Snap _Columns to Power of Two"
 msgid "Snap number of columns to a power of two"
 msgstr "Ajustar número colunas para potência de dois"
 
@@ -1538,8 +1538,8 @@ msgid ""
 "the nearest power of two."
 msgstr ""
 "O número das colunas na grade de mapa de caracteres é determinado pela sua "
-"largura da janela. Se esta configuração for \"verdadeira\", então o valor será "
-"forçado para o mais próximo de dois. "
+"largura da janela. Se esta configuração for \"verdadeira\", então o valor "
+"será forçado para o mais próximo de dois."
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:7
 msgid "Last selected character"
