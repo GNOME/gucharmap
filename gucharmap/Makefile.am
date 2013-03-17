@@ -257,18 +257,18 @@ CLEANFILES += $(nodist_gir_DATA) $(nodist_typelib_DATA)
 if ENABLE_VAPIGEN
 include $(VAPIGEN_MAKEFILE)
 
-VAPIGEN_VAPIS = Gucharmap-$(GUCHARMAP_VAPI_VERSION).vapi
+VAPIGEN_VAPIS = gucharmap-$(GUCHARMAP_VAPI_VERSION).vapi
 
-Gucharmap-@GUCHARMAP_VAPI_VERSION@.vapi: Gucharmap-@GUCHARMAP_GIR_VERSION@.gir
-Gucharmap_@GUCHARMAP_VAPI_VERSION_U@_vapi_DEPS = \
+gucharmap-@GUCHARMAP_VAPI_VERSION@.vapi: Gucharmap-@GUCHARMAP_GIR_VERSION@.gir
+gucharmap_@GUCHARMAP_VAPI_VERSION_U@_vapi_DEPS = \
 	glib-2.0 \
 	pango \
 	gdk-$(GTK_API_VERSION) \
 	gtk+-$(GTK_API_VERSION) \
 	$(NULL)
-Gucharmap_@GUCHARMAP_VAPI_VERSION_U@_vapi_METADATADIRS = $(srcdir)
-Gucharmap_@GUCHARMAP_VAPI_VERSION_U@_vapi_VAPIDIRS = $(datadir)/vala-0.18/vapi
-Gucharmap_@GUCHARMAP_VAPI_VERSION_U@_vapi_FILES = Gucharmap-$(GUCHARMAP_GIR_VERSION).gir
+gucharmap_@GUCHARMAP_VAPI_VERSION_U@_vapi_METADATADIRS = $(srcdir)
+gucharmap_@GUCHARMAP_VAPI_VERSION_U@_vapi_VAPIDIRS = $(datadir)/vala-0.18/vapi
+gucharmap_@GUCHARMAP_VAPI_VERSION_U@_vapi_FILES = Gucharmap-$(GUCHARMAP_GIR_VERSION).gir
 
 #vapidir = $(datadir)/vala/vapi
 vapidir = $(VAPIGEN_VAPIDIR)
