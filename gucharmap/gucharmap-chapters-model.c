@@ -67,7 +67,7 @@ gucharmap_chapters_model_class_init (GucharmapChaptersModelClass *klass)
 /**
  * gucharmap_chapters_model_get_codepoint_list:
  * @chapters: a #GucharmapChaptersModel
- * @iter: a #GtkTreeIter
+ * @iter: (out): a #GtkTreeIter
  *
  * Creates a new #GucharmapCodepointList representing the characters in the
  * current chapter.
@@ -127,6 +127,15 @@ gucharmap_chapters_model_get_title (GucharmapChaptersModel *chapters)
   return GUCHARMAP_CHAPTERS_MODEL_GET_CLASS (chapters)->title;
 }
 
+ 
+/**
+ * gucharmap_chapters_model_id_to_iter:
+ * @chapters_model: a #GucharmapChaptersModel
+ * @id: name
+ * @_iter: (out): a #GtkTreeIter
+ *
+ * Return value: %TRUE on success, %FALSE on failure.
+ */
 gboolean
 gucharmap_chapters_model_id_to_iter (GucharmapChaptersModel *chapters_model,
                                      const char *id,

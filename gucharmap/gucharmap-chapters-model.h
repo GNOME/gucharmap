@@ -80,7 +80,7 @@ gboolean                 gucharmap_chapters_model_character_to_iter       (Gucha
                                                                            GtkTreeIter            *iter);
 gboolean                 gucharmap_chapters_model_id_to_iter              (GucharmapChaptersModel *model,
                                                                            const char             *id,
-                                                                           GtkTreeIter            *iter);
+                                                                           GtkTreeIter            *_iter);
 
 G_END_DECLS
 
