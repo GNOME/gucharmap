@@ -1,7 +1,7 @@
 # gucharmap ko.po.
 # This file is distributed under the same license as the gucharmap package.
 # Young-Ho, Cha <ganadist at mizi.com>, 2003-2006.
-# Changwoo Ryu <cwryu@debian.org>, 2007-2012.
+# Changwoo Ryu <cwryu@debian.org>, 2007-2013.
 #
 # 참고:
 # - 이 프로그램을 'Character Map'이라고 하는데 '문자 표'라고 번역.
@@ -17,9 +17,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gucharmap&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-09-13 16:31+0000\n"
-"PO-Revision-Date: 2012-09-15 17:48+0900\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=gucharmap&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2013-02-16 04:18+0000\n"
+"PO-Revision-Date: 2013-03-17 18:32+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: GNOME Korea <gnome-kr@googlegroups.com>\n"
 "Language: Korean\n"
@@ -36,6 +37,10 @@ msgstr "문자 표"
 #: ../gucharmap.desktop.in.in.h:2
 msgid "Insert special characters into documents"
 msgstr "문서에 특수 문자를 입력합니다"
+
+#: ../gucharmap.desktop.in.in.h:3
+msgid "font;unicode;"
+msgstr "font;글꼴;unicode;유니코드;"
 
 #: ../gucharmap/gucharmap-block-chapters-model.c:84
 msgid "All"
@@ -154,16 +159,16 @@ msgstr "문자 자세히(_D)"
 msgid "Character Table"
 msgstr "문자 표"
 
-#: ../gucharmap/gucharmap-chartable.c:1294
+#: ../gucharmap/gucharmap-chartable.c:1287
 msgid "Unknown character, unable to identify."
 msgstr "알 수 없는 문자, 인식할 수 없습니다."
 
-#: ../gucharmap/gucharmap-chartable.c:1296
+#: ../gucharmap/gucharmap-chartable.c:1289
 #: ../gucharmap/gucharmap-search-dialog.c:585
 msgid "Not found."
 msgstr "찾지 못함."
 
-#: ../gucharmap/gucharmap-chartable.c:1299
+#: ../gucharmap/gucharmap-chartable.c:1292
 msgid "Character found."
 msgstr "문자를 찾았습니다."
 
@@ -1510,7 +1515,9 @@ msgstr "문자 표 모으기 방식"
 msgid ""
 "This is how the characters in the character map are grouped. The characters "
 "can either be grouped by 'script' or 'block'."
-msgstr "문자 표에서 문자를 모으는 기준입니다. 'script' 또는 'block' 단위로 모을 수 있습니다."
+msgstr ""
+"문자 표에서 문자를 모으는 기준입니다. 'script' 또는 'block' 단위로 모을 수 있"
+"습니다."
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
 msgid "Character map font description"
@@ -1521,7 +1528,10 @@ msgid ""
 "The font to use for the character map. If set to 'nothing' then the default "
 "is the system font with the size doubled. Otherwise it should be a font "
 "description string like 'Sans 24'."
-msgstr "문자 표에 사용할 글꼴. 'nothing'으로 설정하면 기본 시스템 글꼴에서 크기만 두 배로 확대해 사용합니다. 'nothing'이 아니면 'Sans 24' 따위의 글꼴 지정 문자열입니다."
+msgstr ""
+"문자 표에 사용할 글꼴. 'nothing'으로 설정하면 기본 시스템 글꼴에서 크기만 두 "
+"배로 확대해 사용합니다. 'nothing'이 아니면 'Sans 24' 따위의 글꼴 지정 문자열"
+"입니다."
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:5
 msgid "Snap number of columns to a power of two"
@@ -1532,7 +1542,9 @@ msgid ""
 "The number of columns in the character map grid is determined by the width "
 "of the window. If this setting is 'true' then the value will be forced to "
 "the nearest power of two."
-msgstr "문자 표의 격자에서 열 개수는 창의 너비에 따라 결정됩니다. 이 값이 참이면 그 값은 가장 가까운 2의 거듭제곱으로 맞춥니다."
+msgstr ""
+"문자 표의 격자에서 열 개수는 창의 너비에 따라 결정됩니다. 이 값이 참이면 그 "
+"값은 가장 가까운 2의 거듭제곱으로 맞춥니다."
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:7
 msgid "Last selected character"
@@ -1545,7 +1557,8 @@ msgid ""
 "\n"
 "By default, it is the first letter of the alphabet in the current locale."
 msgstr ""
-"문자 표에서 선택한 가장 최근 문자입니다. 문자 표가 다음번에 시작할 때 이 문자를 선택합니다.\n"
+"문자 표에서 선택한 가장 최근 문자입니다. 문자 표가 다음번에 시작할 때 이 문자"
+"를 선택합니다.\n"
 "\n"
 "기본값은 이 값은 현재 로캘의 맨 첫번째 글자가 됩니다."
 
