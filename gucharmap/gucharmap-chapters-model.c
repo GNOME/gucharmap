@@ -67,7 +67,7 @@ gucharmap_chapters_model_class_init (GucharmapChaptersModelClass *klass)
 /**
  * gucharmap_chapters_model_get_codepoint_list:
  * @chapters: a #GucharmapChaptersModel
- * @iter: (out): a #GtkTreeIter
+ * @iter: a #GtkTreeIter
  *
  * Creates a new #GucharmapCodepointList representing the characters in the
  * current chapter.
