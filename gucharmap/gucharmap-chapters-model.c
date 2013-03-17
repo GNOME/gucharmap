@@ -105,7 +105,7 @@ gucharmap_chapters_model_get_book_codepoint_list (GucharmapChaptersModel *chapte
  * gucharmap_chapters_model_character_to_iter:
  * @chapters: a #GucharmapChaptersModel
  * @wc: a character
- * @iter: a #GtkTreeIter
+ * @iter: (out): a #GtkTreeIter
  *
  * Return value: %TRUE on success, %FALSE on failure.
  **/
