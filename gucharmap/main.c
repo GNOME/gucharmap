@@ -225,7 +225,7 @@ main (int argc, char **argv)
   /* Set programme name explicitly (see bug #653115) */
   g_set_prgname("gucharmap");
 
-  if (!gtk_init_with_args (&argc, &argv, "", goptions, GETTEXT_PACKAGE, &error))
+  if (!gtk_init_with_args (&argc, &argv, NULL, goptions, GETTEXT_PACKAGE, &error))
     {
       g_printerr ("%s\n", error->message);
       g_error_free (error);
