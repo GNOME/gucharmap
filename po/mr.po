@@ -2,21 +2,21 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Sandeep Shedmake <sshedmak@redhat.com>, 2008, 2009, 2012.
+# Sandeep Shedmake <sshedmak@redhat.com>, 2008, 2009, 2012, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap.HEAD.mr\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gucharmap&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-09-13 16:31+0000\n"
-"PO-Revision-Date: 2012-09-20 13:04+0530\n"
+"POT-Creation-Date: 2013-02-16 04:18+0000\n"
+"PO-Revision-Date: 2013-03-20 07:48+0530\n"
 "Last-Translator: Sandeep Shedmake <sshedmak@redhat.com>\n"
 "Language-Team: Marathi <maajhe-sanganak@freelists.org>\n"
 "Language: mr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.4\n"
+"X-Generator: Lokalize 1.5\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
 #: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:773
@@ -27,6 +27,10 @@ msgstr "कॅरेक्टर मॅप"
 #: ../gucharmap.desktop.in.in.h:2
 msgid "Insert special characters into documents"
 msgstr "दस्तऐवजात विशेष अक्षरे प्रविष्ट करा"
+
+#: ../gucharmap.desktop.in.in.h:3
+msgid "font;unicode;"
+msgstr "फाँट;युनिकोड;"
 
 #: ../gucharmap/gucharmap-block-chapters-model.c:84
 msgid "All"
@@ -145,16 +149,16 @@ msgstr "चिन्हाची अधिक माहिती (_D)"
 msgid "Character Table"
 msgstr "अक्षर तक्ता"
 
-#: ../gucharmap/gucharmap-chartable.c:1294
+#: ../gucharmap/gucharmap-chartable.c:1287
 msgid "Unknown character, unable to identify."
 msgstr "अपरिचीत अक्षर, ओळखता आले नाही."
 
-#: ../gucharmap/gucharmap-chartable.c:1296
+#: ../gucharmap/gucharmap-chartable.c:1289
 #: ../gucharmap/gucharmap-search-dialog.c:585
 msgid "Not found."
 msgstr "सापडला नाही."
 
-#: ../gucharmap/gucharmap-chartable.c:1299
+#: ../gucharmap/gucharmap-chartable.c:1292
 msgid "Character found."
 msgstr "अक्षर आढळले."
 
@@ -1477,7 +1481,6 @@ msgid "Yi"
 msgstr "Yi"
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:1
-#| msgid "Character found."
 msgid "Character map grouping method"
 msgstr "अक्षर मॅप गट पद्धती"
 
@@ -1487,10 +1490,10 @@ msgid ""
 "can either be grouped by 'script' or 'block'."
 msgstr ""
 "अशा प्रकारे कॅरेक्टर मॅपमधील अक्षरांना गटात एकत्र केले जाते. अक्षरांना एकतर "
-"'script' किंवा 'block' तर्फे गटात एकत्र करणे शक्य आहे."
+"'script' किंवा "
+"'block' तर्फे गटात एकत्र करणे शक्य आहे."
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
-#| msgid "Character found."
 msgid "Character map font description"
 msgstr "अक्षर नकाशा फाँट वर्णन"
 
@@ -1501,11 +1504,12 @@ msgid ""
 "description string like 'Sans 24'."
 msgstr ""
 "कॅरेक्टर मॅपकरीता वापरण्याजोगी फाँट. 'काहिच नाही' करीता सेट केल्यास "
-"पूर्वनिर्धारित फाँट प्रणालीवरील फाँट असते, ज्याचा आकार दुहेरी असतो. नाहीतर "
-"फाँटचे वर्णन करणारे 'Sans 24' फाँट हवे."
+"पूर्वनिर्धारित फाँट "
+"प्रणालीवरील फाँट असते, ज्याचा आकार दुहेरी असतो. नाहीतर फाँटचे वर्णन करणारे "
+"'Sans 24' "
+"फाँट हवे."
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:5
-#| msgid "Snap _Columns to Power of Two"
 msgid "Snap number of columns to a power of two"
 msgstr "स्तंभाच्या एकूण संख्याला पावर ऑफ टू करा"
 
@@ -1516,7 +1520,8 @@ msgid ""
 "the nearest power of two."
 msgstr ""
 "पटलाच्या रूंदी कॅरेक्टर मॅप ग्रिडमधील स्तंभाची संख्या ठरवते. हि सेटिंग 'true' "
-"असल्यास मूल्य जवळील पावर ऑफ टू करीता जबरनरित्या ठरवले जाते."
+"असल्यास मूल्य "
+"जवळील पावर ऑफ टू करीता जबरनरित्या ठरवले जाते."
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:7
 msgid "Last selected character"
@@ -1530,7 +1535,8 @@ msgid ""
 "By default, it is the first letter of the alphabet in the current locale."
 msgstr ""
 "कॅरेक्टर मॅपमध्ये नीवडलेले हे शेवटचे अक्षर आहे (व त्यास कॅरेक्टर मॅप "
-"पुढच्यावेळी सुरू केल्यावर पुनः नीवडले जाईल).\n"
+"पुढच्यावेळी सुरू केल्यावर पुनः "
+"नीवडले जाईल).\n"
 "\n"
 "पूर्वनिर्धारितपणे, सध्याच्या लोकेलमध्ये हे पहिले अक्षर असते."
 
