@@ -4,24 +4,25 @@
 # Roozbeh Pournader <roozbeh@farsiweb.info>, 2003.
 # Meelad Zakaria <meelad@bamdad.org>, 2004.
 # Behdad Esfahbod <behdad@gnome.org>, 2005.
-# Arash Mousavi <mousavi.arash@gmail.com>, 2011, 2012.
+# Arash Mousavi <mousavi.arash@gmail.com>, 2011, 2012, 2013.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gucharmap&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-06-25 12:04+0000\n"
-"PO-Revision-Date: 2012-09-08 00:50+0330\n"
+"POT-Creation-Date: 2013-02-16 04:18+0000\n"
+"PO-Revision-Date: 2013-03-21 14:23+0330\n"
 "Last-Translator: Arash Mousavi <mousavi.arash@gmail.com>\n"
 "Language-Team: Persian\n"
+"Language: fa_IR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"Language: fa_IR\n"
+"X-Generator: Poedit 1.5.4\n"
 
-#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:824
+#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:773
 #: ../gucharmap/main.c:236
 msgid "Character Map"
 msgstr "جدول نویسه‌ها"
@@ -29,6 +30,10 @@ msgstr "جدول نویسه‌ها"
 #: ../gucharmap.desktop.in.in.h:2
 msgid "Insert special characters into documents"
 msgstr "درج نویسه‌های خاص در نوشتار"
+
+#: ../gucharmap.desktop.in.in.h:3
+msgid "font;unicode;"
+msgstr "قلم;یونیکد;"
 
 #: ../gucharmap/gucharmap-block-chapters-model.c:84
 msgid "All"
@@ -147,16 +152,16 @@ msgstr "_جزئیات نویسه"
 msgid "Character Table"
 msgstr "جدول نویسه‌ها"
 
-#: ../gucharmap/gucharmap-chartable.c:1294
+#: ../gucharmap/gucharmap-chartable.c:1287
 msgid "Unknown character, unable to identify."
 msgstr "نویسه‌ی نامعلوم، شناسایی ممکن نیست."
 
-#: ../gucharmap/gucharmap-chartable.c:1296
+#: ../gucharmap/gucharmap-chartable.c:1289
 #: ../gucharmap/gucharmap-search-dialog.c:585
 msgid "Not found."
 msgstr "یافت نشد."
 
-#: ../gucharmap/gucharmap-chartable.c:1299
+#: ../gucharmap/gucharmap-chartable.c:1292
 msgid "Character found."
 msgstr "نویسه پیدا شد."
 
@@ -185,7 +190,6 @@ msgid "_Normal Size"
 msgstr "_اندازه عادی"
 
 #: ../gucharmap/gucharmap-menus.ui.h:7
-#| msgid "Find"
 msgid "_Find"
 msgstr "_پیدا کردن"
 
@@ -445,7 +449,7 @@ msgstr "جداکننده، بند"
 msgid "Separator, Space"
 msgstr "جداکننده، فاصله"
 
-#: ../gucharmap/gucharmap-window.c:451
+#: ../gucharmap/gucharmap-window.c:422
 msgid ""
 "Gucharmap is free software; you can redistribute it and/or modify it under "
 "the terms of the GNU General Public License as published by the Free "
@@ -457,7 +461,7 @@ msgstr ""
 "دهید یا دوباره توزیع کنید. یا نسخه‌ی 2 اجازه‌نامه یا (به اختیار خودتان) هر "
 "نسخه‌ی بالاتر دیگری."
 
-#: ../gucharmap/gucharmap-window.c:455
+#: ../gucharmap/gucharmap-window.c:426
 msgid ""
 "Permission is hereby granted, free of charge, to any person obtaining a copy "
 "of the Unicode data files to deal in them without restriction, including "
@@ -469,7 +473,7 @@ msgstr ""
 "هرگونه محدودیت در استفاده، رونوشت، تغییر، ادغام، انتشار، توزیع، و/یا فروش "
 "رونوشت‌ها."
 
-#: ../gucharmap/gucharmap-window.c:459
+#: ../gucharmap/gucharmap-window.c:430
 msgid ""
 "Gucharmap and the Unicode data files are distributed in the hope that they "
 "will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty "
@@ -481,7 +485,7 @@ msgstr ""
 "یا مناسب بودن برای یک هدف مشخص. برای جزئیات بیشتر به اجازه‌نامه‌ی همگانی عمومی "
 "گنو را ببینید."
 
-#: ../gucharmap/gucharmap-window.c:463
+#: ../gucharmap/gucharmap-window.c:434
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "Gucharmap; if not, write to the Free Software Foundation, Inc., 59 Temple "
@@ -491,7 +495,7 @@ msgstr ""
 "نیست برای شرکت بنیاد نرم افزارهای آزاد به آدرس زیر بنویسید:Inc., 51 Franklin "
 "Street, Fifth Floor, Boston, MA 02110-1301 USA"
 
-#: ../gucharmap/gucharmap-window.c:466
+#: ../gucharmap/gucharmap-window.c:437
 msgid ""
 "Also you should have received a copy of the Unicode Copyright along with "
 "Gucharmap; you can always find it at Unicode's website: http://www.unicode."
@@ -501,16 +505,15 @@ msgstr ""
 "باشید؛ همیشه می‌توانید آن را از طریق پایگاه وب دریافت کنید: http://www."
 "unicode.org/copyright.html"
 
-#: ../gucharmap/gucharmap-window.c:476 ../gucharmap/main.c:39
+#: ../gucharmap/gucharmap-window.c:447 ../gucharmap/main.c:39
 msgid "GNOME Character Map"
 msgstr "جدول نویسه‌های گنوم"
 
-#: ../gucharmap/gucharmap-window.c:478
-#| msgid "Based on the Unicode Character Database 6.1.0"
+#: ../gucharmap/gucharmap-window.c:449
 msgid "Based on the Unicode Character Database 6.2.0"
 msgstr "براساس بانک اطلاعاتی نویسه‌های یونیکد نسخه ۶.۲.۰"
 
-#: ../gucharmap/gucharmap-window.c:487
+#: ../gucharmap/gucharmap-window.c:458
 msgid "translator-credits"
 msgstr ""
 "آرش موسوی <mousavi.arash@gmail.com>\n"
@@ -518,28 +521,28 @@ msgstr ""
 "روزبه پورنادر <roozbeh@sharif.edu>\n"
 "میلاد زکریا <meelad@bamdad.org>"
 
-#: ../gucharmap/gucharmap-window.c:576
+#: ../gucharmap/gucharmap-window.c:547
 msgid "Next Script"
 msgstr "خط بعد"
 
-#: ../gucharmap/gucharmap-window.c:576
+#: ../gucharmap/gucharmap-window.c:547
 msgid "Previous Script"
 msgstr "خط قبل"
 
-#: ../gucharmap/gucharmap-window.c:581
+#: ../gucharmap/gucharmap-window.c:552
 msgid "Next Block"
 msgstr "بلوک بعد"
 
-#: ../gucharmap/gucharmap-window.c:581
+#: ../gucharmap/gucharmap-window.c:552
 msgid "Previous Block"
 msgstr "بلوک قبل"
 
 #. Text to copy entry + button
-#: ../gucharmap/gucharmap-window.c:855
+#: ../gucharmap/gucharmap-window.c:804
 msgid "_Text to copy:"
 msgstr "_متن برای رونوشت:"
 
-#: ../gucharmap/gucharmap-window.c:862
+#: ../gucharmap/gucharmap-window.c:811
 msgid "Copy to the clipboard."
 msgstr "نسخه‌برداری به تخته‌برش."
 
@@ -1483,6 +1486,70 @@ msgstr "فگس پا"
 #: ../gucharmap/unicode-scripts.h:117
 msgid "Yi"
 msgstr "یی"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:1
+#| msgid "Character found."
+msgid "Character map grouping method"
+msgstr "روش دسته‌بندی جدول نویسه‌ها"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:2
+msgid ""
+"This is how the characters in the character map are grouped. The characters "
+"can either be grouped by 'script' or 'block'."
+msgstr ""
+"این نحوه‌ی دسته‌بندی نویسه‌ها در جدول نویسه‌ها است. نویسه می‌تواند هم بر اساس "
+"«script» و هم بر اساس «block» دسته‌بندی شود."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
+#| msgid "Character found."
+msgid "Character map font description"
+msgstr "توضیح قلم جدول نویسه‌ها"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:4
+msgid ""
+"The font to use for the character map. If set to 'nothing' then the default "
+"is the system font with the size doubled. Otherwise it should be a font "
+"description string like 'Sans 24'."
+msgstr ""
+"قلمی که برای جدول نویسه‌ها استفاده می‌شود. اگر بر روی «nothing» تنظیم شود، "
+"پیش‌فرض قلم سیستم با اندازه دو برابر خواهد بود. در غیر این صورت باید رشته‌ای "
+"حاوی توضیحات قلم مثل «Sans 24» باشد."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:5
+#| msgid "Snap _Columns to Power of Two"
+msgid "Snap number of columns to a power of two"
+msgstr "تنظیم تعداد ستون‌ها به یکی از توان‌های دو"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:6
+msgid ""
+"The number of columns in the character map grid is determined by the width "
+"of the window. If this setting is 'true' then the value will be forced to "
+"the nearest power of two."
+msgstr ""
+"تعداد ستون در جدول نویسه‌ها بر اساس اندازه پنجره تشخیص داده می‌شود. اگر این "
+"گزینه «true» باشد، مقدار به نزدیک‌ترین عدد توان دو انتخاب می‌شود."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:7
+msgid "Last selected character"
+msgstr "آخرین نویسه انتخاب شده"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:8
+msgid ""
+"This is the last character that was selected in the character map (and will "
+"be selected again when the character map is next started).\n"
+"\n"
+"By default, it is the first letter of the alphabet in the current locale."
+msgstr ""
+"این آخرین نویسه‌ای است که جدول نویسه‌ها انتخاب کرده‌اید (و وقتی که دوباره جدول "
+"نویسه‌ها را باز کنید دوباره انتخاب می‌شود).\n"
+"\n"
+"به‌طور پیش‌فرض، اولین حرف الفبا در مکان کنونی است."
+
+#. The unicode code point of the first letter of the alphabet
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:12
+msgctxt "First letter"
+msgid "0x41"
+msgstr "0x41"
 
 #~ msgid "GConf could not be initialized."
 #~ msgstr "راه‌اندازی اولیه GConf امکان‌پذیر نیست."
