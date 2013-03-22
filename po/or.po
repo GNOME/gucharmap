@@ -3,14 +3,14 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
 #
 # Subhransu Behera <arya_subhransu@yahoo.co.in>, 2006.
-# Manoj Kumar Giri <mgiri@redhat.com>, 2008, 2009, 2011, 2012.
+# Manoj Kumar Giri <mgiri@redhat.com>, 2008, 2009, 2011, 2012, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: or\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gucharmap&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-10-27 23:03+0000\n"
-"PO-Revision-Date: 2012-12-04 17:12+0530\n"
+"POT-Creation-Date: 2013-02-16 04:18+0000\n"
+"PO-Revision-Date: 2013-03-22 19:30+0530\n"
 "Last-Translator: Manoj Kumar Giri <mgiri@redhat.com>\n"
 "Language-Team: Oriya <oriya-it@googlegroups.com>\n"
 "Language: or\n"
@@ -30,6 +30,10 @@ msgstr "ଅକ୍ଷର ତାଲିକା"
 #: ../gucharmap.desktop.in.in.h:2
 msgid "Insert special characters into documents"
 msgstr "ଦଲିଲରେ ବିଶେଷ ଅକ୍ଷର ମାନଙ୍କୁ ଭର୍ତ୍ତୀ କରନ୍ତୁ"
+
+#: ../gucharmap.desktop.in.in.h:3
+msgid "font;unicode;"
+msgstr "font;unicode;"
 
 #: ../gucharmap/gucharmap-block-chapters-model.c:84
 msgid "All"
@@ -186,7 +190,6 @@ msgid "_Normal Size"
 msgstr "ସାଧାରଣ ଆକାର (_N)"
 
 #: ../gucharmap/gucharmap-menus.ui.h:7
-#| msgid "Find"
 msgid "_Find"
 msgstr "ଖୋଜନ୍ତୁ (_F)"
 
@@ -507,7 +510,6 @@ msgid "GNOME Character Map"
 msgstr "GNOME ଅକ୍ଷର ତାଲିକା"
 
 #: ../gucharmap/gucharmap-window.c:449
-#| msgid "Based on the Unicode Character Database 6.0.0"
 msgid "Based on the Unicode Character Database 6.2.0"
 msgstr "ୟୁନିକୋଡ ବର୍ଣ୍ଣ ତଥ୍ଯାଧାର 6.2.0 ଉପରେ ଆଧାରିତ"
 
@@ -634,7 +636,6 @@ msgid "Mandaic"
 msgstr "ମଣ୍ଡାଇକ"
 
 #: ../gucharmap/unicode-blocks.h:33
-#| msgid "Latin Extended-A"
 msgid "Arabic Extended-A"
 msgstr "ବିସ୍ତୃତ ଆରବିକ-A"
 
@@ -799,7 +800,6 @@ msgid "Ol Chiki"
 msgstr "ଓଲ ଚିକି"
 
 #: ../gucharmap/unicode-blocks.h:74
-#| msgid "Kana Supplement"
 msgid "Sundanese Supplement"
 msgstr "ସାଣ୍ଡାନିଜ ଅନୁପୂରକ"
 
@@ -1104,7 +1104,6 @@ msgid "Tai Viet"
 msgstr "ତାଈ ଭିଏତ"
 
 #: ../gucharmap/unicode-blocks.h:150
-#| msgid "Meetei Mayek"
 msgid "Meetei Mayek Extensions"
 msgstr "ମିତେଇ ମାଏକ ଅନୁଲଗ୍ନଗୁଡ଼ିକ"
 
@@ -1261,7 +1260,6 @@ msgid "Lydian"
 msgstr "ଲିଡିଆନ"
 
 #: ../gucharmap/unicode-blocks.h:189 ../gucharmap/unicode-scripts.h:76
-#| msgid "Egyptian Hieroglyphs"
 msgid "Meroitic Hieroglyphs"
 msgstr "ମେରୋଇଟିକ ହିଏରୋଗ୍ଲିଫସ"
 
@@ -1370,7 +1368,6 @@ msgid "Mathematical Alphanumeric Symbols"
 msgstr "ଗାଣିତିକ ଆଲଫାନ୍ଯୁମେରିକ (ଉଭୟ ବର୍ଣ୍ଣମାଳା ଏବଂ ସଂଖ୍ଯା ବିଶିଷ୍ଟ) ପ୍ରତୀକ"
 
 #: ../gucharmap/unicode-blocks.h:216
-#| msgid "Mathematical Alphanumeric Symbols"
 msgid "Arabic Mathematical Alphabetic Symbols"
 msgstr "ଆରବିକ ଗାଣିତିକ ଆକ୍ଷରିକ ସଂକେତ"
 
@@ -1487,7 +1484,6 @@ msgid "Yi"
 msgstr "ୟି"
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:1
-#| msgid "Character found."
 msgid "Character map grouping method"
 msgstr "ଅକ୍ଷର ମେଳକ ଶ୍ରେଣୀଭୁକ୍ତ ପଦ୍ଧତି"
 
@@ -1497,11 +1493,10 @@ msgid ""
 "can either be grouped by 'script' or 'block'."
 msgstr ""
 "ଅକ୍ଷରଗୁଡ଼ିକ ଏହିପରି ଭାବରେ ଅକ୍ଷରମାଳାରେ ଶ୍ରେଣୀଭୁକ୍ତ ହୋଇଥାନ୍ତି। ଅକ୍ଷରଗୁଡ଼ିକ "
-"'ସ୍କ୍ରିପ୍ଟ' ଅଥବା 'ବ୍ଲକ' ଦ୍ୱାରା "
-"ଶ୍ରେଣୀଭୁକ୍ତ ହୋଇଥାନ୍ତି।"
+"'ସ୍କ୍ରିପ୍ଟ' ଅଥବା 'ବ୍ଲକ' "
+"ଦ୍ୱାରା ଶ୍ରେଣୀଭୁକ୍ତ ହୋଇଥାନ୍ତି।"
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
-#| msgid "Character found."
 msgid "Character map font description"
 msgstr "ଅକ୍ଷର ମେଳକ ଅକ୍ଷରରୂପ ବର୍ଣ୍ଣନା"
 
@@ -1514,10 +1509,10 @@ msgstr ""
 "ଅକ୍ଷରମାଳାରେ ବ୍ୟବହୃତ ହେବା ପାଇଁ ଅକ୍ଷରରୂପ। ଯଦି 'କିଛି ନୁହଁ' ସେଟ କରାଯାଇଥାଏ ତେବେ "
 "ପୂର୍ବନିର୍ଦ୍ଧାରିତଟି "
 "ହେଉଛି ଦୁଇଗୁଣା ଆକାର ବିଶିଷ୍ଟ ତନ୍ତ୍ର ଅକ୍ଷରରୂପ। ଅନ୍ୟଥା ଏହା 'Sans 24' ପରି ଏକ "
-"ଅକ୍ଷରରୂପ ବର୍ଣ୍ଣନା ଅଟେ।"
+"ଅକ୍ଷରରୂପ ବର୍ଣ୍ଣନା "
+"ଅଟେ।"
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:5
-#| msgid "Snap _Columns to Power of Two"
 msgid "Snap number of columns to a power of two"
 msgstr "ଦ୍ବି-ଘାତ ଅନୁଯାୟୀ ସ୍ତମ୍ଭକୁ ପୃଥକ କରୁଅଛି"
 
@@ -1543,7 +1538,8 @@ msgid ""
 "By default, it is the first letter of the alphabet in the current locale."
 msgstr ""
 "ଏହା ହେଉଛି ଅକ୍ଷରମାଳାରେ ବଛାହୋଇଥିବା ଅନ୍ତିମ ଅକ୍ଷର (ଏବଂ ଏହାକୁ ପୁଣିଥରେ ବଛାହୋଇଥାଏ "
-"ଯେତେବେଳେ ଅକ୍ଷରମେଳକକୁ ପରବର୍ତ୍ତୀ ସମୟରେ ବଛାହୋଇଥାଏ)।\n"
+"ଯେତେବେଳେ "
+"ଅକ୍ଷରମେଳକକୁ ପରବର୍ତ୍ତୀ ସମୟରେ ବଛାହୋଇଥାଏ)।\n"
 "\n"
 "ପୂର୍ବନିର୍ଦ୍ଧାରିତ ଭାବରେ, ଏହା ହେଉଛି ପ୍ରଚଳିତ ଭାଷାର ଅକ୍ଷରମାଳାର ପ୍ରଥମ ଅକ୍ଷର।"
 
