@@ -5,22 +5,22 @@
 # G Karunakar <karunakar@freedomink.org>, 2003.
 # Ravishankar Shrivastava <raviratlami@yahoo.com>, 2004.
 # Rajesh Ranjan <rranjan@redhat.com>, 2006.
-# Rajesh Ranjan <rajesh672@gmail.com>, 2009.
+# Rajesh Ranjan <rajesh672@gmail.com>, 2009, 2013.
 # chandankumar(ciypro) <chandankumar.093047@gmail.com>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gucharmap&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-09-13 16:31+0000\n"
-"PO-Revision-Date: 2012-09-21 08:44+0530\n"
-"Last-Translator: chandankumar <chandankumar.093047@gmail.com>\n"
+"POT-Creation-Date: 2013-02-16 04:18+0000\n"
+"PO-Revision-Date: 2013-03-22 14:33+0530\n"
+"Last-Translator: raj <raj>\n"
 "Language-Team: Hindi <kde-i18n-doc@kde.org>\n"
 "Language: hi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.4\n"
+"X-Generator: Lokalize 1.5\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 "\n"
 "\n"
@@ -37,6 +37,10 @@ msgstr "अक्षर तालिका"
 #: ../gucharmap.desktop.in.in.h:2
 msgid "Insert special characters into documents"
 msgstr "दस्तावेज़ों में विशिष्ट अक्षर प्रविष्ट करें"
+
+#: ../gucharmap.desktop.in.in.h:3
+msgid "font;unicode;"
+msgstr "font;unicode;"
 
 #: ../gucharmap/gucharmap-block-chapters-model.c:84
 msgid "All"
@@ -157,16 +161,16 @@ msgstr "अक्षर विवरण (_D)"
 msgid "Character Table"
 msgstr "अक्षर तालिका"
 
-#: ../gucharmap/gucharmap-chartable.c:1294
+#: ../gucharmap/gucharmap-chartable.c:1287
 msgid "Unknown character, unable to identify."
 msgstr "अज्ञात अक्षर, पहचानने में अक्षम"
 
-#: ../gucharmap/gucharmap-chartable.c:1296
+#: ../gucharmap/gucharmap-chartable.c:1289
 #: ../gucharmap/gucharmap-search-dialog.c:585
 msgid "Not found."
 msgstr "नहीं मिले."
 
-#: ../gucharmap/gucharmap-chartable.c:1299
+#: ../gucharmap/gucharmap-chartable.c:1292
 msgid "Character found."
 msgstr "अक्षर मिले."
 
@@ -196,7 +200,6 @@ msgstr "सामान्य आकार (_N)"
 
 #  follow hig guidelines
 #: ../gucharmap/gucharmap-menus.ui.h:7
-#| msgid "Find"
 msgid "_Find"
 msgstr "ढूँढें (_F)"
 
@@ -522,7 +525,6 @@ msgid "GNOME Character Map"
 msgstr "गनोम वर्ण मानचित्र"
 
 #: ../gucharmap/gucharmap-window.c:449
-#| msgid "Based on the Unicode Character Database 6.1.0"
 msgid "Based on the Unicode Character Database 6.2.0"
 msgstr "यूनीकोड वर्ण डेटाबेस 6.2.0 पर आधारित"
 
@@ -1499,7 +1501,6 @@ msgid "Yi"
 msgstr "यी"
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:1
-#| msgid "Character found."
 msgid "Character map grouping method"
 msgstr "चरित्र नक्शा समूहीकरण विधि"
 
@@ -1509,10 +1510,10 @@ msgid ""
 "can either be grouped by 'script' or 'block'."
 msgstr ""
 "यह कैसे चरित्र नक्शे में वर्ण समूहीकृत कर रहे हैं. वर्ण या तो 'स्क्रिप्ट' या "
-"'ब्लॉक' द्वारा वर्गीकृत किया जा सकता है."
+"'ब्लॉक' द्वारा "
+"वर्गीकृत किया जा सकता है."
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
-#| msgid "Character found."
 msgid "Character map font description"
 msgstr "चरित्र नक्शा फ़ॉन्ट वर्णन "
 
@@ -1523,12 +1524,10 @@ msgid ""
 "description string like 'Sans 24'."
 msgstr ""
 "चरित्र नक्शा का उपयोग करने के लिए फ़ॉन्ट. अगर 'कुछ भी नहीं' सेट हैं तो दोगुनी "
-"आकार के "
-"साथ सिस्टम फ़ॉन्ट डिफॉल्ट है. अन्यथा यह 'संस 24' एक फंट विवरण स्ट्रिंग होना "
-"चाहिए."
+"आकार के साथ "
+"सिस्टम फ़ॉन्ट डिफॉल्ट है. अन्यथा यह 'संस 24' एक फंट विवरण स्ट्रिंग होना चाहिए."
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:5
-#| msgid "Snap _Columns to Power of Two"
 msgid "Snap number of columns to a power of two"
 msgstr "स्तंभों की संख्या दो की एक शक्ति स्नैप करें"
 
@@ -1553,8 +1552,9 @@ msgid ""
 "\n"
 "By default, it is the first letter of the alphabet in the current locale."
 msgstr ""
-"यह आखिरी वर्ण है कि वर्ण नक्शा (और फिर चयन किया जाएगा जब "
-"चरित्र नक्शा अगले शुरू होता है) में चयनित किया गया है \n"
+"यह आखिरी वर्ण है कि वर्ण नक्शा (और फिर चयन किया जाएगा जब चरित्र नक्शा अगले "
+"शुरू होता "
+"है) में चयनित किया गया है \n"
 "\n"
 " डिफ़ॉल्ट रूप से, यह मौजूदा लोकेल में वर्णमाला का पहला अक्षर है."
 
