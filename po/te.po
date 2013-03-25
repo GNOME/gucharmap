@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 #
-# Krishna Babu K <kkrothap@redhat.com>, 2008, 2009, 2012.
+# Krishna Babu K <kkrothap@redhat.com>, 2008, 2009, 2012, 2013.
 # Hari Krishna <hari@swecha.net>, 2011.
 # Bhuvan Krishna <bhuvan@swecha.net>, 2012.
 msgid ""
@@ -11,15 +11,15 @@ msgstr ""
 "Project-Id-Version: gucharmap.master.te\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gucharmap&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-09-13 16:31+0000\n"
-"PO-Revision-Date: 2012-09-21 21:40+0530\n"
+"POT-Creation-Date: 2013-02-16 04:18+0000\n"
+"PO-Revision-Date: 2013-03-25 13:01+0530\n"
 "Last-Translator: Krishnababu Krothapalli <kkrothap@redhat.com>\n"
 "Language-Team: Telugu <Fedora-trans-te@redhat.com>\n"
 "Language: te\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.4\n"
+"X-Generator: Lokalize 1.5\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 "\n"
 "\n"
@@ -32,6 +32,10 @@ msgstr "ఆక్షర పఠము"
 #: ../gucharmap.desktop.in.in.h:2
 msgid "Insert special characters into documents"
 msgstr "పత్రములలోకి ప్రత్యేక అక్షరములను చేర్చుము"
+
+#: ../gucharmap.desktop.in.in.h:3
+msgid "font;unicode;"
+msgstr "ఫాంట్;యూనికోడ్;"
 
 #: ../gucharmap/gucharmap-block-chapters-model.c:84
 msgid "All"
@@ -150,16 +154,16 @@ msgstr "అక్షరం వివరములు(_D)"
 msgid "Character Table"
 msgstr "అక్షరం పట్టిక"
 
-#: ../gucharmap/gucharmap-chartable.c:1294
+#: ../gucharmap/gucharmap-chartable.c:1287
 msgid "Unknown character, unable to identify."
 msgstr "తెలియని అక్షరం, గుర్తించ లేము."
 
-#: ../gucharmap/gucharmap-chartable.c:1296
+#: ../gucharmap/gucharmap-chartable.c:1289
 #: ../gucharmap/gucharmap-search-dialog.c:585
 msgid "Not found."
 msgstr "కనబడలేదు."
 
-#: ../gucharmap/gucharmap-chartable.c:1299
+#: ../gucharmap/gucharmap-chartable.c:1292
 msgid "Character found."
 msgstr "అక్షరం కనబడింది."
 
@@ -188,7 +192,6 @@ msgid "_Normal Size"
 msgstr "సాదారమ పరిమాణం (_N)"
 
 #: ../gucharmap/gucharmap-menus.ui.h:7
-#| msgid "Find"
 msgid "_Find"
 msgstr "కనుగొనుము (_F)"
 
@@ -512,7 +515,6 @@ msgid "GNOME Character Map"
 msgstr "GNOME ఆక్షర పఠము"
 
 #: ../gucharmap/gucharmap-window.c:449
-#| msgid "Based on the Unicode Character Database 6.1.0"
 msgid "Based on the Unicode Character Database 6.2.0"
 msgstr "యూనికోడ్ అక్షర దత్తాంశం 6.2.0 పై ఆధారపడింది"
 
@@ -1487,7 +1489,6 @@ msgid "Yi"
 msgstr "యి"
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:1
-#| msgid "Character found."
 msgid "Character map grouping method"
 msgstr "అక్షరం పటం సమూహపరచు విధం"
 
@@ -1501,7 +1502,6 @@ msgstr ""
 "సమూహం చేయబడును."
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
-#| msgid "Character found."
 msgid "Character map font description"
 msgstr "అక్షరం పటం ఫాంటు వివరణ"
 
@@ -1512,11 +1512,11 @@ msgid ""
 "description string like 'Sans 24'."
 msgstr ""
 "అక్షరపటం కొరకు వుపయోగించు ఫాంటు. 'nothing' కు అమరిస్తే అప్రమేయంగా సిస్టమ్ "
-"ఫాంటు రెట్టింపు పరిమాణంతో "
-"వుపయోగించును. లేదంటే అది ఫాంటు వివరణ స్ట్రింగ్ 'Sans 24' వలె వుండాలి."
+"ఫాంటు రెట్టింపు "
+"పరిమాణంతో వుపయోగించును. లేదంటే అది ఫాంటు వివరణ స్ట్రింగ్ 'Sans 24' వలె "
+"వుండాలి."
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:5
-#| msgid "Snap _Columns to Power of Two"
 msgid "Snap number of columns to a power of two"
 msgstr "నిలువువరుసల సంఖ్యను ఘాతము రెండుకు రెట్టించుము"
 
@@ -1527,8 +1527,8 @@ msgid ""
 "the nearest power of two."
 msgstr ""
 "అక్షర పటం గ్రిడ్ నందలి నిలువువరుసల సంఖ్య విండో యొక్క వెడల్పుతో "
-"నిర్ణయించబడును. ఈ అమరిక 'true' అయితే విలువ "
-"అనునది దగ్గరలోని 2 యొక్క ఘాతమునకు వత్తిడిచేయబడును."
+"నిర్ణయించబడును. ఈ అమరిక 'true' "
+"అయితే విలువ అనునది దగ్గరలోని 2 యొక్క ఘాతమునకు వత్తిడిచేయబడును."
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:7
 msgid "Last selected character"
@@ -1542,8 +1542,8 @@ msgid ""
 "By default, it is the first letter of the alphabet in the current locale."
 msgstr ""
 "ఇది అక్షర పటం నందు ఆఖరిగా యెంపికచేసిన అక్షరం (మరియు అక్షర పటం తరువాతి సారి "
-"ప్రారంభమైనప్పుడు "
-"మరలా యెంపికచేయబడును).\n"
+"ప్రారంభమైనప్పుడు మరలా "
+"యెంపికచేయబడును).\n"
 "\n"
 "అప్రమేయంగా, యిది ప్రస్తుత స్థానికం యొక్క మొదటి అక్షరం అగును."
 
