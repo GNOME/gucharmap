@@ -171,6 +171,12 @@ fi
 #   AC_MSG_ERROR([hexdump not found])
 # fi
 
+AC_ARG_VAR([DESKTOP_FILE_VALIDATE],[the desktop-file-validate programme])
+AC_PATH_PROG([DESKTOP_FILE_VALIDATE],[desktop-file-validate],[])
+if test -z "$DESKTOP_FILE_VALIDATE"; then
+  AC_MSG_ERROR([desktop-file-validate not found])
+fi
+
 # ****
 # i18n
 # ****

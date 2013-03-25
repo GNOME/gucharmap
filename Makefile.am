@@ -20,6 +20,13 @@ desktop_DATA 	 = $(desktop_in_files:.desktop.in.in=.desktop)
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gucharmap-$(GUCHARMAP_API_PC_VERSION).pc
 
+desktop-file-validate: $(desktop_DATA)
+	for f in $^; do \
+		$(DESKTOP_FILE_VALIDATE) $$f; \
+	done
+
+check-local: desktop-file-validate
+
 EXTRA_DIST = \
 	ChangeLog.pre-2-23 \
 	ChangeLog.README \
