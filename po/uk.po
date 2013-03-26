@@ -5,14 +5,15 @@
 # Maxim Dzumanenko <dziumanenko@gmail.com>, 2003-2010
 # wanderlust <wanderlust@ukr.net>, 2009.
 # Korostil Daniel <ted.korostiled@gmail.com>, 2011, 2012.
+# Daniel Korostil <ted.korostiled@gmail.com>, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-19 14:06+0200\n"
-"PO-Revision-Date: 2012-03-19 14:22+0300\n"
-"Last-Translator: Korostil Daniel <ted.korostiled@gmail.com>\n"
-"Language-Team: translation@linux.org.ua\n"
+"POT-Creation-Date: 2013-03-26 17:20+0200\n"
+"PO-Revision-Date: 2013-03-26 18:19+0300\n"
+"Last-Translator: Daniel Korostil <ted.korostiled@gmail.com>\n"
+"Language-Team: linux.org.ua\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,14 +22,18 @@ msgstr ""
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Virtaal 0.7.1\n"
 
-#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:839
-#: ../gucharmap/main.c:80
+#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:773
+#: ../gucharmap/main.c:236
 msgid "Character Map"
 msgstr "Таблиця символів"
 
 #: ../gucharmap.desktop.in.in.h:2
 msgid "Insert special characters into documents"
 msgstr "Вставляння спеціальних символів у документ"
+
+#: ../gucharmap.desktop.in.in.h:3
+msgid "font;unicode;"
+msgstr "шрифт;унікод;"
 
 #: ../gucharmap/gucharmap-block-chapters-model.c:84
 msgid "All"
@@ -147,18 +152,102 @@ msgstr "Под_робиці про символи"
 msgid "Character Table"
 msgstr "Таблиця символів"
 
-#: ../gucharmap/gucharmap-chartable.c:1294
+#: ../gucharmap/gucharmap-chartable.c:1287
 msgid "Unknown character, unable to identify."
 msgstr "Невідомий символ, неможливо ідентифікувати."
 
-#: ../gucharmap/gucharmap-chartable.c:1296
+#: ../gucharmap/gucharmap-chartable.c:1289
 #: ../gucharmap/gucharmap-search-dialog.c:585
 msgid "Not found."
 msgstr "Не знайдено."
 
-#: ../gucharmap/gucharmap-chartable.c:1299
+#: ../gucharmap/gucharmap-chartable.c:1292
 msgid "Character found."
 msgstr "Символ існує."
+
+#: ../gucharmap/gucharmap-menus.ui.h:1
+msgid "By _Script"
+msgstr "За _системою письма"
+
+#: ../gucharmap/gucharmap-menus.ui.h:2
+msgid "By _Unicode Block"
+msgstr "За блоком _унікоду"
+
+#: ../gucharmap/gucharmap-menus.ui.h:3
+msgid "Sho_w only glyphs from this font"
+msgstr "По_казувати гліфи лише цього шрифту"
+
+#: ../gucharmap/gucharmap-menus.ui.h:4
+msgid "Zoom _In"
+msgstr "З_близити"
+
+#: ../gucharmap/gucharmap-menus.ui.h:5
+msgid "Zoom _Out"
+msgstr "Ві_ддалити"
+
+#: ../gucharmap/gucharmap-menus.ui.h:6
+msgid "_Normal Size"
+msgstr "З_вичайний розмір"
+
+#: ../gucharmap/gucharmap-menus.ui.h:7
+msgid "_Find"
+msgstr "З_найти"
+
+#: ../gucharmap/gucharmap-menus.ui.h:8
+msgid "_Help"
+msgstr "_Довідка"
+
+#: ../gucharmap/gucharmap-menus.ui.h:9
+msgid "_About"
+msgstr "_Про програму"
+
+#: ../gucharmap/gucharmap-menus.ui.h:10
+msgid "_Close Window"
+msgstr "_Закрити вікно"
+
+#: ../gucharmap/gucharmap-menus.ui.h:11
+msgid "_File"
+msgstr "_Файл"
+
+#: ../gucharmap/gucharmap-menus.ui.h:12
+msgid "_Close"
+msgstr "_Закрити"
+
+#: ../gucharmap/gucharmap-menus.ui.h:13
+msgid "_View"
+msgstr "П_ерегляд"
+
+#: ../gucharmap/gucharmap-menus.ui.h:14
+msgid "Snap _Columns to Power of Two"
+msgstr "Кількість с_товпчиків дорівнює степеню двійки"
+
+#: ../gucharmap/gucharmap-menus.ui.h:15
+msgid "_Search"
+msgstr "_Пошук"
+
+#: ../gucharmap/gucharmap-menus.ui.h:16
+msgid "Find _Next"
+msgstr "Знайти _наступний"
+
+#: ../gucharmap/gucharmap-menus.ui.h:17
+msgid "Find _Previous"
+msgstr "Знайти _попередній"
+
+#: ../gucharmap/gucharmap-menus.ui.h:18
+msgid "_Go"
+msgstr "Пере_хід"
+
+#: ../gucharmap/gucharmap-menus.ui.h:19
+msgid "_Next Character"
+msgstr "_Наступний символ"
+
+#: ../gucharmap/gucharmap-menus.ui.h:20
+msgid "_Previous Character"
+msgstr "_Попередній символ"
+
+#: ../gucharmap/gucharmap-menus.ui.h:21
+msgid "_Contents"
+msgstr "_Зміст"
 
 #: ../gucharmap/gucharmap-mini-fontsel.c:282
 msgid "Font"
@@ -360,7 +449,7 @@ msgstr "Розділювач абзаців"
 msgid "Separator, Space"
 msgstr "Розділювач, пробіл"
 
-#: ../gucharmap/gucharmap-window.c:399
+#: ../gucharmap/gucharmap-window.c:422
 msgid ""
 "Gucharmap is free software; you can redistribute it and/or modify it under "
 "the terms of the GNU General Public License as published by the Free "
@@ -372,7 +461,7 @@ msgstr ""
 "Foundation, або версії 3 ліцензії, або (на ваш розсуд) будь-якої подальшої "
 "версії."
 
-#: ../gucharmap/gucharmap-window.c:403
+#: ../gucharmap/gucharmap-window.c:426
 msgid ""
 "Permission is hereby granted, free of charge, to any person obtaining a copy "
 "of the Unicode data files to deal in them without restriction, including "
@@ -383,7 +472,7 @@ msgstr ""
 "Юникоду та працювати з ними без обмежень, включаючи право використання, "
 "копіювання, об'єднання, публікації, розповсюдження та/або продажу копії."
 
-#: ../gucharmap/gucharmap-window.c:407
+#: ../gucharmap/gucharmap-window.c:430
 msgid ""
 "Gucharmap and the Unicode data files are distributed in the hope that they "
 "will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty "
@@ -395,7 +484,7 @@ msgstr ""
 "КОМЕРЦІЙНОЇ ЦІННОСТІ або ВІДПОВІДНОСТІ ПЕВНІЙ МЕТІ. Докладніше про це "
 "дивіться Універсальну Публічній Ліцензії GNU."
 
-#: ../gucharmap/gucharmap-window.c:411
+#: ../gucharmap/gucharmap-window.c:434
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "Gucharmap; if not, write to the Free Software Foundation, Inc., 59 Temple "
@@ -406,7 +495,7 @@ msgstr ""
 "програмного забезпечення за адресою Free Software Foundation, Inc., 59 "
 "Temple Place, Suite 330, Boston, MA  02110-1301  USA"
 
-#: ../gucharmap/gucharmap-window.c:414
+#: ../gucharmap/gucharmap-window.c:437
 msgid ""
 "Also you should have received a copy of the Unicode Copyright along with "
 "Gucharmap; you can always find it at Unicode's website: http://www.unicode."
@@ -416,115 +505,60 @@ msgstr ""
 "можете знайти копію цього документу на веб-сайті http://www.unicode.org/"
 "copyright.html"
 
-#: ../gucharmap/gucharmap-window.c:424 ../gucharmap/main.c:36
+#: ../gucharmap/gucharmap-window.c:447 ../gucharmap/main.c:39
 msgid "GNOME Character Map"
 msgstr "Таблиця символів GNOME"
 
-#: ../gucharmap/gucharmap-window.c:426
-msgid "Based on the Unicode Character Database 6.1.0"
-msgstr "Базується на базі даних символів унікод 6.1.0"
+#: ../gucharmap/gucharmap-window.c:449
+msgid "Based on the Unicode Character Database 6.2.0"
+msgstr "Базується на базі даних символів унікод 6.2.0"
 
-#: ../gucharmap/gucharmap-window.c:435
+#: ../gucharmap/gucharmap-window.c:458
 msgid "translator-credits"
 msgstr ""
 "Юрій Сирота <yuriy@beer.com>\n"
 "Максим Дзюманенко <dziumanenko@gmail.com>\n"
 "Daniel Korostil <ted.korostiled@gmail.com>"
 
-#: ../gucharmap/gucharmap-window.c:508 ../gucharmap/gucharmap-window.c:802
+#: ../gucharmap/gucharmap-window.c:547
 msgid "Next Script"
 msgstr "Наступна система"
 
-#: ../gucharmap/gucharmap-window.c:508 ../gucharmap/gucharmap-window.c:804
+#: ../gucharmap/gucharmap-window.c:547
 msgid "Previous Script"
 msgstr "Попередня система"
 
-#: ../gucharmap/gucharmap-window.c:513
+#: ../gucharmap/gucharmap-window.c:552
 msgid "Next Block"
 msgstr "Наступний блок"
 
-#: ../gucharmap/gucharmap-window.c:513
+#: ../gucharmap/gucharmap-window.c:552
 msgid "Previous Block"
 msgstr "Попередній блок"
 
-#: ../gucharmap/gucharmap-window.c:765
-msgid "_File"
-msgstr "_Файл"
-
-#: ../gucharmap/gucharmap-window.c:766
-msgid "_View"
-msgstr "П_ерегляд"
-
-#: ../gucharmap/gucharmap-window.c:767
-msgid "_Search"
-msgstr "_Пошук"
-
-#: ../gucharmap/gucharmap-window.c:768
-msgid "_Go"
-msgstr "Пере_хід"
-
-#: ../gucharmap/gucharmap-window.c:769
-msgid "_Help"
-msgstr "_Довідка"
-
-#: ../gucharmap/gucharmap-window.c:772
-msgid "Page _Setup"
-msgstr "Пара_метри сторінки"
-
-#: ../gucharmap/gucharmap-window.c:793
-msgid "Find _Next"
-msgstr "Знайти _наступний"
-
-#: ../gucharmap/gucharmap-window.c:795
-msgid "Find _Previous"
-msgstr "Знайти _попередній"
-
-#: ../gucharmap/gucharmap-window.c:798
-msgid "_Next Character"
-msgstr "_Наступний символ"
-
-#: ../gucharmap/gucharmap-window.c:800
-msgid "_Previous Character"
-msgstr "_Попередній символ"
-
-#: ../gucharmap/gucharmap-window.c:807
-msgid "_Contents"
-msgstr "_Зміст"
-
-#: ../gucharmap/gucharmap-window.c:809
-msgid "_About"
-msgstr "_Про програму"
-
-#: ../gucharmap/gucharmap-window.c:819
-msgid "By _Script"
-msgstr "За _системою письма"
-
-#: ../gucharmap/gucharmap-window.c:821
-msgid "By _Unicode Block"
-msgstr "За блоком _унікоду"
-
-#: ../gucharmap/gucharmap-window.c:826
-msgid "Sho_w only glyphs from this font"
-msgstr "По_казувати гліфи лише цього шрифту"
-
-#: ../gucharmap/gucharmap-window.c:829
-msgid "Snap _Columns to Power of Two"
-msgstr "Кількість с_товпчиків дорівнює степеню двійки"
-
 #. Text to copy entry + button
-#: ../gucharmap/gucharmap-window.c:893
+#: ../gucharmap/gucharmap-window.c:804
 msgid "_Text to copy:"
 msgstr "_Текст для копіювання:"
 
-#: ../gucharmap/gucharmap-window.c:900
+#: ../gucharmap/gucharmap-window.c:811
 msgid "Copy to the clipboard."
 msgstr "Копіювати у кишеню."
 
-#: ../gucharmap/main.c:54
+#: ../gucharmap/main.c:160
+msgid "Page _Setup"
+msgstr "Пара_метри сторінки"
+
+#. g_menu_append (G_MENU (model), _("Print Preview"), "win.print-preview");
+#: ../gucharmap/main.c:162
+msgid "_Print"
+msgstr "Над_рукувати"
+
+#: ../gucharmap/main.c:210
 msgid "Font to start with; ex: 'Serif 27'"
 msgstr "З чого починається шрифт; напр., \"Serif 27\""
 
-#: ../gucharmap/main.c:54
+#: ../gucharmap/main.c:210
 msgid "FONT"
 msgstr "ШРИФТ"
 
@@ -1451,6 +1485,67 @@ msgstr "Фагс-Па"
 #: ../gucharmap/unicode-scripts.h:117
 msgid "Yi"
 msgstr "Ї"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:1
+msgid "Character map grouping method"
+msgstr "Спосіб групування карти символів"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:2
+msgid ""
+"This is how the characters in the character map are grouped. The characters "
+"can either be grouped by 'script' or 'block'."
+msgstr ""
+"Яким способом символи в карті згруповано. Символи можна згрупувати як "
+"«скрипт» або «блок»."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
+msgid "Character map font description"
+msgstr "Опис шрифту карти символів"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:4
+msgid ""
+"The font to use for the character map. If set to 'nothing' then the default "
+"is the system font with the size doubled. Otherwise it should be a font "
+"description string like 'Sans 24'."
+msgstr ""
+"Шрифт для карти символів. Якщо вказано «nothing», типовий шрифт — системний "
+"в двічі збільшений. В іншому випадку це має бути рядок, який описує шрифт, "
+"наприклад, «Sans 24»."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:5
+msgid "Snap number of columns to a power of two"
+msgstr "Піднести кількість стовпчиків до другої степені"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:6
+msgid ""
+"The number of columns in the character map grid is determined by the width "
+"of the window. If this setting is 'true' then the value will be forced to "
+"the nearest power of two."
+msgstr ""
+"Кількість стовпчиків у ґратці символьної карти визначено шириною вікна. Якщо "
+"це не вказано, значення буде примусово піднесено до другої степені."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:7
+msgid "Last selected character"
+msgstr "Останній вибраний символ"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:8
+msgid ""
+"This is the last character that was selected in the character map (and will "
+"be selected again when the character map is next started).\n"
+"\n"
+"By default, it is the first letter of the alphabet in the current locale."
+msgstr ""
+"Це останній вибраний символ, який вибрано на карті символів (його буде "
+"вибрано знову, якщо запустити карту наступного разу).\n"
+"\n"
+"Типово, це перша буква абетки поточної локалі."
+
+#. The unicode code point of the first letter of the alphabet
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:12
+msgctxt "First letter"
+msgid "0x41"
+msgstr "&#x0430;"
 
 #~ msgid "GConf could not be initialized."
 #~ msgstr "Не вдається ініціалізувати GConf."
