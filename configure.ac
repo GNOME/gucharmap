@@ -243,7 +243,7 @@ if test -z "$enable_vala"; then
   enable_vala=no
 fi
 m4_ifdef([VAPIGEN_CHECK],
-  [VAPIGEN_CHECK([0.16],[0.18])],
+  [VAPIGEN_CHECK([0.16])],
   [AM_CONDITIONAL([ENABLE_VAPIGEN],[false])])
 
 case "$with_gtk" in

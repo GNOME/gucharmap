@@ -130,7 +130,7 @@ gucharmap_SOURCES = \
 	gucharmap-settings.c \
 	gucharmap-settings.h \
 	gucharmap-window.c \
- 	gucharmap-window.h \
+	gucharmap-window.h \
 	main.c \
 	$(NULL)
 
@@ -267,7 +267,7 @@ gucharmap_@GUCHARMAP_VAPI_VERSION_U@_vapi_DEPS = \
 	gtk+-$(GTK_API_VERSION) \
 	$(NULL)
 gucharmap_@GUCHARMAP_VAPI_VERSION_U@_vapi_METADATADIRS = $(srcdir)
-gucharmap_@GUCHARMAP_VAPI_VERSION_U@_vapi_VAPIDIRS = $(datadir)/vala-0.18/vapi
+gucharmap_@GUCHARMAP_VAPI_VERSION_U@_vapi_VAPIDIRS = $(datadir)/vala/vapi
 gucharmap_@GUCHARMAP_VAPI_VERSION_U@_vapi_FILES = Gucharmap-$(GUCHARMAP_GIR_VERSION).gir
 
 #vapidir = $(datadir)/vala/vapi
