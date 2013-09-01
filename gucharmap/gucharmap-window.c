@@ -561,24 +561,13 @@ gucharmap_window_set_chapters_model (GucharmapWindow *guw,
 }
 
 static void
-view_by (GSimpleAction *action,
-         GVariant      *parameter,
-         gpointer       data)
+gucharmap_window_group_by_changed (GSettings   *settings,
+                                   const gchar *key,
+                                   gpointer     user_data)
 {
-  GucharmapWindow  *guw = data;
-  GucharmapChaptersMode mode;
-  const char *value = g_variant_get_string (parameter, NULL);
+  GucharmapWindow *guw = user_data;
 
-  if (strcmp (value, "script") == 0)
-    mode = GUCHARMAP_CHAPTERS_SCRIPT;
-  else if (strcmp (value, "block") == 0)
-    mode = GUCHARMAP_CHAPTERS_BLOCK;
-  else
-    g_assert_not_reached ();
-
-  gucharmap_window_set_chapters_model (guw, mode);
-  g_settings_set_enum (guw->settings, "group-by", mode);
-  g_action_change_state (G_ACTION (action), parameter);
+  gucharmap_window_set_chapters_model (guw, g_settings_get_enum (settings, "group-by"));
 }
 
 #ifdef DEBUG_chpe
@@ -759,8 +748,6 @@ gucharmap_window_init (GucharmapWindow *guw)
     { "move-next-screen", move_to_next_screen_cb, NULL, NULL, NULL },
   #endif
 
-    { "group-by", view_by, "s", "\"script\"", NULL },
-
     { "show-only-glyphs-in-font", toggle_action_activated, NULL, "false",
       change_no_font_fallback },
   };
@@ -853,6 +840,8 @@ gucharmap_window_init (GucharmapWindow *guw)
     }
 
   /* group by */
+  g_action_map_add_action (G_ACTION_MAP (guw), g_settings_create_action (guw->settings, "group-by"));
+  g_signal_connect_object (guw->settings, "changed::group-by", G_CALLBACK (gucharmap_window_group_by_changed), guw, 0);
   gucharmap_window_set_chapters_model (guw, g_settings_get_enum (guw->settings, "group-by"));
 
   /* active character */
