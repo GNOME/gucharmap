@@ -3,7 +3,7 @@ NULL =
 ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
 GITIGNOREFILES = m4
 
-SUBDIRS = po pixmaps gucharmap docs
+SUBDIRS = data po pixmaps gucharmap docs
 
 if ENABLE_CHARMAP
 SUBDIRS += help
