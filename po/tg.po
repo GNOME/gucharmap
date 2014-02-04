@@ -8,17 +8,40 @@ msgstr ""
 "Project-Id-Version: Tajik Gnome\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gucharmap&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-07-30 11:13+0000\n"
-"PO-Revision-Date: 2013-07-30 16:13-0000\n"
+"POT-Creation-Date: 2014-02-03 22:46+0000\n"
+"PO-Revision-Date: 2014-02-04 11:45+0500\n"
 "Last-Translator: Victor Ibragimov <victor.ibragimov@gmail.com>\n"
 "Language-Team: \n"
-"Language: Tajik\n"
+"Language: tg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.7\n"
+"X-Generator: Poedit 1.6.3\n"
 
-#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:773
+#: ../data/gucharmap.appdata.xml.in.h:1
+msgid ""
+"Gucharmap (\"GNOME Character Map\") is a Unicode character map program, part "
+"of GNOME desktop. This program allows characters to be displayed by unicode "
+"block or script type. It includes brief descriptions of related characters "
+"and occasionally meanings of the character in question."
+msgstr ""
+"Gucharmap (\"Харитаи аломатҳои GNOME\") - ин барномаи харитаи аломатҳои "
+"Юникод барои мизи кории GNOME аст. Ин барнома барои намоиш додани аломатҳо "
+"аз рӯи ҷадвали Юникод ё навъи скрипт имкон медиҳад. Ин барнома инчунин "
+"аломатҳои марбут ва ба қадри имкон аломатҳои саволдорро тавсиф мекунад."
+
+#: ../data/gucharmap.appdata.xml.in.h:2
+msgid ""
+"Gucharmap can also be used to input or enter characters (by copy and paste). "
+"The search functionality allows the use of several search methods, including "
+"by unicode name or code point of the character."
+msgstr ""
+"Gucharmap инчунин метавонад барои ворид ё дарҷ кардани аломатҳо (бо "
+"истифодаи фармони \"Нусха бардоштан\" ё \"Гузоштан\") истифода шавад. "
+"Қобилияти ҷустуҷӯ имкон медиҳад, то ки тавонед якчанд усули ҷустуҷӯиро, аз "
+"ҷумла аз рӯи номи юникод ё нуқтаи рамзи аломат, истифода баред."
+
+#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:760
 #: ../gucharmap/main.c:236
 msgid "Character Map"
 msgstr "Ҷадвали аломатҳо"
@@ -174,48 +197,48 @@ msgid "Sho_w only glyphs from this font"
 msgstr "Намоиш _додани фақат сабкҳои ин шрифт"
 
 #: ../gucharmap/gucharmap-menus.ui.h:4
+msgid "Snap _Columns to Power of Two"
+msgstr "Сутунҳои _часпиш ба барқи ду"
+
+#: ../gucharmap/gucharmap-menus.ui.h:5
 msgid "Zoom _In"
 msgstr "_Бузург кардани андоза"
 
-#: ../gucharmap/gucharmap-menus.ui.h:5
+#: ../gucharmap/gucharmap-menus.ui.h:6
 msgid "Zoom _Out"
 msgstr "_Хурд кардани андоза"
 
-#: ../gucharmap/gucharmap-menus.ui.h:6
+#: ../gucharmap/gucharmap-menus.ui.h:7
 msgid "_Normal Size"
 msgstr "_Андозаи оддӣ"
 
-#: ../gucharmap/gucharmap-menus.ui.h:7
+#: ../gucharmap/gucharmap-menus.ui.h:8
 msgid "_Find"
 msgstr "_Ёфтан"
 
-#: ../gucharmap/gucharmap-menus.ui.h:8
+#: ../gucharmap/gucharmap-menus.ui.h:9
 msgid "_Help"
 msgstr "_Кӯмак"
 
-#: ../gucharmap/gucharmap-menus.ui.h:9
+#: ../gucharmap/gucharmap-menus.ui.h:10
 msgid "_About"
 msgstr "_Дар бораи барнома"
 
-#: ../gucharmap/gucharmap-menus.ui.h:10
+#: ../gucharmap/gucharmap-menus.ui.h:11
 msgid "_Close Window"
 msgstr "_Пӯшидани равзана"
 
-#: ../gucharmap/gucharmap-menus.ui.h:11
+#: ../gucharmap/gucharmap-menus.ui.h:12
 msgid "_File"
 msgstr "_Файл"
 
-#: ../gucharmap/gucharmap-menus.ui.h:12
+#: ../gucharmap/gucharmap-menus.ui.h:13
 msgid "_Close"
 msgstr "_Пӯшидан"
 
-#: ../gucharmap/gucharmap-menus.ui.h:13
+#: ../gucharmap/gucharmap-menus.ui.h:14
 msgid "_View"
 msgstr "_Намоиш"
-
-#: ../gucharmap/gucharmap-menus.ui.h:14
-msgid "Snap _Columns to Power of Two"
-msgstr "Сутунҳои _часпиш ба барқи ду"
 
 #: ../gucharmap/gucharmap-menus.ui.h:15
 msgid "_Search"
@@ -506,7 +529,6 @@ msgid "GNOME Character Map"
 msgstr "Харитаи аломати GNOME"
 
 #: ../gucharmap/gucharmap-window.c:449
-#| msgid "Based on the Unicode Character Database 6.2.0"
 msgid "Based on the Unicode Character Database 6.3.0"
 msgstr "Дар асоси пойгоҳи иттилоотии аломати Юникоди 6.3.0 кор мекунад"
 
@@ -531,11 +553,11 @@ msgid "Previous Block"
 msgstr "Блоки гузашта"
 
 #. Text to copy entry + button
-#: ../gucharmap/gucharmap-window.c:804
+#: ../gucharmap/gucharmap-window.c:791
 msgid "_Text to copy:"
 msgstr "_Матн барои нусхабардорӣ:"
 
-#: ../gucharmap/gucharmap-window.c:811
+#: ../gucharmap/gucharmap-window.c:798
 msgid "Copy to the clipboard."
 msgstr "Нусха бардоштан ба ҳофизаи муваққатӣ."
 
@@ -555,6 +577,67 @@ msgstr "Шрифт барои оғоз бо мисоли: 'Сериф 27'"
 #: ../gucharmap/main.c:210
 msgid "FONT"
 msgstr "ШРИФТ"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:1
+msgid "Character map grouping method"
+msgstr "Равиши гурӯҳбандии харитаи аломат"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:2
+msgid ""
+"This is how the characters in the character map are grouped. The characters "
+"can either be grouped by 'script' or 'block'."
+msgstr ""
+"Ин тарзи гурӯҳбандии аломатҳо дар харитаи аломат аст. Аломатҳо бо 'скрипт' "
+"or 'блок' гурӯҳбандӣ мешаванд."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
+msgid "Character map font description"
+msgstr "Тавсифи шрифти харитаи аломат"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:4
+msgid ""
+"The font to use for the character map. If set to 'nothing' then the default "
+"is the system font with the size doubled. Otherwise it should be a font "
+"description string like 'Sans 24'."
+msgstr ""
+"Шрифт барои истифода дар харитаи аломат. Агар ба 'ҳеҷ чиз' танзим шавад, пас "
+"пешфарз системаи шрифт бо андозаи дукарата аст. Дар ғайри ин ҳолат он бояд "
+"сатри тавсифи шрифт ба мисли 'Sans 24' бошад."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:5
+msgid "Snap number of columns to a power of two"
+msgstr "Часпонидани рақами сутунҳо ба барқи ду"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:6
+msgid ""
+"The number of columns in the character map grid is determined by the width "
+"of the window. If this setting is 'true' then the value will be forced to "
+"the nearest power of two."
+msgstr ""
+"Рақами сутунҳо дар тӯри харитаи аломат бо бари равзана муайян мешавад. Агар "
+"танзим 'дуруст бошад' пас қимат ба баруи наздиктарини ду расонида мешавад."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:7
+msgid "Last selected character"
+msgstr "Аломати интихобшудаи охирин"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:8
+msgid ""
+"This is the last character that was selected in the character map (and will "
+"be selected again when the character map is next started).\n"
+"\n"
+"By default, it is the first letter of the alphabet in the current locale."
+msgstr ""
+"Ин охирин аломати интихобшуда дарр харитаи аломат мебошад ( ва ҳангоми оғози "
+"ояндаи харитаи аломат дубора интихоб мешавад)\n"
+"\n"
+"Бо пешфарз, тн аввалин ҳарфи алифбо дар маҳаллигардонии ҷорӣ мебошад."
+
+#. The unicode code point of the first letter of the alphabet
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:12
+msgctxt "First letter"
+msgid "0x41"
+msgstr "0x41"
 
 #: ../gucharmap/unicode-blocks.h:14
 msgid "Basic Latin"
@@ -1479,64 +1562,3 @@ msgstr "Хати муғулии чоркунҷа"
 #: ../gucharmap/unicode-scripts.h:117
 msgid "Yi"
 msgstr "Юй"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:1
-msgid "Character map grouping method"
-msgstr "Равиши гурӯҳбандии харитаи аломат"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:2
-msgid ""
-"This is how the characters in the character map are grouped. The characters "
-"can either be grouped by 'script' or 'block'."
-msgstr ""
-"Ин тарзи гурӯҳбандии аломатҳо дар харитаи аломат аст. Аломатҳо бо 'скрипт' "
-"or 'блок' гурӯҳбандӣ мешаванд."
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
-msgid "Character map font description"
-msgstr "Тавсифи шрифти харитаи аломат"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:4
-msgid ""
-"The font to use for the character map. If set to 'nothing' then the default "
-"is the system font with the size doubled. Otherwise it should be a font "
-"description string like 'Sans 24'."
-msgstr ""
-"Шрифт барои истифода дар харитаи аломат. Агар ба 'ҳеҷ чиз' танзим шавад, пас "
-"пешфарз системаи шрифт бо андозаи дукарата аст. Дар ғайри ин ҳолат он бояд "
-"сатри тавсифи шрифт ба мисли 'Sans 24' бошад."
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:5
-msgid "Snap number of columns to a power of two"
-msgstr "Часпонидани рақами сутунҳо ба барқи ду"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:6
-msgid ""
-"The number of columns in the character map grid is determined by the width "
-"of the window. If this setting is 'true' then the value will be forced to "
-"the nearest power of two."
-msgstr ""
-"Рақами сутунҳо дар тӯри харитаи аломат бо бари равзана муайян мешавад. Агар "
-"танзим 'дуруст бошад' пас қимат ба баруи наздиктарини ду расонида мешавад."
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:7
-msgid "Last selected character"
-msgstr "Аломати интихобшудаи охирин"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:8
-msgid ""
-"This is the last character that was selected in the character map (and will "
-"be selected again when the character map is next started).\n"
-"\n"
-"By default, it is the first letter of the alphabet in the current locale."
-msgstr ""
-"Ин охирин аломати интихобшуда дарр харитаи аломат мебошад ( ва ҳангоми оғози "
-"ояндаи харитаи аломат дубора интихоб мешавад)\n"
-"\n"
-"Бо пешфарз, тн аввалин ҳарфи алифбо дар маҳаллигардонии ҷорӣ мебошад."
-
-#. The unicode code point of the first letter of the alphabet
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:12
-msgctxt "First letter"
-msgid "0x41"
-msgstr "0x41"
