@@ -10,19 +10,42 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-19 10:14+0200\n"
-"PO-Revision-Date: 2013-06-19 10:14+0200\n"
-"Last-Translator: Milo Casagrande <milo@ubuntu.com>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=gucharmap&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2014-02-16 10:12+0000\n"
+"PO-Revision-Date: 2014-02-16 12:35+0100\n"
+"Last-Translator: Milo Casagrande <milo@milo.name>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8-bit\n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Gtranslator 2.91.6\n"
+"X-Generator: Poedit 1.6.4\n"
 
-#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:773
+#: ../data/gucharmap.appdata.xml.in.h:1
+msgid ""
+"Gucharmap (\"GNOME Character Map\") is a Unicode character map program, part "
+"of GNOME desktop. This program allows characters to be displayed by unicode "
+"block or script type. It includes brief descriptions of related characters "
+"and occasionally meanings of the character in question."
+msgstr ""
+"Gucharmap (\"Tabella caratteri GNOME\") è una maapa dei caratteri Unicode "
+"parte dell'ambiente grafico GNOME. Consente la visualizzazione di caratteri "
+"per blocco Unicode o per tipologia di lingua. Comprende delle brevi "
+"descrizioni dei caratteri e anche il significato del carattere in questione."
+
+#: ../data/gucharmap.appdata.xml.in.h:2
+msgid ""
+"Gucharmap can also be used to input or enter characters (by copy and paste). "
+"The search functionality allows the use of several search methods, including "
+"by unicode name or code point of the character."
+msgstr ""
+"È anche possibile usare Gucharmap per immettere caratteri (copiandoli e "
+"incollandoli). La funzionalità di ricerca consente di eseguire ricerche per "
+"il nome Unicode o tramite il code point del carattere."
+
+#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:760
 #: ../gucharmap/main.c:236
 msgid "Character Map"
 msgstr "Tabella caratteri"
@@ -178,48 +201,48 @@ msgid "Sho_w only glyphs from this font"
 msgstr "_Mostra solo glifi da questo carattere"
 
 #: ../gucharmap/gucharmap-menus.ui.h:4
+msgid "Snap _Columns to Power of Two"
+msgstr "Spezza _colonne in potenze di due"
+
+#: ../gucharmap/gucharmap-menus.ui.h:5
 msgid "Zoom _In"
 msgstr "Aum_enta ingrandimento"
 
-#: ../gucharmap/gucharmap-menus.ui.h:5
+#: ../gucharmap/gucharmap-menus.ui.h:6
 msgid "Zoom _Out"
 msgstr "Rid_uci ingrandimento"
 
-#: ../gucharmap/gucharmap-menus.ui.h:6
+#: ../gucharmap/gucharmap-menus.ui.h:7
 msgid "_Normal Size"
 msgstr "_Dimensione normale"
 
-#: ../gucharmap/gucharmap-menus.ui.h:7
+#: ../gucharmap/gucharmap-menus.ui.h:8
 msgid "_Find"
 msgstr "Tr_ova"
 
-#: ../gucharmap/gucharmap-menus.ui.h:8
+#: ../gucharmap/gucharmap-menus.ui.h:9
 msgid "_Help"
 msgstr "A_iuto"
 
-#: ../gucharmap/gucharmap-menus.ui.h:9
+#: ../gucharmap/gucharmap-menus.ui.h:10
 msgid "_About"
 msgstr "_Informazioni"
 
-#: ../gucharmap/gucharmap-menus.ui.h:10
+#: ../gucharmap/gucharmap-menus.ui.h:11
 msgid "_Close Window"
 msgstr "Chi_udi finestra"
 
-#: ../gucharmap/gucharmap-menus.ui.h:11
+#: ../gucharmap/gucharmap-menus.ui.h:12
 msgid "_File"
 msgstr "_File"
 
-#: ../gucharmap/gucharmap-menus.ui.h:12
+#: ../gucharmap/gucharmap-menus.ui.h:13
 msgid "_Close"
 msgstr "_Chiudi"
 
-#: ../gucharmap/gucharmap-menus.ui.h:13
+#: ../gucharmap/gucharmap-menus.ui.h:14
 msgid "_View"
 msgstr "_Visualizza"
-
-#: ../gucharmap/gucharmap-menus.ui.h:14
-msgid "Snap _Columns to Power of Two"
-msgstr "Spezza _colonne in potenze di due"
 
 #: ../gucharmap/gucharmap-menus.ui.h:15
 msgid "_Search"
@@ -538,11 +561,11 @@ msgid "Previous Block"
 msgstr "Blocco precedente"
 
 #. Text to copy entry + button
-#: ../gucharmap/gucharmap-window.c:804
+#: ../gucharmap/gucharmap-window.c:791
 msgid "_Text to copy:"
 msgstr "_Testo da copiare:"
 
-#: ../gucharmap/gucharmap-window.c:811
+#: ../gucharmap/gucharmap-window.c:798
 msgid "Copy to the clipboard."
 msgstr "Copia negli appunti."
 
@@ -562,6 +585,70 @@ msgstr "Tipo di carattere iniziale; es: 'Serif 27'"
 #: ../gucharmap/main.c:210
 msgid "FONT"
 msgstr "TIPO_CARATTERE"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:1
+msgid "Character map grouping method"
+msgstr "Metodo di raggruppamento della tabella"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:2
+msgid ""
+"This is how the characters in the character map are grouped. The characters "
+"can either be grouped by 'script' or 'block'."
+msgstr ""
+"Questo indica come sono raggruppati i caratteri nella mappa. I valori "
+"possono essere \"script\" o \"block\"."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
+msgid "Character map font description"
+msgstr "Descrizione del tipo di carattere della tabella"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:4
+msgid ""
+"The font to use for the character map. If set to 'nothing' then the default "
+"is the system font with the size doubled. Otherwise it should be a font "
+"description string like 'Sans 24'."
+msgstr ""
+"Il tipo di carattere utilizzato per la tabella. Se impostato a \"nothing\", "
+"viene utilizzato il carattere di sistema con la dimensione raddoppiata, "
+"altrimenti deve essere la descrizione di un tipo di carattere come \"Sans "
+"24\"."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:5
+msgid "Snap number of columns to a power of two"
+msgstr "Spezza il numero delle colonne in potenze di due"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:6
+msgid ""
+"The number of columns in the character map grid is determined by the width "
+"of the window. If this setting is 'true' then the value will be forced to "
+"the nearest power of two."
+msgstr ""
+"Il numero delle colonne nella griglia dei caratteri è determinato dalla "
+"larghezza della finestra. Se impostato a VERO allora il valore verrà forzato "
+"alla potenza di due più vicina."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:7
+msgid "Last selected character"
+msgstr "Ultimo carattere selezionato"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:8
+msgid ""
+"This is the last character that was selected in the character map (and will "
+"be selected again when the character map is next started).\n"
+"\n"
+"By default, it is the first letter of the alphabet in the current locale."
+msgstr ""
+"Questo è l'ultimo carattere selezionato nella tabella e verrà selezionato "
+"nuovamente al successivo avvio della tabella.\n"
+"\n"
+"Come impostazione predefinita è la prima lettera dell'alfabeto nella lingua "
+"corrente."
+
+#. The unicode code point of the first letter of the alphabet
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:12
+msgctxt "First letter"
+msgid "0x41"
+msgstr "0x41"
 
 #: ../gucharmap/unicode-blocks.h:14
 msgid "Basic Latin"
@@ -1487,67 +1574,3 @@ msgstr "Phags Pa"
 #: ../gucharmap/unicode-scripts.h:117
 msgid "Yi"
 msgstr "Yi"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:1
-msgid "Character map grouping method"
-msgstr "Metodo di raggruppamento della tabella"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:2
-msgid ""
-"This is how the characters in the character map are grouped. The characters "
-"can either be grouped by 'script' or 'block'."
-msgstr ""
-"Questo indica come sono raggruppati i caratteri nella mappa. I valori "
-"possono essere \"script\" o \"block\"."
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
-msgid "Character map font description"
-msgstr "Descrizione del tipo di carattere della tabella"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:4
-msgid ""
-"The font to use for the character map. If set to 'nothing' then the default "
-"is the system font with the size doubled. Otherwise it should be a font "
-"description string like 'Sans 24'."
-msgstr ""
-"Il tipo di carattere utilizzato per la tabella. Se impostato a \"nothing\", "
-"viene utilizzato il carattere di sistema con la dimensione raddoppiata, "
-"altrimenti deve essere la descrizione di un tipo di carattere come \"Sans "
-"24\"."
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:5
-msgid "Snap number of columns to a power of two"
-msgstr "Spezza il numero delle colonne in potenze di due"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:6
-msgid ""
-"The number of columns in the character map grid is determined by the width "
-"of the window. If this setting is 'true' then the value will be forced to "
-"the nearest power of two."
-msgstr ""
-"Il numero delle colonne nella griglia dei caratteri è determinato dalla "
-"larghezza della finestra. Se impostato a VERO allora il valore verrà forzato "
-"alla potenza di due più vicina."
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:7
-msgid "Last selected character"
-msgstr "Ultimo carattere selezionato"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:8
-msgid ""
-"This is the last character that was selected in the character map (and will "
-"be selected again when the character map is next started).\n"
-"\n"
-"By default, it is the first letter of the alphabet in the current locale."
-msgstr ""
-"Questo è l'ultimo carattere selezionato nella tabella e verrà selezionato "
-"nuovamente al successivo avvio della tabella.\n"
-"\n"
-"Come impostazione predefinita è la prima lettera dell'alfabeto nella lingua "
-"corrente."
-
-#. The unicode code point of the first letter of the alphabet
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:12
-msgctxt "First letter"
-msgid "0x41"
-msgstr "0x41"
