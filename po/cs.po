@@ -8,15 +8,15 @@
 # Lukas Novotny <lukasnov@cvs.gnome.org>, 2006.
 # Jakub Friedl <jfriedl@suse.cz>, 2006, 2007.
 # Petr Kovar <pknbe@volny.cz>, 2007, 2008, 2009, 2010.
-# Marek Černocký <marek@manet.cz>, 2011, 2012, 2013.
+# Marek Černocký <marek@manet.cz>, 2011, 2012, 2013, 2014.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gucharmap&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-06-03 17:39+0000\n"
-"PO-Revision-Date: 2013-06-04 11:38+0200\n"
+"POT-Creation-Date: 2014-02-07 22:38+0000\n"
+"PO-Revision-Date: 2014-02-27 17:31+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -26,7 +26,29 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: Gtranslator 2.91.6\n"
 
-#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:773
+#: ../data/gucharmap.appdata.xml.in.h:1
+msgid ""
+"Gucharmap (\"GNOME Character Map\") is a Unicode character map program, part "
+"of GNOME desktop. This program allows characters to be displayed by unicode "
+"block or script type. It includes brief descriptions of related characters "
+"and occasionally meanings of the character in question."
+msgstr ""
+"Gucharmap („Mapa znaků GNOME“) je program s mapou znaků Unikódu a je "
+"součástí pracovního prostředí GNOME. Pomocí něj si můžete zobrazit znaky "
+"podle bloku unikódu nebo podle písma (skriptu). Obsahuje popisy příslušných "
+"znaků a někdy také význam daného znaku."
+
+#: ../data/gucharmap.appdata.xml.in.h:2
+msgid ""
+"Gucharmap can also be used to input or enter characters (by copy and paste). "
+"The search functionality allows the use of several search methods, including "
+"by unicode name or code point of the character."
+msgstr ""
+"Mapu znaků můžete také používat ke vkládání znaků (pomocí kopírovat a vložit "
+"přes schránku). Funkce hledání umí několik způsobů hledání, včetně hledání "
+"podle názvu v Unikódu nebo kódu znaku."
+
+#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:760
 #: ../gucharmap/main.c:236
 msgid "Character Map"
 msgstr "Mapa znaků"
@@ -182,48 +204,48 @@ msgid "Sho_w only glyphs from this font"
 msgstr "Zobrazo_vat glyfy jen z tohoto písma"
 
 #: ../gucharmap/gucharmap-menus.ui.h:4
+msgid "Snap _Columns to Power of Two"
+msgstr "Počet sloup_ců v mocninách dvojky"
+
+#: ../gucharmap/gucharmap-menus.ui.h:5
 msgid "Zoom _In"
 msgstr "Př_iblížit"
 
-#: ../gucharmap/gucharmap-menus.ui.h:5
+#: ../gucharmap/gucharmap-menus.ui.h:6
 msgid "Zoom _Out"
 msgstr "_Oddálit"
 
-#: ../gucharmap/gucharmap-menus.ui.h:6
+#: ../gucharmap/gucharmap-menus.ui.h:7
 msgid "_Normal Size"
 msgstr "_Normální velikost"
 
-#: ../gucharmap/gucharmap-menus.ui.h:7
+#: ../gucharmap/gucharmap-menus.ui.h:8
 msgid "_Find"
 msgstr "_Hledat"
 
-#: ../gucharmap/gucharmap-menus.ui.h:8
+#: ../gucharmap/gucharmap-menus.ui.h:9
 msgid "_Help"
 msgstr "_Nápověda"
 
-#: ../gucharmap/gucharmap-menus.ui.h:9
+#: ../gucharmap/gucharmap-menus.ui.h:10
 msgid "_About"
 msgstr "O _aplikaci"
 
-#: ../gucharmap/gucharmap-menus.ui.h:10
+#: ../gucharmap/gucharmap-menus.ui.h:11
 msgid "_Close Window"
 msgstr "_Zavřít okno"
 
-#: ../gucharmap/gucharmap-menus.ui.h:11
+#: ../gucharmap/gucharmap-menus.ui.h:12
 msgid "_File"
 msgstr "_Soubor"
 
-#: ../gucharmap/gucharmap-menus.ui.h:12
+#: ../gucharmap/gucharmap-menus.ui.h:13
 msgid "_Close"
 msgstr "_Zavřít"
 
-#: ../gucharmap/gucharmap-menus.ui.h:13
+#: ../gucharmap/gucharmap-menus.ui.h:14
 msgid "_View"
 msgstr "_Zobrazit"
-
-#: ../gucharmap/gucharmap-menus.ui.h:14
-msgid "Snap _Columns to Power of Two"
-msgstr "Počet sloup_ců v mocninách dvojky"
 
 #: ../gucharmap/gucharmap-menus.ui.h:15
 msgid "_Search"
@@ -491,9 +513,10 @@ msgstr ""
 #: ../gucharmap/gucharmap-window.c:434
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
-"Gucharmap; if not, see <http://www.gnu.org/licenses/>."
+"Gucharmap; if not, write to the Free Software Foundation, Inc., 59 Temple "
+"Place, Suite 330, Boston, MA  02110-1301  USA"
 msgstr ""
-"Kopii GNU General Public License jste měl(a) obdržet spolu s programem "
+"Kopii GNU General Public License jste měli obdržet spolu s programem "
 "Gucharmap; pokud se tak nestalo, napište o ni Free Software Foundation, "
 "Inc., 59 Temple Place, Suite 330, Boston, MA  02110-1301, USA."
 
@@ -503,9 +526,8 @@ msgid ""
 "Gucharmap; you can always find it at Unicode's website: http://www.unicode."
 "org/copyright.html"
 msgstr ""
-"Také kopii Unicode Copyright jste měl(a) obdržet spolu s programem "
-"Gucharmap; tu lze najít na webové stránce Unicode: http://www.unicode.org/"
-"copyright.html"
+"Také kopii Unicode Copyright jste měli obdržet spolu s programem Gucharmap; "
+"tu lze najít na webové stránce Unicode: http://www.unicode.org/copyright.html"
 
 #: ../gucharmap/gucharmap-window.c:447 ../gucharmap/main.c:39
 msgid "GNOME Character Map"
@@ -541,11 +563,11 @@ msgid "Previous Block"
 msgstr "Předchozí blok"
 
 #. Text to copy entry + button
-#: ../gucharmap/gucharmap-window.c:804
+#: ../gucharmap/gucharmap-window.c:791
 msgid "_Text to copy:"
 msgstr "_Text ke zkopírování:"
 
-#: ../gucharmap/gucharmap-window.c:811
+#: ../gucharmap/gucharmap-window.c:798
 msgid "Copy to the clipboard."
 msgstr "Zkopírovat do schránky."
 
@@ -565,6 +587,67 @@ msgstr "Písmo, se kterým chcete začít; např. „Serif 27“"
 #: ../gucharmap/main.c:210
 msgid "FONT"
 msgstr "PÍSMO"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:1
+msgid "Character map grouping method"
+msgstr "Způsob seskupování mapy znaků"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:2
+msgid ""
+"This is how the characters in the character map are grouped. The characters "
+"can either be grouped by 'script' or 'block'."
+msgstr ""
+"Jak se mají znaky v mapě znaků seskupovat. Seskupovat se mohou podle písma "
+"(„script“) nebo podle bloku Unikódu („block“)."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
+msgid "Character map font description"
+msgstr "Písmo pro zobrazování v mapě znaků"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:4
+msgid ""
+"The font to use for the character map. If set to 'nothing' then the default "
+"is the system font with the size doubled. Otherwise it should be a font "
+"description string like 'Sans 24'."
+msgstr ""
+"Písmo použité pro mapu znaků. Pokud je nastaveno na „nothing“, bude výchozím "
+"systémové písmo ve dvojnásobné velikosti. Pro nastavení konkrétního písma se "
+"používá popisný řetězec typu „Sans 24“."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:5
+msgid "Snap number of columns to a power of two"
+msgstr "Nastavovat počet sloupců jen v mocninách dvojky"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:6
+msgid ""
+"The number of columns in the character map grid is determined by the width "
+"of the window. If this setting is 'true' then the value will be forced to "
+"the nearest power of two."
+msgstr ""
+"Počet sloupců v mřížce mapy znaků se odvíjí od šířky okna. Pokud je toto "
+"nastavení „zapnuto“, bude počet nabývat pouze hodnot mocniny dvou."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:7
+msgid "Last selected character"
+msgstr "Poslední vybraný znak"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:8
+msgid ""
+"This is the last character that was selected in the character map (and will "
+"be selected again when the character map is next started).\n"
+"\n"
+"By default, it is the first letter of the alphabet in the current locale."
+msgstr ""
+"Toto je znak, který byl v mapě znaků vybrán jako poslední (a bude vybrán "
+"znovu, až bude mapa znaků znovu spuštěna).\n"
+"\n"
+"Jako výchozí hodnota je první znak abecedy v aktuálním národním prostředí."
+
+#. The unicode code point of the first letter of the alphabet
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:12
+msgctxt "First letter"
+msgid "0x41"
+msgstr "0x41"
 
 #: ../gucharmap/unicode-blocks.h:14
 msgid "Basic Latin"
@@ -1489,64 +1572,3 @@ msgstr "Phags Pa"
 #: ../gucharmap/unicode-scripts.h:117
 msgid "Yi"
 msgstr "Yi"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:1
-msgid "Character map grouping method"
-msgstr "Způsob seskupování mapy znaků"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:2
-msgid ""
-"This is how the characters in the character map are grouped. The characters "
-"can either be grouped by 'script' or 'block'."
-msgstr ""
-"Jak se mají znaky v mapě znaků seskupovat. Seskupovat se mohou podle písma "
-"(„script“) nebo podle bloku Unikódu („block“)."
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
-msgid "Character map font description"
-msgstr "Písmo pro zobrazování v mapě znaků"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:4
-msgid ""
-"The font to use for the character map. If set to 'nothing' then the default "
-"is the system font with the size doubled. Otherwise it should be a font "
-"description string like 'Sans 24'."
-msgstr ""
-"Písmo použité pro mapu znaků. Pokud je nastaveno na „nothing“, bude výchozím "
-"systémové písmo ve dvojnásobné velikosti. Pro nastavení konkrétního písma se "
-"používá popisný řetězec typu „Sans 24“."
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:5
-msgid "Snap number of columns to a power of two"
-msgstr "Nastavovat počet sloupců jen v mocninách dvojky"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:6
-msgid ""
-"The number of columns in the character map grid is determined by the width "
-"of the window. If this setting is 'true' then the value will be forced to "
-"the nearest power of two."
-msgstr ""
-"Počet sloupců v mřížce mapy znaků se odvíjí od šířky okna. Pokud je toto "
-"nastavení „zapnuto“, bude počet nabývat pouze hodnot mocniny dvou."
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:7
-msgid "Last selected character"
-msgstr "Poslední vybraný znak"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:8
-msgid ""
-"This is the last character that was selected in the character map (and will "
-"be selected again when the character map is next started).\n"
-"\n"
-"By default, it is the first letter of the alphabet in the current locale."
-msgstr ""
-"Toto je znak, který byl v mapě znaků vybrán jako poslední (a bude vybrán "
-"znovu, až bude mapa znaků znovu spuštěna).\n"
-"\n"
-"Jako výchozí hodnota je první znak abecedy v aktuálním národním prostředí."
-
-#. The unicode code point of the first letter of the alphabet
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:12
-msgctxt "First letter"
-msgid "0x41"
-msgstr "0x41"
