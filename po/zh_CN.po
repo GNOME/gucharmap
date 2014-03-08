@@ -8,15 +8,16 @@
 # Tao Wei <weitao1979@gmail.com>, 2009.
 # Aron Xu <aronxu@gnome.org>, 2009, 2010.
 # YunQiang Su <wzssyqa@gmail.com>, 2012.
+# Wylmer Wang <wantinghard@gmail.com>, 2014.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gucharmap&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-11-11 20:35+0000\n"
-"PO-Revision-Date: 2014-01-18 10:33+0800\n"
-"Last-Translator: 甘露(Lu Gan) <rhythm.gan@gmail.com>\n"
+"POT-Creation-Date: 2014-03-08 10:13+0000\n"
+"PO-Revision-Date: 2014-03-08 22:21+0800\n"
+"Last-Translator: Wylmer Wang <wantinghard@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
@@ -24,6 +25,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 1.5.7\n"
+
+#: ../data/gucharmap.appdata.xml.in.h:1
+msgid ""
+"Gucharmap (\"GNOME Character Map\") is a Unicode character map program, part "
+"of GNOME desktop. This program allows characters to be displayed by unicode "
+"block or script type. It includes brief descriptions of related characters "
+"and occasionally meanings of the character in question."
+msgstr "Gucharmap (“GNOME 字符映射表”)是一款 Unicode 字符映射表程序，是 GNOME 桌面的一部分。"
+"这款允许以 Unicode 或书写(script)形式显示字符。它提供了字符对应的简要说明，偶尔也会给出有歧义字符的意义。"
+
+#: ../data/gucharmap.appdata.xml.in.h:2
+msgid ""
+"Gucharmap can also be used to input or enter characters (by copy and paste). "
+"The search functionality allows the use of several search methods, including "
+"by unicode name or code point of the character."
+msgstr "Gucharmap 也可以用来输入字符(复制粘贴)。搜索功能允许以多种方式搜索，包括"
+"Unicode 名称或字符代码点(code point)。"
 
 #: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:760
 #: ../gucharmap/main.c:236
@@ -562,6 +580,64 @@ msgstr "起始使用字体，如“Serif 27”"
 #: ../gucharmap/main.c:210
 msgid "FONT"
 msgstr "字体"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:1
+msgid "Character map grouping method"
+msgstr "字符映射表分组方法"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:2
+msgid ""
+"This is how the characters in the character map are grouped. The characters "
+"can either be grouped by 'script' or 'block'."
+msgstr "在字符映射表中字符如何分组。这些字符可分组为 'script' 或 'block'。"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
+msgid "Character map font description"
+msgstr "字符映射表字体描述"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:4
+msgid ""
+"The font to use for the character map. If set to 'nothing' then the default "
+"is the system font with the size doubled. Otherwise it should be a font "
+"description string like 'Sans 24'."
+msgstr ""
+"用于字符映射表的字体。如果未设定 (nothing)，则默认使用双倍大小的系统字体，否"
+"则应当使用诸如 'Sans 24' 的字体描述字符串。"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:5
+msgid "Snap number of columns to a power of two"
+msgstr "将列数设定为 2 的 N 次方"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:6
+msgid ""
+"The number of columns in the character map grid is determined by the width "
+"of the window. If this setting is 'true' then the value will be forced to "
+"the nearest power of two."
+msgstr ""
+"在字符映射表格中的列数由窗口宽度决定。如果该设定为“真”，则该值将强制为 2 的最"
+"小次方。"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:7
+msgid "Last selected character"
+msgstr "最后选定的字符"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:8
+msgid ""
+"This is the last character that was selected in the character map (and will "
+"be selected again when the character map is next started).\n"
+"\n"
+"By default, it is the first letter of the alphabet in the current locale."
+msgstr ""
+"这是在字符映射表中最后被选定的字符 (字符映射表再次启动时也将再次选定该字"
+"符)。\n"
+"\n"
+"默认设定时，为当前区域设置的字母表第一个字母。"
+
+#. The unicode code point of the first letter of the alphabet
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:12
+msgctxt "First letter"
+msgid "0x41"
+msgstr "0x41"
 
 #: ../gucharmap/unicode-blocks.h:14
 msgid "Basic Latin"
@@ -1486,64 +1562,6 @@ msgstr "八思巴字"
 #: ../gucharmap/unicode-scripts.h:117
 msgid "Yi"
 msgstr "彝语"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:1
-msgid "Character map grouping method"
-msgstr "字符映射表分组方法"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:2
-msgid ""
-"This is how the characters in the character map are grouped. The characters "
-"can either be grouped by 'script' or 'block'."
-msgstr "在字符映射表中字符如何分组。这些字符可分组为 'script' 或 'block'。"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
-msgid "Character map font description"
-msgstr "字符映射表字体描述"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:4
-msgid ""
-"The font to use for the character map. If set to 'nothing' then the default "
-"is the system font with the size doubled. Otherwise it should be a font "
-"description string like 'Sans 24'."
-msgstr ""
-"用于字符映射表的字体。如果未设定 (nothing)，则默认使用双倍大小的系统字体，否"
-"则应当使用诸如 'Sans 24' 的字体描述字符串。"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:5
-msgid "Snap number of columns to a power of two"
-msgstr "将列数设定为 2 的 N 次方"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:6
-msgid ""
-"The number of columns in the character map grid is determined by the width "
-"of the window. If this setting is 'true' then the value will be forced to "
-"the nearest power of two."
-msgstr ""
-"在字符映射表格中的列数由窗口宽度决定。如果该设定为“真”，则该值将强制为 2 的最"
-"小次方。"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:7
-msgid "Last selected character"
-msgstr "最后选定的字符"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:8
-msgid ""
-"This is the last character that was selected in the character map (and will "
-"be selected again when the character map is next started).\n"
-"\n"
-"By default, it is the first letter of the alphabet in the current locale."
-msgstr ""
-"这是在字符映射表中最后被选定的字符 (字符映射表再次启动时也将再次选定该字"
-"符)。\n"
-"\n"
-"默认设定时，为当前区域设置的字母表第一个字母。"
-
-#. The unicode code point of the first letter of the alphabet
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:12
-msgctxt "First letter"
-msgid "0x41"
-msgstr "0x41"
 
 #~ msgid "GConf could not be initialized."
 #~ msgstr "无法初始化 GConf。"
