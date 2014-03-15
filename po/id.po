@@ -2,15 +2,15 @@
 # Copyright (C) 2003 THE gucharmap'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the gucharmap package.
 # Ahmad Riza H Nst  <rizahnst@gnome.org>, 2003, 2004, 2006
-# Andika Triwidada <andika@gmail.com>, 2011, 2012, 2013.
+# Andika Triwidada <andika@gmail.com>, 2011, 2012, 2013, 2014.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gucharmap&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-07-26 12:35+0000\n"
-"PO-Revision-Date: 2013-09-10 13:43+0700\n"
+"POT-Creation-Date: 2014-03-14 22:11+0000\n"
+"PO-Revision-Date: 2014-03-15 18:38+0700\n"
 "Last-Translator: Andika Triwidada <andika@gmail.com>\n"
 "Language-Team: Indonesian <gnome@i15n.org>\n"
 "Language: id\n"
@@ -20,7 +20,29 @@ msgstr ""
 "X-Generator: Poedit 1.5.7\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:773
+#: ../data/gucharmap.appdata.xml.in.h:1
+msgid ""
+"Gucharmap (\"GNOME Character Map\") is a Unicode character map program, part "
+"of GNOME desktop. This program allows characters to be displayed by unicode "
+"block or script type. It includes brief descriptions of related characters "
+"and occasionally meanings of the character in question."
+msgstr ""
+"Gucharmap (\"GNOME Peta Karakter\") adalah program peta karakter Unicode, "
+"bagian dari desktop GNOME. Program ini memungkinkan karakter ditampilkan "
+"menurut blok unicode atau tipe skrip. Ini termasuk keterangan singkat atas "
+"karakter terkait dan terkadang arti karakter yang bersangkutan."
+
+#: ../data/gucharmap.appdata.xml.in.h:2
+msgid ""
+"Gucharmap can also be used to input or enter characters (by copy and paste). "
+"The search functionality allows the use of several search methods, including "
+"by unicode name or code point of the character."
+msgstr ""
+"Gucharmap juga dapat dipakai untuk memasukkan karakter (dengan salin dan "
+"tempel). Fungsionalitas pencarian memungkinkan penggunaan beberapa metoda "
+"pencarian, termasuk menurut nama unicode atau titik kode karakter."
+
+#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:760
 #: ../gucharmap/main.c:236
 msgid "Character Map"
 msgstr "Tabel Karakter"
@@ -176,48 +198,48 @@ msgid "Sho_w only glyphs from this font"
 msgstr "Hanya tampilkan glyph dari fonta ini"
 
 #: ../gucharmap/gucharmap-menus.ui.h:4
+msgid "Snap _Columns to Power of Two"
+msgstr "Jadikan _Cacah Kolom Pangkat dari Dua"
+
+#: ../gucharmap/gucharmap-menus.ui.h:5
 msgid "Zoom _In"
 msgstr "Per_besar"
 
-#: ../gucharmap/gucharmap-menus.ui.h:5
+#: ../gucharmap/gucharmap-menus.ui.h:6
 msgid "Zoom _Out"
 msgstr "Per_kecil"
 
-#: ../gucharmap/gucharmap-menus.ui.h:6
+#: ../gucharmap/gucharmap-menus.ui.h:7
 msgid "_Normal Size"
 msgstr "Ukuran _Normal"
 
-#: ../gucharmap/gucharmap-menus.ui.h:7
+#: ../gucharmap/gucharmap-menus.ui.h:8
 msgid "_Find"
 msgstr "_Temukan"
 
-#: ../gucharmap/gucharmap-menus.ui.h:8
+#: ../gucharmap/gucharmap-menus.ui.h:9
 msgid "_Help"
 msgstr "_Bantuan"
 
-#: ../gucharmap/gucharmap-menus.ui.h:9
+#: ../gucharmap/gucharmap-menus.ui.h:10
 msgid "_About"
 msgstr "Tent_ang"
 
-#: ../gucharmap/gucharmap-menus.ui.h:10
+#: ../gucharmap/gucharmap-menus.ui.h:11
 msgid "_Close Window"
 msgstr "Tutup _Jendela"
 
-#: ../gucharmap/gucharmap-menus.ui.h:11
+#: ../gucharmap/gucharmap-menus.ui.h:12
 msgid "_File"
 msgstr "_File"
 
-#: ../gucharmap/gucharmap-menus.ui.h:12
+#: ../gucharmap/gucharmap-menus.ui.h:13
 msgid "_Close"
 msgstr "_Tutup"
 
-#: ../gucharmap/gucharmap-menus.ui.h:13
+#: ../gucharmap/gucharmap-menus.ui.h:14
 msgid "_View"
 msgstr "_Lihat"
-
-#: ../gucharmap/gucharmap-menus.ui.h:14
-msgid "Snap _Columns to Power of Two"
-msgstr "Jadikan _Cacah Kolom Pangkat dari Dua"
 
 #: ../gucharmap/gucharmap-menus.ui.h:15
 msgid "_Search"
@@ -515,7 +537,7 @@ msgstr "Berdasar pada Basis Data Karakter Unicode 6.3.0"
 msgid "translator-credits"
 msgstr ""
 "Ahmad Riza H Nst <rizahnst@gnome.org>, 2003, 2004, 2006\n"
-"Andika Triwidada <andika@gmail.com>, 2011, 2012, 2013"
+"Andika Triwidada <andika@gmail.com>, 2011, 2012, 2013, 2014"
 
 #: ../gucharmap/gucharmap-window.c:547
 msgid "Next Script"
@@ -534,11 +556,11 @@ msgid "Previous Block"
 msgstr "Blok Sebelumnya"
 
 #. Text to copy entry + button
-#: ../gucharmap/gucharmap-window.c:804
+#: ../gucharmap/gucharmap-window.c:791
 msgid "_Text to copy:"
 msgstr "_Teks yang hendak disalin:"
 
-#: ../gucharmap/gucharmap-window.c:811
+#: ../gucharmap/gucharmap-window.c:798
 msgid "Copy to the clipboard."
 msgstr "Salin ke papan klip."
 
@@ -558,6 +580,67 @@ msgstr "Huruf yang ingin dimulai dengan; mis: 'Serif 27'"
 #: ../gucharmap/main.c:210
 msgid "FONT"
 msgstr "FONTA"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:1
+msgid "Character map grouping method"
+msgstr "Metoda pengelompokan peta karakter"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:2
+msgid ""
+"This is how the characters in the character map are grouped. The characters "
+"can either be grouped by 'script' or 'block'."
+msgstr ""
+"Ini adalah bagaimana karakter dalam peta karakter dikelompokkan. Karakter "
+"dapat dikelompokkan menurut 'skrip' atau 'blok'."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
+msgid "Character map font description"
+msgstr "Deskripsi fonta peta karakter"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:4
+msgid ""
+"The font to use for the character map. If set to 'nothing' then the default "
+"is the system font with the size doubled. Otherwise it should be a font "
+"description string like 'Sans 24'."
+msgstr ""
+"Fonta yang dipakai untuk peta karakter. Jika diisi 'nothing' maka bakunya "
+"adalah fonta sistem dengan ukuran digandakan. Bila tidak, itu mesti berupa "
+"string deskripsi fonta seperti 'Sans 24'."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:5
+msgid "Snap number of columns to a power of two"
+msgstr "Jadikan cacah kolom pangkat dari dua"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:6
+msgid ""
+"The number of columns in the character map grid is determined by the width "
+"of the window. If this setting is 'true' then the value will be forced to "
+"the nearest power of two."
+msgstr ""
+"Cacah kolom dalam kisi peta karakter ditentukan oleh lebar jendela. Bila "
+"nilai ini 'true' maka nilai akan dipaksa ke pangkat dua terdekat."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:7
+msgid "Last selected character"
+msgstr "Karakter yang terakhir dipilih"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:8
+msgid ""
+"This is the last character that was selected in the character map (and will "
+"be selected again when the character map is next started).\n"
+"\n"
+"By default, it is the first letter of the alphabet in the current locale."
+msgstr ""
+"Ini adalah karakter terakhir yang dipilih dalam peta karakter (dan akan "
+"dipilih lagi ketika peta karakter dijalankan lagi kali berikutnya).\n"
+"\n"
+"Secara baku, ini adalah huruf pertama alfabet dalam locale kini."
+
+#. The unicode code point of the first letter of the alphabet
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:12
+msgctxt "First letter"
+msgid "0x41"
+msgstr "0x41"
 
 #: ../gucharmap/unicode-blocks.h:14
 msgid "Basic Latin"
@@ -1482,64 +1565,3 @@ msgstr "Phags Pa"
 #: ../gucharmap/unicode-scripts.h:117
 msgid "Yi"
 msgstr "Yi"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:1
-msgid "Character map grouping method"
-msgstr "Metoda pengelompokan peta karakter"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:2
-msgid ""
-"This is how the characters in the character map are grouped. The characters "
-"can either be grouped by 'script' or 'block'."
-msgstr ""
-"Ini adalah bagaimana karakter dalam peta karakter dikelompokkan. Karakter "
-"dapat dikelompokkan menurut 'skrip' atau 'blok'."
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
-msgid "Character map font description"
-msgstr "Deskripsi fonta peta karakter"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:4
-msgid ""
-"The font to use for the character map. If set to 'nothing' then the default "
-"is the system font with the size doubled. Otherwise it should be a font "
-"description string like 'Sans 24'."
-msgstr ""
-"Fonta yang dipakai untuk peta karakter. Jika diisi 'nothing' maka bakunya "
-"adalah fonta sistem dengan ukuran digandakan. Bila tidak, itu mesti berupa "
-"string deskripsi fonta seperti 'Sans 24'."
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:5
-msgid "Snap number of columns to a power of two"
-msgstr "Jadikan cacah kolom pangkat dari dua"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:6
-msgid ""
-"The number of columns in the character map grid is determined by the width "
-"of the window. If this setting is 'true' then the value will be forced to "
-"the nearest power of two."
-msgstr ""
-"Cacah kolom dalam kisi peta karakter ditentukan oleh lebar jendela. Bila "
-"nilai ini 'true' maka nilai akan dipaksa ke pangkat dua terdekat."
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:7
-msgid "Last selected character"
-msgstr "Karakter yang terakhir dipilih"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:8
-msgid ""
-"This is the last character that was selected in the character map (and will "
-"be selected again when the character map is next started).\n"
-"\n"
-"By default, it is the first letter of the alphabet in the current locale."
-msgstr ""
-"Ini adalah karakter terakhir yang dipilih dalam peta karakter (dan akan "
-"dipilih lagi ketika peta karakter dijalankan lagi kali berikutnya).\n"
-"\n"
-"Secara baku, ini adalah huruf pertama alfabet dalam locale kini."
-
-#. The unicode code point of the first letter of the alphabet
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:12
-msgctxt "First letter"
-msgid "0x41"
-msgstr "0x41"
