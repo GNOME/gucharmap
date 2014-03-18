@@ -8,16 +8,16 @@
 # Artur Flinta <aflinta@at.kernel.pl>, 2003-2006.
 # Marek Kiszkis <m.kiszkis@students.mimuw.edu.pl>, 2008.
 # Wadim Dziedzic <wdziedzic@aviary.pl>, 2008-2009.
-# Piotr Drąg <piotrdrag@gmail.com>, 2010-2013.
+# Piotr Drąg <piotrdrag@gmail.com>, 2010-2014.
 # Paweł Żołnowski <pawel@zolnowski.name>, 2014.
 # Aviary.pl <gnomepl@aviary.pl>, 2008-2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-18 20:20+0100\n"
-"PO-Revision-Date: 2014-03-17 23:59+0100\n"
-"Last-Translator: Paweł Żołnowski <pawel@zolnowski.name>\n"
+"POT-Creation-Date: 2014-03-18 20:26+0100\n"
+"PO-Revision-Date: 2014-03-18 20:27+0100\n"
+"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -35,10 +35,10 @@ msgid ""
 "block or script type. It includes brief descriptions of related characters "
 "and occasionally meanings of the character in question."
 msgstr ""
-"Program Gucharmap (\"Mapa znaków GNOME\") to mapa znaków Unicode, będąca "
-"częścią środowiska GNOME. Umożliwia wyświetlanie znaków według bloku lub "
-"typu pisma wraz z krótkimi opisami znaków pokrewnych oraz sporadycznie ze "
-"znaczeniem danego znaku."
+"Program Gucharmap (\"Tablica znaków GNOME\") to tablica znaków Unicode, "
+"będąca częścią środowiska GNOME. Umożliwia wyświetlanie znaków według bloku "
+"lub typu pisma wraz z krótkimi opisami znaków pokrewnych oraz sporadycznie "
+"ze znaczeniem danego znaku."
 
 #: ../data/gucharmap.appdata.xml.in.h:2
 msgid ""
@@ -53,7 +53,7 @@ msgstr ""
 #: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:760
 #: ../gucharmap/main.c:236
 msgid "Character Map"
-msgstr "Mapa znaków"
+msgstr "Tablica znaków"
 
 #: ../gucharmap.desktop.in.in.h:2
 msgid "Insert special characters into documents"
@@ -61,7 +61,7 @@ msgstr "Wstawienie znaków specjalnych do dokumentów"
 
 #: ../gucharmap.desktop.in.in.h:3
 msgid "font;unicode;"
-msgstr "czcionka;font;pismo;unicode;unikod;"
+msgstr "czcionka;font;pismo;unicode;unikod;mapa;"
 
 #: ../gucharmap/gucharmap-block-chapters-model.c:84
 msgid "All"
@@ -508,7 +508,7 @@ msgid ""
 "of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General "
 "Public License and Unicode Copyright for more details."
 msgstr ""
-"Niniejszy program oraz pliki danych Unicode rozpowszechniane są z nadzieją, "
+"Program Gucharmap oraz pliki danych Unicode rozpowszechniane są z nadzieją, "
 "iż będą one użyteczne - jednak BEZ JAKIEJKOLWIEK GWARANCJI, nawet domyślnej "
 "gwarancji PRZYDATNOŚCI HANDLOWEJ albo PRZYDATNOŚCI DO OKREŚLONYCH "
 "ZASTOSOWAŃ. W celu uzyskania bliższych informacji należy zapoznać się z "
@@ -531,13 +531,12 @@ msgid ""
 "Gucharmap; you can always find it at Unicode's website: http://www.unicode."
 "org/copyright.html"
 msgstr ""
-"Wraz z niniejszym programem dostarczono także kopię licencji Unicode wraz z "
-"Gucharmap; można też znaleźć ją na stronie: http://www.unicode.org/copyright."
-"html"
+"Wraz z programem Gucharmap dostarczono także kopię licencji Unicode; można "
+"też znaleźć ją na stronie: http://www.unicode.org/copyright.html"
 
 #: ../gucharmap/gucharmap-window.c:447 ../gucharmap/main.c:39
 msgid "GNOME Character Map"
-msgstr "Mapa znaków dla środowiska GNOME"
+msgstr "Tablica znaków dla środowiska GNOME"
 
 #: ../gucharmap/gucharmap-window.c:449
 msgid "Based on the Unicode Character Database 6.3.0"
@@ -550,7 +549,7 @@ msgstr ""
 "Artur Flinta <aflinta@at.kernel.pl>, 2003-2006\n"
 "Marek Kiszkis <m.kiszkis@students.mimuw.edu.pl>, 2008\n"
 "Wadim Dziedzic <wdziedzic@aviary.pl>, 2008-2009\n"
-"Piotr Drąg <piotrdrag@gmail.com>, 2010-2013\n"
+"Piotr Drąg <piotrdrag@gmail.com>, 2010-2014\n"
 "Paweł Żołnowski <pawel@zolnowski.name>, 2014\n"
 "Aviary.pl <gnomepl@aviary.pl>, 2008-2014"
 
@@ -598,19 +597,19 @@ msgstr "CZCIONKA"
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:1
 msgid "Character map grouping method"
-msgstr "Metoda grupowania mapy znaków"
+msgstr "Metoda grupowania tablicy znaków"
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:2
 msgid ""
 "This is how the characters in the character map are grouped. The characters "
 "can either be grouped by 'script' or 'block'."
 msgstr ""
-"Określa, jak grupowane są znaki na mapie: według pisma (\"script\") lub "
+"Określa, jak grupowane są znaki na tablicy: według pisma (\"script\") lub "
 "bloku (\"block\")."
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
 msgid "Character map font description"
-msgstr "Opis czcionki mapy znaków"
+msgstr "Opis czcionki tablicy znaków"
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:4
 msgid ""
@@ -618,9 +617,9 @@ msgid ""
 "is the system font with the size doubled. Otherwise it should be a font "
 "description string like 'Sans 24'."
 msgstr ""
-"Czcionka używana przez mapę znaków. Jeśli ustawiono na wartość \"nothing\", "
-"to domyślna jest czcionka systemowa o podwójnym rozmiarze. W innym przypadku "
-"powinien to być ciąg opisu, taki jak \"Sans 24\"."
+"Czcionka używana przez tablicę znaków. Jeśli ustawiono na wartość \"nothing"
+"\", to domyślna jest czcionka systemowa o podwójnym rozmiarze. W innym "
+"przypadku powinien to być ciąg opisu, taki jak \"Sans 24\"."
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:5
 msgid "Snap number of columns to a power of two"
@@ -632,7 +631,7 @@ msgid ""
 "of the window. If this setting is 'true' then the value will be forced to "
 "the nearest power of two."
 msgstr ""
-"Liczba kolumn na siatce mapy znaków jest określana przez szerokość okna. "
+"Liczba kolumn na siatce tablicy znaków jest określana przez szerokość okna. "
 "Jeśli ustawiono na wartość \"true\", to liczba zostanie wymuszona na "
 "najbliższą potęgę dwójki."
 
@@ -647,8 +646,8 @@ msgid ""
 "\n"
 "By default, it is the first letter of the alphabet in the current locale."
 msgstr ""
-"To jest ostatni zaznaczony znak na mapie znaków. Zostanie on zaznaczony po "
-"następnym uruchomieniu mapy znaków.\n"
+"To jest ostatni zaznaczony znak na tablicy znaków. Zostanie on zaznaczony po "
+"następnym uruchomieniu tablicy znaków.\n"
 "\n"
 "Domyślnie jest to pierwsza litera alfabetu bieżącej lokalizacji."
 
@@ -1308,7 +1307,7 @@ msgstr "Dysk z Fajstos"
 
 #: ../gucharmap/unicode-blocks.h:176 ../gucharmap/unicode-scripts.h:70
 msgid "Lycian"
-msgstr "Licyjsjki"
+msgstr "Licyjski"
 
 #: ../gucharmap/unicode-blocks.h:177 ../gucharmap/unicode-scripts.h:29
 msgid "Carian"
