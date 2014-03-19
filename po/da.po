@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-15 21:59+0200\n"
-"PO-Revision-Date: 2013-09-15 18:55+0200\n"
+"POT-Creation-Date: 2014-03-19 22:30+0100\n"
+"PO-Revision-Date: 2014-03-15 13:58+0100\n"
 "Last-Translator: Ask Hjorth Larsen <asklarsen@gmail.com>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "Language: da\n"
@@ -26,6 +26,29 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../data/gucharmap.appdata.xml.in.h:1
+msgid ""
+"Gucharmap (\"GNOME Character Map\") is a Unicode character map program, part "
+"of GNOME desktop. This program allows characters to be displayed by unicode "
+"block or script type. It includes brief descriptions of related characters "
+"and occasionally meanings of the character in question."
+msgstr ""
+"Gucharmap (\"GNOME Character Map\" - GNOME Tegnkort) er et Unicode-"
+"tegnvisningprogram, som er en del af GNOME-skrivebordet. Dette program lader "
+"tegn blive vist efter unicode-blok eller skriftsprog. Det inkluderer korte "
+"beskrivelser af relaterede tegn, og undertiden betydninger af det pågældende "
+"tegn."
+
+#: ../data/gucharmap.appdata.xml.in.h:2
+msgid ""
+"Gucharmap can also be used to input or enter characters (by copy and paste). "
+"The search functionality allows the use of several search methods, including "
+"by unicode name or code point of the character."
+msgstr ""
+"Gucharmap kan også bruges til at indtaste tegn (med kopiér/indsæt). "
+"Søgefunktionaliteten tillader brugen af adskillige søgemetoder, såsom efter "
+"unicode-navn eller kodepunkt for tegnet."
 
 #: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:760
 #: ../gucharmap/main.c:236
@@ -184,48 +207,48 @@ msgid "Sho_w only glyphs from this font"
 msgstr "Vi_s kun glyffer fra denne skrifttype"
 
 #: ../gucharmap/gucharmap-menus.ui.h:4
+msgid "Snap _Columns to Power of Two"
+msgstr "Lås _kolonner til potenser af to"
+
+#: ../gucharmap/gucharmap-menus.ui.h:5
 msgid "Zoom _In"
 msgstr "Zoom _ind"
 
-#: ../gucharmap/gucharmap-menus.ui.h:5
+#: ../gucharmap/gucharmap-menus.ui.h:6
 msgid "Zoom _Out"
 msgstr "Zoom _ud"
 
-#: ../gucharmap/gucharmap-menus.ui.h:6
+#: ../gucharmap/gucharmap-menus.ui.h:7
 msgid "_Normal Size"
 msgstr "_Normal størrelse"
 
-#: ../gucharmap/gucharmap-menus.ui.h:7
+#: ../gucharmap/gucharmap-menus.ui.h:8
 msgid "_Find"
 msgstr "_Find"
 
-#: ../gucharmap/gucharmap-menus.ui.h:8
+#: ../gucharmap/gucharmap-menus.ui.h:9
 msgid "_Help"
 msgstr "_Hjælp"
 
-#: ../gucharmap/gucharmap-menus.ui.h:9
+#: ../gucharmap/gucharmap-menus.ui.h:10
 msgid "_About"
 msgstr "_Om"
 
-#: ../gucharmap/gucharmap-menus.ui.h:10
+#: ../gucharmap/gucharmap-menus.ui.h:11
 msgid "_Close Window"
 msgstr "_Luk vindue"
 
-#: ../gucharmap/gucharmap-menus.ui.h:11
+#: ../gucharmap/gucharmap-menus.ui.h:12
 msgid "_File"
 msgstr "_Fil"
 
-#: ../gucharmap/gucharmap-menus.ui.h:12
+#: ../gucharmap/gucharmap-menus.ui.h:13
 msgid "_Close"
 msgstr "_Luk"
 
-#: ../gucharmap/gucharmap-menus.ui.h:13
+#: ../gucharmap/gucharmap-menus.ui.h:14
 msgid "_View"
 msgstr "_Vis"
-
-#: ../gucharmap/gucharmap-menus.ui.h:14
-msgid "Snap _Columns to Power of Two"
-msgstr "Lås _kolonner til potenser af to"
 
 #: ../gucharmap/gucharmap-menus.ui.h:15
 msgid "_Search"
@@ -570,6 +593,68 @@ msgstr "Skrifttype at begynde med; f.eks.: \"Serif 27\""
 #: ../gucharmap/main.c:210
 msgid "FONT"
 msgstr "SKRIFTTYPE"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:1
+msgid "Character map grouping method"
+msgstr "Grupperingsmetode til tegnoversigt"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:2
+msgid ""
+"This is how the characters in the character map are grouped. The characters "
+"can either be grouped by 'script' or 'block'."
+msgstr ""
+"Dette er hvordan tegnene i tegnoversigten grupperes. Tegnene kan grupperes "
+"ved \"skript\" eller \"blok\"."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
+msgid "Character map font description"
+msgstr "Skrifttypebeskrivelse i tegnoversigten"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:4
+msgid ""
+"The font to use for the character map. If set to 'nothing' then the default "
+"is the system font with the size doubled. Otherwise it should be a font "
+"description string like 'Sans 24'."
+msgstr ""
+"Skrifttypen der skal bruges til tegnoversigten. Hvis den sættes til \"nothing"
+"\" bruges systemets standardskrifttype med dobbelt størrelse. Ellers skal "
+"det være en skrifttypebeskrivelse såsom \"Sans 24\"."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:5
+msgid "Snap number of columns to a power of two"
+msgstr "Lås antal kolonner til potenser af to"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:6
+msgid ""
+"The number of columns in the character map grid is determined by the width "
+"of the window. If this setting is 'true' then the value will be forced to "
+"the nearest power of two."
+msgstr ""
+"Antallet af kolonner i tegnoversigtsgitteret bestemmes af vinduets bredde. "
+"Hvis denne indstilling er \"true\", vil værdien tvinges til at være den "
+"nærmeste potens af to."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:7
+msgid "Last selected character"
+msgstr "Sidst valgte tegn"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:8
+msgid ""
+"This is the last character that was selected in the character map (and will "
+"be selected again when the character map is next started).\n"
+"\n"
+"By default, it is the first letter of the alphabet in the current locale."
+msgstr ""
+"Dette er det sidste tegn, der blev valgt i tegnoversigten (og vil blive "
+"valgt igen når tegnoversigten startes næste gang).\n"
+"\n"
+"Som standard er det første bogstav i alfabetet med de aktuelle regionsdata."
+
+#. The unicode code point of the first letter of the alphabet
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:12
+msgctxt "First letter"
+msgid "0x41"
+msgstr "0x41"
 
 #: ../gucharmap/unicode-blocks.h:14
 msgid "Basic Latin"
@@ -1510,68 +1595,6 @@ msgstr "Phags Pa"
 #: ../gucharmap/unicode-scripts.h:117
 msgid "Yi"
 msgstr "Yi"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:1
-msgid "Character map grouping method"
-msgstr "Grupperingsmetode til tegnoversigt"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:2
-msgid ""
-"This is how the characters in the character map are grouped. The characters "
-"can either be grouped by 'script' or 'block'."
-msgstr ""
-"Dette er hvordan tegnene i tegnoversigten grupperes. Tegnene kan grupperes "
-"ved \"skript\" eller \"blok\"."
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
-msgid "Character map font description"
-msgstr "Skrifttypebeskrivelse i tegnoversigten"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:4
-msgid ""
-"The font to use for the character map. If set to 'nothing' then the default "
-"is the system font with the size doubled. Otherwise it should be a font "
-"description string like 'Sans 24'."
-msgstr ""
-"Skrifttypen der skal bruges til tegnoversigten. Hvis den sættes til \"nothing"
-"\" bruges systemets standardskrifttype med dobbelt størrelse. Ellers skal "
-"det være en skrifttypebeskrivelse såsom \"Sans 24\"."
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:5
-msgid "Snap number of columns to a power of two"
-msgstr "Lås antal kolonner til potenser af to"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:6
-msgid ""
-"The number of columns in the character map grid is determined by the width "
-"of the window. If this setting is 'true' then the value will be forced to "
-"the nearest power of two."
-msgstr ""
-"Antallet af kolonner i tegnoversigtsgitteret bestemmes af vinduets bredde. "
-"Hvis denne indstilling er \"true\", vil værdien tvinges til at være den "
-"nærmeste potens af to."
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:7
-msgid "Last selected character"
-msgstr "Sidst valgte tegn"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:8
-msgid ""
-"This is the last character that was selected in the character map (and will "
-"be selected again when the character map is next started).\n"
-"\n"
-"By default, it is the first letter of the alphabet in the current locale."
-msgstr ""
-"Dette er det sidste tegn, der blev valgt i tegnoversigten (og vil blive "
-"valgt igen når tegnoversigten startes næste gang).\n"
-"\n"
-"Som standard er det første bogstav i alfabetet med de aktuelle regionsdata."
-
-#. The unicode code point of the first letter of the alphabet
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:12
-msgctxt "First letter"
-msgid "0x41"
-msgstr "0x41"
 
 #~ msgid "GConf could not be initialized."
 #~ msgstr "GConf kunne ikke initialiseres."
