@@ -4,7 +4,7 @@
 #
 # Andras Timar <timar at fsf dot hu>, 2003-2004.
 # Laszlo Dvornik <dvornikl at mailbox dot hu>, 2004.
-# Gabor Kelemen <kelemeng at gnome dot hu>, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012.
+# Gabor Kelemen <kelemeng at gnome dot hu>, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2014.
 # Mate ORY <orymate at gmail d0t com>, 2006, 2008, 2009.
 # Balázs Úr <urbalazs at gmail dot com>, 2013.
 msgid ""
@@ -12,18 +12,41 @@ msgstr ""
 "Project-Id-Version: gucharmap master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gucharmap&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-07-26 12:35+0000\n"
-"PO-Revision-Date: 2013-08-25 09:20+0200\n"
-"Last-Translator: Balázs Úr <urbalazs at gmail dot com>\n"
-"Language-Team: Hungarian <gnome-hu-list at gnome dot org>\n"
+"POT-Creation-Date: 2014-03-19 10:13+0000\n"
+"PO-Revision-Date: 2014-03-19 16:06+0100\n"
+"Last-Translator: Gabor Kelemen <kelemeng at gnome dot hu>\n"
+"Language-Team: Hungarian <openscope at googlegroups dot com>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.2\n"
+"X-Generator: Lokalize 1.4\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
-#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:773
+#: ../data/gucharmap.appdata.xml.in.h:1
+msgid ""
+"Gucharmap (\"GNOME Character Map\") is a Unicode character map program, part "
+"of GNOME desktop. This program allows characters to be displayed by unicode "
+"block or script type. It includes brief descriptions of related characters "
+"and occasionally meanings of the character in question."
+msgstr ""
+"A Gucharmap („GNOME Karaktertábla”) egy Unicode karaktertábla program, a "
+"GNOME asztali környezet része. Ez a program lehetővé teszi karakterek "
+"megjelenítését Unicode blokk vagy írásrendszertípus alapján. Tartalmazza a "
+"kapcsolódó karakterek rövid leírásait, és esetenként a kérdéses karakter "
+"jelentéseit."
+
+#: ../data/gucharmap.appdata.xml.in.h:2
+msgid ""
+"Gucharmap can also be used to input or enter characters (by copy and paste). "
+"The search functionality allows the use of several search methods, including "
+"by unicode name or code point of the character."
+msgstr ""
+"A Gucharmap használható karakterek bevitelére is (másolás és beillesztés "
+"módszerrel). A keresési funkció lehetővé teszi számos keresési módszer "
+"használatát, beleértve a karakter Unicode neve vagy a kódpontja szerintit."
+
+#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:760
 #: ../gucharmap/main.c:236
 msgid "Character Map"
 msgstr "Karaktertábla"
@@ -179,48 +202,48 @@ msgid "Sho_w only glyphs from this font"
 msgstr "_Csak ezen betűkészlet szimbólumainak megjelenítése"
 
 #: ../gucharmap/gucharmap-menus.ui.h:4
+msgid "Snap _Columns to Power of Two"
+msgstr "_Oszlopok igazítása kettő hatványára"
+
+#: ../gucharmap/gucharmap-menus.ui.h:5
 msgid "Zoom _In"
 msgstr "_Nagyítás"
 
-#: ../gucharmap/gucharmap-menus.ui.h:5
+#: ../gucharmap/gucharmap-menus.ui.h:6
 msgid "Zoom _Out"
 msgstr "_Kicsinyítés"
 
-#: ../gucharmap/gucharmap-menus.ui.h:6
+#: ../gucharmap/gucharmap-menus.ui.h:7
 msgid "_Normal Size"
 msgstr "_Normál méret"
 
-#: ../gucharmap/gucharmap-menus.ui.h:7
+#: ../gucharmap/gucharmap-menus.ui.h:8
 msgid "_Find"
 msgstr "_Keresés"
 
-#: ../gucharmap/gucharmap-menus.ui.h:8
+#: ../gucharmap/gucharmap-menus.ui.h:9
 msgid "_Help"
 msgstr "_Súgó"
 
-#: ../gucharmap/gucharmap-menus.ui.h:9
+#: ../gucharmap/gucharmap-menus.ui.h:10
 msgid "_About"
 msgstr "_Névjegy"
 
-#: ../gucharmap/gucharmap-menus.ui.h:10
+#: ../gucharmap/gucharmap-menus.ui.h:11
 msgid "_Close Window"
 msgstr "Ablak _bezárása"
 
-#: ../gucharmap/gucharmap-menus.ui.h:11
+#: ../gucharmap/gucharmap-menus.ui.h:12
 msgid "_File"
 msgstr "Fáj_l"
 
-#: ../gucharmap/gucharmap-menus.ui.h:12
+#: ../gucharmap/gucharmap-menus.ui.h:13
 msgid "_Close"
 msgstr "_Bezárás"
 
-#: ../gucharmap/gucharmap-menus.ui.h:13
+#: ../gucharmap/gucharmap-menus.ui.h:14
 msgid "_View"
 msgstr "_Nézet"
-
-#: ../gucharmap/gucharmap-menus.ui.h:14
-msgid "Snap _Columns to Power of Two"
-msgstr "_Oszlopok igazítása kettő hatványára"
 
 #: ../gucharmap/gucharmap-menus.ui.h:15
 msgid "_Search"
@@ -487,9 +510,13 @@ msgstr ""
 "licencet."
 
 #: ../gucharmap/gucharmap-window.c:434
+#| msgid ""
+#| "You should have received a copy of the GNU General Public License along "
+#| "with Gucharmap; if not, see <http://www.gnu.org/licenses/>."
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
-"Gucharmap; if not, see <http://www.gnu.org/licenses/>."
+"Gucharmap; if not, write to the Free Software Foundation, Inc., 59 Temple "
+"Place, Suite 330, Boston, MA  02110-1301  USA"
 msgstr ""
 "A Gucharmap programhoz a GNU General Public License egy példánya is jár, ha "
 "nem kapta meg, írjon a Free Software Foundation Inc.-nek. Levélcímük: 59 "
@@ -510,7 +537,6 @@ msgid "GNOME Character Map"
 msgstr "GNOME Karaktertábla"
 
 #: ../gucharmap/gucharmap-window.c:449
-#| msgid "Based on the Unicode Character Database 6.2.0"
 msgid "Based on the Unicode Character Database 6.3.0"
 msgstr "Az Unicode karakter-adatbázis 6.3.0 változata alapján"
 
@@ -539,11 +565,11 @@ msgid "Previous Block"
 msgstr "Előző blokk"
 
 #. Text to copy entry + button
-#: ../gucharmap/gucharmap-window.c:804
+#: ../gucharmap/gucharmap-window.c:791
 msgid "_Text to copy:"
 msgstr "Másolan_dó szöveg:"
 
-#: ../gucharmap/gucharmap-window.c:811
+#: ../gucharmap/gucharmap-window.c:798
 msgid "Copy to the clipboard."
 msgstr "Másolás a vágólapra."
 
@@ -563,6 +589,68 @@ msgstr "Kiindulási betűkészlet; például „Serif 27”"
 #: ../gucharmap/main.c:210
 msgid "FONT"
 msgstr "BETŰKÉSZLET"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:1
+msgid "Character map grouping method"
+msgstr "Karaktertábla csoportosítási módja"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:2
+msgid ""
+"This is how the characters in the character map are grouped. The characters "
+"can either be grouped by 'script' or 'block'."
+msgstr ""
+"A karaktertábla karaktereinek csoportosítása. A karakterek csoportosíthatók "
+"„script” (írásrendszer) vagy „block” (blokk) alapján."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
+msgid "Character map font description"
+msgstr "Karaktertábla betűkészletének leírása"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:4
+msgid ""
+"The font to use for the character map. If set to 'nothing' then the default "
+"is the system font with the size doubled. Otherwise it should be a font "
+"description string like 'Sans 24'."
+msgstr ""
+"A karaktertáblában használandó betűkészlet. Ha „nothing” (semmi), akkor az "
+"rendszer alapértelmezett betűkészlete dupla mérettel. Egyébként egy "
+"betűkészlet-leíró karakterláncnak kell lennie, például „Sans 24”."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:5
+msgid "Snap number of columns to a power of two"
+msgstr "Oszlopok igazítása kettő hatványára"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:6
+msgid ""
+"The number of columns in the character map grid is determined by the width "
+"of the window. If this setting is 'true' then the value will be forced to "
+"the nearest power of two."
+msgstr ""
+"Az oszlopok számát a karaktertáblarácsban az ablak szélessége határozza meg. "
+"Ha ez igazra van állítva, akkor az érték kettő legközelebbi hatványára lesz "
+"kényszerítve."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:7
+msgid "Last selected character"
+msgstr "Utoljára kijelölt karakter"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:8
+msgid ""
+"This is the last character that was selected in the character map (and will "
+"be selected again when the character map is next started).\n"
+"\n"
+"By default, it is the first letter of the alphabet in the current locale."
+msgstr ""
+"A karaktertáblában utoljára (és a karaktertábla következő indításakor újra) "
+"kijelölt karakter.\n"
+"\n"
+"Alapértelmezésben az aktuális területi beállítás ábécéjének első betűje."
+
+#. The unicode code point of the first letter of the alphabet
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:12
+msgctxt "First letter"
+msgid "0x41"
+msgstr "0x41"
 
 #: ../gucharmap/unicode-blocks.h:14
 msgid "Basic Latin"
@@ -1487,66 +1575,4 @@ msgstr "Phags Pa"
 #: ../gucharmap/unicode-scripts.h:117
 msgid "Yi"
 msgstr "Yi"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:1
-msgid "Character map grouping method"
-msgstr "Karaktertábla csoportosítási módja"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:2
-msgid ""
-"This is how the characters in the character map are grouped. The characters "
-"can either be grouped by 'script' or 'block'."
-msgstr ""
-"A karaktertábla karaktereinek csoportosítása. A karakterek csoportosíthatók "
-"„script” (írásrendszer) vagy „block” (blokk) alapján."
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
-msgid "Character map font description"
-msgstr "Karaktertábla betűkészletének leírása"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:4
-msgid ""
-"The font to use for the character map. If set to 'nothing' then the default "
-"is the system font with the size doubled. Otherwise it should be a font "
-"description string like 'Sans 24'."
-msgstr ""
-"A karaktertáblában használandó betűkészlet. Ha „nothing” (semmi), akkor az "
-"rendszer alapértelmezett betűkészlete dupla mérettel. Egyébként egy "
-"betűkészlet-leíró karakterláncnak kell lennie, például „Sans 24”."
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:5
-msgid "Snap number of columns to a power of two"
-msgstr "Oszlopok igazítása kettő hatványára"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:6
-msgid ""
-"The number of columns in the character map grid is determined by the width "
-"of the window. If this setting is 'true' then the value will be forced to "
-"the nearest power of two."
-msgstr ""
-"Az oszlopok számát a karaktertáblarácsban az ablak szélessége határozza meg. "
-"Ha ez igazra van állítva, akkor az érték kettő legközelebbi hatványára lesz "
-"kényszerítve."
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:7
-msgid "Last selected character"
-msgstr "Utoljára kijelölt karakter"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:8
-msgid ""
-"This is the last character that was selected in the character map (and will "
-"be selected again when the character map is next started).\n"
-"\n"
-"By default, it is the first letter of the alphabet in the current locale."
-msgstr ""
-"A karaktertáblában utoljára (és a karaktertábla következő indításakor újra) "
-"kijelölt karakter.\n"
-"\n"
-"Alapértelmezésben az aktuális területi beállítás ábécéjének első betűje."
-
-#. The unicode code point of the first letter of the alphabet
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:12
-msgctxt "First letter"
-msgid "0x41"
-msgstr "0x41"
 
