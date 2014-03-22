@@ -2,16 +2,16 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
 #
+#
 # Hizkuntza Politikarako Sailburuordetza <hizkpol@ej-gv.es>, 2005.
 # Iñaki Larrañaga Murgoitio <dooteo@zundan.com>, 2006, 2008, 2009, 2010, 2011.
-# Iñaki Larrañaga Murgoitio <dooteo@zundan.com>, 2012, 2013.
-#
+# Iñaki Larrañaga Murgoitio <dooteo@zundan.com>, 2012, 2013, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: eu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-17 21:46+0200\n"
-"PO-Revision-Date: 2013-09-17 21:47+0200\n"
+"POT-Creation-Date: 2014-03-22 14:11+0100\n"
+"PO-Revision-Date: 2014-03-22 14:19+0100\n"
 "Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@zundan.com>\n"
 "Language-Team: Basque <librezale@librezale.org>\n"
 "Language: eu\n"
@@ -21,6 +21,32 @@ msgstr ""
 "X-Generator: Lokalize 1.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "\n"
+
+#: ../data/gucharmap.appdata.xml.in.h:1
+msgid ""
+"Gucharmap (\"GNOME Character Map\") is a Unicode character map program, part "
+"of GNOME desktop. This program allows characters to be displayed by unicode "
+"block or script type. It includes brief descriptions of related characters "
+"and occasionally meanings of the character in question."
+msgstr ""
+"Gucharmap (\"GNOMEren Karaktere Mapa\") Unicode karaktere-maparen programa "
+"bat da, "
+"GNOME mahaigainaren zati. Programa honek karaktereak Unicode blokeetan "
+"edo idazketa motan bistaratzea baimentzen du. Honek zerikusia duten "
+"karaktereen "
+"azalpen labur batzuk ditu, eta batzuetan karaktere beraren azalpenak."
+
+#: ../data/gucharmap.appdata.xml.in.h:2
+msgid ""
+"Gucharmap can also be used to input or enter characters (by copy and paste). "
+"The search functionality allows the use of several search methods, including "
+"by unicode name or code point of the character."
+msgstr ""
+"Gucharmap erabil dezakezu karaktereak sartzeko edo txertatzeko (kopiatu eta "
+"itsatsi "
+"bidez). Bilaketen funtzionalitateak bilaketarako hainbat metodo erabiltzea "
+"baimentzen dizu, "
+"unicode izenaren edo  karakterearen kodearen puntuaren arabera."
 
 #: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:760
 #: ../gucharmap/main.c:236
@@ -178,48 +204,48 @@ msgid "Sho_w only glyphs from this font"
 msgstr "Erakutsi _soilik letra-tipo honetako glifoak"
 
 #: ../gucharmap/gucharmap-menus.ui.h:4
+msgid "Snap _Columns to Power of Two"
+msgstr "Atxikitu _zutabeak biren berredurara"
+
+#: ../gucharmap/gucharmap-menus.ui.h:5
 msgid "Zoom _In"
 msgstr "_Handiagotu"
 
-#: ../gucharmap/gucharmap-menus.ui.h:5
+#: ../gucharmap/gucharmap-menus.ui.h:6
 msgid "Zoom _Out"
 msgstr "_Txikiagotu"
 
-#: ../gucharmap/gucharmap-menus.ui.h:6
+#: ../gucharmap/gucharmap-menus.ui.h:7
 msgid "_Normal Size"
 msgstr "Tamaina _normala"
 
-#: ../gucharmap/gucharmap-menus.ui.h:7
+#: ../gucharmap/gucharmap-menus.ui.h:8
 msgid "_Find"
 msgstr "_Bilatu"
 
-#: ../gucharmap/gucharmap-menus.ui.h:8
+#: ../gucharmap/gucharmap-menus.ui.h:9
 msgid "_Help"
 msgstr "_Laguntza"
 
-#: ../gucharmap/gucharmap-menus.ui.h:9
+#: ../gucharmap/gucharmap-menus.ui.h:10
 msgid "_About"
 msgstr "Honi _buruz"
 
-#: ../gucharmap/gucharmap-menus.ui.h:10
+#: ../gucharmap/gucharmap-menus.ui.h:11
 msgid "_Close Window"
 msgstr "_Itxi leihoa"
 
-#: ../gucharmap/gucharmap-menus.ui.h:11
+#: ../gucharmap/gucharmap-menus.ui.h:12
 msgid "_File"
 msgstr "_Fitxategia"
 
-#: ../gucharmap/gucharmap-menus.ui.h:12
+#: ../gucharmap/gucharmap-menus.ui.h:13
 msgid "_Close"
 msgstr "It_xi"
 
-#: ../gucharmap/gucharmap-menus.ui.h:13
+#: ../gucharmap/gucharmap-menus.ui.h:14
 msgid "_View"
 msgstr "_Ikusi"
-
-#: ../gucharmap/gucharmap-menus.ui.h:14
-msgid "Snap _Columns to Power of Two"
-msgstr "Atxikitu _zutabeak biren berredurara"
 
 #: ../gucharmap/gucharmap-menus.ui.h:15
 msgid "_Search"
@@ -560,6 +586,69 @@ msgstr "Hasteko letra-tipoa; adib.: 'Serif 27'"
 #: ../gucharmap/main.c:210
 msgid "FONT"
 msgstr "LETRA-TIPOA"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:1
+msgid "Character map grouping method"
+msgstr "Karaktere-mapa elkartzeko metodoa"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:2
+msgid ""
+"This is how the characters in the character map are grouped. The characters "
+"can either be grouped by 'script' or 'block'."
+msgstr ""
+"Karaktereak karaktere-mapan nola elkartzen diren buruzkoa da hau. "
+"Karaktereak 'script' edo 'block' gisa elkartuta egon daitezke."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
+msgid "Character map font description"
+msgstr "Karaktere-maparen letra-tipoaren deskripzioa"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:4
+msgid ""
+"The font to use for the character map. If set to 'nothing' then the default "
+"is the system font with the size doubled. Otherwise it should be a font "
+"description string like 'Sans 24'."
+msgstr ""
+"Karaktere-mapan erabiliko den letra-tipoa. 'nothing' (ezer ez) gisa ezartzen "
+"bada, orduan sistemako letra-tipoa (tamaina bikoitzekoa) izango da "
+"lehenetsia. Bestela, 'Sans 24' bezalako letra-tipoaren deskripzioaren katea "
+"izango da."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:5
+msgid "Snap number of columns to a power of two"
+msgstr "Atxikitu zutabeen kopurua biren berredurara"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:6
+msgid ""
+"The number of columns in the character map grid is determined by the width "
+"of the window. If this setting is 'true' then the value will be forced to "
+"the nearest power of two."
+msgstr ""
+"Karaktere-maparen saretako zutabe kopurua leihoaren zabaleraren arabera "
+"zehazten da. Hau 'true' (egia) gisa ezartzen bada, balioa biren berredurara "
+"gerturatuko da."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:7
+msgid "Last selected character"
+msgstr "Hautatutako azken karakterea"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:8
+msgid ""
+"This is the last character that was selected in the character map (and will "
+"be selected again when the character map is next started).\n"
+"\n"
+"By default, it is the first letter of the alphabet in the current locale."
+msgstr ""
+"Karaktere-mapan hautatutako azken karakterea da hau (eta berriro hautatuko "
+"da karaktere-mapa abiarazten den hurrengoan).\n"
+"\n"
+"Lehenetsi gisa, uneko lokalaren alfabetoaren aurreneko hizkia izaten da."
+
+#. The unicode code point of the first letter of the alphabet
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:12
+msgctxt "First letter"
+msgid "0x41"
+msgstr "0x41"
 
 #: ../gucharmap/unicode-blocks.h:14
 msgid "Basic Latin"
@@ -1484,69 +1573,6 @@ msgstr "Phags Pa"
 #: ../gucharmap/unicode-scripts.h:117
 msgid "Yi"
 msgstr "Yi"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:1
-msgid "Character map grouping method"
-msgstr "Karaktere-mapa elkartzeko metodoa"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:2
-msgid ""
-"This is how the characters in the character map are grouped. The characters "
-"can either be grouped by 'script' or 'block'."
-msgstr ""
-"Karaktereak karaktere-mapan nola elkartzen diren buruzkoa da hau. "
-"Karaktereak 'script' edo 'block' gisa elkartuta egon daitezke."
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
-msgid "Character map font description"
-msgstr "Karaktere-maparen letra-tipoaren deskripzioa"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:4
-msgid ""
-"The font to use for the character map. If set to 'nothing' then the default "
-"is the system font with the size doubled. Otherwise it should be a font "
-"description string like 'Sans 24'."
-msgstr ""
-"Karaktere-mapan erabiliko den letra-tipoa. 'nothing' (ezer ez) gisa ezartzen "
-"bada, orduan sistemako letra-tipoa (tamaina bikoitzekoa) izango da "
-"lehenetsia. Bestela, 'Sans 24' bezalako letra-tipoaren deskripzioaren katea "
-"izango da."
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:5
-msgid "Snap number of columns to a power of two"
-msgstr "Atxikitu zutabeen kopurua biren berredurara"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:6
-msgid ""
-"The number of columns in the character map grid is determined by the width "
-"of the window. If this setting is 'true' then the value will be forced to "
-"the nearest power of two."
-msgstr ""
-"Karaktere-maparen saretako zutabe kopurua leihoaren zabaleraren arabera "
-"zehazten da. Hau 'true' (egia) gisa ezartzen bada, balioa biren berredurara "
-"gerturatuko da."
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:7
-msgid "Last selected character"
-msgstr "Hautatutako azken karakterea"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:8
-msgid ""
-"This is the last character that was selected in the character map (and will "
-"be selected again when the character map is next started).\n"
-"\n"
-"By default, it is the first letter of the alphabet in the current locale."
-msgstr ""
-"Karaktere-mapan hautatutako azken karakterea da hau (eta berriro hautatuko "
-"da karaktere-mapa abiarazten den hurrengoan).\n"
-"\n"
-"Lehenetsi gisa, uneko lokalaren alfabetoaren aurreneko hizkia izaten da."
-
-#. The unicode code point of the first letter of the alphabet
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:12
-msgctxt "First letter"
-msgid "0x41"
-msgstr "0x41"
 
 #~ msgid "GConf could not be initialized."
 #~ msgstr "Ezin izan da GConf hasieratu."
