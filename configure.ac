@@ -58,7 +58,7 @@ AM_PROG_CC_C_O
 GNOME_DEBUG_CHECK
 
 # User documentation
-YELP_HELP_INIT
+YELP_HELP_INIT([no-lc-media-links no-lc-dist])
 
 GLIB_REQUIRED=2.32.0
 GIO_REQUIRED=2.32.0
