@@ -1,13 +1,13 @@
 # Vital Khilko <dojlid@mova.org>, 2003.
 # Ales Nyakhaychyk <nab@mail.by>, 2003.
-# Ihar Hrachyshka <ihar.hrachyshka@gmail.com>, 2011, 2012, 2013.
+# Ihar Hrachyshka <ihar.hrachyshka@gmail.com>, 2011, 2012, 2013, 2014.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gucharmap&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-07-26 12:35+0000\n"
+"POT-Creation-Date: 2014-05-04 09:06+0000\n"
 "PO-Revision-Date: 2012-09-14 13:18+0300\n"
 "Last-Translator: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>\n"
 "Language-Team: Belarusian <i18n-bel-gnome@googlegroups.com>\n"
@@ -16,7 +16,29 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:773
+#: ../data/gucharmap.appdata.xml.in.h:1
+msgid ""
+"Gucharmap (\"GNOME Character Map\") is a Unicode character map program, part "
+"of GNOME desktop. This program allows characters to be displayed by unicode "
+"block or script type. It includes brief descriptions of related characters "
+"and occasionally meanings of the character in question."
+msgstr ""
+"Gucharmap (\"Карта знакаў GNOME\"), праграма, якая прадастаўляе доступ да знакаў Унікоду. "
+"Яна дазваляе праглядаць знакі для пэўных блокаў і відаў пісьма. Для кожнага знака "
+"прапануецца кароткае апісанне са спасылкамі на звязаныя знакі, а таксама часам "
+"яго значэнне."
+
+#: ../data/gucharmap.appdata.xml.in.h:2
+msgid ""
+"Gucharmap can also be used to input or enter characters (by copy and paste). "
+"The search functionality allows the use of several search methods, including "
+"by unicode name or code point of the character."
+msgstr ""
+"Gucharmap можа быць выкарыстана для ўводу спецыяльных знакаў (праз буфер абмену). "
+"Пошук магчымы паводле разнастайных крытэрыяў, напрыклад, паводле назвы або "
+"кодавай пазіцыі патрэбнага знака."
+
+#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:760
 #: ../gucharmap/main.c:236
 msgid "Character Map"
 msgstr "Табліца знакаў"
@@ -172,48 +194,48 @@ msgid "Sho_w only glyphs from this font"
 msgstr "Паказваць толькі _гліфы шрыфту"
 
 #: ../gucharmap/gucharmap-menus.ui.h:4
+msgid "Snap _Columns to Power of Two"
+msgstr "Па_шырыць слупкі ўдвая"
+
+#: ../gucharmap/gucharmap-menus.ui.h:5
 msgid "Zoom _In"
 msgstr "_Наблізіць"
 
-#: ../gucharmap/gucharmap-menus.ui.h:5
+#: ../gucharmap/gucharmap-menus.ui.h:6
 msgid "Zoom _Out"
 msgstr "_Аддаліць"
 
-#: ../gucharmap/gucharmap-menus.ui.h:6
+#: ../gucharmap/gucharmap-menus.ui.h:7
 msgid "_Normal Size"
 msgstr "_Звычайны памер"
 
-#: ../gucharmap/gucharmap-menus.ui.h:7
+#: ../gucharmap/gucharmap-menus.ui.h:8
 msgid "_Find"
 msgstr "_Пошук"
 
-#: ../gucharmap/gucharmap-menus.ui.h:8
+#: ../gucharmap/gucharmap-menus.ui.h:9
 msgid "_Help"
 msgstr "_Дапамога"
 
-#: ../gucharmap/gucharmap-menus.ui.h:9
+#: ../gucharmap/gucharmap-menus.ui.h:10
 msgid "_About"
 msgstr "_Аб праграме"
 
-#: ../gucharmap/gucharmap-menus.ui.h:10
+#: ../gucharmap/gucharmap-menus.ui.h:11
 msgid "_Close Window"
 msgstr "_Закрыць акно"
 
-#: ../gucharmap/gucharmap-menus.ui.h:11
+#: ../gucharmap/gucharmap-menus.ui.h:12
 msgid "_File"
 msgstr "_Файл"
 
-#: ../gucharmap/gucharmap-menus.ui.h:12
+#: ../gucharmap/gucharmap-menus.ui.h:13
 msgid "_Close"
 msgstr "_Закрыць"
 
-#: ../gucharmap/gucharmap-menus.ui.h:13
+#: ../gucharmap/gucharmap-menus.ui.h:14
 msgid "_View"
 msgstr "_Від"
-
-#: ../gucharmap/gucharmap-menus.ui.h:14
-msgid "Snap _Columns to Power of Two"
-msgstr "Па_шырыць слупкі ўдвая"
 
 #: ../gucharmap/gucharmap-menus.ui.h:15
 msgid "_Search"
@@ -530,11 +552,11 @@ msgid "Previous Block"
 msgstr "Да папярэдняга блока"
 
 #. Text to copy entry + button
-#: ../gucharmap/gucharmap-window.c:804
+#: ../gucharmap/gucharmap-window.c:791
 msgid "_Text to copy:"
 msgstr "_Тэкст для капіравання:"
 
-#: ../gucharmap/gucharmap-window.c:811
+#: ../gucharmap/gucharmap-window.c:798
 msgid "Copy to the clipboard."
 msgstr "Скапіраваць у буфер абмену."
 
@@ -554,6 +576,66 @@ msgstr "Пачатковы шрыфт, напрыклад: \"Serif 27\""
 #: ../gucharmap/main.c:210
 msgid "FONT"
 msgstr "ШРЫФТ"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:1
+msgid "Character map grouping method"
+msgstr "Спосаб групавання табліцы знакаў"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:2
+msgid ""
+"This is how the characters in the character map are grouped. The characters "
+"can either be grouped by 'script' or 'block'."
+msgstr ""
+"Гэты ключ вызначае, як знакі групуюцца ў табліцы. Магчымыя значэнні: \"script"
+"\" (паводле пісьма) ці \"block\" (паводле блокаў)."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
+msgid "Character map font description"
+msgstr "Шрыфт табліцы знакаў"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:4
+msgid ""
+"The font to use for the character map. If set to 'nothing' then the default "
+"is the system font with the size doubled. Otherwise it should be a font "
+"description string like 'Sans 24'."
+msgstr ""
+"Шрыфт табліцы знакаў. Значэнне \"nothing\" азначае сістэмны шрыфт падвоенага "
+"памеру. Іначай гэты ключ мусіць апісваць шрыфт, напрыклад, як \"Sans 24\"."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:5
+msgid "Snap number of columns to a power of two"
+msgstr "Падганяць колькасць слупкоў да бліжэйшай ступені двойкі"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:6
+msgid ""
+"The number of columns in the character map grid is determined by the width "
+"of the window. If this setting is 'true' then the value will be forced to "
+"the nearest power of two."
+msgstr ""
+"Колькасць слупкоў у табліцы знакаў вызначаецца шырынёю акна. Калі гэты ключ "
+"уключаны, гэта значэнне будзе падганяцца да бліжэйшай ступені двойкі."
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:7
+msgid "Last selected character"
+msgstr "Апошні вылучаны знак"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:8
+msgid ""
+"This is the last character that was selected in the character map (and will "
+"be selected again when the character map is next started).\n"
+"\n"
+"By default, it is the first letter of the alphabet in the current locale."
+msgstr ""
+"Апошні знак, вылучаны ў табліцы знакаў (ён будзе зноў вылучаны пры наступным "
+"запуску табліцы).\n"
+"\n"
+"Прадвызначана, гэта першая літара мясцовага алфавіта."
+
+#. The unicode code point of the first letter of the alphabet
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:12
+msgctxt "First letter"
+msgid "0x41"
+msgstr "0x0410"
 
 #: ../gucharmap/unicode-blocks.h:14
 msgid "Basic Latin"
@@ -1478,63 +1560,3 @@ msgstr "Пісьмо Пагба-ламы"
 #: ../gucharmap/unicode-scripts.h:117
 msgid "Yi"
 msgstr "Пісьмо і"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:1
-msgid "Character map grouping method"
-msgstr "Спосаб групавання табліцы знакаў"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:2
-msgid ""
-"This is how the characters in the character map are grouped. The characters "
-"can either be grouped by 'script' or 'block'."
-msgstr ""
-"Гэты ключ вызначае, як знакі групуюцца ў табліцы. Магчымыя значэнні: \"script"
-"\" (паводле пісьма) ці \"block\" (паводле блокаў)."
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
-msgid "Character map font description"
-msgstr "Шрыфт табліцы знакаў"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:4
-msgid ""
-"The font to use for the character map. If set to 'nothing' then the default "
-"is the system font with the size doubled. Otherwise it should be a font "
-"description string like 'Sans 24'."
-msgstr ""
-"Шрыфт табліцы знакаў. Значэнне \"nothing\" азначае сістэмны шрыфт падвоенага "
-"памеру. Іначай гэты ключ мусіць апісваць шрыфт, напрыклад, як \"Sans 24\"."
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:5
-msgid "Snap number of columns to a power of two"
-msgstr "Падганяць колькасць слупкоў да бліжэйшай ступені двойкі"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:6
-msgid ""
-"The number of columns in the character map grid is determined by the width "
-"of the window. If this setting is 'true' then the value will be forced to "
-"the nearest power of two."
-msgstr ""
-"Колькасць слупкоў у табліцы знакаў вызначаецца шырынёю акна. Калі гэты ключ "
-"уключаны, гэта значэнне будзе падганяцца да бліжэйшай ступені двойкі."
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:7
-msgid "Last selected character"
-msgstr "Апошні вылучаны знак"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:8
-msgid ""
-"This is the last character that was selected in the character map (and will "
-"be selected again when the character map is next started).\n"
-"\n"
-"By default, it is the first letter of the alphabet in the current locale."
-msgstr ""
-"Апошні знак, вылучаны ў табліцы знакаў (ён будзе зноў вылучаны пры наступным "
-"запуску табліцы).\n"
-"\n"
-"Прадвызначана, гэта першая літара мясцовага алфавіта."
-
-#. The unicode code point of the first letter of the alphabet
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:12
-msgctxt "First letter"
-msgid "0x41"
-msgstr "0x0410"
