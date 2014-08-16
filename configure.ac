@@ -280,7 +280,6 @@ Makefile
 gucharmap.desktop.in
 gucharmap.nsi
 gucharmap.spec
-data/Makefile
 docs/Makefile
 docs/reference/Makefile
 gucharmap/Makefile
