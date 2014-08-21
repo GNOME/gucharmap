@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: as\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gucharmap&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-08-14 09:10+0000\n"
-"PO-Revision-Date: 2014-08-14 20:15+0530\n"
+"POT-Creation-Date: 2014-08-21 09:30+0000\n"
+"PO-Revision-Date: 2014-08-21 17:24+0530\n"
 "Last-Translator: Nilamdyuti Goswami <ngoswami@redhat.com>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
 "Language: as_IN\n"
@@ -19,20 +19,33 @@ msgstr ""
 "X-Generator: Lokalize 1.5\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: ../data/gucharmap.appdata.xml.in.h:1
+#: ../data/gucharmap.appdata.xml.in.h:1 ../gucharmap.desktop.in.in.h:1
+#: ../gucharmap/gucharmap-window.c:760 ../gucharmap/main.c:236
+msgid "Character Map"
+msgstr "আখৰ মানচিত্ৰ"
+
+#: ../data/gucharmap.appdata.xml.in.h:2 ../gucharmap.desktop.in.in.h:2
+msgid "Insert special characters into documents"
+msgstr "দস্তাবেজত বিশেষ আখৰ সুমুৱাওক"
+
+#: ../data/gucharmap.appdata.xml.in.h:3
+#| msgid ""
+#| "Gucharmap (\"GNOME Character Map\") is a Unicode character map program, "
+#| "part of GNOME desktop. This program allows characters to be displayed by "
+#| "unicode block or script type. It includes brief descriptions of related "
+#| "characters and occasionally meanings of the character in question."
 msgid ""
-"Gucharmap (\"GNOME Character Map\") is a Unicode character map program, part "
-"of GNOME desktop. This program allows characters to be displayed by unicode "
-"block or script type. It includes brief descriptions of related characters "
-"and occasionally meanings of the character in question."
+"GNOME Character Map is a Unicode character map program, part of GNOME "
+"desktop. This program allows characters to be displayed by unicode block or "
+"script type. It includes brief descriptions of related characters and "
+"occasionally meanings of the character in question."
 msgstr ""
-"Gucharmap (\"GNOME আখৰ মেপ\") এটা ইউনিক'ড আখৰ মেপ প্ৰগ্ৰাম, GNOME ডেস্কটপৰ "
-"এটা "
+"GNOME আখৰ মেপ এটা ইউনিক'ড আখৰ মেপ প্ৰগ্ৰাম, GNOME ডেস্কটপৰ এটা "
 "অংশ। ই আখৰসমূহক ইউনিক'ড খণ্ড অথবা স্ক্ৰিপ্ট ধৰণৰ সহায়ত প্ৰদৰ্শন কৰাৰ অনুমতি "
 "দিয়ে। ই "
 "প্ৰাসংগিক আখৰসমূহৰ সমু বিৱৰণ আৰু প্ৰশ্নত থকা আখৰৰ অৰ্থ অন্তৰ্ভুক্ত কৰে।"
 
-#: ../data/gucharmap.appdata.xml.in.h:2
+#: ../data/gucharmap.appdata.xml.in.h:4
 msgid ""
 "Gucharmap can also be used to input or enter characters (by copy and paste). "
 "The search functionality allows the use of several search methods, including "
@@ -43,15 +56,6 @@ msgstr ""
 "সন্ধান কাৰ্য্যকৰীতায় বিভিন্ন সন্ধান পদ্ধতিৰ ব্যৱহাৰ কৰাৰ অনুমতি দিয়ে, আখৰৰ "
 "ইউনিক'ড "
 "নাম অথবা ক'ড পইন্ট ব্যৱহাৰ কৰি।"
-
-#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:760
-#: ../gucharmap/main.c:236
-msgid "Character Map"
-msgstr "আখৰ মানচিত্ৰ"
-
-#: ../gucharmap.desktop.in.in.h:2
-msgid "Insert special characters into documents"
-msgstr "দস্তাবেজত বিশেষ আখৰ সুমুৱাওক"
 
 #: ../gucharmap.desktop.in.in.h:3
 msgid "font;unicode;"
@@ -554,7 +558,6 @@ msgid "GNOME Character Map"
 msgstr "GNOME আখৰৰ ম্যাপ"
 
 #: ../gucharmap/gucharmap-window.c:449
-#| msgid "Based on the Unicode Character Database 6.3.0"
 msgid "Based on the Unicode Character Database 7.0.0"
 msgstr "Unicode Character Database 7.0.0 ৰ ওপৰত ভিত্তিয়"
 
@@ -932,7 +935,6 @@ msgid "Tai Tham"
 msgstr "তাই থাম"
 
 #: ../gucharmap/unicode-blocks.h:69
-#| msgid "Combining Diacritical Marks"
 msgid "Combining Diacritical Marks Extended"
 msgstr "সংযুক্তকাৰী ডাইক্ৰিটিকেল চিহ্নসমূহ প্ৰসাৰিত"
 
@@ -1278,7 +1280,6 @@ msgid "Javanese"
 msgstr "জাভানিছ"
 
 #: ../gucharmap/unicode-blocks.h:148
-#| msgid "Myanmar Extended-A"
 msgid "Myanmar Extended-B"
 msgstr "মাৱানমাৰ বিস্তাৰিত-B"
 
@@ -1303,7 +1304,6 @@ msgid "Ethiopic Extended-A"
 msgstr "ইথিওপিক  বিস্তাৰিত-A"
 
 #: ../gucharmap/unicode-blocks.h:154
-#| msgid "Latin Extended-A"
 msgid "Latin Extended-E"
 msgstr "লেটিন প্ৰসাৰিত-E"
 
@@ -1433,7 +1433,6 @@ msgid "Gothic"
 msgstr "গথিক"
 
 #: ../gucharmap/unicode-blocks.h:184 ../gucharmap/unicode-scripts.h:100
-#| msgid "Old Persian"
 msgid "Old Permic"
 msgstr "পুৰনি পাৰ্মিক"
 
@@ -1466,7 +1465,6 @@ msgid "Caucasian Albanian"
 msgstr "ককেচিয়ান এলবেনিয়ান"
 
 #: ../gucharmap/unicode-blocks.h:192 ../gucharmap/unicode-scripts.h:75
-#| msgid "Linear B"
 msgid "Linear A"
 msgstr "ৰৈখিক A"
 
@@ -1511,7 +1509,6 @@ msgid "Old South Arabian"
 msgstr "পুৰনি দক্ষিণ আৰবীয়"
 
 #: ../gucharmap/unicode-blocks.h:203 ../gucharmap/unicode-scripts.h:99
-#| msgid "Old South Arabian"
 msgid "Old North Arabian"
 msgstr "পুৰনি উত্তৰ আৰবীয়"
 
@@ -1532,7 +1529,6 @@ msgid "Inscriptional Pahlavi"
 msgstr "ইনস্ক্ৰিপষণেল পাহলাভি"
 
 #: ../gucharmap/unicode-blocks.h:208 ../gucharmap/unicode-scripts.h:111
-#| msgid "Inscriptional Pahlavi"
 msgid "Psalter Pahlavi"
 msgstr "চলটাৰ পাহলাভি"
 
@@ -1705,7 +1701,6 @@ msgid "Enclosed Ideographic Supplement"
 msgstr "বান্ধীত প্ৰতিকচিহ্নিত পৰিপূৰক"
 
 #: ../gucharmap/unicode-blocks.h:251
-#| msgid "Miscellaneous Symbols And Pictographs"
 msgid "Miscellaneous Symbols and Pictographs"
 msgstr "বিভিন্ন চিহ্ন আৰু ছবিলেখচিত্ৰসমূহ"
 
@@ -1718,7 +1713,6 @@ msgid "Ornamental Dingbats"
 msgstr "অৰ্নামেণ্টেল ডিংবেটচ্"
 
 #: ../gucharmap/unicode-blocks.h:254
-#| msgid "Transport And Map Symbols"
 msgid "Transport and Map Symbols"
 msgstr "পৰিবহন আৰু মানচিত্ৰ চিহ্নসমুহ"
 
@@ -1727,12 +1721,10 @@ msgid "Alchemical Symbols"
 msgstr "এলকেমিকেল চিহ্নসমূহ"
 
 #: ../gucharmap/unicode-blocks.h:256
-#| msgid "Geometric Shapes"
 msgid "Geometric Shapes Extended"
 msgstr "জ্যামিতিক আকৃতিসমূহ প্ৰসাৰিত"
 
 #: ../gucharmap/unicode-blocks.h:257
-#| msgid "Supplemental Arrows-A"
 msgid "Supplemental Arrows-C"
 msgstr "পৰিপূৰক কাড়-C"
 
