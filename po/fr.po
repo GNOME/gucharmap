@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: gucharmap master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gucharmap&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-06-09 09:06+0000\n"
-"PO-Revision-Date: 2014-03-15 11:14+0100\n"
+"POT-Creation-Date: 2014-08-21 21:16+0000\n"
+"PO-Revision-Date: 2014-08-21 08:52+0200\n"
 "Last-Translator: Claude Paroz <claude@2xlibre.net>\n"
 "Language-Team: GNOME French team <gnomefr@traduc.org>\n"
 "Language: fr\n"
@@ -24,20 +24,29 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../data/gucharmap.appdata.xml.in.h:1
-msgid ""
-"Gucharmap (\"GNOME Character Map\") is a Unicode character map program, part "
-"of GNOME desktop. This program allows characters to be displayed by unicode "
-"block or script type. It includes brief descriptions of related characters "
-"and occasionally meanings of the character in question."
-msgstr ""
-"Gucharmap (Table de caractères GNOME) est un programme d'affichage des "
-"caractères Unicode faisant partie du bureau GNOME. Ce programme permet "
-"d'afficher des caractères par bloc unicode ou par type d'écriture. Il ajoute "
-"de brèves descriptions des caractères associés et parfois les significations "
-"du caractère en question."
+#: ../data/gucharmap.appdata.xml.in.h:1 ../gucharmap.desktop.in.in.h:1
+#: ../gucharmap/gucharmap-window.c:760 ../gucharmap/main.c:236
+msgid "Character Map"
+msgstr "Table de caractères"
 
-#: ../data/gucharmap.appdata.xml.in.h:2
+#: ../data/gucharmap.appdata.xml.in.h:2 ../gucharmap.desktop.in.in.h:2
+msgid "Insert special characters into documents"
+msgstr "Insère des caractères spéciaux dans vos documents"
+
+#: ../data/gucharmap.appdata.xml.in.h:3
+msgid ""
+"GNOME Character Map is a Unicode character map program, part of GNOME "
+"desktop. This program allows characters to be displayed by unicode block or "
+"script type. It includes brief descriptions of related characters and "
+"occasionally meanings of the character in question."
+msgstr ""
+"La Table de caractères GNOME est un programme d'affichage des caractères "
+"Unicode faisant partie du bureau GNOME. Ce programme permet d'afficher des "
+"caractères par bloc unicode ou par type d'écriture. Il ajoute de brèves "
+"descriptions des caractères associés et parfois les significations du "
+"caractère en question."
+
+#: ../data/gucharmap.appdata.xml.in.h:4
 msgid ""
 "Gucharmap can also be used to input or enter characters (by copy and paste). "
 "The search functionality allows the use of several search methods, including "
@@ -47,15 +56,6 @@ msgstr ""
 "coller). La fonctionnalité de recherche emploie plusieurs méthodes de "
 "recherche, dont la recherche par nom unicode ou par point de code du "
 "caractère."
-
-#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:760
-#: ../gucharmap/main.c:236
-msgid "Character Map"
-msgstr "Table de caractères"
-
-#: ../gucharmap.desktop.in.in.h:2
-msgid "Insert special characters into documents"
-msgstr "Insère des caractères spéciaux dans vos documents"
 
 #: ../gucharmap.desktop.in.in.h:3
 msgid "font;unicode;"
@@ -877,10 +877,8 @@ msgid "Tai Tham"
 msgstr "Taï tham"
 
 #: ../gucharmap/unicode-blocks.h:69
-#, fuzzy
-#| msgid "Combining Diacritical Marks"
 msgid "Combining Diacritical Marks Extended"
-msgstr "Diacritiques"
+msgstr "Diacritiques étendus"
 
 #: ../gucharmap/unicode-blocks.h:70 ../gucharmap/unicode-scripts.h:19
 msgid "Balinese"
@@ -1328,7 +1326,7 @@ msgstr "Carien"
 
 #: ../gucharmap/unicode-blocks.h:181
 msgid "Coptic Epact Numbers"
-msgstr ""
+msgstr "Nombres epact coptes"
 
 #: ../gucharmap/unicode-blocks.h:182 ../gucharmap/unicode-scripts.h:98
 msgid "Old Italic"
@@ -1435,10 +1433,8 @@ msgid "Inscriptional Pahlavi"
 msgstr "Pehlevi des inscriptions"
 
 #: ../gucharmap/unicode-blocks.h:208 ../gucharmap/unicode-scripts.h:111
-#, fuzzy
-#| msgid "Inscriptional Pahlavi"
 msgid "Psalter Pahlavi"
-msgstr "Pehlevi des inscriptions"
+msgstr "Pehlevi des psautiers"
 
 #: ../gucharmap/unicode-blocks.h:209 ../gucharmap/unicode-scripts.h:103
 msgid "Old Turkic"
@@ -1466,7 +1462,7 @@ msgstr "Chakma"
 
 #: ../gucharmap/unicode-blocks.h:215 ../gucharmap/unicode-scripts.h:80
 msgid "Mahajani"
-msgstr ""
+msgstr "Mahajani"
 
 #: ../gucharmap/unicode-blocks.h:216 ../gucharmap/unicode-scripts.h:116
 msgid "Sharada"
@@ -1474,31 +1470,31 @@ msgstr "Sharada"
 
 #: ../gucharmap/unicode-blocks.h:217
 msgid "Sinhala Archaic Numbers"
-msgstr ""
+msgstr "Cingalais (nombres archaïques)"
 
 #: ../gucharmap/unicode-blocks.h:218 ../gucharmap/unicode-scripts.h:69
 msgid "Khojki"
-msgstr ""
+msgstr "Khojki"
 
 #: ../gucharmap/unicode-blocks.h:219 ../gucharmap/unicode-scripts.h:70
 msgid "Khudawadi"
-msgstr ""
+msgstr "Khoudawadi"
 
 #: ../gucharmap/unicode-blocks.h:220 ../gucharmap/unicode-scripts.h:49
 msgid "Grantha"
-msgstr ""
+msgstr "Grantha"
 
 #: ../gucharmap/unicode-blocks.h:221 ../gucharmap/unicode-scripts.h:136
 msgid "Tirhuta"
-msgstr ""
+msgstr "Tirhouta"
 
 #: ../gucharmap/unicode-blocks.h:222 ../gucharmap/unicode-scripts.h:118
 msgid "Siddham"
-msgstr ""
+msgstr "Siddham"
 
 #: ../gucharmap/unicode-blocks.h:223 ../gucharmap/unicode-scripts.h:89
 msgid "Modi"
-msgstr ""
+msgstr "Modi"
 
 #: ../gucharmap/unicode-blocks.h:224 ../gucharmap/unicode-scripts.h:129
 msgid "Takri"
@@ -1506,11 +1502,11 @@ msgstr "Takri"
 
 #: ../gucharmap/unicode-blocks.h:225 ../gucharmap/unicode-scripts.h:139
 msgid "Warang Citi"
-msgstr ""
+msgstr "Warang citi"
 
 #: ../gucharmap/unicode-blocks.h:226 ../gucharmap/unicode-scripts.h:108
 msgid "Pau Cin Hau"
-msgstr ""
+msgstr "Pau cin hau"
 
 #: ../gucharmap/unicode-blocks.h:227 ../gucharmap/unicode-scripts.h:37
 msgid "Cuneiform"
@@ -1530,15 +1526,15 @@ msgstr "Supplément bamoun"
 
 #: ../gucharmap/unicode-blocks.h:231 ../gucharmap/unicode-scripts.h:91
 msgid "Mro"
-msgstr ""
+msgstr "Mro"
 
 #: ../gucharmap/unicode-blocks.h:232 ../gucharmap/unicode-scripts.h:21
 msgid "Bassa Vah"
-msgstr ""
+msgstr "Bassa Vah"
 
 #: ../gucharmap/unicode-blocks.h:233 ../gucharmap/unicode-scripts.h:106
 msgid "Pahawh Hmong"
-msgstr ""
+msgstr "Hmong pahawh"
 
 #: ../gucharmap/unicode-blocks.h:234 ../gucharmap/unicode-scripts.h:88
 msgid "Miao"
@@ -1550,11 +1546,11 @@ msgstr "Supplément kana"
 
 #: ../gucharmap/unicode-blocks.h:236 ../gucharmap/unicode-scripts.h:42
 msgid "Duployan"
-msgstr ""
+msgstr "Duployé"
 
 #: ../gucharmap/unicode-blocks.h:237
 msgid "Shorthand Format Controls"
-msgstr ""
+msgstr "Contrôles de format raccourcis"
 
 #: ../gucharmap/unicode-blocks.h:238
 msgid "Byzantine Musical Symbols"
@@ -1582,7 +1578,7 @@ msgstr "Symboles mathématiques alphanumériques"
 
 #: ../gucharmap/unicode-blocks.h:244 ../gucharmap/unicode-scripts.h:85
 msgid "Mende Kikakui"
-msgstr ""
+msgstr "Mendé kikakui"
 
 #: ../gucharmap/unicode-blocks.h:245
 msgid "Arabic Mathematical Alphabetic Symbols"
@@ -1618,7 +1614,7 @@ msgstr "Émoticônes"
 
 #: ../gucharmap/unicode-blocks.h:253
 msgid "Ornamental Dingbats"
-msgstr ""
+msgstr "Casseau ornemental"
 
 #: ../gucharmap/unicode-blocks.h:254
 msgid "Transport and Map Symbols"
