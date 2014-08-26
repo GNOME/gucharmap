@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: gucharmap.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gucharmap&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-06-11 09:09+0000\n"
-"PO-Revision-Date: 2014-06-12 17:46+0200\n"
+"POT-Creation-Date: 2014-08-26 09:17+0000\n"
+"PO-Revision-Date: 2014-08-26 17:43+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español; Castellano <gnome-es-list@gnome.org>\n"
 "Language: \n"
@@ -27,20 +27,34 @@ msgstr ""
 "X-Generator: Gtranslator 2.91.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../data/gucharmap.appdata.xml.in.h:1
-msgid ""
-"Gucharmap (\"GNOME Character Map\") is a Unicode character map program, part "
-"of GNOME desktop. This program allows characters to be displayed by unicode "
-"block or script type. It includes brief descriptions of related characters "
-"and occasionally meanings of the character in question."
-msgstr ""
-"Gucharmap (Mapa de caracteres de GNOME) es un programa de mapa de caracteres "
-"Unicode que forma parte del escritorio GNOME. Este programa permite mostrar "
-"los caracteres por bloques Unicode o por tipo de escritura. Incluye una "
-"breve descripción de los caracteres relacionados y, algunas veces, el "
-"significado del carácter en sí."
+#: ../data/gucharmap.appdata.xml.in.h:1 ../gucharmap.desktop.in.in.h:1
+#: ../gucharmap/gucharmap-window.c:760 ../gucharmap/main.c:236
+msgid "Character Map"
+msgstr "Mapa de caracteres"
 
-#: ../data/gucharmap.appdata.xml.in.h:2
+#: ../data/gucharmap.appdata.xml.in.h:2 ../gucharmap.desktop.in.in.h:2
+msgid "Insert special characters into documents"
+msgstr "Inserte caracteres especiales en los documentos"
+
+#: ../data/gucharmap.appdata.xml.in.h:3
+#| msgid ""
+#| "Gucharmap (\"GNOME Character Map\") is a Unicode character map program, "
+#| "part of GNOME desktop. This program allows characters to be displayed by "
+#| "unicode block or script type. It includes brief descriptions of related "
+#| "characters and occasionally meanings of the character in question."
+msgid ""
+"GNOME Character Map is a Unicode character map program, part of GNOME "
+"desktop. This program allows characters to be displayed by unicode block or "
+"script type. It includes brief descriptions of related characters and "
+"occasionally meanings of the character in question."
+msgstr ""
+"El mapa de caracteres de GNOME es un programa de mapa de caracteres Unicode "
+"que forma parte del escritorio GNOME. Este programa permite mostrar los "
+"caracteres por bloques Unicode o por tipo de escritura. Incluye una breve "
+"descripción de los caracteres relacionados y, algunas veces, el significado "
+"del carácter en sí."
+
+#: ../data/gucharmap.appdata.xml.in.h:4
 msgid ""
 "Gucharmap can also be used to input or enter characters (by copy and paste). "
 "The search functionality allows the use of several search methods, including "
@@ -49,15 +63,6 @@ msgstr ""
 "También se puede usar Gucharmap para introducir caracteres (copiar y pegar). "
 "La búsqueda permite usar varios métodos, incluyendo el nombre Unicode o el "
 "punto de código del carácter."
-
-#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:760
-#: ../gucharmap/main.c:236
-msgid "Character Map"
-msgstr "Mapa de caracteres"
-
-#: ../gucharmap.desktop.in.in.h:2
-msgid "Insert special characters into documents"
-msgstr "Inserte caracteres especiales en los documentos"
 
 #: ../gucharmap.desktop.in.in.h:3
 msgid "font;unicode;"
@@ -538,7 +543,6 @@ msgid "GNOME Character Map"
 msgstr "Mapa de caracteres de GNOME"
 
 #: ../gucharmap/gucharmap-window.c:449
-#| msgid "Based on the Unicode Character Database 6.3.0"
 msgid "Based on the Unicode Character Database 7.0.0"
 msgstr "Basado en la base de datos de caracteres Unicode 7.0.0"
 
@@ -878,7 +882,6 @@ msgid "Tai Tham"
 msgstr "Tai Tham"
 
 #: ../gucharmap/unicode-blocks.h:69
-#| msgid "Combining Diacritical Marks"
 msgid "Combining Diacritical Marks Extended"
 msgstr "Marcas diacríticas combinantes extendidas"
 
@@ -1195,7 +1198,6 @@ msgid "Javanese"
 msgstr "Javanés"
 
 #: ../gucharmap/unicode-blocks.h:148
-#| msgid "Myanmar Extended-A"
 msgid "Myanmar Extended-B"
 msgstr "Myanmar extendido-B"
 
@@ -1220,7 +1222,6 @@ msgid "Ethiopic Extended-A"
 msgstr "Etíope extendido-A"
 
 #: ../gucharmap/unicode-blocks.h:154
-#| msgid "Latin Extended-A"
 msgid "Latin Extended-E"
 msgstr "Latino extendido-E"
 
@@ -1341,7 +1342,6 @@ msgid "Gothic"
 msgstr "Gótico"
 
 #: ../gucharmap/unicode-blocks.h:184 ../gucharmap/unicode-scripts.h:100
-#| msgid "Old Persian"
 msgid "Old Permic"
 msgstr "Pérmico antiguo"
 
@@ -1374,7 +1374,6 @@ msgid "Caucasian Albanian"
 msgstr "Albania caucásica"
 
 #: ../gucharmap/unicode-blocks.h:192 ../gucharmap/unicode-scripts.h:75
-#| msgid "Linear B"
 msgid "Linear A"
 msgstr "A lineal"
 
@@ -1419,7 +1418,6 @@ msgid "Old South Arabian"
 msgstr "Árabe del sur antiguo"
 
 #: ../gucharmap/unicode-blocks.h:203 ../gucharmap/unicode-scripts.h:99
-#| msgid "Old South Arabian"
 msgid "Old North Arabian"
 msgstr "Árabe del norte antiguo"
 
@@ -1440,7 +1438,6 @@ msgid "Inscriptional Pahlavi"
 msgstr "Inscripciones pahlavi"
 
 #: ../gucharmap/unicode-blocks.h:208 ../gucharmap/unicode-scripts.h:111
-#| msgid "Inscriptional Pahlavi"
 msgid "Psalter Pahlavi"
 msgstr "Salterio Pahlavi"
 
@@ -1613,7 +1610,6 @@ msgid "Enclosed Ideographic Supplement"
 msgstr "Suplemento ideográfico adjunto"
 
 #: ../gucharmap/unicode-blocks.h:251
-#| msgid "Miscellaneous Symbols And Pictographs"
 msgid "Miscellaneous Symbols and Pictographs"
 msgstr "Símbolos y pictogramas varios"
 
@@ -1626,7 +1622,6 @@ msgid "Ornamental Dingbats"
 msgstr "Pictogramas ornamentales"
 
 #: ../gucharmap/unicode-blocks.h:254
-#| msgid "Transport And Map Symbols"
 msgid "Transport and Map Symbols"
 msgstr "Símbolos de transporte y mapas"
 
@@ -1635,12 +1630,10 @@ msgid "Alchemical Symbols"
 msgstr "Símbolos alquímicos"
 
 #: ../gucharmap/unicode-blocks.h:256
-#| msgid "Geometric Shapes"
 msgid "Geometric Shapes Extended"
 msgstr "Formas geométricas extendidas"
 
 #: ../gucharmap/unicode-blocks.h:257
-#| msgid "Supplemental Arrows-A"
 msgid "Supplemental Arrows-C"
 msgstr "Flechas suplementarias C"
 
