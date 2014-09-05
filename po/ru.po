@@ -16,38 +16,52 @@
 # Dmitry G. Mastrukov <dmitry@taurussoft.org>, 2004.
 # Leonid Kanter <leon@asplinux.ru>, 2006.
 # Yuri Kozlov <yuray@komyakino.ru>, 2010, 2011.
-# Yuri Myasoedov <omerta13@yandex.ru>, 2012.
+# Yuri Myasoedov <ymyasoedov@yandex.ru>, 2012, 2014.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap trunk\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gucharmap&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-07-08 09:13+0000\n"
-"PO-Revision-Date: 2014-07-08 17:41+0300\n"
-"Last-Translator: Yuri Myasoedov <omerta13@yandex.ru>\n"
+"POT-Creation-Date: 2014-09-05 09:15+0000\n"
+"PO-Revision-Date: 2014-09-05 17:04+0400\n"
+"Last-Translator: Yuri Myasoedov <ymyasoedov@yandex.ru>\n"
 "Language-Team: русский <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 1.5.4\n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+"X-Generator: Gtranslator 2.91.6\n"
 
-#: ../data/gucharmap.appdata.xml.in.h:1
+#: ../data/gucharmap.appdata.xml.in.h:1 ../gucharmap.desktop.in.in.h:1
+#: ../gucharmap/gucharmap-window.c:760 ../gucharmap/main.c:236
+msgid "Character Map"
+msgstr "Таблица символов"
+
+#: ../data/gucharmap.appdata.xml.in.h:2 ../gucharmap.desktop.in.in.h:2
+msgid "Insert special characters into documents"
+msgstr "Программа для вставки специальных символов в документы"
+
+#: ../data/gucharmap.appdata.xml.in.h:3
+#| msgid ""
+#| "Gucharmap (\"GNOME Character Map\") is a Unicode character map program, "
+#| "part of GNOME desktop. This program allows characters to be displayed by "
+#| "unicode block or script type. It includes brief descriptions of related "
+#| "characters and occasionally meanings of the character in question."
 msgid ""
-"Gucharmap (\"GNOME Character Map\") is a Unicode character map program, part "
-"of GNOME desktop. This program allows characters to be displayed by unicode "
-"block or script type. It includes brief descriptions of related characters "
-"and occasionally meanings of the character in question."
+"GNOME Character Map is a Unicode character map program, part of GNOME "
+"desktop. This program allows characters to be displayed by unicode block or "
+"script type. It includes brief descriptions of related characters and "
+"occasionally meanings of the character in question."
 msgstr ""
-"Gucharmap (GNOME Character Map) — карта символов Юникода. Является частью "
-"рабочего стола GNOME. Это приложение позволяет отображать символы по блоку "
-"Юникода или по типу письменности. gucharmap также выводит краткое описание "
-"соответствующих символов и иногда значения символа в вопросе."
+"Карта символов GNOME — это карта символов Юникода. Это приложение является "
+"частью рабочего стола GNOME. Оно позволяет отображать символы по блоку "
+"Юникода или по типу письменности, а также выводит краткое описание "
+"соответствующих символов и значения символа в вопросе."
 
-#: ../data/gucharmap.appdata.xml.in.h:2
+#: ../data/gucharmap.appdata.xml.in.h:4
 msgid ""
 "Gucharmap can also be used to input or enter characters (by copy and paste). "
 "The search functionality allows the use of several search methods, including "
@@ -56,15 +70,6 @@ msgstr ""
 "Gucharmap можно также использовать для ввода символов (через копирование и "
 "вставку). Возможности поиска позволяют использовать несколько способов "
 "поиска, включая имя или код символа."
-
-#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:760
-#: ../gucharmap/main.c:236
-msgid "Character Map"
-msgstr "Таблица символов"
-
-#: ../gucharmap.desktop.in.in.h:2
-msgid "Insert special characters into documents"
-msgstr "Программа для вставки специальных символов в документы"
 
 #: ../gucharmap.desktop.in.in.h:3
 msgid "font;unicode;"
@@ -883,7 +888,6 @@ msgid "Tai Tham"
 msgstr "Тай Тхам"
 
 #: ../gucharmap/unicode-blocks.h:69
-#| msgid "Combining Diacritical Marks"
 msgid "Combining Diacritical Marks Extended"
 msgstr "Дополнительные комбинируемые диакритические знаки"
 
