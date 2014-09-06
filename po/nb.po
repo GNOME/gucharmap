@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap 3.13.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-21 14:40+0200\n"
-"PO-Revision-Date: 2014-07-21 14:46+0200\n"
+"POT-Creation-Date: 2014-09-06 13:39+0200\n"
+"PO-Revision-Date: 2014-09-06 13:43+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: nb\n"
@@ -16,19 +16,24 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
-#: ../data/gucharmap.appdata.xml.in.h:1
-msgid ""
-"Gucharmap (\"GNOME Character Map\") is a Unicode character map program, part "
-"of GNOME desktop. This program allows characters to be displayed by unicode "
-"block or script type. It includes brief descriptions of related characters "
-"and occasionally meanings of the character in question."
-msgstr ""
-"Gucharmap (\"GNOME tegnkart\") er et Unicode-tegnkartprogram som er en del "
-"av GNOME skrivebordet. Dette programmet viser tegn etter Unicode-blokk eller "
-"type skript. Det inneholder en kort beskrivelse av relaterte tegn og noen "
-"ganger betydningen av tegnene."
+#: ../data/gucharmap.appdata.xml.in.h:1 ../gucharmap.desktop.in.in.h:1
+#: ../gucharmap/gucharmap-window.c:760 ../gucharmap/main.c:236
+msgid "Character Map"
+msgstr "Tegnkart"
 
-#: ../data/gucharmap.appdata.xml.in.h:2
+#: ../data/gucharmap.appdata.xml.in.h:2 ../gucharmap.desktop.in.in.h:2
+msgid "Insert special characters into documents"
+msgstr "Sett inn spesielle tegn i dokumenter"
+
+#: ../data/gucharmap.appdata.xml.in.h:3
+msgid ""
+"GNOME Character Map is a Unicode character map program, part of GNOME "
+"desktop. This program allows characters to be displayed by unicode block or "
+"script type. It includes brief descriptions of related characters and "
+"occasionally meanings of the character in question."
+msgstr "GNOME tegnkart er et Unicode-tegnkartprogram som er en del av GNOME skrivebordet. Dette programmet viser tegn etter Unicode-blokk eller type skript. Det inneholder en kort beskrivelse av relaterte tegn og noen ganger betydningen av tegnene."
+
+#: ../data/gucharmap.appdata.xml.in.h:4
 msgid ""
 "Gucharmap can also be used to input or enter characters (by copy and paste). "
 "The search functionality allows the use of several search methods, including "
@@ -37,15 +42,6 @@ msgstr ""
 "Gucharmap kan også brukes til å skrive inn tegn (via klipp og lim). "
 "Søkefunksjonen tillater flere søkemetoder inklusive via Unicode-navn eller "
 "kodepunkt for tegnet."
-
-#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:760
-#: ../gucharmap/main.c:236
-msgid "Character Map"
-msgstr "Tegnkart"
-
-#: ../gucharmap.desktop.in.in.h:2
-msgid "Insert special characters into documents"
-msgstr "Sett inn spesielle tegn i dokumenter"
 
 #: ../gucharmap.desktop.in.in.h:3
 msgid "font;unicode;"
@@ -1306,7 +1302,7 @@ msgstr "Carian"
 
 #: ../gucharmap/unicode-blocks.h:181
 msgid "Coptic Epact Numbers"
-msgstr ""
+msgstr "Koptiske Epact tall"
 
 #: ../gucharmap/unicode-blocks.h:182 ../gucharmap/unicode-scripts.h:98
 msgid "Old Italic"
@@ -1342,11 +1338,11 @@ msgstr "Osmanya"
 
 #: ../gucharmap/unicode-blocks.h:190 ../gucharmap/unicode-scripts.h:44
 msgid "Elbasan"
-msgstr ""
+msgstr "Elbasan"
 
 #: ../gucharmap/unicode-blocks.h:191 ../gucharmap/unicode-scripts.h:31
 msgid "Caucasian Albanian"
-msgstr ""
+msgstr "Kaukasisk Albansk"
 
 #: ../gucharmap/unicode-blocks.h:192 ../gucharmap/unicode-scripts.h:75
 msgid "Linear A"
@@ -1442,7 +1438,7 @@ msgstr "Chakma"
 
 #: ../gucharmap/unicode-blocks.h:215 ../gucharmap/unicode-scripts.h:80
 msgid "Mahajani"
-msgstr ""
+msgstr "Mahajani"
 
 #: ../gucharmap/unicode-blocks.h:216 ../gucharmap/unicode-scripts.h:116
 msgid "Sharada"
@@ -1450,31 +1446,31 @@ msgstr "Sharada"
 
 #: ../gucharmap/unicode-blocks.h:217
 msgid "Sinhala Archaic Numbers"
-msgstr ""
+msgstr "Arkaiske tall i Sinhala"
 
 #: ../gucharmap/unicode-blocks.h:218 ../gucharmap/unicode-scripts.h:69
 msgid "Khojki"
-msgstr ""
+msgstr "Khojki"
 
 #: ../gucharmap/unicode-blocks.h:219 ../gucharmap/unicode-scripts.h:70
 msgid "Khudawadi"
-msgstr ""
+msgstr "Khudawadi"
 
 #: ../gucharmap/unicode-blocks.h:220 ../gucharmap/unicode-scripts.h:49
 msgid "Grantha"
-msgstr ""
+msgstr "Grantha"
 
 #: ../gucharmap/unicode-blocks.h:221 ../gucharmap/unicode-scripts.h:136
 msgid "Tirhuta"
-msgstr ""
+msgstr "Tirhuta"
 
 #: ../gucharmap/unicode-blocks.h:222 ../gucharmap/unicode-scripts.h:118
 msgid "Siddham"
-msgstr ""
+msgstr "Siddham"
 
 #: ../gucharmap/unicode-blocks.h:223 ../gucharmap/unicode-scripts.h:89
 msgid "Modi"
-msgstr ""
+msgstr "Modi"
 
 #: ../gucharmap/unicode-blocks.h:224 ../gucharmap/unicode-scripts.h:129
 msgid "Takri"
@@ -1482,11 +1478,11 @@ msgstr "Takri"
 
 #: ../gucharmap/unicode-blocks.h:225 ../gucharmap/unicode-scripts.h:139
 msgid "Warang Citi"
-msgstr ""
+msgstr "Warang Citi"
 
 #: ../gucharmap/unicode-blocks.h:226 ../gucharmap/unicode-scripts.h:108
 msgid "Pau Cin Hau"
-msgstr ""
+msgstr "Pau Cin Hau"
 
 #: ../gucharmap/unicode-blocks.h:227 ../gucharmap/unicode-scripts.h:37
 msgid "Cuneiform"
@@ -1506,15 +1502,15 @@ msgstr "Tillegg til Bamum"
 
 #: ../gucharmap/unicode-blocks.h:231 ../gucharmap/unicode-scripts.h:91
 msgid "Mro"
-msgstr ""
+msgstr "Mro"
 
 #: ../gucharmap/unicode-blocks.h:232 ../gucharmap/unicode-scripts.h:21
 msgid "Bassa Vah"
-msgstr ""
+msgstr "Bassa Vah"
 
 #: ../gucharmap/unicode-blocks.h:233 ../gucharmap/unicode-scripts.h:106
 msgid "Pahawh Hmong"
-msgstr ""
+msgstr "Pahawh Hmong"
 
 #: ../gucharmap/unicode-blocks.h:234 ../gucharmap/unicode-scripts.h:88
 msgid "Miao"
@@ -1526,7 +1522,7 @@ msgstr "Tillegg til Kana"
 
 #: ../gucharmap/unicode-blocks.h:236 ../gucharmap/unicode-scripts.h:42
 msgid "Duployan"
-msgstr ""
+msgstr "Duployan"
 
 #: ../gucharmap/unicode-blocks.h:237
 msgid "Shorthand Format Controls"
@@ -1558,7 +1554,7 @@ msgstr "Matematiske alfanumeriske symboler"
 
 #: ../gucharmap/unicode-blocks.h:244 ../gucharmap/unicode-scripts.h:85
 msgid "Mende Kikakui"
-msgstr ""
+msgstr "Mende Kikakui"
 
 #: ../gucharmap/unicode-blocks.h:245
 msgid "Arabic Mathematical Alphabetic Symbols"
