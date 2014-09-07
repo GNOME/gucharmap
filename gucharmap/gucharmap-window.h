@@ -49,8 +49,6 @@ struct _GucharmapWindow
 
   GtkWidget *search_dialog; /* takes care of all aspects of searching */
 
-  guint save_last_char_idle_id;
-
   GtkPageSetup *page_setup;
   GtkPrintSettings *print_settings;
 

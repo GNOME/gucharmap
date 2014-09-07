@@ -649,17 +649,6 @@ status_realize (GtkWidget       *status,
   gtk_widget_set_size_request (guw->status, -1, allocation->height + 9);
 }
 
-static gboolean
-save_last_char_idle_cb (GucharmapWindow *guw)
-{
-  guw->save_last_char_idle_id = 0;
-
-  g_settings_set_uint (guw->settings, "last-char", 
-                       gucharmap_charmap_get_active_character (guw->charmap));
-
-  return FALSE;
-}
-
 static void
 fontsel_sync_font_desc (GucharmapMiniFontSelection *fontsel,
                         GParamSpec *pspec,
@@ -700,15 +689,25 @@ charmap_sync_font_desc (GucharmapCharmap *charmap,
   guw->in_notification = FALSE;
 }
 
+static int last_char_dirty = 0;
+
 static void
-charmap_sync_active_character (GtkWidget *widget,
-                               GParamSpec *pspec,
+charmap_dirty_active_character (GtkWidget *widget,
+                                GParamSpec *pspec,
+                                GucharmapWindow *guw)
+{
+  last_char_dirty = 1;
+}
+
+static gboolean
+charmap_save_active_character (GtkWidget *widget,
                                GucharmapWindow *guw)
 {
-  if (guw->save_last_char_idle_id != 0)
-    return;
+  if (last_char_dirty)
+    g_settings_set_uint (guw->settings, "last-char", 
+                         gucharmap_charmap_get_active_character (guw->charmap));
 
-  guw->save_last_char_idle_id = g_idle_add ((GSourceFunc) save_last_char_idle_cb, guw);
+  return FALSE;
 }
 
 static void
@@ -854,8 +853,10 @@ gucharmap_window_init (GucharmapWindow *guw)
   /* connect these only after applying the initial settings in order to
    * avoid unnecessary writes to GSettings.
    */
+  g_signal_connect (guw, "destroy",
+                    G_CALLBACK (charmap_save_active_character), guw);
   g_signal_connect (guw->charmap, "notify::active-character",
-                    G_CALLBACK (charmap_sync_active_character), guw);
+                    G_CALLBACK (charmap_dirty_active_character), guw);
   g_signal_connect (guw->fontsel, "notify::font-desc",
                     G_CALLBACK (fontsel_sync_font_desc), guw);
 }
@@ -864,9 +865,6 @@ static void
 gucharmap_window_finalize (GObject *object)
 {
   GucharmapWindow *guw = GUCHARMAP_WINDOW (object);
-
-  if (guw->save_last_char_idle_id != 0)
-    g_source_remove (guw->save_last_char_idle_id);
 
   if (guw->page_setup)
     g_object_unref (guw->page_setup);
