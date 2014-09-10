@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: lt\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gucharmap&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-04-24 09:00+0000\n"
-"PO-Revision-Date: 2014-04-24 22:58+0300\n"
+"POT-Creation-Date: 2014-09-10 09:16+0000\n"
+"PO-Revision-Date: 2014-09-10 19:06+0300\n"
 "Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
 "Language-Team: Lietuvių <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
@@ -26,19 +26,33 @@ msgstr ""
 "%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Gtranslator 2.91.6\n"
 
-#: ../data/gucharmap.appdata.xml.in.h:1
-msgid ""
-"Gucharmap (\"GNOME Character Map\") is a Unicode character map program, part "
-"of GNOME desktop. This program allows characters to be displayed by unicode "
-"block or script type. It includes brief descriptions of related characters "
-"and occasionally meanings of the character in question."
-msgstr ""
-"Gucharmap („GNOME simbolių lentelė“) yra unikodo simbolių lentelės programa, "
-"GNOME darbastalio dalis. Programa rodyti simbolius pagal unikodo bloką arba "
-"scenarijaus tipą. Ji turi turi trumpus susijusių simbolių aprašymus ir "
-"kartais jų reikšmes."
+#: ../data/gucharmap.appdata.xml.in.h:1 ../gucharmap.desktop.in.in.h:1
+#: ../gucharmap/gucharmap-window.c:759 ../gucharmap/main.c:236
+msgid "Character Map"
+msgstr "Simbolių lentelė"
 
-#: ../data/gucharmap.appdata.xml.in.h:2
+#: ../data/gucharmap.appdata.xml.in.h:2 ../gucharmap.desktop.in.in.h:2
+msgid "Insert special characters into documents"
+msgstr "Įterpti į dokumentus specialius simbolius"
+
+#: ../data/gucharmap.appdata.xml.in.h:3
+#| msgid ""
+#| "Gucharmap (\"GNOME Character Map\") is a Unicode character map program, "
+#| "part of GNOME desktop. This program allows characters to be displayed by "
+#| "unicode block or script type. It includes brief descriptions of related "
+#| "characters and occasionally meanings of the character in question."
+msgid ""
+"GNOME Character Map is a Unicode character map program, part of GNOME "
+"desktop. This program allows characters to be displayed by unicode block or "
+"script type. It includes brief descriptions of related characters and "
+"occasionally meanings of the character in question."
+msgstr ""
+"GNOME simbolių lentelė yra unikodo simbolių lentelės programa, GNOME "
+"darbastalio dalis. Programa skirta rodyti simbolius pagal unikodo bloką arba "
+"scenarijaus tipą. Ji turi trumpus susijusių simbolių aprašymus ir kartais jų "
+"reikšmes."
+
+#: ../data/gucharmap.appdata.xml.in.h:4
 msgid ""
 "Gucharmap can also be used to input or enter characters (by copy and paste). "
 "The search functionality allows the use of several search methods, including "
@@ -47,15 +61,6 @@ msgstr ""
 "Gucharmap taip pat galima naudoti simbolių įvedimui (kopijuojant juos). "
 "Paieškos funkcija leidžia naudoti kelis paieškos metodus, tarp jų simbolio "
 "unikodinis pavadinimas bei kodo vieta."
-
-#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:760
-#: ../gucharmap/main.c:236
-msgid "Character Map"
-msgstr "Simbolių lentelė"
-
-#: ../gucharmap.desktop.in.in.h:2
-msgid "Insert special characters into documents"
-msgstr "Įterpti į dokumentus specialius simbolius"
 
 #: ../gucharmap.desktop.in.in.h:3
 msgid "font;unicode;"
@@ -534,7 +539,6 @@ msgid "GNOME Character Map"
 msgstr "GNOME simbolių lentelė"
 
 #: ../gucharmap/gucharmap-window.c:449
-#| msgid "Based on the Unicode Character Database 6.3.0"
 msgid "Based on the Unicode Character Database 7.0.0"
 msgstr "Paremta Unikodo simbolių duomenų baze 7.0.0"
 
@@ -561,11 +565,11 @@ msgid "Previous Block"
 msgstr "Ankstesnis blokas"
 
 #. Text to copy entry + button
-#: ../gucharmap/gucharmap-window.c:791
+#: ../gucharmap/gucharmap-window.c:790
 msgid "_Text to copy:"
 msgstr "Kopijuotinas _tekstas:"
 
-#: ../gucharmap/gucharmap-window.c:798
+#: ../gucharmap/gucharmap-window.c:797
 msgid "Copy to the clipboard."
 msgstr "Kopijuoti į atmintinę."
 
@@ -869,7 +873,6 @@ msgid "Tai Tham"
 msgstr "Tai Tham"
 
 #: ../gucharmap/unicode-blocks.h:69
-#| msgid "Combining Diacritical Marks"
 msgid "Combining Diacritical Marks Extended"
 msgstr "Išplėstiniai jungiamieji diakritiniai ženklai"
 
@@ -1186,7 +1189,6 @@ msgid "Javanese"
 msgstr "Javiečių"
 
 #: ../gucharmap/unicode-blocks.h:148
-#| msgid "Myanmar Extended-A"
 msgid "Myanmar Extended-B"
 msgstr "﻿Mianmaro išplėstinis B"
 
@@ -1211,7 +1213,6 @@ msgid "Ethiopic Extended-A"
 msgstr "Etiopų išplėstas-A"
 
 #: ../gucharmap/unicode-blocks.h:154
-#| msgid "Latin Extended-A"
 msgid "Latin Extended-E"
 msgstr "Lotynų išplėsta E"
 
@@ -1332,7 +1333,6 @@ msgid "Gothic"
 msgstr "Gotika"
 
 #: ../gucharmap/unicode-blocks.h:184 ../gucharmap/unicode-scripts.h:100
-#| msgid "Old Persian"
 msgid "Old Permic"
 msgstr "Senoji Permic"
 
@@ -1365,7 +1365,6 @@ msgid "Caucasian Albanian"
 msgstr "Kaukazo albanų"
 
 #: ../gucharmap/unicode-blocks.h:192 ../gucharmap/unicode-scripts.h:75
-#| msgid "Linear B"
 msgid "Linear A"
 msgstr "Linijinis A"
 
@@ -1410,7 +1409,6 @@ msgid "Old South Arabian"
 msgstr "Senasis Pietų Arabijos"
 
 #: ../gucharmap/unicode-blocks.h:203 ../gucharmap/unicode-scripts.h:99
-#| msgid "Old South Arabian"
 msgid "Old North Arabian"
 msgstr "Senasis Šiaurės Arabijos"
 
@@ -1431,7 +1429,6 @@ msgid "Inscriptional Pahlavi"
 msgstr "Įrėžiamas pahlavų"
 
 #: ../gucharmap/unicode-blocks.h:208 ../gucharmap/unicode-scripts.h:111
-#| msgid "Inscriptional Pahlavi"
 msgid "Psalter Pahlavi"
 msgstr "Psalter Pahlavi"
 
@@ -1604,7 +1601,6 @@ msgid "Enclosed Ideographic Supplement"
 msgstr "Apribotas ideografinis papildymas"
 
 #: ../gucharmap/unicode-blocks.h:251
-#| msgid "Miscellaneous Symbols And Pictographs"
 msgid "Miscellaneous Symbols and Pictographs"
 msgstr "Įvairūs simboliai ir piktografiniai ženklai"
 
@@ -1617,7 +1613,6 @@ msgid "Ornamental Dingbats"
 msgstr "Ornamentiniai simboliai"
 
 #: ../gucharmap/unicode-blocks.h:254
-#| msgid "Transport And Map Symbols"
 msgid "Transport and Map Symbols"
 msgstr "Transporto ir žemėlapio simboliai"
 
@@ -1626,12 +1621,10 @@ msgid "Alchemical Symbols"
 msgstr "Alcheminiai simboliai"
 
 #: ../gucharmap/unicode-blocks.h:256
-#| msgid "Geometric Shapes"
 msgid "Geometric Shapes Extended"
 msgstr "Išplėstinės geometrinės figūros"
 
 #: ../gucharmap/unicode-blocks.h:257
-#| msgid "Supplemental Arrows-A"
 msgid "Supplemental Arrows-C"
 msgstr "Papildomos rodyklės C"
 
