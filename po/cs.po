@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: gucharmap\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gucharmap&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-04-24 09:00+0000\n"
-"PO-Revision-Date: 2014-04-24 17:00+0200\n"
+"POT-Creation-Date: 2014-09-22 09:19+0000\n"
+"PO-Revision-Date: 2014-09-22 15:01+0200\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -26,19 +26,28 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: Gtranslator 2.91.6\n"
 
-#: ../data/gucharmap.appdata.xml.in.h:1
-msgid ""
-"Gucharmap (\"GNOME Character Map\") is a Unicode character map program, part "
-"of GNOME desktop. This program allows characters to be displayed by unicode "
-"block or script type. It includes brief descriptions of related characters "
-"and occasionally meanings of the character in question."
-msgstr ""
-"Gucharmap („Mapa znaků GNOME“) je program s mapou znaků Unikódu a je "
-"součástí pracovního prostředí GNOME. Pomocí něj si můžete zobrazit znaky "
-"podle bloku unikódu nebo podle písma (skriptu). Obsahuje popisy příslušných "
-"znaků a někdy také význam daného znaku."
+#: ../data/gucharmap.appdata.xml.in.h:1 ../gucharmap.desktop.in.in.h:1
+#: ../gucharmap/gucharmap-window.c:759 ../gucharmap/main.c:236
+msgid "Character Map"
+msgstr "Mapa znaků"
 
-#: ../data/gucharmap.appdata.xml.in.h:2
+#: ../data/gucharmap.appdata.xml.in.h:2 ../gucharmap.desktop.in.in.h:2
+msgid "Insert special characters into documents"
+msgstr "Vložit speciální znaky do dokumentů"
+
+#: ../data/gucharmap.appdata.xml.in.h:3
+msgid ""
+"GNOME Character Map is a Unicode character map program, part of GNOME "
+"desktop. This program allows characters to be displayed by unicode block or "
+"script type. It includes brief descriptions of related characters and "
+"occasionally meanings of the character in question."
+msgstr ""
+"Mapa znaků GNOME je program s mapou znaků Unikódu a je součástí pracovního "
+"prostředí GNOME. Pomocí něj si můžete zobrazit znaky podle bloku unikódu "
+"nebo podle písma (skriptu). Obsahuje popisy příslušných znaků a někdy také "
+"význam daného znaku."
+
+#: ../data/gucharmap.appdata.xml.in.h:4
 msgid ""
 "Gucharmap can also be used to input or enter characters (by copy and paste). "
 "The search functionality allows the use of several search methods, including "
@@ -47,15 +56,6 @@ msgstr ""
 "Mapu znaků můžete také používat ke vkládání znaků (pomocí kopírovat a vložit "
 "přes schránku). Funkce hledání umí několik způsobů hledání, včetně hledání "
 "podle názvu v Unikódu nebo kódu znaku."
-
-#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:760
-#: ../gucharmap/main.c:236
-msgid "Character Map"
-msgstr "Mapa znaků"
-
-#: ../gucharmap.desktop.in.in.h:2
-msgid "Insert special characters into documents"
-msgstr "Vložit speciální znaky do dokumentů"
 
 #: ../gucharmap.desktop.in.in.h:3
 msgid "font;unicode;"
@@ -563,11 +563,11 @@ msgid "Previous Block"
 msgstr "Předchozí blok"
 
 #. Text to copy entry + button
-#: ../gucharmap/gucharmap-window.c:791
+#: ../gucharmap/gucharmap-window.c:790
 msgid "_Text to copy:"
 msgstr "_Text ke zkopírování:"
 
-#: ../gucharmap/gucharmap-window.c:798
+#: ../gucharmap/gucharmap-window.c:797
 msgid "Copy to the clipboard."
 msgstr "Zkopírovat do schránky."
 
@@ -987,7 +987,7 @@ msgstr "Různé symboly"
 
 #: ../gucharmap/unicode-blocks.h:98
 msgid "Dingbats"
-msgstr "Dingbat"
+msgstr "Symboly"
 
 #: ../gucharmap/unicode-blocks.h:99
 msgid "Miscellaneous Mathematical Symbols-A"
@@ -1330,7 +1330,6 @@ msgid "Gothic"
 msgstr "Gótské"
 
 #: ../gucharmap/unicode-blocks.h:184 ../gucharmap/unicode-scripts.h:100
-#| msgid "Old Persian"
 msgid "Old Permic"
 msgstr "Staropermské"
 
@@ -1407,7 +1406,6 @@ msgid "Old South Arabian"
 msgstr "Jihoarabské nápisové"
 
 #: ../gucharmap/unicode-blocks.h:203 ../gucharmap/unicode-scripts.h:99
-#| msgid "Old South Arabian"
 msgid "Old North Arabian"
 msgstr "Severoarabské nápisové"
 
@@ -1428,10 +1426,8 @@ msgid "Inscriptional Pahlavi"
 msgstr "Pehlevské psané"
 
 #: ../gucharmap/unicode-blocks.h:208 ../gucharmap/unicode-scripts.h:111
-#, fuzzy
-#| msgid "Inscriptional Pahlavi"
 msgid "Psalter Pahlavi"
-msgstr "Pehlevské psané"
+msgstr "Pehlevské žaltářové"
 
 #: ../gucharmap/unicode-blocks.h:209 ../gucharmap/unicode-scripts.h:103
 msgid "Old Turkic"
@@ -1611,7 +1607,7 @@ msgstr "Emotikony"
 
 #: ../gucharmap/unicode-blocks.h:253
 msgid "Ornamental Dingbats"
-msgstr ""
+msgstr "Ornamenty"
 
 #: ../gucharmap/unicode-blocks.h:254
 msgid "Transport and Map Symbols"
