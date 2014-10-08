@@ -2,42 +2,64 @@
 # Bengali India translation of gucharmap
 # This file is distributed under the same license as the gucharmap package.
 # Copyright (C) 2003, 2006, 2009, 2010 Free Software Foundation, Inc.
-# 
+#
 # Sayamindu Dasgupta <unmadindu@Softhome.net>, 2003.
 # Mahay Alam Khan <makl10n@yahoo.com>, 2005.
 # Samia Niamatullah <mailsamia2001@yahoo.com>, 2005.
 # Runa Bhattacharjee <runabh@gmail.com>, 2006.
 # Runa Bhattacharjee <runab@redhat.com>, 2009, 2010, 2012.
-# sray <sray@redhat.com>, 2013. #zanata
+# sray <sray@redhat.com>, 2013, 2014. #zanata.
 msgid ""
 msgstr ""
 "Project-Id-Version: bn_IN\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product="
-"gucharmap&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-09-13 16:31+0000\n"
-"PO-Revision-Date: 2013-09-23 04:00-0400\n"
-"Last-Translator: sray <sray@redhat.com>\n"
-"Language-Team: Bengali (India) <anubad@lists.ankur.org.in>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=gucharmap&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2014-09-23 21:23+0000\n"
+"PO-Revision-Date: 2014-09-24 15:56+0000\n"
+"Last-Translator: \n"
+"Language-Team: Bengali (India) <kde-i18n-doc@kde.org>\n"
+"Language: bn-IN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: bn-IN\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "\n"
 "\n"
 "\n"
-"X-Generator: Zanata 3.1.2\n"
+"X-Generator: Lokalize 1.5\n"
 
 # msgstr "অক্ষর খুঁজে পাওয়া গেছে।" <-- "গেছে" শব্দটা কথ্য ভাষায় ব্যবহৃত হয়।
-#: ../gucharmap.desktop.in.in.h:1
-#: ../gucharmap/gucharmap-window.c:773
-#: ../gucharmap/main.c:236
+#: ../data/gucharmap.appdata.xml.in.h:1 ../gucharmap.desktop.in.in.h:1
+#: ../gucharmap/gucharmap-window.c:759 ../gucharmap/main.c:236
 msgid "Character Map"
 msgstr "অক্ষরের ম্যাপ"
 
-#: ../gucharmap.desktop.in.in.h:2
+#: ../data/gucharmap.appdata.xml.in.h:2 ../gucharmap.desktop.in.in.h:2
 msgid "Insert special characters into documents"
 msgstr "নথিপত্রের মধ্যে বিশেষ অক্ষর সন্নিবেশ করুন"
+
+#: ../data/gucharmap.appdata.xml.in.h:3
+msgid ""
+"GNOME Character Map is a Unicode character map program, part of GNOME "
+"desktop. This program allows characters to be displayed by unicode block or "
+"script type. It includes brief descriptions of related characters and "
+"occasionally meanings of the character in question."
+msgstr ""
+"GNOME অক্ষর মানচিত্র হল একটি ইউনিকোড অক্ষর মানচিত্র প্রোগ্রাম, যা GNOME "
+"ডেস্কটপের অংশ। এই প্রোগ্রাম অক্ষর ইউনিকোড ব্লক বা স্ক্রিপ্ট ধরন দিয়ে "
+"প্রদর্শিত হতে দেয়। এটি সংশ্লিষ্ট অক্ষরের সংক্ষিপ্ত বর্ণনা এবং মাঝে মধ্যে "
+"অালোচ্য অক্ষরের অর্থ অন্তর্ভুক্ত করে।"
+
+#: ../data/gucharmap.appdata.xml.in.h:4
+msgid ""
+"Gucharmap can also be used to input or enter characters (by copy and paste). "
+"The search functionality allows the use of several search methods, including "
+"by unicode name or code point of the character."
+msgstr ""
+"Gucharmap অক্ষর ইনপুট বা প্রবেশ করাতেও ব্যবহার করা যেতে পারে (অনুলিপি করে "
+"লেপন করে)। "
+"অনুসন্ধান বৈশিষ্ট্য অক্ষরের ইউনিকেড নাম বা কোড পয়েন্ট সমেত বিভিন্ন অনুসন্ধান "
+"পদ্ধতির সুবিধা দেয়।"
 
 #: ../gucharmap.desktop.in.in.h:3
 msgid "font;unicode;"
@@ -55,8 +77,7 @@ msgstr "ইউনিকোড ব্লক"
 msgid "Canonical decomposition:"
 msgstr "ক্যানোনিকাল ডিকম্পোসিশন:"
 
-#: ../gucharmap/gucharmap-charmap.c:567
-#: ../gucharmap/gucharmap-chartable.c:581
+#: ../gucharmap/gucharmap-charmap.c:567 ../gucharmap/gucharmap-chartable.c:581
 msgid "[not a printable character]"
 msgstr "[প্রিন্ট করারযোগ্য অক্ষর নয়]"
 
@@ -206,49 +227,49 @@ msgstr ""
 "চিহ্নিত ফন্ট থেকে শুধুমাত্র গিফ অর্থাৎ অক্ষরের ছবি প্রদর্শন করা হবে (_w)"
 
 #: ../gucharmap/gucharmap-menus.ui.h:4
+msgid "Snap _Columns to Power of Two"
+msgstr "দুইয়ের ঘাত অনুযায়ী কলাম স্ন্যাপ করা হবে (_C)"
+
+#: ../gucharmap/gucharmap-menus.ui.h:5
 msgid "Zoom _In"
 msgstr "বড় মাপ প্রদর্শন (_I)"
 
-#: ../gucharmap/gucharmap-menus.ui.h:5
+#: ../gucharmap/gucharmap-menus.ui.h:6
 msgid "Zoom _Out"
 msgstr "ছোট মাপে প্রদর্শন (_O)"
 
-#: ../gucharmap/gucharmap-menus.ui.h:6
+#: ../gucharmap/gucharmap-menus.ui.h:7
 msgid "_Normal Size"
 msgstr "স্বাভাবিক মাপ (_N)"
 
 # msgstr "অনুসন্ধান করার মত কিছু নেই।"
-#: ../gucharmap/gucharmap-menus.ui.h:7
+#: ../gucharmap/gucharmap-menus.ui.h:8
 msgid "_Find"
 msgstr "অনুসন্ধান (_F)"
 
-#: ../gucharmap/gucharmap-menus.ui.h:8
+#: ../gucharmap/gucharmap-menus.ui.h:9
 msgid "_Help"
 msgstr "সাহায্য (_H)"
 
-#: ../gucharmap/gucharmap-menus.ui.h:9
+#: ../gucharmap/gucharmap-menus.ui.h:10
 msgid "_About"
 msgstr "পরিচিতি (_A)"
 
-#: ../gucharmap/gucharmap-menus.ui.h:10
+#: ../gucharmap/gucharmap-menus.ui.h:11
 msgid "_Close Window"
 msgstr "উইন্ডো বন্ধ করুন (_C)"
 
-#: ../gucharmap/gucharmap-menus.ui.h:11
+#: ../gucharmap/gucharmap-menus.ui.h:12
 msgid "_File"
 msgstr "ফাইল (_F)"
 
-#: ../gucharmap/gucharmap-menus.ui.h:12
+#: ../gucharmap/gucharmap-menus.ui.h:13
 msgid "_Close"
 msgstr "বন্ধ করুন (_C)"
 
-#: ../gucharmap/gucharmap-menus.ui.h:13
+#: ../gucharmap/gucharmap-menus.ui.h:14
 msgid "_View"
 msgstr "প্রদর্শন (_V)"
-
-#: ../gucharmap/gucharmap-menus.ui.h:14
-msgid "Snap _Columns to Power of Two"
-msgstr "দুইয়ের ঘাত অনুযায়ী কলাম স্ন্যাপ করা হবে (_C)"
 
 # msgstr "প্রদর্শন (_দ)"
 #: ../gucharmap/gucharmap-menus.ui.h:15
@@ -302,7 +323,7 @@ msgstr "লিপি"
 #. Unicode assigns "Common" as the script name for any character not
 #. * specifically listed in Scripts.txt
 #: ../gucharmap/gucharmap-script-codepoint-list.c:463
-#: ../gucharmap/unicode-scripts.h:33
+#: ../gucharmap/unicode-scripts.h:35
 msgid "Common"
 msgstr "Common"
 
@@ -501,10 +522,10 @@ msgid ""
 "Software Foundation; either version 3 of the License, or (at your option) "
 "any later version."
 msgstr ""
-"Gucharmap একটি মুক্ত সফ্টওয়্যার; Free Software Foundation দ্বারা প্রকাশিত "
-"GNU General Public License'র শর্তানুযায়ী এটি বিতরণ ও পরিবর্তন করা যাবে; "
-"লাইনসেন্সের সংস্করণ ৩ অথবা (আপনার সুবিধানুযায়ী) ঊর্ধ্বতন কোনো সংস্করণের "
-"অধীন।"
+"Gucharmap একটি মুক্ত সফ্টওয়্যার; Free Software Foundation দ্বারা প্রকাশিত GNU "
+"General Public License'র শর্তানুযায়ী এটি বিতরণ ও পরিবর্তন করা যাবে; "
+"লাইনসেন্সের "
+"সংস্করণ ৩ অথবা (আপনার সুবিধানুযায়ী) ঊর্ধ্বতন কোনো সংস্করণের অধীন।"
 
 #: ../gucharmap/gucharmap-window.c:426
 msgid ""
@@ -514,7 +535,8 @@ msgid ""
 "distribute, and/or sell copies."
 msgstr ""
 "ইউনিকোড ডাটা ফাইলের প্রতিলিপির অধিকারীকে এই তথ্য ব্যবহার, কপি, পরিবর্তন, "
-"সংযুক্ত, প্রকাশ, বিতরণ এবং/অথবা বিক্রয়ের অনুমতি প্রদান করা হচ্ছে।"
+"সংযুক্ত, "
+"প্রকাশ, বিতরণ এবং/অথবা বিক্রয়ের অনুমতি প্রদান করা হচ্ছে।"
 
 #: ../gucharmap/gucharmap-window.c:430
 msgid ""
@@ -524,9 +546,12 @@ msgid ""
 "Public License and Unicode Copyright for more details."
 msgstr ""
 "Gucharmap ও Unicode ডাটা ফাইল বিতরণ করার মূল উদ্দেশ্য যে ব্যবহারকারীরা এর "
-"দ্বারা উপকৃত হবেন, কিন্তু এটির জন্য কোনো সুস্পষ্ট ওয়ারেন্টি উপস্থিত নেই; "
-"বাণিজ্যিক ও কোনো সুনির্দিষ্ট কর্ম সাধনের জন্য অন্তর্নিহীত ওয়ারেন্টিও "
-"অনুপস্থিত। অধিক জানতে GNU General Public License পড়ুন।"
+"দ্বারা "
+"উপকৃত হবেন, কিন্তু এটির জন্য কোনো সুস্পষ্ট ওয়ারেন্টি উপস্থিত নেই; বাণিজ্যিক ও "
+"কোনো "
+"সুনির্দিষ্ট কর্ম সাধনের জন্য অন্তর্নিহীত ওয়ারেন্টিও অনুপস্থিত। অধিক জানতে GNU "
+"General "
+"Public License পড়ুন।"
 
 #: ../gucharmap/gucharmap-window.c:434
 msgid ""
@@ -535,8 +560,10 @@ msgid ""
 "Place, Suite 330, Boston, MA  02110-1301  USA"
 msgstr ""
 "Gucharmap-র সাথে GNU General Public License-র একটি প্রতিলিপি উপলব্ধ হওয়া "
-"উচিত; না থাকলে নিম্নলিখিত ঠিকানায় লিখে তা সংগ্রহ করুন Free Software "
-"Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02110-1301  USA"
+"উচিত; "
+"না থাকলে নিম্নলিখিত ঠিকানায় লিখে তা সংগ্রহ করুন Free Software Foundation, "
+"Inc., "
+"59 Temple Place, Suite 330, Boston, MA  02110-1301  USA"
 
 #: ../gucharmap/gucharmap-window.c:437
 msgid ""
@@ -545,18 +572,19 @@ msgid ""
 "org/copyright.html"
 msgstr ""
 "Gucharmap'র সাথে ইউনিকোড স্বত্বাধিকারের একটি প্রতিলিপি উপলব্ধ হওয়া উচিত; "
-"উপরন্তু তা ইউনিকোড ওয়েব-সাইটে সর্বদা উপস্থিত রয়েছে: http://www.unicode.org/"
-"copyright.html"
+"উপরন্তু "
+"তা ইউনিকোড ওয়েব-সাইটে সর্বদা উপস্থিত রয়েছে: http://www.unicode.org/copyright."
+"html"
 
 # msgstr "অক্ষর খুঁজে পাওয়া গেছে।" <-- "গেছে" শব্দটা কথ্য ভাষায় ব্যবহৃত হয়।
-#: ../gucharmap/gucharmap-window.c:447
-#: ../gucharmap/main.c:39
+#: ../gucharmap/gucharmap-window.c:447 ../gucharmap/main.c:39
 msgid "GNOME Character Map"
 msgstr "GNOME অক্ষরের ম্যাপ"
 
 #: ../gucharmap/gucharmap-window.c:449
-msgid "Based on the Unicode Character Database 6.2.0"
-msgstr "Unicode Character Database 6.2.0-র উপর ভিত্তি করে নির্মিত"
+#| msgid "Based on the Unicode Character Database 6.2.0"
+msgid "Based on the Unicode Character Database 7.0.0"
+msgstr "Unicode Character Database 7.0.0-র উপর ভিত্তি করে নির্মিত"
 
 #: ../gucharmap/gucharmap-window.c:458
 msgid "translator-credits"
@@ -583,11 +611,11 @@ msgid "Previous Block"
 msgstr "পূর্ববর্তী ব্লক"
 
 #. Text to copy entry + button
-#: ../gucharmap/gucharmap-window.c:804
+#: ../gucharmap/gucharmap-window.c:790
 msgid "_Text to copy:"
 msgstr "কপি করার জন্য চিহ্নিত বিষয়বস্তু: (_T)"
 
-#: ../gucharmap/gucharmap-window.c:811
+#: ../gucharmap/gucharmap-window.c:797
 msgid "Copy to the clipboard."
 msgstr "ক্লিপ-বোর্ডে কপি করুন।"
 
@@ -608,6 +636,73 @@ msgstr "প্রারম্ভিক ফন্ট; উদাহরণস্ব
 #: ../gucharmap/main.c:210
 msgid "FONT"
 msgstr "FONT"
+
+# msgstr "অজ্ঞাত অক্ষর, সনাক্ত করা সম্ভব হয় নি।"
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:1
+msgid "Character map grouping method"
+msgstr "অক্ষর মালার শ্রেণীনির্মাণের পদ্ধতি"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:2
+msgid ""
+"This is how the characters in the character map are grouped. The characters "
+"can either be grouped by 'script' or 'block'."
+msgstr ""
+"অক্ষরের ম্যাপের মধ্যে উপস্থিত অক্ষরগুলি চিহ্নিত পদ্ধতিতে শ্রেণীভুক্ত করা হয়। "
+"'script' "
+"অথবা 'block' অনুযায়ী অক্ষর শ্রণীভুক্ত করা হবে।"
+
+# msgstr "অজ্ঞাত অক্ষর, সনাক্ত করা সম্ভব হয় নি।"
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
+msgid "Character map font description"
+msgstr "অক্ষরের বিন্যাসের ফন্টের বিবরণ"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:4
+msgid ""
+"The font to use for the character map. If set to 'nothing' then the default "
+"is the system font with the size doubled. Otherwise it should be a font "
+"description string like 'Sans 24'."
+msgstr ""
+"অক্ষরের ম্যাপের জন্য ব্যবহারযোগ্য ফন্ট। 'nothing' নির্ধারণ করা হলে দুগুন মাপে "
+"সিস্টেমের ডিফল্ট ফন্ট ব্যবহার করা হয়। অন্যথা  'Sans 24'-র অনুরূপ পংক্তিতে "
+"ফন্টের "
+"বর্ণনা লেখা আবশ্যক।"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:5
+msgid "Snap number of columns to a power of two"
+msgstr "দুইয়ের ঘাত অনুযায়ী কলাম স্ন্যাপ করা হবে"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:6
+msgid ""
+"The number of columns in the character map grid is determined by the width "
+"of the window. If this setting is 'true' then the value will be forced to "
+"the nearest power of two."
+msgstr ""
+"অক্ষরের ম্যাপের গ্রিডের মধ্যে উপস্থিত কলামের সংখ্যা উইন্ডোর প্রস্থ অনুযায়ী "
+"নির্ধারণ করা "
+"হয়। মান 'true' হলে, নিকটতম দুইয়ের ঘাতের সংখ্যা বাধ্যতামূলকভাবে ব্যবহার করা "
+"হবে।"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:7
+msgid "Last selected character"
+msgstr "সর্বশেষ নির্বাচিত অক্ষর"
+
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:8
+msgid ""
+"This is the last character that was selected in the character map (and will "
+"be selected again when the character map is next started).\n"
+"\n"
+"By default, it is the first letter of the alphabet in the current locale."
+msgstr ""
+"অক্ষরের ম্যাপ থেকে সর্বশেষ এই অক্ষরটি নির্বাচন করা হয়েছিল (এবং অক্ষরের ম্যাপ "
+"পরবর্তীবার আরম্ভ করা হলে এটি পুনরায় নির্বাচিত হবে)।\n"
+"\n"
+"ডিফল্টরূপে, বর্তমানে লোকেইলের প্রথম অক্ষরটি ব্যবহার করা হয়।"
+
+#. The unicode code point of the first letter of the alphabet
+#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:12
+msgctxt "First letter"
+msgid "0x41"
+msgstr "0x41"
 
 # msgstr "প্রথমে যে ফন্টটি ব্যবহৃত হবে; যেমন: 'Serif 27'"
 #: ../gucharmap/unicode-blocks.h:14
@@ -645,8 +740,7 @@ msgstr "সংযুক্তকারী ধ্বনি-নির্দেশ�
 msgid "Greek and Coptic"
 msgstr "গ্রিক ও কপটিক"
 
-#: ../gucharmap/unicode-blocks.h:22
-#: ../gucharmap/unicode-scripts.h:37
+#: ../gucharmap/unicode-blocks.h:22 ../gucharmap/unicode-scripts.h:39
 msgid "Cyrillic"
 msgstr "সিরিলিক"
 
@@ -654,24 +748,20 @@ msgstr "সিরিলিক"
 msgid "Cyrillic Supplement"
 msgstr "সিরিলিক সাপ্লিমেন্ট"
 
-#: ../gucharmap/unicode-blocks.h:24
-#: ../gucharmap/unicode-scripts.h:17
+#: ../gucharmap/unicode-blocks.h:24 ../gucharmap/unicode-scripts.h:17
 msgid "Armenian"
 msgstr "আর্মেনিয়ান"
 
 # msgstr "আর্মেনিয়"
-#: ../gucharmap/unicode-blocks.h:25
-#: ../gucharmap/unicode-scripts.h:51
+#: ../gucharmap/unicode-blocks.h:25 ../gucharmap/unicode-scripts.h:56
 msgid "Hebrew"
 msgstr "হিব্রু"
 
-#: ../gucharmap/unicode-blocks.h:26
-#: ../gucharmap/unicode-scripts.h:16
+#: ../gucharmap/unicode-blocks.h:26 ../gucharmap/unicode-scripts.h:16
 msgid "Arabic"
 msgstr "আরবি"
 
-#: ../gucharmap/unicode-blocks.h:27
-#: ../gucharmap/unicode-scripts.h:102
+#: ../gucharmap/unicode-blocks.h:27 ../gucharmap/unicode-scripts.h:123
 msgid "Syriac"
 msgstr "সিরিয়াক"
 
@@ -679,24 +769,20 @@ msgstr "সিরিয়াক"
 msgid "Arabic Supplement"
 msgstr "আরবি সাপ্লিমেন্ট"
 
-#: ../gucharmap/unicode-blocks.h:29
-#: ../gucharmap/unicode-scripts.h:111
+#: ../gucharmap/unicode-blocks.h:29 ../gucharmap/unicode-scripts.h:132
 msgid "Thaana"
 msgstr "থানা"
 
 # http://www.ethnologue.com/show_language.asp?code=emk
-#: ../gucharmap/unicode-blocks.h:30
-#: ../gucharmap/unicode-scripts.h:80
+#: ../gucharmap/unicode-blocks.h:30 ../gucharmap/unicode-scripts.h:93
 msgid "N'Ko"
 msgstr "নকো"
 
-#: ../gucharmap/unicode-blocks.h:31
-#: ../gucharmap/unicode-scripts.h:94
+#: ../gucharmap/unicode-blocks.h:31 ../gucharmap/unicode-scripts.h:114
 msgid "Samaritan"
 msgstr "সামারিটান"
 
-#: ../gucharmap/unicode-blocks.h:32
-#: ../gucharmap/unicode-scripts.h:73
+#: ../gucharmap/unicode-blocks.h:32 ../gucharmap/unicode-scripts.h:82
 msgid "Mandaic"
 msgstr "ম্যান্ডেইক"
 
@@ -705,80 +791,65 @@ msgid "Arabic Extended-A"
 msgstr "আরবী এক্সটেনডেড-A"
 
 # এইটা আবার কোন দেশী ?
-#: ../gucharmap/unicode-blocks.h:34
-#: ../gucharmap/unicode-scripts.h:39
+#: ../gucharmap/unicode-blocks.h:34 ../gucharmap/unicode-scripts.h:41
 msgid "Devanagari"
 msgstr "দেবনাগরি"
 
-#: ../gucharmap/unicode-blocks.h:35
-#: ../gucharmap/unicode-scripts.h:22
+#: ../gucharmap/unicode-blocks.h:35 ../gucharmap/unicode-scripts.h:23
 msgid "Bengali"
 msgstr "বাংলা"
 
-#: ../gucharmap/unicode-blocks.h:36
-#: ../gucharmap/unicode-scripts.h:47
+#: ../gucharmap/unicode-blocks.h:36 ../gucharmap/unicode-scripts.h:52
 msgid "Gurmukhi"
 msgstr "গুরুমুখী"
 
-#: ../gucharmap/unicode-blocks.h:37
-#: ../gucharmap/unicode-scripts.h:46
+#: ../gucharmap/unicode-blocks.h:37 ../gucharmap/unicode-scripts.h:51
 msgid "Gujarati"
 msgstr "গুজরাতি"
 
 # বানানটা সম্ভবত "গুজরাটি"। তবে আমি নিজেই অন্যান্য জায়গায় "গুজরাটী" লিখছি ;-)
-#: ../gucharmap/unicode-blocks.h:38
-#: ../gucharmap/unicode-scripts.h:88
+#: ../gucharmap/unicode-blocks.h:38 ../gucharmap/unicode-scripts.h:104
 msgid "Oriya"
 msgstr "ওড়িয়া"
 
-#: ../gucharmap/unicode-blocks.h:39
-#: ../gucharmap/unicode-scripts.h:109
+#: ../gucharmap/unicode-blocks.h:39 ../gucharmap/unicode-scripts.h:130
 msgid "Tamil"
 msgstr "তামিল"
 
-#: ../gucharmap/unicode-blocks.h:40
-#: ../gucharmap/unicode-scripts.h:110
+#: ../gucharmap/unicode-blocks.h:40 ../gucharmap/unicode-scripts.h:131
 msgid "Telugu"
 msgstr "তেলুগু"
 
-#: ../gucharmap/unicode-blocks.h:41
-#: ../gucharmap/unicode-scripts.h:59
+#: ../gucharmap/unicode-blocks.h:41 ../gucharmap/unicode-scripts.h:64
 msgid "Kannada"
 msgstr "কন্নড়"
 
 # আরেকটু হইলেইতো কানাডা হয়ে গেছিলো ;-)))
-#: ../gucharmap/unicode-blocks.h:42
-#: ../gucharmap/unicode-scripts.h:72
+#: ../gucharmap/unicode-blocks.h:42 ../gucharmap/unicode-scripts.h:81
 msgid "Malayalam"
 msgstr "মালায়ালাম"
 
-#: ../gucharmap/unicode-blocks.h:43
-#: ../gucharmap/unicode-scripts.h:98
+#: ../gucharmap/unicode-blocks.h:43 ../gucharmap/unicode-scripts.h:119
 msgid "Sinhala"
 msgstr "সিংহলি"
 
-#: ../gucharmap/unicode-blocks.h:44
-#: ../gucharmap/unicode-scripts.h:112
+#: ../gucharmap/unicode-blocks.h:44 ../gucharmap/unicode-scripts.h:133
 msgid "Thai"
 msgstr "থাই"
 
-#: ../gucharmap/unicode-blocks.h:45
-#: ../gucharmap/unicode-scripts.h:64
+#: ../gucharmap/unicode-blocks.h:45 ../gucharmap/unicode-scripts.h:71
 msgid "Lao"
 msgstr "লাও"
 
-#: ../gucharmap/unicode-blocks.h:46
-#: ../gucharmap/unicode-scripts.h:113
+#: ../gucharmap/unicode-blocks.h:46 ../gucharmap/unicode-scripts.h:134
 msgid "Tibetan"
 msgstr "তিব্বতি"
 
-#: ../gucharmap/unicode-blocks.h:47
-#: ../gucharmap/unicode-scripts.h:79
+#: ../gucharmap/unicode-blocks.h:47 ../gucharmap/unicode-scripts.h:92
 msgid "Myanmar"
 msgstr "মায়ানমার"
 
-#: ../gucharmap/unicode-blocks.h:48
-#: ../gucharmap/unicode-scripts.h:42
+#: ../gucharmap/unicode-blocks.h:48 ../gucharmap/unicode-scripts.h:46
 msgid "Georgian"
 msgstr "জর্জিয়ান"
 
@@ -787,8 +858,7 @@ msgstr "জর্জিয়ান"
 msgid "Hangul Jamo"
 msgstr "হাঙ্গুল জামো"
 
-#: ../gucharmap/unicode-blocks.h:50
-#: ../gucharmap/unicode-scripts.h:41
+#: ../gucharmap/unicode-blocks.h:50 ../gucharmap/unicode-scripts.h:45
 msgid "Ethiopic"
 msgstr "ইথিওপিক"
 
@@ -797,8 +867,7 @@ msgid "Ethiopic Supplement"
 msgstr "ইথিওপিক সাপ্লিমেন্ট"
 
 # msgstr "ইথিওপিয়"
-#: ../gucharmap/unicode-blocks.h:52
-#: ../gucharmap/unicode-scripts.h:32
+#: ../gucharmap/unicode-blocks.h:52 ../gucharmap/unicode-scripts.h:34
 msgid "Cherokee"
 msgstr "চেরোকি"
 
@@ -807,46 +876,38 @@ msgid "Unified Canadian Aboriginal Syllabics"
 msgstr "ইউনিফাইল কানাডিয়ান অ্যাবোরিজিনাল শব্দাংশ"
 
 # msgstr "সমন্বিত কানাডীয় আদিবাসী সিলেবিক্স" <-- ভয়াবহ!
-#: ../gucharmap/unicode-blocks.h:54
-#: ../gucharmap/unicode-scripts.h:82
+#: ../gucharmap/unicode-blocks.h:54 ../gucharmap/unicode-scripts.h:96
 msgid "Ogham"
 msgstr "ওগহ্যাম"
 
-#: ../gucharmap/unicode-blocks.h:55
-#: ../gucharmap/unicode-scripts.h:93
+#: ../gucharmap/unicode-blocks.h:55 ../gucharmap/unicode-scripts.h:113
 msgid "Runic"
 msgstr "রুনিক"
 
-#: ../gucharmap/unicode-blocks.h:56
-#: ../gucharmap/unicode-scripts.h:103
+#: ../gucharmap/unicode-blocks.h:56 ../gucharmap/unicode-scripts.h:124
 msgid "Tagalog"
 msgstr "টাগালগ"
 
-#: ../gucharmap/unicode-blocks.h:57
-#: ../gucharmap/unicode-scripts.h:50
+#: ../gucharmap/unicode-blocks.h:57 ../gucharmap/unicode-scripts.h:55
 msgid "Hanunoo"
 msgstr "হানুনু"
 
 # এটা কি ??
 # Pro: কে জানে
-#: ../gucharmap/unicode-blocks.h:58
-#: ../gucharmap/unicode-scripts.h:27
+#: ../gucharmap/unicode-blocks.h:58 ../gucharmap/unicode-scripts.h:28
 msgid "Buhid"
 msgstr "বুহিদ"
 
-#: ../gucharmap/unicode-blocks.h:59
-#: ../gucharmap/unicode-scripts.h:104
+#: ../gucharmap/unicode-blocks.h:59 ../gucharmap/unicode-scripts.h:125
 msgid "Tagbanwa"
 msgstr "টাগবানওয়া"
 
-#: ../gucharmap/unicode-blocks.h:60
-#: ../gucharmap/unicode-scripts.h:63
+#: ../gucharmap/unicode-blocks.h:60 ../gucharmap/unicode-scripts.h:68
 msgid "Khmer"
 msgstr "খমের"
 
 # msgstr "খ্মের" <-- বানান
-#: ../gucharmap/unicode-blocks.h:61
-#: ../gucharmap/unicode-scripts.h:78
+#: ../gucharmap/unicode-blocks.h:61 ../gucharmap/unicode-scripts.h:90
 msgid "Mongolian"
 msgstr "মঙ্গোলিয়ান"
 
@@ -856,18 +917,15 @@ msgstr "ইউনিফাইড কানাডিয়ান অ্যাবো�
 
 # msgstr "মঙ্গোলিয়"
 # মঙ্গলবার
-#: ../gucharmap/unicode-blocks.h:63
-#: ../gucharmap/unicode-scripts.h:67
+#: ../gucharmap/unicode-blocks.h:63 ../gucharmap/unicode-scripts.h:74
 msgid "Limbu"
 msgstr "লিম্বু"
 
-#: ../gucharmap/unicode-blocks.h:64
-#: ../gucharmap/unicode-scripts.h:105
+#: ../gucharmap/unicode-blocks.h:64 ../gucharmap/unicode-scripts.h:126
 msgid "Tai Le"
 msgstr "তাই লি"
 
-#: ../gucharmap/unicode-blocks.h:65
-#: ../gucharmap/unicode-scripts.h:81
+#: ../gucharmap/unicode-blocks.h:65 ../gucharmap/unicode-scripts.h:95
 msgid "New Tai Lue"
 msgstr "নতুন তাই লি"
 
@@ -875,889 +933,916 @@ msgstr "নতুন তাই লি"
 msgid "Khmer Symbols"
 msgstr "খমের চিহ্ন"
 
-#: ../gucharmap/unicode-blocks.h:67
-#: ../gucharmap/unicode-scripts.h:26
+#: ../gucharmap/unicode-blocks.h:67 ../gucharmap/unicode-scripts.h:27
 msgid "Buginese"
 msgstr "বুগিনিস"
 
-#: ../gucharmap/unicode-blocks.h:68
-#: ../gucharmap/unicode-scripts.h:106
+#: ../gucharmap/unicode-blocks.h:68 ../gucharmap/unicode-scripts.h:127
 msgid "Tai Tham"
 msgstr "তাই থাম"
 
+# msgstr "স্পেসিঙ্গ মডিফায়ার অক্ষরসমূহ" <-- বানান
+# msgstr "স্পেসিং পরিবর্তক অক্ষরসমূহ"
 #: ../gucharmap/unicode-blocks.h:69
-#: ../gucharmap/unicode-scripts.h:19
+#| msgid "Combining Diacritical Marks"
+msgid "Combining Diacritical Marks Extended"
+msgstr "সংযুক্তকারী ধ্বনি-নির্দেশক চিহ্ন বিস্তারিত"
+
+#: ../gucharmap/unicode-blocks.h:70 ../gucharmap/unicode-scripts.h:19
 msgid "Balinese"
 msgstr "বালিনিস"
 
-#: ../gucharmap/unicode-blocks.h:70
-#: ../gucharmap/unicode-scripts.h:100
+#: ../gucharmap/unicode-blocks.h:71 ../gucharmap/unicode-scripts.h:121
 msgid "Sundanese"
 msgstr "সুনদানিস"
 
-#: ../gucharmap/unicode-blocks.h:71
-#: ../gucharmap/unicode-scripts.h:21
+#: ../gucharmap/unicode-blocks.h:72 ../gucharmap/unicode-scripts.h:22
 msgid "Batak"
 msgstr "বাটাক"
 
-#: ../gucharmap/unicode-blocks.h:72
-#: ../gucharmap/unicode-scripts.h:66
+#: ../gucharmap/unicode-blocks.h:73 ../gucharmap/unicode-scripts.h:73
 msgid "Lepcha"
 msgstr "লেপচা"
 
-#: ../gucharmap/unicode-blocks.h:73
-#: ../gucharmap/unicode-scripts.h:83
+#: ../gucharmap/unicode-blocks.h:74 ../gucharmap/unicode-scripts.h:97
 msgid "Ol Chiki"
 msgstr "ঔ চিকি"
 
-#: ../gucharmap/unicode-blocks.h:74
+#: ../gucharmap/unicode-blocks.h:75
 msgid "Sundanese Supplement"
 msgstr "সুদানিজ সাপ্লিমেন্ট"
 
 # msgstr "খ্মের চিহ্ন" <-- বানান
-#: ../gucharmap/unicode-blocks.h:75
+#: ../gucharmap/unicode-blocks.h:76
 msgid "Vedic Extensions"
 msgstr "বৈদিক এক্সেটনশন"
 
 # msgstr "খ্মের চিহ্ন" <-- বানান
-#: ../gucharmap/unicode-blocks.h:76
+#: ../gucharmap/unicode-blocks.h:77
 msgid "Phonetic Extensions"
 msgstr "ফোনেটিক (ধ্বন্যাত্মক) এক্সেটনশন"
 
 # msgstr "খ্মের চিহ্ন" <-- বানান
-#: ../gucharmap/unicode-blocks.h:77
+#: ../gucharmap/unicode-blocks.h:78
 msgid "Phonetic Extensions Supplement"
 msgstr "ফোনেটিক (ধ্বন্যাত্মক) এক্সেটনশন সাপ্লিমেন্ট"
 
 # msgstr "স্পেসিঙ্গ মডিফায়ার অক্ষরসমূহ" <-- বানান
 # msgstr "স্পেসিং পরিবর্তক অক্ষরসমূহ"
-#: ../gucharmap/unicode-blocks.h:78
+#: ../gucharmap/unicode-blocks.h:79
 msgid "Combining Diacritical Marks Supplement"
 msgstr "সংযুক্তকারী ধ্বনি-নির্দেশক চিহ্ন সাপ্লিমেন্ট"
 
 # msgstr "ধ্বনিগত বর্ধিতাংশ" <-- সম্ববত এটা Out of Context
-#: ../gucharmap/unicode-blocks.h:79
+#: ../gucharmap/unicode-blocks.h:80
 msgid "Latin Extended Additional"
 msgstr "লাতিন এক্সটেন্ডেড অ্যাডিশনেল"
 
-#: ../gucharmap/unicode-blocks.h:80
+#: ../gucharmap/unicode-blocks.h:81
 msgid "Greek Extended"
 msgstr "গ্রিক এক্সটেন্ডেড"
 
 # msgstr "গ্রিক এক্সটেন্ডেড"
-#: ../gucharmap/unicode-blocks.h:81
+#: ../gucharmap/unicode-blocks.h:82
 msgid "General Punctuation"
 msgstr "সাধারণ যতিচিহ্ন"
 
-#: ../gucharmap/unicode-blocks.h:82
+#: ../gucharmap/unicode-blocks.h:83
 msgid "Superscripts and Subscripts"
 msgstr "সুপার-স্ক্রিপ্ট ও সাব-স্ক্রিপ্ট"
 
-#: ../gucharmap/unicode-blocks.h:83
+#: ../gucharmap/unicode-blocks.h:84
 msgid "Currency Symbols"
 msgstr "মুদ্রা চিহ্ন"
 
-#: ../gucharmap/unicode-blocks.h:84
+#: ../gucharmap/unicode-blocks.h:85
 msgid "Combining Diacritical Marks for Symbols"
 msgstr "সংকেতের সাথে ব্যবহারযোগ্য সংযুক্তকারী ধ্বনি-নির্দেশক চিহ্ন"
 
-#: ../gucharmap/unicode-blocks.h:85
+#: ../gucharmap/unicode-blocks.h:86
 msgid "Letterlike Symbols"
 msgstr "অক্ষরের অনুরূপ চিহ্ন"
 
-#: ../gucharmap/unicode-blocks.h:86
+#: ../gucharmap/unicode-blocks.h:87
 msgid "Number Forms"
 msgstr "সংখ্যা রূপ"
 
-#: ../gucharmap/unicode-blocks.h:87
+#: ../gucharmap/unicode-blocks.h:88
 msgid "Arrows"
 msgstr "তীরচিহ্ন"
 
 # msgstr "তীরচিহ্ন"
-#: ../gucharmap/unicode-blocks.h:88
+#: ../gucharmap/unicode-blocks.h:89
 msgid "Mathematical Operators"
 msgstr "গাণিতিক সংকেত"
 
-#: ../gucharmap/unicode-blocks.h:89
+#: ../gucharmap/unicode-blocks.h:90
 msgid "Miscellaneous Technical"
 msgstr "বিবিধ প্রযুক্তি সংক্রান্ত চিহ্ন"
 
-#: ../gucharmap/unicode-blocks.h:90
+#: ../gucharmap/unicode-blocks.h:91
 msgid "Control Pictures"
 msgstr "নিয়ন্ত্রণ সংক্রান্ত চিত্র"
 
-#: ../gucharmap/unicode-blocks.h:91
+#: ../gucharmap/unicode-blocks.h:92
 msgid "Optical Character Recognition"
 msgstr "অপটিকাল ক্যারেকটর রিকোগনিশান"
 
 # msgstr "অপটিকাল ক্যারাকটার রেকগ্নিশন"
-#: ../gucharmap/unicode-blocks.h:92
+#: ../gucharmap/unicode-blocks.h:93
 msgid "Enclosed Alphanumerics"
 msgstr "এনক্লোসড আল্ফানিউমেরিক"
 
 # msgstr "এন্ক্লোজ করা আলফানিমেরিক" <-- বানান
-#: ../gucharmap/unicode-blocks.h:93
+#: ../gucharmap/unicode-blocks.h:94
 msgid "Box Drawing"
 msgstr "বাক্স আবদ্ধ ছবি"
 
 # msgstr "বক্স ড্রয়িঙ্গ" <-- বানান
 # এটা কি বাংলাতে লিখলে Out of Context হয়ে যায় ?
-#: ../gucharmap/unicode-blocks.h:94
+#: ../gucharmap/unicode-blocks.h:95
 msgid "Block Elements"
 msgstr "ব্লক এলিমেন্ট"
 
-#: ../gucharmap/unicode-blocks.h:95
+#: ../gucharmap/unicode-blocks.h:96
 msgid "Geometric Shapes"
 msgstr "জ্যামিতিক আকৃতি"
 
-#: ../gucharmap/unicode-blocks.h:96
+#: ../gucharmap/unicode-blocks.h:97
 msgid "Miscellaneous Symbols"
 msgstr "বিবিধ চিহ্ন"
 
-#: ../gucharmap/unicode-blocks.h:97
+#: ../gucharmap/unicode-blocks.h:98
 msgid "Dingbats"
 msgstr "Dingbats"
 
 # msgstr "ডিঙ্গব্যাট" <-- বানান
-#: ../gucharmap/unicode-blocks.h:98
+#: ../gucharmap/unicode-blocks.h:99
 msgid "Miscellaneous Mathematical Symbols-A"
 msgstr "বিবিধ গাণিতিক চিহ্ন-A"
 
 # msgstr "বিবিধ গাণিতিক চিহ্ন (Symbol-A)"
-#: ../gucharmap/unicode-blocks.h:99
+#: ../gucharmap/unicode-blocks.h:100
 msgid "Supplemental Arrows-A"
 msgstr "অতিরিক্ত তীরচিহ্ন-A"
 
 # msgstr "অন্যান্য তীরচিহ্ন (Arrow-A)"
-#: ../gucharmap/unicode-blocks.h:100
+#: ../gucharmap/unicode-blocks.h:101
 msgid "Braille Patterns"
 msgstr "ব্রেইল চিহ্ন"
 
-#: ../gucharmap/unicode-blocks.h:101
+#: ../gucharmap/unicode-blocks.h:102
 msgid "Supplemental Arrows-B"
 msgstr "অতিরিক্ত তীরচিহ্ন-B"
 
-#: ../gucharmap/unicode-blocks.h:102
+#: ../gucharmap/unicode-blocks.h:103
 msgid "Miscellaneous Mathematical Symbols-B"
 msgstr "বিবিধ গাণিকিত চিহ্ন-B"
 
 # msgstr "বিবিধ গাণিতিক চিহ্ন (Symbol-B)"
-#: ../gucharmap/unicode-blocks.h:103
+#: ../gucharmap/unicode-blocks.h:104
 msgid "Supplemental Mathematical Operators"
 msgstr "অতিরিক্ত গাণিতিক সংকেত"
 
 # msgstr "বিবিধ গাণিতিক অপারেটর"
-#: ../gucharmap/unicode-blocks.h:104
+#: ../gucharmap/unicode-blocks.h:105
 msgid "Miscellaneous Symbols and Arrows"
 msgstr "বিভিন্ন চিহ্ন এবং তীরচিহ্ন"
 
 # msgstr "পুরোনো আইটালিক" <-- বানান
 # msgstr "প্রাচীন ইটালিক"
-#: ../gucharmap/unicode-blocks.h:105
-#: ../gucharmap/unicode-scripts.h:43
+#: ../gucharmap/unicode-blocks.h:106 ../gucharmap/unicode-scripts.h:47
 msgid "Glagolitic"
 msgstr "গ্লাগোলিটিক"
 
-#: ../gucharmap/unicode-blocks.h:106
+#: ../gucharmap/unicode-blocks.h:107
 msgid "Latin Extended-C"
 msgstr "লাতিন এক্সটেন্ডেড-C"
 
 # msgstr "পুরোনো আইটালিক" <-- বানান
 # msgstr "প্রাচীন ইটালিক"
-#: ../gucharmap/unicode-blocks.h:107
-#: ../gucharmap/unicode-scripts.h:34
+#: ../gucharmap/unicode-blocks.h:108 ../gucharmap/unicode-scripts.h:36
 msgid "Coptic"
 msgstr "কপটিক"
 
-#: ../gucharmap/unicode-blocks.h:108
+#: ../gucharmap/unicode-blocks.h:109
 msgid "Georgian Supplement"
 msgstr "জর্জিয়ান সাপ্লিমেন্ট"
 
-#: ../gucharmap/unicode-blocks.h:109
-#: ../gucharmap/unicode-scripts.h:114
+#: ../gucharmap/unicode-blocks.h:110 ../gucharmap/unicode-scripts.h:135
 msgid "Tifinagh"
 msgstr "টিফিনাগ"
 
-#: ../gucharmap/unicode-blocks.h:110
+#: ../gucharmap/unicode-blocks.h:111
 msgid "Ethiopic Extended"
 msgstr "ইথিওপিক এক্সটেন্ডেড"
 
-#: ../gucharmap/unicode-blocks.h:111
+#: ../gucharmap/unicode-blocks.h:112
 msgid "Cyrillic Extended-A"
 msgstr "সিরিলিক এক্সটেনডেড-A"
 
 # msgstr "গ্রিক এক্সটেন্ডেড"
-#: ../gucharmap/unicode-blocks.h:112
+#: ../gucharmap/unicode-blocks.h:113
 msgid "Supplemental Punctuation"
 msgstr "অতিরিক্ত যতিচিহ্ন"
 
-#: ../gucharmap/unicode-blocks.h:113
+#: ../gucharmap/unicode-blocks.h:114
 msgid "CJK Radicals Supplement"
 msgstr "CJK রেডিক্যাল সাপ্লিমেন্ট"
 
-#: ../gucharmap/unicode-blocks.h:114
+#: ../gucharmap/unicode-blocks.h:115
 msgid "Kangxi Radicals"
 msgstr "কাংজি রেডিক্যাল"
 
 # এইটা ঠিক কর
-#: ../gucharmap/unicode-blocks.h:115
+#: ../gucharmap/unicode-blocks.h:116
 msgid "Ideographic Description Characters"
 msgstr "বিস্তারিত ভাবসংকেত অক্ষর"
 
 # msgstr "আইডিওগ্রাফি বর্ণনাকারী অক্ষর"
-#: ../gucharmap/unicode-blocks.h:116
+#: ../gucharmap/unicode-blocks.h:117
 msgid "CJK Symbols and Punctuation"
 msgstr "CJK চিহ্ন ও যতিচিহ্ন"
 
-#: ../gucharmap/unicode-blocks.h:117
-#: ../gucharmap/unicode-scripts.h:52
+#: ../gucharmap/unicode-blocks.h:118 ../gucharmap/unicode-scripts.h:57
 msgid "Hiragana"
 msgstr "হিরাগানা"
 
-#: ../gucharmap/unicode-blocks.h:118
-#: ../gucharmap/unicode-scripts.h:60
+#: ../gucharmap/unicode-blocks.h:119 ../gucharmap/unicode-scripts.h:65
 msgid "Katakana"
 msgstr "কাতাকানা"
 
-#: ../gucharmap/unicode-blocks.h:119
-#: ../gucharmap/unicode-scripts.h:23
+#: ../gucharmap/unicode-blocks.h:120 ../gucharmap/unicode-scripts.h:24
 msgid "Bopomofo"
 msgstr "বোপোমোফো"
 
-#: ../gucharmap/unicode-blocks.h:120
+#: ../gucharmap/unicode-blocks.h:121
 msgid "Hangul Compatibility Jamo"
 msgstr "হাংগুল কম্পেটিবিলিটি জামো"
 
-#: ../gucharmap/unicode-blocks.h:121
+#: ../gucharmap/unicode-blocks.h:122
 msgid "Kanbun"
 msgstr "কানবুন"
 
-#: ../gucharmap/unicode-blocks.h:122
+#: ../gucharmap/unicode-blocks.h:123
 msgid "Bopomofo Extended"
 msgstr "বোপোমোফো এক্সটেন্ডেড"
 
-#: ../gucharmap/unicode-blocks.h:123
+#: ../gucharmap/unicode-blocks.h:124
 msgid "CJK Strokes"
 msgstr "CJK স্ট্রোকস"
 
-#: ../gucharmap/unicode-blocks.h:124
+#: ../gucharmap/unicode-blocks.h:125
 msgid "Katakana Phonetic Extensions"
 msgstr "কাটাকানা ধ্বন্যাত্মক এক্সটেনশন"
 
-#: ../gucharmap/unicode-blocks.h:125
+#: ../gucharmap/unicode-blocks.h:126
 msgid "Enclosed CJK Letters and Months"
 msgstr "এনক্লোসড CJK অক্ষর ও মাস"
 
-#: ../gucharmap/unicode-blocks.h:126
+#: ../gucharmap/unicode-blocks.h:127
 msgid "CJK Compatibility"
 msgstr "CJK সামঞ্জস্য"
 
-#: ../gucharmap/unicode-blocks.h:127
+#: ../gucharmap/unicode-blocks.h:128
 msgid "CJK Unified Ideographs Extension A"
 msgstr "CJK ইউনিফাইড ভাবসংকেত এক্সটেনশন A"
 
-#: ../gucharmap/unicode-blocks.h:128
+#: ../gucharmap/unicode-blocks.h:129
 msgid "Yijing Hexagram Symbols"
 msgstr "ইজিং হেক্সাগ্রাম চিহ্ন"
 
-#: ../gucharmap/unicode-blocks.h:129
+#: ../gucharmap/unicode-blocks.h:130
 msgid "CJK Unified Ideographs"
 msgstr "CJK ইউনিফাইড ভাবসংকেত"
 
-#: ../gucharmap/unicode-blocks.h:130
+#: ../gucharmap/unicode-blocks.h:131
 msgid "Yi Syllables"
 msgstr "ইয়ি ধ্বনি-নির্দেশক"
 
-#: ../gucharmap/unicode-blocks.h:131
+#: ../gucharmap/unicode-blocks.h:132
 msgid "Yi Radicals"
 msgstr "ইয়ি রেডিক্যাল"
 
-#: ../gucharmap/unicode-blocks.h:132
-#: ../gucharmap/unicode-scripts.h:69
+#: ../gucharmap/unicode-blocks.h:133 ../gucharmap/unicode-scripts.h:77
 msgid "Lisu"
 msgstr "লিসু"
 
-#: ../gucharmap/unicode-blocks.h:133
-#: ../gucharmap/unicode-scripts.h:116
+#: ../gucharmap/unicode-blocks.h:134 ../gucharmap/unicode-scripts.h:138
 msgid "Vai"
 msgstr "ওয়াই"
 
-#: ../gucharmap/unicode-blocks.h:134
+#: ../gucharmap/unicode-blocks.h:135
 msgid "Cyrillic Extended-B"
 msgstr "সিরিলিক এক্সটেনডেড-B"
 
-#: ../gucharmap/unicode-blocks.h:135
-#: ../gucharmap/unicode-scripts.h:20
+#: ../gucharmap/unicode-blocks.h:136 ../gucharmap/unicode-scripts.h:20
 msgid "Bamum"
 msgstr "বামুম"
 
-#: ../gucharmap/unicode-blocks.h:136
+#: ../gucharmap/unicode-blocks.h:137
 msgid "Modifier Tone Letters"
 msgstr "ধ্বনি পরিবর্তনকারী অক্ষর"
 
-#: ../gucharmap/unicode-blocks.h:137
+#: ../gucharmap/unicode-blocks.h:138
 msgid "Latin Extended-D"
 msgstr "লাতিন এক্সটেন্ডেড-D"
 
-#: ../gucharmap/unicode-blocks.h:138
-#: ../gucharmap/unicode-scripts.h:101
+#: ../gucharmap/unicode-blocks.h:139 ../gucharmap/unicode-scripts.h:122
 msgid "Syloti Nagri"
 msgstr "সিলোটি নাগরি"
 
-#: ../gucharmap/unicode-blocks.h:139
+#: ../gucharmap/unicode-blocks.h:140
 msgid "Common Indic Number Forms"
 msgstr "সাধারণ ইন্ডিক সংখ্যার রূপ"
 
-#: ../gucharmap/unicode-blocks.h:140
+#: ../gucharmap/unicode-blocks.h:141
 msgid "Phags-pa"
 msgstr "ফাগস-পা"
 
-#: ../gucharmap/unicode-blocks.h:141
-#: ../gucharmap/unicode-scripts.h:95
+#: ../gucharmap/unicode-blocks.h:142 ../gucharmap/unicode-scripts.h:115
 msgid "Saurashtra"
 msgstr "সৌরাষ্ট্র"
 
 # এইটা আবার কোন দেশী ?
-#: ../gucharmap/unicode-blocks.h:142
+#: ../gucharmap/unicode-blocks.h:143
 msgid "Devanagari Extended"
 msgstr "দেবনাগরি এক্সটেন্ডেড"
 
-#: ../gucharmap/unicode-blocks.h:143
-#: ../gucharmap/unicode-scripts.h:61
+#: ../gucharmap/unicode-blocks.h:144 ../gucharmap/unicode-scripts.h:66
 msgid "Kayah Li"
 msgstr "কায়াহ লি"
 
-#: ../gucharmap/unicode-blocks.h:144
-#: ../gucharmap/unicode-scripts.h:92
+#: ../gucharmap/unicode-blocks.h:145 ../gucharmap/unicode-scripts.h:112
 msgid "Rejang"
 msgstr "রেজাং"
 
-#: ../gucharmap/unicode-blocks.h:145
+#: ../gucharmap/unicode-blocks.h:146
 msgid "Hangul Jamo Extended-A"
 msgstr "হাঙ্গুল জামো এক্সটেনডেড-A"
 
-#: ../gucharmap/unicode-blocks.h:146
-#: ../gucharmap/unicode-scripts.h:57
+#: ../gucharmap/unicode-blocks.h:147 ../gucharmap/unicode-scripts.h:62
 msgid "Javanese"
 msgstr "জাভানিস"
 
+#: ../gucharmap/unicode-blocks.h:148
+#| msgid "Myanmar Extended-A"
+msgid "Myanmar Extended-B"
+msgstr "মায়ানমার এক্সটেনডেড-B"
+
 # msgstr "সমন্বিত কানাডীয় আদিবাসী সিলেবিক্স" <-- ভয়াবহ!
-#: ../gucharmap/unicode-blocks.h:147
-#: ../gucharmap/unicode-scripts.h:31
+#: ../gucharmap/unicode-blocks.h:149 ../gucharmap/unicode-scripts.h:33
 msgid "Cham"
 msgstr "ছাম"
 
-#: ../gucharmap/unicode-blocks.h:148
+#: ../gucharmap/unicode-blocks.h:150
 msgid "Myanmar Extended-A"
 msgstr "মায়ানমার এক্সটেনডেড-A"
 
-#: ../gucharmap/unicode-blocks.h:149
-#: ../gucharmap/unicode-scripts.h:107
+#: ../gucharmap/unicode-blocks.h:151 ../gucharmap/unicode-scripts.h:128
 msgid "Tai Viet"
 msgstr "তাই ভিয়েট"
 
 # msgstr "খ্মের চিহ্ন" <-- বানান
-#: ../gucharmap/unicode-blocks.h:150
+#: ../gucharmap/unicode-blocks.h:152
 msgid "Meetei Mayek Extensions"
 msgstr "মেইতেই মায়েক এক্সেটনশন"
 
-#: ../gucharmap/unicode-blocks.h:151
+#: ../gucharmap/unicode-blocks.h:153
 msgid "Ethiopic Extended-A"
 msgstr "ইথিওপিক এক্সটেন্ডেড-A"
 
-#: ../gucharmap/unicode-blocks.h:152
-#: ../gucharmap/unicode-scripts.h:74
+#: ../gucharmap/unicode-blocks.h:154
+#| msgid "Latin Extended-A"
+msgid "Latin Extended-E"
+msgstr "লাতিন এক্সটেনডেড-E"
+
+#: ../gucharmap/unicode-blocks.h:155 ../gucharmap/unicode-scripts.h:84
 msgid "Meetei Mayek"
 msgstr "মেইতেই মায়েক"
 
-#: ../gucharmap/unicode-blocks.h:153
+#: ../gucharmap/unicode-blocks.h:156
 msgid "Hangul Syllables"
 msgstr "হাঙ্গুল ধ্বনি-নির্দেশক"
 
-#: ../gucharmap/unicode-blocks.h:154
+#: ../gucharmap/unicode-blocks.h:157
 msgid "Hangul Jamo Extended-B"
 msgstr "হাঙ্গুল জামো এক্সটেনডেড-B"
 
-#: ../gucharmap/unicode-blocks.h:155
+#: ../gucharmap/unicode-blocks.h:158
 msgid "High Surrogates"
 msgstr "উচ্চ সারোগেট"
 
-#: ../gucharmap/unicode-blocks.h:156
+#: ../gucharmap/unicode-blocks.h:159
 msgid "High Private Use Surrogates"
 msgstr "উচ্চ ব্যক্তিগত ব্যবহারের সারোগেট"
 
 # msgstr "হাই প্রাইঅভেট ইউজ সারোগেট" <-- বানান
 # সম্ভবত এটার বাংলা করার দরকার আছে
-#: ../gucharmap/unicode-blocks.h:157
+#: ../gucharmap/unicode-blocks.h:160
 msgid "Low Surrogates"
 msgstr "নিম্ন সারোগেট"
 
 # msgstr "নিম্ন সারোগেট"
-#: ../gucharmap/unicode-blocks.h:158
+#: ../gucharmap/unicode-blocks.h:161
 msgid "Private Use Area"
 msgstr "ব্যক্তিগত ব্যবহারের ক্ষেত্র"
 
 # msgstr "নিজস্ব ব্যবহারের ক্ষেত্র"
 # msgstr "নিজস্ব ব্যবহারের অংশ"
-#: ../gucharmap/unicode-blocks.h:159
+#: ../gucharmap/unicode-blocks.h:162
 msgid "CJK Compatibility Ideographs"
 msgstr "CJK সামঞ্জস্যের ভাবসংকেত"
 
-#: ../gucharmap/unicode-blocks.h:160
+#: ../gucharmap/unicode-blocks.h:163
 msgid "Alphabetic Presentation Forms"
 msgstr "আল্ফাবেটিক রূপে বিন্যাস"
 
 # msgstr "আল্ফাবেটিক প্রেসেন্টেশন ফর্ম" <-- বানান
 # সম্ভবত এটার বাংলা করার দরকার আছে
-#: ../gucharmap/unicode-blocks.h:161
+#: ../gucharmap/unicode-blocks.h:164
 msgid "Arabic Presentation Forms-A"
 msgstr "আরবি রূপে বিন্যাস-A"
 
-#: ../gucharmap/unicode-blocks.h:162
+#: ../gucharmap/unicode-blocks.h:165
 msgid "Variation Selectors"
 msgstr "পরিবর্তন নির্বাচনকারী"
 
-#: ../gucharmap/unicode-blocks.h:163
+#: ../gucharmap/unicode-blocks.h:166
 msgid "Vertical Forms"
 msgstr "উলম্ব বিন্যাস"
 
 # সম্ভবত এটার বাংলা করার দরকার আছে
-#: ../gucharmap/unicode-blocks.h:164
+#: ../gucharmap/unicode-blocks.h:167
 msgid "Combining Half Marks"
 msgstr "সংযুক্তকারী অর্ধ-রূপ"
 
 # msgstr "কম্বাইনিঙ্গ হাফ মার্ক" <-- বানান
 # msgstr "সংযুক্তকারী হাফ মার্ক"
-#: ../gucharmap/unicode-blocks.h:165
+#: ../gucharmap/unicode-blocks.h:168
 msgid "CJK Compatibility Forms"
 msgstr "CJK সামঞ্জস্যের বিন্যাস"
 
 # msgstr "সি-জে-কে কম্প্যাটিবিলিটি ফর্ম"
-#: ../gucharmap/unicode-blocks.h:166
+#: ../gucharmap/unicode-blocks.h:169
 msgid "Small Form Variants"
 msgstr "ক্ষুদ্র রূপ"
 
-#: ../gucharmap/unicode-blocks.h:167
+#: ../gucharmap/unicode-blocks.h:170
 msgid "Arabic Presentation Forms-B"
 msgstr "আরবি রূপে বিন্যাস-B"
 
-#: ../gucharmap/unicode-blocks.h:168
+#: ../gucharmap/unicode-blocks.h:171
 msgid "Halfwidth and Fullwidth Forms"
 msgstr "অর্ধমাপ ও পূর্ণমাপ রূপ"
 
-#: ../gucharmap/unicode-blocks.h:169
+#: ../gucharmap/unicode-blocks.h:172
 msgid "Specials"
 msgstr "বিশেষ"
 
 # msgstr "বিশেষ"
-#: ../gucharmap/unicode-blocks.h:170
+#: ../gucharmap/unicode-blocks.h:173
 msgid "Linear B Syllabary"
 msgstr "লিনিয়ার B সিলেবারি"
 
 # msgstr "লিনিয়ার (Linear B) সিলেবারি"
-#: ../gucharmap/unicode-blocks.h:171
+#: ../gucharmap/unicode-blocks.h:174
 msgid "Linear B Ideograms"
 msgstr "লিনিয়ার B ভাবসংকেত"
 
 # আগেরটার মত
-#: ../gucharmap/unicode-blocks.h:172
+#: ../gucharmap/unicode-blocks.h:175
 msgid "Aegean Numbers"
 msgstr "অ্যাজিয়ান সংখ্যা"
 
 # আগেরটার মত
-#: ../gucharmap/unicode-blocks.h:173
+#: ../gucharmap/unicode-blocks.h:176
 msgid "Ancient Greek Numbers"
 msgstr "পুরাতন গ্রিক সংখ্যা"
 
-#: ../gucharmap/unicode-blocks.h:174
+#: ../gucharmap/unicode-blocks.h:177
 msgid "Ancient Symbols"
 msgstr "পুরাতন চিহ্ন"
 
-#: ../gucharmap/unicode-blocks.h:175
+#: ../gucharmap/unicode-blocks.h:178
 msgid "Phaistos Disc"
 msgstr "ফাইসটোস ডিস্ক"
 
-#: ../gucharmap/unicode-blocks.h:176
-#: ../gucharmap/unicode-scripts.h:70
+#: ../gucharmap/unicode-blocks.h:179 ../gucharmap/unicode-scripts.h:78
 msgid "Lycian"
 msgstr "লাইসিয়ান"
 
-#: ../gucharmap/unicode-blocks.h:177
-#: ../gucharmap/unicode-scripts.h:29
+#: ../gucharmap/unicode-blocks.h:180 ../gucharmap/unicode-scripts.h:30
 msgid "Carian"
 msgstr "কারিয়ান"
 
-#: ../gucharmap/unicode-blocks.h:178
-#: ../gucharmap/unicode-scripts.h:84
+#: ../gucharmap/unicode-blocks.h:181
+msgid "Coptic Epact Numbers"
+msgstr "Coptic Epact Numbers"
+
+#: ../gucharmap/unicode-blocks.h:182 ../gucharmap/unicode-scripts.h:98
 msgid "Old Italic"
 msgstr "পরাতন আইটালিক"
 
 # msgstr "পুরোনো আইটালিক" <-- বানান
 # msgstr "প্রাচীন ইটালিক"
-#: ../gucharmap/unicode-blocks.h:179
-#: ../gucharmap/unicode-scripts.h:44
+#: ../gucharmap/unicode-blocks.h:183 ../gucharmap/unicode-scripts.h:48
 msgid "Gothic"
 msgstr "গথিক"
 
-#: ../gucharmap/unicode-blocks.h:180
-#: ../gucharmap/unicode-scripts.h:115
+#: ../gucharmap/unicode-blocks.h:184 ../gucharmap/unicode-scripts.h:100
+#| msgid "Old Persian"
+msgid "Old Permic"
+msgstr "পুরাতন পারমিক"
+
+#: ../gucharmap/unicode-blocks.h:185 ../gucharmap/unicode-scripts.h:137
 msgid "Ugaritic"
 msgstr "উগারিটিক"
 
-#: ../gucharmap/unicode-blocks.h:181
-#: ../gucharmap/unicode-scripts.h:85
+#: ../gucharmap/unicode-blocks.h:186 ../gucharmap/unicode-scripts.h:101
 msgid "Old Persian"
 msgstr "পুরাতন ফার্সি"
 
 # msgstr "উগারিটিক"
-#: ../gucharmap/unicode-blocks.h:182
-#: ../gucharmap/unicode-scripts.h:38
+#: ../gucharmap/unicode-blocks.h:187 ../gucharmap/unicode-scripts.h:40
 msgid "Deseret"
 msgstr "ডেসারেট"
 
-#: ../gucharmap/unicode-blocks.h:183
-#: ../gucharmap/unicode-scripts.h:97
+#: ../gucharmap/unicode-blocks.h:188 ../gucharmap/unicode-scripts.h:117
 msgid "Shavian"
 msgstr "শাভিয়ান"
 
-#: ../gucharmap/unicode-blocks.h:184
-#: ../gucharmap/unicode-scripts.h:89
+#: ../gucharmap/unicode-blocks.h:189 ../gucharmap/unicode-scripts.h:105
 msgid "Osmanya"
 msgstr "ওসমানিয়া"
 
-#: ../gucharmap/unicode-blocks.h:185
+#: ../gucharmap/unicode-blocks.h:190 ../gucharmap/unicode-scripts.h:44
+msgid "Elbasan"
+msgstr "ইলাবাসান"
+
+#: ../gucharmap/unicode-blocks.h:191 ../gucharmap/unicode-scripts.h:31
+msgid "Caucasian Albanian"
+msgstr "Caucasian Albanian"
+
+# msgstr "বিশেষ"
+#: ../gucharmap/unicode-blocks.h:192 ../gucharmap/unicode-scripts.h:75
+#| msgid "Linear B"
+msgid "Linear A"
+msgstr "লিনিয়ার A"
+
+#: ../gucharmap/unicode-blocks.h:193
 msgid "Cypriot Syllabary"
 msgstr "সিপ্রিয়ট সিলেবারি"
 
-#: ../gucharmap/unicode-blocks.h:186
-#: ../gucharmap/unicode-scripts.h:53
+#: ../gucharmap/unicode-blocks.h:194 ../gucharmap/unicode-scripts.h:58
 msgid "Imperial Aramaic"
 msgstr "ইম্পিরিয়েল আরামাইক"
 
-#: ../gucharmap/unicode-blocks.h:187
-#: ../gucharmap/unicode-scripts.h:91
+#: ../gucharmap/unicode-blocks.h:195 ../gucharmap/unicode-scripts.h:107
+msgid "Palmyrene"
+msgstr "Palmyrene"
+
+#: ../gucharmap/unicode-blocks.h:196 ../gucharmap/unicode-scripts.h:94
+msgid "Nabataean"
+msgstr "Nabataean"
+
+#: ../gucharmap/unicode-blocks.h:197 ../gucharmap/unicode-scripts.h:110
 msgid "Phoenician"
 msgstr "ফোনিশিয়ান"
 
-#: ../gucharmap/unicode-blocks.h:188
-#: ../gucharmap/unicode-scripts.h:71
+#: ../gucharmap/unicode-blocks.h:198 ../gucharmap/unicode-scripts.h:79
 msgid "Lydian"
 msgstr "লাইডিয়ান"
 
-#: ../gucharmap/unicode-blocks.h:189
-#: ../gucharmap/unicode-scripts.h:76
+#: ../gucharmap/unicode-blocks.h:199 ../gucharmap/unicode-scripts.h:87
 msgid "Meroitic Hieroglyphs"
 msgstr "মেরোইটিক হেইরোগ্লিফস"
 
-#: ../gucharmap/unicode-blocks.h:190
-#: ../gucharmap/unicode-scripts.h:75
+#: ../gucharmap/unicode-blocks.h:200 ../gucharmap/unicode-scripts.h:86
 msgid "Meroitic Cursive"
 msgstr "মেরোইটিক কার্সিভ"
 
-#: ../gucharmap/unicode-blocks.h:191
-#: ../gucharmap/unicode-scripts.h:62
+#: ../gucharmap/unicode-blocks.h:201 ../gucharmap/unicode-scripts.h:67
 msgid "Kharoshthi"
 msgstr "খারোশতি"
 
-#: ../gucharmap/unicode-blocks.h:192
-#: ../gucharmap/unicode-scripts.h:86
+#: ../gucharmap/unicode-blocks.h:202 ../gucharmap/unicode-scripts.h:102
 msgid "Old South Arabian"
 msgstr "পুরাতন দক্ষিণ আরবী"
 
-#: ../gucharmap/unicode-blocks.h:193
-#: ../gucharmap/unicode-scripts.h:18
+#: ../gucharmap/unicode-blocks.h:203 ../gucharmap/unicode-scripts.h:99
+#| msgid "Old South Arabian"
+msgid "Old North Arabian"
+msgstr "পুরাতন উত্তর আরবী"
+
+#: ../gucharmap/unicode-blocks.h:204 ../gucharmap/unicode-scripts.h:83
+msgid "Manichaean"
+msgstr "Manichaean"
+
+#: ../gucharmap/unicode-blocks.h:205 ../gucharmap/unicode-scripts.h:18
 msgid "Avestan"
 msgstr "আভেস্তান"
 
-#: ../gucharmap/unicode-blocks.h:194
-#: ../gucharmap/unicode-scripts.h:56
+#: ../gucharmap/unicode-blocks.h:206 ../gucharmap/unicode-scripts.h:61
 msgid "Inscriptional Parthian"
 msgstr "ইনস্ক্রিপশনেল পার্থিয়ান"
 
-#: ../gucharmap/unicode-blocks.h:195
-#: ../gucharmap/unicode-scripts.h:55
+#: ../gucharmap/unicode-blocks.h:207 ../gucharmap/unicode-scripts.h:60
 msgid "Inscriptional Pahlavi"
 msgstr "ইনস্ক্রিপশনেল পাহলাভি"
 
-#: ../gucharmap/unicode-blocks.h:196
-#: ../gucharmap/unicode-scripts.h:87
+#: ../gucharmap/unicode-blocks.h:208 ../gucharmap/unicode-scripts.h:111
+#| msgid "Inscriptional Pahlavi"
+msgid "Psalter Pahlavi"
+msgstr "Psalter Pahlavi"
+
+#: ../gucharmap/unicode-blocks.h:209 ../gucharmap/unicode-scripts.h:103
 msgid "Old Turkic"
 msgstr "পুরাতন টার্কিক"
 
 # msgstr "বাইজান্টাইন সঙ্গীতবিষয়ক প্রতীক"
-#: ../gucharmap/unicode-blocks.h:197
+#: ../gucharmap/unicode-blocks.h:210
 msgid "Rumi Numeral Symbols"
 msgstr "রুমি সংখ্যার চিহ্ন"
 
-#: ../gucharmap/unicode-blocks.h:198
-#: ../gucharmap/unicode-scripts.h:24
+#: ../gucharmap/unicode-blocks.h:211 ../gucharmap/unicode-scripts.h:25
 msgid "Brahmi"
 msgstr "ব্রাহ্মী"
 
-#: ../gucharmap/unicode-blocks.h:199
-#: ../gucharmap/unicode-scripts.h:58
+#: ../gucharmap/unicode-blocks.h:212 ../gucharmap/unicode-scripts.h:63
 msgid "Kaithi"
 msgstr "কাইথি"
 
-#: ../gucharmap/unicode-blocks.h:200
-#: ../gucharmap/unicode-scripts.h:99
+#: ../gucharmap/unicode-blocks.h:213 ../gucharmap/unicode-scripts.h:120
 msgid "Sora Sompeng"
 msgstr "সোরা সোমপেং"
 
-#: ../gucharmap/unicode-blocks.h:201
-#: ../gucharmap/unicode-scripts.h:30
+#: ../gucharmap/unicode-blocks.h:214 ../gucharmap/unicode-scripts.h:32
 msgid "Chakma"
 msgstr "চাকমা"
 
-#: ../gucharmap/unicode-blocks.h:202
-#: ../gucharmap/unicode-scripts.h:96
+#: ../gucharmap/unicode-blocks.h:215 ../gucharmap/unicode-scripts.h:80
+msgid "Mahajani"
+msgstr "Mahajani"
+
+#: ../gucharmap/unicode-blocks.h:216 ../gucharmap/unicode-scripts.h:116
 msgid "Sharada"
 msgstr "শারদা"
 
-#: ../gucharmap/unicode-blocks.h:203
-#: ../gucharmap/unicode-scripts.h:108
+#: ../gucharmap/unicode-blocks.h:217
+msgid "Sinhala Archaic Numbers"
+msgstr "Sinhala Archaic Numbers"
+
+#: ../gucharmap/unicode-blocks.h:218 ../gucharmap/unicode-scripts.h:69
+msgid "Khojki"
+msgstr "Khojki"
+
+#: ../gucharmap/unicode-blocks.h:219 ../gucharmap/unicode-scripts.h:70
+msgid "Khudawadi"
+msgstr "Khudawadi"
+
+#: ../gucharmap/unicode-blocks.h:220 ../gucharmap/unicode-scripts.h:49
+msgid "Grantha"
+msgstr "Grantha"
+
+#: ../gucharmap/unicode-blocks.h:221 ../gucharmap/unicode-scripts.h:136
+msgid "Tirhuta"
+msgstr "Tirhuta"
+
+#: ../gucharmap/unicode-blocks.h:222 ../gucharmap/unicode-scripts.h:118
+msgid "Siddham"
+msgstr "Siddham"
+
+#: ../gucharmap/unicode-blocks.h:223 ../gucharmap/unicode-scripts.h:89
+msgid "Modi"
+msgstr "Modi"
+
+#: ../gucharmap/unicode-blocks.h:224 ../gucharmap/unicode-scripts.h:129
 msgid "Takri"
 msgstr "টাকরি"
 
-#: ../gucharmap/unicode-blocks.h:204
-#: ../gucharmap/unicode-scripts.h:35
+#: ../gucharmap/unicode-blocks.h:225 ../gucharmap/unicode-scripts.h:139
+msgid "Warang Citi"
+msgstr "Warang Citi"
+
+#: ../gucharmap/unicode-blocks.h:226 ../gucharmap/unicode-scripts.h:108
+msgid "Pau Cin Hau"
+msgstr "Pau Cin Hau"
+
+#: ../gucharmap/unicode-blocks.h:227 ../gucharmap/unicode-scripts.h:37
 msgid "Cuneiform"
 msgstr "কিউনিফোর্ম"
 
 # msgstr "আইডিওগ্রাফি বর্ণনাকারী অক্ষর"
-#: ../gucharmap/unicode-blocks.h:205
+#: ../gucharmap/unicode-blocks.h:228
 msgid "Cuneiform Numbers and Punctuation"
 msgstr "কিউনিফোর্ম সংখ্যা ও যতি চিহ্ন"
 
-#: ../gucharmap/unicode-blocks.h:206
-#: ../gucharmap/unicode-scripts.h:40
+#: ../gucharmap/unicode-blocks.h:229 ../gucharmap/unicode-scripts.h:43
 msgid "Egyptian Hieroglyphs"
 msgstr "মিশরিয় হেইরোগ্লিফস"
 
-#: ../gucharmap/unicode-blocks.h:207
+#: ../gucharmap/unicode-blocks.h:230
 msgid "Bamum Supplement"
 msgstr "বামুম সাপ্লিমেন্ট"
 
-#: ../gucharmap/unicode-blocks.h:208
-#: ../gucharmap/unicode-scripts.h:77
+#: ../gucharmap/unicode-blocks.h:231 ../gucharmap/unicode-scripts.h:91
+msgid "Mro"
+msgstr "Mro"
+
+#: ../gucharmap/unicode-blocks.h:232 ../gucharmap/unicode-scripts.h:21
+msgid "Bassa Vah"
+msgstr "Bassa Vah"
+
+#: ../gucharmap/unicode-blocks.h:233 ../gucharmap/unicode-scripts.h:106
+msgid "Pahawh Hmong"
+msgstr "Pahawh Hmong"
+
+#: ../gucharmap/unicode-blocks.h:234 ../gucharmap/unicode-scripts.h:88
 msgid "Miao"
 msgstr "মিয়াও"
 
-#: ../gucharmap/unicode-blocks.h:209
+#: ../gucharmap/unicode-blocks.h:235
 msgid "Kana Supplement"
 msgstr "কানা সাপ্লিমেন্ট"
 
-#: ../gucharmap/unicode-blocks.h:210
+#: ../gucharmap/unicode-blocks.h:236 ../gucharmap/unicode-scripts.h:42
+msgid "Duployan"
+msgstr "Duployan"
+
+#: ../gucharmap/unicode-blocks.h:237
+msgid "Shorthand Format Controls"
+msgstr "শর্টহ্যান্ড ফর্ম্যাট কন্ট্রোল"
+
+#: ../gucharmap/unicode-blocks.h:238
 msgid "Byzantine Musical Symbols"
 msgstr "বাইজানটিন সংগীতের চিহ্ন"
 
 # msgstr "বাইজান্টাইন সঙ্গীতবিষয়ক প্রতীক"
-#: ../gucharmap/unicode-blocks.h:211
+#: ../gucharmap/unicode-blocks.h:239
 msgid "Musical Symbols"
 msgstr "সংগীতের চিহ্ন"
 
-#: ../gucharmap/unicode-blocks.h:212
+#: ../gucharmap/unicode-blocks.h:240
 msgid "Ancient Greek Musical Notation"
 msgstr "পুরাতন গ্রিক সংগীতের স্বরলিপি"
 
 # msgstr "সঙ্গীতবিষয়ক প্রতীক"
-#: ../gucharmap/unicode-blocks.h:213
+#: ../gucharmap/unicode-blocks.h:241
 msgid "Tai Xuan Jing Symbols"
 msgstr "তাই জুয়ান জিঙ্গ সংকেত"
 
-#: ../gucharmap/unicode-blocks.h:214
+#: ../gucharmap/unicode-blocks.h:242
 msgid "Counting Rod Numerals"
 msgstr "কাউন্টিং রড নিউমারেল"
 
-#: ../gucharmap/unicode-blocks.h:215
+#: ../gucharmap/unicode-blocks.h:243
 msgid "Mathematical Alphanumeric Symbols"
 msgstr "গাণিতিক আল্ফানিউমারিক সংকেত"
 
-#: ../gucharmap/unicode-blocks.h:216
+#: ../gucharmap/unicode-blocks.h:244 ../gucharmap/unicode-scripts.h:85
+msgid "Mende Kikakui"
+msgstr "Mende Kikakui"
+
+#: ../gucharmap/unicode-blocks.h:245
 msgid "Arabic Mathematical Alphabetic Symbols"
 msgstr "আরবী গাণিতিক অক্ষরের সংকেত"
 
-#: ../gucharmap/unicode-blocks.h:217
+#: ../gucharmap/unicode-blocks.h:246
 msgid "Mahjong Tiles"
 msgstr "মাহজোং টালি"
 
-#: ../gucharmap/unicode-blocks.h:218
+#: ../gucharmap/unicode-blocks.h:247
 msgid "Domino Tiles"
 msgstr "ডোমিনো টালি"
 
-#: ../gucharmap/unicode-blocks.h:219
+#: ../gucharmap/unicode-blocks.h:248
 msgid "Playing Cards"
 msgstr "তাশ"
 
 # msgstr "অপটিকাল ক্যারাকটার রেকগ্নিশন"
-#: ../gucharmap/unicode-blocks.h:220
+#: ../gucharmap/unicode-blocks.h:249
 msgid "Enclosed Alphanumeric Supplement"
 msgstr "এনক্লোসড আল্ফানিউমেরিক সাপ্লিমেন্ট"
 
-#: ../gucharmap/unicode-blocks.h:221
+#: ../gucharmap/unicode-blocks.h:250
 msgid "Enclosed Ideographic Supplement"
 msgstr "এনক্লোসড ভাবসংকেত সাপ্লিমেন্ট"
 
 # msgstr "বিবিধ গাণিতিক অপারেটর"
-#: ../gucharmap/unicode-blocks.h:222
-msgid "Miscellaneous Symbols And Pictographs"
+#: ../gucharmap/unicode-blocks.h:251
+#| msgid "Miscellaneous Symbols And Pictographs"
+msgid "Miscellaneous Symbols and Pictographs"
 msgstr "বিভিন্ন চিহ্ন এবং ছবির সংকেত"
 
-#: ../gucharmap/unicode-blocks.h:223
+#: ../gucharmap/unicode-blocks.h:252
 msgid "Emoticons"
 msgstr "ইমোট-আইকন"
 
-#: ../gucharmap/unicode-blocks.h:224
-msgid "Transport And Map Symbols"
+#: ../gucharmap/unicode-blocks.h:253
+msgid "Ornamental Dingbats"
+msgstr "Ornamental Dingbats"
+
+#: ../gucharmap/unicode-blocks.h:254
+#| msgid "Transport And Map Symbols"
+msgid "Transport and Map Symbols"
 msgstr "পরিবহণ ও মানচিত্রের সংকেত"
 
 # msgstr "বাইজান্টাইন সঙ্গীতবিষয়ক প্রতীক"
-#: ../gucharmap/unicode-blocks.h:225
+#: ../gucharmap/unicode-blocks.h:255
 msgid "Alchemical Symbols"
 msgstr "অ্যাকেমির চিহ্ন"
 
-#: ../gucharmap/unicode-blocks.h:226
+#: ../gucharmap/unicode-blocks.h:256
+#| msgid "Geometric Shapes"
+msgid "Geometric Shapes Extended"
+msgstr "জ্যামিতিক আকৃতি বিস্তারিত"
+
+# msgstr "বিবিধ গাণিতিক চিহ্ন (Symbol-A)"
+#: ../gucharmap/unicode-blocks.h:257
+#| msgid "Supplemental Arrows-A"
+msgid "Supplemental Arrows-C"
+msgstr "অতিরিক্ত তীরচিহ্ন-C"
+
+#: ../gucharmap/unicode-blocks.h:258
 msgid "CJK Unified Ideographs Extension B"
 msgstr "CJK ইউনিফাইড ভাবসংকেত এক্সটেনশন B"
 
-#: ../gucharmap/unicode-blocks.h:227
+#: ../gucharmap/unicode-blocks.h:259
 msgid "CJK Unified Ideographs Extension C"
 msgstr "CJK ইউনিফাইড ভাবসংকেত এক্সটেনশন C"
 
-#: ../gucharmap/unicode-blocks.h:228
+#: ../gucharmap/unicode-blocks.h:260
 msgid "CJK Unified Ideographs Extension D"
 msgstr "CJK ইউনিফাইড ভাবসংকেত এক্সটেনশন D"
 
 # msgstr "সি-জে-কে ইউনিফাইড আডিওগ্রাফ এক্সটেনশন (Extension B)"
-#: ../gucharmap/unicode-blocks.h:229
+#: ../gucharmap/unicode-blocks.h:261
 msgid "CJK Compatibility Ideographs Supplement"
 msgstr "CJK সামঞ্জস্যের ভাবসংকেত সাপ্লিমেন্ট"
 
-#: ../gucharmap/unicode-blocks.h:230
+#: ../gucharmap/unicode-blocks.h:262
 msgid "Tags"
 msgstr "ট্যাগ"
 
-#: ../gucharmap/unicode-blocks.h:231
+#: ../gucharmap/unicode-blocks.h:263
 msgid "Variation Selectors Supplement"
 msgstr "পরিবর্তন নির্বাচনকারী সাপ্লিমেন্ট"
 
-#: ../gucharmap/unicode-blocks.h:232
+#: ../gucharmap/unicode-blocks.h:264
 msgid "Supplementary Private Use Area-A"
 msgstr "অতিরিক্ত ব্যক্তিগত ব্যবহারের ক্ষেত্র-A"
 
 # msgstr "সাপ্লিমেন্টারি প্রাইভেট ইউজ এরিয়া (Area-A)"
-#: ../gucharmap/unicode-blocks.h:233
+#: ../gucharmap/unicode-blocks.h:265
 msgid "Supplementary Private Use Area-B"
 msgstr "অতিরিক্ত ব্যক্তিগত ব্যবহারের ক্ষেত্র-B"
 
 # msgstr "অন্যান্য তীরচিহ্ন (Arrow-A)"
-#: ../gucharmap/unicode-scripts.h:25
+#: ../gucharmap/unicode-scripts.h:26
 msgid "Braille"
 msgstr "ব্রেইল"
 
-#: ../gucharmap/unicode-scripts.h:28
+#: ../gucharmap/unicode-scripts.h:29
 msgid "Canadian Aboriginal"
 msgstr "ক্যানাডিয়ান আবোরিজিনাল"
 
-#: ../gucharmap/unicode-scripts.h:36
+#: ../gucharmap/unicode-scripts.h:38
 msgid "Cypriot"
 msgstr "সিপ্রিয়ট"
 
-#: ../gucharmap/unicode-scripts.h:45
+#: ../gucharmap/unicode-scripts.h:50
 msgid "Greek"
 msgstr "গ্রিক"
 
-#: ../gucharmap/unicode-scripts.h:48
+#: ../gucharmap/unicode-scripts.h:53
 msgid "Han"
 msgstr "হান"
 
 # msgstr "জর্জিয়"
-#: ../gucharmap/unicode-scripts.h:49
+#: ../gucharmap/unicode-scripts.h:54
 msgid "Hangul"
 msgstr "হাঙ্গুল"
 
-#: ../gucharmap/unicode-scripts.h:54
+#: ../gucharmap/unicode-scripts.h:59
 msgid "Inherited"
 msgstr "উত্তরলব্ধ"
 
 # msgstr "প্রথমে যে ফন্টটি ব্যবহৃত হবে; যেমন: 'Serif 27'"
-#: ../gucharmap/unicode-scripts.h:65
+#: ../gucharmap/unicode-scripts.h:72
 msgid "Latin"
 msgstr "লাতিন"
 
 # msgstr "বিশেষ"
-#: ../gucharmap/unicode-scripts.h:68
+#: ../gucharmap/unicode-scripts.h:76
 msgid "Linear B"
 msgstr "লিনিয়ার B"
 
-#: ../gucharmap/unicode-scripts.h:90
+#: ../gucharmap/unicode-scripts.h:109
 msgid "Phags Pa"
 msgstr "ফাগস পা"
 
-#: ../gucharmap/unicode-scripts.h:117
+#: ../gucharmap/unicode-scripts.h:140
 msgid "Yi"
 msgstr "ইয়ি"
 
-# msgstr "অজ্ঞাত অক্ষর, সনাক্ত করা সম্ভব হয় নি।"
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:1
-msgid "Character map grouping method"
-msgstr "অক্ষর মালার শ্রেণীনির্মাণের পদ্ধতি"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:2
-msgid ""
-"This is how the characters in the character map are grouped. The characters "
-"can either be grouped by 'script' or 'block'."
-msgstr ""
-"অক্ষরের ম্যাপের মধ্যে উপস্থিত অক্ষরগুলি চিহ্নিত পদ্ধতিতে শ্রেণীভুক্ত করা হয়। "
-"'script' অথবা 'block' অনুযায়ী অক্ষর শ্রণীভুক্ত করা হবে।"
-
-# msgstr "অজ্ঞাত অক্ষর, সনাক্ত করা সম্ভব হয় নি।"
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
-msgid "Character map font description"
-msgstr "অক্ষরের বিন্যাসের ফন্টের বিবরণ"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:4
-msgid ""
-"The font to use for the character map. If set to 'nothing' then the default "
-"is the system font with the size doubled. Otherwise it should be a font "
-"description string like 'Sans 24'."
-msgstr ""
-"অক্ষরের ম্যাপের জন্য ব্যবহারযোগ্য ফন্ট। 'nothing' নির্ধারণ করা হলে দুগুন "
-"মাপে সিস্টেমের ডিফল্ট ফন্ট ব্যবহার করা হয়। অন্যথা  'Sans 24'-র অনুরূপ "
-"পংক্তিতে ফন্টের বর্ণনা লেখা আবশ্যক।"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:5
-msgid "Snap number of columns to a power of two"
-msgstr "দুইয়ের ঘাত অনুযায়ী কলাম স্ন্যাপ করা হবে"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:6
-msgid ""
-"The number of columns in the character map grid is determined by the width "
-"of the window. If this setting is 'true' then the value will be forced to "
-"the nearest power of two."
-msgstr ""
-"অক্ষরের ম্যাপের গ্রিডের মধ্যে উপস্থিত কলামের সংখ্যা উইন্ডোর প্রস্থ অনুযায়ী "
-"নির্ধারণ করা হয়। মান 'true' হলে, নিকটতম দুইয়ের ঘাতের সংখ্যা বাধ্যতামূলকভাবে "
-"ব্যবহার করা হবে।"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:7
-msgid "Last selected character"
-msgstr "সর্বশেষ নির্বাচিত অক্ষর"
-
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:8
-msgid ""
-"This is the last character that was selected in the character map (and will "
-"be selected again when the character map is next started).\n"
-"\n"
-"By default, it is the first letter of the alphabet in the current locale."
-msgstr ""
-"অক্ষরের ম্যাপ থেকে সর্বশেষ এই অক্ষরটি নির্বাচন করা হয়েছিল (এবং অক্ষরের ম্যাপ "
-"পরবর্তীবার আরম্ভ করা হলে এটি পুনরায় নির্বাচিত হবে)।\n"
-"\n"
-"ডিফল্টরূপে, বর্তমানে লোকেইলের প্রথম অক্ষরটি ব্যবহার করা হয়।"
-
-#. The unicode code point of the first letter of the alphabet
-#: ../gucharmap/org.gnome.Charmap.gschema.xml.h:12
-msgctxt "First letter"
-msgid "0x41"
-msgstr "0x41"
