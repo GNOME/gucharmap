@@ -66,7 +66,6 @@ gucharmap_chapters_view_init (GucharmapChaptersView *view)
   column = priv->column = gtk_tree_view_column_new ();
   gtk_tree_view_column_pack_start (column, cell, FALSE);
   gtk_tree_view_column_add_attribute (column, cell, "text", GUCHARMAP_CHAPTERS_MODEL_COLUMN_LABEL);
-  gtk_tree_view_column_set_sort_column_id (column, GUCHARMAP_CHAPTERS_MODEL_COLUMN_LABEL);
   gtk_tree_view_append_column (tree_view, column);
 
   selection = gtk_tree_view_get_selection (tree_view);
@@ -125,9 +124,6 @@ gucharmap_chapters_view_set_model (GucharmapChaptersView *view,
     return;
 
   gtk_tree_view_column_set_title (priv->column, gucharmap_chapters_model_get_title (model));
-  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (model),
-                                        GUCHARMAP_CHAPTERS_MODEL_COLUMN_LABEL,
-                                        GTK_SORT_ASCENDING);
 
   /* Need to re-set this here since it's set to -1 when the tree view model changes! */
   gtk_tree_view_set_search_column (tree_view, GUCHARMAP_CHAPTERS_MODEL_COLUMN_LABEL);

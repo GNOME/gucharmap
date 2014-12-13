@@ -51,6 +51,10 @@ gucharmap_script_chapters_model_init (GucharmapScriptChaptersModel *model)
                           -1);
     }
   g_free (unicode_scripts);
+
+  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (model),
+                                        GUCHARMAP_CHAPTERS_MODEL_COLUMN_LABEL,
+                                        GTK_SORT_ASCENDING);
 }
 
 static GucharmapCodepointList *
