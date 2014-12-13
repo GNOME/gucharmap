@@ -27,26 +27,6 @@
 #include "gucharmap.h"
 #include "gucharmap-private.h"
 
-static int
-compare_iters (GtkTreeModel *model,
-               GtkTreeIter *iter_a,
-               GtkTreeIter *iter_b,
-               gpointer user_data)
-{
-  char *label_a, *label_b;
-  int ret;
-
-  gtk_tree_model_get (model, iter_a, GUCHARMAP_CHAPTERS_MODEL_COLUMN_LABEL, &label_a, -1);
-  gtk_tree_model_get (model, iter_b, GUCHARMAP_CHAPTERS_MODEL_COLUMN_LABEL, &label_b, -1);
-
-  ret = g_utf8_collate (label_a, label_b);
-
-  g_free (label_a);
-  g_free (label_b);
-
-  return ret;
-}
-
 static void
 gucharmap_script_chapters_model_init (GucharmapScriptChaptersModel *model)
 {
@@ -71,11 +51,6 @@ gucharmap_script_chapters_model_init (GucharmapScriptChaptersModel *model)
                           -1);
     }
   g_free (unicode_scripts);
-
-  gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (model),
-                                   GUCHARMAP_CHAPTERS_MODEL_COLUMN_LABEL,
-                                   (GtkTreeIterCompareFunc) compare_iters,
-                                   NULL, NULL);
 }
 
 static GucharmapCodepointList *

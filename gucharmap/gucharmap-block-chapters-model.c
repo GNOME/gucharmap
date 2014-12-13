@@ -56,7 +56,7 @@ compare_iters (GtkTreeModel *model,
   gtk_tree_model_get (model, iter_a, BLOCK_CHAPTERS_MODEL_LABEL, &label_a, -1);
   gtk_tree_model_get (model, iter_b, BLOCK_CHAPTERS_MODEL_LABEL, &label_b, -1);
 
-  ret = g_utf8_collate (label_a, label_b);
+  ret = strcmp (label_a, label_b);
 
   g_free (label_a);
   g_free (label_b);
