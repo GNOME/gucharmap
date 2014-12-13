@@ -27,42 +27,11 @@
 
 enum 
 {
-  BLOCK_CHAPTERS_MODEL_ID = GUCHARMAP_CHAPTERS_MODEL_COLUMN_ID,
-  BLOCK_CHAPTERS_MODEL_LABEL = GUCHARMAP_CHAPTERS_MODEL_COLUMN_LABEL,
-  BLOCK_CHAPTERS_MODEL_UNICODE_BLOCK_PTR = 2,
+  BLOCK_CHAPTERS_MODEL_ID = 0,
+  BLOCK_CHAPTERS_MODEL_LABEL,
+  BLOCK_CHAPTERS_MODEL_UNICODE_BLOCK_PTR,
   BLOCK_CHAPTERS_MODEL_NUM_COLUMNS
 };
-
-static int
-compare_iters (GtkTreeModel *model,
-               GtkTreeIter *iter_a,
-               GtkTreeIter *iter_b,
-               gpointer user_data)
-{
-  UnicodeBlock *block_a, *block_b;
-  char *label_a, *label_b;
-  int ret;
-
-  gtk_tree_model_get (model, iter_a, BLOCK_CHAPTERS_MODEL_UNICODE_BLOCK_PTR, &block_a, -1);
-  gtk_tree_model_get (model, iter_b, BLOCK_CHAPTERS_MODEL_UNICODE_BLOCK_PTR, &block_b, -1);
-
-  if (block_a == NULL && block_b != NULL)
-    return -1;
-  else if (block_a != NULL && block_b == NULL)
-    return 1;
-  else if (block_a == NULL && block_b == NULL)
-    return 0;
-
-  gtk_tree_model_get (model, iter_a, BLOCK_CHAPTERS_MODEL_LABEL, &label_a, -1);
-  gtk_tree_model_get (model, iter_b, BLOCK_CHAPTERS_MODEL_LABEL, &label_b, -1);
-
-  ret = strcmp (label_a, label_b);
-
-  g_free (label_a);
-  g_free (label_b);
-
-  return ret;
-}
 
 static void
 gucharmap_block_chapters_model_init (GucharmapBlockChaptersModel *model)
@@ -98,14 +67,6 @@ gucharmap_block_chapters_model_init (GucharmapBlockChaptersModel *model)
                           BLOCK_CHAPTERS_MODEL_UNICODE_BLOCK_PTR, unicode_blocks + i,
                           -1);
     }
-
-  gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (model),
-                                   GUCHARMAP_CHAPTERS_MODEL_COLUMN_LABEL,
-                                   (GtkTreeIterCompareFunc) compare_iters,
-                                   NULL, NULL);
-  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (model),
-                                        GUCHARMAP_CHAPTERS_MODEL_COLUMN_LABEL,
-                                        GTK_SORT_ASCENDING);
 }
 
 static GucharmapCodepointList *
@@ -143,41 +104,28 @@ character_to_iter (GucharmapChaptersModel *chapters,
                    GtkTreeIter       *_iter)
 {
   GtkTreeModel *model = GTK_TREE_MODEL (chapters);
-  GtkTreeIter iter, all_iter;
-  gboolean all_iter_set = TRUE;
+  GtkTreeIter iter;
 
   if (wc > UNICHAR_MAX)
     return FALSE;
 
+  /* skip "All" block */
   if (!gtk_tree_model_get_iter_first (model, &iter))
     return FALSE;
 
-  do
+  while (gtk_tree_model_iter_next (model, &iter))
     {
       UnicodeBlock *unicode_block;
-
       gtk_tree_model_get (model, &iter, BLOCK_CHAPTERS_MODEL_UNICODE_BLOCK_PTR, &unicode_block, -1);
-
-      /* skip "All" block */
-      if (unicode_block == NULL)
-        {
-          all_iter = iter;
-          all_iter_set = TRUE;
-          continue;
-        }
-
       if (wc >= unicode_block->start && wc <= unicode_block->end)
         {
           *_iter = iter;
           return TRUE;
         }
     }
-  while (gtk_tree_model_iter_next (model, &iter));
 
   /* "All" is the last resort */
-  g_assert (all_iter_set);
-  *_iter = all_iter;
-  return TRUE;
+  return gtk_tree_model_get_iter_first (model, _iter);
 }
 
 static void
