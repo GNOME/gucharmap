@@ -1,41 +1,49 @@
-# translation of eu.po to Basque
+# Basque translation of gucharmap.
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
-#
 #
 # Hizkuntza Politikarako Sailburuordetza <hizkpol@ej-gv.es>, 2005.
 # Iñaki Larrañaga Murgoitio <dooteo@zundan.com>, 2006, 2008, 2009, 2010, 2011.
 # Iñaki Larrañaga Murgoitio <dooteo@zundan.com>, 2012, 2013, 2014.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: eu\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-07 13:55+0200\n"
-"PO-Revision-Date: 2014-08-07 13:59+0200\n"
+"Project-Id-Version: gucharmap master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=gucharmap&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2014-12-30 16:42+0100\n"
+"PO-Revision-Date: 2014-12-05 23:52+0100\n"
 "Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@zundan.com>\n"
 "Language-Team: Basque <librezale@librezale.org>\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.4\n"
+"X-Generator: Lokalize 1.5\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"\n"
 
-#: ../data/gucharmap.appdata.xml.in.h:1
+#: ../data/gucharmap.appdata.xml.in.h:1 ../gucharmap.desktop.in.in.h:1
+#: ../gucharmap/gucharmap-window.c:759 ../gucharmap/main.c:236
+msgid "Character Map"
+msgstr "Karaktere-mapa"
+
+#: ../data/gucharmap.appdata.xml.in.h:2 ../gucharmap.desktop.in.in.h:2
+msgid "Insert special characters into documents"
+msgstr "Txertatu karaktere bereziak dokumentuetan"
+
+#: ../data/gucharmap.appdata.xml.in.h:3
 msgid ""
-"Gucharmap (\"GNOME Character Map\") is a Unicode character map program, part "
-"of GNOME desktop. This program allows characters to be displayed by unicode "
-"block or script type. It includes brief descriptions of related characters "
-"and occasionally meanings of the character in question."
+"GNOME Character Map is a Unicode character map program, part of GNOME "
+"desktop. This program allows characters to be displayed by unicode block or "
+"script type. It includes brief descriptions of related characters and "
+"occasionally meanings of the character in question."
 msgstr ""
-"Gucharmap (\"GNOMEren Karaktere Mapa\") Unicode karaktere-maparen programa "
-"bat da, GNOME mahaigainaren zati. Programa honek karaktereak Unicode "
-"blokeetan edo idazketa motan bistaratzea baimentzen du. Honek zerikusia "
-"duten karaktereen azalpen labur batzuk ditu, eta batzuetan karaktere beraren "
-"azalpenak."
+"GNOMEren Karaktere Mapa Unicode karaktere-maparen programa bat da, GNOME "
+"mahaigainaren zati. Programa honek karaktereak Unicode blokeetan edo "
+"idazketa motan bistaratzea baimentzen du. Honek zerikusia duten karaktereen "
+"azalpen labur batzuk ditu, eta batzuetan karaktere beraren azalpenak."
 
-#: ../data/gucharmap.appdata.xml.in.h:2
+#: ../data/gucharmap.appdata.xml.in.h:4
 msgid ""
 "Gucharmap can also be used to input or enter characters (by copy and paste). "
 "The search functionality allows the use of several search methods, including "
@@ -46,24 +54,15 @@ msgstr ""
 "erabiltzea baimentzen dizu, unicode izenaren edo  karakterearen kodearen "
 "puntuaren arabera."
 
-#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:760
-#: ../gucharmap/main.c:236
-msgid "Character Map"
-msgstr "Karaktere-mapa"
-
-#: ../gucharmap.desktop.in.in.h:2
-msgid "Insert special characters into documents"
-msgstr "Txertatu karaktere bereziak dokumentuetan"
-
 #: ../gucharmap.desktop.in.in.h:3
 msgid "font;unicode;"
 msgstr "letra-tipoa;unicode;"
 
-#: ../gucharmap/gucharmap-block-chapters-model.c:84
+#: ../gucharmap/gucharmap-block-chapters-model.c:53
 msgid "All"
 msgstr "Denak"
 
-#: ../gucharmap/gucharmap-block-chapters-model.c:187
+#: ../gucharmap/gucharmap-block-chapters-model.c:138
 msgid "Unicode Block"
 msgstr "Unicode blokea"
 
@@ -285,7 +284,7 @@ msgstr "Letra-familia"
 msgid "Font Size"
 msgstr "Letra-tamaina"
 
-#: ../gucharmap/gucharmap-script-chapters-model.c:155
+#: ../gucharmap/gucharmap-script-chapters-model.c:134
 msgid "Script"
 msgstr "Script-a"
 
@@ -560,11 +559,11 @@ msgid "Previous Block"
 msgstr "Aurreko blokea"
 
 #. Text to copy entry + button
-#: ../gucharmap/gucharmap-window.c:791
+#: ../gucharmap/gucharmap-window.c:790
 msgid "_Text to copy:"
 msgstr "_Kopiatzeko testua:"
 
-#: ../gucharmap/gucharmap-window.c:798
+#: ../gucharmap/gucharmap-window.c:797
 msgid "Copy to the clipboard."
 msgstr "Kopiatu arbelean."
 
