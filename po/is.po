@@ -11,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gucharmap&keywords=I18N+L10N&component=general\n"
 "POT-Creation-Date: 2014-08-21 09:30+0000\n"
-"PO-Revision-Date: 2015-01-15 15:55+0000\n"
+"PO-Revision-Date: 2015-01-22 11:46+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic <translation-team-is@lists.sourceforge.net>\n"
 "Language: is\n"
@@ -37,6 +37,10 @@ msgid ""
 "script type. It includes brief descriptions of related characters and "
 "occasionally meanings of the character in question."
 msgstr ""
+"GNOME Gucharmap stafatafla er Unicode stafatöfluforrit (character map), hluti "
+"af GNOME skjáborðsumhverfinu. Þetta forrit gerir kleift að skoða stafi eftir "
+"unicode blokkum eða tegund skriftar. Það inniheldur stuttar lýsingar á "
+"skyldum stöfum og stundum einnig útskýringar á meiningu stafanna."
 
 #: ../data/gucharmap.appdata.xml.in.h:4
 msgid ""
@@ -44,6 +48,9 @@ msgid ""
 "The search functionality allows the use of several search methods, including "
 "by unicode name or code point of the character."
 msgstr ""
+"Gucharmap má einnig nota til að setja inn stafi (skrifa/afrita/líma). "
+"Leitarmöguleikar gefa kost á að leita á ýmsa vegu, meðal annars eftir "
+"Unicode-heiti eða eftir kóðapunkti stafs."
 
 #: ../gucharmap.desktop.in.in.h:3
 msgid "font;unicode;"
@@ -181,7 +188,7 @@ msgstr "Fann staf."
 
 #: ../gucharmap/gucharmap-menus.ui.h:1
 msgid "By _Script"
-msgstr "Eftir _skriftu"
+msgstr "Eftir _skrift"
 
 #: ../gucharmap/gucharmap-menus.ui.h:2
 msgid "By _Unicode Block"
@@ -278,7 +285,7 @@ msgstr "Leturstærð"
 
 #: ../gucharmap/gucharmap-script-chapters-model.c:155
 msgid "Script"
-msgstr "Skrifta"
+msgstr "Skrift"
 
 #  Unicode assigns "Common" as the script name for any character not
 #  * specifically listed in Scripts.txt
@@ -545,11 +552,11 @@ msgstr ""
 
 #: ../gucharmap/gucharmap-window.c:547
 msgid "Next Script"
-msgstr "Næsta skrifta"
+msgstr "Næsta skrift"
 
 #: ../gucharmap/gucharmap-window.c:547
 msgid "Previous Script"
-msgstr "Fyrri skrifta"
+msgstr "Fyrri skrift"
 
 #: ../gucharmap/gucharmap-window.c:552
 msgid "Next Block"
@@ -595,6 +602,8 @@ msgid ""
 "This is how the characters in the character map are grouped. The characters "
 "can either be grouped by 'script' or 'block'."
 msgstr ""
+"Þetta er hvernig stafir í stafatöflunni eru hópaðir. Stafirnir geta verið "
+"hópaðir eftir 'skrift' or 'blokk'."
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
 #| msgid "Character found."
@@ -607,6 +616,9 @@ msgid ""
 "is the system font with the size doubled. Otherwise it should be a font "
 "description string like 'Sans 24'."
 msgstr ""
+"Letrið sem á að nota fyrir stafatöfluna. Ef ekkert er sett, mun sjálfgefið "
+"kerfisletur verða notað. Annars á að vera þarna leturlýsing á borð við 'Sans "
+"24'."
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:5
 #| msgid "Snap _Columns to Power of Two"
@@ -863,7 +875,7 @@ msgstr "Tai Tham"
 #: ../gucharmap/unicode-blocks.h:69
 #| msgid "Combining Diacritical Marks"
 msgid "Combining Diacritical Marks Extended"
-msgstr ""
+msgstr "Viðauki samsettra broddstafamerkja"
 
 #: ../gucharmap/unicode-blocks.h:70 ../gucharmap/unicode-scripts.h:19
 msgid "Balinese"
@@ -1415,7 +1427,7 @@ msgstr "Forn suður-arabíska"
 
 #: ../gucharmap/unicode-blocks.h:203 ../gucharmap/unicode-scripts.h:99
 msgid "Old North Arabian"
-msgstr ""
+msgstr "Forn norður-arabíska"
 
 #: ../gucharmap/unicode-blocks.h:204 ../gucharmap/unicode-scripts.h:83
 msgid "Manichaean"
@@ -1427,11 +1439,11 @@ msgstr "Avestan"
 
 #: ../gucharmap/unicode-blocks.h:206 ../gucharmap/unicode-scripts.h:61
 msgid "Inscriptional Parthian"
-msgstr "Parthian skrift"
+msgstr "Parthian grafskrift"
 
 #: ../gucharmap/unicode-blocks.h:207 ../gucharmap/unicode-scripts.h:60
 msgid "Inscriptional Pahlavi"
-msgstr "Pahlavi skrift"
+msgstr "Pahlavi grafskrift"
 
 #: ../gucharmap/unicode-blocks.h:208 ../gucharmap/unicode-scripts.h:111
 msgid "Psalter Pahlavi"
@@ -1530,15 +1542,15 @@ msgstr "Bamum viðauki"
 
 #: ../gucharmap/unicode-blocks.h:231 ../gucharmap/unicode-scripts.h:91
 msgid "Mro"
-msgstr ""
+msgstr "Mro"
 
 #: ../gucharmap/unicode-blocks.h:232 ../gucharmap/unicode-scripts.h:21
 msgid "Bassa Vah"
-msgstr ""
+msgstr "Bassa Vah"
 
 #: ../gucharmap/unicode-blocks.h:233 ../gucharmap/unicode-scripts.h:106
 msgid "Pahawh Hmong"
-msgstr ""
+msgstr "Pahawh Hmong"
 
 #: ../gucharmap/unicode-blocks.h:234 ../gucharmap/unicode-scripts.h:88
 msgid "Miao"
@@ -1551,7 +1563,7 @@ msgstr "Kana viðauki"
 
 #: ../gucharmap/unicode-blocks.h:236 ../gucharmap/unicode-scripts.h:42
 msgid "Duployan"
-msgstr ""
+msgstr "Duployan"
 
 #: ../gucharmap/unicode-blocks.h:237
 msgid "Shorthand Format Controls"
@@ -1583,7 +1595,7 @@ msgstr "Stærðfræðileg leturtákn"
 
 #: ../gucharmap/unicode-blocks.h:244 ../gucharmap/unicode-scripts.h:85
 msgid "Mende Kikakui"
-msgstr ""
+msgstr "Mende Kikakui"
 
 #: ../gucharmap/unicode-blocks.h:245
 #| msgid "Mathematical Alphanumeric Symbols"
@@ -1615,7 +1627,7 @@ msgstr "Umlukt leturtákn - viðauki"
 #: ../gucharmap/unicode-blocks.h:251
 #| msgid "Miscellaneous Symbols and Arrows"
 msgid "Miscellaneous Symbols and Pictographs"
-msgstr ""
+msgstr "Ýmis tákn og myndmerki"
 
 #: ../gucharmap/unicode-blocks.h:252
 msgid "Emoticons"
@@ -1623,7 +1635,7 @@ msgstr "Tjáningartákn"
 
 #: ../gucharmap/unicode-blocks.h:253
 msgid "Ornamental Dingbats"
-msgstr ""
+msgstr "Dingbats skreytitákn"
 
 #: ../gucharmap/unicode-blocks.h:254
 #| msgid "Tai Xuan Jing Symbols"
