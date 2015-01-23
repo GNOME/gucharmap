@@ -244,6 +244,9 @@ main (int argc, char **argv)
 
   g_application_register (G_APPLICATION (application), NULL, NULL);
 
+  /* Gucharmap doesn't work right with the dark theme, see #741939 */
+  g_object_set (gtk_settings_get_default (), "gtk-application-prefer-dark-theme", FALSE, NULL);
+
   window = gucharmap_window_new (application);
 
   screen = gtk_window_get_screen (GTK_WINDOW (window));
