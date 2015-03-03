@@ -1102,6 +1102,8 @@ gucharmap_charmap_init (GucharmapCharmap *charmap)
                                   GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
   gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolled_window),
                                        GTK_SHADOW_NONE);
+  gtk_scrolled_window_set_overlay_scrolling (GTK_SCROLLED_WINDOW (scrolled_window),
+                                             FALSE);
 
   chartable = gucharmap_chartable_new ();
   priv->chartable = GUCHARMAP_CHARTABLE (chartable);
