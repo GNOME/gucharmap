@@ -231,6 +231,7 @@ CC_CHECK_CFLAGS_APPEND([ \
   -Wstrict-aliasing=2 -Winit-self -Wunsafe-loop-optimizations \
   -Wdeclaration-after-statement -Wold-style-definition \
   -Wno-missing-field-initializers -Wno-unused-parameter \
+  -Wformat-signedness \
   -fno-common -Wno-switch-enum])
 
 # ********
