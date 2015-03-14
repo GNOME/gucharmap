@@ -1,36 +1,50 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Victor Ibragimov <victor.ibragimov@gmail.com>, 2013.
+# Victor Ibragimov <victor.ibragimov@gmail.com>, 2013, 2014, 2015
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Tajik Gnome\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gucharmap&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-04-25 09:00+0000\n"
-"PO-Revision-Date: 2014-04-25 17:02+0500\n"
+"POT-Creation-Date: 2015-03-13 22:30+0000\n"
+"PO-Revision-Date: 2015-03-14 11:30+0500\n"
 "Last-Translator: Victor Ibragimov <victor.ibragimov@gmail.com>\n"
 "Language-Team: \n"
 "Language: tg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.4\n"
+"X-Generator: Poedit 1.6.5\n"
 
-#: ../data/gucharmap.appdata.xml.in.h:1
+#: ../data/gucharmap.appdata.xml.in.h:1 ../gucharmap.desktop.in.in.h:1
+#: ../gucharmap/gucharmap-window.c:759 ../gucharmap/main.c:236
+msgid "Character Map"
+msgstr "Ҷадвали аломатҳо"
+
+#: ../data/gucharmap.appdata.xml.in.h:2 ../gucharmap.desktop.in.in.h:2
+msgid "Insert special characters into documents"
+msgstr "Дарҷ кардани аломатҳои махсус дар ҳуҷҷатҳо"
+
+#: ../data/gucharmap.appdata.xml.in.h:3
+#| msgid ""
+#| "Gucharmap (\"GNOME Character Map\") is a Unicode character map program, "
+#| "part of GNOME desktop. This program allows characters to be displayed by "
+#| "unicode block or script type. It includes brief descriptions of related "
+#| "characters and occasionally meanings of the character in question."
 msgid ""
-"Gucharmap (\"GNOME Character Map\") is a Unicode character map program, part "
-"of GNOME desktop. This program allows characters to be displayed by unicode "
-"block or script type. It includes brief descriptions of related characters "
-"and occasionally meanings of the character in question."
+"GNOME Character Map is a Unicode character map program, part of GNOME "
+"desktop. This program allows characters to be displayed by unicode block or "
+"script type. It includes brief descriptions of related characters and "
+"occasionally meanings of the character in question."
 msgstr ""
-"Gucharmap (\"Харитаи аломатҳои GNOME\") - ин барномаи харитаи аломатҳои "
-"Юникод барои мизи кории GNOME аст. Ин барнома барои намоиш додани аломатҳо "
-"аз рӯи ҷадвали Юникод ё навъи скрипт имкон медиҳад. Ин барнома инчунин "
-"аломатҳои марбут ва ба қадри имкон аломатҳои саволдорро тавсиф мекунад."
+"Харитаи аломатҳои GNOME- ин барномаи харитаи аломатҳои Юникод барои мизи "
+"кории GNOME аст. Ин барнома барои намоиш додани аломатҳо аз рӯи ҷадвали "
+"Юникод ё навъи скрипт имкон медиҳад. Ин барнома инчунин аломатҳои марбут ва "
+"ба қадри имкон аломатҳои саволдорро тавсиф мекунад."
 
-#: ../data/gucharmap.appdata.xml.in.h:2
+#: ../data/gucharmap.appdata.xml.in.h:4
 msgid ""
 "Gucharmap can also be used to input or enter characters (by copy and paste). "
 "The search functionality allows the use of several search methods, including "
@@ -41,24 +55,15 @@ msgstr ""
 "Қобилияти ҷустуҷӯ имкон медиҳад, то ки тавонед якчанд усули ҷустуҷӯиро, аз "
 "ҷумла аз рӯи номи юникод ё нуқтаи рамзи аломат, истифода баред."
 
-#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:760
-#: ../gucharmap/main.c:236
-msgid "Character Map"
-msgstr "Ҷадвали аломатҳо"
-
-#: ../gucharmap.desktop.in.in.h:2
-msgid "Insert special characters into documents"
-msgstr "Дарҷ кардани аломатҳои махсус дар ҳуҷҷатҳо"
-
 #: ../gucharmap.desktop.in.in.h:3
 msgid "font;unicode;"
 msgstr "шрифт;юникод;"
 
-#: ../gucharmap/gucharmap-block-chapters-model.c:84
+#: ../gucharmap/gucharmap-block-chapters-model.c:53
 msgid "All"
 msgstr "Ҳама"
 
-#: ../gucharmap/gucharmap-block-chapters-model.c:187
+#: ../gucharmap/gucharmap-block-chapters-model.c:138
 msgid "Unicode Block"
 msgstr "Манъи юникод"
 
@@ -159,11 +164,11 @@ msgstr "Шеваи танги хитоӣ:"
 msgid "Korean Pronunciation:"
 msgstr "Шеваи кореягӣ"
 
-#: ../gucharmap/gucharmap-charmap.c:1125
+#: ../gucharmap/gucharmap-charmap.c:1127
 msgid "Characte_r Table"
 msgstr "Ҷадвали алома_т"
 
-#: ../gucharmap/gucharmap-charmap.c:1172
+#: ../gucharmap/gucharmap-charmap.c:1174
 msgid "Character _Details"
 msgstr "Тафсилоти _аломат"
 
@@ -280,7 +285,7 @@ msgstr "Гурӯҳи шрифт"
 msgid "Font Size"
 msgstr "Андозаи шрифт"
 
-#: ../gucharmap/gucharmap-script-chapters-model.c:155
+#: ../gucharmap/gucharmap-script-chapters-model.c:134
 msgid "Script"
 msgstr "Скрипт"
 
@@ -529,7 +534,6 @@ msgid "GNOME Character Map"
 msgstr "Харитаи аломати GNOME"
 
 #: ../gucharmap/gucharmap-window.c:449
-#| msgid "Based on the Unicode Character Database 6.3.0"
 msgid "Based on the Unicode Character Database 7.0.0"
 msgstr "Дар асоси пойгоҳи иттилоотии аломати Юникоди 7.0.0 кор мекунад"
 
@@ -554,11 +558,11 @@ msgid "Previous Block"
 msgstr "Блоки гузашта"
 
 #. Text to copy entry + button
-#: ../gucharmap/gucharmap-window.c:791
+#: ../gucharmap/gucharmap-window.c:790
 msgid "_Text to copy:"
 msgstr "_Матн барои нусхабардорӣ:"
 
-#: ../gucharmap/gucharmap-window.c:798
+#: ../gucharmap/gucharmap-window.c:797
 msgid "Copy to the clipboard."
 msgstr "Нусха бардоштан ба ҳофизаи муваққатӣ."
 
@@ -861,7 +865,6 @@ msgid "Tai Tham"
 msgstr "Тай там"
 
 #: ../gucharmap/unicode-blocks.h:69
-#| msgid "Combining Diacritical Marks"
 msgid "Combining Diacritical Marks Extended"
 msgstr "Қайдҳои васеъшудаи диакритикии омехта"
 
@@ -1178,7 +1181,6 @@ msgid "Javanese"
 msgstr "Явагӣ"
 
 #: ../gucharmap/unicode-blocks.h:148
-#| msgid "Myanmar Extended-A"
 msgid "Myanmar Extended-B"
 msgstr "Мянмаи васеъшуда-В"
 
@@ -1203,7 +1205,6 @@ msgid "Ethiopic Extended-A"
 msgstr "Густурдаи эфиопӣ-A"
 
 #: ../gucharmap/unicode-blocks.h:154
-#| msgid "Latin Extended-A"
 msgid "Latin Extended-E"
 msgstr "Лотинии васеъшудаи-Е"
 
@@ -1324,7 +1325,6 @@ msgid "Gothic"
 msgstr "Готӣ"
 
 #: ../gucharmap/unicode-blocks.h:184 ../gucharmap/unicode-scripts.h:100
-#| msgid "Old Persian"
 msgid "Old Permic"
 msgstr "Пермики Қадим"
 
@@ -1357,7 +1357,6 @@ msgid "Caucasian Albanian"
 msgstr "Албании қафқозӣ"
 
 #: ../gucharmap/unicode-blocks.h:192 ../gucharmap/unicode-scripts.h:75
-#| msgid "Linear B"
 msgid "Linear A"
 msgstr "Хаттии А"
 
@@ -1402,7 +1401,6 @@ msgid "Old South Arabian"
 msgstr "Арабии қадимаи ҷанубӣ"
 
 #: ../gucharmap/unicode-blocks.h:203 ../gucharmap/unicode-scripts.h:99
-#| msgid "Old South Arabian"
 msgid "Old North Arabian"
 msgstr "Арабии қадимаи шимолӣ"
 
@@ -1423,7 +1421,6 @@ msgid "Inscriptional Pahlavi"
 msgstr "Паҳлавии катибавӣ"
 
 #: ../gucharmap/unicode-blocks.h:208 ../gucharmap/unicode-scripts.h:111
-#| msgid "Inscriptional Pahlavi"
 msgid "Psalter Pahlavi"
 msgstr "Паҳлавии китобӣ"
 
@@ -1596,7 +1593,6 @@ msgid "Enclosed Ideographic Supplement"
 msgstr "Иловаҳои идеографии ҳамроҳшуда"
 
 #: ../gucharmap/unicode-blocks.h:251
-#| msgid "Miscellaneous Symbols And Pictographs"
 msgid "Miscellaneous Symbols and Pictographs"
 msgstr "Рамзҳо ва пиктографҳои гуногун"
 
@@ -1609,7 +1605,6 @@ msgid "Ornamental Dingbats"
 msgstr "Аломатҳои ороиш"
 
 #: ../gucharmap/unicode-blocks.h:254
-#| msgid "Transport And Map Symbols"
 msgid "Transport and Map Symbols"
 msgstr "Рамзҳои нақлиёт ва харита"
 
@@ -1618,12 +1613,10 @@ msgid "Alchemical Symbols"
 msgstr "Рамзҳои кимиёвӣ"
 
 #: ../gucharmap/unicode-blocks.h:256
-#| msgid "Geometric Shapes"
 msgid "Geometric Shapes Extended"
 msgstr "Шаклҳои васеъшудаи геометрӣ"
 
 #: ../gucharmap/unicode-blocks.h:257
-#| msgid "Supplemental Arrows-A"
 msgid "Supplemental Arrows-C"
 msgstr "Тирҳои иловагӣ-С"
 
