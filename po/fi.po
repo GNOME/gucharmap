@@ -13,58 +13,65 @@
 # Ilkka Tuohela <hile@iki.fi>, 2002 - 2003, 2009.
 # Sami Pesonen <sampeson@iki.fi>, 2003.
 # Tommi Vainikainen <Tommi.Vainikainen@iki.fi>, 2004-2011.
-# Jiri Grönroos <jiri.gronroos+l10n@iki.fi>, 2012, 2013.
 # Lasse Liehu <lasse.liehu@gmail.com>, 2014.
+# Jiri Grönroos <jiri.gronroos+l10n@iki.fi>, 2012, 2013, 2015.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gucharmap&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-08-08 21:14+0000\n"
-"PO-Revision-Date: 2014-08-09 13:13+0300\n"
-"Last-Translator: Lasse Liehu <lasse.liehu@gmail.com>\n"
-"Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
+"POT-Creation-Date: 2015-03-15 10:23+0000\n"
+"PO-Revision-Date: 2015-03-15 23:02+0200\n"
+"Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
+"Language-Team: suomi <gnome-fi-laatu@lists.sourceforge.net>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-POT-Import-Date: 2012-02-19 15:25:15+0000\n"
-"X-Generator: Lokalize 1.5\n"
+"X-Generator: Gtranslator 2.91.6\n"
 
-#: ../data/gucharmap.appdata.xml.in.h:1
+#: ../data/gucharmap.appdata.xml.in.h:1 ../gucharmap.desktop.in.in.h:1
+#: ../gucharmap/gucharmap-window.c:759 ../gucharmap/main.c:236
+msgid "Character Map"
+msgstr "Merkkikartta"
+
+#: ../data/gucharmap.appdata.xml.in.h:2 ../gucharmap.desktop.in.in.h:2
+msgid "Insert special characters into documents"
+msgstr "Lisää erikoismerkkejä asiakirjoihin"
+
+#: ../data/gucharmap.appdata.xml.in.h:3
 msgid ""
-"Gucharmap (\"GNOME Character Map\") is a Unicode character map program, part "
-"of GNOME desktop. This program allows characters to be displayed by unicode "
-"block or script type. It includes brief descriptions of related characters "
-"and occasionally meanings of the character in question."
+"GNOME Character Map is a Unicode character map program, part of GNOME "
+"desktop. This program allows characters to be displayed by unicode block or "
+"script type. It includes brief descriptions of related characters and "
+"occasionally meanings of the character in question."
 msgstr ""
+"Gnomen Merkkikartta on Unicode-merkistöjärjestelmän ohjelma, osa Gnome-"
+"työpöytää. Ohjelman avulla voit katsella merkkejä Unicode-lohkoina tai "
+"skriptityyppinä. Näet merkkien kuvaukset ja toisinaan merkkien tarkoitukset."
 
-#: ../data/gucharmap.appdata.xml.in.h:2
+#: ../data/gucharmap.appdata.xml.in.h:4
 msgid ""
 "Gucharmap can also be used to input or enter characters (by copy and paste). "
 "The search functionality allows the use of several search methods, including "
 "by unicode name or code point of the character."
 msgstr ""
-
-#: ../gucharmap.desktop.in.in.h:1 ../gucharmap/gucharmap-window.c:760
-#: ../gucharmap/main.c:236
-msgid "Character Map"
-msgstr "Merkkikartta"
-
-#: ../gucharmap.desktop.in.in.h:2
-msgid "Insert special characters into documents"
-msgstr "Lisää erikoismerkkejä asiakirjoihin"
+"Sen avulla voit syöttää tai tuottaa merkkejä leikepöydän kautta. Haku "
+"tarjoaa monia eri vaihtoehtoa, merkkejä voi etsiä Unicode-nimellä tai merkin "
+"koodimerkinnällä."
 
 #: ../gucharmap.desktop.in.in.h:3
 msgid "font;unicode;"
 msgstr "font;unicode;fontti;kirjasin;"
 
-#: ../gucharmap/gucharmap-block-chapters-model.c:84
+#: ../gucharmap/gucharmap-block-chapters-model.c:53
 msgid "All"
 msgstr "Kaikki"
 
-#: ../gucharmap/gucharmap-block-chapters-model.c:187
+#: ../gucharmap/gucharmap-block-chapters-model.c:138
 msgid "Unicode Block"
 msgstr "Unicode-lohko"
 
@@ -165,11 +172,11 @@ msgstr "Tang-ääntäminen:"
 msgid "Korean Pronunciation:"
 msgstr "Korealainen ääntäminen:"
 
-#: ../gucharmap/gucharmap-charmap.c:1125
+#: ../gucharmap/gucharmap-charmap.c:1127
 msgid "Characte_r Table"
 msgstr "Merkki_kartta"
 
-#: ../gucharmap/gucharmap-charmap.c:1172
+#: ../gucharmap/gucharmap-charmap.c:1174
 msgid "Character _Details"
 msgstr "Merkin _yksityiskohdat"
 
@@ -286,7 +293,7 @@ msgstr "Fonttiperhe"
 msgid "Font Size"
 msgstr "Fontin koko"
 
-#: ../gucharmap/gucharmap-script-chapters-model.c:155
+#: ../gucharmap/gucharmap-script-chapters-model.c:134
 msgid "Script"
 msgstr "Kirjoitusjärjestelmä"
 
@@ -494,7 +501,7 @@ msgid ""
 "distribute, and/or sell copies."
 msgstr ""
 "Unicoden käyttöoikeudet antavat kenelle tahansa, joka hankkii käyttöönsä "
-"Unicode-datatiedostot, oikeuden käyttää niitä rajoituksitta, mukaanlukien "
+"Unicode-datatiedostot, oikeuden käyttää niitä rajoituksitta, mukaan lukien "
 "rajoittamattomat oikeudet käyttää, kopioida, muokata, liittää, julkaista, "
 "jakaa ja myydä kopioita."
 
@@ -508,7 +515,7 @@ msgstr ""
 "Gucharmapia ja Unicode-tiedostoja levitetään siinä toivossa, että ne "
 "olisivat hyödyllisiä, mutta ilman mitään takuuta; ilman edes hiljaista "
 "takuuta kaupallisesti hyväksyttävästä laadusta tai soveltuvuudesta tiettyyn "
-"tarkoitukseen.  Katso GPL lisenssistä ja Unicoden käyttöoikeuksista lisää "
+"tarkoitukseen.  Katso GPL-lisenssistä ja Unicoden käyttöoikeuksista lisää "
 "yksityiskohtia."
 
 #: ../gucharmap/gucharmap-window.c:434
@@ -539,15 +546,14 @@ msgid "GNOME Character Map"
 msgstr "Gnomen merkkikartta"
 
 #: ../gucharmap/gucharmap-window.c:449
-#, fuzzy
 #| msgid "Based on the Unicode Character Database 6.3.0"
 msgid "Based on the Unicode Character Database 7.0.0"
-msgstr "Perustuu Unicode-merkkitietokannan versioon 6.3.0"
+msgstr "Perustuu Unicode-merkkitietokannan versioon 7.0.0"
 
 #: ../gucharmap/gucharmap-window.c:458
 msgid "translator-credits"
 msgstr ""
-"Jiri Grönroos, 2012\n"
+"Jiri Grönroos, 2012-2015\n"
 "Sami Pesonen, 2003\n"
 "Tommi Vainikainen, 2004, 2010\n"
 "Ilkka Tuohela, 2002-2009\n"
@@ -571,11 +577,11 @@ msgid "Previous Block"
 msgstr "Edellinen lohko"
 
 #. Text to copy entry + button
-#: ../gucharmap/gucharmap-window.c:791
+#: ../gucharmap/gucharmap-window.c:790
 msgid "_Text to copy:"
 msgstr "_Kopioitava teksti:"
 
-#: ../gucharmap/gucharmap-window.c:798
+#: ../gucharmap/gucharmap-window.c:797
 msgid "Copy to the clipboard."
 msgstr "Kopioi leikepöydälle."
 
@@ -1723,4 +1729,3 @@ msgstr "Phags Pa"
 #: ../gucharmap/unicode-scripts.h:140
 msgid "Yi"
 msgstr "Yi"
-
