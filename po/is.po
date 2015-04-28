@@ -1,4 +1,4 @@
-# translation of gucharmap.master.po to Icelandic
+# translation of gucharmap.gnome-3-14.is.po to
 # Icelandic translation
 # Copyright (C) 2003, 2009, The Icelandic GNOME Translation Team
 # This file is distributed under the same license as the gucharmap package.
@@ -7,11 +7,11 @@
 # Sveinn í Felli <sveinki@nett.is>, 2009, 2015.
 msgid ""
 msgstr ""
-"Project-Id-Version: gucharmap.master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
-"product=gucharmap&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-08-21 09:30+0000\n"
-"PO-Revision-Date: 2015-01-22 11:46+0000\n"
+"Project-Id-Version: gucharmap.gnome-3-14.is\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gucharma"
+"p&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2014-09-21 12:55+0000\n"
+"PO-Revision-Date: 2015-04-28 08:55+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic <translation-team-is@lists.sourceforge.net>\n"
 "Language: is\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: ../data/gucharmap.appdata.xml.in.h:1 ../gucharmap.desktop.in.in.h:1
-#: ../gucharmap/gucharmap-window.c:760 ../gucharmap/main.c:236
+#: ../gucharmap/gucharmap-window.c:759 ../gucharmap/main.c:236
 msgid "Character Map"
 msgstr "Stafatafla"
 
@@ -37,9 +37,9 @@ msgid ""
 "script type. It includes brief descriptions of related characters and "
 "occasionally meanings of the character in question."
 msgstr ""
-"GNOME Gucharmap stafatafla er Unicode stafatöfluforrit (character map), hluti "
-"af GNOME skjáborðsumhverfinu. Þetta forrit gerir kleift að skoða stafi eftir "
-"unicode blokkum eða tegund skriftar. Það inniheldur stuttar lýsingar á "
+"GNOME Gucharmap stafatafla er Unicode stafatöfluforrit (character map), "
+"hluti af GNOME skjáborðsumhverfinu. Þetta forrit gerir kleift að skoða stafi "
+"eftir unicode blokkum eða tegund skriftar. Það inniheldur stuttar lýsingar á "
 "skyldum stöfum og stundum einnig útskýringar á meiningu stafanna."
 
 #: ../data/gucharmap.appdata.xml.in.h:4
@@ -188,7 +188,7 @@ msgstr "Fann staf."
 
 #: ../gucharmap/gucharmap-menus.ui.h:1
 msgid "By _Script"
-msgstr "Eftir _skrift"
+msgstr "Eftir _skriftu"
 
 #: ../gucharmap/gucharmap-menus.ui.h:2
 msgid "By _Unicode Block"
@@ -285,7 +285,7 @@ msgstr "Leturstærð"
 
 #: ../gucharmap/gucharmap-script-chapters-model.c:155
 msgid "Script"
-msgstr "Skrift"
+msgstr "Skrifta"
 
 #  Unicode assigns "Common" as the script name for any character not
 #  * specifically listed in Scripts.txt
@@ -552,11 +552,11 @@ msgstr ""
 
 #: ../gucharmap/gucharmap-window.c:547
 msgid "Next Script"
-msgstr "Næsta skrift"
+msgstr "Næsta skrifta"
 
 #: ../gucharmap/gucharmap-window.c:547
 msgid "Previous Script"
-msgstr "Fyrri skrift"
+msgstr "Fyrri skrifta"
 
 #: ../gucharmap/gucharmap-window.c:552
 msgid "Next Block"
@@ -567,11 +567,11 @@ msgid "Previous Block"
 msgstr "Fyrri blokk"
 
 #. Text to copy entry + button
-#: ../gucharmap/gucharmap-window.c:791
+#: ../gucharmap/gucharmap-window.c:790
 msgid "_Text to copy:"
 msgstr "_Texti til afritunar:"
 
-#: ../gucharmap/gucharmap-window.c:798
+#: ../gucharmap/gucharmap-window.c:797
 msgid "Copy to the clipboard."
 msgstr "Afrita á klippispjald."
 
@@ -631,6 +631,8 @@ msgid ""
 "of the window. If this setting is 'true' then the value will be forced to "
 "the nearest power of two."
 msgstr ""
+"Fjöldi dálka í stafatöflunni er skilyrtur af breidd gluggans. Ef þetta er "
+"stillt á 'satt' er fjöldinn þvingaður í næsta gildi í öðru veldi."
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:7
 msgid "Last selected character"
@@ -643,6 +645,10 @@ msgid ""
 "\n"
 "By default, it is the first letter of the alphabet in the current locale."
 msgstr ""
+"Þetta er síðasti stafur sem valinn var í stafatöflunni (og verður valinn "
+"aftur næst þegar stafataflan er ræst).\n"
+"\n"
+"Sjálfgefið er þetta fyrsti stafur stafrófsins í gildandi staðfærslu."
 
 #. The unicode code point of the first letter of the alphabet
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:12
@@ -1337,7 +1343,7 @@ msgstr "Carian"
 
 #: ../gucharmap/unicode-blocks.h:181
 msgid "Coptic Epact Numbers"
-msgstr ""
+msgstr "Koptískir páskaútreikningstölustafir (epact)"
 
 #: ../gucharmap/unicode-blocks.h:182 ../gucharmap/unicode-scripts.h:98
 msgid "Old Italic"
@@ -1485,7 +1491,7 @@ msgstr "Sharada"
 
 #: ../gucharmap/unicode-blocks.h:217
 msgid "Sinhala Archaic Numbers"
-msgstr ""
+msgstr "Fornir Sinhala tölustafir"
 
 #: ../gucharmap/unicode-blocks.h:218 ../gucharmap/unicode-scripts.h:69
 msgid "Khojki"
@@ -1567,7 +1573,7 @@ msgstr "Duployan"
 
 #: ../gucharmap/unicode-blocks.h:237
 msgid "Shorthand Format Controls"
-msgstr ""
+msgstr "Hraðritunar-sniðstýringar (shorthand format controls)"
 
 #: ../gucharmap/unicode-blocks.h:238
 msgid "Byzantine Musical Symbols"
@@ -1659,7 +1665,7 @@ msgstr "Aukaörvar-C"
 
 #: ../gucharmap/unicode-blocks.h:258
 msgid "CJK Unified Ideographs Extension B"
-msgstr "CJK-samræmd myndtákn, viðauki B"
+msgstr "CJK samræmd myndtákn viðbót B"
 
 #: ../gucharmap/unicode-blocks.h:259
 #| msgid "CJK Unified Ideographs Extension A"
@@ -1735,8 +1741,4 @@ msgstr "Phags Pa"
 msgid "Yi"
 msgstr "Yi"
 
-#~ msgid "GConf could not be initialized."
-#~ msgstr "Ekki var hægt að ræsa GConf."
 
-#~ msgid "Searching…"
-#~ msgstr "Leita..."
