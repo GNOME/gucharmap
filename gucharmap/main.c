@@ -217,11 +217,6 @@ main (int argc, char **argv)
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
   textdomain (GETTEXT_PACKAGE);
 
-#ifdef HAVE_GCONF
-  /* GConf uses ORBit2 which need GThread. See bug #565516 */
-  g_thread_init (NULL);
-#endif
-
   /* Not interested in silly debug spew polluting the journal, bug #749195 */
   if (g_getenv ("G_ENABLE_DIAGNOSTIC") == NULL)
     g_setenv ("G_ENABLE_DIAGNOSTIC", "0", TRUE);
