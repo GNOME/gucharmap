@@ -222,6 +222,10 @@ main (int argc, char **argv)
   g_thread_init (NULL);
 #endif
 
+  /* Not interested in silly debug spew polluting the journal, bug #749195 */
+  if (g_getenv ("G_ENABLE_DIAGNOSTIC") == NULL)
+    g_setenv ("G_ENABLE_DIAGNOSTIC", "0", TRUE);
+
   /* Set programme name explicitly (see bug #653115) */
   g_set_prgname("gucharmap");
 
