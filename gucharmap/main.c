@@ -202,6 +202,7 @@ main (int argc, char **argv)
   GdkRectangle rect;
   GError *error = NULL;
   char *font = NULL;
+  char **remaining = NULL;
   GtkApplication *application;
   guint status;
   GOptionEntry goptions[] =
@@ -210,6 +211,8 @@ main (int argc, char **argv)
       N_("Font to start with; ex: 'Serif 27'"), N_("FONT") },
     { "version", 0, G_OPTION_FLAG_HIDDEN | G_OPTION_FLAG_NO_ARG, 
       G_OPTION_ARG_CALLBACK, option_version_cb, NULL, NULL },
+    { G_OPTION_REMAINING, 0, 0, G_OPTION_ARG_STRING_ARRAY, &remaining,
+      NULL, N_("[STRING…]") },
     { NULL }
   };
 
