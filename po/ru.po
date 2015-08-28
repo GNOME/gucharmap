@@ -16,18 +16,18 @@
 # Dmitry G. Mastrukov <dmitry@taurussoft.org>, 2004.
 # Leonid Kanter <leon@asplinux.ru>, 2006.
 # Yuri Kozlov <yuray@komyakino.ru>, 2010, 2011.
-# Yuri Myasoedov <ymyasoedov@yandex.ru>, 2012, 2014.
 # Stas Solovey <whats_up@tut.by>, 2015.
+# Yuri Myasoedov <ymyasoedov@yandex.ru>, 2012, 2014, 2015.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap trunk\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gucharmap&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-06-25 10:01+0000\n"
-"PO-Revision-Date: 2015-06-26 00:58+0300\n"
-"Last-Translator: Stas Solovey <whats_up@tut.by>\n"
-"Language-Team: Русский <gnome-cyr@gnome.org>\n"
+"POT-Creation-Date: 2015-08-28 10:10+0000\n"
+"PO-Revision-Date: 2015-08-28 22:33+0300\n"
+"Last-Translator: Yuri Myasoedov <ymyasoedov@yandex.ru>\n"
+"Language-Team: русский <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,7 +37,7 @@ msgstr ""
 "X-Generator: Gtranslator 2.91.7\n"
 
 #: ../data/gucharmap.appdata.xml.in.h:1 ../gucharmap.desktop.in.in.h:1
-#: ../gucharmap/gucharmap-window.c:759 ../gucharmap/main.c:235
+#: ../gucharmap/gucharmap-window.c:759 ../gucharmap/main.c:238
 msgid "Character Map"
 msgstr "Таблица символов"
 
@@ -548,7 +548,6 @@ msgid "GNOME Character Map"
 msgstr "Таблица символов GNOME"
 
 #: ../gucharmap/gucharmap-window.c:449
-#| msgid "Based on the Unicode Character Database 7.0.0"
 msgid "Based on the Unicode Character Database 8.0.0"
 msgstr "Основано на базе данных символов Юникода 8.0.0"
 
@@ -594,13 +593,17 @@ msgstr "Пара_метры страницы"
 msgid "_Print"
 msgstr "_Печать"
 
-#: ../gucharmap/main.c:210
+#: ../gucharmap/main.c:211
 msgid "Font to start with; ex: 'Serif 27'"
 msgstr "Указать исходный шрифт, например: 'Serif 27'"
 
-#: ../gucharmap/main.c:210
+#: ../gucharmap/main.c:211
 msgid "FONT"
 msgstr "ШРИФТ"
+
+#: ../gucharmap/main.c:215
+msgid "[STRING…]"
+msgstr "[СТРОКА…]"
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:1
 msgid "Character map grouping method"
@@ -1230,7 +1233,6 @@ msgid "Latin Extended-E"
 msgstr "Латинский расширение E"
 
 #: ../gucharmap/unicode-blocks.h:155
-#| msgid "Cyrillic Supplement"
 msgid "Cherokee Supplement"
 msgstr "Дополнения письма чероки"
 
@@ -1459,7 +1461,6 @@ msgid "Old Turkic"
 msgstr "Древнетюркский"
 
 #: ../gucharmap/unicode-blocks.h:212 ../gucharmap/unicode-scripts.h:102
-#| msgid "Old Persian"
 msgid "Old Hungarian"
 msgstr "Старый венгерский"
 
@@ -1556,7 +1557,6 @@ msgid "Egyptian Hieroglyphs"
 msgstr "Египетские иероглифы"
 
 #: ../gucharmap/unicode-blocks.h:236 ../gucharmap/unicode-scripts.h:17
-#| msgid "Egyptian Hieroglyphs"
 msgid "Anatolian Hieroglyphs"
 msgstr "Лувийские иероглифы"
 
@@ -1677,7 +1677,6 @@ msgid "Supplemental Arrows-C"
 msgstr "Дополнительные стрелки C"
 
 #: ../gucharmap/unicode-blocks.h:266
-#| msgid "Miscellaneous Symbols and Pictographs"
 msgid "Supplemental Symbols and Pictographs"
 msgstr "Дополнительные символы и пиктограммы"
 
@@ -1694,7 +1693,6 @@ msgid "CJK Unified Ideographs Extension D"
 msgstr "CJK объединённые идеограммы расширение D"
 
 #: ../gucharmap/unicode-blocks.h:270
-#| msgid "CJK Unified Ideographs Extension A"
 msgid "CJK Unified Ideographs Extension E"
 msgstr "CJK объединённые идеограммы расширение Е"
 
