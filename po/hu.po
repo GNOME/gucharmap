@@ -6,25 +6,25 @@
 # Laszlo Dvornik <dvornikl at mailbox dot hu>, 2004.
 # Gabor Kelemen <kelemeng at gnome dot hu>, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2014.
 # Mate ORY <orymate at gmail d0t com>, 2006, 2008, 2009.
-# Balázs Úr <urbalazs at gmail dot com>, 2013, 2014.
+# Balázs Úr <urbalazs at gmail dot com>, 2013, 2014, 2015.
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gucharmap&keywords=I18N"
-"+L10N&component=general\n"
-"POT-Creation-Date: 2015-05-08 21:53+0000\n"
-"PO-Revision-Date: 2015-05-09 13:30+0100\n"
-"Last-Translator: Balázs Meskó <meskobalazs@gmail.com>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=gucharmap&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2015-08-31 10:08+0000\n"
+"PO-Revision-Date: 2015-08-31 19:05+0200\n"
+"Last-Translator: Balázs Úr <urbalazs@gmail.com>\n"
 "Language-Team: Hungarian <openscope at googlegroups dot com>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.5\n"
+"X-Generator: Lokalize 1.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../data/gucharmap.appdata.xml.in.h:1 ../gucharmap.desktop.in.in.h:1
-#: ../gucharmap/gucharmap-window.c:759 ../gucharmap/main.c:236
+#: ../gucharmap/gucharmap-window.c:759 ../gucharmap/main.c:238
 msgid "Character Map"
 msgstr "Karaktertábla"
 
@@ -34,22 +34,25 @@ msgstr "Különleges karakterek dokumentumokba illesztése"
 
 #: ../data/gucharmap.appdata.xml.in.h:3
 msgid ""
-"GNOME Character Map is a Unicode character map program, part of GNOME desktop. This program allows "
-"characters to be displayed by unicode block or script type. It includes brief descriptions of related "
-"characters and occasionally meanings of the character in question."
+"GNOME Character Map is a Unicode character map program, part of GNOME "
+"desktop. This program allows characters to be displayed by unicode block or "
+"script type. It includes brief descriptions of related characters and "
+"occasionally meanings of the character in question."
 msgstr ""
-"A GNOME Karaktertábla egy Unicode karaktertábla program, a GNOME asztali környezet része. Ez a "
-"program lehetővé teszi karakterek megjelenítését Unicode blokk vagy írásrendszertípus alapján. "
-"Tartalmazza a kapcsolódó karakterek rövid leírásait, és esetenként a kérdéses karakter jelentéseit."
+"A GNOME Karaktertábla egy Unicode karaktertábla program, a GNOME asztali "
+"környezet része. Ez a program lehetővé teszi karakterek megjelenítését "
+"Unicode blokk vagy írásrendszertípus alapján. Tartalmazza a kapcsolódó "
+"karakterek rövid leírásait, és esetenként a kérdéses karakter jelentéseit."
 
 #: ../data/gucharmap.appdata.xml.in.h:4
 msgid ""
-"Gucharmap can also be used to input or enter characters (by copy and paste). The search functionality "
-"allows the use of several search methods, including by unicode name or code point of the character."
+"Gucharmap can also be used to input or enter characters (by copy and paste). "
+"The search functionality allows the use of several search methods, including "
+"by unicode name or code point of the character."
 msgstr ""
-"A Gucharmap használható karakterek bevitelére is (másolás és beillesztés módszerrel). A keresési "
-"funkció lehetővé teszi számos keresési módszer használatát, beleértve a karakter Unicode neve vagy a "
-"kódpontja szerintit."
+"A Gucharmap használható karakterek bevitelére is (másolás és beillesztés "
+"módszerrel). A keresési funkció lehetővé teszi számos keresési módszer "
+"használatát, beleértve a karakter Unicode neve vagy a kódpontja szerintit."
 
 #: ../gucharmap.desktop.in.in.h:3
 msgid "font;unicode;"
@@ -160,11 +163,11 @@ msgstr "Tang kiejtés:"
 msgid "Korean Pronunciation:"
 msgstr "Koreai kiejtés:"
 
-#: ../gucharmap/gucharmap-charmap.c:1127
+#: ../gucharmap/gucharmap-charmap.c:1129
 msgid "Characte_r Table"
 msgstr "Karakte_rtábla"
 
-#: ../gucharmap/gucharmap-charmap.c:1174
+#: ../gucharmap/gucharmap-charmap.c:1176
 msgid "Character _Details"
 msgstr "Karakter _adatai"
 
@@ -176,7 +179,8 @@ msgstr "Karaktertábla"
 msgid "Unknown character, unable to identify."
 msgstr "Ismeretlen karakter, nem azonosítható."
 
-#: ../gucharmap/gucharmap-chartable.c:1289 ../gucharmap/gucharmap-search-dialog.c:585
+#: ../gucharmap/gucharmap-chartable.c:1289
+#: ../gucharmap/gucharmap-search-dialog.c:585
 msgid "Not found."
 msgstr "Nem található."
 
@@ -286,7 +290,8 @@ msgstr "Írásrendszer"
 
 #. Unicode assigns "Common" as the script name for any character not
 #. * specifically listed in Scripts.txt
-#: ../gucharmap/gucharmap-script-codepoint-list.c:463 ../gucharmap/unicode-scripts.h:37
+#: ../gucharmap/gucharmap-script-codepoint-list.c:463
+#: ../gucharmap/unicode-scripts.h:37
 msgid "Common"
 msgstr "Közös"
 
@@ -319,199 +324,209 @@ msgstr "_Teljes szó"
 msgid "Search in character _details"
 msgstr "Keresés a karakter _adatai közt"
 
-#: ../gucharmap/gucharmap-unicode-info.c:100
+#: ../gucharmap/gucharmap-unicode-info.c:101
 msgid "<Non Private Use High Surrogate>"
 msgstr "<Felső pótlás nem személyes felhasználásra>"
 
-#: ../gucharmap/gucharmap-unicode-info.c:102
+#: ../gucharmap/gucharmap-unicode-info.c:103
 msgid "<Private Use High Surrogate>"
 msgstr "<Felső pótlás személyes felhasználásra>"
 
-#: ../gucharmap/gucharmap-unicode-info.c:104
+#: ../gucharmap/gucharmap-unicode-info.c:105
 msgid "<Low Surrogate>"
 msgstr "<Alsó pótlás>"
 
-#: ../gucharmap/gucharmap-unicode-info.c:106
+#: ../gucharmap/gucharmap-unicode-info.c:107
 msgid "<Private Use>"
 msgstr "<Személyes felhasználásra>"
 
-#: ../gucharmap/gucharmap-unicode-info.c:108
+#: ../gucharmap/gucharmap-unicode-info.c:109
 msgid "<Plane 15 Private Use>"
 msgstr "<15. sík személyes felhasználásra>"
 
-#: ../gucharmap/gucharmap-unicode-info.c:110
+#: ../gucharmap/gucharmap-unicode-info.c:111
 msgid "<Plane 16 Private Use>"
 msgstr "<16. sík személyes felhasználásra>"
 
-#: ../gucharmap/gucharmap-unicode-info.c:115
+#: ../gucharmap/gucharmap-unicode-info.c:116
 msgid "<not assigned>"
 msgstr "<nincs hozzárendelve>"
 
-#: ../gucharmap/gucharmap-unicode-info.c:128
+#: ../gucharmap/gucharmap-unicode-info.c:129
 msgid "Other, Control"
 msgstr "Egyéb, vezérlő"
 
-#: ../gucharmap/gucharmap-unicode-info.c:129
+#: ../gucharmap/gucharmap-unicode-info.c:130
 msgid "Other, Format"
 msgstr "Egyéb, formátum"
 
-#: ../gucharmap/gucharmap-unicode-info.c:130
+#: ../gucharmap/gucharmap-unicode-info.c:131
 msgid "Other, Not Assigned"
 msgstr "Egyéb, nem hozzárendelt"
 
-#: ../gucharmap/gucharmap-unicode-info.c:131
+#: ../gucharmap/gucharmap-unicode-info.c:132
 msgid "Other, Private Use"
 msgstr "Egyéb, személyes felhasználásra"
 
-#: ../gucharmap/gucharmap-unicode-info.c:132
+#: ../gucharmap/gucharmap-unicode-info.c:133
 msgid "Other, Surrogate"
 msgstr "Egyéb, pótlás"
 
-#: ../gucharmap/gucharmap-unicode-info.c:133
+#: ../gucharmap/gucharmap-unicode-info.c:134
 msgid "Letter, Lowercase"
 msgstr "Betű, kisbetű"
 
-#: ../gucharmap/gucharmap-unicode-info.c:134
+#: ../gucharmap/gucharmap-unicode-info.c:135
 msgid "Letter, Modifier"
 msgstr "Betű, módosító"
 
-#: ../gucharmap/gucharmap-unicode-info.c:135
+#: ../gucharmap/gucharmap-unicode-info.c:136
 msgid "Letter, Other"
 msgstr "Betű, egyéb"
 
-#: ../gucharmap/gucharmap-unicode-info.c:136
+#: ../gucharmap/gucharmap-unicode-info.c:137
 msgid "Letter, Titlecase"
 msgstr "Betű, nagy kezdőbetű"
 
-#: ../gucharmap/gucharmap-unicode-info.c:137
+#: ../gucharmap/gucharmap-unicode-info.c:138
 msgid "Letter, Uppercase"
 msgstr "Betű, nagybetű"
 
-#: ../gucharmap/gucharmap-unicode-info.c:138
+#: ../gucharmap/gucharmap-unicode-info.c:139
 msgid "Mark, Spacing Combining"
 msgstr "Jel, kombinált elválasztó"
 
-#: ../gucharmap/gucharmap-unicode-info.c:139
+#: ../gucharmap/gucharmap-unicode-info.c:140
 msgid "Mark, Enclosing"
 msgstr "Jel, lezárt"
 
-#: ../gucharmap/gucharmap-unicode-info.c:140
+#: ../gucharmap/gucharmap-unicode-info.c:141
 msgid "Mark, Non-Spacing"
 msgstr "Jel, nem-elválasztó"
 
-#: ../gucharmap/gucharmap-unicode-info.c:141
+#: ../gucharmap/gucharmap-unicode-info.c:142
 msgid "Number, Decimal Digit"
 msgstr "Szám, decimális számjegy"
 
-#: ../gucharmap/gucharmap-unicode-info.c:142
+#: ../gucharmap/gucharmap-unicode-info.c:143
 msgid "Number, Letter"
 msgstr "Szám, betű"
 
-#: ../gucharmap/gucharmap-unicode-info.c:143
+#: ../gucharmap/gucharmap-unicode-info.c:144
 msgid "Number, Other"
 msgstr "Szám, egyéb"
 
-#: ../gucharmap/gucharmap-unicode-info.c:144
+#: ../gucharmap/gucharmap-unicode-info.c:145
 msgid "Punctuation, Connector"
 msgstr "Központozás, összekötő"
 
-#: ../gucharmap/gucharmap-unicode-info.c:145
+#: ../gucharmap/gucharmap-unicode-info.c:146
 msgid "Punctuation, Dash"
 msgstr "Központozás, kötőjel"
 
-#: ../gucharmap/gucharmap-unicode-info.c:146
+#: ../gucharmap/gucharmap-unicode-info.c:147
 msgid "Punctuation, Close"
 msgstr "Központozás, lezáró"
 
-#: ../gucharmap/gucharmap-unicode-info.c:147
+#: ../gucharmap/gucharmap-unicode-info.c:148
 msgid "Punctuation, Final Quote"
 msgstr "Központozás, záró idézőjel"
 
-#: ../gucharmap/gucharmap-unicode-info.c:148
+#: ../gucharmap/gucharmap-unicode-info.c:149
 msgid "Punctuation, Initial Quote"
 msgstr "Központozás, nyitó idézőjel"
 
-#: ../gucharmap/gucharmap-unicode-info.c:149
+#: ../gucharmap/gucharmap-unicode-info.c:150
 msgid "Punctuation, Other"
 msgstr "Központozás, egyéb"
 
-#: ../gucharmap/gucharmap-unicode-info.c:150
+#: ../gucharmap/gucharmap-unicode-info.c:151
 msgid "Punctuation, Open"
 msgstr "Központozás, nyitó"
 
-#: ../gucharmap/gucharmap-unicode-info.c:151
+#: ../gucharmap/gucharmap-unicode-info.c:152
 msgid "Symbol, Currency"
 msgstr "Szimbólum, pénznem"
 
-#: ../gucharmap/gucharmap-unicode-info.c:152
+#: ../gucharmap/gucharmap-unicode-info.c:153
 msgid "Symbol, Modifier"
 msgstr "Szimbólum, módosító"
 
-#: ../gucharmap/gucharmap-unicode-info.c:153
+#: ../gucharmap/gucharmap-unicode-info.c:154
 msgid "Symbol, Math"
 msgstr "Szimbólum, matematikai"
 
-#: ../gucharmap/gucharmap-unicode-info.c:154
+#: ../gucharmap/gucharmap-unicode-info.c:155
 msgid "Symbol, Other"
 msgstr "Szimbólum, egyéb"
 
-#: ../gucharmap/gucharmap-unicode-info.c:155
+#: ../gucharmap/gucharmap-unicode-info.c:156
 msgid "Separator, Line"
 msgstr "Elválasztó, sor"
 
-#: ../gucharmap/gucharmap-unicode-info.c:156
+#: ../gucharmap/gucharmap-unicode-info.c:157
 msgid "Separator, Paragraph"
 msgstr "Elválasztó, bekezdés"
 
-#: ../gucharmap/gucharmap-unicode-info.c:157
+#: ../gucharmap/gucharmap-unicode-info.c:158
 msgid "Separator, Space"
 msgstr "Elválasztó, szóköz"
 
 #: ../gucharmap/gucharmap-window.c:422
 msgid ""
-"Gucharmap is free software; you can redistribute it and/or modify it under the terms of the GNU "
-"General Public License as published by the Free Software Foundation; either version 3 of the License, "
-"or (at your option) any later version."
+"Gucharmap is free software; you can redistribute it and/or modify it under "
+"the terms of the GNU General Public License as published by the Free "
+"Software Foundation; either version 3 of the License, or (at your option) "
+"any later version."
 msgstr ""
-"A Gucharmap szabad szoftver, terjesztheti és/vagy módosíthatja a Free Software Foundation által "
-"kiadott GNU General Public License harmadik (vagy bármely későbbi) változatában foglaltak alapján"
+"A Gucharmap szabad szoftver, terjesztheti és/vagy módosíthatja a Free "
+"Software Foundation által kiadott GNU General Public License harmadik (vagy "
+"bármely későbbi) változatában foglaltak alapján"
 
 #: ../gucharmap/gucharmap-window.c:426
 msgid ""
-"Permission is hereby granted, free of charge, to any person obtaining a copy of the Unicode data "
-"files to deal in them without restriction, including without limitation the rights to use, copy, "
-"modify, merge, publish, distribute, and/or sell copies."
+"Permission is hereby granted, free of charge, to any person obtaining a copy "
+"of the Unicode data files to deal in them without restriction, including "
+"without limitation the rights to use, copy, modify, merge, publish, "
+"distribute, and/or sell copies."
 msgstr ""
-"Ezennel engedélyezzük, hogy bárki ingyenesen beszerezze az Unicode adatfájlok másolatát, azok "
-"korlátozásoktól mentes kezelését, beleértve a felhasználásra, másolásra, összefésülésre, "
-"közzétételre, terjesztésre és/vagy másolatok eladására vonatkozó jogokat."
+"Ezennel engedélyezzük, hogy bárki ingyenesen beszerezze az Unicode "
+"adatfájlok másolatát, azok korlátozásoktól mentes kezelését, beleértve a "
+"felhasználásra, másolásra, összefésülésre, közzétételre, terjesztésre és/"
+"vagy másolatok eladására vonatkozó jogokat."
 
 #: ../gucharmap/gucharmap-window.c:430
 msgid ""
-"Gucharmap and the Unicode data files are distributed in the hope that they will be useful, but "
-"WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A "
-"PARTICULAR PURPOSE.  See the GNU General Public License and Unicode Copyright for more details."
+"Gucharmap and the Unicode data files are distributed in the hope that they "
+"will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty "
+"of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General "
+"Public License and Unicode Copyright for more details."
 msgstr ""
-"A Gucharmap programot és az Unicode adatfájlokat abban a reményben terjesztjük, hogy hasznosak "
-"lesznek, de nem vállalunk SEMMIFÉLE GARANCIÁT, még olyan értelemben sem, hogy a program alkalmas-e a "
-"KÖZREADÁSRA vagy EGY BIZONYOS FELADAT ELVÉGZÉSÉRE. További részletekért tanulmányozza a GNU GPL "
+"A Gucharmap programot és az Unicode adatfájlokat abban a reményben "
+"terjesztjük, hogy hasznosak lesznek, de nem vállalunk SEMMIFÉLE GARANCIÁT, "
+"még olyan értelemben sem, hogy a program alkalmas-e a KÖZREADÁSRA vagy EGY "
+"BIZONYOS FELADAT ELVÉGZÉSÉRE. További részletekért tanulmányozza a GNU GPL "
 "licencet."
 
 #: ../gucharmap/gucharmap-window.c:434
 msgid ""
-"You should have received a copy of the GNU General Public License along with Gucharmap; if not, write "
-"to the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02110-1301  USA"
+"You should have received a copy of the GNU General Public License along with "
+"Gucharmap; if not, write to the Free Software Foundation, Inc., 59 Temple "
+"Place, Suite 330, Boston, MA  02110-1301  USA"
 msgstr ""
-"A Gucharmap programhoz a GNU General Public License egy példánya is jár, ha nem kapta meg, írjon a "
-"Free Software Foundation Inc.-nek. Levélcímük: 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA."
+"A Gucharmap programhoz a GNU General Public License egy példánya is jár, ha "
+"nem kapta meg, írjon a Free Software Foundation Inc.-nek. Levélcímük: 59 "
+"Temple Place, Suite 330, Boston, MA 02111-1307, USA."
 
 #: ../gucharmap/gucharmap-window.c:437
 msgid ""
-"Also you should have received a copy of the Unicode Copyright along with Gucharmap; you can always "
-"find it at Unicode's website: http://www.unicode.org/copyright.html"
+"Also you should have received a copy of the Unicode Copyright along with "
+"Gucharmap; you can always find it at Unicode's website: http://www.unicode."
+"org/copyright.html"
 msgstr ""
-"Ezen kívül a Gucharmappal együtt kapnia kellett egy példányt az Unicode Copyright-ból, ezt mindig "
-"megtalálhatja az Unicode weboldalán: http://www.unicode.org/copyright.html"
+"Ezen kívül a Gucharmappal együtt kapnia kellett egy példányt az Unicode "
+"Copyright-ból, ezt mindig megtalálhatja az Unicode weboldalán: http://www."
+"unicode.org/copyright.html"
 
 #: ../gucharmap/gucharmap-window.c:447 ../gucharmap/main.c:39
 msgid "GNOME Character Map"
@@ -563,13 +578,17 @@ msgstr "Oldal_beállítás"
 msgid "_Print"
 msgstr "_Nyomtatás"
 
-#: ../gucharmap/main.c:210
+#: ../gucharmap/main.c:211
 msgid "Font to start with; ex: 'Serif 27'"
 msgstr "Kiindulási betűkészlet; például „Serif 27”"
 
-#: ../gucharmap/main.c:210
+#: ../gucharmap/main.c:211
 msgid "FONT"
 msgstr "BETŰKÉSZLET"
+
+#: ../gucharmap/main.c:215
+msgid "[STRING…]"
+msgstr "[SZÖVEG…]"
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:1
 msgid "Character map grouping method"
@@ -577,11 +596,11 @@ msgstr "Karaktertábla csoportosítási módja"
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:2
 msgid ""
-"This is how the characters in the character map are grouped. The characters can either be grouped by "
-"'script' or 'block'."
+"This is how the characters in the character map are grouped. The characters "
+"can either be grouped by 'script' or 'block'."
 msgstr ""
-"A karaktertábla karaktereinek csoportosítása. A karakterek csoportosíthatók „script” (írásrendszer) "
-"vagy „block” (blokk) alapján."
+"A karaktertábla karaktereinek csoportosítása. A karakterek csoportosíthatók "
+"„script” (írásrendszer) vagy „block” (blokk) alapján."
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:3
 msgid "Character map font description"
@@ -589,12 +608,13 @@ msgstr "Karaktertábla betűkészletének leírása"
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:4
 msgid ""
-"The font to use for the character map. If set to 'nothing' then the default is the system font with "
-"the size doubled. Otherwise it should be a font description string like 'Sans 24'."
+"The font to use for the character map. If set to 'nothing' then the default "
+"is the system font with the size doubled. Otherwise it should be a font "
+"description string like 'Sans 24'."
 msgstr ""
-"A karaktertáblában használandó betűkészlet. Ha „nothing” (semmi), akkor az rendszer alapértelmezett "
-"betűkészlete dupla mérettel. Egyébként egy betűkészlet-leíró karakterláncnak kell lennie, például "
-"„Sans 24”."
+"A karaktertáblában használandó betűkészlet. Ha „nothing” (semmi), akkor az "
+"rendszer alapértelmezett betűkészlete dupla mérettel. Egyébként egy "
+"betűkészlet-leíró karakterláncnak kell lennie, például „Sans 24”."
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:5
 msgid "Snap number of columns to a power of two"
@@ -602,11 +622,13 @@ msgstr "Oszlopok igazítása kettő hatványára"
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:6
 msgid ""
-"The number of columns in the character map grid is determined by the width of the window. If this "
-"setting is 'true' then the value will be forced to the nearest power of two."
+"The number of columns in the character map grid is determined by the width "
+"of the window. If this setting is 'true' then the value will be forced to "
+"the nearest power of two."
 msgstr ""
-"Az oszlopok számát a karaktertáblarácsban az ablak szélessége határozza meg. Ha ez igazra van "
-"állítva, akkor az érték kettő legközelebbi hatványára lesz kényszerítve."
+"Az oszlopok számát a karaktertáblarácsban az ablak szélessége határozza meg. "
+"Ha ez igazra van állítva, akkor az érték kettő legközelebbi hatványára lesz "
+"kényszerítve."
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:7
 msgid "Last selected character"
@@ -614,12 +636,13 @@ msgstr "Utoljára kijelölt karakter"
 
 #: ../gucharmap/org.gnome.Charmap.gschema.xml.h:8
 msgid ""
-"This is the last character that was selected in the character map (and will be selected again when "
-"the character map is next started).\n"
+"This is the last character that was selected in the character map (and will "
+"be selected again when the character map is next started).\n"
 "\n"
 "By default, it is the first letter of the alphabet in the current locale."
 msgstr ""
-"A karaktertáblában utoljára (és a karaktertábla következő indításakor újra) kijelölt karakter.\n"
+"A karaktertáblában utoljára (és a karaktertábla következő indításakor újra) "
+"kijelölt karakter.\n"
 "\n"
 "Alapértelmezésben az aktuális területi beállítás ábécéjének első betűje."
 
@@ -1724,3 +1747,4 @@ msgstr "Jelnyelv"
 #: ../gucharmap/unicode-scripts.h:146
 msgid "Yi"
 msgstr "Yi"
+
