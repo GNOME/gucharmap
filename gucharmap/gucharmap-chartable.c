@@ -782,6 +782,9 @@ make_zoom_window (GucharmapChartable *chartable)
     return;
 
   priv->zoom_window = gtk_window_new (GTK_WINDOW_POPUP);
+  /* For wayland, we need to "attach" the popup to the toplevel */
+  gtk_window_set_transient_for (GTK_WINDOW (priv->zoom_window),
+                                GTK_WINDOW (gtk_widget_get_toplevel (widget)));
   gtk_window_set_resizable (GTK_WINDOW (priv->zoom_window), FALSE);
   gtk_window_set_screen (GTK_WINDOW (priv->zoom_window),
                          gtk_widget_get_screen (widget));
