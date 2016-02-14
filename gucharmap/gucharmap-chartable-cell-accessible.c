@@ -173,7 +173,7 @@ gucharmap_chartable_cell_accessible_action_do_action (AtkAction *action,
 }
 
 
-static G_CONST_RETURN gchar*
+static const gchar*
 gucharmap_chartable_cell_accessible_action_get_name (AtkAction *action,
                           gint      index)
 {
@@ -184,7 +184,7 @@ gucharmap_chartable_cell_accessible_action_get_name (AtkAction *action,
 }
 
 
-static G_CONST_RETURN gchar *
+static const gchar *
 gucharmap_chartable_cell_accessible_action_get_description (AtkAction *action,
                                  gint      index)
 {

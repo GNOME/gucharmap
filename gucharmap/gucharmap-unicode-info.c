@@ -58,7 +58,7 @@ static const gchar JAMO_T_TABLE[][4] = {
   "S", "SS", "NG", "J", "C", "K", "T", "P", "H"
 };
 
-G_CONST_RETURN gchar *
+const gchar *
 gucharmap_get_unicode_name (gunichar wc)
 {
   static gchar buf[32];
@@ -119,7 +119,7 @@ gucharmap_get_unicode_name (gunichar wc)
     }
 }
 
-G_CONST_RETURN gchar *
+const gchar *
 gucharmap_get_unicode_category_name (gunichar wc)
 {
   _gucharmap_intl_ensure_initialized ();
@@ -161,7 +161,7 @@ gucharmap_get_unicode_category_name (gunichar wc)
 }
 
 /* does a binary search on unicode_names */
-G_CONST_RETURN gchar *
+const gchar *
 gucharmap_get_unicode_data_name (gunichar uc)
 {
   gint min = 0;
@@ -217,7 +217,7 @@ gucharmap_get_unicode_version (gunichar uc)
   return GUCHARMAP_UNICODE_VERSION_UNASSIGNED;
 }
 
-G_CONST_RETURN gchar *
+const gchar *
 gucharmap_unicode_version_to_string (GucharmapUnicodeVersion version)
 {
   g_return_val_if_fail (version >= GUCHARMAP_UNICODE_VERSION_UNASSIGNED &&
@@ -239,7 +239,7 @@ gucharmap_get_unihan_count (void)
 
 /* does a binary search; also caches most recent, since it will often be
  * called in succession on the same character */
-static G_CONST_RETURN Unihan *
+static const Unihan *
 _get_unihan (gunichar uc)
 {
   static gunichar most_recent_searched;
@@ -283,43 +283,43 @@ gucharmap_get_unihan_count ()
   return 0;
 }
 
-G_CONST_RETURN gchar * 
+const gchar * 
 gucharmap_get_unicode_kDefinition (gunichar uc)
 {
   return "This feature was not compiled in.";
 }
 
-G_CONST_RETURN gchar * 
+const gchar * 
 gucharmap_get_unicode_kCantonese (gunichar uc)
 {
   return "This feature was not compiled in.";
 }
 
-G_CONST_RETURN gchar * 
+const gchar * 
 gucharmap_get_unicode_kMandarin (gunichar uc)
 {
   return "This feature was not compiled in.";
 }
 
-G_CONST_RETURN gchar * 
+const gchar * 
 gucharmap_get_unicode_kTang (gunichar uc)
 {
   return "This feature was not compiled in.";
 }
 
-G_CONST_RETURN gchar * 
+const gchar * 
 gucharmap_get_unicode_kKorean (gunichar uc)
 {
   return "This feature was not compiled in.";
 }
 
-G_CONST_RETURN gchar * 
+const gchar * 
 gucharmap_get_unicode_kJapaneseKun (gunichar uc)
 {
   return "This feature was not compiled in.";
 }
 
-G_CONST_RETURN gchar * 
+const gchar * 
 gucharmap_get_unicode_kJapaneseOn (gunichar uc)
 {
   return "This feature was not compiled in.";
@@ -329,7 +329,7 @@ gucharmap_get_unicode_kJapaneseOn (gunichar uc)
 
 /* does a binary search; also caches most recent, since it will often be
  * called in succession on the same character */
-static G_CONST_RETURN NamesList *
+static const NamesList *
 get_nameslist (gunichar uc)
 {
   static gunichar most_recent_searched;
@@ -402,7 +402,7 @@ gucharmap_get_nameslist_exes (gunichar uc)
  * Returns: (transfer container): newly allocated null-terminated array of gchar*
  * the items are const, but the array should be freed by the caller
  */
-G_CONST_RETURN gchar **
+const gchar **
 gucharmap_get_nameslist_equals (gunichar uc)
 {
   const NamesList *nl;
@@ -433,7 +433,7 @@ gucharmap_get_nameslist_equals (gunichar uc)
  * Returns: (transfer container): newly allocated null-terminated array of gchar*
  * the items are const, but the array should be freed by the caller
  */
-G_CONST_RETURN gchar **
+const gchar **
 gucharmap_get_nameslist_stars (gunichar uc)
 {
   const NamesList *nl;
@@ -464,7 +464,7 @@ gucharmap_get_nameslist_stars (gunichar uc)
  * Returns: (transfer container): newly allocated null-terminated array of gchar*
  * the items are const, but the array should be freed by the caller
  */
-G_CONST_RETURN gchar **
+const gchar **
 gucharmap_get_nameslist_pounds (gunichar uc)
 {
   const NamesList *nl;
@@ -495,7 +495,7 @@ gucharmap_get_nameslist_pounds (gunichar uc)
  * Returns: (transfer container): newly allocated null-terminated array of gchar*
  * the items are const, but the array should be freed by the caller
  */
-G_CONST_RETURN gchar **
+const gchar **
 gucharmap_get_nameslist_colons (gunichar uc)
 {
   const NamesList *nl;

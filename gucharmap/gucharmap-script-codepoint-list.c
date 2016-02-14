@@ -437,7 +437,7 @@ gucharmap_unicode_list_scripts (void)
  * character belongs. Characters that don't belong to an actual script
  * return %"Common".
  **/
-G_CONST_RETURN gchar *
+const gchar *
 gucharmap_unicode_get_script_for_char (gunichar wc)
 {
   gint min = 0;

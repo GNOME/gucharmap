@@ -435,7 +435,7 @@ static inline const char * unihan_get_$name (const Unihan *uh)
     return unihan_strings + offset;
 }
 
-G_CONST_RETURN gchar * 
+const gchar * 
 gucharmap_get_unicode_$name (gunichar uc)
 {
   const Unihan *uh = _get_unihan (uc);
