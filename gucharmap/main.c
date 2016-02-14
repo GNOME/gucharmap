@@ -268,6 +268,13 @@ main (int argc, char **argv)
 
   gtk_window_present (GTK_WINDOW (window));
 
+  if (remaining) {
+    char *str = g_strjoinv (" ", remaining);
+    gucharmap_window_search (GUCHARMAP_WINDOW (window), str);
+    g_free (str);
+    g_strfreev (remaining);
+  }
+
   status = g_application_run (G_APPLICATION (application), argc, argv);
   g_object_unref (application);
 

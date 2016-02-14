@@ -61,6 +61,8 @@ GucharmapDirection;
 GType       gucharmap_search_dialog_get_type      (void);
 GtkWidget * gucharmap_search_dialog_new           (GucharmapWindow *parent);
 void        gucharmap_search_dialog_present       (GucharmapSearchDialog *search_dialog);
+void        gucharmap_search_dialog_set_search    (GucharmapSearchDialog *search_dialog,
+                                                   const char            *search_string);
 void        gucharmap_search_dialog_start_search  (GucharmapSearchDialog *search_dialog,
                                                    GucharmapDirection     direction);
 gdouble     gucharmap_search_dialog_get_completed (GucharmapSearchDialog *search_dialog); 

@@ -587,7 +587,8 @@ search_completed (GucharmapSearchDialog *search_dialog)
       gtk_widget_set_sensitive (priv->next_button, FALSE);
     }
 
-  gdk_window_set_cursor (gtk_widget_get_window (GTK_WIDGET (search_dialog)), NULL);
+  if (gtk_widget_get_realized (GTK_WIDGET (search_dialog)))
+      gdk_window_set_cursor (gtk_widget_get_window (GTK_WIDGET (search_dialog)), NULL);
 }
 
 static gboolean
@@ -616,9 +617,11 @@ _gucharmap_search_dialog_fire_search (GucharmapSearchDialog *search_dialog,
   if (priv->search_state && priv->search_state->searching) /* Already searching */
     return;
 
-  cursor = gdk_cursor_new_for_display (gtk_widget_get_display (GTK_WIDGET (search_dialog)), GDK_WATCH);
-  gdk_window_set_cursor (gtk_widget_get_window (GTK_WIDGET (search_dialog)), cursor);
-  g_object_unref (cursor);
+  if (gtk_widget_get_realized (GTK_WIDGET (search_dialog))) {
+    cursor = gdk_cursor_new_for_display (gtk_widget_get_display (GTK_WIDGET (search_dialog)), GDK_WATCH);
+    gdk_window_set_cursor (gtk_widget_get_window (GTK_WIDGET (search_dialog)), cursor);
+    g_object_unref (cursor);
+  }
 
   list = gucharmap_charmap_get_book_codepoint_list (priv->guw->charmap);
   if (!list)
@@ -663,7 +666,7 @@ gucharmap_search_dialog_start_search (GucharmapSearchDialog *search_dialog,
 {
   GucharmapSearchDialogPrivate *priv = GUCHARMAP_SEARCH_DIALOG_GET_PRIVATE (search_dialog);
 
-  if (priv->search_state != NULL && !_entry_is_empty (GTK_ENTRY (priv->entry)))
+  if (!_entry_is_empty (GTK_ENTRY (priv->entry)))
     _gucharmap_search_dialog_fire_search (search_dialog, direction);
   else
     gtk_window_present (GTK_WINDOW (search_dialog));
@@ -851,6 +854,18 @@ gucharmap_search_dialog_present (GucharmapSearchDialog *search_dialog)
 {
   gtk_widget_grab_focus (GUCHARMAP_SEARCH_DIALOG_GET_PRIVATE (search_dialog)->entry);
   gtk_window_present (GTK_WINDOW (search_dialog));
+}
+
+void
+gucharmap_search_dialog_set_search (GucharmapSearchDialog *search_dialog,
+                                    const char            *search_string)
+{
+  GucharmapSearchDialogPrivate *priv;
+  g_return_if_fail (GUCHARMAP_IS_SEARCH_DIALOG (search_dialog));
+  g_return_if_fail (search_string != NULL);
+
+  priv = GUCHARMAP_SEARCH_DIALOG_GET_PRIVATE (search_dialog);
+  gtk_entry_set_text (GTK_ENTRY (priv->entry), search_string);
 }
 
 gdouble

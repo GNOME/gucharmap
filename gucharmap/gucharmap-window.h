@@ -69,6 +69,9 @@ GtkWidget * gucharmap_window_new       (GtkApplication *application);
 void        gucharmap_window_set_font  (GucharmapWindow *guw,
                                         const char *font);
 
+void        gucharmap_window_search    (GucharmapWindow *guw,
+                                        const char *str);
+
 G_END_DECLS
 
 #endif /* #ifndef GUCHARMAP_WINDOW_H */

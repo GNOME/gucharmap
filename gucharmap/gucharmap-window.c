@@ -192,6 +192,17 @@ search_finish (GucharmapSearchDialog *search_dialog,
 }
 
 static void
+ensure_search_dialog (GucharmapWindow *guw)
+{
+  if (guw->search_dialog == NULL)
+    {
+      guw->search_dialog = gucharmap_search_dialog_new (guw);
+      g_signal_connect (guw->search_dialog, "search-start", G_CALLBACK (search_start), guw);
+      g_signal_connect (guw->search_dialog, "search-finish", G_CALLBACK (search_finish), guw);
+    }
+}
+
+static void
 search_find (GSimpleAction *action,
              GVariant      *parameter,
              gpointer       data)
@@ -200,15 +211,11 @@ search_find (GSimpleAction *action,
 
   g_assert (GUCHARMAP_IS_WINDOW (guw));
 
-  if (guw->search_dialog == NULL)
-    {
-      guw->search_dialog = gucharmap_search_dialog_new (guw);
-      g_signal_connect (guw->search_dialog, "search-start", G_CALLBACK (search_start), guw);
-      g_signal_connect (guw->search_dialog, "search-finish", G_CALLBACK (search_finish), guw);
-    }
+  ensure_search_dialog (guw);
 
   gucharmap_search_dialog_present (GUCHARMAP_SEARCH_DIALOG (guw->search_dialog));
 }
+
 
 static void
 search_find_next (GSimpleAction *action,
@@ -908,4 +915,17 @@ gucharmap_window_set_font (GucharmapWindow *guw,
   font_desc = pango_font_description_from_string (font);
   gucharmap_charmap_set_font_desc (guw->charmap, font_desc);
   pango_font_description_free (font_desc);
+}
+
+void
+gucharmap_window_search (GucharmapWindow *guw,
+                         const char *str)
+{
+  g_return_if_fail (GUCHARMAP_IS_WINDOW (guw));
+  g_return_if_fail (str != NULL);
+
+  ensure_search_dialog (guw);
+  gucharmap_search_dialog_set_search (GUCHARMAP_SEARCH_DIALOG (guw->search_dialog), str);
+  gucharmap_search_dialog_start_search (GUCHARMAP_SEARCH_DIALOG (guw->search_dialog),
+                                        GUCHARMAP_DIRECTION_FORWARD);
 }
