@@ -118,6 +118,9 @@ sub process_unicode_data_txt
         my $hex = $1;
         my $name = $2;
 
+        # Skip unwanted items
+        next if ($name =~ /^<.+, (First|Last)>$/);
+
         $names{$name} = 1;
         push @unicode_pairs, [$hex, $name];
     }
