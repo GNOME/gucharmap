@@ -692,9 +692,9 @@ sub process_nameslist_txt ($)
 
 #------------------------#
 
-sub process_blocks_txt ($)
+sub read_blocks_txt
 {
-    my ($blocks_txt) = @_;
+    my ($blocks_txt, $blocks) = @_;
 
     # Override script names
     my %block_overrides =
@@ -702,10 +702,34 @@ sub process_blocks_txt ($)
       "NKo" => "N\'Ko"
     );
 
-    open (my $blocks, $blocks_txt) or die;
-    open (my $out, "> unicode-blocks.h") or die;
+    open (my $blocks_file, $blocks_txt) or die;
+
+    my $offset = 0;
+
+    while (my $line = <$blocks_file>)
+    {
+        $line =~ /^([0-9A-F]+)\.\.([0-9A-F]+); (.+)$/ or next;
+
+        my ($start,$end,$block) = ($1, $2, $3);
+
+        if (exists $block_overrides{$block}) {
+                $block = $block_overrides{$block};
+        }
+
+        push @$blocks, [$start, $end, $block, $offset];
+        $offset += length($block) + 1;
+    }
+
+    close ($blocks_file);
+}
+
+sub process_blocks_txt ($)
+{
+    my ($blocks_txt) = @_;
 
     print "processing $blocks_txt...";
+
+    open (my $out, "> unicode-blocks.h") or die;
 
     print $out "/* unicode-blocks.h */\n";
     print $out "/* THIS IS A GENERATED FILE. CHANGES WILL BE OVERWRITTEN. */\n";
@@ -719,21 +743,7 @@ sub process_blocks_txt ($)
     print $out "#include <glib/gi18n-lib.h>\n\n";
 
     my @blocks;
-    my $offset = 0;
-
-    while (my $line = <$blocks>)
-    {
-        $line =~ /^([0-9A-F]+)\.\.([0-9A-F]+); (.+)$/ or next;
-
-        my ($start,$end,$block) = ($1, $2, $3);
-
-        if (exists $block_overrides{$block}) {
-                $block = $block_overrides{$block};
-        }
-
-        push @blocks, [$start, $end, $block, $offset];
-        $offset += length($block) + 1;
-    }
+    read_blocks_txt ($blocks_txt, \@blocks);
 
     print $out "/* for extraction by intltool */\n";
     print $out "#if 0\n";
@@ -771,7 +781,6 @@ sub process_blocks_txt ($)
 
     print $out "#endif  /* #ifndef UNICODE_BLOCKS_H */\n";
 
-    close ($blocks);
     close ($out);
 
     print " done.\n";
@@ -779,9 +788,9 @@ sub process_blocks_txt ($)
 
 #------------------------#
 
-sub process_scripts_txt ($)
+sub read_scripts_txt
 {
-    my ($scripts_txt) = @_;
+    my ($scripts_txt, $script_hash, $scripts) = @_;
 
     # Override script names
     my %script_overrides =
@@ -789,13 +798,7 @@ sub process_scripts_txt ($)
       "Nko" => "N\'Ko"
     );
 
-    my %script_hash;
-    my %scripts;
-
     open (my $scripts_file, $scripts_txt) or die;
-    open (my $out, "> unicode-scripts.h") or die;
-
-    print "processing $scripts_txt...";
 
     while (my $line = <$scripts_file>)
     {
@@ -826,14 +829,28 @@ sub process_scripts_txt ($)
                 $script = $script_overrides{$script};
         }
 
-        $script_hash{$start} = { 'end' => $end, 'script' => $script };
-        $scripts{$script} = 1;
+        $script_hash->{$start} = { 'end' => $end, 'script' => $script };
+        $scripts->{$script} = 1;
     }
 
     close ($scripts_file);
 
     # Adds Common to make sure works with UCD <= 4.0.0
-    $scripts{"Common"} = 1; 
+    $scripts->{"Common"} = 1; 
+}
+
+sub process_scripts_txt ($)
+{
+    my ($scripts_txt) = @_;
+
+    print "processing $scripts_txt...";
+
+    my %script_hash;
+    my %scripts;
+
+    read_scripts_txt ($scripts_txt, \%script_hash, \%scripts);
+
+    open (my $out, "> unicode-scripts.h") or die;
 
     print $out "/* unicode-scripts.h */\n";
     print $out "/* THIS IS A GENERATED FILE. CHANGES WILL BE OVERWRITTEN. */\n";
