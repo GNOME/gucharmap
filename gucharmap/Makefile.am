@@ -1,9 +1,9 @@
 ## Copyright © 2003  Noah Levitt
-## Copyright © 2008  Christian Persch
+## Copyright © 2008, 2016  Christian Persch
 ##
 ## This program is free software; you can redistribute it and/or modify it
 ## under the terms of the GNU General Public License as published by the
-## Free Software Foundation; either version 2 of the License, or (at your
+## Free Software Foundation; either version 3 of the License, or (at your
 ## option) any later version.
 ##
 ## This program is distributed in the hope that it will be useful, but
@@ -27,6 +27,7 @@ BUILT_SOURCES = \
 	gucharmap-resources.h \
 	gucharmap-type-builtins.c \
 	gucharmap-type-builtins.h \
+	$(unicode_sources) \
 	$(NULL)
 
 libgucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@_la_SOURCES = \
@@ -56,13 +57,6 @@ libgucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@_la_SOURCES = \
 	gucharmap-script-codepoint-list.h \
 	gucharmap-unicode-info.c \
 	gucharmap-unicode-info.h \
-	unicode-blocks.h \
-	unicode-categories.h \
-	unicode-names.h \
-	unicode-nameslist.h \
-	unicode-scripts.h \
-	unicode-unihan.h \
-	unicode-versions.h \
 	$(NULL)
 
 nodist_libgucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@_la_SOURCES = $(BUILT_SOURCES)
@@ -206,12 +200,54 @@ gucharmap-type-builtins.c: gucharmap-type-builtins.c.template $(libgucharmapincl
 	&& (cmp -s xgen-gtbc gucharmap-type-builtins.c || cp xgen-gtbc gucharmap-type-builtins.c ) \
 	&& rm -f xgen-gtbc
 
-# printoptions.h: print.glade
-# 	$(AM_V_GEN) $(GTK_BUILDER_CONVERT) --root custom_tab_container $< - | \
-# 		$(XMLLINT) --noblanks - | \
-# 		$(HEXDUMP) -v -e '"" 1/1 "0x%02x,""\n"' > xgen-$(@F) \
-# 	&& (cmp -s xgen-$(@F) $@ || cp -f xgen-$(@F) $@) \
-# 	&& rm -f xgen-$(@F)
+# Unicode data
+
+WGETFLAGS = --timestamping --timeout=300 --tries=8 --no-directories --directory-prefix="$(builddir)"
+
+unicode_version = 8.0.0
+
+unicode_files = \
+	Blocks.txt \
+	DerivedAge.txt \
+	NamesList.txt \
+	Scripts.txt \
+	UnicodeData.txt \
+	Unihan.zip \
+	$(NULL)
+
+unicode_sources = \
+	unicode-blocks.h \
+	unicode-categories.h \
+	unicode-names.h \
+	unicode-nameslist.h \
+	unicode-scripts.h \
+	unicode-unihan.h \
+	unicode-versions.h \
+	$(NULL)
+
+stamp-download-unicode-data:
+if WITH_UNICODE_DATA
+	@echo timestamp > $(@F)
+else
+	$(MAKE) download-unicode-data && echo timestamp > $(@F)
+endif
+
+download-unicode-data:
+	for f in $(unicode_files); do \
+		[ -e $(builddir)/$${f} ] || $(WGET) $(WGETFLAGS) "http://www.unicode.org/Public/$(unicode_version)/ucd/$${f}"; \
+	done && \
+	$(SHA512SUM) --check $(srcdir)/unicode.sha512sums
+
+unicode.sha512sums: stamp-download-unicode-data
+	$(AM_V_GEN)$(SHA512SUM) $(addprefix $(unicodedatadir)/,$(unicode_files)) | $(SED) 's,$(unicodedatadir)/,,g' > $(srcdir)/$(@F)
+
+stamp-unicode-data:
+	PROG_UNZIP=$(PROG_UNZIP) $(srcdir)/gen-guch-unicode-tables.pl $(unicode_version) $(unicodedatadir) && \
+	echo timestamp > $(@F)
+
+$(unicode_sources): stamp-unicode-data
+
+# Dist & cleanup
 
 EXTRA_DIST = \
 	gucharmap-marshal.list \
@@ -221,11 +257,19 @@ EXTRA_DIST = \
 	download-unicode-files.sh \
 	gen-guch-unicode-tables.pl \
         gucharmap.gresource.xml.in \
+	unicode.sha512sums \
+	unicode-strings.h \
 	$(NULL)
 
 CLEANFILES = \
 	stamp-gucharmap-type-builtins.h \
+	stamp-download-unicode-data \
+	stamp-unicode-data \
 	$(BUILT_SOURCES) \
+	$(NULL)
+
+DISTCLEANFILES = \
+	$(unicode_files) \
 	$(NULL)
 
 # introspection

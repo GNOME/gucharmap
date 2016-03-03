@@ -21,6 +21,8 @@
 #include <gtk/gtk.h>
 #include <string.h>
 
+#include <glib/gi18n-lib.h>
+
 #include "gucharmap.h"
 #include "gucharmap-private.h"
 

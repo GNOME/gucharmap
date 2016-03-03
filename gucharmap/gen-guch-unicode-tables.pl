@@ -17,17 +17,9 @@
 # NOTE! Some code copied from glib/glib/gen-unicode-tables.pl; keep in sync!
 
 use strict;
-use vars ('$UNZIP');
 
-# if these things aren't in your path you can put full paths to them here
-$UNZIP = 'unzip';
-
-sub process_unicode_data_txt ($);
-sub process_unihan_zip ($);
-sub process_nameslist_txt ($);
-sub process_blocks_txt ($);
-sub process_scripts_txt ($);
-sub process_versions_txt ($);
+use Env qw($PROG_UNZIP);
+$PROG_UNZIP = "unzip" unless (defined $PROG_UNZIP);
 
 $| = 1;  # flush stdout buffer
 
@@ -94,7 +86,7 @@ exit;
 
 #------------------------#
 
-sub process_unicode_data_txt ($)
+sub process_unicode_data_txt
 {
     my ($unicodedata_txt) = @_;
 
@@ -114,7 +106,6 @@ sub process_unicode_data_txt ($)
     print $out "#define UNICODE_NAMES_H\n\n";
 
     print $out "#include <glib.h>\n\n";
-    print $out "#include <glib/gi18n-lib.h>\n\n";
 
     my @unicode_pairs;
     my %names;
@@ -304,14 +295,14 @@ EOT
 #------------------------#
 
 # XXX should do kFrequency too
-sub process_unihan_zip ($)
+sub process_unihan_zip
 {
     my ($unihan_zip) = @_;
 
-    open (my $unihan, "$UNZIP -c $unihan_zip |") or die;
-    open (my $out, "> unicode-unihan.h") or die;
+    print "processing $unihan_zip.";
 
-    print "processing $unihan_zip";
+    open (my $unihan, "$PROG_UNZIP -c '$unihan_zip' |") or die;
+    open (my $out, "> unicode-unihan.h") or die;
 
     print $out "/* unicode-unihan.h */\n";
     print $out "/* THIS IS A GENERATED FILE. CHANGES WILL BE OVERWRITTEN. */\n";
@@ -530,7 +521,7 @@ sub print_names_list
     print $out "};\n\n";
 }
 
-sub process_nameslist_txt ($)
+sub process_nameslist_txt
 {
     my ($nameslist_txt) = @_;
 
@@ -736,7 +727,7 @@ sub read_blocks_txt
     close ($blocks_file);
 }
 
-sub process_blocks_txt ($)
+sub process_blocks_txt
 {
     my ($blocks_txt) = @_;
 
@@ -753,7 +744,6 @@ sub process_blocks_txt ($)
     print $out "#define UNICODE_BLOCKS_H\n\n";
 
     print $out "#include <glib.h>\n";
-    print $out "#include <glib/gi18n-lib.h>\n\n";
 
     my @blocks;
     read_blocks_txt ($blocks_txt, \@blocks);
@@ -843,7 +833,7 @@ sub read_scripts_txt
     $scripts->{"Common"} = 1; 
 }
 
-sub process_scripts_txt ($)
+sub process_scripts_txt
 {
     my ($scripts_txt) = @_;
 
@@ -865,7 +855,6 @@ sub process_scripts_txt ($)
     print $out "#define UNICODE_SCRIPTS_H\n\n";
 
     print $out "#include <glib.h>\n";
-    print $out "#include <glib/gi18n-lib.h>\n\n";
 
     print $out "typedef struct _UnicodeScript UnicodeScript;\n\n";
 
@@ -915,7 +904,7 @@ sub process_scripts_txt ($)
 
 #------------------------#
 
-sub  process_translatable_strings
+sub process_translatable_strings
 {
     my ($blocks_txt, $scripts_txt) = @_;
 
@@ -956,7 +945,7 @@ sub  process_translatable_strings
 
 #------------------------#
 
-sub process_versions_txt ($)
+sub process_versions_txt
 {
     my ($versions_txt) = @_;
 
@@ -1010,7 +999,6 @@ sub process_versions_txt ($)
     print $out "#define UNICODE_VERSIONS_H\n\n";
 
     print $out "#include <glib.h>\n";
-    print $out "#include <glib/gi18n-lib.h>\n\n";
 
     print $out "typedef struct {\n";
     print $out "  gunichar start;\n";

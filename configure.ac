@@ -3,7 +3,7 @@
 #
 # This program is free software; you can redistribute it and/or modify it
 # under the terms of the GNU General Public License as published by the
-# Free Software Foundation; either version 2 of the License, or (at your
+# Free Software Foundation; either version 3 of the License, or (at your
 # option) any later version.
 #
 # This program is distributed in the hope that it will be useful, but
@@ -148,6 +148,7 @@ fi
 
 # Some utilities
 AC_PROG_LN_S
+AC_PROG_SED
 
 AC_ARG_VAR([GLIB_COMPILE_RESOURCES],[the glib-compile-resources programme])
 AC_PATH_PROG([GLIB_COMPILE_RESOURCES],[glib-compile-resources],[false])
@@ -155,26 +156,53 @@ if test "$GLIB_COMPILE_RESOURCES" = "false"; then
     AC_MSG_ERROR([glib-compile-resources not found])
 fi
 
-# AC_PATH_PROG([GTK_BUILDER_CONVERT],[gtk-builder-convert],[false])
-# if test "$GTK_BUILDER_CONVERT" = "false"; then
-#   AC_MSG_ERROR([gtk-builder-convert not found])
-# fi
-
 AC_ARG_VAR([XMLLINT],[the xmllint programme])
 AC_PATH_PROG([XMLLINT],[xmllint],[false])
 if test "$XMLLINT" = "false"; then
   AC_MSG_ERROR([xmllint not found])
 fi
 
-# AC_PATH_PROG([HEXDUMP],[hexdump],[false])
-# if test "$HEXDUMP" = "false"; then
-#   AC_MSG_ERROR([hexdump not found])
-# fi
-
 AC_ARG_VAR([DESKTOP_FILE_VALIDATE],[the desktop-file-validate programme])
 AC_PATH_PROG([DESKTOP_FILE_VALIDATE],[desktop-file-validate],[])
 if test -z "$DESKTOP_FILE_VALIDATE"; then
   AC_MSG_ERROR([desktop-file-validate not found])
+fi
+
+# Unicode data
+
+AC_MSG_CHECKING([for Unicode data])
+AC_ARG_WITH([unicode-data],
+        [AS_HELP_STRING([--with-unicode-data=none],[Specify absolute directory where the Unicode data files reside. If 'none', downloads the files to the build directory.])],
+        [unicodedatadir="$(readlink -f $withval)"
+         with_provided_unicode_data="yes (from $unicodedatadir)"],
+        [unicodedatadir='${builddir}'
+         with_provided_unicode_data=no])
+AC_MSG_RESULT([$with_provided_unicode_data])
+
+AM_CONDITIONAL([WITH_UNICODE_DATA],[test "$with_provided_unicode_data" != "no"])
+AC_SUBST([unicodedatadir])
+
+# If we don't have a directory where we can find Unicode data in, we need to download it.
+# For that, we need some utilities
+
+# Note! Not using UNZIP as variable name here since unzip itself
+# uses the UNZIP env var and interprets it as its options.
+AC_ARG_VAR([PROG_UNZIP],[the unzip programme])
+AC_PATH_PROG([PROG_UNZIP],[unzip],[false])
+if test "$PROG_UNZIP" = "false"; then
+    AC_MSG_ERROR([unzip not found])
+fi
+
+AC_ARG_VAR([WGET],[the wget programme])
+AC_PATH_PROG([WGET],[wget],[false])
+if test "$with_provided_unicode_data" = "no" -a "$WGET" = "false"; then
+    AC_MSG_ERROR([wget not found])
+fi
+
+AC_ARG_VAR([SHA512SUM],[the sha512sum programme])
+AC_PATH_PROG([SHA512SUM],[sha512sum],[false])
+if test "$with_provided_unicode_data" = "no" -a "$WGET" = "false"; then
+  AC_MSG_ERROR([sha512sum not found])
 fi
 
 # ****
