@@ -82,6 +82,14 @@ gucharmap_get_unicode_name (gunichar wc)
       g_snprintf (buf, sizeof (buf), "CJK COMPATIBILITY IDEOGRAPH-%04X", wc);
       return buf;
   }
+  else if (wc >= 0x17000 && wc <= 0x187ec) {
+      g_snprintf (buf, sizeof (buf), "TANGUT IDEOGRAPH-%05X", wc);
+      return buf;
+  }
+  else if (wc >= 0x18800 && wc <= 0x18af2) {
+      g_snprintf (buf, sizeof (buf), "TANGUT COMPONENT-%u", wc - 0x18800);
+      return buf;
+  }
   else if (wc >= 0xac00 && wc <= 0xd7af)
     {
       /* compute hangul syllable name as per UAX #15 */

@@ -121,6 +121,8 @@ sub process_unicode_data_txt
         # Skip items where we can easily reconstruct the name programmatically
         next if ($name =~ /^CJK UNIFIED IDEOGRAPH-[0-9A-F]{4,6}$/);
         next if ($name =~ /^CJK COMPATIBILITY IDEOGRAPH-[0-9A-F]{4,6}$/);
+        next if ($name =~ /^TANGUT IDEOGRAPH-[0-9A-F]{4,6}$/);
+        next if ($name =~ /^TANGUT COMPONENT-[0-9]+$/);
 
         # Skip unwanted items
         next if ($name =~ /^<.+, (First|Last)>$/);
