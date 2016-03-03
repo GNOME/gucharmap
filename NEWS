@@ -1,3 +1,11 @@
+gucharmap 8.0.0:
+
+Gucharmap no longer includes Unicode data. Instead the data
+is generated a build time from the unicode source data, which
+can either be downloaded from unicode.org, or be provided in
+a directory specified by the --with-unicode-data=DIRECTORY
+configure switch.
+
 gucharmap 3.18.0:
 - Update to unicode 8.0
 
