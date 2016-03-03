@@ -118,6 +118,10 @@ sub process_unicode_data_txt
         my $hex = $1;
         my $name = $2;
 
+        # Skip items where we can easily reconstruct the name programmatically
+        next if ($name =~ /^CJK UNIFIED IDEOGRAPH-[0-9A-F]{4,6}$/);
+        next if ($name =~ /^CJK COMPATIBILITY IDEOGRAPH-[0-9A-F]{4,6}$/);
+
         # Skip unwanted items
         next if ($name =~ /^<.+, (First|Last)>$/);
 
