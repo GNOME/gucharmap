@@ -770,12 +770,6 @@ gucharmap_window_init (GucharmapWindow *guw)
                                    menu_entries, G_N_ELEMENTS (menu_entries),
                                    guw);
 
-  /* snap-to-power-of-two */
-  action = g_settings_create_action (guw->settings, "snap-cols-pow2");
-  g_action_map_add_action (G_ACTION_MAP (guw), action);
-  g_signal_connect (guw->settings, "changed::snap-cols-pow2",
-                    G_CALLBACK (snap_cols_pow2_changed), guw);
-
   /* Now the widgets */
   grid = gtk_grid_new ();
   gtk_container_add (GTK_CONTAINER (guw), grid);
@@ -835,6 +829,13 @@ gucharmap_window_init (GucharmapWindow *guw)
   gtk_widget_grab_focus (GTK_WIDGET (gucharmap_charmap_get_chartable (guw->charmap)));
 
   gtk_window_set_has_resize_grip (GTK_WINDOW (guw), TRUE);
+
+  /* snap-to-power-of-two */
+  action = g_settings_create_action (guw->settings, "snap-cols-pow2");
+  g_action_map_add_action (G_ACTION_MAP (guw), action);
+  snap_cols_pow2_changed (guw->settings, "snap-cols-pow2", guw);
+  g_signal_connect (guw->settings, "changed::snap-cols-pow2",
+                    G_CALLBACK (snap_cols_pow2_changed), guw);
 
   /* read initial settings */
   /* font */
