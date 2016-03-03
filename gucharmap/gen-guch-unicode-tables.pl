@@ -17,11 +17,10 @@
 # NOTE! Some code copied from glib/glib/gen-unicode-tables.pl; keep in sync!
 
 use strict;
-use vars ('$UNZIP', '$ICONV');
+use vars ('$UNZIP');
 
 # if these things aren't in your path you can put full paths to them here
 $UNZIP = 'unzip';
-$ICONV = 'iconv';
 
 sub process_unicode_data_txt ($);
 sub process_unihan_zip ($);
