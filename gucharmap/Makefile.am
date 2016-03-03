@@ -241,7 +241,7 @@ download-unicode-data:
 unicode.sha512sums: stamp-download-unicode-data
 	$(AM_V_GEN)$(SHA512SUM) $(addprefix $(unicodedatadir)/,$(unicode_files)) | $(SED) 's,$(unicodedatadir)/,,g' > $(srcdir)/$(@F)
 
-stamp-unicode-data:
+stamp-unicode-data: stamp-download-unicode-data
 	PROG_UNZIP=$(PROG_UNZIP) $(srcdir)/gen-guch-unicode-tables.pl $(unicode_version) $(unicodedatadir) && \
 	echo timestamp > $(@F)
 
