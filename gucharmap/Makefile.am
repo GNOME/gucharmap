@@ -355,4 +355,6 @@ EXTRA_DIST += $(gsettings_SCHEMAS)
 
 @GSETTINGS_RULES@
 
+.PHONY: unicode.sha512sums
+
 -include $(top_srcdir)/git.mk
