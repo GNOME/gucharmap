@@ -88,7 +88,7 @@ gucharmap_get_unicode_name (gunichar wc)
       return buf;
   }
   else if (wc >= 0x18800 && wc <= 0x18af2) {
-      g_snprintf (buf, sizeof (buf), "TANGUT COMPONENT-%u", wc - 0x18800);
+      g_snprintf (buf, sizeof (buf), "TANGUT COMPONENT-%u", wc - 0x18800 + 1);
       return buf;
   }
 #endif
