@@ -78,7 +78,7 @@ GucharmapCodepointList * gucharmap_chapters_model_get_book_codepoint_list (Gucha
 gboolean                 gucharmap_chapters_model_character_to_iter       (GucharmapChaptersModel *chapters,
                                                                            gunichar                wc,
                                                                            GtkTreeIter            *iter);
-gboolean                 gucharmap_chapters_model_id_to_iter              (GucharmapChaptersModel *model,
+gboolean                 gucharmap_chapters_model_id_to_iter              (GucharmapChaptersModel *chapters_model,
                                                                            const char             *id,
                                                                            GtkTreeIter            *_iter);
 
