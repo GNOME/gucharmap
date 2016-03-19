@@ -15,7 +15,7 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 59 Temple Place, Suite 330, Boston, MA 02110-1301  USA
 
-m4_define([gucharmap_version_major],[8])
+m4_define([gucharmap_version_major],[9])
 m4_define([gucharmap_version_minor],[0])
 m4_define([gucharmap_version_micro],[0])
 m4_define([gucharmap_version_extra],[])
