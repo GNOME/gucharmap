@@ -254,11 +254,10 @@ EXTRA_DIST = \
 	gucharmap-type-builtins.c.template \
 	gucharmap-type-builtins.h.template \
 	gucharmaprc.rc \
-	download-unicode-files.sh \
 	gen-guch-unicode-tables.pl \
         gucharmap.gresource.xml.in \
 	unicode.sha512sums \
-	unicode-strings.h \
+	unicode-i18n.h \
 	$(NULL)
 
 CLEANFILES = \
