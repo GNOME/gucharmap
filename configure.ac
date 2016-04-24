@@ -151,21 +151,27 @@ AC_PROG_LN_S
 AC_PROG_SED
 
 AC_ARG_VAR([GLIB_COMPILE_RESOURCES],[the glib-compile-resources programme])
-AC_PATH_PROG([GLIB_COMPILE_RESOURCES],[glib-compile-resources],[false])
-if test "$GLIB_COMPILE_RESOURCES" = "false"; then
-    AC_MSG_ERROR([glib-compile-resources not found])
+if test -z "$GLIB_COMPILE_RESOURCES"; then
+  AC_PATH_PROG([GLIB_COMPILE_RESOURCES],[glib-compile-resources],[false])
+  if test "$GLIB_COMPILE_RESOURCES" = "false"; then
+      AC_MSG_ERROR([glib-compile-resources not found])
+  fi
 fi
 
 AC_ARG_VAR([XMLLINT],[the xmllint programme])
-AC_PATH_PROG([XMLLINT],[xmllint],[false])
-if test "$XMLLINT" = "false"; then
-  AC_MSG_ERROR([xmllint not found])
+if test -z "$XMLLINT"; then
+  AC_PATH_PROG([XMLLINT],[xmllint],[false])
+  if test "$XMLLINT" = "false"; then
+    AC_MSG_ERROR([xmllint not found])
+  fi
 fi
 
 AC_ARG_VAR([DESKTOP_FILE_VALIDATE],[the desktop-file-validate programme])
-AC_PATH_PROG([DESKTOP_FILE_VALIDATE],[desktop-file-validate],[])
 if test -z "$DESKTOP_FILE_VALIDATE"; then
-  AC_MSG_ERROR([desktop-file-validate not found])
+  AC_PATH_PROG([DESKTOP_FILE_VALIDATE],[desktop-file-validate],[])
+  if test -z "$DESKTOP_FILE_VALIDATE"; then
+    AC_MSG_ERROR([desktop-file-validate not found])
+  fi
 fi
 
 # Unicode data
@@ -188,21 +194,27 @@ AC_SUBST([unicodedatadir])
 # Note! Not using UNZIP as variable name here since unzip itself
 # uses the UNZIP env var and interprets it as its options.
 AC_ARG_VAR([PROG_UNZIP],[the unzip programme])
-AC_PATH_PROG([PROG_UNZIP],[unzip],[false])
-if test "$PROG_UNZIP" = "false"; then
-    AC_MSG_ERROR([unzip not found])
+if test -z "$PROG_UNZIP"; then
+  AC_PATH_PROG([PROG_UNZIP],[unzip],[false])
+  if test "$PROG_UNZIP" = "false"; then
+      AC_MSG_ERROR([unzip not found])
+  fi
 fi
 
 AC_ARG_VAR([WGET],[the wget programme])
-AC_PATH_PROG([WGET],[wget],[false])
-if test "$with_provided_unicode_data" = "no" -a "$WGET" = "false"; then
-    AC_MSG_ERROR([wget not found])
+if test -z "$WGET"; then
+  AC_PATH_PROG([WGET],[wget],[false])
+  if test "$with_provided_unicode_data" = "no" -a "$WGET" = "false"; then
+      AC_MSG_ERROR([wget not found])
+  fi
 fi
 
 AC_ARG_VAR([SHA512SUM],[the sha512sum programme])
-AC_PATH_PROG([SHA512SUM],[sha512sum],[false])
-if test "$with_provided_unicode_data" = "no" -a "$WGET" = "false"; then
-  AC_MSG_ERROR([sha512sum not found])
+if test -z "$SHA512SUM"; then
+  AC_PATH_PROG([SHA512SUM],[sha512sum],[false])
+  if test "$with_provided_unicode_data" = "no" -a "$WGET" = "false"; then
+    AC_MSG_ERROR([sha512sum not found])
+  fi
 fi
 
 # ****
