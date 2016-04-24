@@ -1,4 +1,4 @@
-#!/usr/bin/perl -w
+#!/usr/bin/env perl
 #
 # $Id$ 
 #
@@ -17,6 +17,7 @@
 # NOTE! Some code copied from glib/glib/gen-unicode-tables.pl; keep in sync!
 
 use strict;
+use warnings;
 
 use Env qw($PROG_UNZIP);
 $PROG_UNZIP = "unzip" unless (defined $PROG_UNZIP);
