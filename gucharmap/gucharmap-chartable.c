@@ -1918,7 +1918,8 @@ gucharmap_chartable_init (GucharmapChartable *chartable)
   gtk_widget_set_events (widget,
           GDK_EXPOSURE_MASK | GDK_KEY_PRESS_MASK | GDK_BUTTON_PRESS_MASK |
           GDK_BUTTON_RELEASE_MASK | GDK_BUTTON3_MOTION_MASK |
-          GDK_BUTTON1_MOTION_MASK | GDK_FOCUS_CHANGE_MASK | GDK_SCROLL_MASK);
+          GDK_BUTTON1_MOTION_MASK | GDK_FOCUS_CHANGE_MASK |
+          GDK_SCROLL_MASK | GDK_SMOOTH_SCROLL_MASK);
 
   priv->target_list = gtk_target_list_new (NULL, 0);
   gtk_target_list_add_text_targets (priv->target_list, 0);
