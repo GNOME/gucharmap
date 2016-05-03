@@ -211,7 +211,7 @@ fi
 
 AC_ARG_VAR([SHA512SUM],[the sha512sum programme])
 if test -z "$SHA512SUM"; then
-  AC_PATH_PROG([SHA512SUM],[sha512sum],[false])
+  AC_PATH_PROGS([SHA512SUM],[gsha512sum sha512sum],[false])
   if test "$with_provided_unicode_data" = "no" -a "$WGET" = "false"; then
     AC_MSG_ERROR([sha512sum not found])
   fi
