@@ -204,7 +204,7 @@ gucharmap-type-builtins.c: gucharmap-type-builtins.c.template $(libgucharmapincl
 
 WGETFLAGS = --timestamping --timeout=300 --tries=8 --no-directories --directory-prefix="$(builddir)"
 
-unicode_version = 8.0.0
+unicode_version = 9.0.0
 
 unicode_files = \
 	Blocks.txt \
@@ -239,7 +239,7 @@ download-unicode-data:
 	$(SHA512SUM) --check $(srcdir)/unicode.sha512sums
 
 unicode.sha512sums: stamp-download-unicode-data
-	$(AM_V_GEN)$(SHA512SUM) $(addprefix $(unicodedatadir)/,$(unicode_files)) | $(SED) 's,$(unicodedatadir)/,,g' > $(srcdir)/$(@F)
+	$(AM_V_GEN)$(SHA512SUM) --tag $(addprefix $(unicodedatadir)/,$(unicode_files)) | $(SED) 's,$(unicodedatadir)/,,g' > $(srcdir)/$(@F)
 
 stamp-unicode-data: stamp-download-unicode-data
 	PROG_UNZIP=$(PROG_UNZIP) $(srcdir)/gen-guch-unicode-tables.pl $(unicode_version) $(unicodedatadir) && \

@@ -453,10 +453,10 @@ help_about (GSimpleAction *action,
   gtk_show_about_dialog (GTK_WINDOW (guw),
 			 "program-name", _("GNOME Character Map"),
 			 "version", VERSION,
-			 "comments", _("Based on the Unicode Character Database 8.0.0"),
+			 "comments", _("Based on the Unicode Character Database 9.0.0"),
 			 "copyright", "Copyright © 2004 Noah Levitt\n"
-				      "Copyright © 1991–2015 Unicode, Inc.\n"
-				      "Copyright © 2007–2013 Christian Persch",
+				      "Copyright © 1991–2016 Unicode, Inc.\n"
+				      "Copyright © 2007–2016 Christian Persch",
 			 "documenters", documenters,
 			 "license", license_trans,
 			 "wrap-license", TRUE,
