@@ -42,6 +42,33 @@ option_version_cb (const gchar *option_name,
   return FALSE;
 }
 
+static gboolean
+option_print_cb (const gchar *option_name,
+                 const gchar *value,
+                 gpointer     data,
+                 GError     **error)
+{
+  const char *p;
+
+  for (p = value; *p; p = g_utf8_next_char (p)) {
+    gunichar c;
+    char utf[7];
+
+    c = g_utf8_get_char (p);
+    if (c == (gunichar)-1)
+      continue;
+
+    utf[g_unichar_to_utf8 (c, utf)] = '\0';
+
+    g_print("%s\tU+%04X\t%s\n",
+            utf, c,
+            gucharmap_get_unicode_name (c));
+  }
+
+  exit (EXIT_SUCCESS);
+  return FALSE;
+}
+
 static GAction *
 get_corresponding_window_action (GtkApplication *app,
                                  GAction        *action)
@@ -211,6 +238,8 @@ main (int argc, char **argv)
       N_("Font to start with; ex: 'Serif 27'"), N_("FONT") },
     { "version", 0, G_OPTION_FLAG_HIDDEN | G_OPTION_FLAG_NO_ARG, 
       G_OPTION_ARG_CALLBACK, option_version_cb, NULL, NULL },
+    { "print", 'p', 0, G_OPTION_ARG_CALLBACK, option_print_cb,
+      "Print characters in string", "STRING" },
     { G_OPTION_REMAINING, 0, 0, G_OPTION_ARG_STRING_ARRAY, &remaining,
       NULL, N_("[STRING…]") },
     { NULL }
