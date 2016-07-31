@@ -31,9 +31,7 @@
 #include "unicode-nameslist.h"
 #include "unicode-categories.h"
 #include "unicode-versions.h"
-#if ENABLE_UNIHAN
-# include "unicode-unihan.h"
-#endif
+#include "unicode-unihan.h"
 
 /* constants for hangul (de)composition, see UAX #15 */
 #define SBase 0xAC00
@@ -240,8 +238,6 @@ gucharmap_unicode_version_to_string (GucharmapUnicodeVersion version)
   return unicode_version_strings + unicode_version_string_offsets[version - 1];
 }
 
-#if ENABLE_UNIHAN
-
 gint
 gucharmap_get_unihan_count (void)
 {
@@ -285,58 +281,6 @@ _get_unihan (gunichar uc)
   most_recent_result = NULL;
   return NULL;
 }
-
-#else /* #if ENABLE_UNIHAN */
-
-gint
-gucharmap_get_unihan_count ()
-{
-  return 0;
-}
-
-const gchar * 
-gucharmap_get_unicode_kDefinition (gunichar uc)
-{
-  return "This feature was not compiled in.";
-}
-
-const gchar * 
-gucharmap_get_unicode_kCantonese (gunichar uc)
-{
-  return "This feature was not compiled in.";
-}
-
-const gchar * 
-gucharmap_get_unicode_kMandarin (gunichar uc)
-{
-  return "This feature was not compiled in.";
-}
-
-const gchar * 
-gucharmap_get_unicode_kTang (gunichar uc)
-{
-  return "This feature was not compiled in.";
-}
-
-const gchar * 
-gucharmap_get_unicode_kKorean (gunichar uc)
-{
-  return "This feature was not compiled in.";
-}
-
-const gchar * 
-gucharmap_get_unicode_kJapaneseKun (gunichar uc)
-{
-  return "This feature was not compiled in.";
-}
-
-const gchar * 
-gucharmap_get_unicode_kJapaneseOn (gunichar uc)
-{
-  return "This feature was not compiled in.";
-}
-
-#endif /* #else (#if ENABLE_UNIHAN) */
 
 /* does a binary search; also caches most recent, since it will often be
  * called in succession on the same character */

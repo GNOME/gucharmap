@@ -149,8 +149,6 @@ matches (GucharmapSearchDialog *search_dialog,
 
   if (annotations)
     {
-
-#if ENABLE_UNIHAN
       haystack = gucharmap_get_unicode_kDefinition (wc);
       if (haystack)
 	{
@@ -163,7 +161,6 @@ matches (GucharmapSearchDialog *search_dialog,
 
       if (matched)
 	return TRUE;
-#endif
 
       haystack_arr = gucharmap_get_nameslist_equals (wc);
       if (haystack_arr)
@@ -877,11 +874,7 @@ gucharmap_search_dialog_get_completed (GucharmapSearchDialog *search_dialog)
     return -1.0;
   else
     {
-#if ENABLE_UNIHAN
       gdouble total = gucharmap_get_unicode_data_name_count () + gucharmap_get_unihan_count ();
-#else
-      gdouble total = gucharmap_get_unicode_data_name_count ();
-#endif
       return (gdouble) priv->search_state->strings_checked / total;
     }
 }

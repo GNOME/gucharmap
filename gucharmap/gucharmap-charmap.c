@@ -695,8 +695,6 @@ set_details (GucharmapCharmap *charmap,
         }
     }
 
-#if ENABLE_UNIHAN
-
   /* this isn't so bad efficiency-wise */
   if (gucharmap_get_unicode_kDefinition (uc)
       || gucharmap_get_unicode_kCantonese (uc)
@@ -743,7 +741,6 @@ set_details (GucharmapCharmap *charmap,
         insert_vanilla_detail (charmap, buffer, &iter,
                                _("Korean Pronunciation:"), csp);
     }
-#endif /* #if ENABLE_UNIHAN */
 }
 
 static void
@@ -778,11 +775,9 @@ chartable_sync_active_char (GtkWidget *widget,
   g_string_append_printf (gs, "U+%4.4X %s", wc, 
                           gucharmap_get_unicode_name (wc));
 
-#if ENABLE_UNIHAN
   temp = gucharmap_get_unicode_kDefinition (wc);
   if (temp)
     g_string_append_printf (gs, "   %s", temp);
-#endif
 
   temps = gucharmap_get_nameslist_equals (wc);
   if (temps)

@@ -138,14 +138,6 @@ AC_CHECK_FUNCS([bind_textdomain_codeset])
 AC_SUBST(GTK_CFLAGS)
 AC_SUBST(GTK_LIBS)
 
-AH_TEMPLATE([ENABLE_UNIHAN], [Define if you want CJK ideograph information])
-AC_ARG_ENABLE(unihan, 
-              AC_HELP_STRING([--disable-unihan], 
-                             [do not build in CJK ideograph information]))
-if test "x$enable_unihan" != "xno" ; then
-    AC_DEFINE([ENABLE_UNIHAN],[1],[Define if you want CJK ideograph information])
-fi
-
 # Some utilities
 AC_PROG_LN_S
 AC_PROG_SED
