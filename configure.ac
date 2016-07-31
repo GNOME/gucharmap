@@ -258,7 +258,7 @@ CC_CHECK_CFLAGS_APPEND([ \
   -Wdeclaration-after-statement -Wold-style-definition \
   -Wno-missing-field-initializers -Wno-unused-parameter \
   -Wformat-signedness \
-  -fno-common -Wno-switch-enum])
+  -fno-common -fno-strict-aliasing -Wno-switch-enum])
 
 # ********
 # Bindings
