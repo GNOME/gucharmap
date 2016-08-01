@@ -598,8 +598,24 @@ gucharmap_unichar_isgraph (gunichar uc)
 {
   GUnicodeType t = gucharmap_unichar_type (uc);
 
+  /* From http://www.unicode.org/versions/Unicode9.0.0/ch09.pdf, p16
+   * "Unlike most other format control characters, however, they should be
+   *  rendered with a visible glyph, even in circumstances where no suitable
+   *  digit or sequence of digits follows them in logical order."
+   * There the standard talks about the ar signs spanning numbers, but
+   * I think this should apply to all Prepended_Concatenation_Mark format
+   * characters.
+   * Instead of parsing the corresponding data file, just hardcode the
+   * (few!) existing characters here.
+   */
+  if (t == G_UNICODE_FORMAT)
+    return (uc >= 0x0600 && uc <= 0x0605) || 
+	   uc == 0x06DD ||
+           uc == 0x070F ||
+           uc == 0x08E2 ||
+           uc == 0x110BD;
+
   return (t != G_UNICODE_CONTROL
-          && t != G_UNICODE_FORMAT
           && t != G_UNICODE_UNASSIGNED
           && t != G_UNICODE_PRIVATE_USE
           && t != G_UNICODE_SURROGATE
