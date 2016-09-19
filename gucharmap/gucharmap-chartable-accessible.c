@@ -538,13 +538,16 @@ gucharmap_chartable_accessible_class_init (GucharmapChartableAccessibleClass *kl
 {
   GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
   AtkObjectClass *atk_object_class = ATK_OBJECT_CLASS (klass);
-  GtkAccessibleClass *accessible_class = GTK_ACCESSIBLE_CLASS (klass);
 
   gucharmap_chartable_accessible_parent_class = g_type_class_peek_parent (klass);
 
   gobject_class->finalize = gucharmap_chartable_accessible_finalize;
 
-  accessible_class->connect_widget_destroyed = gucharmap_chartable_accessible_connect_widget_destroyed;
+  /* This is normally true, except during introspection dump */
+  if (GTK_IS_ACCESSIBLE_CLASS (klass)) {
+    GtkAccessibleClass *accessible_class = GTK_ACCESSIBLE_CLASS (klass);
+    accessible_class->connect_widget_destroyed = gucharmap_chartable_accessible_connect_widget_destroyed;
+  }
 
   atk_object_class->get_n_children = gucharmap_chartable_accessible_get_n_children;
   atk_object_class->ref_child = gucharmap_chartable_accessible_ref_child;
