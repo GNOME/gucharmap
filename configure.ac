@@ -170,14 +170,23 @@ fi
 
 AC_MSG_CHECKING([for Unicode data])
 AC_ARG_WITH([unicode-data],
-        [AS_HELP_STRING([--with-unicode-data=none],[Specify absolute directory where the Unicode data files reside. If 'none', downloads the files to the build directory.])],
-        [unicodedatadir="$(readlink -f $withval)"
-         with_provided_unicode_data="yes (from $unicodedatadir)"],
-        [unicodedatadir='${builddir}'
-         with_provided_unicode_data=no])
+        [AS_HELP_STRING([--with-unicode-data=PATH],[Specify absolute directory where the Unicode data files reside. If 'download', downloads the files to the build directory.])],
+        [case "$withval" in
+           download) unicodedatadir='${builddir}'
+                     with_provided_unicode_data="download"
+                     ;;
+	   yes|no) AC_MSG_ERROR([You need to specify the path to the unicode data files with --with-unicode-data=PATH, or use
+--with-unicode-data=download to download the data files during the build process.])
+                   ;;
+           *) unicodedatadir="$(readlink -f $withval)"
+              with_provided_unicode_data="yes (from $unicodedatadir)"
+              ;;
+         esac],
+        [AC_MSG_ERROR([You need to specify the path to the unicode data files with --with-unicode-data=PATH, or use
+--with-unicode-data=download to download the data files during the build process.])])
 AC_MSG_RESULT([$with_provided_unicode_data])
 
-AM_CONDITIONAL([WITH_UNICODE_DATA],[test "$with_provided_unicode_data" != "no"])
+AM_CONDITIONAL([WITH_UNICODE_DATA],[test "$with_provided_unicode_data" != "download"])
 AC_SUBST([unicodedatadir])
 
 # If we don't have a directory where we can find Unicode data in, we need to download it.
@@ -196,7 +205,7 @@ fi
 AC_ARG_VAR([WGET],[the wget programme])
 if test -z "$WGET"; then
   AC_PATH_PROG([WGET],[wget],[false])
-  if test "$with_provided_unicode_data" = "no" -a "$WGET" = "false"; then
+  if test "$with_provided_unicode_data" = "download" -a "$WGET" = "false"; then
       AC_MSG_ERROR([wget not found])
   fi
 fi
@@ -204,7 +213,7 @@ fi
 AC_ARG_VAR([SHA512SUM],[the sha512sum programme])
 if test -z "$SHA512SUM"; then
   AC_PATH_PROGS([SHA512SUM],[gsha512sum sha512sum],[false])
-  if test "$with_provided_unicode_data" = "no" -a "$WGET" = "false"; then
+  if test "$with_provided_unicode_data" = "download" -a "$WGET" = "false"; then
     AC_MSG_ERROR([sha512sum not found])
   fi
 fi
