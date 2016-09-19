@@ -47,15 +47,15 @@ AM_SILENT_RULES([yes])
 AM_MAINTAINER_MODE([enable])
 
 # checks for progs
+
+GNOME_DEBUG_CHECK
+
 AC_PROG_CC
 AC_DISABLE_STATIC
 AC_PROG_LIBTOOL
 IT_PROG_INTLTOOL([0.40.0])
 
 AM_PROG_CC_C_O
-
-# checks for stuff
-GNOME_DEBUG_CHECK
 
 # User documentation
 YELP_HELP_INIT([no-lc-media-links no-lc-dist])
