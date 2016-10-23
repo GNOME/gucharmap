@@ -336,6 +336,8 @@ sub process_unihan_zip
     print $out "  gint32 kKorean;\n";
     print $out "  gint32 kJapaneseKun;\n";
     print $out "  gint32 kJapaneseOn;\n";
+    print $out "  gint32 kHangul;\n";
+    print $out "  gint32 kVietnamese;\n";
     print $out "} \n";
     print $out "unihan[] =\n";
     print $out "{\n";
@@ -344,7 +346,7 @@ sub process_unihan_zip
     my $offset = 0;
 
     my $wc = 0;
-    my ($kDefinition, $kCantonese, $kMandarin, $kTang, $kKorean, $kJapaneseKun, $kJapaneseOn);
+    my ($kDefinition, $kCantonese, $kMandarin, $kTang, $kKorean, $kJapaneseKun, $kJapaneseOn, $kHangul, $kVietnamese);
 
     my $i = 0;
     while (my $line = <$unihan>)
@@ -363,9 +365,9 @@ sub process_unihan_zip
         {
             if (defined $kDefinition or defined $kCantonese or defined $kMandarin 
                 or defined $kTang or defined $kKorean or defined $kJapaneseKun
-                or defined $kJapaneseOn)
+                or defined $kJapaneseOn or defined $kHangul or defined $kVietnamese)
             {
-                printf $out ("  { 0x%04X, \%d, \%d, \%d, \%d, \%d, \%d, \%d },\n",
+                printf $out ("  { 0x%04X, \%d, \%d, \%d, \%d, \%d, \%d, \%d, \%d, \%d },\n",
                              $wc,
                              (defined($kDefinition) ? $kDefinition : -1),
                              (defined($kCantonese) ? $kCantonese: -1),
@@ -373,7 +375,9 @@ sub process_unihan_zip
                              (defined($kTang) ? $kTang : -1),
                              (defined($kKorean) ? $kKorean : -1),
                              (defined($kJapaneseKun) ? $kJapaneseKun : -1),
-                             (defined($kJapaneseOn) ? $kJapaneseOn : -1));
+                             (defined($kJapaneseOn) ? $kJapaneseOn : -1),
+                             (defined($kHangul) ? $kHangul : -1),
+                             (defined($kVietnamese) ? $kVietnamese : -1));
             }
 
             $wc = $new_wc;
@@ -385,10 +389,12 @@ sub process_unihan_zip
             undef $kKorean;
             undef $kJapaneseKun;
             undef $kJapaneseOn;
+            undef $kHangul;
+            undef $kVietnamese;
         }
 
         for my $f (qw(kDefinition kCantonese kMandarin
-                     kTang kKorean kJapaneseKun kJapaneseOn)) {
+                     kTang kKorean kJapaneseKun kJapaneseOn kHangul kVietnamese)) {
 
             if ($field eq $f) {
 	        push @strings, $value;
@@ -420,6 +426,12 @@ sub process_unihan_zip
         elsif ($field eq "kJapaneseOn") {
             $kJapaneseOn = $value;
         }
+        elsif ($field eq "kHangul") {
+            $kHangul = $value;
+        }
+        elsif ($field eq "kVietnamese") {
+            $kVietnamese = $value;
+        }
 
         if ($i++ % 32768 == 0) {
             print ".";
@@ -438,7 +450,7 @@ sub process_unihan_zip
     print $out "static const Unihan *_get_unihan (gunichar uc)\n;";
 
     for my $name (qw(kDefinition kCantonese kMandarin
-		    kTang kKorean kJapaneseKun kJapaneseOn)) {
+		    kTang kKorean kJapaneseKun kJapaneseOn kHangul kVietnamese)) {
     print $out <<EOT;
 
 static inline const char * unihan_get_$name (const Unihan *uh)
