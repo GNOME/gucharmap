@@ -1,5 +1,6 @@
 /*
  * Copyright © 2004 Noah Levitt
+ * Copyright (c) 2016 DaeHyun Sung
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -64,6 +65,8 @@ const gchar *  gucharmap_get_unicode_kTang               (gunichar uc);
 const gchar *  gucharmap_get_unicode_kKorean             (gunichar uc);
 const gchar *  gucharmap_get_unicode_kJapaneseKun        (gunichar uc);
 const gchar *  gucharmap_get_unicode_kJapaneseOn         (gunichar uc);
+const gchar *  gucharmap_get_unicode_kHangul             (gunichar uc);
+const gchar *  gucharmap_get_unicode_kVietnamese         (gunichar uc);
 
 /* nameslist stuff */
 const gchar ** gucharmap_get_nameslist_stars             (gunichar  uc);

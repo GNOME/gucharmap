@@ -415,6 +415,7 @@ help_about (GSimpleAction *action,
       "Daniel Elstner <daniel.elstner@gmx.net>", 
       "Padraig O'Briain <Padraig.Obriain@sun.com>",
       "Christian Persch <" "chpe" "\100" "gnome" "." "org" ">",
+      "DaeHyun Sung <sungdh86@gmail.com>",
       NULL 
     };
 
@@ -456,7 +457,8 @@ help_about (GSimpleAction *action,
 			 "comments", _("Based on the Unicode Character Database 9.0.0"),
 			 "copyright", "Copyright © 2004 Noah Levitt\n"
 				      "Copyright © 1991–2016 Unicode, Inc.\n"
-				      "Copyright © 2007–2016 Christian Persch",
+				      "Copyright © 2007–2016 Christian Persch\n"
+                                      "Copyright © 2016 DaeHyun Sung",
 			 "documenters", documenters,
 			 "license", license_trans,
 			 "wrap-license", TRUE,

@@ -2,6 +2,7 @@
 # This file is distributed under the same license as the gucharmap package.
 # Young-Ho, Cha <ganadist at mizi.com>, 2003-2006.
 # Changwoo Ryu <cwryu@debian.org>, 2007-2015.
+# DaeHyun Sung <sungdh86@gmail.com>, 2016.
 #
 # 참고:
 # - 이 프로그램을 'Character Map'이라고 하는데 '문자 표'라고 번역.
@@ -21,8 +22,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gucharmap&keywords=I18N+L10N&component=general\n"
 "POT-Creation-Date: 2015-09-05 10:10+0000\n"
-"PO-Revision-Date: 2015-09-06 02:56+0900\n"
-"Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
+"PO-Revision-Date: 2016-10-23 02:56+0900\n"
+"Last-Translator: DaeHyun Sung <sungdh86@gmail.com>\n"
 "Language-Team: GNOME Korea <gnome-kr@googlegroups.com>\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
@@ -146,11 +147,11 @@ msgstr "뜻을 영어로 풀어놓기:"
 
 #: ../gucharmap/gucharmap-charmap.c:719
 msgid "Mandarin Pronunciation:"
-msgstr "북경어 표기:"
+msgstr "북경어 발음:"
 
 #: ../gucharmap/gucharmap-charmap.c:724
 msgid "Cantonese Pronunciation:"
-msgstr "광동어 표기:"
+msgstr "광동어 발음:"
 
 #: ../gucharmap/gucharmap-charmap.c:729
 msgid "Japanese On Pronunciation:"
@@ -162,11 +163,19 @@ msgstr "일본어 훈독:"
 
 #: ../gucharmap/gucharmap-charmap.c:739
 msgid "Tang Pronunciation:"
-msgstr "중국 고어 표기:"
+msgstr "중국 고어(당음) 발음:"
 
 #: ../gucharmap/gucharmap-charmap.c:744
 msgid "Korean Pronunciation:"
+msgstr "한국어 발음:"
+
+#: ../gucharmap/gucharmap-charmap.c:749
+msgid "Korean Alphabet(Hangul):"
 msgstr "한글 표기:"
+
+#: ../gucharmap/gucharmap-charmap.c:754
+msgid "Vietnamese Pronunciation:"
+msgstr "베트남어 발음:"
 
 #: ../gucharmap/gucharmap-charmap.c:1129
 msgid "Characte_r Table"
@@ -539,14 +548,15 @@ msgid "GNOME Character Map"
 msgstr "그놈 문자 표"
 
 #: ../gucharmap/gucharmap-window.c:449
-msgid "Based on the Unicode Character Database 8.0.0"
-msgstr "유니코드 문자 데이터베이스 8.0.0 기준"
+msgid "Based on the Unicode Character Database 9.0.0"
+msgstr "유니코드 문자 데이터베이스 9.0.0 기준"
 
 #: ../gucharmap/gucharmap-window.c:458
 msgid "translator-credits"
 msgstr ""
 "차영호 <ganadist@gmail.com>\n"
-"류창우 <cwryu@debian.org>"
+"류창우 <cwryu@debian.org>\n"
+"성대현 <sungdh86@gmail.com>"
 
 #: ../gucharmap/gucharmap-window.c:547
 msgid "Next Script"
@@ -1084,7 +1094,7 @@ msgstr "카타카나"
 
 #: ../gucharmap/unicode-blocks.h:120 ../gucharmap/unicode-scripts.h:26
 msgid "Bopomofo"
-msgstr "주음 기호(중국어 발음기호)"
+msgstr "주음부호(중국어 발음기호)"
 
 #: ../gucharmap/unicode-blocks.h:121
 msgid "Hangul Compatibility Jamo"
@@ -1098,7 +1108,7 @@ msgstr "간분"
 
 #: ../gucharmap/unicode-blocks.h:123
 msgid "Bopomofo Extended"
-msgstr "보포모포 확장영역"
+msgstr "주음부호 확장영역"
 
 #: ../gucharmap/unicode-blocks.h:124
 msgid "CJK Strokes"
