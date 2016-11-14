@@ -29,25 +29,26 @@
 # Benjamin Steinwender <b@stbe.at>, 2013.
 # Wolfgang Stöggl <c72578@yahoo.de>, 2014.
 # Bernd Homuth <dev@hmt.im>, 2015.
+# Paul Seyfert <pseyfert@mathphys.fsk.uni-heidelberg.de>, 2016.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gucharmap&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-07-23 19:18+0000\n"
-"PO-Revision-Date: 2016-08-04 13:06+0200\n"
-"Last-Translator: Mario Blättermann <mario.blaettermann@gmail.com>\n"
+"POT-Creation-Date: 2016-10-30 11:56+0000\n"
+"PO-Revision-Date: 2016-11-12 11:52+0100\n"
+"Last-Translator: Paul Seyfert <pseyfert@mathphys.fsk.uni-heidelberg.de>\n"
 "Language-Team: Deutsch <gnome-de@gnome.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.8\n"
+"X-Generator: Poedit 1.6.10\n"
 
 #: ../data/gucharmap.appdata.xml.in.h:1 ../gucharmap.desktop.in.in.h:1
-#: ../gucharmap/gucharmap-window.c:766 ../gucharmap/main.c:238
+#: ../gucharmap/gucharmap-window.c:768 ../gucharmap/main.c:267
 msgid "Character Map"
 msgstr "Zeichentabelle"
 
@@ -91,68 +92,68 @@ msgstr "Alle"
 msgid "Unicode Block"
 msgstr "Unicode-Block"
 
-#: ../gucharmap/gucharmap-charmap.c:524
+#: ../gucharmap/gucharmap-charmap.c:525
 msgid "Canonical decomposition:"
 msgstr "Kanonische Zerlegung:"
 
-#: ../gucharmap/gucharmap-charmap.c:567 ../gucharmap/gucharmap-chartable.c:581
+#: ../gucharmap/gucharmap-charmap.c:568 ../gucharmap/gucharmap-chartable.c:581
 msgid "[not a printable character]"
 msgstr "[kein druckbares Zeichen]"
 
-#: ../gucharmap/gucharmap-charmap.c:581
+#: ../gucharmap/gucharmap-charmap.c:582
 msgid "General Character Properties"
 msgstr "Allgemeine Zeicheneigenschaften"
 
-#: ../gucharmap/gucharmap-charmap.c:587
+#: ../gucharmap/gucharmap-charmap.c:588
 msgid "In Unicode since:"
 msgstr "In Unicode enthalten seit:"
 
 #. character category
-#: ../gucharmap/gucharmap-charmap.c:591
+#: ../gucharmap/gucharmap-charmap.c:592
 msgid "Unicode category:"
 msgstr "Unicode-Kategorie:"
 
-#: ../gucharmap/gucharmap-charmap.c:600
+#: ../gucharmap/gucharmap-charmap.c:601
 msgid "Various Useful Representations"
 msgstr "Nützliche Darstellungsformen"
 
-#: ../gucharmap/gucharmap-charmap.c:610
+#: ../gucharmap/gucharmap-charmap.c:611
 msgid "UTF-8:"
 msgstr "UTF-8:"
 
-#: ../gucharmap/gucharmap-charmap.c:618
+#: ../gucharmap/gucharmap-charmap.c:619
 msgid "UTF-16:"
 msgstr "UTF-16:"
 
-#: ../gucharmap/gucharmap-charmap.c:629
+#: ../gucharmap/gucharmap-charmap.c:630
 msgid "C octal escaped UTF-8:"
 msgstr "C-Oktal terminiertes UTF-8:"
 
-#: ../gucharmap/gucharmap-charmap.c:639
+#: ../gucharmap/gucharmap-charmap.c:640
 msgid "XML decimal entity:"
 msgstr "Dezimale XML-Entität:"
 
-#: ../gucharmap/gucharmap-charmap.c:650
+#: ../gucharmap/gucharmap-charmap.c:651
 msgid "Annotations and Cross References"
 msgstr "Anmerkungen und Verweise"
 
-#: ../gucharmap/gucharmap-charmap.c:657
+#: ../gucharmap/gucharmap-charmap.c:658
 msgid "Alias names:"
 msgstr "Aliasnamen:"
 
-#: ../gucharmap/gucharmap-charmap.c:666
+#: ../gucharmap/gucharmap-charmap.c:667
 msgid "Notes:"
 msgstr "Hinweise:"
 
-#: ../gucharmap/gucharmap-charmap.c:675
+#: ../gucharmap/gucharmap-charmap.c:676
 msgid "See also:"
 msgstr "Siehe auch:"
 
-#: ../gucharmap/gucharmap-charmap.c:684
+#: ../gucharmap/gucharmap-charmap.c:685
 msgid "Approximate equivalents:"
 msgstr "Ungefähre Äquivalente:"
 
-#: ../gucharmap/gucharmap-charmap.c:693
+#: ../gucharmap/gucharmap-charmap.c:694
 msgid "Equivalents:"
 msgstr "Äquivalente:"
 
@@ -188,15 +189,19 @@ msgstr "Tang-Aussprache:"
 msgid "Korean Pronunciation:"
 msgstr "Koreanische Aussprache:"
 
-#: ../gucharmap/gucharmap-charmap.c:1129
+#: ../gucharmap/gucharmap-charmap.c:749
+msgid "Vietnamese Pronunciation:"
+msgstr "Vietnamesische Aussprache:"
+
+#: ../gucharmap/gucharmap-charmap.c:1131
 msgid "Characte_r Table"
 msgstr "Zeichen_tabelle"
 
-#: ../gucharmap/gucharmap-charmap.c:1176
+#: ../gucharmap/gucharmap-charmap.c:1178
 msgid "Character _Details"
 msgstr "Zeichen_details"
 
-#: ../gucharmap/gucharmap-chartable-accessible.c:795
+#: ../gucharmap/gucharmap-chartable-accessible.c:798
 msgid "Character Table"
 msgstr "Zeichentabelle"
 
@@ -205,7 +210,7 @@ msgid "Unknown character, unable to identify."
 msgstr "Unbekanntes Zeichen, Identifikation nicht möglich."
 
 #: ../gucharmap/gucharmap-chartable.c:1292
-#: ../gucharmap/gucharmap-search-dialog.c:585
+#: ../gucharmap/gucharmap-search-dialog.c:582
 msgid "Not found."
 msgstr "Nicht gefunden."
 
@@ -320,185 +325,185 @@ msgstr "Schriftsystem"
 msgid "Common"
 msgstr "Allgemein"
 
-#: ../gucharmap/gucharmap-search-dialog.c:565
+#: ../gucharmap/gucharmap-search-dialog.c:562
 msgid "Information"
 msgstr "Informationen"
 
 #. follow hig guidelines
-#: ../gucharmap/gucharmap-search-dialog.c:735
+#: ../gucharmap/gucharmap-search-dialog.c:732
 msgid "Find"
 msgstr "Suchen"
 
-#: ../gucharmap/gucharmap-search-dialog.c:748
+#: ../gucharmap/gucharmap-search-dialog.c:745
 msgid "_Previous"
 msgstr "_Rückwärts suchen"
 
-#: ../gucharmap/gucharmap-search-dialog.c:755
+#: ../gucharmap/gucharmap-search-dialog.c:752
 msgid "_Next"
 msgstr "_Weitersuchen"
 
-#: ../gucharmap/gucharmap-search-dialog.c:771
+#: ../gucharmap/gucharmap-search-dialog.c:768
 msgid "_Search:"
 msgstr "Such_begriff:"
 
-#: ../gucharmap/gucharmap-search-dialog.c:782
+#: ../gucharmap/gucharmap-search-dialog.c:779
 msgid "Match _whole word"
 msgstr "Nur _vollständige Wörter berücksichtigen"
 
-#: ../gucharmap/gucharmap-search-dialog.c:787
+#: ../gucharmap/gucharmap-search-dialog.c:784
 msgid "Search in character _details"
 msgstr "Suchen in Zeichen_details"
 
-#: ../gucharmap/gucharmap-unicode-info.c:112
+#: ../gucharmap/gucharmap-unicode-info.c:110
 msgid "<Non Private Use High Surrogate>"
 msgstr "<Hoher Ersatzkode, nicht privat>"
 
-#: ../gucharmap/gucharmap-unicode-info.c:114
+#: ../gucharmap/gucharmap-unicode-info.c:112
 msgid "<Private Use High Surrogate>"
 msgstr "<Hoher Ersatzkode, privater Gebrauch>"
 
-#: ../gucharmap/gucharmap-unicode-info.c:116
+#: ../gucharmap/gucharmap-unicode-info.c:114
 msgid "<Low Surrogate>"
 msgstr "<Niedriger Ersatzkode>"
 
-#: ../gucharmap/gucharmap-unicode-info.c:118
+#: ../gucharmap/gucharmap-unicode-info.c:116
 msgid "<Private Use>"
 msgstr "<Privater Gebrauch>"
 
-#: ../gucharmap/gucharmap-unicode-info.c:120
+#: ../gucharmap/gucharmap-unicode-info.c:118
 msgid "<Plane 15 Private Use>"
 msgstr "<Privater Gebrauch, Ebene 15>"
 
-#: ../gucharmap/gucharmap-unicode-info.c:122
+#: ../gucharmap/gucharmap-unicode-info.c:120
 msgid "<Plane 16 Private Use>"
 msgstr "<Privater Gebrauch, Ebene 16>"
 
-#: ../gucharmap/gucharmap-unicode-info.c:127
+#: ../gucharmap/gucharmap-unicode-info.c:125
 msgid "<not assigned>"
 msgstr "<nicht zugewiesen>"
 
-#: ../gucharmap/gucharmap-unicode-info.c:140
+#: ../gucharmap/gucharmap-unicode-info.c:138
 msgid "Other, Control"
 msgstr "Sonstige, Steuerung"
 
-#: ../gucharmap/gucharmap-unicode-info.c:141
+#: ../gucharmap/gucharmap-unicode-info.c:139
 msgid "Other, Format"
 msgstr "Sonstige, Formatierung"
 
-#: ../gucharmap/gucharmap-unicode-info.c:142
+#: ../gucharmap/gucharmap-unicode-info.c:140
 msgid "Other, Not Assigned"
 msgstr "Sonstige, Nicht zugewiesen"
 
-#: ../gucharmap/gucharmap-unicode-info.c:143
+#: ../gucharmap/gucharmap-unicode-info.c:141
 msgid "Other, Private Use"
 msgstr "Sonstige, Privater Gebrauch"
 
-#: ../gucharmap/gucharmap-unicode-info.c:144
+#: ../gucharmap/gucharmap-unicode-info.c:142
 msgid "Other, Surrogate"
 msgstr "Sonstige, Ersatzkode"
 
-#: ../gucharmap/gucharmap-unicode-info.c:145
+#: ../gucharmap/gucharmap-unicode-info.c:143
 msgid "Letter, Lowercase"
 msgstr "Kleinbuchstabe"
 
-#: ../gucharmap/gucharmap-unicode-info.c:146
+#: ../gucharmap/gucharmap-unicode-info.c:144
 msgid "Letter, Modifier"
 msgstr "Buchstabe, Zusatzzeichen"
 
-#: ../gucharmap/gucharmap-unicode-info.c:147
+#: ../gucharmap/gucharmap-unicode-info.c:145
 msgid "Letter, Other"
 msgstr "Buchstabe, Sonstige"
 
-#: ../gucharmap/gucharmap-unicode-info.c:148
+#: ../gucharmap/gucharmap-unicode-info.c:146
 msgid "Letter, Titlecase"
 msgstr "Großbuchstabe am Wortanfang"
 
-#: ../gucharmap/gucharmap-unicode-info.c:149
+#: ../gucharmap/gucharmap-unicode-info.c:147
 msgid "Letter, Uppercase"
 msgstr "Großbuchstabe"
 
 # CHECK
-#: ../gucharmap/gucharmap-unicode-info.c:150
+#: ../gucharmap/gucharmap-unicode-info.c:148
 msgid "Mark, Spacing Combining"
 msgstr "Zusatzzeichen, kombinierende Anfügung"
 
-#: ../gucharmap/gucharmap-unicode-info.c:151
+#: ../gucharmap/gucharmap-unicode-info.c:149
 msgid "Mark, Enclosing"
 msgstr "Zusatzzeichen, einschließend"
 
-#: ../gucharmap/gucharmap-unicode-info.c:152
+#: ../gucharmap/gucharmap-unicode-info.c:150
 msgid "Mark, Non-Spacing"
 msgstr "Zusatzzeichen, kombinierend"
 
-#: ../gucharmap/gucharmap-unicode-info.c:153
+#: ../gucharmap/gucharmap-unicode-info.c:151
 msgid "Number, Decimal Digit"
 msgstr "Zahl, Dezimalziffer"
 
-#: ../gucharmap/gucharmap-unicode-info.c:154
+#: ../gucharmap/gucharmap-unicode-info.c:152
 msgid "Number, Letter"
 msgstr "Zahl, Buchstabe"
 
-#: ../gucharmap/gucharmap-unicode-info.c:155
+#: ../gucharmap/gucharmap-unicode-info.c:153
 msgid "Number, Other"
 msgstr "Zahl, Sonstige"
 
-#: ../gucharmap/gucharmap-unicode-info.c:156
+#: ../gucharmap/gucharmap-unicode-info.c:154
 msgid "Punctuation, Connector"
 msgstr "Interpunktion, Verbinder"
 
-#: ../gucharmap/gucharmap-unicode-info.c:157
+#: ../gucharmap/gucharmap-unicode-info.c:155
 msgid "Punctuation, Dash"
 msgstr "Interpunktion, Bindestrich"
 
-#: ../gucharmap/gucharmap-unicode-info.c:158
+#: ../gucharmap/gucharmap-unicode-info.c:156
 msgid "Punctuation, Close"
 msgstr "Interpunktion, Schließend"
 
-#: ../gucharmap/gucharmap-unicode-info.c:159
+#: ../gucharmap/gucharmap-unicode-info.c:157
 msgid "Punctuation, Final Quote"
 msgstr "Interpunktion, Schließendes Anführungszeichen"
 
-#: ../gucharmap/gucharmap-unicode-info.c:160
+#: ../gucharmap/gucharmap-unicode-info.c:158
 msgid "Punctuation, Initial Quote"
 msgstr "Interpunktion, Öffnendes Anführungszeichen"
 
-#: ../gucharmap/gucharmap-unicode-info.c:161
+#: ../gucharmap/gucharmap-unicode-info.c:159
 msgid "Punctuation, Other"
 msgstr "Interpunktion, Sonstige"
 
-#: ../gucharmap/gucharmap-unicode-info.c:162
+#: ../gucharmap/gucharmap-unicode-info.c:160
 msgid "Punctuation, Open"
 msgstr "Interpunktion, Öffnend"
 
-#: ../gucharmap/gucharmap-unicode-info.c:163
+#: ../gucharmap/gucharmap-unicode-info.c:161
 msgid "Symbol, Currency"
 msgstr "Symbol, Währung"
 
-#: ../gucharmap/gucharmap-unicode-info.c:164
+#: ../gucharmap/gucharmap-unicode-info.c:162
 msgid "Symbol, Modifier"
 msgstr "Symbol, Zusatzzeichen"
 
-#: ../gucharmap/gucharmap-unicode-info.c:165
+#: ../gucharmap/gucharmap-unicode-info.c:163
 msgid "Symbol, Math"
 msgstr "Symbol, Mathematik"
 
-#: ../gucharmap/gucharmap-unicode-info.c:166
+#: ../gucharmap/gucharmap-unicode-info.c:164
 msgid "Symbol, Other"
 msgstr "Symbol, Sonstige"
 
-#: ../gucharmap/gucharmap-unicode-info.c:167
+#: ../gucharmap/gucharmap-unicode-info.c:165
 msgid "Separator, Line"
 msgstr "Trenner, Zeile"
 
-#: ../gucharmap/gucharmap-unicode-info.c:168
+#: ../gucharmap/gucharmap-unicode-info.c:166
 msgid "Separator, Paragraph"
 msgstr "Trenner, Absatz"
 
-#: ../gucharmap/gucharmap-unicode-info.c:169
+#: ../gucharmap/gucharmap-unicode-info.c:167
 msgid "Separator, Space"
 msgstr "Trenner, Leerzeichen"
 
-#: ../gucharmap/gucharmap-window.c:429
+#: ../gucharmap/gucharmap-window.c:430
 msgid ""
 "Gucharmap is free software; you can redistribute it and/or modify it under "
 "the terms of the GNU General Public License as published by the Free "
@@ -510,7 +515,7 @@ msgstr ""
 "weitergeben und/oder modifizieren, entweder gemäß Version 3 der Lizenz oder "
 "(nach Ihrer Option) jeder späteren Version."
 
-#: ../gucharmap/gucharmap-window.c:433
+#: ../gucharmap/gucharmap-window.c:434
 msgid ""
 "Permission is hereby granted, free of charge, to any person obtaining a copy "
 "of the Unicode data files to deal in them without restriction, including "
@@ -522,7 +527,7 @@ msgstr ""
 "zum Benutzen, Bearbeiten, Zusammenführen, Veröffentlichen, Verteilen und/"
 "oder Verkaufen von Kopien ein, beschränkt sich aber nicht darauf."
 
-#: ../gucharmap/gucharmap-window.c:437
+#: ../gucharmap/gucharmap-window.c:438
 msgid ""
 "Gucharmap and the Unicode data files are distributed in the hope that they "
 "will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty "
@@ -535,7 +540,7 @@ msgstr ""
 "VERWENDBARKEIT FÜR EINEN BESTIMMTEN ZWECK. Details finden Sie in der GNU "
 "General Public License."
 
-#: ../gucharmap/gucharmap-window.c:441
+#: ../gucharmap/gucharmap-window.c:442
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "Gucharmap; if not, write to the Free Software Foundation, Inc., 59 Temple "
@@ -545,7 +550,7 @@ msgstr ""
 "Gucharmap erhalten haben. Falls nicht, schreiben Sie an die Free Software "
 "Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02110-1301  USA"
 
-#: ../gucharmap/gucharmap-window.c:444
+#: ../gucharmap/gucharmap-window.c:445
 msgid ""
 "Also you should have received a copy of the Unicode Copyright along with "
 "Gucharmap; you can always find it at Unicode's website: http://www.unicode."
@@ -555,66 +560,67 @@ msgstr ""
 "Gucharmap erhalten haben. Sie können Sie stets auf der Unicode-Website "
 "einsehen: http://www.unicode.org/copyright.html"
 
-#: ../gucharmap/gucharmap-window.c:454 ../gucharmap/main.c:39
+#: ../gucharmap/gucharmap-window.c:455 ../gucharmap/main.c:39
 msgid "GNOME Character Map"
 msgstr "GNOME-Zeichentabelle"
 
-#: ../gucharmap/gucharmap-window.c:456
+#: ../gucharmap/gucharmap-window.c:457
 msgid "Based on the Unicode Character Database 9.0.0"
 msgstr "Basierend auf der Unicode-Zeichendatenbank 9.0.0"
 
-#: ../gucharmap/gucharmap-window.c:465
+#: ../gucharmap/gucharmap-window.c:467
 msgid "translator-credits"
 msgstr ""
 "Christian Neumair <chris@gnome-de.org>\n"
 "Hendrik Richter <hendrikr@gnome.org>\n"
 "Andre Klapper <ak-47@gmx.net>\n"
 "Christian Kirbach <Christian.Kirbach@googlemail.com>\n"
-"Mario Blättermann <mario.blaettermann@gmail.com>"
+"Mario Blättermann <mario.blaettermann@gmail.com>\n"
+"Paul Seyfert <pseyfert@mathphys.fsk.uni-heidelberg.de>"
 
-#: ../gucharmap/gucharmap-window.c:554
+#: ../gucharmap/gucharmap-window.c:556
 msgid "Next Script"
 msgstr "Nächstes Schriftsystem"
 
-#: ../gucharmap/gucharmap-window.c:554
+#: ../gucharmap/gucharmap-window.c:556
 msgid "Previous Script"
 msgstr "Vorheriges Schriftsystem"
 
-#: ../gucharmap/gucharmap-window.c:559
+#: ../gucharmap/gucharmap-window.c:561
 msgid "Next Block"
 msgstr "Nächster Block"
 
-#: ../gucharmap/gucharmap-window.c:559
+#: ../gucharmap/gucharmap-window.c:561
 msgid "Previous Block"
 msgstr "Vorheriger Block"
 
 #. Text to copy entry + button
-#: ../gucharmap/gucharmap-window.c:791
+#: ../gucharmap/gucharmap-window.c:793
 msgid "_Text to copy:"
 msgstr "Zu kopierender _Text:"
 
-#: ../gucharmap/gucharmap-window.c:798
+#: ../gucharmap/gucharmap-window.c:800
 msgid "Copy to the clipboard."
 msgstr "In die Zwischenablage kopieren"
 
-#: ../gucharmap/main.c:160
+#: ../gucharmap/main.c:187
 msgid "Page _Setup"
 msgstr "Sei_teneinstellungen"
 
 #. g_menu_append (G_MENU (model), _("Print Preview"), "win.print-preview");
-#: ../gucharmap/main.c:162
+#: ../gucharmap/main.c:189
 msgid "_Print"
 msgstr "_Drucken"
 
-#: ../gucharmap/main.c:211
+#: ../gucharmap/main.c:238
 msgid "Font to start with; ex: 'Serif 27'"
 msgstr "Zu verwendende Schrift; z.B.: »Serif 27«"
 
-#: ../gucharmap/main.c:211
+#: ../gucharmap/main.c:238
 msgid "FONT"
 msgstr "SCHRIFT"
 
-#: ../gucharmap/main.c:215
+#: ../gucharmap/main.c:244
 msgid "[STRING…]"
 msgstr "[STRING…]"
 
