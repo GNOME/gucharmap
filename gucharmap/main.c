@@ -275,8 +275,12 @@ main (int argc, char **argv)
 
   g_application_register (G_APPLICATION (application), NULL, NULL);
 
-  /* Gucharmap doesn't work right with the dark theme, see #741939 */
-  g_object_set (gtk_settings_get_default (), "gtk-application-prefer-dark-theme", FALSE, NULL);
+  /* Gucharmap doesn't work right with the dark theme, see #741939. 
+   * Apparently this got fixed in gtk+ some time before 3.22, so
+   * only work around this on older versions.
+   */
+  if (gtk_check_version (3, 22, 0) != NULL /* < 3.22.0 */)
+    g_object_set (gtk_settings_get_default (), "gtk-application-prefer-dark-theme", FALSE, NULL);
 
   window = gucharmap_window_new (application);
 
