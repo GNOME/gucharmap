@@ -515,23 +515,43 @@ insert_heading (GucharmapCharmap *charmap,
 }
 
 static void
-conditionally_insert_canonical_decomposition (GucharmapCharmap *charmap, 
-                                              GtkTextBuffer *buffer,
-                                              GtkTextIter *iter,
-                                              gunichar uc)
+conditionally_insert_decomposition (GucharmapCharmap *charmap, 
+                                    GtkTextBuffer *buffer,
+                                    GtkTextIter *iter,
+                                    gunichar uc,
+                                    gboolean compat)
 {
   gunichar decomposition[G_UNICHAR_MAX_DECOMPOSITION_LENGTH];
   gsize result_len, i;
 
   result_len = g_unichar_fully_decompose (uc,
-                                          FALSE /* perform canonical decomposition */,
+                                          compat,
                                           decomposition,
                                           G_N_ELEMENTS (decomposition));
 
   if (result_len == 1)
     return;
 
-  gtk_text_buffer_insert (buffer, iter, _("Canonical decomposition:"), -1);
+  /* Only insert compat decomp if different from canonical decomp */
+  if (compat) {
+    gunichar canonical[G_UNICHAR_MAX_DECOMPOSITION_LENGTH];
+    gsize canonical_len;
+
+    canonical_len = g_unichar_fully_decompose (uc,
+                                               FALSE /* canonical */,
+                                               canonical,
+                                               G_N_ELEMENTS (canonical));
+
+    if (canonical_len == result_len &&
+        memcmp (decomposition, canonical, result_len * sizeof (gunichar)) == 0)
+      return;
+  }
+
+  gtk_text_buffer_insert (buffer, iter,
+                          compat
+                          ? _("Compatibility decomposition:")
+                          : _("Canonical decomposition:"),
+                          -1);
   gtk_text_buffer_insert (buffer, iter, " ", -1);
 
   insert_codepoint (charmap, buffer, iter, decomposition[0]);
@@ -600,7 +620,9 @@ set_details (GucharmapCharmap *charmap,
                          gucharmap_get_unicode_category_name (uc));
 
   /* canonical decomposition */
-  conditionally_insert_canonical_decomposition (charmap, buffer, &iter, uc);
+  conditionally_insert_decomposition (charmap, buffer, &iter, uc, FALSE);
+  /* compatibility decomposition */
+  conditionally_insert_decomposition (charmap, buffer, &iter, uc, TRUE);
 
   /* representations */
   if (g_unichar_break_type(uc) != G_UNICODE_BREAK_SURROGATE)
