@@ -364,15 +364,20 @@ insert_codepoint (GucharmapCharmap *charmap,
   GtkTextTag *tag;
   char buf[7];
   GUnicodeType t;
+  gboolean is_graph, is_Mn;
   char nbsp[3] = "\302\240\0"; /* U+00A0 NO-BREAK SPACE */
 
   t = g_unichar_type (uc);
+  is_Mn = t == G_UNICODE_NON_SPACING_MARK /* Mn */;
+  is_graph = g_unichar_isgraph (uc);
+
   buf[g_unichar_to_utf8 (uc, buf)] = '\0';
 
-  str = g_strdup_printf ("%s%s U+%4.4X %s",
+  str = g_strdup_printf ("%s%s%sU+%4.4X %s",
                          /* Per unicode standard, exhibit nonspacing marks on NBSP */
-                         t == G_UNICODE_NON_SPACING_MARK /* Mn */ ? nbsp : "", 
-                         buf,
+                         is_graph && is_Mn ? nbsp : "",
+                         is_graph ? buf : "",
+                         is_graph ? " " : "",
                          uc,
                          gucharmap_get_unicode_name (uc));
 
