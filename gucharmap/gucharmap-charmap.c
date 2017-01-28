@@ -410,6 +410,58 @@ insert_chocolate_detail_codepoints (GucharmapCharmap *charmap,
   gtk_text_buffer_insert (buffer, iter, "\n", -1);
 }
 
+typedef enum {
+  TAG_NONE,
+  TAG_FONT,
+  TAG_NO_BREAK,
+  TAG_INITIAL,
+  TAG_MEDIAL,
+  TAG_FINAL,
+  TAG_ISOLATED,
+  TAG_CIRCLE,
+  TAG_SUPER,
+  TAG_SUB,
+  TAG_VERTICAL,
+  TAG_WIDE,
+  TAG_NARROW,
+  TAG_SMALL,
+  TAG_SQUARE,
+  TAG_FRACTION,
+  TAG_COMPAT
+} CompatibilityFormattingTag;
+
+static void
+insert_compatibility_formatting_tag (GucharmapCharmap *charmap,
+                                     GtkTextBuffer *buffer,
+                                     GtkTextIter *iter,
+                                     CompatibilityFormattingTag tag)
+{
+  static const char *tag_names[] = {
+    [TAG_NONE] = "",
+    [TAG_FONT] = N_("Font variant of"),
+    [TAG_NO_BREAK] = N_("No-break version of"),
+    [TAG_INITIAL] = N_("Initial presentation form of"),
+    [TAG_MEDIAL] = N_("Medial presentation form of"),
+    [TAG_FINAL] = N_("Final presentation form of"),
+    [TAG_ISOLATED] = N_("Isolated presentation form of"),
+    [TAG_CIRCLE] = N_("Encircled form of"),
+    [TAG_SUPER] = N_("Superscript form of"),
+    [TAG_SUB] = N_("Subscript form of"),
+    [TAG_VERTICAL] = N_("Vertical layout presentation form of"),
+    [TAG_WIDE] = N_("Wide compatibility character of"),
+    [TAG_NARROW] = N_("Narrow compatibility character of"),
+    [TAG_SMALL] = N_("Small variant form of"),
+    [TAG_SQUARE] = N_("CJK squared font variant of"),
+    [TAG_FRACTION] = N_("Vulgar fraction form of"),
+    [TAG_COMPAT] = N_("Unspecified compatibility character of")
+  };
+  char *str;
+
+  str = g_strdup_printf ("%s ", _(tag_names[tag]));
+  gtk_text_buffer_insert (buffer, iter, str, -1);
+  g_free (str);
+}
+
 #define is_hex_digit(c) (((c) >= '0' && (c) <= '9') \
                          || ((c) >= 'A' && (c) <= 'F'))
 
@@ -447,6 +499,72 @@ find_codepoint (const gchar *str)
   return NULL;
 }
 
+static CompatibilityFormattingTag
+parse_tag (const char *str,
+           gsize len)
+{
+  if (strncmp (str, "font", len) == 0)
+    return TAG_FONT;
+  if (strncmp (str, "noBreak", len) == 0)
+    return TAG_NO_BREAK;
+  if (strncmp (str, "initial", len) == 0)
+    return TAG_INITIAL;
+  if (strncmp (str, "medial", len) == 0)
+    return TAG_MEDIAL;
+  if (strncmp (str, "final", len) == 0)
+    return TAG_FINAL;
+  if (strncmp (str, "isolated", len) == 0)
+    return TAG_ISOLATED;
+  if (strncmp (str, "circle", len) == 0)
+    return TAG_CIRCLE;
+  if (strncmp (str, "super", len) == 0)
+    return TAG_SUPER;
+  if (strncmp (str, "sub", len) == 0)
+    return TAG_SUB;
+  if (strncmp (str, "vertical", len) == 0)
+    return TAG_VERTICAL;
+  if (strncmp (str, "wide", len) == 0)
+    return TAG_WIDE;
+  if (strncmp (str, "narrow", len) == 0)
+    return TAG_NARROW;
+  if (strncmp (str, "small", len) == 0)
+    return TAG_SMALL;
+  if (strncmp (str, "square", len) == 0)
+    return TAG_SQUARE;
+  if (strncmp (str, "fraction", len) == 0)
+    return TAG_FRACTION;
+  if (strncmp (str, "compat", len) == 0)
+    return TAG_COMPAT;
+
+  g_printerr ("unrecognised tag '%s'\n", str);
+  return TAG_NONE;
+}
+
+/* returns the string after the tag */
+static const char *
+find_tag (const char *str,
+          CompatibilityFormattingTag *tag)
+{
+  const char *csb;
+
+  *tag = TAG_NONE;
+
+  if (str[0] != '<')
+    return str;
+
+  csb = strchr (str, '>');
+  if (csb == NULL)
+    return str;
+
+  *tag = parse_tag (str + 1, csb - str - 1);
+
+  str = csb + 1;
+  while (g_ascii_isspace (*str))
+    str++;
+
+  return str;
+}
+
 static void
 insert_string_link_codepoints (GucharmapCharmap *charmap,
                                GtkTextBuffer *buffer,
@@ -454,8 +572,12 @@ insert_string_link_codepoints (GucharmapCharmap *charmap,
                                const gchar *str)
 {
   const gchar *p1, *p2;
+  CompatibilityFormattingTag tag;
 
-  p1 = str;
+  p1 = find_tag (str, &tag);
+  if (tag != TAG_NONE)
+    insert_compatibility_formatting_tag (charmap, buffer, iter, tag);
+
   for (;;)
     {
       p2 = find_codepoint (p1);
@@ -468,7 +590,9 @@ insert_string_link_codepoints (GucharmapCharmap *charmap,
         }
       else
         {
-          gtk_text_buffer_insert (buffer, iter, p1, -1);
+          /* Ignore non-codepoints for compatibility formatting tags */
+          if (tag == TAG_NONE)
+            gtk_text_buffer_insert (buffer, iter, p1, -1);
           break;
         }
     }
