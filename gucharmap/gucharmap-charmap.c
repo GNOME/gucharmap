@@ -362,8 +362,18 @@ insert_codepoint (GucharmapCharmap *charmap,
 {
   gchar *str;
   GtkTextTag *tag;
+  char buf[7];
+  GUnicodeType t;
+  char nbsp[3] = "\302\240\0"; /* U+00A0 NO-BREAK SPACE */
 
-  str = g_strdup_printf ("U+%4.4X %s", uc,
+  t = g_unichar_type (uc);
+  buf[g_unichar_to_utf8 (uc, buf)] = '\0';
+
+  str = g_strdup_printf ("%s%s U+%4.4X %s",
+                         /* Per unicode standard, exhibit nonspacing marks on NBSP */
+                         t == G_UNICODE_NON_SPACING_MARK /* Mn */ ? nbsp : "", 
+                         buf,
+                         uc,
                          gucharmap_get_unicode_name (uc));
 
   tag = gtk_text_buffer_create_tag (buffer, NULL, 
@@ -510,17 +520,16 @@ conditionally_insert_canonical_decomposition (GucharmapCharmap *charmap,
                                               GtkTextIter *iter,
                                               gunichar uc)
 {
-  gunichar *decomposition;
-  gsize result_len;
-  guint i;
+  gunichar decomposition[G_UNICHAR_MAX_DECOMPOSITION_LENGTH];
+  gsize result_len, i;
 
-  decomposition = g_unicode_canonical_decomposition (uc, &result_len);
+  result_len = g_unichar_fully_decompose (uc,
+                                          FALSE /* perform canonical decomposition */,
+                                          decomposition,
+                                          G_N_ELEMENTS (decomposition));
 
   if (result_len == 1)
-    {
-      g_free (decomposition);
-      return;
-    }
+    return;
 
   gtk_text_buffer_insert (buffer, iter, _("Canonical decomposition:"), -1);
   gtk_text_buffer_insert (buffer, iter, " ", -1);
@@ -533,8 +542,6 @@ conditionally_insert_canonical_decomposition (GucharmapCharmap *charmap,
     }
 
   gtk_text_buffer_insert (buffer, iter, "\n", -1);
-
-  g_free (decomposition);
 }
 
 static void
