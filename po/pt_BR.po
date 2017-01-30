@@ -1,5 +1,5 @@
 # Brazilian Portuguese translation of gucharmap.
-# Copyright (C) 2003-2016 the Free Software Foundation, Inc.
+# Copyright (C) 2017 the Free Software Foundation, Inc.
 # This file is distributed under the same license as the gucharmap package.
 # Evandro Fernandes Giovanini <evandrofg@ig.com.br>, 2003.
 # Maurício de Lemos Rodrigues Collares Neto <mauricioc@myrealbox.com>, 2003
@@ -14,14 +14,14 @@
 # Djavan Fagundes <djavan@comum.org>, 2012.
 # Enrico Nicoletto <liverig@gmail.com>, 2014.
 # Felipe Braga <fbobraga@gmail.com>, 2015.
-# Rafael Fontenelle <rafaelff@gnome.org>, 2013, 2016.
+# Rafael Fontenelle <rafaelff@gnome.org>, 2013, 2016, 2017.
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
-"product=gucharmap&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-10-30 11:56+0000\n"
-"PO-Revision-Date: 2016-12-28 14:32-0200\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gucharm"
+"ap&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2017-01-28 21:41+0000\n"
+"PO-Revision-Date: 2017-01-29 23:15-0200\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
@@ -78,113 +78,187 @@ msgstr "Todos"
 msgid "Unicode Block"
 msgstr "Bloco Unicode"
 
-#: ../gucharmap/gucharmap-charmap.c:525
+#: ../gucharmap/gucharmap-charmap.c:441
+msgid "Font variant of"
+msgstr "Variante da fonte de"
+
+#: ../gucharmap/gucharmap-charmap.c:442
+msgid "No-break version of"
+msgstr "Versão não-quebra de"
+
+#: ../gucharmap/gucharmap-charmap.c:443
+#| msgid "Alphabetic Presentation Forms"
+msgid "Initial presentation form of"
+msgstr "Forma de apresentação inicial de"
+
+#: ../gucharmap/gucharmap-charmap.c:444
+#| msgid "Alphabetic Presentation Forms"
+msgid "Medial presentation form of"
+msgstr "Forma de apresentação média de"
+
+#: ../gucharmap/gucharmap-charmap.c:445
+#| msgid "Arabic Presentation Forms-A"
+msgid "Final presentation form of"
+msgstr "Forma de apresentação final de"
+
+#: ../gucharmap/gucharmap-charmap.c:446
+#| msgid "Alphabetic Presentation Forms"
+msgid "Isolated presentation form of"
+msgstr "Forma de apresentação isolada de"
+
+#: ../gucharmap/gucharmap-charmap.c:447
+msgid "Encircled form of"
+msgstr "Forma arredondada de"
+
+#: ../gucharmap/gucharmap-charmap.c:448
+msgid "Superscript form of"
+msgstr "Forma sobrescrita de"
+
+#: ../gucharmap/gucharmap-charmap.c:449
+msgid "Subscript form of"
+msgstr "Forma subscrita de"
+
+#: ../gucharmap/gucharmap-charmap.c:450
+#| msgid "Alphabetic Presentation Forms"
+msgid "Vertical layout presentation form of"
+msgstr "Formas de apresentação de layout vertical de"
+
+#: ../gucharmap/gucharmap-charmap.c:451
+msgid "Wide compatibility character of"
+msgstr "Caractere de compatibilidade ampla de"
+
+#: ../gucharmap/gucharmap-charmap.c:452
+msgid "Narrow compatibility character of"
+msgstr "Caractere de compatibilidade restrita de"
+
+#: ../gucharmap/gucharmap-charmap.c:453
+#| msgid "Small Form Variants"
+msgid "Small variant form of"
+msgstr "Forma de variante pequena de"
+
+#: ../gucharmap/gucharmap-charmap.c:454
+msgid "CJK squared font variant of"
+msgstr "Variante de fonte quadrada CJK de"
+
+#: ../gucharmap/gucharmap-charmap.c:455
+msgid "Vulgar fraction form of"
+msgstr "Forma de fração vulgar de"
+
+#: ../gucharmap/gucharmap-charmap.c:456
+msgid "Unspecified compatibility character of"
+msgstr "Caractere de compatibilidade não especificada de"
+
+#: ../gucharmap/gucharmap-charmap.c:676
+#| msgid "Canonical decomposition:"
+msgid "Compatibility decomposition:"
+msgstr "Decomposição de compatibilidade:"
+
+#: ../gucharmap/gucharmap-charmap.c:677
 msgid "Canonical decomposition:"
 msgstr "Decomposição canônica:"
 
-#: ../gucharmap/gucharmap-charmap.c:568 ../gucharmap/gucharmap-chartable.c:581
+#: ../gucharmap/gucharmap-charmap.c:719 ../gucharmap/gucharmap-chartable.c:581
 msgid "[not a printable character]"
 msgstr "[não é um caractere imprimível]"
 
-#: ../gucharmap/gucharmap-charmap.c:582
+#: ../gucharmap/gucharmap-charmap.c:733
 msgid "General Character Properties"
 msgstr "Propriedades gerais do caractere"
 
-#: ../gucharmap/gucharmap-charmap.c:588
+#: ../gucharmap/gucharmap-charmap.c:739
 msgid "In Unicode since:"
 msgstr "No Unicode desde:"
 
 #. character category
-#: ../gucharmap/gucharmap-charmap.c:592
+#: ../gucharmap/gucharmap-charmap.c:743
 msgid "Unicode category:"
 msgstr "Categoria Unicode:"
 
-#: ../gucharmap/gucharmap-charmap.c:601
+#: ../gucharmap/gucharmap-charmap.c:754
 msgid "Various Useful Representations"
 msgstr "Várias representações úteis"
 
-#: ../gucharmap/gucharmap-charmap.c:611
+#: ../gucharmap/gucharmap-charmap.c:764
 msgid "UTF-8:"
 msgstr "UTF-8:"
 
-#: ../gucharmap/gucharmap-charmap.c:619
+#: ../gucharmap/gucharmap-charmap.c:772
 msgid "UTF-16:"
 msgstr "UTF-16:"
 
-#: ../gucharmap/gucharmap-charmap.c:630
+#: ../gucharmap/gucharmap-charmap.c:783
 msgid "C octal escaped UTF-8:"
 msgstr "Octal C UTF-8 com escape:"
 
-#: ../gucharmap/gucharmap-charmap.c:640
+#: ../gucharmap/gucharmap-charmap.c:793
 msgid "XML decimal entity:"
 msgstr "Entidade decimal XML:"
 
-#: ../gucharmap/gucharmap-charmap.c:651
+#: ../gucharmap/gucharmap-charmap.c:804
 msgid "Annotations and Cross References"
 msgstr "Anotações e referências cruzadas"
 
-#: ../gucharmap/gucharmap-charmap.c:658
+#: ../gucharmap/gucharmap-charmap.c:811
 msgid "Alias names:"
 msgstr "Apelidos:"
 
-#: ../gucharmap/gucharmap-charmap.c:667
+#: ../gucharmap/gucharmap-charmap.c:820
 msgid "Notes:"
 msgstr "Notas:"
 
-#: ../gucharmap/gucharmap-charmap.c:676
+#: ../gucharmap/gucharmap-charmap.c:829
 msgid "See also:"
 msgstr "Veja também:"
 
-#: ../gucharmap/gucharmap-charmap.c:685
+#: ../gucharmap/gucharmap-charmap.c:838
 msgid "Approximate equivalents:"
 msgstr "Equivalentes aproximados:"
 
-#: ../gucharmap/gucharmap-charmap.c:694
+#: ../gucharmap/gucharmap-charmap.c:847
 msgid "Equivalents:"
 msgstr "Equivalentes:"
 
-#: ../gucharmap/gucharmap-charmap.c:709
+#: ../gucharmap/gucharmap-charmap.c:862
 msgid "CJK Ideograph Information"
 msgstr "Informação da ideografia CJK"
 
-#: ../gucharmap/gucharmap-charmap.c:714
+#: ../gucharmap/gucharmap-charmap.c:867
 msgid "Definition in English:"
 msgstr "Definição em inglês:"
 
-#: ../gucharmap/gucharmap-charmap.c:719
+#: ../gucharmap/gucharmap-charmap.c:872
 msgid "Mandarin Pronunciation:"
 msgstr "Pronúncia em mandarim:"
 
-#: ../gucharmap/gucharmap-charmap.c:724
+#: ../gucharmap/gucharmap-charmap.c:877
 msgid "Cantonese Pronunciation:"
 msgstr "Pronúncia em cantonês:"
 
-#: ../gucharmap/gucharmap-charmap.c:729
+#: ../gucharmap/gucharmap-charmap.c:882
 msgid "Japanese On Pronunciation:"
 msgstr "Pronúncia em japonês On:"
 
-#: ../gucharmap/gucharmap-charmap.c:734
+#: ../gucharmap/gucharmap-charmap.c:887
 msgid "Japanese Kun Pronunciation:"
 msgstr "Pronúncia em japonês Kun:"
 
-#: ../gucharmap/gucharmap-charmap.c:739
+#: ../gucharmap/gucharmap-charmap.c:892
 msgid "Tang Pronunciation:"
 msgstr "Pronúncia em tang:"
 
-#: ../gucharmap/gucharmap-charmap.c:744
+#: ../gucharmap/gucharmap-charmap.c:897
 msgid "Korean Pronunciation:"
 msgstr "Pronúncia em coreano:"
 
-#: ../gucharmap/gucharmap-charmap.c:749
-#| msgid "Cantonese Pronunciation:"
+#: ../gucharmap/gucharmap-charmap.c:902
 msgid "Vietnamese Pronunciation:"
 msgstr "Pronúncia em vietnamita:"
 
-#: ../gucharmap/gucharmap-charmap.c:1131
+#: ../gucharmap/gucharmap-charmap.c:1284
 msgid "Characte_r Table"
 msgstr "Tabel_a de caracteres"
 
-#: ../gucharmap/gucharmap-charmap.c:1178
+#: ../gucharmap/gucharmap-charmap.c:1331
 msgid "Character _Details"
 msgstr "_Detalhes do caractere"
 
