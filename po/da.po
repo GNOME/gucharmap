@@ -19,8 +19,8 @@ msgstr ""
 "Project-Id-Version: gucharmap\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gucharmap&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-10-30 11:56+0000\n"
-"PO-Revision-Date: 2017-01-14 11:21+0100\n"
+"POT-Creation-Date: 2017-01-28 21:41+0000\n"
+"PO-Revision-Date: 2017-02-12 16:15+0100\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "Language: da\n"
@@ -75,113 +75,184 @@ msgstr "Alle"
 msgid "Unicode Block"
 msgstr "Unicodeblok"
 
-#: ../gucharmap/gucharmap-charmap.c:525
+#: ../gucharmap/gucharmap-charmap.c:441
+msgid "Font variant of"
+msgstr "Skrifttypevariant af"
+
+#: ../gucharmap/gucharmap-charmap.c:442
+msgid "No-break version of"
+msgstr "Intet linjeskift-version af"
+
+#: ../gucharmap/gucharmap-charmap.c:443
+msgid "Initial presentation form of"
+msgstr "Begyndende præsentation-form af"
+
+#: ../gucharmap/gucharmap-charmap.c:444
+msgid "Medial presentation form of"
+msgstr "Mellem præsentation-form af"
+
+#: ../gucharmap/gucharmap-charmap.c:445
+msgid "Final presentation form of"
+msgstr "Afsluttende præsentation-form af"
+
+#: ../gucharmap/gucharmap-charmap.c:446
+msgid "Isolated presentation form of"
+msgstr "Isoleret præsentation-form af"
+
+#: ../gucharmap/gucharmap-charmap.c:447
+msgid "Encircled form of"
+msgstr "Indesluttet form af"
+
+#: ../gucharmap/gucharmap-charmap.c:448
+msgid "Superscript form of"
+msgstr "Hævet skrift-form af"
+
+#: ../gucharmap/gucharmap-charmap.c:449
+msgid "Subscript form of"
+msgstr "Sænket skrift-form af"
+
+#: ../gucharmap/gucharmap-charmap.c:450
+msgid "Vertical layout presentation form of"
+msgstr "Lodret layoutpræsentation-form af"
+
+#: ../gucharmap/gucharmap-charmap.c:451
+msgid "Wide compatibility character of"
+msgstr "Bredt kompatibilitetstegn af"
+
+#: ../gucharmap/gucharmap-charmap.c:452
+msgid "Narrow compatibility character of"
+msgstr "Smalt kompatibilitetstegn af"
+
+#: ../gucharmap/gucharmap-charmap.c:453
+msgid "Small variant form of"
+msgstr "Lille variantform af"
+
+#: ../gucharmap/gucharmap-charmap.c:454
+msgid "CJK squared font variant of"
+msgstr "CJK-kvadreret skrifttypevariant af"
+
+# vulgar = common
+# Microsofts oversættelse
+# Der er tale om brøker, der kan skrives som et tegn f.eks. ½
+#: ../gucharmap/gucharmap-charmap.c:455
+msgid "Vulgar fraction form of"
+msgstr "Almindelig brøk-form af"
+
+#: ../gucharmap/gucharmap-charmap.c:456
+msgid "Unspecified compatibility character of"
+msgstr "Uspecificeret kompatibilitetstegn af"
+
+#: ../gucharmap/gucharmap-charmap.c:676
+msgid "Compatibility decomposition:"
+msgstr "Kompatibilitetsdekomposition:"
+
+#: ../gucharmap/gucharmap-charmap.c:677
 msgid "Canonical decomposition:"
 msgstr "Kanonisk dekomposition:"
 
-#: ../gucharmap/gucharmap-charmap.c:568 ../gucharmap/gucharmap-chartable.c:581
+#: ../gucharmap/gucharmap-charmap.c:719 ../gucharmap/gucharmap-chartable.c:581
 msgid "[not a printable character]"
 msgstr "[ikke et tegn der kan vises]"
 
-#: ../gucharmap/gucharmap-charmap.c:582
+#: ../gucharmap/gucharmap-charmap.c:733
 msgid "General Character Properties"
 msgstr "Generelle tegnegenskaber"
 
-#: ../gucharmap/gucharmap-charmap.c:588
+#: ../gucharmap/gucharmap-charmap.c:739
 msgid "In Unicode since:"
 msgstr "I Unicode siden:"
 
 #. character category
-#: ../gucharmap/gucharmap-charmap.c:592
+#: ../gucharmap/gucharmap-charmap.c:743
 msgid "Unicode category:"
 msgstr "Unicodekategori:"
 
-#: ../gucharmap/gucharmap-charmap.c:601
+#: ../gucharmap/gucharmap-charmap.c:754
 msgid "Various Useful Representations"
 msgstr "Diverse brugbare repræsentationer"
 
-#: ../gucharmap/gucharmap-charmap.c:611
+#: ../gucharmap/gucharmap-charmap.c:764
 msgid "UTF-8:"
 msgstr "UTF-8:"
 
-#: ../gucharmap/gucharmap-charmap.c:619
+#: ../gucharmap/gucharmap-charmap.c:772
 msgid "UTF-16:"
 msgstr "UTF-16:"
 
-#: ../gucharmap/gucharmap-charmap.c:630
+#: ../gucharmap/gucharmap-charmap.c:783
 msgid "C octal escaped UTF-8:"
 msgstr "Oktal undvigesekvens for UTF-8 i C:"
 
 # Selv på tysk bruges Entität, så vi må hellere skrive entitet for at være forståelige på dansk
-#: ../gucharmap/gucharmap-charmap.c:640
+#: ../gucharmap/gucharmap-charmap.c:793
 msgid "XML decimal entity:"
 msgstr "XML decimalentitet:"
 
-#: ../gucharmap/gucharmap-charmap.c:651
+#: ../gucharmap/gucharmap-charmap.c:804
 msgid "Annotations and Cross References"
 msgstr "Bemærkninger og krydsreferencer"
 
-#: ../gucharmap/gucharmap-charmap.c:658
+#: ../gucharmap/gucharmap-charmap.c:811
 msgid "Alias names:"
 msgstr "Aliasnavne:"
 
-#: ../gucharmap/gucharmap-charmap.c:667
+#: ../gucharmap/gucharmap-charmap.c:820
 msgid "Notes:"
 msgstr "Noter:"
 
-#: ../gucharmap/gucharmap-charmap.c:676
+#: ../gucharmap/gucharmap-charmap.c:829
 msgid "See also:"
 msgstr "Se også:"
 
-#: ../gucharmap/gucharmap-charmap.c:685
+#: ../gucharmap/gucharmap-charmap.c:838
 msgid "Approximate equivalents:"
 msgstr "Omtrent ækvivalente:"
 
-#: ../gucharmap/gucharmap-charmap.c:694
+#: ../gucharmap/gucharmap-charmap.c:847
 msgid "Equivalents:"
 msgstr "Ækvivalente:"
 
-#: ../gucharmap/gucharmap-charmap.c:709
+#: ../gucharmap/gucharmap-charmap.c:862
 msgid "CJK Ideograph Information"
 msgstr "CJK-ideograf-info"
 
-#: ../gucharmap/gucharmap-charmap.c:714
+#: ../gucharmap/gucharmap-charmap.c:867
 msgid "Definition in English:"
 msgstr "Definition på engelsk:"
 
-#: ../gucharmap/gucharmap-charmap.c:719
+#: ../gucharmap/gucharmap-charmap.c:872
 msgid "Mandarin Pronunciation:"
 msgstr "Mandarin-udtale:"
 
-#: ../gucharmap/gucharmap-charmap.c:724
+#: ../gucharmap/gucharmap-charmap.c:877
 msgid "Cantonese Pronunciation:"
 msgstr "Kantonesisk udtale:"
 
-#: ../gucharmap/gucharmap-charmap.c:729
+#: ../gucharmap/gucharmap-charmap.c:882
 msgid "Japanese On Pronunciation:"
 msgstr "Japansk On-udtale:"
 
-#: ../gucharmap/gucharmap-charmap.c:734
+#: ../gucharmap/gucharmap-charmap.c:887
 msgid "Japanese Kun Pronunciation:"
 msgstr "Japansk Kun-udtale:"
 
-#: ../gucharmap/gucharmap-charmap.c:739
+#: ../gucharmap/gucharmap-charmap.c:892
 msgid "Tang Pronunciation:"
 msgstr "Tang-udtale:"
 
-#: ../gucharmap/gucharmap-charmap.c:744
+#: ../gucharmap/gucharmap-charmap.c:897
 msgid "Korean Pronunciation:"
 msgstr "Koreansk udtale:"
 
-#: ../gucharmap/gucharmap-charmap.c:749
+#: ../gucharmap/gucharmap-charmap.c:902
 msgid "Vietnamese Pronunciation:"
 msgstr "Vietnamesisk udtale:"
 
-#: ../gucharmap/gucharmap-charmap.c:1131
+#: ../gucharmap/gucharmap-charmap.c:1284
 msgid "Characte_r Table"
 msgstr "Tegn_oversigt"
 
-#: ../gucharmap/gucharmap-charmap.c:1178
+#: ../gucharmap/gucharmap-charmap.c:1331
 msgid "Character _Details"
 msgstr "Tegn_detaljer"
 
