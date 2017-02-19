@@ -9,19 +9,19 @@ msgstr ""
 "Project-Id-Version: gucharmap master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gucharmap&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-06-24 16:58+0000\n"
-"PO-Revision-Date: 2016-07-08 21:06+0700\n"
+"POT-Creation-Date: 2017-01-28 21:41+0000\n"
+"PO-Revision-Date: 2017-02-19 16:35+0700\n"
 "Last-Translator: Andika Triwidada <andika@gmail.com>\n"
 "Language-Team: Indonesian <gnome@i15n.org>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.8\n"
+"X-Generator: Poedit 1.8.12\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: ../data/gucharmap.appdata.xml.in.h:1 ../gucharmap.desktop.in.in.h:1
-#: ../gucharmap/gucharmap-window.c:766 ../gucharmap/main.c:238
+#: ../gucharmap/gucharmap-window.c:768 ../gucharmap/main.c:267
 msgid "Character Map"
 msgstr "Tabel Karakter"
 
@@ -63,112 +63,184 @@ msgstr "Semua"
 msgid "Unicode Block"
 msgstr "Blok Unicode"
 
-#: ../gucharmap/gucharmap-charmap.c:524
+#: ../gucharmap/gucharmap-charmap.c:441
+msgid "Font variant of"
+msgstr "Varian fonta dari"
+
+#: ../gucharmap/gucharmap-charmap.c:442
+msgid "No-break version of"
+msgstr "Versi tanpa putus dari"
+
+#: ../gucharmap/gucharmap-charmap.c:443
+msgid "Initial presentation form of"
+msgstr "Bentuk presentasi awal dari"
+
+#: ../gucharmap/gucharmap-charmap.c:444
+msgid "Medial presentation form of"
+msgstr "Bentuk presentasi menengah dari"
+
+#: ../gucharmap/gucharmap-charmap.c:445
+msgid "Final presentation form of"
+msgstr "Bentuk presentasi akhir dari"
+
+#: ../gucharmap/gucharmap-charmap.c:446
+msgid "Isolated presentation form of"
+msgstr "Bentuk presentasi terisolasi dari"
+
+#: ../gucharmap/gucharmap-charmap.c:447
+msgid "Encircled form of"
+msgstr "Bentuk dilingkari dari"
+
+#: ../gucharmap/gucharmap-charmap.c:448
+msgid "Superscript form of"
+msgstr "Bentuk superskrip dari"
+
+#: ../gucharmap/gucharmap-charmap.c:449
+msgid "Subscript form of"
+msgstr "Bentuk subskrip dari"
+
+#: ../gucharmap/gucharmap-charmap.c:450
+msgid "Vertical layout presentation form of"
+msgstr "Bentuk presentasi tata letak vertikal dari"
+
+#: ../gucharmap/gucharmap-charmap.c:451
+msgid "Wide compatibility character of"
+msgstr "Karakter kompatibilitas lebar dari"
+
+#: ../gucharmap/gucharmap-charmap.c:452
+msgid "Narrow compatibility character of"
+msgstr "Karakter kompatibilitas sempit dari"
+
+#: ../gucharmap/gucharmap-charmap.c:453
+msgid "Small variant form of"
+msgstr "Bentuk varian kecil dari"
+
+#: ../gucharmap/gucharmap-charmap.c:454
+msgid "CJK squared font variant of"
+msgstr "Varian fonta bujur sangkar CJK dari"
+
+#: ../gucharmap/gucharmap-charmap.c:455
+msgid "Vulgar fraction form of"
+msgstr "Bentuk fraksi vulgar dari"
+
+#: ../gucharmap/gucharmap-charmap.c:456
+msgid "Unspecified compatibility character of"
+msgstr "Karakter kompatibilitas tak dinyatakan dari"
+
+#: ../gucharmap/gucharmap-charmap.c:676
+msgid "Compatibility decomposition:"
+msgstr "Dekomposisi kompatibilitas:"
+
+#: ../gucharmap/gucharmap-charmap.c:677
 msgid "Canonical decomposition:"
 msgstr "Dekomposisi kanonik:"
 
-#: ../gucharmap/gucharmap-charmap.c:567 ../gucharmap/gucharmap-chartable.c:581
+#: ../gucharmap/gucharmap-charmap.c:719 ../gucharmap/gucharmap-chartable.c:581
 msgid "[not a printable character]"
 msgstr "[karakter ini tidak dapat dicetak]"
 
-#: ../gucharmap/gucharmap-charmap.c:581
+#: ../gucharmap/gucharmap-charmap.c:733
 msgid "General Character Properties"
 msgstr "Properti Umum Karakter"
 
-#: ../gucharmap/gucharmap-charmap.c:587
+#: ../gucharmap/gucharmap-charmap.c:739
 msgid "In Unicode since:"
 msgstr "Dalam Unicode sejak:"
 
 #. character category
-#: ../gucharmap/gucharmap-charmap.c:591
+#: ../gucharmap/gucharmap-charmap.c:743
 msgid "Unicode category:"
 msgstr "Kategori Unicode:"
 
-#: ../gucharmap/gucharmap-charmap.c:600
+#: ../gucharmap/gucharmap-charmap.c:754
 msgid "Various Useful Representations"
 msgstr "Berbagai Representasi Yang Berguna"
 
-#: ../gucharmap/gucharmap-charmap.c:610
+#: ../gucharmap/gucharmap-charmap.c:764
 msgid "UTF-8:"
 msgstr "UTF-8:"
 
-#: ../gucharmap/gucharmap-charmap.c:618
+#: ../gucharmap/gucharmap-charmap.c:772
 msgid "UTF-16:"
 msgstr "UTF-16:"
 
-#: ../gucharmap/gucharmap-charmap.c:629
+#: ../gucharmap/gucharmap-charmap.c:783
 msgid "C octal escaped UTF-8:"
 msgstr "C octal escaped UTF-8:"
 
-#: ../gucharmap/gucharmap-charmap.c:639
+#: ../gucharmap/gucharmap-charmap.c:793
 msgid "XML decimal entity:"
 msgstr "Entiti desimal XML:"
 
-#: ../gucharmap/gucharmap-charmap.c:650
+#: ../gucharmap/gucharmap-charmap.c:804
 msgid "Annotations and Cross References"
 msgstr "Anotasi dan Referensi Silang"
 
-#: ../gucharmap/gucharmap-charmap.c:657
+#: ../gucharmap/gucharmap-charmap.c:811
 msgid "Alias names:"
 msgstr "Nama alias:"
 
-#: ../gucharmap/gucharmap-charmap.c:666
+#: ../gucharmap/gucharmap-charmap.c:820
 msgid "Notes:"
 msgstr "Catatan:"
 
-#: ../gucharmap/gucharmap-charmap.c:675
+#: ../gucharmap/gucharmap-charmap.c:829
 msgid "See also:"
 msgstr "Lihat juga:"
 
-#: ../gucharmap/gucharmap-charmap.c:684
+#: ../gucharmap/gucharmap-charmap.c:838
 msgid "Approximate equivalents:"
 msgstr "Hampir mendekati:"
 
-#: ../gucharmap/gucharmap-charmap.c:693
+#: ../gucharmap/gucharmap-charmap.c:847
 msgid "Equivalents:"
 msgstr "Sama dengan:"
 
-#: ../gucharmap/gucharmap-charmap.c:709
+#: ../gucharmap/gucharmap-charmap.c:862
 msgid "CJK Ideograph Information"
 msgstr "Informasi Ideograf CJK"
 
-#: ../gucharmap/gucharmap-charmap.c:714
+#: ../gucharmap/gucharmap-charmap.c:867
 msgid "Definition in English:"
 msgstr "Definisi dalam Bahasa Inggris:"
 
-#: ../gucharmap/gucharmap-charmap.c:719
+#: ../gucharmap/gucharmap-charmap.c:872
 msgid "Mandarin Pronunciation:"
 msgstr "Pengucapan Mandarin:"
 
-#: ../gucharmap/gucharmap-charmap.c:724
+#: ../gucharmap/gucharmap-charmap.c:877
 msgid "Cantonese Pronunciation:"
 msgstr "Pengucapan Kanton:"
 
-#: ../gucharmap/gucharmap-charmap.c:729
+#: ../gucharmap/gucharmap-charmap.c:882
 msgid "Japanese On Pronunciation:"
 msgstr "Pengucapan Bahasa Jepang On:"
 
-#: ../gucharmap/gucharmap-charmap.c:734
+#: ../gucharmap/gucharmap-charmap.c:887
 msgid "Japanese Kun Pronunciation:"
 msgstr "Pengucapan Bahasa Jepang Kun:"
 
-#: ../gucharmap/gucharmap-charmap.c:739
+#: ../gucharmap/gucharmap-charmap.c:892
 msgid "Tang Pronunciation:"
 msgstr "Pengucapan Tang:"
 
-#: ../gucharmap/gucharmap-charmap.c:744
+#: ../gucharmap/gucharmap-charmap.c:897
 msgid "Korean Pronunciation:"
 msgstr "Pengucapan Korea"
 
-#: ../gucharmap/gucharmap-charmap.c:1129
+#: ../gucharmap/gucharmap-charmap.c:902
+msgid "Vietnamese Pronunciation:"
+msgstr "Pengucapan Vietnam:"
+
+#: ../gucharmap/gucharmap-charmap.c:1284
 msgid "Characte_r Table"
 msgstr "Tabel Karakte_r"
 
-#: ../gucharmap/gucharmap-charmap.c:1176
+#: ../gucharmap/gucharmap-charmap.c:1331
 msgid "Character _Details"
 msgstr "_Detil Karakter"
 
-#: ../gucharmap/gucharmap-chartable-accessible.c:795
+#: ../gucharmap/gucharmap-chartable-accessible.c:798
 msgid "Character Table"
 msgstr "Tabel Karakter"
 
@@ -177,7 +249,7 @@ msgid "Unknown character, unable to identify."
 msgstr "Karakter tidak dikenal, tidak bisa mengenali."
 
 #: ../gucharmap/gucharmap-chartable.c:1292
-#: ../gucharmap/gucharmap-search-dialog.c:585
+#: ../gucharmap/gucharmap-search-dialog.c:582
 msgid "Not found."
 msgstr "Tidak ditemukan."
 
@@ -292,184 +364,184 @@ msgstr "Skrip"
 msgid "Common"
 msgstr "Umum"
 
-#: ../gucharmap/gucharmap-search-dialog.c:565
+#: ../gucharmap/gucharmap-search-dialog.c:562
 msgid "Information"
 msgstr "Informasi"
 
 #. follow hig guidelines
-#: ../gucharmap/gucharmap-search-dialog.c:735
+#: ../gucharmap/gucharmap-search-dialog.c:732
 msgid "Find"
 msgstr "Temukan"
 
-#: ../gucharmap/gucharmap-search-dialog.c:748
+#: ../gucharmap/gucharmap-search-dialog.c:745
 msgid "_Previous"
 msgstr "_Sebelumnya"
 
-#: ../gucharmap/gucharmap-search-dialog.c:755
+#: ../gucharmap/gucharmap-search-dialog.c:752
 msgid "_Next"
 msgstr "Sela_njutnya"
 
-#: ../gucharmap/gucharmap-search-dialog.c:771
+#: ../gucharmap/gucharmap-search-dialog.c:768
 msgid "_Search:"
 msgstr "_Cari:"
 
-#: ../gucharmap/gucharmap-search-dialog.c:782
+#: ../gucharmap/gucharmap-search-dialog.c:779
 msgid "Match _whole word"
 msgstr "Cocok seluruh kata"
 
-#: ../gucharmap/gucharmap-search-dialog.c:787
+#: ../gucharmap/gucharmap-search-dialog.c:784
 msgid "Search in character _details"
 msgstr "Cari dalam _Detil Karakter"
 
-#: ../gucharmap/gucharmap-unicode-info.c:112
+#: ../gucharmap/gucharmap-unicode-info.c:110
 msgid "<Non Private Use High Surrogate>"
 msgstr "<Penggunaan Bukan Pribadi Surrogate Tinggi>"
 
-#: ../gucharmap/gucharmap-unicode-info.c:114
+#: ../gucharmap/gucharmap-unicode-info.c:112
 msgid "<Private Use High Surrogate>"
 msgstr "<Penggunaan Pribadi ]Surrogate Tinggi>"
 
-#: ../gucharmap/gucharmap-unicode-info.c:116
+#: ../gucharmap/gucharmap-unicode-info.c:114
 msgid "<Low Surrogate>"
 msgstr "<Surrogates Rendah>"
 
-#: ../gucharmap/gucharmap-unicode-info.c:118
+#: ../gucharmap/gucharmap-unicode-info.c:116
 msgid "<Private Use>"
 msgstr "<Penggunaan Pribadi>"
 
-#: ../gucharmap/gucharmap-unicode-info.c:120
+#: ../gucharmap/gucharmap-unicode-info.c:118
 msgid "<Plane 15 Private Use>"
 msgstr "<Plane 15 Penggunaan Pribadi>"
 
-#: ../gucharmap/gucharmap-unicode-info.c:122
+#: ../gucharmap/gucharmap-unicode-info.c:120
 msgid "<Plane 16 Private Use>"
 msgstr "<Plane 16 Penggunaan Pribadi>"
 
-#: ../gucharmap/gucharmap-unicode-info.c:127
+#: ../gucharmap/gucharmap-unicode-info.c:125
 msgid "<not assigned>"
 msgstr "<belum ditentukan>"
 
-#: ../gucharmap/gucharmap-unicode-info.c:140
+#: ../gucharmap/gucharmap-unicode-info.c:138
 msgid "Other, Control"
 msgstr "Yang lain, Kendali"
 
-#: ../gucharmap/gucharmap-unicode-info.c:141
+#: ../gucharmap/gucharmap-unicode-info.c:139
 msgid "Other, Format"
 msgstr "Yang lain, susun"
 
-#: ../gucharmap/gucharmap-unicode-info.c:142
+#: ../gucharmap/gucharmap-unicode-info.c:140
 msgid "Other, Not Assigned"
 msgstr "Yang lain, belum ditentukan"
 
-#: ../gucharmap/gucharmap-unicode-info.c:143
+#: ../gucharmap/gucharmap-unicode-info.c:141
 msgid "Other, Private Use"
 msgstr "Yang lain, Penggunaan Pribadi"
 
-#: ../gucharmap/gucharmap-unicode-info.c:144
+#: ../gucharmap/gucharmap-unicode-info.c:142
 msgid "Other, Surrogate"
 msgstr "Yang lain, Surrogate"
 
-#: ../gucharmap/gucharmap-unicode-info.c:145
+#: ../gucharmap/gucharmap-unicode-info.c:143
 msgid "Letter, Lowercase"
 msgstr "Huruf, Huruf kecil"
 
-#: ../gucharmap/gucharmap-unicode-info.c:146
+#: ../gucharmap/gucharmap-unicode-info.c:144
 msgid "Letter, Modifier"
 msgstr "Huruf, Perubah"
 
-#: ../gucharmap/gucharmap-unicode-info.c:147
+#: ../gucharmap/gucharmap-unicode-info.c:145
 msgid "Letter, Other"
 msgstr "Huruf, Yang Lain"
 
-#: ../gucharmap/gucharmap-unicode-info.c:148
+#: ../gucharmap/gucharmap-unicode-info.c:146
 msgid "Letter, Titlecase"
 msgstr "Huruf, Huruf Judul"
 
-#: ../gucharmap/gucharmap-unicode-info.c:149
+#: ../gucharmap/gucharmap-unicode-info.c:147
 msgid "Letter, Uppercase"
 msgstr "Huruf, Huruf Besar"
 
-#: ../gucharmap/gucharmap-unicode-info.c:150
+#: ../gucharmap/gucharmap-unicode-info.c:148
 msgid "Mark, Spacing Combining"
 msgstr "Tanda, Kombinasi Spasi"
 
-#: ../gucharmap/gucharmap-unicode-info.c:151
+#: ../gucharmap/gucharmap-unicode-info.c:149
 msgid "Mark, Enclosing"
 msgstr "Tanda, Enclosing"
 
-#: ../gucharmap/gucharmap-unicode-info.c:152
+#: ../gucharmap/gucharmap-unicode-info.c:150
 msgid "Mark, Non-Spacing"
 msgstr "Tanda, Bukan Spasi"
 
-#: ../gucharmap/gucharmap-unicode-info.c:153
+#: ../gucharmap/gucharmap-unicode-info.c:151
 msgid "Number, Decimal Digit"
 msgstr "Nomor, Digit Desimal"
 
-#: ../gucharmap/gucharmap-unicode-info.c:154
+#: ../gucharmap/gucharmap-unicode-info.c:152
 msgid "Number, Letter"
 msgstr "Nomor, Huruf"
 
-#: ../gucharmap/gucharmap-unicode-info.c:155
+#: ../gucharmap/gucharmap-unicode-info.c:153
 msgid "Number, Other"
 msgstr "Nomor, Yang Lain"
 
-#: ../gucharmap/gucharmap-unicode-info.c:156
+#: ../gucharmap/gucharmap-unicode-info.c:154
 msgid "Punctuation, Connector"
 msgstr "Puntuasi, Penghubung"
 
-#: ../gucharmap/gucharmap-unicode-info.c:157
+#: ../gucharmap/gucharmap-unicode-info.c:155
 msgid "Punctuation, Dash"
 msgstr "Puntuasi, Minus"
 
-#: ../gucharmap/gucharmap-unicode-info.c:158
+#: ../gucharmap/gucharmap-unicode-info.c:156
 msgid "Punctuation, Close"
 msgstr "Puntuasi, Tutup"
 
-#: ../gucharmap/gucharmap-unicode-info.c:159
+#: ../gucharmap/gucharmap-unicode-info.c:157
 msgid "Punctuation, Final Quote"
 msgstr "Puntuasi, Kutip Tutup"
 
-#: ../gucharmap/gucharmap-unicode-info.c:160
+#: ../gucharmap/gucharmap-unicode-info.c:158
 msgid "Punctuation, Initial Quote"
 msgstr "Puntuasi, Kutip Buka"
 
-#: ../gucharmap/gucharmap-unicode-info.c:161
+#: ../gucharmap/gucharmap-unicode-info.c:159
 msgid "Punctuation, Other"
 msgstr "Puntuasi, Yang Lain"
 
-#: ../gucharmap/gucharmap-unicode-info.c:162
+#: ../gucharmap/gucharmap-unicode-info.c:160
 msgid "Punctuation, Open"
 msgstr "Puntuasi, Buka"
 
-#: ../gucharmap/gucharmap-unicode-info.c:163
+#: ../gucharmap/gucharmap-unicode-info.c:161
 msgid "Symbol, Currency"
 msgstr "Simbol, Mata Uang"
 
-#: ../gucharmap/gucharmap-unicode-info.c:164
+#: ../gucharmap/gucharmap-unicode-info.c:162
 msgid "Symbol, Modifier"
 msgstr "Simbol, Pengubah"
 
-#: ../gucharmap/gucharmap-unicode-info.c:165
+#: ../gucharmap/gucharmap-unicode-info.c:163
 msgid "Symbol, Math"
 msgstr "Simbol, Matematika"
 
-#: ../gucharmap/gucharmap-unicode-info.c:166
+#: ../gucharmap/gucharmap-unicode-info.c:164
 msgid "Symbol, Other"
 msgstr "Simbol, Yang Lain"
 
-#: ../gucharmap/gucharmap-unicode-info.c:167
+#: ../gucharmap/gucharmap-unicode-info.c:165
 msgid "Separator, Line"
 msgstr "Pemisah, Garis"
 
-#: ../gucharmap/gucharmap-unicode-info.c:168
+#: ../gucharmap/gucharmap-unicode-info.c:166
 msgid "Separator, Paragraph"
 msgstr "Pemisah, Paragraf"
 
-#: ../gucharmap/gucharmap-unicode-info.c:169
+#: ../gucharmap/gucharmap-unicode-info.c:167
 msgid "Separator, Space"
 msgstr "Pemisah, Spasi"
 
-#: ../gucharmap/gucharmap-window.c:429
+#: ../gucharmap/gucharmap-window.c:430
 msgid ""
 "Gucharmap is free software; you can redistribute it and/or modify it under "
 "the terms of the GNU General Public License as published by the Free "
@@ -481,7 +553,7 @@ msgstr ""
 "dipublikasikan oleh Free Software Foundation; baik versi 3 dari Lisensi atau "
 "(terserah pilihan Anda) versi setelahnya."
 
-#: ../gucharmap/gucharmap-window.c:433
+#: ../gucharmap/gucharmap-window.c:434
 msgid ""
 "Permission is hereby granted, free of charge, to any person obtaining a copy "
 "of the Unicode data files to deal in them without restriction, including "
@@ -493,7 +565,7 @@ msgstr ""
 "untuk menggunakan, menyalin, merubah, menggabungkan, menerbitkan, "
 "menyebarkan, dan atau menjual salinan."
 
-#: ../gucharmap/gucharmap-window.c:437
+#: ../gucharmap/gucharmap-window.c:438
 msgid ""
 "Gucharmap and the Unicode data files are distributed in the hope that they "
 "will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty "
@@ -505,7 +577,7 @@ msgstr ""
 "BEKERJA DENGAN BAIK. Lihat Lisensi Publik Umum GNU dan Hak cipta Unicode "
 "untuk lebih jelasnya."
 
-#: ../gucharmap/gucharmap-window.c:441
+#: ../gucharmap/gucharmap-window.c:442
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "Gucharmap; if not, write to the Free Software Foundation, Inc., 59 Temple "
@@ -515,7 +587,7 @@ msgstr ""
 "Gucharmap; jika tidak, kirimkan surat Anda ke Free Software Foundation, "
 "Inc., 59 Temple Place, Suite 330, Boston, MA  02110-1301  USA"
 
-#: ../gucharmap/gucharmap-window.c:444
+#: ../gucharmap/gucharmap-window.c:445
 msgid ""
 "Also you should have received a copy of the Unicode Copyright along with "
 "Gucharmap; you can always find it at Unicode's website: http://www.unicode."
@@ -525,63 +597,63 @@ msgstr ""
 "Gucharmap, anda selalu dapat menemukannya di website Unicode: http://www."
 "unicode.org/copyright.html"
 
-#: ../gucharmap/gucharmap-window.c:454 ../gucharmap/main.c:39
+#: ../gucharmap/gucharmap-window.c:455 ../gucharmap/main.c:39
 msgid "GNOME Character Map"
 msgstr "Tabel Karakter GNOME"
 
-#: ../gucharmap/gucharmap-window.c:456
+#: ../gucharmap/gucharmap-window.c:457
 msgid "Based on the Unicode Character Database 9.0.0"
 msgstr "Berdasar pada Basis Data Karakter Unicode 9.0.0"
 
-#: ../gucharmap/gucharmap-window.c:465
+#: ../gucharmap/gucharmap-window.c:467
 msgid "translator-credits"
 msgstr ""
 "Ahmad Riza H Nst <rizahnst@gnome.org>, 2003, 2004, 2006\n"
 "Andika Triwidada <andika@gmail.com>, 2011, 2012, 2013, 2014"
 
-#: ../gucharmap/gucharmap-window.c:554
+#: ../gucharmap/gucharmap-window.c:556
 msgid "Next Script"
 msgstr "Skrip Selanjutnya"
 
-#: ../gucharmap/gucharmap-window.c:554
+#: ../gucharmap/gucharmap-window.c:556
 msgid "Previous Script"
 msgstr "Skrip Sebelumnya"
 
-#: ../gucharmap/gucharmap-window.c:559
+#: ../gucharmap/gucharmap-window.c:561
 msgid "Next Block"
 msgstr "Blok Selanjutnya"
 
-#: ../gucharmap/gucharmap-window.c:559
+#: ../gucharmap/gucharmap-window.c:561
 msgid "Previous Block"
 msgstr "Blok Sebelumnya"
 
 #. Text to copy entry + button
-#: ../gucharmap/gucharmap-window.c:791
+#: ../gucharmap/gucharmap-window.c:793
 msgid "_Text to copy:"
 msgstr "_Teks yang hendak disalin:"
 
-#: ../gucharmap/gucharmap-window.c:798
+#: ../gucharmap/gucharmap-window.c:800
 msgid "Copy to the clipboard."
 msgstr "Salin ke papan klip."
 
-#: ../gucharmap/main.c:160
+#: ../gucharmap/main.c:187
 msgid "Page _Setup"
 msgstr "_Penyiapan Halaman"
 
 #. g_menu_append (G_MENU (model), _("Print Preview"), "win.print-preview");
-#: ../gucharmap/main.c:162
+#: ../gucharmap/main.c:189
 msgid "_Print"
 msgstr "_Cetak"
 
-#: ../gucharmap/main.c:211
+#: ../gucharmap/main.c:238
 msgid "Font to start with; ex: 'Serif 27'"
 msgstr "Huruf yang ingin dimulai dengan; mis: 'Serif 27'"
 
-#: ../gucharmap/main.c:211
+#: ../gucharmap/main.c:238
 msgid "FONT"
 msgstr "FONTA"
 
-#: ../gucharmap/main.c:215
+#: ../gucharmap/main.c:244
 msgid "[STRING…]"
 msgstr "[STRING…]"
 
@@ -1587,7 +1659,6 @@ msgid "Ideographic Symbols and Punctuation"
 msgstr "Puntuasi dan Simbol Ideografis"
 
 #: ../gucharmap/unicode-i18n.h:241 ../gucharmap/unicode-i18n.h:406
-#| msgid "Hangul"
 msgid "Tangut"
 msgstr "Tangut"
 
