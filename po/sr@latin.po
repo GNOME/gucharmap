@@ -1,22 +1,22 @@
 # Serbian translation of gucharmap.
-# Courtesy of Prevod.org team (http://prevod.org/) >>> 2003—2016.
+# Courtesy of Prevod.org team (http://prevod.org/) >>> 2003—2017.
 # This file is distributed under the same license as the gucharmap package.
 # Translators:
 # Danilo Šegan <dsegan@gmx.net>, 2004.
 # Slobodan D. Sredojević <slobo@akrep.be>
 # Branko Kokanović <branko.kokanovic@gmail.com>, 2010.
 # Miloš Popović <gpopac@gmail.com>, 2011.
-# Miroslav Nikolić <miroslavnikolic@rocketmail.com>, 2010—2016.
+# Miroslav Nikolić <miroslavnikolic@rocketmail.com>, 2010—2017.
 # Marko M. Kostić <marko.m.kostic@gmail.com>, 2015.
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gucharm"
 "ap&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-08-15 10:26+0000\n"
-"PO-Revision-Date: 2016-08-20 23:04+0200\n"
+"POT-Creation-Date: 2017-01-28 21:41+0000\n"
+"PO-Revision-Date: 2017-02-12 20:56+0200\n"
 "Last-Translator: Miroslav Nikolić <miroslavnikolic@rocketmail.com>\n"
-"Language-Team: Serbian <gnom@prevod.org>\n"
+"Language-Team: Serbian <(nothing)>\n"
 "Language: sr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,7 +26,7 @@ msgstr ""
 "X-Project-Style: gnome\n"
 
 #: ../data/gucharmap.appdata.xml.in.h:1 ../gucharmap.desktop.in.in.h:1
-#: ../gucharmap/gucharmap-window.c:766 ../gucharmap/main.c:267
+#: ../gucharmap/gucharmap-window.c:768 ../gucharmap/main.c:267
 msgid "Character Map"
 msgstr "Tablica znakova"
 
@@ -69,112 +69,192 @@ msgstr "Sve"
 msgid "Unicode Block"
 msgstr "Unikod blok"
 
-#: ../gucharmap/gucharmap-charmap.c:524
+#: ../gucharmap/gucharmap-charmap.c:441
+msgid "Font variant of"
+msgstr "Varijante iszgleda slova"
+
+#: ../gucharmap/gucharmap-charmap.c:442
+msgid "No-break version of"
+msgstr "Neprekidno izdanje"
+
+#: ../gucharmap/gucharmap-charmap.c:443
+#| msgid "Alphabetic Presentation Forms"
+msgid "Initial presentation form of"
+msgstr "Početni oblik predstavljanja"
+
+#: ../gucharmap/gucharmap-charmap.c:444
+#| msgid "Alphabetic Presentation Forms"
+msgid "Medial presentation form of"
+msgstr "Srednji oblik predstavljanja"
+
+#: ../gucharmap/gucharmap-charmap.c:445
+#| msgid "Arabic Presentation Forms-A"
+msgid "Final presentation form of"
+msgstr "Krajnji oblik predstavljanja"
+
+#: ../gucharmap/gucharmap-charmap.c:446
+#| msgid "Alphabetic Presentation Forms"
+msgid "Isolated presentation form of"
+msgstr "Izolovani oblik predstavljanja"
+
+#: ../gucharmap/gucharmap-charmap.c:447
+msgid "Encircled form of"
+msgstr "Zaokruženi oblik"
+
+#: ../gucharmap/gucharmap-charmap.c:448
+msgid "Superscript form of"
+msgstr "Oblik stepena"
+
+#: ../gucharmap/gucharmap-charmap.c:449
+msgid "Subscript form of"
+msgstr "Oblik indeksa"
+
+#: ../gucharmap/gucharmap-charmap.c:450
+#| msgid "Alphabetic Presentation Forms"
+msgid "Vertical layout presentation form of"
+msgstr "Uspravni oblik predstavljanja rasporeda"
+
+#: ../gucharmap/gucharmap-charmap.c:451
+msgid "Wide compatibility character of"
+msgstr "Široki znak saglasnosti"
+
+#: ../gucharmap/gucharmap-charmap.c:452
+msgid "Narrow compatibility character of"
+msgstr "Uski znak saglasnosti"
+
+#: ../gucharmap/gucharmap-charmap.c:453
+#| msgid "Small Form Variants"
+msgid "Small variant form of"
+msgstr "Varijante malih oblika"
+
+#: ../gucharmap/gucharmap-charmap.c:454
+msgid "CJK squared font variant of"
+msgstr "KJK četvrtasta varijanta slova"
+
+#: ../gucharmap/gucharmap-charmap.c:455
+msgid "Vulgar fraction form of"
+msgstr "Oblik prostog razlomka"
+
+#: ../gucharmap/gucharmap-charmap.c:456
+msgid "Unspecified compatibility character of"
+msgstr "Neodređeni znak saglasnosti"
+
+#: ../gucharmap/gucharmap-charmap.c:676
+#| msgid "Canonical decomposition:"
+msgid "Compatibility decomposition:"
+msgstr "Razlaganje saglasnosti:"
+
+#: ../gucharmap/gucharmap-charmap.c:677
 msgid "Canonical decomposition:"
 msgstr "Kanonsko razlaganje:"
 
-#: ../gucharmap/gucharmap-charmap.c:567 ../gucharmap/gucharmap-chartable.c:581
+#: ../gucharmap/gucharmap-charmap.c:719 ../gucharmap/gucharmap-chartable.c:581
 msgid "[not a printable character]"
 msgstr "[znak bez prikaza]"
 
-#: ../gucharmap/gucharmap-charmap.c:581
+#: ../gucharmap/gucharmap-charmap.c:733
 msgid "General Character Properties"
 msgstr "Opšte osobine znaka"
 
-#: ../gucharmap/gucharmap-charmap.c:587
+#: ../gucharmap/gucharmap-charmap.c:739
 msgid "In Unicode since:"
 msgstr "U Unikodu od:"
 
 #. character category
-#: ../gucharmap/gucharmap-charmap.c:591
+#: ../gucharmap/gucharmap-charmap.c:743
 msgid "Unicode category:"
 msgstr "Kategorija Unikoda:"
 
-#: ../gucharmap/gucharmap-charmap.c:600
+#: ../gucharmap/gucharmap-charmap.c:754
 msgid "Various Useful Representations"
 msgstr "Razni načini prikaza"
 
-#: ../gucharmap/gucharmap-charmap.c:610
+#: ../gucharmap/gucharmap-charmap.c:764
 msgid "UTF-8:"
 msgstr "UTF-8:"
 
-#: ../gucharmap/gucharmap-charmap.c:618
+#: ../gucharmap/gucharmap-charmap.c:772
 msgid "UTF-16:"
 msgstr "UTF-16:"
 
-#: ../gucharmap/gucharmap-charmap.c:629
+#: ../gucharmap/gucharmap-charmap.c:783
 msgid "C octal escaped UTF-8:"
 msgstr "Oktalno istaknuta UTF-8:"
 
-#: ../gucharmap/gucharmap-charmap.c:639
+#: ../gucharmap/gucharmap-charmap.c:793
 msgid "XML decimal entity:"
 msgstr "IksML decimalni entitet:"
 
-#: ../gucharmap/gucharmap-charmap.c:650
+#: ../gucharmap/gucharmap-charmap.c:804
 msgid "Annotations and Cross References"
 msgstr "Pribeleške i među-reference"
 
-#: ../gucharmap/gucharmap-charmap.c:657
+#: ../gucharmap/gucharmap-charmap.c:811
 msgid "Alias names:"
 msgstr "Drugi nazivi:"
 
-#: ../gucharmap/gucharmap-charmap.c:666
+#: ../gucharmap/gucharmap-charmap.c:820
 msgid "Notes:"
 msgstr "Beleške:"
 
-#: ../gucharmap/gucharmap-charmap.c:675
+#: ../gucharmap/gucharmap-charmap.c:829
 msgid "See also:"
 msgstr "Videti takođe:"
 
-#: ../gucharmap/gucharmap-charmap.c:684
+#: ../gucharmap/gucharmap-charmap.c:838
 msgid "Approximate equivalents:"
 msgstr "Približni ekvivalenti:"
 
-#: ../gucharmap/gucharmap-charmap.c:693
+#: ../gucharmap/gucharmap-charmap.c:847
 msgid "Equivalents:"
 msgstr "Ekvivalenti:"
 
-#: ../gucharmap/gucharmap-charmap.c:707
+#: ../gucharmap/gucharmap-charmap.c:862
 msgid "CJK Ideograph Information"
 msgstr "Podaci o KJK ideogramu"
 
-#: ../gucharmap/gucharmap-charmap.c:712
+#: ../gucharmap/gucharmap-charmap.c:867
 msgid "Definition in English:"
 msgstr "Odrednica na engleskom:"
 
-#: ../gucharmap/gucharmap-charmap.c:717
+#: ../gucharmap/gucharmap-charmap.c:872
 msgid "Mandarin Pronunciation:"
 msgstr "Mandarinski izgovor:"
 
-#: ../gucharmap/gucharmap-charmap.c:722
+#: ../gucharmap/gucharmap-charmap.c:877
 msgid "Cantonese Pronunciation:"
 msgstr "Kantonski izgovor:"
 
-#: ../gucharmap/gucharmap-charmap.c:727
+#: ../gucharmap/gucharmap-charmap.c:882
 msgid "Japanese On Pronunciation:"
 msgstr "Japanski On izgovor:"
 
-#: ../gucharmap/gucharmap-charmap.c:732
+#: ../gucharmap/gucharmap-charmap.c:887
 msgid "Japanese Kun Pronunciation:"
 msgstr "Japanski Kun izgovor:"
 
-#: ../gucharmap/gucharmap-charmap.c:737
+#: ../gucharmap/gucharmap-charmap.c:892
 msgid "Tang Pronunciation:"
 msgstr "Tang izgovor:"
 
-#: ../gucharmap/gucharmap-charmap.c:742
+#: ../gucharmap/gucharmap-charmap.c:897
 msgid "Korean Pronunciation:"
 msgstr "Korejski izgovor:"
 
-#: ../gucharmap/gucharmap-charmap.c:1124
+#: ../gucharmap/gucharmap-charmap.c:902
+#| msgid "Cantonese Pronunciation:"
+msgid "Vietnamese Pronunciation:"
+msgstr "Vijetnamski izgovor:"
+
+#: ../gucharmap/gucharmap-charmap.c:1284
 msgid "Characte_r Table"
 msgstr "Tablica _znakova"
 
-#: ../gucharmap/gucharmap-charmap.c:1171
+#: ../gucharmap/gucharmap-charmap.c:1331
 msgid "Character _Details"
 msgstr "_Detalji o znaku"
 
-#: ../gucharmap/gucharmap-chartable-accessible.c:795
+#: ../gucharmap/gucharmap-chartable-accessible.c:798
 msgid "Character Table"
 msgstr "Tablica znakova"
 
@@ -475,7 +555,7 @@ msgstr "Razdelnik, pasus"
 msgid "Separator, Space"
 msgstr "Razdelnik, razmak"
 
-#: ../gucharmap/gucharmap-window.c:429
+#: ../gucharmap/gucharmap-window.c:430
 msgid ""
 "Gucharmap is free software; you can redistribute it and/or modify it under "
 "the terms of the GNU General Public License as published by the Free "
@@ -488,7 +568,7 @@ msgstr ""
 "verzije."
 
 # bug(slobo): ovo sam proizvoljno preveo - usaglasi sa legal.xml prevodom!
-#: ../gucharmap/gucharmap-window.c:433
+#: ../gucharmap/gucharmap-window.c:434
 msgid ""
 "Permission is hereby granted, free of charge, to any person obtaining a copy "
 "of the Unicode data files to deal in them without restriction, including "
@@ -500,7 +580,7 @@ msgstr ""
 "na korišćenje, umnožavanje, prispajanje, objavljivanje, deljenje(rasturanje) i/ili "
 "prodaju primeraka."
 
-#: ../gucharmap/gucharmap-window.c:437
+#: ../gucharmap/gucharmap-window.c:438
 msgid ""
 "Gucharmap and the Unicode data files are distributed in the hope that they "
 "will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty "
@@ -512,7 +592,7 @@ msgstr ""
 "TRŽIŠNE VREDNOSTI ili PRILAGOĐENOSTI ODREĐENOJ NAMENI.  Za više detalja "
 "pročitajte Gnuovu opštu javnu licencu i autorska prava Unikoda."
 
-#: ../gucharmap/gucharmap-window.c:441
+#: ../gucharmap/gucharmap-window.c:442
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "Gucharmap; if not, write to the Free Software Foundation, Inc., 59 Temple "
@@ -523,7 +603,7 @@ msgstr ""
 "Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02110-1301  USA“"
 
 # bug(slobo): beleška samom sebi ovde promeni redosled reči, konfuzno je pomalo...
-#: ../gucharmap/gucharmap-window.c:444
+#: ../gucharmap/gucharmap-window.c:445
 msgid ""
 "Also you should have received a copy of the Unicode Copyright along with "
 "Gucharmap; you can always find it at Unicode's website: http://www.unicode."
@@ -533,16 +613,15 @@ msgstr ""
 "slovnu mapu; ako niste možete da ga pronađete na veb stranici Unikoda: "
 "„http://www.unicode.org/copyright.html“"
 
-#: ../gucharmap/gucharmap-window.c:454 ../gucharmap/main.c:39
+#: ../gucharmap/gucharmap-window.c:455 ../gucharmap/main.c:39
 msgid "GNOME Character Map"
 msgstr "Gnomova tablica znakova"
 
-#: ../gucharmap/gucharmap-window.c:456
-#| msgid "Based on the Unicode Character Database 8.0.0"
+#: ../gucharmap/gucharmap-window.c:457
 msgid "Based on the Unicode Character Database 9.0.0"
 msgstr "Zasnovano na bazi podataka Unikod znakova 9.0.0"
 
-#: ../gucharmap/gucharmap-window.c:465
+#: ../gucharmap/gucharmap-window.c:467
 msgid "translator-credits"
 msgstr ""
 "Danilo Šegan <danilo@prevod.org>\n"
@@ -554,28 +633,28 @@ msgstr ""
 "\n"
 "http://prevod.org — prevodi na srpski jezik"
 
-#: ../gucharmap/gucharmap-window.c:554
+#: ../gucharmap/gucharmap-window.c:556
 msgid "Next Script"
 msgstr "Sledeće pismo"
 
-#: ../gucharmap/gucharmap-window.c:554
+#: ../gucharmap/gucharmap-window.c:556
 msgid "Previous Script"
 msgstr "Prethodno pismo"
 
-#: ../gucharmap/gucharmap-window.c:559
+#: ../gucharmap/gucharmap-window.c:561
 msgid "Next Block"
 msgstr "Sledeći blok"
 
-#: ../gucharmap/gucharmap-window.c:559
+#: ../gucharmap/gucharmap-window.c:561
 msgid "Previous Block"
 msgstr "Prethodni blok"
 
 #. Text to copy entry + button
-#: ../gucharmap/gucharmap-window.c:791
+#: ../gucharmap/gucharmap-window.c:793
 msgid "_Text to copy:"
 msgstr "_Tekst za umnožavanje:"
 
-#: ../gucharmap/gucharmap-window.c:798
+#: ../gucharmap/gucharmap-window.c:800
 msgid "Copy to the clipboard."
 msgstr "Smesti u spisak isečaka."
 
