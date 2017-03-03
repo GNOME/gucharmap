@@ -1,25 +1,26 @@
 # Swedish messages for gucharmap.
-# Copyright © 2003-2012 Free Software Foundation, Inc.
+# Copyright © 2003-2017 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gucharmap package.
 # Christian Rose <menthos@menthos.com>, 2003, 2004, 2005.
 # Daniel Nylander <po@danielnylander.se>, 2006, 2007, 2008, 2009, 2010, 2011, 2012.
 # Mattias Eriksson <snaggen@gmail.com>, 2014.
 # Anders Jonsson <anders.jonsson@norsjovallen.se>, 2015.
+# Josef Andersson <l10nl18nsweja@gmail.com>, 2017.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gucharmap&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-10-30 11:56+0000\n"
-"PO-Revision-Date: 2016-11-10 21:11+0100\n"
-"Last-Translator: Josef Andersson <josef.andersson@fripost.org>\n"
+"POT-Creation-Date: 2017-02-26 08:13+0000\n"
+"PO-Revision-Date: 2017-03-03 21:32+0100\n"
+"Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 1.8.11\n"
 
 #: ../data/gucharmap.appdata.xml.in.h:1 ../gucharmap.desktop.in.in.h:1
 #: ../gucharmap/gucharmap-window.c:768 ../gucharmap/main.c:267
@@ -65,113 +66,182 @@ msgstr "Alla"
 msgid "Unicode Block"
 msgstr "Unicode-block"
 
-#: ../gucharmap/gucharmap-charmap.c:525
+#: ../gucharmap/gucharmap-charmap.c:446
+msgid "Font variant of"
+msgstr "Typsnittsvariant av"
+
+#: ../gucharmap/gucharmap-charmap.c:447
+msgid "No-break version of"
+msgstr "Inga-radbryt-version av"
+
+#: ../gucharmap/gucharmap-charmap.c:448
+msgid "Initial presentation form of"
+msgstr "Initial presentationsform av"
+
+#: ../gucharmap/gucharmap-charmap.c:449
+msgid "Medial presentation form of"
+msgstr "Mellanpresentationsform av"
+
+#: ../gucharmap/gucharmap-charmap.c:450
+msgid "Final presentation form of"
+msgstr "Slutlig presentationsform av"
+
+#: ../gucharmap/gucharmap-charmap.c:451
+msgid "Isolated presentation form of"
+msgstr "Isolerad presentationsform av"
+
+#: ../gucharmap/gucharmap-charmap.c:452
+msgid "Encircled form of"
+msgstr "Omringad form av"
+
+#: ../gucharmap/gucharmap-charmap.c:453
+msgid "Superscript form of"
+msgstr "Exponentlägesform av"
+
+#: ../gucharmap/gucharmap-charmap.c:454
+msgid "Subscript form of"
+msgstr "Indexlägeform av"
+
+#: ../gucharmap/gucharmap-charmap.c:455
+msgid "Vertical layout presentation form of"
+msgstr "Vertikal layout-presentationsform av"
+
+#: ../gucharmap/gucharmap-charmap.c:456
+msgid "Wide compatibility character of"
+msgstr "Brett kompatibilitetstecken för"
+
+#: ../gucharmap/gucharmap-charmap.c:457
+msgid "Narrow compatibility character of"
+msgstr "Smalt kompatibilitetstecken för"
+
+#: ../gucharmap/gucharmap-charmap.c:458
+msgid "Small variant form of"
+msgstr "Liten variantform av"
+
+# https://www.compart.com/en/unicode/decomposition/%3Csquare%3E
+#: ../gucharmap/gucharmap-charmap.c:459
+msgid "CJK squared font variant of"
+msgstr "Kvadratisk CJK-typsnittsvariant av"
+
+#: ../gucharmap/gucharmap-charmap.c:460
+msgid "Vulgar fraction form of"
+msgstr "Bråkform av"
+
+#: ../gucharmap/gucharmap-charmap.c:461
+msgid "Unspecified compatibility character of"
+msgstr "Ospecificerat kompatibilitetstecken för"
+
+#: ../gucharmap/gucharmap-charmap.c:681
+msgid "Compatibility decomposition:"
+msgstr "Kompatibilitetsuppdelning:"
+
+#: ../gucharmap/gucharmap-charmap.c:682
 msgid "Canonical decomposition:"
 msgstr "Kanonisk dekomposition:"
 
-#: ../gucharmap/gucharmap-charmap.c:568 ../gucharmap/gucharmap-chartable.c:581
+#: ../gucharmap/gucharmap-charmap.c:724 ../gucharmap/gucharmap-chartable.c:581
 msgid "[not a printable character]"
 msgstr "[inte ett utskrivbart tecken]"
 
-#: ../gucharmap/gucharmap-charmap.c:582
+#: ../gucharmap/gucharmap-charmap.c:738
 msgid "General Character Properties"
 msgstr "Allmänna teckenegenskaper"
 
-#: ../gucharmap/gucharmap-charmap.c:588
+#: ../gucharmap/gucharmap-charmap.c:744
 msgid "In Unicode since:"
 msgstr "I Unicode sedan:"
 
 #. character category
-#: ../gucharmap/gucharmap-charmap.c:592
+#: ../gucharmap/gucharmap-charmap.c:748
 msgid "Unicode category:"
 msgstr "Unicode-kategori:"
 
-#: ../gucharmap/gucharmap-charmap.c:601
+#: ../gucharmap/gucharmap-charmap.c:759
 msgid "Various Useful Representations"
 msgstr "Diverse användbara representationer"
 
-#: ../gucharmap/gucharmap-charmap.c:611
+#: ../gucharmap/gucharmap-charmap.c:769
 msgid "UTF-8:"
 msgstr "UTF-8:"
 
-#: ../gucharmap/gucharmap-charmap.c:619
+#: ../gucharmap/gucharmap-charmap.c:777
 msgid "UTF-16:"
 msgstr "UTF-16:"
 
 # Osäker
-#: ../gucharmap/gucharmap-charmap.c:630
+#: ../gucharmap/gucharmap-charmap.c:788
 msgid "C octal escaped UTF-8:"
 msgstr "Oktalt kodad UTF-8 för C:"
 
-#: ../gucharmap/gucharmap-charmap.c:640
+#: ../gucharmap/gucharmap-charmap.c:798
 msgid "XML decimal entity:"
 msgstr "Decimal entitetsreferens för XML:"
 
-#: ../gucharmap/gucharmap-charmap.c:651
+#: ../gucharmap/gucharmap-charmap.c:809
 msgid "Annotations and Cross References"
 msgstr "Annotationer och korsreferenser"
 
-#: ../gucharmap/gucharmap-charmap.c:658
+#: ../gucharmap/gucharmap-charmap.c:816
 msgid "Alias names:"
 msgstr "Aliasnamn:"
 
-#: ../gucharmap/gucharmap-charmap.c:667
+#: ../gucharmap/gucharmap-charmap.c:825
 msgid "Notes:"
 msgstr "Anteckningar:"
 
-#: ../gucharmap/gucharmap-charmap.c:676
+#: ../gucharmap/gucharmap-charmap.c:834
 msgid "See also:"
 msgstr "Se även:"
 
-#: ../gucharmap/gucharmap-charmap.c:685
+#: ../gucharmap/gucharmap-charmap.c:843
 msgid "Approximate equivalents:"
 msgstr "Ungefärliga ekvivalenter:"
 
-#: ../gucharmap/gucharmap-charmap.c:694
+#: ../gucharmap/gucharmap-charmap.c:852
 msgid "Equivalents:"
 msgstr "Ekvivalenter:"
 
-#: ../gucharmap/gucharmap-charmap.c:709
+#: ../gucharmap/gucharmap-charmap.c:867
 msgid "CJK Ideograph Information"
 msgstr "CJK-ideografinformation"
 
-#: ../gucharmap/gucharmap-charmap.c:714
+#: ../gucharmap/gucharmap-charmap.c:872
 msgid "Definition in English:"
 msgstr "Definition på engelska:"
 
-#: ../gucharmap/gucharmap-charmap.c:719
+#: ../gucharmap/gucharmap-charmap.c:877
 msgid "Mandarin Pronunciation:"
 msgstr "Mandarin-uttal:"
 
-#: ../gucharmap/gucharmap-charmap.c:724
+#: ../gucharmap/gucharmap-charmap.c:882
 msgid "Cantonese Pronunciation:"
 msgstr "Kantonesiskt uttal:"
 
-#: ../gucharmap/gucharmap-charmap.c:729
+#: ../gucharmap/gucharmap-charmap.c:887
 msgid "Japanese On Pronunciation:"
 msgstr "Japanskt On-uttal:"
 
-#: ../gucharmap/gucharmap-charmap.c:734
+#: ../gucharmap/gucharmap-charmap.c:892
 msgid "Japanese Kun Pronunciation:"
 msgstr "Japanskt Kun-uttal:"
 
-#: ../gucharmap/gucharmap-charmap.c:739
+#: ../gucharmap/gucharmap-charmap.c:897
 msgid "Tang Pronunciation:"
 msgstr "Tang-uttal:"
 
-#: ../gucharmap/gucharmap-charmap.c:744
+#: ../gucharmap/gucharmap-charmap.c:902
 msgid "Korean Pronunciation:"
 msgstr "Koreanskt uttal:"
 
-#: ../gucharmap/gucharmap-charmap.c:749
+#: ../gucharmap/gucharmap-charmap.c:907
 msgid "Vietnamese Pronunciation:"
 msgstr "Vietnamesiskt uttal:"
 
-#: ../gucharmap/gucharmap-charmap.c:1131
+#: ../gucharmap/gucharmap-charmap.c:1289
 msgid "Characte_r Table"
 msgstr "Tecke_ntabell"
 
-#: ../gucharmap/gucharmap-charmap.c:1178
+#: ../gucharmap/gucharmap-charmap.c:1336
 msgid "Character _Details"
 msgstr "Tecken_detaljer"
 
