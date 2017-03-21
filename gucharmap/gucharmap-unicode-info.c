@@ -66,11 +66,12 @@ gucharmap_get_unicode_name (gunichar wc)
   _gucharmap_intl_ensure_initialized ();
 
   if ((wc >= 0x3400 && wc <= 0x4db5)
-      || (wc >= 0x4e00 && wc <= 0x9fd5)
+      || (wc >= 0x4e00 && wc <= 0x9fea)
       || (wc >= 0x20000 && wc <= 0x2a6d6)
       || (wc >= 0x2a700 && wc <= 0x2b734)
       || (wc >= 0x2b740 && wc <= 0x2b81d)
-      || (wc >= 0x2b820 && wc <= 0x2cea1))
+      || (wc >= 0x2b820 && wc <= 0x2cea1)
+      || (wc >= 0x2ceb0 && wc <= 0x2ebe0))
     {
       g_snprintf (buf, sizeof (buf), "CJK UNIFIED IDEOGRAPH-%04X", wc);
       return buf;

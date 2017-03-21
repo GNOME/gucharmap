@@ -1040,7 +1040,7 @@ sub process_versions_txt
     print $out "static const gchar unicode_version_strings[] =\n";
     my $offset = 0;
     my %version_offsets;
-    for my $version (sort keys %versions)
+    for my $version (sort { $a <=> $b } keys %versions)
     {
         printf $out (qq/  "\%s\\0"\n/, $version);
 	$version_offsets{$version} = $offset;
@@ -1051,7 +1051,7 @@ sub process_versions_txt
 
     print $out "static const guint16 unicode_version_string_offsets[] =\n";
     print $out "{\n";
-    for my $version (sort keys %versions)
+    for my $version (sort { $a <=> $b } keys %versions)
     {
         printf $out (qq/  \%d,\n/, $version_offsets{$version});
     }
