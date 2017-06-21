@@ -238,7 +238,7 @@ download-unicode-data:
 	done && \
 	$(SHA512SUM) --check $(srcdir)/unicode.sha512sums
 
-unicode.sha512sums: stamp-download-unicode-data
+checksum:
 	$(AM_V_GEN)$(SHA512SUM) --tag $(addprefix $(unicodedatadir)/,$(unicode_files)) | $(SED) 's,$(unicodedatadir)/,,g' > $(srcdir)/$(@F)
 
 stamp-unicode-data: stamp-download-unicode-data
