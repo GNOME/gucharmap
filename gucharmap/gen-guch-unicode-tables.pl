@@ -34,7 +34,7 @@ Usage: $0 UNICODE-VERSION DIRECTORY [--i18n]
 DIRECTORY should contain the following Unicode data files:
 UnicodeData.txt Unihan.zip NamesList.txt Blocks.txt Scripts.txt
 
-which can be found at http://www.unicode.org/Public/UNIDATA/
+which can be found at https://www.unicode.org/Public/UNIDATA/
 
 EOF
 }

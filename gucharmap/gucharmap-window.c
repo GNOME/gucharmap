@@ -444,7 +444,7 @@ help_about (GSimpleAction *action,
        "51 Franklin Street, Fifth Floor, Boston, MA 02110-1335 USA"),
     N_("Also you should have received a copy of the Unicode Copyright along "
        "with Gucharmap; you can always find it at Unicode's website: "
-       "http://www.unicode.org/copyright.html")
+       "https://www.unicode.org/copyright.html")
   };
   gchar *license_trans;
   license_trans = g_strconcat (_(license[0]), "\n\n", _(license[1]), "\n\n",
@@ -465,7 +465,7 @@ help_about (GSimpleAction *action,
 			 "logo-icon-name", GUCHARMAP_ICON_NAME,
   			 "authors", authors,
 			 "translator-credits", _("translator-credits"),
-			 "website", "http://live.gnome.org/Gucharmap",
+			 "website", "https://wiki.gnome.org/Apps/Gucharmap",
 			 NULL);
 
   g_free (license_trans);

@@ -234,7 +234,7 @@ endif
 
 download-unicode-data:
 	for f in $(unicode_files); do \
-		[ -e $(builddir)/$${f} ] || $(WGET) $(WGETFLAGS) "http://www.unicode.org/Public/$(unicode_version)/ucd/$${f}"; \
+		[ -e $(builddir)/$${f} ] || $(WGET) $(WGETFLAGS) "https://www.unicode.org/Public/$(unicode_version)/ucd/$${f}"; \
 	done && \
 	$(SHA512SUM) --check $(srcdir)/unicode.sha512sums
 
