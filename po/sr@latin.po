@@ -1,20 +1,20 @@
 # Serbian translation of gucharmap.
-# Courtesy of Prevod.org team (http://prevod.org/) >>> 2003—2017.
+# Courtesy of Prevod.org team (http://prevod.org/) >>> 2003—2018.
 # This file is distributed under the same license as the gucharmap package.
 # Translators:
 # Danilo Šegan <dsegan@gmx.net>, 2004.
 # Slobodan D. Sredojević <slobo@akrep.be>
 # Branko Kokanović <branko.kokanovic@gmail.com>, 2010.
 # Miloš Popović <gpopac@gmail.com>, 2011.
-# Miroslav Nikolić <miroslavnikolic@rocketmail.com>, 2010—2017.
+# Miroslav Nikolić <miroslavnikolic@rocketmail.com>, 2010—2018.
 # Marko M. Kostić <marko.m.kostic@gmail.com>, 2015.
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
 "Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?product=guchar"
 "map&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-07-03 14:22+0000\n"
-"PO-Revision-Date: 2017-08-13 10:05+0200\n"
+"POT-Creation-Date: 2017-12-10 21:39+0000\n"
+"PO-Revision-Date: 2018-02-24 08:32+0200\n"
 "Last-Translator: Miroslav Nikolić <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: srpski <gnome-sr@googlegroups.org>\n"
 "Language: sr\n"
@@ -366,7 +366,7 @@ msgstr "Pismo"
 #. Unicode assigns "Common" as the script name for any character not
 #. * specifically listed in Scripts.txt
 #: ../gucharmap/gucharmap-script-codepoint-list.c:465
-#: ../gucharmap/unicode-i18n.h:310
+#: ../gucharmap/unicode-i18n.h:321
 msgid "Common"
 msgstr "Zajednički"
 
@@ -584,23 +584,36 @@ msgstr ""
 "TRŽIŠNE VREDNOSTI ili PRILAGOĐENOSTI ODREĐENOJ NAMENI.  Za više detalja "
 "pročitajte Gnuovu opštu javnu licencu i autorska prava Unikoda."
 
+#: ../gucharmap/gucharmap-window.c:442
+msgid ""
+"You should have received a copy of the GNU General Public License along with "
+"Gucharmap; if not, write to the Free Software Foundation, Inc., 51 Franklin "
+"Street, Fifth Floor, Boston, MA 02110-1335 USA"
+msgstr ""
+"Trebali ste da primite primerak Gnuove opšte javne licence uz ovaj program; "
+"ako niste, pišite Zadužbini slobodnog softvera na adresu: „Free Software "
+"Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02110-1335  USA“"
+
 # bug(slobo): beleška samom sebi ovde promeni redosled reči, konfuzno je pomalo...
 #: ../gucharmap/gucharmap-window.c:445
+#| msgid ""
+#| "Also you should have received a copy of the Unicode Copyright along with "
+#| "Gucharmap; you can always find it at Unicode's website: http://www."
+#| "unicode.org/copyright.html"
 msgid ""
 "Also you should have received a copy of the Unicode Copyright along with "
-"Gucharmap; you can always find it at Unicode's website: http://www.unicode."
+"Gucharmap; you can always find it at Unicode's website: https://www.unicode."
 "org/copyright.html"
 msgstr ""
 "Takođe ste trebali da dobijete i primerak autorskih prava Unikoda uz Gnomovu "
 "slovnu mapu; ako niste možete da ga pronađete na veb stranici Unikoda: "
-"„http://www.unicode.org/copyright.html“"
+"„https://www.unicode.org/copyright.html“"
 
 #: ../gucharmap/gucharmap-window.c:455 ../gucharmap/main.c:39
 msgid "GNOME Character Map"
 msgstr "Gnomova tablica znakova"
 
 #: ../gucharmap/gucharmap-window.c:457
-#| msgid "Based on the Unicode Character Database 9.0.0"
 msgid "Based on the Unicode Character Database 10.0.0"
 msgstr "Zasnovano na bazi podataka Unikod znakova 10.0.0"
 
@@ -640,20 +653,6 @@ msgstr "_Tekst za umnožavanje:"
 #: ../gucharmap/gucharmap-window.c:800
 msgid "Copy to the clipboard."
 msgstr "Smesti u spisak isečaka."
-
-#: ../gucharmap/gucharmap-window.c:442
-#| msgid ""
-#| "You should have received a copy of the GNU General Public License along "
-#| "with Gucharmap; if not, write to the Free Software Foundation, Inc., 59 "
-#| "Temple Place, Suite 330, Boston, MA  02110-1301  USA"
-msgid ""
-"You should have received a copy of the GNU General Public License along with "
-"Gucharmap; if not, write to the Free Software Foundation, Inc., 51 Franklin "
-"Street, Fifth Floor, Boston, MA 02110-1335 USA"
-msgstr ""
-"Trebali ste da primite primerak Gnuove opšte javne licence uz ovaj program; "
-"ako niste, pišite Zadužbini slobodnog softvera na adresu: „Free Software "
-"Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02110-1335  USA“"
 
 #: ../gucharmap/main.c:187
 msgid "Page _Setup"
@@ -771,7 +770,7 @@ msgstr "Kombinujući diakritički znaci"
 msgid "Greek and Coptic"
 msgstr "Grčki i koptički"
 
-#: ../gucharmap/unicode-i18n.h:14 ../gucharmap/unicode-i18n.h:314
+#: ../gucharmap/unicode-i18n.h:14 ../gucharmap/unicode-i18n.h:325
 msgid "Cyrillic"
 msgstr "Ćirilični"
 
@@ -779,19 +778,19 @@ msgstr "Ćirilični"
 msgid "Cyrillic Supplement"
 msgstr "Ćirilični dodatak"
 
-#: ../gucharmap/unicode-i18n.h:16 ../gucharmap/unicode-i18n.h:291
+#: ../gucharmap/unicode-i18n.h:16 ../gucharmap/unicode-i18n.h:302
 msgid "Armenian"
 msgstr "Jermenski"
 
-#: ../gucharmap/unicode-i18n.h:17 ../gucharmap/unicode-i18n.h:332
+#: ../gucharmap/unicode-i18n.h:17 ../gucharmap/unicode-i18n.h:343
 msgid "Hebrew"
 msgstr "Hebrejski"
 
-#: ../gucharmap/unicode-i18n.h:18 ../gucharmap/unicode-i18n.h:290
+#: ../gucharmap/unicode-i18n.h:18 ../gucharmap/unicode-i18n.h:301
 msgid "Arabic"
 msgstr "Arapski"
 
-#: ../gucharmap/unicode-i18n.h:19 ../gucharmap/unicode-i18n.h:408
+#: ../gucharmap/unicode-i18n.h:19 ../gucharmap/unicode-i18n.h:419
 msgid "Syriac"
 msgstr "Sirijski"
 
@@ -799,24 +798,23 @@ msgstr "Sirijski"
 msgid "Arabic Supplement"
 msgstr "Arapski dodatak"
 
-#: ../gucharmap/unicode-i18n.h:21 ../gucharmap/unicode-i18n.h:418
+#: ../gucharmap/unicode-i18n.h:21 ../gucharmap/unicode-i18n.h:429
 msgid "Thaana"
 msgstr "Tana"
 
-#: ../gucharmap/unicode-i18n.h:22 ../gucharmap/unicode-i18n.h:372
+#: ../gucharmap/unicode-i18n.h:22 ../gucharmap/unicode-i18n.h:383
 msgid "N'Ko"
 msgstr "N'ko"
 
-#: ../gucharmap/unicode-i18n.h:23 ../gucharmap/unicode-i18n.h:397
+#: ../gucharmap/unicode-i18n.h:23 ../gucharmap/unicode-i18n.h:408
 msgid "Samaritan"
 msgstr "Samarićanski"
 
-#: ../gucharmap/unicode-i18n.h:24 ../gucharmap/unicode-i18n.h:358
+#: ../gucharmap/unicode-i18n.h:24 ../gucharmap/unicode-i18n.h:369
 msgid "Mandaic"
 msgstr "Mandaik"
 
 #: ../gucharmap/unicode-i18n.h:25
-#| msgid "Cyrillic Supplement"
 msgid "Syriac Supplement"
 msgstr "Sirijski dodatak"
 
@@ -824,63 +822,63 @@ msgstr "Sirijski dodatak"
 msgid "Arabic Extended-A"
 msgstr "Arapski prošireni-A"
 
-#: ../gucharmap/unicode-i18n.h:27 ../gucharmap/unicode-i18n.h:316
+#: ../gucharmap/unicode-i18n.h:27 ../gucharmap/unicode-i18n.h:327
 msgid "Devanagari"
 msgstr "Devanagari"
 
-#: ../gucharmap/unicode-i18n.h:28 ../gucharmap/unicode-i18n.h:297
+#: ../gucharmap/unicode-i18n.h:28 ../gucharmap/unicode-i18n.h:308
 msgid "Bengali"
 msgstr "Bengali"
 
-#: ../gucharmap/unicode-i18n.h:29 ../gucharmap/unicode-i18n.h:327
+#: ../gucharmap/unicode-i18n.h:29 ../gucharmap/unicode-i18n.h:338
 msgid "Gurmukhi"
 msgstr "Gurmuki"
 
-#: ../gucharmap/unicode-i18n.h:30 ../gucharmap/unicode-i18n.h:326
+#: ../gucharmap/unicode-i18n.h:30 ../gucharmap/unicode-i18n.h:337
 msgid "Gujarati"
 msgstr "Gujarati"
 
-#: ../gucharmap/unicode-i18n.h:31 ../gucharmap/unicode-i18n.h:386
+#: ../gucharmap/unicode-i18n.h:31 ../gucharmap/unicode-i18n.h:397
 msgid "Oriya"
 msgstr "Orija"
 
-#: ../gucharmap/unicode-i18n.h:32 ../gucharmap/unicode-i18n.h:415
+#: ../gucharmap/unicode-i18n.h:32 ../gucharmap/unicode-i18n.h:426
 msgid "Tamil"
 msgstr "Tamil"
 
-#: ../gucharmap/unicode-i18n.h:33 ../gucharmap/unicode-i18n.h:417
+#: ../gucharmap/unicode-i18n.h:33 ../gucharmap/unicode-i18n.h:428
 msgid "Telugu"
 msgstr "Telugu"
 
-#: ../gucharmap/unicode-i18n.h:34 ../gucharmap/unicode-i18n.h:340
+#: ../gucharmap/unicode-i18n.h:34 ../gucharmap/unicode-i18n.h:351
 msgid "Kannada"
 msgstr "Kanada"
 
-#: ../gucharmap/unicode-i18n.h:35 ../gucharmap/unicode-i18n.h:357
+#: ../gucharmap/unicode-i18n.h:35 ../gucharmap/unicode-i18n.h:368
 msgid "Malayalam"
 msgstr "Malajamski"
 
-#: ../gucharmap/unicode-i18n.h:36 ../gucharmap/unicode-i18n.h:403
+#: ../gucharmap/unicode-i18n.h:36 ../gucharmap/unicode-i18n.h:414
 msgid "Sinhala"
 msgstr "Sinhala"
 
-#: ../gucharmap/unicode-i18n.h:37 ../gucharmap/unicode-i18n.h:419
+#: ../gucharmap/unicode-i18n.h:37 ../gucharmap/unicode-i18n.h:430
 msgid "Thai"
 msgstr "Tajlandski"
 
-#: ../gucharmap/unicode-i18n.h:38 ../gucharmap/unicode-i18n.h:347
+#: ../gucharmap/unicode-i18n.h:38 ../gucharmap/unicode-i18n.h:358
 msgid "Lao"
 msgstr "Lao"
 
-#: ../gucharmap/unicode-i18n.h:39 ../gucharmap/unicode-i18n.h:420
+#: ../gucharmap/unicode-i18n.h:39 ../gucharmap/unicode-i18n.h:431
 msgid "Tibetan"
 msgstr "Tibetski"
 
-#: ../gucharmap/unicode-i18n.h:40 ../gucharmap/unicode-i18n.h:371
+#: ../gucharmap/unicode-i18n.h:40 ../gucharmap/unicode-i18n.h:382
 msgid "Myanmar"
 msgstr "Burmanski"
 
-#: ../gucharmap/unicode-i18n.h:41 ../gucharmap/unicode-i18n.h:321
+#: ../gucharmap/unicode-i18n.h:41 ../gucharmap/unicode-i18n.h:332
 msgid "Georgian"
 msgstr "Gruzijski"
 
@@ -888,7 +886,7 @@ msgstr "Gruzijski"
 msgid "Hangul Jamo"
 msgstr "Hangul Džamo"
 
-#: ../gucharmap/unicode-i18n.h:43 ../gucharmap/unicode-i18n.h:320
+#: ../gucharmap/unicode-i18n.h:43 ../gucharmap/unicode-i18n.h:331
 msgid "Ethiopic"
 msgstr "Etiopski"
 
@@ -896,7 +894,7 @@ msgstr "Etiopski"
 msgid "Ethiopic Supplement"
 msgstr "Etiopski dodatak"
 
-#: ../gucharmap/unicode-i18n.h:45 ../gucharmap/unicode-i18n.h:309
+#: ../gucharmap/unicode-i18n.h:45 ../gucharmap/unicode-i18n.h:320
 msgid "Cherokee"
 msgstr "Čiroki"
 
@@ -904,35 +902,35 @@ msgstr "Čiroki"
 msgid "Unified Canadian Aboriginal Syllabics"
 msgstr "Sjedinjeni Kanadski slogovi Aboridžina"
 
-#: ../gucharmap/unicode-i18n.h:47 ../gucharmap/unicode-i18n.h:377
+#: ../gucharmap/unicode-i18n.h:47 ../gucharmap/unicode-i18n.h:388
 msgid "Ogham"
 msgstr "Ogam"
 
-#: ../gucharmap/unicode-i18n.h:48 ../gucharmap/unicode-i18n.h:396
+#: ../gucharmap/unicode-i18n.h:48 ../gucharmap/unicode-i18n.h:407
 msgid "Runic"
 msgstr "Runski"
 
-#: ../gucharmap/unicode-i18n.h:49 ../gucharmap/unicode-i18n.h:409
+#: ../gucharmap/unicode-i18n.h:49 ../gucharmap/unicode-i18n.h:420
 msgid "Tagalog"
 msgstr "Tagalog"
 
-#: ../gucharmap/unicode-i18n.h:50 ../gucharmap/unicode-i18n.h:330
+#: ../gucharmap/unicode-i18n.h:50 ../gucharmap/unicode-i18n.h:341
 msgid "Hanunoo"
 msgstr "Hanunu"
 
-#: ../gucharmap/unicode-i18n.h:51 ../gucharmap/unicode-i18n.h:303
+#: ../gucharmap/unicode-i18n.h:51 ../gucharmap/unicode-i18n.h:314
 msgid "Buhid"
 msgstr "Buhid"
 
-#: ../gucharmap/unicode-i18n.h:52 ../gucharmap/unicode-i18n.h:410
+#: ../gucharmap/unicode-i18n.h:52 ../gucharmap/unicode-i18n.h:421
 msgid "Tagbanwa"
 msgstr "Tagbanva"
 
-#: ../gucharmap/unicode-i18n.h:53 ../gucharmap/unicode-i18n.h:344
+#: ../gucharmap/unicode-i18n.h:53 ../gucharmap/unicode-i18n.h:355
 msgid "Khmer"
 msgstr "Kmerski"
 
-#: ../gucharmap/unicode-i18n.h:54 ../gucharmap/unicode-i18n.h:368
+#: ../gucharmap/unicode-i18n.h:54 ../gucharmap/unicode-i18n.h:379
 msgid "Mongolian"
 msgstr "Mongolski"
 
@@ -940,15 +938,15 @@ msgstr "Mongolski"
 msgid "Unified Canadian Aboriginal Syllabics Extended"
 msgstr "Prošireni Sjedinjeni Kanadski slogovi Aboridžina"
 
-#: ../gucharmap/unicode-i18n.h:56 ../gucharmap/unicode-i18n.h:350
+#: ../gucharmap/unicode-i18n.h:56 ../gucharmap/unicode-i18n.h:361
 msgid "Limbu"
 msgstr "Limbu"
 
-#: ../gucharmap/unicode-i18n.h:57 ../gucharmap/unicode-i18n.h:411
+#: ../gucharmap/unicode-i18n.h:57 ../gucharmap/unicode-i18n.h:422
 msgid "Tai Le"
 msgstr "Tai Le"
 
-#: ../gucharmap/unicode-i18n.h:58 ../gucharmap/unicode-i18n.h:374
+#: ../gucharmap/unicode-i18n.h:58 ../gucharmap/unicode-i18n.h:385
 msgid "New Tai Lue"
 msgstr "Novi Tai Le"
 
@@ -956,11 +954,11 @@ msgstr "Novi Tai Le"
 msgid "Khmer Symbols"
 msgstr "Kmerski simboli"
 
-#: ../gucharmap/unicode-i18n.h:60 ../gucharmap/unicode-i18n.h:302
+#: ../gucharmap/unicode-i18n.h:60 ../gucharmap/unicode-i18n.h:313
 msgid "Buginese"
 msgstr "Buginiz"
 
-#: ../gucharmap/unicode-i18n.h:61 ../gucharmap/unicode-i18n.h:412
+#: ../gucharmap/unicode-i18n.h:61 ../gucharmap/unicode-i18n.h:423
 msgid "Tai Tham"
 msgstr "Tai Tam"
 
@@ -968,23 +966,23 @@ msgstr "Tai Tam"
 msgid "Combining Diacritical Marks Extended"
 msgstr "Prošireni kombinujući diakritički znaci"
 
-#: ../gucharmap/unicode-i18n.h:63 ../gucharmap/unicode-i18n.h:293
+#: ../gucharmap/unicode-i18n.h:63 ../gucharmap/unicode-i18n.h:304
 msgid "Balinese"
 msgstr "Balineze"
 
-#: ../gucharmap/unicode-i18n.h:64 ../gucharmap/unicode-i18n.h:406
+#: ../gucharmap/unicode-i18n.h:64 ../gucharmap/unicode-i18n.h:417
 msgid "Sundanese"
 msgstr "Sudanski"
 
-#: ../gucharmap/unicode-i18n.h:65 ../gucharmap/unicode-i18n.h:296
+#: ../gucharmap/unicode-i18n.h:65 ../gucharmap/unicode-i18n.h:307
 msgid "Batak"
 msgstr "Batak"
 
-#: ../gucharmap/unicode-i18n.h:66 ../gucharmap/unicode-i18n.h:349
+#: ../gucharmap/unicode-i18n.h:66 ../gucharmap/unicode-i18n.h:360
 msgid "Lepcha"
 msgstr "Lepča"
 
-#: ../gucharmap/unicode-i18n.h:67 ../gucharmap/unicode-i18n.h:378
+#: ../gucharmap/unicode-i18n.h:67 ../gucharmap/unicode-i18n.h:389
 msgid "Ol Chiki"
 msgstr "Ol Čiki"
 
@@ -993,923 +991,972 @@ msgid "Cyrillic Extended-C"
 msgstr "Ćirilični proširenje-C"
 
 #: ../gucharmap/unicode-i18n.h:69
+#| msgid "Geometric Shapes Extended"
+msgid "Georgian Extended"
+msgstr "Prošireni gruzijski"
+
+#: ../gucharmap/unicode-i18n.h:70
 msgid "Sundanese Supplement"
 msgstr "Sundanski dodatak"
 
-#: ../gucharmap/unicode-i18n.h:70
+#: ../gucharmap/unicode-i18n.h:71
 msgid "Vedic Extensions"
 msgstr "Vedski dodaci"
 
-#: ../gucharmap/unicode-i18n.h:71
+#: ../gucharmap/unicode-i18n.h:72
 msgid "Phonetic Extensions"
 msgstr "Fonetski dodaci"
 
-#: ../gucharmap/unicode-i18n.h:72
+#: ../gucharmap/unicode-i18n.h:73
 msgid "Phonetic Extensions Supplement"
 msgstr "Fonetski dodatak"
 
-#: ../gucharmap/unicode-i18n.h:73
+#: ../gucharmap/unicode-i18n.h:74
 msgid "Combining Diacritical Marks Supplement"
 msgstr "Kombinuje dodatke za dijakritičke znake"
 
-#: ../gucharmap/unicode-i18n.h:74
+#: ../gucharmap/unicode-i18n.h:75
 msgid "Latin Extended Additional"
 msgstr "Dodatno latinično proširenje"
 
-#: ../gucharmap/unicode-i18n.h:75
+#: ../gucharmap/unicode-i18n.h:76
 msgid "Greek Extended"
 msgstr "Prošireni grčki"
 
-#: ../gucharmap/unicode-i18n.h:76
+#: ../gucharmap/unicode-i18n.h:77
 msgid "General Punctuation"
 msgstr "Opšta interpunkcija"
 
 # V. Morton-Benson rečnik
-#: ../gucharmap/unicode-i18n.h:77
+#: ../gucharmap/unicode-i18n.h:78
 msgid "Superscripts and Subscripts"
 msgstr "Natpisani i potpisani znaci"
 
-#: ../gucharmap/unicode-i18n.h:78
+#: ../gucharmap/unicode-i18n.h:79
 msgid "Currency Symbols"
 msgstr "Simboli valuta"
 
-#: ../gucharmap/unicode-i18n.h:79
+#: ../gucharmap/unicode-i18n.h:80
 msgid "Combining Diacritical Marks for Symbols"
 msgstr "Kombinovane diakritike za simbole"
 
-#: ../gucharmap/unicode-i18n.h:80
+#: ../gucharmap/unicode-i18n.h:81
 msgid "Letterlike Symbols"
 msgstr "Simboli nalik slovima"
 
-#: ../gucharmap/unicode-i18n.h:81
+#: ../gucharmap/unicode-i18n.h:82
 msgid "Number Forms"
 msgstr "Oblici brojeva"
 
-#: ../gucharmap/unicode-i18n.h:82
+#: ../gucharmap/unicode-i18n.h:83
 msgid "Arrows"
 msgstr "Strelice"
 
-#: ../gucharmap/unicode-i18n.h:83
+#: ../gucharmap/unicode-i18n.h:84
 msgid "Mathematical Operators"
 msgstr "Matematički operatori"
 
-#: ../gucharmap/unicode-i18n.h:84
+#: ../gucharmap/unicode-i18n.h:85
 msgid "Miscellaneous Technical"
 msgstr "Razno tehnički"
 
-#: ../gucharmap/unicode-i18n.h:85
+#: ../gucharmap/unicode-i18n.h:86
 msgid "Control Pictures"
 msgstr "Kontrolne slike"
 
-#: ../gucharmap/unicode-i18n.h:86
+#: ../gucharmap/unicode-i18n.h:87
 msgid "Optical Character Recognition"
 msgstr "Optičko prepoznavanje znakova"
 
-#: ../gucharmap/unicode-i18n.h:87
+#: ../gucharmap/unicode-i18n.h:88
 msgid "Enclosed Alphanumerics"
 msgstr "Zatvoren alfanumerik"
 
-#: ../gucharmap/unicode-i18n.h:88
+#: ../gucharmap/unicode-i18n.h:89
 msgid "Box Drawing"
 msgstr "Prostor za crtanje"
 
-#: ../gucharmap/unicode-i18n.h:89
+#: ../gucharmap/unicode-i18n.h:90
 msgid "Block Elements"
 msgstr "Elementi bloka"
 
-#: ../gucharmap/unicode-i18n.h:90
+#: ../gucharmap/unicode-i18n.h:91
 msgid "Geometric Shapes"
 msgstr "Geometrijski oblici"
 
-#: ../gucharmap/unicode-i18n.h:91
+#: ../gucharmap/unicode-i18n.h:92
 msgid "Miscellaneous Symbols"
 msgstr "Raznoliki simboli"
 
-#: ../gucharmap/unicode-i18n.h:92
+#: ../gucharmap/unicode-i18n.h:93
 msgid "Dingbats"
 msgstr "Ornamenti"
 
-#: ../gucharmap/unicode-i18n.h:93
+#: ../gucharmap/unicode-i18n.h:94
 msgid "Miscellaneous Mathematical Symbols-A"
 msgstr "Razni matematički simboli-A"
 
-#: ../gucharmap/unicode-i18n.h:94
+#: ../gucharmap/unicode-i18n.h:95
 msgid "Supplemental Arrows-A"
 msgstr "Dodatne strelice-A"
 
-#: ../gucharmap/unicode-i18n.h:95
+#: ../gucharmap/unicode-i18n.h:96
 msgid "Braille Patterns"
 msgstr "Brajovi šabloni"
 
-#: ../gucharmap/unicode-i18n.h:96
+#: ../gucharmap/unicode-i18n.h:97
 msgid "Supplemental Arrows-B"
 msgstr "Dodatne strelice-B"
 
-#: ../gucharmap/unicode-i18n.h:97
+#: ../gucharmap/unicode-i18n.h:98
 msgid "Miscellaneous Mathematical Symbols-B"
 msgstr "Razni matematički simboli-B"
 
-#: ../gucharmap/unicode-i18n.h:98
+#: ../gucharmap/unicode-i18n.h:99
 msgid "Supplemental Mathematical Operators"
 msgstr "Dodatni matematički operatori"
 
-#: ../gucharmap/unicode-i18n.h:99
+#: ../gucharmap/unicode-i18n.h:100
 msgid "Miscellaneous Symbols and Arrows"
 msgstr "Razni simboli i strelice"
 
-#: ../gucharmap/unicode-i18n.h:100 ../gucharmap/unicode-i18n.h:322
+#: ../gucharmap/unicode-i18n.h:101 ../gucharmap/unicode-i18n.h:333
 msgid "Glagolitic"
 msgstr "Glagoljica"
 
-#: ../gucharmap/unicode-i18n.h:101
+#: ../gucharmap/unicode-i18n.h:102
 msgid "Latin Extended-C"
 msgstr "Latinični proširenje-C"
 
-#: ../gucharmap/unicode-i18n.h:102 ../gucharmap/unicode-i18n.h:311
+#: ../gucharmap/unicode-i18n.h:103 ../gucharmap/unicode-i18n.h:322
 msgid "Coptic"
 msgstr "Kopski"
 
-#: ../gucharmap/unicode-i18n.h:103
+#: ../gucharmap/unicode-i18n.h:104
 msgid "Georgian Supplement"
 msgstr "Gruzijski dodatak"
 
-#: ../gucharmap/unicode-i18n.h:104 ../gucharmap/unicode-i18n.h:421
+#: ../gucharmap/unicode-i18n.h:105 ../gucharmap/unicode-i18n.h:432
 msgid "Tifinagh"
 msgstr "Tifina"
 
-#: ../gucharmap/unicode-i18n.h:105
+#: ../gucharmap/unicode-i18n.h:106
 msgid "Ethiopic Extended"
 msgstr "Prošireni etiopski"
 
-#: ../gucharmap/unicode-i18n.h:106
+#: ../gucharmap/unicode-i18n.h:107
 msgid "Cyrillic Extended-A"
 msgstr "Ćirilični proširenje-A"
 
-#: ../gucharmap/unicode-i18n.h:107
+#: ../gucharmap/unicode-i18n.h:108
 msgid "Supplemental Punctuation"
 msgstr "Dodatna interpunkcija"
 
-#: ../gucharmap/unicode-i18n.h:108
+#: ../gucharmap/unicode-i18n.h:109
 msgid "CJK Radicals Supplement"
 msgstr "Dodatni KJK radikali"
 
-#: ../gucharmap/unicode-i18n.h:109
+#: ../gucharmap/unicode-i18n.h:110
 msgid "Kangxi Radicals"
 msgstr "Kangksi radikali"
 
-#: ../gucharmap/unicode-i18n.h:110
+#: ../gucharmap/unicode-i18n.h:111
 msgid "Ideographic Description Characters"
 msgstr "Znakovi za opis ideograma"
 
-#: ../gucharmap/unicode-i18n.h:111
+#: ../gucharmap/unicode-i18n.h:112
 msgid "CJK Symbols and Punctuation"
 msgstr "KJK simboli i interpunkcija"
 
-#: ../gucharmap/unicode-i18n.h:112 ../gucharmap/unicode-i18n.h:333
+#: ../gucharmap/unicode-i18n.h:113 ../gucharmap/unicode-i18n.h:344
 msgid "Hiragana"
 msgstr "Hiragana"
 
-#: ../gucharmap/unicode-i18n.h:113 ../gucharmap/unicode-i18n.h:341
+#: ../gucharmap/unicode-i18n.h:114 ../gucharmap/unicode-i18n.h:352
 msgid "Katakana"
 msgstr "Katakana"
 
-#: ../gucharmap/unicode-i18n.h:114 ../gucharmap/unicode-i18n.h:299
+#: ../gucharmap/unicode-i18n.h:115 ../gucharmap/unicode-i18n.h:310
 msgid "Bopomofo"
 msgstr "Bopomofo"
 
-#: ../gucharmap/unicode-i18n.h:115
+#: ../gucharmap/unicode-i18n.h:116
 msgid "Hangul Compatibility Jamo"
 msgstr "Hangul Džamo za kompatibilnost"
 
-#: ../gucharmap/unicode-i18n.h:116
+#: ../gucharmap/unicode-i18n.h:117
 msgid "Kanbun"
 msgstr "Kanbun"
 
-#: ../gucharmap/unicode-i18n.h:117
+#: ../gucharmap/unicode-i18n.h:118
 msgid "Bopomofo Extended"
 msgstr "Prošireni Bopomofo"
 
-#: ../gucharmap/unicode-i18n.h:118
+#: ../gucharmap/unicode-i18n.h:119
 msgid "CJK Strokes"
 msgstr "KJK potezi"
 
-#: ../gucharmap/unicode-i18n.h:119
+#: ../gucharmap/unicode-i18n.h:120
 msgid "Katakana Phonetic Extensions"
 msgstr "Fonetska proširenja Katakane"
 
-#: ../gucharmap/unicode-i18n.h:120
+#: ../gucharmap/unicode-i18n.h:121
 msgid "Enclosed CJK Letters and Months"
 msgstr "Uključena KJK slova i meseci"
 
-#: ../gucharmap/unicode-i18n.h:121
+#: ../gucharmap/unicode-i18n.h:122
 msgid "CJK Compatibility"
 msgstr "KJK kompatibilnost"
 
-#: ../gucharmap/unicode-i18n.h:122
+#: ../gucharmap/unicode-i18n.h:123
 msgid "CJK Unified Ideographs Extension A"
 msgstr "Proširenje A KJK ujedinjenih ideograma"
 
-#: ../gucharmap/unicode-i18n.h:123
+#: ../gucharmap/unicode-i18n.h:124
 msgid "Yijing Hexagram Symbols"
 msgstr "Jidžing simboli heksagrama"
 
-#: ../gucharmap/unicode-i18n.h:124
+#: ../gucharmap/unicode-i18n.h:125
 msgid "CJK Unified Ideographs"
 msgstr "KJK ujedinjeni ideogrami"
 
-#: ../gucharmap/unicode-i18n.h:125
+#: ../gucharmap/unicode-i18n.h:126
 msgid "Yi Syllables"
 msgstr "Ji slogovi"
 
-#: ../gucharmap/unicode-i18n.h:126
+#: ../gucharmap/unicode-i18n.h:127
 msgid "Yi Radicals"
 msgstr "Ji radikali"
 
-#: ../gucharmap/unicode-i18n.h:127 ../gucharmap/unicode-i18n.h:353
+#: ../gucharmap/unicode-i18n.h:128 ../gucharmap/unicode-i18n.h:364
 msgid "Lisu"
 msgstr "Lisu"
 
-#: ../gucharmap/unicode-i18n.h:128 ../gucharmap/unicode-i18n.h:424
+#: ../gucharmap/unicode-i18n.h:129 ../gucharmap/unicode-i18n.h:435
 msgid "Vai"
 msgstr "Vai"
 
-#: ../gucharmap/unicode-i18n.h:129
+#: ../gucharmap/unicode-i18n.h:130
 msgid "Cyrillic Extended-B"
 msgstr "Ćirilični proširenje-B"
 
-#: ../gucharmap/unicode-i18n.h:130 ../gucharmap/unicode-i18n.h:294
+#: ../gucharmap/unicode-i18n.h:131 ../gucharmap/unicode-i18n.h:305
 msgid "Bamum"
 msgstr "Bamum"
 
-#: ../gucharmap/unicode-i18n.h:131
+#: ../gucharmap/unicode-i18n.h:132
 msgid "Modifier Tone Letters"
 msgstr "Slova koja menjaju izgovor (naglasak)"
 
-#: ../gucharmap/unicode-i18n.h:132
+#: ../gucharmap/unicode-i18n.h:133
 msgid "Latin Extended-D"
 msgstr "Latinični proširenje-D"
 
-#: ../gucharmap/unicode-i18n.h:133 ../gucharmap/unicode-i18n.h:407
+#: ../gucharmap/unicode-i18n.h:134 ../gucharmap/unicode-i18n.h:418
 msgid "Syloti Nagri"
 msgstr "Silot Nagri"
 
-#: ../gucharmap/unicode-i18n.h:134
+#: ../gucharmap/unicode-i18n.h:135
 msgid "Common Indic Number Forms"
 msgstr "Zajednički Indijski Oblici Brojeva"
 
-#: ../gucharmap/unicode-i18n.h:135
+#: ../gucharmap/unicode-i18n.h:136
 msgid "Phags-pa"
 msgstr "Fagspa"
 
-#: ../gucharmap/unicode-i18n.h:136 ../gucharmap/unicode-i18n.h:398
+#: ../gucharmap/unicode-i18n.h:137 ../gucharmap/unicode-i18n.h:409
 msgid "Saurashtra"
 msgstr "Sourstra"
 
-#: ../gucharmap/unicode-i18n.h:137
+#: ../gucharmap/unicode-i18n.h:138
 msgid "Devanagari Extended"
 msgstr "Devanagari Prošireno"
 
-#: ../gucharmap/unicode-i18n.h:138 ../gucharmap/unicode-i18n.h:342
+#: ../gucharmap/unicode-i18n.h:139 ../gucharmap/unicode-i18n.h:353
 msgid "Kayah Li"
 msgstr "Kajal Li"
 
-#: ../gucharmap/unicode-i18n.h:139 ../gucharmap/unicode-i18n.h:395
+#: ../gucharmap/unicode-i18n.h:140 ../gucharmap/unicode-i18n.h:406
 msgid "Rejang"
 msgstr "Rejang"
 
-#: ../gucharmap/unicode-i18n.h:140
+#: ../gucharmap/unicode-i18n.h:141
 msgid "Hangul Jamo Extended-A"
 msgstr "Hangul Džamo proširenje-A"
 
-#: ../gucharmap/unicode-i18n.h:141 ../gucharmap/unicode-i18n.h:338
+#: ../gucharmap/unicode-i18n.h:142 ../gucharmap/unicode-i18n.h:349
 msgid "Javanese"
 msgstr "Javanski"
 
-#: ../gucharmap/unicode-i18n.h:142
+#: ../gucharmap/unicode-i18n.h:143
 msgid "Myanmar Extended-B"
 msgstr "Burmanski proširenje-B"
 
-#: ../gucharmap/unicode-i18n.h:143 ../gucharmap/unicode-i18n.h:308
+#: ../gucharmap/unicode-i18n.h:144 ../gucharmap/unicode-i18n.h:319
 msgid "Cham"
 msgstr "Čam"
 
-#: ../gucharmap/unicode-i18n.h:144
+#: ../gucharmap/unicode-i18n.h:145
 msgid "Myanmar Extended-A"
 msgstr "Mjanmarski proširenje-A"
 
-#: ../gucharmap/unicode-i18n.h:145 ../gucharmap/unicode-i18n.h:413
+#: ../gucharmap/unicode-i18n.h:146 ../gucharmap/unicode-i18n.h:424
 msgid "Tai Viet"
 msgstr "Tai Viet"
 
-#: ../gucharmap/unicode-i18n.h:146
+#: ../gucharmap/unicode-i18n.h:147
 msgid "Meetei Mayek Extensions"
 msgstr "Mitaj Majek dodaci"
 
-#: ../gucharmap/unicode-i18n.h:147
+#: ../gucharmap/unicode-i18n.h:148
 msgid "Ethiopic Extended-A"
 msgstr "Prošireni etiopski-A"
 
-#: ../gucharmap/unicode-i18n.h:148
+#: ../gucharmap/unicode-i18n.h:149
 msgid "Latin Extended-E"
 msgstr "Latinični prošireni-E"
 
-#: ../gucharmap/unicode-i18n.h:149
+#: ../gucharmap/unicode-i18n.h:150
 msgid "Cherokee Supplement"
 msgstr "Čirokeški dodatno"
 
-#: ../gucharmap/unicode-i18n.h:150 ../gucharmap/unicode-i18n.h:362
+#: ../gucharmap/unicode-i18n.h:151 ../gucharmap/unicode-i18n.h:373
 msgid "Meetei Mayek"
 msgstr "Manipuri"
 
-#: ../gucharmap/unicode-i18n.h:151
+#: ../gucharmap/unicode-i18n.h:152
 msgid "Hangul Syllables"
 msgstr "Hangul slogovi"
 
-#: ../gucharmap/unicode-i18n.h:152
+#: ../gucharmap/unicode-i18n.h:153
 msgid "Hangul Jamo Extended-B"
 msgstr "Hangul Džamo proširenje-B"
 
-#: ../gucharmap/unicode-i18n.h:153
+#: ../gucharmap/unicode-i18n.h:154
 msgid "High Surrogates"
 msgstr "Visoke zamene"
 
-#: ../gucharmap/unicode-i18n.h:154
+#: ../gucharmap/unicode-i18n.h:155
 msgid "High Private Use Surrogates"
 msgstr "Visoke zamene iz privatnog opsega"
 
-#: ../gucharmap/unicode-i18n.h:155
+#: ../gucharmap/unicode-i18n.h:156
 msgid "Low Surrogates"
 msgstr "Niske zamene"
 
-#: ../gucharmap/unicode-i18n.h:156
+#: ../gucharmap/unicode-i18n.h:157
 msgid "Private Use Area"
 msgstr "Privatni opseg"
 
-#: ../gucharmap/unicode-i18n.h:157
+#: ../gucharmap/unicode-i18n.h:158
 msgid "CJK Compatibility Ideographs"
 msgstr "KJK ideogrami za kompatibilnost"
 
-#: ../gucharmap/unicode-i18n.h:158
+#: ../gucharmap/unicode-i18n.h:159
 msgid "Alphabetic Presentation Forms"
 msgstr "Oblici za predstavljanje slova"
 
-#: ../gucharmap/unicode-i18n.h:159
+#: ../gucharmap/unicode-i18n.h:160
 msgid "Arabic Presentation Forms-A"
 msgstr "Oblici za predstavljanje arapskog-A"
 
-#: ../gucharmap/unicode-i18n.h:160
+#: ../gucharmap/unicode-i18n.h:161
 msgid "Variation Selectors"
 msgstr "Izbornici varijacije"
 
-#: ../gucharmap/unicode-i18n.h:161
+#: ../gucharmap/unicode-i18n.h:162
 msgid "Vertical Forms"
 msgstr "Uspravni oblici"
 
-#: ../gucharmap/unicode-i18n.h:162
+#: ../gucharmap/unicode-i18n.h:163
 msgid "Combining Half Marks"
 msgstr "Kombinujuće polu-oznake"
 
-#: ../gucharmap/unicode-i18n.h:163
+#: ../gucharmap/unicode-i18n.h:164
 msgid "CJK Compatibility Forms"
 msgstr "KJK oblici za kompatibilnost"
 
-#: ../gucharmap/unicode-i18n.h:164
+#: ../gucharmap/unicode-i18n.h:165
 msgid "Small Form Variants"
 msgstr "Varijante malih oblika"
 
-#: ../gucharmap/unicode-i18n.h:165
+#: ../gucharmap/unicode-i18n.h:166
 msgid "Arabic Presentation Forms-B"
 msgstr "Oblici za predstavljanje arapskog-B"
 
-#: ../gucharmap/unicode-i18n.h:166
+#: ../gucharmap/unicode-i18n.h:167
 msgid "Halfwidth and Fullwidth Forms"
 msgstr "Oblici pola i pune širine"
 
-#: ../gucharmap/unicode-i18n.h:167
+#: ../gucharmap/unicode-i18n.h:168
 msgid "Specials"
 msgstr "Naročiti"
 
-#: ../gucharmap/unicode-i18n.h:168
+#: ../gucharmap/unicode-i18n.h:169
 msgid "Linear B Syllabary"
 msgstr "Slovar Lineara B"
 
-#: ../gucharmap/unicode-i18n.h:169
+#: ../gucharmap/unicode-i18n.h:170
 msgid "Linear B Ideograms"
 msgstr "Ideogrami Lineara B"
 
-#: ../gucharmap/unicode-i18n.h:170
+#: ../gucharmap/unicode-i18n.h:171
 msgid "Aegean Numbers"
 msgstr "Egejski brojevi"
 
-#: ../gucharmap/unicode-i18n.h:171
+#: ../gucharmap/unicode-i18n.h:172
 msgid "Ancient Greek Numbers"
 msgstr "Drevni grčki brojevi"
 
-#: ../gucharmap/unicode-i18n.h:172
+#: ../gucharmap/unicode-i18n.h:173
 msgid "Ancient Symbols"
 msgstr "Drevni simboli"
 
-#: ../gucharmap/unicode-i18n.h:173
+#: ../gucharmap/unicode-i18n.h:174
 msgid "Phaistos Disc"
 msgstr "Faistos disk"
 
-#: ../gucharmap/unicode-i18n.h:174 ../gucharmap/unicode-i18n.h:354
+#: ../gucharmap/unicode-i18n.h:175 ../gucharmap/unicode-i18n.h:365
 msgid "Lycian"
 msgstr "Lukijski"
 
-#: ../gucharmap/unicode-i18n.h:175 ../gucharmap/unicode-i18n.h:305
+#: ../gucharmap/unicode-i18n.h:176 ../gucharmap/unicode-i18n.h:316
 msgid "Carian"
 msgstr "Šavijan"
 
-#: ../gucharmap/unicode-i18n.h:176
+#: ../gucharmap/unicode-i18n.h:177
 msgid "Coptic Epact Numbers"
 msgstr "Koptski dodati brojevi"
 
-#: ../gucharmap/unicode-i18n.h:177 ../gucharmap/unicode-i18n.h:380
+#: ../gucharmap/unicode-i18n.h:178 ../gucharmap/unicode-i18n.h:391
 msgid "Old Italic"
 msgstr "Stari kurziv"
 
-#: ../gucharmap/unicode-i18n.h:178 ../gucharmap/unicode-i18n.h:323
+#: ../gucharmap/unicode-i18n.h:179 ../gucharmap/unicode-i18n.h:334
 msgid "Gothic"
 msgstr "Gotica"
 
-#: ../gucharmap/unicode-i18n.h:179 ../gucharmap/unicode-i18n.h:382
+#: ../gucharmap/unicode-i18n.h:180 ../gucharmap/unicode-i18n.h:393
 msgid "Old Permic"
 msgstr "Stari permski"
 
-#: ../gucharmap/unicode-i18n.h:180 ../gucharmap/unicode-i18n.h:423
+#: ../gucharmap/unicode-i18n.h:181 ../gucharmap/unicode-i18n.h:434
 msgid "Ugaritic"
 msgstr "Ugarski"
 
-#: ../gucharmap/unicode-i18n.h:181 ../gucharmap/unicode-i18n.h:383
+#: ../gucharmap/unicode-i18n.h:182 ../gucharmap/unicode-i18n.h:394
 msgid "Old Persian"
 msgstr "Staropersijski"
 
-#: ../gucharmap/unicode-i18n.h:182 ../gucharmap/unicode-i18n.h:315
+#: ../gucharmap/unicode-i18n.h:183 ../gucharmap/unicode-i18n.h:326
 msgid "Deseret"
 msgstr "Dezeret"
 
-#: ../gucharmap/unicode-i18n.h:183 ../gucharmap/unicode-i18n.h:400
+#: ../gucharmap/unicode-i18n.h:184 ../gucharmap/unicode-i18n.h:411
 msgid "Shavian"
 msgstr "Šavijan"
 
-#: ../gucharmap/unicode-i18n.h:184 ../gucharmap/unicode-i18n.h:388
+#: ../gucharmap/unicode-i18n.h:185 ../gucharmap/unicode-i18n.h:399
 msgid "Osmanya"
 msgstr "Osmanska"
 
-#: ../gucharmap/unicode-i18n.h:185 ../gucharmap/unicode-i18n.h:387
+#: ../gucharmap/unicode-i18n.h:186 ../gucharmap/unicode-i18n.h:398
 msgid "Osage"
 msgstr "Osaški"
 
-#: ../gucharmap/unicode-i18n.h:186 ../gucharmap/unicode-i18n.h:319
+#: ../gucharmap/unicode-i18n.h:187 ../gucharmap/unicode-i18n.h:330
 msgid "Elbasan"
 msgstr "Elbasanski"
 
-#: ../gucharmap/unicode-i18n.h:187 ../gucharmap/unicode-i18n.h:306
+#: ../gucharmap/unicode-i18n.h:188 ../gucharmap/unicode-i18n.h:317
 msgid "Caucasian Albanian"
 msgstr "Kavkaski albanski"
 
-#: ../gucharmap/unicode-i18n.h:188 ../gucharmap/unicode-i18n.h:351
+#: ../gucharmap/unicode-i18n.h:189 ../gucharmap/unicode-i18n.h:362
 msgid "Linear A"
 msgstr "Linearni A"
 
-#: ../gucharmap/unicode-i18n.h:189
+#: ../gucharmap/unicode-i18n.h:190
 msgid "Cypriot Syllabary"
 msgstr "Kiparski slovar"
 
-#: ../gucharmap/unicode-i18n.h:190 ../gucharmap/unicode-i18n.h:334
+#: ../gucharmap/unicode-i18n.h:191 ../gucharmap/unicode-i18n.h:345
 msgid "Imperial Aramaic"
 msgstr "Carski aramejski"
 
-#: ../gucharmap/unicode-i18n.h:191 ../gucharmap/unicode-i18n.h:390
+#: ../gucharmap/unicode-i18n.h:192 ../gucharmap/unicode-i18n.h:401
 msgid "Palmyrene"
 msgstr "Palmirski"
 
-#: ../gucharmap/unicode-i18n.h:192 ../gucharmap/unicode-i18n.h:373
+#: ../gucharmap/unicode-i18n.h:193 ../gucharmap/unicode-i18n.h:384
 msgid "Nabataean"
 msgstr "Nabatanski"
 
-#: ../gucharmap/unicode-i18n.h:193 ../gucharmap/unicode-i18n.h:331
+#: ../gucharmap/unicode-i18n.h:194 ../gucharmap/unicode-i18n.h:342
 msgid "Hatran"
 msgstr "Hatranski"
 
-#: ../gucharmap/unicode-i18n.h:194 ../gucharmap/unicode-i18n.h:393
+#: ../gucharmap/unicode-i18n.h:195 ../gucharmap/unicode-i18n.h:404
 msgid "Phoenician"
 msgstr "Feničansko"
 
-#: ../gucharmap/unicode-i18n.h:195 ../gucharmap/unicode-i18n.h:355
+#: ../gucharmap/unicode-i18n.h:196 ../gucharmap/unicode-i18n.h:366
 msgid "Lydian"
 msgstr "Libijski"
 
-#: ../gucharmap/unicode-i18n.h:196 ../gucharmap/unicode-i18n.h:365
+#: ../gucharmap/unicode-i18n.h:197 ../gucharmap/unicode-i18n.h:376
 msgid "Meroitic Hieroglyphs"
 msgstr "Meroitski hijeroglifi"
 
-#: ../gucharmap/unicode-i18n.h:197 ../gucharmap/unicode-i18n.h:364
+#: ../gucharmap/unicode-i18n.h:198 ../gucharmap/unicode-i18n.h:375
 msgid "Meroitic Cursive"
 msgstr "Meroitski kurziv"
 
-#: ../gucharmap/unicode-i18n.h:198 ../gucharmap/unicode-i18n.h:343
+#: ../gucharmap/unicode-i18n.h:199 ../gucharmap/unicode-i18n.h:354
 msgid "Kharoshthi"
 msgstr "Karošti"
 
-#: ../gucharmap/unicode-i18n.h:199 ../gucharmap/unicode-i18n.h:384
+#: ../gucharmap/unicode-i18n.h:200 ../gucharmap/unicode-i18n.h:395
 msgid "Old South Arabian"
 msgstr "Stari južnoarabijski"
 
-#: ../gucharmap/unicode-i18n.h:200 ../gucharmap/unicode-i18n.h:381
+#: ../gucharmap/unicode-i18n.h:201 ../gucharmap/unicode-i18n.h:392
 msgid "Old North Arabian"
 msgstr "Stari severno-arabijski"
 
-#: ../gucharmap/unicode-i18n.h:201 ../gucharmap/unicode-i18n.h:359
+#: ../gucharmap/unicode-i18n.h:202 ../gucharmap/unicode-i18n.h:370
 msgid "Manichaean"
 msgstr "Maničanski"
 
-#: ../gucharmap/unicode-i18n.h:202 ../gucharmap/unicode-i18n.h:292
+#: ../gucharmap/unicode-i18n.h:203 ../gucharmap/unicode-i18n.h:303
 msgid "Avestan"
 msgstr "Avestanski"
 
-#: ../gucharmap/unicode-i18n.h:203 ../gucharmap/unicode-i18n.h:337
+#: ../gucharmap/unicode-i18n.h:204 ../gucharmap/unicode-i18n.h:348
 msgid "Inscriptional Parthian"
 msgstr "Parćanski"
 
-#: ../gucharmap/unicode-i18n.h:204 ../gucharmap/unicode-i18n.h:336
+#: ../gucharmap/unicode-i18n.h:205 ../gucharmap/unicode-i18n.h:347
 msgid "Inscriptional Pahlavi"
 msgstr "Palavi"
 
-#: ../gucharmap/unicode-i18n.h:205 ../gucharmap/unicode-i18n.h:394
+#: ../gucharmap/unicode-i18n.h:206 ../gucharmap/unicode-i18n.h:405
 msgid "Psalter Pahlavi"
 msgstr "Psalter palavi"
 
-#: ../gucharmap/unicode-i18n.h:206 ../gucharmap/unicode-i18n.h:385
+#: ../gucharmap/unicode-i18n.h:207 ../gucharmap/unicode-i18n.h:396
 msgid "Old Turkic"
 msgstr "Stari turski"
 
-#: ../gucharmap/unicode-i18n.h:207 ../gucharmap/unicode-i18n.h:379
+#: ../gucharmap/unicode-i18n.h:208 ../gucharmap/unicode-i18n.h:390
 msgid "Old Hungarian"
 msgstr "Stari mađarski"
 
-#: ../gucharmap/unicode-i18n.h:208
+#: ../gucharmap/unicode-i18n.h:209
+msgid "Hanifi Rohingya"
+msgstr "Hanifi Rohingja"
+
+#: ../gucharmap/unicode-i18n.h:210
 msgid "Rumi Numeral Symbols"
 msgstr "Rumi brojni simboli"
 
-#: ../gucharmap/unicode-i18n.h:209 ../gucharmap/unicode-i18n.h:300
+#: ../gucharmap/unicode-i18n.h:211
+#| msgid "Old Hungarian"
+msgid "Old Sogdian"
+msgstr "Stari sogdeški"
+
+#: ../gucharmap/unicode-i18n.h:212
+#| msgid "Lydian"
+msgid "Sogdian"
+msgstr "Sogdeški"
+
+#: ../gucharmap/unicode-i18n.h:213 ../gucharmap/unicode-i18n.h:311
 msgid "Brahmi"
 msgstr "Brami"
 
-#: ../gucharmap/unicode-i18n.h:210 ../gucharmap/unicode-i18n.h:339
+#: ../gucharmap/unicode-i18n.h:214 ../gucharmap/unicode-i18n.h:350
 msgid "Kaithi"
 msgstr "Kaiti"
 
-#: ../gucharmap/unicode-i18n.h:211 ../gucharmap/unicode-i18n.h:404
+#: ../gucharmap/unicode-i18n.h:215 ../gucharmap/unicode-i18n.h:415
 msgid "Sora Sompeng"
 msgstr "Sora Sompeng"
 
-#: ../gucharmap/unicode-i18n.h:212 ../gucharmap/unicode-i18n.h:307
+#: ../gucharmap/unicode-i18n.h:216 ../gucharmap/unicode-i18n.h:318
 msgid "Chakma"
 msgstr "Čakma"
 
-#: ../gucharmap/unicode-i18n.h:213 ../gucharmap/unicode-i18n.h:356
+#: ../gucharmap/unicode-i18n.h:217 ../gucharmap/unicode-i18n.h:367
 msgid "Mahajani"
 msgstr "Mahadžani"
 
-#: ../gucharmap/unicode-i18n.h:214 ../gucharmap/unicode-i18n.h:399
+#: ../gucharmap/unicode-i18n.h:218 ../gucharmap/unicode-i18n.h:410
 msgid "Sharada"
 msgstr "Šarada"
 
-#: ../gucharmap/unicode-i18n.h:215
+#: ../gucharmap/unicode-i18n.h:219
 msgid "Sinhala Archaic Numbers"
 msgstr "Sinhaleški stari brojevi"
 
-#: ../gucharmap/unicode-i18n.h:216 ../gucharmap/unicode-i18n.h:345
+#: ../gucharmap/unicode-i18n.h:220 ../gucharmap/unicode-i18n.h:356
 msgid "Khojki"
 msgstr "Kojki"
 
-#: ../gucharmap/unicode-i18n.h:217 ../gucharmap/unicode-i18n.h:370
+#: ../gucharmap/unicode-i18n.h:221 ../gucharmap/unicode-i18n.h:381
 msgid "Multani"
 msgstr "Multski"
 
-#: ../gucharmap/unicode-i18n.h:218 ../gucharmap/unicode-i18n.h:346
+#: ../gucharmap/unicode-i18n.h:222 ../gucharmap/unicode-i18n.h:357
 msgid "Khudawadi"
 msgstr "Kudavadski"
 
-#: ../gucharmap/unicode-i18n.h:219 ../gucharmap/unicode-i18n.h:324
+#: ../gucharmap/unicode-i18n.h:223 ../gucharmap/unicode-i18n.h:335
 msgid "Grantha"
 msgstr "Grantski"
 
-#: ../gucharmap/unicode-i18n.h:220 ../gucharmap/unicode-i18n.h:375
+#: ../gucharmap/unicode-i18n.h:224 ../gucharmap/unicode-i18n.h:386
 msgid "Newa"
 msgstr "Nevarski"
 
-#: ../gucharmap/unicode-i18n.h:221 ../gucharmap/unicode-i18n.h:422
+#: ../gucharmap/unicode-i18n.h:225 ../gucharmap/unicode-i18n.h:433
 msgid "Tirhuta"
 msgstr "Tirutski"
 
-#: ../gucharmap/unicode-i18n.h:222 ../gucharmap/unicode-i18n.h:401
+#: ../gucharmap/unicode-i18n.h:226 ../gucharmap/unicode-i18n.h:412
 msgid "Siddham"
 msgstr "Sidamski"
 
-#: ../gucharmap/unicode-i18n.h:223 ../gucharmap/unicode-i18n.h:367
+#: ../gucharmap/unicode-i18n.h:227 ../gucharmap/unicode-i18n.h:378
 msgid "Modi"
 msgstr "Modski"
 
-#: ../gucharmap/unicode-i18n.h:224
+#: ../gucharmap/unicode-i18n.h:228
 msgid "Mongolian Supplement"
 msgstr "Mongolijski dodatak"
 
-#: ../gucharmap/unicode-i18n.h:225 ../gucharmap/unicode-i18n.h:414
+#: ../gucharmap/unicode-i18n.h:229 ../gucharmap/unicode-i18n.h:425
 msgid "Takri"
 msgstr "Takri"
 
-#: ../gucharmap/unicode-i18n.h:226 ../gucharmap/unicode-i18n.h:288
+#: ../gucharmap/unicode-i18n.h:230 ../gucharmap/unicode-i18n.h:299
 msgid "Ahom"
 msgstr "Ahomski"
 
-#: ../gucharmap/unicode-i18n.h:227 ../gucharmap/unicode-i18n.h:425
+#: ../gucharmap/unicode-i18n.h:231
+msgid "Dogra"
+msgstr "Dogra"
+
+#: ../gucharmap/unicode-i18n.h:232 ../gucharmap/unicode-i18n.h:436
 msgid "Warang Citi"
 msgstr "Varang siti"
 
-#: ../gucharmap/unicode-i18n.h:228 ../gucharmap/unicode-i18n.h:427
+#: ../gucharmap/unicode-i18n.h:233 ../gucharmap/unicode-i18n.h:438
 msgid "Zanabazar Square"
 msgstr "Zanabazar kvadrat"
 
-#: ../gucharmap/unicode-i18n.h:229 ../gucharmap/unicode-i18n.h:405
+#: ../gucharmap/unicode-i18n.h:234 ../gucharmap/unicode-i18n.h:416
 msgid "Soyombo"
 msgstr "Sojombo"
 
-#: ../gucharmap/unicode-i18n.h:230 ../gucharmap/unicode-i18n.h:391
+#: ../gucharmap/unicode-i18n.h:235 ../gucharmap/unicode-i18n.h:402
 msgid "Pau Cin Hau"
 msgstr "Paučinhauški"
 
-#: ../gucharmap/unicode-i18n.h:231 ../gucharmap/unicode-i18n.h:298
+#: ../gucharmap/unicode-i18n.h:236 ../gucharmap/unicode-i18n.h:309
 msgid "Bhaiksuki"
 msgstr "Bajksukiški"
 
-#: ../gucharmap/unicode-i18n.h:232 ../gucharmap/unicode-i18n.h:360
+#: ../gucharmap/unicode-i18n.h:237 ../gucharmap/unicode-i18n.h:371
 msgid "Marchen"
 msgstr "Marčenski"
 
-#: ../gucharmap/unicode-i18n.h:233 ../gucharmap/unicode-i18n.h:361
+#: ../gucharmap/unicode-i18n.h:238 ../gucharmap/unicode-i18n.h:372
 msgid "Masaram Gondi"
 msgstr "Masaram Gondi"
 
-#: ../gucharmap/unicode-i18n.h:234 ../gucharmap/unicode-i18n.h:312
+#: ../gucharmap/unicode-i18n.h:239
+#| msgid "Masaram Gondi"
+msgid "Gunjala Gondi"
+msgstr "Gundžala Gondi"
+
+#: ../gucharmap/unicode-i18n.h:240
+msgid "Makasar"
+msgstr "Makasarski"
+
+#: ../gucharmap/unicode-i18n.h:241 ../gucharmap/unicode-i18n.h:323
 msgid "Cuneiform"
 msgstr "Klinasto"
 
-#: ../gucharmap/unicode-i18n.h:235
+#: ../gucharmap/unicode-i18n.h:242
 msgid "Cuneiform Numbers and Punctuation"
 msgstr "Klinasti brojevi i interpunkcija"
 
 # https://sh.wikipedia.org/wiki/Rani_dinasti%C4%8Dki_period_Egipta
 # https://en.wikipedia.org/wiki/Cuneiform
 # https://sr.wikipedia.org/wiki/%D0%9A%D0%BB%D0%B8%D0%BD%D0%B0%D1%81%D1%82%D0%BE_%D0%BF%D0%B8%D1%81%D0%BC%D0%BE
-#: ../gucharmap/unicode-i18n.h:236
+#: ../gucharmap/unicode-i18n.h:243
 msgid "Early Dynastic Cuneiform"
 msgstr "Klinasto pismo ranog dinastičkog perioda"
 
-#: ../gucharmap/unicode-i18n.h:237 ../gucharmap/unicode-i18n.h:318
+#: ../gucharmap/unicode-i18n.h:244 ../gucharmap/unicode-i18n.h:329
 msgid "Egyptian Hieroglyphs"
 msgstr "Egipatski hijeroglifi"
 
-#: ../gucharmap/unicode-i18n.h:238 ../gucharmap/unicode-i18n.h:289
+#: ../gucharmap/unicode-i18n.h:245 ../gucharmap/unicode-i18n.h:300
 msgid "Anatolian Hieroglyphs"
 msgstr "Anatolijski hijeroglifi"
 
-#: ../gucharmap/unicode-i18n.h:239
+#: ../gucharmap/unicode-i18n.h:246
 msgid "Bamum Supplement"
 msgstr "Bamum dodatak"
 
-#: ../gucharmap/unicode-i18n.h:240 ../gucharmap/unicode-i18n.h:369
+#: ../gucharmap/unicode-i18n.h:247 ../gucharmap/unicode-i18n.h:380
 msgid "Mro"
 msgstr "Mroški"
 
-#: ../gucharmap/unicode-i18n.h:241 ../gucharmap/unicode-i18n.h:295
+#: ../gucharmap/unicode-i18n.h:248 ../gucharmap/unicode-i18n.h:306
 msgid "Bassa Vah"
 msgstr "Basavaški"
 
-#: ../gucharmap/unicode-i18n.h:242 ../gucharmap/unicode-i18n.h:389
+#: ../gucharmap/unicode-i18n.h:249 ../gucharmap/unicode-i18n.h:400
 msgid "Pahawh Hmong"
 msgstr "Pahavhmonški"
 
-#: ../gucharmap/unicode-i18n.h:243 ../gucharmap/unicode-i18n.h:366
+#: ../gucharmap/unicode-i18n.h:250
+msgid "Medefaidrin"
+msgstr "Medefaidrinski"
+
+#: ../gucharmap/unicode-i18n.h:251 ../gucharmap/unicode-i18n.h:377
 msgid "Miao"
 msgstr "Miao"
 
-#: ../gucharmap/unicode-i18n.h:244
+#: ../gucharmap/unicode-i18n.h:252
 msgid "Ideographic Symbols and Punctuation"
 msgstr "Ideogramski simboli i interpunkcije"
 
-#: ../gucharmap/unicode-i18n.h:245 ../gucharmap/unicode-i18n.h:416
+#: ../gucharmap/unicode-i18n.h:253 ../gucharmap/unicode-i18n.h:427
 msgid "Tangut"
 msgstr "Tangutski"
 
-#: ../gucharmap/unicode-i18n.h:246
+#: ../gucharmap/unicode-i18n.h:254
 msgid "Tangut Components"
 msgstr "Tangutski sastojci"
 
-#: ../gucharmap/unicode-i18n.h:247
+#: ../gucharmap/unicode-i18n.h:255
 msgid "Kana Supplement"
 msgstr "Kana dodatak"
 
-#: ../gucharmap/unicode-i18n.h:248
-#| msgid "Myanmar Extended-A"
+#: ../gucharmap/unicode-i18n.h:256
 msgid "Kana Extended-A"
 msgstr "Kana proširenje-A"
 
-#: ../gucharmap/unicode-i18n.h:249 ../gucharmap/unicode-i18n.h:376
+#: ../gucharmap/unicode-i18n.h:257 ../gucharmap/unicode-i18n.h:387
 msgid "Nushu"
 msgstr "Nušu"
 
-#: ../gucharmap/unicode-i18n.h:250 ../gucharmap/unicode-i18n.h:317
+#: ../gucharmap/unicode-i18n.h:258 ../gucharmap/unicode-i18n.h:328
 msgid "Duployan"
 msgstr "Dipluajanski"
 
-#: ../gucharmap/unicode-i18n.h:251
+#: ../gucharmap/unicode-i18n.h:259
 msgid "Shorthand Format Controls"
 msgstr "Stenografske kontrole zapisa"
 
-#: ../gucharmap/unicode-i18n.h:252
+#: ../gucharmap/unicode-i18n.h:260
 msgid "Byzantine Musical Symbols"
 msgstr "Vizantijski muzički simboli"
 
-#: ../gucharmap/unicode-i18n.h:253
+#: ../gucharmap/unicode-i18n.h:261
 msgid "Musical Symbols"
 msgstr "Muzički simboli"
 
-#: ../gucharmap/unicode-i18n.h:254
+#: ../gucharmap/unicode-i18n.h:262
 msgid "Ancient Greek Musical Notation"
 msgstr "Drevna grčka muzička notacija"
 
-#: ../gucharmap/unicode-i18n.h:255
+#: ../gucharmap/unicode-i18n.h:263
+#| msgid "Aegean Numbers"
+msgid "Mayan Numerals"
+msgstr "Maja brojevi"
+
+#: ../gucharmap/unicode-i18n.h:264
 msgid "Tai Xuan Jing Symbols"
 msgstr "Tai Ksuan Jing simboli"
 
-#: ../gucharmap/unicode-i18n.h:256
+#: ../gucharmap/unicode-i18n.h:265
 msgid "Counting Rod Numerals"
 msgstr "Brojevi kineskim štapićima"
 
-#: ../gucharmap/unicode-i18n.h:257
+#: ../gucharmap/unicode-i18n.h:266
 msgid "Mathematical Alphanumeric Symbols"
 msgstr "Matematički alfanumerički simboli"
 
-#: ../gucharmap/unicode-i18n.h:258
+#: ../gucharmap/unicode-i18n.h:267
 msgid "Sutton SignWriting"
 msgstr "Saton znakovno pismo"
 
-#: ../gucharmap/unicode-i18n.h:259
+#: ../gucharmap/unicode-i18n.h:268
 msgid "Glagolitic Supplement"
 msgstr "Ćirilični dodatak"
 
-#: ../gucharmap/unicode-i18n.h:260 ../gucharmap/unicode-i18n.h:363
+#: ../gucharmap/unicode-i18n.h:269 ../gucharmap/unicode-i18n.h:374
 msgid "Mende Kikakui"
 msgstr "Mende kikakujski"
 
-#: ../gucharmap/unicode-i18n.h:261 ../gucharmap/unicode-i18n.h:287
+#: ../gucharmap/unicode-i18n.h:270 ../gucharmap/unicode-i18n.h:298
 msgid "Adlam"
 msgstr "Adlamski"
 
-#: ../gucharmap/unicode-i18n.h:262
+#: ../gucharmap/unicode-i18n.h:271
+#| msgid "Coptic Epact Numbers"
+msgid "Indic Siyaq Numbers"
+msgstr "Indijski šijak brojevi"
+
+#: ../gucharmap/unicode-i18n.h:272
 msgid "Arabic Mathematical Alphabetic Symbols"
 msgstr "Arapski matematički alfabetni simboli"
 
-#: ../gucharmap/unicode-i18n.h:263
+#: ../gucharmap/unicode-i18n.h:273
 msgid "Mahjong Tiles"
 msgstr "Mahdžong pločice"
 
-#: ../gucharmap/unicode-i18n.h:264
+#: ../gucharmap/unicode-i18n.h:274
 msgid "Domino Tiles"
 msgstr "Domino pločice"
 
-#: ../gucharmap/unicode-i18n.h:265
+#: ../gucharmap/unicode-i18n.h:275
 msgid "Playing Cards"
 msgstr "Karte za igru"
 
-#: ../gucharmap/unicode-i18n.h:266
+#: ../gucharmap/unicode-i18n.h:276
 msgid "Enclosed Alphanumeric Supplement"
 msgstr "Zatvoreni alfanumerički dodatak"
 
-#: ../gucharmap/unicode-i18n.h:267
+#: ../gucharmap/unicode-i18n.h:277
 msgid "Enclosed Ideographic Supplement"
 msgstr "Zatvoreni ideogramski dodatak"
 
-#: ../gucharmap/unicode-i18n.h:268
+#: ../gucharmap/unicode-i18n.h:278
 msgid "Miscellaneous Symbols and Pictographs"
 msgstr "Razni simboli i piktografi"
 
-#: ../gucharmap/unicode-i18n.h:269
+#: ../gucharmap/unicode-i18n.h:279
 msgid "Emoticons"
 msgstr "Smešci"
 
-#: ../gucharmap/unicode-i18n.h:270
+#: ../gucharmap/unicode-i18n.h:280
 msgid "Ornamental Dingbats"
 msgstr "Kitnjasti ornamenti"
 
-#: ../gucharmap/unicode-i18n.h:271
+#: ../gucharmap/unicode-i18n.h:281
 msgid "Transport and Map Symbols"
 msgstr "Simboli transporta i karti"
 
-#: ../gucharmap/unicode-i18n.h:272
+#: ../gucharmap/unicode-i18n.h:282
 msgid "Alchemical Symbols"
 msgstr "Alhemijski simboli"
 
-#: ../gucharmap/unicode-i18n.h:273
+#: ../gucharmap/unicode-i18n.h:283
 msgid "Geometric Shapes Extended"
 msgstr "Prošireni geometrijski oblici"
 
-#: ../gucharmap/unicode-i18n.h:274
+#: ../gucharmap/unicode-i18n.h:284
 msgid "Supplemental Arrows-C"
 msgstr "Dodatne strelice-C"
 
-#: ../gucharmap/unicode-i18n.h:275
+#: ../gucharmap/unicode-i18n.h:285
 msgid "Supplemental Symbols and Pictographs"
 msgstr "Dodatni simboli i piktografi"
 
-#: ../gucharmap/unicode-i18n.h:276
+#: ../gucharmap/unicode-i18n.h:286
+#| msgid "Khmer Symbols"
+msgid "Chess Symbols"
+msgstr "Šahovski simboli"
+
+#: ../gucharmap/unicode-i18n.h:287
 msgid "CJK Unified Ideographs Extension B"
 msgstr "Proširenje B KJK ujedinjenih ideograma"
 
-#: ../gucharmap/unicode-i18n.h:277
+#: ../gucharmap/unicode-i18n.h:288
 msgid "CJK Unified Ideographs Extension C"
 msgstr "Proširenje C KJK ujedinjenih ideograma"
 
-#: ../gucharmap/unicode-i18n.h:278
+#: ../gucharmap/unicode-i18n.h:289
 msgid "CJK Unified Ideographs Extension D"
 msgstr "Proširenje D KJK ujedinjenih ideograma"
 
-#: ../gucharmap/unicode-i18n.h:279
+#: ../gucharmap/unicode-i18n.h:290
 msgid "CJK Unified Ideographs Extension E"
 msgstr "Proširenje E KJK ujedinjenih ideograma"
 
-#: ../gucharmap/unicode-i18n.h:280
-#| msgid "CJK Unified Ideographs Extension A"
+#: ../gucharmap/unicode-i18n.h:291
 msgid "CJK Unified Ideographs Extension F"
 msgstr "Proširenje F KJK ujedinjenih ideograma"
 
-#: ../gucharmap/unicode-i18n.h:281
+#: ../gucharmap/unicode-i18n.h:292
 msgid "CJK Compatibility Ideographs Supplement"
 msgstr "Dodatak KJK ideograma za kompatibilnost"
 
-#: ../gucharmap/unicode-i18n.h:282
+#: ../gucharmap/unicode-i18n.h:293
 msgid "Tags"
 msgstr "Oznake"
 
-#: ../gucharmap/unicode-i18n.h:283
+#: ../gucharmap/unicode-i18n.h:294
 msgid "Variation Selectors Supplement"
 msgstr "Dodatak izbornicima varijacija"
 
-#: ../gucharmap/unicode-i18n.h:284
+#: ../gucharmap/unicode-i18n.h:295
 msgid "Supplementary Private Use Area-A"
 msgstr "Dodatni privatni opseg-A"
 
-#: ../gucharmap/unicode-i18n.h:285
+#: ../gucharmap/unicode-i18n.h:296
 msgid "Supplementary Private Use Area-B"
 msgstr "Dodatni privatni opseg-B"
 
-#: ../gucharmap/unicode-i18n.h:301
+#: ../gucharmap/unicode-i18n.h:312
 msgid "Braille"
 msgstr "Brajevo pismo"
 
-#: ../gucharmap/unicode-i18n.h:304
+#: ../gucharmap/unicode-i18n.h:315
 msgid "Canadian Aboriginal"
 msgstr "Kanadskih Aboridžina"
 
-#: ../gucharmap/unicode-i18n.h:313
+#: ../gucharmap/unicode-i18n.h:324
 msgid "Cypriot"
 msgstr "Kiparski"
 
-#: ../gucharmap/unicode-i18n.h:325
+#: ../gucharmap/unicode-i18n.h:336
 msgid "Greek"
 msgstr "Grčki"
 
-#: ../gucharmap/unicode-i18n.h:328
+#: ../gucharmap/unicode-i18n.h:339
 msgid "Han"
 msgstr "Han"
 
-#: ../gucharmap/unicode-i18n.h:329
+#: ../gucharmap/unicode-i18n.h:340
 msgid "Hangul"
 msgstr "Hangul"
 
-#: ../gucharmap/unicode-i18n.h:335
+#: ../gucharmap/unicode-i18n.h:346
 msgid "Inherited"
 msgstr "Nasleđeni"
 
-#: ../gucharmap/unicode-i18n.h:348
+#: ../gucharmap/unicode-i18n.h:359
 msgid "Latin"
 msgstr "Latinični"
 
-#: ../gucharmap/unicode-i18n.h:352
+#: ../gucharmap/unicode-i18n.h:363
 msgid "Linear B"
 msgstr "Linear B"
 
-#: ../gucharmap/unicode-i18n.h:392
+#: ../gucharmap/unicode-i18n.h:403
 msgid "Phags Pa"
 msgstr "Fagspa"
 
-#: ../gucharmap/unicode-i18n.h:402
+#: ../gucharmap/unicode-i18n.h:413
 msgid "Signwriting"
 msgstr "Znakovno pismo"
 
-#: ../gucharmap/unicode-i18n.h:426
+#: ../gucharmap/unicode-i18n.h:437
 msgid "Yi"
 msgstr "Ji"
