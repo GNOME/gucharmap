@@ -29,7 +29,69 @@
 #include "gucharmap-window.h"
 
 #define UI_RESOURCE "/org/gnome/charmap/ui/menus.ui"
- 
+
+/* BEGIN HACK
+ *
+ * Gucharmap is a *character map*, not an emoji picker.
+ * Consequently, we want to show character glyphs in black
+ * and white, not colour emojis.
+ *
+ * However, there currently is no way in the pango API to
+ * suppress use of colour fonts.
+ * Internally, cairo *always* (!) calls FT_Load_Glyph with
+ * the FT_LOAD_COLOR flag. Interpose the function and strip
+ * that flag.
+ *
+ * This still doesn't get the desired display since the
+ * emoji colour fonts (Noto Color Emoji) that's hardcoded
+ * (see bug 787365) has greyscale fallback; I see no way
+ * to skip the font altogether.
+ */
+
+#include <dlfcn.h>
+#include <ft2build.h>
+#include FT_FREETYPE_H
+
+extern FT_Error
+FT_Load_Glyph(FT_Face face,
+	      FT_UInt glyph_index,
+	      FT_Int32 load_flags);
+
+extern FT_Error
+FT_Load_Char(FT_Face face,
+	     FT_ULong char_code,
+	     FT_Int32 load_flags);
+
+FT_Error
+FT_Load_Glyph(FT_Face face,
+	      FT_UInt glyph_index,
+	      FT_Int32 load_flags)
+{
+  static FT_Error (*original)(FT_Face face,
+			      FT_UInt glyph_index,
+			      FT_Int32 load_flags) = NULL;
+  if (!original)
+    original = dlsym(RTLD_NEXT, "FT_Load_Glyph");
+
+  return original(face, glyph_index, load_flags & ~FT_LOAD_COLOR);
+}
+
+FT_Error
+FT_Load_Char( FT_Face face,
+	      FT_ULong char_code,
+	      FT_Int32 load_flags)
+{
+  static FT_Error (*original)(FT_Face face,
+			      FT_ULong char_code,
+			      FT_Int32 load_flags) = NULL;
+  if (!original)
+    original = dlsym(RTLD_NEXT, "FT_Load_Char");
+
+  return original(face, char_code, load_flags & ~FT_LOAD_COLOR);
+}
+
+/* END HACK */
+
 static gboolean
 option_version_cb (const gchar *option_name,
                    const gchar *value,
