@@ -205,7 +205,7 @@ gucharmap-type-builtins.c: gucharmap-type-builtins.c.template $(libgucharmapincl
 
 WGETFLAGS = --timestamping --timeout=300 --tries=8 --no-directories --directory-prefix="$(builddir)"
 
-unicode_version = 10.0.0
+unicode_version = 11.0.0
 
 unicode_files = \
 	Blocks.txt \
