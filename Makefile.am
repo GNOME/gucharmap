@@ -32,6 +32,7 @@ EXTRA_DIST = \
 	ChangeLog.README \
 	autogen.sh \
 	gtkrc.win32 \
+	COPYING.GFDL \
 	COPYING.UNICODE \
 	$(NULL)
 
