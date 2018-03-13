@@ -156,6 +156,7 @@ gucharmap_LDFLAGS = \
 gucharmap_LDADD = \
 	libgucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@.la	\
 	$(GTK_LIBS)	\
+	$(LIBDL) \
 	$(INTL_LIBS)
 
 dist_noinst_DATA = gucharmap-menus.ui

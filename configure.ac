@@ -120,6 +120,13 @@ PKG_CHECK_MODULES([GTK],[
   freetype2
 ])
 
+sv_LIBS="$LIBS"
+LIBS=
+AC_SEARCH_LIBS([dlsym],[dl])
+LIBDL="$LIBS"
+LIBS="$sv_LIBS"
+AC_SUBST([LIBDL])
+
 GLIB_GENMARSHAL="$($PKG_CONFIG --variable=glib_genmarshal glib-2.0)"
 AC_SUBST([GLIB_GENMARSHAL])
 GLIB_MKENUMS="$($PKG_CONFIG --variable=glib_mkenums glib-2.0)"
