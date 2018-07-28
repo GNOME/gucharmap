@@ -39,6 +39,7 @@ struct _GucharmapMiniFontSelection
   GtkHBox parent;
 
   GtkListStore         *family_store;
+  GtkEntryCompletion   *completion; /* font name completion */
   GtkWidget            *family; /* combo box */
   GtkWidget            *bold;   /* toggle button*/
   GtkWidget            *italic; /* toggle button*/
