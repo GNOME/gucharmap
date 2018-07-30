@@ -55,11 +55,8 @@ G_DEFINE_TYPE (GucharmapMiniFontSelection, gucharmap_mini_font_selection, GTK_TY
 static void
 fill_font_families_combo (GucharmapMiniFontSelection *fontsel)
 {
-  GtkComboBox *combo = GTK_COMBO_BOX (fontsel->family);
   PangoFontFamily **families;
   int n_families, i;
-
-  fontsel->family_store = gtk_list_store_new (1, G_TYPE_STRING);
 
   pango_context_list_families (
           gtk_widget_get_pango_context (GTK_WIDGET (fontsel)),
@@ -83,9 +80,6 @@ fill_font_families_combo (GucharmapMiniFontSelection *fontsel)
   gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (fontsel->family_store),
                                         COL_FAMILIY,
                                         GTK_SORT_ASCENDING);
-
-  gtk_combo_box_set_model (combo, GTK_TREE_MODEL (fontsel->family_store));
-  g_object_unref (fontsel->family_store);
 }
 
 static void
@@ -142,6 +136,63 @@ family_combo_changed (GtkComboBox *combo,
 
   g_object_notify (G_OBJECT (fontsel), "font-desc");
 }
+
+static gboolean
+match_function (GtkEntryCompletion *completion,
+                const gchar *key,
+                GtkTreeIter *iter,
+                gpointer user_data)
+{
+  GucharmapMiniFontSelection *fontsel = GUCHARMAP_MINI_FONT_SELECTION (user_data);
+  char *family, *family_fold;
+  gchar **sub_match, **p;
+  gboolean all_matches = TRUE;
+
+  gtk_tree_model_get (GTK_TREE_MODEL (fontsel->family_store),
+                      iter,
+                      COL_FAMILIY, &family,
+                      -1);
+  family_fold = g_utf8_casefold (family, -1);
+
+  /* Match if all space separated substrings are part of family string */
+  sub_match = g_strsplit (key, " ", -1);
+  p = sub_match;
+  while (*p) {
+      gchar *match_fold = g_utf8_casefold (*p++, -1);
+      if (!g_strstr_len (family_fold, -1, match_fold))
+          all_matches = FALSE;
+      g_free (match_fold);
+      if (!all_matches)
+          break;
+  }
+
+  g_free (family);
+  g_free (family_fold);
+  g_strfreev (sub_match);
+
+  return all_matches;
+}
+
+static gboolean
+completion_match_selected(GtkEntryCompletion *widget,
+                          GtkTreeModel       *model,
+                          GtkTreeIter        *iter,
+                          GucharmapMiniFontSelection *fontsel)
+{
+  char *family;
+
+  gtk_tree_model_get (GTK_TREE_MODEL (fontsel->family_store),
+                      iter,
+                      COL_FAMILIY, &family,
+                      -1);
+  pango_font_description_set_family (fontsel->font_desc, family);
+  g_free (family);
+
+  g_object_notify (G_OBJECT (fontsel), "font-desc");
+
+  return FALSE;
+}
+
 
 /* returns font size in points */
 static int
@@ -266,7 +317,6 @@ italic_toggled (GtkToggleButton *toggle,
 static void
 gucharmap_mini_font_selection_init (GucharmapMiniFontSelection *fontsel)
 {
-  GtkCellRenderer *renderer;
   GtkStyle *style;
   AtkObject *accessib;
 
@@ -283,13 +333,19 @@ gucharmap_mini_font_selection_init (GucharmapMiniFontSelection *fontsel)
 
   gtk_box_set_spacing (GTK_BOX (fontsel), 6);
 
-  fontsel->family = gtk_combo_box_new ();
+  fontsel->family_store = gtk_list_store_new (1, G_TYPE_STRING);
 
-  renderer = gtk_cell_renderer_text_new ();
-  gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (fontsel->family), renderer, TRUE);
-  gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (fontsel->family), renderer,
-                                  "text", COL_FAMILIY,
-                                  NULL);
+  fontsel->family = gtk_combo_box_new_with_model_and_entry (GTK_TREE_MODEL (fontsel->family_store));
+  gtk_combo_box_set_entry_text_column (GTK_COMBO_BOX(fontsel->family), COL_FAMILIY);
+  fontsel->completion = gtk_entry_completion_new();
+  gtk_entry_completion_set_text_column (fontsel->completion, COL_FAMILIY);
+  gtk_entry_completion_set_model (fontsel->completion, GTK_TREE_MODEL (fontsel->family_store));
+  gtk_entry_completion_set_match_func(fontsel->completion, match_function, fontsel, NULL);
+  g_signal_connect (G_OBJECT (fontsel->completion), "match-selected",
+                    G_CALLBACK (completion_match_selected), fontsel);
+
+  gtk_entry_set_completion (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (fontsel->family))),
+                            fontsel->completion);
   gtk_widget_show (fontsel->family);
   accessib = gtk_widget_get_accessible (fontsel->family);
   atk_object_set_name (accessib, _("Font Family"));
