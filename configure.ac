@@ -55,7 +55,8 @@ AC_USE_SYSTEM_EXTENSIONS
 
 AC_DISABLE_STATIC
 AC_PROG_LIBTOOL
-IT_PROG_INTLTOOL([0.40.0])
+AM_GNU_GETTEXT_VERSION([0.19.8])
+
 
 AM_PROG_CC_C_O
 
@@ -235,7 +236,7 @@ fi
 GETTEXT_PACKAGE=gucharmap
 AC_SUBST([GETTEXT_PACKAGE])
 AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE],["$GETTEXT_PACKAGE"],[The gucharmap gettext domain])
-AM_GLIB_GNU_GETTEXT
+AM_GNU_GETTEXT([external])
 
 ##########################################################
 # Check for -Bsymbolic-functions linker flag used to avoid

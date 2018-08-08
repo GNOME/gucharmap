@@ -34,6 +34,7 @@ EXTRA_DIST = \
 	gtkrc.win32 \
 	COPYING.GFDL \
 	COPYING.UNICODE \
+	$(desktop_in_files) \
 	$(NULL)
 
 DISTCHECK_CONFIGURE_FLAGS = \
@@ -75,6 +76,7 @@ dist: ChangeLog
 
 .PHONY: ChangeLog
 
-@INTLTOOL_DESKTOP_RULE@
+gucharmap.desktop: gucharmap.desktop.in
+	$(AM_V_GEN)$(MSGFMT) --desktop --template $< -d $(top_srcdir)/po -o $@
 
 -include $(top_srcdir)/git.mk
