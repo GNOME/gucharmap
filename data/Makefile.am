@@ -16,8 +16,7 @@ DISTCLEANFILES = \
 	$(nodist_appdata_DATA) \
 	$(NULL)
 
-gucharmap.appdata.xml: gucharmap.appdata.xml.in
-	$(AM_V_GEN)$(MSGFMT) --xml --template $< -d $(top_srcdir)/po -o $@
+@INTLTOOL_XML_RULE@
 
 -include $(top_srcdir)/git.mk
 
