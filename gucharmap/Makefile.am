@@ -65,7 +65,7 @@ libgucharmap@GUCHARMAP_LIBRARY_SUFFIX_U@_la_CPPFLAGS = \
 	-I$(top_srcdir) \
 	-DGUCHARMAP_COMPILATION \
 	-DDATADIR=\"$(datadir)\" \
-	-DLOCALEDIR=\"$(datadir)/locale\" \
+	-DLOCALEDIR=\"$(localedir)\" \
 	-DHELPDIR=\"$(HELP_DIR)\" \
 	-DGLIB_DISABLE_DEPRECATION_WARNINGS \
 	-DPANGO_DISABLE_DEPRECATION_WARNINGS \
@@ -136,7 +136,7 @@ nodist_gucharmap_SOURCES = \
 gucharmap_CPPFLAGS = \
 	-I$(top_srcdir) \
 	-DDATADIR=\"$(datadir)\" \
-	-DLOCALEDIR=\"$(datadir)/locale\" \
+	-DLOCALEDIR=\"$(localedir)\" \
 	-DHELPDIR=\"$(HELP_DIR)\" \
 	-DGLIB_DISABLE_DEPRECATION_WARNINGS \
 	-DPANGO_DISABLE_DEPRECATION_WARNINGS \
