@@ -61,7 +61,7 @@ static const gchar JAMO_T_TABLE[][4] = {
 const gchar *
 gucharmap_get_unicode_name (gunichar wc)
 {
-  static gchar buf[32];
+  static gchar buf[64];
 
   _gucharmap_intl_ensure_initialized ();
 
