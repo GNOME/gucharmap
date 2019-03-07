@@ -81,7 +81,7 @@ gucharmap_get_unicode_name (gunichar wc)
       g_snprintf (buf, sizeof (buf), "CJK COMPATIBILITY IDEOGRAPH-%04X", wc);
       return buf;
   }
-  else if (wc >= 0x17000 && wc <= 0x187f1) {
+  else if (wc >= 0x17000 && wc <= 0x187f7) {
       g_snprintf (buf, sizeof (buf), "TANGUT IDEOGRAPH-%05X", wc);
       return buf;
   }
