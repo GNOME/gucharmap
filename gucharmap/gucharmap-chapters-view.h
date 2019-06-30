@@ -28,6 +28,7 @@
 #include <gtk/gtk.h>
 
 #include <gucharmap/gucharmap-chapters-model.h>
+#include <gucharmap/gucharmap-macros.h>
 
 G_BEGIN_DECLS
 
@@ -55,26 +56,38 @@ struct _GucharmapChaptersViewClass
   GtkTreeViewClass parent_class;
 };
 
+_GUCHARMAP_PUBLIC
 GType       gucharmap_chapters_view_get_type (void);
 
+_GUCHARMAP_PUBLIC
 GtkWidget * gucharmap_chapters_view_new      (void);
 
+_GUCHARMAP_PUBLIC
 void                    gucharmap_chapters_view_set_model (GucharmapChaptersView *view,
                                                            GucharmapChaptersModel *model);
+_GUCHARMAP_PUBLIC
 GucharmapChaptersModel *gucharmap_chapters_view_get_model (GucharmapChaptersView *view);
 
+_GUCHARMAP_PUBLIC
 gboolean           gucharmap_chapters_view_select_character (GucharmapChaptersView *view,
                                                              gunichar           wc);
+_GUCHARMAP_PUBLIC
 GucharmapCodepointList * gucharmap_chapters_view_get_codepoint_list      (GucharmapChaptersView *view);
+_GUCHARMAP_PUBLIC
 GucharmapCodepointList * gucharmap_chapters_view_get_book_codepoint_list (GucharmapChaptersView *view);
 
+_GUCHARMAP_PUBLIC
 void               gucharmap_chapters_view_next         (GucharmapChaptersView *view);
+_GUCHARMAP_PUBLIC
 void               gucharmap_chapters_view_previous     (GucharmapChaptersView *view);
 
+_GUCHARMAP_PUBLIC
 gchar *            gucharmap_chapters_view_get_selected  (GucharmapChaptersView *view);
+_GUCHARMAP_PUBLIC
 gboolean           gucharmap_chapters_view_set_selected  (GucharmapChaptersView *view,
                                                           const gchar       *name);
 
+_GUCHARMAP_PUBLIC
 gboolean           gucharmap_chapters_view_select_locale (GucharmapChaptersView *view);
 
 G_END_DECLS

@@ -22,6 +22,11 @@
 -->
 
 <schemalist gettext-domain='gucharmap'>
+  <enum id='org.gnome.Charmap.GucharmapChaptersMode'>
+    <value nick='script' value='0'/>
+    <value nick='block' value='1'/>
+  </enum>
+
   <schema id='org.gnome.Charmap' path='/org/gnome/charmap/'>
     <key name='group-by' enum='org.gnome.Charmap.GucharmapChaptersMode'>
       <summary>Character map grouping method</summary>

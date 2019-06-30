@@ -134,7 +134,7 @@ gucharmap_chartable_accessible_ref_child (AtkObject *obj,
   gucharmap_chartable_cell_accessible_initialise (GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE (child),
                             GTK_WIDGET (chartable), obj, index);
   /* Set the name of the cell */
-  name = g_strdup_printf("U+%4.4X %s", index, gucharmap_get_unicode_name (index));
+  name = g_strdup_printf("U+%4.4X %s", (unsigned int)index, gucharmap_get_unicode_name (index));
   atk_object_set_name (child, name);
   g_free (name);
   set_cell_visibility (chartable, GUCHARMAP_CHARTABLE_CELL_ACCESSIBLE (child), FALSE);

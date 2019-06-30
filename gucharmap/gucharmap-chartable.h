@@ -27,6 +27,7 @@
 #include <gtk/gtk.h>
 
 #include <gucharmap/gucharmap-codepoint-list.h>
+#include <gucharmap/gucharmap-macros.h>
 
 G_BEGIN_DECLS
 
@@ -67,25 +68,39 @@ struct _GucharmapChartableClass
   void (* status_message) (GucharmapChartable *chartable, const gchar *message);
 };
 
+_GUCHARMAP_PUBLIC
 GType gucharmap_chartable_get_type (void);
+_GUCHARMAP_PUBLIC
 GtkWidget * gucharmap_chartable_new (void);
+_GUCHARMAP_PUBLIC
 void gucharmap_chartable_set_font_desc (GucharmapChartable *chartable,
                                         PangoFontDescription *font_desc);
+_GUCHARMAP_PUBLIC
 PangoFontDescription * gucharmap_chartable_get_font_desc (GucharmapChartable *chartable);
+_GUCHARMAP_PUBLIC
 void gucharmap_chartable_set_font_fallback (GucharmapChartable *chartable,
                                             gboolean enable_font_fallback);
+_GUCHARMAP_PUBLIC
 gboolean gucharmap_chartable_get_font_fallback (GucharmapChartable *chartable);
+_GUCHARMAP_PUBLIC
 gunichar gucharmap_chartable_get_active_character (GucharmapChartable *chartable);
+_GUCHARMAP_PUBLIC
 void gucharmap_chartable_set_active_character (GucharmapChartable *chartable,
                                                gunichar wc);
+_GUCHARMAP_PUBLIC
 void gucharmap_chartable_set_zoom_enabled (GucharmapChartable *chartable,
                                            gboolean enabled);
+_GUCHARMAP_PUBLIC
 gboolean gucharmap_chartable_get_zoom_enabled (GucharmapChartable *chartable);
+_GUCHARMAP_PUBLIC
 void gucharmap_chartable_set_snap_pow2 (GucharmapChartable *chartable,
                                         gboolean snap);
+_GUCHARMAP_PUBLIC
 gboolean gucharmap_chartable_get_snap_pow2 (GucharmapChartable *chartable);
+_GUCHARMAP_PUBLIC
 void gucharmap_chartable_set_codepoint_list (GucharmapChartable         *chartable,
                                              GucharmapCodepointList *codepoint_list);
+_GUCHARMAP_PUBLIC
 GucharmapCodepointList * gucharmap_chartable_get_codepoint_list (GucharmapChartable *chartable);
 
 G_END_DECLS

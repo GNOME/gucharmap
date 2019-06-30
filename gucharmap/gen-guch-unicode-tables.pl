@@ -11,7 +11,7 @@
 #  - unicode-scripts.h
 #  - unicode-versions.h
 #
-# usage: ./gen-guch-unicode-tables.pl UNICODE-VERSION DIRECTORY
+# usage: ./gen-guch-unicode-tables.pl UNICODE-VERSION UNICODE-DIRECTORY OUTPUT-DIRECTORY
 # where DIRECTORY contains UnicodeData.txt Unihan.zip NamesList.txt Blocks.txt Scripts.txt
 #
 # NOTE! Some code copied from glib/glib/gen-unicode-tables.pl; keep in sync!
@@ -24,12 +24,12 @@ $PROG_UNZIP = "unzip" unless (defined $PROG_UNZIP);
 
 $| = 1;  # flush stdout buffer
 
-if (@ARGV != 2 && @ARGV != 3)
+if (@ARGV != 3 && @ARGV != 4)
 {
     $0 =~ s@.*/@@;
     die <<EOF
 
-Usage: $0 UNICODE-VERSION DIRECTORY [--i18n]
+Usage: $0 UNICODE-VERSION UNICODE-DIRECTORY OUTPUT-DIRECTORY [--i18n]
 
 DIRECTORY should contain the following Unicode data files:
 UnicodeData.txt Unihan.zip NamesList.txt Blocks.txt Scripts.txt
@@ -43,11 +43,12 @@ my ($unicodedata_txt, $unihan_zip, $nameslist_txt, $blocks_txt, $scripts_txt, $v
 
 my $v = $ARGV[0];
 my $d = $ARGV[1];
+my $outdir = $ARGV[2];
 
 my $gen_translatable_strings = 0;
-if (@ARGV == 3)
+if (@ARGV == 4)
 {
-    $gen_translatable_strings = 1 if ($ARGV[2] eq "--i18n") or die "Unknown option \"$ARGV[2]\"\n";
+    $gen_translatable_strings = 1 if ($ARGV[3] eq "--i18n") or die "Unknown option \"$ARGV[3]\"\n";
 }
 
 opendir (my $dir, $d) or die "Cannot open Unicode data dir $d: $!\n";
@@ -94,7 +95,7 @@ sub process_unicode_data_txt
     # part 1: names
 
     open (my $unicodedata, $unicodedata_txt) or die;
-    open (my $out, "> unicode-names.h") or die;
+    open (my $out, "> $outdir/unicode-names.h") or die;
 
     print "processing $unicodedata_txt...";
 
@@ -192,7 +193,7 @@ EOT
     # part 2: categories
 
     open ($unicodedata, $unicodedata_txt) or die;
-    open ($out, "> unicode-categories.h") or die;
+    open ($out, "> $outdir/unicode-categories.h") or die;
 
     # Map general category code onto symbolic name.
     my %mappings =
@@ -312,7 +313,7 @@ sub process_unihan_zip
     print "processing $unihan_zip.";
 
     open (my $unihan, "$PROG_UNZIP -c '$unihan_zip' |") or die;
-    open (my $out, "> unicode-unihan.h") or die;
+    open (my $out, "> $outdir/unicode-unihan.h") or die;
 
     print $out "/* unicode-unihan.h */\n";
     print $out "/* THIS IS A GENERATED FILE. CHANGES WILL BE OVERWRITTEN. */\n";
@@ -640,7 +641,7 @@ sub process_nameslist_txt
 
     close ($nameslist);
 
-    open (my $out, "> unicode-nameslist.h") or die;
+    open (my $out, "> $outdir/unicode-nameslist.h") or die;
 
     print $out "/* unicode-nameslist.h */\n";
     print $out "/* THIS IS A GENERATED FILE. CHANGES WILL BE OVERWRITTEN. */\n";
@@ -755,7 +756,7 @@ sub process_blocks_txt
 
     print "processing $blocks_txt...";
 
-    open (my $out, "> unicode-blocks.h") or die;
+    open (my $out, "> $outdir/unicode-blocks.h") or die;
 
     print $out "/* unicode-blocks.h */\n";
     print $out "/* THIS IS A GENERATED FILE. CHANGES WILL BE OVERWRITTEN. */\n";
@@ -866,7 +867,7 @@ sub process_scripts_txt
 
     read_scripts_txt ($scripts_txt, \%script_hash, \%scripts);
 
-    open (my $out, "> unicode-scripts.h") or die;
+    open (my $out, "> $outdir/unicode-scripts.h") or die;
 
     print $out "/* unicode-scripts.h */\n";
     print $out "/* THIS IS A GENERATED FILE. CHANGES WILL BE OVERWRITTEN. */\n";
@@ -940,7 +941,7 @@ sub process_translatable_strings
 
     read_scripts_txt ($scripts_txt, \%script_hash, \%scripts);
 
-    open (my $out, "> unicode-i18n.h") or die;
+    open (my $out, "> $outdir/unicode-i18n.h") or die;
 
     print $out "unicode-i18n.h for extraction by gettext\n";
     print $out "THIS IS A GENERATED FILE. CHANGES WILL BE OVERWRITTEN.\n";
@@ -975,7 +976,7 @@ sub process_versions_txt
     my %versions;
 
     open (my $versions, $versions_txt) or die;
-    open (my $out, "> unicode-versions.h") or die;
+    open (my $out, "> $outdir/unicode-versions.h") or die;
 
     print "processing $versions_txt...";
 

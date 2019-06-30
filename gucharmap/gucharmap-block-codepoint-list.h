@@ -26,6 +26,7 @@
 #include <glib-object.h>
 
 #include <gucharmap/gucharmap-codepoint-list.h>
+#include <gucharmap/gucharmap-macros.h>
 
 G_BEGIN_DECLS
 
@@ -53,8 +54,10 @@ struct _GucharmapBlockCodepointListClass
   GucharmapCodepointListClass parent_class;
 };
 
+_GUCHARMAP_PUBLIC
 GType                    gucharmap_block_codepoint_list_get_type (void);
 
+_GUCHARMAP_PUBLIC
 GucharmapCodepointList * gucharmap_block_codepoint_list_new      (gunichar start,
                                                                   gunichar end);
 

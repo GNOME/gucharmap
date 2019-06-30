@@ -24,6 +24,7 @@
 #define GUCHARMAP_CODEPOINT_LIST_H
 
 #include <glib-object.h>
+#include <gucharmap/gucharmap-macros.h>
 
 G_BEGIN_DECLS
 
@@ -58,14 +59,18 @@ struct _GucharmapCodepointListClass
                               gunichar                wc);
 };
 
+_GUCHARMAP_PUBLIC
 GType                    gucharmap_codepoint_list_get_type       (void);
 
+_GUCHARMAP_PUBLIC
 gunichar                 gucharmap_codepoint_list_get_char       (GucharmapCodepointList *list,
                                                                   gint                    index);
 
+_GUCHARMAP_PUBLIC
 gint                     gucharmap_codepoint_list_get_index      (GucharmapCodepointList *list, 
                                                                   gunichar                wc);
 
+_GUCHARMAP_PUBLIC
 gint                     gucharmap_codepoint_list_get_last_index (GucharmapCodepointList *list);
 
 G_END_DECLS

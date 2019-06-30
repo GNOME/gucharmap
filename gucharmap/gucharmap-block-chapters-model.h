@@ -27,6 +27,7 @@
 #define GUCHARMAP_BLOCK_CHAPTERS_MODEL_H
 
 #include <gucharmap/gucharmap-chapters-model.h>
+#include <gucharmap/gucharmap-macros.h>
 
 G_BEGIN_DECLS
 
@@ -54,7 +55,9 @@ struct _GucharmapBlockChaptersModelClass
   GucharmapChaptersModelClass parent_class;
 };
 
+_GUCHARMAP_PUBLIC
 GType                   gucharmap_block_chapters_model_get_type (void);
+_GUCHARMAP_PUBLIC
 GucharmapChaptersModel* gucharmap_block_chapters_model_new      (void);
 
 G_END_DECLS

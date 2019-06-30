@@ -793,7 +793,7 @@ set_details (GucharmapCharmap *charmap,
 	  (0xE000 <= uc && uc <= 0xFFFD) ||
 	  (0x10000 <= uc && uc <= 0x10FFFF))
 	{
-	  temp = g_strdup_printf ("&#%d;", uc);
+	  temp = g_strdup_printf ("&#%u;", uc);
 	  insert_vanilla_detail (charmap, buffer, &iter, 
 				 _("XML decimal entity:"), temp);
 	  g_free (temp);

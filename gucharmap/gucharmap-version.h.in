@@ -17,20 +17,12 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335 USA
  */
 
-#ifndef GUCHARMAP_H
-#define GUCHARMAP_H
-
-#define __GUCHARMAP_GUCHARMAP_H_INSIDE__
-
-#include <glib.h>
-
-#if defined(GUCHARMAP_DISABLE_DEPRECATION_WARNINGS) || !GLIB_CHECK_VERSION (2, 31, 0)
-#define GUCHARMAP_DEPRECATED
-#define GUCHARMAP_DEPRECATED_FOR(f)
-#else
-#define GUCHARMAP_DEPRECATED G_DEPRECATED
-#define GUCHARMAP_DEPRECATED_FOR(f) G_DEPRECATED_FOR(f)
+#if !defined (__GUCHARMAP_GUCHARMAP_H_INSIDE__) && !defined (GUCHARMAP_COMPILATION)
+#error "Only <gucharmap/gucharmap.h> can be included directly."
 #endif
+
+#ifndef GUCHARMAP_VERSION_H
+#define GUCHARMAP_VERSION_H
 
 #define GUCHARMAP_VERSION_MAJOR (@GUCHARMAP_VERSION_MAJOR@)
 #define GUCHARMAP_VERSION_MINOR (@GUCHARMAP_VERSION_MINOR@)
@@ -41,23 +33,4 @@
    (GUCHARMAP_VERSION_MAJOR == (major) && GUCHARMAP_VERSION_MINOR > (minor)) || \
    (GUCHARMAP_VERSION_MAJOR == (major) && GUCHARMAP_VERSION_MINOR == (minor) && GUCHARMAP_VERSION_MICRO >= (micro)))
 
-#include <gucharmap/gucharmap-codepoint-list.h>
-#include <gucharmap/gucharmap-block-codepoint-list.h>
-#include <gucharmap/gucharmap-script-codepoint-list.h>
-
-#include <gucharmap/gucharmap-chapters-model.h>
-#include <gucharmap/gucharmap-block-chapters-model.h>
-#include <gucharmap/gucharmap-script-chapters-model.h>
-
-#include <gucharmap/gucharmap-chartable.h>
-#include <gucharmap/gucharmap-charmap.h>
-
-#include <gucharmap/gucharmap-type-builtins.h>
-
-#include <gucharmap/gucharmap-unicode-info.h>
-
-#undef GUCHARMAP_DEPRECATED
-#undef GUCHARMAP_DEPRECATED_FOR
-#undef __GUCHARMAP_GUCHARMAP_H_INSIDE__
-
-#endif /* #ifndef GUCHARMAP_H */
+#endif /* #ifndef GUCHARMAP_VERSION_H */

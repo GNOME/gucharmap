@@ -25,6 +25,7 @@
 #define GUCHARMAP_SCRIPT_CHAPTERS_MODEL_H
 
 #include <gucharmap/gucharmap-chapters-model.h>
+#include <gucharmap/gucharmap-macros.h>
 
 G_BEGIN_DECLS
 
@@ -52,7 +53,9 @@ struct _GucharmapScriptChaptersModelClass
   GucharmapChaptersModelClass parent_class;
 };
 
+_GUCHARMAP_PUBLIC
 GType                   gucharmap_script_chapters_model_get_type (void);
+_GUCHARMAP_PUBLIC
 GucharmapChaptersModel* gucharmap_script_chapters_model_new      (void);
 
 G_END_DECLS

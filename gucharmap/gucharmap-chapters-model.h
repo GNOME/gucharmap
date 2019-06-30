@@ -27,6 +27,7 @@
 #include <gtk/gtk.h>
 
 #include <gucharmap/gucharmap-codepoint-list.h>
+#include <gucharmap/gucharmap-macros.h>
 
 G_BEGIN_DECLS
 
@@ -70,14 +71,20 @@ enum {
   GUCHARMAP_CHAPTERS_MODEL_COLUMN_LABEL = 1
 };
 
+_GUCHARMAP_PUBLIC
 GType                    gucharmap_chapters_model_get_type                (void);
+_GUCHARMAP_PUBLIC
 GucharmapCodepointList * gucharmap_chapters_model_get_codepoint_list      (GucharmapChaptersModel *chapters,
                                                                                           GtkTreeIter            *iter);
+_GUCHARMAP_PUBLIC
 const char *             gucharmap_chapters_model_get_title               (GucharmapChaptersModel *chapters);
+_GUCHARMAP_PUBLIC
 GucharmapCodepointList * gucharmap_chapters_model_get_book_codepoint_list (GucharmapChaptersModel *chapters);
+_GUCHARMAP_PUBLIC
 gboolean                 gucharmap_chapters_model_character_to_iter       (GucharmapChaptersModel *chapters,
                                                                            gunichar                wc,
                                                                            GtkTreeIter            *iter);
+_GUCHARMAP_PUBLIC
 gboolean                 gucharmap_chapters_model_id_to_iter              (GucharmapChaptersModel *chapters_model,
                                                                            const char             *id,
                                                                            GtkTreeIter            *_iter);

@@ -26,6 +26,7 @@
 #include <glib-object.h>
 
 #include <gucharmap/gucharmap-codepoint-list.h>
+#include <gucharmap/gucharmap-macros.h>
 
 G_BEGIN_DECLS
 
@@ -53,12 +54,17 @@ struct _GucharmapScriptCodepointListClass
   GucharmapCodepointListClass parent_class;
 };
 
+_GUCHARMAP_PUBLIC
 GType                    gucharmap_script_codepoint_list_get_type       (void);
+_GUCHARMAP_PUBLIC
 GucharmapCodepointList * gucharmap_script_codepoint_list_new            (void);
+_GUCHARMAP_PUBLIC
 gboolean                 gucharmap_script_codepoint_list_set_script     (GucharmapScriptCodepointList  *list,
 	                                                                 const gchar                   *script);
+_GUCHARMAP_PUBLIC
 gboolean                 gucharmap_script_codepoint_list_set_scripts    (GucharmapScriptCodepointList  *list,
 	                                                                 const gchar                  **scripts);
+_GUCHARMAP_PUBLIC
 gboolean                 gucharmap_script_codepoint_list_append_script  (GucharmapScriptCodepointList  *list,
                                                                          const gchar                   *script);
 /* XXX: gucharmap_script_codepoint_list_get_script? seems unnecessary */

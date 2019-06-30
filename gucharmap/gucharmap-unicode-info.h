@@ -26,6 +26,8 @@
 
 #include <glib.h>
 
+#include <gucharmap/gucharmap-macros.h>
+
 G_BEGIN_DECLS
 
 typedef enum {
@@ -55,45 +57,73 @@ typedef enum {
 } GucharmapUnicodeVersion;
 
 /* return values are read-only */
+_GUCHARMAP_PUBLIC
 const gchar *  gucharmap_get_unicode_name                (gunichar uc);
+_GUCHARMAP_PUBLIC
 const gchar *  gucharmap_get_unicode_data_name           (gunichar uc);
+_GUCHARMAP_PUBLIC
 gint                    gucharmap_get_unicode_data_name_count     (void);
+_GUCHARMAP_PUBLIC
 GucharmapUnicodeVersion gucharmap_get_unicode_version             (gunichar uc);
+_GUCHARMAP_PUBLIC
 const gchar *  gucharmap_get_unicode_category_name       (gunichar uc);
+_GUCHARMAP_PUBLIC
 gint                    gucharmap_get_unihan_count                (void);
+_GUCHARMAP_PUBLIC
 const gchar *  gucharmap_get_unicode_kDefinition         (gunichar uc);
+_GUCHARMAP_PUBLIC
 const gchar *  gucharmap_get_unicode_kCantonese          (gunichar uc);
+_GUCHARMAP_PUBLIC
 const gchar *  gucharmap_get_unicode_kMandarin           (gunichar uc);
+_GUCHARMAP_PUBLIC
 const gchar *  gucharmap_get_unicode_kTang               (gunichar uc);
+_GUCHARMAP_PUBLIC
 const gchar *  gucharmap_get_unicode_kKorean             (gunichar uc);
+_GUCHARMAP_PUBLIC
 const gchar *  gucharmap_get_unicode_kJapaneseKun        (gunichar uc);
+_GUCHARMAP_PUBLIC
 const gchar *  gucharmap_get_unicode_kJapaneseOn         (gunichar uc);
+_GUCHARMAP_PUBLIC
 const gchar *  gucharmap_get_unicode_kHangul             (gunichar uc);
+_GUCHARMAP_PUBLIC
 const gchar *  gucharmap_get_unicode_kVietnamese         (gunichar uc);
 
 /* nameslist stuff */
+_GUCHARMAP_PUBLIC
 const gchar ** gucharmap_get_nameslist_stars             (gunichar  uc);
+_GUCHARMAP_PUBLIC
 const gchar ** gucharmap_get_nameslist_equals            (gunichar  uc);
+_GUCHARMAP_PUBLIC
 gunichar *              gucharmap_get_nameslist_exes              (gunichar  uc);
+_GUCHARMAP_PUBLIC
 const gchar ** gucharmap_get_nameslist_pounds            (gunichar  uc);
+_GUCHARMAP_PUBLIC
 const gchar ** gucharmap_get_nameslist_colons            (gunichar  uc);
+_GUCHARMAP_PUBLIC
 gboolean                gucharmap_unichar_validate                (gunichar  uc);
+_GUCHARMAP_PUBLIC
 gint                    gucharmap_unichar_to_printable_utf8       (gunichar  uc,
                                                                    gchar    *outbuf);
+_GUCHARMAP_PUBLIC
 GUnicodeType            gucharmap_unichar_type                    (gunichar  uc);
+_GUCHARMAP_PUBLIC
 gboolean                gucharmap_unichar_isdefined               (gunichar  uc);
+_GUCHARMAP_PUBLIC
 gboolean                gucharmap_unichar_isgraph                 (gunichar  uc);
 
 /* defined in gucharmap-script-codepoint-list.c */
+_GUCHARMAP_PUBLIC
 const gchar ** gucharmap_unicode_list_scripts            (void);
+_GUCHARMAP_PUBLIC
 const gchar *  gucharmap_unicode_get_script_for_char     (gunichar wc);
 
+_GUCHARMAP_PUBLIC
 const gchar *  gucharmap_unicode_version_to_string       (GucharmapUnicodeVersion version);
 
 /* doesn't really belong here, but no better place was available */
+_GUCHARMAP_PUBLIC
 gunichar     gucharmap_unicode_get_locale_character (void);
 
 G_END_DECLS
 
 #endif  /* #ifndef GUCHARMAP_UNICODE_INFO_H */
-
