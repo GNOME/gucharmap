@@ -146,7 +146,7 @@ libgucharmap_gtk3_deps = libgucharmap_gtk3_public_deps
 libgucharmap_gtk3_cppflags = disable_deprecated_cppflags + [
   '-DGUCHARMAP_COMPILATION',
   '-DG_LOG_DOMAIN="Gucharmap"',
-  '-DLOCALEDIR="@0@"'.format(gucharmap_localedir),
+  '-DLOCALEDIR="@0@"'.format(gucharmap_prefix / gucharmap_localedir),
 ]
 
 libgucharmap_gtk3_sources = libgucharmap_sources
@@ -260,7 +260,7 @@ gucharmap_gtk3_sources += gnome.compile_resources(
 )
 
 gucharmap_gtk3_cppflags = disable_deprecated_cppflags + [
-  '-DLOCALEDIR="@0@"'.format(gucharmap_localedir),
+  '-DLOCALEDIR="@0@"'.format(gucharmap_prefix / gucharmap_localedir),
 ]
 
 gucharmap_gtk3_deps = [
