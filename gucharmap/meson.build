@@ -53,6 +53,7 @@ libgucharmap_public_headers = libgucharmap_enum_headers + [libgucharmap_version_
   'gucharmap-chapters-view.h',
   'gucharmap-chartable.h',
   'gucharmap-codepoint-list.h',
+  'gucharmap-macros.h',
   'gucharmap-script-chapters-model.h',
   'gucharmap-script-codepoint-list.h',
   'gucharmap.h',
