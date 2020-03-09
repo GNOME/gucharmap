@@ -24,7 +24,7 @@ project(
   ],
   license: ['GPL-3.0-or-later',],
   meson_version: '>= 0.49.0',
-  version: '12.0.3',
+  version: '12.1.0',
 )
 
 # Naming
@@ -45,7 +45,7 @@ gtk3_req_version      = '3.4.0'
 # changes to gucharmap. Therefore, you should NOT upgrade the unicode version
 # of a released gucharmap, but upgrade to the gucharmap version corresponding
 # to the desired unicode version.
-unicode_req_version   = '12.0.0'
+unicode_req_version   = '12.1.0'
 
 # API
 
