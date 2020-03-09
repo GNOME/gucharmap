@@ -65,28 +65,36 @@ gucharmap_get_unicode_name (gunichar wc)
 
   _gucharmap_intl_ensure_initialized ();
 
-  if ((wc >= 0x3400 && wc <= 0x4db5)
-      || (wc >= 0x4e00 && wc <= 0x9fef)
-      || (wc >= 0x20000 && wc <= 0x2a6d6)
-      || (wc >= 0x2a700 && wc <= 0x2b734)
-      || (wc >= 0x2b740 && wc <= 0x2b81d)
-      || (wc >= 0x2b820 && wc <= 0x2cea1)
-      || (wc >= 0x2ceb0 && wc <= 0x2ebe0))
+  if ((wc >= 0x3400 && wc <= 0x4dbf)       /* CJK Unified Ideographs Extension A */
+      || (wc >= 0x4e00 && wc <= 0x9ffc)    /* CJK Unified Ideographs             */
+      || (wc >= 0x20000 && wc <= 0x2a6dd)  /* CJK Unified Ideographs Extension B */
+      || (wc >= 0x2a700 && wc <= 0x2b734)  /* CJK Unified Ideographs Extension C */
+      || (wc >= 0x2b740 && wc <= 0x2b81d)  /* CJK Unified Ideographs Extension D */
+      || (wc >= 0x2b820 && wc <= 0x2cea1)  /* CJK Unified Ideographs Extension E */
+      || (wc >= 0x2ceb0 && wc <= 0x2ebe0)  /* CJK Unified Ideographs Extension F */
+      || (wc >= 0x30000 && wc <= 0x3134a)) /* CJK Unified Ideographs Extension G */
     {
       g_snprintf (buf, sizeof (buf), "CJK UNIFIED IDEOGRAPH-%04X", wc);
       return buf;
     }
-  else if ((wc >= 0xf900 && wc <= 0xfaff) ||
-           (wc >= 0x2f800 && wc <= 0x2fa1d)) {
+  else if ((wc >= 0xf900 && wc <= 0xfaff) || /* CJK Compatibility Ideographs            */
+           (wc >= 0x2f800 && wc <= 0x2fa1d)) /* CJK Compatibility Ideographs Supplement */
+    {
       g_snprintf (buf, sizeof (buf), "CJK COMPATIBILITY IDEOGRAPH-%04X", wc);
       return buf;
   }
-  else if (wc >= 0x17000 && wc <= 0x187f7) {
+  else if ((wc >= 0x17000 && wc <= 0x187f7) || /* Tangut            */
+           (wc >= 0x18d00 && wc <= 0x18d08))   /* Tangut Supplement */
+    {
       g_snprintf (buf, sizeof (buf), "TANGUT IDEOGRAPH-%05X", wc);
       return buf;
   }
-  else if (wc >= 0x18800 && wc <= 0x18af2) {
+  else if (wc >= 0x18800 && wc <= 0x18aff) {
       g_snprintf (buf, sizeof (buf), "TANGUT COMPONENT-%03u", wc - 0x18800 + 1);
+      return buf;
+  }
+  else if (wc >= 0x18b00 && wc <= 0x18cd5) {
+      g_snprintf (buf, sizeof (buf), "KHITAN SMALL SCRIPT CHARACTER-%05X", wc);
       return buf;
   }
   else if (wc >= 0xac00 && wc <= 0xd7af)
