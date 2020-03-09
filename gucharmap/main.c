@@ -52,16 +52,19 @@
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
-extern FT_Error
+_GUCHARMAP_PUBLIC
+FT_Error
 FT_Load_Glyph(FT_Face face,
 	      FT_UInt glyph_index,
 	      FT_Int32 load_flags);
 
-extern FT_Error
+_GUCHARMAP_PUBLIC
+FT_Error
 FT_Load_Char(FT_Face face,
 	     FT_ULong char_code,
 	     FT_Int32 load_flags);
 
+_GUCHARMAP_PUBLIC
 FT_Error
 FT_Load_Glyph(FT_Face face,
 	      FT_UInt glyph_index,
@@ -76,6 +79,7 @@ FT_Load_Glyph(FT_Face face,
   return original(face, glyph_index, load_flags & ~FT_LOAD_COLOR);
 }
 
+_GUCHARMAP_PUBLIC
 FT_Error
 FT_Load_Char( FT_Face face,
 	      FT_ULong char_code,
