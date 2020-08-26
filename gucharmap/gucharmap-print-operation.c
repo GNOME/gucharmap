@@ -274,9 +274,7 @@ gucharmap_print_operation_custom_widget_apply (GtkPrintOperation *operation,
 static void
 gucharmap_print_operation_init (GucharmapPrintOperation *print_operation)
 {
-  GucharmapPrintOperationPrivate *priv;
-
-  priv = print_operation->priv = GUCHARMAP_PRINT_OPERATION_GET_PRIVATE (print_operation);
+  print_operation->priv = GUCHARMAP_PRINT_OPERATION_GET_PRIVATE (print_operation);
 }
 
 static GObject *
