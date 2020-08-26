@@ -124,7 +124,10 @@ gucharmap_chartable_accessible_ref_child (AtkObject *obj,
       GucharmapChartableCellAccessible *cell = g_ptr_array_index (cells, n);
 
       if (index == cell->index)
-        return g_object_ref (cell);
+        {
+          g_object_ref (cell);
+          return ATK_OBJECT (cell);
+        }
     }
 
   /* Not cached, create a new cell accessible */
