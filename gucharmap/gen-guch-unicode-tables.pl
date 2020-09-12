@@ -855,6 +855,9 @@ sub read_scripts_txt
 
     # Adds Common to make sure works with UCD <= 4.0.0
     $scripts->{"Common"} = 1; 
+
+    # Add Unknown (for code points not explicitly listed as script)
+    $scripts->{"Unknown"} = 1;
 }
 
 sub process_scripts_txt

@@ -69,24 +69,24 @@ find_script (const gchar *script)
 }
 
 /* *ranges should be freed by caller */
-/* adds unlisted characters to the "Common" script */
+/* adds unlisted characters to the "Unknown" script */
 static gboolean
 get_chars_for_script (const gchar            *script,
                       UnicodeRange          **ranges,
                       gint                   *size)
 {
   gint i, j, index;
-  gint script_index, common_script_index;
+  gint script_index, unknown_script_index;
   gint prev_end;
 
   script_index = find_script (script);
-  common_script_index = find_script ("Common");
+  unknown_script_index = find_script ("Unknown");
   if (script_index == -1)
     return FALSE;
 
   j = 0;
 
-  if (script_index == common_script_index)
+  if (script_index == unknown_script_index)
     {
       prev_end = -1;
       for (i = 0;  i < G_N_ELEMENTS (unicode_scripts);  i++)
@@ -110,7 +110,7 @@ get_chars_for_script (const gchar            *script,
 
   for (i = 0;  i < G_N_ELEMENTS (unicode_scripts);  i++)
     {
-      if (script_index == common_script_index)
+      if (script_index == unknown_script_index)
 	{
 	  if (unicode_scripts[i].start > prev_end + 1)
 	    {
@@ -136,7 +136,7 @@ get_chars_for_script (const gchar            *script,
 	}
     }
 
-  if (script_index == common_script_index)
+  if (script_index == unknown_script_index)
     {
       if (unicode_scripts[i-1].end < UNICHAR_MAX)
 	{
@@ -437,7 +437,7 @@ gucharmap_unicode_list_scripts (void)
  *
  * Return value: The English (untranslated) name of the script to which the
  * character belongs. Characters that don't belong to an actual script
- * return %"Common".
+ * return %"Unknown".
  **/
 const gchar *
 gucharmap_unicode_get_script_for_char (gunichar wc)
@@ -460,7 +460,7 @@ gucharmap_unicode_get_script_for_char (gunichar wc)
         return unicode_script_list_strings + unicode_script_list_offsets[unicode_scripts[mid].script_index];
     }
 
-  /* Unicode assigns "Common" as the script name for any character not
+  /* Unicode assigns "Unknown" as the script name for any character not
    * specifically listed in Scripts.txt */
-  return N_("Common");
+  return N_("Unknown");
 }
