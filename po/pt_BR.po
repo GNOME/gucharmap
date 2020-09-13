@@ -15,21 +15,22 @@
 # Enrico Nicoletto <liverig@gmail.com>, 2014.
 # Felipe Braga <fbobraga@gmail.com>, 2015.
 # Rafael Fontenelle <rafaelff@gnome.org>, 2013-2020.
+# Henrique Machado Campos <henriquecamposrj@gmail.com>, 2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gucharmap/issues\n"
-"POT-Creation-Date: 2020-03-10 05:46+0000\n"
-"PO-Revision-Date: 2020-03-10 02:54-0300\n"
-"Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
+"POT-Creation-Date: 2020-09-12 20:19+0000\n"
+"PO-Revision-Date: 2020-09-12 23:30-0300\n"
+"Last-Translator: Henrique Machado Campos <henriquecamposrj@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
-"X-Generator: Gtranslator 3.32.0\n"
+"X-Generator: Gtranslator 3.36.0\n"
 "X-Project-Style: gnome\n"
 
 #. VERSION=@VERSION@
@@ -292,7 +293,7 @@ msgstr "Tabel_a de caracteres"
 msgid "Character _Details"
 msgstr "_Detalhes do caractere"
 
-#: gucharmap/gucharmap-chartable-accessible.c:798
+#: gucharmap/gucharmap-chartable-accessible.c:801
 msgid "Character Table"
 msgstr "Tabela de caracteres"
 
@@ -408,11 +409,11 @@ msgstr "Tamanho da fonte"
 msgid "Script"
 msgstr "Sistema de escrita"
 
-#. Unicode assigns "Common" as the script name for any character not
+#. Unicode assigns "Unknown" as the script name for any character not
 #. * specifically listed in Scripts.txt
-#: gucharmap/gucharmap-script-codepoint-list.c:465 gucharmap/unicode-i18n.h:339
-msgid "Common"
-msgstr "Comum"
+#: gucharmap/gucharmap-script-codepoint-list.c:465
+msgid "Unknown"
+msgstr "Desconhecido"
 
 #: gucharmap/gucharmap-search-dialog.c:562
 msgid "Information"
@@ -652,7 +653,6 @@ msgid "GNOME Character Map"
 msgstr "Mapa de caracteres do GNOME"
 
 #: gucharmap/gucharmap-window.c:457
-#| msgid "Based on the Unicode Character Database 12.1.0"
 msgid "Based on the Unicode Character Database 13.0.0"
 msgstr "Baseado no banco de dados de caracteres Unicode 13.0.0"
 
@@ -1740,7 +1740,6 @@ msgid "Makasar"
 msgstr "Makassar"
 
 #: gucharmap/unicode-i18n.h:246
-#| msgid "Latin-1 Supplement"
 msgid "Lisu Supplement"
 msgstr "Lisu suplemento"
 
@@ -1813,7 +1812,6 @@ msgid "Khitan Small Script"
 msgstr "Sistema de escrita Kitan"
 
 #: gucharmap/unicode-i18n.h:264
-#| msgid "Kana Supplement"
 msgid "Tangut Supplement"
 msgstr "Suplemento tangut"
 
@@ -1994,7 +1992,6 @@ msgid "CJK Compatibility Ideographs Supplement"
 msgstr "Suplemento de ideogramas de compatibilidade CJK"
 
 #: gucharmap/unicode-i18n.h:309
-#| msgid "CJK Unified Ideographs Extension A"
 msgid "CJK Unified Ideographs Extension G"
 msgstr "Ideogramas unificados CJK extensão G"
 
@@ -2021,6 +2018,10 @@ msgstr "Braile"
 #: gucharmap/unicode-i18n.h:332
 msgid "Canadian Aboriginal"
 msgstr "Aborígene canadense"
+
+#: gucharmap/unicode-i18n.h:339
+msgid "Common"
+msgstr "Comum"
 
 #: gucharmap/unicode-i18n.h:342
 msgid "Cypriot"
