@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gucharmap/issues\n"
-"POT-Creation-Date: 2020-03-14 08:04+0000\n"
-"PO-Revision-Date: 2020-03-15 14:35+0100\n"
+"POT-Creation-Date: 2020-09-12 20:19+0000\n"
+"PO-Revision-Date: 2020-09-13 14:08+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <community-poland@mozilla.org>\n"
 "Language: pl\n"
@@ -281,7 +281,7 @@ msgstr "Tablica z_naków"
 msgid "Character _Details"
 msgstr "Informacje o _znaku"
 
-#: gucharmap/gucharmap-chartable-accessible.c:798
+#: gucharmap/gucharmap-chartable-accessible.c:801
 msgid "Character Table"
 msgstr "Tablica znaków"
 
@@ -397,11 +397,11 @@ msgstr "Rozmiar czcionki"
 msgid "Script"
 msgstr "Pismo"
 
-#. Unicode assigns "Common" as the script name for any character not
+#. Unicode assigns "Unknown" as the script name for any character not
 #. * specifically listed in Scripts.txt
-#: gucharmap/gucharmap-script-codepoint-list.c:465 gucharmap/unicode-i18n.h:339
-msgid "Common"
-msgstr "Wspólne"
+#: gucharmap/gucharmap-script-codepoint-list.c:465
+msgid "Unknown"
+msgstr "Nieznane"
 
 #: gucharmap/gucharmap-search-dialog.c:562
 msgid "Information"
@@ -2002,6 +2002,10 @@ msgstr "Alfabet Braille’a"
 #: gucharmap/unicode-i18n.h:332
 msgid "Canadian Aboriginal"
 msgstr "Rdzenny kanadyjski"
+
+#: gucharmap/unicode-i18n.h:339
+msgid "Common"
+msgstr "Wspólne"
 
 #: gucharmap/unicode-i18n.h:342
 msgid "Cypriot"
