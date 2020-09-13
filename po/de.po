@@ -36,8 +36,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gucharmap/issues\n"
-"POT-Creation-Date: 2020-08-27 19:47+0000\n"
-"PO-Revision-Date: 2020-09-02 20:20+0200\n"
+"POT-Creation-Date: 2020-09-13 06:38+0000\n"
+"PO-Revision-Date: 2020-09-13 13:09+0200\n"
 "Last-Translator: Ingo Brückl <ib@wupperonline.de>\n"
 "Language-Team: Deutsch <gnome-de@gnome.org>\n"
 "Language: de\n"
@@ -423,11 +423,11 @@ msgstr "Schriftgröße"
 msgid "Script"
 msgstr "Schriftsystem"
 
-#. Unicode assigns "Common" as the script name for any character not
+#. Unicode assigns "Unknown" as the script name for any character not
 #. * specifically listed in Scripts.txt
-#: gucharmap/gucharmap-script-codepoint-list.c:465 gucharmap/unicode-i18n.h:339
-msgid "Common"
-msgstr "Allgemein"
+#: gucharmap/gucharmap-script-codepoint-list.c:465
+msgid "Unknown"
+msgstr "Unbekannt"
 
 #: gucharmap/gucharmap-search-dialog.c:562
 msgid "Information"
@@ -2033,6 +2033,10 @@ msgstr "Braille"
 #: gucharmap/unicode-i18n.h:332
 msgid "Canadian Aboriginal"
 msgstr "Kanadisch-indigene Silbenschrift"
+
+#: gucharmap/unicode-i18n.h:339
+msgid "Common"
+msgstr "Allgemein"
 
 #: gucharmap/unicode-i18n.h:342
 msgid "Cypriot"
