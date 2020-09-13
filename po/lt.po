@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lt\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gucharmap/issues\n"
-"POT-Creation-Date: 2020-06-28 08:04+0000\n"
-"PO-Revision-Date: 2020-09-07 21:47+0300\n"
+"POT-Creation-Date: 2020-09-12 20:19+0000\n"
+"PO-Revision-Date: 2020-09-13 20:14+0300\n"
 "Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
 "Language-Team: Lietuvių <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
@@ -282,7 +282,7 @@ msgstr "Simbolių _lentelė"
 msgid "Character _Details"
 msgstr "Simbolio _detalės"
 
-#: gucharmap/gucharmap-chartable-accessible.c:798
+#: gucharmap/gucharmap-chartable-accessible.c:801
 msgid "Character Table"
 msgstr "Simbolių lentelė"
 
@@ -398,11 +398,11 @@ msgstr "Šrifto dydis"
 msgid "Script"
 msgstr "Raštas"
 
-#. Unicode assigns "Common" as the script name for any character not
+#. Unicode assigns "Unknown" as the script name for any character not
 #. * specifically listed in Scripts.txt
-#: gucharmap/gucharmap-script-codepoint-list.c:465 gucharmap/unicode-i18n.h:339
-msgid "Common"
-msgstr "Bendrinis"
+#: gucharmap/gucharmap-script-codepoint-list.c:465
+msgid "Unknown"
+msgstr "Nežinoma"
 
 #: gucharmap/gucharmap-search-dialog.c:562
 msgid "Information"
@@ -641,7 +641,6 @@ msgid "GNOME Character Map"
 msgstr "GNOME simbolių lentelė"
 
 #: gucharmap/gucharmap-window.c:457
-#| msgid "Based on the Unicode Character Database 12.0.0"
 msgid "Based on the Unicode Character Database 13.0.0"
 msgstr "Paremta Unikodo simbolių duomenų baze 13.0.0"
 
@@ -742,11 +741,6 @@ msgid "Last selected character"
 msgstr "Paskutinis pasirinktas simbolis"
 
 #: gucharmap/org.gnome.Charmap.gschema.xml:63
-#| msgid ""
-#| "This is the last character that was selected in the character map (and "
-#| "will be selected again when the character map is next started).\n"
-#| "\n"
-#| "By default, it is the first letter of the alphabet in the current locale."
 msgid ""
 "This is the last character that was selected in the character map (and will "
 "be selected again when the character map is next started). By default, it is "
@@ -1723,7 +1717,6 @@ msgid "Makasar"
 msgstr "Makasar"
 
 #: gucharmap/unicode-i18n.h:246
-#| msgid "Latin-1 Supplement"
 msgid "Lisu Supplement"
 msgstr "Lisu papildymas"
 
@@ -1796,7 +1789,6 @@ msgid "Khitan Small Script"
 msgstr "Khitan Small Script"
 
 #: gucharmap/unicode-i18n.h:264
-#| msgid "Kana Supplement"
 msgid "Tangut Supplement"
 msgstr "Tangut papildymas"
 
@@ -1977,7 +1969,6 @@ msgid "CJK Compatibility Ideographs Supplement"
 msgstr "CJK suderinamumo ideografinis papildymas"
 
 #: gucharmap/unicode-i18n.h:309
-#| msgid "CJK Unified Ideographs Extension A"
 msgid "CJK Unified Ideographs Extension G"
 msgstr "CJK unifikuotų ideogramų išplėtimas G"
 
@@ -2004,6 +1995,10 @@ msgstr "Brailis"
 #: gucharmap/unicode-i18n.h:332
 msgid "Canadian Aboriginal"
 msgstr "Kanados aborigenų"
+
+#: gucharmap/unicode-i18n.h:339
+msgid "Common"
+msgstr "Bendrinis"
 
 #: gucharmap/unicode-i18n.h:342
 msgid "Cypriot"
