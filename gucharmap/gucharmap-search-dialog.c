@@ -782,6 +782,7 @@ gucharmap_search_dialog_init (GucharmapSearchDialog *search_dialog)
   g_signal_connect (priv->whole_word_option, "toggled", G_CALLBACK (entry_changed), search_dialog);
 
   priv->annotations_option = gtk_check_button_new_with_mnemonic (_("Search in character _details"));
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(priv->annotations_option), TRUE);
   gtk_widget_show (priv->annotations_option);
   gtk_box_pack_start (GTK_BOX (content_area), priv->annotations_option, FALSE, FALSE, 0);
   g_signal_connect (priv->annotations_option, "toggled", G_CALLBACK (entry_changed), search_dialog);
