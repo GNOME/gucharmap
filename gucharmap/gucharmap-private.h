@@ -31,6 +31,7 @@ G_GNUC_INTERNAL gboolean _gucharmap_unicode_has_nameslist_entry (gunichar uc);
 
 struct _GucharmapChaptersModelPrivate {
   GucharmapCodepointList *book_list;
+  int sort_column;
 };
 
 struct _GucharmapChartablePrivate {

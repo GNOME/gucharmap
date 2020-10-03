@@ -30,6 +30,7 @@
 static void
 gucharmap_script_chapters_model_init (GucharmapScriptChaptersModel *model)
 {
+  GucharmapChaptersModel *chapters_model = GUCHARMAP_CHAPTERS_MODEL (model);
   GtkListStore *store = GTK_LIST_STORE (model);
   const gchar **unicode_scripts;
   GtkTreeIter iter;
@@ -52,9 +53,7 @@ gucharmap_script_chapters_model_init (GucharmapScriptChaptersModel *model)
     }
   g_free (unicode_scripts);
 
-  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (model),
-                                        GUCHARMAP_CHAPTERS_MODEL_COLUMN_LABEL,
-                                        GTK_SORT_ASCENDING);
+  chapters_model->priv->sort_column = GUCHARMAP_CHAPTERS_MODEL_COLUMN_LABEL;
 }
 
 static GucharmapCodepointList *

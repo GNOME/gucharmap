@@ -28,18 +28,39 @@
 enum 
 {
   BLOCK_CHAPTERS_MODEL_ID = 0,
-  BLOCK_CHAPTERS_MODEL_LABEL,
+  BLOCK_CHAPTERS_MODEL_LABEL = GUCHARMAP_CHAPTERS_MODEL_COLUMN_LABEL,
+  BLOCK_CHAPTERS_MODEL_BLOCK,
   BLOCK_CHAPTERS_MODEL_UNICODE_BLOCK_PTR,
   BLOCK_CHAPTERS_MODEL_NUM_COLUMNS
 };
 
 static void
+sort_column_changed_cb (GtkTreeSortable *sortable,
+			gpointer user_data)
+{
+  GucharmapChaptersModel *model = GUCHARMAP_CHAPTERS_MODEL (sortable);
+
+  if (model->priv->sort_column == BLOCK_CHAPTERS_MODEL_BLOCK)
+    model->priv->sort_column = BLOCK_CHAPTERS_MODEL_LABEL;
+  else
+    model->priv->sort_column = BLOCK_CHAPTERS_MODEL_BLOCK;
+
+  g_signal_handlers_block_by_func(sortable, G_CALLBACK(sort_column_changed_cb), NULL);
+  gtk_tree_sortable_set_sort_column_id (sortable,
+                                        model->priv->sort_column,
+                                        GTK_SORT_ASCENDING);
+  g_signal_handlers_unblock_by_func(sortable, G_CALLBACK(sort_column_changed_cb), NULL);
+}
+
+static void
 gucharmap_block_chapters_model_init (GucharmapBlockChaptersModel *model)
 {
+  GucharmapChaptersModel *chapters_model = GUCHARMAP_CHAPTERS_MODEL (model);
   GtkListStore *store = GTK_LIST_STORE (model);
   GtkTreeIter iter;
   guint i;
   GType types[] = {
+    G_TYPE_STRING,
     G_TYPE_STRING,
     G_TYPE_STRING,
     G_TYPE_POINTER
@@ -51,22 +72,34 @@ gucharmap_block_chapters_model_init (GucharmapBlockChaptersModel *model)
   gtk_list_store_set (store, &iter,
                       BLOCK_CHAPTERS_MODEL_ID, "All",
                       BLOCK_CHAPTERS_MODEL_LABEL, _("All"), 
+                      BLOCK_CHAPTERS_MODEL_BLOCK, "",
                       BLOCK_CHAPTERS_MODEL_UNICODE_BLOCK_PTR, NULL, 
                       -1);
 
   for (i = 0;  i < G_N_ELEMENTS (unicode_blocks); i++)
     {
+      static gchar block_start[12];
       const char *block_name;
 
+      g_snprintf (block_start, sizeof (block_start), "%012" G_GUINT32_FORMAT, unicode_blocks[i].start);
       block_name = unicode_blocks_strings + unicode_blocks[i].block_name_index;
 
       gtk_list_store_append (store, &iter);
       gtk_list_store_set (store, &iter,
                           BLOCK_CHAPTERS_MODEL_ID, block_name,
                           BLOCK_CHAPTERS_MODEL_LABEL, _(block_name),
+                          BLOCK_CHAPTERS_MODEL_BLOCK, block_start,
                           BLOCK_CHAPTERS_MODEL_UNICODE_BLOCK_PTR, unicode_blocks + i,
                           -1);
     }
+
+  g_signal_connect (model, "sort-column-changed", G_CALLBACK (sort_column_changed_cb), NULL);
+
+  /* This will switch to its default BLOCK_CHAPTERS_MODEL_BLOCK when
+   * gucharmap_chapters_view_set_model() calls
+   * gtk_tree_sortable_set_sort_column_id() and triggers
+   * "sort-column-changed". */
+  chapters_model->priv->sort_column = BLOCK_CHAPTERS_MODEL_LABEL;
 }
 
 static GucharmapCodepointList *
@@ -104,28 +137,41 @@ character_to_iter (GucharmapChaptersModel *chapters,
                    GtkTreeIter       *_iter)
 {
   GtkTreeModel *model = GTK_TREE_MODEL (chapters);
-  GtkTreeIter iter;
+  GtkTreeIter iter, all_iter;
+  gboolean all_iter_set = TRUE;
 
   if (wc > UNICHAR_MAX)
     return FALSE;
 
-  /* skip "All" block */
   if (!gtk_tree_model_get_iter_first (model, &iter))
     return FALSE;
 
-  while (gtk_tree_model_iter_next (model, &iter))
+  do
     {
       UnicodeBlock *unicode_block;
+
       gtk_tree_model_get (model, &iter, BLOCK_CHAPTERS_MODEL_UNICODE_BLOCK_PTR, &unicode_block, -1);
+
+      /* skip "All" block */
+      if (unicode_block == NULL)
+        {
+          all_iter = iter;
+          all_iter_set = TRUE;
+          continue;
+        }
+
       if (wc >= unicode_block->start && wc <= unicode_block->end)
         {
           *_iter = iter;
           return TRUE;
         }
     }
+  while (gtk_tree_model_iter_next (model, &iter));
 
   /* "All" is the last resort */
-  return gtk_tree_model_get_iter_first (model, _iter);
+  g_assert (all_iter_set);
+  *_iter = all_iter;
+  return TRUE;
 }
 
 static void
