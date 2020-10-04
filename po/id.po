@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gucharmap/issues\n"
-"POT-Creation-Date: 2020-03-26 14:51+0000\n"
-"PO-Revision-Date: 2020-04-10 10:34+0700\n"
+"POT-Creation-Date: 2020-09-12 20:19+0000\n"
+"PO-Revision-Date: 2020-10-04 17:18+0700\n"
 "Last-Translator: Andika Triwidada <andika@gmail.com>\n"
 "Language-Team: Indonesian <gnome@i15n.org>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 2.4.1\n"
 "Plural-Forms: nplurals=2; plural=n!=1;\n"
 
 #. VERSION=@VERSION@
@@ -276,7 +276,7 @@ msgstr "Tabel Karakte_r"
 msgid "Character _Details"
 msgstr "_Detil Karakter"
 
-#: gucharmap/gucharmap-chartable-accessible.c:798
+#: gucharmap/gucharmap-chartable-accessible.c:801
 msgid "Character Table"
 msgstr "Tabel Karakter"
 
@@ -392,11 +392,11 @@ msgstr "Ukuran Fonta"
 msgid "Script"
 msgstr "Skrip"
 
-#. Unicode assigns "Common" as the script name for any character not
+#. Unicode assigns "Unknown" as the script name for any character not
 #. * specifically listed in Scripts.txt
-#: gucharmap/gucharmap-script-codepoint-list.c:465 gucharmap/unicode-i18n.h:339
-msgid "Common"
-msgstr "Umum"
+#: gucharmap/gucharmap-script-codepoint-list.c:465
+msgid "Unknown"
+msgstr "Tidak dikenal"
 
 #: gucharmap/gucharmap-search-dialog.c:562
 msgid "Information"
@@ -1990,6 +1990,10 @@ msgstr "Braille"
 #: gucharmap/unicode-i18n.h:332
 msgid "Canadian Aboriginal"
 msgstr "Aborigin Kanada"
+
+#: gucharmap/unicode-i18n.h:339
+msgid "Common"
+msgstr "Umum"
 
 #: gucharmap/unicode-i18n.h:342
 msgid "Cypriot"
