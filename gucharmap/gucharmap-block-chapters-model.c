@@ -29,6 +29,7 @@ enum
 {
   BLOCK_CHAPTERS_MODEL_ID = 0,
   BLOCK_CHAPTERS_MODEL_LABEL = GUCHARMAP_CHAPTERS_MODEL_COLUMN_LABEL,
+  BLOCK_CHAPTERS_MODEL_LABEL_ATTRS = _GUCHARMAP_CHAPTERS_MODEL_COLUMN_LABEL_ATTRS,
   BLOCK_CHAPTERS_MODEL_BLOCK,
   BLOCK_CHAPTERS_MODEL_UNICODE_BLOCK_PTR,
   BLOCK_CHAPTERS_MODEL_NUM_COLUMNS
@@ -62,9 +63,14 @@ gucharmap_block_chapters_model_init (GucharmapBlockChaptersModel *model)
   GType types[] = {
     G_TYPE_STRING,
     G_TYPE_STRING,
+    PANGO_TYPE_ATTR_LIST,
     G_TYPE_STRING,
     G_TYPE_POINTER
   };
+  PangoAttrList *attr_list;
+
+  attr_list = pango_attr_list_new ();
+  pango_attr_list_insert (attr_list, pango_attr_style_new (PANGO_STYLE_ITALIC));
 
   gtk_list_store_set_column_types (store, G_N_ELEMENTS (types), types);
 
@@ -72,9 +78,12 @@ gucharmap_block_chapters_model_init (GucharmapBlockChaptersModel *model)
   gtk_list_store_set (store, &iter,
                       BLOCK_CHAPTERS_MODEL_ID, "All",
                       BLOCK_CHAPTERS_MODEL_LABEL, _("All"), 
+                      BLOCK_CHAPTERS_MODEL_LABEL_ATTRS, attr_list,
                       BLOCK_CHAPTERS_MODEL_BLOCK, "",
                       BLOCK_CHAPTERS_MODEL_UNICODE_BLOCK_PTR, NULL, 
                       -1);
+
+  pango_attr_list_unref (attr_list);
 
   for (i = 0;  i < G_N_ELEMENTS (unicode_blocks); i++)
     {
@@ -88,6 +97,7 @@ gucharmap_block_chapters_model_init (GucharmapBlockChaptersModel *model)
       gtk_list_store_set (store, &iter,
                           BLOCK_CHAPTERS_MODEL_ID, block_name,
                           BLOCK_CHAPTERS_MODEL_LABEL, _(block_name),
+                          BLOCK_CHAPTERS_MODEL_LABEL_ATTRS, NULL,
                           BLOCK_CHAPTERS_MODEL_BLOCK, block_start,
                           BLOCK_CHAPTERS_MODEL_UNICODE_BLOCK_PTR, unicode_blocks + i,
                           -1);

@@ -27,6 +27,14 @@
 #include "gucharmap.h"
 #include "gucharmap-private.h"
 
+static gboolean
+is_special_script (const char *script)
+{
+  return g_str_equal (script, "Common") ||
+    g_str_equal (script, "Inherited") ||
+    g_str_equal (script, "Unknown");
+}
+
 static void
 gucharmap_script_chapters_model_init (GucharmapScriptChaptersModel *model)
 {
@@ -38,7 +46,12 @@ gucharmap_script_chapters_model_init (GucharmapScriptChaptersModel *model)
   GType types[] = {
     G_TYPE_STRING,
     G_TYPE_STRING,
+    PANGO_TYPE_ATTR_LIST,
   };
+  PangoAttrList *attr_list;
+
+  attr_list = pango_attr_list_new ();
+  pango_attr_list_insert (attr_list, pango_attr_style_new (PANGO_STYLE_ITALIC));
 
   gtk_list_store_set_column_types (store, G_N_ELEMENTS (types), types);
 
@@ -49,9 +62,12 @@ gucharmap_script_chapters_model_init (GucharmapScriptChaptersModel *model)
       gtk_list_store_set (store, &iter,
                           GUCHARMAP_CHAPTERS_MODEL_COLUMN_ID, unicode_scripts[i],
                           GUCHARMAP_CHAPTERS_MODEL_COLUMN_LABEL, _(unicode_scripts[i]),
+                          _GUCHARMAP_CHAPTERS_MODEL_COLUMN_LABEL_ATTRS,
+                                  is_special_script (unicode_scripts[i]) ? attr_list : NULL,
                           -1);
     }
   g_free (unicode_scripts);
+  pango_attr_list_unref (attr_list);
 
   chapters_model->priv->sort_column = GUCHARMAP_CHAPTERS_MODEL_COLUMN_LABEL;
 }

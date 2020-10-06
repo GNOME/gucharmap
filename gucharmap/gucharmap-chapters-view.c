@@ -66,6 +66,7 @@ gucharmap_chapters_view_init (GucharmapChaptersView *view)
   column = priv->column = gtk_tree_view_column_new ();
   gtk_tree_view_column_pack_start (column, cell, FALSE);
   gtk_tree_view_column_add_attribute (column, cell, "text", GUCHARMAP_CHAPTERS_MODEL_COLUMN_LABEL);
+  gtk_tree_view_column_add_attribute (column, cell, "attributes", _GUCHARMAP_CHAPTERS_MODEL_COLUMN_LABEL_ATTRS);
   gtk_tree_view_append_column (tree_view, column);
 
   selection = gtk_tree_view_get_selection (tree_view);

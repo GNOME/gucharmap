@@ -28,6 +28,7 @@ G_GNUC_INTERNAL void _gucharmap_intl_ensure_initialized (void);
 
 G_GNUC_INTERNAL gboolean _gucharmap_unicode_has_nameslist_entry (gunichar uc);
 
+#define _GUCHARMAP_CHAPTERS_MODEL_COLUMN_LABEL_ATTRS (2)
 
 struct _GucharmapChaptersModelPrivate {
   GucharmapCodepointList *book_list;
