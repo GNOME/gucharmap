@@ -22,8 +22,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gucharmap/issues\n"
-"POT-Creation-Date: 2020-06-28 08:04+0000\n"
-"PO-Revision-Date: 2020-08-30 22:00+0900\n"
+"POT-Creation-Date: 2020-10-11 23:06+0000\n"
+"PO-Revision-Date: 2020-10-19 01:39+0900\n"
 "Last-Translator: DaeHyun Sung <sungdh86+git@gmail.com>\n"
 "Language-Team: GNOME Korea <gnome-kr@googlegroups.com>\n"
 "Language: ko\n"
@@ -103,11 +103,11 @@ msgstr "그놈"
 msgid "gucharmap"
 msgstr "gucharmap"
 
-#: gucharmap/gucharmap-block-chapters-model.c:53
+#: gucharmap/gucharmap-block-chapters-model.c:80
 msgid "All"
 msgstr "모두"
 
-#: gucharmap/gucharmap-block-chapters-model.c:138
+#: gucharmap/gucharmap-block-chapters-model.c:194
 msgid "Unicode Block"
 msgstr "유니코드 범위"
 
@@ -289,7 +289,7 @@ msgstr "문자 표(_R)"
 msgid "Character _Details"
 msgstr "문자 자세히(_D)"
 
-#: gucharmap/gucharmap-chartable-accessible.c:798
+#: gucharmap/gucharmap-chartable-accessible.c:801
 msgid "Character Table"
 msgstr "문자 표"
 
@@ -401,15 +401,15 @@ msgstr "글꼴 계열"
 msgid "Font Size"
 msgstr "글꼴 크기"
 
-#: gucharmap/gucharmap-script-chapters-model.c:134
+#: gucharmap/gucharmap-script-chapters-model.c:149
 msgid "Script"
 msgstr "문자 범위"
 
-#. Unicode assigns "Common" as the script name for any character not
+#. Unicode assigns "Unknown" as the script name for any character not
 #. * specifically listed in Scripts.txt
-#: gucharmap/gucharmap-script-codepoint-list.c:465 gucharmap/unicode-i18n.h:339
-msgid "Common"
-msgstr "일반"
+#: gucharmap/gucharmap-script-codepoint-list.c:465
+msgid "Unknown"
+msgstr "알 수 없음"
 
 #: gucharmap/gucharmap-search-dialog.c:562
 msgid "Information"
@@ -2050,6 +2050,10 @@ msgstr "점자"
 #: gucharmap/unicode-i18n.h:332
 msgid "Canadian Aboriginal"
 msgstr "캐나다 원주민 문자"
+
+#: gucharmap/unicode-i18n.h:339
+msgid "Common"
+msgstr "일반"
 
 #: gucharmap/unicode-i18n.h:342
 msgid "Cypriot"
