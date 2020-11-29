@@ -648,31 +648,6 @@ create_glyph_surface (GucharmapChartable *chartable,
   return surface;
 }
 
-static GdkPixbuf *
-create_glyph_pixbuf (GucharmapChartable *chartable,
-                     gunichar wc,
-                     double font_factor,
-                     gboolean draw_font_family,
-                     int *zoom_surface_width,
-                     int *zoom_surface_height)
-{
-  cairo_surface_t *surface;
-  int width, height;
-  GdkPixbuf *pixbuf;
-
-  surface = create_glyph_surface (chartable, wc, font_factor, draw_font_family,
-                                  &width, &height);
-  pixbuf = gdk_pixbuf_get_from_surface (surface, 0, 0, width, height);
-  cairo_surface_destroy (surface);
-
-  if (zoom_surface_width)
-    *zoom_surface_width = width;
-  if (zoom_surface_height)
-    *zoom_surface_height = height;
-
-  return pixbuf;
-}
-
 /* places the zoom window toward the inside of the coordinates */
 static void
 place_zoom_window (GucharmapChartable *chartable, gint x_root, gint y_root)
@@ -745,7 +720,7 @@ update_zoom_window (GucharmapChartable *chartable)
   GtkWidget *widget = GTK_WIDGET (chartable);
   double scale;
   int font_size_px, screen_height;
-  GdkPixbuf *pixbuf;
+  cairo_surface_t *surface;
 
   if (priv->zoom_window == NULL)
     return;
@@ -756,15 +731,14 @@ update_zoom_window (GucharmapChartable *chartable)
   scale = (0.3 * screen_height) / (FACTOR_WIDTH * font_size_px);
   scale = CLAMP (scale, 1.0, 12.0);
 
-  pixbuf = create_glyph_pixbuf (chartable,
-                                gucharmap_chartable_get_active_character (chartable),
-                                scale,
-                                TRUE,
-                                &priv->zoom_image_width,
-                                &priv->zoom_image_height);
-  gtk_image_set_from_pixbuf (GTK_IMAGE (gtk_bin_get_child (GTK_BIN (priv->zoom_window))),
-                             pixbuf);
-  g_object_unref (pixbuf);
+  surface = create_glyph_surface (chartable,
+                                  gucharmap_chartable_get_active_character (chartable),
+                                  scale, TRUE,
+                                  &priv->zoom_image_width,
+                                  &priv->zoom_image_height);
+  gtk_image_set_from_surface (GTK_IMAGE (gtk_bin_get_child (GTK_BIN (priv->zoom_window))),
+                              surface);
+  cairo_surface_destroy (surface);
 
   gtk_window_resize (GTK_WINDOW (priv->zoom_window),
                      priv->zoom_image_width, priv->zoom_image_height);
