@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gucharmap/issues\n"
-"POT-Creation-Date: 2020-06-28 08:04+0000\n"
-"PO-Revision-Date: 2020-07-18 18:34+0300\n"
+"POT-Creation-Date: 2020-11-29 14:20+0000\n"
+"PO-Revision-Date: 2021-01-07 15:53+0200\n"
 "Last-Translator: Florentina Mușat <florentina.musat.28@gmail.com>\n"
 "Language-Team: Romanian Gnome Team <gnomero-list@lists.sourceforge.net>\n"
 "Language: ro\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2);;\n"
-"X-Generator: Poedit 2.3.1\n"
+"X-Generator: Poedit 2.4.2\n"
 
 #. VERSION=@VERSION@
 #: data/gucharmap.desktop.in.in:4 data/gucharmap.metainfo.xml.in:37
@@ -93,11 +93,11 @@ msgstr "GNOME"
 msgid "gucharmap"
 msgstr "gucharmap"
 
-#: gucharmap/gucharmap-block-chapters-model.c:53
+#: gucharmap/gucharmap-block-chapters-model.c:80
 msgid "All"
 msgstr "Toate"
 
-#: gucharmap/gucharmap-block-chapters-model.c:138
+#: gucharmap/gucharmap-block-chapters-model.c:194
 msgid "Unicode Block"
 msgstr "Bloc Unicode"
 
@@ -278,7 +278,7 @@ msgstr "Tabel ca_ractere"
 msgid "Character _Details"
 msgstr "_Detalii caracter"
 
-#: gucharmap/gucharmap-chartable-accessible.c:798
+#: gucharmap/gucharmap-chartable-accessible.c:801
 msgid "Character Table"
 msgstr "Tabel caractere"
 
@@ -390,15 +390,15 @@ msgstr "Familie font"
 msgid "Font Size"
 msgstr "Dimensiune font"
 
-#: gucharmap/gucharmap-script-chapters-model.c:134
+#: gucharmap/gucharmap-script-chapters-model.c:149
 msgid "Script"
 msgstr "Script"
 
-#. Unicode assigns "Common" as the script name for any character not
+#. Unicode assigns "Unknown" as the script name for any character not
 #. * specifically listed in Scripts.txt
-#: gucharmap/gucharmap-script-codepoint-list.c:465 gucharmap/unicode-i18n.h:339
-msgid "Common"
-msgstr "Comun"
+#: gucharmap/gucharmap-script-codepoint-list.c:465
+msgid "Unknown"
+msgstr "Necunoscut"
 
 #: gucharmap/gucharmap-search-dialog.c:562
 msgid "Information"
@@ -645,7 +645,8 @@ msgstr "Bazat pe baza de date de caracter Unicode 13.0.0"
 msgid "translator-credits"
 msgstr ""
 "Dan Damian <dand@gnome.ro>\n"
-"Florentina Mușat <florentina [dot] musat [dot] 28 [at] gmail [dot] com>, 2020"
+"Florentina Mușat <florentina [dot] musat [dot] 28 [at] gmail [dot] com>, "
+"2020-2021"
 
 #: gucharmap/gucharmap-window.c:556
 msgid "Next Script"
@@ -1992,6 +1993,10 @@ msgstr "Braille"
 #: gucharmap/unicode-i18n.h:332
 msgid "Canadian Aboriginal"
 msgstr "Aborigen canadian"
+
+#: gucharmap/unicode-i18n.h:339
+msgid "Common"
+msgstr "Comun"
 
 #: gucharmap/unicode-i18n.h:342
 msgid "Cypriot"
