@@ -143,7 +143,6 @@ compiler_flags_common = [
   '-Waggregate-return',
   '-Wall',
   '-Wcast-align',
-  '-Wdeclaration-after-statement',
   '-Werror=implicit-function-declaration',
   '-Wextra',
   '-Wformat-signedness',
