@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2004 Noah Levitt
- * Copyright (c) 2007, 2008 Christian Persch
- * Copyright (c) 2016 DaeHyun Sung
+ * Copyright (c) 2007, 2008, 2021 Christian Persch
+ * Copyright (c) 2016, 2020 DaeHyun Sung
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -340,7 +340,7 @@ gucharmap_charmap_set_font_desc_internal (GucharmapCharmap *charmap,
 }
 
 static void
-insert_vanilla_detail (GucharmapCharmap *charmap, 
+insert_vanilla_detail (GucharmapCharmap *charmap,
                        GtkTextBuffer *buffer,
                        GtkTextIter *iter,
                        const gchar *name,
@@ -351,6 +351,166 @@ insert_vanilla_detail (GucharmapCharmap *charmap,
   gtk_text_buffer_insert_with_tags_by_name (buffer, iter, value, -1,
                                             "detail-value", NULL);
   gtk_text_buffer_insert (buffer, iter, "\n", -1);
+}
+
+/** add Korean Hanja properties
+ * check the link: UAX#38: Unicode Han Database - kHangul
+ * https://www.unicode.org/reports/tr38/#kHangul
+ * */
+static void
+insert_hanja_prop_detail (GucharmapCharmap *charmap,
+                          GtkTextBuffer *buffer,
+                          GtkTextIter *iter,
+                          const gchar *name,
+                          const gchar *value)
+{
+  gtk_text_buffer_insert (buffer, iter, name, -1);
+  gtk_text_buffer_insert (buffer, iter, " ", -1);
+
+  GError *err = NULL;
+  GRegex *regex = g_regex_new ("[\\w:\\w*]", 0, 0, &err);
+  g_assert_no_error (err);
+
+  GMatchInfo *match_info = NULL;
+  g_regex_match (regex, value, 0, &match_info);
+  gboolean matches = g_match_info_matches (match_info);
+
+  g_regex_unref (regex);
+  g_match_info_free (match_info);
+
+  if (!matches) {
+    gtk_text_buffer_insert_with_tags_by_name (buffer, iter, value, -1,
+                                              "detail-value", NULL);
+    gtk_text_buffer_insert (buffer, iter, "\n", -1);
+    return;
+  }
+  gtk_text_buffer_insert (buffer, iter, "\n", -1);
+
+  // 0: KS X 1001
+  // 1: KS X 1002
+  // E: 한문 교육용 기초 한자 (漢文敎育用基礎漢字)
+  // N: 인명용 한자 (人名用漢字)
+  // X: indicates that a K-source was formerly at that code point but was later removed.
+  GList* ksx1001List = NULL;
+  GList* ksx1002List = NULL;
+  GList* eList = NULL;
+  GList* nList = NULL;
+  GList* xList = NULL;
+
+  char **splitHanja = g_strsplit_set(value, " ", -1);
+  for (char **ptr = splitHanja; *ptr != NULL; ++ptr) {
+    char **splitItem = g_strsplit_set(*ptr, ":", -1);
+    if (splitItem == NULL)
+      goto next;
+    char *hanjaVal = splitItem[0];
+    if (hanjaVal == NULL)
+      goto next;
+    char *hanjaKeys = splitItem[1];
+    if (hanjaKeys == NULL)
+      goto next;
+
+    for (char *c = hanjaKeys; *c != '\0'; ++c) {
+      if (*c == '0') {
+        ksx1001List = g_list_prepend(ksx1001List, g_strdup(hanjaVal));
+      } else if (*c == '1') {
+        ksx1002List = g_list_prepend(ksx1002List, g_strdup(hanjaVal));
+      } else if (*c == 'E') {
+        eList = g_list_prepend(eList, g_strdup(hanjaVal));
+      } else if (*c == 'N') {
+        nList = g_list_prepend(nList, g_strdup(hanjaVal));
+      } else if (*c == 'X') {
+        xList = g_list_prepend(xList, g_strdup(hanjaVal));
+      }
+    }
+
+  next:
+    g_strfreev(splitItem);
+  }
+  g_strfreev(splitHanja);
+
+  if (ksx1001List != NULL) {
+    ksx1001List = g_list_reverse(ksx1001List);
+
+    gtk_text_buffer_insert (buffer, iter, "  ", -1);
+    /* Translators: this is the name of a korean standard */
+    gtk_text_buffer_insert (buffer, iter, _("KS X 1001"), -1);
+    gtk_text_buffer_insert (buffer, iter, ": ", -1);
+    for (GList *node = ksx1001List; node; node = node->next) {
+      gtk_text_buffer_insert_with_tags_by_name (buffer, iter,  node->data, -1,
+                                                "detail-value", NULL);
+      if (node->next != NULL)
+        gtk_text_buffer_insert (buffer, iter, " ", -1);
+    }
+    gtk_text_buffer_insert (buffer, iter, "\n", -1);
+  }
+
+  if (ksx1002List != NULL) {
+    ksx1002List = g_list_reverse(ksx1002List);
+
+    gtk_text_buffer_insert (buffer, iter, "  ", -1);
+    /* Translators: this is the name of a korean standard */
+    gtk_text_buffer_insert (buffer, iter, _("KS X 1002"), -1);
+    gtk_text_buffer_insert (buffer, iter, ": ", -1);
+    for (GList *node = ksx1002List; node; node = node->next) {
+      gtk_text_buffer_insert_with_tags_by_name (buffer, iter, node->data, -1,
+                                                "detail-value", NULL);
+      if (node->next != NULL)
+        gtk_text_buffer_insert (buffer, iter, " ", -1);
+    }
+    gtk_text_buffer_insert (buffer, iter, "\n", -1);
+  }
+
+  if (eList != NULL) {
+    eList = g_list_reverse(eList);
+
+    gtk_text_buffer_insert (buffer, iter, "  ", -1);
+    gtk_text_buffer_insert (buffer, iter, _("Korean Education Hanja"), -1);
+    gtk_text_buffer_insert (buffer, iter, ": ", -1);
+    for (GList *node = eList; node; node = node->next) {
+      gtk_text_buffer_insert_with_tags_by_name (buffer, iter, node->data, -1,
+                                                "detail-value", NULL);
+      if (node->next != NULL)
+        gtk_text_buffer_insert (buffer, iter, " ", -1);
+    }
+    gtk_text_buffer_insert (buffer, iter, "\n", -1);
+  }
+
+  if (nList != NULL) {
+    nList = g_list_reverse(nList);
+
+    gtk_text_buffer_insert (buffer, iter, "  ", -1);
+    gtk_text_buffer_insert (buffer, iter,
+                            _("Korean Hanja for Use in Personal Names"), -1);
+    gtk_text_buffer_insert (buffer, iter, ": ", -1);
+    for (GList *node = nList; node; node = node->next) {
+      gtk_text_buffer_insert_with_tags_by_name (buffer, iter, node->data, -1,
+                                                "detail-value", NULL);
+      if (node->next != NULL)
+        gtk_text_buffer_insert (buffer, iter, " ", -1);
+    }
+    gtk_text_buffer_insert (buffer, iter, "\n", -1);
+  }
+
+  if (xList != NULL) {
+    xList = g_list_reverse(xList);
+
+    gtk_text_buffer_insert (buffer, iter, "  ", -1);
+    gtk_text_buffer_insert (buffer, iter, _("later removed at the code point"), -1);
+    gtk_text_buffer_insert (buffer, iter, ": ", -1);
+    for (GList *node = xList; node; node = node->next) {
+      gtk_text_buffer_insert_with_tags_by_name (buffer, iter, node->data, -1,
+                                                "detail-value", NULL);
+      if (node->next != NULL)
+        gtk_text_buffer_insert (buffer, iter, " ", -1);
+    }
+    gtk_text_buffer_insert (buffer, iter, "\n", -1);
+  }
+
+  g_list_free_full(ksx1001List, (GDestroyNotify)g_free);
+  g_list_free_full(ksx1002List, (GDestroyNotify)g_free);
+  g_list_free_full(eList, (GDestroyNotify)g_free);
+  g_list_free_full(nList, (GDestroyNotify)g_free);
+  g_list_free_full(xList, (GDestroyNotify)g_free);
 }
 
 /* makes a nice string and makes it a link to the character */
@@ -898,7 +1058,7 @@ set_details (GucharmapCharmap *charmap,
     
       csp = gucharmap_get_unicode_kHangul (uc);
       if (csp)
-        insert_vanilla_detail (charmap, buffer, &iter,
+        insert_hanja_prop_detail (charmap, buffer, &iter,
                                _("Korean Pronunciation:"), csp);
       
       csp = gucharmap_get_unicode_kVietnamese (uc);
