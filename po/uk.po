@@ -5,13 +5,13 @@
 # Maxim Dzumanenko <dziumanenko@gmail.com>, 2003-2010.
 # wanderlust <wanderlust@ukr.net>, 2009.
 # Daniel Korostil <ted.korostiled@gmail.com>, 2013, 2014, 2015.
-# Yuri Chornoivan <yurchor@ukr.net>, 2020.
+# Yuri Chornoivan <yurchor@ukr.net>, 2020, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gucharmap/issues\n"
-"POT-Creation-Date: 2020-09-12 20:19+0000\n"
-"PO-Revision-Date: 2020-09-17 13:59+0300\n"
+"POT-Creation-Date: 2021-01-11 22:06+0000\n"
+"PO-Revision-Date: 2021-01-12 08:47+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -95,188 +95,211 @@ msgstr "GNOME"
 msgid "gucharmap"
 msgstr "gucharmap"
 
-#: gucharmap/gucharmap-block-chapters-model.c:53
+#: gucharmap/gucharmap-block-chapters-model.c:80
 msgid "All"
 msgstr "Всі"
 
-#: gucharmap/gucharmap-block-chapters-model.c:138
+#: gucharmap/gucharmap-block-chapters-model.c:194
 msgid "Unicode Block"
 msgstr "Блок Юнікоду"
 
-#: gucharmap/gucharmap-charmap.c:446
+#. Translators: this is the name of a korean standard
+#: gucharmap/gucharmap-charmap.c:436
+msgid "KS X 1001"
+msgstr "KS X 1001"
+
+#. Translators: this is the name of a korean standard
+#: gucharmap/gucharmap-charmap.c:452
+msgid "KS X 1002"
+msgstr "KS X 1002"
+
+#: gucharmap/gucharmap-charmap.c:467
+#| msgid "Korean Pronunciation:"
+msgid "Korean Education Hanja"
+msgstr "Корейська освітня ханча"
+
+#: gucharmap/gucharmap-charmap.c:483
+msgid "Korean Hanja for Use in Personal Names"
+msgstr "Корейська ханча для використання у особистих іменах"
+
+#: gucharmap/gucharmap-charmap.c:498
+msgid "later removed at the code point"
+msgstr "пізніше вилучено у блоці кодування"
+
+#: gucharmap/gucharmap-charmap.c:606
 msgid "Font variant of"
 msgstr "Варіант шрифту"
 
-#: gucharmap/gucharmap-charmap.c:447
+#: gucharmap/gucharmap-charmap.c:607
 msgid "No-break version of"
 msgstr "Версія без розриву"
 
-#: gucharmap/gucharmap-charmap.c:448
+#: gucharmap/gucharmap-charmap.c:608
 msgid "Initial presentation form of"
 msgstr "Форма початкового представлення"
 
-#: gucharmap/gucharmap-charmap.c:449
+#: gucharmap/gucharmap-charmap.c:609
 msgid "Medial presentation form of"
 msgstr "Форма проміжного представлення"
 
-#: gucharmap/gucharmap-charmap.c:450
+#: gucharmap/gucharmap-charmap.c:610
 msgid "Final presentation form of"
 msgstr "Форма завершального представлення"
 
-#: gucharmap/gucharmap-charmap.c:451
+#: gucharmap/gucharmap-charmap.c:611
 msgid "Isolated presentation form of"
 msgstr "Форма ізольованого представлення"
 
-#: gucharmap/gucharmap-charmap.c:452
+#: gucharmap/gucharmap-charmap.c:612
 msgid "Encircled form of"
 msgstr "Версія у колі"
 
-#: gucharmap/gucharmap-charmap.c:453
+#: gucharmap/gucharmap-charmap.c:613
 msgid "Superscript form of"
 msgstr "Форма верхнього індексу"
 
-#: gucharmap/gucharmap-charmap.c:454
+#: gucharmap/gucharmap-charmap.c:614
 msgid "Subscript form of"
 msgstr "Форма нижнього індексу"
 
-#: gucharmap/gucharmap-charmap.c:455
+#: gucharmap/gucharmap-charmap.c:615
 msgid "Vertical layout presentation form of"
 msgstr "Форма представлення у вертикальному компонуванні"
 
-#: gucharmap/gucharmap-charmap.c:456
+#: gucharmap/gucharmap-charmap.c:616
 msgid "Wide compatibility character of"
 msgstr "Широкий сумісний символ"
 
-#: gucharmap/gucharmap-charmap.c:457
+#: gucharmap/gucharmap-charmap.c:617
 msgid "Narrow compatibility character of"
 msgstr "Вузький сумісний символ"
 
-#: gucharmap/gucharmap-charmap.c:458
+#: gucharmap/gucharmap-charmap.c:618
 msgid "Small variant form of"
 msgstr "Форма малого варіанта"
 
-#: gucharmap/gucharmap-charmap.c:459
+#: gucharmap/gucharmap-charmap.c:619
 msgid "CJK squared font variant of"
 msgstr "Варіант квадратного ієрогліфічного шрифту"
 
-#: gucharmap/gucharmap-charmap.c:460
+#: gucharmap/gucharmap-charmap.c:620
 msgid "Vulgar fraction form of"
 msgstr "Форма спрощеної частини"
 
-#: gucharmap/gucharmap-charmap.c:461
+#: gucharmap/gucharmap-charmap.c:621
 msgid "Unspecified compatibility character of"
 msgstr "Невказаний символ сумісності"
 
-#: gucharmap/gucharmap-charmap.c:681
+#: gucharmap/gucharmap-charmap.c:841
 msgid "Compatibility decomposition:"
 msgstr "Сумісний розклад:"
 
-#: gucharmap/gucharmap-charmap.c:682
+#: gucharmap/gucharmap-charmap.c:842
 msgid "Canonical decomposition:"
 msgstr "Канонічний розклад:"
 
-#: gucharmap/gucharmap-charmap.c:724 gucharmap/gucharmap-chartable.c:581
+#: gucharmap/gucharmap-charmap.c:884 gucharmap/gucharmap-chartable.c:581
 msgid "[not a printable character]"
 msgstr "[недрукований символ]"
 
-#: gucharmap/gucharmap-charmap.c:738
+#: gucharmap/gucharmap-charmap.c:898
 msgid "General Character Properties"
 msgstr "Загальні властивості символу"
 
-#: gucharmap/gucharmap-charmap.c:744
+#: gucharmap/gucharmap-charmap.c:904
 msgid "In Unicode since:"
 msgstr "У Unicode з:"
 
 #. character category
-#: gucharmap/gucharmap-charmap.c:748
+#: gucharmap/gucharmap-charmap.c:908
 msgid "Unicode category:"
 msgstr "Категорія унікоду:"
 
-#: gucharmap/gucharmap-charmap.c:759
+#: gucharmap/gucharmap-charmap.c:919
 msgid "Various Useful Representations"
 msgstr "Різноманітні корисні представлення"
 
-#: gucharmap/gucharmap-charmap.c:769
+#: gucharmap/gucharmap-charmap.c:929
 msgid "UTF-8:"
 msgstr "UTF-8:"
 
-#: gucharmap/gucharmap-charmap.c:777
+#: gucharmap/gucharmap-charmap.c:937
 msgid "UTF-16:"
 msgstr "UTF-16:"
 
-#: gucharmap/gucharmap-charmap.c:788
+#: gucharmap/gucharmap-charmap.c:948
 msgid "C octal escaped UTF-8:"
 msgstr "UTF-8 у вісімковій формі на мові C:"
 
-#: gucharmap/gucharmap-charmap.c:798
+#: gucharmap/gucharmap-charmap.c:958
 msgid "XML decimal entity:"
 msgstr "Десяткове представлення XML:"
 
-#: gucharmap/gucharmap-charmap.c:809
+#: gucharmap/gucharmap-charmap.c:969
 msgid "Annotations and Cross References"
 msgstr "Примітки та посилання"
 
-#: gucharmap/gucharmap-charmap.c:816
+#: gucharmap/gucharmap-charmap.c:976
 msgid "Alias names:"
 msgstr "Назви псевдонімів:"
 
-#: gucharmap/gucharmap-charmap.c:825
+#: gucharmap/gucharmap-charmap.c:985
 msgid "Notes:"
 msgstr "Нотатки:"
 
-#: gucharmap/gucharmap-charmap.c:834
+#: gucharmap/gucharmap-charmap.c:994
 msgid "See also:"
 msgstr "Дивіться також:"
 
-#: gucharmap/gucharmap-charmap.c:843
+#: gucharmap/gucharmap-charmap.c:1003
 msgid "Approximate equivalents:"
 msgstr "Приблизні еквіваленти:"
 
-#: gucharmap/gucharmap-charmap.c:852
+#: gucharmap/gucharmap-charmap.c:1012
 msgid "Equivalents:"
 msgstr "Еквіваленти:"
 
-#: gucharmap/gucharmap-charmap.c:867
+#: gucharmap/gucharmap-charmap.c:1027
 msgid "CJK Ideograph Information"
 msgstr "Ідеографічна інформація CJK"
 
-#: gucharmap/gucharmap-charmap.c:872
+#: gucharmap/gucharmap-charmap.c:1032
 msgid "Definition in English:"
 msgstr "Визначення англійською:"
 
-#: gucharmap/gucharmap-charmap.c:877
+#: gucharmap/gucharmap-charmap.c:1037
 msgid "Mandarin Pronunciation:"
 msgstr "Мандаринська вимова:"
 
-#: gucharmap/gucharmap-charmap.c:882
+#: gucharmap/gucharmap-charmap.c:1042
 msgid "Cantonese Pronunciation:"
 msgstr "Кантонська вимова:"
 
-#: gucharmap/gucharmap-charmap.c:887
+#: gucharmap/gucharmap-charmap.c:1047
 msgid "Japanese On Pronunciation:"
 msgstr "Японська вимова Он:"
 
-#: gucharmap/gucharmap-charmap.c:892
+#: gucharmap/gucharmap-charmap.c:1052
 msgid "Japanese Kun Pronunciation:"
 msgstr "Японська вимова Кун:"
 
-#: gucharmap/gucharmap-charmap.c:897
+#: gucharmap/gucharmap-charmap.c:1057
 msgid "Tang Pronunciation:"
 msgstr "Вимова Танґ:"
 
-#: gucharmap/gucharmap-charmap.c:902
+#: gucharmap/gucharmap-charmap.c:1062
 msgid "Korean Pronunciation:"
 msgstr "Корейська вимова:"
 
-#: gucharmap/gucharmap-charmap.c:907
+#: gucharmap/gucharmap-charmap.c:1067
 msgid "Vietnamese Pronunciation:"
 msgstr "В'єтнамська вимова:"
 
-#: gucharmap/gucharmap-charmap.c:1289
+#: gucharmap/gucharmap-charmap.c:1449
 msgid "Characte_r Table"
 msgstr "Таблиця _символів"
 
-#: gucharmap/gucharmap-charmap.c:1336
+#: gucharmap/gucharmap-charmap.c:1496
 msgid "Character _Details"
 msgstr "Под_робиці про символи"
 
@@ -284,15 +307,15 @@ msgstr "Под_робиці про символи"
 msgid "Character Table"
 msgstr "Таблиця символів"
 
-#: gucharmap/gucharmap-chartable.c:1290
+#: gucharmap/gucharmap-chartable.c:1264
 msgid "Unknown character, unable to identify."
 msgstr "Невідомий символ, неможливо ідентифікувати."
 
-#: gucharmap/gucharmap-chartable.c:1292 gucharmap/gucharmap-search-dialog.c:582
+#: gucharmap/gucharmap-chartable.c:1266 gucharmap/gucharmap-search-dialog.c:582
 msgid "Not found."
 msgstr "Не знайдено."
 
-#: gucharmap/gucharmap-chartable.c:1295
+#: gucharmap/gucharmap-chartable.c:1269
 msgid "Character found."
 msgstr "Символ існує."
 
@@ -392,7 +415,7 @@ msgstr "Гарнітура"
 msgid "Font Size"
 msgstr "Розмір шрифту"
 
-#: gucharmap/gucharmap-script-chapters-model.c:134
+#: gucharmap/gucharmap-script-chapters-model.c:149
 msgid "Script"
 msgstr "Алфавіт"
 
