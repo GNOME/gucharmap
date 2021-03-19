@@ -264,6 +264,12 @@ if get_option('docs') and get_option('charmap')
   subdir('help')
 endif
 
+# Dist
+
+meson.add_dist_script(
+  find_program('meson_changelog.sh'),
+)
+
 # Simple compat Makefile
 
 makefile_conf = configuration_data()
