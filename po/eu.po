@@ -5,14 +5,14 @@
 # Hizkuntza Politikarako Sailburuordetza <hizkpol@ej-gv.es>, 2005.
 # Iñaki Larrañaga Murgoitio <dooteo@zundan.com>, 2006, 2008, 2009, 2010, 2011.
 # Iñaki Larrañaga Murgoitio <dooteo@zundan.com>, 2012, 2013, 2014, 2015, 2017.
-# Asier Sarasua Garmendia <asier.sarasua@gmail.com>, 2019.
+# Asier Sarasua Garmendia <asiersarasua@ni.eus>, 2019, 2021.
 #
 msgid ""
 msgstr "Project-Id-Version: gucharmap master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gucharmap/issues\n"
-"POT-Creation-Date: 2019-09-20 19:13+0000\n"
-"PO-Revision-Date: 2019-11-04 10:00+0100\n"
-"Last-Translator: Asier Sarasua Garmendia <asier.sarasua@gmail.com>\n"
+"POT-Creation-Date: 2020-06-28 12:59+0000\n"
+"PO-Revision-Date: 2021-03-20 10:00+0100\n"
+"Last-Translator: Asier Sarasua Garmendia <asiersarasua@ni.eus>\n"
 "Language-Team: Basque <librezale@librezale.eus>\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
@@ -23,7 +23,7 @@ msgstr "Project-Id-Version: gucharmap master\n"
 
 #. VERSION=@VERSION@
 #: data/gucharmap.desktop.in.in:4 data/gucharmap.metainfo.xml.in:37
-#: gucharmap/gucharmap-window.c:768 gucharmap/main.c:329
+#: gucharmap/gucharmap-window.c:768 gucharmap/main.c:333
 msgid "Character Map"
 msgstr "Karaktere-mapa"
 
@@ -608,17 +608,17 @@ msgid ""
 "org/copyright.html"
 msgstr "Gucharmap-ekin batera Unicode Copyright-aren kopia bat ere jaso beharko zenuke; horrela ez bada, Unicode-ren web gunean aurki dezakezu: https://www.unicode.org/copyright.html"
 
-#: gucharmap/gucharmap-window.c:455 gucharmap/main.c:101
+#: gucharmap/gucharmap-window.c:455 gucharmap/main.c:105
 msgid "GNOME Character Map"
 msgstr "GNOMEren karaktere-mapa"
 
 #: gucharmap/gucharmap-window.c:457
-msgid "Based on the Unicode Character Database 12.0.0"
-msgstr "Unicode karaktereen datu-basearen 12.0.0 bertsioan oinarritua"
+msgid "Based on the Unicode Character Database 12.1.0"
+msgstr "Unicode karaktereen datu-basearen 12.1.0 bertsioan oinarritua"
 
 #: gucharmap/gucharmap-window.c:467
 msgid "translator-credits"
-msgstr "Asier Sarasua Garmendia <asier.sarasua@gmail.com>"
+msgstr "translator-credits"
 
 #: gucharmap/gucharmap-window.c:556
 msgid "Next Script"
@@ -645,24 +645,24 @@ msgstr "_Kopiatzeko testua:"
 msgid "Copy to the clipboard."
 msgstr "Kopiatu arbelean."
 
-#: gucharmap/main.c:249
+#: gucharmap/main.c:253
 msgid "Page _Setup"
 msgstr "Orriaren _konfigurazioa"
 
 #. g_menu_append (G_MENU (model), _("Print Preview"), "win.print-preview");
-#: gucharmap/main.c:251
+#: gucharmap/main.c:255
 msgid "_Print"
 msgstr "I_nprimatu"
 
-#: gucharmap/main.c:300
+#: gucharmap/main.c:304
 msgid "Font to start with; ex: 'Serif 27'"
 msgstr "Hasteko letra-tipoa; adib.: 'Serif 27'"
 
-#: gucharmap/main.c:300
+#: gucharmap/main.c:304
 msgid "FONT"
 msgstr "LETRA-TIPOA"
 
-#: gucharmap/main.c:306
+#: gucharmap/main.c:310
 msgid "[STRING…]"
 msgstr "[KATEA…]"
 
@@ -1509,15 +1509,15 @@ msgstr "Avestan"
 
 #: gucharmap/unicode-i18n.h:204 gucharmap/unicode-i18n.h:361
 msgid "Inscriptional Parthian"
-msgstr "Parthia-ko inskripzioak"
+msgstr "Parthiako inskripzioak"
 
 #: gucharmap/unicode-i18n.h:205 gucharmap/unicode-i18n.h:360
 msgid "Inscriptional Pahlavi"
-msgstr "Pahlavi-ko inskripzioak"
+msgstr "Pahlaviko inskripzioak"
 
 #: gucharmap/unicode-i18n.h:206 gucharmap/unicode-i18n.h:423
 msgid "Psalter Pahlavi"
-msgstr "Psalter Pahlavi"
+msgstr "Psalter Pahlavia"
 
 #: gucharmap/unicode-i18n.h:207 gucharmap/unicode-i18n.h:414
 msgid "Old Turkic"
@@ -1529,7 +1529,7 @@ msgstr "Hungariera zaharra"
 
 #: gucharmap/unicode-i18n.h:209 gucharmap/unicode-i18n.h:353
 msgid "Hanifi Rohingya"
-msgstr ""
+msgstr "Hanifi Rohingya"
 
 #: gucharmap/unicode-i18n.h:210
 msgid "Rumi Numeral Symbols"
@@ -1537,15 +1537,15 @@ msgstr "Rumi ikur numerikoak"
 
 #: gucharmap/unicode-i18n.h:211 gucharmap/unicode-i18n.h:412
 msgid "Old Sogdian"
-msgstr ""
+msgstr "Sogdiar zaharra"
 
 #: gucharmap/unicode-i18n.h:212 gucharmap/unicode-i18n.h:433
 msgid "Sogdian"
-msgstr ""
+msgstr "Sogdiarra"
 
 #: gucharmap/unicode-i18n.h:213 gucharmap/unicode-i18n.h:341
 msgid "Elymaic"
-msgstr ""
+msgstr "Elimaikoa"
 
 #: gucharmap/unicode-i18n.h:214 gucharmap/unicode-i18n.h:320
 msgid "Brahmi"
@@ -1573,7 +1573,7 @@ msgstr "Sharada"
 
 #: gucharmap/unicode-i18n.h:220
 msgid "Sinhala Archaic Numbers"
-msgstr "Sinhala-ren zenbaki arkaikoak"
+msgstr "Sinhalaren zenbaki arkaikoak"
 
 #: gucharmap/unicode-i18n.h:221 gucharmap/unicode-i18n.h:369
 msgid "Khojki"
@@ -1621,7 +1621,7 @@ msgstr "Ahom"
 
 #: gucharmap/unicode-i18n.h:232 gucharmap/unicode-i18n.h:337
 msgid "Dogra"
-msgstr ""
+msgstr "Dogra"
 
 #: gucharmap/unicode-i18n.h:233 gucharmap/unicode-i18n.h:456
 msgid "Warang Citi"
@@ -1657,11 +1657,11 @@ msgstr "Masaram Gondi.a"
 
 #: gucharmap/unicode-i18n.h:241 gucharmap/unicode-i18n.h:349
 msgid "Gunjala Gondi"
-msgstr ""
+msgstr "Gunjala Gondia"
 
 #: gucharmap/unicode-i18n.h:242 gucharmap/unicode-i18n.h:381
 msgid "Makasar"
-msgstr ""
+msgstr "Makasara"
 
 #: gucharmap/unicode-i18n.h:243
 msgid "Tamil Supplement"
@@ -1685,7 +1685,7 @@ msgstr "Hieroglifiko egiptoarra"
 
 #: gucharmap/unicode-i18n.h:248
 msgid "Egyptian Hieroglyph Format Controls"
-msgstr ""
+msgstr "Hieroglikiko egiptoarraren formatu-kontrolak"
 
 #: gucharmap/unicode-i18n.h:249 gucharmap/unicode-i18n.h:309
 msgid "Anatolian Hieroglyphs"
@@ -1709,7 +1709,7 @@ msgstr "Pahawh Hmong-a"
 
 #: gucharmap/unicode-i18n.h:254 gucharmap/unicode-i18n.h:387
 msgid "Medefaidrin"
-msgstr ""
+msgstr "Medefaidrina"
 
 #: gucharmap/unicode-i18n.h:255 gucharmap/unicode-i18n.h:392
 msgid "Miao"
@@ -1733,11 +1733,11 @@ msgstr "Kana-ren osagarria"
 
 #: gucharmap/unicode-i18n.h:260
 msgid "Kana Extended-A"
-msgstr ""
+msgstr "Kana hedatua A"
 
 #: gucharmap/unicode-i18n.h:261
 msgid "Small Kana Extension"
-msgstr ""
+msgstr "Kana hedapen txikia"
 
 #: gucharmap/unicode-i18n.h:262 gucharmap/unicode-i18n.h:403
 msgid "Nushu"
@@ -1761,11 +1761,11 @@ msgstr "Musika-ikurrak"
 
 #: gucharmap/unicode-i18n.h:267
 msgid "Ancient Greek Musical Notation"
-msgstr "Greko musika-notazio zaharra"
+msgstr "Greziar zaharraren musika-notazioa"
 
 #: gucharmap/unicode-i18n.h:268
 msgid "Mayan Numerals"
-msgstr ""
+msgstr "Zenbaki maiak"
 
 #: gucharmap/unicode-i18n.h:269
 msgid "Tai Xuan Jing Symbols"
@@ -1789,27 +1789,27 @@ msgstr "Glagolitikoaren osagarria"
 
 #: gucharmap/unicode-i18n.h:274 gucharmap/unicode-i18n.h:404
 msgid "Nyiakeng Puachue Hmong"
-msgstr ""
+msgstr "Nyiakeng Puachue Hmonga"
 
 #: gucharmap/unicode-i18n.h:275 gucharmap/unicode-i18n.h:455
 msgid "Wancho"
-msgstr ""
+msgstr "Wanchoa"
 
 #: gucharmap/unicode-i18n.h:276 gucharmap/unicode-i18n.h:389
 msgid "Mende Kikakui"
-msgstr "Mende Kikakui-a"
+msgstr "Mende Kikakuia"
 
 #: gucharmap/unicode-i18n.h:277 gucharmap/unicode-i18n.h:307
 msgid "Adlam"
-msgstr "Adlam-a"
+msgstr "Adlama"
 
 #: gucharmap/unicode-i18n.h:278
 msgid "Indic Siyaq Numbers"
-msgstr ""
+msgstr "Indiako Siyaq zenbakiak"
 
 #: gucharmap/unicode-i18n.h:279
 msgid "Ottoman Siyaq Numbers"
-msgstr ""
+msgstr "Siyaq zenbaki otomandarrak"
 
 #: gucharmap/unicode-i18n.h:280
 msgid "Arabic Mathematical Alphabetic Symbols"
