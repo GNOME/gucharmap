@@ -21,20 +21,20 @@
 # Sebastien Bruggeman <seba@ulyssis.org>, 2004, 2005.
 # Wouter Bolsterlee <wbolster@gnome.org>, 2008–2011.
 # Hannie Dumoleyn <hannie@ubuntu-nl.org>, 2015.
-# Nathan Follens <nthn@unseen.is>, 2018-2021.
+# Nathan Follens <nfollens@gnome.org>, 2018-2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gucharmap/issues\n"
-"POT-Creation-Date: 2021-03-20 08:37+0000\n"
-"PO-Revision-Date: 2021-04-02 16:43+0200\n"
-"Last-Translator: Nathan Follens <nthn@unseen.is>\n"
+"POT-Creation-Date: 2021-08-14 20:06+0000\n"
+"PO-Revision-Date: 2021-09-07 21:52+0200\n"
+"Last-Translator: Nathan Follens <nfollens@gnome.org>\n"
 "Language-Team: Dutch <gnome-nl-list@gnome.org>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 # Dit komt in het gnome menu Hulpmiddelen
@@ -448,7 +448,7 @@ msgstr "Schrift"
 
 #. Unicode assigns "Unknown" as the script name for any character not
 #. * specifically listed in Scripts.txt
-#: gucharmap/gucharmap-script-codepoint-list.c:465
+#: gucharmap/gucharmap-script-codepoint-list.c:465 gucharmap/unicode-i18n.h:481
 msgid "Unknown"
 msgstr "Onbekend"
 
@@ -702,9 +702,9 @@ msgstr ""
 "Wouter Bolsterlee\n"
 "Sebastien Bruggeman\n"
 "Tino Meinen\n"
-"Nathan Follens\n"
+"Nathan Follens <nfollens@gnome.org>\n"
 "\n"
-"Meer info over Gnome-NL http://nl.gnome.org/"
+"Meer info over Gnome-NL https://nl.gnome.org/"
 
 #: gucharmap/gucharmap-window.c:556
 msgid "Next Script"
@@ -852,7 +852,7 @@ msgstr "Combinerende diakritische tekens"
 msgid "Greek and Coptic"
 msgstr "Grieks en Koptisch"
 
-#: gucharmap/unicode-i18n.h:14 gucharmap/unicode-i18n.h:343
+#: gucharmap/unicode-i18n.h:14 gucharmap/unicode-i18n.h:356
 msgid "Cyrillic"
 msgstr "Cyrillisch"
 
@@ -860,19 +860,19 @@ msgstr "Cyrillisch"
 msgid "Cyrillic Supplement"
 msgstr "Cyrillisch (aanvulling)"
 
-#: gucharmap/unicode-i18n.h:16 gucharmap/unicode-i18n.h:319
+#: gucharmap/unicode-i18n.h:16 gucharmap/unicode-i18n.h:331
 msgid "Armenian"
 msgstr "Armeens"
 
-#: gucharmap/unicode-i18n.h:17 gucharmap/unicode-i18n.h:366
+#: gucharmap/unicode-i18n.h:17 gucharmap/unicode-i18n.h:379
 msgid "Hebrew"
 msgstr "Hebreeuws"
 
-#: gucharmap/unicode-i18n.h:18 gucharmap/unicode-i18n.h:318
+#: gucharmap/unicode-i18n.h:18 gucharmap/unicode-i18n.h:330
 msgid "Arabic"
 msgstr "Arabisch"
 
-#: gucharmap/unicode-i18n.h:19 gucharmap/unicode-i18n.h:449
+#: gucharmap/unicode-i18n.h:19 gucharmap/unicode-i18n.h:463
 msgid "Syriac"
 msgstr "Syrisch"
 
@@ -880,19 +880,19 @@ msgstr "Syrisch"
 msgid "Arabic Supplement"
 msgstr "Arabisch (aanvulling)"
 
-#: gucharmap/unicode-i18n.h:21 gucharmap/unicode-i18n.h:459
+#: gucharmap/unicode-i18n.h:21 gucharmap/unicode-i18n.h:474
 msgid "Thaana"
 msgstr "Thaana"
 
-#: gucharmap/unicode-i18n.h:22 gucharmap/unicode-i18n.h:409
+#: gucharmap/unicode-i18n.h:22 gucharmap/unicode-i18n.h:422
 msgid "N'Ko"
 msgstr "N'Ko"
 
-#: gucharmap/unicode-i18n.h:23 gucharmap/unicode-i18n.h:437
+#: gucharmap/unicode-i18n.h:23 gucharmap/unicode-i18n.h:451
 msgid "Samaritan"
 msgstr "Samaritaans"
 
-#: gucharmap/unicode-i18n.h:24 gucharmap/unicode-i18n.h:394
+#: gucharmap/unicode-i18n.h:24 gucharmap/unicode-i18n.h:407
 msgid "Mandaic"
 msgstr "Mandaïsch"
 
@@ -901,1235 +901,1291 @@ msgid "Syriac Supplement"
 msgstr "Syrisch (aanvulling)"
 
 #: gucharmap/unicode-i18n.h:26
+msgid "Arabic Extended-B"
+msgstr "Arabisch (uitbreiding B)"
+
+#: gucharmap/unicode-i18n.h:27
 msgid "Arabic Extended-A"
 msgstr "Arabisch (uitbreiding A)"
 
-#: gucharmap/unicode-i18n.h:27 gucharmap/unicode-i18n.h:345
+#: gucharmap/unicode-i18n.h:28 gucharmap/unicode-i18n.h:358
 msgid "Devanagari"
 msgstr "Devanagari"
 
-#: gucharmap/unicode-i18n.h:28 gucharmap/unicode-i18n.h:325
+#: gucharmap/unicode-i18n.h:29 gucharmap/unicode-i18n.h:337
 msgid "Bengali"
 msgstr "Bengaals"
 
-#: gucharmap/unicode-i18n.h:29 gucharmap/unicode-i18n.h:360
+#: gucharmap/unicode-i18n.h:30 gucharmap/unicode-i18n.h:373
 msgid "Gurmukhi"
 msgstr "Gurmukhi"
 
-#: gucharmap/unicode-i18n.h:30 gucharmap/unicode-i18n.h:358
+#: gucharmap/unicode-i18n.h:31 gucharmap/unicode-i18n.h:371
 msgid "Gujarati"
 msgstr "Gujarati"
 
-#: gucharmap/unicode-i18n.h:31 gucharmap/unicode-i18n.h:426
+#: gucharmap/unicode-i18n.h:32 gucharmap/unicode-i18n.h:440
 msgid "Oriya"
 msgstr "Oriya"
 
-#: gucharmap/unicode-i18n.h:32 gucharmap/unicode-i18n.h:456
+#: gucharmap/unicode-i18n.h:33 gucharmap/unicode-i18n.h:470
 msgid "Tamil"
 msgstr "Tamil"
 
-#: gucharmap/unicode-i18n.h:33 gucharmap/unicode-i18n.h:458
+#: gucharmap/unicode-i18n.h:34 gucharmap/unicode-i18n.h:473
 msgid "Telugu"
 msgstr "Telugu"
 
-#: gucharmap/unicode-i18n.h:34 gucharmap/unicode-i18n.h:374
+#: gucharmap/unicode-i18n.h:35 gucharmap/unicode-i18n.h:387
 msgid "Kannada"
 msgstr "Kannada"
 
-#: gucharmap/unicode-i18n.h:35 gucharmap/unicode-i18n.h:393
+#: gucharmap/unicode-i18n.h:36 gucharmap/unicode-i18n.h:406
 msgid "Malayalam"
 msgstr "Malayalam"
 
-#: gucharmap/unicode-i18n.h:36 gucharmap/unicode-i18n.h:443
+#: gucharmap/unicode-i18n.h:37 gucharmap/unicode-i18n.h:457
 msgid "Sinhala"
 msgstr "Sinhala"
 
-#: gucharmap/unicode-i18n.h:37 gucharmap/unicode-i18n.h:460
+#: gucharmap/unicode-i18n.h:38 gucharmap/unicode-i18n.h:475
 msgid "Thai"
 msgstr "Thais"
 
-#: gucharmap/unicode-i18n.h:38 gucharmap/unicode-i18n.h:382
+#: gucharmap/unicode-i18n.h:39 gucharmap/unicode-i18n.h:395
 msgid "Lao"
 msgstr "Lao"
 
-#: gucharmap/unicode-i18n.h:39 gucharmap/unicode-i18n.h:461
+#: gucharmap/unicode-i18n.h:40 gucharmap/unicode-i18n.h:476
 msgid "Tibetan"
 msgstr "Tibetaans"
 
-#: gucharmap/unicode-i18n.h:40 gucharmap/unicode-i18n.h:408
+#: gucharmap/unicode-i18n.h:41 gucharmap/unicode-i18n.h:421
 msgid "Myanmar"
 msgstr "Birmees (Myanmar)"
 
-#: gucharmap/unicode-i18n.h:41 gucharmap/unicode-i18n.h:353
+#: gucharmap/unicode-i18n.h:42 gucharmap/unicode-i18n.h:366
 msgid "Georgian"
 msgstr "Georgisch"
 
-#: gucharmap/unicode-i18n.h:42
+#: gucharmap/unicode-i18n.h:43
 msgid "Hangul Jamo"
 msgstr "Hangul Jamo"
 
-#: gucharmap/unicode-i18n.h:43 gucharmap/unicode-i18n.h:352
+#: gucharmap/unicode-i18n.h:44 gucharmap/unicode-i18n.h:365
 msgid "Ethiopic"
 msgstr "Ethiopisch"
 
-#: gucharmap/unicode-i18n.h:44
+#: gucharmap/unicode-i18n.h:45
 msgid "Ethiopic Supplement"
 msgstr "Ethiopisch (aanvulling)"
 
-#: gucharmap/unicode-i18n.h:45 gucharmap/unicode-i18n.h:337
+#: gucharmap/unicode-i18n.h:46 gucharmap/unicode-i18n.h:349
 msgid "Cherokee"
 msgstr "Cherokee"
 
 # Het schrift heet ‘Canadian Aboriginal Syllabics’, dus dat laten we maar
 # onvertaald bij gebrek aan een fatsoenlijke Nederlandse vertaling. Let op, er
 # staat ‘syllabics’, niet ‘syllables’! (Wouter Bolsterlee)
-#: gucharmap/unicode-i18n.h:46
+#: gucharmap/unicode-i18n.h:47
 msgid "Unified Canadian Aboriginal Syllabics"
 msgstr "Verenigde Canadese Aboriginal Syllabics"
 
-#: gucharmap/unicode-i18n.h:47 gucharmap/unicode-i18n.h:416
+#: gucharmap/unicode-i18n.h:48 gucharmap/unicode-i18n.h:429
 msgid "Ogham"
 msgstr "Ogham"
 
-#: gucharmap/unicode-i18n.h:48 gucharmap/unicode-i18n.h:436
+#: gucharmap/unicode-i18n.h:49 gucharmap/unicode-i18n.h:450
 msgid "Runic"
 msgstr "Runen"
 
-#: gucharmap/unicode-i18n.h:49 gucharmap/unicode-i18n.h:450
+#: gucharmap/unicode-i18n.h:50 gucharmap/unicode-i18n.h:464
 msgid "Tagalog"
 msgstr "Tagalog"
 
-#: gucharmap/unicode-i18n.h:50 gucharmap/unicode-i18n.h:364
+#: gucharmap/unicode-i18n.h:51 gucharmap/unicode-i18n.h:377
 msgid "Hanunoo"
 msgstr "Hanunoo"
 
-#: gucharmap/unicode-i18n.h:51 gucharmap/unicode-i18n.h:331
+#: gucharmap/unicode-i18n.h:52 gucharmap/unicode-i18n.h:343
 msgid "Buhid"
 msgstr "Buhid"
 
-#: gucharmap/unicode-i18n.h:52 gucharmap/unicode-i18n.h:451
+#: gucharmap/unicode-i18n.h:53 gucharmap/unicode-i18n.h:465
 msgid "Tagbanwa"
 msgstr "Tagbanwa"
 
-#: gucharmap/unicode-i18n.h:53 gucharmap/unicode-i18n.h:379
+#: gucharmap/unicode-i18n.h:54 gucharmap/unicode-i18n.h:392
 msgid "Khmer"
 msgstr "Khmer"
 
-#: gucharmap/unicode-i18n.h:54 gucharmap/unicode-i18n.h:405
+#: gucharmap/unicode-i18n.h:55 gucharmap/unicode-i18n.h:418
 msgid "Mongolian"
 msgstr "Mongools"
 
 # Het schrift heet ‘Canadian Aboriginal syllabics’, dus dat laten we maar
 # onvertaald bij gebrek aan een fatsoenlijke Nederlandse vertaling. Let op, er
 # staat ‘syllabics’, niet ‘syllables’! (Wouter Bolsterlee)
-#: gucharmap/unicode-i18n.h:55
+#: gucharmap/unicode-i18n.h:56
 msgid "Unified Canadian Aboriginal Syllabics Extended"
 msgstr "Verenigde Canadese Aboriginal Syllabics (uitbreiding)"
 
-#: gucharmap/unicode-i18n.h:56 gucharmap/unicode-i18n.h:385
+#: gucharmap/unicode-i18n.h:57 gucharmap/unicode-i18n.h:398
 msgid "Limbu"
 msgstr "Limbu"
 
 # Let op, dis is NIET Thai(s) (Wouter Bolsterlee)
-#: gucharmap/unicode-i18n.h:57 gucharmap/unicode-i18n.h:452
+#: gucharmap/unicode-i18n.h:58 gucharmap/unicode-i18n.h:466
 msgid "Tai Le"
 msgstr "Tai Le"
 
 # Let op, dis is NIET Thai(s) (Wouter Bolsterlee)
-#: gucharmap/unicode-i18n.h:58 gucharmap/unicode-i18n.h:412
+#: gucharmap/unicode-i18n.h:59 gucharmap/unicode-i18n.h:425
 msgid "New Tai Lue"
 msgstr "Nieuw Tai Lü"
 
-#: gucharmap/unicode-i18n.h:59
+#: gucharmap/unicode-i18n.h:60
 msgid "Khmer Symbols"
 msgstr "Khmer-symbolen"
 
-#: gucharmap/unicode-i18n.h:60 gucharmap/unicode-i18n.h:330
+#: gucharmap/unicode-i18n.h:61 gucharmap/unicode-i18n.h:342
 msgid "Buginese"
 msgstr "Buginees"
 
-#: gucharmap/unicode-i18n.h:61 gucharmap/unicode-i18n.h:453
+#: gucharmap/unicode-i18n.h:62 gucharmap/unicode-i18n.h:467
 msgid "Tai Tham"
 msgstr "Tai Tham"
 
 # tekens die in combinatie met andere tekens worden gebruikt
-#: gucharmap/unicode-i18n.h:62
+#: gucharmap/unicode-i18n.h:63
 msgid "Combining Diacritical Marks Extended"
 msgstr "Combinerende diakritische tekens (uitbreiding)"
 
-#: gucharmap/unicode-i18n.h:63 gucharmap/unicode-i18n.h:321
+#: gucharmap/unicode-i18n.h:64 gucharmap/unicode-i18n.h:333
 msgid "Balinese"
 msgstr "Balinees"
 
 # Let op: Het Sundanees is een West-Javaans schrift. Dit is niet hetzelfde als
 # Soedanees! (Wouter Bolsterlee)
-#: gucharmap/unicode-i18n.h:64 gucharmap/unicode-i18n.h:447
+#: gucharmap/unicode-i18n.h:65 gucharmap/unicode-i18n.h:461
 msgid "Sundanese"
 msgstr "Sundanees"
 
-#: gucharmap/unicode-i18n.h:65 gucharmap/unicode-i18n.h:324
+#: gucharmap/unicode-i18n.h:66 gucharmap/unicode-i18n.h:336
 msgid "Batak"
 msgstr "Batak"
 
-#: gucharmap/unicode-i18n.h:66 gucharmap/unicode-i18n.h:384
+#: gucharmap/unicode-i18n.h:67 gucharmap/unicode-i18n.h:397
 msgid "Lepcha"
 msgstr "Lepcha"
 
-#: gucharmap/unicode-i18n.h:67 gucharmap/unicode-i18n.h:417
+#: gucharmap/unicode-i18n.h:68 gucharmap/unicode-i18n.h:430
 msgid "Ol Chiki"
 msgstr "Ol Chiki"
 
-#: gucharmap/unicode-i18n.h:68
+#: gucharmap/unicode-i18n.h:69
 msgid "Cyrillic Extended-C"
 msgstr "Cyrillisch (uitbreiding C)"
 
-#: gucharmap/unicode-i18n.h:69
+#: gucharmap/unicode-i18n.h:70
 msgid "Georgian Extended"
 msgstr "Georgisch (uitbreiding)"
 
-#: gucharmap/unicode-i18n.h:70
+#: gucharmap/unicode-i18n.h:71
 msgid "Sundanese Supplement"
 msgstr "Sundanees (aanvulling)"
 
-#: gucharmap/unicode-i18n.h:71
+#: gucharmap/unicode-i18n.h:72
 msgid "Vedic Extensions"
 msgstr "Vedische uitbreidingen"
 
-#: gucharmap/unicode-i18n.h:72
+#: gucharmap/unicode-i18n.h:73
 msgid "Phonetic Extensions"
 msgstr "Fonetische uitbreidingen"
 
-#: gucharmap/unicode-i18n.h:73
+#: gucharmap/unicode-i18n.h:74
 msgid "Phonetic Extensions Supplement"
 msgstr "Fonetische uitbreidingen (aanvulling)"
 
-#: gucharmap/unicode-i18n.h:74
+#: gucharmap/unicode-i18n.h:75
 msgid "Combining Diacritical Marks Supplement"
 msgstr "Combinerende diakritische tekens (aanvulling)"
 
-#: gucharmap/unicode-i18n.h:75
+#: gucharmap/unicode-i18n.h:76
 msgid "Latin Extended Additional"
 msgstr "Latijns (additionele uitbreiding)"
 
-#: gucharmap/unicode-i18n.h:76
+#: gucharmap/unicode-i18n.h:77
 msgid "Greek Extended"
 msgstr "Grieks (uitbreiding)"
 
-#: gucharmap/unicode-i18n.h:77
+#: gucharmap/unicode-i18n.h:78
 msgid "General Punctuation"
 msgstr "Algemene leestekens"
 
-#: gucharmap/unicode-i18n.h:78
+#: gucharmap/unicode-i18n.h:79
 msgid "Superscripts and Subscripts"
 msgstr "Superscripts en subscripts"
 
-#: gucharmap/unicode-i18n.h:79
+#: gucharmap/unicode-i18n.h:80
 msgid "Currency Symbols"
 msgstr "Valuta-symbolen"
 
-#: gucharmap/unicode-i18n.h:80
+#: gucharmap/unicode-i18n.h:81
 msgid "Combining Diacritical Marks for Symbols"
 msgstr "Combinerende diakritische tekens voor symbolen"
 
 # bv de R voor reeele getallen en N voor natuurlijke getallen
-#: gucharmap/unicode-i18n.h:81
+#: gucharmap/unicode-i18n.h:82
 msgid "Letterlike Symbols"
 msgstr "Op letters lijkende symbolen"
 
 # kan ook meer dan 10 zijn (bijv X of L)
-#: gucharmap/unicode-i18n.h:82
+#: gucharmap/unicode-i18n.h:83
 msgid "Number Forms"
 msgstr "Getalvormen"
 
-#: gucharmap/unicode-i18n.h:83
+#: gucharmap/unicode-i18n.h:84
 msgid "Arrows"
 msgstr "Pijlen"
 
-#: gucharmap/unicode-i18n.h:84
+#: gucharmap/unicode-i18n.h:85
 msgid "Mathematical Operators"
 msgstr "Wiskundige operatoren"
 
 # techniek gemengd/gemengd technisch
-#: gucharmap/unicode-i18n.h:85
+#: gucharmap/unicode-i18n.h:86
 msgid "Miscellaneous Technical"
 msgstr "Gemengd technisch"
 
 # bv teken voor einde tekst, teken voor beckspace, esc.
 # afbeeldingen/figuren/tekens/plaatjes
-#: gucharmap/unicode-i18n.h:86
+#: gucharmap/unicode-i18n.h:87
 msgid "Control Pictures"
 msgstr "Sturings-figuren"
 
 # OCR
-#: gucharmap/unicode-i18n.h:87
+#: gucharmap/unicode-i18n.h:88
 msgid "Optical Character Recognition"
 msgstr "Optische tekenherkenning"
 
-#: gucharmap/unicode-i18n.h:88
+#: gucharmap/unicode-i18n.h:89
 msgid "Enclosed Alphanumerics"
 msgstr "Ingesloten alfanumerieke tekens"
 
-#: gucharmap/unicode-i18n.h:89
+#: gucharmap/unicode-i18n.h:90
 msgid "Box Drawing"
 msgstr "Celtekeningen"
 
-#: gucharmap/unicode-i18n.h:90
+#: gucharmap/unicode-i18n.h:91
 msgid "Block Elements"
 msgstr "Blokelementen"
 
-#: gucharmap/unicode-i18n.h:91
+#: gucharmap/unicode-i18n.h:92
 msgid "Geometric Shapes"
 msgstr "Geometrische figuren"
 
-#: gucharmap/unicode-i18n.h:92
+#: gucharmap/unicode-i18n.h:93
 msgid "Miscellaneous Symbols"
 msgstr "Gemengde symbolen"
 
-#: gucharmap/unicode-i18n.h:93
+#: gucharmap/unicode-i18n.h:94
 msgid "Dingbats"
 msgstr "Dingbats"
 
-#: gucharmap/unicode-i18n.h:94
+#: gucharmap/unicode-i18n.h:95
 msgid "Miscellaneous Mathematical Symbols-A"
 msgstr "Gemengde wiskundige symbolen A"
 
-#: gucharmap/unicode-i18n.h:95
+#: gucharmap/unicode-i18n.h:96
 msgid "Supplemental Arrows-A"
 msgstr "Aanvullende pijlen A"
 
-#: gucharmap/unicode-i18n.h:96
+#: gucharmap/unicode-i18n.h:97
 msgid "Braille Patterns"
 msgstr "Braille-patronen"
 
-#: gucharmap/unicode-i18n.h:97
+#: gucharmap/unicode-i18n.h:98
 msgid "Supplemental Arrows-B"
 msgstr "Aanvullende pijlen B"
 
-#: gucharmap/unicode-i18n.h:98
+#: gucharmap/unicode-i18n.h:99
 msgid "Miscellaneous Mathematical Symbols-B"
 msgstr "Gemengde wiskundige symbolen B"
 
-#: gucharmap/unicode-i18n.h:99
+#: gucharmap/unicode-i18n.h:100
 msgid "Supplemental Mathematical Operators"
 msgstr "Aanvullende wiskundige operatoren"
 
-#: gucharmap/unicode-i18n.h:100
+#: gucharmap/unicode-i18n.h:101
 msgid "Miscellaneous Symbols and Arrows"
 msgstr "Gemengde symbolen en pijlen"
 
-#: gucharmap/unicode-i18n.h:101 gucharmap/unicode-i18n.h:354
+#: gucharmap/unicode-i18n.h:102 gucharmap/unicode-i18n.h:367
 msgid "Glagolitic"
 msgstr "Glagolitisch"
 
-#: gucharmap/unicode-i18n.h:102
+#: gucharmap/unicode-i18n.h:103
 msgid "Latin Extended-C"
 msgstr "Latijns (uitbreiding C)"
 
-#: gucharmap/unicode-i18n.h:103 gucharmap/unicode-i18n.h:340
+#: gucharmap/unicode-i18n.h:104 gucharmap/unicode-i18n.h:352
 msgid "Coptic"
 msgstr "Koptisch"
 
-#: gucharmap/unicode-i18n.h:104
+#: gucharmap/unicode-i18n.h:105
 msgid "Georgian Supplement"
 msgstr "Georgisch (aanvulling)"
 
-#: gucharmap/unicode-i18n.h:105 gucharmap/unicode-i18n.h:462
+#: gucharmap/unicode-i18n.h:106 gucharmap/unicode-i18n.h:477
 msgid "Tifinagh"
 msgstr "Tifinagh"
 
-#: gucharmap/unicode-i18n.h:106
+#: gucharmap/unicode-i18n.h:107
 msgid "Ethiopic Extended"
 msgstr "Ethiopisch (uitbreiding)"
 
-#: gucharmap/unicode-i18n.h:107
+#: gucharmap/unicode-i18n.h:108
 msgid "Cyrillic Extended-A"
 msgstr "Cyrillisch (uitbreiding A)"
 
-#: gucharmap/unicode-i18n.h:108
+#: gucharmap/unicode-i18n.h:109
 msgid "Supplemental Punctuation"
 msgstr "Aanvullende leestekens"
 
-#: gucharmap/unicode-i18n.h:109
+#: gucharmap/unicode-i18n.h:110
 msgid "CJK Radicals Supplement"
 msgstr "CJK-radicalen (aanvulling)"
 
-#: gucharmap/unicode-i18n.h:110
+#: gucharmap/unicode-i18n.h:111
 msgid "Kangxi Radicals"
 msgstr "Kangxi-radicalen"
 
-#: gucharmap/unicode-i18n.h:111
+#: gucharmap/unicode-i18n.h:112
 msgid "Ideographic Description Characters"
 msgstr "Ideografische beschrijvings-karakters"
 
-#: gucharmap/unicode-i18n.h:112
+#: gucharmap/unicode-i18n.h:113
 msgid "CJK Symbols and Punctuation"
 msgstr "CJK-symbolen en -leestekens"
 
-#: gucharmap/unicode-i18n.h:113 gucharmap/unicode-i18n.h:367
+#: gucharmap/unicode-i18n.h:114 gucharmap/unicode-i18n.h:380
 msgid "Hiragana"
 msgstr "Hiragana"
 
-#: gucharmap/unicode-i18n.h:114 gucharmap/unicode-i18n.h:375
+#: gucharmap/unicode-i18n.h:115 gucharmap/unicode-i18n.h:388
 msgid "Katakana"
 msgstr "Katakana"
 
-#: gucharmap/unicode-i18n.h:115 gucharmap/unicode-i18n.h:327
+#: gucharmap/unicode-i18n.h:116 gucharmap/unicode-i18n.h:339
 msgid "Bopomofo"
 msgstr "Bopomofo"
 
-#: gucharmap/unicode-i18n.h:116
+#: gucharmap/unicode-i18n.h:117
 msgid "Hangul Compatibility Jamo"
 msgstr "Hangul compatibiliteits-Jamo"
 
-#: gucharmap/unicode-i18n.h:117
+#: gucharmap/unicode-i18n.h:118
 msgid "Kanbun"
 msgstr "Kanbun"
 
-#: gucharmap/unicode-i18n.h:118
+#: gucharmap/unicode-i18n.h:119
 msgid "Bopomofo Extended"
 msgstr "Bopomofo (uitbreiding)"
 
-#: gucharmap/unicode-i18n.h:119
+#: gucharmap/unicode-i18n.h:120
 msgid "CJK Strokes"
 msgstr "CJK-strepen"
 
-#: gucharmap/unicode-i18n.h:120
+#: gucharmap/unicode-i18n.h:121
 msgid "Katakana Phonetic Extensions"
 msgstr "Katakana (fonetische uitbreidingen)"
 
-#: gucharmap/unicode-i18n.h:121
+#: gucharmap/unicode-i18n.h:122
 msgid "Enclosed CJK Letters and Months"
 msgstr "Ingesloten CJK-tekens en -maanden"
 
-#: gucharmap/unicode-i18n.h:122
+#: gucharmap/unicode-i18n.h:123
 msgid "CJK Compatibility"
 msgstr "CJK-compatibiliteit"
 
-#: gucharmap/unicode-i18n.h:123
+#: gucharmap/unicode-i18n.h:124
 msgid "CJK Unified Ideographs Extension A"
 msgstr "Verenigde CJK-ideogrammen (uitbreiding A)"
 
-#: gucharmap/unicode-i18n.h:124
+#: gucharmap/unicode-i18n.h:125
 msgid "Yijing Hexagram Symbols"
 msgstr "Yijing hexagram-symbolen"
 
-#: gucharmap/unicode-i18n.h:125
+#: gucharmap/unicode-i18n.h:126
 msgid "CJK Unified Ideographs"
 msgstr "Verenigde CJK-ideogrammen"
 
-#: gucharmap/unicode-i18n.h:126
+#: gucharmap/unicode-i18n.h:127
 msgid "Yi Syllables"
 msgstr "Yi-syllaben"
 
-#: gucharmap/unicode-i18n.h:127
+#: gucharmap/unicode-i18n.h:128
 msgid "Yi Radicals"
 msgstr "Yi-radicalen"
 
-#: gucharmap/unicode-i18n.h:128 gucharmap/unicode-i18n.h:388
+#: gucharmap/unicode-i18n.h:129 gucharmap/unicode-i18n.h:401
 msgid "Lisu"
 msgstr "Lisu"
 
-#: gucharmap/unicode-i18n.h:129 gucharmap/unicode-i18n.h:465
+#: gucharmap/unicode-i18n.h:130 gucharmap/unicode-i18n.h:482
 msgid "Vai"
 msgstr "Vai"
 
-#: gucharmap/unicode-i18n.h:130
+#: gucharmap/unicode-i18n.h:131
 msgid "Cyrillic Extended-B"
 msgstr "Cyrillisch (uitbreiding B)"
 
-#: gucharmap/unicode-i18n.h:131 gucharmap/unicode-i18n.h:322
+#: gucharmap/unicode-i18n.h:132 gucharmap/unicode-i18n.h:334
 msgid "Bamum"
 msgstr "Bamum"
 
-#: gucharmap/unicode-i18n.h:132
+#: gucharmap/unicode-i18n.h:133
 msgid "Modifier Tone Letters"
 msgstr "Toonwijziging-tekens"
 
-#: gucharmap/unicode-i18n.h:133
+#: gucharmap/unicode-i18n.h:134
 msgid "Latin Extended-D"
 msgstr "Latijns (uitbreiding D)"
 
-#: gucharmap/unicode-i18n.h:134 gucharmap/unicode-i18n.h:448
+#: gucharmap/unicode-i18n.h:135 gucharmap/unicode-i18n.h:462
 msgid "Syloti Nagri"
 msgstr "Syloti Nagri"
 
-#: gucharmap/unicode-i18n.h:135
+#: gucharmap/unicode-i18n.h:136
 msgid "Common Indic Number Forms"
 msgstr "Algemene Indische getalvormen"
 
-#: gucharmap/unicode-i18n.h:136
+#: gucharmap/unicode-i18n.h:137
 msgid "Phags-pa"
 msgstr "Phags-pa"
 
-#: gucharmap/unicode-i18n.h:137 gucharmap/unicode-i18n.h:438
+#: gucharmap/unicode-i18n.h:138 gucharmap/unicode-i18n.h:452
 msgid "Saurashtra"
 msgstr "Saurashtra"
 
-#: gucharmap/unicode-i18n.h:138
+#: gucharmap/unicode-i18n.h:139
 msgid "Devanagari Extended"
 msgstr "Devanagari (uitbreiding)"
 
-#: gucharmap/unicode-i18n.h:139 gucharmap/unicode-i18n.h:376
+#: gucharmap/unicode-i18n.h:140 gucharmap/unicode-i18n.h:389
 msgid "Kayah Li"
 msgstr "Kayah Li"
 
-#: gucharmap/unicode-i18n.h:140 gucharmap/unicode-i18n.h:435
+#: gucharmap/unicode-i18n.h:141 gucharmap/unicode-i18n.h:449
 msgid "Rejang"
 msgstr "Rejang"
 
-#: gucharmap/unicode-i18n.h:141
+#: gucharmap/unicode-i18n.h:142
 msgid "Hangul Jamo Extended-A"
 msgstr "Hangul Jamo (uitbreiding A)"
 
-#: gucharmap/unicode-i18n.h:142 gucharmap/unicode-i18n.h:372
+#: gucharmap/unicode-i18n.h:143 gucharmap/unicode-i18n.h:385
 msgid "Javanese"
 msgstr "Javaans"
 
-#: gucharmap/unicode-i18n.h:143
+#: gucharmap/unicode-i18n.h:144
 msgid "Myanmar Extended-B"
 msgstr "Myanmar (uitbreiding B)"
 
-#: gucharmap/unicode-i18n.h:144 gucharmap/unicode-i18n.h:336
+#: gucharmap/unicode-i18n.h:145 gucharmap/unicode-i18n.h:348
 msgid "Cham"
 msgstr "Cham"
 
-#: gucharmap/unicode-i18n.h:145
+#: gucharmap/unicode-i18n.h:146
 msgid "Myanmar Extended-A"
 msgstr "Birmees (Myanmar) (uitbreiding A)"
 
 # Let op, dis is NIET Thai(s) (Wouter Bolsterlee)
-#: gucharmap/unicode-i18n.h:146 gucharmap/unicode-i18n.h:454
+#: gucharmap/unicode-i18n.h:147 gucharmap/unicode-i18n.h:468
 msgid "Tai Viet"
 msgstr "Tai Viet"
 
-#: gucharmap/unicode-i18n.h:147
+#: gucharmap/unicode-i18n.h:148
 msgid "Meetei Mayek Extensions"
 msgstr "Meetei Mayek (uitbreidingen)"
 
-#: gucharmap/unicode-i18n.h:148
+#: gucharmap/unicode-i18n.h:149
 msgid "Ethiopic Extended-A"
 msgstr "Ethiopisch (uitbreiding A)"
 
-#: gucharmap/unicode-i18n.h:149
+#: gucharmap/unicode-i18n.h:150
 msgid "Latin Extended-E"
 msgstr "Latijns (uitbreiding E)"
 
-#: gucharmap/unicode-i18n.h:150
+#: gucharmap/unicode-i18n.h:151
 msgid "Cherokee Supplement"
 msgstr "Cherokee (aanvulling)"
 
-#: gucharmap/unicode-i18n.h:151 gucharmap/unicode-i18n.h:399
+#: gucharmap/unicode-i18n.h:152 gucharmap/unicode-i18n.h:412
 msgid "Meetei Mayek"
 msgstr "Meetei Mayek"
 
-#: gucharmap/unicode-i18n.h:152
+#: gucharmap/unicode-i18n.h:153
 msgid "Hangul Syllables"
 msgstr "Hangul-lettergrepen"
 
-#: gucharmap/unicode-i18n.h:153
+#: gucharmap/unicode-i18n.h:154
 msgid "Hangul Jamo Extended-B"
 msgstr "Hangul Jamo (uitbreiding B)"
 
-#: gucharmap/unicode-i18n.h:154
+#: gucharmap/unicode-i18n.h:155
 msgid "High Surrogates"
 msgstr "Hoge surrogaten"
 
-#: gucharmap/unicode-i18n.h:155
+#: gucharmap/unicode-i18n.h:156
 msgid "High Private Use Surrogates"
 msgstr "Hoge surrogaten voor privaatgebruik"
 
-#: gucharmap/unicode-i18n.h:156
+#: gucharmap/unicode-i18n.h:157
 msgid "Low Surrogates"
 msgstr "Lage Surrogaten"
 
-#: gucharmap/unicode-i18n.h:157
+#: gucharmap/unicode-i18n.h:158
 msgid "Private Use Area"
 msgstr "Gebied voor privaatgebruik"
 
-#: gucharmap/unicode-i18n.h:158
+#: gucharmap/unicode-i18n.h:159
 msgid "CJK Compatibility Ideographs"
 msgstr "CJK compatibiliteits-ideogrammen"
 
-#: gucharmap/unicode-i18n.h:159
+#: gucharmap/unicode-i18n.h:160
 msgid "Alphabetic Presentation Forms"
 msgstr "Alfabetische presentatievormen"
 
-#: gucharmap/unicode-i18n.h:160
+#: gucharmap/unicode-i18n.h:161
 msgid "Arabic Presentation Forms-A"
 msgstr "Arabische presentatievormen A"
 
-#: gucharmap/unicode-i18n.h:161
+#: gucharmap/unicode-i18n.h:162
 msgid "Variation Selectors"
 msgstr "Variatie-selectoren"
 
-#: gucharmap/unicode-i18n.h:162
+#: gucharmap/unicode-i18n.h:163
 msgid "Vertical Forms"
 msgstr "Verticale vormen"
 
-#: gucharmap/unicode-i18n.h:163
+#: gucharmap/unicode-i18n.h:164
 msgid "Combining Half Marks"
 msgstr "Combinerende halve markeringstekens"
 
-#: gucharmap/unicode-i18n.h:164
+#: gucharmap/unicode-i18n.h:165
 msgid "CJK Compatibility Forms"
 msgstr "CJK-compatibiliteitsvormen"
 
-#: gucharmap/unicode-i18n.h:165
+#: gucharmap/unicode-i18n.h:166
 msgid "Small Form Variants"
 msgstr "Kleine-vormvarianten"
 
-#: gucharmap/unicode-i18n.h:166
+#: gucharmap/unicode-i18n.h:167
 msgid "Arabic Presentation Forms-B"
 msgstr "Arabische presentatievormen B"
 
-#: gucharmap/unicode-i18n.h:167
+#: gucharmap/unicode-i18n.h:168
 msgid "Halfwidth and Fullwidth Forms"
 msgstr "Halve- en volle-breedtevormen"
 
-#: gucharmap/unicode-i18n.h:168
+#: gucharmap/unicode-i18n.h:169
 msgid "Specials"
 msgstr "Speciaal"
 
-#: gucharmap/unicode-i18n.h:169
+#: gucharmap/unicode-i18n.h:170
 msgid "Linear B Syllabary"
 msgstr "Lineair B-lettergrepen"
 
-#: gucharmap/unicode-i18n.h:170
+#: gucharmap/unicode-i18n.h:171
 msgid "Linear B Ideograms"
 msgstr "Lineair B-ideogrammen"
 
-#: gucharmap/unicode-i18n.h:171
+#: gucharmap/unicode-i18n.h:172
 msgid "Aegean Numbers"
 msgstr "Egeïsche getallen"
 
 # Oudgrieks (mbt taal), Oud-Grieks (mbt het klassieke Griekenland)
-#: gucharmap/unicode-i18n.h:172
+#: gucharmap/unicode-i18n.h:173
 msgid "Ancient Greek Numbers"
 msgstr "Oudgriekse getallen"
 
 # historische/oude/pre-historische/stokoud
-#: gucharmap/unicode-i18n.h:173
+#: gucharmap/unicode-i18n.h:174
 msgid "Ancient Symbols"
 msgstr "Historische symbolen"
 
 # De schijf van Phaistos: http://en.wikipedia.org/wiki/Phaistos_Disc
-#: gucharmap/unicode-i18n.h:174
+#: gucharmap/unicode-i18n.h:175
 msgid "Phaistos Disc"
 msgstr "Schijf van Phaistos"
 
-#: gucharmap/unicode-i18n.h:175 gucharmap/unicode-i18n.h:389
+#: gucharmap/unicode-i18n.h:176 gucharmap/unicode-i18n.h:402
 msgid "Lycian"
 msgstr "Lycisch"
 
-#: gucharmap/unicode-i18n.h:176 gucharmap/unicode-i18n.h:333
+#: gucharmap/unicode-i18n.h:177 gucharmap/unicode-i18n.h:345
 msgid "Carian"
 msgstr "Carisch"
 
-#: gucharmap/unicode-i18n.h:177
+#: gucharmap/unicode-i18n.h:178
 msgid "Coptic Epact Numbers"
 msgstr "Koptische Epactgetallen"
 
 # Italisch / Etruskisch
-#: gucharmap/unicode-i18n.h:178 gucharmap/unicode-i18n.h:419
+#: gucharmap/unicode-i18n.h:179 gucharmap/unicode-i18n.h:432
 msgid "Old Italic"
 msgstr "Oud-Italisch"
 
-#: gucharmap/unicode-i18n.h:179 gucharmap/unicode-i18n.h:355
+#: gucharmap/unicode-i18n.h:180 gucharmap/unicode-i18n.h:368
 msgid "Gothic"
 msgstr "Gotisch"
 
-#: gucharmap/unicode-i18n.h:180 gucharmap/unicode-i18n.h:421
+#: gucharmap/unicode-i18n.h:181 gucharmap/unicode-i18n.h:434
 msgid "Old Permic"
 msgstr "Oud-Permisch"
 
-#: gucharmap/unicode-i18n.h:181 gucharmap/unicode-i18n.h:464
+#: gucharmap/unicode-i18n.h:182 gucharmap/unicode-i18n.h:480
 msgid "Ugaritic"
 msgstr "Ugaritisch"
 
-#: gucharmap/unicode-i18n.h:182 gucharmap/unicode-i18n.h:422
+#: gucharmap/unicode-i18n.h:183 gucharmap/unicode-i18n.h:435
 msgid "Old Persian"
 msgstr "Oudpersisch"
 
-#: gucharmap/unicode-i18n.h:183 gucharmap/unicode-i18n.h:344
+#: gucharmap/unicode-i18n.h:184 gucharmap/unicode-i18n.h:357
 msgid "Deseret"
 msgstr "Deseret"
 
-#: gucharmap/unicode-i18n.h:184 gucharmap/unicode-i18n.h:440
+#: gucharmap/unicode-i18n.h:185 gucharmap/unicode-i18n.h:454
 msgid "Shavian"
 msgstr "Shavian"
 
-#: gucharmap/unicode-i18n.h:185 gucharmap/unicode-i18n.h:428
+#: gucharmap/unicode-i18n.h:186 gucharmap/unicode-i18n.h:442
 msgid "Osmanya"
 msgstr "Osmaans"
 
-#: gucharmap/unicode-i18n.h:186 gucharmap/unicode-i18n.h:427
+#: gucharmap/unicode-i18n.h:187 gucharmap/unicode-i18n.h:441
 msgid "Osage"
 msgstr "Osage"
 
-#: gucharmap/unicode-i18n.h:187 gucharmap/unicode-i18n.h:350
+#: gucharmap/unicode-i18n.h:188 gucharmap/unicode-i18n.h:363
 msgid "Elbasan"
 msgstr "Elbasan"
 
-#: gucharmap/unicode-i18n.h:188 gucharmap/unicode-i18n.h:334
+#: gucharmap/unicode-i18n.h:189 gucharmap/unicode-i18n.h:346
 msgid "Caucasian Albanian"
 msgstr "Caucasisch Albaans"
 
-#: gucharmap/unicode-i18n.h:189 gucharmap/unicode-i18n.h:386
+#: gucharmap/unicode-i18n.h:190 gucharmap/unicode-i18n.h:483
+msgid "Vithkuqi"
+msgstr "Vithkuqi"
+
+#: gucharmap/unicode-i18n.h:191 gucharmap/unicode-i18n.h:399
 msgid "Linear A"
 msgstr "Lineair-A"
 
-#: gucharmap/unicode-i18n.h:190
+#: gucharmap/unicode-i18n.h:192
+msgid "Latin Extended-F"
+msgstr "Latijns (uitbreiding F)"
+
+#: gucharmap/unicode-i18n.h:193
 msgid "Cypriot Syllabary"
 msgstr "Cypriotisch (syllabisch)"
 
-#: gucharmap/unicode-i18n.h:191 gucharmap/unicode-i18n.h:368
+#: gucharmap/unicode-i18n.h:194 gucharmap/unicode-i18n.h:381
 msgid "Imperial Aramaic"
 msgstr "Rijksaramees"
 
-#: gucharmap/unicode-i18n.h:192 gucharmap/unicode-i18n.h:430
+#: gucharmap/unicode-i18n.h:195 gucharmap/unicode-i18n.h:444
 msgid "Palmyrene"
 msgstr "Palmyreens"
 
-#: gucharmap/unicode-i18n.h:193 gucharmap/unicode-i18n.h:410
+#: gucharmap/unicode-i18n.h:196 gucharmap/unicode-i18n.h:423
 msgid "Nabataean"
 msgstr "Nabataeaans"
 
-#: gucharmap/unicode-i18n.h:194 gucharmap/unicode-i18n.h:365
+#: gucharmap/unicode-i18n.h:197 gucharmap/unicode-i18n.h:378
 msgid "Hatran"
 msgstr "Hatran"
 
-#: gucharmap/unicode-i18n.h:195 gucharmap/unicode-i18n.h:433
+#: gucharmap/unicode-i18n.h:198 gucharmap/unicode-i18n.h:447
 msgid "Phoenician"
 msgstr "Fenicisch"
 
-#: gucharmap/unicode-i18n.h:196 gucharmap/unicode-i18n.h:390
+#: gucharmap/unicode-i18n.h:199 gucharmap/unicode-i18n.h:403
 msgid "Lydian"
 msgstr "Lydisch"
 
-#: gucharmap/unicode-i18n.h:197 gucharmap/unicode-i18n.h:402
+#: gucharmap/unicode-i18n.h:200 gucharmap/unicode-i18n.h:415
 msgid "Meroitic Hieroglyphs"
 msgstr "Meroitische hiërogliefen"
 
-#: gucharmap/unicode-i18n.h:198 gucharmap/unicode-i18n.h:401
+#: gucharmap/unicode-i18n.h:201 gucharmap/unicode-i18n.h:414
 msgid "Meroitic Cursive"
 msgstr "Meroitische schrijfletters"
 
 # In het nederlands zonder extra h
-#: gucharmap/unicode-i18n.h:199 gucharmap/unicode-i18n.h:377
+#: gucharmap/unicode-i18n.h:202 gucharmap/unicode-i18n.h:390
 msgid "Kharoshthi"
 msgstr "Kharosthi"
 
-#: gucharmap/unicode-i18n.h:200 gucharmap/unicode-i18n.h:424
+#: gucharmap/unicode-i18n.h:203 gucharmap/unicode-i18n.h:437
 msgid "Old South Arabian"
 msgstr "Oud Zuid-Arabisch"
 
-#: gucharmap/unicode-i18n.h:201 gucharmap/unicode-i18n.h:420
+#: gucharmap/unicode-i18n.h:204 gucharmap/unicode-i18n.h:433
 msgid "Old North Arabian"
 msgstr "Oud Noord-Arabisch"
 
-#: gucharmap/unicode-i18n.h:202 gucharmap/unicode-i18n.h:395
+#: gucharmap/unicode-i18n.h:205 gucharmap/unicode-i18n.h:408
 msgid "Manichaean"
 msgstr "Manichaeaans"
 
-#: gucharmap/unicode-i18n.h:203 gucharmap/unicode-i18n.h:320
+#: gucharmap/unicode-i18n.h:206 gucharmap/unicode-i18n.h:332
 msgid "Avestan"
 msgstr "Avestisch"
 
 # Het is me niet duidelijk of het Parthian danwel Parthiaan moet zijn (Wouter Bolsterlee)
 # Inscriptional heb ik maar als geïnscribeerd vertaald (Wouter Bolsterlee)
-#: gucharmap/unicode-i18n.h:204 gucharmap/unicode-i18n.h:371
+#: gucharmap/unicode-i18n.h:207 gucharmap/unicode-i18n.h:384
 msgid "Inscriptional Parthian"
 msgstr "Geïnscribeerd Parthiaan"
 
 # Inscriptional heb ik maar als geïnscribeerd vertaald (Wouter Bolsterlee)
-#: gucharmap/unicode-i18n.h:205 gucharmap/unicode-i18n.h:370
+#: gucharmap/unicode-i18n.h:208 gucharmap/unicode-i18n.h:383
 msgid "Inscriptional Pahlavi"
 msgstr "Geïnscribeerd Pahlavi"
 
 # Inscriptional heb ik maar als geïnscribeerd vertaald (Wouter Bolsterlee)
-#: gucharmap/unicode-i18n.h:206 gucharmap/unicode-i18n.h:434
+#: gucharmap/unicode-i18n.h:209 gucharmap/unicode-i18n.h:448
 msgid "Psalter Pahlavi"
 msgstr "Psalter Pahlavi"
 
-#: gucharmap/unicode-i18n.h:207 gucharmap/unicode-i18n.h:425
+#: gucharmap/unicode-i18n.h:210 gucharmap/unicode-i18n.h:438
 msgid "Old Turkic"
 msgstr "Oud-Turks"
 
-#: gucharmap/unicode-i18n.h:208 gucharmap/unicode-i18n.h:418
+#: gucharmap/unicode-i18n.h:211 gucharmap/unicode-i18n.h:431
 msgid "Old Hungarian"
 msgstr "Oudhongaars"
 
-#: gucharmap/unicode-i18n.h:209 gucharmap/unicode-i18n.h:363
+#: gucharmap/unicode-i18n.h:212 gucharmap/unicode-i18n.h:376
 msgid "Hanifi Rohingya"
 msgstr "Hanifi Rohingya"
 
-#: gucharmap/unicode-i18n.h:210
+#: gucharmap/unicode-i18n.h:213
 msgid "Rumi Numeral Symbols"
 msgstr "Rumi-getalsymbolen"
 
-#: gucharmap/unicode-i18n.h:211 gucharmap/unicode-i18n.h:468
+#: gucharmap/unicode-i18n.h:214 gucharmap/unicode-i18n.h:486
 msgid "Yezidi"
 msgstr "Yezidi"
 
-#: gucharmap/unicode-i18n.h:212 gucharmap/unicode-i18n.h:423
+#: gucharmap/unicode-i18n.h:215 gucharmap/unicode-i18n.h:436
 msgid "Old Sogdian"
 msgstr "Oudsogdisch"
 
-#: gucharmap/unicode-i18n.h:213 gucharmap/unicode-i18n.h:444
+#: gucharmap/unicode-i18n.h:216 gucharmap/unicode-i18n.h:458
 msgid "Sogdian"
 msgstr "Sogdisch"
 
-#: gucharmap/unicode-i18n.h:214 gucharmap/unicode-i18n.h:338
+#: gucharmap/unicode-i18n.h:217 gucharmap/unicode-i18n.h:439
+msgid "Old Uyghur"
+msgstr "Oud-Oeigoers"
+
+#: gucharmap/unicode-i18n.h:218 gucharmap/unicode-i18n.h:350
 msgid "Chorasmian"
 msgstr "Chorasmisch"
 
-#: gucharmap/unicode-i18n.h:215 gucharmap/unicode-i18n.h:351
+#: gucharmap/unicode-i18n.h:219 gucharmap/unicode-i18n.h:364
 msgid "Elymaic"
 msgstr "Elymaïsch"
 
-#: gucharmap/unicode-i18n.h:216 gucharmap/unicode-i18n.h:328
+#: gucharmap/unicode-i18n.h:220 gucharmap/unicode-i18n.h:340
 msgid "Brahmi"
 msgstr "Brahmi"
 
-#: gucharmap/unicode-i18n.h:217 gucharmap/unicode-i18n.h:373
+#: gucharmap/unicode-i18n.h:221 gucharmap/unicode-i18n.h:386
 msgid "Kaithi"
 msgstr "Kaithi"
 
-#: gucharmap/unicode-i18n.h:218 gucharmap/unicode-i18n.h:445
+#: gucharmap/unicode-i18n.h:222 gucharmap/unicode-i18n.h:459
 msgid "Sora Sompeng"
 msgstr "Sora Sompeng"
 
-#: gucharmap/unicode-i18n.h:219 gucharmap/unicode-i18n.h:335
+#: gucharmap/unicode-i18n.h:223 gucharmap/unicode-i18n.h:347
 msgid "Chakma"
 msgstr "Chakma"
 
-#: gucharmap/unicode-i18n.h:220 gucharmap/unicode-i18n.h:391
+#: gucharmap/unicode-i18n.h:224 gucharmap/unicode-i18n.h:404
 msgid "Mahajani"
 msgstr "Mahajani"
 
-#: gucharmap/unicode-i18n.h:221 gucharmap/unicode-i18n.h:439
+#: gucharmap/unicode-i18n.h:225 gucharmap/unicode-i18n.h:453
 msgid "Sharada"
 msgstr "Sharada"
 
-#: gucharmap/unicode-i18n.h:222
+#: gucharmap/unicode-i18n.h:226
 msgid "Sinhala Archaic Numbers"
 msgstr "Sinhala archaïsche nummers"
 
-#: gucharmap/unicode-i18n.h:223 gucharmap/unicode-i18n.h:380
+#: gucharmap/unicode-i18n.h:227 gucharmap/unicode-i18n.h:393
 msgid "Khojki"
 msgstr "Khojki"
 
-#: gucharmap/unicode-i18n.h:224 gucharmap/unicode-i18n.h:407
+#: gucharmap/unicode-i18n.h:228 gucharmap/unicode-i18n.h:420
 msgid "Multani"
 msgstr "Multani"
 
-#: gucharmap/unicode-i18n.h:225 gucharmap/unicode-i18n.h:381
+#: gucharmap/unicode-i18n.h:229 gucharmap/unicode-i18n.h:394
 msgid "Khudawadi"
 msgstr "Khudawadi"
 
-#: gucharmap/unicode-i18n.h:226 gucharmap/unicode-i18n.h:356
+#: gucharmap/unicode-i18n.h:230 gucharmap/unicode-i18n.h:369
 msgid "Grantha"
 msgstr "Grantha"
 
-#: gucharmap/unicode-i18n.h:227 gucharmap/unicode-i18n.h:413
+#: gucharmap/unicode-i18n.h:231 gucharmap/unicode-i18n.h:426
 msgid "Newa"
 msgstr "Newa"
 
-#: gucharmap/unicode-i18n.h:228 gucharmap/unicode-i18n.h:463
+#: gucharmap/unicode-i18n.h:232 gucharmap/unicode-i18n.h:478
 msgid "Tirhuta"
 msgstr "Tirhuta"
 
-#: gucharmap/unicode-i18n.h:229 gucharmap/unicode-i18n.h:441
+#: gucharmap/unicode-i18n.h:233 gucharmap/unicode-i18n.h:455
 msgid "Siddham"
 msgstr "Siddham"
 
-#: gucharmap/unicode-i18n.h:230 gucharmap/unicode-i18n.h:404
+#: gucharmap/unicode-i18n.h:234 gucharmap/unicode-i18n.h:417
 msgid "Modi"
 msgstr "Modi"
 
-#: gucharmap/unicode-i18n.h:231
+#: gucharmap/unicode-i18n.h:235
 msgid "Mongolian Supplement"
 msgstr "Mongools (aanvulling)"
 
-#: gucharmap/unicode-i18n.h:232 gucharmap/unicode-i18n.h:455
+#: gucharmap/unicode-i18n.h:236 gucharmap/unicode-i18n.h:469
 msgid "Takri"
 msgstr "Takri"
 
-#: gucharmap/unicode-i18n.h:233 gucharmap/unicode-i18n.h:316
+#: gucharmap/unicode-i18n.h:237 gucharmap/unicode-i18n.h:328
 msgid "Ahom"
 msgstr "Ahom"
 
-#: gucharmap/unicode-i18n.h:234 gucharmap/unicode-i18n.h:347
+#: gucharmap/unicode-i18n.h:238 gucharmap/unicode-i18n.h:360
 msgid "Dogra"
 msgstr "Dogra"
 
-#: gucharmap/unicode-i18n.h:235 gucharmap/unicode-i18n.h:467
+#: gucharmap/unicode-i18n.h:239 gucharmap/unicode-i18n.h:485
 msgid "Warang Citi"
 msgstr "Warang Citi"
 
-#: gucharmap/unicode-i18n.h:236 gucharmap/unicode-i18n.h:346
+#: gucharmap/unicode-i18n.h:240 gucharmap/unicode-i18n.h:359
 msgid "Dives Akuru"
 msgstr "Dhives Akuru"
 
-#: gucharmap/unicode-i18n.h:237 gucharmap/unicode-i18n.h:411
+#: gucharmap/unicode-i18n.h:241 gucharmap/unicode-i18n.h:424
 msgid "Nandinagari"
 msgstr "Nandinagari"
 
-#: gucharmap/unicode-i18n.h:238 gucharmap/unicode-i18n.h:470
+#: gucharmap/unicode-i18n.h:242 gucharmap/unicode-i18n.h:488
 msgid "Zanabazar Square"
 msgstr "Zanabazar-vierkant"
 
-#: gucharmap/unicode-i18n.h:239 gucharmap/unicode-i18n.h:446
+#: gucharmap/unicode-i18n.h:243 gucharmap/unicode-i18n.h:460
 msgid "Soyombo"
 msgstr "Soyombo"
 
-#: gucharmap/unicode-i18n.h:240 gucharmap/unicode-i18n.h:431
+# Het schrift heet ‘Canadian Aboriginal syllabics’, dus dat laten we maar
+# onvertaald bij gebrek aan een fatsoenlijke Nederlandse vertaling. Let op, er
+# staat ‘syllabics’, niet ‘syllables’! (Wouter Bolsterlee)
+#: gucharmap/unicode-i18n.h:244
+msgid "Unified Canadian Aboriginal Syllabics Extended-A"
+msgstr "Verenigde Canadese Aboriginal Syllabics (uitbreiding A)"
+
+#: gucharmap/unicode-i18n.h:245 gucharmap/unicode-i18n.h:445
 msgid "Pau Cin Hau"
 msgstr "Pau Cin Hau"
 
-#: gucharmap/unicode-i18n.h:241 gucharmap/unicode-i18n.h:326
+#: gucharmap/unicode-i18n.h:246 gucharmap/unicode-i18n.h:338
 msgid "Bhaiksuki"
 msgstr "Bhaiksuki"
 
-#: gucharmap/unicode-i18n.h:242 gucharmap/unicode-i18n.h:396
+#: gucharmap/unicode-i18n.h:247 gucharmap/unicode-i18n.h:409
 msgid "Marchen"
 msgstr "Marchen"
 
-#: gucharmap/unicode-i18n.h:243 gucharmap/unicode-i18n.h:397
+#: gucharmap/unicode-i18n.h:248 gucharmap/unicode-i18n.h:410
 msgid "Masaram Gondi"
 msgstr "Masaram Gondi"
 
-#: gucharmap/unicode-i18n.h:244 gucharmap/unicode-i18n.h:359
+#: gucharmap/unicode-i18n.h:249 gucharmap/unicode-i18n.h:372
 msgid "Gunjala Gondi"
 msgstr "Gunjala Gondi"
 
-#: gucharmap/unicode-i18n.h:245 gucharmap/unicode-i18n.h:392
+#: gucharmap/unicode-i18n.h:250 gucharmap/unicode-i18n.h:405
 msgid "Makasar"
 msgstr "Makasar"
 
-#: gucharmap/unicode-i18n.h:246
+#: gucharmap/unicode-i18n.h:251
 msgid "Lisu Supplement"
 msgstr "Lisu (aanvulling)"
 
-#: gucharmap/unicode-i18n.h:247
+#: gucharmap/unicode-i18n.h:252
 msgid "Tamil Supplement"
 msgstr "Tamil (aanvulling)"
 
-#: gucharmap/unicode-i18n.h:248 gucharmap/unicode-i18n.h:341
+#: gucharmap/unicode-i18n.h:253 gucharmap/unicode-i18n.h:353
 msgid "Cuneiform"
 msgstr "Spijkerschrift"
 
-#: gucharmap/unicode-i18n.h:249
+#: gucharmap/unicode-i18n.h:254
 msgid "Cuneiform Numbers and Punctuation"
 msgstr "Spijkerschrift-getallen en -leestekens"
 
-#: gucharmap/unicode-i18n.h:250
+#: gucharmap/unicode-i18n.h:255
 msgid "Early Dynastic Cuneiform"
 msgstr "Vroegdynastiek cuneiform"
 
-#: gucharmap/unicode-i18n.h:251 gucharmap/unicode-i18n.h:349
+#: gucharmap/unicode-i18n.h:256
+msgid "Cypro-Minoan"
+msgstr "Cypro-Minoïsch"
+
+#: gucharmap/unicode-i18n.h:257 gucharmap/unicode-i18n.h:362
 msgid "Egyptian Hieroglyphs"
 msgstr "Egyptische hiërogliefen"
 
-#: gucharmap/unicode-i18n.h:252
+#: gucharmap/unicode-i18n.h:258
 msgid "Egyptian Hieroglyph Format Controls"
 msgstr "Egyptische hiërogliefen Format Controls"
 
-#: gucharmap/unicode-i18n.h:253 gucharmap/unicode-i18n.h:317
+#: gucharmap/unicode-i18n.h:259 gucharmap/unicode-i18n.h:329
 msgid "Anatolian Hieroglyphs"
 msgstr "Anatolische hiërogliefen"
 
-#: gucharmap/unicode-i18n.h:254
+#: gucharmap/unicode-i18n.h:260
 msgid "Bamum Supplement"
 msgstr "Bamum (aanvulling)"
 
-#: gucharmap/unicode-i18n.h:255 gucharmap/unicode-i18n.h:406
+#: gucharmap/unicode-i18n.h:261 gucharmap/unicode-i18n.h:419
 msgid "Mro"
 msgstr "Mro"
 
-#: gucharmap/unicode-i18n.h:256 gucharmap/unicode-i18n.h:323
+#: gucharmap/unicode-i18n.h:262 gucharmap/unicode-i18n.h:471
+#| msgid "Tangut"
+msgid "Tangsa"
+msgstr "Tangsa"
+
+#: gucharmap/unicode-i18n.h:263 gucharmap/unicode-i18n.h:335
 msgid "Bassa Vah"
 msgstr "Bassa Vah"
 
-#: gucharmap/unicode-i18n.h:257 gucharmap/unicode-i18n.h:429
+#: gucharmap/unicode-i18n.h:264 gucharmap/unicode-i18n.h:443
 msgid "Pahawh Hmong"
 msgstr "Pahawh Hmong"
 
-#: gucharmap/unicode-i18n.h:258 gucharmap/unicode-i18n.h:398
+#: gucharmap/unicode-i18n.h:265 gucharmap/unicode-i18n.h:411
 msgid "Medefaidrin"
 msgstr "Medefaidrin"
 
-#: gucharmap/unicode-i18n.h:259 gucharmap/unicode-i18n.h:403
+#: gucharmap/unicode-i18n.h:266 gucharmap/unicode-i18n.h:416
 msgid "Miao"
 msgstr "Miao"
 
-#: gucharmap/unicode-i18n.h:260
+#: gucharmap/unicode-i18n.h:267
 msgid "Ideographic Symbols and Punctuation"
 msgstr "Ideografische symbolen en leestekens"
 
-#: gucharmap/unicode-i18n.h:261 gucharmap/unicode-i18n.h:457
+#: gucharmap/unicode-i18n.h:268 gucharmap/unicode-i18n.h:472
 msgid "Tangut"
 msgstr "Tangut"
 
-#: gucharmap/unicode-i18n.h:262
+#: gucharmap/unicode-i18n.h:269
 msgid "Tangut Components"
 msgstr "Tangut-onderdelen"
 
-#: gucharmap/unicode-i18n.h:263 gucharmap/unicode-i18n.h:378
+#: gucharmap/unicode-i18n.h:270 gucharmap/unicode-i18n.h:391
 msgid "Khitan Small Script"
 msgstr "Khitaans klein schrift"
 
-#: gucharmap/unicode-i18n.h:264
+#: gucharmap/unicode-i18n.h:271
 msgid "Tangut Supplement"
 msgstr "Tangut (aanvulling)"
 
-#: gucharmap/unicode-i18n.h:265
+#: gucharmap/unicode-i18n.h:272
+msgid "Kana Extended-B"
+msgstr "Kana (uitbreiding B)"
+
+#: gucharmap/unicode-i18n.h:273
 msgid "Kana Supplement"
 msgstr "Kana (aanvulling)"
 
-#: gucharmap/unicode-i18n.h:266
+#: gucharmap/unicode-i18n.h:274
 msgid "Kana Extended-A"
 msgstr "Kana (uitbreiding A)"
 
-#: gucharmap/unicode-i18n.h:267
+#: gucharmap/unicode-i18n.h:275
 msgid "Small Kana Extension"
 msgstr "Kleine kana (uitbreiding)"
 
-#: gucharmap/unicode-i18n.h:268 gucharmap/unicode-i18n.h:414
+#: gucharmap/unicode-i18n.h:276 gucharmap/unicode-i18n.h:427
 msgid "Nushu"
 msgstr "Nushu"
 
-#: gucharmap/unicode-i18n.h:269 gucharmap/unicode-i18n.h:348
+#: gucharmap/unicode-i18n.h:277 gucharmap/unicode-i18n.h:361
 msgid "Duployan"
 msgstr "Duployan"
 
-#: gucharmap/unicode-i18n.h:270
+#: gucharmap/unicode-i18n.h:278
 msgid "Shorthand Format Controls"
 msgstr "Shorthand Format Controls"
 
-#: gucharmap/unicode-i18n.h:271
+#: gucharmap/unicode-i18n.h:279
+msgid "Znamenny Musical Notation"
+msgstr "Znamennyj-muzieknotatie"
+
+#: gucharmap/unicode-i18n.h:280
 msgid "Byzantine Musical Symbols"
 msgstr "Byzantijnse muzieksymbolen"
 
-#: gucharmap/unicode-i18n.h:272
+#: gucharmap/unicode-i18n.h:281
 msgid "Musical Symbols"
 msgstr "Muzieksymbolen"
 
-#: gucharmap/unicode-i18n.h:273
+#: gucharmap/unicode-i18n.h:282
 msgid "Ancient Greek Musical Notation"
 msgstr "Oudgriekse muzieknotatie"
 
-#: gucharmap/unicode-i18n.h:274
+#: gucharmap/unicode-i18n.h:283
 msgid "Mayan Numerals"
 msgstr "Mayagetallen"
 
-#: gucharmap/unicode-i18n.h:275
+#: gucharmap/unicode-i18n.h:284
 msgid "Tai Xuan Jing Symbols"
 msgstr "Tai Xuan Jing symbolen"
 
-#: gucharmap/unicode-i18n.h:276
+#: gucharmap/unicode-i18n.h:285
 msgid "Counting Rod Numerals"
 msgstr "Telraam-getallen"
 
-#: gucharmap/unicode-i18n.h:277
+#: gucharmap/unicode-i18n.h:286
 msgid "Mathematical Alphanumeric Symbols"
 msgstr "Wiskundige alfanumerieke symbolen"
 
-#: gucharmap/unicode-i18n.h:278
+#: gucharmap/unicode-i18n.h:287
 msgid "Sutton SignWriting"
 msgstr "Sutton SignWriting"
 
-#: gucharmap/unicode-i18n.h:279
+#: gucharmap/unicode-i18n.h:288
+msgid "Latin Extended-G"
+msgstr "Latijns (uitbreiding G)"
+
+#: gucharmap/unicode-i18n.h:289
 msgid "Glagolitic Supplement"
 msgstr "Glagolitisch (aanvulling)"
 
-#: gucharmap/unicode-i18n.h:280 gucharmap/unicode-i18n.h:415
+#: gucharmap/unicode-i18n.h:290 gucharmap/unicode-i18n.h:428
 msgid "Nyiakeng Puachue Hmong"
 msgstr "Nyiakeng Puachue Hmong"
 
-#: gucharmap/unicode-i18n.h:281 gucharmap/unicode-i18n.h:466
+#: gucharmap/unicode-i18n.h:291 gucharmap/unicode-i18n.h:479
+msgid "Toto"
+msgstr "Toto"
+
+#: gucharmap/unicode-i18n.h:292 gucharmap/unicode-i18n.h:484
 msgid "Wancho"
 msgstr "Wancho"
 
-#: gucharmap/unicode-i18n.h:282 gucharmap/unicode-i18n.h:400
+#: gucharmap/unicode-i18n.h:293
+msgid "Ethiopic Extended-B"
+msgstr "Ethiopisch (uitbreiding B)"
+
+#: gucharmap/unicode-i18n.h:294 gucharmap/unicode-i18n.h:413
 msgid "Mende Kikakui"
 msgstr "Mende Kikakui"
 
-#: gucharmap/unicode-i18n.h:283 gucharmap/unicode-i18n.h:315
+#: gucharmap/unicode-i18n.h:295 gucharmap/unicode-i18n.h:327
 msgid "Adlam"
 msgstr "Adlam"
 
-#: gucharmap/unicode-i18n.h:284
+#: gucharmap/unicode-i18n.h:296
 msgid "Indic Siyaq Numbers"
 msgstr "Indische Siyaqgetallen"
 
-#: gucharmap/unicode-i18n.h:285
+#: gucharmap/unicode-i18n.h:297
 msgid "Ottoman Siyaq Numbers"
 msgstr "Ottomaanse Siyaqgetallen"
 
-#: gucharmap/unicode-i18n.h:286
+#: gucharmap/unicode-i18n.h:298
 msgid "Arabic Mathematical Alphabetic Symbols"
 msgstr "Arabische wiskundige alfabetische symbolen"
 
-#: gucharmap/unicode-i18n.h:287
+#: gucharmap/unicode-i18n.h:299
 msgid "Mahjong Tiles"
 msgstr "Mahjong-stenen"
 
-#: gucharmap/unicode-i18n.h:288
+#: gucharmap/unicode-i18n.h:300
 msgid "Domino Tiles"
 msgstr "Domino-stenen"
 
-#: gucharmap/unicode-i18n.h:289
+#: gucharmap/unicode-i18n.h:301
 msgid "Playing Cards"
 msgstr "Speelkaarten"
 
-#: gucharmap/unicode-i18n.h:290
+#: gucharmap/unicode-i18n.h:302
 msgid "Enclosed Alphanumeric Supplement"
 msgstr "Ingesloten alfanumerieke tekens (supplement)"
 
-#: gucharmap/unicode-i18n.h:291
+#: gucharmap/unicode-i18n.h:303
 msgid "Enclosed Ideographic Supplement"
 msgstr "Ingesloten ideografisch supplement"
 
-#: gucharmap/unicode-i18n.h:292
+#: gucharmap/unicode-i18n.h:304
 msgid "Miscellaneous Symbols and Pictographs"
 msgstr "Gemengde symbolen en pictogrammen"
 
-#: gucharmap/unicode-i18n.h:293
+#: gucharmap/unicode-i18n.h:305
 msgid "Emoticons"
 msgstr "Emoticons"
 
-#: gucharmap/unicode-i18n.h:294
+#: gucharmap/unicode-i18n.h:306
 msgid "Ornamental Dingbats"
 msgstr "Sierdingbats"
 
-#: gucharmap/unicode-i18n.h:295
+#: gucharmap/unicode-i18n.h:307
 msgid "Transport and Map Symbols"
 msgstr "Transport- en kaartsymbolen"
 
-#: gucharmap/unicode-i18n.h:296
+#: gucharmap/unicode-i18n.h:308
 msgid "Alchemical Symbols"
 msgstr "Alchemiche symbolen"
 
-#: gucharmap/unicode-i18n.h:297
+#: gucharmap/unicode-i18n.h:309
 msgid "Geometric Shapes Extended"
 msgstr "Geometrische figuren (uitbreiding)"
 
-#: gucharmap/unicode-i18n.h:298
+#: gucharmap/unicode-i18n.h:310
 msgid "Supplemental Arrows-C"
 msgstr "Aanvullende pijlen C"
 
-#: gucharmap/unicode-i18n.h:299
+#: gucharmap/unicode-i18n.h:311
 msgid "Supplemental Symbols and Pictographs"
 msgstr "Aanvullende symbolen en pictogrammen"
 
-#: gucharmap/unicode-i18n.h:300
+#: gucharmap/unicode-i18n.h:312
 msgid "Chess Symbols"
 msgstr "Schaaksymbolen"
 
-#: gucharmap/unicode-i18n.h:301
+#: gucharmap/unicode-i18n.h:313
 msgid "Symbols and Pictographs Extended-A"
 msgstr "Symbolen en pictogrammen (uitbreiding A)"
 
-#: gucharmap/unicode-i18n.h:302
+#: gucharmap/unicode-i18n.h:314
 msgid "Symbols for Legacy Computing"
 msgstr "Symbolen voor verouderde computerprogramma’s"
 
-#: gucharmap/unicode-i18n.h:303
+#: gucharmap/unicode-i18n.h:315
 msgid "CJK Unified Ideographs Extension B"
 msgstr "Verenigde CJK-ideogrammen (uitbreiding B)"
 
-#: gucharmap/unicode-i18n.h:304
+#: gucharmap/unicode-i18n.h:316
 msgid "CJK Unified Ideographs Extension C"
 msgstr "Verenigde CJK-ideogrammen (uitbreiding C)"
 
-#: gucharmap/unicode-i18n.h:305
+#: gucharmap/unicode-i18n.h:317
 msgid "CJK Unified Ideographs Extension D"
 msgstr "Verenigde CJK-ideogrammen (uitbreiding D)"
 
-#: gucharmap/unicode-i18n.h:306
+#: gucharmap/unicode-i18n.h:318
 msgid "CJK Unified Ideographs Extension E"
 msgstr "Verenigde CJK-ideogrammen (uitbreiding E)"
 
-#: gucharmap/unicode-i18n.h:307
+#: gucharmap/unicode-i18n.h:319
 msgid "CJK Unified Ideographs Extension F"
 msgstr "Verenigde CJK-ideogrammen (uitbreiding F)"
 
 # Drie keer woordwaarde! (Wouter Bolsterlee)
-#: gucharmap/unicode-i18n.h:308
+#: gucharmap/unicode-i18n.h:320
 msgid "CJK Compatibility Ideographs Supplement"
 msgstr "CJK-compatibiliteitideogrammen (aanvulling)"
 
-#: gucharmap/unicode-i18n.h:309
+#: gucharmap/unicode-i18n.h:321
 msgid "CJK Unified Ideographs Extension G"
 msgstr "Verenigde CJK-ideogrammen (uitbreiding G)"
 
-#: gucharmap/unicode-i18n.h:310
+#: gucharmap/unicode-i18n.h:322
 msgid "Tags"
 msgstr "Tags"
 
-#: gucharmap/unicode-i18n.h:311
+#: gucharmap/unicode-i18n.h:323
 msgid "Variation Selectors Supplement"
 msgstr "Variatie-selectoren (aanvulling)"
 
-#: gucharmap/unicode-i18n.h:312
+#: gucharmap/unicode-i18n.h:324
 msgid "Supplementary Private Use Area-A"
 msgstr "Aanvullend gebied voor privaatgebruik A"
 
-#: gucharmap/unicode-i18n.h:313
+#: gucharmap/unicode-i18n.h:325
 msgid "Supplementary Private Use Area-B"
 msgstr "Aanvullend gebied voor privaatgebruik B"
 
-#: gucharmap/unicode-i18n.h:329
+#: gucharmap/unicode-i18n.h:341
 msgid "Braille"
 msgstr "Braille"
 
-#: gucharmap/unicode-i18n.h:332
+#: gucharmap/unicode-i18n.h:344
 msgid "Canadian Aboriginal"
 msgstr "Canadese Aboriginal-tekens"
 
-#: gucharmap/unicode-i18n.h:339
+#: gucharmap/unicode-i18n.h:351
 msgid "Common"
 msgstr "Algemeen"
 
-#: gucharmap/unicode-i18n.h:342
+#: gucharmap/unicode-i18n.h:354
 msgid "Cypriot"
 msgstr "Cypriotisch"
 
-#: gucharmap/unicode-i18n.h:357
+#: gucharmap/unicode-i18n.h:355
+msgid "Cypro Minoan"
+msgstr "Cypro-Minoïsch"
+
+#: gucharmap/unicode-i18n.h:370
 msgid "Greek"
 msgstr "Grieks"
 
-#: gucharmap/unicode-i18n.h:361
+#: gucharmap/unicode-i18n.h:374
 msgid "Han"
 msgstr "Han"
 
-#: gucharmap/unicode-i18n.h:362
+#: gucharmap/unicode-i18n.h:375
 msgid "Hangul"
 msgstr "Hangul"
 
-#: gucharmap/unicode-i18n.h:369
+#: gucharmap/unicode-i18n.h:382
 msgid "Inherited"
 msgstr "Overerfd"
 
 # Ja, met een s erachter. Het gaat om het schrift hier, niet om de taal.
 # (Wouter Bolsterlee)
-#: gucharmap/unicode-i18n.h:383
+#: gucharmap/unicode-i18n.h:396
 msgid "Latin"
 msgstr "Latijns"
 
-#: gucharmap/unicode-i18n.h:387
+#: gucharmap/unicode-i18n.h:400
 msgid "Linear B"
 msgstr "Lineair-B"
 
-#: gucharmap/unicode-i18n.h:432
+#: gucharmap/unicode-i18n.h:446
 msgid "Phags Pa"
 msgstr "Phags Pa"
 
-#: gucharmap/unicode-i18n.h:442
+#: gucharmap/unicode-i18n.h:456
 msgid "Signwriting"
 msgstr "Signwriting"
 
-#: gucharmap/unicode-i18n.h:469
+#: gucharmap/unicode-i18n.h:487
 msgid "Yi"
 msgstr "Yi"
