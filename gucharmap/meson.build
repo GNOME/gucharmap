@@ -140,6 +140,7 @@ libgucharmap_gtk3_public_deps = [
   gio_dep,
   glib_dep,
   gtk3_dep,
+  pcre2_dep,
 ]
 
 libgucharmap_gtk3_deps = libgucharmap_gtk3_public_deps

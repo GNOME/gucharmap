@@ -29,6 +29,9 @@
 #include "gucharmap-marshal.h"
 #include "gucharmap-private.h"
 
+#define PCRE2_CODE_UNIT_WIDTH 0
+#include <pcre2.h>
+
 struct _GucharmapCharmapPrivate {
   GtkWidget *notebook;
   GucharmapChaptersView *chapters_view;
@@ -367,18 +370,34 @@ insert_hanja_prop_detail (GucharmapCharmap *charmap,
   gtk_text_buffer_insert (buffer, iter, name, -1);
   gtk_text_buffer_insert (buffer, iter, " ", -1);
 
-  GError *err = NULL;
-  GRegex *regex = g_regex_new ("[\\w:\\w*]", 0, 0, &err);
-  g_assert_no_error (err);
+  int errcode;
+  size_t erroffset;
+  pcre2_code_8* code = pcre2_compile_8 ((PCRE2_SPTR8)"[\\w:\\w*]",
+                                        PCRE2_ZERO_TERMINATED,
+                                        0, /* compile flags */
+                                        &errcode,
+                                        &erroffset,
+                                        NULL /* general context */);
+  g_assert_nonnull (code);
 
-  GMatchInfo *match_info = NULL;
-  g_regex_match (regex, value, 0, &match_info);
-  gboolean matches = g_match_info_matches (match_info);
+  pcre2_match_context_8* context = pcre2_match_context_create_8 (NULL);
+  pcre2_set_match_limit_8 (context, 256); /* plenty */
 
-  g_regex_unref (regex);
-  g_match_info_free (match_info);
+  pcre2_match_data_8* data = pcre2_match_data_create_from_pattern_8 (code, NULL);
 
-  if (!matches) {
+  int matches = pcre2_match_8 (code,
+                               (PCRE2_SPTR8)value,
+                               PCRE2_ZERO_TERMINATED,
+                               0, /* start offset */
+                               0, /* match flags */
+                               data,
+                               context);
+
+  pcre2_match_context_free_8 (context);
+  pcre2_match_data_free_8 (data);
+  pcre2_code_free_8 (code);
+
+  if (matches <= 0) {
     gtk_text_buffer_insert_with_tags_by_name (buffer, iter, value, -1,
                                               "detail-value", NULL);
     gtk_text_buffer_insert (buffer, iter, "\n", -1);

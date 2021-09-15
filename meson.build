@@ -37,6 +37,7 @@ freetype2_req_version = '1.0'
 gio_req_version       = '2.32.0'
 glib_req_version      = '2.32.0'
 gtk3_req_version      = '3.4.0'
+pcre2_req_version     = '10.21'
 
 # NOTE! This is an exact requirement. Each gucharmap version (major.minor) is
 # designed to work with, and only with, this unicode version. Upgrading to
@@ -231,9 +232,10 @@ endforeach
 
 # Dependencies
 
-freetype2_dep = dependency('freetype2', version: '>=' + freetype2_req_version,)
-gio_dep       = dependency('gio-2.0',   version: '>=' + gio_req_version,)
-glib_dep      = dependency('glib-2.0',  version: '>=' + glib_req_version,)
+freetype2_dep = dependency('freetype2',  version: '>=' + freetype2_req_version,)
+gio_dep       = dependency('gio-2.0',    version: '>=' + gio_req_version,)
+glib_dep      = dependency('glib-2.0',   version: '>=' + glib_req_version,)
+pcre2_dep     = dependency('libpcre2-8', version: '>=' + pcre2_req_version)
 
 if get_option('gtk3')
   gtk3_dep = dependency('gtk+-3.0',  version: '>=' + gtk3_req_version,)
