@@ -8,14 +8,14 @@
 # Lukas Novotny <lukasnov@cvs.gnome.org>, 2006.
 # Jakub Friedl <jfriedl@suse.cz>, 2006, 2007.
 # Petr Kovar <pknbe@volny.cz>, 2007, 2008, 2009, 2010.
-# Marek Černocký <marek@manet.cz>, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2020.
+# Marek Černocký <marek@manet.cz>, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2020, 2021.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gucharmap\n"
+"Project-Id-Version: gucharmap unicode-13\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gucharmap/issues\n"
-"POT-Creation-Date: 2020-09-12 20:19+0000\n"
-"PO-Revision-Date: 2020-11-09 18:17+0100\n"
+"POT-Creation-Date: 2021-09-14 17:49+0000\n"
+"PO-Revision-Date: 2021-09-28 11:59+0200\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: čeština <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -97,188 +97,210 @@ msgstr "GNOME"
 msgid "gucharmap"
 msgstr ""
 
-#: gucharmap/gucharmap-block-chapters-model.c:53
+#: gucharmap/gucharmap-block-chapters-model.c:80
 msgid "All"
 msgstr "Vše"
 
-#: gucharmap/gucharmap-block-chapters-model.c:138
+#: gucharmap/gucharmap-block-chapters-model.c:194
 msgid "Unicode Block"
 msgstr "Blok Unikódu"
 
-#: gucharmap/gucharmap-charmap.c:446
+#. Translators: this is the name of a korean standard
+#: gucharmap/gucharmap-charmap.c:436
+msgid "KS X 1001"
+msgstr "KS X 1001"
+
+#. Translators: this is the name of a korean standard
+#: gucharmap/gucharmap-charmap.c:452
+msgid "KS X 1002"
+msgstr "KS X 1002"
+
+#: gucharmap/gucharmap-charmap.c:467
+msgid "Korean Education Hanja"
+msgstr "Korejská školní Hanja"
+
+#: gucharmap/gucharmap-charmap.c:483
+msgid "Korean Hanja for Use in Personal Names"
+msgstr "Korejská Hanja pro osobní jména"
+
+#: gucharmap/gucharmap-charmap.c:498
+msgid "later removed at the code point"
+msgstr "znak byl z kódu odstraněn"
+
+#: gucharmap/gucharmap-charmap.c:606
 msgid "Font variant of"
 msgstr "V jiném fontu varianta"
 
-#: gucharmap/gucharmap-charmap.c:447
+#: gucharmap/gucharmap-charmap.c:607
 msgid "No-break version of"
 msgstr "Nezalomitelná varianta"
 
-#: gucharmap/gucharmap-charmap.c:448
+#: gucharmap/gucharmap-charmap.c:608
 msgid "Initial presentation form of"
 msgstr "Začáteční varianta"
 
-#: gucharmap/gucharmap-charmap.c:449
+#: gucharmap/gucharmap-charmap.c:609
 msgid "Medial presentation form of"
 msgstr "Středová varianta"
 
-#: gucharmap/gucharmap-charmap.c:450
+#: gucharmap/gucharmap-charmap.c:610
 msgid "Final presentation form of"
 msgstr "Koncová varianta"
 
-#: gucharmap/gucharmap-charmap.c:451
+#: gucharmap/gucharmap-charmap.c:611
 msgid "Isolated presentation form of"
 msgstr "Samostatná varianta"
 
-#: gucharmap/gucharmap-charmap.c:452
+#: gucharmap/gucharmap-charmap.c:612
 msgid "Encircled form of"
 msgstr "Zakroužkovaná podoba"
 
-#: gucharmap/gucharmap-charmap.c:453
+#: gucharmap/gucharmap-charmap.c:613
 msgid "Superscript form of"
 msgstr "Podoba horního indexu"
 
-#: gucharmap/gucharmap-charmap.c:454
+#: gucharmap/gucharmap-charmap.c:614
 msgid "Subscript form of"
 msgstr "Podoba dolního indexu"
 
-#: gucharmap/gucharmap-charmap.c:455
+#: gucharmap/gucharmap-charmap.c:615
 msgid "Vertical layout presentation form of"
 msgstr "Podoba pro svislé znázornění"
 
-#: gucharmap/gucharmap-charmap.c:456
+#: gucharmap/gucharmap-charmap.c:616
 msgid "Wide compatibility character of"
 msgstr "Kompatibilní široká podoba"
 
-#: gucharmap/gucharmap-charmap.c:457
+#: gucharmap/gucharmap-charmap.c:617
 msgid "Narrow compatibility character of"
 msgstr "Kompatibilní úzká podoba"
 
-#: gucharmap/gucharmap-charmap.c:458
+#: gucharmap/gucharmap-charmap.c:618
 msgid "Small variant form of"
 msgstr "Podoba malé varianty"
 
-#: gucharmap/gucharmap-charmap.c:459
+#: gucharmap/gucharmap-charmap.c:619
 msgid "CJK squared font variant of"
 msgstr "Čtvercová varianta ČJK"
 
-#: gucharmap/gucharmap-charmap.c:460
+#: gucharmap/gucharmap-charmap.c:620
 msgid "Vulgar fraction form of"
 msgstr "Podoba nehezkého zlomku"
 
-#: gucharmap/gucharmap-charmap.c:461
+#: gucharmap/gucharmap-charmap.c:621
 msgid "Unspecified compatibility character of"
 msgstr "Blíže neurčená kompatibilita s"
 
-#: gucharmap/gucharmap-charmap.c:681
+#: gucharmap/gucharmap-charmap.c:841
 msgid "Compatibility decomposition:"
 msgstr "Kompatibilní rozklad:"
 
-#: gucharmap/gucharmap-charmap.c:682
+#: gucharmap/gucharmap-charmap.c:842
 msgid "Canonical decomposition:"
 msgstr "Kanonický rozklad:"
 
-#: gucharmap/gucharmap-charmap.c:724 gucharmap/gucharmap-chartable.c:581
+#: gucharmap/gucharmap-charmap.c:884 gucharmap/gucharmap-chartable.c:581
 msgid "[not a printable character]"
 msgstr "[není tisknutelným znakem]"
 
-#: gucharmap/gucharmap-charmap.c:738
+#: gucharmap/gucharmap-charmap.c:898
 msgid "General Character Properties"
 msgstr "Obecné vlastnosti znaku"
 
-#: gucharmap/gucharmap-charmap.c:744
+#: gucharmap/gucharmap-charmap.c:904
 msgid "In Unicode since:"
 msgstr "V Unikódu od:"
 
 #. character category
-#: gucharmap/gucharmap-charmap.c:748
+#: gucharmap/gucharmap-charmap.c:908
 msgid "Unicode category:"
 msgstr "Kategorie Unikódu:"
 
-#: gucharmap/gucharmap-charmap.c:759
+#: gucharmap/gucharmap-charmap.c:919
 msgid "Various Useful Representations"
 msgstr "Různé užitečné reprezentace"
 
-#: gucharmap/gucharmap-charmap.c:769
+#: gucharmap/gucharmap-charmap.c:929
 msgid "UTF-8:"
 msgstr "UTF-8:"
 
-#: gucharmap/gucharmap-charmap.c:777
+#: gucharmap/gucharmap-charmap.c:937
 msgid "UTF-16:"
 msgstr "UTF-16:"
 
-#: gucharmap/gucharmap-charmap.c:788
+#: gucharmap/gucharmap-charmap.c:948
 msgid "C octal escaped UTF-8:"
 msgstr "Osmičkové vyjádření UTF-8 v C:"
 
-#: gucharmap/gucharmap-charmap.c:798
+#: gucharmap/gucharmap-charmap.c:958
 msgid "XML decimal entity:"
 msgstr "Entita XML (desítkově):"
 
-#: gucharmap/gucharmap-charmap.c:809
+#: gucharmap/gucharmap-charmap.c:969
 msgid "Annotations and Cross References"
 msgstr "Poznámky a křížové odkazy"
 
-#: gucharmap/gucharmap-charmap.c:816
+#: gucharmap/gucharmap-charmap.c:976
 msgid "Alias names:"
 msgstr "Alternativní názvy:"
 
-#: gucharmap/gucharmap-charmap.c:825
+#: gucharmap/gucharmap-charmap.c:985
 msgid "Notes:"
 msgstr "Poznámky:"
 
-#: gucharmap/gucharmap-charmap.c:834
+#: gucharmap/gucharmap-charmap.c:994
 msgid "See also:"
 msgstr "Viz také:"
 
-#: gucharmap/gucharmap-charmap.c:843
+#: gucharmap/gucharmap-charmap.c:1003
 msgid "Approximate equivalents:"
 msgstr "Přibližné ekvivalenty:"
 
-#: gucharmap/gucharmap-charmap.c:852
+#: gucharmap/gucharmap-charmap.c:1012
 msgid "Equivalents:"
 msgstr "Ekvivalenty:"
 
-#: gucharmap/gucharmap-charmap.c:867
+#: gucharmap/gucharmap-charmap.c:1027
 msgid "CJK Ideograph Information"
 msgstr "Informace o ideografických znacích ČJK"
 
-#: gucharmap/gucharmap-charmap.c:872
+#: gucharmap/gucharmap-charmap.c:1032
 msgid "Definition in English:"
 msgstr "Definice v angličtině:"
 
-#: gucharmap/gucharmap-charmap.c:877
+#: gucharmap/gucharmap-charmap.c:1037
 msgid "Mandarin Pronunciation:"
 msgstr "Mandarínská výslovnost:"
 
-#: gucharmap/gucharmap-charmap.c:882
+#: gucharmap/gucharmap-charmap.c:1042
 msgid "Cantonese Pronunciation:"
 msgstr "Kantonská výslovnost:"
 
-#: gucharmap/gucharmap-charmap.c:887
+#: gucharmap/gucharmap-charmap.c:1047
 msgid "Japanese On Pronunciation:"
 msgstr "Japonská výslovnost on:"
 
-#: gucharmap/gucharmap-charmap.c:892
+#: gucharmap/gucharmap-charmap.c:1052
 msgid "Japanese Kun Pronunciation:"
 msgstr "Japonská výslovnost kun:"
 
-#: gucharmap/gucharmap-charmap.c:897
+#: gucharmap/gucharmap-charmap.c:1057
 msgid "Tang Pronunciation:"
 msgstr "Výslovnost tang:"
 
-#: gucharmap/gucharmap-charmap.c:902
+#: gucharmap/gucharmap-charmap.c:1062
 msgid "Korean Pronunciation:"
 msgstr "Korejská výslovnost:"
 
-#: gucharmap/gucharmap-charmap.c:907
+#: gucharmap/gucharmap-charmap.c:1067
 msgid "Vietnamese Pronunciation:"
 msgstr "Vietnamská výslovnost:"
 
-#: gucharmap/gucharmap-charmap.c:1289
+#: gucharmap/gucharmap-charmap.c:1449
 msgid "Characte_r Table"
 msgstr "Tabulka z_naků"
 
-#: gucharmap/gucharmap-charmap.c:1336
+#: gucharmap/gucharmap-charmap.c:1496
 msgid "Character _Details"
 msgstr "Informa_ce o znaku"
 
@@ -286,15 +308,15 @@ msgstr "Informa_ce o znaku"
 msgid "Character Table"
 msgstr "Tabulka znaků"
 
-#: gucharmap/gucharmap-chartable.c:1290
+#: gucharmap/gucharmap-chartable.c:1264
 msgid "Unknown character, unable to identify."
 msgstr "Neznámý znak, nelze jej identifikovat."
 
-#: gucharmap/gucharmap-chartable.c:1292 gucharmap/gucharmap-search-dialog.c:582
+#: gucharmap/gucharmap-chartable.c:1266 gucharmap/gucharmap-search-dialog.c:582
 msgid "Not found."
 msgstr "Nenalezeno."
 
-#: gucharmap/gucharmap-chartable.c:1295
+#: gucharmap/gucharmap-chartable.c:1269
 msgid "Character found."
 msgstr "Znak nalezen."
 
@@ -394,13 +416,13 @@ msgstr "Rodina fontů"
 msgid "Font Size"
 msgstr "Velikost fontu"
 
-#: gucharmap/gucharmap-script-chapters-model.c:134
+#: gucharmap/gucharmap-script-chapters-model.c:149
 msgid "Script"
 msgstr "Písmo"
 
 #. Unicode assigns "Unknown" as the script name for any character not
 #. * specifically listed in Scripts.txt
-#: gucharmap/gucharmap-script-codepoint-list.c:465
+#: gucharmap/gucharmap-script-codepoint-list.c:465 gucharmap/unicode-i18n.h:481
 msgid "Unknown"
 msgstr "Neznámé"
 
@@ -749,8 +771,8 @@ msgid ""
 "the first letter of the alphabet in the current locale."
 msgstr ""
 "Toto je znak, který byl v mapě znaků vybrán jako poslední (a bude vybrán "
-"znovu, až bude mapa znaků znovu spuštěna). Jako výchozí hodnota je první znak "
-"abecedy v aktuálním národním prostředí."
+"znovu, až bude mapa znaků znovu spuštěna). Jako výchozí hodnota je první "
+"znak abecedy v aktuálním národním prostředí."
 
 #. The unicode code point of the first letter of the alphabet
 #: gucharmap/org.gnome.Charmap.gschema.xml:72
@@ -768,11 +790,11 @@ msgstr "Latin-1, doplněk"
 
 #: gucharmap/unicode-i18n.h:8
 msgid "Latin Extended-A"
-msgstr "Latinka rozšířená A"
+msgstr "Latinka, rozšířená – A"
 
 #: gucharmap/unicode-i18n.h:9
 msgid "Latin Extended-B"
-msgstr "Latinka rozšířená B)"
+msgstr "Latinka, rozšířená – B"
 
 #: gucharmap/unicode-i18n.h:10
 msgid "IPA Extensions"
@@ -790,7 +812,7 @@ msgstr "Kombinující diakritická znaménka"
 msgid "Greek and Coptic"
 msgstr "Řecké a koptské"
 
-#: gucharmap/unicode-i18n.h:14 gucharmap/unicode-i18n.h:343
+#: gucharmap/unicode-i18n.h:14 gucharmap/unicode-i18n.h:356
 msgid "Cyrillic"
 msgstr "Azbuka"
 
@@ -798,19 +820,19 @@ msgstr "Azbuka"
 msgid "Cyrillic Supplement"
 msgstr "Azbuka, doplněk"
 
-#: gucharmap/unicode-i18n.h:16 gucharmap/unicode-i18n.h:319
+#: gucharmap/unicode-i18n.h:16 gucharmap/unicode-i18n.h:331
 msgid "Armenian"
 msgstr "Arménské"
 
-#: gucharmap/unicode-i18n.h:17 gucharmap/unicode-i18n.h:366
+#: gucharmap/unicode-i18n.h:17 gucharmap/unicode-i18n.h:379
 msgid "Hebrew"
 msgstr "Hebrejské"
 
-#: gucharmap/unicode-i18n.h:18 gucharmap/unicode-i18n.h:318
+#: gucharmap/unicode-i18n.h:18 gucharmap/unicode-i18n.h:330
 msgid "Arabic"
 msgstr "Arabské"
 
-#: gucharmap/unicode-i18n.h:19 gucharmap/unicode-i18n.h:449
+#: gucharmap/unicode-i18n.h:19 gucharmap/unicode-i18n.h:463
 msgid "Syriac"
 msgstr "Syrské"
 
@@ -818,19 +840,19 @@ msgstr "Syrské"
 msgid "Arabic Supplement"
 msgstr "Arabské, doplněk"
 
-#: gucharmap/unicode-i18n.h:21 gucharmap/unicode-i18n.h:459
+#: gucharmap/unicode-i18n.h:21 gucharmap/unicode-i18n.h:474
 msgid "Thaana"
 msgstr "Thaana"
 
-#: gucharmap/unicode-i18n.h:22 gucharmap/unicode-i18n.h:409
+#: gucharmap/unicode-i18n.h:22 gucharmap/unicode-i18n.h:422
 msgid "N'Ko"
 msgstr "N'Ko"
 
-#: gucharmap/unicode-i18n.h:23 gucharmap/unicode-i18n.h:437
+#: gucharmap/unicode-i18n.h:23 gucharmap/unicode-i18n.h:451
 msgid "Samaritan"
 msgstr "Samaritánské"
 
-#: gucharmap/unicode-i18n.h:24 gucharmap/unicode-i18n.h:394
+#: gucharmap/unicode-i18n.h:24 gucharmap/unicode-i18n.h:407
 msgid "Mandaic"
 msgstr "Mandejské"
 
@@ -839,1205 +861,1257 @@ msgid "Syriac Supplement"
 msgstr "Syrské, doplněk"
 
 #: gucharmap/unicode-i18n.h:26
+msgid "Arabic Extended-B"
+msgstr "Arabské, rozšířené – B"
+
+#: gucharmap/unicode-i18n.h:27
 msgid "Arabic Extended-A"
 msgstr "Arabské, rozšířené – A"
 
-#: gucharmap/unicode-i18n.h:27 gucharmap/unicode-i18n.h:345
+#: gucharmap/unicode-i18n.h:28 gucharmap/unicode-i18n.h:358
 msgid "Devanagari"
 msgstr "Dévanagárí"
 
-#: gucharmap/unicode-i18n.h:28 gucharmap/unicode-i18n.h:325
+#: gucharmap/unicode-i18n.h:29 gucharmap/unicode-i18n.h:337
 msgid "Bengali"
 msgstr "Bengálské"
 
-#: gucharmap/unicode-i18n.h:29 gucharmap/unicode-i18n.h:360
+#: gucharmap/unicode-i18n.h:30 gucharmap/unicode-i18n.h:373
 msgid "Gurmukhi"
 msgstr "Gurmuchské"
 
-#: gucharmap/unicode-i18n.h:30 gucharmap/unicode-i18n.h:358
+#: gucharmap/unicode-i18n.h:31 gucharmap/unicode-i18n.h:371
 msgid "Gujarati"
 msgstr "Gudžarátské"
 
-#: gucharmap/unicode-i18n.h:31 gucharmap/unicode-i18n.h:426
+#: gucharmap/unicode-i18n.h:32 gucharmap/unicode-i18n.h:440
 msgid "Oriya"
 msgstr "Urijské"
 
-#: gucharmap/unicode-i18n.h:32 gucharmap/unicode-i18n.h:456
+#: gucharmap/unicode-i18n.h:33 gucharmap/unicode-i18n.h:470
 msgid "Tamil"
 msgstr "Tamilské"
 
-#: gucharmap/unicode-i18n.h:33 gucharmap/unicode-i18n.h:458
+#: gucharmap/unicode-i18n.h:34 gucharmap/unicode-i18n.h:473
 msgid "Telugu"
 msgstr "Telugské"
 
-#: gucharmap/unicode-i18n.h:34 gucharmap/unicode-i18n.h:374
+#: gucharmap/unicode-i18n.h:35 gucharmap/unicode-i18n.h:387
 msgid "Kannada"
 msgstr "Kannadské"
 
-#: gucharmap/unicode-i18n.h:35 gucharmap/unicode-i18n.h:393
+#: gucharmap/unicode-i18n.h:36 gucharmap/unicode-i18n.h:406
 msgid "Malayalam"
 msgstr "Malajálamské"
 
-#: gucharmap/unicode-i18n.h:36 gucharmap/unicode-i18n.h:443
+#: gucharmap/unicode-i18n.h:37 gucharmap/unicode-i18n.h:457
 msgid "Sinhala"
 msgstr "Sinhálské"
 
-#: gucharmap/unicode-i18n.h:37 gucharmap/unicode-i18n.h:460
+#: gucharmap/unicode-i18n.h:38 gucharmap/unicode-i18n.h:475
 msgid "Thai"
 msgstr "Thajské"
 
-#: gucharmap/unicode-i18n.h:38 gucharmap/unicode-i18n.h:382
+#: gucharmap/unicode-i18n.h:39 gucharmap/unicode-i18n.h:395
 msgid "Lao"
 msgstr "Laoské"
 
-#: gucharmap/unicode-i18n.h:39 gucharmap/unicode-i18n.h:461
+#: gucharmap/unicode-i18n.h:40 gucharmap/unicode-i18n.h:476
 msgid "Tibetan"
 msgstr "Tibetské"
 
-#: gucharmap/unicode-i18n.h:40 gucharmap/unicode-i18n.h:408
+#: gucharmap/unicode-i18n.h:41 gucharmap/unicode-i18n.h:421
 msgid "Myanmar"
 msgstr "Barmské"
 
-#: gucharmap/unicode-i18n.h:41 gucharmap/unicode-i18n.h:353
+#: gucharmap/unicode-i18n.h:42 gucharmap/unicode-i18n.h:366
 msgid "Georgian"
 msgstr "Gruzínské"
 
-#: gucharmap/unicode-i18n.h:42
+#: gucharmap/unicode-i18n.h:43
 msgid "Hangul Jamo"
 msgstr "Hangul džamo"
 
-#: gucharmap/unicode-i18n.h:43 gucharmap/unicode-i18n.h:352
+#: gucharmap/unicode-i18n.h:44 gucharmap/unicode-i18n.h:365
 msgid "Ethiopic"
 msgstr "Etiopské"
 
-#: gucharmap/unicode-i18n.h:44
+#: gucharmap/unicode-i18n.h:45
 msgid "Ethiopic Supplement"
 msgstr "Etiopské, doplněk"
 
-#: gucharmap/unicode-i18n.h:45 gucharmap/unicode-i18n.h:337
+#: gucharmap/unicode-i18n.h:46 gucharmap/unicode-i18n.h:349
 msgid "Cherokee"
 msgstr "Čerokí"
 
-#: gucharmap/unicode-i18n.h:46
+#: gucharmap/unicode-i18n.h:47
 msgid "Unified Canadian Aboriginal Syllabics"
 msgstr "Sjednocené kanadské domorodé slabikové"
 
-#: gucharmap/unicode-i18n.h:47 gucharmap/unicode-i18n.h:416
+#: gucharmap/unicode-i18n.h:48 gucharmap/unicode-i18n.h:429
 msgid "Ogham"
 msgstr "Ogam"
 
-#: gucharmap/unicode-i18n.h:48 gucharmap/unicode-i18n.h:436
+#: gucharmap/unicode-i18n.h:49 gucharmap/unicode-i18n.h:450
 msgid "Runic"
 msgstr "Runové"
 
-#: gucharmap/unicode-i18n.h:49 gucharmap/unicode-i18n.h:450
+#: gucharmap/unicode-i18n.h:50 gucharmap/unicode-i18n.h:464
 msgid "Tagalog"
 msgstr "Tagalské"
 
-#: gucharmap/unicode-i18n.h:50 gucharmap/unicode-i18n.h:364
+#: gucharmap/unicode-i18n.h:51 gucharmap/unicode-i18n.h:377
 msgid "Hanunoo"
 msgstr "Hanunoo"
 
-#: gucharmap/unicode-i18n.h:51 gucharmap/unicode-i18n.h:331
+#: gucharmap/unicode-i18n.h:52 gucharmap/unicode-i18n.h:343
 msgid "Buhid"
 msgstr "Buhidské"
 
-#: gucharmap/unicode-i18n.h:52 gucharmap/unicode-i18n.h:451
+#: gucharmap/unicode-i18n.h:53 gucharmap/unicode-i18n.h:465
 msgid "Tagbanwa"
 msgstr "Tagbanwa"
 
-#: gucharmap/unicode-i18n.h:53 gucharmap/unicode-i18n.h:379
+#: gucharmap/unicode-i18n.h:54 gucharmap/unicode-i18n.h:392
 msgid "Khmer"
 msgstr "Khmerské"
 
-#: gucharmap/unicode-i18n.h:54 gucharmap/unicode-i18n.h:405
+#: gucharmap/unicode-i18n.h:55 gucharmap/unicode-i18n.h:418
 msgid "Mongolian"
 msgstr "Mongolské"
 
-#: gucharmap/unicode-i18n.h:55
+#: gucharmap/unicode-i18n.h:56
 msgid "Unified Canadian Aboriginal Syllabics Extended"
 msgstr "Rozšířené sjednocené kanadské domorodé slabikové"
 
-#: gucharmap/unicode-i18n.h:56 gucharmap/unicode-i18n.h:385
+#: gucharmap/unicode-i18n.h:57 gucharmap/unicode-i18n.h:398
 msgid "Limbu"
 msgstr "Limbu"
 
-#: gucharmap/unicode-i18n.h:57 gucharmap/unicode-i18n.h:452
+#: gucharmap/unicode-i18n.h:58 gucharmap/unicode-i18n.h:466
 msgid "Tai Le"
 msgstr "Tai Le"
 
-#: gucharmap/unicode-i18n.h:58 gucharmap/unicode-i18n.h:412
+#: gucharmap/unicode-i18n.h:59 gucharmap/unicode-i18n.h:425
 msgid "New Tai Lue"
 msgstr "Nové Tai Lue"
 
-#: gucharmap/unicode-i18n.h:59
+#: gucharmap/unicode-i18n.h:60
 msgid "Khmer Symbols"
 msgstr "Khmerské symboly"
 
-#: gucharmap/unicode-i18n.h:60 gucharmap/unicode-i18n.h:330
+#: gucharmap/unicode-i18n.h:61 gucharmap/unicode-i18n.h:342
 msgid "Buginese"
 msgstr "Bugijské"
 
-#: gucharmap/unicode-i18n.h:61 gucharmap/unicode-i18n.h:453
+#: gucharmap/unicode-i18n.h:62 gucharmap/unicode-i18n.h:467
 msgid "Tai Tham"
 msgstr "Lanna"
 
-#: gucharmap/unicode-i18n.h:62
+#: gucharmap/unicode-i18n.h:63
 msgid "Combining Diacritical Marks Extended"
 msgstr "Kombinující diakritická znaménka, rozšířené"
 
-#: gucharmap/unicode-i18n.h:63 gucharmap/unicode-i18n.h:321
+#: gucharmap/unicode-i18n.h:64 gucharmap/unicode-i18n.h:333
 msgid "Balinese"
 msgstr "Balijské"
 
-#: gucharmap/unicode-i18n.h:64 gucharmap/unicode-i18n.h:447
+#: gucharmap/unicode-i18n.h:65 gucharmap/unicode-i18n.h:461
 msgid "Sundanese"
 msgstr "Sundské"
 
-#: gucharmap/unicode-i18n.h:65 gucharmap/unicode-i18n.h:324
+#: gucharmap/unicode-i18n.h:66 gucharmap/unicode-i18n.h:336
 msgid "Batak"
 msgstr "Batacké"
 
-#: gucharmap/unicode-i18n.h:66 gucharmap/unicode-i18n.h:384
+#: gucharmap/unicode-i18n.h:67 gucharmap/unicode-i18n.h:397
 msgid "Lepcha"
 msgstr "Lepčské"
 
-#: gucharmap/unicode-i18n.h:67 gucharmap/unicode-i18n.h:417
+#: gucharmap/unicode-i18n.h:68 gucharmap/unicode-i18n.h:430
 msgid "Ol Chiki"
 msgstr "Ol Chiki"
 
-#: gucharmap/unicode-i18n.h:68
-msgid "Cyrillic Extended-C"
-msgstr "Azbuka, rozšířené – C"
-
 #: gucharmap/unicode-i18n.h:69
+msgid "Cyrillic Extended-C"
+msgstr "Azbuka, rozšířená – C"
+
+#: gucharmap/unicode-i18n.h:70
 msgid "Georgian Extended"
 msgstr "Gruzínské rozšířené"
 
-#: gucharmap/unicode-i18n.h:70
+#: gucharmap/unicode-i18n.h:71
 msgid "Sundanese Supplement"
 msgstr "Sundské, doplněk"
 
-#: gucharmap/unicode-i18n.h:71
+#: gucharmap/unicode-i18n.h:72
 msgid "Vedic Extensions"
 msgstr "Védské, rozšíření"
 
-#: gucharmap/unicode-i18n.h:72
+#: gucharmap/unicode-i18n.h:73
 msgid "Phonetic Extensions"
 msgstr "Fonetická rozšíření"
 
-#: gucharmap/unicode-i18n.h:73
+#: gucharmap/unicode-i18n.h:74
 msgid "Phonetic Extensions Supplement"
 msgstr "Fonetická rozšíření, doplněk"
 
-#: gucharmap/unicode-i18n.h:74
+#: gucharmap/unicode-i18n.h:75
 msgid "Combining Diacritical Marks Supplement"
 msgstr "Kombinující diakritická znaménka, doplňek"
 
-#: gucharmap/unicode-i18n.h:75
-msgid "Latin Extended Additional"
-msgstr "Latinka rozšířená, přídavná"
-
 #: gucharmap/unicode-i18n.h:76
-msgid "Greek Extended"
-msgstr "Řecké rozšířené"
+msgid "Latin Extended Additional"
+msgstr "Latinka, rozšířená, přídavná"
 
 #: gucharmap/unicode-i18n.h:77
+msgid "Greek Extended"
+msgstr "Řecké, rozšířené"
+
+#: gucharmap/unicode-i18n.h:78
 msgid "General Punctuation"
 msgstr "Obecná interpunkce"
 
-#: gucharmap/unicode-i18n.h:78
+#: gucharmap/unicode-i18n.h:79
 msgid "Superscripts and Subscripts"
 msgstr "Horní a dolní indexy"
 
-#: gucharmap/unicode-i18n.h:79
+#: gucharmap/unicode-i18n.h:80
 msgid "Currency Symbols"
 msgstr "Symboly měny"
 
-#: gucharmap/unicode-i18n.h:80
+#: gucharmap/unicode-i18n.h:81
 msgid "Combining Diacritical Marks for Symbols"
 msgstr "Kombinující diakritická znaménka pro symboly"
 
-#: gucharmap/unicode-i18n.h:81
+#: gucharmap/unicode-i18n.h:82
 msgid "Letterlike Symbols"
 msgstr "Symboly podobné písmenům"
 
-#: gucharmap/unicode-i18n.h:82
+#: gucharmap/unicode-i18n.h:83
 msgid "Number Forms"
 msgstr "Číselné tvary"
 
-#: gucharmap/unicode-i18n.h:83
+#: gucharmap/unicode-i18n.h:84
 msgid "Arrows"
 msgstr "Šipky"
 
-#: gucharmap/unicode-i18n.h:84
+#: gucharmap/unicode-i18n.h:85
 msgid "Mathematical Operators"
 msgstr "Matematické operátory"
 
-#: gucharmap/unicode-i18n.h:85
+#: gucharmap/unicode-i18n.h:86
 msgid "Miscellaneous Technical"
 msgstr "Různé technické znaky"
 
-#: gucharmap/unicode-i18n.h:86
+#: gucharmap/unicode-i18n.h:87
 msgid "Control Pictures"
 msgstr "Obrázky ovládacích prvků"
 
-#: gucharmap/unicode-i18n.h:87
+#: gucharmap/unicode-i18n.h:88
 msgid "Optical Character Recognition"
 msgstr "Optické rozpoznávání znaků"
 
-#: gucharmap/unicode-i18n.h:88
+#: gucharmap/unicode-i18n.h:89
 msgid "Enclosed Alphanumerics"
 msgstr "Alfanumerický systém"
 
-#: gucharmap/unicode-i18n.h:89
+#: gucharmap/unicode-i18n.h:90
 msgid "Box Drawing"
 msgstr "Kreslení polí"
 
-#: gucharmap/unicode-i18n.h:90
+#: gucharmap/unicode-i18n.h:91
 msgid "Block Elements"
 msgstr "Prvky bloků"
 
-#: gucharmap/unicode-i18n.h:91
+#: gucharmap/unicode-i18n.h:92
 msgid "Geometric Shapes"
 msgstr "Geometrické tvary"
 
-#: gucharmap/unicode-i18n.h:92
+#: gucharmap/unicode-i18n.h:93
 msgid "Miscellaneous Symbols"
 msgstr "Různé symboly"
 
-#: gucharmap/unicode-i18n.h:93
+#: gucharmap/unicode-i18n.h:94
 msgid "Dingbats"
 msgstr "Symboly"
 
-#: gucharmap/unicode-i18n.h:94
+#: gucharmap/unicode-i18n.h:95
 msgid "Miscellaneous Mathematical Symbols-A"
 msgstr "Různé matematické symboly – A"
 
-#: gucharmap/unicode-i18n.h:95
+#: gucharmap/unicode-i18n.h:96
 msgid "Supplemental Arrows-A"
 msgstr "Šipky, doplněk – A"
 
-#: gucharmap/unicode-i18n.h:96
+#: gucharmap/unicode-i18n.h:97
 msgid "Braille Patterns"
 msgstr "Braillovy znaky"
 
-#: gucharmap/unicode-i18n.h:97
+#: gucharmap/unicode-i18n.h:98
 msgid "Supplemental Arrows-B"
 msgstr "Šipky, doplněk – B"
 
-#: gucharmap/unicode-i18n.h:98
+#: gucharmap/unicode-i18n.h:99
 msgid "Miscellaneous Mathematical Symbols-B"
 msgstr "Různé matematické symboly – B"
 
-#: gucharmap/unicode-i18n.h:99
+#: gucharmap/unicode-i18n.h:100
 msgid "Supplemental Mathematical Operators"
 msgstr "Doplňující matematické operátory"
 
-#: gucharmap/unicode-i18n.h:100
+#: gucharmap/unicode-i18n.h:101
 msgid "Miscellaneous Symbols and Arrows"
 msgstr "Různé symboly a šipky"
 
-#: gucharmap/unicode-i18n.h:101 gucharmap/unicode-i18n.h:354
+#: gucharmap/unicode-i18n.h:102 gucharmap/unicode-i18n.h:367
 msgid "Glagolitic"
 msgstr "Hlaholice"
 
-#: gucharmap/unicode-i18n.h:102
+#: gucharmap/unicode-i18n.h:103
 msgid "Latin Extended-C"
 msgstr "Latinka, rozšířené – C"
 
-#: gucharmap/unicode-i18n.h:103 gucharmap/unicode-i18n.h:340
+#: gucharmap/unicode-i18n.h:104 gucharmap/unicode-i18n.h:352
 msgid "Coptic"
 msgstr "Koptské"
 
-#: gucharmap/unicode-i18n.h:104
+#: gucharmap/unicode-i18n.h:105
 msgid "Georgian Supplement"
 msgstr "Gruzínské, doplněk"
 
-#: gucharmap/unicode-i18n.h:105 gucharmap/unicode-i18n.h:462
+#: gucharmap/unicode-i18n.h:106 gucharmap/unicode-i18n.h:477
 msgid "Tifinagh"
 msgstr "Berberské"
 
-#: gucharmap/unicode-i18n.h:106
+#: gucharmap/unicode-i18n.h:107
 msgid "Ethiopic Extended"
 msgstr "Etiopské, rozšířené"
 
-#: gucharmap/unicode-i18n.h:107
+#: gucharmap/unicode-i18n.h:108
 msgid "Cyrillic Extended-A"
 msgstr "Azbuka, rozšířené – A"
 
-#: gucharmap/unicode-i18n.h:108
+#: gucharmap/unicode-i18n.h:109
 msgid "Supplemental Punctuation"
 msgstr "Doplňující interpunkce"
 
-#: gucharmap/unicode-i18n.h:109
+#: gucharmap/unicode-i18n.h:110
 msgid "CJK Radicals Supplement"
 msgstr "Radikály v ČJK, doplněk"
 
-#: gucharmap/unicode-i18n.h:110
+#: gucharmap/unicode-i18n.h:111
 msgid "Kangxi Radicals"
 msgstr "Radikály Kandží"
 
-#: gucharmap/unicode-i18n.h:111
+#: gucharmap/unicode-i18n.h:112
 msgid "Ideographic Description Characters"
 msgstr "Znaky ideografického popisu"
 
-#: gucharmap/unicode-i18n.h:112
+#: gucharmap/unicode-i18n.h:113
 msgid "CJK Symbols and Punctuation"
 msgstr "Symboly a interpunkce v ČJK"
 
-#: gucharmap/unicode-i18n.h:113 gucharmap/unicode-i18n.h:367
+#: gucharmap/unicode-i18n.h:114 gucharmap/unicode-i18n.h:380
 msgid "Hiragana"
 msgstr "Hiragana"
 
-#: gucharmap/unicode-i18n.h:114 gucharmap/unicode-i18n.h:375
+#: gucharmap/unicode-i18n.h:115 gucharmap/unicode-i18n.h:388
 msgid "Katakana"
 msgstr "Katakana"
 
-#: gucharmap/unicode-i18n.h:115 gucharmap/unicode-i18n.h:327
+#: gucharmap/unicode-i18n.h:116 gucharmap/unicode-i18n.h:339
 msgid "Bopomofo"
 msgstr "Ču-jin"
 
-#: gucharmap/unicode-i18n.h:116
+#: gucharmap/unicode-i18n.h:117
 msgid "Hangul Compatibility Jamo"
 msgstr "Džamo kompatibilní s hangul"
 
-#: gucharmap/unicode-i18n.h:117
+#: gucharmap/unicode-i18n.h:118
 msgid "Kanbun"
 msgstr "Kanbun"
 
-#: gucharmap/unicode-i18n.h:118
+#: gucharmap/unicode-i18n.h:119
 msgid "Bopomofo Extended"
 msgstr "Rozšířené ču-jin"
 
-#: gucharmap/unicode-i18n.h:119
+#: gucharmap/unicode-i18n.h:120
 msgid "CJK Strokes"
 msgstr "Tahy v ČJK"
 
-#: gucharmap/unicode-i18n.h:120
+#: gucharmap/unicode-i18n.h:121
 msgid "Katakana Phonetic Extensions"
 msgstr "Fonetická rozšíření katakany"
 
-#: gucharmap/unicode-i18n.h:121
+#: gucharmap/unicode-i18n.h:122
 msgid "Enclosed CJK Letters and Months"
 msgstr "Uzavřená pismena a měsíce v ČJK"
 
-#: gucharmap/unicode-i18n.h:122
+#: gucharmap/unicode-i18n.h:123
 msgid "CJK Compatibility"
 msgstr "Kompatibilní znaky v ČJK"
 
-#: gucharmap/unicode-i18n.h:123
+#: gucharmap/unicode-i18n.h:124
 msgid "CJK Unified Ideographs Extension A"
 msgstr "Sjednocené ideografické znaky v ČJK, rozšíření A"
 
-#: gucharmap/unicode-i18n.h:124
+#: gucharmap/unicode-i18n.h:125
 msgid "Yijing Hexagram Symbols"
 msgstr "Hexagramové symboly Yijing"
 
-#: gucharmap/unicode-i18n.h:125
+#: gucharmap/unicode-i18n.h:126
 msgid "CJK Unified Ideographs"
 msgstr "Sjednocené ideografické znaky v ČJK"
 
-#: gucharmap/unicode-i18n.h:126
+#: gucharmap/unicode-i18n.h:127
 msgid "Yi Syllables"
 msgstr "Slabiky Yi"
 
-#: gucharmap/unicode-i18n.h:127
+#: gucharmap/unicode-i18n.h:128
 msgid "Yi Radicals"
 msgstr "Radikály Yi"
 
-#: gucharmap/unicode-i18n.h:128 gucharmap/unicode-i18n.h:388
+#: gucharmap/unicode-i18n.h:129 gucharmap/unicode-i18n.h:401
 msgid "Lisu"
 msgstr "Lisu"
 
-#: gucharmap/unicode-i18n.h:129 gucharmap/unicode-i18n.h:465
+#: gucharmap/unicode-i18n.h:130 gucharmap/unicode-i18n.h:482
 msgid "Vai"
 msgstr "Vaiské"
 
-#: gucharmap/unicode-i18n.h:130
+#: gucharmap/unicode-i18n.h:131
 msgid "Cyrillic Extended-B"
 msgstr "Azbuka, rozšířené – B"
 
-#: gucharmap/unicode-i18n.h:131 gucharmap/unicode-i18n.h:322
+#: gucharmap/unicode-i18n.h:132 gucharmap/unicode-i18n.h:334
 msgid "Bamum"
 msgstr "Bamumské"
 
-#: gucharmap/unicode-i18n.h:132
+#: gucharmap/unicode-i18n.h:133
 msgid "Modifier Tone Letters"
 msgstr "Písmena modifikující tóny"
 
-#: gucharmap/unicode-i18n.h:133
+#: gucharmap/unicode-i18n.h:134
 msgid "Latin Extended-D"
 msgstr "Latinka, rozšířené – D"
 
-#: gucharmap/unicode-i18n.h:134 gucharmap/unicode-i18n.h:448
+#: gucharmap/unicode-i18n.h:135 gucharmap/unicode-i18n.h:462
 msgid "Syloti Nagri"
 msgstr "Syloti Nagri"
 
-#: gucharmap/unicode-i18n.h:135
+#: gucharmap/unicode-i18n.h:136
 msgid "Common Indic Number Forms"
 msgstr "Běžné indické číselné tvary"
 
-#: gucharmap/unicode-i18n.h:136
+#: gucharmap/unicode-i18n.h:137
 msgid "Phags-pa"
 msgstr "'Phags-pa"
 
-#: gucharmap/unicode-i18n.h:137 gucharmap/unicode-i18n.h:438
+#: gucharmap/unicode-i18n.h:138 gucharmap/unicode-i18n.h:452
 msgid "Saurashtra"
 msgstr "Sauráštra"
 
-#: gucharmap/unicode-i18n.h:138
+#: gucharmap/unicode-i18n.h:139
 msgid "Devanagari Extended"
 msgstr "Rozšířené devanagárské"
 
-#: gucharmap/unicode-i18n.h:139 gucharmap/unicode-i18n.h:376
+#: gucharmap/unicode-i18n.h:140 gucharmap/unicode-i18n.h:389
 msgid "Kayah Li"
 msgstr "Kayah li"
 
-#: gucharmap/unicode-i18n.h:140 gucharmap/unicode-i18n.h:435
+#: gucharmap/unicode-i18n.h:141 gucharmap/unicode-i18n.h:449
 msgid "Rejang"
 msgstr "Rejangské"
 
-#: gucharmap/unicode-i18n.h:141
+#: gucharmap/unicode-i18n.h:142
 msgid "Hangul Jamo Extended-A"
 msgstr "Hangul džamo, rozšířené – A"
 
-#: gucharmap/unicode-i18n.h:142 gucharmap/unicode-i18n.h:372
+#: gucharmap/unicode-i18n.h:143 gucharmap/unicode-i18n.h:385
 msgid "Javanese"
 msgstr "Jávské"
 
-#: gucharmap/unicode-i18n.h:143
+#: gucharmap/unicode-i18n.h:144
 msgid "Myanmar Extended-B"
 msgstr "Barmské, rozšířené – B"
 
-#: gucharmap/unicode-i18n.h:144 gucharmap/unicode-i18n.h:336
+#: gucharmap/unicode-i18n.h:145 gucharmap/unicode-i18n.h:348
 msgid "Cham"
 msgstr "Čamské"
 
-#: gucharmap/unicode-i18n.h:145
+#: gucharmap/unicode-i18n.h:146
 msgid "Myanmar Extended-A"
 msgstr "Barmské, rozšířené – A"
 
-#: gucharmap/unicode-i18n.h:146 gucharmap/unicode-i18n.h:454
+#: gucharmap/unicode-i18n.h:147 gucharmap/unicode-i18n.h:468
 msgid "Tai Viet"
 msgstr "Tai Viet"
 
-#: gucharmap/unicode-i18n.h:147
+#: gucharmap/unicode-i18n.h:148
 msgid "Meetei Mayek Extensions"
 msgstr "Manipurské rozšíření"
 
-#: gucharmap/unicode-i18n.h:148
+#: gucharmap/unicode-i18n.h:149
 msgid "Ethiopic Extended-A"
 msgstr "Etiopské, rozšířené – A"
 
-#: gucharmap/unicode-i18n.h:149
+#: gucharmap/unicode-i18n.h:150
 msgid "Latin Extended-E"
 msgstr "Latinka, rozšířené – E"
 
-#: gucharmap/unicode-i18n.h:150
+#: gucharmap/unicode-i18n.h:151
 msgid "Cherokee Supplement"
 msgstr "Čerokí, doplněk"
 
-#: gucharmap/unicode-i18n.h:151 gucharmap/unicode-i18n.h:399
+#: gucharmap/unicode-i18n.h:152 gucharmap/unicode-i18n.h:412
 msgid "Meetei Mayek"
 msgstr "Meetei Mayek"
 
-#: gucharmap/unicode-i18n.h:152
+#: gucharmap/unicode-i18n.h:153
 msgid "Hangul Syllables"
 msgstr "Slabiky hangul"
 
-#: gucharmap/unicode-i18n.h:153
+#: gucharmap/unicode-i18n.h:154
 msgid "Hangul Jamo Extended-B"
 msgstr "Hangul džamo, rozšířené – B"
 
-#: gucharmap/unicode-i18n.h:154
+#: gucharmap/unicode-i18n.h:155
 msgid "High Surrogates"
 msgstr "Vysoké náhražky"
 
-#: gucharmap/unicode-i18n.h:155
+#: gucharmap/unicode-i18n.h:156
 msgid "High Private Use Surrogates"
 msgstr "Vysoké náhražky pro soukromé použití"
 
-#: gucharmap/unicode-i18n.h:156
+#: gucharmap/unicode-i18n.h:157
 msgid "Low Surrogates"
 msgstr "Nízké náhražky"
 
-#: gucharmap/unicode-i18n.h:157
+#: gucharmap/unicode-i18n.h:158
 msgid "Private Use Area"
 msgstr "Oblast pro soukromé použití"
 
-#: gucharmap/unicode-i18n.h:158
+#: gucharmap/unicode-i18n.h:159
 msgid "CJK Compatibility Ideographs"
 msgstr "Kompatibilní ideografické znaky v ČJK"
 
-#: gucharmap/unicode-i18n.h:159
+#: gucharmap/unicode-i18n.h:160
 msgid "Alphabetic Presentation Forms"
 msgstr "Způsoby zápisu abecedy"
 
-#: gucharmap/unicode-i18n.h:160
+#: gucharmap/unicode-i18n.h:161
 msgid "Arabic Presentation Forms-A"
 msgstr "Způsoby zápisu arabštiny – A"
 
-#: gucharmap/unicode-i18n.h:161
+#: gucharmap/unicode-i18n.h:162
 msgid "Variation Selectors"
 msgstr "Výběry z variací"
 
-#: gucharmap/unicode-i18n.h:162
+#: gucharmap/unicode-i18n.h:163
 msgid "Vertical Forms"
 msgstr "Svislé tvary"
 
-#: gucharmap/unicode-i18n.h:163
+#: gucharmap/unicode-i18n.h:164
 msgid "Combining Half Marks"
 msgstr "Kombinující poloviční značky"
 
-#: gucharmap/unicode-i18n.h:164
+#: gucharmap/unicode-i18n.h:165
 msgid "CJK Compatibility Forms"
 msgstr "Kompatibilní tvary v ČJK"
 
-#: gucharmap/unicode-i18n.h:165
+#: gucharmap/unicode-i18n.h:166
 msgid "Small Form Variants"
 msgstr "Malé varianty tvarů"
 
-#: gucharmap/unicode-i18n.h:166
+#: gucharmap/unicode-i18n.h:167
 msgid "Arabic Presentation Forms-B"
 msgstr "Způsoby zápisu arabštiny – B"
 
-#: gucharmap/unicode-i18n.h:167
+#: gucharmap/unicode-i18n.h:168
 msgid "Halfwidth and Fullwidth Forms"
 msgstr "Tvary s poloviční a plnou šířkou"
 
-#: gucharmap/unicode-i18n.h:168
+#: gucharmap/unicode-i18n.h:169
 msgid "Specials"
 msgstr "Speciální znaky"
 
-#: gucharmap/unicode-i18n.h:169
+#: gucharmap/unicode-i18n.h:170
 msgid "Linear B Syllabary"
 msgstr "Slabikové lineární B"
 
-#: gucharmap/unicode-i18n.h:170
+#: gucharmap/unicode-i18n.h:171
 msgid "Linear B Ideograms"
 msgstr "Ideogramy lineární B"
 
-#: gucharmap/unicode-i18n.h:171
+#: gucharmap/unicode-i18n.h:172
 msgid "Aegean Numbers"
 msgstr "Egejská čísla"
 
-#: gucharmap/unicode-i18n.h:172
+#: gucharmap/unicode-i18n.h:173
 msgid "Ancient Greek Numbers"
 msgstr "Starořecká čísla"
 
-#: gucharmap/unicode-i18n.h:173
+#: gucharmap/unicode-i18n.h:174
 msgid "Ancient Symbols"
 msgstr "Starověké symboly"
 
-#: gucharmap/unicode-i18n.h:174
+#: gucharmap/unicode-i18n.h:175
 msgid "Phaistos Disc"
 msgstr "Disk z Faistu"
 
-#: gucharmap/unicode-i18n.h:175 gucharmap/unicode-i18n.h:389
+#: gucharmap/unicode-i18n.h:176 gucharmap/unicode-i18n.h:402
 msgid "Lycian"
 msgstr "Lykijské"
 
-#: gucharmap/unicode-i18n.h:176 gucharmap/unicode-i18n.h:333
+#: gucharmap/unicode-i18n.h:177 gucharmap/unicode-i18n.h:345
 msgid "Carian"
 msgstr "Karské"
 
-#: gucharmap/unicode-i18n.h:177
+#: gucharmap/unicode-i18n.h:178
 msgid "Coptic Epact Numbers"
 msgstr "Koptská epaktová čísla"
 
-#: gucharmap/unicode-i18n.h:178 gucharmap/unicode-i18n.h:419
+#: gucharmap/unicode-i18n.h:179 gucharmap/unicode-i18n.h:432
 msgid "Old Italic"
 msgstr "Staroitalské"
 
-#: gucharmap/unicode-i18n.h:179 gucharmap/unicode-i18n.h:355
+#: gucharmap/unicode-i18n.h:180 gucharmap/unicode-i18n.h:368
 msgid "Gothic"
 msgstr "Gótské"
 
-#: gucharmap/unicode-i18n.h:180 gucharmap/unicode-i18n.h:421
+#: gucharmap/unicode-i18n.h:181 gucharmap/unicode-i18n.h:434
 msgid "Old Permic"
 msgstr "Staropermské"
 
-#: gucharmap/unicode-i18n.h:181 gucharmap/unicode-i18n.h:464
+#: gucharmap/unicode-i18n.h:182 gucharmap/unicode-i18n.h:480
 msgid "Ugaritic"
 msgstr "Ugaritské"
 
-#: gucharmap/unicode-i18n.h:182 gucharmap/unicode-i18n.h:422
+#: gucharmap/unicode-i18n.h:183 gucharmap/unicode-i18n.h:435
 msgid "Old Persian"
 msgstr "Staroperské"
 
-#: gucharmap/unicode-i18n.h:183 gucharmap/unicode-i18n.h:344
+#: gucharmap/unicode-i18n.h:184 gucharmap/unicode-i18n.h:357
 msgid "Deseret"
 msgstr "Deseret"
 
-#: gucharmap/unicode-i18n.h:184 gucharmap/unicode-i18n.h:440
+#: gucharmap/unicode-i18n.h:185 gucharmap/unicode-i18n.h:454
 msgid "Shavian"
 msgstr "Shaw"
 
-#: gucharmap/unicode-i18n.h:185 gucharmap/unicode-i18n.h:428
+#: gucharmap/unicode-i18n.h:186 gucharmap/unicode-i18n.h:442
 msgid "Osmanya"
 msgstr "Osmanské"
 
-#: gucharmap/unicode-i18n.h:186 gucharmap/unicode-i18n.h:427
+#: gucharmap/unicode-i18n.h:187 gucharmap/unicode-i18n.h:441
 msgid "Osage"
 msgstr "Osedžské"
 
-#: gucharmap/unicode-i18n.h:187 gucharmap/unicode-i18n.h:350
+#: gucharmap/unicode-i18n.h:188 gucharmap/unicode-i18n.h:363
 msgid "Elbasan"
 msgstr "Elbasanské"
 
-#: gucharmap/unicode-i18n.h:188 gucharmap/unicode-i18n.h:334
+#: gucharmap/unicode-i18n.h:189 gucharmap/unicode-i18n.h:346
 msgid "Caucasian Albanian"
 msgstr "Kavkazsko-albánské"
 
-#: gucharmap/unicode-i18n.h:189 gucharmap/unicode-i18n.h:386
+#: gucharmap/unicode-i18n.h:190 gucharmap/unicode-i18n.h:483
+msgid "Vithkuqi"
+msgstr "Vithkuqi"
+
+#: gucharmap/unicode-i18n.h:191 gucharmap/unicode-i18n.h:399
 msgid "Linear A"
 msgstr "Lineární A"
 
-#: gucharmap/unicode-i18n.h:190
+#: gucharmap/unicode-i18n.h:192
+msgid "Latin Extended-F"
+msgstr "Latinka, rozšířená – F"
+
+#: gucharmap/unicode-i18n.h:193
 msgid "Cypriot Syllabary"
 msgstr "Kyperské slabičné"
 
-#: gucharmap/unicode-i18n.h:191 gucharmap/unicode-i18n.h:368
+#: gucharmap/unicode-i18n.h:194 gucharmap/unicode-i18n.h:381
 msgid "Imperial Aramaic"
 msgstr "Aramejské z Perské říše"
 
-#: gucharmap/unicode-i18n.h:192 gucharmap/unicode-i18n.h:430
+#: gucharmap/unicode-i18n.h:195 gucharmap/unicode-i18n.h:444
 msgid "Palmyrene"
 msgstr "Palmýrské"
 
-#: gucharmap/unicode-i18n.h:193 gucharmap/unicode-i18n.h:410
+#: gucharmap/unicode-i18n.h:196 gucharmap/unicode-i18n.h:423
 msgid "Nabataean"
 msgstr "Nabatejské"
 
-#: gucharmap/unicode-i18n.h:194 gucharmap/unicode-i18n.h:365
+#: gucharmap/unicode-i18n.h:197 gucharmap/unicode-i18n.h:378
 msgid "Hatran"
 msgstr "Hatran"
 
-#: gucharmap/unicode-i18n.h:195 gucharmap/unicode-i18n.h:433
+#: gucharmap/unicode-i18n.h:198 gucharmap/unicode-i18n.h:447
 msgid "Phoenician"
 msgstr "Fénické"
 
-#: gucharmap/unicode-i18n.h:196 gucharmap/unicode-i18n.h:390
+#: gucharmap/unicode-i18n.h:199 gucharmap/unicode-i18n.h:403
 msgid "Lydian"
 msgstr "Lýdské"
 
-#: gucharmap/unicode-i18n.h:197 gucharmap/unicode-i18n.h:402
+#: gucharmap/unicode-i18n.h:200 gucharmap/unicode-i18n.h:415
 msgid "Meroitic Hieroglyphs"
 msgstr "Meroitické hieroglyfy"
 
-#: gucharmap/unicode-i18n.h:198 gucharmap/unicode-i18n.h:401
+#: gucharmap/unicode-i18n.h:201 gucharmap/unicode-i18n.h:414
 msgid "Meroitic Cursive"
 msgstr "Meroitické psací"
 
-#: gucharmap/unicode-i18n.h:199 gucharmap/unicode-i18n.h:377
+#: gucharmap/unicode-i18n.h:202 gucharmap/unicode-i18n.h:390
 msgid "Kharoshthi"
 msgstr "Kháróští"
 
-#: gucharmap/unicode-i18n.h:200 gucharmap/unicode-i18n.h:424
+#: gucharmap/unicode-i18n.h:203 gucharmap/unicode-i18n.h:437
 msgid "Old South Arabian"
 msgstr "Jihoarabské nápisové"
 
-#: gucharmap/unicode-i18n.h:201 gucharmap/unicode-i18n.h:420
+#: gucharmap/unicode-i18n.h:204 gucharmap/unicode-i18n.h:433
 msgid "Old North Arabian"
 msgstr "Severoarabské nápisové"
 
-#: gucharmap/unicode-i18n.h:202 gucharmap/unicode-i18n.h:395
+#: gucharmap/unicode-i18n.h:205 gucharmap/unicode-i18n.h:408
 msgid "Manichaean"
 msgstr "Manichejské"
 
-#: gucharmap/unicode-i18n.h:203 gucharmap/unicode-i18n.h:320
+#: gucharmap/unicode-i18n.h:206 gucharmap/unicode-i18n.h:332
 msgid "Avestan"
 msgstr "Avestické"
 
-#: gucharmap/unicode-i18n.h:204 gucharmap/unicode-i18n.h:371
+#: gucharmap/unicode-i18n.h:207 gucharmap/unicode-i18n.h:384
 msgid "Inscriptional Parthian"
 msgstr "Partské psané"
 
-#: gucharmap/unicode-i18n.h:205 gucharmap/unicode-i18n.h:370
+#: gucharmap/unicode-i18n.h:208 gucharmap/unicode-i18n.h:383
 msgid "Inscriptional Pahlavi"
 msgstr "Pahlaví psané"
 
-#: gucharmap/unicode-i18n.h:206 gucharmap/unicode-i18n.h:434
+#: gucharmap/unicode-i18n.h:209 gucharmap/unicode-i18n.h:448
 msgid "Psalter Pahlavi"
 msgstr "Pahlaví žaltářové"
 
-#: gucharmap/unicode-i18n.h:207 gucharmap/unicode-i18n.h:425
+#: gucharmap/unicode-i18n.h:210 gucharmap/unicode-i18n.h:438
 msgid "Old Turkic"
 msgstr "Staroturkické"
 
-#: gucharmap/unicode-i18n.h:208 gucharmap/unicode-i18n.h:418
+#: gucharmap/unicode-i18n.h:211 gucharmap/unicode-i18n.h:431
 msgid "Old Hungarian"
 msgstr "Staromaďarské"
 
-#: gucharmap/unicode-i18n.h:209 gucharmap/unicode-i18n.h:363
+#: gucharmap/unicode-i18n.h:212 gucharmap/unicode-i18n.h:376
 msgid "Hanifi Rohingya"
 msgstr "Hanifovo rohingské"
 
-#: gucharmap/unicode-i18n.h:210
+#: gucharmap/unicode-i18n.h:213
 msgid "Rumi Numeral Symbols"
 msgstr "Rumi, číselné symboly"
 
-#: gucharmap/unicode-i18n.h:211 gucharmap/unicode-i18n.h:468
+#: gucharmap/unicode-i18n.h:214 gucharmap/unicode-i18n.h:486
 msgid "Yezidi"
 msgstr "Jezídské"
 
-#: gucharmap/unicode-i18n.h:212 gucharmap/unicode-i18n.h:423
+#: gucharmap/unicode-i18n.h:215 gucharmap/unicode-i18n.h:436
 msgid "Old Sogdian"
 msgstr "Starosogdské"
 
-#: gucharmap/unicode-i18n.h:213 gucharmap/unicode-i18n.h:444
+#: gucharmap/unicode-i18n.h:216 gucharmap/unicode-i18n.h:458
 msgid "Sogdian"
 msgstr "Sogdské"
 
-#: gucharmap/unicode-i18n.h:214 gucharmap/unicode-i18n.h:338
+#: gucharmap/unicode-i18n.h:217 gucharmap/unicode-i18n.h:439
+msgid "Old Uyghur"
+msgstr "Staroujgurské"
+
+#: gucharmap/unicode-i18n.h:218 gucharmap/unicode-i18n.h:350
 msgid "Chorasmian"
 msgstr "Chórezmijské"
 
-#: gucharmap/unicode-i18n.h:215 gucharmap/unicode-i18n.h:351
+#: gucharmap/unicode-i18n.h:219 gucharmap/unicode-i18n.h:364
 msgid "Elymaic"
 msgstr "Elymajské"
 
-#: gucharmap/unicode-i18n.h:216 gucharmap/unicode-i18n.h:328
+#: gucharmap/unicode-i18n.h:220 gucharmap/unicode-i18n.h:340
 msgid "Brahmi"
 msgstr "Bráhmí"
 
-#: gucharmap/unicode-i18n.h:217 gucharmap/unicode-i18n.h:373
+#: gucharmap/unicode-i18n.h:221 gucharmap/unicode-i18n.h:386
 msgid "Kaithi"
 msgstr "Kaithí"
 
-#: gucharmap/unicode-i18n.h:218 gucharmap/unicode-i18n.h:445
+#: gucharmap/unicode-i18n.h:222 gucharmap/unicode-i18n.h:459
 msgid "Sora Sompeng"
 msgstr "Sora Sompeng"
 
-#: gucharmap/unicode-i18n.h:219 gucharmap/unicode-i18n.h:335
+#: gucharmap/unicode-i18n.h:223 gucharmap/unicode-i18n.h:347
 msgid "Chakma"
 msgstr "Čakma"
 
-#: gucharmap/unicode-i18n.h:220 gucharmap/unicode-i18n.h:391
+#: gucharmap/unicode-i18n.h:224 gucharmap/unicode-i18n.h:404
 msgid "Mahajani"
 msgstr "Mahájánské"
 
-#: gucharmap/unicode-i18n.h:221 gucharmap/unicode-i18n.h:439
+#: gucharmap/unicode-i18n.h:225 gucharmap/unicode-i18n.h:453
 msgid "Sharada"
 msgstr "Šáradá"
 
-#: gucharmap/unicode-i18n.h:222
+#: gucharmap/unicode-i18n.h:226
 msgid "Sinhala Archaic Numbers"
 msgstr "Sinhálská archaická čísla"
 
-#: gucharmap/unicode-i18n.h:223 gucharmap/unicode-i18n.h:380
+#: gucharmap/unicode-i18n.h:227 gucharmap/unicode-i18n.h:393
 msgid "Khojki"
 msgstr "Chodžské"
 
-#: gucharmap/unicode-i18n.h:224 gucharmap/unicode-i18n.h:407
+#: gucharmap/unicode-i18n.h:228 gucharmap/unicode-i18n.h:420
 msgid "Multani"
 msgstr "Multánské"
 
-#: gucharmap/unicode-i18n.h:225 gucharmap/unicode-i18n.h:381
+#: gucharmap/unicode-i18n.h:229 gucharmap/unicode-i18n.h:394
 msgid "Khudawadi"
 msgstr "Khudawadi"
 
-#: gucharmap/unicode-i18n.h:226 gucharmap/unicode-i18n.h:356
+#: gucharmap/unicode-i18n.h:230 gucharmap/unicode-i18n.h:369
 msgid "Grantha"
 msgstr "Grantha"
 
-#: gucharmap/unicode-i18n.h:227 gucharmap/unicode-i18n.h:413
+#: gucharmap/unicode-i18n.h:231 gucharmap/unicode-i18n.h:426
 msgid "Newa"
 msgstr "Névárské"
 
-#: gucharmap/unicode-i18n.h:228 gucharmap/unicode-i18n.h:463
+#: gucharmap/unicode-i18n.h:232 gucharmap/unicode-i18n.h:478
 msgid "Tirhuta"
 msgstr "Tirhuta"
 
-#: gucharmap/unicode-i18n.h:229 gucharmap/unicode-i18n.h:441
+#: gucharmap/unicode-i18n.h:233 gucharmap/unicode-i18n.h:455
 msgid "Siddham"
 msgstr "Siddham"
 
-#: gucharmap/unicode-i18n.h:230 gucharmap/unicode-i18n.h:404
+#: gucharmap/unicode-i18n.h:234 gucharmap/unicode-i18n.h:417
 msgid "Modi"
 msgstr "Modi"
 
-#: gucharmap/unicode-i18n.h:231
+#: gucharmap/unicode-i18n.h:235
 msgid "Mongolian Supplement"
 msgstr "Mongolské, doplněk"
 
-#: gucharmap/unicode-i18n.h:232 gucharmap/unicode-i18n.h:455
+#: gucharmap/unicode-i18n.h:236 gucharmap/unicode-i18n.h:469
 msgid "Takri"
 msgstr "Tákrí"
 
-#: gucharmap/unicode-i18n.h:233 gucharmap/unicode-i18n.h:316
+#: gucharmap/unicode-i18n.h:237 gucharmap/unicode-i18n.h:328
 msgid "Ahom"
 msgstr "Ahomské"
 
-#: gucharmap/unicode-i18n.h:234 gucharmap/unicode-i18n.h:347
+#: gucharmap/unicode-i18n.h:238 gucharmap/unicode-i18n.h:360
 msgid "Dogra"
 msgstr "Dogarské"
 
-#: gucharmap/unicode-i18n.h:235 gucharmap/unicode-i18n.h:467
+#: gucharmap/unicode-i18n.h:239 gucharmap/unicode-i18n.h:485
 msgid "Warang Citi"
 msgstr "Varang Kšiti"
 
-#: gucharmap/unicode-i18n.h:236 gucharmap/unicode-i18n.h:346
+#: gucharmap/unicode-i18n.h:240 gucharmap/unicode-i18n.h:359
 msgid "Dives Akuru"
 msgstr "Divehi Akuru"
 
-#: gucharmap/unicode-i18n.h:237 gucharmap/unicode-i18n.h:411
+#: gucharmap/unicode-i18n.h:241 gucharmap/unicode-i18n.h:424
 msgid "Nandinagari"
 msgstr "Nandinagárí"
 
-#: gucharmap/unicode-i18n.h:238 gucharmap/unicode-i18n.h:470
+#: gucharmap/unicode-i18n.h:242 gucharmap/unicode-i18n.h:488
 msgid "Zanabazar Square"
 msgstr "Dzanabazarovo čtvercové"
 
-#: gucharmap/unicode-i18n.h:239 gucharmap/unicode-i18n.h:446
+#: gucharmap/unicode-i18n.h:243 gucharmap/unicode-i18n.h:460
 msgid "Soyombo"
 msgstr "Soyombo"
 
-#: gucharmap/unicode-i18n.h:240 gucharmap/unicode-i18n.h:431
+#: gucharmap/unicode-i18n.h:244
+msgid "Unified Canadian Aboriginal Syllabics Extended-A"
+msgstr "Sjednocené kanadské domorodé slabikové, rozšířené – A"
+
+#: gucharmap/unicode-i18n.h:245 gucharmap/unicode-i18n.h:445
 msgid "Pau Cin Hau"
 msgstr "Pau Cin Hau"
 
-#: gucharmap/unicode-i18n.h:241 gucharmap/unicode-i18n.h:326
+#: gucharmap/unicode-i18n.h:246 gucharmap/unicode-i18n.h:338
 msgid "Bhaiksuki"
 msgstr "Bhaiksuki"
 
-#: gucharmap/unicode-i18n.h:242 gucharmap/unicode-i18n.h:396
+#: gucharmap/unicode-i18n.h:247 gucharmap/unicode-i18n.h:409
 msgid "Marchen"
 msgstr "sMar-chen"
 
-#: gucharmap/unicode-i18n.h:243 gucharmap/unicode-i18n.h:397
+#: gucharmap/unicode-i18n.h:248 gucharmap/unicode-i18n.h:410
 msgid "Masaram Gondi"
 msgstr "Masaramovo Gondi"
 
-#: gucharmap/unicode-i18n.h:244 gucharmap/unicode-i18n.h:359
+#: gucharmap/unicode-i18n.h:249 gucharmap/unicode-i18n.h:372
 msgid "Gunjala Gondi"
 msgstr "Gunjalské Gondi"
 
-#: gucharmap/unicode-i18n.h:245 gucharmap/unicode-i18n.h:392
+#: gucharmap/unicode-i18n.h:250 gucharmap/unicode-i18n.h:405
 msgid "Makasar"
 msgstr "Makasarské"
 
-#: gucharmap/unicode-i18n.h:246
+#: gucharmap/unicode-i18n.h:251
 msgid "Lisu Supplement"
 msgstr "Lisu, doplněk"
 
-#: gucharmap/unicode-i18n.h:247
+#: gucharmap/unicode-i18n.h:252
 msgid "Tamil Supplement"
 msgstr "Tamilské, doplněk"
 
-#: gucharmap/unicode-i18n.h:248 gucharmap/unicode-i18n.h:341
+#: gucharmap/unicode-i18n.h:253 gucharmap/unicode-i18n.h:353
 msgid "Cuneiform"
 msgstr "Klínové"
 
-#: gucharmap/unicode-i18n.h:249
+#: gucharmap/unicode-i18n.h:254
 msgid "Cuneiform Numbers and Punctuation"
 msgstr "Čísla a interpunkce klínového písma"
 
-#: gucharmap/unicode-i18n.h:250
+#: gucharmap/unicode-i18n.h:255
 msgid "Early Dynastic Cuneiform"
 msgstr "Archaické klínové písmo"
 
-#: gucharmap/unicode-i18n.h:251 gucharmap/unicode-i18n.h:349
+#: gucharmap/unicode-i18n.h:256
+msgid "Cypro-Minoan"
+msgstr "Kypersko-mínojské"
+
+#: gucharmap/unicode-i18n.h:257 gucharmap/unicode-i18n.h:362
 msgid "Egyptian Hieroglyphs"
 msgstr "Egyptské hieroglyfy"
 
-#: gucharmap/unicode-i18n.h:252
+#: gucharmap/unicode-i18n.h:258
 msgid "Egyptian Hieroglyph Format Controls"
 msgstr "Řídící formát. znaky egyptských hieroglyfů"
 
-#: gucharmap/unicode-i18n.h:253 gucharmap/unicode-i18n.h:317
+#: gucharmap/unicode-i18n.h:259 gucharmap/unicode-i18n.h:329
 msgid "Anatolian Hieroglyphs"
 msgstr "Anatólské hieroglyfy"
 
-#: gucharmap/unicode-i18n.h:254
+#: gucharmap/unicode-i18n.h:260
 msgid "Bamum Supplement"
 msgstr "Bamumské, doplněk"
 
-#: gucharmap/unicode-i18n.h:255 gucharmap/unicode-i18n.h:406
+#: gucharmap/unicode-i18n.h:261 gucharmap/unicode-i18n.h:419
 msgid "Mro"
 msgstr "Mro"
 
-#: gucharmap/unicode-i18n.h:256 gucharmap/unicode-i18n.h:323
+#: gucharmap/unicode-i18n.h:262 gucharmap/unicode-i18n.h:471
+msgid "Tangsa"
+msgstr "Tangské"
+
+#: gucharmap/unicode-i18n.h:263 gucharmap/unicode-i18n.h:335
 msgid "Bassa Vah"
 msgstr "Bassa Vah"
 
-#: gucharmap/unicode-i18n.h:257 gucharmap/unicode-i18n.h:429
+#: gucharmap/unicode-i18n.h:264 gucharmap/unicode-i18n.h:443
 msgid "Pahawh Hmong"
 msgstr "Hmongské Pahawh"
 
-#: gucharmap/unicode-i18n.h:258 gucharmap/unicode-i18n.h:398
+#: gucharmap/unicode-i18n.h:265 gucharmap/unicode-i18n.h:411
 msgid "Medefaidrin"
 msgstr "Medefaidrin"
 
-#: gucharmap/unicode-i18n.h:259 gucharmap/unicode-i18n.h:403
+#: gucharmap/unicode-i18n.h:266 gucharmap/unicode-i18n.h:416
 msgid "Miao"
 msgstr "Miao"
 
-#: gucharmap/unicode-i18n.h:260
+#: gucharmap/unicode-i18n.h:267
 msgid "Ideographic Symbols and Punctuation"
 msgstr "Ideografické symboly a interpunkce"
 
-#: gucharmap/unicode-i18n.h:261 gucharmap/unicode-i18n.h:457
+#: gucharmap/unicode-i18n.h:268 gucharmap/unicode-i18n.h:472
 msgid "Tangut"
 msgstr "Tangutské"
 
-#: gucharmap/unicode-i18n.h:262
+#: gucharmap/unicode-i18n.h:269
 msgid "Tangut Components"
 msgstr "Komponenty tangutského"
 
-#: gucharmap/unicode-i18n.h:263 gucharmap/unicode-i18n.h:378
+#: gucharmap/unicode-i18n.h:270 gucharmap/unicode-i18n.h:391
 msgid "Khitan Small Script"
 msgstr "Kitanské malé"
 
-#: gucharmap/unicode-i18n.h:264
+#: gucharmap/unicode-i18n.h:271
 msgid "Tangut Supplement"
 msgstr "Tangutské, doplněk"
 
-#: gucharmap/unicode-i18n.h:265
+#: gucharmap/unicode-i18n.h:272
+msgid "Kana Extended-B"
+msgstr "Kana, rozšířené – B"
+
+#: gucharmap/unicode-i18n.h:273
 msgid "Kana Supplement"
 msgstr "Kana, doplněk"
 
-#: gucharmap/unicode-i18n.h:266
+#: gucharmap/unicode-i18n.h:274
 msgid "Kana Extended-A"
 msgstr "Kana, rozšířené – A"
 
-#: gucharmap/unicode-i18n.h:267
+#: gucharmap/unicode-i18n.h:275
 msgid "Small Kana Extension"
 msgstr "Malá kana, rozšíření"
 
-#: gucharmap/unicode-i18n.h:268 gucharmap/unicode-i18n.h:414
+#: gucharmap/unicode-i18n.h:276 gucharmap/unicode-i18n.h:427
 msgid "Nushu"
 msgstr "Nü-šu"
 
-#: gucharmap/unicode-i18n.h:269 gucharmap/unicode-i18n.h:348
+#: gucharmap/unicode-i18n.h:277 gucharmap/unicode-i18n.h:361
 msgid "Duployan"
 msgstr "Duployého"
 
-#: gucharmap/unicode-i18n.h:270
+#: gucharmap/unicode-i18n.h:278
 msgid "Shorthand Format Controls"
 msgstr "Řízení těsnopisného formátu"
 
-#: gucharmap/unicode-i18n.h:271
+#: gucharmap/unicode-i18n.h:279
+msgid "Znamenny Musical Notation"
+msgstr "Znamenný notový záznam"
+
+#: gucharmap/unicode-i18n.h:280
 msgid "Byzantine Musical Symbols"
 msgstr "Byzantské hudební symboly"
 
-#: gucharmap/unicode-i18n.h:272
+#: gucharmap/unicode-i18n.h:281
 msgid "Musical Symbols"
 msgstr "Hudební symboly"
 
-#: gucharmap/unicode-i18n.h:273
+#: gucharmap/unicode-i18n.h:282
 msgid "Ancient Greek Musical Notation"
 msgstr "Starořecký notový záznam"
 
-#: gucharmap/unicode-i18n.h:274
+#: gucharmap/unicode-i18n.h:283
 msgid "Mayan Numerals"
 msgstr "Mayská čísla"
 
-#: gucharmap/unicode-i18n.h:275
+#: gucharmap/unicode-i18n.h:284
 msgid "Tai Xuan Jing Symbols"
 msgstr "Symboly Tai Xuan Jing"
 
-#: gucharmap/unicode-i18n.h:276
+#: gucharmap/unicode-i18n.h:285
 msgid "Counting Rod Numerals"
 msgstr "Číslice chóu"
 
-#: gucharmap/unicode-i18n.h:277
+#: gucharmap/unicode-i18n.h:286
 msgid "Mathematical Alphanumeric Symbols"
 msgstr "Matematické alfanumerické symboly"
 
-#: gucharmap/unicode-i18n.h:278
+#: gucharmap/unicode-i18n.h:287
 msgid "Sutton SignWriting"
 msgstr "Znakopis Valerie Suttonové"
 
-#: gucharmap/unicode-i18n.h:279
+#: gucharmap/unicode-i18n.h:288
+msgid "Latin Extended-G"
+msgstr "Latinka, rozšířená – G"
+
+#: gucharmap/unicode-i18n.h:289
 msgid "Glagolitic Supplement"
 msgstr "Hlaholice, doplňkové"
 
-#: gucharmap/unicode-i18n.h:280 gucharmap/unicode-i18n.h:415
+#: gucharmap/unicode-i18n.h:290 gucharmap/unicode-i18n.h:428
 msgid "Nyiakeng Puachue Hmong"
 msgstr "Hmongské Nyiakeng Puachue"
 
-#: gucharmap/unicode-i18n.h:281 gucharmap/unicode-i18n.h:466
+#: gucharmap/unicode-i18n.h:291 gucharmap/unicode-i18n.h:479
+msgid "Toto"
+msgstr "Toto"
+
+#: gucharmap/unicode-i18n.h:292 gucharmap/unicode-i18n.h:484
 msgid "Wancho"
 msgstr "Wančejské"
 
-#: gucharmap/unicode-i18n.h:282 gucharmap/unicode-i18n.h:400
+#: gucharmap/unicode-i18n.h:293
+msgid "Ethiopic Extended-B"
+msgstr "Etiopské, rozšířené – B"
+
+#: gucharmap/unicode-i18n.h:294 gucharmap/unicode-i18n.h:413
 msgid "Mende Kikakui"
 msgstr "Mendské Kikakui"
 
-#: gucharmap/unicode-i18n.h:283 gucharmap/unicode-i18n.h:315
+#: gucharmap/unicode-i18n.h:295 gucharmap/unicode-i18n.h:327
 msgid "Adlam"
 msgstr "Adlam"
 
-#: gucharmap/unicode-i18n.h:284
+#: gucharmap/unicode-i18n.h:296
 msgid "Indic Siyaq Numbers"
 msgstr "Indská čísla Siyaq"
 
-#: gucharmap/unicode-i18n.h:285
+#: gucharmap/unicode-i18n.h:297
 msgid "Ottoman Siyaq Numbers"
 msgstr "Osmanská čísla Siyaq"
 
-#: gucharmap/unicode-i18n.h:286
+#: gucharmap/unicode-i18n.h:298
 msgid "Arabic Mathematical Alphabetic Symbols"
 msgstr "Arabské matematické abecední symboly"
 
-#: gucharmap/unicode-i18n.h:287
+#: gucharmap/unicode-i18n.h:299
 msgid "Mahjong Tiles"
 msgstr "Kameny hry mah-jong"
 
-#: gucharmap/unicode-i18n.h:288
+#: gucharmap/unicode-i18n.h:300
 msgid "Domino Tiles"
 msgstr "Dominové kameny"
 
-#: gucharmap/unicode-i18n.h:289
+#: gucharmap/unicode-i18n.h:301
 msgid "Playing Cards"
 msgstr "Hrací karty"
 
-#: gucharmap/unicode-i18n.h:290
+#: gucharmap/unicode-i18n.h:302
 msgid "Enclosed Alphanumeric Supplement"
 msgstr "Alfanumerický systém, doplněk"
 
-#: gucharmap/unicode-i18n.h:291
+#: gucharmap/unicode-i18n.h:303
 msgid "Enclosed Ideographic Supplement"
 msgstr "Ideografický systém, doplněk"
 
-#: gucharmap/unicode-i18n.h:292
+#: gucharmap/unicode-i18n.h:304
 msgid "Miscellaneous Symbols and Pictographs"
 msgstr "Různé symboly a piktogramy"
 
-#: gucharmap/unicode-i18n.h:293
+#: gucharmap/unicode-i18n.h:305
 msgid "Emoticons"
 msgstr "Emotikony"
 
-#: gucharmap/unicode-i18n.h:294
+#: gucharmap/unicode-i18n.h:306
 msgid "Ornamental Dingbats"
 msgstr "Ornamenty"
 
-#: gucharmap/unicode-i18n.h:295
+#: gucharmap/unicode-i18n.h:307
 msgid "Transport and Map Symbols"
 msgstr "Dopravní a mapové symboly"
 
-#: gucharmap/unicode-i18n.h:296
+#: gucharmap/unicode-i18n.h:308
 msgid "Alchemical Symbols"
 msgstr "Alchymistické symboly"
 
-#: gucharmap/unicode-i18n.h:297
+#: gucharmap/unicode-i18n.h:309
 msgid "Geometric Shapes Extended"
 msgstr "Geometrické tvary, rozšířené"
 
-#: gucharmap/unicode-i18n.h:298
+#: gucharmap/unicode-i18n.h:310
 msgid "Supplemental Arrows-C"
 msgstr "Šipky, doplňkové – C"
 
-#: gucharmap/unicode-i18n.h:299
+#: gucharmap/unicode-i18n.h:311
 msgid "Supplemental Symbols and Pictographs"
 msgstr "Doplňkové symboly a piktogramy"
 
-#: gucharmap/unicode-i18n.h:300
+#: gucharmap/unicode-i18n.h:312
 msgid "Chess Symbols"
 msgstr "Šachové symboly"
 
-#: gucharmap/unicode-i18n.h:301
+#: gucharmap/unicode-i18n.h:313
 msgid "Symbols and Pictographs Extended-A"
 msgstr "Symboly a piktogramy, rozšířené – A"
 
-#: gucharmap/unicode-i18n.h:302
+#: gucharmap/unicode-i18n.h:314
 msgid "Symbols for Legacy Computing"
 msgstr "Symboly pro starou výpočetní techniku"
 
-#: gucharmap/unicode-i18n.h:303
+#: gucharmap/unicode-i18n.h:315
 msgid "CJK Unified Ideographs Extension B"
 msgstr "Sjednocené ideografické znaky v ČJK, rozšíření B"
 
-#: gucharmap/unicode-i18n.h:304
+#: gucharmap/unicode-i18n.h:316
 msgid "CJK Unified Ideographs Extension C"
 msgstr "Sjednocené ideografické znaky v ČJK, rozšíření C"
 
-#: gucharmap/unicode-i18n.h:305
+#: gucharmap/unicode-i18n.h:317
 msgid "CJK Unified Ideographs Extension D"
 msgstr "Sjednocené ideografické znaky v ČJK, rozšíření D"
 
-#: gucharmap/unicode-i18n.h:306
+#: gucharmap/unicode-i18n.h:318
 msgid "CJK Unified Ideographs Extension E"
 msgstr "Sjednocené ideografické znaky v ČJK, rozšíření E"
 
-#: gucharmap/unicode-i18n.h:307
+#: gucharmap/unicode-i18n.h:319
 msgid "CJK Unified Ideographs Extension F"
 msgstr "Sjednocené ideografické znaky v ČJK, rozšíření F"
 
-#: gucharmap/unicode-i18n.h:308
+#: gucharmap/unicode-i18n.h:320
 msgid "CJK Compatibility Ideographs Supplement"
 msgstr "Kompatibilní ideografické znaky v ČJK"
 
-#: gucharmap/unicode-i18n.h:309
+#: gucharmap/unicode-i18n.h:321
 msgid "CJK Unified Ideographs Extension G"
 msgstr "Sjednocené ideografické znaky v ČJK, rozšíření G"
 
-#: gucharmap/unicode-i18n.h:310
+#: gucharmap/unicode-i18n.h:322
 msgid "Tags"
 msgstr "Značky"
 
-#: gucharmap/unicode-i18n.h:311
+#: gucharmap/unicode-i18n.h:323
 msgid "Variation Selectors Supplement"
 msgstr "Doplněk výběrů z variací"
 
-#: gucharmap/unicode-i18n.h:312
+#: gucharmap/unicode-i18n.h:324
 msgid "Supplementary Private Use Area-A"
 msgstr "Doplňující oblast pro soukromé použití – A"
 
-#: gucharmap/unicode-i18n.h:313
+#: gucharmap/unicode-i18n.h:325
 msgid "Supplementary Private Use Area-B"
 msgstr "Doplňující oblast pro soukromé použití – B"
 
-#: gucharmap/unicode-i18n.h:329
+#: gucharmap/unicode-i18n.h:341
 msgid "Braille"
 msgstr "Braillovo"
 
-#: gucharmap/unicode-i18n.h:332
+#: gucharmap/unicode-i18n.h:344
 msgid "Canadian Aboriginal"
 msgstr "Kanadské domorodé"
 
-#: gucharmap/unicode-i18n.h:339
+#: gucharmap/unicode-i18n.h:351
 msgid "Common"
 msgstr "Běžné"
 
-#: gucharmap/unicode-i18n.h:342
+#: gucharmap/unicode-i18n.h:354
 msgid "Cypriot"
 msgstr "Kyperské"
 
-#: gucharmap/unicode-i18n.h:357
+#: gucharmap/unicode-i18n.h:355
+msgid "Cypro Minoan"
+msgstr "Kypersko-mínojské"
+
+#: gucharmap/unicode-i18n.h:370
 msgid "Greek"
 msgstr "Řecké"
 
-#: gucharmap/unicode-i18n.h:361
+#: gucharmap/unicode-i18n.h:374
 msgid "Han"
 msgstr "Chan-c'"
 
-#: gucharmap/unicode-i18n.h:362
+#: gucharmap/unicode-i18n.h:375
 msgid "Hangul"
 msgstr "Hangul"
 
-#: gucharmap/unicode-i18n.h:369
+#: gucharmap/unicode-i18n.h:382
 msgid "Inherited"
 msgstr "Zděděné"
 
-#: gucharmap/unicode-i18n.h:383
+#: gucharmap/unicode-i18n.h:396
 msgid "Latin"
 msgstr "Latinka"
 
-#: gucharmap/unicode-i18n.h:387
+#: gucharmap/unicode-i18n.h:400
 msgid "Linear B"
 msgstr "Lineární B"
 
-#: gucharmap/unicode-i18n.h:432
+#: gucharmap/unicode-i18n.h:446
 msgid "Phags Pa"
 msgstr "Phags Pa"
 
-#: gucharmap/unicode-i18n.h:442
+#: gucharmap/unicode-i18n.h:456
 msgid "Signwriting"
 msgstr "Znakopis"
 
-#: gucharmap/unicode-i18n.h:469
+#: gucharmap/unicode-i18n.h:487
 msgid "Yi"
 msgstr "Yi"
