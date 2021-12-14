@@ -18,7 +18,6 @@
 metainfodir = gucharmap_prefix / gucharmap_datadir / 'metainfo'
 
 i18n.merge_file(
-  'gucharmap.metainfo.xml',
   input: 'gucharmap.metainfo.xml.in',
   output: '@BASENAME@',
   po_dir: po_dir,
@@ -42,7 +41,6 @@ desktop_in = configure_file(
 )
 
 i18n.merge_file(
-  'gucharmap.desktop',
   input: desktop_in,
   output: '@BASENAME@',
   type: 'desktop',
