@@ -1,361 +1,607 @@
-# translation of gucharmap.gnome-2-14.po to Georgian
-# Copyright (C) 2006 THE PACKAGE'S COPYRIGHT HOLDER
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Vladimer Sichinava <alinux@siena.linux.it>, 2006.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gucharmap.gnome-2-14\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-25 22:45+0100\n"
-"PO-Revision-Date: 2006-03-26 23:03+0200\n"
-"Last-Translator: Vladimer Sichinava <alinux@siena.linux.it>\n"
-"Language-Team: Georgian <gnome@inet.ge>\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gucharmap/issues\n"
+"POT-Creation-Date: 2022-07-10 11:33+0000\n"
+"PO-Revision-Date: 2022-07-25 21:13+0200\n"
+"Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
+"Language-Team: \n"
 "Language: ka\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.1.1\n"
 
-#: ../gucharmap.desktop.in.h:1 ../gucharmap/gucharmap-window.c:842
+#. VERSION=@VERSION@
+#: data/gucharmap.desktop.in.in:4 data/gucharmap.metainfo.xml.in:37
+#: gucharmap/gucharmap-window.c:768 gucharmap/main.c:333
 msgid "Character Map"
-msgstr "სიმბოლოთა რუკა"
+msgstr "სიმბოლოების რუკის აპლიკაცია"
 
-#: ../gucharmap.desktop.in.h:2
+#: data/gucharmap.desktop.in.in:5 data/gucharmap.metainfo.xml.in:38
 msgid "Insert special characters into documents"
+msgstr "დოკუმენტში სპეციალური სიმბოლოების ჩასმა"
+
+#: data/gucharmap.desktop.in.in:6
+msgid "font;unicode;"
+msgstr "font;unicode;"
+
+#: data/gucharmap.metainfo.xml.in:34
+msgid "gucharmap.desktop"
+msgstr "gucharmap.desktop"
+
+#: data/gucharmap.metainfo.xml.in:35
+msgid "GPL-3.0+ or GFDL-1.3-only"
+msgstr "მხოლოდ GPL-3.0+ ან GFDL-1.3"
+
+#: data/gucharmap.metainfo.xml.in:36
+msgid "GPL-3.0+"
+msgstr "GPL-3.0+"
+
+#: data/gucharmap.metainfo.xml.in:40
+msgid ""
+"GNOME Character Map is a Unicode character map program, part of GNOME "
+"desktop. This program allows characters to be displayed by unicode block or "
+"script type. It includes brief descriptions of related characters and "
+"occasionally meanings of the character in question."
 msgstr ""
 
-#: ../gucharmap/gucharmap-charmap.c:268
+#: data/gucharmap.metainfo.xml.in:46
+msgid ""
+"Gucharmap can also be used to input or enter characters (by copy and paste). "
+"The search functionality allows the use of several search methods, including "
+"by unicode name or code point of the character."
+msgstr ""
+
+#: data/gucharmap.metainfo.xml.in:58
+msgid "ModernToolkit"
+msgstr "თანამედროვე ხელსაწყოები"
+
+#: data/gucharmap.metainfo.xml.in:59
+msgid "UserDocs"
+msgstr "მომხმარებლისდოკუმენტაცია"
+
+#: data/gucharmap.metainfo.xml.in:61
+msgid "https://wiki.gnome.org/Apps/Gucharmap"
+msgstr "https://wiki.gnome.org/Apps/Gucharmap"
+
+#: data/gucharmap.metainfo.xml.in:62
+msgid "GNOME"
+msgstr "GNOME"
+
+#: data/gucharmap.metainfo.xml.in:63
+msgid "gucharmap"
+msgstr "gucharmap"
+
+#: gucharmap/gucharmap-block-chapters-model.c:80
+msgid "All"
+msgstr "ყველა"
+
+#: gucharmap/gucharmap-block-chapters-model.c:194
+msgid "Unicode Block"
+msgstr "უნიკოდის ბლოკი"
+
+#. Translators: this is the name of a korean standard
+#: gucharmap/gucharmap-charmap.c:455
+msgid "KS X 1001"
+msgstr "KS X 1001"
+
+#. Translators: this is the name of a korean standard
+#: gucharmap/gucharmap-charmap.c:471
+msgid "KS X 1002"
+msgstr "KS X 1002"
+
+#: gucharmap/gucharmap-charmap.c:486
+msgid "Korean Education Hanja"
+msgstr ""
+
+#: gucharmap/gucharmap-charmap.c:502
+msgid "Korean Hanja for Use in Personal Names"
+msgstr ""
+
+#: gucharmap/gucharmap-charmap.c:517
+msgid "later removed at the code point"
+msgstr ""
+
+#: gucharmap/gucharmap-charmap.c:625
+msgid "Font variant of"
+msgstr ""
+
+#: gucharmap/gucharmap-charmap.c:626
+msgid "No-break version of"
+msgstr ""
+
+#: gucharmap/gucharmap-charmap.c:627
+msgid "Initial presentation form of"
+msgstr ""
+
+#: gucharmap/gucharmap-charmap.c:628
+msgid "Medial presentation form of"
+msgstr ""
+
+#: gucharmap/gucharmap-charmap.c:629
+msgid "Final presentation form of"
+msgstr ""
+
+#: gucharmap/gucharmap-charmap.c:630
+msgid "Isolated presentation form of"
+msgstr ""
+
+#: gucharmap/gucharmap-charmap.c:631
+msgid "Encircled form of"
+msgstr ""
+
+#: gucharmap/gucharmap-charmap.c:632
+msgid "Superscript form of"
+msgstr ""
+
+#: gucharmap/gucharmap-charmap.c:633
+msgid "Subscript form of"
+msgstr ""
+
+#: gucharmap/gucharmap-charmap.c:634
+msgid "Vertical layout presentation form of"
+msgstr ""
+
+#: gucharmap/gucharmap-charmap.c:635
+msgid "Wide compatibility character of"
+msgstr ""
+
+#: gucharmap/gucharmap-charmap.c:636
+msgid "Narrow compatibility character of"
+msgstr ""
+
+#: gucharmap/gucharmap-charmap.c:637
+msgid "Small variant form of"
+msgstr ""
+
+#: gucharmap/gucharmap-charmap.c:638
+msgid "CJK squared font variant of"
+msgstr ""
+
+#: gucharmap/gucharmap-charmap.c:639
+msgid "Vulgar fraction form of"
+msgstr ""
+
+#: gucharmap/gucharmap-charmap.c:640
+msgid "Unspecified compatibility character of"
+msgstr ""
+
+#: gucharmap/gucharmap-charmap.c:860
+msgid "Compatibility decomposition:"
+msgstr ""
+
+#: gucharmap/gucharmap-charmap.c:861
 msgid "Canonical decomposition:"
 msgstr ""
 
-#: ../gucharmap/gucharmap-charmap.c:309 ../gucharmap/gucharmap-table.c:294
-#, fuzzy
+#: gucharmap/gucharmap-charmap.c:903 gucharmap/gucharmap-chartable.c:581
 msgid "[not a printable character]"
-msgstr "არა a"
+msgstr ""
 
-#: ../gucharmap/gucharmap-charmap.c:323
-#, fuzzy
+#: gucharmap/gucharmap-charmap.c:917
 msgid "General Character Properties"
-msgstr "საერთო სიმბოლო პარამეტრები"
+msgstr ""
+
+#: gucharmap/gucharmap-charmap.c:923
+msgid "In Unicode since:"
+msgstr ""
 
 #. character category
-#: ../gucharmap/gucharmap-charmap.c:326
+#: gucharmap/gucharmap-charmap.c:927
 msgid "Unicode category:"
-msgstr "უნიკოდის კატეგორია:"
+msgstr ""
 
-#: ../gucharmap/gucharmap-charmap.c:335
+#: gucharmap/gucharmap-charmap.c:938
 msgid "Various Useful Representations"
 msgstr ""
 
-#: ../gucharmap/gucharmap-charmap.c:345
+#: gucharmap/gucharmap-charmap.c:948
 msgid "UTF-8:"
 msgstr "UTF-8:"
 
-#: ../gucharmap/gucharmap-charmap.c:353
+#: gucharmap/gucharmap-charmap.c:956
 msgid "UTF-16:"
 msgstr "UTF-16:"
 
-#: ../gucharmap/gucharmap-charmap.c:364
-#, fuzzy
+#: gucharmap/gucharmap-charmap.c:967
 msgid "C octal escaped UTF-8:"
-msgstr "C:"
+msgstr ""
 
-#: ../gucharmap/gucharmap-charmap.c:374
+#: gucharmap/gucharmap-charmap.c:977
 msgid "XML decimal entity:"
 msgstr ""
 
-#: ../gucharmap/gucharmap-charmap.c:385
-#, fuzzy
+#: gucharmap/gucharmap-charmap.c:988
 msgid "Annotations and Cross References"
-msgstr "ანოტაციები და კვეთა"
+msgstr ""
 
-#: ../gucharmap/gucharmap-charmap.c:392
+#: gucharmap/gucharmap-charmap.c:995
 msgid "Alias names:"
-msgstr "ფსევდონიმები:"
+msgstr "მეტსახელები:"
 
-#: ../gucharmap/gucharmap-charmap.c:401
+#: gucharmap/gucharmap-charmap.c:1004
 msgid "Notes:"
 msgstr "შენიშვნები:"
 
-#: ../gucharmap/gucharmap-charmap.c:410
+#: gucharmap/gucharmap-charmap.c:1013
 msgid "See also:"
-msgstr "ნახე აგრეთვე:"
+msgstr "ასევე იხილეთ:"
 
-#: ../gucharmap/gucharmap-charmap.c:419
+#: gucharmap/gucharmap-charmap.c:1022
 msgid "Approximate equivalents:"
-msgstr "მიახლოებითი ეკვივალენტები:"
+msgstr "დაახლოებით ეკვივალენტები:"
 
-#: ../gucharmap/gucharmap-charmap.c:428
+#: gucharmap/gucharmap-charmap.c:1031
 msgid "Equivalents:"
 msgstr "ეკვივალენტები:"
 
-#: ../gucharmap/gucharmap-charmap.c:444
-#, fuzzy
+#: gucharmap/gucharmap-charmap.c:1046
 msgid "CJK Ideograph Information"
-msgstr "ინფორმაცია"
+msgstr ""
 
-#: ../gucharmap/gucharmap-charmap.c:449
+#: gucharmap/gucharmap-charmap.c:1051
 msgid "Definition in English:"
-msgstr "ინგლისური შესატყვისი:"
+msgstr ""
 
-#: ../gucharmap/gucharmap-charmap.c:454
+#: gucharmap/gucharmap-charmap.c:1056
 msgid "Mandarin Pronunciation:"
 msgstr ""
 
-#: ../gucharmap/gucharmap-charmap.c:459
+#: gucharmap/gucharmap-charmap.c:1061
 msgid "Cantonese Pronunciation:"
-msgstr "კანტონური გამოთქმა:"
+msgstr ""
 
-#: ../gucharmap/gucharmap-charmap.c:464
+#: gucharmap/gucharmap-charmap.c:1066
 msgid "Japanese On Pronunciation:"
-msgstr "იაპონური გამოთქმით:"
+msgstr ""
 
-#: ../gucharmap/gucharmap-charmap.c:469
+#: gucharmap/gucharmap-charmap.c:1071
 msgid "Japanese Kun Pronunciation:"
-msgstr "იაპონური კუნ გამოთქმა:"
+msgstr ""
 
-#: ../gucharmap/gucharmap-charmap.c:474
+#: gucharmap/gucharmap-charmap.c:1076
 msgid "Tang Pronunciation:"
-msgstr "ტანგური გამოთქმა:"
+msgstr ""
 
-#: ../gucharmap/gucharmap-charmap.c:479
+#: gucharmap/gucharmap-charmap.c:1081
 msgid "Korean Pronunciation:"
-msgstr "კორეული გამოთქმა:"
+msgstr ""
 
-#: ../gucharmap/gucharmap-charmap.c:780
+#: gucharmap/gucharmap-charmap.c:1086
+msgid "Vietnamese Pronunciation:"
+msgstr ""
+
+#: gucharmap/gucharmap-charmap.c:1468
 msgid "Characte_r Table"
-msgstr "ს_იმბოლოების ცხრილი"
+msgstr ""
 
-#: ../gucharmap/gucharmap-charmap.c:783
+#: gucharmap/gucharmap-charmap.c:1515
 msgid "Character _Details"
-msgstr "სიმბოლოს შ_ესახებ"
+msgstr ""
 
-#: ../gucharmap/gucharmap-mini-fontsel.c:205
+#: gucharmap/gucharmap-chartable-accessible.c:801
+msgid "Character Table"
+msgstr ""
+
+#: gucharmap/gucharmap-chartable.c:1264
+msgid "Unknown character, unable to identify."
+msgstr ""
+
+#: gucharmap/gucharmap-chartable.c:1266 gucharmap/gucharmap-search-dialog.c:582
+msgid "Not found."
+msgstr "ვერ მოიძებნა."
+
+#: gucharmap/gucharmap-chartable.c:1269
+msgid "Character found."
+msgstr ""
+
+#: gucharmap/gucharmap-menus.ui:28 gucharmap/gucharmap-menus.ui:107
+msgid "By _Script"
+msgstr ""
+
+#: gucharmap/gucharmap-menus.ui:33 gucharmap/gucharmap-menus.ui:112
+msgid "By _Unicode Block"
+msgstr ""
+
+#: gucharmap/gucharmap-menus.ui:40 gucharmap/gucharmap-menus.ui:119
+msgid "Sho_w only glyphs from this font"
+msgstr ""
+
+#: gucharmap/gucharmap-menus.ui:44 gucharmap/gucharmap-menus.ui:123
+msgid "Snap _Columns to Power of Two"
+msgstr ""
+
+#: gucharmap/gucharmap-menus.ui:50 gucharmap/gucharmap-menus.ui:129
+msgid "Zoom _In"
+msgstr "_გადიდება"
+
+#: gucharmap/gucharmap-menus.ui:55 gucharmap/gucharmap-menus.ui:134
+msgid "Zoom _Out"
+msgstr "და_პატარავება"
+
+#: gucharmap/gucharmap-menus.ui:60 gucharmap/gucharmap-menus.ui:139
+msgid "_Normal Size"
+msgstr "_ნორმალური ზომა"
+
+#: gucharmap/gucharmap-menus.ui:67 gucharmap/gucharmap-menus.ui:149
+msgid "_Find"
+msgstr "_ძებნა"
+
+#: gucharmap/gucharmap-menus.ui:74 gucharmap/gucharmap-menus.ui:182
+msgid "_Help"
+msgstr "_დახმარება"
+
+#: gucharmap/gucharmap-menus.ui:79 gucharmap/gucharmap-menus.ui:190
+msgid "_About"
+msgstr "_შესახებ"
+
+#: gucharmap/gucharmap-menus.ui:85
+msgid "_Close Window"
+msgstr "_დახურე ფანჯარა"
+
+#: gucharmap/gucharmap-menus.ui:94
+msgid "_File"
+msgstr "_ფაილი"
+
+#: gucharmap/gucharmap-menus.ui:97
+msgid "_Close"
+msgstr "_დახურვა"
+
+#: gucharmap/gucharmap-menus.ui:104
+msgid "_View"
+msgstr "_ხედი"
+
+#: gucharmap/gucharmap-menus.ui:146
+msgid "_Search"
+msgstr "_ძებნა"
+
+#: gucharmap/gucharmap-menus.ui:154
+msgid "Find _Next"
+msgstr "შემდეგის _პოვნა"
+
+#: gucharmap/gucharmap-menus.ui:159
+msgid "Find _Previous"
+msgstr "წინას პოვნა"
+
+#: gucharmap/gucharmap-menus.ui:166
+msgid "_Go"
+msgstr "გადასვლა"
+
+#: gucharmap/gucharmap-menus.ui:169
+msgid "_Next Character"
+msgstr ""
+
+#: gucharmap/gucharmap-menus.ui:174
+msgid "_Previous Character"
+msgstr ""
+
+#: gucharmap/gucharmap-menus.ui:185
+msgid "_Contents"
+msgstr "_შინაარსი"
+
+#: gucharmap/gucharmap-mini-fontsel.c:332
 msgid "Font"
 msgstr "შრიფტი"
 
-#: ../gucharmap/gucharmap-mini-fontsel.c:212
+#: gucharmap/gucharmap-mini-fontsel.c:351
 msgid "Font Family"
-msgstr "შრიფტების ოჯახი"
+msgstr "ფონტების ოჯახი"
 
-#: ../gucharmap/gucharmap-mini-fontsel.c:232
+#: gucharmap/gucharmap-mini-fontsel.c:369
 msgid "Font Size"
-msgstr "შრიფტის ზომა"
+msgstr "ფონტის ზომა"
 
-#. Unicode assigns "Common" as the script name for any character not
+#: gucharmap/gucharmap-script-chapters-model.c:149
+msgid "Script"
+msgstr "სკრიპტი"
+
+#. Unicode assigns "Unknown" as the script name for any character not
 #. * specifically listed in Scripts.txt
-#: ../gucharmap/gucharmap-script-codepoint-list.c:458
-#: ../gucharmap/unicode-scripts.h:25
-msgid "Common"
-msgstr "საერთო"
+#: gucharmap/gucharmap-script-codepoint-list.c:465 gucharmap/unicode-i18n.h:490
+msgid "Unknown"
+msgstr "უცნობი"
 
-#: ../gucharmap/gucharmap-table.c:1513
-msgid "Unknown character, unable to identify."
-msgstr "უცნობი სიმპოლო, შეუძლებელია დადგენა."
+#: gucharmap/gucharmap-search-dialog.c:562
+msgid "Information"
+msgstr "ინფორმაცია"
 
-#: ../gucharmap/gucharmap-table.c:1515
-#: ../gucharmap/gucharmap-search-dialog.c:595
-msgid "Not found."
+#. follow hig guidelines
+#: gucharmap/gucharmap-search-dialog.c:732
+msgid "Find"
+msgstr "ძებნა"
+
+#: gucharmap/gucharmap-search-dialog.c:745
+msgid "_Previous"
+msgstr "_წინა"
+
+#: gucharmap/gucharmap-search-dialog.c:752
+msgid "_Next"
+msgstr "_შემდეგი"
+
+#: gucharmap/gucharmap-search-dialog.c:768
+msgid "_Search:"
+msgstr "_ძებნა:"
+
+#: gucharmap/gucharmap-search-dialog.c:779
+msgid "Match _whole word"
 msgstr ""
 
-#: ../gucharmap/gucharmap-table.c:1518
-#, fuzzy
-msgid "Character found."
-msgstr "სიმბოლო."
+#: gucharmap/gucharmap-search-dialog.c:784
+msgid "Search in character _details"
+msgstr ""
 
-#: ../gucharmap/gucharmap-table.c:1582
-#, fuzzy
-msgid "Character Table"
-msgstr "სიმბოლოთა ცხრილი"
-
-#: ../gucharmap/gucharmap-unicode-info.c:96
+#: gucharmap/gucharmap-unicode-info.c:119
 msgid "<Non Private Use High Surrogate>"
 msgstr ""
 
-#: ../gucharmap/gucharmap-unicode-info.c:98
+#: gucharmap/gucharmap-unicode-info.c:121
 msgid "<Private Use High Surrogate>"
 msgstr ""
 
-#: ../gucharmap/gucharmap-unicode-info.c:100
+#: gucharmap/gucharmap-unicode-info.c:123
 msgid "<Low Surrogate>"
 msgstr ""
 
-#: ../gucharmap/gucharmap-unicode-info.c:102
+#: gucharmap/gucharmap-unicode-info.c:125
 msgid "<Private Use>"
 msgstr ""
 
-#: ../gucharmap/gucharmap-unicode-info.c:104
+#: gucharmap/gucharmap-unicode-info.c:127
 msgid "<Plane 15 Private Use>"
 msgstr ""
 
-#: ../gucharmap/gucharmap-unicode-info.c:106
+#: gucharmap/gucharmap-unicode-info.c:129
 msgid "<Plane 16 Private Use>"
 msgstr ""
 
-#: ../gucharmap/gucharmap-unicode-info.c:111
+#: gucharmap/gucharmap-unicode-info.c:134
 msgid "<not assigned>"
 msgstr ""
 
-#: ../gucharmap/gucharmap-unicode-info.c:124
-#, fuzzy
+#: gucharmap/gucharmap-unicode-info.c:147
 msgid "Other, Control"
-msgstr "სხვა, კონტროლი"
+msgstr "სხვა, საკონტროლო"
 
-#: ../gucharmap/gucharmap-unicode-info.c:125
-#, fuzzy
+#: gucharmap/gucharmap-unicode-info.c:148
 msgid "Other, Format"
 msgstr "სხვა, ფორმატი"
 
-#: ../gucharmap/gucharmap-unicode-info.c:126
-#, fuzzy
+#: gucharmap/gucharmap-unicode-info.c:149
 msgid "Other, Not Assigned"
-msgstr "სხვა მინიჭებული"
+msgstr "სხვა, მიუნიჭებელი"
 
-#: ../gucharmap/gucharmap-unicode-info.c:127
-#, fuzzy
+#: gucharmap/gucharmap-unicode-info.c:150
 msgid "Other, Private Use"
-msgstr "სხვა პრივატი გამოყენება"
+msgstr "სხვა, პირადი"
 
-#: ../gucharmap/gucharmap-unicode-info.c:128
+#: gucharmap/gucharmap-unicode-info.c:151
 msgid "Other, Surrogate"
-msgstr ""
+msgstr "სხვა, სუროგატი"
 
-#: ../gucharmap/gucharmap-unicode-info.c:129
+#: gucharmap/gucharmap-unicode-info.c:152
 msgid "Letter, Lowercase"
-msgstr "ასო, დაბალი რეგისტრი"
+msgstr "წერილი, პატარა სიმბოლოები"
 
-#: ../gucharmap/gucharmap-unicode-info.c:130
+#: gucharmap/gucharmap-unicode-info.c:153
 msgid "Letter, Modifier"
-msgstr "ასო, მოდიფიკატორი"
+msgstr "წერილი, მოდიფიკატორი"
 
-#: ../gucharmap/gucharmap-unicode-info.c:131
-#, fuzzy
+#: gucharmap/gucharmap-unicode-info.c:154
 msgid "Letter, Other"
-msgstr "სხვა"
+msgstr "წერილი, სხვა"
 
-#: ../gucharmap/gucharmap-unicode-info.c:132
+#: gucharmap/gucharmap-unicode-info.c:155
 msgid "Letter, Titlecase"
-msgstr ""
+msgstr "წერილი, ზემოდან დასაწერი"
 
-#: ../gucharmap/gucharmap-unicode-info.c:133
-#, fuzzy
+#: gucharmap/gucharmap-unicode-info.c:156
 msgid "Letter, Uppercase"
-msgstr "ზედა რეგისტრი (მთავრული)"
+msgstr "წერილი, დიდი სიმბოლოები"
 
-#: ../gucharmap/gucharmap-unicode-info.c:134
-#, fuzzy
+#: gucharmap/gucharmap-unicode-info.c:157
 msgid "Mark, Spacing Combining"
-msgstr "ინტერვალი"
+msgstr "ნიშანი, დაშორების შეკრება"
 
-#: ../gucharmap/gucharmap-unicode-info.c:135
+#: gucharmap/gucharmap-unicode-info.c:158
 msgid "Mark, Enclosing"
-msgstr ""
+msgstr "ნიშანი, ჩასმა"
 
-#: ../gucharmap/gucharmap-unicode-info.c:136
-#, fuzzy
+#: gucharmap/gucharmap-unicode-info.c:159
 msgid "Mark, Non-Spacing"
-msgstr "ინტერვალი"
+msgstr "ნიშანი, დაშორების-გარეშე"
 
-#: ../gucharmap/gucharmap-unicode-info.c:137
-#, fuzzy
+#: gucharmap/gucharmap-unicode-info.c:160
 msgid "Number, Decimal Digit"
-msgstr "ნომერი ათობითი ციფრი"
+msgstr "რიცხვი, ათეული ციფრი"
 
-#: ../gucharmap/gucharmap-unicode-info.c:138
-#, fuzzy
+#: gucharmap/gucharmap-unicode-info.c:161
 msgid "Number, Letter"
-msgstr "ნომერი"
+msgstr "რიცხვი, სიმბოლო"
 
-#: ../gucharmap/gucharmap-unicode-info.c:139
-#, fuzzy
+#: gucharmap/gucharmap-unicode-info.c:162
 msgid "Number, Other"
-msgstr "ნომერი, სხვა"
+msgstr "რიცხვი, სხვა"
 
-#: ../gucharmap/gucharmap-unicode-info.c:140
+#: gucharmap/gucharmap-unicode-info.c:163
 msgid "Punctuation, Connector"
-msgstr ""
+msgstr "პუნქტუაცია, შემაერთებელი"
 
-#: ../gucharmap/gucharmap-unicode-info.c:141
+#: gucharmap/gucharmap-unicode-info.c:164
 msgid "Punctuation, Dash"
-msgstr ""
+msgstr "პუნქტუაცია, ტირე"
 
-#: ../gucharmap/gucharmap-unicode-info.c:142
-#, fuzzy
+#: gucharmap/gucharmap-unicode-info.c:165
 msgid "Punctuation, Close"
-msgstr "დახურვა"
+msgstr "პუნქტუაცია, დახურვა"
 
-#: ../gucharmap/gucharmap-unicode-info.c:143
+#: gucharmap/gucharmap-unicode-info.c:166
 msgid "Punctuation, Final Quote"
-msgstr ""
+msgstr "პუნქტუაცია, დამხურავი ბრჭყალი"
 
-#: ../gucharmap/gucharmap-unicode-info.c:144
+#: gucharmap/gucharmap-unicode-info.c:167
 msgid "Punctuation, Initial Quote"
-msgstr ""
+msgstr "პუნქტუაცია, გამხსნელი ბრჭყალი"
 
-#: ../gucharmap/gucharmap-unicode-info.c:145
-#, fuzzy
+#: gucharmap/gucharmap-unicode-info.c:168
 msgid "Punctuation, Other"
-msgstr "სხვა"
+msgstr "პუნქტუაცია, სხვა"
 
-#: ../gucharmap/gucharmap-unicode-info.c:146
-#, fuzzy
+#: gucharmap/gucharmap-unicode-info.c:169
 msgid "Punctuation, Open"
-msgstr "გახსნა"
+msgstr "პუნქტუაცია, გახსნა"
 
-#: ../gucharmap/gucharmap-unicode-info.c:147
+#: gucharmap/gucharmap-unicode-info.c:170
 msgid "Symbol, Currency"
-msgstr ""
+msgstr "სიმბოლო, ფულის"
 
-#: ../gucharmap/gucharmap-unicode-info.c:148
+#: gucharmap/gucharmap-unicode-info.c:171
 msgid "Symbol, Modifier"
-msgstr "სიმბოლოს, მოდიფიკატორი"
+msgstr "სიმბოლო, მოდიფიკატორი"
 
-#: ../gucharmap/gucharmap-unicode-info.c:149
+#: gucharmap/gucharmap-unicode-info.c:172
 msgid "Symbol, Math"
-msgstr ""
+msgstr "სიმბოლო, მათემატიკური"
 
-#: ../gucharmap/gucharmap-unicode-info.c:150
-#, fuzzy
+#: gucharmap/gucharmap-unicode-info.c:173
 msgid "Symbol, Other"
-msgstr "სხვა"
+msgstr "სიმბოლო, სხვა"
 
-#: ../gucharmap/gucharmap-unicode-info.c:151
+#: gucharmap/gucharmap-unicode-info.c:174
 msgid "Separator, Line"
 msgstr "გამყოფი, ხაზი"
 
-#: ../gucharmap/gucharmap-unicode-info.c:152
-#, fuzzy
+#: gucharmap/gucharmap-unicode-info.c:175
 msgid "Separator, Paragraph"
-msgstr "გამყოფი აბზაცი"
+msgstr "გამყოფი, პარაგრაფი"
 
-#: ../gucharmap/gucharmap-unicode-info.c:153
-#, fuzzy
+#: gucharmap/gucharmap-unicode-info.c:176
 msgid "Separator, Space"
-msgstr "გამყოფი კოსმოსი"
+msgstr "გამყოფი, ჰარე"
 
-#: ../gucharmap/gucharmap-window.c:188
-msgid "Searching..."
-msgstr "ძებნა..."
-
-#: ../gucharmap/gucharmap-window.c:337
+#: gucharmap/gucharmap-window.c:430
 msgid ""
 "Gucharmap is free software; you can redistribute it and/or modify it under "
 "the terms of the GNU General Public License as published by the Free "
-"Software Foundation; either version 2 of the License, or (at your option) "
+"Software Foundation; either version 3 of the License, or (at your option) "
 "any later version."
 msgstr ""
 
-#: ../gucharmap/gucharmap-window.c:341
-#, fuzzy
+#: gucharmap/gucharmap-window.c:434
 msgid ""
 "Permission is hereby granted, free of charge, to any person obtaining a copy "
 "of the Unicode data files to deal in them without restriction, including "
 "without limitation the rights to use, copy, modify, merge, publish, "
 "distribute, and/or sell copies."
-msgstr "- -სკენ ნებისმიერი პირადი ფორმა a კოპირება - უნიკოდი ფაილი -სკენ - შეზღუდვა -სკენ კოპირება და ან."
+msgstr ""
 
-#: ../gucharmap/gucharmap-window.c:345
+#: gucharmap/gucharmap-window.c:438
 msgid ""
 "Gucharmap and the Unicode data files are distributed in the hope that they "
 "will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty "
@@ -363,837 +609,1487 @@ msgid ""
 "Public License and Unicode Copyright for more details."
 msgstr ""
 
-#: ../gucharmap/gucharmap-window.c:349
+#: gucharmap/gucharmap-window.c:442
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
-"Gucharmap; if not, write to the Free Software Foundation, Inc., 59 Temple "
-"Place, Suite 330, Boston, MA  02111-1307  USA"
+"Gucharmap; if not, write to the Free Software Foundation, Inc., 51 Franklin "
+"Street, Fifth Floor, Boston, MA 02110-1335 USA"
 msgstr ""
 
-#: ../gucharmap/gucharmap-window.c:352
-#, fuzzy
+#: gucharmap/gucharmap-window.c:445
 msgid ""
 "Also you should have received a copy of the Unicode Copyright along with "
-"Gucharmap; you can always find it at Unicode's website: http://www.unicode."
+"Gucharmap; you can always find it at Unicode's website: https://www.unicode."
 "org/copyright.html"
-msgstr "a კოპირება - უნიკოდი საავტორო უფლებები პოვნა ეთ უნიკოდი წმhttp://www.unicode.org/copyright.html"
-
-#: ../gucharmap/gucharmap-window.c:362
-#, fuzzy
-msgid "translator-credits"
-msgstr "თარგმანი-შესრულებულია"
-
-#: ../gucharmap/gucharmap-window.c:368
-msgid ""
-"GNOME Character Map\n"
-"based on the Unicode Character Database"
-msgstr "გნომის სიმბოლოების რუკა\n"
-"დაფუძნებულია უნიკოდის მონაცემთა ბაზაზე"
-
-#: ../gucharmap/gucharmap-window.c:374 ../gucharmap/main.c:76
-msgid "Gucharmap"
 msgstr ""
 
-#: ../gucharmap/gucharmap-window.c:491
-msgid "_File"
-msgstr "_ფაილი"
+#: gucharmap/gucharmap-window.c:455 gucharmap/main.c:105
+msgid "GNOME Character Map"
+msgstr ""
 
-#: ../gucharmap/gucharmap-window.c:492
-msgid "_View"
-msgstr "_ხედი"
+#: gucharmap/gucharmap-window.c:457
+msgid "Based on the Unicode Character Database 14.0.0"
+msgstr ""
 
-#: ../gucharmap/gucharmap-window.c:493
-msgid "_Search"
-msgstr "_ძებნა"
+#: gucharmap/gucharmap-window.c:467
+msgid "translator-credits"
+msgstr "თემური დოღონაძე"
 
-#: ../gucharmap/gucharmap-window.c:494
-msgid "_Go"
-msgstr "_წინ"
-
-#: ../gucharmap/gucharmap-window.c:495
-msgid "_Help"
-msgstr "_დახმარება"
-
-#: ../gucharmap/gucharmap-window.c:497
-msgid "_Quit"
-msgstr "_გასვლა"
-
-#: ../gucharmap/gucharmap-window.c:500
-msgid "Zoom _In"
-msgstr "მი_უახლოვე"
-
-#: ../gucharmap/gucharmap-window.c:502
-msgid "Zoom _Out"
-msgstr "დ_აშორება"
-
-#: ../gucharmap/gucharmap-window.c:504
-msgid "_Normal Size"
-msgstr "_ნორმალური ზომა"
-
-#: ../gucharmap/gucharmap-window.c:507
-msgid "_Find..."
-msgstr "_ძიება..."
-
-#: ../gucharmap/gucharmap-window.c:509
-msgid "Find _Next"
-msgstr "შე_მდეგის ძებნა"
-
-#: ../gucharmap/gucharmap-window.c:511
-msgid "Find _Previous"
-msgstr "_წინას მოძებნა"
-
-#: ../gucharmap/gucharmap-window.c:514
-msgid "_Next Character"
-msgstr "_შემდეგი სიმბოლო"
-
-#: ../gucharmap/gucharmap-window.c:516
-msgid "_Previous Character"
-msgstr "_წინა სიმბოლო"
-
-#: ../gucharmap/gucharmap-window.c:518
+#: gucharmap/gucharmap-window.c:556
 msgid "Next Script"
-msgstr "შემდეგი დამწერლობა"
+msgstr "შემდეგი სკრიპტი"
 
-#: ../gucharmap/gucharmap-window.c:520
+#: gucharmap/gucharmap-window.c:556
 msgid "Previous Script"
 msgstr "წინა სკრიპტი"
 
-#: ../gucharmap/gucharmap-window.c:524
-msgid "_Contents"
-msgstr "_შინაარსი"
+#: gucharmap/gucharmap-window.c:561
+msgid "Next Block"
+msgstr "შემდეგი ბლოკი"
 
-#: ../gucharmap/gucharmap-window.c:527
-msgid "_About"
-msgstr "_შესახებ"
+#: gucharmap/gucharmap-window.c:561
+msgid "Previous Block"
+msgstr "წინა ბლოკი"
 
-#: ../gucharmap/gucharmap-window.c:533
-msgid "By _Script"
-msgstr "_დამწერლობის მიხედვით"
-
-#: ../gucharmap/gucharmap-window.c:535
-msgid "By _Unicode Block"
-msgstr "_უნიკოდ ბლოკის მიხედვით"
-
-#: ../gucharmap/gucharmap-window.c:732
+#. Text to copy entry + button
+#: gucharmap/gucharmap-window.c:793
 msgid "_Text to copy:"
-msgstr "_დასაკოპირებელი ტექსტი:"
+msgstr "_დასაკროპირებელი ტექსტი:"
 
-#: ../gucharmap/gucharmap-window.c:753
-#, fuzzy
+#: gucharmap/gucharmap-window.c:800
 msgid "Copy to the clipboard."
-msgstr "დააკოპირე -სკენ."
+msgstr "ანგარიშის მიმოცვლის ბაფერში კოპირება."
 
-#: ../gucharmap/main.c:36
-#, fuzzy
+#: gucharmap/main.c:253
+msgid "Page _Setup"
+msgstr "გვერდის _მორგება"
+
+#. g_menu_append (G_MENU (model), _("Print Preview"), "win.print-preview");
+#: gucharmap/main.c:255
+msgid "_Print"
+msgstr "_ბეჭდვა"
+
+#: gucharmap/main.c:304
 msgid "Font to start with; ex: 'Serif 27'"
-msgstr "შრიფტი -სკენ"
+msgstr ""
 
-#: ../gucharmap/unicode-blocks.h:20
+#: gucharmap/main.c:304
+msgid "FONT"
+msgstr "FONT"
+
+#: gucharmap/main.c:310
+msgid "[STRING…]"
+msgstr "[სტრიქონი…]"
+
+#: gucharmap/org.gnome.Charmap.gschema.xml:32
+msgid "Character map grouping method"
+msgstr ""
+
+#: gucharmap/org.gnome.Charmap.gschema.xml:33
+msgid ""
+"This is how the characters in the character map are grouped. The characters "
+"can either be grouped by 'script' or 'block'."
+msgstr ""
+
+#: gucharmap/org.gnome.Charmap.gschema.xml:41
+msgid "Character map font description"
+msgstr ""
+
+#: gucharmap/org.gnome.Charmap.gschema.xml:42
+msgid ""
+"The font to use for the character map. If set to 'nothing' then the default "
+"is the system font with the size doubled. Otherwise it should be a font "
+"description string like 'Sans 24'."
+msgstr ""
+
+#: gucharmap/org.gnome.Charmap.gschema.xml:51
+msgid "Snap number of columns to a power of two"
+msgstr ""
+
+#: gucharmap/org.gnome.Charmap.gschema.xml:52
+msgid ""
+"The number of columns in the character map grid is determined by the width "
+"of the window. If this setting is 'true' then the value will be forced to "
+"the nearest power of two."
+msgstr ""
+
+#: gucharmap/org.gnome.Charmap.gschema.xml:62
+msgid "Last selected character"
+msgstr ""
+
+#: gucharmap/org.gnome.Charmap.gschema.xml:63
+msgid ""
+"This is the last character that was selected in the character map (and will "
+"be selected again when the character map is next started). By default, it is "
+"the first letter of the alphabet in the current locale."
+msgstr ""
+
+#. The unicode code point of the first letter of the alphabet
+#: gucharmap/org.gnome.Charmap.gschema.xml:72
+msgctxt "First letter"
+msgid "0x41"
+msgstr "0x41"
+
+#: gucharmap/unicode-i18n.h:6
 msgid "Basic Latin"
-msgstr "ძირითადი ლათინური"
+msgstr "საბაზისო ლათინური"
 
-#: ../gucharmap/unicode-blocks.h:21
+#: gucharmap/unicode-i18n.h:7
 msgid "Latin-1 Supplement"
-msgstr "Latin-1 დამატებითი"
+msgstr "Latin-1 დამატებებით"
 
-#: ../gucharmap/unicode-blocks.h:22
+#: gucharmap/unicode-i18n.h:8
 msgid "Latin Extended-A"
 msgstr "ლათინური გაფართოებული-A"
 
-#: ../gucharmap/unicode-blocks.h:23
+#: gucharmap/unicode-i18n.h:9
 msgid "Latin Extended-B"
-msgstr "ლათინური გაფართოებული B"
+msgstr "ლათინური გაფართოებული-B"
 
-#: ../gucharmap/unicode-blocks.h:24
+#: gucharmap/unicode-i18n.h:10
 msgid "IPA Extensions"
-msgstr "IPA გაფართოებები"
+msgstr "IPA-ის გაფართოებები"
 
-#: ../gucharmap/unicode-blocks.h:25
-#, fuzzy
+#: gucharmap/unicode-i18n.h:11
 msgid "Spacing Modifier Letters"
-msgstr "ინტერვალი მოდიფიკატორი"
+msgstr "ჰარეს მოდიფიკატორი სიმბოლოები"
 
-#: ../gucharmap/unicode-blocks.h:26
+#: gucharmap/unicode-i18n.h:12
 msgid "Combining Diacritical Marks"
-msgstr ""
+msgstr "შემკრები დიაკრიტიკული სანიშნები"
 
-#: ../gucharmap/unicode-blocks.h:27
+#: gucharmap/unicode-i18n.h:13
 msgid "Greek and Coptic"
-msgstr "ბერძნული"
+msgstr "ბერძნული და კოპტური"
 
-#: ../gucharmap/unicode-blocks.h:28 ../gucharmap/unicode-scripts.h:28
+#: gucharmap/unicode-i18n.h:14 gucharmap/unicode-i18n.h:363
 msgid "Cyrillic"
 msgstr "კირილიცა"
 
-#: ../gucharmap/unicode-blocks.h:29
+#: gucharmap/unicode-i18n.h:15
 msgid "Cyrillic Supplement"
-msgstr "კირილიცა დამატებითი"
+msgstr "კირილიცა დამატებებით"
 
-#: ../gucharmap/unicode-blocks.h:30 ../gucharmap/unicode-scripts.h:17
+#: gucharmap/unicode-i18n.h:16 gucharmap/unicode-i18n.h:338
 msgid "Armenian"
 msgstr "სომხური"
 
-#: ../gucharmap/unicode-blocks.h:31 ../gucharmap/unicode-scripts.h:41
+#: gucharmap/unicode-i18n.h:17 gucharmap/unicode-i18n.h:386
 msgid "Hebrew"
 msgstr "ივრითი"
 
-#: ../gucharmap/unicode-blocks.h:32 ../gucharmap/unicode-scripts.h:16
+#: gucharmap/unicode-i18n.h:18 gucharmap/unicode-i18n.h:337
 msgid "Arabic"
 msgstr "არაბული"
 
-#: ../gucharmap/unicode-blocks.h:33 ../gucharmap/unicode-scripts.h:65
+#: gucharmap/unicode-i18n.h:19 gucharmap/unicode-i18n.h:472
 msgid "Syriac"
 msgstr "სირიული"
 
-#: ../gucharmap/unicode-blocks.h:34
+#: gucharmap/unicode-i18n.h:20
 msgid "Arabic Supplement"
-msgstr "არაბული დამატებითი"
+msgstr "არაბული დამატებებით"
 
-#: ../gucharmap/unicode-blocks.h:35 ../gucharmap/unicode-scripts.h:71
+#: gucharmap/unicode-i18n.h:21 gucharmap/unicode-i18n.h:483
 msgid "Thaana"
+msgstr "თაანური"
+
+#: gucharmap/unicode-i18n.h:22 gucharmap/unicode-i18n.h:430
+msgid "N'Ko"
+msgstr "N'ko"
+
+#: gucharmap/unicode-i18n.h:23 gucharmap/unicode-i18n.h:460
+msgid "Samaritan"
+msgstr "სამარიტული"
+
+#: gucharmap/unicode-i18n.h:24 gucharmap/unicode-i18n.h:415
+msgid "Mandaic"
+msgstr "მანდეური"
+
+#: gucharmap/unicode-i18n.h:25
+msgid "Syriac Supplement"
+msgstr "სირიულის შემცვლელი"
+
+#: gucharmap/unicode-i18n.h:26
+msgid "Arabic Extended-B"
 msgstr ""
 
-#: ../gucharmap/unicode-blocks.h:36 ../gucharmap/unicode-scripts.h:30
+#: gucharmap/unicode-i18n.h:27
+msgid "Arabic Extended-A"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:28 gucharmap/unicode-i18n.h:365
 msgid "Devanagari"
-msgstr "დევანაგარი"
+msgstr "დევაგანური"
 
-#: ../gucharmap/unicode-blocks.h:37 ../gucharmap/unicode-scripts.h:18
+#: gucharmap/unicode-i18n.h:29 gucharmap/unicode-i18n.h:344
 msgid "Bengali"
-msgstr "ბენგალი"
+msgstr "ბენგალური"
 
-#: ../gucharmap/unicode-blocks.h:38 ../gucharmap/unicode-scripts.h:37
+#: gucharmap/unicode-i18n.h:30 gucharmap/unicode-i18n.h:380
 msgid "Gurmukhi"
-msgstr "გურმუხი"
+msgstr "გურმუხული"
 
-#: ../gucharmap/unicode-blocks.h:39 ../gucharmap/unicode-scripts.h:36
+#: gucharmap/unicode-i18n.h:31 gucharmap/unicode-i18n.h:378
 msgid "Gujarati"
-msgstr "გუჯარათი"
+msgstr "გუჯარათული"
 
-#: ../gucharmap/unicode-blocks.h:40 ../gucharmap/unicode-scripts.h:59
+#: gucharmap/unicode-i18n.h:32 gucharmap/unicode-i18n.h:449
 msgid "Oriya"
-msgstr "ორიული"
+msgstr "ორია"
 
-#: ../gucharmap/unicode-blocks.h:41 ../gucharmap/unicode-scripts.h:69
+#: gucharmap/unicode-i18n.h:33 gucharmap/unicode-i18n.h:479
 msgid "Tamil"
 msgstr "თამილური"
 
-#: ../gucharmap/unicode-blocks.h:42 ../gucharmap/unicode-scripts.h:70
+#: gucharmap/unicode-i18n.h:34 gucharmap/unicode-i18n.h:482
 msgid "Telugu"
-msgstr "თელუგუ"
+msgstr "ტელუგური"
 
-#: ../gucharmap/unicode-blocks.h:43 ../gucharmap/unicode-scripts.h:44
+#: gucharmap/unicode-i18n.h:35 gucharmap/unicode-i18n.h:394
 msgid "Kannada"
-msgstr "კანადური"
+msgstr "კანნადა"
 
-#: ../gucharmap/unicode-blocks.h:44 ../gucharmap/unicode-scripts.h:52
+#: gucharmap/unicode-i18n.h:36 gucharmap/unicode-i18n.h:414
 msgid "Malayalam"
-msgstr "მალაიალამური"
+msgstr "მალაიამი"
 
-#: ../gucharmap/unicode-blocks.h:45 ../gucharmap/unicode-scripts.h:63
+#: gucharmap/unicode-i18n.h:37 gucharmap/unicode-i18n.h:466
 msgid "Sinhala"
-msgstr ""
+msgstr "სინჰალური"
 
-#: ../gucharmap/unicode-blocks.h:46 ../gucharmap/unicode-scripts.h:72
+#: gucharmap/unicode-i18n.h:38 gucharmap/unicode-i18n.h:484
 msgid "Thai"
 msgstr "ტაილანდური"
 
-#: ../gucharmap/unicode-blocks.h:47 ../gucharmap/unicode-scripts.h:48
+#: gucharmap/unicode-i18n.h:39 gucharmap/unicode-i18n.h:403
 msgid "Lao"
-msgstr "ლაო"
+msgstr "ლაოსური"
 
-#: ../gucharmap/unicode-blocks.h:48 ../gucharmap/unicode-scripts.h:73
+#: gucharmap/unicode-i18n.h:40 gucharmap/unicode-i18n.h:485
 msgid "Tibetan"
 msgstr "ტიბეტური"
 
-#: ../gucharmap/unicode-blocks.h:49 ../gucharmap/unicode-scripts.h:54
+#: gucharmap/unicode-i18n.h:41 gucharmap/unicode-i18n.h:429
 msgid "Myanmar"
-msgstr "მიანმა"
+msgstr "მიანმარი"
 
-#: ../gucharmap/unicode-blocks.h:50 ../gucharmap/unicode-scripts.h:32
+#: gucharmap/unicode-i18n.h:42 gucharmap/unicode-i18n.h:373
 msgid "Georgian"
 msgstr "ქართული"
 
-#: ../gucharmap/unicode-blocks.h:51
+#: gucharmap/unicode-i18n.h:43
 msgid "Hangul Jamo"
-msgstr "ჰანგულ ჯამო"
+msgstr "ჰანგული ჯამო"
 
-#: ../gucharmap/unicode-blocks.h:52 ../gucharmap/unicode-scripts.h:31
+#: gucharmap/unicode-i18n.h:44 gucharmap/unicode-i18n.h:372
 msgid "Ethiopic"
-msgstr "ეთიოპური"
+msgstr "ეთიოპიური"
 
-#: ../gucharmap/unicode-blocks.h:53
+#: gucharmap/unicode-i18n.h:45
 msgid "Ethiopic Supplement"
-msgstr "ეთიოპური დამატებითი"
+msgstr "ეთიოპური დამატებებით"
 
-#: ../gucharmap/unicode-blocks.h:54 ../gucharmap/unicode-scripts.h:24
+#: gucharmap/unicode-i18n.h:46 gucharmap/unicode-i18n.h:356
 msgid "Cherokee"
 msgstr "ჩეროკი"
 
-#: ../gucharmap/unicode-blocks.h:55
-#, fuzzy
+#: gucharmap/unicode-i18n.h:47
 msgid "Unified Canadian Aboriginal Syllabics"
-msgstr "უნიფიცირებული კანადური"
+msgstr "კანადური აბორიგინალური"
 
-#: ../gucharmap/unicode-blocks.h:56 ../gucharmap/unicode-scripts.h:56
+#: gucharmap/unicode-i18n.h:48 gucharmap/unicode-i18n.h:438
 msgid "Ogham"
-msgstr "ოღამური"
+msgstr "ოგხამი"
 
-#: ../gucharmap/unicode-blocks.h:57 ../gucharmap/unicode-scripts.h:61
+#: gucharmap/unicode-i18n.h:49 gucharmap/unicode-i18n.h:459
 msgid "Runic"
-msgstr "რუნიკური"
+msgstr "რუნები"
 
-#: ../gucharmap/unicode-blocks.h:58 ../gucharmap/unicode-scripts.h:66
+#: gucharmap/unicode-i18n.h:50 gucharmap/unicode-i18n.h:473
 msgid "Tagalog"
-msgstr "ტაგალოგი"
+msgstr "ტაგალოგური"
 
-#: ../gucharmap/unicode-blocks.h:59 ../gucharmap/unicode-scripts.h:40
+#: gucharmap/unicode-i18n.h:51 gucharmap/unicode-i18n.h:384
 msgid "Hanunoo"
-msgstr "ჰანუნო"
+msgstr "ჰანუნოო"
 
-#: ../gucharmap/unicode-blocks.h:60 ../gucharmap/unicode-scripts.h:22
+#: gucharmap/unicode-i18n.h:52 gucharmap/unicode-i18n.h:350
 msgid "Buhid"
-msgstr ""
+msgstr "ბუჰიდი"
 
-#: ../gucharmap/unicode-blocks.h:61 ../gucharmap/unicode-scripts.h:67
+#: gucharmap/unicode-i18n.h:53 gucharmap/unicode-i18n.h:474
 msgid "Tagbanwa"
-msgstr ""
+msgstr "ტაგბანვა"
 
-#: ../gucharmap/unicode-blocks.h:62 ../gucharmap/unicode-scripts.h:47
+#: gucharmap/unicode-i18n.h:54 gucharmap/unicode-i18n.h:400
 msgid "Khmer"
-msgstr "ქხმერული"
+msgstr "ხმერული"
 
-#: ../gucharmap/unicode-blocks.h:63 ../gucharmap/unicode-scripts.h:53
+#: gucharmap/unicode-i18n.h:55 gucharmap/unicode-i18n.h:426
 msgid "Mongolian"
 msgstr "მონღოლური"
 
-#: ../gucharmap/unicode-blocks.h:64 ../gucharmap/unicode-scripts.h:50
+#: gucharmap/unicode-i18n.h:56
+msgid "Unified Canadian Aboriginal Syllabics Extended"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:57 gucharmap/unicode-i18n.h:406
 msgid "Limbu"
 msgstr "ლიმბუ"
 
-#: ../gucharmap/unicode-blocks.h:65 ../gucharmap/unicode-scripts.h:68
+#: gucharmap/unicode-i18n.h:58 gucharmap/unicode-i18n.h:475
 msgid "Tai Le"
 msgstr "ტაი ლე"
 
-#: ../gucharmap/unicode-blocks.h:66 ../gucharmap/unicode-scripts.h:55
+#: gucharmap/unicode-i18n.h:59 gucharmap/unicode-i18n.h:434
 msgid "New Tai Lue"
-msgstr "ახალი ტაი ლუერული"
+msgstr "ახალი ტაი ლუ"
 
-#: ../gucharmap/unicode-blocks.h:67
+#: gucharmap/unicode-i18n.h:60
 msgid "Khmer Symbols"
-msgstr "ქხმერული სიმბოლოები"
+msgstr "ხმერული სიმბოლოები"
 
-#: ../gucharmap/unicode-blocks.h:68 ../gucharmap/unicode-scripts.h:21
+#: gucharmap/unicode-i18n.h:61 gucharmap/unicode-i18n.h:349
 msgid "Buginese"
-msgstr "ბუგინეზური"
+msgstr "ბუგინური"
 
-#: ../gucharmap/unicode-blocks.h:69
+#: gucharmap/unicode-i18n.h:62 gucharmap/unicode-i18n.h:476
+msgid "Tai Tham"
+msgstr "ტაი ენა"
+
+#: gucharmap/unicode-i18n.h:63
+msgid "Combining Diacritical Marks Extended"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:64 gucharmap/unicode-i18n.h:340
+msgid "Balinese"
+msgstr "ბალინური"
+
+#: gucharmap/unicode-i18n.h:65 gucharmap/unicode-i18n.h:470
+msgid "Sundanese"
+msgstr "სუნდური"
+
+#: gucharmap/unicode-i18n.h:66 gucharmap/unicode-i18n.h:343
+msgid "Batak"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:67 gucharmap/unicode-i18n.h:405
+msgid "Lepcha"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:68 gucharmap/unicode-i18n.h:439
+msgid "Ol Chiki"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:69
+msgid "Cyrillic Extended-C"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:70
+msgid "Georgian Extended"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:71
+msgid "Sundanese Supplement"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:72
+msgid "Vedic Extensions"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:73
 msgid "Phonetic Extensions"
 msgstr "ფონეტიკური გაფართოებები"
 
-#: ../gucharmap/unicode-blocks.h:70
-#, fuzzy
+#: gucharmap/unicode-i18n.h:74
 msgid "Phonetic Extensions Supplement"
-msgstr "გაფართოებები"
+msgstr "ფონეტიკური გაფართოებების ჩანაცვლებები"
 
-#: ../gucharmap/unicode-blocks.h:71
+#: gucharmap/unicode-i18n.h:75
 msgid "Combining Diacritical Marks Supplement"
 msgstr ""
 
-#: ../gucharmap/unicode-blocks.h:72
+#: gucharmap/unicode-i18n.h:76
 msgid "Latin Extended Additional"
-msgstr "ლათინური გაფართოებული დამატებითი"
+msgstr "ლათინური დამატებით გაფართოებული"
 
-#: ../gucharmap/unicode-blocks.h:73
+#: gucharmap/unicode-i18n.h:77
 msgid "Greek Extended"
-msgstr "ბერძნული გაფართოებული"
+msgstr "გაფართოებული ბერძნული"
 
-#: ../gucharmap/unicode-blocks.h:74
-#, fuzzy
+#: gucharmap/unicode-i18n.h:78
 msgid "General Punctuation"
-msgstr "საერთო"
+msgstr "ზოგადი პუნქტუაცია"
 
-#: ../gucharmap/unicode-blocks.h:75
-#, fuzzy
+#: gucharmap/unicode-i18n.h:79
 msgid "Superscripts and Subscripts"
-msgstr "და"
+msgstr "ზედა და ქვედა სკრიპტები"
 
-#: ../gucharmap/unicode-blocks.h:76
-#, fuzzy
+#: gucharmap/unicode-i18n.h:80
 msgid "Currency Symbols"
-msgstr "სიმბოლოები"
+msgstr "ფულის სიმბოლოები"
 
-#: ../gucharmap/unicode-blocks.h:77
-#, fuzzy
+#: gucharmap/unicode-i18n.h:81
 msgid "Combining Diacritical Marks for Symbols"
-msgstr "для სიმბოლოები"
+msgstr ""
 
-#: ../gucharmap/unicode-blocks.h:78
+#: gucharmap/unicode-i18n.h:82
 msgid "Letterlike Symbols"
 msgstr ""
 
-#: ../gucharmap/unicode-blocks.h:79
+#: gucharmap/unicode-i18n.h:83
 msgid "Number Forms"
-msgstr "ციფრული ფორმები"
+msgstr "რიცხვითი ფორმები"
 
-#: ../gucharmap/unicode-blocks.h:80
+#: gucharmap/unicode-i18n.h:84
 msgid "Arrows"
 msgstr "ისრები"
 
-#: ../gucharmap/unicode-blocks.h:81
+#: gucharmap/unicode-i18n.h:85
 msgid "Mathematical Operators"
-msgstr ""
+msgstr "მათემატიკური ოპერატორები"
 
-#: ../gucharmap/unicode-blocks.h:82
-#, fuzzy
+#: gucharmap/unicode-i18n.h:86
 msgid "Miscellaneous Technical"
-msgstr "სხვადასხვა"
+msgstr "დანარჩენი ტექნიკური"
 
-#: ../gucharmap/unicode-blocks.h:83
-#, fuzzy
+#: gucharmap/unicode-i18n.h:87
 msgid "Control Pictures"
-msgstr "Control ნახატები"
+msgstr "საკონტროლო სურათები"
 
-#: ../gucharmap/unicode-blocks.h:84
-#, fuzzy
+#: gucharmap/unicode-i18n.h:88
 msgid "Optical Character Recognition"
-msgstr "სიმბოლო"
+msgstr "სიმბოლოების ოპტიკური გამოცნობა"
 
-#: ../gucharmap/unicode-blocks.h:85
+#: gucharmap/unicode-i18n.h:89
 msgid "Enclosed Alphanumerics"
 msgstr ""
 
-#: ../gucharmap/unicode-blocks.h:86
+#: gucharmap/unicode-i18n.h:90
 msgid "Box Drawing"
-msgstr ""
+msgstr "ყუთის ნახატი"
 
-#: ../gucharmap/unicode-blocks.h:87
-#, fuzzy
+#: gucharmap/unicode-i18n.h:91
 msgid "Block Elements"
-msgstr "ბლოკირება"
+msgstr "ბლოკის ელემენტები"
 
-#: ../gucharmap/unicode-blocks.h:88
+#: gucharmap/unicode-i18n.h:92
 msgid "Geometric Shapes"
-msgstr "გეომეტრიული ფორმები"
+msgstr "გეომეტრიული ფიგურები"
 
-#: ../gucharmap/unicode-blocks.h:89
-#, fuzzy
+#: gucharmap/unicode-i18n.h:93
 msgid "Miscellaneous Symbols"
 msgstr "სხვადასხვა სიმბოლოები"
 
-#: ../gucharmap/unicode-blocks.h:90
+#: gucharmap/unicode-i18n.h:94
 msgid "Dingbats"
-msgstr ""
+msgstr "სისულელეები"
 
-#: ../gucharmap/unicode-blocks.h:91
-#, fuzzy
+#: gucharmap/unicode-i18n.h:95
 msgid "Miscellaneous Mathematical Symbols-A"
-msgstr "სხვადასხვა სიმბოლოები A"
+msgstr "სხვადასხვა მათემატიკური სიმბოლოები - A"
 
-#: ../gucharmap/unicode-blocks.h:92
-#, fuzzy
+#: gucharmap/unicode-i18n.h:96
 msgid "Supplemental Arrows-A"
-msgstr "A"
+msgstr "დამატებითი ისრები - A"
 
-#: ../gucharmap/unicode-blocks.h:93
-#, fuzzy
+#: gucharmap/unicode-i18n.h:97
 msgid "Braille Patterns"
-msgstr "ნიმუშები"
+msgstr "ბრაილის შაბლონები"
 
-#: ../gucharmap/unicode-blocks.h:94
-#, fuzzy
+#: gucharmap/unicode-i18n.h:98
 msgid "Supplemental Arrows-B"
-msgstr "B"
+msgstr "დამატებითი ისრები - B"
 
-#: ../gucharmap/unicode-blocks.h:95
-#, fuzzy
+#: gucharmap/unicode-i18n.h:99
 msgid "Miscellaneous Mathematical Symbols-B"
-msgstr "სხვადასხვა სიმბოლოები B"
+msgstr "სხვადასხვა მათემატიკური სიმბოლოები - B"
 
-#: ../gucharmap/unicode-blocks.h:96
+#: gucharmap/unicode-i18n.h:100
 msgid "Supplemental Mathematical Operators"
 msgstr ""
 
-#: ../gucharmap/unicode-blocks.h:97
-#, fuzzy
+#: gucharmap/unicode-i18n.h:101
 msgid "Miscellaneous Symbols and Arrows"
-msgstr "სხვადასხვა სიმბოლოები და"
+msgstr ""
 
-#: ../gucharmap/unicode-blocks.h:98 ../gucharmap/unicode-scripts.h:33
+#: gucharmap/unicode-i18n.h:102 gucharmap/unicode-i18n.h:374
 msgid "Glagolitic"
 msgstr ""
 
-#: ../gucharmap/unicode-blocks.h:99 ../gucharmap/unicode-scripts.h:26
+#: gucharmap/unicode-i18n.h:103
+msgid "Latin Extended-C"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:104 gucharmap/unicode-i18n.h:359
 msgid "Coptic"
-msgstr ""
+msgstr "კოპტური"
 
-#: ../gucharmap/unicode-blocks.h:100
+#: gucharmap/unicode-i18n.h:105
 msgid "Georgian Supplement"
-msgstr "ქართული დამატებითი"
+msgstr "ქართული დამატებებით"
 
-#: ../gucharmap/unicode-blocks.h:101 ../gucharmap/unicode-scripts.h:74
+#: gucharmap/unicode-i18n.h:106 gucharmap/unicode-i18n.h:486
 msgid "Tifinagh"
-msgstr ""
+msgstr "ტიფინაგური"
 
-#: ../gucharmap/unicode-blocks.h:102
+#: gucharmap/unicode-i18n.h:107
 msgid "Ethiopic Extended"
-msgstr "ეთიოპური გაფართოებული"
+msgstr "გაფართოებული ეთიოპიური"
 
-#: ../gucharmap/unicode-blocks.h:103
+#: gucharmap/unicode-i18n.h:108
+msgid "Cyrillic Extended-A"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:109
 msgid "Supplemental Punctuation"
-msgstr ""
+msgstr "დამატებითი პუნქტუაცია"
 
-#: ../gucharmap/unicode-blocks.h:104
+#: gucharmap/unicode-i18n.h:110
 msgid "CJK Radicals Supplement"
-msgstr ""
+msgstr "CJK რადიკალების დამატებები"
 
-#: ../gucharmap/unicode-blocks.h:105
+#: gucharmap/unicode-i18n.h:111
 msgid "Kangxi Radicals"
-msgstr ""
+msgstr "Kangxi-ის რადიკალები"
 
-#: ../gucharmap/unicode-blocks.h:106
-#, fuzzy
+#: gucharmap/unicode-i18n.h:112
 msgid "Ideographic Description Characters"
-msgstr "აღწერა ასოები"
+msgstr "იდეოგრაფიური აღწერის სიმბოლოები"
 
-#: ../gucharmap/unicode-blocks.h:107
-#, fuzzy
+#: gucharmap/unicode-i18n.h:113
 msgid "CJK Symbols and Punctuation"
-msgstr "სიმბოლოები და"
+msgstr "CJK სიმბოლოები და პუნქტუაცია"
 
-#: ../gucharmap/unicode-blocks.h:108 ../gucharmap/unicode-scripts.h:42
+#: gucharmap/unicode-i18n.h:114 gucharmap/unicode-i18n.h:387
 msgid "Hiragana"
-msgstr ""
+msgstr "ჰირაგანა"
 
-#: ../gucharmap/unicode-blocks.h:109 ../gucharmap/unicode-scripts.h:45
+#: gucharmap/unicode-i18n.h:115 gucharmap/unicode-i18n.h:395
 msgid "Katakana"
-msgstr ""
+msgstr "კატაკანა"
 
-#: ../gucharmap/unicode-blocks.h:110 ../gucharmap/unicode-scripts.h:19
+#: gucharmap/unicode-i18n.h:116 gucharmap/unicode-i18n.h:346
 msgid "Bopomofo"
-msgstr ""
+msgstr "ბოპომოფო"
 
-#: ../gucharmap/unicode-blocks.h:111
-#, fuzzy
+#: gucharmap/unicode-i18n.h:117
 msgid "Hangul Compatibility Jamo"
-msgstr "შეთავსებადობა"
+msgstr "Hangul-თან თავსებადი Jamo"
 
-#: ../gucharmap/unicode-blocks.h:112
+#: gucharmap/unicode-i18n.h:118
 msgid "Kanbun"
-msgstr ""
+msgstr "კანბუნი"
 
-#: ../gucharmap/unicode-blocks.h:113
-#, fuzzy
+#: gucharmap/unicode-i18n.h:119
 msgid "Bopomofo Extended"
-msgstr "გაფართოებული"
+msgstr "ბოპომოფო, გაფართოებული"
 
-#: ../gucharmap/unicode-blocks.h:114
+#: gucharmap/unicode-i18n.h:120
 msgid "CJK Strokes"
+msgstr "CJK-ის ჩარტყმები"
+
+#: gucharmap/unicode-i18n.h:121
+msgid "Katakana Phonetic Extensions"
+msgstr "კატაკანის ფონეტიკური გაფართოებები"
+
+#: gucharmap/unicode-i18n.h:122
+msgid "Enclosed CJK Letters and Months"
 msgstr ""
 
-#: ../gucharmap/unicode-blocks.h:115
-msgid "Katakana Phonetic Extensions"
-msgstr "კატაკანას ფონეტიკური გაფართოებები"
-
-#: ../gucharmap/unicode-blocks.h:116
-#, fuzzy
-msgid "Enclosed CJK Letters and Months"
-msgstr "და თვეები"
-
-#: ../gucharmap/unicode-blocks.h:117
-#, fuzzy
+#: gucharmap/unicode-i18n.h:123
 msgid "CJK Compatibility"
-msgstr "შეთავსებადობა"
+msgstr "CJK-სთან თავსებადობა"
 
-#: ../gucharmap/unicode-blocks.h:118
-#, fuzzy
+#: gucharmap/unicode-i18n.h:124
 msgid "CJK Unified Ideographs Extension A"
-msgstr "უნიფიცირებული გაფართოება A"
+msgstr ""
 
-#: ../gucharmap/unicode-blocks.h:119
+#: gucharmap/unicode-i18n.h:125
 msgid "Yijing Hexagram Symbols"
 msgstr ""
 
-#: ../gucharmap/unicode-blocks.h:120
-#, fuzzy
+#: gucharmap/unicode-i18n.h:126
 msgid "CJK Unified Ideographs"
-msgstr "უნიფიცირებული"
+msgstr "CJK გაფართოებული იდეოგრაფები"
 
-#: ../gucharmap/unicode-blocks.h:121
+#: gucharmap/unicode-i18n.h:127
 msgid "Yi Syllables"
 msgstr ""
 
-#: ../gucharmap/unicode-blocks.h:122
+#: gucharmap/unicode-i18n.h:128
 msgid "Yi Radicals"
 msgstr ""
 
-#: ../gucharmap/unicode-blocks.h:123
-#, fuzzy
-msgid "Modifier Tone Letters"
-msgstr "მოდიფიკატორი ტონი"
+#: gucharmap/unicode-i18n.h:129 gucharmap/unicode-i18n.h:409
+msgid "Lisu"
+msgstr "ლისუ"
 
-#: ../gucharmap/unicode-blocks.h:124 ../gucharmap/unicode-scripts.h:64
+#: gucharmap/unicode-i18n.h:130 gucharmap/unicode-i18n.h:491
+msgid "Vai"
+msgstr "ვაი"
+
+#: gucharmap/unicode-i18n.h:131
+msgid "Cyrillic Extended-B"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:132 gucharmap/unicode-i18n.h:341
+msgid "Bamum"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:133
+msgid "Modifier Tone Letters"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:134
+msgid "Latin Extended-D"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:135 gucharmap/unicode-i18n.h:471
 msgid "Syloti Nagri"
 msgstr ""
 
-#: ../gucharmap/unicode-blocks.h:125
+#: gucharmap/unicode-i18n.h:136
+msgid "Common Indic Number Forms"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:137
+msgid "Phags-pa"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:138 gucharmap/unicode-i18n.h:461
+msgid "Saurashtra"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:139
+msgid "Devanagari Extended"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:140 gucharmap/unicode-i18n.h:397
+msgid "Kayah Li"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:141 gucharmap/unicode-i18n.h:458
+msgid "Rejang"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:142
+msgid "Hangul Jamo Extended-A"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:143 gucharmap/unicode-i18n.h:392
+msgid "Javanese"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:144
+msgid "Myanmar Extended-B"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:145 gucharmap/unicode-i18n.h:355
+msgid "Cham"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:146
+msgid "Myanmar Extended-A"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:147 gucharmap/unicode-i18n.h:477
+msgid "Tai Viet"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:148
+msgid "Meetei Mayek Extensions"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:149
+msgid "Ethiopic Extended-A"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:150
+msgid "Latin Extended-E"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:151
+msgid "Cherokee Supplement"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:152 gucharmap/unicode-i18n.h:420
+msgid "Meetei Mayek"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:153
 msgid "Hangul Syllables"
 msgstr ""
 
-#: ../gucharmap/unicode-blocks.h:126
+#: gucharmap/unicode-i18n.h:154
+msgid "Hangul Jamo Extended-B"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:155
 msgid "High Surrogates"
 msgstr ""
 
-#: ../gucharmap/unicode-blocks.h:127
+#: gucharmap/unicode-i18n.h:156
 msgid "High Private Use Surrogates"
 msgstr ""
 
-#: ../gucharmap/unicode-blocks.h:128
+#: gucharmap/unicode-i18n.h:157
 msgid "Low Surrogates"
 msgstr ""
 
-#: ../gucharmap/unicode-blocks.h:129
+#: gucharmap/unicode-i18n.h:158
 msgid "Private Use Area"
-msgstr "პირადი გამოყენების არე"
+msgstr ""
 
-#: ../gucharmap/unicode-blocks.h:130
-#, fuzzy
+#: gucharmap/unicode-i18n.h:159
 msgid "CJK Compatibility Ideographs"
-msgstr "შეთავსებადობა"
+msgstr ""
 
-#: ../gucharmap/unicode-blocks.h:131
-#, fuzzy
+#: gucharmap/unicode-i18n.h:160
 msgid "Alphabetic Presentation Forms"
-msgstr "ანბანის მიხედვით პრეზენტაცია ფორმები"
+msgstr ""
 
-#: ../gucharmap/unicode-blocks.h:132
-#, fuzzy
+#: gucharmap/unicode-i18n.h:161
 msgid "Arabic Presentation Forms-A"
-msgstr "არაბული პრეზენტაცია ფორმები A"
+msgstr ""
 
-#: ../gucharmap/unicode-blocks.h:133
+#: gucharmap/unicode-i18n.h:162
 msgid "Variation Selectors"
 msgstr ""
 
-#: ../gucharmap/unicode-blocks.h:134
+#: gucharmap/unicode-i18n.h:163
 msgid "Vertical Forms"
 msgstr "ვერტიკალური ფორმები"
 
-#: ../gucharmap/unicode-blocks.h:135
+#: gucharmap/unicode-i18n.h:164
 msgid "Combining Half Marks"
 msgstr ""
 
-#: ../gucharmap/unicode-blocks.h:136
-#, fuzzy
+#: gucharmap/unicode-i18n.h:165
 msgid "CJK Compatibility Forms"
-msgstr "შეთავსებადობა ფორმები"
+msgstr ""
 
-#: ../gucharmap/unicode-blocks.h:137
+#: gucharmap/unicode-i18n.h:166
 msgid "Small Form Variants"
-msgstr "პატარა ფორმის ვარიანტები"
+msgstr ""
 
-#: ../gucharmap/unicode-blocks.h:138
-#, fuzzy
+#: gucharmap/unicode-i18n.h:167
 msgid "Arabic Presentation Forms-B"
-msgstr "არაბული პრეზენტაცია ფორმები B"
+msgstr ""
 
-#: ../gucharmap/unicode-blocks.h:139
-#, fuzzy
+#: gucharmap/unicode-i18n.h:168
 msgid "Halfwidth and Fullwidth Forms"
-msgstr "და ფორმები"
+msgstr ""
 
-#: ../gucharmap/unicode-blocks.h:140
+#: gucharmap/unicode-i18n.h:169
 msgid "Specials"
-msgstr "სპეციალური"
+msgstr "სპეციალური სიმბოლოები"
 
-#: ../gucharmap/unicode-blocks.h:141
-#, fuzzy
+#: gucharmap/unicode-i18n.h:170
 msgid "Linear B Syllabary"
-msgstr "ხაზოვანი B"
+msgstr "წრფივი B მარცვლოვანი ანბანი"
 
-#: ../gucharmap/unicode-blocks.h:142
-#, fuzzy
+#: gucharmap/unicode-i18n.h:171
 msgid "Linear B Ideograms"
-msgstr "ხაზოვანი B"
+msgstr "წრფივი B იდეოგრამები"
 
-#: ../gucharmap/unicode-blocks.h:143
-#, fuzzy
+#: gucharmap/unicode-i18n.h:172
 msgid "Aegean Numbers"
-msgstr "ნომერი"
+msgstr "ეგეოსური რიცხვები"
 
-#: ../gucharmap/unicode-blocks.h:144
-#, fuzzy
+#: gucharmap/unicode-i18n.h:173
 msgid "Ancient Greek Numbers"
-msgstr "ბერძნული ნომერი"
+msgstr "ძველბერძნული ციფრები"
 
-#: ../gucharmap/unicode-blocks.h:145 ../gucharmap/unicode-scripts.h:57
+#: gucharmap/unicode-i18n.h:174
+msgid "Ancient Symbols"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:175
+msgid "Phaistos Disc"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:176 gucharmap/unicode-i18n.h:410
+msgid "Lycian"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:177 gucharmap/unicode-i18n.h:352
+msgid "Carian"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:178
+msgid "Coptic Epact Numbers"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:179 gucharmap/unicode-i18n.h:441
 msgid "Old Italic"
 msgstr "ძველი დახრილი"
 
-#: ../gucharmap/unicode-blocks.h:146 ../gucharmap/unicode-scripts.h:34
+#: gucharmap/unicode-i18n.h:180 gucharmap/unicode-i18n.h:375
 msgid "Gothic"
-msgstr "გოთიკური"
+msgstr "გოთური"
 
-#: ../gucharmap/unicode-blocks.h:147 ../gucharmap/unicode-scripts.h:75
-msgid "Ugaritic"
+#: gucharmap/unicode-i18n.h:181 gucharmap/unicode-i18n.h:443
+msgid "Old Permic"
 msgstr ""
 
-#: ../gucharmap/unicode-blocks.h:148 ../gucharmap/unicode-scripts.h:58
+#: gucharmap/unicode-i18n.h:182 gucharmap/unicode-i18n.h:489
+msgid "Ugaritic"
+msgstr "უგარათული"
+
+#: gucharmap/unicode-i18n.h:183 gucharmap/unicode-i18n.h:444
 msgid "Old Persian"
 msgstr "ძველი სპარსული"
 
-#: ../gucharmap/unicode-blocks.h:149 ../gucharmap/unicode-scripts.h:29
+#: gucharmap/unicode-i18n.h:184 gucharmap/unicode-i18n.h:364
 msgid "Deseret"
-msgstr "დესერეტი"
+msgstr "უდაბნოური"
 
-#: ../gucharmap/unicode-blocks.h:150 ../gucharmap/unicode-scripts.h:62
+#: gucharmap/unicode-i18n.h:185 gucharmap/unicode-i18n.h:463
 msgid "Shavian"
-msgstr "შავიანური"
+msgstr "შავიური"
 
-#: ../gucharmap/unicode-blocks.h:151 ../gucharmap/unicode-scripts.h:60
+#: gucharmap/unicode-i18n.h:186 gucharmap/unicode-i18n.h:451
 msgid "Osmanya"
+msgstr "ოსმანია"
+
+#: gucharmap/unicode-i18n.h:187 gucharmap/unicode-i18n.h:450
+msgid "Osage"
 msgstr ""
 
-#: ../gucharmap/unicode-blocks.h:152
+#: gucharmap/unicode-i18n.h:188 gucharmap/unicode-i18n.h:370
+msgid "Elbasan"
+msgstr "ელბასანი"
+
+#: gucharmap/unicode-i18n.h:189 gucharmap/unicode-i18n.h:353
+msgid "Caucasian Albanian"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:190 gucharmap/unicode-i18n.h:492
+msgid "Vithkuqi"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:191 gucharmap/unicode-i18n.h:407
+msgid "Linear A"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:192
+msgid "Latin Extended-F"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:193
 msgid "Cypriot Syllabary"
+msgstr "კვიპრიოტული მარცვლოვანი ანბანი"
+
+#: gucharmap/unicode-i18n.h:194 gucharmap/unicode-i18n.h:388
+msgid "Imperial Aramaic"
 msgstr ""
 
-#: ../gucharmap/unicode-blocks.h:153 ../gucharmap/unicode-scripts.h:46
+#: gucharmap/unicode-i18n.h:195 gucharmap/unicode-i18n.h:453
+msgid "Palmyrene"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:196 gucharmap/unicode-i18n.h:431
+msgid "Nabataean"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:197 gucharmap/unicode-i18n.h:385
+msgid "Hatran"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:198 gucharmap/unicode-i18n.h:456
+msgid "Phoenician"
+msgstr "ფონეტიკური"
+
+#: gucharmap/unicode-i18n.h:199 gucharmap/unicode-i18n.h:411
+msgid "Lydian"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:200 gucharmap/unicode-i18n.h:423
+msgid "Meroitic Hieroglyphs"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:201 gucharmap/unicode-i18n.h:422
+msgid "Meroitic Cursive"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:202 gucharmap/unicode-i18n.h:398
 msgid "Kharoshthi"
+msgstr "ხაროშტი"
+
+#: gucharmap/unicode-i18n.h:203 gucharmap/unicode-i18n.h:446
+msgid "Old South Arabian"
 msgstr ""
 
-#: ../gucharmap/unicode-blocks.h:154
-#, fuzzy
-msgid "Byzantine Musical Symbols"
-msgstr "სიმბოლოები"
+#: gucharmap/unicode-i18n.h:204 gucharmap/unicode-i18n.h:442
+msgid "Old North Arabian"
+msgstr ""
 
-#: ../gucharmap/unicode-blocks.h:155
+#: gucharmap/unicode-i18n.h:205 gucharmap/unicode-i18n.h:416
+msgid "Manichaean"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:206 gucharmap/unicode-i18n.h:339
+msgid "Avestan"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:207 gucharmap/unicode-i18n.h:391
+msgid "Inscriptional Parthian"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:208 gucharmap/unicode-i18n.h:390
+msgid "Inscriptional Pahlavi"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:209 gucharmap/unicode-i18n.h:457
+msgid "Psalter Pahlavi"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:210 gucharmap/unicode-i18n.h:447
+msgid "Old Turkic"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:211 gucharmap/unicode-i18n.h:440
+msgid "Old Hungarian"
+msgstr "ძველი უნგრული"
+
+#: gucharmap/unicode-i18n.h:212 gucharmap/unicode-i18n.h:383
+msgid "Hanifi Rohingya"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:213
+msgid "Rumi Numeral Symbols"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:214 gucharmap/unicode-i18n.h:495
+msgid "Yezidi"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:215
+msgid "Arabic Extended-C"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:216 gucharmap/unicode-i18n.h:445
+msgid "Old Sogdian"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:217 gucharmap/unicode-i18n.h:467
+msgid "Sogdian"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:218 gucharmap/unicode-i18n.h:448
+msgid "Old Uyghur"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:219 gucharmap/unicode-i18n.h:357
+msgid "Chorasmian"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:220 gucharmap/unicode-i18n.h:371
+msgid "Elymaic"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:221 gucharmap/unicode-i18n.h:347
+msgid "Brahmi"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:222 gucharmap/unicode-i18n.h:393
+msgid "Kaithi"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:223 gucharmap/unicode-i18n.h:468
+msgid "Sora Sompeng"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:224 gucharmap/unicode-i18n.h:354
+msgid "Chakma"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:225 gucharmap/unicode-i18n.h:412
+msgid "Mahajani"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:226 gucharmap/unicode-i18n.h:462
+msgid "Sharada"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:227
+msgid "Sinhala Archaic Numbers"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:228 gucharmap/unicode-i18n.h:401
+msgid "Khojki"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:229 gucharmap/unicode-i18n.h:428
+msgid "Multani"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:230 gucharmap/unicode-i18n.h:402
+msgid "Khudawadi"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:231 gucharmap/unicode-i18n.h:376
+msgid "Grantha"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:232 gucharmap/unicode-i18n.h:435
+msgid "Newa"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:233 gucharmap/unicode-i18n.h:487
+msgid "Tirhuta"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:234 gucharmap/unicode-i18n.h:464
+msgid "Siddham"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:235 gucharmap/unicode-i18n.h:425
+msgid "Modi"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:236
+msgid "Mongolian Supplement"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:237 gucharmap/unicode-i18n.h:478
+msgid "Takri"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:238 gucharmap/unicode-i18n.h:335
+msgid "Ahom"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:239 gucharmap/unicode-i18n.h:367
+msgid "Dogra"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:240 gucharmap/unicode-i18n.h:494
+msgid "Warang Citi"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:241 gucharmap/unicode-i18n.h:366
+msgid "Dives Akuru"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:242 gucharmap/unicode-i18n.h:433
+msgid "Nandinagari"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:243 gucharmap/unicode-i18n.h:497
+msgid "Zanabazar Square"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:244 gucharmap/unicode-i18n.h:469
+msgid "Soyombo"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:245
+msgid "Unified Canadian Aboriginal Syllabics Extended-A"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:246 gucharmap/unicode-i18n.h:454
+msgid "Pau Cin Hau"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:247
+msgid "Devanagari Extended-A"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:248 gucharmap/unicode-i18n.h:345
+msgid "Bhaiksuki"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:249 gucharmap/unicode-i18n.h:417
+msgid "Marchen"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:250 gucharmap/unicode-i18n.h:418
+msgid "Masaram Gondi"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:251 gucharmap/unicode-i18n.h:379
+msgid "Gunjala Gondi"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:252 gucharmap/unicode-i18n.h:413
+msgid "Makasar"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:253 gucharmap/unicode-i18n.h:396
+msgid "Kawi"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:254
+msgid "Lisu Supplement"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:255
+msgid "Tamil Supplement"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:256 gucharmap/unicode-i18n.h:360
+msgid "Cuneiform"
+msgstr "ლურსმული"
+
+#: gucharmap/unicode-i18n.h:257
+msgid "Cuneiform Numbers and Punctuation"
+msgstr "ლურსმული რიცხვები და პუნქტუაცია"
+
+#: gucharmap/unicode-i18n.h:258
+msgid "Early Dynastic Cuneiform"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:259
+msgid "Cypro-Minoan"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:260 gucharmap/unicode-i18n.h:369
+msgid "Egyptian Hieroglyphs"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:261
+msgid "Egyptian Hieroglyph Format Controls"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:262 gucharmap/unicode-i18n.h:336
+msgid "Anatolian Hieroglyphs"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:263
+msgid "Bamum Supplement"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:264 gucharmap/unicode-i18n.h:427
+msgid "Mro"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:265 gucharmap/unicode-i18n.h:480
+msgid "Tangsa"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:266 gucharmap/unicode-i18n.h:342
+msgid "Bassa Vah"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:267 gucharmap/unicode-i18n.h:452
+msgid "Pahawh Hmong"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:268 gucharmap/unicode-i18n.h:419
+msgid "Medefaidrin"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:269 gucharmap/unicode-i18n.h:424
+msgid "Miao"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:270
+msgid "Ideographic Symbols and Punctuation"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:271 gucharmap/unicode-i18n.h:481
+msgid "Tangut"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:272
+msgid "Tangut Components"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:273 gucharmap/unicode-i18n.h:399
+msgid "Khitan Small Script"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:274
+msgid "Tangut Supplement"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:275
+msgid "Kana Extended-B"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:276
+msgid "Kana Supplement"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:277
+msgid "Kana Extended-A"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:278
+msgid "Small Kana Extension"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:279 gucharmap/unicode-i18n.h:436
+msgid "Nushu"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:280 gucharmap/unicode-i18n.h:368
+msgid "Duployan"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:281
+msgid "Shorthand Format Controls"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:282
+msgid "Znamenny Musical Notation"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:283
+msgid "Byzantine Musical Symbols"
+msgstr "ბიზანტიური მუსიკალური სიმბოლოები"
+
+#: gucharmap/unicode-i18n.h:284
 msgid "Musical Symbols"
 msgstr "მუსიკალური სიმბოლოები"
 
-#: ../gucharmap/unicode-blocks.h:156
-#, fuzzy
+#: gucharmap/unicode-i18n.h:285
 msgid "Ancient Greek Musical Notation"
-msgstr "ბერძნული"
+msgstr "ძველბერძნული მუსიკალური ნოტაციები"
 
-#: ../gucharmap/unicode-blocks.h:157
-#, fuzzy
+#: gucharmap/unicode-i18n.h:286
+msgid "Kaktovik Numerals"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:287
+msgid "Mayan Numerals"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:288
 msgid "Tai Xuan Jing Symbols"
-msgstr "სიმბოლოები"
+msgstr "Tai Xuan Jing-ის სიმბოლოები"
 
-#: ../gucharmap/unicode-blocks.h:158
-#, fuzzy
+#: gucharmap/unicode-i18n.h:289
+msgid "Counting Rod Numerals"
+msgstr "ჩხირებით თვლა"
+
+#: gucharmap/unicode-i18n.h:290
 msgid "Mathematical Alphanumeric Symbols"
-msgstr "ალფავიტურ-ციფრული სიმბოლოები"
+msgstr "მათემატიკური ალფარიცხვული სიმბოლოები"
 
-#: ../gucharmap/unicode-blocks.h:159
-#, fuzzy
+#: gucharmap/unicode-i18n.h:291
+msgid "Sutton SignWriting"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:292
+msgid "Latin Extended-G"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:293
+msgid "Glagolitic Supplement"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:294
+msgid "Cyrillic Extended-D"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:295 gucharmap/unicode-i18n.h:437
+msgid "Nyiakeng Puachue Hmong"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:296 gucharmap/unicode-i18n.h:488
+msgid "Toto"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:297 gucharmap/unicode-i18n.h:493
+msgid "Wancho"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:298 gucharmap/unicode-i18n.h:432
+msgid "Nag Mundari"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:299
+msgid "Ethiopic Extended-B"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:300 gucharmap/unicode-i18n.h:421
+msgid "Mende Kikakui"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:301 gucharmap/unicode-i18n.h:334
+msgid "Adlam"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:302
+msgid "Indic Siyaq Numbers"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:303
+msgid "Ottoman Siyaq Numbers"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:304
+msgid "Arabic Mathematical Alphabetic Symbols"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:305
+msgid "Mahjong Tiles"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:306
+msgid "Domino Tiles"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:307
+msgid "Playing Cards"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:308
+msgid "Enclosed Alphanumeric Supplement"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:309
+msgid "Enclosed Ideographic Supplement"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:310
+msgid "Miscellaneous Symbols and Pictographs"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:311
+msgid "Emoticons"
+msgstr "ემოციები"
+
+#: gucharmap/unicode-i18n.h:312
+msgid "Ornamental Dingbats"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:313
+msgid "Transport and Map Symbols"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:314
+msgid "Alchemical Symbols"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:315
+msgid "Geometric Shapes Extended"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:316
+msgid "Supplemental Arrows-C"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:317
+msgid "Supplemental Symbols and Pictographs"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:318
+msgid "Chess Symbols"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:319
+msgid "Symbols and Pictographs Extended-A"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:320
+msgid "Symbols for Legacy Computing"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:321
 msgid "CJK Unified Ideographs Extension B"
-msgstr "უნიფიცირებული გაფართოება B"
+msgstr "CJK გაერთიანებული იდეოგრაფების გაფართოება B"
 
-#: ../gucharmap/unicode-blocks.h:160
-#, fuzzy
+#: gucharmap/unicode-i18n.h:322
+msgid "CJK Unified Ideographs Extension C"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:323
+msgid "CJK Unified Ideographs Extension D"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:324
+msgid "CJK Unified Ideographs Extension E"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:325
+msgid "CJK Unified Ideographs Extension F"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:326
 msgid "CJK Compatibility Ideographs Supplement"
-msgstr "შეთავსებადობა"
+msgstr "CJK თავსებადი იდეოგრაფების დამატებები"
 
-#: ../gucharmap/unicode-blocks.h:161
+#: gucharmap/unicode-i18n.h:327
+msgid "CJK Unified Ideographs Extension G"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:328
+msgid "CJK Unified Ideographs Extension H"
+msgstr ""
+
+#: gucharmap/unicode-i18n.h:329
 msgid "Tags"
 msgstr "ჭდეები"
 
-#: ../gucharmap/unicode-blocks.h:162
+#: gucharmap/unicode-i18n.h:330
 msgid "Variation Selectors Supplement"
 msgstr ""
 
-#: ../gucharmap/unicode-blocks.h:163
-#, fuzzy
+#: gucharmap/unicode-i18n.h:331
 msgid "Supplementary Private Use Area-A"
-msgstr "პრივატი გამოყენება არე A"
+msgstr ""
 
-#: ../gucharmap/unicode-blocks.h:164
-#, fuzzy
+#: gucharmap/unicode-i18n.h:332
 msgid "Supplementary Private Use Area-B"
-msgstr "პრივატი გამოყენება არე B"
+msgstr ""
 
-#: ../gucharmap/unicode-scripts.h:20
+#: gucharmap/unicode-i18n.h:348
 msgid "Braille"
-msgstr ""
+msgstr "ბრაილური"
 
-#: ../gucharmap/unicode-scripts.h:23
-#, fuzzy
+#: gucharmap/unicode-i18n.h:351
 msgid "Canadian Aboriginal"
-msgstr "კანადური"
+msgstr "კანადური აბორიგინალური"
 
-#: ../gucharmap/unicode-scripts.h:27
+#: gucharmap/unicode-i18n.h:358
+msgid "Common"
+msgstr "ჩვეულებრივი"
+
+#: gucharmap/unicode-i18n.h:361
 msgid "Cypriot"
+msgstr "კვიპრიოტი"
+
+#: gucharmap/unicode-i18n.h:362
+msgid "Cypro Minoan"
 msgstr ""
 
-#: ../gucharmap/unicode-scripts.h:35
+#: gucharmap/unicode-i18n.h:377
 msgid "Greek"
 msgstr "ბერძნული"
 
-#: ../gucharmap/unicode-scripts.h:38
+#: gucharmap/unicode-i18n.h:381
 msgid "Han"
-msgstr "ჰანი"
+msgstr "ჰანური"
 
-#: ../gucharmap/unicode-scripts.h:39
+#: gucharmap/unicode-i18n.h:382
 msgid "Hangul"
 msgstr "ჰანგული"
 
-#: ../gucharmap/unicode-scripts.h:43
+#: gucharmap/unicode-i18n.h:389
 msgid "Inherited"
-msgstr "მემკვიდრეობით მიღებული"
+msgstr "მემკვიდრეობით"
 
-#: ../gucharmap/unicode-scripts.h:49
+#: gucharmap/unicode-i18n.h:404
 msgid "Latin"
 msgstr "ლათინური"
 
-#: ../gucharmap/unicode-scripts.h:51
+#: gucharmap/unicode-i18n.h:408
 msgid "Linear B"
-msgstr "ხაზოვანი B"
+msgstr "წრფივი B"
 
-#: ../gucharmap/unicode-scripts.h:76
-msgid "Yi"
+#: gucharmap/unicode-i18n.h:455
+msgid "Phags Pa"
+msgstr "Phags Pa"
+
+#: gucharmap/unicode-i18n.h:465
+msgid "Signwriting"
 msgstr ""
 
-#: ../gucharmap/gucharmap-block-chapters.c:61
-msgid "All"
-msgstr "ყველა"
-
-#: ../gucharmap/gucharmap-block-chapters.c:79
-msgid "Unicode Block"
-msgstr "უნიკოდის ბლოკი"
-
-#: ../gucharmap/gucharmap-script-chapters.c:76
-msgid "Script"
-msgstr "დამწერლობა"
-
-#: ../gucharmap/gucharmap-search-dialog.c:549
-msgid "Information"
-msgstr "ინფორმაცია"
-
-#. follow hig guidelines
-#: ../gucharmap/gucharmap-search-dialog.c:753
-msgid "Find"
-msgstr "ძიება"
-
-#: ../gucharmap/gucharmap-search-dialog.c:767
-msgid "_Previous"
-msgstr "_წინა"
-
-#: ../gucharmap/gucharmap-search-dialog.c:774
-msgid "_Next"
-msgstr "_შემდეგი"
-
-#: ../gucharmap/gucharmap-search-dialog.c:784
-msgid "_Search:"
-msgstr "_ძებნა:"
-
-#: ../gucharmap/gucharmap-search-dialog.c:794
-#, fuzzy
-msgid "Match _whole word"
-msgstr "სიტყვა"
-
-#: ../gucharmap/gucharmap-search-dialog.c:798
-#, fuzzy
-msgid "Search in character _details"
-msgstr "ძებნა -"
-
+#: gucharmap/unicode-i18n.h:496
+msgid "Yi"
+msgstr "იოქტი"
