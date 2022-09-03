@@ -138,6 +138,14 @@ foreach func: check_dl_functions_required
   assert(cc.has_function(func, dependencies: libdl_dep), func + ' not found')
 endforeach
 
+# Asserts must not be disabled
+
+assert(get_option('b_ndebug') == 'false', 'assertions may not be disabled')
+
+# LTO very much NOT supported
+
+assert(get_option('b_lto') == false, 'LTO not supported')
+
 # Compiler flags
 
 compiler_flags_common = [
