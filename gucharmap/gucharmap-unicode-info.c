@@ -68,11 +68,12 @@ gucharmap_get_unicode_name (gunichar wc)
   if ((wc >= 0x3400 && wc <= 0x4dbf)       /* CJK Unified Ideographs Extension A */
       || (wc >= 0x4e00 && wc <= 0x9fff)    /* CJK Unified Ideographs             */
       || (wc >= 0x20000 && wc <= 0x2a6df)  /* CJK Unified Ideographs Extension B */
-      || (wc >= 0x2a700 && wc <= 0x2b738)  /* CJK Unified Ideographs Extension C */
+      || (wc >= 0x2a700 && wc <= 0x2b739)  /* CJK Unified Ideographs Extension C */
       || (wc >= 0x2b740 && wc <= 0x2b81d)  /* CJK Unified Ideographs Extension D */
       || (wc >= 0x2b820 && wc <= 0x2cea1)  /* CJK Unified Ideographs Extension E */
       || (wc >= 0x2ceb0 && wc <= 0x2ebe0)  /* CJK Unified Ideographs Extension F */
-      || (wc >= 0x30000 && wc <= 0x3134a)) /* CJK Unified Ideographs Extension G */
+      || (wc >= 0x30000 && wc <= 0x3134a)  /* CJK Unified Ideographs Extension G */
+      || (wc >= 0x31350 && wc <= 0x323af)) /* CJK Unified Ideographs Extension H */
     {
       g_snprintf (buf, sizeof (buf), "CJK UNIFIED IDEOGRAPH-%04X", wc);
       return buf;
