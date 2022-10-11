@@ -19,11 +19,11 @@ project(
   default_options: [
     'buildtype=release',
     'c_std=gnu11',
-    'warning_level=' + (meson.version().version_compare('>= 0.50.0') ? '0' : '1'),
+    'warning_level=0',
     'b_ndebug=false',
   ],
   license: ['GPL-3.0-or-later',],
-  meson_version: '>= 0.49.0',
+  meson_version: '>= 0.62.0',
   version: '15.0.1',
 )
 
@@ -79,7 +79,6 @@ libgucharmap_gtk4_soversion = '0'
 # i18n
 
 gucharmap_gettext_domain = gucharmap_name
-po_dir = meson.current_source_dir() / 'po'
 
 # Directories
 
@@ -262,9 +261,9 @@ configure_file(
 
 top_inc = include_directories('.')
 
+subdir('po')
 subdir('data')
 subdir('gucharmap')
-subdir('po')
 
 if get_option('docs')
   subdir('docs' / 'reference')
