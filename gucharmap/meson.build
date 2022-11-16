@@ -290,7 +290,6 @@ install_data(
   install_dir: schemadir,
 )
 
-meson.add_install_script(
-  'meson_compileschemas.py',
-  schemadir,
+gnome.post_install(
+  glib_compile_schemas: true,
 )
