@@ -126,6 +126,7 @@ sub process_unicode_data_txt
         next if ($name =~ /^TANGUT IDEOGRAPH-[0-9A-F]{4,6}$/);
         next if ($name =~ /^TANGUT COMPONENT-[0-9]+$/);
         next if ($name =~ /^KHITAN SMALL SCRIPT CHARACTER-[0-9A-F]+$/);
+        next if ($name =~ /^NUSHU CHARACTER-[0-9A-F]+$/);
 
         # Skip unwanted items
         next if ($name =~ /^<.+, (First|Last)>$/);

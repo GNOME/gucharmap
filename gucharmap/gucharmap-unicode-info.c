@@ -98,6 +98,10 @@ gucharmap_get_unicode_name (gunichar wc)
       g_snprintf (buf, sizeof (buf), "KHITAN SMALL SCRIPT CHARACTER-%05X", wc);
       return buf;
   }
+  else if (wc >= 0x1b170 && wc <= 0x1b2fb) {
+      g_snprintf (buf, sizeof (buf), "NUSHU CHARACTER-%05X", wc);
+      return buf;
+  }
   else if (wc >= 0xac00 && wc <= 0xd7af)
     {
       /* compute hangul syllable name as per UAX #15 */
