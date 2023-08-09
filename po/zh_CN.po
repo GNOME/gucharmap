@@ -14,10 +14,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
-"product=gucharmap&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2016-03-19 13:16+0000\n"
-"PO-Revision-Date: 2016-04-14 17:28+0800\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gucharmap/issues\n"
+"POT-Creation-Date: 2019-03-13 06:19+0000\n"
+"PO-Revision-Date: 2019-03-13 21:35+0800\n"
 "Last-Translator: Jeff Bai <jeffbai@aosc.xyz>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
@@ -25,10 +24,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: ../data/gucharmap.appdata.xml.in.h:1 ../gucharmap.desktop.in.in.h:1
-#: ../gucharmap/gucharmap-window.c:766 ../gucharmap/main.c:238
+#: ../gucharmap/gucharmap-window.c:768 ../gucharmap/main.c:329
 msgid "Character Map"
 msgstr "字符映射表"
 
@@ -68,112 +67,184 @@ msgstr "全部"
 msgid "Unicode Block"
 msgstr "Unicode 区块"
 
-#: ../gucharmap/gucharmap-charmap.c:524
+#: ../gucharmap/gucharmap-charmap.c:446
+msgid "Font variant of"
+msgstr "是以下字符的字体变体"
+
+#: ../gucharmap/gucharmap-charmap.c:447
+msgid "No-break version of"
+msgstr "是以下字符的不间断版本"
+
+#: ../gucharmap/gucharmap-charmap.c:448
+msgid "Initial presentation form of"
+msgstr "是以下字符的首部表达形式"
+
+#: ../gucharmap/gucharmap-charmap.c:449
+msgid "Medial presentation form of"
+msgstr "是以下字符的中部表达形式"
+
+#: ../gucharmap/gucharmap-charmap.c:450
+msgid "Final presentation form of"
+msgstr "是以下字符的尾部表达形式"
+
+#: ../gucharmap/gucharmap-charmap.c:451
+msgid "Isolated presentation form of"
+msgstr "是以下字符的独立表达形式"
+
+#: ../gucharmap/gucharmap-charmap.c:452
+msgid "Encircled form of"
+msgstr "是以下字符的带圈形式"
+
+#: ../gucharmap/gucharmap-charmap.c:453
+msgid "Superscript form of"
+msgstr "是以下字符的上标形式"
+
+#: ../gucharmap/gucharmap-charmap.c:454
+msgid "Subscript form of"
+msgstr "是以下字符的下标形式"
+
+#: ../gucharmap/gucharmap-charmap.c:455
+msgid "Vertical layout presentation form of"
+msgstr "是以下字符的竖排表达形式"
+
+#: ../gucharmap/gucharmap-charmap.c:456
+msgid "Wide compatibility character of"
+msgstr "是以下字符的宽型兼容字符"
+
+#: ../gucharmap/gucharmap-charmap.c:457
+msgid "Narrow compatibility character of"
+msgstr "是以下字符的窄型兼容字符"
+
+#: ../gucharmap/gucharmap-charmap.c:458
+msgid "Small variant form of"
+msgstr "是以下字符的小型变体"
+
+#: ../gucharmap/gucharmap-charmap.c:459
+msgid "CJK squared font variant of"
+msgstr "是以下字符的中日韩方形字体变体"
+
+#: ../gucharmap/gucharmap-charmap.c:460
+msgid "Vulgar fraction form of"
+msgstr "是以下字符的普通分数形式"
+
+#: ../gucharmap/gucharmap-charmap.c:461
+msgid "Unspecified compatibility character of"
+msgstr "是以下字符的未指定的兼容字符"
+
+#: ../gucharmap/gucharmap-charmap.c:681
+msgid "Compatibility decomposition:"
+msgstr "兼容性分解："
+
+#: ../gucharmap/gucharmap-charmap.c:682
 msgid "Canonical decomposition:"
 msgstr "规范化分解："
 
-#: ../gucharmap/gucharmap-charmap.c:567 ../gucharmap/gucharmap-chartable.c:581
+#: ../gucharmap/gucharmap-charmap.c:724 ../gucharmap/gucharmap-chartable.c:581
 msgid "[not a printable character]"
 msgstr "[不可打印字符]"
 
-#: ../gucharmap/gucharmap-charmap.c:581
+#: ../gucharmap/gucharmap-charmap.c:738
 msgid "General Character Properties"
 msgstr "字符常规属性"
 
-#: ../gucharmap/gucharmap-charmap.c:587
+#: ../gucharmap/gucharmap-charmap.c:744
 msgid "In Unicode since:"
 msgstr "被此后的 Unicode 版本包含："
 
 #. character category
-#: ../gucharmap/gucharmap-charmap.c:591
+#: ../gucharmap/gucharmap-charmap.c:748
 msgid "Unicode category:"
 msgstr "Unicode 分类："
 
-#: ../gucharmap/gucharmap-charmap.c:600
+#: ../gucharmap/gucharmap-charmap.c:759
 msgid "Various Useful Representations"
 msgstr "其它有用的表示"
 
-#: ../gucharmap/gucharmap-charmap.c:610
+#: ../gucharmap/gucharmap-charmap.c:769
 msgid "UTF-8:"
 msgstr "UTF-8："
 
-#: ../gucharmap/gucharmap-charmap.c:618
+#: ../gucharmap/gucharmap-charmap.c:777
 msgid "UTF-16:"
 msgstr "UTF-16："
 
-#: ../gucharmap/gucharmap-charmap.c:629
+#: ../gucharmap/gucharmap-charmap.c:788
 msgid "C octal escaped UTF-8:"
 msgstr "C 八进制转码的 UTF-8："
 
-#: ../gucharmap/gucharmap-charmap.c:639
+#: ../gucharmap/gucharmap-charmap.c:798
 msgid "XML decimal entity:"
 msgstr "XML 十进制实体："
 
-#: ../gucharmap/gucharmap-charmap.c:650
+#: ../gucharmap/gucharmap-charmap.c:809
 msgid "Annotations and Cross References"
 msgstr "注解和交叉引用"
 
-#: ../gucharmap/gucharmap-charmap.c:657
+#: ../gucharmap/gucharmap-charmap.c:816
 msgid "Alias names:"
 msgstr "别名："
 
-#: ../gucharmap/gucharmap-charmap.c:666
+#: ../gucharmap/gucharmap-charmap.c:825
 msgid "Notes:"
 msgstr "附注："
 
-#: ../gucharmap/gucharmap-charmap.c:675
+#: ../gucharmap/gucharmap-charmap.c:834
 msgid "See also:"
 msgstr "另见："
 
-#: ../gucharmap/gucharmap-charmap.c:684
+#: ../gucharmap/gucharmap-charmap.c:843
 msgid "Approximate equivalents:"
 msgstr "近似等价字符："
 
-#: ../gucharmap/gucharmap-charmap.c:693
+#: ../gucharmap/gucharmap-charmap.c:852
 msgid "Equivalents:"
 msgstr "等价字符："
 
-#: ../gucharmap/gucharmap-charmap.c:709
+#: ../gucharmap/gucharmap-charmap.c:867
 msgid "CJK Ideograph Information"
 msgstr "中日韩表意文字信息"
 
-#: ../gucharmap/gucharmap-charmap.c:714
+#: ../gucharmap/gucharmap-charmap.c:872
 msgid "Definition in English:"
 msgstr "英文释义："
 
-#: ../gucharmap/gucharmap-charmap.c:719
+#: ../gucharmap/gucharmap-charmap.c:877
 msgid "Mandarin Pronunciation:"
 msgstr "普通话读音："
 
-#: ../gucharmap/gucharmap-charmap.c:724
+#: ../gucharmap/gucharmap-charmap.c:882
 msgid "Cantonese Pronunciation:"
 msgstr "粤语读音："
 
-#: ../gucharmap/gucharmap-charmap.c:729
+#: ../gucharmap/gucharmap-charmap.c:887
 msgid "Japanese On Pronunciation:"
-msgstr "日文音读："
+msgstr "日语音读："
 
-#: ../gucharmap/gucharmap-charmap.c:734
+#: ../gucharmap/gucharmap-charmap.c:892
 msgid "Japanese Kun Pronunciation:"
-msgstr "日文训读："
+msgstr "日语训读："
 
-#: ../gucharmap/gucharmap-charmap.c:739
+#: ../gucharmap/gucharmap-charmap.c:897
 msgid "Tang Pronunciation:"
-msgstr "唐音·古中国读音："
+msgstr "唐代汉语拟音："
 
-#: ../gucharmap/gucharmap-charmap.c:744
+#: ../gucharmap/gucharmap-charmap.c:902
 msgid "Korean Pronunciation:"
 msgstr "韩语读音："
 
-#: ../gucharmap/gucharmap-charmap.c:1129
+#: ../gucharmap/gucharmap-charmap.c:907
+msgid "Vietnamese Pronunciation:"
+msgstr "越南语读音："
+
+#: ../gucharmap/gucharmap-charmap.c:1289
 msgid "Characte_r Table"
 msgstr "字符表(_R)"
 
-#: ../gucharmap/gucharmap-charmap.c:1176
+#: ../gucharmap/gucharmap-charmap.c:1336
 msgid "Character _Details"
 msgstr "字符细节(_D)"
 
-#: ../gucharmap/gucharmap-chartable-accessible.c:795
+#: ../gucharmap/gucharmap-chartable-accessible.c:798
 msgid "Character Table"
 msgstr "字符表"
 
@@ -182,7 +253,7 @@ msgid "Unknown character, unable to identify."
 msgstr "未知字符，无法分辨。"
 
 #: ../gucharmap/gucharmap-chartable.c:1292
-#: ../gucharmap/gucharmap-search-dialog.c:585
+#: ../gucharmap/gucharmap-search-dialog.c:582
 msgid "Not found."
 msgstr "未查到。"
 
@@ -274,15 +345,15 @@ msgstr "上一个字符(_P)"
 msgid "_Contents"
 msgstr "目录(_C)"
 
-#: ../gucharmap/gucharmap-mini-fontsel.c:282
+#: ../gucharmap/gucharmap-mini-fontsel.c:332
 msgid "Font"
 msgstr "字体"
 
-#: ../gucharmap/gucharmap-mini-fontsel.c:295
+#: ../gucharmap/gucharmap-mini-fontsel.c:351
 msgid "Font Family"
 msgstr "字体族"
 
-#: ../gucharmap/gucharmap-mini-fontsel.c:313
+#: ../gucharmap/gucharmap-mini-fontsel.c:369
 msgid "Font Size"
 msgstr "字体大小"
 
@@ -293,188 +364,188 @@ msgstr "文字"
 #. Unicode assigns "Common" as the script name for any character not
 #. * specifically listed in Scripts.txt
 #: ../gucharmap/gucharmap-script-codepoint-list.c:465
-#: ../gucharmap/unicode-i18n.h:303
+#: ../gucharmap/unicode-i18n.h:330
 msgid "Common"
 msgstr "公共"
 
-#: ../gucharmap/gucharmap-search-dialog.c:565
+#: ../gucharmap/gucharmap-search-dialog.c:562
 msgid "Information"
 msgstr "信息"
 
 #. follow hig guidelines
-#: ../gucharmap/gucharmap-search-dialog.c:735
+#: ../gucharmap/gucharmap-search-dialog.c:732
 msgid "Find"
 msgstr "查找"
 
-#: ../gucharmap/gucharmap-search-dialog.c:748
+#: ../gucharmap/gucharmap-search-dialog.c:745
 msgid "_Previous"
 msgstr "上一个(_P)"
 
-#: ../gucharmap/gucharmap-search-dialog.c:755
+#: ../gucharmap/gucharmap-search-dialog.c:752
 msgid "_Next"
 msgstr "下一个(_N)"
 
-#: ../gucharmap/gucharmap-search-dialog.c:771
+#: ../gucharmap/gucharmap-search-dialog.c:768
 msgid "_Search:"
 msgstr "搜索(_S)："
 
-#: ../gucharmap/gucharmap-search-dialog.c:782
+#: ../gucharmap/gucharmap-search-dialog.c:779
 msgid "Match _whole word"
 msgstr "匹配整个单词(_W)"
 
-#: ../gucharmap/gucharmap-search-dialog.c:787
+#: ../gucharmap/gucharmap-search-dialog.c:784
 msgid "Search in character _details"
 msgstr "在字符细节中搜索(_D)"
 
-#: ../gucharmap/gucharmap-unicode-info.c:114
+#: ../gucharmap/gucharmap-unicode-info.c:111
 msgid "<Non Private Use High Surrogate>"
-msgstr "<非私用高半超大字符集>"
+msgstr "<非私用高半代理区>"
 
-#: ../gucharmap/gucharmap-unicode-info.c:116
+#: ../gucharmap/gucharmap-unicode-info.c:113
 msgid "<Private Use High Surrogate>"
-msgstr "<私用高半超大字符集>"
+msgstr "<私用高半代理区>"
 
-#: ../gucharmap/gucharmap-unicode-info.c:118
+#: ../gucharmap/gucharmap-unicode-info.c:115
 msgid "<Low Surrogate>"
-msgstr "<低半超大字符集>"
+msgstr "<低半代理区>"
 
-#: ../gucharmap/gucharmap-unicode-info.c:120
+#: ../gucharmap/gucharmap-unicode-info.c:117
 msgid "<Private Use>"
-msgstr "<私用空间>"
+msgstr "<私用区>"
 
-#: ../gucharmap/gucharmap-unicode-info.c:122
+#: ../gucharmap/gucharmap-unicode-info.c:119
 msgid "<Plane 15 Private Use>"
-msgstr "<平面 15 私用空间>"
+msgstr "<第15平面私用区>"
 
-#: ../gucharmap/gucharmap-unicode-info.c:124
+#: ../gucharmap/gucharmap-unicode-info.c:121
 msgid "<Plane 16 Private Use>"
-msgstr "<平面 16 私用空间>"
+msgstr "<第16平面私用区>"
 
-#: ../gucharmap/gucharmap-unicode-info.c:129
+#: ../gucharmap/gucharmap-unicode-info.c:126
 msgid "<not assigned>"
 msgstr "<尚未赋值>"
 
-#: ../gucharmap/gucharmap-unicode-info.c:142
+#: ../gucharmap/gucharmap-unicode-info.c:139
 msgid "Other, Control"
 msgstr "其它，控制字符"
 
-#: ../gucharmap/gucharmap-unicode-info.c:143
+#: ../gucharmap/gucharmap-unicode-info.c:140
 msgid "Other, Format"
 msgstr "其它，格式化字符"
 
-#: ../gucharmap/gucharmap-unicode-info.c:144
+#: ../gucharmap/gucharmap-unicode-info.c:141
 msgid "Other, Not Assigned"
 msgstr "其它，尚未指派"
 
-#: ../gucharmap/gucharmap-unicode-info.c:145
+#: ../gucharmap/gucharmap-unicode-info.c:142
 msgid "Other, Private Use"
-msgstr "其它，私用空间"
+msgstr "其它，私用区"
 
-#: ../gucharmap/gucharmap-unicode-info.c:146
+#: ../gucharmap/gucharmap-unicode-info.c:143
 msgid "Other, Surrogate"
-msgstr "其它，超大字符集"
+msgstr "其它，代理区"
 
-#: ../gucharmap/gucharmap-unicode-info.c:147
+#: ../gucharmap/gucharmap-unicode-info.c:144
 msgid "Letter, Lowercase"
 msgstr "字母，小写"
 
-#: ../gucharmap/gucharmap-unicode-info.c:148
+#: ../gucharmap/gucharmap-unicode-info.c:145
 msgid "Letter, Modifier"
 msgstr "字母，修饰符"
 
-#: ../gucharmap/gucharmap-unicode-info.c:149
+#: ../gucharmap/gucharmap-unicode-info.c:146
 msgid "Letter, Other"
 msgstr "字母，其它"
 
-#: ../gucharmap/gucharmap-unicode-info.c:150
+#: ../gucharmap/gucharmap-unicode-info.c:147
 msgid "Letter, Titlecase"
 msgstr "字母，标题样式"
 
-#: ../gucharmap/gucharmap-unicode-info.c:151
+#: ../gucharmap/gucharmap-unicode-info.c:148
 msgid "Letter, Uppercase"
 msgstr "字母，大写"
 
-#: ../gucharmap/gucharmap-unicode-info.c:152
+#: ../gucharmap/gucharmap-unicode-info.c:149
 msgid "Mark, Spacing Combining"
 msgstr "标记，空格组合"
 
-#: ../gucharmap/gucharmap-unicode-info.c:153
+#: ../gucharmap/gucharmap-unicode-info.c:150
 msgid "Mark, Enclosing"
 msgstr "标记，带圈"
 
-#: ../gucharmap/gucharmap-unicode-info.c:154
+#: ../gucharmap/gucharmap-unicode-info.c:151
 msgid "Mark, Non-Spacing"
 msgstr "标记，无空格"
 
-#: ../gucharmap/gucharmap-unicode-info.c:155
+#: ../gucharmap/gucharmap-unicode-info.c:152
 msgid "Number, Decimal Digit"
 msgstr "数字，十进制数字"
 
-#: ../gucharmap/gucharmap-unicode-info.c:156
+#: ../gucharmap/gucharmap-unicode-info.c:153
 msgid "Number, Letter"
 msgstr "数字，字母"
 
-#: ../gucharmap/gucharmap-unicode-info.c:157
+#: ../gucharmap/gucharmap-unicode-info.c:154
 msgid "Number, Other"
 msgstr "数字，其它"
 
-#: ../gucharmap/gucharmap-unicode-info.c:158
+#: ../gucharmap/gucharmap-unicode-info.c:155
 msgid "Punctuation, Connector"
 msgstr "标点符号，连接符"
 
-#: ../gucharmap/gucharmap-unicode-info.c:159
+#: ../gucharmap/gucharmap-unicode-info.c:156
 msgid "Punctuation, Dash"
 msgstr "标点符号，破折号"
 
-#: ../gucharmap/gucharmap-unicode-info.c:160
+#: ../gucharmap/gucharmap-unicode-info.c:157
 msgid "Punctuation, Close"
 msgstr "标点符号，关闭"
 
-#: ../gucharmap/gucharmap-unicode-info.c:161
+#: ../gucharmap/gucharmap-unicode-info.c:158
 msgid "Punctuation, Final Quote"
 msgstr "标点符号，右引号"
 
-#: ../gucharmap/gucharmap-unicode-info.c:162
+#: ../gucharmap/gucharmap-unicode-info.c:159
 msgid "Punctuation, Initial Quote"
 msgstr "标点符号，左引号"
 
-#: ../gucharmap/gucharmap-unicode-info.c:163
+#: ../gucharmap/gucharmap-unicode-info.c:160
 msgid "Punctuation, Other"
 msgstr "标点符号，其它"
 
-#: ../gucharmap/gucharmap-unicode-info.c:164
+#: ../gucharmap/gucharmap-unicode-info.c:161
 msgid "Punctuation, Open"
-msgstr "标点符号，打开"
+msgstr "标点符号，开始"
 
-#: ../gucharmap/gucharmap-unicode-info.c:165
+#: ../gucharmap/gucharmap-unicode-info.c:162
 msgid "Symbol, Currency"
 msgstr "符号，货币"
 
-#: ../gucharmap/gucharmap-unicode-info.c:166
+#: ../gucharmap/gucharmap-unicode-info.c:163
 msgid "Symbol, Modifier"
-msgstr "符号，调整字符"
+msgstr "符号，修饰符"
 
-#: ../gucharmap/gucharmap-unicode-info.c:167
+#: ../gucharmap/gucharmap-unicode-info.c:164
 msgid "Symbol, Math"
 msgstr "符号，数学"
 
-#: ../gucharmap/gucharmap-unicode-info.c:168
+#: ../gucharmap/gucharmap-unicode-info.c:165
 msgid "Symbol, Other"
 msgstr "符号，其它"
 
-#: ../gucharmap/gucharmap-unicode-info.c:169
+#: ../gucharmap/gucharmap-unicode-info.c:166
 msgid "Separator, Line"
 msgstr "分隔符，直线"
 
-#: ../gucharmap/gucharmap-unicode-info.c:170
+#: ../gucharmap/gucharmap-unicode-info.c:167
 msgid "Separator, Paragraph"
 msgstr "分隔符，段落"
 
-#: ../gucharmap/gucharmap-unicode-info.c:171
+#: ../gucharmap/gucharmap-unicode-info.c:168
 msgid "Separator, Space"
 msgstr "分隔符，空格"
 
-#: ../gucharmap/gucharmap-window.c:429
+#: ../gucharmap/gucharmap-window.c:430
 msgid ""
 "Gucharmap is free software; you can redistribute it and/or modify it under "
 "the terms of the GNU General Public License as published by the Free "
@@ -484,7 +555,7 @@ msgstr ""
 "Gucharmap 是自由软件；您可以按照自由软件基金会所发表的 GNU GPL 协议自由发放"
 "和/或修改它；GPL 协议应该采用第三版或(由您选择)更高版本。"
 
-#: ../gucharmap/gucharmap-window.c:433
+#: ../gucharmap/gucharmap-window.c:434
 msgid ""
 "Permission is hereby granted, free of charge, to any person obtaining a copy "
 "of the Unicode data files to deal in them without restriction, including "
@@ -494,7 +565,7 @@ msgstr ""
 "特此免费授予任何获得 Unicode 数据文件拷贝的个人以不受限制的处理该文件的权利，"
 "包括不受限制的使用、拷贝、修改、合并、出版、分发，以及/或者出售拷贝的权利。"
 
-#: ../gucharmap/gucharmap-window.c:437
+#: ../gucharmap/gucharmap-window.c:438
 msgid ""
 "Gucharmap and the Unicode data files are distributed in the hope that they "
 "will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty "
@@ -505,34 +576,34 @@ msgstr ""
 "保证；对于以任何用途使用它所造成的任何直接或间接后果都不承担任何责任。请参看 "
 "GNU GPL 协议中的细节。"
 
-#: ../gucharmap/gucharmap-window.c:441
+#: ../gucharmap/gucharmap-window.c:442
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
-"Gucharmap; if not, write to the Free Software Foundation, Inc., 59 Temple "
-"Place, Suite 330, Boston, MA  02110-1301  USA"
+"Gucharmap; if not, write to the Free Software Foundation, Inc., 51 Franklin "
+"Street, Fifth Floor, Boston, MA 02110-1335 USA"
 msgstr ""
 "您应该在收到 Gucharmap 的同时收到了 GNU GPL 协议的副本；如果您没有收到的话，"
-"请给自由软件基金会写信，地址是 59 Temple Place, Suite 330, Boston, MA  "
-"02111-1301  USA"
+"请给自由软件基金会写信，地址是 51 Franklin Street, Fifth Floor, Boston, MA "
+"02110-1335 USA"
 
-#: ../gucharmap/gucharmap-window.c:444
+#: ../gucharmap/gucharmap-window.c:445
 msgid ""
 "Also you should have received a copy of the Unicode Copyright along with "
-"Gucharmap; you can always find it at Unicode's website: http://www.unicode."
+"Gucharmap; you can always find it at Unicode's website: https://www.unicode."
 "org/copyright.html"
 msgstr ""
 "同时，您应该与 Gucharmap 同时收到了 Unicode 版权声明的副本；您总是可以在 "
 "Unicode 的网站上找到该版权声明 http://www.unicode.org/copyright.html"
 
-#: ../gucharmap/gucharmap-window.c:454 ../gucharmap/main.c:39
+#: ../gucharmap/gucharmap-window.c:455 ../gucharmap/main.c:101
 msgid "GNOME Character Map"
 msgstr "GNOME 字符映射表"
 
-#: ../gucharmap/gucharmap-window.c:456
-msgid "Based on the Unicode Character Database 8.0.0"
-msgstr "基于 Unicode 字符数据库 8.0.0"
+#: ../gucharmap/gucharmap-window.c:457
+msgid "Based on the Unicode Character Database 12.0.0"
+msgstr "基于 Unicode 字符数据库 12.0.0"
 
-#: ../gucharmap/gucharmap-window.c:465
+#: ../gucharmap/gucharmap-window.c:467
 msgid "translator-credits"
 msgstr ""
 "梁昌泰 <beos@turbolinux.com.cn>, 2003\n"
@@ -543,51 +614,52 @@ msgstr ""
 "Tao Wei <weitao1979@gmail.com>, 2009\n"
 "Aron Xu <aronxu@gnome.org>, 2009, 2010\n"
 "Kyle Wang <waxaca@163.com>, 2014, 2015\n"
-"Tong Hui <tonghuix@gmail.com>, 2015"
+"Tong Hui <tonghuix@gmail.com>, 2015\n"
+"Wan Peng <almsev@gmail.com>, 2019"
 
-#: ../gucharmap/gucharmap-window.c:554
+#: ../gucharmap/gucharmap-window.c:556
 msgid "Next Script"
-msgstr "下一文字"
+msgstr "下一字符"
 
-#: ../gucharmap/gucharmap-window.c:554
+#: ../gucharmap/gucharmap-window.c:556
 msgid "Previous Script"
-msgstr "上一文字"
+msgstr "上一字符"
 
-#: ../gucharmap/gucharmap-window.c:559
+#: ../gucharmap/gucharmap-window.c:561
 msgid "Next Block"
 msgstr "下一区块"
 
-#: ../gucharmap/gucharmap-window.c:559
+#: ../gucharmap/gucharmap-window.c:561
 msgid "Previous Block"
 msgstr "上一区块"
 
 #. Text to copy entry + button
-#: ../gucharmap/gucharmap-window.c:791
+#: ../gucharmap/gucharmap-window.c:793
 msgid "_Text to copy:"
 msgstr "要复制的文本(_T)："
 
-#: ../gucharmap/gucharmap-window.c:798
+#: ../gucharmap/gucharmap-window.c:800
 msgid "Copy to the clipboard."
 msgstr "复制到剪贴板。"
 
-#: ../gucharmap/main.c:160
+#: ../gucharmap/main.c:249
 msgid "Page _Setup"
 msgstr "页面设置(_S)"
 
 #. g_menu_append (G_MENU (model), _("Print Preview"), "win.print-preview");
-#: ../gucharmap/main.c:162
+#: ../gucharmap/main.c:251
 msgid "_Print"
 msgstr "打印(_P)"
 
-#: ../gucharmap/main.c:211
+#: ../gucharmap/main.c:300
 msgid "Font to start with; ex: 'Serif 27'"
 msgstr "起始使用字体，如“Serif 27”"
 
-#: ../gucharmap/main.c:211
+#: ../gucharmap/main.c:300
 msgid "FONT"
 msgstr "字体"
 
-#: ../gucharmap/main.c:215
+#: ../gucharmap/main.c:306
 msgid "[STRING…]"
 msgstr "[字符串...]"
 
@@ -671,17 +743,17 @@ msgstr "国际音标扩展"
 
 #: ../gucharmap/unicode-i18n.h:11
 msgid "Spacing Modifier Letters"
-msgstr "空格调整字母"
+msgstr "占位修饰字母"
 
 #: ../gucharmap/unicode-i18n.h:12
 msgid "Combining Diacritical Marks"
-msgstr "组合变音标记"
+msgstr "组合附加记号"
 
 #: ../gucharmap/unicode-i18n.h:13
 msgid "Greek and Coptic"
-msgstr "希腊及埃及古文"
+msgstr "希腊文和科普特文"
 
-#: ../gucharmap/unicode-i18n.h:14 ../gucharmap/unicode-i18n.h:307
+#: ../gucharmap/unicode-i18n.h:14 ../gucharmap/unicode-i18n.h:334
 msgid "Cyrillic"
 msgstr "西里尔文"
 
@@ -689,19 +761,19 @@ msgstr "西里尔文"
 msgid "Cyrillic Supplement"
 msgstr "西里尔文补充"
 
-#: ../gucharmap/unicode-i18n.h:16 ../gucharmap/unicode-i18n.h:284
+#: ../gucharmap/unicode-i18n.h:16 ../gucharmap/unicode-i18n.h:311
 msgid "Armenian"
 msgstr "亚美尼亚文"
 
-#: ../gucharmap/unicode-i18n.h:17 ../gucharmap/unicode-i18n.h:325
+#: ../gucharmap/unicode-i18n.h:17 ../gucharmap/unicode-i18n.h:356
 msgid "Hebrew"
 msgstr "希伯来文"
 
-#: ../gucharmap/unicode-i18n.h:18 ../gucharmap/unicode-i18n.h:283
+#: ../gucharmap/unicode-i18n.h:18 ../gucharmap/unicode-i18n.h:310
 msgid "Arabic"
 msgstr "阿拉伯文"
 
-#: ../gucharmap/unicode-i18n.h:19 ../gucharmap/unicode-i18n.h:398
+#: ../gucharmap/unicode-i18n.h:19 ../gucharmap/unicode-i18n.h:438
 msgid "Syriac"
 msgstr "叙利亚文"
 
@@ -709,1083 +781,1191 @@ msgstr "叙利亚文"
 msgid "Arabic Supplement"
 msgstr "阿拉伯文补充"
 
-#: ../gucharmap/unicode-i18n.h:21 ../gucharmap/unicode-i18n.h:408
+#: ../gucharmap/unicode-i18n.h:21 ../gucharmap/unicode-i18n.h:448
 msgid "Thaana"
-msgstr "马尔代夫塔安那文"
+msgstr "它拿文"
 
-#: ../gucharmap/unicode-i18n.h:22 ../gucharmap/unicode-i18n.h:364
+#: ../gucharmap/unicode-i18n.h:22 ../gucharmap/unicode-i18n.h:398
 msgid "N'Ko"
-msgstr "西非书面语言字母"
+msgstr "西非书面文字"
 
-#: ../gucharmap/unicode-i18n.h:23 ../gucharmap/unicode-i18n.h:388
+#: ../gucharmap/unicode-i18n.h:23 ../gucharmap/unicode-i18n.h:426
 msgid "Samaritan"
-msgstr "撒玛利亚"
+msgstr "撒玛利亚文"
 
-#: ../gucharmap/unicode-i18n.h:24 ../gucharmap/unicode-i18n.h:351
+#: ../gucharmap/unicode-i18n.h:24 ../gucharmap/unicode-i18n.h:383
 msgid "Mandaic"
 msgstr "曼达安文"
 
 #: ../gucharmap/unicode-i18n.h:25
+msgid "Syriac Supplement"
+msgstr "叙利亚文补充"
+
+#: ../gucharmap/unicode-i18n.h:26
 msgid "Arabic Extended-A"
 msgstr "阿拉伯文扩展 A"
 
-#: ../gucharmap/unicode-i18n.h:26 ../gucharmap/unicode-i18n.h:309
+#: ../gucharmap/unicode-i18n.h:27 ../gucharmap/unicode-i18n.h:336
 msgid "Devanagari"
-msgstr "天城文(梵文)"
+msgstr "天城文"
 
-#: ../gucharmap/unicode-i18n.h:27 ../gucharmap/unicode-i18n.h:290
+#: ../gucharmap/unicode-i18n.h:28 ../gucharmap/unicode-i18n.h:317
 msgid "Bengali"
 msgstr "孟加拉文"
 
-#: ../gucharmap/unicode-i18n.h:28 ../gucharmap/unicode-i18n.h:320
+#: ../gucharmap/unicode-i18n.h:29 ../gucharmap/unicode-i18n.h:350
 msgid "Gurmukhi"
-msgstr "古尔木其文"
+msgstr "古木基文"
 
-#: ../gucharmap/unicode-i18n.h:29 ../gucharmap/unicode-i18n.h:319
+#: ../gucharmap/unicode-i18n.h:30 ../gucharmap/unicode-i18n.h:348
 msgid "Gujarati"
 msgstr "古吉拉特文"
 
-#: ../gucharmap/unicode-i18n.h:30 ../gucharmap/unicode-i18n.h:377
+#: ../gucharmap/unicode-i18n.h:31 ../gucharmap/unicode-i18n.h:415
 msgid "Oriya"
 msgstr "奥里亚文"
 
-#: ../gucharmap/unicode-i18n.h:31 ../gucharmap/unicode-i18n.h:405
+#: ../gucharmap/unicode-i18n.h:32 ../gucharmap/unicode-i18n.h:445
 msgid "Tamil"
 msgstr "泰米尔文"
 
-#: ../gucharmap/unicode-i18n.h:32 ../gucharmap/unicode-i18n.h:407
+#: ../gucharmap/unicode-i18n.h:33 ../gucharmap/unicode-i18n.h:447
 msgid "Telugu"
 msgstr "泰卢固文"
 
-#: ../gucharmap/unicode-i18n.h:33 ../gucharmap/unicode-i18n.h:333
+#: ../gucharmap/unicode-i18n.h:34 ../gucharmap/unicode-i18n.h:364
 msgid "Kannada"
-msgstr "挨纳德文"
+msgstr "卡纳达文"
 
-#: ../gucharmap/unicode-i18n.h:34 ../gucharmap/unicode-i18n.h:350
+#: ../gucharmap/unicode-i18n.h:35 ../gucharmap/unicode-i18n.h:382
 msgid "Malayalam"
-msgstr "印度马拉亚姆文"
+msgstr "马拉雅拉姆文"
 
-#: ../gucharmap/unicode-i18n.h:35 ../gucharmap/unicode-i18n.h:394
+#: ../gucharmap/unicode-i18n.h:36 ../gucharmap/unicode-i18n.h:432
 msgid "Sinhala"
 msgstr "僧伽罗文"
 
-#: ../gucharmap/unicode-i18n.h:36 ../gucharmap/unicode-i18n.h:409
+#: ../gucharmap/unicode-i18n.h:37 ../gucharmap/unicode-i18n.h:449
 msgid "Thai"
 msgstr "泰文"
 
-#: ../gucharmap/unicode-i18n.h:37 ../gucharmap/unicode-i18n.h:340
+#: ../gucharmap/unicode-i18n.h:38 ../gucharmap/unicode-i18n.h:371
 msgid "Lao"
 msgstr "老挝文"
 
-#: ../gucharmap/unicode-i18n.h:38 ../gucharmap/unicode-i18n.h:410
+#: ../gucharmap/unicode-i18n.h:39 ../gucharmap/unicode-i18n.h:450
 msgid "Tibetan"
 msgstr "藏文"
 
-#: ../gucharmap/unicode-i18n.h:39 ../gucharmap/unicode-i18n.h:363
+#: ../gucharmap/unicode-i18n.h:40 ../gucharmap/unicode-i18n.h:397
 msgid "Myanmar"
 msgstr "缅甸文"
 
-#: ../gucharmap/unicode-i18n.h:40 ../gucharmap/unicode-i18n.h:314
+#: ../gucharmap/unicode-i18n.h:41 ../gucharmap/unicode-i18n.h:343
 msgid "Georgian"
 msgstr "格鲁吉亚文"
 
-#: ../gucharmap/unicode-i18n.h:41
+#: ../gucharmap/unicode-i18n.h:42
 msgid "Hangul Jamo"
 msgstr "谚文字母"
 
-#: ../gucharmap/unicode-i18n.h:42 ../gucharmap/unicode-i18n.h:313
+#: ../gucharmap/unicode-i18n.h:43 ../gucharmap/unicode-i18n.h:342
 msgid "Ethiopic"
-msgstr "埃塞尔比亚文"
+msgstr "埃塞俄比亚文"
 
-#: ../gucharmap/unicode-i18n.h:43
+#: ../gucharmap/unicode-i18n.h:44
 msgid "Ethiopic Supplement"
-msgstr "埃塞尔比亚文补充"
+msgstr "埃塞俄比亚文补充"
 
-#: ../gucharmap/unicode-i18n.h:44 ../gucharmap/unicode-i18n.h:302
+#: ../gucharmap/unicode-i18n.h:45 ../gucharmap/unicode-i18n.h:329
 msgid "Cherokee"
 msgstr "切罗基文"
 
-#: ../gucharmap/unicode-i18n.h:45
+#: ../gucharmap/unicode-i18n.h:46
 msgid "Unified Canadian Aboriginal Syllabics"
-msgstr "统一加拿大原住民音节表"
+msgstr "统一加拿大原住民音节文字"
 
-#: ../gucharmap/unicode-i18n.h:46 ../gucharmap/unicode-i18n.h:368
+#: ../gucharmap/unicode-i18n.h:47 ../gucharmap/unicode-i18n.h:405
 msgid "Ogham"
 msgstr "欧甘文"
 
-#: ../gucharmap/unicode-i18n.h:47 ../gucharmap/unicode-i18n.h:387
+#: ../gucharmap/unicode-i18n.h:48 ../gucharmap/unicode-i18n.h:425
 msgid "Runic"
-msgstr "古北欧文"
+msgstr "卢恩文"
 
-#: ../gucharmap/unicode-i18n.h:48 ../gucharmap/unicode-i18n.h:399
+#: ../gucharmap/unicode-i18n.h:49 ../gucharmap/unicode-i18n.h:439
 msgid "Tagalog"
-msgstr "塔加路文"
+msgstr "他加禄文"
 
-#: ../gucharmap/unicode-i18n.h:49 ../gucharmap/unicode-i18n.h:323
+#: ../gucharmap/unicode-i18n.h:50 ../gucharmap/unicode-i18n.h:354
 msgid "Hanunoo"
-msgstr "菲律宾哈鲁喏文"
+msgstr "哈努诺文"
 
-#: ../gucharmap/unicode-i18n.h:50 ../gucharmap/unicode-i18n.h:296
+#: ../gucharmap/unicode-i18n.h:51 ../gucharmap/unicode-i18n.h:323
 msgid "Buhid"
 msgstr "布希德文"
 
-#: ../gucharmap/unicode-i18n.h:51 ../gucharmap/unicode-i18n.h:400
+#: ../gucharmap/unicode-i18n.h:52 ../gucharmap/unicode-i18n.h:440
 msgid "Tagbanwa"
-msgstr "塔格巴努亚文"
+msgstr "塔格班瓦文"
 
-#: ../gucharmap/unicode-i18n.h:52 ../gucharmap/unicode-i18n.h:337
+#: ../gucharmap/unicode-i18n.h:53 ../gucharmap/unicode-i18n.h:368
 msgid "Khmer"
 msgstr "高棉文"
 
-#: ../gucharmap/unicode-i18n.h:53 ../gucharmap/unicode-i18n.h:360
+#: ../gucharmap/unicode-i18n.h:54 ../gucharmap/unicode-i18n.h:394
 msgid "Mongolian"
 msgstr "蒙古文"
 
-#: ../gucharmap/unicode-i18n.h:54
+#: ../gucharmap/unicode-i18n.h:55
 msgid "Unified Canadian Aboriginal Syllabics Extended"
-msgstr "统一加拿大土著语音节扩展"
+msgstr "统一加拿大原住民音节文字扩展"
 
-#: ../gucharmap/unicode-i18n.h:55 ../gucharmap/unicode-i18n.h:343
+#: ../gucharmap/unicode-i18n.h:56 ../gucharmap/unicode-i18n.h:374
 msgid "Limbu"
 msgstr "林布文"
 
-#: ../gucharmap/unicode-i18n.h:56 ../gucharmap/unicode-i18n.h:401
+#: ../gucharmap/unicode-i18n.h:57 ../gucharmap/unicode-i18n.h:441
 msgid "Tai Le"
 msgstr "傣仂文"
 
-#: ../gucharmap/unicode-i18n.h:57 ../gucharmap/unicode-i18n.h:366
+#: ../gucharmap/unicode-i18n.h:58 ../gucharmap/unicode-i18n.h:401
 msgid "New Tai Lue"
 msgstr "新傣仂文"
 
-#: ../gucharmap/unicode-i18n.h:58
+#: ../gucharmap/unicode-i18n.h:59
 msgid "Khmer Symbols"
 msgstr "高棉文符号"
 
-#: ../gucharmap/unicode-i18n.h:59 ../gucharmap/unicode-i18n.h:295
+#: ../gucharmap/unicode-i18n.h:60 ../gucharmap/unicode-i18n.h:322
 msgid "Buginese"
 msgstr "布吉文"
 
-#: ../gucharmap/unicode-i18n.h:60 ../gucharmap/unicode-i18n.h:402
+#: ../gucharmap/unicode-i18n.h:61 ../gucharmap/unicode-i18n.h:442
 msgid "Tai Tham"
 msgstr "老傣文"
 
-#: ../gucharmap/unicode-i18n.h:61
+#: ../gucharmap/unicode-i18n.h:62
 msgid "Combining Diacritical Marks Extended"
 msgstr "组合变音标记扩展"
 
-#: ../gucharmap/unicode-i18n.h:62 ../gucharmap/unicode-i18n.h:286
+#: ../gucharmap/unicode-i18n.h:63 ../gucharmap/unicode-i18n.h:313
 msgid "Balinese"
-msgstr "峇里字母"
+msgstr "巴厘文"
 
-#: ../gucharmap/unicode-i18n.h:63 ../gucharmap/unicode-i18n.h:396
+#: ../gucharmap/unicode-i18n.h:64 ../gucharmap/unicode-i18n.h:436
 msgid "Sundanese"
-msgstr "巽他字母"
+msgstr "巽他文"
 
-#: ../gucharmap/unicode-i18n.h:64 ../gucharmap/unicode-i18n.h:289
+#: ../gucharmap/unicode-i18n.h:65 ../gucharmap/unicode-i18n.h:316
 msgid "Batak"
 msgstr "巴塔克文"
 
-#: ../gucharmap/unicode-i18n.h:65 ../gucharmap/unicode-i18n.h:342
+#: ../gucharmap/unicode-i18n.h:66 ../gucharmap/unicode-i18n.h:373
 msgid "Lepcha"
-msgstr "雷布查文"
+msgstr "绒巴文"
 
-#: ../gucharmap/unicode-i18n.h:66 ../gucharmap/unicode-i18n.h:369
+#: ../gucharmap/unicode-i18n.h:67 ../gucharmap/unicode-i18n.h:406
 msgid "Ol Chiki"
 msgstr "桑塔利文"
 
-#: ../gucharmap/unicode-i18n.h:67
+#: ../gucharmap/unicode-i18n.h:68
 msgid "Cyrillic Extended-C"
 msgstr "西里尔文扩展 C"
 
-#: ../gucharmap/unicode-i18n.h:68
+#: ../gucharmap/unicode-i18n.h:69
+msgid "Georgian Extended"
+msgstr "格鲁吉亚文扩展"
+
+#: ../gucharmap/unicode-i18n.h:70
 msgid "Sundanese Supplement"
 msgstr "巽他字母补充"
 
-#: ../gucharmap/unicode-i18n.h:69
+#: ../gucharmap/unicode-i18n.h:71
 msgid "Vedic Extensions"
 msgstr "吠陀扩展"
 
-#: ../gucharmap/unicode-i18n.h:70
+#: ../gucharmap/unicode-i18n.h:72
 msgid "Phonetic Extensions"
 msgstr "音标扩展"
 
-#: ../gucharmap/unicode-i18n.h:71
+#: ../gucharmap/unicode-i18n.h:73
 msgid "Phonetic Extensions Supplement"
 msgstr "音标扩展补充"
 
-#: ../gucharmap/unicode-i18n.h:72
+#: ../gucharmap/unicode-i18n.h:74
 msgid "Combining Diacritical Marks Supplement"
-msgstr "组合变音标记补充"
+msgstr "组合附加记号补充"
 
-#: ../gucharmap/unicode-i18n.h:73
+#: ../gucharmap/unicode-i18n.h:75
 msgid "Latin Extended Additional"
 msgstr "拉丁文扩展附加"
 
-#: ../gucharmap/unicode-i18n.h:74
-msgid "Greek Extended"
-msgstr "希腊扩展"
-
-#: ../gucharmap/unicode-i18n.h:75
-msgid "General Punctuation"
-msgstr "常用标点符号"
-
 #: ../gucharmap/unicode-i18n.h:76
-msgid "Superscripts and Subscripts"
-msgstr "上下标"
+msgid "Greek Extended"
+msgstr "希腊文扩展"
 
 #: ../gucharmap/unicode-i18n.h:77
+msgid "General Punctuation"
+msgstr "常用标点"
+
+#: ../gucharmap/unicode-i18n.h:78
+msgid "Superscripts and Subscripts"
+msgstr "上标和下标"
+
+#: ../gucharmap/unicode-i18n.h:79
 msgid "Currency Symbols"
 msgstr "货币符号"
 
-#: ../gucharmap/unicode-i18n.h:78
-msgid "Combining Diacritical Marks for Symbols"
-msgstr "符号组合变音标记"
-
-#: ../gucharmap/unicode-i18n.h:79
-msgid "Letterlike Symbols"
-msgstr "字母符号"
-
 #: ../gucharmap/unicode-i18n.h:80
+msgid "Combining Diacritical Marks for Symbols"
+msgstr "符号用组合附加记号"
+
+#: ../gucharmap/unicode-i18n.h:81
+msgid "Letterlike Symbols"
+msgstr "字母式符号"
+
+#: ../gucharmap/unicode-i18n.h:82
 msgid "Number Forms"
 msgstr "数字形式"
 
-#: ../gucharmap/unicode-i18n.h:81
+#: ../gucharmap/unicode-i18n.h:83
 msgid "Arrows"
 msgstr "箭头"
 
-#: ../gucharmap/unicode-i18n.h:82
+#: ../gucharmap/unicode-i18n.h:84
 msgid "Mathematical Operators"
 msgstr "数学运算符"
 
-#: ../gucharmap/unicode-i18n.h:83
+#: ../gucharmap/unicode-i18n.h:85
 msgid "Miscellaneous Technical"
-msgstr "其它技术符号"
+msgstr "杂项技术符号"
 
-#: ../gucharmap/unicode-i18n.h:84
+#: ../gucharmap/unicode-i18n.h:86
 msgid "Control Pictures"
 msgstr "控制图片"
 
-#: ../gucharmap/unicode-i18n.h:85
+#: ../gucharmap/unicode-i18n.h:87
 msgid "Optical Character Recognition"
-msgstr "光学符号识别"
+msgstr "光学识别符"
 
-#: ../gucharmap/unicode-i18n.h:86
+#: ../gucharmap/unicode-i18n.h:88
 msgid "Enclosed Alphanumerics"
 msgstr "带圈的字母数字"
 
-#: ../gucharmap/unicode-i18n.h:87
+#: ../gucharmap/unicode-i18n.h:89
 msgid "Box Drawing"
-msgstr "方框绘图"
+msgstr "制表符"
 
-#: ../gucharmap/unicode-i18n.h:88
+#: ../gucharmap/unicode-i18n.h:90
 msgid "Block Elements"
 msgstr "块状元素"
 
-#: ../gucharmap/unicode-i18n.h:89
+#: ../gucharmap/unicode-i18n.h:91
 msgid "Geometric Shapes"
 msgstr "几何形状"
 
-#: ../gucharmap/unicode-i18n.h:90
-msgid "Miscellaneous Symbols"
-msgstr "其它符号"
-
-#: ../gucharmap/unicode-i18n.h:91
-msgid "Dingbats"
-msgstr "杂锦字符"
-
 #: ../gucharmap/unicode-i18n.h:92
-msgid "Miscellaneous Mathematical Symbols-A"
-msgstr "其它数学符号 A"
+msgid "Miscellaneous Symbols"
+msgstr "杂项符号"
 
 #: ../gucharmap/unicode-i18n.h:93
+msgid "Dingbats"
+msgstr "什锦符号"
+
+#: ../gucharmap/unicode-i18n.h:94
+msgid "Miscellaneous Mathematical Symbols-A"
+msgstr "杂项数学符号 A"
+
+#: ../gucharmap/unicode-i18n.h:95
 msgid "Supplemental Arrows-A"
 msgstr "补充箭头 A"
 
-#: ../gucharmap/unicode-i18n.h:94
+#: ../gucharmap/unicode-i18n.h:96
 msgid "Braille Patterns"
-msgstr "盲文模式"
+msgstr "盲文点字"
 
-#: ../gucharmap/unicode-i18n.h:95
+#: ../gucharmap/unicode-i18n.h:97
 msgid "Supplemental Arrows-B"
 msgstr "补充箭头 B"
 
-#: ../gucharmap/unicode-i18n.h:96
+#: ../gucharmap/unicode-i18n.h:98
 msgid "Miscellaneous Mathematical Symbols-B"
 msgstr "其它数学符号 B"
 
-#: ../gucharmap/unicode-i18n.h:97
+#: ../gucharmap/unicode-i18n.h:99
 msgid "Supplemental Mathematical Operators"
-msgstr "补充的数学运算符"
+msgstr "补充数学运算符"
 
-#: ../gucharmap/unicode-i18n.h:98
+#: ../gucharmap/unicode-i18n.h:100
 msgid "Miscellaneous Symbols and Arrows"
-msgstr "其它符号和箭头"
+msgstr "杂项符号和箭头"
 
-#: ../gucharmap/unicode-i18n.h:99 ../gucharmap/unicode-i18n.h:315
+#: ../gucharmap/unicode-i18n.h:101 ../gucharmap/unicode-i18n.h:344
 msgid "Glagolitic"
 msgstr "格拉哥里文"
 
-#: ../gucharmap/unicode-i18n.h:100
+#: ../gucharmap/unicode-i18n.h:102
 msgid "Latin Extended-C"
 msgstr "拉丁文扩展 C"
 
-#: ../gucharmap/unicode-i18n.h:101 ../gucharmap/unicode-i18n.h:304
+#: ../gucharmap/unicode-i18n.h:103 ../gucharmap/unicode-i18n.h:331
 msgid "Coptic"
 msgstr "科普特文"
 
-#: ../gucharmap/unicode-i18n.h:102
+#: ../gucharmap/unicode-i18n.h:104
 msgid "Georgian Supplement"
 msgstr "格鲁吉亚文补充"
 
-#: ../gucharmap/unicode-i18n.h:103 ../gucharmap/unicode-i18n.h:411
+#: ../gucharmap/unicode-i18n.h:105 ../gucharmap/unicode-i18n.h:451
 msgid "Tifinagh"
 msgstr "提非纳文"
 
-#: ../gucharmap/unicode-i18n.h:104
+#: ../gucharmap/unicode-i18n.h:106
 msgid "Ethiopic Extended"
-msgstr "埃塞额比亚文扩展"
+msgstr "埃塞俄比亚文扩展"
 
-#: ../gucharmap/unicode-i18n.h:105
+#: ../gucharmap/unicode-i18n.h:107
 msgid "Cyrillic Extended-A"
 msgstr "西里尔文扩展 A"
 
-#: ../gucharmap/unicode-i18n.h:106
+#: ../gucharmap/unicode-i18n.h:108
 msgid "Supplemental Punctuation"
-msgstr "补充标点符号"
+msgstr "补充标点"
 
-#: ../gucharmap/unicode-i18n.h:107
+#: ../gucharmap/unicode-i18n.h:109
 msgid "CJK Radicals Supplement"
 msgstr "中日韩部首补充"
 
-#: ../gucharmap/unicode-i18n.h:108
+#: ../gucharmap/unicode-i18n.h:110
 msgid "Kangxi Radicals"
 msgstr "康熙部首"
 
-#: ../gucharmap/unicode-i18n.h:109
+#: ../gucharmap/unicode-i18n.h:111
 msgid "Ideographic Description Characters"
-msgstr "表意文字字符"
+msgstr "表意文字描述字符"
 
-#: ../gucharmap/unicode-i18n.h:110
+#: ../gucharmap/unicode-i18n.h:112
 msgid "CJK Symbols and Punctuation"
-msgstr "中日韩标点符号"
+msgstr "中日韩符号和标点"
 
-#: ../gucharmap/unicode-i18n.h:111 ../gucharmap/unicode-i18n.h:326
+#: ../gucharmap/unicode-i18n.h:113 ../gucharmap/unicode-i18n.h:357
 msgid "Hiragana"
 msgstr "日文平假名"
 
-#: ../gucharmap/unicode-i18n.h:112 ../gucharmap/unicode-i18n.h:334
+#: ../gucharmap/unicode-i18n.h:114 ../gucharmap/unicode-i18n.h:365
 msgid "Katakana"
 msgstr "日文片假名"
 
-#: ../gucharmap/unicode-i18n.h:113 ../gucharmap/unicode-i18n.h:292
+#: ../gucharmap/unicode-i18n.h:115 ../gucharmap/unicode-i18n.h:319
 msgid "Bopomofo"
 msgstr "注音符号"
 
-#: ../gucharmap/unicode-i18n.h:114
+#: ../gucharmap/unicode-i18n.h:116
 msgid "Hangul Compatibility Jamo"
 msgstr "谚文兼容字母"
 
-#: ../gucharmap/unicode-i18n.h:115
+#: ../gucharmap/unicode-i18n.h:117
 msgid "Kanbun"
-msgstr "汉文训点号"
+msgstr "汉文训点记号"
 
-#: ../gucharmap/unicode-i18n.h:116
+#: ../gucharmap/unicode-i18n.h:118
 msgid "Bopomofo Extended"
 msgstr "注音符号扩展"
 
-#: ../gucharmap/unicode-i18n.h:117
+#: ../gucharmap/unicode-i18n.h:119
 msgid "CJK Strokes"
 msgstr "中日韩笔画"
 
-#: ../gucharmap/unicode-i18n.h:118
-msgid "Katakana Phonetic Extensions"
-msgstr "片假名语音扩展"
-
-#: ../gucharmap/unicode-i18n.h:119
-msgid "Enclosed CJK Letters and Months"
-msgstr "带圈的中日韩字符及月份"
-
 #: ../gucharmap/unicode-i18n.h:120
-msgid "CJK Compatibility"
-msgstr "中日韩兼容"
+msgid "Katakana Phonetic Extensions"
+msgstr "日文片假名语音扩展"
 
 #: ../gucharmap/unicode-i18n.h:121
+msgid "Enclosed CJK Letters and Months"
+msgstr "带圈的中日韩字符和月份"
+
+#: ../gucharmap/unicode-i18n.h:122
+msgid "CJK Compatibility"
+msgstr "中日韩兼容字符"
+
+#: ../gucharmap/unicode-i18n.h:123
 msgid "CJK Unified Ideographs Extension A"
 msgstr "中日韩统一表意文字扩展 A"
 
-#: ../gucharmap/unicode-i18n.h:122
+#: ../gucharmap/unicode-i18n.h:124
 msgid "Yijing Hexagram Symbols"
-msgstr "易经六十四卦象形符号"
+msgstr "易经六十四卦符号"
 
-#: ../gucharmap/unicode-i18n.h:123
+#: ../gucharmap/unicode-i18n.h:125
 msgid "CJK Unified Ideographs"
 msgstr "中日韩统一表意文字"
 
-#: ../gucharmap/unicode-i18n.h:124
+#: ../gucharmap/unicode-i18n.h:126
 msgid "Yi Syllables"
-msgstr "彝文符号"
+msgstr "彝文音节"
 
-#: ../gucharmap/unicode-i18n.h:125
+#: ../gucharmap/unicode-i18n.h:127
 msgid "Yi Radicals"
 msgstr "彝文部首"
 
-#: ../gucharmap/unicode-i18n.h:126 ../gucharmap/unicode-i18n.h:346
+#: ../gucharmap/unicode-i18n.h:128 ../gucharmap/unicode-i18n.h:377
 msgid "Lisu"
 msgstr "傈僳文"
 
-#: ../gucharmap/unicode-i18n.h:127 ../gucharmap/unicode-i18n.h:414
+#: ../gucharmap/unicode-i18n.h:129 ../gucharmap/unicode-i18n.h:454
 msgid "Vai"
 msgstr "瓦伊文"
 
-#: ../gucharmap/unicode-i18n.h:128
+#: ../gucharmap/unicode-i18n.h:130
 msgid "Cyrillic Extended-B"
 msgstr "西里尔文扩展 B"
 
-#: ../gucharmap/unicode-i18n.h:129 ../gucharmap/unicode-i18n.h:287
+#: ../gucharmap/unicode-i18n.h:131 ../gucharmap/unicode-i18n.h:314
 msgid "Bamum"
 msgstr "巴姆穆文"
 
-#: ../gucharmap/unicode-i18n.h:130
+#: ../gucharmap/unicode-i18n.h:132
 msgid "Modifier Tone Letters"
-msgstr "修饰符语调字母"
+msgstr "修饰用声调字母"
 
-#: ../gucharmap/unicode-i18n.h:131
+#: ../gucharmap/unicode-i18n.h:133
 msgid "Latin Extended-D"
 msgstr "拉丁文扩展 D"
 
-#: ../gucharmap/unicode-i18n.h:132 ../gucharmap/unicode-i18n.h:397
+#: ../gucharmap/unicode-i18n.h:134 ../gucharmap/unicode-i18n.h:437
 msgid "Syloti Nagri"
-msgstr "塞洛狄纳戈里文"
+msgstr "锡尔赫特城文"
 
-#: ../gucharmap/unicode-i18n.h:133
+#: ../gucharmap/unicode-i18n.h:135
 msgid "Common Indic Number Forms"
 msgstr "通用印度数字形式"
 
-#: ../gucharmap/unicode-i18n.h:134
+#: ../gucharmap/unicode-i18n.h:136
 msgid "Phags-pa"
 msgstr "八思巴文"
 
-#: ../gucharmap/unicode-i18n.h:135 ../gucharmap/unicode-i18n.h:389
+#: ../gucharmap/unicode-i18n.h:137 ../gucharmap/unicode-i18n.h:427
 msgid "Saurashtra"
 msgstr "索拉什特拉文"
 
-#: ../gucharmap/unicode-i18n.h:136
+#: ../gucharmap/unicode-i18n.h:138
 msgid "Devanagari Extended"
-msgstr "梵文扩展"
+msgstr "天城文扩展"
 
-#: ../gucharmap/unicode-i18n.h:137 ../gucharmap/unicode-i18n.h:335
+#: ../gucharmap/unicode-i18n.h:139 ../gucharmap/unicode-i18n.h:366
 msgid "Kayah Li"
-msgstr "克耶李文字"
+msgstr "克耶里文"
 
-#: ../gucharmap/unicode-i18n.h:138 ../gucharmap/unicode-i18n.h:386
+#: ../gucharmap/unicode-i18n.h:140 ../gucharmap/unicode-i18n.h:424
 msgid "Rejang"
 msgstr "拉让文"
 
-#: ../gucharmap/unicode-i18n.h:139
+#: ../gucharmap/unicode-i18n.h:141
 msgid "Hangul Jamo Extended-A"
 msgstr "谚文字母扩展 A"
 
-#: ../gucharmap/unicode-i18n.h:140 ../gucharmap/unicode-i18n.h:331
+#: ../gucharmap/unicode-i18n.h:142 ../gucharmap/unicode-i18n.h:362
 msgid "Javanese"
 msgstr "爪哇文"
 
-#: ../gucharmap/unicode-i18n.h:141
+#: ../gucharmap/unicode-i18n.h:143
 msgid "Myanmar Extended-B"
-msgstr "缅甸扩展 B"
+msgstr "缅甸文扩展 B"
 
-#: ../gucharmap/unicode-i18n.h:142 ../gucharmap/unicode-i18n.h:301
+#: ../gucharmap/unicode-i18n.h:144 ../gucharmap/unicode-i18n.h:328
 msgid "Cham"
 msgstr "占文"
 
-#: ../gucharmap/unicode-i18n.h:143
+#: ../gucharmap/unicode-i18n.h:145
 msgid "Myanmar Extended-A"
-msgstr "缅甸扩展 A"
+msgstr "缅甸文扩展 A"
 
-#: ../gucharmap/unicode-i18n.h:144 ../gucharmap/unicode-i18n.h:403
+#: ../gucharmap/unicode-i18n.h:146 ../gucharmap/unicode-i18n.h:443
 msgid "Tai Viet"
 msgstr "越南傣文"
 
-#: ../gucharmap/unicode-i18n.h:145
-msgid "Meetei Mayek Extensions"
-msgstr "曼尼普尔字母扩展"
-
-#: ../gucharmap/unicode-i18n.h:146
-msgid "Ethiopic Extended-A"
-msgstr "埃塞额比亚文扩展 A"
-
 #: ../gucharmap/unicode-i18n.h:147
+msgid "Meetei Mayek Extensions"
+msgstr "曼尼普尔文扩展"
+
+#: ../gucharmap/unicode-i18n.h:148
+msgid "Ethiopic Extended-A"
+msgstr "埃塞俄比亚文扩展 A"
+
+#: ../gucharmap/unicode-i18n.h:149
 msgid "Latin Extended-E"
 msgstr "拉丁文扩展 E"
 
-#: ../gucharmap/unicode-i18n.h:148
-msgid "Cherokee Supplement"
-msgstr "彻罗基文补充"
-
-#: ../gucharmap/unicode-i18n.h:149 ../gucharmap/unicode-i18n.h:354
-msgid "Meetei Mayek"
-msgstr "曼尼普尔字母"
-
 #: ../gucharmap/unicode-i18n.h:150
+msgid "Cherokee Supplement"
+msgstr "切罗基文补充"
+
+#: ../gucharmap/unicode-i18n.h:151 ../gucharmap/unicode-i18n.h:388
+msgid "Meetei Mayek"
+msgstr "曼尼普尔文"
+
+#: ../gucharmap/unicode-i18n.h:152
 msgid "Hangul Syllables"
 msgstr "谚文音节"
 
-#: ../gucharmap/unicode-i18n.h:151
+#: ../gucharmap/unicode-i18n.h:153
 msgid "Hangul Jamo Extended-B"
 msgstr "谚文字母扩展 B"
 
-#: ../gucharmap/unicode-i18n.h:152
-msgid "High Surrogates"
-msgstr "高半超大字符集"
-
-#: ../gucharmap/unicode-i18n.h:153
-msgid "High Private Use Surrogates"
-msgstr "高半私用超大字符集"
-
 #: ../gucharmap/unicode-i18n.h:154
-msgid "Low Surrogates"
-msgstr "低半超大字符集"
+msgid "High Surrogates"
+msgstr "高半代理区"
 
 #: ../gucharmap/unicode-i18n.h:155
-msgid "Private Use Area"
-msgstr "私用空间"
+msgid "High Private Use Surrogates"
+msgstr "高半私用代理区"
 
 #: ../gucharmap/unicode-i18n.h:156
+msgid "Low Surrogates"
+msgstr "低半代理区"
+
+#: ../gucharmap/unicode-i18n.h:157
+msgid "Private Use Area"
+msgstr "私用区"
+
+#: ../gucharmap/unicode-i18n.h:158
 msgid "CJK Compatibility Ideographs"
 msgstr "中日韩兼容表意文字"
 
-#: ../gucharmap/unicode-i18n.h:157
-msgid "Alphabetic Presentation Forms"
-msgstr "字母表现形式"
-
-#: ../gucharmap/unicode-i18n.h:158
-msgid "Arabic Presentation Forms-A"
-msgstr "阿拉伯表现形式 A"
-
 #: ../gucharmap/unicode-i18n.h:159
-msgid "Variation Selectors"
-msgstr "异体字选择符"
+msgid "Alphabetic Presentation Forms"
+msgstr "字母表达形式"
 
 #: ../gucharmap/unicode-i18n.h:160
+msgid "Arabic Presentation Forms-A"
+msgstr "阿拉伯表达形式 A"
+
+#: ../gucharmap/unicode-i18n.h:161
+msgid "Variation Selectors"
+msgstr "异体字选择器"
+
+#: ../gucharmap/unicode-i18n.h:162
 msgid "Vertical Forms"
 msgstr "竖排形式"
 
-#: ../gucharmap/unicode-i18n.h:161
+#: ../gucharmap/unicode-i18n.h:163
 msgid "Combining Half Marks"
-msgstr "组合半角标记"
+msgstr "组合用半符号"
 
-#: ../gucharmap/unicode-i18n.h:162
+#: ../gucharmap/unicode-i18n.h:164
 msgid "CJK Compatibility Forms"
 msgstr "中日韩兼容形式"
 
-#: ../gucharmap/unicode-i18n.h:163
-msgid "Small Form Variants"
-msgstr "小标点变体"
-
-#: ../gucharmap/unicode-i18n.h:164
-msgid "Arabic Presentation Forms-B"
-msgstr "阿拉伯表现形式 B"
-
 #: ../gucharmap/unicode-i18n.h:165
+msgid "Small Form Variants"
+msgstr "小型变体"
+
+#: ../gucharmap/unicode-i18n.h:166
+msgid "Arabic Presentation Forms-B"
+msgstr "阿拉伯表达形式 B"
+
+#: ../gucharmap/unicode-i18n.h:167
 msgid "Halfwidth and Fullwidth Forms"
 msgstr "半角及全角形式"
 
-#: ../gucharmap/unicode-i18n.h:166
+#: ../gucharmap/unicode-i18n.h:168
 msgid "Specials"
 msgstr "特殊字符"
 
-#: ../gucharmap/unicode-i18n.h:167
-msgid "Linear B Syllabary"
-msgstr "线性 B 字音表"
-
-#: ../gucharmap/unicode-i18n.h:168
-msgid "Linear B Ideograms"
-msgstr "线性 B 表意符号"
-
 #: ../gucharmap/unicode-i18n.h:169
+msgid "Linear B Syllabary"
+msgstr "线形文字 B 音节"
+
+#: ../gucharmap/unicode-i18n.h:170
+msgid "Linear B Ideograms"
+msgstr "线形文字 B 表意文字"
+
+#: ../gucharmap/unicode-i18n.h:171
 msgid "Aegean Numbers"
 msgstr "爱琴海数字"
 
-#: ../gucharmap/unicode-i18n.h:170
+#: ../gucharmap/unicode-i18n.h:172
 msgid "Ancient Greek Numbers"
 msgstr "古希腊数字"
 
-#: ../gucharmap/unicode-i18n.h:171
+#: ../gucharmap/unicode-i18n.h:173
 msgid "Ancient Symbols"
 msgstr "古代符号"
 
-#: ../gucharmap/unicode-i18n.h:172
+#: ../gucharmap/unicode-i18n.h:174
 msgid "Phaistos Disc"
-msgstr "菲斯特斯圆盘"
+msgstr "斐斯托斯圆盘"
 
-#: ../gucharmap/unicode-i18n.h:173 ../gucharmap/unicode-i18n.h:347
+#: ../gucharmap/unicode-i18n.h:175 ../gucharmap/unicode-i18n.h:378
 msgid "Lycian"
-msgstr "利西亚文"
+msgstr "吕西亚文"
 
-#: ../gucharmap/unicode-i18n.h:174 ../gucharmap/unicode-i18n.h:298
+#: ../gucharmap/unicode-i18n.h:176 ../gucharmap/unicode-i18n.h:325
 msgid "Carian"
-msgstr "卡里亚字母"
+msgstr "卡里亚文"
 
-#: ../gucharmap/unicode-i18n.h:175
+#: ../gucharmap/unicode-i18n.h:177
 msgid "Coptic Epact Numbers"
 msgstr "科普特闰余数字"
 
-#: ../gucharmap/unicode-i18n.h:176 ../gucharmap/unicode-i18n.h:371
+#: ../gucharmap/unicode-i18n.h:178 ../gucharmap/unicode-i18n.h:408
 msgid "Old Italic"
-msgstr "古意大利式"
+msgstr "古意大利文"
 
-#: ../gucharmap/unicode-i18n.h:177 ../gucharmap/unicode-i18n.h:316
+#: ../gucharmap/unicode-i18n.h:179 ../gucharmap/unicode-i18n.h:345
 msgid "Gothic"
-msgstr "哥特字母"
+msgstr "哥特文"
 
-#: ../gucharmap/unicode-i18n.h:178 ../gucharmap/unicode-i18n.h:373
+#: ../gucharmap/unicode-i18n.h:180 ../gucharmap/unicode-i18n.h:410
 msgid "Old Permic"
 msgstr "古彼尔姆文"
 
-#: ../gucharmap/unicode-i18n.h:179 ../gucharmap/unicode-i18n.h:413
+#: ../gucharmap/unicode-i18n.h:181 ../gucharmap/unicode-i18n.h:453
 msgid "Ugaritic"
 msgstr "乌加里特文"
 
-#: ../gucharmap/unicode-i18n.h:180 ../gucharmap/unicode-i18n.h:374
+#: ../gucharmap/unicode-i18n.h:182 ../gucharmap/unicode-i18n.h:411
 msgid "Old Persian"
 msgstr "古波斯文"
 
-#: ../gucharmap/unicode-i18n.h:181 ../gucharmap/unicode-i18n.h:308
+#: ../gucharmap/unicode-i18n.h:183 ../gucharmap/unicode-i18n.h:335
 msgid "Deseret"
-msgstr "犹他大学音标"
+msgstr "德瑟雷特文"
 
-#: ../gucharmap/unicode-i18n.h:182 ../gucharmap/unicode-i18n.h:391
+#: ../gucharmap/unicode-i18n.h:184 ../gucharmap/unicode-i18n.h:429
 msgid "Shavian"
-msgstr "萧伯纳式字母"
+msgstr "萧伯纳文"
 
-#: ../gucharmap/unicode-i18n.h:183 ../gucharmap/unicode-i18n.h:379
+#: ../gucharmap/unicode-i18n.h:185 ../gucharmap/unicode-i18n.h:417
 msgid "Osmanya"
-msgstr "土耳其文"
+msgstr "奥斯曼亚文"
 
-#: ../gucharmap/unicode-i18n.h:184 ../gucharmap/unicode-i18n.h:378
+#: ../gucharmap/unicode-i18n.h:186 ../gucharmap/unicode-i18n.h:416
 msgid "Osage"
-msgstr "奥沙"
+msgstr "欧塞奇文"
 
-#: ../gucharmap/unicode-i18n.h:185 ../gucharmap/unicode-i18n.h:312
+#: ../gucharmap/unicode-i18n.h:187 ../gucharmap/unicode-i18n.h:340
 msgid "Elbasan"
 msgstr "爱尔巴桑文"
 
-#: ../gucharmap/unicode-i18n.h:186 ../gucharmap/unicode-i18n.h:299
+#: ../gucharmap/unicode-i18n.h:188 ../gucharmap/unicode-i18n.h:326
 msgid "Caucasian Albanian"
 msgstr "高加索阿尔巴尼亚文"
 
-#: ../gucharmap/unicode-i18n.h:187 ../gucharmap/unicode-i18n.h:344
+#: ../gucharmap/unicode-i18n.h:189 ../gucharmap/unicode-i18n.h:375
 msgid "Linear A"
-msgstr "线性 A"
+msgstr "线形文字 A"
 
-#: ../gucharmap/unicode-i18n.h:188
+#: ../gucharmap/unicode-i18n.h:190
 msgid "Cypriot Syllabary"
 msgstr "塞浦路斯文字音表"
 
-#: ../gucharmap/unicode-i18n.h:189 ../gucharmap/unicode-i18n.h:327
+#: ../gucharmap/unicode-i18n.h:191 ../gucharmap/unicode-i18n.h:358
 msgid "Imperial Aramaic"
-msgstr "皇家亚兰字母"
+msgstr "帝国亚拉姆文"
 
-#: ../gucharmap/unicode-i18n.h:190 ../gucharmap/unicode-i18n.h:381
+#: ../gucharmap/unicode-i18n.h:192 ../gucharmap/unicode-i18n.h:419
 msgid "Palmyrene"
-msgstr "帕米拉字母"
+msgstr "帕米拉文"
 
-#: ../gucharmap/unicode-i18n.h:191 ../gucharmap/unicode-i18n.h:365
+#: ../gucharmap/unicode-i18n.h:193 ../gucharmap/unicode-i18n.h:399
 msgid "Nabataean"
 msgstr "纳巴泰文"
 
-#: ../gucharmap/unicode-i18n.h:192 ../gucharmap/unicode-i18n.h:324
+#: ../gucharmap/unicode-i18n.h:194 ../gucharmap/unicode-i18n.h:355
 msgid "Hatran"
-msgstr "哈特拉字母"
+msgstr "哈特拉文"
 
-#: ../gucharmap/unicode-i18n.h:193 ../gucharmap/unicode-i18n.h:384
+#: ../gucharmap/unicode-i18n.h:195 ../gucharmap/unicode-i18n.h:422
 msgid "Phoenician"
-msgstr "腓尼基字母"
+msgstr "腓尼基文"
 
-#: ../gucharmap/unicode-i18n.h:194 ../gucharmap/unicode-i18n.h:348
+#: ../gucharmap/unicode-i18n.h:196 ../gucharmap/unicode-i18n.h:379
 msgid "Lydian"
 msgstr "吕底亚文"
 
-#: ../gucharmap/unicode-i18n.h:195 ../gucharmap/unicode-i18n.h:357
+#: ../gucharmap/unicode-i18n.h:197 ../gucharmap/unicode-i18n.h:391
 msgid "Meroitic Hieroglyphs"
-msgstr "麦罗埃象形文字"
+msgstr "麦罗埃文圣书体"
 
-#: ../gucharmap/unicode-i18n.h:196 ../gucharmap/unicode-i18n.h:356
+#: ../gucharmap/unicode-i18n.h:198 ../gucharmap/unicode-i18n.h:390
 msgid "Meroitic Cursive"
-msgstr "麦罗埃草书"
+msgstr "麦罗埃文草书体"
 
-#: ../gucharmap/unicode-i18n.h:197 ../gucharmap/unicode-i18n.h:336
+#: ../gucharmap/unicode-i18n.h:199 ../gucharmap/unicode-i18n.h:367
 msgid "Kharoshthi"
-msgstr "卡罗须提文"
+msgstr "佉卢文"
 
-#: ../gucharmap/unicode-i18n.h:198 ../gucharmap/unicode-i18n.h:375
+#: ../gucharmap/unicode-i18n.h:200 ../gucharmap/unicode-i18n.h:413
 msgid "Old South Arabian"
 msgstr "古南阿拉伯文"
 
-#: ../gucharmap/unicode-i18n.h:199 ../gucharmap/unicode-i18n.h:372
+#: ../gucharmap/unicode-i18n.h:201 ../gucharmap/unicode-i18n.h:409
 msgid "Old North Arabian"
 msgstr "古北阿拉伯文"
 
-#: ../gucharmap/unicode-i18n.h:200 ../gucharmap/unicode-i18n.h:352
+#: ../gucharmap/unicode-i18n.h:202 ../gucharmap/unicode-i18n.h:384
 msgid "Manichaean"
 msgstr "摩尼文"
 
-#: ../gucharmap/unicode-i18n.h:201 ../gucharmap/unicode-i18n.h:285
+#: ../gucharmap/unicode-i18n.h:203 ../gucharmap/unicode-i18n.h:312
 msgid "Avestan"
-msgstr "阿维斯塔文"
+msgstr "阿维斯陀文"
 
-#: ../gucharmap/unicode-i18n.h:202 ../gucharmap/unicode-i18n.h:330
+#: ../gucharmap/unicode-i18n.h:204 ../gucharmap/unicode-i18n.h:361
 msgid "Inscriptional Parthian"
-msgstr "帕提亚铭文旧体"
+msgstr "碑刻帕提亚文"
 
-#: ../gucharmap/unicode-i18n.h:203 ../gucharmap/unicode-i18n.h:329
+#: ../gucharmap/unicode-i18n.h:205 ../gucharmap/unicode-i18n.h:360
 msgid "Inscriptional Pahlavi"
-msgstr "帕拉维文旧体"
+msgstr "碑刻巴列维文"
 
-#: ../gucharmap/unicode-i18n.h:204 ../gucharmap/unicode-i18n.h:385
+#: ../gucharmap/unicode-i18n.h:206 ../gucharmap/unicode-i18n.h:423
 msgid "Psalter Pahlavi"
-msgstr "古巴列维诗篇"
+msgstr "诗篇巴列维文"
 
-#: ../gucharmap/unicode-i18n.h:205 ../gucharmap/unicode-i18n.h:376
+#: ../gucharmap/unicode-i18n.h:207 ../gucharmap/unicode-i18n.h:414
 msgid "Old Turkic"
 msgstr "古突厥文"
 
-#: ../gucharmap/unicode-i18n.h:206 ../gucharmap/unicode-i18n.h:370
+#: ../gucharmap/unicode-i18n.h:208 ../gucharmap/unicode-i18n.h:407
 msgid "Old Hungarian"
 msgstr "古匈牙利文"
 
-#: ../gucharmap/unicode-i18n.h:207
-msgid "Rumi Numeral Symbols"
-msgstr "鲁米记数符号"
+#: ../gucharmap/unicode-i18n.h:209 ../gucharmap/unicode-i18n.h:353
+msgid "Hanifi Rohingya"
+msgstr "哈乃斐罗兴亚文"
 
-#: ../gucharmap/unicode-i18n.h:208 ../gucharmap/unicode-i18n.h:293
+#: ../gucharmap/unicode-i18n.h:210
+msgid "Rumi Numeral Symbols"
+msgstr "卢米计数符号"
+
+#: ../gucharmap/unicode-i18n.h:211 ../gucharmap/unicode-i18n.h:412
+msgid "Old Sogdian"
+msgstr "古粟特文"
+
+#: ../gucharmap/unicode-i18n.h:212 ../gucharmap/unicode-i18n.h:433
+msgid "Sogdian"
+msgstr "粟特文"
+
+#: ../gucharmap/unicode-i18n.h:213 ../gucharmap/unicode-i18n.h:341
+msgid "Elymaic"
+msgstr "以利买文"
+
+#: ../gucharmap/unicode-i18n.h:214 ../gucharmap/unicode-i18n.h:320
 msgid "Brahmi"
 msgstr "婆罗米文"
 
-#: ../gucharmap/unicode-i18n.h:209 ../gucharmap/unicode-i18n.h:332
+#: ../gucharmap/unicode-i18n.h:215 ../gucharmap/unicode-i18n.h:363
 msgid "Kaithi"
-msgstr "卡罗须提文"
+msgstr "凯提文"
 
-#: ../gucharmap/unicode-i18n.h:210 ../gucharmap/unicode-i18n.h:395
+#: ../gucharmap/unicode-i18n.h:216 ../gucharmap/unicode-i18n.h:434
 msgid "Sora Sompeng"
-msgstr "索朗桑朋"
+msgstr "索拉桑朋文"
 
-#: ../gucharmap/unicode-i18n.h:211 ../gucharmap/unicode-i18n.h:300
+#: ../gucharmap/unicode-i18n.h:217 ../gucharmap/unicode-i18n.h:327
 msgid "Chakma"
 msgstr "查克马文"
 
-#: ../gucharmap/unicode-i18n.h:212 ../gucharmap/unicode-i18n.h:349
+#: ../gucharmap/unicode-i18n.h:218 ../gucharmap/unicode-i18n.h:380
 msgid "Mahajani"
-msgstr "古印度马哈加尼文"
+msgstr "马哈加尼文"
 
-#: ../gucharmap/unicode-i18n.h:213 ../gucharmap/unicode-i18n.h:390
+#: ../gucharmap/unicode-i18n.h:219 ../gucharmap/unicode-i18n.h:428
 msgid "Sharada"
 msgstr "夏达拉文"
 
-#: ../gucharmap/unicode-i18n.h:214
+#: ../gucharmap/unicode-i18n.h:220
 msgid "Sinhala Archaic Numbers"
 msgstr "僧伽罗文古数字"
 
-#: ../gucharmap/unicode-i18n.h:215 ../gucharmap/unicode-i18n.h:338
+#: ../gucharmap/unicode-i18n.h:221 ../gucharmap/unicode-i18n.h:369
 msgid "Khojki"
-msgstr "和卓文"
+msgstr "可吉文"
 
-#: ../gucharmap/unicode-i18n.h:216 ../gucharmap/unicode-i18n.h:362
+#: ../gucharmap/unicode-i18n.h:222 ../gucharmap/unicode-i18n.h:396
 msgid "Multani"
-msgstr "木尔坦文"
+msgstr "穆尔塔尼文"
 
-#: ../gucharmap/unicode-i18n.h:217 ../gucharmap/unicode-i18n.h:339
+#: ../gucharmap/unicode-i18n.h:223 ../gucharmap/unicode-i18n.h:370
 msgid "Khudawadi"
 msgstr "库达瓦迪文"
 
-#: ../gucharmap/unicode-i18n.h:218 ../gucharmap/unicode-i18n.h:317
+#: ../gucharmap/unicode-i18n.h:224 ../gucharmap/unicode-i18n.h:346
 msgid "Grantha"
-msgstr "帕拉瓦文"
+msgstr "古兰塔文"
 
-#: ../gucharmap/unicode-i18n.h:219 ../gucharmap/unicode-i18n.h:367
+#: ../gucharmap/unicode-i18n.h:225 ../gucharmap/unicode-i18n.h:402
 msgid "Newa"
-msgstr ""
+msgstr "纽瓦文"
 
-#: ../gucharmap/unicode-i18n.h:220 ../gucharmap/unicode-i18n.h:412
+#: ../gucharmap/unicode-i18n.h:226 ../gucharmap/unicode-i18n.h:452
 msgid "Tirhuta"
-msgstr "迈蒂利文"
+msgstr "提尔胡塔文"
 
-#: ../gucharmap/unicode-i18n.h:221 ../gucharmap/unicode-i18n.h:392
+#: ../gucharmap/unicode-i18n.h:227 ../gucharmap/unicode-i18n.h:430
 msgid "Siddham"
 msgstr "悉昙文"
 
-#: ../gucharmap/unicode-i18n.h:222 ../gucharmap/unicode-i18n.h:359
+#: ../gucharmap/unicode-i18n.h:228 ../gucharmap/unicode-i18n.h:393
 msgid "Modi"
 msgstr "莫迪文"
 
-#: ../gucharmap/unicode-i18n.h:223
+#: ../gucharmap/unicode-i18n.h:229
 msgid "Mongolian Supplement"
-msgstr "蒙文补充"
+msgstr "蒙古文补充"
 
-#: ../gucharmap/unicode-i18n.h:224 ../gucharmap/unicode-i18n.h:404
+#: ../gucharmap/unicode-i18n.h:230 ../gucharmap/unicode-i18n.h:444
 msgid "Takri"
 msgstr "塔卡里"
 
-#: ../gucharmap/unicode-i18n.h:225 ../gucharmap/unicode-i18n.h:281
+#: ../gucharmap/unicode-i18n.h:231 ../gucharmap/unicode-i18n.h:308
 msgid "Ahom"
-msgstr "阿含文"
+msgstr "阿洪姆文"
 
-#: ../gucharmap/unicode-i18n.h:226 ../gucharmap/unicode-i18n.h:415
+#: ../gucharmap/unicode-i18n.h:232 ../gucharmap/unicode-i18n.h:337
+msgid "Dogra"
+msgstr "多格拉文"
+
+#: ../gucharmap/unicode-i18n.h:233 ../gucharmap/unicode-i18n.h:456
 msgid "Warang Citi"
 msgstr "瓦兰齐地文"
 
-#: ../gucharmap/unicode-i18n.h:227 ../gucharmap/unicode-i18n.h:382
+#: ../gucharmap/unicode-i18n.h:234 ../gucharmap/unicode-i18n.h:400
+msgid "Nandinagari"
+msgstr "南迪城文"
+
+#: ../gucharmap/unicode-i18n.h:235 ../gucharmap/unicode-i18n.h:458
+msgid "Zanabazar Square"
+msgstr "札那巴札尔方形字母"
+
+#: ../gucharmap/unicode-i18n.h:236 ../gucharmap/unicode-i18n.h:435
+msgid "Soyombo"
+msgstr "索永布文"
+
+#: ../gucharmap/unicode-i18n.h:237 ../gucharmap/unicode-i18n.h:420
 msgid "Pau Cin Hau"
-msgstr "鲍钦豪文"
+msgstr "包钦豪文"
 
-#: ../gucharmap/unicode-i18n.h:228 ../gucharmap/unicode-i18n.h:291
+#: ../gucharmap/unicode-i18n.h:238 ../gucharmap/unicode-i18n.h:318
 msgid "Bhaiksuki"
-msgstr ""
+msgstr "拜克舒基文"
 
-#: ../gucharmap/unicode-i18n.h:229 ../gucharmap/unicode-i18n.h:353
+#: ../gucharmap/unicode-i18n.h:239 ../gucharmap/unicode-i18n.h:385
 msgid "Marchen"
-msgstr ""
+msgstr "玛钦文"
 
-#: ../gucharmap/unicode-i18n.h:230 ../gucharmap/unicode-i18n.h:305
+#: ../gucharmap/unicode-i18n.h:240 ../gucharmap/unicode-i18n.h:386
+msgid "Masaram Gondi"
+msgstr "马萨拉姆贡德文"
+
+#: ../gucharmap/unicode-i18n.h:241 ../gucharmap/unicode-i18n.h:349
+msgid "Gunjala Gondi"
+msgstr "贡贾拉贡德文"
+
+#: ../gucharmap/unicode-i18n.h:242 ../gucharmap/unicode-i18n.h:381
+msgid "Makasar"
+msgstr "望加锡文"
+
+#: ../gucharmap/unicode-i18n.h:243
+msgid "Tamil Supplement"
+msgstr "泰米尔文补充"
+
+#: ../gucharmap/unicode-i18n.h:244 ../gucharmap/unicode-i18n.h:332
 msgid "Cuneiform"
 msgstr "楔形文字"
 
-#: ../gucharmap/unicode-i18n.h:231
+#: ../gucharmap/unicode-i18n.h:245
 msgid "Cuneiform Numbers and Punctuation"
-msgstr "楔形数字和标点符号"
+msgstr "楔形数字和标点"
 
-#: ../gucharmap/unicode-i18n.h:232
+#: ../gucharmap/unicode-i18n.h:246
 msgid "Early Dynastic Cuneiform"
-msgstr "早期王朝楔形文字"
+msgstr "早王朝楔形文字"
 
-#: ../gucharmap/unicode-i18n.h:233 ../gucharmap/unicode-i18n.h:311
+#: ../gucharmap/unicode-i18n.h:247 ../gucharmap/unicode-i18n.h:339
 msgid "Egyptian Hieroglyphs"
-msgstr "古埃及象形文"
+msgstr "埃及圣书体"
 
-#: ../gucharmap/unicode-i18n.h:234 ../gucharmap/unicode-i18n.h:282
+#: ../gucharmap/unicode-i18n.h:248
+msgid "Egyptian Hieroglyph Format Controls"
+msgstr "埃及圣书体格式控制"
+
+#: ../gucharmap/unicode-i18n.h:249 ../gucharmap/unicode-i18n.h:309
 msgid "Anatolian Hieroglyphs"
-msgstr "安纳托利亚象形文"
+msgstr "安纳托利亚象形文字"
 
-#: ../gucharmap/unicode-i18n.h:235
+#: ../gucharmap/unicode-i18n.h:250
 msgid "Bamum Supplement"
 msgstr "巴姆穆文补充"
 
-#: ../gucharmap/unicode-i18n.h:236 ../gucharmap/unicode-i18n.h:361
+#: ../gucharmap/unicode-i18n.h:251 ../gucharmap/unicode-i18n.h:395
 msgid "Mro"
 msgstr "莫鲁文"
 
-#: ../gucharmap/unicode-i18n.h:237 ../gucharmap/unicode-i18n.h:288
+#: ../gucharmap/unicode-i18n.h:252 ../gucharmap/unicode-i18n.h:315
 msgid "Bassa Vah"
-msgstr "巴萨文"
+msgstr "巴萨瓦文"
 
-#: ../gucharmap/unicode-i18n.h:238 ../gucharmap/unicode-i18n.h:380
+#: ../gucharmap/unicode-i18n.h:253 ../gucharmap/unicode-i18n.h:418
 msgid "Pahawh Hmong"
-msgstr "救世苗文"
+msgstr "帕哈苗文"
 
-#: ../gucharmap/unicode-i18n.h:239 ../gucharmap/unicode-i18n.h:358
+#: ../gucharmap/unicode-i18n.h:254 ../gucharmap/unicode-i18n.h:387
+msgid "Medefaidrin"
+msgstr "梅德法伊德林文"
+
+#: ../gucharmap/unicode-i18n.h:255 ../gucharmap/unicode-i18n.h:392
 msgid "Miao"
 msgstr "苗文"
 
-#: ../gucharmap/unicode-i18n.h:240
+#: ../gucharmap/unicode-i18n.h:256
 msgid "Ideographic Symbols and Punctuation"
-msgstr "表意文字标点符号"
+msgstr "表意文字符号和标点"
 
-#: ../gucharmap/unicode-i18n.h:241 ../gucharmap/unicode-i18n.h:406
+#: ../gucharmap/unicode-i18n.h:257 ../gucharmap/unicode-i18n.h:446
 msgid "Tangut"
 msgstr "西夏文"
 
-#: ../gucharmap/unicode-i18n.h:242
+#: ../gucharmap/unicode-i18n.h:258
 msgid "Tangut Components"
 msgstr "西夏文偏旁"
 
-#: ../gucharmap/unicode-i18n.h:243
+#: ../gucharmap/unicode-i18n.h:259
 msgid "Kana Supplement"
-msgstr "假名补充"
+msgstr "日文假名补充"
 
-#: ../gucharmap/unicode-i18n.h:244 ../gucharmap/unicode-i18n.h:310
+#: ../gucharmap/unicode-i18n.h:260
+msgid "Kana Extended-A"
+msgstr "日文假名扩展 A"
+
+#: ../gucharmap/unicode-i18n.h:261
+msgid "Small Kana Extension"
+msgstr "小型日文假名扩展"
+
+#: ../gucharmap/unicode-i18n.h:262 ../gucharmap/unicode-i18n.h:403
+msgid "Nushu"
+msgstr "女书"
+
+#: ../gucharmap/unicode-i18n.h:263 ../gucharmap/unicode-i18n.h:338
 msgid "Duployan"
-msgstr "杜普雷速记符"
+msgstr "杜普雷速记符号"
 
-#: ../gucharmap/unicode-i18n.h:245
+#: ../gucharmap/unicode-i18n.h:264
 msgid "Shorthand Format Controls"
 msgstr "速记格式控制"
 
-#: ../gucharmap/unicode-i18n.h:246
+#: ../gucharmap/unicode-i18n.h:265
 msgid "Byzantine Musical Symbols"
 msgstr "拜占庭音乐符号"
 
-#: ../gucharmap/unicode-i18n.h:247
+#: ../gucharmap/unicode-i18n.h:266
 msgid "Musical Symbols"
 msgstr "音乐符号"
 
-#: ../gucharmap/unicode-i18n.h:248
+#: ../gucharmap/unicode-i18n.h:267
 msgid "Ancient Greek Musical Notation"
-msgstr "古希腊音符"
+msgstr "古希腊音乐记号"
 
-#: ../gucharmap/unicode-i18n.h:249
+#: ../gucharmap/unicode-i18n.h:268
+msgid "Mayan Numerals"
+msgstr "玛雅数字"
+
+#: ../gucharmap/unicode-i18n.h:269
 msgid "Tai Xuan Jing Symbols"
 msgstr "太玄经符号"
 
-#: ../gucharmap/unicode-i18n.h:250
+#: ../gucharmap/unicode-i18n.h:270
 msgid "Counting Rod Numerals"
 msgstr "算筹数码"
 
-#: ../gucharmap/unicode-i18n.h:251
+#: ../gucharmap/unicode-i18n.h:271
 msgid "Mathematical Alphanumeric Symbols"
-msgstr "数学字母数字符号"
+msgstr "数学用字母数字符号"
 
-#: ../gucharmap/unicode-i18n.h:252
+#: ../gucharmap/unicode-i18n.h:272
 msgid "Sutton SignWriting"
 msgstr "萨顿手语文字"
 
-#: ../gucharmap/unicode-i18n.h:253
+#: ../gucharmap/unicode-i18n.h:273
 msgid "Glagolitic Supplement"
 msgstr "格拉哥里字母补充"
 
-#: ../gucharmap/unicode-i18n.h:254 ../gucharmap/unicode-i18n.h:355
+#: ../gucharmap/unicode-i18n.h:274 ../gucharmap/unicode-i18n.h:404
+msgid "Nyiakeng Puachue Hmong"
+msgstr "涅根普瓦最苗文"
+
+#: ../gucharmap/unicode-i18n.h:275 ../gucharmap/unicode-i18n.h:455
+msgid "Wancho"
+msgstr "文乔文"
+
+#: ../gucharmap/unicode-i18n.h:276 ../gucharmap/unicode-i18n.h:389
 msgid "Mende Kikakui"
-msgstr "图拉伊门德字母"
+msgstr "门德基卡库文"
 
-#: ../gucharmap/unicode-i18n.h:255 ../gucharmap/unicode-i18n.h:280
+#: ../gucharmap/unicode-i18n.h:277 ../gucharmap/unicode-i18n.h:307
 msgid "Adlam"
-msgstr ""
+msgstr "阿德拉姆文"
 
-#: ../gucharmap/unicode-i18n.h:256
+#: ../gucharmap/unicode-i18n.h:278
+msgid "Indic Siyaq Numbers"
+msgstr "印度西亚格数字"
+
+#: ../gucharmap/unicode-i18n.h:279
+msgid "Ottoman Siyaq Numbers"
+msgstr "奥斯曼西亚格数字"
+
+#: ../gucharmap/unicode-i18n.h:280
 msgid "Arabic Mathematical Alphabetic Symbols"
 msgstr "阿拉伯数学字母符号"
 
-#: ../gucharmap/unicode-i18n.h:257
+#: ../gucharmap/unicode-i18n.h:281
 msgid "Mahjong Tiles"
-msgstr "麻将牌面"
+msgstr "麻将牌"
 
-#: ../gucharmap/unicode-i18n.h:258
+#: ../gucharmap/unicode-i18n.h:282
 msgid "Domino Tiles"
-msgstr "骨牌牌面"
+msgstr "多米诺牌"
 
-#: ../gucharmap/unicode-i18n.h:259
+#: ../gucharmap/unicode-i18n.h:283
 msgid "Playing Cards"
-msgstr "纸牌"
+msgstr "扑克牌"
 
-#: ../gucharmap/unicode-i18n.h:260
+#: ../gucharmap/unicode-i18n.h:284
 msgid "Enclosed Alphanumeric Supplement"
-msgstr "封闭式字母数字补充"
+msgstr "带圈字母数字补充"
 
-#: ../gucharmap/unicode-i18n.h:261
+#: ../gucharmap/unicode-i18n.h:285
 msgid "Enclosed Ideographic Supplement"
-msgstr "封闭式表意文字补充"
+msgstr "带圈表意文字补充"
 
-#: ../gucharmap/unicode-i18n.h:262
+#: ../gucharmap/unicode-i18n.h:286
 msgid "Miscellaneous Symbols and Pictographs"
-msgstr "杂项符号和象形文字"
+msgstr "杂项符号和象形图"
 
-#: ../gucharmap/unicode-i18n.h:263
+#: ../gucharmap/unicode-i18n.h:287
 msgid "Emoticons"
-msgstr "表情"
+msgstr "表情符号"
 
-#: ../gucharmap/unicode-i18n.h:264
+#: ../gucharmap/unicode-i18n.h:288
 msgid "Ornamental Dingbats"
-msgstr "观赏装饰符号"
+msgstr "装饰什锦符号"
 
-#: ../gucharmap/unicode-i18n.h:265
+#: ../gucharmap/unicode-i18n.h:289
 msgid "Transport and Map Symbols"
-msgstr "交通运输和地图符号"
+msgstr "交通和地图符号"
 
-#: ../gucharmap/unicode-i18n.h:266
+#: ../gucharmap/unicode-i18n.h:290
 msgid "Alchemical Symbols"
-msgstr "冶金符号"
+msgstr "炼金术符号"
 
-#: ../gucharmap/unicode-i18n.h:267
+#: ../gucharmap/unicode-i18n.h:291
 msgid "Geometric Shapes Extended"
 msgstr "几何形状扩展"
 
-#: ../gucharmap/unicode-i18n.h:268
+#: ../gucharmap/unicode-i18n.h:292
 msgid "Supplemental Arrows-C"
 msgstr "补充箭头 C"
 
-#: ../gucharmap/unicode-i18n.h:269
+#: ../gucharmap/unicode-i18n.h:293
 msgid "Supplemental Symbols and Pictographs"
-msgstr "补充符号和象形文字"
+msgstr "补充符号和象形图"
 
-#: ../gucharmap/unicode-i18n.h:270
+#: ../gucharmap/unicode-i18n.h:294
+msgid "Chess Symbols"
+msgstr "象棋符号"
+
+#: ../gucharmap/unicode-i18n.h:295
+msgid "Symbols and Pictographs Extended-A"
+msgstr "符号和象形图扩展 A"
+
+#: ../gucharmap/unicode-i18n.h:296
 msgid "CJK Unified Ideographs Extension B"
 msgstr "中日韩统一表意文字扩展 B"
 
-#: ../gucharmap/unicode-i18n.h:271
+#: ../gucharmap/unicode-i18n.h:297
 msgid "CJK Unified Ideographs Extension C"
 msgstr "中日韩统一表意文字扩展 C"
 
-#: ../gucharmap/unicode-i18n.h:272
+#: ../gucharmap/unicode-i18n.h:298
 msgid "CJK Unified Ideographs Extension D"
 msgstr "中日韩统一表意文字扩展 D"
 
-#: ../gucharmap/unicode-i18n.h:273
+#: ../gucharmap/unicode-i18n.h:299
 msgid "CJK Unified Ideographs Extension E"
 msgstr "中日韩统一表意文字扩展 E"
 
-#: ../gucharmap/unicode-i18n.h:274
+#: ../gucharmap/unicode-i18n.h:300
+msgid "CJK Unified Ideographs Extension F"
+msgstr "中日韩统一表意文字扩展 F"
+
+#: ../gucharmap/unicode-i18n.h:301
 msgid "CJK Compatibility Ideographs Supplement"
 msgstr "中日韩兼容表意文字补充"
 
-#: ../gucharmap/unicode-i18n.h:275
+#: ../gucharmap/unicode-i18n.h:302
 msgid "Tags"
-msgstr "标记字符"
+msgstr "标签"
 
-#: ../gucharmap/unicode-i18n.h:276
+#: ../gucharmap/unicode-i18n.h:303
 msgid "Variation Selectors Supplement"
-msgstr "变调选择器补充"
+msgstr "变体选择器补充"
 
-#: ../gucharmap/unicode-i18n.h:277
+#: ../gucharmap/unicode-i18n.h:304
 msgid "Supplementary Private Use Area-A"
-msgstr "补充私用空间 A"
+msgstr "补充私用区 A"
 
-#: ../gucharmap/unicode-i18n.h:278
+#: ../gucharmap/unicode-i18n.h:305
 msgid "Supplementary Private Use Area-B"
-msgstr "补充私用空间 B"
+msgstr "补充私用区 B"
 
-#: ../gucharmap/unicode-i18n.h:294
+#: ../gucharmap/unicode-i18n.h:321
 msgid "Braille"
 msgstr "盲文"
 
-#: ../gucharmap/unicode-i18n.h:297
+#: ../gucharmap/unicode-i18n.h:324
 msgid "Canadian Aboriginal"
-msgstr "加拿大原住民音节表"
+msgstr "加拿大原住民音节文字"
 
-#: ../gucharmap/unicode-i18n.h:306
+#: ../gucharmap/unicode-i18n.h:333
 msgid "Cypriot"
 msgstr "塞浦路斯文"
 
-#: ../gucharmap/unicode-i18n.h:318
+#: ../gucharmap/unicode-i18n.h:347
 msgid "Greek"
-msgstr "希腊字母"
+msgstr "希腊文"
 
-#: ../gucharmap/unicode-i18n.h:321
+#: ../gucharmap/unicode-i18n.h:351
 msgid "Han"
 msgstr "汉字"
 
-#: ../gucharmap/unicode-i18n.h:322
+#: ../gucharmap/unicode-i18n.h:352
 msgid "Hangul"
-msgstr "韩文"
+msgstr "谚文"
 
-#: ../gucharmap/unicode-i18n.h:328
+#: ../gucharmap/unicode-i18n.h:359
 msgid "Inherited"
 msgstr "继承"
 
-#: ../gucharmap/unicode-i18n.h:341
+#: ../gucharmap/unicode-i18n.h:372
 msgid "Latin"
-msgstr "拉丁"
+msgstr "拉丁文"
 
-#: ../gucharmap/unicode-i18n.h:345
+#: ../gucharmap/unicode-i18n.h:376
 msgid "Linear B"
-msgstr "线性 B"
+msgstr "线形文字 B"
 
-#: ../gucharmap/unicode-i18n.h:383
+#: ../gucharmap/unicode-i18n.h:421
 msgid "Phags Pa"
-msgstr "八思巴字"
+msgstr "八思巴文"
 
-#: ../gucharmap/unicode-i18n.h:393
+#: ../gucharmap/unicode-i18n.h:431
 msgid "Signwriting"
 msgstr "手语文字"
 
-#: ../gucharmap/unicode-i18n.h:416
+#: ../gucharmap/unicode-i18n.h:457
 msgid "Yi"
 msgstr "彝文"
 
