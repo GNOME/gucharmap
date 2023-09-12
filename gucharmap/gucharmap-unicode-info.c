@@ -72,6 +72,7 @@ gucharmap_get_unicode_name (gunichar wc)
       || (wc >= 0x2b740 && wc <= 0x2b81d)  /* CJK Unified Ideographs Extension D */
       || (wc >= 0x2b820 && wc <= 0x2cea1)  /* CJK Unified Ideographs Extension E */
       || (wc >= 0x2ceb0 && wc <= 0x2ebe0)  /* CJK Unified Ideographs Extension F */
+      || (wc >= 0x2ebf0 && wc <= 0x2ee5d)  /* CJK Unified Ideographs Extension I */
       || (wc >= 0x30000 && wc <= 0x3134a)  /* CJK Unified Ideographs Extension G */
       || (wc >= 0x31350 && wc <= 0x323af)) /* CJK Unified Ideographs Extension H */
     {
