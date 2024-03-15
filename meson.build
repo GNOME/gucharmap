@@ -24,7 +24,7 @@ project(
   ],
   license: ['GPL-3.0-or-later',],
   meson_version: '>= 0.62.0',
-  version: '15.1.3',
+  version: '15.1.4',
 )
 
 # Naming
