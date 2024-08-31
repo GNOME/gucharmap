@@ -21,9 +21,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gucharmap/issues\n"
-"POT-Creation-Date: 2023-10-06 03:19+0000\n"
-"PO-Revision-Date: 2024-02-01 22:35+0900\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gucharmap/issues/\n"
+"POT-Creation-Date: 2024-07-26 13:38+0000\n"
+"PO-Revision-Date: 2024-08-27 14:41+0900\n"
 "Last-Translator: DaeHyun Sung <sungdh86+git@gmail.com>\n"
 "Language-Team: GNOME Korea <gnome-kr@googlegroups.com>\n"
 "Language: ko\n"
@@ -31,7 +31,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.5\n"
 
 #. VERSION=@VERSION@
 #: data/gucharmap.desktop.in.in:4 data/gucharmap.metainfo.xml.in:35
@@ -437,7 +437,7 @@ msgstr "문자 범위"
 
 #. Unicode assigns "Unknown" as the script name for any character not
 #. * specifically listed in Scripts.txt
-#: gucharmap/gucharmap-script-codepoint-list.c:465 gucharmap/unicode-i18n.h:491
+#: gucharmap/gucharmap-script-codepoint-list.c:465 gucharmap/unicode-i18n.h:508
 msgid "Unknown"
 msgstr "알 수 없음"
 
@@ -796,1418 +796,1462 @@ msgctxt "First letter"
 msgid "0x41"
 msgstr "0xAC00"
 
-#: gucharmap/unicode-i18n.h:6
-msgid "Basic Latin"
-msgstr "기본 라틴문자"
+# 플라니어(Fulani language)를 표기하기 위한 문자
+#: gucharmap/unicode-i18n.h:6 gucharmap/unicode-i18n.h:345
+msgid "Adlam"
+msgstr "애들램 문자"
 
 #: gucharmap/unicode-i18n.h:7
-msgid "Latin-1 Supplement"
-msgstr "라틴-1 문자 추가영역"
+msgid "Aegean Numbers"
+msgstr "에게 숫자"
 
-#: gucharmap/unicode-i18n.h:8
-msgid "Latin Extended-A"
-msgstr "라틴문자 확장영역 A"
+# 인도
+#: gucharmap/unicode-i18n.h:8 gucharmap/unicode-i18n.h:346
+msgid "Ahom"
+msgstr "아홈 문자"
 
 #: gucharmap/unicode-i18n.h:9
-msgid "Latin Extended-B"
-msgstr "라틴문자 확장영역 B"
+msgid "Alchemical Symbols"
+msgstr "연금술 기호"
 
 #: gucharmap/unicode-i18n.h:10
-msgid "IPA Extensions"
-msgstr "국제 음표 문자 확장영역"
+msgid "Alphabetic Presentation Forms"
+msgstr "알파벳 표시 꼴"
 
-#: gucharmap/unicode-i18n.h:11
-msgid "Spacing Modifier Letters"
-msgstr "간격 조정 문자"
+# 현재 터키 지역
+#: gucharmap/unicode-i18n.h:11 gucharmap/unicode-i18n.h:347
+msgid "Anatolian Hieroglyphs"
+msgstr "아나톨리아 상형문자"
 
 #: gucharmap/unicode-i18n.h:12
-msgid "Combining Diacritical Marks"
-msgstr "조합 구분 표시"
+msgid "Ancient Greek Musical Notation"
+msgstr "고대 그리스 음표"
 
 #: gucharmap/unicode-i18n.h:13
-msgid "Greek and Coptic"
-msgstr "그리스 문자 및 콥트 문자"
+msgid "Ancient Greek Numbers"
+msgstr "고대 그리스 숫자"
 
-#: gucharmap/unicode-i18n.h:14 gucharmap/unicode-i18n.h:364
-msgid "Cyrillic"
-msgstr "키릴 문자"
+#: gucharmap/unicode-i18n.h:14
+msgid "Ancient Symbols"
+msgstr "고대 기호"
 
-#: gucharmap/unicode-i18n.h:15
-msgid "Cyrillic Supplement"
-msgstr "키릴 문자 추가영역"
-
-#: gucharmap/unicode-i18n.h:16 gucharmap/unicode-i18n.h:339
-msgid "Armenian"
-msgstr "아르메니아 문자"
-
-#: gucharmap/unicode-i18n.h:17 gucharmap/unicode-i18n.h:387
-msgid "Hebrew"
-msgstr "히브리 문자"
-
-#: gucharmap/unicode-i18n.h:18 gucharmap/unicode-i18n.h:338
+#: gucharmap/unicode-i18n.h:15 gucharmap/unicode-i18n.h:348
 msgid "Arabic"
 msgstr "아랍 문자"
 
-#: gucharmap/unicode-i18n.h:19 gucharmap/unicode-i18n.h:473
-msgid "Syriac"
-msgstr "시리아 문자"
-
-#: gucharmap/unicode-i18n.h:20
-msgid "Arabic Supplement"
-msgstr "아랍 문자 추가영역"
-
-#: gucharmap/unicode-i18n.h:21 gucharmap/unicode-i18n.h:484
-msgid "Thaana"
-msgstr "타너 문자"
-
-#: gucharmap/unicode-i18n.h:22 gucharmap/unicode-i18n.h:431
-msgid "N'Ko"
-msgstr "은코 문자"
-
-#: gucharmap/unicode-i18n.h:23 gucharmap/unicode-i18n.h:461
-msgid "Samaritan"
-msgstr "사마리아 문자"
-
-#: gucharmap/unicode-i18n.h:24 gucharmap/unicode-i18n.h:416
-msgid "Mandaic"
-msgstr "만다르어 문자"
-
-#: gucharmap/unicode-i18n.h:25
-msgid "Syriac Supplement"
-msgstr "시리아 문자 추가영역"
-
-#: gucharmap/unicode-i18n.h:26
-msgid "Arabic Extended-B"
-msgstr "아랍 문자 확장영역 B"
-
-#: gucharmap/unicode-i18n.h:27
+#: gucharmap/unicode-i18n.h:16
 msgid "Arabic Extended-A"
 msgstr "아랍 문자 확장영역 A"
 
-#: gucharmap/unicode-i18n.h:28 gucharmap/unicode-i18n.h:366
-msgid "Devanagari"
-msgstr "데바나가리 문자"
+#: gucharmap/unicode-i18n.h:17
+msgid "Arabic Extended-B"
+msgstr "아랍 문자 확장영역 B"
 
-#: gucharmap/unicode-i18n.h:29 gucharmap/unicode-i18n.h:345
-msgid "Bengali"
-msgstr "벵골 문자"
+#: gucharmap/unicode-i18n.h:18
+msgid "Arabic Extended-C"
+msgstr "아랍 문자 확장영역 C"
 
-#: gucharmap/unicode-i18n.h:30 gucharmap/unicode-i18n.h:381
-msgid "Gurmukhi"
-msgstr "구르무키 문자"
+#: gucharmap/unicode-i18n.h:19
+msgid "Arabic Mathematical Alphabetic Symbols"
+msgstr "아랍 수학용 알파벳 기호"
 
-#: gucharmap/unicode-i18n.h:31 gucharmap/unicode-i18n.h:379
-msgid "Gujarati"
-msgstr "구자라트 문자"
+#: gucharmap/unicode-i18n.h:20
+msgid "Arabic Presentation Forms-A"
+msgstr "아랍 문자 표시 꼴 A"
 
-#: gucharmap/unicode-i18n.h:32 gucharmap/unicode-i18n.h:450
-msgid "Oriya"
-msgstr "오리야 문자"
+#: gucharmap/unicode-i18n.h:21
+msgid "Arabic Presentation Forms-B"
+msgstr "아랍 문자 표시 꼴 B"
 
-#: gucharmap/unicode-i18n.h:33 gucharmap/unicode-i18n.h:480
-msgid "Tamil"
-msgstr "타밀 문자"
+#: gucharmap/unicode-i18n.h:22
+msgid "Arabic Supplement"
+msgstr "아랍 문자 추가영역"
 
-#: gucharmap/unicode-i18n.h:34 gucharmap/unicode-i18n.h:483
-msgid "Telugu"
-msgstr "텔루구 문자"
+#: gucharmap/unicode-i18n.h:23 gucharmap/unicode-i18n.h:349
+msgid "Armenian"
+msgstr "아르메니아 문자"
 
-#: gucharmap/unicode-i18n.h:35 gucharmap/unicode-i18n.h:395
-msgid "Kannada"
-msgstr "칸나다 문자"
+#: gucharmap/unicode-i18n.h:24
+msgid "Arrows"
+msgstr "화살표"
 
-#: gucharmap/unicode-i18n.h:36 gucharmap/unicode-i18n.h:415
-msgid "Malayalam"
-msgstr "말라얌람 문자"
+#: gucharmap/unicode-i18n.h:25 gucharmap/unicode-i18n.h:350
+msgid "Avestan"
+msgstr "아베스탄어"
 
-#: gucharmap/unicode-i18n.h:37 gucharmap/unicode-i18n.h:467
-msgid "Sinhala"
-msgstr "신할라 문자"
-
-#: gucharmap/unicode-i18n.h:38 gucharmap/unicode-i18n.h:485
-msgid "Thai"
-msgstr "타이 문자"
-
-#: gucharmap/unicode-i18n.h:39 gucharmap/unicode-i18n.h:404
-msgid "Lao"
-msgstr "라오 문자"
-
-#: gucharmap/unicode-i18n.h:40 gucharmap/unicode-i18n.h:486
-msgid "Tibetan"
-msgstr "티베트 문자"
-
-#: gucharmap/unicode-i18n.h:41 gucharmap/unicode-i18n.h:430
-msgid "Myanmar"
-msgstr "미얀마 문자"
-
-#: gucharmap/unicode-i18n.h:42 gucharmap/unicode-i18n.h:374
-msgid "Georgian"
-msgstr "그루지야 문자"
-
-#: gucharmap/unicode-i18n.h:43
-msgid "Hangul Jamo"
-msgstr "한글 자모"
-
-#: gucharmap/unicode-i18n.h:44 gucharmap/unicode-i18n.h:373
-msgid "Ethiopic"
-msgstr "에티오피아 문자"
-
-#: gucharmap/unicode-i18n.h:45
-msgid "Ethiopic Supplement"
-msgstr "에티오피아 문자 추가영역"
-
-#: gucharmap/unicode-i18n.h:46 gucharmap/unicode-i18n.h:357
-msgid "Cherokee"
-msgstr "체로키 문자"
-
-#: gucharmap/unicode-i18n.h:47
-msgid "Unified Canadian Aboriginal Syllabics"
-msgstr "통합 캐나다 원주민 음절"
-
-#: gucharmap/unicode-i18n.h:48 gucharmap/unicode-i18n.h:439
-msgid "Ogham"
-msgstr "오검 문자"
-
-#: gucharmap/unicode-i18n.h:49 gucharmap/unicode-i18n.h:460
-msgid "Runic"
-msgstr "룬 문자"
-
-#: gucharmap/unicode-i18n.h:50 gucharmap/unicode-i18n.h:474
-msgid "Tagalog"
-msgstr "타갈로그 문자"
-
-#: gucharmap/unicode-i18n.h:51 gucharmap/unicode-i18n.h:385
-msgid "Hanunoo"
-msgstr "하누누 문자"
-
-#: gucharmap/unicode-i18n.h:52 gucharmap/unicode-i18n.h:351
-msgid "Buhid"
-msgstr "부히드 문자"
-
-#: gucharmap/unicode-i18n.h:53 gucharmap/unicode-i18n.h:475
-msgid "Tagbanwa"
-msgstr "타그반와 문자"
-
-#: gucharmap/unicode-i18n.h:54 gucharmap/unicode-i18n.h:401
-msgid "Khmer"
-msgstr "크메르 문자"
-
-#: gucharmap/unicode-i18n.h:55 gucharmap/unicode-i18n.h:427
-msgid "Mongolian"
-msgstr "몽골 문자"
-
-#: gucharmap/unicode-i18n.h:56
-msgid "Unified Canadian Aboriginal Syllabics Extended"
-msgstr "통합 캐나다 원주민 음절 확장영역"
-
-#: gucharmap/unicode-i18n.h:57 gucharmap/unicode-i18n.h:407
-msgid "Limbu"
-msgstr "림부 문자"
-
-#: gucharmap/unicode-i18n.h:58 gucharmap/unicode-i18n.h:476
-msgid "Tai Le"
-msgstr "타이레 문자"
-
-#: gucharmap/unicode-i18n.h:59 gucharmap/unicode-i18n.h:435
-msgid "New Tai Lue"
-msgstr "신 타이 루에"
-
-#: gucharmap/unicode-i18n.h:60
-msgid "Khmer Symbols"
-msgstr "크메르 기호"
-
-#: gucharmap/unicode-i18n.h:61 gucharmap/unicode-i18n.h:350
-msgid "Buginese"
-msgstr "부기스 문자"
-
-# 태국 북부
-#: gucharmap/unicode-i18n.h:62 gucharmap/unicode-i18n.h:477
-msgid "Tai Tham"
-msgstr "타이삼 문자"
-
-#: gucharmap/unicode-i18n.h:63
-msgid "Combining Diacritical Marks Extended"
-msgstr "조합 구분 표시 확장영역"
-
-#: gucharmap/unicode-i18n.h:64 gucharmap/unicode-i18n.h:341
+#: gucharmap/unicode-i18n.h:26 gucharmap/unicode-i18n.h:351
 msgid "Balinese"
 msgstr "발리 문자"
 
-#: gucharmap/unicode-i18n.h:65 gucharmap/unicode-i18n.h:471
-msgid "Sundanese"
-msgstr "순다 문자"
+# 아프리카
+#: gucharmap/unicode-i18n.h:27 gucharmap/unicode-i18n.h:352
+msgid "Bamum"
+msgstr "바뭄어 문자"
+
+#: gucharmap/unicode-i18n.h:28
+msgid "Bamum Supplement"
+msgstr "바뭄어 문자 추가영역"
+
+#: gucharmap/unicode-i18n.h:29
+msgid "Basic Latin"
+msgstr "기본 라틴문자"
+
+#: gucharmap/unicode-i18n.h:30 gucharmap/unicode-i18n.h:353
+msgid "Bassa Vah"
+msgstr "바사 문자"
 
 # 인도네시아
-#: gucharmap/unicode-i18n.h:66 gucharmap/unicode-i18n.h:344
+#: gucharmap/unicode-i18n.h:31 gucharmap/unicode-i18n.h:354
 msgid "Batak"
 msgstr "바타크 문자"
 
-#: gucharmap/unicode-i18n.h:67 gucharmap/unicode-i18n.h:406
-msgid "Lepcha"
-msgstr "레프차 문자"
+#: gucharmap/unicode-i18n.h:32 gucharmap/unicode-i18n.h:355
+msgid "Bengali"
+msgstr "벵골 문자"
 
-#: gucharmap/unicode-i18n.h:68 gucharmap/unicode-i18n.h:440
-msgid "Ol Chiki"
-msgstr "올 치키 문자"
+#: gucharmap/unicode-i18n.h:33 gucharmap/unicode-i18n.h:356
+msgid "Bhaiksuki"
+msgstr "바이크수키 문자"
+
+#: gucharmap/unicode-i18n.h:34
+msgid "Block Elements"
+msgstr "블럭 요소"
+
+#: gucharmap/unicode-i18n.h:35 gucharmap/unicode-i18n.h:357
+msgid "Bopomofo"
+msgstr "주음부호(중국어 발음기호)"
+
+#: gucharmap/unicode-i18n.h:36
+msgid "Bopomofo Extended"
+msgstr "주음부호 확장영역"
+
+#: gucharmap/unicode-i18n.h:37
+msgid "Box Drawing"
+msgstr "테두리 모양"
+
+#: gucharmap/unicode-i18n.h:38 gucharmap/unicode-i18n.h:358
+msgid "Brahmi"
+msgstr "브라흐미 문자"
+
+#: gucharmap/unicode-i18n.h:39
+msgid "Braille Patterns"
+msgstr "점자 모양"
+
+#: gucharmap/unicode-i18n.h:40 gucharmap/unicode-i18n.h:360
+msgid "Buginese"
+msgstr "부기스 문자"
+
+#: gucharmap/unicode-i18n.h:41 gucharmap/unicode-i18n.h:361
+msgid "Buhid"
+msgstr "부히드 문자"
+
+#: gucharmap/unicode-i18n.h:42
+msgid "Byzantine Musical Symbols"
+msgstr "비잔틴 음악 기호"
+
+#: gucharmap/unicode-i18n.h:43
+msgid "CJK Compatibility"
+msgstr "한중일 호환 영역"
+
+#: gucharmap/unicode-i18n.h:44
+msgid "CJK Compatibility Forms"
+msgstr "한중일 호환 꼴"
+
+#: gucharmap/unicode-i18n.h:45
+msgid "CJK Compatibility Ideographs"
+msgstr "한중일 호환 한자"
+
+#: gucharmap/unicode-i18n.h:46
+msgid "CJK Compatibility Ideographs Supplement"
+msgstr "한중일 호환 보충 한자"
+
+#: gucharmap/unicode-i18n.h:47
+msgid "CJK Radicals Supplement"
+msgstr "한중일 부수 추가영역"
+
+#: gucharmap/unicode-i18n.h:48
+msgid "CJK Strokes"
+msgstr "한중일 획수"
+
+#: gucharmap/unicode-i18n.h:49
+msgid "CJK Symbols and Punctuation"
+msgstr "한중일 기호 및 문장 부호"
+
+#: gucharmap/unicode-i18n.h:50
+msgid "CJK Unified Ideographs"
+msgstr "한중일 통합 한자"
+
+#: gucharmap/unicode-i18n.h:51
+msgid "CJK Unified Ideographs Extension A"
+msgstr "한중일 통합 한자 확장영역 A"
+
+#: gucharmap/unicode-i18n.h:52
+msgid "CJK Unified Ideographs Extension B"
+msgstr "한중일 통합 한자 확장영역 B"
+
+#: gucharmap/unicode-i18n.h:53
+msgid "CJK Unified Ideographs Extension C"
+msgstr "한중일 통합 한자 확장영역 C"
+
+#: gucharmap/unicode-i18n.h:54
+msgid "CJK Unified Ideographs Extension D"
+msgstr "한중일 통합 한자 확장영역 D"
+
+#: gucharmap/unicode-i18n.h:55
+msgid "CJK Unified Ideographs Extension E"
+msgstr "한중일 통합 한자 확장영역 E"
+
+#: gucharmap/unicode-i18n.h:56
+msgid "CJK Unified Ideographs Extension F"
+msgstr "한중일 통합 한자 확장영역 F"
+
+#: gucharmap/unicode-i18n.h:57
+msgid "CJK Unified Ideographs Extension G"
+msgstr "한중일 통합 한자 확장영역 G"
+
+#: gucharmap/unicode-i18n.h:58
+msgid "CJK Unified Ideographs Extension H"
+msgstr "한중일 통합 한자 확장영역 H"
+
+#: gucharmap/unicode-i18n.h:59
+msgid "CJK Unified Ideographs Extension I"
+msgstr "한중일 통합 한자 확장영역 I"
+
+#: gucharmap/unicode-i18n.h:60 gucharmap/unicode-i18n.h:363
+msgid "Carian"
+msgstr "카리 문자"
+
+# 중세에 있던 알바니아라는 국가를 현대의 알바니아와 구분하는 용어
+#: gucharmap/unicode-i18n.h:61 gucharmap/unicode-i18n.h:364
+msgid "Caucasian Albanian"
+msgstr "캅카스 알바니아 문자"
+
+# 인도
+#: gucharmap/unicode-i18n.h:62 gucharmap/unicode-i18n.h:365
+msgid "Chakma"
+msgstr "차크마 문자"
+
+#: gucharmap/unicode-i18n.h:63 gucharmap/unicode-i18n.h:366
+msgid "Cham"
+msgstr "참 문자"
+
+#: gucharmap/unicode-i18n.h:64 gucharmap/unicode-i18n.h:367
+msgid "Cherokee"
+msgstr "체로키 문자"
+
+#: gucharmap/unicode-i18n.h:65
+msgid "Cherokee Supplement"
+msgstr "체로키 문자 추가영역"
+
+#: gucharmap/unicode-i18n.h:66
+msgid "Chess Symbols"
+msgstr "체스 기호"
+
+#: gucharmap/unicode-i18n.h:67 gucharmap/unicode-i18n.h:368
+msgid "Chorasmian"
+msgstr "호라즘 문자"
+
+#: gucharmap/unicode-i18n.h:68
+msgid "Combining Diacritical Marks"
+msgstr "조합 구분 표시"
 
 #: gucharmap/unicode-i18n.h:69
-msgid "Cyrillic Extended-C"
-msgstr "키릴 문자 확장영역 C"
+msgid "Combining Diacritical Marks Extended"
+msgstr "조합 구분 표시 확장영역"
 
 #: gucharmap/unicode-i18n.h:70
-msgid "Georgian Extended"
-msgstr "그루지야 문자 확장영역"
-
-#: gucharmap/unicode-i18n.h:71
-msgid "Sundanese Supplement"
-msgstr "순다 문자 추가영역"
-
-#: gucharmap/unicode-i18n.h:72
-msgid "Vedic Extensions"
-msgstr "베다 확장영역"
-
-#: gucharmap/unicode-i18n.h:73
-msgid "Phonetic Extensions"
-msgstr "발음 확장영역"
-
-#: gucharmap/unicode-i18n.h:74
-msgid "Phonetic Extensions Supplement"
-msgstr "발음 확장 추가영역"
-
-#: gucharmap/unicode-i18n.h:75
 msgid "Combining Diacritical Marks Supplement"
 msgstr "조합 구분 표시 추가영역"
 
+#: gucharmap/unicode-i18n.h:71
+msgid "Combining Diacritical Marks for Symbols"
+msgstr "기호용 조합 구분 표시"
+
+#: gucharmap/unicode-i18n.h:72
+msgid "Combining Half Marks"
+msgstr "조합 반각 표시"
+
+#: gucharmap/unicode-i18n.h:73
+msgid "Common Indic Number Forms"
+msgstr "인도 공통 숫자"
+
+#: gucharmap/unicode-i18n.h:74
+msgid "Control Pictures"
+msgstr "제어 문자 표시"
+
+#: gucharmap/unicode-i18n.h:75 gucharmap/unicode-i18n.h:370
+msgid "Coptic"
+msgstr "콥트 문자"
+
+# Epact - 태양력이 태음력보다 초과하는 날 수, 1월 1일에 달의 형태
 #: gucharmap/unicode-i18n.h:76
-msgid "Latin Extended Additional"
-msgstr "라틴 확장 추가영역"
+msgid "Coptic Epact Numbers"
+msgstr "콥트어 이팩트 번호"
 
 #: gucharmap/unicode-i18n.h:77
-msgid "Greek Extended"
-msgstr "그리스 문자 확장영역"
+msgid "Counting Rod Numerals"
+msgstr "산가지 숫자"
 
-#: gucharmap/unicode-i18n.h:78
-msgid "General Punctuation"
-msgstr "일반 문장 부호"
+#: gucharmap/unicode-i18n.h:78 gucharmap/unicode-i18n.h:371
+msgid "Cuneiform"
+msgstr "설형 문자"
 
 #: gucharmap/unicode-i18n.h:79
-msgid "Superscripts and Subscripts"
-msgstr "위첨자/아래첨자"
+msgid "Cuneiform Numbers and Punctuation"
+msgstr "설형 숫자및 구두기호"
 
 #: gucharmap/unicode-i18n.h:80
 msgid "Currency Symbols"
 msgstr "화폐 기호"
 
 #: gucharmap/unicode-i18n.h:81
-msgid "Combining Diacritical Marks for Symbols"
-msgstr "기호용 조합 구분 표시"
-
-#: gucharmap/unicode-i18n.h:82
-msgid "Letterlike Symbols"
-msgstr "문자 모양 기호"
-
-#: gucharmap/unicode-i18n.h:83
-msgid "Number Forms"
-msgstr "여러가지 숫자"
-
-#: gucharmap/unicode-i18n.h:84
-msgid "Arrows"
-msgstr "화살표"
-
-#: gucharmap/unicode-i18n.h:85
-msgid "Mathematical Operators"
-msgstr "수학 연산자"
-
-#: gucharmap/unicode-i18n.h:86
-msgid "Miscellaneous Technical"
-msgstr "여러가지 기타 서술 기호"
-
-#: gucharmap/unicode-i18n.h:87
-msgid "Control Pictures"
-msgstr "제어 문자 표시"
-
-#: gucharmap/unicode-i18n.h:88
-msgid "Optical Character Recognition"
-msgstr "광학 인식 문자"
-
-#: gucharmap/unicode-i18n.h:89
-msgid "Enclosed Alphanumerics"
-msgstr "괄호 영문자"
-
-#: gucharmap/unicode-i18n.h:90
-msgid "Box Drawing"
-msgstr "테두리 모양"
-
-#: gucharmap/unicode-i18n.h:91
-msgid "Block Elements"
-msgstr "블럭 요소"
-
-#: gucharmap/unicode-i18n.h:92
-msgid "Geometric Shapes"
-msgstr "도형"
-
-#: gucharmap/unicode-i18n.h:93
-msgid "Miscellaneous Symbols"
-msgstr "여러가지 기호"
-
-#: gucharmap/unicode-i18n.h:94
-msgid "Dingbats"
-msgstr "딩뱃 기호"
-
-#: gucharmap/unicode-i18n.h:95
-msgid "Miscellaneous Mathematical Symbols-A"
-msgstr "여러가지 수학기호 A"
-
-#: gucharmap/unicode-i18n.h:96
-msgid "Supplemental Arrows-A"
-msgstr "화살표 추가영역 A"
-
-#: gucharmap/unicode-i18n.h:97
-msgid "Braille Patterns"
-msgstr "점자 모양"
-
-#: gucharmap/unicode-i18n.h:98
-msgid "Supplemental Arrows-B"
-msgstr "화살표 추가영역 B"
-
-#: gucharmap/unicode-i18n.h:99
-msgid "Miscellaneous Mathematical Symbols-B"
-msgstr "여러가지 수학기호 B"
-
-#: gucharmap/unicode-i18n.h:100
-msgid "Supplemental Mathematical Operators"
-msgstr "수학 연산자 추가영역"
-
-#: gucharmap/unicode-i18n.h:101
-msgid "Miscellaneous Symbols and Arrows"
-msgstr "여러가지 기호 및 화살표"
-
-# 고대 슬라브어를 적는 데 쓰였던 음소 문자
-#: gucharmap/unicode-i18n.h:102 gucharmap/unicode-i18n.h:375
-msgid "Glagolitic"
-msgstr "글라골루 문자"
-
-#: gucharmap/unicode-i18n.h:103
-msgid "Latin Extended-C"
-msgstr "라틴문자 확장영역 C"
-
-#: gucharmap/unicode-i18n.h:104 gucharmap/unicode-i18n.h:360
-msgid "Coptic"
-msgstr "콥트 문자"
-
-#: gucharmap/unicode-i18n.h:105
-msgid "Georgian Supplement"
-msgstr "그루지야 문자 추가영역"
-
-#: gucharmap/unicode-i18n.h:106 gucharmap/unicode-i18n.h:487
-msgid "Tifinagh"
-msgstr "티피나그 문자"
-
-#: gucharmap/unicode-i18n.h:107
-msgid "Ethiopic Extended"
-msgstr "에티오피아 문자 확장영역"
-
-#: gucharmap/unicode-i18n.h:108
-msgid "Cyrillic Extended-A"
-msgstr "키릴 문자 확장영역 A"
-
-#: gucharmap/unicode-i18n.h:109
-msgid "Supplemental Punctuation"
-msgstr "추가 문장 부호"
-
-#: gucharmap/unicode-i18n.h:110
-msgid "CJK Radicals Supplement"
-msgstr "한중일 부수 추가영역"
-
-#: gucharmap/unicode-i18n.h:111
-msgid "Kangxi Radicals"
-msgstr "강희자전 부수"
-
-#: gucharmap/unicode-i18n.h:112
-msgid "Ideographic Description Characters"
-msgstr "한자 기술 문자"
-
-#: gucharmap/unicode-i18n.h:113
-msgid "CJK Symbols and Punctuation"
-msgstr "한중일 기호 및 문장 부호"
-
-#: gucharmap/unicode-i18n.h:114 gucharmap/unicode-i18n.h:388
-msgid "Hiragana"
-msgstr "히라가나"
-
-#: gucharmap/unicode-i18n.h:115 gucharmap/unicode-i18n.h:396
-msgid "Katakana"
-msgstr "카타카나"
-
-#: gucharmap/unicode-i18n.h:116 gucharmap/unicode-i18n.h:347
-msgid "Bopomofo"
-msgstr "주음부호(중국어 발음기호)"
-
-#: gucharmap/unicode-i18n.h:117
-msgid "Hangul Compatibility Jamo"
-msgstr "한글 호환 자모"
-
-# 중국어 텍스트를 이해하기 쉽도록 주석을 다는 일본식 표기
-# http://en.wikipedia.org/wiki/Kanbun#Unicode_kanbun
-#: gucharmap/unicode-i18n.h:118
-msgid "Kanbun"
-msgstr "간분"
-
-#: gucharmap/unicode-i18n.h:119
-msgid "Bopomofo Extended"
-msgstr "주음부호 확장영역"
-
-#: gucharmap/unicode-i18n.h:120
-msgid "CJK Strokes"
-msgstr "한중일 획수"
-
-#: gucharmap/unicode-i18n.h:121
-msgid "Katakana Phonetic Extensions"
-msgstr "카타카나 발음 확장영역"
-
-#: gucharmap/unicode-i18n.h:122
-msgid "Enclosed CJK Letters and Months"
-msgstr "한중일 둘러싼 문자 및 날짜 기호"
-
-#: gucharmap/unicode-i18n.h:123
-msgid "CJK Compatibility"
-msgstr "한중일 호환 영역"
-
-#: gucharmap/unicode-i18n.h:124
-msgid "CJK Unified Ideographs Extension A"
-msgstr "한중일 통합 한자 확장영역 A"
-
-#: gucharmap/unicode-i18n.h:125
-msgid "Yijing Hexagram Symbols"
-msgstr "주역 6선형 기호"
-
-#: gucharmap/unicode-i18n.h:126
-msgid "CJK Unified Ideographs"
-msgstr "한중일 통합 한자"
-
-#: gucharmap/unicode-i18n.h:127
-msgid "Yi Syllables"
-msgstr "이 음절문자"
-
-#: gucharmap/unicode-i18n.h:128
-msgid "Yi Radicals"
-msgstr "이 문자 부수"
-
-#: gucharmap/unicode-i18n.h:129 gucharmap/unicode-i18n.h:410
-msgid "Lisu"
-msgstr "리수 문자"
-
-#: gucharmap/unicode-i18n.h:130 gucharmap/unicode-i18n.h:492
-msgid "Vai"
-msgstr "바이 문자"
-
-#: gucharmap/unicode-i18n.h:131
-msgid "Cyrillic Extended-B"
-msgstr "키릴 문자 확장영역 B"
-
-# 아프리카
-#: gucharmap/unicode-i18n.h:132 gucharmap/unicode-i18n.h:342
-msgid "Bamum"
-msgstr "바뭄어 문자"
-
-#: gucharmap/unicode-i18n.h:133
-msgid "Modifier Tone Letters"
-msgstr "변조 성조 문자"
-
-#: gucharmap/unicode-i18n.h:134
-msgid "Latin Extended-D"
-msgstr "라틴 문자 확장영역-D"
-
-#: gucharmap/unicode-i18n.h:135 gucharmap/unicode-i18n.h:472
-msgid "Syloti Nagri"
-msgstr "실헤티 나가리"
-
-#: gucharmap/unicode-i18n.h:136
-msgid "Common Indic Number Forms"
-msgstr "인도 공통 숫자"
-
-#: gucharmap/unicode-i18n.h:137
-msgid "Phags-pa"
-msgstr "파스파 문자"
-
-#: gucharmap/unicode-i18n.h:138 gucharmap/unicode-i18n.h:462
-msgid "Saurashtra"
-msgstr "사우라슈트라 문자"
-
-#: gucharmap/unicode-i18n.h:139
-msgid "Devanagari Extended"
-msgstr "데바나가리 확장영역"
-
-#: gucharmap/unicode-i18n.h:140 gucharmap/unicode-i18n.h:398
-msgid "Kayah Li"
-msgstr "카야 리 문자"
-
-#: gucharmap/unicode-i18n.h:141 gucharmap/unicode-i18n.h:459
-msgid "Rejang"
-msgstr "레장 문자"
-
-#: gucharmap/unicode-i18n.h:142
-msgid "Hangul Jamo Extended-A"
-msgstr "한글 자모 확장영역 A"
-
-# 인도네시아
-#: gucharmap/unicode-i18n.h:143 gucharmap/unicode-i18n.h:393
-msgid "Javanese"
-msgstr "자와어"
-
-#: gucharmap/unicode-i18n.h:144
-msgid "Myanmar Extended-B"
-msgstr "미얀마 확장영역 B"
-
-#: gucharmap/unicode-i18n.h:145 gucharmap/unicode-i18n.h:356
-msgid "Cham"
-msgstr "참 문자"
-
-#: gucharmap/unicode-i18n.h:146
-msgid "Myanmar Extended-A"
-msgstr "미얀마 확장영역 A"
-
-# 태국
-#: gucharmap/unicode-i18n.h:147 gucharmap/unicode-i18n.h:478
-msgid "Tai Viet"
-msgstr "타이비엣 문자"
-
-#: gucharmap/unicode-i18n.h:148
-msgid "Meetei Mayek Extensions"
-msgstr "메이테이 문자 확장영역"
-
-#: gucharmap/unicode-i18n.h:149
-msgid "Ethiopic Extended-A"
-msgstr "에티오피아 문자 확장영역 A"
-
-#: gucharmap/unicode-i18n.h:150
-msgid "Latin Extended-E"
-msgstr "라틴문자 확장영역 E"
-
-#: gucharmap/unicode-i18n.h:151
-msgid "Cherokee Supplement"
-msgstr "체로키 문자 추가영역"
-
-#: gucharmap/unicode-i18n.h:152 gucharmap/unicode-i18n.h:421
-msgid "Meetei Mayek"
-msgstr "메이테이 문자"
-
-#: gucharmap/unicode-i18n.h:153
-msgid "Hangul Syllables"
-msgstr "한글 음절"
-
-#: gucharmap/unicode-i18n.h:154
-msgid "Hangul Jamo Extended-B"
-msgstr "한글 자모 확장영역 B"
-
-#: gucharmap/unicode-i18n.h:155
-msgid "High Surrogates"
-msgstr "상위 확장코드"
-
-#: gucharmap/unicode-i18n.h:156
-msgid "High Private Use Surrogates"
-msgstr "개인용 상위 확장코드"
-
-#: gucharmap/unicode-i18n.h:157
-msgid "Low Surrogates"
-msgstr "하위 확장코드"
-
-#: gucharmap/unicode-i18n.h:158
-msgid "Private Use Area"
-msgstr "개인 사용 영역"
-
-#: gucharmap/unicode-i18n.h:159
-msgid "CJK Compatibility Ideographs"
-msgstr "한중일 호환 한자"
-
-#: gucharmap/unicode-i18n.h:160
-msgid "Alphabetic Presentation Forms"
-msgstr "알파벳 표시 꼴"
-
-#: gucharmap/unicode-i18n.h:161
-msgid "Arabic Presentation Forms-A"
-msgstr "아랍 문자 표시 꼴 A"
-
-#: gucharmap/unicode-i18n.h:162
-msgid "Variation Selectors"
-msgstr "여러가지 선택자"
-
-#: gucharmap/unicode-i18n.h:163
-msgid "Vertical Forms"
-msgstr "세로 모양"
-
-#: gucharmap/unicode-i18n.h:164
-msgid "Combining Half Marks"
-msgstr "조합 반각 표시"
-
-#: gucharmap/unicode-i18n.h:165
-msgid "CJK Compatibility Forms"
-msgstr "한중일 호환 꼴"
-
-#: gucharmap/unicode-i18n.h:166
-msgid "Small Form Variants"
-msgstr "작은꼴 변형"
-
-#: gucharmap/unicode-i18n.h:167
-msgid "Arabic Presentation Forms-B"
-msgstr "아랍 문자 표시 꼴 B"
-
-#: gucharmap/unicode-i18n.h:168
-msgid "Halfwidth and Fullwidth Forms"
-msgstr "반각 및 전각 꼴"
-
-#: gucharmap/unicode-i18n.h:169
-msgid "Specials"
-msgstr "특수 문자"
-
-#: gucharmap/unicode-i18n.h:170
-msgid "Linear B Syllabary"
-msgstr "선형 B 음절문자"
-
-#: gucharmap/unicode-i18n.h:171
-msgid "Linear B Ideograms"
-msgstr "선형 B 표의문자"
-
-#: gucharmap/unicode-i18n.h:172
-msgid "Aegean Numbers"
-msgstr "에게 숫자"
-
-#: gucharmap/unicode-i18n.h:173
-msgid "Ancient Greek Numbers"
-msgstr "고대 그리스 숫자"
-
-#: gucharmap/unicode-i18n.h:174
-msgid "Ancient Symbols"
-msgstr "고대 기호"
-
-#: gucharmap/unicode-i18n.h:175
-msgid "Phaistos Disc"
-msgstr "파이스토스 원판"
-
-#: gucharmap/unicode-i18n.h:176 gucharmap/unicode-i18n.h:411
-msgid "Lycian"
-msgstr "리키아 문자"
-
-#: gucharmap/unicode-i18n.h:177 gucharmap/unicode-i18n.h:353
-msgid "Carian"
-msgstr "카리 문자"
-
-# Epact - 태양력이 태음력보다 초과하는 날 수, 1월 1일에 달의 형태
-#: gucharmap/unicode-i18n.h:178
-msgid "Coptic Epact Numbers"
-msgstr "콥트어 이팩트 번호"
-
-#: gucharmap/unicode-i18n.h:179 gucharmap/unicode-i18n.h:442
-msgid "Old Italic"
-msgstr "고대 이탈리아 문자"
-
-#: gucharmap/unicode-i18n.h:180 gucharmap/unicode-i18n.h:376
-msgid "Gothic"
-msgstr "고트 문자"
-
-#: gucharmap/unicode-i18n.h:181 gucharmap/unicode-i18n.h:444
-msgid "Old Permic"
-msgstr "고대 페름어"
-
-#: gucharmap/unicode-i18n.h:182 gucharmap/unicode-i18n.h:490
-msgid "Ugaritic"
-msgstr "우가릿 문자"
-
-#: gucharmap/unicode-i18n.h:183 gucharmap/unicode-i18n.h:445
-msgid "Old Persian"
-msgstr "옛 페르시아 문자"
-
-#: gucharmap/unicode-i18n.h:184 gucharmap/unicode-i18n.h:365
-msgid "Deseret"
-msgstr "데저렛 문자"
-
-#: gucharmap/unicode-i18n.h:185 gucharmap/unicode-i18n.h:464
-msgid "Shavian"
-msgstr "쇼 문자"
-
-#: gucharmap/unicode-i18n.h:186 gucharmap/unicode-i18n.h:452
-msgid "Osmanya"
-msgstr "오스마냐 문자"
-
-# 아메리카 원주민 오세이지족의 언어를 표기하기 위한 문자
-#: gucharmap/unicode-i18n.h:187 gucharmap/unicode-i18n.h:451
-msgid "Osage"
-msgstr "오세이지 문자"
-
-#: gucharmap/unicode-i18n.h:188 gucharmap/unicode-i18n.h:371
-msgid "Elbasan"
-msgstr "엘바산 문자"
-
-# 중세에 있던 알바니아라는 국가를 현대의 알바니아와 구분하는 용어
-#: gucharmap/unicode-i18n.h:189 gucharmap/unicode-i18n.h:354
-msgid "Caucasian Albanian"
-msgstr "캅카스 알바니아 문자"
-
-#: gucharmap/unicode-i18n.h:190 gucharmap/unicode-i18n.h:493
-msgid "Vithkuqi"
-msgstr "비스쿠치 문자"
-
-#: gucharmap/unicode-i18n.h:191 gucharmap/unicode-i18n.h:408
-msgid "Linear A"
-msgstr "선형 A"
-
-#: gucharmap/unicode-i18n.h:192
-msgid "Latin Extended-F"
-msgstr "라틴문자 확장영역 F"
-
-#: gucharmap/unicode-i18n.h:193
 msgid "Cypriot Syllabary"
 msgstr "키프로스 음절표"
 
-#: gucharmap/unicode-i18n.h:194 gucharmap/unicode-i18n.h:389
-msgid "Imperial Aramaic"
-msgstr "황실 아람어 알파벳"
+#: gucharmap/unicode-i18n.h:82
+msgid "Cypro-Minoan"
+msgstr "키프로-미노아 문자"
 
-#: gucharmap/unicode-i18n.h:195 gucharmap/unicode-i18n.h:454
-msgid "Palmyrene"
-msgstr "팔미라 문자"
+#: gucharmap/unicode-i18n.h:83 gucharmap/unicode-i18n.h:374
+msgid "Cyrillic"
+msgstr "키릴 문자"
 
-#: gucharmap/unicode-i18n.h:196 gucharmap/unicode-i18n.h:432
-msgid "Nabataean"
-msgstr "나바테아 문자"
+#: gucharmap/unicode-i18n.h:84
+msgid "Cyrillic Extended-A"
+msgstr "키릴 문자 확장영역 A"
 
-# 이란 지역
-#: gucharmap/unicode-i18n.h:197 gucharmap/unicode-i18n.h:386
-msgid "Hatran"
-msgstr "하트란 문자"
+#: gucharmap/unicode-i18n.h:85
+msgid "Cyrillic Extended-B"
+msgstr "키릴 문자 확장영역 B"
 
-#: gucharmap/unicode-i18n.h:198 gucharmap/unicode-i18n.h:457
-msgid "Phoenician"
-msgstr "페니키아 문자"
+#: gucharmap/unicode-i18n.h:86
+msgid "Cyrillic Extended-C"
+msgstr "키릴 문자 확장영역 C"
 
-#: gucharmap/unicode-i18n.h:199 gucharmap/unicode-i18n.h:412
-msgid "Lydian"
-msgstr "리디아 문자"
+#: gucharmap/unicode-i18n.h:87
+msgid "Cyrillic Extended-D"
+msgstr "키릴 문자 확장영역 D"
 
-#: gucharmap/unicode-i18n.h:200 gucharmap/unicode-i18n.h:424
-msgid "Meroitic Hieroglyphs"
-msgstr "메로에 상형문자"
+#: gucharmap/unicode-i18n.h:88
+msgid "Cyrillic Supplement"
+msgstr "키릴 문자 추가영역"
 
-#: gucharmap/unicode-i18n.h:201 gucharmap/unicode-i18n.h:423
-msgid "Meroitic Cursive"
-msgstr "메로에 필기체"
+#: gucharmap/unicode-i18n.h:89 gucharmap/unicode-i18n.h:375
+msgid "Deseret"
+msgstr "데저렛 문자"
 
-#: gucharmap/unicode-i18n.h:202 gucharmap/unicode-i18n.h:399
-msgid "Kharoshthi"
-msgstr "카로시디 문자"
+#: gucharmap/unicode-i18n.h:90 gucharmap/unicode-i18n.h:376
+msgid "Devanagari"
+msgstr "데바나가리 문자"
 
-#: gucharmap/unicode-i18n.h:203 gucharmap/unicode-i18n.h:447
-msgid "Old South Arabian"
-msgstr "고대 남아라비아 문자"
+#: gucharmap/unicode-i18n.h:91
+msgid "Devanagari Extended"
+msgstr "데바나가리 확장영역"
 
-#: gucharmap/unicode-i18n.h:204 gucharmap/unicode-i18n.h:443
-msgid "Old North Arabian"
-msgstr "고대 북아라비아 문자"
+#: gucharmap/unicode-i18n.h:92
+msgid "Devanagari Extended-A"
+msgstr "데바나가리 확장영역 A"
 
-#: gucharmap/unicode-i18n.h:205 gucharmap/unicode-i18n.h:417
-msgid "Manichaean"
-msgstr "마니교 문자"
+#: gucharmap/unicode-i18n.h:93
+msgid "Dingbats"
+msgstr "딩뱃 기호"
 
-#: gucharmap/unicode-i18n.h:206 gucharmap/unicode-i18n.h:340
-msgid "Avestan"
-msgstr "아베스탄어"
+#: gucharmap/unicode-i18n.h:94 gucharmap/unicode-i18n.h:377
+msgid "Dives Akuru"
+msgstr "디베스 아쿠루 문자"
 
-#: gucharmap/unicode-i18n.h:207 gucharmap/unicode-i18n.h:392
-msgid "Inscriptional Parthian"
-msgstr "파르티아어 새김 문자"
+# The Dogra script is historically associated with the Dogri language
+#: gucharmap/unicode-i18n.h:95 gucharmap/unicode-i18n.h:378
+msgid "Dogra"
+msgstr "도그라 문자"
 
-#: gucharmap/unicode-i18n.h:208 gucharmap/unicode-i18n.h:391
-msgid "Inscriptional Pahlavi"
-msgstr "팔레비어 새김 문자"
+#: gucharmap/unicode-i18n.h:96
+msgid "Domino Tiles"
+msgstr "도미노 타일"
 
-# 시편(Psalter)으로 발견된 팔레비어 문자
-#: gucharmap/unicode-i18n.h:209 gucharmap/unicode-i18n.h:458
-msgid "Psalter Pahlavi"
-msgstr "시편 팔레비어 문자"
+#: gucharmap/unicode-i18n.h:97 gucharmap/unicode-i18n.h:379
+msgid "Duployan"
+msgstr "듀플로이언 속기 문자"
 
-#: gucharmap/unicode-i18n.h:210 gucharmap/unicode-i18n.h:448
-msgid "Old Turkic"
-msgstr "고대 튀르크 문자"
+#: gucharmap/unicode-i18n.h:98
+msgid "Early Dynastic Cuneiform"
+msgstr "초기 왕조 쐐기 문자"
 
-#: gucharmap/unicode-i18n.h:211 gucharmap/unicode-i18n.h:441
-msgid "Old Hungarian"
-msgstr "옛 헝가리 문자"
+#: gucharmap/unicode-i18n.h:99
+msgid "Egyptian Hieroglyph Format Controls"
+msgstr "고대 이집트 신성문자 형식 제어 문자"
 
-# 1980년대 이슬람학자인 모하마드 하니프가 로힝야족의 언어를 연구해 개발한 문자 '하니프 로힝야(Hanifi Rohingya)'
-#: gucharmap/unicode-i18n.h:212 gucharmap/unicode-i18n.h:384
-msgid "Hanifi Rohingya"
-msgstr "하니피 로힝야 문자"
+#: gucharmap/unicode-i18n.h:100 gucharmap/unicode-i18n.h:380
+msgid "Egyptian Hieroglyphs"
+msgstr "고대 이집트 신성문자"
 
-#: gucharmap/unicode-i18n.h:213
-msgid "Rumi Numeral Symbols"
-msgstr "루미 숫자 기호"
+#: gucharmap/unicode-i18n.h:101
+msgid "Egyptian Hieroglyphs Extended-A"
+msgstr "고대 이집트 신성문자 확장영역 A"
 
-#: gucharmap/unicode-i18n.h:214 gucharmap/unicode-i18n.h:496
-msgid "Yezidi"
-msgstr "야지디 문자"
+#: gucharmap/unicode-i18n.h:102 gucharmap/unicode-i18n.h:381
+msgid "Elbasan"
+msgstr "엘바산 문자"
 
-#: gucharmap/unicode-i18n.h:215
-msgid "Arabic Extended-C"
-msgstr "아랍 문자 확장영역 C"
-
-#: gucharmap/unicode-i18n.h:216 gucharmap/unicode-i18n.h:446
-msgid "Old Sogdian"
-msgstr "고대 소그드 문자"
-
-#: gucharmap/unicode-i18n.h:217 gucharmap/unicode-i18n.h:468
-msgid "Sogdian"
-msgstr "소그드 문자"
-
-#: gucharmap/unicode-i18n.h:218 gucharmap/unicode-i18n.h:449
-msgid "Old Uyghur"
-msgstr "고대 위구르 문자"
-
-#: gucharmap/unicode-i18n.h:219 gucharmap/unicode-i18n.h:358
-msgid "Chorasmian"
-msgstr "호라즘 문자"
-
-#: gucharmap/unicode-i18n.h:220 gucharmap/unicode-i18n.h:372
+#: gucharmap/unicode-i18n.h:103 gucharmap/unicode-i18n.h:382
 msgid "Elymaic"
 msgstr "엘리마이스 문자"
 
-#: gucharmap/unicode-i18n.h:221 gucharmap/unicode-i18n.h:348
-msgid "Brahmi"
-msgstr "브라흐미 문자"
+#: gucharmap/unicode-i18n.h:104
+msgid "Emoticons"
+msgstr "이모티콘"
+
+#: gucharmap/unicode-i18n.h:105
+msgid "Enclosed Alphanumeric Supplement"
+msgstr "괄호 영문자 및 숫자 추가영역"
+
+#: gucharmap/unicode-i18n.h:106
+msgid "Enclosed Alphanumerics"
+msgstr "괄호 영문자"
+
+#: gucharmap/unicode-i18n.h:107
+msgid "Enclosed CJK Letters and Months"
+msgstr "한중일 둘러싼 문자 및 날짜 기호"
+
+#: gucharmap/unicode-i18n.h:108
+msgid "Enclosed Ideographic Supplement"
+msgstr "괄호 한자 추가영역"
+
+#: gucharmap/unicode-i18n.h:109 gucharmap/unicode-i18n.h:383
+msgid "Ethiopic"
+msgstr "에티오피아 문자"
+
+#: gucharmap/unicode-i18n.h:110
+msgid "Ethiopic Extended"
+msgstr "에티오피아 문자 확장영역"
+
+#: gucharmap/unicode-i18n.h:111
+msgid "Ethiopic Extended-A"
+msgstr "에티오피아 문자 확장영역 A"
+
+#: gucharmap/unicode-i18n.h:112
+msgid "Ethiopic Extended-B"
+msgstr "에티오피아 문자 확장영역 B"
+
+#: gucharmap/unicode-i18n.h:113
+msgid "Ethiopic Supplement"
+msgstr "에티오피아 문자 추가영역"
+
+#: gucharmap/unicode-i18n.h:114 gucharmap/unicode-i18n.h:384
+msgid "Garay"
+msgstr "가라이 문자"
+
+#: gucharmap/unicode-i18n.h:115
+msgid "General Punctuation"
+msgstr "일반 문장 부호"
+
+#: gucharmap/unicode-i18n.h:116
+msgid "Geometric Shapes"
+msgstr "도형"
+
+#: gucharmap/unicode-i18n.h:117
+msgid "Geometric Shapes Extended"
+msgstr "도형 확장영역"
+
+#: gucharmap/unicode-i18n.h:118 gucharmap/unicode-i18n.h:385
+msgid "Georgian"
+msgstr "그루지야 문자"
+
+#: gucharmap/unicode-i18n.h:119
+msgid "Georgian Extended"
+msgstr "그루지야 문자 확장영역"
+
+#: gucharmap/unicode-i18n.h:120
+msgid "Georgian Supplement"
+msgstr "그루지야 문자 추가영역"
+
+# 고대 슬라브어를 적는 데 쓰였던 음소 문자
+#: gucharmap/unicode-i18n.h:121 gucharmap/unicode-i18n.h:386
+msgid "Glagolitic"
+msgstr "글라골루 문자"
+
+# 고대 슬라브어를 적는 데 쓰였던 음소 문자
+#: gucharmap/unicode-i18n.h:122
+msgid "Glagolitic Supplement"
+msgstr "글라골루 문자 추가영역"
+
+#: gucharmap/unicode-i18n.h:123 gucharmap/unicode-i18n.h:387
+msgid "Gothic"
+msgstr "고트 문자"
+
+# 인도
+#: gucharmap/unicode-i18n.h:124 gucharmap/unicode-i18n.h:388
+msgid "Grantha"
+msgstr "그랜사 문자"
+
+#: gucharmap/unicode-i18n.h:125
+msgid "Greek Extended"
+msgstr "그리스 문자 확장영역"
+
+#: gucharmap/unicode-i18n.h:126
+msgid "Greek and Coptic"
+msgstr "그리스 문자 및 콥트 문자"
+
+#: gucharmap/unicode-i18n.h:127 gucharmap/unicode-i18n.h:390
+msgid "Gujarati"
+msgstr "구자라트 문자"
+
+#: gucharmap/unicode-i18n.h:128 gucharmap/unicode-i18n.h:391
+msgid "Gunjala Gondi"
+msgstr "건잘라 곤디 문자"
+
+#: gucharmap/unicode-i18n.h:129 gucharmap/unicode-i18n.h:392
+msgid "Gurmukhi"
+msgstr "구르무키 문자"
+
+#: gucharmap/unicode-i18n.h:130 gucharmap/unicode-i18n.h:393
+msgid "Gurung Khema"
+msgstr "구룽 케마 문자"
+
+#: gucharmap/unicode-i18n.h:131
+msgid "Halfwidth and Fullwidth Forms"
+msgstr "반각 및 전각 꼴"
+
+#: gucharmap/unicode-i18n.h:132
+msgid "Hangul Compatibility Jamo"
+msgstr "한글 호환 자모"
+
+#: gucharmap/unicode-i18n.h:133
+msgid "Hangul Jamo"
+msgstr "한글 자모"
+
+#: gucharmap/unicode-i18n.h:134
+msgid "Hangul Jamo Extended-A"
+msgstr "한글 자모 확장영역 A"
+
+#: gucharmap/unicode-i18n.h:135
+msgid "Hangul Jamo Extended-B"
+msgstr "한글 자모 확장영역 B"
+
+#: gucharmap/unicode-i18n.h:136
+msgid "Hangul Syllables"
+msgstr "한글 음절"
+
+# 1980년대 이슬람학자인 모하마드 하니프가 로힝야족의 언어를 연구해 개발한 문자 '하니프 로힝야(Hanifi Rohingya)'
+#: gucharmap/unicode-i18n.h:137 gucharmap/unicode-i18n.h:396
+msgid "Hanifi Rohingya"
+msgstr "하니피 로힝야 문자"
+
+#: gucharmap/unicode-i18n.h:138 gucharmap/unicode-i18n.h:397
+msgid "Hanunoo"
+msgstr "하누누 문자"
+
+# 이란 지역
+#: gucharmap/unicode-i18n.h:139 gucharmap/unicode-i18n.h:398
+msgid "Hatran"
+msgstr "하트란 문자"
+
+#: gucharmap/unicode-i18n.h:140 gucharmap/unicode-i18n.h:399
+msgid "Hebrew"
+msgstr "히브리 문자"
+
+#: gucharmap/unicode-i18n.h:141
+msgid "High Private Use Surrogates"
+msgstr "개인용 상위 확장코드"
+
+#: gucharmap/unicode-i18n.h:142
+msgid "High Surrogates"
+msgstr "상위 확장코드"
+
+#: gucharmap/unicode-i18n.h:143 gucharmap/unicode-i18n.h:400
+msgid "Hiragana"
+msgstr "히라가나"
+
+#: gucharmap/unicode-i18n.h:144
+msgid "IPA Extensions"
+msgstr "국제 음표 문자 확장영역"
+
+#: gucharmap/unicode-i18n.h:145
+msgid "Ideographic Description Characters"
+msgstr "한자 기술 문자"
+
+# 서하문자(西夏文字, Tangut Block)
+#: gucharmap/unicode-i18n.h:146
+msgid "Ideographic Symbols and Punctuation"
+msgstr "표의문자용 기호 및 구두 기호"
+
+#: gucharmap/unicode-i18n.h:147 gucharmap/unicode-i18n.h:401
+msgid "Imperial Aramaic"
+msgstr "황실 아람어 알파벳"
+
+# the Indic Siyaq Numbers are a specialized subset of the Arabic script that was used for accounting and in general for recording numbers https://www.unicode.org/L2/L2015/15121r2-indic-siyaq.pdf
+#: gucharmap/unicode-i18n.h:148
+msgid "Indic Siyaq Numbers"
+msgstr "인도 시야크 숫자"
+
+#: gucharmap/unicode-i18n.h:149 gucharmap/unicode-i18n.h:403
+msgid "Inscriptional Pahlavi"
+msgstr "팔레비어 새김 문자"
+
+#: gucharmap/unicode-i18n.h:150 gucharmap/unicode-i18n.h:404
+msgid "Inscriptional Parthian"
+msgstr "파르티아어 새김 문자"
+
+# 인도네시아
+#: gucharmap/unicode-i18n.h:151 gucharmap/unicode-i18n.h:405
+msgid "Javanese"
+msgstr "자와어"
 
 # 북 인도 문자
-#: gucharmap/unicode-i18n.h:222 gucharmap/unicode-i18n.h:394
+#: gucharmap/unicode-i18n.h:152 gucharmap/unicode-i18n.h:406
 msgid "Kaithi"
 msgstr "카이시 문자"
 
-# 인도
-#: gucharmap/unicode-i18n.h:223 gucharmap/unicode-i18n.h:469
-msgid "Sora Sompeng"
-msgstr "소라 솜펭 문자"
+#: gucharmap/unicode-i18n.h:153
+msgid "Kaktovik Numerals"
+msgstr "칵토빅 숫자"
+
+#: gucharmap/unicode-i18n.h:154
+msgid "Kana Extended-A"
+msgstr "가나 확장영역 A"
+
+#: gucharmap/unicode-i18n.h:155
+msgid "Kana Extended-B"
+msgstr "가나 확장영역 B"
+
+#: gucharmap/unicode-i18n.h:156
+msgid "Kana Supplement"
+msgstr "가나 추가영역"
+
+# 중국어 텍스트를 이해하기 쉽도록 주석을 다는 일본식 표기
+# http://en.wikipedia.org/wiki/Kanbun#Unicode_kanbun
+#: gucharmap/unicode-i18n.h:157
+msgid "Kanbun"
+msgstr "간분"
+
+#: gucharmap/unicode-i18n.h:158
+msgid "Kangxi Radicals"
+msgstr "강희자전 부수"
+
+#: gucharmap/unicode-i18n.h:159 gucharmap/unicode-i18n.h:407
+msgid "Kannada"
+msgstr "칸나다 문자"
+
+#: gucharmap/unicode-i18n.h:160 gucharmap/unicode-i18n.h:408
+msgid "Katakana"
+msgstr "카타카나"
+
+#: gucharmap/unicode-i18n.h:161
+msgid "Katakana Phonetic Extensions"
+msgstr "카타카나 발음 확장영역"
+
+#: gucharmap/unicode-i18n.h:162 gucharmap/unicode-i18n.h:409
+msgid "Kawi"
+msgstr "카위 문자"
+
+#: gucharmap/unicode-i18n.h:163 gucharmap/unicode-i18n.h:410
+msgid "Kayah Li"
+msgstr "카야 리 문자"
+
+#: gucharmap/unicode-i18n.h:164 gucharmap/unicode-i18n.h:411
+msgid "Kharoshthi"
+msgstr "카로시디 문자"
+
+#: gucharmap/unicode-i18n.h:165 gucharmap/unicode-i18n.h:412
+msgid "Khitan Small Script"
+msgstr "거란 소자"
+
+#: gucharmap/unicode-i18n.h:166 gucharmap/unicode-i18n.h:413
+msgid "Khmer"
+msgstr "크메르 문자"
+
+#: gucharmap/unicode-i18n.h:167
+msgid "Khmer Symbols"
+msgstr "크메르 기호"
 
 # 인도
-#: gucharmap/unicode-i18n.h:224 gucharmap/unicode-i18n.h:355
-msgid "Chakma"
-msgstr "차크마 문자"
-
-# 인도
-#: gucharmap/unicode-i18n.h:225 gucharmap/unicode-i18n.h:413
-msgid "Mahajani"
-msgstr "마하자니 문자"
-
-# 인도
-#: gucharmap/unicode-i18n.h:226 gucharmap/unicode-i18n.h:463
-msgid "Sharada"
-msgstr "샤라다 문자"
-
-# 인도
-#: gucharmap/unicode-i18n.h:227
-msgid "Sinhala Archaic Numbers"
-msgstr "신할라 고대 숫자"
-
-# 인도
-#: gucharmap/unicode-i18n.h:228 gucharmap/unicode-i18n.h:402
+#: gucharmap/unicode-i18n.h:168 gucharmap/unicode-i18n.h:414
 msgid "Khojki"
 msgstr "코즈키 문자"
 
 # 인도
-#: gucharmap/unicode-i18n.h:229 gucharmap/unicode-i18n.h:429
-msgid "Multani"
-msgstr "물타니 문자"
-
-# 인도
-#: gucharmap/unicode-i18n.h:230 gucharmap/unicode-i18n.h:403
+#: gucharmap/unicode-i18n.h:169 gucharmap/unicode-i18n.h:415
 msgid "Khudawadi"
 msgstr "쿠다와디 문자"
 
-# 인도
-#: gucharmap/unicode-i18n.h:231 gucharmap/unicode-i18n.h:377
-msgid "Grantha"
-msgstr "그랜사 문자"
+#: gucharmap/unicode-i18n.h:170 gucharmap/unicode-i18n.h:416
+msgid "Kirat Rai"
+msgstr "키랏 라이 문자"
 
-# 네팔에서 사용하는 네와르어의 문자(newa alphabet)
-#: gucharmap/unicode-i18n.h:232 gucharmap/unicode-i18n.h:436
-msgid "Newa"
-msgstr "네와 문자"
+#: gucharmap/unicode-i18n.h:171 gucharmap/unicode-i18n.h:417
+msgid "Lao"
+msgstr "라오 문자"
 
-# 인도
-#: gucharmap/unicode-i18n.h:233 gucharmap/unicode-i18n.h:488
-msgid "Tirhuta"
-msgstr "티르후타 문자"
+#: gucharmap/unicode-i18n.h:172
+msgid "Latin Extended Additional"
+msgstr "라틴 확장 추가영역"
 
-# 인도
-#: gucharmap/unicode-i18n.h:234 gucharmap/unicode-i18n.h:465
-msgid "Siddham"
-msgstr "시드햄 문자"
+#: gucharmap/unicode-i18n.h:173
+msgid "Latin Extended-A"
+msgstr "라틴문자 확장영역 A"
 
-# 인도
-#: gucharmap/unicode-i18n.h:235 gucharmap/unicode-i18n.h:426
-msgid "Modi"
-msgstr "모디 문자"
+#: gucharmap/unicode-i18n.h:174
+msgid "Latin Extended-B"
+msgstr "라틴문자 확장영역 B"
 
-#: gucharmap/unicode-i18n.h:236
-msgid "Mongolian Supplement"
-msgstr "몽골 문자 추가영역"
+#: gucharmap/unicode-i18n.h:175
+msgid "Latin Extended-C"
+msgstr "라틴문자 확장영역 C"
 
-# 인도
-#: gucharmap/unicode-i18n.h:237 gucharmap/unicode-i18n.h:479
-msgid "Takri"
-msgstr "타크리 문자"
+#: gucharmap/unicode-i18n.h:176
+msgid "Latin Extended-D"
+msgstr "라틴문자 확장영역 D"
 
-# 인도
-#: gucharmap/unicode-i18n.h:238 gucharmap/unicode-i18n.h:336
-msgid "Ahom"
-msgstr "아홈 문자"
+#: gucharmap/unicode-i18n.h:177
+msgid "Latin Extended-E"
+msgstr "라틴문자 확장영역 E"
 
-# The Dogra script is historically associated with the Dogri language
-#: gucharmap/unicode-i18n.h:239 gucharmap/unicode-i18n.h:368
-msgid "Dogra"
-msgstr "도그라 문자"
+#: gucharmap/unicode-i18n.h:178
+msgid "Latin Extended-F"
+msgstr "라틴문자 확장영역 F"
 
-# 인도
-#: gucharmap/unicode-i18n.h:240 gucharmap/unicode-i18n.h:495
-msgid "Warang Citi"
-msgstr "바랑 크시티 문자"
+#: gucharmap/unicode-i18n.h:179
+msgid "Latin Extended-G"
+msgstr "라틴문자 확장영역 G"
 
-#: gucharmap/unicode-i18n.h:241 gucharmap/unicode-i18n.h:367
-msgid "Dives Akuru"
-msgstr "디베스 아쿠루 문자"
+#: gucharmap/unicode-i18n.h:180
+msgid "Latin-1 Supplement"
+msgstr "라틴-1 문자 추가영역"
 
-#: gucharmap/unicode-i18n.h:242 gucharmap/unicode-i18n.h:434
-msgid "Nandinagari"
-msgstr "난디나가리 문자"
+#: gucharmap/unicode-i18n.h:181 gucharmap/unicode-i18n.h:419
+msgid "Lepcha"
+msgstr "레프차 문자"
 
-#: gucharmap/unicode-i18n.h:243 gucharmap/unicode-i18n.h:498
-msgid "Zanabazar Square"
-msgstr "자나바자르 정방형 문자"
+#: gucharmap/unicode-i18n.h:182
+msgid "Letterlike Symbols"
+msgstr "문자 모양 기호"
 
-# 소욤보는 몽골인의 문자인 소욤보 문자로 구성
-#: gucharmap/unicode-i18n.h:244 gucharmap/unicode-i18n.h:470
-msgid "Soyombo"
-msgstr "소욤보 문자"
+#: gucharmap/unicode-i18n.h:183 gucharmap/unicode-i18n.h:420
+msgid "Limbu"
+msgstr "림부 문자"
 
-#: gucharmap/unicode-i18n.h:245
-msgid "Unified Canadian Aboriginal Syllabics Extended-A"
-msgstr "통합 캐나다 원주민 음절 확장영역 A"
+#: gucharmap/unicode-i18n.h:184 gucharmap/unicode-i18n.h:421
+msgid "Linear A"
+msgstr "선형 A"
 
-#: gucharmap/unicode-i18n.h:246 gucharmap/unicode-i18n.h:455
-msgid "Pau Cin Hau"
-msgstr "파우 킨 하우 문자"
+#: gucharmap/unicode-i18n.h:185
+msgid "Linear B Ideograms"
+msgstr "선형 B 표의문자"
 
-#: gucharmap/unicode-i18n.h:247
-msgid "Devanagari Extended-A"
-msgstr "데바나가리 확장영역 A"
+#: gucharmap/unicode-i18n.h:186
+msgid "Linear B Syllabary"
+msgstr "선형 B 음절문자"
 
-#: gucharmap/unicode-i18n.h:248 gucharmap/unicode-i18n.h:346
-msgid "Bhaiksuki"
-msgstr "바이크수키 문자"
+#: gucharmap/unicode-i18n.h:187 gucharmap/unicode-i18n.h:423
+msgid "Lisu"
+msgstr "리수 문자"
 
-# 티베트 북부지방에서 사용하던  샹슝(象雄,zhang-zhung)왕국의 고대문자. 샹슝 문자라고도 부름. 사어(死語)
-#: gucharmap/unicode-i18n.h:249 gucharmap/unicode-i18n.h:418
-msgid "Marchen"
-msgstr "샹슝 문자"
-
-#: gucharmap/unicode-i18n.h:250 gucharmap/unicode-i18n.h:419
-msgid "Masaram Gondi"
-msgstr "마사람 곤디 문자"
-
-#: gucharmap/unicode-i18n.h:251 gucharmap/unicode-i18n.h:380
-msgid "Gunjala Gondi"
-msgstr "건잘라 곤디 문자"
-
-#: gucharmap/unicode-i18n.h:252 gucharmap/unicode-i18n.h:414
-msgid "Makasar"
-msgstr "마카사르 문자"
-
-#: gucharmap/unicode-i18n.h:253 gucharmap/unicode-i18n.h:397
-msgid "Kawi"
-msgstr "카위 문자"
-
-#: gucharmap/unicode-i18n.h:254
+#: gucharmap/unicode-i18n.h:188
 msgid "Lisu Supplement"
 msgstr "리수 문자 추가영역"
 
-#: gucharmap/unicode-i18n.h:255
-msgid "Tamil Supplement"
-msgstr "타밀 문자 추가영역"
+#: gucharmap/unicode-i18n.h:189
+msgid "Low Surrogates"
+msgstr "하위 확장코드"
 
-#: gucharmap/unicode-i18n.h:256 gucharmap/unicode-i18n.h:361
-msgid "Cuneiform"
-msgstr "설형 문자"
+#: gucharmap/unicode-i18n.h:190 gucharmap/unicode-i18n.h:424
+msgid "Lycian"
+msgstr "리키아 문자"
 
-#: gucharmap/unicode-i18n.h:257
-msgid "Cuneiform Numbers and Punctuation"
-msgstr "설형 숫자및 구두기호"
+#: gucharmap/unicode-i18n.h:191 gucharmap/unicode-i18n.h:425
+msgid "Lydian"
+msgstr "리디아 문자"
 
-#: gucharmap/unicode-i18n.h:258
-msgid "Early Dynastic Cuneiform"
-msgstr "초기 왕조 쐐기 문자"
+# 인도
+#: gucharmap/unicode-i18n.h:192 gucharmap/unicode-i18n.h:426
+msgid "Mahajani"
+msgstr "마하자니 문자"
 
-#: gucharmap/unicode-i18n.h:259
-msgid "Cypro-Minoan"
-msgstr "키프로-미노아 문자"
+#: gucharmap/unicode-i18n.h:193
+msgid "Mahjong Tiles"
+msgstr "마작 타일"
 
-#: gucharmap/unicode-i18n.h:260 gucharmap/unicode-i18n.h:370
-msgid "Egyptian Hieroglyphs"
-msgstr "고대 이집트 신성문자"
+#: gucharmap/unicode-i18n.h:194 gucharmap/unicode-i18n.h:427
+msgid "Makasar"
+msgstr "마카사르 문자"
 
-#: gucharmap/unicode-i18n.h:261
-msgid "Egyptian Hieroglyph Format Controls"
-msgstr "고대 이집트 신성문자 형식 제어 문자"
+#: gucharmap/unicode-i18n.h:195 gucharmap/unicode-i18n.h:428
+msgid "Malayalam"
+msgstr "말라얌람 문자"
 
-# 현재 터키 지역
-#: gucharmap/unicode-i18n.h:262 gucharmap/unicode-i18n.h:337
-msgid "Anatolian Hieroglyphs"
-msgstr "아나톨리아 상형문자"
+#: gucharmap/unicode-i18n.h:196 gucharmap/unicode-i18n.h:429
+msgid "Mandaic"
+msgstr "만다르어 문자"
 
-#: gucharmap/unicode-i18n.h:263
-msgid "Bamum Supplement"
-msgstr "바뭄어 문자 추가영역"
+#: gucharmap/unicode-i18n.h:197 gucharmap/unicode-i18n.h:430
+msgid "Manichaean"
+msgstr "마니교 문자"
 
-#: gucharmap/unicode-i18n.h:264 gucharmap/unicode-i18n.h:428
-msgid "Mro"
-msgstr "므로 문자"
+# 티베트 북부지방에서 사용하던  샹슝(象雄,zhang-zhung)왕국의 고대문자. 샹슝 문자라고도 부름. 사어(死語)
+#: gucharmap/unicode-i18n.h:198 gucharmap/unicode-i18n.h:431
+msgid "Marchen"
+msgstr "샹슝 문자"
 
-#: gucharmap/unicode-i18n.h:265 gucharmap/unicode-i18n.h:481
-msgid "Tangsa"
-msgstr "탕사 문자"
+#: gucharmap/unicode-i18n.h:199 gucharmap/unicode-i18n.h:432
+msgid "Masaram Gondi"
+msgstr "마사람 곤디 문자"
 
-#: gucharmap/unicode-i18n.h:266 gucharmap/unicode-i18n.h:343
-msgid "Bassa Vah"
-msgstr "바사 문자"
+#: gucharmap/unicode-i18n.h:200
+msgid "Mathematical Alphanumeric Symbols"
+msgstr "수학용 알파벳, 숫자 기호"
 
-#: gucharmap/unicode-i18n.h:267 gucharmap/unicode-i18n.h:453
-msgid "Pahawh Hmong"
-msgstr "파하우몽 문자"
+#: gucharmap/unicode-i18n.h:201
+msgid "Mathematical Operators"
+msgstr "수학 연산자"
+
+#: gucharmap/unicode-i18n.h:202
+msgid "Mayan Numerals"
+msgstr "마야 숫자"
 
 # Oberi Okaime,The Medefaidrin script was created for an artificial language Medefaidrin
-#: gucharmap/unicode-i18n.h:268 gucharmap/unicode-i18n.h:420
+#: gucharmap/unicode-i18n.h:203 gucharmap/unicode-i18n.h:433
 msgid "Medefaidrin"
 msgstr "메데파이드린 문자"
 
-#: gucharmap/unicode-i18n.h:269 gucharmap/unicode-i18n.h:425
+#: gucharmap/unicode-i18n.h:204 gucharmap/unicode-i18n.h:434
+msgid "Meetei Mayek"
+msgstr "메이테이 문자"
+
+#: gucharmap/unicode-i18n.h:205
+msgid "Meetei Mayek Extensions"
+msgstr "메이테이 문자 확장영역"
+
+#: gucharmap/unicode-i18n.h:206 gucharmap/unicode-i18n.h:435
+msgid "Mende Kikakui"
+msgstr "멘데어 키카쿠이 문자"
+
+#: gucharmap/unicode-i18n.h:207 gucharmap/unicode-i18n.h:436
+msgid "Meroitic Cursive"
+msgstr "메로에 필기체"
+
+#: gucharmap/unicode-i18n.h:208 gucharmap/unicode-i18n.h:437
+msgid "Meroitic Hieroglyphs"
+msgstr "메로에 상형문자"
+
+#: gucharmap/unicode-i18n.h:209 gucharmap/unicode-i18n.h:438
 msgid "Miao"
 msgstr "먀오 문자"
 
-# 서하문자(西夏文字, Tangut Block)
-#: gucharmap/unicode-i18n.h:270
-msgid "Ideographic Symbols and Punctuation"
-msgstr "표의문자용 기호 및 구두 기호"
+#: gucharmap/unicode-i18n.h:210
+msgid "Miscellaneous Mathematical Symbols-A"
+msgstr "여러가지 수학기호 A"
+
+#: gucharmap/unicode-i18n.h:211
+msgid "Miscellaneous Mathematical Symbols-B"
+msgstr "여러가지 수학기호 B"
+
+#: gucharmap/unicode-i18n.h:212
+msgid "Miscellaneous Symbols"
+msgstr "여러가지 기호"
+
+#: gucharmap/unicode-i18n.h:213
+msgid "Miscellaneous Symbols and Arrows"
+msgstr "여러가지 기호 및 화살표"
+
+#: gucharmap/unicode-i18n.h:214
+msgid "Miscellaneous Symbols and Pictographs"
+msgstr "여러가지 기호 및 그림 문자"
+
+#: gucharmap/unicode-i18n.h:215
+msgid "Miscellaneous Technical"
+msgstr "여러가지 기타 서술 기호"
+
+# 인도
+#: gucharmap/unicode-i18n.h:216 gucharmap/unicode-i18n.h:439
+msgid "Modi"
+msgstr "모디 문자"
+
+#: gucharmap/unicode-i18n.h:217
+msgid "Modifier Tone Letters"
+msgstr "변조 성조 문자"
+
+#: gucharmap/unicode-i18n.h:218 gucharmap/unicode-i18n.h:440
+msgid "Mongolian"
+msgstr "몽골 문자"
+
+#: gucharmap/unicode-i18n.h:219
+msgid "Mongolian Supplement"
+msgstr "몽골 문자 추가영역"
+
+#: gucharmap/unicode-i18n.h:220 gucharmap/unicode-i18n.h:441
+msgid "Mro"
+msgstr "므로 문자"
+
+# 인도
+#: gucharmap/unicode-i18n.h:221 gucharmap/unicode-i18n.h:442
+msgid "Multani"
+msgstr "물타니 문자"
+
+#: gucharmap/unicode-i18n.h:222
+msgid "Musical Symbols"
+msgstr "음악 기호"
+
+#: gucharmap/unicode-i18n.h:223 gucharmap/unicode-i18n.h:443
+msgid "Myanmar"
+msgstr "미얀마 문자"
+
+#: gucharmap/unicode-i18n.h:224
+msgid "Myanmar Extended-A"
+msgstr "미얀마 확장영역 A"
+
+#: gucharmap/unicode-i18n.h:225
+msgid "Myanmar Extended-B"
+msgstr "미얀마 확장영역 B"
+
+#: gucharmap/unicode-i18n.h:226
+msgid "Myanmar Extended-C"
+msgstr "미얀마 확장영역 C"
+
+#: gucharmap/unicode-i18n.h:227 gucharmap/unicode-i18n.h:444
+msgid "N'Ko"
+msgstr "은코 문자"
+
+#: gucharmap/unicode-i18n.h:228 gucharmap/unicode-i18n.h:445
+msgid "Nabataean"
+msgstr "나바테아 문자"
+
+#: gucharmap/unicode-i18n.h:229 gucharmap/unicode-i18n.h:446
+msgid "Nag Mundari"
+msgstr "나그 문다리 문자"
+
+#: gucharmap/unicode-i18n.h:230 gucharmap/unicode-i18n.h:447
+msgid "Nandinagari"
+msgstr "난디나가리 문자"
+
+#: gucharmap/unicode-i18n.h:231 gucharmap/unicode-i18n.h:448
+msgid "New Tai Lue"
+msgstr "신 타이 루에"
+
+# 네팔에서 사용하는 네와르어의 문자(newa alphabet)
+#: gucharmap/unicode-i18n.h:232 gucharmap/unicode-i18n.h:449
+msgid "Newa"
+msgstr "네와 문자"
+
+#: gucharmap/unicode-i18n.h:233
+msgid "Number Forms"
+msgstr "여러가지 숫자"
+
+# 뉘수 문자(女书, 女書, Nǚshū) 음절 문자이며, 중국의 소수민족인 야오족 여성들만이 사용함.
+#: gucharmap/unicode-i18n.h:234 gucharmap/unicode-i18n.h:450
+msgid "Nushu"
+msgstr "뉘수 문자"
+
+#  ‘Genesis Complete Hmong script’; 출처: https://www.unicode.org/L2/L2017/17002r3-n4780r3-nyiakeng-puachue-hmong.pdf
+#: gucharmap/unicode-i18n.h:235 gucharmap/unicode-i18n.h:451
+msgid "Nyiakeng Puachue Hmong"
+msgstr "창세기 몽족 문자"
+
+#: gucharmap/unicode-i18n.h:236 gucharmap/unicode-i18n.h:452
+msgid "Ogham"
+msgstr "오검 문자"
+
+#: gucharmap/unicode-i18n.h:237 gucharmap/unicode-i18n.h:453
+msgid "Ol Chiki"
+msgstr "올 치키 문자"
+
+#: gucharmap/unicode-i18n.h:238 gucharmap/unicode-i18n.h:454
+msgid "Ol Onal"
+msgstr "올 오날 문자"
+
+#: gucharmap/unicode-i18n.h:239 gucharmap/unicode-i18n.h:455
+msgid "Old Hungarian"
+msgstr "옛 헝가리 문자"
+
+#: gucharmap/unicode-i18n.h:240 gucharmap/unicode-i18n.h:456
+msgid "Old Italic"
+msgstr "고대 이탈리아 문자"
+
+#: gucharmap/unicode-i18n.h:241 gucharmap/unicode-i18n.h:457
+msgid "Old North Arabian"
+msgstr "고대 북아라비아 문자"
+
+#: gucharmap/unicode-i18n.h:242 gucharmap/unicode-i18n.h:458
+msgid "Old Permic"
+msgstr "고대 페름어"
+
+#: gucharmap/unicode-i18n.h:243 gucharmap/unicode-i18n.h:459
+msgid "Old Persian"
+msgstr "옛 페르시아 문자"
+
+#: gucharmap/unicode-i18n.h:244 gucharmap/unicode-i18n.h:460
+msgid "Old Sogdian"
+msgstr "고대 소그드 문자"
+
+#: gucharmap/unicode-i18n.h:245 gucharmap/unicode-i18n.h:461
+msgid "Old South Arabian"
+msgstr "고대 남아라비아 문자"
+
+#: gucharmap/unicode-i18n.h:246 gucharmap/unicode-i18n.h:462
+msgid "Old Turkic"
+msgstr "고대 튀르크 문자"
+
+#: gucharmap/unicode-i18n.h:247 gucharmap/unicode-i18n.h:463
+msgid "Old Uyghur"
+msgstr "고대 위구르 문자"
+
+#: gucharmap/unicode-i18n.h:248
+msgid "Optical Character Recognition"
+msgstr "광학 인식 문자"
+
+#: gucharmap/unicode-i18n.h:249 gucharmap/unicode-i18n.h:464
+msgid "Oriya"
+msgstr "오리야 문자"
+
+#: gucharmap/unicode-i18n.h:250
+msgid "Ornamental Dingbats"
+msgstr "장식용 딩뱃 기호"
+
+# 아메리카 원주민 오세이지족의 언어를 표기하기 위한 문자
+#: gucharmap/unicode-i18n.h:251 gucharmap/unicode-i18n.h:465
+msgid "Osage"
+msgstr "오세이지 문자"
+
+#: gucharmap/unicode-i18n.h:252 gucharmap/unicode-i18n.h:466
+msgid "Osmanya"
+msgstr "오스마냐 문자"
+
+# the Indic Siyaq Numbers are a specialized subset of the Arabic script that was used for accounting and in general for recording numbers https://www.unicode.org/L2/L2015/15121r2-indic-siyaq.pdf
+#: gucharmap/unicode-i18n.h:253
+msgid "Ottoman Siyaq Numbers"
+msgstr "오스만 시야크 숫자"
+
+#: gucharmap/unicode-i18n.h:254 gucharmap/unicode-i18n.h:467
+msgid "Pahawh Hmong"
+msgstr "파하우몽 문자"
+
+#: gucharmap/unicode-i18n.h:255 gucharmap/unicode-i18n.h:468
+msgid "Palmyrene"
+msgstr "팔미라 문자"
+
+#: gucharmap/unicode-i18n.h:256 gucharmap/unicode-i18n.h:469
+msgid "Pau Cin Hau"
+msgstr "파우 킨 하우 문자"
+
+#: gucharmap/unicode-i18n.h:257
+msgid "Phags-pa"
+msgstr "파스파 문자"
+
+#: gucharmap/unicode-i18n.h:258
+msgid "Phaistos Disc"
+msgstr "파이스토스 원판"
+
+#: gucharmap/unicode-i18n.h:259 gucharmap/unicode-i18n.h:471
+msgid "Phoenician"
+msgstr "페니키아 문자"
+
+#: gucharmap/unicode-i18n.h:260
+msgid "Phonetic Extensions"
+msgstr "발음 확장영역"
+
+#: gucharmap/unicode-i18n.h:261
+msgid "Phonetic Extensions Supplement"
+msgstr "발음 확장 추가영역"
+
+#: gucharmap/unicode-i18n.h:262
+msgid "Playing Cards"
+msgstr "플레잉카드"
+
+#: gucharmap/unicode-i18n.h:263
+msgid "Private Use Area"
+msgstr "개인 사용 영역"
+
+# 시편(Psalter)으로 발견된 팔레비어 문자
+#: gucharmap/unicode-i18n.h:264 gucharmap/unicode-i18n.h:472
+msgid "Psalter Pahlavi"
+msgstr "시편 팔레비어 문자"
+
+#: gucharmap/unicode-i18n.h:265 gucharmap/unicode-i18n.h:473
+msgid "Rejang"
+msgstr "레장 문자"
+
+#: gucharmap/unicode-i18n.h:266
+msgid "Rumi Numeral Symbols"
+msgstr "루미 숫자 기호"
+
+#: gucharmap/unicode-i18n.h:267 gucharmap/unicode-i18n.h:474
+msgid "Runic"
+msgstr "룬 문자"
+
+#: gucharmap/unicode-i18n.h:268 gucharmap/unicode-i18n.h:475
+msgid "Samaritan"
+msgstr "사마리아 문자"
+
+#: gucharmap/unicode-i18n.h:269 gucharmap/unicode-i18n.h:476
+msgid "Saurashtra"
+msgstr "사우라슈트라 문자"
+
+# 인도
+#: gucharmap/unicode-i18n.h:270 gucharmap/unicode-i18n.h:477
+msgid "Sharada"
+msgstr "샤라다 문자"
+
+#: gucharmap/unicode-i18n.h:271 gucharmap/unicode-i18n.h:478
+msgid "Shavian"
+msgstr "쇼 문자"
+
+#: gucharmap/unicode-i18n.h:272
+msgid "Shorthand Format Controls"
+msgstr "속기 형식 컨트롤 문자"
+
+# 인도
+#: gucharmap/unicode-i18n.h:273 gucharmap/unicode-i18n.h:479
+msgid "Siddham"
+msgstr "시드햄 문자"
+
+#: gucharmap/unicode-i18n.h:274 gucharmap/unicode-i18n.h:481
+msgid "Sinhala"
+msgstr "신할라 문자"
+
+# 인도
+#: gucharmap/unicode-i18n.h:275
+msgid "Sinhala Archaic Numbers"
+msgstr "신할라 고대 숫자"
+
+#: gucharmap/unicode-i18n.h:276
+msgid "Small Form Variants"
+msgstr "작은꼴 변형"
+
+#: gucharmap/unicode-i18n.h:277
+msgid "Small Kana Extension"
+msgstr "작은 가나꼴 확장영역"
+
+#: gucharmap/unicode-i18n.h:278 gucharmap/unicode-i18n.h:482
+msgid "Sogdian"
+msgstr "소그드 문자"
+
+# 인도
+#: gucharmap/unicode-i18n.h:279 gucharmap/unicode-i18n.h:483
+msgid "Sora Sompeng"
+msgstr "소라 솜펭 문자"
+
+# 소욤보는 몽골인의 문자인 소욤보 문자로 구성
+#: gucharmap/unicode-i18n.h:280 gucharmap/unicode-i18n.h:484
+msgid "Soyombo"
+msgstr "소욤보 문자"
+
+#: gucharmap/unicode-i18n.h:281
+msgid "Spacing Modifier Letters"
+msgstr "간격 조정 문자"
+
+#: gucharmap/unicode-i18n.h:282
+msgid "Specials"
+msgstr "특수 문자"
+
+#: gucharmap/unicode-i18n.h:283 gucharmap/unicode-i18n.h:485
+msgid "Sundanese"
+msgstr "순다 문자"
+
+#: gucharmap/unicode-i18n.h:284
+msgid "Sundanese Supplement"
+msgstr "순다 문자 추가영역"
+
+#: gucharmap/unicode-i18n.h:285 gucharmap/unicode-i18n.h:486
+msgid "Sunuwar"
+msgstr "수누와르 문자"
+
+#: gucharmap/unicode-i18n.h:286
+msgid "Superscripts and Subscripts"
+msgstr "위첨자/아래첨자"
+
+#: gucharmap/unicode-i18n.h:287
+msgid "Supplemental Arrows-A"
+msgstr "화살표 추가영역 A"
+
+#: gucharmap/unicode-i18n.h:288
+msgid "Supplemental Arrows-B"
+msgstr "화살표 추가영역 B"
+
+#: gucharmap/unicode-i18n.h:289
+msgid "Supplemental Arrows-C"
+msgstr "화살표 추가영역 C"
+
+#: gucharmap/unicode-i18n.h:290
+msgid "Supplemental Mathematical Operators"
+msgstr "수학 연산자 추가영역"
+
+#: gucharmap/unicode-i18n.h:291
+msgid "Supplemental Punctuation"
+msgstr "추가 문장 부호"
+
+#: gucharmap/unicode-i18n.h:292
+msgid "Supplemental Symbols and Pictographs"
+msgstr "추가 기호 및 그림 문자"
+
+#: gucharmap/unicode-i18n.h:293
+msgid "Supplementary Private Use Area-A"
+msgstr "사용자 추가영역 A"
+
+#: gucharmap/unicode-i18n.h:294
+msgid "Supplementary Private Use Area-B"
+msgstr "사용자 추가영역 B"
+
+#: gucharmap/unicode-i18n.h:295
+msgid "Sutton SignWriting"
+msgstr "서튼 수화 표기"
+
+#: gucharmap/unicode-i18n.h:296 gucharmap/unicode-i18n.h:487
+msgid "Syloti Nagri"
+msgstr "실헤티 나가리"
+
+#: gucharmap/unicode-i18n.h:297
+msgid "Symbols and Pictographs Extended-A"
+msgstr "기호 및 그림 문자 확장영역 A"
+
+#: gucharmap/unicode-i18n.h:298
+msgid "Symbols for Legacy Computing"
+msgstr "레거시 컴퓨팅 기호"
+
+#: gucharmap/unicode-i18n.h:299
+msgid "Symbols for Legacy Computing Supplement"
+msgstr "레거시 컴퓨팅 기호 추가영역"
+
+#: gucharmap/unicode-i18n.h:300 gucharmap/unicode-i18n.h:488
+msgid "Syriac"
+msgstr "시리아 문자"
+
+#: gucharmap/unicode-i18n.h:301
+msgid "Syriac Supplement"
+msgstr "시리아 문자 추가영역"
+
+#: gucharmap/unicode-i18n.h:302 gucharmap/unicode-i18n.h:489
+msgid "Tagalog"
+msgstr "타갈로그 문자"
+
+#: gucharmap/unicode-i18n.h:303 gucharmap/unicode-i18n.h:490
+msgid "Tagbanwa"
+msgstr "타그반와 문자"
+
+#: gucharmap/unicode-i18n.h:304
+msgid "Tags"
+msgstr "태그"
+
+#: gucharmap/unicode-i18n.h:305 gucharmap/unicode-i18n.h:491
+msgid "Tai Le"
+msgstr "타이레 문자"
+
+# 태국 북부
+#: gucharmap/unicode-i18n.h:306 gucharmap/unicode-i18n.h:492
+msgid "Tai Tham"
+msgstr "타이삼 문자"
+
+# 태국
+#: gucharmap/unicode-i18n.h:307 gucharmap/unicode-i18n.h:493
+msgid "Tai Viet"
+msgstr "타이비엣 문자"
+
+#: gucharmap/unicode-i18n.h:308
+msgid "Tai Xuan Jing Symbols"
+msgstr "태현경 기호"
+
+# 인도
+#: gucharmap/unicode-i18n.h:309 gucharmap/unicode-i18n.h:494
+msgid "Takri"
+msgstr "타크리 문자"
+
+#: gucharmap/unicode-i18n.h:310 gucharmap/unicode-i18n.h:495
+msgid "Tamil"
+msgstr "타밀 문자"
+
+#: gucharmap/unicode-i18n.h:311
+msgid "Tamil Supplement"
+msgstr "타밀 문자 추가영역"
+
+#: gucharmap/unicode-i18n.h:312 gucharmap/unicode-i18n.h:496
+msgid "Tangsa"
+msgstr "탕사 문자"
 
 # 서하문자(西夏文字, Tangut Block)
-#: gucharmap/unicode-i18n.h:271 gucharmap/unicode-i18n.h:482
+#: gucharmap/unicode-i18n.h:313 gucharmap/unicode-i18n.h:497
 msgid "Tangut"
 msgstr "서하 문자"
 
 # 서하문자(西夏文字, Tangut Block)
-#: gucharmap/unicode-i18n.h:272
+#: gucharmap/unicode-i18n.h:314
 msgid "Tangut Components"
 msgstr "서하 문자 구성요소"
 
-#: gucharmap/unicode-i18n.h:273 gucharmap/unicode-i18n.h:400
-msgid "Khitan Small Script"
-msgstr "거란 소자"
-
-#: gucharmap/unicode-i18n.h:274
+#: gucharmap/unicode-i18n.h:315
 msgid "Tangut Supplement"
 msgstr "서하 문자 추가영역"
 
-#: gucharmap/unicode-i18n.h:275
-msgid "Kana Extended-B"
-msgstr "가나 확장영역 B"
+#: gucharmap/unicode-i18n.h:316 gucharmap/unicode-i18n.h:498
+msgid "Telugu"
+msgstr "텔루구 문자"
 
-#: gucharmap/unicode-i18n.h:276
-msgid "Kana Supplement"
-msgstr "가나 추가영역"
+#: gucharmap/unicode-i18n.h:317 gucharmap/unicode-i18n.h:499
+msgid "Thaana"
+msgstr "타너 문자"
 
-#: gucharmap/unicode-i18n.h:277
-msgid "Kana Extended-A"
-msgstr "가나 확장영역 A"
+#: gucharmap/unicode-i18n.h:318 gucharmap/unicode-i18n.h:500
+msgid "Thai"
+msgstr "타이 문자"
 
-#: gucharmap/unicode-i18n.h:278
-msgid "Small Kana Extension"
-msgstr "작은 가나꼴 확장영역"
+#: gucharmap/unicode-i18n.h:319 gucharmap/unicode-i18n.h:501
+msgid "Tibetan"
+msgstr "티베트 문자"
 
-# 뉘수 문자(女书, 女書, Nǚshū) 음절 문자이며, 중국의 소수민족인 야오족 여성들만이 사용함.
-#: gucharmap/unicode-i18n.h:279 gucharmap/unicode-i18n.h:437
-msgid "Nushu"
-msgstr "뉘수 문자"
+#: gucharmap/unicode-i18n.h:320 gucharmap/unicode-i18n.h:502
+msgid "Tifinagh"
+msgstr "티피나그 문자"
 
-#: gucharmap/unicode-i18n.h:280 gucharmap/unicode-i18n.h:369
-msgid "Duployan"
-msgstr "듀플로이언 속기 문자"
+# 인도
+#: gucharmap/unicode-i18n.h:321 gucharmap/unicode-i18n.h:503
+msgid "Tirhuta"
+msgstr "티르후타 문자"
 
-#: gucharmap/unicode-i18n.h:281
-msgid "Shorthand Format Controls"
-msgstr "속기 형식 컨트롤 문자"
+#: gucharmap/unicode-i18n.h:322 gucharmap/unicode-i18n.h:504
+msgid "Todhri"
+msgstr "토드리 문자"
 
-#: gucharmap/unicode-i18n.h:282
-msgid "Znamenny Musical Notation"
-msgstr "즈나메니 음표"
-
-#: gucharmap/unicode-i18n.h:283
-msgid "Byzantine Musical Symbols"
-msgstr "비잔틴 음악 기호"
-
-#: gucharmap/unicode-i18n.h:284
-msgid "Musical Symbols"
-msgstr "음악 기호"
-
-#: gucharmap/unicode-i18n.h:285
-msgid "Ancient Greek Musical Notation"
-msgstr "고대 그리스 음표"
-
-#: gucharmap/unicode-i18n.h:286
-msgid "Kaktovik Numerals"
-msgstr "칵토빅 숫자"
-
-#: gucharmap/unicode-i18n.h:287
-msgid "Mayan Numerals"
-msgstr "마야 숫자"
-
-#: gucharmap/unicode-i18n.h:288
-msgid "Tai Xuan Jing Symbols"
-msgstr "태현경 기호"
-
-#: gucharmap/unicode-i18n.h:289
-msgid "Counting Rod Numerals"
-msgstr "산가지 숫자"
-
-#: gucharmap/unicode-i18n.h:290
-msgid "Mathematical Alphanumeric Symbols"
-msgstr "수학용 알파벳, 숫자 기호"
-
-#: gucharmap/unicode-i18n.h:291
-msgid "Sutton SignWriting"
-msgstr "서튼 수화 표기"
-
-#: gucharmap/unicode-i18n.h:292
-msgid "Latin Extended-G"
-msgstr "라틴문자 확장영역 G"
-
-# 고대 슬라브어를 적는 데 쓰였던 음소 문자
-#: gucharmap/unicode-i18n.h:293
-msgid "Glagolitic Supplement"
-msgstr "글라골루 문자 추가영역"
-
-#: gucharmap/unicode-i18n.h:294
-msgid "Cyrillic Extended-D"
-msgstr "키릴 문자 확장영역 D"
-
-#  ‘Genesis Complete Hmong script’; 출처: https://www.unicode.org/L2/L2017/17002r3-n4780r3-nyiakeng-puachue-hmong.pdf
-#: gucharmap/unicode-i18n.h:295 gucharmap/unicode-i18n.h:438
-msgid "Nyiakeng Puachue Hmong"
-msgstr "창세기 몽족 문자"
-
-#: gucharmap/unicode-i18n.h:296 gucharmap/unicode-i18n.h:489
+#: gucharmap/unicode-i18n.h:323 gucharmap/unicode-i18n.h:505
 msgid "Toto"
 msgstr "토토 문자"
 
-#: gucharmap/unicode-i18n.h:297 gucharmap/unicode-i18n.h:494
-msgid "Wancho"
-msgstr "완초 문자"
-
-#: gucharmap/unicode-i18n.h:298 gucharmap/unicode-i18n.h:433
-msgid "Nag Mundari"
-msgstr "나그 문다리 문자"
-
-#: gucharmap/unicode-i18n.h:299
-msgid "Ethiopic Extended-B"
-msgstr "에티오피아 문자 확장영역 B"
-
-#: gucharmap/unicode-i18n.h:300 gucharmap/unicode-i18n.h:422
-msgid "Mende Kikakui"
-msgstr "멘데어 키카쿠이 문자"
-
-# 플라니어(Fulani language)를 표기하기 위한 문자
-#: gucharmap/unicode-i18n.h:301 gucharmap/unicode-i18n.h:335
-msgid "Adlam"
-msgstr "애들램 문자"
-
-# the Indic Siyaq Numbers are a specialized subset of the Arabic script that was used for accounting and in general for recording numbers https://www.unicode.org/L2/L2015/15121r2-indic-siyaq.pdf
-#: gucharmap/unicode-i18n.h:302
-msgid "Indic Siyaq Numbers"
-msgstr "인도 시야크 숫자"
-
-# the Indic Siyaq Numbers are a specialized subset of the Arabic script that was used for accounting and in general for recording numbers https://www.unicode.org/L2/L2015/15121r2-indic-siyaq.pdf
-#: gucharmap/unicode-i18n.h:303
-msgid "Ottoman Siyaq Numbers"
-msgstr "오스만 시야크 숫자"
-
-#: gucharmap/unicode-i18n.h:304
-msgid "Arabic Mathematical Alphabetic Symbols"
-msgstr "아랍 수학용 알파벳 기호"
-
-#: gucharmap/unicode-i18n.h:305
-msgid "Mahjong Tiles"
-msgstr "마작 타일"
-
-#: gucharmap/unicode-i18n.h:306
-msgid "Domino Tiles"
-msgstr "도미노 타일"
-
-#: gucharmap/unicode-i18n.h:307
-msgid "Playing Cards"
-msgstr "플레잉카드"
-
-#: gucharmap/unicode-i18n.h:308
-msgid "Enclosed Alphanumeric Supplement"
-msgstr "괄호 영문자 및 숫자 추가영역"
-
-#: gucharmap/unicode-i18n.h:309
-msgid "Enclosed Ideographic Supplement"
-msgstr "괄호 한자 추가영역"
-
-#: gucharmap/unicode-i18n.h:310
-msgid "Miscellaneous Symbols and Pictographs"
-msgstr "여러가지 기호 및 그림 문자"
-
-#: gucharmap/unicode-i18n.h:311
-msgid "Emoticons"
-msgstr "이모티콘"
-
-#: gucharmap/unicode-i18n.h:312
-msgid "Ornamental Dingbats"
-msgstr "장식용 딩뱃 기호"
-
-#: gucharmap/unicode-i18n.h:313
+#: gucharmap/unicode-i18n.h:324
 msgid "Transport and Map Symbols"
 msgstr "교통 및 지도 기호"
 
-#: gucharmap/unicode-i18n.h:314
-msgid "Alchemical Symbols"
-msgstr "연금술 기호"
-
-#: gucharmap/unicode-i18n.h:315
-msgid "Geometric Shapes Extended"
-msgstr "도형 확장영역"
-
-#: gucharmap/unicode-i18n.h:316
-msgid "Supplemental Arrows-C"
-msgstr "화살표 추가영역 C"
-
-#: gucharmap/unicode-i18n.h:317
-msgid "Supplemental Symbols and Pictographs"
-msgstr "추가 기호 및 그림 문자"
-
-#: gucharmap/unicode-i18n.h:318
-msgid "Chess Symbols"
-msgstr "체스 기호"
-
-#: gucharmap/unicode-i18n.h:319
-msgid "Symbols and Pictographs Extended-A"
-msgstr "기호 및 그림 문자 확장영역-A"
-
-#: gucharmap/unicode-i18n.h:320
-msgid "Symbols for Legacy Computing"
-msgstr "레거시 컴퓨팅 기호"
-
-#: gucharmap/unicode-i18n.h:321
-msgid "CJK Unified Ideographs Extension B"
-msgstr "한중일 통합 한자 확장영역 B"
-
-#: gucharmap/unicode-i18n.h:322
-msgid "CJK Unified Ideographs Extension C"
-msgstr "한중일 통합 한자 확장영역 C"
-
-#: gucharmap/unicode-i18n.h:323
-msgid "CJK Unified Ideographs Extension D"
-msgstr "한중일 통합 한자 확장영역 D"
-
-#: gucharmap/unicode-i18n.h:324
-msgid "CJK Unified Ideographs Extension E"
-msgstr "한중일 통합 한자 확장영역 E"
-
 #: gucharmap/unicode-i18n.h:325
-msgid "CJK Unified Ideographs Extension F"
-msgstr "한중일 통합 한자 확장영역 F"
+msgid "Tulu-Tigalari"
+msgstr "툴루-티갈라리 문자"
 
-#: gucharmap/unicode-i18n.h:326
-msgid "CJK Unified Ideographs Extension I"
-msgstr "한중일 통합 한자 확장영역 I"
+#: gucharmap/unicode-i18n.h:326 gucharmap/unicode-i18n.h:507
+msgid "Ugaritic"
+msgstr "우가릿 문자"
 
 #: gucharmap/unicode-i18n.h:327
-msgid "CJK Compatibility Ideographs Supplement"
-msgstr "한중일 호환 보충 한자"
+msgid "Unified Canadian Aboriginal Syllabics"
+msgstr "통합 캐나다 원주민 음절"
 
 #: gucharmap/unicode-i18n.h:328
-msgid "CJK Unified Ideographs Extension G"
-msgstr "한중일 통합 한자 확장영역 G"
+msgid "Unified Canadian Aboriginal Syllabics Extended"
+msgstr "통합 캐나다 원주민 음절 확장영역"
 
 #: gucharmap/unicode-i18n.h:329
-msgid "CJK Unified Ideographs Extension H"
-msgstr "한중일 통합 한자 확장영역 H"
+msgid "Unified Canadian Aboriginal Syllabics Extended-A"
+msgstr "통합 캐나다 원주민 음절 확장영역 A"
 
-#: gucharmap/unicode-i18n.h:330
-msgid "Tags"
-msgstr "태그"
+#: gucharmap/unicode-i18n.h:330 gucharmap/unicode-i18n.h:509
+msgid "Vai"
+msgstr "바이 문자"
 
 #: gucharmap/unicode-i18n.h:331
+msgid "Variation Selectors"
+msgstr "여러가지 선택자"
+
+#: gucharmap/unicode-i18n.h:332
 msgid "Variation Selectors Supplement"
 msgstr "여러가지 선택자 추가영역"
 
-#: gucharmap/unicode-i18n.h:332
-msgid "Supplementary Private Use Area-A"
-msgstr "사용자 추가영역 A"
-
 #: gucharmap/unicode-i18n.h:333
-msgid "Supplementary Private Use Area-B"
-msgstr "사용자 추가영역 B"
+msgid "Vedic Extensions"
+msgstr "베다 확장영역"
 
-#: gucharmap/unicode-i18n.h:349
+#: gucharmap/unicode-i18n.h:334
+msgid "Vertical Forms"
+msgstr "세로 모양"
+
+#: gucharmap/unicode-i18n.h:335 gucharmap/unicode-i18n.h:510
+msgid "Vithkuqi"
+msgstr "비스쿠치 문자"
+
+#: gucharmap/unicode-i18n.h:336 gucharmap/unicode-i18n.h:511
+msgid "Wancho"
+msgstr "완초 문자"
+
+# 인도
+#: gucharmap/unicode-i18n.h:337 gucharmap/unicode-i18n.h:512
+msgid "Warang Citi"
+msgstr "바랑 크시티 문자"
+
+#: gucharmap/unicode-i18n.h:338 gucharmap/unicode-i18n.h:513
+msgid "Yezidi"
+msgstr "야지디 문자"
+
+#: gucharmap/unicode-i18n.h:339
+msgid "Yi Radicals"
+msgstr "이 문자 부수"
+
+#: gucharmap/unicode-i18n.h:340
+msgid "Yi Syllables"
+msgstr "이 음절문자"
+
+#: gucharmap/unicode-i18n.h:341
+msgid "Yijing Hexagram Symbols"
+msgstr "주역 6선형 기호"
+
+#: gucharmap/unicode-i18n.h:342 gucharmap/unicode-i18n.h:515
+msgid "Zanabazar Square"
+msgstr "자나바자르 정방형 문자"
+
+#: gucharmap/unicode-i18n.h:343
+msgid "Znamenny Musical Notation"
+msgstr "즈나메니 음표"
+
+#: gucharmap/unicode-i18n.h:359
 msgid "Braille"
 msgstr "점자"
 
-#: gucharmap/unicode-i18n.h:352
+#: gucharmap/unicode-i18n.h:362
 msgid "Canadian Aboriginal"
 msgstr "캐나다 원주민 문자"
 
-#: gucharmap/unicode-i18n.h:359
+#: gucharmap/unicode-i18n.h:369
 msgid "Common"
 msgstr "일반"
 
-#: gucharmap/unicode-i18n.h:362
+#: gucharmap/unicode-i18n.h:372
 msgid "Cypriot"
 msgstr "키프로스어"
 
-#: gucharmap/unicode-i18n.h:363
+#: gucharmap/unicode-i18n.h:373
 msgid "Cypro Minoan"
 msgstr "키프로 미노아 문자"
 
-#: gucharmap/unicode-i18n.h:378
+#: gucharmap/unicode-i18n.h:389
 msgid "Greek"
 msgstr "그리스어"
 
-#: gucharmap/unicode-i18n.h:382
+#: gucharmap/unicode-i18n.h:394
 msgid "Han"
 msgstr "한자"
 
-#: gucharmap/unicode-i18n.h:383
+#: gucharmap/unicode-i18n.h:395
 msgid "Hangul"
 msgstr "한글"
 
 # http://www.unicode.org/unicode/reports/tr24/tr24-3.html
-#: gucharmap/unicode-i18n.h:390
+#: gucharmap/unicode-i18n.h:402
 msgid "Inherited"
 msgstr "의존"
 
-#: gucharmap/unicode-i18n.h:405
+#: gucharmap/unicode-i18n.h:418
 msgid "Latin"
 msgstr "라틴"
 
-#: gucharmap/unicode-i18n.h:409
+#: gucharmap/unicode-i18n.h:422
 msgid "Linear B"
 msgstr "선형 B"
 
-#: gucharmap/unicode-i18n.h:456
+#: gucharmap/unicode-i18n.h:470
 msgid "Phags Pa"
 msgstr "파스파 문자"
 
 # 수화의 표기 방법
-#: gucharmap/unicode-i18n.h:466
+#: gucharmap/unicode-i18n.h:480
 msgid "Signwriting"
 msgstr "수화 표기"
 
-#: gucharmap/unicode-i18n.h:497
+#: gucharmap/unicode-i18n.h:506
+msgid "Tulu Tigalari"
+msgstr "툴루 티갈라리 문자"
+
+#: gucharmap/unicode-i18n.h:514
 msgid "Yi"
 msgstr "이 문자"
 
