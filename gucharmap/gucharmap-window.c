@@ -454,10 +454,10 @@ help_about (GSimpleAction *action,
   gtk_show_about_dialog (GTK_WINDOW (guw),
 			 "program-name", _("GNOME Character Map"),
 			 "version", VERSION,
-			 "comments", _("Based on the Unicode Character Database 15.1.0"),
+			 "comments", _("Based on the Unicode Character Database 16.0.0"),
 			 "copyright", "Copyright © 2004 Noah Levitt\n"
-				      "Copyright © 1991–2023 Unicode, Inc.\n"
-				      "Copyright © 2007–2023 Christian Persch\n"
+				      "Copyright © 1991–2024 Unicode, Inc.\n"
+				      "Copyright © 2007–2024 Christian Persch\n"
                                       "Copyright © 2016, 2020 DaeHyun Sung",
 			 "documenters", documenters,
 			 "license", license_trans,

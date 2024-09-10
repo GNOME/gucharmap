@@ -128,6 +128,12 @@ sub process_unicode_data_txt
         next if ($name =~ /^KHITAN SMALL SCRIPT CHARACTER-[0-9A-F]+$/);
         next if ($name =~ /^NUSHU CHARACTER-[0-9A-F]+$/);
 
+	# Skip EGYPTIAN HIEROGLYPH- but only for those where
+	# the character ends with their codepoint
+	if ($name =~ /^EGYPTIAN HIEROGLYPH-([0-9A-F]+)$/) {
+	    next if ($1 eq $hex);
+	}
+
         # Skip unwanted items
         next if ($name =~ /^<.+, (First|Last)>$/);
 
