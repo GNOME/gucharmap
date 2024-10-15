@@ -10,10 +10,11 @@
 <ulink url="https://gitlab.gnome.org/GNOME/gucharmap/">https://gitlab.gnome.org/GNOME/gucharmap/</ulink>.</remark>
     </releaseinfo>
   </bookinfo>
-  <chapter>
+  <part>
     <title>API Reference</title>
     <xi:include href="xml/gucharmap-codepoint-list.xml"/>
     <xi:include href="xml/gucharmap-block-chapters-model.xml"/>
+    <xi:include href="xml/gucharmap-block-codepoint-list.xml"/>
     <xi:include href="xml/gucharmap-chapters-model.xml"/>
     <xi:include href="xml/gucharmap-chartable.xml"/>
     <xi:include href="xml/gucharmap-script-chapters-model.xml"/>
@@ -21,5 +22,20 @@
     <xi:include href="xml/gucharmap-chapters-view.xml"/>
     <xi:include href="xml/gucharmap-charmap.xml"/>
     <xi:include href="xml/gucharmap-unicode-info.xml"/>
-  </chapter>
+  </part>
+  <part>
+    <title>Appendix</title>
+    <chapter>
+      <title>Object Hierarchy</title>
+      <xi:include href="xml/tree_index.sgml"/>
+    </chapter>
+    <chapter role="object-index">
+      <title>Object Index</title>
+      <xi:include href="xml/object_index.sgml"/>
+    </chapter>
+    <xi:include href="xml/api-index-full.xml"/>
+    <xi:include href="xml/api-index-2.34.xml"/>
+    <xi:include href="xml/api-index-deprecated.xml"/>
+    <xi:include href="xml/annotation-glossary.xml"/>
+  </part>
 </book>
