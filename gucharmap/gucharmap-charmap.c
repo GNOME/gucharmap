@@ -356,7 +356,7 @@ insert_vanilla_detail (GucharmapCharmap *charmap,
   gtk_text_buffer_insert (buffer, iter, "\n", -1);
 }
 
-/** add Korean Hanja properties
+/* add Korean Hanja properties
  * check the link: UAX#38: Unicode Han Database - kHangul
  * https://www.unicode.org/reports/tr38/#kHangul
  * */

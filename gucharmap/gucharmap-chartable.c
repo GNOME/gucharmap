@@ -78,7 +78,7 @@ static guint signals[NUM_SIGNALS];
 #define FACTOR_WIDTH (2.25) /* 3 / (96 / 72) */
 #define FACTOR_HEIGHT (1.875) /* 2.5 / (96 / 72) */
 
-/** Notes
+/* Notes
  *
  * 1. Table geometry
  * The allocated rectangle is divided into ::rows rows and ::col columns,
