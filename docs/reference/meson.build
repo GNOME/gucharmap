@@ -14,6 +14,7 @@
 # along with this programme.  If not, see <https://www.gnu.org/licenses/>.
 
 libgucharmap_private_headers = [
+  'config.h',
   'gucharmap-chartable-accessible.h',
   'gucharmap-chartable-cell-accessible.h',
   'gucharmap-font-codepoint-list.h',
@@ -22,7 +23,10 @@ libgucharmap_private_headers = [
   'gucharmap-private.h',
   'gucharmap-search-dialog.h',
   'gucharmap-settings.h',
+  'gucharmap-type-builtins.h',
+  'gucharmap-version.h',
   'gucharmap-window.h',
+  'gucharmap.h',
   'unicode-blocks.h',
   'unicode-categories.h',
   'unicode-names.h',
@@ -61,7 +65,6 @@ if get_option('gtk3')
     c_args: ['-DGUCHARMAP_COMPILATION', '-Wno-error'],
     dependencies: libgucharmap_gtk3_dep,
     fixxref_args: fixxrefs_gtk3,
-    gobject_typesfile: 'gucharmap.types',
     ignore_headers: libgucharmap_private_headers,
     include_directories: [top_inc, src_inc],
     install: true,
@@ -69,6 +72,7 @@ if get_option('gtk3')
     mkdb_args: ['--sgml-mode', '--output-format=xml',],
     module_version: libgucharmap_gtk3_api_version,
     namespace: 'gucharmap',
+    scan_args: ['--rebuild-sections', '--rebuild-types',],
     src_dir: [top_inc, src_inc,],
   )
 endif
