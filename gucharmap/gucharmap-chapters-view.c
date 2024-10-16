@@ -209,7 +209,7 @@ gucharmap_chapters_view_get_selected (GucharmapChaptersView *view)
 /**
  * gucharmap_chapter_view_set_selected:
  * @view: a #GucharmapChapters
- * @name: 
+ * @name: the name of the selected row
  *
  * Sets the selection to the row specified by @name
  * Return value: %TRUE on success, %FALSE on failure
