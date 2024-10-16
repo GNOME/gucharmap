@@ -124,6 +124,11 @@ void     gucharmap_charmap_set_chapters_visible (GucharmapCharmap *charmap,
 _GUCHARMAP_PUBLIC
 gboolean gucharmap_charmap_get_chapters_visible (GucharmapCharmap *charmap);
 
+/**
+ * GucharmapCharmapPageType:
+ * @GUCHARMAP_CHARMAP_PAGE_CHARTABLE: Character table page
+ * @GUCHARMAP_CHARMAP_PAGE_DETAILS: Character detail page
+ */
 typedef enum {
   GUCHARMAP_CHARMAP_PAGE_CHARTABLE,
   GUCHARMAP_CHARMAP_PAGE_DETAILS
