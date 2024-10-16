@@ -199,7 +199,8 @@ gucharmap_charmap_class_init (GucharmapCharmapClass *klass)
   g_object_class_install_property
     (object_class,
      PROP_CHAPTERS_MODEL,
-     g_param_spec_object ("chapters-model", NULL, NULL,
+     g_param_spec_object ("chapters-model", NULL,
+                          "Chapter model",
                          GUCHARMAP_TYPE_CHAPTERS_MODEL,
                          G_PARAM_WRITABLE |
                          G_PARAM_CONSTRUCT |
@@ -210,7 +211,8 @@ gucharmap_charmap_class_init (GucharmapCharmapClass *klass)
   g_object_class_install_property
     (object_class,
      PROP_ACTIVE_CHAPTER,
-     g_param_spec_string ("active-chapter", NULL, NULL,
+     g_param_spec_string ("active-chapter", NULL,
+                          "Active chapter",
                           NULL,
                           G_PARAM_READWRITE |
                           G_PARAM_STATIC_NAME |
@@ -220,7 +222,8 @@ gucharmap_charmap_class_init (GucharmapCharmapClass *klass)
   g_object_class_install_property
     (object_class,
      PROP_ACTIVE_CHARACTER,
-     g_param_spec_uint ("active-character", NULL, NULL,
+     g_param_spec_uint ("active-character", NULL,
+                        "Active character",
                         0,
                         UNICHAR_MAX,
                         0,
@@ -232,7 +235,8 @@ gucharmap_charmap_class_init (GucharmapCharmapClass *klass)
   g_object_class_install_property
     (object_class,
      PROP_ACTIVE_CODEPOINT_LIST,
-     g_param_spec_object ("active-codepoint-list", NULL, NULL,
+     g_param_spec_object ("active-codepoint-list", NULL,
+                          "Active codepoint list",
                           GUCHARMAP_TYPE_CODEPOINT_LIST,
                           G_PARAM_READABLE |
                           G_PARAM_STATIC_NAME |
@@ -242,7 +246,8 @@ gucharmap_charmap_class_init (GucharmapCharmapClass *klass)
   g_object_class_install_property
     (object_class,
      PROP_ACTIVE_PAGE,
-     g_param_spec_uint ("active-page", NULL, NULL,
+     g_param_spec_uint ("active-page", NULL,
+                        "Active page",
                         0,
                         G_MAXUINT,
                         0,
@@ -254,7 +259,8 @@ gucharmap_charmap_class_init (GucharmapCharmapClass *klass)
   g_object_class_install_property
     (object_class,
      PROP_FONT_DESC,
-     g_param_spec_boxed ("font-desc", NULL, NULL,
+     g_param_spec_boxed ("font-desc", NULL,
+                         "Font description",
                          PANGO_TYPE_FONT_DESCRIPTION,
                          G_PARAM_READWRITE |
                          G_PARAM_STATIC_NAME |
@@ -271,14 +277,16 @@ gucharmap_charmap_class_init (GucharmapCharmapClass *klass)
   g_object_class_install_property
     (object_class,
      PROP_FONT_FALLBACK,
-     g_param_spec_boolean ("font-fallback", NULL, NULL,
+     g_param_spec_boolean ("font-fallback", NULL,
+                           "Font fallback",
                            TRUE,
                            G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property
     (object_class,
      PROP_SNAP_POW2,
-     g_param_spec_boolean ("snap-power-2", NULL, NULL,
+     g_param_spec_boolean ("snap-power-2", NULL,
+                           "Snap squared",
                            FALSE,
                            G_PARAM_READWRITE |
                            G_PARAM_STATIC_NAME |

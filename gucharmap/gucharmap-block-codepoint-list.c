@@ -164,7 +164,8 @@ gucharmap_block_codepoint_list_class_init (GucharmapBlockCodepointListClass *kla
   g_object_class_install_property
     (object_class,
      PROP_FIRST_CODEPOINT,
-     g_param_spec_uint ("first-codepoint", NULL, NULL,
+     g_param_spec_uint ("first-codepoint", NULL,
+                        "First codepoint",
                         0,
                         UNICHAR_MAX,
                         0,
@@ -177,7 +178,8 @@ gucharmap_block_codepoint_list_class_init (GucharmapBlockCodepointListClass *kla
   g_object_class_install_property
     (object_class,
      PROP_LAST_CODEPOINT,
-     g_param_spec_uint ("last-codepoint", NULL, NULL,
+     g_param_spec_uint ("last-codepoint", NULL,
+                        "Last codepoint",
                         0,
                         UNICHAR_MAX,
                         0,

@@ -282,7 +282,8 @@ gucharmap_mini_font_selection_class_init (GucharmapMiniFontSelectionClass *klass
   g_object_class_install_property
     (gobject_class,
      PROP_FONT_DESC,
-     g_param_spec_boxed ("font-desc", NULL, NULL,
+     g_param_spec_boxed ("font-desc", NULL,
+                         "Font description",
                          PANGO_TYPE_FONT_DESCRIPTION,
                          G_PARAM_READWRITE |
                          G_PARAM_STATIC_NAME |

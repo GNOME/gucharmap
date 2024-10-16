@@ -348,7 +348,8 @@ gucharmap_print_operation_class_init (GucharmapPrintOperationClass *klass)
   g_object_class_install_property
     (gobject_class,
      PROP_CODEPOINT_LIST,
-     g_param_spec_object ("codepoint-list", NULL, NULL,
+     g_param_spec_object ("codepoint-list", NULL,
+                          "Codepoint list",
                           GUCHARMAP_TYPE_CODEPOINT_LIST,
                           G_PARAM_WRITABLE | G_PARAM_STATIC_NAME | G_PARAM_STATIC_NICK | G_PARAM_STATIC_BLURB |
                           G_PARAM_CONSTRUCT_ONLY));
@@ -356,7 +357,8 @@ gucharmap_print_operation_class_init (GucharmapPrintOperationClass *klass)
   g_object_class_install_property
     (gobject_class,
      PROP_FONT_DESC,
-     g_param_spec_boxed ("font-desc", NULL, NULL,
+     g_param_spec_boxed ("font-desc", NULL,
+                         "Font description",
                          PANGO_TYPE_FONT_DESCRIPTION,
                          G_PARAM_WRITABLE | G_PARAM_STATIC_NAME | G_PARAM_STATIC_NICK | G_PARAM_STATIC_BLURB |
                          G_PARAM_CONSTRUCT_ONLY));

@@ -2127,7 +2127,8 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
   g_object_class_install_property
     (object_class,
      PROP_ACTIVE_CHAR,
-     g_param_spec_uint ("active-character", NULL, NULL,
+     g_param_spec_uint ("active-character", NULL,
+                        "Active character",
                         0,
                         UNICHAR_MAX,
                         0,
@@ -2139,7 +2140,8 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
   g_object_class_install_property
     (object_class,
      PROP_CODEPOINT_LIST,
-     g_param_spec_object ("codepoint-list", NULL, NULL,
+     g_param_spec_object ("codepoint-list", NULL,
+                          "Codepoint list",
                           gucharmap_codepoint_list_get_type (),
                           G_PARAM_READWRITE |
                           G_PARAM_STATIC_NAME |
@@ -2149,7 +2151,8 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
   g_object_class_install_property
     (object_class,
      PROP_FONT_DESC,
-     g_param_spec_boxed ("font-desc", NULL, NULL,
+     g_param_spec_boxed ("font-desc", NULL,
+                         "Font description",
                          PANGO_TYPE_FONT_DESCRIPTION,
                          G_PARAM_READWRITE |
                          G_PARAM_STATIC_NAME |
@@ -2166,14 +2169,16 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
   g_object_class_install_property
     (object_class,
      PROP_FONT_FALLBACK,
-     g_param_spec_boolean ("font-fallback", NULL, NULL,
+     g_param_spec_boolean ("font-fallback", NULL,
+                           "Font fallback",
                            TRUE,
                            G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property
     (object_class,
      PROP_SNAP_POW2,
-     g_param_spec_boolean ("snap-power-2", NULL, NULL,
+     g_param_spec_boolean ("snap-power-2", NULL,
+                           "Snap squared",
                            FALSE,
                            G_PARAM_READWRITE |
                            G_PARAM_STATIC_NAME |
@@ -2183,7 +2188,8 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
   g_object_class_install_property
     (object_class,
      PROP_ZOOM_ENABLED,
-     g_param_spec_boolean ("zoom-enabled", NULL, NULL,
+     g_param_spec_boolean ("zoom-enabled", NULL,
+                           "Zoom enabled",
                            FALSE,
                            G_PARAM_READWRITE |
                            G_PARAM_STATIC_NAME |
@@ -2193,7 +2199,8 @@ gucharmap_chartable_class_init (GucharmapChartableClass *klass)
   g_object_class_install_property
     (object_class,
      PROP_ZOOM_SHOWING,
-     g_param_spec_boolean ("zoom-showing", NULL, NULL,
+     g_param_spec_boolean ("zoom-showing", NULL,
+                           "Zoom showing",
                            FALSE,
                            G_PARAM_READABLE |
                            G_PARAM_STATIC_NAME |
