@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the gucharmap package.
 # Young-Ho, Cha <ganadist at mizi.com>, 2003-2006.
 # Changwoo Ryu <cwryu@debian.org>, 2007-2015.
-# DaeHyun Sung <sungdh86+git@gmail.com>, 2016-2024.
+# DaeHyun Sung <sungdh86+git@gmail.com>, 2016-2025.
 #
 # 참고:
 # - 이 프로그램을 'Character Map'이라고 하는데 '문자 표'라고 번역.
@@ -22,8 +22,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gucharmap\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gucharmap/issues/\n"
-"POT-Creation-Date: 2024-07-26 13:38+0000\n"
-"PO-Revision-Date: 2024-08-27 14:41+0900\n"
+"POT-Creation-Date: 2025-02-21 21:20+0000\n"
+"PO-Revision-Date: 2025-03-02 04:04+0900\n"
 "Last-Translator: DaeHyun Sung <sungdh86+git@gmail.com>\n"
 "Language-Team: GNOME Korea <gnome-kr@googlegroups.com>\n"
 "Language: ko\n"
@@ -47,7 +47,7 @@ msgstr "문서에 특수 문자를 입력합니다"
 msgid "font;unicode;"
 msgstr "font;글꼴;폰트;unicode;유니코드;"
 
-#: data/gucharmap.metainfo.xml.in:32 data/gucharmap.metainfo.xml.in:65
+#: data/gucharmap.metainfo.xml.in:32 data/gucharmap.metainfo.xml.in:69
 msgid "gucharmap.desktop"
 msgstr "gucharmap.desktop"
 
@@ -104,10 +104,26 @@ msgid "https://wiki.gnome.org/Apps/Gucharmap"
 msgstr "https://wiki.gnome.org/Apps/Gucharmap"
 
 #: data/gucharmap.metainfo.xml.in:63
+msgid "https://gitlab.gnome.org/GNOME/gucharmap/-/issues"
+msgstr "https://gitlab.gnome.org/GNOME/gucharmap/-/issues"
+
+#: data/gucharmap.metainfo.xml.in:64
+msgid "https://help.gnome.org/users/gucharmap/stable/"
+msgstr "https://help.gnome.org/users/gucharmap/stable/"
+
+#: data/gucharmap.metainfo.xml.in:65
+msgid "https://l10n.gnome.org/module/gucharmap/"
+msgstr "https://l10n.gnome.org/module/gucharmap/"
+
+#: data/gucharmap.metainfo.xml.in:66
+msgid "https://gitlab.gnome.org/GNOME/gucharmap"
+msgstr "https://gitlab.gnome.org/GNOME/gucharmap"
+
+#: data/gucharmap.metainfo.xml.in:67
 msgid "GNOME"
 msgstr "그놈"
 
-#: data/gucharmap.metainfo.xml.in:64
+#: data/gucharmap.metainfo.xml.in:68
 msgid "gucharmap"
 msgstr "gucharmap"
 
@@ -120,202 +136,202 @@ msgid "Unicode Block"
 msgstr "유니코드 범위"
 
 #. Translators: this is the name of a korean standard
-#: gucharmap/gucharmap-charmap.c:455
+#: gucharmap/gucharmap-charmap.c:463
 msgid "KS X 1001"
 msgstr "KS X 1001"
 
 #. Translators: this is the name of a korean standard
-#: gucharmap/gucharmap-charmap.c:471
+#: gucharmap/gucharmap-charmap.c:479
 msgid "KS X 1002"
 msgstr "KS X 1002"
 
-#: gucharmap/gucharmap-charmap.c:486
+#: gucharmap/gucharmap-charmap.c:494
 msgid "Korean Education Hanja"
 msgstr "한문 교육용 기초 한자 (漢文敎育用基礎漢字)"
 
-#: gucharmap/gucharmap-charmap.c:502
+#: gucharmap/gucharmap-charmap.c:510
 msgid "Korean Hanja for Use in Personal Names"
 msgstr "인명용 한자 (人名用漢字)"
 
-#: gucharmap/gucharmap-charmap.c:517
+#: gucharmap/gucharmap-charmap.c:525
 msgid "later removed at the code point"
 msgstr "코드 포인트에서 나중에 제거됨"
 
-#: gucharmap/gucharmap-charmap.c:625
+#: gucharmap/gucharmap-charmap.c:633
 msgid "Font variant of"
 msgstr "문자 변형"
 
-#: gucharmap/gucharmap-charmap.c:626
+#: gucharmap/gucharmap-charmap.c:634
 msgid "No-break version of"
 msgstr "줄바꿈없는 형식"
 
-#: gucharmap/gucharmap-charmap.c:627
+#: gucharmap/gucharmap-charmap.c:635
 msgid "Initial presentation form of"
 msgstr "어두형"
 
-#: gucharmap/gucharmap-charmap.c:628
+#: gucharmap/gucharmap-charmap.c:636
 msgid "Medial presentation form of"
 msgstr "어중형"
 
-#: gucharmap/gucharmap-charmap.c:629
+#: gucharmap/gucharmap-charmap.c:637
 msgid "Final presentation form of"
 msgstr "어말형"
 
-#: gucharmap/gucharmap-charmap.c:630
+#: gucharmap/gucharmap-charmap.c:638
 msgid "Isolated presentation form of"
 msgstr "단독형"
 
-#: gucharmap/gucharmap-charmap.c:631
+#: gucharmap/gucharmap-charmap.c:639
 msgid "Encircled form of"
 msgstr "원형글자"
 
-#: gucharmap/gucharmap-charmap.c:632
+#: gucharmap/gucharmap-charmap.c:640
 msgid "Superscript form of"
 msgstr "위첨자"
 
-#: gucharmap/gucharmap-charmap.c:633
+#: gucharmap/gucharmap-charmap.c:641
 msgid "Subscript form of"
 msgstr "아랫첨자"
 
-#: gucharmap/gucharmap-charmap.c:634
+#: gucharmap/gucharmap-charmap.c:642
 msgid "Vertical layout presentation form of"
 msgstr "세로쓰기 표시 꼴"
 
-#: gucharmap/gucharmap-charmap.c:635
+#: gucharmap/gucharmap-charmap.c:643
 msgid "Wide compatibility character of"
 msgstr "전각 호환 문자"
 
-#: gucharmap/gucharmap-charmap.c:636
+#: gucharmap/gucharmap-charmap.c:644
 msgid "Narrow compatibility character of"
 msgstr "반각 호환 문자"
 
-#: gucharmap/gucharmap-charmap.c:637
+#: gucharmap/gucharmap-charmap.c:645
 msgid "Small variant form of"
 msgstr "작은꼴 변형"
 
-#: gucharmap/gucharmap-charmap.c:638
+#: gucharmap/gucharmap-charmap.c:646
 msgid "CJK squared font variant of"
 msgstr "한중일 네모꼴 문자 변형"
 
 # Vulgar fraction - 분수
-#: gucharmap/gucharmap-charmap.c:639
+#: gucharmap/gucharmap-charmap.c:647
 msgid "Vulgar fraction form of"
 msgstr "분수 형"
 
-#: gucharmap/gucharmap-charmap.c:640
+#: gucharmap/gucharmap-charmap.c:648
 msgid "Unspecified compatibility character of"
 msgstr "지정되지 않은 호환 문자"
 
-#: gucharmap/gucharmap-charmap.c:860
+#: gucharmap/gucharmap-charmap.c:868
 msgid "Compatibility decomposition:"
 msgstr "호환문자 분해:"
 
-#: gucharmap/gucharmap-charmap.c:861
+#: gucharmap/gucharmap-charmap.c:869
 msgid "Canonical decomposition:"
 msgstr "정준 분해:"
 
-#: gucharmap/gucharmap-charmap.c:903 gucharmap/gucharmap-chartable.c:581
+#: gucharmap/gucharmap-charmap.c:911 gucharmap/gucharmap-chartable.c:581
 msgid "[not a printable character]"
 msgstr "[표시할 수 없는 문자]"
 
-#: gucharmap/gucharmap-charmap.c:917
+#: gucharmap/gucharmap-charmap.c:925
 msgid "General Character Properties"
 msgstr "일반 문자 속성"
 
-#: gucharmap/gucharmap-charmap.c:923
+#: gucharmap/gucharmap-charmap.c:931
 msgid "In Unicode since:"
 msgstr "유니코드에 포함된 시점:"
 
 #. character category
-#: gucharmap/gucharmap-charmap.c:927
+#: gucharmap/gucharmap-charmap.c:935
 msgid "Unicode category:"
 msgstr "유니코드 범위:"
 
-#: gucharmap/gucharmap-charmap.c:938
+#: gucharmap/gucharmap-charmap.c:946
 msgid "Various Useful Representations"
 msgstr "다른 표기법"
 
-#: gucharmap/gucharmap-charmap.c:948
+#: gucharmap/gucharmap-charmap.c:956
 msgid "UTF-8:"
 msgstr "UTF-8:"
 
-#: gucharmap/gucharmap-charmap.c:956
+#: gucharmap/gucharmap-charmap.c:964
 msgid "UTF-16:"
 msgstr "UTF-16:"
 
-#: gucharmap/gucharmap-charmap.c:967
+#: gucharmap/gucharmap-charmap.c:975
 msgid "C octal escaped UTF-8:"
 msgstr "C언어 8진수로 표기한 UTF-8:"
 
-#: gucharmap/gucharmap-charmap.c:977
+#: gucharmap/gucharmap-charmap.c:985
 msgid "XML decimal entity:"
 msgstr "XML 10진수 엔티티:"
 
-#: gucharmap/gucharmap-charmap.c:988
+#: gucharmap/gucharmap-charmap.c:996
 msgid "Annotations and Cross References"
 msgstr "해설 및 참고 사항"
 
-#: gucharmap/gucharmap-charmap.c:995
+#: gucharmap/gucharmap-charmap.c:1003
 msgid "Alias names:"
 msgstr "다른 이름:"
 
-#: gucharmap/gucharmap-charmap.c:1004
+#: gucharmap/gucharmap-charmap.c:1012
 msgid "Notes:"
 msgstr "주의:"
 
-#: gucharmap/gucharmap-charmap.c:1013
+#: gucharmap/gucharmap-charmap.c:1021
 msgid "See also:"
 msgstr "참고:"
 
-#: gucharmap/gucharmap-charmap.c:1022
+#: gucharmap/gucharmap-charmap.c:1030
 msgid "Approximate equivalents:"
 msgstr "비슷한 문자:"
 
-#: gucharmap/gucharmap-charmap.c:1031
+#: gucharmap/gucharmap-charmap.c:1039
 msgid "Equivalents:"
 msgstr "같은 문자:"
 
-#: gucharmap/gucharmap-charmap.c:1046
+#: gucharmap/gucharmap-charmap.c:1054
 msgid "CJK Ideograph Information"
 msgstr "한중일 한자 정보"
 
-#: gucharmap/gucharmap-charmap.c:1051
+#: gucharmap/gucharmap-charmap.c:1059
 msgid "Definition in English:"
 msgstr "뜻을 영어로 풀어놓기:"
 
-#: gucharmap/gucharmap-charmap.c:1056
+#: gucharmap/gucharmap-charmap.c:1064
 msgid "Mandarin Pronunciation:"
 msgstr "북경어 발음:"
 
-#: gucharmap/gucharmap-charmap.c:1061
+#: gucharmap/gucharmap-charmap.c:1069
 msgid "Cantonese Pronunciation:"
 msgstr "광동어 발음:"
 
-#: gucharmap/gucharmap-charmap.c:1066
+#: gucharmap/gucharmap-charmap.c:1074
 msgid "Japanese On Pronunciation:"
 msgstr "일본어 음독:"
 
-#: gucharmap/gucharmap-charmap.c:1071
+#: gucharmap/gucharmap-charmap.c:1079
 msgid "Japanese Kun Pronunciation:"
 msgstr "일본어 훈독:"
 
-#: gucharmap/gucharmap-charmap.c:1076
+#: gucharmap/gucharmap-charmap.c:1084
 msgid "Tang Pronunciation:"
 msgstr "중국 고어(당음) 발음:"
 
-#: gucharmap/gucharmap-charmap.c:1081
+#: gucharmap/gucharmap-charmap.c:1089
 msgid "Korean Pronunciation:"
 msgstr "한국어 발음:"
 
-#: gucharmap/gucharmap-charmap.c:1086
+#: gucharmap/gucharmap-charmap.c:1094
 msgid "Vietnamese Pronunciation:"
 msgstr "베트남어 발음:"
 
-#: gucharmap/gucharmap-charmap.c:1468
+#: gucharmap/gucharmap-charmap.c:1476
 msgid "Characte_r Table"
 msgstr "문자 표(_R)"
 
-#: gucharmap/gucharmap-charmap.c:1515
+#: gucharmap/gucharmap-charmap.c:1523
 msgid "Character _Details"
 msgstr "문자 자세히(_D)"
 
@@ -419,15 +435,15 @@ msgstr "이전 문자(_P)"
 msgid "_Contents"
 msgstr "차례(_C)"
 
-#: gucharmap/gucharmap-mini-fontsel.c:332
+#: gucharmap/gucharmap-mini-fontsel.c:333
 msgid "Font"
 msgstr "글꼴"
 
-#: gucharmap/gucharmap-mini-fontsel.c:351
+#: gucharmap/gucharmap-mini-fontsel.c:352
 msgid "Font Family"
 msgstr "글꼴 계열"
 
-#: gucharmap/gucharmap-mini-fontsel.c:369
+#: gucharmap/gucharmap-mini-fontsel.c:370
 msgid "Font Size"
 msgstr "글꼴 크기"
 
@@ -470,152 +486,152 @@ msgstr "전체 단어 일치(_W)"
 msgid "Search in character _details"
 msgstr "문자 자세한 정보에서 검색(_D)"
 
-#: gucharmap/gucharmap-unicode-info.c:125
+#: gucharmap/gucharmap-unicode-info.c:129
 msgid "<Non Private Use High Surrogate>"
 msgstr "<비 개인용 상위 확장코드>"
 
-#: gucharmap/gucharmap-unicode-info.c:127
+#: gucharmap/gucharmap-unicode-info.c:131
 msgid "<Private Use High Surrogate>"
 msgstr "<개인용 상위 확장코드>"
 
-#: gucharmap/gucharmap-unicode-info.c:129
+#: gucharmap/gucharmap-unicode-info.c:133
 msgid "<Low Surrogate>"
 msgstr "<하위 확장코드>"
 
-#: gucharmap/gucharmap-unicode-info.c:131
+#: gucharmap/gucharmap-unicode-info.c:135
 msgid "<Private Use>"
 msgstr "<개인 영역>"
 
-#: gucharmap/gucharmap-unicode-info.c:133
+#: gucharmap/gucharmap-unicode-info.c:137
 msgid "<Plane 15 Private Use>"
 msgstr "<개인 영역 15 수준>"
 
-#: gucharmap/gucharmap-unicode-info.c:135
+#: gucharmap/gucharmap-unicode-info.c:139
 msgid "<Plane 16 Private Use>"
 msgstr "<개인 영역 16 수준>"
 
-#: gucharmap/gucharmap-unicode-info.c:140
+#: gucharmap/gucharmap-unicode-info.c:144
 msgid "<not assigned>"
 msgstr "<지정되지 않음>"
 
-#: gucharmap/gucharmap-unicode-info.c:153
+#: gucharmap/gucharmap-unicode-info.c:157
 msgid "Other, Control"
 msgstr "기타, 제어문자"
 
-#: gucharmap/gucharmap-unicode-info.c:154
+#: gucharmap/gucharmap-unicode-info.c:158
 msgid "Other, Format"
 msgstr "기타, 형식"
 
-#: gucharmap/gucharmap-unicode-info.c:155
+#: gucharmap/gucharmap-unicode-info.c:159
 msgid "Other, Not Assigned"
 msgstr "기타, 지정되지 않음"
 
-#: gucharmap/gucharmap-unicode-info.c:156
+#: gucharmap/gucharmap-unicode-info.c:160
 msgid "Other, Private Use"
 msgstr "기타, 개인 영역"
 
 # UTF-16에서 BMP 바깥의 문자를 쓸 때 확장하는 코드를 말함
-#: gucharmap/gucharmap-unicode-info.c:157
+#: gucharmap/gucharmap-unicode-info.c:161
 msgid "Other, Surrogate"
 msgstr "기타, 확장 코드"
 
-#: gucharmap/gucharmap-unicode-info.c:158
+#: gucharmap/gucharmap-unicode-info.c:162
 msgid "Letter, Lowercase"
 msgstr "문자, 소문자"
 
-#: gucharmap/gucharmap-unicode-info.c:159
+#: gucharmap/gucharmap-unicode-info.c:163
 msgid "Letter, Modifier"
 msgstr "문자, 변경자"
 
-#: gucharmap/gucharmap-unicode-info.c:160
+#: gucharmap/gucharmap-unicode-info.c:164
 msgid "Letter, Other"
 msgstr "문자, 기타"
 
-#: gucharmap/gucharmap-unicode-info.c:161
+#: gucharmap/gucharmap-unicode-info.c:165
 msgid "Letter, Titlecase"
 msgstr "문자, 제목 문자"
 
-#: gucharmap/gucharmap-unicode-info.c:162
+#: gucharmap/gucharmap-unicode-info.c:166
 msgid "Letter, Uppercase"
 msgstr "문자, 대문자"
 
-#: gucharmap/gucharmap-unicode-info.c:163
+#: gucharmap/gucharmap-unicode-info.c:167
 msgid "Mark, Spacing Combining"
 msgstr "표시, 공백 조합"
 
-#: gucharmap/gucharmap-unicode-info.c:164
+#: gucharmap/gucharmap-unicode-info.c:168
 msgid "Mark, Enclosing"
 msgstr "표시, 둘러싸기"
 
-#: gucharmap/gucharmap-unicode-info.c:165
+#: gucharmap/gucharmap-unicode-info.c:169
 msgid "Mark, Non-Spacing"
 msgstr "표시, 공백 아님"
 
-#: gucharmap/gucharmap-unicode-info.c:166
+#: gucharmap/gucharmap-unicode-info.c:170
 msgid "Number, Decimal Digit"
 msgstr "숫자, 10진 숫자"
 
-#: gucharmap/gucharmap-unicode-info.c:167
+#: gucharmap/gucharmap-unicode-info.c:171
 msgid "Number, Letter"
 msgstr "숫자, 문자"
 
-#: gucharmap/gucharmap-unicode-info.c:168
+#: gucharmap/gucharmap-unicode-info.c:172
 msgid "Number, Other"
 msgstr "숫자, 그외"
 
-#: gucharmap/gucharmap-unicode-info.c:169
+#: gucharmap/gucharmap-unicode-info.c:173
 msgid "Punctuation, Connector"
 msgstr "구두 기호, 연결자"
 
-#: gucharmap/gucharmap-unicode-info.c:170
+#: gucharmap/gucharmap-unicode-info.c:174
 msgid "Punctuation, Dash"
 msgstr "구두 기호, 대시"
 
-#: gucharmap/gucharmap-unicode-info.c:171
+#: gucharmap/gucharmap-unicode-info.c:175
 msgid "Punctuation, Close"
 msgstr "구두 기호, 닫기"
 
-#: gucharmap/gucharmap-unicode-info.c:172
+#: gucharmap/gucharmap-unicode-info.c:176
 msgid "Punctuation, Final Quote"
 msgstr "구두 기호, 닫는 따옴표"
 
-#: gucharmap/gucharmap-unicode-info.c:173
+#: gucharmap/gucharmap-unicode-info.c:177
 msgid "Punctuation, Initial Quote"
 msgstr "구두 기호, 여는 따옴표"
 
-#: gucharmap/gucharmap-unicode-info.c:174
+#: gucharmap/gucharmap-unicode-info.c:178
 msgid "Punctuation, Other"
 msgstr "구두 기호, 기타"
 
-#: gucharmap/gucharmap-unicode-info.c:175
+#: gucharmap/gucharmap-unicode-info.c:179
 msgid "Punctuation, Open"
 msgstr "구두 기호, 열기"
 
-#: gucharmap/gucharmap-unicode-info.c:176
+#: gucharmap/gucharmap-unicode-info.c:180
 msgid "Symbol, Currency"
 msgstr "기호, 통화"
 
-#: gucharmap/gucharmap-unicode-info.c:177
+#: gucharmap/gucharmap-unicode-info.c:181
 msgid "Symbol, Modifier"
 msgstr "기호, 변경자"
 
-#: gucharmap/gucharmap-unicode-info.c:178
+#: gucharmap/gucharmap-unicode-info.c:182
 msgid "Symbol, Math"
 msgstr "기호, 수학"
 
-#: gucharmap/gucharmap-unicode-info.c:179
+#: gucharmap/gucharmap-unicode-info.c:183
 msgid "Symbol, Other"
 msgstr "기호, 기타"
 
-#: gucharmap/gucharmap-unicode-info.c:180
+#: gucharmap/gucharmap-unicode-info.c:184
 msgid "Separator, Line"
 msgstr "분리 기호, 줄"
 
-#: gucharmap/gucharmap-unicode-info.c:181
+#: gucharmap/gucharmap-unicode-info.c:185
 msgid "Separator, Paragraph"
 msgstr "분리 기호, 문단"
 
-#: gucharmap/gucharmap-unicode-info.c:182
+#: gucharmap/gucharmap-unicode-info.c:186
 msgid "Separator, Space"
 msgstr "분리 기호, 공백"
 
@@ -680,8 +696,8 @@ msgid "GNOME Character Map"
 msgstr "그놈 문자 표"
 
 #: gucharmap/gucharmap-window.c:457
-msgid "Based on the Unicode Character Database 15.1.0"
-msgstr "유니코드 문자 데이터베이스 15.1.0 기준"
+msgid "Based on the Unicode Character Database 16.0.0"
+msgstr "유니코드 문자 데이터베이스 16.0.0 기준"
 
 #: gucharmap/gucharmap-window.c:467
 msgid "translator-credits"
