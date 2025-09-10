@@ -1,0 +1,65 @@
+# Copyright © 2025 Christian Persch
+#
+# This library is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published
+# by the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public License
+# along with this library.  If not, see <https://www.gnu.org/licenses/>.
+
+include:
+  - project: 'chpe/versuch-ci'
+    ref: 3b3bc58c665c6dea3e6b88bf20357062ffaa10f2
+    file: '/versuch.yml'
+    inputs:
+      release-service: gnome
+
+variables:
+  VERSUCH_FEDORA_VERSION: 42
+
+  # Increase this serial when changing VERSUCH_FEDORA_PACKAGES
+  # below, and reset to 0 when changing VERSUCH_FEDORA_VERSION
+  # above.
+  VERSUCH_FEDORA_SERIAL: '0'
+
+  VERSUCH_FEDORA_PACKAGES: >-
+    appstream
+    bash
+    cairo-devel
+    clang
+    clang-analyzer
+    clang-tools-extra
+    desktop-file-utils
+    gcc-c++
+    gettext-devel
+    glib2-devel
+    gobject-introspection-devel
+    gtk-doc
+    gtk3-devel
+    itstool
+    libappstream-glib
+    libxml2
+    libxslt
+    meson
+    pango-devel
+    perl
+    vala
+    yelp-tools
+
+  VERSUCH_FEDORA_SCRIPT: ".gitlab-ci/unicode-data.sh"
+
+  VERSUCH_COMMON_BUILD_OPTIONS: >-
+    --prefix=/usr
+    -Dcharmap=true
+    -Ddocs=true
+    -Dgir=true
+    -Ducd_path=/usr/share/unicode-data/17.0.0/ucd
+    -Dvapi=true
+
+  VERSUCH_CI_BOT_NAME: "Gucharmap Automation"

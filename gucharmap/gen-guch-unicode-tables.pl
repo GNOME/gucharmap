@@ -12,7 +12,8 @@
 #  - unicode-versions.h
 #
 # usage: ./gen-guch-unicode-tables.pl UNICODE-VERSION UNICODE-DIRECTORY OUTPUT-DIRECTORY
-# where DIRECTORY contains UnicodeData.txt Unihan.zip NamesList.txt Blocks.txt Scripts.txt
+# where DIRECTORY contains UnicodeData.txt NamesList.txt Blocks.txt Scripts.txt
+# DerivedAge.txt and one of Unihan.zip or Unihan_Readings.txt.
 #
 # NOTE! Some code copied from glib/glib/gen-unicode-tables.pl; keep in sync!
 
@@ -32,14 +33,14 @@ if (@ARGV != 3 && @ARGV != 4)
 Usage: $0 UNICODE-VERSION UNICODE-DIRECTORY OUTPUT-DIRECTORY [--i18n]
 
 DIRECTORY should contain the following Unicode data files:
-UnicodeData.txt Unihan.zip NamesList.txt Blocks.txt Scripts.txt
+UnicodeData.txt Unihan_Readings.txt NamesList.txt Blocks.txt Scripts.txt
 
 which can be found at https://www.unicode.org/Public/UNIDATA/
 
 EOF
 }
 
-my ($unicodedata_txt, $unihan_zip, $nameslist_txt, $blocks_txt, $scripts_txt, $versions_txt);
+my ($unicodedata_txt, $unihan_zip, $unihan_readings_txt, $nameslist_txt, $blocks_txt, $scripts_txt, $versions_txt);
 
 my $v = $ARGV[0];
 my $d = $ARGV[1];
@@ -56,6 +57,7 @@ for my $f (readdir ($dir))
 {
     $unicodedata_txt = "$d/$f" if ($f =~ /UnicodeData.*\.txt/);
     $unihan_zip = "$d/$f" if ($f =~ /Unihan.*\.zip/);
+    $unihan_readings_txt = "$d/$f" if ($f =~ /Unihan_Readings.*\.txt/);
     $nameslist_txt = "$d/$f" if ($f =~ /NamesList.*\.txt/);
     $blocks_txt = "$d/$f" if ($f =~ /Blocks.*\.txt/);
     $scripts_txt = "$d/$f" if ($f =~ /Scripts.*\.txt/);
@@ -63,7 +65,7 @@ for my $f (readdir ($dir))
 }
 
 defined $unicodedata_txt or die "Did not find $d/UnicodeData.txt";
-defined $unihan_zip or die "Did not find $d/Unihan.zip";
+defined $unihan_readings_txt or defined $unihan_zip or die "Did not find $d/Unihan_Readings.txt nor $d/Unihan.zip";
 defined $nameslist_txt or die "Did not find $d/NamesList.txt";
 defined $blocks_txt or die "Did not find $d/Blocks.txt";
 defined $scripts_txt or die "Did not find $d/Scripts.txt";
@@ -80,7 +82,11 @@ else
     process_blocks_txt ($blocks_txt);
     process_scripts_txt ($scripts_txt);
     process_versions_txt ($versions_txt);
-    process_unihan_zip ($unihan_zip);
+    if (defined $unihan_readings_txt) {
+	process_unihan_readings_txt ($unihan_readings_txt);
+    } else {
+	process_unihan_zip ($unihan_zip)
+    }
 }
 
 exit;
@@ -314,13 +320,10 @@ EOT
 #------------------------#
 
 # XXX should do kFrequency too
-sub process_unihan_zip
+sub process_unihan_readings
 {
-    my ($unihan_zip) = @_;
+    my ($unihan) = @_;
 
-    print "processing $unihan_zip.";
-
-    open (my $unihan, "$PROG_UNZIP -c '$unihan_zip' |") or die;
     open (my $out, "> $outdir/unicode-unihan.h") or die;
 
     print $out "/* unicode-unihan.h */\n";
@@ -372,7 +375,7 @@ sub process_unihan_zip
 
         if ($new_wc != $wc)
         {
-            if (defined $kDefinition or defined $kCantonese or defined $kMandarin 
+            if (defined $kDefinition or defined $kCantonese or defined $kMandarin
                 or defined $kTang or defined $kKorean or defined $kJapaneseKun
                 or defined $kJapaneseOn or defined $kHangul or defined $kVietnamese)
             {
@@ -447,6 +450,24 @@ sub process_unihan_zip
         }
     }
 
+    # Output the info for the last character too
+    if (defined $kDefinition or defined $kCantonese or defined $kMandarin
+	or defined $kTang or defined $kKorean or defined $kJapaneseKun
+	or defined $kJapaneseOn or defined $kHangul or defined $kVietnamese)
+    {
+	printf $out ("  { 0x%04X, \%d, \%d, \%d, \%d, \%d, \%d, \%d, \%d, \%d },\n",
+		     $wc,
+		     (defined($kDefinition) ? $kDefinition : -1),
+		     (defined($kCantonese) ? $kCantonese: -1),
+		     (defined($kMandarin) ? $kMandarin : -1),
+		     (defined($kTang) ? $kTang : -1),
+		     (defined($kKorean) ? $kKorean : -1),
+		     (defined($kJapaneseKun) ? $kJapaneseKun : -1),
+		     (defined($kJapaneseOn) ? $kJapaneseOn : -1),
+		     (defined($kHangul) ? $kHangul : -1),
+		     (defined($kVietnamese) ? $kVietnamese : -1));
+    }
+
     print $out "};\n\n";
 
     print $out "static const char unihan_strings[] = \\\n";
@@ -489,6 +510,26 @@ EOT
     close ($out);
 
     print " done.\n";
+}
+
+sub process_unihan_readings_txt
+{
+    my ($unihan_readings_txt) = @_;
+
+    print "processing $unihan_readings_txt.";
+
+    open (my $unihan, $unihan_readings_txt) or die;
+    process_unihan_readings ($unihan)
+}
+
+sub process_unihan_zip
+{
+    my ($unihan_zip) = @_;
+
+    print "processing $unihan_zip.";
+
+    open (my $unihan, "$PROG_UNZIP -c '$unihan_zip' |") or die;
+    process_unihan_readings ($unihan)
 }
 
 #------------------------#
