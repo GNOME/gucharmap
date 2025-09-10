@@ -60,6 +60,7 @@ G_BEGIN_DECLS
  * @GUCHARMAP_UNICODE_VERSION_15_0: Unicode version 15.0
  * @GUCHARMAP_UNICODE_VERSION_15_1: Unicode version 15.1
  * @GUCHARMAP_UNICODE_VERSION_16_0: Unicode version 16.0
+ * @GUCHARMAP_UNICODE_VERSION_17_0: Unicode version 17.0
  * @GUCHARMAP_UNICODE_VERSION_LATEST: Latest Unicode version
  */
 typedef enum {
@@ -91,7 +92,8 @@ typedef enum {
   GUCHARMAP_UNICODE_VERSION_15_0,
   GUCHARMAP_UNICODE_VERSION_15_1,
   GUCHARMAP_UNICODE_VERSION_16_0,
-  GUCHARMAP_UNICODE_VERSION_LATEST = GUCHARMAP_UNICODE_VERSION_16_0 /* private, will move forward with each revision */
+  GUCHARMAP_UNICODE_VERSION_17_0,
+  GUCHARMAP_UNICODE_VERSION_LATEST = GUCHARMAP_UNICODE_VERSION_17_0 /* private, will move forward with each revision */
 } GucharmapUnicodeVersion;
 
 /* return values are read-only */
