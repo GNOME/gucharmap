@@ -69,7 +69,7 @@ gucharmap_get_unicode_name (gunichar wc)
       || (wc >= 0x4e00 && wc <= 0x9fff)    /* CJK Unified Ideographs             */
       || (wc >= 0x20000 && wc <= 0x2a6df)  /* CJK Unified Ideographs Extension B */
       || (wc >= 0x2a700 && wc <= 0x2b73f)  /* CJK Unified Ideographs Extension C */
-      || (wc >= 0x2b740 && wc <= 0x2b81d)  /* CJK Unified Ideographs Extension D */
+      || (wc >= 0x2b740 && wc <= 0x2b81e)  /* CJK Unified Ideographs Extension D */
       || (wc >= 0x2b820 && wc <= 0x2cead)  /* CJK Unified Ideographs Extension E */
       || (wc >= 0x2ceb0 && wc <= 0x2ebe0)  /* CJK Unified Ideographs Extension F */
       || (wc >= 0x2ebf0 && wc <= 0x2ee5d)  /* CJK Unified Ideographs Extension I */
@@ -87,7 +87,7 @@ gucharmap_get_unicode_name (gunichar wc)
       return buf;
   }
   else if ((wc >= 0x17000 && wc <= 0x187ff) || /* Tangut            */
-           (wc >= 0x18d00 && wc <= 0x18d1e))   /* Tangut Supplement */
+           (wc >= 0x18d00 && wc <= 0x18d20))   /* Tangut Supplement */
     {
       g_snprintf (buf, sizeof (buf), "TANGUT IDEOGRAPH-%05X", wc);
       return buf;
@@ -100,7 +100,8 @@ gucharmap_get_unicode_name (gunichar wc)
       g_snprintf (buf, sizeof (buf), "TANGUT COMPONENT-%03u", wc - 0x18d80 + 769);
       return buf;
   }
-  else if (wc >= 0x18b00 && wc <= 0x18cd5) {
+  else if ((wc >= 0x18b00 && wc <= 0x18cda) ||
+           wc == 0x18cff) {
       g_snprintf (buf, sizeof (buf), "KHITAN SMALL SCRIPT CHARACTER-%05X", wc);
       return buf;
   }
@@ -110,6 +111,19 @@ gucharmap_get_unicode_name (gunichar wc)
   }
   else if (wc >= 0x13460 && wc <= 0x143fa) {
       g_snprintf (buf, sizeof (buf), "EGYPTIAN HIEROGLYPH-%05X", wc);
+      return buf;
+  }
+  else if (wc >= 0x18e00 && wc <= 0x19191) /* Jurchen */
+    {
+      g_snprintf (buf, sizeof (buf), "JURCHEN CHARACTER-%05X", wc);
+      return buf;
+  }
+  else if (wc >= 0x191a0 && wc <= 0x191d2) {
+      g_snprintf (buf, sizeof (buf), "JURCHEN RADICAL-%02u", wc - 0x191a0 + 1);
+      return buf;
+  }
+  else if (wc >= 0x3d000 && wc <= 0x3fc3f) {
+      g_snprintf (buf, sizeof (buf), "SMALL SEAL CHARACTER-%05X", wc);
       return buf;
   }
   else if (wc >= 0xac00 && wc <= 0xd7af)

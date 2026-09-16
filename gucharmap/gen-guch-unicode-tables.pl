@@ -133,6 +133,7 @@ sub process_unicode_data_txt
         next if ($name =~ /^TANGUT COMPONENT-[0-9]+$/);
         next if ($name =~ /^KHITAN SMALL SCRIPT CHARACTER-[0-9A-F]+$/);
         next if ($name =~ /^NUSHU CHARACTER-[0-9A-F]+$/);
+        next if ($name =~ /^JURCHEN RADICAL-[0-9]+$/);
 
 	# Skip EGYPTIAN HIEROGLYPH- but only for those where
 	# the character ends with their codepoint
