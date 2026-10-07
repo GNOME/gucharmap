@@ -465,7 +465,7 @@ help_about (GSimpleAction *action,
 			 "logo-icon-name", GUCHARMAP_ICON_NAME,
   			 "authors", authors,
 			 "translator-credits", _("translator-credits"),
-			 "website", "https://wiki.gnome.org/Apps/Gucharmap",
+			 "website", "https://gitlab.gnome.org/GNOME/gucharmap",
 			 NULL);
 
   g_free (license_trans);
